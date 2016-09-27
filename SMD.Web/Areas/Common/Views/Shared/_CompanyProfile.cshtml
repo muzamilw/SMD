@@ -72,7 +72,7 @@
                         <div class="clearfix"></div>
                     </div>
 
-                    <div class="tab-content">
+                    <div class="tab-content" data-bind="with:$root.selectedCompany">
                         <div class="tab-pane fade in active" id="tab-PersonalInfo">
                             <div class="col-lg-12 col-sm-12 col-md-12 form-horizontal">
                                 <div class="col-md-12 main-box">
@@ -86,18 +86,18 @@
                                                 <select class="form-control" id="ddlSolutation" data-bind="options: $root.genderList, optionsText: 'name', optionsValue: 'id', optionsCaption: '<' + 'Select Gender'+ '>' , value:solutation"></select>
                                             </div>
                                             <div class="form-group">
-                                                <label for="txtFirstName" class="requiredlabel">First Name </label>
-                                                <input type="text" id="txtFirstName" class="form-control" placeholder="Enter First Name">
+                                                <label for="txtFirstName" class="requiredlabel">Full Name </label>
+                                                <input type="text" id="txtFirstName" class="form-control" placeholder="Enter First Name" data-bind="value:fullName">
                                             </div>
                                             <div class="form-group">
                                                 <label for="txtEmail" class="requiredlabel">Email </label>
-                                                <input type="email" class="form-control" id="txtEmail" placeholder="Enter email">
+                                                <input type="email" class="form-control" id="txtEmail" placeholder="Enter email" data-bind="value:email, enable:false">
                                             </div>
                                             <div class="form-group">
                                                 <label for="txtDob" class="requiredlabel">Date of Birth </label>
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                                    <input type="text" class="form-control" id="txtDob" placeholder="Enter Date of birth">
+                                                    <input type="text" class="form-control" id="txtDob" placeholder="Enter Date of birth" data-bind="datepicker:dateOfBirth, datepickerOptions: { yearRange: '-60:+0' }">
                                                 </div>
                                             </div>
                                         </div>
@@ -115,20 +115,17 @@
                                                     <option>Electrical Engineering</option>
                                                 </select>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="txtLastName" class="requiredlabel">Last Name </label>
-                                                <input type="text" id="txtLastName" class="form-control" placeholder="Enter Last Name">
-                                            </div>
+                                           
                                             <div class="form-group">
                                                 <label for="txtMobileNo" class="requiredlabel">Mobile Number </label>
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                                                    <input type="text" id="txtMobileNo" class="form-control" placeholder="Enter Mobile Number">
+                                                    <input type="text" id="txtMobileNo" class="form-control" placeholder="Enter Mobile Number" data-bind="value:mobileNumber">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="txtPasportNo" class="requiredlabel">Valid Passport number </label>
-                                                <input type="text" id="txtPasportNo" class="form-control" placeholder="Enter Valid Passport number">
+                                                <input type="text" id="txtPasportNo" class="form-control" placeholder="Enter Valid Passport number" data-bind="value:passportNumber">
                                             </div>
 
                                         </div>
@@ -141,7 +138,7 @@
 
                                             <div class="form-group" style="margin-bottom:0;">
                                                 <div class="checkbox-nice ">
-                                                    <input type="checkbox" name="wupdates" value="1" id="chkreceiveDeals">
+                                                    <input type="checkbox" name="chkreceiveDeals" value="1" id="chkreceiveDeals" data-bind="checked:isReceiveDeals">
                                                     <label for="chkreceiveDeals">
                                                         Yes, I want to receive deals near me by email.
                                                     </label>
@@ -149,7 +146,7 @@
                                             </div>
                                             <div class="form-group" style="margin-bottom:0;">
                                                 <div class="checkbox-nice ">
-                                                    <input type="checkbox" name="wupdates" value="1" id="chkwupdates">
+                                                    <input type="checkbox" name="chkwupdates" value="1" id="chkwupdates" data-bind="checked:isReceiveWeeklyUpdates">
                                                     <label for="chkwupdates">
                                                         Yes, I want to receive weekly updates on how my advertising campaigns are performing.
                                                     </label>
@@ -157,7 +154,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <div class="checkbox-nice ">
-                                                    <input type="checkbox" name="wupdates" value="1" id="chklatescasg4ads">
+                                                    <input type="checkbox" name="chklatescasg4ads" value="1" id="chklatescasg4ads" data-bind="checked:isReceiveLatestServices">
                                                     <label for="chklatescasg4ads">
                                                         Yes, I want to receive emails about the latest Cash4Ads news and partnering services.
                                                     </label>
@@ -189,14 +186,14 @@
                                     </a>
                                     <button class="btn  btn-success" style="margin-bottom: 10px; margin-left: 5px;" id="btnSaveCompProfile">Save</button>
                                 </div>
-                               
-                                
+
+
                                 @*<button class="btn  btn-default pull-right" style="margin-bottom: 10px;" id="saveBtn" data-bind="click: $root.onTabChange(2)">Continue to Step 2</button>*@
                             </div>
 
                         </div>
                         <div class="tab-pane fade" id="tab-Business">
-                            
+
                             <div class="col-lg-12 col-sm-12 col-md-12 form-horizontal clearfix">
                                 <div class="col-md-12 main-box">
                                     <div class="col-md-6">
@@ -206,29 +203,29 @@
                                         <div class="main-box-body clearfix" style="padding-bottom: 0">
                                             <div class="form-group">
                                                 <label for="txtBusinessName" class="requiredlabel">Business Name </label>
-                                                <input type="text" id="txtBusinessName" class="form-control" placeholder="Enter Your Business Name">
+                                                <input type="text" id="txtBusinessName" class="form-control" placeholder="Enter Your Business Name" data-bind="value:CompanyName">
                                             </div>
                                             <div class="form-group">
                                                 <label for="txtBusinessAddress" class="requiredlabel">Business Address </label>
-                                                <input type="text" id="txtBusinessAddress" class="form-control" placeholder="Enter Business Address">
+                                                <input type="text" id="txtBusinessAddress" class="form-control" placeholder="Enter Business Address" data-bind="value:BillingAddressLine1">
                                             </div>
                                             <div class="form-group">
                                                 <label for="txtCity" class="requiredlabel">Town/City</label>
-                                                <input type="text" id="txtCity" class="form-control" placeholder="Enter Town/City">
+                                                <input type="text" id="txtCity" class="form-control" placeholder="Enter Town/City" data-bind="value:billingCity">
                                             </div>
                                             <div class="form-group">
                                                 <label for="txtState" class="requiredlabel">State/County</label>
-                                                <input type="text" id="txtState" class="form-control" placeholder="Enter State/County">
+                                                <input type="text" id="txtState" class="form-control" placeholder="Enter State/County" data-bind="value:BillingState">
                                             </div>
                                             <div class="form-group">
                                                 <label for="txtPostCode" class="requiredlabel">Post Code </label>
-                                                <input type="text" id="txtPostCode" class="form-control" placeholder="Enter Postal Code">
+                                                <input type="text" id="txtPostCode" class="form-control" placeholder="Enter Postal Code" data-bind="value:BillingZipCode">
                                             </div>
                                             <div class="form-group">
                                                 <label for="ddlCountry" class="requiredlabel">Country </label>
                                                 <select class="form-control" id="ddlCountry" data-bind="options: $root.countries, optionsText: 'CountryName', optionsValue: 'CountryId', optionsCaption:  '&lt;' + 'Select Country'+ '&gt;', value:BillingCountryId"></select>
                                             </div>
-                                           
+
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -242,11 +239,11 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="txtBranchName" class="requiredlabel">Branch Name </label>
-                                                <input type="text" id="txtBranchName" class="form-control" placeholder="Enter Branch Name">
+                                                <input type="text" id="txtBranchName" class="form-control" placeholder="Enter Branch Name" data-bind="value:branchName">
                                             </div>
                                             <div class="form-group">
                                                 <label for="txtBranchLocations" class="requiredlabel">How Many Branch Locations do you have? </label>
-                                                <input type="text" id="txtBranchLocations" class="form-control" placeholder="Enter Number of branches">
+                                                <input type="text" id="txtBranchLocations" class="form-control" placeholder="Enter Number of branches" data-bind="autoNumeric:numberOfBranches">
                                             </div>
                                         </div>
                                     </div>
@@ -258,7 +255,7 @@
                                     </a>
                                     <button class="btn  btn-success" style="margin-bottom: 10px;margin-left: 5px;" id="btnSaveCompProfile">Save</button>
                                 </div>
-                                
+
                             </div>
                         </div>
                         <div class="tab-pane fade" id="tab-Logo">
@@ -277,20 +274,20 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="txtWebsite" class="requiredlabel">Website </label>
-                                                <input type="text" id="txtWebsite" class="form-control" placeholder="Enter Web Address">
+                                                <input type="text" id="txtWebsite" class="form-control" placeholder="Enter Web Address" data-bind="value:WebsiteLink">
                                             </div>
                                             <div class="form-group">
                                                 <label for="txtSalesEmail" class="requiredlabel">Sales Email</label>
-                                                <input type="text" id="txtSalesEmail" class="form-control" placeholder="Enter Sales Email">
+                                                <input type="text" id="txtSalesEmail" class="form-control" placeholder="Enter Sales Email" data-bind="value:SalesEmail">
                                             </div>
-                                           
+
                                             <div class="form-group">
                                                 <label for="txtSalesPhone" class="requiredlabel">Sales Phone Line </label>
-                                                <input type="text" id="txtSalesPhone" class="form-control" placeholder="Enter Sales Phone">
+                                                <input type="text" id="txtSalesPhone" class="form-control" placeholder="Enter Sales Phone" data-bind="value:salesPhone">
                                             </div>
                                             <div class="form-group">
-                                                <label for="ddlCountry" class="requiredlabel">Company Type </label>
-                                                <select class="form-control" id="ddlCountry">
+                                                <label for="ddlCompanyType" class="requiredlabel">Company Type </label>
+                                                <select class="form-control" id="ddlCompanyType">
                                                     <option>Advertising</option>
                                                     <option>Realestate</option>
                                                     <option>Marketing</option>
@@ -305,10 +302,10 @@
                                         <div class="main-box-body clearfix" style="padding-bottom: 0">
                                             <div class="form-group">
                                                 <label for="txtAboutUs">Tell us more about your business.</label>
-                                                <textarea class="form-control" style="height:268px; border:1px solid" id="txtAboutUs"></textarea>
+                                                <textarea class="form-control" style="height:268px; border:1px solid" id="txtAboutUs" data-bind="value:aboutUs"></textarea>
                                                 <span class="help-block text-left">This text is used for About Us Section.</span>
                                             </div>
-                                            
+
                                         </div>
                                     </div>
                                 </div>
@@ -319,7 +316,7 @@
                                     </a>
                                     <button class="btn  btn-success" style="margin-bottom: 10px; margin-left:5px;" id="btnSaveCompProfile">Save</button>
                                 </div>
-                                
+
                             </div>
                         </div>
                         <div class="tab-pane fade" id="tab-Money">
@@ -332,7 +329,7 @@
                                         <div class="main-box-body clearfix" style="padding-bottom: 0">
                                             <div class="form-group">
                                                 <label for="txtPaypalId" class="requiredlabel">Your Paypal Id (email) </label>
-                                                <input type="text" id="txtPaypalId" class="form-control" placeholder="Enter Your Paypal Id">
+                                                <input type="text" id="txtPaypalId" class="form-control" placeholder="Enter Your Paypal Id" data-bind="value:paypalMailId">
                                                 <span class="help-block text-left">This used to transfer cash credits(centz) from your App wallet to your Paypal account.</span>
                                             </div>
                                         </div>
@@ -343,51 +340,58 @@
                                         </header>
                                         <div class="main-box-body clearfix" style="padding-bottom: 0">
                                             <div class="form-group">
-                                               
+
                                             </div>
 
                                         </div>
                                     </div>
-                                    
-                                    <div class="col-md-12 main-box" style="background-color: #dedede; padding-top: 20px;">
+
+                                    <div class="col-md-12 main-box" style="background-color: #E5E5E5; padding-top: 20px;">
                                         <div class="col-md-6 main-box-body clearfix">
                                             <div class="form-group">
                                                 <label for="txtBillInvoiceTo" class="requiredlabel">Bill Invoices to (Business Name) </label>
-                                                <input type="text" id="txtBillInvoiceTo" class="form-control" placeholder="Enter Billing Business Name">
+                                                <input type="text" id="txtBillInvoiceTo" class="form-control" placeholder="Enter Billing Business Name" data-bind="value:billingBusinessName">
                                             </div>
                                             <div class="form-group">
                                                 <label for="txtBillingEmail" class="requiredlabel">Billing Email </label>
-                                                <input type="text" id="txtBillingEmail" class="form-control" placeholder="Enter Billing Email">
+                                                <input type="text" id="txtBillingEmail" class="form-control" placeholder="Enter Billing Email" data-bind="value:BillingEmail">
                                             </div>
                                             <div class="form-group">
                                                 <label for="txtRegNo" class="requiredlabel">Company Registration Number</label>
-                                                <input type="text" id="txtRegNo" class="form-control" placeholder="Enter Registration Number">
+                                                <input type="text" id="txtRegNo" class="form-control" placeholder="Enter Registration Number" data-bind="value:companyRegNo">
                                             </div>
                                             <div class="form-group">
                                                 <label for="txtBusinessStartDate" class="requiredlabel">Business Start Date </label>
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                                    <input type="text" class="form-control" id="txtBusinessStartDate" placeholder="Enter Business Start Date">
+                                                    <input type="text" class="form-control" id="txtBusinessStartDate" placeholder="Enter Business Start Date" data-bind="datepicker:businessStartDate, datepickerOptions: { yearRange: '-60:+0' }">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-6 main-box-body clearfix">
                                             <div class="form-group">
-                                                <label for="txtCreditCard" class="requiredlabel">Your Paypal Id (email) </label>
-                                                <div class="col-md-10" style="padding-left:0;">
-                                                    <input type="text" id="txtCreditCard" class="form-control" placeholder="Enter Your Paypal Id">
+                                                <label for="txtCreditCard" class="requiredlabel">Credit Card </label>
+                                                <div class="input-group" style="padding: 0;">
+                                                    <input type="text" class="form-control" id="txtCreditCard" data-bind="value:creditCardUi">
+                                                    <span class="input-group-addon"><button class="btn  btn-default" data-bind="text: creditCard() ? 'Update' : 'Link', enable:false" id="btnlinkCard"></button></span>
+                                                </div>
+                                                
+                                                
+
+                                                @*<div class="col-md-10" style="padding-left:0;">
+                                                    <input type="text" id="txtCreditCard" class="form-control" placeholder="Enter Your Paypal Id" data-bind="value:email">
                                                 </div>
                                                 <div class="col-md-2" style="padding-right:0;">
                                                     <button class="btn  btn-success pull-right" id="btnlinkCard">Link</button>
-                                                </div>
+                                                </div>*@
                                             </div>
                                             <div class="form-group">
                                                 <label for="txtBillingPhone" class="requiredlabel">Billing Phone Line</label>
-                                                <input type="text" id="txtBillingPhone" class="form-control" placeholder="Enter Billing Phone Line">
+                                                <input type="text" id="txtBillingPhone" class="form-control" placeholder="Enter Billing Phone Line" data-bind="value:BillingPhone">
                                             </div>
                                             <div class="form-group">
                                                 <label for="txtVatNo" class="requiredlabel">VAT Number</label>
-                                                <input type="text" id="txtVatNo" class="form-control" placeholder="Enter VAT Number">
+                                                <input type="text" id="txtVatNo" class="form-control" placeholder="Enter VAT Number" data-bind="value:vatNumber">
                                             </div>
                                         </div>
                                     </div>

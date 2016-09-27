@@ -67,6 +67,8 @@ define("common/companyProfile.viewModel",
                     id: 2,
                     name: 'MRs.'
                 }]),
+                professions = ko.observableArray([]),
+                companyTypes = ko.observableArray([]),
                 //Update Profile
                 //Get Base Data for Questions
                 updateProfile = function () {
