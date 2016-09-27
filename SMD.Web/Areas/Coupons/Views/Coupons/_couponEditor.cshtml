@@ -33,7 +33,25 @@
                                     <h3 class="group-header" style="margin-top:20px;">
                                         Deal General Info
                                     </h3>
-                                    <div class="col-lg-9">
+                                    <div class="col-lg-12">
+                                        <div class="col-lg-9">
+                                            <div class="form-group">
+                                                <div class="col-lg-4 text-right">
+                                                    <label class="control-label text-right tooltip-float">Deal Title</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" readonly class="form-control" data-bind="value:title">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 marginBottom12" style="margin-bottom:0px;">
+                                            <div class="col-md-6">
+                                                <label>Logo</label>
+                                                <img id="vehicleImage" alt="" style="width: auto;height:80px" data-bind="attr:{src:logoUrl()}" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @*<div class="col-lg-9">
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
                                                 <label class="control-label text-right tooltip-float">Deal Title</label>
@@ -42,7 +60,7 @@
                                                 <input type="text" readonly class="form-control" data-bind="value:title">
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>*@
                                     <div class="col-lg-9">
                                         <div class="form-group" style="display:none">
                                             <div class="col-lg-4 text-right">
@@ -53,7 +71,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-9 marginBottom12">
+                                    @*<div class="col-lg-9 marginBottom12">
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
                                                 <label class="control-label text-right tooltip-float">Logo</label>
@@ -63,19 +81,19 @@
                                                 <h5><span></span></h5>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>*@
                                     <div class="col-lg-9">
                                         <div class="form-group">
                                             <div class="form-group">
                                                 <div class="col-lg-4 text-campaign-left  Float-Left">
-                                                    <label class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;    margin-left: 6px; ">Deal Time</label>
+                                                    <label class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;    margin-left: 6px; ">Deal Group</label>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 text-right">
                                                 <label class="control-label text-right tooltip-float">Deal Summary</label>
                                             </div>
                                             <div class="col-lg-6">
-                                                <textarea readonly class="form-control" data-bind="value:highlight1"></textarea>
+                                                <textarea readonly class="form-control" data-bind="value:redeemLine2"></textarea>
                                                 @*<input type="text" readonly class="form-control" data-bind="value:highlight1">*@
                                             </div>
                                         </div>
@@ -86,7 +104,24 @@
                                                 <label class="control-label text-right tooltip-float">Highlights</label>
                                             </div>
                                             <div class="col-lg-6">
-                                                <input type="text" readonly class="form-control" data-bind="value:highlight2">
+                                                <textarea readonly class="form-control" data-bind="value:highlight1"></textarea>
+                                                @*<input type="text" readonly class="form-control" data-bind="value:highlight2">*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <div class="form-group">
+                                            <div class="form-group" style="display:none">
+                                                <div class="col-lg-4 text-campaign-left  Float-Left">
+                                                    <label class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;    margin-left: 6px; ">Fine print & Redeem</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 text-right">
+                                                <label class="control-label text-right tooltip-float">Fine Print</label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <textarea readonly class="form-control" data-bind="value:printLine1"></textarea>
+                                                @*<input type="text" readonly class="form-control" data-bind="value:printLine1">*@
                                             </div>
                                         </div>
                                     </div>
@@ -153,11 +188,11 @@
                                     <div class="col-lg-9">
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Deal end date</label>
+                                                <label class="control-label text-right tooltip-float">Submission Date</label>
                                             </div>
                                             <div class="col-lg-6">
                                                 @*<input type="text" readonly class="form-control" data-bind="value:expireDate">*@
-                                                <label class="form-control" data-bind="dateString:expireDate,datePattern: 'DD/MM/YYYY'">
+                                                <label class="form-control" data-bind="dateString:submissionDate,datePattern: 'DD/MM/YYYY'">
                                                 </label>
                                             </div>
                                         </div>
@@ -170,17 +205,17 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Deal categories</label>
+                                                <label class="control-label text-right tooltip-float">Deal Categories</label>
                                             </div>
                                             <div class="col-lg-6">
-                                                <input type="text" readonly class="form-control" data-bind="value:category">
+                                                <input type="text" readonly class="form-control" data-bind="value:categories">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-9">
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Deal search keywords</label>
+                                                <label class="control-label text-right tooltip-float">Deal Search Keywords</label>
                                             </div>
                                             <div class="col-lg-6">
                                                 <input type="text" readonly class="form-control" data-bind="value:coSearchKeywords">
@@ -204,22 +239,6 @@
                                             </div>
                                             <div class="col-lg-6">
                                                 <input type="text" readonly class="form-control" data-bind="value:coMonthYear">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-9">
-                                        <div class="form-group">
-                                            <div class="form-group" style="display:none">
-                                                <div class="col-lg-4 text-campaign-left  Float-Left">
-                                                    <label class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;    margin-left: 6px; ">Fine print & Redeem</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Fine print</label>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <textarea readonly class="form-control" data-bind="value:printLine1"></textarea>
-                                                @*<input type="text" readonly class="form-control" data-bind="value:printLine1">*@
                                             </div>
                                         </div>
                                     </div>
@@ -317,7 +336,7 @@
                                         <div class="form-group">
                                             <div class="form-group">
                                                 <div class="col-lg-4 text-campaign-left  Float-Left">
-                                                    <label class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;    margin-left: 6px; ">Branch & Images</label>
+                                                    <label class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;    margin-left: 6px; ">Slider Images</label>
                                                 </div>
                                             </div>
 
@@ -345,6 +364,38 @@
                                                     <img id="vehicleImage" alt="" style="width: auto;height:200px;width:400px;" data-bind="attr:{src:couponImage3()}" />
                                                     <h5><span></span></h5>
                                                 </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-9">
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-campaign-left  Float-Left">
+                                                <label class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;    margin-left: 6px; ">Call for action options</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-right">
+                                                <label class="control-label text-right tooltip-float">Landing Page Url</label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <input type="text" readonly class="form-control" data-bind="value:buyitLandingPageUrl">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-right">
+                                                <label class="control-label text-right tooltip-float">Button Label</label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <input type="text" readonly class="form-control" data-bind="value:buyItBtnLabel">
+                                            </div>
+
+                                            <div class="col-lg-1">
+                                                <a id="displayBrabchlocatuion" target="_blank" data-bind="attr: { href: buyitLandingPageUrl }" style="padding: 4px 8px;" class="btn btn-primary">
+                                                    <i class="fa fa-lg"></i>&nbsp;Open Link
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
