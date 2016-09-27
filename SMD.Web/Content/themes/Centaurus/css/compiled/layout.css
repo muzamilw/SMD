@@ -1,5 +1,5 @@
 html,body {
-    font-family: 'Open Sans',sans-serif;
+    font-family: 'PT Sans', sans-serif;
     -webkit-font-smoothing: antialiased;
 }
 
@@ -9,7 +9,7 @@ body {
 }
 
 h1,h2,h3,h4,h5,h6 {
-    font-family: 'Open Sans','Titillium Web',Geneva,sans-serif;
+    font-family: 'PT Sans', sans-serif;
     font-weight: 300;
 }
 

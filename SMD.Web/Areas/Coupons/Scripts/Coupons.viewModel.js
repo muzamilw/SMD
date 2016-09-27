@@ -14,6 +14,7 @@ define("Coupons/Coupons.viewModel",
                        // Controlls editor visibility 
                     searchFilterValue = ko.observable(),
                     isEditorVisible = ko.observable(false),
+                    EditorLoading= ko.observable(false),
                     langs = ko.observableArray([]),
                     countoryidList = [],
                     cityidList = [],
@@ -50,6 +51,8 @@ define("Coupons/Coupons.viewModel",
                     IsCopyBtnVisible = ko.observable(false),
                     IsPauseBtnVisible = ko.observable(false),
                     IsResumeBtnVisible = ko.observable(false),
+
+                    IsRejectionReasonVisible = ko.observable(false),
 
                     CurrencyDropDown = ko.observableArray([{ id: 1, name: "Choice 1" }, { id: 2, name: "Choice 2" }, { id: 3, name: "Choice 3" }, { id: 0, name: "Ask User Suggestion" }]),
                     YearRangeDropDown = ko.observableArray([]),
@@ -116,7 +119,10 @@ define("Coupons/Coupons.viewModel",
                     CouponTitle = ko.observable(),
                     StatusValue = ko.observable(),
                     GetCallBackBranchObject = ko.observable()
-                    previewScreenNumber = ko.observable(1);
+                previewScreenNumber = ko.observable(1);
+
+                
+
                 CurrPage = ko.observable(9);
                 MaxPage = ko.observable(12);
                 getCampaignBaseContent = function () {
@@ -155,7 +161,7 @@ define("Coupons/Coupons.viewModel",
                     }, {
                         success: function (data) {
                             if (data != null) {
-                                console.log(data);
+                                
                                 branchLocations([]);
                                 ko.utils.arrayPushAll(branchLocations(), data.listBranches);
                                 branchLocations.valueHasMutated();
@@ -176,7 +182,7 @@ define("Coupons/Coupons.viewModel",
                 }, {
                     success: function (data) {
                         if (data != null) {
-                            console.log(data);
+                            
                             branchLocations([]);
                             ko.utils.arrayPushAll(branchLocations(), data.listBranches);
                             branchLocations.valueHasMutated();
@@ -544,7 +550,7 @@ define("Coupons/Coupons.viewModel",
                     });
 
                     couponModel().Status(mode);
-                   
+
                     couponModel().SubmissionDateTime(mode);
 
 
@@ -672,19 +678,21 @@ define("Coupons/Coupons.viewModel",
 
                   },
                 onEditCampaign = function (item) {
-
+                    EditorLoading(true);
                     //resetting flags
                     IsSubmitBtnVisible(false);
-
+                    IsRejectionReasonVisible(false);
+                    buyItQuestionLabelStatus(false);
+                    isTerminateBtnVisible(false);
+                    isNewCampaignVisible(false);
+                    isShowArchiveBtn(false);
 
                     //hide the main menu;
                     collapseMainMenu();
 
                     previewScreenNumber(1);
-                    isTerminateBtnVisible(false);
-                    isNewCampaignVisible(false);
-                    isShowArchiveBtn(false);
                     CouponTitle(item.CouponTitle());
+                    
                     $(".hideInCoupons").css("display", "none");
 
                     $("#MarketobjDiv").css("display", "none");
@@ -693,7 +701,7 @@ define("Coupons/Coupons.viewModel",
                     $("#panelArea").css("display", "none");
 
                     $("#Heading_div").css("display", "none");
-                    if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == null || item.Status() == 7 || item.Status() == 9) {
+                    if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == 6 || item.Status() == 7 || item.Status() == 9) {
                        
                         dataservice.getCampaignData({
                             CampaignId: item.CouponId(),
@@ -705,6 +713,13 @@ define("Coupons/Coupons.viewModel",
                                     couponModel(model.Coupon.Create(data.Coupon[0]));
                                     
                                     CouponActiveMonth(couponModel().CouponActiveYear() + ' - ' + GetMonthNameByID(couponModel().CouponActiveMonth()));
+
+
+                                    couponModel().CouponListingMode.subscribe(function (item) {
+                                        CouponListingModeChecker(item);
+                                    });
+
+                                    
                                   
                                     view.initializeTypeahead();
                                     if (couponModel().Status() == 1) {
@@ -733,16 +748,15 @@ define("Coupons/Coupons.viewModel",
 
                                         $("#btnCancel").css("display", "block");
                                     } else if (couponModel().Status() == 4) {
-                                        $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
-                                        $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
-                                        $("#saveBtn").css("display", "none");
-                                        $("#btnResumeCampagin").css("display", "inline-block");
-                                        $("#btnCancel,#btnResumeCampagin,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
-                                        $("#btnCancel").css("display", "none");
+                                        //$("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
+                                        //$("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
+                                        //$("#saveBtn").css("display", "none");
+                                        //$("#btnResumeCampagin").css("display", "inline-block");
+                                        //$("#btnCancel,#btnResumeCampagin,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
+                                        //$("#btnCancel").css("display", "none");
                                         couponModel().StatusValue("Paused");
-                                        
-                                        
                                         IsResumeBtnVisible(true);
+
                                     } else if (couponModel().Status() == 5) {
                                         $("#btnCancel").css("display", "block");
                                         couponModel().StatusValue("Completed");
@@ -750,6 +764,7 @@ define("Coupons/Coupons.viewModel",
                                         couponModel().StatusValue("Approval Rejected");
                                         $("#btnCancel").css("display", "block");
                                         IsSubmitBtnVisible(true);
+                                        IsRejectionReasonVisible(true);
                                     } else if (couponModel().Status() == 7) {
                                         couponModel().StatusValue("Terminated by user");
                                         $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
@@ -803,7 +818,7 @@ define("Coupons/Coupons.viewModel",
                                     });
 
 
-                                    var arrayOfUpdatedList = couponCategories().clone();
+                                    var arrayOfUpdatedList = couponCategories().slice(0);
                                     couponCategories.removeAll();
                                     ko.utils.arrayPushAll(couponCategories(), arrayOfUpdatedList);
                                     couponCategories.valueHasMutated();
@@ -848,13 +863,15 @@ define("Coupons/Coupons.viewModel",
                                     $.unblockUI(spinner);
                                     couponModel().reset();
                                 }
-
+                                EditorLoading(false);
                             },
                             error: function (response) {
 
                             }
                         });
                     }
+
+                   
                 },
                 changeStatus = function (status) {
                     if (couponModel() != undefined)
@@ -864,6 +881,20 @@ define("Coupons/Coupons.viewModel",
                     $("#btnSubmitForApproval,#saveBtn,.lang_delSurvey,.table-link").css("display", "inline-block");
                     $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign").removeAttr('disabled');
                 },
+                CouponListingModeChecker = function (item)
+                {
+                    
+                    if (EditorLoading() == false) {
+                        //if upgrading to paid mode and mode is otehr than draft
+                        if (item == 2 && couponModel().Status() != 1) {
+                            IsSubmitBtnVisible(true);
+                            IsResumeBtnVisible(false);
+                        }
+                    }
+
+                    return item;
+                }
+                ,
                  handleBuyIt = function (item) {
                    
 
@@ -1539,7 +1570,7 @@ define("Coupons/Coupons.viewModel",
                 },
                 removeSelectedCouponCodeItem = function (item) {
 
-                    //console.log(allCouponCodeItems().remove(item.Code()));
+                    
                     allCouponCodeItems.removeAll();
                     selectedCouponCodeItems([]); // Clear selection
 
@@ -1548,7 +1579,7 @@ define("Coupons/Coupons.viewModel",
 
                         allCouponCodeItems.push(cc.Code);
                     });
-                    console.log(allCouponCodeItems());
+                    
                     couponModel().CouponQuantity(allCouponCodeItems().length);
                 },
                 addVoucherClickRate = function () {
@@ -1646,7 +1677,7 @@ define("Coupons/Coupons.viewModel",
                         return arrayitem.BranchId == item.LocationBranchId();
                     });
 
-                    //console.log(matchedItem);
+                    
 
 
                     if (matchedItem != null) {
@@ -1667,7 +1698,7 @@ define("Coupons/Coupons.viewModel",
 
                         return arrayitem.BranchId == val;
                     });
-                    console.log(matchedItem);
+                    
                     if (matchedItem != null) {
                         item.LocationLine1(matchedItem.BranchAddressLine1);
                         item.LocationLine2(matchedItem.BranchAddressLine2);
@@ -1772,7 +1803,7 @@ define("Coupons/Coupons.viewModel",
                     }, {
                         success: function (data) {
                             if (data != null) {
-                                console.log(data);
+                                
                                 branchLocations([]);
                                 ko.utils.arrayPushAll(branchLocations(), data.listBranches);
                                 branchLocations.valueHasMutated();
@@ -1874,6 +1905,12 @@ define("Coupons/Coupons.viewModel",
                     getAdCampaignGridContent();
                     getCampaignBaseContent();
                     isEditorVisible(false);
+
+
+                    
+
+                 
+
                 };
                 return {
                     initialize: initialize,
@@ -1922,7 +1959,8 @@ define("Coupons/Coupons.viewModel",
                     isTerminateBtnVisible: isTerminateBtnVisible,
                     IsCopyBtnVisible : IsCopyBtnVisible,
                     IsPauseBtnVisible : IsPauseBtnVisible,
-                    IsResumeBtnVisible : IsResumeBtnVisible,
+                    IsResumeBtnVisible: IsResumeBtnVisible,
+                    IsRejectionReasonVisible:IsRejectionReasonVisible,
                     isNewCampaignVisible: isNewCampaignVisible,
                     isShowArchiveBtn: isShowArchiveBtn,
                     submitCampaignData: submitCampaignData,
@@ -2032,7 +2070,9 @@ define("Coupons/Coupons.viewModel",
                     onCreatePriceOption: onCreatePriceOption,
                     onDeletePriceOption: onDeletePriceOption,
                     selectedPriceOption: selectedPriceOption,
-                    selectPriceOption: selectPriceOption
+                    selectPriceOption: selectPriceOption,
+                    EditorLoading: EditorLoading(),
+                    CouponListingModeChecker: CouponListingModeChecker
                 };
             })()
         };
