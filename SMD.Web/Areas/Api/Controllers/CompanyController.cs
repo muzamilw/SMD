@@ -59,30 +59,46 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Get User's Profile 
         /// </summary>
-        public CompanyApiModel Get()
+        //public CompanyApiModel Get()
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
+        //    }
+
+            
+
+
+
+        //    Mapper.Initialize(cfg => cfg.CreateMap<Company, CompanyApiModel>());
+            
+        //    var response = companyService.GetCurrentCompany();
+        //    CompanyApiModel apicompany = Mapper.Map<Company, CompanyApiModel>(response);
+
+        //    if (!string.IsNullOrEmpty(apicompany.Logo))
+        //        apicompany.Logo = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Host + "/" + apicompany.Logo + "?" + DateTime.Now;
+
+
+        //   return apicompany;
+           
+           
+          
+        //}
+        public CompanyResponseModel Get()
         {
             if (!ModelState.IsValid)
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
             }
 
-            
+            var response = companyService.GetCompanyDetails();
+
+            if (!string.IsNullOrEmpty(response.Logo))
+                response.Logo = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Host + "/" + response.Logo + "?" + DateTime.Now;
 
 
+            return response;
 
-            Mapper.Initialize(cfg => cfg.CreateMap<Company, CompanyApiModel>());
-            
-            var response = companyService.GetCurrentCompany();
-            CompanyApiModel apicompany = Mapper.Map<Company, CompanyApiModel>(response);
-
-            if (!string.IsNullOrEmpty(apicompany.Logo))
-                apicompany.Logo = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Host + "/" + apicompany.Logo + "?" + DateTime.Now;
-
-
-           return apicompany;
-           
-           
-          
         }
 
         /// <summary>
