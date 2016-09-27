@@ -32,7 +32,7 @@
                             <div class="tab-pane fade in active" id="tab-generalinfo">
                                 <div class="col-lg-12 form-horizontal" data-bind="with:selectedProfileQuestion">
                                     <h3 class="group-header" style="margin-top:20px;">
-                                        Survay question
+                                        Survey question
                                     </h3>
                                     <div class="col-lg-9">
                                         <div class="form-group">
@@ -48,7 +48,7 @@
                                         <div class="form-group">
                                             <div class="form-group" style="margin-bottom:0px;">
                                                 <div class="col-lg-4 text-campaign-left  Float-Left">
-                                                    <label class="control-label text-right tooltip-float floatNone" style="float:left !important;    margin-left: 6px; ">Answers</label>
+                                                    <label class="control-label text-right tooltip-float floatNone" style="float:left !important;    margin-left: 6px; ">Answer List</label>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 text-right">
@@ -62,20 +62,41 @@
                                     <div class="col-lg-9">
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Profile Group</label>
+                                                <label class="control-label text-right tooltip-float">Survey Group</label>
                                             </div>
                                             <div class="col-lg-6">
                                                 <input type="text" readonly class="form-control" data-bind="value:profileGroupId">
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-9" style="display:none">
+                                    <div class="col-lg-9">
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
                                                 <label class="control-label text-right tooltip-float">Question Type</label>
                                             </div>
                                             <div class="col-lg-6">
-                                                <input type="text" readonly class="form-control" data-bind="value:type">
+                                                <input type="text" readonly class="form-control" data-bind="value:type()==1?'Single Choice':'Multiple Choice'">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-right">
+                                                <label class="control-label text-right tooltip-float">Deliver Count</label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <input type="text" readonly class="form-control" data-bind="value:deliverCount">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-right">
+                                                <label class="control-label text-right tooltip-float defaultImgUploadImageBtn" >Submission Date</label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <label class="form-control" data-bind="dateString:submissionDate,datePattern: 'DD/MM/YYYY'">
+                                                </label>
                                             </div>
                                         </div>
                                     </div>

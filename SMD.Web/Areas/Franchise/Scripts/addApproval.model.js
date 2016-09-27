@@ -3,7 +3,7 @@
     var // ReSharper disable InconsistentNaming
       AdCampaign = function (sQId, spcName, spcDes, spcIsApproved, spcRejectionReason,
           subDate, spcCreatedBy, spcType, spcPath, spcLink, spcrate, spcBudget, CampaignDescription, Voucher1Heading, Voucher1Description, Voucher1Value, Voucher1ImagePath,
-          CouponSwapValue, CouponActualValue, CouponQuantity, CouponTakenCount, MaxDailyBudget, VerifyQuestion, Answer1, Answer2, Answer3, CorrectAnswer, DeliveryDays, BuuyItLine1, BuyItButtonLabel, VideoUrl,VideoLink2) {
+          CouponSwapValue, CouponActualValue, CouponQuantity, CouponTakenCount, MaxDailyBudget, VerifyQuestion, Answer1, Answer2, Answer3, CorrectAnswer, DeliveryDays, BuuyItLine1, BuyItButtonLabel, VideoUrl, VideoLink2) {
           var
               id = ko.observable(sQId),
               campaignName = ko.observable(spcName),
@@ -14,7 +14,7 @@
               submissionDate = ko.observable(subDate),
               createdBy = ko.observable(spcCreatedBy),
               type = ko.observable(spcType),
-              imagePath = ko.observable(spcPath),
+              imagePath = ko.observable(spcPath.startsWith('http') ? spcPath : '/' + spcPath),
               landingLink = ko.observable(spcLink),
               clickRate = ko.observable(spcrate),
               maxBudget = ko.observable(spcBudget),

@@ -10,7 +10,7 @@
                     <li><a href="~/Dashboard/Index">&nbsp;</a></li>
                 </ol>
                 <div class="clearfix">
-                    <h1 class="pull-left" style="padding-left:0px;">Survey cards for approval</h1>
+                    <h1 class="pull-left" style="padding-left:0px;">Polls for approval</h1>
                 </div>
             </div>
         </div>
@@ -95,13 +95,13 @@
                                 <div class="tab-pane fade in active" data-bind="with: $root.selectedQuestion" id="tab-generalinfo">
                                     <div class="col-lg-12 form-horizontal">
                                         <h3 class="group-header" style="margin-top:20px;">
-                                            Survey cards
+                                            Polls
                                         </h3>
                                         <div class="col-lg-9">
                                             <div class="form-group">
                                                 <div class="col-lg-4 text-right">
 
-                                                    <label class="control-label text-right tooltip-float defaultImgUploadImageBtn">Question</label>
+                                                    <label class="control-label text-right tooltip-float defaultImgUploadImageBtn">Poll Question</label>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <input type="text" readonly class="form-control" data-bind="value:question">
@@ -170,11 +170,11 @@
                                                     <label class="control-label text-right tooltip-float defaultImgUploadImageBtn">Images</label>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <img id="vehicleImage" alt="" style="width: 200px;height:400px" data-bind="attr:{src:leftImage }" />
+                                                    <img id="vehicleImage" alt="" style="width: 75%;height:75%" data-bind="attr:{src:leftImage }" />
                                                     <h5>Card 1<span></span></h5>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <img id="vehicleImage" alt="" style="width: 200px;height:400px" data-bind="attr:{src:rightImage }" />
+                                                    <img id="vehicleImage" alt="" style="width: 75%;height:75%" data-bind="attr:{src:rightImage }" />
                                                     <h5>Card 2<span></span></h5>
                                                 </div>
                                             </div>
@@ -222,6 +222,7 @@
 @section Scripts{
     <script type="text/javascript">
         require(["FranchiseDashboard/surveyQuestionApp.view", "common/confirmation.view", "common/stripeChargeCustomer.view"]);
+        $("#btnPollsApprov").css("background-color", "#34b9c7");
     </script>
 
 }
