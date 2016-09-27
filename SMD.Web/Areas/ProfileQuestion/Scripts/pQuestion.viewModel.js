@@ -15,6 +15,8 @@ define("pQuestion/pQuestion.viewModel",
                     linkedQuestions = ko.observableArray([]),
                     // Base Data
                     langs = ko.observableArray([]),
+                    surveyQuestionList = ko.observableArray([]),
+                    surveyquestionList = ko.observableArray([]),
                     countries = ko.observableArray([]),
                     userBaseData = ko.observable({ CurrencySymbol: '', isStripeIntegrated: false }),
                     qGroup = ko.observableArray([]),
@@ -22,10 +24,10 @@ define("pQuestion/pQuestion.viewModel",
                     professions = ko.observableArray([]),
                     ageRange = ko.observableArray([]),
                     AgeRangeEnd = ko.observable(80),
-                    ProfileQuestionList = ko.observableArray([]),
                     AgeRangeStart=ko.observable(13),
                     SelectedPvcVal = ko.observable(0),
                     isNewCriteria = ko.observable(true),
+                    showCompanyProfileQuestions = ko.observable(false),
                     selectedCriteria = ko.observable(),
                     Gender = ko.observable('1'),
                      AditionalCriteriaMode = ko.observable("1"), //1 = main buttons, 2 = profile questions , 3 = ad linked questions
@@ -335,7 +337,7 @@ define("pQuestion/pQuestion.viewModel",
                          selectedLocationRadius("");
                      },
                        buildParentSQList = function () {
-                           if (ProfileQuestionList().length == 0) {
+                           if (profileQuestionList().length == 0) {
                                dataservice.getBaseData({
                                    RequestId: 4,
                                    QuestionId: 0,
@@ -344,8 +346,8 @@ define("pQuestion/pQuestion.viewModel",
                                    success: function (data) {
                                        if (data != null) {
                                            surveyQuestionList([]);
-                                           ko.utils.arrayPushAll(ProfileQuestionList(), data.ProfileQuestions);
-                                           ProfileQuestionList.valueHasMutated();
+                                           ko.utils.arrayPushAll(profileQuestionList(), data.ProfileQuestions);
+                                           profileQuestionList.valueHasMutated();
                                        }
                                    },
                                    error: function (response) {
@@ -808,43 +810,14 @@ define("pQuestion/pQuestion.viewModel",
                         });
                     }),
                     onEditCriteria = function (item) {
-
-                       
-                        AditionalCriteriaMode("2");
-
                         isNewCriteria(false);
-                       
                         var val = item.PQAnswerID() + 0;
-                        var valQuest = item.PQID() + 0;
-
                         if (item.Type() == "1") {
 
-                            if (profileQuestionList().length == 0) {
-
-                                dataservice.getBaseDataForProfileQuestions({
-                                    RequestId: 2,
-                                    QuestionId: 0,
-
-                                }, {
-                                    success: function (data) {
-
-                                        if (data != null) {
-                                            profileQuestionList([]);
-                                            ko.utils.arrayPushAll(profileQuestionList(), data.ProfileQuestions);
-                                            profileQuestionList.valueHasMutated();
-                                            item.PQID(valQuest);
-                                        }
-
-                                    },
-                                    error: function (response) {
-
-                                    }
-                                });
-                            }
-
-                            dataservice.getBaseDataForProfileQuestions({
+                        //    editCriteriaHeading("Edit Profile Criteria");
+                            dataservice.getFilterBaseData({
                                 RequestId: 3,
-                                QuestionId: item.PQQuestionID(),
+                                QuestionId: item.PQID(),
                             }, {
                                 success: function (data) {
                                     if (data != null) {
@@ -852,13 +825,11 @@ define("pQuestion/pQuestion.viewModel",
                                             question.PQID = question.PqId;
                                             question.PQAnswerID = question.PqAnswerId;
                                         });
-                                       
                                         profileAnswerList([]);
                                         ko.utils.arrayPushAll(profileAnswerList(), data.ProfileQuestionAnswers);
                                         profileAnswerList.valueHasMutated();
                                         item.PQAnswerID(val);
                                     }
-
                                 },
                                 error: function (response) {
 
@@ -867,14 +838,55 @@ define("pQuestion/pQuestion.viewModel",
 
                             selectedCriteria(item);
                         }
+                        else if (item.Type() == "2") {
+                            debugger;
+                            if (surveyquestionList().length == 0) {
+                                dataservice.getBaseData({
+                                    RequestId: 6,
+                                    QuestionId: 0,
+                                }, {
+                                    success: function (data) {
+
+                                        if (data != null) {
+
+                                            surveyquestionList([]);
+                                            ko.utils.arrayPushAll(surveyquestionList(), data.SurveyQuestions);
+                                            surveyquestionList.valueHasMutated();
+
+                                            var matchSurveyQuestion = ko.utils.arrayFirst(surveyquestionList(), function (survey) {
+                                                return survey.SQID == item.SQID();
+                                            });
+                                            selectedCriteria(item);
+                                            selectedCriteria().profileQuestRightImageSrc(matchSurveyQuestion.LeftPicturePath);
+                                            selectedCriteria().profileQuestRightImageSrc(matchSurveyQuestion.RightPicturePath);
+
+                                        }
+
+                                    },
+                                    error: function (response) {
+
+                                    }
+                                });
+                            }
+                            else {
+
+                                var matchSurveyQuestion = ko.utils.arrayFirst(surveyquestionList(), function (survey) {
+                                    return survey.SQID == item.LinkedSQID();
+                                });
+                                selectedCriteria(item);
+                                selectedCriteria().profileQuestLeftImageSrc(matchSurveyQuestion.LeftPicturePath);
+                                selectedCriteria().profileQuestRightImageSrc(matchSurveyQuestion.RightPicturePath);
+                            }
+
+
+
+                        }
 
                         else {
-                            
-                            
                             selectedCriteria(item);
 
                             if (myQuizQuestions().length == 0) {
-                                dataservice.getBaseDataForProfileQuestions({
+                                dataservice.getBaseData({
                                     RequestId: 12,
                                     QuestionId: 0,
                                 }, {
@@ -883,30 +895,27 @@ define("pQuestion/pQuestion.viewModel",
                                             myQuizQuestions([]);
                                             ko.utils.arrayPushAll(myQuizQuestions(), data.AdCampaigns);
                                             myQuizQuestions.valueHasMutated();
-                                           
                                             var matchSurveyQuestion = ko.utils.arrayFirst(myQuizQuestions(), function (survey) {
-                                                return survey.CampaignId == selectedCriteria().AdCampaignID();
+                                                return survey.CampaignId == item.QuizCampaignId();
                                             });
-                                            selectedCriteria().profileQuestLeftImageSrc(matchSurveyQuestion.Answer1);
-                                            selectedCriteria().profileQuestRightImageSrc(matchSurveyQuestion.Answer2);
+                                            selectedCriteria().surveyQuestLeftImageSrc(matchSurveyQuestion.Answer1);
+                                            selectedCriteria().surveyQuestRightImageSrc(matchSurveyQuestion.Answer2);
                                         }
+
                                     },
                                     error: function (response) {
 
                                     }
                                 });
-                            }
-                            else {
+                            } else {
                                 var matchSurveyQuestion = ko.utils.arrayFirst(myQuizQuestions(), function (survey) {
-                                    return survey.CampaignId == selectedCriteria().AdCampaignID();
+                                    return survey.CampaignId == item.QuizCampaignId();
                                 });
-                                selectedCriteria().profileQuestLeftImageSrc(matchSurveyQuestion.Answer1);
-                                selectedCriteria().profileQuestRightImageSrc(matchSurveyQuestion.Answer2);
+                                selectedCriteria().surveyQuestLeftImageSrc(matchSurveyQuestion.Answer1);
+                                selectedCriteria().surveyQuestRightImageSrc(matchSurveyQuestion.Answer2);
+                                // adjust item
                             }
-                           
-                            // adjust item
                         }
-
                     },
                     // get sorted array of answers 
                     getSortedAnswers = ko.computed(function () {
@@ -934,8 +943,8 @@ define("pQuestion/pQuestion.viewModel",
                     confirmation.afterProceed(function () {
                         //selectedQuestion().ProfileQuestionTargetCriteria.remove(item);
 
-                        item.IsDeleted(true);
-
+                      //  item.IsDeleted(true);
+                        selectedQuestion().ProfileQuestionTargetCriteria.remove(item);
                         toastr.success("Removed Successfully!");
                     });
                     confirmation.show();
@@ -1241,18 +1250,50 @@ define("pQuestion/pQuestion.viewModel",
                   },
                 showAdditionUserCriteria = function () {
 
+                  //  isNewCriteria(true);
+                  //  var objProfileCriteria = new model.ProfileQuestionTargetCriteria();
+
+                  //  objProfileCriteria.Type("1");
+                  //  objProfileCriteria.IncludeorExclude("1");
+                  //  criteriaCount(criteriaCount() + 1);
+                  ////  objProfileCriteria.CriteriaID(criteriaCount());
+                  //  selectedCriteria(objProfileCriteria);
+
+
+                  //  if (profileQuestionList().length == 0) {
+                  //      dataservice.getBaseDataForProfileQuestions({
+                  //          RequestId: 2,
+                  //          QuestionId: 0,
+                  //      }, {
+                  //          success: function (data) {
+                  //              if (data != null) {
+                  //                  profileQuestionList([]);
+                  //                  ko.utils.arrayPushAll(profileQuestionList(), data.ProfileQuestions);
+                  //                  profileQuestionList.valueHasMutated();
+                  //              }
+
+                  //          },
+                  //          error: function (response) {
+
+                  //          }
+                  //      });
+                  //  }
+                  //  AditionalCriteriaMode(2);
+
+
+                    ////////////////////////
                     isNewCriteria(true);
                     var objProfileCriteria = new model.ProfileQuestionTargetCriteria();
 
                     objProfileCriteria.Type("1");
                     objProfileCriteria.IncludeorExclude("1");
                     criteriaCount(criteriaCount() + 1);
-                  //  objProfileCriteria.CriteriaID(criteriaCount());
+                    objProfileCriteria.ID(criteriaCount());
                     selectedCriteria(objProfileCriteria);
 
 
                     if (profileQuestionList().length == 0) {
-                        dataservice.getBaseDataForProfileQuestions({
+                        dataservice.getFilterBaseData({
                             RequestId: 2,
                             QuestionId: 0,
                         }, {
@@ -1270,6 +1311,7 @@ define("pQuestion/pQuestion.viewModel",
                         });
                     }
                     AditionalCriteriaMode(2);
+                    showCompanyProfileQuestions(false);
                 },
                  onChangeProfileQuestion = function (item) {
                      if (item == null)
@@ -1307,8 +1349,8 @@ define("pQuestion/pQuestion.viewModel",
                     //    return item.SQID == selectedSurveyQuestionId;
                     //});
                     //item.SQAnswer("1");
-                    //item.surveyQuestLeftImageSrc(matchSurveyQuestion.LeftPicturePath);
-                    //item.surveyQuestRightImageSrc(matchSurveyQuestion.RightPicturePath);
+                    //item.profileQuestLeftImageSrc(matchSurveyQuestion.LeftPicturePath);
+                    //item.profileQuestRightImageSrc(matchSurveyQuestion.RightPicturePath);
                     //$("#surveyAnswersContainer").show();
                     //isShowSurveyAns(true);
                 },
@@ -1348,7 +1390,7 @@ define("pQuestion/pQuestion.viewModel",
                              //}
                              selectedQuestion().ProfileQuestionTargetCriteria.push(new model.ProfileQuestionTargetCriteria.Create({
                                  Type: 1,
-                                // PqId: selectedCriteria().PQID(),
+                                 PqId: selectedCriteria().PQID(),
                                  PqAnswerId: selectedCriteria().PQAnswerID(),
                                  SqId: selectedCriteria().SQID(),
                                  //SQAnswer: selectedCriteria().SQAnswer(),
@@ -1459,7 +1501,7 @@ define("pQuestion/pQuestion.viewModel",
                     
 
                     if (!isNewCriteria()) {
-                        selectedQuestion().SurveyQuestionTargetCriteria.remove(selectedCriteria());
+                        selectedQuestion().ProfileQuestionTargetCriteria.remove(selectedCriteria());
                     } else {
 
                     }
@@ -1472,34 +1514,136 @@ define("pQuestion/pQuestion.viewModel",
                             showAdditionQuizCriteria = function () {
 
                               
-                              selectedCriteria(null);
-                              isNewCriteria(true);
-                              var objProfileCriteria = new model.ProfileQuestionTargetCriteria();
+                           //   selectedCriteria(null);
+                           //   isNewCriteria(true);
+                           //   var objProfileCriteria = new model.ProfileQuestionTargetCriteria();
 
-                              objProfileCriteria.Type("1");
-                              objProfileCriteria.IncludeorExclude("1");
+                           //   objProfileCriteria.Type("1");
+                           //   objProfileCriteria.IncludeorExclude("1");
                               
-                              selectedCriteria(objProfileCriteria);
+                           //   selectedCriteria(objProfileCriteria);
 
-                           if (myQuizQuestions().length == 0) {
-                               dataservice.getBaseDataForProfileQuestions({
-                                   RequestId: 12,
-                                   QuestionId: 0,
-                               }, {
-                                   success: function (data) {
-                                       if (data != null) {
-                                           myQuizQuestions([]);
-                                           ko.utils.arrayPushAll(myQuizQuestions(), data.AdCampaigns);
-                                           myQuizQuestions.valueHasMutated();
-                                       }
-                                   },
-                                   error: function (response) {
+                           //if (myQuizQuestions().length == 0) {
+                           //    dataservice.getBaseDataForProfileQuestions({
+                           //        RequestId: 12,
+                           //        QuestionId: 0,
+                           //    }, {
+                           //        success: function (data) {
+                           //            if (data != null) {
+                           //                myQuizQuestions([]);
+                           //                ko.utils.arrayPushAll(myQuizQuestions(), data.AdCampaigns);
+                           //                myQuizQuestions.valueHasMutated();
+                           //            }
+                           //        },
+                           //        error: function (response) {
 
+                           //        }
+                           //    });
+                           //}
+                                //AditionalCriteriaMode(3);
+                                debugger;
+                                isNewCriteria(true);
+                                var objProfileCriteria = new model.ProfileQuestionTargetCriteria();
+
+                                objProfileCriteria.Type("1");
+                                objProfileCriteria.IncludeorExclude("1");
+                                criteriaCount(criteriaCount() + 1);
+                                objProfileCriteria.ID(criteriaCount());
+                                selectedCriteria(objProfileCriteria);
+
+                                if (myQuizQuestions().length == 0) {
+                                    dataservice.getFilterBaseData({
+                                        RequestId: 12,
+                                        QuestionId: 0,
+                                    }, {
+                                        success: function (data) {
+                                            if (data != null) {
+                                                myQuizQuestions([]);
+                                                ko.utils.arrayPushAll(myQuizQuestions(), data.AdCampaigns);
+                                                myQuizQuestions.valueHasMutated();
+                                            }
+
+                                        },
+                                        error: function (response) {
+
+                                        }
+                                    });
+                                }
+                                AditionalCriteriaMode(3);
+                            },
+                               showAdditionUserSurveyCriteria = function () {
+
+                                   isNewCriteria(true);
+                                   var objProfileCriteria = new model.ProfileQuestionTargetCriteria();
+
+                                   objProfileCriteria.Type("1");
+                                   objProfileCriteria.IncludeorExclude("1");
+                                   criteriaCount(criteriaCount() + 1);
+                                   objProfileCriteria.ID(criteriaCount());
+                                   selectedCriteria(objProfileCriteria);
+
+
+                                   if (surveyquestionList().length == 0) {
+                                       dataservice.getFilterBaseData({
+                                           RequestId: 6,
+                                           QuestionId: 0,
+                                       }, {
+                                           success: function (data) {
+
+                                               if (data != null) {
+
+                                                   surveyquestionList([]);
+                                                   ko.utils.arrayPushAll(surveyquestionList(), data.SurveyQuestions);
+                                                   surveyquestionList.valueHasMutated();
+                                               }
+
+                                           },
+                                           error: function (response) {
+
+                                           }
+                                       });
                                    }
-                               });
-                           }
-                           AditionalCriteriaMode(3);
-                       },
+                                   AditionalCriteriaMode(4);
+                               },
+
+                                    showAdditionalSurveyQuestions = function () {
+                                        isNewCriteria(true);
+                                        var objProfileCriteria = new model.ProfileQuestionTargetCriteria();
+
+                                        objProfileCriteria.Type("1");
+                                        objProfileCriteria.IncludeorExclude("1");
+                                        criteriaCount(criteriaCount() + 1);
+                                        objProfileCriteria.ID(criteriaCount());
+                                        selectedCriteria(objProfileCriteria);
+
+
+                                        if (profileQuestionList().length == 0) {
+                                            dataservice.getFilterBaseData({
+                                                RequestId: 2,
+                                                QuestionId: 0,
+                                            }, {
+                                                success: function (data) {
+                                                    if (data != null) {
+                                                        profileQuestionList([]);
+                                                        ko.utils.arrayPushAll(profileQuestionList(), data.ProfileQuestions);
+                                                        console.log(data.profileQuestionList)
+                                                        profileQuestionList.valueHasMutated();
+
+                                                        console.log(data)
+                                                    }
+
+                                                },
+                                                error: function (response) {
+
+                                                }
+                                            });
+
+                                        }
+
+                                        AditionalCriteriaMode(2);
+                                        showCompanyProfileQuestions(true);
+                                    },
+        
                           getProductPrice = function () {
                               dataservice.getProduct({
                                   success: function (data) {
@@ -1542,6 +1686,79 @@ define("pQuestion/pQuestion.viewModel",
                                     }
                                 }
                             }),
+                               saveSurveyQuestionCriteria = function (type, item) {
+
+                                   var selectedQuestionstring = item.DisplayQuestion;
+                                   selectedCriteria().questionString(selectedQuestionstring);
+
+                                   selectedCriteria().SQID(item.SQID);
+
+
+                                   if (type == 1) {
+                                       selectedCriteria().answerString(item.LeftPicturePath);
+                                   } else {
+                                       selectedCriteria().answerString(item.RightPicturePath);
+                                   }
+
+                                   var matchedSurveyCriteriaRec = null;
+
+                                   _.each(selectedQuestion().ProfileQuestionTargetCriteria(), function (itemarry) {
+
+                                       if (itemarry.SQID == item.SQID) {
+
+                                           matchedSurveyCriteriaRec = itemarry;
+                                       }
+                                   });
+
+
+                                   if (isNewCriteria()) {
+                                       if (matchedSurveyCriteriaRec == null) {
+
+                                           selectedQuestion().ProfileQuestionTargetCriteria.push(new model.ProfileQuestionTargetCriteria.Create({
+                                               Type: 2,
+                                               LinkedSqId: item.SQID,
+                                               LinkedSqAnswer: type,
+
+                                               //PQAnswerId: selectedCriteria().PQAnswerID(),
+                                               //QuizCampaignId: item.CampaignId,
+                                               //QuizAnswerId: type,
+                                               questionString: selectedCriteria().questionString(),
+                                               answerString: selectedCriteria().answerString(),
+                                               IncludeorExclude: selectedCriteria().IncludeorExclude()
+                                           }));
+
+                                       } else {
+
+
+                                           selectedQuestion().ProfileQuestionTargetCriteria.push(new model.ProfileQuestionTargetCriteria.Create({
+                                               Type: 2,
+                                               LinkedSqId: item.SQID,
+                                               LinkedSqAnswer: type,
+                                               // QuizCampaignId: item.CampaignId,
+                                               // QuizAnswerId: type,
+                                               questionString: selectedCriteria().questionString(),
+                                               answerString: selectedCriteria().answerString(),
+
+                                               IncludeorExclude: selectedCriteria().IncludeorExclude(),
+                                               //  CampaignId: selectedQuestion().CampaignID,
+                                               criteriaPrice: 0
+                                           }));
+
+                                       }
+                                   }
+                                   $(".close").click();
+                                   isShowSurveyAns(false);
+                               },
+
+                                    updateSurveyCriteriass = function (type, item) {
+                                        selectedCriteria().LinkedSQAnswer(type);
+                                        if (type == 1) {
+                                            selectedCriteria().answerString(selectedCriteria().profileQuestLeftImageSrc());
+                                        } else {
+                                            selectedCriteria().answerString(selectedCriteria().profileQuestRightImageSrc());
+                                        }
+                                        $(".close").click();
+                                    },
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView;
@@ -1629,7 +1846,6 @@ define("pQuestion/pQuestion.viewModel",
                     selectedLocation: selectedLocation,
                     onRemoveLocation: onRemoveLocation,
                     deleteLocation: deleteLocation,
-                    ProfileQuestionList: ProfileQuestionList,
                     reachedAudience: reachedAudience,
                     totalAudience: totalAudience,
                     audienceReachMode: audienceReachMode,
@@ -1658,7 +1874,15 @@ define("pQuestion/pQuestion.viewModel",
                     updateProfileQuestion: updateProfileQuestion,
                     totalPrice: totalPrice,
                     isNewCampaign: isNewCampaign,
-                    SaveAsDraft: SaveAsDraft
+                    SaveAsDraft: SaveAsDraft,
+                    showAdditionUserSurveyCriteria: showAdditionUserSurveyCriteria,
+                    showAdditionalSurveyQuestions: showAdditionalSurveyQuestions,
+                    showCompanyProfileQuestions: showCompanyProfileQuestions,
+                    surveyQuestionList: surveyQuestionList,
+                    surveyquestionList: surveyquestionList,
+                    saveSurveyQuestionCriteria: saveSurveyQuestionCriteria,
+                        updateSurveyCriteriass: updateSurveyCriteriass
+                 
                 };
             })()
         };
