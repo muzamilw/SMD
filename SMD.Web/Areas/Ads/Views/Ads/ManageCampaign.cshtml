@@ -22,7 +22,7 @@ else
                 <div class="clearfix col-lg-9" data-bind="with: $root.campaignModel" style="padding:0px;">
                     <span class="pull-left Theme_standard_clr" style="padding-left:0px;font-size:21px;" data-bind="NewCampaignBinding: CampaignName,visible:$root.isDisplayCouponsAds()">New Coupon</span>
                     <span class="pull-left " style="color:black!important; padding-left:0px;font-size:23px;margin-top:12px;" data-bind="NewCampaignBinding: CampaignName,visible:!$root.isDisplayCouponsAds()">New video campaign</span>
-                    <span class="control-label heading-style pull-right" style=" margin-right:13px;   margin-top: 12px;    margin-left: 40px;" data-bind="text:StatusValue()"></span>
+                   
                     
                 </div>
                 <div class="col-lg-3"style="padding:0px;">
@@ -867,8 +867,7 @@ else
 
                             <div class="row" style="line-height: 2;background: rgb(220,220,220);height:74px;display:none;">
 
-                                <div class="Subpanels " style="height:62px;margin-left:6px;margin-top:6px;width:96%;padding:3px;padding-left:16px;">
-
+                                <div class="Subpanels " style="height:62px;width:97%;padding:3px;padding-left:16px;">
 
                                     <div style="padding:0px;">
                                         <span style="color:black !important;">Estimated target audience size:</span>
@@ -885,13 +884,13 @@ else
 
 
 
-                            <div class="row" style="line-height: 2;margin-top:6px;">
+                            <div class="row" style="line-height: 2;">
 
-                                <div class="Subpanels " style="height:auto;margin-left:6px;margin-top:6px;width:96%;padding:3px;padding-left:16px;">
+                                <div class="Subpanels " style="height:auto;width:97%;padding:3px;padding-left:16px;">
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <div class="col-lg-6" style="padding:0px;border-bottom :2px solid rgb(220,220,220);">
-                                                <span style="color:black !important;font-weight:bold;float:left;">Potential Reach</span>
+                                                <span style="color:black !important;float:left;">Potential Reach</span>
                                             </div>
                                             <div class="col-lg-4" style="border-bottom :2px solid rgb(220,220,220);text-align:right;">
                                                 <span style="color:#9690cf;font-weight:bold;" data-bind="text:$root.reachedAudience()">1112</span>
@@ -908,7 +907,7 @@ else
                                                 <div class="col-lg-6" style="float:left;padding-top:4px;
     padding-right: 0px;">
 
-                                                    <span class="text-campaign-left" style="float:left;font-weight:bold;">Ad click</span>
+                                                    <span class="text-campaign-left" style="float:left;">Ad click</span>
                                                     <span style="float:right;">$</span>
                                                     <div style="clear:both;">
                                                     </div>
@@ -943,7 +942,7 @@ else
                                                 <div class="col-lg-6" style="float:left;padding-top:4px;padding-right: 0px;">
 
 
-                                                    <span class="text-campaign-left" style="float:left;font-weight:bold;">Daily budget</span>
+                                                    <span class="text-campaign-left" style="float:left;">Daily budget</span>
                                                     <span style="float:right;">$</span>
                                                     <div style="clear:both;">
                                                     </div>
@@ -982,8 +981,11 @@ else
 
 
                                                 @*<i class="fa fa-arrow-down " data-toggle="collapse" data-target="#demo" aria-hidden="true"></i>*@
-                                                <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Simple collapsible</button>
-
+                                                @*<button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Simple collapsible</button>*@
+                                                <br />
+                                                <div>
+                                                    <span>Learn more about 'Ad Click' and setting your budget</span> <img data-toggle="collapse" data-target="#demo" src="/Content/Images/Drop_Arrow.png" style="height:15px;height:15px;" />
+                                                </div>
                                             </div>
 
 
@@ -993,9 +995,9 @@ else
                                 </div>
                             </div>
 
-                            <div class="row collapse" id="demo" style="margin-top:6px;min-height:80px;background: rgb(220,220,220);">
+                            <div class="row collapse" id="demo" style="margin-top:0px;min-height:80px;">
 
-                                <div class="Subpanels " style="height:auto; min-height:80px;margin-left:6px;margin-top:6px;width:96%;padding:3px;padding-left:16px;">
+                                <div class="Subpanels " style="height:auto; min-height:80px;width:97%;padding:3px;padding-left:16px;">
                                     <br />
                                     <div style="width:100%;">
                                         <p>
