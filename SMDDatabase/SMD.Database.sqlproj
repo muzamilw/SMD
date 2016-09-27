@@ -67,6 +67,9 @@
     <None Include="getApprovedCampaignsOverTime.sql" />
     <None Include="SearchCoupons.sql" />
     <None Include="getActiveCampaignsOverTime.sql" />
+    <None Include="GetDealMetric.sql" />
+    <None Include="GetSurvayQestionsAnswered.sql" />
+    <None Include="GetSurvayCardsAnswered.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="GetRevenueOverTime.sql" />
