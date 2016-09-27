@@ -91,7 +91,7 @@ namespace SMD.MIS
                 .Include("~/Content/CSS/toastr.css")
                 .Include("~/Content/colorpicker.css")
                 .Include("~/Content/CSS/spectrum.css")
-                .Include("~/RichTextEditor/skins/moono/editor.css")
+                //.Include("~/RichTextEditor/skins/moono/editor.css")
                 .Include("~/Content/CSS/custom.css")
                 .Include("~/Content/CSS/jquery.tokenize.css"));
 
