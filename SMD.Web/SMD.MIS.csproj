@@ -717,6 +717,7 @@
     <Content Include="Areas\DAM\Views\Images\AdminIndex.cshtml" />
     <Content Include="Areas\Common\Views\Shared\_InviteSharingUser.cshtml" />
     <Content Include="Areas\Report\Views\Report\WalletReport.cshtml" />
+    <Content Include="Areas\Franchise\Views\Dashboard\TransferRateDashboard.cshtml" />
     <None Include="config\Web.connectionstrings.config">
       <SubType>Designer</SubType>
     </None>

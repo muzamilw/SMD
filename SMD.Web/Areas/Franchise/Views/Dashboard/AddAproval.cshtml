@@ -1,15 +1,17 @@
 ﻿@{
     ViewBag.Title = "Ad Campaigns For Approval";
+    
 }
 <div class="row" id="AdCampaignApprovalBindingSpot">
     <div class="col-lg-12" data-bind="visible: !$root.isEditorVisible()">
         <div class="row">
             <div class="col-lg-12">
+                <input type="hidden" id="typeParam" name="typeParam" value="@ViewBag.addType" />
                 <ol class="breadcrumb">
                     <li><a href="~/Dashboard/Index">&nbsp;</a></li>
                 </ol>
                 <div class="clearfix">
-                    <h1 class="pull-left" style="padding-left:0px;" data-bind="text:$root.lblPageTitle">Ad Campaigns For Approval</h1>
+                    <h1 class="pull-left" style="padding-left:0px;" data-bind="text:$root.lblPageTitle"></h1>
                 </div>
             </div>
         </div>
@@ -90,7 +92,7 @@
 @section Scripts{
     <script type="text/javascript">
         require(["FranchiseDashboard/addApproval.view", "common/confirmation.view"]);
-        $("#btnVideaAddApprov").css("background-color", "#34b9c7");
+       
     </script>
     <script>
         function getParameter(url, param) {

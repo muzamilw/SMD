@@ -262,41 +262,41 @@ namespace SMD.MIS.ModelMappers
                       AnswerString = source.ProfileQuestionAnswer.AnswerString;
                   }
               }
-              //else if (source.Type != null && source.Type == (int)AdCampaignCriteriaType.SurveyQuestion)
-              //{
-              //    if (source.SQID != null && source.SQID > 0 && source.SurveyQuestion != null)
-              //    {
-              //        QuestionString = source.SurveyQuestion.Question;
-              //    }
-              //    if (source.SqAnswer != null && source.SqAnswer > 0 && source.SurveyQuestion != null)
-              //    {
-              //        if (source.SqAnswer == 1)
-              //        {
-              //            if (!source.SurveyQuestion.LeftPicturePath.Contains("http:"))
-              //            {
-              //                AnswerString = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.SurveyQuestion.LeftPicturePath;
-              //            }
-              //            else
-              //            {
-              //                AnswerString = source.SurveyQuestion.LeftPicturePath;
-              //            }
+              else if (source.Type != null && source.Type == (int)AdCampaignCriteriaType.SurveyQuestion)
+              {
+                  if (source.LinkedSQID != null && source.LinkedSQID > 0 && source.SurveyQuestion != null)
+                  {
+                      QuestionString = source.SurveyQuestion.Question;
+                  }
+                  if (source.LinkedSQAnswer != null && source.LinkedSQAnswer > 0 && source.SurveyQuestion != null)
+                  {
+                      if (source.LinkedSQAnswer == 1)
+                      {
+                          if (!source.SurveyQuestion.LeftPicturePath.Contains("http:"))
+                          {
+                              AnswerString = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.SurveyQuestion.LeftPicturePath;
+                          }
+                          else
+                          {
+                              AnswerString = source.SurveyQuestion.LeftPicturePath;
+                          }
 
-              //        }
-              //        else
-              //        {
-              //            if (!source.SurveyQuestion.RightPicturePath.Contains("http:"))
-              //            {
-              //                AnswerString = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.SurveyQuestion.RightPicturePath;
-              //            }
-              //            else
-              //            {
-              //                AnswerString = source.SurveyQuestion.RightPicturePath;
-              //            }
+                      }
+                      else
+                      {
+                          if (!source.SurveyQuestion.RightPicturePath.Contains("http:"))
+                          {
+                              AnswerString = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.SurveyQuestion.RightPicturePath;
+                          }
+                          else
+                          {
+                              AnswerString = source.SurveyQuestion.RightPicturePath;
+                          }
 
-              //        }
+                      }
 
-              //    }
-              //}
+                  }
+              }
               else if (source.Type != null && source.Type == (int)AdCampaignCriteriaType.Language)
               {
                   if (source.LanguageID != null && source.LanguageID > 0 && source.Language != null)

@@ -398,7 +398,6 @@ define("pQuestion/pQuestion.viewModel",
                         }
                         getQuestionAnswer(item.qId());
                         selectedQuestion(item);
-                        
                         if (selectedQuestion().status() == 1) {
                             selectedQuestion().statusValue("Draft");
                         } else if (selectedQuestion().status() == 2) {
@@ -472,6 +471,7 @@ define("pQuestion/pQuestion.viewModel",
                         }
                         SelectedPvcVal(item.answerNeeded());
 
+                        console.log(item.ProfileQuestionTargetCriteria());
                         selectedQuestion().reset();
 
                     },
@@ -817,7 +817,7 @@ define("pQuestion/pQuestion.viewModel",
                         //    editCriteriaHeading("Edit Profile Criteria");
                             dataservice.getFilterBaseData({
                                 RequestId: 3,
-                                QuestionId: item.PQID(),
+                                QuestionId: item.PQQuestionID(),
                             }, {
                                 success: function (data) {
                                     if (data != null) {

@@ -20,6 +20,8 @@ define("FranchiseDashboard/profileQuestionApp.viewModel",
                    // isShowCopounMode = ko.observable(false),
                     selectedProfileQuestion = ko.observable(),
                     onEditPQ = function (item) {
+                        $("#topArea").css("display", "none");
+                        $("#divApprove").css("display", "none");
                         dataservice.getPqAnswer(
                         {
                             ProfileQuestionId: item.id
@@ -43,6 +45,8 @@ define("FranchiseDashboard/profileQuestionApp.viewModel",
                     closeEditDialog = function () {
                         selectedProfileQuestion(undefined);
                         isEditorVisible(false);
+                        $("#topArea").css("display", "block");
+                        $("#divApprove").css("display", "block");
                     },
                     getProfileQuestions = function () {
                         dataservice.getPQForApproval(

@@ -31,7 +31,9 @@
     @* these two css files are bundled into centaurus now.
             <link rel="stylesheet" href="~/Content/themes/Centaurus/css/libs/fullcalendar.css" type="text/css" />
         <link rel="stylesheet" href="~/Content/themes/Centaurus/css/libs/fullcalendar.print.css" type="text/css" media="print" />*@
-    @Styles.Render("~/Content/themes/Centaurus/css/bundleCentaurus/css")
+        @Styles.Render("~/Content/themes/Centaurus/css/bundleCentaurus/css")
+        <link href="~/Content/metroUI/css/metro.css" rel="stylesheet" />
+    <script src="~/Content/metroUI/js/metro.js"></script>
     @* If Debuggin is Enabled then pick css *@
     @if (HttpContext.Current.IsDebuggingEnabled)
     {
