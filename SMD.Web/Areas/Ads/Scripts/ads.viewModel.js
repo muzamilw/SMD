@@ -462,7 +462,14 @@ define("ads/ads.viewModel",
                 $("#headdesc").css("display", "block")
                 
             },
+                GetAudienceCount = function (val)
+                {
+                    while (/(\d+)(\d{3})/.test(val.toString())) {
+                        val = val.toString().replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
+                    }
+                    return val;
 
+                },
 
                 closeContent = function ()
                 {
@@ -1296,7 +1303,7 @@ define("ads/ads.viewModel",
                     });
                 },
                  onChangeSurveyQuestion = function (item) {
-                     debugger;
+                     
                      var y = $(".listview").scrollTop();  //your current y position on the page
 
                      if (item == null)
@@ -1308,7 +1315,7 @@ define("ads/ads.viewModel",
                          QuestionId: selectedQuestionId,
                      }, {
                          success: function (data) {
-                             debugger;
+                             
                              if (data != null) {
                                  if (surveyAnswerList().length > 0) {
                                      surveyAnswerList([]);
@@ -2285,7 +2292,7 @@ define("ads/ads.viewModel",
                     dataservice.getAudienceData(campData, {
                         success: function (data) {
                             $("#spinnerAudience").css("display", "none");
-                            reachedAudience(data.MatchingUsers);
+                            reachedAudience(GetAudienceCount(data.MatchingUsers));
                             totalAudience(data.AllUsers);
                             var percent = data.MatchingUsers / data.AllUsers;
                             if (percent < 0.20) {

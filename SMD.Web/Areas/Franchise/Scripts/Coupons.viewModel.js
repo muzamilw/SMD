@@ -20,6 +20,8 @@ define("FranchiseDashboard/Coupons.viewModel",
                     isShowCopounMode = ko.observable(false),
                     selectedCoupon = ko.observable(),
                     onEditCoupon = function (item) {
+                        $("#topArea").css("display", "none");
+                        $("#divApprove").css("display", "none");
                         dataservice.getCurrenybyID(
                         { id: item.currencyId },
                         {
@@ -61,6 +63,8 @@ define("FranchiseDashboard/Coupons.viewModel",
                     closeEditDialog = function () {
                         selectedCoupon(undefined);
                         isEditorVisible(false);
+                        $("#topArea").css("display", "block");
+                        $("#divApprove").css("display", "block");
                     },
                     getCoupons = function () {
                         dataservice.getCouponsForApproval(

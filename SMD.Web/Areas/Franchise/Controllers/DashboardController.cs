@@ -33,8 +33,9 @@ namespace SMD.MIS.Areas.Franchise.Controllers
         /// <summary>
         /// Approval/rejection of adds
         /// </summary>
-        public ActionResult AddAproval()
+        public ActionResult AddAproval(int adType)
         {
+            ViewBag.addType = adType;
             return View();
         }
         public ActionResult CouponsAproval()
@@ -45,7 +46,10 @@ namespace SMD.MIS.Areas.Franchise.Controllers
         {
             return View();
         }
-
+        public ActionResult TransferRateDashboard()
+        {
+            return View();
+        }
 
     }
 }
