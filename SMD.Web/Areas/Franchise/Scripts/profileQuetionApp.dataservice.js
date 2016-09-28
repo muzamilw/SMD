@@ -43,6 +43,11 @@ define("FranchiseDashboard/profileQuetionApp.dataservice", function () {
                         dataType: 'json',
                         type: 'GET'
                     });
+                    amplify.request.define('getCompanyData', 'ajax', {
+                        url: '/Api/Company',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
                     isInitialized = true;
                 }
             },
@@ -97,14 +102,24 @@ define("FranchiseDashboard/profileQuetionApp.dataservice", function () {
                 error: callbacks.error,
                 data: params
             });
-        };
+        },
+         getCompanyData = function (params, callbacks) {
+             initialize();
+             return amplify.request({
+                 resourceId: 'getCompanyData',
+                 success: callbacks.success,
+                 error: callbacks.error,
+                 data: params
+             });
+         };
 
         return {
             savePq: savePq,
             getPQForApproval: getPQForApproval,
             sendApprovalRejectionEmail: sendApprovalRejectionEmail,
             getPqAnswer: getPqAnswer,
-            getProfileGroupbyID: getProfileGroupbyID
+            getProfileGroupbyID: getProfileGroupbyID,
+            getCompanyData: getCompanyData
         };
     })();
     return dataService;

@@ -17,6 +17,7 @@ define("FranchiseDashboard/profileQuestionApp.viewModel",
                     //Assending  / Desending
                     sortIsAsc = ko.observable(true),
                     isEditorVisible = ko.observable(false),
+                    selectedCompany = ko.observable(),
                    // isShowCopounMode = ko.observable(false),
                     selectedProfileQuestion = ko.observable(),
                     onEditPQ = function (item) {
@@ -186,6 +187,7 @@ define("FranchiseDashboard/profileQuestionApp.viewModel",
                     onSavePQ: onSavePQ,
                     onRejectPQ: onRejectPQ,
                     hasChangesOnPQ: hasChangesOnPQ,
+                    selectedCompany: selectedCompany,
 
                 };
             })()

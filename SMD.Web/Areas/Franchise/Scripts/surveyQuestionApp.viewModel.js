@@ -15,6 +15,7 @@ define("FranchiseDashboard/surveyQuestionApp.viewModel",
                     pager = ko.observable(),
                     //sorting
                     sortOn = ko.observable(1),
+                    selectedCompany = ko.observable(),
                     //Assending  / Desending
                     sortIsAsc = ko.observable(true),
                     // Controlls editor visibility 
@@ -140,7 +141,8 @@ define("FranchiseDashboard/surveyQuestionApp.viewModel",
                     onSaveQuestion: onSaveQuestion,
                     hasChangesOnQuestion: hasChangesOnQuestion,
                     onRejectQuestion: onRejectQuestion,
-                    onApproveQuestion: onApproveQuestion
+                    onApproveQuestion: onApproveQuestion,
+                    selectedCompany: selectedCompany,
                 };
             })()
         };

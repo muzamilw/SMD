@@ -25,6 +25,11 @@ define("FranchiseDashboard/surveyQuestionApp.dataservice", function () {
                         dataType: 'json',
                         type: 'POST'
                     });
+                    amplify.request.define('getCompanyData', 'ajax', {
+                        url: '/Api/Company',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
                     isInitialized = true;
                 }
             },       
@@ -50,11 +55,21 @@ define("FranchiseDashboard/surveyQuestionApp.dataservice", function () {
                     error: callbacks.error,
                     data: params
                 });
-            };
+            },
+                getCompanyData = function (params, callbacks) {
+                    initialize();
+                    return amplify.request({
+                        resourceId: 'getCompanyData',
+                        success: callbacks.success,
+                        error: callbacks.error,
+                        data: params
+                    });
+                };
 
         return {
             saveSurveyQuestion: saveSurveyQuestion,
-            searchSurveyQuestions: searchSurveyQuestions
+            searchSurveyQuestions: searchSurveyQuestions,
+            getCompanyData: getCompanyData
         };
     })();
     return dataService;

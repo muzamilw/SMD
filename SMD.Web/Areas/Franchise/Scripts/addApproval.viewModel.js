@@ -13,6 +13,7 @@ define("FranchiseDashboard/addApproval.viewModel",
                     campaigns = ko.observableArray([]),
                     //pager
                     pager = ko.observable(),
+                    selectedCompany = ko.observable(),
                     //sorting
                     sortOn = ko.observable(5),
                     adType = ko.observable(1),
@@ -177,7 +178,8 @@ define("FranchiseDashboard/addApproval.viewModel",
                     hasChangesOnCampaign: hasChangesOnCampaign,
                     onRejectCampaign: onRejectCampaign,
                     lblPageTitle: lblPageTitle,
-                    isShowCopounMode: isShowCopounMode
+                    isShowCopounMode: isShowCopounMode,
+                    selectedCompany: selectedCompany,
                 };
             })()
         };

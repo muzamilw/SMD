@@ -43,7 +43,7 @@ define("FranchiseDashboard/Coupons.dataservice", function () {
                         dataType: 'json',
                         type: 'POST'
                     });
-                    amplify.request.define('getCompanyDate', 'ajax', {
+                    amplify.request.define('getCompanyData', 'ajax', {
                         url: '/Api/Company',
                         dataType: 'json',
                         type: 'GET'
@@ -101,10 +101,10 @@ define("FranchiseDashboard/Coupons.dataservice", function () {
                     data: params
                 });
             },
-              getCompanyDate = function (params, callbacks) {
+              getCompanyData = function (params, callbacks) {
                   initialize();
                   return amplify.request({
-                      resourceId: 'getCompanyDate',
+                      resourceId: 'getCompanyData',
                       success: callbacks.success,
                       error: callbacks.error,
                       data: params
@@ -117,7 +117,7 @@ define("FranchiseDashboard/Coupons.dataservice", function () {
             getCurrenybyID: getCurrenybyID,
             getCouponCategories:getCouponCategories,
             sendApprovalRejectionEmail: sendApprovalRejectionEmail,
-            getCompanyDate: getCompanyDate
+            getCompanyData: getCompanyData
         };
     })();
     return dataService;

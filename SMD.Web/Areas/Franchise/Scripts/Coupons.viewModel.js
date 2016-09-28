@@ -19,6 +19,7 @@ define("FranchiseDashboard/Coupons.viewModel",
                     isEditorVisible = ko.observable(false),
                     isShowCopounMode = ko.observable(false),
                     selectedCoupon = ko.observable(),
+                    selectedCompany = ko.observable(),
                     onEditCoupon = function (item) {
                         $("#topArea").css("display", "none");
                         $("#divApprove").css("display", "none");
@@ -28,7 +29,8 @@ define("FranchiseDashboard/Coupons.viewModel",
                             success: function (data) {
                                 selectedCoupon(item);
                                 selectedCoupon().currencyId(data.CurrencyCode)
-                                isEditorVisible(true);
+                                getCompanyData(item);
+                               // isEditorVisible(true);
                                 //getCouponCategories(item.couponId);
 
                                
@@ -153,11 +155,11 @@ define("FranchiseDashboard/Coupons.viewModel",
                     },
                     getCompanyData = function (selectedItem)
                     {
-                        dataservice.getCompanyDate(
-                     { id: selectedItem.CompanyId },
+                        dataservice.getCompanyData(
+                     { id: selectedItem.companyId },
                      {
                          success: function (company) {
-                             
+                             isEditorVisible(true);
                          
                          },
                          error: function () {
@@ -194,6 +196,7 @@ define("FranchiseDashboard/Coupons.viewModel",
                     closeEditDialog: closeEditDialog,
                     onApproveCoupon:onApproveCoupon,
                     onSaveCoupon: onSaveCoupon,
+                    selectedCompany:selectedCompany,
                     onRejectCoupon: onRejectCoupon,
                     hasChangesOnCoupon: hasChangesOnCoupon,
 
