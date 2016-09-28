@@ -10,6 +10,7 @@ namespace SMD.Interfaces.Repository
     public interface ICompanyBranchRepository : IBaseRepository<CompanyBranch, long>
     {
         CompanyBranch GetBranchsByCategoryId(long id);
+        bool IsCompanyBranchExist();
     }
 
 }
