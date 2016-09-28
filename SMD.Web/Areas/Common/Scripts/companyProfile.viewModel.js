@@ -18,10 +18,14 @@ define("common/companyProfile.viewModel",
                 // list of cities 
                 cities = ko.observableArray([]),
                 currentTab = ko.observable(1),
-
+                isMapVisible = ko.observable(false),
+                errorList = ko.observableArray([]),
+                OldPassword = ko.observable(),
+                NewPassword = ko.observable(),
+                ConfirmPassword = ko.observable(),
                  showCompanyProfileDialog = function () {
 
-                    // view.showCompanyProfileDialog();
+                     // view.showCompanyProfileDialog();
                      getCompanyProfile(view.showCompanyProfileDialog);
                  },
                 //closing
@@ -35,7 +39,7 @@ define("common/companyProfile.viewModel",
                              dataservice.savecompanyProfile(
                                  data, {
                                      success: function () {
-                                         toastr.success("Profile updated!");
+                                         toastr.success("Company profile updated successfully!");
                                      },
                                      error: function () {
                                          toastr.error("Failed to update profile!");
@@ -43,6 +47,7 @@ define("common/companyProfile.viewModel",
                                  });
                          });
                          confirmation.afterCancel(function () {
+                             selectedCompany().reset();
                              view.CloseCompanyProfileDialog();
                          });
                          confirmation.show();
@@ -59,7 +64,7 @@ define("common/companyProfile.viewModel",
             { Id: 2, Text: 'Twitter' },
             { Id: 3, Text: 'Instagram' },
             { Id: 4, Text: 'Pinterest' }
-                ]),
+            ]),
                 genderList = ko.observableArray([{
                     id: 1,
                     name: 'Mr.'
@@ -67,27 +72,100 @@ define("common/companyProfile.viewModel",
                     id: 2,
                     name: 'MRs.'
                 }]),
-                professions = ko.observableArray([]),
-                companyTypes = ko.observableArray([]),
+                professionsList = ko.observableArray([]),
+                companyTypes = ko.observableArray([
+                    { Id: 1, Name: 'Amusement, Gambling, and Recreation Industries' },
+                    { Id: 2, Name: 'Arts, Entertainment, and Recreation' },
+                    { Id: 3, Name: 'Broadcasting (except Internet)' },
+                    { Id: 4, Name: 'Building Material and Garden Equipment and Supplies Dealers' },
+                    { Id: 5, Name: 'Clothing and Clothing Accessories Stores' },
+                    { Id: 6, Name: 'Computer and Electronics' },
+                    { Id: 7, Name: 'Construction' },
+                    { Id: 8, Name: 'Couriers and Messengers' },
+                    { Id: 9, Name: 'Data Processing, Hosting, and Related Services' },
+                    { Id: 10, Name: 'Health Services' },
+                    { Id: 11, Name: 'Educational Services' },
+                    { Id: 12, Name: 'Electronics and Appliance Stores' },
+                    { Id: 13, Name: 'Finance and Insurance' },
+                    { Id: 14, Name: 'Food Services' },
+                    { Id: 15, Name: 'Food and Beverage Stores' },
+                    { Id: 16, Name: 'Furniture and Home Furnishings Stores' },
+                    { Id: 17, Name: 'General Merchandise Stores' },
+                    { Id: 18, Name: 'Health Care' },
+                    { Id: 19, Name: 'Internet Publishing and Broadcasting' },
+                    { Id: 20, Name: 'Leisure and Hospitality' },
+                    { Id: 21, Name: 'Manufacturing' },
+                    { Id: 22, Name: 'Merchant Wholesalers ' },
+                    { Id: 23, Name: 'Motor Vehicle and Parts Dealers ' },
+                    { Id: 24, Name: 'Museums, Historical Sites, and Similar Institutions ' },
+                    { Id: 25, Name: 'Performing Arts, Spectator Sports' },
+                    { Id: 26, Name: 'Printing Services' },
+                    { Id: 27, Name: 'Professional and Business Services' },
+                    { Id: 28, Name: 'Real Estate' },
+                    { Id: 29, Name: 'Repair and Maintenance' },
+                    { Id: 30, Name: 'Scenic and Sightseeing Transportation' },
+                    { Id: 31, Name: 'Service-Providing Industries' },
+                    { Id: 32, Name: 'Social Assistance' },
+                    { Id: 33, Name: 'Sporting Goods, Hobby, Book, and Music Stores' },
+                    { Id: 34, Name: 'Telecommunications' },
+                    { Id: 35, Name: 'Transportation' },
+                    { Id: 36, Name: 'Utilities' }
+                ]),
+                isAddressFilled = ko.computed(function () {
+                    if (selectedCompany() != undefined && selectedCompany() != null) {
+                        if ((selectedCompany().BillingAddressLine1() == undefined || selectedCompany().BillingAddressLine1() == "") || (selectedCompany().billingCity() == undefined || selectedCompany().billingCity() == "") || (selectedCompany().BillingState() == undefined || selectedCompany().BillingState() == "")) {
+                            return false;
+                        }
+                        else {
+                            isMapVisible(true);
+                            return true;
+                        }
+
+
+                    }
+                    else {
+
+                        return false;
+                    }
+
+
+                }),
                 //Update Profile
                 //Get Base Data for Questions
                 updateProfile = function () {
+                    if (selectedCompany().isSubmit()) {
+                        if (doBeforeSave()) {
+                            saveCompanyProfile();
+                        }
+                    } else {
+                        saveCompanyProfile();
+                    }
 
+                },
+                saveCompanyProfile = function() {
                     var data = selectedCompany().convertToServerData();
                     dataservice.saveCompanyProfile(
                         data, {
                             success: function () {
                                 selectedCompany().reset();
-                                toastr.success("Profile updated!");
+                                toastr.success("Profile updated successfully!");
                                 view.CloseCompanyProfileDialog();
                             },
                             error: function () {
                                 toastr.error("Failed to update profile!");
                             }
                         });
-
                 },
-
+                doBeforeSave = function() {
+                    var flag = true;
+                    errorList.removeAll();
+                    if (!selectedCompany().isValid()) {
+                        selectedCompany().errors.showAllMessages();
+                        setValidationSummary(selectedCompany());
+                        flag = false;
+                    }
+                    return flag;
+                },
                 getCitiesByCountryId = function (data) {
 
                     dataservice.getCitiesByCountry(
@@ -130,6 +208,8 @@ define("common/companyProfile.viewModel",
                                //        selectedCompany().selectedMedia('Instagram');
                                //    if(selectedCompany().PinterestHandle() != null)
                                //        selectedCompany().selectedMedia('Pinterest');
+                               googleAddressMap();
+                               currentTab(1);
                                selectedCompany().reset();
                                if (callback && typeof callback === "function") {
                                    callback();
@@ -162,6 +242,12 @@ define("common/companyProfile.viewModel",
                                 ko.utils.arrayPushAll(cities(), baseDataFromServer.CityDropDowns);
                                 cities.valueHasMutated();
                             }
+                            if (baseDataFromServer != null && baseDataFromServer.IndusteryDropdowns != null) {
+                                professionsList.removeAll();
+                                ko.utils.arrayPushAll(professionsList(), baseDataFromServer.IndusteryDropdowns);
+                                professionsList.valueHasMutated();
+                            }
+                            
 
                             randonNumber("?r=" + Math.floor(Math.random() * (20 - 1 + 1)) + 1);
 
@@ -185,22 +271,92 @@ define("common/companyProfile.viewModel",
                 onTabChange = function(tabNo) {
                     currentTab(tabNo);
                 },
-                
+                 
+                //-------Google Map Code--------------
+                googleAddressMap = function () {
+                    initializeGEO();
+                    codeAddress();
+                    google.maps.event.addDomListener(window, 'load', initializeGEO);
+                },
+                initializeGEO = function () {
+                    geocoder = new google.maps.Geocoder();
+                    var latlng = new google.maps.LatLng(-34.397, 150.644);
+                    var mapOptions = {
+                        zoom: 15,
+                        center: latlng,
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    };
+                    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+                },
+                codeAddress = function () {
+                    
+                    var address = selectedCompany().BillingAddressLine1().toLowerCase() + ' ' + selectedCompany().billingCity() + ' ' + selectedCompany().BillingZipCode() + ' ' + selectedCompany().BillingState().toLowerCase();
+                     geocoder.geocode({
+                         'address': address
+                     }, function (results, status) {
+                         if (status == google.maps.GeocoderStatus.OK) {
+                             //if (isCodeAddressEdit() == false) {
+                             //    selectedBranch().branchLocationLat(results[0].geometry.location.lat());
+                             //    selectedBranch().branchLocationLon(results[0].geometry.location.lng());
+                             //}
+                             map.setCenter(results[0].geometry.location);
+
+                             var marker = new google.maps.Marker({
+                                 map: map,
+                                 position: results[0].geometry.location
+                             });
+                             //google.maps.event.addListener(map, 'click', function (event) {
+                             //    //selectedBranch().branchLocationLat(event.latLng.lat());
+                             //    //selectedBranch().branchLocationLon(event.latLng.lng());
+                             //    var geocoder = new google.maps.Geocoder();
+                             //    geocoder.geocode({
+                             //        "latLng": event.latLng
+                             //    }, function (results, status) {
+                             //        console.log(results, status);
+                             //        if (status == google.maps.GeocoderStatus.OK) {
+                             //            console.log(results);
+                             //            var lat = results[0].geometry.location.lat(),
+                             //                lng = results[0].geometry.location.lng(),
+                             //                placeName = results[0].address_components[0].long_name,
+                             //                latlng = new google.maps.LatLng(lat, lng);
+
+                             //            moveMarker(placeName, latlng);
+                             //        }
+                             //    });
+                             //});
+                             //function moveMarker(placeName, latlng) {
+                             //    //marker.setIcon(image);
+                             //    marker.setPosition(latlng);
+                             //    //infowindow.setContent(placeName);
+                             //    //infowindow.open(map, marker);
+                             //}
+                             isCodeAddressEdit(false);
+                             isMapVisible(true);
+                         } else {
+                             toastr.error("Failed to Search Address,please add valid address and search it . Error: " + status);
+                             isMapVisible(false);
+                             //alert('Geocode was not successful for the following reason: ' + status);
+                         }
+                     });
+                 },
+                //-------Google Map Code Ends
+               
 
                 // Update Button handler
                 onUpdateProfile = function () {
-                    selectedCompany().TwitterHandle(null);
-                    selectedCompany().InstagramHandle(null);
-                    selectedCompany().FacebookHandle(null);
-                    selectedCompany().PinterestHandle(null)
-                    if (selectedCompany().selectedMedia() == 'Twitter')
-                        selectedCompany().TwitterHandle(selectedCompany().mediaHandleui());
-                    else if (selectedCompany().selectedMedia() == 'Facebook')
-                        selectedCompany().FacebookHandle(selectedCompany().mediaHandleui());
-                    else if (selectedCompany().selectedMedia() == 'Instagram')
-                        selectedCompany().InstagramHandle(selectedCompany().mediaHandleui());
-                    else if (selectedCompany().selectedMedia() == 'Pinterest')
-                        selectedCompany().PinterestHandle(selectedCompany().mediaHandleui());
+                    //selectedCompany().TwitterHandle(null);
+                    //selectedCompany().InstagramHandle(null);
+                    //selectedCompany().FacebookHandle(null);
+                    //selectedCompany().PinterestHandle(null)
+                    //if (selectedCompany().selectedMedia() == 'Twitter')
+                    //    selectedCompany().TwitterHandle(selectedCompany().mediaHandleui());
+                    //else if (selectedCompany().selectedMedia() == 'Facebook')
+                    //    selectedCompany().FacebookHandle(selectedCompany().mediaHandleui());
+                    //else if (selectedCompany().selectedMedia() == 'Instagram')
+                    //    selectedCompany().InstagramHandle(selectedCompany().mediaHandleui());
+                    //else if (selectedCompany().selectedMedia() == 'Pinterest')
+                    //    selectedCompany().PinterestHandle(selectedCompany().mediaHandleui());
 
                     updateProfile();
                 },
@@ -208,6 +364,61 @@ define("common/companyProfile.viewModel",
                 chargeCustomer = function () {
                     stripeChargeCustomer.show(undefined, 2000, '2 Widgets');
                 },
+                 setValidationSummary = function (selectedItem) {
+
+                     if (selectedItem.CompanyName.error) {
+                         errorList.push({ name: selectedItem.CompanyName.domElement.name, element: selectedItem.CompanyName.domElement });
+                     }
+                     if (selectedItem.salutation.error) {
+                         errorList.push({ name: selectedItem.salutation.domElement.name, element: selectedItem.salutation.domElement });
+                     }
+                     if (selectedItem.fullName.error) {
+                         errorList.push({ name: selectedItem.fullName.domElement.name, element: selectedItem.fullName.domElement });
+                     }
+                     
+                 },
+                gotoElement = function (validation) {
+                    view.gotoElement(validation.element);
+                },
+                ChangePassword = function () {
+                    view.showChangePassword();
+                },
+
+                ChangePasswordOk = function () {
+
+                       var oldPasswordLength = OldPassword();
+                       var newPasswordLength = NewPassword();
+                       if (OldPassword() == "" || OldPassword() == undefined) {
+                           toastr.error("Old Password is Required!");
+                           return;
+                       }
+                       else if (NewPassword() == "" || NewPassword() == undefined) {
+                           toastr.error("New Password is Required!");
+                           return;
+                       } else if (ConfirmPassword() == "" || ConfirmPassword() == undefined) {
+                           toastr.error("Confirm Password is Required!");
+                           return;
+                       }
+                       else if (oldPasswordLength.length < 6) {
+                           toastr.error("Old Password is not correct it should have minimum 6 characters!");
+                       }
+                       else if (newPasswordLength.length < 6) {
+                           toastr.error("New Password is required with minimum 6 characters!");
+                       }
+                       else if (NewPassword() != ConfirmPassword()) {
+                           toastr.error("Password not matched!");
+                       }
+                       else {
+                           $.getJSON("/Account/ChangePassword?Password=" + NewPassword() + "&OldPassword=" + OldPassword() + "&UserId=" + selectedUser().id(),
+                                  function (xdata) {
+                                      toastr.success("Password Changed Successfully!");
+                                      view.hideChangePassword();
+                                  });
+                           toastr.success("Password Changed Successfully!");
+                           view.hideChangePassword();
+                       }
+
+                   },
                 // Initialize the view model
                 initialize = function (specifiedView) {
                     view = specifiedView;
@@ -219,26 +430,36 @@ define("common/companyProfile.viewModel",
 
 
                 };
-        return {
-            initialize: initialize,
-            getCompanyProfile: getCompanyProfile,
-            selectedCompany: selectedCompany,
-            countries: countries,
-            cities: cities,
-            LogoUrlImageCallback: LogoUrlImageCallback,
-            randonNumber: randonNumber,
-            onUpdateProfile: onUpdateProfile,
-            chargeCustomer: chargeCustomer,
-            hasChangesOnProfile: hasChangesOnProfile,
-            getCitiesByCountryId: getCitiesByCountryId,
-            showCompanyProfileDialog: showCompanyProfileDialog,
-            onCloseCompanyProfileDialog: onCloseCompanyProfileDialog,
-            socialMedia: socialMedia,
-            selectedMedia: selectedMedia,
-            currentTab: currentTab,
-            onTabChange: onTabChange,
-            genderList: genderList
-        };
+                return {
+                    initialize: initialize,
+                    getCompanyProfile: getCompanyProfile,
+                    selectedCompany: selectedCompany,
+                    countries: countries,
+                    cities: cities,
+                    LogoUrlImageCallback: LogoUrlImageCallback,
+                    randonNumber: randonNumber,
+                    onUpdateProfile: onUpdateProfile,
+                    chargeCustomer: chargeCustomer,
+                    hasChangesOnProfile: hasChangesOnProfile,
+                    getCitiesByCountryId: getCitiesByCountryId,
+                    showCompanyProfileDialog: showCompanyProfileDialog,
+                    onCloseCompanyProfileDialog: onCloseCompanyProfileDialog,
+                    socialMedia: socialMedia,
+                    selectedMedia: selectedMedia,
+                    currentTab: currentTab,
+                    onTabChange: onTabChange,
+                    genderList: genderList,
+                    professionsList: professionsList,
+                    companyTypes: companyTypes,
+                    isAddressFilled: isAddressFilled,
+                    errorList: errorList,
+                    gotoElement: gotoElement,
+                    ChangePassword: ChangePassword,
+                    ChangePasswordOk: ChangePasswordOk,
+                    OldPassword: OldPassword,
+                    NewPassword:NewPassword,
+                    ConfirmPassword: ConfirmPassword
+            };
     })()
 };
 return ist.companyProfile.viewModel;

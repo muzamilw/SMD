@@ -10688,9 +10688,9 @@ require(["ko", "knockout-validation"], function (ko) {
     };
 
     // Knockout Extender for Element
-    ko.extenders.element = function (target, element) {
-        target.domElement = element;
-    }
+    //ko.extenders.element = function (target, element) {
+    //    target.domElement = element;
+    //}
 
     // Custom Binding for handling validation elements
     ko.bindingHandlers.validationOnElement = {
