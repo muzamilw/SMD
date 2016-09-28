@@ -24,8 +24,34 @@ define("common/companyProfile.view",
                     $("#companyProfileDialog").modal("hide");
                 },
                 
-                
+                gotoElement = function (element) {
+                    var tab = $(element).closest(".tab-pane");
+                    if (!tab) {
+                        return;
+                    }
 
+                    var liElement = $('a[href=#' + tab.attr('id') + ']');
+                    if (!liElement) {
+                        return;
+                    }
+
+                    liElement.click();
+
+                    // Scroll to Element
+                    setTimeout(function () {
+                        window.scrollTo($(element).offset().left, $(element).offset().top - 50);
+                        // Focus on element
+                        $(element).focus();
+                    }, 1000);
+                },
+                showChangePassword = function () {
+                    $("#ChangePassword").modal("show");
+                    initializeLabelPopovers();
+                },
+                 // Hide Company Contact the dialog
+                hideChangePassword = function () {
+                    $("#ChangePassword").modal("hide");
+                },
             
                 // Initialize
                 initialize = function () {
@@ -40,10 +66,12 @@ define("common/companyProfile.view",
                 viewModel: viewModel,
                 showCompanyProfileDialog: showCompanyProfileDialog,
                 CloseCompanyProfileDialog: CloseCompanyProfileDialog,
-            
-             
+                gotoElement: gotoElement,
+                showChangePassword: showChangePassword,
+                hideChangePassword: hideChangePassword
 
-            };
+
+        };
         })(companyViewModel);
         // Initialize the view model
         if (ist.companyProfile.view.bindingRoot) {

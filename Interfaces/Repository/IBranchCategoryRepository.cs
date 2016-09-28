@@ -10,7 +10,7 @@ namespace SMD.Interfaces.Repository
     public interface IBranchCategoryRepository : IBaseRepository<BranchCategory, long>
     {
         List<BranchCategory> GetAllBranchCategories();
-        
 
+        long ExistedCompanyBranchCategory();
     }
 }

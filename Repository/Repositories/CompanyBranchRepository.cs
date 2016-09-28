@@ -28,6 +28,11 @@ namespace SMD.Repository.Repositories
             return DbSet.Where(b => b.BranchId == id).FirstOrDefault();
 
         }
+
+        public bool IsCompanyBranchExist()
+        {
+            return DbSet.Any(b => b.CompanyId == CompanyId);
+        }
        
     }
 }
