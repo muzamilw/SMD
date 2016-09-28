@@ -33,7 +33,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Get Add Campaigns
         /// </summary>
-        public AdCampaignResposneModelForAproval Get([FromUri] AdCampaignSearchRequest request)
+        public AdCampaignResposneModelForAproval Get([FromUri] AdCampaignSearchRequest request )
         {
             if (request == null || !ModelState.IsValid)
             {

@@ -1,7 +1,7 @@
 ﻿define(["ko", "underscore", "underscore-ko"], function (ko) {
 
     var // ReSharper disable InconsistentNaming
-      ProfileQuestion = function (pqSubBy, pquestion, pqsubmissionDateTime, pqCompanyId, pqprofileGroupId, pqType, PqId, pqApproved, pqRejectedReason, pqAgeRangeStart, pqAgeRangeEnd, pqAmountCharged) {
+      ProfileQuestion = function (pqSubBy, pquestion, pqsubmissionDateTime, pqCompanyId, pqprofileGroupId, pqType, PqId, pqApproved, pqRejectedReason, pqAgeRangeStart, pqAgeRangeEnd, pqAmountCharged, pqAnswerNeeded) {
           var
               submittedBy = ko.observable(pqSubBy),
               question = ko.observable(pquestion),
@@ -16,6 +16,7 @@
               ageRangeStart = ko.observable(pqAgeRangeStart),
               ageRangeEnd = ko.observable(pqAgeRangeEnd),
               amountCharged = ko.observable(pqAmountCharged),
+              deliverCount = ko.observable(pqAnswerNeeded),
            
               errors = ko.validation.group({
 
@@ -58,7 +59,8 @@
               isApproved :isApproved,
               rejectedReason :rejectedReason,
               pqAnswers:pqAnswers,
-              type:type,
+              type: type,
+              deliverCount:deliverCount,
               hasChanges: hasChanges,
               convertToServerData: convertToServerData,
               reset: reset,
@@ -74,7 +76,7 @@
     var ProfileQuestionServertoClientMapper = function (itemFromServer) {
 
 
-        return new ProfileQuestion(itemFromServer.CreatedBy, itemFromServer.Question, itemFromServer.SubmissionDateTime, itemFromServer.CompanyId, itemFromServer.ProfileGroupId, itemFromServer.Type, itemFromServer.PqId, itemFromServer.Approved, itemFromServer.RejectionReason, itemFromServer.AgeRangeStart, itemFromServer.AgeRangeEnd, itemFromServer.AmountCharged);
+        return new ProfileQuestion(itemFromServer.CreatedBy, itemFromServer.Question, itemFromServer.SubmissionDateTime, itemFromServer.CompanyId, itemFromServer.ProfileGroupId, itemFromServer.Type, itemFromServer.PqId, itemFromServer.Approved, itemFromServer.RejectionReason, itemFromServer.AgeRangeStart, itemFromServer.AgeRangeEnd, itemFromServer.AmountCharged, itemFromServer.AnswerNeeded);
     };
   
     // Function to attain cancel button functionality ProfileQuestion

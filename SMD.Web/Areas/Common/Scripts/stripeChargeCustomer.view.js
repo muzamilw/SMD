@@ -16,7 +16,7 @@ define("common/stripeChargeCustomer.view",
                 // Show Dialog
                 showDialog = function() {
                     handler = StripeCheckout.configure({
-                        key: 'pk_test_H5ynmxoBz7YATHN18SgZ5hjc',
+                        key: 'pk_test_7Hp61hs1eELy0kpvdkcu7klW',
                         image: 'http://cash4ads.com/wp-content/uploads/2016/09/Cash_4_ads_Circle.png',
                         locale: 'auto',
                         token: function (token) {
