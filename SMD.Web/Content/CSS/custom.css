@@ -440,11 +440,11 @@ a.reportAnchor a:hover {
 }
     .line-separator{
 
-     border-left: 1px solid #7f8c8d;
-    border-right: 1px solid #7f8c8d;
+     border-left: 1px solid gainsboro;
+    border-right: 1px solid gainsboro;
     height: 114px;
     position: absolute;
-    right: 347px;
+    right: 359px;
     top: 0px;
 
 }
