@@ -156,9 +156,13 @@ define("FranchiseDashboard/Coupons.viewModel",
                     getCompanyData = function (selectedItem)
                     {
                         dataservice.getCompanyData(
-                     { id: selectedItem.companyId },
                      {
-                         success: function (company) {
+                         companyId: selectedItem.companyId,
+                         userId: selectedItem.userID,
+                     },
+                     {
+                         success: function (comData) {
+                             selectedCompany(comData);
                              isEditorVisible(true);
                          
                          },
