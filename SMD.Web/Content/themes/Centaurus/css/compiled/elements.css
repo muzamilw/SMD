@@ -164,7 +164,10 @@ h1 small, h2 small, h3 small, h1 .small, h2 .small, h3 .small {
     background-color: #5fb761;
     border-color: #27ae60;
 }
-
+.backclr {
+    background-color:gainsboro!important;
+    border-color:gainsboro!important;
+}
     .btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active, .open .dropdown-toggle.btn-success {
         background-color: #27ae60;
     }
@@ -4487,7 +4490,7 @@ input[type="radio"] {
     float: right;
     width: 25px;
     margin-top: 5px;
-    background-color: #68b359!important;
+    background-color: gainsboro!important;
     text-align: center;
     height: 25px;
     border-radius: 25px;
@@ -5470,6 +5473,7 @@ color:red !important;
     -webikt-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
+   
 }
 .ads-numbering-linebar {
     width: 80px;
@@ -5531,7 +5535,7 @@ background-image: url(/Images/crowdcentz_logo.png) !important;
 .tooltip {
     position: relative;
     display: inline-block;
-    border-bottom: 1px dotted black;
+    /*border-bottom: 1px dotted black;*/
     opacity: 1 !important;
 }
 
@@ -5581,43 +5585,7 @@ background-image: url(/Images/crowdcentz_logo.png) !important;
     filter: alpha(opacity=20);
     opacity: .2;
 }
-
-
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
-
-
-
-
-
-#colbtn {
-  display: block;
-  padding: 0.5em;
-  text-align: center;
-  border-bottom: 1px solid #CCC;
-  color: #666;
-}
-#colbtn:hover {
-  color: #000;
-}
-#colbtn::before {
-  font-family: Consolas, monaco, monospace;
-  font-weight: bold;
-  font-size: 15px;
-  content: "+";
-  vertical-align: text-top;
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  margin-right: 3px;
-  background: radial-gradient(ellipse at center, #CCC 50%, transparent 50%);
+.panelfntSize {
+    font-size:18px!important;
 }
 
-section {
-  padding: 0 20px;
-}
-#toggle:checked ~ #expand {
-  height: 250px;
-}
-#toggle:checked ~ label::before {
-  content: "-";
-}
