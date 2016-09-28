@@ -43,6 +43,11 @@ define("FranchiseDashboard/Coupons.dataservice", function () {
                         dataType: 'json',
                         type: 'POST'
                     });
+                    amplify.request.define('getCompanyDate', 'ajax', {
+                        url: '/Api/Company',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
                     isInitialized = true;
                 }
             },
@@ -95,14 +100,24 @@ define("FranchiseDashboard/Coupons.dataservice", function () {
                     error: callbacks.error,
                     data: params
                 });
-            };
+            },
+              getCompanyDate = function (params, callbacks) {
+                  initialize();
+                  return amplify.request({
+                      resourceId: 'getCompanyDate',
+                      success: callbacks.success,
+                      error: callbacks.error,
+                      data: params
+                  });
+              };
 
         return {
             saveCoupon: saveCoupon,
             getCouponsForApproval: getCouponsForApproval,
             getCurrenybyID: getCurrenybyID,
             getCouponCategories:getCouponCategories,
-            sendApprovalRejectionEmail: sendApprovalRejectionEmail
+            sendApprovalRejectionEmail: sendApprovalRejectionEmail,
+            getCompanyDate: getCompanyDate
         };
     })();
     return dataService;

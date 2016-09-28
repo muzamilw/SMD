@@ -91,7 +91,7 @@ define("FranchiseDashboard/Coupons.viewModel",
                                 }
                             });
                     },
-                   onApproveCoupon = function () {
+                    onApproveCoupon = function () {
                              confirmation.messageText("Do you want to approve this Coupon ? System will attempt to collect payment and generate invoice");
                              confirmation.show();
                              confirmation.afterCancel(function () {
@@ -103,7 +103,7 @@ define("FranchiseDashboard/Coupons.viewModel",
                                  toastr.success("Approved Successfully.");
                              });
                          },
-                      onSaveCoupon = function () {
+                    onSaveCoupon = function () {
 
                           var couponId = selectedCoupon().couponId();
                           dataservice.saveCoupon(selectedCoupon().convertToServerData(), {
@@ -136,13 +136,13 @@ define("FranchiseDashboard/Coupons.viewModel",
                               }
                           });
                       },
-                       hasChangesOnCoupon = ko.computed(function () {
+                    hasChangesOnCoupon = ko.computed(function () {
                            if (selectedCoupon() == undefined) {
                                 return false;
                             }
                            return (selectedCoupon().hasChanges());
                         }),
-                      onRejectCoupon = function () {
+                    onRejectCoupon = function () {
                           if (selectedCoupon().rejectedReason() == undefined || selectedCoupon().rejectedReason() == "" || selectedCoupon().rejectedReason() == " ") {
                                  toastr.info("Please add rejection reason!");
                                  return false;
@@ -150,7 +150,22 @@ define("FranchiseDashboard/Coupons.viewModel",
                              selectedCoupon().isApproved(false);
                              onSaveCoupon();
                              toastr.success("Rejected Successfully.");
+                    },
+                    getCompanyData = function (selectedItem)
+                    {
+                        dataservice.getCompanyDate(
+                     { id: selectedItem.CompanyId },
+                     {
+                         success: function (company) {
+                             
+                         
                          },
+                         error: function () {
+                             toastr.error("Failed to load Company");
+                         }
+                     });
+
+                    },
 
                     // Initialize the view model
                     initialize = function (specifiedView) {
