@@ -1748,23 +1748,23 @@ input[type="radio"] {
 }
 
 #login-page {
-    background-color: #e7ebee;
+    background-color: white;
 }
 
 
 #login-page-full a {
 
-    color:white;
+    color:#2c3e50;
 }
 
 
 #login-page-full {
     background-color: #e7ebee;
-    color:white;
+    color:#2c3e50;
 }
 
 #login-box {
-    background: #fff;
+    /*background: #fff;*/
     max-width: 350px;
     min-width: 280px;
     border: 1px solid #e1e1e1;
@@ -1812,12 +1812,12 @@ input[type="radio"] {
 
 #login-box-inner {
     padding: 60px 25px;
-    background-color:#b0b0b0;
+    background-color: rgb(255, 255, 255);
 }
 
 
 #login-box-inner h4 {
-   color:white;
+   color:#2c3e50;
    margin:auto;
    margin-bottom:20px;
   
@@ -1944,7 +1944,7 @@ input[type="radio"] {
 }
 
 #login-full-wrapper {
-    /*background: url(../../img/login-img.jpg) no-repeat center center;*/
+    background: url(/images/NY-city.jpg) no-repeat center center;
     background-size: cover;
     width: 100%;
     height: 100%;
@@ -5026,11 +5026,11 @@ input[type="radio"] {
     height:100px !important;
 }
 .login-logo-bakImg {
-background: url(/Images/crowdcentz_logo.png);
+    background: url(/Images/Cash4ads_logo-circle.png);
     width: 228px;
     height: 70px;
-    background-size: 70%;
-    background-position-x: 33px;
+    background-size: 31%;
+    background-position-x: 50%;
     margin: auto;
     background-repeat: no-repeat;
     position: relative;
