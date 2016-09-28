@@ -37,7 +37,6 @@ namespace SMD.MIS.Areas.Api.Controllers
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
             }
-
             var response = companyService.GetCompanyDetails();
             return response;
         }
