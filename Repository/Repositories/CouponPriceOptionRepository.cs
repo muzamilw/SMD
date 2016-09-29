@@ -41,6 +41,12 @@ namespace SMD.Repository.Repositories
             return DbSet.Where(g => g.CouponPriceOptionId == id).SingleOrDefault();
         }
 
+
+        public List<CouponPriceOption> GetCouponPriceOptions(long CouponId)
+        {
+            return DbSet.Where(g => g.CouponId == CouponId).ToList();
+        }
+
       
        
      

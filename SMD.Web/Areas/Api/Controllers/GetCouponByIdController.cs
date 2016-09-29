@@ -55,10 +55,24 @@ namespace SMD.MIS.Areas.Api.Controllers
                 throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
             }
             var coupon = _couponService.GetCouponByIdDefault(Convert.ToInt64( CouponId),UserId,Lat,Lon);
-            
 
-            Mapper.Initialize(cfg => cfg.CreateMap<SMD.Models.DomainModels.GetCouponByID_Result, CouponDetails>());
+            var couponPriceoptions = _couponService.GetCouponPriceOptions(Convert.ToInt64( CouponId));
+
+
+            Mapper.Initialize(cfg =>
+                {
+                    cfg.CreateMap<SMD.Models.DomainModels.GetCouponByID_Result, CouponDetails>();
+                    cfg.CreateMap<SMD.Models.DomainModels.CouponPriceOption, SMD.MIS.Areas.Api.Models.CouponPriceOption>();
+                });
+
+//ForSourceMember(x => x.Coupon, opt => opt.Ignore()
+
+
             var res = Mapper.Map<SMD.Models.DomainModels.GetCouponByID_Result, CouponDetails>(coupon);
+
+            if (couponPriceoptions != null && couponPriceoptions.Count > 0)
+                res.CouponPriceOptions = couponPriceoptions.Select(a => Mapper.Map<SMD.Models.DomainModels.CouponPriceOption, SMD.MIS.Areas.Api.Models.CouponPriceOption>(a)).ToList();
+
             res.distance = Math.Round(res.distance.Value,1);
             res.FlaggedByCurrentUser = _couponService.CheckCouponFlaggedByUser(Convert.ToInt64(CouponId), UserId);
             return res;
