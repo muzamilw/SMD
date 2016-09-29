@@ -997,4 +997,10 @@ div#spinner {
     margin-left:170px
     
 }
+#btnNext,#btnBack {
+    
+ background-color: gainsboro!important;
+    border-color:gainsboro!important;
+
+}
 /*# sourceMappingURL=MainSite.css.map */

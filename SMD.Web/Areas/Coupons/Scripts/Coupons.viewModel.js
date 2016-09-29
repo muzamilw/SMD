@@ -141,7 +141,7 @@ define("Coupons/Coupons.viewModel",
                                     langs.valueHasMutated();
 
                                 }
-
+                              
                                 if (data.CouponCategories != null) {
                                     couponCategories.removeAll();
                                     ko.utils.arrayPushAll(couponCategories, data.CouponCategories);
