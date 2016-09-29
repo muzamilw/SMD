@@ -128,7 +128,7 @@
             itemFromServer.Voucher1Value, itemFromServer.Voucher1ImagePath, itemFromServer.CouponSwapValue == null ? "" : itemFromServer.CouponSwapValue,
             itemFromServer.CouponActualValue == null ? "" : itemFromServer.CouponActualValue,
             itemFromServer.CouponQuantity == null ? "" : itemFromServer.CouponQuantity,
-            itemFromServer.CouponTakenCount == null ? "" : itemFromServer.CouponTakenCount, itemFromServer.MaxDailyBudget, itemFromServer.VerifyQuestion, itemFromServer.Answer1, itemFromServer.Answer2, itemFromServer.Answer3, itemFromServer.CorrectAnswer, itemFromServer.DeliveryDays, itemFromServer.BuuyItLine1, itemFromServer.BuyItButtonLabel, itemFromServer.VideoUrl, itemFromServer.VideoLink2, itemFromSerer.CompanyId, itemFromServer.UserID);
+            itemFromServer.CouponTakenCount == null ? "" : itemFromServer.CouponTakenCount, itemFromServer.MaxDailyBudget, itemFromServer.VerifyQuestion, itemFromServer.Answer1, itemFromServer.Answer2, itemFromServer.Answer3, itemFromServer.CorrectAnswer, itemFromServer.DeliveryDays, itemFromServer.BuuyItLine1, itemFromServer.BuyItButtonLabel, itemFromServer.VideoUrl, itemFromServer.VideoLink2, itemFromServer.CompanyId, itemFromServer.UserId);
     };
 
     // Function to attain cancel button functionality AdCampaign

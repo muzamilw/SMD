@@ -26,7 +26,7 @@ define("FranchiseDashboard/surveyQuestionApp.dataservice", function () {
                         type: 'POST'
                     });
                     amplify.request.define('getCompanyData', 'ajax', {
-                        url: '/Api/Company',
+                        url: '/Api/CompanyDetail',
                         dataType: 'json',
                         type: 'GET'
                     });

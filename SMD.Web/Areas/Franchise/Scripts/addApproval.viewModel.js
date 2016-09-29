@@ -71,7 +71,8 @@ define("FranchiseDashboard/addApproval.viewModel",
                         $("#topArea").css("display", "none");
                         $("#divApprove").css("display", "none");
                         selectedCampaign(item);
-                        isEditorVisible(true);
+                        getCompanyData(item);
+                       // isEditorVisible(true);
                     },                  
                     // Save AdCampaign 
                     onSaveCampaign = function () {
@@ -104,7 +105,25 @@ define("FranchiseDashboard/addApproval.viewModel",
                                 toastr.error("Failed to save!");
                             }
                         });
-                    },                   
+                    },
+                      getCompanyData = function (selectedItem) {
+                          dataservice.getCompanyData(
+                       {
+                           companyId: selectedItem.companyId,
+                           userId: selectedItem.userID,
+                       },
+                       {
+                           success: function (comData) {
+                               selectedCompany(comData);
+                               isEditorVisible(true);
+
+                           },
+                           error: function () {
+                               toastr.error("Failed to load Company");
+                           }
+                       });
+
+                      },
                     // Has Changes
                     hasChangesOnCampaign = ko.computed(function() {
                         if (selectedCampaign() == undefined) {
@@ -178,6 +197,7 @@ define("FranchiseDashboard/addApproval.viewModel",
                     hasChangesOnCampaign: hasChangesOnCampaign,
                     onRejectCampaign: onRejectCampaign,
                     lblPageTitle: lblPageTitle,
+                    adType:adType,
                     isShowCopounMode: isShowCopounMode,
                     selectedCompany: selectedCompany,
                 };

@@ -38,7 +38,7 @@ define("FranchiseDashboard/Coupons.viewModel",
                             },
                             error: function () {
                                 selectedCoupon(item);
-                                isEditorVisible(true);
+                                getCompanyData(item);
                                 //toastr.error("Failed to load Currency");
                             }
                         });
