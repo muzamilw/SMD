@@ -66,6 +66,12 @@ namespace SMD.MIS.Areas.Api.Models
         public string LogoUrl { get; set; }
 
 
+        public Nullable<bool> ShowBuyitBtn { get; set; }
+        public string BuyitLandingPageUrl { get; set; }
+        public string BuyitBtnLabel { get; set; }
+        public string AboutUsDescription { get; set; }
+
+
         public virtual ICollection<CouponPriceOption> CouponPriceOptions { get; set; }
         
     }

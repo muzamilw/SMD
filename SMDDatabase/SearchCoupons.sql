@@ -7,7 +7,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 ALTER PROCEDURE [dbo].[SearchCoupons]
---   EXEC [dbo].[SearchCoupons] 		@categoryId =3,		@type = 1,		@keywords = N'',		@distance = 1000000,		@Lat = N'31.483177',		@Lon = N'74.288167',		@UserId = N'88d8d269-6d4f-4310-9efdd-aed888ef7ac5',		@FromRow = 0,		@ToRow = 100
+--   EXEC [dbo].[SearchCoupons] 		@categoryId =0,		@type = 1,		@keywords = N'',		@distance = 1000000000,		@Lat = N'31.483177',		@Lon = N'74.288167',		@UserId = N'88d8d269-6d4f-4310-9efdd-aed888ef7ac5lk',		@FromRow = 0,		@ToRow = 100
 
 	-- Add the parameters for the stored procedure here
 	@categoryId INT = 1 ,
@@ -54,7 +54,7 @@ DECLARE @source geography = geography::Point(@lat, @lon, 4326)
 		THEN 'http://manage.cash4ads.com/' + vchr.LogoUrl
 	END as AdvertisersLogoPath from company c
 	 where c.CompanyId = vchr.CompanyId) as LogoUrl,
-	Price, Savings,SwapCost, CompanyId, CouponActiveMonth,CouponActiveYear
+	Price, Savings,SwapCost, vchr.CompanyId, CouponActiveMonth,CouponActiveYear
 	,DATEFROMPARTS(vchr.CouponActiveYear, vchr.CouponActiveMonth,day(EOMONTH ( DATEFROMPARTS(vchr.CouponActiveYear, vchr.CouponActiveMonth,1)))) eod,
 	DATEFROMPARTS(vchr.CouponActiveYear, vchr.CouponActiveMonth,1) strt,
 
@@ -62,18 +62,28 @@ DECLARE @source geography = geography::Point(@lat, @lon, 4326)
 	else
 	@source.STDistance(geography::Point(vchr.LocationLAT, vchr.LocationLON, 4326))/1000 
        
-	end  as distance
+	end  as distance,
+	comp.CompanyName,
+	vchr.LocationTitle,
+	vchr.LocationCity
+
 	from Coupon vchr
-	inner join CouponCategories cc on cc.CouponId = vchr.CouponId and cc.CategoryId = @categoryId and vchr.LocationLAT is not null and vchr.LocationLON is not null
+	inner join CouponCategories cc on cc.CouponId = vchr.CouponId and vchr.LocationLAT is not null and vchr.LocationLON is not null
+	inner join Company comp on vchr.CompanyId = comp.CompanyId
 	--left outer join [dbo].[UserPurchasedCoupon] upc on upc.couponID = vchr.couponid
 	where (
 		
-		--and
-		--(adcampaign.EndDateTime >= @currentDate and @currentDate >= adcampaign.StartDateTime)
+
 		
 		vchr.CouponExpirydate > GETDATE()
 		and vchr.status = 3
 
+		and (cc.CategoryId = @categoryId or  @categoryId = 0)
+		
+		and -- keyword search
+		(
+			@keywords = '' or (vchr.SearchKeywords like '%'+@keywords+'%' or vchr.CouponTitle like '%'+@keywords+'%' or LocationTitle like '%'+@keywords+'%' or LocationLine1 like '%'+@keywords+'%')
+		)
 		
 		and 
 		(--unlimited listing  -- valid for 3 months
@@ -93,16 +103,13 @@ DECLARE @source geography = geography::Point(@lat, @lon, 4326)
 		CouponListingMode = 3 and @currentDate between DATEFROMPARTS(vchr.CouponActiveYear, vchr.CouponActiveMonth,1) and dateadd(month,2,DATEFROMPARTS(vchr.CouponActiveYear, vchr.CouponActiveMonth,day(EOMONTH ( DATEFROMPARTS(vchr.CouponActiveYear, vchr.CouponActiveMonth,1)))))
 			and  vchr.CouponQtyPerUser > (select count(*) from [dbo].[UserPurchasedCoupon] upc where upc.couponID = vchr.couponid and upc.userId = @UserId) 
 		)
-		and -- keyword search
-		(
-			@keywords <> '' and (vchr.SearchKeywords like '%'+@keywords+'%' or vchr.CouponTitle like '%'+@keywords+'%' or LocationTitle like '%'+@keywords+'%' or LocationLine1 like '%'+@keywords+'%')
-		)
+		
 		
 		
 
 		
 		)
-		group by vchr.CouponId, CouponTitle,vchr.CouponImage1,LogoUrl,Price, Savings,SwapCost,CompanyId,CouponActiveMonth,CouponActiveYear,vchr.LocationLAT, vchr.LocationLON,CouponListingMode
+		group by vchr.CouponId, CouponTitle,vchr.CouponImage1,LogoUrl,Price, Savings,SwapCost,vchr.CompanyId,CouponActiveMonth,CouponActiveYear,vchr.LocationLAT, vchr.LocationLON,CouponListingMode, comp.companyname, vchr.LocationTitle, vchr.LocationCity
 		)as items
 		where distance < @distance
 	order by distance
