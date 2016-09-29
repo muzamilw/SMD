@@ -963,8 +963,8 @@
                                                             <div class="list childList rightImg" data-bind="click:$root.updateSurveyCriteriass.bind($data, 2),css: { 'active': LinkedSQAnswer() ==2 }"><img data-bind="attr: { src:profileQuestRightImageSrc}" style="height:75px;width:auto;" /></div>
                                                             <!--/ko-->
                                                             <!--ko if:Type() == 6 -->
-                                                            <div class="list childList leftImg" data-bind="click:$root.updateSurveyCriteria.bind($data, 1),css: { 'active': QuizAnswerId() ==1 }"> <label data-bind="text:profileQuestLeftImageSrc "></label> </div>
-                                                            <div class="list childList rightImg" data-bind="click:$root.updateSurveyCriteria.bind($data, 2),css: { 'active': QuizAnswerId() ==2 }"><label data-bind="text:profileQuestRightImageSrc "></label></div>
+                                                            <div class="list childList leftImg" data-bind="click:$root.updateSurveyCriteria.bind($data, 1),css: { 'active': AdCampaignAnswer() ==1 }"> <label data-bind="text:profileQuestLeftImageSrc "></label> </div>
+                                                            <div class="list childList rightImg" data-bind="click:$root.updateSurveyCriteria.bind($data, 2),css: { 'active': AdCampaignAnswer() ==2 }"><label data-bind="text:profileQuestRightImageSrc "></label></div>
                                                             <!--/ko-->
                                                             <!--ko if:Type() == 1 -->
                                                             <!-- ko template: { name: 'criteriaEditorTemplate' ,  foreach: $root.profileAnswerList} --><!-- /ko -->

@@ -164,6 +164,11 @@
             minWidth = 200
             aspectRatio = "1:2";
         }
+        else if (mode == 5) {
+            minheight = 60;
+            minWidth = 234
+            aspectRatio = "1:2";
+        }
         var sizeString = ''+ minWidth + ' x ' + minheight;
         $("#spansizestring").text(sizeString);
         $(".cropit-preview").css("width", minWidth + "px");
