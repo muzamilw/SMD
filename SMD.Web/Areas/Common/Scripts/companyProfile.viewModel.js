@@ -11,7 +11,7 @@ define("common/companyProfile.viewModel",
                      // Current User
                     selectedCompany = ko.observable(),
 
-                 selectedMedia = ko.observable();
+                 selectedMedia = ko.observable(),
                 
                 // list of countries
                 countries = ko.observableArray([]),
@@ -23,6 +23,7 @@ define("common/companyProfile.viewModel",
                 OldPassword = ko.observable(),
                 NewPassword = ko.observable(),
                 ConfirmPassword = ko.observable(),
+                    logoImage = '',
                  showCompanyProfileDialog = function () {
 
                      // view.showCompanyProfileDialog();
@@ -51,7 +52,7 @@ define("common/companyProfile.viewModel",
                              view.CloseCompanyProfileDialog();
                          });
                          confirmation.show();
-                         logoImage = '';
+                         logoImage='';
                      }
                      else {
 
@@ -142,7 +143,9 @@ define("common/companyProfile.viewModel",
                     }
 
                 },
-                saveCompanyProfile = function() {
+                saveCompanyProfile = function () {
+                    if (logoImage != '')
+                        selectedCompany().Logo(logoImage);
                     var data = selectedCompany().convertToServerData();
                     dataservice.saveCompanyProfile(
                         data, {
@@ -208,12 +211,14 @@ define("common/companyProfile.viewModel",
                                //        selectedCompany().selectedMedia('Instagram');
                                //    if(selectedCompany().PinterestHandle() != null)
                                //        selectedCompany().selectedMedia('Pinterest');
-                               googleAddressMap();
+                                googleAddressMap();
+                              
                                currentTab(1);
                                selectedCompany().reset();
                                if (callback && typeof callback === "function") {
                                    callback();
                                }
+                               
                            },
                            error: function () {
                                toastr.error("Failed to load User's Profile!");
@@ -274,71 +279,76 @@ define("common/companyProfile.viewModel",
                  
                 //-------Google Map Code--------------
                 googleAddressMap = function () {
-                    initializeGEO();
-                    codeAddress();
-                    google.maps.event.addDomListener(window, 'load', initializeGEO);
+                    initializeGeoLocation();
+                    setCompanyAddress();
+                    google.maps.event.addDomListener(window, 'load', initializeGeoLocation);
+                    
                 },
-                initializeGEO = function () {
-                    geocoder = new google.maps.Geocoder();
-                    var latlng = new google.maps.LatLng(-34.397, 150.644);
+                initializeGeoLocation = function () {
+                    geocoderComp = new google.maps.Geocoder();
+                    var latlngComp = new google.maps.LatLng(-34.397, 150.644);
                     var mapOptions = {
                         zoom: 15,
-                        center: latlng,
+                        center: latlngComp,
                         mapTypeId: google.maps.MapTypeId.ROADMAP
                     };
-                    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-
+                    compMap = new google.maps.Map(document.getElementById('map-canvasCompany'), mapOptions);
+                    //map = new google.maps.Map($('#map-canvasCompany'), mapOptions);
+                    
                 },
-                codeAddress = function () {
+                setCompanyAddress = function () {
                     
                     var address = selectedCompany().BillingAddressLine1().toLowerCase() + ' ' + selectedCompany().billingCity() + ' ' + selectedCompany().BillingZipCode() + ' ' + selectedCompany().BillingState().toLowerCase();
-                     geocoder.geocode({
+                    geocoderComp.geocode({
                          'address': address
                      }, function (results, status) {
                          if (status == google.maps.GeocoderStatus.OK) {
-                             //if (isCodeAddressEdit() == false) {
-                             //    selectedBranch().branchLocationLat(results[0].geometry.location.lat());
-                             //    selectedBranch().branchLocationLon(results[0].geometry.location.lng());
-                             //}
-                             map.setCenter(results[0].geometry.location);
+                             if (isCodeAddressEdit() == false) {
+                                 selectedCompany().branchLocationLat(results[0].geometry.location.lat());
+                                 selectedCompany().branchLocationLong(results[0].geometry.location.lng());
+                             }
+                             
+                             compMap.setCenter(results[0].geometry.location);
 
                              var marker = new google.maps.Marker({
-                                 map: map,
+                                 map: compMap,
                                  position: results[0].geometry.location
                              });
-                             //google.maps.event.addListener(map, 'click', function (event) {
-                             //    //selectedBranch().branchLocationLat(event.latLng.lat());
-                             //    //selectedBranch().branchLocationLon(event.latLng.lng());
-                             //    var geocoder = new google.maps.Geocoder();
-                             //    geocoder.geocode({
-                             //        "latLng": event.latLng
-                             //    }, function (results, status) {
-                             //        console.log(results, status);
-                             //        if (status == google.maps.GeocoderStatus.OK) {
-                             //            console.log(results);
-                             //            var lat = results[0].geometry.location.lat(),
-                             //                lng = results[0].geometry.location.lng(),
-                             //                placeName = results[0].address_components[0].long_name,
-                             //                latlng = new google.maps.LatLng(lat, lng);
+                             google.maps.event.addListener(compMap, 'click', function (event) {
+                                 selectedCompany().branchLocationLat(event.latLng.lat());
+                                 selectedCompany().branchLocationLong(event.latLng.lng());
+                                 var geocoder = new google.maps.Geocoder();
+                                 geocoder.geocode({
+                                     "latLng": event.latLng
+                                 }, function (results, status) {
+                                     console.log(results, status);
+                                     if (status == google.maps.GeocoderStatus.OK) {
+                                         console.log(results);
+                                         var lat = results[0].geometry.location.lat(),
+                                             lng = results[0].geometry.location.lng(),
+                                             placeName = results[0].address_components[0].long_name,
+                                             latlng = new google.maps.LatLng(lat, lng);
 
-                             //            moveMarker(placeName, latlng);
-                             //        }
-                             //    });
-                             //});
-                             //function moveMarker(placeName, latlng) {
-                             //    //marker.setIcon(image);
-                             //    marker.setPosition(latlng);
-                             //    //infowindow.setContent(placeName);
-                             //    //infowindow.open(map, marker);
-                             //}
+                                         moveMarker(placeName, latlng);
+                                     }
+                                 });
+                             });
+                             function moveMarker(placeName, latlng) {
+                                 //marker.setIcon(image);
+                                 marker.setPosition(latlng);
+                                 //infowindow.setContent(placeName);
+                                 //infowindow.open(map, marker);
+                             }
                              isCodeAddressEdit(false);
                              isMapVisible(true);
+                             
                          } else {
                              toastr.error("Failed to Search Address,please add valid address and search it . Error: " + status);
                              isMapVisible(false);
-                             //alert('Geocode was not successful for the following reason: ' + status);
+                            
                          }
                      });
+                     
                  },
                 //-------Google Map Code Ends
                
@@ -375,6 +385,18 @@ define("common/companyProfile.viewModel",
                      if (selectedItem.fullName.error) {
                          errorList.push({ name: selectedItem.fullName.domElement.name, element: selectedItem.fullName.domElement });
                      }
+                     if (selectedItem.mobileNumber.error) {
+                         errorList.push({ name: selectedItem.mobileNumber.domElement.name, element: selectedItem.mobileNumber.domElement });
+                     }
+                     if (selectedItem.dateOfBirth.error) {
+                         errorList.push({ name: selectedItem.dateOfBirth.domElement.name, element: selectedItem.dateOfBirth.domElement });
+                     }
+                     if (selectedItem.billingCity.error) {
+                         errorList.push({ name: selectedItem.billingCity.domElement.name, element: selectedItem.billingCity.domElement });
+                     }
+                     if (selectedItem.BillingAddressLine1.error) {
+                         errorList.push({ name: selectedItem.BillingAddressLine1.domElement.name, element: selectedItem.BillingAddressLine1.domElement });
+                     }
                      
                  },
                 gotoElement = function (validation) {
@@ -409,8 +431,11 @@ define("common/companyProfile.viewModel",
                            toastr.error("Password not matched!");
                        }
                        else {
-                           $.getJSON("/Account/ChangePassword?Password=" + NewPassword() + "&OldPassword=" + OldPassword() + "&UserId=" + selectedUser().id(),
+                           $.getJSON("/Account/ChangePassword?Password=" + NewPassword() + "&OldPassword=" + OldPassword() + "&UserId=" + selectedCompany().userId(),
                                   function (xdata) {
+                                      OldPassword(undefined);
+                                      ConfirmPassword(undefined);
+                                      NewPassword(undefined);
                                       toastr.success("Password Changed Successfully!");
                                       view.hideChangePassword();
                                   });
@@ -426,7 +451,7 @@ define("common/companyProfile.viewModel",
                     ko.applyBindings(view.viewModel, view.bindingPartial);
 
                     getBasedata();
-                   
+                    
 
 
                 };

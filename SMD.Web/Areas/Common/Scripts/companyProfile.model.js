@@ -7,19 +7,18 @@
           InstagramHandle, PinterestHandle, Logo, LogoImageBase64, specifiedSolutation, specifiedProfession, specifiedfullName, specifiedEmail, specifiedMobile,
             specifiedDob, specifiedPassport, specifiedIsDeals, specifiedIsWeeklyUpdate, specifiedIsLatestService, specifiedBranchName, specifiedBranchCount,
             specifiedSalesPhone, specifiedCompanyType, specifiedAboutUs, specifiedPaypalId, specifiedBusinessName, specifiedRegNumber, specifiedStartDate,
-            specifiedVatNumber) {
-          debugger;
-          var
+            specifiedVatNumber, specifiedUserId, specifiedLat, specifiedLong) {
+         var
                
                 CompanyId = ko.observable(CompanyId),
                 CompanyName = ko.observable(CompanyName).extend({ required: true }),
-                Tel1 = ko.observable(Tel1).extend({ required: true }),
+                Tel1 = ko.observable(Tel1),
                 Tel2 = ko.observable(Tel2),
                 Logo = ko.observable(Logo),
                 stripeCustomerId = ko.observable(StripeCustomerId || undefined),
                 SalesEmail = ko.observable(SalesEmail || specifiedEmail).extend({ required: true }),
                 WebsiteLink = ko.observable(WebsiteLink),
-                VoucherSecretKey = ko.observable(VoucherSecretKey).extend({ required: true }),
+                VoucherSecretKey = ko.observable(VoucherSecretKey),
                 BillingAddressLine1 = ko.observable(BillingAddressLine1).extend({ required: true }),
                 BillingAddressLine2 = ko.observable(BillingAddressLine2),
                 BillingState = ko.observable(BillingState).extend({ required: true }),
@@ -33,7 +32,7 @@
                 FacebookHandle = ko.observable(FacebookHandle),
                 InstagramHandle = ko.observable(InstagramHandle),
                 PinterestHandle = ko.observable(PinterestHandle),
-                selectedMedia = ko.observable().extend({ required: true }),
+                selectedMedia = ko.observable(),
                 Logo = ko.observable(Logo),
                 LogoImageBase64 = ko.observable(LogoImageBase64),
               
@@ -70,6 +69,9 @@
                   return creditCard() != undefined ? 'Linked | ' + creditCard() + '' : 'Not Linked | Link with Stripe Id';
                   }),
               isSubmit = ko.observable(false),
+              userId = ko.observable(specifiedUserId),
+              branchLocationLat = ko.observable(specifiedLat),
+              branchLocationLong = ko.observable(specifiedLong),
               //-------------------
                 
                 //FacebookHandleui = ko.computed({
@@ -89,9 +91,7 @@
               
               errors = ko.validation.group({
                   CompanyName: CompanyName,
-                  Tel1: Tel1,
                   SalesEmail: SalesEmail,
-                  VoucherSecretKey: VoucherSecretKey,
                   BillingAddressLine1: BillingAddressLine1,
                   
                   BillingState: BillingState,
@@ -100,8 +100,6 @@
                   BillingZipCode: BillingZipCode,
                   BillingPhone: BillingPhone,
                   BillingEmail: BillingEmail,
-                  selectedMedia: selectedMedia,
-                  
                   salutation: salutation,
                   fullName: fullName,
                   email: email,
@@ -181,13 +179,13 @@
                   dirtyFlag.reset();
               },
           convertToServerData = function () {
-              
+
               return {
-                  CompanyId:CompanyId(),
+                  CompanyId: CompanyId(),
                   CompanyName: CompanyName(),
                   Tel1: Tel1(),
                   Tel2: Tel2(),
-                  
+
                   Logo: logoImage == "" ? Logo() : logoImage,
 
                   StripeCustomerId: creditCard(),
@@ -207,7 +205,7 @@
                   InstagramHandle: InstagramHandle(),
                   PinterestHandle: PinterestHandle(),
                   LogoImageBase64: LogoImageBase64(),
-                  
+
                   Profession: profession(),
                   Solutation: salutation(),
                   FirstName: fullName(),
@@ -227,10 +225,11 @@
                   BillingBusinessName: billingBusinessName(),
                   CompanyRegistrationNo: companyRegNo(),
                   BusinessStartDate: businessStartDate() ? moment(businessStartDate()).format(ist.utcFormat) + 'Z' : undefined,
-                  VatNumber: vatNumber()
-                  
-                  
-              };
+                  VatNumber: vatNumber(),
+                  BranchLocationLat: branchLocationLat(),
+                  BranchLocationLong: branchLocationLong()
+
+          };
           };
 
 
@@ -289,7 +288,10 @@
               creditCardUi: creditCardUi,
               profession: profession,
               creditCard: creditCard,
-              isSubmit: isSubmit
+              isSubmit: isSubmit,
+              userId: userId,
+              branchLocationLat: branchLocationLat,
+              branchLocationLong: branchLocationLong
             
           };
       };
@@ -297,13 +299,13 @@
     ////=================================== User
     //Server to Client mapper For User
     var CompanyServertoClientMapper = function (objSrv) {
-        debugger;
+        
         return new User(objSrv.CompanyId, objSrv.CompanyName, objSrv.Tel1, objSrv.Tel2, objSrv.Logo,
           objSrv.StripeCustomerId, objSrv.SalesEmail, objSrv.WebsiteLink, objSrv.VoucherSecretKey, objSrv.BillingAddressLine1, objSrv.BillingAddressLine2,
           objSrv.BillingState, objSrv.BillingCountryId, objSrv.BillingCity, objSrv.BillingZipCode, objSrv.BillingPhone, objSrv.BillingEmail, objSrv.TwitterHandle, objSrv.FacebookHandle,
           objSrv.InstagramHandle, objSrv.PinterestHandle, objSrv.Logo, objSrv.LogoImageBase64, objSrv.Solutation, objSrv.Profession, objSrv.FirstName, objSrv.Email, objSrv.Mobile, objSrv.DateOfBirth
        , objSrv.PassportNumber, objSrv.IsReceiveDeals, objSrv.IsReceiveWeeklyUpdates, objSrv.IsReceiveLatestServices, objSrv.BranchName, objSrv.BranchesCount, objSrv.SalesPhone, objSrv.CompanyType
-        , objSrv.AboutUs, objSrv.PayPalId, objSrv.BillingBusinessName, objSrv.CompanyRegistrationNo, objSrv.BusinessStartDate, objSrv.VatNumber);
+        , objSrv.AboutUs, objSrv.PayPalId, objSrv.BillingBusinessName, objSrv.CompanyRegistrationNo, objSrv.BusinessStartDate, objSrv.VatNumber, objSrv.UserId, objSrv.BranchLocationLat, objSrv.BranchLocationLong);
      
     };
     

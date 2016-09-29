@@ -29,9 +29,12 @@ namespace SMD.Repository.Repositories
 
         }
 
-        public bool IsCompanyBranchExist()
+        public CompanyBranch GetDefaultCompanyBranch(int companyId = 0)
         {
-            return DbSet.Any(b => b.CompanyId == CompanyId);
+            //Condition is to apply for isDefault once field added int DB
+            int compId = companyId > 0 ? companyId : CompanyId;
+            db.Configuration.LazyLoadingEnabled = false;
+            return DbSet.FirstOrDefault(b => b.CompanyId == compId);
         }
        
     }

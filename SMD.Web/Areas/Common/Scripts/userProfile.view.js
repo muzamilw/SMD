@@ -49,9 +49,7 @@ define("common/userProfile.view",
                 showUserProfileDialog: showUserProfileDialog,
                 CloseUserProfileDialog : CloseUserProfileDialog,
                 showChangePassword: showChangePassword,
-                hideChangePassword: hideChangePassword,
-               
-                hideChangePassword: hideChangePassword,
+                hideChangePassword: hideChangePassword
              
 
             };
