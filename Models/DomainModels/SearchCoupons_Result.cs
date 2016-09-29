@@ -26,6 +26,10 @@ namespace SMD.Models.DomainModels
         public Nullable<DateTime> strt { get; set; }
 
         public Nullable<double> distance { get; set; }
+
+        public string CompanyName { get; set; }
+        public string LocationTitle { get; set; }
+        public string LocationCity { get; set; }
         
     }
 }

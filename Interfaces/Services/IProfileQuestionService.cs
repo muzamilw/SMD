@@ -11,10 +11,7 @@ namespace SMD.Interfaces.Services
     /// </summary>
     public interface IProfileQuestionService
     {
-        /// <summary>
-        /// Skip Profile Question
-        /// </summary>
-        void PerformSkip(int pqId);
+        
 
         /// <summary>
         /// Profile Question Search request 

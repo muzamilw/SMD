@@ -11,6 +11,6 @@ namespace SMD.Interfaces.Services
         /// <summary>
         /// Update user's answer for question
         /// </summary>
-        string UpdateProfileQuestionUserAnswer(UpdateProfileQuestionUserAnswerApiRequest request);
+        string SaveProfileQuestionUserResponse(UpdateProfileQuestionUserAnswerApiRequest request);
     }
 }

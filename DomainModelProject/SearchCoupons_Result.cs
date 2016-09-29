@@ -27,5 +27,8 @@ namespace DomainModelProject
         public Nullable<System.DateTime> eod { get; set; }
         public Nullable<System.DateTime> strt { get; set; }
         public Nullable<double> distance { get; set; }
+        public string CompanyName { get; set; }
+        public string LocationTitle { get; set; }
+        public string LocationCity { get; set; }
     }
 }

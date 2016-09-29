@@ -26,6 +26,10 @@ namespace SMD.Models.Common
         public Nullable<double> distance { get; set; }
 
         public string LocationPhone { get; set; }
+
+        public string CompanyName { get; set; }
+        public string LocationTitle { get; set; }
+        public string LocationCity { get; set; }
         
     }
 

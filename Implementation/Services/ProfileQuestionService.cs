@@ -85,29 +85,7 @@ namespace SMD.Implementation.Services
         #endregion
         #region Public
 
-        /// <summary>
-        /// Skip Profile Question
-        /// </summary>
-        public void PerformSkip(int pqId)
-        {
-            ProfileQuestion profileQuestion = _profileQuestionRepository.Find(pqId);
-            if (profileQuestion == null)
-            {
-                throw new SMDException(string.Format(CultureInfo.InvariantCulture,
-                    LanguageResources.ProfileQuestionService_ProfileQuestionNotFound, pqId));
-            }
-
-            // Update Skipped Count
-            if (profileQuestion.SkippedCount == null)
-            {
-                profileQuestion.SkippedCount = 0;
-            }
-
-            profileQuestion.SkippedCount += 1;
-
-            // Save Changes
-            _profileQuestionRepository.SaveChanges();
-        }
+       
 
         /// <summary>
         /// Profile Question Search request 

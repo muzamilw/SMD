@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using SMD.Models.Common;
+using System.Collections.Generic;
 
 namespace SMD.Models.RequestModels
 {
@@ -18,24 +19,9 @@ namespace SMD.Models.RequestModels
         public long? ItemId { get; set; }
 
         /// <summary>
-        /// Type - Ad / Survey / Question
+        /// Type - Ad / Survey / Question / Game
         /// </summary>
-        public int? Type { get; set; }
-
-        /// <summary>
-        /// ItemType - if Ad (Video, Link, Game)
-        /// </summary>
-        public int? ItemType { get; set; }
-
-        /// <summary>
-        /// Is Skipped
-        /// </summary>
-        public bool? IsSkipped { get; set; }
-
-        /// <summary>
-        /// Ad Clicked / Viewed
-        /// </summary>
-        public bool? AdClickedViewed { get; set; }
+        public CampaignType Type { get; set; }
 
         /// <summary>
         /// Survey User Selection
@@ -65,5 +51,7 @@ namespace SMD.Models.RequestModels
 
 
         public string Country { get; set; }
+
+        public CampaignResponseEventType ResponeEventType { get; set; }
     }
 }
