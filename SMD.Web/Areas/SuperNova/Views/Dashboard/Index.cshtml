@@ -54,7 +54,7 @@
                           
                         </tr>
                         <tr>
-                            <td><span class="Theme_subheading-Clr font14">Activity</span></td>
+                            <td><span class="h4">#Users</span></td>
                             <td> </td>
                             <td class="text-right">
                                 <span class="Theme_subheading-Clr  font14">
@@ -180,11 +180,11 @@
 <script id="DashboardInsightTemplate" type="text/html">
     <tr style="border-bottom: none;">
         <td class="col-sm-3 font14">
-            <!-- ko if: activity() === "#Approved Campaigns" ||  activity() === "Payout" || activity() === "#Active Campaigns" || activity() === "Impressions" || activity() === "Revenue" -->
+            <!-- ko if: activity() === "# Answered" ||  activity() === "# Skipped" || activity() === "#Conversion to landing pages" || activity() === "# Rewarded" || activity() === "$ Revenue by Campaign types"  || activity() === "$ Total Revenue (Stripe)"  || activity() === "$ Total Payouts (PayPal)" -->
             <span class="h4" data-bind="text: activity"></span>
             <!-- /ko -->
 
-            <!-- ko ifnot: activity() === "#Approved Campaigns" || activity() === "Payout" || activity() === "#Active Campaigns" || activity() === "Impressions" || activity() === "Revenue" -->
+            <!-- ko ifnot: activity() === "# Answered" ||  activity() === "# Skipped" || activity() === "#Conversion to landing pages" || activity() === "# Rewarded" || activity() === "$ Revenue by Campaign types"  || activity() === "$ Total Revenue (Stripe)"  || activity() === "$ Total Payouts (PayPal)" -->
             <span class="paddingLeft20px" data-bind="text: activity"></span>
             <!-- /ko -->
         </td>
