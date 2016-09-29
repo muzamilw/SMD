@@ -156,6 +156,13 @@
         <AssociationConnector Association="DomainModels.FK_SurveyQuestionTargetLocation_City" />
         <EntityTypeShape EntityType="DomainModels.vw_Coupons" Width="1.5" PointX="9.375" PointY="7.75" />
         <AssociationConnector Association="DomainModels.FK_Country_Currency" />
+        <EntityTypeShape EntityType="DomainModels.CampaignEventHistory" Width="1.5" PointX="31.875" PointY="72.625" />
+        <EntityTypeShape EntityType="DomainModels.EventStatus" Width="1.5" PointX="29.625" PointY="69.5" />
+        <AssociationConnector Association="DomainModels.FK_CampaignEventHistory_AdCampaign" />
+        <AssociationConnector Association="DomainModels.FK_CampaignEventHistory_Coupon" />
+        <AssociationConnector Association="DomainModels.FK_CampaignEventHistory_EventStatus" />
+        <AssociationConnector Association="DomainModels.FK_CampaignEventHistory_ProfileQuestion" />
+        <AssociationConnector Association="DomainModels.FK_CampaignEventHistory_SurveyQuestion" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

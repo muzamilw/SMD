@@ -74,5 +74,7 @@ namespace SMD.Models.DomainModels
         public string LeftPictureBytes { get; set; }
         //[NotMapped]
         public string RightPictureBytes { get; set; }
+
+        public virtual ICollection<CampaignEventHistory> CampaignEventHistories { get; set; }
     }
 }

@@ -9,6 +9,6 @@ namespace SMD.Interfaces.Repository
 {
     public interface ICouponPriceOptionRepository : IBaseRepository<CouponPriceOption, long>
     {
-       
+         List<CouponPriceOption> GetCouponPriceOptions(long CouponId);
     }
 }

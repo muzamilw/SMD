@@ -62,6 +62,9 @@ namespace SMD.Models.DomainModels
         public string CompanyRegNo { get; set; }
         public string TaxRegNo { get; set; }
 
+        public Nullable<bool> IsDeleted { get; set; }
+        public Nullable<System.DateTime> DeleteDate { get; set; }
+
         public Nullable<System.DateTime> CreationDateTime { get; set; }
         public Nullable<int> NoOfBranches { get; set; }
         public string BillingAddressName { get; set; }
