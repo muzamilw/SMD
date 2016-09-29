@@ -160,7 +160,7 @@ namespace SMD.MIS.Controllers
                         
 
                         SetupUserClaims(identity);
-                        AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = true }, identity);
+                        AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = false }, identity);
                         //return RedirectToLocal(returnUrl);
 
                         return RedirectToAction("SelectCompany");
@@ -222,7 +222,7 @@ namespace SMD.MIS.Controllers
                 }
             }
             SetupUserClaims(identity);
-            AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = true }, identity);
+            AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = false }, identity);
             return RedirectToLocal("");
 
         }
@@ -540,13 +540,13 @@ namespace SMD.MIS.Controllers
             }
 
             // Sign in the user with this external login provider if the user already has a login
-            var result = await SignInManager.ExternalSignInAsync(loginInfo, isPersistent: true);
+            var result = await SignInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
             switch (result)
             {
                 case SignInStatus.Success:
                     
                         //SetupUserClaims(loginInfo.ExternalIdentity);
-                        //AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = true }, loginInfo.ExternalIdentity);
+                        //AuthenticationManager.SignIn(new AuthenticationProperties { `sistent = true }, loginInfo.ExternalIdentity);
                        
                         return RedirectToAction("SelectCompany");
 
@@ -724,7 +724,7 @@ namespace SMD.MIS.Controllers
                  SetupUserClaims(identity);
                  claimsSecurityService.AddCompanyIdClaimToIdentity(identity, Convert.ToInt32(CompanyId), CompanyName, CompanyLogo, Role,user.FullName,user.Phone1);
                  
-                 AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = true }, identity);
+                 AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = false }, identity);
 
                  if ( RoleId == "Supernova_Admin")
                     return RedirectToLocal("/Supernova/Dashboard/Index");

@@ -23,6 +23,6 @@ namespace SMD.Interfaces.Repository
 
 
         List<vw_CompanyUsers> GetCompaniesByUserId(string UserId);
-        User GetLoginUser();
+        User GetLoginUser(string sUserId = "");
     }
 }

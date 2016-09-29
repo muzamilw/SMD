@@ -105,22 +105,33 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// Update User Profile
         /// </summary>
         [ApiExceptionCustom]
-        public async Task<BaseApiResponse> Post(CompanyApiModel request)
+        //public async Task<BaseApiResponse> Post(CompanyApiModel request)
+        //{
+        //    if (request == null || !ModelState.IsValid)
+        //    {
+        //        throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
+        //    }
+
+
+        //    Mapper.Initialize(cfg => cfg.CreateMap<CompanyApiModel,Company>());
+        //    var company = Mapper.Map<CompanyApiModel,Company>(request);
+
+            
+
+        //    companyService.UpdateCompany(company, request.LogoImageBytes);
+
+        //    return new BaseApiResponse {  Status = true, Message = "Success"};
+        //}
+        public async Task<BaseApiResponse> Post(CompanyResponseModel request)
         {
             if (request == null || !ModelState.IsValid)
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
             }
 
+            companyService.UpdateCompanyProfile(request, request.LogoImageBytes);
 
-            Mapper.Initialize(cfg => cfg.CreateMap<CompanyApiModel,Company>());
-            var company = Mapper.Map<CompanyApiModel,Company>(request);
-
-            
-
-            companyService.UpdateCompany(company, request.LogoImageBytes);
-
-            return new BaseApiResponse {  Status = true, Message = "Success"};
+            return new BaseApiResponse { Status = true, Message = "Success" };
         }
 
         #endregion
