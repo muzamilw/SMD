@@ -66,7 +66,9 @@ namespace SMD.Models.IdentityModels
         public Nullable<bool> optDealsNearMeEmails { get; set; }
         public Nullable<bool> optLatestNewsEmails { get; set; }
         public Nullable<bool> optMarketingEmails { get; set; }
-        
+
+
+        public Nullable<int> Title { get; set; }
 
         public virtual ICollection<UserLogin> UserLogins { get; set; }
         public virtual ICollection<Role> Roles { get; set; }

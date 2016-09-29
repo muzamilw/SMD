@@ -166,6 +166,13 @@
         <AssociationConnector Association="SMDDevModel.FK_City_Country" />
         <AssociationConnector Association="SMDDevModel.FK_ProfileQuestionTargetLocation_City" />
         <AssociationConnector Association="SMDDevModel.FK_SurveyQuestionTargetLocation_City" />
+        <EntityTypeShape EntityType="SMDDevModel.CampaignEventHistory" Width="1.5" PointX="28" PointY="49.875" />
+        <EntityTypeShape EntityType="SMDDevModel.EventStatus" Width="1.5" PointX="25.75" PointY="46.75" />
+        <AssociationConnector Association="SMDDevModel.FK_CampaignEventHistory_AdCampaign" />
+        <AssociationConnector Association="SMDDevModel.FK_CampaignEventHistory_Coupon" />
+        <AssociationConnector Association="SMDDevModel.FK_CampaignEventHistory_EventStatus" />
+        <AssociationConnector Association="SMDDevModel.FK_CampaignEventHistory_ProfileQuestion" />
+        <AssociationConnector Association="SMDDevModel.FK_CampaignEventHistory_SurveyQuestion" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

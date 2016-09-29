@@ -707,6 +707,15 @@ namespace SMD.Implementation.Services
             }
             return res;
           }
+
+
+        public List<CouponPriceOption> GetCouponPriceOptions(long CouponId)
+        {
+            return couponPriceOptionRepository.GetCouponPriceOptions(CouponId);
+        }
+
+
+
         public CouponsResponseModelForApproval GetAdCampaignForAproval(GetPagedListRequest request)
         {
             int rowCount;
