@@ -767,6 +767,8 @@ COMMIT
 
 
 
+
+
 /* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
 BEGIN TRANSACTION
 SET QUOTED_IDENTIFIER ON
@@ -779,28 +781,190 @@ SET ANSI_WARNINGS ON
 COMMIT
 BEGIN TRANSACTION
 GO
-ALTER TABLE dbo.Coupon SET (LOCK_ESCALATION = TABLE)
+ALTER TABLE dbo.AdCampaign SET (LOCK_ESCALATION = TABLE)
 GO
 COMMIT
 BEGIN TRANSACTION
 GO
-CREATE TABLE dbo.CouponEventHistory
+CREATE TABLE dbo.AdCampaignEventHistory
 	(
 	EventId bigint NOT NULL IDENTITY (1, 1),
 	EventStatus int NULL,
-	CouponId bigint NULL,
+	CampaignID bigint NULL,
 	EventDateTime datetime NULL
 	)  ON [PRIMARY]
 GO
-ALTER TABLE dbo.CouponEventHistory ADD CONSTRAINT
-	PK_CouponEventHistory PRIMARY KEY CLUSTERED 
+ALTER TABLE dbo.AdCampaignEventHistory ADD CONSTRAINT
+	PK_AdCampaignEventHistory PRIMARY KEY CLUSTERED 
 	(
 	EventId
 	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 
 GO
-ALTER TABLE dbo.CouponEventHistory ADD CONSTRAINT
-	FK_CouponEventHistory_Coupon FOREIGN KEY
+ALTER TABLE dbo.AdCampaignEventHistory ADD CONSTRAINT
+	FK_AdCampaignEventHistory_AdCampaign FOREIGN KEY
+	(
+	CampaignID
+	) REFERENCES dbo.AdCampaign
+	(
+	CampaignID
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+ALTER TABLE dbo.AdCampaignEventHistory SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
+
+
+
+
+
+/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+DROP TABLE dbo.ProfileQuestionEventHistory
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+DROP TABLE dbo.SurveyQuestionEventHistory
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+DROP TABLE dbo.CouponEventHistory
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.ProfileQuestion SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.SurveyQuestion SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.AdCampaignEventHistory
+	DROP CONSTRAINT FK_AdCampaignEventHistory_AdCampaign
+GO
+ALTER TABLE dbo.AdCampaign SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+EXECUTE sp_rename N'dbo.AdCampaignEventHistory', N'CampaignEventHistory', 'OBJECT' 
+GO
+ALTER TABLE dbo.CampaignEventHistory
+	DROP CONSTRAINT PK_AdCampaignEventHistory
+GO
+ALTER TABLE dbo.CampaignEventHistory ADD CONSTRAINT
+	PK_CampaignEventHistory PRIMARY KEY CLUSTERED 
+	(
+	EventId
+	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+
+GO
+ALTER TABLE dbo.CampaignEventHistory ADD CONSTRAINT
+	FK_CampaignEventHistory_AdCampaign FOREIGN KEY
+	(
+	CampaignID
+	) REFERENCES dbo.AdCampaign
+	(
+	CampaignID
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+ALTER TABLE dbo.CampaignEventHistory SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.Coupon SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
+
+
+
+
+/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+CREATE TABLE dbo.EventStatus
+	(
+	EventStatus int NOT NULL,
+	EventName nvarchar(100) NULL
+	)  ON [PRIMARY]
+GO
+ALTER TABLE dbo.EventStatus ADD CONSTRAINT
+	PK_EventStatus PRIMARY KEY CLUSTERED 
+	(
+	EventStatus
+	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+
+GO
+ALTER TABLE dbo.EventStatus SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.ProfileQuestion SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.SurveyQuestion SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.Coupon SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.CampaignEventHistory ADD
+	CouponId bigint NULL,
+	SQID bigint NULL,
+	PQID int NULL
+GO
+ALTER TABLE dbo.CampaignEventHistory ADD CONSTRAINT
+	FK_CampaignEventHistory_EventStatus FOREIGN KEY
+	(
+	EventStatus
+	) REFERENCES dbo.EventStatus
+	(
+	EventStatus
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+ALTER TABLE dbo.CampaignEventHistory ADD CONSTRAINT
+	FK_CampaignEventHistory_Coupon FOREIGN KEY
 	(
 	CouponId
 	) REFERENCES dbo.Coupon
@@ -810,6 +974,28 @@ ALTER TABLE dbo.CouponEventHistory ADD CONSTRAINT
 	 ON DELETE  NO ACTION 
 	
 GO
-ALTER TABLE dbo.CouponEventHistory SET (LOCK_ESCALATION = TABLE)
+ALTER TABLE dbo.CampaignEventHistory ADD CONSTRAINT
+	FK_CampaignEventHistory_SurveyQuestion FOREIGN KEY
+	(
+	SQID
+	) REFERENCES dbo.SurveyQuestion
+	(
+	SQID
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+ALTER TABLE dbo.CampaignEventHistory ADD CONSTRAINT
+	FK_CampaignEventHistory_ProfileQuestion FOREIGN KEY
+	(
+	PQID
+	) REFERENCES dbo.ProfileQuestion
+	(
+	PQID
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+ALTER TABLE dbo.CampaignEventHistory SET (LOCK_ESCALATION = TABLE)
 GO
 COMMIT
