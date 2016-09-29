@@ -77,6 +77,12 @@ namespace SMD.Repository.Repositories
             }
             return countryId;
         }
+
+        public string GetCountryNameById(int countryId)
+        {
+            var country = DbSet.FirstOrDefault(c => c.CountryId == countryId);
+            return country != null ? country.CountryName : string.Empty;
+        }
         #endregion
     }
 }

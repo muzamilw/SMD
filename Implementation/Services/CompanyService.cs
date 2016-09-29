@@ -24,18 +24,21 @@ namespace SMD.Implementation.Services
         private readonly IManageUserRepository _manageUserRepository;
         private readonly ICompanyBranchRepository _companyBranchRepository;
         private readonly IBranchCategoryRepository _branchCategoryRepository;
+        private readonly ICountryRepository _countryRepository;
 
         #endregion 
         #region Constructor
         /// <summary>
         /// Constructor 
         /// </summary>
-        public CompanyService(ICompanyRepository companyRepository, IManageUserRepository managerUserRepository, ICompanyBranchRepository companyBranchRepository, IBranchCategoryRepository branchCategoryRepository)
+        public CompanyService(ICompanyRepository companyRepository, IManageUserRepository managerUserRepository, ICompanyBranchRepository companyBranchRepository, IBranchCategoryRepository branchCategoryRepository,
+            ICountryRepository countryRepository)
         {
             this.companyRepository = companyRepository;
             this._manageUserRepository = managerUserRepository;
             this._companyBranchRepository = companyBranchRepository;
             this._branchCategoryRepository = branchCategoryRepository;
+            this._countryRepository = countryRepository;
         }
 
         #endregion
@@ -71,19 +74,21 @@ namespace SMD.Implementation.Services
         {
             Company company = companyRepository.GetCompanyWithoutChilds(companyId);
             User loginUser = _manageUserRepository.GetLoginUser(userId);
+            var defaultBranch = _companyBranchRepository.GetDefaultCompanyBranch(companyId);
             return new CompanyResponseModel
             {
                 CompanyId = company.CompanyId,
                 AboutUs = company.AboutUsDescription,
-                BillingAddressLine1 = company.BillingAddressLine1,
-                BillingAddressLine2 = company.BillingAddressLine2,
+                BillingAddressLine1 = defaultBranch != null? defaultBranch.BranchAddressLine1 : string.Empty,
+                BillingAddressLine2 = defaultBranch != null ? defaultBranch.BranchAddressLine2 : string.Empty,
                 BillingBusinessName = company.BillingAddressName,
-                BillingCity = company.BillingCity,
-                BillingCountryId = company.BillingCountryId,
+                BillingCity = defaultBranch != null ? defaultBranch.BranchCity : string.Empty,
+                BillingCountryId = defaultBranch != null ? defaultBranch.CountryId : null,
                 BillingEmail = company.BillingEmail,
                 BillingPhone = company.BillingPhone,
-                BillingState = company.BillingState,
-                BillingZipCode = company.BillingZipCode,
+                BillingState = defaultBranch != null ? defaultBranch.BranchState : string.Empty,
+                BillingZipCode = defaultBranch != null ? defaultBranch.BranchZipCode : string.Empty,
+                BranchName = defaultBranch != null ? defaultBranch.BranchTitle : string.Empty,
                 CompanyName = company.CompanyName,
                 CompanyRegistrationNo = company.CompanyRegNo,
                 CompanyType = company.CompanyType??0,
@@ -105,8 +110,10 @@ namespace SMD.Implementation.Services
                 BranchesCount =  company.NoOfBranches??0,
                 BusinessStartDate = company.CreationDateTime,
                 Profession = loginUser.IndustryId??0,
-                PassportNumber = loginUser.PassportNo
-
+                PassportNumber = loginUser.PassportNo,
+                UserId = loginUser.Id,
+                BillingCountryName = _countryRepository.GetCountryNameById(defaultBranch != null ? defaultBranch.CountryId??0 : 0),
+                BranchId = defaultBranch != null ? defaultBranch.BranchId : 0
             };
         }
 
@@ -158,9 +165,14 @@ namespace SMD.Implementation.Services
                    currentCompany.Logo = ImageHelper.SaveImage(mapPath, company.Logo, string.Empty, string.Empty,
                         "blah", logoImageBytes, company.CompanyId);
                 }
-                if (!_companyBranchRepository.IsCompanyBranchExist())
+                var defaultBranch = _companyBranchRepository.GetDefaultCompanyBranch();
+                if (defaultBranch == null)
                 {
                     CreateNewCompanyBranch(company);
+                }
+                else
+                {
+                    updateCompanyBranch(defaultBranch, company);
                 }
                 UpdatedCurrentCompany(company, currentCompany);
                 UpdateUserProfile(company);
@@ -231,6 +243,10 @@ namespace SMD.Implementation.Services
             target.BranchState = source.BillingState;
             target.BranchZipCode = source.BillingZipCode;
             target.BranchPhone = source.BillingPhone;
+            target.CountryId = source.BillingCountryId;
+            target.BranchTitle = source.BranchName;
+            target.BranchLocationLat = source.BranchLocationLat;
+            target.BranchLocationLong = source.BranchLocationLong;
             
             return target;
         }
