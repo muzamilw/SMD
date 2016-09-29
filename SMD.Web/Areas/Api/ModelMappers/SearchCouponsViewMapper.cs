@@ -34,7 +34,11 @@ namespace SMD.MIS.Areas.Api.ModelMappers
 
         LogoUrl = source.LogoUrl,
         DaysLeft = Convert.ToInt32((new DateTime(source.CouponActiveYear.Value,source.CouponActiveMonth.Value,DateTime.DaysInMonth(source.CouponActiveYear.Value, source.CouponActiveMonth.Value)) - DateTime.Today).TotalDays),
-        distance = Math.Round( source.distance.Value,1)
+        distance = Math.Round( source.distance.Value,1),
+        CompanyName = source.CompanyName == null ? "":source.CompanyName,
+        LocationCity = source.LocationCity == null? "":source.LocationCity,
+        LocationTitle = source.LocationTitle == null ?"":source.LocationTitle
+        
       
                    };
         }

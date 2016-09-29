@@ -54,7 +54,7 @@ DECLARE @source geography = geography::Point(@lat, @lon, 4326)
 		THEN 'http://manage.cash4ads.com/' + vchr.LogoUrl
 	END as AdvertisersLogoPath from company c
 	 where c.CompanyId = vchr.CompanyId) as LogoUrl,
-	Price, Savings,SwapCost, vchr.CompanyId, CouponActiveMonth,CouponActiveYear
+	isnull(cpopt.Price,0) Price, isnull(cpopt.Savings,0) Savings, isnull(SwapCost,0) SwapCost, vchr.CompanyId, CouponActiveMonth,CouponActiveYear
 	,DATEFROMPARTS(vchr.CouponActiveYear, vchr.CouponActiveMonth,day(EOMONTH ( DATEFROMPARTS(vchr.CouponActiveYear, vchr.CouponActiveMonth,1)))) eod,
 	DATEFROMPARTS(vchr.CouponActiveYear, vchr.CouponActiveMonth,1) strt,
 
@@ -70,7 +70,14 @@ DECLARE @source geography = geography::Point(@lat, @lon, 4326)
 	from Coupon vchr
 	inner join CouponCategories cc on cc.CouponId = vchr.CouponId and vchr.LocationLAT is not null and vchr.LocationLON is not null
 	inner join Company comp on vchr.CompanyId = comp.CompanyId
-	--left outer join [dbo].[UserPurchasedCoupon] upc on upc.couponID = vchr.couponid
+
+	OUTER APPLY (SELECT TOp 1 Price, Savings
+                    FROM   CouponPriceOption cpo
+                    WHERE  cpo.CouponId = vchr.CouponId
+                    ORDER  BY cpo.Price) cpopt
+
+
+	
 	where (
 		
 
@@ -109,7 +116,7 @@ DECLARE @source geography = geography::Point(@lat, @lon, 4326)
 
 		
 		)
-		group by vchr.CouponId, CouponTitle,vchr.CouponImage1,LogoUrl,Price, Savings,SwapCost,vchr.CompanyId,CouponActiveMonth,CouponActiveYear,vchr.LocationLAT, vchr.LocationLON,CouponListingMode, comp.companyname, vchr.LocationTitle, vchr.LocationCity
+		group by vchr.CouponId, CouponTitle,vchr.CouponImage1,LogoUrl,cpopt.Price, cpopt.Savings,SwapCost,vchr.CompanyId,CouponActiveMonth,CouponActiveYear,vchr.LocationLAT, vchr.LocationLON,CouponListingMode, comp.companyname, vchr.LocationTitle, vchr.LocationCity
 		)as items
 		where distance < @distance
 	order by distance

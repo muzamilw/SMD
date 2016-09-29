@@ -5428,6 +5428,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_Coupons' does not have a primary key
           <Property Type="DateTime" Name="eod" Nullable="true" />
           <Property Type="DateTime" Name="strt" Nullable="true" />
           <Property Type="Double" Name="distance" Nullable="true" />
+          <Property Type="String" Name="CompanyName" Nullable="true" />
+          <Property Type="String" Name="LocationTitle" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="LocationCity" Nullable="true" MaxLength="500" />
         </ComplexType>
         <EntityType Name="UserPurchasedCoupon">
           <Key>
@@ -7420,6 +7423,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_Coupons' does not have a primary key
                 <ScalarProperty Name="eod" ColumnName="eod" />
                 <ScalarProperty Name="strt" ColumnName="strt" />
                 <ScalarProperty Name="distance" ColumnName="distance" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="LocationTitle" ColumnName="LocationTitle" />
+                <ScalarProperty Name="LocationCity" ColumnName="LocationCity" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
