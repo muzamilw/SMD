@@ -305,19 +305,20 @@
     /////////////////////////////////////////////////////////QUESTION
     //server to client mapper For QUESTION
     var questionServertoClientMapper = function (itemFromServer) {
-        
-        return new question(itemFromServer.PqId, itemFromServer.Question, itemFromServer.Priority,
+     
+        var Question =  new question(itemFromServer.PqId, itemFromServer.Question, itemFromServer.Priority,
             itemFromServer.HasLinkedQuestions, itemFromServer.ProfileGroupName, itemFromServer.LanguageId, itemFromServer.CountryId, itemFromServer.ProfileGroupId, itemFromServer.Type, itemFromServer.RefreshTime
         , itemFromServer.SkippedCount, moment(itemFromServer.CreationDate), itemFromServer.ModifiedDate, itemFromServer.PenalityForNotAnswering, itemFromServer.Status, itemFromServer.CreatedBy, itemFromServer.StatusValue, itemFromServer.AnswerNeeded,itemFromServer.AmountCharged, itemFromServer.AsnswerCount, itemFromServer.Gender, itemFromServer.AgeRangeStart, itemFromServer.AgeRangeEnd);
+        _.each(itemFromServer.ProfileQuestionTargetCriteria, function (item) {
+          
+            Question.ProfileQuestionTargetCriteria.push(ProfileQuestionTargetCriteria.Create(item));
+        });
+        _.each(itemFromServer.ProfileQuestionTargetLocation, function (item) {
 
-        _.each(itemFromServer.ProfileQuestionTargetCriterias, function (item) {
-            
-            question.ProfileQuestionTargetCriteria.push(ProfileQuestionTargetCriteria.Create(item));
+            Question.ProfileQuestionTargetLocation.push(ProfileQuestionTargetLocations.Create(item));
         });
-        _.each(itemFromServer.ProfileQuestionTargetLocations, function (item) {
-            
-            question.ProfileQuestionTargetLocation.push(ProfileQuestionTargetLocations.Create(item));
-        });
+        return Question
+      
     };
 
 
@@ -326,7 +327,7 @@
         var Question= new question(itemFromServer.PqId, itemFromServer.Question, itemFromServer.Priority,
             itemFromServer.HasLinkedQuestions, itemFromServer.ProfileGroupName, itemFromServer.LanguageId, itemFromServer.CountryId, itemFromServer.ProfileGroupId, itemFromServer.Type, itemFromServer.RefreshTime
         , itemFromServer.SkippedCount, moment(itemFromServer.CreationDate), itemFromServer.ModifiedDate, itemFromServer.PenalityForNotAnswering, itemFromServer.Status, itemFromServer.CreatedBy, itemFromServer.StatusValue, itemFromServer.AnswerNeeded, itemFromServer.AsnswerCount, itemFromServer.Gender, itemFromServer.AgeRangeStart, itemFromServer.AgeRangeEnd);
-
+        
         _.each(itemFromServer.ProfileQuestionTargetCriteria, function (item) {
            
             Question.ProfileQuestionTargetCriteria.push(ProfileQuestionTargetCriteria.Create(item));
@@ -447,7 +448,7 @@
  ProfileQuestionTargetCriteria = function (ID, PQID, Type, PQID, PQAnswerID, LinkedSQID, LinkedSqAnswer, IncludeorExclude, LanguageID,
      questionString, answerString, Language, IndustryID, Industry, EducationId, Education, AdCampaignAnswer, PQQuestionID, AdCampaignID,
      PQQuestionString, profileQuestRightImageSrc, profileQuestLeftImageSrc, IsDeleted, ID) {
-     
+     console.log(answerString);
      var
          //type and userID will be set on server side
          ID = ko.observable(ID),
@@ -570,9 +571,10 @@
         return new ProfileQuestionTargetLocation(source.Id, source.SqId, source.CountryId, source.CityId, source.Radius,
            source.Country, source.City, source.IncludeorExclude, source.Latitude, source.Longitude, source.pqid, source.IsDeleted,source.ID);
     }
-    ProfileQuestionTargetCriteria.Create = function (source) {
-        
-        return new ProfileQuestionTargetCriteria(source.Id, source.SqId, source.Type, source.PqId, source.PqAnswerId, source.LinkedSqId, source.LinkedSqAnswer, source.IncludeorExclude, source.LanguageId, source.questionString, source.answerString, source.Language, source.IndustryId, source.Industry, source.EducationId, source.Education, source.AdCampaignAnswer, source.PQQuestionID, source.AdCampaignID, source.PQQuestionString, source.profileQuestRightImageSrc,source.profileQuestLeftImageSrc,source.IsDeleted,source.ID);
+  ProfileQuestionTargetCriteria.Create = function (source) {
+        return new ProfileQuestionTargetCriteria(source.Id, source.SqId, source.Type, source.PqId, source.PqAnswerId, source.LinkedSqId, source.LinkedSqAnswer, source.IncludeorExclude,
+            source.LanguageId, source.questionString, source.answerString, source.Language, source.IndustryId, source.Industry, source.EducationId, source.Education,
+            source.AdCampaignAnswer, source.PQQuestionID, source.AdCampaignID, source.PQQuestionString, source.profileQuestRightImageSrc, source.profileQuestLeftImageSrc, source.IsDeleted, source.ID);
     };
     return {
         question: question,

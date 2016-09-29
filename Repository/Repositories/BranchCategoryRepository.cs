@@ -39,7 +39,11 @@ namespace SMD.Repository.Repositories
              return DbSet.Include(c => c.CompanyBranches).Where(c => c.CompanyId == CompanyId).ToList();
             
          }
-      
+         public long ExistedCompanyBranchCategory()
+         {
+              var bc = DbSet.FirstOrDefault(b => b.CompanyId == CompanyId);
+             return bc != null ? bc.BranchCategoryId : 0;
+         }
 
     }
 }

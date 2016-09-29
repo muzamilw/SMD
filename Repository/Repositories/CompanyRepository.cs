@@ -134,10 +134,11 @@ namespace SMD.Repository.Repositories
             return DbSet. Where(g => g.CompanyId == CompanyId).SingleOrDefault();
         }
 
-        public Company GetCompanyWithoutChilds()
+        public Company GetCompanyWithoutChilds(int companyId = 0)
         {
+            int compId = companyId > 0 ? companyId : CompanyId;
             db.Configuration.LazyLoadingEnabled = false;
-            return DbSet.FirstOrDefault(c => c.CompanyId == CompanyId);
+            return DbSet.FirstOrDefault(c => c.CompanyId == compId);
         }
 
         

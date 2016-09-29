@@ -17,9 +17,12 @@ define("FranchiseDashboard/profileQuestionApp.viewModel",
                     //Assending  / Desending
                     sortIsAsc = ko.observable(true),
                     isEditorVisible = ko.observable(false),
+                    selectedCompany = ko.observable(),
                    // isShowCopounMode = ko.observable(false),
                     selectedProfileQuestion = ko.observable(),
                     onEditPQ = function (item) {
+                        $("#topArea").css("display", "none");
+                        $("#divApprove").css("display", "none");
                         dataservice.getPqAnswer(
                         {
                             ProfileQuestionId: item.id
@@ -43,6 +46,8 @@ define("FranchiseDashboard/profileQuestionApp.viewModel",
                     closeEditDialog = function () {
                         selectedProfileQuestion(undefined);
                         isEditorVisible(false);
+                        $("#topArea").css("display", "block");
+                        $("#divApprove").css("display", "block");
                     },
                     getProfileQuestions = function () {
                         dataservice.getPQForApproval(
@@ -122,14 +127,33 @@ define("FranchiseDashboard/profileQuestionApp.viewModel",
                            success: function (data) {
                                
                                selectedProfileQuestion().profileGroupId(data.ProfileGroupName)
+                               getCompanyData(item);
                            },
                            error: function () {
                                selectedProfileQuestion().profileGroupId(item.profileGroupId());
+                               getCompanyData(item);
                                //isEditorVisible(true);
                                //toastr.error("Failed to load PG");
                            }
                        });
                     },
+                     getCompanyData = function (selectedItem) {
+                         dataservice.getCompanyData(
+                      {
+                          companyId: selectedItem.companyId,
+                          userId: selectedItem.userID,
+                      },
+                      {
+                          success: function (comData) {
+                              selectedCompany(comData);
+
+                          },
+                          error: function () {
+                              toastr.error("Failed to load Company");
+                          }
+                      });
+
+                     },
                     hasChangesOnPQ = ko.computed(function () {
                         if (selectedProfileQuestion() == undefined) {
                                return false;
@@ -182,6 +206,7 @@ define("FranchiseDashboard/profileQuestionApp.viewModel",
                     onSavePQ: onSavePQ,
                     onRejectPQ: onRejectPQ,
                     hasChangesOnPQ: hasChangesOnPQ,
+                    selectedCompany: selectedCompany,
 
                 };
             })()

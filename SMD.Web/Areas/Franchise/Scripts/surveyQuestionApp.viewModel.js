@@ -15,6 +15,7 @@ define("FranchiseDashboard/surveyQuestionApp.viewModel",
                     pager = ko.observable(),
                     //sorting
                     sortOn = ko.observable(1),
+                    selectedCompany = ko.observable(),
                     //Assending  / Desending
                     sortIsAsc = ko.observable(true),
                     // Controlls editor visibility 
@@ -54,11 +55,16 @@ define("FranchiseDashboard/surveyQuestionApp.viewModel",
                         //confirmation.show();
                         selectedQuestion(undefined);
                         isEditorVisible(false);
+                        $("#topArea").css("display", "block");
+                        $("#divApprove").css("display", "block");
                     },
                     // On editing of existing PQ
                     onEditQuestion = function (item) {
+                        $("#topArea").css("display", "none");
+                        $("#divApprove").css("display", "none");
                         selectedQuestion(item);
-                        isEditorVisible(true);
+                        getCompanyData(item);
+                        //isEditorVisible(true);
                     },
                   
                     // Save Question / Add 
@@ -100,6 +106,24 @@ define("FranchiseDashboard/surveyQuestionApp.viewModel",
                             onSaveQuestion();
                         });
                     },
+                       getCompanyData = function (selectedItem) {
+                           dataservice.getCompanyData(
+                        {
+                            companyId: selectedItem.companyId,
+                            userId: selectedItem.userID,
+                        },
+                        {
+                            success: function (comData) {
+                                selectedCompany(comData);
+                                isEditorVisible(true);
+
+                            },
+                            error: function () {
+                                toastr.error("Failed to load Company");
+                            }
+                        });
+
+                       },
                      onApproveQuestion = function () {
 
                          confirmation.messageText("Do you want to approve this Survay Cards ? System will attempt to collect payment and generate invoice");
@@ -136,7 +160,8 @@ define("FranchiseDashboard/surveyQuestionApp.viewModel",
                     onSaveQuestion: onSaveQuestion,
                     hasChangesOnQuestion: hasChangesOnQuestion,
                     onRejectQuestion: onRejectQuestion,
-                    onApproveQuestion: onApproveQuestion
+                    onApproveQuestion: onApproveQuestion,
+                    selectedCompany: selectedCompany,
                 };
             })()
         };

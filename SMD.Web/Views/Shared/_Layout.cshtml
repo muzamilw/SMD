@@ -14,7 +14,7 @@
     string MobileNo = companyClaimValues != null && companyClaimValues.Any() ? companyClaimValues.ElementAt(0).MobileNumber : "Claim not found";
     string CompanyID = companyClaimValues != null && companyClaimValues.Any() ? companyClaimValues.ElementAt(0).CompanyId.ToString() : "Claim not found";
     IEnumerable<SmdRoleClaimValue> roleClaim = ClaimHelper.GetClaimsByType<SmdRoleClaimValue>(SmdClaimTypes.Role);
-    
+
     string RoleName = roleClaim != null && roleClaim.Any() ? roleClaim.ElementAt(0).Role : "Role Not Loaded";
     var Name = string.Empty;
 }
@@ -25,11 +25,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_N_x3UhG5IHl8GUZ4y5Lj_QkNhGUh91I" type="text/javascript"></script>
+    <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
     <script src="~/Scripts/jquery-2.1.0.min.js"></script>
     <script src="~/Scripts/jquery.blockUI.js"></script>
-    <link rel="stylesheet" href="~/Content/themes/Centaurus/css/libs/fullcalendar.css" type="text/css" />
-    <link rel="stylesheet" href="~/Content/themes/Centaurus/css/libs/fullcalendar.print.css" type="text/css" media="print" />
-    @Styles.Render("~/Content/themes/Centaurus/css/bundleCentaurus/css")
+    @* these two css files are bundled into centaurus now.
+            <link rel="stylesheet" href="~/Content/themes/Centaurus/css/libs/fullcalendar.css" type="text/css" />
+        <link rel="stylesheet" href="~/Content/themes/Centaurus/css/libs/fullcalendar.print.css" type="text/css" media="print" />*@
+        @Styles.Render("~/Content/themes/Centaurus/css/bundleCentaurus/css")
+        <link href="~/Content/metroUI/css/metro.css" rel="stylesheet" />
+    <script src="~/Content/metroUI/js/metro.js"></script>
     @* If Debuggin is Enabled then pick css *@
     @if (HttpContext.Current.IsDebuggingEnabled)
     {
@@ -44,9 +48,11 @@
     <link type="image/x-icon" href="/favicon.png" rel="shortcut icon" />
     @if (HttpContext.Current.Request.IsLocal == false)
     {
-        <link href='//fonts.googleapis.com/css?family=Open+Sans:400,600,700,300|Titillium+Web:200,300,400' rel='stylesheet' type='text/css'>
+
 
     }
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+
     <!--[if lt IE 9]>
         <script src="js/html5shiv.js"></script>
         <script src="js/respond.min.js"></script>
@@ -62,10 +68,10 @@
     <header class="navbar" id="header-navbar">
         <div class="col-md-12 col-lg-12 col-sm-12" style="height: 4px; background-color: black; position: absolute; margin-top: 100px;"></div>
         <div class="container" style="height:100px;">
-            
 
 
-            <a href="~/" id="header" class="cashlogox my-navigator navbar-brand logoAnchor " ></a>
+
+            <a href="~/" id="header" class="cashlogox my-navigator navbar-brand logoAnchor "></a>
 
 
 
@@ -80,8 +86,8 @@
                     <div style="float:right;">
                         <div class="pull-left" style="display:inline-block;margin-top:20px;">
                             @*<p style="box-shadow: inset 0 0px 0 white, inset 0 -1px 0 white;margin-bottom:3px;display:inline-block;font-size:11px;">
-                 Advertiser Dashboard for
-                </p>*@
+                                 Advertiser Dashboard for
+                                </p>*@
                             <p style="font-size:16px;color:white;">@CompanyName</p>
                         </div>
                         <div class="pull-left" style="color:white;margin-left: 10px;margin-top: 12px;margin-right: 9px;"><img style="width:87px;height:41px;    background-color: white; border: 1px solid white;" src="~/@CompanyLogo" /></div>
@@ -137,21 +143,21 @@
                         <li class="dropdown profile-dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <span class="hidden-xs">
-                                @if (!String.IsNullOrEmpty(userName))
-                                {
-                                    @userName;
-                                   Name = userName;
-                                }
-                                else
-                                {
-                                    if (User != null && User.Identity != null)
+                                    @if (!String.IsNullOrEmpty(userName))
                                     {
-                                        @User.Identity.Name;
-                                        Name = User.Identity.Name;
-                                    } 
-                                }
-                                    
-                                    
+                                        @userName;
+                                             Name = userName;
+                                    }
+                                    else
+                                    {
+                                        if (User != null && User.Identity != null)
+                                        {
+                                            @User.Identity.Name;
+                                                           Name = User.Identity.Name;
+                                        }
+                                    }
+
+
                                 </span> <b class="caret"></b>
                                 <div class="user-positioner" style="position:fixed;">
                                 </div>
@@ -188,8 +194,8 @@
                                 <li><a href="~/">Analytics and Charts</a></li>
                                 <li><a href="~/Billing/Manage/Invoice">Billing History</a></li>
                                 @*<li class="inlineMenuItem"><a href="~/Billing/Manage/Invoice">&nbsp;&nbsp;View Invoices</a></li>
-                                <li class="inlineMenuItem"><a href="">&nbsp;&nbsp;Payment Methods</a></li>*@
-                                
+                                    <li class="inlineMenuItem"><a href="">&nbsp;&nbsp;Payment Methods</a></li>*@
+
                                 <li style="display: block;
     margin-top: 0.5em;
     margin-bottom: 0.5em;
@@ -201,14 +207,14 @@
                                 <li><a href="">Delete my Account</a></li>
 
                                 @*<li><a href="">Ad Campaigns</a></li>
-                                <li class="inlineMenuItem" style="display:none;"><a href="~/Ads/Ads">&nbsp;&nbsp;Create Ad Campaigns</a></li>
-                                <li class="inlineMenuItem"><a href="~/Ads/Ads">&nbsp;&nbsp;View Ad Campaigns</a></li>
-                                <li><a href="">Survey Slides</a></li>
-                                <li class="inlineMenuItem" style="display:none;"><a href="~/survey">&nbsp;&nbsp;Create Survey Slides</a></li>
-                                <li class="inlineMenuItem"><a href="~/survey">&nbsp;&nbsp;View Survey Slides</a></li>*@
-                                
+                                    <li class="inlineMenuItem" style="display:none;"><a href="~/Ads/Ads">&nbsp;&nbsp;Create Ad Campaigns</a></li>
+                                    <li class="inlineMenuItem"><a href="~/Ads/Ads">&nbsp;&nbsp;View Ad Campaigns</a></li>
+                                    <li><a href="">Survey Slides</a></li>
+                                    <li class="inlineMenuItem" style="display:none;"><a href="~/survey">&nbsp;&nbsp;Create Survey Slides</a></li>
+                                    <li class="inlineMenuItem"><a href="~/survey">&nbsp;&nbsp;View Survey Slides</a></li>*@
+
                                 @*<li class=""><a href="~/user/ManageUser/ManageUsers">Invite users </a></li>*@
-                               
+
                                 <li style="display: block;
     margin-top: 0.5em;
     margin-bottom: 0.5em;
@@ -220,23 +226,23 @@
                             </ul>
                         </li>
                         @*<li class="dropdown profile-dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <span class="hidden-xs">
-                                    <i class="fa fa-life-ring"></i>
-                                </span> <b class="caret"></b>
-                              
-                            </a>
-                            <ul class="dropdown-menu loginMenu">
-                                <li><a href="">Startup Guide</a></li>
-                                <li><a href="">Training Videos</a></li>
-                                <li><a href="">Help Center</a></li>
-                                <li><a href="">Contact Us</a></li>
-                            </ul>
-                        </li>*@
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <span class="hidden-xs">
+                                        <i class="fa fa-life-ring"></i>
+                                    </span> <b class="caret"></b>
 
-                   
+                                </a>
+                                <ul class="dropdown-menu loginMenu">
+                                    <li><a href="">Startup Guide</a></li>
+                                    <li><a href="">Training Videos</a></li>
+                                    <li><a href="">Help Center</a></li>
+                                    <li><a href="">Contact Us</a></li>
+                                </ul>
+                            </li>*@
+
+
                         <li class="hidden-xxs">
-                            <a  href="~/Account/LogOff">
+                            <a href="~/Account/LogOff">
                                 <i class="fa fa-power-off"></i>
                             </a>
                         </li>
@@ -252,8 +258,8 @@
             @RenderSection("leftmenue", required: false)
 
             @*content wrapper goes here*@
-            <div id="content-wrapper" class="removeMenuMargin" >
-               
+            <div id="content-wrapper" class="removeMenuMargin">
+
                 <div class="row" id="panelArea">
 
 
@@ -268,37 +274,37 @@
                             @*<div class="pull-left" style="position: absolute;margin-left: -65px;margin-top: 16px;">Help center</div>
 
 
-                            <div class="pull-right">
+                                <div class="pull-right">
 
-                                <ul class="nav navbar-nav pull-right" style="width:140px;">
-                                    <li class="dropdown profile-dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                            <span class="hidden-xs">
-                                                <i class="fa fa-life-ring"></i>
-                                            </span> <b class="caret"></b>
+                                    <ul class="nav navbar-nav pull-right" style="width:140px;">
+                                        <li class="dropdown profile-dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                <span class="hidden-xs">
+                                                    <i class="fa fa-life-ring"></i>
+                                                </span> <b class="caret"></b>
 
-                                        </a>
-                                        <ul class="dropdown-menu loginMenu">
-                                            <li><a href="~/Home/StartupGuide">Startup Guide</a></li>
-                                            <li><a href="~/Home/TrainingVideos">Training Videos</a></li>
-                                            <li><a href="~/Home/ContactUs">Contact Us</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
+                                            </a>
+                                            <ul class="dropdown-menu loginMenu">
+                                                <li><a href="~/Home/StartupGuide">Startup Guide</a></li>
+                                                <li><a href="~/Home/TrainingVideos">Training Videos</a></li>
+                                                <li><a href="~/Home/ContactUs">Contact Us</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
 
 
 
-                            </div>*@
+                                </div>*@
 
 
 
 
                         </div>
 
- 
+
                     </div>
                     <div class="col-sm-4 pull-left hideInCoupons" style="height:46px;padding-left:46px;color: black;">
-                       
+
                         <span class="line-separator"></span>
                         <div class="pull-left">
                             <span class="pull-left" style="color:#7f8c8d;font-size:13px;">Generate Income <br />Refer Businesses - <b style="color: #3498db;">Earn 25% </b></span>
@@ -342,49 +348,49 @@
                             <a class="btn  btn-default btn-gray" style="float:left; width:136px;height:58px;padding-top:16px;margin-right:15px; white-space:normal;" id="btnspnsergames" href="/Ads/Ads?mode=4">Display Ads</a>
                             <a class="btn  btn-default btn-gray" style="float:left;width:136px;height:58px;padding-top:16px;white-space:normal;" href="/Survey/" id="btnSurvey">Polls</a>
                             <a class="btn  btn-default btn-gray" style="float:left;width:136px;height:58px;padding-top:16px;white-space:normal;" href="~/ProfileQuestion/Manage/Index" id="btnSurveyQuestion">Surveys</a>
-                            
+
                             @*<a class="btn  btn-default btn-gray" style="float:left;width:20%;height:66px;white-space:normal;" href="~/ProfileQuestion/Manage/Index" id="btnProQuestions">Profile Questions</a>*@
                         </div>
 
                         <div class="col-sm-4 hideInCoupons" style="padding-left:42px;margin-top:3px;">
                             <div id="InviteUserBinding">
-                                <a class="btn btn-default btn-gray" data-bind="click:showInviteUserPopup" id="btninviteusers" style="  height:58px;  width: 136px;float:right;margin-right:0px;padding-top:17px">Invite users</a>
-
-                                </div>
-                                @*<a class="btn btn-default btn-gray " href="~/ProfileQuestion/Manage/Index" id="btninviteusers" style=" width:136px;float:left;margin-right:20px;font-size:14px;padding-top:17px; height:58px;" href="#">Invite Business</a>*@
-
-                            <a class="btn btn-default btn-gray " id="" style=" width:136px;float:left;margin-right:0px;font-size:14px;height:58px;padding-top:17px" href="~/Report/report/WalletReport">Wallet History</a>
-                                
-                                <br />
-                                <br />
-                                <br />
-
-                                <span style="color:#7f8c8d;font-size:13px;display:none;" id="MainSpan">
-                                    Become a country partner
-                                    <a style="color:#7f8c8d;font-size:14px; color:#3498db; font-weight:bold;" href="mailto:partners@crowdcentz.com">Email us </a>
-                                </span>
-                                <div id="branchBinding" style="float: right;display:none;">
-                                    <a class="btn btn-default btn-gray btnSmall" data-bind="click:showBranchDialoge" style="display:none;" href="#" id="btnBranchLocations">Branch Locations</a>
-                                </div>
-
-                                @*<a class="btn btn-default btn-gray btnSmall " id="btnDAM" style="    width: 100px;float:right" href="/DamImages/Grid" id="btnImageLibrary">Image Library</a>*@
-                                <div id="phraseLibraryBinding" style="float: right;display:none;">
-                                    <a class="btn btn-default btn-gray btnSmall" id="btnPhraseLibrary" style="display:none;" data-bind="click:showphraseLibraryDialog">Phrase Library</a>
-                                </div>
+                                <a class="btn btn-default btn-gray" data-bind="click:showInviteUserPopup" id="btninviteusers" style="  height:58px;  width: 136px;float:right;margin-right:50px;padding-top:17px">Invite users</a>
 
                             </div>
-                        
+                            @*<a class="btn btn-default btn-gray " href="~/ProfileQuestion/Manage/Index" id="btninviteusers" style=" width:136px;float:left;margin-right:20px;font-size:14px;padding-top:17px; height:58px;" href="#">Invite Business</a>*@
+
+                            <a class="btn btn-default btn-gray " id="" style=" width:136px;float:left;margin-right:0px;font-size:14px;height:58px;padding-top:17px" href="~/Report/report/WalletReport">Wallet History</a>
+
+                            <br />
+                            <br />
+                            <br />
+
+                            <span style="color:#7f8c8d;font-size:13px;display:none;" id="MainSpan">
+                                Become a country partner
+                                <a style="color:#7f8c8d;font-size:14px; color:#3498db; font-weight:bold;" href="mailto:partners@crowdcentz.com">Email us </a>
+                            </span>
+                            <div id="branchBinding" style="float: right;display:none;">
+                                <a class="btn btn-default btn-gray btnSmall" data-bind="click:showBranchDialoge" style="display:none;" href="#" id="btnBranchLocations">Branch Locations</a>
+                            </div>
+
+                            @*<a class="btn btn-default btn-gray btnSmall " id="btnDAM" style="    width: 100px;float:right" href="/DamImages/Grid" id="btnImageLibrary">Image Library</a>*@
+                            <div id="phraseLibraryBinding" style="float: right;display:none;">
+                                <a class="btn btn-default btn-gray btnSmall" id="btnPhraseLibrary" style="display:none;" data-bind="click:showphraseLibraryDialog">Phrase Library</a>
+                            </div>
+
                         </div>
+
+                    </div>
 
                 </div>
 
                 @*<div class="row">
-                    <div class="col-sm-8"></div>
-                    <div class="col-sm-4">
-                        <span style="color:#7f8c8d;font-size:11px;">Become a territory partner <br /><a style="color:#7f8c8d;font-size:11px;" href="mailto:Cash.com">Email us: </a></span>
+                        <div class="col-sm-8"></div>
+                        <div class="col-sm-4">
+                            <span style="color:#7f8c8d;font-size:11px;">Become a territory partner <br /><a style="color:#7f8c8d;font-size:11px;" href="mailto:Cash.com">Email us: </a></span>
 
-                    </div>
-                </div>*@
+                        </div>
+                    </div>*@
                 @RenderBody()
                 <!-- ko stopBinding: true -->
                 @Html.Partial("~/Areas/Common/Views/Shared/_ConfirmationDialog.cshtml")
@@ -418,21 +424,21 @@
                     }
                 </div>
 
-                    <div id="spinner" style="display: none">
-                    </div>
-                    <div id="siteUrl">
-                    </div>
-                    <footer id="footer-bar" class="row">
-                        <p id="footer-copyright" class="col-xs-12">
-                            &copy; @DateTime.Now.Year Powered by CASH 4 Ads Inc.,USA
-                        </p>
-                    </footer>
+                <div id="spinner" style="display: none">
                 </div>
+                <div id="siteUrl">
+                </div>
+                <footer id="footer-bar" class="row">
+                    <p id="footer-copyright" class="col-xs-12">
+                        &copy; @DateTime.Now.Year Powered by CASH 4 Ads Inc.,USA
+                    </p>
+                </footer>
+            </div>
         </div>
     </div>
     @*<!-- ko stopBinding: true -->
-    @Html.Partial("~/Areas/Common/Views/Shared/_ConfirmationDialog.cshtml")
-    <!-- /ko -->*@
+        @Html.Partial("~/Areas/Common/Views/Shared/_ConfirmationDialog.cshtml")
+        <!-- /ko -->*@
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     <script>
@@ -443,7 +449,7 @@
 
 
         function collapseMainMenu() {
-           
+
             $('#topArea').collapse('hide');
         }
 
@@ -465,7 +471,7 @@
         require(["common/userProfile.view"]);
         require(["common/companyProfile.view"]);
         require(["common/InviteUser.view"]);
-      
+
         $(document).ready(function () {
             $("#make-small-nav").click(function () {
                 $("#header-logo").toggle();
@@ -473,11 +479,11 @@
             });
 
             $('#topArea').collapse();
-            
+
             $("#btnPhraseLibrary").click(function () {
                 $("#btnPhraseLibrary").css("background-color", "#93bf47");
             });
-          
+
             $("#phrase-libraryCloseButton").click(function () {
                 $("#btnPhraseLibrary").css("background-color", "#7f8c8d");
                 $("#btnPhraseLibrary").css("border-color", "#5c6667");
@@ -486,7 +492,7 @@
                 $("#btnPhraseLibrary").css("background-color", "#7f8c8d");
                 $("#btnPhraseLibrary").css("border-color", "#5c6667");
             });
-            
+
         });
 
         function OpenPhraseLibrary()
@@ -498,7 +504,7 @@
         }
     </script>
 
-  
+
 
 
     @RenderSection("scripts", required: false)

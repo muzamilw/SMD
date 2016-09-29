@@ -16,8 +16,8 @@
                 Tel1 = ko.observable(Tel1).extend({ required: true }),
                 Tel2 = ko.observable(Tel2),
                 Logo = ko.observable(Logo),
-                StripeCustomerId = ko.observable(StripeCustomerId || 'undefined'),
-                SalesEmail = ko.observable(SalesEmail).extend({ required: true }),
+                stripeCustomerId = ko.observable(StripeCustomerId || undefined),
+                SalesEmail = ko.observable(SalesEmail || specifiedEmail).extend({ required: true }),
                 WebsiteLink = ko.observable(WebsiteLink),
                 VoucherSecretKey = ko.observable(VoucherSecretKey).extend({ required: true }),
                 BillingAddressLine1 = ko.observable(BillingAddressLine1).extend({ required: true }),
@@ -26,8 +26,8 @@
                 BillingCountryId = ko.observable(BillingCountryId).extend({ required: true }),
                 billingCity = ko.observable(BillingCity).extend({ required: true }),
                 BillingZipCode = ko.observable(BillingZipCode).extend({ required: true }),
-                BillingPhone = ko.observable(BillingPhone).extend({ required: true }),
-                BillingEmail = ko.observable(BillingEmail).extend({ required: true }),
+                BillingPhone = ko.observable(BillingPhone || specifiedMobile).extend({ required: true }),
+                BillingEmail = ko.observable(BillingEmail || specifiedEmail).extend({ required: true }),
                 mediaHandleui = ko.observable(TwitterHandle != null ? TwitterHandle : FacebookHandle != null ? FacebookHandle : InstagramHandle != null ? InstagramHandle : PinterestHandle != null ? PinterestHandle : ""),
                 TwitterHandle = ko.observable(TwitterHandle),
                 FacebookHandle = ko.observable(FacebookHandle),
@@ -40,36 +40,36 @@
                 
               
               //Fields for User profil-------------
-              solutation = ko.observable(specifiedSolutation).extend({ required: true, message:"Solutation is required" }),
-              professsion = ko.observable(specifiedProfession).extend({ required: true, message: "Profession is required" }),
+              salutation = ko.observable(specifiedSolutation).extend({ required: true, message:"Solutation is required" }),
+              profession = ko.observable(specifiedProfession).extend({ required: true, message: "Profession is required" }),
               fullName = ko.observable(specifiedfullName).extend({ required: true, message: "Name is required" }),
               email = ko.observable(specifiedEmail).extend({ required: true, message: "Email is required" }),
               mobileNumber = ko.observable(specifiedMobile).extend({ required: true, message:"Mobile number is required" }),
-              dateOfBirth = ko.observable(specifiedDob).extend({ required: true, message: "Date of birth is required" }),
-              passportNumber = ko.observable(specifiedPassport).extend({ required: true, message: "Valid Passport number is required" }),
+              dateOfBirth = ko.observable(specifiedDob ? moment(specifiedDob).toDate() : moment().toDate()).extend({ required: true, message: "Date of birth is required" }),
+              passportNumber = ko.observable(specifiedPassport),
               isReceiveDeals = ko.observable(specifiedIsDeals),
               isReceiveWeeklyUpdates = ko.observable(specifiedIsWeeklyUpdate),
               isReceiveLatestServices = ko.observable(specifiedIsLatestService),
               //----------------
               //Fields for User Branch-------------
-              branchName = ko.observable(specifiedBranchName),
-              numberOfBranches = ko.observable(specifiedBranchCount),
-              salesPhone = ko.observable(specifiedSalesPhone),
-              companyType = ko.observable(specifiedCompanyType),
+              branchName = ko.observable(specifiedBranchName).extend({ required: true, message: "Branch name is required" }),
+              numberOfBranches = ko.observable(specifiedBranchCount || 1),
+              salesPhone = ko.observable(specifiedSalesPhone || specifiedMobile).extend({ required: true, message: "Sales is required" }),
+              companyType = ko.observable(specifiedCompanyType).extend({ required: true, message: "Company type is required" }),
               aboutUs = ko.observable(specifiedAboutUs),
               
               //---------------------------
               //Money Tab Fields
-              paypalMailId = ko.observable(specifiedPaypalId),
-              billingBusinessName = ko.observable(specifiedBusinessName),
+              paypalMailId = ko.observable(specifiedPaypalId).extend({ required: true, message: "Paypal Id is required" }),
+              billingBusinessName = ko.observable(specifiedBusinessName || CompanyName()).extend({ required: true, message: "Billing address title is required" }),
               companyRegNo = ko.observable(specifiedRegNumber),
-              businessStartDate = ko.observable(specifiedStartDate),
-              creditCard = ko.observable(StripeCustomerId),
+              businessStartDate = ko.observable(specifiedStartDate ? moment(specifiedStartDate).toDate() : moment().toDate()),
+              creditCard = ko.observable(StripeCustomerId).extend({ required: true, message:"linked card info is required" }),
               vatNumber = ko.observable(specifiedVatNumber),
               creditCardUi = ko.computed(function () {
-                  return creditCard() ? "Linked | " + creditCard() : "Not Linked | Link with Stripe Id";
+                  return creditCard() != undefined ? 'Linked | ' + creditCard() + '' : 'Not Linked | Link with Stripe Id';
                   }),
-              
+              isSubmit = ko.observable(false),
               //-------------------
                 
                 //FacebookHandleui = ko.computed({
@@ -102,13 +102,12 @@
                   BillingEmail: BillingEmail,
                   selectedMedia: selectedMedia,
                   
-                  solutation: solutation,
+                  salutation: salutation,
                   fullName: fullName,
                   email: email,
                   mobileNumber: mobileNumber,
                   dateOfBirth: dateOfBirth,
                   passportNumber: passportNumber,
-                  numberOfBranches: numberOfBranches,
                   salesPhone: salesPhone,
                   companyType: companyType,
                   aboutUs: aboutUs,
@@ -117,7 +116,7 @@
                   companyRegNo: companyRegNo,
                   businessStartDate: businessStartDate,
                   vatNumber: vatNumber,
-                  professsion: professsion,
+                  profession: profession,
                   creditCard: creditCard
 
               }),
@@ -131,7 +130,7 @@
                   Tel1: Tel1,
                   Tel2: Tel2,
                   Logo: Logo,
-                  StripeCustomerId: StripeCustomerId,
+                  stripeCustomerId: stripeCustomerId,
                   SalesEmail: SalesEmail,
                   WebsiteLink: WebsiteLink,
                   VoucherSecretKey: VoucherSecretKey,
@@ -150,7 +149,7 @@
                   LogoImageBase64: LogoImageBase64,
                   mediaHandleui: mediaHandleui,
                   selectedMedia: selectedMedia,
-                  solutation: solutation,
+                  salutation: salutation,
                   fullName: fullName,
                   email: email,
                   mobileNumber: mobileNumber,
@@ -169,7 +168,7 @@
                   companyRegNo: companyRegNo,
                   businessStartDate: businessStartDate,
                   vatNumber: vatNumber,
-                  professsion: professsion,
+                  profession: profession,
                   creditCard: creditCard
 
               }),
@@ -191,7 +190,7 @@
                   
                   Logo: logoImage == "" ? Logo() : logoImage,
 
-                  StripeCustomerId: StripeCustomerId(),
+                  StripeCustomerId: creditCard(),
                   SalesEmail: SalesEmail(),
                   WebsiteLink: WebsiteLink(),
                   VoucherSecretKey: VoucherSecretKey(),
@@ -207,7 +206,30 @@
                   FacebookHandle: FacebookHandle(),
                   InstagramHandle: InstagramHandle(),
                   PinterestHandle: PinterestHandle(),
-                  LogoImageBase64: LogoImageBase64()
+                  LogoImageBase64: LogoImageBase64(),
+                  
+                  Profession: profession(),
+                  Solutation: salutation(),
+                  FirstName: fullName(),
+                  Email: email(),
+                  Mobile: mobileNumber(),
+                  DateOfBirth: dateOfBirth() ? moment(dateOfBirth()).format(ist.utcFormat) + 'Z' : undefined,
+                  PassportNumber: passportNumber(),
+                  IsReceiveDeals: isReceiveDeals(),
+                  IsReceiveWeeklyUpdates: isReceiveWeeklyUpdates(),
+                  IsReceiveLatestServices: isReceiveLatestServices(),
+                  BranchName: branchName(),
+                  BranchesCount: numberOfBranches(),
+                  SalesPhone: salesPhone(),
+                  CompanyType: companyType(),
+                  AboutUs: aboutUs(),
+                  PayPalId: paypalMailId(),
+                  BillingBusinessName: billingBusinessName(),
+                  CompanyRegistrationNo: companyRegNo(),
+                  BusinessStartDate: businessStartDate() ? moment(businessStartDate()).format(ist.utcFormat) + 'Z' : undefined,
+                  VatNumber: vatNumber()
+                  
+                  
               };
           };
 
@@ -218,7 +240,7 @@
               Tel1: Tel1,
               Tel2: Tel2,
               Logo: Logo,
-              StripeCustomerId: StripeCustomerId,
+              stripeCustomerId: stripeCustomerId,
               SalesEmail: SalesEmail,
               WebsiteLink: WebsiteLink,
               VoucherSecretKey: VoucherSecretKey,
@@ -245,7 +267,7 @@
               isValid: isValid,
               
               errors: errors,
-              solutation: solutation,
+              salutation: salutation,
               fullName: fullName,
               email: email,
               mobileNumber: mobileNumber,
@@ -265,8 +287,9 @@
               businessStartDate: businessStartDate,
               vatNumber: vatNumber,
               creditCardUi: creditCardUi,
-              professsion: professsion,
-              creditCard: creditCard
+              profession: profession,
+              creditCard: creditCard,
+              isSubmit: isSubmit
             
           };
       };

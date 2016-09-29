@@ -30,107 +30,289 @@
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane fade in active" id="tab-generalinfo">
-                                <div class="col-lg-12 form-horizontal" data-bind="with:selectedProfileQuestion">
+                                <div class="col-lg-12 form-horizontal">
                                     <h3 class="group-header" style="margin-top:20px;">
-                                        Survey question
+                                        Approve - Reject Survey question
                                     </h3>
-                                    <div class="col-lg-9">
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Question</label>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <input type="text" readonly class="form-control" data-bind="value:question">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-9">
-                                        <div class="form-group">
-                                            <div class="form-group" style="margin-bottom:0px;">
-                                                <div class="col-lg-4 text-campaign-left  Float-Left">
-                                                    <label class="control-label text-right tooltip-float floatNone" style="float:left !important;    margin-left: 6px; ">Answer List</label>
+                                    <div class="col-lg-12 col-md-12 col-sm-12" style="padding-bottom:20px" data-bind="with:selectedCompany">
+                                        <div style="padding-left:0px;padding-right:0px;padding-bottom:5px; min-height: 270.90px;background-color:#f9f9f9;">
+                                            <div class="col-lg-4 text-left">
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class="col-lg-4">
+                                                        <label class="control-label" style="padding-top:10px;padding-left:10px;font-weight:bold">Account Profile</label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class=" col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:small;color:lightgray">Title:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="text:FirstName" style="font-size:11px"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class=" col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:small;color:lightgray">E-mail address:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="text:Email" style="font-size:11px"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class=" col-lg-4 text-right" style="font-size:11px">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:small;color:lightgray">Mobile no:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="text:Mobile" style="font-size:11px"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class=" col-lg-4 text-right" style="font-size:11px">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:small;color:lightgray">Date of birth:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="dateString:DateOfBirth,datePattern: 'DD/MM/YYYY'" style="font-size:11px"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class=" col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:small;color:lightgray">ID no:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="text:PassportNumber" style="font-size:11px"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class=" col-lg-4 text-right">
+                                                        <label style="font-size:small;color:lightgray">Logo:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <img id="vehicleImage" alt="" style="width: auto;height:80px" data-bind="attr:{src:Logo.startsWith('http') ? Logo : '/' + Logo }" />
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-4 text-right">
-
+                                            <div class="col-lg-4 text-left">
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class="col-lg-6">
+                                                        <label class="control-label" style="padding-top:10px;padding-left:10px;font-weight:bold">Billing Address</label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class=" col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;font-size:small;color:lightgray">Billing Address 1:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="text:BillingAddressLine1" style="font-size:11px"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class=" col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;font-size:small;color:lightgray">Billing City:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="text:BillingCity" style="font-size:11px"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class=" col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;font-size:small;color:lightgray">Billing State:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="text:BillingState" style="font-size:11px"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class=" col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;font-size:small;color:lightgray">Billing Country:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label style="font-size:11px">Test Country</label>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="col-lg-6" data-bind="foreach:pqAnswers">
-                                                <p id="txtPages" data-bind="text: AnswerString">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-9">
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Survey Group</label>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <input type="text" readonly class="form-control" data-bind="value:profileGroupId">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-9">
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Question Type</label>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <input type="text" readonly class="form-control" data-bind="value:type()==1?'Single Choice':'Multiple Choice'">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-9">
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Deliver Count</label>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <input type="text" readonly class="form-control" data-bind="value:deliverCount">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-9">
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float defaultImgUploadImageBtn" >Submission Date</label>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <label class="form-control" data-bind="dateString:submissionDate,datePattern: 'DD/MM/YYYY'">
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12 col-md-12 col-sm-12">
-                                        <div class="modal-header" style="padding-left:0px;padding-right:0px;padding-bottom:5px; min-height: 128.90px">
-                                            <div class="col-lg-9">
-                                                <div class="form-group">
+                                            <div class="col-lg-4 text-left">
+                                                <div class="form-group" style="margin-bottom:0px;">
                                                     <div class="col-lg-4 text-right">
-                                                        @*<div class="bs-example-tooltips tooltip-float-width">
+                                                        <label class="control-label" style="padding-top:10px;padding-left:10px;font-size:11px;font-size:small;color:lightgray">Business Name:</label>
+                                                    </div>
+                                                    <div class="col-lg-8" style="padding-top:10px;">
+                                                        <label data-bind="text:CompanyName" style="font-size:11px"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class="col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;font-size:small;color:lightgray">Website:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <a data-bind="text:WebsiteLink,attr: { href: WebsiteLink }" target="_blank" style="font-size:11px"></a>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class="col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;font-size:small;color:lightgray">Sale phone no:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="text:SalesPhone" style="font-size:11px"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class="col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;font-size:small;color:lightgray">Billing E-mail:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="text:BillingEmail" style="font-size:11px"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class="col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;font-size:small;color:lightgray">Billing phone no:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="text:BillingPhone" style="font-size:11px"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class="col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;font-size:small;color:lightgray">Company Type:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="text:CompanyType" style="font-size:11px"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class="col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;font-size:11px;font-size:small;color:lightgray">Company Reg No:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="text:CompanyRegistrationNo" style="font-size: 11px"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class="col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;font-size:small;color:lightgray">Sales Tex No:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="text:VatNumber" style="font-size:11px"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class="col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;font-size:small;color:lightgray">B.Start Date:</label>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <label data-bind="dateString:BusinessStartDate,datePattern: 'DD/MM/YYYY'" style="font-size:11px"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class="col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;font-size:small;color:lightgray">Credit Card:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="text:StripeCustomerId==null ?'No':'Yes'" style="font-size:11px"></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div data-bind="with:selectedProfileQuestion">
+                                        <div class="col-lg-9">
+                                            <div class="form-group">
+                                                <div class="col-lg-4 text-right">
+                                                    <label class="control-label text-right tooltip-float">Question</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" readonly class="form-control" data-bind="value:question">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <div class="form-group">
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class="col-lg-4 text-campaign-left  Float-Left">
+                                                        <label class="control-label text-right tooltip-float floatNone" style="float:left !important;    margin-left: 6px; ">Answer List</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 text-right">
+
+                                                </div>
+                                                <div class="col-lg-6" data-bind="foreach:pqAnswers">
+                                                    <p id="txtPages" data-bind="text: AnswerString">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <div class="form-group">
+                                                <div class="col-lg-4 text-right">
+                                                    <label class="control-label text-right tooltip-float">Survey Group</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" readonly class="form-control" data-bind="value:profileGroupId">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <div class="form-group">
+                                                <div class="col-lg-4 text-right">
+                                                    <label class="control-label text-right tooltip-float">Question Type</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" readonly class="form-control" data-bind="value:type()==1?'Single Choice':'Multiple Choice'">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <div class="form-group">
+                                                <div class="col-lg-4 text-right">
+                                                    <label class="control-label text-right tooltip-float">Deliver Count</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" readonly class="form-control" data-bind="value:deliverCount">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <div class="form-group">
+                                                <div class="col-lg-4 text-right">
+                                                    <label class="control-label text-right tooltip-float defaultImgUploadImageBtn">Submission Date</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <label class="form-control" data-bind="dateString:submissionDate,datePattern: 'DD/MM/YYYY'">
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <div style="padding-left:0px;padding-right:0px;padding-bottom:5px; padding:15px; min-height: 128.90px;background-color:#f9f9f9">
+                                                <div class="col-lg-9">
+                                                    <div class="form-group">
+                                                        <div class="col-lg-4 text-right">
+                                                            @*<div class="bs-example-tooltips tooltip-float-width">
                                     <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
                                         <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                     </a>
                                 </div>*@
-                                                        <label class="control-label text-right tooltip-float">Rejection Reason</label>
-                                                    </div>
-                                                    <div class="col-lg-6">
-                                                        <textarea placeholder="Enter rejection reason " style="resize: none" data-bind="value:rejectedReason" class="form-control"></textarea>
-                                                        @*<input type="text" placeholder="Enter rejection reason " data-bind="value:rejectedReason" class="form-control">*@
+                                                            <label class="control-label text-right tooltip-float">Rejection Reason</label>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <textarea placeholder="Enter rejection reason " style="resize: none" data-bind="value:rejectedReason" class="form-control"></textarea>
+                                                            @*<input type="text" placeholder="Enter rejection reason " data-bind="value:rejectedReason" class="form-control">*@
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-9">
-                                                <div class="form-group">
-                                                    <div class="col-lg-4 text-right">
+                                                <div class="col-lg-9">
+                                                    <div class="form-group">
+                                                        <div class="col-lg-4 text-right">
 
-                                                    </div>
-                                                    <div class="col-lg-6">
-                                                        <button class="btn  btn-success" id="saveBtn" data-bind="click :$root.onApprovePq,visible:rejectedReason()==null ||rejectedReason()==''">Approve</button>
-                                                        <button class="btn  btn-danger" id="delbtn" data-bind="click:$root.onRejectPQ ,enable: $root.hasChangesOnPQ, css: { ' btn-danger': $root.hasChangesOnPQ }">Reject</button>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <button class="btn  btn-success" id="saveBtn" data-bind="click :$root.onApprovePq,visible:rejectedReason()==null ||rejectedReason()==''">Approve</button>
+                                                            <button class="btn  btn-danger" id="delbtn" data-bind="click:$root.onRejectPQ ,enable: $root.hasChangesOnPQ, css: { ' btn-danger': $root.hasChangesOnPQ }">Reject</button>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
                                             </div>
                                         </div>
+                                    </div>
                                         </div>
                                     </div>
                                 </div>

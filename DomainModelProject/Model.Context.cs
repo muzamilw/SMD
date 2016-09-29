@@ -239,5 +239,78 @@ namespace DomainModelProject
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetRevenueOverTime_Result>("GetRevenueOverTime", companyIdParameter, dateFromParameter, dateToParameter, granularityParameter);
         }
+    
+        public virtual ObjectResult<GetSurvayQestionsAnswered_Result> GetSurvayQestionsAnswered(Nullable<System.DateTime> dateFrom, Nullable<System.DateTime> dateTo, Nullable<int> granularity)
+        {
+            var dateFromParameter = dateFrom.HasValue ?
+                new ObjectParameter("DateFrom", dateFrom) :
+                new ObjectParameter("DateFrom", typeof(System.DateTime));
+    
+            var dateToParameter = dateTo.HasValue ?
+                new ObjectParameter("DateTo", dateTo) :
+                new ObjectParameter("DateTo", typeof(System.DateTime));
+    
+            var granularityParameter = granularity.HasValue ?
+                new ObjectParameter("Granularity", granularity) :
+                new ObjectParameter("Granularity", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetSurvayQestionsAnswered_Result>("GetSurvayQestionsAnswered", dateFromParameter, dateToParameter, granularityParameter);
+        }
+    
+        public virtual int getApprovedCampaignsOverTime(Nullable<System.DateTime> dateFrom, Nullable<System.DateTime> dateTo, Nullable<int> granularity)
+        {
+            var dateFromParameter = dateFrom.HasValue ?
+                new ObjectParameter("DateFrom", dateFrom) :
+                new ObjectParameter("DateFrom", typeof(System.DateTime));
+    
+            var dateToParameter = dateTo.HasValue ?
+                new ObjectParameter("DateTo", dateTo) :
+                new ObjectParameter("DateTo", typeof(System.DateTime));
+    
+            var granularityParameter = granularity.HasValue ?
+                new ObjectParameter("Granularity", granularity) :
+                new ObjectParameter("Granularity", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("getApprovedCampaignsOverTime", dateFromParameter, dateToParameter, granularityParameter);
+        }
+    
+        public virtual ObjectResult<GetDealMetric_Result> GetDealMetric()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetDealMetric_Result>("GetDealMetric");
+        }
+    
+        public virtual ObjectResult<GetSurvayCardsAnswered_Result> GetSurvayCardsAnswered(Nullable<System.DateTime> dateFrom, Nullable<System.DateTime> dateTo, Nullable<int> granularity)
+        {
+            var dateFromParameter = dateFrom.HasValue ?
+                new ObjectParameter("DateFrom", dateFrom) :
+                new ObjectParameter("DateFrom", typeof(System.DateTime));
+    
+            var dateToParameter = dateTo.HasValue ?
+                new ObjectParameter("DateTo", dateTo) :
+                new ObjectParameter("DateTo", typeof(System.DateTime));
+    
+            var granularityParameter = granularity.HasValue ?
+                new ObjectParameter("Granularity", granularity) :
+                new ObjectParameter("Granularity", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetSurvayCardsAnswered_Result>("GetSurvayCardsAnswered", dateFromParameter, dateToParameter, granularityParameter);
+        }
+    
+        public virtual ObjectResult<getActiveCampaignsOverTime_Result> getActiveCampaignsOverTime(Nullable<System.DateTime> dateFrom, Nullable<System.DateTime> dateTo, Nullable<int> granularity)
+        {
+            var dateFromParameter = dateFrom.HasValue ?
+                new ObjectParameter("DateFrom", dateFrom) :
+                new ObjectParameter("DateFrom", typeof(System.DateTime));
+    
+            var dateToParameter = dateTo.HasValue ?
+                new ObjectParameter("DateTo", dateTo) :
+                new ObjectParameter("DateTo", typeof(System.DateTime));
+    
+            var granularityParameter = granularity.HasValue ?
+                new ObjectParameter("Granularity", granularity) :
+                new ObjectParameter("Granularity", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getActiveCampaignsOverTime_Result>("getActiveCampaignsOverTime", dateFromParameter, dateToParameter, granularityParameter);
+        }
     }
 }

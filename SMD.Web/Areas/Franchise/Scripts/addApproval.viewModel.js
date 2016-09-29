@@ -13,15 +13,17 @@ define("FranchiseDashboard/addApproval.viewModel",
                     campaigns = ko.observableArray([]),
                     //pager
                     pager = ko.observable(),
+                    selectedCompany = ko.observable(),
                     //sorting
                     sortOn = ko.observable(5),
+                    adType = ko.observable(1),
                     //Assending  / Desending
                     sortIsAsc = ko.observable(true),
                     // Controlls editor visibility 
                     isEditorVisible = ko.observable(false),
                     isShowCopounMode = ko.observable(false),
                     // variables 
-                    lblPageTitle = ko.observable("Ad Campaigns For Approval"),
+                    lblPageTitle = ko.observable(null),
                     //selected AdCampaign
                     selectedCampaign = ko.observable(),
                     //Get AdCampaign
@@ -32,7 +34,9 @@ define("FranchiseDashboard/addApproval.viewModel",
                                 PageNo: pager().currentPage(),
                                 SortBy: sortOn(),
                                 IsAsc: sortIsAsc(),
-                                ShowCoupons: isShowCopounMode()
+                                ShowCoupons: isShowCopounMode(),
+                                status: adType(),
+
                             },
                             {
                                 success: function(data) {
@@ -59,11 +63,16 @@ define("FranchiseDashboard/addApproval.viewModel",
                         //confirmation.show();
                         selectedCampaign(undefined);
                         isEditorVisible(false);
+                        $("#topArea").css("display", "block");
+                        $("#divApprove").css("display", "block");
                     },
                     // On editing of existing AdCampaign
                     onEditCampaign = function (item) {
+                        $("#topArea").css("display", "none");
+                        $("#divApprove").css("display", "none");
                         selectedCampaign(item);
-                        isEditorVisible(true);
+                        getCompanyData(item);
+                       // isEditorVisible(true);
                     },                  
                     // Save AdCampaign 
                     onSaveCampaign = function () {
@@ -96,7 +105,25 @@ define("FranchiseDashboard/addApproval.viewModel",
                                 toastr.error("Failed to save!");
                             }
                         });
-                    },                   
+                    },
+                      getCompanyData = function (selectedItem) {
+                          dataservice.getCompanyData(
+                       {
+                           companyId: selectedItem.companyId,
+                           userId: selectedItem.userID,
+                       },
+                       {
+                           success: function (comData) {
+                               selectedCompany(comData);
+                               isEditorVisible(true);
+
+                           },
+                           error: function () {
+                               toastr.error("Failed to load Company");
+                           }
+                       });
+
+                      },
                     // Has Changes
                     hasChangesOnCampaign = ko.computed(function() {
                         if (selectedCampaign() == undefined) {
@@ -139,10 +166,19 @@ define("FranchiseDashboard/addApproval.viewModel",
                         pager(pagination.Pagination({ PageSize: 10 }, campaigns, getCampaigns));
                         var mode = getParameter(window.location.href, "mode"); 
                         if (mode == 2) {
-                            lblPageTitle("Coupons For Approval");
                             isShowCopounMode(true);
                         }
                         // First request for LV
+                        var type = $('#typeParam').val();
+                        if (type == 1) {
+                            lblPageTitle("Ad Campaigns For Approval");
+                            $("#btnVideaAddApprov").css("background-color", "#34b9c7");
+                        }
+                        else {
+                            lblPageTitle("Display Ads For Approval");
+                            $("#btnsponserGameApprov").css("background-color", "#34b9c7");
+                        }
+                        adType(type);
                         getCampaigns();
                     };
                 return {
@@ -161,7 +197,9 @@ define("FranchiseDashboard/addApproval.viewModel",
                     hasChangesOnCampaign: hasChangesOnCampaign,
                     onRejectCampaign: onRejectCampaign,
                     lblPageTitle: lblPageTitle,
-                    isShowCopounMode: isShowCopounMode
+                    adType:adType,
+                    isShowCopounMode: isShowCopounMode,
+                    selectedCompany: selectedCompany,
                 };
             })()
         };

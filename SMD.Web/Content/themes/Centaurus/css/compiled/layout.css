@@ -1,5 +1,5 @@
 html,body {
-    font-family: 'Open Sans',sans-serif;
+    font-family: 'PT Sans', sans-serif;
     -webkit-font-smoothing: antialiased;
 }
 
@@ -9,7 +9,7 @@ body {
 }
 
 h1,h2,h3,h4,h5,h6 {
-    font-family: 'Open Sans','Titillium Web',Geneva,sans-serif;
+    font-family: 'PT Sans', sans-serif;
     font-weight: 300;
 }
 
@@ -1048,6 +1048,12 @@ blockquote.pull-right:before {
     -webikt-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
+   
+}
+
+.main-box-subpage {
+      padding:50px;
+    padding-top:20px;
 }
 
 .main-box h2 {
@@ -1059,6 +1065,10 @@ blockquote.pull-right:before {
 
 .main-box.no-header {
     padding-top: 20px;
+}
+
+.main-box.header {
+    padding: 20px;
 }
 
 .main-box .main-box-header {

@@ -2230,12 +2230,22 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="getActiveCampaignsOverTime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DateFrom" Type="datetime" Mode="In" />
+          <Parameter Name="DateTo" Type="datetime" Mode="In" />
+          <Parameter Name="Granularity" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetActiveVSNewUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetAdminDashBoardInsights" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetAds" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserID" Type="nvarchar" Mode="In" />
           <Parameter Name="FromRow" Type="int" Mode="In" />
           <Parameter Name="ToRow" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getApprovedCampaignsOverTime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DateFrom" Type="datetime" Mode="In" />
+          <Parameter Name="DateTo" Type="datetime" Mode="In" />
+          <Parameter Name="Granularity" Type="int" Mode="In" />
         </Function>
         <Function Name="GetAudience" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ageFrom" Type="int" Mode="In" />
@@ -2288,6 +2298,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
         <Function Name="GetCouponsByCompanyId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CompanyId" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="GetDealMetric" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetProducts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserID" Type="nvarchar" Mode="In" />
           <Parameter Name="FromRow" Type="int" Mode="In" />
@@ -2295,6 +2306,16 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
         </Function>
         <Function Name="GetRevenueOverTime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CompanyId" Type="int" Mode="In" />
+          <Parameter Name="DateFrom" Type="datetime" Mode="In" />
+          <Parameter Name="DateTo" Type="datetime" Mode="In" />
+          <Parameter Name="Granularity" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetSurvayCardsAnswered" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DateFrom" Type="datetime" Mode="In" />
+          <Parameter Name="DateTo" Type="datetime" Mode="In" />
+          <Parameter Name="Granularity" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetSurvayQestionsAnswered" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DateFrom" Type="datetime" Mode="In" />
           <Parameter Name="DateTo" Type="datetime" Mode="In" />
           <Parameter Name="Granularity" Type="int" Mode="In" />
@@ -3467,6 +3488,27 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             <End Role="Currency" EntitySet="Currencies" />
             <End Role="Country" EntitySet="Countries" />
           </AssociationSet>
+          <FunctionImport Name="getApprovedCampaignsOverTime" ReturnType="Collection(DomainModels.getApprovedCampaignsOverTime_Result)">
+            <Parameter Name="DateFrom" Mode="In" Type="DateTime" />
+            <Parameter Name="DateTo" Mode="In" Type="DateTime" />
+            <Parameter Name="Granularity" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetSurvayQestionsAnswered">
+            <Parameter Name="DateFrom" Mode="In" Type="DateTime" />
+            <Parameter Name="DateTo" Mode="In" Type="DateTime" />
+            <Parameter Name="Granularity" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetDealMetric" ReturnType="Collection(DomainModels.GetDealMetric_Result)" />
+          <FunctionImport Name="GetSurvayCardsAnswered" ReturnType="Collection(DomainModels.GetSurvayCardsAnswered_Result)">
+            <Parameter Name="DateFrom" Mode="In" Type="DateTime" />
+            <Parameter Name="DateTo" Mode="In" Type="DateTime" />
+            <Parameter Name="Granularity" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getActiveCampaignsOverTime" ReturnType="Collection(DomainModels.getActiveCampaignsOverTime_Result)">
+            <Parameter Name="DateFrom" Mode="In" Type="DateTime" />
+            <Parameter Name="DateTo" Mode="In" Type="DateTime" />
+            <Parameter Name="Granularity" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -6265,6 +6307,31 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="getApprovedCampaignsOverTime_Result">
+          <Property Type="String" Name="Granual" Nullable="false" MaxLength="37" />
+          <Property Type="Int32" Name="GameStats" Nullable="false" />
+          <Property Type="Int32" Name="videoStats" Nullable="false" />
+          <Property Type="Int32" Name="dealStats" Nullable="false" />
+          <Property Type="Int32" Name="pQStats" Nullable="false" />
+          <Property Type="Int32" Name="sQStats" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetDealMetric_Result">
+          <Property Type="Int32" Name="ViewStats" Nullable="true" />
+          <Property Type="Int32" Name="LandingPageStats" Nullable="true" />
+          <Property Type="String" Name="Granual" Nullable="false" MaxLength="8" />
+        </ComplexType>
+        <ComplexType Name="GetSurvayCardsAnswered_Result">
+          <Property Type="String" Name="Granual" Nullable="false" MaxLength="41" />
+          <Property Type="Int32" Name="SCStats" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="getActiveCampaignsOverTime_Result">
+          <Property Type="String" Name="Granual" Nullable="false" MaxLength="33" />
+          <Property Type="Int32" Name="GameStats" Nullable="false" />
+          <Property Type="Int32" Name="videoStats" Nullable="false" />
+          <Property Type="Int32" Name="dealStats" Nullable="false" />
+          <Property Type="Int32" Name="pQStats" Nullable="false" />
+          <Property Type="Int32" Name="sQStats" Nullable="false" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -7766,6 +7833,48 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="getApprovedCampaignsOverTime" FunctionName="SMDModel.Store.getApprovedCampaignsOverTime">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.getApprovedCampaignsOverTime_Result">
+                <ScalarProperty Name="Granual" ColumnName="Granual" />
+                <ScalarProperty Name="GameStats" ColumnName="GameStats" />
+                <ScalarProperty Name="videoStats" ColumnName="videoStats" />
+                <ScalarProperty Name="dealStats" ColumnName="dealStats" />
+                <ScalarProperty Name="pQStats" ColumnName="pQStats" />
+                <ScalarProperty Name="sQStats" ColumnName="sQStats" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetSurvayQestionsAnswered" FunctionName="SMDModel.Store.GetSurvayQestionsAnswered" />
+          <FunctionImportMapping FunctionImportName="GetDealMetric" FunctionName="SMDModel.Store.GetDealMetric">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.GetDealMetric_Result">
+                <ScalarProperty Name="ViewStats" ColumnName="ViewStats" />
+                <ScalarProperty Name="LandingPageStats" ColumnName="LandingPageStats" />
+                <ScalarProperty Name="Granual" ColumnName="Granual" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetSurvayCardsAnswered" FunctionName="SMDModel.Store.GetSurvayCardsAnswered" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.GetSurvayCardsAnswered_Result">
+                <ScalarProperty Name="Granual" ColumnName="Granual" />
+                <ScalarProperty Name="SCStats" ColumnName="SCStats" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getActiveCampaignsOverTime" FunctionName="SMDModel.Store.getActiveCampaignsOverTime">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.getActiveCampaignsOverTime_Result">
+                <ScalarProperty Name="Granual" ColumnName="Granual" />
+                <ScalarProperty Name="GameStats" ColumnName="GameStats" />
+                <ScalarProperty Name="videoStats" ColumnName="videoStats" />
+                <ScalarProperty Name="dealStats" ColumnName="dealStats" />
+                <ScalarProperty Name="pQStats" ColumnName="pQStats" />
+                <ScalarProperty Name="sQStats" ColumnName="sQStats" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

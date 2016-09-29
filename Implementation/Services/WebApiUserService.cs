@@ -1522,7 +1522,7 @@ namespace SMD.Implementation.Services
             return new UserProfileBaseResponseModel
             {
                Countries = countryRepository.GetAllCountries().ToList(),
-               Cities = company != null? cityRepository.GetAllCitiesOfCountry(company.BillingCountryId??0).ToList(): null,
+               //Cities = company != null? cityRepository.GetAllCitiesOfCountry(company.BillingCountryId??0).ToList(): null,
                Industries = industryRepository.GetAll().ToList(),
                Educations = educationRepository.GetAllEducations().ToList(),
                UserRoles = this.RoleManager.Roles.Where(g => g.Id.StartsWith("EndUser")).ToList() //   manageUserRepository.getUserRoles().ToList()
