@@ -69,7 +69,7 @@
               creditCardUi = ko.computed(function () {
                   return creditCard() != undefined ? 'Linked | ' + creditCard() + '' : 'Not Linked | Link with Stripe Id';
                   }),
-              isSubmit = ko.observable(true),
+              isSubmit = ko.observable(false),
               //-------------------
                 
                 //FacebookHandleui = ko.computed({

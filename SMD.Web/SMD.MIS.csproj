@@ -388,6 +388,7 @@
     <Compile Include="Areas\Api\Controllers\ApproveProfileQuestionAnsController.cs" />
     <Compile Include="Areas\Api\Controllers\ApproveProfileQuestionController.cs" />
     <Compile Include="Areas\Api\Controllers\BranchCategoryController.cs" />
+    <Compile Include="Areas\Api\Controllers\CompanyDetailController.cs" />
     <Compile Include="Areas\Api\Controllers\DashboardInsightController.cs" />
     <Compile Include="Areas\Api\Controllers\GetCitiesController.cs" />
     <Compile Include="Areas\Api\Controllers\GetCompanyController.cs" />

@@ -19,6 +19,7 @@ define("FranchiseDashboard/Coupons.viewModel",
                     isEditorVisible = ko.observable(false),
                     isShowCopounMode = ko.observable(false),
                     selectedCoupon = ko.observable(),
+                    selectedCompany = ko.observable(),
                     onEditCoupon = function (item) {
                         $("#topArea").css("display", "none");
                         $("#divApprove").css("display", "none");
@@ -28,7 +29,8 @@ define("FranchiseDashboard/Coupons.viewModel",
                             success: function (data) {
                                 selectedCoupon(item);
                                 selectedCoupon().currencyId(data.CurrencyCode)
-                                isEditorVisible(true);
+                                getCompanyData(item);
+                               // isEditorVisible(true);
                                 //getCouponCategories(item.couponId);
 
                                
@@ -36,7 +38,7 @@ define("FranchiseDashboard/Coupons.viewModel",
                             },
                             error: function () {
                                 selectedCoupon(item);
-                                isEditorVisible(true);
+                                getCompanyData(item);
                                 //toastr.error("Failed to load Currency");
                             }
                         });
@@ -91,7 +93,7 @@ define("FranchiseDashboard/Coupons.viewModel",
                                 }
                             });
                     },
-                   onApproveCoupon = function () {
+                    onApproveCoupon = function () {
                              confirmation.messageText("Do you want to approve this Coupon ? System will attempt to collect payment and generate invoice");
                              confirmation.show();
                              confirmation.afterCancel(function () {
@@ -103,7 +105,7 @@ define("FranchiseDashboard/Coupons.viewModel",
                                  toastr.success("Approved Successfully.");
                              });
                          },
-                      onSaveCoupon = function () {
+                    onSaveCoupon = function () {
 
                           var couponId = selectedCoupon().couponId();
                           dataservice.saveCoupon(selectedCoupon().convertToServerData(), {
@@ -136,13 +138,13 @@ define("FranchiseDashboard/Coupons.viewModel",
                               }
                           });
                       },
-                       hasChangesOnCoupon = ko.computed(function () {
+                    hasChangesOnCoupon = ko.computed(function () {
                            if (selectedCoupon() == undefined) {
                                 return false;
                             }
                            return (selectedCoupon().hasChanges());
                         }),
-                      onRejectCoupon = function () {
+                    onRejectCoupon = function () {
                           if (selectedCoupon().rejectedReason() == undefined || selectedCoupon().rejectedReason() == "" || selectedCoupon().rejectedReason() == " ") {
                                  toastr.info("Please add rejection reason!");
                                  return false;
@@ -150,7 +152,26 @@ define("FranchiseDashboard/Coupons.viewModel",
                              selectedCoupon().isApproved(false);
                              onSaveCoupon();
                              toastr.success("Rejected Successfully.");
+                    },
+                    getCompanyData = function (selectedItem)
+                    {
+                        dataservice.getCompanyData(
+                     {
+                         companyId: selectedItem.companyId,
+                         userId: selectedItem.userID,
+                     },
+                     {
+                         success: function (comData) {
+                             selectedCompany(comData);
+                             isEditorVisible(true);
+                         
                          },
+                         error: function () {
+                             toastr.error("Failed to load Company");
+                         }
+                     });
+
+                    },
 
                     // Initialize the view model
                     initialize = function (specifiedView) {
@@ -179,6 +200,7 @@ define("FranchiseDashboard/Coupons.viewModel",
                     closeEditDialog: closeEditDialog,
                     onApproveCoupon:onApproveCoupon,
                     onSaveCoupon: onSaveCoupon,
+                    selectedCompany:selectedCompany,
                     onRejectCoupon: onRejectCoupon,
                     hasChangesOnCoupon: hasChangesOnCoupon,
 
