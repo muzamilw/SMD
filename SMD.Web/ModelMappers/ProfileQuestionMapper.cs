@@ -349,7 +349,9 @@ namespace SMD.MIS.ModelMappers
                   EducationID = source.EducationID,
                   Education = EducationName,
                   AdCampaignAnswer = source.AdCampaignAnswer,
-                  AdCampaignID = source.AdCampaignID
+                  AdCampaignID = source.AdCampaignID,
+                  LinkedSQAnswer = source.LinkedSQAnswer,
+                  LinkedSQID = source.LinkedSQID
               };
           }
 

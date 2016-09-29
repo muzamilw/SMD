@@ -537,19 +537,24 @@ define("pQuestion/pQuestion.viewModel",
 
 
 
-                                   _.each(answers[0].ProfileQuestion.ProfileQuestionTargetCriteria, function (itemtemp, i) {
-
+                                    _.each(answers[0].ProfileQuestion.ProfileQuestionTargetCriteria, function (itemtemp, i) {
                                         selectedQuestion().ProfileQuestionTargetCriteria.push(new model.ProfileQuestionTargetCriteria.Create({
                                            Industry: itemtemp.Industry,
                                            IndustryId: itemtemp.IndustryID,
                                            IncludeorExclude: itemtemp.IncludeorExclude == true ? 1 : 0,
                                            Type: itemtemp.Type,
-                                           PqId: itemtemp.PQID,
+                                           PQID: itemtemp.PQID,
                                            questionString:itemtemp.questionString,
                                            answerString: itemtemp.answerString,
                                            PQQuestionID: itemtemp.PQQuestionID,
                                            ID: itemtemp.ID,
-                                           AdCampaignID: itemtemp.AdCampaignID
+                                           AdCampaignID: itemtemp.AdCampaignID,
+                                           LinkedSQID: itemtemp.LinkedSQID,
+                                           LinkedSQAnswer: itemtemp.LinkedSQAnswer,
+                                           PQAnswerID: itemtemp.PQAnswerID,
+                                           AdCampaignAnswer: itemtemp.AdCampaignAnswer
+
+
                                        }));
                                    });
                                    selectedQuestion().reset();
@@ -835,13 +840,11 @@ define("pQuestion/pQuestion.viewModel",
 
                                 }
                             });
-
                             selectedCriteria(item);
                         }
                         else if (item.Type() == "2") {
-                            debugger;
                             if (surveyquestionList().length == 0) {
-                                dataservice.getBaseData({
+                                dataservice.getFilterBaseData({
                                     RequestId: 6,
                                     QuestionId: 0,
                                 }, {
@@ -854,7 +857,7 @@ define("pQuestion/pQuestion.viewModel",
                                             surveyquestionList.valueHasMutated();
 
                                             var matchSurveyQuestion = ko.utils.arrayFirst(surveyquestionList(), function (survey) {
-                                                return survey.SQID == item.SQID();
+                                                return survey.SQID == item.LinkedSQID();
                                             });
                                             selectedCriteria(item);
                                             selectedCriteria().profileQuestRightImageSrc(matchSurveyQuestion.LeftPicturePath);
@@ -886,7 +889,7 @@ define("pQuestion/pQuestion.viewModel",
                             selectedCriteria(item);
 
                             if (myQuizQuestions().length == 0) {
-                                dataservice.getBaseData({
+                                dataservice.getFilterBaseData({
                                     RequestId: 12,
                                     QuestionId: 0,
                                 }, {
@@ -896,10 +899,10 @@ define("pQuestion/pQuestion.viewModel",
                                             ko.utils.arrayPushAll(myQuizQuestions(), data.AdCampaigns);
                                             myQuizQuestions.valueHasMutated();
                                             var matchSurveyQuestion = ko.utils.arrayFirst(myQuizQuestions(), function (survey) {
-                                                return survey.CampaignId == item.QuizCampaignId();
+                                                return survey.CampaignId == item.AdCampaignID();
                                             });
-                                            selectedCriteria().surveyQuestLeftImageSrc(matchSurveyQuestion.Answer1);
-                                            selectedCriteria().surveyQuestRightImageSrc(matchSurveyQuestion.Answer2);
+                                            selectedCriteria().profileQuestLeftImageSrc(matchSurveyQuestion.Answer1);
+                                            selectedCriteria().profileQuestRightImageSrc(matchSurveyQuestion.Answer2);
                                         }
 
                                     },
@@ -909,10 +912,10 @@ define("pQuestion/pQuestion.viewModel",
                                 });
                             } else {
                                 var matchSurveyQuestion = ko.utils.arrayFirst(myQuizQuestions(), function (survey) {
-                                    return survey.CampaignId == item.QuizCampaignId();
+                                    return survey.CampaignId == item.AdCampaignID();
                                 });
-                                selectedCriteria().surveyQuestLeftImageSrc(matchSurveyQuestion.Answer1);
-                                selectedCriteria().surveyQuestRightImageSrc(matchSurveyQuestion.Answer2);
+                                selectedCriteria().profileQuestLeftImageSrc(matchSurveyQuestion.Answer1);
+                                selectedCriteria().profileQuestRightImageSrc(matchSurveyQuestion.Answer2);
                                 // adjust item
                             }
                         }
@@ -1541,7 +1544,6 @@ define("pQuestion/pQuestion.viewModel",
                            //    });
                            //}
                                 //AditionalCriteriaMode(3);
-                                debugger;
                                 isNewCriteria(true);
                                 var objProfileCriteria = new model.ProfileQuestionTargetCriteria();
 
