@@ -81,6 +81,8 @@ namespace DomainModelProject
         public Nullable<System.DateTime> CreationDateTime { get; set; }
         public Nullable<int> NoOfBranches { get; set; }
         public string BillingAddressName { get; set; }
+        public Nullable<bool> IsDeleted { get; set; }
+        public Nullable<System.DateTime> DeleteDate { get; set; }
     
         public virtual ICollection<Account> Accounts { get; set; }
         public virtual ICollection<AdCampaign> AdCampaigns { get; set; }

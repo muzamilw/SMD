@@ -16,51 +16,48 @@ define("analytic/analytic.viewModel",
 					selectedGranualforRevenue = ko.observable(1),
 					RevenueOverTimeData = ko.observable([]),
 					intializeDashboardInsightsData = function(){
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Active App Users"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("New App Users"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Total Deal subscribers"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("New Deal subscribers"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Cancelled deal subscribers"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Users who logged in"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("New Users who registered"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Advertisers who created a NEW campaign"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("New Video Ad campaigns"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("New Display Ad campaigns"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("New Survey campaigns"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("New Poll campaigns"));
 						DashboardInsightsData.push(new model.DashboardInsightsModel("",true));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("#Approved Campaigns", true));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Deals Campaigns"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Video Campaigns"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Game Campaigns"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Survey card Campaigns"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Survey question Campaigns"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("# Answered", true));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Video Ads (Ad click charged)"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Display Ads (Ad click charged)"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Surveys"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Polls"));
 						DashboardInsightsData.push(new model.DashboardInsightsModel("",true));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("#Active Campaigns", true));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Deals Campaigns"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Video Campaigns"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Game Campaigns"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Survey card Campaigns"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Survey question Campaigns"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("# Skipped",true));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Video Ads"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Display Ads"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Surveys"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Polls"));
 						DashboardInsightsData.push(new model.DashboardInsightsModel("",true));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Impressions", true));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Deals viewed"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Deals referred to landing pages"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Deals Saved"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Deals Redeemed"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Videos referred to landing pages"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Video Quiz Ad clicks"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Game quiz Ad clicks"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Survey questions answered"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Survey cards answered"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Video ads skipped"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Games skipped"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Survey cards skipped"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Survey question skipped"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("#Conversion to landing pages", true));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Videos Ads"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Display Ads"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Deals"));
 						DashboardInsightsData.push(new model.DashboardInsightsModel("",true));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Revenue", true));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Video Ad revenue"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Display Ad revenue"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Deal Subscription revenue"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Survey card revenue"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Survey Question revenue"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("All Revenue (income from stripe)"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Payout", true));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("to PayPal"));
-						
+						DashboardInsightsData.push(new model.DashboardInsightsModel("# Rewarded", true));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Video Ads"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Display Ads"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Surveys"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Polls"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Deals viewed (Opened)"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("",true));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("$ Revenue by Campaign types", true));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Video Ads"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Display Ads"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Surveys"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Polls"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Deals"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("",true));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("$ Total Revenue (Stripe)"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("",true));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("$ Total Payouts (PayPal)"));
 						getDashboardInsights();
 					},
 					getDashboardInsights = function () {
@@ -122,7 +119,7 @@ define("analytic/analytic.viewModel",
                             });
                     },
                
-                    getAnalytic = function () {
+                    getActiveUsers = function () {
                         dataservice.getactiveuser(
                             {
                              },
@@ -169,13 +166,13 @@ define("analytic/analytic.viewModel",
 						analyticFromdate().setMonth(analyticFromdate().getMonth()-1)
                         ko.applyBindings(view.viewModel, view.bindingRoot);
 						intializeDashboardInsightsData();
-						getAnalytic();
+					//	getActiveUsers();
 						getRevenueOverTime();
                     };
                 return {
 
                     initialize: initialize,
-                    getAnalytic: getAnalytic,
+                    getActiveUsers: getActiveUsers,
 					activeUser:activeUser,
 					granularityDropDown:granularityDropDown,
 					analyticFromdate: analyticFromdate,

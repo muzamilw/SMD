@@ -46,7 +46,6 @@ define("common/companyProfile.view",
                 },
                 showChangePassword = function () {
                     $("#ChangePassword").modal("show");
-                    initializeLabelPopovers();
                 },
                  // Hide Company Contact the dialog
                 hideChangePassword = function () {

@@ -914,20 +914,20 @@ SET ANSI_WARNINGS ON
 COMMIT
 BEGIN TRANSACTION
 GO
-CREATE TABLE dbo.EventStatus
+CREATE TABLE dbo.EventStatuses
 	(
 	EventStatus int NOT NULL,
 	EventName nvarchar(100) NULL
 	)  ON [PRIMARY]
 GO
-ALTER TABLE dbo.EventStatus ADD CONSTRAINT
+ALTER TABLE dbo.EventStatuses ADD CONSTRAINT
 	PK_EventStatus PRIMARY KEY CLUSTERED 
 	(
 	EventStatus
 	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 
 GO
-ALTER TABLE dbo.EventStatus SET (LOCK_ESCALATION = TABLE)
+ALTER TABLE dbo.EventStatuses SET (LOCK_ESCALATION = TABLE)
 GO
 COMMIT
 BEGIN TRANSACTION
@@ -956,7 +956,7 @@ ALTER TABLE dbo.CampaignEventHistory ADD CONSTRAINT
 	FK_CampaignEventHistory_EventStatus FOREIGN KEY
 	(
 	EventStatus
-	) REFERENCES dbo.EventStatus
+	) REFERENCES dbo.EventStatuses
 	(
 	EventStatus
 	) ON UPDATE  NO ACTION 
@@ -995,6 +995,49 @@ ALTER TABLE dbo.CampaignEventHistory ADD CONSTRAINT
 	) ON UPDATE  NO ACTION 
 	 ON DELETE  NO ACTION 
 	
+GO
+ALTER TABLE dbo.CampaignEventHistory SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
+
+
+
+
+
+alter table Company add IsDeleted bit
+alter table Company add DeleteDate datetime
+alter table AspNetUsers add Title int
+alter table CompanyBranch add IsDefault bit
+
+
+
+
+
+/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+EXECUTE sp_rename N'dbo.EventStatuses.EventStatus', N'Tmp_EventStatusId', 'COLUMN' 
+GO
+EXECUTE sp_rename N'dbo.EventStatuses.Tmp_EventStatusId', N'EventStatusId', 'COLUMN' 
+GO
+ALTER TABLE dbo.EventStatuses SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+EXECUTE sp_rename N'dbo.CampaignEventHistory.EventStatus', N'Tmp_EventStatusId_1', 'COLUMN' 
+GO
+EXECUTE sp_rename N'dbo.CampaignEventHistory.Tmp_EventStatusId_1', N'EventStatusId', 'COLUMN' 
 GO
 ALTER TABLE dbo.CampaignEventHistory SET (LOCK_ESCALATION = TABLE)
 GO

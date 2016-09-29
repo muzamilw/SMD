@@ -64,6 +64,8 @@ namespace SMD.Models.DomainModels
         public virtual ICollection<ProfileQuestionTargetCriteria> ProfileQuestionTargetCriterias1 { get; set; }
 
         public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }
+
+        public virtual ICollection<CampaignEventHistory> CampaignEventHistories { get; set; }
         
     }
 }

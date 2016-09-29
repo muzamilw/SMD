@@ -646,6 +646,8 @@
                }
                 codeAddress = function () {
 
+                    if (selectedBranch() == undefined)
+                        return;
                     // var address = selectedBranch().branchAddressline1().toLowerCase() + ',' + selectedBranch().branchCity().toLowerCase() + ',' + selectedBranch().branchZipCode() + ',' + selectedBranch().branchState().toLowerCase();
                     var address = selectedBranch().branchAddressline1().toLowerCase() + ' ' + selectedBranch().branchCity() + ' ' + selectedBranch().branchZipCode() + ' ' + selectedBranch().branchState().toLowerCase();
                     geocoder.geocode({

@@ -31,8 +31,8 @@
     @* these two css files are bundled into centaurus now.
             <link rel="stylesheet" href="~/Content/themes/Centaurus/css/libs/fullcalendar.css" type="text/css" />
         <link rel="stylesheet" href="~/Content/themes/Centaurus/css/libs/fullcalendar.print.css" type="text/css" media="print" />*@
-        @Styles.Render("~/Content/themes/Centaurus/css/bundleCentaurus/css")
-        <link href="~/Content/metroUI/css/metro.css" rel="stylesheet" />
+    @Styles.Render("~/Content/themes/Centaurus/css/bundleCentaurus/css")
+    <link href="~/Content/metroUI/css/metro.css" rel="stylesheet" />
     <script src="~/Content/metroUI/js/metro.js"></script>
     @* If Debuggin is Enabled then pick css *@
     @if (HttpContext.Current.IsDebuggingEnabled)
@@ -146,14 +146,14 @@
                                     @if (!String.IsNullOrEmpty(userName))
                                     {
                                         @userName;
-                                             Name = userName;
+                                                 Name = userName;
                                     }
                                     else
                                     {
                                         if (User != null && User.Identity != null)
                                         {
                                             @User.Identity.Name;
-                                                           Name = User.Identity.Name;
+                                                               Name = User.Identity.Name;
                                         }
                                     }
 
@@ -168,16 +168,16 @@
                                 <li><a href="">@MobileNo</a></li>
                                 @*<li style="height:9px;"></li>*@
                                 <li style="display: block;
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-    margin-left: auto;
-    margin-right: auto;
-    border-style: inset;
-    border-width: 1px;"></li>
+                                margin-top: 0.5em;
+                                margin-bottom: 0.5em;
+                                margin-left: auto;
+                                margin-right: auto;
+                                border-style: inset;
+                                border-width: 1px;"></li>
 
                                 <li><a href="">Role : @RoleName</a></li>
-                                <li id="userProfileBinding"><a data-bind="click:showUserProfileDialog">Personal Profile</a></li>
-                                <li id="companyProfileBinding"><a style="cursor: pointer" data-bind="click:showCompanyProfileDialog">Company Profile</a></li>
+                                @*<li id="userProfileBinding"><a data-bind="click:showUserProfileDialog">Personal Profile</a></li>*@
+                                <li id="companyProfileBinding"><a style="cursor: pointer" data-bind="click:showCompanyProfileDialog">Account Settings</a></li>
                                 <li><a href="/User/ManageUser/ManageUsers">Invite colleagues to manage campaigns</a></li>
 
                                 <li><a onclick="OpenBranchLocation();">Branch locations</a></li>
@@ -185,12 +185,12 @@
                                 <li><a onclick="OpenPhraseLibrary();">Phrase library</a></li>
 
                                 <li style="display: block;
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-    margin-left: auto;
-    margin-right: auto;
-    border-style: inset;
-    border-width: 1px;"></li>
+                                margin-top: 0.5em;
+                                margin-bottom: 0.5em;
+                                margin-left: auto;
+                                margin-right: auto;
+                                border-style: inset;
+                                border-width: 1px;"></li>
                                 <li><a href="~/">Analytics and Charts</a></li>
                                 <li><a href="~/Billing/Manage/Invoice">Billing History</a></li>
                                 @*<li class="inlineMenuItem"><a href="~/Billing/Manage/Invoice">&nbsp;&nbsp;View Invoices</a></li>
@@ -406,11 +406,11 @@
                     }
                 </div>
 
-                <div id="bindingUserProfilePartialViews">
-                    @{
-                        Html.RenderPartial("~/Areas/Common/Views/Shared/_UserProfile.cshtml");
-                    }
-                </div>
+                @*<div id="bindingUserProfilePartialViews">
+                        @{
+                            Html.RenderPartial("~/Areas/Common/Views/Shared/_UserProfile.cshtml");
+                        }
+                    </div>*@
 
                 <div id="bindingCompanyProfilePartialViews">
                     @{
@@ -502,11 +502,69 @@
         function OpenBranchLocation() {
             $("#btnBranchLocations").click();
         }
+        
+        
+        var logoImage = "";
+        var bannerImage1 = "";
+        var bannerImage2 = "";
+        var bannerImage3 = "";
+        var mode = 1;
+
+
+        function changeIframeSrc(mode1) {
+            mode = mode1;
+            if (mode1 != 1)
+                mode1 = 2;
+            $("#iframe").attr("src", "/DamImages?mode=" + mode1 + "&selection=true");
+
+            console.log(mode);
+        }
+
+        function iframeLoaded() {
+            var iframeBody = $('body', $('#iframe')[0].contentWindow.document);
+            $(iframeBody).on('click', '.damImgContainer img', function (event) {
+                console.log(mode);
+                if (mode == 1) {
+                    $("#imgLogo").attr("src", this.src).change();
+                    logoImage = this.src;
+                    $(".DamModelclose").click();
+                } else if (mode == 2) {
+                    $("#bannerImage1").attr("src", this.src).change();
+                    bannerImage1 = this.src;
+                    $(".DamModelclose").click();
+                } else if (mode == 3) {
+                    $("#bannerImage2").attr("src", this.src).change();
+                    bannerImage2 = this.src;
+                    $(".close").click();
+                } else if (mode == 4) {
+                    $("#bannerImage3").attr("src", this.src).change();
+                    bannerImage3 = this.src;
+                    $(".close").click();
+                }
+            });
+        }
     </script>
 
 
 
 
     @RenderSection("scripts", required: false)
+    
+    <!-- Modal -->
+    <div class="modal fade" id="damModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="z-index:99999999999;">
+        <div class="modal-dialog" role="document" style="width:1150px;z-index:99999999999;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="DamModelclose" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Select an Image or upload</h4>
+                </div>
+                <div class="modal-body">
+                    <iframe src="~/DamImages?mode=1&selection=true" style="width:100%;height:600px;border:none;" id="iframe"></iframe>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

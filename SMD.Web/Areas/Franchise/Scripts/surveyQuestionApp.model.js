@@ -2,7 +2,7 @@
 
     var // ReSharper disable InconsistentNaming
       Survey = function (sQId, spcQuestion, spcDes, spcDisplayQuestion, spcIsApproved, spcRejectionReason,
-          subDate, spcCreatedBy, address, leftImg, righImg, AmountCharged, AnswerNeeded, Company, ProjectedReach) {
+          subDate, spcCreatedBy, address, leftImg, righImg, AmountCharged, AnswerNeeded, Company, ProjectedReach, CompanyId, UserID) {
           var
               id = ko.observable(sQId),
               question = ko.observable(spcQuestion),
@@ -15,11 +15,12 @@
               creatorAddress = ko.observable(address),
               leftImage = ko.observable(leftImg),
               rightImage = ko.observable(righImg),
-                AmountCharged = ko.observable(AmountCharged),
-                AnswerNeeded = ko.observable(AnswerNeeded),
-                Company = ko.observable(Company),
-
-                ProjectedReach = ko.observable(ProjectedReach),
+              AmountCharged = ko.observable(AmountCharged),
+              AnswerNeeded = ko.observable(AnswerNeeded),
+              Company = ko.observable(Company),
+              ProjectedReach = ko.observable(ProjectedReach),
+              companyId = ko.observable(CompanyId),
+              userID = ko.observable(UserID),
 
               errors = ko.validation.group({
 
@@ -63,7 +64,9 @@
               AmountCharged: AmountCharged,
               AnswerNeeded: AnswerNeeded,
               Company: Company,
-              ProjectedReach:ProjectedReach,
+              ProjectedReach: ProjectedReach,
+              companyId: companyId,
+              userID:userID,
               hasChanges: hasChanges,
               convertToServerData:convertToServerData,
               reset: reset,
@@ -79,7 +82,7 @@
         return new Survey(itemFromServer.SqId, itemFromServer.Question, itemFromServer.Description,
             itemFromServer.DisplayQuestion, itemFromServer.Approved, itemFromServer.RejectionReason,
             itemFromServer.SubmissionDate, itemFromServer.CreatedBy, itemFromServer.CreatorAddress,
-        itemFromServer.LeftPicturePath, itemFromServer.RightPicturePath, itemFromServer.AmountCharged, itemFromServer.AnswerNeeded, itemFromServer.Company, itemFromServer.ProjectedReach);
+        itemFromServer.LeftPicturePath, itemFromServer.RightPicturePath, itemFromServer.AmountCharged, itemFromServer.AnswerNeeded, itemFromServer.Company, itemFromServer.ProjectedReach, itemFromServer.CompanyId, itemFromServer.UserId);
     };
     
     // Function to attain cancel button functionality Survey QUESTION

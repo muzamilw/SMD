@@ -33,6 +33,8 @@ namespace SMD.Models.DomainModels
         public Nullable<int> CompanyId { get; set; }
 
         public Nullable<int> CountryId { get; set; }
+
+        public Nullable<bool> IsDefault { get; set; }
     
         public virtual BranchCategory BranchCategory { get; set; }
         public virtual Company Company { get; set; }

@@ -32,6 +32,11 @@ define("FranchiseDashboard/addApproval.dataservice", function () {
                         dataType: 'json',
                         type: 'POST'
                     });
+                    amplify.request.define('getCompanyData', 'ajax', {
+                        url: '/Api/CompanyDetail',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
                     isInitialized = true;
                 }
             },       
@@ -66,12 +71,22 @@ define("FranchiseDashboard/addApproval.dataservice", function () {
                     error: callbacks.error,
                     data: params
                 });
-            };
+            },
+             getCompanyData = function (params, callbacks) {
+                 initialize();
+                 return amplify.request({
+                     resourceId: 'getCompanyData',
+                     success: callbacks.success,
+                     error: callbacks.error,
+                     data: params
+                 });
+             };
 
         return {
             saveAdCampaign: saveAdCampaign,
             searchAdCampaigns: searchAdCampaigns,
-            sendApprovalRejectionEmail: sendApprovalRejectionEmail
+            sendApprovalRejectionEmail: sendApprovalRejectionEmail,
+            getCompanyData: getCompanyData
         };
     })();
     return dataService;

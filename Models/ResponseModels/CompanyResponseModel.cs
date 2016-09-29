@@ -26,6 +26,8 @@ namespace SMD.Models.ResponseModels
         public string BillingZipCode { get; set; }
         public string BillingPhone { get; set; }
         public string BillingEmail { get; set; }
+        public string BillingCountryName { get; set; }
+
 
         #region Additional User Profile Properties
         
@@ -35,18 +37,23 @@ namespace SMD.Models.ResponseModels
         public string LastName { get; set; }
         public string Email { get; set; }
         public string Mobile { get; set; }
+        public string UserId { get; set; }
 
         public string PassportNumber { get; set; }
         public DateTime? DateOfBirth { get; set; }
         public bool IsReceiveDeals { get; set; }
         public bool IsReceiveWeeklyUpdates { get; set; }
         public bool IsReceiveLatestServices { get; set; }
+
         #endregion
         #region Branch Properties
         public string BranchName { get; set; }
         public int BranchesCount { get; set; }
         public int CompanyType { get; set; }
+        public string CompanyTypeName { get; set; }
         public string AboutUs { get; set; }
+        public string BranchLocationLat { get; set; }
+        public string BranchLocationLong { get; set; }
         #endregion
         #region Money Properties
         public string PayPalId { get; set; }
@@ -54,6 +61,7 @@ namespace SMD.Models.ResponseModels
         public string CompanyRegistrationNo { get; set; }
         public DateTime? BusinessStartDate { get; set; }
         public string VatNumber { get; set; }
+        public long BranchId { get; set; }
         
         #endregion
 
