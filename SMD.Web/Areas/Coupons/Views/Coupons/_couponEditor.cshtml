@@ -33,7 +33,7 @@
                                     <h3 class="group-header" style="margin-top:20px;">
                                         Approve - Reject Deal
                                     </h3>
-                                    <div class="col-lg-12 col-md-12 col-sm-12" style="padding-bottom:20px">
+                                    <div class="col-lg-12 col-md-12 col-sm-12" style="padding-bottom:20px" data-bind="with:selectedCompany">
                                         <label class="control-label" style="font-size:20px">Account Profile</label>
                                         <div style="padding-left:0px;padding-right:0px;padding-bottom:5px; min-height: 270.90px;background-color:#f9f9f9;">
                                             <div class="col-lg-4 text-left">
@@ -47,7 +47,7 @@
                                                         <label class="control-label" style="padding-top:0px;padding-left:10px">Title:</label>
                                                     </div>
                                                     <div class="col-lg-8">
-                                                        <label>Muhammad Abuzar Iqbal</label>
+                                                        <label data-bind="text:FirstName"></label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group" style="margin-bottom:0px;">
@@ -55,7 +55,7 @@
                                                         <label class="control-label" style="padding-top:0px;padding-left:10px">E-mail address:</label>
                                                     </div>
                                                     <div class="col-lg-8">
-                                                        <label>shanabuzar@yahoo.com</label>
+                                                        <label data-bind="text:Email"></label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group" style="margin-bottom:0px;">
@@ -63,7 +63,7 @@
                                                         <label class="control-label" style="padding-top:0px;padding-left:10px">Mobile no:</label>
                                                     </div>
                                                     <div class="col-lg-8">
-                                                        <label>+923247714241</label>
+                                                        <label data-bind="text:Mobile"></label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group" style="margin-bottom:0px;">
@@ -71,15 +71,21 @@
                                                         <label class="control-label" style="padding-top:0px;padding-left:10px">Date of birth:</label>
                                                     </div>
                                                     <div class="col-lg-8">
-                                                        <label>20-jul-1992</label>
+                                                        <label data-bind="dateString:DateOfBirth,datePattern: 'DD/MM/YYYY'"></label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group" style="margin-bottom:0px;">
                                                     <div class=" col-lg-4 text-right">
                                                         <label class="control-label" style="padding-top:0px;padding-left:10px">ID no:</label>
                                                     </div>
-                                                    <div class="col-lg-8">
-                                                        <label>xxxx125633325222322252223225223322</label>
+                                                    <div class="col-lg-8"> 
+                                                        <label data-bind="text:PassportNumber"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 marginBottom12" style="margin-bottom:0px;">
+                                                    <div class="col-md-6">
+                                                        <label>Logo</label>
+                                                        <img id="vehicleImage" alt="" style="width: auto;height:80px" data-bind="attr:{src:'/'+ Logo }" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -94,23 +100,23 @@
                                                         <label class="control-label" style="padding-top:0px;padding-left:10px">Billing Address 1:</label>
                                                     </div>
                                                     <div class="col-lg-8">
-                                                        <label>Test addressline 1 </label>
+                                                        <label data-bind="text:BillingAddressLine1"></label>
                                                     </div>
                                                 </div>
-                                                <div class="form-group" style="margin-bottom:0px;">
+                                                @*<div class="form-group" style="margin-bottom:0px;">
                                                     <div class=" col-lg-4">
                                                         <label class="control-label" style="padding-top:0px;padding-left:10px">Billing Address 2:</label>
                                                     </div>
                                                     <div class="col-lg-8">
                                                         <label>Test address line 2</label>
                                                     </div>
-                                                </div>
+                                                </div>*@
                                                 <div class="form-group" style="margin-bottom:0px;">
                                                     <div class=" col-lg-4">
                                                         <label class="control-label" style="padding-top:0px;padding-left:10px">Billing City:</label>
                                                     </div>
                                                     <div class="col-lg-8">
-                                                        <label>Test City</label>
+                                                        <label data-bind="text:BillingCity"></label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group" style="margin-bottom:0px;">
@@ -118,7 +124,7 @@
                                                         <label class="control-label" style="padding-top:0px;padding-left:10px">Billing State:</label>
                                                     </div>
                                                     <div class="col-lg-8">
-                                                        <label>Test State</label>
+                                                        <label data-bind="text:BillingState"></label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group" style="margin-bottom:0px;">
@@ -129,12 +135,12 @@
                                                         <label>Test Country</label>
                                                     </div>
                                                 </div>
-                                                <div class="form-group" style="margin-bottom:0px;">
+                                                @*<div class="form-group" style="margin-bottom:0px;">
                                                     <div class=" col-lg-4">
                                                         <label class="control-label" style="padding-top:0px;padding-left:10px">Billing Phone:</label>
                                                     </div>
                                                     <div class="col-lg-8">
-                                                        <label>03247714241</label>
+                                                        <label data-bind="text:BillingPhone"></label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group" style="margin-bottom:0px;">
@@ -142,9 +148,9 @@
                                                         <label class="control-label" style="padding-top:0px;padding-left:10px">Billing Email:</label>
                                                     </div>
                                                     <div class="col-lg-8">
-                                                        <label>shanabuzartestmail.com</label>
+                                                        <label data-bind="text:BillingEmail"></label>
                                                     </div>
-                                                </div>
+                                                </div>*@
                                             </div>
                                             <div class="col-lg-4 text-left">
                                                 <div class="form-group" style="margin-bottom:0px;">
@@ -152,7 +158,7 @@
                                                         <label class="control-label" style="padding-top:10px;padding-left:10px">Business Name:</label>
                                                     </div>
                                                     <div class="col-lg-8" style="padding-top:10px;">
-                                                        <label>Test Company</label>
+                                                        <label data-bind="text:CompanyName"></label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group" style="margin-bottom:0px;">
@@ -160,7 +166,7 @@
                                                         <label class="control-label" style="padding-top:0px;padding-left:10px">Website:</label>
                                                     </div>
                                                     <div class="col-lg-8">
-                                                        <label>www.test.com</label>
+                                                        <label data-bind="text:WebsiteLink"></label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group" style="margin-bottom:0px;">
@@ -168,7 +174,7 @@
                                                         <label class="control-label" style="padding-top:0px;padding-left:10px">Sale phone no:</label>
                                                     </div>
                                                     <div class="col-lg-8">
-                                                        <label>+923247714241</label>
+                                                        <label data-bind="text:SalesPhone"></label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group" style="margin-bottom:0px;">
@@ -176,7 +182,7 @@
                                                         <label class="control-label" style="padding-top:0px;padding-left:10px">Billing E-mail:</label>
                                                     </div>
                                                     <div class="col-lg-8">
-                                                        <label>shanabuzar@yahoo.com</label>
+                                                        <label data-bind="text:BillingEmail"></label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group" style="margin-bottom:0px;">
@@ -184,7 +190,7 @@
                                                         <label class="control-label" style="padding-top:0px;padding-left:10px">Billing phone no:</label>
                                                     </div>
                                                     <div class="col-lg-8">
-                                                        <label>+923247714241</label>
+                                                        <label data-bind="text:BillingPhone"></label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group" style="margin-bottom:0px;">
@@ -192,7 +198,7 @@
                                                         <label class="control-label" style="padding-top:0px;padding-left:10px">Company Type:</label>
                                                     </div>
                                                     <div class="col-lg-8">
-                                                        <label>type</label>
+                                                        <label data-bind="text:CompanyType"></label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group" style="margin-bottom:0px;">
@@ -200,7 +206,7 @@
                                                         <label class="control-label" style="padding-top:0px;padding-left:10px">Company Reg No:</label>
                                                     </div>
                                                     <div class="col-lg-8">
-                                                        <label>111221xx2121xx2221121221212</label>
+                                                        <label data-bind="text:CompanyRegistrationNo"></label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group" style="margin-bottom:0px;">
@@ -208,7 +214,7 @@
                                                         <label class="control-label" style="padding-top:0px;padding-left:10px">Sales Tex No:</label>
                                                     </div>
                                                     <div class="col-lg-8">
-                                                        <label>111221xx2121xx22211</label>
+                                                        <label data-bind="text:VatNumber"></label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group" style="margin-bottom:0px;">
@@ -216,20 +222,20 @@
                                                         <label class="control-label" style="padding-top:0px;padding-left:10px">Business Start Date:</label>
                                                     </div>
                                                     <div class="col-lg-4">
-                                                        <label>20-jul-1992</label>
+                                                        <label data-bind="dateString:BusinessStartDate,datePattern: 'DD/MM/YYYY'"></label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group" style="margin-bottom:0px;">
                                                     <div class="col-lg-4">
                                                         <label class="control-label" style="padding-top:0px;padding-left:10px">Credit Card</label>
                                                     </div>
-                                                    <div class="col-lg-8">
-                                                        <label>yes</label>
+                                                    <div class="col-lg-8"> 
+                                                        <label data-bind="text:StripeCustomerId==null ?'No':'Yes'"></label>
                                                     </div>
                                                 </div>
                                             </div>
-                                            </div>
                                         </div>
+                                    </div>
                                     <div data-bind="with: $root.selectedCoupon">
                                             <div class="col-lg-12">
                                                 <div class="col-lg-9">
