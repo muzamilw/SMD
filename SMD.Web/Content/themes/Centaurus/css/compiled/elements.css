@@ -161,7 +161,7 @@ h1 small, h2 small, h3 small, h1 .small, h2 .small, h3 .small {
     }
 
 .btn-success {
-    background-color: #5fb761;
+     background-color: #5fb761;
     border-color: #27ae60;
 }
 .backclr {
@@ -5474,6 +5474,15 @@ color:red !important;
     -moz-border-radius: 3px;
     border-radius: 3px;
    
+}
+.borderbtmline {
+    border-bottom: 1px solid rgb(220,220,220);
+
+}
+
+.borderPanel {
+   border: 2px solid rgb(220,220,220);
+   padding:6px;
 }
 .ads-numbering-linebar {
     width: 80px;

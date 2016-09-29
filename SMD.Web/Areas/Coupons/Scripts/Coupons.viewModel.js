@@ -144,11 +144,14 @@ define("Coupons/Coupons.viewModel",
                                     langs.valueHasMutated();
 
                                 }
-
+                              
                                 if (data.CouponCategories != null) {
+                               
                                     couponCategories.removeAll();
                                     ko.utils.arrayPushAll(couponCategories, data.CouponCategories);
+
                                     couponCategories.valueHasMutated();
+                                    reachedAudience(Count(3150));
                                     
                                     //ko.utils.arrayPushAll(couponCategoriesCol1, couponCategories.take(7));
                                     //couponCategoriesCol1.valueHasMutated();
@@ -1838,6 +1841,7 @@ define("Coupons/Coupons.viewModel",
                                 BindPeriodDD();
                                 couponModel().LocationBranchId(BranchID);
                                 locationChanged(couponModel());
+                                
                             }
 
                         },
@@ -1846,7 +1850,13 @@ define("Coupons/Coupons.viewModel",
                         }
                     });
                 },
+                 Count = function (val) {
+                     while (/(\d+)(\d{3})/.test(val.toString())) {
+                         val = val.toString().replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
+                     }
+                     return val;
 
+                 },
                 
                 selectedField = function (Fieldvalue, event) {
 
