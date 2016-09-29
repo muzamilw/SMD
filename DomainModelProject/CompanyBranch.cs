@@ -32,6 +32,7 @@ namespace DomainModelProject
         public Nullable<long> BranchCategoryId { get; set; }
         public Nullable<int> CompanyId { get; set; }
         public Nullable<int> CountryId { get; set; }
+        public Nullable<bool> IsDefault { get; set; }
     
         public virtual BranchCategory BranchCategory { get; set; }
         public virtual ICollection<Coupon> Coupons { get; set; }

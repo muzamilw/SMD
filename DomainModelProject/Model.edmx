@@ -259,6 +259,7 @@
           <Property Name="optLatestNewsEmails" Type="bit" />
           <Property Name="optMarketingEmails" Type="bit" />
           <Property Name="PassportNo" Type="nvarchar" MaxLength="150" />
+          <Property Name="Title" Type="int" />
         </EntityType>
         <EntityType Name="AuditLog">
           <Key>
@@ -287,6 +288,18 @@
           <Property Name="CampaignId" Type="bigint" Nullable="false" />
           <Property Name="CategoryId" Type="int" Nullable="false" />
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CampaignEventHistory">
+          <Key>
+            <PropertyRef Name="EventId" />
+          </Key>
+          <Property Name="EventId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EventStatusId" Type="int" />
+          <Property Name="CampaignID" Type="bigint" />
+          <Property Name="EventDateTime" Type="datetime" />
+          <Property Name="CouponId" Type="bigint" />
+          <Property Name="SQID" Type="bigint" />
+          <Property Name="PQID" Type="int" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -379,6 +392,8 @@
           <Property Name="CreationDateTime" Type="datetime" />
           <Property Name="NoOfBranches" Type="int" />
           <Property Name="BillingAddressName" Type="nvarchar" MaxLength="150" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="DeleteDate" Type="datetime" />
         </EntityType>
         <EntityType Name="CompanyBranch">
           <Key>
@@ -397,6 +412,7 @@
           <Property Name="BranchCategoryId" Type="bigint" />
           <Property Name="CompanyId" Type="int" />
           <Property Name="CountryId" Type="int" />
+          <Property Name="IsDefault" Type="bit" />
         </EntityType>
         <EntityType Name="Country">
           <Key>
@@ -598,6 +614,13 @@
           <Property Name="AttemptCount" Type="int" />
           <Property Name="ToName" Type="varchar" MaxLength="100" />
           <Property Name="FromName" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="EventStatuses">
+          <Key>
+            <PropertyRef Name="EventStatusId" />
+          </Key>
+          <Property Name="EventStatusId" Type="int" Nullable="false" />
+          <Property Name="EventName" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Game">
           <Key>
@@ -1417,6 +1440,66 @@ warning 6002: The table/view 'SMDDev.dbo.vw_Coupons' does not have a primary key
             </Principal>
             <Dependent Role="CampaignCategories">
               <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CampaignEventHistory_AdCampaign">
+          <End Role="AdCampaign" Type="Self.AdCampaign" Multiplicity="0..1" />
+          <End Role="CampaignEventHistory" Type="Self.CampaignEventHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdCampaign">
+              <PropertyRef Name="CampaignID" />
+            </Principal>
+            <Dependent Role="CampaignEventHistory">
+              <PropertyRef Name="CampaignID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CampaignEventHistory_Coupon">
+          <End Role="Coupon" Type="Self.Coupon" Multiplicity="0..1" />
+          <End Role="CampaignEventHistory" Type="Self.CampaignEventHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coupon">
+              <PropertyRef Name="CouponId" />
+            </Principal>
+            <Dependent Role="CampaignEventHistory">
+              <PropertyRef Name="CouponId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CampaignEventHistory_EventStatus">
+          <End Role="EventStatuses" Type="Self.EventStatuses" Multiplicity="0..1" />
+          <End Role="CampaignEventHistory" Type="Self.CampaignEventHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EventStatuses">
+              <PropertyRef Name="EventStatusId" />
+            </Principal>
+            <Dependent Role="CampaignEventHistory">
+              <PropertyRef Name="EventStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CampaignEventHistory_ProfileQuestion">
+          <End Role="ProfileQuestion" Type="Self.ProfileQuestion" Multiplicity="0..1" />
+          <End Role="CampaignEventHistory" Type="Self.CampaignEventHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProfileQuestion">
+              <PropertyRef Name="PQID" />
+            </Principal>
+            <Dependent Role="CampaignEventHistory">
+              <PropertyRef Name="PQID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CampaignEventHistory_SurveyQuestion">
+          <End Role="SurveyQuestion" Type="Self.SurveyQuestion" Multiplicity="0..1" />
+          <End Role="CampaignEventHistory" Type="Self.CampaignEventHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SurveyQuestion">
+              <PropertyRef Name="SQID" />
+            </Principal>
+            <Dependent Role="CampaignEventHistory">
+              <PropertyRef Name="SQID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2418,6 +2501,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_Coupons' does not have a primary key
           <EntitySet Name="AuditLog" EntityType="Self.AuditLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BranchCategory" EntityType="Self.BranchCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CampaignCategories" EntityType="Self.CampaignCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CampaignEventHistory" EntityType="Self.CampaignEventHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CategoryLog" EntityType="Self.CategoryLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
@@ -2436,6 +2520,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_Coupons' does not have a primary key
           <EntitySet Name="DiscountVoucher" EntityType="Self.DiscountVoucher" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Education" EntityType="Self.Education" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmailQueue" EntityType="Self.EmailQueue" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EventStatuses" EntityType="Self.EventStatuses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Game" EntityType="Self.Game" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Industry" EntityType="Self.Industry" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Invoice" EntityType="Self.Invoice" Schema="dbo" store:Type="Tables" />
@@ -2636,6 +2721,26 @@ warning 6002: The table/view 'SMDDev.dbo.vw_Coupons' does not have a primary key
           <AssociationSet Name="FK_CampaignCategories_CouponCategory" Association="Self.FK_CampaignCategories_CouponCategory">
             <End Role="CouponCategory" EntitySet="CouponCategory" />
             <End Role="CampaignCategories" EntitySet="CampaignCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CampaignEventHistory_AdCampaign" Association="Self.FK_CampaignEventHistory_AdCampaign">
+            <End Role="AdCampaign" EntitySet="AdCampaign" />
+            <End Role="CampaignEventHistory" EntitySet="CampaignEventHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CampaignEventHistory_Coupon" Association="Self.FK_CampaignEventHistory_Coupon">
+            <End Role="Coupon" EntitySet="Coupon" />
+            <End Role="CampaignEventHistory" EntitySet="CampaignEventHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CampaignEventHistory_EventStatus" Association="Self.FK_CampaignEventHistory_EventStatus">
+            <End Role="EventStatuses" EntitySet="EventStatuses" />
+            <End Role="CampaignEventHistory" EntitySet="CampaignEventHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CampaignEventHistory_ProfileQuestion" Association="Self.FK_CampaignEventHistory_ProfileQuestion">
+            <End Role="ProfileQuestion" EntitySet="ProfileQuestion" />
+            <End Role="CampaignEventHistory" EntitySet="CampaignEventHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CampaignEventHistory_SurveyQuestion" Association="Self.FK_CampaignEventHistory_SurveyQuestion">
+            <End Role="SurveyQuestion" EntitySet="SurveyQuestion" />
+            <End Role="CampaignEventHistory" EntitySet="CampaignEventHistory" />
           </AssociationSet>
           <AssociationSet Name="FK_CategoryLog_Category" Association="Self.FK_CategoryLog_Category">
             <End Role="Category" EntitySet="Category" />
@@ -3069,6 +3174,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_Coupons' does not have a primary key
           <Property Name="SubmissionDateTime" Type="DateTime" Precision="3" />
           <NavigationProperty Name="SurveyQuestionTargetCriterias" Relationship="SMDDevModel.FK_SurveyQuestionTargetCriteria_AdCampaign" FromRole="AdCampaign" ToRole="SurveyQuestionTargetCriteria" />
           <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_AdCampaign_Company" FromRole="AdCampaign" ToRole="Company" />
+          <NavigationProperty Name="CampaignEventHistories" Relationship="SMDDevModel.FK_CampaignEventHistory_AdCampaign" FromRole="AdCampaign" ToRole="CampaignEventHistory" />
         </EntityType>
         <EntityType Name="AdCampaignResponse">
           <Key>
@@ -3239,6 +3345,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_Coupons' does not have a primary key
           <Property Name="optMarketingEmails" Type="Boolean" />
           <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_AspNetUsers_Company" FromRole="AspNetUser" ToRole="Company" />
           <Property Name="PassportNo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="Int32" />
         </EntityType>
         <EntityType Name="AuditLog">
           <Key>
@@ -3326,6 +3433,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_Coupons' does not have a primary key
           <NavigationProperty Name="Coupons" Relationship="Self.FK_Coupon_CompanyBranch" FromRole="CompanyBranch" ToRole="Coupon" />
           <Property Name="CountryId" Type="Int32" />
           <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_CompanyBranch_Company" FromRole="CompanyBranch" ToRole="Company" />
+          <Property Name="IsDefault" Type="Boolean" />
         </EntityType>
         <EntityType Name="Country">
           <Key>
@@ -3425,6 +3533,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_Coupons' does not have a primary key
           <Property Name="BuyitBtnLabel" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CouponPriceOptions" Relationship="SMDDevModel.FK_CouponPriceOption_Coupon" FromRole="Coupon" ToRole="CouponPriceOption" />
           <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_Coupon_Company" FromRole="Coupon" ToRole="Company" />
+          <NavigationProperty Name="CampaignEventHistories" Relationship="SMDDevModel.FK_CampaignEventHistory_Coupon" FromRole="Coupon" ToRole="CampaignEventHistory" />
         </EntityType>
         <EntityType Name="CouponCode">
           <Key>
@@ -3705,6 +3814,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_Coupons' does not have a primary key
           <Property Name="StartDate" Type="DateTime" Precision="3" />
           <Property Name="EndDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_ProfileQuestion_Company" FromRole="ProfileQuestion" ToRole="Company" />
+          <NavigationProperty Name="CampaignEventHistories" Relationship="SMDDevModel.FK_CampaignEventHistory_ProfileQuestion" FromRole="ProfileQuestion" ToRole="CampaignEventHistory" />
         </EntityType>
         <EntityType Name="ProfileQuestionAnswer">
           <Key>
@@ -3808,6 +3918,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_Coupons' does not have a primary key
           <Property Name="AmountCharged" Type="Double" />
           <NavigationProperty Name="ProfileQuestionTargetCriterias" Relationship="SMDDevModel.FK_ProfileQuestionTargetCriteria_ProfileQuestion1" FromRole="SurveyQuestion" ToRole="ProfileQuestionTargetCriteria" />
           <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_SurveyQuestion_Company" FromRole="SurveyQuestion" ToRole="Company" />
+          <NavigationProperty Name="CampaignEventHistories" Relationship="SMDDevModel.FK_CampaignEventHistory_SurveyQuestion" FromRole="SurveyQuestion" ToRole="CampaignEventHistory" />
         </EntityType>
         <EntityType Name="SurveyQuestionResponse">
           <Key>
@@ -5190,6 +5301,28 @@ warning 6002: The table/view 'SMDDev.dbo.vw_Coupons' does not have a primary key
             <Parameter Name="DateTo" Mode="In" Type="DateTime" />
             <Parameter Name="Granularity" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="CampaignEventHistories" EntityType="SMDDevModel.CampaignEventHistory" />
+          <EntitySet Name="EventStatuses" EntityType="SMDDevModel.EventStatus" />
+          <AssociationSet Name="FK_CampaignEventHistory_AdCampaign" Association="SMDDevModel.FK_CampaignEventHistory_AdCampaign">
+            <End Role="AdCampaign" EntitySet="AdCampaigns" />
+            <End Role="CampaignEventHistory" EntitySet="CampaignEventHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CampaignEventHistory_Coupon" Association="SMDDevModel.FK_CampaignEventHistory_Coupon">
+            <End Role="Coupon" EntitySet="Coupons" />
+            <End Role="CampaignEventHistory" EntitySet="CampaignEventHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CampaignEventHistory_EventStatus" Association="SMDDevModel.FK_CampaignEventHistory_EventStatus">
+            <End Role="EventStatus" EntitySet="EventStatuses" />
+            <End Role="CampaignEventHistory" EntitySet="CampaignEventHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CampaignEventHistory_ProfileQuestion" Association="SMDDevModel.FK_CampaignEventHistory_ProfileQuestion">
+            <End Role="ProfileQuestion" EntitySet="ProfileQuestions" />
+            <End Role="CampaignEventHistory" EntitySet="CampaignEventHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CampaignEventHistory_SurveyQuestion" Association="SMDDevModel.FK_CampaignEventHistory_SurveyQuestion">
+            <End Role="SurveyQuestion" EntitySet="SurveyQuestions" />
+            <End Role="CampaignEventHistory" EntitySet="CampaignEventHistories" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="CouponCategories">
           <Key>
@@ -5847,6 +5980,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_Coupons' does not have a primary key
           <Property Name="CreationDateTime" Type="DateTime" Precision="3" />
           <Property Name="NoOfBranches" Type="Int32" />
           <Property Name="BillingAddressName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="DeleteDate" Type="DateTime" Precision="3" />
         </EntityType>
         <Association Name="FK_Account_Company">
           <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
@@ -6232,6 +6367,91 @@ warning 6002: The table/view 'SMDDev.dbo.vw_Coupons' does not have a primary key
           <Property Type="Int32" Name="pQStats" Nullable="false" />
           <Property Type="Int32" Name="sQStats" Nullable="false" />
         </ComplexType>
+        <EntityType Name="CampaignEventHistory">
+          <Key>
+            <PropertyRef Name="EventId" />
+          </Key>
+          <Property Name="EventId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EventStatusId" Type="Int32" />
+          <Property Name="CampaignID" Type="Int64" />
+          <Property Name="EventDateTime" Type="DateTime" Precision="3" />
+          <Property Name="CouponId" Type="Int64" />
+          <Property Name="SQID" Type="Int64" />
+          <Property Name="PQID" Type="Int32" />
+          <NavigationProperty Name="AdCampaign" Relationship="SMDDevModel.FK_CampaignEventHistory_AdCampaign" FromRole="CampaignEventHistory" ToRole="AdCampaign" />
+          <NavigationProperty Name="Coupon" Relationship="SMDDevModel.FK_CampaignEventHistory_Coupon" FromRole="CampaignEventHistory" ToRole="Coupon" />
+          <NavigationProperty Name="EventStatus" Relationship="SMDDevModel.FK_CampaignEventHistory_EventStatus" FromRole="CampaignEventHistory" ToRole="EventStatus" />
+          <NavigationProperty Name="ProfileQuestion" Relationship="SMDDevModel.FK_CampaignEventHistory_ProfileQuestion" FromRole="CampaignEventHistory" ToRole="ProfileQuestion" />
+          <NavigationProperty Name="SurveyQuestion" Relationship="SMDDevModel.FK_CampaignEventHistory_SurveyQuestion" FromRole="CampaignEventHistory" ToRole="SurveyQuestion" />
+        </EntityType>
+        <EntityType Name="EventStatus">
+          <Key>
+            <PropertyRef Name="EventStatusId" />
+          </Key>
+          <Property Name="EventStatusId" Type="Int32" Nullable="false" />
+          <Property Name="EventName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CampaignEventHistories" Relationship="SMDDevModel.FK_CampaignEventHistory_EventStatus" FromRole="EventStatus" ToRole="CampaignEventHistory" />
+        </EntityType>
+        <Association Name="FK_CampaignEventHistory_AdCampaign">
+          <End Type="SMDDevModel.AdCampaign" Role="AdCampaign" Multiplicity="0..1" />
+          <End Type="SMDDevModel.CampaignEventHistory" Role="CampaignEventHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdCampaign">
+              <PropertyRef Name="CampaignID" />
+            </Principal>
+            <Dependent Role="CampaignEventHistory">
+              <PropertyRef Name="CampaignID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CampaignEventHistory_Coupon">
+          <End Type="SMDDevModel.Coupon" Role="Coupon" Multiplicity="0..1" />
+          <End Type="SMDDevModel.CampaignEventHistory" Role="CampaignEventHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coupon">
+              <PropertyRef Name="CouponId" />
+            </Principal>
+            <Dependent Role="CampaignEventHistory">
+              <PropertyRef Name="CouponId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CampaignEventHistory_EventStatus">
+          <End Type="SMDDevModel.EventStatus" Role="EventStatus" Multiplicity="0..1" />
+          <End Type="SMDDevModel.CampaignEventHistory" Role="CampaignEventHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EventStatus">
+              <PropertyRef Name="EventStatusId" />
+            </Principal>
+            <Dependent Role="CampaignEventHistory">
+              <PropertyRef Name="EventStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CampaignEventHistory_ProfileQuestion">
+          <End Type="SMDDevModel.ProfileQuestion" Role="ProfileQuestion" Multiplicity="0..1" />
+          <End Type="SMDDevModel.CampaignEventHistory" Role="CampaignEventHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProfileQuestion">
+              <PropertyRef Name="PQID" />
+            </Principal>
+            <Dependent Role="CampaignEventHistory">
+              <PropertyRef Name="PQID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CampaignEventHistory_SurveyQuestion">
+          <End Type="SMDDevModel.SurveyQuestion" Role="SurveyQuestion" Multiplicity="0..1" />
+          <End Type="SMDDevModel.CampaignEventHistory" Role="CampaignEventHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SurveyQuestion">
+              <PropertyRef Name="SQID" />
+            </Principal>
+            <Dependent Role="CampaignEventHistory">
+              <PropertyRef Name="SQID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -6448,6 +6668,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_Coupons' does not have a primary key
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="SMDDevModel.AspNetUser">
               <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="PassportNo" ColumnName="PassportNo" />
                 <ScalarProperty Name="optMarketingEmails" ColumnName="optMarketingEmails" />
                 <ScalarProperty Name="optLatestNewsEmails" ColumnName="optLatestNewsEmails" />
@@ -6558,6 +6779,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_Coupons' does not have a primary key
           <EntitySetMapping Name="CompanyBranches">
             <EntityTypeMapping TypeName="SMDDevModel.CompanyBranch">
               <MappingFragment StoreEntitySet="CompanyBranch">
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
                 <ScalarProperty Name="CountryId" ColumnName="CountryId" />
                 <ScalarProperty Name="BranchId" ColumnName="BranchId" />
                 <ScalarProperty Name="BranchTitle" ColumnName="BranchTitle" />
@@ -7532,6 +7754,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_Coupons' does not have a primary key
           <EntitySetMapping Name="Companies">
             <EntityTypeMapping TypeName="SMDDevModel.Company">
               <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="BillingAddressName" ColumnName="BillingAddressName" />
                 <ScalarProperty Name="NoOfBranches" ColumnName="NoOfBranches" />
                 <ScalarProperty Name="CreationDateTime" ColumnName="CreationDateTime" />
@@ -7730,6 +7954,27 @@ warning 6002: The table/view 'SMDDev.dbo.vw_Coupons' does not have a primary key
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="CampaignEventHistories">
+            <EntityTypeMapping TypeName="SMDDevModel.CampaignEventHistory">
+              <MappingFragment StoreEntitySet="CampaignEventHistory">
+                <ScalarProperty Name="PQID" ColumnName="PQID" />
+                <ScalarProperty Name="SQID" ColumnName="SQID" />
+                <ScalarProperty Name="CouponId" ColumnName="CouponId" />
+                <ScalarProperty Name="EventDateTime" ColumnName="EventDateTime" />
+                <ScalarProperty Name="CampaignID" ColumnName="CampaignID" />
+                <ScalarProperty Name="EventStatusId" ColumnName="EventStatusId" />
+                <ScalarProperty Name="EventId" ColumnName="EventId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EventStatuses">
+            <EntityTypeMapping TypeName="SMDDevModel.EventStatus">
+              <MappingFragment StoreEntitySet="EventStatuses">
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="EventStatusId" ColumnName="EventStatusId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

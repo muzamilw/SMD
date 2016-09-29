@@ -108,5 +108,7 @@ namespace SMD.Models.DomainModels
         public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }
 
         public virtual ICollection<CouponPriceOption> CouponPriceOptions { get; set; }
+
+        public virtual ICollection<CampaignEventHistory> CampaignEventHistories { get; set; }
     }
 }

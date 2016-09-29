@@ -128,6 +128,9 @@ namespace SMD.Models.DomainModels
         public virtual ICollection<CouponCategory> CouponCategories { get; set; }
     
         public virtual ICollection<CampaignCategory> CampaignCategories { get; set; }
+
+        public virtual ICollection<CampaignEventHistory> CampaignEventHistories { get; set; }
+
         [NotMapped]
         public string CampaignImagePath { get; set; }
         [NotMapped]
