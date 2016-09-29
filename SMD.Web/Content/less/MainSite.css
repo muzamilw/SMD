@@ -1003,4 +1003,13 @@ div#spinner {
     border-color:gainsboro!important;
 
 }
+.filterbtnclrs {
+    background-color: #81d3dc!important;
+    border-color: #81d3dc!important;
+    height:38px!important;
+    width:128px!important;
+}
+.filtersDiv_width {
+    width:139px;
+}
 /*# sourceMappingURL=MainSite.css.map */
