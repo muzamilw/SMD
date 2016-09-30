@@ -1,6 +1,7 @@
 ﻿using SMD.Models.DomainModels;
 using SMD.Models.IdentityModels;
 using SMD.Models.RequestModels;
+using SMD.Models.ResponseModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,5 +22,6 @@ namespace SMD.Interfaces.Repository
         string GetCompanyNameByID(int CompanyId);
         Company GetCompanyById();
         Company GetCompanyWithoutChilds(int companyId = 0);
+        bool updateCompanyForProfile(CompanyResponseModel RequestData, Company Target);
     }
 }

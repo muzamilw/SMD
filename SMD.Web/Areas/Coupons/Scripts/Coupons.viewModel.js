@@ -122,8 +122,8 @@ define("Coupons/Coupons.viewModel",
                     CouponTitle = ko.observable(),
                     StatusValue = ko.observable(),
                     GetCallBackBranchObject = ko.observable()
-                previewScreenNumber = ko.observable(1);
-
+                    previewScreenNumber = ko.observable(1);
+ 
                 
 
                 CurrPage = ko.observable(9);
@@ -180,7 +180,7 @@ define("Coupons/Coupons.viewModel",
                                 }
 
                             }
-
+                            
                         },
                         error: function (response) {
 
@@ -198,6 +198,7 @@ define("Coupons/Coupons.viewModel",
                                 branchLocations.valueHasMutated();
 
                                 BindPeriodDD();
+                                
                             }
 
                         },
@@ -520,10 +521,10 @@ define("Coupons/Coupons.viewModel",
                     }
 
                   
-                    if (couponModel().HowToRedeemLine2() == "" || couponModel().HowToRedeemLine2() == undefined) {
-                        hasErrors = true;
-                        toastr.error("Please enter deal summary.");
-                    }
+                    //if (couponModel().HowToRedeemLine2() == "" || couponModel().HowToRedeemLine2() == undefined) {
+                    //    hasErrors = true;
+                    //    toastr.error("Please enter deal summary.");
+                    //}
 
                 //couponImage1
                     //if (couponModel().couponImage1() == "/images/default-placeholder.png" && couponModel().CouponImage2() == "/images/default-placeholder.png" && couponModel().CouponImage3() == "/images/default-placeholder.png") {
@@ -1097,10 +1098,10 @@ define("Coupons/Coupons.viewModel",
                     }
 
                   
-                    if (couponModel().HowToRedeemLine2() == "" || couponModel().HowToRedeemLine2() == undefined) {
-                        hasErrors = true;
-                        toastr.error("Please enter deal description.");
-                    }
+                    //if (couponModel().HowToRedeemLine2() == "" || couponModel().HowToRedeemLine2() == undefined) {
+                    //    hasErrors = true;
+                    //    toastr.error("Please enter deal description.");
+                    //}
 
 
                     if (couponModel().CouponPriceOptions().length == 0 || couponModel().Savings() == undefined) {
@@ -1494,6 +1495,7 @@ define("Coupons/Coupons.viewModel",
                                     profileQuestionList([]);
                                     ko.utils.arrayPushAll(profileQuestionList(), data.ProfileQuestions);
                                     profileQuestionList.valueHasMutated();
+                                    
                                 }
 
                             },

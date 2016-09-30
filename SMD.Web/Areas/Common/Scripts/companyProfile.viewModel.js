@@ -297,8 +297,9 @@ define("common/companyProfile.viewModel",
                     
                 },
                 setCompanyAddress = function () {
-                    
-                    var address = selectedCompany().BillingAddressLine1().toLowerCase() + ' ' + selectedCompany().billingCity() + ' ' + selectedCompany().BillingZipCode() + ' ' + selectedCompany().BillingState().toLowerCase();
+                    if (selectedCompany().BillingAddressLine1() != null && selectedCompany().BillingAddressLine1() != '') {
+                        var address = selectedCompany().BillingAddressLine1().toLowerCase() + ' ' + selectedCompany().billingCity() + ' ' + selectedCompany().BillingZipCode() + ' ' + selectedCompany().BillingState().toLowerCase();
+                    }
                     geocoderComp.geocode({
                          'address': address
                      }, function (results, status) {
