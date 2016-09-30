@@ -90,6 +90,7 @@ namespace DomainModelProject
         public virtual DbSet<City> Cities { get; set; }
         public virtual DbSet<CampaignEventHistory> CampaignEventHistories { get; set; }
         public virtual DbSet<EventStatus> EventStatuses { get; set; }
+        public virtual DbSet<vw_ReferringCompanies> vw_ReferringCompanies { get; set; }
     
         public virtual ObjectResult<SearchCoupons_Result> SearchCoupons(Nullable<int> categoryId, Nullable<int> type, string keywords, Nullable<int> distance, string lat, string lon, string userId, Nullable<int> fromRow, Nullable<int> toRow)
         {

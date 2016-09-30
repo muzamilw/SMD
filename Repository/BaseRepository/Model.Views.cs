@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetsD614FD40AFC0D7D4A1EFCEB4016B383771AC0B3A0481BAD348D4542208F0ADB9))]
+[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetsF9B13B376788C3BD58D1446C5583BC7FDDC84B48D72A9A1A72D26DC11D951213))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -17,19 +17,19 @@ namespace Edm_EntityMappingGeneratedViews
     /// <Summary>
     /// The type contains views for EntitySets and AssociationSets that were generated at design time.
     /// </Summary>
-    public sealed class ViewsForBaseEntitySetsD614FD40AFC0D7D4A1EFCEB4016B383771AC0B3A0481BAD348D4542208F0ADB9 : System.Data.Mapping.EntityViewContainer
+    public sealed class ViewsForBaseEntitySetsF9B13B376788C3BD58D1446C5583BC7FDDC84B48D72A9A1A72D26DC11D951213 : System.Data.Mapping.EntityViewContainer
     {
         
         /// <Summary>
         /// The constructor stores the views for the extents and also the hash values generated based on the metadata and mapping closure and views.
         /// </Summary>
-        public ViewsForBaseEntitySetsD614FD40AFC0D7D4A1EFCEB4016B383771AC0B3A0481BAD348D4542208F0ADB9()
+        public ViewsForBaseEntitySetsF9B13B376788C3BD58D1446C5583BC7FDDC84B48D72A9A1A72D26DC11D951213()
         {
             this.EdmEntityContainerName = "BaseDbContext";
             this.StoreEntityContainerName = "SMDModelStoreContainer";
-            this.HashOverMappingClosure = "7984ecfe3c15c6f2f97bac60975c57e1369a3c3eeb3a606f4516d1b48a7a1142";
-            this.HashOverAllExtentViews = "8c8d09cba82d71cc140c9ec8b0064332b3e8cbb841a6dd3f9743ffd846924100";
-            this.ViewCount = 120;
+            this.HashOverMappingClosure = "4589b2c9fed643277fd4c01adf62ff475ab5302f7cbfb63829d5acf46324da26";
+            this.HashOverAllExtentViews = "c9177e5d6ab9f569527daec4e69e6e8f8f991401431df9c6c11bc17ece7be2d4";
+            this.ViewCount = 122;
         }
         
         /// <Summary>
@@ -516,6 +516,14 @@ namespace Edm_EntityMappingGeneratedViews
             if ((index == 119))
             {
                 return GetView119();
+            }
+            if ((index == 120))
+            {
+                return GetView120();
+            }
+            if ((index == 121))
+            {
+                return GetView121();
             }
             throw new System.IndexOutOfRangeException();
         }
@@ -3957,6 +3965,50 @@ namespace Edm_EntityMappingGeneratedViews
             viewString.Append("True AS _from0\r\n        FROM SMDModelStoreContainer.vw_Coupons AS T\r\n    ) AS T1");
             viewString.Append("");
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.vw_Coupons", viewString.ToString());
+        }
+        
+        /// <Summary>
+        /// return view for SMDModelStoreContainer.vw_ReferringCompanies
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView120()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.vw_ReferringCompanies", @"
+    SELECT VALUE -- Constructing vw_ReferringCompanies
+        [SMDModel.Store.vw_ReferringCompanies](T1.[vw_ReferringCompanies.FullName], T1.[vw_ReferringCompanies.Email], T1.[vw_ReferringCompanies.CompanyName], T1.[vw_ReferringCompanies.vcount], T1.[vw_ReferringCompanies.scount], T1.[vw_ReferringCompanies.pcount], T1.[vw_ReferringCompanies.ReferringCompanyID])
+    FROM (
+        SELECT 
+            T.FullName AS [vw_ReferringCompanies.FullName], 
+            T.Email AS [vw_ReferringCompanies.Email], 
+            T.CompanyName AS [vw_ReferringCompanies.CompanyName], 
+            T.vcount AS [vw_ReferringCompanies.vcount], 
+            T.scount AS [vw_ReferringCompanies.scount], 
+            T.pcount AS [vw_ReferringCompanies.pcount], 
+            T.ReferringCompanyID AS [vw_ReferringCompanies.ReferringCompanyID], 
+            True AS _from0
+        FROM BaseDbContext.vw_ReferringCompanies AS T
+    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for BaseDbContext.vw_ReferringCompanies
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView121()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.vw_ReferringCompanies", @"
+    SELECT VALUE -- Constructing vw_ReferringCompanies
+        [DomainModels.vw_ReferringCompanies](T1.[vw_ReferringCompanies.FullName], T1.[vw_ReferringCompanies.Email], T1.[vw_ReferringCompanies.CompanyName], T1.[vw_ReferringCompanies.vcount], T1.[vw_ReferringCompanies.scount], T1.[vw_ReferringCompanies.pcount], T1.[vw_ReferringCompanies.ReferringCompanyID])
+    FROM (
+        SELECT 
+            T.FullName AS [vw_ReferringCompanies.FullName], 
+            T.Email AS [vw_ReferringCompanies.Email], 
+            T.CompanyName AS [vw_ReferringCompanies.CompanyName], 
+            T.vcount AS [vw_ReferringCompanies.vcount], 
+            T.scount AS [vw_ReferringCompanies.scount], 
+            T.pcount AS [vw_ReferringCompanies.pcount], 
+            T.ReferringCompanyID AS [vw_ReferringCompanies.ReferringCompanyID], 
+            True AS _from0
+        FROM SMDModelStoreContainer.vw_ReferringCompanies AS T
+    ) AS T1");
         }
     }
 }

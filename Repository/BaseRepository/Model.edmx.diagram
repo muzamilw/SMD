@@ -163,6 +163,7 @@
         <AssociationConnector Association="DomainModels.FK_CampaignEventHistory_EventStatus" />
         <AssociationConnector Association="DomainModels.FK_CampaignEventHistory_ProfileQuestion" />
         <AssociationConnector Association="DomainModels.FK_CampaignEventHistory_SurveyQuestion" />
+        <EntityTypeShape EntityType="DomainModels.vw_ReferringCompanies" Width="1.5" PointX="11.375" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

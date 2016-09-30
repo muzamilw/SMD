@@ -193,6 +193,7 @@
     <Compile Include="DomainModels\vw_Coupons.cs" />
     <Compile Include="DomainModels\vw_GetUserTransactions.cs" />
     <Compile Include="DomainModels\vw_PublisherTransaction.cs" />
+    <Compile Include="DomainModels\vw_ReferringCompanies.cs" />
     <Compile Include="IdentityModels\Role.cs" />
     <Compile Include="IdentityModels\Role`.cs" />
     <Compile Include="IdentityModels\User.cs" />
