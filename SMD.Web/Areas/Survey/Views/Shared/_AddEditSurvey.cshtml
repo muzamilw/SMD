@@ -1500,21 +1500,21 @@
 
     var sImageLeft = "";
     var sImageRight = "";
-    var mode = 1;
+    var buttontype = 1;
     function changeIframeSrc(mode1) {
        
-        mode = mode1;
+        buttontype = mode1;
         $("#iframe").attr("src", "/DamImages?mode=4" );
     }
     function iframeLoaded() {
         var iframeBody = $('body', $('#iframe')[0].contentWindow.document);
         $(iframeBody).on('click', '.damImgContainer img', function (event) {
             console.log(mode);
-            if (mode == 1) {
+            if (buttontype == 1) {
                 $("#leftImgPath").attr("src", this.src).change();
                 sImageLeft = this.src;
                 $(".close").click();
-            } else if (mode == 2) {
+            } else if (buttontype == 2) {
                 $("#rightImgPath").attr("src", this.src).change();
                 sImageRight = this.src;
                 $(".close").click();
