@@ -353,7 +353,7 @@
                         </div>
 
                         <div class="col-sm-4 hideInCoupons" style="padding-left:42px;margin-top:3px;">
-                            <div id="InviteUserBinding">
+                            <div id="InviteUserBinding" style="display:none">
                                 <a class="btn btn-default btn-gray" data-bind="click:showInviteUserPopup" id="btninviteusers" style="  height:58px;  width: 136px;float:right;margin-right:50px;padding-top:17px">Invite users</a>
 
                             </div>
@@ -542,6 +542,9 @@
                     $(".DamModelclose").click();
                 }
             });
+        }
+        function ShowInviteUserPopup() {
+            $('#btninviteusers').click();; 
         }
     </script>
 
