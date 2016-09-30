@@ -75,6 +75,7 @@ namespace SMD.Implementation.Services
             Company company = companyRepository.GetCompanyWithoutChilds(companyId);
             User loginUser = _manageUserRepository.GetLoginUser(userId);
             var defaultBranch = _companyBranchRepository.GetDefaultCompanyBranch(companyId);
+
             return new CompanyResponseModel
             {
                 CompanyId = company.CompanyId,
@@ -83,7 +84,7 @@ namespace SMD.Implementation.Services
                 BillingAddressLine2 = defaultBranch != null ? defaultBranch.BranchAddressLine2 : string.Empty,
                 BillingBusinessName = company.BillingAddressName,
                 BillingCity = defaultBranch != null ? defaultBranch.BranchCity : string.Empty,
-                BillingCountryId = defaultBranch != null ? defaultBranch.CountryId : null,
+                BillingCountryId = company != null ? company.BillingCountryId : null,
                 BillingEmail = company.BillingEmail,
                 BillingPhone = company.BillingPhone,
                 BillingState = defaultBranch != null ? defaultBranch.BranchState : string.Empty,
@@ -145,7 +146,7 @@ namespace SMD.Implementation.Services
 
         }
 
-        public bool UpdateCompanyProfile(CompanyResponseModel company, byte[] logoImageBytes)
+        public bool UpdateCompanyProfile(CompanyResponseModel requestData, byte[] logoImageBytes)
         {
             var currentCompany = companyRepository.GetCompanyWithoutChilds();
             if (currentCompany != null)
@@ -154,7 +155,7 @@ namespace SMD.Implementation.Services
                 {
                     string smdContentPath = ConfigurationManager.AppSettings["SMD_Content"];
                     HttpServerUtility server = HttpContext.Current.Server;
-                    string mapPath = server.MapPath(smdContentPath + "/Users/" + company.CompanyId);
+                    string mapPath = server.MapPath(smdContentPath + "/Users/" + requestData.CompanyId);
 
                     // Create directory if not there
                     if (!Directory.Exists(mapPath))
@@ -162,27 +163,34 @@ namespace SMD.Implementation.Services
                         Directory.CreateDirectory(mapPath);
                     }
 
-                   currentCompany.Logo = ImageHelper.SaveImage(mapPath, company.Logo, string.Empty, string.Empty,
-                        "blah", logoImageBytes, company.CompanyId);
+                   currentCompany.Logo = ImageHelper.SaveImage(mapPath, requestData.Logo, string.Empty, string.Empty,
+                        "blah", logoImageBytes, requestData.CompanyId);
                 }
                 var defaultBranch = _companyBranchRepository.GetDefaultCompanyBranch();
                 if (defaultBranch == null)
                 {
-                    CreateNewCompanyBranch(company);
+                    CreateNewCompanyBranch(requestData);
                 }
                 else
                 {
-                    updateCompanyBranch(defaultBranch, company);
+                    updateCompanyBranch(defaultBranch, requestData);
                 }
-                UpdatedCurrentCompany(company, currentCompany);
-                UpdateUserProfile(company);
-                companyRepository.SaveChanges();
+
+              //UpdatedCurrentCompany(requestData, currentCompany);
+
+
+                companyRepository.updateCompanyForProfile(requestData, currentCompany);
+
+                UpdateUserProfile(requestData);
+
+               
             }
             return true;
         }
 
         private Company UpdatedCurrentCompany(CompanyResponseModel source, Company target)
         {
+
             target.CompanyName = source.CompanyName;
             target.AboutUsDescription = source.AboutUs;
            target.BillingAddressLine1 = source.BillingAddressLine1;
@@ -204,7 +212,8 @@ namespace SMD.Implementation.Services
             target.WebsiteLink = source.WebsiteLink;
             target.TaxRegNo = source.CompanyRegistrationNo;
             target.Tel1 = source.SalesPhone;
-                
+            target.CountryId = source.BillingCountryId;
+           
             return target;
         }
         private CompanyBranch CreateNewCompanyBranch(CompanyResponseModel source)
@@ -264,7 +273,7 @@ namespace SMD.Implementation.Services
             currentUser.optDealsNearMeEmails = source.IsReceiveDeals;
             currentUser.optLatestNewsEmails = source.IsReceiveLatestServices;
             currentUser.optMarketingEmails = source.IsReceiveWeeklyUpdates;
-            
+          
             _manageUserRepository.SaveChanges();
             
         }

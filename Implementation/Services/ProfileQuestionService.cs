@@ -181,6 +181,8 @@ namespace SMD.Implementation.Services
                 serverObj.Status = source.Status;
                 serverObj.ModifiedDate = DateTime.Now.Add(-(_profileQuestionRepository.UserTimezoneOffSet));
 
+                _profileQuestionRepository.SaveChanges();
+
                 if (source.ProfileQuestionAnswers != null)
                 {
                     if (serverObj.ProfileQuestionAnswers == null)

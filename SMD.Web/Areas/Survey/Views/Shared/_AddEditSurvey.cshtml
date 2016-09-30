@@ -1474,55 +1474,10 @@
             </li>
         </ul>
     </li>
-</script>
-
-
-<!-- Modal -->
-<div class="modal fade" id="damModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document" style="width:1150px;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">&nbsp;</h4>
-            </div>
-            <div class="modal-body">
-                <iframe src="~/DamImages?mode=1" style="width:100%;height:600px;border:none;" id="iframe"></iframe>
-            </div>
-            <div class="modal-footer">
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
 
 
 
-    var sImageLeft = "";
-    var sImageRight = "";
-    var mode = 1;
-    function changeIframeSrc(mode1) {
-       
-        mode = mode1;
-        $("#iframe").attr("src", "/DamImages?mode=4" );
-    }
-    function iframeLoaded() {
-        var iframeBody = $('body', $('#iframe')[0].contentWindow.document);
-        $(iframeBody).on('click', '.damImgContainer img', function (event) {
-            console.log(mode);
-            if (mode == 1) {
-                $("#leftImgPath").attr("src", this.src).change();
-                sImageLeft = this.src;
-                $(".close").click();
-            } else if (mode == 2) {
-                $("#rightImgPath").attr("src", this.src).change();
-                sImageRight = this.src;
-                $(".close").click();
-            } 
-        });
-    }
 
-</script>
 
 <script id="SurveyssQuestionTiles" type="text/html">
     <div class="list">
