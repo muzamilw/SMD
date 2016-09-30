@@ -262,7 +262,18 @@ namespace SMD.Implementation.Services
 
         private void UpdateUserProfile(CompanyResponseModel source)
         {
+
             User currentUser = _manageUserRepository.GetLoginUser();
+
+            if (source.Solutation == 1)
+            {
+                currentUser.Title = "Mr.";
+            }
+            else
+            {
+                currentUser.Title = "MRs.";
+            }
+
             currentUser.FullName = source.FirstName;
             currentUser.Gender = source.Solutation == 1 ? 1 : 2;
            // currentUser.Email = source.Email;

@@ -157,8 +157,6 @@ namespace SMD.Implementation.Services
             var user = UserManager.Users.Where(g => g.Id == _profileQuestionRepository.LoggedInUserIdentity).SingleOrDefault();
 
 
-
-
             var serverObj = _profileQuestionRepository.Find(source.PqId);
             //var user = UserManager.Users.Where(g => g.Id == _profileQuestionRepository.LoggedInUserIdentity).SingleOrDefault();
 
