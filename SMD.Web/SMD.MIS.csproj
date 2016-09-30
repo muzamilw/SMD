@@ -717,8 +717,9 @@
     <Content Include="Areas\ProfileQuestion\Views\Manage\_pqEditorForApp.cshtml" />
     <Content Include="Areas\DAM\Views\Images\AdminIndex.cshtml" />
     <Content Include="Areas\Common\Views\Shared\_InviteSharingUser.cshtml" />
-    <Content Include="Areas\Report\Views\Report\WalletReport.cshtml" />
+    <Content Include="Areas\Report\Views\Report\WalletReport1.cshtml" />
     <Content Include="Areas\Franchise\Views\Dashboard\TransferRateDashboard.cshtml" />
+    <Content Include="Areas\Report\Views\Report\WalletReport.cshtml" />
     <None Include="config\Web.connectionstrings.config">
       <SubType>Designer</SubType>
     </None>
