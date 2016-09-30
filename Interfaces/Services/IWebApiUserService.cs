@@ -40,10 +40,10 @@ namespace SMD.Interfaces.Services
         /// </summary>
         Task<BaseApiResponse> UpdateProfile(UpdateUserProfileRequest request);
 
-        /// <summary>
-        /// Update Profile Image
-        /// </summary>
-        Task<UpdateProfileImageResponse> UpdateProfileImage(UpdateUserProfileRequest request);
+        ///// <summary>
+        ///// Update Profile Image
+        ///// </summary>
+        //Task<UpdateProfileImageResponse> UpdateProfileImage(UpdateUserProfileRequest request);
         
         /// <summary>
         /// Confirm Email

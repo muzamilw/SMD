@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets308397826F61FA2CDD5BEDFFB65989804F47E7E6F1BF69814E598B0F91953F5B))]
+[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetsD614FD40AFC0D7D4A1EFCEB4016B383771AC0B3A0481BAD348D4542208F0ADB9))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -17,18 +17,18 @@ namespace Edm_EntityMappingGeneratedViews
     /// <Summary>
     /// The type contains views for EntitySets and AssociationSets that were generated at design time.
     /// </Summary>
-    public sealed class ViewsForBaseEntitySets308397826F61FA2CDD5BEDFFB65989804F47E7E6F1BF69814E598B0F91953F5B : System.Data.Mapping.EntityViewContainer
+    public sealed class ViewsForBaseEntitySetsD614FD40AFC0D7D4A1EFCEB4016B383771AC0B3A0481BAD348D4542208F0ADB9 : System.Data.Mapping.EntityViewContainer
     {
         
         /// <Summary>
         /// The constructor stores the views for the extents and also the hash values generated based on the metadata and mapping closure and views.
         /// </Summary>
-        public ViewsForBaseEntitySets308397826F61FA2CDD5BEDFFB65989804F47E7E6F1BF69814E598B0F91953F5B()
+        public ViewsForBaseEntitySetsD614FD40AFC0D7D4A1EFCEB4016B383771AC0B3A0481BAD348D4542208F0ADB9()
         {
             this.EdmEntityContainerName = "BaseDbContext";
             this.StoreEntityContainerName = "SMDModelStoreContainer";
-            this.HashOverMappingClosure = "7439276f0cb948f19710cef85643d1031f2483a5e2a5bb47e25fefd937f259ef";
-            this.HashOverAllExtentViews = "62fb977b6880b84cb7f42ac8e501229138d9d3d084e7e516d31aa3d14e06c058";
+            this.HashOverMappingClosure = "7984ecfe3c15c6f2f97bac60975c57e1369a3c3eeb3a606f4516d1b48a7a1142";
+            this.HashOverAllExtentViews = "8c8d09cba82d71cc140c9ec8b0064332b3e8cbb841a6dd3f9743ffd846924100";
             this.ViewCount = 120;
         }
         
@@ -3737,13 +3737,15 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.UserCouponView", @"
     SELECT VALUE -- Constructing UserCouponView
-        [SMDModel.Store.UserCouponView](T1.UserCouponView_UserCouponViewId, T1.UserCouponView_CouponId, T1.UserCouponView_UserId, T1.UserCouponView_ViewDateTime)
+        [SMDModel.Store.UserCouponView](T1.UserCouponView_UserCouponViewId, T1.UserCouponView_CouponId, T1.UserCouponView_UserId, T1.UserCouponView_ViewDateTime, T1.UserCouponView_userLocationLAT, T1.UserCouponView_userLocationLONG)
     FROM (
         SELECT 
             T.UserCouponViewId AS UserCouponView_UserCouponViewId, 
             T.CouponId AS UserCouponView_CouponId, 
             T.UserId AS UserCouponView_UserId, 
             T.ViewDateTime AS UserCouponView_ViewDateTime, 
+            T.userLocationLAT AS UserCouponView_userLocationLAT, 
+            T.userLocationLONG AS UserCouponView_userLocationLONG, 
             True AS _from0
         FROM BaseDbContext.UserCouponViews AS T
     ) AS T1");
@@ -3756,13 +3758,15 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.UserCouponViews", @"
     SELECT VALUE -- Constructing UserCouponViews
-        [DomainModels.UserCouponView](T1.UserCouponView_UserCouponViewId, T1.UserCouponView_CouponId, T1.UserCouponView_UserId, T1.UserCouponView_ViewDateTime)
+        [DomainModels.UserCouponView](T1.UserCouponView_UserCouponViewId, T1.UserCouponView_CouponId, T1.UserCouponView_UserId, T1.UserCouponView_ViewDateTime, T1.UserCouponView_userLocationLAT, T1.UserCouponView_userLocationLONG)
     FROM (
         SELECT 
             T.UserCouponViewId AS UserCouponView_UserCouponViewId, 
             T.CouponId AS UserCouponView_CouponId, 
             T.UserId AS UserCouponView_UserId, 
             T.ViewDateTime AS UserCouponView_ViewDateTime, 
+            T.userLocationLAT AS UserCouponView_userLocationLAT, 
+            T.userLocationLONG AS UserCouponView_userLocationLONG, 
             True AS _from0
         FROM SMDModelStoreContainer.UserCouponView AS T
     ) AS T1");
