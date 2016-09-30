@@ -153,20 +153,20 @@ namespace SMD.Implementation.Services
         /// <param name="smdAccount">SMD Account Info</param>
         /// <param name="adCampaign">Ad Campaign</param>
         /// <param name="adViewerUsedVoucher">If Ad Viewer Uses Voucher</param>
-        private async Task PerformAdCampaignClickTransactions(AdViewedRequest request, Account advertisersAccount, double? adClickRate,
+        private async Task PerformAdCampaignClickTransactions(long AdCampaignId, Account advertisersAccount, double? adClickRate,
             Account adViewersAccount, double? adViewersCut, Company referringCompany, double? smdsCut, Account affiliatesAccount,
-            Account smdAccount, AdCampaign adCampaign, ProductActionRequest pRequest, bool ReferralScenario, double? referralCut)
+            Account smdAccount, AdCampaign adCampaign, bool ReferralScenario, double? referralCut)
         {
             // Debit Advertiser
             var transactionSequence = 1;
 
             // Perform the transactions
             // Debit Campaign Advertiser
-            PerformTransaction(request.AdCampaignId, null, advertisersAccount, adClickRate, transactionSequence, TransactionType.AdClick, false);
+            PerformTransaction(AdCampaignId, null, advertisersAccount, adClickRate, transactionSequence, TransactionType.AdClick, false);
 
            
             transactionSequence += 1;
-            PerformTransaction(request.AdCampaignId, null, adViewersAccount, adViewersCut, transactionSequence, TransactionType.AdClick,true);
+            PerformTransaction(AdCampaignId, null, adViewersAccount, adViewersCut, transactionSequence, TransactionType.AdClick,true);
 
   
             // Credit Affiliate
@@ -174,14 +174,14 @@ namespace SMD.Implementation.Services
             if (ReferralScenario)
             {
                 transactionSequence += 1;
-                PerformTransaction(request.AdCampaignId, null, affiliatesAccount, referralCut, transactionSequence, TransactionType.AdClick);
+                PerformTransaction(AdCampaignId, null, affiliatesAccount, referralCut, transactionSequence, TransactionType.AdClick);
             }
             
             
             // Credit SMD
             //todo pilot: Commenting Smd Transaction
             transactionSequence += 1;
-            PerformTransaction(request.AdCampaignId, null, smdAccount, smdsCut, transactionSequence, TransactionType.AdClick, true, true);
+            PerformTransaction(AdCampaignId, null, smdAccount, smdsCut, transactionSequence, TransactionType.AdClick, true, true);
 
             // Update AdCampaign Amount Spent
             if (!adCampaign.AmountSpent.HasValue)
@@ -190,9 +190,7 @@ namespace SMD.Implementation.Services
             }
             adCampaign.AmountSpent += adClickRate;
 
-            // Add Campaign Response 
-            PerformSkipOrUpdateUserAdSelection((int)request.AdCampaignId, request.UserId,
-                (int)AdRewardType.Cash,false, adViewersCut, request.companyId, request.userQuizSelection.HasValue ? request.userQuizSelection.Value : 0, pRequest,false);
+          
 
             // Save Changes
             transactionRepository.SaveChanges();
@@ -204,7 +202,7 @@ namespace SMD.Implementation.Services
         /// Sets up accounts for transcations
         /// Verifies if required accounts exist
         /// </summary>
-        private void SetupAdCampaignTransaction(AdViewedRequest request, AdCampaign adCampaign,
+        private void SetupAdCampaignTransaction(ProductActionRequest request, AdCampaign adCampaign,
             out Account adViewersAccount, out Account advertisersAccount, out Account smdAccount, string systemUserId)
         {
 
@@ -235,15 +233,15 @@ namespace SMD.Implementation.Services
         /// Validates Ad Campaing
         /// AdCampaign Exists
         /// </summary>
-        private async Task<AdCampaign> ValidateAdCampaign(AdViewedRequest request)
+        private async Task<AdCampaign> ValidateAdCampaign(long AdCampaignId)
         {
             // Get AdCampaign against AdCampaign Id
-            AdCampaign adCampaign = adCampaignRepository.Find(request.AdCampaignId);
+            AdCampaign adCampaign = adCampaignRepository.Find(AdCampaignId);
             if (adCampaign == null)
             {
                 throw new SMDException(string.Format(CultureInfo.InvariantCulture,
                     LanguageResources.WebApiUserService_AdCampaignNotFound,
-                    request.AdCampaignId));
+                    AdCampaignId));
             }
 
             if (string.IsNullOrEmpty(adCampaign.UserId))
@@ -360,28 +358,34 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Update Profile Question User Answer
         /// </summary>
-        /// <param name="request"></param>
-        private void UpdateProfileQuestionUserAnswer(ProductActionRequest request)
+        /// <param name="response"></param>
+        private void ExecuteProfileQuestionEvent(ProductActionRequest response)
         {
-            if (request.Type != null && (request.Type.Value == (int?)ProductType.Question && request.ItemId.HasValue) && 
-                (!request.IsSkipped.HasValue || !request.IsSkipped.Value))
-            {
-                if (request.PqAnswerIds == null)
-                {
-                    request.PqAnswerIds = new List<int>();
-                }
-                
-                profileQuestionAnswerService.UpdateProfileQuestionUserAnswer(
-                    new UpdateProfileQuestionUserAnswerApiRequest
-                    {
-                        ProfileQuestionAnswerIds = request.PqAnswerIds,
-                        ProfileQuestionId = (int)request.ItemId.Value,
-                        UserId = request.UserId,
-                        companyId = request.companyId.Value
-                    });
 
-                //updating count
-                var profileQuestion = profileQuestionRepository.Find((int)request.ItemId.Value);
+
+            if (response.PqAnswerIds == null)
+            {
+                response.PqAnswerIds = new List<int>();
+            }
+
+            //recording response
+            profileQuestionAnswerService.SaveProfileQuestionUserResponse(
+               new UpdateProfileQuestionUserAnswerApiRequest
+               {
+                   ProfileQuestionAnswerIds = response.PqAnswerIds,
+                   ProfileQuestionId = (int)response.ItemId.Value,
+                   UserId = response.UserId,
+                   companyId = response.companyId.Value,
+                   ResponeEventType = response.ResponeEventType
+               });
+
+            var profileQuestion = profileQuestionRepository.Find((int)response.ItemId.Value);
+            //rewarding and increasing count happens only when they answer it.
+            if (response.ResponeEventType == CampaignResponseEventType.Answered)
+            {
+
+
+                //updating answer count
                 profileQuestion.AsnswerCount = (profileQuestion.AsnswerCount.HasValue ? profileQuestion.AsnswerCount.Value : 0) + 1;
                 profileQuestionRepository.Update(profileQuestion);
                 profileQuestionRepository.SaveChanges();
@@ -391,131 +395,157 @@ namespace SMD.Implementation.Services
                 if (profileQuestion.CompanyId != null)
                 {
 
-                      UpdateTransactionOnPaidProfileQuestionAnswer(new AdViewedRequest
-                    {
-                        AdCampaignId = request.ItemId.Value,
-                        UserId = request.UserId,
-                        companyId = request.companyId.Value,
-                        userQuizSelection = request.UserQuestionResponse,
-                        
-                    }, request,2,profileQuestion.CompanyId.Value );    
+                    UpdateTransactionOnPaidProfileQuestionAnswer(new AdViewedRequest
+                  {
+                      AdCampaignId = response.ItemId.Value,
+                      UserId = response.UserId,
+                      companyId = response.companyId.Value,
+                      userQuizSelection = response.UserQuestionResponse,
+
+                  }, response, 2, profileQuestion.CompanyId.Value);
 
                 }
-
-
-                
             }
+            else if (response.ResponeEventType == CampaignResponseEventType.Skip)
+            {
+                profileQuestion.SkippedCount = (profileQuestion.SkippedCount.HasValue ? profileQuestion.SkippedCount.Value : 0) + 1;
+                profileQuestionRepository.Update(profileQuestion);
+                profileQuestionRepository.SaveChanges();
+            }
+
+
         }
 
         /// <summary>
         /// Execute AdClicked / Viewed
         /// </summary>
-        private async Task ExecuteAdClickViewed(ProductActionRequest request)
+        private async Task<BaseApiResponse> ExecuteVideoOrGameEvent(ProductActionRequest request)
         {
-            if (request.AdClickedViewed.HasValue && request.AdClickedViewed.Value && request.ItemId.HasValue && request.AdRewardUserSelection.HasValue &&
-                (!request.IsSkipped.HasValue || !request.IsSkipped.Value))
+
+            double? adViewersCut = 0;
+            // Get Ad Viewer
+            User adViewer = await UserManager.FindByIdAsync(request.UserId);
+            if (adViewer == null)
             {
-                
-                    await UpdateTransactionOnViewingAd(new AdViewedRequest
+                throw new SMDException(LanguageResources.WebApiUserService_InvalidUserId);
+            }
+
+            User cash4Ads = await UserManager.FindByEmailAsync(SystemUsers.Cash4Ads);
+            if (cash4Ads == null)
+            {
+                throw new SMDException(string.Format(CultureInfo.InvariantCulture, LanguageResources.WebApiUserService_InvalidUser,
+                    "Cash4Ads"));
+            }
+
+            var adCampaign = await ValidateAdCampaign(request.ItemId.Value);
+
+            if (request.ResponeEventType == CampaignResponseEventType.Answered)
+            {
+
+                // Validates if Ad Campaing Exists
+               
+                bool ReferralScenario = false;
+                Company referringCompany = null;
+                Account referringCompanyAccount = null;
+                var advertiserCompany = companyRepository.Find(adCampaign.CompanyId.Value);
+               
+
+
+                // Get Referral if any
+                if (advertiserCompany.ReferringCompanyID.HasValue)
+                {
+                    referringCompany = companyRepository.Find(advertiserCompany.ReferringCompanyID.Value);
+                    ReferralScenario = true;
+
+                    if (referringCompany == null)
                     {
-                        AdCampaignId = request.ItemId.Value,
-                        UserId = request.UserId,
-                        companyId = request.companyId.Value,
-                        userQuizSelection = request.UserQuestionResponse 
-                    },request);    
-                
+                        throw new SMDException(LanguageResources.WebApiUserService_ReferrerNotFound);
+                    }
 
-                //else if (request.AdRewardUserSelection.Value == (int)AdRewardType.Voucher)
-                //{
-                //    await UpdateTransactionOnViewingAdWithVoucher(new AdViewedRequest
-                //    {
-                //        AdCampaignId = request.ItemId.Value,
-                //        UserId = request.UserId,
-                //        companyId = request.companyId.Value,
-                //        userQuizSelection =  request.UserQuestionResponse 
-                //    }); 
-                //}
+                    referringCompanyAccount = accountRepository.GetByCompanyId(referringCompany.CompanyId, AccountType.VirtualAccount);
+                    if (referringCompanyAccount == null)
+                    {
+                        throw new SMDException(string.Format(CultureInfo.InvariantCulture,
+                            LanguageResources.WebApiUserService_AccountNotFound, "Affiliate"));
+                    }
+                }
+
+
+                // Ad Viewer will get 50% and other 50% will be divided b/w SMD (30%), Affiliate(20%) (Referrer) if exists
+                double? adClickRate = adCampaign.ClickRate ?? 0;
+
+                adViewersCut = adClickRate / 2; // commenting for pilot launch, now smd hace no percentage and all the money will go to user account from advertiser account. So there will be 2 transactions now advertiser debit transaction and user credit transaction ((adClickRate * 50) / 100); 
+                double? smdsCut = 0;
+                double? referralCut = 0;
+
+
+                if (ReferralScenario)
+                {
+                    smdsCut = adClickRate / 4; //adViewersCut;
+                    referralCut = adClickRate / 4;
+                }
+                else
+                {
+                    smdsCut = adClickRate / 2;
+                    referralCut = 0;
+                }
+
+                Account adViewersAccount;
+                Account advertisersAccount;
+                Account smdAccount;
+
+                // Sets up transaction 
+                // Gets Accounts required
+                SetupAdCampaignTransaction(request, adCampaign, out adViewersAccount, out advertisersAccount, out smdAccount, cash4Ads.Id);
+
+                // Perform financial Transactions
+                await PerformAdCampaignClickTransactions(request.ItemId.Value, advertisersAccount, adClickRate, adViewersAccount, adViewersCut, referringCompany, smdsCut,
+                    referringCompanyAccount, smdAccount, adCampaign, ReferralScenario, referralCut);
+
             }
-        }
 
-        /// <summary>
-        /// Skips Ad Campaign
-        /// </summary>
-        private void PerformSkipOrUpdateUserAdSelection(int adCampaignId, string userId, int? userSelection, bool? isSkipped,
-            double? endUserAmount, int companyId, int userQuizSelection,  ProductActionRequest request,bool saveChanges = true)
-        {
-            AdCampaign adCampaign = adCampaignRepository.Find(adCampaignId);
-            if (adCampaign == null)
-            {
-                throw new SMDException(string.Format(CultureInfo.InvariantCulture,
-                    LanguageResources.WebApiUserService_AdCampaignNotFound, adCampaignId));
-            }
 
-            AdCampaignResponse adCampaignResponse = adCampaignResponseRepository.GetByUserId(adCampaignId, userId) ??
-                                                    CreateAdCampaignResponse(adCampaignId, userId, adCampaign, request);
-            adCampaignResponse.CompanyId = companyId;
-            adCampaignResponse.UserQuestionResponse = userQuizSelection;
-            UpdateAdResponse(userSelection, isSkipped, endUserAmount, adCampaignResponse);
-            
-            if (!saveChanges)
-            {
-                return;
-            }
+            // Add Campaign Response recording
 
-            adCampaignRepository.SaveChanges();
-        }
-
-        /// <summary>
-        /// Creates New Ad Campaign Response
-        /// </summary>
-        private AdCampaignResponse CreateAdCampaignResponse(int adCampaignId, string userId, AdCampaign adCampaign, ProductActionRequest request)
-        {
             AdCampaignResponse adCampaignResponse = adCampaignResponseRepository.Create();
-            adCampaignResponse.CampaignId = adCampaignId;
-            adCampaignResponse.UserId = userId;
+            adCampaignResponse.CampaignId = request.ItemId.Value;
+            adCampaignResponse.UserId = request.UserId;
             adCampaignResponse.UserLocationLat = request.UserLocationLat;
             adCampaignResponse.UserLocationLong = request.UserLocationLong;
             adCampaignResponse.UserLocationCity = request.City;
             adCampaignResponse.UserLocationCountry = request.Country;
-
-
+            adCampaignResponse.CompanyId = request.companyId;
+            adCampaignResponse.UserQuestionResponse = request.UserQuestionResponse;
+            adCampaignResponse.UserSelection = request.UserQuestionResponse;
+            adCampaignResponse.ResponseType = (int)request.ResponeEventType;
+            adCampaignResponse.EndUserDollarAmount = adViewersCut;
+            adCampaignResponse.CreatedDateTime = DateTime.Now;
 
             adCampaignResponseRepository.Add(adCampaignResponse);
             adCampaign.AdCampaignResponses.Add(adCampaignResponse);
-            
-            return adCampaignResponse;
+            adCampaignRepository.SaveChanges();
+
+
+
+            return new BaseApiResponse
+            {
+                Status = true,
+                Message = LanguageResources.Success
+            };
+
+
+
+
         }
 
-        /// <summary>
-        /// Updates users response for Ads
-        /// </summary>
-        private void UpdateAdResponse(int? userSelection, bool? isSkipped, double? endUserAmount, AdCampaignResponse adCampaignResponse)
-        {
-            if (isSkipped.HasValue && isSkipped.Value)
-            {
-                if (!adCampaignResponse.SkipCount.HasValue)
-                {
-                    adCampaignResponse.SkipCount = 0;
-                }
+               
 
-                adCampaignResponse.SkipCount += 1;
-            }
-            else if (userSelection.HasValue)
-            {
-                adCampaignResponse.UserSelection = userSelection;
-                if (!adCampaignResponse.EndUserDollarAmount.HasValue)
-                {
-                    adCampaignResponse.EndUserDollarAmount = 0;
-                }
-                adCampaignResponse.EndUserDollarAmount += endUserAmount ?? 0;
-            }
-            adCampaignResponse.CreatedDateTime = DateTime.Now.Add(-(adCampaignRepository.UserTimezoneOffSet));
-        }
+
 
         /// <summary>
         /// Skips Survey Question
         /// </summary>
-        private void PerformSkipOrUserSurveySelection(int sqId, string userId, int? userSelection, bool? isSkipped,int companyId, ProductActionRequest request)
+        private void ExecuteSurveyQuestionEvent(int sqId, string userId, int? userSelection, bool? isSkipped,int companyId, ProductActionRequest request)
         {
             SurveyQuestion surveyQuestion = surveyQuestionRepository.Find(sqId);
             if (surveyQuestion == null)
@@ -524,22 +554,32 @@ namespace SMD.Implementation.Services
                     LanguageResources.WebApiUserService_SurveyQuestionNotFound, sqId));
             }
 
-            SurveyQuestionResponse sqResponse = surveyQuestionResponseRepository.GetByUserId(sqId, userId) ??
-                                                CreateSurveyQuestionResponse(sqId, userId, surveyQuestion);
+            //adding response
+            SurveyQuestionResponse sqResponse = surveyQuestionResponseRepository.Create();
+            sqResponse.SqId = sqId;
+            sqResponse.UserId = userId;
+            sqResponse.ResponseType = (int)request.ResponeEventType;
+            if (userSelection.HasValue)
+            {
+                sqResponse.UserSelection = userSelection;
+            }
+            sqResponse.CompanyId = companyId;
+            sqResponse.ResoponseDateTime = DateTime.Now.Add(-(surveyQuestionRepository.UserTimezoneOffSet));
+
+            surveyQuestionResponseRepository.Add(sqResponse);
+            surveyQuestion.SurveyQuestionResponses.Add(sqResponse);
 
             //increment counter
-            surveyQuestion.ResultClicks = (surveyQuestion.ResultClicks.HasValue  ? surveyQuestion.ResultClicks.Value : 0) +  1;
-
+            if ( request.ResponeEventType != CampaignResponseEventType.Skip)
+                surveyQuestion.ResultClicks = (surveyQuestion.ResultClicks.HasValue  ? surveyQuestion.ResultClicks.Value : 0) +  1;
 
             surveyQuestionRepository.Update(surveyQuestion);
-            // Update User Response
-            UpdateProductsResponse(userSelection, isSkipped, sqResponse,companyId);
             surveyQuestionRepository.SaveChanges();
 
 
+            //since its a purchased ProfileQuestion hence reward the end user and its an answered event
 
-            //since its a purchased ProfileQuestion hence reward the end user
-            if (surveyQuestion.CompanyId != null)
+            if (surveyQuestion.CompanyId != null && request.ResponeEventType == CampaignResponseEventType.Answered)
             {
 
                 UpdateTransactionOnPaidSurveyAnswer(new AdViewedRequest
@@ -554,72 +594,11 @@ namespace SMD.Implementation.Services
             }
         }
 
-        /// <summary>
-        /// Creates New Survey Question Response
-        /// </summary>
-        private SurveyQuestionResponse CreateSurveyQuestionResponse(int sqId, string userId, SurveyQuestion surveyQuestion)
-        {
-            SurveyQuestionResponse sqResponse = surveyQuestionResponseRepository.Create();
-            sqResponse.SqId = sqId;
-            sqResponse.UserId = userId;
-            surveyQuestionResponseRepository.Add(sqResponse);
-            surveyQuestion.SurveyQuestionResponses.Add(sqResponse);
-            return sqResponse;
-        }
+      
 
-        /// <summary>
-        /// Update Users response for product
-        /// </summary>
-        private void UpdateProductsResponse(int? userSelection, bool? isSkipped, SurveyQuestionResponse sqResponse,int companyId)
-        {
-            if (isSkipped.HasValue && isSkipped.Value)
-            {
-                if (!sqResponse.SkipCount.HasValue)
-                {
-                    sqResponse.SkipCount = 0;
-                }
-
-                sqResponse.SkipCount += 1;
-            }
-            else if (userSelection.HasValue)
-            {
-                sqResponse.UserSelection = userSelection;
-                sqResponse.SkipCount = 0;
-            }
-            sqResponse.CompanyId = companyId;
-            sqResponse.ResoponseDateTime = DateTime.Now.Add(-(surveyQuestionRepository.UserTimezoneOffSet));
-        }
+       
 
 
-        /// <summary>
-        /// Skip Product
-        /// </summary>
-        /// <param name="request"></param>
-        private void SkipProduct(ProductActionRequest request)
-        {
-            if (request.IsSkipped.HasValue && request.IsSkipped.Value)
-            {
-                if (!request.ItemId.HasValue || !request.Type.HasValue)
-                {
-                    throw new SMDException(LanguageResources.WebApiUserService_ProductTypeNotProvided);
-                }
-
-                if (request.Type.Value == (int)ProductType.Question)
-                {
-                    profileQuestionService.PerformSkip((int)request.ItemId.Value);
-                }
-
-                else if (request.Type.Value == (int)ProductType.Ad)
-                {
-                    PerformSkipOrUpdateUserAdSelection((int)request.ItemId.Value, request.UserId, null, true, null, request.companyId.Value,request.UserQuestionResponse.HasValue? request.UserQuestionResponse.Value:0, request, true);
-                }
-
-                else if (request.Type.Value == (int)ProductType.SurveyQuestion)
-                {
-                    PerformSkipOrUserSurveySelection((int)request.ItemId.Value, request.UserId, null, true,request.companyId.Value,request);
-                }
-            }
-        }
 
         #endregion
 
@@ -715,89 +694,7 @@ namespace SMD.Implementation.Services
 
         #region Ad Approve
 
-        /// <summary>
-        /// Update Transactions on viewing ad
-        /// </summary>
-        public async Task<BaseApiResponse> UpdateTransactionOnViewingAd(AdViewedRequest request,ProductActionRequest pRequest)
-        {
-            // Get Ad Viewer
-            User adViewer = await UserManager.FindByIdAsync(request.UserId);
-            if (adViewer == null)
-            {
-                throw new SMDException(LanguageResources.WebApiUserService_InvalidUserId);
-            }
-
-            User cash4Ads = await UserManager.FindByEmailAsync(SystemUsers.Cash4Ads);
-            if (cash4Ads == null)
-            {
-                throw new SMDException(string.Format(CultureInfo.InvariantCulture, LanguageResources.WebApiUserService_InvalidUser,
-                    "Cash4Ads"));
-            }
-
-            // Validates if Ad Campaing Exists
-            var adCampaign = await ValidateAdCampaign(request);
-            bool ReferralScenario = false;
-            Company referringCompany = null;
-            Account referringCompanyAccount = null;
-            var advertiserCompany = companyRepository.Find(adCampaign.CompanyId.Value);
-
-            // Get Referral if any
-            if (advertiserCompany.ReferringCompanyID.HasValue)
-            {
-                referringCompany = companyRepository.Find(advertiserCompany.ReferringCompanyID.Value);
-                ReferralScenario = true;
-          
-                if (referringCompany == null)
-                {
-                    throw new SMDException(LanguageResources.WebApiUserService_ReferrerNotFound);
-                }
-
-                referringCompanyAccount = accountRepository.GetByCompanyId(referringCompany.CompanyId, AccountType.VirtualAccount);
-                if (referringCompanyAccount == null)
-                {
-                    throw new SMDException(string.Format(CultureInfo.InvariantCulture,
-                        LanguageResources.WebApiUserService_AccountNotFound, "Affiliate"));
-                }
-            }
-
-          
-            // Ad Viewer will get 50% and other 50% will be divided b/w SMD (30%), Affiliate(20%) (Referrer) if exists
-            double? adClickRate = adCampaign.ClickRate ?? 0;
-            
-            double? adViewersCut = adClickRate /2; // commenting for pilot launch, now smd hace no percentage and all the money will go to user account from advertiser account. So there will be 2 transactions now advertiser debit transaction and user credit transaction ((adClickRate * 50) / 100); 
-            double? smdsCut = 0;
-            double? referralCut=0;
-
-
-            if (ReferralScenario)
-            {
-                smdsCut = adClickRate / 4; //adViewersCut;
-                referralCut = adClickRate / 4;
-            }
-            else
-            {
-                smdsCut = adClickRate / 2;
-                referralCut = 0;
-            }
-
-            Account adViewersAccount;
-            Account advertisersAccount;
-            Account smdAccount;
-
-            // Sets up transaction 
-            // Gets Accounts required
-            SetupAdCampaignTransaction(request, adCampaign, out adViewersAccount, out advertisersAccount, out smdAccount, cash4Ads.Id);
-
-            // Perform Transactions
-            await PerformAdCampaignClickTransactions(request, advertisersAccount, adClickRate, adViewersAccount, adViewersCut, referringCompany, smdsCut,
-                referringCompanyAccount, smdAccount, adCampaign, pRequest, ReferralScenario, referralCut);
-
-            return new BaseApiResponse
-                   {
-                       Status = true,
-                       Message = LanguageResources.Success
-                   };
-        }
+      
 
 
         public async Task<BaseApiResponse> UpdateTransactionOnPaidSurveyAnswer(AdViewedRequest request, ProductActionRequest pRequest, double rewardCentz, int AdvertiserCompanyId)
@@ -941,51 +838,7 @@ namespace SMD.Implementation.Services
                 Message = LanguageResources.Success
             };
         }
-        /// <summary>
-        /// Update Transactions on Viewing Ad
-        /// this function is not needed anymore
-        /// </summary>
-        //public async Task<BaseApiResponse> UpdateTransactionOnViewingAdWithVoucher(AdViewedRequest request)
-        //{
-        //    // Get Ad Viewer
-        //    User adViewer = await UserManager.FindByIdAsync(request.UserId);
-        //    if (adViewer == null)
-        //    {
-        //        throw new SMDException(LanguageResources.WebApiUserService_InvalidUserId);
-        //    }
-
-        //    User cash4Ads = await UserManager.FindByEmailAsync(SystemUsers.Cash4Ads);
-        //    if (cash4Ads == null)
-        //    {
-        //        throw new SMDException(string.Format(CultureInfo.InvariantCulture, LanguageResources.WebApiUserService_InvalidUser,
-        //            "Cash4Ads"));
-        //    }
-
-        //    // Validates if Ad Campaing Exists
-        //    var adCampaign = await ValidateAdCampaign(request);
-            
-        //    // Begin Transaction
-        //    // Ad Viewer will get Voucher and 100% will be given to SMD
-        //    double? adClickRate = adCampaign.ClickRate ?? 0;
-        //    double? smdsCut = adClickRate;
-        //    Account adViewersAccount;
-        //    Account advertisersAccount;
-        //    Account smdAccount;
-
-        //    // Sets up transaction 
-        //    // Gets Accounts required
-        //    SetupAdCampaignTransaction(request, adCampaign, out adViewersAccount, out advertisersAccount, out smdAccount, cash4Ads.Id);
-
-        //    // Perform Transactions
-        //    await PerformAdCampaignTransactions(request, advertisersAccount, adClickRate, adViewersAccount, 0, null, smdsCut,
-        //        null, smdAccount, adCampaign, true);
-
-        //    return new BaseApiResponse
-        //    {
-        //        Status = true,
-        //        Message = LanguageResources.Success
-        //    };
-        //}
+        
 
 
         #endregion
@@ -1026,34 +879,35 @@ namespace SMD.Implementation.Services
         /// Handles Response for Products
         /// Ad Clicked/Viewed, Question Answered, Survey Selection
         /// </summary>
-        public async Task<BaseApiResponse> ExecuteActionOnProductsResponse(ProductActionRequest request)
+        public async Task<BaseApiResponse> ExecuteActionOnProductsResponse(ProductActionRequest response)
         {
-            if (!request.Type.HasValue)
-            {
-                throw new SMDException(LanguageResources.WebApiUserService_ProductTypeNotProvided);
-            }
+            //if (request.Type)
+            //{
+            //    throw new SMDException(LanguageResources.WebApiUserService_ProductTypeNotProvided);
+            //}
 
             // Check if user exists
-            User user = await UserManager.FindByIdAsync(request.UserId);
+            User user = await UserManager.FindByIdAsync(response.UserId);
             if (user == null)
             {
                 throw new SMDException(LanguageResources.WebApiUserService_InvalidUserId);
             }
 
-            // Question Answered
-            UpdateProfileQuestionUserAnswer(request);
+            // Profile Question  Event
+            // (int?)ProductType.Question 3
+            if ( response.Type ==  CampaignType.ProfileQuestion)
+                ExecuteProfileQuestionEvent(response);
 
             // Ad Clicked / Viewed
-            await ExecuteAdClickViewed(request);
+            if (response.Type == CampaignType.GameAd || response.Type == CampaignType.VideoAd)
+                await ExecuteVideoOrGameEvent(response);
 
             // Update Survey User Selection
-            if (request.Type.Value == (int)ProductType.SurveyQuestion && request.ItemId.HasValue && request.SqUserSelection.HasValue)
+            if (response.Type == CampaignType.SurveyQuestion)
             {
-                PerformSkipOrUserSurveySelection((int)request.ItemId.Value, request.UserId, request.SqUserSelection, null, request.companyId.Value, request);
+                ExecuteSurveyQuestionEvent((int)response.ItemId.Value, response.UserId, response.SqUserSelection, null, response.companyId.Value, response);
             }
 
-            // Product Skipped
-            SkipProduct(request);
 
             return new BaseApiResponse
             {

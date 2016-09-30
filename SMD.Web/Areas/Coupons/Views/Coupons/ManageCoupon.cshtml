@@ -16,7 +16,7 @@ else
     <div class="col-lg-12">
         <div class="row">
             <div class="col-lg-12" id="topArea">
-                
+
                 <ol class="breadcrumb" style="display:none;">
                     <li><a href="/Dashboard/Index" class="my-navigator">Home</a></li>
                     <li><a data-bind="click:$root.CloseCouponsView" class="my-navigator">Deal Promotion</a></li>
@@ -26,7 +26,7 @@ else
                    
                     <div  style="float:right;margin-top:-9px;"><img data-bind="click: $root.CloseCouponsView" src="/Content/Images/Close_Button.png" style="width:27px;height:27px;float:right;cursor:pointer;"></div>
                 </div>
-                
+
                 <div class="row" style="margin-bottom:15px;">
                     <div class="col-xs-6 pull-left validationSummaryContainer">
                         <ul data-bind="foreach: $root.errorList">
@@ -144,43 +144,22 @@ else
 
 
 
-                        <div class="adsubHeading Theme_standard_clr borderbtmline " style="padding-left:27px;" data-bind="visible: $root.previewScreenNumber() == 1">
-                            Use Inspiring headlines to attract attention.
-                        </div>
+                        @*<div class="adsubHeading Theme_standard_clr borderbtmline " style="padding-left:27px;" data-bind="visible: $root.previewScreenNumber() == 1">
+                            
+                        </div>*@
 
+                        <div class="col-lg-12" data-bind="visible: $root.previewScreenNumber() == 1">
+                            <div style="height:34px;" class="borderbtmline ">
+                                <div class="col-lg-9 adsubHeading Theme_standard_clr">
 
-
-                        <div class="adsubHeading Theme_standard_clr borderbtmline" data-bind="visible: $root.previewScreenNumber() == 2">
-                            Use high quality and clear images (minimal text).
-                        </div>
-                        <div class="adsubHeading Theme_standard_clr borderbtmline" data-bind="visible: $root.previewScreenNumber() == 3">
-                            Use words that you would google when looking for your deals.
-                        </div>
-
-
-                        <div class="adsubHeading Theme_standard_clr borderbtmline" data-bind="visible: $root.previewScreenNumber() == 4">
-                            Offer big savings to spark an interest.
-                        </div>
-                        <div class="col-lg-11" style="margin:auto;float:none !important;" data-bind="visible: $root.previewScreenNumber() == 1">
-
-
-                            <div class="form-group">
-                                <div class="col-lg-2" style="padding-right:0px;">
-                                    <label for="txtCampaignDisplayName" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Group HeadLine</label>
+                                    <div class="adsubHeading Theme_standard_clr" data-bind="visible: $root.previewScreenNumber() == 1">
+                                        Use Inspiring headlines to attract attention.
+                                    </div>
                                 </div>
-                                <div class="col-lg-7">
-                                    <textarea maxlength="76" style="height:60px;" name="Coupon Display Name" class="form-control  " id="txtCampaignDisplayName" placeholder="Deal title (76 characters)" data-bind="value: CouponTitle,click: $root.selectJobDescription"></textarea>
-                                </div>
-                                <div class="col-lg-1">
-                                    <a id="P0" data-bind="visible:$root.selectedJobDescription()=== 'txtCampaignDisplayName',click:$root.openPhraseLibrary" style="padding: 4px 8px;display:none;" class="btn btn-primary pull-right">
-                                        <i class="fa fa-lg"></i>&nbsp;....
-                                    </a>
-                                </div>
-                                <div class="col-lg-2">
-                                    <div class="bs-example-tooltips tooltip-float-width tooltip">
+                                <div class="col-lg-3">
+                                    <div class="bs-example-tooltips tooltip-float-width tooltip ">
                                         <a class="input-group-addon" tabindex="-1" href="#" data-toggle="tooltip" title="" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;    padding: 0px;
-                                             padding-top: 5px;" data-container="body" data-placement="right" data-content="Add a city" data-original-title="Hooray!">
-
+    padding-top: 5px;" data-container="body" data-placement="right" data-content="Add a city" data-original-title="Hooray!">
                                             <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                         </a>
                                         <i class="fa fa-chevron-up" aria-hidden="true" style="color:#68b359;"></i>
@@ -188,70 +167,21 @@ else
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="col-lg-12 borderPanel " style="margin-bottom:20px;">
-                                <header class="main-box-header clearfix" style="padding-right:0px;padding-left:0px">
 
-                                    <div class="filter-block pull-left">
-                                        <div class="pull-left">
-                                            <span>Deal headlines</span>
-                                        </div>
-                                        <div class="pull-right" style="margin-left:17px;">
-                                            <span>All deal lines are listed inside the group deal listing.<br />Create upto 20 deal lines in order of appearer of appearance.</span>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </div>
+                        <div class="col-lg-12" data-bind="visible: $root.previewScreenNumber() == 2">
+                            <div style="height:34px;" class="borderbtmline ">
+                                <div class="col-lg-9 adsubHeading Theme_standard_clr">
 
-                                    <div class="filter-block pull-right">
-
-                                        <a href="#" class="btn btn-primary pull-right" data-bind="click: $root.onCreatePriceOption">
-                                            Create Deal
-                                        </a>
-                                    </div>
-                                </header>
-                                <div class="clearfix">
-                                    <div class="table-responsive">
-                                        <table id="subCategoriesTable" class="table table-striped table-hover">
-                                            <thead>
-                                                <tr>
-
-                                                    <th class="col-lg-5 GridHeaderFont_size" style="padding-left:7px;"><span>Deal Headline</span></th>
-                                                    <th class="col-lg-1 GridHeaderFont_size"> <span>Price</span></th>
-                                                    <th class="col-lg-1 GridHeaderFont_size"> <span>Savings</span></th>
-                                                    <th class="col-lg-2 GridHeaderFont_size"> <span>Voucher Code</span></th>
-                                                    <th class="col-lg-1"></th>
-                                                    <th class="col-lg-2">&nbsp;</th>
-
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <!-- ko template: { name: $root.templateToUsePriceOptions , foreach: $root.couponModel().CouponPriceOptions } -->
-                                                <!-- /ko -->
-                                            </tbody>
-                                        </table>
+                                    <div class="adsubHeading Theme_standard_clr" data-bind="visible: $root.previewScreenNumber() == 2">
+                                        Use high quality and clear images (minimal text).
                                     </div>
                                 </div>
-                            </div>
-
-
-                            <div class="form-group" style="display:none;">
-                                <div class="col-lg-2">
-                                    <label for="txtCampaignDisplayName" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Deal Summary</label>
-                                </div>
-                                <div class="col-lg-7">
-                                    <textarea maxlength="76" name="Coupon Display Name" class="form-control  " rows="2" id="txtCampaignDescription" placeholder="Deal Summary (76 characters)" data-bind="value:HowToRedeemLine2,click: $root.selectJobDescription"></textarea>
-                                </div>
-                                <div class="col-lg-1">
-                                    <a id="P0" data-bind="visible:$root.selectedJobDescription()=== 'txtCampaignDescription',click:$root.openPhraseLibrary" style="padding: 4px 8px;display:none;" class="btn btn-primary pull-right">
-                                        <i class="fa fa-lg"></i>&nbsp;....
-                                    </a>
-                                </div>
-
-                                <div class="col-lg-2">
-                                    <div class="bs-example-tooltips tooltip-float-width tooltip">
+                                <div class="col-lg-3">
+                                    <div class="bs-example-tooltips tooltip-float-width tooltip ">
                                         <a class="input-group-addon" tabindex="-1" href="#" data-toggle="tooltip" title="" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;    padding: 0px;
-                                             padding-top: 5px;" data-container="body" data-placement="right" data-content="Add a city" data-original-title="Hooray!">
-
+    padding-top: 5px;" data-container="body" data-placement="right" data-content="Add a city" data-original-title="Hooray!">
                                             <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                         </a>
                                         <i class="fa fa-chevron-up" aria-hidden="true" style="color:#68b359;"></i>
@@ -259,362 +189,116 @@ else
                                     </div>
                                 </div>
                             </div>
-
-
-                            <div class="form-group">
-                                <div class="col-lg-2">
-                                    <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn"> Group Highlights</label>
-                                </div>
-                                <div class="col-lg-7">
-                                    <textarea class="form-control" id="highlightedfield1" rows="4" placeholder="max 800 characters" data-bind="value:HighlightLine1, click: $root.selectJobDescription" maxlength="800"></textarea>
-                                </div>
-                                <div class="col-lg-1">
-                                    <a id="P1" data-bind="visible:$root.selectedJobDescription()=== 'highlightedfield1',click:$root.openPhraseLibrary" style="padding: 4px 8px;display:none;" class="btn btn-primary pull-right">
-                                        <i class="fa fa-lg"></i>&nbsp;....
-                                    </a>
-                                </div>
-
                             </div>
-                            <div class="form-group" style="Display:none;">
-                                <div class="col-lg-2">
-                                    <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Highlight # 2 </label>
-                                </div>
-                                <div class="col-lg-7">
-                                    <textarea class="form-control" id="highlightedfield2" rows="4" placeholder="max 800 characters" data-bind="value: HighlightLine2, click: $root.selectJobDescription" maxlength="800"></textarea>
-                                </div>
-                                <div class="col-lg-1">
-                                    <a id="P2" data-bind="visible:$root.selectedJobDescription()=== 'highlightedfield2',click:$root.openPhraseLibrary" style="padding: 4px 8px;display:none;" class="btn btn-primary pull-right">
-                                        <i class="fa fa-lg"></i>&nbsp;....
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="form-group" style="display:none;">
-                                <div class="col-lg-2">
-                                    <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Highlight # 3 </label>
-                                </div>
-                                <div class="col-lg-7">
-                                    <textarea class="form-control" id="highlightedfield3" rows="1" placeholder="max 72 characters" data-bind="value: HighlightLine3, click: $root.selectJobDescription" maxlength=" 72"></textarea>
-                                </div>
-                                <div class="col-lg-1">
-                                    <a id="P3" data-bind="visible:$root.selectedJobDescription()=== 'highlightedfield3',click:$root.openPhraseLibrary" style="padding: 4px 8px;display:none;" class="btn btn-primary pull-right">
-                                        <i class="fa fa-lg"></i>&nbsp;....
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="form-group" style="display:none;">
-                                <div class="col-lg-2">
-                                    <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Highlight # 4 </label>
-                                </div>
-                                <div class="col-lg-7">
-                                    <textarea class="form-control" id="highlightedfield4" rows="1" placeholder="max 72 characters" data-bind="value: HighlightLine4, click: $root.selectJobDescription" maxlength=" 72"></textarea>
-                                </div>
-                                <div class="col-lg-1">
-                                    <a id="P4" data-bind="visible:$root.selectedJobDescription()=== 'highlightedfield4',click:$root.openPhraseLibrary" style="padding: 4px 8px;display:none;" class="btn btn-primary pull-right">
-                                        <i class="fa fa-lg"></i>&nbsp;....
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="form-group" style="display:none;">
-                                <div class="col-lg-2">
-                                    <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Highlight # 5 </label>
-                                </div>
-                                <div class="col-lg-7">
-                                    <textarea class="form-control" id="highlightedfield5" rows="1" placeholder="max 72 characters" data-bind="value: HighlightLine5, click: $root.selectJobDescription" maxlength=" 72"></textarea>
-                                </div>
-                                <div class="col-lg-1">
-                                    <a id="P5" data-bind="visible:$root.selectedJobDescription()=== 'highlightedfield5',click:$root.openPhraseLibrary" style="padding: 4px 8px;" class="btn btn-primary pull-right">
-                                        <i class="fa fa-lg"></i>&nbsp;....
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-lg-2">
-                                    <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn wrapspace">Fine print </label>
-                                </div>
-                                <div class="col-lg-7">
-                                    <textarea class="form-control" id="fineprint1" rows="4" placeholder="max 800 characters" data-bind="value: FinePrintLine1,click:$root.selectJobDescription" maxlength="800"></textarea>
-                                </div>
-                                <div class="col-lg-1">
-                                    <a id="P0" data-bind="visible:$root.selectedJobDescription()=== 'fineprint1',click:$root.openPhraseLibrary" style="padding: 4px 8px;" class="btn btn-primary pull-right">
-                                        <i class="fa fa-lg"></i>&nbsp;....
-                                    </a>
-                                </div>
-                            </div>
+                        <div class="col-lg-12" data-bind="visible: $root.previewScreenNumber() == 3">
+                            <div style="height:34px;" class="borderbtmline ">
+                              
 
-                            <div class="col-lg-12" style="padding:0px;">
-                                <div class="adsubHeading Theme_standard_clr borderbtmline">
-                                    Call for Action-Drive people to your web site.
-                                </div>
-                            </div>
+                                <div class="col-lg-9 adsubHeading Theme_standard_clr">
 
-                            <div class="form-group">
-                                <div class="col-lg-2">
-                                    <label for="txtBuyItlbl" class="control-label text-right tooltip-float floatNone">Button Label </label>
-                                </div>
-                                <div class="col-lg-8">
-
-                                    <select class="form-control" style="width:50%!important;" id="buyItddl" data-bind="event:{ change: $root.handleBuyIt}">
-
-                                        <option value="0">Do not show button</option>
-                                        <option value="Apply Now">
-                                            Apply Now
-                                        </option>
-                                        <option value="Book Now">
-                                            Book Now
-                                        </option>
-                                        <option value="Contact Us">
-                                            Contact Us
-                                        </option>
-                                        <option value="Download">
-                                            Download
-                                        </option>
-                                        <option value="Learn More">
-                                            Learn More
-                                        </option>
-                                        <option value="Shop Now">
-                                            Shop Now
-                                        </option>
-                                        <option value="Sign Up">
-                                            Sign Up
-                                        </option>
-                                        <option value="Watch More">
-                                            Watch More
-                                        </option>
-                                        <option value="999">
-                                            Other
-                                        </option>
-
-
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-group" data-bind="visible: $root.buyItQuestionStatus() == true ">
-                                <div class="col-lg-2">
-                                    <label for="txtBuyItUrl" class="control-label text-right tooltip-float floatNone">Landing page url </label>
-                                </div>
-                                <div class="col-lg-10">
-                                    <div class="col-lg-8" style="padding-left:0px;">
-                                        <textarea class="form-control" id="txtBuyItUrl" rows="1" placeholder="Enter in landing page url " style="width:380px;margin-top:5px;" maxlength="500" data-bind="value: BuyitLandingPageUrl"></textarea>
-                                    </div>
-                                    <div class="col-lg-4" style="padding-top:4px;text-align:right;">
-                                        <button style="width:123px;height:33px;" class="btn  btn-success gtild-color" id="btnNext">Test URL Link</button>
+                                    <div class="adsubHeading Theme_standard_clr" data-bind="visible: $root.previewScreenNumber() == 3">
+                                        Use words that you would google when looking for your deals.
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="col-lg-12" style="padding:0px;">
-                                <div class="adsubHeading Theme_standard_clr borderbtmline">
-                                    List deals to people near you.
+                                <div class="col-lg-3">
+                                    <div class="bs-example-tooltips tooltip-float-width tooltip ">
+                                        <a class="input-group-addon" tabindex="-1" href="#" data-toggle="tooltip" title="" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;    padding: 0px;
+    padding-top: 5px;" data-container="body" data-placement="right" data-content="Add a city" data-original-title="Hooray!">
+                                            <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                        </a>
+                                        <i class="fa fa-chevron-up" aria-hidden="true" style="color:#68b359;"></i>
+                                        <span class="tooltiptext">Tooltip text</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row branchAddressContainer">
-                                <div class="form-group" style="margin-bottom:10px;">
-                                    <div class="col-lg-2">
-                                        <label for="txtCampaignDesc" style="" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">Select Branch  </label>
-                                    </div>
-                                    <div class="col-lg-4 " style="padding-left:14px;">
-                                        <select class="form-control" id="yearDropDown" data-bind="options: $root.branchLocations, optionsText: 'BranchTitle', optionsValue: 'BranchId', value: LocationBranchId, event:{ change: $root.locationChanged},optionsCaption: '&lt;' + 'Select a branch'+ '&gt;'"></select>
-                                    </div>
 
+                            </div>
+                            </div>
+
+
+
+                            <div class="adsubHeading Theme_standard_clr borderbtmline" data-bind="visible: $root.previewScreenNumber() == 4">
+                                Offer big savings to spark an interest.
+                            </div>
+                            <div class="col-lg-12" style="margin:auto;float:none !important;" data-bind="visible: $root.previewScreenNumber() == 1">
+
+
+                                <div class="form-group">
+                                    <div class="col-lg-2" style="padding-right:0px;">
+                                        <label for="txtCampaignDisplayName" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Group HeadLine</label>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <textarea maxlength="76" style="height:60px;" name="Coupon Display Name" class="form-control  " id="txtCampaignDisplayName" placeholder="Deal title (76 characters)" data-bind="value: CouponTitle,click: $root.selectJobDescription"></textarea>
+                                    </div>
                                     <div class="col-lg-1">
-                                        <a id="displayBrabchlocatuion" data-bind="click:$root.openBranchLocation" style="padding: 4px 8px;" class="btn btn-primary pull-right">
+                                        <a id="P0" data-bind="visible:$root.selectedJobDescription()=== 'txtCampaignDisplayName',click:$root.openPhraseLibrary" style="padding: 4px 8px;display:none;" class="btn btn-primary pull-right">
+                                            <i class="fa fa-lg"></i>&nbsp;....
+                                        </a>
+                                    </div>
+                                    <div class="col-lg-2">
+
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12 borderPanel " style="margin-bottom:20px;">
+                                    <header class="main-box-header clearfix" style="padding-right:0px;padding-left:0px">
+
+                                        <div class="filter-block pull-left">
+                                            <div class="pull-left">
+                                                <span>Deal headlines</span>
+                                            </div>
+                                            <div class="pull-right" style="margin-left:17px;">
+                                                <span>All deal lines are listed inside the group deal listing.<br />Create upto 20 deal lines in order of appearer of appearance.</span>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+
+                                        <div class="filter-block pull-right">
+
+                                            <a href="#" class="btn btn-primary pull-right" data-bind="click: $root.onCreatePriceOption">
+                                                Create Deal
+                                            </a>
+                                        </div>
+                                    </header>
+                                    <div class="clearfix">
+                                        <div class="table-responsive">
+                                            <table id="subCategoriesTable" class="table table-striped table-hover">
+                                                <thead>
+                                                    <tr>
+
+                                                        <th class="col-lg-5 GridHeaderFont_size" style="padding-left:7px;"><span>Deal Headline</span></th>
+                                                        <th class="col-lg-1 GridHeaderFont_size"> <span>Price</span></th>
+                                                        <th class="col-lg-1 GridHeaderFont_size"> <span>Savings</span></th>
+                                                        <th class="col-lg-2 GridHeaderFont_size"> <span>Voucher Code</span></th>
+                                                        <th class="col-lg-1"></th>
+                                                        <th class="col-lg-2">&nbsp;</th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <!-- ko template: { name: $root.templateToUsePriceOptions , foreach: $root.couponModel().CouponPriceOptions } -->
+                                                    <!-- /ko -->
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group" style="display:none;">
+                                    <div class="col-lg-2">
+                                        <label for="txtCampaignDisplayName" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Deal Summary</label>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <textarea maxlength="76" name="Coupon Display Name" class="form-control  " rows="2" id="txtCampaignDescription" placeholder="Deal Summary (76 characters)" data-bind="value:HowToRedeemLine2,click: $root.selectJobDescription"></textarea>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <a id="P0" data-bind="visible:$root.selectedJobDescription()=== 'txtCampaignDescription',click:$root.openPhraseLibrary" style="padding: 4px 8px;display:none;" class="btn btn-primary pull-right">
                                             <i class="fa fa-lg"></i>&nbsp;....
                                         </a>
                                     </div>
 
-
-
-
-
-
                                     <div class="col-lg-2">
-
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-lg-2">
-                                        <label style="display:none;" for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">Branch Address </label>
-                                    </div>
-                                    <div class="col-lg-7 padding_left19">
-                                        <label id="txtCampaignDesc" data-bind="text: LocationLine1"></label>
-                                        @*<textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 72 characters" data-bind="value: LocationLine1" maxlength="72" readonly="readonly"></textarea>*@
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-lg-2">
-                                        <label style="display:none;" for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">Optional </label>
-                                    </div>
-                                    <div class="col-lg-7 padding_left19">
-                                        <label id="txtCampaignDesc" data-bind="text: LocationLine2"></label>
-                                        @*<textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 72 characters" data-bind="value: LocationLine2" maxlength="72" readonly="readonly"></textarea>*@
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-lg-2">
-                                        <label style="display:none;" for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">City </label>
-                                    </div>
-                                    <div class="col-lg-7 padding_left19">
-                                        <label id="txtCampaignDesc" data-bind="text:LocationCity"></label>
-                                        @*<textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationCity" maxlength="36" readonly="readonly"></textarea>*@
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-lg-2">
-                                        <label style="display:none;" for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">State </label>
-                                    </div>
-                                    <div class="col-lg-7 padding_left19">
-                                        <label id="txtCampaignDesc" data-bind="text: LocationState"></label>
-                                        @*<textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationState" maxlength="36" readonly="readonly"></textarea>*@
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-lg-2">
-                                        <label style="display:none;" for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">Zip </label>
-                                    </div>
-                                    <div class="col-lg-7 padding_left19">
-                                        <label id="txtCampaignDesc" data-bind="text: LocationZipCode"></label>
-                                        @*<textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationZipCode" maxlength="36" readonly="readonly"></textarea>*@
-                                    </div>
-                                </div>
-                                <div class="form-group" style="display:none;">
-                                    <div class="col-lg-2">
-                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">Geo location Lat</label>
-                                    </div>
-                                    <div class="col-lg-7 padding_left19">
-                                        <label id="txtCampaignDesc" data-bind="text: LocationLAT"></label>
-                                        @*<textarea class="form-control" id="geolocation" rows="1" placeholder="max 72 characters" data-bind="value: LocationLAT" readonly="readonly" maxlength="72"></textarea>*@
-                                    </div>
-
-
-                                </div>
-                                <div class="form-group" style="display:none;">
-                                    <div class="col-lg-2">
-                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">Geo location Long</label>
-                                    </div>
-                                    <div class="col-lg-7 padding_left19">
-                                        <label id="txtCampaignDesc" data-bind="text:LocationLON"></label>
-                                        @*<textarea class="form-control" id="geolocationlong" rows="1" placeholder="max 72 characters" data-bind="value: LocationLON" readonly="readonly" maxlength="72"></textarea>*@
-                                    </div>
-
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-lg-2">
-                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">Phone no </label>
-                                    </div>
-                                    <div class="col-lg-7 padding_left19">
-                                        <label id="txtCampaignDesc" data-bind="text:LocationPhone"></label>
-                                        @*<textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationPhone" readonly="readonly"></textarea>*@
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-
-                            <div class="form-group" style="display:none;">
-                                <div class="col-lg-2">
-                                    <label for="txtPriorityLabel" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn wrapspace">Priority </label>
-                                </div>
-                                <div class="col-lg-7">
-                                    <input style="width:31%!important;" type="text" class="form-control" id="txtPriority" placeholder="max 2 characters" data-bind="value:Priority" maxlength=" 2" />
-                                </div>
-                                <div class="col-lg-1">
-
-                                </div>
-                            </div>
-                            <div class="form-group" style="display:none;">
-                                <div class="col-lg-2">
-                                    <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn wrapspace">Group Deal HeadLine</label>
-                                </div>
-                                <div class="col-lg-2" style="padding-left:14px;">
-                                    <div class="onoffswitch">
-                                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchVoucherONOFf">
-                                        <label class="onoffswitch-label" for="switchVoucherONOFf">
-                                            <div class="onoffswitch-inner"></div>
-                                            <div class="onoffswitch-switch"></div>
-
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-5">
-                                    <span style="color: #7f8c8d !important;font-size:13px!important;">Select YES to make this deal as parent headline for all your live deals</span>
-                                </div>
-                            </div>
-
-
-                            <div class="form-group" style="display:none;">
-                                <div class="col-lg-2">
-                                    <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn wrapspace" style=" font-size: 12px; ">How to redeem  </label>
-                                </div>
-                                <div class="col-lg-7">
-                                    <textarea class="form-control" id="redeemline1" rows="4" placeholder="max 800 characters" data-bind="value: HowToRedeemLine1,click:$root.selectJobDescription" maxlength="400"></textarea>
-                                </div>
-                                <div class="col-lg-1">
-                                    <a id="P5" data-bind="visible:$root.selectedJobDescription()=== 'redeemline1',click:$root.openPhraseLibrary" style="padding: 4px 8px;" class="btn btn-primary pull-right">
-                                        <i class="fa fa-lg"></i>&nbsp;....
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-11" style="margin:auto;float:none !important;    " data-bind="visible: $root.previewScreenNumber() == 2">
-
-                            <div class="clearfix">
-
-                            </div><br />
-                            <div class="row">
-                                <div class="form-group" style="margin-top:10px;">
-                                    <div class="col-lg-2">
-                                        <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Banner Images</label>
-                                    </div>
-                                    <div class="col-lg-8">
-                                        <div class="col-lg-4">
-                                            <div style="margin-top:5px;    text-align: center;cursor:pointer;">
-                                                @*<img style="height:90px;" data-bind="visible: couponImage1() == '' || couponImage1() == null"  src="/Content/Images/placeholder.png" onclick="showCouponDialog4();" />*@
-                                                <img style="height:70px;" data-bind="visible: couponImage1() != '',attr: { src: couponImage1 }" id="bannerImage1" data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(2)" />
-                                                <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
-                                                    (450 x 300 pixels)
-                                                </div>
-                                            </div>
-                                            <br />
-                                            <div class="fileUpload btn btn-primary" style="display:none;">
-                                                <span>Upload </span>
-                                                <input type="file" class="upload" id="campaignType_image_file1" data-bind="files: { onLoaded: $root.couponImage1Callback, fileFilter: 'image.*'}" />
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-4">
-                                            <div style="margin-top:5px;    text-align: center;cursor:pointer;">
-                                                @*<img style="height:90px;" data-bind="visible: CouponImage2() == '' || CouponImage2() == null" src="/Content/Images/placeholder.png" onclick="showCouponDialog2();" />*@
-                                                <img style="height:70px;" data-bind="visible: CouponImage2() != '' && CouponImage2() != null ,attr: { src: CouponImage2 }" data-toggle="modal" data-target="#damModel" id="bannerImage2" onclick="changeIframeSrc(3)" />
-                                                <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
-                                                    (450 x 300 pixels)
-                                                </div>
-                                            </div>
-                                            <br />
-                                            <div class="fileUpload btn btn-primary" style="display:none;">
-                                                <span>Upload </span>
-                                                <input type="file" class="upload" id="campaignType_coupon_file2" data-bind="files: { onLoaded: $root.CouponImage2Callback, fileFilter: 'image.*'}" />
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div style="margin-top:5px;    text-align: center;cursor:pointer;">
-                                                @*<img style="height:90px;" data-bind="visible: CouponImage3() == '' || CouponImage3() == null" src="/Content/Images/placeholder.png" onclick="showCouponDialog3();" />*@
-                                                <img style="height:70px;" data-bind="visible: CouponImage3() != '' && CouponImage3() != null,attr: { src: CouponImage3 }" id="bannerImage3" data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(4)" />
-                                                <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
-                                                    (450 x 300 pixels)
-                                                </div>
-                                            </div>
-                                            <br />
-                                            <div class="fileUpload btn btn-primary" style="display:none;">
-                                                <span>Upload </span>
-                                                <input type="file" class="upload" id="campaignType_coupon_file3" data-bind="files: { onLoaded: $root.CouponImage3Callback, fileFilter: 'image.*'}" />
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="col-lg-2" style="padding-right:20px;">
                                         <div class="bs-example-tooltips tooltip-float-width tooltip">
                                             <a class="input-group-addon" tabindex="-1" href="#" data-toggle="tooltip" title="" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;    padding: 0px;
                                              padding-top: 5px;" data-container="body" data-placement="right" data-content="Add a city" data-original-title="Hooray!">
@@ -626,445 +310,821 @@ else
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
 
-                            <div class="row" style="display:none;">
-                                <div class="form-group" style="margin-top:10px;">
+                                <div class="form-group">
                                     <div class="col-lg-2">
-                                        <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Upload Logo</label>
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn"> Group Highlights</label>
                                     </div>
-                                    <div class="col-lg-8">
-                                        <div class="col-lg-4">
-                                            <div style="margin-top:5px;    text-align: center;cursor:pointer;padding-right:24px;">
-                                                @*<img style="height:90px;" data-bind="visible: LogoImageBytes() == '' || LogoImageBytes() == null" src="/Content/Images/placeholder.png" onclick="showCouponDialog1();" />*@
-                                                @*<img style="height:90px;" data-bind="visible: LogoImageBytes() != '' &&  LogoImageBytes() != null ,attr: { src: LogoImageBytes() }" onclick="showCouponDialog1();" />*@
-
-
-                                                <img style="height:70px;" data-bind="visible: LogoUrl() != '' &&  LogoUrl() != null ,attr: { src: LogoUrl()+$root.randonNumber() }" id="imgLogo" data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(1)" />
-
-
-                                                <div style="padding-top: 10px;padding-left:24px;    text-align: center;    font-size: 12px;    color: gray;">
-                                                    (300 x 150 pixels)
-                                                </div>
-                                            </div>
-                                            <br />
-                                            <div class="fileUpload btn btn-primary" style="display:none;">
-                                                <span data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(1)">Upload </span>
-                                                @*<input type="file" class="upload" id="campaignType_coupon_file1" data-bind="files: { onLoaded: $root.campaignImageCallback, fileFilter: 'image.*'}" />*@
-                                            </div>
-                                        </div>
-
+                                    <div class="col-lg-7">
+                                        <textarea class="form-control" id="highlightedfield1" rows="4" placeholder="max 800 characters" data-bind="value:HighlightLine1, click: $root.selectJobDescription" maxlength="800"></textarea>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <a id="P1" data-bind="visible:$root.selectedJobDescription()=== 'highlightedfield1',click:$root.openPhraseLibrary" style="padding: 4px 8px;display:none;" class="btn btn-primary pull-right">
+                                            <i class="fa fa-lg"></i>&nbsp;....
+                                        </a>
                                     </div>
 
                                 </div>
-                            </div>
-
-
-
-
-
-
-                        </div>
-
-
-                        <div class="col-lg-11" style="margin:auto;float:none !important;" data-bind="visible: $root.previewScreenNumber() == 3">
-                            @*<div class="form-group formcontrol-bg" data-bind="visible: $root.isEnableVedioVerificationLink">
-                        <div class="col-lg-11">*@
-                            <div class="form-group">
-                                <div class="col-lg-2">
-                                    <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn"> Deal category</label>
-                                </div>
-                                <div class="col-lg-7">
-                                    <div class="row">
-                                        <div>
-                                            <a href="#" id="couponCategorySelectorLink" class="btn btn-warning" style="margin-left:0px;" data-bind="click: $root.openProductCategoryDialog">
-                                                <i class="fa fa-lg"></i>&nbsp;Select Deal Categories
-                                            </a>
-                                        </div>
-                                        <div>
-                                            <!-- ko template: { name: 'ListOfSelectedCouponCats' , foreach: $root.couponCategories } -->
-                                            <!-- /ko -->
-                                        </div>
+                                <div class="form-group" style="Display:none;">
+                                    <div class="col-lg-2">
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Highlight # 2 </label>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <textarea class="form-control" id="highlightedfield2" rows="4" placeholder="max 800 characters" data-bind="value: HighlightLine2, click: $root.selectJobDescription" maxlength="800"></textarea>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <a id="P2" data-bind="visible:$root.selectedJobDescription()=== 'highlightedfield2',click:$root.openPhraseLibrary" style="padding: 4px 8px;display:none;" class="btn btn-primary pull-right">
+                                            <i class="fa fa-lg"></i>&nbsp;....
+                                        </a>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-lg-2">
-                                    <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">keywords</label>
-                                </div>
-                                <div class="col-lg-7">
-                                    <textarea class="form-control" id="txtCampaignDesc" rows="3" placeholder="Type in keyword searches to help users find your coupon offer. Seperate with a comma " data-bind="value: SearchKeywords"></textarea>
-                                </div>
-                            </div>
-                            <div class="col-lg-12" style="margin-bottom:20px;">
-                                <div class="adsubHeading Theme_standard_clr borderbtmline" data-bind="visible: $root.previewScreenNumber() == 3">
-                                    Use words that you would google when looking for your deals.
-                                </div>
-                            </div>
-                            <div class="col-lg-11" style="display:none">
-                                <div class="form-group" style="margin-bottom:20px; margin-top:20px;">
-                                    <div class="col-lg-4 text-campaign-left  Float-Left">
-                                        <label class="control-label text-right tooltip-float font20 floatNone hideInGames" style="float:left !important;font-size: 17px; margin-left: 6px; ">Refer deal to my website</label>
-
+                                <div class="form-group" style="display:none;">
+                                    <div class="col-lg-2">
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Highlight # 3 </label>
                                     </div>
-                                    <div class="col-lg-2 Float-Left" style="padding-top:3px;">
-                                        <div class="onoffswitch">
-                                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchVoucher" data-bind="checked: $root.buyItQuestionStatus, event: { click: $root.addBuyItPrice}">
-                                            <label class="onoffswitch-label" for="switchVoucher">
-                                                <div class="onoffswitch-inner"></div>
-                                                <div class="onoffswitch-switch"></div>
-                                            </label>
-                                        </div>
+                                    <div class="col-lg-7">
+                                        <textarea class="form-control" id="highlightedfield3" rows="1" placeholder="max 72 characters" data-bind="value: HighlightLine3, click: $root.selectJobDescription" maxlength=" 72"></textarea>
                                     </div>
-                                    <div class="col-lg-2 text-campaign-left Float-Left" style="margin-left:6px;display:none;">
-                                        <span class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;color:red;"></span>
+                                    <div class="col-lg-1">
+                                        <a id="P3" data-bind="visible:$root.selectedJobDescription()=== 'highlightedfield3',click:$root.openPhraseLibrary" style="padding: 4px 8px;display:none;" class="btn btn-primary pull-right">
+                                            <i class="fa fa-lg"></i>&nbsp;....
+                                        </a>
                                     </div>
-                                    <div class="col-lg-3 Float-Left" style="margin-left:40px;">
-                                        <a href="#" id="idpreviewquizscreen" class="btn btn-primary pull-right" data-toggle="modal" data-target=".model_BuyItQ_ph" style="margin-left:6px;display:none;">
-                                            Preview
+                                </div>
+                                <div class="form-group" style="display:none;">
+                                    <div class="col-lg-2">
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Highlight # 4 </label>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <textarea class="form-control" id="highlightedfield4" rows="1" placeholder="max 72 characters" data-bind="value: HighlightLine4, click: $root.selectJobDescription" maxlength=" 72"></textarea>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <a id="P4" data-bind="visible:$root.selectedJobDescription()=== 'highlightedfield4',click:$root.openPhraseLibrary" style="padding: 4px 8px;display:none;" class="btn btn-primary pull-right">
+                                            <i class="fa fa-lg"></i>&nbsp;....
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="display:none;">
+                                    <div class="col-lg-2">
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Highlight # 5 </label>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <textarea class="form-control" id="highlightedfield5" rows="1" placeholder="max 72 characters" data-bind="value: HighlightLine5, click: $root.selectJobDescription" maxlength=" 72"></textarea>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <a id="P5" data-bind="visible:$root.selectedJobDescription()=== 'highlightedfield5',click:$root.openPhraseLibrary" style="padding: 4px 8px;" class="btn btn-primary pull-right">
+                                            <i class="fa fa-lg"></i>&nbsp;....
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-2">
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn wrapspace">Fine print </label>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <textarea class="form-control" id="fineprint1" rows="4" placeholder="max 800 characters" data-bind="value: FinePrintLine1,click:$root.selectJobDescription" maxlength="800"></textarea>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <a id="P0" data-bind="visible:$root.selectedJobDescription()=== 'fineprint1',click:$root.openPhraseLibrary" style="padding: 4px 8px;" class="btn btn-primary pull-right">
+                                            <i class="fa fa-lg"></i>&nbsp;....
                                         </a>
                                     </div>
                                 </div>
 
-                            </div>
-
-
-
-
-                            <div class="form-group" data-bind="visible: $root.buyItQuestionLabelStatus() == true && $root.buyItQuestionStatus() == true ">
-                                <div class="col-lg-2">
-                                    <label for="txtBuyItlbl" class="control-label text-right tooltip-float floatNone">Enter Label</label>
-                                </div>
-                                <div class="col-lg-8">
-                                    <input type="text" class="form-control" id="txtBuyItlbl" placeholder="(12 characters)" style="width:50%!important;" maxlength="12" data-bind="value: $root.ButItOtherLabel">
-                                </div>
-                            </div>
-
-
-
-
-
-                            <div class="form-group" style="display:none;">
-                                <div class="col-lg-2">
-                                    <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn"> Deal can be issued</label>
-                                </div>
-                                <div class="col-lg-7">
-                                    <textarea class="form-control" id="txtCampaignDesc" rows="1" data-bind="value: CouponQtyPerUser" style=" width:50px; float: left; margin-right: 16px;" maxlength="2"></textarea>
-                                    times at this branch per user
-                                </div>
-                            </div>
-                            <div class="form-group" style="display:none;">
-                                <div class="col-lg-2">
-                                    <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn"> Deal listing mode</label>
-                                </div>
-                                <div class="col-lg-7">
-                                    <div class="radio col-lg-12" style="text-align: left;">
-                                        <input type="radio" name="optionsRadiosDelvTypes" value="1" id="optionsRadiosApplyFilterFree" data-bind="checked:CouponListingMode">
-                                        <label for="optionsRadiosApplyFilterFree">
-                                            <span style="color:red; font-weight:bold;">FREE</span> - Auto remove after 7 days listing, unlimited offers Issuance .
-
-                                        </label>
-                                        <span class="help-block text-right"></span>
-                                    </div>
-                                    <div class="radio col-lg-12" style="text-align: left;">
-                                        <input type="radio" name="optionsRadiosDelvTypes" value="2" id="optionsRadiosApplyFilterOnce" data-bind="checked:CouponListingMode">
-                                        <label for="optionsRadiosApplyFilterOnce">
-                                            <span class="defaultThemeTxtClr defaultImgUploadImageBtn" style="margin-left:1px;"> UNLIMITED </span> <span syle="margin-left:1px;"> - </span> Listed for 30 days upto 50 km, unlimited offers Issuance .
-                                        </label>
-                                        <span class="help-block text-right"></span>
-                                    </div>
-
-                                    <div class=" col-lg-12" style="text-align: left;    padding-left: 35px;">
-
-                                        <label for="">
-                                            <span class="defaultThemeTxtClr"></span>Select month any year to list this offer
-                                            <br /><br />
-                                            <select class="form-control" id="yearDropDown" data-bind="options: $root.YearRangeDropDown, optionsText: 'name', optionsValue: 'name', value: $root.CouponActiveMonth"></select>
-
-                                        </label>
-                                        <span class="help-block text-right"></span>
+                                <div class="col-lg-12" style="padding:0px;">
+                                    <div class="adsubHeading Theme_standard_clr borderbtmline">
+                                        Call for Action-Drive people to your web site.
                                     </div>
                                 </div>
-                            </div>
 
-                        </div>
-                        <div class="col-lg-11" style="margin:auto;float:none !important;   " data-bind="visible: $root.previewScreenNumber() == 4">
+                                <div class="form-group">
+                                    <div class="col-lg-2">
+                                        <label for="txtBuyItlbl" class="control-label text-right tooltip-float floatNone">Button Label </label>
+                                    </div>
+                                    <div class="col-lg-8">
 
+                                        <select class="form-control" style="width:50%!important;" id="buyItddl" data-bind="event:{ change: $root.handleBuyIt}">
 
-                            <div class="form-group">
-                                <div class="col-lg-2">
-                                    <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Currency Symbol </label>
-                                </div>
-                                <div class="col-lg-7">
-                                    <select class="form-control" style="width:50%!important;" id="ddpCorrectAns" data-bind="options: $root.CurrencyDropDown, optionsText: 'CurrencyName', optionsValue: 'CurrencyId', value: CurrencyId"></select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-lg-2">
-                                    <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Price</label>
-                                </div>
-                                <div class="col-lg-7">
-                                    <textarea style="width:25%!important;" class="form-control" id="txtCampaignDesc" rows="1" data-bind="value: Price"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-lg-2">
-                                    <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn"> Saving </label>
-                                </div>
-                                <div class="col-lg-7">
-                                    <textarea style="width:25%!important;" class="form-control" id="txtCampaignDesc" rows="1" data-bind="value: Savings"></textarea>
-                                </div>
-                            </div>
-
-
-                            <div class="form-group" style="display:none;">
-                                <div class="col-lg-2">
-                                    <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn" style="white-space:nowrap;"> Deal Start date</label>
-                                </div>
-                                <div class="col-lg-7">
-                                    <input type="text" class="form-control" style="width:50%!important;" id="validFromStartDate" data-bind="datepicker:CouponStartDate">
-                                    @*<textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="datetimepicker:StartDateTime"  data-bind="value: CouponExpirydate"></textarea>*@
-                                </div>
-                            </div>
+                                            <option value="0">Do not show button</option>
+                                            <option value="Apply Now">
+                                                Apply Now
+                                            </option>
+                                            <option value="Book Now">
+                                                Book Now
+                                            </option>
+                                            <option value="Contact Us">
+                                                Contact Us
+                                            </option>
+                                            <option value="Download">
+                                                Download
+                                            </option>
+                                            <option value="Learn More">
+                                                Learn More
+                                            </option>
+                                            <option value="Shop Now">
+                                                Shop Now
+                                            </option>
+                                            <option value="Sign Up">
+                                                Sign Up
+                                            </option>
+                                            <option value="Watch More">
+                                                Watch More
+                                            </option>
+                                            <option value="999">
+                                                Other
+                                            </option>
 
 
-                            <div class="form-group" style="display:none;">
-                                <div class="col-lg-2">
-                                    <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn" style="white-space:nowrap;"> Deal End date</label>
-                                </div>
-                                <div class="col-lg-7">
-                                    <input type="text" class="form-control" style="width:50%!important;" id="validFromEndDate" data-bind="datepicker:CouponEndDate">
-                                    @*<textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="datetimepicker:StartDateTime"  data-bind="value: CouponExpirydate"></textarea>*@
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-lg-2">
-                                    <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn" style="white-space:nowrap;"> Deal expiry date</label>
-                                </div>
-                                <div class="col-lg-7">
-                                    <input type="text" class="form-control" style="width:50%!important;" id="validFromExpiryDate" data-bind="datepicker:CouponExpirydate">
-                                    @*<textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="datetimepicker:StartDateTime"  data-bind="value: CouponExpirydate"></textarea>*@
-                                </div>
-                            </div>
-                            @*<div class="col-lg-11">
-                        <div class="form-group" style="margin-bottom:20px; margin-top:20px;">
-                            <div class="col-lg-4 text-campaign-left  Float-Left">
-                                <label class="control-label text-right tooltip-float font20 floatNone hideInGames" style="float:left !important;       font-size: 17px; margin-left: 6px; ">Buy Landing page Url</label>*@
-                            @*<label class="control-label text-right tooltip-float font20 floatNone showInGames" style="float:left !important;      font-size: 17px;  margin-left: 6px; ">Win game Landing page Url</label>*@
-                            @*</div>*@
-                            @*<div class="col-lg-2 Float-Left" style="padding-top:3px;">
-                                    <div class="onoffswitch">
-                                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchVoucher" data-bind="checked: $root.buyItQuestionStatus, event: { click: $root.addBuyItPrice}">
-                                        <label class="onoffswitch-label" for="switchVoucher">
-                                            <div class="onoffswitch-inner"></div>
-                                            <div class="onoffswitch-switch"></div>
-                                        </label>
+                                        </select>
                                     </div>
                                 </div>
-                                <div class="col-lg-2 text-campaign-left Float-Left" style="margin-left:6px;display:none;">
-                                    <span class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;color:red;" ></span>
-                                </div>
-                                <div class="col-lg-3 Float-Left" style="margin-left:40px;">
-                                    <a href="#" id="idpreviewquizscreen" class="btn btn-primary pull-right" data-toggle="modal" data-target=".model_BuyItQ_ph" style="margin-left:6px;display:none;">
-                                        Preview
-                                    </a>
-                                </div>
-                            </div>
 
-                        </div>*@
-
-                            @*<div class="form-group" data-bind="visible: $root.buyItQuestionStatus()">
-                            <div class="col-lg-2">
-                                <label for="txtBuyItLine1" class="control-label text-right tooltip-float floatNone">Description</label>
-                            </div>
-                            <div class="col-lg-8">
-                                <input type="text" class="form-control" id="txtBuyItLine1" placeholder="Enter Description  (150 characters)" maxlength="150">
-                            </div>
-                        </div>*@
-
-
-                            @*<div class="form-group" data-bind="visible: $root.buyItQuestionStatus() == 1 ">
-                            <div class="col-lg-2">
-                                <label for="txtBuyItUrl" class="control-label text-right tooltip-float floatNone">Landing page url </label>
-                            </div>
-                            <div class="col-lg-8">
-                                <textarea class="form-control" id="txtBuyItUrl" rows="1" placeholder="Enter in landing page url "  style="margin-top:5px;"></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group" data-bind="visible: $root.buyItQuestionStatus() == 1 ">
-                            <div class="col-lg-2">
-                                <label for="txtBuyItlbl" class="control-label text-right tooltip-float floatNone">Button Label </label>
-                            </div>
-                            <div class="col-lg-8">
-
-                                <select class="form-control" style="width:50%!important;">
-                                    <option>Label1</option>
-                                    <option>Label2</option>
-                                    <option>Label3</option>
-                                    <option>Label4</option>
-                                    <option>Label5</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group" data-bind="visible: $root.buyItQuestionStatus() == 1 ">
-                            <div class="col-lg-2">
-                                <label for="txtBuyItlbl" class="control-label text-right tooltip-float floatNone">Enter Label</label>
-                            </div>
-                            <div class="col-lg-8">
-                                <input type="text" class="form-control" id="txtBuyItlbl" placeholder="(12 characters)" style="width:50%!important;" maxlength="12">
-                            </div>
-                        </div>*@
-
-
-
-                            <div class="form-group" style="display:none;">
-                                <div class="col-lg-2">
-                                    <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn wrapspace">Fine print # 2 </label>
-                                </div>
-                                <div class="col-lg-7">
-                                    <textarea class="form-control" id="fineprint2" rows="1" placeholder="max 72 characters" data-bind="value: FinePrintLine2,click:$root.selectJobDescription" maxlength="72"></textarea>
-                                </div>
-                                <div class="col-lg-1">
-                                    <a id="P1" data-bind="visible:$root.selectedJobDescription()=== 'fineprint2',click:$root.openPhraseLibrary" style="padding: 4px 8px;" class="btn btn-primary pull-right">
-                                        <i class="fa fa-lg"></i>&nbsp;....
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="form-group" style="display:none;">
-                                <div class="col-lg-2">
-                                    <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn wrapspace">Fine print # 3 </label>
-                                </div>
-                                <div class="col-lg-7">
-                                    <textarea class="form-control" id="fineprint3" rows="1" placeholder="max 72 characters" data-bind="value: FinePrintLine3,click:$root.selectJobDescription" maxlength="72"></textarea>
-                                </div>
-                                <div class="col-lg-1">
-                                    <a id="P2" data-bind="visible:$root.selectedJobDescription()=== 'fineprint3',click:$root.openPhraseLibrary" style="padding: 4px 8px;" class="btn btn-primary pull-right">
-                                        <i class="fa fa-lg"></i>&nbsp;....
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="form-group" style="display:none;">
-                                <div class="col-lg-2">
-                                    <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn wrapspace">Fine print # 4 </label>
-                                </div>
-                                <div class="col-lg-7">
-                                    <textarea class="form-control" id="fineprint4" rows="1" placeholder="max 72 characters" data-bind="value: FinePrintLine4,click:$root.selectJobDescription" maxlength="72"></textarea>
-                                </div>
-                                <div class="col-lg-1">
-                                    <a id="P3" data-bind="visible:$root.selectedJobDescription()=== 'fineprint4',click:$root.openPhraseLibrary" style="padding: 4px 8px;" class="btn btn-primary pull-right">
-                                        <i class="fa fa-lg"></i>&nbsp;....
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="form-group" style="display:none;">
-                                <div class="col-lg-2">
-                                    <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn wrapspace">Fine print # 5 </label>
-                                </div>
-                                <div class="col-lg-7">
-                                    <textarea class="form-control" id="fineprint5" rows="1" placeholder="max 72 characters" data-bind="value: FinePrintLine5,click:$root.selectJobDescription" maxlength="72"></textarea>
-                                </div>
-                                <div class="col-lg-1">
-                                    <a id="P4" data-bind="visible:$root.selectedJobDescription()=== 'fineprint5',click:$root.openPhraseLibrary" style="padding: 4px 8px;" class="btn btn-primary pull-right">
-                                        <i class="fa fa-lg"></i>&nbsp;....
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="form-group" style="display:none;">
-                                <div class="col-lg-2">
-                                    <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn wrapspace" style=" font-size: 12px; ">How to redeem # 2 </label>
-                                </div>
-                                <div class="col-lg-7">
-                                    <textarea class="form-control" id="redeemline2" rows="1" placeholder="max 72 characters" data-bind="value: HowToRedeemLine2,click:$root.selectJobDescription" maxlength="72"></textarea>
-                                </div>
-                                <div class="col-lg-1">
-                                    <a id="P6" data-bind="visible:$root.selectedJobDescription()=== 'redeemline2',click:$root.openPhraseLibrary" style="padding: 4px 8px;" class="btn btn-primary pull-right">
-                                        <i class="fa fa-lg"></i>&nbsp;....
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="form-group" style="display:none;">
-                                <div class="col-lg-2">
-                                    <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn wrapspace" style=" font-size: 12px; ">How to redeem # 3 </label>
-                                </div>
-                                <div class="col-lg-7">
-                                    <textarea class="form-control" id="redeemline3" rows="1" placeholder="max 72 characters" data-bind="value: HowToRedeemLine3,click:$root.selectJobDescription" maxlength="72"></textarea>
-                                </div>
-                                <div class="col-lg-1">
-                                    <a id="P7" data-bind="visible:$root.selectedJobDescription()=== 'redeemline3',click:$root.openPhraseLibrary" style="padding: 4px 8px;" class="btn btn-primary pull-right">
-                                        <i class="fa fa-lg"></i>&nbsp;....
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="form-group" style="display:none;">
-                                <div class="col-lg-2">
-                                    <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn wrapspace" style=" font-size: 12px; ">How to redeem # 4 </label>
-                                </div>
-                                <div class="col-lg-7">
-                                    <textarea class="form-control" id="redeemline4" rows="1" placeholder="max 72 characters" data-bind="value: HowToRedeemLine4,click:$root.selectJobDescription" maxlength="72"></textarea>
-                                </div>
-                                <div class="col-lg-1">
-                                    <a id="P8" data-bind="visible:$root.selectedJobDescription()=== 'redeemline4',click:$root.openPhraseLibrary" style="padding: 4px 8px;" class="btn btn-primary pull-right">
-                                        <i class="fa fa-lg"></i>&nbsp;....
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="form-group" style="display:none;">
-                                <div class="col-lg-2">
-                                    <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn wrapspace" style=" font-size: 12px; ">How to redeem # 5 </label>
-                                </div>
-                                <div class="col-lg-7">
-                                    <textarea class="form-control" id="redeemline5" rows="1" placeholder="max 72 characters" data-bind="value: HowToRedeemLine5,click:$root.selectJobDescription" maxlength="72"></textarea>
-                                </div>
-                                <div class="col-lg-1">
-                                    <a id="P8" data-bind="visible:$root.selectedJobDescription()=== 'redeemline5',click:$root.openPhraseLibrary" style="padding: 4px 8px;" class="btn btn-primary pull-right">
-                                        <i class="fa fa-lg"></i>&nbsp;....
-                                    </a>
-                                </div>
-                            </div>
-
-
-
-
-
-
-
-
-
-                        </div>
-
-                        <div class="clearfix">
-
-                        </div>
-
-                        <div class="next-back-btns col-lg-12" style="margin:auto;float:none !important;">
-                            <div class="form-group">
-                                <div class="col-lg-3">
-                                    &nbsp;
-                                </div>
-                                <div class="col-lg-3">
-                                    &nbsp;
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="pull-right col-lg-5" style="padding-left:10px;">
-                                        <button class="btn  btn-success gtild-color" id="btnNext" data-bind="visible:$root.previewScreenNumber() < 4,click:$root.nextPreviewScreen">Next</button>
+                                <div class="form-group" data-bind="visible: $root.buyItQuestionStatus() == true ">
+                                    <div class="col-lg-2">
+                                        <label for="txtBuyItUrl" class="control-label text-right tooltip-float floatNone">Landing page url </label>
                                     </div>
-                                    <div class="pull-left col-lg-7" style="text-align:right;padding-right:0px;">
-                                        <button class="btn  btn-success gtild-color" id="btnBack" data-bind="visible:$root.previewScreenNumber() > 1, click:$root.backScreen">Back</button>
+                                    <div class="col-lg-10">
+                                        <div class="col-lg-8" style="padding-left:0px;">
+                                            <textarea class="form-control" id="txtBuyItUrl" rows="1" placeholder="Enter in landing page url " style="width:380px;margin-top:5px;" maxlength="500" data-bind="value: BuyitLandingPageUrl"></textarea>
+                                        </div>
+                                        <div class="col-lg-4" style="padding-top:4px;text-align:right;">
+                                            <button style="width:123px;height:33px;" class="btn  btn-success gtild-color" id="btnNext">Test URL Link</button>
+                                        </div>
                                     </div>
-                                    <div class="clearfix">
+                                </div>
 
+                                <div class="col-lg-12" style="padding:0px;">
+                                    <div class="adsubHeading Theme_standard_clr borderbtmline">
+                                        List deals to people near you.
+                                    </div>
+                                </div>
+                                <div class="row branchAddressContainer">
+                                    <div class="form-group" style="margin-bottom:10px;">
+                                        <div class="col-lg-2">
+                                            <label for="txtCampaignDesc" style="" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">Select Branch  </label>
+                                        </div>
+                                        <div class="col-lg-4 " style="padding-left:14px;">
+                                            <select class="form-control" id="yearDropDown" data-bind="options: $root.branchLocations, optionsText: 'BranchTitle', optionsValue: 'BranchId', value: LocationBranchId, event:{ change: $root.locationChanged},optionsCaption: '&lt;' + 'Select a branch'+ '&gt;'"></select>
+                                        </div>
+
+                                        <div class="col-lg-1">
+                                            <a id="displayBrabchlocatuion" data-bind="click:$root.openBranchLocation" style="padding: 4px 8px;" class="btn btn-primary pull-right">
+                                                <i class="fa fa-lg"></i>&nbsp;....
+                                            </a>
+                                        </div>
+
+
+
+
+
+
+                                        <div class="col-lg-2">
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-2">
+                                            <label style="display:none;" for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">Branch Address </label>
+                                        </div>
+                                        <div class="col-lg-7 padding_left19">
+                                            <label id="txtCampaignDesc" data-bind="text: LocationLine1"></label>
+                                            @*<textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 72 characters" data-bind="value: LocationLine1" maxlength="72" readonly="readonly"></textarea>*@
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-2">
+                                            <label style="display:none;" for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">Optional </label>
+                                        </div>
+                                        <div class="col-lg-7 padding_left19">
+                                            <label id="txtCampaignDesc" data-bind="text: LocationLine2"></label>
+                                            @*<textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 72 characters" data-bind="value: LocationLine2" maxlength="72" readonly="readonly"></textarea>*@
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-2">
+                                            <label style="display:none;" for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">City </label>
+                                        </div>
+                                        <div class="col-lg-7 padding_left19">
+                                            <label id="txtCampaignDesc" data-bind="text:LocationCity"></label>
+                                            @*<textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationCity" maxlength="36" readonly="readonly"></textarea>*@
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-2">
+                                            <label style="display:none;" for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">State </label>
+                                        </div>
+                                        <div class="col-lg-7 padding_left19">
+                                            <label id="txtCampaignDesc" data-bind="text: LocationState"></label>
+                                            @*<textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationState" maxlength="36" readonly="readonly"></textarea>*@
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-2">
+                                            <label style="display:none;" for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">Zip </label>
+                                        </div>
+                                        <div class="col-lg-7 padding_left19">
+                                            <label id="txtCampaignDesc" data-bind="text: LocationZipCode"></label>
+                                            @*<textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationZipCode" maxlength="36" readonly="readonly"></textarea>*@
+                                        </div>
+                                    </div>
+                                    <div class="form-group" style="display:none;">
+                                        <div class="col-lg-2">
+                                            <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">Geo location Lat</label>
+                                        </div>
+                                        <div class="col-lg-7 padding_left19">
+                                            <label id="txtCampaignDesc" data-bind="text: LocationLAT"></label>
+                                            @*<textarea class="form-control" id="geolocation" rows="1" placeholder="max 72 characters" data-bind="value: LocationLAT" readonly="readonly" maxlength="72"></textarea>*@
+                                        </div>
+
+
+                                    </div>
+                                    <div class="form-group" style="display:none;">
+                                        <div class="col-lg-2">
+                                            <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">Geo location Long</label>
+                                        </div>
+                                        <div class="col-lg-7 padding_left19">
+                                            <label id="txtCampaignDesc" data-bind="text:LocationLON"></label>
+                                            @*<textarea class="form-control" id="geolocationlong" rows="1" placeholder="max 72 characters" data-bind="value: LocationLON" readonly="readonly" maxlength="72"></textarea>*@
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-2">
+                                            <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">Phone no </label>
+                                        </div>
+                                        <div class="col-lg-7 padding_left19">
+                                            <label id="txtCampaignDesc" data-bind="text:LocationPhone"></label>
+                                            @*<textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationPhone" readonly="readonly"></textarea>*@
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="form-group" style="display:none;">
+                                    <div class="col-lg-2">
+                                        <label for="txtPriorityLabel" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn wrapspace">Priority </label>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <input style="width:31%!important;" type="text" class="form-control" id="txtPriority" placeholder="max 2 characters" data-bind="value:Priority" maxlength=" 2" />
+                                    </div>
+                                    <div class="col-lg-1">
+
+                                    </div>
+                                </div>
+                                <div class="form-group" style="display:none;">
+                                    <div class="col-lg-2">
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn wrapspace">Group Deal HeadLine</label>
+                                    </div>
+                                    <div class="col-lg-2" style="padding-left:14px;">
+                                        <div class="onoffswitch">
+                                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchVoucherONOFf">
+                                            <label class="onoffswitch-label" for="switchVoucherONOFf">
+                                                <div class="onoffswitch-inner"></div>
+                                                <div class="onoffswitch-switch"></div>
+
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <span style="color: #7f8c8d !important;font-size:13px!important;">Select YES to make this deal as parent headline for all your live deals</span>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group" style="display:none;">
+                                    <div class="col-lg-2">
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn wrapspace" style=" font-size: 12px; ">How to redeem  </label>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <textarea class="form-control" id="redeemline1" rows="4" placeholder="max 800 characters" data-bind="value: HowToRedeemLine1,click:$root.selectJobDescription" maxlength="400"></textarea>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <a id="P5" data-bind="visible:$root.selectedJobDescription()=== 'redeemline1',click:$root.openPhraseLibrary" style="padding: 4px 8px;" class="btn btn-primary pull-right">
+                                            <i class="fa fa-lg"></i>&nbsp;....
+                                        </a>
                                     </div>
                                 </div>
                             </div>
 
-                        </div>
-                        <div class="clearfix">
+                            <div class="col-lg-12" style="margin:auto;float:none !important;    " data-bind="visible: $root.previewScreenNumber() == 2">
 
-                        </div>
+                                <div class="clearfix">
 
+                                </div><br />
+                                <div class="row">
+                                    <div class="form-group" style="margin-top:10px;">
+                                        <div class="col-lg-2">
+                                            <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Banner Images</label>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <div class="col-lg-4">
+                                                <div style="margin-top:5px;    text-align: center;cursor:pointer;">
+                                                    @*<img style="height:90px;" data-bind="visible: couponImage1() == '' || couponImage1() == null"  src="/Content/Images/placeholder.png" onclick="showCouponDialog4();" />*@
+                                                    <img style="height:70px;" data-bind="visible: couponImage1() != '',attr: { src: couponImage1 }" id="bannerImage1" data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(2)" />
+                                                    <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
+                                                        (450 x 300 pixels)
+                                                    </div>
+                                                </div>
+                                                <br />
+                                                <div class="fileUpload btn btn-primary" style="display:none;">
+                                                    <span>Upload </span>
+                                                    <input type="file" class="upload" id="campaignType_image_file1" data-bind="files: { onLoaded: $root.couponImage1Callback, fileFilter: 'image.*'}" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-4">
+                                                <div style="margin-top:5px;    text-align: center;cursor:pointer;">
+                                                    @*<img style="height:90px;" data-bind="visible: CouponImage2() == '' || CouponImage2() == null" src="/Content/Images/placeholder.png" onclick="showCouponDialog2();" />*@
+                                                    <img style="height:70px;" data-bind="visible: CouponImage2() != '' && CouponImage2() != null ,attr: { src: CouponImage2 }" data-toggle="modal" data-target="#damModel" id="bannerImage2" onclick="changeIframeSrc(3)" />
+                                                    <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
+                                                        (450 x 300 pixels)
+                                                    </div>
+                                                </div>
+                                                <br />
+                                                <div class="fileUpload btn btn-primary" style="display:none;">
+                                                    <span>Upload </span>
+                                                    <input type="file" class="upload" id="campaignType_coupon_file2" data-bind="files: { onLoaded: $root.CouponImage2Callback, fileFilter: 'image.*'}" />
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div style="margin-top:5px;    text-align: center;cursor:pointer;">
+                                                    @*<img style="height:90px;" data-bind="visible: CouponImage3() == '' || CouponImage3() == null" src="/Content/Images/placeholder.png" onclick="showCouponDialog3();" />*@
+                                                    <img style="height:70px;" data-bind="visible: CouponImage3() != '' && CouponImage3() != null,attr: { src: CouponImage3 }" id="bannerImage3" data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(4)" />
+                                                    <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
+                                                        (450 x 300 pixels)
+                                                    </div>
+                                                </div>
+                                                <br />
+                                                <div class="fileUpload btn btn-primary" style="display:none;">
+                                                    <span>Upload </span>
+                                                    <input type="file" class="upload" id="campaignType_coupon_file3" data-bind="files: { onLoaded: $root.CouponImage3Callback, fileFilter: 'image.*'}" />
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-lg-2" style="padding-right:20px;">
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row" style="display:none;">
+                                    <div class="form-group" style="margin-top:10px;">
+                                        <div class="col-lg-2">
+                                            <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Upload Logo</label>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <div class="col-lg-4">
+                                                <div style="margin-top:5px;    text-align: center;cursor:pointer;padding-right:24px;">
+                                                    @*<img style="height:90px;" data-bind="visible: LogoImageBytes() == '' || LogoImageBytes() == null" src="/Content/Images/placeholder.png" onclick="showCouponDialog1();" />*@
+                                                    @*<img style="height:90px;" data-bind="visible: LogoImageBytes() != '' &&  LogoImageBytes() != null ,attr: { src: LogoImageBytes() }" onclick="showCouponDialog1();" />*@
+
+
+                                                    <img style="height:70px;" data-bind="visible: LogoUrl() != '' &&  LogoUrl() != null ,attr: { src: LogoUrl()+$root.randonNumber() }" id="imgLogo" data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(1)" />
+
+
+                                                    <div style="padding-top: 10px;padding-left:24px;    text-align: center;    font-size: 12px;    color: gray;">
+                                                        (300 x 150 pixels)
+                                                    </div>
+                                                </div>
+                                                <br />
+                                                <div class="fileUpload btn btn-primary" style="display:none;">
+                                                    <span data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(1)">Upload </span>
+                                                    @*<input type="file" class="upload" id="campaignType_coupon_file1" data-bind="files: { onLoaded: $root.campaignImageCallback, fileFilter: 'image.*'}" />*@
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+
+
+
+
+                            </div>
+
+
+                            <div class="col-lg-12" style="margin:auto;float:none !important;" data-bind="visible: $root.previewScreenNumber() == 3">
+                                @*<div class="form-group formcontrol-bg" data-bind="visible: $root.isEnableVedioVerificationLink">
+                <div class="col-lg-11">*@
+                                <div class="form-group">
+                                    <div class="col-lg-2">
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn"> Deal category</label>
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <div class="col-lg-4">
+                                            <ol class="dd-list" id="col1List">
+                                                <!-- ko template: { name: 'ListOfSelectedCouponCats2' , foreach: $root.couponCategoriesCol1 } -->
+                                                <!-- /ko -->
+                                            </ol>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <!-- ko template: { name: 'ListOfSelectedCouponCats2' , foreach: $root.couponCategoriesCol2 } -->
+                                            <!-- /ko -->
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <!-- ko template: { name: 'ListOfSelectedCouponCats2' , foreach: $root.couponCategoriesCol3 } -->
+                                            <!-- /ko -->
+                                        </div>
+                                    </div>
+                                    @*<div class="col-lg-7">
+                                        <div class="row">
+                                            <div>
+                                                <a href="#" id="couponCategorySelectorLink" class="btn btn-warning" style="margin-left:0px;" data-bind="click: $root.openProductCategoryDialog">
+                                                    <i class="fa fa-lg"></i>&nbsp;Select Deal Categories
+                                                </a>
+                                            </div>
+                                            <div>
+                                                <!-- ko template: { name: 'ListOfSelectedCouponCats' , foreach: $root.couponCategories } -->
+                                                <!-- /ko -->
+                                            </div>
+                                        </div>
+                                        </div>*@
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-2">
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">keywords</label>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <textarea class="form-control" id="txtCampaignDesc" rows="3" placeholder="Type in keyword searches to help users find your coupon offer. Seperate with a comma " data-bind="value: SearchKeywords"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12" style="margin-bottom:20px;">
+                                    <div class="adsubHeading Theme_standard_clr borderbtmline" data-bind="visible: $root.previewScreenNumber() == 3">
+                                        Use words that you would google when looking for your deals.
+                                    </div>
+                                </div>
+                                <div class="col-lg-11" style="display:none">
+                                    <div class="form-group" style="margin-bottom:20px; margin-top:20px;">
+                                        <div class="col-lg-4 text-campaign-left  Float-Left">
+                                            <label class="control-label text-right tooltip-float font20 floatNone hideInGames" style="float:left !important;font-size: 17px; margin-left: 6px; ">Refer deal to my website</label>
+
+                                        </div>
+                                        <div class="col-lg-2 Float-Left" style="padding-top:3px;">
+                                            <div class="onoffswitch">
+                                                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchVoucher" data-bind="checked: $root.buyItQuestionStatus, event: { click: $root.addBuyItPrice}">
+                                                <label class="onoffswitch-label" for="switchVoucher">
+                                                    <div class="onoffswitch-inner"></div>
+                                                    <div class="onoffswitch-switch"></div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2 text-campaign-left Float-Left" style="margin-left:6px;display:none;">
+                                            <span class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;color:red;"></span>
+                                        </div>
+                                        <div class="col-lg-3 Float-Left" style="margin-left:40px;">
+                                            <a href="#" id="idpreviewquizscreen" class="btn btn-primary pull-right" data-toggle="modal" data-target=".model_BuyItQ_ph" style="margin-left:6px;display:none;">
+                                                Preview
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                    @*data-bind="visible: $root.buyItQuestionStatus() == 1 "*@
+
+
+
+                                <div class="form-group" data-bind="visible: $root.buyItQuestionLabelStatus() == true && $root.buyItQuestionStatus() == true ">
+                                    <div class="col-lg-2">
+                                        <label for="txtBuyItlbl" class="control-label text-right tooltip-float floatNone">Enter Label</label>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <input type="text" class="form-control" id="txtBuyItlbl" placeholder="(12 characters)" style="width:50%!important;" maxlength="12" data-bind="value: $root.ButItOtherLabel">
+                                    </div>
+                                </div>
+
+
+
+
+
+                                <div class="form-group" style="display:none;">
+                                    <div class="col-lg-2">
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn"> Deal can be issued</label>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <textarea class="form-control" id="txtCampaignDesc" rows="1" data-bind="value: CouponQtyPerUser" style=" width:50px; float: left; margin-right: 16px;" maxlength="2"></textarea>
+                                        times at this branch per user
+                                    </div>
+                                </div>
+                                <div class="form-group" style="display:none;">
+                                    <div class="col-lg-2">
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn"> Deal listing mode</label>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <div class="radio col-lg-12" style="text-align: left;">
+                                            <input type="radio" name="optionsRadiosDelvTypes" value="1" id="optionsRadiosApplyFilterFree" data-bind="checked:CouponListingMode">
+                                            <label for="optionsRadiosApplyFilterFree">
+                                                <span style="color:red; font-weight:bold;">FREE</span> - Auto remove after 7 days listing, unlimited offers Issuance .
+
+                                            </label>
+                                            <span class="help-block text-right"></span>
+                                        </div>
+                                        <div class="radio col-lg-12" style="text-align: left;">
+                                            <input type="radio" name="optionsRadiosDelvTypes" value="2" id="optionsRadiosApplyFilterOnce" data-bind="checked:CouponListingMode">
+                                            <label for="optionsRadiosApplyFilterOnce">
+                                                <span class="defaultThemeTxtClr defaultImgUploadImageBtn" style="margin-left:1px;"> UNLIMITED </span> <span syle="margin-left:1px;"> - </span> Listed for 30 days upto 50 km, unlimited offers Issuance .
+                                            </label>
+                                            <span class="help-block text-right"></span>
+                                        </div>
+
+                                        <div class=" col-lg-12" style="text-align: left;    padding-left: 35px;">
+
+                                            <label for="">
+                                                <span class="defaultThemeTxtClr"></span>Select month any year to list this offer
+                                                <br /><br />
+                                                <select class="form-control" id="yearDropDown" data-bind="options: $root.YearRangeDropDown, optionsText: 'name', optionsValue: 'name', value: $root.CouponActiveMonth"></select>
+
+                                            </label>
+                                            <span class="help-block text-right"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-12" style="margin:auto;float:none !important;   " data-bind="visible: $root.previewScreenNumber() == 4">
+
+
+                                <div class="form-group">
+                                    <div class="col-lg-2">
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Currency Symbol </label>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <select class="form-control" style="width:50%!important;" id="ddpCorrectAns" data-bind="options: $root.CurrencyDropDown, optionsText: 'CurrencyName', optionsValue: 'CurrencyId', value: CurrencyId"></select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-2">
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Price</label>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <textarea style="width:25%!important;" class="form-control" id="txtCampaignDesc" rows="1" data-bind="value: Price"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-2">
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn"> Saving </label>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <textarea style="width:25%!important;" class="form-control" id="txtCampaignDesc" rows="1" data-bind="value: Savings"></textarea>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group" style="display:none;">
+                                    <div class="col-lg-2">
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn" style="white-space:nowrap;"> Deal Start date</label>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <input type="text" class="form-control" style="width:50%!important;" id="validFromStartDate" data-bind="datepicker:CouponStartDate">
+                                        @*<textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="datetimepicker:StartDateTime"  data-bind="value: CouponExpirydate"></textarea>*@
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group" style="display:none;">
+                                    <div class="col-lg-2">
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn" style="white-space:nowrap;"> Deal End date</label>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <input type="text" class="form-control" style="width:50%!important;" id="validFromEndDate" data-bind="datepicker:CouponEndDate">
+                                        @*<textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="datetimepicker:StartDateTime"  data-bind="value: CouponExpirydate"></textarea>*@
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-2">
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn" style="white-space:nowrap;"> Deal expiry date</label>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <input type="text" class="form-control" style="width:50%!important;" id="validFromExpiryDate" data-bind="datepicker:CouponExpirydate">
+                                        @*<textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="datetimepicker:StartDateTime"  data-bind="value: CouponExpirydate"></textarea>*@
+                                    </div>
+                                </div>
+                                @*<div class="col-lg-11">
+                <div class="form-group" style="margin-bottom:20px; margin-top:20px;">
+                    <div class="col-lg-4 text-campaign-left  Float-Left">
+                        <label class="control-label text-right tooltip-float font20 floatNone hideInGames" style="float:left !important;       font-size: 17px; margin-left: 6px; ">Buy Landing page Url</label>*@
+                                @*<label class="control-label text-right tooltip-float font20 floatNone showInGames" style="float:left !important;      font-size: 17px;  margin-left: 6px; ">Win game Landing page Url</label>*@
+                                @*</div>*@
+                                @*<div class="col-lg-2 Float-Left" style="padding-top:3px;">
+                            <div class="onoffswitch">
+                                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchVoucher" data-bind="checked: $root.buyItQuestionStatus, event: { click: $root.addBuyItPrice}">
+                                <label class="onoffswitch-label" for="switchVoucher">
+                                    <div class="onoffswitch-inner"></div>
+                                    <div class="onoffswitch-switch"></div>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 text-campaign-left Float-Left" style="margin-left:6px;display:none;">
+                            <span class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;color:red;" ></span>
+                        </div>
+                        <div class="col-lg-3 Float-Left" style="margin-left:40px;">
+                            <a href="#" id="idpreviewquizscreen" class="btn btn-primary pull-right" data-toggle="modal" data-target=".model_BuyItQ_ph" style="margin-left:6px;display:none;">
+                                Preview
+                            </a>
+                        </div>
                     </div>
+
+                </div>*@
+
+                                @*<div class="form-group" data-bind="visible: $root.buyItQuestionStatus()">
+                    <div class="col-lg-2">
+                        <label for="txtBuyItLine1" class="control-label text-right tooltip-float floatNone">Description</label>
+                    </div>
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control" id="txtBuyItLine1" placeholder="Enter Description  (150 characters)" maxlength="150">
+                    </div>
+                </div>*@
+
+
+                                @*<div class="form-group" data-bind="visible: $root.buyItQuestionStatus() == 1 ">
+                    <div class="col-lg-2">
+                        <label for="txtBuyItUrl" class="control-label text-right tooltip-float floatNone">Landing page url </label>
+                    </div>
+                    <div class="col-lg-8">
+                        <textarea class="form-control" id="txtBuyItUrl" rows="1" placeholder="Enter in landing page url "  style="margin-top:5px;"></textarea>
+                    </div>
+                </div>
+                <div class="form-group" data-bind="visible: $root.buyItQuestionStatus() == 1 ">
+                    <div class="col-lg-2">
+                        <label for="txtBuyItlbl" class="control-label text-right tooltip-float floatNone">Button Label </label>
+                    </div>
+                    <div class="col-lg-8">
+
+                        <select class="form-control" style="width:50%!important;">
+                            <option>Label1</option>
+                            <option>Label2</option>
+                            <option>Label3</option>
+                            <option>Label4</option>
+                            <option>Label5</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group" data-bind="visible: $root.buyItQuestionStatus() == 1 ">
+                    <div class="col-lg-2">
+                        <label for="txtBuyItlbl" class="control-label text-right tooltip-float floatNone">Enter Label</label>
+                    </div>
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control" id="txtBuyItlbl" placeholder="(12 characters)" style="width:50%!important;" maxlength="12">
+                    </div>
+                </div>*@
+
+
+
+                                <div class="form-group" style="display:none;">
+                                    <div class="col-lg-2">
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn wrapspace">Fine print # 2 </label>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <textarea class="form-control" id="fineprint2" rows="1" placeholder="max 72 characters" data-bind="value: FinePrintLine2,click:$root.selectJobDescription" maxlength="72"></textarea>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <a id="P1" data-bind="visible:$root.selectedJobDescription()=== 'fineprint2',click:$root.openPhraseLibrary" style="padding: 4px 8px;" class="btn btn-primary pull-right">
+                                            <i class="fa fa-lg"></i>&nbsp;....
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="display:none;">
+                                    <div class="col-lg-2">
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn wrapspace">Fine print # 3 </label>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <textarea class="form-control" id="fineprint3" rows="1" placeholder="max 72 characters" data-bind="value: FinePrintLine3,click:$root.selectJobDescription" maxlength="72"></textarea>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <a id="P2" data-bind="visible:$root.selectedJobDescription()=== 'fineprint3',click:$root.openPhraseLibrary" style="padding: 4px 8px;" class="btn btn-primary pull-right">
+                                            <i class="fa fa-lg"></i>&nbsp;....
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="display:none;">
+                                    <div class="col-lg-2">
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn wrapspace">Fine print # 4 </label>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <textarea class="form-control" id="fineprint4" rows="1" placeholder="max 72 characters" data-bind="value: FinePrintLine4,click:$root.selectJobDescription" maxlength="72"></textarea>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <a id="P3" data-bind="visible:$root.selectedJobDescription()=== 'fineprint4',click:$root.openPhraseLibrary" style="padding: 4px 8px;" class="btn btn-primary pull-right">
+                                            <i class="fa fa-lg"></i>&nbsp;....
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="display:none;">
+                                    <div class="col-lg-2">
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn wrapspace">Fine print # 5 </label>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <textarea class="form-control" id="fineprint5" rows="1" placeholder="max 72 characters" data-bind="value: FinePrintLine5,click:$root.selectJobDescription" maxlength="72"></textarea>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <a id="P4" data-bind="visible:$root.selectedJobDescription()=== 'fineprint5',click:$root.openPhraseLibrary" style="padding: 4px 8px;" class="btn btn-primary pull-right">
+                                            <i class="fa fa-lg"></i>&nbsp;....
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" style="display:none;">
+                                    <div class="col-lg-2">
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn wrapspace" style=" font-size: 12px; ">How to redeem # 2 </label>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <textarea class="form-control" id="redeemline2" rows="1" placeholder="max 72 characters" data-bind="value: HowToRedeemLine2,click:$root.selectJobDescription" maxlength="72"></textarea>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <a id="P6" data-bind="visible:$root.selectedJobDescription()=== 'redeemline2',click:$root.openPhraseLibrary" style="padding: 4px 8px;" class="btn btn-primary pull-right">
+                                            <i class="fa fa-lg"></i>&nbsp;....
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="display:none;">
+                                    <div class="col-lg-2">
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn wrapspace" style=" font-size: 12px; ">How to redeem # 3 </label>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <textarea class="form-control" id="redeemline3" rows="1" placeholder="max 72 characters" data-bind="value: HowToRedeemLine3,click:$root.selectJobDescription" maxlength="72"></textarea>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <a id="P7" data-bind="visible:$root.selectedJobDescription()=== 'redeemline3',click:$root.openPhraseLibrary" style="padding: 4px 8px;" class="btn btn-primary pull-right">
+                                            <i class="fa fa-lg"></i>&nbsp;....
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="display:none;">
+                                    <div class="col-lg-2">
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn wrapspace" style=" font-size: 12px; ">How to redeem # 4 </label>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <textarea class="form-control" id="redeemline4" rows="1" placeholder="max 72 characters" data-bind="value: HowToRedeemLine4,click:$root.selectJobDescription" maxlength="72"></textarea>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <a id="P8" data-bind="visible:$root.selectedJobDescription()=== 'redeemline4',click:$root.openPhraseLibrary" style="padding: 4px 8px;" class="btn btn-primary pull-right">
+                                            <i class="fa fa-lg"></i>&nbsp;....
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="display:none;">
+                                    <div class="col-lg-2">
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn wrapspace" style=" font-size: 12px; ">How to redeem # 5 </label>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <textarea class="form-control" id="redeemline5" rows="1" placeholder="max 72 characters" data-bind="value: HowToRedeemLine5,click:$root.selectJobDescription" maxlength="72"></textarea>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <a id="P8" data-bind="visible:$root.selectedJobDescription()=== 'redeemline5',click:$root.openPhraseLibrary" style="padding: 4px 8px;" class="btn btn-primary pull-right">
+                                            <i class="fa fa-lg"></i>&nbsp;....
+                                        </a>
+                                    </div>
+                                </div>
+
+
+
+
+
+
+
+
+
+                            </div>
+
+                            <div class="clearfix">
+
+                            </div>
+
+                            <div class="next-back-btns col-lg-12" style="margin:auto;float:none !important;">
+                                <div class="form-group">
+                                    <div class="col-lg-3">
+                                        &nbsp;
+                                    </div>
+                                    <div class="col-lg-3">
+                                        &nbsp;
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="pull-right col-lg-5" style="padding-left:10px;">
+                                            <button class="btn  btn-success gtild-color" id="btnNext" data-bind="visible:$root.previewScreenNumber() < 4,click:$root.nextPreviewScreen">Next</button>
+                                        </div>
+                                        <div class="pull-left col-lg-7" style="text-align:right;padding-right:0px;">
+                                            <button class="btn  btn-success gtild-color" id="btnBack" data-bind="visible:$root.previewScreenNumber() > 1, click:$root.backScreen">Back</button>
+                                        </div>
+                                        <div class="clearfix">
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="clearfix">
+
+                            </div>
+
+                        </div>
                 </div>
 
                 <div class="col-lg-3 form-horizontal" style=" height:566px;
@@ -1077,7 +1137,7 @@ else
                         <div class="col-lg-12">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <div style="padding-top:5px;height:43px;border-bottom :1px solid rgb(220,220,220);">
+                                    <div style="padding-top:13px;height:51px;border-bottom :1px solid rgb(220,220,220);">
                                         <div class="col-lg-7" style="padding-left:16px;">
                                             <span style="color:black !important;float:left;" class="panelfntSize">Potential Reach</span>
                                         </div>
@@ -1237,12 +1297,12 @@ else
                
 
             </div>
-       
+
         </div>
     </div>
 
 </div>
-@Html.Partial("~/Areas/Coupons/Views/Coupons/_addEditCouponCategories.cshtml")
+@*@Html.Partial("~/Areas/Coupons/Views/Coupons/_addEditCouponCategories.cshtml")*@
 
 
 <script id="editActionPirceOptionTemplate" type="text/html">
@@ -1298,7 +1358,7 @@ else
         <td  data-bind="text: Price"></td>
         <td data-bind="text: Savings"></td>
         <td data-bind="text: VoucherCode"></td>
-       
+
         <td id="actionColumn" style="text-align:right;">
             <!-- ko template: { name: 'editActionPirceOptionTemplate' } -->
             <!-- /ko -->
@@ -1317,6 +1377,18 @@ else
     <span>, </span>
     <!--/ko-->
 </script>
+<script id="ListOfSelectedCouponCats2" type="text/html">
+    <li class="dd-item dd-item-list " data-bind="attr: { id: CategoryId }">
+        <div class="dd-handle" style=" height:auto;padding-left:5px;">
+            <span data-bind="text: Name" style="font-size:12px!important;">
+            </span>
+            <input name="mcheck" type="checkbox" onclick="onchangeCheckbox();" class="bigcheckbox" style="float:right" data-bind="checked: IsSelected" />
+        </div>
+    </li>
+    
+
+</script>
+
 <script>
     function PageScroll() {
         $('html, body').animate({ scrollTop: 0 }, 800);
@@ -1347,6 +1419,16 @@ else
         $("#campaignType_image_file1").click();
 
     }
+    function onchangeCheckbox() {
+        $('.bigcheckbox').change(function () {
+            if ($('input.bigcheckbox').filter(':checked').length == 3)
+                $('input.bigcheckbox:not(:checked)').attr('disabled', 'disabled');
+            else
+                $('input.bigcheckbox').removeAttr('disabled');
+
+        });
+
+    }
     //var logoImage = "";
     //var bannerImage1 = "";
     //var bannerImage2 = "";
@@ -1357,11 +1439,11 @@ else
     //    if (mode1 != 1)
     //        mode1 = 2;
     //    $("#iframe").attr("src", "/DamImages?mode=" + mode1+"&selection=true");
-        
+
     //    console.log(mode);
     //}
     //function iframeLoaded() {
-        
+
     //    var iframeBody = $('body', $('#iframe')[0].contentWindow.document);
     //    $(iframeBody).on('click', '.damImgContainer img', function (event) {
     //        console.log(mode);
@@ -1383,23 +1465,23 @@ else
     //            $(".close").click();
     //        }
     //    });
-    }
+    //}
 
 </script>
 
 <!-- Modal -->
 @*<div class="modal fade" id="damModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document" style="width:1150px;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button"  class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Select an Image or upload</h4>
+        <div class="modal-dialog" role="document" style="width:1150px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button"  class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Select an Image or upload</h4>
+                </div>
+                <div class="modal-body">
+                    <iframe src="~/DamImages?mode=1&selection=true" style="width:100%;height:600px;border:none;" id="iframe"></iframe>
+                </div>
+                <div class="modal-footer">
+                  </div>
             </div>
-            <div class="modal-body">
-                <iframe src="~/DamImages?mode=1&selection=true" style="width:100%;height:600px;border:none;" id="iframe"></iframe>
-            </div>
-            <div class="modal-footer">
-              </div>
         </div>
-    </div>
-</div>*@
+    </div>*@

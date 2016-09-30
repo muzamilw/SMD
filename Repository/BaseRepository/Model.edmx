@@ -5617,12 +5617,12 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Type="String" Name="couponImage1" Nullable="true" />
           <Property Type="String" Name="CouponImage2" Nullable="true" />
           <Property Type="String" Name="CouponImage3" Nullable="true" />
-          <Property Type="String" Name="HighlightLine1" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="HighlightLine1" Nullable="true" MaxLength="800" />
           <Property Type="String" Name="HighlightLine2" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="HighlightLine3" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="HighlightLine4" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="HighlightLine5" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="FinePrintLine1" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="FinePrintLine1" Nullable="true" MaxLength="800" />
           <Property Type="String" Name="FinePrintLine2" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="FinePrintLine3" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="FinePrintLine4" Nullable="true" MaxLength="100" />
@@ -5648,6 +5648,10 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Type="String" Name="LogoUrl" Nullable="true" MaxLength="227" />
           <Property Type="Int32" Name="DaysLeft" Nullable="true" />
           <Property Type="Decimal" Name="SwapCost" Nullable="true" Precision="36" Scale="2" />
+          <Property Type="Boolean" Name="ShowBuyitBtn" Nullable="true" />
+          <Property Type="String" Name="BuyitLandingPageUrl" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="BuyitBtnLabel" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="AboutUsDescription" Nullable="true" />
         </ComplexType>
         <EntityType Name="ProfileQuestionTargetCriteria">
           <Key>
@@ -7674,6 +7678,10 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
                 <ScalarProperty Name="LogoUrl" ColumnName="LogoUrl" />
                 <ScalarProperty Name="DaysLeft" ColumnName="DaysLeft" />
                 <ScalarProperty Name="SwapCost" ColumnName="SwapCost" />
+                <ScalarProperty Name="ShowBuyitBtn" ColumnName="ShowBuyitBtn" />
+                <ScalarProperty Name="BuyitLandingPageUrl" ColumnName="BuyitLandingPageUrl" />
+                <ScalarProperty Name="BuyitBtnLabel" ColumnName="BuyitBtnLabel" />
+                <ScalarProperty Name="AboutUsDescription" ColumnName="AboutUsDescription" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

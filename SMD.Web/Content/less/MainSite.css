@@ -373,11 +373,13 @@ ul {
   font-size: 12px;
 }
 .radius_ddp {
-  background: #f3f3f3;
+  background:#81d3dc;
   width: 95px;
   padding: 0px;
   height: 25px;
   margin: 5px;
+  margin-left:53px;
+  color:white;
 }
 #coun_token_cnt li {
   list-style: none;
@@ -1007,9 +1009,12 @@ div#spinner {
     background-color: #81d3dc!important;
     border-color: #81d3dc!important;
     height:38px!important;
-    width:128px!important;
+    width:144px!important;
 }
 .filtersDiv_width {
-    width:139px;
+    width:150px;
+}
+.margin-btm26 {
+    margin-bottom:26px!important;
 }
 /*# sourceMappingURL=MainSite.css.map */

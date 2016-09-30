@@ -91,6 +91,9 @@ define("Coupons/Coupons.viewModel",
                     ButItOtherLabel = ko.observable(''),
                     AditionalCriteriaMode = ko.observable("1"), //1 = main buttons, 2 = profile questions , 3 = ad linked questions
                     couponCategories = ko.observableArray([]),
+                    couponCategoriesCol1 = ko.observableArray([]),
+                    couponCategoriesCol2 = ko.observableArray([]),
+                    couponCategoriesCol3 = ko.observableArray([]),
                     quizQuestionStatus = ko.observable(false),
                     quizPriceLbl = ko.observable("1"),
                     tenPriceLbl = ko.observable("1"),
@@ -149,6 +152,31 @@ define("Coupons/Coupons.viewModel",
 
                                     couponCategories.valueHasMutated();
                                     reachedAudience(Count(3150));
+                                    
+                                    //ko.utils.arrayPushAll(couponCategoriesCol1, couponCategories.take(7));
+                                    //couponCategoriesCol1.valueHasMutated();
+                                    var set = parseInt((couponCategories().length / 3));
+
+                                    //For 1s Column
+                                    for (var i = 0; i < set; i++) {
+                                        couponCategoriesCol1.push(couponCategories()[i]);
+                                    }
+                                    couponCategoriesCol1.valueHasMutated();
+                                    //For 2nd Column
+                                    if (couponCategories().length > set + 1) {
+                                        for (var j = set + 1; j < set*2 + 1; j++) {
+                                            couponCategoriesCol2.push(couponCategories()[j]);
+                                        }
+                                        couponCategoriesCol2.valueHasMutated();
+                                    }
+                                    //For 3rd Column
+                                    if (couponCategories().length >= set * 2 + 1) {
+                                        for (var k = set * 2 + 1; k < couponCategories().length; k++) {
+                                            couponCategoriesCol3.push(couponCategories()[k]);
+                                        }
+                                        couponCategoriesCol2.valueHasMutated();
+                                    }
+
                                 }
 
                             }
@@ -343,6 +371,7 @@ define("Coupons/Coupons.viewModel",
                 isNewCampaign(true);
                 isTerminateBtnVisible(false);
                 isNewCampaignVisible(false);
+                IsSubmitBtnVisible(true);
                 $("#btnCancel").css("display", "block");
                 $(".hideInCoupons").css("display", "none");
 
@@ -354,10 +383,10 @@ define("Coupons/Coupons.viewModel",
                 isShowArchiveBtn(false);
                 CouponTitle('New Deal');
                 StatusValue('Draft');
-                couponModel().reset();
+               
                 couponModel().CouponPriceOptions.splice(0, 0, new model.CouponPriceOption());
                 selectedPriceOption(couponModel().CouponPriceOptions()[0]);
-
+                couponModel().reset();
             },
 
             closeNewCampaignDialog = function () {
@@ -1836,9 +1865,11 @@ define("Coupons/Coupons.viewModel",
                     SelectedTextField(Fieldvalue);
                 },
                 CloseCouponsView = function () {
-
+                    
                     if (couponModel().hasChanges()) {
+
                         confirmation.messageText("Do you want to save changes?");
+
                         confirmation.afterProceed(function () {
                             SaveAsDraft();
                         });
@@ -1848,7 +1879,6 @@ define("Coupons/Coupons.viewModel",
                         });
 
                         confirmation.show();
-
                     }
                     else {
                         CloseContent();
@@ -2082,7 +2112,10 @@ define("Coupons/Coupons.viewModel",
                     selectedPriceOption: selectedPriceOption,
                     selectPriceOption: selectPriceOption,
                     EditorLoading: EditorLoading(),
-                    CouponListingModeChecker: CouponListingModeChecker
+                    CouponListingModeChecker: CouponListingModeChecker,
+                    couponCategoriesCol1: couponCategoriesCol1,
+                    couponCategoriesCol2: couponCategoriesCol2,
+                    couponCategoriesCol3: couponCategoriesCol3
                 };
             })()
         };

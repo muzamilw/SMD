@@ -93,7 +93,7 @@ define("ads/ads.viewModel",
                     SubHeading = ko.observable("Reward audiences 50% of your ‘ad click’ Increase branding and drive people to your web site with one ‘ad click’ Show a video ad, ask a reinforcing question and show your deals.");
 
                     tab1Heading = ko.observable("Upload a 10-20 second video ad.");
-                tab2Heading = ko.observable(" Define the target audience to deliver video ad.");
+                    tab2Heading = ko.observable("Target audience in different cities.");
                 tab4SubHeading = ko.observable("Select your ad campaign delivery mode:");
                     errorListNew = ko.observableArray([]),
                       // unique country list used to bind location dropdown

@@ -169,7 +169,6 @@
     var // ReSharper disable InconsistentNaming
       questionAnswer = function (ansString, imgpath, linkQ1, linkQ2, linkQ3, linkQ4, linkQ5, linkQ6, ansId,
       qstId, srtOrder, spcType, ProfleQuestion) {
-          debugger;
           var
               linkedQuestion1Id = ko.observable(linkQ1),
               linkedQuestion2Id = ko.observable(linkQ2),
@@ -328,21 +327,20 @@
             itemFromServer.HasLinkedQuestions, itemFromServer.ProfileGroupName, itemFromServer.LanguageId, itemFromServer.CountryId, itemFromServer.ProfileGroupId, itemFromServer.Type, itemFromServer.RefreshTime
         , itemFromServer.SkippedCount, moment(itemFromServer.CreationDate), itemFromServer.ModifiedDate, itemFromServer.PenalityForNotAnswering, itemFromServer.Status, itemFromServer.CreatedBy, itemFromServer.StatusValue, itemFromServer.AnswerNeeded, itemFromServer.AsnswerCount, itemFromServer.Gender, itemFromServer.AgeRangeStart, itemFromServer.AgeRangeEnd);
         
-        _.each(itemFromServer.ProfileQuestionTargetCriteria, function (item) {
+        //_.each(itemFromServer.ProfileQuestionTargetCriteria, function (item) {
            
-            Question.ProfileQuestionTargetCriteria.push(ProfileQuestionTargetCriteria.Create(item));
+        //    Question.ProfileQuestionTargetCriteria.push(ProfileQuestionTargetCriteria.Create(item));
 
-          });
-        _.each(itemFromServer.ProfileQuestionTargetLocation, function (item) {
+        //  });
+        //_.each(itemFromServer.ProfileQuestionTargetLocation, function (item) {
             
-            Question.ProfileQuestionTargetLocation.push(ProfileQuestionTargetLocation.Create(item));
-        });
+        //    Question.ProfileQuestionTargetLocation.push(ProfileQuestionTargetLocation.Create(item));
+        //});
         return Question;
     };
     
     // Function to attain cancel button functionality QUESTION
     question.CreateFromClientModel = function (item) {
-        debugger;
         return new question(item.qId, item.questionString, item.priority, item.hasLinkedQuestions, item.profileGroupName, item.languageId, item.countryId, item.profileGroupId, item.type, item.refreshTime
         , item.skippedCount, item.creationDate);
     };
@@ -448,7 +446,6 @@
  ProfileQuestionTargetCriteria = function (ID, PQID, Type, PQID, PQAnswerID, LinkedSQID, LinkedSqAnswer, IncludeorExclude, LanguageID,
      questionString, answerString, Language, IndustryID, Industry, EducationId, Education, AdCampaignAnswer, PQQuestionID, AdCampaignID,
      PQQuestionString, profileQuestRightImageSrc, profileQuestLeftImageSrc, IsDeleted, ID) {
-     console.log(answerString);
      var
          //type and userID will be set on server side
          ID = ko.observable(ID),
@@ -572,7 +569,7 @@
            source.Country, source.City, source.IncludeorExclude, source.Latitude, source.Longitude, source.pqid, source.IsDeleted,source.ID);
     }
   ProfileQuestionTargetCriteria.Create = function (source) {
-        return new ProfileQuestionTargetCriteria(source.Id, source.SqId, source.Type, source.PqId, source.PqAnswerId, source.LinkedSqId, source.LinkedSqAnswer, source.IncludeorExclude,
+      return new ProfileQuestionTargetCriteria(source.Id, source.SqId, source.Type, source.PQID, source.PQAnswerID, source.LinkedSQID, source.LinkedSQAnswer, source.IncludeorExclude,
             source.LanguageId, source.questionString, source.answerString, source.Language, source.IndustryId, source.Industry, source.EducationId, source.Education,
             source.AdCampaignAnswer, source.PQQuestionID, source.AdCampaignID, source.PQQuestionString, source.profileQuestRightImageSrc, source.profileQuestLeftImageSrc, source.IsDeleted, source.ID);
     };

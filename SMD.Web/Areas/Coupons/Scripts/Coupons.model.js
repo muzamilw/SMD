@@ -184,7 +184,6 @@
               }),
               // Has Changes
               hasChanges = ko.computed(function () {
-                  debugger;
                   return dirtyFlag.isDirty();
               }),
               // Reset
