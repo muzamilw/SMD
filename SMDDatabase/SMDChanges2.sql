@@ -1072,3 +1072,359 @@ COMMIT
 
 
 -------------------------------------------  All previous scripts executed on live server on 9-30-2016
+
+
+
+
+
+
+
+
+/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.AspNetUsers
+	DROP CONSTRAINT FK_AspNetUsers_Language
+GO
+ALTER TABLE dbo.Language SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.AspNetUsers
+	DROP CONSTRAINT FK_AspNetUsers_Industry
+GO
+ALTER TABLE dbo.Industry SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.AspNetUsers
+	DROP CONSTRAINT FK_AspNetUsers_Education
+GO
+ALTER TABLE dbo.Education SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.AspNetUsers
+	DROP CONSTRAINT FK_AspNetUsers_Company
+GO
+ALTER TABLE dbo.Company SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+CREATE TABLE dbo.Tmp_AspNetUsers
+	(
+	Id nvarchar(128) NOT NULL,
+	Email nvarchar(256) NULL,
+	EmailConfirmed bit NOT NULL,
+	PasswordHash nvarchar(MAX) NULL,
+	SecurityStamp nvarchar(MAX) NULL,
+	PhoneNumberConfirmed bit NOT NULL,
+	TwoFactorEnabled bit NOT NULL,
+	LockoutEndDateUtc datetime NULL,
+	LockoutEnabled bit NOT NULL,
+	AccessFailedCount int NOT NULL,
+	UserName nvarchar(256) NOT NULL,
+	FullName nvarchar(200) NOT NULL,
+	AlternateEmail nvarchar(256) NULL,
+	IsEmailVerified nchar(10) NULL,
+	Status int NULL,
+	CreatedDateTime datetime NULL,
+	ModifiedDateTime datetime NULL,
+	LastLoginTime datetime NULL,
+	Phone1 nvarchar(100) NULL,
+	Phone2 nvarchar(100) NULL,
+	Jobtitle nvarchar(50) NULL,
+	ContactNotes nvarchar(MAX) NULL,
+	IsSubscribed bit NOT NULL,
+	AppID int NULL,
+	IsCompanyRepresentative bit NULL,
+	UserTimeZone nvarchar(50) NULL,
+	Gender int NULL,
+	LanguageID int NULL,
+	IndustryID int NULL,
+	EducationId bigint NULL,
+	ProfileImage nvarchar(200) NULL,
+	UserCode nvarchar(300) NULL,
+	SmsCode nvarchar(50) NULL,
+	WebsiteLink nvarchar(100) NULL,
+	DOB datetime NULL,
+	CompanyId int NULL,
+	authenticationToken nvarchar(500) NULL,
+	DevicePlatform int NULL,
+	optDealsNearMeEmails bit NULL,
+	optLatestNewsEmails bit NULL,
+	optMarketingEmails bit NULL,
+	PassportNo nvarchar(150) NULL,
+	Title nvarchar(50) NULL
+	)  ON [PRIMARY]
+	 TEXTIMAGE_ON [PRIMARY]
+GO
+ALTER TABLE dbo.Tmp_AspNetUsers SET (LOCK_ESCALATION = TABLE)
+GO
+DECLARE @v sql_variant 
+SET @v = N'1 - Male, 2 Female'
+EXECUTE sp_addextendedproperty N'MS_Description', @v, N'SCHEMA', N'dbo', N'TABLE', N'Tmp_AspNetUsers', N'COLUMN', N'Gender'
+GO
+IF EXISTS(SELECT * FROM dbo.AspNetUsers)
+	 EXEC('INSERT INTO dbo.Tmp_AspNetUsers (Id, Email, EmailConfirmed, PasswordHash, SecurityStamp, PhoneNumberConfirmed, TwoFactorEnabled, LockoutEndDateUtc, LockoutEnabled, AccessFailedCount, UserName, FullName, AlternateEmail, IsEmailVerified, Status, CreatedDateTime, ModifiedDateTime, LastLoginTime, Phone1, Phone2, Jobtitle, ContactNotes, IsSubscribed, AppID, IsCompanyRepresentative, UserTimeZone, Gender, LanguageID, IndustryID, EducationId, ProfileImage, UserCode, SmsCode, WebsiteLink, DOB, CompanyId, authenticationToken, DevicePlatform, optDealsNearMeEmails, optLatestNewsEmails, optMarketingEmails, PassportNo, Title)
+		SELECT Id, Email, EmailConfirmed, PasswordHash, SecurityStamp, PhoneNumberConfirmed, TwoFactorEnabled, LockoutEndDateUtc, LockoutEnabled, AccessFailedCount, UserName, FullName, AlternateEmail, IsEmailVerified, Status, CreatedDateTime, ModifiedDateTime, LastLoginTime, Phone1, Phone2, Jobtitle, ContactNotes, IsSubscribed, AppID, IsCompanyRepresentative, UserTimeZone, Gender, LanguageID, IndustryID, EducationId, ProfileImage, UserCode, SmsCode, WebsiteLink, DOB, CompanyId, authenticationToken, DevicePlatform, optDealsNearMeEmails, optLatestNewsEmails, optMarketingEmails, PassportNo, CONVERT(nvarchar(50), Title) FROM dbo.AspNetUsers WITH (HOLDLOCK TABLOCKX)')
+GO
+ALTER TABLE dbo.CouponCodes
+	DROP CONSTRAINT FK_CouponCodes_AspNetUsers
+GO
+ALTER TABLE dbo.CompaniesAspNetUsers
+	DROP CONSTRAINT FK_CompaniesAspNetUsers_AspNetUsers
+GO
+ALTER TABLE dbo.UserApps
+	DROP CONSTRAINT FK_UserApps_AspNetUsers
+GO
+ALTER TABLE dbo.AspNetUserLogins
+	DROP CONSTRAINT [FK_dbo.AspNetUserLogins_dbo.AspNetUsers_UserId]
+GO
+ALTER TABLE dbo.AspNetUserClaims
+	DROP CONSTRAINT [FK_dbo.AspNetUserClaims_dbo.AspNetUsers_UserId]
+GO
+ALTER TABLE dbo.AdCampaignResponse
+	DROP CONSTRAINT FK_AdCampaignResponse_AspNetUsers
+GO
+ALTER TABLE dbo.AspNetUserRoles
+	DROP CONSTRAINT [FK_dbo.AspNetUserRoles_dbo.AspNetUsers_UserId]
+GO
+ALTER TABLE dbo.ProfileQuestionUserAnswer
+	DROP CONSTRAINT FK_ProfileQuestionUserAnswer_AspNetUsers
+GO
+ALTER TABLE dbo.SurveyQuestionResponse
+	DROP CONSTRAINT FK_SurveyQuestionResponse_AspNetUsers
+GO
+ALTER TABLE dbo.SurveyQuestion
+	DROP CONSTRAINT FK_SurveyQuestion_AspNetUsers
+GO
+DROP TABLE dbo.AspNetUsers
+GO
+EXECUTE sp_rename N'dbo.Tmp_AspNetUsers', N'AspNetUsers', 'OBJECT' 
+GO
+ALTER TABLE dbo.AspNetUsers ADD CONSTRAINT
+	[PK_dbo.AspNetUsers] PRIMARY KEY CLUSTERED 
+	(
+	Id
+	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+
+GO
+ALTER TABLE dbo.AspNetUsers ADD CONSTRAINT
+	FK_AspNetUsers_Company FOREIGN KEY
+	(
+	CompanyId
+	) REFERENCES dbo.Company
+	(
+	CompanyId
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+ALTER TABLE dbo.AspNetUsers ADD CONSTRAINT
+	FK_AspNetUsers_Education FOREIGN KEY
+	(
+	EducationId
+	) REFERENCES dbo.Education
+	(
+	EducationId
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+ALTER TABLE dbo.AspNetUsers ADD CONSTRAINT
+	FK_AspNetUsers_Industry FOREIGN KEY
+	(
+	IndustryID
+	) REFERENCES dbo.Industry
+	(
+	IndustryID
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+ALTER TABLE dbo.AspNetUsers ADD CONSTRAINT
+	FK_AspNetUsers_Language FOREIGN KEY
+	(
+	LanguageID
+	) REFERENCES dbo.Language
+	(
+	LanguageID
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.SurveyQuestion ADD CONSTRAINT
+	FK_SurveyQuestion_AspNetUsers FOREIGN KEY
+	(
+	UserID
+	) REFERENCES dbo.AspNetUsers
+	(
+	Id
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+ALTER TABLE dbo.SurveyQuestion SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.SurveyQuestionResponse ADD CONSTRAINT
+	FK_SurveyQuestionResponse_AspNetUsers FOREIGN KEY
+	(
+	UserID
+	) REFERENCES dbo.AspNetUsers
+	(
+	Id
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+ALTER TABLE dbo.SurveyQuestionResponse SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.ProfileQuestionUserAnswer ADD CONSTRAINT
+	FK_ProfileQuestionUserAnswer_AspNetUsers FOREIGN KEY
+	(
+	UserID
+	) REFERENCES dbo.AspNetUsers
+	(
+	Id
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+ALTER TABLE dbo.ProfileQuestionUserAnswer SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.AspNetUserRoles ADD CONSTRAINT
+	[FK_dbo.AspNetUserRoles_dbo.AspNetUsers_UserId] FOREIGN KEY
+	(
+	UserId
+	) REFERENCES dbo.AspNetUsers
+	(
+	Id
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  CASCADE 
+	
+GO
+ALTER TABLE dbo.AspNetUserRoles SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.AdCampaignResponse ADD CONSTRAINT
+	FK_AdCampaignResponse_AspNetUsers FOREIGN KEY
+	(
+	UserID
+	) REFERENCES dbo.AspNetUsers
+	(
+	Id
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+ALTER TABLE dbo.AdCampaignResponse SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.AspNetUserClaims ADD CONSTRAINT
+	[FK_dbo.AspNetUserClaims_dbo.AspNetUsers_UserId] FOREIGN KEY
+	(
+	UserId
+	) REFERENCES dbo.AspNetUsers
+	(
+	Id
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  CASCADE 
+	
+GO
+ALTER TABLE dbo.AspNetUserClaims SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.AspNetUserLogins ADD CONSTRAINT
+	[FK_dbo.AspNetUserLogins_dbo.AspNetUsers_UserId] FOREIGN KEY
+	(
+	UserId
+	) REFERENCES dbo.AspNetUsers
+	(
+	Id
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  CASCADE 
+	
+GO
+ALTER TABLE dbo.AspNetUserLogins SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.UserApps ADD CONSTRAINT
+	FK_UserApps_AspNetUsers FOREIGN KEY
+	(
+	UserID
+	) REFERENCES dbo.AspNetUsers
+	(
+	Id
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+ALTER TABLE dbo.UserApps SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.CompaniesAspNetUsers ADD CONSTRAINT
+	FK_CompaniesAspNetUsers_AspNetUsers FOREIGN KEY
+	(
+	UserId
+	) REFERENCES dbo.AspNetUsers
+	(
+	Id
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+ALTER TABLE dbo.CompaniesAspNetUsers SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.CouponCodes ADD CONSTRAINT
+	FK_CouponCodes_AspNetUsers FOREIGN KEY
+	(
+	UserId
+	) REFERENCES dbo.AspNetUsers
+	(
+	Id
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+ALTER TABLE dbo.CouponCodes SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT

@@ -250,7 +250,7 @@
           <Property Name="optLatestNewsEmails" Type="bit" />
           <Property Name="optMarketingEmails" Type="bit" />
           <Property Name="PassportNo" Type="nvarchar" MaxLength="150" />
-          <Property Name="Title" Type="int" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="AuditLog">
           <Key>
@@ -954,6 +954,8 @@
           <Property Name="CouponId" Type="bigint" />
           <Property Name="UserId" Type="nvarchar" MaxLength="128" />
           <Property Name="ViewDateTime" Type="datetime" />
+          <Property Name="userLocationLAT" Type="nvarchar" MaxLength="50" />
+          <Property Name="userLocationLONG" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="UserFavouriteCoupon">
           <Key>
@@ -4647,7 +4649,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Name="optMarketingEmails" Type="Boolean" />
           <NavigationProperty Name="Company" Relationship="DomainModels.FK_AspNetUsers_Company" FromRole="User" ToRole="Company" />
           <Property Name="PassportNo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Title" Type="Int32" />
+          <Property Name="Title" Type="String" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Type="DomainModels.User" Role="AspNetUser" Multiplicity="1">
@@ -5583,6 +5585,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Name="CouponId" Type="Int64" />
           <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="ViewDateTime" Type="DateTime" Precision="3" />
+          <Property Name="userLocationLAT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="userLocationLONG" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <ComplexType Name="GetCouponByID_Result">
           <Property Type="Int64" Name="CouponId" Nullable="false" />
@@ -5652,6 +5656,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Type="String" Name="BuyitLandingPageUrl" Nullable="true" MaxLength="500" />
           <Property Type="String" Name="BuyitBtnLabel" Nullable="true" MaxLength="200" />
           <Property Type="String" Name="AboutUsDescription" Nullable="true" />
+          <Property Type="String" Name="CompanyName" Nullable="true" />
         </ComplexType>
         <EntityType Name="ProfileQuestionTargetCriteria">
           <Key>
@@ -7605,6 +7610,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySetMapping Name="UserCouponViews">
             <EntityTypeMapping TypeName="DomainModels.UserCouponView">
               <MappingFragment StoreEntitySet="UserCouponView">
+                <ScalarProperty Name="userLocationLONG" ColumnName="userLocationLONG" />
+                <ScalarProperty Name="userLocationLAT" ColumnName="userLocationLAT" />
                 <ScalarProperty Name="ViewDateTime" ColumnName="ViewDateTime" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="CouponId" ColumnName="CouponId" />
@@ -7682,6 +7689,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
                 <ScalarProperty Name="BuyitLandingPageUrl" ColumnName="BuyitLandingPageUrl" />
                 <ScalarProperty Name="BuyitBtnLabel" ColumnName="BuyitBtnLabel" />
                 <ScalarProperty Name="AboutUsDescription" ColumnName="AboutUsDescription" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

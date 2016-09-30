@@ -68,7 +68,7 @@ namespace SMD.Models.IdentityModels
         public Nullable<bool> optMarketingEmails { get; set; }
 
 
-        public Nullable<int> Title { get; set; }
+        public string Title { get; set; }
 
         public virtual ICollection<UserLogin> UserLogins { get; set; }
         public virtual ICollection<Role> Roles { get; set; }
@@ -103,101 +103,7 @@ namespace SMD.Models.IdentityModels
 
         #region Public
 
-        /// <summary>
-        /// Update user
-        /// </summary>
-        public void Update(UpdateUserProfileRequest source)
-        {
-            if (source == null)
-            {
-                return;
-            }
-
-            // Update only the ones that changed
-            if (!string.IsNullOrEmpty(source.Phone1))
-            {
-                Phone1 = source.Phone1;
-            }
-
-            if (!string.IsNullOrEmpty(source.Phone2))
-            {
-                Phone2 = source.Phone2;
-            }
-
-            //if (!string.IsNullOrEmpty(source.Address1))
-            //{
-            //    Address1 = source.Address1;
-            //}
-
-            //if (!string.IsNullOrEmpty(source.Address2))
-            //{
-            //    Address2 = source.Address2;
-            //}
-
-            if (!string.IsNullOrEmpty(source.JobTitle))
-            {
-                Jobtitle = source.JobTitle;
-            }
-
-            if (!string.IsNullOrEmpty(source.ContactNotes))
-            {
-                ContactNotes = source.ContactNotes;
-            }
-
-            //if (!string.IsNullOrEmpty(source.State))
-            //{
-            //    State = source.State;
-            //}
-
-            //if (!string.IsNullOrEmpty(source.ZipCode))
-            //{
-            //    ZipCode = source.ZipCode;
-            //}
-
-            if (source.DOB.HasValue)
-            {
-                DOB = source.DOB;
-            }
-
-            //if (source.CityId.HasValue)
-            //{
-            //    CityId = source.CityId;
-            //}
-
-            //if (source.CountryId.HasValue)
-            //{
-            //    CountryId = source.CountryId;
-            //}
-
-            if (source.Gender.HasValue)
-            {
-                Gender = source.Gender;
-            }
-
-            if (source.IndustryId.HasValue)
-            {
-                IndustryId = source.IndustryId;
-            }
-
-            if (!string.IsNullOrEmpty(source.FullName))
-            {
-                FullName = source.FullName;
-            }
-
-            if (!string.IsNullOrEmpty(source.TimeZone))
-            {
-                UserTimeZone = source.TimeZone;
-            }
-            if (source.EducationId.HasValue)
-            {
-                EducationId = source.EducationId;
-            }
-            if (!string.IsNullOrEmpty(source.Password))
-            {
-                PasswordHash = source.Password;
-            }
-           
-        }
+       
 
         #endregion
     }

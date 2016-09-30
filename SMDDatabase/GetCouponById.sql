@@ -1,6 +1,6 @@
 ﻿
 GO
-/****** Object:  StoredProcedure [dbo].[GetCouponByID]    Script Date: 9/29/2016 2:57:11 PM ******/
+/****** Object:  StoredProcedure [dbo].[GetCouponByID]    Script Date: 9/30/2016 12:19:30 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -42,15 +42,11 @@ DECLARE @source geography = geography::Point(@lat, @lon, 4326)
 INSERT INTO [dbo].[UserCouponView]
            ([CouponId]
            ,[UserId]
-           ,[ViewDateTime],userLocationLAT
-			userLocationLONG)
+           ,[ViewDateTime])
      VALUES
            (@CouponId
            ,@UserId
-           ,GETDATE(),
-		   @lat,
-		   @lon
-		   )
+           ,GETDATE())
 
 
 SELECT [CouponId]
@@ -123,14 +119,11 @@ SELECT [CouponId]
        
 	end  as distance, curr.CurrencySymbol
 	,
-		(select 
-	CASE
-		WHEN c.LogoUrl is null or c.LogoUrl = ''
-		THEN 'http://manage.cash4ads.com/' + comp.Logo
-		WHEN c.LogoUrl is not null
-		THEN 'http://manage.cash4ads.com/' + c.LogoUrl
-	END as AdvertisersLogoPath from company comp
-	 where comp.CompanyId = c.CompanyId) as [LogoUrl],
+		
+		
+		'http://manage.cash4ads.com/' + comp.Logo
+		
+	 [LogoUrl],
 
 	 case when c.CouponListingMode  = 2
 	 then 
@@ -155,7 +148,8 @@ SELECT [CouponId]
 	 c.ShowBuyitBtn,
 	c.BuyitLandingPageUrl,
 	c.BuyitBtnLabel,
-	comp.AboutUsDescription
+	comp.AboutUsDescription,
+	comp.CompanyName
 
 
 
