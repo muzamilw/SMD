@@ -371,6 +371,7 @@ define("Coupons/Coupons.viewModel",
                 isNewCampaign(true);
                 isTerminateBtnVisible(false);
                 isNewCampaignVisible(false);
+                IsSubmitBtnVisible(true);
                 $("#btnCancel").css("display", "block");
                 $(".hideInCoupons").css("display", "none");
 
@@ -382,10 +383,10 @@ define("Coupons/Coupons.viewModel",
                 isShowArchiveBtn(false);
                 CouponTitle('New Deal');
                 StatusValue('Draft');
-                couponModel().reset();
+               
                 couponModel().CouponPriceOptions.splice(0, 0, new model.CouponPriceOption());
                 selectedPriceOption(couponModel().CouponPriceOptions()[0]);
-
+                couponModel().reset();
             },
 
             closeNewCampaignDialog = function () {
@@ -1864,9 +1865,11 @@ define("Coupons/Coupons.viewModel",
                     SelectedTextField(Fieldvalue);
                 },
                 CloseCouponsView = function () {
-
+                    
                     if (couponModel().hasChanges()) {
+
                         confirmation.messageText("Do you want to save changes?");
+
                         confirmation.afterProceed(function () {
                             SaveAsDraft();
                         });
@@ -1876,7 +1879,6 @@ define("Coupons/Coupons.viewModel",
                         });
 
                         confirmation.show();
-
                     }
                     else {
                         CloseContent();
