@@ -213,12 +213,26 @@
         Paypal = 1,
         Coupon = 3
     }
-    public enum ProductType
+    public enum CampaignType
     {
-        Ad = 1,
+        VideoAd = 1,
+        GameAd = 4,
         SurveyQuestion = 2,
-        Question = 3
+        ProfileQuestion = 3
     }
+
+
+    public enum CampaignResponseEventType
+    {
+        Opened = 1,
+        BuyItbuttonClicked = 2,
+        Answered =3,
+        Skip = 4,
+        
+
+
+    }
+
 
     /// <summary>
     /// Ad Reward

@@ -1,4 +1,5 @@
 ﻿
+using SMD.Models.Common;
 using System.Collections.Generic;
 
 namespace SMD.Models.RequestModels
@@ -24,5 +25,7 @@ namespace SMD.Models.RequestModels
         public string UserId { get; set; }
 
         public int companyId { get; set; }
+
+        public CampaignResponseEventType ResponeEventType { get; set; }
     }
 }

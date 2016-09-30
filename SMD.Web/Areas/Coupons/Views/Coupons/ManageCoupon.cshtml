@@ -16,7 +16,7 @@ else
     <div class="col-lg-12">
         <div class="row">
             <div class="col-lg-12" id="topArea">
-                
+
                 <ol class="breadcrumb" style="display:none;">
                     <li><a href="/Dashboard/Index" class="my-navigator">Home</a></li>
                     <li><a data-bind="click:$root.CloseCouponsView" class="my-navigator">Deal Promotion</a></li>
@@ -26,7 +26,7 @@ else
                    
                     <div  style="float:right;margin-top:-9px;"><img data-bind="click: $root.CloseCouponsView" src="/Content/Images/Close_Button.png" style="width:27px;height:27px;float:right;cursor:pointer;"></div>
                 </div>
-                
+
                 <div class="row" style="margin-bottom:15px;">
                     <div class="col-xs-6 pull-left validationSummaryContainer">
                         <ul data-bind="foreach: $root.errorList">
@@ -718,7 +718,23 @@ else
                                     <div class="col-lg-2">
                                         <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn"> Deal category</label>
                                     </div>
-                                    <div class="col-lg-7">
+                                    <div class="col-lg-10">
+                                        <div class="col-lg-4">
+                                            <ol class="dd-list" id="col1List">
+                                                <!-- ko template: { name: 'ListOfSelectedCouponCats2' , foreach: $root.couponCategoriesCol1 } -->
+                                                <!-- /ko -->
+                                            </ol>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <!-- ko template: { name: 'ListOfSelectedCouponCats2' , foreach: $root.couponCategoriesCol2 } -->
+                                            <!-- /ko -->
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <!-- ko template: { name: 'ListOfSelectedCouponCats2' , foreach: $root.couponCategoriesCol3 } -->
+                                            <!-- /ko -->
+                                        </div>
+                                    </div>
+                                    @*<div class="col-lg-7">
                                         <div class="row">
                                             <div>
                                                 <a href="#" id="couponCategorySelectorLink" class="btn btn-warning" style="margin-left:0px;" data-bind="click: $root.openProductCategoryDialog">
@@ -730,7 +746,7 @@ else
                                                 <!-- /ko -->
                                             </div>
                                         </div>
-                                    </div>
+                                        </div>*@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-lg-2">
@@ -772,6 +788,7 @@ else
 
                                 </div>
 
+                                    @*data-bind="visible: $root.buyItQuestionStatus() == 1 "*@
 
 
 
@@ -1280,12 +1297,12 @@ else
                
 
             </div>
-       
+
         </div>
     </div>
 
 </div>
-@Html.Partial("~/Areas/Coupons/Views/Coupons/_addEditCouponCategories.cshtml")
+@*@Html.Partial("~/Areas/Coupons/Views/Coupons/_addEditCouponCategories.cshtml")*@
 
 
 <script id="editActionPirceOptionTemplate" type="text/html">
@@ -1341,7 +1358,7 @@ else
         <td  data-bind="text: Price"></td>
         <td data-bind="text: Savings"></td>
         <td data-bind="text: VoucherCode"></td>
-       
+
         <td id="actionColumn" style="text-align:right;">
             <!-- ko template: { name: 'editActionPirceOptionTemplate' } -->
             <!-- /ko -->
@@ -1360,6 +1377,18 @@ else
     <span>, </span>
     <!--/ko-->
 </script>
+<script id="ListOfSelectedCouponCats2" type="text/html">
+    <li class="dd-item dd-item-list " data-bind="attr: { id: CategoryId }">
+        <div class="dd-handle" style=" height:auto;padding-left:5px;">
+            <span data-bind="text: Name" style="font-size:12px!important;">
+            </span>
+            <input name="mcheck" type="checkbox" onclick="onchangeCheckbox();" class="bigcheckbox" style="float:right" data-bind="checked: IsSelected" />
+        </div>
+    </li>
+    
+
+</script>
+
 <script>
     function PageScroll() {
         $('html, body').animate({ scrollTop: 0 }, 800);
@@ -1390,6 +1419,16 @@ else
         $("#campaignType_image_file1").click();
 
     }
+    function onchangeCheckbox() {
+        $('.bigcheckbox').change(function () {
+            if ($('input.bigcheckbox').filter(':checked').length == 3)
+                $('input.bigcheckbox:not(:checked)').attr('disabled', 'disabled');
+            else
+                $('input.bigcheckbox').removeAttr('disabled');
+
+        });
+
+    }
     //var logoImage = "";
     //var bannerImage1 = "";
     //var bannerImage2 = "";
@@ -1400,11 +1439,11 @@ else
     //    if (mode1 != 1)
     //        mode1 = 2;
     //    $("#iframe").attr("src", "/DamImages?mode=" + mode1+"&selection=true");
-        
+
     //    console.log(mode);
     //}
     //function iframeLoaded() {
-        
+
     //    var iframeBody = $('body', $('#iframe')[0].contentWindow.document);
     //    $(iframeBody).on('click', '.damImgContainer img', function (event) {
     //        console.log(mode);
@@ -1426,23 +1465,23 @@ else
     //            $(".close").click();
     //        }
     //    });
-    }
+    //}
 
 </script>
 
 <!-- Modal -->
 @*<div class="modal fade" id="damModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document" style="width:1150px;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button"  class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Select an Image or upload</h4>
+        <div class="modal-dialog" role="document" style="width:1150px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button"  class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Select an Image or upload</h4>
+                </div>
+                <div class="modal-body">
+                    <iframe src="~/DamImages?mode=1&selection=true" style="width:100%;height:600px;border:none;" id="iframe"></iframe>
+                </div>
+                <div class="modal-footer">
+                  </div>
             </div>
-            <div class="modal-body">
-                <iframe src="~/DamImages?mode=1&selection=true" style="width:100%;height:600px;border:none;" id="iframe"></iframe>
-            </div>
-            <div class="modal-footer">
-              </div>
         </div>
-    </div>
-</div>*@
+    </div>*@

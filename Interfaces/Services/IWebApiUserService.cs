@@ -30,12 +30,6 @@ namespace SMD.Interfaces.Services
         /// </summary>
         GetProductsResponse GetProducts(GetProductsRequest request);
         
-        
-        /// <summary>
-        /// Ad Viewed
-        /// </summary>
-        Task<BaseApiResponse> UpdateTransactionOnViewingAd(AdViewedRequest request,ProductActionRequest pRequest);
-
         /// <summary>
         /// Archive Account
         /// </summary>
