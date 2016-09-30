@@ -690,7 +690,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-alter VIEW [dbo].[vw_Coupons]
+create VIEW [dbo].[vw_Coupons]
 AS
 select a.*, ( select
 			stuff((
@@ -1068,3 +1068,7 @@ GO
 ALTER TABLE dbo.UserCouponView SET (LOCK_ESCALATION = TABLE)
 GO
 COMMIT
+
+
+
+-------------------------------------------  All previous scripts executed on live server on 9-30-2016

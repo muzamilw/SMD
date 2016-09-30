@@ -42,11 +42,15 @@ DECLARE @source geography = geography::Point(@lat, @lon, 4326)
 INSERT INTO [dbo].[UserCouponView]
            ([CouponId]
            ,[UserId]
-           ,[ViewDateTime])
+           ,[ViewDateTime],userLocationLAT
+			userLocationLONG)
      VALUES
            (@CouponId
            ,@UserId
-           ,GETDATE())
+           ,GETDATE(),
+		   @lat,
+		   @lon
+		   )
 
 
 SELECT [CouponId]
