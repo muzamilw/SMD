@@ -46,12 +46,14 @@ namespace SMD.MIS.Areas.Api.Controllers
         [ApiExceptionCustom]
         public async Task<UpdateProfileImageResponse> Post(string authenticationToken, UpdateUserProfileRequest request)
         {
-            if (string.IsNullOrEmpty(authenticationToken) || request == null || !ModelState.IsValid)
-            {
-                throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
-            }
+            //if (string.IsNullOrEmpty(authenticationToken) || request == null || !ModelState.IsValid)
+            //{
+            //    throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
+            //}
 
-            return await webApiUserService.UpdateProfileImage(request); 
+            //return await webApiUserService.UpdateProfileImage(request); 
+
+            return null;
         }
 
         #endregion

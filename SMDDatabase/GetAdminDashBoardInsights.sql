@@ -1,5 +1,5 @@
-﻿USE [SMDv2]
-GO
+﻿
+
 /****** Object:  StoredProcedure [dbo].[GetAdminDashBoardInsights]    Script Date: 9/20/2016 4:10:00 PM ******/
 SET ANSI_NULLS ON
 GO

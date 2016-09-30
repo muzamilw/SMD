@@ -72,6 +72,10 @@ namespace SMD.MIS.Areas.Api.Models
         public string AboutUsDescription { get; set; }
 
 
+        public string CompanyName { get; set; }
+        
+
+
         public virtual ICollection<CouponPriceOption> CouponPriceOptions { get; set; }
         
     }

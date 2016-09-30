@@ -328,30 +328,30 @@ namespace SMD.Implementation.Services
             HttpContext.Current.User = new ClaimsPrincipal(identity);
         }
 
-        /// <summary>
-        /// Updates Profile Image
-        /// </summary>
-        private static void UpdateProfileImage(UpdateUserProfileRequest request, User user)
-        {
-            string smdContentPath = ConfigurationManager.AppSettings["SMD_Content"];
-            HttpServerUtility server = HttpContext.Current.Server;
-            string mapPath = server.MapPath(smdContentPath + "/Users/" + user.CompanyId);
+        ///// <summary>
+        ///// Updates Profile Image
+        ///// </summary>
+        //private static void UpdateProfileImage(UpdateUserProfileRequest request, User user)
+        //{
+        //    string smdContentPath = ConfigurationManager.AppSettings["SMD_Content"];
+        //    HttpServerUtility server = HttpContext.Current.Server;
+        //    string mapPath = server.MapPath(smdContentPath + "/Users/" + user.CompanyId);
 
-            // Create directory if not there
-            if (!Directory.Exists(mapPath))
-            {
-                Directory.CreateDirectory(mapPath);
-            }
+        //    // Create directory if not there
+        //    if (!Directory.Exists(mapPath))
+        //    {
+        //        Directory.CreateDirectory(mapPath);
+        //    }
 
-            user.ProfileImage = ImageHelper.Save(mapPath, user.ProfileImage, string.Empty, request.ProfileImageName,
-                request.ProfileImage, request.ProfileImageBytes);
-             string imgExt = Path.GetExtension(user.ProfileImage);
-             string sourcePath = HttpContext.Current.Server.MapPath("~/"+user.ProfileImage);
-             string[] results = sourcePath.Split(new string[] { imgExt }, StringSplitOptions.None);
-             string res = results[0];
-             string destPath = res + "_thumb" + imgExt;
-             ImageHelper.GenerateThumbNail(sourcePath, sourcePath, 200);
-        }
+        //    user.ProfileImage = ImageHelper.Save(mapPath, user.ProfileImage, string.Empty, request.ProfileImageName,
+        //        request.ProfileImage, request.ProfileImageBytes);
+        //     string imgExt = Path.GetExtension(user.ProfileImage);
+        //     string sourcePath = HttpContext.Current.Server.MapPath("~/"+user.ProfileImage);
+        //     string[] results = sourcePath.Split(new string[] { imgExt }, StringSplitOptions.None);
+        //     string res = results[0];
+        //     string destPath = res + "_thumb" + imgExt;
+        //     ImageHelper.GenerateThumbNail(sourcePath, sourcePath, 200);
+        //}
         
         #region Product Response Actions
 
@@ -960,36 +960,34 @@ namespace SMD.Implementation.Services
         /// </summary>
         public async Task<BaseApiResponse> UpdateProfile(UpdateUserProfileRequest request)
         {
+            
+            
             User user = await UserManager.FindByIdAsync(request.UserId);
             if (user == null)
             {
                 throw new SMDException(LanguageResources.WebApiUserService_InvalidUserId);
             }
-           
 
-            /// update country and city based on name
-            if (!string.IsNullOrEmpty(request.Country))
+
+            if (!string.IsNullOrEmpty(request.Title))
             {
-                request.CountryId = countryRepository.GetCountryId(request.Country);
+                user.Title = request.Title;
             }
-            if (!string.IsNullOrEmpty(request.City))
+
+            if (request.DOB.HasValue)
             {
-                request.CityId = cityRepository.GetCityId(request.City);
+                user.DOB = request.DOB;
             }
-            // Update User
-          
-            user.Update(request);
-            //update company
-            //companyRepository.updateCompany(request);
+
+            if (request.Gender.HasValue)
+            {
+                user.Gender = request.Gender;
+            }
+                user.IndustryId = request.ProfessionID;
+                user.FullName= request.FullName;
+
             // Save Changes
            await UserManager.UpdateAsync(user);
-           if (request.ProfileImageBytes != null)
-               await UpdateProfileImage(request);
-
-            if(!string.IsNullOrEmpty(request.RoleId))
-            {
-                manageUserRepository.UpdateRoles(request.RoleId,request);
-            }
 
             return new BaseApiResponse
             {
@@ -998,31 +996,31 @@ namespace SMD.Implementation.Services
             };
         }
 
-        /// <summary>
-        /// Update Profile Image
-        /// </summary>
-        public async Task<UpdateProfileImageResponse> UpdateProfileImage(UpdateUserProfileRequest request)
-        {
-            User user = await UserManager.FindByIdAsync(request.UserId);
+        ///// <summary>
+        ///// Update Profile Image
+        ///// </summary>
+        //public async Task<UpdateProfileImageResponse> UpdateProfileImage(UpdateUserProfileRequest request)
+        //{
+        //    User user = await UserManager.FindByIdAsync(request.UserId);
             
-            if (user == null)
-            {
-                throw new SMDException(LanguageResources.WebApiUserService_InvalidUserId);
-            }
+        //    if (user == null)
+        //    {
+        //        throw new SMDException(LanguageResources.WebApiUserService_InvalidUserId);
+        //    }
 
-            // Update Profile Image
-            UpdateProfileImage(request, user);
-            companyRepository.updateCompanyLogo(user.ProfileImage, user.CompanyId.Value);
-            // Save Changes
-           // await UserManager.UpdateAsync(user); // because now we will save profile image in company 
+        //    // Update Profile Image
+        //    UpdateProfileImage(request, user);
+        //    companyRepository.updateCompanyLogo(user.ProfileImage, user.CompanyId.Value);
+        //    // Save Changes
+        //   // await UserManager.UpdateAsync(user); // because now we will save profile image in company 
 
-            return new UpdateProfileImageResponse
-                   {
-                       ImageUrl = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + user.ProfileImage,
-                       Status = true,
-                       Message = "Success"
-                   };
-        }
+        //    return new UpdateProfileImageResponse
+        //           {
+        //               ImageUrl = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + user.ProfileImage,
+        //               Status = true,
+        //               Message = "Success"
+        //           };
+        //}
 
         /// <summary>
         /// Get Logged-In User profile 

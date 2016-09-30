@@ -250,7 +250,7 @@
           <Property Name="optLatestNewsEmails" Type="bit" />
           <Property Name="optMarketingEmails" Type="bit" />
           <Property Name="PassportNo" Type="nvarchar" MaxLength="150" />
-          <Property Name="Title" Type="int" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="AuditLog">
           <Key>
@@ -954,6 +954,8 @@
           <Property Name="CouponId" Type="bigint" />
           <Property Name="UserId" Type="nvarchar" MaxLength="128" />
           <Property Name="ViewDateTime" Type="datetime" />
+          <Property Name="userLocationLAT" Type="nvarchar" MaxLength="50" />
+          <Property Name="userLocationLONG" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="UserFavouriteCoupon">
           <Key>
@@ -1128,6 +1130,20 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Name="CurentBalance" Type="float" />
           <Property Name="CampaignID" Type="bigint" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_ReferringCompanies">
+          <Key>
+            <PropertyRef Name="FullName" />
+          </Key>
+          <Property Name="FullName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="CompanyName" Type="nvarchar(max)" />
+          <Property Name="vcount" Type="int" />
+          <Property Name="scount" Type="int" />
+          <Property Name="pcount" Type="int" />
+          <Property Name="ReferringCompanyID" Type="int" />
         </EntityType>
         <Association Name="FK_Account_Company">
           <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
@@ -2635,6 +2651,17 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
     [vw_PublisherTransaction].[Email] AS [Email]
     FROM [dbo].[vw_PublisherTransaction] AS [vw_PublisherTransaction]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="vw_ReferringCompanies" EntityType="Self.vw_ReferringCompanies" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_ReferringCompanies].[FullName] AS [FullName], 
+    [vw_ReferringCompanies].[Email] AS [Email], 
+    [vw_ReferringCompanies].[CompanyName] AS [CompanyName], 
+    [vw_ReferringCompanies].[vcount] AS [vcount], 
+    [vw_ReferringCompanies].[scount] AS [scount], 
+    [vw_ReferringCompanies].[pcount] AS [pcount], 
+    [vw_ReferringCompanies].[ReferringCompanyID] AS [ReferringCompanyID]
+    FROM [dbo].[vw_ReferringCompanies] AS [vw_ReferringCompanies]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Account_Company" Association="Self.FK_Account_Company">
             <End Role="Company" EntitySet="Company" />
             <End Role="Account" EntitySet="Account" />
@@ -3636,6 +3663,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             <End Role="SurveyQuestion" EntitySet="SurveyQuestions" />
             <End Role="CampaignEventHistory" EntitySet="CampaignEventHistories" />
           </AssociationSet>
+          <EntitySet Name="vw_ReferringCompanies" EntityType="DomainModels.vw_ReferringCompanies" />
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -4647,7 +4675,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Name="optMarketingEmails" Type="Boolean" />
           <NavigationProperty Name="Company" Relationship="DomainModels.FK_AspNetUsers_Company" FromRole="User" ToRole="Company" />
           <Property Name="PassportNo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Title" Type="Int32" />
+          <Property Name="Title" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Type="DomainModels.User" Role="AspNetUser" Multiplicity="1">
@@ -5583,6 +5611,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Name="CouponId" Type="Int64" />
           <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="ViewDateTime" Type="DateTime" Precision="3" />
+          <Property Name="userLocationLAT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="userLocationLONG" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <ComplexType Name="GetCouponByID_Result">
           <Property Type="Int64" Name="CouponId" Nullable="false" />
@@ -5652,6 +5682,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Type="String" Name="BuyitLandingPageUrl" Nullable="true" MaxLength="500" />
           <Property Type="String" Name="BuyitBtnLabel" Nullable="true" MaxLength="200" />
           <Property Type="String" Name="AboutUsDescription" Nullable="true" />
+          <Property Type="String" Name="CompanyName" Nullable="true" />
         </ComplexType>
         <EntityType Name="ProfileQuestionTargetCriteria">
           <Key>
@@ -6556,6 +6587,18 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="vw_ReferringCompanies">
+          <Key>
+            <PropertyRef Name="FullName" />
+          </Key>
+          <Property Name="FullName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="vcount" Type="Int32" />
+          <Property Name="scount" Type="Int32" />
+          <Property Name="pcount" Type="Int32" />
+          <Property Name="ReferringCompanyID" Type="Int32" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -7605,6 +7648,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySetMapping Name="UserCouponViews">
             <EntityTypeMapping TypeName="DomainModels.UserCouponView">
               <MappingFragment StoreEntitySet="UserCouponView">
+                <ScalarProperty Name="userLocationLONG" ColumnName="userLocationLONG" />
+                <ScalarProperty Name="userLocationLAT" ColumnName="userLocationLAT" />
                 <ScalarProperty Name="ViewDateTime" ColumnName="ViewDateTime" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="CouponId" ColumnName="CouponId" />
@@ -7682,6 +7727,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
                 <ScalarProperty Name="BuyitLandingPageUrl" ColumnName="BuyitLandingPageUrl" />
                 <ScalarProperty Name="BuyitBtnLabel" ColumnName="BuyitBtnLabel" />
                 <ScalarProperty Name="AboutUsDescription" ColumnName="AboutUsDescription" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -8125,6 +8171,19 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
               <MappingFragment StoreEntitySet="EventStatuses">
                 <ScalarProperty Name="EventName" ColumnName="EventName" />
                 <ScalarProperty Name="EventStatusId" ColumnName="EventStatusId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_ReferringCompanies">
+            <EntityTypeMapping TypeName="DomainModels.vw_ReferringCompanies">
+              <MappingFragment StoreEntitySet="vw_ReferringCompanies">
+                <ScalarProperty Name="ReferringCompanyID" ColumnName="ReferringCompanyID" />
+                <ScalarProperty Name="pcount" ColumnName="pcount" />
+                <ScalarProperty Name="scount" ColumnName="scount" />
+                <ScalarProperty Name="vcount" ColumnName="vcount" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

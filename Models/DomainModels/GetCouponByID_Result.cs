@@ -83,5 +83,8 @@ namespace SMD.Models.DomainModels
         public string BuyitLandingPageUrl { get; set; }
         public string BuyitBtnLabel { get; set; }
         public string AboutUsDescription { get; set; }
+
+        public string CompanyName { get; set; }
+        
     }
 }
