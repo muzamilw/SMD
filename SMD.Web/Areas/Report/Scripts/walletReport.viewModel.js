@@ -29,6 +29,7 @@
                                     balance(data.Balance.toFixed(2));
                                     var amount = data.Balance / 100;
                                     dollarBalance(amount.toFixed(2));
+                                  //  getReferralCountries();
                                     ////pager().totalCount(0);
                                     //pager().totalCount(data.TotalCount);
                                 },
@@ -37,6 +38,19 @@
                                 }
                             });
                     },
+                getReferralCountries = function()
+                {
+                    dataservice.getreferralComponies({
+                        success: function (data) {
+                            var a = data;
+
+                        },
+                        error: function () {
+                            toastr.error("Failed to load branchCategory.");
+                        }
+                    });
+                            
+                },
                    
                     // Initialize the view model
                     initialize = function (specifiedView) {

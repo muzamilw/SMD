@@ -140,8 +140,10 @@ namespace SMD.Repository.Repositories
             db.Configuration.LazyLoadingEnabled = false;
             return DbSet.FirstOrDefault(c => c.CompanyId == compId);
         }
-
-        
+        public List<vw_ReferringCompanies> GetReferralCompaniesByCID()
+        {
+            return db.vwvw_ReferringCompanies.Where(re => re.ReferringCompanyID == CompanyId).ToList();
+        }
         #endregion
     }
 }

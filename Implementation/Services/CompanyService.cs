@@ -290,6 +290,10 @@ namespace SMD.Implementation.Services
         {
             return companyRepository.GetCompanyById();
         }
+        public List<vw_ReferringCompanies> GetRefferalComponiesByCid()
+        {
+            return companyRepository.GetReferralCompaniesByCID();
+        }
         #endregion
     }
 }
