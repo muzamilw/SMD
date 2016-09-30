@@ -22,7 +22,7 @@ define("ads/ads.viewModel",
                     profileQuestionList = ko.observable([]),
                     myQuizQuestions = ko.observableArray([]),
                     profileAnswerList = ko.observable([]),
-
+                    ShowAudienceCounter = ko.observable(),
                     surveyAnswerList = ko.observable([]),
 
                     criteriaCount = ko.observable(0),
@@ -2292,7 +2292,8 @@ define("ads/ads.viewModel",
                     dataservice.getAudienceData(campData, {
                         success: function (data) {
                             $("#spinnerAudience").css("display", "none");
-                            reachedAudience(GetAudienceCount(data.MatchingUsers));
+                            reachedAudience(data.MatchingUsers);
+                            ShowAudienceCounter(GetAudienceCount(data.MatchingUsers));
                             totalAudience(data.AllUsers);
                             var percent = data.MatchingUsers / data.AllUsers;
                             if (percent < 0.20) {
@@ -2990,7 +2991,8 @@ define("ads/ads.viewModel",
                     surveyquestionList: surveyquestionList,
                     surveyAnswerList: surveyAnswerList,
                     saveSurveyQuestion: saveSurveyQuestion,
-                    updateSurveyCriteriass: updateSurveyCriteriass
+                    updateSurveyCriteriass: updateSurveyCriteriass,
+                    ShowAudienceCounter: ShowAudienceCounter
                 };
             })()
         };

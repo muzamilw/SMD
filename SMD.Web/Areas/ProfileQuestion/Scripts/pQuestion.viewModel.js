@@ -724,7 +724,7 @@ define("pQuestion/pQuestion.viewModel",
                         onSaveProfileQuestion(1);
                     },
                     onSaveProfileQuestion = function (mode) {
-                        
+                        debugger;
                         if (!doBeforeSave()) {
                             return;
                         }

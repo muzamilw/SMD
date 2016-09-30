@@ -17,7 +17,7 @@ namespace SMD.Repository.Repositories
     public class CompanyRepository : BaseRepository<Company>, ICompanyRepository
     {
         #region Private
-       
+
         #endregion
         #region Constructor
         /// <summary>
@@ -38,7 +38,7 @@ namespace SMD.Repository.Repositories
         }
         #endregion
 
-        
+
         #region Public
 
 
@@ -68,16 +68,16 @@ namespace SMD.Repository.Repositories
         public int createCompany(string userId, string email, string fullname, string guid)
         {
             int UserCompanyId = 0;
-           
-                Company company = new Company();
-                company.ReplyEmail = email;
-                company.CompanyName = fullname;
-                company.ReferralCode = Guid.NewGuid().ToString();
-                db.Companies.Add(company);
-                db.SaveChanges();
-                UserCompanyId = company.CompanyId;
 
-            
+            Company company = new Company();
+            company.ReplyEmail = email;
+            company.CompanyName = fullname;
+            company.ReferralCode = Guid.NewGuid().ToString();
+            db.Companies.Add(company);
+            db.SaveChanges();
+            UserCompanyId = company.CompanyId;
+
+
             var user = db.Users.Where(g => g.Id == userId).SingleOrDefault();
             if (user != null)
             {
@@ -90,29 +90,29 @@ namespace SMD.Repository.Repositories
         public bool updateCompany(Company request)
         {
             var company = db.Companies.Where(g => g.CompanyId == request.CompanyId).SingleOrDefault();
-            if(company != null)
+            if (company != null)
             {
 
-              company.CompanyName= request.CompanyName;
-              company.Tel1= request.Tel1;
-              company.Tel2= request.Tel2;
-              
-              company.StripeCustomerId= request.StripeCustomerId;
-              company.SalesEmail= request.SalesEmail;
-              company.WebsiteLink= request.WebsiteLink;
-              company.VoucherSecretKey= request.VoucherSecretKey;
-              company.BillingAddressLine1= request.BillingAddressLine1;
-              company.BillingAddressLine2= request.BillingAddressLine2;
-              company.BillingState= request.BillingState;
-              company.BillingCountryId= request.BillingCountryId;
-              company.BillingCity= request.BillingCity;
-              company.BillingZipCode= request.BillingZipCode;
-              company.BillingPhone= request.BillingPhone;
-              company.BillingEmail= request.BillingEmail;
-              company.TwitterHandle= request.TwitterHandle;
-              company.FacebookHandle= request.FacebookHandle;
-              company.InstagramHandle= request.InstagramHandle;
-              company.PinterestHandle= request.PinterestHandle;
+                company.CompanyName = request.CompanyName;
+                company.Tel1 = request.Tel1;
+                company.Tel2 = request.Tel2;
+
+                company.StripeCustomerId = request.StripeCustomerId;
+                company.SalesEmail = request.SalesEmail;
+                company.WebsiteLink = request.WebsiteLink;
+                company.VoucherSecretKey = request.VoucherSecretKey;
+                company.BillingAddressLine1 = request.BillingAddressLine1;
+                company.BillingAddressLine2 = request.BillingAddressLine2;
+                company.BillingState = request.BillingState;
+                company.BillingCountryId = request.BillingCountryId;
+                company.BillingCity = request.BillingCity;
+                company.BillingZipCode = request.BillingZipCode;
+                company.BillingPhone = request.BillingPhone;
+                company.BillingEmail = request.BillingEmail;
+                company.TwitterHandle = request.TwitterHandle;
+                company.FacebookHandle = request.FacebookHandle;
+                company.InstagramHandle = request.InstagramHandle;
+                company.PinterestHandle = request.PinterestHandle;
 
 
                 db.SaveChanges();
@@ -123,7 +123,7 @@ namespace SMD.Repository.Repositories
         public User getUserBasedOnAuthenticationToken(string token)
         {
             return db.Users.Where(g => g.AuthenticationToken == token).SingleOrDefault();
-            
+
         }
         public string GetCompanyNameByID(int CompanyId)
         {
@@ -131,7 +131,7 @@ namespace SMD.Repository.Repositories
         }
         public Company GetCompanyById()
         {
-            return DbSet. Where(g => g.CompanyId == CompanyId).SingleOrDefault();
+            return DbSet.Where(g => g.CompanyId == CompanyId).SingleOrDefault();
         }
 
         public Company GetCompanyWithoutChilds(int companyId = 0)
@@ -144,6 +144,46 @@ namespace SMD.Repository.Repositories
         {
             return db.vwvw_ReferringCompanies.Where(re => re.ReferringCompanyID == CompanyId).ToList();
         }
+        public bool updateCompanyForProfile(CompanyResponseModel RequestData, Company Target)
+        {
+            var target = db.Companies.Where(g => g.CompanyId == Target.CompanyId).SingleOrDefault();
+
+            if (target != null)
+            {
+
+                target.CompanyName = RequestData.CompanyName;
+                target.AboutUsDescription = RequestData.AboutUs;
+                target.BillingAddressLine1 = RequestData.BillingAddressLine1;
+                target.BillingAddressLine2 = RequestData.BillingAddressLine2;
+                target.BillingAddressName = RequestData.BillingBusinessName;
+                target.BillingCity = RequestData.BillingCity;
+                target.BillingCountryId = RequestData.BillingCountryId;
+                target.BillingEmail = RequestData.BillingEmail;
+                target.BillingPhone = RequestData.BillingPhone;
+                target.BillingState = RequestData.BillingState;
+                target.BillingZipCode = RequestData.BillingZipCode;
+                target.NoOfBranches = RequestData.BranchesCount;
+                target.CompanyRegNo = RequestData.CompanyRegistrationNo;
+                target.CompanyType = RequestData.CompanyType;
+                target.CreationDateTime = RequestData.BusinessStartDate;
+                target.PaypalCustomerId = RequestData.PayPalId;
+                target.StripeCustomerId = RequestData.StripeCustomerId;
+                target.SalesEmail = RequestData.SalesEmail;
+                target.WebsiteLink = RequestData.WebsiteLink;
+                target.TaxRegNo = RequestData.CompanyRegistrationNo;
+                target.Tel1 = RequestData.SalesPhone;
+                target.CompanyType = RequestData.CompanyType;
+
+                db.Companies.Attach(target);
+
+                db.Entry(target).State = EntityState.Modified;
+                db.SaveChanges();
+
+            }
+            return true;
+
         #endregion
+
+        }
     }
 }
