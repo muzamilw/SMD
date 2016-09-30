@@ -22,6 +22,7 @@ namespace SMD.Interfaces.Repository
         string GetCompanyNameByID(int CompanyId);
         Company GetCompanyById();
         Company GetCompanyWithoutChilds(int companyId = 0);
+        List<vw_ReferringCompanies> GetReferralCompaniesByCID();
         bool updateCompanyForProfile(CompanyResponseModel RequestData, Company Target);
     }
 }

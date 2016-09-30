@@ -23,5 +23,6 @@ namespace SMD.Interfaces.Services
         Company GetCompanyForAddress();
         CompanyResponseModel GetCompanyDetails(int companyId = 0, string userId = "");
         bool UpdateCompanyProfile(CompanyResponseModel company, byte[] logoImageBytes);
+        List<vw_ReferringCompanies> GetRefferalComponiesByCid();
     }
 }

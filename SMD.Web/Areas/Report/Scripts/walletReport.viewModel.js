@@ -8,6 +8,7 @@
                 var view,
                     walletReport = ko.observableArray([]),
                     balance = ko.observable();
+                    dollarBalance = ko.observable();
                     //pager
                    
                 
@@ -25,7 +26,10 @@
                                     _.each(data.Transactions, function (item) {
                                         walletReport.push(model.WalletReportServertoClientMapper(item));
                                     });
-                                    balance(data.Balance);
+                                    balance(data.Balance.toFixed(2));
+                                    var amount = data.Balance / 100;
+                                    dollarBalance(amount.toFixed(2));
+                                  //  getReferralCountries();
                                     ////pager().totalCount(0);
                                     //pager().totalCount(data.TotalCount);
                                 },
@@ -34,6 +38,19 @@
                                 }
                             });
                     },
+                getReferralCountries = function()
+                {
+                    dataservice.getreferralComponies({
+                        success: function (data) {
+                            var a = data;
+
+                        },
+                        error: function () {
+                            toastr.error("Failed to load branchCategory.");
+                        }
+                    });
+                            
+                },
                    
                     // Initialize the view model
                     initialize = function (specifiedView) {
@@ -47,6 +64,7 @@
                     getWalletReportHistory: getWalletReportHistory,
                     walletReport: walletReport,
                     balance: balance,
+                    dollarBalance: dollarBalance,
                 };
             })()
         };
