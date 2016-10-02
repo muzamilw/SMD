@@ -372,7 +372,7 @@ define("Coupons/Coupons.viewModel",
                 isNewCampaign(true);
                 isTerminateBtnVisible(false);
                 isNewCampaignVisible(false);
-                IsSubmitBtnVisible(true);
+               
                 $("#btnCancel").css("display", "block");
                 $(".hideInCoupons").css("display", "none");
 
@@ -384,7 +384,7 @@ define("Coupons/Coupons.viewModel",
                 isShowArchiveBtn(false);
                 CouponTitle('New Deal');
                 StatusValue('Draft');
-               
+                IsSubmitBtnVisible(true);
                 couponModel().CouponPriceOptions.splice(0, 0, new model.CouponPriceOption());
                 selectedPriceOption(couponModel().CouponPriceOptions()[0]);
                 couponModel().reset();
