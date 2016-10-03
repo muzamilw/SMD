@@ -73,6 +73,8 @@
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="GetRevenueOverTime.sql" />
+    <None Include="getCampaignsByStatus.sql" />
+    <None Include="GetUserCounts.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="GetProducts.sql" />
