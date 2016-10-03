@@ -56,7 +56,7 @@ namespace SMD.Interfaces.Services
 
         AdCampaign SendApprovalRejectionEmail(AdCampaign source);
         string UpdateAdApprovalCampaign(AdCampaign source);
-
+        IEnumerable<getCampaignsByStatus_Result> getCampaignsByStatus();
 
         //CouponCodeModel GenerateCouponCodes(int numbers, long CampaignId);
         

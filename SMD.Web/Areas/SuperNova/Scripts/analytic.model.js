@@ -29,7 +29,8 @@ var DashboardInsightsModel = function (ActivityName, isBlankrow) {
 	 usT= ko.observable(""),
 	 caT= ko.observable(""),
 	 auT= ko.observable(""),
-	 aeT= ko.observable("")
+	 aeT= ko.observable(""),
+	 ordr= ko.observable("")
 	} else{
 	 activity = ko.observable(ActivityName), 
 	 usL = ko.observable(0), 
@@ -46,7 +47,8 @@ var DashboardInsightsModel = function (ActivityName, isBlankrow) {
 	 usT= ko.observable(0),
 	 caT= ko.observable(0),
 	 auT= ko.observable(0),
-	 aeT= ko.observable(0)
+	 aeT= ko.observable(0),
+	 ordr= ko.observable(0)
 	}
 	return{
 		activity:activity,
@@ -64,7 +66,8 @@ var DashboardInsightsModel = function (ActivityName, isBlankrow) {
 		ukT:ukT,
 		auT:auT,
 		caT:caT,
-		aeT:aeT
+		aeT:aeT,
+		ordr:ordr
 	}
     
    

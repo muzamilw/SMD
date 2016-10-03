@@ -1268,6 +1268,12 @@ namespace SMD.Implementation.Services
         //{
         //    return _couponCodeRepository.UpdateCouponSettings(VoucherCode, SecretKey, UserId);
         //}
+
+        public IEnumerable<getCampaignsByStatus_Result> getCampaignsByStatus() {
+            return this._campaignCategoriesRepository.getCampaignsByStatus();
+        
+        }
+
         #endregion
 
         //public string CampaignVerifyQuestionById(int CampaignID)
@@ -1275,5 +1281,7 @@ namespace SMD.Implementation.Services
         //    return DbSet.Where(i => i.CampaignId == CampaignID).FirstOrDefault().VerifyQuestion;
 
         //}
+
+
     }
 }
