@@ -44,5 +44,11 @@ namespace SMD.Repository.Repositories
            db.SaveChanges();
 
        }
+       public IEnumerable<getCampaignsByStatus_Result> getCampaignsByStatus()
+       {
+           return db.getCampaignsByStatus();
+       }
     }
+
+    
 }

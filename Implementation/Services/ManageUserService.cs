@@ -175,7 +175,10 @@ namespace SMD.Implementation.Services
                 return false;
 
         }
-
+        public IEnumerable<GetUserCounts_Result> GetUserCounts()
+        {
+            return this.managerUserRepository.GetUserCounts();
+        }
 
         //public bool AcceptInvitation(string invitationcode)
         //{

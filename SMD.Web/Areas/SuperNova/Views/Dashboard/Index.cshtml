@@ -133,43 +133,43 @@
         </div>
         <div class="col-lg-12">
             <div class="table-responsive tbl-dashboard" style="margin-right:-4px; ">
-                <table class="table">
+                <table class="table" style="border-right:solid white 8px;">
                     <thead>
                         <tr>
                             <th> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                             <th class="text-left">
+                            <th>
                                 <span class="GridHeaderFont_size">
                                     Draft
                                 </span>
                             </th>
-                            
-                            <th class="text-left">
+
+                            <th>
                                 <span class="GridHeaderFont_size">
                                     Pending
                                 </span>
                             </th>
-                           
-                            <th class="text-left">
+
+                            <th>
                                 <span class="GridHeaderFont_size">
                                     Live
                                 </span>
                             </th>
-                           
-                            <th class="text-left">
+
+                            <th>
                                 <span class="GridHeaderFont_size">
                                     Paused
                                 </span>
                             </th>
-                           
-                            <th class="text-left">
+
+                            <th>
                                 <span class="GridHeaderFont_size">
                                     Rejected
                                 </span>
                             </th>
-                            
+
 
                         </tr>
-                      
+
 
                     </thead>
                     <tbody>
@@ -222,6 +222,8 @@
                         <!-- ko template: { name: 'UserCountsTemplate' , foreach: $root.UserCountsData } -->
                         <!-- /ko -->
                         <tr><td colspan="17"> </td></tr>
+
+                      
                     </tbody>
                 </table>
             </div>
@@ -289,23 +291,23 @@
 <script id="DashboardInsightTemplate" type="text/html">
     <tr style="border-bottom: none;">
         <td class="col-sm-3 font14">
-            <!-- ko if: activity() === "# Answered" ||  activity() === "# Skipped" || activity() === "#Conversion to landing pages" || activity() === "# Rewarded" || activity() === "$ Revenue by Campaign types"  || activity() === "$ Total Revenue (Stripe)"  || activity() === "$ Total Payouts (PayPal)" -->
+            <!-- ko if: activity() === "# Answered" ||  activity() === "# Skipped" || activity() === "#Conversion to landing pages" || activity() === "# Openeded" || activity() === "$ Revenue by Campaign types"  || activity() === "$ Total Revenue (Stripe)"  || activity() === "$ Total Payouts (PayPal)" -->
             <span class="h4" data-bind="text: activity"></span>
             <!-- /ko -->
 
-            <!-- ko ifnot: activity() === "# Answered" ||  activity() === "# Skipped" || activity() === "#Conversion to landing pages" || activity() === "# Rewarded" || activity() === "$ Revenue by Campaign types"  || activity() === "$ Total Revenue (Stripe)"  || activity() === "$ Total Payouts (PayPal)" -->
+            <!-- ko ifnot: activity() === "# Answered" ||  activity() === "# Skipped" || activity() === "#Conversion to landing pages" || activity() === "# Openeded" || activity() === "$ Revenue by Campaign types"  || activity() === "$ Total Revenue (Stripe)"  || activity() === "$ Total Payouts (PayPal)" -->
             <span class="paddingLeft20px" data-bind="text: activity"></span>
             <!-- /ko -->
         </td>
         <td></td>
         <td class="text-right">
-            <!-- ko if: activity() === "Video Ads Revenue" || activity() === "Game Ads Revenue" || activity() === "Survey Cards Revenue" || activity() === "Profile Questions Revenue" || activity() === "Payout via Paypal" || activity() === "Income from Stripe" -->
+            <!-- ko if: ordr() === 32 || ordr() === 33 || ordr() === 34 || ordr() === 35 || ordr() === 36 || ordr() === 39 || ordr() === 40 -->
             $
             <!-- /ko -->
             <span data-bind="text: usL"></span>
         </td>
         <td class="text-right">
-            <!-- ko if: activity() === "Video Ads Revenue" || activity() === "Game Ads Revenue" || activity() === "Survey Cards Revenue" || activity() === "Profile Questions Revenue" || activity() === "Payout via Paypal" || activity() === "Income from Stripe" -->
+            <!-- ko if: ordr() === 32 || ordr() === 33 || ordr() === 34 || ordr() === 35 || ordr() === 36 || ordr() === 39 || ordr() === 40 -->
             $
             <!-- /ko -->
             <span data-bind="text: usC()"></span>
@@ -327,13 +329,13 @@
             <!-- /ko -->
         </td>
         <td class="text-right bk-gray">
-            <!-- ko if: activity() === "Video Ads Revenue" || activity() === "Game Ads Revenue" || activity() === "Survey Cards Revenue" || activity() === "Profile Questions Revenue" || activity() === "Payout via Paypal" || activity() === "Income from Stripe" -->
+            <!-- ko if: ordr() === 32 || ordr() === 33 || ordr() === 34 || ordr() === 35 || ordr() === 36 || ordr() === 39 || ordr() === 40 -->
             $
             <!-- /ko -->
             <span data-bind="text: ukL"></span>
         </td>
         <td class="text-right bk-gray">
-            <!-- ko if: activity() === "Video Ads Revenue" || activity() === "Game Ads Revenue" || activity() === "Survey Cards Revenue" || activity() === "Profile Questions Revenue" || activity() === "Payout via Paypal" || activity() === "Income from Stripe" -->
+            <!-- ko if: ordr() === 32 || ordr() === 33 || ordr() === 34 || ordr() === 35 || ordr() === 36 || ordr() === 39 || ordr() === 40 -->
             $
             <!-- /ko -->
             <span data-bind="text: ukC"></span>
@@ -357,13 +359,13 @@
        
 
         <td class="text-right">
-            <!-- ko if: activity() === "Video Ads Revenue" || activity() === "Game Ads Revenue" || activity() === "Survey Cards Revenue" || activity() === "Profile Questions Revenue" || activity() === "Payout via Paypal" || activity() === "Income from Stripe" -->
+            <!-- ko if: ordr() === 32 || ordr() === 33 || ordr() === 34 || ordr() === 35 || ordr() === 36 || ordr() === 39 || ordr() === 40 -->
             $
             <!-- /ko -->
             <span data-bind="text: caL"></span>
         </td>
         <td class="text-right">
-            <!-- ko if: activity() === "Video Ads Revenue" || activity() === "Game Ads Revenue" || activity() === "Survey Cards Revenue" || activity() === "Profile Questions Revenue" || activity() === "Payout via Paypal" || activity() === "Income from Stripe" -->
+            <!-- ko if: ordr() === 32 || ordr() === 33 || ordr() === 34 || ordr() === 35 || ordr() === 36 || ordr() === 39 || ordr() === 40 -->
             $
             <!-- /ko -->
             <span data-bind="text: caC"></span>
@@ -386,13 +388,13 @@
         </td>
        
         <td class="text-right bk-gray">
-            <!-- ko if: activity() === "Video Ads Revenue" || activity() === "Game Ads Revenue" || activity() === "Survey Cards Revenue" || activity() === "Profile Questions Revenue" || activity() === "Payout via Paypal" || activity() === "Income from Stripe" -->
+            <!-- ko if: ordr() === 32 || ordr() === 33 || ordr() === 34 || ordr() === 35 || ordr() === 36 || ordr() === 39 || ordr() === 40 -->
             $
             <!-- /ko -->
             <span data-bind="text: auL"></span>
         </td>
         <td class="text-right bk-gray">
-            <!-- ko if: activity() === "Video Ads Revenue" || activity() === "Game Ads Revenue" || activity() === "Survey Cards Revenue" || activity() === "Profile Questions Revenue" || activity() === "Payout via Paypal" || activity() === "Income from Stripe" -->
+            <!-- ko if: ordr() === 32 || ordr() === 33 || ordr() === 34 || ordr() === 35 || ordr() === 36 || ordr() === 39 || ordr() === 40 -->
             $
             <!-- /ko -->
             <span data-bind="text: auC"></span>
@@ -416,13 +418,13 @@
         
 
         <td class="text-right">
-            <!-- ko if: activity() === "Video Ads Revenue" || activity() === "Game Ads Revenue" || activity() === "Survey Cards Revenue" || activity() === "Profile Questions Revenue" || activity() === "Payout via Paypal" || activity() === "Income from Stripe" -->
+            <!-- ko if: ordr() === 32 || ordr() === 33 || ordr() === 34 || ordr() === 35 || ordr() === 36 || ordr() === 39 || ordr() === 40 -->
             $
             <!-- /ko -->
             <span data-bind="text: aeL"></span>
         </td>
         <td class="text-right">
-            <!-- ko if: activity() === "Video Ads Revenue" || activity() === "Game Ads Revenue" || activity() === "Survey Cards Revenue" || activity() === "Profile Questions Revenue" || activity() === "Payout via Paypal" || activity() === "Income from Stripe" -->
+            <!-- ko if: ordr() === 32 || ordr() === 33 || ordr() === 34 || ordr() === 35 || ordr() === 36 || ordr() === 39 || ordr() === 40 -->
             $
             <!-- /ko -->
             <span data-bind="text: aeC"></span>
@@ -448,26 +450,26 @@
 </script>
 <script id="CampaignsByStatusTemplate" type="text/html">
     <tr style="border-bottom: none;">
-        <td class="col-sm-3 font14">
-            <span data-bind="text: rectype"></span>
+        <td class="col-sm-2 font14">
+            <span class="text-center" data-bind="text: rectype"></span>
         </td>
-        <td>
-            <span data-bind="text: Draft"></span>
+        <td class="bk-gray col-sm-2">
+            <span class="text-center" data-bind="text: Draft"></span>
         </td>
-        <td class="text-right">
-            <span data-bind="text: Pending"></span>
-            </td>
+        <td class="col-sm-2">
+            <span class="text-center" data-bind="text: Pending"></span>
+        </td>
          
-        <td class="text-right">
-            <span data-bind="text: Live"></span>
+        <td class="bk-gray col-sm-2">
+            <span class="text-center" data-bind="text: Live"></span>
         </td>
-        <td class="text-left">
-            <span data-bind="text: Paused"></span>
-            
-        </td>
-        <td class="text-left">
-            <span data-bind="text: Rejected"></span>
+        <td class="col-sm-2">
+            <span class="text-center" data-bind="text: Paused"></span>
 
+        </td>
+        <td class="bk-gray col-sm-2" >
+            <span class="text-center" data-bind="text: Rejected"></span>
+            
         </td>
        
 
@@ -476,27 +478,24 @@
 
 <script id="UserCountsTemplate" type="text/html">
     <tr style="border-bottom: none;">
-        <td class="col-sm-3 font14">
+        <td class="col-sm-4 font14">
             <span data-bind="text: title"></span>
         </td>
-        <td>
-            <span data-bind="text: Days7"></span>
+        <td class="bk-gray col-sm-2">
+            <span data-bind="text: C7Days"></span>
         </td>
-        <td class="text-right">
-            <span data-bind="text: Days14"></span>
+        <td class="col-sm-2">
+            <span data-bind="text: C14Days"></span>
         </td>
 
-        <td class="text-right">
-            <span data-bind="text: Days30"></span>
+        <td class="bk-gray col-sm-2">
+            <span data-bind="text: C30Days"></span>
         </td>
-        <td class="text-left">
-            <span data-bind="text: Days60"></span>
+        <td class="col-sm-2">
+            <span data-bind="text: C60Days"></span>
 
         </td>
- 
-
-
-    </tr>
+     </tr>
 </script>
 
 @section Scripts{

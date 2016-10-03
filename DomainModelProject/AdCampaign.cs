@@ -25,6 +25,7 @@ namespace DomainModelProject
             this.InvoiceDetails = new HashSet<InvoiceDetail>();
             this.SurveyQuestionTargetCriterias = new HashSet<SurveyQuestionTargetCriteria>();
             this.CampaignEventHistories = new HashSet<CampaignEventHistory>();
+            this.AdCampaignClickRateHistories = new HashSet<AdCampaignClickRateHistory>();
         }
     
         public long CampaignID { get; set; }
@@ -136,5 +137,6 @@ namespace DomainModelProject
         public virtual ICollection<SurveyQuestionTargetCriteria> SurveyQuestionTargetCriterias { get; set; }
         public virtual Company Company { get; set; }
         public virtual ICollection<CampaignEventHistory> CampaignEventHistories { get; set; }
+        public virtual ICollection<AdCampaignClickRateHistory> AdCampaignClickRateHistories { get; set; }
     }
 }

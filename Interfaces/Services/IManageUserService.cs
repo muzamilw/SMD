@@ -29,5 +29,6 @@ namespace SMD.Interfaces.Services
 
 
         bool UpdateManagedUser(string id, string RoleId);
+        IEnumerable<GetUserCounts_Result> GetUserCounts();
     }
 }

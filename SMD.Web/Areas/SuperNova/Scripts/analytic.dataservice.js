@@ -23,7 +23,7 @@ define("analytic/analytic.dataservice", function () {
                         type: 'GET'
                     });
 					amplify.request.define('getCampaignsByStatus', 'ajax', {
-                        url: '/Api/Campaign',
+                        url: '/Api/SuperNovaCampaign',
                         dataType: 'json',
                         type: 'GET'
                     });
@@ -33,7 +33,7 @@ define("analytic/analytic.dataservice", function () {
                         type: 'GET'
                     });
 					 amplify.request.define('getUserCounts', 'ajax', {
-                        url: '/Api/ActiveUser',
+                        url: '/Api/User',
                         dataType: 'json',
                         type: 'GET'
                     });
