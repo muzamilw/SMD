@@ -36,6 +36,7 @@ define("ads/ads.viewModel",
                     selectedLocationLong = ko.observable(0),
                     ageRange = ko.observableArray([]),
                     isNewCriteria = ko.observable(true),
+                    IsShownforVideo = ko.observable(true),
                     isEnableVedioVerificationLink = ko.observable(false),
                     //caption variablels 
                     lblCampaignName = ko.observable("Campaign Name"),
@@ -68,6 +69,7 @@ define("ads/ads.viewModel",
                     selectedIndustryIncludeExclude = ko.observable(true),
                     UserAndCostDetail = ko.observable(),
                     pricePerclick = ko.observable(0),
+                    UrlHeadings = ko.observable('')
                     isLocationPerClickPriceAdded = ko.observable(false),
                     isLanguagePerClickPriceAdded = ko.observable(false),
                     isIndustoryPerClickPriceAdded = ko.observable(false),
@@ -92,7 +94,7 @@ define("ads/ads.viewModel",
                     uploadTitle = ko.observable("Video"),
                     SubHeading = ko.observable("Reward audiences 50% of your ‘ad click’ Increase branding and drive people to your web site with one ‘ad click’ Show a video ad, ask a reinforcing question and show your deals.");
 
-                    tab1Heading = ko.observable("Upload a 10-20 second video ad.");
+                    tab1Heading = ko.observable("Upload your video commercial (max 30 seconds , mp4 format).");
                     tab2Heading = ko.observable("Target audience in different cities.");
                 tab4SubHeading = ko.observable("Select your ad campaign delivery mode:");
                     errorListNew = ko.observableArray([]),
@@ -2386,12 +2388,16 @@ define("ads/ads.viewModel",
 
                 ShowAdCampaigns = function () {
                     isDisplayCouponsAds(false);
+
                     MainHeading("Video Campaigns");
                     SubHeading("Video campaigns can be paused and terminated at any time. Increase your conversions and reduce your spend by using profile filters.");
-                    if (mode == 4)
-                    {
+                    if (mode == 4) {
                         MainHeading("Sponsor an app ‘Brain game’.");
                         SubHeading("Reward audiences 50% of your ‘ad click’Drive people to your web site, ask a reinforcing question and show your deals –All for one ‘ad click’ fee.");
+                        IsShownforVideo(false);
+                    }
+                    else {
+                        IsShownforVideo(true);
                     }
                     getAdCampaignGridContent();
                 },
@@ -2766,14 +2772,19 @@ define("ads/ads.viewModel",
                 // Initialize the view model
                 initialize = function (specifiedView) {
                     if (mode == 4) {
-                        MainHeading("Sponsor an app ‘Brain game’.");
+                        MainHeading("Sponsor an app ‘brain game’.");
                         SubHeading("Reward audiences 50% of your ‘ad click’Drive people to your web site, ask a reinforcing question and show your deals –All for one ‘ad click’ fee.");
-
+                        IsShownforVideo(false);
                         lblAdTitle("Game  Title");
                         uploadTitle("Upload");
-                        tab1Heading("Leaderboard banners appear when App Users play Brain Training games.");
+                        tab1Heading("Leaderboard banners appear when app users play brain training games.");
                         tab2Heading("Define the target audience to deliver game ad.");
                         tab4SubHeading("Select your game campaign delivery mode:");
+                        UrlHeadings("Leatherboard banner click thru url to your landing  page.");
+                    }
+                    else {
+                        UrlHeadings("Direct viewers to a landing page at the end of your video ad.");
+                        IsShownforVideo(true);
                     }
                     view = specifiedView;
                     ko.applyBindings(view.viewModel, view.bindingRoot);
@@ -2957,7 +2968,9 @@ define("ads/ads.viewModel",
                     surveyAnswerList: surveyAnswerList,
                     saveSurveyQuestion: saveSurveyQuestion,
                     updateSurveyCriteriass: updateSurveyCriteriass,
-                    ShowAudienceCounter: ShowAudienceCounter
+                    ShowAudienceCounter: ShowAudienceCounter,
+                    IsShownforVideo: IsShownforVideo,
+                    UrlHeadings: UrlHeadings
                 };
             })()
         };
