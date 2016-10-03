@@ -269,6 +269,11 @@ define("ads/ads.viewModel",
             },
                 // Add new Profile Question
             addNewCampaign = function () {
+               
+              
+               
+
+
                 $("#panelArea").css("display", "none");
 
                 $(".hideInCoupons").css("display", "none");
@@ -277,15 +282,11 @@ define("ads/ads.viewModel",
                 $("#topArea").css("display", "none");
                 $("#headlabel,#headdesc").css("display", "none");
 
-                //if (isDisplayCouponsAds() == false) {
-                //    isWelcomeScreenVisible(true);
-                //} else {
-                //show the main menu;
                 collapseMainMenu();
                 TodisplayImg(true);
                 openEditScreen(1);
                 isFromEdit(true);
-                //  }
+               
                 isListVisible(false);
                 isNewCampaign(true);
                 isTerminateBtnVisible(false);
@@ -301,51 +302,19 @@ define("ads/ads.viewModel",
                 campaignModel().MaxBudget("20");
                 campaignModel().Type(mode);
                 campaignModel().DeliveryDays("3");
+                campaignModel().VideoUrl("https://www.");
+                if (mode == 4) {
+                    campaignModel().CampaignName("New display ad");
+                    $("#logo_div").css("display", "block");
+                }
+
+                else {
+                    campaignModel().CampaignName("New video campaign");
+                    $("#logo_div").css("display", "none");
+                }
                 campaignModel().reset();
-                //isEditorVisible(true);
-                //canSubmitForApproval(true);
-                //campaignModel(new model.Campaign());
-
-
-                //selectedCriteria();
-                //    getAudienceCount();
-                //campaignModel().Gender('1');
-                //campaignModel().Type('1');
-                //campaignModel().MaxBudget('1');
-                //campaignModel().AgeRangeEnd(80);
-                //campaignModel().AgeRangeStart(13);
-                //view.initializeTypeahead();
-                //isEnableVedioVerificationLink(false);
-                //isEditCampaign(false);
-                //campaignModel().CampaignTypeImagePath("");
-                //campaignModel().CampaignImagePath("");
-                //campaignModel().VoucherImagePath("");
-                //campaignModel().LanguageId(41);
-                //campaignModel().CampaignName('New Campaign');
-
-
-                //bindAudienceReachCount();
-                //selectedQuestionCountryList([]);
-
-                // above lines
-
-                //if (UserAndCostDetail().CountryId != null && UserAndCostDetail().CityId != null) {
-
-                //    var objCity = {
-                //        CountryID: UserAndCostDetail().CountryId,
-                //        CityID: UserAndCostDetail().CityId,
-                //        Radius: 0,
-                //        Country: UserAndCostDetail().Country,
-                //        City: UserAndCostDetail().City,
-                //        Latitude: UserAndCostDetail().GeoLat,
-                //        Longitude: UserAndCostDetail().GeoLong
-                //    }
-                //    selectedLocation(objCity);
-                //    onAddLocation();
-                //}
-
-
-
+                
+                
             },
            GoToHomePage = function ()
            {
@@ -1477,9 +1446,7 @@ define("ads/ads.viewModel",
                   },
                 onEditCampaign = function (item) {
                 
-                    //hiding the main menu
-                   
-                 //   VideoLink2src(item.VideoLink2);
+                    
                     previewScreenNumber(1);
                     isTerminateBtnVisible(false);
                     isNewCampaignVisible(false);
@@ -1519,7 +1486,6 @@ define("ads/ads.viewModel",
 
                                     var clonedVersofCariterias = data.Campaigns[0].AdCampaignTargetCriterias.clone();
 
-                                    //data.Campaigns[0].AdCampaignTargetCriterias = null;
 
                                     _.each(data.Campaigns[0].CouponCodes, function (cc) {
 
@@ -1856,7 +1822,6 @@ define("ads/ads.viewModel",
                                         lbllSecondLine("Second Line");
                                         lblCampaignSchedule("Schedule");
                                     }
-
 
                                     getAudienceCount();
                                     bindAudienceReachCount();
@@ -2418,6 +2383,7 @@ define("ads/ads.viewModel",
                     //SubHeading("Paid coupon promotions are listed for whole one calendar month. Submission fee includes unlimited issuing and redemption at all branches.");
                     //getAdCampaignGridContent();
                 },
+
                 ShowAdCampaigns = function () {
                     isDisplayCouponsAds(false);
                     MainHeading("Video Campaigns");
@@ -2426,7 +2392,6 @@ define("ads/ads.viewModel",
                     {
                         MainHeading("Sponsor an app ‘Brain game’.");
                         SubHeading("Reward audiences 50% of your ‘ad click’Drive people to your web site, ask a reinforcing question and show your deals –All for one ‘ad click’ fee.");
-
                     }
                     getAdCampaignGridContent();
                 },
@@ -2805,8 +2770,8 @@ define("ads/ads.viewModel",
                         SubHeading("Reward audiences 50% of your ‘ad click’Drive people to your web site, ask a reinforcing question and show your deals –All for one ‘ad click’ fee.");
 
                         lblAdTitle("Game  Title");
-                        uploadTitle("Upload Logo");
-                        tab1Heading("Add game title and logo");
+                        uploadTitle("Upload");
+                        tab1Heading("Leaderboard banners appear when App Users play Brain Training games.");
                         tab2Heading("Define the target audience to deliver game ad.");
                         tab4SubHeading("Select your game campaign delivery mode:");
                     }

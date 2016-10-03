@@ -123,12 +123,121 @@
                 </table>
             </div>
         </div>
+       
+
         <div class="row">
+            <div class="col-lg-12">
+                <br />
+                <h1 style="padding-left:7px!important;">Campaigns by Status type </h1>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="table-responsive tbl-dashboard" style="margin-right:-4px; ">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                             <th class="text-left">
+                                <span class="GridHeaderFont_size">
+                                    Draft
+                                </span>
+                            </th>
+                            
+                            <th class="text-left">
+                                <span class="GridHeaderFont_size">
+                                    Pending
+                                </span>
+                            </th>
+                           
+                            <th class="text-left">
+                                <span class="GridHeaderFont_size">
+                                    Live
+                                </span>
+                            </th>
+                           
+                            <th class="text-left">
+                                <span class="GridHeaderFont_size">
+                                    Paused
+                                </span>
+                            </th>
+                           
+                            <th class="text-left">
+                                <span class="GridHeaderFont_size">
+                                    Rejected
+                                </span>
+                            </th>
+                            
+
+                        </tr>
+                      
+
+                    </thead>
+                    <tbody>
+                        <!-- ko template: { name: 'CampaignsByStatusTemplate' , foreach: $root.CampaignsByStatusData } -->
+                        <!-- /ko -->
+                        <tr><td colspan="17"> </td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-12">
+                <br />
+                <h1 style="padding-left:7px!important;">Logged in and Registered User counts </h1>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="table-responsive tbl-dashboard" style="margin-right:-4px; ">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                            <th class="text-left">
+                                <span class="GridHeaderFont_size">
+                                    Within 7 days
+                                </span>
+                            </th>
+
+                            <th class="text-left">
+                                <span class="GridHeaderFont_size">
+                                    14 days
+                                </span>
+                            </th>
+
+                            <th class="text-left">
+                                <span class="GridHeaderFont_size">
+                                    30 days
+                                </span>
+                            </th>
+
+                            <th class="text-left">
+                                <span class="GridHeaderFont_size">
+                                    60 Days
+                                </span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- ko template: { name: 'UserCountsTemplate' , foreach: $root.UserCountsData } -->
+                        <!-- /ko -->
+                        <tr><td colspan="17"> </td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+
+
+         <div class="row">
             <div class="col-lg-12">
                 <br />
                 <h1 style="padding-left:7px!important;">Reports </h1>
             </div>
         </div>
+
+
           <div class="col-lg-12">
             <div class="main-box">
                 <div class="row">
@@ -335,6 +444,58 @@
             <!-- /ko -->
         </td>
         
+    </tr>
+</script>
+<script id="CampaignsByStatusTemplate" type="text/html">
+    <tr style="border-bottom: none;">
+        <td class="col-sm-3 font14">
+            <span data-bind="text: rectype"></span>
+        </td>
+        <td>
+            <span data-bind="text: Draft"></span>
+        </td>
+        <td class="text-right">
+            <span data-bind="text: Pending"></span>
+            </td>
+         
+        <td class="text-right">
+            <span data-bind="text: Live"></span>
+        </td>
+        <td class="text-left">
+            <span data-bind="text: Paused"></span>
+            
+        </td>
+        <td class="text-left">
+            <span data-bind="text: Rejected"></span>
+
+        </td>
+       
+
+    </tr>
+</script>
+
+<script id="UserCountsTemplate" type="text/html">
+    <tr style="border-bottom: none;">
+        <td class="col-sm-3 font14">
+            <span data-bind="text: title"></span>
+        </td>
+        <td>
+            <span data-bind="text: Days7"></span>
+        </td>
+        <td class="text-right">
+            <span data-bind="text: Days14"></span>
+        </td>
+
+        <td class="text-right">
+            <span data-bind="text: Days30"></span>
+        </td>
+        <td class="text-left">
+            <span data-bind="text: Days60"></span>
+
+        </td>
+ 
+
+
     </tr>
 </script>
 
