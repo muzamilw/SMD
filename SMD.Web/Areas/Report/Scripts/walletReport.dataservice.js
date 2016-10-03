@@ -16,7 +16,7 @@ define("Report/walletReport.dataservice", function () {
                         type: 'GET'
                     });
                     amplify.request.define('getreferralComponies', 'ajax', {
-                        url: '/Api/ReferralComponiesController',
+                        url: '/Api/ReferralComponies',
                         dataType: 'json',
                         type: 'GET'
                     });
