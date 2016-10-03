@@ -269,10 +269,10 @@ define("ads/ads.viewModel",
             },
                 // Add new Profile Question
             addNewCampaign = function () {
-                if (mode == 4)
-                {
+               
+              
+               
 
-                }
 
                 $("#panelArea").css("display", "none");
 
@@ -302,6 +302,16 @@ define("ads/ads.viewModel",
                 campaignModel().MaxBudget("20");
                 campaignModel().Type(mode);
                 campaignModel().DeliveryDays("3");
+                campaignModel().VideoUrl("https://www.");
+                if (mode == 4) {
+                    campaignModel().CampaignName("New display ad");
+                    $("#logo_div").css("display", "block");
+                }
+
+                else {
+                    campaignModel().CampaignName("New video campaign");
+                    $("#logo_div").css("display", "none");
+                }
                 campaignModel().reset();
                 
                 
@@ -2761,7 +2771,7 @@ define("ads/ads.viewModel",
 
                         lblAdTitle("Game  Title");
                         uploadTitle("Upload");
-                        tab1Heading("Add game title and logo");
+                        tab1Heading("Leaderboard banners appear when App Users play Brain Training games.");
                         tab2Heading("Define the target audience to deliver game ad.");
                         tab4SubHeading("Select your game campaign delivery mode:");
                     }

@@ -33,6 +33,7 @@ define("survey/survey.viewModel",
                     selectedEducationIncludeExclude = ko.observable(true),
                     selectedLocationLat = ko.observable(0),
                     selectedLocationLong = ko.observable(0),
+                    ShowAudienceCounter = ko.observable(),
                     // criteria selection 
                     selectedCriteria = ko.observable(),
                     profileQuestionList = ko.observable([]),
@@ -1324,6 +1325,7 @@ define("survey/survey.viewModel",
                         dataservice.getAudienceData(ProfileData, {
                             success: function (data) {
                                 reachedAudience(data.MatchingUsers);
+                                ShowAudienceCounter(GetAudienceCount(data.MatchingUsers));
                                 totalAudience(data.AllUsers);
                                 var percent = data.MatchingUsers / data.AllUsers;
                                 if (percent < 0.20) {
@@ -1366,6 +1368,13 @@ define("survey/survey.viewModel",
                         });
                         return list;
                     },
+                GetAudienceCount = function (val) {
+                    while (/(\d+)(\d{3})/.test(val.toString())) {
+                        val = val.toString().replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
+                    }
+                    return val;
+
+                },
                     visibleTargetAudience = function (mode) {
 
                          if (mode != undefined) {
@@ -1633,7 +1642,8 @@ define("survey/survey.viewModel",
                     isNewCampaign: isNewCampaign,
                     showCompanyProfileQuestions: showCompanyProfileQuestions,
                     SaveAsDraft: SaveAsDraft,
-                    updateSurveyCriteriass: updateSurveyCriteriass
+                    updateSurveyCriteriass: updateSurveyCriteriass,
+                    ShowAudienceCounter: ShowAudienceCounter
                 };
             })()
         };
