@@ -1612,7 +1612,7 @@
         <div class="modal-dialog" role="document" style="width:1150px;">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" id="btnDamClose" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel">&nbsp;</h4>
                 </div>
                 <div class="modal-body">
@@ -1643,11 +1643,11 @@
                 if (mode == 1) {
                     $("#leftImgPath").attr("src", this.src).change();
                     sImageLeft = this.src;
-                    $(".close").click();
+                    $("#btnDamClose").click();
                 } else if (mode == 2) {
                     $("#rightImgPath").attr("src", this.src).change();
                     sImageRight = this.src;
-                    $(".close").click();
+                    $("#btnDamClose").click();
                 }
             });
         }

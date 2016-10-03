@@ -2450,6 +2450,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Parameter Name="DateTo" Type="datetime" Mode="In" />
           <Parameter Name="Granularity" Type="int" Mode="In" />
         </Function>
+        <Function Name="getCampaignsByStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetCouponByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CouponId" Type="bigint" Mode="In" />
           <Parameter Name="Lat" Type="nvarchar" Mode="In" />
@@ -2483,6 +2484,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Parameter Name="AccountType" Type="int" Mode="In" />
           <Parameter Name="Rows" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetUserCounts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SearchCampaigns" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Status" Type="int" Mode="In" />
           <Parameter Name="keyword" Type="nvarchar" Mode="In" />
@@ -5351,6 +5353,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <End Role="CampaignEventHistory" EntitySet="CampaignEventHistories" />
           </AssociationSet>
           <EntitySet Name="vw_ReferringCompanies" EntityType="SMDDevModel.vw_ReferringCompanies" />
+          <FunctionImport Name="getCampaignsByStatus" ReturnType="Collection(SMDDevModel.getCampaignsByStatus_Result)" />
+          <FunctionImport Name="GetUserCounts" ReturnType="Collection(SMDDevModel.GetUserCounts_Result)" />
           </EntityContainer>
         <EntityType Name="CouponCategories">
           <Key>
@@ -6501,6 +6505,21 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="pcount" Type="Int32" />
           <Property Name="ReferringCompanyID" Type="Int32" />
         </EntityType>
+        <ComplexType Name="getCampaignsByStatus_Result">
+          <Property Type="String" Name="rectype" Nullable="false" MaxLength="11" />
+          <Property Type="Int32" Name="Draft" Nullable="true" />
+          <Property Type="Int32" Name="Pending" Nullable="true" />
+          <Property Type="Int32" Name="Live" Nullable="true" />
+          <Property Type="Int32" Name="Paused" Nullable="true" />
+          <Property Type="Int32" Name="Rejected" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetUserCounts_Result">
+          <Property Type="String" Name="title" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="C7Days" Nullable="true" />
+          <Property Type="Int32" Name="C14Days" Nullable="true" />
+          <Property Type="Int32" Name="C30Days" Nullable="true" />
+          <Property Type="Int32" Name="C60Days" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -8046,6 +8065,29 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="getCampaignsByStatus" FunctionName="SMDDevModel.Store.getCampaignsByStatus">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SMDDevModel.getCampaignsByStatus_Result">
+                <ScalarProperty Name="rectype" ColumnName="rectype" />
+                <ScalarProperty Name="Draft" ColumnName="Draft" />
+                <ScalarProperty Name="Pending" ColumnName="Pending" />
+                <ScalarProperty Name="Live" ColumnName="Live" />
+                <ScalarProperty Name="Paused" ColumnName="Paused" />
+                <ScalarProperty Name="Rejected" ColumnName="Rejected" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetUserCounts" FunctionName="SMDDevModel.Store.GetUserCounts">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SMDDevModel.GetUserCounts_Result">
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="C7Days" ColumnName="7Days" />
+                <ScalarProperty Name="C14Days" ColumnName="14Days" />
+                <ScalarProperty Name="C30Days" ColumnName="30Days" />
+                <ScalarProperty Name="C60Days" ColumnName="60Days" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -7,6 +7,8 @@ using System.Web;
 using System.Web.Http;
 using SMD.Models.ResponseModels;
 using SMD.WebBase.Mvc;
+using SMD.MIS.Areas.Api.Models;
+using SMD.MIS.Areas.Api.ModelMappers;
 
 namespace SMD.MIS.Areas.Api.Controllers
 {
@@ -39,6 +41,25 @@ namespace SMD.MIS.Areas.Api.Controllers
         #endregion
 
         #region Public
+
+
+
+
+        public WebApiUser Get(string authenticationToken, string UserId)
+        {
+            if (!ModelState.IsValid)
+            {
+                throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
+            }
+
+            var response = webApiUserService.GetLoggedInUser(UserId);
+            WebApiUser apiuser = response.CreateFromUserForMobile();
+
+            return apiuser;
+
+
+
+        }
         
         /// <summary>
         /// Update User Profile
