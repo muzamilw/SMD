@@ -1,16 +1,16 @@
 ﻿
-
-/****** Object:  StoredProcedure [dbo].[GetAdminDashBoardInsights]    Script Date: 9/29/2016 10:52:08 PM ******/
+GO
+/****** Object:  StoredProcedure [dbo].[GetAdminDashBoardInsights]    Script Date: 10/3/2016 1:39:40 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-alter PROCEDURE [dbo].[GetAdminDashBoardInsights]
+ALTER PROCEDURE [dbo].[GetAdminDashBoardInsights]
 
 as
 Begin
-select ordr, rectype, pMonth, us, uk, ca, au, ae
+select ordr, rectype, pMonth, us, uk, [pk] ca, au, ae
 from 
 (
   select ordr, stats, countrycode, rectype, pMonth
@@ -32,44 +32,107 @@ from
 		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, u.CreatedDateTime), 0) ,  c.CountryCode
 		union
 
-		select 2 as ordr,  count(ac.CampaignID) stats, c.CountryCode , (case when month( DATEADD(MONTH,DATEDIFF(MONTH, 0, ac.ApprovalDateTime), 0)) = month(getdate()) then 'current' else 'prev' end) pMonth,'Video Campaigns' rectype
-		from AdCampaign ac
-		inner join Company co on ac.CompanyId = co.CompanyId
-		inner join Country c on co.CountryId = c.CountryID
-		where ac.ApprovalDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2))  AND ac.Type = 1
-		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, ac.ApprovalDateTime), 0) ,  c.CountryCode
-		union 
-
-		select 3 as ordr,  count(ac.CampaignID) stats, c.CountryCode , (case when month( DATEADD(MONTH,DATEDIFF(MONTH, 0, ac.ApprovalDateTime), 0)) = month(getdate()) then 'current' else 'prev' end) pMonth,'Game Campaigns' rectype
-		from AdCampaign ac
-		inner join Company co on ac.CompanyId = co.CompanyId
-		inner join Country c on co.CountryId = c.CountryID
-		where ac.ApprovalDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2))  AND ac.Type = 4
-		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, ac.ApprovalDateTime), 0) ,  c.CountryCode
-		union
-		select 4 as ordr,  count(coup.CouponId) stats, c.CountryCode , (case when month( DATEADD(MONTH,DATEDIFF(MONTH, 0, coup.ApprovalDateTime), 0)) = month(getdate()) then 'current' else 'prev' end) pMonth,'Deals Campaigns' rectype
-		from Coupon coup
-		inner join Company co on coup.CompanyId = co.CompanyId
-		inner join Country c on co.CountryId = c.CountryID
-		where coup.ApprovalDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) 
-		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, coup.ApprovalDateTime), 0) ,  c.CountryCode
-
-		union 
-		select 5 as ordr,   count(sq.SQID) stats, c.CountryCode , (case when month( DATEADD(MONTH,DATEDIFF(MONTH, 0, sq.ApprovalDate), 0)) = month(getdate()) then 'current' else 'prev' end) pMonth,'Survey card Campaigns' rectype
+		select 2 ordr, count(distinct(CompanyId)) stats, CountryCode , pMonth, 'Advertisers who created a NEW campaign' rectype  from  (
+		select sq.sqid, sq.CompanyId as CompanyId , c.CountryCode , (case when month( DATEADD(MONTH,DATEDIFF(MONTH, 0, evntHis.MinDateTime), 0)) = month(getdate()) then 'current' else 'prev' end) pMonth
 		from SurveyQuestion sq
-		inner join Country c on sq.CountryId = c.CountryID
-		where sq.ApprovalDate > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) 
-		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, sq.ApprovalDate), 0) ,  c.CountryCode
+		inner join 	(SELECT SQID, MIN(EventDateTime) AS MinDateTime
+				FROM CampaignEventHistory
+				where EventStatus = 3
+				GROUP BY SQID)  evntHis
+			on sq.SQID = evntHis.SQID
+			inner join Country c on sq.CountryID = c.CountryID
+		where evntHis.MinDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) 
+		union
+	
+		select pq.pqid, (pq.CompanyId) as CompanyId, c.CountryCode , (case when month( DATEADD(MONTH,DATEDIFF(MONTH, 0, evntHis.MinDateTime), 0)) = month(getdate()) then 'current' else 'prev' end) pMonth
+		from ProfileQuestion pq
+		inner join 	(SELECT PQID, MIN(EventDateTime) AS MinDateTime
+				FROM CampaignEventHistory
+				where EventStatus = 3
+				GROUP BY PQID)  evntHis
+			on pq.PQID = evntHis.PQID
+			inner join Country c on pq.CountryID = c.CountryID
+			where evntHis.MinDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) 
+
+	union 
+	select ac.campaignId,  (ac.CompanyId) as CompanyId, c.CountryCode , (case when month( DATEADD(MONTH,DATEDIFF(MONTH, 0, evntHis.MinDateTime), 0)) = month(getdate()) then 'current' else 'prev' end) pMonth
+		from AdCampaign ac
+		inner join 	(SELECT CampaignID, MIN(EventDateTime) AS MinDateTime
+				FROM CampaignEventHistory
+				where EventStatus = 3
+				GROUP BY CampaignID)  evntHis
+			on ac.CampaignID = evntHis.CampaignID
+			inner join Company co on ac.CompanyId = co.CompanyId
+			inner join Country c on co.CountryId = c.CountryID
+		where evntHis.MinDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) 
+		
+		union 
+		select cpn.CouponId,  (cpn.CompanyId) as CompanyId, c.CountryCode , (case when month( DATEADD(MONTH,DATEDIFF(MONTH, 0, evntHis.MinDateTime), 0)) = month(getdate()) then 'current' else 'prev' end) pMonth
+		from Coupon cpn
+		inner join 	(SELECT CouponId, MIN(EventDateTime) AS MinDateTime
+				FROM CampaignEventHistory
+				where EventStatus = 3
+				GROUP BY CouponId)  evntHis
+			on cpn.CouponId = evntHis.CouponId
+			inner join Company co on cpn.CompanyId = co.CompanyId
+			inner join Country c on co.CountryId = c.CountryID
+		where evntHis.MinDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) 
+		
+
+		) as rec 
+		group by pMonth ,  CountryCode
+		union 
+		select 3 ordr, count(ac.CampaignID) stats, c.CountryCode , (case when month( DATEADD(MONTH,DATEDIFF(MONTH, 0, evntHis.MinDateTime), 0)) = month(getdate()) then 'current' else 'prev' end) pMonth,'New Video Ad campaigns' rectype
+		from AdCampaign ac
+		inner join 	(SELECT CampaignID, MIN(EventDateTime) AS MinDateTime
+				FROM CampaignEventHistory
+				where EventStatus = 3
+				GROUP BY CampaignID)  evntHis
+			on ac.CampaignID = evntHis.CampaignID
+			inner join Company co on ac.CompanyId = co.CompanyId
+			inner join Country c on co.CountryId = c.CountryID
+		where ac.Type = 1 and evntHis.MinDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) 
+		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, evntHis.MinDateTime), 0) ,  c.CountryCode
 
 		union
-		select 6 as ordr,   count(pq.PQID) stats, c.CountryCode , (case when month( DATEADD(MONTH,DATEDIFF(MONTH, 0, pq.ApprovalDate), 0)) = month(getdate()) then 'current' else 'prev' end) pMonth,'Survey question Campaigns' rectype
+		select 4 ordr, count(ac.CampaignID) stats, c.CountryCode , (case when month( DATEADD(MONTH,DATEDIFF(MONTH, 0, evntHis.MinDateTime), 0)) = month(getdate()) then 'current' else 'prev' end) pMonth,'New Display Ad campaigns' rectype
+		from AdCampaign ac
+		inner join 	(SELECT CampaignID, MIN(EventDateTime) AS MinDateTime
+				FROM CampaignEventHistory
+				where EventStatus = 3
+				GROUP BY CampaignID)  evntHis
+			on ac.CampaignID = evntHis.CampaignID
+			inner join Company co on ac.CompanyId = co.CompanyId
+			inner join Country c on co.CountryId = c.CountryID
+		where ac.Type = 4 and evntHis.MinDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) 
+		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, evntHis.MinDateTime), 0) ,  c.CountryCode
+		
+		union
+
+		select 5 ordr, count(pq.PQID) stats, c.CountryCode , (case when month( DATEADD(MONTH,DATEDIFF(MONTH, 0, evntHis.MinDateTime), 0)) = month(getdate()) then 'current' else 'prev' end) pMonth,'New Survey campaigns' rectype
 		from ProfileQuestion pq
-		inner join Country c on pq.CountryId = c.CountryID
-		where pq.ApprovalDate > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) 
-		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, pq.ApprovalDate), 0) ,  c.CountryCode 
+		inner join 	(SELECT PQID, MIN(EventDateTime) AS MinDateTime
+				FROM CampaignEventHistory
+				where EventStatus = 3
+				GROUP BY PQID)  evntHis
+			on pq.PQID = evntHis.PQID
+			inner join Country c on pq.CountryID = c.CountryID
+			where evntHis.MinDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) 
+		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, evntHis.MinDateTime), 0) ,  c.CountryCode
 
-		union 
+		union
 
+		select 6 ordr, count(sq.SQID) stats, c.CountryCode , (case when month( DATEADD(MONTH,DATEDIFF(MONTH, 0, evntHis.MinDateTime), 0)) = month(getdate()) then 'current' else 'prev' end) pMonth,'New Poll campaigns' rectype
+		from SurveyQuestion sq
+		inner join 	(SELECT SQID, MIN(EventDateTime) AS MinDateTime
+				FROM CampaignEventHistory
+				where EventStatus = 3
+				GROUP BY SQID)  evntHis
+			on sq.SQID = evntHis.SQID
+			inner join Country c on sq.CountryID = c.CountryID
+		where evntHis.MinDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) 
+		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, evntHis.MinDateTime), 0) ,  c.CountryCode
+		union
 		select 9 as ordr,   count(acr.ResponseID) stats, c.CountryCode , (case when month( DATEADD(MONTH,DATEDIFF(MONTH, 0, acr.CreatedDateTime), 0)) = month(getdate()) then 'current' else 'prev' end) pMonth,'Video Quiz Ad clicks' rectype
 		from AdCampaignResponse acr
 		inner join AdCampaign ac on ac.CampaignID = acr.CampaignID
@@ -279,14 +342,6 @@ from
 		inner join Country c on co.CountryId = c.CountryID
 		where t.TransactionDate > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND t.Type = 10 AND  a.AccountType = 4 
 		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, t.TransactionDate), 0) ,  c.CountryCode
-
-
-			
-		
-		
-		
-		
-		
 		
 
 	) as rec
@@ -296,7 +351,7 @@ from
 pivot
 (
   max(stats)
-    for countrycode in ([us], [uk],[ca], [au], [ae]) 
+    for countrycode in ([us], [uk],[pk], [au], [ae]) 
 ) piv
 
 --order by rectype

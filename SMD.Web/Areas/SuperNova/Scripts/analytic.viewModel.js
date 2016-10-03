@@ -20,11 +20,11 @@ define("analytic/analytic.viewModel",
 					intializeDashboardInsightsData = function(){
 						DashboardInsightsData.push(new model.DashboardInsightsModel("Users who logged in"));
 						DashboardInsightsData.push(new model.DashboardInsightsModel("New Users who registered"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Advertisers who created a NEW campaign(Not Done)"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("New Video Ad campaigns(Not Done)"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("New Display Ad campaigns(Not Done)"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("New Survey campaigns(Not Done)"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("New Poll campaigns(Not Done)"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Advertisers who created a NEW campaign"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("New Video Ad campaigns"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("New Display Ad campaigns"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("New Survey campaigns"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("New Poll campaigns"));
 						DashboardInsightsData.push(new model.DashboardInsightsModel("",true));
 						DashboardInsightsData.push(new model.DashboardInsightsModel("# Answered", true));
 						DashboardInsightsData.push(new model.DashboardInsightsModel("Video Ads (Ad click charged)"));
