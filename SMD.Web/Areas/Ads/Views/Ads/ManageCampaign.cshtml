@@ -2791,7 +2791,7 @@ else
     var bannerImage3 = "";
     var mode = 1;
     function changeIframeSrc(mode1) {
-        alert('frame of ads');
+       
         mode = mode1;
         if (mode1 != 1)
             mode1 = 2;
@@ -2807,19 +2807,19 @@ else
                 $("#imgLogo").attr("src", this.src).change();
                 logoImage = this.src;
 
-                $(".close").click();
+                $("#btnDamClose").click();
             } else if (mode == 2) {
                 $("#bannerImage1").attr("src", this.src).change();
                 bannerImage1 = this.src;
-                $(".close").click();
+                $("#btnDamClose").click();
             } else if (mode == 3) {
                 $("#bannerImage2").attr("src", this.src).change();
                 bannerImage2 = this.src;
-                $(".close").click();
+                $("#btnDamClose").click();
             } else if (mode == 4) {
                 $("#bannerImage3").attr("src", this.src).change();
                 bannerImage3 = this.src;
-                $(".close").click();
+                $("#btnDamClose").click();
             }
         });
     }
@@ -2835,7 +2835,7 @@ else
     <div class="modal-dialog" role="document" style="width:1150px;">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" id="btnDamClose" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">Select an Image or upload</h4>
             </div>
             <div class="modal-body">

@@ -152,5 +152,7 @@ namespace SMD.MIS.Areas.Api.Models
         public string Password { get; set; }
         public string RoleId { get; set; }
         public string VoucherSecretKey { get; set; }
+
+        public string Title { get; set; }
     }
 }
