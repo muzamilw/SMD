@@ -7,6 +7,9 @@
             viewModel: (function () {
                 var view,
                     walletReport = ko.observableArray([]),
+                    referralComponies = ko.observableArray([]),
+                    linkedComponiesCount = ko.observable(),
+                    activeCampaignsCount = ko.observable(),
                     balance = ko.observable();
                     dollarBalance = ko.observable();
                     //pager
@@ -29,7 +32,7 @@
                                     balance(data.Balance.toFixed(2));
                                     var amount = data.Balance / 100;
                                     dollarBalance(amount.toFixed(2));
-                                  //  getReferralCountries();
+                                    getReferralComponies();
                                     ////pager().totalCount(0);
                                     //pager().totalCount(data.TotalCount);
                                 },
@@ -38,12 +41,20 @@
                                 }
                             });
                     },
-                getReferralCountries = function()
+                getReferralComponies = function ()
                 {
                     dataservice.getreferralComponies({
                         success: function (data) {
-                            var a = data;
-
+                            var count;
+                            for (var i = 0, len = data.length; i < len; i++) {
+                                referralComponies.push(data[i]);
+                            }
+                            linkedComponiesCount(data.length);
+                            _.each(data, function (item) {
+                                count = item.pcount + item.vcount + item.scount;
+                            });
+                            activeCampaignsCount(count);
+                          
                         },
                         error: function () {
                             toastr.error("Failed to load branchCategory.");
@@ -63,6 +74,9 @@
                     initialize: initialize,
                     getWalletReportHistory: getWalletReportHistory,
                     walletReport: walletReport,
+                    referralComponies: referralComponies,
+                    linkedComponiesCount: linkedComponiesCount,
+                    activeCampaignsCount:activeCampaignsCount,
                     balance: balance,
                     dollarBalance: dollarBalance,
                 };

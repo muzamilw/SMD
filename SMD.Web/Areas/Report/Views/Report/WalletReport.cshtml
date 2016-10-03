@@ -68,22 +68,6 @@
                             </div>
                         </div>
                     </div>
-                    <script id="walletReportTemplate" type="text/html">
-                        <tr style="cursor: pointer;">
-                            <td>
-
-                                <p data-bind="text:moment(transatinDate()).format('DD MMM YY,h:mm')" style="font-size:small"></p>
-                                @*<p data-bind="text:moment(transatinDate()).format('DD MMM YYYY,h:mm:ss a')"></p>*@
-                            </td>
-                            <td>
-                                <p data-bind="text:description"></p>
-                            </td>
-                            <td class="text-right">
-                                <p data-bind="text:creditAmount"></p>
-                            </td>
-
-                        </tr>
-                    </script>
                 </div>
             </div>
             <div class="col-lg-3 form-horizontal" style=" height:566px; margin-left: 0px !important;">
@@ -92,7 +76,7 @@
                         <div style="padding:0px;">
                             <div style="border-bottom: 1px solid rgb(220,220,220);width: 100%;margin-left: 0px;margin-bottom:10px;margin-top:13px;" class="adsubHeading Theme_standard_clr">
                                 <span style="color:black !important;">Linked Businesses</span>
-                                <label class="text-left" style="margin-left:93px;">6</label>
+                                <label class="text-left" style="margin-left:93px;" data-bind="text:$root.linkedComponiesCount"></label>
                             </div>
                         </div>
                         <div class="form-group" style="margin-bottom:0px;">
@@ -142,29 +126,8 @@
                                     <div style="border-bottom: 1px solid rgb(220,220,220);width: 100%;margin-left: 0px;margin-bottom:10px;" class="adsubHeading Theme_standard_clr">
                                         <span style="color:black !important;">Live campaigns by my referrals           </span>
                                     </div>
-                                    <div id="bindingDiv">
-                                        <div class="form-group" style="margin-bottom:0px;">
-                                            <div class=" col-lg-8 text-left">
-                                                <label class="control-label" style="padding-top:0px;padding-left:10px;">User Name</label>
-                                            </div>
-                                        </div>
-                                        <div class="form-group" style="margin-bottom:0px;">
-                                            <div class=" col-lg-8 text-left">
-                                                <label class="control-label" style="padding-top:0px;padding-left:10px;">Company Name</label>
-                                            </div>
-                                        </div>
-                                        <div class="form-group" style="margin-bottom:0px;">
-                                            <div class=" col-lg-8 text-left">
-                                                <label class="control-label" style="padding-top:0px;padding-left:10px;">Active Campaigns</label>
-                                            </div>
-                                            <div class=" col-lg-4 text-right" style="margin-left:-18px;">
-                                                <label class="control-label" style="padding-top:0px;">1</label>
-                                            </div>
-                                        </div>
-                                        <div style="border-bottom: 1px solid rgb(220,220,220);width: 100%;margin-left: 0px;margin-bottom:10px;" class="adsubHeading Theme_standard_clr">
-                                        </div>
-                                    </div>
-
+                                        <!-- ko template: { name: 'ComponyDetails',foreach: $root.referralComponies} -->
+                                        <!-- /ko -->
                                 </div>
 
                                 <div class="col-lg-1"></div>
@@ -177,6 +140,48 @@
         </div>
     </div>
 </div>
+<script id="walletReportTemplate" type="text/html">
+    <tr style="cursor: pointer;">
+        <td>
+
+            <p data-bind="text:moment(transatinDate()).format('DD MMM YY,h:mm')" style="font-size:small"></p>
+            @*<p data-bind="text:moment(transatinDate()).format('DD MMM YYYY,h:mm:ss a')"></p>*@
+        </td>
+        <td>
+            <p data-bind="text:description"></p>
+        </td>
+        <td class="text-right">
+            <p data-bind="text:creditAmount"></p>
+        </td>
+
+    </tr>
+</script>
+<script type="text/html" id="ComponyDetails">
+
+    <div class="form-group" style="margin-bottom:0px;">
+        <div class=" col-lg-8 text-left">
+            <label class="control-label" style="padding-top:0px;padding-left:10px;" data-bind="text:FullName"></label>
+        </div>
+    </div>
+    <div class="form-group" style="margin-bottom:0px;">
+        <div class=" col-lg-8 text-left">
+            <label class="control-label" style="padding-top:0px;padding-left:10px;" data-bind="text:CompanyName,visible:CompanyName!=FullName && CompanyName!=null"></label>
+        </div>
+    </div>
+    <div class="form-group" style="margin-bottom:0px;">
+        <div class=" col-lg-8 text-left">
+            <label class="control-label" style="padding-top:0px;padding-left:10px;">Active Campaigns</label>
+        </div>
+        <div class=" col-lg-4 text-right" style="margin-left:-18px;">
+            <label class="control-label" style="padding-top:0px;" data-bind="text:pcount + vcount+ scount"></label>
+        </div>
+    </div>
+    <div style="border-bottom: 1px solid rgb(220,220,220);width: 100%;margin-left: 0px;margin-bottom:10px;" class="adsubHeading Theme_standard_clr">
+    </div>
+
+
+
+</script>
 @section Scripts{
     <script type="text/javascript">
         require(["Report/walletReport.view", "common/confirmation.view"]);
