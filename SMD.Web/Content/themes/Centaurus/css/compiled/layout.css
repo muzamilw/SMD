@@ -1039,7 +1039,7 @@ blockquote.pull-right:before {
 
 .main-box {
     background: #FFFFFF;
-    -webkit-box-shadow: 1px 1px 2px 0 #CCCCCC;
+   
     -moz-box-shadow: 1px 1px 2px 0 #CCCCCC;
     -o-box-shadow: 1px 1px 2px 0 #CCCCCC;
     -ms-box-shadow: 1px 1px 2px 0 #CCCCCC;
