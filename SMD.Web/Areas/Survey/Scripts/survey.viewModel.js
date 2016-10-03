@@ -20,6 +20,7 @@ define("survey/survey.viewModel",
                     filterValue = ko.observable(),
                     langfilterValue = ko.observable(0),
                     countryfilterValue = ko.observable(0),
+                    price = ko.observable(0),
                     // Controlls editor visibility 
                     isEditorVisible = ko.observable(false),
                     ////selected Question
@@ -251,7 +252,49 @@ define("survey/survey.viewModel",
                         //    addCountryToCountryList(userBaseData().CountryId, userBaseData().Country);
                         //}
                     },
-                    // Close Editor 
+                // Close Editor
+                   getProductPrice = function () {
+                       dataservice.getProduct({
+                           success: function (data) {
+                               price(data.SetupPrice);
+
+                           },
+                           error: function () {
+                               toastr.error("Failed to load product.");
+                           }
+                       });
+                   },
+                totalPrice = ko.computed(function () {
+                    debugger;
+                    var ansNeeeded;
+                    var calculatePrice
+                    if (selectedQuestion() == undefined) {
+                        return 0;
+                    }
+                    else {
+                        ansNeeeded = selectedQuestion().answerNeeded();
+                        if (ansNeeeded > 0 && ansNeeeded <= 1000) {
+                            calculatePrice = price();
+                            selectedQuestion().AmountCharged(calculatePrice);
+                            return "$ " + calculatePrice + " usd";
+                        }
+                        if (ansNeeeded > 1000 && ansNeeeded % 1000 == 0) {
+                            var val = ansNeeeded / 1000;
+                            calculatePrice = val * price();
+                            selectedQuestion().AmountCharged(calculatePrice);
+                            return "$ " + calculatePrice+" usd";
+                        }
+                        else {
+                            if (ansNeeeded > 1000 && ansNeeeded % 1000 != 0) {
+                                var val2 = ansNeeeded / 1000
+                                calculatePrice = price() * Math.ceil(val2);
+                                selectedQuestion().AmountCharged(calculatePrice);
+                                return "$ " + calculatePrice + " usd";
+                            }
+
+                        }
+                    }
+                }),
                     closeEditDialog = function () {
                         
                         if (selectedQuestion().hasChanges()) {
@@ -391,6 +434,8 @@ define("survey/survey.viewModel",
                                        toastr.error("Failed to load  question!");
                                    }
                                });
+
+                            SelectedPvcVal(item.answerNeeded());
                        // }
                     },
                     // store left side ans image
@@ -1540,6 +1585,7 @@ define("survey/survey.viewModel",
                         // Base Data Call
                         getBasedata();
                         getQuestions();
+                        getProductPrice();
                     };
                 return {
                     initialize: initialize,
@@ -1643,7 +1689,8 @@ define("survey/survey.viewModel",
                     showCompanyProfileQuestions: showCompanyProfileQuestions,
                     SaveAsDraft: SaveAsDraft,
                     updateSurveyCriteriass: updateSurveyCriteriass,
-                    ShowAudienceCounter: ShowAudienceCounter
+                    ShowAudienceCounter: ShowAudienceCounter,
+                    totalPrice: totalPrice
                 };
             })()
         };

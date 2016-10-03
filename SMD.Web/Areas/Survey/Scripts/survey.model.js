@@ -3,7 +3,7 @@
     var // ReSharper disable InconsistentNaming
         Survey = function (SQID, LanguageID, CountryID, UserID, Status, StatusValue, Question, Gender, Language, Country,
             Description, DisplayQuestion, StartDate, EndDate, ModifiedDate, LeftPicturePath, RightPicturePath, ProjectedReach, AgeRangeStart,
-            AgeRangeEnd, LeftPictureBytes, RightPictureBytes, ParentSurveyId, Priority, CreatedBy, CompanyId, AnswerNeeded, ResultClicks) {
+            AgeRangeEnd, LeftPictureBytes, RightPictureBytes, ParentSurveyId, Priority, CreatedBy, CompanyId, AnswerNeeded, ResultClicks, AmountCharged) {
            
             var
                 //type and userID will be set on server sside
@@ -65,6 +65,9 @@
                 RightPictureBytes = ko.observable(RightPictureBytes),
                 ParentSurveyId = ko.observable(ParentSurveyId),
                 Priority = ko.observable(Priority),
+
+                AmountCharged = ko.observable(AmountCharged),
+
                 errors = ko.validation.group({
                     Question: Question,
                     //DisplayQuestion: DisplayQuestion,
@@ -98,7 +101,8 @@
                     RightPictureBytes: RightPictureBytes,
                     ParentSurveyId: ParentSurveyId,
                     Priority: Priority,
-                    answerNeeded: answerNeeded
+                    answerNeeded: answerNeeded,
+                    AmountCharged: AmountCharged
                 }),
                 // Has Changes
                 hasChanges = ko.computed(function () {
@@ -150,8 +154,8 @@
                         SurveyQuestionTargetLocations: targetLocation,
                         ParentSurveyId: ParentSurveyId(),
                         Priority: Priority(),
-                        CompanyId: CompanyId()
-                        
+                        CompanyId: CompanyId(),
+                        AmountCharged:AmountCharged
                     };
                 };
             return {
@@ -195,7 +199,8 @@
                 CreatedBy: CreatedBy,
                 CompanyId: CompanyId,
                 answerNeeded: answerNeeded,
-                resultClicks: resultClicks
+                resultClicks: resultClicks,
+                AmountCharged: AmountCharged
             };
         };
 
@@ -317,7 +322,7 @@
         var survey = new Survey(source.SqId, source.LanguageId, source.CountryId, source.UserId, source.Status, source.StatusValue, source.Question,
             source.Gender + "", source.Language, source.Country, source.Description, source.DisplayQuestion, source.StartDate, source.EndDate, source.ModifiedDate,
             source.LeftPicturePath, source.RightPicturePath, source.ProjectedReach, source.AgeRangeStart, source.AgeRangeEnd, source.LeftPictureBytes,
-            source.RightPictureBytes, source.ParentSurveyId, source.Priority,source.CreatedBy,source.CompanyId,source.AnswerNeeded);
+            source.RightPictureBytes, source.ParentSurveyId, source.Priority,source.CreatedBy,source.CompanyId,source.AnswerNeeded,source.AmountCharged);
         _.each(source.SurveyQuestionTargetCriterias, function (item) {
             survey.SurveyQuestionTargetCriteria.push(SurveyQuestionTargetCriteria.Create(item));
         });
