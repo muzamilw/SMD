@@ -30,12 +30,6 @@ namespace SMD.Interfaces.Services
         /// </summary>
         GetProductsResponse GetProducts(GetProductsRequest request);
         
-        
-        /// <summary>
-        /// Ad Viewed
-        /// </summary>
-        Task<BaseApiResponse> UpdateTransactionOnViewingAd(AdViewedRequest request,ProductActionRequest pRequest);
-
         /// <summary>
         /// Archive Account
         /// </summary>
@@ -46,10 +40,10 @@ namespace SMD.Interfaces.Services
         /// </summary>
         Task<BaseApiResponse> UpdateProfile(UpdateUserProfileRequest request);
 
-        /// <summary>
-        /// Update Profile Image
-        /// </summary>
-        Task<UpdateProfileImageResponse> UpdateProfileImage(UpdateUserProfileRequest request);
+        ///// <summary>
+        ///// Update Profile Image
+        ///// </summary>
+        //Task<UpdateProfileImageResponse> UpdateProfileImage(UpdateUserProfileRequest request);
         
         /// <summary>
         /// Confirm Email

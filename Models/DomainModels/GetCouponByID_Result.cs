@@ -76,5 +76,15 @@ namespace SMD.Models.DomainModels
         public string LogoUrl { get; set; }
         public Nullable<int> DaysLeft { get; set; }
         public Nullable<decimal> SwapCost { get; set; }
+
+
+        
+        public Nullable<bool> ShowBuyitBtn { get; set; }
+        public string BuyitLandingPageUrl { get; set; }
+        public string BuyitBtnLabel { get; set; }
+        public string AboutUsDescription { get; set; }
+
+        public string CompanyName { get; set; }
+        
     }
 }

@@ -157,6 +157,18 @@ namespace SMD.MIS.Controllers
             {
                 case SignInStatus.Success:
                     {
+                        var company = companyService.GetCompanyById(user.CompanyId.Value);
+
+                        if ( company.Status != 1)
+                        {
+                            ModelState.AddModelError("", "Account not Active");
+                            return View(model);
+                        }
+                        else if (company.IsDeleted.HasValue && company.IsDeleted.Value == true)
+                        {
+                            ModelState.AddModelError("", "Account has been deleted");
+                            return View(model);
+                        } 
                         
 
                         SetupUserClaims(identity);
@@ -547,6 +559,22 @@ namespace SMD.MIS.Controllers
                     
                         //SetupUserClaims(loginInfo.ExternalIdentity);
                         //AuthenticationManager.SignIn(new AuthenticationProperties { `sistent = true }, loginInfo.ExternalIdentity);
+
+                    //var user = _userManager.FindById(loginInfo.ExternalIdentity.GetUserId());
+
+                    //var company = companyService.GetCompanyById(user.CompanyId.Value);
+                    //LoginViewModel model = new LoginViewModel();
+
+                    //    if ( company.Status != 1)
+                    //    {
+                    //        ModelState.AddModelError("", "Account not Active");
+                    //        return View("login",model);
+                    //    }
+                    //    else if (company.IsDeleted.HasValue && company.IsDeleted.Value == true)
+                    //    {
+                    //        ModelState.AddModelError("", "Account has been deleted");
+                    //        return View("login",model);
+                    //    } 
                        
                         return RedirectToAction("SelectCompany");
 

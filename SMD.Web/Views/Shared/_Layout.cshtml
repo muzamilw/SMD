@@ -353,13 +353,13 @@
                         </div>
 
                         <div class="col-sm-4 hideInCoupons" style="padding-left:42px;margin-top:3px;">
-                            <div id="InviteUserBinding">
+                            <div id="InviteUserBinding" style="display:none">
                                 <a class="btn btn-default btn-gray" data-bind="click:showInviteUserPopup" id="btninviteusers" style="  height:58px;  width: 136px;float:right;margin-right:50px;padding-top:17px">Invite users</a>
 
                             </div>
                             @*<a class="btn btn-default btn-gray " href="~/ProfileQuestion/Manage/Index" id="btninviteusers" style=" width:136px;float:left;margin-right:20px;font-size:14px;padding-top:17px; height:58px;" href="#">Invite Business</a>*@
 
-                            <a class="btn btn-default btn-gray " id="" style=" width:136px;float:left;margin-right:0px;font-size:14px;height:58px;padding-top:17px" href="~/Report/report/WalletReport">Wallet History</a>
+                            <a class="btn btn-default btn-gray " id="btnWallet" style=" width:136px;float:left;margin-right:0px;font-size:14px;height:58px;padding-top:17px" href="~/Report/report/WalletReport">Wallet History</a>
 
                             <br />
                             <br />
@@ -504,44 +504,48 @@
         }
         
         
-        var logoImage = "";
-        var bannerImage1 = "";
-        var bannerImage2 = "";
-        var bannerImage3 = "";
-        var mode = 1;
+        //////////////var logoImage = "";
+        //////////////var bannerImage1 = "";
+        //////////////var bannerImage2 = "";
+        //////////////var bannerImage3 = "";
+        //////////////var mode = 1;
 
 
-        function changeIframeSrc(mode1) {
-            mode = mode1;
-            if (mode1 != 1)
-                mode1 = 2;
-            $("#iframe").attr("src", "/DamImages?mode=" + mode1 + "&selection=true");
+        //////////////function changeIframeSrc(mode1) {
+        //////////////    mode = mode1;
+        //////////////    if (mode1 != 1)
+        //////////////        mode1 = 2;
+        //////////////    $("#iframe").attr("src", "/DamImages?mode=" + mode1 + "&selection=true");
 
-            console.log(mode);
-        }
+        //////////////    console.log(mode);
+        //////////////}
 
-        function iframeLoaded() {
-            var iframeBody = $('body', $('#iframe')[0].contentWindow.document);
-            $(iframeBody).on('click', '.damImgContainer img', function (event) {
-                console.log(mode);
-                if (mode == 1) {
-                    $("#imgLogo").attr("src", this.src).change();
-                    logoImage = this.src;
-                    $(".DamModelclose").click();
-                } else if (mode == 2) {
-                    $("#bannerImage1").attr("src", this.src).change();
-                    bannerImage1 = this.src;
-                    $(".DamModelclose").click();
-                } else if (mode == 3) {
-                    $("#bannerImage2").attr("src", this.src).change();
-                    bannerImage2 = this.src;
-                    $(".close").click();
-                } else if (mode == 4) {
-                    $("#bannerImage3").attr("src", this.src).change();
-                    bannerImage3 = this.src;
-                    $(".close").click();
-                }
-            });
+        //////////////function iframeLoaded() {
+            
+        //////////////    var iframeBody = $('body', $('#iframe')[0].contentWindow.document);
+        //////////////    $(iframeBody).on('click', '.damImgContainer img', function (event) {
+        //////////////        console.log(mode);
+        //////////////        if (mode == 1) {
+        //////////////            $("#imgLogo").attr("src", this.src).change();
+        //////////////            logoImage = this.src;
+        //////////////            $(".DamModelclose").click();
+        //////////////        } else if (mode == 2) {
+        //////////////            $("#bannerImage1").attr("src", this.src).change();
+        //////////////            bannerImage1 = this.src;
+        //////////////            $(".DamModelclose").click();
+        //////////////        } else if (mode == 3) {
+        //////////////            $("#bannerImage2").attr("src", this.src).change();
+        //////////////            bannerImage2 = this.src;
+        //////////////            $(".DamModelclose").click();
+        //////////////        } else if (mode == 4) {
+        //////////////            $("#bannerImage3").attr("src", this.src).change();
+        //////////////            bannerImage3 = this.src;
+        //////////////            $(".DamModelclose").click();
+        //////////////        }
+        //////////////    });
+        //////////////}
+        function ShowInviteUserPopup() {
+            $('#btninviteusers').click();
         }
     </script>
 
@@ -551,7 +555,7 @@
     @RenderSection("scripts", required: false)
     
     <!-- Modal -->
-    <div class="modal fade" id="damModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="z-index:99999999999;">
+    @*<div class="modal fade" id="damModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="z-index:99999999999;">
         <div class="modal-dialog" role="document" style="width:1150px;z-index:99999999999;">
             <div class="modal-content">
                 <div class="modal-header">
@@ -565,6 +569,6 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>*@
 </body>
 </html>

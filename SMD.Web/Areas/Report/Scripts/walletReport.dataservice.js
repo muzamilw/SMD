@@ -15,6 +15,11 @@ define("Report/walletReport.dataservice", function () {
                         dataType: 'json',
                         type: 'GET'
                     });
+                    amplify.request.define('getreferralComponies', 'ajax', {
+                        url: '/Api/ReferralComponies',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
                     isInitialized = true;
                 }
             },
@@ -27,11 +32,20 @@ define("Report/walletReport.dataservice", function () {
                     error: callbacks.error,
                     data: params
                 });
-            };
+            },
+           getreferralComponies = function (callbacks) {
+                      initialize();
+                      return amplify.request({
+                          resourceId: 'getreferralComponies',
+                          success: callbacks.success,
+                          error: callbacks.error,
+                      });
+                  };
 
         return {
           
             getWalletReport: getWalletReport,
+            getreferralComponies: getreferralComponies,
         };
     })();
     return dataService;

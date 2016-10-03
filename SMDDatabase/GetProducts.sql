@@ -1,5 +1,5 @@
 ﻿
-GO
+
 /****** Object:  StoredProcedure [dbo].[GetProducts]    Script Date: 9/6/2016 5:32:33 PM ******/
 SET ANSI_NULLS ON
 GO

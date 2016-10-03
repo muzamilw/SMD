@@ -82,7 +82,20 @@ namespace SMD.MIS.Areas.Api.Controllers
                 throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
             }
 
-            return await webApiUserService.UpdateProfile(request); 
+            try
+            {
+
+          
+
+
+            return await webApiUserService.UpdateProfile(request);
+
+            }
+            catch (Exception e)
+            {
+
+                return new BaseApiResponse { Message = e.ToString(), Status = false };
+            }
         }
 
         #endregion

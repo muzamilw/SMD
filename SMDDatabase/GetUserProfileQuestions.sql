@@ -1,6 +1,6 @@
-﻿USE [SMDdev]
+﻿USE [SMDv2]
 GO
-/****** Object:  UserDefinedFunction [dbo].[GetUserProfileQuestions]    Script Date: 9/6/2016 11:27:23 AM ******/
+/****** Object:  UserDefinedFunction [dbo].[GetUserProfileQuestions]    Script Date: 9/30/2016 10:11:56 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -147,7 +147,7 @@ as
 		OFFSET 5 Rows
 		FETCH NEXT 1 Rows ONLY
 	) as pql6
-	where status = 1
+	where pqo.status = 1
 	 --pqo.HasLinkedQuestions = 1 and pqo.Status = 1
 	--UNION ALL
 	--select pq.pqid, pq.question, null, null,

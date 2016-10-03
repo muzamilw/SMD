@@ -100,7 +100,7 @@
         <AssociationConnector Association="DomainModels.FK_CompaniesAspNetUsers_AspNetUsers" />
         <EntityTypeShape EntityType="DomainModels.vw_CompanyUsers" Width="1.5" PointX="4.75" PointY="8.75" />
         <EntityTypeShape EntityType="DomainModels.BranchCategory" Width="1.5" PointX="14.125" PointY="105.375" />
-        <EntityTypeShape EntityType="DomainModels.CompanyBranch" Width="1.5" PointX="16.375" PointY="84.75" />
+        <EntityTypeShape EntityType="DomainModels.CompanyBranch" Width="1.5" PointX="16.375" PointY="84.75" IsExpanded="false" />
         <EntityTypeShape EntityType="DomainModels.Coupon" Width="1.5" PointX="28.625" PointY="76.5" />
         <AssociationConnector Association="DomainModels.FK_CompanyBranch_BranchCategory" />
         <AssociationConnector Association="DomainModels.FK_Coupon_CompanyBranch" />
@@ -163,6 +163,7 @@
         <AssociationConnector Association="DomainModels.FK_CampaignEventHistory_EventStatus" />
         <AssociationConnector Association="DomainModels.FK_CampaignEventHistory_ProfileQuestion" />
         <AssociationConnector Association="DomainModels.FK_CampaignEventHistory_SurveyQuestion" />
+        <EntityTypeShape EntityType="DomainModels.vw_ReferringCompanies" Width="1.5" PointX="11.375" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -527,13 +527,32 @@ namespace SMD.Implementation.Services
                 }
                 if (!string.IsNullOrEmpty(paths[7]))
                 {
-                    campaignModel.LogoUrl =paths[7];
+                    campaignModel.LogoUrl = paths[7];
                 }
                 else if (campaignModel.LogoUrl.Contains("Content/Images"))
                 {
                     campaignModel.LogoUrl = null;
                 }
+
+                if (campaignModel.LogoUrl.StartsWith("/"))
+                {
+
+                    string path = campaignModel.LogoUrl.Substring(1);
+
+                    if (path.StartsWith("/"))
+                    {
+                        path = path.Substring(1);
+                    }
+                    campaignModel.LogoUrl = path;
+                }
+
+
             }
+
+
+            
+          
+
             if (!string.IsNullOrEmpty(campaignModel.couponImage2) && !campaignModel.couponImage2.Contains("http:"))
             {
                 campaignModel.couponImage2 = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + campaignModel.couponImage2;

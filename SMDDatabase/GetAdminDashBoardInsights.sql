@@ -1,4 +1,5 @@
-﻿GO
+﻿
+
 /****** Object:  StoredProcedure [dbo].[GetAdminDashBoardInsights]    Script Date: 9/29/2016 10:52:08 PM ******/
 SET ANSI_NULLS ON
 GO

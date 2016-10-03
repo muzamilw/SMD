@@ -85,29 +85,7 @@ namespace SMD.Implementation.Services
         #endregion
         #region Public
 
-        /// <summary>
-        /// Skip Profile Question
-        /// </summary>
-        public void PerformSkip(int pqId)
-        {
-            ProfileQuestion profileQuestion = _profileQuestionRepository.Find(pqId);
-            if (profileQuestion == null)
-            {
-                throw new SMDException(string.Format(CultureInfo.InvariantCulture,
-                    LanguageResources.ProfileQuestionService_ProfileQuestionNotFound, pqId));
-            }
-
-            // Update Skipped Count
-            if (profileQuestion.SkippedCount == null)
-            {
-                profileQuestion.SkippedCount = 0;
-            }
-
-            profileQuestion.SkippedCount += 1;
-
-            // Save Changes
-            _profileQuestionRepository.SaveChanges();
-        }
+       
 
         /// <summary>
         /// Profile Question Search request 
@@ -179,8 +157,6 @@ namespace SMD.Implementation.Services
             var user = UserManager.Users.Where(g => g.Id == _profileQuestionRepository.LoggedInUserIdentity).SingleOrDefault();
 
 
-
-
             var serverObj = _profileQuestionRepository.Find(source.PqId);
             //var user = UserManager.Users.Where(g => g.Id == _profileQuestionRepository.LoggedInUserIdentity).SingleOrDefault();
 
@@ -202,6 +178,8 @@ namespace SMD.Implementation.Services
                 serverObj.PenalityForNotAnswering = source.PenalityForNotAnswering;
                 serverObj.Status = source.Status;
                 serverObj.ModifiedDate = DateTime.Now.Add(-(_profileQuestionRepository.UserTimezoneOffSet));
+
+                _profileQuestionRepository.SaveChanges();
 
                 if (source.ProfileQuestionAnswers != null)
                 {
