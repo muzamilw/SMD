@@ -1429,48 +1429,49 @@ else
         });
 
     }
-    //var logoImage = "";
-    //var bannerImage1 = "";
-    //var bannerImage2 = "";
-    //var bannerImage3 = "";
-    //var mode = 1;
-    //function changeIframeSrc(mode1) {
-    //    mode = mode1;
-    //    if (mode1 != 1)
-    //        mode1 = 2;
-    //    $("#iframe").attr("src", "/DamImages?mode=" + mode1+"&selection=true");
 
-    //    console.log(mode);
-    //}
-    //function iframeLoaded() {
+    var logoImage = "";
+    var bannerImage1 = "";
+    var bannerImage2 = "";
+    var bannerImage3 = "";
+    var mode = 1;
+    function changeIframeSrc(mode1) {
+        mode = mode1;
+        if (mode1 != 1)
+            mode1 = 2;
+        $("#iframe").attr("src", "/DamImages?mode=" + mode1+"&selection=true");
 
-    //    var iframeBody = $('body', $('#iframe')[0].contentWindow.document);
-    //    $(iframeBody).on('click', '.damImgContainer img', function (event) {
-    //        console.log(mode);
-    //        if (mode == 1) {
-    //            $("#imgLogo").attr("src", this.src).change();
-    //            logoImage = this.src;
-    //            $(".close").click();
-    //        } else if (mode == 2) {
-    //            $("#bannerImage1").attr("src", this.src).change();
-    //            bannerImage1 = this.src;
-    //            $(".close").click();
-    //        } else if (mode == 3) {
-    //            $("#bannerImage2").attr("src", this.src).change();
-    //            bannerImage2 = this.src;
-    //            $(".close").click();
-    //        } else if (mode == 4) {
-    //            $("#bannerImage3").attr("src", this.src).change();
-    //            bannerImage3 = this.src;
-    //            $(".close").click();
-    //        }
-    //    });
-    //}
+        console.log(mode);
+    }
+    function iframeLoaded() {
+
+        var iframeBody = $('body', $('#iframe')[0].contentWindow.document);
+        $(iframeBody).on('click', '.damImgContainer img', function (event) {
+            console.log(mode);
+            if (mode == 1) {
+                $("#imgLogo").attr("src", this.src).change();
+                logoImage = this.src;
+                $(".close").click();
+            } else if (mode == 2) {
+                $("#bannerImage1").attr("src", this.src).change();
+                bannerImage1 = this.src;
+                $(".close").click();
+            } else if (mode == 3) {
+                $("#bannerImage2").attr("src", this.src).change();
+                bannerImage2 = this.src;
+                $(".close").click();
+            } else if (mode == 4) {
+                $("#bannerImage3").attr("src", this.src).change();
+                bannerImage3 = this.src;
+                $(".close").click();
+            }
+        });
+    }
 
 </script>
 
 <!-- Modal -->
-@*<div class="modal fade" id="damModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="damModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document" style="width:1150px;">
             <div class="modal-content">
                 <div class="modal-header">
@@ -1484,4 +1485,4 @@ else
                   </div>
             </div>
         </div>
-    </div>*@
+    </div>

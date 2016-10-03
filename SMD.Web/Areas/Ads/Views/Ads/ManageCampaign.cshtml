@@ -2730,7 +2730,7 @@ else
 
 </script>
 
-@*<script type="text/javascript">
+<script type="text/javascript">
 
     // $("#panelArea").css("display", "none");
     //  $("#MainSpan").css("display", "none");
@@ -2755,6 +2755,7 @@ else
     var bannerImage3 = "";
     var mode = 1;
     function changeIframeSrc(mode1) {
+        alert('frame of ads');
         mode = mode1;
         if (mode1 != 1)
             mode1 = 2;
@@ -2792,9 +2793,9 @@ else
 
     }
 
-</script>*@
+</script>
 <!-- Modal -->
-@*<div class="modal fade" id="damModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="damModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="z-index:9999">
     <div class="modal-dialog" role="document" style="width:1150px;">
         <div class="modal-content">
             <div class="modal-header">
@@ -2808,4 +2809,4 @@ else
             </div>
         </div>
     </div>
-</div>*@
+</div>
