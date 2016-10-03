@@ -50,6 +50,11 @@ define("survey/survey.dataservice", function () {
                         dataType: 'json',
                         type: 'GET'
                     });
+                    amplify.request.define('getProduct', 'ajax', {
+                        url: '/Api/GetProduct',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
                     isInitialized = true;
                 }
             },
@@ -73,6 +78,14 @@ define("survey/survey.dataservice", function () {
                     data: params
                 });
             },
+            getProduct = function (callbacks) {
+                initialize();
+                return amplify.request({
+                    resourceId: 'getProduct',
+                    success: callbacks.success,
+                    error: callbacks.error,
+                });
+            },
                // get survey Questions
             getSurveyQuestion = function (params, callbacks) {
                 initialize();
@@ -83,6 +96,7 @@ define("survey/survey.dataservice", function () {
                     data: params
                 });
             },
+              
             // get audiance Count
              getAudienceData = function (params, callbacks) {
                  initialize();
@@ -120,7 +134,8 @@ define("survey/survey.dataservice", function () {
             addSurveyData: addSurveyData,
             getSurveyQuestion: getSurveyQuestion,
             getAudienceData: getAudienceData,
-            getSurveyParentList:getSurveyParentList
+            getSurveyParentList: getSurveyParentList,
+            getProduct: getProduct
         };
        
     })();

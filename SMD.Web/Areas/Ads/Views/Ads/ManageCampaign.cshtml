@@ -77,7 +77,7 @@ else
                                     <br />
                                     <span data-bind="css: $root.previewScreenNumber() == 3  ? 'ads-selected-numbering-text' : '',click: $root.gotoScreen.bind(null,3)">Quiz</span>
                                 </div>
-                                <div class="pull-left ads-numbering-linebar" data-bind="css: $root.previewScreenNumber() == 6 ? 'ads-selected-numbering-box' : ''">
+                                @*<div class="pull-left ads-numbering-linebar" data-bind="css: $root.previewScreenNumber() == 6 ? 'ads-selected-numbering-box' : ''">
                                 </div>
                                 <div class="pull-left ads-numbering-main">
                                     <div class="ads-numbering-box" data-bind="css: $root.previewScreenNumber() == 4 ? 'ads-selected-numbering-box' : '',click: $root.gotoScreen.bind(null,4)">
@@ -85,7 +85,7 @@ else
                                     </div>
                                     <br />
                                     <span data-bind="css: $root.previewScreenNumber() == 4 ? 'ads-selected-numbering-text' : '',click: $root.gotoScreen.bind(null,4)">Delivery</span>
-                                </div>
+                                </div>*@
                                 <div class="pull-left" style="width:49px;">
                                     &nbsp;
                                 </div>
@@ -102,7 +102,7 @@ else
                                     &nbsp;
                                 </div>
 
-                                <div class="pull-left" style="width:315px;">
+                                <div class="pull-left" style="width:450px;">
                                     <div>
                                         <div class="pull-right ads-numbering-main" style="width:99px;
     border-left: 1px solid rgb(220,220,220);
@@ -118,7 +118,7 @@ else
                                         </div>
                                     </div>
                                 </div>
-                                <div id="statusDiv" class="pull-left" style="width:141px;text-align: right; padding-top: 71px;height: auto;">
+                                <div id="statusDiv" class="pull-left" style="width:140px;text-align: right; padding-top: 71px;height: auto;">
 
 
                                     <span style="font-size:16px;color:black;margin-right:2px;">Status</span><span>:</span><span style="font-size:16px;color:black;margin-left:2px;" data-bind="text:StatusValue()"></span>
@@ -363,37 +363,79 @@ else
                                                 </div>
                                             </div>
                                         </div>*@
-                                        <div class="form-group" >
-                                            <div class="col-lg-2">
-                                                <label for="txtBuyItLine1" class="control-label text-right tooltip-float floatNone">Description</label>
-                                            </div>
-                                            <div class="col-lg-8">
-                                                <input style="width:420px!important;" type="text" class="form-control" id="txtBuyItLine1" placeholder="Enter Description  (150 characters)" data-bind="value: BuuyItLine1" maxlength="150">
+                                        <div class="col-lg-12">
+                                            <div style="height:34px;" class="borderbtmline">
+
+
+                                                <div class="col-lg-9 adsubHeading Theme_standard_clr">
+
+                                                    <div class="adsubHeading Theme_standard_clr" data-bind="text:$root.UrlHeadings">
+                                                        Leatherboard banner click thru url to your landing  page.
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <div class="bs-example-tooltips tooltip-float-width tooltip ">
+                                                        <a class="input-group-addon" tabindex="-1" href="#" data-toggle="tooltip" title="" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;    padding: 0px;
+    padding-top: 5px;" data-container="body" data-placement="right" data-content="Add a city" data-original-title="Hooray!">
+                                                            <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                        </a>
+                                                        <i class="fa fa-chevron-up" aria-hidden="true" style="color:#68b359;"></i>
+                                                        <span class="tooltiptext">Tooltip text</span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
 
+                                        <div class="form-group" data-bind="visible:$root.IsShownforVideo()">
+                                            <div class="col-lg-2">
+                                                <label for="txtBuyItLine1" class="control-label text-right tooltip-float floatNone">Call for action</label>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <input style="width:420px!important;" type="text" class="form-control" id="txtBuyItLine1" placeholder="Shown after video (72 characters)" data-bind="value: BuuyItLine1" maxlength="72">
+                                            </div>
+                                        </div>
 
+                                        <div class="form-group" data-bind="visible:$root.IsShownforVideo()">
+                                            <div class="col-lg-2">
+                                                <label for="txtBuyItlbl" class="control-label text-right tooltip-float floatNone">Button</label>
+                                            </div>
+                                            <div class="col-lg-10">
+                                                <select style="width:420px!important;" id="ddTextBtns" class="form-control" data-bind="options: $root.DefaultTextBtns, optionsText: 'name', optionsValue: 'id',value: BuyItButtonLabel"></select>
+                                             
+                                            </div>
+                                            
+                                        </div>
+                                        <!-- ko if: BuyItButtonLabel() == "Custom Button Label"-->
+                                        <div class="form-group" data-bind="visible:$root.IsShownforVideo()">
+                                            
+                                            <div>
+                                                
+                                                <div class="col-lg-2">
+                                                    <label for="txtBuyItlbl" class="control-label text-right tooltip-float floatNone">Custom button</label>
+                                                </div>
+
+                                                <div class="col-lg-8">
+
+                                                    <input style="width:420px!important;" type="text" class="form-control txtBuyItlbl" id="txtBuyItlbl" placeholder="(12 characters)" data-bind="" maxlength="12">
+
+
+                                                </div>
+                                            </div>
+                                           
+                                        </div>
+                                        <!-- /ko -->
                                         <div class="form-group" >
                                             <div class="col-lg-2">
                                                 <label for="txtBuyItUrl" class="control-label text-right tooltip-float floatNone">Landing page url </label>
                                             </div>
-                                            <div class="col-lg-8">
-                                                <textarea style="width:420px!important;" class="form-control" id="txtBuyItUrl" rows="1" placeholder="Enter in landing page url " data-bind="value: VideoUrl" style="margin-top:5px;"></textarea>
+                                            <div class="col-lg-7">
+                                                <textarea style="width:420px!important;" class="form-control" id="urlBx" rows="1" placeholder="Enter in landing page url " data-bind="value: VideoUrl" style="margin-top:5px;"></textarea>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-lg-2">
-                                                <label for="txtBuyItlbl" class="control-label text-right tooltip-float floatNone">Button Label </label>
+                                            <div class="col-lg-3">
+                                                <button style="width:123px;height:33px;" class="btn  btn-success gtild-color urlbtn" id="btnNext" onclick="openUrl();">Test URL Link</button>
                                             </div>
-                                            <div class="col-lg-8">
-                                                <select style="width:420px!important;" id="ddTextBtns" class="form-control" data-bind="options: $root.DefaultTextBtns, optionsText: 'name', optionsValue: 'id',value: BuyItButtonLabel"></select>
-                                                <!-- ko if: BuyItButtonLabel() == "Custom Button Label"-->
-                                                <br />
-                                                <input style="width:420px!important;" type="text" class="form-control txtBuyItlbl" id="txtBuyItlbl" placeholder="Enter Description  (72 characters)" data-bind="" maxlength="72">
-                                                <!-- /ko -->
-
                                             </div>
-                                        </div>
+                                       
 
                                     </div>
 
@@ -529,7 +571,7 @@ else
                                         <div class="col-lg-12" style="padding:0px;">
                                             <div style="height:34px;" class="borderbtmline">
                                                 <div class="col-lg-9 ">
-                                                    <div class="adsubHeading Theme_standard_clr  ">Segment audience by age,range,gender and professions.</div>
+                                                    <div class="adsubHeading Theme_standard_clr  ">Segment audience by age , range , gender and professions.</div>
                                                 </div>
                                                 <div class="col-lg-3 " style="text-align:right;">
 
@@ -700,9 +742,26 @@ else
                                     </div>
                                     
                                     <div id="thirdCont">
-                                        <div class="col-lg-12">
-                                            <div class="adsubHeading Theme_standard_clr borderbtmline ">Refine further using results from surveys,polls and quiz questions.</div>
+                                     
+                                        <div class="col-lg-12" >
+                                            <div style="height:34px;" class="borderbtmline ">
+                                                <div class="col-lg-10 adsubHeading Theme_standard_clr">
 
+                                                    <div class="adsubHeading Theme_standard_clr" >
+                                                        Refine further using results from surveys , polls and quiz questions.
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <div class="bs-example-tooltips tooltip-float-width tooltip ">
+                                                        <a class="input-group-addon" tabindex="-1" href="#" data-toggle="tooltip" title="" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;    padding: 0px;
+    padding-top: 5px;" data-container="body" data-placement="right" data-content="Add a city" data-original-title="Hooray!">
+                                                            <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                        </a>
+                                                        <i class="fa fa-chevron-up" aria-hidden="true" style="color:#68b359;"></i>
+                                                        <span class="tooltiptext">Tooltip text</span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
 
                                         <div class="form-group margin-btm26">
@@ -2642,6 +2701,12 @@ else
     <!--/ko-->
 </script>
 <script>
+   
+    function openUrl()
+    {
+        var win = window.open($("#urlBx").val(), '_blank');
+        win.focus();
+    }
     function showUploadDialog() {
         $("#logo_image_file").click();
 
