@@ -63,6 +63,31 @@ namespace SMD.MIS.Areas.Api.ModelMappers
             return user;
         }
 
+
+        public static WebApiUser CreateFromUserForMobile(this SMD.Models.IdentityModels.User source)
+        {
+            var user = new WebApiUser
+            {
+                UserId = source.Id,
+                FullName = source.FullName,
+            
+                Email = source.Email,
+             
+                Gender = source.Gender,
+          
+                DOB = source.DOB,
+          
+                IndustryId = source.IndustryId,
+         
+                ImageUrl = !string.IsNullOrEmpty(source.Company.Logo) ? HttpContext.Current.Request.Url.Scheme + "://" +
+                HttpContext.Current.Request.Url.Host + "/" + source.ProfileImage + "?" + DateTime.Now : string.Empty,
+                Title = source.Title
+               
+            };
+
+            return user;
+        }
+
         /// <summary>
         /// Create WebApi User from Domain Model
         /// </summary>

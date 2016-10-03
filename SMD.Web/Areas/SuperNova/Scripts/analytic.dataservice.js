@@ -22,8 +22,18 @@ define("analytic/analytic.dataservice", function () {
                         dataType: 'json',
                         type: 'GET'
                     });
+					amplify.request.define('getCampaignsByStatus', 'ajax', {
+                        url: '/Api/Campaign',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
 					 amplify.request.define('getRevenueOverTime', 'ajax', {
                         url: '/Api/Revenue',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
+					 amplify.request.define('getUserCounts', 'ajax', {
+                        url: '/Api/ActiveUser',
                         dataType: 'json',
                         type: 'GET'
                     });
@@ -40,6 +50,25 @@ define("analytic/analytic.dataservice", function () {
                     data: params
                 });
 			},
+			 getCampaignsByStatus = function (params, callbacks) {
+                initialize();
+                return amplify.request({
+                    resourceId: 'getCampaignsByStatus',
+                    success: callbacks.success,
+                    error: callbacks.error,
+                    data: params
+                });
+			},
+			getUserCounts = function (params, callbacks) {
+                initialize();
+                return amplify.request({
+                    resourceId: 'getUserCounts',
+                    success: callbacks.success,
+                    error: callbacks.error,
+                    data: params
+                });
+			},
+			
 			getRevenueOverTime = function (params, callbacks) {
                 initialize();
                 return amplify.request({
@@ -63,7 +92,9 @@ define("analytic/analytic.dataservice", function () {
         return {
             getactiveuser: getactiveuser,
 			getDashboardInsights:getDashboardInsights,
-			getRevenueOverTime:getRevenueOverTime
+			getRevenueOverTime:getRevenueOverTime,
+			getCampaignsByStatus: getCampaignsByStatus,
+			getUserCounts:getUserCounts
         };
     })();
     return dataService;

@@ -15,14 +15,16 @@ define("analytic/analytic.viewModel",
 					analyticTodate = ko.observable(new Date()),
 					selectedGranualforRevenue = ko.observable(1),
 					RevenueOverTimeData = ko.observable([]),
+					CampaignsByStatusData = ko.observable([]),
+					UserCountsData = ko.observable([]),
 					intializeDashboardInsightsData = function(){
 						DashboardInsightsData.push(new model.DashboardInsightsModel("Users who logged in"));
 						DashboardInsightsData.push(new model.DashboardInsightsModel("New Users who registered"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Advertisers who created a NEW campaign"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("New Video Ad campaigns"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("New Display Ad campaigns"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("New Survey campaigns"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("New Poll campaigns"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Advertisers who created a NEW campaign(Not Done)"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("New Video Ad campaigns(Not Done)"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("New Display Ad campaigns(Not Done)"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("New Survey campaigns(Not Done)"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("New Poll campaigns(Not Done)"));
 						DashboardInsightsData.push(new model.DashboardInsightsModel("",true));
 						DashboardInsightsData.push(new model.DashboardInsightsModel("# Answered", true));
 						DashboardInsightsData.push(new model.DashboardInsightsModel("Video Ads (Ad click charged)"));
@@ -41,7 +43,7 @@ define("analytic/analytic.viewModel",
 						DashboardInsightsData.push(new model.DashboardInsightsModel("Display Ads"));
 						DashboardInsightsData.push(new model.DashboardInsightsModel("Deals"));
 						DashboardInsightsData.push(new model.DashboardInsightsModel("",true));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("# Rewarded", true));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("# Openeded", true));
 						DashboardInsightsData.push(new model.DashboardInsightsModel("Video Ads"));
 						DashboardInsightsData.push(new model.DashboardInsightsModel("Display Ads"));
 						DashboardInsightsData.push(new model.DashboardInsightsModel("Surveys"));
@@ -144,11 +146,41 @@ define("analytic/analytic.viewModel",
                                                            },
                             {
                                 success: function (data) {
-									//data[0].amountcollected
+									//data[0].amountcollected 
 									//data[0].granular
 								RevenueOverTimeData([]);
                                 ko.utils.arrayPushAll(RevenueOverTimeData(), data);
                                 RevenueOverTimeData.valueHasMutated();
+	                            },
+                                error: function (response) {
+                                    toastr.error("Failed to load Ad Campaigns!");
+                                }
+                            });
+                    },
+					 getCampaignsByStatus = function () {
+                        dataservice.getCampaignsByStatus(
+                            { },
+                            {
+                                success: function (data) {
+								
+								CampaignsByStatusData([]);
+                                ko.utils.arrayPushAll(CampaignsByStatusData(), data);
+                                CampaignsByStatusData.valueHasMutated();
+	                            },
+                                error: function (response) {
+                                    toastr.error("Failed to load Ad Campaigns!");
+                                }
+                            });
+                    },
+					getUserCounts = function () {
+                        dataservice.getUserCounts(
+                            { },
+                            {
+                                success: function (data) {
+								
+								UserCountsData([]);
+                                ko.utils.arrayPushAll(UserCountsData(), data);
+                                UserCountsData.valueHasMutated();
 	                            },
                                 error: function (response) {
                                     toastr.error("Failed to load Ad Campaigns!");
@@ -166,6 +198,8 @@ define("analytic/analytic.viewModel",
 						analyticFromdate().setMonth(analyticFromdate().getMonth()-1)
                         ko.applyBindings(view.viewModel, view.bindingRoot);
 						intializeDashboardInsightsData();
+						getCampaignsByStatus();
+						getUserCounts();
 					//	getActiveUsers();
 						getRevenueOverTime();
                     };
@@ -181,7 +215,10 @@ define("analytic/analytic.viewModel",
 					selectedGranualforRevenue:selectedGranualforRevenue,
 					RevenueOverTimeData:RevenueOverTimeData,
 					getRevenueOverTime:getRevenueOverTime,
-					ReloadAnalytic:ReloadAnalytic
+					ReloadAnalytic:ReloadAnalytic,
+					getCampaignsByStatus : getCampaignsByStatus,
+					CampaignsByStatusData:CampaignsByStatusData,
+					getUserCounts:getUserCounts
 
                 };
             })()
