@@ -560,7 +560,7 @@ namespace SMD.MIS.Controllers
                         //SetupUserClaims(loginInfo.ExternalIdentity);
                         //AuthenticationManager.SignIn(new AuthenticationProperties { `sistent = true }, loginInfo.ExternalIdentity);
 
-                    var user = _userManager.FindByEmail(loginInfo.Email);
+                    var user = _userManager.FindById(loginInfo.ExternalIdentity.GetUserId());
 
                     var company = companyService.GetCompanyById(user.CompanyId.Value);
                     LoginViewModel model = new LoginViewModel();
