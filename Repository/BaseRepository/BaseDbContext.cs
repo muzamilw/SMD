@@ -118,6 +118,9 @@ namespace SMD.Repository.BaseRepository
         /// </summary>
         public DbSet<AdCampaignResponse> AdCampaignResponses { get; set; }
 
+
+        public DbSet<AdCampaignClickRateHistory> AdCampaignClickRateHistory { get; set; }
+
         /// <summary>
         /// AdCampaign Target Criterias
         /// </summary>

@@ -36,6 +36,7 @@ define("ads/ads.viewModel",
                     selectedLocationLong = ko.observable(0),
                     ageRange = ko.observableArray([]),
                     isNewCriteria = ko.observable(true),
+                    IsShownforVideo = ko.observable(true),
                     isEnableVedioVerificationLink = ko.observable(false),
                     //caption variablels 
                     lblCampaignName = ko.observable("Campaign Name"),
@@ -68,6 +69,7 @@ define("ads/ads.viewModel",
                     selectedIndustryIncludeExclude = ko.observable(true),
                     UserAndCostDetail = ko.observable(),
                     pricePerclick = ko.observable(0),
+                    UrlHeadings = ko.observable('')
                     isLocationPerClickPriceAdded = ko.observable(false),
                     isLanguagePerClickPriceAdded = ko.observable(false),
                     isIndustoryPerClickPriceAdded = ko.observable(false),
@@ -92,7 +94,7 @@ define("ads/ads.viewModel",
                     uploadTitle = ko.observable("Video"),
                     SubHeading = ko.observable("Reward audiences 50% of your ‘ad click’ Increase branding and drive people to your web site with one ‘ad click’ Show a video ad, ask a reinforcing question and show your deals.");
 
-                    tab1Heading = ko.observable("Upload a 10-20 second video ad.");
+                    tab1Heading = ko.observable("Upload your video commercial (max 30 seconds , mp4 format).");
                     tab2Heading = ko.observable("Target audience in different cities.");
                 tab4SubHeading = ko.observable("Select your ad campaign delivery mode:");
                     errorListNew = ko.observableArray([]),
@@ -297,7 +299,7 @@ define("ads/ads.viewModel",
                 VideoLink2src(null);
                 isShowArchiveBtn(false);
                 campaignModel().ChannelType("1");
-                campaignModel().ClickRate("0.1");
+                campaignModel().ClickRate("0.12");
                 campaignModel().MaxDailyBudget("5");
                 campaignModel().MaxBudget("20");
                 campaignModel().Type(mode);
@@ -332,33 +334,57 @@ define("ads/ads.viewModel",
 
                 confirmation.messageText("Do you want to save changes?");
                 confirmation.afterProceed(function () {
-                    saveCampaignData();
-                    isEditorVisible(false);
+                   
+                    if (ValidateCampaign()) {
 
-                    if (isFromEdit() == true) {
-                        isListVisible(true);
-                        isWelcomeScreenVisible(false);
+                        if (campaignModel().Status() == 3) {
+                            saveCampaign(3);
+
+                        } else {
+                            saveCampaign(1);
+
+                        }
+
+                        isEditorVisible(false);
+
+                        if (isFromEdit() == true) {
+                            isListVisible(true);
+                            isWelcomeScreenVisible(false);
+                        }
+                        else {
+                            isListVisible(false);
+                            isWelcomeScreenVisible(true);
+                        }
+
+                        if (isDisplayCouponsAds() == true) {
+                            isListVisible(true);
+                            isWelcomeScreenVisible(false);
+                        }
+
+                        $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
+                        $("#btnSubmitForApproval,#saveBtn,.table-link").css("display", "inline-block");
+                        $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign,#btnStopAndTerminate,#btnCopyCampaign").removeAttr('disabled');
+
+                        $("#headlabel, #Heading_div").css("display", "block");
+
+                        $("#panelArea,#headdesc").css("display", "block");
+                        //show the main menu;
+                        showMainMenu();
+                        logoImage = '';
+
+
                     }
                     else {
-                        isListVisible(false);
-                        isWelcomeScreenVisible(true);
+                        if (errorListNew().length > 0) {
+                            ko.utils.arrayForEach(errorListNew(), function (errorListNew) {
+                                toastr.error(errorListNew.name);
+                            });
+                        }
                     }
 
-                    if (isDisplayCouponsAds() == true) {
-                        isListVisible(true);
-                        isWelcomeScreenVisible(false);
-                    }
 
-                    $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
-                    $("#btnSubmitForApproval,#saveBtn,.table-link").css("display", "inline-block");
-                    $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign,#btnStopAndTerminate,#btnCopyCampaign").removeAttr('disabled');
 
-                    $("#headlabel, #Heading_div").css("display", "block");
-                   
-                    $("#panelArea,#headdesc").css("display", "block");
-                    //show the main menu;
-                    showMainMenu();
-                    logoImage = '';
+                    
                 });
                 confirmation.afterCancel(function () {
 
@@ -485,24 +511,7 @@ define("ads/ads.viewModel",
                 
                 $("#headdesc").css("display", "block");
                 },
-            saveCampaignData = function () {
-
-                //if (campaignModel().isValid()) {
-                if (campaignModel().Status() == 3) {
-                    saveCampaign(3);
-
-                } else {
-                    saveCampaign(1);
-
-                }
-
-
-                //} else {
-                //    campaignModel().errors.showAllMessages();
-                //    toastr.error("Please fill the required feilds to continue.");
-                //}
-            },
-
+           
              BackToAds = function () {
                  isEditorVisible(false);
                  isWelcomeScreenVisible(false);
@@ -593,7 +602,7 @@ define("ads/ads.viewModel",
             submitCampaignData = function () {
                 //if (campaignModel().isValid()) {
                 if (ValidateCampaign()) {
-                    if (reachedAudience() > 0) {
+                   
                         if (UserAndCostDetail().isStripeIntegrated == false) {
 
                             stripeChargeCustomer.show(function () {
@@ -605,9 +614,7 @@ define("ads/ads.viewModel",
                         } else {
                             saveCampaign(2);
                         }
-                    } else {
-                        toastr.error("You have no audience against the specified criteria please broad your audience definition.");
-                    }
+                   
                 }
                 else {
                     if (errorListNew().length > 0) {
@@ -631,12 +638,23 @@ define("ads/ads.viewModel",
                          errorListNew.push({ name: "Please enter ad Title.", element: "" });
                          
                      }
+
                      if (campaignModel().ClickRate() == undefined) {
                          campaignModel().ClickRate(0);
                      }
+
+                     if (campaignModel().ClickRate() < 0.06) {
+                         errorListNew.push({ name: "Ad Click should be greater than $ 0.06 USD", element: "" });
+                     }
+
                      if ((parseInt(campaignModel().MaxBudget()) < parseInt(campaignModel().ClickRate()))) {
-                         errorListNew.push({ name: "Campaign budget should be greater than ppvc.", element: "" });
+                         errorListNew.push({ name: "Campaign budget should be greater than Ad click.", element: "" });
                        }
+
+                    if (reachedAudience() == 0) {
+                     errorListNew.push({
+                         name: "You have no audience against the specified criteria please broaden your audience definition.", element: "" });
+                    }
 
                      if (errorListNew() == null || errorListNew().length == 0) {
                          return true;
@@ -801,7 +819,9 @@ define("ads/ads.viewModel",
 
 
                     campaignModel().Status(mode);
-                    campaignModel().ClickRate(pricePerclick());
+
+                    //disabling the following line so that user can customize their click rate.
+                    //campaignModel().ClickRate(pricePerclick());
 
 
                     var campignServerObj = campaignModel().convertToServerData();
@@ -2386,12 +2406,16 @@ define("ads/ads.viewModel",
 
                 ShowAdCampaigns = function () {
                     isDisplayCouponsAds(false);
+
                     MainHeading("Video Campaigns");
                     SubHeading("Video campaigns can be paused and terminated at any time. Increase your conversions and reduce your spend by using profile filters.");
-                    if (mode == 4)
-                    {
+                    if (mode == 4) {
                         MainHeading("Sponsor an app ‘Brain game’.");
                         SubHeading("Reward audiences 50% of your ‘ad click’Drive people to your web site, ask a reinforcing question and show your deals –All for one ‘ad click’ fee.");
+                        IsShownforVideo(false);
+                    }
+                    else {
+                        IsShownforVideo(true);
                     }
                     getAdCampaignGridContent();
                 },
@@ -2766,14 +2790,19 @@ define("ads/ads.viewModel",
                 // Initialize the view model
                 initialize = function (specifiedView) {
                     if (mode == 4) {
-                        MainHeading("Sponsor an app ‘Brain game’.");
+                        MainHeading("Sponsor an app ‘brain game’.");
                         SubHeading("Reward audiences 50% of your ‘ad click’Drive people to your web site, ask a reinforcing question and show your deals –All for one ‘ad click’ fee.");
-
+                        IsShownforVideo(false);
                         lblAdTitle("Game  Title");
                         uploadTitle("Upload");
-                        tab1Heading("Leaderboard banners appear when App Users play Brain Training games.");
+                        tab1Heading("Leaderboard banners appear when app users play brain training games.");
                         tab2Heading("Define the target audience to deliver game ad.");
                         tab4SubHeading("Select your game campaign delivery mode:");
+                        UrlHeadings("Leatherboard banner click thru url to your landing  page.");
+                    }
+                    else {
+                        UrlHeadings("Direct viewers to a landing page at the end of your video ad.");
+                        IsShownforVideo(true);
                     }
                     view = specifiedView;
                     ko.applyBindings(view.viewModel, view.bindingRoot);
@@ -2799,7 +2828,7 @@ define("ads/ads.viewModel",
                     addNewCampaign: addNewCampaign,
                     langs: langs,
                     campaignModel: campaignModel,
-                    saveCampaignData: saveCampaignData,
+                   
                     closeNewCampaignDialog: closeNewCampaignDialog,
                     selectedCriteria: selectedCriteria,
                     profileQuestionList: profileQuestionList,
@@ -2957,7 +2986,9 @@ define("ads/ads.viewModel",
                     surveyAnswerList: surveyAnswerList,
                     saveSurveyQuestion: saveSurveyQuestion,
                     updateSurveyCriteriass: updateSurveyCriteriass,
-                    ShowAudienceCounter: ShowAudienceCounter
+                    ShowAudienceCounter: ShowAudienceCounter,
+                    IsShownforVideo: IsShownforVideo,
+                    UrlHeadings: UrlHeadings
                 };
             })()
         };
