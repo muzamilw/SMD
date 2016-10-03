@@ -131,6 +131,8 @@ namespace SMD.Models.DomainModels
 
         public virtual ICollection<CampaignEventHistory> CampaignEventHistories { get; set; }
 
+        public virtual ICollection<AdCampaignClickRateHistory> AdCampaignClickRateHistories { get; set; }
+
         [NotMapped]
         public string CampaignImagePath { get; set; }
         [NotMapped]

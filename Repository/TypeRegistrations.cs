@@ -70,6 +70,8 @@ namespace SMD.Repository
             unityContainer.RegisterType<IGameRepository, GameRepository>();
 
             unityContainer.RegisterType<ICouponPriceOptionRepository, CouponPriceOptionRepository>();
+
+            unityContainer.RegisterType<IAdCampaignClickRateHistoryRepository, AdCampaignClickRateHistoryRepository>();
             
         }
     }
