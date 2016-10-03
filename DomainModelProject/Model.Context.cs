@@ -315,5 +315,15 @@ namespace DomainModelProject
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getActiveCampaignsOverTime_Result>("getActiveCampaignsOverTime", dateFromParameter, dateToParameter, granularityParameter);
         }
+    
+        public virtual ObjectResult<getCampaignsByStatus_Result> getCampaignsByStatus()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getCampaignsByStatus_Result>("getCampaignsByStatus");
+        }
+    
+        public virtual ObjectResult<GetUserCounts_Result> GetUserCounts()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUserCounts_Result>("GetUserCounts");
+        }
     }
 }

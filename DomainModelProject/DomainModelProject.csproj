@@ -159,6 +159,9 @@
     <Compile Include="GetAdminDashBoardInsights_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="getCampaignsByStatus_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetCouponByID_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -178,6 +181,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="GetTransactions_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetUserCounts_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Industry.cs">
