@@ -175,6 +175,9 @@ namespace SMD.Repository.Repositories
             return DbSet.FirstOrDefault(u => u.Id == sId);
         }
 
-
+        public IEnumerable<GetUserCounts_Result> GetUserCounts()
+        {
+            return db.GetUserCounts();
+        }
     }
 }

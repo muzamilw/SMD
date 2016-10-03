@@ -10,5 +10,6 @@ namespace SMD.Interfaces.Repository
     public interface ICampaignCategoriesRepository: IBaseRepository<CampaignCategory, long>
     {
         void RemoveAll(List<CampaignCategory> categories);
+        IEnumerable<getCampaignsByStatus_Result> getCampaignsByStatus();
     }
 }

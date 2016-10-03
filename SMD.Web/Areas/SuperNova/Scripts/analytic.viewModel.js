@@ -76,12 +76,14 @@ define("analytic/analytic.viewModel",
 											DashboardInsightsData()[data[i].ordr].caC(data[i].ca!= null ? data[i].ca:0);
 											DashboardInsightsData()[data[i].ordr].auC(data[i].au != null ? data[i].au:0);
 											DashboardInsightsData()[data[i].ordr].aeC(data[i].ae != null ? data[i].ae:0);
+											DashboardInsightsData()[data[i].ordr].ordr(data[i].ordr);
 										}else if(data[i].pMonth == "prev" ){
 											DashboardInsightsData()[data[i].ordr].usL(data[i].us != null ? data[i].us:0);
 											DashboardInsightsData()[data[i].ordr].ukL(data[i].uk != null ? data[i].uk:0);
 											DashboardInsightsData()[data[i].ordr].caL(data[i].ca!= null ? data[i].ca:0);
 											DashboardInsightsData()[data[i].ordr].auL(data[i].au != null ? data[i].au:0);
 											DashboardInsightsData()[data[i].ordr].aeL(data[i].ae != null ? data[i].ae:0);
+											DashboardInsightsData()[data[i].ordr].ordr(data[i].ordr);
 										}
 										
 									}
@@ -218,7 +220,8 @@ define("analytic/analytic.viewModel",
 					ReloadAnalytic:ReloadAnalytic,
 					getCampaignsByStatus : getCampaignsByStatus,
 					CampaignsByStatusData:CampaignsByStatusData,
-					getUserCounts:getUserCounts
+					getUserCounts:getUserCounts,
+					UserCountsData:UserCountsData
 
                 };
             })()
