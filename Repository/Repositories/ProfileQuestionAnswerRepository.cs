@@ -57,7 +57,14 @@ namespace SMD.Repository.Repositories
         /// 
         public IEnumerable<ProfileQuestionAnswer> GetAllProfileQuestionAnswerByQuestionId(int profileQuestionId)
         {
-            return DbSet.Where(ans => ans.PqId == profileQuestionId && ans.Status != 0).OrderByDescending(g=>g.SortOrder.HasValue ).ThenBy(g=>g.SortOrder).ToList();
+            if (profileQuestionId == 0)
+            {
+                return DbSet.ToList();
+            }
+            else
+            {
+                return DbSet.Where(ans => ans.PqId == profileQuestionId && ans.Status != 0).OrderByDescending(g => g.SortOrder.HasValue).ThenBy(g => g.SortOrder).ToList();
+            }
         }
         
         public IEnumerable<ProfileQuestionAnswer> GetAllProfileQuestionAnswerOrderbySortOrder(long profileQuestionId)

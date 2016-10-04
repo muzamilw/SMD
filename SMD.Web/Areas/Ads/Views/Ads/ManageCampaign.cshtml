@@ -743,7 +743,7 @@ else
                                     
                                     <div id="thirdCont">
                                      
-                                        <div class="col-lg-12" >
+                                        <div class="col-lg-12" style="height:45px;">
                                             <div style="height:34px;" class="borderbtmline ">
                                                 <div class="col-lg-10 adsubHeading Theme_standard_clr">
 
@@ -765,10 +765,11 @@ else
                                         </div>
 
                                         <div class="form-group margin-btm26">
-                                            <div class="col-lg-2">
+                                            @*<div class="col-lg-2">*@
                                                 @*<label for="txtadditionalCrit" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Advanced matching options</label>*@
-                                            </div>
-                                            <div class="col-lg-10">
+                                            @*</div>*@
+                                            <div class="col-lg-12" style="padding: 23px;padding-top: 0px;">
+
 
                                                 <div class="pull-left filtersDiv_width">
                                                     <button class="btn  btn-danger btnAdsCampaign ButtonWidth filterbtnclrs" id="" data-toggle="modal" data-target=".bs-example-modal-lg" data-bind="click:$root.showAdditionUserCriteria">Profle Insights</button>
@@ -790,26 +791,8 @@ else
 
                                                 </div>
                                                 <div>
-                                                    <div id="MainTble_div" data-bind="foreach: AdCampaignTargetCriterias">
-                                                        <!--ko if:IncludeorExclude() =='0' -->
-                                                        <div class="table-responsive">
-                                                            <table class="table table-striped table-hover">
-                                                                <tbody>
-                                                                    <tr data-bind="visible: $root.visibleTargetAudience(1)  != 1 && $root.visibleTargetAudience(2)  != 1&& $root.visibleTargetAudience(6)  != 1">
-                                                                        <td class="noCriteria"><span>No additional targeting criteria selected</span></td>
-                                                                    </tr> 
-
-                                                                    <!-- ko template: { name: 'answersTemplateforExclude', foreach:$root.campaignModel().AdCampaignTargetCriterias} -->
-                                                                    <!-- /ko -->
-
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                        <br />
-                                                        <br />
-                                                        <!-- /ko -->
-
-                                                        <!--ko if:IncludeorExclude() =='1' -->
+                                                    <div id="MainTble_div">
+                                                
                                                         <div class="table-responsive">
                                                             <table class="table table-striped table-hover">
                                                                 <tbody>
@@ -824,7 +807,6 @@ else
                                                             </table>
                                                         </div>
 
-                                                        <!-- /ko -->
                                                     </div>
                                                 </div>
                                             </div>
@@ -1215,35 +1197,61 @@ else
 
                             <div>
                                 <div class="col-lg-12 marginBottom12">
-                                    <div class="form-group" data-bind="visible:$root.isNewCriteria">
-                                        <div class="col-lg-4 pull-left">
-                                            <div class="form-group">
-                                                <div class="row header">
-                                                    <label class="control-label modelHeading">Criteria</label>
-                                                </div>
-                                                <div class="radio row" style="margin-top:20px;">
-                                                    <input type="radio" name="optionRadioSelectionCriteria" id="optionIncludeCriteria" value="1" data-bind="checked: IncludeorExclude">
-                                                    <label for="optionIncludeCriteria">
-                                                        Include
-                                                    </label>
-                                                </div>
-                                                <div class="radio row" style="margin-top:20px;">
-                                                    <input type="radio" name="optionRadioSelectionCriteria" id="optionExcludeCriteria" value="0" data-bind="checked: IncludeorExclude ">
-                                                    <label for="optionExcludeCriteria">
-                                                        Exclude
-                                                    </label>
+
+                                    <div data-bind="visible:$root.isNewCriteria">
+                                        <div class="col-lg-12" style="padding:0px;">
+                                            <div class="col-lg-2 row header" style="margin-top:20px;">
+                                                <label class="control-label modelHeading">Criteria</label>
+                                            </div>
+                                            <div class="radio col-lg-2 " style="margin-top:20px;">
+                                                <input type="radio" name="optionRadioSelectionCriteria" id="optionIncludeCriteria" value="1" data-bind="checked: IncludeorExclude">
+                                                <label for="optionIncludeCriteria">
+                                                    Include
+                                                </label>
+                                            </div>
+                                            <div class="radio col-lg-2 " style="margin-top:20px;">
+                                                <input type="radio" name="optionRadioSelectionCriteria" id="optionExcludeCriteria" value="0" data-bind="checked: IncludeorExclude ">
+                                                <label for="optionExcludeCriteria">
+                                                    Exclude
+                                                </label>
+                                            </div>
+
+                                            <div class="col-lg-2 "></div>
+                                            <div class="col-lg-2 "></div>
+                                            <div class="col-lg-2 "></div>
+                                        </div>
+                                        
+                                        <div class="clearfix"></div>
+
+                                        <div class="col-lg-12" style="padding:0px;">
+                                            <div class="col-lg-6" style="padding-top:21px;padding-left:0px;">
+                                                <label class="control-label modelHeading">Profile Questions</label>
+                                            </div>
+
+                                            <div class="col-lg-6" style="padding:0px;">
+                                                <div>
+                                                    <div class="filter-block">
+                                                        <div class="form-group pull-right">
+                                                            <input style="width:213px" type="text" class="form-control " placeholder="Search..." data-bind="value: $root.SearchProfileQuestion">
+                                                            <i class="fa fa-search search-icon" data-bind="click: $root.getQuestionByFilter"></i>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-8 pull-right" data-bind="visible: $root.AditionalCriteriaMode() == '2'">
-                                            <div class="row header">
-                                                <label class="control-label modelHeading">Profile Questions</label>
-                                            </div>
+                                        <div class="clearfix"></div>
+                                      
+                                        <div class="pull-right" data-bind="visible: $root.AditionalCriteriaMode() == '2'">
+                                         
                                             <div class="listview parentList set-border padding10 list-type-tiles" data-role="listview" id="lv1">
                                                 <!-- ko template: { name: 'profileQuestionTiles' , foreach: $root.profileQuestionList} --><!-- /ko -->
                                                 <div class="clear-both"></div>
                                             </div>
+                                          
                                         </div>
+
+
+
 
                                         <div class="col-lg-8 pull-right" data-bind="visible: $root.AditionalCriteriaMode() == '4'">
                                             <div class="row header">
@@ -2183,19 +2191,27 @@ else
         </td>
         <!--/ko-->
         <td class="col-lg-1" style=" padding: 0px !important; text-align:right;">
-            <a class="table-link">
-                <span class="fa-stack">
-                    <i class="fa fa-pencil-square-o" data-bind="click:$root.onEditCriteria" data-toggle="modal" data-target=".bs-example-modal-lg"></i>
-                </span>
-            </a>
+
+            <button class="btn grideditbtn">
+                <a class="table-link" style="margin-left:-5px;">
+
+                    <span class="fa-stack">
+
+                        <i style="margin-right:13px;" class="fa fa-pencil-square-o whiteclr" data-bind="click:$root.onEditCriteria" data-toggle="modal" data-target=".bs-example-modal-lg"></i>
+                    </span>
+                </a>
+            </button>
+         
         </td>
-        <td class="col-lg-1" style=" padding: 0px !important;">
-            <a class="table-link danger">
-                <span class="fa-stack">
-                    <i class="fa fa-trash-o" data-bind="click:$root.onDeleteCriteria"></i>
-                </span>
-            </a>
-        </td>
+        <td class="col-lg-1">
+            <button class="btn gridDeletebtn">
+                <a class="table-link danger" style="margin-left:-5px;">
+                    <span class="fa-stack">
+                        <i style="margin-right:15px;" class="fa fa-trash-o whiteclr" data-bind="click:$root.onDeleteCriteria"></i>
+                    </span>
+                </a>
+            </button>
+</td>
     </tr>
     <!--/ko-->
 </script>
@@ -2642,6 +2658,7 @@ else
     <div class="list">
         <div class="parent-list-title" data-bind="click:$root.onChangeProfileQuestion"><span data-bind="text:Question"></span></div>
         <div class="listview set-border padding10 list-type-tiles chlidList" data-role="listview">
+
             <!-- ko template: { name: 'profileQuestionAnsTiles' , foreach: $root.profileAnswerList } --><!-- /ko -->
             <div class="clear-both"></div>
         </div>
@@ -2658,7 +2675,29 @@ else
         <div class="clear-both"></div>
     </div>
     <!--/ko-->
+
+
+
+ 
 </script>
+
+<script id="QuestionsMainGrd" type="text/html">
+    <tr style="cursor: pointer">
+      <td><span data-bind="text: Question,click:$root.onChangeProfileQuestion"></span></td>
+      <td>
+          <!-- ko template: { name: 'AnswersTab' , foreach: $root.GetAnswers(PqId) } --><!-- /ko -->
+          
+      </td>
+    </tr>
+</script>
+
+<script id="AnswersTab" type="text/html">
+    <div>
+        <div class="pull-left" data-bind="text:Answer" style="margin-left:4px;"></div>
+    </div>
+</script>
+
+
 
 <script id="SurveyssQuestionTiles" type="text/html">
     <div class="list">

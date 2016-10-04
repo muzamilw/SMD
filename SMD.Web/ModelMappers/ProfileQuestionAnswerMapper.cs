@@ -260,7 +260,8 @@ namespace SMD.MIS.ModelMappers
             return new ProfileQuestionAnswerDropdown
             {
                 PqAnswerId = source.PqAnswerId,
-                Answer = source.AnswerString
+                Answer = source.AnswerString,
+                PqId=source.PqId??0
             };
         }
 

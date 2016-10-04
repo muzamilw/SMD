@@ -50,6 +50,7 @@ namespace SMD.MIS.Areas.Api.Controllers
                     ProfileQuestionAnswers = _campaignService.GetProfileQuestionAnswersData((int)request.QuestionId).ProfileQuestionAnswers.Select(ques => ques.CreateFromDropdown()),
 
                 };
+               
             }
             else if (request.RequestId == 4) //  get survey question data 
             {
