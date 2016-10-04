@@ -160,10 +160,17 @@ h1 small, h2 small, h3 small, h1 .small, h2 .small, h3 .small {
         border-color: #1c5c87;
     }
 
+.btn-darkgray {
+     background-color: darkgray;
+    border-color: darkgray;
+}
+
 .btn-success {
      background-color: #5fb761;
     border-color: #27ae60;
 }
+
+
 .backclr {
     background-color:gainsboro!important;
     border-color:gainsboro!important;
@@ -5598,3 +5605,9 @@ background-image: url(/Images/crowdcentz_logo.png) !important;
     font-size:18px!important;
 }
 
+
+
+
+.validation-summary-errors {
+    color:red;
+}
