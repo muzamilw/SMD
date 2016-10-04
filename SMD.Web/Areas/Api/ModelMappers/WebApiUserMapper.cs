@@ -73,13 +73,13 @@ namespace SMD.MIS.Areas.Api.ModelMappers
             
                 Email = source.Email,
              
-                Gender = source.Gender,
+                Gender = source.Gender.HasValue ? source.Gender.Value : 1,
           
-                DOB = source.DOB,
+                DOB = source.DOB.HasValue ? source.DOB.Value : DateTime.Now,
           
-                IndustryId = source.IndustryId,
+                IndustryId = source.IndustryId.HasValue ? source.IndustryId : 0,
 
-                IndustryName = source.Industry.IndustryName,
+                IndustryName = source.Industry != null ? source.Industry.IndustryName : "",
 
                 GenderString = source.Gender == 1 ? "Male" : "Female",
          
