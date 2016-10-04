@@ -85,7 +85,7 @@ namespace SMD.MIS.Areas.Api.ModelMappers
          
                 ImageUrl = !string.IsNullOrEmpty(source.Company.Logo) ? HttpContext.Current.Request.Url.Scheme + "://" +
                 HttpContext.Current.Request.Url.Host + "/" + source.ProfileImage + "?" + DateTime.Now : string.Empty,
-                Title = source.Title
+                Title = source.Title == null ? "": source.Title
                
             };
 

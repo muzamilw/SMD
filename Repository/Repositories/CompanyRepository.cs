@@ -73,6 +73,7 @@ namespace SMD.Repository.Repositories
             company.ReplyEmail = email;
             company.CompanyName = fullname;
             company.ReferralCode = Guid.NewGuid().ToString();
+            company.Status = 1;
             db.Companies.Add(company);
             db.SaveChanges();
             UserCompanyId = company.CompanyId;

@@ -4,6 +4,7 @@ using FluentScheduler;
 using Microsoft.Practices.Unity;
 using SMD.Implementation.Identity;
 using SMD.Interfaces.Services;
+using SMD.Interfaces.Repository;
 using SMD.Models.Common;
 using SMD.Models.DomainModels;
 using SMD.Models.IdentityModels;
@@ -25,6 +26,10 @@ namespace SMD.Implementation.Services
 
         [Dependency]
         private static IPaypalService PaypalService { get; set; }
+
+
+         [Dependency]
+        private static IPayOutHistoryRepository payoutRepository { get; set; }
 
 
         /// <summary>
@@ -708,15 +713,17 @@ namespace SMD.Implementation.Services
         /// Deducting the amount from account only and not performing the paypal transaction. this will be enabled later on.
         /// </summary>
         /// <param name="companyId"></param>
-        /// <param name="amount"></param>
+        /// <param name="CentzAmount"></param>
         /// <returns>1 for success, 2 for balance insufficient, 3 for amount less than minimum limit, 0 for error</returns>
-        public static int PerformUserPayout(string UserId,int companyId,double amount)
+        public static int PerformUserPayout(string UserId,int companyId,double CentzAmount, string PayPalId )
         {
 
             var cashoutMinLimit = ConfigurationManager.AppSettings["CashoutMinLimit"];
 
-            if (amount < (Convert.ToDouble(cashoutMinLimit)))
+            if (CentzAmount < (Convert.ToDouble(cashoutMinLimit)))
                 return 3;
+
+            double dollarAmount = CentzAmount / 100;
 
 
             //PaypalService = UnityConfig.UnityContainer.Resolve<IPaypalService>();
@@ -742,12 +749,12 @@ namespace SMD.Implementation.Services
                 
             
                     var userVirtualAccount = accounts.Where(g => g.AccountType == (int)AccountType.VirtualAccount).FirstOrDefault();
-                    if (amount < userVirtualAccount.AccountBalance)
+                    if (CentzAmount < userVirtualAccount.AccountBalance)
                     {
                         // PayPal Request Model 
                         var requestModel = new MakePaypalPaymentRequest
                         {
-                            Amount = (decimal)amount,
+                            Amount = (decimal)CentzAmount,
                             RecieverEmails = new List<string> { preferedAccount },
                             SenderEmail = smdUser.Company.PaypalCustomerId
                         };
@@ -755,15 +762,21 @@ namespace SMD.Implementation.Services
                         // Stripe + Invoice Work 
                         //PaypalService.MakeAdaptiveImplicitPayment(requestModel);
                         // Update Accounts
-                        UpdateAccountsUserPayout(company, smdUser.Company, amount, dbContext);
+                        UpdateAccountsUserPayout(company, smdUser.Company, CentzAmount, dbContext);
+
+
 
                         // Save Changes
                         dbContext.SaveChanges();
 
+                        //creating payout history record
+                        var payOutHistory = new PayOutHistory { CentzAmount = CentzAmount, CompanyId = companyId, DollarAmount = dollarAmount, RequestDateTime = DateTime.Now, TargetPayoutAccount = PayPalId };
+                        payoutRepository.Add(payOutHistory);
+
                         // Email To User 
                         BackgroundEmailManagerService.EmailNotificationPayOutToUser(dbContext, user);
                         //email to smd admin
-                        BackgroundEmailManagerService.EmailNotificationPayOutToAdmin(dbContext,user,company,amount);
+                        BackgroundEmailManagerService.EmailNotificationPayOutToAdmin(dbContext,user,company,CentzAmount);
                         return 1;
                     } else
                     {

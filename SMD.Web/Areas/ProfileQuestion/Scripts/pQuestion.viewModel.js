@@ -51,8 +51,10 @@ define("pQuestion/pQuestion.viewModel",
                     isShowArchiveBtn = ko.observable(true),
                     canSubmitForApproval = ko.observable(true),
                     isShowSurveyAns = ko.observable(false),
+                    IsPauseBtnVisible = ko.observable(false),
                     criteriaCount = ko.observable(0),
                     IsOnAddLocationAdded = ko.observable(false),
+                    isNewCampaignVisible = ko.observable(false),
                     profileAnswerList = ko.observable([]),
                     questiontype = ko.observableArray([{
                         typeId: 1,
@@ -386,6 +388,7 @@ define("pQuestion/pQuestion.viewModel",
                     //},
                     // On editing of existing PQ
                     onEditProfileQuestion = function (item) {
+                        IsPauseBtnVisible(false);
                        
                         $("#panelArea,#topArea,#Heading_div").css("display", "none");
                         
@@ -422,6 +425,7 @@ define("pQuestion/pQuestion.viewModel",
                             selectedQuestion().statusValue("Live");
                             isTerminateBtnVisible(true);
                             isNewCampaignVisible(true);
+                            IsPauseBtnVisible(true);
 
                         } else if (selectedQuestion().status() == 4) {
                             $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
@@ -475,6 +479,14 @@ define("pQuestion/pQuestion.viewModel",
                         selectedQuestion().reset();
 
                     },
+                       SavePassChanges = function () {
+                           if (selectedQuestion() != undefined)
+                               onSaveProfileQuestion(4);
+
+                           $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
+                           $("#btnSubmitForApproval,#saveBtn,.lang_delSurvey,.table-link").css("display", "inline-block");
+                           $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign").removeAttr('disabled');
+                       },
                     
                  getSelectedItems=function(items,pqid) {
                      return ko.utils.arrayFilter(items, function (item,index) {
@@ -1894,7 +1906,10 @@ define("pQuestion/pQuestion.viewModel",
                     surveyQuestionList: surveyQuestionList,
                     surveyquestionList: surveyquestionList,
                     saveSurveyQuestionCriteria: saveSurveyQuestionCriteria,
-                        updateSurveyCriteriass: updateSurveyCriteriass
+                    updateSurveyCriteriass: updateSurveyCriteriass,
+                    isNewCampaignVisible: isNewCampaignVisible,
+                    SavePassChanges: SavePassChanges,
+                    IsPauseBtnVisible: IsPauseBtnVisible
                  
                 };
             })()

@@ -203,6 +203,7 @@
     <Compile Include="Repositories\CompanyBranchRepository.cs" />
     <Compile Include="Repositories\CompanyRepository.cs" />
     <Compile Include="Repositories\CompanyAspNetUsersRepository.cs" />
+    <Compile Include="Repositories\PayOutHistoryRepository.cs" />
     <Compile Include="Repositories\GameRepository.cs" />
     <Compile Include="Repositories\DamImageRepository.cs" />
     <Compile Include="Repositories\CouponCategoriesRepository.cs" />

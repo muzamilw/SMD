@@ -349,7 +349,7 @@ define("Coupons/Coupons.viewModel",
                 } else if (item.Status == 6) {
                     item.StatusValue = "Approval Rejected"
                 } else if (item.Status == 7) {
-                    item.StatusValue = ("Terminated by user");
+                    item.StatusValue = ("Remove");
                 } else if (item.Status == 9) {
                     item.StatusValue = ("Completed");
                 } else if (item.Status == 8) {
@@ -719,6 +719,7 @@ define("Coupons/Coupons.viewModel",
                     isTerminateBtnVisible(false);
                     isNewCampaignVisible(false);
                     isShowArchiveBtn(false);
+                    IsPauseBtnVisible(false);
 
                     //hide the main menu;
                     collapseMainMenu();
@@ -758,6 +759,7 @@ define("Coupons/Coupons.viewModel",
                                     if (couponModel().Status() == 1) {
 
                                         isNewCampaign(true);
+                                        //isTerminateBtnVisible(true);
                                         couponModel().StatusValue("Draft");
                                         IsSubmitBtnVisible(true);
                                     } else if (couponModel().Status() == 2) {
@@ -776,8 +778,9 @@ define("Coupons/Coupons.viewModel",
                                         //$("#btnPauseCampaign").css("display", "inline-block");
                                         //$("#btnCancel,#btnPauseCampaign,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
                                         couponModel().StatusValue("Live");
-                                        isTerminateBtnVisible(true);
-                                        isNewCampaignVisible(true);
+                                        IsPauseBtnVisible(true);
+                                        //isTerminateBtnVisible(true);
+                                        //isNewCampaignVisible(true);
 
                                         $("#btnCancel").css("display", "block");
                                     } else if (couponModel().Status() == 4) {
@@ -788,7 +791,9 @@ define("Coupons/Coupons.viewModel",
                                         //$("#btnCancel,#btnResumeCampagin,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
                                         //$("#btnCancel").css("display", "none");
                                         couponModel().StatusValue("Paused");
-                                        IsResumeBtnVisible(true);
+                                        IsSubmitBtnVisible(true);
+                                        //isTerminateBtnVisible(true);
+                                       //IsResumeBtnVisible(true);
 
                                     } else if (couponModel().Status() == 5) {
                                         $("#btnCancel").css("display", "block");
@@ -797,17 +802,19 @@ define("Coupons/Coupons.viewModel",
                                         couponModel().StatusValue("Approval Rejected");
                                         $("#btnCancel").css("display", "block");
                                         IsSubmitBtnVisible(true);
+                                        //isTerminateBtnVisible(true);
                                         IsRejectionReasonVisible(true);
                                     } else if (couponModel().Status() == 7) {
-                                        couponModel().StatusValue("Terminated by user");
+                                        couponModel().StatusValue("Remove");
                                         $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
                                         $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
                                         $("#saveBtn").css("display", "none");
-                                        $("#btnPauseCampaign").css("display", "inline-block");
+                                        $("#btnPauseCampaign").css("display", "none");
                                         $("#btnCancel,#btnPauseCampaign,#btnCopyCampaign,#btnArchive").removeAttr('disabled');
                                        $("#btnCancel").css("display", "none");
-                                        isNewCampaignVisible(true);
-                                        isShowArchiveBtn(true);
+                                        //isNewCampaignVisible(true);
+                                        //isShowArchiveBtn(true);
+
                                     } else if (item.Status == 9) {
                                       //  $("#btnCancel").css("display", "block");
                                         item.StatusValue = ("Completed");

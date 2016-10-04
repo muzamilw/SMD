@@ -80,8 +80,19 @@ namespace SMD.Common
                 return null;
             }
 
-           
-            string[] paths = existingImage.Split(new string[] { "SMD_Content" }, StringSplitOptions.None);
+            string[] paths = null;
+
+            if (existingImage.Contains("?" ))
+            {
+                var existingImageold = existingImage.Split(new string[] { "?" }, StringSplitOptions.None);
+                paths = existingImageold[0].Split(new string[] { "SMD_Content" }, StringSplitOptions.None);
+            }
+            else
+            {
+                paths = existingImage.Split(new string[] { "SMD_Content" }, StringSplitOptions.None);
+            }
+
+            
             string url = HttpContext.Current.Server.MapPath("~/SMD_Content/" + paths[paths.Length - 1]);
             string savePath = mapPath + "\\" +CompanyId+ ".png";
             File.Copy(url, savePath, true);
@@ -90,6 +101,27 @@ namespace SMD.Common
             return savePath;
 
         }
+
+
+
+        public static string RemoveQueryStringByKey(string url, string key)
+        {
+            var uri = new Uri(url);
+
+            // this gets all the query string key value pairs as a collection
+            var newQueryString = HttpUtility.ParseQueryString(uri.Query);
+
+            // this removes the key if exists
+            newQueryString.Remove(key);
+
+            // this gets the page path from root without QueryString
+            string pagePathWithoutQueryString = uri.GetLeftPart(UriPartial.Path);
+
+            return newQueryString.Count > 0
+                ? String.Format("{0}?{1}", pagePathWithoutQueryString, newQueryString)
+                : pagePathWithoutQueryString;
+        }
+
 
 
         public static void GenerateThumbNail(string sourcefile, string destinationfile, int width)

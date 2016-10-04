@@ -48,7 +48,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// User Payout
         /// </summary>
         [ApiExceptionCustom]
-          public BaseApiResponse Post(string authenticationToken, string UserId, string PayoutAmount)
+          public BaseApiResponse Post(string authenticationToken, string UserId, string CentzAmount, string Phone, string PayPalId)
         {
             
             var response = new BaseApiResponse { Message = "Success", Status = true };
@@ -62,7 +62,7 @@ namespace SMD.MIS.Areas.Api.Controllers
                     throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
                 }
 
-                var cashoutResult = TransactionManager.PerformUserPayout(UserId, user.CompanyId.Value, Convert.ToDouble( PayoutAmount));
+                var cashoutResult = TransactionManager.PerformUserPayout(UserId, user.CompanyId.Value, Convert.ToDouble(CentzAmount), PayPalId);
 
                 if (cashoutResult == 1)//success
                     return response;
