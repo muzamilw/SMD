@@ -71,6 +71,8 @@
     <None Include="GetSurvayQestionsAnswered.sql" />
     <None Include="GetSurvayCardsAnswered.sql" />
     <None Include="GetCouponByID.sql" />
+    <None Include="getUserActivitiesOverTime.sql" />
+    <None Include="getPayoutVSRevenueOverTime.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="GetRevenueOverTime.sql" />

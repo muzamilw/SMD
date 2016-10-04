@@ -1134,9 +1134,9 @@ define("survey/survey.viewModel",
 
                                 if (reachedAudience() > 0) {
 
-                                    if (userBaseData().isStripeIntegrated == true) {
+                                    if (userBaseData().isStripeIntegrated == false) {
                                         stripeChargeCustomer.show(function () {
-                                            userBaseData().isStripeIntegrated =false;
+                                            userBaseData().isStripeIntegrated =true;
                                             saveSurveyQuestion(2);
                                         }, 2000, 'Enter your details');
                                     } else {

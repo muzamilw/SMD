@@ -716,8 +716,18 @@ define("pQuestion/pQuestion.viewModel",
                     // Save Question / Add 
                     SaveChanges = function ()
                     {
+                        if (userBaseData().isStripeIntegrated == false) {
 
-                        onSaveProfileQuestion(2);
+                            stripeChargeCustomer.show(function () {
+                                userBaseData().isStripeIntegrated = true;
+                                onSaveProfileQuestion(2);
+                            }, 2000, 'Enter your details');
+
+
+                        } else {
+                            onSaveProfileQuestion(2); (2);
+                        }
+
                     },
                     SaveAsDraft = function ()
                     {
@@ -825,6 +835,7 @@ define("pQuestion/pQuestion.viewModel",
                                 QuestionId: item.PQQuestionID(),
                             }, {
                                 success: function (data) {
+                                    debugger;
                                     if (data != null) {
                                         _.each(data.ProfileQuestionAnswers, function (question) {
                                             question.PQID = question.PqId;

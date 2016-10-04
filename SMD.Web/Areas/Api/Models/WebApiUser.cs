@@ -154,5 +154,10 @@ namespace SMD.MIS.Areas.Api.Models
         public string VoucherSecretKey { get; set; }
 
         public string Title { get; set; }
+
+
+        public string GenderString { get; set; }
+
+        public string IndustryName { get; set; }
     }
 }

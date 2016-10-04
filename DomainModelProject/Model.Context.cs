@@ -326,5 +326,22 @@ namespace DomainModelProject
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUserCounts_Result>("GetUserCounts");
         }
+    
+        public virtual int getUserActivitiesOverTime(Nullable<System.DateTime> dateFrom, Nullable<System.DateTime> dateTo, Nullable<int> granularity)
+        {
+            var dateFromParameter = dateFrom.HasValue ?
+                new ObjectParameter("DateFrom", dateFrom) :
+                new ObjectParameter("DateFrom", typeof(System.DateTime));
+    
+            var dateToParameter = dateTo.HasValue ?
+                new ObjectParameter("DateTo", dateTo) :
+                new ObjectParameter("DateTo", typeof(System.DateTime));
+    
+            var granularityParameter = granularity.HasValue ?
+                new ObjectParameter("Granularity", granularity) :
+                new ObjectParameter("Granularity", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("getUserActivitiesOverTime", dateFromParameter, dateToParameter, granularityParameter);
+        }
     }
 }
