@@ -737,11 +737,11 @@
           <Property Name="RequestDateTime" Type="datetime" />
           <Property Name="CentzAmount" Type="float" />
           <Property Name="DollarAmount" Type="float" />
-          <Property Name="StageOneStatus" Type="bit" />
+          <Property Name="StageOneStatus" Type="int" />
           <Property Name="StageOneRejectionReason" Type="nvarchar" MaxLength="500" />
           <Property Name="StageOneEventDate" Type="datetime" />
           <Property Name="StageOneUserId" Type="nvarchar" MaxLength="128" />
-          <Property Name="StageTwoStatus" Type="bit" />
+          <Property Name="StageTwoStatus" Type="int" />
           <Property Name="StageTwoRejectionReason" Type="nvarchar" MaxLength="500" />
           <Property Name="StageTwoEventDate" Type="datetime" />
           <Property Name="StageTwoUserId" Type="nvarchar" MaxLength="128" />
@@ -2479,10 +2479,28 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Parameter Name="UserId" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="GetDealMetric" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetLiveCampaignCountOverTime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CampaignType" Type="int" Mode="In" />
+          <Parameter Name="DateFrom" Type="datetime" Mode="In" />
+          <Parameter Name="DateTo" Type="datetime" Mode="In" />
+          <Parameter Name="Granularity" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getPayoutVSRevenueOverTime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DateFrom" Type="datetime" Mode="In" />
+          <Parameter Name="DateTo" Type="datetime" Mode="In" />
+          <Parameter Name="Granularity" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetProducts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserID" Type="nvarchar" Mode="In" />
           <Parameter Name="FromRow" Type="int" Mode="In" />
           <Parameter Name="ToRow" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetRevenueByCampaignOverTime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+          <Parameter Name="CampaignType" Type="int" Mode="In" />
+          <Parameter Name="DateFrom" Type="datetime" Mode="In" />
+          <Parameter Name="DateTo" Type="datetime" Mode="In" />
+          <Parameter Name="Granularity" Type="int" Mode="In" />
         </Function>
         <Function Name="GetRevenueOverTime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CompanyId" Type="int" Mode="In" />
@@ -5392,7 +5410,25 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <End Role="AdCampaign" EntitySet="AdCampaigns" />
             <End Role="AdCampaignClickRateHistory" EntitySet="AdCampaignClickRateHistories" />
           </AssociationSet>
-          <FunctionImport Name="getUserActivitiesOverTime">
+          <FunctionImport Name="getUserActivitiesOverTime" ReturnType="Collection(SMDDevModel.getUserActivitiesOverTime_Result)">
+            <Parameter Name="DateFrom" Mode="In" Type="DateTime" />
+            <Parameter Name="DateTo" Mode="In" Type="DateTime" />
+            <Parameter Name="Granularity" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetLiveCampaignCountOverTime" ReturnType="Collection(SMDDevModel.GetLiveCampaignCountOverTime_Result)">
+            <Parameter Name="CampaignType" Mode="In" Type="Int32" />
+            <Parameter Name="DateFrom" Mode="In" Type="DateTime" />
+            <Parameter Name="DateTo" Mode="In" Type="DateTime" />
+            <Parameter Name="Granularity" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getPayoutVSRevenueOverTime" ReturnType="Collection(SMDDevModel.getPayoutVSRevenueOverTime_Result)">
+            <Parameter Name="DateFrom" Mode="In" Type="DateTime" />
+            <Parameter Name="DateTo" Mode="In" Type="DateTime" />
+            <Parameter Name="Granularity" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetRevenueByCampaignOverTime" ReturnType="Collection(SMDDevModel.GetRevenueByCampaignOverTime_Result)">
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="CampaignType" Mode="In" Type="Int32" />
             <Parameter Name="DateFrom" Mode="In" Type="DateTime" />
             <Parameter Name="DateTo" Mode="In" Type="DateTime" />
             <Parameter Name="Granularity" Mode="In" Type="Int32" />
@@ -6584,6 +6620,25 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="GetLiveCampaignCountOverTime_Result">
+          <Property Type="String" Name="Granual" Nullable="false" MaxLength="24" />
+          <Property Type="Int32" Name="campCount" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="getPayoutVSRevenueOverTime_Result">
+          <Property Type="String" Name="Granual" Nullable="false" MaxLength="24" />
+          <Property Type="Decimal" Name="revStats" Nullable="false" Precision="1" Scale="1" />
+          <Property Type="Decimal" Name="PayoutStats" Nullable="false" Precision="1" Scale="1" />
+        </ComplexType>
+        <ComplexType Name="GetRevenueByCampaignOverTime_Result">
+          <Property Type="String" Name="Granual" Nullable="false" MaxLength="24" />
+          <Property Type="Decimal" Name="Revenue" Nullable="false" Precision="1" Scale="1" />
+        </ComplexType>
+        <ComplexType Name="getUserActivitiesOverTime_Result">
+          <Property Type="String" Name="Granual" Nullable="false" MaxLength="14" />
+          <Property Type="Int32" Name="newStats" Nullable="false" />
+          <Property Type="Int32" Name="loginStats" Nullable="false" />
+          <Property Type="Int32" Name="deleteStats" Nullable="false" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -8162,7 +8217,41 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="getUserActivitiesOverTime" FunctionName="SMDDevModel.Store.getUserActivitiesOverTime" />
+          <FunctionImportMapping FunctionImportName="getUserActivitiesOverTime" FunctionName="SMDDevModel.Store.getUserActivitiesOverTime" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SMDDevModel.getUserActivitiesOverTime_Result">
+                <ScalarProperty Name="Granual" ColumnName="Granual" />
+                <ScalarProperty Name="newStats" ColumnName="newStats" />
+                <ScalarProperty Name="loginStats" ColumnName="loginStats" />
+                <ScalarProperty Name="deleteStats" ColumnName="deleteStats" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetLiveCampaignCountOverTime" FunctionName="SMDDevModel.Store.GetLiveCampaignCountOverTime">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SMDDevModel.GetLiveCampaignCountOverTime_Result">
+                <ScalarProperty Name="Granual" ColumnName="Granual" />
+                <ScalarProperty Name="campCount" ColumnName="campCount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getPayoutVSRevenueOverTime" FunctionName="SMDDevModel.Store.getPayoutVSRevenueOverTime">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SMDDevModel.getPayoutVSRevenueOverTime_Result">
+                <ScalarProperty Name="Granual" ColumnName="Granual" />
+                <ScalarProperty Name="revStats" ColumnName="revStats" />
+                <ScalarProperty Name="PayoutStats" ColumnName="PayoutStats" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetRevenueByCampaignOverTime" FunctionName="SMDDevModel.Store.GetRevenueByCampaignOverTime">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SMDDevModel.GetRevenueByCampaignOverTime_Result">
+                <ScalarProperty Name="Granual" ColumnName="Granual" />
+                <ScalarProperty Name="Revenue" ColumnName="Revenue" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

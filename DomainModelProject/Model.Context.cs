@@ -327,7 +327,7 @@ namespace DomainModelProject
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUserCounts_Result>("GetUserCounts");
         }
     
-        public virtual int getUserActivitiesOverTime(Nullable<System.DateTime> dateFrom, Nullable<System.DateTime> dateTo, Nullable<int> granularity)
+        public virtual ObjectResult<getUserActivitiesOverTime_Result> getUserActivitiesOverTime(Nullable<System.DateTime> dateFrom, Nullable<System.DateTime> dateTo, Nullable<int> granularity)
         {
             var dateFromParameter = dateFrom.HasValue ?
                 new ObjectParameter("DateFrom", dateFrom) :
@@ -341,7 +341,70 @@ namespace DomainModelProject
                 new ObjectParameter("Granularity", granularity) :
                 new ObjectParameter("Granularity", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("getUserActivitiesOverTime", dateFromParameter, dateToParameter, granularityParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getUserActivitiesOverTime_Result>("getUserActivitiesOverTime", dateFromParameter, dateToParameter, granularityParameter);
+        }
+    
+        public virtual ObjectResult<GetLiveCampaignCountOverTime_Result> GetLiveCampaignCountOverTime(Nullable<int> campaignType, Nullable<System.DateTime> dateFrom, Nullable<System.DateTime> dateTo, Nullable<int> granularity)
+        {
+            var campaignTypeParameter = campaignType.HasValue ?
+                new ObjectParameter("CampaignType", campaignType) :
+                new ObjectParameter("CampaignType", typeof(int));
+    
+            var dateFromParameter = dateFrom.HasValue ?
+                new ObjectParameter("DateFrom", dateFrom) :
+                new ObjectParameter("DateFrom", typeof(System.DateTime));
+    
+            var dateToParameter = dateTo.HasValue ?
+                new ObjectParameter("DateTo", dateTo) :
+                new ObjectParameter("DateTo", typeof(System.DateTime));
+    
+            var granularityParameter = granularity.HasValue ?
+                new ObjectParameter("Granularity", granularity) :
+                new ObjectParameter("Granularity", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetLiveCampaignCountOverTime_Result>("GetLiveCampaignCountOverTime", campaignTypeParameter, dateFromParameter, dateToParameter, granularityParameter);
+        }
+    
+        public virtual ObjectResult<getPayoutVSRevenueOverTime_Result> getPayoutVSRevenueOverTime(Nullable<System.DateTime> dateFrom, Nullable<System.DateTime> dateTo, Nullable<int> granularity)
+        {
+            var dateFromParameter = dateFrom.HasValue ?
+                new ObjectParameter("DateFrom", dateFrom) :
+                new ObjectParameter("DateFrom", typeof(System.DateTime));
+    
+            var dateToParameter = dateTo.HasValue ?
+                new ObjectParameter("DateTo", dateTo) :
+                new ObjectParameter("DateTo", typeof(System.DateTime));
+    
+            var granularityParameter = granularity.HasValue ?
+                new ObjectParameter("Granularity", granularity) :
+                new ObjectParameter("Granularity", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getPayoutVSRevenueOverTime_Result>("getPayoutVSRevenueOverTime", dateFromParameter, dateToParameter, granularityParameter);
+        }
+    
+        public virtual ObjectResult<GetRevenueByCampaignOverTime_Result> GetRevenueByCampaignOverTime(Nullable<int> companyId, Nullable<int> campaignType, Nullable<System.DateTime> dateFrom, Nullable<System.DateTime> dateTo, Nullable<int> granularity)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var campaignTypeParameter = campaignType.HasValue ?
+                new ObjectParameter("CampaignType", campaignType) :
+                new ObjectParameter("CampaignType", typeof(int));
+    
+            var dateFromParameter = dateFrom.HasValue ?
+                new ObjectParameter("DateFrom", dateFrom) :
+                new ObjectParameter("DateFrom", typeof(System.DateTime));
+    
+            var dateToParameter = dateTo.HasValue ?
+                new ObjectParameter("DateTo", dateTo) :
+                new ObjectParameter("DateTo", typeof(System.DateTime));
+    
+            var granularityParameter = granularity.HasValue ?
+                new ObjectParameter("Granularity", granularity) :
+                new ObjectParameter("Granularity", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetRevenueByCampaignOverTime_Result>("GetRevenueByCampaignOverTime", companyIdParameter, campaignTypeParameter, dateFromParameter, dateToParameter, granularityParameter);
         }
     }
 }
