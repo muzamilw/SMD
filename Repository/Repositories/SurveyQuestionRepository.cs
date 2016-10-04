@@ -56,8 +56,8 @@ namespace SMD.Repository.Repositories
         /// </summary>
         public IEnumerable<SurveyQuestion> SearchSurveyQuestions(SurveySearchRequest request, out int rowCount)
         {
-           
-           
+
+
             //if (request == null)
             //{
             //    int fromRow = 0;
@@ -80,42 +80,42 @@ namespace SMD.Repository.Repositories
             //}
             //else
             //{
-                int fromRow = (request.PageNo - 1) * request.PageSize;
-                int toRow = request.PageSize;
-                Expression<Func<SurveyQuestion, bool>> query = null;
+            int fromRow = (request.PageNo - 1) * request.PageSize;
+            int toRow = request.PageSize;
+            Expression<Func<SurveyQuestion, bool>> query = null;
 
-                if (request.fmode == true)// admin
-                {
-                     query =
-                        question =>
-                            (string.IsNullOrEmpty(request.SearchText) ||
-                             (question.Question.Contains(request.SearchText)))
-                             && (request.CountryFilter == 0 || question.CountryId == request.CountryFilter)
-                             && (request.LanguageFilter == 0 || question.LanguageId == request.LanguageFilter)
-                             && (request.Status == 0 || question.Status == request.Status)
-                            
-                             && question.CompanyId == null;
+            if (request.fmode == true)// admin
+            {
+                query =
+                   question =>
+                       (string.IsNullOrEmpty(request.SearchText) ||
+                        (question.Question.Contains(request.SearchText)))
+                        && (request.CountryFilter == 0 || question.CountryId == request.CountryFilter)
+                        && (request.LanguageFilter == 0 || question.LanguageId == request.LanguageFilter)
+                        && (request.Status == 0 || question.Status == request.Status)
 
-                }
+                        && question.CompanyId == null;
+
+            }
             else
-                {
-                    query =
-                        question =>
-                            (string.IsNullOrEmpty(request.SearchText) ||
-                             (question.Question.Contains(request.SearchText)))
-                             && (request.CountryFilter == 0 || question.CountryId == request.CountryFilter)
-                             && (request.LanguageFilter == 0 || question.LanguageId == request.LanguageFilter)
-                             && (request.Status == 0 || question.Status == request.Status)
-                             && question.CompanyId == this.CompanyId;
-                          
-                }
+            {
+                query =
+                    question =>
+                        (string.IsNullOrEmpty(request.SearchText) ||
+                         (question.Question.Contains(request.SearchText)))
+                         && (request.CountryFilter == 0 || question.CountryId == request.CountryFilter)
+                         && (request.LanguageFilter == 0 || question.LanguageId == request.LanguageFilter)
+                         && (request.Status == 0 || question.Status == request.Status)
+                         && question.CompanyId == this.CompanyId;
 
-                rowCount = DbSet.Count(query);
-                return DbSet.Where(query).OrderBy(g=>g.SqId)
-                        .Skip(fromRow)
-                        .Take(toRow)
-                        .ToList();
-            
+            }
+
+            rowCount = DbSet.Count(query);
+            return DbSet.Where(query).OrderByDescending(g => g.CreationDate).ThenByDescending( g=> g.StartDate)
+                    .Skip(fromRow)
+                    .Take(toRow)
+                    .ToList();
+
         }
 
         /// <summary>
