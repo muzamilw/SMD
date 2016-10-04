@@ -21,7 +21,7 @@ BEGIN
 -- interfering with SELECT statements.
 SET NOCOUNT ON;
 DECLARE @StartDate DATE = '20000101', @NumberOfYears INT = 30;
-
+select 'vvvvvvvvvvvvvv' Granual, 0 newStats, 0 loginStats,  0 deleteStats
 -- prevent set or regional settings from interfering with 
 -- interpretation of dates / literals
 
