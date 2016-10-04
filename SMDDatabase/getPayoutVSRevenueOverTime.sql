@@ -9,7 +9,7 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-alter PROCEDURE [dbo].[getPayoutVSRevenueOverTime] (
+CREATE PROCEDURE [dbo].[getPayoutVSRevenueOverTime] (
 @DateFrom DateTime, 
 @DateTo	DateTime,
 @Granularity INT		----- 1 for day, 2 for week, 3 for month and 4 for year
@@ -20,7 +20,7 @@ BEGIN
 -- interfering with SELECT statements.
 SET NOCOUNT ON;
 DECLARE @StartDate DATE = '20000101', @NumberOfYears INT = 30;
-select 'nnnnnnnnnnnnnnnnnnnnnnnn' Granual , 0 revStats, 0 PayoutStats
+select 'nnnnnnnnnnnnnnnnnnnnnnnn' Granual , 0.0 revStats, 0.0 PayoutStats
 -- prevent set or regional settings from interfering with 
 -- interpretation of dates / literals
 
@@ -79,11 +79,11 @@ DECLARE @CutoffDate DATE = DATEADD(YEAR, @NumberOfYears, @StartDate);
 	)
 	DECLARE @payout TABLE (
 	Granual  VARCHAR(200),
-	PayoutStats bigint
+	PayoutStats float
 	)
 	DECLARE @rev TABLE (
 	Granual  VARCHAR(200),
-	revStats bigint
+	revStats float
 	)
 		
 		

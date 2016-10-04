@@ -73,6 +73,8 @@
     <None Include="GetCouponByID.sql" />
     <None Include="getUserActivitiesOverTime.sql" />
     <None Include="getPayoutVSRevenueOverTime.sql" />
+    <None Include="GetRevenueByCampaignOverTime.sql" />
+    <None Include="GetLiveCampaignCountOverTime.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="GetRevenueOverTime.sql" />
