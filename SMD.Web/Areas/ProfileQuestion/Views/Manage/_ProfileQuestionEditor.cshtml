@@ -804,7 +804,7 @@
                             <button class="btn  btn-info " id="btnStopAndTerminate" data-bind="visible:$root.isTerminateBtnVisible" style="width: 80%;margin-bottom:10px;">Stop & Terminate Early</button>
                             <button class="btn  btn-danger " id="btnArchive" data-bind="visible: $root.isShowArchiveBtn" style="width: 80%;margin-bottom:10px;">Archive Campaign</button>
                             <button class="btn  btn-info Theme_standard_clr" id="btnCopyCampaign" style="display:none;">Create Copy - New Campaign</button>@*visible: $root.isNewCampaignVisible*@
-                            @*<button style="width:229px;margin-bottom:10px;" class="btn  btn-success" id="btnPauseCampaign" data-bind="click:$root.changeStatus(4),  visible: $root.IsPauseBtnVisible()" style="display:none;">Pause</button>*@
+                            <button style="width:229px;margin-bottom:10px;" class="btn  btn-success" id="btnPauseCampaign" data-bind="click:$root.SavePassChanges,  visible: $root.IsPauseBtnVisible()" style="display:none;">Pause</button>
                             <button class="btn  btn-success" id="btnResumeCampagin" style="display:none;">Resume</button>
                         </div>
                         @*<button class="btn  btn-warning" id="saveBtn" data-bind="click:$root.saveCampaignData, enable: $root.hasChangesOnQuestion, css: { 'btn-warning': $root.hasChangesOnQuestion }">Save</button>*@
