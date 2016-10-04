@@ -301,7 +301,7 @@ define("ads/ads.viewModel",
                
               
                
-
+                $("#logo_div").css("display", "block");
 
                 $("#panelArea").css("display", "none");
 
@@ -355,7 +355,7 @@ define("ads/ads.viewModel",
                isWelcomeScreenVisible(false);
                $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
                $("#btnSubmitForApproval,#saveBtn,.table-link").css("display", "inline-block");
-               $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign,#btnStopAndTerminate,#btnCopyCampaign").removeAttr('disabled');
+               $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign,#btnStopAndTerminate,#btnCopyCampaign,#imgLogo").removeAttr('disabled');
                // showMainMenu();
            },
             closeNewCampaignDialog = function () {
@@ -393,7 +393,7 @@ define("ads/ads.viewModel",
 
                             $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
                             $("#btnSubmitForApproval,#saveBtn,.table-link").css("display", "inline-block");
-                            $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign,#btnStopAndTerminate,#btnCopyCampaign").removeAttr('disabled');
+                            $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign,#btnStopAndTerminate,#btnCopyCampaign,#imgLogo").removeAttr('disabled');
 
                             $("#headlabel, #Heading_div").css("display", "block");
 
@@ -1502,7 +1502,7 @@ define("ads/ads.viewModel",
                     isTerminateBtnVisible(false);
                     isNewCampaignVisible(false);
                     isShowArchiveBtn(false);
-                    
+                    $("#logo_div").css("display", "block");
                     $(".hideInCoupons").css("display", "none");
 
                     $("#MarketobjDiv").css("display", "none");
@@ -1668,7 +1668,7 @@ define("ads/ads.viewModel",
                                     } else if (campaignModel().Status() == 2) {
                                         $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
                                         
-
+                                        $('#imgLogo').prop('disabled', true);
 
                                         $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
                                         $("#saveBtn").css("display", "none")

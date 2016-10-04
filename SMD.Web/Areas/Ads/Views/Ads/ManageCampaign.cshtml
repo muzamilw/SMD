@@ -2857,33 +2857,37 @@ else
     var bannerImage1 = "";
     var bannerImage2 = "";
     var bannerImage3 = "";
-    var mode = 1;
+    var dammode = 1;
     function changeIframeSrc(mode1) {
        
-        mode = mode1;
-       
-        $("#iframe").attr("src", "/DamImages?mode=" + mode1 + "&selection=true");
 
-        console.log(mode);
+        var dresult = $('#imgLogo').is(':disabled');
+        if (dresult == false) {
+            dammode = mode1;
+
+            $("#iframe").attr("src", "/DamImages?mode=" + mode1 + "&selection=true");
+
+            console.log(dammode);
+        }
     }
     function iframeLoaded() {
         var iframeBody = $('body', $('#iframe')[0].contentWindow.document);
         $(iframeBody).on('click', '.damImgContainer img', function (event) {
-            console.log(mode);
-            if (mode == 6) {
+            console.log(dammode);
+            if (dammode == 6) {
                 $("#imgLogo").attr("src", this.src).change();
                 logoImage = this.src;
 
                 $("#btnDamClose").click();
-            } else if (mode == 2) {
+            } else if (dammode == 2) {
                 $("#bannerImage1").attr("src", this.src).change();
                 bannerImage1 = this.src;
                 $("#btnDamClose").click();
-            } else if (mode == 3) {
+            } else if (dammode == 3) {
                 $("#bannerImage2").attr("src", this.src).change();
                 bannerImage2 = this.src;
                 $("#btnDamClose").click();
-            } else if (mode == 4) {
+            } else if (dammode == 4) {
                 $("#bannerImage3").attr("src", this.src).change();
                 bannerImage3 = this.src;
                 $("#btnDamClose").click();
