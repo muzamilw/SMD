@@ -10,26 +10,28 @@ using System.Web.Http;
 
 namespace SMD.MIS.Areas.Api.Controllers
 {
-    public class ActiveUserController : ApiController
+    public class UserController : ApiController
     {
         #region Private
 
         private readonly IActiveUser activeUser;
+        private readonly IManageUserService _IManageUserService;
 
         #endregion
 
         #region Constructor 
 
-        public ActiveUserController(IActiveUser activeUser) {
+        public UserController(IActiveUser activeUser, IManageUserService _IManageUserService) {
             this.activeUser = activeUser;
+            this._IManageUserService = _IManageUserService;
         }
 
         #endregion
 
         // GET: api/ActiveUser
-        public IEnumerable<GetActiveVSNewUsers_Result> Get()
+        public IEnumerable<GetUserCounts_Result> Get()
         {
-            return activeUser.GetActiveVSNewUsers();
+            return _IManageUserService.GetUserCounts();
         }
 
         // GET: api/ActiveUser/5

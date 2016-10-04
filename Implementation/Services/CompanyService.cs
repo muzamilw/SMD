@@ -151,8 +151,7 @@ namespace SMD.Implementation.Services
             var currentCompany = companyRepository.GetCompanyWithoutChilds();
             if (currentCompany != null)
             {
-                if (logoImageBytes != null)
-                {
+               
                     string smdContentPath = ConfigurationManager.AppSettings["SMD_Content"];
                     HttpServerUtility server = HttpContext.Current.Server;
                     string mapPath = server.MapPath(smdContentPath + "/Users/" + requestData.CompanyId);
@@ -165,7 +164,9 @@ namespace SMD.Implementation.Services
 
                    currentCompany.Logo = ImageHelper.SaveImage(mapPath, requestData.Logo, string.Empty, string.Empty,
                         "blah", logoImageBytes, requestData.CompanyId);
-                }
+
+
+                
                 var defaultBranch = _companyBranchRepository.GetDefaultCompanyBranch();
                 if (defaultBranch == null)
                 {

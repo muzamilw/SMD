@@ -118,6 +118,9 @@ namespace SMD.Repository.BaseRepository
         /// </summary>
         public DbSet<AdCampaignResponse> AdCampaignResponses { get; set; }
 
+
+        public DbSet<AdCampaignClickRateHistory> AdCampaignClickRateHistory { get; set; }
+
         /// <summary>
         /// AdCampaign Target Criterias
         /// </summary>
@@ -294,7 +297,15 @@ namespace SMD.Repository.BaseRepository
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAdminDashBoardInsights_Result>("GetAdminDashBoardInsights");
         }
-
+        public ObjectResult<getCampaignsByStatus_Result> getCampaignsByStatus()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getCampaignsByStatus_Result>("getCampaignsByStatus");
+        }
+        public ObjectResult<GetUserCounts_Result> GetUserCounts()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUserCounts_Result>("GetUserCounts");
+        }
+        //
         public ObjectResult<GetRevenueOverTime_Result> GetRevenueOverTime(int CompanyId, DateTime DateFrom, DateTime DateTo, int Granularity)
         {
             var CID = new ObjectParameter("CompanyId", CompanyId);

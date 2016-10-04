@@ -258,7 +258,12 @@
     //}
     window.onload = function () {
         try {
-            parent.iframeLoaded();
+
+            if (GetURLParameter("mode") != 1)
+                parent.iframeLoaded();
+            else
+                parent.iframeLoadedCProfile();
+
         } catch (e) {
 
         }

@@ -1,6 +1,6 @@
-﻿
+﻿USE [SMDv2]
 GO
-/****** Object:  StoredProcedure [dbo].[SearchCoupons]    Script Date: 9/23/2016 6:38:03 AM ******/
+/****** Object:  StoredProcedure [dbo].[SearchCoupons]    Script Date: 10/3/2016 4:46:07 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -56,7 +56,7 @@ DECLARE @source geography = geography::Point(@lat, @lon, 4326)
 	 where c.CompanyId = vchr.CompanyId) as LogoUrl,
 	isnull(cpopt.Price,0) Price, isnull(cpopt.Savings,0) Savings, isnull(SwapCost,0) SwapCost, vchr.CompanyId, CouponActiveMonth,CouponActiveYear
 	,DATEFROMPARTS(vchr.CouponActiveYear, vchr.CouponActiveMonth,day(EOMONTH ( DATEFROMPARTS(vchr.CouponActiveYear, vchr.CouponActiveMonth,1)))) eod,
-	DATEFROMPARTS(vchr.CouponActiveYear, vchr.CouponActiveMonth,1) strt,
+	vchr.ApprovalDateTime strt,
 
 	case when vchr.CouponListingMode = 3 then 0 
 	else
@@ -93,16 +93,16 @@ DECLARE @source geography = geography::Point(@lat, @lon, 4326)
 		)
 		
 		and 
-		(--unlimited listing  -- valid for 3 months
-		( CouponListingMode = 2 and @currentDate between DATEFROMPARTS(vchr.CouponActiveYear, vchr.CouponActiveMonth,1) and dateadd(month,2,DATEFROMPARTS(vchr.CouponActiveYear, vchr.CouponActiveMonth,day(EOMONTH ( DATEFROMPARTS(vchr.CouponActiveYear, vchr.CouponActiveMonth,1)))))
-			and  vchr.CouponQtyPerUser > (select count(*) from [dbo].[UserPurchasedCoupon] upc where upc.couponID = vchr.couponid and upc.userId = @UserId) 
+		(--unlimited listing  -- valid for 6 months
+		( CouponListingMode = 2 and @currentDate between vchr.ApprovalDateTime and dateadd(day,14,vchr.ApprovalDateTime)--dateadd(month,2,DATEFROMPARTS(vchr.CouponActiveYear, vchr.CouponActiveMonth,day(EOMONTH ( DATEFROMPARTS(vchr.CouponActiveYear, vchr.CouponActiveMonth,1)))))
+			--and  vchr.CouponQtyPerUser > (select count(*) from [dbo].[UserPurchasedCoupon] upc where upc.couponID = vchr.couponid and upc.userId = @UserId) 
 		)
 			--
 		or
 		--free more - valid for 1 month now.
 		(
-			CouponListingMode = 1 and @currentDate  between DATEFROMPARTS(vchr.CouponActiveYear, vchr.CouponActiveMonth,1) and DATEFROMPARTS(vchr.CouponActiveYear, vchr.CouponActiveMonth,30))
-			and vchr.CouponIssuedCount < 10
+			CouponListingMode = 1 and @currentDate  between vchr.ApprovalDateTime and dateadd(day,14,vchr.ApprovalDateTime))
+			--and vchr.CouponIssuedCount < 10
 		)
 		or 
 		--nationwide mode valid for 3 months but higher priority
@@ -116,7 +116,7 @@ DECLARE @source geography = geography::Point(@lat, @lon, 4326)
 
 		
 		)
-		group by vchr.CouponId, CouponTitle,vchr.CouponImage1,LogoUrl,cpopt.Price, cpopt.Savings,SwapCost,vchr.CompanyId,CouponActiveMonth,CouponActiveYear,vchr.LocationLAT, vchr.LocationLON,CouponListingMode, comp.companyname, vchr.LocationTitle, vchr.LocationCity
+		group by vchr.CouponId, CouponTitle,vchr.CouponImage1,LogoUrl,cpopt.Price, cpopt.Savings,SwapCost,vchr.CompanyId,CouponActiveMonth,CouponActiveYear,vchr.LocationLAT, vchr.LocationLON,CouponListingMode, comp.companyname, vchr.LocationTitle, vchr.LocationCity,vchr.ApprovalDateTime
 		)as items
 		where distance < @distance
 	order by distance

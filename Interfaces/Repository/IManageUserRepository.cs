@@ -24,5 +24,6 @@ namespace SMD.Interfaces.Repository
 
         List<vw_CompanyUsers> GetCompaniesByUserId(string UserId);
         User GetLoginUser(string sUserId = "");
+        IEnumerable<GetUserCounts_Result> GetUserCounts();
     }
 }

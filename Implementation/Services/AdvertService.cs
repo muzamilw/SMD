@@ -52,6 +52,8 @@ namespace SMD.Implementation.Services
         private readonly ICampaignCategoriesRepository _campaignCategoriesRepository;
         private readonly IUserFavouriteCouponRepository _userFavouriteCouponRepository;
 
+        private readonly IAdCampaignClickRateHistoryRepository _adCampaignClickRateHistoryRepository;
+
         #region Private Funcs
         private ApplicationUserManager UserManager
         {
@@ -214,7 +216,7 @@ namespace SMD.Implementation.Services
             IStripeService stripeService, WebApiUserService webApiUserService, ICompanyRepository companyRepository, IAdCampaignResponseRepository adcampaignResponseRepository
             , ICouponCategoryRepository couponCategoryRepository
             , ICampaignCategoriesRepository campaignCategoriesRepository
-            , IUserFavouriteCouponRepository userFavouriteCouponRepository, ICurrencyRepository currencyRepository)
+            , IUserFavouriteCouponRepository userFavouriteCouponRepository, ICurrencyRepository currencyRepository, IAdCampaignClickRateHistoryRepository adCampaignClickRateHistoryRepository)
         {
             this._adCampaignRepository = adCampaignRepository;
             this._languageRepository = languageRepository;
@@ -241,6 +243,7 @@ namespace SMD.Implementation.Services
 
             this._userFavouriteCouponRepository = userFavouriteCouponRepository;
             this._currencyRepository = currencyRepository;
+            this._adCampaignClickRateHistoryRepository = adCampaignClickRateHistoryRepository;
         }
 
         /// <summary>
@@ -363,10 +366,20 @@ namespace SMD.Implementation.Services
             if (campaignModel.Status == 2)
             {
                 campaignModel.SubmissionDateTime = DateTime.Now;
+
+
+              
             }
 
             _adCampaignRepository.Add(campaignModel);
             _adCampaignRepository.SaveChanges();
+
+            //maintaining click rate history
+           
+                _adCampaignClickRateHistoryRepository.Add(new AdCampaignClickRateHistory { CampaignID = campaignModel.CampaignId, ClickRate = campaignModel.ClickRate, RateChangeDateTime = DateTime.Now });
+                _adCampaignClickRateHistoryRepository.SaveChanges();
+
+
 
             string[] paths = SaveImages(campaignModel);
             if (paths != null && paths.Count() > 0)
@@ -488,6 +501,9 @@ namespace SMD.Implementation.Services
         {
             // campaignModel.UserId = _adCampaignRepository.LoggedInUserIdentity;
             var user = UserManager.Users.Where(g => g.Id == _adCampaignRepository.LoggedInUserIdentity).SingleOrDefault();
+            var campaignDb = _adCampaignRepository.Find(campaignModel.CampaignId);
+
+
             if (user != null)
                 campaignModel.CreatedBy = user.FullName;
             string[] paths = SaveImages(campaignModel);
@@ -573,8 +589,15 @@ namespace SMD.Implementation.Services
             campaignModel.StartDateTime = new DateTime(2005, 1, 1);//campaignModel.StartDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
             campaignModel.EndDateTime = new DateTime(2040, 1, 1);//campaignModel.EndDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
 
-            //todo pilot: harcoding ClickRate = 1 for every campaign
-            campaignModel.ClickRate = 1;
+          
+            //maintaining click rate history
+            if (campaignDb.ClickRate != campaignModel.ClickRate)
+            {
+                _adCampaignClickRateHistoryRepository.Add(new AdCampaignClickRateHistory { CampaignID = campaignModel.CampaignId, ClickRate = campaignModel.ClickRate, RateChangeDateTime = DateTime.Now });
+                _adCampaignClickRateHistoryRepository.SaveChanges();
+            }
+
+
 
             if (campaignModel.Status == 3)
             {
@@ -1245,6 +1268,12 @@ namespace SMD.Implementation.Services
         //{
         //    return _couponCodeRepository.UpdateCouponSettings(VoucherCode, SecretKey, UserId);
         //}
+
+        public IEnumerable<getCampaignsByStatus_Result> getCampaignsByStatus() {
+            return this._campaignCategoriesRepository.getCampaignsByStatus();
+        
+        }
+
         #endregion
 
         //public string CampaignVerifyQuestionById(int CampaignID)
@@ -1252,5 +1281,7 @@ namespace SMD.Implementation.Services
         //    return DbSet.Where(i => i.CampaignId == CampaignID).FirstOrDefault().VerifyQuestion;
 
         //}
+
+
     }
 }

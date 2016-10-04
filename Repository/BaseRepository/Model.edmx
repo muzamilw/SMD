@@ -117,6 +117,15 @@
           <Property Name="MaxDailyBudget" Type="float" />
           <Property Name="SubmissionDateTime" Type="datetime" />
         </EntityType>
+        <EntityType Name="AdCampaignClickRateHistory">
+          <Key>
+            <PropertyRef Name="ClickRateId" />
+          </Key>
+          <Property Name="ClickRateId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CampaignID" Type="bigint" />
+          <Property Name="ClickRate" Type="float" />
+          <Property Name="RateChangeDateTime" Type="datetime" />
+        </EntityType>
         <EntityType Name="AdCampaignResponse">
           <Key>
             <PropertyRef Name="ResponseID" />
@@ -1178,6 +1187,18 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             </Principal>
             <Dependent Role="AdCampaign">
               <PropertyRef Name="LanguageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AdCampaignClickRateHistory_AdCampaign">
+          <End Role="AdCampaign" Type="Self.AdCampaign" Multiplicity="0..1" />
+          <End Role="AdCampaignClickRateHistory" Type="Self.AdCampaignClickRateHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdCampaign">
+              <PropertyRef Name="CampaignID" />
+            </Principal>
+            <Dependent Role="AdCampaignClickRateHistory">
+              <PropertyRef Name="CampaignID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2430,6 +2451,11 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Parameter Name="AccountType" Type="int" Mode="In" />
           <Parameter Name="Rows" Type="int" Mode="In" />
         </Function>
+        <Function Name="getUserActivitiesOverTime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DateFrom" Type="datetime" Mode="In" />
+          <Parameter Name="DateTo" Type="datetime" Mode="In" />
+          <Parameter Name="Granularity" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetUserCounts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="ResetProductsUserResponses" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SearchCampaigns" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -2469,6 +2495,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
         <EntityContainer Name="SMDModelStoreContainer">
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AdCampaign" EntityType="Self.AdCampaign" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AdCampaignClickRateHistory" EntityType="Self.AdCampaignClickRateHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AdCampaignResponse" EntityType="Self.AdCampaignResponse" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AdCampaignTargetCriteria" EntityType="Self.AdCampaignTargetCriteria" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AdCampaignTargetLocation" EntityType="Self.AdCampaignTargetLocation" Schema="dbo" store:Type="Tables" />
@@ -2675,6 +2702,10 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <AssociationSet Name="FK_AdCampaign_Language" Association="Self.FK_AdCampaign_Language">
             <End Role="Language" EntitySet="Language" />
             <End Role="AdCampaign" EntitySet="AdCampaign" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AdCampaignClickRateHistory_AdCampaign" Association="Self.FK_AdCampaignClickRateHistory_AdCampaign">
+            <End Role="AdCampaign" EntitySet="AdCampaign" />
+            <End Role="AdCampaignClickRateHistory" EntitySet="AdCampaignClickRateHistory" />
           </AssociationSet>
           <AssociationSet Name="FK_AdCampaignResponse_AdCampaign" Association="Self.FK_AdCampaignResponse_AdCampaign">
             <End Role="AdCampaign" EntitySet="AdCampaign" />
@@ -3668,6 +3699,16 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySet Name="vw_ReferringCompanies" EntityType="DomainModels.vw_ReferringCompanies" />
           <FunctionImport Name="getCampaignsByStatus" ReturnType="Collection(DomainModels.getCampaignsByStatus_Result)" />
           <FunctionImport Name="GetUserCounts" ReturnType="Collection(DomainModels.GetUserCounts_Result)" />
+          <EntitySet Name="AdCampaignClickRateHistories" EntityType="DomainModels.AdCampaignClickRateHistory" />
+          <AssociationSet Name="FK_AdCampaignClickRateHistory_AdCampaign" Association="DomainModels.FK_AdCampaignClickRateHistory_AdCampaign">
+            <End Role="AdCampaign" EntitySet="AdCampaigns" />
+            <End Role="AdCampaignClickRateHistory" EntitySet="AdCampaignClickRateHistories" />
+          </AssociationSet>
+          <FunctionImport Name="getUserActivitiesOverTime">
+            <Parameter Name="DateFrom" Mode="In" Type="DateTime" />
+            <Parameter Name="DateTo" Mode="In" Type="DateTime" />
+            <Parameter Name="Granularity" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -4990,6 +5031,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <NavigationProperty Name="SurveyQuestionTargetCriterias" Relationship="DomainModels.FK_SurveyQuestionTargetCriteria_AdCampaign" FromRole="AdCampaign" ToRole="SurveyQuestionTargetCriteria" />
           <NavigationProperty Name="Company" Relationship="DomainModels.FK_AdCampaign_Company" FromRole="AdCampaign" ToRole="Company" />
           <NavigationProperty Name="CampaignEventHistories" Relationship="DomainModels.FK_CampaignEventHistory_AdCampaign" FromRole="AdCampaign" ToRole="CampaignEventHistory" />
+          <NavigationProperty Name="AdCampaignClickRateHistories" Relationship="DomainModels.FK_AdCampaignClickRateHistory_AdCampaign" FromRole="AdCampaign" ToRole="AdCampaignClickRateHistory" />
         </EntityType>
         <Association Name="FK_AdCampaign_Language">
           <End Type="DomainModels.Language" Role="Language" Multiplicity="0..1" />
@@ -6618,6 +6660,28 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="Int32" Name="C30Days" Nullable="true" />
           <Property Type="Int32" Name="C60Days" Nullable="true" />
         </ComplexType>
+        <EntityType Name="AdCampaignClickRateHistory">
+          <Key>
+            <PropertyRef Name="ClickRateId" />
+          </Key>
+          <Property Name="ClickRateId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CampaignID" Type="Int64" />
+          <Property Name="ClickRate" Type="Double" />
+          <Property Name="RateChangeDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AdCampaign" Relationship="DomainModels.FK_AdCampaignClickRateHistory_AdCampaign" FromRole="AdCampaignClickRateHistory" ToRole="AdCampaign" />
+        </EntityType>
+        <Association Name="FK_AdCampaignClickRateHistory_AdCampaign">
+          <End Type="DomainModels.AdCampaign" Role="AdCampaign" Multiplicity="0..1" />
+          <End Type="DomainModels.AdCampaignClickRateHistory" Role="AdCampaignClickRateHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdCampaign">
+              <PropertyRef Name="CampaignId" />
+            </Principal>
+            <Dependent Role="AdCampaignClickRateHistory">
+              <PropertyRef Name="CampaignID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -8229,6 +8293,17 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="AdCampaignClickRateHistories">
+            <EntityTypeMapping TypeName="DomainModels.AdCampaignClickRateHistory">
+              <MappingFragment StoreEntitySet="AdCampaignClickRateHistory">
+                <ScalarProperty Name="RateChangeDateTime" ColumnName="RateChangeDateTime" />
+                <ScalarProperty Name="ClickRate" ColumnName="ClickRate" />
+                <ScalarProperty Name="CampaignID" ColumnName="CampaignID" />
+                <ScalarProperty Name="ClickRateId" ColumnName="ClickRateId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="getUserActivitiesOverTime" FunctionName="SMDModel.Store.getUserActivitiesOverTime" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

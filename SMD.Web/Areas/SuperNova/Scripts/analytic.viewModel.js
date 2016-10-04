@@ -20,11 +20,11 @@ define("analytic/analytic.viewModel",
 					intializeDashboardInsightsData = function(){
 						DashboardInsightsData.push(new model.DashboardInsightsModel("Users who logged in"));
 						DashboardInsightsData.push(new model.DashboardInsightsModel("New Users who registered"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Advertisers who created a NEW campaign(Not Done)"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("New Video Ad campaigns(Not Done)"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("New Display Ad campaigns(Not Done)"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("New Survey campaigns(Not Done)"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("New Poll campaigns(Not Done)"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Advertisers who created a NEW campaign"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("New Video Ad campaigns"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("New Display Ad campaigns"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("New Survey campaigns"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("New Poll campaigns"));
 						DashboardInsightsData.push(new model.DashboardInsightsModel("",true));
 						DashboardInsightsData.push(new model.DashboardInsightsModel("# Answered", true));
 						DashboardInsightsData.push(new model.DashboardInsightsModel("Video Ads (Ad click charged)"));
@@ -76,12 +76,14 @@ define("analytic/analytic.viewModel",
 											DashboardInsightsData()[data[i].ordr].caC(data[i].ca!= null ? data[i].ca:0);
 											DashboardInsightsData()[data[i].ordr].auC(data[i].au != null ? data[i].au:0);
 											DashboardInsightsData()[data[i].ordr].aeC(data[i].ae != null ? data[i].ae:0);
+											DashboardInsightsData()[data[i].ordr].ordr(data[i].ordr);
 										}else if(data[i].pMonth == "prev" ){
 											DashboardInsightsData()[data[i].ordr].usL(data[i].us != null ? data[i].us:0);
 											DashboardInsightsData()[data[i].ordr].ukL(data[i].uk != null ? data[i].uk:0);
 											DashboardInsightsData()[data[i].ordr].caL(data[i].ca!= null ? data[i].ca:0);
 											DashboardInsightsData()[data[i].ordr].auL(data[i].au != null ? data[i].au:0);
 											DashboardInsightsData()[data[i].ordr].aeL(data[i].ae != null ? data[i].ae:0);
+											DashboardInsightsData()[data[i].ordr].ordr(data[i].ordr);
 										}
 										
 									}
@@ -218,7 +220,8 @@ define("analytic/analytic.viewModel",
 					ReloadAnalytic:ReloadAnalytic,
 					getCampaignsByStatus : getCampaignsByStatus,
 					CampaignsByStatusData:CampaignsByStatusData,
-					getUserCounts:getUserCounts
+					getUserCounts:getUserCounts,
+					UserCountsData:UserCountsData
 
                 };
             })()

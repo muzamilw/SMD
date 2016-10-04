@@ -91,6 +91,7 @@ namespace DomainModelProject
         public virtual DbSet<CampaignEventHistory> CampaignEventHistories { get; set; }
         public virtual DbSet<EventStatus> EventStatuses { get; set; }
         public virtual DbSet<vw_ReferringCompanies> vw_ReferringCompanies { get; set; }
+        public virtual DbSet<AdCampaignClickRateHistory> AdCampaignClickRateHistories { get; set; }
     
         public virtual ObjectResult<SearchCoupons_Result> SearchCoupons(Nullable<int> categoryId, Nullable<int> type, string keywords, Nullable<int> distance, string lat, string lon, string userId, Nullable<int> fromRow, Nullable<int> toRow)
         {
@@ -324,6 +325,23 @@ namespace DomainModelProject
         public virtual ObjectResult<GetUserCounts_Result> GetUserCounts()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUserCounts_Result>("GetUserCounts");
+        }
+    
+        public virtual int getUserActivitiesOverTime(Nullable<System.DateTime> dateFrom, Nullable<System.DateTime> dateTo, Nullable<int> granularity)
+        {
+            var dateFromParameter = dateFrom.HasValue ?
+                new ObjectParameter("DateFrom", dateFrom) :
+                new ObjectParameter("DateFrom", typeof(System.DateTime));
+    
+            var dateToParameter = dateTo.HasValue ?
+                new ObjectParameter("DateTo", dateTo) :
+                new ObjectParameter("DateTo", typeof(System.DateTime));
+    
+            var granularityParameter = granularity.HasValue ?
+                new ObjectParameter("Granularity", granularity) :
+                new ObjectParameter("Granularity", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("getUserActivitiesOverTime", dateFromParameter, dateToParameter, granularityParameter);
         }
     }
 }

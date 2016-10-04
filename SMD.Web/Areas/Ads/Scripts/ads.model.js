@@ -221,6 +221,7 @@
                   ChannelType: ChannelType,
                   VideoBytes: VideoBytes,
                   LogoUrl: LogoUrl,
+                  ClickRate: ClickRate,
                   
               }),
               // Has Changes
