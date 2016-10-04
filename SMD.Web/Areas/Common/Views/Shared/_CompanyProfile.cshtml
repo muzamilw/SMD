@@ -97,7 +97,7 @@
                                         <div class="main-box-body" style="padding-bottom: 0;">
                                             <div class="form-group">
                                                 <label for="ddlSalutation" class="requiredlabel">Salutation </label>
-                                                <select class="form-control" id="ddlSalutation" name="Missing Salutation" data-bind="options: $root.genderList, optionsText: 'name', optionsValue: 'id', optionsCaption: '<' + 'Select Gender'+ '>' , value:salutation, validationOnElement: salutation"></select>
+                                                <select class="form-control" id="ddlSalutation" name="Missing Salutation" data-bind="options: $root.genderList, optionsText: 'name', optionsValue: 'id', optionsCaption: '<' + 'Select Title'+ '>' , value:salutation, validationOnElement: salutation"></select>
                                             </div>
                                             <div class="form-group">
                                                 <label for="txtFirstName" class="requiredlabel">Full Name </label>
@@ -399,6 +399,10 @@
                                                 <label for="txtVatNo">VAT Number</label>
                                                 <input type="text" id="txtVatNo" class="form-control" placeholder="Enter VAT Number" data-bind="value:vatNumber">
                                             </div>
+
+                                            
+
+                                            <input id="hdlogchanged" type="checkbox" name="hdlogchanged" data-bind="value:LogoChanged" style="display:none">
                                         </div>
                                     </div>
 
@@ -490,7 +494,10 @@
             if (mode == 1) {
                 $("#imgLogoCProfile").attr("src", this.src).change();
                 logoImage = this.src;
-                alert();
+                
+                $('#hdlogchanged').prop('checked', true);
+                $('#hdlogchanged').trigger('change');
+                
 
                 cpoDamClose.click();
             } else if (mode == 2) {

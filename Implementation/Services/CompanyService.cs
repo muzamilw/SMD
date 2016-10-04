@@ -162,6 +162,7 @@ namespace SMD.Implementation.Services
                         Directory.CreateDirectory(mapPath);
                     }
 
+                if ( requestData.LogoChanged)
                    currentCompany.Logo = ImageHelper.SaveImage(mapPath, requestData.Logo, string.Empty, string.Empty,
                         "blah", logoImageBytes, requestData.CompanyId);
 

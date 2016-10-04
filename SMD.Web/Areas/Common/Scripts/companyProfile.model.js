@@ -39,7 +39,7 @@
                 
               
               //Fields for User profil-------------
-              salutation = ko.observable(specifiedSolutation).extend({ required: true, message:"Solutation is required" }),
+              salutation = ko.observable(specifiedSolutation).extend({ required: true, message:"Title is required" }),
               profession = ko.observable(specifiedProfession).extend({ required: true, message: "Profession is required" }),
               fullName = ko.observable(specifiedfullName).extend({ required: true, message: "Name is required" }),
               email = ko.observable(specifiedEmail).extend({ required: true, message: "Email is required" }),
@@ -72,6 +72,7 @@
               userId = ko.observable(specifiedUserId),
               branchLocationLat = ko.observable(specifiedLat),
               branchLocationLong = ko.observable(specifiedLong),
+              LogoChanged = ko.observable(false),
               //-------------------
                 
                 //FacebookHandleui = ko.computed({
@@ -167,7 +168,9 @@
                   businessStartDate: businessStartDate,
                   vatNumber: vatNumber,
                   profession: profession,
-                  creditCard: creditCard
+                  creditCard: creditCard,
+                  logoImage: logoImage,
+                  LogoChanged: LogoChanged
 
               }),
               // Has Changes
@@ -187,6 +190,7 @@
                   Tel2: Tel2(),
 
                   Logo: logoImage == "" ? Logo() : logoImage,
+                 
 
                   StripeCustomerId: creditCard(),
                   SalesEmail: SalesEmail(),
@@ -227,7 +231,8 @@
                   BusinessStartDate: businessStartDate() ? moment(businessStartDate()).format(ist.utcFormat) + 'Z' : undefined,
                   VatNumber: vatNumber(),
                   BranchLocationLat: branchLocationLat(),
-                  BranchLocationLong: branchLocationLong()
+                  BranchLocationLong: branchLocationLong(),
+                  LogoChanged: logoImage == "" ? false : true,
 
           };
           };
@@ -291,7 +296,8 @@
               isSubmit: isSubmit,
               userId: userId,
               branchLocationLat: branchLocationLat,
-              branchLocationLong: branchLocationLong
+              branchLocationLong: branchLocationLong,
+              LogoChanged: LogoChanged
             
           };
       };

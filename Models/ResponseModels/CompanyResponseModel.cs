@@ -102,6 +102,6 @@ namespace SMD.Models.ResponseModels
 
         }
 
-     
+        public bool LogoChanged { get; set; }
     }
 }

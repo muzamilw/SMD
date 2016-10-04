@@ -220,6 +220,9 @@ namespace SMD.Repository.BaseRepository
         /// </summary>
         public DbSet<Invoice> Invoices { get; set; }
 
+        public DbSet<PayOutHistory> PayOutHistory { get; set; }
+        
+
 
         /// <summary>
         /// Invoice Details

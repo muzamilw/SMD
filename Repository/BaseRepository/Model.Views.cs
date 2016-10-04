@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets187913C40A8B5F4C3C1D28E8BA71E5D12A221747466B07EA5D0AEEA55BDFA69F))]
+[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetsEEC419BA8B312C320D40A66114545F4C47775A3F6AC2CA7E48AED5015337E9A5))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -17,18 +17,18 @@ namespace Edm_EntityMappingGeneratedViews
     /// <Summary>
     /// The type contains views for EntitySets and AssociationSets that were generated at design time.
     /// </Summary>
-    public sealed class ViewsForBaseEntitySets187913C40A8B5F4C3C1D28E8BA71E5D12A221747466B07EA5D0AEEA55BDFA69F : System.Data.Mapping.EntityViewContainer
+    public sealed class ViewsForBaseEntitySetsEEC419BA8B312C320D40A66114545F4C47775A3F6AC2CA7E48AED5015337E9A5 : System.Data.Mapping.EntityViewContainer
     {
         
         /// <Summary>
         /// The constructor stores the views for the extents and also the hash values generated based on the metadata and mapping closure and views.
         /// </Summary>
-        public ViewsForBaseEntitySets187913C40A8B5F4C3C1D28E8BA71E5D12A221747466B07EA5D0AEEA55BDFA69F()
+        public ViewsForBaseEntitySetsEEC419BA8B312C320D40A66114545F4C47775A3F6AC2CA7E48AED5015337E9A5()
         {
             this.EdmEntityContainerName = "BaseDbContext";
             this.StoreEntityContainerName = "SMDModelStoreContainer";
-            this.HashOverMappingClosure = "119145d296286ed3e01fc4b5be1c33c881247cc690bffb76f9171744f0e7f11e";
-            this.HashOverAllExtentViews = "c6396008f97f02912be9d39b43ec7d4b896a42b977272ec9adcbe7314add4da5";
+            this.HashOverMappingClosure = "7fa13d1af1059d78e949fc18852e585281e9a0bdb68fc4c4752c583172451dbf";
+            this.HashOverAllExtentViews = "4cfcf3d7b940f2416a1440b83131a92194bdf261ebb76cc447de5b103356434d";
             this.ViewCount = 124;
         }
         
@@ -1768,9 +1768,88 @@ namespace Edm_EntityMappingGeneratedViews
         }
         
         /// <Summary>
-        /// return view for SMDModelStoreContainer.PayOutHistory
+        /// return view for SMDModelStoreContainer.City
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView41()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.City", @"
+    SELECT VALUE -- Constructing City
+        [SMDModel.Store.City](T1.City_CityId, T1.City_CityName, T1.City_IsCapital, T1.City_CountryId, T1.City_GeoLONG, T1.City_GeoLAT)
+    FROM (
+        SELECT 
+            T.CityId AS City_CityId, 
+            T.CityName AS City_CityName, 
+            T.IsCapital AS City_IsCapital, 
+            T.CountryId AS City_CountryId, 
+            T.GeoLONG AS City_GeoLONG, 
+            T.GeoLAT AS City_GeoLAT, 
+            True AS _from0
+        FROM BaseDbContext.Cities AS T
+    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for SMDModelStoreContainer.CampaignEventHistory
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView42()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.CampaignEventHistory", @"
+    SELECT VALUE -- Constructing CampaignEventHistory
+        [SMDModel.Store.CampaignEventHistory](T1.CampaignEventHistory_EventId, T1.CampaignEventHistory_EventStatusId, T1.CampaignEventHistory_CampaignID, T1.CampaignEventHistory_EventDateTime, T1.CampaignEventHistory_CouponId, T1.CampaignEventHistory_SQID, T1.CampaignEventHistory_PQID)
+    FROM (
+        SELECT 
+            T.EventId AS CampaignEventHistory_EventId, 
+            T.EventStatusId AS CampaignEventHistory_EventStatusId, 
+            T.CampaignID AS CampaignEventHistory_CampaignID, 
+            T.EventDateTime AS CampaignEventHistory_EventDateTime, 
+            T.CouponId AS CampaignEventHistory_CouponId, 
+            T.SQID AS CampaignEventHistory_SQID, 
+            T.PQID AS CampaignEventHistory_PQID, 
+            True AS _from0
+        FROM BaseDbContext.CampaignEventHistories AS T
+    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for SMDModelStoreContainer.EventStatuses
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView43()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.EventStatuses", @"
+    SELECT VALUE -- Constructing EventStatuses
+        [SMDModel.Store.EventStatuses](T1.EventStatuses_EventStatusId, T1.EventStatuses_EventName)
+    FROM (
+        SELECT 
+            T.EventStatusId AS EventStatuses_EventStatusId, 
+            T.EventName AS EventStatuses_EventName, 
+            True AS _from0
+        FROM BaseDbContext.EventStatuses AS T
+    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for SMDModelStoreContainer.AdCampaignClickRateHistory
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView44()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.AdCampaignClickRateHistory", @"
+    SELECT VALUE -- Constructing AdCampaignClickRateHistory
+        [SMDModel.Store.AdCampaignClickRateHistory](T1.AdCampaignClickRateHistory_ClickRateId, T1.AdCampaignClickRateHistory_CampaignID, T1.AdCampaignClickRateHistory_ClickRate, T1.AdCampaignClickRateHistory_RateChangeDateTime)
+    FROM (
+        SELECT 
+            T.ClickRateId AS AdCampaignClickRateHistory_ClickRateId, 
+            T.CampaignID AS AdCampaignClickRateHistory_CampaignID, 
+            T.ClickRate AS AdCampaignClickRateHistory_ClickRate, 
+            T.RateChangeDateTime AS AdCampaignClickRateHistory_RateChangeDateTime, 
+            True AS _from0
+        FROM BaseDbContext.AdCampaignClickRateHistories AS T
+    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for SMDModelStoreContainer.PayOutHistory
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView45()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.PayOutHistory", "\r\n    SELECT VALUE -- Constructing PayOutHistory\r\n        [SMDModel.Store.PayOutH" +
                     "istory](T1.PayOutHistory_PayOutId, T1.PayOutHistory_CompanyId, T1.PayOutHistory_" +
@@ -1793,85 +1872,6 @@ namespace Edm_EntityMappingGeneratedViews
                     ", \r\n            T.TargetPayoutAccount AS PayOutHistory_TargetPayoutAccount, \r\n  " +
                     "          True AS _from0\r\n        FROM BaseDbContext.PayOutHistories AS T\r\n    )" +
                     " AS T1");
-        }
-        
-        /// <Summary>
-        /// return view for SMDModelStoreContainer.City
-        /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView42()
-        {
-            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.City", @"
-    SELECT VALUE -- Constructing City
-        [SMDModel.Store.City](T1.City_CityId, T1.City_CityName, T1.City_IsCapital, T1.City_CountryId, T1.City_GeoLONG, T1.City_GeoLAT)
-    FROM (
-        SELECT 
-            T.CityId AS City_CityId, 
-            T.CityName AS City_CityName, 
-            T.IsCapital AS City_IsCapital, 
-            T.CountryId AS City_CountryId, 
-            T.GeoLONG AS City_GeoLONG, 
-            T.GeoLAT AS City_GeoLAT, 
-            True AS _from0
-        FROM BaseDbContext.Cities AS T
-    ) AS T1");
-        }
-        
-        /// <Summary>
-        /// return view for SMDModelStoreContainer.CampaignEventHistory
-        /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView43()
-        {
-            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.CampaignEventHistory", @"
-    SELECT VALUE -- Constructing CampaignEventHistory
-        [SMDModel.Store.CampaignEventHistory](T1.CampaignEventHistory_EventId, T1.CampaignEventHistory_EventStatusId, T1.CampaignEventHistory_CampaignID, T1.CampaignEventHistory_EventDateTime, T1.CampaignEventHistory_CouponId, T1.CampaignEventHistory_SQID, T1.CampaignEventHistory_PQID)
-    FROM (
-        SELECT 
-            T.EventId AS CampaignEventHistory_EventId, 
-            T.EventStatusId AS CampaignEventHistory_EventStatusId, 
-            T.CampaignID AS CampaignEventHistory_CampaignID, 
-            T.EventDateTime AS CampaignEventHistory_EventDateTime, 
-            T.CouponId AS CampaignEventHistory_CouponId, 
-            T.SQID AS CampaignEventHistory_SQID, 
-            T.PQID AS CampaignEventHistory_PQID, 
-            True AS _from0
-        FROM BaseDbContext.CampaignEventHistories AS T
-    ) AS T1");
-        }
-        
-        /// <Summary>
-        /// return view for SMDModelStoreContainer.EventStatuses
-        /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView44()
-        {
-            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.EventStatuses", @"
-    SELECT VALUE -- Constructing EventStatuses
-        [SMDModel.Store.EventStatuses](T1.EventStatuses_EventStatusId, T1.EventStatuses_EventName)
-    FROM (
-        SELECT 
-            T.EventStatusId AS EventStatuses_EventStatusId, 
-            T.EventName AS EventStatuses_EventName, 
-            True AS _from0
-        FROM BaseDbContext.EventStatuses AS T
-    ) AS T1");
-        }
-        
-        /// <Summary>
-        /// return view for SMDModelStoreContainer.AdCampaignClickRateHistory
-        /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView45()
-        {
-            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.AdCampaignClickRateHistory", @"
-    SELECT VALUE -- Constructing AdCampaignClickRateHistory
-        [SMDModel.Store.AdCampaignClickRateHistory](T1.AdCampaignClickRateHistory_ClickRateId, T1.AdCampaignClickRateHistory_CampaignID, T1.AdCampaignClickRateHistory_ClickRate, T1.AdCampaignClickRateHistory_RateChangeDateTime)
-    FROM (
-        SELECT 
-            T.ClickRateId AS AdCampaignClickRateHistory_ClickRateId, 
-            T.CampaignID AS AdCampaignClickRateHistory_CampaignID, 
-            T.ClickRate AS AdCampaignClickRateHistory_ClickRate, 
-            T.RateChangeDateTime AS AdCampaignClickRateHistory_RateChangeDateTime, 
-            True AS _from0
-        FROM BaseDbContext.AdCampaignClickRateHistories AS T
-    ) AS T1");
         }
         
         /// <Summary>
@@ -3115,9 +3115,88 @@ namespace Edm_EntityMappingGeneratedViews
         }
         
         /// <Summary>
-        /// return view for BaseDbContext.PayOutHistories
+        /// return view for BaseDbContext.Cities
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView88()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Cities", @"
+    SELECT VALUE -- Constructing Cities
+        [DomainModels.City](T1.City_CityId, T1.City_CityName, T1.City_IsCapital, T1.City_CountryId, T1.City_GeoLONG, T1.City_GeoLAT)
+    FROM (
+        SELECT 
+            T.CityId AS City_CityId, 
+            T.CityName AS City_CityName, 
+            T.IsCapital AS City_IsCapital, 
+            T.CountryId AS City_CountryId, 
+            T.GeoLONG AS City_GeoLONG, 
+            T.GeoLAT AS City_GeoLAT, 
+            True AS _from0
+        FROM SMDModelStoreContainer.City AS T
+    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for BaseDbContext.CampaignEventHistories
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView89()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.CampaignEventHistories", @"
+    SELECT VALUE -- Constructing CampaignEventHistories
+        [DomainModels.CampaignEventHistory](T1.CampaignEventHistory_EventId, T1.CampaignEventHistory_EventStatusId, T1.CampaignEventHistory_CampaignID, T1.CampaignEventHistory_EventDateTime, T1.CampaignEventHistory_CouponId, T1.CampaignEventHistory_SQID, T1.CampaignEventHistory_PQID)
+    FROM (
+        SELECT 
+            T.EventId AS CampaignEventHistory_EventId, 
+            T.EventStatusId AS CampaignEventHistory_EventStatusId, 
+            T.CampaignID AS CampaignEventHistory_CampaignID, 
+            T.EventDateTime AS CampaignEventHistory_EventDateTime, 
+            T.CouponId AS CampaignEventHistory_CouponId, 
+            T.SQID AS CampaignEventHistory_SQID, 
+            T.PQID AS CampaignEventHistory_PQID, 
+            True AS _from0
+        FROM SMDModelStoreContainer.CampaignEventHistory AS T
+    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for BaseDbContext.EventStatuses
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView90()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.EventStatuses", @"
+    SELECT VALUE -- Constructing EventStatuses
+        [DomainModels.EventStatus](T1.EventStatus_EventStatusId, T1.EventStatus_EventName)
+    FROM (
+        SELECT 
+            T.EventStatusId AS EventStatus_EventStatusId, 
+            T.EventName AS EventStatus_EventName, 
+            True AS _from0
+        FROM SMDModelStoreContainer.EventStatuses AS T
+    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for BaseDbContext.AdCampaignClickRateHistories
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView91()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.AdCampaignClickRateHistories", @"
+    SELECT VALUE -- Constructing AdCampaignClickRateHistories
+        [DomainModels.AdCampaignClickRateHistory](T1.AdCampaignClickRateHistory_ClickRateId, T1.AdCampaignClickRateHistory_CampaignID, T1.AdCampaignClickRateHistory_ClickRate, T1.AdCampaignClickRateHistory_RateChangeDateTime)
+    FROM (
+        SELECT 
+            T.ClickRateId AS AdCampaignClickRateHistory_ClickRateId, 
+            T.CampaignID AS AdCampaignClickRateHistory_CampaignID, 
+            T.ClickRate AS AdCampaignClickRateHistory_ClickRate, 
+            T.RateChangeDateTime AS AdCampaignClickRateHistory_RateChangeDateTime, 
+            True AS _from0
+        FROM SMDModelStoreContainer.AdCampaignClickRateHistory AS T
+    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for BaseDbContext.PayOutHistories
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView92()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.PayOutHistories", "\r\n    SELECT VALUE -- Constructing PayOutHistories\r\n        [DomainModels.PayOutH" +
                     "istory](T1.PayOutHistory_PayOutId, T1.PayOutHistory_CompanyId, T1.PayOutHistory_" +
@@ -3140,85 +3219,6 @@ namespace Edm_EntityMappingGeneratedViews
                     ", \r\n            T.TargetPayoutAccount AS PayOutHistory_TargetPayoutAccount, \r\n  " +
                     "          True AS _from0\r\n        FROM SMDModelStoreContainer.PayOutHistory AS T" +
                     "\r\n    ) AS T1");
-        }
-        
-        /// <Summary>
-        /// return view for BaseDbContext.Cities
-        /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView89()
-        {
-            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Cities", @"
-    SELECT VALUE -- Constructing Cities
-        [DomainModels.City](T1.City_CityId, T1.City_CityName, T1.City_IsCapital, T1.City_CountryId, T1.City_GeoLONG, T1.City_GeoLAT)
-    FROM (
-        SELECT 
-            T.CityId AS City_CityId, 
-            T.CityName AS City_CityName, 
-            T.IsCapital AS City_IsCapital, 
-            T.CountryId AS City_CountryId, 
-            T.GeoLONG AS City_GeoLONG, 
-            T.GeoLAT AS City_GeoLAT, 
-            True AS _from0
-        FROM SMDModelStoreContainer.City AS T
-    ) AS T1");
-        }
-        
-        /// <Summary>
-        /// return view for BaseDbContext.CampaignEventHistories
-        /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView90()
-        {
-            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.CampaignEventHistories", @"
-    SELECT VALUE -- Constructing CampaignEventHistories
-        [DomainModels.CampaignEventHistory](T1.CampaignEventHistory_EventId, T1.CampaignEventHistory_EventStatusId, T1.CampaignEventHistory_CampaignID, T1.CampaignEventHistory_EventDateTime, T1.CampaignEventHistory_CouponId, T1.CampaignEventHistory_SQID, T1.CampaignEventHistory_PQID)
-    FROM (
-        SELECT 
-            T.EventId AS CampaignEventHistory_EventId, 
-            T.EventStatusId AS CampaignEventHistory_EventStatusId, 
-            T.CampaignID AS CampaignEventHistory_CampaignID, 
-            T.EventDateTime AS CampaignEventHistory_EventDateTime, 
-            T.CouponId AS CampaignEventHistory_CouponId, 
-            T.SQID AS CampaignEventHistory_SQID, 
-            T.PQID AS CampaignEventHistory_PQID, 
-            True AS _from0
-        FROM SMDModelStoreContainer.CampaignEventHistory AS T
-    ) AS T1");
-        }
-        
-        /// <Summary>
-        /// return view for BaseDbContext.EventStatuses
-        /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView91()
-        {
-            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.EventStatuses", @"
-    SELECT VALUE -- Constructing EventStatuses
-        [DomainModels.EventStatus](T1.EventStatus_EventStatusId, T1.EventStatus_EventName)
-    FROM (
-        SELECT 
-            T.EventStatusId AS EventStatus_EventStatusId, 
-            T.EventName AS EventStatus_EventName, 
-            True AS _from0
-        FROM SMDModelStoreContainer.EventStatuses AS T
-    ) AS T1");
-        }
-        
-        /// <Summary>
-        /// return view for BaseDbContext.AdCampaignClickRateHistories
-        /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView92()
-        {
-            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.AdCampaignClickRateHistories", @"
-    SELECT VALUE -- Constructing AdCampaignClickRateHistories
-        [DomainModels.AdCampaignClickRateHistory](T1.AdCampaignClickRateHistory_ClickRateId, T1.AdCampaignClickRateHistory_CampaignID, T1.AdCampaignClickRateHistory_ClickRate, T1.AdCampaignClickRateHistory_RateChangeDateTime)
-    FROM (
-        SELECT 
-            T.ClickRateId AS AdCampaignClickRateHistory_ClickRateId, 
-            T.CampaignID AS AdCampaignClickRateHistory_CampaignID, 
-            T.ClickRate AS AdCampaignClickRateHistory_ClickRate, 
-            T.RateChangeDateTime AS AdCampaignClickRateHistory_RateChangeDateTime, 
-            True AS _from0
-        FROM SMDModelStoreContainer.AdCampaignClickRateHistory AS T
-    ) AS T1");
         }
         
         /// <Summary>
