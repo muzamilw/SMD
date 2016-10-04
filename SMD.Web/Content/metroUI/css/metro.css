@@ -50,7 +50,13 @@
         
     background-color: white;
     }
+    #ProfileQtsList:nth-child(even) {
+    background-color:white!important;
+}
 
+#ProfileQtsList:nth-child(odd) {
+    background-color: #f9f9f9!important;
+}
     .listview .list.active {
         background-color: #d1e8ff;
         border-color: #64b4db;

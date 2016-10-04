@@ -2590,27 +2590,34 @@ define("ads/ads.viewModel",
                 },
 
 
-                getQuestionByFilter = ko.computed(function() {
-                    if (profileQuestionList().length > 0) {
+                getQuestionByFilter = function() {
+            
+                   
+                       
                         if (SearchProfileQuestion() != '') {
+
                             var list = ko.utils.arrayFilter(profileQuestionList(), function (prod) {
                                 
-                                return prod.Question==SearchProfileQuestion();
+                                return prod.Question.toLowerCase().startsWith(SearchProfileQuestion().toLowerCase());
+                                
                             });
                           
                             profileQuestionList().clear;
-                            debugger;
+                      
                             profileQuestionList(list);
                           
 
                             return list;
                         }
-                    }
-                    else {
+                        else {
 
-                        profileQuestionList(TemporaryList());
-                    }
-                });
+                          
+                            profileQuestionList.clear;
+                            profileQuestionList(TemporaryList());
+                        }
+                    
+                    
+                }
 
                 
                 showAdditionQuizCriteria = function () {
