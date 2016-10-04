@@ -10,5 +10,6 @@ namespace SMD.MIS.Areas.Api.Models
         public int PqAnswerId { get; set; }
         public string Answer { get; set; }
         public bool isSelected { get; set; }
+        public int PqId { get; set; }
     }
 }
