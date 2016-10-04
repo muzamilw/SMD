@@ -305,6 +305,7 @@ define("ads/ads.viewModel",
                 campaignModel().Type(mode);
                 campaignModel().DeliveryDays("3");
                 campaignModel().VideoUrl("https://www.");
+
                 if (mode == 4) {
                     campaignModel().CampaignName("New display ad");
                     $("#logo_div").css("display", "block");
@@ -314,6 +315,8 @@ define("ads/ads.viewModel",
                     campaignModel().CampaignName("New video campaign");
                     $("#logo_div").css("display", "none");
                 }
+
+
                 campaignModel().reset();
                 
                 
@@ -1845,6 +1848,17 @@ define("ads/ads.viewModel",
 
                                     getAudienceCount();
                                     bindAudienceReachCount();
+
+                                    if (mode == 4) {
+                                        
+                                        $("#logo_div").css("display", "block");
+                                    }
+
+                                    else {
+                                        
+                                        $("#logo_div").css("display", "none");
+                                    }
+
                                     $.unblockUI(spinner);
 
                                 }
