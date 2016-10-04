@@ -78,6 +78,10 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                 DOB = source.DOB,
           
                 IndustryId = source.IndustryId,
+
+                IndustryName = source.Industry.IndustryName,
+
+                GenderString = source.Gender == 1 ? "Male" : "Female",
          
                 ImageUrl = !string.IsNullOrEmpty(source.Company.Logo) ? HttpContext.Current.Request.Url.Scheme + "://" +
                 HttpContext.Current.Request.Url.Host + "/" + source.ProfileImage + "?" + DateTime.Now : string.Empty,
