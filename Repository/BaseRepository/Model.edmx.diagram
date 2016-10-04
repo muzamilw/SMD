@@ -147,8 +147,6 @@
         <AssociationConnector Association="DomainModels.FK_ProfileQuestionUserAnswer_Company" />
         <AssociationConnector Association="DomainModels.FK_SurveyQuestion_Company" />
         <AssociationConnector Association="DomainModels.FK_SurveyQuestionResponse_Company" />
-        <EntityTypeShape EntityType="DomainModels.PayOutHistory" Width="1.5" PointX="5.875" PointY="77.125" />
-        <AssociationConnector Association="DomainModels.FK_PayOutHistory_Company" />
         <EntityTypeShape EntityType="DomainModels.City" Width="1.5" PointX="3.625" PointY="55.375" />
         <AssociationConnector Association="DomainModels.FK_AdCampaignTargetLocation_City" />
         <AssociationConnector Association="DomainModels.FK_City_Country" />
@@ -166,6 +164,8 @@
         <EntityTypeShape EntityType="DomainModels.vw_ReferringCompanies" Width="1.5" PointX="11.375" PointY="0.75" />
         <EntityTypeShape EntityType="DomainModels.AdCampaignClickRateHistory" Width="1.5" PointX="23.75" PointY="62.125" />
         <AssociationConnector Association="DomainModels.FK_AdCampaignClickRateHistory_AdCampaign" />
+        <EntityTypeShape EntityType="DomainModels.PayOutHistory" Width="1.5" PointX="5.875" PointY="77.625" />
+        <AssociationConnector Association="DomainModels.FK_PayOutHistory_Company" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

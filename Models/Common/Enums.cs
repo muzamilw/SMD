@@ -67,7 +67,7 @@
         Paused = 4,
         Completed = 5,
         ApprovalRejected = 6,
-        TerminatedByUser = 7,
+        Remove = 7,
         Archived = 8,
         AutoComplete = 9
     }

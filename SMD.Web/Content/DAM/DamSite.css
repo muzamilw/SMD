@@ -197,7 +197,7 @@ div#title {
 .imageBox {
   margin: 6px;
     float: left;
-    height: 250px;
+    min-height: 100px;
     border: 0;
     overflow: hidden;
     width: 250px;

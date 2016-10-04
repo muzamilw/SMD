@@ -655,11 +655,11 @@
           <Property Name="RequestDateTime" Type="datetime" />
           <Property Name="CentzAmount" Type="float" />
           <Property Name="DollarAmount" Type="float" />
-          <Property Name="StageOneStatus" Type="bit" />
+          <Property Name="StageOneStatus" Type="int" />
           <Property Name="StageOneRejectionReason" Type="nvarchar" MaxLength="500" />
           <Property Name="StageOneEventDate" Type="datetime" />
           <Property Name="StageOneUserId" Type="nvarchar" MaxLength="128" />
-          <Property Name="StageTwoStatus" Type="bit" />
+          <Property Name="StageTwoStatus" Type="int" />
           <Property Name="StageTwoRejectionReason" Type="nvarchar" MaxLength="500" />
           <Property Name="StageTwoEventDate" Type="datetime" />
           <Property Name="StageTwoUserId" Type="nvarchar" MaxLength="128" />
@@ -3626,11 +3626,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <End Role="Company" EntitySet="Companies" />
             <End Role="SurveyQuestionResponse" EntitySet="SurveyQuestionResponses" />
           </AssociationSet>
-          <EntitySet Name="PayOutHistories" EntityType="DomainModels.PayOutHistory" />
-          <AssociationSet Name="FK_PayOutHistory_Company" Association="DomainModels.FK_PayOutHistory_Company">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="PayOutHistory" EntitySet="PayOutHistories" />
-          </AssociationSet>
           <EntitySet Name="Cities" EntityType="DomainModels.City" />
           <AssociationSet Name="FK_AdCampaignTargetLocation_City" Association="DomainModels.FK_AdCampaignTargetLocation_City">
             <End Role="City" EntitySet="Cities" />
@@ -3709,6 +3704,11 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <Parameter Name="DateTo" Mode="In" Type="DateTime" />
             <Parameter Name="Granularity" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="PayOutHistories" EntityType="DomainModels.PayOutHistory" />
+          <AssociationSet Name="FK_PayOutHistory_Company" Association="DomainModels.FK_PayOutHistory_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="PayOutHistory" EntitySet="PayOutHistories" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -6153,12 +6153,12 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <NavigationProperty Name="SurveyQuestionResponses" Relationship="DomainModels.FK_SurveyQuestionResponse_Company" FromRole="Company" ToRole="SurveyQuestionResponse" />
           <Property Name="CompanyRegNo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="TaxRegNo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="PayOutHistories" Relationship="DomainModels.FK_PayOutHistory_Company" FromRole="Company" ToRole="PayOutHistory" />
           <Property Name="CreationDateTime" Type="DateTime" Precision="3" />
           <Property Name="NoOfBranches" Type="Int32" />
           <Property Name="BillingAddressName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="IsDeleted" Type="Boolean" />
           <Property Name="DeleteDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="PayOutHistories" Relationship="DomainModels.FK_PayOutHistory_Company" FromRole="Company" ToRole="PayOutHistory" />
         </EntityType>
         <Association Name="FK_Account_Company">
           <End Type="DomainModels.Company" Role="Company" Multiplicity="0..1" />
@@ -6336,38 +6336,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
               <PropertyRef Name="CompanyId" />
             </Principal>
             <Dependent Role="SurveyQuestionResponse">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="PayOutHistory">
-          <Key>
-            <PropertyRef Name="PayOutId" />
-          </Key>
-          <Property Name="PayOutId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CompanyId" Type="Int32" />
-          <Property Name="RequestDateTime" Type="DateTime" Precision="3" />
-          <Property Name="CentzAmount" Type="Double" />
-          <Property Name="DollarAmount" Type="Double" />
-          <Property Name="StageOneStatus" Type="Boolean" />
-          <Property Name="StageOneRejectionReason" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="StageOneEventDate" Type="DateTime" Precision="3" />
-          <Property Name="StageOneUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="StageTwoStatus" Type="Boolean" />
-          <Property Name="StageTwoRejectionReason" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="StageTwoEventDate" Type="DateTime" Precision="3" />
-          <Property Name="StageTwoUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="TargetPayoutAccount" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Company" Relationship="DomainModels.FK_PayOutHistory_Company" FromRole="PayOutHistory" ToRole="Company" />
-        </EntityType>
-        <Association Name="FK_PayOutHistory_Company">
-          <End Type="DomainModels.Company" Role="Company" Multiplicity="0..1" />
-          <End Type="DomainModels.PayOutHistory" Role="PayOutHistory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="CompanyId" />
-            </Principal>
-            <Dependent Role="PayOutHistory">
               <PropertyRef Name="CompanyId" />
             </Dependent>
           </ReferentialConstraint>
@@ -6679,6 +6647,38 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             </Principal>
             <Dependent Role="AdCampaignClickRateHistory">
               <PropertyRef Name="CampaignID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PayOutHistory">
+          <Key>
+            <PropertyRef Name="PayOutId" />
+          </Key>
+          <Property Name="PayOutId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="RequestDateTime" Type="DateTime" Precision="3" />
+          <Property Name="CentzAmount" Type="Double" />
+          <Property Name="DollarAmount" Type="Double" />
+          <Property Name="StageOneStatus" Type="Int32" />
+          <Property Name="StageOneRejectionReason" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="StageOneEventDate" Type="DateTime" Precision="3" />
+          <Property Name="StageOneUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="StageTwoStatus" Type="Int32" />
+          <Property Name="StageTwoRejectionReason" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="StageTwoEventDate" Type="DateTime" Precision="3" />
+          <Property Name="StageTwoUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="TargetPayoutAccount" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Company" Relationship="DomainModels.FK_PayOutHistory_Company" FromRole="PayOutHistory" ToRole="Company" />
+        </EntityType>
+        <Association Name="FK_PayOutHistory_Company">
+          <End Type="DomainModels.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="DomainModels.PayOutHistory" Role="PayOutHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="PayOutHistory">
+              <PropertyRef Name="CompanyId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -8085,26 +8085,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PayOutHistories">
-            <EntityTypeMapping TypeName="DomainModels.PayOutHistory">
-              <MappingFragment StoreEntitySet="PayOutHistory">
-                <ScalarProperty Name="TargetPayoutAccount" ColumnName="TargetPayoutAccount" />
-                <ScalarProperty Name="StageTwoUserId" ColumnName="StageTwoUserId" />
-                <ScalarProperty Name="StageTwoEventDate" ColumnName="StageTwoEventDate" />
-                <ScalarProperty Name="StageTwoRejectionReason" ColumnName="StageTwoRejectionReason" />
-                <ScalarProperty Name="StageTwoStatus" ColumnName="StageTwoStatus" />
-                <ScalarProperty Name="StageOneUserId" ColumnName="StageOneUserId" />
-                <ScalarProperty Name="StageOneEventDate" ColumnName="StageOneEventDate" />
-                <ScalarProperty Name="StageOneRejectionReason" ColumnName="StageOneRejectionReason" />
-                <ScalarProperty Name="StageOneStatus" ColumnName="StageOneStatus" />
-                <ScalarProperty Name="DollarAmount" ColumnName="DollarAmount" />
-                <ScalarProperty Name="CentzAmount" ColumnName="CentzAmount" />
-                <ScalarProperty Name="RequestDateTime" ColumnName="RequestDateTime" />
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="PayOutId" ColumnName="PayOutId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Cities">
             <EntityTypeMapping TypeName="DomainModels.City">
               <MappingFragment StoreEntitySet="City">
@@ -8304,6 +8284,26 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="getUserActivitiesOverTime" FunctionName="SMDModel.Store.getUserActivitiesOverTime" />
+          <EntitySetMapping Name="PayOutHistories">
+            <EntityTypeMapping TypeName="DomainModels.PayOutHistory">
+              <MappingFragment StoreEntitySet="PayOutHistory">
+                <ScalarProperty Name="TargetPayoutAccount" ColumnName="TargetPayoutAccount" />
+                <ScalarProperty Name="StageTwoUserId" ColumnName="StageTwoUserId" />
+                <ScalarProperty Name="StageTwoEventDate" ColumnName="StageTwoEventDate" />
+                <ScalarProperty Name="StageTwoRejectionReason" ColumnName="StageTwoRejectionReason" />
+                <ScalarProperty Name="StageTwoStatus" ColumnName="StageTwoStatus" />
+                <ScalarProperty Name="StageOneUserId" ColumnName="StageOneUserId" />
+                <ScalarProperty Name="StageOneEventDate" ColumnName="StageOneEventDate" />
+                <ScalarProperty Name="StageOneRejectionReason" ColumnName="StageOneRejectionReason" />
+                <ScalarProperty Name="StageOneStatus" ColumnName="StageOneStatus" />
+                <ScalarProperty Name="DollarAmount" ColumnName="DollarAmount" />
+                <ScalarProperty Name="CentzAmount" ColumnName="CentzAmount" />
+                <ScalarProperty Name="RequestDateTime" ColumnName="RequestDateTime" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="PayOutId" ColumnName="PayOutId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
