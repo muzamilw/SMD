@@ -1,6 +1,6 @@
-﻿USE [SMDv2]
+﻿
 GO
-/****** Object:  StoredProcedure [dbo].[SearchCoupons]    Script Date: 10/3/2016 4:46:07 PM ******/
+/****** Object:  StoredProcedure [dbo].[SearchCoupons]    Script Date: 10/5/2016 10:47:55 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -65,7 +65,8 @@ DECLARE @source geography = geography::Point(@lat, @lon, 4326)
 	end  as distance,
 	comp.CompanyName,
 	vchr.LocationTitle,
-	vchr.LocationCity
+	vchr.LocationCity,
+	cpoptc.cnt DealsCount
 
 	from Coupon vchr
 	inner join CouponCategories cc on cc.CouponId = vchr.CouponId and vchr.LocationLAT is not null and vchr.LocationLON is not null
@@ -75,7 +76,10 @@ DECLARE @source geography = geography::Point(@lat, @lon, 4326)
                     FROM   CouponPriceOption cpo
                     WHERE  cpo.CouponId = vchr.CouponId
                     ORDER  BY cpo.Price) cpopt
-
+	OUTER APPLY (SELECT count(*) cnt
+                    FROM   CouponPriceOption cpo
+                    WHERE  cpo.CouponId = vchr.CouponId
+                    ) cpoptc
 
 	
 	where (
@@ -116,7 +120,7 @@ DECLARE @source geography = geography::Point(@lat, @lon, 4326)
 
 		
 		)
-		group by vchr.CouponId, CouponTitle,vchr.CouponImage1,LogoUrl,cpopt.Price, cpopt.Savings,SwapCost,vchr.CompanyId,CouponActiveMonth,CouponActiveYear,vchr.LocationLAT, vchr.LocationLON,CouponListingMode, comp.companyname, vchr.LocationTitle, vchr.LocationCity,vchr.ApprovalDateTime
+		group by vchr.CouponId, CouponTitle,vchr.CouponImage1,LogoUrl,cpopt.Price, cpopt.Savings,SwapCost,vchr.CompanyId,CouponActiveMonth,CouponActiveYear,vchr.LocationLAT, vchr.LocationLON,CouponListingMode, comp.companyname, vchr.LocationTitle, vchr.LocationCity,vchr.ApprovalDateTime, cpoptc.cnt
 		)as items
 		where distance < @distance
 	order by distance
