@@ -30,6 +30,13 @@ namespace SMD.Models.DomainModels
         public string CompanyName { get; set; }
         public string LocationTitle { get; set; }
         public string LocationCity { get; set; }
+
+        public Nullable<int> DealsCount { get; set; }
+
+        public string CurrencyCode { get; set; }
+
+        public string CurrencySymbol { get; set; }
+        
         
     }
 }

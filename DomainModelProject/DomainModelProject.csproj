@@ -171,7 +171,16 @@
     <Compile Include="GetDealMetric_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetLiveCampaignCountOverTime_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="getPayoutVSRevenueOverTime_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetProducts_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetRevenueByCampaignOverTime_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="GetRevenueOverTime_Result.cs">
@@ -184,6 +193,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="GetTransactions_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="getUserActivitiesOverTime_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="GetUserCounts_Result.cs">

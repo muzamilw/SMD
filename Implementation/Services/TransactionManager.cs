@@ -715,7 +715,7 @@ namespace SMD.Implementation.Services
         /// <param name="companyId"></param>
         /// <param name="CentzAmount"></param>
         /// <returns>1 for success, 2 for balance insufficient, 3 for amount less than minimum limit, 0 for error</returns>
-        public static int PerformUserPayout(string UserId,int companyId,double CentzAmount, string PayPalId )
+        public static int PerformUserPayout(string UserId,int companyId,double CentzAmount, string PayPalId, string Phone )
         {
 
             var cashoutMinLimit = ConfigurationManager.AppSettings["CashoutMinLimit"];
@@ -740,10 +740,16 @@ namespace SMD.Implementation.Services
                 var smdUser = GetCash4AdsUser(dbContext);
                 if (smdUser == null || smdUser.Company == null)
                     return 0;
+
+                //only send payment to paypal.
                 // User's Prefered Account
-                var preferedAccount = company.PreferredPayoutAccount == 1
-                    ? company.PaypalCustomerId
-                    : company.GoogleWalletCustomerId;
+                //var preferedAccount = company.PreferredPayoutAccount == 1
+                //    ? company.PaypalCustomerId
+                //    : company.GoogleWalletCustomerId;
+
+                company.PaypalCustomerId = PayPalId;
+                user.Phone1 = Phone;
+
 
                 List<Account> accounts = dbContext.Accounts.Where(g => g.CompanyId == companyId).ToList();
                 
@@ -755,7 +761,7 @@ namespace SMD.Implementation.Services
                         var requestModel = new MakePaypalPaymentRequest
                         {
                             Amount = (decimal)CentzAmount,
-                            RecieverEmails = new List<string> { preferedAccount },
+                            RecieverEmails = new List<string> { PayPalId },
                             SenderEmail = smdUser.Company.PaypalCustomerId
                         };
 

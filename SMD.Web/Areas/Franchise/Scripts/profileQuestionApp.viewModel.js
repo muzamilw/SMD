@@ -83,6 +83,8 @@ define("FranchiseDashboard/profileQuestionApp.viewModel",
                        confirmation.afterProceed(function () {
                        selectedProfileQuestion().isApproved(true);
                        onSavePQ();
+                       $("#topArea").css("display", "block");
+                       $("#divApprove").css("display", "block");
                            toastr.success("Approved Successfully.");
                        });
                    },
@@ -173,6 +175,8 @@ define("FranchiseDashboard/profileQuestionApp.viewModel",
                             }
                             selectedProfileQuestion().isApproved(false);
                             onSavePQ();
+                            $("#topArea").css("display", "block");
+                            $("#divApprove").css("display", "block");
                             toastr.success("Rejected Successfully.");
                         });
                       },
