@@ -44,7 +44,7 @@ namespace SMD.MIS.Areas.Api.Controllers
 
         //}
 
-        [ApiException]
+        //--[ApiException]
         public SearchCouponsViewResponse Get(string categoryId, string ctype, string size, string keywords, string pageNo, string distance, string Lat, string Lon, string UserId)
         {
 
