@@ -928,6 +928,7 @@ namespace SMD.Implementation.Services
             {
                 AdCampaigns = _adCampaignRepository.GetAll().Where(g => g.UserId == _adCampaignRepository.LoggedInUserIdentity && g.VerifyQuestion != null && g.VerifyQuestion != "")
             };
+          
         }
         public AdCampaignBaseResponse getCompanyBranches()
         {
