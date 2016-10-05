@@ -11,12 +11,15 @@ define("analytic/analytic.viewModel",
                     activeUser = ko.observable(),
 					DashboardInsightsData = ko.observableArray(),
 					granularityDropDown = ko.observableArray([{ id: 1, name: "daily" }, { id: 2, name: "weekly" }, { id: 3, name: "monthly" }, { id: 4, name: "yearly" }]),
-                    analyticFromdate = ko.observable(new Date()),
+                    CampaignTypeDD = ko.observableArray([{ id: 1, name: "Video ads" }, { id: 2, name: "Display ads" }, { id: 3, name: "Surveys" }, { id: 4, name: "Polls" }, { id: 5, name: "Deals" }]),
+					analyticFromdate = ko.observable(new Date()),
 					analyticTodate = ko.observable(new Date()),
 					selectedGranualforRevenue = ko.observable(1),
+					selectedGranualforPayoutRevenue = ko.observable(1),
 					RevenueOverTimeData = ko.observable([]),
 					CampaignsByStatusData = ko.observable([]),
 					UserCountsData = ko.observable([]),
+					rCampaignType= ko.observable(),
 					intializeDashboardInsightsData = function(){
 						DashboardInsightsData.push(new model.DashboardInsightsModel("Users who logged in"));
 						DashboardInsightsData.push(new model.DashboardInsightsModel("New Users who registered"));
@@ -142,6 +145,8 @@ define("analytic/analytic.viewModel",
 			   getRevenueOverTime = function () {
                         dataservice.getRevenueOverTime(
                             {
+								compnyId: 466,
+								CampaignType : rCampaignType(),
 								granuality: selectedGranualforRevenue(),
 								DateFrom: analyticFromdate().toISOString().substring(0, 10),
 								DateTo :analyticTodate().toISOString().substring(0, 10)
@@ -152,6 +157,26 @@ define("analytic/analytic.viewModel",
 									//data[0].granular
 								RevenueOverTimeData([]);
                                 ko.utils.arrayPushAll(RevenueOverTimeData(), data);
+                                RevenueOverTimeData.valueHasMutated();
+	                            },
+                                error: function (response) {
+                                    toastr.error("Failed to load Ad Campaigns!");
+                                }
+                            });
+                    },
+					getPayoutVSRevenueOverTime = function () {
+                        dataservice.getRevenueOverTime(
+                            {
+								granuality: selectedGranualforPayoutRevenue(),
+								DateFrom: analyticFromdate().toISOString().substring(0, 10),
+								DateTo :analyticTodate().toISOString().substring(0, 10)
+                                                           },
+                            {
+                                success: function (data) {
+									//data[0].amountcollected 
+									//data[0].granular
+								RevenueOverTimeData([]);
+                                ko.utils.arrayPushAll(PayoutVSRevenueOverTimeData(), data);
                                 RevenueOverTimeData.valueHasMutated();
 	                            },
                                 error: function (response) {
@@ -202,7 +227,7 @@ define("analytic/analytic.viewModel",
 						intializeDashboardInsightsData();
 						getCampaignsByStatus();
 						getUserCounts();
-					//	getActiveUsers();
+						getPayoutVSRevenueOverTime();
 						getRevenueOverTime();
                     };
                 return {
@@ -221,7 +246,12 @@ define("analytic/analytic.viewModel",
 					getCampaignsByStatus : getCampaignsByStatus,
 					CampaignsByStatusData:CampaignsByStatusData,
 					getUserCounts:getUserCounts,
-					UserCountsData:UserCountsData
+					UserCountsData:UserCountsData,
+					getPayoutVSRevenueOverTime, getPayoutVSRevenueOverTime,
+					rCampaignType:rCampaignType,
+					PayoutVSRevenueOverTimeData:PayoutVSRevenueOverTimeData,
+					selectedGranualforPayoutRevenue:selectedGranualforPayoutRevenue,
+					CampaignTypeDD:CampaignTypeDD
 
                 };
             })()

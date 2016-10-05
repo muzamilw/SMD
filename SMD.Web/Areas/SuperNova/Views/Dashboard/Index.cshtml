@@ -255,14 +255,14 @@
                         @*<h2 class="graphheaderleft">Top 10 Spenders on platform</h2>
                         <div class="form-group lightgray-bg graph-box-analytics">
                         </div>*@
-                        <h2 class="graphheaderleft">Revenue over time</h2>
+                        <h2 class="graphheaderleft">Pay Pal Payout vs All Revenue</h2>
                         <div class="form-group lightgray-bg graph-box-analytics" style="margin-right:10px">
                         </div>
                         <div class=" margin10">
-                            <select class="form-control" style="width:35%!important;" id="ddprevenue" data-bind="options: $root.granularityDropDown, optionsText: 'name', optionsValue: 'id', value:$root.selectedGranualforRevenue, event: { change: $root.getRevenueOverTime }"></select>
+                            <select class="form-control" style="width:35%!important;" id="ddprevenue" data-bind="options: $root.granularityDropDown, optionsText: 'name', optionsValue: 'id', value:$root.selectedGranualforPayoutRevenue, event: { change: $root.getRevenueOverTime }"></select>
                             
 
-                            <div class="margin-Top-30" data-bind="morris: {type: 'Line', data: $root.RevenueOverTimeData, xkey: 'granular', ykeys: ['amountcollected'], labels: ['Revenue'], parseTime:false, setAxisAlignFirstX: true}" ></div>
+                            <div class="margin-Top-30" data-bind="morris: {type: 'Line', data: $root.PayoutVSRevenueOverTimeData, xkey: 'granular', ykeys: ['revStats', 'PayoutStats'], labels: ['All Revenue', 'Payout to Paypal'], parseTime:false, setAxisAlignFirstX: true}"></div>
                             
                           </div>
                     </div>

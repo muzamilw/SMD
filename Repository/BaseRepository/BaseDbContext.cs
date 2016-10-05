@@ -309,6 +309,20 @@ namespace SMD.Repository.BaseRepository
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUserCounts_Result>("GetUserCounts");
         }
         //
+        public ObjectResult<getPayoutVSRevenueOverTime_Result> getPayoutVSRevenueOverTime(DateTime DateFrom, DateTime DateTo, int Granularity)
+        {
+            var DateFrm = new ObjectParameter("DateFrom", DateFrom);
+            var DatTo = new ObjectParameter("DateTo", DateTo);
+            var Granulrty = new ObjectParameter("Granularity", Granularity);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getPayoutVSRevenueOverTime_Result>("getPayoutVSRevenueOverTime", DateFrm, DatTo, Granulrty);
+        }
+        public ObjectResult<getUserActivitiesOverTime_Result> getUserActivitiesOverTime(DateTime DateFrom, DateTime DateTo, int Granularity)
+        {
+            var DateFrm = new ObjectParameter("DateFrom", DateFrom);
+            var DatTo = new ObjectParameter("DateTo", DateTo);
+            var Granulrty = new ObjectParameter("Granularity", Granularity);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getUserActivitiesOverTime_Result>("getUserActivitiesOverTime", DateFrm, DatTo, Granulrty);
+        }
         public ObjectResult<GetRevenueOverTime_Result> GetRevenueOverTime(int CompanyId, DateTime DateFrom, DateTime DateTo, int Granularity)
         {
             var CID = new ObjectParameter("CompanyId", CompanyId);
@@ -316,6 +330,23 @@ namespace SMD.Repository.BaseRepository
             var DatTo = new ObjectParameter("DateTo", DateTo);
             var Granulrty = new ObjectParameter("Granularity", Granularity);
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetRevenueOverTime_Result>("GetRevenueOverTime", CID, DateFrm, DatTo, Granulrty);
+        }
+        public ObjectResult<GetLiveCampaignCountOverTime_Result> GetLiveCampaignCountOverTime(int CampaignType, DateTime DateFrom, DateTime DateTo, int Granularity)
+        {
+            var CID = new ObjectParameter("CampaignType", CampaignType);
+            var DateFrm = new ObjectParameter("DateFrom", DateFrom);
+            var DatTo = new ObjectParameter("DateTo", DateTo);
+            var Granulrty = new ObjectParameter("Granularity", Granularity);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetLiveCampaignCountOverTime_Result>("GetLiveCampaignCountOverTime", CID, DateFrm, DatTo, Granulrty);
+        }
+        public ObjectResult<GetRevenueByCampaignOverTime_Result> GetRevenueByCampaignOverTime(int CompanyId, int CampaignType, DateTime DateFrom, DateTime DateTo, int Granularity)
+        {
+            var CID = new ObjectParameter("CompanyId", CompanyId);
+            var Ctype = new ObjectParameter("CampaignType", CampaignType);
+            var DateFrm = new ObjectParameter("DateFrom", DateFrom);
+            var DatTo = new ObjectParameter("DateTo", DateTo);
+            var Granulrty = new ObjectParameter("Granularity", Granularity);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetRevenueByCampaignOverTime_Result>("GetLiveCampaignCountOverTime",Ctype, CID, DateFrm, DatTo, Granulrty);
         }
 
         /// <summary>

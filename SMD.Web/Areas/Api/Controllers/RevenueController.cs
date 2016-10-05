@@ -12,20 +12,24 @@ namespace SMD.MIS.Areas.Api.Controllers
     public class RevenueController : ApiController
     {
         #region private
-        private readonly IDashboardService IDashboardService;
+        private readonly ITransactionService ITransactionService;
         #endregion
 
-        public RevenueController(IDashboardService _IDashboardService)
+        public RevenueController(ITransactionService _ITransactionService)
         {
-            this.IDashboardService = _IDashboardService;
+            this.ITransactionService = _ITransactionService;
         }
         // GET: api/Revenue
-        public IEnumerable<GetRevenueOverTime_Result> Get(int granuality, DateTime DateFrom, DateTime DateTo)
+        public IEnumerable<getPayoutVSRevenueOverTime_Result> Get(int granuality, DateTime DateFrom, DateTime DateTo)
         {
-           
-            return IDashboardService.GetRevenueOverTime(466, DateFrom, DateTo, granuality);
-        }
 
+            return ITransactionService.getPayoutVSRevenueOverTime(DateFrom, DateTo, granuality);
+        }
+        public  IEnumerable<GetRevenueByCampaignOverTime_Result> Get(int compnyId, int CampaignType, int Granularity, DateTime DateFrom, DateTime DateTo)
+        {
+
+            return ITransactionService.GetRevenueByCampaignOverTime(compnyId, CampaignType, DateFrom, DateTo, Granularity);
+        }
         // GET: api/Revenue/5
         //public string Get()
         //{

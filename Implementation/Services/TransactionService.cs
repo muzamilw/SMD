@@ -3,6 +3,7 @@ using SMD.Interfaces.Repository;
 using SMD.Interfaces.Services;
 using SMD.Models.DomainModels;
 using SMD.Models.ResponseModels;
+using System;
 
 namespace SMD.Implementation.Services
 {
@@ -62,6 +63,13 @@ namespace SMD.Implementation.Services
 
         }
 
+        public IEnumerable<getPayoutVSRevenueOverTime_Result> getPayoutVSRevenueOverTime(DateTime DateFrom, DateTime DateTo, int Granularity) {
+            return transactionRepository.getPayoutVSRevenueOverTime(DateFrom, DateTo, Granularity);
+        }
+        public IEnumerable<GetRevenueByCampaignOverTime_Result> GetRevenueByCampaignOverTime(int compnyId, int CampaignType, DateTime DateFrom, DateTime DateTo, int Granularity)
+        {
+            return transactionRepository.GetRevenueByCampaignOverTime(compnyId, CampaignType, DateFrom, DateTo, Granularity);
+        }
        // public IEnumerable<Transaction> GetTransactionByAccountId(int accountId)
         #endregion
     }

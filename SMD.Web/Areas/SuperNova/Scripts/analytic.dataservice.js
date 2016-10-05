@@ -32,6 +32,11 @@ define("analytic/analytic.dataservice", function () {
                         dataType: 'json',
                         type: 'GET'
                     });
+					amplify.request.define('getPayoutVSRevenueOverTime', 'ajax', {
+                        url: '/Api/Revenue',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
 					 amplify.request.define('getUserCounts', 'ajax', {
                         url: '/Api/User',
                         dataType: 'json',
@@ -68,7 +73,15 @@ define("analytic/analytic.dataservice", function () {
                     data: params
                 });
 			},
-			
+			getPayoutVSRevenueOverTime = function (params, callbacks) {
+                initialize();
+                return amplify.request({
+                    resourceId: 'getPayoutVSRevenueOverTime',
+                    success: callbacks.success,
+                    error: callbacks.error,
+                    data: params
+                });
+			},
 			getRevenueOverTime = function (params, callbacks) {
                 initialize();
                 return amplify.request({
@@ -94,7 +107,8 @@ define("analytic/analytic.dataservice", function () {
 			getDashboardInsights:getDashboardInsights,
 			getRevenueOverTime:getRevenueOverTime,
 			getCampaignsByStatus: getCampaignsByStatus,
-			getUserCounts:getUserCounts
+			getUserCounts:getUserCounts,
+			getPayoutVSRevenueOverTime:getPayoutVSRevenueOverTime
         };
     })();
     return dataService;
