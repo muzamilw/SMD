@@ -140,6 +140,8 @@ define("FranchiseDashboard/addApproval.viewModel",
                         confirmation.afterProceed(function () {
                             selectedCampaign().isApproved(true) ;
                             onSaveCampaign();
+                            $("#topArea").css("display", "block");
+                            $("#divApprove").css("display", "block");
                         });
                     },
                     // Reject buttoin handler 
@@ -156,6 +158,8 @@ define("FranchiseDashboard/addApproval.viewModel",
                             }
                             selectedCampaign().isApproved(false);
                             onSaveCampaign();
+                            $("#topArea").css("display", "block");
+                            $("#divApprove").css("display", "block");
                         });
                      
                     },
