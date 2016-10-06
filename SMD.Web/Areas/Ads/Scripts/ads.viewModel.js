@@ -721,8 +721,15 @@ define("ads/ads.viewModel",
                 },
 
               removeAdd = function () {
-                  if (campaignModel() != undefined)
-                      saveCampaign(7);
+                  confirmation.messageText("Are you sure you want to remove this ad ? This action cannot be undone.");
+                  confirmation.show();
+                  confirmation.afterCancel(function () {
+                      confirmation.hide();
+                  });
+                  confirmation.afterProceed(function () {
+                      if (campaignModel() != undefined)
+                          saveCampaign(7);
+                  });
               },
               ArchiveCampaign = function () {
                   saveCampaign(8);

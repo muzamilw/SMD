@@ -506,6 +506,7 @@ define("pQuestion/pQuestion.viewModel",
                                confirmation.hide();
                            });
                            confirmation.afterProceed(function () {
+                              if (selectedQuestion() != undefined)
                                onSaveProfileQuestion(7);
                            });
                             },

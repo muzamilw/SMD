@@ -1532,6 +1532,7 @@ define("survey/survey.viewModel",
                         confirmation.hide();
                     });
                     confirmation.afterProceed(function () {
+                       if (selectedQuestion() != undefined)
                         saveSurveyQuestion(7);
                     });   
                 },
