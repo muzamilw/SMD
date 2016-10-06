@@ -2635,9 +2635,9 @@ define("ads/ads.viewModel",
 
 
                 getQuestionByFilter = function() {
-                    debugger;
+                  
                     if (AditionalCriteriaMode() == 2) {
-                        debugger;
+                     
                         if (SearchProfileQuestion() != '') {
 
                             profileQuestionList(TemporaryProfileList());
