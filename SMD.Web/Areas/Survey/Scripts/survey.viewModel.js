@@ -1525,8 +1525,16 @@ define("survey/survey.viewModel",
                      $("#btnSubmitForApproval,#saveBtn,.lang_delSurvey,.table-link").css("display", "inline-block");
                      //$("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign").removeAttr('disabled');
                  },
-                terminateSaveChanges = function () {
-                    saveSurveyQuestion(7);
+                terminateSaveChanges = function (item) {
+                    confirmation.messageText("Are you sure you want to remove this Poll ? This action cannot be undone.");
+                    confirmation.show();
+                    confirmation.afterCancel(function () {
+                        confirmation.hide();
+                    });
+                    confirmation.afterProceed(function () {
+                       if (selectedQuestion() != undefined)
+                        saveSurveyQuestion(7);
+                    });   
                 },
                     disableControls = function(status)
                     {

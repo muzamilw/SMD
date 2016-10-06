@@ -721,8 +721,15 @@ define("ads/ads.viewModel",
                 },
 
               removeAdd = function () {
-                  if (campaignModel() != undefined)
-                      saveCampaign(7);
+                  confirmation.messageText("Are you sure you want to remove this ad ? This action cannot be undone.");
+                  confirmation.show();
+                  confirmation.afterCancel(function () {
+                      confirmation.hide();
+                  });
+                  confirmation.afterProceed(function () {
+                      if (campaignModel() != undefined)
+                          saveCampaign(7);
+                  });
               },
               ArchiveCampaign = function () {
                   saveCampaign(8);
@@ -2628,9 +2635,9 @@ define("ads/ads.viewModel",
 
 
                 getQuestionByFilter = function() {
-                    debugger;
+                  
                     if (AditionalCriteriaMode() == 2) {
-                        debugger;
+                     
                         if (SearchProfileQuestion() != '') {
 
                             profileQuestionList(TemporaryProfileList());
@@ -2681,7 +2688,22 @@ define("ads/ads.viewModel",
                             surveyquestionList.clear;
                             surveyquestionList(TemporarySurveyList());
                         }
+                        
+                        if (SearchProfileQuestion() != '') {
+                            surveyquestionList(TemporarySurveyList());
+                            var list = ko.utils.arrayFilter(surveyquestionList(), function (prod) {
 
+                                return prod.DisplayQuestion.toLowerCase().indexOf(SearchProfileQuestion().toLowerCase()) != -1;
+                            });
+                            surveyquestionList().clear;
+                            surveyquestionList(list);
+                        }
+                        else {
+                            surveyquestionList.clear;
+                            surveyquestionList(TemporarySurveyList());
+                        }
+
+                    }
                     }
                 }
 
