@@ -1821,8 +1821,9 @@ input[type="radio"] {
         }
 
 #login-box-inner {
-    padding: 60px 25px;
+    padding: 10px 25px;
     background-color: rgb(255, 255, 255);
+    padding-bottom:20px;
 }
 
 
@@ -1939,7 +1940,7 @@ input[type="radio"] {
 #login-box .social-text {
     margin: 0;
     padding: 15px 0;
-    text-align: center;
+    text-align: left;
     font-size: 0.875em;
 }
 

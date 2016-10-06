@@ -167,7 +167,8 @@
         AdWeeklyCollection = 11,
         WelcomeGiftBalance = 12,
         PromotionalCentz = 13,
-        ReferFriendBalance = 14
+        ReferFriendBalance = 14,
+        UnCollectedCentz = 14
 
 
     }

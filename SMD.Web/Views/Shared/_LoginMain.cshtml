@@ -35,25 +35,26 @@
             </button>
         </div>
     </div>
-    <div class="row">
-        <div class="col-xs-12">
+}
+    <div class="row" style="margin-top:15px;">
+        <div class="col-xs-6">
             <p class="social-text">
                 Or login with
             </p>
         </div>
+        <div class="col-xs-6 text-right ">
+            @Html.Partial("~/Views/Shared/_ExternalLoginPartial.cshtml")
+
+        </div>
     </div>
-}
-<div class="row">
-    @Html.Partial("~/Views/Shared/_ExternalLoginPartial.cshtml")    
-</div><br/>
+
+
 <div class="row">
     <div class="col-xs-12">
         <div class="create-account">
-            <p>
-                Don't have an account yet ?&nbsp;<br />
-
-                <a class="btn btn-darkgray col-xs-12" style="color:white;margin-top:10px;" href="~/Account/Register">Register</a>
-            </p>
+            
+                <a class="btn btn-darkgray col-xs-12" style="color:white;margin-top:10px; text-transform:none" href="~/Account/Register">Don't have an account yet - Register</a>
+            
         </div>
     </div>
 </div>

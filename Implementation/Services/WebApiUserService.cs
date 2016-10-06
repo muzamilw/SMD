@@ -942,11 +942,33 @@ namespace SMD.Implementation.Services
                 throw new SMDException(LanguageResources.WebApiUserService_InvalidUserId);
             }
 
+            Random rnd = new Random();
+            int numb = rnd.Next(100);
+
+
+            user.ContactNotes = "Archived user on app request="  + DateTime.Now.ToLongDateString() + ", old username=" + user.UserName + ", old email=" + user.Email;
+
             // Archive Account
             user.Status = (int)UserStatus.InActive;
+            user.ModifiedDateTime = DateTime.Now;
+            user.UserName = user.UserName + "_archived" + numb.ToString();
+            user.Email = user.Email + "_archived" + numb.ToString();
+
+
+            //removing any provider logins.
+            var logins = UserManager.GetLogins(userId);
+            if ( logins != null && logins.Count > 0)
+                foreach (var item in logins)
+                {
+                    UserManager.RemoveLogin(userId, item);
+                }
+            
 
             // Save Changes
             await UserManager.UpdateAsync(user);
+
+            //reset virtual accounts balance and transferring it back to Cash4ads virtual account
+            TransactionManager.ArchiveUserResetVirtualAccountBalance(user.CompanyId.Value);
 
             return new BaseApiResponse
                    {
