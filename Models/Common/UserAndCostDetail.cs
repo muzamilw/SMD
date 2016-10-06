@@ -37,5 +37,9 @@ namespace SMD.Models.Common
         public string GeoLong { get; set; }
 
         public string UserProfileImage { get; set; }
+
+
+        public bool? IsSpecialAccount { get; set; }
+        
     }
 }

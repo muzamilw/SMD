@@ -205,7 +205,9 @@ namespace SMD.Repository.Repositories
         public UserBaseData getBaseData()
         {
             UserBaseData data = new UserBaseData();
-            var usr = db.Users.Where(g => g.Id == LoggedInUserIdentity).SingleOrDefault();
+            var user = db.Users.Where(g => g.Id == LoggedInUserIdentity).SingleOrDefault();
+
+            var usr = db.Companies.Where(g => g.CompanyId == CompanyId).SingleOrDefault();
             
             if(usr!= null)
             {
@@ -213,19 +215,20 @@ namespace SMD.Repository.Repositories
             
          
                  //data.CityId =usr.Company == null? null: usr.Company.CityId;
-                 data.CountryId = usr.Company == null ? null : usr.Company.CountryId; 
-                 data.EducationId = usr.EducationId;
-                 data.IndustryId = usr.IndustryId;
-                 data.LanguageId = usr.LanguageId;
-                 data.City = usr.Company.City != null ? usr.Company.City : "";
-                 data.Country = usr.Company.Country != null ? usr.Company.Country.CountryName : "";
-                 data.Education = usr.Education != null?usr.Education.Title : "";
-                 data.Industry = usr.Industry != null?usr.Industry.IndustryName:"";
-                 data.Language = usr.Language != null? usr.Language.LanguageName: "";
-                data.isStripeIntegrated =usr.Company == null? false: String.IsNullOrEmpty(usr.Company.StripeCustomerId) == true ? false : true;
+                 data.CountryId = usr == null ? null : usr.CountryId; 
+                 data.EducationId = user.EducationId;
+                 data.IndustryId = user.IndustryId;
+                 data.LanguageId = user.LanguageId;
+                 data.City = usr.City != null ? usr.City : "";
+                 data.Country = usr.Country != null ? usr.Country.CountryName : "";
+                 data.Education = user.Education != null?user.Education.Title : "";
+                 data.Industry = user.Industry != null?user.Industry.IndustryName:"";
+                 data.Language = user.Language != null? user.Language.LanguageName: "";
+                data.isStripeIntegrated =usr == null? false: String.IsNullOrEmpty(usr.StripeCustomerId) == true ? false : true;
                 //data.Latitude = usr.Company.City != null ? usr.Company.City.GeoLat : "";
                 //data.Longitude = usr.Company.City != null ? usr.Company.City.GeoLong : "";
                  data.isUserAdmin = isAdmin;
+                 data.IsSpecialAccount = usr.IsSpecialAccount;
             }
 
             return data;

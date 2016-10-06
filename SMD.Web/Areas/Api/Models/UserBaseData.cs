@@ -22,5 +22,7 @@ namespace SMD.MIS.Areas.Api.Models
         public string Latitude { get; set; }
         public string Longitude { get; set; }
         public bool isUserAddmin { get; set; }
+
+        public bool? IsSpecialAccount { get; set; }
     }
 }
