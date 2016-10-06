@@ -104,6 +104,8 @@ define("FranchiseDashboard/surveyQuestionApp.viewModel",
                                 return false;
                             }
                             onSaveQuestion();
+                            $("#topArea").css("display", "block");
+                            $("#divApprove").css("display", "block");
                         });
                     },
                        getCompanyData = function (selectedItem) {
@@ -134,6 +136,8 @@ define("FranchiseDashboard/surveyQuestionApp.viewModel",
                          confirmation.afterProceed(function () {
                              selectedQuestion().isApproved(true);
                              onSaveQuestion();
+                             $("#topArea").css("display", "block");
+                             $("#divApprove").css("display", "block");
                              toastr.success("Approved Successfully.");
                          });
                      },

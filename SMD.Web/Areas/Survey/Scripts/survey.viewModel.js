@@ -1517,6 +1517,24 @@ define("survey/survey.viewModel",
                             return false;
                         }
                     },
+                 SavePassChanges = function () {
+                     if (selectedQuestion() != undefined)
+                         saveSurveyQuestion(4);
+
+                     //$("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
+                     $("#btnSubmitForApproval,#saveBtn,.lang_delSurvey,.table-link").css("display", "inline-block");
+                     //$("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign").removeAttr('disabled');
+                 },
+                terminateSaveChanges = function () {
+                    confirmation.messageText("Are you sure you want to remove this Poll ? This action cannot be undone.");
+                    confirmation.show();
+                    confirmation.afterCancel(function () {
+                        confirmation.hide();
+                    });
+                    confirmation.afterProceed(function () {
+                        saveSurveyQuestion(7);
+                    });   
+                },
                     disableControls = function(status)
                     {
                         $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
@@ -1529,8 +1547,8 @@ define("survey/survey.viewModel",
                             $("#btnPauseCampaign").css("display", "inline-block");
                             $("#btnPauseCampaign").removeAttr('disabled');
                         } else if (status == 4) {
-                            $("#btnResumeCampagin").css("display", "inline-block");
-                            $("#btnResumeCampagin").removeAttr('disabled');
+                            //$("#btnResumeCampagin").css("display", "inline-block");
+                            //$("#btnResumeCampagin").removeAttr('disabled');
                         }
                         $("#topArea a").removeAttr('disabled');
                     },
@@ -1690,7 +1708,9 @@ define("survey/survey.viewModel",
                     SaveAsDraft: SaveAsDraft,
                     updateSurveyCriteriass: updateSurveyCriteriass,
                     ShowAudienceCounter: ShowAudienceCounter,
-                    totalPrice: totalPrice
+                    totalPrice: totalPrice,
+                    SavePassChanges: SavePassChanges,
+                    terminateSaveChanges: terminateSaveChanges
                 };
             })()
         };

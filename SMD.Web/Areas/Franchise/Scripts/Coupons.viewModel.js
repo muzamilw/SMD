@@ -102,6 +102,8 @@ define("FranchiseDashboard/Coupons.viewModel",
                              confirmation.afterProceed(function () {
                                  selectedCoupon().isApproved(true);
                                  onSaveCoupon();
+                                 $("#topArea").css("display", "block");
+                                 $("#divApprove").css("display", "block");
                                  toastr.success("Approved Successfully.");
                              });
                          },
@@ -151,6 +153,8 @@ define("FranchiseDashboard/Coupons.viewModel",
                              }
                              selectedCoupon().isApproved(false);
                              onSaveCoupon();
+                             $("#topArea").css("display", "block");
+                             $("#divApprove").css("display", "block");
                              toastr.success("Rejected Successfully.");
                     },
                     getCompanyData = function (selectedItem)

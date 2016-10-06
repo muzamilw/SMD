@@ -47,7 +47,7 @@
         width: 838px;
         min-height: 52px;
         margin: .625rem;
-        
+        margin-left:0px;
     background-color: white;
     }
     #ProfileQtsList:nth-child(even) {
@@ -56,6 +56,19 @@
 
 #ProfileQtsList:nth-child(odd) {
     background-color: #f9f9f9!important;
+}
+
+#lv2:nth-child(odd) {
+    background-color: #f9f9f9!important;
+}
+   #lv2:nth-child(even) {
+    background-color:white!important;
+}
+   #lv1:nth-child(odd) {
+    background-color: #f9f9f9!important;
+}
+      #lv1:nth-child(even) {
+    background-color:white!important;
 }
     .listview .list.active {
         background-color: #d1e8ff;
@@ -86,13 +99,13 @@
     .listview.list-type-tiles .list .list-title {
           margin-top: 8px;
     display: inline-block;
-    min-width: 140px;
+    /*min-width: 140px;*/
 }
-    }
+    
 .parent-list-title{
       margin-top: 8px;
         display: block;
-        height:40px;
+        height:30px;
 }
 
 .clear-both {
@@ -105,17 +118,34 @@
     display:block;
 }
 .chlidList .list.active {
-     background-color: #45D145 !important;
+     background-color: #4dc5d3  !important;
 }
 .modelHeading{
         padding-left: 0.825rem;
     padding-bottom: 0.5rem;
     font-size: 14px;
-    font-weight: bold;
+ 
 }
 #lv1 .list {
-    background-color:lightgreen; overflow:hidden;
+    background-color:white; overflow:hidden;
 }
 #lv2 .list {
-    background-color:#FFE13B; overflow:hidden;
+    background-color:white; overflow:hidden;
+}
+
+
+
+.filterCrtTilesClr {
+        background-color: #81d3dc!important;
+    border-color: #81d3dc!important;
+    text-align: center;
+    border-radius: 5px;
+    color: white;
+}
+.active {
+  background-color: #f9f9f9!important;
+   border-color: #f9f9f9!important;
+}
+.ListRowHov:hover {
+    background-color: #f9f9f9;
 }
