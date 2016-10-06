@@ -6734,7 +6734,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
         </Association>
         <ComplexType Name="GetLiveCampaignCountOverTime_Result">
           <Property Type="String" Name="Granual" Nullable="false" MaxLength="24" />
-          <Property Type="Int32" Name="campCount" Nullable="false" />
+          <Property Type="Int64" Name="campCount" Nullable="true" />
         </ComplexType>
         <ComplexType Name="getPayoutVSRevenueOverTime_Result">
           <Property Type="String" Name="Granual" Nullable="false" MaxLength="24" />
