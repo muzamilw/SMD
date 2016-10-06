@@ -119,6 +119,9 @@ namespace SMD.Implementation.Identity
                     new DataProtectorTokenProvider<User, string>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
             return manager;
+
+            
         }
+
     }
 }

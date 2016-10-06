@@ -278,6 +278,13 @@ namespace SMD.MIS
          null,
          routeHandlers);
 
+        config.Routes.MapHttpRoute(
+         "UserFeedback",
+         "UserFeedback/{AuthenticationToken}/",
+         new { controller = "UserFeedback" },
+         null,
+         routeHandlers);
+
             
               config.Routes.MapHttpRoute(
             "RedeemPurchasedCoupon",

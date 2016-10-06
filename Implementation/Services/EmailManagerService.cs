@@ -88,6 +88,8 @@ namespace SMD.Implementation.Services
         private string smailsubject;
         public string Subj { get; set; }
 
+        public string feedback { get; set; }
+
         public string MBody { get; set; }
 
         public List<string> MMailto
@@ -302,6 +304,16 @@ namespace SMD.Implementation.Services
             MBody = MBody.Replace("++CurrentDateTime++", DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToLongTimeString() + " GMT");
             MBody = MBody.Replace("++EmailConfirmationLink++", EmailConfirmationLink);
             MBody = MBody.Replace("++inviteurl++", InviteURL);
+            MBody = MBody.Replace("++fname++", Fname);
+            MBody = MBody.Replace("++phone++", PhoneNo);
+
+            MBody = MBody.Replace("++feedback++", feedback);
+
+            MBody = MBody.Replace("++countryname++", CountryName);
+
+            MBody = MBody.Replace("++city++", City);
+
+
             if (Mid == (int)EmailTypes.ResetPassword)
             {
                 MBody = MBody.Replace("++PasswordResetLink++", PasswordResetLink);
@@ -976,6 +988,33 @@ namespace SMD.Implementation.Services
             {
                 throw new Exception("Email could not be sent!");
             }
+        }
+
+
+
+        /// <summary>
+        ///Invite User Email
+        /// </summary>
+        public void SendAppFeedback(string UserId, string feedback, string City, string Country, string FullName, string email, string phone)
+        {
+            MMailto.Add("info@cash4ads.com");
+            Mid = (int)EmailTypes.AppFeedbackFromUser;
+            string userName = FullName;
+            
+
+            this.Fname = FullName;
+            this.PhoneNo = phone;
+            this.sfemail = email;
+            this.feedback = feedback;
+            this.CountryName = Country;
+            this.City = City;
+
+            Muser = FullName;
+
+            SendEmailNotAysnc();
+
+
+
         }
 
         //public async Task SendEmailToInviteUser(string email, string UserId)

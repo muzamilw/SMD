@@ -255,6 +255,10 @@ namespace SMD.Implementation.Services
             User loggedInUser = _adCampaignRepository.GetUserById();
             Product campaignProduct = null;
             UserAndCostDetail objUC = new UserAndCostDetail();
+
+            var company = companyRepository.GetCompanyById();
+
+
             if (loggedInUser != null)
             {
                 campaignProduct = productRepository.GetProductByCountryId(code);
@@ -275,7 +279,8 @@ namespace SMD.Implementation.Services
                 objUC.EducationTitle = loggedInUser.Education != null ? loggedInUser.Education.Title : "";
                 objUC.IndustryName = loggedInUser.Industry != null ? loggedInUser.Industry.IndustryName : "";
                 objUC.LanguageName = loggedInUser.Language != null ? loggedInUser.Language.LanguageName : "";
-                objUC.isStripeIntegrated = loggedInUser.Company == null ? false : (String.IsNullOrEmpty(loggedInUser.Company.StripeCustomerId) || loggedInUser.Company.StripeCustomerId  == "undefined" ? false : true);
+                objUC.isStripeIntegrated = company == null ? false : (String.IsNullOrEmpty(company.StripeCustomerId) || company.StripeCustomerId == "undefined" ? false : true);
+                objUC.IsSpecialAccount = company.IsSpecialAccount;
             }
             if (campaignProduct != null)
             {

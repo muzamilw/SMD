@@ -1,6 +1,6 @@
-﻿USE [SMDv2]
+﻿
 GO
-/****** Object:  UserDefinedFunction [dbo].[GetUserProfileQuestions]    Script Date: 9/30/2016 10:11:56 AM ******/
+/****** Object:  UserDefinedFunction [dbo].[GetUserProfileQuestions]    Script Date: 10/5/2016 11:14:28 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -147,7 +147,7 @@ as
 		OFFSET 5 Rows
 		FETCH NEXT 1 Rows ONLY
 	) as pql6
-	where pqo.status = 1
+	where pqo.status = 3
 	 --pqo.HasLinkedQuestions = 1 and pqo.Status = 1
 	--UNION ALL
 	--select pq.pqid, pq.question, null, null,
@@ -358,7 +358,7 @@ outer apply (
 			where pq.PQID = pqu.PQID and pqu.UserID = @UserID --and pq.CountryID = @countryId -- commented because no need for country
 			order by pqu.pquanswerid) > 0 )	
 		)
-		and pq.status = 1
+		and pq.status = 3
 	)
 	UNION ALL
 	select pq.pqid, pq.question, null, null,
@@ -564,5 +564,5 @@ outer apply (
 		)
 	)
 	and
-	pq.Status = 1
+	pq.Status = 3
 )

@@ -261,6 +261,44 @@ namespace SMD.Implementation.Services
               }
 
           }
+
+
+
+
+          public static bool ArchiveUserResetVirtualAccountBalance(int CompanyId)
+          {
+
+              using (var dbContext = new BaseDbContext()) 
+              {
+
+                  var userCompany = dbContext.Companies.Where(g => g.CompanyId == CompanyId).SingleOrDefault();
+
+                  var smdCompany = GetCash4AdsUser(dbContext).Company;
+
+
+                  // if coupon 
+                  // get money from user virtual account 
+                  // add it to smd and users virtual account 
+                  // send user voucher email 
+
+
+                  Account userVirtualAccount = userCompany.Accounts.FirstOrDefault(acc => acc.AccountType == (int)AccountType.VirtualAccount);
+
+                  // deduct user centz balance.
+                  updateVirtualAccount(userCompany, userVirtualAccount.AccountBalance.Value, dbContext, TransactionType.UnCollectedCentz, false, null, null);
+                  // update smd users  virutal accont credit 
+                  updateVirtualAccount(smdCompany, userVirtualAccount.AccountBalance.Value, dbContext, TransactionType.UnCollectedCentz, true, null, null);
+                  // update smd users  virutal accont credit 
+                  //updateUsersVirtualAccount(coupon.Company, SwapCost, dbContext, 2, true, null, couponId);
+
+                  dbContext.SaveChanges();
+                  return true;
+              }
+
+          }
+
+
+
         // used by new payout scheduler 
         private static void UpdateAccountsUserPayout(Company Usercompany, Company smdCompany, double amount,
            BaseDbContext dbContext)
@@ -280,7 +318,7 @@ namespace SMD.Implementation.Services
         private static void UpdateUsersPaypalAccountNew(Company company, double amount,  BaseDbContext dbContext, bool isCredit = true)
         {
             Account usersPaypalAccount = company.Accounts.FirstOrDefault(acc => acc.AccountType == (int)AccountType.Paypal);
-            Account userVirtualAccount = company.Accounts.FirstOrDefault(acc => acc.AccountType == (int)AccountType.VirtualAccount);
+            //Account userVirtualAccount = company.Accounts.FirstOrDefault(acc => acc.AccountType == (int)AccountType.VirtualAccount);
             if (usersPaypalAccount == null)
             {
                 throw new Exception(string.Format(CultureInfo.InvariantCulture,
@@ -318,7 +356,7 @@ namespace SMD.Implementation.Services
             {
                 batchTransaction.CreditAmount = amount;
                 usersPaypalAccount.AccountBalance += amount;
-                userVirtualAccount.AccountBalance -= amount;
+                
 
             }
             else
@@ -614,6 +652,8 @@ namespace SMD.Implementation.Services
             // Initialize Service
             PaypalService = UnityConfig.UnityContainer.Resolve<IPaypalService>();
 
+           
+
             // Using Base DB Context
             using (var dbContext = new BaseDbContext())
             {
@@ -717,16 +757,17 @@ namespace SMD.Implementation.Services
         /// <returns>1 for success, 2 for balance insufficient, 3 for amount less than minimum limit, 0 for error</returns>
         public static int PerformUserPayout(string UserId,int companyId,double CentzAmount, string PayPalId, string Phone )
         {
+            payoutRepository = UnityConfig.UnityContainer.Resolve<IPayOutHistoryRepository>();
 
             var cashoutMinLimit = ConfigurationManager.AppSettings["CashoutMinLimit"];
 
             if (CentzAmount < (Convert.ToDouble(cashoutMinLimit)))
                 return 3;
 
-            double dollarAmount = CentzAmount / 100;
+            double dollarAmount = CentzAmount * 0.08;
 
 
-            //PaypalService = UnityConfig.UnityContainer.Resolve<IPaypalService>();
+            PaypalService = UnityConfig.UnityContainer.Resolve<IPaypalService>();
             using (var dbContext = new BaseDbContext())
             {
                 Company company = null;
@@ -778,6 +819,7 @@ namespace SMD.Implementation.Services
                         //creating payout history record
                         var payOutHistory = new PayOutHistory { CentzAmount = CentzAmount, CompanyId = companyId, DollarAmount = dollarAmount, RequestDateTime = DateTime.Now, TargetPayoutAccount = PayPalId };
                         payoutRepository.Add(payOutHistory);
+                        payoutRepository.SaveChanges();
 
                         // Email To User 
                         BackgroundEmailManagerService.EmailNotificationPayOutToUser(dbContext, user);

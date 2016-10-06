@@ -379,6 +379,7 @@
           <Property Name="BillingAddressName" Type="nvarchar" MaxLength="150" />
           <Property Name="IsDeleted" Type="bit" />
           <Property Name="DeleteDate" Type="datetime" />
+          <Property Name="IsSpecialAccount" Type="bit" />
         </EntityType>
         <EntityType Name="CompanyBranch">
           <Key>
@@ -2475,6 +2476,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Parameter Name="Granularity" Type="int" Mode="In" />
         </Function>
         <Function Name="GetUserCounts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetUserProfileCompletness" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="ResetProductsUserResponses" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SearchCampaigns" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Status" Type="int" Mode="In" />
@@ -3744,6 +3748,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <Parameter Name="DateFrom" Mode="In" Type="DateTime" />
             <Parameter Name="DateTo" Mode="In" Type="DateTime" />
             <Parameter Name="Granularity" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetUserProfileCompletness" ReturnType="Collection(Int32)">
+            <Parameter Name="UserId" Mode="In" Type="String" />
           </FunctionImport>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
@@ -6201,6 +6208,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="IsDeleted" Type="Boolean" />
           <Property Name="DeleteDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="PayOutHistories" Relationship="DomainModels.FK_PayOutHistory_Company" FromRole="Company" ToRole="PayOutHistory" />
+          <Property Name="IsSpecialAccount" Type="Boolean" />
         </EntityType>
         <Association Name="FK_Account_Company">
           <End Type="DomainModels.Company" Role="Company" Multiplicity="0..1" />
@@ -8099,6 +8107,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="Companies">
             <EntityTypeMapping TypeName="DomainModels.Company">
               <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="IsSpecialAccount" ColumnName="IsSpecialAccount" />
                 <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="BillingAddressName" ColumnName="BillingAddressName" />
@@ -8405,6 +8414,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetUserProfileCompletness" FunctionName="SMDModel.Store.GetUserProfileCompletness" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

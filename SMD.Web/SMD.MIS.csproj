@@ -386,6 +386,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Api\Controllers\PayoutRevenueController.cs" />
     <Compile Include="Areas\Api\Controllers\SuperNovaCampaignController.cs" />
+    <Compile Include="Areas\Api\Controllers\UserFeedbackController.cs" />
     <Compile Include="Areas\Api\Controllers\UserController.cs" />
     <Compile Include="Areas\Api\Controllers\ApproveProfileQuestionAnsController.cs" />
     <Compile Include="Areas\Api\Controllers\ApproveProfileQuestionController.cs" />
@@ -1174,6 +1175,7 @@
     <Content Include="Images\youtube_play.JPG" />
     <Content Include="ReportViewers\Publisher.aspx" />
     <Content Include="ReportViewers\SMDReport.aspx" />
+    <Content Include="ReportViewers\test.html" />
     <Content Include="RichTextEditor\adapters\jquery.js" />
     <Content Include="RichTextEditor\build-config.js" />
     <Content Include="RichTextEditor\ckeditor.js" />
