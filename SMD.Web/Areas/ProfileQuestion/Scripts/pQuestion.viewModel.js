@@ -577,6 +577,7 @@ define("pQuestion/pQuestion.viewModel",
                                confirmation.hide();
                            });
                            confirmation.afterProceed(function () {
+                              if (selectedQuestion() != undefined)
                                onSaveProfileQuestion(7);
                            });
                             },
@@ -871,6 +872,7 @@ define("pQuestion/pQuestion.viewModel",
                                 selectedQuestion().questionString(obj.Question);
                                 selectedQuestion().priority(obj.Priority);
                                 selectedQuestion().hasLinkedQuestions(obj.HasLinkedQuestions);
+                                selectedQuestion().qId(obj.PqId);
                                 // Update Linked Questions
                                 linkedQuestions.push({ PqId: obj.PqId, Question: obj.Question });
                                 isEditorVisible(false);
