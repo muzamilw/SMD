@@ -36,5 +36,10 @@ namespace SMD.MIS.Areas.Api.Models
 
 
         public bool? IsSpecialAccount { get; set; }
+        public string CurrencyCode { get; set; }
+
+        public string CurrencySymbol { get; set; }
+
+
     }
 }
