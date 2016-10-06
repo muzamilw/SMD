@@ -1,6 +1,5 @@
-﻿USE [SMDv2]
-GO
-/****** Object:  StoredProcedure [dbo].[GetLiveCampaignCountOverTime]    Script Date: 10/4/2016 11:55:19 PM ******/
+﻿GO
+/****** Object:  StoredProcedure [dbo].[GetLiveCampaignCountOverTime]    Script Date: 10/6/2016 5:59:41 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -130,7 +129,7 @@ FROM
 			@T1 t 
 			left outer join CampaignEventHistory c on c.EventDateTime <= t.date
 			inner join AdCampaign ac on ac.CampaignID = c.CampaignID 
-			where  c.CampaignID is not null and ac.Type = 1 and c.EventStatus = 3
+			where  c.CampaignID is not null and ac.Type = 1 and c.EventStatusId = 3
 			
 			group by c.CampaignID 
 			) evntHis on gg.date > =  evntHis.maxdate
@@ -146,7 +145,7 @@ FROM
 			@T1 t 
 			left outer join CampaignEventHistory c on c.EventDateTime <= t.date
 			inner join AdCampaign ac on ac.CampaignID = c.CampaignID 
-			where  c.CampaignID is not null and ac.Type = 2 and c.EventStatus = 3
+			where  c.CampaignID is not null and ac.Type = 2 and c.EventStatusId = 3
 			
 			group by c.CampaignID 
 			) evntHis on gg.date > =  evntHis.maxdate
@@ -161,7 +160,7 @@ FROM
 			select Max(c.EventDateTime) maxdate, c.PQID  from
 			@T1 t 
 			left outer join CampaignEventHistory c on c.EventDateTime <= t.date
-			where  c.PQID is not null  and c.EventStatus = 3
+			where  c.PQID is not null  and c.EventStatusId = 3
 			group by c.PQID 
 			) evntHis on gg.date > =  evntHis.maxdate
 			group by gg.Granual
@@ -175,7 +174,7 @@ FROM
 			select Max(c.EventDateTime) maxdate, c.SQID  from
 			@T1 t 
 			left outer join CampaignEventHistory c on c.EventDateTime <= t.date
-			where  c.SQID is not null  and c.EventStatus = 3
+			where  c.SQID is not null  and c.EventStatusId = 3
 			group by c.SQID 
 			) evntHis on gg.date > =  evntHis.maxdate
 			group by gg.Granual
@@ -190,7 +189,7 @@ FROM
 			@T1 t 
 			left outer join CampaignEventHistory c on c.EventDateTime <= t.date
 			inner join Coupon ac on ac.CouponId = c.CouponId 
-			where  c.CouponId is not null and ac.CouponListingMode = 1 and c.EventStatus = 3
+			where  c.CouponId is not null and ac.CouponListingMode = 1 and c.EventStatusId = 3
 			group by c.CouponId 
 			) evntHis on gg.date > =  evntHis.maxdate
 			group by gg.Granual
@@ -205,7 +204,7 @@ FROM
 			@T1 t 
 			left outer join CampaignEventHistory c on c.EventDateTime <= t.date
 			inner join Coupon ac on ac.CouponId = c.CouponId 
-			where  c.CouponId is not null and ac.CouponListingMode = 2 and c.EventStatus = 3
+			where  c.CouponId is not null and ac.CouponListingMode = 2 and c.EventStatusId = 3
 			group by c.CouponId 
 			) evntHis on gg.date > =  evntHis.maxdate
 			group by gg.Granual
@@ -217,8 +216,3 @@ FROM
 	END
 	
 
-
-	
-	
-
---EXEC [GetLiveCampaignCountOverTime] 1, '2016-9-01', '2016-10-1', 1 

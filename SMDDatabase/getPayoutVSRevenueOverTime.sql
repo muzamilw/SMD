@@ -1,5 +1,5 @@
 ﻿GO
-/****** Object:  StoredProcedure [dbo].[getApprovedCampaignsOverTime]    Script Date: 10/3/2016 7:30:50 PM ******/
+/****** Object:  StoredProcedure [dbo].[getPayoutVSRevenueOverTime]    Script Date: 10/6/2016 5:59:44 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -9,7 +9,7 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE [dbo].[getPayoutVSRevenueOverTime] (
+ALTER PROCEDURE [dbo].[getPayoutVSRevenueOverTime] (
 @DateFrom DateTime, 
 @DateTo	DateTime,
 @Granularity INT		----- 1 for day, 2 for week, 3 for month and 4 for year
@@ -20,7 +20,7 @@ BEGIN
 -- interfering with SELECT statements.
 SET NOCOUNT ON;
 DECLARE @StartDate DATE = '20000101', @NumberOfYears INT = 30;
-select 'nnnnnnnnnnnnnnnnnnnnnnnn' Granual , 0.0 revStats, 0.0 PayoutStats
+--select 'nnnnnnnnnnnnnnnnnnnnnnnn' Granual , 0 revStats, 0 PayoutStats
 -- prevent set or regional settings from interfering with 
 -- interpretation of dates / literals
 
@@ -125,20 +125,20 @@ DECLARE @CutoffDate DATE = DATEADD(YEAR, @NumberOfYears, @StartDate);
 
 
 	insert into @payout
-	Select  t.Granual, CASE WHEN sum(tt.CreditAmount) > 0 THEN sum(tt.CreditAmount) ELSE 0 END PayoutStats
+	Select  t.Granual, CASE WHEN sum(tt.DebitAmount) > 0 THEN sum(tt.CreditAmount) ELSE 0 END PayoutStats
 	from [Transaction] tt
 	right outer join   @T1 t on t.date = CONVERT(date, tt.TransactionDate)
 	left outer join Account a on a.AccountId = tt.AccountID
-	where AccountType = 1
+	where AccountType = 2
 	
 	group by t.Granual
 			
 	insert into @rev
-	select t.Granual , sum(tt.DebitAmount) as revStats
+	select t.Granual , sum(tt.CreditAmount) as revStats
 	from @T1 t
 	left join [Transaction] tt on t.date = CONVERT(date, tt.TransactionDate)
 	inner join Account a on a.AccountId = tt.AccountID
-	AND  a.AccountType = 4 
+	AND  a.AccountType = 1
 	group by t.Granual
 			
 	
@@ -150,5 +150,5 @@ DECLARE @CutoffDate DATE = DATEADD(YEAR, @NumberOfYears, @StartDate);
 END
 
 
---EXEC [getPayoutVSRevenueOverTime] '2016-8-26', '2016-9-26', 1
+--EXEC [getPayoutVSRevenueOverTime] '2016-9-6', '2016-10-6', 1
 

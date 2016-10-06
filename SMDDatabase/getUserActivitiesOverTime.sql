@@ -1,6 +1,5 @@
-﻿
-GO
-/****** Object:  StoredProcedure [dbo].[getApprovedCampaignsOverTime]    Script Date: 10/3/2016 7:30:50 PM ******/
+﻿GO
+/****** Object:  StoredProcedure [dbo].[getUserActivitiesOverTime]    Script Date: 10/6/2016 5:59:57 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -10,7 +9,7 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-Alter PROCEDURE [dbo].[getUserActivitiesOverTime] (
+ALTER PROCEDURE [dbo].[getUserActivitiesOverTime] (
 @DateFrom DateTime, 
 @DateTo	DateTime,
 @Granularity INT		----- 1 for day, 2 for week, 3 for month and 4 for year
@@ -21,14 +20,13 @@ BEGIN
 -- interfering with SELECT statements.
 SET NOCOUNT ON;
 DECLARE @StartDate DATE = '20000101', @NumberOfYears INT = 30;
-select 'vvvvvvvvvvvvvv' Granual, 0 newStats, 0 loginStats,  0 deleteStats
+
 -- prevent set or regional settings from interfering with 
 -- interpretation of dates / literals
 
 SET DATEFIRST 7;
 SET DATEFORMAT mdy;
 SET LANGUAGE US_ENGLISH;
-
 DECLARE @CutoffDate DATE = DATEADD(YEAR, @NumberOfYears, @StartDate);
 
 -- this is just a holding table for intermediate calculations:

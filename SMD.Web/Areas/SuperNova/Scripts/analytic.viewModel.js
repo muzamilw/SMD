@@ -260,8 +260,10 @@ define("analytic/analytic.viewModel",
                             });
                     },
 					ReloadAnalytic = function () {
-						getRevenueOverTime();
 						getPayoutVSRevenueOverTime();
+						getRevenueOverTime();
+						getUserActivitiesOverTime();
+						GetLiveCampaignCountOverTime();
 					},
                     // Initialize the view model
                     initialize = function (specifiedView) {

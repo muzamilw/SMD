@@ -1,6 +1,6 @@
 ﻿
 GO
-/****** Object:  StoredProcedure [dbo].[GetAdminDashBoardInsights]    Script Date: 10/3/2016 1:39:40 PM ******/
+/****** Object:  StoredProcedure [dbo].[GetAdminDashBoardInsights]    Script Date: 10/6/2016 5:57:25 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -37,7 +37,7 @@ from
 		from SurveyQuestion sq
 		inner join 	(SELECT SQID, MIN(EventDateTime) AS MinDateTime
 				FROM CampaignEventHistory
-				where EventStatus = 3
+				where EventStatusId = 3
 				GROUP BY SQID)  evntHis
 			on sq.SQID = evntHis.SQID
 			inner join Country c on sq.CountryID = c.CountryID
@@ -48,7 +48,7 @@ from
 		from ProfileQuestion pq
 		inner join 	(SELECT PQID, MIN(EventDateTime) AS MinDateTime
 				FROM CampaignEventHistory
-				where EventStatus = 3
+				where EventStatusId = 3
 				GROUP BY PQID)  evntHis
 			on pq.PQID = evntHis.PQID
 			inner join Country c on pq.CountryID = c.CountryID
@@ -59,7 +59,7 @@ from
 		from AdCampaign ac
 		inner join 	(SELECT CampaignID, MIN(EventDateTime) AS MinDateTime
 				FROM CampaignEventHistory
-				where EventStatus = 3
+				where EventStatusId = 3
 				GROUP BY CampaignID)  evntHis
 			on ac.CampaignID = evntHis.CampaignID
 			inner join Company co on ac.CompanyId = co.CompanyId
@@ -71,7 +71,7 @@ from
 		from Coupon cpn
 		inner join 	(SELECT CouponId, MIN(EventDateTime) AS MinDateTime
 				FROM CampaignEventHistory
-				where EventStatus = 3
+				where EventStatusId = 3
 				GROUP BY CouponId)  evntHis
 			on cpn.CouponId = evntHis.CouponId
 			inner join Company co on cpn.CompanyId = co.CompanyId
@@ -86,7 +86,7 @@ from
 		from AdCampaign ac
 		inner join 	(SELECT CampaignID, MIN(EventDateTime) AS MinDateTime
 				FROM CampaignEventHistory
-				where EventStatus = 3
+				where EventStatusId = 3
 				GROUP BY CampaignID)  evntHis
 			on ac.CampaignID = evntHis.CampaignID
 			inner join Company co on ac.CompanyId = co.CompanyId
@@ -99,7 +99,7 @@ from
 		from AdCampaign ac
 		inner join 	(SELECT CampaignID, MIN(EventDateTime) AS MinDateTime
 				FROM CampaignEventHistory
-				where EventStatus = 3
+				where EventStatusId = 3
 				GROUP BY CampaignID)  evntHis
 			on ac.CampaignID = evntHis.CampaignID
 			inner join Company co on ac.CompanyId = co.CompanyId
@@ -113,7 +113,7 @@ from
 		from ProfileQuestion pq
 		inner join 	(SELECT PQID, MIN(EventDateTime) AS MinDateTime
 				FROM CampaignEventHistory
-				where EventStatus = 3
+				where EventStatusId = 3
 				GROUP BY PQID)  evntHis
 			on pq.PQID = evntHis.PQID
 			inner join Country c on pq.CountryID = c.CountryID
@@ -126,7 +126,7 @@ from
 		from SurveyQuestion sq
 		inner join 	(SELECT SQID, MIN(EventDateTime) AS MinDateTime
 				FROM CampaignEventHistory
-				where EventStatus = 3
+				where EventStatusId = 3
 				GROUP BY SQID)  evntHis
 			on sq.SQID = evntHis.SQID
 			inner join Country c on sq.CountryID = c.CountryID
@@ -281,7 +281,7 @@ from
 		inner join AdCampaign ac on ac.CampaignID = t.AdCampaignID
 		inner join Company co on ac.CompanyId = co.CompanyId
 		inner join Country c on co.CountryId = c.CountryID
-		where t.TransactionDate > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND t.Type = 1 AND a.AccountType = 1 AND ac.Type = 1
+		where t.TransactionDate > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND t.Type = 1 AND a.AccountType = 1 AND ac.Type = 1 and a.CompanyId = 466
 		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, t.TransactionDate), 0) ,  c.CountryCode
 
 		union 
@@ -291,7 +291,7 @@ from
 		inner join AdCampaign ac on ac.CampaignID = t.AdCampaignID
 		inner join Company co on ac.CompanyId = co.CompanyId
 		inner join Country c on co.CountryId = c.CountryID
-		where t.TransactionDate > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND t.Type = 1 AND  a.AccountType = 1 AND ac.Type = 4
+		where t.TransactionDate > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND t.Type = 1 AND  a.AccountType = 1 AND ac.Type = 4 and a.CompanyId = 466
 		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, t.TransactionDate), 0) ,  c.CountryCode
 		union
 
@@ -300,7 +300,7 @@ from
 		inner join Account a on a.AccountId = t.AccountID
 		inner join ProfileQuestion pq on pq.PQID = t.PQID
 		inner join Country c on pq.CountryId = c.CountryID
-		where t.TransactionDate > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND t.Type = 7 AND  a.AccountType = 1 
+		where t.TransactionDate > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND t.Type = 7 AND  a.AccountType = 1 and a.CompanyId = 466
 		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, t.TransactionDate), 0) ,  c.CountryCode
 
 		union 
@@ -309,7 +309,7 @@ from
 		inner join Account a on a.AccountId = t.AccountID
 		inner join SurveyQuestion sq on sq.SQID = t.SQID
 		inner join Country c on sq.CountryId = c.CountryID
-		where t.TransactionDate > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND t.Type = 2 AND  a.AccountType = 1 
+		where t.TransactionDate > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND t.Type = 2 AND  a.AccountType = 1 and a.CompanyId = 466
 		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, t.TransactionDate), 0) ,  c.CountryCode
 
 		
@@ -323,7 +323,7 @@ from
 		inner join Coupon cpn on cpn.CouponId = t.CouponId
 		inner join Company co on cpn.CompanyId = co.CompanyId
 		inner join Country c on co.CountryId = c.CountryID
-		where t.TransactionDate > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND t.Type = 8 AND  a.AccountType = 1 
+		where t.TransactionDate > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND t.Type = 8 AND  a.AccountType = 1 and a.CompanyId = 466
 		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, t.TransactionDate), 0) ,  c.CountryCode
 
 		union
@@ -332,7 +332,7 @@ from
 		inner join Account a on a.AccountId = t.AccountID
 		inner join Company co on a.CompanyId = co.CompanyId
 		inner join Country c on co.CountryId = c.CountryID
-		where t.TransactionDate > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND  a.AccountType = 1 
+		where t.TransactionDate > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND  a.AccountType = 1 and a.CompanyId = 466
 		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, t.TransactionDate), 0) ,  c.CountryCode
 		union  
 		select 41 as ordr,  sum(t.DebitAmount) stats, c.CountryCode, (case when month( DATEADD(MONTH,DATEDIFF(MONTH, 0, t.TransactionDate), 0)) = month(getdate()) then 'current' else 'prev' end) pMonth,'Payout via PayPal' rectype
@@ -340,7 +340,7 @@ from
 		inner join Account a on a.AccountId = t.AccountID
 		inner join Company co on a.CompanyId = co.CompanyId
 		inner join Country c on co.CountryId = c.CountryID
-		where t.TransactionDate > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND t.Type = 10 AND  a.AccountType = 4 
+		where t.TransactionDate > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND t.Type = 10 AND  a.AccountType = 2 
 		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, t.TransactionDate), 0) ,  c.CountryCode
 		
 

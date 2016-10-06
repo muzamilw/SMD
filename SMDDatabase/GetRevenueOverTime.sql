@@ -1,6 +1,5 @@
-﻿USE [SMDv2]
-GO
-/****** Object:  StoredProcedure [dbo].[GetRevenueOverTime]    Script Date: 9/19/2016 1:40:27 PM ******/
+﻿GO
+/****** Object:  StoredProcedure [dbo].[GetRevenueOverTime]    Script Date: 10/6/2016 5:59:51 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
