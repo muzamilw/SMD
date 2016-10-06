@@ -2,6 +2,7 @@
 using SMD.Models.DomainModels;
 using SMD.Models.RequestModels;
 using SMD.Models.ResponseModels;
+using System;
 using System.Collections.Generic;
 
 namespace SMD.Interfaces.Services
@@ -57,6 +58,8 @@ namespace SMD.Interfaces.Services
         AdCampaign SendApprovalRejectionEmail(AdCampaign source);
         string UpdateAdApprovalCampaign(AdCampaign source);
         IEnumerable<getCampaignsByStatus_Result> getCampaignsByStatus();
+        IEnumerable<GetLiveCampaignCountOverTime_Result> GetLiveCampaignCountOverTime(int CampaignType, DateTime DateFrom, DateTime DateTo, int Granularity);
+       
 
         //CouponCodeModel GenerateCouponCodes(int numbers, long CampaignId);
         

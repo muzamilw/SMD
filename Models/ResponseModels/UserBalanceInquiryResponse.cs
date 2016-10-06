@@ -10,6 +10,8 @@ namespace SMD.Models.ResponseModels
         /// Balance
         /// </summary>
         public double? Balance { get; set; }
+
+        public double? ProfileCompleteness { get; set; }
     }
     public class StatementInquiryResponse : BaseApiResponse
     {

@@ -69,7 +69,7 @@ namespace SMD.MIS.Areas.Api.Controllers
            
         }
 
-
+        //GetLiveCampaignCountOverTime
         public void Post(SMD.Models.DomainModels.AdCampaign campaignModel)
         {
             //campaignModel.Status = (int)AdCampaignStatus.Draft;

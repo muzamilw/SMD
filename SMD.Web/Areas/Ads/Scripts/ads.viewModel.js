@@ -2688,7 +2688,22 @@ define("ads/ads.viewModel",
                             surveyquestionList.clear;
                             surveyquestionList(TemporarySurveyList());
                         }
+                        
+                        if (SearchProfileQuestion() != '') {
+                            surveyquestionList(TemporarySurveyList());
+                            var list = ko.utils.arrayFilter(surveyquestionList(), function (prod) {
 
+                                return prod.DisplayQuestion.toLowerCase().indexOf(SearchProfileQuestion().toLowerCase()) != -1;
+                            });
+                            surveyquestionList().clear;
+                            surveyquestionList(list);
+                        }
+                        else {
+                            surveyquestionList.clear;
+                            surveyquestionList(TemporarySurveyList());
+                        }
+
+                    }
                     }
                 }
 

@@ -44,16 +44,30 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Login
         /// </summary>
-        [ApiExceptionCustom]
+        //[ApiExceptionCustom]
         public async Task<UserBalanceInquiryResponse> Get(string authenticationToken, [FromUri] UserBalanceInquiryRequest request)
         {
+            try 
+	{	        
+		
+
             if (request == null || !ModelState.IsValid || string.IsNullOrEmpty(authenticationToken))
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
             }
 
             LoginResponse response = await webApiUserService.GetById(request.UserId);
-            return response.CreateFromForBalance();
+            var finalResponse =  response.CreateFromForBalance();
+            finalResponse.ProfileCompleteness = webApiUserService.GetUserProfileCompletness(request.UserId);
+            return finalResponse;
+
+	        }
+	        catch (Exception e)
+	        {
+		
+		        return new UserBalanceInquiryResponse{ Status = false, Message = e.ToString()};
+	        }
+
         }
 
         #endregion

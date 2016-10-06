@@ -23,5 +23,7 @@ namespace SMD.Models.Common
         public string Latitude { get; set; }
         public string Longitude { get; set; }
         public bool isUserAdmin { get; set; }
+
+        public bool? IsSpecialAccount { get; set; }
     }
 }

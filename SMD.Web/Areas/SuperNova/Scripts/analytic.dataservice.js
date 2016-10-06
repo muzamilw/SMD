@@ -32,15 +32,30 @@ define("analytic/analytic.dataservice", function () {
                         dataType: 'json',
                         type: 'GET'
                     });
+					amplify.request.define('getPayoutVSRevenueOverTime', 'ajax', {
+                        url: '/Api/PayoutRevenue',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
 					 amplify.request.define('getUserCounts', 'ajax', {
                         url: '/Api/User',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
+					 amplify.request.define('getUserActivitiesOverTime', 'ajax', {
+                        url: '/Api/User',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
+					amplify.request.define('GetLiveCampaignCountOverTime', 'ajax', {
+                        url: '/Api/SuperNovaCampaign',
                         dataType: 'json',
                         type: 'GET'
                     });
                     isInitialized = true;
                 }
             },
-            // get DashboardInsight
+            // get DashboardInsight 
             getDashboardInsights = function (params, callbacks) {
                 initialize();
                 return amplify.request({
@@ -68,11 +83,37 @@ define("analytic/analytic.dataservice", function () {
                     data: params
                 });
 			},
-			
+			getUserActivitiesOverTime = function (params, callbacks) {
+                initialize();
+                return amplify.request({
+                    resourceId: 'getUserActivitiesOverTime',
+                    success: callbacks.success,
+                    error: callbacks.error,
+                    data: params
+                });
+			},
+			getPayoutVSRevenueOverTime = function (params, callbacks) {
+                initialize();
+                return amplify.request({
+                    resourceId: 'getPayoutVSRevenueOverTime',
+                    success: callbacks.success,
+                    error: callbacks.error,
+                    data: params
+                });
+			},
 			getRevenueOverTime = function (params, callbacks) {
                 initialize();
                 return amplify.request({
                     resourceId: 'getRevenueOverTime',
+                    success: callbacks.success,
+                    error: callbacks.error,
+                    data: params
+                });
+			},
+			GetLiveCampaignCountOverTime  = function (params, callbacks) {
+                initialize();
+                return amplify.request({
+                    resourceId: 'GetLiveCampaignCountOverTime',
                     success: callbacks.success,
                     error: callbacks.error,
                     data: params
@@ -94,7 +135,11 @@ define("analytic/analytic.dataservice", function () {
 			getDashboardInsights:getDashboardInsights,
 			getRevenueOverTime:getRevenueOverTime,
 			getCampaignsByStatus: getCampaignsByStatus,
-			getUserCounts:getUserCounts
+			getUserCounts:getUserCounts,
+			getPayoutVSRevenueOverTime:getPayoutVSRevenueOverTime,
+			getUserActivitiesOverTime : getUserActivitiesOverTime,
+			GetLiveCampaignCountOverTime:GetLiveCampaignCountOverTime
+			
         };
     })();
     return dataService;

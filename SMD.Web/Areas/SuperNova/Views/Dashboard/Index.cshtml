@@ -243,8 +243,9 @@
           <div class="col-lg-12">
             <div class="main-box">
                 <div class="row">
-                    <div class="col-lg-8"></div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-6"></div>
+                    <div class="col-lg-6">
+                        <select class="form-control margin10" style="width:35%!important;" id="ddprevenue" data-bind="options: $root.granularityDropDown, optionsText: 'name', optionsValue: 'id', value:$root.selectedGranualforPayoutRevenue, event: { change: $root.getRevenueOverTime }"></select>
                         <label class="control-label text-right pull-left margin10" style="padding-top:8px;">Date Range </label>
                         <input type="text" class="form-control margin10 pull-left" style="width:35%;" id="FromDate" data-bind="datepicker:$root.analyticFromdate,  event: { change: $root.ReloadAnalytic }">
                         <input type="text" class="form-control margin10" style="width:35%;" id="ToDate" data-bind="datepicker:$root.analyticTodate,  event: { change: $root.ReloadAnalytic }">
@@ -252,17 +253,15 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-6">
-                        @*<h2 class="graphheaderleft">Top 10 Spenders on platform</h2>
-                        <div class="form-group lightgray-bg graph-box-analytics">
-                        </div>*@
-                        <h2 class="graphheaderleft">Revenue over time</h2>
+                       
+                        <h2 class="graphheaderleft">Pay Pal Payout vs All Revenue</h2>
                         <div class="form-group lightgray-bg graph-box-analytics" style="margin-right:10px">
                         </div>
                         <div class=" margin10">
-                            <select class="form-control" style="width:35%!important;" id="ddprevenue" data-bind="options: $root.granularityDropDown, optionsText: 'name', optionsValue: 'id', value:$root.selectedGranualforRevenue, event: { change: $root.getRevenueOverTime }"></select>
+                          
                             
 
-                            <div class="margin-Top-30" data-bind="morris: {type: 'Line', data: $root.RevenueOverTimeData, xkey: 'granular', ykeys: ['amountcollected'], labels: ['Revenue'], parseTime:false, setAxisAlignFirstX: true}" ></div>
+                            <div class="margin-Top-30" data-bind="morris: {type: 'Line', data: $root.PayoutVSRevenueOverTimeData, xkey: 'granular', ykeys: ['revStats', 'PayoutStats'], labels: ['All Revenue', 'Payout to Paypal'], parseTime:false, setAxisAlignFirstX: true}"></div>
                             
                           </div>
                     </div>
@@ -277,10 +276,38 @@
                              
                             </div>
                         </div>*@
-                        <h2 class="graphheaderright">Active Users</h2>
+                        <h2 class="graphheaderright">New Registrations vs Logged in vs deleted </h2>
                         <div class="form-group lightgray-bg graph-box-analytics" style="margin-right:10px">
-                            <div data-bind="morris: {type: 'Bar', data: $root.activeUser, xkey: 'Granual', ykeys: ['NewStats', 'ActiveStats'], labels: ['New Users','Active Users'], stacked: true}" style="width: 600px; float: left; margin-top:96px;"></div>
+                            <div data-bind="morris: {type: 'Line', data: $root.UserActivitiesOverTimeData, xkey: 'Granual', ykeys: ['newStats', 'loginStats', 'deleteStats'], labels: ['New Users','Active Users', 'Deleted User'], parseTime:false, setAxisAlignFirstX: true}" style="width: 600px; float: left; margin-top:96px;"></div>
                         </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h2 class="graphheaderleft">Live Campaign Counts</h2>
+                        <div class="form-group lightgray-bg graph-box-analytics" style="margin-right:10px">
+                        </div>
+                        <div class=" margin10">
+                            <select class="form-control" style="width:35%!important;" id="ddprevenue" data-bind="options: $root.CampaignTypeForLiveCampDD, optionsText: 'name', optionsValue: 'id', value:$root.LCampaignType, event: { change: $root.GetLiveCampaignCountOverTime }"></select>
+
+
+                            <div class="margin-Top-30" data-bind="morris: {type: 'Line', data: $root.LiveCampaignOverTimeData, xkey: 'Granual', ykeys: ['revStats', 'PayoutStats'], labels: ['All Revenue', 'Payout to Paypal'], parseTime:false, setAxisAlignFirstX: true}"></div>
+
+                        </div>
+                       
+                    </div>
+                    <div class="col-lg-6">
+                        <h2 class="graphheaderleft">Revenue by Campaign</h2>
+                        <div class="form-group lightgray-bg graph-box-analytics" style="margin-right:10px">
+                        </div>
+                        <div class=" margin10">
+                            <select class="form-control" style="width:35%!important;" id="ddprevenue" data-bind="options: $root.CampaignTypeDD, optionsText: 'name', optionsValue: 'id', value:$root.rCampaignType, event: { change: $root.getRevenueOverTime }"></select>
+
+
+                            <div class="margin-Top-30" data-bind="morris: {type: 'Line', data: $root.RevenueOverTimeData, xkey: 'Granual', ykeys: ['revStats', 'PayoutStats'], labels: ['All Revenue', 'Payout to Paypal'], parseTime:false, setAxisAlignFirstX: true}"></div>
+
+                        </div>
+                        
                     </div>
                 </div>
             </div>

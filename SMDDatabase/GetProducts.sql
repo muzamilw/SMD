@@ -1,6 +1,6 @@
 ﻿
 
-/****** Object:  StoredProcedure [dbo].[GetProducts]    Script Date: 9/6/2016 5:32:33 PM ******/
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -63,9 +63,9 @@ select *, COUNT(*) OVER() AS TotalItems--,
 from
 (	
 
-	select top(1) WITH TIES ads.*, g.GameUrl,COUNT(*) OVER( partition by type) AS AdCount from
+	select top(2) WITH TIES ads.*, g.GameUrl,COUNT(*) OVER( partition by type) AS AdCount from
 	(
-			select adcampaign.campaignid as ItemId, adcampaign.DisplayTitle ItemName, 'Ad' Type, 
+			select adcampaign.campaignid as ItemId, adcampaign.CampaignName ItemName, 'Ad' Type, 
 			adcampaign.Description +'\n' + adcampaign.CampaignDescription as description,
 			Case 
 				when adcampaign.Type = 3  -- Flyer
@@ -114,7 +114,7 @@ from
 			NULL as PqA6Type, NULL as PqA6SortOrder, NULL as PqA6ImagePath,
 
 			--((row_number() over (order by ABS(CHECKSUM(NewId())) % 100 desc) * 100) + 1) Weightage,
-			((row_number() over (order by isNUll(Priority,0) desc) * 100) + 1) Weightage,
+			((row_number() over (order by isNUll(clickrate,0) desc) * 100) + 1) Weightage,
 			NULL as SqLeftImagePercentage, NULL as SqRightImagePercentage,
 			null as SocialHandle, null as SocialHandleType,
 			(select 
@@ -186,7 +186,7 @@ from
 			union
 
 			-------- fall back freee games to be offered if no paid ad campaigns are available and only max 2 possible in one day.
-		select freeGame.* from (select  -2 as ItemId, 'Free Coupon Offer Game' ItemName, 'freeGame' Type, 
+		select freeGame.* from (select  -2 as ItemId, 'Free Game' ItemName, 'freeGame' Type, 
 			'' as description,
 			9 as ItemType, 
 			0 as AdClickRate,  -- Amount AdViewer will get
@@ -232,39 +232,9 @@ from
 			0 as CompanyId,'' as VideoLink2,cast(1 as bit) as IsShowVoucherSetting,
 			
 			(select top 1 GameId from Game  where Game.Status = 1 ORDER BY NEWID() ) as GameId,  
-			(select top 1 CouponId from coupon c 
-			
-			--coupon where clause
-			where c.Status = 3
-			and c.CouponExpirydate > GETDATE()
-			and 
-				(--unlimited listing  -- valid for 3 months
-				( CouponListingMode = 2 and @currentDate between DATEFROMPARTS(c.CouponActiveYear, c.CouponActiveMonth,1) and dateadd(month,2,DATEFROMPARTS(c.CouponActiveYear, c.CouponActiveMonth,day(EOMONTH ( DATEFROMPARTS(c.CouponActiveYear, c.CouponActiveMonth,1)))))
-					and  c.CouponQtyPerUser > (select count(*) from [dbo].[UserPurchasedCoupon] upc where upc.couponID = c.couponid and upc.userId = @UserId) 
-				)
-					--
-				or
-				--free more - valid for 1 month now.
-				(
-					CouponListingMode = 1 and @currentDate  between DATEFROMPARTS(c.CouponActiveYear, c.CouponActiveMonth,1) and DATEFROMPARTS(c.CouponActiveYear, c.CouponActiveMonth,30))
-					and c.CouponIssuedCount < 10
-				)
-				or 
-				--nationwide mode valid for 3 months but higher priority
-				(
-				CouponListingMode = 3 and @currentDate between DATEFROMPARTS(c.CouponActiveYear, c.CouponActiveMonth,1) and dateadd(month,2,DATEFROMPARTS(c.CouponActiveYear, c.CouponActiveMonth,day(EOMONTH ( DATEFROMPARTS(c.CouponActiveYear, c.CouponActiveMonth,1)))))
-					and  c.CouponQtyPerUser > (select count(*) from [dbo].[UserPurchasedCoupon] upc where upc.couponID = c.couponid and upc.userId = @UserId) 
-				)
-				
-
-			--coupon end clause
-			
-			
-			
-			
-			 order by NEWID())  as FreeCouponID
+			(1)  as FreeCouponID
 			) as freeGame
-			inner join AdCampaignResponse  acr on freeGame.ItemId = acr.CampaignID and acr.ResponseType = 4 and acr.UserID = 'b8a3884f-73f3-41ec-9926-293ea919a5e1' and acr.CreatedDateTime between DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) and dateadd(HOUR,24,GETDATE())
+			--inner join AdCampaignResponse  acr on freeGame.ItemId = acr.CampaignID and acr.ResponseType = 4 and acr.UserID = @UserID and acr.CreatedDateTime between DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) and dateadd(HOUR,24,GETDATE())
 			group by ItemId, ItemName, Type, 
 			description,
 			ItemType, 
@@ -308,13 +278,13 @@ from
 			 BuyItImageUrl,
 			VoucherImagePath,
 			VoucherCount,
-			freegame.CompanyId,VideoLink2,IsShowVoucherSetting, freegame.GameId, acr.CampaignID,acr.UserID, freeGame.FreeCouponID
-			having COUNT(acr.CampaignID)  < 3
+			freegame.CompanyId,VideoLink2,IsShowVoucherSetting, freegame.GameId,  freeGame.FreeCouponID
+			
 			
 			-------- fall back if all 3 free games are also played then show no ads card. .
 			union
 
-			select  -1 as ItemId, 'No Ads card' ItemName, 'noAds' Type, 
+			select  -1 as ItemId, 'Free Video' ItemName, 'noAds' Type, 
 			'' as description,
 			9 as ItemType, 
 			0 as AdClickRate,  -- Amount AdViewer will get
@@ -345,7 +315,7 @@ from
 			NULL as PqA6Type, NULL as PqA6SortOrder, NULL as PqA6ImagePath,
 
 			
-			0 as  Weightage,
+			240 as  Weightage,
 			NULL as SqLeftImagePercentage, NULL as SqRightImagePercentage,
 			null as SocialHandle, null as SocialHandleType,
 			'' as AdvertisersLogoPath,

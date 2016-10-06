@@ -6626,12 +6626,12 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
         </ComplexType>
         <ComplexType Name="getPayoutVSRevenueOverTime_Result">
           <Property Type="String" Name="Granual" Nullable="false" MaxLength="24" />
-          <Property Type="Decimal" Name="revStats" Nullable="false" Precision="1" Scale="1" />
-          <Property Type="Decimal" Name="PayoutStats" Nullable="false" Precision="1" Scale="1" />
+          <Property Type="Double" Name="revStats" Nullable="true" />
+          <Property Type="Double" Name="PayoutStats" Nullable="true" />
         </ComplexType>
         <ComplexType Name="GetRevenueByCampaignOverTime_Result">
           <Property Type="String" Name="Granual" Nullable="false" MaxLength="24" />
-          <Property Type="Decimal" Name="Revenue" Nullable="false" Precision="1" Scale="1" />
+          <Property Type="Double" Name="Revenue" Nullable="true" />
         </ComplexType>
         <ComplexType Name="getUserActivitiesOverTime_Result">
           <Property Type="String" Name="Granual" Nullable="false" MaxLength="14" />

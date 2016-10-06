@@ -9,6 +9,7 @@ namespace SMD.Models.DomainModels
     public partial class GetRevenueByCampaignOverTime_Result
     {
         public string Granual { get; set; }
-        public decimal Revenue { get; set; }
+
+        public Nullable<double> Revenue { get; set; }
     }
 }
