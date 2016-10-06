@@ -614,6 +614,8 @@ namespace SMD.Implementation.Services
             // Initialize Service
             PaypalService = UnityConfig.UnityContainer.Resolve<IPaypalService>();
 
+           
+
             // Using Base DB Context
             using (var dbContext = new BaseDbContext())
             {
@@ -717,6 +719,7 @@ namespace SMD.Implementation.Services
         /// <returns>1 for success, 2 for balance insufficient, 3 for amount less than minimum limit, 0 for error</returns>
         public static int PerformUserPayout(string UserId,int companyId,double CentzAmount, string PayPalId, string Phone )
         {
+            payoutRepository = UnityConfig.UnityContainer.Resolve<IPayOutHistoryRepository>();
 
             var cashoutMinLimit = ConfigurationManager.AppSettings["CashoutMinLimit"];
 
@@ -726,7 +729,7 @@ namespace SMD.Implementation.Services
             double dollarAmount = CentzAmount / 100;
 
 
-            //PaypalService = UnityConfig.UnityContainer.Resolve<IPaypalService>();
+            PaypalService = UnityConfig.UnityContainer.Resolve<IPaypalService>();
             using (var dbContext = new BaseDbContext())
             {
                 Company company = null;

@@ -72,6 +72,8 @@ namespace SMD.Repository
             unityContainer.RegisterType<ICouponPriceOptionRepository, CouponPriceOptionRepository>();
 
             unityContainer.RegisterType<IAdCampaignClickRateHistoryRepository, AdCampaignClickRateHistoryRepository>();
+
+            unityContainer.RegisterType<IPayOutHistoryRepository, PayOutHistoryRepository>();
             
         }
     }
