@@ -1,13 +1,13 @@
 ﻿GO
-/****** Object:  StoredProcedure [dbo].[GetRevenueOverTime]    Script Date: 10/4/2016 3:27:07 PM ******/
+/****** Object:  StoredProcedure [dbo].[GetRevenueByCampaignOverTime]    Script Date: 10/4/2016 10:45:26 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[GetRevenueByCampaignOverTime](
+ALTER PROCEDURE [dbo].[GetRevenueByCampaignOverTime](
 
 @CompanyId INT,                   --Input parameter ,  CompanyID of owner 466
-@CampaignType INT,				--Input parameter ,  CampaignType 1 for Ads, 2, games, 3 for survay, 4 for polls, 5 free deals , 6 paid deals
+@CampaignType INT,				--Input parameter ,  CampaignType 1 for Ads, 2, games, 3 for survay, 4 for polls, 5 deals
 @DateFrom DateTime, 
 @DateTo	DateTime,
 @Granularity INT			----- 1 for day, 2 for week, 3 for month and 4 for year
@@ -16,7 +16,7 @@ CREATE PROCEDURE [dbo].[GetRevenueByCampaignOverTime](
 )
 AS
 BEGIN
-select 'nnnnnnnnnnnnnnnnnnnnnnnn' Granual , 0.0 Revenue
+
 DECLARE @StartDate DATE = '20000101', @NumberOfYears INT = 30;
 
 -- prevent set or regional settings from interfering with 
@@ -112,25 +112,77 @@ FROM
 	Select  t.Granual, min(t.date) ordr
 	from @T1 t 
 	group by t.Granual
-		
+	IF @CampaignType = 1
+		BEGIN
 		-- for Video ads
-	insert into @rev
-	select g.Granual , sum(t.CreditAmount) as Revenue
-	from @T1 g
-	left join [Transaction] t on g.date = CONVERT(date, t.TransactionDate)
-	inner join Account a on a.AccountId = t.AccountID
-	inner join AdCampaign ac on ac.CampaignID = t.AdCampaignID
-	AND  a.AccountType = 1 AND a.CompanyId = @CompanyId AND t.Type = 1 AND ac.Type = 1
-	group by g.Granual
+			insert into @rev
+			select g.Granual , sum(t.CreditAmount) as Revenue
+			from @T1 g
+			left join [Transaction] t on g.date = CONVERT(date, t.TransactionDate)
+			inner join Account a on a.AccountId = t.AccountID
+			inner join AdCampaign ac on ac.CampaignID = t.AdCampaignID
+			AND  a.AccountType = 1 AND a.CompanyId = @CompanyId AND t.Type = 1 AND ac.Type = 1
+			group by g.Granual
+
+		END
+	ELSE IF @CampaignType = 2
+		BEGIN
+		-- for Display ads
+			insert into @rev
+			select g.Granual , sum(t.CreditAmount) as Revenue
+			from @T1 g
+			left join [Transaction] t on g.date = CONVERT(date, t.TransactionDate)
+			inner join Account a on a.AccountId = t.AccountID
+			inner join AdCampaign ac on ac.CampaignID = t.AdCampaignID
+			AND  a.AccountType = 1 AND a.CompanyId = @CompanyId AND t.Type = 1 AND ac.Type = 4
+			group by g.Granual
+
+		END
+	ELSE IF @CampaignType = 3
+		BEGIN
+		-- for Survay
+			insert into @rev
+			select g.Granual , sum(t.CreditAmount) as Revenue
+			from @T1 g
+			left join [Transaction] t on g.date = CONVERT(date, t.TransactionDate)
+			inner join Account a on a.AccountId = t.AccountID
+			AND  a.AccountType = 1 AND a.CompanyId = @CompanyId AND t.Type = 7 
+			group by g.Granual
+
+		
+		END
+	ELSE IF @CampaignType = 4
+		BEGIN
+		-- for Polls
+			insert into @rev
+			select g.Granual , sum(t.CreditAmount) as Revenue
+			from @T1 g
+			left join [Transaction] t on g.date = CONVERT(date, t.TransactionDate)
+			inner join Account a on a.AccountId = t.AccountID
+			AND  a.AccountType = 1 AND a.CompanyId = @CompanyId AND t.Type = 2
+			group by g.Granual
+
+		END
+	ELSE IF @CampaignType = 5
+		BEGIN
+		-- for Deals
+			insert into @rev
+			select g.Granual , sum(t.CreditAmount) as Revenue
+			from @T1 g
+			left join [Transaction] t on g.date = CONVERT(date, t.TransactionDate)
+			inner join Account a on a.AccountId = t.AccountID
+			AND  a.AccountType = 1 AND a.CompanyId = @CompanyId AND t.Type = 8 
+			group by g.Granual
+
+		END
 	
-	--select * from @rev
 	select g.Granual, (case when r.Revenue is not null then r.Revenue else 0 end) Revenue from @gran g
 	left outer join @rev r on r.Granual = g.Granual
 	order by g.ordr
 	
 END
 
-	
+	--@CampaignType INT,				--Input parameter ,  CampaignType 1 for Ads, 2, games, 3 for survay, 4 for polls, 5 deals
 	
 
---EXEC [GetRevenueByCampaignOverTime] 466, 1, '2016-9-01', '2016-10-1', 1 
+--EXEC [GetRevenueByCampaignOverTime] 466, 1, '2016-9-01', '2016-10-1', 2 

@@ -30,5 +30,6 @@ namespace SMD.Interfaces.Services
 
         bool UpdateManagedUser(string id, string RoleId);
         IEnumerable<GetUserCounts_Result> GetUserCounts();
+        IEnumerable<getUserActivitiesOverTime_Result> getUserActivitiesOverTime(DateTime DateFrom, DateTime DateTo, int Granularity);
     }
 }

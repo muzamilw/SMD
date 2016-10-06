@@ -74,6 +74,14 @@ namespace SMD.Repository.Repositories
               return db.GetAdminDashBoardInsights();
 
           }
+          public IEnumerable<getPayoutVSRevenueOverTime_Result> getPayoutVSRevenueOverTime(DateTime DateFrom, DateTime DateTo, int Granularity)
+          {
+              return db.getPayoutVSRevenueOverTime(DateFrom, DateTo, Granularity);
+          }
+          public IEnumerable<GetRevenueByCampaignOverTime_Result> GetRevenueByCampaignOverTime(int compnyId, int CampaignType, DateTime DateFrom, DateTime DateTo, int Granularity)
+          {
+              return db.GetRevenueByCampaignOverTime(compnyId,CampaignType, DateFrom, DateTo, Granularity);
+          }
         #endregion 
     }
 }

@@ -179,5 +179,9 @@ namespace SMD.Repository.Repositories
         {
             return db.GetUserCounts();
         }
+        public IEnumerable<getUserActivitiesOverTime_Result> getUserActivitiesOverTime(DateTime DateFrom, DateTime DateTo, int Granularity)
+        {
+            return db.getUserActivitiesOverTime(DateFrom, DateTo, Granularity);
+        }
     }
 }

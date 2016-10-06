@@ -1279,6 +1279,10 @@ namespace SMD.Implementation.Services
             return this._campaignCategoriesRepository.getCampaignsByStatus();
         
         }
+        public IEnumerable<GetLiveCampaignCountOverTime_Result> GetLiveCampaignCountOverTime(int CampaignType, DateTime DateFrom, DateTime DateTo, int Granularity)
+        {
+            return _campaignCategoriesRepository.GetLiveCampaignCountOverTime(CampaignType, DateFrom, DateTo, Granularity);
+        }
 
         #endregion
 

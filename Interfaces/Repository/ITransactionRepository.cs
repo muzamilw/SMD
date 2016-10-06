@@ -20,7 +20,8 @@ namespace SMD.Interfaces.Repository
         IEnumerable<GetAdminDashBoardInsights_Result> GetAdminDashBoardInsights();
         IEnumerable<GetRevenueOverTime_Result> GetRevenueOverTime(int CompanyId, DateTime DateFrom, DateTime DateTo, int Granularity);
 
-
-    
+        IEnumerable<getPayoutVSRevenueOverTime_Result> getPayoutVSRevenueOverTime(DateTime DateFrom, DateTime DateTo, int Granularity);
+        IEnumerable<GetRevenueByCampaignOverTime_Result> GetRevenueByCampaignOverTime(int compnyId, int CampaignType, DateTime DateFrom, DateTime DateTo, int Granularity);
+        
     }
 }

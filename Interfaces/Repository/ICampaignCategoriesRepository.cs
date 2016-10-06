@@ -11,5 +11,7 @@ namespace SMD.Interfaces.Repository
     {
         void RemoveAll(List<CampaignCategory> categories);
         IEnumerable<getCampaignsByStatus_Result> getCampaignsByStatus();
+        IEnumerable<GetLiveCampaignCountOverTime_Result> GetLiveCampaignCountOverTime(int CampaignType, DateTime DateFrom, DateTime DateTo, int Granularity);
+       
     }
 }
