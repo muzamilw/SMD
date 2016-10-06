@@ -15,6 +15,9 @@ define("ads/ads.viewModel",
                     isEditorVisible = ko.observable(false),
                     langs = ko.observableArray([]),
                     TemporaryList = ko.observableArray([]),
+                    TemporaryProfileList = ko.observableArray([]),
+                    TemporaryQuizQuestions = ko.observableArray([]),
+                    TemporarySurveyList = ko.observableArray([]),
                     countoryidList = [],
                     cityidList = [],
                     langidList = [],
@@ -28,6 +31,7 @@ define("ads/ads.viewModel",
                     SearchProfileQuestion=ko.observable(''),
                     criteriaCount = ko.observable(0),
                     isShowSurveyAns = ko.observable(false),
+                    IsprofileQuestion=ko.observable(false),
                      // selected location 
                     selectedLocation = ko.observable(),
                     selectedLocationRadius = ko.observable(),
@@ -41,6 +45,7 @@ define("ads/ads.viewModel",
                     isEnableVedioVerificationLink = ko.observable(false),
                     //caption variablels 
                     lblCampaignName = ko.observable("Campaign Name"),
+                    Modelheading = ko.observable(""),
                     lblDetailsHeading = ko.observable("Free Display Ad Details"),
                     lblAdTitle = ko.observable("Ad Title"),
                     lblFirstLine = ko.observable("First line"),
@@ -284,7 +289,7 @@ define("ads/ads.viewModel",
                 } else if (item.Status == 6) {
                     item.StatusValue = "Approval Rejected"
                 } else if (item.Status == 7) {
-                    item.StatusValue = ("Terminated");
+                    item.StatusValue = ("Remove");
                 } else if (item.Status == 9) {
                     item.StatusValue = ("Completed");
                 } else if (item.Status == 8) {
@@ -506,8 +511,15 @@ define("ads/ads.viewModel",
                         isWelcomeScreenVisible(false);
                     }
                     else {
-                        isListVisible(false);
-                        isWelcomeScreenVisible(true);
+                       
+                        if (campaignModel().Status() == 7) {
+                            isWelcomeScreenVisible(false);
+                            isListVisible(true);
+                        }
+                        else {
+                            isWelcomeScreenVisible(true);
+                            isListVisible(false);
+                        }
                     }
                     //show the main menu;
                     showMainMenu();
@@ -707,8 +719,10 @@ define("ads/ads.viewModel",
 
                     }
                 },
-              terminateCampaign = function () {
-                  saveCampaign(7);
+
+              removeAdd = function () {
+                  if (campaignModel() != undefined)
+                      saveCampaign(7);
               },
               ArchiveCampaign = function () {
                   saveCampaign(8);
@@ -1166,7 +1180,6 @@ define("ads/ads.viewModel",
                                         profileQuestionList.valueHasMutated();
                                         item.PQID(valQuest);
                                     }
-
                                 },
                                 error: function (response) {
 
@@ -1512,7 +1525,7 @@ define("ads/ads.viewModel",
                     $("#Heading_div").css("display", "none");
 
 
-                    if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == null || item.Status() == 7 || item.Status() == 9) {
+                    if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == 6|| item.Status() == null || item.Status() == 7 || item.Status() == 9) {
                         collapseMainMenu();
                        
                         if (item.Status() == 1)//because it is in draft mode.
@@ -1667,50 +1680,58 @@ define("ads/ads.viewModel",
                                         campaignModel().StatusValue("Draft");
                                     } else if (campaignModel().Status() == 2) {
                                         $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
+                                        $("#btnSubmitForApproval2").css("display", "none");
                                         
                                         $('#imgLogo').prop('disabled', true);
 
-                                        $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
+                                        $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,#btnPauseCampaign,.lang_delSurvey").css("display", "none");
                                         $("#saveBtn").css("display", "none")
                                         $("#btnCancel,#btnPauseCampaign,#btnClose").removeAttr('disabled');
                                         campaignModel().StatusValue("Submitted for Approval");
                                     } else if (campaignModel().Status() == 3) {
-                                        //$("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
-                                        $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
+                                        $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
+                                        $("#btnStopAndTerminate,#btnPauseCampaign").removeAttr('disabled');
+                                        $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey").css("display", "none");
                                         //$("#saveBtn").css("display", "none");
                                         //$("#btnPauseCampaign").css("display", "inline-block");
                                         //$("#btnCancel,#btnPauseCampaign,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
+                                        $("#btnPauseCampaign").css("display", "inline-block");
                                         campaignModel().StatusValue("Live");
-                                        isTerminateBtnVisible(true);
+                                        //isTerminateBtnVisible(true);
                                         isNewCampaignVisible(true);
                                     } else if (campaignModel().Status() == 4) {
-                                        $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
-                                        $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
+                                       // $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
+                                        $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey").css("display", "none");
                                         $("#saveBtn").css("display", "none");
                                         $("#btnResumeCampagin").css("display", "inline-block");
                                         $("#btnCancel,#btnResumeCampagin,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
                                         campaignModel().StatusValue("Paused");
-                                        isTerminateBtnVisible(true);
+                                       // isTerminateBtnVisible(true);
                                         isNewCampaignVisible(true);
                                     } else if (campaignModel().Status() == 5) {
                                         campaignModel().StatusValue("Completed");
                                     } else if (campaignModel().Status() == 6) {
+                                      //  $("input,button,textarea,select").attr('disabled', 'disabled'); // disable all controls
+                                        $("#btnSubmitForApproval2").css("display", "inline-block");
+                                        $("#btnSubmitForApproval2").removeAttr('disabled');
+                                        $("#btnPauseCampaign").css("display", "none");
                                         campaignModel().StatusValue("Approval Rejected");
                                     } else if (campaignModel().Status() == 7) {
-                                        campaignModel().StatusValue("Terminated by user");
+                                        
+                                        campaignModel().StatusValue("Remove");
                                         $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
-                                        $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
+                                        $("#btnSubmitForApproval,#btnResumeCampagin,#btnArchive,#btnPauseCampaign,.lang_delSurvey").css("display", "none");
                                         $("#saveBtn").css("display", "none");
-                                        $("#btnPauseCampaign").css("display", "inline-block");
+                                       // $("#btnPauseCampaign").css("display", "inline-block");
                                         $("#btnCancel,#btnPauseCampaign,#btnCopyCampaign,#btnArchive").removeAttr('disabled');
-                                        isNewCampaignVisible(true);
-                                        isShowArchiveBtn(true);
+                                        isNewCampaignVisible();
+                                        isShowArchiveBtn(false);
                                     } else if (item.Status == 9) {
                                         item.StatusValue = ("Completed");
                                     } else if (item.Status == 8) {
                                         item.StatusValue = ("Archived");
                                         $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
-                                        $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
+                                        $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey").css("display", "none");
                                         $("#saveBtn").css("display", "none");
                                         $("#btnPauseCampaign").css("display", "inline-block");
                                         $("#btnCancel,#btnPauseCampaign,#btnCopyCampaign,#btnArchive").removeAttr('disabled');
@@ -1906,6 +1927,14 @@ define("ads/ads.viewModel",
                     $("#btnSubmitForApproval,#saveBtn,.lang_delSurvey,.table-link").css("display", "inline-block");
                     $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign").removeAttr('disabled');
                 },
+                submitResumeData = function () {
+                         if (campaignModel() != undefined)
+                             saveCampaign(3);
+
+                         $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
+                         $("#btnSubmitForApproval,#saveBtn,.lang_delSurvey,.table-link").css("display", "inline-block");
+                         $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign").removeAttr('disabled');
+                     },
                 nextPreviewScreen = function () {
                     
                     var noErrors = true;
@@ -2483,6 +2512,8 @@ define("ads/ads.viewModel",
                 },
                 showAdditionUserCriteria = function () {
                     isNewCriteria(true);
+                    IsprofileQuestion(true);
+                    Modelheading('Profile Questions');
                     var objProfileCriteria = new model.AdCampaignTargetCriteriasModel();
 
                     objProfileCriteria.Type("1");
@@ -2504,7 +2535,8 @@ define("ads/ads.viewModel",
                                    
                                     ko.utils.arrayPushAll(profileQuestionList(), data.ProfileQuestions);
                                     profileQuestionList.valueHasMutated();
-                                    TemporaryList(profileQuestionList());
+                                    TemporaryProfileList.clear;
+                                    TemporaryProfileList(profileQuestionList());
                                 }
 
                             },
@@ -2520,7 +2552,7 @@ define("ads/ads.viewModel",
                 showAdditionalSurveyQuestions = function () {
                     isNewCriteria(true);
                     var objProfileCriteria = new model.AdCampaignTargetCriteriasModel();
-
+                    Modelheading('Survey Questions');
                     objProfileCriteria.Type("1");
                     objProfileCriteria.IncludeorExclude("1");
                     criteriaCount(criteriaCount() + 1);
@@ -2539,8 +2571,10 @@ define("ads/ads.viewModel",
                                     ko.utils.arrayPushAll(profileQuestionList(), data.ProfileQuestions);
                                     console.log(data.profileQuestionList)
                                     profileQuestionList.valueHasMutated();
-
-                                    console.log(data)
+                                   
+                                    TemporaryProfileList.clear;
+                                    TemporaryProfileList(profileQuestionList());
+                                    
                                 }
 
                             },
@@ -2555,8 +2589,9 @@ define("ads/ads.viewModel",
                     showCompanyProfileQuestions(true);
                 },
                 showAdditionUserSurveyCriteria = function () {
-                   
+                    Modelheading('Polls');
                     isNewCriteria(true);
+
                     var objProfileCriteria = new model.AdCampaignTargetCriteriasModel();
 
                     objProfileCriteria.Type("1");
@@ -2578,6 +2613,8 @@ define("ads/ads.viewModel",
                                     surveyquestionList([]);
                                     ko.utils.arrayPushAll(surveyquestionList(), data.SurveyQuestions);
                                     surveyquestionList.valueHasMutated();
+                                    TemporarySurveyList.clear;
+                                    TemporarySurveyList(surveyquestionList());
                                 }
 
                             },
@@ -2591,36 +2628,67 @@ define("ads/ads.viewModel",
 
 
                 getQuestionByFilter = function() {
-            
-                   
-                       
+                    debugger;
+                    if (AditionalCriteriaMode() == 2) {
+                        debugger;
                         if (SearchProfileQuestion() != '') {
 
-                            var list = ko.utils.arrayFilter(profileQuestionList(), function (prod) {
-                                
-                                return prod.Question.toLowerCase().startsWith(SearchProfileQuestion().toLowerCase());
-                                
-                            });
-                          
-                            profileQuestionList().clear;
-                      
-                            profileQuestionList(list);
-                          
+                            profileQuestionList(TemporaryProfileList());
 
-                            return list;
+                            var list = ko.utils.arrayFilter(profileQuestionList(), function (prod) {
+                                return prod.Question.toLowerCase().indexOf(SearchProfileQuestion().toLowerCase()) != -1;
+                            });
+                            profileQuestionList().clear;
+                            profileQuestionList(list);
                         }
                         else {
-
-                          
                             profileQuestionList.clear;
-                            profileQuestionList(TemporaryList());
+                            profileQuestionList(TemporaryProfileList());
                         }
-                    
-                    
+                    }
+                    else if(AditionalCriteriaMode() == 3)
+                    {
+                        
+                        if (SearchProfileQuestion() != '') {
+                            myQuizQuestions(TemporaryQuizQuestions());
+                            var list = ko.utils.arrayFilter(myQuizQuestions(), function (prod) {
+                                
+                                return prod.VerifyQuestion.toLowerCase().indexOf(SearchProfileQuestion().toLowerCase()) != -1;
+                            });
+                            myQuizQuestions().clear;
+                            myQuizQuestions(list);
+                        }
+                        else {
+                            myQuizQuestions.clear;
+                            myQuizQuestions(TemporaryQuizQuestions());
+                        }
+
+                    }
+
+                    else if (AditionalCriteriaMode() == 4)
+                    {
+                        
+                        if (SearchProfileQuestion() != '') {
+                            surveyquestionList(TemporarySurveyList());
+                            var list = ko.utils.arrayFilter(surveyquestionList(), function (prod) {
+
+                                return prod.DisplayQuestion.toLowerCase().indexOf(SearchProfileQuestion().toLowerCase()) != -1;
+                            });
+                            surveyquestionList().clear;
+                            surveyquestionList(list);
+                        }
+                        else {
+                            surveyquestionList.clear;
+                            surveyquestionList(TemporarySurveyList());
+                        }
+
+                    }
                 }
 
                 
                 showAdditionQuizCriteria = function () {
+                    Modelheading('Your Quiz Questions');
+                    IsprofileQuestion(false);
                     isNewCriteria(true);
                     var objProfileCriteria = new model.AdCampaignTargetCriteriasModel();
 
@@ -2640,6 +2708,8 @@ define("ads/ads.viewModel",
                                     myQuizQuestions([]);
                                     ko.utils.arrayPushAll(myQuizQuestions(), data.AdCampaigns);
                                     myQuizQuestions.valueHasMutated();
+                                    TemporaryQuizQuestions.clear;
+                                    TemporaryQuizQuestions(myQuizQuestions());
                                 }
 
                             },
@@ -2855,7 +2925,7 @@ define("ads/ads.viewModel",
                                 },
                                     {
                                         "id": "7",
-                                        "name": "Terminated"
+                                        "name": "Remove"
                                     },
                                         {
                                             "id": "8",
@@ -2962,7 +3032,7 @@ define("ads/ads.viewModel",
                     isNewCampaignVisible: isNewCampaignVisible,
                     isShowArchiveBtn: isShowArchiveBtn,
                     submitCampaignData: submitCampaignData,
-                    terminateCampaign: terminateCampaign,
+                    removeAdd: removeAdd,
                     selectedIndustryIncludeExclude: selectedIndustryIncludeExclude,
                     addIndustry: addIndustry,
                     onRemoveIndustry: onRemoveIndustry,
@@ -3080,7 +3150,10 @@ define("ads/ads.viewModel",
                     UrlHeadings: UrlHeadings,
                     GetAnswers: GetAnswers,
                     SearchProfileQuestion: SearchProfileQuestion,
-                    getQuestionByFilter: getQuestionByFilter
+                    getQuestionByFilter: getQuestionByFilter,
+                    submitResumeData: submitResumeData,
+                    IsprofileQuestion: IsprofileQuestion,
+                    Modelheading: Modelheading
                 };
             })()
         };

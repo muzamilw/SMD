@@ -1049,11 +1049,15 @@ else
                                             <div style="margin-top:0px;min-height:59px;">
                                                 <div>
                                                     <button class="btn  btn-success btnSubmitApproval" id="btnSubmitForApproval2" data-bind="click:$root.submitCampaignData, visible: $root.isNewCampaign() " style="width:229px;">Submit for Approval</button>
-                                                    <button class="btn  btn-info " id="btnStopAndTerminate" data-bind=" click:$root.terminateCampaign,visible: $root.isTerminateBtnVisible " style="width:229px;margin-top:10px;">Stop & Terminate Early</button>
+                                                    <button class="btn  btn-info " id="btnStopAndTerminate" data-bind="visible: $root.isTerminateBtnVisible " style="width:229px;margin-top:10px;">Stop & Terminate Early</button>
                                                     <button class="btn  btn-danger " id="btnArchive" data-bind=" click:$root.ArchiveCampaign,visible: $root.isShowArchiveBtn " style="width:229px;margin-bottom:10px;">Archive Campaign</button>
                                                     <button class="btn  btn-info Theme_standard_clr" id="btnCopyCampaign" data-bind=" click:$root.copyCampaign  " style="display:none;">Create Copy - New Campaign</button>@*visible: $root.isNewCampaignVisible*@
                                                     <button class="btn  btn-success" id="btnPauseCampaign" data-bind="click:$root.changeStatus(4)" style="display:none;width:229px;margin-bottom:10px;">Pause</button>
-                                                    <button class="btn  btn-success" id="btnResumeCampagin" data-bind="click:$root.changeStatus(3)" style="display:none;width:229px;margin-top:10px">Resume</button>
+                                                    <div data-bind="with: $root.campaignModel">
+                                                        <button class="btn  btn-success" id="btnResumeAdd" data-bind="click:$root.submitResumeData,visible:hasChanges()==false&& Status() == 4" style="display:none;width:229px;margin-top:10px">Resume</button>
+                                                        @*<button class="btn  btn-success" id="btnResumeCampagin" data-bind="click:$root.submitResumeData,visible:hasChanges()==false&& Status() == 4" style="display:none;width:229px;margin-top:10px">Resume</button>*@
+                                                        <button class="btn  btn-success " id="btnSubmitForApproval23" data-bind="click:$root.submitCampaignData, visible:hasChanges()==true && Status() == 4" style="width:229px;margin-top:10px">Submit for Approval</button>
+                                                    </div>
                                                     <button class="btn  btn-success gtild-color " id="btnChart" data-bind="visible: !$root.isNewCampaign()" style="margin-top: 10px;width:229px;color:gainsboro;">Charts</button>
                                                 </div>
 
@@ -1200,45 +1204,57 @@ else
 
                                     <div data-bind="visible:$root.isNewCriteria">
                                         <div class="col-lg-12" style="padding:0px;">
-                                            <div class="col-lg-2 row header" style="margin-top:20px;">
-                                                <label class="control-label modelHeading">Criteria</label>
-                                            </div>
-                                            <div class="radio col-lg-2 " style="margin-top:20px;">
-                                                <input type="radio" name="optionRadioSelectionCriteria" id="optionIncludeCriteria" value="1" data-bind="checked: IncludeorExclude">
-                                                <label for="optionIncludeCriteria">
-                                                    Include
-                                                </label>
-                                            </div>
-                                            <div class="radio col-lg-2 " style="margin-top:20px;">
-                                                <input type="radio" name="optionRadioSelectionCriteria" id="optionExcludeCriteria" value="0" data-bind="checked: IncludeorExclude ">
-                                                <label for="optionExcludeCriteria">
-                                                    Exclude
-                                                </label>
-                                            </div>
+                                            <div class="adsubHeading Theme_standard_clr">
 
-                                            <div class="col-lg-2 "></div>
-                                            <div class="col-lg-2 "></div>
-                                            <div class="col-lg-2 "></div>
-                                        </div>
-                                        
-                                        <div class="clearfix"></div>
+                                                <div style="height:48px;" class="borderbtmline ">
 
-                                        <div class="col-lg-12" style="padding:0px;">
-                                            <div class="col-lg-6" style="padding-top:21px;padding-left:0px;">
-                                                <label class="control-label modelHeading">Profile Questions</label>
-                                            </div>
-
-                                            <div class="col-lg-6" style="padding:0px;">
-                                                <div>
-                                                    <div class="filter-block">
-                                                        <div class="form-group pull-right">
-                                                            <input style="width:213px" type="text" class="form-control " placeholder="Search..." data-bind="value: $root.SearchProfileQuestion">
-                                                            <i class="fa fa-search search-icon" data-bind="click: $root.getQuestionByFilter"></i>
-                                                        </div>
+                                                    <div class="col-lg-2 row header" style="margin-top:20px;">
+                                                        <label class="control-label modelHeading">Criteria</label>
                                                     </div>
+                                                    <div class="radio col-lg-2 " style="margin-top:20px;">
+                                                        <input type="radio" name="optionRadioSelectionCriteria" id="optionIncludeCriteria" value="1" data-bind="checked: IncludeorExclude">
+                                                        <label for="optionIncludeCriteria">
+                                                            Include
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio col-lg-2 " style="margin-top:20px;">
+                                                        <input type="radio" name="optionRadioSelectionCriteria" id="optionExcludeCriteria" value="0" data-bind="checked: IncludeorExclude ">
+                                                        <label for="optionExcludeCriteria">
+                                                            Exclude
+                                                        </label>
+                                                    </div>
+
+                                                    <div class="col-lg-2 "></div>
+                                                    <div class="col-lg-2 "></div>
+                                                    <div class="col-lg-2 "></div>
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="clearfix"></div>
+
+                                        <div class="col-lg-12" style="padding:0px;">
+                                            <div class="adsubHeading Theme_standard_clr">
+
+                                                <div style="height:48px;" class="borderbtmline ">
+                                                    <div class="col-lg-6" style="padding-top:21px;padding-left:0px;">
+                                                        <label class="control-label modelHeading" data-bind="text: $root.Modelheading">Profile Questions</label>
+                                                    </div>
+
+                                                    <div class="col-lg-6" style="padding:0px;">
+                                                        <form data-bind="submit: $root.getQuestionByFilter">
+                                                            <div>
+                                                                <div class="filter-block">
+                                                                    <div class="form-group pull-right">
+                                                                        <input style="width:213px" type="text" class="form-control " placeholder="Search..." data-bind="value: $root.SearchProfileQuestion">
+                                                                        <i class="fa fa-search search-icon" data-bind="click: $root.getQuestionByFilter"></i>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </div>
                                         <div class="clearfix"></div>
                                       
                                         <div class="pull-right" data-bind="visible: $root.AditionalCriteriaMode() == '2'">
@@ -1249,24 +1265,26 @@ else
                                             </div>
                                           
                                         </div>
+                                        <div class="clearfix"></div>
 
-
-
-
-                                        <div class="col-lg-8 pull-right" data-bind="visible: $root.AditionalCriteriaMode() == '4'">
-                                            <div class="row header">
+                                        <div class="pull-right" data-bind="visible: $root.AditionalCriteriaMode() == '4'">
+                                            @*<div class="row header">
                                                 <label class="control-label modelHeading">Survey Questions</label>
-                                            </div>
+                                            </div>*@
                                             <div class="listview parentList set-border padding10 list-type-tiles" data-role="listview" id="lv1">
                                                 <!-- ko template: { name: 'SurveyssQuestionTiles' , foreach: $root.surveyquestionList} --><!-- /ko -->
                                                 <div class="clear-both"></div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-8 pull-left" data-bind="visible: $root.AditionalCriteriaMode() == '3'">
-                                            <div class="row header">
+
+
+                                        <div class="pull-right" data-bind="visible: $root.AditionalCriteriaMode() == '3'">
+
+                                            @*<div class="row header">
                                                 <label class="control-label modelHeading">Your Quiz Questions</label>
-                                            </div>
-                                            <div class="listview parentList set-border padding10 list-type-tiles" data-role="listview" id="lv2">
+                                            </div>*@
+
+                                            <div class="listview parentList set-border padding10 list-type-tiles"  data-role="listview" id="lv2">
                                                 <!-- ko template: { name: 'surveyQuestionTiles' , foreach: $root.myQuizQuestions} --><!-- /ko -->
                                                 <div data-bind="visible: $root.myQuizQuestions().length == 0" style="display:none;">
                                                     <div class="" style="padding:20px;">
@@ -1278,7 +1296,7 @@ else
                                         </div>
                                     </div>
                                     <div class="form-group" data-bind="visible:$root.isNewCriteria() == false,with:$root.selectedCriteria">
-                                        <div class="col-lg-9 marginBottom12" style="    margin-left: 20px;">
+                                        <div class="col-lg-12 marginBottom12">
                                             <div class="form-group">
                                                 <div class="row header">
                                                     <label class="control-label modelHeading">Edit Criteria </label>
@@ -1286,14 +1304,15 @@ else
                                                 <div class="listview parentList set-border padding10 list-type-tiles" data-role="listview">
                                                     <div class="list active">
                                                         <span data-bind="text:questionString"></span>
-                                                        <div class="listview set-border padding10 list-type-tiles chlidList" data-role="listview">
+                                                        <div class="listview  padding10 list-type-tiles chlidList" data-role="listview">
                                                             <!--ko if:Type() == 2 -->
-                                                            <div class="list childList leftImg" data-bind="click:$root.updateSurveyCriteriass.bind($data, 1),css: { 'active': SQAnswer() ==1 }"> <img data-bind="attr: { src:surveyQuestLeftImageSrc}" style="height:75px;width:auto;" /></div>
-                                                            <div class="list childList rightImg" data-bind="click:$root.updateSurveyCriteriass.bind($data, 2),css: { 'active': SQAnswer() ==2 }"><img data-bind="attr: { src:surveyQuestRightImageSrc}" style="height:75px;width:auto;" /></div>
+                                                            <div style="padding-top: 14px;padding-right: 11px;" class="list childList leftImg filterCrtTilesClr" data-bind="click:$root.updateSurveyCriteriass.bind($data, 1),css: { 'active': SQAnswer() ==1 }"> <img data-bind="attr: { src:surveyQuestLeftImageSrc}" style="height:75px;width:auto;" /></div>
+     
+                                                            <div style="padding-top: 14px;padding-right: 11px;" class="list childList rightImg filterCrtTilesClr" data-bind="click:$root.updateSurveyCriteriass.bind($data, 2),css: { 'active': SQAnswer() ==2 }"><img data-bind="attr: { src:surveyQuestRightImageSrc}" style="height:75px;width:auto;" /></div>
                                                             <!--/ko-->
                                                             <!--ko if:Type() == 6 -->
-                                                            <div class="list childList leftImg" data-bind="click:$root.updateSurveyCriteria.bind($data, 1),css: { 'active': QuizAnswerId() ==1 }"> <label data-bind="text:surveyQuestLeftImageSrc "></label> </div>
-                                                            <div class="list childList rightImg" data-bind="click:$root.updateSurveyCriteria.bind($data, 2),css: { 'active': QuizAnswerId() ==2 }"><label data-bind="text:surveyQuestRightImageSrc "></label></div>
+                                                            <div style="padding-top: 14px;padding-right: 11px;" class="list childList leftImg filterCrtTilesClr" data-bind="click:$root.updateSurveyCriteria.bind($data, 1),css: { 'active': QuizAnswerId() ==1 }"> <label data-bind="text:surveyQuestLeftImageSrc "></label> </div>
+                                                            <div style="padding-top: 14px;padding-right: 11px;" class="list childList rightImg filterCrtTilesClr" data-bind="click:$root.updateSurveyCriteria.bind($data, 2),css: { 'active': QuizAnswerId() ==2 }"><label data-bind="text:surveyQuestRightImageSrc "></label></div>
                                                             <!--/ko-->
                                                             <!--ko if:Type() == 1 -->
                                                             <!-- ko template: { name: 'criteriaEditorTemplate' ,  foreach: $root.profileAnswerList} --><!-- /ko -->
@@ -2655,10 +2674,10 @@ else
 </script>
 <script id="profileQuestionTiles" type="text/html">
     <!--ko if:$root.showCompanyProfileQuestions() == true && CompanyId != null -->
-    <div class="list">
+    <div class="list ListRowHov">
         <div class="parent-list-title" data-bind="click:$root.onChangeProfileQuestion"><span data-bind="text:Question"></span></div>
-        <div class="listview set-border padding10 list-type-tiles chlidList" data-role="listview">
-
+        <div class="listview list-type-tiles chlidList" data-role="listview">
+            <div><span class="listlabels">Select audience who have answered one of the following results.</span></div>
             <!-- ko template: { name: 'profileQuestionAnsTiles' , foreach: $root.profileAnswerList } --><!-- /ko -->
             <div class="clear-both"></div>
         </div>
@@ -2666,10 +2685,14 @@ else
     </div>
     <!--/ko-->
     <!--ko if:$root.showCompanyProfileQuestions() == false && CompanyId == null-->
-    <div class="list">
+    <div class="list ListRowHov">
         <div class="parent-list-title" data-bind="click:$root.onChangeProfileQuestion"><span data-bind="text:Question"></span></div>
-        <div class="listview set-border padding10 list-type-tiles chlidList" data-role="listview">
-            <!-- ko template: { name: 'profileQuestionAnsTiles' , foreach: $root.profileAnswerList } --><!-- /ko -->
+        <div class="listview list-type-tiles chlidList" data-role="listview">
+
+            <div><span class="listlabels">Select audience who have answered one of the following results.</span></div>
+            <div>
+                <!-- ko template: { name: 'profileQuestionAnsTiles' , foreach: $root.profileAnswerList } --><!-- /ko -->
+            </div>
             <div class="clear-both"></div>
         </div>
         <div class="clear-both"></div>
@@ -2702,10 +2725,14 @@ else
 <script id="SurveyssQuestionTiles" type="text/html">
     <div class="list">
         <div class="parent-list-title"><span data-bind="text:DisplayQuestion"></span></div>
-        <div class="listview set-border padding10 list-type-tiles chlidList" data-role="listview">
+        
+        <div class="listview  padding10 list-type-tiles chlidList" data-role="listview" style="padding-left:0px;">
+            <div><span class="listlabels">Select audience who have answered one of the following results.</span></div>
             @*<!-- ko template: { name: 'SurveyQuestionAnsTiles' , foreach: $root.profileAnswerList } --><!-- /ko -->*@
-            <img data-bind="attr: { src:LeftPicturePath},click:$root.saveSurveyQuestion.bind($data, 1)" style="width:100px;" />
-            <img data-bind="attr: { src:RightPicturePath},click:$root.saveSurveyQuestion.bind($data, 1)" style="width:100px;" />
+            <div>
+                <img data-bind="attr: { src:LeftPicturePath},click:$root.saveSurveyQuestion.bind($data, 1)" style="width:100px;height:150px" />
+                <img data-bind="attr: { src:RightPicturePath},click:$root.saveSurveyQuestion.bind($data, 1)" style="width:100px;height:150px" />
+            </div>
             <div class="clear-both"></div>
         </div>
         <div class="clear-both"></div>
@@ -2713,7 +2740,7 @@ else
 </script>
 
 <script id="profileQuestionAnsTiles" type="text/html">
-    <div class="list childList" data-bind="click:$root.saveProfileQuestion" data-dismiss="modal"> <span class="list-title" data-bind="text:Answer"></span> </div>
+    <div class="list childList filterCrtTilesClr" data-bind="click:$root.saveProfileQuestion" data-dismiss="modal"> <span class="list-title" data-bind="text:Answer"></span> </div>
 </script>
 <script id="SurveyQuestionAnsTiles" type="text/html">
     <div class="list childList" data-bind="click:$root.saveProfileQuestion" data-dismiss="modal"> <span class="list-title" data-bind="text:Answer"></span> </div>
@@ -2721,16 +2748,20 @@ else
 <script id="surveyQuestionTiles" type="text/html">
     <div class="list">
         <div class="parent-list-title"><span data-bind="text:VerifyQuestion"></span></div>
-        <div class="listview set-border padding10 list-type-tiles chlidList" data-role="listview">
-            <div class="list childList leftImg" data-bind="click:$root.saveCriteria.bind($data, 1)"><span class="list-title" data-bind="text:Answer1"></span> </div>
-            <div class="list childList rightImg" data-bind="click:$root.saveCriteria.bind($data, 2)"> <span class="list-title" data-bind="text:Answer2"></span> </div>
+
+        <div class="listview list-type-tiles chlidList" data-role="listview">
+            <div><span class="listlabels">Select audience who have answered one of the following results.</span></div>
+            <div>
+                <div class="list childList leftImg filterCrtTilesClr" data-bind="click:$root.saveCriteria.bind($data, 1)"><span class="list-title" data-bind="text:Answer1"></span> </div>
+                <div class="list childList rightImg filterCrtTilesClr" data-bind="click:$root.saveCriteria.bind($data, 2)"> <span class="list-title" data-bind="text:Answer2"></span> </div>
+            </div>
             <div class="clear-both"></div>
         </div>
         <div class="clear-both"></div>
     </div>
 </script>
 <script id="criteriaEditorTemplate" type="text/html">
-    <div class="list childList" data-bind="click:$root.updateProfileQuestion,css: { 'active': $root.selectedCriteria().PQAnswerID() == PqAnswerId }" data-dismiss="modal"> <span class="list-title" data-bind="text:Answer"></span> </div>
+    <div class="list childList filterCrtTilesClr" data-bind="click:$root.updateProfileQuestion,css: { 'active': $root.selectedCriteria().PQAnswerID() == PqAnswerId }" data-dismiss="modal"> <span class="list-title" data-bind="text:Answer"></span> </div>
 </script>
 <script id="ListOfSelectedCouponCats" type="text/html">
     <!--ko if:IsSelected == true-->

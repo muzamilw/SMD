@@ -21,25 +21,27 @@ namespace SMD.MIS.Areas.Api.ModelMappers
         {
             return new Coupons
                    {
-                         CouponId = source.CouponId,
-      
-        CouponTitle = source.CouponTitle,
-      
-        CouponImage1 = source.CouponImage1,
-        SwapCost = 0,
-        Price = source.Price.Value,
-        Savings = source.Savings.Value,
+                       CouponId = source.CouponId,
 
-        CompanyId = source.CompanyId.Value,
+                       CouponTitle = source.CouponTitle,
 
-        LogoUrl = source.LogoUrl,
-        DaysLeft = Convert.ToInt32((new DateTime(source.CouponActiveYear.Value,source.CouponActiveMonth.Value,DateTime.DaysInMonth(source.CouponActiveYear.Value, source.CouponActiveMonth.Value)) - DateTime.Today).TotalDays),
-        distance = Math.Round( source.distance.Value,1),
-        CompanyName = source.CompanyName == null ? "":source.CompanyName,
-        LocationCity = source.LocationCity == null? "":source.LocationCity,
-        LocationTitle = source.LocationTitle == null ?"":source.LocationTitle
-        
-      
+                       CouponImage1 = source.CouponImage1,
+                       SwapCost = 0,
+                       Price = source.Price.Value,
+                       Savings = source.Savings.Value,
+
+                       CompanyId = source.CompanyId.Value,
+
+                       LogoUrl = source.LogoUrl,
+                       DaysLeft = 0,//Convert.ToInt32((new DateTime(source.CouponActiveYear.Value, source.CouponActiveMonth.Value, DateTime.DaysInMonth(source.CouponActiveYear.Value, source.CouponActiveMonth.Value)) - DateTime.Today).TotalDays),
+                       distance = Math.Round(source.distance.Value, 1),
+                       CompanyName = source.CompanyName == null ? "" : source.CompanyName,
+                       LocationCity = source.LocationCity == null ? "" : source.LocationCity,
+                       LocationTitle = source.LocationTitle == null ? "" : source.LocationTitle,
+                       DealsCount = source.DealsCount ,
+                       CurrencyCode = source.CurrencyCode== null ? "" : source.CurrencyCode,
+                       CurrencySymbol = source.CurrencySymbol == null ? "" : source.CurrencySymbol,
+
                    };
         }
 

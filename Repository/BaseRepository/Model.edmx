@@ -5340,15 +5340,21 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="Int32" Name="TotalItems" Nullable="true" />
           <Property Type="String" Name="CouponImage1" Nullable="true" />
           <Property Type="String" Name="LogoUrl" Nullable="true" MaxLength="227" />
-          <Property Type="Double" Name="Price" Nullable="true" />
-          <Property Type="Double" Name="Savings" Nullable="true" />
-          <Property Type="Double" Name="SwapCost" Nullable="true" />
+          <Property Type="Double" Name="Price" Nullable="false" />
+          <Property Type="Double" Name="Savings" Nullable="false" />
+          <Property Type="Double" Name="SwapCost" Nullable="false" />
           <Property Type="Int32" Name="CompanyId" Nullable="true" />
           <Property Type="Int32" Name="CouponActiveMonth" Nullable="true" />
           <Property Type="Int32" Name="CouponActiveYear" Nullable="true" />
           <Property Type="DateTime" Name="eod" Nullable="true" />
-          <Property Type="DateTime" Name="strt" Nullable="true" />
+          <Property Type="DateTime" Name="strt" Nullable="true" Precision="23" />
           <Property Type="Double" Name="distance" Nullable="true" />
+          <Property Type="String" Name="CompanyName" Nullable="true" />
+          <Property Type="String" Name="LocationTitle" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="LocationCity" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="DealsCount" Nullable="true" />
+          <Property Type="String" Name="CurrencyCode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CurrencySymbol" Nullable="true" MaxLength="50" />
         </ComplexType>
         <EntityType Name="UserFavouriteCoupon">
           <Key>
@@ -7561,6 +7567,12 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
                 <ScalarProperty Name="eod" ColumnName="eod" />
                 <ScalarProperty Name="strt" ColumnName="strt" />
                 <ScalarProperty Name="distance" ColumnName="distance" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="LocationTitle" ColumnName="LocationTitle" />
+                <ScalarProperty Name="LocationCity" ColumnName="LocationCity" />
+                <ScalarProperty Name="DealsCount" ColumnName="DealsCount" />
+                <ScalarProperty Name="CurrencyCode" ColumnName="CurrencyCode" />
+                <ScalarProperty Name="CurrencySymbol" ColumnName="CurrencySymbol" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

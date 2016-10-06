@@ -416,7 +416,7 @@ define("pQuestion/pQuestion.viewModel",
                             selectedQuestion().statusValue("Submitted for Approval");
 
                         } else if (selectedQuestion().status() == 3) {
-                            //$("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
+                            $("input,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
                             $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
                             //$("#saveBtn").css("display", "none");
                             //$("#btnPauseCampaign").css("display", "inline-block");
@@ -431,11 +431,12 @@ define("pQuestion/pQuestion.viewModel",
                             $("input,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
                             //$("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
                             //    $("#saveBtn").css("display", "none");
-                            $("#btnResumeCampagin").css("display", "none");
-                            $("#btnCancel,#btnResumeCampagin,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
+                            //$("#btnResumeCampagin").css("display", "none");
+                            $("#btnCancel,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
                             selectedQuestion().statusValue("Paused");
                             isTerminateBtnVisible(true);
                             isNewCampaignVisible(true);
+                            canSubmitForApproval(false);
                         } else if (selectedQuestion().status() == 5) {
                             selectedQuestion().statusValue("Completed");
                         } else if (selectedQuestion().status() == 6) {
@@ -489,6 +490,14 @@ define("pQuestion/pQuestion.viewModel",
                            $("#btnSubmitForApproval,#saveBtn,.lang_delSurvey,.table-link").css("display", "inline-block");
                            //$("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign").removeAttr('disabled');
                        },
+                         SaveResumeChanges = function () {
+                             if (selectedQuestion() != undefined)
+                                 onSaveProfileQuestion(3);
+
+                             //$("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
+                             $("#btnSubmitForApproval,#saveBtn,.lang_delSurvey,.table-link").css("display", "inline-block");
+                             //$("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign").removeAttr('disabled');
+                         },
                        terminateCampaign = function () {
                            onSaveProfileQuestion(7);
                             },
@@ -1909,6 +1918,7 @@ define("pQuestion/pQuestion.viewModel",
                     updateSurveyCriteriass: updateSurveyCriteriass,
                     isNewCampaignVisible: isNewCampaignVisible,
                     SavePassChanges: SavePassChanges,
+                    SaveResumeChanges:SaveResumeChanges,
                     IsPauseBtnVisible: IsPauseBtnVisible,
                     terminateCampaign: terminateCampaign
 

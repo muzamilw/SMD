@@ -34,6 +34,11 @@ namespace SMD.MIS.Areas.Api.Controllers
             return _IManageUserService.GetUserCounts();
         }
 
+        public IEnumerable<getUserActivitiesOverTime_Result> getUserActivitiesOverTime(int granuality, DateTime DateFrom, DateTime DateTo)
+        {
+            return _IManageUserService.getUserActivitiesOverTime(DateFrom, DateTo, granuality);
+        }
+
         // GET: api/ActiveUser/5
         public string Get(int id)
         {

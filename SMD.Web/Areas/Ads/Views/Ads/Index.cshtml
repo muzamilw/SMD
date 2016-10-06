@@ -231,7 +231,7 @@ else
             <!-- /ko -->
             <!-- ko if: Status() == 7-->
             <div class="text-left statusbg" style="background:red;width: 125px">
-                <span data-bind="text: StatusValue">
+                <span data-bind="text: 'Remove'">
                 </span>
             </div>
             <!-- /ko -->
@@ -252,13 +252,13 @@ else
 
 
 
-        <td class="col-sm-2" style="padding-top:23px;display:none;">
+        <td class="col-sm-2" style="padding-top:23px;">
 
-            <!-- ko if: Status() == 1 ||  Status() == 3 || Status() == 4 || Status() == 7|| Status() == 9-->
-            <a class="table-link" style="float: right">
+            <!-- ko if: Status() == 1 ||  Status() == 4|| Status() ==  6-->
+            <a class="table-link danger" style="float: right">
                 <span class="fa-stack">
-                    
-                    <i class="fa fa-pencil-square-o" data-bind="click:$root.onEditCampaign"></i>
+                    <i class="fa fa-square fa-stack-2x"></i>
+                    <i class="fa fa-trash-o fa-stack-1x fa-inverse" data-bind="click:$root.removeAdd"></i>
                 </span>
             </a>
             <!-- /ko -->

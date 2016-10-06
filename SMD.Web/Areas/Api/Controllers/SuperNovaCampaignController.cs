@@ -30,7 +30,10 @@ namespace SMD.MIS.Areas.Api.Controllers
             return _campaignService.getCampaignsByStatus();
 
         }
-
+          public IEnumerable<GetLiveCampaignCountOverTime_Result> GetLiveCampaignCountOverTime(int CampaignType, int granuality, DateTime DateFrom, DateTime DateTo)
+          {
+              return _campaignService.GetLiveCampaignCountOverTime(CampaignType, DateFrom, DateTo, granuality);
+          }
         #endregion
     }
 }

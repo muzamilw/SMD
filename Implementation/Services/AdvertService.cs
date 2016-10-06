@@ -928,6 +928,7 @@ namespace SMD.Implementation.Services
             {
                 AdCampaigns = _adCampaignRepository.GetAll().Where(g => g.UserId == _adCampaignRepository.LoggedInUserIdentity && g.VerifyQuestion != null && g.VerifyQuestion != "")
             };
+          
         }
         public AdCampaignBaseResponse getCompanyBranches()
         {
@@ -1272,6 +1273,10 @@ namespace SMD.Implementation.Services
         public IEnumerable<getCampaignsByStatus_Result> getCampaignsByStatus() {
             return this._campaignCategoriesRepository.getCampaignsByStatus();
         
+        }
+        public IEnumerable<GetLiveCampaignCountOverTime_Result> GetLiveCampaignCountOverTime(int CampaignType, DateTime DateFrom, DateTime DateTo, int Granularity)
+        {
+            return _campaignCategoriesRepository.GetLiveCampaignCountOverTime(CampaignType, DateFrom, DateTo, Granularity);
         }
 
         #endregion

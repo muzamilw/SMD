@@ -48,6 +48,10 @@ namespace SMD.Repository.Repositories
        {
            return db.getCampaignsByStatus();
        }
+       public IEnumerable<GetLiveCampaignCountOverTime_Result> GetLiveCampaignCountOverTime(int CampaignType, DateTime DateFrom, DateTime DateTo, int Granularity)
+       {
+           return db.GetLiveCampaignCountOverTime(CampaignType, DateFrom, DateTo, Granularity);
+       }
     }
 
     

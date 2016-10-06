@@ -20,16 +20,16 @@ namespace SMD.MIS.Areas.Api.Controllers
             this.ITransactionService = _ITransactionService;
         }
         // GET: api/Revenue
-        public IEnumerable<getPayoutVSRevenueOverTime_Result> Get(int granuality, DateTime DateFrom, DateTime DateTo)
+        public IEnumerable<GetRevenueByCampaignOverTime_Result> Get(int compnyId, int CampaignType, int granuality, DateTime DateFrom, DateTime DateTo)
         {
 
-            return ITransactionService.getPayoutVSRevenueOverTime(DateFrom, DateTo, granuality);
+            return ITransactionService.GetRevenueByCampaignOverTime(compnyId, CampaignType, DateFrom, DateTo, granuality);
         }
-        public  IEnumerable<GetRevenueByCampaignOverTime_Result> Get(int compnyId, int CampaignType, int Granularity, DateTime DateFrom, DateTime DateTo)
-        {
+        //public  IEnumerable<GetRevenueByCampaignOverTime_Result> Get(int compnyId, int CampaignType, int Granularity, DateTime DateFrom, DateTime DateTo)
+        //{
 
-            return ITransactionService.GetRevenueByCampaignOverTime(compnyId, CampaignType, DateFrom, DateTo, Granularity);
-        }
+        //    return ITransactionService.GetRevenueByCampaignOverTime(compnyId, CampaignType, DateFrom, DateTo, Granularity);
+        //}
         // GET: api/Revenue/5
         //public string Get()
         //{

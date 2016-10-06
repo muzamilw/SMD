@@ -9,8 +9,8 @@ namespace SMD.Models.DomainModels
     public partial class getUserActivitiesOverTime_Result
     {
         public string Granual { get; set; }
-        public int newStats { get; set; }
-        public int loginStats { get; set; }
-        public int deleteStats { get; set; }
+        public Int64 newStats { get; set; }
+        public Int64 loginStats { get; set; }
+        public Int64 deleteStats { get; set; }
     }
 }

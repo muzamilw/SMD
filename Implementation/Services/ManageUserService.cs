@@ -180,10 +180,10 @@ namespace SMD.Implementation.Services
             return this.managerUserRepository.GetUserCounts();
         }
 
-        //public bool AcceptInvitation(string invitationcode)
-        //{
-        //    rer
-        //}
+        public IEnumerable<getUserActivitiesOverTime_Result> getUserActivitiesOverTime(DateTime DateFrom, DateTime DateTo, int Granularity)
+        {
+            return managerUserRepository.getUserActivitiesOverTime(DateFrom, DateTo, Granularity);
+        }
         #endregion
     }
 }

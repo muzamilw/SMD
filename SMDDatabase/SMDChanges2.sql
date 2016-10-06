@@ -1723,3 +1723,7 @@ ALTER TABLE dbo.PayOutHistory ADD CONSTRAINT
 	
 GO
 COMMIT
+
+
+
+-------------------------------------- all scripts above executed on server

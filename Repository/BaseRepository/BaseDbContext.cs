@@ -346,7 +346,7 @@ namespace SMD.Repository.BaseRepository
             var DateFrm = new ObjectParameter("DateFrom", DateFrom);
             var DatTo = new ObjectParameter("DateTo", DateTo);
             var Granulrty = new ObjectParameter("Granularity", Granularity);
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetRevenueByCampaignOverTime_Result>("GetLiveCampaignCountOverTime",Ctype, CID, DateFrm, DatTo, Granulrty);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetRevenueByCampaignOverTime_Result>("GetRevenueByCampaignOverTime", Ctype, CID, DateFrm, DatTo, Granulrty);
         }
 
         /// <summary>
