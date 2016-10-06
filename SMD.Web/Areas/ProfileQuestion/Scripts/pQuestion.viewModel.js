@@ -308,6 +308,7 @@ define("pQuestion/pQuestion.viewModel",
                         isTerminateBtnVisible(false);
                         isNewCampaign(true);
                         isShowArchiveBtn(false);
+                        IsPauseBtnVisible(false);
 
                         canSubmitForApproval(true);
                         selectedQuestion(new model.question());
@@ -499,7 +500,14 @@ define("pQuestion/pQuestion.viewModel",
                              //$("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign").removeAttr('disabled');
                          },
                        terminateCampaign = function () {
-                           onSaveProfileQuestion(7);
+                           confirmation.messageText("Are you sure you want to remove this Survey ? This action cannot be undone.");
+                           confirmation.show();
+                           confirmation.afterCancel(function () {
+                               confirmation.hide();
+                           });
+                           confirmation.afterProceed(function () {
+                               onSaveProfileQuestion(7);
+                           });
                             },
 
                  getSelectedItems = function (items, pqid) {
