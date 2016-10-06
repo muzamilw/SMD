@@ -74,6 +74,9 @@ namespace SMD.Repository
             unityContainer.RegisterType<IAdCampaignClickRateHistoryRepository, AdCampaignClickRateHistoryRepository>();
 
             unityContainer.RegisterType<IPayOutHistoryRepository, PayOutHistoryRepository>();
+
+            unityContainer.RegisterType<IAspnetUsersRepository, AspnetUsersRepository>();
+            
             
         }
     }

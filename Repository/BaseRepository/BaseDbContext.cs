@@ -601,6 +601,21 @@ namespace SMD.Repository.BaseRepository
 
 
 
+        /// <summary>
+        /// Returns the transactiopns agaisnt a companyid's account
+        /// </summary>
+        /// <param name="CompanyId"></param>
+        /// <param name="AccountType"></param>
+        /// <param name="Rows"></param>
+        /// <returns></returns>
+        public ObjectResult<Int32> GetUserProfileCompletness(string UserId)
+        {
+            var UserIdParam = new ObjectParameter("UserId", UserId);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Int32>("GetUserProfileCompletness", UserIdParam);
+        }
+
+
+
 
         #endregion
     }

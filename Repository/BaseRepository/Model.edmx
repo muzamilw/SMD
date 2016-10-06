@@ -2476,6 +2476,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Parameter Name="Granularity" Type="int" Mode="In" />
         </Function>
         <Function Name="GetUserCounts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetUserProfileCompletness" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="ResetProductsUserResponses" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SearchCampaigns" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Status" Type="int" Mode="In" />
@@ -3745,6 +3748,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <Parameter Name="DateFrom" Mode="In" Type="DateTime" />
             <Parameter Name="DateTo" Mode="In" Type="DateTime" />
             <Parameter Name="Granularity" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetUserProfileCompletness" ReturnType="Collection(Int32)">
+            <Parameter Name="UserId" Mode="In" Type="String" />
           </FunctionImport>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
@@ -8408,6 +8414,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetUserProfileCompletness" FunctionName="SMDModel.Store.GetUserProfileCompletness" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

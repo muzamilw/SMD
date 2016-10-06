@@ -52,6 +52,10 @@ namespace SMD.Implementation.Services
         private readonly IManageUserRepository manageUserRepository;
         private readonly IAccountService accountService;
         private readonly IProfileQuestionRepository profileQuestionRepository;
+
+        private readonly IAspnetUsersRepository aspnetUsersRepository;
+
+
         private ApplicationUserManager UserManager
         {
             get { return HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
@@ -616,7 +620,7 @@ namespace SMD.Implementation.Services
             ITaxRepository taxRepository, IProfileQuestionUserAnswerService profileQuestionAnswerService,
             ICountryRepository countryRepository, IIndustryRepository industryRepository,
             IProfileQuestionService profileQuestionService, IAdCampaignResponseRepository adCampaignResponseRepository,
-            ISurveyQuestionResponseRepository surveyQuestionResponseRepository, IEducationRepository educationRepository, ICityRepository cityRepository, ICompanyRepository companyRepository, IManageUserRepository manageUserRepository, IAccountService accountService, IProfileQuestionRepository profileQuestionRepository)
+            ISurveyQuestionResponseRepository surveyQuestionResponseRepository, IEducationRepository educationRepository, ICityRepository cityRepository, ICompanyRepository companyRepository, IManageUserRepository manageUserRepository, IAccountService accountService, IProfileQuestionRepository profileQuestionRepository, IAspnetUsersRepository aspnetUsersRepository)
         {
             if (emailManagerService == null)
             {
@@ -684,6 +688,7 @@ namespace SMD.Implementation.Services
             this.manageUserRepository = manageUserRepository;
             this.accountService = accountService;
             this.profileQuestionRepository = profileQuestionRepository;
+            this.aspnetUsersRepository = aspnetUsersRepository;
         }
 
 
@@ -1438,7 +1443,10 @@ namespace SMD.Implementation.Services
         }
 
 
-
+        public int GetUserProfileCompletness(string UserId)
+        {
+            return aspnetUsersRepository.GetUserProfileCompletness(UserId);
+        }
        
 
         #endregion

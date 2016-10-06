@@ -84,5 +84,6 @@
   <ItemGroup>
     <Build Include="GetProducts.sql" />
     <Build Include="GetAdminDashBoardInsights.sql" />
+    <Build Include="GetUserProfileCompletness.sql" />
   </ItemGroup>
 </Project>
