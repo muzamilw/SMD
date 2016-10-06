@@ -1722,6 +1722,7 @@ define("Coupons/Coupons.viewModel",
 
 
                     if (matchedItem != null) {
+                        item.LocationTitle(matchedItem.BranchTitle);
                         item.LocationLine1(matchedItem.BranchAddressLine1);
                         item.LocationLine2(matchedItem.BranchAddressLine2);
                         item.LocationCity(matchedItem.BranchCity);
@@ -1741,6 +1742,7 @@ define("Coupons/Coupons.viewModel",
                     });
                     
                     if (matchedItem != null) {
+                        item.LocationTitle(matchedItem.BranchTitle);
                         item.LocationLine1(matchedItem.BranchAddressLine1);
                         item.LocationLine2(matchedItem.BranchAddressLine2);
                         item.LocationCity(matchedItem.BranchCity);
