@@ -42,7 +42,7 @@ namespace SMD.Repository.Repositories
       
         public Country Find(int id)
         {
-            throw new NotImplementedException();
+            return DbSet.Where(c => c.CountryId == id).FirstOrDefault();
         }
 
         /// <summary>

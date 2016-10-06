@@ -40,6 +40,10 @@ namespace SMD.Models.Common
 
 
         public bool? IsSpecialAccount { get; set; }
+
+        public string CurrencyCode { get; set; }
+
+        public string CurrencySymbol { get; set; }
         
     }
 }

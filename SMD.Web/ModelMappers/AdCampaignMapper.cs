@@ -448,7 +448,10 @@ namespace SMD.MIS.ModelMappers
                 ThreeDayDeliveryClausePrice = source.ThreeDayDeliveryClausePrice,
                 UserProfileImage = source.UserProfileImage,
                 VoucherClausePrice = source.VoucherClausePrice,
-                IsSpecialAccount = source.IsSpecialAccount
+                IsSpecialAccount = source.IsSpecialAccount,
+                CurrencyCode = source.CurrencyCode,
+                CurrencySymbol = source.CurrencySymbol,
+               
             };
 
 

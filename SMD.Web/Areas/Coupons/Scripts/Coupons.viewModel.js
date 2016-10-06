@@ -121,6 +121,7 @@ define("Coupons/Coupons.viewModel",
                     TempSelectedObj = ko.observable(),
                     CouponTitle = ko.observable(),
                     StatusValue = ko.observable(),
+                    currencyCode = ko.observable(),
                     GetCallBackBranchObject = ko.observable()
                     previewScreenNumber = ko.observable(1);
  
@@ -137,6 +138,7 @@ define("Coupons/Coupons.viewModel",
 
                             if (data != null) {
                                 UserAndCostDetail(data.UserAndCostDetails);
+                                currencyCode(data.UserAndCostDetails.CurrencyCode);
 
                                 if (data.Currencies != null) {
                                     CurrencyDropDown.removeAll();
@@ -2135,7 +2137,8 @@ define("Coupons/Coupons.viewModel",
                     CouponListingModeChecker: CouponListingModeChecker,
                     couponCategoriesCol1: couponCategoriesCol1,
                     couponCategoriesCol2: couponCategoriesCol2,
-                    couponCategoriesCol3: couponCategoriesCol3
+                    couponCategoriesCol3: couponCategoriesCol3,
+                    currencyCode: currencyCode
                 };
             })()
         };
