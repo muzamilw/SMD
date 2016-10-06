@@ -1526,7 +1526,14 @@ define("survey/survey.viewModel",
                      //$("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign").removeAttr('disabled');
                  },
                 terminateSaveChanges = function () {
-                    saveSurveyQuestion(7);
+                    confirmation.messageText("Are you sure you want to remove this Poll ? This action cannot be undone.");
+                    confirmation.show();
+                    confirmation.afterCancel(function () {
+                        confirmation.hide();
+                    });
+                    confirmation.afterProceed(function () {
+                        saveSurveyQuestion(7);
+                    });   
                 },
                     disableControls = function(status)
                     {

@@ -215,13 +215,13 @@
                   viewCountToday: viewCountToday,
                   viewCountYesterday: viewCountYesterday,
                   viewCountAllTime: viewCountAllTime,
-                  MaxDailyBudget : MaxDailyBudget,
+                //  MaxDailyBudget : MaxDailyBudget,
                   Locationss: Locationss,
                   ApprovalDateTime : ApprovalDateTime,
                   ChannelType: ChannelType,
                   VideoBytes: VideoBytes,
                   LogoUrl: LogoUrl,
-                  ClickRate: ClickRate,
+                //  ClickRate: ClickRate,
                   
               }),
               // Has Changes
