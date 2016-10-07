@@ -129,7 +129,10 @@ define("FranchiseDashboard/profileQuestionApp.viewModel",
                            success: function (data) {
                                
                                selectedProfileQuestion().profileGroupId(data.ProfileGroupName)
-                               getCompanyData(item);
+                               if (item.companyId() != null)
+                                   getCompanyData(item);
+                               else
+                               { selectedCompany (null)}
                            },
                            error: function () {
                                selectedProfileQuestion().profileGroupId(item.profileGroupId());

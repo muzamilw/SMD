@@ -63,8 +63,12 @@ define("FranchiseDashboard/surveyQuestionApp.viewModel",
                         $("#topArea").css("display", "none");
                         $("#divApprove").css("display", "none");
                         selectedQuestion(item);
-                        getCompanyData(item);
-                        //isEditorVisible(true);
+                        if (item.companyId() != null)
+                            getCompanyData(item);
+                        else {
+                            isEditorVisible(true);
+                            selectedCompany(null);
+                        }
                     },
                   
                     // Save Question / Add 
