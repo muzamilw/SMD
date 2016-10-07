@@ -48,6 +48,11 @@ define("FranchiseDashboard/Coupons.dataservice", function () {
                         dataType: 'json',
                         type: 'GET'
                     });
+                    amplify.request.define('getCouponPriceOption', 'ajax', {
+                        url: '/Api/GetCouponPriceOption',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
                     isInitialized = true;
                 }
             },
@@ -109,7 +114,16 @@ define("FranchiseDashboard/Coupons.dataservice", function () {
                       error: callbacks.error,
                       data: params
                   });
-              };
+              },
+        getCouponPriceOption = function (params, callbacks) {
+            initialize();
+            return amplify.request({
+                resourceId: 'getCouponPriceOption',
+                success: callbacks.success,
+                error: callbacks.error,
+                data: params
+            });
+        };
 
         return {
             saveCoupon: saveCoupon,
@@ -117,7 +131,8 @@ define("FranchiseDashboard/Coupons.dataservice", function () {
             getCurrenybyID: getCurrenybyID,
             getCouponCategories:getCouponCategories,
             sendApprovalRejectionEmail: sendApprovalRejectionEmail,
-            getCompanyData: getCompanyData
+            getCompanyData: getCompanyData,
+            getCouponPriceOption: getCouponPriceOption
         };
     })();
     return dataService;

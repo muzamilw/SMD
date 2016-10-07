@@ -10,6 +10,7 @@ define("FranchiseDashboard/Coupons.viewModel",
             viewModel: (function () {
                 var view,
                     coupons = ko.observableArray([]),
+                    couponsPriceOption = ko.observableArray([]),
                     //pager
                     pager = ko.observable(),
                     //sorting
@@ -31,7 +32,7 @@ define("FranchiseDashboard/Coupons.viewModel",
                                 selectedCoupon().currencyId(data.CurrencyCode)
                                 getCompanyData(item);
                                // isEditorVisible(true);
-                                //getCouponCategories(item.couponId);
+                                //getCouponPriceOption(item.couponId);
 
                                
 
@@ -46,15 +47,18 @@ define("FranchiseDashboard/Coupons.viewModel",
                         //selectedCoupon(item);
                         //isEditorVisible(true);
                     },
-                    getCouponCategories = function (couponid)
+                    getCouponPriceOption = function (couponid)
                     {
-                        dataservice.getCouponCategories(
-                                             { CampaignId: couponid },
+                        dataservice.getCouponPriceOption(
+                                             { CouponId: couponid },
                                              {
                                                  success: function (data) {
-                                                     var a = data;
-
-
+                                                     couponsPriceOption.removeAll();
+                                                     _.each(data, function (item) {
+                                                         couponsPriceOption.push(item);
+                                                     });
+                                                    
+ 
                                                  },
                                                  error: function () {
                                                      toastr.error("Failed to load CouponCategory");
@@ -167,6 +171,7 @@ define("FranchiseDashboard/Coupons.viewModel",
                      {
                          success: function (comData) {
                              selectedCompany(comData);
+                             getCouponPriceOption(selectedItem.couponId);
                              isEditorVisible(true);
                          
                          },
@@ -207,6 +212,7 @@ define("FranchiseDashboard/Coupons.viewModel",
                     selectedCompany:selectedCompany,
                     onRejectCoupon: onRejectCoupon,
                     hasChangesOnCoupon: hasChangesOnCoupon,
+                    couponsPriceOption: couponsPriceOption,
 
                 };
             })()
