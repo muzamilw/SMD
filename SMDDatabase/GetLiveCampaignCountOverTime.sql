@@ -1,5 +1,5 @@
 ﻿GO
-/****** Object:  StoredProcedure [dbo].[GetLiveCampaignCountOverTime]    Script Date: 10/6/2016 5:59:41 PM ******/
+/****** Object:  StoredProcedure [dbo].[GetLiveCampaignCountOverTime]    Script Date: 10/7/2016 4:57:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -32,14 +32,14 @@ DECLARE @CutoffDate DATE = DATEADD(YEAR, @NumberOfYears, @StartDate);
 CREATE TABLE #dim
 (
   [date]       DATE PRIMARY KEY, 
-  [day]        AS DATEPART(DAY,      [date]),
+  [day]        AS CONVERT(VARCHAR(6), dateadd(day, datediff(day, 0, [date]), 0), 6),
   [month]      AS DATEPART(MONTH,    [date]),
   FirstOfMonth AS CONVERT(DATE, DATEADD(MONTH, DATEDIFF(MONTH, 0, [date]), 0)),
   [MonthName]  AS right(convert(varchar, [date], 106), 8),
   [week]       AS CONVERT(VARCHAR(6), dateadd(week, datediff(week, 0, [date]), 0), 6),
   [ISOweek]    AS DATEPART(ISO_WEEK, [date]),
   [DayOfWeek]  AS DATEPART(WEEKDAY,  [date]),
-  [quarter]    AS DATEPART(QUARTER,  [date]),
+  [quarter]    AS CONVERT(VARCHAR(11), dateadd(QUARTER, datediff(QUARTER, 0, [date]), 0), 6),
   [year]       AS DATEPART(YEAR,     [date]),
   FirstOfYear  AS CONVERT(DATE, DATEADD(YEAR,  DATEDIFF(YEAR,  0, [date]), 0)),
   Style112     AS CONVERT(CHAR(8),   [date], 112),
@@ -82,7 +82,7 @@ FROM
 	IF @Granularity = 1
 	BEGIN
 		insert into @T1 
-		select d.date , d.date 
+		select d.day , d.date 
 		from #dim d
 		where d.date >= @DateFrom and d.date <= @DateTo
 	END
@@ -103,10 +103,18 @@ FROM
 	ELSE IF @Granularity = 4
 	BEGIN
 		insert into @T1 
+		select d.quarter , d.date
+		from #dim d
+		where d.date >= @DateFrom and d.date <= @DateTo
+	END
+	ELSE IF @Granularity = 5
+	BEGIN
+		insert into @T1 
 		select d.year , d.date
 		from #dim d
 		where d.date >= @DateFrom and d.date <= @DateTo
 	END
+
 	insert into @gran
 	Select  t.Granual, min(t.date) ordr
 	from @T1 t 
@@ -134,6 +142,18 @@ FROM
 			group by c.CampaignID 
 			) evntHis on gg.date > =  evntHis.maxdate
 			group by gg.Granual
+			--insert into @rev
+			--select gg.Granual,  count(evntHis.CampaignID) stats 
+			--from @T1 gg left outer join (
+			--select DISTINCT (c.CampaignID) , c.EventDateTime maxdate, c.EventId, c.EventStatusId from
+			--@T1 t 
+			--inner join CampaignEventHistory c on c.EventDateTime <= t.date
+			--inner join AdCampaign ac on ac.CampaignID = c.CampaignID 
+			--where c.CampaignID is not null and ac.Type = 1 --and c.EventStatusId = 3
+			--group by c.CampaignID 	 
+			
+			--) evntHis on gg.date > =  evntHis.maxdate
+			--group by gg.Granual
 		END
 		ELSE  IF @CampaignType = 2
 		BEGIN -- for Display ads
@@ -216,3 +236,4 @@ FROM
 	END
 	
 
+	--EXEC [GetLiveCampaignCountOverTime] 1, '2016-9-01', '2016-10-1', 1 
