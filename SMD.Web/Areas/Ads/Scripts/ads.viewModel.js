@@ -28,10 +28,10 @@ define("ads/ads.viewModel",
                     profileAnswerList = ko.observable([]),
                     ShowAudienceCounter = ko.observable(),
                     surveyAnswerList = ko.observable([]),
-                    SearchProfileQuestion=ko.observable(''),
+                    SearchProfileQuestion = ko.observable(''),
                     criteriaCount = ko.observable(0),
                     isShowSurveyAns = ko.observable(false),
-                    IsprofileQuestion=ko.observable(false),
+                    IsprofileQuestion = ko.observable(false),
                      // selected location 
                     selectedLocation = ko.observable(),
                     selectedLocationRadius = ko.observable(),
@@ -76,70 +76,70 @@ define("ads/ads.viewModel",
                     UserAndCostDetail = ko.observable(),
                     pricePerclick = ko.observable(0),
                     UrlHeadings = ko.observable('')
-                    isLocationPerClickPriceAdded = ko.observable(false),
-                    isLanguagePerClickPriceAdded = ko.observable(false),
-                    isIndustoryPerClickPriceAdded = ko.observable(false),
-                    isProfileSurveyPerClickPriceAdded = ko.observable(false),
-                    isEducationPerClickPriceAdded = ko.observable(false),
-                    isBuyItPerClickPriceAdded = ko.observable(false),
-                    isVoucherPerClickPriceAdded = ko.observable(false),
-                    isDisplayCouponsAds = ko.observable(false),
-                    selectedEducationIncludeExclude = ko.observable(true),
-                    isListVisible = ko.observable(true),
-                    isWelcomeScreenVisible = ko.observable(false),
-                    isDetailEditorVisible = ko.observable(false),
-                    isNewCampaign = ko.observable(false),
-                    isFromEdit = ko.observable(false),
-                     //audience reach
-                    reachedAudience = ko.observable(0),
-                    //total audience
-                    totalAudience = ko.observable(0),
-                    // audience reach mode 
-                    audienceReachMode = ko.observable("1"),
-                    MainHeading = ko.observable("Video ads - Upload a video and target audiences near you."),
-                    uploadTitle = ko.observable("Video"),
-                    SubHeading = ko.observable("Reward audiences 50% of your ‘ad click’ Increase branding and drive people to your web site with one ‘ad click’ Show a video ad, ask a reinforcing question and show your deals.");
+                isLocationPerClickPriceAdded = ko.observable(false),
+                isLanguagePerClickPriceAdded = ko.observable(false),
+                isIndustoryPerClickPriceAdded = ko.observable(false),
+                isProfileSurveyPerClickPriceAdded = ko.observable(false),
+                isEducationPerClickPriceAdded = ko.observable(false),
+                isBuyItPerClickPriceAdded = ko.observable(false),
+                isVoucherPerClickPriceAdded = ko.observable(false),
+                isDisplayCouponsAds = ko.observable(false),
+                selectedEducationIncludeExclude = ko.observable(true),
+                isListVisible = ko.observable(true),
+                isWelcomeScreenVisible = ko.observable(false),
+                isDetailEditorVisible = ko.observable(false),
+                isNewCampaign = ko.observable(false),
+                isFromEdit = ko.observable(false),
+                //audience reach
+                reachedAudience = ko.observable(0),
+                //total audience
+                totalAudience = ko.observable(0),
+                // audience reach mode 
+                audienceReachMode = ko.observable("1"),
+                MainHeading = ko.observable("Video ads - Upload a video and target audiences near you."),
+                uploadTitle = ko.observable("Video"),
+                SubHeading = ko.observable("Reward audiences 50% of your ‘ad click’ Increase branding and drive people to your web site with one ‘ad click’ Show a video ad, ask a reinforcing question and show your deals.");
 
-                    tab1Heading = ko.observable("Upload your video commercial (max 30 seconds , mp4 format).");
-                    tab2Heading = ko.observable("Target audience in different cities.");
+                tab1Heading = ko.observable("Upload your video commercial (max 30 seconds , mp4 format).");
+                tab2Heading = ko.observable("Target audience in different cities.");
                 tab4SubHeading = ko.observable("Select your ad campaign delivery mode:");
-                    errorListNew = ko.observableArray([]),
-                      // unique country list used to bind location dropdown
-                    selectedQuestionCountryList = ko.observableArray([]),
-                    educations = ko.observableArray([]),
-                    professions = ko.observableArray([]),
-                    surveyquestionList = ko.observableArray([]),
-                    voucherQuestionStatus = ko.observable(false),
-                    buyItQuestionStatus = ko.observable(false),
-                    AditionalCriteriaMode = ko.observable("1"), //1 = main buttons, 2 = profile questions , 3 = ad linked questions
-                showCompanyProfileQuestions = ko.observable(false),
-                    couponCategories = ko.observableArray([]),
-                    quizQuestionStatus = ko.observable(false),
-                    quizPriceLbl = ko.observable("1"),
-                    tenPriceLbl = ko.observable("1"),
-                    fivePriceLbl = ko.observable("1"),
-                    threePriceLbl = ko.observable("1"),
-                    buyItPriceLbl = ko.observable("1"),
-                    voucherPriceLbl = ko.observable("1"),
-                    alreadyAddedDeliveryValue = ko.observable(false),
-                    isQuizQPerClickPriceAdded = ko.observable(false),
-                    campaignNamePlaceHolderValue = ko.observable('Campaign Name (36 characters)'),
-                    genderppc = ko.observable(),
-                    professionppc = ko.observable(),
-                    ageppc = ko.observable(),
-                    BetterListitemToAdd = ko.observable(""),
-                    allCouponCodeItems = ko.observableArray([]),// Initial items
-                    selectedCouponCodeItems = ko.observableArray([]),                            // Initial selection
-                    UsedCouponQuantity = ko.observable(0),
-                    advertiserLogo = ko.observable(""),
-                    previewVideoTagUrl = ko.observable(""),
-                    randonNumber = ko.observable("?r=0"),
-                    vouchers = ko.observableArray(),
-                    numberOFCouponsToGenerate = ko.observable(0),
-                    previewScreenNumber = ko.observable(1),
-                    VideoLink2src = ko.observable(),
-                    TodisplayImg = ko.observable(true),
-                    SearchSelectedStatus = ko.observable();
+                errorListNew = ko.observableArray([]),
+                // unique country list used to bind location dropdown
+                selectedQuestionCountryList = ko.observableArray([]),
+                educations = ko.observableArray([]),
+                professions = ko.observableArray([]),
+                surveyquestionList = ko.observableArray([]),
+                voucherQuestionStatus = ko.observable(false),
+                buyItQuestionStatus = ko.observable(false),
+                AditionalCriteriaMode = ko.observable("1"), //1 = main buttons, 2 = profile questions , 3 = ad linked questions
+            showCompanyProfileQuestions = ko.observable(false),
+                couponCategories = ko.observableArray([]),
+                quizQuestionStatus = ko.observable(false),
+                quizPriceLbl = ko.observable("1"),
+                tenPriceLbl = ko.observable("1"),
+                fivePriceLbl = ko.observable("1"),
+                threePriceLbl = ko.observable("1"),
+                buyItPriceLbl = ko.observable("1"),
+                voucherPriceLbl = ko.observable("1"),
+                alreadyAddedDeliveryValue = ko.observable(false),
+                isQuizQPerClickPriceAdded = ko.observable(false),
+                campaignNamePlaceHolderValue = ko.observable('Campaign Name (36 characters)'),
+                genderppc = ko.observable(),
+                professionppc = ko.observable(),
+                ageppc = ko.observable(),
+                BetterListitemToAdd = ko.observable(""),
+                allCouponCodeItems = ko.observableArray([]),// Initial items
+                selectedCouponCodeItems = ko.observableArray([]),                            // Initial selection
+                UsedCouponQuantity = ko.observable(0),
+                advertiserLogo = ko.observable(""),
+                previewVideoTagUrl = ko.observable(""),
+                randonNumber = ko.observable("?r=0"),
+                vouchers = ko.observableArray(),
+                numberOFCouponsToGenerate = ko.observable(0),
+                previewScreenNumber = ko.observable(1),
+                VideoLink2src = ko.observable(),
+                TodisplayImg = ko.observable(true),
+                SearchSelectedStatus = ko.observable();
                 FlagToShowDivs = ko.observable(false);
 
                 CurrPage = ko.observable(9);
@@ -218,12 +218,12 @@ define("ads/ads.viewModel",
 
                 dataservice.getCampaignData({
                     CampaignId: 0,
-                    status : SearchSelectedStatus(),
+                    status: SearchSelectedStatus(),
                     PageSize: pager().pageSize(),
                     PageNo: pager().currentPage(),
                     SearchText: searchFilterValue(),
                     ShowCoupons: isDisplayCouponsAds(),
-                    mode:mode
+                    mode: mode
                 }, {
                     success: function (data) {
                         if (data != null) {
@@ -235,7 +235,7 @@ define("ads/ads.viewModel",
                                 campaignGridContent.push(model.Campaign.Create(updateCampaignGridItem(item)));
                             });
                             pager().totalCount(data.TotalCount);
-                            
+
                             //  LoadAnswers();
                         }
 
@@ -246,9 +246,8 @@ define("ads/ads.viewModel",
                 });
 
             },
-                LoadAnswers = function ()
-                {
-              
+                LoadAnswers = function () {
+
 
                     dataservice.getBaseData({
                         RequestId: 3,
@@ -256,11 +255,11 @@ define("ads/ads.viewModel",
                     }, {
                         success: function (data) {
                             if (data != null) {
-                              
+
                                 if (profileAnswerList().length > 0) {
                                     profileAnswerList([]);
                                 }
-                                
+
                                 ko.utils.arrayPushAll(profileAnswerList(), data.ProfileQuestionAnswers);
                                 profileAnswerList.valueHasMutated();
                             }
@@ -271,7 +270,7 @@ define("ads/ads.viewModel",
                         }
                     });
                 },
-               
+
             updateCampaignGridItem = function (item) {
 
                 canSubmitForApproval(false);
@@ -303,9 +302,9 @@ define("ads/ads.viewModel",
             },
                 // Add new Profile Question
             addNewCampaign = function () {
-               
-              
-               
+
+
+
                 $("#logo_div").css("display", "block");
 
                 $("#panelArea").css("display", "none");
@@ -320,7 +319,7 @@ define("ads/ads.viewModel",
                 TodisplayImg(true);
                 openEditScreen(1);
                 isFromEdit(true);
-               
+
                 isListVisible(false);
                 isNewCampaign(true);
                 isTerminateBtnVisible(false);
@@ -350,11 +349,10 @@ define("ads/ads.viewModel",
 
 
                 campaignModel().reset();
-                
-                
+
+
             },
-           GoToHomePage = function ()
-           {
+           GoToHomePage = function () {
                //isListVisible(false);
                isEditorVisible(false);
                isWelcomeScreenVisible(false);
@@ -364,12 +362,12 @@ define("ads/ads.viewModel",
                // showMainMenu();
            },
             closeNewCampaignDialog = function () {
-               
+
                 if (campaignModel().hasChanges() || logoImage != '') {    //&& (campaignModel().Status() == null || campaignModel().Status() == 1)
 
                     confirmation.messageText("Do you want to save changes?");
                     confirmation.afterProceed(function () {
-                   
+
                         if (ValidateCampaign()) {
 
                             if (campaignModel().Status() == 3) {
@@ -419,7 +417,7 @@ define("ads/ads.viewModel",
 
 
 
-                    
+
                     });
                     confirmation.afterCancel(function () {
 
@@ -447,7 +445,7 @@ define("ads/ads.viewModel",
 
                     confirmation.show();
 
-             
+
                     return;
                 } else { // no changes go close it
                     campaignModel();
@@ -490,10 +488,9 @@ define("ads/ads.viewModel",
                 $("#topArea").css("display", "block");
                 $("#headlabel").css("display", "block");
                 $("#headdesc").css("display", "block")
-                
+
             },
-                GetAudienceCount = function (val)
-                {
+                GetAudienceCount = function (val) {
                     while (/(\d+)(\d{3})/.test(val.toString())) {
                         val = val.toString().replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
                     }
@@ -501,8 +498,7 @@ define("ads/ads.viewModel",
 
                 },
 
-                closeContent = function ()
-                {
+                closeContent = function () {
                     campaignModel();
                     selectedCriteria();
                     isEditorVisible(false);
@@ -511,7 +507,7 @@ define("ads/ads.viewModel",
                         isWelcomeScreenVisible(false);
                     }
                     else {
-                       
+
                         if (campaignModel().Status() == 7) {
                             isWelcomeScreenVisible(false);
                             isListVisible(true);
@@ -541,7 +537,7 @@ define("ads/ads.viewModel",
                     //    $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
                     //    $("#btnSubmitForApproval,#saveBtn,.table-link").css("display", "inline-block");
                     //    $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
-                
+
                     isFromEdit(false);
                     $("#panelArea").css("display", "block");
 
@@ -550,17 +546,17 @@ define("ads/ads.viewModel",
                     $("#MarketobjDiv").css("display", "block");
                     $("#topArea").css("display", "block");
                     $("#headlabel").css("display", "block");
-                
+
                     $("#headdesc").css("display", "block");
                 },
-           
+
              BackToAds = function () {
                  isEditorVisible(false);
                  isWelcomeScreenVisible(false);
                  isListVisible(true);
              },
               openEditScreen = function (mode) {
-                 
+
                   campaignModel(new model.Campaign());
                   // campaignModel().CampaignName('New Campaign');
 
@@ -621,7 +617,7 @@ define("ads/ads.viewModel",
                   campaignModel().LanguageId(41);
                   campaignModel().DeliveryDays('10');
                   campaignModel().LogoUrl('/images/default-placeholder.png');
-                  
+
                   // campaignModel().LogoImageBytes("/images/default-placeholder.png");
 
                   campaignModel().IsShowVoucherSetting(false);
@@ -644,19 +640,24 @@ define("ads/ads.viewModel",
             submitCampaignData = function () {
                 //if (campaignModel().isValid()) {
                 if (ValidateCampaign()) {
-                   
-                    if (UserAndCostDetail().isStripeIntegrated == false) {
-
-                        stripeChargeCustomer.show(function () {
-                            UserAndCostDetail().isStripeIntegrated = true;
-                            saveCampaign(2);
-                        }, 2000, 'Enter your details');
-
-
-                    } else {
+                    if (UserAndCostDetail().IsSpecialAccount == true) {
+                        campaignModel().ClickRate(0);
                         saveCampaign(2);
                     }
-                   
+                    else {
+                        if (UserAndCostDetail().isStripeIntegrated == false) {
+
+                            stripeChargeCustomer.show(function () {
+                                UserAndCostDetail().isStripeIntegrated = true;
+                                saveCampaign(2);
+                            }, 2000, 'Enter your details');
+
+
+                        } else {
+                            saveCampaign(2);
+                        }
+                    }
+
                 }
                 else {
                     if (errorListNew().length > 0) {
@@ -678,7 +679,7 @@ define("ads/ads.viewModel",
 
                      if (campaignModel().CampaignName() == "" || campaignModel().CampaignName() == undefined) {
                          errorListNew.push({ name: "Please enter ad Title.", element: "" });
-                         
+
                      }
 
                      if (campaignModel().ClickRate() == undefined) {
@@ -695,7 +696,8 @@ define("ads/ads.viewModel",
 
                      if (reachedAudience() == 0) {
                          errorListNew.push({
-                             name: "You have no audience against the specified criteria please broaden your audience definition.", element: "" });
+                             name: "You have no audience against the specified criteria please broaden your audience definition.", element: ""
+                         });
                      }
 
                      if (errorListNew() == null || errorListNew().length == 0) {
@@ -735,7 +737,7 @@ define("ads/ads.viewModel",
                   saveCampaign(8);
               },
             saveCampaign = function (mode) {
-               
+
                 var isPopulateErrorList = false;
                 if (isDisplayCouponsAds() == false) {
 
@@ -893,7 +895,7 @@ define("ads/ads.viewModel",
                         isWelcomeScreenVisible(false);
                         toastr.success("Successfully saved.");
                         allCouponCodeItems.removeAll();
-                           
+
                         $("#topArea").css("display", "block");
                         //$("#MainBtnClose").click();
                         //GoToHomePage();
@@ -905,7 +907,7 @@ define("ads/ads.viewModel",
                     }
                 });
             },
-            
+
                 // Add new profile Criteria
                 addNewProfileCriteria = function () {
 
@@ -958,7 +960,7 @@ define("ads/ads.viewModel",
                     //}
                 },
                   saveProfileQuestion = function (item) {
-                     
+
                       var selectedQuestionstring = $(".active .parent-list-title").text();
                       selectedCriteria().questionString(selectedQuestionstring);
                       selectedCriteria().PQID(item.PQID);
@@ -1096,7 +1098,7 @@ define("ads/ads.viewModel",
                 },
 
                  saveSurveyQuestion = function (type, item) {
-                     
+
                      var selectedQuestionstring = item.DisplayQuestion;
                      selectedCriteria().questionString(selectedQuestionstring);
 
@@ -1130,7 +1132,7 @@ define("ads/ads.viewModel",
                              campaignModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
                                  Type: 2,
                                  SQId: item.SQID,
-                                 SQAnswer:type,
+                                 SQAnswer: type,
                                  //PQAnswerId: selectedCriteria().PQAnswerID(),
                                  //QuizCampaignId: item.CampaignId,
                                  //QuizAnswerId: type,
@@ -1168,7 +1170,7 @@ define("ads/ads.viewModel",
 
 
                 onEditCriteria = function (item) {
-                    
+
                     AditionalCriteriaMode("2");
                     isNewCriteria(false);
                     var val = item.PQAnswerID() + 0;
@@ -1219,9 +1221,8 @@ define("ads/ads.viewModel",
 
                         selectedCriteria(item);
                     }
-                    else if (item.Type() == "2")
-                    {
-                      
+                    else if (item.Type() == "2") {
+
                         if (surveyquestionList().length == 0) {
                             dataservice.getBaseData({
                                 RequestId: 6,
@@ -1260,7 +1261,7 @@ define("ads/ads.viewModel",
                             selectedCriteria().surveyQuestRightImageSrc(matchSurveyQuestion.RightPicturePath);
                         }
 
-                        
+
 
                     }
 
@@ -1310,9 +1311,9 @@ define("ads/ads.viewModel",
                 },
 
                 onChangeProfileQuestion = function (item) {
-          
+
                     var y = $(".listview").scrollTop();  //your current y position on the page
-                    
+
                     if (item == null)
                         return;
                     var selectedQuestionId = item.PqId;
@@ -1333,7 +1334,7 @@ define("ads/ads.viewModel",
 
                                 profileAnswerList.valueHasMutated();
 
-                                $(".listview").scrollTop(y+60);
+                                $(".listview").scrollTop(y + 60);
                             }
 
                         },
@@ -1343,7 +1344,7 @@ define("ads/ads.viewModel",
                     });
                 },
                  onChangeSurveyQuestion = function (item) {
-                     
+
                      var y = $(".listview").scrollTop();  //your current y position on the page
 
                      if (item == null)
@@ -1355,7 +1356,7 @@ define("ads/ads.viewModel",
                          QuestionId: selectedQuestionId,
                      }, {
                          success: function (data) {
-                             
+
                              if (data != null) {
                                  if (surveyAnswerList().length > 0) {
                                      surveyAnswerList([]);
@@ -1377,7 +1378,7 @@ define("ads/ads.viewModel",
                          }
                      });
                  },
-               
+
 
                 onRemoveLocation = function (item) {
                     // Ask for confirmation
@@ -1516,8 +1517,8 @@ define("ads/ads.viewModel",
 
                   },
                 onEditCampaign = function (item) {
-                
-                    
+
+
                     previewScreenNumber(1);
                     isTerminateBtnVisible(false);
                     isNewCampaignVisible(false);
@@ -1532,9 +1533,9 @@ define("ads/ads.viewModel",
                     $("#Heading_div").css("display", "none");
 
 
-                    if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == 6|| item.Status() == null || item.Status() == 7 || item.Status() == 9) {
+                    if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == 6 || item.Status() == null || item.Status() == 7 || item.Status() == 9) {
                         collapseMainMenu();
-                       
+
                         if (item.Status() == 1)//because it is in draft mode.
                             isNewCampaign(true);
                         else
@@ -1547,7 +1548,7 @@ define("ads/ads.viewModel",
                             SearchText: ""
                         }, {
                             success: function (data) {
-                                
+
                                 if (data != null) {
                                     // set languages drop down
                                     var profileQIds = [];
@@ -1564,22 +1565,22 @@ define("ads/ads.viewModel",
                                     });
 
                                     campaignModel(model.Campaign.Create(data.Campaigns[0]));
-                                    
+
                                     if (campaignModel().LogoUrl() == '' || campaignModel().LogoUrl() == undefined) {
 
                                         campaignModel().LogoUrl("/images/default-placeholder.png");
                                     }
-                                   
-                                   
-                                    VideoLink2src(campaignModel().VideoLink2()+''+'');
-                                    
+
+
+                                    VideoLink2src(campaignModel().VideoLink2() + '' + '');
+
                                     if (VideoLink2src() != null && VideoLink2src() != '') {
                                         FlagToShowDivs(false);
                                     }
                                     else {
                                         FlagToShowDivs(true);
                                     }
-                                    
+
                                     //if (campaignModel().LogoUrl() != null && campaignModel().LogoUrl() != '') {
                                     //    TodisplayImg(false);
 
@@ -1669,7 +1670,7 @@ define("ads/ads.viewModel",
 
                                     selectedQuestionCountryList([]);
                                     _.each(campaignModel().AdCampaignTargetLocations(), function (item) {
-                                        
+
                                         addCountryToCountryList(item.CountryID(), item.Country());
                                     });
 
@@ -1688,7 +1689,7 @@ define("ads/ads.viewModel",
                                     } else if (campaignModel().Status() == 2) {
                                         $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
                                         $("#btnSubmitForApproval2").css("display", "none");
-                                        
+
                                         $('#imgLogo').prop('disabled', true);
 
                                         $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,#btnPauseCampaign,.lang_delSurvey").css("display", "none");
@@ -1707,29 +1708,29 @@ define("ads/ads.viewModel",
                                         //isTerminateBtnVisible(true);
                                         isNewCampaignVisible(true);
                                     } else if (campaignModel().Status() == 4) {
-                                       // $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
+                                        // $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
                                         $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey").css("display", "none");
                                         $("#saveBtn").css("display", "none");
                                         $("#btnResumeCampagin").css("display", "inline-block");
                                         $("#btnCancel,#btnResumeCampagin,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
                                         campaignModel().StatusValue("Paused");
-                                       // isTerminateBtnVisible(true);
+                                        // isTerminateBtnVisible(true);
                                         isNewCampaignVisible(true);
                                     } else if (campaignModel().Status() == 5) {
                                         campaignModel().StatusValue("Completed");
                                     } else if (campaignModel().Status() == 6) {
-                                      //  $("input,button,textarea,select").attr('disabled', 'disabled'); // disable all controls
+                                        //  $("input,button,textarea,select").attr('disabled', 'disabled'); // disable all controls
                                         $("#btnSubmitForApproval2").css("display", "inline-block");
                                         $("#btnSubmitForApproval2").removeAttr('disabled');
                                         $("#btnPauseCampaign").css("display", "none");
                                         campaignModel().StatusValue("Approval Rejected");
                                     } else if (campaignModel().Status() == 7) {
-                                        
+
                                         campaignModel().StatusValue("Remove");
                                         $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
                                         $("#btnSubmitForApproval,#btnResumeCampagin,#btnArchive,#btnPauseCampaign,.lang_delSurvey").css("display", "none");
                                         $("#saveBtn").css("display", "none");
-                                       // $("#btnPauseCampaign").css("display", "inline-block");
+                                        // $("#btnPauseCampaign").css("display", "inline-block");
                                         $("#btnCancel,#btnPauseCampaign,#btnCopyCampaign,#btnArchive").removeAttr('disabled');
                                         isNewCampaignVisible();
                                         isShowArchiveBtn(false);
@@ -1906,12 +1907,12 @@ define("ads/ads.viewModel",
                                     bindAudienceReachCount();
 
                                     if (mode == 4) {
-                                        
+
                                         $("#logo_div").css("display", "block");
                                     }
 
                                     else {
-                                        
+
                                         $("#logo_div").css("display", "none");
                                     }
 
@@ -1935,15 +1936,15 @@ define("ads/ads.viewModel",
                     $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign").removeAttr('disabled');
                 },
                 submitResumeData = function () {
-                         if (campaignModel() != undefined)
-                             saveCampaign(3);
+                    if (campaignModel() != undefined)
+                        saveCampaign(3);
 
-                         $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
-                         $("#btnSubmitForApproval,#saveBtn,.lang_delSurvey,.table-link").css("display", "inline-block");
-                         $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign").removeAttr('disabled');
-                     },
+                    $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
+                    $("#btnSubmitForApproval,#saveBtn,.lang_delSurvey,.table-link").css("display", "inline-block");
+                    $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign").removeAttr('disabled');
+                },
                 nextPreviewScreen = function () {
-                    
+
                     var noErrors = true;
                     if (previewScreenNumber() == 1) {
 
@@ -1959,7 +1960,7 @@ define("ads/ads.viewModel",
                         //    noErrors = false;
                         //    toastr.error("Please enter second line.");
                         //}
-                        
+
                         if (campaignModel().MaxBudget() < campaignModel().ClickRate()) {
                             noErrors = false;
                             toastr.error("Manage budget should be greater than ppvc.");
@@ -2431,7 +2432,7 @@ define("ads/ads.viewModel",
                     }
                 },
                 findLocationsInCountry = function (id) {
-                   
+
 
                     var list = ko.utils.arrayFilter(campaignModel().AdCampaignTargetLocations(), function (prod) {
                         return prod.CountryID() == id;
@@ -2455,24 +2456,23 @@ define("ads/ads.viewModel",
                      campaignModel().LogoImageBytes(data);
                      TodisplayImg(false);
                  },
-               
+
                  VideoUrlCallback = function (file, data) {
 
-                     if (file.size <88888888) {
-                     
+                     if (file.size < 88888888) {
+
                          if (file.type === 'video/mp4') {
-                             
+
                              campaignModel().VideoBytes(data);
                          }
                          else {
                              toastr.error("sorry you can upload Mp4 video only.");
                          }
                      }
-                     else
-                     {
+                     else {
                          toastr.error("sorry you can upload upto 88Mb video only.");
                      }
-                     
+
                  },
                 ShowCouponPromotions = function () {
                     window.location.href = "/Coupons/Coupons";
@@ -2529,17 +2529,17 @@ define("ads/ads.viewModel",
                     objProfileCriteria.CriteriaID(criteriaCount());
                     selectedCriteria(objProfileCriteria);
 
-                    
+
                     if (profileQuestionList().length == 0) {
                         dataservice.getBaseData({
                             RequestId: 2,
                             QuestionId: 0,
                         }, {
                             success: function (data) {
-                                
+
                                 if (data != null) {
                                     profileQuestionList([]);
-                                   
+
                                     ko.utils.arrayPushAll(profileQuestionList(), data.ProfileQuestions);
                                     profileQuestionList.valueHasMutated();
                                     TemporaryProfileList.clear;
@@ -2578,10 +2578,10 @@ define("ads/ads.viewModel",
                                     ko.utils.arrayPushAll(profileQuestionList(), data.ProfileQuestions);
                                     console.log(data.profileQuestionList)
                                     profileQuestionList.valueHasMutated();
-                                   
+
                                     TemporaryProfileList.clear;
                                     TemporaryProfileList(profileQuestionList());
-                                    
+
                                 }
 
                             },
@@ -2591,7 +2591,7 @@ define("ads/ads.viewModel",
                         });
 
                     }
-                   
+
                     AditionalCriteriaMode(2);
                     showCompanyProfileQuestions(true);
                 },
@@ -2614,7 +2614,7 @@ define("ads/ads.viewModel",
                             QuestionId: 0,
                         }, {
                             success: function (data) {
-                                
+
                                 if (data != null) {
 
                                     surveyquestionList([]);
@@ -2634,10 +2634,10 @@ define("ads/ads.viewModel",
                 },
 
 
-                getQuestionByFilter = function() {
-                  
+                getQuestionByFilter = function () {
+
                     if (AditionalCriteriaMode() == 2) {
-                     
+
                         if (SearchProfileQuestion() != '') {
 
                             profileQuestionList(TemporaryProfileList());
@@ -2653,13 +2653,12 @@ define("ads/ads.viewModel",
                             profileQuestionList(TemporaryProfileList());
                         }
                     }
-                    else if(AditionalCriteriaMode() == 3)
-                    {
-                        
+                    else if (AditionalCriteriaMode() == 3) {
+
                         if (SearchProfileQuestion() != '') {
                             myQuizQuestions(TemporaryQuizQuestions());
                             var list = ko.utils.arrayFilter(myQuizQuestions(), function (prod) {
-                                
+
                                 return prod.VerifyQuestion.toLowerCase().indexOf(SearchProfileQuestion().toLowerCase()) != -1;
                             });
                             myQuizQuestions().clear;
@@ -2672,9 +2671,8 @@ define("ads/ads.viewModel",
 
                     }
 
-                    else if (AditionalCriteriaMode() == 4)
-                    {
-                        
+                    else if (AditionalCriteriaMode() == 4) {
+
                         if (SearchProfileQuestion() != '') {
                             surveyquestionList(TemporarySurveyList());
                             var list = ko.utils.arrayFilter(surveyquestionList(), function (prod) {
@@ -2688,7 +2686,7 @@ define("ads/ads.viewModel",
                             surveyquestionList.clear;
                             surveyquestionList(TemporarySurveyList());
                         }
-                        
+
                         if (SearchProfileQuestion() != '') {
                             surveyquestionList(TemporarySurveyList());
                             var list = ko.utils.arrayFilter(surveyquestionList(), function (prod) {
@@ -2704,10 +2702,8 @@ define("ads/ads.viewModel",
                         }
 
                     }
-                    }
-                }
+                },
 
-                
                 showAdditionQuizCriteria = function () {
                     Modelheading('Your Quiz Questions');
                     IsprofileQuestion(false);
@@ -2877,7 +2873,7 @@ define("ads/ads.viewModel",
                      };
                      dataservice.generateCouponCodes(gData, {
                          success: function (data) {
-                             
+
                              _.each(data.CouponList, function (item) {
                                  allCouponCodeItems.push(item.Code);
                                  campaignModel().CouponCodes.push(new model.AdCampaignCouponCodes.Create({
@@ -2905,25 +2901,24 @@ define("ads/ads.viewModel",
                 },
                  gotoScreen = function (number) {
                      //  toastr.error("Validation.");
-                   
+
                      previewScreenNumber(number);
 
                  },
-                GetAnswers = function (id)
-                {
-                    
+                GetAnswers = function (id) {
+
                     if (profileAnswerList().length > 0) {
                         var list = ko.utils.arrayFilter(profileAnswerList(), function (prod) {
-                           
+
                             return prod.PqId == id;
                         });
                         return list;
                     }
-                   
+
                 }
                 // BindStatusDD();
 
-                BindStatusDD =function () {
+                BindStatusDD = function () {
                     var data = [
                         {
                             "id": "2",
@@ -3009,7 +3004,7 @@ define("ads/ads.viewModel",
                     addNewCampaign: addNewCampaign,
                     langs: langs,
                     campaignModel: campaignModel,
-                   
+
                     closeNewCampaignDialog: closeNewCampaignDialog,
                     selectedCriteria: selectedCriteria,
                     profileQuestionList: profileQuestionList,
@@ -3090,7 +3085,7 @@ define("ads/ads.viewModel",
                     isNewCampaign: isNewCampaign,
                     BackToAds: BackToAds,
                     MainHeading: MainHeading,
-                    uploadTitle:uploadTitle,
+                    uploadTitle: uploadTitle,
                     SubHeading: SubHeading,
                     ShowAdCampaigns: ShowAdCampaigns,
                     ShowCouponPromotions: ShowCouponPromotions,
@@ -3110,10 +3105,10 @@ define("ads/ads.viewModel",
                     ArchiveCampaign: ArchiveCampaign,
                     copyCampaign: copyCampaign,
                     AditionalCriteriaMode: AditionalCriteriaMode,
-                    showCompanyProfileQuestions:showCompanyProfileQuestions,
+                    showCompanyProfileQuestions: showCompanyProfileQuestions,
                     showAdditionCriteria: showAdditionCriteria,
                     showAdditionUserCriteria: showAdditionUserCriteria,
-                    showAdditionalSurveyQuestions:showAdditionalSurveyQuestions,
+                    showAdditionalSurveyQuestions: showAdditionalSurveyQuestions,
                     showAdditionQuizCriteria: showAdditionQuizCriteria,
                     addBuyItPrice: addBuyItPrice,
                     couponCategories: couponCategories,
@@ -3133,7 +3128,7 @@ define("ads/ads.viewModel",
                     BetterListitemToAdd: BetterListitemToAdd,
                     allCouponCodeItems: allCouponCodeItems,
                     selectedCouponCodeItems: selectedCouponCodeItems,
-                    DefaultTextBtns:DefaultTextBtns,
+                    DefaultTextBtns: DefaultTextBtns,
                     addItemToCouponCodeList: addItemToCouponCodeList,
                     removeSelectedCouponCodeItem: removeSelectedCouponCodeItem,
                     opencouponCodesDialog: opencouponCodesDialog,

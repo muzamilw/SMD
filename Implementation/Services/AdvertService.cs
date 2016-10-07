@@ -376,6 +376,9 @@ namespace SMD.Implementation.Services
                 campaignModel.SubmissionDateTime = DateTime.Now;
             }
             //toCamdo pilot: harcoding ClickRate = 1 for every campaign
+            if (campaignModel.ClickRate == 0)
+            { campaignModel.ClickRate = 0.0; }
+            else
             campaignModel.ClickRate = 0.20;
             if (campaignModel.Status == 2)
             {
@@ -1192,6 +1195,7 @@ namespace SMD.Implementation.Services
         {
             string respMesg = "True";
             var dbAd = _adCampaignRepository.Find(source.CampaignId);
+            var userData = webApiUserService.GetUserByUserId(dbAd.UserId);
             // Update 
             if (dbAd != null)
             {
@@ -1204,11 +1208,15 @@ namespace SMD.Implementation.Services
                     dbAd.Status = (Int32)AdCampaignStatus.Live;
                     dbAd.StartDateTime = DateTime.Now;
                     dbAd.EndDateTime = DateTime.Now.AddDays(30);
+
                     // Stripe payment + Invoice Generation
                     // Muzi bhai said we will see it on latter stage 
 
                     //todo pilot: unCommenting Stripe payment code on Ads approval
-                    respMesg = MakeStripePaymentandAddInvoiceForCampaign(dbAd);
+                    if (userData.Company.IsSpecialAccount != true)
+                    {
+                        respMesg = MakeStripePaymentandAddInvoiceForCampaign(dbAd);
+                    }
                     if (respMesg.Contains("Failed"))
                     {
                         return respMesg;
