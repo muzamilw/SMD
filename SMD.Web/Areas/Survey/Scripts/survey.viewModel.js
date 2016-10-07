@@ -35,6 +35,8 @@ define("survey/survey.viewModel",
                     selectedLocationLat = ko.observable(0),
                     selectedLocationLong = ko.observable(0),
                     ShowAudienceCounter = ko.observable(),
+                    DefaultRangeValue = ko.observable(100),
+                    DefaultCountValue = ko.observable(100),
                     // criteria selection 
                     selectedCriteria = ko.observable(),
                     profileQuestionList = ko.observable([]),
@@ -225,6 +227,7 @@ define("survey/survey.viewModel",
                         selectedQuestion().StatusValue("Draft");
                         selectedQuestion().AgeRangeStart(13);
                         selectedQuestion().AgeRangeEnd(80);
+                        selectedQuestion().answerNeeded(100);
                         selectedQuestion().reset();
                         selectedQuestion().SurveyQuestionTargetCriteria([]);
                         selectedQuestion().SurveyQuestionTargetLocation([]);
@@ -1604,6 +1607,13 @@ define("survey/survey.viewModel",
                         getBasedata();
                         getQuestions();
                         getProductPrice();
+                        //$("#Ranges").val(100).change();
+
+                        //$("#show_audience").text(100);
+
+                        //$("#txtPerClick").val(100).change();
+
+
                     };
                 return {
                     initialize: initialize,
@@ -1710,7 +1720,8 @@ define("survey/survey.viewModel",
                     ShowAudienceCounter: ShowAudienceCounter,
                     totalPrice: totalPrice,
                     SavePassChanges: SavePassChanges,
-                    terminateSaveChanges: terminateSaveChanges
+                    terminateSaveChanges: terminateSaveChanges,
+                    DefaultRangeValue: DefaultRangeValue
                 };
             })()
         };

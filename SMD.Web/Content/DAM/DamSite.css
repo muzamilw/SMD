@@ -200,10 +200,10 @@ div#title {
     min-height: 100px;
     border: 0;
     overflow: hidden;
-    width: 250px;
+    width:210px;
     cursor: pointer;
     border: 1px solid #eee;
-    margin-left: 16%;
+    margin-left: 0%;
 }
 
 .imageBox:hover {
@@ -212,7 +212,7 @@ div#title {
 }
 
 .imagePreview {
-    max-height: 200px; display: block; margin: 0 auto;max-width:250px;
+    max-height: 200px; display: block; margin: 0 auto;max-width:210px;
 }
 
 .imageBoxName {
@@ -423,8 +423,8 @@ div#title {
 }
 
 .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover {
-     border: 1px solid #5cb85c !important;
-    background: #68b359 !important;
+     border: 1px solid #81d3dc!important;
+    background: #81d3dc !important;
     font-weight: normal;
     color: #ffffff;
 }

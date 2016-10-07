@@ -895,6 +895,9 @@
     <Content Include="Content\metroUI\js\prettify\prettify.css" />
     <Content Include="Content\metroUI\js\prettify\prettify.js" />
     <Content Include="Content\metroUI\js\prettify\run_prettify.js" />
+    <Content Include="Content\Range\rangeslider.css" />
+    <Content Include="Content\Range\rangeslider.js" />
+    <Content Include="Content\Range\rangeslider.min.js" />
     <Content Include="Content\ReportViewerSite.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\textboxLabel.css" />

@@ -1030,5 +1030,26 @@ div#spinner {
 .listlabels {
     font-size:12px;color:#7f8c8d !important;
 }
+.dam_header {
+    background-color:#81d3dc!important;
+    text-align:center;
+}
+.damHeading {
+    font-size:24px;color: #ffffff; line-height: 2.5 !important;
+}
+.Border_right {
+        border-right: 1px solid rgb(220,220,220);
+}
+.greycolor {
+   color: #7f8c8d !important;
+}
+.dampanel {
+    height: 38px!important;
+    text-align: center;
+    padding-top: 8px;
+}
+
+
+
 
 /*# sourceMappingURL=MainSite.css.map */
