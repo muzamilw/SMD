@@ -478,6 +478,7 @@ namespace SMD.Implementation.Services
         {
             string respMesg = "True";
             var dbCo = _profileQuestionRepository.Find(source.PqId);
+            var userData = UserManager.FindById(dbCo.UserID);
             // Update 
             if (dbCo != null)
             {
@@ -497,7 +498,10 @@ namespace SMD.Implementation.Services
                     }
                     else
                     {
-                        respMesg = MakeStripePaymentandAddInvoiceForPQ(dbCo);
+                        if (userData.Company.IsSpecialAccount != true)
+                        {
+                            respMesg = MakeStripePaymentandAddInvoiceForPQ(dbCo);
+                        }
                         if (respMesg.Contains("Failed"))
                         {
                             return respMesg;

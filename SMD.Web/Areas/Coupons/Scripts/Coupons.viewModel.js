@@ -539,16 +539,19 @@ define("Coupons/Coupons.viewModel",
 
                 if (hasErrors)
                     return;
-
-                
-                if (UserAndCostDetail().isStripeIntegrated == false) {
-                    stripeChargeCustomer.show(function () {
-                        UserAndCostDetail().isStripeIntegrated = true;
-                        saveCampaign(2);
-                    }, 1000, 'Configure your credit card');
-
-                } else {
+                if (UserAndCostDetail().IsSpecialAccount == true) {
                     saveCampaign(2);
+                }
+                else {
+                    if (UserAndCostDetail().isStripeIntegrated == false) {
+                        stripeChargeCustomer.show(function () {
+                            UserAndCostDetail().isStripeIntegrated = true;
+                            saveCampaign(2);
+                        }, 1000, 'Configure your credit card');
+
+                    } else {
+                        saveCampaign(2);
+                    }
                 }
             },
               terminateCampaign = function () {
