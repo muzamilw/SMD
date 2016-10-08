@@ -624,6 +624,7 @@ namespace SMD.Implementation.Services
             {
                 campaignModel.MaxBudget = Math.Round(Convert.ToDouble(campaignModel.MaxBudget), 2);
             }
+            campaignModel.CompanyId = _adCampaignRepository.CompanyId;
 
             _adCampaignRepository.Update(campaignModel);
             _adCampaignRepository.SaveChanges();

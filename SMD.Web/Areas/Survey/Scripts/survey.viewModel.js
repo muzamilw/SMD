@@ -1524,6 +1524,8 @@ define("survey/survey.viewModel",
                      //$("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign").removeAttr('disabled');
                  },
                 terminateSaveChanges = function (item) {
+                    if (item.Status() == 1)
+                        selectedQuestion().SQID(item.SQID());
                     confirmation.messageText("Are you sure you want to remove this Poll ? This action cannot be undone.");
                     confirmation.show();
                     confirmation.afterCancel(function () {
