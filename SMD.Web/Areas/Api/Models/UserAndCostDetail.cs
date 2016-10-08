@@ -33,5 +33,13 @@ namespace SMD.MIS.Areas.Api.Models
         public string GeoLat { get; set; }
         public string GeoLong { get; set; }
         public string UserProfileImage { get; set; }
+
+
+        public bool? IsSpecialAccount { get; set; }
+        public string CurrencyCode { get; set; }
+
+        public string CurrencySymbol { get; set; }
+
+
     }
 }

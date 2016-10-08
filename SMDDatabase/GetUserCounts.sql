@@ -1,6 +1,6 @@
 ﻿
 GO
-/****** Object:  StoredProcedure [dbo].[GetUserCounts]    Script Date: 10/3/2016 7:02:12 PM ******/
+/****** Object:  StoredProcedure [dbo].[GetUserCounts]    Script Date: 10/6/2016 6:00:30 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON

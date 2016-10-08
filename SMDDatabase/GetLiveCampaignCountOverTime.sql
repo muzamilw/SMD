@@ -1,10 +1,10 @@
 ﻿GO
-/****** Object:  StoredProcedure [dbo].[GetRevenueOverTime]    Script Date: 10/4/2016 3:27:07 PM ******/
+/****** Object:  StoredProcedure [dbo].[GetLiveCampaignCountOverTime]    Script Date: 10/6/2016 5:59:41 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-Create PROCEDURE [dbo].[GetLiveCampaignCountOverTime](
+ALTER PROCEDURE [dbo].[GetLiveCampaignCountOverTime](
 
 @CampaignType INT,				--Input parameter ,  CampaignType 1 for Ads, 2, games, 3 for survay, 4 for polls, 5 free deals , 6 paid deals
 @DateFrom DateTime, 
@@ -15,7 +15,7 @@ Create PROCEDURE [dbo].[GetLiveCampaignCountOverTime](
 )
 AS
 BEGIN
-select 'nnnnnnnnnnnnnnnnnnnnnnnn' Granual , 0 campCount
+--select 'nnnnnnnnnnnnnnnnnnnnnnnn' Granual , 0 campCount
 DECLARE @StartDate DATE = '20000101', @NumberOfYears INT = 30;
 
 -- prevent set or regional settings from interfering with 
@@ -113,23 +113,106 @@ FROM
 	group by t.Granual
 		
 		-- for Video ads
-	insert into @rev
-	select g.Granual , sum(t.CreditAmount) as Revenue
-	from @T1 g
-	left join [Transaction] t on g.date = CONVERT(date, t.TransactionDate)
-	inner join Account a on a.AccountId = t.AccountID
-	inner join AdCampaign ac on ac.CampaignID = t.AdCampaignID
-	AND  a.AccountType = 1 AND t.Type = 1 AND ac.Type = 1
-	group by g.Granual
+	--insert into @rev
+	--select t.date, count(case when ac.Type = 4 and CONVERT(date, ac.StartDateTime) <= t.date then ac.CampaignID else null end) GameStats, count(case when ac.Type = 1 and CONVERT(date, ac.StartDateTime) <= t.date then ac.CampaignID else null end) as videoStats 
+	--from AdCampaign ac
+	--right outer join   @T1 t on t.date < CONVERT(date, ac.EndDateTime)
+	--group by t.date
+
+	 IF @CampaignType = 1
+		BEGIN -- for video ads
+				
+			insert into @rev
+			select gg.Granual,  count(evntHis.CampaignID) stats --evntHis.maxdate , evntHis.CampaignID
+			from @T1 gg left outer join (
+			select Max(c.EventDateTime) maxdate, c.CampaignID  from
+			@T1 t 
+			left outer join CampaignEventHistory c on c.EventDateTime <= t.date
+			inner join AdCampaign ac on ac.CampaignID = c.CampaignID 
+			where  c.CampaignID is not null and ac.Type = 1 and c.EventStatusId = 3
+			
+			group by c.CampaignID 
+			) evntHis on gg.date > =  evntHis.maxdate
+			group by gg.Granual
+		END
+		ELSE  IF @CampaignType = 2
+		BEGIN -- for Display ads
+				
+			insert into @rev
+			select gg.Granual,  count(evntHis.CampaignID) stats --evntHis.maxdate , evntHis.CampaignID
+			from @T1 gg left outer join (
+			select Max(c.EventDateTime) maxdate, c.CampaignID  from
+			@T1 t 
+			left outer join CampaignEventHistory c on c.EventDateTime <= t.date
+			inner join AdCampaign ac on ac.CampaignID = c.CampaignID 
+			where  c.CampaignID is not null and ac.Type = 2 and c.EventStatusId = 3
+			
+			group by c.CampaignID 
+			) evntHis on gg.date > =  evntHis.maxdate
+			group by gg.Granual
+		END 
+		ElSE  IF @CampaignType = 3
+		BEGIN -- Survay
+				
+			insert into @rev
+			select gg.Granual,  count(evntHis.PQID) stats --evntHis.maxdate , evntHis.CampaignID
+			from @T1 gg left outer join (
+			select Max(c.EventDateTime) maxdate, c.PQID  from
+			@T1 t 
+			left outer join CampaignEventHistory c on c.EventDateTime <= t.date
+			where  c.PQID is not null  and c.EventStatusId = 3
+			group by c.PQID 
+			) evntHis on gg.date > =  evntHis.maxdate
+			group by gg.Granual
+		END
+		ElSE  IF @CampaignType = 4
+		BEGIN -- Polls
+				
+			insert into @rev
+			select gg.Granual,  count(evntHis.SQID) stats --evntHis.maxdate , evntHis.CampaignID
+			from @T1 gg left outer join (
+			select Max(c.EventDateTime) maxdate, c.SQID  from
+			@T1 t 
+			left outer join CampaignEventHistory c on c.EventDateTime <= t.date
+			where  c.SQID is not null  and c.EventStatusId = 3
+			group by c.SQID 
+			) evntHis on gg.date > =  evntHis.maxdate
+			group by gg.Granual
+		END
+		ELSE  IF @CampaignType = 5
+		BEGIN -- for Free Deals
+				
+			insert into @rev
+			select gg.Granual,  count(evntHis.CouponId) stats --evntHis.maxdate , evntHis.CampaignID
+			from @T1 gg left outer join (
+			select Max(c.EventDateTime) maxdate, c.CouponId  from
+			@T1 t 
+			left outer join CampaignEventHistory c on c.EventDateTime <= t.date
+			inner join Coupon ac on ac.CouponId = c.CouponId 
+			where  c.CouponId is not null and ac.CouponListingMode = 1 and c.EventStatusId = 3
+			group by c.CouponId 
+			) evntHis on gg.date > =  evntHis.maxdate
+			group by gg.Granual
+		END 
+		ELSE  IF @CampaignType = 6
+		BEGIN -- for Paid Deals
+				
+			insert into @rev
+			select gg.Granual,  count(evntHis.CouponId) stats --evntHis.maxdate , evntHis.CampaignID
+			from @T1 gg left outer join (
+			select Max(c.EventDateTime) maxdate, c.CouponId  from
+			@T1 t 
+			left outer join CampaignEventHistory c on c.EventDateTime <= t.date
+			inner join Coupon ac on ac.CouponId = c.CouponId 
+			where  c.CouponId is not null and ac.CouponListingMode = 2 and c.EventStatusId = 3
+			group by c.CouponId 
+			) evntHis on gg.date > =  evntHis.maxdate
+			group by gg.Granual
+		END 
 	
-	--select * from @rev
 	select g.Granual, (case when r.campCount is not null then r.campCount else 0 end) campCount from @gran g
 	left outer join @rev r on r.Granual = g.Granual
 	order by g.ordr
-	
-END
-
-	
+	END
 	
 
---EXEC [GetLiveCampaignCountOverTime] 1, '2016-9-01', '2016-10-1', 1 

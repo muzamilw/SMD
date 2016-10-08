@@ -9,6 +9,6 @@ namespace SMD.Models.DomainModels
     public partial class GetLiveCampaignCountOverTime_Result
     {
         public string Granual { get; set; }
-        public int campCount { get; set; }
+        public Int64 campCount { get; set; }
     }
 }

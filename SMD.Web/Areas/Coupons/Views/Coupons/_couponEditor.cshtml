@@ -85,7 +85,7 @@
                                                     <div class=" col-lg-4 text-right">
                                                         <label style="font-size:small;color:lightgray">Logo:</label></div>
                                                     <div class="col-lg-8">
-                                                        <img id="vehicleImage" alt="" style="width: auto;height:80px" data-bind="attr:{src:Logo.startsWith('http') ? Logo : '/' + Logo }" />
+                                                        <img id="vehicleImage" alt="" style="width: auto;height:80px" data-bind="attr:{src:Logo!=null && Logo.startsWith('http') ? Logo : '/' + Logo }" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -269,11 +269,11 @@
                                                             <label class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;    margin-left: 6px; ">Deal Group</label>
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-4 text-right">
+                                                    <div class="col-lg-4 text-right" style="display:none">
                                                         <label class="control-label text-right tooltip-float">Deal Summary</label>
                                                     </div>
-                                                    <div class="col-lg-6">
-                                                        <textarea readonly class="form-control" data-bind="value:redeemLine2"></textarea>
+                                                    <div class="col-lg-6" style="display:none">
+                                                        <textarea readonly class="form-control" rows="4" style="resize:none" data-bind="value:redeemLine2"></textarea>
                                                         @*<input type="text" readonly class="form-control" data-bind="value:highlight1">*@
                                                     </div>
                                                 </div>
@@ -284,7 +284,7 @@
                                                         <label class="control-label text-right tooltip-float">Highlights</label>
                                                     </div>
                                                     <div class="col-lg-6">
-                                                        <textarea readonly class="form-control" data-bind="value:highlight1"></textarea>
+                                                        <textarea readonly class="form-control" rows="4" style="resize:none" data-bind="value:highlight1"></textarea>
                                                         @*<input type="text" readonly class="form-control" data-bind="value:highlight2">*@
                                                     </div>
                                                 </div>
@@ -300,7 +300,7 @@
                                                         <label class="control-label text-right tooltip-float">Fine Print</label>
                                                     </div>
                                                     <div class="col-lg-6">
-                                                        <textarea readonly class="form-control" data-bind="value:printLine1"></textarea>
+                                                        <textarea readonly class="form-control" rows="4" style="resize:none" data-bind="value:printLine1"></textarea>
                                                         @*<input type="text" readonly class="form-control" data-bind="value:printLine1">*@
                                                     </div>
                                                 </div>

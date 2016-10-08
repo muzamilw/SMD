@@ -183,7 +183,7 @@
                                                 <label for="txtSurveyTtile" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Poll Question</label>
                                             </div>
                                             <div class="col-lg-7">
-                                                <input type="text" name="Campaign Name" class="form-control" id="txtSurveyTtile" placeholder="Enter poll question" data-bind="value: Question,validationTooltip: Question, validationOnElement: Question">
+                                                <input type="text" name="Campaign Name" maxlength="64" class="form-control" id="txtSurveyTtile" placeholder="Enter poll question" data-bind="value: Question,validationTooltip: Question, validationOnElement: Question">
                                             </div>
                                             <div class="col-lg-1"></div>
                                             <div class="col-lg-2">
@@ -937,8 +937,8 @@
                                                         <span class="panelfntSize" style="color:#9690cf;" data-bind="text:$root.ShowAudienceCounter()">1,112</span>
                                                     </div>
                                                 </div>*@
-                                                <input id="Ranges" type="range" min="0" 
-                                                       oninput="showVal(this.value)" data-bind="attr:{max:$root.reachedAudience,value:$root.DefaultRangeValue}" onchange="showVal(this.value)">
+                                                <input id="Ranges" type="range" min="0"
+                                                       oninput="showVal(this.value)" data-bind="attr:{max:$root.reachedAudience,value:$root.reachedAudience}" onchange="showVal(this.value)">
                                             </div>
                                         </div>
 
@@ -956,7 +956,7 @@
 
                                                     <div class=" col-lg-12" style="padding-left:0px;padding-top:2px;">
                                                         <input type="text" style="float:left; color:#81d3dc; font-weight: bold;font-size: 15px; width:65px;display:none;" name="Budget" class="form-control" id="txtPerClick" data-bind="value:answerNeeded" />
-                                                        <span data-bind="text:$root.DefaultRangeValue" id="show_audience" class="panelfntSize" style="color:#9690cf;"></span>
+                                                        <span data-bind="text:$root.reachedAudience" id="show_audience" class="panelfntSize" style="color:#9690cf;"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -984,9 +984,9 @@
                                                 <div style="margin-top:0px;min-height:59px;">
                                                     <div>
                                                   
-                                                        @*<button class="btn  btn-success btnSubmitApproval" id="btnSaveAsDraft" data-bind="click:$root.SaveAsDraft, visible: $root.isNewCampaign() " style="width: 229px;">Save as Draft</button>*@
+                                                      
                                                         <button class="btn  btn-success btnSubmitApproval" id="btnSubmitForApproval2" data-bind="visible:$root.canSubmitForApproval,click:$root.onSubmitSurveyQuestion" style="width: 229px;margin-bottom:4px;">Submit for Approval</button>
-
+                                                        <button class="btn  btn-success btnSubmitApproval bluethemeclr drafthov" id="btnSaveAsDraft" data-bind="click:$root.SaveAsDraft, visible: $root.isNewCampaign() " style="width: 229px;">Save as Draft</button>
                                                         <button class="btn  btn-info " id="btnStopAndTerminate" data-bind="visible:$root.isTerminateBtnVisible" style="width:229px; margin-bottom: 10px; display: none;">Stop &amp; Terminate Early</button>
                                                         <button class="btn  btn-danger " id="btnArchive" data-bind="visible: $root.isShowArchiveBtn" style="width:229px; margin-bottom: 10px; display: none;">Archive Campaign</button>
                                                         <button class="btn  btn-info Theme_standard_clr" id="btnCopyCampaign" style="display:none;width:229px;">Create Copy - New Campaign</button>
@@ -1001,34 +1001,34 @@
 
                                             <div class="col-lg-12" style="padding-left:24px;">
 
-                                                <span style=" font-size:12px;">  Learn more about 'Ad Click'</span><img style="height:14px;" src="/Content/Images/Drop_Arrow.png" data-toggle="collapse" data-target="#demo" onclick="PageScroll()">
+                                                <span style=" font-size:12px;">  Learn more about 'Ad Click'</span><img style="height:14px;" src="/Content/Images/Drop_Arrow.png" data-toggle="collapse" data-target="#demo"/>
 
                                             </div>
                                         </div>
                                     </div>
 
                                 </div>
-                                <div class="row Subpanels collapse in" id="demo" style="">
+                                <div class="row Subpanels collapse" id="demo">
 
 
                                     <div class="col-lg-12" style="font-size:12px;">
                                         <div class="row">
 
                                             <div class="col-lg-11" style="padding-left:32px;">
-                                                <br>
+                                                <br />
                                                 <p>
                                                     The ad click is charged after app users have watched your video ad AND successfully answered your quiz survey.
-                                                    <br>
-                                                </p><p>
+                                                    <br />
+                                                <p>
                                                     Half of th¬e ad click is rewarded to the viewer for participating in your quiz survey. If users opt to skip the video ad, or skip the quiz survey at any time, then no ad click is charged.
                                                 </p>
-                                                <br>
+                                                <br />
                                                 <p>
                                                     Higher the ad click campaigns get seen sooner.If you notice that your daily budget isn’t achieved then either increase your ad click for higher priority or try the ‘Broadcast Repeat’ mode.
 
 
                                                 </p>
-                                                <br>
+                                                <br />
                                                 <p>Minimum video ad click is $0.04 USD, with a maximum of $2 USD.</p>
 
                                             </div>
@@ -1663,19 +1663,21 @@
     <script src="/Content/Range/rangeslider.min.js"></script>
 
     <script type="text/javascript">
-
-        //$(document).ready(function () {
-        //    GetAudienceCount = function (val) {
-        //        while (/(\d+)(\d{3})/.test(val.toString())) {
-        //            val = val.toString().replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
-        //        }
-        //        return val;
-
-        //    }
+        
+        $(function () {
+            $('#demo').on('shown.bs.collapse', function (e) {
            
-          
-        //});
+                //var offset = $('.panel.panel-default > .panel-collapse.in').offset();
+                //if (offset) {
+                $('html,body').animate({
+                    scrollTop: $('#demo p').offset().top - 20
+                }, 600);
 
+                
+                //}
+            });
+        });
+        
         $('input[type="range"]').rangeslider({
         });
 
@@ -1688,9 +1690,26 @@
             $("#show_audience").text(GetAudienceCount(val)).change();
             $("#txtPerClick").val(val).change();
         }
+        function DefaultStatus()
+        {
+            var val = $("#Ranges").val();
+            $("#show_audience").text(GetAudienceCount(val)).change();
+            $("#txtPerClick").val(val).change();
+        }
+      
+        function GetAudienceCount(val)
+        {
+            while (/(\d+)(\d{3})/.test(val.toString())) {
+                val = val.toString().replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
+            }
+            return val;
+        }
 
-        
+           function PageScroll()
+    {
+        $('html, body').animate({ scrollTop:0 }, 800);
 
+    }
         var sImageLeft = "";
         var sImageRight = "";
         var mode = 1;

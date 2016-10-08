@@ -379,6 +379,7 @@
           <Property Name="BillingAddressName" Type="nvarchar" MaxLength="150" />
           <Property Name="IsDeleted" Type="bit" />
           <Property Name="DeleteDate" Type="datetime" />
+          <Property Name="IsSpecialAccount" Type="bit" />
         </EntityType>
         <EntityType Name="CompanyBranch">
           <Key>
@@ -2475,6 +2476,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Parameter Name="Granularity" Type="int" Mode="In" />
         </Function>
         <Function Name="GetUserCounts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetUserProfileCompletness" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="ResetProductsUserResponses" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SearchCampaigns" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Status" Type="int" Mode="In" />
@@ -3744,6 +3748,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <Parameter Name="DateFrom" Mode="In" Type="DateTime" />
             <Parameter Name="DateTo" Mode="In" Type="DateTime" />
             <Parameter Name="Granularity" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetUserProfileCompletness" ReturnType="Collection(Int32)">
+            <Parameter Name="UserId" Mode="In" Type="String" />
           </FunctionImport>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
@@ -6201,6 +6208,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="IsDeleted" Type="Boolean" />
           <Property Name="DeleteDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="PayOutHistories" Relationship="DomainModels.FK_PayOutHistory_Company" FromRole="Company" ToRole="PayOutHistory" />
+          <Property Name="IsSpecialAccount" Type="Boolean" />
         </EntityType>
         <Association Name="FK_Account_Company">
           <End Type="DomainModels.Company" Role="Company" Multiplicity="0..1" />
@@ -6726,22 +6734,22 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
         </Association>
         <ComplexType Name="GetLiveCampaignCountOverTime_Result">
           <Property Type="String" Name="Granual" Nullable="false" MaxLength="24" />
-          <Property Type="Int32" Name="campCount" Nullable="false" />
+          <Property Type="Int64" Name="campCount" Nullable="true" />
         </ComplexType>
         <ComplexType Name="getPayoutVSRevenueOverTime_Result">
           <Property Type="String" Name="Granual" Nullable="false" MaxLength="24" />
-          <Property Type="Decimal" Name="revStats" Nullable="false" Precision="1" Scale="1" />
-          <Property Type="Decimal" Name="PayoutStats" Nullable="false" Precision="1" Scale="1" />
+          <Property Type="Double" Name="revStats" Nullable="true" />
+          <Property Type="Double" Name="PayoutStats" Nullable="true" />
         </ComplexType>
         <ComplexType Name="GetRevenueByCampaignOverTime_Result">
           <Property Type="String" Name="Granual" Nullable="false" MaxLength="24" />
-          <Property Type="Decimal" Name="Revenue" Nullable="false" Precision="1" Scale="1" />
+          <Property Type="Double" Name="Revenue" Nullable="true" />
         </ComplexType>
         <ComplexType Name="getUserActivitiesOverTime_Result">
           <Property Type="String" Name="Granual" Nullable="false" MaxLength="14" />
-          <Property Type="Int32" Name="newStats" Nullable="false" />
-          <Property Type="Int32" Name="loginStats" Nullable="false" />
-          <Property Type="Int32" Name="deleteStats" Nullable="false" />
+          <Property Type="Int64" Name="newStats" Nullable="true" />
+          <Property Type="Int64" Name="loginStats" Nullable="true" />
+          <Property Type="Int64" Name="deleteStats" Nullable="true" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -8099,6 +8107,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="Companies">
             <EntityTypeMapping TypeName="DomainModels.Company">
               <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="IsSpecialAccount" ColumnName="IsSpecialAccount" />
                 <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="BillingAddressName" ColumnName="BillingAddressName" />
@@ -8405,6 +8414,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetUserProfileCompletness" FunctionName="SMDModel.Store.GetUserProfileCompletness" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

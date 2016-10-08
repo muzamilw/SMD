@@ -87,7 +87,7 @@
                                                         <label style="font-size:small;color:lightgray">Logo:</label>
                                                     </div>
                                                     <div class="col-lg-8">
-                                                        <img id="vehicleImage" alt="" style="width: auto;height:80px" data-bind="attr:{src:Logo.startsWith('http') ? Logo : '/' + Logo }" />
+                                                        <img id="vehicleImage" alt="" style="width: auto;height:80px" data-bind="attr:{src:Logo!=null && Logo.startsWith('http') ? Logo : '/' + Logo }" />
                                                     </div>
                                                 </div>
                                             </div>

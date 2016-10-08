@@ -37,5 +37,13 @@ namespace SMD.Models.Common
         public string GeoLong { get; set; }
 
         public string UserProfileImage { get; set; }
+
+
+        public bool? IsSpecialAccount { get; set; }
+
+        public string CurrencyCode { get; set; }
+
+        public string CurrencySymbol { get; set; }
+        
     }
 }

@@ -50,6 +50,9 @@ namespace SMD.Models.DomainModels
         public string InstagramHandle { get; set; }
         public string PinterestHandle { get; set; }
 
+        public Nullable<bool> IsSpecialAccount { get; set; }
+        
+
 
         public string City { get; set; }
         public string BillingCity { get; set; }

@@ -502,33 +502,7 @@
         function OpenBranchLocation() {
             $("#btnBranchLocations").click();
         }
-        $('.slider-minmax').noUiSlider({
-            range: [0, 100],
-            start: [20],
-            handles: 1,
-            connect: 'upper',
-            slide: function () {
-                debugger;
-                var val = $(this).val();
-
-                $(this).next('span').text(
-                 'Max: $' + val
-                );
-            },
-            set: function () {
-                debugger;
-                var val = $(this).val();
-
-                $(this).next('span').text(
-                 'Max: $' + val
-                );
-            }
-        });
-        $('.slider-minmax').val(20, true);
-
-        $('#bnv-expert-current').on('change', function(){
-            alert('change');
-        });
+       
         //////////////var logoImage = "";
         //////////////var bannerImage1 = "";
         //////////////var bannerImage2 = "";

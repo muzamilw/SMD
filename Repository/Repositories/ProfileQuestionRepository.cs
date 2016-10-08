@@ -219,6 +219,7 @@ namespace SMD.Repository.Repositories
                 data.Industry = usr.Industry != null ? usr.Industry.IndustryName : "";
                 data.Language = usr.Language != null ? usr.Language.LanguageName : "";
                 data.isStripeIntegrated = usr.Company == null ? false : String.IsNullOrEmpty(usr.Company.StripeCustomerId) == true ? false : true;
+                data.IsSpecialAccount = usr.Company.IsSpecialAccount;
                 //data.Latitude = usr.Company.City != null ? usr.Company.City.GeoLat : "";
                 //data.Longitude = usr.Company.City != null ? usr.Company.City.GeoLong : "";
                 data.isUserAdmin = isAdmin;

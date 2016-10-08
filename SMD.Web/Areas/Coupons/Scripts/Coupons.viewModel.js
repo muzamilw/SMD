@@ -121,6 +121,8 @@ define("Coupons/Coupons.viewModel",
                     TempSelectedObj = ko.observable(),
                     CouponTitle = ko.observable(),
                     StatusValue = ko.observable(),
+                    currencyCode = ko.observable(),
+                    currencySymbol = ko.observable(),
                     GetCallBackBranchObject = ko.observable()
                     previewScreenNumber = ko.observable(1);
  
@@ -134,9 +136,12 @@ define("Coupons/Coupons.viewModel",
                         QuestionId: 0,
                     }, {
                         success: function (data) {
-
+                            var currency;
                             if (data != null) {
+                                currency = data.UserAndCostDetails.CurrencyCode + ' (' + data.UserAndCostDetails.CurrencySymbol + ')';
                                 UserAndCostDetail(data.UserAndCostDetails);
+                                currencyCode(currency);
+                                currencySymbol(data.UserAndCostDetails.CurrencySymbol);
 
                                 if (data.Currencies != null) {
                                     CurrencyDropDown.removeAll();
@@ -534,20 +539,32 @@ define("Coupons/Coupons.viewModel",
 
                 if (hasErrors)
                     return;
-
-                
-                if (UserAndCostDetail().isStripeIntegrated == false) {
-                    stripeChargeCustomer.show(function () {
-                        UserAndCostDetail().isStripeIntegrated = true;
-                        saveCampaign(2);
-                    }, 1000, 'Configure your credit card');
-
-                } else {
+                if (UserAndCostDetail().IsSpecialAccount == true) {
                     saveCampaign(2);
+                }
+                else {
+                    if (UserAndCostDetail().isStripeIntegrated == false) {
+                        stripeChargeCustomer.show(function () {
+                            UserAndCostDetail().isStripeIntegrated = true;
+                            saveCampaign(2);
+                        }, 1000, 'Configure your credit card');
+
+                    } else {
+                        saveCampaign(2);
+                    }
                 }
             },
               terminateCampaign = function () {
-                  saveCampaign(7);
+                  confirmation.messageText("Are you sure you want to remove this ad ? This action cannot be undone.");
+                  confirmation.show();
+                  confirmation.afterCancel(function () {
+                      confirmation.hide();
+                  });
+                  confirmation.afterProceed(function () {
+                      if (couponModel() != undefined)
+                          saveCampaign(7);
+                  });
+                
               },
               ArchiveCampaign = function () {
                   saveCampaign(8);
@@ -1722,6 +1739,7 @@ define("Coupons/Coupons.viewModel",
 
 
                     if (matchedItem != null) {
+                        item.LocationTitle(matchedItem.BranchTitle);
                         item.LocationLine1(matchedItem.BranchAddressLine1);
                         item.LocationLine2(matchedItem.BranchAddressLine2);
                         item.LocationCity(matchedItem.BranchCity);
@@ -1741,6 +1759,7 @@ define("Coupons/Coupons.viewModel",
                     });
                     
                     if (matchedItem != null) {
+                        item.LocationTitle(matchedItem.BranchTitle);
                         item.LocationLine1(matchedItem.BranchAddressLine1);
                         item.LocationLine2(matchedItem.BranchAddressLine2);
                         item.LocationCity(matchedItem.BranchCity);
@@ -2124,7 +2143,9 @@ define("Coupons/Coupons.viewModel",
                     CouponListingModeChecker: CouponListingModeChecker,
                     couponCategoriesCol1: couponCategoriesCol1,
                     couponCategoriesCol2: couponCategoriesCol2,
-                    couponCategoriesCol3: couponCategoriesCol3
+                    couponCategoriesCol3: couponCategoriesCol3,
+                    currencyCode: currencyCode,
+                    currencySymbol: currencySymbol
                 };
             })()
         };

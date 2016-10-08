@@ -9,7 +9,10 @@ namespace SMD.Models.DomainModels
     public partial class getPayoutVSRevenueOverTime_Result
     {
         public string Granual { get; set; }
-        public decimal revStats { get; set; }
-        public decimal PayoutStats { get; set; }
+
+        public Nullable<double> revStats { get; set; }
+
+        public Nullable<double> PayoutStats { get; set; }
+
     }
 }

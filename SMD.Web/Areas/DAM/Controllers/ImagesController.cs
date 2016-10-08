@@ -49,9 +49,11 @@ namespace SMD.MIS.Areas.DAM.Controllers
             var images = new ImagesModel();
             int companyId = 0;
             images.Images = damImageService.getAllImages(mode,out companyId);
+            if (images.Images != null) { 
             foreach (var img in images.Images)
             {
                 img.ImageFileName = "/SMD_Content/DamImages/" + companyId + "/" + mode + "/" + img.ImageFileName;
+            }
             }
             images.FreeImages = damImageService.getAllFreeImages();
             foreach (var img in images.FreeImages)

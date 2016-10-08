@@ -25,7 +25,7 @@
         </div>
         <div class="row" style="padding-left:0px;min-height:400px;">
             <div class="pull-left damImgContainer" style="width:100%;overflow:auto;height:600px;overflow-x: hidden; ">
-                @if (Model != null && Model.Images.Count > 0)
+                @if (Model != null && Model.Images !=null && Model.Images.Count > 0)
                 {
                     <div class="imageContainer">
                         @foreach (var img in Model.Images)

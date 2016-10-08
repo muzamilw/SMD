@@ -16,14 +16,19 @@ else
 }
 <div class="row" id="Heading_div" >
     <div class="col-lg-12" style="padding-left: 0px;">
-        <div class="col-lg-2" style="padding:0px;">
+        <div style="width:125px;" class="pull-left">
           
                <label id="headlabel" style="font-size:24px;color:black!important;margin-top:7px;">Videos ads</label>
            
         </div>
-        <div class="col-lg-10" style="padding:0px;">
+        <div style="width:5px;">
+
+        </div>
+
+        <div style="width:600px" class="pull-left">
             <label id="headdesc" style="color:#7f8c8d;font-size:14px;margin-top:17px;">Target and broadcast your latest video commercials to audiences near you.</label>
         </div>
+        <div class="clearfix;"></div>
     </div>
     </div>
     
@@ -52,10 +57,17 @@ else
                                             <th class="col-sm-3" style="vertical-align:top"><span class="GridHeaderFont_size ">Campaign Name</span></th>
                                             <th class="col-sm-1" style="vertical-align:top;display:none;"><span class="GridHeaderFont_size">Type</span></th>
 
-                                            <th class="col-sm-2" style="vertical-align:top"><span class="GridHeaderFont_size">Start Date</span></th>
+                                            <th class="col-sm-2" style="vertical-align:top;display:none;"><span class="GridHeaderFont_size">Start Date</span></th>
+                                            <th class="col-sm-3" style="vertical-align:top">
+                                                <span class="GridHeaderFont_size">Click throughs</span><br />
+                                                <span style="color:darkgray;font-size:10px;">Today</span>
+                                                <span style="color:darkgray;font-size:10px;">Yesterday</span>
+                                                <span style="color:darkgray;font-size:10px;">All Time</span>
+                                            </th>
+
 
                                             <th class="col-sm-2" style="vertical-align:top"><span class="GridHeaderFont_size">Locations</span></th>
-
+                                            <th class="col-sm-1" style="vertical-align:top"><span class="GridHeaderFont_size">Daily($)</span></th>
                                             <th class="col-sm-1" style="vertical-align:top"><span class="GridHeaderFont_size">Ad Click</span></th>
 
 
@@ -68,7 +80,7 @@ else
                                                 <span style="color:darkgray;font-size:10px;">All Time</span>
 
                                             </th>
-                                            <th class="col-sm-1" style="vertical-align:top"><span class="GridHeaderFont_size">Daily Cap</span></th>
+                                            
                                             <th class="col-sm-1" style="vertical-align:top"><span style="white-space:nowrap;display:none;" class="GridHeaderFont_size">Total Spent</span></th>
                                             <th class="col-sm-1" style="vertical-align:top"><span class="GridHeaderFont_size">Status</span></th>
                                             @*<th class="col-sm-2"><span class="@userClasses">Spent</span><span class="@adminClasses">Created by</span></th>*@
@@ -170,11 +182,19 @@ else
             <span class="">Game</span>
             <!-- /ko -->
         </td>
-        <td class="col-sm-3">
+        <td class="col-sm-3" style="display:none;">
             <span data-bind="text: StartDateTime"></span>
         </td>
         <td class="col-sm-2">
+            <span data-bind="text: viewCountToday" style="display:inline-block;width:35px;"></span>
+            <span data-bind="text: viewCountYesterday" style="display:inline-block;width:60px;"></span>
+            <span data-bind="text: viewCountAllTime" style="display:inline-block;width:47px;"></span>
+        </td>
+        <td class="col-sm-2">
             <span data-bind="text: Locationss"></span>
+        </td>
+        <td class="col-sm-1">
+            <span data-bind="text: MaxDailyBudget"></span>
         </td>
         <td class="col-sm-1">
             <span data-bind="text: '$'+ ClickRate().toFixed(2)"></span>
@@ -183,14 +203,10 @@ else
 
             <span data-bind="text: viewCountToday" style="display:inline-block;width:35px;"></span>
             <span data-bind="text: viewCountYesterday" style="display:inline-block;width:60px;"></span>
-            <span data-bind="text: viewCountAllTime" style="display:inline-block;width:47px;"></span>
-
-
+            <span data-bind="text: viewCountAllTime" style="display:inline-block;width:35px;"></span>
 
         </td>
-        <td class="col-sm-1">
-            <span data-bind="text: MaxDailyBudget"></span>
-        </td>
+        
         <td class="col-sm-1" ><span class="@userClasses" data-bind="text: AmountSpent() ? '$'+ AmountSpent().toFixed(2) : '$'+ 0"></span></td>
         <td class="col-sm-2">
             <!-- ko if: Status() == 1-->
