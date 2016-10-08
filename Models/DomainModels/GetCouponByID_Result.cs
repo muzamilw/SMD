@@ -85,6 +85,9 @@ namespace SMD.Models.DomainModels
         public string AboutUsDescription { get; set; }
 
         public string CompanyName { get; set; }
+
+
+        public string CurrencyCode { get; set; }
         
     }
 }

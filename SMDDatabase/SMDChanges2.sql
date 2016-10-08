@@ -1753,3 +1753,7 @@ GO
 ALTER TABLE dbo.Company SET (LOCK_ESCALATION = TABLE)
 GO
 COMMIT
+
+
+
+-------------------------------------- all scripts above executed on server   7 october.

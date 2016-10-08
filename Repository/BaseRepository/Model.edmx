@@ -3750,7 +3750,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <Parameter Name="Granularity" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetUserProfileCompletness" ReturnType="Collection(Int32)">
-            <Parameter Name="UserId" Mode="In" Type="String" />
+          <Parameter Name="UserId" Mode="In" Type="String" />
           </FunctionImport>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
@@ -5778,6 +5778,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="String" Name="BuyitBtnLabel" Nullable="true" MaxLength="200" />
           <Property Type="String" Name="AboutUsDescription" Nullable="true" />
           <Property Type="String" Name="CompanyName" Nullable="true" />
+          <Property Type="String" Name="CurrencyCode" Nullable="true" MaxLength="50" />
         </ComplexType>
         <EntityType Name="ProfileQuestionTargetCriteria">
           <Key>
@@ -7886,6 +7887,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
                 <ScalarProperty Name="BuyitBtnLabel" ColumnName="BuyitBtnLabel" />
                 <ScalarProperty Name="AboutUsDescription" ColumnName="AboutUsDescription" />
                 <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="CurrencyCode" ColumnName="CurrencyCode" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

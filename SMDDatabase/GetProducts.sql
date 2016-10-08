@@ -1,6 +1,6 @@
 ﻿
-
-
+GO
+/****** Object:  StoredProcedure [dbo].[GetProducts]    Script Date: 10/7/2016 12:28:35 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -63,7 +63,7 @@ select *, COUNT(*) OVER() AS TotalItems--,
 from
 (	
 
-	select top(2) WITH TIES ads.*, g.GameUrl,COUNT(*) OVER( partition by type) AS AdCount from
+	select top(4) WITH TIES ads.*, g.GameUrl,COUNT(*) OVER( partition by type) AS AdCount from
 	(
 			select adcampaign.campaignid as ItemId, adcampaign.CampaignName ItemName, 'Ad' Type, 
 			adcampaign.Description +'\n' + adcampaign.CampaignDescription as description,
@@ -115,15 +115,11 @@ from
 
 			--((row_number() over (order by ABS(CHECKSUM(NewId())) % 100 desc) * 100) + 1) Weightage,
 			((row_number() over (order by isNUll(clickrate,0) desc) * 100) + 1) Weightage,
+
 			NULL as SqLeftImagePercentage, NULL as SqRightImagePercentage,
 			null as SocialHandle, null as SocialHandleType,
-			(select 
-			CASE
-				WHEN adcampaign.LogoUrl is null or adcampaign.LogoUrl = ''
-				THEN 'http://manage.cash4ads.com/' + usr.ProfileImage
-				WHEN usr.ProfileImage is not null
-				THEN 'http://manage.cash4ads.com/' + adcampaign.LogoUrl
-			END as AdvertisersLogoPath from AspNetUsers usr where usr.Id = adcampaign.UserID) as AdvertisersLogoPath,
+			(select 'http://manage.cash4ads.com/' + c.logo from Company c
+			  where c.CompanyId = adcampaign.CompanyId) as AdvertisersLogoPath,
 
 			
 
@@ -134,7 +130,8 @@ from
 			adcampaign.BuyItButtonLabel as BuyItButtonText, 
 			 'http://manage.cash4ads.com/' +adcampaign.BuyItImageUrl as BuyItImageUrl,
 			'http://manage.cash4ads.com/' + adcampaign.Voucher1ImagePath as VoucherImagePath,
-			(select count(*) from coupon v where AdCampaign.CompanyId = v.CompanyId and v.Status = 3) as VoucherCount,
+			--(select count(*) from coupon v where AdCampaign.CompanyId = v.CompanyId and v.Status = 3) as VoucherCount,
+			0 as VoucherCount,
 			AdCampaign.CompanyId,VideoLink2,IsShowVoucherSetting,
 			
 			Case 
@@ -185,17 +182,35 @@ from
 			)  
 			union
 
-			-------- fall back freee games to be offered if no paid ad campaigns are available and only max 2 possible in one day.
-		select freeGame.* from (select  -2 as ItemId, 'Free Game' ItemName, 'freeGame' Type, 
-			'' as description,
-			9 as ItemType, 
+			-------- fall back 1 show free games
+		select adcampaign.campaignid as ItemId, adcampaign.CampaignName ItemName, 'Ad' Type, 
+			adcampaign.Description +'\n' + adcampaign.CampaignDescription as description,
+			Case 
+				when adcampaign.Type = 3  -- Flyer
+				THEN
+				  2
+				when adcampaign.Type = 4
+				THEN
+					3
+				when adcampaign.Type = 1
+				THEN
+					1
+				END as
+			  ItemType, 
 			0 as AdClickRate,  -- Amount AdViewer will get
-			'' as AdImagePath, 
-			'' as AdVideoLink,
-			'' as AdAnswer1, '' as AdAnswer2, '' as AdAnswer3, '' as AdCorrectAnswer, '' as AdVerifyQuestion, 
-			0 as AdRewardType,
-			'' as AdVoucher1Heading, '' as AdVoucher1Description,
-			'' as AdVoucher1Value, NULL as SqLeftImagePath, NULL as SqRightImagePath,
+			adcampaign.ImagePath as AdImagePath, 
+			Case 
+				when adcampaign.Type = 3  -- Flyer
+				THEN
+				  adcampaign.LandingPageVideoLink--'http://manage.cash4ads.com/' +   LandingPageVideoLink -- 'http://manage.cash4ads.com/Ads/Ads/Content/' + CONVERT(NVARCHAR, CampaignID)
+				when adcampaign.Type != 3
+				THEN
+					adcampaign.LandingPageVideoLink
+			END as AdVideoLink,
+			adcampaign.Answer1 as AdAnswer1, adcampaign.Answer2 as AdAnswer2, adcampaign.Answer3 as AdAnswer3, adcampaign.CorrectAnswer as AdCorrectAnswer, adcampaign.VerifyQuestion as AdVerifyQuestion, 
+			adcampaign.RewardType as AdRewardType,
+			adcampaign.Voucher1Heading as AdVoucher1Heading, adcampaign.Voucher1Description as AdVoucher1Description,
+			adcampaign.Voucher1Value as AdVoucher1Value, NULL as SqLeftImagePath, NULL as SqRightImagePath,
 	
 			NULL as PqAnswer1Id, NULL as PqAnswer1, NULL as PqA1LinkedQ1, NULL as PqA1LinkedQ2, 
 			NULL as	PQA1LinkedQ3,NULL as PQA1LinkedQ4,NULL as PQA1LinkedQ5,NULL as PQA1LinkedQ6,
@@ -216,84 +231,72 @@ from
 			NULL as PQA6LinkedQ3,NULL as  PQA6LinkedQ4,NULL as  PQA6LinkedQ5,NULL as PQA6LinkedQ6,
 			NULL as PqA6Type, NULL as PqA6SortOrder, NULL as PqA6ImagePath,
 
-			
-			0 as  Weightage,
+			--((row_number() over (order by ABS(CHECKSUM(NewId())) % 100 desc) * 100) + 1) Weightage,
+			--((row_number() over (order by isNUll(adcampaign.maxdailybudget,0) desc) * 100) + 1) Weightage,
+			cast(maxdailybudget * 100 as int) Weightage,
 			NULL as SqLeftImagePercentage, NULL as SqRightImagePercentage,
 			null as SocialHandle, null as SocialHandleType,
-			'' as AdvertisersLogoPath,
-			'' as LandingPageUrl,
-			'' as BuyItLine1,
-			'' as BuyItLine2,
-			 '' as BuyItLine3,
-			'' as BuyItButtonText, 
-			 '' as BuyItImageUrl,
-			'' as VoucherImagePath,
-			0 as VoucherCount,
-			0 as CompanyId,'' as VideoLink2,cast(1 as bit) as IsShowVoucherSetting,
-			
-			(select top 1 GameId from Game  where Game.Status = 1 ORDER BY NEWID() ) as GameId,  
-			(1)  as FreeCouponID
-			) as freeGame
-			--inner join AdCampaignResponse  acr on freeGame.ItemId = acr.CampaignID and acr.ResponseType = 4 and acr.UserID = @UserID and acr.CreatedDateTime between DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) and dateadd(HOUR,24,GETDATE())
-			group by ItemId, ItemName, Type, 
-			description,
-			ItemType, 
-			AdClickRate,  -- Amount AdViewer will get
-			AdImagePath, 
-			AdVideoLink,
-			AdAnswer1, AdAnswer2, AdAnswer3, AdCorrectAnswer, AdVerifyQuestion, 
-			AdRewardType,
-			AdVoucher1Heading, AdVoucher1Description,
-			AdVoucher1Value, SqLeftImagePath, SqRightImagePath,
-	
-			PqAnswer1Id, PqAnswer1, PqA1LinkedQ1, PqA1LinkedQ2, 
-			PQA1LinkedQ3,PQA1LinkedQ4,PQA1LinkedQ5,PQA1LinkedQ6,
-			PqA1Type, PqA1SortOrder, PqA1ImagePath,
-			PqAnswer2Id, PqAnswer2, PqA2LinkedQ1, PqA2LinkedQ2,
-			PQA2LinkedQ3, PQA2LinkedQ4, PQA2LinkedQ5,PQA2LinkedQ6,
-			PqA2Type, PqA2SortOrder, PqA2ImagePath,
-			PqAnswer3Id, PqAnswer3, PqA3LinkedQ1, PqA3LinkedQ2,
-			PQA3LinkedQ3, PQA3LinkedQ4, PQA3LinkedQ5,PQA3LinkedQ6,
-			PqA3Type, PqA3SortOrder, PqA3ImagePath, 
-			PqAnswer4Id, PqAnswer4, PqA4LinkedQ1, PqA4LinkedQ2,
-			PQA4LinkedQ3, PQA4LinkedQ4, PQA4LinkedQ5,PQA4LinkedQ6,
-			PqA4Type, PqA4SortOrder, PqA4ImagePath,
-			PqAnswer5Id, PqAnswer5, PqA5LinkedQ1, PqA5LinkedQ2,
-			PQA5LinkedQ3, PQA5LinkedQ4, PQA5LinkedQ5,PQA5LinkedQ6,
-			PqA5Type, PqA5SortOrder, PqA5ImagePath,
-			PqAnswer6Id, PqAnswer6, PqA6LinkedQ1, PqA6LinkedQ2,
-			PQA6LinkedQ3, PQA6LinkedQ4, PQA6LinkedQ5,PQA6LinkedQ6,
-			PqA6Type, PqA6SortOrder, PqA6ImagePath,
+			(select 'http://manage.cash4ads.com/' + c.logo from Company c
+			  where c.CompanyId = adcampaign.CompanyId) as AdvertisersLogoPath,
 
 			
-			 Weightage,
-			SqLeftImagePercentage, SqRightImagePercentage,
-			SocialHandle, SocialHandleType,
-			AdvertisersLogoPath,
-			LandingPageUrl,
-			BuyItLine1,
-			BuyItLine2,
-			 BuyItLine3,
-			BuyItButtonText, 
-			 BuyItImageUrl,
-			VoucherImagePath,
-			VoucherCount,
-			freegame.CompanyId,VideoLink2,IsShowVoucherSetting, freegame.GameId,  freeGame.FreeCouponID
+
+			adcampaign.VideoUrl as LandingPageUrl,
+			adcampaign.BuuyItLine1 as BuyItLine1,
+			adcampaign.BuyItLine2 as BuyItLine2,
+			 adcampaign.BuyItLine3 as BuyItLine3,
+			adcampaign.BuyItButtonLabel as BuyItButtonText, 
+			 'http://manage.cash4ads.com/' +adcampaign.BuyItImageUrl as BuyItImageUrl,
+			'http://manage.cash4ads.com/' + adcampaign.Voucher1ImagePath as VoucherImagePath,
+			--(select count(*) from coupon v where AdCampaign.CompanyId = v.CompanyId and v.Status = 3) as VoucherCount,
+			0 as VoucherCount,
+			AdCampaign.CompanyId,VideoLink2,IsShowVoucherSetting,
+			
+			Case 
+				when adcampaign.Type = 4   -- Game
+				THEN
+					(select top 1 GameId from Game  where Game.Status = 1 ORDER BY NEWID() )
+				when adcampaign.Type != 4
+				THEN
+					NULL
+			END as GameId,
+			null as FreeCouponID
+			 
+			from adcampaign
+			inner join Company cc on adcampaign.CompanyId = cc.CompanyId and cc.IsSpecialAccount = 1 and adcampaign.Type = 4
 			
 			
-			-------- fall back if all 3 free games are also played then show no ads card. .
+			-------- fall back 2 show 2 free video ads
 			union
 
-			select  -1 as ItemId, 'Free Video' ItemName, 'noAds' Type, 
-			'' as description,
-			9 as ItemType, 
+			select adcampaign.campaignid as ItemId, adcampaign.CampaignName ItemName, 'Ad' Type, 
+			adcampaign.Description +'\n' + adcampaign.CampaignDescription as description,
+			Case 
+				when adcampaign.Type = 3  -- Flyer
+				THEN
+				  2
+				when adcampaign.Type = 4
+				THEN
+					3
+				when adcampaign.Type = 1
+				THEN
+					1
+				END as
+			  ItemType, 
 			0 as AdClickRate,  -- Amount AdViewer will get
-			'' as AdImagePath, 
-			'' as AdVideoLink,
-			'' as AdAnswer1, '' as AdAnswer2, '' as AdAnswer3, '' as AdCorrectAnswer, '' as AdVerifyQuestion, 
-			0 as AdRewardType,
-			'' as AdVoucher1Heading, '' as AdVoucher1Description,
-			'' as AdVoucher1Value, NULL as SqLeftImagePath, NULL as SqRightImagePath,
+			adcampaign.ImagePath as AdImagePath, 
+			Case 
+				when adcampaign.Type = 3  -- Flyer
+				THEN
+				  adcampaign.LandingPageVideoLink--'http://manage.cash4ads.com/' +   LandingPageVideoLink -- 'http://manage.cash4ads.com/Ads/Ads/Content/' + CONVERT(NVARCHAR, CampaignID)
+				when adcampaign.Type != 3
+				THEN
+					adcampaign.LandingPageVideoLink
+			END as AdVideoLink,
+			adcampaign.Answer1 as AdAnswer1, adcampaign.Answer2 as AdAnswer2, adcampaign.Answer3 as AdAnswer3, adcampaign.CorrectAnswer as AdCorrectAnswer, adcampaign.VerifyQuestion as AdVerifyQuestion, 
+			adcampaign.RewardType as AdRewardType,
+			adcampaign.Voucher1Heading as AdVoucher1Heading, adcampaign.Voucher1Description as AdVoucher1Description,
+			adcampaign.Voucher1Value as AdVoucher1Value, NULL as SqLeftImagePath, NULL as SqRightImagePath,
 	
 			NULL as PqAnswer1Id, NULL as PqAnswer1, NULL as PqA1LinkedQ1, NULL as PqA1LinkedQ2, 
 			NULL as	PQA1LinkedQ3,NULL as PQA1LinkedQ4,NULL as PQA1LinkedQ5,NULL as PQA1LinkedQ6,
@@ -314,23 +317,39 @@ from
 			NULL as PQA6LinkedQ3,NULL as  PQA6LinkedQ4,NULL as  PQA6LinkedQ5,NULL as PQA6LinkedQ6,
 			NULL as PqA6Type, NULL as PqA6SortOrder, NULL as PqA6ImagePath,
 
-			
-			240 as  Weightage,
+			--((row_number() over (order by ABS(CHECKSUM(NewId())) % 100 desc) * 100) + 1) Weightage,
+			--((row_number() over (order by isNUll(maxdailybudget,0) desc) * 100) + 1) Weightage,
+			cast(MaxDailyBudget * 100 as int ) Weightage,
 			NULL as SqLeftImagePercentage, NULL as SqRightImagePercentage,
 			null as SocialHandle, null as SocialHandleType,
-			'' as AdvertisersLogoPath,
-			'' as LandingPageUrl,
-			'' as BuyItLine1,
-			'' as BuyItLine2,
-			 '' as BuyItLine3,
-			'' as BuyItButtonText, 
-			 '' as BuyItImageUrl,
-			'' as VoucherImagePath,
-			0 as VoucherCount,
-			0 as CompanyId,'' as VideoLink2,cast(1 as bit) as IsShowVoucherSetting,
+			(select 'http://manage.cash4ads.com/' + c.logo from Company c
+			  where c.CompanyId = adcampaign.CompanyId) as AdvertisersLogoPath,
+
 			
-			0 as GameId,
+
+			adcampaign.VideoUrl as LandingPageUrl,
+			adcampaign.BuuyItLine1 as BuyItLine1,
+			adcampaign.BuyItLine2 as BuyItLine2,
+			 adcampaign.BuyItLine3 as BuyItLine3,
+			adcampaign.BuyItButtonLabel as BuyItButtonText, 
+			 'http://manage.cash4ads.com/' +adcampaign.BuyItImageUrl as BuyItImageUrl,
+			'http://manage.cash4ads.com/' + adcampaign.Voucher1ImagePath as VoucherImagePath,
+			--(select count(*) from coupon v where AdCampaign.CompanyId = v.CompanyId and v.Status = 3) as VoucherCount,
+			0 as VoucherCount,
+			AdCampaign.CompanyId,VideoLink2,IsShowVoucherSetting,
+			
+			Case 
+				when adcampaign.Type = 4   -- Game
+				THEN
+					(select top 1 GameId from Game  where Game.Status = 1 ORDER BY NEWID() )
+				when adcampaign.Type != 4
+				THEN
+					NULL
+			END as GameId,
 			null as FreeCouponID
+			 
+			from adcampaign
+			inner join Company cc on adcampaign.CompanyId = cc.CompanyId and cc.IsSpecialAccount = 1 and adcampaign.Type = 1
 
 
 			
