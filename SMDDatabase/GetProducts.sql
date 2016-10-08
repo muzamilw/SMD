@@ -1,6 +1,6 @@
 ﻿
 GO
-/****** Object:  StoredProcedure [dbo].[GetProducts]    Script Date: 10/7/2016 12:28:35 PM ******/
+/****** Object:  StoredProcedure [dbo].[GetProducts]    Script Date: 10/8/2016 5:49:17 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -30,6 +30,15 @@ DECLARE @currentDate AS DateTime
 DECLARE @companyId AS INT
 DECLARE @cash4adsSocialHandle AS nvarchar(128)
 DECLARE @cash4adsSocialHandleType AS nvarchar(128)
+DECLARE @FreeAdsPosition as int
+
+if (@FromRow = 0 )
+	set @FreeAdsPosition = 0
+else 
+	begin
+		set @FreeAdsPosition = @FromRow - (@FromRow * 4 /10)
+
+	end
 
         -- Setting local variables
 		   SELECT @dob = DOB FROM AspNetUsers where id=@UserID
@@ -79,7 +88,7 @@ from
 					1
 				END as
 			  ItemType, 
-			((adcampaign.ClickRate * 50) / 100) as AdClickRate,  -- Amount AdViewer will get
+			((adcampaign.ClickRate * 50) / 100) * 100 as AdClickRate,  -- Amount AdViewer will get
 			adcampaign.ImagePath as AdImagePath, 
 			Case 
 				when adcampaign.Type = 3  -- Flyer
@@ -118,10 +127,15 @@ from
 
 			NULL as SqLeftImagePercentage, NULL as SqRightImagePercentage,
 			null as SocialHandle, null as SocialHandleType,
-			(select 'http://manage.cash4ads.com/' + c.logo from Company c
-			  where c.CompanyId = adcampaign.CompanyId) as AdvertisersLogoPath,
-
 			
+				case when AdCampaign.Type = 1 then
+					(select 'http://manage.cash4ads.com/' + c.logo from Company c
+					where c.CompanyId = adcampaign.CompanyId)
+				when AdCampaign.Type = 4 then
+					'http://manage.cash4ads.com/' + AdCampaign.LogoUrl
+				end
+
+			 as AdvertisersLogoPath,
 
 			adcampaign.VideoUrl as LandingPageUrl,
 			adcampaign.BuuyItLine1 as BuyItLine1,
@@ -183,7 +197,7 @@ from
 			union
 
 			-------- fall back 1 show free games
-		select adcampaign.campaignid as ItemId, adcampaign.CampaignName ItemName, 'Ad' Type, 
+		select adcampaign.campaignid as ItemId, adcampaign.CampaignName ItemName, 'freeGame' Type, 
 			adcampaign.Description +'\n' + adcampaign.CampaignDescription as description,
 			Case 
 				when adcampaign.Type = 3  -- Flyer
@@ -233,11 +247,18 @@ from
 
 			--((row_number() over (order by ABS(CHECKSUM(NewId())) % 100 desc) * 100) + 1) Weightage,
 			--((row_number() over (order by isNUll(adcampaign.maxdailybudget,0) desc) * 100) + 1) Weightage,
-			cast(maxdailybudget * 100 as int) Weightage,
+			cast((@FreeAdsPosition + MaxDailyBudget) * 100 as int) Weightage,
 			NULL as SqLeftImagePercentage, NULL as SqRightImagePercentage,
 			null as SocialHandle, null as SocialHandleType,
-			(select 'http://manage.cash4ads.com/' + c.logo from Company c
-			  where c.CompanyId = adcampaign.CompanyId) as AdvertisersLogoPath,
+			
+				case when AdCampaign.Type = 1 then
+					(select 'http://manage.cash4ads.com/' + c.logo from Company c
+					where c.CompanyId = adcampaign.CompanyId)
+				when AdCampaign.Type = 4 then
+					'http://manage.cash4ads.com/' + AdCampaign.LogoUrl
+				end
+
+			 as AdvertisersLogoPath,
 
 			
 
@@ -269,7 +290,7 @@ from
 			-------- fall back 2 show 2 free video ads
 			union
 
-			select adcampaign.campaignid as ItemId, adcampaign.CampaignName ItemName, 'Ad' Type, 
+			select adcampaign.campaignid as ItemId, adcampaign.CampaignName ItemName, 'freeAd' Type, 
 			adcampaign.Description +'\n' + adcampaign.CampaignDescription as description,
 			Case 
 				when adcampaign.Type = 3  -- Flyer
@@ -319,11 +340,18 @@ from
 
 			--((row_number() over (order by ABS(CHECKSUM(NewId())) % 100 desc) * 100) + 1) Weightage,
 			--((row_number() over (order by isNUll(maxdailybudget,0) desc) * 100) + 1) Weightage,
-			cast(MaxDailyBudget * 100 as int ) Weightage,
+			cast((@FreeAdsPosition + MaxDailyBudget) * 100 as int) Weightage,
 			NULL as SqLeftImagePercentage, NULL as SqRightImagePercentage,
 			null as SocialHandle, null as SocialHandleType,
-			(select 'http://manage.cash4ads.com/' + c.logo from Company c
-			  where c.CompanyId = adcampaign.CompanyId) as AdvertisersLogoPath,
+		
+				case when AdCampaign.Type = 1 then
+					(select 'http://manage.cash4ads.com/' + c.logo from Company c
+					where c.CompanyId = adcampaign.CompanyId)
+				when AdCampaign.Type = 4 then
+					'http://manage.cash4ads.com/' + AdCampaign.LogoUrl
+				end
+
+			 as AdvertisersLogoPath,
 
 			
 
