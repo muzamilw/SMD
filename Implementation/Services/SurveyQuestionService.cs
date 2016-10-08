@@ -277,6 +277,8 @@ namespace SMD.Implementation.Services
         public SurveyQuestion EditSurveyQuestion(SurveyQuestion source)
         {
             var dbServey = surveyQuestionRepository.Find(source.SqId);
+            var userData = webApiUserService.GetUserByUserId(dbServey.UserId);
+
             if (dbServey != null)
             {
                 // Approved 
@@ -286,12 +288,15 @@ namespace SMD.Implementation.Services
                     dbServey.ApprovalDate = source.ApprovalDate;
                     dbServey.ApprovedByUserId = surveyQuestionRepository.LoggedInUserIdentity;
                     dbServey.Status = (Int32)AdCampaignStatus.Live;
-                    if (source.CompanyId != null)
+                    if (dbServey.CompanyId != null)
                     {
-                        MakeStripePaymentandAddInvoice(dbServey);
+                        if (userData.Company.IsSpecialAccount != true)
+                        {
+                            MakeStripePaymentandAddInvoice(dbServey);
+                        }
                     }
                     // Strpe + Invoice Work 
-                   
+
 
                     //  emailManagerService.SendQuestionApprovalEmail(dbServey.UserId);
 

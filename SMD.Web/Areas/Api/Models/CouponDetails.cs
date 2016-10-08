@@ -73,6 +73,12 @@ namespace SMD.MIS.Areas.Api.Models
 
 
         public string CompanyName { get; set; }
+
+        
+
+        public string CurrencyCode { get; set; }
+
+        public string CurrencySymbol { get; set; }
         
 
 
