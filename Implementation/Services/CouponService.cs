@@ -19,7 +19,7 @@ using Stripe;
 
 namespace SMD.Implementation.Services
 {
-    public class CouponService: ICouponService
+    public class CouponService : ICouponService
     {
         #region Private
 
@@ -55,73 +55,73 @@ namespace SMD.Implementation.Services
             {
                 Directory.CreateDirectory(directoryPath);
             }
-           
+
             if (!string.IsNullOrEmpty(campaign.CouponImage2) && !campaign.CouponImage2.Contains("guid_Voucher2DefaultImage") && !campaign.CouponImage2.Contains("http://manage.cash4ads.com/"))
             {
-               if(campaign.CouponImage2.Contains("SMD_Content"))
-               {
-                string[] paths = campaign.CouponImage2.Split(new string[] { "SMD_Content" }, StringSplitOptions.None);
-                string url = HttpContext.Current.Server.MapPath("~/SMD_Content/" + paths[paths.Length-1]);
-                string savePath = directoryPath + "\\guid_Voucher2DefaultImage.jpg";
+                if (campaign.CouponImage2.Contains("SMD_Content"))
+                {
+                    string[] paths = campaign.CouponImage2.Split(new string[] { "SMD_Content" }, StringSplitOptions.None);
+                    string url = HttpContext.Current.Server.MapPath("~/SMD_Content/" + paths[paths.Length - 1]);
+                    string savePath = directoryPath + "\\guid_Voucher2DefaultImage.jpg";
 
-                File.Copy(url, savePath,true);
-                int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
-                savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
-                savePaths[4] = savePath;
-                campaign.CouponImage2 = savePath;
-               }
+                    File.Copy(url, savePath, true);
+                    int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
+                    savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
+                    savePaths[4] = savePath;
+                    campaign.CouponImage2 = savePath;
+                }
             }
             if (!string.IsNullOrEmpty(campaign.CouponImage3) && !campaign.CouponImage3.Contains("guid_Coupon3DefaultImage") && !campaign.CouponImage3.Contains("http://manage.cash4ads.com/"))
             {
-                if(campaign.CouponImage3.Contains("SMD_Content"))
-               {
-                string[] paths = campaign.CouponImage3.Split(new string[] { "SMD_Content" }, StringSplitOptions.None);
-                string url = HttpContext.Current.Server.MapPath("~/SMD_Content/" + paths[paths.Length - 1]);
-                //string base64 = campaign.CouponImage3.Substring(campaign.CouponImage3.IndexOf(',') + 1);
-                //base64 = base64.Trim('\0');
-                //byte[] data = Convert.FromBase64String(base64);
-                string savePath = directoryPath + "\\guid_Coupon3DefaultImage.jpg";
-               // File.WriteAllBytes(savePath, data);
-                File.Copy(url, savePath, true);
-                int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
-                savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
-                savePaths[5] = savePath;
-                campaign.CouponImage3 = savePath;
+                if (campaign.CouponImage3.Contains("SMD_Content"))
+                {
+                    string[] paths = campaign.CouponImage3.Split(new string[] { "SMD_Content" }, StringSplitOptions.None);
+                    string url = HttpContext.Current.Server.MapPath("~/SMD_Content/" + paths[paths.Length - 1]);
+                    //string base64 = campaign.CouponImage3.Substring(campaign.CouponImage3.IndexOf(',') + 1);
+                    //base64 = base64.Trim('\0');
+                    //byte[] data = Convert.FromBase64String(base64);
+                    string savePath = directoryPath + "\\guid_Coupon3DefaultImage.jpg";
+                    // File.WriteAllBytes(savePath, data);
+                    File.Copy(url, savePath, true);
+                    int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
+                    savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
+                    savePaths[5] = savePath;
+                    campaign.CouponImage3 = savePath;
                 }
             }
             if (!string.IsNullOrEmpty(campaign.couponImage1) && !campaign.couponImage1.Contains("guid_Voucher4DefaultImage") && !campaign.couponImage1.Contains("http://manage.cash4ads.com/"))
             {
-                if(campaign.couponImage1.Contains("SMD_Content"))
+                if (campaign.couponImage1.Contains("SMD_Content"))
                 {
-                string[] paths = campaign.couponImage1.Split(new string[] { "SMD_Content" }, StringSplitOptions.None);
-                string url = HttpContext.Current.Server.MapPath("~/SMD_Content/" + paths[paths.Length - 1]);
-                //string base64 = campaign.couponImage1.Substring(campaign.couponImage1.IndexOf(',') + 1);
-                //base64 = base64.Trim('\0');
-                //byte[] data = Convert.FromBase64String(base64);
-                string savePath = directoryPath + "\\guid_Voucher4DefaultImage.jpg";
-                //File.WriteAllBytes(savePath, data);
-                File.Copy(url, savePath, true);
-                int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
-                savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
-                savePaths[6] = savePath;
-                campaign.couponImage1 = savePath;
+                    string[] paths = campaign.couponImage1.Split(new string[] { "SMD_Content" }, StringSplitOptions.None);
+                    string url = HttpContext.Current.Server.MapPath("~/SMD_Content/" + paths[paths.Length - 1]);
+                    //string base64 = campaign.couponImage1.Substring(campaign.couponImage1.IndexOf(',') + 1);
+                    //base64 = base64.Trim('\0');
+                    //byte[] data = Convert.FromBase64String(base64);
+                    string savePath = directoryPath + "\\guid_Voucher4DefaultImage.jpg";
+                    //File.WriteAllBytes(savePath, data);
+                    File.Copy(url, savePath, true);
+                    int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
+                    savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
+                    savePaths[6] = savePath;
+                    campaign.couponImage1 = savePath;
                 }
             }
             if (!string.IsNullOrEmpty(campaign.LogoUrl) && !campaign.LogoUrl.Contains("guid_CampaignLogoImage") && !campaign.LogoUrl.Contains("http://manage.cash4ads.com/"))
             {
-                if(campaign.LogoUrl.Contains("SMD_Content"))
+                if (campaign.LogoUrl.Contains("SMD_Content"))
                 {
-                string[] paths = campaign.LogoUrl.Split(new string[] { "SMD_Content" }, StringSplitOptions.None);
-                string url = HttpContext.Current.Server.MapPath("~/SMD_Content/" + paths[paths.Length - 1]);
-                //string base64 = campaign.LogoImageBytes.Substring(campaign.LogoImageBytes.IndexOf(',') + 1);
-                //base64 = base64.Trim('\0');
-                //byte[] data = Convert.FromBase64String(base64);
-                string savePath = directoryPath + "\\guid_CampaignLogoImage.jpg";
-                //File.WriteAllBytes(savePath, data);
-                File.Copy(url, savePath, true);
-                int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
-                savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
-                savePaths[7] = savePath;
+                    string[] paths = campaign.LogoUrl.Split(new string[] { "SMD_Content" }, StringSplitOptions.None);
+                    string url = HttpContext.Current.Server.MapPath("~/SMD_Content/" + paths[paths.Length - 1]);
+                    //string base64 = campaign.LogoImageBytes.Substring(campaign.LogoImageBytes.IndexOf(',') + 1);
+                    //base64 = base64.Trim('\0');
+                    //byte[] data = Convert.FromBase64String(base64);
+                    string savePath = directoryPath + "\\guid_CampaignLogoImage.jpg";
+                    //File.WriteAllBytes(savePath, data);
+                    File.Copy(url, savePath, true);
+                    int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
+                    savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
+                    savePaths[7] = savePath;
                 }
             }
             return savePaths;
@@ -151,9 +151,9 @@ namespace SMD.Implementation.Services
             this.productRepository = productRepository;
             this.taxRepository = taxRepository;
             this.invoiceRepository = invoiceRepository;
-           this.invoiceDetailRepository = invoiceDetailRepository;
-           _iCompanyRepository = iCompanyRepository;
-           this.couponPriceOptionRepository = couponPriceOptionRepository;
+            this.invoiceDetailRepository = invoiceDetailRepository;
+            _iCompanyRepository = iCompanyRepository;
+            this.couponPriceOptionRepository = couponPriceOptionRepository;
         }
 
         #endregion
@@ -190,7 +190,7 @@ namespace SMD.Implementation.Services
                 //    campaign.EndDateTime = campaign.EndDateTime.Value.Add(couponRepository.UserTimezoneOffSet);
             }
 
-          
+
 
             return new CampaignResponseModel
             {
@@ -206,8 +206,8 @@ namespace SMD.Implementation.Services
             var result = _userFavouriteCouponRepository.GetAllFavouriteCouponByUserId(UserId);
             foreach (var item in result)
             {
-                var differ = new DateTime(item.CouponActiveYear.Value,item.CouponActiveMonth.Value,DateTime.DaysInMonth(item.CouponActiveYear.Value, item.CouponActiveMonth.Value)) - DateTime.Today;
-                item.DaysLeft = Convert.ToInt32( differ.TotalDays);
+                var differ = new DateTime(item.CouponActiveYear.Value, item.CouponActiveMonth.Value, DateTime.DaysInMonth(item.CouponActiveYear.Value, item.CouponActiveMonth.Value)) - DateTime.Today;
+                item.DaysLeft = Convert.ToInt32(differ.TotalDays);
 
                 if (item.LogoUrl == null)
                 {
@@ -215,7 +215,7 @@ namespace SMD.Implementation.Services
 
                     item.LogoUrl = "http://manage.cash4ads.com/" + company.Logo;
 
-            }
+                }
                 else
                 {
                     item.LogoUrl = "http://manage.cash4ads.com/" + item.LogoUrl;
@@ -226,11 +226,11 @@ namespace SMD.Implementation.Services
 
             return result;
 
-          
+
 
         }
 
- 
+
 
         /// <summary>
         /// Setting of favorite coupons
@@ -247,11 +247,11 @@ namespace SMD.Implementation.Services
                 //checking if its not alrady marked
                 if (_userFavouriteCouponRepository.GetByCouponId(CouponId, UserId) == null)
                 {
-                var favCoupon = new UserFavouriteCoupon { UserId = UserId, CouponId = CouponId };
+                    var favCoupon = new UserFavouriteCoupon { UserId = UserId, CouponId = CouponId };
 
-                _userFavouriteCouponRepository.Add(favCoupon);
-                _userFavouriteCouponRepository.SaveChanges();
-            }
+                    _userFavouriteCouponRepository.Add(favCoupon);
+                    _userFavouriteCouponRepository.SaveChanges();
+                }
             }
             else // removing the favorite
             {
@@ -269,7 +269,7 @@ namespace SMD.Implementation.Services
         {
             List<SearchCoupons_Result> coupons = couponRepository.SearchCoupons(categoryId, type, size, keywords, pageNo, distance, Lat, Lon, UserId).ToList();
 
-           
+
 
             return new SearchCouponsResponse
             {
@@ -300,7 +300,7 @@ namespace SMD.Implementation.Services
             string[] paths = SaveImages(couponModel);
             if (paths != null && paths.Count() > 0)
             {
-                
+
                 if (!string.IsNullOrEmpty(paths[4]))
                 {
                     couponModel.CouponImage2 = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + paths[4];
@@ -342,7 +342,7 @@ namespace SMD.Implementation.Services
             ////    _couponCategoriesRepository.SaveChanges();
 
             ////}
-          
+
         }
 
         public void UpdateCampaign(Coupon couponModel)
@@ -353,18 +353,18 @@ namespace SMD.Implementation.Services
             if (user != null)
                 couponModel.CreatedBy = user.FullName;
 
-            if(couponModel.LogoUrl != null)
+            if (couponModel.LogoUrl != null)
             {
-                if(couponModel.LogoUrl[0] == '/')
+                if (couponModel.LogoUrl[0] == '/')
                 {
-                    couponModel.LogoUrl = couponModel.LogoUrl.Substring(1, couponModel.LogoUrl.Length-1);
+                    couponModel.LogoUrl = couponModel.LogoUrl.Substring(1, couponModel.LogoUrl.Length - 1);
                 }
             }
             string[] paths = SaveImages(couponModel);
 
             if (paths != null && paths.Count() > 0)
             {
-              
+
                 if (!string.IsNullOrEmpty(paths[4]))
                 {
                     if (!paths[4].ToLower().Contains(HttpContext.Current.Request.Url.Authority.ToLower()))
@@ -389,13 +389,13 @@ namespace SMD.Implementation.Services
                     couponModel.LogoUrl = null;
                 }
             }
-          
+
             if (couponModel.Status == 3)
             {
                 couponModel.Approved = true;
             }
 
-            foreach(var couponCategory in _couponCategoriesRepository.GetAll().Where(g=>g.CouponId == couponModel.CouponId).ToList())
+            foreach (var couponCategory in _couponCategoriesRepository.GetAll().Where(g => g.CouponId == couponModel.CouponId).ToList())
             {
                 _couponCategoriesRepository.Delete(couponCategory);
             }
@@ -403,7 +403,7 @@ namespace SMD.Implementation.Services
             if (couponModel.Status == 7)
             {
                 couponModel.CouponEndDate = DateTime.Now;
-            
+
             }
 
             if (couponModel.CouponCategories != null && couponModel.CouponCategories.Count() > 0)
@@ -444,7 +444,7 @@ namespace SMD.Implementation.Services
 
                         couponDbVersion.CouponPriceOptions.Add(item);
                     }
-                    
+
                 }
             }
             //find missing items
@@ -455,10 +455,10 @@ namespace SMD.Implementation.Services
             {
 
                 if (couponModel.CouponPriceOptions != null && couponModel.CouponPriceOptions.All(x => x.CouponPriceOptionId != dbversionCouponPriceOptions.CouponPriceOptionId && x.CouponId == couponModel.CouponId))
-                    {
-                        missingCouponPriceOptions.Add(dbversionCouponPriceOptions);
-                    }
-                
+                {
+                    missingCouponPriceOptions.Add(dbversionCouponPriceOptions);
+                }
+
 
             }
 
@@ -491,18 +491,18 @@ namespace SMD.Implementation.Services
             couponRepository.SaveChanges();
 
 
-            
+
         }
 
 
         //called from mobile apps
-        public GetCouponByID_Result GetCouponByIdDefault(long CouponId,string UserId,string Lat, string Lon)
+        public GetCouponByID_Result GetCouponByIdDefault(long CouponId, string UserId, string Lat, string Lon)
         {
 
-            return couponRepository.GetCouponByIdSP(CouponId,UserId,Lat,Lon);
+            return couponRepository.GetCouponByIdSP(CouponId, UserId, Lat, Lon);
 
 
-            
+
 
             //if (coupon.LogoUrl == null)
             //{
@@ -528,13 +528,13 @@ namespace SMD.Implementation.Services
 
             //checking if its already flagged by user or not.
 
-            
-          
+
+
 
 
         }
 
-          public bool CheckCouponFlaggedByUser(long CouponId, string UserId)
+        public bool CheckCouponFlaggedByUser(long CouponId, string UserId)
         {
 
             return _userFavouriteCouponRepository.CheckCouponFlaggedByUser(CouponId, UserId);
@@ -542,90 +542,90 @@ namespace SMD.Implementation.Services
 
 
 
-          public List<PurchasedCoupons> GetPurchasedCouponByUserId(string UserId)
-          {
-              var result = _userPurchasedCouponRepository.GetPurchasedCouponByUserId(UserId);
-             
-              foreach (var coupon in result)
-              {
-                  if (coupon.LogoUrl == null)
-                  {
-                      var company = this._companyService.GetCompanyById(coupon.CompanyId);
+        public List<PurchasedCoupons> GetPurchasedCouponByUserId(string UserId)
+        {
+            var result = _userPurchasedCouponRepository.GetPurchasedCouponByUserId(UserId);
 
-                      coupon.LogoUrl = "http://manage.cash4ads.com/" + company.Logo;
+            foreach (var coupon in result)
+            {
+                if (coupon.LogoUrl == null)
+                {
+                    var company = this._companyService.GetCompanyById(coupon.CompanyId);
 
-                  }
-                  else
-                  {
-                      coupon.LogoUrl = "http://manage.cash4ads.com/" + coupon.LogoUrl;
-                  }
+                    coupon.LogoUrl = "http://manage.cash4ads.com/" + company.Logo;
 
-              }
+                }
+                else
+                {
+                    coupon.LogoUrl = "http://manage.cash4ads.com/" + coupon.LogoUrl;
+                }
 
-                
-
-              return result.ToList();
-
-          }
+            }
 
 
 
-          public bool PurchaseCoupon(string UserId, long CouponId, double PurchaseAmount)
-          {
+            return result.ToList();
 
-              List<Account> accounts = _accountRepository.GetByUserId(UserId);
-
-              //var userVirtualAccount = accounts.Where(g => g.AccountType == (int)AccountType.VirtualAccount).FirstOrDefault();
-              //if (PurchaseAmount < userVirtualAccount.AccountBalance)
-              //{
-
-                  //Update Accounts
-                  //TransactionManager.CouponPurchaseTransaction(CouponId, PurchaseAmount, userVirtualAccount.CompanyId.Value);
-
-
-                  //enter the entry for purchased coupon,
-                  var newPurchasedCoupon = new UserPurchasedCoupon { CouponId = CouponId, IsRedeemed = false, PurchaseAmount = PurchaseAmount, PurchaseDateTime = DateTime.Now, RedemptionOperator = null, UserId = UserId };
-
-                  _userPurchasedCouponRepository.Add(newPurchasedCoupon);
-                  _userPurchasedCouponRepository.SaveChanges();
-
-
-                  //incrementing the Issues/Purchased count 
-
-                  var oCoupon = couponRepository.GetCouponByIdSingle(CouponId);
-                  oCoupon.CouponIssuedCount = (oCoupon.CouponIssuedCount == null ? 0 : oCoupon.CouponIssuedCount ) + 1;
-
-                  couponRepository.Update(oCoupon);
-                  couponRepository.SaveChanges();
-
-
-                  //// Email To User coupon code 
-                  //try
-                  //{
-                  //    //BackgroundEmailManagerService.SendVoucherCodeEmail(dbContext, company.CompanyId, codeCode);
-                  //}
-                  //catch (Exception ex)
-                  //{
+        }
 
 
 
-                  //    return true;
+        public bool PurchaseCoupon(string UserId, long CouponId, double PurchaseAmount)
+        {
 
-                  //}
+            List<Account> accounts = _accountRepository.GetByUserId(UserId);
 
-                  return true;
+            //var userVirtualAccount = accounts.Where(g => g.AccountType == (int)AccountType.VirtualAccount).FirstOrDefault();
+            //if (PurchaseAmount < userVirtualAccount.AccountBalance)
+            //{
 
-              //}
-              //return false;
+            //Update Accounts
+            //TransactionManager.CouponPurchaseTransaction(CouponId, PurchaseAmount, userVirtualAccount.CompanyId.Value);
 
-          }
+
+            //enter the entry for purchased coupon,
+            var newPurchasedCoupon = new UserPurchasedCoupon { CouponId = CouponId, IsRedeemed = false, PurchaseAmount = PurchaseAmount, PurchaseDateTime = DateTime.Now, RedemptionOperator = null, UserId = UserId };
+
+            _userPurchasedCouponRepository.Add(newPurchasedCoupon);
+            _userPurchasedCouponRepository.SaveChanges();
+
+
+            //incrementing the Issues/Purchased count 
+
+            var oCoupon = couponRepository.GetCouponByIdSingle(CouponId);
+            oCoupon.CouponIssuedCount = (oCoupon.CouponIssuedCount == null ? 0 : oCoupon.CouponIssuedCount) + 1;
+
+            couponRepository.Update(oCoupon);
+            couponRepository.SaveChanges();
+
+
+            //// Email To User coupon code 
+            //try
+            //{
+            //    //BackgroundEmailManagerService.SendVoucherCodeEmail(dbContext, company.CompanyId, codeCode);
+            //}
+            //catch (Exception ex)
+            //{
+
+
+
+            //    return true;
+
+            //}
+
+            return true;
+
+            //}
+            //return false;
+
+        }
         public int RedeemPurchasedCoupon(string UserId, long couponPurchaseId, string pinCode, string operatorId)
-          {
+        {
 
-              var user = _userService.GetUserByUserId(UserId);
+            var user = _userService.GetUserByUserId(UserId);
 
-              if (user == null)
-                  throw new Exception("User is null");
+            if (user == null)
+                throw new Exception("User is null");
 
             var purchasedCoupon = _userPurchasedCouponRepository.Find(couponPurchaseId);
 
@@ -659,54 +659,54 @@ namespace SMD.Implementation.Services
                 if (oCoupon == null)
                     throw new Exception("Coupon is null");
 
-                oCoupon.CouponRedeemedCount =   (oCoupon.CouponRedeemedCount == null ? 0 : oCoupon.CouponRedeemedCount) +  1;
+                oCoupon.CouponRedeemedCount = (oCoupon.CouponRedeemedCount == null ? 0 : oCoupon.CouponRedeemedCount) + 1;
 
                 couponRepository.Update(oCoupon);
                 couponRepository.SaveChanges();
 
                 return 1;
-            
+
 
             }
-              else if ( company.VoucherSecretKey != pinCode)
-              {
-                  return 3;// incorrect pincode
-              }
+            else if (company.VoucherSecretKey != pinCode)
+            {
+                return 3;// incorrect pincode
+            }
             else if (purchasedCoupon.IsRedeemed == true)
             {
                 return 4;// already redeemed
             }
-              
-              else 
-              {
-                  return 2;// incorrect settings
-              }
-          }
-       
+
+            else
+            {
+                return 2;// incorrect settings
+            }
+        }
+
 
         public List<Coupon> GetCouponsByCompanyId(int CompanyId)
         {
 
             var company = this._companyService.GetCompanyById(CompanyId);
 
-            var res =couponRepository.GetCouponsByCompanyId(CompanyId);
+            var res = couponRepository.GetCouponsByCompanyId(CompanyId);
             foreach (var coupon in res)
-	        {
-		        coupon.DaysLeft =Convert.ToInt32( (new DateTime(coupon.CouponActiveYear.Value, coupon.CouponActiveMonth.Value, DateTime.DaysInMonth(coupon.CouponActiveYear.Value, coupon.CouponActiveMonth.Value)) - DateTime.Today).TotalDays);
+            {
+                coupon.DaysLeft = Convert.ToInt32((new DateTime(coupon.CouponActiveYear.Value, coupon.CouponActiveMonth.Value, DateTime.DaysInMonth(coupon.CouponActiveYear.Value, coupon.CouponActiveMonth.Value)) - DateTime.Today).TotalDays);
 
 
-                    if (coupon.LogoUrl == null)
-                    {
-                        coupon.LogoUrl = "http://manage.cash4ads.com/" + company.Logo;
-                    }
-                    else
-                    {
-                        coupon.LogoUrl = "http://manage.cash4ads.com/" + coupon.LogoUrl;
-                    }
-                
+                if (coupon.LogoUrl == null)
+                {
+                    coupon.LogoUrl = "http://manage.cash4ads.com/" + company.Logo;
+                }
+                else
+                {
+                    coupon.LogoUrl = "http://manage.cash4ads.com/" + coupon.LogoUrl;
+                }
+
             }
             return res;
-          }
+        }
 
 
         public List<CouponPriceOption> GetCouponPriceOptions(long CouponId)
@@ -729,6 +729,7 @@ namespace SMD.Implementation.Services
         {
             string respMesg = "True";
             var dbCo = couponRepository.GetCouponByIdSingle(source.CouponId);
+            var userData = webApiUserService.GetUserByUserId(dbCo.UserId);
             // Update 
             if (dbCo != null)
             {
@@ -744,15 +745,17 @@ namespace SMD.Implementation.Services
                     // Stripe payment + Invoice Generation
                     // Muzi bhai said we will see it on latter stage 
                     //todo pilot: unCommenting Stripe payment code on Ads approval
-
-                    respMesg = MakeStripePaymentandAddInvoiceForCoupon(dbCo, out PaymentToBeCharged);
-                    if (respMesg.Contains("Failed"))
+                    if (userData.Company.IsSpecialAccount != true)
                     {
-                        return respMesg;
-                    }
-                    else
-                    {
-                        TransactionManager.CouponApprovalTransaction(dbCo.CouponId, PaymentToBeCharged, dbCo.CompanyId.Value);
+                        respMesg = MakeStripePaymentandAddInvoiceForCoupon(dbCo, out PaymentToBeCharged);
+                        if (respMesg.Contains("Failed"))
+                        {
+                            return respMesg;
+                        }
+                        else
+                        {
+                            TransactionManager.CouponApprovalTransaction(dbCo.CouponId, PaymentToBeCharged, dbCo.CompanyId.Value);
+                        }
                     }
                 }
                 // Rejection 
@@ -761,7 +764,7 @@ namespace SMD.Implementation.Services
                     dbCo.Status = (Int32)AdCampaignStatus.ApprovalRejected;
                     dbCo.Approved = false;
                     dbCo.RejectedReason = source.RejectedReason.ToString();
-                   
+
                 }
                 dbCo.ModifiedDateTime = DateTime.Now;
                 dbCo.ModifiedBy = couponRepository.LoggedInUserIdentity;
@@ -787,13 +790,14 @@ namespace SMD.Implementation.Services
             // Get Current Product
             var product = (dynamic)null;
 
-            if(source.CouponListingMode==1)
+            if (source.CouponListingMode == 1)
                 product = productRepository.GetProductByCountryId("couponfree");
             else if (source.CouponListingMode == 2)
                 product = productRepository.GetProductByCountryId("couponunlimited");
             else if (source.CouponListingMode == 3)
                 product = productRepository.GetProductByCountryId("couponnationwide");
-            else {
+            else
+            {
                 product = productRepository.GetProductByCountryId("couponfree");
             }
             // Tax Applied
@@ -824,7 +828,7 @@ namespace SMD.Implementation.Services
 
             if (response != null && !response.Contains("Failed"))
             {
-                if (source.CompanyId!= null)
+                if (source.CompanyId != null)
                 {
                     String CompanyName = _iCompanyRepository.GetCompanyNameByID(source.CompanyId.Value);
                     #region Add Invoice
@@ -852,7 +856,7 @@ namespace SMD.Implementation.Services
                     {
                         InvoiceId = invoice.InvoiceId,
                         SqId = null,
-                        PQID=null,
+                        PQID = null,
                         ProductId = product.ProductId,
                         ItemName = product.ProductName,
                         ItemAmount = (double)amount,
@@ -871,7 +875,7 @@ namespace SMD.Implementation.Services
             return response;
         }
 
-        public Currency GetCurrenyById( int id)
+        public Currency GetCurrenyById(int id)
         {
             return _currencyRepository.Find(id);
         }

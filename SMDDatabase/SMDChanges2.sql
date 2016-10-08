@@ -1757,3 +1757,42 @@ COMMIT
 
 
 -------------------------------------- all scripts above executed on server   7 october.
+/****** Added by hadia to delete previous SPs ******/
+GO
+
+/****** Object:  StoredProcedure [dbo].[GetAdminDashBoardInsights1]    Script Date: 10/7/2016 5:01:55 PM ******/
+DROP PROCEDURE [dbo].[GetAdminDashBoardInsights1]
+GO
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[GetActiveVSNewUsers]    Script Date: 10/7/2016 5:01:55 PM ******/
+DROP PROCEDURE [dbo].[GetActiveVSNewUsers]
+GO
+
+GO
+/****** Object:  StoredProcedure [dbo].[getApprovedCampaignsOverTime]    Script Date: 10/7/2016 5:01:55 PM ******/
+DROP PROCEDURE [dbo].[getApprovedCampaignsOverTime]
+GO
+
+GO
+/****** Object:  StoredProcedure [dbo].[GetRevenueOverTime]    Script Date: 10/7/2016 5:01:55 PM ******/
+DROP PROCEDURE [dbo].[GetRevenueOverTime]
+GO
+
+GO
+/****** Object:  StoredProcedure [dbo].[GetDealMetric]    Script Date: 10/7/2016 5:01:55 PM ******/
+DROP PROCEDURE [dbo].[GetDealMetric]
+GO
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[GetSurvayCardsAnswered]    Script Date: 10/7/2016 5:01:55 PM ******/
+DROP PROCEDURE [dbo].[GetSurvayCardsAnswered]
+GO
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[GetSurvayQestionsAnswered]    Script Date: 10/7/2016 5:01:55 PM ******/
+DROP PROCEDURE [dbo].[GetSurvayQestionsAnswered]
+GO

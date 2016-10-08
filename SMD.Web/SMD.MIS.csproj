@@ -384,6 +384,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SecurityConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Api\Controllers\GetCouponPriceOptionController.cs" />
     <Compile Include="Areas\Api\Controllers\PayoutRevenueController.cs" />
     <Compile Include="Areas\Api\Controllers\SuperNovaCampaignController.cs" />
     <Compile Include="Areas\Api\Controllers\UserFeedbackController.cs" />

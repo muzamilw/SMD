@@ -1,5 +1,5 @@
 ﻿GO
-/****** Object:  StoredProcedure [dbo].[getUserActivitiesOverTime]    Script Date: 10/6/2016 5:59:57 PM ******/
+/****** Object:  StoredProcedure [dbo].[getUserActivitiesOverTime]    Script Date: 10/7/2016 5:16:16 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -34,14 +34,14 @@ DECLARE @CutoffDate DATE = DATEADD(YEAR, @NumberOfYears, @StartDate);
 	CREATE TABLE #dim
 	(
 	[date]       DATE PRIMARY KEY, 
-	[day]        AS DATEPART(DAY,      [date]),
+	[day]        AS CONVERT(VARCHAR(6), dateadd(day, datediff(day, 0, [date]), 0), 6),
 	[month]      AS DATEPART(MONTH,    [date]),
 	FirstOfMonth AS CONVERT(DATE, DATEADD(MONTH, DATEDIFF(MONTH, 0, [date]), 0)),
 	[MonthName]  AS right(convert(varchar, [date], 106), 8),
 	[week]       AS CONVERT(VARCHAR(6), dateadd(week, datediff(week, 0, [date]), 0), 6),
 	[ISOweek]    AS DATEPART(ISO_WEEK, [date]),
 	[DayOfWeek]  AS DATEPART(WEEKDAY,  [date]),
-	[quarter]    AS DATEPART(QUARTER,  [date]),
+	[quarter]    AS CONVERT(VARCHAR(11), dateadd(QUARTER, datediff(QUARTER, 0, [date]), 0), 6),
 	[year]       AS DATEPART(YEAR,     [date]),
 	FirstOfYear  AS CONVERT(DATE, DATEADD(YEAR,  DATEDIFF(YEAR,  0, [date]), 0)),
 	Style112     AS CONVERT(CHAR(8),   [date], 112),
@@ -92,7 +92,7 @@ DECLARE @CutoffDate DATE = DATEADD(YEAR, @NumberOfYears, @StartDate);
 	IF @Granularity = 1
 	BEGIN
 		insert into @T1 
-		select d.date , d.date 
+		select d.day , d.date 
 		from #dim d
 		where d.date >= @DateFrom and d.date <= @DateTo
 	END
@@ -111,6 +111,13 @@ DECLARE @CutoffDate DATE = DATEADD(YEAR, @NumberOfYears, @StartDate);
 		where d.date >= @DateFrom and d.date <= @DateTo
 	END
 	ELSE IF @Granularity = 4
+	BEGIN
+		insert into @T1 
+		select d.quarter , d.date
+		from #dim d
+		where d.date >= @DateFrom and d.date <= @DateTo
+	END
+	ELSE IF @Granularity = 5
 	BEGIN
 		insert into @T1 
 		select d.year , d.date

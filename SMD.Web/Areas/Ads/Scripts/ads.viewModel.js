@@ -28,10 +28,10 @@ define("ads/ads.viewModel",
                     profileAnswerList = ko.observable([]),
                     ShowAudienceCounter = ko.observable(),
                     surveyAnswerList = ko.observable([]),
-                    SearchProfileQuestion=ko.observable(''),
+                    SearchProfileQuestion = ko.observable(''),
                     criteriaCount = ko.observable(0),
                     isShowSurveyAns = ko.observable(false),
-                    IsprofileQuestion=ko.observable(false),
+                    IsprofileQuestion = ko.observable(false),
                      // selected location 
                     selectedLocation = ko.observable(),
                     selectedLocationRadius = ko.observable(),
@@ -218,12 +218,12 @@ define("ads/ads.viewModel",
 
                 dataservice.getCampaignData({
                     CampaignId: 0,
-                    status : SearchSelectedStatus(),
+                    status: SearchSelectedStatus(),
                     PageSize: pager().pageSize(),
                     PageNo: pager().currentPage(),
                     SearchText: searchFilterValue(),
                     ShowCoupons: isDisplayCouponsAds(),
-                    mode:mode
+                    mode: mode
                 }, {
                     success: function (data) {
                         if (data != null) {
@@ -235,7 +235,7 @@ define("ads/ads.viewModel",
                                 campaignGridContent.push(model.Campaign.Create(updateCampaignGridItem(item)));
                             });
                             pager().totalCount(data.TotalCount);
-                            
+
                             //  LoadAnswers();
                         }
 
@@ -246,9 +246,8 @@ define("ads/ads.viewModel",
                 });
 
             },
-                LoadAnswers = function ()
-                {
-              
+                LoadAnswers = function () {
+
 
                     dataservice.getBaseData({
                         RequestId: 3,
@@ -256,11 +255,11 @@ define("ads/ads.viewModel",
                     }, {
                         success: function (data) {
                             if (data != null) {
-                              
+
                                 if (profileAnswerList().length > 0) {
                                     profileAnswerList([]);
                                 }
-                                
+
                                 ko.utils.arrayPushAll(profileAnswerList(), data.ProfileQuestionAnswers);
                                 profileAnswerList.valueHasMutated();
                             }
@@ -271,7 +270,7 @@ define("ads/ads.viewModel",
                         }
                     });
                 },
-               
+
             updateCampaignGridItem = function (item) {
 
                 canSubmitForApproval(false);
@@ -303,9 +302,9 @@ define("ads/ads.viewModel",
             },
                 // Add new Profile Question
             addNewCampaign = function () {
-               
-              
-               
+
+
+
                 $("#logo_div").css("display", "block");
 
                 $("#panelArea").css("display", "none");
@@ -320,7 +319,7 @@ define("ads/ads.viewModel",
                 TodisplayImg(true);
                 openEditScreen(1);
                 isFromEdit(true);
-               
+
                 isListVisible(false);
                 isNewCampaign(true);
                 isTerminateBtnVisible(false);
@@ -350,11 +349,10 @@ define("ads/ads.viewModel",
 
 
                 campaignModel().reset();
-                
-                
+
+
             },
-           GoToHomePage = function ()
-           {
+           GoToHomePage = function () {
                //isListVisible(false);
                isEditorVisible(false);
                isWelcomeScreenVisible(false);
@@ -364,12 +362,12 @@ define("ads/ads.viewModel",
                // showMainMenu();
            },
             closeNewCampaignDialog = function () {
-               
+
                 if (campaignModel().hasChanges() || logoImage != '') {    //&& (campaignModel().Status() == null || campaignModel().Status() == 1)
 
                     confirmation.messageText("Do you want to save changes?");
                     confirmation.afterProceed(function () {
-                   
+
                         if (ValidateCampaign()) {
 
                             if (campaignModel().Status() == 3) {
@@ -419,7 +417,7 @@ define("ads/ads.viewModel",
 
 
 
-                    
+
                     });
                     confirmation.afterCancel(function () {
 
@@ -447,7 +445,7 @@ define("ads/ads.viewModel",
 
                     confirmation.show();
 
-             
+
                     return;
                 } else { // no changes go close it
                     campaignModel();
@@ -490,10 +488,9 @@ define("ads/ads.viewModel",
                 $("#topArea").css("display", "block");
                 $("#headlabel").css("display", "block");
                 $("#headdesc").css("display", "block")
-                
+
             },
-                GetAudienceCount = function (val)
-                {
+                GetAudienceCount = function (val) {
                     while (/(\d+)(\d{3})/.test(val.toString())) {
                         val = val.toString().replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
                     }
@@ -501,8 +498,7 @@ define("ads/ads.viewModel",
 
                 },
 
-                closeContent = function ()
-                {
+                closeContent = function () {
                     campaignModel();
                     selectedCriteria();
                     isEditorVisible(false);
@@ -511,7 +507,7 @@ define("ads/ads.viewModel",
                         isWelcomeScreenVisible(false);
                     }
                     else {
-                       
+
                         if (campaignModel().Status() == 7) {
                             isWelcomeScreenVisible(false);
                             isListVisible(true);
@@ -541,7 +537,7 @@ define("ads/ads.viewModel",
                     //    $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
                     //    $("#btnSubmitForApproval,#saveBtn,.table-link").css("display", "inline-block");
                     //    $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
-                
+
                     isFromEdit(false);
                     $("#panelArea").css("display", "block");
 
@@ -550,17 +546,17 @@ define("ads/ads.viewModel",
                     $("#MarketobjDiv").css("display", "block");
                     $("#topArea").css("display", "block");
                     $("#headlabel").css("display", "block");
-                
+
                     $("#headdesc").css("display", "block");
                 },
-           
+
              BackToAds = function () {
                  isEditorVisible(false);
                  isWelcomeScreenVisible(false);
                  isListVisible(true);
              },
               openEditScreen = function (mode) {
-                 
+
                   campaignModel(new model.Campaign());
                   // campaignModel().CampaignName('New Campaign');
 
@@ -621,7 +617,7 @@ define("ads/ads.viewModel",
                   campaignModel().LanguageId(41);
                   campaignModel().DeliveryDays('10');
                   campaignModel().LogoUrl('/images/default-placeholder.png');
-                  
+
                   // campaignModel().LogoImageBytes("/images/default-placeholder.png");
 
                   campaignModel().IsShowVoucherSetting(false);
@@ -644,19 +640,24 @@ define("ads/ads.viewModel",
             submitCampaignData = function () {
                 //if (campaignModel().isValid()) {
                 if (ValidateCampaign()) {
-                   
-                    if (UserAndCostDetail().isStripeIntegrated == false) {
-
-                        stripeChargeCustomer.show(function () {
-                            UserAndCostDetail().isStripeIntegrated = true;
-                            saveCampaign(2);
-                        }, 2000, 'Enter your details');
-
-
-                    } else {
+                    if (UserAndCostDetail().IsSpecialAccount == true) {
+                        campaignModel().ClickRate(0);
                         saveCampaign(2);
                     }
-                   
+                    else {
+                        if (UserAndCostDetail().isStripeIntegrated == false) {
+
+                            stripeChargeCustomer.show(function () {
+                                UserAndCostDetail().isStripeIntegrated = true;
+                                saveCampaign(2);
+                            }, 2000, 'Enter your details');
+
+
+                        } else {
+                            saveCampaign(2);
+                        }
+                    }
+
                 }
                 else {
                     if (errorListNew().length > 0) {
@@ -678,7 +679,7 @@ define("ads/ads.viewModel",
 
                      if (campaignModel().CampaignName() == "" || campaignModel().CampaignName() == undefined) {
                          errorListNew.push({ name: "Please enter ad Title.", element: "" });
-                         
+
                      }
 
                      if (campaignModel().ClickRate() == undefined) {
@@ -695,7 +696,8 @@ define("ads/ads.viewModel",
 
                      if (reachedAudience() == 0) {
                          errorListNew.push({
-                             name: "You have no audience against the specified criteria please broaden your audience definition.", element: "" });
+                             name: "You have no audience against the specified criteria please broaden your audience definition.", element: ""
+                         });
                      }
 
                      if (errorListNew() == null || errorListNew().length == 0) {
@@ -720,7 +722,9 @@ define("ads/ads.viewModel",
                     }
                 },
 
-              removeAdd = function () {
+              removeAdd = function (item) {
+                  if (item.Status() == 1)
+                      campaignModel().CampaignID(item.CampaignID());
                   confirmation.messageText("Are you sure you want to remove this ad ? This action cannot be undone.");
                   confirmation.show();
                   confirmation.afterCancel(function () {
@@ -735,7 +739,7 @@ define("ads/ads.viewModel",
                   saveCampaign(8);
               },
             saveCampaign = function (mode) {
-               
+
                 var isPopulateErrorList = false;
                 if (isDisplayCouponsAds() == false) {
 
@@ -893,7 +897,7 @@ define("ads/ads.viewModel",
                         isWelcomeScreenVisible(false);
                         toastr.success("Successfully saved.");
                         allCouponCodeItems.removeAll();
-                           
+
                         $("#topArea").css("display", "block");
                         //$("#MainBtnClose").click();
                         //GoToHomePage();
@@ -905,7 +909,7 @@ define("ads/ads.viewModel",
                     }
                 });
             },
-            
+
                 // Add new profile Criteria
                 addNewProfileCriteria = function () {
 
@@ -958,7 +962,7 @@ define("ads/ads.viewModel",
                     //}
                 },
                   saveProfileQuestion = function (item) {
-                     
+
                       var selectedQuestionstring = $(".active .parent-list-title").text();
                       selectedCriteria().questionString(selectedQuestionstring);
                       selectedCriteria().PQID(item.PQID);
@@ -1096,7 +1100,7 @@ define("ads/ads.viewModel",
                 },
 
                  saveSurveyQuestion = function (type, item) {
-                     
+
                      var selectedQuestionstring = item.DisplayQuestion;
                      selectedCriteria().questionString(selectedQuestionstring);
 
@@ -1130,7 +1134,7 @@ define("ads/ads.viewModel",
                              campaignModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
                                  Type: 2,
                                  SQId: item.SQID,
-                                 SQAnswer:type,
+                                 SQAnswer: type,
                                  //PQAnswerId: selectedCriteria().PQAnswerID(),
                                  //QuizCampaignId: item.CampaignId,
                                  //QuizAnswerId: type,
@@ -1168,7 +1172,7 @@ define("ads/ads.viewModel",
 
 
                 onEditCriteria = function (item) {
-                    
+
                     AditionalCriteriaMode("2");
                     isNewCriteria(false);
                     var val = item.PQAnswerID() + 0;
@@ -1219,9 +1223,8 @@ define("ads/ads.viewModel",
 
                         selectedCriteria(item);
                     }
-                    else if (item.Type() == "2")
-                    {
-                      
+                    else if (item.Type() == "2") {
+
                         if (surveyquestionList().length == 0) {
                             dataservice.getBaseData({
                                 RequestId: 6,
@@ -1260,7 +1263,7 @@ define("ads/ads.viewModel",
                             selectedCriteria().surveyQuestRightImageSrc(matchSurveyQuestion.RightPicturePath);
                         }
 
-                        
+
 
                     }
 
@@ -1310,9 +1313,9 @@ define("ads/ads.viewModel",
                 },
 
                 onChangeProfileQuestion = function (item) {
-          
+
                     var y = $(".listview").scrollTop();  //your current y position on the page
-                    
+
                     if (item == null)
                         return;
                     var selectedQuestionId = item.PqId;
@@ -1333,7 +1336,7 @@ define("ads/ads.viewModel",
 
                                 profileAnswerList.valueHasMutated();
 
-                                $(".listview").scrollTop(y+60);
+                                $(".listview").scrollTop(y + 60);
                             }
 
                         },
@@ -1343,7 +1346,7 @@ define("ads/ads.viewModel",
                     });
                 },
                  onChangeSurveyQuestion = function (item) {
-                     
+
                      var y = $(".listview").scrollTop();  //your current y position on the page
 
                      if (item == null)
@@ -1355,7 +1358,7 @@ define("ads/ads.viewModel",
                          QuestionId: selectedQuestionId,
                      }, {
                          success: function (data) {
-                             
+
                              if (data != null) {
                                  if (surveyAnswerList().length > 0) {
                                      surveyAnswerList([]);
@@ -1377,7 +1380,7 @@ define("ads/ads.viewModel",
                          }
                      });
                  },
-               
+
 
                 onRemoveLocation = function (item) {
                     // Ask for confirmation
@@ -1516,8 +1519,8 @@ define("ads/ads.viewModel",
 
                   },
                 onEditCampaign = function (item) {
-                
-                    
+
+
                     previewScreenNumber(1);
                     isTerminateBtnVisible(false);
                     isNewCampaignVisible(false);
@@ -1532,9 +1535,9 @@ define("ads/ads.viewModel",
                     $("#Heading_div").css("display", "none");
 
 
-                    if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == 6|| item.Status() == null || item.Status() == 7 || item.Status() == 9) {
+                    if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == 6 || item.Status() == null || item.Status() == 7 || item.Status() == 9) {
                         collapseMainMenu();
-                       
+
                         if (item.Status() == 1)//because it is in draft mode.
                             isNewCampaign(true);
                         else
@@ -1547,7 +1550,7 @@ define("ads/ads.viewModel",
                             SearchText: ""
                         }, {
                             success: function (data) {
-                                
+
                                 if (data != null) {
                                     // set languages drop down
                                     var profileQIds = [];
@@ -1564,22 +1567,22 @@ define("ads/ads.viewModel",
                                     });
 
                                     campaignModel(model.Campaign.Create(data.Campaigns[0]));
-                                    
+
                                     if (campaignModel().LogoUrl() == '' || campaignModel().LogoUrl() == undefined) {
 
                                         campaignModel().LogoUrl("/images/default-placeholder.png");
                                     }
-                                   
-                                   
-                                    VideoLink2src(campaignModel().VideoLink2()+''+'');
-                                    
+
+
+                                    VideoLink2src(campaignModel().VideoLink2() + '' + '');
+
                                     if (VideoLink2src() != null && VideoLink2src() != '') {
                                         FlagToShowDivs(false);
                                     }
                                     else {
                                         FlagToShowDivs(true);
                                     }
-                                    
+
                                     //if (campaignModel().LogoUrl() != null && campaignModel().LogoUrl() != '') {
                                     //    TodisplayImg(false);
 
@@ -1669,7 +1672,7 @@ define("ads/ads.viewModel",
 
                                     selectedQuestionCountryList([]);
                                     _.each(campaignModel().AdCampaignTargetLocations(), function (item) {
-                                        
+
                                         addCountryToCountryList(item.CountryID(), item.Country());
                                     });
 
@@ -1688,7 +1691,7 @@ define("ads/ads.viewModel",
                                     } else if (campaignModel().Status() == 2) {
                                         $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
                                         $("#btnSubmitForApproval2").css("display", "none");
-                                        
+
                                         $('#imgLogo').prop('disabled', true);
 
                                         $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,#btnPauseCampaign,.lang_delSurvey").css("display", "none");
@@ -1724,7 +1727,7 @@ define("ads/ads.viewModel",
                                         $("#btnPauseCampaign").css("display", "none");
                                         campaignModel().StatusValue("Approval Rejected");
                                     } else if (campaignModel().Status() == 7) {
-                                        
+
                                         campaignModel().StatusValue("Remove");
                                         $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
                                         $("#btnSubmitForApproval,#btnResumeCampagin,#btnArchive,#btnPauseCampaign,.lang_delSurvey").css("display", "none");
@@ -1906,12 +1909,12 @@ define("ads/ads.viewModel",
                                     bindAudienceReachCount();
 
                                     if (mode == 4) {
-                                        
+
                                         $("#logo_div").css("display", "block");
                                     }
 
                                     else {
-                                        
+
                                         $("#logo_div").css("display", "none");
                                     }
 
@@ -1943,7 +1946,7 @@ define("ads/ads.viewModel",
                     $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign").removeAttr('disabled');
                 },
                 nextPreviewScreen = function () {
-                    
+
                     var noErrors = true;
                     if (previewScreenNumber() == 1) {
 
@@ -1959,7 +1962,7 @@ define("ads/ads.viewModel",
                         //    noErrors = false;
                         //    toastr.error("Please enter second line.");
                         //}
-                        
+
                         if (campaignModel().MaxBudget() < campaignModel().ClickRate()) {
                             noErrors = false;
                             toastr.error("Manage budget should be greater than ppvc.");
@@ -2431,7 +2434,7 @@ define("ads/ads.viewModel",
                     }
                 },
                 findLocationsInCountry = function (id) {
-                   
+
 
                     var list = ko.utils.arrayFilter(campaignModel().AdCampaignTargetLocations(), function (prod) {
                         return prod.CountryID() == id;
@@ -2455,24 +2458,23 @@ define("ads/ads.viewModel",
                      campaignModel().LogoImageBytes(data);
                      TodisplayImg(false);
                  },
-               
+
                  VideoUrlCallback = function (file, data) {
 
-                     if (file.size <88888888) {
-                     
+                     if (file.size < 88888888) {
+
                          if (file.type === 'video/mp4') {
-                             
+
                              campaignModel().VideoBytes(data);
                          }
                          else {
                              toastr.error("sorry you can upload Mp4 video only.");
                          }
                      }
-                     else
-                     {
+                     else {
                          toastr.error("sorry you can upload upto 88Mb video only.");
                      }
-                     
+
                  },
                 ShowCouponPromotions = function () {
                     window.location.href = "/Coupons/Coupons";
@@ -2529,17 +2531,17 @@ define("ads/ads.viewModel",
                     objProfileCriteria.CriteriaID(criteriaCount());
                     selectedCriteria(objProfileCriteria);
 
-                    
+
                     if (profileQuestionList().length == 0) {
                         dataservice.getBaseData({
                             RequestId: 2,
                             QuestionId: 0,
                         }, {
                             success: function (data) {
-                                
+
                                 if (data != null) {
                                     profileQuestionList([]);
-                                   
+
                                     ko.utils.arrayPushAll(profileQuestionList(), data.ProfileQuestions);
                                     profileQuestionList.valueHasMutated();
                                     TemporaryProfileList.clear;
@@ -2578,10 +2580,10 @@ define("ads/ads.viewModel",
                                     ko.utils.arrayPushAll(profileQuestionList(), data.ProfileQuestions);
                                     console.log(data.profileQuestionList)
                                     profileQuestionList.valueHasMutated();
-                                   
+
                                     TemporaryProfileList.clear;
                                     TemporaryProfileList(profileQuestionList());
-                                    
+
                                 }
 
                             },
@@ -2591,7 +2593,7 @@ define("ads/ads.viewModel",
                         });
 
                     }
-                   
+
                     AditionalCriteriaMode(2);
                     showCompanyProfileQuestions(true);
                 },
@@ -2614,7 +2616,7 @@ define("ads/ads.viewModel",
                             QuestionId: 0,
                         }, {
                             success: function (data) {
-                                
+
                                 if (data != null) {
 
                                     surveyquestionList([]);
@@ -2634,10 +2636,10 @@ define("ads/ads.viewModel",
                 },
 
 
-                getQuestionByFilter = function() {
-                  
+                getQuestionByFilter = function () {
+
                     if (AditionalCriteriaMode() == 2) {
-                     
+
                         if (SearchProfileQuestion() != '') {
 
                             profileQuestionList(TemporaryProfileList());
@@ -2653,13 +2655,12 @@ define("ads/ads.viewModel",
                             profileQuestionList(TemporaryProfileList());
                         }
                     }
-                    else if(AditionalCriteriaMode() == 3)
-                    {
-                        
+                    else if (AditionalCriteriaMode() == 3) {
+
                         if (SearchProfileQuestion() != '') {
                             myQuizQuestions(TemporaryQuizQuestions());
                             var list = ko.utils.arrayFilter(myQuizQuestions(), function (prod) {
-                                
+
                                 return prod.VerifyQuestion.toLowerCase().indexOf(SearchProfileQuestion().toLowerCase()) != -1;
                             });
                             myQuizQuestions().clear;
@@ -2672,9 +2673,8 @@ define("ads/ads.viewModel",
 
                     }
 
-                    else if (AditionalCriteriaMode() == 4)
-                    {
-                        
+                    else if (AditionalCriteriaMode() == 4) {
+
                         if (SearchProfileQuestion() != '') {
                             surveyquestionList(TemporarySurveyList());
                             var list = ko.utils.arrayFilter(surveyquestionList(), function (prod) {
@@ -2688,7 +2688,7 @@ define("ads/ads.viewModel",
                             surveyquestionList.clear;
                             surveyquestionList(TemporarySurveyList());
                         }
-                        
+
                         if (SearchProfileQuestion() != '') {
                             surveyquestionList(TemporarySurveyList());
                             var list = ko.utils.arrayFilter(surveyquestionList(), function (prod) {
@@ -2705,7 +2705,7 @@ define("ads/ads.viewModel",
 
                     }
                 },
-                
+
                 showAdditionQuizCriteria = function () {
                     Modelheading('Your Quiz Questions');
                     IsprofileQuestion(false);
@@ -2740,7 +2740,7 @@ define("ads/ads.viewModel",
                     }
                     AditionalCriteriaMode(3);
                 },
-        // open Product Category Dialog
+                // open Product Category Dialog
                 openProductCategoryDialog = function () {
                     $("#productCategoryDialog").modal("show");
                 },
@@ -2875,7 +2875,7 @@ define("ads/ads.viewModel",
                      };
                      dataservice.generateCouponCodes(gData, {
                          success: function (data) {
-                             
+
                              _.each(data.CouponList, function (item) {
                                  allCouponCodeItems.push(item.Code);
                                  campaignModel().CouponCodes.push(new model.AdCampaignCouponCodes.Create({
@@ -2903,279 +2903,278 @@ define("ads/ads.viewModel",
                 },
                  gotoScreen = function (number) {
                      //  toastr.error("Validation.");
-                   
+
                      previewScreenNumber(number);
 
                  },
-                GetAnswers = function (id)
-                {
-                    
+                GetAnswers = function (id) {
+
                     if (profileAnswerList().length > 0) {
                         var list = ko.utils.arrayFilter(profileAnswerList(), function (prod) {
-                           
+
                             return prod.PqId == id;
                         });
                         return list;
                     }
-                   
-                }
-        // BindStatusDD();
 
-        BindStatusDD =function () {
-            var data = [
-                {
-                    "id": "2",
-                    "name": "Pending Approval"
-                },
-            {
-                "id": "3",
-                "name": "Live"
-            },
-                {
-                    "id": "4",
-                    "name": "Paused"
-                },
+                }
+                // BindStatusDD();
+
+                BindStatusDD = function () {
+                    var data = [
+                        {
+                            "id": "2",
+                            "name": "Pending Approval"
+                        },
                     {
-                        "id": "5",
-                        "name": "Completed"
+                        "id": "3",
+                        "name": "Live"
                     },
                         {
-                            "id": "6",
-                            "name": "Approval Rejected"
+                            "id": "4",
+                            "name": "Paused"
                         },
                             {
-                                "id": "7",
-                                "name": "Remove"
+                                "id": "5",
+                                "name": "Completed"
                             },
                                 {
-                                    "id": "8",
-                                    "name": "Archived"
+                                    "id": "6",
+                                    "name": "Approval Rejected"
                                 },
                                     {
-                                        "id": "9",
-                                        "name": "Draft"
-                                    }
+                                        "id": "7",
+                                        "name": "Remove"
+                                    },
+                                        {
+                                            "id": "8",
+                                            "name": "Archived"
+                                        },
+                                            {
+                                                "id": "9",
+                                                "name": "Draft"
+                                            }
 
 
-            ];
-            var Status = $("#ddlStatus");
-            Status.html('');
-            Status.append($('<option/>').attr("value", 0).text('All'));
-            $.each(data, function (i, option) {
-                Status.append($('<option/>').attr("value", option.id).text(option.name));
-            });
-            Status[0].selectedIndex = 0;
-        },
-        // Initialize the view model
-        initialize = function (specifiedView) {
-            if (mode == 4) {
-                MainHeading("Sponsor an app ‘brain game’.");
-                SubHeading("Reward audiences 50% of your ‘ad click’Drive people to your web site, ask a reinforcing question and show your deals –All for one ‘ad click’ fee.");
-                IsShownforVideo(false);
-                lblAdTitle("Game  Title");
-                uploadTitle("Upload");
-                tab1Heading("Leaderboard banners appear when app users play brain training games.");
-                tab2Heading("Define the target audience to deliver game ad.");
-                tab4SubHeading("Select your game campaign delivery mode:");
-                UrlHeadings("Leatherboard banner click thru url to your landing  page.");
-            }
-            else {
-                UrlHeadings("Direct viewers to a landing page at the end of your video ad.");
-                IsShownforVideo(true);
-            }
-            view = specifiedView;
-            ko.applyBindings(view.viewModel, view.bindingRoot);
-            for (var i = 10; i < 81; i++) {
-                var text = i.toString();
-                if (i == 110)
-                    text += "+";
-                ageRange.push({ value: i.toString(), text: text });
-            }
-            BindStatusDD();
-            ageRange.push({ value: 120, text: "80+" });
-            pager(pagination.Pagination({ PageSize: 10 }, campaignGridContent, getAdCampaignGridContent));
-            getAdCampaignGridContent();
-            getCampaignBaseContent();
-            isEditorVisible(false);
+                    ];
+                    var Status = $("#ddlStatus");
+                    Status.html('');
+                    Status.append($('<option/>').attr("value", 0).text('All'));
+                    $.each(data, function (i, option) {
+                        Status.append($('<option/>').attr("value", option.id).text(option.name));
+                    });
+                    Status[0].selectedIndex = 0;
+                },
+                // Initialize the view model
+                initialize = function (specifiedView) {
+                    if (mode == 4) {
+                        MainHeading("Sponsor an app ‘brain game’.");
+                        SubHeading("Reward audiences 50% of your ‘ad click’Drive people to your web site, ask a reinforcing question and show your deals –All for one ‘ad click’ fee.");
+                        IsShownforVideo(false);
+                        lblAdTitle("Game  Title");
+                        uploadTitle("Upload");
+                        tab1Heading("Leaderboard banners appear when app users play brain training games.");
+                        tab2Heading("Define the target audience to deliver game ad.");
+                        tab4SubHeading("Select your game campaign delivery mode:");
+                        UrlHeadings("Leatherboard banner click thru url to your landing  page.");
+                    }
+                    else {
+                        UrlHeadings("Direct viewers to a landing page at the end of your video ad.");
+                        IsShownforVideo(true);
+                    }
+                    view = specifiedView;
+                    ko.applyBindings(view.viewModel, view.bindingRoot);
+                    for (var i = 10; i < 81; i++) {
+                        var text = i.toString();
+                        if (i == 110)
+                            text += "+";
+                        ageRange.push({ value: i.toString(), text: text });
+                    }
+                    BindStatusDD();
+                    ageRange.push({ value: 120, text: "80+" });
+                    pager(pagination.Pagination({ PageSize: 10 }, campaignGridContent, getAdCampaignGridContent));
+                    getAdCampaignGridContent();
+                    getCampaignBaseContent();
+                    isEditorVisible(false);
+                };
+                return {
+                    initialize: initialize,
+                    pager: pager,
+                    hasChangesOnQuestion: hasChangesOnQuestion,
+                    isEditorVisible: isEditorVisible,
+                    campaignGridContent: campaignGridContent,
+                    addNewCampaign: addNewCampaign,
+                    langs: langs,
+                    campaignModel: campaignModel,
+
+                    closeNewCampaignDialog: closeNewCampaignDialog,
+                    selectedCriteria: selectedCriteria,
+                    profileQuestionList: profileQuestionList,
+                    profileAnswerList: profileAnswerList,
+                    saveCriteria: saveCriteria,
+                    onDeleteCriteria: onDeleteCriteria,
+                    onEditCriteria: onEditCriteria,
+                    addNewProfileCriteria: addNewProfileCriteria,
+                    onChangeProfileQuestion: onChangeProfileQuestion,
+                    myQuizQuestions: myQuizQuestions,
+                    //   addNewSurveyCriteria: addNewSurveyCriteria,
+                    onChangeSurveyQuestion: onChangeSurveyQuestion,
+                    getCampaignByFilter: getCampaignByFilter,
+                    searchFilterValue: searchFilterValue,
+                    isShowSurveyAns: isShowSurveyAns,
+                    selectedLocation: selectedLocation,
+                    selectedLocationRadius: selectedLocationRadius,
+                    selectedLocationIncludeExclude: selectedLocationIncludeExclude,
+                    selectedLangIncludeExclude: selectedLangIncludeExclude,
+                    selectedLocationLat: selectedLocationLat,
+                    selectedLocationLong: selectedLocationLong,
+                    onAddLocation: onAddLocation,
+                    onRemoveLocation: onRemoveLocation,
+                    deleteLocation: deleteLocation,
+                    addLanguage: addLanguage,
+                    onRemoveLanguage: onRemoveLanguage,
+                    deleteLanguage: deleteLanguage,
+                    ageRange: ageRange,
+                    isNewCriteria: isNewCriteria,
+                    isEnableVedioVerificationLink: isEnableVedioVerificationLink,
+                    campaignTypePlaceHolderValue: campaignTypePlaceHolderValue,
+                    OnChangeCampaignType: OnChangeCampaignType,
+                    campaignTypeImageCallback: campaignTypeImageCallback,
+                    campaignImageCallback: campaignImageCallback,
+                    CouponImage4Callback: CouponImage4Callback,
+                    CouponImage3Callback: CouponImage3Callback,
+                    couponImage2Callback: couponImage2Callback,
+                    correctAnswers: correctAnswers,
+                    onEditCampaign: onEditCampaign,
+                    canSubmitForApproval: canSubmitForApproval,
+                    isTerminateBtnVisible: isTerminateBtnVisible,
+                    isNewCampaignVisible: isNewCampaignVisible,
+                    isShowArchiveBtn: isShowArchiveBtn,
+                    submitCampaignData: submitCampaignData,
+                    removeAdd: removeAdd,
+                    selectedIndustryIncludeExclude: selectedIndustryIncludeExclude,
+                    addIndustry: addIndustry,
+                    onRemoveIndustry: onRemoveIndustry,
+                    visibleTargetAudience: visibleTargetAudience,
+                    pricePerclick: pricePerclick,
+                    selectedEducationIncludeExclude: selectedEducationIncludeExclude,
+                    addEducation: addEducation,
+                    reachedAudience: reachedAudience,
+                    audienceReachMode: audienceReachMode,
+                    onRemoveEducation: onRemoveEducation,
+                    bindAudienceReachCount: bindAudienceReachCount,
+                    errorListNew: errorListNew,
+                    addCountryToCountryList: addCountryToCountryList,
+                    findLocationsInCountry: findLocationsInCountry,
+                    selectedQuestionCountryList: selectedQuestionCountryList,
+                    changeStatus: changeStatus,
+                    educations: educations,
+                    professions: professions,
+                    addNewEducationCriteria: addNewEducationCriteria,
+                    addNewProfessionCriteria: addNewProfessionCriteria,
+                    voucherQuestionStatus: voucherQuestionStatus,
+                    ChangeVoucherSettings: ChangeVoucherSettings,
+                    VoucherImageCallback: VoucherImageCallback,
+                    saveProfileQuestion: saveProfileQuestion,
+                    updateProfileQuestion: updateProfileQuestion,
+                    updateSurveyCriteria: updateSurveyCriteria,
+                    buyItQuestionStatus: buyItQuestionStatus,
+                    buyItImageCallback: buyItImageCallback,
+                    openEditScreen: openEditScreen,
+                    isWelcomeScreenVisible: isWelcomeScreenVisible,
+                    isDetailEditorVisible: isDetailEditorVisible,
+                    isListVisible: isListVisible,
+                    isNewCampaign: isNewCampaign,
+                    BackToAds: BackToAds,
+                    MainHeading: MainHeading,
+                    uploadTitle: uploadTitle,
+                    SubHeading: SubHeading,
+                    ShowAdCampaigns: ShowAdCampaigns,
+                    ShowCouponPromotions: ShowCouponPromotions,
+                    isDisplayCouponsAds: isDisplayCouponsAds,
+                    lblCampaignName: lblCampaignName,
+                    lblDetailsHeading: lblDetailsHeading,
+                    lblAdTitle: lblAdTitle,
+                    lblFirstLine: lblFirstLine,
+                    lbllSecondLine: lbllSecondLine,
+                    lblCampaignSchedule: lblCampaignSchedule,
+                    tab1Heading: tab1Heading,
+                    tab2Heading: tab2Heading,
+                    tab4SubHeading: tab4SubHeading,
+
+                    gotoProfile: gotoProfile,
+                    gotoManageUsers: gotoManageUsers,
+                    ArchiveCampaign: ArchiveCampaign,
+                    copyCampaign: copyCampaign,
+                    AditionalCriteriaMode: AditionalCriteriaMode,
+                    showCompanyProfileQuestions: showCompanyProfileQuestions,
+                    showAdditionCriteria: showAdditionCriteria,
+                    showAdditionUserCriteria: showAdditionUserCriteria,
+                    showAdditionalSurveyQuestions: showAdditionalSurveyQuestions,
+                    showAdditionQuizCriteria: showAdditionQuizCriteria,
+                    addBuyItPrice: addBuyItPrice,
+                    couponCategories: couponCategories,
+                    openProductCategoryDialog: openProductCategoryDialog,
+                    quizQuestionStatus: quizQuestionStatus,
+                    quizPriceLbl: quizPriceLbl,
+                    tenPriceLbl: tenPriceLbl,
+                    fivePriceLbl: fivePriceLbl,
+                    threePriceLbl: threePriceLbl,
+                    addDeliveryPrice: addDeliveryPrice,
+                    addQuizQuestPrice: addQuizQuestPrice,
+                    campaignNamePlaceHolderValue: campaignNamePlaceHolderValue,
+                    genderppc: genderppc,
+                    professionppc: professionppc,
+                    ageppc: ageppc,
+                    buyItPriceLbl: buyItPriceLbl,
+                    BetterListitemToAdd: BetterListitemToAdd,
+                    allCouponCodeItems: allCouponCodeItems,
+                    selectedCouponCodeItems: selectedCouponCodeItems,
+                    DefaultTextBtns: DefaultTextBtns,
+                    addItemToCouponCodeList: addItemToCouponCodeList,
+                    removeSelectedCouponCodeItem: removeSelectedCouponCodeItem,
+                    opencouponCodesDialog: opencouponCodesDialog,
+                    campaignCSVCallback: campaignCSVCallback,
+                    updateExistingCodeVal: updateExistingCodeVal,
+                    UsedCouponQuantity: UsedCouponQuantity,
+                    advertiserLogo: advertiserLogo,
+                    openVideoDialog: openVideoDialog,
+                    previewVideoTagUrl: previewVideoTagUrl,
+                    closePreviewDialog: closePreviewDialog,
+                    LogoUrlImageCallback: LogoUrlImageCallback,
+                    randonNumber: randonNumber,
+                    vouchers: vouchers,
+                    voucherPriceLbl: voucherPriceLbl,
+                    numberOFCouponsToGenerate: numberOFCouponsToGenerate,
+                    showCouponGenerationWarning: showCouponGenerationWarning,
+                    previewScreenNumber: previewScreenNumber,
+                    nextPreviewScreen: nextPreviewScreen,
+                    gotoScreen: gotoScreen,
+                    backScreen: backScreen,
+                    CurrPage: CurrPage,
+                    MaxPage: MaxPage,
+                    SearchSelectedStatus: SearchSelectedStatus,
+                    SaveDraftCampaign: SaveDraftCampaign,
+                    VideoUrlCallback: VideoUrlCallback,
+                    VideoLink2src: VideoLink2src,
+                    FlagToShowDivs: FlagToShowDivs,
+                    TodisplayImg: TodisplayImg,
+                    showAdditionUserSurveyCriteria: showAdditionUserSurveyCriteria,
+                    surveyquestionList: surveyquestionList,
+                    surveyAnswerList: surveyAnswerList,
+                    saveSurveyQuestion: saveSurveyQuestion,
+                    updateSurveyCriteriass: updateSurveyCriteriass,
+                    ShowAudienceCounter: ShowAudienceCounter,
+                    IsShownforVideo: IsShownforVideo,
+                    UrlHeadings: UrlHeadings,
+                    GetAnswers: GetAnswers,
+                    SearchProfileQuestion: SearchProfileQuestion,
+                    getQuestionByFilter: getQuestionByFilter,
+                    submitResumeData: submitResumeData,
+                    IsprofileQuestion: IsprofileQuestion,
+                    Modelheading: Modelheading
+                };
+            })()
         };
-        return {
-            initialize: initialize,
-            pager: pager,
-            hasChangesOnQuestion: hasChangesOnQuestion,
-            isEditorVisible: isEditorVisible,
-            campaignGridContent: campaignGridContent,
-            addNewCampaign: addNewCampaign,
-            langs: langs,
-            campaignModel: campaignModel,
-                   
-            closeNewCampaignDialog: closeNewCampaignDialog,
-            selectedCriteria: selectedCriteria,
-            profileQuestionList: profileQuestionList,
-            profileAnswerList: profileAnswerList,
-            saveCriteria: saveCriteria,
-            onDeleteCriteria: onDeleteCriteria,
-            onEditCriteria: onEditCriteria,
-            addNewProfileCriteria: addNewProfileCriteria,
-            onChangeProfileQuestion: onChangeProfileQuestion,
-            myQuizQuestions: myQuizQuestions,
-            //   addNewSurveyCriteria: addNewSurveyCriteria,
-            onChangeSurveyQuestion: onChangeSurveyQuestion,
-            getCampaignByFilter: getCampaignByFilter,
-            searchFilterValue: searchFilterValue,
-            isShowSurveyAns: isShowSurveyAns,
-            selectedLocation: selectedLocation,
-            selectedLocationRadius: selectedLocationRadius,
-            selectedLocationIncludeExclude: selectedLocationIncludeExclude,
-            selectedLangIncludeExclude: selectedLangIncludeExclude,
-            selectedLocationLat: selectedLocationLat,
-            selectedLocationLong: selectedLocationLong,
-            onAddLocation: onAddLocation,
-            onRemoveLocation: onRemoveLocation,
-            deleteLocation: deleteLocation,
-            addLanguage: addLanguage,
-            onRemoveLanguage: onRemoveLanguage,
-            deleteLanguage: deleteLanguage,
-            ageRange: ageRange,
-            isNewCriteria: isNewCriteria,
-            isEnableVedioVerificationLink: isEnableVedioVerificationLink,
-            campaignTypePlaceHolderValue: campaignTypePlaceHolderValue,
-            OnChangeCampaignType: OnChangeCampaignType,
-            campaignTypeImageCallback: campaignTypeImageCallback,
-            campaignImageCallback: campaignImageCallback,
-            CouponImage4Callback: CouponImage4Callback,
-            CouponImage3Callback: CouponImage3Callback,
-            couponImage2Callback: couponImage2Callback,
-            correctAnswers: correctAnswers,
-            onEditCampaign: onEditCampaign,
-            canSubmitForApproval: canSubmitForApproval,
-            isTerminateBtnVisible: isTerminateBtnVisible,
-            isNewCampaignVisible: isNewCampaignVisible,
-            isShowArchiveBtn: isShowArchiveBtn,
-            submitCampaignData: submitCampaignData,
-            removeAdd: removeAdd,
-            selectedIndustryIncludeExclude: selectedIndustryIncludeExclude,
-            addIndustry: addIndustry,
-            onRemoveIndustry: onRemoveIndustry,
-            visibleTargetAudience: visibleTargetAudience,
-            pricePerclick: pricePerclick,
-            selectedEducationIncludeExclude: selectedEducationIncludeExclude,
-            addEducation: addEducation,
-            reachedAudience: reachedAudience,
-            audienceReachMode: audienceReachMode,
-            onRemoveEducation: onRemoveEducation,
-            bindAudienceReachCount: bindAudienceReachCount,
-            errorListNew: errorListNew,
-            addCountryToCountryList: addCountryToCountryList,
-            findLocationsInCountry: findLocationsInCountry,
-            selectedQuestionCountryList: selectedQuestionCountryList,
-            changeStatus: changeStatus,
-            educations: educations,
-            professions: professions,
-            addNewEducationCriteria: addNewEducationCriteria,
-            addNewProfessionCriteria: addNewProfessionCriteria,
-            voucherQuestionStatus: voucherQuestionStatus,
-            ChangeVoucherSettings: ChangeVoucherSettings,
-            VoucherImageCallback: VoucherImageCallback,
-            saveProfileQuestion: saveProfileQuestion,
-            updateProfileQuestion: updateProfileQuestion,
-            updateSurveyCriteria: updateSurveyCriteria,
-            buyItQuestionStatus: buyItQuestionStatus,
-            buyItImageCallback: buyItImageCallback,
-            openEditScreen: openEditScreen,
-            isWelcomeScreenVisible: isWelcomeScreenVisible,
-            isDetailEditorVisible: isDetailEditorVisible,
-            isListVisible: isListVisible,
-            isNewCampaign: isNewCampaign,
-            BackToAds: BackToAds,
-            MainHeading: MainHeading,
-            uploadTitle:uploadTitle,
-            SubHeading: SubHeading,
-            ShowAdCampaigns: ShowAdCampaigns,
-            ShowCouponPromotions: ShowCouponPromotions,
-            isDisplayCouponsAds: isDisplayCouponsAds,
-            lblCampaignName: lblCampaignName,
-            lblDetailsHeading: lblDetailsHeading,
-            lblAdTitle: lblAdTitle,
-            lblFirstLine: lblFirstLine,
-            lbllSecondLine: lbllSecondLine,
-            lblCampaignSchedule: lblCampaignSchedule,
-            tab1Heading: tab1Heading,
-            tab2Heading: tab2Heading,
-            tab4SubHeading: tab4SubHeading,
-
-            gotoProfile: gotoProfile,
-            gotoManageUsers: gotoManageUsers,
-            ArchiveCampaign: ArchiveCampaign,
-            copyCampaign: copyCampaign,
-            AditionalCriteriaMode: AditionalCriteriaMode,
-            showCompanyProfileQuestions:showCompanyProfileQuestions,
-            showAdditionCriteria: showAdditionCriteria,
-            showAdditionUserCriteria: showAdditionUserCriteria,
-            showAdditionalSurveyQuestions:showAdditionalSurveyQuestions,
-            showAdditionQuizCriteria: showAdditionQuizCriteria,
-            addBuyItPrice: addBuyItPrice,
-            couponCategories: couponCategories,
-            openProductCategoryDialog: openProductCategoryDialog,
-            quizQuestionStatus: quizQuestionStatus,
-            quizPriceLbl: quizPriceLbl,
-            tenPriceLbl: tenPriceLbl,
-            fivePriceLbl: fivePriceLbl,
-            threePriceLbl: threePriceLbl,
-            addDeliveryPrice: addDeliveryPrice,
-            addQuizQuestPrice: addQuizQuestPrice,
-            campaignNamePlaceHolderValue: campaignNamePlaceHolderValue,
-            genderppc: genderppc,
-            professionppc: professionppc,
-            ageppc: ageppc,
-            buyItPriceLbl: buyItPriceLbl,
-            BetterListitemToAdd: BetterListitemToAdd,
-            allCouponCodeItems: allCouponCodeItems,
-            selectedCouponCodeItems: selectedCouponCodeItems,
-            DefaultTextBtns:DefaultTextBtns,
-            addItemToCouponCodeList: addItemToCouponCodeList,
-            removeSelectedCouponCodeItem: removeSelectedCouponCodeItem,
-            opencouponCodesDialog: opencouponCodesDialog,
-            campaignCSVCallback: campaignCSVCallback,
-            updateExistingCodeVal: updateExistingCodeVal,
-            UsedCouponQuantity: UsedCouponQuantity,
-            advertiserLogo: advertiserLogo,
-            openVideoDialog: openVideoDialog,
-            previewVideoTagUrl: previewVideoTagUrl,
-            closePreviewDialog: closePreviewDialog,
-            LogoUrlImageCallback: LogoUrlImageCallback,
-            randonNumber: randonNumber,
-            vouchers: vouchers,
-            voucherPriceLbl: voucherPriceLbl,
-            numberOFCouponsToGenerate: numberOFCouponsToGenerate,
-            showCouponGenerationWarning: showCouponGenerationWarning,
-            previewScreenNumber: previewScreenNumber,
-            nextPreviewScreen: nextPreviewScreen,
-            gotoScreen: gotoScreen,
-            backScreen: backScreen,
-            CurrPage: CurrPage,
-            MaxPage: MaxPage,
-            SearchSelectedStatus: SearchSelectedStatus,
-            SaveDraftCampaign: SaveDraftCampaign,
-            VideoUrlCallback: VideoUrlCallback,
-            VideoLink2src: VideoLink2src,
-            FlagToShowDivs: FlagToShowDivs,
-            TodisplayImg: TodisplayImg,
-            showAdditionUserSurveyCriteria: showAdditionUserSurveyCriteria,
-            surveyquestionList: surveyquestionList,
-            surveyAnswerList: surveyAnswerList,
-            saveSurveyQuestion: saveSurveyQuestion,
-            updateSurveyCriteriass: updateSurveyCriteriass,
-            ShowAudienceCounter: ShowAudienceCounter,
-            IsShownforVideo: IsShownforVideo,
-            UrlHeadings: UrlHeadings,
-            GetAnswers: GetAnswers,
-            SearchProfileQuestion: SearchProfileQuestion,
-            getQuestionByFilter: getQuestionByFilter,
-            submitResumeData: submitResumeData,
-            IsprofileQuestion: IsprofileQuestion,
-            Modelheading: Modelheading
-        };
-    })()
-};
-return ist.Ads.viewModel;
-});
+        return ist.Ads.viewModel;
+    });
