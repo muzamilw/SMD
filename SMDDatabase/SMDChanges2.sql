@@ -1757,11 +1757,6 @@ COMMIT
 
 
 /****** Added by hadia to delete previous SPs ******/
-GO
-
-/****** Object:  StoredProcedure [dbo].[GetAdminDashBoardInsights1]    Script Date: 10/7/2016 5:01:55 PM ******/
-DROP PROCEDURE [dbo].[GetAdminDashBoardInsights1]
-GO
 
 GO
 

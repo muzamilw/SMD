@@ -725,6 +725,7 @@
     <Content Include="Areas\Report\Views\Report\WalletReport1.cshtml" />
     <Content Include="Areas\Franchise\Views\Dashboard\TransferRateDashboard.cshtml" />
     <Content Include="Areas\Report\Views\Report\WalletReport.cshtml" />
+    <Content Include="Areas\Ads\Views\Ads\_advertDashboard.cshtml" />
     <None Include="config\Web.connectionstrings.config">
       <SubType>Designer</SubType>
     </None>

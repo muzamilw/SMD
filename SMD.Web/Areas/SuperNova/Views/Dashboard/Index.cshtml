@@ -55,7 +55,7 @@
 
                             </tr>
                             <tr>
-                                <td><span class="h4">#Users</span></td>
+                                <td><span class="h4"># Users</span></td>
                                 <td> </td>
                                 <td class="text-right">
                                     <span class="Theme_subheading-Clr  font14">
@@ -129,7 +129,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <br />
-                <h1 style="padding-left:7px!important;">Campaigns by Status type </h1>
+                <h1 style="padding-left:7px!important;"># Campaigns by status type </h1>
             </div>
         </div>
         <div class="row main-box">
@@ -186,7 +186,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <br />
-                <h1 style="padding-left:7px!important;">Logged in and Registered User counts </h1>
+                <h1 style="padding-left:7px!important;"># Logged in, registered and deleted User</h1>
             </div>
         </div>
         <div class="row main-box">
@@ -317,11 +317,11 @@
 <script id="DashboardInsightTemplate" type="text/html">
     <tr style="border-bottom: none;">
         <td class="col-sm-3 font14">
-            <!-- ko if: activity() === "# Answered" ||  activity() === "# Skipped" || activity() === "#Conversion to landing pages" || activity() === "# Openeded" || activity() === "$ Revenue by Campaign types"  || activity() === "$ Total Revenue (Stripe)"  || activity() === "$ Total Payouts (PayPal)" -->
+            <!-- ko if: activity() === "# Answered" ||  activity() === "# Skipped" || activity() === "# Conversion to landing pages" || activity() === "# Openeded" || activity() === "$ Revenue by campaign types"  || activity() === "$ Total revenue (stripe)"  || activity() === "$ Total payouts (payPal)" -->
             <span class="h4" data-bind="text: activity"></span>
             <!-- /ko -->
 
-            <!-- ko ifnot: activity() === "# Answered" ||  activity() === "# Skipped" || activity() === "#Conversion to landing pages" || activity() === "# Openeded" || activity() === "$ Revenue by Campaign types"  || activity() === "$ Total Revenue (Stripe)"  || activity() === "$ Total Payouts (PayPal)" -->
+            <!-- ko ifnot: activity() === "# Answered" ||  activity() === "# Skipped" || activity() === "# Conversion to landing pages" || activity() === "# Openeded" || activity() === "$ Revenue by campaign types"  || activity() === "$ Total revenue (stripe)"  || activity() === "$ Total payouts (payPal)" -->
             <span class="paddingLeft20px" data-bind="text: activity"></span>
             <!-- /ko -->
         </td>
