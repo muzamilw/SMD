@@ -478,6 +478,8 @@ namespace SMD.Implementation.Services
                 // Ad Viewer will get 50% and other 50% will be divided b/w SMD (30%), Affiliate(20%) (Referrer) if exists
                 double? adClickRate = adCampaign.ClickRate ?? 0;
 
+                adClickRate = adClickRate * 100;
+
                 adViewersCut = adClickRate / 2; // commenting for pilot launch, now smd hace no percentage and all the money will go to user account from advertiser account. So there will be 2 transactions now advertiser debit transaction and user credit transaction ((adClickRate * 50) / 100); 
                 double? smdsCut = 0;
                 double? referralCut = 0;
@@ -1190,15 +1192,15 @@ namespace SMD.Implementation.Services
 
                 if (user.Company != null)
                 {
-                    // update user name  and cuntry name for api 
-                    if (user.Company.Country != null)
-                        user.CountryName = user.Company.Country.CountryName;
-                    if (user.Company.City != null)
-                        user.CityName = user.Company.City;
+                    //// update user name  and cuntry name for api 
+                    //if (user.Company.Country != null)
+                    //    user.CountryName = user.Company.Country.CountryName;
+                    //if (user.Company.City != null)
+                    //    user.CityName = user.Company.City;
                 }
                 else
                 {
-                    user.AuthenticationToken = Guid.NewGuid().ToString();
+                   
                     var CompanyId = companyRepository.createCompany(user.Id, request.Email, request.FullName, user.AuthenticationToken);
                     accountService.AddAccountsForNewUser(CompanyId);
                     TransactionManager.UserSignupFreeGiftBalanceTransaction(500, CompanyId);
@@ -1229,7 +1231,7 @@ namespace SMD.Implementation.Services
                         {
                             Message = LanguageResources.WebApiUserService_ProviderKeyInvalid
                         };
-                    }  
+                    }
                        
                 }
 
@@ -1241,8 +1243,11 @@ namespace SMD.Implementation.Services
                     };
                 }
                 // update GUID 
-                user.AuthenticationToken = Guid.NewGuid().ToString();
                 user.LastLoginTime = DateTime.Now;
+                user.CityName = request.City;
+                user.CountryName = request.Country;
+                user.AuthenticationToken = Guid.NewGuid().ToString();
+                
                 await UserManager.UpdateAsync(user);
 
                 // Login user

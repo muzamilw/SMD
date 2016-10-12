@@ -490,7 +490,8 @@ define("ads/ads.viewModel",
                 $("#headdesc").css("display", "block")
 
             },
-                GetAudienceCount = function (val) {
+
+
                     while (/(\d+)(\d{3})/.test(val.toString())) {
                         val = val.toString().replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
                     }
@@ -722,7 +723,9 @@ define("ads/ads.viewModel",
                     }
                 },
 
-              removeAdd = function () {
+              removeAdd = function (item) {
+                  if (item.Status() == 1)
+                      campaignModel().CampaignID(item.CampaignID());
                   confirmation.messageText("Are you sure you want to remove this ad ? This action cannot be undone.");
                   confirmation.show();
                   confirmation.afterCancel(function () {

@@ -1756,6 +1756,7 @@ COMMIT
 
 
 
+-------------------------------------- all scripts above executed on server   7 october.
 /****** Added by hadia to delete previous SPs ******/
 
 GO

@@ -1,6 +1,6 @@
 ﻿
 GO
-/****** Object:  StoredProcedure [dbo].[GetCouponByID]    Script Date: 9/30/2016 12:19:30 PM ******/
+/****** Object:  StoredProcedure [dbo].[GetCouponByID]    Script Date: 10/7/2016 10:30:20 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -149,7 +149,8 @@ SELECT [CouponId]
 	c.BuyitLandingPageUrl,
 	c.BuyitBtnLabel,
 	comp.AboutUsDescription,
-	comp.CompanyName
+	comp.CompanyName,
+	curr.CurrencyCode
 
 
 

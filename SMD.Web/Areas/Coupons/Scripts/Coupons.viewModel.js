@@ -554,7 +554,10 @@ define("Coupons/Coupons.viewModel",
                     }
                 }
             },
-              terminateCampaign = function () {
+              terminateCampaign = function (item) {
+                  if (item.Status() == 1)
+                      couponModel().CouponId(item.CouponId());
+
                   confirmation.messageText("Are you sure you want to remove this ad ? This action cannot be undone.");
                   confirmation.show();
                   confirmation.afterCancel(function () {
