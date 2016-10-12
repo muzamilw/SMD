@@ -9,6 +9,7 @@ namespace SMD.MIS.Areas.Ads.Controllers
         {
             return View();
         }
+       
         
     }
 }

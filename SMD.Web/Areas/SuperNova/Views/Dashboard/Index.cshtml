@@ -186,7 +186,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <br />
-                <h1 style="padding-left:7px!important;"># Logged in, registered and deleted User</h1>
+                <h1 style="padding-left:7px!important;"># Logged in, registered and deleted users</h1>
             </div>
         </div>
         <div class="row main-box">
@@ -198,19 +198,19 @@
                                 <th> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                                 <th class="text-left">
                                     <span class="GridHeaderFont_size">
-                                        Within 7 days
+                                        Within 7 Days
                                     </span>
                                 </th>
 
                                 <th class="text-left">
                                     <span class="GridHeaderFont_size">
-                                        14 days
+                                        14 Days
                                     </span>
                                 </th>
 
                                 <th class="text-left">
                                     <span class="GridHeaderFont_size">
-                                        30 days
+                                        30 Days
                                     </span>
                                 </th>
 
@@ -254,14 +254,14 @@
             <div class="row">
                 <div class="col-lg-12">
                     <br />
-                    <h1 style="padding-left:7px!important;">Pay Pal Payout vs All Revenue</h1>
+                    <h1 style="padding-left:7px!important;">Paypal payout vs all revenue</h1>
                 </div>
             </div>
             <div class="row main-box">
                 <div class="col-lg-12">
                     <div class=" margin10">
 
-                        <div class="margin-Top-30" data-bind="morris: {type: 'Line', data: $root.PayoutVSRevenueOverTimeData, xkey: 'Granual', ykeys: ['revStats', 'PayoutStats'], labels: ['All Revenue', 'Payout to Paypal'], parseTime:false, setAxisAlignFirstX: true, lineColors: ['blue','red']}"></div>
+                        <div class="margin-Top-30" data-bind="morris: {type: 'Line', data: $root.PayoutVSRevenueOverTimeData, xkey: 'Granual', ykeys: ['revStats', 'PayoutStats'], labels: ['All Revenue', 'Payout to Paypal'], parseTime:false, setAxisAlignFirstX: true, lineColors: ['blue','red'], preUnits: '$' }"></div>
 
                     </div>
                 </div>
@@ -270,7 +270,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <br />
-                <h1 style="padding-left:7px!important;"> New Registrations vs Logged in vs deleted</h1>
+                <h1 style="padding-left:7px!important;"> New registrations vs logged in vs deleted</h1>
             </div>
         </div>
         <div class="row main-box">
@@ -283,7 +283,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <br />
-                <h1 style="padding-left:7px!important;"> Live Campaign Counts</h1>
+                <h1 style="padding-left:7px!important;"> Live campaigns counts</h1>
             </div>
         </div>
         <div class="row main-box">
@@ -297,7 +297,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <br />
-                <h1 style="padding-left:7px!important;">Revenue by Campaign</h1>
+                <h1 style="padding-left:7px!important;">Revenue by campaign</h1>
             </div>
         </div>
         <div class="row main-box">
@@ -306,7 +306,7 @@
                     <select class="form-control" style="width:35%!important;" id="ddprevenue" data-bind="options: $root.CampaignTypeDD, optionsText: 'name', optionsValue: 'id', value:$root.rCampaignType, event: { change: $root.getRevenueOverTime }"></select>
 
 
-                    <div class="margin-Top-30" data-bind="morris: {type: 'Line', data: $root.RevenueOverTimeData, xkey: 'Granual', ykeys: ['Revenue'], labels: ['Revenue'], parseTime:false, setAxisAlignFirstX: true}"></div>
+                    <div class="margin-Top-30" data-bind="morris: {type: 'Line', data: $root.RevenueOverTimeData, xkey: 'Granual', ykeys: ['Revenue'], labels: ['Revenue'], parseTime:false, setAxisAlignFirstX: true, preUnits: '$'}"></div>
 
                 </div>
             </div>
@@ -317,11 +317,11 @@
 <script id="DashboardInsightTemplate" type="text/html">
     <tr style="border-bottom: none;">
         <td class="col-sm-3 font14">
-            <!-- ko if: activity() === "# Answered" ||  activity() === "# Skipped" || activity() === "# Conversion to landing pages" || activity() === "# Openeded" || activity() === "$ Revenue by campaign types"  || activity() === "$ Total revenue (stripe)"  || activity() === "$ Total payouts (payPal)" -->
+            <!-- ko if: activity() === "# Answered" ||  activity() === "# Skipped" || activity() === "# Conversion to landing pages" || activity() === "# Opened" || activity() === "$ Revenue by campaign types"  || activity() === "$ Total revenue (stripe)"  || activity() === "$ Total payouts (payPal)" -->
             <span class="h4" data-bind="text: activity"></span>
             <!-- /ko -->
 
-            <!-- ko ifnot: activity() === "# Answered" ||  activity() === "# Skipped" || activity() === "# Conversion to landing pages" || activity() === "# Openeded" || activity() === "$ Revenue by campaign types"  || activity() === "$ Total revenue (stripe)"  || activity() === "$ Total payouts (payPal)" -->
+            <!-- ko ifnot: activity() === "# Answered" ||  activity() === "# Skipped" || activity() === "# Conversion to landing pages" || activity() === "# Opened" || activity() === "$ Revenue by campaign types"  || activity() === "$ Total revenue (stripe)"  || activity() === "$ Total payouts (payPal)" -->
             <span class="paddingLeft20px" data-bind="text: activity"></span>
             <!-- /ko -->
         </td>

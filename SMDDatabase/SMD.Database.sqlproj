@@ -70,6 +70,9 @@
     <None Include="getPayoutVSRevenueOverTime.sql" />
     <None Include="GetRevenueByCampaignOverTime.sql" />
     <None Include="GetLiveCampaignCountOverTime.sql" />
+    <None Include="getAdsCampaignByCampaignId.sql" />
+    <None Include="getPollsBySQID.sql" />
+    <None Include="getSurvayByPQID.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="getCampaignsByStatus.sql" />

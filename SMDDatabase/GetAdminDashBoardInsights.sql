@@ -1,6 +1,5 @@
-﻿
-GO
-/****** Object:  StoredProcedure [dbo].[GetAdminDashBoardInsights]    Script Date: 10/6/2016 5:57:25 PM ******/
+﻿GO
+/****** Object:  StoredProcedure [dbo].[GetAdminDashBoardInsights]    Script Date: 10/12/2016 11:20:12 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -32,7 +31,7 @@ from
 		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, u.CreatedDateTime), 0) ,  c.CountryCode
 		union
 
-		select 2 ordr, count(distinct(CompanyId)) stats, CountryCode , pMonth, 'Advertisers who created a NEW campaign' rectype  from  (
+		select 2 ordr, count(distinct(CompanyId)) stats, CountryCode , pMonth, 'Advertisers who created a new campaign' rectype  from  (
 		select sq.sqid, sq.CompanyId as CompanyId , c.CountryCode , (case when month( DATEADD(MONTH,DATEDIFF(MONTH, 0, evntHis.MinDateTime), 0)) = month(getdate()) then 'current' else 'prev' end) pMonth
 		from SurveyQuestion sq
 		inner join 	(SELECT SQID, MIN(EventDateTime) AS MinDateTime
@@ -136,18 +135,18 @@ from
 		select 9 as ordr,   count(acr.ResponseID) stats, c.CountryCode , (case when month( DATEADD(MONTH,DATEDIFF(MONTH, 0, acr.CreatedDateTime), 0)) = month(getdate()) then 'current' else 'prev' end) pMonth,'Video Quiz Ad clicks' rectype
 		from AdCampaignResponse acr
 		inner join AdCampaign ac on ac.CampaignID = acr.CampaignID
-		inner join Company co on acr.CompanyId = co.CompanyId
+		inner join Company co on ac.CompanyId = co.CompanyId
 		inner join Country c on co.CountryId = c.CountryID
-		where acr.CreatedDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND ac.Type = 1 AND acr.ResponseType = 1
+		where acr.CreatedDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND ac.Type = 1 AND acr.ResponseType = 3
 		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, acr.CreatedDateTime), 0) ,  c.CountryCode
 		union 
 
 		select 10 as ordr,   count(acr.ResponseID) stats, c.CountryCode , (case when month( DATEADD(MONTH,DATEDIFF(MONTH, 0, acr.CreatedDateTime), 0)) = month(getdate()) then 'current' else 'prev' end) pMonth,'Game quiz Ad clicks' rectype
 		from AdCampaignResponse acr
 		inner join AdCampaign ac on ac.CampaignID = acr.CampaignID
-		inner join Company co on acr.CompanyId = co.CompanyId
+		inner join Company co on ac.CompanyId = co.CompanyId
 		inner join Country c on co.CountryId = c.CountryID
-		where acr.CreatedDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND ac.Type = 4 AND acr.ResponseType = 1
+		where acr.CreatedDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND ac.Type = 4 AND acr.ResponseType = 3
 		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, acr.CreatedDateTime), 0) ,  c.CountryCode
 
 		union
@@ -155,7 +154,7 @@ from
 		from ProfileQuestionUserAnswer pqua
 		inner join Company co on pqua.CompanyId = co.CompanyId
 		inner join Country c on co.CountryId = c.CountryID
-		where pqua.AnswerDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2))  AND pqua.ResponseType = 1
+		where pqua.AnswerDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2))  AND pqua.ResponseType = 3
 		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, pqua.AnswerDateTime), 0) ,  c.CountryCode
 
 		union
@@ -163,7 +162,7 @@ from
 		from SurveyQuestionResponse sqr
 		inner join Company co on sqr.CompanyId = co.CompanyId
 		inner join Country c on co.CountryId = c.CountryID
-		where sqr.ResoponseDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND sqr.ResponseType = 1
+		where sqr.ResoponseDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND sqr.ResponseType = 3
 		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, sqr.ResoponseDateTime), 0) ,  c.CountryCode
 
 		union 
@@ -171,18 +170,18 @@ from
 		select 15 as ordr,   count(acr.ResponseID) stats, c.CountryCode , (case when month( DATEADD(MONTH,DATEDIFF(MONTH, 0, acr.CreatedDateTime), 0)) = month(getdate()) then 'current' else 'prev' end) pMonth,'Video ads skipped' rectype
 		from AdCampaignResponse acr
 		inner join AdCampaign ac on ac.CampaignID = acr.CampaignID
-		inner join Company co on acr.CompanyId = co.CompanyId
+		inner join Company co on ac.CompanyId = co.CompanyId
 		inner join Country c on co.CountryId = c.CountryID
-		where acr.CreatedDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND ac.Type = 1 AND acr.ResponseType = 2
+		where acr.CreatedDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND ac.Type = 1 AND acr.ResponseType = 4
 		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, acr.CreatedDateTime), 0) ,  c.CountryCode
 		union 
 
 		select 16 as ordr,   count(acr.ResponseID) stats, c.CountryCode , (case when month( DATEADD(MONTH,DATEDIFF(MONTH, 0, acr.CreatedDateTime), 0)) = month(getdate()) then 'current' else 'prev' end) pMonth,'Games skipped' rectype
 		from AdCampaignResponse acr
 		inner join AdCampaign ac on ac.CampaignID = acr.CampaignID
-		inner join Company co on acr.CompanyId = co.CompanyId
+		inner join Company co on ac.CompanyId = co.CompanyId
 		inner join Country c on co.CountryId = c.CountryID
-		where acr.CreatedDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND ac.Type = 4 AND acr.ResponseType = 2
+		where acr.CreatedDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND ac.Type = 4 AND acr.ResponseType = 4
 		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, acr.CreatedDateTime), 0) ,  c.CountryCode
 
 		union
@@ -191,7 +190,7 @@ from
 		from ProfileQuestionUserAnswer pqua
 		inner join Company co on pqua.CompanyId = co.CompanyId
 		inner join Country c on co.CountryId = c.CountryID
-		where pqua.AnswerDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2))  AND pqua.ResponseType = 2
+		where pqua.AnswerDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2))  AND pqua.ResponseType = 4
 		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, pqua.AnswerDateTime), 0) ,  c.CountryCode
 
 		union
@@ -199,25 +198,25 @@ from
 		from SurveyQuestionResponse sqr
 		inner join Company co on sqr.CompanyId = co.CompanyId
 		inner join Country c on co.CountryId = c.CountryID
-		where sqr.ResoponseDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND sqr.ResponseType = 2
+		where sqr.ResoponseDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND sqr.ResponseType = 4
 		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, sqr.ResoponseDateTime), 0) ,  c.CountryCode
 
 		union
 		select 21 as ordr,   count(acr.ResponseID) stats, c.CountryCode , (case when month( DATEADD(MONTH,DATEDIFF(MONTH, 0, acr.CreatedDateTime), 0)) = month(getdate()) then 'current' else 'prev' end) pMonth,'Videos referred to landing pages' rectype
 		from AdCampaignResponse acr
 		inner join AdCampaign ac on ac.CampaignID = acr.CampaignID
-		inner join Company co on acr.CompanyId = co.CompanyId
+		inner join Company co on ac.CompanyId = co.CompanyId
 		inner join Country c on co.CountryId = c.CountryID
-		where acr.CreatedDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND ac.Type = 1 AND acr.ResponseType = 3
+		where acr.CreatedDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND ac.Type = 1 AND acr.ResponseType = 2
 		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, acr.CreatedDateTime), 0) ,  c.CountryCode
 
 		union
 		select 22 as ordr,   count(acr.ResponseID) stats, c.CountryCode , (case when month( DATEADD(MONTH,DATEDIFF(MONTH, 0, acr.CreatedDateTime), 0)) = month(getdate()) then 'current' else 'prev' end) pMonth,'Games referred to landing pages' rectype
 		from AdCampaignResponse acr
 		inner join AdCampaign ac on ac.CampaignID = acr.CampaignID
-		inner join Company co on acr.CompanyId = co.CompanyId
+		inner join Company co on ac.CompanyId = co.CompanyId
 		inner join Country c on co.CountryId = c.CountryID
-		where acr.CreatedDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND ac.Type = 4 AND acr.ResponseType = 3
+		where acr.CreatedDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND ac.Type = 4 AND acr.ResponseType = 2
 		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, acr.CreatedDateTime), 0) ,  c.CountryCode
 
 		union
@@ -226,25 +225,25 @@ from
 		inner join Coupon cpn on cpn.CouponId = upc.CouponId
 		inner join Company co on cpn.CompanyId = co.CompanyId
 		inner join Country c on co.CountryId = c.CountryID
-		where upc.PurchaseDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND upc.ResponseType = 3
+		where upc.PurchaseDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND upc.ResponseType = 2
 		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, upc.PurchaseDateTime), 0) ,  c.CountryCode
 
 		union
 		select 26 as ordr,   count(acr.ResponseID) stats, c.CountryCode , (case when month( DATEADD(MONTH,DATEDIFF(MONTH, 0, acr.CreatedDateTime), 0)) = month(getdate()) then 'current' else 'prev' end) pMonth,'Video Quiz Ad clicks' rectype
 		from AdCampaignResponse acr
 		inner join AdCampaign ac on ac.CampaignID = acr.CampaignID
-		inner join Company co on acr.CompanyId = co.CompanyId
+		inner join Company co on ac.CompanyId = co.CompanyId
 		inner join Country c on co.CountryId = c.CountryID
-		where acr.CreatedDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND ac.Type = 1 AND acr.ResponseType = 4
+		where acr.CreatedDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND ac.Type = 1 AND acr.ResponseType = 1
 		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, acr.CreatedDateTime), 0) ,  c.CountryCode
 		union 
 
 		select 27 as ordr,   count(acr.ResponseID) stats, c.CountryCode , (case when month( DATEADD(MONTH,DATEDIFF(MONTH, 0, acr.CreatedDateTime), 0)) = month(getdate()) then 'current' else 'prev' end) pMonth,'Game quiz Ad clicks' rectype
 		from AdCampaignResponse acr
 		inner join AdCampaign ac on ac.CampaignID = acr.CampaignID
-		inner join Company co on acr.CompanyId = co.CompanyId
+		inner join Company co on ac.CompanyId = co.CompanyId
 		inner join Country c on co.CountryId = c.CountryID
-		where acr.CreatedDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND ac.Type = 4 AND acr.ResponseType = 4
+		where acr.CreatedDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND ac.Type = 4 AND acr.ResponseType = 1
 		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, acr.CreatedDateTime), 0) ,  c.CountryCode
 
 		union
@@ -252,7 +251,7 @@ from
 		from ProfileQuestionUserAnswer pqua
 		inner join Company co on pqua.CompanyId = co.CompanyId
 		inner join Country c on co.CountryId = c.CountryID
-		where pqua.AnswerDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2))  AND pqua.ResponseType = 4
+		where pqua.AnswerDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2))  AND pqua.ResponseType = 1
 		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, pqua.AnswerDateTime), 0) ,  c.CountryCode
 
 		union
@@ -260,7 +259,7 @@ from
 		from SurveyQuestionResponse sqr
 		inner join Company co on sqr.CompanyId = co.CompanyId
 		inner join Country c on co.CountryId = c.CountryID
-		where sqr.ResoponseDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND sqr.ResponseType = 4
+		where sqr.ResoponseDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND sqr.ResponseType = 1
 		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, sqr.ResoponseDateTime), 0) ,  c.CountryCode
 
 		union
@@ -269,7 +268,7 @@ from
 		inner join Coupon cpn on cpn.CouponId = upc.CouponId
 		inner join Company co on cpn.CompanyId = co.CompanyId
 		inner join Country c on co.CountryId = c.CountryID
-		where upc.PurchaseDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND upc.ResponseType = 4
+		where upc.PurchaseDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND upc.ResponseType = 1
 		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, upc.PurchaseDateTime), 0) ,  c.CountryCode
 
 
