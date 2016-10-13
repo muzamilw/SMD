@@ -2368,6 +2368,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Parameter Name="DateRange" Type="int" Mode="In" />
           <Parameter Name="Granularity" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetApprovalCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetAudience" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ageFrom" Type="int" Mode="In" />
           <Parameter Name="ageTo" Type="int" Mode="In" />
@@ -2422,6 +2423,12 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
         </Function>
         <Function Name="getDealByCouponID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CouponID" Type="int" Mode="In" />
+          <Parameter Name="DateRange" Type="int" Mode="In" />
+          <Parameter Name="Granularity" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getDisplayAdsCampaignByCampaignIdAnalytics" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CampaignId" Type="int" Mode="In" />
+          <Parameter Name="status" Type="int" Mode="In" />
           <Parameter Name="DateRange" Type="int" Mode="In" />
           <Parameter Name="Granularity" Type="int" Mode="In" />
         </Function>
@@ -3771,6 +3778,13 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           </FunctionImport>
           <FunctionImport Name="getSurvayByPQID" ReturnType="Collection(DomainModels.getSurvayByPQID_Result)">
             <Parameter Name="PQId" Mode="In" Type="Int32" />
+            <Parameter Name="status" Mode="In" Type="Int32" />
+            <Parameter Name="DateRange" Mode="In" Type="Int32" />
+            <Parameter Name="Granularity" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetApprovalCount" ReturnType="Collection(DomainModels.GetApprovalCount_Result)" />
+          <FunctionImport Name="getDisplayAdsCampaignByCampaignIdAnalytics" ReturnType="Collection(DomainModels.getDisplayAdsCampaignByCampaignIdAnalytics_Result)">
+            <Parameter Name="CampaignId" Mode="In" Type="Int32" />
             <Parameter Name="status" Mode="In" Type="Int32" />
             <Parameter Name="DateRange" Mode="In" Type="Int32" />
             <Parameter Name="Granularity" Mode="In" Type="Int32" />
@@ -6795,6 +6809,19 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="Int64" Name="openStats" Nullable="true" />
           <Property Type="Int64" Name="Stats" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="GetApprovalCount_Result">
+          <Property Type="Int32" Name="CouponCount" Nullable="true" />
+          <Property Type="Int32" Name="AdCmpaignCount" Nullable="true" />
+          <Property Type="Int32" Name="DisplayAdCount" Nullable="true" />
+          <Property Type="Int32" Name="ProfileQuestionCount" Nullable="true" />
+          <Property Type="Int32" Name="SurveyQuestionCount" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="getDisplayAdsCampaignByCampaignIdAnalytics_Result">
+          <Property Type="String" Name="Granual" Nullable="false" MaxLength="26" />
+          <Property Type="Int64" Name="openStats" Nullable="true" />
+          <Property Type="Double" Name="avgAdClickStats" Nullable="true" />
+          <Property Type="Int64" Name="Stats" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -8445,6 +8472,27 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
               <ComplexTypeMapping TypeName="DomainModels.getSurvayByPQID_Result">
                 <ScalarProperty Name="Granual" ColumnName="Granual" />
                 <ScalarProperty Name="openStats" ColumnName="openStats" />
+                <ScalarProperty Name="Stats" ColumnName="Stats" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetApprovalCount" FunctionName="SMDModel.Store.GetApprovalCount">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.GetApprovalCount_Result">
+                <ScalarProperty Name="CouponCount" ColumnName="CouponCount" />
+                <ScalarProperty Name="AdCmpaignCount" ColumnName="AdCmpaignCount" />
+                <ScalarProperty Name="DisplayAdCount" ColumnName="DisplayAdCount" />
+                <ScalarProperty Name="ProfileQuestionCount" ColumnName="ProfileQuestionCount" />
+                <ScalarProperty Name="SurveyQuestionCount" ColumnName="SurveyQuestionCount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getDisplayAdsCampaignByCampaignIdAnalytics" FunctionName="SMDModel.Store.getDisplayAdsCampaignByCampaignIdAnalytics">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.getDisplayAdsCampaignByCampaignIdAnalytics_Result">
+                <ScalarProperty Name="Granual" ColumnName="Granual" />
+                <ScalarProperty Name="openStats" ColumnName="openStats" />
+                <ScalarProperty Name="avgAdClickStats" ColumnName="avgAdClickStats" />
                 <ScalarProperty Name="Stats" ColumnName="Stats" />
               </ComplexTypeMapping>
             </ResultMapping>

@@ -1,6 +1,6 @@
-﻿
+﻿USE [SMDv2]
 GO
-/****** Object:  StoredProcedure [dbo].[GetUserProfileCompletness]    Script Date: 10/6/2016 3:57:57 PM ******/
+/****** Object:  StoredProcedure [dbo].[GetUserProfileCompletness]    Script Date: 10/13/2016 9:00:45 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -11,20 +11,28 @@ GO
 -- Description:	
 -- =============================================
 ALTER PROCEDURE [dbo].[GetUserProfileCompletness] 
-	--  exec [GetUserProfileCompletness] 'bc23eeda-1605-482c-86ec-401901b2fb13'
+	--  exec [GetUserProfileCompletness] '9a7fb205-ed88-4b05-b287-9c4d10bd4d68'
 	@UserId nvarchar(128)
 	
 AS
 BEGIN
+
+
+
+
+
 	-- SET NOCOUNT ON added to prevent extra result sets from
 	-- interfering with SELECT statements.
 	
 		select 
-			isnull((select count(distinct pqa.UserID) from ProfileQuestionUserAnswer pqa
+			isnull(
+			(select count(*) from (
+				select  distinct pqa.UserID from ProfileQuestionUserAnswer pqa
 				inner join ProfileQuestion pqi on pqa.PQID = pqi.pqid and pqi.CompanyId is null and pqi.Status = 3
 
-			 where pqa.UserID = @userid
-			 group by pqa.PQID, pqa.UserID
+				where pqa.UserID = @userid
+				group by pqa.PQID, pqa.UserID
+			) pqans
 		  )  / count(*) * 100,0)
 		 from ProfileQuestion pq 
 

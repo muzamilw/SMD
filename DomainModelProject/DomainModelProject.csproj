@@ -165,6 +165,9 @@
     <Compile Include="getAdsCampaignByCampaignId_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetApprovalCount_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="getCampaignsByStatus_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

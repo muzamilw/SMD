@@ -466,8 +466,50 @@ namespace DomainModelProject
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getPollsBySQID_Result>("getPollsBySQID", sQIDParameter, statusParameter, dateRangeParameter, granularityParameter);
         }
     
+        public virtual ObjectResult<getDealByCouponID_Result> getDealByCouponID(Nullable<int> couponID, Nullable<int> dateRange, Nullable<int> granularity)
+        {
+            var couponIDParameter = couponID.HasValue ?
+                new ObjectParameter("CouponID", couponID) :
+                new ObjectParameter("CouponID", typeof(int));
+    
+            var dateRangeParameter = dateRange.HasValue ?
+                new ObjectParameter("DateRange", dateRange) :
+                new ObjectParameter("DateRange", typeof(int));
+    
+            var granularityParameter = granularity.HasValue ?
+                new ObjectParameter("Granularity", granularity) :
+                new ObjectParameter("Granularity", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getDealByCouponID_Result>("getDealByCouponID", couponIDParameter, dateRangeParameter, granularityParameter);
+        }
+    
         public virtual ObjectResult<getSurvayByPQID_Result> getSurvayByPQID(Nullable<int> pQId, Nullable<int> status, Nullable<int> dateRange, Nullable<int> granularity)
         {
+            var pQIdParameter = pQId.HasValue ?
+                new ObjectParameter("PQId", pQId) :
+                new ObjectParameter("PQId", typeof(int));
+    
+            var statusParameter = status.HasValue ?
+                new ObjectParameter("status", status) :
+                new ObjectParameter("status", typeof(int));
+    
+            var dateRangeParameter = dateRange.HasValue ?
+                new ObjectParameter("DateRange", dateRange) :
+                new ObjectParameter("DateRange", typeof(int));
+    
+            var granularityParameter = granularity.HasValue ?
+                new ObjectParameter("Granularity", granularity) :
+                new ObjectParameter("Granularity", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getSurvayByPQID_Result>("getSurvayByPQID", pQIdParameter, statusParameter, dateRangeParameter, granularityParameter);
+        }
+    
+        public virtual ObjectResult<GetApprovalCount_Result> GetApprovalCount()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetApprovalCount_Result>("GetApprovalCount");
+        }
+    }
+}
             var pQIdParameter = pQId.HasValue ?
                 new ObjectParameter("PQId", pQId) :
                 new ObjectParameter("PQId", typeof(int));
