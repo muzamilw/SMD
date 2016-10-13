@@ -492,12 +492,13 @@ define("ads/ads.viewModel",
             },
 
 
-                    while (/(\d+)(\d{3})/.test(val.toString())) {
-                        val = val.toString().replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
-                    }
-                    return val;
+                   GetAudienceCount = function (val) {
+                       while (/(\d+)(\d{3})/.test(val.toString())) {
+                           val = val.toString().replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
+                       }
+                       return val;
 
-                },
+                   },
 
                 closeContent = function () {
                     campaignModel();
@@ -3173,7 +3174,8 @@ define("ads/ads.viewModel",
                     getQuestionByFilter: getQuestionByFilter,
                     submitResumeData: submitResumeData,
                     IsprofileQuestion: IsprofileQuestion,
-                    Modelheading: Modelheading
+                    Modelheading: Modelheading,
+                    GetAudienceCount: GetAudienceCount
                 };
             })()
         };

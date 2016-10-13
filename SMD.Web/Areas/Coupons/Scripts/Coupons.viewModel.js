@@ -977,7 +977,7 @@ define("Coupons/Coupons.viewModel",
                     }
                     else
                     {
-                        buyItQuestionStatus(true);
+                        buyItQuestionStatus(false);
                         couponModel().ShowBuyitBtn(true);
                         buyItQuestionLabelStatus(false);
                         ButItOtherLabel('');

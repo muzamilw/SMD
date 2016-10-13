@@ -7,12 +7,12 @@
         sLayout = "~/Views/Shared/_Layout_Franchise.cshtml";
     }
     else
-    { 
+    {
         sLayout = "~/Views/Shared/_Layout.cshtml";
     }
 
     Layout = sLayout;
-        
+
     string adminClasses = "";
     string userClasses = "";
 }
@@ -168,7 +168,7 @@ else
 
             </td>
 
-            <td >
+            <td>
                 <!-- ko if: Status() == 1 ||  Status() == 4|| Status() ==  6-->
                 <a class="table-link danger" style="float: right">
                     <span class="fa-stack">
@@ -195,8 +195,8 @@ else
                         </button>
                         <div style="clear:both;"></div>
                     </div>
-                    
-                    
+
+
                     <span class="red bold rightAlign" style=" margin-right: 14px;margin-top:-11px!important;display:none;"> Watch Video <img src="/Images/youtube_play.JPG" height="25px" /> </span> <span style="font-size: 14px;margin-right:8px;" class="Theme_subheading-Clr">Run a 2 picture card survey and create a new target audience groups <br />that can be used in any of your video or display ads campaigns.</span>&nbsp; &nbsp; &nbsp;<br />
                 </div>
 
@@ -242,14 +242,14 @@ else
         Html.RenderPartial("~/Areas/Survey/Views/Shared/_AddEditSurvey.cshtml");
     }
 </div>
-  <!-- ko stopBinding: true -->
+<!-- ko stopBinding: true -->
 @Html.Partial("~/Areas/Common/Views/Shared/_StripeChargeCustomerDialog.cshtml")
 <!-- /ko -->
 <!-- ko stopBinding: true -->
 @Html.Partial("~/Areas/Common/Views/Shared/_ConfirmationDialog.cshtml")
 <!-- /ko -->
 @section Scripts{
-<script src="~/Scripts/jquery.tokenize.js"></script>
+    <script src="~/Scripts/jquery.tokenize.js"></script>
     <script type="text/javascript">
         //$("#MainSpan").css("display", "none");
         require(["survey/survey.view", "common/confirmation.view", "common/stripeChargeCustomer.view"]);
