@@ -78,7 +78,7 @@ namespace SMD.MIS.Controllers
         /// Welcome Page
         /// </summary>
 
-        [SiteAuthorize(MisRoles = new[] { SecurityRoles.EndUser_Admin, SecurityRoles.EndUser_Accounts, SecurityRoles.EndUser_Creative, SecurityRoles.Franchise_Account_Manager, SecurityRoles.Franchise_Admin, SecurityRoles.Franchise_Approvers, SecurityRoles.Franchise_Cashout_Manager, SecurityRoles.Franchise_Creative_ }, AccessRights = null)]
+        //[SiteAuthorize(MisRoles = new[] { SecurityRoles.EndUser_Admin, SecurityRoles.EndUser_Accounts, SecurityRoles.EndUser_Creative, SecurityRoles.Franchise_Account_Manager, SecurityRoles.Franchise_Admin, SecurityRoles.Franchise_Approvers, SecurityRoles.Franchise_Cashout_Manager, SecurityRoles.Franchise_Creative_ }, AccessRights = new SecurityAccessRight{  })]
         public ActionResult Welcome()
         {
             IEnumerable<SmdRoleClaimValue> roleClaim = ClaimHelper.GetClaimsByType<SmdRoleClaimValue>(SmdClaimTypes.Role);
