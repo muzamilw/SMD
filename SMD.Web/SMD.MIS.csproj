@@ -384,6 +384,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SecurityConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Api\Controllers\GetApprovalCountController.cs" />
     <Compile Include="Areas\Api\Controllers\GetCouponPriceOptionController.cs" />
     <Compile Include="Areas\Api\Controllers\PayoutRevenueController.cs" />
     <Compile Include="Areas\Api\Controllers\SuperNovaCampaignController.cs" />
@@ -419,6 +420,7 @@
     <Compile Include="Areas\Api\Models\CompanyBranch.cs" />
     <Compile Include="Areas\Api\Models\CouponsApproval.cs" />
     <Compile Include="Areas\Api\Models\CurrencyApprov.cs" />
+    <Compile Include="Areas\Api\Models\GetApprovalCount_Result.cs" />
     <Compile Include="Areas\Api\Models\Phrase.cs" />
     <Compile Include="Areas\Api\Models\PhraseResponseModel.cs" />
     <Compile Include="Areas\Api\Models\PQResponseModelForApproval.cs" />

@@ -2,6 +2,7 @@
 using SMD.Models.IdentityModels;
 using SMD.Models.RequestModels;
 using SMD.Models.ResponseModels;
+using SMD.Models.DomainModels;
 
 namespace SMD.Interfaces.Services
 {
@@ -115,5 +116,7 @@ namespace SMD.Interfaces.Services
 
 
         int GetUserProfileCompletness(string UserId);
+
+        GetApprovalCount_Result GetApprovalCount();
     }
 }

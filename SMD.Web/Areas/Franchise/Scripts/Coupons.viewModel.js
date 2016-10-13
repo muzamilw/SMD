@@ -91,6 +91,7 @@ define("FranchiseDashboard/Coupons.viewModel",
                                     });
                                     //pager().totalCount(0);
                                     pager().totalCount(data.TotalCount);
+                                    getApprovalCount();
                                 },
                                 error: function () {
                                     toastr.error("Failed to load Ad Campaigns!");
@@ -143,7 +144,23 @@ define("FranchiseDashboard/Coupons.viewModel",
                                   toastr.error("Failed to save!");
                               }
                           });
-                      },
+                    },
+                    getApprovalCount = function ()
+                    {
+                        dataservice.getapprovalCount({
+                            success: function (data) {
+                                $('#couponCount').text(data.CouponCount);
+                                $('#vidioAdCount').text(data.AdCmpaignCount);
+                                $('#displayAdCount').text(data.DisplayAdCount);
+                                $('#surveyCount').text(data.SurveyQuestionCount);
+                                $('#profileCount').text(data.ProfileQuestionCount);
+
+                            },
+                            error: function () {
+                                toastr.error("Failed to load Approval Count.");
+                            }
+                        });
+                    },
                     hasChangesOnCoupon = ko.computed(function () {
                            if (selectedCoupon() == undefined) {
                                 return false;
@@ -213,6 +230,7 @@ define("FranchiseDashboard/Coupons.viewModel",
                     onRejectCoupon: onRejectCoupon,
                     hasChangesOnCoupon: hasChangesOnCoupon,
                     couponsPriceOption: couponsPriceOption,
+                    getApprovalCount: getApprovalCount,
 
                 };
             })()

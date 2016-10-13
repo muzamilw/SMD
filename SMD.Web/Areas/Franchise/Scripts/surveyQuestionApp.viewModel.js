@@ -81,6 +81,7 @@ define("FranchiseDashboard/surveyQuestionApp.viewModel",
                                 questions.remove(newObjtodelete);
                                 toastr.success("Saved Successfully!");
                                 isEditorVisible(false);
+                                getApprovalCount();
                             },
                             error: function () {
                                 toastr.error("Failed to update!");
@@ -112,6 +113,21 @@ define("FranchiseDashboard/surveyQuestionApp.viewModel",
                             $("#divApprove").css("display", "block");
                         });
                     },
+                     getApprovalCount = function () {
+                         dataservice.getapprovalCount({
+                             success: function (data) {
+                                 $('#couponCount').text(data.CouponCount);
+                                 $('#vidioAdCount').text(data.AdCmpaignCount);
+                                 $('#displayAdCount').text(data.DisplayAdCount);
+                                 $('#surveyCount').text(data.SurveyQuestionCount);
+                                 $('#profileCount').text(data.ProfileQuestionCount);
+
+                             },
+                             error: function () {
+                                 toastr.error("Failed to load Approval Count.");
+                             }
+                         });
+                     },
                        getCompanyData = function (selectedItem) {
                            dataservice.getCompanyData(
                         {
@@ -170,6 +186,7 @@ define("FranchiseDashboard/surveyQuestionApp.viewModel",
                     onRejectQuestion: onRejectQuestion,
                     onApproveQuestion: onApproveQuestion,
                     selectedCompany: selectedCompany,
+                    getApprovalCount: getApprovalCount
                 };
             })()
         };

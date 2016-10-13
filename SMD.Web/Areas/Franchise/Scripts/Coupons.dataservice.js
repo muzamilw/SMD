@@ -53,6 +53,11 @@ define("FranchiseDashboard/Coupons.dataservice", function () {
                         dataType: 'json',
                         type: 'GET'
                     });
+                    amplify.request.define('getapprovalCount', 'ajax', {
+                        url: '/Api/GetApprovalCount',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
                     isInitialized = true;
                 }
             },
@@ -123,7 +128,15 @@ define("FranchiseDashboard/Coupons.dataservice", function () {
                 error: callbacks.error,
                 data: params
             });
-        };
+        },
+          getapprovalCount = function (callbacks) {
+              initialize();
+              return amplify.request({
+                  resourceId: 'getapprovalCount',
+                  success: callbacks.success,
+                  error: callbacks.error,
+              });
+          };
 
         return {
             saveCoupon: saveCoupon,
@@ -132,7 +145,8 @@ define("FranchiseDashboard/Coupons.dataservice", function () {
             getCouponCategories:getCouponCategories,
             sendApprovalRejectionEmail: sendApprovalRejectionEmail,
             getCompanyData: getCompanyData,
-            getCouponPriceOption: getCouponPriceOption
+            getCouponPriceOption: getCouponPriceOption,
+            getapprovalCount: getapprovalCount
         };
     })();
     return dataService;
