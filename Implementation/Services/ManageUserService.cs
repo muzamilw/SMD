@@ -51,29 +51,40 @@ namespace SMD.Implementation.Services
             //special case of getting the main company of this user
             var usr = userService.GetUserByUserId(UserId);
 
+            if (usr == null)
+            {
+                throw new Exception("Catestrophic errror, user is null. with userid = " + UserId);
+            }
+
             var company = companyService.GetCompanyById(usr.CompanyId.Value);
 
             var result = managerUserRepository.GetCompaniesByUserId(UserId);
 
-            
 
+            if (company != null)
+            {
+                //addding the main company to the result.
+                var rec = new vw_CompanyUsers
+                {
+                    id = -999,
+                    companyid = company.CompanyId,
+                    CompanyName = company.CompanyName,
+                    CreatedOn = usr.CreatedDateTime.HasValue == true ? usr.CreatedDateTime.Value : DateTime.Now,
+                    email = usr.Email,
+                    FullName = usr.FullName,
+                    RoleName = usr.Roles.First().Name,
+                    status = "active",
+                    UserId = UserId,
+                    RoleId = usr.Roles.First().Id
 
-            //addding the main company to the result.
-            var rec = new vw_CompanyUsers{
-        id = -999,
-        companyid = company.CompanyId,
-        CompanyName = company.CompanyName,
-        CreatedOn = usr.CreatedDateTime.HasValue == true ? usr.CreatedDateTime.Value:DateTime.Now,
-        email = usr.Email,
-        FullName = usr.FullName,
-        RoleName = usr.Roles.First().Name,
-        status = "active",
-        UserId = UserId,
-        RoleId = usr.Roles.First().Id
-            
-        };
+                };
 
-            result.Add(rec);
+                result.Add(rec);
+            }
+            else
+            {
+                throw new Exception("Catestrophic errror, company is null. with companyid = " + usr.CompanyId.Value);
+            }
 
             return result;
         }

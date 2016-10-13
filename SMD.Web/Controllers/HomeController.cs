@@ -84,6 +84,11 @@ namespace SMD.MIS.Controllers
             IEnumerable<SmdRoleClaimValue> roleClaim = ClaimHelper.GetClaimsByType<SmdRoleClaimValue>(SmdClaimTypes.Role);
             string RoleName = roleClaim != null && roleClaim.Any() ? roleClaim.ElementAt(0).Role : "Role Not Loaded";
 
+            if (roleClaim.Count() > 0)
+            {
+                return RedirectToLocal("/");
+            }
+
              
             if (RoleName.StartsWith("Franchise"))
                 return RedirectToLocal("/Franchise/Dashboard/Index");

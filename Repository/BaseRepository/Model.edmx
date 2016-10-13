@@ -2356,16 +2356,16 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Parameter Name="DateTo" Type="datetime" Mode="In" />
           <Parameter Name="Granularity" Type="int" Mode="In" />
         </Function>
-        <Function Name="GetActiveVSNewUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetAdminDashBoardInsights" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetAds" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserID" Type="nvarchar" Mode="In" />
           <Parameter Name="FromRow" Type="int" Mode="In" />
           <Parameter Name="ToRow" Type="int" Mode="In" />
         </Function>
-        <Function Name="getApprovedCampaignsOverTime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="DateFrom" Type="datetime" Mode="In" />
-          <Parameter Name="DateTo" Type="datetime" Mode="In" />
+        <Function Name="getAdsCampaignByCampaignId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CampaignId" Type="int" Mode="In" />
+          <Parameter Name="status" Type="int" Mode="In" />
+          <Parameter Name="DateRange" Type="int" Mode="In" />
           <Parameter Name="Granularity" Type="int" Mode="In" />
         </Function>
         <Function Name="GetAudience" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -2420,7 +2420,11 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
         <Function Name="GetCouponsByCompanyId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CompanyId" Type="nvarchar" Mode="In" />
         </Function>
-        <Function Name="GetDealMetric" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="getDealByCouponID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CouponID" Type="int" Mode="In" />
+          <Parameter Name="DateRange" Type="int" Mode="In" />
+          <Parameter Name="Granularity" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetLiveCampaignCountOverTime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CampaignType" Type="int" Mode="In" />
           <Parameter Name="DateFrom" Type="datetime" Mode="In" />
@@ -2430,6 +2434,12 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
         <Function Name="getPayoutVSRevenueOverTime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DateFrom" Type="datetime" Mode="In" />
           <Parameter Name="DateTo" Type="datetime" Mode="In" />
+          <Parameter Name="Granularity" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getPollsBySQID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SQID" Type="int" Mode="In" />
+          <Parameter Name="status" Type="int" Mode="In" />
+          <Parameter Name="DateRange" Type="int" Mode="In" />
           <Parameter Name="Granularity" Type="int" Mode="In" />
         </Function>
         <Function Name="GetProducts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -2444,20 +2454,10 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Parameter Name="DateTo" Type="datetime" Mode="In" />
           <Parameter Name="Granularity" Type="int" Mode="In" />
         </Function>
-        <Function Name="GetRevenueOverTime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="CompanyId" Type="int" Mode="In" />
-          <Parameter Name="DateFrom" Type="datetime" Mode="In" />
-          <Parameter Name="DateTo" Type="datetime" Mode="In" />
-          <Parameter Name="Granularity" Type="int" Mode="In" />
-        </Function>
-        <Function Name="GetSurvayCardsAnswered" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="DateFrom" Type="datetime" Mode="In" />
-          <Parameter Name="DateTo" Type="datetime" Mode="In" />
-          <Parameter Name="Granularity" Type="int" Mode="In" />
-        </Function>
-        <Function Name="GetSurvayQestionsAnswered" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="DateFrom" Type="datetime" Mode="In" />
-          <Parameter Name="DateTo" Type="datetime" Mode="In" />
+        <Function Name="getSurvayByPQID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PQId" Type="int" Mode="In" />
+          <Parameter Name="status" Type="int" Mode="In" />
+          <Parameter Name="DateRange" Type="int" Mode="In" />
           <Parameter Name="Granularity" Type="int" Mode="In" />
         </Function>
         <Function Name="GetSurveys" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -3751,6 +3751,29 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           </FunctionImport>
           <FunctionImport Name="GetUserProfileCompletness" ReturnType="Collection(Int32)">
           <Parameter Name="UserId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="getAdsCampaignByCampaignId" ReturnType="Collection(DomainModels.getAdsCampaignByCampaignId_Result)">
+            <Parameter Name="CampaignId" Mode="In" Type="Int32" />
+            <Parameter Name="status" Mode="In" Type="Int32" />
+            <Parameter Name="DateRange" Mode="In" Type="Int32" />
+            <Parameter Name="Granularity" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getDealByCouponID" ReturnType="Collection(DomainModels.getDealByCouponID_Result)">
+            <Parameter Name="CouponID" Mode="In" Type="Int32" />
+            <Parameter Name="DateRange" Mode="In" Type="Int32" />
+            <Parameter Name="Granularity" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getPollsBySQID" ReturnType="Collection(DomainModels.getPollsBySQID_Result)">
+            <Parameter Name="SQID" Mode="In" Type="Int32" />
+            <Parameter Name="status" Mode="In" Type="Int32" />
+            <Parameter Name="DateRange" Mode="In" Type="Int32" />
+            <Parameter Name="Granularity" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getSurvayByPQID" ReturnType="Collection(DomainModels.getSurvayByPQID_Result)">
+            <Parameter Name="PQId" Mode="In" Type="Int32" />
+            <Parameter Name="status" Mode="In" Type="Int32" />
+            <Parameter Name="DateRange" Mode="In" Type="Int32" />
+            <Parameter Name="Granularity" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
@@ -6752,6 +6775,26 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="Int64" Name="loginStats" Nullable="true" />
           <Property Type="Int64" Name="deleteStats" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="getAdsCampaignByCampaignId_Result">
+          <Property Type="String" Name="Granual" Nullable="false" MaxLength="26" />
+          <Property Type="Int64" Name="openStats" Nullable="true" />
+          <Property Type="Int64" Name="Stats" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="getDealByCouponID_Result">
+          <Property Type="String" Name="Granual" Nullable="false" MaxLength="26" />
+          <Property Type="Int64" Name="openStats" Nullable="true" />
+          <Property Type="Int64" Name="ConvrsionStats" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="getPollsBySQID_Result">
+          <Property Type="String" Name="Granual" Nullable="false" MaxLength="26" />
+          <Property Type="Int64" Name="openStats" Nullable="true" />
+          <Property Type="Int64" Name="Stats" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="getSurvayByPQID_Result">
+          <Property Type="String" Name="Granual" Nullable="false" MaxLength="26" />
+          <Property Type="Int64" Name="openStats" Nullable="true" />
+          <Property Type="Int64" Name="Stats" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -8076,23 +8119,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetRevenueOverTime" FunctionName="SMDModel.Store.GetRevenueOverTime" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="DomainModels.GetRevenueOverTime_Result">
-                <ScalarProperty Name="amountcollected" ColumnName="amountcollected" />
-                <ScalarProperty Name="granular" ColumnName="granular" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetActiveVSNewUsers" FunctionName="SMDModel.Store.GetActiveVSNewUsers">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="DomainModels.GetActiveVSNewUsers_Result">
-                <ScalarProperty Name="ActiveStats" ColumnName="ActiveStats" />
-                <ScalarProperty Name="NewStats" ColumnName="NewStats" />
-                <ScalarProperty Name="Granual" ColumnName="Granual" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="CouponPriceOptions">
             <EntityTypeMapping TypeName="DomainModels.CouponPriceOption">
               <MappingFragment StoreEntitySet="CouponPriceOption">
@@ -8252,36 +8278,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="getApprovedCampaignsOverTime" FunctionName="SMDModel.Store.getApprovedCampaignsOverTime">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="DomainModels.getApprovedCampaignsOverTime_Result">
-                <ScalarProperty Name="Granual" ColumnName="Granual" />
-                <ScalarProperty Name="GameStats" ColumnName="GameStats" />
-                <ScalarProperty Name="videoStats" ColumnName="videoStats" />
-                <ScalarProperty Name="dealStats" ColumnName="dealStats" />
-                <ScalarProperty Name="pQStats" ColumnName="pQStats" />
-                <ScalarProperty Name="sQStats" ColumnName="sQStats" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetSurvayQestionsAnswered" FunctionName="SMDModel.Store.GetSurvayQestionsAnswered" />
-          <FunctionImportMapping FunctionImportName="GetDealMetric" FunctionName="SMDModel.Store.GetDealMetric">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="DomainModels.GetDealMetric_Result">
-                <ScalarProperty Name="ViewStats" ColumnName="ViewStats" />
-                <ScalarProperty Name="LandingPageStats" ColumnName="LandingPageStats" />
-                <ScalarProperty Name="Granual" ColumnName="Granual" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetSurvayCardsAnswered" FunctionName="SMDModel.Store.GetSurvayCardsAnswered" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="DomainModels.GetSurvayCardsAnswered_Result">
-                <ScalarProperty Name="Granual" ColumnName="Granual" />
-                <ScalarProperty Name="SCStats" ColumnName="SCStats" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="getActiveCampaignsOverTime" FunctionName="SMDModel.Store.getActiveCampaignsOverTime">
             <ResultMapping>
               <ComplexTypeMapping TypeName="DomainModels.getActiveCampaignsOverTime_Result">
@@ -8417,6 +8413,42 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetUserProfileCompletness" FunctionName="SMDModel.Store.GetUserProfileCompletness" />
+          <FunctionImportMapping FunctionImportName="getAdsCampaignByCampaignId" FunctionName="SMDModel.Store.getAdsCampaignByCampaignId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.getAdsCampaignByCampaignId_Result">
+                <ScalarProperty Name="Granual" ColumnName="Granual" />
+                <ScalarProperty Name="openStats" ColumnName="openStats" />
+                <ScalarProperty Name="Stats" ColumnName="Stats" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getDealByCouponID" FunctionName="SMDModel.Store.getDealByCouponID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.getDealByCouponID_Result">
+                <ScalarProperty Name="Granual" ColumnName="Granual" />
+                <ScalarProperty Name="openStats" ColumnName="openStats" />
+                <ScalarProperty Name="ConvrsionStats" ColumnName="ConvrsionStats" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getPollsBySQID" FunctionName="SMDModel.Store.getPollsBySQID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.getPollsBySQID_Result">
+                <ScalarProperty Name="Granual" ColumnName="Granual" />
+                <ScalarProperty Name="openStats" ColumnName="openStats" />
+                <ScalarProperty Name="Stats" ColumnName="Stats" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getSurvayByPQID" FunctionName="SMDModel.Store.getSurvayByPQID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.getSurvayByPQID_Result">
+                <ScalarProperty Name="Granual" ColumnName="Granual" />
+                <ScalarProperty Name="openStats" ColumnName="openStats" />
+                <ScalarProperty Name="Stats" ColumnName="Stats" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
