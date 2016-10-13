@@ -77,14 +77,14 @@ namespace SMD.MIS.Controllers
         /// <summary>
         /// Welcome Page
         /// </summary>
-       
-        //[SiteAuthorize(MisRoles = new[] { SecurityRoles.EndUser_Admin }, AccessRights = new[] { SecurityAccessRight.CanViewSuperNovaAdmin })]
+
+        [SiteAuthorize(MisRoles = new[] { SecurityRoles.EndUser_Admin, SecurityRoles.EndUser_Accounts, SecurityRoles.EndUser_Creative, SecurityRoles.Franchise_Account_Manager, SecurityRoles.Franchise_Admin, SecurityRoles.Franchise_Approvers, SecurityRoles.Franchise_Cashout_Manager, SecurityRoles.Franchise_Creative_ }, AccessRights = null)]
         public ActionResult Welcome()
         {
             IEnumerable<SmdRoleClaimValue> roleClaim = ClaimHelper.GetClaimsByType<SmdRoleClaimValue>(SmdClaimTypes.Role);
             string RoleName = roleClaim != null && roleClaim.Any() ? roleClaim.ElementAt(0).Role : "Role Not Loaded";
 
-            if (roleClaim.Count() > 0)
+            if (roleClaim == null && roleClaim.Any() == false)
             {
                 return RedirectToLocal("/");
             }

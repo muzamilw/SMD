@@ -1791,3 +1791,26 @@ GO
 /****** Object:  StoredProcedure [dbo].[GetSurvayQestionsAnswered]    Script Date: 10/7/2016 5:01:55 PM ******/
 DROP PROCEDURE [dbo].[GetSurvayQestionsAnswered]
 GO
+
+
+
+
+
+CREATE PROCEDURE dbo.GetApprovalCount
+AS
+BEGIN
+
+ 
+  select (SELECT COUNT(CouponId) From Coupon where Status = 2) as CouponCount,
+   (SELECT COUNT(CampaignID) From AdCampaign  where Status = 2 and type =1) as AdCmpaignCount,
+   (SELECT COUNT(CampaignID) From AdCampaign  where Status = 2 and type =4) as DisplayAdCount,
+   (SELECT COUNT(PQID) From ProfileQuestion  where Status = 2) as ProfileQuestionCount,
+   (SELECT COUNT(SQID) From SurveyQuestion  where Status = 2) as SurveyQuestionCount
+
+
+ 
+
+
+ 
+END
+GO

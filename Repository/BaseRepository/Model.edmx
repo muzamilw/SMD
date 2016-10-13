@@ -2368,6 +2368,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Parameter Name="DateRange" Type="int" Mode="In" />
           <Parameter Name="Granularity" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetApprovalCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetAudience" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ageFrom" Type="int" Mode="In" />
           <Parameter Name="ageTo" Type="int" Mode="In" />
@@ -3775,6 +3776,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <Parameter Name="DateRange" Mode="In" Type="Int32" />
             <Parameter Name="Granularity" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="GetApprovalCount" ReturnType="Collection(DomainModels.GetApprovalCount_Result)" />
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -6795,6 +6797,13 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="Int64" Name="openStats" Nullable="true" />
           <Property Type="Int64" Name="Stats" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="GetApprovalCount_Result">
+          <Property Type="Int32" Name="CouponCount" Nullable="true" />
+          <Property Type="Int32" Name="AdCmpaignCount" Nullable="true" />
+          <Property Type="Int32" Name="DisplayAdCount" Nullable="true" />
+          <Property Type="Int32" Name="ProfileQuestionCount" Nullable="true" />
+          <Property Type="Int32" Name="SurveyQuestionCount" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -8446,6 +8455,17 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
                 <ScalarProperty Name="Granual" ColumnName="Granual" />
                 <ScalarProperty Name="openStats" ColumnName="openStats" />
                 <ScalarProperty Name="Stats" ColumnName="Stats" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetApprovalCount" FunctionName="SMDModel.Store.GetApprovalCount">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.GetApprovalCount_Result">
+                <ScalarProperty Name="CouponCount" ColumnName="CouponCount" />
+                <ScalarProperty Name="AdCmpaignCount" ColumnName="AdCmpaignCount" />
+                <ScalarProperty Name="DisplayAdCount" ColumnName="DisplayAdCount" />
+                <ScalarProperty Name="ProfileQuestionCount" ColumnName="ProfileQuestionCount" />
+                <ScalarProperty Name="SurveyQuestionCount" ColumnName="SurveyQuestionCount" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

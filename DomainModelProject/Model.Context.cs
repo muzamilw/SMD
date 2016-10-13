@@ -486,5 +486,10 @@ namespace DomainModelProject
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getSurvayByPQID_Result>("getSurvayByPQID", pQIdParameter, statusParameter, dateRangeParameter, granularityParameter);
         }
+    
+        public virtual ObjectResult<GetApprovalCount_Result> GetApprovalCount()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetApprovalCount_Result>("GetApprovalCount");
+        }
     }
 }
