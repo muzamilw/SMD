@@ -68,6 +68,7 @@ define("FranchiseDashboard/profileQuestionApp.viewModel",
                                     });
                                     ////pager().totalCount(0);
                                     pager().totalCount(data.TotalCount);
+                                    getApprovalCount();
                                 },
                                 error: function () {
                                     toastr.error("Failed to load Ad Campaigns!");
@@ -142,6 +143,21 @@ define("FranchiseDashboard/profileQuestionApp.viewModel",
                            }
                        });
                     },
+                    getApprovalCount = function () {
+                          dataservice.getapprovalCount({
+                              success: function (data) {
+                                  $('#couponCount').text(data.CouponCount);
+                                  $('#vidioAdCount').text(data.AdCmpaignCount);
+                                  $('#displayAdCount').text(data.DisplayAdCount);
+                                  $('#surveyCount').text(data.SurveyQuestionCount);
+                                  $('#profileCount').text(data.ProfileQuestionCount);
+
+                              },
+                              error: function () {
+                                  toastr.error("Failed to load Approval Count.");
+                              }
+                          });
+                      },
                      getCompanyData = function (selectedItem) {
                          dataservice.getCompanyData(
                       {
@@ -214,6 +230,7 @@ define("FranchiseDashboard/profileQuestionApp.viewModel",
                     onRejectPQ: onRejectPQ,
                     hasChangesOnPQ: hasChangesOnPQ,
                     selectedCompany: selectedCompany,
+                    getApprovalCount: getApprovalCount
 
                 };
             })()

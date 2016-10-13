@@ -261,6 +261,11 @@ define("common/companyProfile.viewModel",
                 getBasedata = function () {
                     dataservice.getBaseDataForCompanyProfile(null, {
                         success: function (baseDataFromServer) {
+                            $('#couponCount').text(baseDataFromServer.GetApprovalCount.CouponCount);
+                            $('#vidioAdCount').text(baseDataFromServer.GetApprovalCount.AdCmpaignCount);
+                            $('#displayAdCount').text(baseDataFromServer.GetApprovalCount.DisplayAdCount);
+                            $('#surveyCount').text(baseDataFromServer.GetApprovalCount.SurveyQuestionCount);
+                            $('#profileCount').text(baseDataFromServer.GetApprovalCount.ProfileQuestionCount);
 
                             if (baseDataFromServer != null && baseDataFromServer.CountryDropdowns != null) {
                                 countries.removeAll();

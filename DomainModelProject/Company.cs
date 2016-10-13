@@ -154,6 +154,8 @@ public partial class Company
 
     public Nullable<System.DateTime> DeleteDate { get; set; }
 
+    public Nullable<bool> IsSpecialAccount { get; set; }
+
 
 
     public virtual ICollection<Account> Accounts { get; set; }

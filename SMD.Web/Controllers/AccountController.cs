@@ -388,8 +388,15 @@ namespace SMD.MIS.Controllers
                 int companyId = companyService.GetUserCompany(userId);
                 CreateUserAccounts(companyId);
                 TransactionManager.UserSignupFreeGiftBalanceTransaction(500, companyId);
-                return View("Login");
+                return RedirectToAction("Login", "Account");
             }
+            else
+            {
+
+                ViewBag.error = string.Join(",", result.Errors.ToArray()); ;
+                return View("ConfirmEmail");
+            }
+
             return View("Error");
         }
 

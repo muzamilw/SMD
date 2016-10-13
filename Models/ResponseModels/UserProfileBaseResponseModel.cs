@@ -11,6 +11,7 @@ namespace SMD.Models.ResponseModels
         public IEnumerable<Education> Educations { get; set; }
 
         public IEnumerable<Role> UserRoles { get; set; }
+        public GetApprovalCount_Result GetApprovalCount { get; set; }
 
     }
 }

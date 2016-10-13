@@ -179,12 +179,19 @@ namespace SMD.Repository.Repositories
 
                 db.Entry(target).State = EntityState.Modified;
                 db.SaveChanges();
+                
 
             }
             return true;
 
         #endregion
 
+        }
+
+        public GetApprovalCount_Result GetApprovalCount()
+        {
+            var appCount = db.GetApprovalCount();
+            return appCount != null ? appCount.FirstOrDefault() : null;
         }
     }
 }

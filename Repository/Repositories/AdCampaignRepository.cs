@@ -102,7 +102,7 @@ namespace SMD.Repository.Repositories
             //        .ToList();
             //res = res.OrderByDescending(g => g.priority);
             var res = DbSet.Where(query)
-                    .OrderByDescending(g => g.SubmissionDateTime);
+                    .OrderByDescending(g => g.ClickRate);
             return res.Skip(fromRow)
                     .Take(toRow);
 
@@ -315,6 +315,16 @@ namespace SMD.Repository.Repositories
         {
             return DbSet.Where(i => i.CampaignId == CampaignID).FirstOrDefault();
         
+        }
+        public IEnumerable<getAdsCampaignByCampaignId_Result> getAdsCampaignByCampaignIdForAnalytics(int compaignId, int CampStatus, int dateRange, int Granularity)
+        {
+
+            return db.getAdsCampaignByCampaignId(compaignId, CampStatus, dateRange, Granularity);
+        }
+        public IEnumerable<getDisplayAdsCampaignByCampaignIdAnalytics_Result> getDisplayAdsCampaignByCampaignIdAnalytics(int compaignId, int CampStatus, int dateRange, int Granularity)
+        {
+           
+            return db.getDisplayAdsCampaignByCampaignIdAnalytics(compaignId, CampStatus, dateRange, Granularity);
         }
     }
 }

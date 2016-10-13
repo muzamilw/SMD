@@ -37,6 +37,11 @@ define("FranchiseDashboard/addApproval.dataservice", function () {
                         dataType: 'json',
                         type: 'GET'
                     });
+                    amplify.request.define('getapprovalCount', 'ajax', {
+                        url: '/Api/GetApprovalCount',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
                     isInitialized = true;
                 }
             },       
@@ -80,13 +85,22 @@ define("FranchiseDashboard/addApproval.dataservice", function () {
                      error: callbacks.error,
                      data: params
                  });
-             };
+             },
+                getapprovalCount = function (callbacks) {
+                      initialize();
+                      return amplify.request({
+                          resourceId: 'getapprovalCount',
+                          success: callbacks.success,
+                          error: callbacks.error,
+                      });
+                  };
 
         return {
             saveAdCampaign: saveAdCampaign,
             searchAdCampaigns: searchAdCampaigns,
             sendApprovalRejectionEmail: sendApprovalRejectionEmail,
-            getCompanyData: getCompanyData
+            getCompanyData: getCompanyData,
+            getapprovalCount: getapprovalCount
         };
     })();
     return dataService;

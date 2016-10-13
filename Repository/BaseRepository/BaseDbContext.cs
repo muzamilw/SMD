@@ -644,9 +644,50 @@ namespace SMD.Repository.BaseRepository
             var UserIdParam = new ObjectParameter("UserId", UserId);
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Int32>("GetUserProfileCompletness", UserIdParam);
         }
+        public ObjectResult<GetApprovalCount_Result> GetApprovalCount()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetApprovalCount_Result>("GetApprovalCount");
+        }
+        public ObjectResult<getAdsCampaignByCampaignId_Result> getAdsCampaignByCampaignId(int compaignId, int CampStatus, int dateRange, int Granularity)
+        {
+            var _compaignId = new ObjectParameter("CampaignId", compaignId);
+            var _CampStatus = new ObjectParameter("status", CampStatus);
+            var _dateRange = new ObjectParameter("DateRange", dateRange);
+            var _Granularity = new ObjectParameter("Granularity", Granularity);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getAdsCampaignByCampaignId_Result>("getAdsCampaignByCampaignId", _compaignId, _CampStatus, _dateRange, _Granularity);
+        }
+        public ObjectResult<getDisplayAdsCampaignByCampaignIdAnalytics_Result> getDisplayAdsCampaignByCampaignIdAnalytics(int compaignId, int CampStatus, int dateRange, int Granularity)
+        {
+            var _compaignId = new ObjectParameter("CampaignId", compaignId);
+            var _CampStatus = new ObjectParameter("status", CampStatus);
+            var _dateRange = new ObjectParameter("DateRange", dateRange);
+            var _Granularity = new ObjectParameter("Granularity", Granularity);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getDisplayAdsCampaignByCampaignIdAnalytics_Result>("getDisplayAdsCampaignByCampaignIdAnalytics", _compaignId, _CampStatus, _dateRange, _Granularity);
+        }
 
-
-
+        public ObjectResult<getSurvayByPQID_Result> getSurvayByPQID(int PQId, int CampStatus, int dateRange, int Granularity)
+        {
+            var _PQId = new ObjectParameter("PQId", PQId);
+            var _CampStatus = new ObjectParameter("status", CampStatus);
+            var _dateRange = new ObjectParameter("DateRange", dateRange);
+            var _Granularity = new ObjectParameter("Granularity", Granularity);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getSurvayByPQID_Result>("getSurvayByPQID", _PQId, _CampStatus, _dateRange, _Granularity);
+        }
+        public ObjectResult<getPollsBySQID_Result> getPollsBySQID(int SQId, int CampStatus, int dateRange, int Granularity)
+        {
+            var _SQId = new ObjectParameter("SQID", SQId);
+            var _CampStatus = new ObjectParameter("status", CampStatus);
+            var _dateRange = new ObjectParameter("DateRange", dateRange);
+            var _Granularity = new ObjectParameter("Granularity", Granularity);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getPollsBySQID_Result>("getPollsBySQID", _SQId, _CampStatus, _dateRange, _Granularity);
+        }
+        public ObjectResult<getDealByCouponID_Result> getDealByCouponID(int CouponID, int dateRange, int Granularity)
+        {
+            var _CouponID = new ObjectParameter("CouponID", CouponID);
+            var _dateRange = new ObjectParameter("DateRange", dateRange);
+            var _Granularity = new ObjectParameter("Granularity", Granularity);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getDealByCouponID_Result>("getDealByCouponID", _CouponID, _dateRange, _Granularity);
+        }
 
         #endregion
     }
