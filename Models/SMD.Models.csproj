@@ -140,6 +140,7 @@
     <Compile Include="DomainModels\getCampaignsByStatus.cs" />
     <Compile Include="DomainModels\GetCouponByID_Result.cs" />
     <Compile Include="DomainModels\getDealByCouponID_Result.cs" />
+    <Compile Include="DomainModels\getDisplayAdsCampaignByCampaignIdAnalytics_Result.cs" />
     <Compile Include="DomainModels\GetLiveCampaignCountOverTime_Result.cs" />
     <Compile Include="DomainModels\getPayoutVSRevenueOverTime_Result.cs" />
     <Compile Include="DomainModels\getPollsBySQID_Result.cs" />

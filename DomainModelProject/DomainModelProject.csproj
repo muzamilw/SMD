@@ -180,6 +180,9 @@
     <Compile Include="GetDealMetric_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="getDisplayAdsCampaignByCampaignIdAnalytics_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetLiveCampaignCountOverTime_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
