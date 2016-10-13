@@ -1304,11 +1304,16 @@ namespace SMD.Implementation.Services
 
         #endregion
 
-        //public string CampaignVerifyQuestionById(int CampaignID)
-        //{
-        //    return DbSet.Where(i => i.CampaignId == CampaignID).FirstOrDefault().VerifyQuestion;
+        public IEnumerable<getAdsCampaignByCampaignId_Result> getAdsCampaignByCampaignIdForAnalytics(int compaignId, int CampStatus, int dateRange, int Granularity)
+        {
 
-        //}
+            return this._adCampaignRepository.getAdsCampaignByCampaignIdForAnalytics(compaignId, CampStatus, dateRange, Granularity);
+        }
+        public IEnumerable<getDisplayAdsCampaignByCampaignIdAnalytics_Result> getDisplayAdsCampaignByCampaignIdAnalytics(int compaignId, int CampStatus, int dateRange, int Granularity)
+        {
+
+            return _adCampaignRepository.getDisplayAdsCampaignByCampaignIdAnalytics(compaignId, CampStatus, dateRange, Granularity);
+        }
 
 
     }

@@ -89,6 +89,11 @@ namespace SMD.MIS.Controllers
                 return RedirectToLocal("/");
             }
 
+            if (roleClaim.Count() > 0)
+            {
+                return RedirectToLocal("/");
+            }
+
              
             if (RoleName.StartsWith("Franchise"))
                 return RedirectToLocal("/Franchise/Dashboard/Index");

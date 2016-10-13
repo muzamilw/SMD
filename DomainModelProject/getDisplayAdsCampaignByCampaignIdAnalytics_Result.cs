@@ -13,26 +13,17 @@ namespace DomainModelProject
 {
 
 using System;
-    using System.Collections.Generic;
     
-public partial class Game
+public partial class getDisplayAdsCampaignByCampaignIdAnalytics_Result
 {
 
-    public long GameId { get; set; }
+    public string Granual { get; set; }
 
-    public string GameName { get; set; }
+    public Nullable<long> openStats { get; set; }
 
-    public Nullable<bool> Status { get; set; }
+    public Nullable<double> avgAdClickStats { get; set; }
 
-    public Nullable<int> AgeRangeStart { get; set; }
-
-    public Nullable<int> AgeRangeEnd { get; set; }
-
-    public Nullable<int> GameType { get; set; }
-
-    public Nullable<int> Complexity { get; set; }
-
-    public string GameUrl { get; set; }
+    public Nullable<long> Stats { get; set; }
 
 }
 

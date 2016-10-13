@@ -62,6 +62,9 @@ namespace SMD.Interfaces.Services
        
 
         //CouponCodeModel GenerateCouponCodes(int numbers, long CampaignId);
+        IEnumerable<getAdsCampaignByCampaignId_Result> getAdsCampaignByCampaignIdForAnalytics(int compaignId, int CampStatus, int dateRange, int Granularity);
+        IEnumerable<getDisplayAdsCampaignByCampaignIdAnalytics_Result> getDisplayAdsCampaignByCampaignIdAnalytics(int compaignId, int CampStatus, int dateRange, int Granularity);
+        
         
     }
 }
