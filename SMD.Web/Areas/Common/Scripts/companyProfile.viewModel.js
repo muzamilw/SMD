@@ -251,7 +251,7 @@ define("common/companyProfile.viewModel",
                },
 
                 LogoUrlImageCallback = function (file, data) {
-                    debugger;
+                  
                      selectedCompany().LogoImageBase64(data);
                      selectedCompany().Logo('');
                  },

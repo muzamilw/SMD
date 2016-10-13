@@ -487,11 +487,11 @@ define("Coupons/Coupons.viewModel",
                   campaignNamePlaceHolderValue('New Voucher');
                   isEnableVedioVerificationLink(false);
 
-                  couponModel().CouponImage2("/images/default-placeholder.png");
+                  couponModel().CouponImage2("/images/standardplaceholder.png");
 
-                  couponModel().CouponImage3("/images/default-placeholder.png");
-                  couponModel().couponImage1("/images/default-placeholder.png");
-                  couponModel().LogoUrl("/images/default-placeholder.png");
+                  couponModel().CouponImage3("/images/standardplaceholder.png");
+                  couponModel().couponImage1("/images/standardplaceholder.png");
+                  couponModel().LogoUrl("/images/standardplaceholder.png");
                   couponModel().Price(10);
                   couponModel().Savings(15);
                   couponModel().CouponQtyPerUser(3);

@@ -619,7 +619,7 @@ define("ads/ads.viewModel",
                   campaignModel().VoucherImagePath("");
                   campaignModel().LanguageId(41);
                   campaignModel().DeliveryDays('10');
-                  campaignModel().LogoUrl('/images/default-placeholder.png');
+                  campaignModel().LogoUrl('/images/standardplaceholder.png');
 
                   // campaignModel().LogoImageBytes("/images/default-placeholder.png");
 
@@ -1571,7 +1571,7 @@ define("ads/ads.viewModel",
 
                                     if (campaignModel().LogoUrl() == '' || campaignModel().LogoUrl() == undefined) {
 
-                                        campaignModel().LogoUrl("/images/default-placeholder.png");
+                                        campaignModel().LogoUrl("/images/standardplaceholder.png");
                                     }
 
 
