@@ -376,10 +376,12 @@ namespace SMD.Implementation.Services
                 campaignModel.SubmissionDateTime = DateTime.Now;
             }
             //toCamdo pilot: harcoding ClickRate = 1 for every campaign
-            if (campaignModel.ClickRate == 0)
-            { campaignModel.ClickRate = 0.0; }
-            else
-            campaignModel.ClickRate = 0.20;
+
+            // not needed now
+            //if (campaignModel.ClickRate == 0)
+            //{ campaignModel.ClickRate = 0.0; }
+            //else
+            //campaignModel.ClickRate = 0.20;
             if (campaignModel.Status == 2)
             {
                 campaignModel.SubmissionDateTime = DateTime.Now;
