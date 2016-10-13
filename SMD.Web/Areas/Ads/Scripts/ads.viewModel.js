@@ -13,6 +13,7 @@ define("ads/ads.viewModel",
                        // Controlls editor visibility 
                     searchFilterValue = ko.observable(),
                     isEditorVisible = ko.observable(false),
+					isAdvertdashboardVisible= ko.observable(false),
                     langs = ko.observableArray([]),
                     TemporaryList = ko.observableArray([]),
                     TemporaryProfileList = ko.observableArray([]),
@@ -3175,7 +3176,8 @@ define("ads/ads.viewModel",
                     submitResumeData: submitResumeData,
                     IsprofileQuestion: IsprofileQuestion,
                     Modelheading: Modelheading,
-                    GetAudienceCount: GetAudienceCount
+                    GetAudienceCount: GetAudienceCount,
+					isAdvertdashboardVisible:isAdvertdashboardVisible
                 };
             })()
         };

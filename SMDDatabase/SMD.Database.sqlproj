@@ -63,21 +63,18 @@
     <None Include="GetUserProfileQuestions.sql" />
     <None Include="GetUserSurveys.sql" />
     <None Include="SMDChanges2.sql" />
-    <None Include="GetActiveVSNewUsers.sql" />
-    <None Include="getApprovedCampaignsOverTime.sql" />
     <None Include="SearchCoupons.sql" />
     <None Include="getActiveCampaignsOverTime.sql" />
-    <None Include="GetDealMetric.sql" />
-    <None Include="GetSurvayQestionsAnswered.sql" />
-    <None Include="GetSurvayCardsAnswered.sql" />
     <None Include="GetCouponByID.sql" />
     <None Include="getUserActivitiesOverTime.sql" />
     <None Include="getPayoutVSRevenueOverTime.sql" />
     <None Include="GetRevenueByCampaignOverTime.sql" />
     <None Include="GetLiveCampaignCountOverTime.sql" />
+    <None Include="getAdsCampaignByCampaignId.sql" />
+    <None Include="getPollsBySQID.sql" />
+    <None Include="getSurvayByPQID.sql" />
   </ItemGroup>
   <ItemGroup>
-    <PostDeploy Include="GetRevenueOverTime.sql" />
     <None Include="getCampaignsByStatus.sql" />
     <None Include="GetUserCounts.sql" />
   </ItemGroup>
