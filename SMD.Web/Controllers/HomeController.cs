@@ -86,13 +86,10 @@ namespace SMD.MIS.Controllers
 
             if (roleClaim == null && roleClaim.Any() == false)
             {
-                return RedirectToLocal("/");
+                return RedirectToAction("Login", "Account");
             }
 
-            if (roleClaim.Count() > 0)
-            {
-                return RedirectToLocal("/");
-            }
+           
 
              
             if (RoleName.StartsWith("Franchise"))
