@@ -228,7 +228,7 @@ else
                                         <label for="txtCampaignDisplayName" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Group HeadLine</label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <textarea maxlength="76" style="height:60px; resize:none" name="Coupon Display Name" class="form-control  " id="txtCampaignDisplayName" placeholder="Deal title (76 characters)" data-bind="value: CouponTitle,click: $root.selectJobDescription"></textarea>
+                                        <textarea maxlength="55" style="height:60px; resize:none" name="Coupon Display Name" class="form-control  " id="txtCampaignDisplayName" placeholder="Deal title (55 characters)" data-bind="value: CouponTitle,click: $root.selectJobDescription"></textarea>
                                     </div>
                                     <div class="col-lg-1">
                                         <a id="P0" data-bind="visible:$root.selectedJobDescription()=== 'txtCampaignDisplayName',click:$root.openPhraseLibrary" style="padding: 4px 8px;display:none;" class="btn btn-primary pull-right">
@@ -455,9 +455,7 @@ else
                                         </div>
 
                                         <div class="col-lg-8">
-
-                                            <input style="width:420px!important;" type="text" class="form-control txtBuyItlbl" id="txtBuyItlbl" placeholder="(12 characters)" data-bind="" maxlength="12">
-
+                                            <input style="width:420px!important;" type="text" class=" form-control txtbuyitlbl" id="txtBuyItlbl" placeholder="(12 characters)" data-bind="value:BuyitBtnLabel" maxlength="12">
 
                                         </div>
                                     </div>
@@ -469,7 +467,7 @@ else
                                     </div>
                                     <div class="col-lg-10">
                                         <div class="col-lg-8" style="padding-left:0px;">
-                                            <textarea class="form-control" id="txtBuyItUrl" rows="1" placeholder="Enter in landing page url " style="width:380px;margin-top:5px;" maxlength="500" data-bind="value: BuyitLandingPageUrl"></textarea>
+                                            <textarea class="form-control" id="txtBuyItUrl" rows="1" placeholder="Enter in landing page url " style="width:380px;margin-top:5px;" maxlength="500" data-bind="value:BuyitLandingPageUrl"></textarea>
                                         </div>
                                         <div class="col-lg-4" style="padding-top:4px;text-align:right;">
                                             <button style="width:123px;height:33px;" class="btn  btn-success gtild-color" id="btnNext">Test URL Link</button>
@@ -778,17 +776,19 @@ else
                                         </div>
                                         </div>*@
                                 </div>
+                                
+                                <div class="col-lg-12" style="margin-bottom:20px;">
+                                    <div class="adsubHeading Theme_standard_clr borderbtmline" data-bind="visible: $root.previewScreenNumber() == 3">
+                                        Use words that you would google when looking for your deals.
+                                    </div>
+                                </div>
+
                                 <div class="form-group">
                                     <div class="col-lg-2">
                                         <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">keywords</label>
                                     </div>
                                     <div class="col-lg-7">
                                         <textarea class="form-control" id="txtCampaignDesc" rows="3" maxlength="800" style="resize:none" placeholder="Type in keyword searches to help users find your coupon offer. Seperate with a comma " data-bind="value: SearchKeywords"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12" style="margin-bottom:20px;">
-                                    <div class="adsubHeading Theme_standard_clr borderbtmline" data-bind="visible: $root.previewScreenNumber() == 3">
-                                        Use words that you would google when looking for your deals.
                                     </div>
                                 </div>
                                 <div class="col-lg-11" style="display:none">
@@ -822,14 +822,14 @@ else
 
 
 
-                                <div class="form-group" data-bind="visible: $root.buyItQuestionLabelStatus() == true && $root.buyItQuestionStatus() == true ">
+                                @*<div class="form-group" data-bind="visible: $root.buyItQuestionLabelStatus() == true && $root.buyItQuestionStatus() == true ">
                                     <div class="col-lg-2">
                                         <label for="txtBuyItlbl" class="control-label text-right tooltip-float floatNone">Enter Label</label>
                                     </div>
                                     <div class="col-lg-8">
                                         <input type="text" class="form-control" id="txtBuyItlbl" placeholder="(12 characters)" style="width:50%!important;" maxlength="12" data-bind="value: $root.ButItOtherLabel">
                                     </div>
-                                </div>
+                                </div>*@
 
 
 

@@ -583,7 +583,7 @@ define("Coupons/Coupons.viewModel",
                 }
                 ,
             saveCampaign = function (mode) {
-               
+                debugger;
                 if (ValidateCoupon() == false) {
 
                     var isPopulateErrorList = false;
@@ -613,7 +613,10 @@ define("Coupons/Coupons.viewModel",
                     //if other question then
                     if (buyItQuestionLabelStatus() == true)
                     {
-                        couponModel().BuyitBtnLabel(ButItOtherLabel());
+                        debugger;
+                        couponModel().BuyitBtnLabel();
+
+                       // couponModel().BuyitBtnLabel(ButItOtherLabel());
                     }
                     else
                     {
@@ -731,6 +734,7 @@ define("Coupons/Coupons.viewModel",
 
                   },
                 onEditCampaign = function (item) {
+                    debugger;
                     EditorLoading(true);
                     //resetting flags
                     IsSubmitBtnVisible(false);
@@ -911,6 +915,7 @@ define("Coupons/Coupons.viewModel",
                                         else {
                                             $("#buyItddl").val('999');
                                             buyItQuestionLabelStatus(true);
+                                            debugger;
                                             ButItOtherLabel(buyitbuttonlabel);
                                         }
                                     }
@@ -1117,7 +1122,7 @@ define("Coupons/Coupons.viewModel",
                     return true;
                 },
                 SaveAsDraft = function () {
-
+                    debugger;
                     hasErrors = false;
                     if (couponModel().CouponTitle() == "" || couponModel().CouponTitle() == undefined) {
                         hasErrors = true;
