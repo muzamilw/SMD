@@ -229,7 +229,10 @@ define("FranchiseDashboard/Coupons.viewModel",
                              var cType = companyTypes().find(function (item) {
                                  return comData.CompanyType === item.Id;
                              });
-                             company(cType.Name);
+                             if (cType != undefined)
+                                 company(cType.Name);
+                             else
+                                 company(null);
                              selectedCompany(comData);
                              getCouponPriceOption(selectedItem.couponId);
                              isEditorVisible(true);
