@@ -339,7 +339,7 @@ define("ads/ads.viewModel",
                 campaignModel().MaxBudget("20");
                 campaignModel().Type(mode);
                 campaignModel().DeliveryDays("3");
-                campaignModel().VideoUrl("https://www.");
+                campaignModel().LandingPageVideoLink("https://www.");
 
                 if (mode == 4) {
                     campaignModel().CampaignName("New display ad");

@@ -153,7 +153,7 @@ else
                                 <div class="col-lg-9 adsubHeading Theme_standard_clr">
 
                                     <div class="adsubHeading Theme_standard_clr" data-bind="visible: $root.previewScreenNumber() == 1">
-                                        Use Inspiring headlines to attract attention.
+                                        Use Inspiring headlines to draw attention.
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
@@ -248,7 +248,7 @@ else
                                                 <span>Deal headlines</span>
                                             </div>
                                             <div class="pull-right" style="margin-left:17px;">
-                                                <span>All deal lines are listed inside the group deal listing.<br />Create upto 20 deal lines in order of appearer of appearance.</span>
+                                                <span>All deal lines are listed inside the group deal listing.<br />Create upto 20 deal lines in order of appearance.</span>
                                             </div>
                                             <div class="clearfix"></div>
                                         </div>
@@ -470,7 +470,7 @@ else
                                             <textarea class="form-control" id="txtBuyItUrl" rows="1" placeholder="Enter in landing page url" style="width:380px;margin-top:5px;resize:none" maxlength="500" data-bind="value:BuyitLandingPageUrl"></textarea>
                                         </div>
                                         <div class="col-lg-4" style="padding-top:4px;text-align:right;">
-                                            <button style="width:123px;height:33px;" class="btn  btn-success gtild-color" id="btnNext">Test URL Link</button>
+                                            <button style="width:123px;height:33px;" class="btn  btn-success gtild-color" id="btnNext" onclick="openUrl();">Test URL Link</button>
                                         </div>
                                     </div>
                                 </div>
@@ -564,7 +564,7 @@ else
                                         </div>
 
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" data-bind="visible:$root.ISshowPhone">
                                         <div class="col-lg-2">
                                             <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">Phone no </label>
                                         </div>
@@ -1329,15 +1329,14 @@ else
 
 
 <script id="editActionPirceOptionTemplate" type="text/html">
-    <a href="#" class="table-link" data-bind="click: $root.selectPriceOption, css: { selectedRow: $data === $root.selectedPriceOption() }">
+    <a style="color:green;" href="#" class="table-link" data-bind="click: $root.selectPriceOption">
         <span class="fa-stack">
             <i class="fa fa-square fa-stack-2x"></i>
             <i class="fa fa-floppy-o fa-stack-1x fa-inverse"></i>
         </span>
     </a>
-    <a href="#" class="table-link" data-bind="click: $root.selectPriceOption, css: { selectedRow: $data === $root.selectedPriceOption() }">
+    <a href="#" class="table-link" data-bind="click: $root.selectPriceOption">
         <span class="fa-stack">
-            <i class="fa fa-floppy-o fa-stack-2x"></i>
             <i class="fa fa-square fa-stack-2x"></i>
             <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
         </span>
@@ -1388,7 +1387,7 @@ else
         <td  data-bind="text: Price"></td>
         <td data-bind="text: Savings"></td>
         <td data-bind="text: VoucherCode"></td>
-        <td></td>
+       
         <td id="actionColumn" style="text-align:right;">
             <!-- ko template: { name: 'editActionPirceOptionTemplate' } -->
             <!-- /ko -->
@@ -1424,7 +1423,13 @@ else
     //    $('html, body').animate({ scrollTop: 0 }, 800);
        
     //}
+    function openUrl() {
+     
+        //var win = window.open($("#txtBuyItUrl").val(), '_blank');
+        //win.focus();
 
+        window.open($("#txtBuyItUrl").val(), '_blank');
+    }
     $(function () {
         $('#demo').on('shown.bs.collapse', function (e) {
            
