@@ -1,6 +1,6 @@
-﻿USE [SMDdev]
+﻿USE [SMDv2]
 GO
-/****** Object:  UserDefinedFunction [dbo].[GetUserSurveys]    Script Date: 9/6/2016 10:54:12 AM ******/
+/****** Object:  UserDefinedFunction [dbo].[GetUserSurveys]    Script Date: 10/14/2016 1:05:59 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -53,7 +53,7 @@ as (
 	NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', -- PQAnswer4
 	NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', -- PQAnswer5
 	NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', -- PQAnswer6
-	(((row_number() over (order by sq.Priority) * 100) + 20) ) Weightage,
+	(((row_number() over (order by (case when isnull(sq.companyid,0) = 0 then 10 else 1 end)) * 100) + 20) ) Weightage,
 	sqResponsePercentages.leftImagePercentage, sqResponsePercentages.rightImagePercentage,
 	case when c.TwitterHandle is not null or c.TwitterHandle <> '' then c.TwitterHandle 
 	when c.FacebookHandle is not null or c.FacebookHandle <> '' then c.FacebookHandle 
