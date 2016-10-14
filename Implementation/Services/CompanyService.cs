@@ -96,6 +96,7 @@ namespace SMD.Implementation.Services
                 StripeCustomerId = company.StripeCustomerId,
                 PayPalId =  company.PaypalCustomerId,
                 FirstName = loginUser.FullName,
+                Gender = loginUser.Gender,
                 Email = loginUser.Email,
                 Solutation = loginUser.Title == "Mr." ? 1 : (loginUser.Title == "Ms." ? 2 : 3),
                 Mobile = loginUser.Phone1,
