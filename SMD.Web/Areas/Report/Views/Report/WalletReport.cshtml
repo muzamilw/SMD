@@ -27,7 +27,7 @@
         <div class="col-lg-12">
             <div class=" col-lg-9 form-horizontal" style="padding-left:0px;">
                 <div class="main-box main-box-subpage" style="margin-left:-13px;">
-                    <div style="border-bottom: 1px solid rgb(220,220,220);width: 100%;margin-left: 0px;margin-bottom:10px;display:none;" class="adsubHeading Theme_standard_clr" >
+                    <div style="border-bottom: 1px solid rgb(220,220,220);width: 100%;margin-left: 0px;margin-bottom:10px;display:none;" class="adsubHeading Theme_standard_clr">
                         Invite businesses and earn centz faster.
                         <div class="bs-example-tooltips tooltip-float-width tooltip" style=" margin-top: -5px; ">
                             <a class="input-group-addon" tabindex="-1" href="#" data-toggle="tooltip" title="Hooray!" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;    padding: 0px;padding-top: 5px;"
@@ -132,22 +132,24 @@
                                 <div class="col-lg-12" style="padding-left:8px;" data-bind="visible:$root.referralComponies().length>0">
                                     <div style="border-bottom: 1px solid rgb(220,220,220);width: 100%;margin-left: 0px;margin-bottom:10px; margin-top:15px;" class="adsubHeading Theme_standard_clr">
                                         <span style="color:black !important;">Live campaigns by my referrals           </span>
+                                        <label class="text-left"> &nbsp;</label>
                                     </div>
                                     <!-- ko template: { name: 'ComponyDetails',foreach: $root.referralComponies} -->
                                     <!-- /ko -->
                                 </div>
-                                <div class="col-lg-12" style="padding-left:8px;"  data-bind="visible:$root.referralComponies().length==0">
+                                <div class="col-lg-12" style="padding-left:8px;" data-bind="visible:$root.referralComponies().length==0">
                                     <div style="border-bottom: 1px solid rgb(220,220,220);width: 100%;margin-left: 0px;margin-bottom:10px; margin-top:15px;" class="adsubHeading Theme_standard_clr">
                                         <span style="color:black !important;">Live campaigns by my referrals           </span>
+                                        <label class="text-left"> &nbsp;</label>
                                     </div>
                                     <br />
                                     <br />
-                                    <span style="color:gray;text-align:center">You have not referred any businesses yet.           </span>
+                                    <p style="color:gray;text-align:center">You have not referred any businesses yet.</p>
                                     <br />
                                     <br />
                                     <br />
-                                    <br />
-                                    
+                                  
+
                                 </div>
 
                                 <div class="col-lg-1"></div>
