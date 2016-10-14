@@ -6,9 +6,9 @@
 <div class="col-lg-12" style="padding:0px;">
     <div class="row" id="Heading_div">
         <div class="col-lg-12" style="padding-left: 0px;">
-            <div style="width:125px;" class="pull-left">
+            <div style="width:150px;" class="pull-left">
 
-                <label id="headlabel" style="font-size:24px;color:black!important;margin-top:7px;">Videos ads</label>
+                <label id="headlabel" style="font-size:24px;color:black!important;margin-top:7px;">Wallet History</label>
 
             </div>
             <div style="width:5px;">
@@ -129,12 +129,19 @@
                     <div class="row Subpanels" style="width:97%;margin-left:1px;">
                         <div class="col-lg-12" style="font-size:12px;">
                             <div class="row">
-                                <div class="col-lg-12" style="padding-left:8px;">
-                                    <div style="border-bottom: 1px solid rgb(220,220,220);width: 100%;margin-left: 0px;margin-bottom:10px;" class="adsubHeading Theme_standard_clr">
+                                <div class="col-lg-12" style="padding-left:8px;" data-bind="visible:$root.referralComponies().length>0">
+                                    <div style="border-bottom: 1px solid rgb(220,220,220);width: 100%;margin-left: 0px;margin-bottom:10px; margin-top:15px;" class="adsubHeading Theme_standard_clr">
                                         <span style="color:black !important;">Live campaigns by my referrals           </span>
                                     </div>
-                                        <!-- ko template: { name: 'ComponyDetails',foreach: $root.referralComponies} -->
-                                        <!-- /ko -->
+                                    <!-- ko template: { name: 'ComponyDetails',foreach: $root.referralComponies} -->
+                                    <!-- /ko -->
+                                </div>
+                                <div class="col-lg-12" style="padding-left:8px;" data-bind="visible:$root.referralComponies().length==0">
+                                    <div style="border-bottom: 1px solid rgb(220,220,220);width: 100%;margin-left: 0px;margin-bottom:10px; margin-top:15px;" class="adsubHeading Theme_standard_clr">
+                                        <span style="color:black !important;">Live campaigns by my referrals           </span>
+                                    </div>
+                                    <span style="color:black !important;">You have not referred any businesses yet.           </span>
+                                    
                                 </div>
 
                                 <div class="col-lg-1"></div>
