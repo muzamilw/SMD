@@ -16,6 +16,7 @@ define("FranchiseDashboard/surveyQuestionApp.viewModel",
                     //sorting
                     sortOn = ko.observable(1),
                     selectedCompany = ko.observable(),
+                    company = ko.observable(),
                     //Assending  / Desending
                     sortIsAsc = ko.observable(true),
                     // Controlls editor visibility 
@@ -113,7 +114,7 @@ define("FranchiseDashboard/surveyQuestionApp.viewModel",
                             $("#divApprove").css("display", "block");
                         });
                     },
-                     getApprovalCount = function () {
+                    getApprovalCount = function () {
                          dataservice.getapprovalCount({
                              success: function (data) {
                                  $('#couponCount').text(data.CouponCount);
@@ -128,7 +129,7 @@ define("FranchiseDashboard/surveyQuestionApp.viewModel",
                              }
                          });
                      },
-                       getCompanyData = function (selectedItem) {
+                    getCompanyData = function (selectedItem) {
                            dataservice.getCompanyData(
                         {
                             companyId: selectedItem.companyId,
@@ -137,6 +138,10 @@ define("FranchiseDashboard/surveyQuestionApp.viewModel",
                         {
                             success: function (comData) {
                                 selectedCompany(comData);
+                                var cType = companyTypes().find(function (item) {
+                                    return comData.CompanyType === item.Id;
+                                });
+                                company(cType.Name);
                                 isEditorVisible(true);
 
                             },
@@ -146,7 +151,7 @@ define("FranchiseDashboard/surveyQuestionApp.viewModel",
                         });
 
                        },
-                     onApproveQuestion = function () {
+                    onApproveQuestion = function () {
 
                          confirmation.messageText("Do you want to approve this Survay Cards ? System will attempt to collect payment and generate invoice");
                          confirmation.show();
@@ -160,7 +165,45 @@ define("FranchiseDashboard/surveyQuestionApp.viewModel",
                              $("#divApprove").css("display", "block");
                              toastr.success("Approved Successfully.");
                          });
-                     },
+                    },
+                    companyTypes = ko.observableArray([
+                    { Id: 1, Name: 'Amusement, Gambling, and Recreation Industries' },
+                    { Id: 2, Name: 'Arts, Entertainment, and Recreation' },
+                    { Id: 3, Name: 'Broadcasting (except Internet)' },
+                    { Id: 4, Name: 'Building Material and Garden Equipment and Supplies Dealers' },
+                    { Id: 5, Name: 'Clothing and Clothing Accessories Stores' },
+                    { Id: 6, Name: 'Computer and Electronics' },
+                    { Id: 7, Name: 'Construction' },
+                    { Id: 8, Name: 'Couriers and Messengers' },
+                    { Id: 9, Name: 'Data Processing, Hosting, and Related Services' },
+                    { Id: 10, Name: 'Health Services' },
+                    { Id: 11, Name: 'Educational Services' },
+                    { Id: 12, Name: 'Electronics and Appliance Stores' },
+                    { Id: 13, Name: 'Finance and Insurance' },
+                    { Id: 14, Name: 'Food Services' },
+                    { Id: 15, Name: 'Food and Beverage Stores' },
+                    { Id: 16, Name: 'Furniture and Home Furnishings Stores' },
+                    { Id: 17, Name: 'General Merchandise Stores' },
+                    { Id: 18, Name: 'Health Care' },
+                    { Id: 19, Name: 'Internet Publishing and Broadcasting' },
+                    { Id: 20, Name: 'Leisure and Hospitality' },
+                    { Id: 21, Name: 'Manufacturing' },
+                    { Id: 22, Name: 'Merchant Wholesalers ' },
+                    { Id: 23, Name: 'Motor Vehicle and Parts Dealers ' },
+                    { Id: 24, Name: 'Museums, Historical Sites, and Similar Institutions ' },
+                    { Id: 25, Name: 'Performing Arts, Spectator Sports' },
+                    { Id: 26, Name: 'Printing Services' },
+                    { Id: 27, Name: 'Professional and Business Services' },
+                    { Id: 28, Name: 'Real Estate' },
+                    { Id: 29, Name: 'Repair and Maintenance' },
+                    { Id: 30, Name: 'Scenic and Sightseeing Transportation' },
+                    { Id: 31, Name: 'Service-Providing Industries' },
+                    { Id: 32, Name: 'Social Assistance' },
+                    { Id: 33, Name: 'Sporting Goods, Hobby, Book, and Music Stores' },
+                    { Id: 34, Name: 'Telecommunications' },
+                    { Id: 35, Name: 'Transportation' },
+                    { Id: 36, Name: 'Utilities' }
+                      ]),
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView;
@@ -186,7 +229,9 @@ define("FranchiseDashboard/surveyQuestionApp.viewModel",
                     onRejectQuestion: onRejectQuestion,
                     onApproveQuestion: onApproveQuestion,
                     selectedCompany: selectedCompany,
-                    getApprovalCount: getApprovalCount
+                    getApprovalCount: getApprovalCount,
+                    company: company,
+                    companyTypes: companyTypes,
                 };
             })()
         };
