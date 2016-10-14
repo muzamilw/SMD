@@ -583,7 +583,7 @@ define("Coupons/Coupons.viewModel",
                 }
                 ,
             saveCampaign = function (mode) {
-               
+                debugger;
                 if (ValidateCoupon() == false) {
 
                     var isPopulateErrorList = false;
@@ -613,7 +613,10 @@ define("Coupons/Coupons.viewModel",
                     //if other question then
                     if (buyItQuestionLabelStatus() == true)
                     {
-                        couponModel().BuyitBtnLabel(ButItOtherLabel());
+                        debugger;
+                        couponModel().BuyitBtnLabel();
+
+                       // couponModel().BuyitBtnLabel(ButItOtherLabel());
                     }
                     else
                     {
@@ -731,6 +734,7 @@ define("Coupons/Coupons.viewModel",
 
                   },
                 onEditCampaign = function (item) {
+                    debugger;
                     EditorLoading(true);
                     //resetting flags
                     IsSubmitBtnVisible(false);
@@ -789,14 +793,17 @@ define("Coupons/Coupons.viewModel",
                                         $("#btnCancel,#btnPauseCampaign").removeAttr('disabled');
                                         $("#btnCancel").css("display", "none");
                                         $("#btnCancel,#btnPauseCampaign,#btnClose").removeAttr('disabled');
+                                        isNewCampaign(false);
                                         couponModel().StatusValue("Submitted for Approval");
                                     
                                     } else if (couponModel().Status() == 3) {
-                                        //$("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
+                                        $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
                                         $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
+                                        $("#btnCancel,#btnPauseCampaign").removeAttr('disabled');
                                         //$("#saveBtn").css("display", "none");
                                         //$("#btnPauseCampaign").css("display", "inline-block");
                                         //$("#btnCancel,#btnPauseCampaign,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
+                                        isNewCampaign(false);
                                         couponModel().StatusValue("Live");
                                         IsPauseBtnVisible(true);
                                         //isTerminateBtnVisible(true);
@@ -810,12 +817,15 @@ define("Coupons/Coupons.viewModel",
                                         //$("#btnResumeCampagin").css("display", "inline-block");
                                         //$("#btnCancel,#btnResumeCampagin,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
                                         //$("#btnCancel").css("display", "none");
+                                        isNewCampaign(false);
+                                        IsResumeBtnVisible(true);
                                         couponModel().StatusValue("Paused");
-                                        IsSubmitBtnVisible(true);
+                                        //IsSubmitBtnVisible(true);
                                         //isTerminateBtnVisible(true);
                                        //IsResumeBtnVisible(true);
 
                                     } else if (couponModel().Status() == 5) {
+                                        isNewCampaign(false);
                                         $("#btnCancel").css("display", "block");
                                         couponModel().StatusValue("Completed");
                                     } else if (couponModel().Status() == 6) {
@@ -911,6 +921,7 @@ define("Coupons/Coupons.viewModel",
                                         else {
                                             $("#buyItddl").val('999');
                                             buyItQuestionLabelStatus(true);
+                                            debugger;
                                             ButItOtherLabel(buyitbuttonlabel);
                                         }
                                     }
@@ -1117,7 +1128,7 @@ define("Coupons/Coupons.viewModel",
                     return true;
                 },
                 SaveAsDraft = function () {
-
+                    debugger;
                     hasErrors = false;
                     if (couponModel().CouponTitle() == "" || couponModel().CouponTitle() == undefined) {
                         hasErrors = true;

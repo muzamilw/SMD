@@ -116,6 +116,7 @@
           <Property Name="VoucherLocationLON" Type="nchar" MaxLength="10" />
           <Property Name="MaxDailyBudget" Type="float" />
           <Property Name="SubmissionDateTime" Type="datetime" />
+          <Property Name="ShowBuyitBtn" Type="bit" />
         </EntityType>
         <EntityType Name="AdCampaignClickRateHistory">
           <Key>
@@ -5112,6 +5113,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <NavigationProperty Name="Company" Relationship="DomainModels.FK_AdCampaign_Company" FromRole="AdCampaign" ToRole="Company" />
           <NavigationProperty Name="CampaignEventHistories" Relationship="DomainModels.FK_CampaignEventHistory_AdCampaign" FromRole="AdCampaign" ToRole="CampaignEventHistory" />
           <NavigationProperty Name="AdCampaignClickRateHistories" Relationship="DomainModels.FK_AdCampaignClickRateHistory_AdCampaign" FromRole="AdCampaign" ToRole="AdCampaignClickRateHistory" />
+          <Property Name="ShowBuyitBtn" Type="Boolean" />
         </EntityType>
         <Association Name="FK_AdCampaign_Language">
           <End Type="DomainModels.Language" Role="Language" Multiplicity="0..1" />
@@ -7423,6 +7425,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="AdCampaigns">
             <EntityTypeMapping TypeName="DomainModels.AdCampaign">
               <MappingFragment StoreEntitySet="AdCampaign">
+                <ScalarProperty Name="ShowBuyitBtn" ColumnName="ShowBuyitBtn" />
                 <ScalarProperty Name="SubmissionDateTime" ColumnName="SubmissionDateTime" />
                 <ScalarProperty Name="MaxDailyBudget" ColumnName="MaxDailyBudget" />
                 <ScalarProperty Name="VoucherLocationLON" ColumnName="VoucherLocationLON" />

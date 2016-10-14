@@ -416,7 +416,7 @@ else
 
                                                 <div class="col-lg-8">
 
-                                                    <input style="width:420px!important;" type="text" class="form-control txtBuyItlbl" id="txtBuyItlbl" placeholder="(12 characters)" data-bind="" maxlength="12">
+                                                    <input style="width:420px!important;" type="text" class="form-control txtBuyItlbl" data-bind="value:BuyItButtonLabel" id="txtBuyItlbl" placeholder="(12 characters)"  maxlength="12">
 
 
                                                 </div>
@@ -429,7 +429,7 @@ else
                                                 <label for="txtBuyItUrl" class="control-label text-right tooltip-float floatNone">Landing page url </label>
                                             </div>
                                             <div class="col-lg-7">
-                                                <textarea style="width:420px!important;resize:none" class="form-control" id="urlBx" rows="1" placeholder="Enter in landing page url " data-bind="value: VideoUrl" style="margin-top:5px;"></textarea>
+                                                <textarea style="width:420px!important;margin-top:5px;resize:none" class="form-control" id="urlBx" rows="1" placeholder="Enter in landing page url " data-bind="value:LandingPageVideoLink"></textarea>
                                             </div>
                                             <div class="col-lg-3">
                                                 <button style="width:123px;height:33px;" class="btn  btn-success gtild-color urlbtn" id="btnNext" onclick="openUrl();">Test URL Link</button>

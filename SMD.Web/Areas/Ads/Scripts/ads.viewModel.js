@@ -874,7 +874,7 @@ define("ads/ads.viewModel",
                 } else {
                     campaignModel().IsUseFilter(1);
                 }
-
+                debugger;
 
                 campaignModel().Status(mode);
 
@@ -1855,6 +1855,37 @@ define("ads/ads.viewModel",
                                         });
 
                                     });
+
+
+                                    BuyItButtonLabel(campaignModel().ShowBuyitBtn());
+                                    var buyitbuttonlabel = couponModel().BuyitBtnLabel();
+
+                                    if (couponModel().ShowBuyitBtn() == false) {
+                                        $("#buyItddl").val('0');
+                                    }
+                                    else {
+                                        if (buyitbuttonlabel == 'Apply Now' ||
+                                            buyitbuttonlabel == 'Book Now' ||
+                                            buyitbuttonlabel == 'Contact Us' ||
+                                            buyitbuttonlabel == 'Download' ||
+                                            buyitbuttonlabel == 'Learn More' ||
+                                            buyitbuttonlabel == 'Shop Now' ||
+                                            buyitbuttonlabel == 'Sign Up' ||
+                                            buyitbuttonlabel == 'Watch More'
+                                             ) {
+                                            buyItQuestionLabelStatus(false);
+                                            $("#buyItddl").val(buyitbuttonlabel);
+
+                                        }
+                                        else {
+                                            $("#buyItddl").val('999');
+                                            buyItQuestionLabelStatus(true);
+                                            debugger;
+                                            ButItOtherLabel(buyitbuttonlabel);
+                                        }
+                                    }
+
+
 
                                     if (campaignModel().DeliveryDays() != null) {
                                         if (campaignModel().DeliveryDays() == 3) {
