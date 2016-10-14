@@ -1180,6 +1180,7 @@
     <Content Include="Images\preview_game.jpg" />
     <Content Include="Images\select_image.jpg" />
     <Content Include="Images\Sign_In_Image.png" />
+    <Content Include="Images\standardplaceholder.png" />
     <Content Include="Images\topbarph.png" />
     <Content Include="Images\youtube_play.JPG" />
     <Content Include="ReportViewers\Publisher.aspx" />

@@ -646,10 +646,17 @@ else
                                             <div class="col-lg-4">
                                                 <div style="margin-top:5px;    text-align: center;cursor:pointer;">
                                                     @*<img style="height:90px;" data-bind="visible: couponImage1() == '' || couponImage1() == null"  src="/Content/Images/placeholder.png" onclick="showCouponDialog4();" />*@
-                                                    <img style="height:70px;" data-bind="visible: couponImage1() != '',attr: { src: couponImage1 }" id="bannerImage1" data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(2)" />
-                                                    <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
+
+                                                    <img style="height:70px;" data-bind="visible: couponImage1()!='',attr: { src: couponImage1 }" id="bannerImage1" data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(2)" />
+
+
+                                                    @*<div id="couponImage1" class="placeholders" data-bind="visible: couponImage1() == '/images/default-placeholder.png'" onclick="changeIframeSrc(2);"><span><i class="fa fa-plus" aria-hidden="true" style="color:#32CD32"></i></span></div>*@
+
+
+                                                    <div style="padding-top: 10px;text-align:center;font-size: 12px;color: gray;">
                                                         (450 x 300 pixels)
                                                     </div>
+
                                                 </div>
                                                 <br />
                                                 <div class="fileUpload btn btn-primary" style="display:none;">
@@ -742,20 +749,20 @@ else
                                         <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn"> Deal category</label>
                                     </div>
                                     <div class="col-lg-10">
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-12">
                                             <ol class="dd-list" id="col1List">
                                                 <!-- ko template: { name: 'ListOfSelectedCouponCats2' , foreach: $root.couponCategoriesCol1 } -->
                                                 <!-- /ko -->
                                             </ol>
                                         </div>
-                                        <div class="col-lg-4">
+                                        @*<div class="col-lg-4">
                                             <!-- ko template: { name: 'ListOfSelectedCouponCats2' , foreach: $root.couponCategoriesCol2 } -->
                                             <!-- /ko -->
                                         </div>
                                         <div class="col-lg-4">
                                             <!-- ko template: { name: 'ListOfSelectedCouponCats2' , foreach: $root.couponCategoriesCol3 } -->
                                             <!-- /ko -->
-                                        </div>
+                                        </div>*@
                                     </div>
                                     @*<div class="col-lg-7">
                                         <div class="row">
@@ -1400,7 +1407,7 @@ else
     <!--/ko-->
 </script>
 <script id="ListOfSelectedCouponCats2" type="text/html">
-    <li class="dd-item dd-item-list " data-bind="attr: { id: CategoryId }">
+    <li class="dd-item dd-item-list " data-bind="attr: { id: CategoryId }" style="float:left;margin-right:10px;width:185px;">
         <div class="dd-handle" style=" height:auto;padding-left:5px;">
             <span data-bind="text: Name" style="font-size:12px!important;">
             </span>
@@ -1455,7 +1462,7 @@ else
     }
     function onchangeCheckbox() {
         $('.bigcheckbox').change(function () {
-            if ($('input.bigcheckbox').filter(':checked').length == 3)
+            if ($('input.bigcheckbox').filter(':checked').length >= 3)
                 $('input.bigcheckbox:not(:checked)').attr('disabled', 'disabled');
             else
                 $('input.bigcheckbox').removeAttr('disabled');
@@ -1470,6 +1477,7 @@ else
     var bannerImage3 = "";
     var mode = 1;
     function changeIframeSrc(mode1) {
+       
         mode = mode1;
         if (mode1 != 1)
             mode1 = 2;
@@ -1477,6 +1485,10 @@ else
 
         console.log(mode);
     }
+
+    //$("#couponImage1").click(function () {
+    //    changeIframeSrc(2);
+    //});
     function iframeLoaded() {
 
         var iframeBody = $('body', $('#iframe')[0].contentWindow.document);
@@ -1506,10 +1518,10 @@ else
 
 <!-- Modal -->
 <div class="modal fade" id="damModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document" style="width:1150px;">
+        <div class="modal-dialog" role="document" style="width:883px;">
             <div class="modal-content">
                 <div class="modal-header dam_header">
-                    <button type="button" id="btnDamClose" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" id="btnDamClose" class="close" data-dismiss="modal" aria-label="Close"><span style="color:white!important;">&times;</span></button>
                     <span class="damHeading">Upload/Select Images</span>
                 </div>
                 <div class="modal-body">

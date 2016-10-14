@@ -163,24 +163,24 @@ define("Coupons/Coupons.viewModel",
                                     var set = parseInt((couponCategories().length / 3));
 
                                     //For 1s Column
-                                    for (var i = 0; i < set; i++) {
+                                    for (var i = 0; i < couponCategories().length; i++) {
                                         couponCategoriesCol1.push(couponCategories()[i]);
                                     }
                                     couponCategoriesCol1.valueHasMutated();
-                                    //For 2nd Column
-                                    if (couponCategories().length > set + 1) {
-                                        for (var j = set + 1; j < set*2 + 1; j++) {
-                                            couponCategoriesCol2.push(couponCategories()[j]);
-                                        }
-                                        couponCategoriesCol2.valueHasMutated();
-                                    }
-                                    //For 3rd Column
-                                    if (couponCategories().length >= set * 2 + 1) {
-                                        for (var k = set * 2 + 1; k < couponCategories().length; k++) {
-                                            couponCategoriesCol3.push(couponCategories()[k]);
-                                        }
-                                        couponCategoriesCol2.valueHasMutated();
-                                    }
+                                    ////For 2nd Column
+                                    //if (couponCategories().length > set + 1) {
+                                    //    for (var j = set + 1; j < set*2 + 1; j++) {
+                                    //        couponCategoriesCol2.push(couponCategories()[j]);
+                                    //    }
+                                    //    couponCategoriesCol2.valueHasMutated();
+                                    //}
+                                    ////For 3rd Column
+                                    //if (couponCategories().length >= set * 2 + 1) {
+                                    //    for (var k = set * 2 + 1; k < couponCategories().length; k++) {
+                                    //        couponCategoriesCol3.push(couponCategories()[k]);
+                                    //    }
+                                    //    couponCategoriesCol2.valueHasMutated();
+                                    //}
 
                                 }
 
@@ -487,11 +487,11 @@ define("Coupons/Coupons.viewModel",
                   campaignNamePlaceHolderValue('New Voucher');
                   isEnableVedioVerificationLink(false);
 
-                  couponModel().CouponImage2("/images/default-placeholder.png");
+                  couponModel().CouponImage2("/images/standardplaceholder.png");
 
-                  couponModel().CouponImage3("/images/default-placeholder.png");
-                  couponModel().couponImage1("/images/default-placeholder.png");
-                  couponModel().LogoUrl("/images/default-placeholder.png");
+                  couponModel().CouponImage3("/images/standardplaceholder.png");
+                  couponModel().couponImage1("/images/standardplaceholder.png");
+                  couponModel().LogoUrl("/images/standardplaceholder.png");
                   couponModel().Price(10);
                   couponModel().Savings(15);
                   couponModel().CouponQtyPerUser(3);

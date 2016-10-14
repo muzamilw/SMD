@@ -16,11 +16,16 @@ define("survey/survey.viewModel",
                     countries = ko.observableArray([]),
                     //pager
                     pager = ko.observable(),
+                    Modelheading = ko.observable(""),
                     // Search Filter value 
                     filterValue = ko.observable(),
                     langfilterValue = ko.observable(0),
                     countryfilterValue = ko.observable(0),
+                    TemporaryProfileList = ko.observableArray([]),
+                    TemporaryQuizQuestions = ko.observableArray([]),
+                    TemporarySurveyList = ko.observableArray([]),
                     price = ko.observable(0),
+                    SearchProfileQuestion = ko.observable(''),
                     // Controlls editor visibility 
                     isEditorVisible = ko.observable(false),
                     ////selected Question
@@ -591,6 +596,7 @@ define("survey/survey.viewModel",
 
                 },
                showAdditionUserCriteria = function () {
+                   Modelheading('Profile Questions');
                    isNewCriteria(true);
                    var objProfileCriteria = new model.SurveyQuestionTargetCriteria();
 
@@ -611,6 +617,8 @@ define("survey/survey.viewModel",
                                    profileQuestionList([]);
                                    ko.utils.arrayPushAll(profileQuestionList(), data.ProfileQuestions);
                                    profileQuestionList.valueHasMutated();
+                                   TemporaryProfileList.clear;
+                                   TemporaryProfileList(profileQuestionList());
                                }
 
                            },
@@ -623,7 +631,78 @@ define("survey/survey.viewModel",
                    showCompanyProfileQuestions(false);
 
                },
+                getQuestionByFilter = function () {
+
+                    if (AditionalCriteriaMode() == 2) {
+
+                        if (SearchProfileQuestion() != '') {
+
+                            profileQuestionList(TemporaryProfileList());
+
+                            var list = ko.utils.arrayFilter(profileQuestionList(), function (prod) {
+                                return prod.Question.toLowerCase().indexOf(SearchProfileQuestion().toLowerCase()) != -1;
+                            });
+                            profileQuestionList().clear;
+                            profileQuestionList(list);
+                        }
+                        else {
+                            profileQuestionList.clear;
+                            profileQuestionList(TemporaryProfileList());
+                        }
+                    }
+                    else if (AditionalCriteriaMode() == 3) {
+
+                        if (SearchProfileQuestion() != '') {
+                            myQuizQuestions(TemporaryQuizQuestions());
+                            var list = ko.utils.arrayFilter(myQuizQuestions(), function (prod) {
+
+                                return prod.VerifyQuestion.toLowerCase().indexOf(SearchProfileQuestion().toLowerCase()) != -1;
+                            });
+                            myQuizQuestions().clear;
+                            myQuizQuestions(list);
+                        }
+                        else {
+                            myQuizQuestions.clear;
+                            myQuizQuestions(TemporaryQuizQuestions());
+                        }
+
+                    }
+
+                    else if (AditionalCriteriaMode() == 4) {
+
+                        if (SearchProfileQuestion() != '') {
+                            surveyquestionList(TemporarySurveyList());
+                            var list = ko.utils.arrayFilter(surveyquestionList(), function (prod) {
+
+                                return prod.DisplayQuestion.toLowerCase().indexOf(SearchProfileQuestion().toLowerCase()) != -1;
+                            });
+                            surveyquestionList().clear;
+                            surveyquestionList(list);
+                        }
+                        else {
+                            surveyquestionList.clear;
+                            surveyquestionList(TemporarySurveyList());
+                        }
+
+                        if (SearchProfileQuestion() != '') {
+                            surveyquestionList(TemporarySurveyList());
+                            var list = ko.utils.arrayFilter(surveyquestionList(), function (prod) {
+
+                                return prod.DisplayQuestion.toLowerCase().indexOf(SearchProfileQuestion().toLowerCase()) != -1;
+                            });
+                            surveyquestionList().clear;
+                            surveyquestionList(list);
+                        }
+                        else {
+                            surveyquestionList.clear;
+                            surveyquestionList(TemporarySurveyList());
+                        }
+
+                    }
+                },
+
             showAdditionalSurveyQuestions = function () {
+                Modelheading('Survey Questions');
                 isNewCriteria(true);
                 var objProfileCriteria = new model.SurveyQuestionTargetCriteria();
 
@@ -645,7 +724,8 @@ define("survey/survey.viewModel",
                                 ko.utils.arrayPushAll(profileQuestionList(), data.ProfileQuestions);
                                 console.log(data.profileQuestionList)
                                 profileQuestionList.valueHasMutated();
-
+                                TemporaryProfileList.clear;
+                                TemporaryProfileList(profileQuestionList());
                                 console.log(data)
                             }
 
@@ -661,7 +741,7 @@ define("survey/survey.viewModel",
                 showCompanyProfileQuestions(true);
             },
             showAdditionUserSurveyCriteria = function () {
-
+                Modelheading('Polls');
                 isNewCriteria(true);
                 var objProfileCriteria = new model.SurveyQuestionTargetCriteria();
 
@@ -684,6 +764,8 @@ define("survey/survey.viewModel",
                                 surveyquestionList([]);
                                 ko.utils.arrayPushAll(surveyquestionList(), data.SurveyQuestions);
                                 surveyquestionList.valueHasMutated();
+                                TemporarySurveyList.clear;
+                                TemporarySurveyList(surveyquestionList());
                             }
 
                         },
@@ -697,6 +779,7 @@ define("survey/survey.viewModel",
 
 
             showAdditionQuizCriteria = function () {
+                Modelheading('Your Quiz Questions');
                 isNewCriteria(true);
                 var objProfileCriteria = new model.SurveyQuestionTargetCriteria();
 
@@ -716,6 +799,8 @@ define("survey/survey.viewModel",
                                 myQuizQuestions([]);
                                 ko.utils.arrayPushAll(myQuizQuestions(), data.AdCampaigns);
                                 myQuizQuestions.valueHasMutated();
+                                TemporaryQuizQuestions.clear;
+                                TemporaryQuizQuestions(myQuizQuestions());
                             }
 
                         },
@@ -1908,7 +1993,13 @@ define("survey/survey.viewModel",
                     totalPrice: totalPrice,
                     SavePassChanges: SavePassChanges,
                     terminateSaveChanges: terminateSaveChanges,
-                    DefaultRangeValue: DefaultRangeValue
+                    DefaultRangeValue: DefaultRangeValue,
+                    Modelheading: Modelheading,
+                    getQuestionByFilter: getQuestionByFilter,
+                    SearchProfileQuestion: SearchProfileQuestion,
+                    TemporaryProfileList:TemporaryProfileList,
+                    TemporaryQuizQuestions:TemporaryQuizQuestions,
+                    TemporarySurveyList: TemporarySurveyList
                 };
             })()
         };

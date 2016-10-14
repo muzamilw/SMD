@@ -1437,10 +1437,9 @@
 </div>
 <script id="profileQuestionTiles" type="text/html">
     <!--ko if:$root.showCompanyProfileQuestions() == true && CompanyId != null -->
-    <div class="list ListRowHov">
+    <div class="list">
         <div class="parent-list-title" data-bind="click:$root.onChangeProfileQuestion"><span data-bind="text:Question"></span></div>
-        <div class="listview list-type-tiles chlidList" data-role="listview">
-            <div><span class="listlabels">Select audience who have answered one of the following results.</span></div>
+        <div class="listview set-border padding10 list-type-tiles chlidList" data-role="listview">
             <!-- ko template: { name: 'profileQuestionAnsTiles' , foreach: $root.profileAnswerList } --><!-- /ko -->
             <div class="clear-both"></div>
         </div>
@@ -1448,22 +1447,18 @@
     </div>
     <!--/ko-->
     <!--ko if:$root.showCompanyProfileQuestions() == false && CompanyId == null-->
-    <div class="list ListRowHov">
+    <div class="list">
         <div class="parent-list-title" data-bind="click:$root.onChangeProfileQuestion"><span data-bind="text:Question"></span></div>
-        <div class="listview list-type-tiles chlidList" data-role="listview">
-
-            <div><span class="listlabels">Select audience who have answered one of the following results.</span></div>
-            <div>
-                <!-- ko template: { name: 'profileQuestionAnsTiles' , foreach: $root.profileAnswerList } --><!-- /ko -->
-            </div>
+        <div class="listview set-border padding10 list-type-tiles chlidList" data-role="listview">
+            <!-- ko template: { name: 'profileQuestionAnsTiles' , foreach: $root.profileAnswerList } --><!-- /ko -->
             <div class="clear-both"></div>
         </div>
         <div class="clear-both"></div>
     </div>
     <!--/ko-->
 
-
 </script>
+
 <script id="SurveyssQuestionTiles" type="text/html">
     <div class="list">
         <div class="parent-list-title"><span data-bind="text:DisplayQuestion"></span></div>

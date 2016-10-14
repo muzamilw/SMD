@@ -11,14 +11,14 @@
 <section id="main" style="display:none;">
     <div class="row">
 
-        <div class="row" style="padding-left:0px;min-height:400px;">
+        <div class="row" style="padding-left:16px;min-height:400px;">
             
-            <div class="pull-left damImgContainer Border_right" style="width:20%;overflow:auto;height:600px;overflow-x: hidden;border-right: 1px solid rgb(220,220,220) ">
+            <div class="pull-left damImgContainer Border_right" style="width:30%;overflow:auto;height:600px;overflow-x: hidden;border-right: 1px solid rgb(220,220,220) ">
 
                 @if (Model != null && Model.Images != null && Model.Images.Count > 0)
                 {
                     <div class="imageContainer">
-                        <div  style="height: 38px!important;text-align: left;padding-top: 8px;border-bottom: 1px solid rgb(220,220,220);"><span class="greycolor" style="font-weight:normal!important;color:#7f8c8d !important">Saved images</span></div>
+                        @*<div  style="height: 38px!important;text-align: left;padding-top: 8px;border-bottom: 1px solid rgb(220,220,220);"><span class="greycolor" style="font-weight:normal!important;color:#7f8c8d !important">Saved images</span></div>*@
     
                         @foreach (var img in Model.Images)
                         {
@@ -45,15 +45,15 @@
                 }
             </div>
             
-            <div class=" pull-left" style="width:63%;padding-left:6px;">
+            <div class=" pull-left" style="width:63%;padding-left:12px;">
 
-                <div style="height: 43px;border-bottom: 1px solid rgb(220,220,220);text-align: left;padding-top: 12px;color:#7f8c8d !important">
+                @*<div style="height: 43px;border-bottom: 1px solid rgb(220,220,220);text-align: left;padding-top: 12px;color:#7f8c8d !important">
 
                     Upload your image or select from our free images.
 
-                </div>
+                </div>*@
                 <div id="tabs" style=" border: none;">
-                    <ul style="height:46px;padding-top: 3px;padding-left: 4px;">
+                    <ul style="height:46px;padding-top: 3px;padding-left: 4px;display:none;">
     
                         <li><a href="#tabs-1" style="background-color:#81d3dc;border-color:#81d3dc;">Upload Image</a></li>
                         <li><a href="#tabs-2" style="background-color:#81d3dc;border-color:#81d3dc;">Free Images</a></li>
@@ -76,12 +76,11 @@
                                     @*<div style="height:110px;width:110px;">Upload an Image</div>*@
                                     <div id="uploadFileMain" style="height:110px;width:110px;background-color:#e9e9e9;padding-top:46px;text-align:center;">
                                         <span><i class="fa fa-plus" aria-hidden="true" style="color:#32CD32"></i></span>
-
                                     </div>
                                 </div>
                                 <div class="image-editor">
 
-                                    <div style="margin-bottom:60px;margin-left:30px;margin-right:20px;">Your uploaded image must be greater than minimum size of (<b><span id="spansizestring"></span></b>). You can pan/zoom your bigger images and crop them to requied size below.</div>
+                                    <div style="margin-bottom:28px;margin-left:30px;margin-right:20px;">Images must be a minimum size of 450 x 300 pixels.(<b><span id="spansizestring"></span></b>).<br />Pan, Zoom and Crop your image inside the frame below..</div>
                                     <input type="file" class="cropit-image-input" style="display:none;">
                                     <div class="cropit-preview"></div>
                                     <div class="controls-wrapper">
@@ -200,6 +199,7 @@
         $(".cropit-preview").css("width", minWidth + "px");
         $(".cropit-preview").css("height", minheight + "px");
         $('.cropit-image-input').change(function (evt) {
+            $(".editor-row").css("display","none");
             $(".image-editor").css("display", "block");
         });
         $('.imageFreePreview').click(function (evt) {
@@ -209,14 +209,17 @@
             $(".cropit-preview").attr("src",this.src);
             $( "#tabs" ).tabs({ active: 0});
         });
-        
+
+
         $("#uploadFileMain").click(function () {
             $('.cropit-image-input').click();
+          //  $(".editor-row").css("display","none");
             return false;
         });
         $("#cancelCategory").click(function () {
             $('.image-editor').css("display", "none");
             $(".cropit-image-input").val('');
+            $(".editor-row").css("display","block");
             return false;
         });
         $(function () {

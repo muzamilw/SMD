@@ -1056,7 +1056,15 @@ div#spinner {
 .drafthov :hover{
     background-color:#00bcd4!important;
 }
+.placeholders {
+    height: 110px;
+    width: 110px;
+    background-color: #e9e9e9;
+    padding-top: 46px;
+    text-align: center;
+}
 
-
-
+.close>span {
+    color:#ffffff!important;
+}
 /*# sourceMappingURL=MainSite.css.map */

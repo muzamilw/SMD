@@ -1814,3 +1814,63 @@ BEGIN
  
 END
 GO
+
+
+
+
+
+
+
+GO
+/****** Object:  UserDefinedFunction [dbo].[GetUserSurveySelectionPercentage]    Script Date: 10/13/2016 1:44:06 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER FUNCTION [dbo].[GetUserSurveySelectionPercentage]
+(	--  select * from [GetUserSurveySelectionPercentage](10300)
+	-- Add the parameters for the function here
+	@sqId int = 0
+)
+RETURNS 
+@SurveySelectionPercentage TABLE
+(
+	-- Add the column definitions for the TABLE variable here
+	leftImagePercentage float null, 
+	rightImagePercentage float null
+)
+AS
+BEGIN
+	-- Fill the table variable with the rows for your result set
+	DECLARE @surveyResponses float
+	SELECT @surveyResponses = count(*) from SurveyQuestionResponse where SQID = @sqId
+
+	-- Add the SELECT statement with parameter references here
+	insert into @SurveySelectionPercentage
+	values
+	((select 
+	CASE
+		WHEN @surveyResponses is null or @surveyResponses <= 0
+		THEN @surveyResponses
+		WHEN @surveyResponses > 0
+		THEN  
+		CEILING((count(*) / @surveyResponses) * 100)
+	END as leftImagePercentage
+	  from SurveyQuestionResponse
+	where SQID = @sqId and UserSelection = 1),
+	((select 
+	CASE
+		WHEN @surveyResponses is null or @surveyResponses <= 0
+		THEN @surveyResponses
+		WHEN @surveyResponses > 0
+		THEN  
+		floor(((count(*) / @surveyResponses) * 100))
+	END as rightImagePercentage
+	 from SurveyQuestionResponse
+	where SQID = @sqId and UserSelection = 2)))
+
+	RETURN 
+END
+
+
+------------------------------------------ all above scripts executed on live server.
