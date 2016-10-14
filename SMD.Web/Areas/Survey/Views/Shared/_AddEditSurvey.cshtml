@@ -708,12 +708,13 @@
                                                 </div>
 
                                             </div>
-                                            <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                                            <div class="modal fade bs-example-modal-lg" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
                                                 <div class="modal-dialog modal-lg">
                                                     <div class="modal-content">
-                                                        <div class="modal-header">
+                                                        <div class="modal-header" style="background-color: #81d3dc;text-align: center;">
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                            <h4 class="modal-title" id="gridSystemModalLabel">Add Criteria</h4>
+                                                            @*<h4 class="modal-title" id="gridSystemModalLabel">Add Criteria</h4>*@
+                                                            <span class="text-center" style="font-size:24px;color: #ffffff; line-height: 2.5 !important;">Add Criteria</span>
                                                         </div>
                                                         <div class="modal-body" data-bind="with:$root.selectedCriteria">
                                                             <div class="row">
@@ -721,7 +722,7 @@
                                                                 <div>
                                                                     <div class="col-lg-12 marginBottom12">
                                                                         <div class="form-group" data-bind="visible:$root.isNewCriteria">
-                                                                            <div class="col-lg-12" >
+                                                                            <div class="col-lg-12">
                                                                                 <div class="adsubHeading Theme_standard_clr">
 
                                                                                     <div style="height:56px;" class="borderbtmline ">
@@ -779,8 +780,8 @@
 
                                                                             <div class="pull-right" data-bind="visible: $root.AditionalCriteriaMode() == '2'">
                                                                                 @*<div class="row header">
-                                                                                    <label class="control-label modelHeading">Profile Questions</label>
-                                                                                </div>*@
+                                                <label class="control-label modelHeading">Profile Questions</label>
+                                            </div>*@
                                                                                 <div class="listview parentList set-border padding10 list-type-tiles" data-role="listview" id="lv1">
                                                                                     <!-- ko template: { name: 'profileQuestionTiles' , foreach: $root.profileQuestionList} --><!-- /ko -->
                                                                                     <div class="clear-both"></div>
@@ -790,8 +791,8 @@
 
                                                                             <div class="pull-right" data-bind="visible: $root.AditionalCriteriaMode() == '4'">
                                                                                 @*<div class="row header">
-                                                                                    <label class="control-label modelHeading">Survey Questions</label>
-                                                                                </div>*@
+                                                <label class="control-label modelHeading">Survey Questions</label>
+                                            </div>*@
                                                                                 <div class="listview parentList set-border padding10 list-type-tiles" data-role="listview" id="lv1">
                                                                                     <!-- ko template: { name: 'SurveyssQuestionTiles' , foreach: $root.surveyquestionList} --><!-- /ko -->
                                                                                     <div class="clear-both"></div>
@@ -800,8 +801,8 @@
 
                                                                             <div class="pull-right" data-bind="visible: $root.AditionalCriteriaMode() == '3'">
                                                                                 @*<div class="row header">
-                                                                                    <label class="control-label modelHeading">Your Quiz Questions</label>
-                                                                                </div>*@
+                                                <label class="control-label modelHeading">Your Quiz Questions</label>
+                                            </div>*@
                                                                                 <div class="listview parentList set-border padding10 list-type-tiles" data-role="listview" id="lv2">
                                                                                     <!-- ko template: { name: 'surveyQuestionTiles' , foreach: $root.myQuizQuestions} --><!-- /ko -->
                                                                                     <div data-bind="visible: $root.myQuizQuestions().length == 0" style="display:none;">

@@ -14,7 +14,8 @@ define("Coupons/Coupons.viewModel",
                        // Controlls editor visibility 
                     searchFilterValue = ko.observable(),
                     isEditorVisible = ko.observable(false),
-                    EditorLoading= ko.observable(false),
+                    EditorLoading = ko.observable(false),
+                    ISshowPhone = ko.observable(false),
                     langs = ko.observableArray([]),
                     countoryidList = [],
                     cityidList = [],
@@ -391,6 +392,7 @@ define("Coupons/Coupons.viewModel",
                 StatusValue('Draft');
                 IsSubmitBtnVisible(true);
                 couponModel().CouponPriceOptions.splice(0, 0, new model.CouponPriceOption());
+                couponModel().BuyitLandingPageUrl('https://');
                 selectedPriceOption(couponModel().CouponPriceOptions()[0]);
                 couponModel().reset();
             },
@@ -676,21 +678,26 @@ define("Coupons/Coupons.viewModel",
                     },
                 //Create Price option
                      onCreatePriceOption = function () {
-                         var priceOption = couponModel().CouponPriceOptions()[0];
-                         //Create Price option for the very First Time
-                         if (priceOption == undefined) {
-                             couponModel().CouponPriceOptions.splice(0, 0, new model.CouponPriceOption());
-                             selectedPriceOption(couponModel().CouponPriceOptions()[couponModel().CouponPriceOptions.length+1]);
-                         }
-                             //If There are already Price options in list
-                         else {
-                             if (!priceOption.isValid()) {
-                                 priceOption.errors.showAllMessages();
+                         if (couponModel().CouponPriceOptions().length <= 20) {
+                             var priceOption = couponModel().CouponPriceOptions()[0];
+                             //Create Price option for the very First Time
+                             if (priceOption == undefined) {
+                                 couponModel().CouponPriceOptions.splice(0, 0, new model.CouponPriceOption());
+                                 selectedPriceOption(couponModel().CouponPriceOptions()[couponModel().CouponPriceOptions.length + 1]);
                              }
+                                 //If There are already Price options in list
                              else {
-                                 couponModel().CouponPriceOptions.splice(couponModel().CouponPriceOptions().length, 0, new model.CouponPriceOption());
-                                 selectedPriceOption(couponModel().CouponPriceOptions()[couponModel().CouponPriceOptions().length-1]);
+                                 if (!priceOption.isValid()) {
+                                     priceOption.errors.showAllMessages();
+                                 }
+                                 else {
+                                     couponModel().CouponPriceOptions.splice(couponModel().CouponPriceOptions().length, 0, new model.CouponPriceOption());
+                                     selectedPriceOption(couponModel().CouponPriceOptions()[couponModel().CouponPriceOptions().length - 1]);
+                                 }
                              }
+                         }
+                         else {
+                             toastr.error("Sorry,you can Create upto 20 deal lines.");
                          }
                      },
                 // Delete a Price option
@@ -1741,15 +1748,10 @@ define("Coupons/Coupons.viewModel",
                  },
                 locationChanged = function (item) {
 
-                    
-
                     var matchedItem = ko.utils.arrayFirst(branchLocations(), function (arrayitem) {
 
                         return arrayitem.BranchId == item.LocationBranchId();
                     });
-
-                    
-
 
                     if (matchedItem != null) {
                         item.LocationTitle(matchedItem.BranchTitle);
@@ -1762,6 +1764,8 @@ define("Coupons/Coupons.viewModel",
                         item.LocationLON(matchedItem.BranchLocationLong);
                         item.LocationPhone(matchedItem.BranchPhone);
                     }
+                    ISshowPhone(true);
+
                 },
                 LocationChangedOnSelectedIndex = function (val)
                 {
@@ -2158,7 +2162,8 @@ define("Coupons/Coupons.viewModel",
                     couponCategoriesCol2: couponCategoriesCol2,
                     couponCategoriesCol3: couponCategoriesCol3,
                     currencyCode: currencyCode,
-                    currencySymbol: currencySymbol
+                    currencySymbol: currencySymbol,
+                    ISshowPhone: ISshowPhone
                 };
             })()
         };
