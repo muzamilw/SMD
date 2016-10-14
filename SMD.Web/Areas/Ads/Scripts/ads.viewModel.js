@@ -13,12 +13,15 @@ define("ads/ads.viewModel",
                        // Controlls editor visibility 
                     searchFilterValue = ko.observable(),
                     isEditorVisible = ko.observable(false),
-					isAdvertdashboardVisible= ko.observable(false),
+                    buyItQuestionStatus = ko.observable(false),
+					isAdvertdashboardVisible = ko.observable(false),
+                    ButItOtherLabel = ko.observable(''),
                     langs = ko.observableArray([]),
                     TemporaryList = ko.observableArray([]),
                     TemporaryProfileList = ko.observableArray([]),
                     TemporaryQuizQuestions = ko.observableArray([]),
                     TemporarySurveyList = ko.observableArray([]),
+                    BuyItStatus = ko.observable(false),
                     countoryidList = [],
                     cityidList = [],
                     langidList = [],
@@ -111,7 +114,7 @@ define("ads/ads.viewModel",
                 professions = ko.observableArray([]),
                 surveyquestionList = ko.observableArray([]),
                 voucherQuestionStatus = ko.observable(false),
-                buyItQuestionStatus = ko.observable(false),
+                
                 AditionalCriteriaMode = ko.observable("1"), //1 = main buttons, 2 = profile questions , 3 = ad linked questions
             showCompanyProfileQuestions = ko.observable(false),
                 couponCategories = ko.observableArray([]),
@@ -874,7 +877,7 @@ define("ads/ads.viewModel",
                 } else {
                     campaignModel().IsUseFilter(1);
                 }
-
+                debugger;
 
                 campaignModel().Status(mode);
 
@@ -1101,7 +1104,37 @@ define("ads/ads.viewModel",
                     $(".close").click();
                     isShowSurveyAns(false);
                 },
+                 handleBuyIt = function (item) {
+                     var selectionoption = $("#ddTextBtns").val();
 
+                     if (selectionoption == '0') {
+                         buyItQuestionStatus(false);
+                         campaignModel().ShowBuyitBtn(false);
+                         BuyItStatus(false);
+                         ButItOtherLabel('');
+                     }
+                     else if (selectionoption == '999')  //other scenario
+                     {
+                         buyItQuestionStatus(true);
+                         campaignModel().ShowBuyitBtn(true);
+                          BuyItStatus(true);
+                         campaignModel().BuyItButtonLabel('');
+
+                     }
+                     else if (selectionoption == 'Custom Button Label')
+                     {
+                         BuyItStatus(true);
+                         campaignModel().ShowBuyitBtn(true);
+                     }
+                     else {
+                         buyItQuestionStatus(false);
+                         campaignModel().ShowBuyitBtn(true);
+                         BuyItStatus(false);
+                         ButItOtherLabel('');
+                         campaignModel().BuyItButtonLabel('');
+                     }
+
+                 },
                  saveSurveyQuestion = function (type, item) {
 
                      var selectedQuestionstring = item.DisplayQuestion;
@@ -1855,6 +1888,35 @@ define("ads/ads.viewModel",
                                         });
 
                                     });
+
+
+                                    //BuyItButtonLabel(campaignModel().ShowBuyitBtn());
+
+                                    //var buyitbuttonlabel = couponModel().BuyitBtnLabel();
+
+                                    //if (couponModel().ShowBuyitBtn() == false) {
+                                    //    $("#buyItddl").val('0');
+                                    //}
+                                    //else {
+                                    //    if (buyitbuttonlabel == 'Apply Now' ||
+                                    //        buyitbuttonlabel == 'Book Now' ||
+                                    //        buyitbuttonlabel == 'Contact Us' ||
+                                    //        buyitbuttonlabel == 'Download' ||
+                                    //        buyitbuttonlabel == 'Learn More' ||
+                                    //        buyitbuttonlabel == 'Shop Now' ||
+                                    //        buyitbuttonlabel == 'Sign Up' ||
+                                    //        buyitbuttonlabel == 'Watch More'
+                                    //         ) {
+                                    //        buyItQuestionLabelStatus(false);
+                                    //        $("#buyItddl").val(buyitbuttonlabel);
+                                    //    }
+                                    //    else {
+                                    //        $("#buyItddl").val('999');
+                                    //        buyItQuestionLabelStatus(true);
+                                    //        ButItOtherLabel(buyitbuttonlabel);
+                                    //    }
+                                    //}
+
 
                                     if (campaignModel().DeliveryDays() != null) {
                                         if (campaignModel().DeliveryDays() == 3) {
@@ -3079,7 +3141,7 @@ define("ads/ads.viewModel",
                     saveProfileQuestion: saveProfileQuestion,
                     updateProfileQuestion: updateProfileQuestion,
                     updateSurveyCriteria: updateSurveyCriteria,
-                    buyItQuestionStatus: buyItQuestionStatus,
+                    
                     buyItImageCallback: buyItImageCallback,
                     openEditScreen: openEditScreen,
                     isWelcomeScreenVisible: isWelcomeScreenVisible,
@@ -3175,7 +3237,11 @@ define("ads/ads.viewModel",
                     IsprofileQuestion: IsprofileQuestion,
                     Modelheading: Modelheading,
                     GetAudienceCount: GetAudienceCount,
-					isAdvertdashboardVisible:isAdvertdashboardVisible
+                    isAdvertdashboardVisible: isAdvertdashboardVisible,
+                    handleBuyIt: handleBuyIt,
+                    BuyItStatus: BuyItStatus,
+                    buyItQuestionStatus: buyItQuestionStatus,
+                    ButItOtherLabel: ButItOtherLabel
                 };
             })()
         };

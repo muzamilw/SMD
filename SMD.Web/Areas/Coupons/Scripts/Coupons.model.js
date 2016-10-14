@@ -91,14 +91,7 @@
               ShowBuyitBtn = ko.observable(ShowBuyitBtn),
               BuyitLandingPageUrl = ko.observable(BuyitLandingPageUrl),
               BuyitBtnLabel = ko.observable(BuyitBtnLabel),
-
-
               CouponPriceOptions = ko.observableArray([]),
-
-
-
-
-
                // Errors
           errors = ko.validation.group({
               couponTitle: couponTitle
@@ -289,8 +282,6 @@
                       BuyitBtnLabel: BuyitBtnLabel(),
                       CouponPriceOptions: priceOptions
 
-
-                      
                   };
               };
           return {
