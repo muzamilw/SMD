@@ -97,7 +97,7 @@ namespace SMD.Implementation.Services
                 PayPalId =  company.PaypalCustomerId,
                 FirstName = loginUser.FullName,
                 Email = loginUser.Email,
-                Solutation = loginUser.Gender == 1? 1 : 2,
+                Solutation = loginUser.Title == "Mr." ? 1 : (loginUser.Title == "Ms." ? 2 : 3),
                 Mobile = loginUser.Phone1,
                 DateOfBirth = loginUser.DOB,
                 IsReceiveDeals = loginUser.optDealsNearMeEmails??false,
@@ -270,14 +270,21 @@ namespace SMD.Implementation.Services
             if (source.Solutation == 1)
             {
                 currentUser.Title = "Mr.";
+                currentUser.Gender = 1;
             }
-            else
+            else if (source.Solutation == 2)
             {
-                currentUser.Title = "MRs.";
+                currentUser.Title = "Ms.";
+                currentUser.Gender = 2;
+            }
+            else if (source.Solutation == 3)
+            {
+                currentUser.Title = "Mrs.";
+                currentUser.Gender = 2;
             }
 
             currentUser.FullName = source.FirstName;
-            currentUser.Gender = source.Solutation == 1 ? 1 : 2;
+            
            // currentUser.Email = source.Email;
             currentUser.DOB = source.DateOfBirth;
             currentUser.IndustryId = source.Profession;

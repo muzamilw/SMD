@@ -11,6 +11,9 @@ namespace SMD.Interfaces.Services
     {
         AdCampaignBaseResponse GetSurveyQuestionAnser(long SqID);
         AdCampaignBaseResponse GetALLSurveyQuestionData();
+
+        AdCampaignBaseResponse GetSurveyQuestionDataByCompanyId();
+
         AdCampaignBaseResponse GetCampaignBaseData();
         AdCampaignBaseResponse SearchCountriesAndCities(string searchString);
         AdCampaignBaseResponse SearchLanguages(string searchString);

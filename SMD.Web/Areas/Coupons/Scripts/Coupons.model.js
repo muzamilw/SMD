@@ -33,7 +33,7 @@
               CouponListingMode = ko.observable(couponListingMode  == 1 ? "1" : "2"),
               CouponQtyPerUser = ko.observable(CouponQtyPerUser).extend({ required: true}),
               CouponRedeemedCount = ko.observable(CouponRedeemedCount),
-              CouponTitle = ko.observable(CouponTitle),
+              couponTitle = ko.observable(CouponTitle),
               CouponViewCount = ko.observable(CouponViewCount),
               CreatedBy = ko.observable(CreatedBy),
               CreatedDateTime = ko.observable(CreatedDateTime),
@@ -91,10 +91,10 @@
               ShowBuyitBtn = ko.observable(ShowBuyitBtn),
               BuyitLandingPageUrl = ko.observable(BuyitLandingPageUrl),
               BuyitBtnLabel = ko.observable(BuyitBtnLabel),
-              CouponPriceOptions = ko.observableArray([])
+              CouponPriceOptions = ko.observableArray([]),
                // Errors
           errors = ko.validation.group({
-              CouponTitle: CouponTitle
+              couponTitle: couponTitle
           }),
                 // Is Valid 
              isValid = ko.computed(function () {
@@ -118,7 +118,7 @@
                  CouponListingMode : CouponListingMode,
                  CouponQtyPerUser : CouponQtyPerUser,
                  CouponRedeemedCount: CouponRedeemedCount,
-                 CouponTitle : CouponTitle,
+                 couponTitle : couponTitle,
                  CouponViewCount : CouponViewCount,
                  CreatedBy : CreatedBy,
                  CreatedDateTime : CreatedDateTime,
@@ -171,12 +171,14 @@
 
                 ShowBuyitBtn : ShowBuyitBtn,
                 BuyitLandingPageUrl : BuyitLandingPageUrl,
-                BuyitBtnLabel: BuyitBtnLabel
-                //CouponPriceOptions: CouponPriceOptions
+                BuyitBtnLabel: BuyitBtnLabel,
+
+
+                CouponPriceOptions: CouponPriceOptions
 
               }),
               // Has Changes
-              hasChanges = ko.computed(function () {
+              CouponhasChanges = ko.computed(function () {
                   return dirtyFlag.isDirty();
               }),
               // Reset
@@ -223,7 +225,7 @@
                       CouponListingMode: CouponListingMode(),
                       CouponQtyPerUser: CouponQtyPerUser(),
                       CouponRedeemedCount: CouponRedeemedCount(),
-                      CouponTitle: CouponTitle(),
+                      couponTitle: couponTitle(),
                       CouponViewCount: CouponViewCount(),
                       CreatedBy: CreatedBy(),
                       SubmissionDateTime:SubmissionDateTime(),
@@ -270,8 +272,7 @@
                       StatusValue :StatusValue (),
                       SwapCost: SwapCost(),
                       UserId: UserId(),
-                      LogoImageBytes: LogoImageBytes(),
-                      hasChanges: hasChanges(),
+                      LogoImageBytes: LogoImageBytes(),                      
                       CouponCategories: selectedCoupons,
                       CouponStartDate: moment(CouponStartDate()).format(ist.utcFormat) + 'Z',
                       CouponEndDate: moment(CouponEndDate()).format(ist.utcFormat) + 'Z',
@@ -301,7 +302,7 @@
               CouponListingMode: CouponListingMode,
               CouponQtyPerUser: (CouponQtyPerUser),
               CouponRedeemedCount: (CouponRedeemedCount),
-              CouponTitle: (CouponTitle),
+              couponTitle: (couponTitle),
               CouponViewCount: (CouponViewCount),
               CreatedBy: (CreatedBy),
               CreatedDateTime: (CreatedDateTime),
@@ -347,7 +348,7 @@
               SwapCost: (SwapCost),
               UserId: (UserId),
               LogoImageBytes: LogoImageBytes,
-              hasChanges: hasChanges,
+              CouponhasChanges: CouponhasChanges,
               convertToServerData: convertToServerData,
               CouponCategories: CouponCategories,
               SubmissionDateTime: (SubmissionDateTime),
