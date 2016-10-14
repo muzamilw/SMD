@@ -128,7 +128,7 @@
                                                         <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;font-size:small;color:lightgray">Billing Country:</label>
                                                     </div>
                                                     <div class="col-lg-8">
-                                                        <label style="font-size:11px">Test Country</label>
+                                                        <label style="font-size:11px" data-bind="text:BillingCountryName"></label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -178,7 +178,7 @@
                                                         <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;font-size:small;color:lightgray">Company Type:</label>
                                                     </div>
                                                     <div class="col-lg-8">
-                                                        <label data-bind="text:CompanyType" style="font-size:11px"></label>
+                                                        <label data-bind="text:$root.company()" style="font-size:11px"></label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group" style="margin-bottom:0px;">
