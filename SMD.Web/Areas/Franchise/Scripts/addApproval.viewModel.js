@@ -120,7 +120,10 @@ define("FranchiseDashboard/addApproval.viewModel",
                                var cType = companyTypes().find(function (item) {
                                    return comData.CompanyType === item.Id;
                                });
-                               company(cType.Name);
+                               if (cType != undefined)
+                                   company(cType.Name);
+                               else
+                                   company(null);
                                isEditorVisible(true);
 
                            },
