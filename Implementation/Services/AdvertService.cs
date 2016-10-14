@@ -913,6 +913,15 @@ namespace SMD.Implementation.Services
                 SurveyQuestions = _surveyQuestionRepository.GetAll().Where(g => g.Status != 0)
             };
         }
+
+        public AdCampaignBaseResponse GetSurveyQuestionDataByCompanyId()
+        {
+            return new AdCampaignBaseResponse
+            {
+                SurveyQuestions = _surveyQuestionRepository.GetAllByCompanyId().Where(g => g.Status != 0)
+            };
+        }
+
         public AdCampaignBaseResponse GetSurveyQuestionAnser(long SqID)
         {
             return new AdCampaignBaseResponse
