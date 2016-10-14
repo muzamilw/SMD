@@ -1987,7 +1987,6 @@ ADD ShowBuyitBtn bit
 
 
 
-USE [SMDv2]
 GO
 /****** Object:  StoredProcedure [dbo].[SearchCampaigns]    Script Date: 10/14/2016 3:43:00 PM ******/
 SET ANSI_NULLS ON
@@ -2073,3 +2072,7 @@ BEGIN
 	FETCH NEXT @toRow ROWS ONLY
 	
 END
+
+
+
+------------------------------------------ all above scripts executed on live server.
