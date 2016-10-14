@@ -921,7 +921,6 @@ define("Coupons/Coupons.viewModel",
                                         else {
                                             $("#buyItddl").val('999');
                                             buyItQuestionLabelStatus(true);
-                                            debugger;
                                             ButItOtherLabel(buyitbuttonlabel);
                                         }
                                     }

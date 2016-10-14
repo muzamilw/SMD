@@ -395,10 +395,8 @@ namespace SMD.Implementation.Services
 
             //maintaining click rate history
            
-                _adCampaignClickRateHistoryRepository.Add(new AdCampaignClickRateHistory { CampaignID = campaignModel.CampaignId, ClickRate = campaignModel.ClickRate, RateChangeDateTime = DateTime.Now });
+           _adCampaignClickRateHistoryRepository.Add(new AdCampaignClickRateHistory { CampaignID = campaignModel.CampaignId, ClickRate = campaignModel.ClickRate, RateChangeDateTime = DateTime.Now });
                 _adCampaignClickRateHistoryRepository.SaveChanges();
-
-
 
             string[] paths = SaveImages(campaignModel);
             if (paths != null && paths.Count() > 0)
@@ -456,8 +454,6 @@ namespace SMD.Implementation.Services
                     oModel.CampaignId = campaignModel.CampaignId;
                     oModel.CategoryId = item.CategoryId;
                     _campaignCategoriesRepository.Add(oModel);
-
-
                 }
                 _campaignCategoriesRepository.SaveChanges();
 
