@@ -33,7 +33,7 @@
               CouponListingMode = ko.observable(couponListingMode  == 1 ? "1" : "2"),
               CouponQtyPerUser = ko.observable(CouponQtyPerUser).extend({ required: true}),
               CouponRedeemedCount = ko.observable(CouponRedeemedCount),
-              couponTitle = ko.observable(CouponTitle),
+              CouponTitle = ko.observable(CouponTitle),
               CouponViewCount = ko.observable(CouponViewCount),
               CreatedBy = ko.observable(CreatedBy),
               CreatedDateTime = ko.observable(CreatedDateTime),
@@ -94,7 +94,7 @@
               CouponPriceOptions = ko.observableArray([]),
                // Errors
           errors = ko.validation.group({
-              couponTitle: couponTitle
+              CouponTitle: CouponTitle
           }),
                 // Is Valid 
              isValid = ko.computed(function () {
@@ -118,7 +118,7 @@
                  CouponListingMode : CouponListingMode,
                  CouponQtyPerUser : CouponQtyPerUser,
                  CouponRedeemedCount: CouponRedeemedCount,
-                 couponTitle : couponTitle,
+                 CouponTitle : CouponTitle,
                  CouponViewCount : CouponViewCount,
                  CreatedBy : CreatedBy,
                  CreatedDateTime : CreatedDateTime,
@@ -225,7 +225,7 @@
                       CouponListingMode: CouponListingMode(),
                       CouponQtyPerUser: CouponQtyPerUser(),
                       CouponRedeemedCount: CouponRedeemedCount(),
-                      couponTitle: couponTitle(),
+                      CouponTitle: CouponTitle(),
                       CouponViewCount: CouponViewCount(),
                       CreatedBy: CreatedBy(),
                       SubmissionDateTime:SubmissionDateTime(),
@@ -302,7 +302,7 @@
               CouponListingMode: CouponListingMode,
               CouponQtyPerUser: (CouponQtyPerUser),
               CouponRedeemedCount: (CouponRedeemedCount),
-              couponTitle: (couponTitle),
+              CouponTitle: (CouponTitle),
               CouponViewCount: (CouponViewCount),
               CreatedBy: (CreatedBy),
               CreatedDateTime: (CreatedDateTime),
