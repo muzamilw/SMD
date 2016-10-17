@@ -6,6 +6,8 @@ using SMD.Models.DomainModels;
 using SMD.Repository.BaseRepository;
 using System;
 using System.Data.Entity;
+using SMD.Models.RequestModels;
+using System.Linq.Expressions;
 
 namespace SMD.Repository.Repositories
 {
@@ -53,6 +55,31 @@ namespace SMD.Repository.Repositories
         {
             return DbSet.Where(g => g.StageOneStatus.Value == 1 && g.StageTwoStatus == null).ToList();
         }
+        public IEnumerable<PayOutHistory> GetPayOutHistoryForApprovalStage1(GetPagedListRequest request, out int rowCount)
+        {
+            int fromRow = (request.PageNo - 1) * request.PageSize;
+            int toRow = request.PageSize;
+            Expression<Func<PayOutHistory, bool>> query =
+                s => s.StageOneStatus == null;
+            rowCount = DbSet.Count(query);
+            var res = DbSet.Where(query)
+            .OrderByDescending(p => p.CentzAmount);
+            return res.Skip(fromRow)
+                .Take(toRow);
+        }
+        public IEnumerable<PayOutHistory> GetPayOutHistoryForApprovalStage2(GetPagedListRequest request, out int rowCount)
+        {
+            int fromRow = (request.PageNo - 1) * request.PageSize;
+            int toRow = request.PageSize;
+            Expression<Func<PayOutHistory, bool>> query =
+                s => s.StageOneStatus == 1 && s.StageTwoStatus ==null;
+            rowCount = DbSet.Count(query);
+            var res = DbSet.Where(query)
+             .OrderByDescending(p => p.CentzAmount);
+            return res.Skip(fromRow)
+                .Take(toRow);
+        }
+
       
         
         #endregion

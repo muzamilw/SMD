@@ -266,6 +266,7 @@
     <Compile Include="ResponseModels\BaseApiResponse.cs" />
     <Compile Include="ResponseModels\CompanyResponseModel.cs" />
     <Compile Include="ResponseModels\CouponsResponseModelForApproval.cs" />
+    <Compile Include="ResponseModels\PayOutResponseModelForApproval.cs" />
     <Compile Include="ResponseModels\RandomGameResponse.cs" />
     <Compile Include="ResponseModels\ProfileQuestionResponseModelForApproval.cs" />
     <Compile Include="ResponseModels\RevenueOverTimeResponseModel.cs" />

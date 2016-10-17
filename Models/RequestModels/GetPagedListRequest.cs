@@ -58,5 +58,6 @@ namespace SMD.Models.RequestModels
         /// Total Count
         /// </summary>
         public int TotalCount { get; set; }
+        public bool isFlage { get; set; }
     }
 }
