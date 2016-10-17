@@ -2076,3 +2076,26 @@ END
 
 
 ------------------------------------------ all above scripts executed on live server.
+
+
+
+
+ALTER TABLE Coupon
+ADD YoutubeLink varchar(MAX)
+
+
+ALTER TABLE CouponPriceOption
+ADD ExpiryDate datetime
+
+ALTER TABLE CouponPriceOption
+ADD URL varchar(MAX)
+
+
+ALTER TABLE Coupon
+ADD CouponImage4 nvarchar(MAX)
+
+ALTER TABLE Coupon
+ADD CouponImage5 nvarchar(MAX)
+
+ALTER TABLE Coupon
+ADD CouponImage6 nvarchar(MAX)
