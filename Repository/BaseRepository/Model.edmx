@@ -483,6 +483,9 @@
           <Property Name="BuyitLandingPageUrl" Type="nvarchar" MaxLength="500" />
           <Property Name="BuyitBtnLabel" Type="nvarchar" MaxLength="200" />
           <Property Name="YoutubeLink" Type="varchar(max)" />
+          <Property Name="CouponImage4" Type="nvarchar(max)" />
+          <Property Name="CouponImage5" Type="nvarchar(max)" />
+          <Property Name="CouponImage6" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="CouponCategories">
           <Key>
@@ -513,6 +516,8 @@
           <Property Name="Savings" Type="float" />
           <Property Name="VoucherCode" Type="nvarchar" MaxLength="100" />
           <Property Name="OptionUrl" Type="nvarchar" MaxLength="500" />
+          <Property Name="ExpiryDate" Type="datetime" />
+          <Property Name="URL" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="Currency">
           <Key>
@@ -5580,6 +5585,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <NavigationProperty Name="Company" Relationship="DomainModels.FK_Coupon_Company" FromRole="Coupon" ToRole="Company" />
           <NavigationProperty Name="CampaignEventHistories" Relationship="DomainModels.FK_CampaignEventHistory_Coupon" FromRole="Coupon" ToRole="CampaignEventHistory" />
           <Property Name="YoutubeLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CouponImage4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CouponImage5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CouponImage6" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_CompanyBranch_BranchCategory">
           <End Type="DomainModels.BranchCategory" Role="BranchCategory" Multiplicity="0..1" />
@@ -6167,6 +6175,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="OptionUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Coupon" Relationship="DomainModels.FK_CouponPriceOption_Coupon" FromRole="CouponPriceOption" ToRole="Coupon" />
           <Property Name="VoucherCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ExpiryDate" Type="DateTime" Precision="3" />
+          <Property Name="URL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_CouponPriceOption_Coupon">
           <End Type="DomainModels.Coupon" Role="Coupon" Multiplicity="0..1" />
@@ -7731,6 +7741,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="Coupons">
             <EntityTypeMapping TypeName="DomainModels.Coupon">
               <MappingFragment StoreEntitySet="Coupon">
+                <ScalarProperty Name="CouponImage6" ColumnName="CouponImage6" />
+                <ScalarProperty Name="CouponImage5" ColumnName="CouponImage5" />
+                <ScalarProperty Name="CouponImage4" ColumnName="CouponImage4" />
                 <ScalarProperty Name="YoutubeLink" ColumnName="YoutubeLink" />
                 <ScalarProperty Name="BuyitBtnLabel" ColumnName="BuyitBtnLabel" />
                 <ScalarProperty Name="BuyitLandingPageUrl" ColumnName="BuyitLandingPageUrl" />
@@ -8155,6 +8168,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="CouponPriceOptions">
             <EntityTypeMapping TypeName="DomainModels.CouponPriceOption">
               <MappingFragment StoreEntitySet="CouponPriceOption">
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
                 <ScalarProperty Name="VoucherCode" ColumnName="VoucherCode" />
                 <ScalarProperty Name="OptionUrl" ColumnName="OptionUrl" />
                 <ScalarProperty Name="Savings" ColumnName="Savings" />
