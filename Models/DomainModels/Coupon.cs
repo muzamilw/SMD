@@ -93,6 +93,9 @@ namespace SMD.Models.DomainModels
         public string BuyitLandingPageUrl { get; set; }
 	    public string BuyitBtnLabel { get; set; }
 
+        public string YoutubeLink { get; set; }
+        
+
         public virtual ICollection<CouponCategories> CouponCategories { get; set; }
 
         [NotMapped]

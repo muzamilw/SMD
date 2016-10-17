@@ -482,6 +482,7 @@
           <Property Name="ShowBuyitBtn" Type="bit" />
           <Property Name="BuyitLandingPageUrl" Type="nvarchar" MaxLength="500" />
           <Property Name="BuyitBtnLabel" Type="nvarchar" MaxLength="200" />
+          <Property Name="YoutubeLink" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="CouponCategories">
           <Key>
@@ -2492,7 +2493,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Parameter Name="Status" Type="int" Mode="In" />
           <Parameter Name="keyword" Type="nvarchar" Mode="In" />
           <Parameter Name="companyId" Type="int" Mode="In" />
-          <Parameter Name="fromRow" Type="int" Mode="In" />
+          <Parameter Name="fromRoww" Type="int" Mode="In" />
           <Parameter Name="toRow" Type="int" Mode="In" />
           <Parameter Name="adminMode" Type="bit" Mode="In" />
         </Function>
@@ -3510,7 +3511,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <Parameter Name="Status" Mode="In" Type="Int32" />
             <Parameter Name="keyword" Mode="In" Type="String" />
             <Parameter Name="companyId" Mode="In" Type="Int32" />
-            <Parameter Name="fromRow" Mode="In" Type="Int32" />
+            <Parameter Name="fromRoww" Mode="In" Type="Int32" />
             <Parameter Name="toRow" Mode="In" Type="Int32" />
             <Parameter Name="adminMode" Mode="In" Type="Boolean" />
           </FunctionImport>
@@ -5578,6 +5579,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <NavigationProperty Name="CouponPriceOptions" Relationship="DomainModels.FK_CouponPriceOption_Coupon" FromRole="Coupon" ToRole="CouponPriceOption" />
           <NavigationProperty Name="Company" Relationship="DomainModels.FK_Coupon_Company" FromRole="Coupon" ToRole="Company" />
           <NavigationProperty Name="CampaignEventHistories" Relationship="DomainModels.FK_CampaignEventHistory_Coupon" FromRole="Coupon" ToRole="CampaignEventHistory" />
+          <Property Name="YoutubeLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_CompanyBranch_BranchCategory">
           <End Type="DomainModels.BranchCategory" Role="BranchCategory" Multiplicity="0..1" />
@@ -7729,6 +7731,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="Coupons">
             <EntityTypeMapping TypeName="DomainModels.Coupon">
               <MappingFragment StoreEntitySet="Coupon">
+                <ScalarProperty Name="YoutubeLink" ColumnName="YoutubeLink" />
                 <ScalarProperty Name="BuyitBtnLabel" ColumnName="BuyitBtnLabel" />
                 <ScalarProperty Name="BuyitLandingPageUrl" ColumnName="BuyitLandingPageUrl" />
                 <ScalarProperty Name="ShowBuyitBtn" ColumnName="ShowBuyitBtn" />
