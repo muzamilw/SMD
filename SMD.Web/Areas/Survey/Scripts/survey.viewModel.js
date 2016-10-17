@@ -228,12 +228,13 @@ define("survey/survey.viewModel",
                     StatusValue("Draft");
                     selectedQuestion(new model.Survey());
                     selectedQuestion().Gender("1");
-                    selectedQuestion().LeftPicturePath("/Images/select_image.jpg");
-                    selectedQuestion().RightPicturePath("/Images/select_image.jpg");
+                    //selectedQuestion().LeftPicturePath("/Images/select_image.jpg");
+                    //selectedQuestion().RightPicturePath("/Images/select_image.jpg");
+                    selectedQuestion().LeftPicturePath("/images/standardplaceholder.png");
+                    selectedQuestion().RightPicturePath("/images/standardplaceholder.png");
                     selectedQuestion().StatusValue("Draft");
                     selectedQuestion().AgeRangeStart(13);
                     selectedQuestion().AgeRangeEnd(80);
-
 
                     if (!reachedAudience() > 0) {
                         getAudienceCountForAdd(selectedQuestion());

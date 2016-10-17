@@ -29,9 +29,9 @@
                                     _.each(data.Transactions, function (item) {
                                         walletReport.push(model.WalletReportServertoClientMapper(item));
                                     });
-                                    balance(data.Balance.toFixed(2));
+                                    balance(data.Balance);
                                     var amount = data.Balance / 100;
-                                    dollarBalance(amount.toFixed(2));
+                                    dollarBalance(amount);
                                     getReferralComponies();
                                     ////pager().totalCount(0);
                                     //pager().totalCount(data.TotalCount);
