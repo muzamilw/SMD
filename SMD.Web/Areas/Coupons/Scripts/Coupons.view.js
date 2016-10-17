@@ -188,7 +188,16 @@ define("Coupons/Coupons.view",
                                       viewModel.addEducation(selected);
                                   }
                               });
+                      var myEvent = window.attachEvent || window.addEventListener;
+                      var chkevent = window.attachEvent ? 'onbeforeunload' : 'beforeunload'; /// make IE7, IE8 compatable
 
+                      myEvent(chkevent, function (e) { // For >=IE7, Chrome, Firefox
+                          if (viewModel.couponModel().CouponhasChanges()) {
+                              var confirmationMessage = ' ';  // a space
+                              (e || window.event).returnValue = confirmationMessage;
+                              return confirmationMessage;
+                          }
+                      });
                 },
             
                 // Initialize

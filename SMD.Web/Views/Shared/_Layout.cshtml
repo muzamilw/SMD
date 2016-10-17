@@ -164,8 +164,9 @@
                             </a>
                             <ul class="dropdown-menu loginMenu">
 
-                                <li><a href="">@Name</a></li>
-                                <li><a href="">@MobileNo</a></li>
+                                <li><a href="#">@Name</a></li>
+                                <li><a href="#">@MobileNo</a></li>
+                                <li><a href="#">Role : @RoleName</a></li>
                                 @*<li style="height:9px;"></li>*@
                                 <li style="display: block;
                                 margin-top: 0.5em;
@@ -175,7 +176,7 @@
                                 border-style: inset;
                                 border-width: 1px;"></li>
 
-                                <li><a href="">Role : @RoleName</a></li>
+                              
                                 @*<li id="userProfileBinding"><a data-bind="click:showUserProfileDialog">Personal Profile</a></li>*@
                                 <li id="companyProfileBinding"><a style="cursor: pointer" data-bind="click:showCompanyProfileDialog">Account Settings</a></li>
                                 <li><a href="/User/ManageUser/ManageUsers">Invite colleagues to manage campaigns</a></li>
@@ -193,6 +194,7 @@
                                 border-width: 1px;"></li>
                                 <li><a href="~/">Analytics and Charts</a></li>
                                 <li><a href="~/Billing/Manage/Invoice">Billing History</a></li>
+                                <li><a class=" " id="btnWallet" href="~/Report/report/WalletReport">Wallet History</a></li>
                                 @*<li class="inlineMenuItem"><a href="~/Billing/Manage/Invoice">&nbsp;&nbsp;View Invoices</a></li>
                                     <li class="inlineMenuItem"><a href="">&nbsp;&nbsp;Payment Methods</a></li>*@
 
@@ -305,10 +307,10 @@
                     </div>
                     <div class="col-sm-4 pull-left hideInCoupons" style="height:46px;padding-left:46px;color: black;">
 
-                        <span class="line-separator"></span>
+                        @*<span class="line-separator"></span>
                         <div class="pull-left">
                             <span class="pull-left" style="color:#7f8c8d;font-size:13px;">Generate Income <br />Refer Businesses - <b style="color: #3498db;">Earn 25% </b></span>
-                        </div>
+                        </div>*@
 
                         <div class="pull-right" style="width:143px;">
 
@@ -359,7 +361,7 @@
                             </div>
                             @*<a class="btn btn-default btn-gray " href="~/ProfileQuestion/Manage/Index" id="btninviteusers" style=" width:136px;float:left;margin-right:20px;font-size:14px;padding-top:17px; height:58px;" href="#">Invite Business</a>*@
 
-                            <a class="btn btn-default btn-gray " id="btnWallet" style=" width:136px;float:left;margin-right:0px;font-size:14px;height:58px;padding-top:17px" href="~/Report/report/WalletReport">Wallet History</a>
+                            @*<a class="btn btn-default btn-gray " id="btnWallet" style=" width:136px;float:left;margin-right:0px;font-size:14px;height:58px;padding-top:17px" href="~/Report/report/WalletReport">Wallet History</a>*@
 
                             <br />
                             <br />

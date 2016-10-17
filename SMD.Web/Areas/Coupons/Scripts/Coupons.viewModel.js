@@ -421,6 +421,7 @@ define("Coupons/Coupons.viewModel",
                     $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign,#btnStopAndTerminate,#btnCopyCampaign").removeAttr('disabled');
                     //show the main menu;
                     showMainMenu();
+                 //   couponModel().reset();
                 });
                 confirmation.afterCancel(function () {
 
@@ -441,6 +442,7 @@ define("Coupons/Coupons.viewModel",
                     showMainMenu();
                 });
                 confirmation.show();
+              //  couponModel().reset();
                 return;
                 //} else {
                 //    isEditorVisible(false);
@@ -516,7 +518,7 @@ define("Coupons/Coupons.viewModel",
 
             submitCampaignData = function () {
                 hasErrors = false;
-                    if (couponModel().couponTitle() == "" || couponModel().couponTitle() == undefined) {
+                    if (couponModel().CouponTitle() == "" || couponModel().CouponTitle() == undefined) {
                         hasErrors = true;
                         toastr.error("Please enter Group Title.");
                     }
@@ -757,7 +759,7 @@ define("Coupons/Coupons.viewModel",
                     collapseMainMenu();
 
                     previewScreenNumber(1);
-                    CouponTitle(item.couponTitle());
+                    CouponTitle(item.CouponTitle());
                     
                     $(".hideInCoupons").css("display", "none");
 
@@ -1009,7 +1011,7 @@ define("Coupons/Coupons.viewModel",
                 nextPreviewScreen = function () {
                     var hasErrors = false;
                     if (previewScreenNumber() == 1) {
-                        if (couponModel().couponTitle() == "" || couponModel().couponTitle() == undefined) {
+                        if (couponModel().CouponTitle() == "" || couponModel().CouponTitle() == undefined) {
                             hasErrors = true;
                             toastr.error("Please enter Coupon Title.");
                         }
@@ -1054,7 +1056,7 @@ define("Coupons/Coupons.viewModel",
                    
                     var hasErrors = false;
                    
-                        if (couponModel().couponTitle() == "" || couponModel().couponTitle() == undefined) {
+                        if (couponModel().CouponTitle() == "" || couponModel().CouponTitle() == undefined) {
                             hasErrors = true;
                             toastr.error("Please enter Coupon Title.");
                             gotoScreen(1);
@@ -1140,7 +1142,7 @@ define("Coupons/Coupons.viewModel",
                 SaveAsDraft = function () {
                     debugger;
                     hasErrors = false;
-                    if (couponModel().couponTitle() == "" || couponModel().couponTitle() == undefined) {
+                    if (couponModel().CouponTitle() == "" || couponModel().CouponTitle() == undefined) {
                         hasErrors = true;
                         toastr.error("Please enter Group Title.");
                     }
@@ -1816,7 +1818,7 @@ define("Coupons/Coupons.viewModel",
 
                          else if (selectedJobDescription() === 'txtCampaignDisplayName')
 
-                             TempSelectedObj().couponTitle(phrase);
+                             TempSelectedObj().CouponTitle(phrase);
                              //fineprint
 
                          else if (selectedJobDescription() === 'txtCampaignDescription')
@@ -1932,7 +1934,7 @@ define("Coupons/Coupons.viewModel",
                     else {
                         CloseContent();
                     }
-
+                    couponModel().reset();
                 }
                 ,
                 CloseContent = function ()

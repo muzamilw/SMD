@@ -47,7 +47,7 @@ define("ads/ads.view",
                           displayKey: 'bindedValue',
                           source: array.ttAdapter()
                       }).bind('typeahead:selected', function (obj, selected) {
-                          
+                          console.log(obj);
                           if (selected) {
                               var CityID = null, CountryID = null, Radius = 0, Country = '', City = '', latitude = '', longitude = '';
                               if (selected.IsCountry) {
@@ -79,7 +79,13 @@ define("ads/ads.view",
                               $('#searchCampaignLocations').focus(function () {
                                   $('.twitter-typeahead input').val("");
                               });
+                              $('#searchCampaignLocations').focusout(function () {
+                                  $('.twitter-typeahead input').val("");
+                              });
+                              $('#searchCampaignLocations').typeahead('close');
+                              $('#searchCampaignLocations').typeahead('val', '');
                           }
+                         
                       });
                    
                       var lan_array = new Bloodhound({
@@ -191,13 +197,24 @@ define("ads/ads.view",
                                       viewModel.addEducation(selected);
                                   }
                               });
+                    
+                      var myEvent = window.attachEvent || window.addEventListener;
+                      var chkevent = window.attachEvent ? 'onbeforeunload' : 'beforeunload'; /// make IE7, IE8 compatable
 
+                      myEvent(chkevent, function (e) { // For >=IE7, Chrome, Firefox
+                          if (viewModel.campaignModel().hasChanges()) {
+                              var confirmationMessage = ' ';  // a space
+                              (e || window.event).returnValue = confirmationMessage;
+                              return confirmationMessage;
+                          }
+                      });
                   },
                 // Initialize
                 initialize = function () {
                     if (!bindingRoot) {
                         return;
                     }
+
                 };
             initialize();
 

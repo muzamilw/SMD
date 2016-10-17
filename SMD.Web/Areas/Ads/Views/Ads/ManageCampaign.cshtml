@@ -415,7 +415,7 @@ else
                                             </div>
                                         </div>
                                      
-                                        <div class="form-group" >
+                                        <div class="form-group" data-bind="visible:$root.showLandingPageUrl() == true">
                                             <div class="col-lg-2">
                                                 <label for="txtBuyItUrl" class="control-label text-right tooltip-float floatNone">Landing page url </label>
                                             </div>
@@ -425,7 +425,7 @@ else
                                             <div class="col-lg-3">
                                                 <button style="width:123px;height:33px;" class="btn  btn-success gtild-color urlbtn" id="btnNext" onclick="openUrl();">Test URL Link</button>
                                             </div>
-                                            </div>
+                                        </div>
                                     </div>
 
 
@@ -1248,7 +1248,7 @@ else
                                             </div>
                                         <div class="clearfix"></div>
                                       
-                                        <div class="pull-right" data-bind="visible: $root.AditionalCriteriaMode() == '2'">
+                                        <div class="" data-bind="visible: $root.AditionalCriteriaMode() == '2'">
                                          
                                             <div class="listview parentList set-border padding10 list-type-tiles" data-role="listview" id="ProfileQtsList">
                                                 <!-- ko template: { name: 'profileQuestionTiles' , foreach: $root.profileQuestionList} --><!-- /ko -->
@@ -1258,7 +1258,7 @@ else
                                         </div>
                                         <div class="clearfix"></div>
 
-                                        <div class="pull-right" data-bind="visible: $root.AditionalCriteriaMode() == '4'">
+                                        <div class="" data-bind="visible: $root.AditionalCriteriaMode() == '4'">
                                             @*<div class="row header">
                                                 <label class="control-label modelHeading">Survey Questions</label>
                                             </div>*@
@@ -1269,7 +1269,7 @@ else
                                         </div>
 
 
-                                        <div class="pull-right" data-bind="visible: $root.AditionalCriteriaMode() == '3'">
+                                        <div class="" data-bind="visible: $root.AditionalCriteriaMode() == '3'">
 
                                             @*<div class="row header">
                                                 <label class="control-label modelHeading">Your Quiz Questions</label>

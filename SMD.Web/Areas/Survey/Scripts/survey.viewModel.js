@@ -330,6 +330,7 @@ define("survey/survey.viewModel",
                     else {
                         CloseContent();
                     }
+                    selectedQuestion().reset();
                 },
               CloseContent = function () {
                   isEditorVisible(false); enableControls();
