@@ -267,8 +267,10 @@ else
                                                     <tr>
 
                                                         <th class="col-lg-5 GridHeaderFont_size" style="padding-left:7px;"><span>Deal Headline</span></th>
-                                                        <th class="col-lg-2 GridHeaderFont_size"> <span>Price&nbsp;<span data-bind="text:$root.currencyCode"></span></span></th>
-                                                        <th class="col-lg-2 GridHeaderFont_size"> <span>Savings&nbsp;<span data-bind="text:$root.currencyCode"></span></span></th>
+                                                        <th class="col-lg-3 GridHeaderFont_size"> <span>Price<span data-bind="text:$root.currencyCode"></span></span></th>
+                                                        <th class="col-lg-3 GridHeaderFont_size"> <span>Savings<span data-bind="text:$root.currencyCode"></span></span></th>
+                                                        <th class="col-lg-3 GridHeaderFont_size"> <span>Url<span data-bind="text:$root.currencyCode"></span></span></th>
+                                                        <th class="col-lg-3 GridHeaderFont_size"> <span>Expiry<span data-bind="text:$root.currencyCode"></span></span></th>
                                                         <th class="col-lg-2 GridHeaderFont_size" style="display:none;"> <span>Voucher Code</span></th>
                                                         <th class="col-lg-1"></th>
                                                         <th class="col-lg-2">&nbsp;</th>
@@ -505,7 +507,7 @@ else
                                         </div>
                                         <div class="col-lg-7 " style="padding-left:14px;">
                                             @*@*<video id="videoTag" controls style="width:300px;height:150px;" onclick="showvideoUploadDialog();" data-bind="    attr: { src: $root.VideoLink2src()+$root.randonNumber() }"></video>*@
-                                           <textarea class="form-control" id="viedoLink" rows="4" placeholder="max 800 characters" data-bind="" maxlength="400"></textarea>
+                                            <textarea class="form-control" id="viedoLink" rows="4" placeholder="max 800 characters" data-bind="value:YoutubeLink" maxlength="400"></textarea>
                                             <br />
                                             <br />
                                            <pre id="myCode" style="width:581px!important;display:none;"></pre>
@@ -807,6 +809,15 @@ else
                                         <textarea class="form-control" id="txtCampaignDesc" rows="3" maxlength="800" style="resize:none" placeholder="Type in keyword searches to help users find your coupon offer. Seperate with a comma " data-bind="value: SearchKeywords"></textarea>
                                     </div>
                                 </div>
+
+                                <div class="form-group">
+                                    <div class="col-lg-2">
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn" style="white-space:nowrap;"> Deal expiry date</label>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <input type="text" class="form-control" style="width:50%!important;" id="validFromExpiryDate" data-bind="datepicker:CouponExpirydate">
+                                    </div>
+                                </div>
                                 <div class="col-lg-11" style="display:none">
                                     <div class="form-group" style="margin-bottom:20px; margin-top:20px;">
                                         <div class="col-lg-4 text-campaign-left  Float-Left">
@@ -944,15 +955,7 @@ else
                                         @*<textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="datetimepicker:StartDateTime"  data-bind="value: CouponExpirydate"></textarea>*@
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <div class="col-lg-2">
-                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn" style="white-space:nowrap;"> Deal expiry date</label>
-                                    </div>
-                                    <div class="col-lg-7">
-                                        <input type="text" class="form-control" style="width:50%!important;" id="validFromExpiryDate" data-bind="datepicker:CouponExpirydate">
-                                        @*<textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="datetimepicker:StartDateTime"  data-bind="value: CouponExpirydate"></textarea>*@
-                                    </div>
-                                </div>
+                                
                                 @*<div class="col-lg-11">
                 <div class="form-group" style="margin-bottom:20px; margin-top:20px;">
                     <div class="col-lg-4 text-campaign-left  Float-Left">
@@ -1454,9 +1457,10 @@ else
     //});
     function openYoutubeVideo()
     {
-        $("#myCode").css("display", "block");
-        StartVideo($("#viedoLink").val());
-
+        if ($("#viedoLink").val() != '') {
+            $("#myCode").css("display", "block");
+            StartVideo($("#viedoLink").val());
+        }
     }
 
     function getId(url) {

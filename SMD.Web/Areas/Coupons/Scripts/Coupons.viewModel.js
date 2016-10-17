@@ -141,7 +141,7 @@ define("Coupons/Coupons.viewModel",
                             if (data != null) {
                                 currency = data.UserAndCostDetails.CurrencyCode + ' (' + data.UserAndCostDetails.CurrencySymbol + ')';
                                 UserAndCostDetail(data.UserAndCostDetails);
-                                currencyCode(currency);
+                                currencyCode(currency + ' ← Price');
                                 currencySymbol(data.UserAndCostDetails.CurrencySymbol);
 
                                 if (data.Currencies != null) {

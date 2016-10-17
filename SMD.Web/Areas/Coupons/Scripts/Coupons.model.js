@@ -6,7 +6,7 @@
             LocationLine1, LocationLine2, LocationLON, LocationPhone, LocationState, LocationTitle, LocationZipCode, LogoUrl, ModifiedBy, ModifiedDateTime, Price, RejectedBy,
             Rejecteddatetime, RejectedReason, Savings, SearchKeywords, Status, SwapCost, UserId, CouponTitle, CouponExpirydate, CouponQtyPerUser, CouponId, couponImage1, CouponImage2, CouponImage3,
             CurrencyId, couponListingMode, CouponActiveMonth, CouponActiveYear, CouponRedeemedCount, CouponViewCount, CouponIssuedCount, SubmissionDateTime, LocationCountryId, CouponStartDate, CouponEndDate, Priority,
-            ShowBuyitBtn, BuyitLandingPageUrl, BuyitBtnLabel
+            ShowBuyitBtn, BuyitLandingPageUrl, BuyitBtnLabel, YoutubeLink
           ) {
           var
               //type and userID will be set on server sside
@@ -22,6 +22,7 @@
 
                   return getMonthName(CouponActiveMonth());
               }),
+              YoutubeLink = ko.observable(YoutubeLink),
               SubmissionDateTime = ko.observable(SubmissionDateTime),
               CouponActiveYear = ko.observable(CouponActiveYear),
               CouponExpirydate = ko.observable((CouponExpirydate !== null && CouponExpirydate !== undefined) ? moment(CouponExpirydate).toDate() : undefined),//ko.observable(),
@@ -101,6 +102,7 @@
                     return errors().length === 0 ? true : false;
              }),
              dirtyFlag = new ko.dirtyFlag({
+                 YoutubeLink:YoutubeLink,
                  ApprovalDateTime : ApprovalDateTime,
                  Approved : Approved,
                  ApprovedBy : ApprovedBy,
@@ -204,6 +206,7 @@
 
                   return {
                       ApprovalDateTime: ApprovalDateTime(),
+                      YoutubeLink:YoutubeLink(),
                       Approved: Approved(),
                       ApprovedBy: ApprovedBy(),
                       Archived: Archived(),
@@ -360,7 +363,8 @@
               BuyitLandingPageUrl : (BuyitLandingPageUrl),
               BuyitBtnLabel: (BuyitBtnLabel),
               CouponPriceOptions : (CouponPriceOptions),
-              reset: (reset)
+              reset: (reset),
+              YoutubeLink: (YoutubeLink)
           };
       };
 
@@ -376,7 +380,7 @@
             source.LocationTitle, source.LocationZipCode, source.LogoUrl, source.ModifiedBy, source.ModifiedDateTime, source.Price, source.RejectedBy,
             source.Rejecteddatetime, source.RejectedReason, source.Savings, source.SearchKeywords, source.Status, source.SwapCost, source.UserId,source.CouponTitle,source.CouponExpirydate,
             source.CouponQtyPerUser, source.CouponId, source.couponImage1, source.CouponImage2, source.CouponImage3, source.CurrencyId, source.CouponListingMode, source.CouponActiveMonth, source.CouponActiveYear, source.CouponRedeemedCount, source.CouponViewCount, source.CouponIssuedCount, source.SubmissionDateTime, source.LocationCountryId, source.CouponStartDate, source.CouponEndDate, source.Priority
-            , source.ShowBuyitBtn, source.BuyitLandingPageUrl, source.BuyitBtnLabel
+            , source.ShowBuyitBtn, source.BuyitLandingPageUrl, source.BuyitBtnLabel, source.YoutubeLink
             );
 
         _.each(source.CouponCategories, function (item) {

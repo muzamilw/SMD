@@ -575,8 +575,8 @@ namespace SMD.MIS.ModelMappers
                 BuyitBtnLabel = source.BuyitBtnLabel,
                 BuyitLandingPageUrl = source.BuyitLandingPageUrl,
                 ShowBuyitBtn = source.ShowBuyitBtn,
-                CouponPriceOptions =  source.CouponPriceOptions == null? null: source.CouponPriceOptions.Select(cr =>cr.CreateFrom())// source.CouponPriceOptions
-               
+                CouponPriceOptions =  source.CouponPriceOptions == null? null: source.CouponPriceOptions.Select(cr =>cr.CreateFrom()),// source.CouponPriceOptions
+                YoutubeLink=source.YoutubeLink
               };
 
 
