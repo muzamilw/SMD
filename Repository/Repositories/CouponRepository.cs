@@ -77,14 +77,7 @@ namespace SMD.Repository.Repositories
                            .Take(toRow)
                            .ToList();
 
-                    if (adCampaigns != null && adCampaigns.Count() > 0)
-                    {
-                        foreach (var ad in adCampaigns)
-                        {
-                           // ad.AdViews = db.AdCampaignResponses.Where(c => c.CampaignId == ad.CampaignId).Count();
-                        }
-
-                    }
+                    
                     return adCampaigns;
 
 
@@ -95,14 +88,7 @@ namespace SMD.Repository.Repositories
                            .Skip(fromRow)
                            .Take(toRow)
                            .ToList();
-                    if (adCampaigns != null && adCampaigns.Count() > 0)
-                    {
-                        foreach (var ad in adCampaigns)
-                        {
-                         //   ad.AdViews = db.AdCampaignResponses.Where(c => c.CampaignId == ad.CampaignId).Count();
-                        }
-
-                    }
+                    
                     return adCampaigns;
 
                 }
@@ -115,7 +101,7 @@ namespace SMD.Repository.Repositories
                     campaign =>
                         (string.IsNullOrEmpty(request.SearchText) ||
                          (campaign.CouponTitle.Contains(request.SearchText)))
-                         && (campaign.CompanyId == CompanyId || isAdmin);
+                         && (campaign.CompanyId == CompanyId || isAdmin) && campaign.Status != 7;
 
 
               

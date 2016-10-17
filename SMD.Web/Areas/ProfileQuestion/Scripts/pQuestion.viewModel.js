@@ -1777,7 +1777,7 @@ define("pQuestion/pQuestion.viewModel",
                         else {
                             CloseContent();
                         }
-
+                        selectedQuestion().reset();
                     },
 
                     CloseContent = function () {

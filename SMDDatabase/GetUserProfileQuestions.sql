@@ -1,6 +1,6 @@
-﻿
+﻿USE [SMDv2]
 GO
-/****** Object:  UserDefinedFunction [dbo].[GetUserProfileQuestions]    Script Date: 10/5/2016 11:14:28 AM ******/
+/****** Object:  UserDefinedFunction [dbo].[GetUserProfileQuestions]    Script Date: 10/14/2016 1:30:03 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -43,7 +43,9 @@ as
 	pql5.PQA1LinkedQ5,pql5.PQA1LinkedQ6,pql6.LinkedQuestion1ID, pql6.LinkedQuestion2ID,pql6.PQA1LinkedQ3,pql6.PQA1LinkedQ4,
 	pql6.PQA1LinkedQ5,pql6.PQA1LinkedQ6,pqo.refreshtime, pqo.CountryID, pqo.status, pqo.type,
 	((row_number() over (order by pqo.pqid)) + isNUll(pqo.Priority,0)) rowNumber,
-	(((row_number() over (order by pqo.ProfileGroupID, [priority]) * 100 ) + 30) ) Weightage, ProfileGroupID,
+	--(((row_number() over (order by pqo.ProfileGroupID, [priority]) * 100 ) + 30) ) Weightage, 
+	(((row_number() over (order by (case when isnull(pqo.companyid,0) = 0 then 10 else 1 end)) * 100) + 30) ) Weightage,
+	ProfileGroupID,
 	case when c.TwitterHandle is not null or c.TwitterHandle <> '' then c.TwitterHandle 
 	when c.FacebookHandle is not null or c.FacebookHandle <> '' then c.FacebookHandle 
 	when c.InstagramHandle is not null or c.InstagramHandle <> '' then c.InstagramHandle 

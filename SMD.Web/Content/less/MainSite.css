@@ -353,16 +353,16 @@ ul {
   white-space: nowrap;
 }
 .sp_NQc91B1T0mb.sx_d7a1cb {
-  width: 10px;
+  width: 14px;
   height: 14px;
-  background-position: -724px -274px;
+  background-position: 0 0;
 }
 ._40n0 {
   margin: 0 6px 0 24px;
   vertical-align: text-bottom;
 }
 .sp_NQc91B1T0mb {
-  background-image: url(../Images/CZ_AOFDdEE7.png);
+  background-image: url(../Images/a5485b563efc4511e0cd8bd04ad0fe9e.png);
   background-size: auto;
   background-repeat: no-repeat;
   display: inline-block;
@@ -1066,5 +1066,9 @@ div#spinner {
 
 .close>span {
     color:#ffffff!important;
+}
+.loginMenu {
+        left: auto !important;
+    right: 0px;
 }
 /*# sourceMappingURL=MainSite.css.map */

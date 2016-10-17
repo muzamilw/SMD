@@ -144,7 +144,8 @@ namespace SMD.MIS.ModelMappers
                 IsSavedCoupon = source.IsSavedCoupon ?? false,
                 DeliveryDays = source.DeliveryDays ?? 1,
                 MaxDailyBudget = source.MaxDailyBudget ?? 0,
-                SubmissionDateTime =source.SubmissionDateTime
+                SubmissionDateTime =source.SubmissionDateTime,
+                ShowBuyitBtn=source.ShowBuyitBtn
             };
 
 
@@ -196,7 +197,7 @@ namespace SMD.MIS.ModelMappers
                 StartDateTime = source.StartDateTime,
                 UserId = source.UserId,
                 VerifyQuestion = source.VerifyQuestion,
-               
+                ShowBuyitBtn=source.ShowBuyitBtn
             };
 
 

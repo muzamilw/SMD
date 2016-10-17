@@ -13,12 +13,16 @@ define("ads/ads.viewModel",
                        // Controlls editor visibility 
                     searchFilterValue = ko.observable(),
                     isEditorVisible = ko.observable(false),
-					isAdvertdashboardVisible= ko.observable(false),
+                    buyItQuestionStatus = ko.observable(false),
+					isAdvertdashboardVisible = ko.observable(false),
+                    ButItOtherLabel = ko.observable(''),
                     langs = ko.observableArray([]),
                     TemporaryList = ko.observableArray([]),
                     TemporaryProfileList = ko.observableArray([]),
                     TemporaryQuizQuestions = ko.observableArray([]),
                     TemporarySurveyList = ko.observableArray([]),
+                    BuyItStatus = ko.observable(false),
+                    showLandingPageUrl = ko.observable(true),
                     countoryidList = [],
                     cityidList = [],
                     langidList = [],
@@ -35,7 +39,7 @@ define("ads/ads.viewModel",
                     IsprofileQuestion = ko.observable(false),
                      // selected location 
                     selectedLocation = ko.observable(),
-                    selectedLocationRadius = ko.observable(),
+                    selectedLocationRadius = ko.observable(100),
                     selectedLocationIncludeExclude = ko.observable(true),
                     selectedLangIncludeExclude = ko.observable(true),
                     selectedLocationLat = ko.observable(0),
@@ -71,7 +75,8 @@ define("ads/ads.viewModel",
                         { id: "Watch More", name: "Watch More" },
                         { id: "Buy Now", name: "Buy Now" },
                         { id: "Check Availability", name: "Check Availability" },
-                        { id: "Custom Button Label", name: "Custom Button Label" }
+                        { id: "Custom Button Label", name: "Custom Button Label" },
+                        { id: "No Button", name: "No Button" }
                     ]),
                     selectedIndustryIncludeExclude = ko.observable(true),
                     UserAndCostDetail = ko.observable(),
@@ -111,7 +116,7 @@ define("ads/ads.viewModel",
                 professions = ko.observableArray([]),
                 surveyquestionList = ko.observableArray([]),
                 voucherQuestionStatus = ko.observable(false),
-                buyItQuestionStatus = ko.observable(false),
+                
                 AditionalCriteriaMode = ko.observable("1"), //1 = main buttons, 2 = profile questions , 3 = ad linked questions
             showCompanyProfileQuestions = ko.observable(false),
                 couponCategories = ko.observableArray([]),
@@ -336,8 +341,8 @@ define("ads/ads.viewModel",
                 campaignModel().MaxBudget("20");
                 campaignModel().Type(mode);
                 campaignModel().DeliveryDays("3");
-                campaignModel().VideoUrl("https://www.");
-
+                campaignModel().LandingPageVideoLink("https://www.");
+                previewScreenNumber(1);
                 if (mode == 4) {
                     campaignModel().CampaignName("New display ad");
                     $("#logo_div").css("display", "block");
@@ -369,7 +374,7 @@ define("ads/ads.viewModel",
                     confirmation.messageText("Do you want to save changes?");
                     confirmation.afterProceed(function () {
 
-                        if (ValidateCampaign()) {
+                        if (ValidateCampaign(3)) {
 
                             if (campaignModel().Status() == 3) {
                                 saveCampaign(3);
@@ -415,7 +420,7 @@ define("ads/ads.viewModel",
                                 });
                             }
                         }
-
+                      
 
 
 
@@ -446,7 +451,7 @@ define("ads/ads.viewModel",
 
                     confirmation.show();
 
-
+                    campaignModel().reset();
                     return;
                 } else { // no changes go close it
                     campaignModel();
@@ -462,7 +467,7 @@ define("ads/ads.viewModel",
                     }
                     //show the main menu;
                     showMainMenu();
-
+                    campaignModel().reset();
                     $("input,button,textarea,a,select").removeAttr('disabled');
 
 
@@ -489,7 +494,7 @@ define("ads/ads.viewModel",
                 $("#topArea").css("display", "block");
                 $("#headlabel").css("display", "block");
                 $("#headdesc").css("display", "block")
-
+               
             },
 
 
@@ -642,7 +647,7 @@ define("ads/ads.viewModel",
 
             submitCampaignData = function () {
                 //if (campaignModel().isValid()) {
-                if (ValidateCampaign()) {
+                if (ValidateCampaign(2)) {
                     if (UserAndCostDetail().IsSpecialAccount == true) {
                         campaignModel().ClickRate(0);
                         saveCampaign(2);
@@ -676,7 +681,7 @@ define("ads/ads.viewModel",
                 //    toastr.error("Please fill the required feilds to continue.");
                 //}
             },
-                 ValidateCampaign = function () {
+                 ValidateCampaign = function (mode) {
 
                      errorListNew.removeAll();
 
@@ -697,7 +702,7 @@ define("ads/ads.viewModel",
                          errorListNew.push({ name: "Campaign budget should be greater than Ad click.", element: "" });
                      }
 
-                     if (reachedAudience() == 0) {
+                     if (reachedAudience() == 0 && mode != 1) {
                          errorListNew.push({
                              name: "You have no audience against the specified criteria please broaden your audience definition.", element: ""
                          });
@@ -710,7 +715,7 @@ define("ads/ads.viewModel",
                      }
                  },
                 SaveDraftCampaign = function () {
-                    if (ValidateCampaign()) {
+                    if (ValidateCampaign(1)) {
                         saveCampaign(1);
                     }
                     else {
@@ -1101,7 +1106,41 @@ define("ads/ads.viewModel",
                     $(".close").click();
                     isShowSurveyAns(false);
                 },
+                 handleBuyIt = function (item) {
+                     var selectionoption = $("#ddTextBtns").val();
 
+                     if (selectionoption == '0') {
+                         buyItQuestionStatus(false);
+                         campaignModel().ShowBuyitBtn(false);
+                         BuyItStatus(false);
+                         ButItOtherLabel('');
+                     }
+                     else if (selectionoption == '999')  //other scenario
+                     {
+                         buyItQuestionStatus(true);
+                         campaignModel().ShowBuyitBtn(true);
+                          BuyItStatus(true);
+                         campaignModel().BuyItButtonLabel('');
+
+                     }
+                     else if (selectionoption == 'Custom Button Label')
+                     {
+                         BuyItStatus(true);
+                         campaignModel().ShowBuyitBtn(true);
+                     }
+                     else {
+                         buyItQuestionStatus(false);
+                         campaignModel().ShowBuyitBtn(true);
+                         BuyItStatus(false);
+                         ButItOtherLabel('');
+                         campaignModel().BuyItButtonLabel('');
+                     }
+                     if (selectionoption == 'No Button') {
+                         showLandingPageUrl(false);
+                     } else {
+                         showLandingPageUrl(true);
+                     }
+                 },
                  saveSurveyQuestion = function (type, item) {
 
                      var selectedQuestionstring = item.DisplayQuestion;
@@ -1431,11 +1470,14 @@ define("ads/ads.viewModel",
                         pricePerclick(pricePerclick() + UserAndCostDetail().LocationClausePrice);
                         isLocationPerClickPriceAdded(true);
                     }
+                    $(".twitter-typeahead input").val("");
+                  
                 },
 
                 resetLocations = function () {
                     $("#searchCampaignLocations").val("");
-                    selectedLocationRadius("");
+                    selectedLocationRadius(100);
+               
                 },
 
                 addLanguage = function (selected) {
@@ -1857,34 +1899,32 @@ define("ads/ads.viewModel",
                                     });
 
 
-                                    BuyItButtonLabel(campaignModel().ShowBuyitBtn());
-                                    var buyitbuttonlabel = couponModel().BuyitBtnLabel();
+                                    //BuyItButtonLabel(campaignModel().ShowBuyitBtn());
 
-                                    if (couponModel().ShowBuyitBtn() == false) {
-                                        $("#buyItddl").val('0');
-                                    }
-                                    else {
-                                        if (buyitbuttonlabel == 'Apply Now' ||
-                                            buyitbuttonlabel == 'Book Now' ||
-                                            buyitbuttonlabel == 'Contact Us' ||
-                                            buyitbuttonlabel == 'Download' ||
-                                            buyitbuttonlabel == 'Learn More' ||
-                                            buyitbuttonlabel == 'Shop Now' ||
-                                            buyitbuttonlabel == 'Sign Up' ||
-                                            buyitbuttonlabel == 'Watch More'
-                                             ) {
-                                            buyItQuestionLabelStatus(false);
-                                            $("#buyItddl").val(buyitbuttonlabel);
+                                    //var buyitbuttonlabel = couponModel().BuyitBtnLabel();
 
-                                        }
-                                        else {
-                                            $("#buyItddl").val('999');
-                                            buyItQuestionLabelStatus(true);
-                                            debugger;
-                                            ButItOtherLabel(buyitbuttonlabel);
-                                        }
-                                    }
-
+                                    //if (couponModel().ShowBuyitBtn() == false) {
+                                    //    $("#buyItddl").val('0');
+                                    //}
+                                    //else {
+                                    //    if (buyitbuttonlabel == 'Apply Now' ||
+                                    //        buyitbuttonlabel == 'Book Now' ||
+                                    //        buyitbuttonlabel == 'Contact Us' ||
+                                    //        buyitbuttonlabel == 'Download' ||
+                                    //        buyitbuttonlabel == 'Learn More' ||
+                                    //        buyitbuttonlabel == 'Shop Now' ||
+                                    //        buyitbuttonlabel == 'Sign Up' ||
+                                    //        buyitbuttonlabel == 'Watch More'
+                                    //         ) {
+                                    //        buyItQuestionLabelStatus(false);
+                                    //        $("#buyItddl").val(buyitbuttonlabel);
+                                    //    }
+                                    //    else {
+                                    //        $("#buyItddl").val('999');
+                                    //        buyItQuestionLabelStatus(true);
+                                    //        ButItOtherLabel(buyitbuttonlabel);
+                                    //    }
+                                    //}
 
 
                                     if (campaignModel().DeliveryDays() != null) {
@@ -3110,7 +3150,7 @@ define("ads/ads.viewModel",
                     saveProfileQuestion: saveProfileQuestion,
                     updateProfileQuestion: updateProfileQuestion,
                     updateSurveyCriteria: updateSurveyCriteria,
-                    buyItQuestionStatus: buyItQuestionStatus,
+                    
                     buyItImageCallback: buyItImageCallback,
                     openEditScreen: openEditScreen,
                     isWelcomeScreenVisible: isWelcomeScreenVisible,
@@ -3206,7 +3246,12 @@ define("ads/ads.viewModel",
                     IsprofileQuestion: IsprofileQuestion,
                     Modelheading: Modelheading,
                     GetAudienceCount: GetAudienceCount,
-					isAdvertdashboardVisible:isAdvertdashboardVisible
+                    isAdvertdashboardVisible: isAdvertdashboardVisible,
+                    handleBuyIt: handleBuyIt,
+                    BuyItStatus: BuyItStatus,
+                    showLandingPageUrl:showLandingPageUrl,
+                    buyItQuestionStatus: buyItQuestionStatus,
+                    ButItOtherLabel: ButItOtherLabel
                 };
             })()
         };

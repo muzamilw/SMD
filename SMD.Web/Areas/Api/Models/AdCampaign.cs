@@ -10,6 +10,7 @@ namespace SMD.MIS.Areas.Api.Models
     /// </summary>
     public class AdCampaign
     {
+        public Nullable<bool> ShowBuyitBtn { get; set; }
         public long CampaignId { get; set; }
         public int? LanguageId { get; set; }
         public string UserId { get; set; }

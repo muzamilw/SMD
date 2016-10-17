@@ -91,7 +91,7 @@
               ShowBuyitBtn = ko.observable(ShowBuyitBtn),
               BuyitLandingPageUrl = ko.observable(BuyitLandingPageUrl),
               BuyitBtnLabel = ko.observable(BuyitBtnLabel),
-              CouponPriceOptions = ko.observableArray([])
+              CouponPriceOptions = ko.observableArray([]),
                // Errors
           errors = ko.validation.group({
               CouponTitle: CouponTitle
@@ -171,12 +171,14 @@
 
                 ShowBuyitBtn : ShowBuyitBtn,
                 BuyitLandingPageUrl : BuyitLandingPageUrl,
-                BuyitBtnLabel: BuyitBtnLabel
-                //CouponPriceOptions: CouponPriceOptions
+                BuyitBtnLabel: BuyitBtnLabel,
+
+
+                CouponPriceOptions: CouponPriceOptions
 
               }),
               // Has Changes
-              hasChanges = ko.computed(function () {
+              CouponhasChanges = ko.computed(function () {
                   return dirtyFlag.isDirty();
               }),
               // Reset
@@ -270,8 +272,7 @@
                       StatusValue :StatusValue (),
                       SwapCost: SwapCost(),
                       UserId: UserId(),
-                      LogoImageBytes: LogoImageBytes(),
-                      hasChanges: hasChanges(),
+                      LogoImageBytes: LogoImageBytes(),                      
                       CouponCategories: selectedCoupons,
                       CouponStartDate: moment(CouponStartDate()).format(ist.utcFormat) + 'Z',
                       CouponEndDate: moment(CouponEndDate()).format(ist.utcFormat) + 'Z',
@@ -347,7 +348,7 @@
               SwapCost: (SwapCost),
               UserId: (UserId),
               LogoImageBytes: LogoImageBytes,
-              hasChanges: hasChanges,
+              CouponhasChanges: CouponhasChanges,
               convertToServerData: convertToServerData,
               CouponCategories: CouponCategories,
               SubmissionDateTime: (SubmissionDateTime),

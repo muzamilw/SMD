@@ -27,6 +27,7 @@ namespace SMD.Models.ResponseModels
         public string BillingPhone { get; set; }
         public string BillingEmail { get; set; }
         public string BillingCountryName { get; set; }
+        public int? Gender { get; set; }
 
 
         #region Additional User Profile Properties
