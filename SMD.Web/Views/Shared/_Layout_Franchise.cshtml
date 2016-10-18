@@ -10,9 +10,11 @@
     IEnumerable<CompanyIdClaimValue> companyClaimValues = ClaimHelper.GetClaimsByType<CompanyIdClaimValue>(SmdClaimTypes.CompanyId);
     string CompanyName = companyClaimValues != null && companyClaimValues.Any() ? companyClaimValues.ElementAt(0).CompanyName : "Company Not Loaded";
     string CompanyLogo = companyClaimValues != null && companyClaimValues.Any() ? companyClaimValues.ElementAt(0).CompanyLogo : "Claim not found";
-
+    string CompanyID = companyClaimValues != null && companyClaimValues.Any() ? companyClaimValues.ElementAt(0).CompanyId.ToString() : "Claim not found";
+    
     IEnumerable<SmdRoleClaimValue> roleClaim = ClaimHelper.GetClaimsByType<SmdRoleClaimValue>(SmdClaimTypes.Role);
     string RoleName = roleClaim != null && roleClaim.Any() ? roleClaim.ElementAt(0).Role : "Role Not Loaded";
+   
 
 }
 <!DOCTYPE html>
@@ -43,6 +45,13 @@
         <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
 
     }
+    
+    <script>
+        var gCompanyID = @CompanyID;
+        var UserRole = '@RoleName';
+
+    </script>
+
     <!--[if lt IE 9]>
         <script src="js/html5shiv.js"></script>
         <script src="js/respond.min.js"></script>
@@ -201,6 +210,9 @@
                             <a class="btn btn-default btn-gray " aria-expanded="false" id="btnTransferRates" style="padding-top:16px;" href="~/Franchise/Dashboard/TransferRateDashboard">
                                 Transfers
                             </a>
+                            <a class="btn btn-default btn-gray " aria-expanded="false" id="btnAprroveTransfer" style="padding-top:16px;" href="~/Franchise/ApprovePayPal/PayPalDashboard">
+                                Pay Pal
+                            </a>
 
                             <div class="btn-group"style="display:none">
                                 <button type="button" class="btn btn-default btn-gray dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width:177px;">
@@ -217,7 +229,7 @@
 
                                 </ul>
                                 </div>
-                            <div class="btn-group" style="margin-left:109px ">
+                            <div class="btn-group">
                                 <button type="button" class="btn btn-default btn-gray dropdown-toggle" id="btnManageApprov" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Manage <span class="caret"></span>
                                 </button>

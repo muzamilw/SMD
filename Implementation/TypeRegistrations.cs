@@ -54,6 +54,7 @@ namespace SMD.Implementation
             unityContainer.RegisterType<IGameService, GameService>();
             unityContainer.RegisterType<IActiveUser, ActiveUser>();
             unityContainer.RegisterType<IDashboardService, DashboardService>();
+            unityContainer.RegisterType<IPayOutHistoryService, PayOutHistoryService>();
             
         }
     }

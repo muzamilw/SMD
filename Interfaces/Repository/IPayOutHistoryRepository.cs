@@ -1,4 +1,5 @@
 ﻿using SMD.Models.DomainModels;
+using SMD.Models.RequestModels;
 using System.Collections.Generic;
 
 namespace SMD.Interfaces.Repository
@@ -9,7 +10,14 @@ namespace SMD.Interfaces.Repository
         List<PayOutHistory> GetPendingStageOnePayOuts();
 
         List<PayOutHistory> GetPendingStageTwoPayOuts();
-        
+
+        IEnumerable<PayOutHistory> GetPayOutHistoryForApprovalStage1(GetPagedListRequest request, out int rowCount);
+        IEnumerable<PayOutHistory> GetPayOutHistoryForApprovalStage2(GetPagedListRequest request, out int rowCount);
+
+        List<PayOutHistory> GetPayOutHistoryByCompanyId(int companyId);
+
+
+
     }
 
 

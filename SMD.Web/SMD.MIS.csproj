@@ -384,9 +384,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SecurityConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Api\Controllers\ApprovePayOutHistoryController.cs" />
     <Compile Include="Areas\Api\Controllers\GetApprovalCountController.cs" />
     <Compile Include="Areas\Api\Controllers\DisplayAdsCampaignAnalyticController.cs" />
     <Compile Include="Areas\Api\Controllers\GetCouponPriceOptionController.cs" />
+    <Compile Include="Areas\Api\Controllers\GetPayOutHistoryController.cs" />
     <Compile Include="Areas\Api\Controllers\PayoutRevenueController.cs" />
     <Compile Include="Areas\Api\Controllers\SuperNovaCampaignController.cs" />
     <Compile Include="Areas\Api\Controllers\UserFeedbackController.cs" />
@@ -423,6 +425,8 @@
     <Compile Include="Areas\Api\Models\CouponsApproval.cs" />
     <Compile Include="Areas\Api\Models\CurrencyApprov.cs" />
     <Compile Include="Areas\Api\Models\GetApprovalCount_Result.cs" />
+    <Compile Include="Areas\Api\Models\PayOutHistory.cs" />
+    <Compile Include="Areas\Api\Models\PayOutResponseModelForApproval.cs" />
     <Compile Include="Areas\Api\Models\Phrase.cs" />
     <Compile Include="Areas\Api\Models\PhraseResponseModel.cs" />
     <Compile Include="Areas\Api\Models\PQResponseModelForApproval.cs" />
@@ -564,6 +568,7 @@
     <Compile Include="Areas\DAM\Controllers\ImagesController.cs" />
     <Compile Include="Areas\DAM\DAMAreaRegistration.cs" />
     <Compile Include="Areas\DAM\Models\Images.cs" />
+    <Compile Include="Areas\Franchise\Controllers\ApprovePayPalController.cs" />
     <Compile Include="Areas\ProfileQuestion\Controllers\ManageController.cs" />
     <Compile Include="Areas\Report\Controllers\ReportController.cs" />
     <Compile Include="Areas\Report\ReportAreaRegistration.cs" />
@@ -689,6 +694,8 @@
     <Content Include="Areas\Franchise\Scripts\Coupons.dataservice.js" />
     <Content Include="Areas\Franchise\Scripts\Coupons.view.js" />
     <Content Include="Areas\Franchise\Scripts\Coupons.viewModel.js" />
+    <Content Include="Areas\Franchise\Scripts\payPallApp.dataservice.js" />
+    <Content Include="Areas\Franchise\Scripts\payPallApp.viewModel.js" />
     <Content Include="Areas\Franchise\Scripts\profileQuestionApp.model.js" />
     <Content Include="Areas\Franchise\Scripts\profileQuestionApp.view.js" />
     <Content Include="Areas\Franchise\Scripts\profileQuestionApp.viewModel.js" />
@@ -730,6 +737,9 @@
     <Content Include="Areas\Franchise\Views\Dashboard\TransferRateDashboard.cshtml" />
     <Content Include="Areas\Report\Views\Report\WalletReport.cshtml" />
     <Content Include="Areas\Ads\Views\Ads\_advertDashboard.cshtml" />
+    <Content Include="Areas\Franchise\Views\ApprovePayPal\PayPalDashboard.cshtml" />
+    <Content Include="Areas\Franchise\Scripts\payPallApp.view.js" />
+    <Content Include="Areas\Franchise\Views\ApprovePayPal\_payPallEditorForApp.cshtml" />
     <None Include="config\Web.connectionstrings.config">
       <SubType>Designer</SubType>
     </None>
@@ -2975,6 +2985,9 @@
     <EmbeddedResource Include="Reports\Publisher.rdlc" />
     <EmbeddedResource Include="Reports\SMDReport.rdlc" />
     <EmbeddedResource Include="Reports\Users.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Franchise\Scripts\payPallApp.model.js" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

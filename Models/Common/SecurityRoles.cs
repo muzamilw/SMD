@@ -15,7 +15,9 @@
          public const string Franchise_Cashout_Manager = "Franchise Cashout manager";
          public const string EndUser_Accounts = "EndUser Accounts";
          public const string EndUser_Creative = "EndUser Creative";
-        public const string EndUser_Admin = "EndUser Admin";
+         public const string EndUser_Admin = "EndUser Admin";
+         public const string Franchise_Approvers_1 = "Franchise_Approver1";
+         public const string Franchise_Approvers_2 = "Franchise_Approver2";
 
          public const string Supernova_Admin = "Supernova Admin";
 

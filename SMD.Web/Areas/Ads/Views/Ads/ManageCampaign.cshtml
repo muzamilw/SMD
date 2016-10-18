@@ -789,7 +789,7 @@ else
                                                                         <td class="noCriteria"><span>No additional targeting criteria selected</span></td>
                                                                     </tr>
 
-                                                                    <!-- ko template: { name: 'answersTemplateforInclude', foreach:$root.campaignModel().AdCampaignTargetCriterias } -->
+                                                                    <!-- ko template: { name: 'answersTemplate', foreach:$root.campaignModel().AdCampaignTargetCriterias } -->
                                                                     <!-- /ko -->
                                                                     
                                                                 </tbody>
@@ -2271,6 +2271,61 @@ else
             </a>
         </td>
     </tr>
+    <!--/ko-->
+</script>
+
+<script id="answersTemplate" type="text/html">
+    <!--ko if:Type() == 1  || Type() == 2   || Type() == 5  || Type() == 6-->
+    <tr>
+
+        <!--ko if:IncludeorExclude() == '0' -->
+        <td class="col-lg-3">
+            <!-- ko if:   Type() != "2" -->
+            <p style="margin-top: 5px;margin-left: 12px;" data-bind="text: '(Exclude) ' + questionString() + ' = ' + answerString()">
+            </p>
+            <!-- /ko -->
+            <!-- ko if:   Type()  == "2" -->
+            <p style="margin-top: 5px;margin-left: 12px;">
+                <span data-bind="text: '(Exclude) ' +  questionString() + ' = ' "></span>
+                <img data-bind="attr:{src: answerString()}" width="80" />
+            </p>
+            <!-- /ko -->
+        </td>
+        <!--/ko-->
+        <!--ko if:IncludeorExclude() == '1'-->
+        <td class="col-lg-3">
+            <!-- ko if:   Type() != "2" -->
+            <p style="margin-top: 5px;margin-left: 12px;" data-bind="text: '(Include) ' + questionString() + ' = ' + answerString()">
+            </p>
+            <!-- /ko -->
+            <!-- ko if:   Type()  == "2" -->
+            <p style="margin-top: 5px;margin-left: 12px;">
+                <span data-bind="text: '(Include) ' +  questionString() + ' = ' "></span>
+                <img data-bind="attr:{src: answerString()}" width="80" />
+            </p>
+            <!-- /ko -->
+        </td>
+        <!--/ko-->
+
+
+        <td class="col-lg-1" style=" padding: 0px !important; text-align:right;">
+            <a class="table-link">
+                <span class="fa-stack">
+                    <i class="fa fa-pencil-square-o" data-bind="click:$root.onEditCriteria" data-toggle="modal" data-target=".bs-example-modal-lg"></i>
+                </span>
+            </a>
+        </td>
+        <td class="col-lg-1" style=" padding: 0px !important;">
+
+            <a class="table-link danger">
+                <span class="fa-stack">
+                    <i class="fa fa-trash-o" data-bind="click:$root.onDeleteCriteria"></i>
+                </span>
+
+            </a>
+        </td>
+    </tr>
+
     <!--/ko-->
 </script>
 

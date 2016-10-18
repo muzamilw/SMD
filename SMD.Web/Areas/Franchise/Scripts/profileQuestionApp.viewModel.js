@@ -16,6 +16,7 @@ define("FranchiseDashboard/profileQuestionApp.viewModel",
                     sortOn = ko.observable(5),
                     //Assending  / Desending
                     sortIsAsc = ko.observable(true),
+                    Falgval = ko.observable(false),
                     isEditorVisible = ko.observable(false),
                     selectedCompany = ko.observable(),
                     company = ko.observable(),
@@ -51,12 +52,14 @@ define("FranchiseDashboard/profileQuestionApp.viewModel",
                         $("#divApprove").css("display", "block");
                     },
                     getProfileQuestions = function () {
+                        Falgval(true);
                         dataservice.getPQForApproval(
                             {
                                 PageSize: pager().pageSize(),
                                 PageNo: pager().currentPage(),
                                 SortBy: sortOn(),
                                 IsAsc: sortIsAsc(),
+                              
 
                             },
                             {
@@ -278,7 +281,7 @@ define("FranchiseDashboard/profileQuestionApp.viewModel",
                     getApprovalCount: getApprovalCount,
                     companyTypes: companyTypes,
                     company: company,
-
+                    Falgval: Falgval
                 };
             })()
         };
