@@ -110,7 +110,7 @@ define("pQuestion/pQuestion.viewModel",
 					granularityDropDown = ko.observableArray([{ id: 1, name: "Daily" }, { id: 2, name: "Weekly" }, { id: 3, name: "Monthly" }, { id: 4, name: "Quarterly" }, { id: 5, name: "Yearly" }]),
 					DateRangeDropDown  = ko.observableArray([{ id: 1, name: "One month" }, { id: 2, name: "All Time" }]),
 					CampaignStatusDropDown  = ko.observableArray([{ id: 1, name: "Answered" }, { id: 2, name: "Skipped" }]),
-				    
+				    CampaignRatioAnalyticData = ko.observable(1), 
 					openAdvertiserDashboardSurvayScreen = function () {
 					getSurvayAnalytics();
 					$("#ddGranularityDropDown").removeAttr("disabled");
@@ -129,9 +129,9 @@ define("pQuestion/pQuestion.viewModel",
 						success: function (data) {
 							
 							PQAnalyticsData.removeAll();
-							ko.utils.arrayPushAll(PQAnalyticsData(), data);
+							ko.utils.arrayPushAll(PQAnalyticsData(), data.lineCharts);
 							PQAnalyticsData.valueHasMutated();
-							
+							CampaignRatioAnalyticData(data.pieCharts);
 						},
 						error: function (response) {
 
@@ -139,7 +139,6 @@ define("pQuestion/pQuestion.viewModel",
 					});
 					
 				},					
-					
 					
 					CloseSurvayAnalyticView = function () {
 					isAdvertdashboardSurvayVisible(false);
@@ -1831,7 +1830,9 @@ define("pQuestion/pQuestion.viewModel",
                     },
 
                     CloseContent = function () {
-                        isEditorVisible(false); enableControls();
+                        isEditorVisible(false); 
+						isAdvertdashboardSurvayVisible(false);
+						enableControls();
                         $("#panelArea,#topArea,#headlabel,#Heading_div").css("display", "block");
                         filterProfileQuestion();
 
@@ -2285,7 +2286,8 @@ define("pQuestion/pQuestion.viewModel",
 					CampaignStatusDropDown : CampaignStatusDropDown,
 				    openAdvertiserDashboardSurvayScreen:openAdvertiserDashboardSurvayScreen,
 					getSurvayAnalytics:getSurvayAnalytics,
-					CloseSurvayAnalyticView:CloseSurvayAnalyticView
+					CloseSurvayAnalyticView:CloseSurvayAnalyticView,
+					CampaignRatioAnalyticData:CampaignRatioAnalyticData
                 };
             })()
         };

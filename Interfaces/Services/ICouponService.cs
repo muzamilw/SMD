@@ -45,7 +45,7 @@ namespace SMD.Interfaces.Services
         string UpdateCouponForApproval(Coupon source);
         Currency GetCurrenyById(int id);
         IEnumerable<getDealByCouponID_Result> getDealByCouponIDAnalytics(int CouponID, int dateRange, int Granularity);
-        IEnumerable<getCampaignRatioAnalytic_Result> getDealByCouponIdRatioAnalytic(int ID, int dateRange);
+        IEnumerable<getDealByCouponIdRatioAnalytic_Result> getDealByCouponIdRatioAnalytic(int ID, int dateRange);
         
 
     }

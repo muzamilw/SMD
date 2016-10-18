@@ -92,6 +92,7 @@ define("survey/survey.viewModel",
 					granularityDropDown = ko.observableArray([{ id: 1, name: "Daily" }, { id: 2, name: "Weekly" }, { id: 3, name: "Monthly" }, { id: 4, name: "Quarterly" }, { id: 5, name: "Yearly" }]),
 					DateRangeDropDown  = ko.observableArray([{ id: 1, name: "One month" }, { id: 2, name: "All Time" }]),
 					CampaignStatusDropDown  = ko.observableArray([{ id: 1, name: "Answered" }, { id: 2, name: "Skipped" }]),
+					CampaignRatioAnalyticData = ko.observable(1), 
 				    openAdvertiserDashboardPollScreen = function () {
 					getSurvayAnalytics();
 					$("#ddGranularityDropDown").removeAttr("disabled");
@@ -109,9 +110,9 @@ define("survey/survey.viewModel",
 						success: function (data) {
 							
 							SQAnalyticsData.removeAll();
-							ko.utils.arrayPushAll(SQAnalyticsData(), data);
+							ko.utils.arrayPushAll(SQAnalyticsData(), data.lineCharts);
 							SQAnalyticsData.valueHasMutated();
-							
+							CampaignRatioAnalyticData(data.pieCharts);
 						},
 						error: function (response) {
 
@@ -377,7 +378,9 @@ define("survey/survey.viewModel",
                     selectedQuestion().reset();
                 },
               CloseContent = function () {
-                  isEditorVisible(false); enableControls();
+                  isEditorVisible(false); 
+				  isAdvertdashboardPollVisible(false);
+				  enableControls();
                   $("#panelArea,#topArea,#Heading_div").css("display", "block");
               },
                 SurveyQuestionsByFilter = function () {
@@ -2064,7 +2067,8 @@ define("survey/survey.viewModel",
 					granularityDropDown : granularityDropDown,
 					DateRangeDropDown : DateRangeDropDown ,
 					CampaignStatusDropDown : CampaignStatusDropDown , 
-					openAdvertiserDashboardPollScreen : openAdvertiserDashboardPollScreen
+					openAdvertiserDashboardPollScreen : openAdvertiserDashboardPollScreen,
+					CampaignRatioAnalyticData:CampaignRatioAnalyticData
                 };
             })()
         };

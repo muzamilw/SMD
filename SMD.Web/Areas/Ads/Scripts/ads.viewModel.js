@@ -156,9 +156,11 @@ define("ads/ads.viewModel",
 				selectedGranularityAnalytics = ko.observable(1) ,
 				selectedCampaignIdAnalytics = ko.observable() ,
 				AdsCampaignAnalyticsData = ko.observableArray([]), 
+				CampaignRatioAnalyticData = ko.observable(1), 
 				granularityDropDown = ko.observableArray([{ id: 1, name: "Daily" }, { id: 2, name: "Weekly" }, { id: 3, name: "Monthly" }, { id: 4, name: "Quarterly" }, { id: 5, name: "Yearly" }]),
 				DateRangeDropDown  = ko.observableArray([{ id: 1, name: "One month" }, { id: 2, name: "All Time" }]),
 				CampaignStatusDropDown  = ko.observableArray([{ id: 1, name: "Answered" }, { id: 2, name: "Referred" }, { id: 3, name: "Skipped" }]),
+				
 				openAdvertiserDashboardScreen = function (Campaign) {
 					//getDisplayAdsCampaignByCampaignIdAnalytics
 				//	var s = isAdvertdashboardVisible(); ;
@@ -183,9 +185,9 @@ define("ads/ads.viewModel",
 						success: function (data) {
 							
 							AdsCampaignAnalyticsData.removeAll();
-							ko.utils.arrayPushAll(AdsCampaignAnalyticsData(), data);
+							ko.utils.arrayPushAll(AdsCampaignAnalyticsData(), data.lineCharts);
 							AdsCampaignAnalyticsData.valueHasMutated();
-							
+							CampaignRatioAnalyticData(data.pieCharts);
 						},
 						error: function (response) {
 
@@ -1860,14 +1862,14 @@ define("ads/ads.viewModel",
                                     } else {
                                         isLocationPerClickPriceAdded(true);
                                     }
-
+									if (UserAndCostDetail() != null) {
                                     if (UserAndCostDetail().GenderClausePrice != null) {
                                         pricePerclick(pricePerclick() + UserAndCostDetail().GenderClausePrice);
                                     }
                                     if (UserAndCostDetail().AgeClausePrice != null) {
                                         pricePerclick(pricePerclick() + UserAndCostDetail().AgeClausePrice);
                                     }
-
+									}
                                     _.each(campaignModel().AdCampaignTargetCriterias(), function (item) {
 
                                         if (item.Type() == 1) { // profile
@@ -1922,8 +1924,9 @@ define("ads/ads.viewModel",
                                     }
                                     if (campaignModel().BuuyItLine1() != null || campaignModel().BuyItLine2() != null || campaignModel().BuyItLine3() != null || campaignModel().BuyItButtonLabel() != null) {
                                         buyItQuestionStatus(true);
-
+									if (UserAndCostDetail() != null) {
                                         pricePerclick(pricePerclick() + UserAndCostDetail().BuyItClausePrice);
+									}
                                         isBuyItPerClickPriceAdded(true);
 
 
@@ -3317,7 +3320,8 @@ define("ads/ads.viewModel",
 					CampaignStatusDropDown:CampaignStatusDropDown,
 					selectedCampStatusAnalytics : selectedCampStatusAnalytics,
 					selecteddateRangeAnalytics : selecteddateRangeAnalytics,
-					CloseCampaignADAnalyticView:CloseCampaignADAnalyticView
+					CloseCampaignADAnalyticView:CloseCampaignADAnalyticView,
+					CampaignRatioAnalyticData:CampaignRatioAnalyticData
 					
                 };
             })()

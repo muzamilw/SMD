@@ -648,15 +648,15 @@ namespace SMD.Repository.BaseRepository
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetApprovalCount_Result>("GetApprovalCount");
         }
-        public ObjectResult<getAdsCampaignByCampaignId_Result> getAdsCampaignByCampaignId(int compaignId, int CampStatus, int dateRange, int Granularity)
-        {
-            var _compaignId = new ObjectParameter("CampaignId", compaignId);
-            var _CampStatus = new ObjectParameter("status", CampStatus);
-            var _dateRange = new ObjectParameter("DateRange", dateRange);
-            var _Granularity = new ObjectParameter("Granularity", Granularity);
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getAdsCampaignByCampaignId_Result>("getAdsCampaignByCampaignId", _compaignId, _CampStatus, _dateRange, _Granularity);
-        }
-        public ObjectResult<getDisplayAdsCampaignByCampaignIdAnalytics_Result> getDisplayAdsCampaignByCampaignIdAnalytics(int compaignId, int CampStatus, int dateRange, int Granularity)
+        //public ObjectResult<getAdsCampaignByCampaignId_Result> getAdsCampaignByCampaignId(int compaignId, int CampStatus, int dateRange, int Granularity)
+        //{
+        //    var _compaignId = new ObjectParameter("CampaignId", compaignId);
+        //    var _CampStatus = new ObjectParameter("status", CampStatus);
+        //    var _dateRange = new ObjectParameter("DateRange", dateRange);
+        //    var _Granularity = new ObjectParameter("Granularity", Granularity);
+        //    return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getAdsCampaignByCampaignId_Result>("getAdsCampaignByCampaignId", _compaignId, _CampStatus, _dateRange, _Granularity);
+        //}
+        public ObjectResult<getDisplayAdsCampaignByCampaignIdAnalytics_Result> getAdsCampaignByCampaignIdAnalytics(int compaignId, int CampStatus, int dateRange, int Granularity)
         {
             var _compaignId = new ObjectParameter("CampaignId", compaignId);
             var _CampStatus = new ObjectParameter("status", CampStatus);
@@ -688,29 +688,29 @@ namespace SMD.Repository.BaseRepository
             var _Granularity = new ObjectParameter("Granularity", Granularity);
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getDealByCouponID_Result>("getDealByCouponID", _CouponID, _dateRange, _Granularity);
         }
-        public ObjectResult<getCampaignRatioAnalytic_Result> getAdsCampaignByCampaignIdRatioAnalytic(int ID, int dateRange)
+        public ObjectResult<getAdsCampaignByCampaignIdRatioAnalytic_Result> getAdsCampaignByCampaignIdRatioAnalytic(int ID, int dateRange)
         {
             var _ID = new ObjectParameter("Id", ID);
             var _dateRange = new ObjectParameter("DateRange", dateRange);
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getCampaignRatioAnalytic_Result>("getAdsCampaignByCampaignIdRatioAnalytic", _ID, _dateRange);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getAdsCampaignByCampaignIdRatioAnalytic_Result>("getAdsCampaignByCampaignIdRatioAnalytic", _ID, _dateRange);
         }
-        public ObjectResult<getCampaignRatioAnalytic_Result> getSurveyByPQIDRatioAnalytic(int ID, int dateRange)
+        public ObjectResult<getSurveyByPQIDRatioAnalytic_Result> getSurveyByPQIDRatioAnalytic(int ID, int dateRange)
         {
             var _ID = new ObjectParameter("Id", ID);
             var _dateRange = new ObjectParameter("DateRange", dateRange);
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getCampaignRatioAnalytic_Result>("getSurveyByPQIDRatioAnalytic", _ID, _dateRange);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getSurveyByPQIDRatioAnalytic_Result>("getSurveyByPQIDRatioAnalytic", _ID, _dateRange);
         }
-        public ObjectResult<getCampaignRatioAnalytic_Result> getPollBySQIDRatioAnalytic(int ID, int dateRange)
+        public ObjectResult<getPollBySQIDRatioAnalytic_Result> getPollBySQIDRatioAnalytic(int ID, int dateRange)
         {
             var _ID = new ObjectParameter("Id", ID);
             var _dateRange = new ObjectParameter("DateRange", dateRange);
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getCampaignRatioAnalytic_Result>("getPollBySQIDRatioAnalytic", _ID, _dateRange);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getPollBySQIDRatioAnalytic_Result>("getPollBySQIDRatioAnalytic", _ID, _dateRange);
         }
-        public ObjectResult<getCampaignRatioAnalytic_Result> getDealByCouponIdRatioAnalytic(int ID, int dateRange)
+        public ObjectResult<getDealByCouponIdRatioAnalytic_Result> getDealByCouponIdRatioAnalytic(int ID, int dateRange)
         {
             var _ID = new ObjectParameter("Id", ID);
             var _dateRange = new ObjectParameter("DateRange", dateRange);
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getCampaignRatioAnalytic_Result>("getDealByCouponIdRatioAnalytic", _ID, _dateRange);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getDealByCouponIdRatioAnalytic_Result>("getDealByCouponIdRatioAnalytic", _ID, _dateRange);
         }
         #endregion
     }

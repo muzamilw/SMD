@@ -62,7 +62,7 @@ define("ads/ads.dataservice", function () {
                         type: 'Get'
                     });
 					 amplify.request.define('getAdsByCampaignIdAnalytics', 'ajax', {
-                        url: '/Api/DisplayAdsCampaignAnalytic',
+                        url: '/Api/AdsCampaignAnalytic',
                         dataType: 'json',
                         type: 'GET'
                     });

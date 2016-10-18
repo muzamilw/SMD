@@ -58,7 +58,7 @@ namespace SMD.Interfaces.Services
         /// </summary>
         SurveyQuestion GetSurveyQuestionById(long sqid);
         IEnumerable<getPollsBySQID_Result> getPollsBySQIDAnalytics(int SQId, int CampStatus, int dateRange, int Granularity);
-        IEnumerable<getCampaignRatioAnalytic_Result> getPollBySQIDRatioAnalytic(int ID, int dateRange);
+        IEnumerable<getPollBySQIDRatioAnalytic_Result> getPollBySQIDRatioAnalytic(int ID, int dateRange);
       
     }
 }

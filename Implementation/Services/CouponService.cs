@@ -883,7 +883,7 @@ namespace SMD.Implementation.Services
         {
             return couponRepository.getDealByCouponIDAnalytics(CouponID, dateRange, Granularity);
         }
-        public IEnumerable<getCampaignRatioAnalytic_Result> getDealByCouponIdRatioAnalytic(int ID, int dateRange)
+        public IEnumerable<getDealByCouponIdRatioAnalytic_Result> getDealByCouponIdRatioAnalytic(int ID, int dateRange)
         {
 
             return couponRepository.getDealByCouponIdRatioAnalytic(ID, dateRange);

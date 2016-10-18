@@ -552,7 +552,7 @@ namespace SMD.Implementation.Services
 
             return this.surveyQuestionRepository.getPollsBySQIDAnalytics(SQId, CampStatus, dateRange, Granularity);
         }
-        public IEnumerable<getCampaignRatioAnalytic_Result> getPollBySQIDRatioAnalytic(int ID, int dateRange)
+        public IEnumerable<getPollBySQIDRatioAnalytic_Result> getPollBySQIDRatioAnalytic(int ID, int dateRange)
         {
 
             return surveyQuestionRepository.getPollBySQIDRatioAnalytic(ID, dateRange);
