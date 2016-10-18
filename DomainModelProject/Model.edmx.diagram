@@ -157,8 +157,6 @@
         <AssociationConnector Association="SMDDevModel.FK_ProfileQuestionUserAnswer_Company" />
         <AssociationConnector Association="SMDDevModel.FK_SurveyQuestion_Company" />
         <AssociationConnector Association="SMDDevModel.FK_SurveyQuestionResponse_Company" />
-        <EntityTypeShape EntityType="SMDDevModel.PayOutHistory" Width="1.5" PointX="5.25" PointY="43.625" />
-        <AssociationConnector Association="SMDDevModel.FK_PayOutHistory_Company" />
         <EntityTypeShape EntityType="SMDDevModel.vw_Coupons" Width="1.5" PointX="0.75" PointY="11.75" />
         <AssociationConnector Association="SMDDevModel.FK_Country_Currency" />
         <EntityTypeShape EntityType="SMDDevModel.City" Width="1.5" PointX="3" PointY="34.875" />
@@ -176,6 +174,8 @@
         <EntityTypeShape EntityType="SMDDevModel.vw_ReferringCompanies" Width="1.5" PointX="11.375" PointY="0.75" />
         <EntityTypeShape EntityType="SMDDevModel.AdCampaignClickRateHistory" Width="1.5" PointX="19.75" PointY="44.25" />
         <AssociationConnector Association="SMDDevModel.FK_AdCampaignClickRateHistory_AdCampaign" />
+        <EntityTypeShape EntityType="SMDDevModel.PayOutHistory" Width="1.5" PointX="5.25" PointY="43.25" />
+        <AssociationConnector Association="SMDDevModel.FK_PayOutHistory_Company" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
