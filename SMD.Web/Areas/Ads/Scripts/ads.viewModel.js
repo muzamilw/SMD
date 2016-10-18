@@ -219,6 +219,7 @@ define("ads/ads.viewModel",
                                     genderppc(" (" + UserAndCostDetail().GenderClausePrice + "p)");
                                     pricePerclick(pricePerclick() + UserAndCostDetail().GenderClausePrice);
                                 }
+
                                 if (UserAndCostDetail().AgeClausePrice != null) {
                                     ageppc(" (" + UserAndCostDetail().AgeClausePrice + "p)");
                                     pricePerclick(pricePerclick() + UserAndCostDetail().AgeClausePrice);
@@ -927,8 +928,7 @@ define("ads/ads.viewModel",
                 } else {
                     campaignModel().IsUseFilter(1);
                 }
-                debugger;
-
+                
                 campaignModel().Status(mode);
 
                 //disabling the following line so that user can customize their click rate.
@@ -1612,7 +1612,7 @@ define("ads/ads.viewModel",
 
                   },
                 onEditCampaign = function (item) {
-
+                    debugger;
                     previewScreenNumber(1);
                     isTerminateBtnVisible(false);
                     isNewCampaignVisible(false);
@@ -1641,7 +1641,7 @@ define("ads/ads.viewModel",
                             SearchText: ""
                         }, {
                             success: function (data) {
-
+                              
                                 if (data != null) {
                                     // set languages drop down
                                     var profileQIds = [];
@@ -1658,7 +1658,8 @@ define("ads/ads.viewModel",
                                     });
 
                                     campaignModel(model.Campaign.Create(data.Campaigns[0]));
-
+                                    
+                                    campaignModel().AdCampaignTargetCriterias.removeAll();
                                     if (campaignModel().LogoUrl() == '' || campaignModel().LogoUrl() == undefined) {
 
                                         campaignModel().LogoUrl("/images/standardplaceholder.png");
@@ -1682,6 +1683,7 @@ define("ads/ads.viewModel",
                                     //    TodisplayImg(true);
                                     //}
                                     _.each(clonedVersofCariterias, function (cclist) {
+                                       
                                         if (cclist.Type == 1) {
 
                                             if (profileQIds.indexOf(cclist.PQId) == -1) {
@@ -1701,6 +1703,7 @@ define("ads/ads.viewModel",
                                                     CriteriaId: cclist.CriteriaId
                                                 }));
                                             } else {
+                                             
                                                 campaignModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
 
                                                     Type: cclist.Type,
@@ -1719,6 +1722,7 @@ define("ads/ads.viewModel",
 
 
                                         } else if (cclist.Type == 6) {
+                                         
                                             if (surveyQIds.indexOf(cclist.QuizCampaignId) == -1) {
                                                 surveyQIds.push(cclist.QuizCampaignId);
                                                 campaignModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
@@ -1736,8 +1740,9 @@ define("ads/ads.viewModel",
                                                     CriteriaId: cclist.CriteriaId
                                                 }));
                                             } else {
+                                              
                                                 campaignModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
-
+                                                    
                                                     Type: cclist.Type,
                                                     PQId: cclist.PQId,
                                                     PQAnswerId: cclist.PQAnswerId,
@@ -1754,7 +1759,8 @@ define("ads/ads.viewModel",
                                         }
 
                                     });
-
+                                   
+                                    var ff = campaignModel().AdCampaignTargetCriterias();
                                     DefaultTextBtns.push({ id: campaignModel().BuyItButtonLabel(), name: campaignModel().BuyItButtonLabel() });
                                     campaignModel().reset();
 

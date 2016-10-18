@@ -473,6 +473,7 @@
                                                         <select class="form-control" data-bind="options: $root.ageRange, optionsText: 'text', optionsValue: 'value', value: AgeRangeStart"> </select>
                                                     </div>
                                                     <div class="pull-left range_dash">
+                                                        -
                                                     </div>
                                                     <div class="col-lg-2" style=" padding: 0px !important;">
                                                         <select class="form-control" data-bind="options: $root.ageRange, optionsText: 'text', optionsValue: 'value',value: AgeRangeEnd,validationTooltip: AgeRangeEnd, validationOnElement: AgeRangeEnd"> </select>
@@ -1459,7 +1460,6 @@
 <script id="answersTemplate" type="text/html">
     <!--ko if:Type() == 1  || Type() == 2   || Type() == 5  || Type() == 6-->
     <tr>
-
         <!--ko if:IncludeorExclude() == '0' -->
         <td class="col-lg-3">
             <!-- ko if:   Type() != "2" -->
