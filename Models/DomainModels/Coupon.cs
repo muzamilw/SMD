@@ -50,6 +50,12 @@ namespace SMD.Models.DomainModels
         public string couponImage1 { get; set; }
         public string CouponImage2 { get; set; }
         public string CouponImage3 { get; set; }
+
+        public string CouponImage4 { get; set; }
+
+        public string CouponImage5 { get; set; }
+
+        public string CouponImage6 { get; set; }
         public string LogoUrl { get; set; }
         public string HighlightLine1 { get; set; }
         public string HighlightLine2 { get; set; }
@@ -92,6 +98,9 @@ namespace SMD.Models.DomainModels
         public Nullable<bool> ShowBuyitBtn { get; set; }
         public string BuyitLandingPageUrl { get; set; }
 	    public string BuyitBtnLabel { get; set; }
+
+        public string YoutubeLink { get; set; }
+        
 
         public virtual ICollection<CouponCategories> CouponCategories { get; set; }
 
