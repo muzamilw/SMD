@@ -3313,7 +3313,7 @@ define("ads/ads.viewModel",
                     BuyItStatus: BuyItStatus,
                     showLandingPageUrl:showLandingPageUrl,
                     buyItQuestionStatus: buyItQuestionStatus,
-                    ButItOtherLabel: ButItOtherLabel
+                    ButItOtherLabel: ButItOtherLabel,
 					CampaignStatusDropDown:CampaignStatusDropDown,
 					selectedCampStatusAnalytics : selectedCampStatusAnalytics,
 					selecteddateRangeAnalytics : selecteddateRangeAnalytics,
