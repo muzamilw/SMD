@@ -2059,7 +2059,7 @@ define("survey/survey.viewModel",
                     TemporaryProfileList:TemporaryProfileList,
                     TemporaryQuizQuestions:TemporaryQuizQuestions,
                     TemporarySurveyList: TemporarySurveyList,
-                    submitResumeData: submitResumeData
+                    submitResumeData: submitResumeData,
 					selectedSQIDAnalytics : selectedSQIDAnalytics,
 					SQAnalyticsData : SQAnalyticsData,
 					granularityDropDown : granularityDropDown,
