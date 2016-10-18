@@ -699,7 +699,8 @@ define("pQuestion/pQuestion.viewModel",
 
                     } else if (selectedQuestion().status() == 4) {
                         $("input,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
-                        //$("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
+                       // $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
+                        $("#btnResumeCampagin").css("display", "inline-block");
                         //    $("#saveBtn").css("display", "none");
                         //$("#btnResumeCampagin").css("display", "none");
                         $("#btnCancel,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
