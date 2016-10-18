@@ -2287,7 +2287,14 @@ define("Coupons/Coupons.viewModel",
 					getDealsAnalytics:getDealsAnalytics,
 					CloseCouponsAnalyticView: CloseCouponsAnalyticView,
 					isAdvertdashboardDealVisible: isAdvertdashboardDealVisible,
-					selectedGranularityAnalytics: selectedGranularityAnalytics
+					selectedGranularityAnalytics: selectedGranularityAnalytics,
+					selecteddateRangeAnalytics:selecteddateRangeAnalytics,
+					selectedCouponIdAnalytics:selectedCouponIdAnalytics,
+					DealsAnalyticsData:DealsAnalyticsData,
+					CampaignStatusDropDown:CampaignStatusDropDown
+					
+					
+					
                 };
             })()
         };
