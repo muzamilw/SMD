@@ -1597,6 +1597,10 @@ else
     var bannerImage1 = "";
     var bannerImage2 = "";
     var bannerImage3 = "";
+    var bannerImage4 = "";
+    var bannerImage5 = "";
+    var bannerImage6 = "";
+
     var mode = 1;
     function changeIframeSrc(mode1) {
        
@@ -1649,6 +1653,21 @@ else
             } else if (mode == 4) {
                 $("#bannerImage3").attr("src", this.src).change();
                 bannerImage3 = this.src;
+                $("#btnDamClose").click();
+            }
+            else if (mode == 5) {
+                $("#bannerImage4").attr("src", this.src).change();
+                bannerImage4 = this.src;
+                $("#btnDamClose").click();
+            }
+            else if (mode == 6) {
+                $("#bannerImage5").attr("src", this.src).change();
+                bannerImage5 = this.src;
+                $("#btnDamClose").click();
+            }
+            else if (mode == 7) {
+                $("#bannerImage6").attr("src", this.src).change();
+                bannerImage6 = this.src;
                 $("#btnDamClose").click();
             }
             SetMode(mode);

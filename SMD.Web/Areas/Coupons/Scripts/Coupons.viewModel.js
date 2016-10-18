@@ -398,6 +398,12 @@ define("Coupons/Coupons.viewModel",
                 IsSubmitBtnVisible(true);
                 couponModel().CouponPriceOptions.splice(0, 0, new model.CouponPriceOption());
                 couponModel().BuyitLandingPageUrl('https://');
+
+                    Banner2Flag(false);
+                    Banner3Flag(false);
+                    Banner4Flag(false);
+                    Banner5Flag(false);
+                    Banner6Flag(false);
                 selectedPriceOption(couponModel().CouponPriceOptions()[0]);
                 couponModel().reset();
             },
@@ -781,6 +787,9 @@ define("Coupons/Coupons.viewModel",
                     $("#panelArea").css("display", "none");
 
                     $("#Heading_div").css("display", "none");
+
+                    ShowImages(item);
+
                     if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == 6 || item.Status() == 7 || item.Status() == 9) {
                        
                         dataservice.getCampaignData({
@@ -967,6 +976,49 @@ define("Coupons/Coupons.viewModel",
                     }
 
                    
+                },
+                ShowImages = function (Item)
+                {
+                    if (Item.CouponImage2() != null && Item.CouponImage2() != "" && Item.CouponImage2() != undefined && Item.CouponImage2() != '/images/standardplaceholder.png')
+                    {
+                        Banner2Flag(true);
+                    }
+                    if (Item.CouponImage3() != null && Item.CouponImage3() != "" && Item.CouponImage3() != undefined && Item.CouponImage3() != '/images/standardplaceholder.png') {
+                        Banner3Flag(true);
+                    }
+                    if (Item.CouponImage4() != null && Item.CouponImage4() != "" && Item.CouponImage4() != undefined && Item.CouponImage4() != '/images/standardplaceholder.png') {
+                        Banner4Flag(true);
+                    }
+                    if (Item.CouponImage5() != null && Item.CouponImage5() != "" && Item.CouponImage5() != undefined && Item.CouponImage5() != '/images/standardplaceholder.png') {
+                        Banner5Flag(true);
+                    }
+                    if (Item.CouponImage6() != null && Item.CouponImage6() != "" && Item.CouponImage6() != undefined && Item.CouponImage6() != '/images/standardplaceholder.png') {
+                        Banner6Flag(true);
+                    }
+                    OpenDefault(Item);
+                },
+
+                OpenDefault = function (Item)
+                {
+                    if (Item.CouponImage2() == '/images/standardplaceholder.png')
+                    {
+                        Banner3Flag(true);
+                        return;
+                    }
+
+                    else if (Item.CouponImage3() == '/images/standardplaceholder.png')
+                    {
+                        Banner4Flag(true);
+                        return;
+                    }
+                    else if (Item.CouponImage4() == '/images/standardplaceholder.png') {
+                        Banner5Flag(true);
+                        return;
+                    }
+                    else if (Item.CouponImage5() == '/images/standardplaceholder.png') {
+                        Banne6Flag(true);
+                        return;
+                    }
                 },
                 changeStatus = function (status) {
                     if (couponModel() != undefined)

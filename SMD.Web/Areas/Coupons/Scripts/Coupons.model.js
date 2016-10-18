@@ -227,7 +227,7 @@
                       CouponImage2: bannerImage2 == "" ? CouponImage2() : bannerImage2,
                       CouponImage3: bannerImage3 == "" ? CouponImage3() : bannerImage3,
 
-                      couponImage4: bannerImage4 == "" ? couponImage4() : bannerImage4,
+                      CouponImage4: bannerImage4 == "" ? CouponImage4() : bannerImage4,
                       CouponImage5: bannerImage5 == "" ? CouponImage5() : bannerImage5,
                       CouponImage6: bannerImage6 == "" ? CouponImage6() : bannerImage6,
 
@@ -290,11 +290,8 @@
                       ShowBuyitBtn: ShowBuyitBtn(),
                       BuyitLandingPageUrl: BuyitLandingPageUrl(),
                       BuyitBtnLabel: BuyitBtnLabel(),
-                      CouponPriceOptions: priceOptions,
-                      CouponImage4: CouponImage4(),
-                      CouponImage5: CouponImage5(),
-                      CouponImage6: CouponImage6()
-
+                      CouponPriceOptions: priceOptions
+                    
                   };
               };
           return {
