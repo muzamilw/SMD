@@ -1322,6 +1322,10 @@ namespace SMD.Implementation.Services
             return _adCampaignRepository.getDisplayAdsCampaignByCampaignIdAnalytics(compaignId, CampStatus, dateRange, Granularity);
         }
 
+        public IEnumerable<getCampaignRatioAnalytic_Result> getAdsCampaignByCampaignIdRatioAnalytic(int ID, int dateRange)
+        {
 
+            return _adCampaignRepository.getAdsCampaignByCampaignIdRatioAnalytic(ID, dateRange);
+        }
     }
 }

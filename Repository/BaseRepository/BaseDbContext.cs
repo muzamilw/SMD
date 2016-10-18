@@ -688,7 +688,30 @@ namespace SMD.Repository.BaseRepository
             var _Granularity = new ObjectParameter("Granularity", Granularity);
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getDealByCouponID_Result>("getDealByCouponID", _CouponID, _dateRange, _Granularity);
         }
-
+        public ObjectResult<getCampaignRatioAnalytic_Result> getAdsCampaignByCampaignIdRatioAnalytic(int ID, int dateRange)
+        {
+            var _ID = new ObjectParameter("Id", ID);
+            var _dateRange = new ObjectParameter("DateRange", dateRange);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getCampaignRatioAnalytic_Result>("getAdsCampaignByCampaignIdRatioAnalytic", _ID, _dateRange);
+        }
+        public ObjectResult<getCampaignRatioAnalytic_Result> getSurveyByPQIDRatioAnalytic(int ID, int dateRange)
+        {
+            var _ID = new ObjectParameter("Id", ID);
+            var _dateRange = new ObjectParameter("DateRange", dateRange);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getCampaignRatioAnalytic_Result>("getSurveyByPQIDRatioAnalytic", _ID, _dateRange);
+        }
+        public ObjectResult<getCampaignRatioAnalytic_Result> getPollBySQIDRatioAnalytic(int ID, int dateRange)
+        {
+            var _ID = new ObjectParameter("Id", ID);
+            var _dateRange = new ObjectParameter("DateRange", dateRange);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getCampaignRatioAnalytic_Result>("getPollBySQIDRatioAnalytic", _ID, _dateRange);
+        }
+        public ObjectResult<getCampaignRatioAnalytic_Result> getDealByCouponIdRatioAnalytic(int ID, int dateRange)
+        {
+            var _ID = new ObjectParameter("Id", ID);
+            var _dateRange = new ObjectParameter("DateRange", dateRange);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getCampaignRatioAnalytic_Result>("getDealByCouponIdRatioAnalytic", _ID, _dateRange);
+        }
         #endregion
     }
 }

@@ -619,7 +619,10 @@ namespace SMD.Implementation.Services
 
             return this._profileQuestionRepository.getSurvayByPQIDAnalytics(PQId, CampStatus, dateRange, Granularity);
         }
-
+        public IEnumerable<getCampaignRatioAnalytic_Result> getSurveyByPQIDRatioAnalytic(int ID, int dateRange)
+        {
+            return _profileQuestionRepository.getSurveyByPQIDRatioAnalytic(ID, dateRange);
+        }
         #endregion
     }
 }

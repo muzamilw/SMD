@@ -209,7 +209,11 @@ namespace SMD.Repository.Repositories
         {
             return db.getDealByCouponIDAnalytics(CouponID, dateRange, Granularity);
         }
-       
+        public IEnumerable<getCampaignRatioAnalytic_Result> getDealByCouponIdRatioAnalytic(int ID, int dateRange)
+        {
+            
+            return db.getDealByCouponIdRatioAnalytic(ID, dateRange);
+        }
         #endregion
     }
 }

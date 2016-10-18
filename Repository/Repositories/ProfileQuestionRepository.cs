@@ -255,6 +255,9 @@ namespace SMD.Repository.Repositories
         //   return DbSet.Where(i=>i.PqId==PQID).Include<q=>Queryable.>
 
         //}
+        public IEnumerable<getCampaignRatioAnalytic_Result> getSurveyByPQIDRatioAnalytic(int ID, int dateRange){
+            return db.getSurveyByPQIDRatioAnalytic(ID, dateRange);
+        }
 
         #endregion
     }

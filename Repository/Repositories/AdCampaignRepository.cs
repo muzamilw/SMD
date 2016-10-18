@@ -326,5 +326,10 @@ namespace SMD.Repository.Repositories
            
             return db.getDisplayAdsCampaignByCampaignIdAnalytics(compaignId, CampStatus, dateRange, Granularity);
         }
+        public IEnumerable<getCampaignRatioAnalytic_Result> getAdsCampaignByCampaignIdRatioAnalytic(int ID, int dateRange)
+        {
+            
+            return db.getAdsCampaignByCampaignIdRatioAnalytic(ID, dateRange);
+        }
     }
 }

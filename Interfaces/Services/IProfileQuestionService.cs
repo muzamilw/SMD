@@ -42,6 +42,7 @@ namespace SMD.Interfaces.Services
         string UpdatePQForApproval(ProfileQuestion source);
         ProfileQuestionGroup GetPQGroupById(int id);
         IEnumerable<getSurvayByPQID_Result> getSurvayByPQIDAnalytics(int PQId, int CampStatus, int dateRange, int Granularity);
+        IEnumerable<getCampaignRatioAnalytic_Result> getSurveyByPQIDRatioAnalytic(int ID, int dateRange);
         
        
     }
