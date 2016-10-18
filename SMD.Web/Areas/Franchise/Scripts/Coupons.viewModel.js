@@ -33,7 +33,7 @@ define("FranchiseDashboard/Coupons.viewModel",
                         //selectedCoupon(item);
                         //isEditorVisible(true);
                     },
-                    getCouponPriceOption = function (couponid)
+                    getCouponPriceOption = function (couponid, comData)
                     {
                         dataservice.getCouponPriceOption(
                                              { CouponId: couponid },
@@ -43,7 +43,7 @@ define("FranchiseDashboard/Coupons.viewModel",
                                                      _.each(data, function (item) {
                                                          couponsPriceOption.push(item);
                                                      });
-                                                    
+                                                     getCurrencyData(comData);
  
                                                  },
                                                  error: function () {
@@ -237,8 +237,8 @@ define("FranchiseDashboard/Coupons.viewModel",
                              else
                                  company(null);
                              selectedCompany(comData);
-                             getCouponPriceOption(selectedItem.couponId);
-                             getCurrencyData(comData);
+                             getCouponPriceOption(selectedItem.couponId, comData);
+                           
                              isEditorVisible(true);
                          
                          },
