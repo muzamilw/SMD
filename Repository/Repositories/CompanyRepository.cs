@@ -128,6 +128,7 @@ namespace SMD.Repository.Repositories
         }
         public string GetCompanyNameByID(int CompanyId)
         {
+            db.Configuration.LazyLoadingEnabled = false;
             return DbSet.Where(c => c.CompanyId == CompanyId).FirstOrDefault().CompanyName;
         }
         public Company GetCompanyById()
