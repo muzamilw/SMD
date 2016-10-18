@@ -614,6 +614,12 @@ namespace SMD.Implementation.Services
             return _profileQuestionGroupRepository.Find(id);
         
         }
+        public IEnumerable<getSurvayByPQID_Result> getSurvayByPQIDAnalytics(int PQId, int CampStatus, int dateRange, int Granularity)
+        {
+
+            return this._profileQuestionRepository.getSurvayByPQIDAnalytics(PQId, CampStatus, dateRange, Granularity);
+        }
+
         #endregion
     }
 }

@@ -879,7 +879,10 @@ namespace SMD.Implementation.Services
         {
             return _currencyRepository.Find(id);
         }
-
+        public IEnumerable<getDealByCouponID_Result> getDealByCouponIDAnalytics(int CouponID, int dateRange, int Granularity)
+        {
+            return couponRepository.getDealByCouponIDAnalytics(CouponID, dateRange, Granularity);
+        }
 
 
         #endregion

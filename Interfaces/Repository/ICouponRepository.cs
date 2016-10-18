@@ -25,6 +25,7 @@ namespace SMD.Interfaces.Repository
 
 
         GetCouponByID_Result GetCouponByIdSP(long CouponId, string UserId, string Lat, string Lon);
-
+        IEnumerable<getDealByCouponID_Result> getDealByCouponIDAnalytics(int CouponID, int dateRange, int Granularity);
+        
     }
 }

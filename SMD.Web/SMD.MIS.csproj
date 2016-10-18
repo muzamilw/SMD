@@ -384,10 +384,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SecurityConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Api\Controllers\CouponAnalyticsController.cs" />
     <Compile Include="Areas\Api\Controllers\DisplayAdsCampaignAnalyticController.cs" />
     <Compile Include="Areas\Api\Controllers\GetCouponPriceOptionController.cs" />
     <Compile Include="Areas\Api\Controllers\PayoutRevenueController.cs" />
+    <Compile Include="Areas\Api\Controllers\profileQuestionAnalyticController.cs" />
     <Compile Include="Areas\Api\Controllers\SuperNovaCampaignController.cs" />
+    <Compile Include="Areas\Api\Controllers\SurvayQuestionAnalyticController.cs" />
     <Compile Include="Areas\Api\Controllers\UserFeedbackController.cs" />
     <Compile Include="Areas\Api\Controllers\UserController.cs" />
     <Compile Include="Areas\Api\Controllers\ApproveProfileQuestionAnsController.cs" />
@@ -728,6 +731,9 @@
     <Content Include="Areas\Franchise\Views\Dashboard\TransferRateDashboard.cshtml" />
     <Content Include="Areas\Report\Views\Report\WalletReport.cshtml" />
     <Content Include="Areas\Ads\Views\Ads\_advertDashboard.cshtml" />
+    <Content Include="Areas\Coupons\Views\Coupons\_advertDashboardDeal.cshtml" />
+    <Content Include="Areas\Survey\Views\Shared\_advertSurveyAnalytic.cshtml" />
+    <Content Include="Areas\ProfileQuestion\Views\Manage\_advertProfileQuestionAnalytic.cshtml" />
     <None Include="config\Web.connectionstrings.config">
       <SubType>Designer</SubType>
     </None>

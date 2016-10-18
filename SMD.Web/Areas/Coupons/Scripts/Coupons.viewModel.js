@@ -123,13 +123,51 @@ define("Coupons/Coupons.viewModel",
                     StatusValue = ko.observable(),
                     currencyCode = ko.observable(),
                     currencySymbol = ko.observable(),
-                    GetCallBackBranchObject = ko.observable()
+                    GetCallBackBranchObject = ko.observable(),
                     previewScreenNumber = ko.observable(1);
- 
-                
+					CurrPage = ko.observable(9);
+					MaxPage = ko.observable(12);
+					// advertiser analytics 
+					isAdvertdashboardDealVisible= ko.observable(false),
+					selecteddateRangeAnalytics = ko.observable(1),
+					selectedGranularityAnalytics = ko.observable(1) ,
+				    selectedCouponIdAnalytics = ko.observable() ,
+					DealsAnalyticsData = ko.observableArray([]), 
+					granularityDropDown = ko.observableArray([{ id: 1, name: "Daily" }, { id: 2, name: "Weekly" }, { id: 3, name: "Monthly" }, { id: 4, name: "Quarterly" }, { id: 5, name: "Yearly" }]),
+					DateRangeDropDown  = ko.observableArray([{ id: 1, name: "One month" }, { id: 2, name: "All Time" }]),
+					CampaignStatusDropDown  = ko.observableArray([{ id: 1, name: "Answered" }, { id: 2, name: "Referred" }, { id: 3, name: "Skipped" }]),
+				    openAdvertiserDashboardDealScreen = function () {
+					getDealsAnalytics();
+					$("#ddGranularityDropDown").removeAttr("disabled");
+					$("#ddDateRangeDropDown").removeAttr("disabled");
+					isAdvertdashboardDealVisible(true);
+				},
+				getDealsAnalytics = function () {
+					dataservice.getDealsAnalytics({
+						CouponID:selectedCouponIdAnalytics(),
+						dateRange :selecteddateRangeAnalytics(),
+						Granularity : selectedGranularityAnalytics(),
+					},{
+						success: function (data) {
+							
+							DealsAnalyticsData.removeAll();
+							ko.utils.arrayPushAll(DealsAnalyticsData(), data);
+							DealsAnalyticsData.valueHasMutated();
+							
+						},
+						error: function (response) {
 
-                CurrPage = ko.observable(9);
-                MaxPage = ko.observable(12);
+                        }
+					});
+					
+				},
+				CloseCouponsAnalyticView = function () {
+					isAdvertdashboardDealVisible(false);
+				},
+				
+				//
+				
+					//end advertiser analytics
                 getCampaignBaseContent = function () {
                     dataservice.getBaseData({
                         RequestId: 1,
@@ -746,7 +784,7 @@ define("Coupons/Coupons.viewModel",
 
                     previewScreenNumber(1);
                     CouponTitle(item.CouponTitle());
-                    
+                    selectedCouponIdAnalytics(item.CouponId());
                     $(".hideInCoupons").css("display", "none");
 
                     $("#MarketobjDiv").css("display", "none");
@@ -2148,7 +2186,18 @@ define("Coupons/Coupons.viewModel",
                     couponCategoriesCol2: couponCategoriesCol2,
                     couponCategoriesCol3: couponCategoriesCol3,
                     currencyCode: currencyCode,
-                    currencySymbol: currencySymbol
+                    currencySymbol: currencySymbol,
+					//analytics dashboard
+					isAdvertdashboardDealVisible : isAdvertdashboardDealVisible,
+					selecteddateRangeAnalytics : selecteddateRangeAnalytics,
+					selectedGranularityAnalytics :selectedGranularityAnalytics,
+					selectedCouponIdAnalytics: selectedCouponIdAnalytics,
+					DealsAnalyticsData : DealsAnalyticsData,
+					granularityDropDown :granularityDropDown,
+					DateRangeDropDown:DateRangeDropDown,
+					openAdvertiserDashboardDealScreen :openAdvertiserDashboardDealScreen,
+					getDealsAnalytics:getDealsAnalytics,
+					CloseCouponsAnalyticView:CloseCouponsAnalyticView
                 };
             })()
         };

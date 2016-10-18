@@ -547,7 +547,11 @@ namespace SMD.Implementation.Services
         {
             return surveyQuestionRepository.Find(sqid);
         }
+        public IEnumerable<getPollsBySQID_Result> getPollsBySQIDAnalytics(int SQId, int CampStatus, int dateRange, int Granularity)
+        {
 
+            return this.surveyQuestionRepository.getPollsBySQIDAnalytics(SQId, CampStatus, dateRange, Granularity);
+        }
         #endregion
     }
 

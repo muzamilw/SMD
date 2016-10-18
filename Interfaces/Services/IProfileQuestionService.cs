@@ -41,6 +41,8 @@ namespace SMD.Interfaces.Services
         //List<ProfileQuestionTargetLocation> GetPQlocation(long pqId);
         string UpdatePQForApproval(ProfileQuestion source);
         ProfileQuestionGroup GetPQGroupById(int id);
+        IEnumerable<getSurvayByPQID_Result> getSurvayByPQIDAnalytics(int PQId, int CampStatus, int dateRange, int Granularity);
+        
        
     }
 }
