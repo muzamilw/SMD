@@ -56,7 +56,8 @@ namespace SMD.MIS.Areas.Api.Models
         public Nullable<double> Savings { get; set; }
         public string VoucherCode { get; set; }
         public string OptionUrl { get; set; }
-      
+        public Nullable<DateTime> ExpiryDate { get; set; }
+        public string URL { get; set; }
     }
 
 

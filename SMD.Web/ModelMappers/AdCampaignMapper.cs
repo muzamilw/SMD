@@ -576,7 +576,10 @@ namespace SMD.MIS.ModelMappers
                 BuyitLandingPageUrl = source.BuyitLandingPageUrl,
                 ShowBuyitBtn = source.ShowBuyitBtn,
                 CouponPriceOptions =  source.CouponPriceOptions == null? null: source.CouponPriceOptions.Select(cr =>cr.CreateFrom()),// source.CouponPriceOptions
-                YoutubeLink=source.YoutubeLink
+                YoutubeLink=source.YoutubeLink,
+                CouponImage4=source.CouponImage4,
+                CouponImage5=source.CouponImage5,
+                CouponImage6=source.CouponImage6
               };
 
 
@@ -603,7 +606,9 @@ namespace SMD.MIS.ModelMappers
                  OptionUrl = source.OptionUrl,
                  Price = source.Price,
                  Savings = source.Savings,
-                 VoucherCode = source.VoucherCode
+                 VoucherCode = source.VoucherCode,
+                 ExpiryDate=source.ExpiryDate,
+                 URL = source.URL
             };
         }
     }

@@ -124,10 +124,15 @@ define("Coupons/Coupons.viewModel",
                     StatusValue = ko.observable(),
                     currencyCode = ko.observable(),
                     currencySymbol = ko.observable(),
-                    GetCallBackBranchObject = ko.observable()
-                    previewScreenNumber = ko.observable(1);
- 
-                
+                    GetCallBackBranchObject = ko.observable(),
+                    previewScreenNumber = ko.observable(1),
+
+                    Banner2Flag = ko.observable(false),
+                    Banner3Flag = ko.observable(false),
+                    Banner4Flag = ko.observable(false),
+                    Banner5Flag = ko.observable(false),
+                    Banner6Flag = ko.observable(false),
+                    
 
                 CurrPage = ko.observable(9);
                 MaxPage = ko.observable(12);
@@ -139,7 +144,7 @@ define("Coupons/Coupons.viewModel",
                         success: function (data) {
                             var currency;
                             if (data != null) {
-                                currency = data.UserAndCostDetails.CurrencyCode + ' (' + data.UserAndCostDetails.CurrencySymbol + ')';
+                                currency =' (' + data.UserAndCostDetails.CurrencySymbol + ')';
                                 UserAndCostDetail(data.UserAndCostDetails);
                                 currencyCode(currency + ' ← Price');
                                 currencySymbol(data.UserAndCostDetails.CurrencySymbol);
@@ -495,6 +500,13 @@ define("Coupons/Coupons.viewModel",
 
                   couponModel().CouponImage3("/images/standardplaceholder.png");
                   couponModel().couponImage1("/images/standardplaceholder.png");
+
+                  couponModel().CouponImage4("/images/standardplaceholder.png");
+
+                  couponModel().CouponImage5("/images/standardplaceholder.png");
+                  couponModel().CouponImage6("/images/standardplaceholder.png");
+
+
                   couponModel().LogoUrl("/images/standardplaceholder.png");
                   couponModel().Price(10);
                   couponModel().Savings(15);
@@ -2169,7 +2181,12 @@ define("Coupons/Coupons.viewModel",
                     couponCategoriesCol3: couponCategoriesCol3,
                     currencyCode: currencyCode,
                     currencySymbol: currencySymbol,
-                    ISshowPhone: ISshowPhone
+                    ISshowPhone: ISshowPhone,
+                    Banner2Flag:Banner2Flag,
+                    Banner3Flag :Banner3Flag,
+                    Banner4Flag:Banner4Flag,
+                    Banner5Flag:Banner5Flag,
+                    Banner6Flag: Banner6Flag
                 };
             })()
         };
