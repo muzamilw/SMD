@@ -79,6 +79,8 @@
     <None Include="getSurveyByPQIDRatioAnalytic.sql" />
     <None Include="getPollBySQIDRatioAnalytic.sql" />
     <None Include="getDealByCouponIdRatioAnalytic.sql" />
+    <None Include="getSurvayByPQIDtblAnalytic.sql" />
+    <None Include="getAdsCampaignByCampaignIdtblAnalytic.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="getCampaignsByStatus.sql" />
