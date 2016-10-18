@@ -1622,6 +1622,14 @@ define("survey/survey.viewModel",
                             }
                         });
                     },
+                     submitResumeData = function () {
+                         if (selectedQuestion() != undefined)
+                             saveSurveyQuestion(3);
+
+                         //$("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
+                         //$("#btnSubmitForApproval,#saveBtn,.lang_delSurvey,.table-link").css("display", "inline-block");
+                         //$("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign").removeAttr('disabled');
+                     },
                     buildParentSQList = function () {
                         if (surveyQuestionList().length == 0) {
                             dataservice.getBaseData({
@@ -1873,8 +1881,8 @@ define("survey/survey.viewModel",
                             $("#btnPauseCampaign").css("display", "inline-block");
                             $("#btnPauseCampaign").removeAttr('disabled');
                         } else if (status == 4) {
-                            //$("#btnResumeCampagin").css("display", "inline-block");
-                            //$("#btnResumeCampagin").removeAttr('disabled');
+                            $("#btnResumeCampagin").css("display", "inline-block");
+                            $("#btnResumeCampagin").removeAttr('disabled');
                         }
                         $("#topArea a").removeAttr('disabled');
                     },
@@ -2050,7 +2058,8 @@ define("survey/survey.viewModel",
                     SearchProfileQuestion: SearchProfileQuestion,
                     TemporaryProfileList:TemporaryProfileList,
                     TemporaryQuizQuestions:TemporaryQuizQuestions,
-                    TemporarySurveyList: TemporarySurveyList
+                    TemporarySurveyList: TemporarySurveyList,
+                    submitResumeData: submitResumeData,
 					selectedSQIDAnalytics : selectedSQIDAnalytics,
 					SQAnalyticsData : SQAnalyticsData,
 					granularityDropDown : granularityDropDown,

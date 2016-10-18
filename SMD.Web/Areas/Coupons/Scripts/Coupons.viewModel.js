@@ -137,6 +137,14 @@ define("Coupons/Coupons.viewModel",
 					granularityDropDown = ko.observableArray([{ id: 1, name: "Daily" }, { id: 2, name: "Weekly" }, { id: 3, name: "Monthly" }, { id: 4, name: "Quarterly" }, { id: 5, name: "Yearly" }]),
 					DateRangeDropDown  = ko.observableArray([{ id: 1, name: "One month" }, { id: 2, name: "All Time" }]),
 					CampaignStatusDropDown  = ko.observableArray([{ id: 1, name: "Answered" }, { id: 2, name: "Referred" }, { id: 3, name: "Skipped" }]),
+                    Banner2Flag = ko.observable(false),
+                    Banner3Flag = ko.observable(false),
+                    Banner4Flag = ko.observable(false),
+                    Banner5Flag = ko.observable(false),
+                    Banner6Flag = ko.observable(false)
+
+
+
 				    openAdvertiserDashboardDealScreen = function () {
 					getDealsAnalytics();
 					$("#ddGranularityDropDown").removeAttr("disabled");
@@ -154,11 +162,7 @@ define("Coupons/Coupons.viewModel",
 							DealsAnalyticsData.removeAll();
 							ko.utils.arrayPushAll(DealsAnalyticsData(), data);
 							DealsAnalyticsData.valueHasMutated();
-                    Banner2Flag = ko.observable(false),
-                    Banner3Flag = ko.observable(false),
-                    Banner4Flag = ko.observable(false),
-                    Banner5Flag = ko.observable(false),
-                    Banner6Flag = ko.observable(false),
+                  
                     
 						},
 						error: function (response) {
@@ -2276,12 +2280,14 @@ define("Coupons/Coupons.viewModel",
                     Banner3Flag :Banner3Flag,
                     Banner4Flag:Banner4Flag,
                     Banner5Flag:Banner5Flag,
-                    Banner6Flag: Banner6Flag
+                    Banner6Flag: Banner6Flag,
 					granularityDropDown :granularityDropDown,
 					DateRangeDropDown:DateRangeDropDown,
 					openAdvertiserDashboardDealScreen :openAdvertiserDashboardDealScreen,
 					getDealsAnalytics:getDealsAnalytics,
-					CloseCouponsAnalyticView:CloseCouponsAnalyticView
+					CloseCouponsAnalyticView: CloseCouponsAnalyticView,
+					isAdvertdashboardDealVisible: isAdvertdashboardDealVisible,
+					selectedGranularityAnalytics: selectedGranularityAnalytics
                 };
             })()
         };
