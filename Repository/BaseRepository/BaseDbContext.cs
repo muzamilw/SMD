@@ -644,7 +644,10 @@ namespace SMD.Repository.BaseRepository
             var UserIdParam = new ObjectParameter("UserId", UserId);
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Int32>("GetUserProfileCompletness", UserIdParam);
         }
-
+        public ObjectResult<GetApprovalCount_Result> GetApprovalCount()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetApprovalCount_Result>("GetApprovalCount");
+        }
         public ObjectResult<getAdsCampaignByCampaignId_Result> getAdsCampaignByCampaignId(int compaignId, int CampStatus, int dateRange, int Granularity)
         {
             var _compaignId = new ObjectParameter("CampaignId", compaignId);

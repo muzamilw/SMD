@@ -1814,3 +1814,288 @@ BEGIN
  
 END
 GO
+
+
+
+
+
+
+
+GO
+/****** Object:  UserDefinedFunction [dbo].[GetUserSurveySelectionPercentage]    Script Date: 10/13/2016 1:44:06 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER FUNCTION [dbo].[GetUserSurveySelectionPercentage]
+(	--  select * from [GetUserSurveySelectionPercentage](10300)
+	-- Add the parameters for the function here
+	@sqId int = 0
+)
+RETURNS 
+@SurveySelectionPercentage TABLE
+(
+	-- Add the column definitions for the TABLE variable here
+	leftImagePercentage float null, 
+	rightImagePercentage float null
+)
+AS
+BEGIN
+	-- Fill the table variable with the rows for your result set
+	DECLARE @surveyResponses float
+	SELECT @surveyResponses = count(*) from SurveyQuestionResponse where SQID = @sqId
+
+	-- Add the SELECT statement with parameter references here
+	insert into @SurveySelectionPercentage
+	values
+	((select 
+	CASE
+		WHEN @surveyResponses is null or @surveyResponses <= 0
+		THEN @surveyResponses
+		WHEN @surveyResponses > 0
+		THEN  
+		CEILING((count(*) / @surveyResponses) * 100)
+	END as leftImagePercentage
+	  from SurveyQuestionResponse
+	where SQID = @sqId and UserSelection = 1),
+	((select 
+	CASE
+		WHEN @surveyResponses is null or @surveyResponses <= 0
+		THEN @surveyResponses
+		WHEN @surveyResponses > 0
+		THEN  
+		floor(((count(*) / @surveyResponses) * 100))
+	END as rightImagePercentage
+	 from SurveyQuestionResponse
+	where SQID = @sqId and UserSelection = 2)))
+
+	RETURN 
+END
+
+
+------------------------------------------ all above scripts executed on live server.
+
+
+
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[GetTransactions]    Script Date: 10/14/2016 5:51:34 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		mz
+-- Create date: 
+
+---- Description:	        AdClick = 1,
+--        ApproveSurvey = 2,
+--        ViewSurveyReport = 3,
+--        CouponPurchased = 4,
+--        SurveyWatched = 5,
+--        ProfileQuestionAnswered = 6,
+--        ApproveProfileQuestion = 7,
+--        ApproveCoupon = 8,
+--        ApproveAd = 9,
+--        UserCashOutPaypal = 10,
+--        AdWeeklyCollection = 11,
+--        WelcomeGiftBalance = 12,
+--        PromotionalCentz = 13,
+--        ReferFriendBalance = 14
+
+-- exec GetTransactions 3126,4,30
+-- =============================================
+ALTER PROCEDURE [dbo].[GetTransactions] 
+	-- Add the parameters for the stored procedure here
+	@CompanyID int = 0, 
+	@AccountType int = 0,
+	@Rows int
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+
+	select * 
+	from (
+
+					SELECT t.[TxID]
+						  ,t.[TransactionDate]
+						  ,t.[Type]
+						  ,isnull(t.[DebitCredit],0) as [DebitCredit]
+						  ,isnull(t.[CreditAmount],0) as [CreditAmount]
+						  ,isnull(t.[DebitAmount],0) as [DebitAmount]
+						  ,t.[AccountID]
+						  ,t.[TaxPerc]
+						  ,t.[TaxValue]
+						  ,t.[AdCampaignID]
+						  ,t.[SQID]
+						  ,t.[isProcessed]
+						  ,t.[CurrencyID]
+						  ,t.[CurrencyRateID]
+						  ,t.[Sequence]
+						  ,t.[CouponId]
+						  ,t.[AccountBalance]
+						  ,t.[PQID],
+					  a.accountbalance CurrentBalance,
+					case when t.[type] = 1 then 'Ad Viewed ' + ad.CampaignName
+							when t.[type] = 2 then 'Survey Approved ' + sq.Question
+							when t.[type] = 4 then 'Coupon Purchased ' + CouponTitle
+							when t.[type] = 5 then 'Survey Answered ' + sq.Question
+							when t.[type] = 6 then 'Profile Question Answered ' + pq.Question
+							when t.[type] = 7 then 'Profile Question Approved ' + pq.Question
+							when t.[type] = 8 then 'Coupon Offer Approved ' + c.CouponTitle
+							when t.[type] = 9 then 'Ad Approved ' + ad.CampaignName 
+							when t.[type] = 10 then 'Cashout to Paypal' 
+							when t.[type] = 11 then 'Weekly Ad Collection ' + ad.CampaignName 
+							when t.[type] = 12 then 'Welcome Gift Balance '
+							when t.[type] = 13 then 'Promotional Centz Awarded' 
+							when t.[type] = 14 then 'Refer friend Balance '
+		  
+					end as description
+
+
+
+					from [Transaction] t
+					inner join Account a on t.AccountID = a.AccountId and a.CompanyId = @CompanyID and a.AccountType = @AccountType
+					inner join Company co on a.CompanyId = co.CompanyId
+					left outer join AdCampaign ad on t.AdCampaignID = ad.CampaignID
+					left outer join Coupon c on t.CouponId = c.CouponId
+					left outer join ProfileQuestion pq on t.PQID = pq.PQID
+					left outer join SurveyQuestion sq on t.SQID = sq.SQID
+					
+
+
+
+	)  a
+		
+	order by Transactiondate DESC
+	OFFSET 0 ROWS
+	FETCH NEXT @Rows ROWS ONLY
+END
+
+
+
+
+ALTER TABLE AdCampaign
+ADD ShowBuyitBtn bit
+
+
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[SearchCampaigns]    Script Date: 10/14/2016 3:43:00 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Mz
+-- Create date: 8 dec 2015
+-- Description:	
+-- =============================================
+ALTER PROCEDURE [dbo].[SearchCampaigns] 
+--  exec [SearchCampaigns] 0,'',416,0,10,0
+	-- Add the parameters for the stored procedure here
+	@Status int,
+	@keyword nvarchar(100),
+	@companyId int,
+	@fromRoww int,
+	@toRow int,
+	@adminMode bit
+	
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	--select @toRow, @fromRow
+	--return
+
+
+	select *, COUNT(*) OVER() AS TotalItems
+	from (
+
+    -- Insert statements for procedure here
+	select  a.CampaignID,a.CompanyId, a.CampaignName,
+	(select count (*) from adcampaignresponse cr where cr.campaignid = a.campaignid and  cast(CreatedDateTime as DATE)  = cast (GETDATE() as DATE) ) viewCountToday,
+	(select count (*) from adcampaignresponse cr where cr.campaignid = a.campaignid and cast(CreatedDateTime as date) = cast(getdate()-1 as date)) viewCountYesterday,
+	(select count (*) from adcampaignresponse cr where cr.campaignid = a.campaignid) viewCountAllTime,
+	left(( select
+			stuff((
+					select ', ' + c1.CountryName, ', ' + ci.CityName
+					from [AdCampaignTargetLocation] l1 
+					left outer join country c1 on l1.countryid = c1.countryid
+					left outer join city ci on l1.CityID = ci.CityID
+					where l1.campaignid = l.campaignid
+					order by c1.CountryName
+					for xml path('')
+				),1,1,'') as name_csv
+			from [AdCampaignTargetLocation] l 
+			where CampaignID = a.CampaignID
+			group by l.campaignid  
+		),30) +'..' Locationss,
+		
+		 StartDateTime, MaxBudget, MaxDailyBudget,AmountSpent,
+		Status, ApprovalDateTime, ClickRate, a.CreatedDateTime, a.Type, a.priority
+		
+		
+		
+	
+	 from AdCampaign a
+	 
+	--inner join AspNetUsers u on 
+	
+	
+	--left outer join AdCampaignResponse aResp on a.CampaignID = aResp.CampaignID 
+	where 
+	(
+		(@keyword is null or (a.CampaignName like '%'+ @keyword +'%' or a.DisplayTitle like '%'+ @keyword +'%'  ))
+		and a.Status <> 7
+		and 
+		( @Status = 0 or a.[status] = @Status)
+		and  ( @adminMode = 1 or a.companyid = @companyId )
+
+	)
+	
+
+
+	group by CampaignID, CampaignName,StartDateTime,MaxBudget,MaxDailyBudget,AmountSpent,Status, ApprovalDateTime, ClickRate, a.CreatedDateTime, a.Type, a.priority,a.CompanyId
+		)as items
+	order by priority desc
+	OFFSET @fromRoww ROWS
+	FETCH NEXT @toRow ROWS ONLY
+	
+END
+
+
+
+------------------------------------------ all above scripts executed on live server.
+
+
+
+
+ALTER TABLE Coupon
+ADD YoutubeLink varchar(MAX)
+
+
+ALTER TABLE CouponPriceOption
+ADD ExpiryDate datetime
+
+ALTER TABLE CouponPriceOption
+ADD URL varchar(MAX)
+
+
+ALTER TABLE Coupon
+ADD CouponImage4 nvarchar(MAX)
+
+ALTER TABLE Coupon
+ADD CouponImage5 nvarchar(MAX)
+
+ALTER TABLE Coupon
+ADD CouponImage6 nvarchar(MAX)

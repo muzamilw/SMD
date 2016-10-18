@@ -16,6 +16,11 @@ namespace SMD.Models.DomainModels
         public string VoucherCode { get; set; }
         public string OptionUrl { get; set; }
 
+
+        public Nullable<DateTime> ExpiryDate { get; set; }
+        public string URL { get; set; }
+        
+
         public virtual Coupon Coupon { get; set; }
     }
 }

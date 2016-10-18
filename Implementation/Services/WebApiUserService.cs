@@ -1137,7 +1137,7 @@ namespace SMD.Implementation.Services
         /// </summary>
         public async Task<LoginResponse> RegisterExternal(RegisterExternalRequest request)
         {
-            var user = new User { UserName = request.Email, Email = request.Email, FullName = request.FullName };
+            var user = new User { UserName = request.Email, Email = request.Email, FullName = request.FullName, DOB = null };
             var result = await UserManager.CreateAsync(user);
             if (!result.Succeeded)
             {
@@ -1403,13 +1403,15 @@ namespace SMD.Implementation.Services
         public UserProfileBaseResponseModel GetBaseDataForUserProfile()
         {
             Company company = companyRepository.GetCompanyById();
+            
             return new UserProfileBaseResponseModel
             {
                Countries = countryRepository.GetAllCountries().ToList(),
                //Cities = company != null? cityRepository.GetAllCitiesOfCountry(company.BillingCountryId??0).ToList(): null,
                Industries = industryRepository.GetAll().ToList(),
                Educations = educationRepository.GetAllEducations().ToList(),
-               UserRoles = this.RoleManager.Roles.Where(g => g.Id.StartsWith("EndUser")).ToList() //   manageUserRepository.getUserRoles().ToList()
+               UserRoles = this.RoleManager.Roles.Where(g => g.Id.StartsWith("EndUser")).ToList(), //   manageUserRepository.getUserRoles().ToList()
+               GetApprovalCount = companyRepository.GetApprovalCount()
             };
         }
         public int generateAndSmsCode(string userId, string phone)
@@ -1451,6 +1453,11 @@ namespace SMD.Implementation.Services
         public int GetUserProfileCompletness(string UserId)
         {
             return aspnetUsersRepository.GetUserProfileCompletness(UserId);
+        }
+        public GetApprovalCount_Result GetApprovalCount()
+        {
+            return companyRepository.GetApprovalCount();
+        
         }
        
 

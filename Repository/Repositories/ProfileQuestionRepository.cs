@@ -86,7 +86,8 @@ namespace SMD.Repository.Repositories
                      (question.CountryId == request.CountryFilter)
                      &&
                      (question.LanguageId == request.LanguageFilter)
-                     && (question.CompanyId == null);   
+                     && (question.CompanyId == null)
+                     && question.Status != 7;   
             }
             else
             {
@@ -100,7 +101,8 @@ namespace SMD.Repository.Repositories
                      (question.CountryId == request.CountryFilter)
                      &&
                      (question.LanguageId == request.LanguageFilter)
-                     && (question.CompanyId == this.CompanyId);   
+                     && (question.CompanyId == this.CompanyId)
+                     && question.Status != 7;   
             }
 
 

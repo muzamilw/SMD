@@ -21,6 +21,8 @@ namespace SMD.Interfaces.Repository
 
         IEnumerable<SurveyQuestion> GetAll();
 
+        IEnumerable<SurveyQuestion> GetAllByCompanyId();
+
         SurveyQuestion Get(long SqId);
 
         /// <summary>

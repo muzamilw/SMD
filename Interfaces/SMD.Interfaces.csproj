@@ -145,6 +145,7 @@
     <Compile Include="Services\IInvoiceDetailService.cs" />
     <Compile Include="Services\IInvoiceService.cs" />
     <Compile Include="Services\IManageUserService.cs" />
+    <Compile Include="Services\IPayOutHistoryService.cs" />
     <Compile Include="Services\IPaypalService.cs" />
     <Compile Include="Services\IAccountService.cs" />
     <Compile Include="Services\IGameService.cs" />

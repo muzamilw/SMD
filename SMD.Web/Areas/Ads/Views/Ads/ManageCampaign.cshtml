@@ -329,7 +329,7 @@ else
                                         <div class="col-lg-7">
                                             <div class=" pull-left" style="margin-top:5px;text-align: left;cursor:pointer;padding-right:24px;">
 
-                                                <img style="height:108px;width:420px;" data-bind="attr: { src: $root.campaignModel().LogoUrl()+$root.randonNumber() }" src="/Content/Images/Company_Default.png" id="imgLogo" data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(6)" />
+                                                <img style="height:110px;" data-bind="attr: { src: $root.campaignModel().LogoUrl()+$root.randonNumber() }" src="/Content/Images/Company_Default.png" id="imgLogo" data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(6)" />
                                                 <div style="    padding-top: 10px;   text-align: center;    font-size: 12px;    color: gray;">
                                                     (468 x 120 pixels)
                                                 </div>
@@ -408,43 +408,33 @@ else
                                                 <label for="txtBuyItlbl" class="control-label text-right tooltip-float floatNone">Button</label>
                                             </div>
                                             <div class="col-lg-10">
-                                                <select style="width:420px!important;" id="ddTextBtns" class="form-control" data-bind="options: $root.DefaultTextBtns, optionsText: 'name', optionsValue: 'id',value: BuyItButtonLabel"></select>
-
+                                                <select style="width:420px!important;" id="ddTextBtns" class="form-control" data-bind="options: $root.DefaultTextBtns, optionsText: 'name', optionsValue: 'id',event:{ change: $root.handleBuyIt}"></select>
                                             </div>
-
                                         </div>
-                                        <!-- ko if: BuyItButtonLabel() == "Custom Button Label"-->
-                                        <div class="form-group" data-bind="visible:$root.IsShownforVideo()">
-
+                                        
+                                        <div class="form-group" data-bind="visible:$root.BuyItStatus() == true">
                                             <div>
-
                                                 <div class="col-lg-2">
                                                     <label for="txtBuyItlbl" class="control-label text-right tooltip-float floatNone">Custom button</label>
                                                 </div>
-
                                                 <div class="col-lg-8">
-
-                                                    <input style="width:420px!important;" type="text" class="form-control txtBuyItlbl" id="txtBuyItlbl" placeholder="(12 characters)" data-bind="" maxlength="12">
-
-
+                                                    <input style="width:420px!important;" type="text" class="form-control txtBuyItlbl" data-bind="value:BuyItButtonLabel" id="txtBuyItlbl" placeholder="(12 characters)" maxlength="12">
                                                 </div>
                                             </div>
-
                                         </div>
+                                     
                                         <!-- /ko -->
-                                        <div class="form-group">
+                                        <div class="form-group" data-bind="visible:$root.showLandingPageUrl() == true">
                                             <div class="col-lg-2">
                                                 <label for="txtBuyItUrl" class="control-label text-right tooltip-float floatNone">Landing page url </label>
                                             </div>
                                             <div class="col-lg-7">
-                                                <textarea style="width:420px!important;resize:none" class="form-control" id="urlBx" rows="1" placeholder="Enter in landing page url " data-bind="value: VideoUrl" style="margin-top:5px;"></textarea>
+                                                <textarea style="width:420px!important;margin-top:5px;resize:none" class="form-control" id="urlBx" rows="1" placeholder="Enter in landing page url " data-bind="value:LandingPageVideoLink"></textarea>
                                             </div>
                                             <div class="col-lg-3">
                                                 <button style="width:123px;height:33px;" class="btn  btn-success gtild-color urlbtn" id="btnNext" onclick="openUrl();">Test URL Link</button>
                                             </div>
                                         </div>
-
-
                                     </div>
 
 
@@ -1268,7 +1258,7 @@ else
                                             </div>
                                         <div class="clearfix"></div>
                                       
-                                        <div class="pull-right" data-bind="visible: $root.AditionalCriteriaMode() == '2'">
+                                        <div class="" data-bind="visible: $root.AditionalCriteriaMode() == '2'">
                                          
                                             <div class="listview parentList set-border padding10 list-type-tiles" data-role="listview" id="ProfileQtsList">
                                                 <!-- ko template: { name: 'profileQuestionTiles' , foreach: $root.profileQuestionList} --><!-- /ko -->
@@ -1278,7 +1268,7 @@ else
                                         </div>
                                         <div class="clearfix"></div>
 
-                                        <div class="pull-right" data-bind="visible: $root.AditionalCriteriaMode() == '4'">
+                                        <div class="" data-bind="visible: $root.AditionalCriteriaMode() == '4'">
                                             @*<div class="row header">
                                                 <label class="control-label modelHeading">Survey Questions</label>
                                             </div>*@
@@ -1289,7 +1279,7 @@ else
                                         </div>
 
 
-                                        <div class="pull-right" data-bind="visible: $root.AditionalCriteriaMode() == '3'">
+                                        <div class="" data-bind="visible: $root.AditionalCriteriaMode() == '3'">
 
                                             @*<div class="row header">
                                                 <label class="control-label modelHeading">Your Quiz Questions</label>
@@ -2821,11 +2811,11 @@ else
         }
 
     });
-    $(".txtBuyItlbl").keyup(function () {
+    //$(".txtBuyItlbl").keyup(function () {
 
-        $("#ddTextBtns").val($("#txtBuyItlbl").val());
-        console.log($("#ddTextBtns").val());
-    });
+    //    $("#ddTextBtns").val($("#txtBuyItlbl").val());
+    //    console.log($("#ddTextBtns").val());
+    //});
 
 </script>
 <script type="">
@@ -2946,7 +2936,7 @@ else
 </script>
 <!-- Modal -->
 <div class="modal fade" id="damModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="z-index:9999">
-    <div class="modal-dialog" role="document" style="width:1150px;">
+    <div class="modal-dialog" role="document" style="width:883px;">
         <div class="modal-content">
             <div class="modal-header dam_header">
                 <button type="button" id="btnDamClose" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>

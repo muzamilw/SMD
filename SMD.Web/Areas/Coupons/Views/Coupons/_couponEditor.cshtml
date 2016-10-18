@@ -34,7 +34,7 @@
                                         Approve - Reject Deal
                                     </h3>
                                     <div class="col-lg-12 col-md-12 col-sm-12" style="padding-bottom:20px" data-bind="with:selectedCompany">
-                                        <div style="padding-left:0px;padding-right:0px;padding-bottom:5px; min-height: 270.90px;background-color:#f9f9f9;">
+                                        <div style="padding-left:0px;padding-right:0px;padding-bottom:5px; min-height: 318.90px;background-color:#f9f9f9;">
                                             <div class="col-lg-4 text-left">
                                                 <div class="form-group" style="margin-bottom:0px;">
                                                     <div class="col-lg-4">
@@ -55,6 +55,14 @@
                                                     </div>
                                                     <div class="col-lg-8">
                                                         <label data-bind="text:Email" style="font-size:11px"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class=" col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:small;color:lightgray">Gender:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="text:Gender==1?'Male':'Female'" style="font-size:11px"></label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group" style="margin-bottom:0px;">
@@ -86,7 +94,7 @@
                                                         <label style="font-size:small;color:lightgray">Logo:</label>
                                                     </div>
                                                     <div class="col-lg-8">
-                                                        <img id="vehicleImage" alt="" style="width: auto;height:80px" data-bind="attr:{src:Logo!=null && Logo.startsWith('http') ? Logo : '/' + Logo }" />
+                                                        <img id="vehicleImage" alt="" style="width: auto;height:auto" data-bind="attr:{src:Logo!=null && Logo.startsWith('http') ? Logo : '/' + Logo }" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -125,7 +133,7 @@
                                                         <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;font-size:small;color:lightgray">Billing Country:</label>
                                                     </div>
                                                     <div class="col-lg-8">
-                                                        <label style="font-size:11px">Test Country</label>
+                                                        <label style="font-size:11px" data-bind="text:BillingCountryName"></label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -175,7 +183,7 @@
                                                         <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;font-size:small;color:lightgray">Company Type:</label>
                                                     </div>
                                                     <div class="col-lg-8">
-                                                        <label data-bind="text:CompanyType" style="font-size:11px"></label>
+                                                        <label data-bind="text:$root.company()" style="font-size:11px"></label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group" style="margin-bottom:0px;">
@@ -389,7 +397,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-9">
+                                        <div class="col-lg-9" style="display:none">
                                             <div class="form-group">
                                                 <div class="col-lg-4 text-right">
                                                     <label class="control-label text-right tooltip-float">Currency Symbol</label>
@@ -399,7 +407,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-9">
+                                        <div class="col-lg-9" style="display:none">
                                             <div class="form-group">
                                                 <div class="col-lg-4 text-right">
                                                     <label class="control-label text-right tooltip-float">Price</label>
@@ -409,7 +417,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-9">
+                                        <div class="col-lg-9" style="display:none">
                                             <div class="form-group">
                                                 <div class="col-lg-4 text-right">
                                                     <label class="control-label text-right tooltip-float">Saving</label>
@@ -579,7 +587,7 @@
                                                     <div class="col-lg-4 text-right">
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <img id="vehicleImage" alt="" style="width: auto;height:200px;width:400px;" data-bind="attr:{src:couponImage1()}" />
+                                                        <img id="vehicleImage" alt="" style="width: auto;height:auto;width:400px;" data-bind="attr:{src:couponImage1()}" />
                                                         <h5><span></span></h5>
                                                     </div>
                                                 </div>
@@ -587,7 +595,7 @@
                                                     <div class="col-lg-4 text-right">
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <img id="vehicleImage" alt="" style="width: auto;height:200px;width:400px;" data-bind="attr:{src:couponImage2()}" />
+                                                        <img id="vehicleImage" alt="" style="width: auto;height:auto;width:400px;" data-bind="attr:{src:couponImage2()}" />
                                                         <h5><span></span></h5>
                                                     </div>
                                                 </div>
@@ -595,7 +603,7 @@
                                                     <div class="col-lg-4 text-right">
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <img id="vehicleImage" alt="" style="width: auto;height:200px;width:400px;" data-bind="attr:{src:couponImage3()}" />
+                                                        <img id="vehicleImage" alt="" style="width: auto;height:auto;width:400px;" data-bind="attr:{src:couponImage3()}" />
                                                         <h5><span></span></h5>
                                                     </div>
                                                 </div>

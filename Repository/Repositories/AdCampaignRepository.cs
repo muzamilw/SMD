@@ -102,7 +102,7 @@ namespace SMD.Repository.Repositories
             //        .ToList();
             //res = res.OrderByDescending(g => g.priority);
             var res = DbSet.Where(query)
-                    .OrderByDescending(g => g.SubmissionDateTime);
+                    .OrderByDescending(g => g.ClickRate);
             return res.Skip(fromRow)
                     .Take(toRow);
 

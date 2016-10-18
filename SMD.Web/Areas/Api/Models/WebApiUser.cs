@@ -45,7 +45,7 @@ namespace SMD.MIS.Areas.Api.Models
         /// <summary>
         /// Age
         /// </summary>
-        public DateTime? DOB { get; set; }
+        public string DOB { get; set; }
 
         /// <summary>
         /// Gender
@@ -159,5 +159,8 @@ namespace SMD.MIS.Areas.Api.Models
         public string GenderString { get; set; }
 
         public string IndustryName { get; set; }
+
+
+        public bool ProfileComplete { get; set; }
     }
 }

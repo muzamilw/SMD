@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SMD.Models.DomainModels
 {
@@ -22,6 +23,12 @@ namespace SMD.Models.DomainModels
         public Nullable<System.DateTime> StageTwoEventDate { get; set; }
         public string StageTwoUserId { get; set; }
         public string TargetPayoutAccount { get; set; }
+        [NotMapped]
+        public string CompanyName { get; set; }
+        [NotMapped]
+        public string UserId { get; set; }
+        [NotMapped]
+        public string Email { get; set; }
 
         public virtual Company Company { get; set; }
     }

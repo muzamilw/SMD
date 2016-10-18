@@ -317,7 +317,7 @@ namespace SMD.MIS.Controllers
             {
 
                
-                var user = new User { UserName = model.Email, Email = model.Email, FullName = model.FullName };
+                var user = new User { UserName = model.Email, Email = model.Email, FullName = model.FullName, DOB = null };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -421,7 +421,8 @@ namespace SMD.MIS.Controllers
                 if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
                 {
                     // Don't reveal that the user does not exist or is not confirmed
-                    return View("ForgotPasswordConfirmation");
+                    ViewBag.error = "We could not find an account with provided email.";
+                    return View(model);
                 }
 
                 var code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
@@ -620,7 +621,7 @@ namespace SMD.MIS.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new User { UserName = model.Email, Email = model.Email, FullName = info.DefaultUserName };
+                var user = new User { UserName = model.Email, Email = model.Email, FullName = info.DefaultUserName, DOB = null };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {

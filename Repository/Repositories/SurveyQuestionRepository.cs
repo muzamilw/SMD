@@ -92,7 +92,7 @@ namespace SMD.Repository.Repositories
                         (question.Question.Contains(request.SearchText)))
                         && (request.CountryFilter == 0 || question.CountryId == request.CountryFilter)
                         && (request.LanguageFilter == 0 || question.LanguageId == request.LanguageFilter)
-                        && (request.Status == 0 || question.Status == request.Status)
+                        && (request.Status == 0 || question.Status == request.Status) && question.Status != 7
 
                         && question.CompanyId == null;
 
@@ -105,7 +105,7 @@ namespace SMD.Repository.Repositories
                          (question.Question.Contains(request.SearchText)))
                          && (request.CountryFilter == 0 || question.CountryId == request.CountryFilter)
                          && (request.LanguageFilter == 0 || question.LanguageId == request.LanguageFilter)
-                         && (request.Status == 0 || question.Status == request.Status)
+                         && (request.Status == 0 || question.Status == request.Status) && question.Status != 7
                          && question.CompanyId == this.CompanyId;
 
             }
@@ -150,6 +150,16 @@ namespace SMD.Repository.Repositories
         {
             return DbSet.Select(survey => survey).ToList();
         }
+
+        /// <summary>
+        /// Get survey Questions by current Companyid
+        /// </summary>
+        public IEnumerable<SurveyQuestion> GetAllByCompanyId()
+        {
+            return DbSet.Where(g=> g.CompanyId == CompanyId).Select(survey => survey).ToList();
+        }
+
+
         public SurveyQuestion Get(long SqId)
         {
             db.Configuration.ProxyCreationEnabled = false;

@@ -376,10 +376,12 @@ namespace SMD.Implementation.Services
                 campaignModel.SubmissionDateTime = DateTime.Now;
             }
             //toCamdo pilot: harcoding ClickRate = 1 for every campaign
-            if (campaignModel.ClickRate == 0)
-            { campaignModel.ClickRate = 0.0; }
-            else
-            campaignModel.ClickRate = 0.20;
+
+            // not needed now
+            //if (campaignModel.ClickRate == 0)
+            //{ campaignModel.ClickRate = 0.0; }
+            //else
+            //campaignModel.ClickRate = 0.20;
             if (campaignModel.Status == 2)
             {
                 campaignModel.SubmissionDateTime = DateTime.Now;
@@ -393,10 +395,8 @@ namespace SMD.Implementation.Services
 
             //maintaining click rate history
            
-                _adCampaignClickRateHistoryRepository.Add(new AdCampaignClickRateHistory { CampaignID = campaignModel.CampaignId, ClickRate = campaignModel.ClickRate, RateChangeDateTime = DateTime.Now });
+           _adCampaignClickRateHistoryRepository.Add(new AdCampaignClickRateHistory { CampaignID = campaignModel.CampaignId, ClickRate = campaignModel.ClickRate, RateChangeDateTime = DateTime.Now });
                 _adCampaignClickRateHistoryRepository.SaveChanges();
-
-
 
             string[] paths = SaveImages(campaignModel);
             if (paths != null && paths.Count() > 0)
@@ -454,8 +454,6 @@ namespace SMD.Implementation.Services
                     oModel.CampaignId = campaignModel.CampaignId;
                     oModel.CategoryId = item.CategoryId;
                     _campaignCategoriesRepository.Add(oModel);
-
-
                 }
                 _campaignCategoriesRepository.SaveChanges();
 
@@ -911,6 +909,15 @@ namespace SMD.Implementation.Services
                 SurveyQuestions = _surveyQuestionRepository.GetAll().Where(g => g.Status != 0)
             };
         }
+
+        public AdCampaignBaseResponse GetSurveyQuestionDataByCompanyId()
+        {
+            return new AdCampaignBaseResponse
+            {
+                SurveyQuestions = _surveyQuestionRepository.GetAllByCompanyId().Where(g => g.Status != 0)
+            };
+        }
+
         public AdCampaignBaseResponse GetSurveyQuestionAnser(long SqID)
         {
             return new AdCampaignBaseResponse

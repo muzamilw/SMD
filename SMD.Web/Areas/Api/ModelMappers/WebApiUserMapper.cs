@@ -32,7 +32,7 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                        UserTimeZone = source.UserTimeZone,
                        Gender = source.Gender,
                        Address2 = source.Company.AddressLine2,
-                       DOB =  source.DOB,
+                       DOB =  source.DOB.Value.ToShortDateString(),
                        //CityId = source.Company.CityId,
                        ContactNotes = source.ContactNotes,
                        CountryId = source.Company.CountryId,
@@ -66,6 +66,15 @@ namespace SMD.MIS.Areas.Api.ModelMappers
 
         public static WebApiUser CreateFromUserForMobile(this SMD.Models.IdentityModels.User source)
         {
+
+            bool isProfilecomplete = true;
+
+            if (source.IndustryId.HasValue == false || source.DOB.HasValue == false || source.Title == "" || source.Title == null)
+            {
+                isProfilecomplete = false;
+            }
+
+            
             var user = new WebApiUser
             {
                 UserId = source.Id,
@@ -75,7 +84,7 @@ namespace SMD.MIS.Areas.Api.ModelMappers
              
                 Gender = source.Gender.HasValue ? source.Gender.Value : 1,
           
-                DOB = source.DOB.HasValue ? source.DOB.Value : DateTime.Now,
+                DOB = source.DOB.HasValue ? source.DOB.Value.ToShortDateString() : "",
           
                 IndustryId = source.IndustryId.HasValue ? source.IndustryId : 0,
 
@@ -85,7 +94,8 @@ namespace SMD.MIS.Areas.Api.ModelMappers
          
                 ImageUrl = !string.IsNullOrEmpty(source.Company.Logo) ? HttpContext.Current.Request.Url.Scheme + "://" +
                 HttpContext.Current.Request.Url.Host + "/" + source.ProfileImage + "?" + DateTime.Now : string.Empty,
-                Title = source.Title == null ? "": source.Title
+                Title = source.Title == null ? "": source.Title,
+                ProfileComplete = isProfilecomplete
                
             };
 
@@ -234,7 +244,20 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                 IndusteryDropdowns = source.Industries.Select(industery => industery.CreateForDd()),
                 EducationDropdowns = source.Educations.Select(edu => edu.CreateFromDd()),
                 UserRoles = source.UserRoles.Select(role => role.CreateFromDd()),
-                TimeZoneDropDowns = timeZones
+                TimeZoneDropDowns = timeZones,
+                GetApprovalCount = source.GetApprovalCount.CreateFrom()
+            };
+        }
+
+        private static SMD.MIS.Areas.Api.Models.GetApprovalCount_Result CreateFrom(this SMD.Models.DomainModels.GetApprovalCount_Result source)
+        {
+            return new Models.GetApprovalCount_Result
+            {
+                AdCmpaignCount = source.AdCmpaignCount,
+                CouponCount =source.CouponCount,
+                DisplayAdCount = source.DisplayAdCount,
+                SurveyQuestionCount = source.SurveyQuestionCount,
+                ProfileQuestionCount = source.ProfileQuestionCount
             };
         }
     }

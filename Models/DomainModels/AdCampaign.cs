@@ -112,9 +112,10 @@ namespace SMD.Models.DomainModels
 
     public double? MaxDailyBudget { get; set; }
 
+    public Nullable<bool> ShowBuyitBtn { get; set; }
+        
 
     public Nullable<System.DateTime> SubmissionDateTime { get; set; }
-
 
 
         public Nullable<int> ChannelType { get; set; }

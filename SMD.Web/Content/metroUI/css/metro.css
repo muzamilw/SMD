@@ -8,7 +8,7 @@
 
 .listview {
     display: block;
-    width: 100%;
+    width:899px;
     height: auto;
  
 }
@@ -16,6 +16,7 @@
     height:400px;
        overflow-y: scroll;
     overflow-x: hidden;
+        width: 99%;
 }
 .childList
 {
@@ -33,18 +34,22 @@
         width: 100%;
         padding: 8px 8px 4px 48px;
         border: 1px transparent solid;
-        cursor: pointer;
-       
+      
         border-bottom-color: #eeeeee;
         position: relative;
         border-color: #eeeeee;
     }
-
+.listview .list span{
+    cursor:pointer;
+}
+.childList {
+        cursor:pointer;
+}
     .listview.list-type-tiles .list {
         display: block;
         float: left;
         padding: 6px 4px 4px 10px;
-        width: 838px;
+        width: 872px;
         min-height: 52px;
         margin: .625rem;
         margin-left:0px;

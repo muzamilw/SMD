@@ -128,6 +128,7 @@ namespace SMD.Repository.Repositories
         }
         public string GetCompanyNameByID(int CompanyId)
         {
+            db.Configuration.LazyLoadingEnabled = false;
             return DbSet.Where(c => c.CompanyId == CompanyId).FirstOrDefault().CompanyName;
         }
         public Company GetCompanyById()
@@ -179,12 +180,19 @@ namespace SMD.Repository.Repositories
 
                 db.Entry(target).State = EntityState.Modified;
                 db.SaveChanges();
+                
 
             }
             return true;
 
         #endregion
 
+        }
+
+        public GetApprovalCount_Result GetApprovalCount()
+        {
+            var appCount = db.GetApprovalCount();
+            return appCount != null ? appCount.FirstOrDefault() : null;
         }
     }
 }
