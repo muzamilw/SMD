@@ -66,6 +66,15 @@ namespace SMD.MIS.Areas.Api.ModelMappers
 
         public static WebApiUser CreateFromUserForMobile(this SMD.Models.IdentityModels.User source)
         {
+
+            bool isProfilecomplete = true;
+
+            if (source.IndustryId.HasValue == false || source.DOB.HasValue == false || source.Title == "" || source.Title == null)
+            {
+                isProfilecomplete = false;
+            }
+
+            
             var user = new WebApiUser
             {
                 UserId = source.Id,
@@ -75,7 +84,7 @@ namespace SMD.MIS.Areas.Api.ModelMappers
              
                 Gender = source.Gender.HasValue ? source.Gender.Value : 1,
           
-                DOB = source.DOB.HasValue ? source.DOB.Value.ToShortDateString() : DateTime.Now.ToShortDateString(),
+                DOB = source.DOB.HasValue ? source.DOB.Value.ToShortDateString() : "",
           
                 IndustryId = source.IndustryId.HasValue ? source.IndustryId : 0,
 
@@ -85,7 +94,8 @@ namespace SMD.MIS.Areas.Api.ModelMappers
          
                 ImageUrl = !string.IsNullOrEmpty(source.Company.Logo) ? HttpContext.Current.Request.Url.Scheme + "://" +
                 HttpContext.Current.Request.Url.Host + "/" + source.ProfileImage + "?" + DateTime.Now : string.Empty,
-                Title = source.Title == null ? "": source.Title
+                Title = source.Title == null ? "": source.Title,
+                ProfileComplete = isProfilecomplete
                
             };
 

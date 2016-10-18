@@ -159,5 +159,8 @@ namespace SMD.MIS.Areas.Api.Models
         public string GenderString { get; set; }
 
         public string IndustryName { get; set; }
+
+
+        public bool ProfileComplete { get; set; }
     }
 }
