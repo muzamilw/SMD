@@ -55,9 +55,14 @@ define("survey/survey.dataservice", function () {
                         dataType: 'json',
                         type: 'GET'
                     });
+					amplify.request.define('getSurvayAnalytics', 'ajax', {
+                        url: '/Api/SurvayQuestionAnalytic',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
                     isInitialized = true;
                 }
-            },
+            }, // 
             // callings ads comapaign service for profile questions and survey questions list 
             getBaseData = function (params, callbacks) {
                 initialize();
@@ -117,6 +122,15 @@ define("survey/survey.dataservice", function () {
                        error: callbacks.error,
                    });
                },
+			  getSurvayAnalytics = function (params, callbacks) {
+                   initialize();
+                   return amplify.request({
+                       resourceId: 'getSurvayAnalytics',
+                       data: params,
+                       success: callbacks.success,
+                       error: callbacks.error,
+                   });
+               }, 
            addSurveyData = function (params, callbacks) {
                initialize();
                return amplify.request({
@@ -135,7 +149,8 @@ define("survey/survey.dataservice", function () {
             getSurveyQuestion: getSurveyQuestion,
             getAudienceData: getAudienceData,
             getSurveyParentList: getSurveyParentList,
-            getProduct: getProduct
+            getProduct: getProduct,
+			getSurvayAnalytics : getSurvayAnalytics
         };
        
     })();

@@ -81,8 +81,51 @@ define("survey/survey.viewModel",
                     HeaderText = ko.observable(0),
                     StatusValue = ko.observable(0),
                     qStatuses = ko.observableArray([{ id: 0, value: 'All' }, { id: 1, value: 'Draft' }, { id: 2, value: 'Submitted for Approval' }, { id: 3, value: 'Live' }, { id: 4, value: 'Paused' }, { id: 5, value: 'Completed' }, { id: 6, value: 'Rejected' }]);
-                statusFilterValue = ko.observable();
-                //Get Questions
+					statusFilterValue = ko.observable();
+				// Advertiser Analytics 
+					isAdvertdashboardPollVisible = ko.observable(false),
+					selectedCampStatusAnalytics = ko.observable(1),
+					selecteddateRangeAnalytics = ko.observable(1),
+					selectedGranularityAnalytics = ko.observable(1) ,
+				    selectedSQIDAnalytics = ko.observable() ,
+					SQAnalyticsData = ko.observableArray([]), 
+					granularityDropDown = ko.observableArray([{ id: 1, name: "Daily" }, { id: 2, name: "Weekly" }, { id: 3, name: "Monthly" }, { id: 4, name: "Quarterly" }, { id: 5, name: "Yearly" }]),
+					DateRangeDropDown  = ko.observableArray([{ id: 1, name: "One month" }, { id: 2, name: "All Time" }]),
+					CampaignStatusDropDown  = ko.observableArray([{ id: 1, name: "Answered" }, { id: 2, name: "Skipped" }]),
+				    openAdvertiserDashboardPollScreen = function () {
+					getSurvayAnalytics();
+					$("#ddGranularityDropDown").removeAttr("disabled");
+					$("#ddDateRangeDropDown").removeAttr("disabled");
+					$("#ddCampaignStatusDropDown").removeAttr("disabled");
+					isAdvertdashboardPollVisible(true);
+				},
+				getSurvayAnalytics = function () {
+					dataservice.getSurvayAnalytics({
+						SQId: selectedSQIDAnalytics(),
+						CampStatus : selectedCampStatusAnalytics(),
+						dateRange :selecteddateRangeAnalytics(),
+						Granularity : selectedGranularityAnalytics(),
+					},{
+						success: function (data) {
+							
+							SQAnalyticsData.removeAll();
+							ko.utils.arrayPushAll(SQAnalyticsData(), data);
+							SQAnalyticsData.valueHasMutated();
+							
+						},
+						error: function (response) {
+
+                        }
+					});
+					
+				},					
+					
+					ClosePollAnalyticView = function () {
+					isAdvertdashboardPollVisible(false);
+				},
+					
+					//End Advertiser Analytics 
+			   //Get Questions
                 getQuestions = function () {
                     dataservice.searchSurveyQuestions(
                         {
@@ -363,11 +406,10 @@ define("survey/survey.viewModel",
             },
                 // On editing of existing PQ
                 onEditSurvey = function (item) {
+					selectedSQIDAnalytics(item.SQID());
                     selectedQuestionCountryList([]); $("#panelArea,#topArea,#Heading_div").css("display", "none");
                     gotoScreen(1);
                     isTerminateBtnVisible(false);
-
-
                     isShowArchiveBtn(false);
                     if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == null || item.Status() == 7 || item.Status() == 9) {
                         canSubmitForApproval(true);
@@ -2003,6 +2045,13 @@ define("survey/survey.viewModel",
                     totalPrice: totalPrice,
                     SavePassChanges: SavePassChanges,
                     terminateSaveChanges: terminateSaveChanges,
+                    DefaultRangeValue: DefaultRangeValue ,
+					getSurvayAnalytics:getSurvayAnalytics,
+					ClosePollAnalyticView:ClosePollAnalyticView,
+					isAdvertdashboardPollVisible :isAdvertdashboardPollVisible,
+					selectedCampStatusAnalytics:selectedCampStatusAnalytics,
+					selecteddateRangeAnalytics:selecteddateRangeAnalytics,
+					selectedGranularityAnalytics :selectedGranularityAnalytics,
                     DefaultRangeValue: DefaultRangeValue,
                     Modelheading: Modelheading,
                     getQuestionByFilter: getQuestionByFilter,
@@ -2011,6 +2060,12 @@ define("survey/survey.viewModel",
                     TemporaryQuizQuestions:TemporaryQuizQuestions,
                     TemporarySurveyList: TemporarySurveyList,
                     submitResumeData: submitResumeData
+					selectedSQIDAnalytics : selectedSQIDAnalytics,
+					SQAnalyticsData : SQAnalyticsData,
+					granularityDropDown : granularityDropDown,
+					DateRangeDropDown : DateRangeDropDown ,
+					CampaignStatusDropDown : CampaignStatusDropDown , 
+					openAdvertiserDashboardPollScreen : openAdvertiserDashboardPollScreen
                 };
             })()
         };

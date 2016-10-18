@@ -665,7 +665,7 @@ namespace SMD.Repository.BaseRepository
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getDisplayAdsCampaignByCampaignIdAnalytics_Result>("getDisplayAdsCampaignByCampaignIdAnalytics", _compaignId, _CampStatus, _dateRange, _Granularity);
         }
 
-        public ObjectResult<getSurvayByPQID_Result> getSurvayByPQID(int PQId, int CampStatus, int dateRange, int Granularity)
+        public ObjectResult<getSurvayByPQID_Result> getSurvayByPQIDAnalytics(int PQId, int CampStatus, int dateRange, int Granularity)
         {
             var _PQId = new ObjectParameter("PQId", PQId);
             var _CampStatus = new ObjectParameter("status", CampStatus);
@@ -673,7 +673,7 @@ namespace SMD.Repository.BaseRepository
             var _Granularity = new ObjectParameter("Granularity", Granularity);
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getSurvayByPQID_Result>("getSurvayByPQID", _PQId, _CampStatus, _dateRange, _Granularity);
         }
-        public ObjectResult<getPollsBySQID_Result> getPollsBySQID(int SQId, int CampStatus, int dateRange, int Granularity)
+        public ObjectResult<getPollsBySQID_Result> getPollsBySQIDAnalytics(int SQId, int CampStatus, int dateRange, int Granularity)
         {
             var _SQId = new ObjectParameter("SQID", SQId);
             var _CampStatus = new ObjectParameter("status", CampStatus);
@@ -681,7 +681,7 @@ namespace SMD.Repository.BaseRepository
             var _Granularity = new ObjectParameter("Granularity", Granularity);
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getPollsBySQID_Result>("getPollsBySQID", _SQId, _CampStatus, _dateRange, _Granularity);
         }
-        public ObjectResult<getDealByCouponID_Result> getDealByCouponID(int CouponID, int dateRange, int Granularity)
+        public ObjectResult<getDealByCouponID_Result> getDealByCouponIDAnalytics(int CouponID, int dateRange, int Granularity)
         {
             var _CouponID = new ObjectParameter("CouponID", CouponID);
             var _dateRange = new ObjectParameter("DateRange", dateRange);

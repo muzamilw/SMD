@@ -384,13 +384,16 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SecurityConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Api\Controllers\CouponAnalyticsController.cs" />
     <Compile Include="Areas\Api\Controllers\ApprovePayOutHistoryController.cs" />
     <Compile Include="Areas\Api\Controllers\GetApprovalCountController.cs" />
     <Compile Include="Areas\Api\Controllers\DisplayAdsCampaignAnalyticController.cs" />
     <Compile Include="Areas\Api\Controllers\GetCouponPriceOptionController.cs" />
     <Compile Include="Areas\Api\Controllers\GetPayOutHistoryController.cs" />
     <Compile Include="Areas\Api\Controllers\PayoutRevenueController.cs" />
+    <Compile Include="Areas\Api\Controllers\profileQuestionAnalyticController.cs" />
     <Compile Include="Areas\Api\Controllers\SuperNovaCampaignController.cs" />
+    <Compile Include="Areas\Api\Controllers\SurvayQuestionAnalyticController.cs" />
     <Compile Include="Areas\Api\Controllers\UserFeedbackController.cs" />
     <Compile Include="Areas\Api\Controllers\UserController.cs" />
     <Compile Include="Areas\Api\Controllers\ApproveProfileQuestionAnsController.cs" />
@@ -740,6 +743,9 @@
     <Content Include="Areas\Franchise\Views\ApprovePayPal\PayPalDashboard.cshtml" />
     <Content Include="Areas\Franchise\Scripts\payPallApp.view.js" />
     <Content Include="Areas\Franchise\Views\ApprovePayPal\_payPallEditorForApp.cshtml" />
+    <Content Include="Areas\Coupons\Views\Coupons\_advertDashboardDeal.cshtml" />
+    <Content Include="Areas\Survey\Views\Shared\_advertSurveyAnalytic.cshtml" />
+    <Content Include="Areas\ProfileQuestion\Views\Manage\_advertProfileQuestionAnalytic.cshtml" />
     <None Include="config\Web.connectionstrings.config">
       <SubType>Designer</SubType>
     </None>

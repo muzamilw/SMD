@@ -1,6 +1,5 @@
-﻿
-GO
-/****** Object:  StoredProcedure [dbo].[getAdsCampaignByCampaignId]    Script Date: 10/13/2016 2:49:40 PM ******/
+﻿GO
+/****** Object:  StoredProcedure [dbo].[getDisplayAdsCampaignByCampaignIdAnalytics]    Script Date: 10/14/2016 2:47:28 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -10,9 +9,9 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-create PROCEDURE [dbo].[getDisplayAdsCampaignByCampaignIdAnalytics] (
+ALTER PROCEDURE [dbo].[getDisplayAdsCampaignByCampaignIdAnalytics] (
 @CampaignId INT,
-@status INT, -- 1 for Viewed, 2 for Conversions or 3 for Skipped
+@status INT, -- 1 for Answered, 2 for Conversions or 3 for Skipped
 @DateRange INT, -- 1 for last 30 days , 2 for All time
 @Granularity INT		----- 1 for day, 2 for week, 3 for month and 4 for year
 )
@@ -23,7 +22,7 @@ BEGIN
 SET NOCOUNT ON;
 DECLARE @StartDate DATE = '20000101', @NumberOfYears INT = 30, @dateFrom DATE = getdate()-30, @tmp BIGINT =0, @tmpA float ;
 
-select 'hkkkkkkkkkkkkkkkkkkkkkkkkk' Granual , @tmp openStats, @tmpA avgAdClickStats, @tmp Stats
+--select 'hkkkkkkkkkkkkkkkkkkkkkkkkk' Granual , @tmp openStats, @tmpA avgAdClickStats, @tmp Stats
 -- prevent set or regional settings from interfering with 
 -- interpretation of dates / literals
 
@@ -89,9 +88,9 @@ DECLARE @CutoffDate DATE = DATEADD(YEAR, @NumberOfYears, @StartDate);
 	Granual  VARCHAR(200),
 	avgAdClickStats float
 	)
-IF @DateRange = 2
+IF @DateRange = 2 
 	BEGIN
-	 Select top 1 @dateFrom= [CreatedDateTime] from AdCampaignResponse where CampaignID = @CampaignId
+	 Select top 1 @dateFrom= [CreatedDateTime] - 3 from AdCampaignResponse where CampaignID = @CampaignId
 	END
 
 	IF @Granularity = 1
@@ -138,14 +137,14 @@ IF @DateRange = 2
 	group by t.Granual
 
 	insert into @rev
-	select g.Granual , (sum(t.DebitAmount)/count(t.DebitAmount))/100 as avgAdClickStats
+	select g.Granual ,isnull((sum(t.DebitAmount)/count(t.DebitAmount))/100, 0) as avgAdClickStats
 	from @T1 g
 	left join [Transaction] t on g.date = CONVERT(date, t.TransactionDate) AND t.AdCampaignID = @CampaignId
 	group by g.Granual
 
 
 
-	IF @status = 1
+	IF @status = 1 -- 1 for Answered
 		BEGIN
 		insert into @stats
 		Select  t.Granual, count(case when acr.ResponseType = 3 then acr.CampaignID else null end) Stats
@@ -153,7 +152,7 @@ IF @DateRange = 2
 		right outer join   @T1 t on t.date = CONVERT(date, acr.CreatedDateTime) and acr.CampaignID = @CampaignId
 		group by t.Granual
 		END
-	IF @status = 2
+	IF @status = 2 -- 2 for Conversions 
 		BEGIN
 		insert into @stats
 		Select  t.Granual, count(case when acr.ResponseType = 2 then acr.CampaignID else null end) Stats
@@ -161,7 +160,7 @@ IF @DateRange = 2
 		right outer join   @T1 t on t.date = CONVERT(date, acr.CreatedDateTime) and acr.CampaignID = @CampaignId
 		group by t.Granual
 		END
-	IF @status = 3
+	IF @status = 3 -- 3 for Skipped
 		BEGIN
 		insert into @stats
 		Select  t.Granual, count(case when acr.ResponseType = 4 then acr.CampaignID else null end) Stats
@@ -177,9 +176,5 @@ IF @DateRange = 2
 	order by c.ordr
 END
 
-
-
-
---EXEC [getDisplayAdsCampaignByCampaignIdAnalytics] 20290, 1, 2, 1
-
+--EXEC [getDisplayAdsCampaignByCampaignIdAnalytics] 10020, 1, 1, 1
 

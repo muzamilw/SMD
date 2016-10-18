@@ -2375,6 +2375,10 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Parameter Name="DateRange" Type="int" Mode="In" />
           <Parameter Name="Granularity" Type="int" Mode="In" />
         </Function>
+        <Function Name="getAdsCampaignByCampaignIdRatioAnalytic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="DateRange" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetApprovalCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetAudience" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ageFrom" Type="int" Mode="In" />
@@ -2433,6 +2437,10 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Parameter Name="DateRange" Type="int" Mode="In" />
           <Parameter Name="Granularity" Type="int" Mode="In" />
         </Function>
+        <Function Name="getDealByCouponIdRatioAnalytic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="DateRange" Type="int" Mode="In" />
+        </Function>
         <Function Name="getDisplayAdsCampaignByCampaignIdAnalytics" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CampaignId" Type="int" Mode="In" />
           <Parameter Name="status" Type="int" Mode="In" />
@@ -2449,6 +2457,10 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Parameter Name="DateFrom" Type="datetime" Mode="In" />
           <Parameter Name="DateTo" Type="datetime" Mode="In" />
           <Parameter Name="Granularity" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getPollBySQIDRatioAnalytic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="DateRange" Type="int" Mode="In" />
         </Function>
         <Function Name="getPollsBySQID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="SQID" Type="int" Mode="In" />
@@ -2473,6 +2485,10 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Parameter Name="status" Type="int" Mode="In" />
           <Parameter Name="DateRange" Type="int" Mode="In" />
           <Parameter Name="Granularity" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getSurveyByPQIDRatioAnalytic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="DateRange" Type="int" Mode="In" />
         </Function>
         <Function Name="GetSurveys" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserID" Type="nvarchar" Mode="In" />
@@ -3795,6 +3811,22 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <Parameter Name="status" Mode="In" Type="Int32" />
             <Parameter Name="DateRange" Mode="In" Type="Int32" />
             <Parameter Name="Granularity" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getAdsCampaignByCampaignIdRatioAnalytic" ReturnType="Collection(DomainModels.getAdsCampaignByCampaignIdRatioAnalytic_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="DateRange" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getDealByCouponIdRatioAnalytic" ReturnType="Collection(DomainModels.getDealByCouponIdRatioAnalytic_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="DateRange" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getPollBySQIDRatioAnalytic" ReturnType="Collection(DomainModels.getPollBySQIDRatioAnalytic_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="DateRange" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getSurveyByPQIDRatioAnalytic" ReturnType="Collection(DomainModels.getSurveyByPQIDRatioAnalytic_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="DateRange" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
@@ -6836,6 +6868,22 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="Double" Name="avgAdClickStats" Nullable="true" />
           <Property Type="Int64" Name="Stats" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="getAdsCampaignByCampaignIdRatioAnalytic_Result">
+          <Property Type="String" Name="label" Nullable="false" MaxLength="24" />
+          <Property Type="Int32" Name="value" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="getDealByCouponIdRatioAnalytic_Result">
+          <Property Type="String" Name="label" Nullable="false" MaxLength="23" />
+          <Property Type="Int32" Name="value" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="getPollBySQIDRatioAnalytic_Result">
+          <Property Type="Int32" Name="label" Nullable="true" />
+          <Property Type="Int32" Name="value" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="getSurveyByPQIDRatioAnalytic_Result">
+          <Property Type="String" Name="label" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="value" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -8515,6 +8563,38 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
                 <ScalarProperty Name="openStats" ColumnName="openStats" />
                 <ScalarProperty Name="avgAdClickStats" ColumnName="avgAdClickStats" />
                 <ScalarProperty Name="Stats" ColumnName="Stats" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getAdsCampaignByCampaignIdRatioAnalytic" FunctionName="SMDModel.Store.getAdsCampaignByCampaignIdRatioAnalytic">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.getAdsCampaignByCampaignIdRatioAnalytic_Result">
+                <ScalarProperty Name="label" ColumnName="label" />
+                <ScalarProperty Name="value" ColumnName="value" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getDealByCouponIdRatioAnalytic" FunctionName="SMDModel.Store.getDealByCouponIdRatioAnalytic">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.getDealByCouponIdRatioAnalytic_Result">
+                <ScalarProperty Name="label" ColumnName="label" />
+                <ScalarProperty Name="value" ColumnName="value" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getPollBySQIDRatioAnalytic" FunctionName="SMDModel.Store.getPollBySQIDRatioAnalytic">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.getPollBySQIDRatioAnalytic_Result">
+                <ScalarProperty Name="label" ColumnName="label" />
+                <ScalarProperty Name="value" ColumnName="value" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getSurveyByPQIDRatioAnalytic" FunctionName="SMDModel.Store.getSurveyByPQIDRatioAnalytic">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.getSurveyByPQIDRatioAnalytic_Result">
+                <ScalarProperty Name="label" ColumnName="label" />
+                <ScalarProperty Name="value" ColumnName="value" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

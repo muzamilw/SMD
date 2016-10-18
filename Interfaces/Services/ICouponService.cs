@@ -45,6 +45,8 @@ namespace SMD.Interfaces.Services
         List<CouponPriceOption> GetCouponPriceOptions(long CouponId );
         string UpdateCouponForApproval(Coupon source);
         Currency GetCurrenyById(int id);
+        IEnumerable<getDealByCouponID_Result> getDealByCouponIDAnalytics(int CouponID, int dateRange, int Granularity);
+       
 
     }
 }

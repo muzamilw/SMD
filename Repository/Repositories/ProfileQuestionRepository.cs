@@ -243,6 +243,11 @@ namespace SMD.Repository.Repositories
                     .Take(toRow);
 
         }
+        public IEnumerable<getSurvayByPQID_Result> getSurvayByPQIDAnalytics(int PQId, int CampStatus, int dateRange, int Granularity)
+        {
+          
+            return db.getSurvayByPQIDAnalytics(PQId, CampStatus, dateRange, Granularity);
+        }
 
         //public ProfileQuestion GetProfileQuestionByID(long PQID)
         //{ 

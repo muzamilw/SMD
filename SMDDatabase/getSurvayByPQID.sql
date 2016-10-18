@@ -1,4 +1,5 @@
 ﻿GO
+/****** Object:  StoredProcedure [dbo].[getSurvayByPQID]    Script Date: 10/15/2016 7:28:46 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -8,7 +9,7 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-Create PROCEDURE [dbo].[getSurvayByPQID] (
+ALTER PROCEDURE [dbo].[getSurvayByPQID] (
 @PQId INT,
 @status INT, -- 1 for answered, 2 for Skipped
 @DateRange INT, -- 1 for last 30 days , 2 for All time
@@ -21,7 +22,7 @@ BEGIN
 SET NOCOUNT ON;
 DECLARE @StartDate DATE = '20000101', @NumberOfYears INT = 30, @dateFrom DATE = getdate()-30, @tmp BIGINT =0;
 
-select 'hkkkkkkkkkkkkkkkkkkkkkkkkk' Granual , @tmp openStats, @tmp Stats
+--select 'hkkkkkkkkkkkkkkkkkkkkkkkkk' Granual , @tmp openStats, @tmp Stats
 -- prevent set or regional settings from interfering with 
 -- interpretation of dates / literals
 
@@ -156,5 +157,5 @@ IF @DateRange = 2
 END
 
 
---EXEC [getSurvayByPQID] 6, 1, 1, 1
+--EXEC [getSurvayByPQID] 6, 1, 1, 2
 

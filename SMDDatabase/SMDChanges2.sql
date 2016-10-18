@@ -2099,3 +2099,7 @@ ADD CouponImage5 nvarchar(MAX)
 
 ALTER TABLE Coupon
 ADD CouponImage6 nvarchar(MAX)
+
+
+
+------------------------------------------ all above scripts executed on live server.

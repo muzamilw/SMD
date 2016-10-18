@@ -1,4 +1,5 @@
 ﻿GO
+/****** Object:  StoredProcedure [dbo].[getPollsBySQID]    Script Date: 10/15/2016 7:29:17 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -8,7 +9,7 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-Create PROCEDURE [dbo].[getPollsBySQID] (
+ALTER PROCEDURE [dbo].[getPollsBySQID] (
 @SQID INT,
 @status INT, -- 1 for answered, 2 for Skipped
 @DateRange INT, -- 1 for last 30 days , 2 for All time
@@ -21,7 +22,7 @@ BEGIN
 SET NOCOUNT ON;
 DECLARE @StartDate DATE = '20000101', @NumberOfYears INT = 30, @dateFrom DATE = getdate()-30, @tmp BIGINT =0;
 
-select 'hkkkkkkkkkkkkkkkkkkkkkkkkk' Granual , @tmp openStats, @tmp Stats
+--select 'hkkkkkkkkkkkkkkkkkkkkkkkkk' Granual , @tmp openStats, @tmp Stats
 -- prevent set or regional settings from interfering with 
 -- interpretation of dates / literals
 
@@ -153,9 +154,7 @@ IF @DateRange = 2
 	inner join @stats ln on ln.Granual = c.Granual
 	order by c.ordr
 END
---EXEC [getPollsBySQID] 170, 2, 1, 1
 
---@SQID INT,
---@status INT, -- 1 for answered, 2 for Skipped
---@DateRange INT, -- 1 for last 30 days , 2 for All time
---@Granularity INT		----- 1 for day, 2 for week, 3 for month and 4 for year
+
+--EXEC [getPollsBySQID] 41, 1, 1, 2
+

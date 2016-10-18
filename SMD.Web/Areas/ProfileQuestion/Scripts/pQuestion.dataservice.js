@@ -69,6 +69,12 @@ define("pQuestion/pQuestion.dataservice", function () {
                         dataType: 'json',
                         type: 'GET'
                     });
+					 amplify.request.define('getSurvayAnalytics', 'ajax', {
+                        url: '/Api/profileQuestionAnalytic',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
+					
                     isInitialized = true;
                 }
             },
@@ -144,7 +150,15 @@ define("pQuestion/pQuestion.dataservice", function () {
                     data: params
                 });
             },
-            
+            getSurvayAnalytics = function (params, callbacks) {
+                initialize();
+                return amplify.request({
+                    resourceId: 'getSurvayAnalytics',
+                    success: callbacks.success,
+                    error: callbacks.error,
+                    data: params
+                });
+            },
             // Save Profile Questions add /edit
             saveProfileQuestion = function (params, callbacks) {
                 initialize();
@@ -173,7 +187,8 @@ define("pQuestion/pQuestion.dataservice", function () {
             getAudienceData: getAudienceData,
             getProduct: getProduct,
             getFilterBaseData:getFilterBaseData,
-            getBaseDataForProfileQuestions: getBaseDataForProfileQuestions
+            getBaseDataForProfileQuestions: getBaseDataForProfileQuestions,
+			getSurvayAnalytics:getSurvayAnalytics
         };
     })();
     return dataService;
