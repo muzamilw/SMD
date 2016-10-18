@@ -6,7 +6,7 @@
             LocationLine1, LocationLine2, LocationLON, LocationPhone, LocationState, LocationTitle, LocationZipCode, LogoUrl, ModifiedBy, ModifiedDateTime, Price, RejectedBy,
             Rejecteddatetime, RejectedReason, Savings, SearchKeywords, Status, SwapCost, UserId, CouponTitle, CouponExpirydate, CouponQtyPerUser, CouponId, couponImage1, CouponImage2, CouponImage3,
             CurrencyId, couponListingMode, CouponActiveMonth, CouponActiveYear, CouponRedeemedCount, CouponViewCount, CouponIssuedCount, SubmissionDateTime, LocationCountryId, CouponStartDate, CouponEndDate, Priority,
-            ShowBuyitBtn, BuyitLandingPageUrl, BuyitBtnLabel
+            ShowBuyitBtn, BuyitLandingPageUrl, BuyitBtnLabel, YoutubeLink, CouponImage4, CouponImage5, CouponImage6
           ) {
           var
               //type and userID will be set on server sside
@@ -16,12 +16,16 @@
               Archived = ko.observable(Archived),
               LocationCountryId = ko.observable(LocationCountryId),
               CompanyId = ko.observable(CompanyId),
+              CouponImage4 = ko.observable(CouponImage4),
+              CouponImage5 = ko.observable(CouponImage5),
+              CouponImage6 = ko.observable(CouponImage6),
               CouponCategories = ko.observableArray([]),
               CouponActiveMonth = ko.observable(CouponActiveMonth),
               CouponActiveMonthName = ko.computed(function () {
 
                   return getMonthName(CouponActiveMonth());
               }),
+              YoutubeLink = ko.observable(YoutubeLink),
               SubmissionDateTime = ko.observable(SubmissionDateTime),
               CouponActiveYear = ko.observable(CouponActiveYear),
               CouponExpirydate = ko.observable((CouponExpirydate !== null && CouponExpirydate !== undefined) ? moment(CouponExpirydate).toDate() : undefined),//ko.observable(),
@@ -29,6 +33,7 @@
               couponImage1 = ko.observable(couponImage1),
               CouponImage2 = ko.observable(CouponImage2),
               CouponImage3 = ko.observable(CouponImage3),
+
               CouponIssuedCount = ko.observable(CouponIssuedCount),
               CouponListingMode = ko.observable(couponListingMode  == 1 ? "1" : "2"),
               CouponQtyPerUser = ko.observable(CouponQtyPerUser).extend({ required: true}),
@@ -101,6 +106,7 @@
                     return errors().length === 0 ? true : false;
              }),
              dirtyFlag = new ko.dirtyFlag({
+                 YoutubeLink:YoutubeLink,
                  ApprovalDateTime : ApprovalDateTime,
                  Approved : Approved,
                  ApprovedBy : ApprovedBy,
@@ -172,8 +178,9 @@
                 ShowBuyitBtn : ShowBuyitBtn,
                 BuyitLandingPageUrl : BuyitLandingPageUrl,
                 BuyitBtnLabel: BuyitBtnLabel,
-
-
+                CouponImage4 :CouponImage4,
+                CouponImage5: CouponImage5,
+                CouponImage6:CouponImage6,
                 CouponPriceOptions: CouponPriceOptions
 
               }),
@@ -204,6 +211,7 @@
 
                   return {
                       ApprovalDateTime: ApprovalDateTime(),
+                      YoutubeLink:YoutubeLink(),
                       Approved: Approved(),
                       ApprovedBy: ApprovedBy(),
                       Archived: Archived(),
@@ -219,7 +227,9 @@
                       CouponImage2: bannerImage2 == "" ? CouponImage2() : bannerImage2,
                       CouponImage3: bannerImage3 == "" ? CouponImage3() : bannerImage3,
 
-
+                      CouponImage4: bannerImage4 == "" ? CouponImage4() : bannerImage4,
+                      CouponImage5: bannerImage5 == "" ? CouponImage5() : bannerImage5,
+                      CouponImage6: bannerImage6 == "" ? CouponImage6() : bannerImage6,
 
                       CouponIssuedCount: CouponIssuedCount(),
                       CouponListingMode: CouponListingMode(),
@@ -281,7 +291,7 @@
                       BuyitLandingPageUrl: BuyitLandingPageUrl(),
                       BuyitBtnLabel: BuyitBtnLabel(),
                       CouponPriceOptions: priceOptions
-
+                    
                   };
               };
           return {
@@ -360,7 +370,11 @@
               BuyitLandingPageUrl : (BuyitLandingPageUrl),
               BuyitBtnLabel: (BuyitBtnLabel),
               CouponPriceOptions : (CouponPriceOptions),
-              reset: (reset)
+              reset: (reset),
+              YoutubeLink: (YoutubeLink),
+              CouponImage4:(CouponImage4),
+              CouponImage5:(CouponImage5),
+              CouponImage6:(CouponImage6)
           };
       };
 
@@ -376,16 +390,14 @@
             source.LocationTitle, source.LocationZipCode, source.LogoUrl, source.ModifiedBy, source.ModifiedDateTime, source.Price, source.RejectedBy,
             source.Rejecteddatetime, source.RejectedReason, source.Savings, source.SearchKeywords, source.Status, source.SwapCost, source.UserId,source.CouponTitle,source.CouponExpirydate,
             source.CouponQtyPerUser, source.CouponId, source.couponImage1, source.CouponImage2, source.CouponImage3, source.CurrencyId, source.CouponListingMode, source.CouponActiveMonth, source.CouponActiveYear, source.CouponRedeemedCount, source.CouponViewCount, source.CouponIssuedCount, source.SubmissionDateTime, source.LocationCountryId, source.CouponStartDate, source.CouponEndDate, source.Priority
-            , source.ShowBuyitBtn, source.BuyitLandingPageUrl, source.BuyitBtnLabel
+            , source.ShowBuyitBtn, source.BuyitLandingPageUrl, source.BuyitBtnLabel, source.YoutubeLink, source.CouponImage4, source.CouponImage5, source.CouponImage6
             );
 
         _.each(source.CouponCategories, function (item) {
-
             coupon.CouponCategories.push(selectedCouponCategory.Create(item));
         });
 
         _.each(source.CouponPriceOptions, function (item) {
-
             coupon.CouponPriceOptions.push(CouponPriceOption.Create(item));
         });
 
@@ -421,7 +433,7 @@
 
 
     // ReSharper disable once AssignToImplicitGlobalInFunctionScope
-    CouponPriceOption = function (specifiedCouponPriceOptionId, specifiedCouponId, specifiedDescription, specifiedPrice, specifiedSavings, specifiedOptionUrl, specifiedVoucherCode) {
+    CouponPriceOption = function (specifiedCouponPriceOptionId, specifiedCouponId, specifiedDescription, specifiedPrice, specifiedSavings, specifiedOptionUrl, specifiedVoucherCode, ExpiryDate, URL) {
         var
             self,
             CouponPriceOptionId = ko.observable(specifiedCouponPriceOptionId),
@@ -430,13 +442,17 @@
             Description = ko.observable(specifiedDescription).extend({ required: true }),
             Savings = ko.observable(specifiedSavings).extend({ required: true }),
             OptionUrl = ko.observable(specifiedOptionUrl),
-            VoucherCode = ko.observable(specifiedVoucherCode)
+            VoucherCode = ko.observable(specifiedVoucherCode),
+            ExpiryDate = ko.observable((ExpiryDate !== null && ExpiryDate !== undefined) ? moment(ExpiryDate).toDate() : undefined),
+            URL = ko.observable(URL),
         // Errors
         errors = ko.validation.group({
             Description: Description,
             Price: Price,
             Savings: Savings,
-            VoucherCode: VoucherCode
+            VoucherCode: VoucherCode,
+            ExpiryDate: ExpiryDate,
+            URL: URL
         }),
         // Is Valid 
         isValid = ko.computed(function () {
@@ -449,7 +465,9 @@
             Description: Description,
             Price: Price,
             Savings: Savings,
-            VoucherCode: VoucherCode
+            VoucherCode: VoucherCode,
+            ExpiryDate: ExpiryDate,
+            URL: URL
 
         }),
         // Has Changes
@@ -464,7 +482,9 @@
                 Description: Description(),
                 Savings: Savings(),
                 OptionUrl: OptionUrl(),
-                VoucherCode: VoucherCode()
+                VoucherCode: VoucherCode(),
+                ExpiryDate: moment(ExpiryDate()).format(ist.utcFormat) + 'Z',
+                URL: URL()
             }
         },
         // Reset
@@ -480,12 +500,13 @@
             Savings: Savings,
             OptionUrl: OptionUrl,
             VoucherCode: VoucherCode,
-
             isValid: isValid,
             errors: errors,
             dirtyFlag: dirtyFlag,
             hasChanges: hasChanges,
             convertToServerData: convertToServerData,
+            ExpiryDate: ExpiryDate,
+            URL:URL,
             reset: reset
         };
         return self;
@@ -493,21 +514,18 @@
 
     //function to attain cancel button functionality 
     CouponPriceOption.CreateFromClientModel = function (source) {
-        return new CouponPriceOption(source.CouponPriceOptionId, source.CouponId, source.Description, source.Price, source.Savings, source.OptionUrl, source.VoucherCode);
+        return new CouponPriceOption(source.CouponPriceOptionId, source.CouponId, source.Description, source.Price, source.Savings, source.OptionUrl, source.VoucherCode, source.ExpiryDate, source.URL);
     };
 
 
     CouponPriceOption.Create = function (source) {
-        return new CouponPriceOption(source.CouponPriceOptionId, source.CouponId, source.Description, source.Price, source.Savings, source.OptionUrl, source.VoucherCode);
+        return new CouponPriceOption(source.CouponPriceOptionId, source.CouponId, source.Description, source.Price, source.Savings, source.OptionUrl, source.VoucherCode, source.ExpiryDate, source.URL);
     };
     
-
     return {
         Coupon: Coupon,
         selectedCouponCategory: selectedCouponCategory,
         CouponPriceOption: CouponPriceOption
     };
-
-
 
 });
