@@ -1,13 +1,22 @@
 ﻿define(["ko", "underscore", "underscore-ko"], function (ko) {
 
     var // ReSharper disable InconsistentNaming
-        PayPallApp = function (poStageOneUserId, poCentzAmount, poTargetPayoutAccount, poCompanyId, poPayOutId) {
+        PayPallApp = function (poStageOneUserId, poCentzAmount, poTargetPayoutAccount, poCompanyId, poPayOutId, poCompanyName, poDollarAmount, poStageOneRejectionReason, poStageTwoRejectionReason, poEmail, poUserId, poStageOneStatus,poStageTwoStatus) {
             var
                 stageOneUserId = ko.observable(poStageOneUserId),
                 centzAmount = ko.observable(poCentzAmount),
                 targetPayoutAccount = ko.observable(poTargetPayoutAccount),
                 companyId = ko.observable(poCompanyId),
                 payOutId = ko.observable(poPayOutId),
+                companyName = ko.observable(poCompanyName),
+                dollarAmount = ko.observable(poDollarAmount),
+                //isApproved = ko.observable(spcIsApproved),
+                rejectionReasonStage1 = ko.observable(poStageOneRejectionReason),
+                rejectionReasonStage2 = ko.observable(poStageTwoRejectionReason),
+                email = ko.observable(poEmail),
+                userId = ko.observable(poUserId),
+                stageOneStatus = ko.observable(poStageOneStatus),
+                stageTwoStatus = ko.observable(poStageTwoStatus),
 
                 errors = ko.validation.group({
 
@@ -17,7 +26,8 @@
                     return errors().length === 0;
                 }),
                 dirtyFlag = new ko.dirtyFlag({
-                    //rejectedReason: rejectedReason
+                    rejectionReasonStage1: rejectionReasonStage1,
+                    rejectionReasonStage2: rejectionReasonStage2
                 }),
                 // Has Changes
                 hasChanges = ko.computed(function () {
@@ -31,9 +41,12 @@
                 // Convert to server data
                 convertToServerData = function () {
                     return {
-                        //PqId: id(),
+                        PayOutId: payOutId(),
                         //Approved: isApproved(),
-                        //RejectionReason: rejectedReason(),
+                        StageOneRejectionReason: rejectionReasonStage1(),
+                        StageTwoRejectionReason:rejectionReasonStage2(),
+                        StageOneStatus: stageOneStatus(),
+                        StageTwoStatus: stageTwoStatus(),
                     };
                 };
             return {
@@ -43,8 +56,15 @@
                 targetPayoutAccount: targetPayoutAccount,
                 companyId: companyId,
                 payOutId: payOutId,
+                companyName: companyName,
+                dollarAmount:dollarAmount,
                 //isApproved: isApproved,
-                //rejectedReason: rejectedReason,
+                rejectionReasonStage1: rejectionReasonStage1,
+                rejectionReasonStage2: rejectionReasonStage2,
+                stageOneStatus: stageOneStatus,
+                stageTwoStatus: stageTwoStatus,
+                email: email,
+                userId:userId,
                 hasChanges: hasChanges,
                 convertToServerData: convertToServerData,
                 reset: reset,
@@ -60,7 +80,7 @@
     var PayPallAppServertoClientMapper = function (itemFromServer) {
 
 
-        return new PayPallApp(itemFromServer.StageOneUserId, itemFromServer.CentzAmount, itemFromServer.TargetPayoutAccount, itemFromServer.CompanyId, itemFromServer.PayOutId);
+        return new PayPallApp(itemFromServer.StageOneUserId, itemFromServer.CentzAmount, itemFromServer.TargetPayoutAccount, itemFromServer.CompanyId, itemFromServer.PayOutId, itemFromServer.CompanyName, itemFromServer.DollarAmount, itemFromServer.StageOneRejectionReason, itemFromServer.StageTwoRejectionReason, itemFromServer.Email, itemFromServer.UserId, itemFromServer.StageOneStatus,itemFromServer.StageTwoStatus);
     };
 
     // Function to attain cancel button functionality ProfileQuestion

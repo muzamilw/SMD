@@ -388,6 +388,7 @@
     <Compile Include="Areas\Api\Controllers\GetApprovalCountController.cs" />
     <Compile Include="Areas\Api\Controllers\DisplayAdsCampaignAnalyticController.cs" />
     <Compile Include="Areas\Api\Controllers\GetCouponPriceOptionController.cs" />
+    <Compile Include="Areas\Api\Controllers\GetPayOutHistoryController.cs" />
     <Compile Include="Areas\Api\Controllers\PayoutRevenueController.cs" />
     <Compile Include="Areas\Api\Controllers\SuperNovaCampaignController.cs" />
     <Compile Include="Areas\Api\Controllers\UserFeedbackController.cs" />
@@ -738,6 +739,7 @@
     <Content Include="Areas\Ads\Views\Ads\_advertDashboard.cshtml" />
     <Content Include="Areas\Franchise\Views\ApprovePayPal\PayPalDashboard.cshtml" />
     <Content Include="Areas\Franchise\Scripts\payPallApp.view.js" />
+    <Content Include="Areas\Franchise\Views\ApprovePayPal\_payPallEditorForApp.cshtml" />
     <None Include="config\Web.connectionstrings.config">
       <SubType>Designer</SubType>
     </None>

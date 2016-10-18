@@ -12,7 +12,7 @@ namespace SMD.Models.ResponseModels
         /// <summary>
         ///  PayOuthistory List
         /// </summary>
-        public IEnumerable<PayOutHistory> PayOutHistory { get; set; }
+        public List<PayOutHistory> PayOutHistory { get; set; }
 
         /// <summary>
         /// Total Count of Ad Campaigns

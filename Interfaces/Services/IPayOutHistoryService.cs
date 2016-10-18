@@ -1,4 +1,5 @@
-﻿using SMD.Models.RequestModels;
+﻿using SMD.Models.DomainModels;
+using SMD.Models.RequestModels;
 using SMD.Models.ResponseModels;
 using System;
 using System.Collections.Generic;
@@ -12,5 +13,7 @@ namespace SMD.Interfaces.Services
     {
         PayOutResponseModelForApproval GetPayOutHistoryForApprovalStage1(GetPagedListRequest request);
         PayOutResponseModelForApproval GetPayOutHistoryForApprovalStage2(GetPagedListRequest request);
+        string UpdatePayOutForApproval(PayOutHistory source);
+        List<PayOutHistory> GetPayOutHistoryByCompanyId(int companyId);
     }
 }

@@ -2,11 +2,13 @@
 using SMD.Interfaces.Services;
 using SMD.MIS.Areas.Api.Models;
 using SMD.Models.RequestModels;
+using SMD.Models.ResponseModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 
 namespace SMD.MIS.Areas.Api.Controllers
@@ -26,23 +28,20 @@ namespace SMD.MIS.Areas.Api.Controllers
         #endregion
 
         #region Methods
-        public PayOutResponseModelForApproval Get([FromUri]GetPagedListRequest request)
+        public SMD.Models.ResponseModels.PayOutResponseModelForApproval Get([FromUri]GetPagedListRequest request)
         {
-
-            Mapper.Initialize(cfg => cfg.CreateMap<SMD.Models.DomainModels.PayOutHistory, PayOutHistory>());
-            var obj = (dynamic)null;
-            if (request.isFlage)
-                obj = _payOutHistoryService.GetPayOutHistoryForApprovalStage1(request);
-            else
-               obj = _payOutHistoryService.GetPayOutHistoryForApprovalStage2(request);
-            var retobj = new PayOutResponseModelForApproval();
-            foreach (var item in obj.PayOutHistory)
+            var obj = request.UserRole == "Franchise_Approver1" ? _payOutHistoryService.GetPayOutHistoryForApprovalStage1(request) : _payOutHistoryService.GetPayOutHistoryForApprovalStage2(request);
+            return obj;
+        }
+        public string Post(PayOutHistory payOut)
+        {
+            Mapper.Initialize(cfg => cfg.CreateMap<PayOutHistory, SMD.Models.DomainModels.PayOutHistory>());
+            if (payOut == null || !ModelState.IsValid)
             {
-                retobj.PayOutHistory.Add(Mapper.Map<SMD.Models.DomainModels.PayOutHistory, PayOutHistory>(item));
-
+                throw new HttpException((int)HttpStatusCode.BadRequest, "Invalid Request");
             }
-            retobj.TotalCount = obj.TotalCount;
-            return retobj;
+
+            return _payOutHistoryService.UpdatePayOutForApproval(Mapper.Map<PayOutHistory, SMD.Models.DomainModels.PayOutHistory>(payOut));
         }
         #endregion
     }

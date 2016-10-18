@@ -21,6 +21,7 @@ namespace SMD.MIS.Areas.Api.Models
         public Nullable<System.DateTime> StageTwoEventDate { get; set; }
         public string StageTwoUserId { get; set; }
         public string TargetPayoutAccount { get; set; }
+        public string CompanyName { get; set; }
 
        // public virtual Company Company { get; set; }
     }

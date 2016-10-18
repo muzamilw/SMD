@@ -2,7 +2,7 @@
     ViewBag.Title = "Transfer Rate";
 }
 <div class="row" id="PPApprovalBindingSpot">
-    <div class="col-lg-12">
+    <div class="col-lg-12" data-bind="visible: !$root.isEditorVisible()">
         <div class="row">
             <div class="col-lg-12">
                 <ol class="breadcrumb">
@@ -45,12 +45,12 @@
             </div>
         </div>
         <script id="transferRateTemplate" type="text/html">
-            <tr style="cursor: pointer">
+            <tr style="cursor: pointer" data-bind="click:$root.onEditPayPallHistory">
                 <td>
-                    <p>Test Company</p>
+                    <p data-bind="text:companyName"></p>
                 </td>
                 <td>
-                    <p data-bind="text:stageOneUserId"></p>
+                    <p data-bind="text:email"></p>
                 </td>
                 <td>
                     <p data-bind="text:centzAmount"></p>
@@ -59,7 +59,7 @@
                     <p data-bind="text:targetPayoutAccount"></p>
                 </td>
                 <td>
-                    <p >Panding Approval</p>
+                    <p data-bind="text:stageOneStatus()==null?'Pending Approval':(stageOneStatus()==1 && stageTwoStatus()==null)?'Approved':(stageOneStatus()==1 && stageTwoStatus()==3)?'Pending Investigation':stageTwoStatus"></p>
                 </td>
                 <td>
                     <a class="table-link" style="float: right;display:none">
@@ -72,9 +72,9 @@
             </tr>
         </script>
     </div>
-    @*@{
-        Html.RenderPartial("~/Areas/ProfileQuestion/Views/Manage/_pqEditorForApp.cshtml");
-        }*@
+    @{
+        Html.RenderPartial("~/Areas/Franchise/Views/ApprovePayPal/_payPallEditorForApp.cshtml");
+    }
 </div>
 @*<!-- ko stopBinding: true -->
     @Html.Partial("~/Areas/Common/Views/Shared/_ConfirmationDialog.cshtml")

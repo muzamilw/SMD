@@ -20,8 +20,8 @@ define("FranchiseDashboard/payPallApp.dataservice", function () {
 
 
                     // Edit AdCampaign
-                    amplify.request.define('savePq', 'ajax', {
-                        url: '/Api/ApproveProfileQuestion',
+                    amplify.request.define('savePayOut', 'ajax', {
+                        url: '/Api/ApprovePayOutHistory',
                         dataType: 'json',
                         type: 'POST'
                     });
@@ -35,6 +35,11 @@ define("FranchiseDashboard/payPallApp.dataservice", function () {
                     });
                     amplify.request.define('getCompanyData', 'ajax', {
                         url: '/Api/CompanyDetail',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
+                    amplify.request.define('getPayOutHistory', 'ajax', {
+                        url: '/Api/GetPayOutHistory',
                         dataType: 'json',
                         type: 'GET'
                     });
@@ -66,10 +71,10 @@ define("FranchiseDashboard/payPallApp.dataservice", function () {
             },
 
             // Save Ad Campaign edit
-            savePq = function (params, callbacks) {
+            savePayOut = function (params, callbacks) {
                 initialize();
                 return amplify.request({
-                    resourceId: 'savePq',
+                    resourceId: 'savePayOut',
                     success: callbacks.success,
                     error: callbacks.error,
                     data: params
@@ -83,14 +88,24 @@ define("FranchiseDashboard/payPallApp.dataservice", function () {
                  error: callbacks.error,
                  data: params
              });
-         };
+         },
+              getPayOutHistory = function (params, callbacks) {
+                  initialize();
+                  return amplify.request({
+                      resourceId: 'getPayOutHistory',
+                      success: callbacks.success,
+                      error: callbacks.error,
+                      data: params
+                  });
+              };
    
 
         return {
-            savePq: savePq,
+            savePayOut: savePayOut,
             getpayOutHistoryForApproval: getpayOutHistoryForApproval,
             sendApprovalRejectionEmail: sendApprovalRejectionEmail,
-            getCompanyData: getCompanyData
+            getCompanyData: getCompanyData,
+            getPayOutHistory: getPayOutHistory
     
         };
     })();

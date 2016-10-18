@@ -14,6 +14,8 @@ namespace SMD.Interfaces.Repository
         IEnumerable<PayOutHistory> GetPayOutHistoryForApprovalStage1(GetPagedListRequest request, out int rowCount);
         IEnumerable<PayOutHistory> GetPayOutHistoryForApprovalStage2(GetPagedListRequest request, out int rowCount);
 
+        List<PayOutHistory> GetPayOutHistoryByCompanyId(int companyId);
+
 
 
     }

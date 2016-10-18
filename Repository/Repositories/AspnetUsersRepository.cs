@@ -45,6 +45,19 @@ namespace SMD.Repository.Repositories
         {
             return db.GetUserProfileCompletness(UserId).FirstOrDefault();
         }
+        public String GetUserEmail(int companyId)
+        {
+            db.Configuration.LazyLoadingEnabled = false;
+            return db.Users.Where(g => g.CompanyId == companyId).SingleOrDefault().Email;
+            
+        }
+        public String GetUserid(int companyId)
+        {
+            db.Configuration.LazyLoadingEnabled = false;
+            return db.Users.Where(g => g.CompanyId == companyId).SingleOrDefault().Id;
+
+        }
+
 
       
 

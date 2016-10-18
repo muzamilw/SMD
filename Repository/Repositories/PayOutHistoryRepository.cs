@@ -57,6 +57,7 @@ namespace SMD.Repository.Repositories
         }
         public IEnumerable<PayOutHistory> GetPayOutHistoryForApprovalStage1(GetPagedListRequest request, out int rowCount)
         {
+            db.Configuration.LazyLoadingEnabled = false;
             int fromRow = (request.PageNo - 1) * request.PageSize;
             int toRow = request.PageSize;
             Expression<Func<PayOutHistory, bool>> query =
@@ -69,15 +70,20 @@ namespace SMD.Repository.Repositories
         }
         public IEnumerable<PayOutHistory> GetPayOutHistoryForApprovalStage2(GetPagedListRequest request, out int rowCount)
         {
+            db.Configuration.LazyLoadingEnabled = false;
             int fromRow = (request.PageNo - 1) * request.PageSize;
             int toRow = request.PageSize;
             Expression<Func<PayOutHistory, bool>> query =
-                s => s.StageOneStatus == 1 && s.StageTwoStatus ==null;
+                s => s.StageOneStatus == 1 && s.StageTwoStatus ==null ||s.StageOneStatus == 1 && s.StageTwoStatus ==3;
             rowCount = DbSet.Count(query);
             var res = DbSet.Where(query)
              .OrderByDescending(p => p.CentzAmount);
             return res.Skip(fromRow)
                 .Take(toRow);
+        }
+        public List<PayOutHistory> GetPayOutHistoryByCompanyId(int companyId)
+        {
+            return DbSet.Where(g => g.CompanyId == companyId).ToList();
         }
 
       
