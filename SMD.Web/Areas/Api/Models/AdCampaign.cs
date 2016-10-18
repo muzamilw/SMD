@@ -109,7 +109,11 @@ namespace SMD.MIS.Areas.Api.Models
     }
     public class Coupon
     {
+        public string CouponImage4 { get; set; }
 
+        public string CouponImage5 { get; set; }
+
+        public string CouponImage6 { get; set; }
         public long CouponId { get; set; }
         public Nullable<int> LanguageId { get; set; }
         public string UserId { get; set; }
@@ -181,7 +185,7 @@ namespace SMD.MIS.Areas.Api.Models
         public string BuyitBtnLabel { get; set; }
 
         public virtual IEnumerable<SMD.MIS.Areas.Api.Models.CouponCategories> CouponCategories { get; set; }
-
+        public string YoutubeLink { get; set; }
         
         public virtual IEnumerable<CouponPriceOption> CouponPriceOptions { get; set; }
     }

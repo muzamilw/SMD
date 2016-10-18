@@ -266,9 +266,11 @@ else
                                                 <thead>
                                                     <tr>
 
-                                                        <th class="col-lg-5 GridHeaderFont_size" style="padding-left:7px;"><span>Deal Headline</span></th>
-                                                        <th class="col-lg-2 GridHeaderFont_size"> <span>Price&nbsp;<span data-bind="text:$root.currencyCode"></span></span></th>
-                                                        <th class="col-lg-2 GridHeaderFont_size"> <span>Savings&nbsp;<span data-bind="text:$root.currencyCode"></span></span></th>
+                                                        <th class="col-lg-4 GridHeaderFont_size" style="padding-left:7px;"><span>Deal Headline</span></th>
+                                                        <th class="col-lg-2 GridHeaderFont_size"> <span>Now<span data-bind="text:$root.currencyCode"></span></span></th>
+                                                        <th class="col-lg-2 GridHeaderFont_size"> <span>Was<span data-bind="text:$root.currencyCode"></span></span></th>
+                                                        <th class="col-lg-2 GridHeaderFont_size"> <span>Url<span></span></span></th>
+                                                        <th class="col-lg-2 GridHeaderFont_size"> <span>Expiry<span></span></span></th>
                                                         <th class="col-lg-2 GridHeaderFont_size" style="display:none;"> <span>Voucher Code</span></th>
                                                         <th class="col-lg-1"></th>
                                                         <th class="col-lg-2">&nbsp;</th>
@@ -498,82 +500,103 @@ else
                                         <div class="col-lg-2">
                                         </div>
                                     </div>
-                                    <div class="form-group">
+
+                                    <div class="form-group" style="margin-bottom:10px;">
                                         <div class="col-lg-2">
-                                            <label style="display:none;" for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">Branch Address </label>
+                                            <label for="txtCampaignDesc" style="" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">Video Url</label>
                                         </div>
-                                        <div class="col-lg-7 padding_left19">
-                                            <label id="txtCampaignDesc" data-bind="text: LocationLine1"></label>
-                                            @*<textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 72 characters" data-bind="value: LocationLine1" maxlength="72" readonly="readonly"></textarea>*@
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-lg-2">
-                                            <label style="display:none;" for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">Optional </label>
-                                        </div>
-                                        <div class="col-lg-7 padding_left19">
-                                            <label id="txtCampaignDesc" data-bind="text: LocationLine2"></label>
-                                            @*<textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 72 characters" data-bind="value: LocationLine2" maxlength="72" readonly="readonly"></textarea>*@
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-lg-2">
-                                            <label style="display:none;" for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">City </label>
-                                        </div>
-                                        <div class="col-lg-7 padding_left19">
-                                            <label id="txtCampaignDesc" data-bind="text:LocationCity"></label>
-                                            @*<textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationCity" maxlength="36" readonly="readonly"></textarea>*@
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-lg-2">
-                                            <label style="display:none;" for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">State </label>
-                                        </div>
-                                        <div class="col-lg-7 padding_left19">
-                                            <label id="txtCampaignDesc" data-bind="text: LocationState"></label>
-                                            @*<textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationState" maxlength="36" readonly="readonly"></textarea>*@
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-lg-2">
-                                            <label style="display:none;" for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">Zip </label>
-                                        </div>
-                                        <div class="col-lg-7 padding_left19">
-                                            <label id="txtCampaignDesc" data-bind="text: LocationZipCode"></label>
-                                            @*<textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationZipCode" maxlength="36" readonly="readonly"></textarea>*@
-                                        </div>
-                                    </div>
-                                    <div class="form-group" style="display:none;">
-                                        <div class="col-lg-2">
-                                            <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">Geo location Lat</label>
-                                        </div>
-                                        <div class="col-lg-7 padding_left19">
-                                            <label id="txtCampaignDesc" data-bind="text: LocationLAT"></label>
-                                            @*<textarea class="form-control" id="geolocation" rows="1" placeholder="max 72 characters" data-bind="value: LocationLAT" readonly="readonly" maxlength="72"></textarea>*@
+                                        <div class="col-lg-7 " style="padding-left:14px;">
+                                            @*@*<video id="videoTag" controls style="width:300px;height:150px;" onclick="showvideoUploadDialog();" data-bind="    attr: { src: $root.VideoLink2src()+$root.randonNumber() }"></video>*@
+                                            <input class="form-control" id="viedoLink" placeholder="max 400 characters" data-bind="value:YoutubeLink" maxlength="400"/>
+                                            <br />
+                                           <pre id="myCode" style="width:433px!important;display:none;"></pre>
                                         </div>
 
-
-                                    </div>
-                                    <div class="form-group" style="display:none;">
-                                        <div class="col-lg-2">
-                                            <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">Geo location Long</label>
+                                        <div class="col-lg-3" style="padding-left:47px;">
+                                            <button style="width:123px;height:33px;" class="btn  btn-success gtild-color" id="btnNext" onclick="openYoutubeVideo();">Test URL Link</button>
                                         </div>
-                                        <div class="col-lg-7 padding_left19">
-                                            <label id="txtCampaignDesc" data-bind="text:LocationLON"></label>
-                                            @*<textarea class="form-control" id="geolocationlong" rows="1" placeholder="max 72 characters" data-bind="value: LocationLON" readonly="readonly" maxlength="72"></textarea>*@
+
+                                        <div class="col-lg-2">
                                         </div>
 
                                     </div>
-                                    <div class="form-group" data-bind="visible:$root.ISshowPhone">
-                                        <div class="col-lg-2">
-                                            <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">Phone no </label>
+
+
+                                        <div class="form-group">
+                                            <div class="col-lg-2">
+                                                <label style="display:none;" for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">Branch Address </label>
+                                            </div>
+                                            <div class="col-lg-7 padding_left19">
+                                                <label id="txtCampaignDesc" data-bind="text: LocationLine1"></label>
+                                                @*<textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 72 characters" data-bind="value: LocationLine1" maxlength="72" readonly="readonly"></textarea>*@
+                                            </div>
                                         </div>
-                                        <div class="col-lg-7 padding_left19">
-                                            <label id="txtCampaignDesc" data-bind="text:LocationPhone"></label>
-                                            @*<textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationPhone" readonly="readonly"></textarea>*@
+                                        <div class="form-group">
+                                            <div class="col-lg-2">
+                                                <label style="display:none;" for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">Optional </label>
+                                            </div>
+                                            <div class="col-lg-7 padding_left19">
+                                                <label id="txtCampaignDesc" data-bind="text: LocationLine2"></label>
+                                                @*<textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 72 characters" data-bind="value: LocationLine2" maxlength="72" readonly="readonly"></textarea>*@
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-2">
+                                                <label style="display:none;" for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">City </label>
+                                            </div>
+                                            <div class="col-lg-7 padding_left19">
+                                                <label id="txtCampaignDesc" data-bind="text:LocationCity"></label>
+                                                @*<textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationCity" maxlength="36" readonly="readonly"></textarea>*@
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-2">
+                                                <label style="display:none;" for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">State </label>
+                                            </div>
+                                            <div class="col-lg-7 padding_left19">
+                                                <label id="txtCampaignDesc" data-bind="text: LocationState"></label>
+                                                @*<textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationState" maxlength="36" readonly="readonly"></textarea>*@
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-2">
+                                                <label style="display:none;" for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">Zip </label>
+                                            </div>
+                                            <div class="col-lg-7 padding_left19">
+                                                <label id="txtCampaignDesc" data-bind="text: LocationZipCode"></label>
+                                                @*<textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationZipCode" maxlength="36" readonly="readonly"></textarea>*@
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="display:none;">
+                                            <div class="col-lg-2">
+                                                <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">Geo location Lat</label>
+                                            </div>
+                                            <div class="col-lg-7 padding_left19">
+                                                <label id="txtCampaignDesc" data-bind="text: LocationLAT"></label>
+                                                @*<textarea class="form-control" id="geolocation" rows="1" placeholder="max 72 characters" data-bind="value: LocationLAT" readonly="readonly" maxlength="72"></textarea>*@
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group" style="display:none;">
+                                            <div class="col-lg-2">
+                                                <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">Geo location Long</label>
+                                            </div>
+                                            <div class="col-lg-7 padding_left19">
+                                                <label id="txtCampaignDesc" data-bind="text:LocationLON"></label>
+                                                @*<textarea class="form-control" id="geolocationlong" rows="1" placeholder="max 72 characters" data-bind="value: LocationLON" readonly="readonly" maxlength="72"></textarea>*@
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group" data-bind="visible:$root.ISshowPhone">
+                                            <div class="col-lg-2">
+                                                <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">Phone no </label>
+                                            </div>
+                                            <div class="col-lg-7 padding_left19">
+                                                <label id="txtCampaignDesc" data-bind="text:LocationPhone"></label>
+                                                @*<textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationPhone" readonly="readonly"></textarea>*@
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
 
 
@@ -624,7 +647,7 @@ else
                                 </div>
                             </div>
 
-                            <div class="col-lg-12" style="margin:auto;float:none !important;    " data-bind="visible: $root.previewScreenNumber() == 2">
+                            <div class="col-lg-12" style="margin:auto;float:none !important; " data-bind="visible: $root.previewScreenNumber() == 2">
 
                                 <div class="clearfix">
 
@@ -639,16 +662,13 @@ else
                                                 <div style="margin-top:5px;    text-align: center;cursor:pointer;">
                                                     @*<img style="height:90px;" data-bind="visible: couponImage1() == '' || couponImage1() == null"  src="/Content/Images/placeholder.png" onclick="showCouponDialog4();" />*@
 
-                                                    <img style="height:70px;" data-bind="visible: couponImage1()!='',attr: { src: couponImage1 }" id="bannerImage1" data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(2)" />
-
+                                                    <img style="height:70px;" data-bind="visible:couponImage1()!='',attr:{ src:couponImage1}" id="bannerImage1" data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(2)" />
 
                                                     @*<div id="couponImage1" class="placeholders" data-bind="visible: couponImage1() == '/images/default-placeholder.png'" onclick="changeIframeSrc(2);"><span><i class="fa fa-plus" aria-hidden="true" style="color:#32CD32"></i></span></div>*@
-
 
                                                     <div style="padding-top: 10px;text-align:center;font-size: 12px;color: gray;">
                                                         (450 x 300 pixels)
                                                     </div>
-
                                                 </div>
                                                 <br />
                                                 <div class="fileUpload btn btn-primary" style="display:none;">
@@ -656,8 +676,7 @@ else
                                                     <input type="file" class="upload" id="campaignType_image_file1" data-bind="files: { onLoaded: $root.couponImage1Callback, fileFilter: 'image.*'}" />
                                                 </div>
                                             </div>
-
-                                            <div class="col-lg-4">
+                                            <div class="col-lg-4" style="display:none;" id="CouponImage2panel" data-bind="visible:$root.Banner2Flag">
                                                 <div style="margin-top:5px;    text-align: center;cursor:pointer;">
                                                     @*<img style="height:90px;" data-bind="visible: CouponImage2() == '' || CouponImage2() == null" src="/Content/Images/placeholder.png" onclick="showCouponDialog2();" />*@
                                                     <img style="height:70px;" data-bind="visible: CouponImage2() != '' && CouponImage2() != null ,attr: { src: CouponImage2 }" data-toggle="modal" data-target="#damModel" id="bannerImage2" onclick="changeIframeSrc(3)" />
@@ -671,7 +690,7 @@ else
                                                     <input type="file" class="upload" id="campaignType_coupon_file2" data-bind="files: { onLoaded: $root.CouponImage2Callback, fileFilter: 'image.*'}" />
                                                 </div>
                                             </div>
-                                            <div class="col-lg-4">
+                                            <div class="col-lg-4" style="display:none;" id="CouponImage3panel" data-bind="visible:$root.Banner3Flag">
                                                 <div style="margin-top:5px;    text-align: center;cursor:pointer;">
                                                     @*<img style="height:90px;" data-bind="visible: CouponImage3() == '' || CouponImage3() == null" src="/Content/Images/placeholder.png" onclick="showCouponDialog3();" />*@
                                                     <img style="height:70px;" data-bind="visible: CouponImage3() != '' && CouponImage3() != null,attr: { src: CouponImage3 }" id="bannerImage3" data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(4)" />
@@ -685,13 +704,67 @@ else
                                                     <input type="file" class="upload" id="campaignType_coupon_file3" data-bind="files: { onLoaded: $root.CouponImage3Callback, fileFilter: 'image.*'}" />
                                                 </div>
                                             </div>
-
                                         </div>
                                         <div class="col-lg-2" style="padding-right:20px;">
 
                                         </div>
                                     </div>
-                                </div>
+
+                                    <div class="form-group" style="margin-top:10px;">
+                                        <div class="col-lg-2">
+                                           
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <div class="col-lg-4" style="display:none;" id="CouponImage4panel" data-bind="visible:$root.Banner4Flag">
+                                                <div style="margin-top:5px;    text-align: center;cursor:pointer;">
+                                                    @*<img style="height:90px;" data-bind="visible: couponImage1() == '' || couponImage1() == null"  src="/Content/Images/placeholder.png" onclick="showCouponDialog4();" />*@
+
+                                                    <img style="height:70px;" data-bind="visible: CouponImage4()!='',attr: { src: CouponImage4 }" id="bannerImage4" data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(5)" />
+
+                                                    @*<div id="couponImage1" class="placeholders" data-bind="visible: couponImage1() == '/images/default-placeholder.png'" onclick="changeIframeSrc(2);"><span><i class="fa fa-plus" aria-hidden="true" style="color:#32CD32"></i></span></div>*@
+
+                                                    <div style="padding-top: 10px;text-align:center;font-size: 12px;color: gray;">
+                                                        (450 x 300 pixels)
+                                                    </div>
+
+                                                </div>
+                                                <br />
+                                                <div class="fileUpload btn btn-primary" style="display:none;">
+                                                    <span>Upload </span>
+                                                    <input type="file" class="upload" id="campaignType_image_file1" data-bind="files: { onLoaded: $root.couponImage1Callback, fileFilter: 'image.*'}" />
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4" style="display:none;" id="CouponImage5panel" data-bind="visible:$root.Banner5Flag">
+                                                <div style="margin-top:5px;    text-align: center;cursor:pointer;">
+                                                    @*<img style="height:90px;" data-bind="visible: CouponImage2() == '' || CouponImage2() == null" src="/Content/Images/placeholder.png" onclick="showCouponDialog2();" />*@
+                                                    <img style="height:70px;" data-bind="visible: CouponImage5() != '' && CouponImage5() != null ,attr: { src: CouponImage5 }" data-toggle="modal" data-target="#damModel" id="bannerImage5" onclick="changeIframeSrc(6)" />
+                                                    <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
+                                                        (450 x 300 pixels)
+                                                    </div>
+                                                </div>
+                                                <br />
+                                                <div class="fileUpload btn btn-primary" style="display:none;">
+                                                    <span>Upload </span>
+                                                    <input type="file" class="upload" id="campaignType_coupon_file2" data-bind="files: { onLoaded: $root.CouponImage2Callback, fileFilter: 'image.*'}" />
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4" style="display:none;" id="CouponImage6panel" data-bind="visible:$root.Banner6Flag">
+                                                <div style="margin-top:5px;    text-align: center;cursor:pointer;">
+                                                    @*<img style="height:90px;" data-bind="visible: CouponImage3() == '' || CouponImage3() == null" src="/Content/Images/placeholder.png" onclick="showCouponDialog3();" />*@
+                                                    <img style="height:70px;" data-bind="visible: CouponImage6() != '' && CouponImage6() != null,attr: { src: CouponImage6 }" id="bannerImage6" data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(7)" />
+                                                    <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
+                                                        (450 x 300 pixels)
+                                                    </div>
+                                                </div>
+                                                <br />
+                                                <div class="fileUpload btn btn-primary" style="display:none;">
+                                                    <span>Upload </span>
+                                                    <input type="file" class="upload" id="campaignType_coupon_file3" data-bind="files: { onLoaded: $root.CouponImage3Callback, fileFilter: 'image.*'}" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
 
 
                                 <div class="row" style="display:none;">
@@ -783,6 +856,15 @@ else
                                     </div>
                                     <div class="col-lg-7">
                                         <textarea class="form-control" id="txtCampaignDesc" rows="3" maxlength="800" style="resize:none" placeholder="Type in keyword searches to help users find your coupon offer. Seperate with a comma " data-bind="value: SearchKeywords"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" style="display:none;">
+                                    <div class="col-lg-2">
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn" style="white-space:nowrap;"> Deal expiry date</label>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <input type="text" class="form-control" style="width:50%!important;" id="validFromExpiryDate" data-bind="datepicker:CouponExpirydate">
                                     </div>
                                 </div>
                                 <div class="col-lg-11" style="display:none">
@@ -922,15 +1004,7 @@ else
                                         @*<textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="datetimepicker:StartDateTime"  data-bind="value: CouponExpirydate"></textarea>*@
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <div class="col-lg-2">
-                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn" style="white-space:nowrap;"> Deal expiry date</label>
-                                    </div>
-                                    <div class="col-lg-7">
-                                        <input type="text" class="form-control" style="width:50%!important;" id="validFromExpiryDate" data-bind="datepicker:CouponExpirydate">
-                                        @*<textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="datetimepicker:StartDateTime"  data-bind="value: CouponExpirydate"></textarea>*@
-                                    </div>
-                                </div>
+                                
                                 @*<div class="col-lg-11">
                 <div class="form-group" style="margin-bottom:20px; margin-top:20px;">
                     <div class="col-lg-4 text-campaign-left  Float-Left">
@@ -1360,10 +1434,16 @@ else
             <textarea class="form-control" style="resize:none" data-bind="value: Description" placeholder="Max 72 characters" maxlength="72"  />
         </td>
         <td>
-            <input type="text" class="form-control" data-bind="value: Price" maxlength="7" />
+            <input style="width:90px;" type="text" class="form-control" data-bind="value: Price" maxlength="7" />
         </td>
         <td>
-            <input type="text" class="form-control" data-bind="value: Savings" maxlength="7" />
+            <input style="width:90px;" type="text" class="form-control" data-bind="value: Savings" maxlength="7" />
+        </td>
+        <td>
+            <input style="width:138px;" type="text" class="form-control" data-bind="value: URL" maxlength="37" />
+        </td>
+        <td>
+            <input style="width:90px;" type="text" class="form-control" data-bind="datepicker:ExpiryDate" maxlength="37" />
         </td>
         <td style="display:none;">
             <input type="text" class="form-control" data-bind="value: VoucherCode" maxlength="16" />
@@ -1386,8 +1466,9 @@ else
         <td  data-bind="text: Description"></td>
         <td  data-bind="text: Price"></td>
         <td data-bind="text: Savings"></td>
-        <td data-bind="text: VoucherCode"></td>
-       
+        <td data-bind="text: VoucherCode" style="display:none;"></td>
+        <td data-bind="text: URL"></td>
+        <td data-bind="dateString:ExpiryDate"></td>
         <td id="actionColumn" style="text-align:right;">
             <!-- ko template: { name: 'editActionPirceOptionTemplate' } -->
             <!-- /ko -->
@@ -1423,6 +1504,41 @@ else
     //    $('html, body').animate({ scrollTop: 0 }, 800);
        
     //}
+
+    //$("#viedoLink").keyup(function () {
+    //    alert(this.val());
+    //    StartVideo(this.val());
+    //    //$("#videoTag").val($("#txtBuyItlbl").val());
+    //    console.log($("#ddTextBtns").val());
+    //});
+    function openYoutubeVideo()
+    {
+        if ($("#viedoLink").val() != '') {
+            $("#myCode").css("display", "block");
+            StartVideo($("#viedoLink").val());
+        }
+    }
+
+    function getId(url) {
+        var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+        var match = url.match(regExp);
+
+        if (match && match[2].length == 11) {
+            return match[2];
+        } else {
+            return 'error';
+        }
+    }
+    function StartVideo(url)
+    {
+        var myId = getId(url);
+
+        $('#myId').html(myId);
+
+        $('#myCode').html('<iframe width="412" height="315" src="//www.youtube.com/embed/' + myId + '" frameborder="0" allowfullscreen></iframe>');
+
+    }
+
     function openUrl() {
      
         //var win = window.open($("#txtBuyItUrl").val(), '_blank');
@@ -1481,6 +1597,10 @@ else
     var bannerImage1 = "";
     var bannerImage2 = "";
     var bannerImage3 = "";
+    var bannerImage4 = "";
+    var bannerImage5 = "";
+    var bannerImage6 = "";
+
     var mode = 1;
     function changeIframeSrc(mode1) {
        
@@ -1490,11 +1610,29 @@ else
         $("#iframe").attr("src", "/DamImages?mode=" + mode1+"&selection=true");
 
         console.log(mode);
+       // SetMode(mode);
     }
 
-    //$("#couponImage1").click(function () {
-    //    changeIframeSrc(2);
-    //});
+    function SetMode(mode)
+    {
+        if (mode == 2) {
+            $("#CouponImage2panel").css('display', 'block');
+
+        }
+        else if (mode == 3) {
+            $("#CouponImage3panel").css('display', 'block');
+        }
+        else if (mode == 4) {
+            $("#CouponImage4panel").css('display', 'block');
+        }
+        else if (mode == 5) {
+            $("#CouponImage5panel").css('display', 'block');
+        }
+        else if (mode == 6) {
+            $("#CouponImage6panel").css('display', 'block');
+        }
+
+    }
     function iframeLoaded() {
 
         var iframeBody = $('body', $('#iframe')[0].contentWindow.document);
@@ -1517,6 +1655,22 @@ else
                 bannerImage3 = this.src;
                 $("#btnDamClose").click();
             }
+            else if (mode == 5) {
+                $("#bannerImage4").attr("src", this.src).change();
+                bannerImage4 = this.src;
+                $("#btnDamClose").click();
+            }
+            else if (mode == 6) {
+                $("#bannerImage5").attr("src", this.src).change();
+                bannerImage5 = this.src;
+                $("#btnDamClose").click();
+            }
+            else if (mode == 7) {
+                $("#bannerImage6").attr("src", this.src).change();
+                bannerImage6 = this.src;
+                $("#btnDamClose").click();
+            }
+            SetMode(mode);
         });
     }
 
