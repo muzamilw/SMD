@@ -83,6 +83,10 @@ namespace SMD.Repository.Repositories
             var country = DbSet.FirstOrDefault(c => c.CountryId == countryId);
             return country != null ? country.CountryName : string.Empty;
         }
+        public int GetCurrencyCode(int countryId)
+        {
+            return DbSet.Where(c => c.CountryId == countryId).FirstOrDefault().CurrencyID ??0;    
+        }
         #endregion
     }
 }

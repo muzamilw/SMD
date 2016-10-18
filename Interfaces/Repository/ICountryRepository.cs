@@ -16,5 +16,7 @@ namespace SMD.Interfaces.Repository
         IEnumerable<Country> GetSearchedCountries(string searchString);
         int GetCountryId(string name);
         string GetCountryNameById(int countryId);
+
+        int GetCurrencyCode(int countryId);
     }
 }

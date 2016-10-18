@@ -16,6 +16,7 @@ define("FranchiseDashboard/Coupons.viewModel",
                     //sorting
                     sortOn = ko.observable(5),
                     company = ko.observable(),
+                    currencyCode = ko.observable(),
                     //Assending  / Desending
                     sortIsAsc = ko.observable(true),
                     isEditorVisible = ko.observable(false),
@@ -25,25 +26,9 @@ define("FranchiseDashboard/Coupons.viewModel",
                     onEditCoupon = function (item) {
                         $("#topArea").css("display", "none");
                         $("#divApprove").css("display", "none");
-                        dataservice.getCurrenybyID(
-                        { id: item.currencyId },
-                        {
-                            success: function (data) {
-                                selectedCoupon(item);
-                                selectedCoupon().currencyId(data.CurrencyCode)
-                                getCompanyData(item);
-                               // isEditorVisible(true);
-                                //getCouponPriceOption(item.couponId);
-
-                               
-
-                            },
-                            error: function () {
-                                selectedCoupon(item);
-                                getCompanyData(item);
-                                //toastr.error("Failed to load Currency");
-                            }
-                        });
+                        selectedCoupon(item);
+                        getCompanyData(item);
+                       
 
                         //selectedCoupon(item);
                         //isEditorVisible(true);
@@ -162,6 +147,24 @@ define("FranchiseDashboard/Coupons.viewModel",
                             }
                         });
                     },
+                    getCurrencyData = function (item)
+                    {
+                        dataservice.getCurrenybyID(
+                       { id: item.CurrencyID },
+                       {
+                           success: function (data) {
+                               currencyCode(null);
+                               var cCode = '(' + data.CurrencySymbol + ')';
+                               currencyCode(cCode);
+
+
+
+                           },
+                           error: function () {
+                            
+                           }
+                       });
+                    },
                     companyTypes = ko.observableArray([
                     { Id: 1, Name: 'Amusement, Gambling, and Recreation Industries' },
                     { Id: 2, Name: 'Arts, Entertainment, and Recreation' },
@@ -235,6 +238,7 @@ define("FranchiseDashboard/Coupons.viewModel",
                                  company(null);
                              selectedCompany(comData);
                              getCouponPriceOption(selectedItem.couponId);
+                             getCurrencyData(comData);
                              isEditorVisible(true);
                          
                          },
@@ -279,6 +283,7 @@ define("FranchiseDashboard/Coupons.viewModel",
                     getApprovalCount: getApprovalCount,
                     companyTypes: companyTypes,
                     company: company,
+                    currencyCode: currencyCode,
 
                 };
             })()
