@@ -1593,7 +1593,7 @@ define("ads/ads.viewModel",
                             SearchText: ""
                         }, {
                             success: function (data) {
-                                debugger;
+                              
                                 if (data != null) {
                                     // set languages drop down
                                     var profileQIds = [];
@@ -1635,7 +1635,7 @@ define("ads/ads.viewModel",
                                     //    TodisplayImg(true);
                                     //}
                                     _.each(clonedVersofCariterias, function (cclist) {
-                                        debugger;
+                                       
                                         if (cclist.Type == 1) {
 
                                             if (profileQIds.indexOf(cclist.PQId) == -1) {
@@ -1655,7 +1655,7 @@ define("ads/ads.viewModel",
                                                     CriteriaId: cclist.CriteriaId
                                                 }));
                                             } else {
-                                                debugger;
+                                             
                                                 campaignModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
 
                                                     Type: cclist.Type,
@@ -1674,7 +1674,7 @@ define("ads/ads.viewModel",
 
 
                                         } else if (cclist.Type == 6) {
-                                            debugger;
+                                         
                                             if (surveyQIds.indexOf(cclist.QuizCampaignId) == -1) {
                                                 surveyQIds.push(cclist.QuizCampaignId);
                                                 campaignModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
@@ -1692,7 +1692,7 @@ define("ads/ads.viewModel",
                                                     CriteriaId: cclist.CriteriaId
                                                 }));
                                             } else {
-                                                debugger;
+                                              
                                                 campaignModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
                                                     
                                                     Type: cclist.Type,
@@ -1711,7 +1711,7 @@ define("ads/ads.viewModel",
                                         }
 
                                     });
-                                    debugger;
+                                   
                                     var ff = campaignModel().AdCampaignTargetCriterias();
                                     DefaultTextBtns.push({ id: campaignModel().BuyItButtonLabel(), name: campaignModel().BuyItButtonLabel() });
                                     campaignModel().reset();
