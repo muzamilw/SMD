@@ -10,6 +10,7 @@ define("FranchiseDashboard/payPallApp.viewModel",
             viewModel: (function () {
                 var view,
                     payOutHistory = ko.observableArray([]),
+                    payOutPreviousHistory = ko.observableArray([]),
                     //pager
                     pager = ko.observable(),
                     //sorting
@@ -78,13 +79,13 @@ define("FranchiseDashboard/payPallApp.viewModel",
                               success: function (comData) {
                                   selectedCompany(comData);
                                   getPayOutHistoryByCId(selectedItem);
-                                  //var cType = companyTypes().find(function (item) {
-                                  //    return comData.CompanyType === item.Id;
-                                  //});
-                                  //if (cType != undefined)
-                                  //    company(cType.Name);
-                                  //else
-                                  //    company(null);
+                                  var cType = companyTypes().find(function (item) {
+                                      return comData.CompanyType === item.Id;
+                                  });
+                                  if (cType != undefined)
+                                      company(cType.Name);
+                                  else
+                                      company(null);
                                   isEditorVisible(true);
 
                               },
@@ -192,6 +193,45 @@ define("FranchiseDashboard/payPallApp.viewModel",
                                     }
                                 });
                     },
+                    company = ko.observable(),
+                    companyTypes = ko.observableArray([
+                    { Id: 1, Name: 'Amusement, Gambling, and Recreation Industries' },
+                    { Id: 2, Name: 'Arts, Entertainment, and Recreation' },
+                    { Id: 3, Name: 'Broadcasting (except Internet)' },
+                    { Id: 4, Name: 'Building Material and Garden Equipment and Supplies Dealers' },
+                    { Id: 5, Name: 'Clothing and Clothing Accessories Stores' },
+                    { Id: 6, Name: 'Computer and Electronics' },
+                    { Id: 7, Name: 'Construction' },
+                    { Id: 8, Name: 'Couriers and Messengers' },
+                    { Id: 9, Name: 'Data Processing, Hosting, and Related Services' },
+                    { Id: 10, Name: 'Health Services' },
+                    { Id: 11, Name: 'Educational Services' },
+                    { Id: 12, Name: 'Electronics and Appliance Stores' },
+                    { Id: 13, Name: 'Finance and Insurance' },
+                    { Id: 14, Name: 'Food Services' },
+                    { Id: 15, Name: 'Food and Beverage Stores' },
+                    { Id: 16, Name: 'Furniture and Home Furnishings Stores' },
+                    { Id: 17, Name: 'General Merchandise Stores' },
+                    { Id: 18, Name: 'Health Care' },
+                    { Id: 19, Name: 'Internet Publishing and Broadcasting' },
+                    { Id: 20, Name: 'Leisure and Hospitality' },
+                    { Id: 21, Name: 'Manufacturing' },
+                    { Id: 22, Name: 'Merchant Wholesalers ' },
+                    { Id: 23, Name: 'Motor Vehicle and Parts Dealers ' },
+                    { Id: 24, Name: 'Museums, Historical Sites, and Similar Institutions ' },
+                    { Id: 25, Name: 'Performing Arts, Spectator Sports' },
+                    { Id: 26, Name: 'Printing Services' },
+                    { Id: 27, Name: 'Professional and Business Services' },
+                    { Id: 28, Name: 'Real Estate' },
+                    { Id: 29, Name: 'Repair and Maintenance' },
+                    { Id: 30, Name: 'Scenic and Sightseeing Transportation' },
+                    { Id: 31, Name: 'Service-Providing Industries' },
+                    { Id: 32, Name: 'Social Assistance' },
+                    { Id: 33, Name: 'Sporting Goods, Hobby, Book, and Music Stores' },
+                    { Id: 34, Name: 'Telecommunications' },
+                    { Id: 35, Name: 'Transportation' },
+                    { Id: 36, Name: 'Utilities' }
+                     ]),
                     getPayOutHistoryByCId = function (selectedItem) {
 
                         dataservice.getPayOutHistory(
@@ -201,9 +241,11 @@ define("FranchiseDashboard/payPallApp.viewModel",
                        },
                        {
                            success: function (data) {
-                               var a = data;
-                          
-
+                               payOutPreviousHistory.removeAll();
+                               _.each(data, function (item) {
+                                   payOutPreviousHistory.push(item);
+                               });
+                               isEditorVisible(true);
                            },
                            error: function (error) {
                                toastr.error("Failed to load PayOutHistory");
@@ -244,6 +286,9 @@ define("FranchiseDashboard/payPallApp.viewModel",
                     approval1: approval1,
                     approval2: approval2,
                     onInvestigationPayOut: onInvestigationPayOut,
+                    payOutPreviousHistory: payOutPreviousHistory,
+                    companyTypes: companyTypes,
+                    company: company
 
 
                    

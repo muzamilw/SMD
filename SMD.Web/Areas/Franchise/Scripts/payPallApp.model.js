@@ -1,7 +1,7 @@
 ﻿define(["ko", "underscore", "underscore-ko"], function (ko) {
 
     var // ReSharper disable InconsistentNaming
-        PayPallApp = function (poStageOneUserId, poCentzAmount, poTargetPayoutAccount, poCompanyId, poPayOutId, poCompanyName, poDollarAmount, poStageOneRejectionReason, poStageTwoRejectionReason, poEmail, poUserId, poStageOneStatus,poStageTwoStatus) {
+        PayPallApp = function (poStageOneUserId, poCentzAmount, poTargetPayoutAccount, poCompanyId, poPayOutId, poCompanyName, poDollarAmount, poStageOneRejectionReason, poStageTwoRejectionReason, poEmail, poUserId, poStageOneStatus, poStageTwoStatus, poRequestDateTime) {
             var
                 stageOneUserId = ko.observable(poStageOneUserId),
                 centzAmount = ko.observable(poCentzAmount),
@@ -17,6 +17,7 @@
                 userId = ko.observable(poUserId),
                 stageOneStatus = ko.observable(poStageOneStatus),
                 stageTwoStatus = ko.observable(poStageTwoStatus),
+                requestDateTime = ko.observable(poRequestDateTime),
 
                 errors = ko.validation.group({
 
@@ -63,6 +64,7 @@
                 rejectionReasonStage2: rejectionReasonStage2,
                 stageOneStatus: stageOneStatus,
                 stageTwoStatus: stageTwoStatus,
+                requestDateTime:requestDateTime,
                 email: email,
                 userId:userId,
                 hasChanges: hasChanges,
@@ -80,7 +82,7 @@
     var PayPallAppServertoClientMapper = function (itemFromServer) {
 
 
-        return new PayPallApp(itemFromServer.StageOneUserId, itemFromServer.CentzAmount, itemFromServer.TargetPayoutAccount, itemFromServer.CompanyId, itemFromServer.PayOutId, itemFromServer.CompanyName, itemFromServer.DollarAmount, itemFromServer.StageOneRejectionReason, itemFromServer.StageTwoRejectionReason, itemFromServer.Email, itemFromServer.UserId, itemFromServer.StageOneStatus,itemFromServer.StageTwoStatus);
+        return new PayPallApp(itemFromServer.StageOneUserId, itemFromServer.CentzAmount, itemFromServer.TargetPayoutAccount, itemFromServer.CompanyId, itemFromServer.PayOutId, itemFromServer.CompanyName, itemFromServer.DollarAmount, itemFromServer.StageOneRejectionReason, itemFromServer.StageTwoRejectionReason, itemFromServer.Email, itemFromServer.UserId, itemFromServer.StageOneStatus, itemFromServer.StageTwoStatus, itemFromServer.RequestDateTime);
     };
 
     // Function to attain cancel button functionality ProfileQuestion

@@ -63,12 +63,14 @@ namespace SMD.Implementation.Services
                     dbCo.StageOneStatus = source.StageOneStatus;
                     dbCo.StageOneUserId = userid;
                     dbCo.StageOneRejectionReason = source.StageOneRejectionReason.ToString();
+                    dbCo.StageOneEventDate = DateTime.Now;
                 }
                 else
                 {
                     dbCo.StageTwoStatus = source.StageTwoStatus;
                     dbCo.StageTwoUserId = userid;
                     dbCo.StageTwoRejectionReason = source.StageTwoRejectionReason.ToString();
+                    dbCo.StageTwoEventDate = DateTime.Now;
 
                 }
                 _PayOutHistoryRepository.SaveChanges();
