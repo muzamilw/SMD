@@ -712,6 +712,21 @@ namespace SMD.Repository.BaseRepository
             var _dateRange = new ObjectParameter("DateRange", dateRange);
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getDealByCouponIdRatioAnalytic_Result>("getDealByCouponIdRatioAnalytic", _ID, _dateRange);
         }
+        public ObjectResult<getAdsCampaignByCampaignIdtblAnalytic_Result> getAdsCampaignByCampaignIdtblAnalytic(int ID)
+        {
+            var _ID = new ObjectParameter("Id", ID);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getAdsCampaignByCampaignIdtblAnalytic_Result>("getAdsCampaignByCampaignIdtblAnalytic", _ID);
+        }
+        public ObjectResult<getSurvayByPQIDtblAnalytic_Result> getSurvayByPQIDtblAnalytic(int ID)
+        {
+            var _ID = new ObjectParameter("Id", ID);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getSurvayByPQIDtblAnalytic_Result>("getSurvayByPQIDtblAnalytic", _ID);
+        }
+        public ObjectResult<getPollBySQIDtblAnalytic_Result> getPollBySQIDtblAnalytic(int ID)
+        {
+            var _ID = new ObjectParameter("Id", ID);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getPollBySQIDtblAnalytic_Result>("getPollBySQIDtblAnalytic", _ID);
+        }
         #endregion
     }
 }

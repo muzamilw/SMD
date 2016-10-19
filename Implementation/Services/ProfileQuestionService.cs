@@ -623,6 +623,10 @@ namespace SMD.Implementation.Services
         {
             return _profileQuestionRepository.getSurveyByPQIDRatioAnalytic(ID, dateRange);
         }
+        public IEnumerable<getSurvayByPQIDtblAnalytic_Result> getSurvayByPQIDtblAnalytic(int ID)
+        {
+            return _profileQuestionRepository.getSurvayByPQIDtblAnalytic(ID);
+        }
         #endregion
     }
 }

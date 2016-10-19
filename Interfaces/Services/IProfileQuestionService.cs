@@ -43,7 +43,8 @@ namespace SMD.Interfaces.Services
         ProfileQuestionGroup GetPQGroupById(int id);
         IEnumerable<getSurvayByPQID_Result> getSurvayByPQIDAnalytics(int PQId, int CampStatus, int dateRange, int Granularity);
         IEnumerable<getSurveyByPQIDRatioAnalytic_Result> getSurveyByPQIDRatioAnalytic(int ID, int dateRange);
-        
+        IEnumerable<getSurvayByPQIDtblAnalytic_Result> getSurvayByPQIDtblAnalytic(int ID);
+       
        
     }
 }

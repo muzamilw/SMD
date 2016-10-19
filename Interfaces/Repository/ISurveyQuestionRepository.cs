@@ -50,6 +50,7 @@ namespace SMD.Interfaces.Repository
         IEnumerable<SurveyQuestion> GetSurveyQuestionAnswer(long SurveyQuestionId);
         IEnumerable<getPollsBySQID_Result> getPollsBySQIDAnalytics(int SQId, int CampStatus, int dateRange, int Granularity);
         IEnumerable<getPollBySQIDRatioAnalytic_Result> getPollBySQIDRatioAnalytic(int ID, int dateRange);
+        IEnumerable<getPollBySQIDtblAnalytic_Result> getPollBySQIDtblAnalytic(int ID);
         
     }
 }
