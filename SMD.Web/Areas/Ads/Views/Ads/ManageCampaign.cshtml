@@ -21,7 +21,7 @@ else
                 </ol>
                 <div class="clearfix col-lg-9" data-bind="with: $root.campaignModel" style="padding:0px;">
                     <span class="pull-left Theme_standard_clr" style="padding-left:0px;font-size:21px;" data-bind="NewCampaignBinding: CampaignName,visible:$root.isDisplayCouponsAds()">New Coupon</span>
-                    <span id="newVid" class="pull-left " style="color:black!important; padding-left:0px;font-size:23px;margin-top:12px;" data-bind="NewCampaignBinding: CampaignName">New video campaign</span>
+                    <span id="newVid" class="pull-left " style="color:#fff!important; padding-left:0px;font-size:23px;margin-top:12px;" data-bind="NewCampaignBinding: CampaignName">New video campaign</span>
 
                     @*<span id="newdisplay_Ad" class="pull-left " style="color:black!important; padding-left:0px;font-size:23px;margin-top:12px;display:none;" data-bind="NewCampaignBinding: CampaignName">New display ad</span>*@
                 </div>
@@ -769,7 +769,7 @@ else
                                                     <button class="btn  btn-danger btnAdsCampaign ButtonWidth filterbtnclrs" id="" data-toggle="modal" data-target=".bs-example-modal-lg" data-bind="click:$root.showAdditionQuizCriteria">Ad quiz results</button>
                                                 </div>
 
-                                                <div class="pull-left filtersDiv_width">
+                                                <div class="pull-left filtersDiv_width" style="display:none;">
                                                     <button class="btn  btn-danger btnAdsCampaign ButtonWidth filterbtnclrs" id="" data-toggle="modal" data-bind="click:$root.showAdditionUserSurveyCriteria" data-target=".bs-example-modal-lg">My poll results</button>
                                                 </div>
 
