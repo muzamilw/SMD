@@ -1,7 +1,7 @@
 ﻿define(["ko", "underscore", "underscore-ko"], function (ko) {
   
     var // ReSharper disable InconsistentNaming
-      Campaign = function (CampaignID, LanguageID, CampaignName, UserID, Status, StatusValue, CampaignDescription, Gender,
+      Campaign = function (IsPaymentCollected, PaymentDate,CampaignID, LanguageID, CampaignName, UserID, Status, StatusValue, CampaignDescription, Gender,
           Archived, StartDateTime, EndDateTime, MaxBudget, Type, DisplayTitle, LandingPageVideoLink, VerifyQuestion,
           Answer1, Answer2, Answer3, CorrectAnswer, AgeRangeStart, AgeRangeEnd, ResultClicks, AmountSpent
           , ImagePath, CampaignImagePath, CampaignTypeImagePath, Description, ClickRate,
@@ -15,6 +15,8 @@
          
           var
               //type and userID will be set on server sside
+              IsPaymentCollected = ko.observable(IsPaymentCollected),
+              PaymentDate = ko.observable(PaymentDate),
               CampaignID = ko.observable(CampaignID),
               LanguageID = ko.observable(LanguageID),
               CampaignName = ko.observable(CampaignName).extend({  // custom message
@@ -170,7 +172,9 @@
                     return errors().length === 0 ? true : false;
                 }),
               dirtyFlag = new ko.dirtyFlag({
-                  ShowBuyitBtn:ShowBuyitBtn,
+                  ShowBuyitBtn: ShowBuyitBtn,
+                  IsPaymentCollected:IsPaymentCollected,
+                  PaymentDate :PaymentDate,
                   CampaignName: CampaignName,
                   CampaignDescription: CampaignDescription,
                   Description:Description,
@@ -326,7 +330,9 @@
                       CouponCodes: targetCouponCodes,
                       IsUseFilter: IsUseFilter(),
                       LogoUrl: LogoUrl(),
-                      ShowBuyitBtn:ShowBuyitBtn(),
+                      ShowBuyitBtn: ShowBuyitBtn(),
+                      IsPaymentCollected :IsPaymentCollected(),
+                      PaymentDate:PaymentDate(),
                       VoucherAdditionalInfo: VoucherAdditionalInfo(),
                      
                       LogoImageBytes: logoImage == "" ? LogoImageBytes() : logoImage,
@@ -432,7 +438,9 @@
               ApprovalDateTime : ApprovalDateTime,
               ChannelType: ChannelType,
               VideoBytes: VideoBytes,
-              ShowBuyitBtn: ShowBuyitBtn
+              ShowBuyitBtn: ShowBuyitBtn,
+              IsPaymentCollected :IsPaymentCollected,
+              PaymentDate: PaymentDate
           };
       };
 
@@ -616,7 +624,7 @@
     // Factory Method
     Campaign.Create = function (source) {
        
-        var campaign = new Campaign(source.CampaignId, source.LanguageId, source.CampaignName, source.UserId, source.Status, source.StatusValue,
+        var campaign = new Campaign(source.IsPaymentCollected, source.PaymentDate,source.CampaignId, source.LanguageId, source.CampaignName, source.UserId, source.Status, source.StatusValue,
             source.CampaignDescription, source.Gender + "", source.Archived, source.StartDateTime, source.EndDateTime, source.MaxBudget
             , source.Type + "", source.DisplayTitle, source.LandingPageVideoLink, source.VerifyQuestion, source.Answer1, source.Answer2, source.Answer3,
             source.CorrectAnswer, source.AgeRangeStart, source.AgeRangeEnd, source.ResultClicks, source.AmountSpent, source.ImagePath, source.CampaignImagePath,
