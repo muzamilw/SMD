@@ -730,6 +730,7 @@ namespace SMD.Implementation.Services
             string respMesg = "True";
             var dbCo = couponRepository.GetCouponByIdSingle(source.CouponId);
             var userData = webApiUserService.GetUserByUserId(dbCo.UserId);
+            var isFlag = dbCo.IsPaymentCollected;
             // Update 
             if (dbCo != null)
             {
@@ -742,19 +743,27 @@ namespace SMD.Implementation.Services
                     dbCo.ApprovalDateTime = DateTime.Now;
                     dbCo.ApprovedBy = couponRepository.LoggedInUserIdentity;
                     dbCo.Status = (Int32)AdCampaignStatus.Live;
+                    if (dbCo.IsPaymentCollected != true)
+                    {
+                        dbCo.IsPaymentCollected = true;
+                        dbCo.PaymentDate = DateTime.Now;
+                    }
                     // Stripe payment + Invoice Generation
                     // Muzi bhai said we will see it on latter stage 
                     //todo pilot: unCommenting Stripe payment code on Ads approval
                     if (userData.Company.IsSpecialAccount != true)
                     {
-                        respMesg = MakeStripePaymentandAddInvoiceForCoupon(dbCo, out PaymentToBeCharged);
-                        if (respMesg.Contains("Failed"))
+                        if (isFlag != true)
                         {
-                            return respMesg;
-                        }
-                        else
-                        {
-                            TransactionManager.CouponApprovalTransaction(dbCo.CouponId, PaymentToBeCharged, dbCo.CompanyId.Value);
+                            respMesg = MakeStripePaymentandAddInvoiceForCoupon(dbCo, out PaymentToBeCharged);
+                            if (respMesg.Contains("Failed"))
+                            {
+                                return respMesg;
+                            }
+                            else
+                            {
+                                TransactionManager.CouponApprovalTransaction(dbCo.CouponId, PaymentToBeCharged, dbCo.CompanyId.Value);
+                            }
                         }
                     }
                 }

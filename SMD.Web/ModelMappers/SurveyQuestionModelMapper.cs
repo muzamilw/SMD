@@ -204,7 +204,8 @@ namespace SMD.MIS.ModelMappers
                 CampaignId = source.CampaignId,
                 VerifyQuestion = source.VerifyQuestion,
                 Answer1 = source.Answer1,
-                Answer2 = source.Answer2
+                Answer2 = source.Answer2,
+                Answer3=source.Answer3
             };
         }
         public static SMD.MIS.Areas.Api.Models.CompanyBranch CreateFromDropdown(this Models.DomainModels.CompanyBranch source)

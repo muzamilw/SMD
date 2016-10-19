@@ -1111,8 +1111,6 @@ define("pQuestion/pQuestion.viewModel",
 
                     selectedQuestion().status(mode);
 
-
-
                     var serverQuestion = selectedQuestion().convertToServerData();
 
 
@@ -1188,6 +1186,7 @@ define("pQuestion/pQuestion.viewModel",
                     });
                 }),
                 onEditCriteria = function (item) {
+                    debugger;
                     isNewCriteria(false);
                     var val = item.PQAnswerID() + 0;
                     if (item.Type() == "1") {
@@ -1198,7 +1197,7 @@ define("pQuestion/pQuestion.viewModel",
                             QuestionId: item.PQQuestionID(),
                         }, {
                             success: function (data) {
-                                debugger;
+                               
                                 if (data != null) {
                                     _.each(data.ProfileQuestionAnswers, function (question) {
                                         question.PQID = question.PqId;
@@ -1278,7 +1277,6 @@ define("pQuestion/pQuestion.viewModel",
                                         selectedCriteria().profileQuestLeftImageSrc(matchSurveyQuestion.Answer1);
                                         selectedCriteria().profileQuestRightImageSrc(matchSurveyQuestion.Answer2);
                                     }
-
                                 },
                                 error: function (response) {
 
@@ -1748,8 +1746,7 @@ define("pQuestion/pQuestion.viewModel",
                  $(".close").click();
              },
                  saveProfileQuestion = function (item) {
-
-
+                     debugger;
                      var selectedQuestionstring = $(".active .parent-list-title").text();
                      selectedCriteria().questionString(selectedQuestionstring);
                      selectedCriteria().PQID(item.PQID);
@@ -1773,7 +1770,7 @@ define("pQuestion/pQuestion.viewModel",
                          selectedQuestion().ProfileQuestionTargetCriteria.push(new model.ProfileQuestionTargetCriteria.Create({
                              Type: 1,
                              PqId: selectedCriteria().PQID(),
-                             PqAnswerId: selectedCriteria().PQAnswerID(),
+                             PQAnswerID: selectedCriteria().PQAnswerID(),
                              SqId: selectedCriteria().SQID(),
                              //SQAnswer: selectedCriteria().SQAnswer(),
                              questionString: selectedCriteria().questionString(),
@@ -1789,7 +1786,7 @@ define("pQuestion/pQuestion.viewModel",
                          selectedQuestion().ProfileQuestionTargetCriteria.push(new model.ProfileQuestionTargetCriteria.Create({
                              Type: 1,
                              PqId: selectedCriteria().PQID(),
-                             PqAnswerId: selectedCriteria().PQAnswerID(),
+                             PQAnswerID: selectedCriteria().PQAnswerID(),
                              SqId: selectedCriteria().SQID(),
                              //SQAnswer: selectedCriteria().SQAnswer(),
                              questionString: selectedCriteria().questionString(),
@@ -1894,7 +1891,7 @@ define("pQuestion/pQuestion.viewModel",
             ,
 
                         showAdditionQuizCriteria = function () {
-
+                            
                             Modelheading('Your Quiz Questions');
                             //   selectedCriteria(null);
                             //   isNewCriteria(true);
@@ -1944,6 +1941,7 @@ define("pQuestion/pQuestion.viewModel",
                                             myQuizQuestions.valueHasMutated();
                                             TemporaryQuizQuestions.clear;
                                             TemporaryQuizQuestions(myQuizQuestions());
+                                            debugger;
                                         }
 
                                     },

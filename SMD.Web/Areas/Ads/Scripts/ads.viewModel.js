@@ -13,6 +13,7 @@ define("ads/ads.viewModel",
                        // Controlls editor visibility 
                     searchFilterValue = ko.observable(),
                     isEditorVisible = ko.observable(false),
+                    isClickRateVisible = ko.observable(null),
                     buyItQuestionStatus = ko.observable(false),
 					isAdvertdashboardVisible = ko.observable(false),
                     ButItOtherLabel = ko.observable(''),
@@ -211,7 +212,7 @@ define("ads/ads.viewModel",
                         success: function (data) {
 
                             if (data != null) {
-
+                                isClickRateVisible(data.UserAndCostDetails.IsSpecialAccount);
                                 UserAndCostDetail(data.UserAndCostDetails);
                                 advertiserLogo(UserAndCostDetail().UserProfileImage);
                                 buyItPriceLbl(UserAndCostDetail().BuyItClausePrice + "p");
@@ -1101,11 +1102,16 @@ define("ads/ads.viewModel",
                 saveCriteria = function (type, item) {
 
                     var selectedQuestionstring = item.VerifyQuestion;
+
                     selectedCriteria().questionString(selectedQuestionstring);
                     if (type == 1) {
                         selectedCriteria().answerString(item.Answer1);
-                    } else {
+                    }
+                    else if (type == 2) {
                         selectedCriteria().answerString(item.Answer2);
+                    }
+                    else {
+                        selectedCriteria().answerString(item.Answer3);
                     }
 
                     var matchedSurveyCriteriaRec = null;
@@ -1359,8 +1365,6 @@ define("ads/ads.viewModel",
                             selectedCriteria().surveyQuestRightImageSrc(matchSurveyQuestion.RightPicturePath);
                         }
 
-
-
                     }
 
                     else {
@@ -1370,6 +1374,7 @@ define("ads/ads.viewModel",
                         });
                         selectedCriteria().surveyQuestLeftImageSrc(matchSurveyQuestion.Answer1);
                         selectedCriteria().surveyQuestRightImageSrc(matchSurveyQuestion.Answer2);
+                        selectedCriteria().surveyQuestThirdImageSrc(matchSurveyQuestion.Answer3);
                         // adjust item
                     }
 
@@ -2842,6 +2847,7 @@ define("ads/ads.viewModel",
                 },
 
                 showAdditionQuizCriteria = function () {
+                    debugger;
                     Modelheading('Your Quiz Questions');
                     IsprofileQuestion(false);
                     isNewCriteria(true);
@@ -2859,6 +2865,7 @@ define("ads/ads.viewModel",
                             QuestionId: 0,
                         }, {
                             success: function (data) {
+                                debugger;
                                 if (data != null) {
                                     myQuizQuestions([]);
                                     ko.utils.arrayPushAll(myQuizQuestions(), data.AdCampaigns);
@@ -3327,7 +3334,8 @@ define("ads/ads.viewModel",
 					selecteddateRangeAnalytics : selecteddateRangeAnalytics,
 					CloseCampaignADAnalyticView:CloseCampaignADAnalyticView,
 					CampaignRatioAnalyticData:CampaignRatioAnalyticData,
-					CampaignTblAnalyticsData:CampaignTblAnalyticsData
+					CampaignTblAnalyticsData:CampaignTblAnalyticsData,
+					isClickRateVisible: isClickRateVisible
 					
                 };
             })()
