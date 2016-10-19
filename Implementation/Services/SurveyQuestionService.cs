@@ -557,6 +557,10 @@ namespace SMD.Implementation.Services
 
             return surveyQuestionRepository.getPollBySQIDRatioAnalytic(ID, dateRange);
         }
+        public IEnumerable<getPollBySQIDtblAnalytic_Result> getPollBySQIDtblAnalytic(int ID)
+        {
+            return surveyQuestionRepository.getPollBySQIDtblAnalytic(ID);
+        }
         #endregion
     }
 

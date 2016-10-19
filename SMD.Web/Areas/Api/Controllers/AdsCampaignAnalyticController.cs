@@ -29,6 +29,7 @@ namespace SMD.MIS.Areas.Api.Controllers
             AdsCampaignByCampaignIdForAnalyticsResponse data = new AdsCampaignByCampaignIdForAnalyticsResponse();
             data.lineCharts = _IAdvertService.getAdsCampaignByCampaignIdAnalytics(compaignId, CampStatus, dateRange, Granularity);
             data.pieCharts = _IAdvertService.getAdsCampaignByCampaignIdRatioAnalytic(compaignId, dateRange);
+            data.tbl = _IAdvertService.getAdsCampaignByCampaignIdtblAnalytic(compaignId);
             return data;
         }
 

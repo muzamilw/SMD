@@ -445,7 +445,7 @@
   var // ReSharper disable InconsistentNaming
  ProfileQuestionTargetCriteria = function (ID, PQID, Type, PQID, PQAnswerID, LinkedSQID, LinkedSqAnswer, IncludeorExclude, LanguageID,
      questionString, answerString, Language, IndustryID, Industry, EducationId, Education, AdCampaignAnswer, PQQuestionID, AdCampaignID,
-     PQQuestionString, profileQuestRightImageSrc, profileQuestLeftImageSrc, IsDeleted, ID) {
+     PQQuestionString, profileQuestRightImageSrc, profileQuestLeftImageSrc, IsDeleted, ID, profileQuestThirdImageSrc) {
      var
          //type and userID will be set on server side
          ID = ko.observable(ID),
@@ -476,7 +476,7 @@
          EducationId = ko.observable(EducationId)
          profileQuestLeftImageSrc = ko.observable(profileQuestLeftImageSrc),
          profileQuestRightImageSrc = ko.observable(profileQuestRightImageSrc),
-
+         profileQuestThirdImageSrc = ko.observable(profileQuestThirdImageSrc),
 
           dirtyFlag = new ko.dirtyFlag({
               ID: ID,
@@ -557,6 +557,7 @@
          AdCampaignID: AdCampaignID,
          profileQuestLeftImageSrc: profileQuestLeftImageSrc,
          profileQuestRightImageSrc: profileQuestRightImageSrc,
+         profileQuestThirdImageSrc:profileQuestThirdImageSrc,
          IsDeleted: IsDeleted,
          ID: ID,
          hasChanges: hasChanges

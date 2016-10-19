@@ -356,6 +356,8 @@ namespace SMD.MIS.ModelMappers
                         AnswerString = source.QuizCampaign.Answer1;
                     if (source.QuizAnswerId == 2)
                         AnswerString = source.QuizCampaign.Answer2;
+                    if (source.QuizAnswerId == 3)
+                       AnswerString = source.QuizCampaign.Answer3;
                 }
             }
             return new SMD.MIS.Areas.Api.Models.AdCampaignTargetCriteria

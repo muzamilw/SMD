@@ -1190,13 +1190,27 @@ namespace SMD.Implementation.Services
                     };
                 }
 
+
+                //updating logged in user
                 if (user.Company != null)
                 {
-                    //// update user name  and cuntry name for api 
-                    //if (user.Company.Country != null)
-                    //    user.CountryName = user.Company.Country.CountryName;
-                    //if (user.Company.City != null)
-                    //    user.CityName = user.Company.City;
+                    var company = companyRepository.Find(user.CompanyId.Value);
+                    if ( company != null)
+                    {
+                        company.BillingCity = request.City;
+                        company.City = request.City;
+
+                        var country = countryRepository.GetSearchedCountries(request.Country).FirstOrDefault();
+                        
+                        if ( country != null)
+                        {
+                            company.BillingCountryId = country.CountryId;
+                        }
+
+                        companyRepository.Update(company);
+                        companyRepository.SaveChanges();
+
+                    }
                 }
                 else
                 {
@@ -1244,8 +1258,15 @@ namespace SMD.Implementation.Services
                 }
                 // update GUID 
                 user.LastLoginTime = DateTime.Now;
+
+
                 user.CityName = request.City;
                 user.CountryName = request.Country;
+
+
+                
+
+
                 user.AuthenticationToken = Guid.NewGuid().ToString();
                 
                 await UserManager.UpdateAsync(user);

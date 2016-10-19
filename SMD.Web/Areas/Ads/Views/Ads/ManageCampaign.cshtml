@@ -1313,8 +1313,9 @@ else
                                                             <div style="padding-top: 14px;padding-right: 11px;" class="list childList rightImg filterCrtTilesClr" data-bind="click:$root.updateSurveyCriteriass.bind($data, 2),css: { 'active': SQAnswer() ==2 }"><img data-bind="attr: { src:surveyQuestRightImageSrc}" style="height:75px;width:auto;" /></div>
                                                             <!--/ko-->
                                                             <!--ko if:Type() == 6 -->
-                                                            <div style="padding-top: 14px;padding-right: 11px;" class="list childList leftImg filterCrtTilesClr" data-bind="click:$root.updateSurveyCriteria.bind($data, 1),css: { 'active': QuizAnswerId() ==1 }"> <label data-bind="text:surveyQuestLeftImageSrc "></label> </div>
-                                                            <div style="padding-top: 14px;padding-right: 11px;" class="list childList rightImg filterCrtTilesClr" data-bind="click:$root.updateSurveyCriteria.bind($data, 2),css: { 'active': QuizAnswerId() ==2 }"><label data-bind="text:surveyQuestRightImageSrc "></label></div>
+                                                            <div style="padding-top: 14px;padding-right: 11px;" class="list childList leftImg filterCrtTilesClr" data-bind="click:$root.updateSurveyCriteria.bind($data, 1),css: { 'active': QuizAnswerId() ==1 }"> <label data-bind="text:surveyQuestLeftImageSrc"></label></div>
+                                                            <div style="padding-top: 14px;padding-right: 11px;" class="list childList rightImg filterCrtTilesClr" data-bind="click:$root.updateSurveyCriteria.bind($data, 2),css: { 'active': QuizAnswerId() ==2 }"><label data-bind="text:surveyQuestRightImageSrc"></label></div>
+                                                            <div style="padding-top: 14px;padding-right: 11px;" class="list childList rightImg filterCrtTilesClr" data-bind="click:$root.updateSurveyCriteria.bind($data, 3),css: { 'active': QuizAnswerId() ==3 }"><label data-bind="text:surveyQuestThirdImageSrc"></label></div>
                                                             <!--/ko-->
                                                             <!--ko if:Type() == 1 -->
                                                             <!-- ko template: { name: 'criteriaEditorTemplate' ,  foreach: $root.profileAnswerList} --><!-- /ko -->
@@ -2812,6 +2813,9 @@ else
             <div>
                 <div class="list childList leftImg filterCrtTilesClr" data-bind="click:$root.saveCriteria.bind($data, 1)"><span class="list-title" data-bind="text:Answer1"></span> </div>
                 <div class="list childList rightImg filterCrtTilesClr" data-bind="click:$root.saveCriteria.bind($data, 2)"> <span class="list-title" data-bind="text:Answer2"></span> </div>
+                <!-- ko if: Answer3!=''&&Answer3!=null -->
+                <div class="list childList rightImg filterCrtTilesClr" data-bind="click:$root.saveCriteria.bind($data, 3)"> <span class="list-title" data-bind="text:Answer3"></span> </div>
+                <!-- /ko -->
             </div>
             <div class="clear-both"></div>
         </div>

@@ -26,6 +26,8 @@ namespace SMD.MIS.Areas.Api.Controllers
             PQByPQIDForAnalyticsResponse data = new PQByPQIDForAnalyticsResponse();
             data.lineCharts = _IProfileQuestionService.getSurvayByPQIDAnalytics(PQId, CampStatus, dateRange, Granularity);
             data.pieCharts = _IProfileQuestionService.getSurveyByPQIDRatioAnalytic(PQId, dateRange);
+            data.tbl = _IProfileQuestionService.getSurvayByPQIDtblAnalytic(PQId);
+        
             return data;
         }
 

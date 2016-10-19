@@ -138,11 +138,12 @@ define("Coupons/Coupons.viewModel",
 					DateRangeDropDown  = ko.observableArray([{ id: 1, name: "One month" }, { id: 2, name: "All Time" }]),
 					CampaignStatusDropDown  = ko.observableArray([{ id: 1, name: "Answered" }, { id: 2, name: "Referred" }, { id: 3, name: "Skipped" }]),
 					CampaignRatioAnalyticData = ko.observable(1), 
+					dealExpirydate = ko.observable(), 
 					Banner2Flag = ko.observable(false),
                     Banner3Flag = ko.observable(false),
                     Banner4Flag = ko.observable(false),
                     Banner5Flag = ko.observable(false),
-                    Banner6Flag = ko.observable(false)
+                    Banner6Flag = ko.observable(false),
 				    openAdvertiserDashboardDealScreen = function () {
 						getDealsAnalytics();
 						$("#ddGranularityDropDown").removeAttr("disabled");
@@ -161,6 +162,7 @@ define("Coupons/Coupons.viewModel",
 							ko.utils.arrayPushAll(DealsAnalyticsData(), data.lineCharts);
 							DealsAnalyticsData.valueHasMutated();
 							CampaignRatioAnalyticData(data.pieCharts);
+							dealExpirydate(data.expiryDate);
                     
 						},
 						error: function (response) {
@@ -171,6 +173,7 @@ define("Coupons/Coupons.viewModel",
 				},
 				CloseCouponsAnalyticView = function () {
 					isAdvertdashboardDealVisible(false);
+					CampaignRatioAnalyticData(1);
 				},
 				
 				//
@@ -738,7 +741,7 @@ define("Coupons/Coupons.viewModel",
                     },
                 //Create Price option
                      onCreatePriceOption = function () {
-                         if (couponModel().CouponPriceOptions().length <= 20) {
+                         if (couponModel().CouponPriceOptions().length <= 5) {
                              var priceOption = couponModel().CouponPriceOptions()[0];
                              //Create Price option for the very First Time
                              if (priceOption == undefined) {
@@ -2052,7 +2055,7 @@ define("Coupons/Coupons.viewModel",
                     couponModel();
                     selectedCriteria();
                     isEditorVisible(false);
-					isAdvertdashboardDealVisible(false);
+					CloseCouponsAnalyticView();
                     if (isFromEdit() == true) {
                         isListVisible(true);
                         isWelcomeScreenVisible(false);
@@ -2291,7 +2294,8 @@ define("Coupons/Coupons.viewModel",
 					selectedCouponIdAnalytics:selectedCouponIdAnalytics,
 					DealsAnalyticsData:DealsAnalyticsData,
 					CampaignStatusDropDown:CampaignStatusDropDown,
-					CampaignRatioAnalyticData:CampaignRatioAnalyticData
+					CampaignRatioAnalyticData:CampaignRatioAnalyticData,
+					dealExpirydate : dealExpirydate
 					
 					
 					

@@ -214,6 +214,14 @@ namespace SMD.Repository.Repositories
             
             return db.getDealByCouponIdRatioAnalytic(ID, dateRange);
         }
+        public DateTime getExpiryDate(int CouponId)
+        {
+            Coupon c = db.Coupons.Where(g=>g.CouponId == CouponId).FirstOrDefault();
+           if(c != null){
+               return (DateTime)c.CouponExpirydate;
+           }
+           return default(DateTime);
+        }
         #endregion
     }
 }
