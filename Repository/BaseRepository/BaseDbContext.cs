@@ -604,6 +604,29 @@ namespace SMD.Repository.BaseRepository
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SearchCampaigns_Result>("SearchCampaigns", statusParameter, keywordParameter, companyIdParameter, fromRowParameter, toRowParameter,adminModeParameter);
         }
 
+        public ObjectResult<GetRegisteredUserData_Result> GetRegisteredUserData(int status, string keyword, int fromRow, int toRow)
+        {
+            var statusParameter = status != null ?
+                new ObjectParameter("status", status) :
+                new ObjectParameter("status", typeof(int));
+
+            var keywordParameter = keyword != null ?
+               new ObjectParameter("keyword", keyword) :
+               new ObjectParameter("keyword", typeof(string));
+
+        
+
+            var fromRowParameter = new ObjectParameter("fromRoww", fromRow);
+
+
+            var toRowParameter = new ObjectParameter("toRow", toRow);
+
+
+
+
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetRegisteredUserData_Result>("GetRegisteredUserData", statusParameter, keywordParameter, fromRowParameter, toRowParameter);
+        }
+
 
         /// <summary>
         /// Returns the transactiopns agaisnt a companyid's account
