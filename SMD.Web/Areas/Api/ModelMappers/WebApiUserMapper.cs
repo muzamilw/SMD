@@ -83,8 +83,8 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                 Email = source.Email,
              
                 Gender = source.Gender.HasValue ? source.Gender.Value : 1,
-          
-                DOB = source.DOB.HasValue ? source.DOB.Value.ToShortDateString() : "",
+
+                DOB = source.DOB.HasValue ? source.DOB.Value.ToString("dd-MMM-yyyy") : "",
           
                 IndustryId = source.IndustryId.HasValue ? source.IndustryId : 0,
 
