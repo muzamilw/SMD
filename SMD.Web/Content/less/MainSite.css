@@ -31,14 +31,14 @@
 }
 .count_token_opt_cnt {
   float: left;
-  width: 42.7%;
+  width: 100%;
   background-color: #fff;
   background-image: none;
   border: 1px solid #e7ebee;
   height: 37px;
 }
 #searchCampaignLocations {
-  width: 247px !important;
+  width: 100% !important;
   border-top-left-radius: 0px !important;
   border-top-right-radius: 0px !important;
   border: none;
@@ -486,10 +486,7 @@ ul {
   width: 30%;
   float: left;
 }
-.count_token_opt_cnt {
-  float: left;
-  width: 69.7%;
-}
+
 .count_token_opt_prof_cnt {
   float: left;
   width: 100% !important;

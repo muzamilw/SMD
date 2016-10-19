@@ -591,5 +591,26 @@ namespace DomainModelProject
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getSurvayByPQIDtblAnalytic_Result>("getSurvayByPQIDtblAnalytic", idParameter);
         }
+    
+        public virtual ObjectResult<GetRegisteredUserData_Result> GetRegisteredUserData(Nullable<int> status, string keyword, Nullable<int> fromRoww, Nullable<int> toRow)
+        {
+            var statusParameter = status.HasValue ?
+                new ObjectParameter("Status", status) :
+                new ObjectParameter("Status", typeof(int));
+    
+            var keywordParameter = keyword != null ?
+                new ObjectParameter("keyword", keyword) :
+                new ObjectParameter("keyword", typeof(string));
+    
+            var fromRowwParameter = fromRoww.HasValue ?
+                new ObjectParameter("fromRoww", fromRoww) :
+                new ObjectParameter("fromRoww", typeof(int));
+    
+            var toRowParameter = toRow.HasValue ?
+                new ObjectParameter("toRow", toRow) :
+                new ObjectParameter("toRow", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetRegisteredUserData_Result>("GetRegisteredUserData", statusParameter, keywordParameter, fromRowwParameter, toRowParameter);
+        }
     }
 }
