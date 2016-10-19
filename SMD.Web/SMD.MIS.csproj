@@ -575,6 +575,7 @@
     <Compile Include="Areas\DAM\DAMAreaRegistration.cs" />
     <Compile Include="Areas\DAM\Models\Images.cs" />
     <Compile Include="Areas\Franchise\Controllers\ApprovePayPalController.cs" />
+    <Compile Include="Areas\Franchise\Controllers\RegisterUsersController.cs" />
     <Compile Include="Areas\ProfileQuestion\Controllers\ManageController.cs" />
     <Compile Include="Areas\Report\Controllers\ReportController.cs" />
     <Compile Include="Areas\Report\ReportAreaRegistration.cs" />
@@ -749,6 +750,7 @@
     <Content Include="Areas\Coupons\Views\Coupons\_advertDashboardDeal.cshtml" />
     <Content Include="Areas\Survey\Views\Shared\_advertSurveyAnalytic.cshtml" />
     <Content Include="Areas\ProfileQuestion\Views\Manage\_advertProfileQuestionAnalytic.cshtml" />
+    <Content Include="Areas\Franchise\Views\RegisterUsers\UsersDashboard.cshtml" />
     <None Include="config\Web.connectionstrings.config">
       <SubType>Designer</SubType>
     </None>
