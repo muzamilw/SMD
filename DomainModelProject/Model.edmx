@@ -117,6 +117,8 @@
           <Property Name="MaxDailyBudget" Type="float" />
           <Property Name="SubmissionDateTime" Type="datetime" />
           <Property Name="ShowBuyitBtn" Type="bit" />
+          <Property Name="IsPaymentCollected" Type="bit" />
+          <Property Name="PaymentDate" Type="datetime" />
         </EntityType>
         <EntityType Name="AdCampaignClickRateHistory">
           <Key>
@@ -510,6 +512,8 @@
           <Property Name="CouponImage4" Type="nvarchar(max)" />
           <Property Name="CouponImage5" Type="nvarchar(max)" />
           <Property Name="CouponImage6" Type="nvarchar(max)" />
+          <Property Name="IsPaymentCollected" Type="bit" />
+          <Property Name="PaymentDate" Type="datetime" />
         </EntityType>
         <EntityType Name="CouponCategories">
           <Key>
@@ -2484,6 +2488,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Parameter Name="Id" Type="int" Mode="In" />
           <Parameter Name="DateRange" Type="int" Mode="In" />
         </Function>
+        <Function Name="getAdsCampaignByCampaignIdtblAnalytic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetApprovalCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="getCampaignsByStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetCouponByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -2522,6 +2529,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Parameter Name="Id" Type="int" Mode="In" />
           <Parameter Name="DateRange" Type="int" Mode="In" />
         </Function>
+        <Function Name="getPollBySQIDtblAnalytic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
         <Function Name="getPollsBySQID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="SQID" Type="int" Mode="In" />
           <Parameter Name="status" Type="int" Mode="In" />
@@ -2545,6 +2555,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Parameter Name="status" Type="int" Mode="In" />
           <Parameter Name="DateRange" Type="int" Mode="In" />
           <Parameter Name="Granularity" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getSurvayByPQIDtblAnalytic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
         </Function>
         <Function Name="getSurveyByPQIDRatioAnalytic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="int" Mode="In" />
@@ -3287,6 +3300,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <NavigationProperty Name="CampaignEventHistories" Relationship="SMDDevModel.FK_CampaignEventHistory_AdCampaign" FromRole="AdCampaign" ToRole="CampaignEventHistory" />
           <NavigationProperty Name="AdCampaignClickRateHistories" Relationship="SMDDevModel.FK_AdCampaignClickRateHistory_AdCampaign" FromRole="AdCampaign" ToRole="AdCampaignClickRateHistory" />
           <Property Name="ShowBuyitBtn" Type="Boolean" />
+          <Property Name="IsPaymentCollected" Type="Boolean" />
+          <Property Name="PaymentDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="AdCampaignResponse">
           <Key>
@@ -3650,6 +3665,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="CouponImage4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CouponImage5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CouponImage6" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsPaymentCollected" Type="Boolean" />
+          <Property Name="PaymentDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="CouponCode">
           <Key>
@@ -5516,6 +5533,15 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <End Role="Company" EntitySet="Companies" />
             <End Role="PayOutHistory" EntitySet="PayOutHistories" />
           </AssociationSet>
+          <FunctionImport Name="getAdsCampaignByCampaignIdtblAnalytic" ReturnType="Collection(SMDDevModel.getAdsCampaignByCampaignIdtblAnalytic_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getPollBySQIDtblAnalytic" ReturnType="Collection(SMDDevModel.getPollBySQIDtblAnalytic_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getSurvayByPQIDtblAnalytic" ReturnType="Collection(SMDDevModel.getSurvayByPQIDtblAnalytic_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="CouponCategories">
           <Key>
@@ -6774,6 +6800,24 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="getAdsCampaignByCampaignIdtblAnalytic_Result">
+          <Property Type="Int32" Name="ordr" Nullable="false" />
+          <Property Type="String" Name="label" Nullable="false" MaxLength="24" />
+          <Property Type="Double" Name="All_time" Nullable="true" />
+          <Property Type="Double" Name="C30_days" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="getPollBySQIDtblAnalytic_Result">
+          <Property Type="Int32" Name="ordr" Nullable="false" />
+          <Property Type="String" Name="label" Nullable="false" MaxLength="9" />
+          <Property Type="Double" Name="All_time" Nullable="true" />
+          <Property Type="Double" Name="C30_days" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="getSurvayByPQIDtblAnalytic_Result">
+          <Property Type="Int32" Name="ordr" Nullable="false" />
+          <Property Type="String" Name="label" Nullable="false" MaxLength="9" />
+          <Property Type="Double" Name="All_time" Nullable="true" />
+          <Property Type="Double" Name="C30_days" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -6794,6 +6838,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="AdCampaigns">
             <EntityTypeMapping TypeName="SMDDevModel.AdCampaign">
               <MappingFragment StoreEntitySet="AdCampaign">
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="IsPaymentCollected" ColumnName="IsPaymentCollected" />
                 <ScalarProperty Name="ShowBuyitBtn" ColumnName="ShowBuyitBtn" />
                 <ScalarProperty Name="SubmissionDateTime" ColumnName="SubmissionDateTime" />
                 <ScalarProperty Name="MaxDailyBudget" ColumnName="MaxDailyBudget" />
@@ -7132,6 +7178,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="Coupons">
             <EntityTypeMapping TypeName="SMDDevModel.Coupon">
               <MappingFragment StoreEntitySet="Coupon">
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="IsPaymentCollected" ColumnName="IsPaymentCollected" />
                 <ScalarProperty Name="CouponImage6" ColumnName="CouponImage6" />
                 <ScalarProperty Name="CouponImage5" ColumnName="CouponImage5" />
                 <ScalarProperty Name="CouponImage4" ColumnName="CouponImage4" />
@@ -8450,6 +8498,36 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="getAdsCampaignByCampaignIdtblAnalytic" FunctionName="SMDDevModel.Store.getAdsCampaignByCampaignIdtblAnalytic">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SMDDevModel.getAdsCampaignByCampaignIdtblAnalytic_Result">
+                <ScalarProperty Name="ordr" ColumnName="ordr" />
+                <ScalarProperty Name="label" ColumnName="label" />
+                <ScalarProperty Name="All_time" ColumnName="All time" />
+                <ScalarProperty Name="C30_days" ColumnName="30 days" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getPollBySQIDtblAnalytic" FunctionName="SMDDevModel.Store.getPollBySQIDtblAnalytic">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SMDDevModel.getPollBySQIDtblAnalytic_Result">
+                <ScalarProperty Name="ordr" ColumnName="ordr" />
+                <ScalarProperty Name="label" ColumnName="label" />
+                <ScalarProperty Name="All_time" ColumnName="All time" />
+                <ScalarProperty Name="C30_days" ColumnName="30 days" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getSurvayByPQIDtblAnalytic" FunctionName="SMDDevModel.Store.getSurvayByPQIDtblAnalytic">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SMDDevModel.getSurvayByPQIDtblAnalytic_Result">
+                <ScalarProperty Name="ordr" ColumnName="ordr" />
+                <ScalarProperty Name="label" ColumnName="label" />
+                <ScalarProperty Name="All_time" ColumnName="All time" />
+                <ScalarProperty Name="C30_days" ColumnName="30 days" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -100,6 +100,11 @@ namespace SMD.Models.DomainModels
 	    public string BuyitBtnLabel { get; set; }
 
         public string YoutubeLink { get; set; }
+
+        public Nullable<bool> IsPaymentCollected { get; set; }
+
+        public Nullable<System.DateTime> PaymentDate { get; set; }
+        
         
 
         public virtual ICollection<CouponCategories> CouponCategories { get; set; }

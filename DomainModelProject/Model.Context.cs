@@ -564,5 +564,32 @@ namespace DomainModelProject
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getSurveyByPQIDRatioAnalytic_Result>("getSurveyByPQIDRatioAnalytic", idParameter, dateRangeParameter);
         }
+    
+        public virtual ObjectResult<getAdsCampaignByCampaignIdtblAnalytic_Result> getAdsCampaignByCampaignIdtblAnalytic(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getAdsCampaignByCampaignIdtblAnalytic_Result>("getAdsCampaignByCampaignIdtblAnalytic", idParameter);
+        }
+    
+        public virtual ObjectResult<getPollBySQIDtblAnalytic_Result> getPollBySQIDtblAnalytic(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getPollBySQIDtblAnalytic_Result>("getPollBySQIDtblAnalytic", idParameter);
+        }
+    
+        public virtual ObjectResult<getSurvayByPQIDtblAnalytic_Result> getSurvayByPQIDtblAnalytic(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getSurvayByPQIDtblAnalytic_Result>("getSurvayByPQIDtblAnalytic", idParameter);
+        }
     }
 }

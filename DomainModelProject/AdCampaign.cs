@@ -126,6 +126,8 @@ namespace DomainModelProject
         public Nullable<double> MaxDailyBudget { get; set; }
         public Nullable<System.DateTime> SubmissionDateTime { get; set; }
         public Nullable<bool> ShowBuyitBtn { get; set; }
+        public Nullable<bool> IsPaymentCollected { get; set; }
+        public Nullable<System.DateTime> PaymentDate { get; set; }
     
         public virtual Language Language { get; set; }
         public virtual ICollection<AdCampaignResponse> AdCampaignResponses { get; set; }
