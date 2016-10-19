@@ -1105,8 +1105,6 @@ define("pQuestion/pQuestion.viewModel",
 
                     selectedQuestion().status(mode);
 
-
-
                     var serverQuestion = selectedQuestion().convertToServerData();
 
 
@@ -1742,8 +1740,7 @@ define("pQuestion/pQuestion.viewModel",
                  $(".close").click();
              },
                  saveProfileQuestion = function (item) {
-
-
+                     debugger;
                      var selectedQuestionstring = $(".active .parent-list-title").text();
                      selectedCriteria().questionString(selectedQuestionstring);
                      selectedCriteria().PQID(item.PQID);
@@ -1767,7 +1764,7 @@ define("pQuestion/pQuestion.viewModel",
                          selectedQuestion().ProfileQuestionTargetCriteria.push(new model.ProfileQuestionTargetCriteria.Create({
                              Type: 1,
                              PqId: selectedCriteria().PQID(),
-                             PqAnswerId: selectedCriteria().PQAnswerID(),
+                             PQAnswerID: selectedCriteria().PQAnswerID(),
                              SqId: selectedCriteria().SQID(),
                              //SQAnswer: selectedCriteria().SQAnswer(),
                              questionString: selectedCriteria().questionString(),
@@ -1783,7 +1780,7 @@ define("pQuestion/pQuestion.viewModel",
                          selectedQuestion().ProfileQuestionTargetCriteria.push(new model.ProfileQuestionTargetCriteria.Create({
                              Type: 1,
                              PqId: selectedCriteria().PQID(),
-                             PqAnswerId: selectedCriteria().PQAnswerID(),
+                             PQAnswerID: selectedCriteria().PQAnswerID(),
                              SqId: selectedCriteria().SQID(),
                              //SQAnswer: selectedCriteria().SQAnswer(),
                              questionString: selectedCriteria().questionString(),

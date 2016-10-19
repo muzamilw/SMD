@@ -515,7 +515,7 @@
                  SqId: SQID(),
                  Type: Type(),
                  PqId: PQID(),
-                 PqAnswerId: PQAnswerID(),
+                 PQAnswerID: PQAnswerID(),
                  LinkedSqId: LinkedSQID(),
                  LinkedSqAnswer: LinkedSQAnswer(),
                  IncludeorExclude: IncludeorExclude() == 1 ? true : false,
