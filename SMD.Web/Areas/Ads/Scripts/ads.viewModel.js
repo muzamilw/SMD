@@ -13,6 +13,7 @@ define("ads/ads.viewModel",
                        // Controlls editor visibility 
                     searchFilterValue = ko.observable(),
                     isEditorVisible = ko.observable(false),
+                    isClickRateVisible = ko.observable(null),
                     buyItQuestionStatus = ko.observable(false),
 					isAdvertdashboardVisible = ko.observable(false),
                     ButItOtherLabel = ko.observable(''),
@@ -208,7 +209,7 @@ define("ads/ads.viewModel",
                         success: function (data) {
 
                             if (data != null) {
-
+                                isClickRateVisible(data.UserAndCostDetails.IsSpecialAccount);
                                 UserAndCostDetail(data.UserAndCostDetails);
                                 advertiserLogo(UserAndCostDetail().UserProfileImage);
                                 buyItPriceLbl(UserAndCostDetail().BuyItClausePrice + "p");
@@ -3321,7 +3322,8 @@ define("ads/ads.viewModel",
 					selectedCampStatusAnalytics : selectedCampStatusAnalytics,
 					selecteddateRangeAnalytics : selecteddateRangeAnalytics,
 					CloseCampaignADAnalyticView:CloseCampaignADAnalyticView,
-					CampaignRatioAnalyticData:CampaignRatioAnalyticData
+					CampaignRatioAnalyticData: CampaignRatioAnalyticData,
+					isClickRateVisible: isClickRateVisible
 					
                 };
             })()
