@@ -105,10 +105,10 @@ else
                                 <div class="pull-left" style="width:450px;">
                                     <div>
                                         <div class="pull-right ads-numbering-main" style="width:99px;
-    border-left: 1px solid rgb(220,220,220);
-    padding-left: 32px;
-    text-align: left;">
-                                            <a data-toggle="modal" data-target=".model_quizQ_ph">
+                                    border-left: 1px solid rgb(220,220,220);
+                                    padding-left: 32px;
+                                    text-align: left;">
+                                            <a data-toggle="modal" data-bind="click:$root.openAdvertiserDashboardScreen">
                                                 <div class="ads-numbering-box" style="background:#9690cf;">
                                                     <img src="~/Content/Images/AD_Campaign_mobileStencil.png" width="20px" />
                                                 </div>
@@ -129,8 +129,16 @@ else
 
                     </div>
                     <div class="col-lg-12">
+                        <div class="col-lg-9">
+                            <div class="clearfix" data-bind="with: $root.campaignModel, visible: $root.isAdvertdashboardVisible()">
+                                <span class="pull-left " style="color:black!important; padding-left: 0px; font-size: 23px;" data-bind="text: CampaignName"></span>
 
-                        <div class=" col-lg-9 form-horizontal" data-bind="with: $root.campaignModel" style="padding-left:0px;">
+                                <div style="float:right;margin-top:-9px;"><img data-bind="click: $root.CloseCampaignADAnalyticView" src="/Content/Images/Close_Button.png" style="width:27px;height:27px;float:right;cursor:pointer;"></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                        </div>
+                        <div class=" col-lg-9 form-horizontal" data-bind="with: $root.campaignModel, visible: !$root.isAdvertdashboardVisible()" style="padding-left:0px;">
                             <div class="main-box main-box-subpage">
 
                                 <div class="col-lg-12" data-bind="visible: $root.previewScreenNumber() == 1">
@@ -138,11 +146,11 @@ else
                                         <div class="col-lg-10 adsubHeading Theme_standard_clr">
 
                                             <div class="adsubHeading Theme_standard_clr" data-bind="visible: $root.previewScreenNumber() == 1,text: $root.tab1Heading">
-                                               
+
                                             </div>
                                         </div>
                                         <div class="col-lg-2">
-                                            <div class="bs-example-tooltips tooltip-float-width tooltip ">
+                                            <div class="bs-example-tooltips tooltip-float-width tooltip">
                                                 <a class="input-group-addon" tabindex="-1" href="#" data-toggle="tooltip" title="" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;    padding: 0px;
     padding-top: 5px;" data-container="body" data-placement="right" data-content="Add a city" data-original-title="Hooray!">
                                                     <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
@@ -176,7 +184,7 @@ else
                                 <div class="col-lg-12">
                                     <div style="height:34px;" class="borderbtmline " data-bind="visible: $root.previewScreenNumber() == 4">
 
-                                       
+
                                         <div class="col-lg-9 adsubHeading Theme_standard_clr">
 
                                             <div class="adsubHeading Theme_standard_clr" data-bind="visible: $root.previewScreenNumber() == 4">
@@ -194,7 +202,7 @@ else
                                             </div>
                                         </div>
                                     </div>
-                                    </div>
+                                </div>
 
 
                                 <div class="col-lg-12">
@@ -217,7 +225,7 @@ else
                                                     <span class="tooltiptext">Tooltip text</span>
                                                 </div>
                                             </div>
-                                            
+
                                         </div>
 
 
@@ -278,7 +286,7 @@ else
     color: red;">
                                         </div>
                                         <div class="col-lg-2">
-                 
+
                                         </div>
                                     </div>
                                     <div class="form-group" style="margin-bottom:25px;" data-bind="if: Type()==1,visible:!$root.isDisplayCouponsAds()">
@@ -339,30 +347,30 @@ else
                                     </div>
                                     <div>
                                         @*<div class="col-lg-11">
-                                            <div class="form-group" style="margin-bottom:20px; margin-top:20px;">
-                                                <div class="col-lg-4 text-campaign-left  Float-Left">
-                                                    <label class="control-label text-right tooltip-float font20 floatNone hideInGames" style="float:left !important;       font-size: 17px; margin-left: 6px; ">Video Landing page Url</label>
-                                                    <label class="control-label text-right tooltip-float font20 floatNone showInGames" style="float:left !important;      font-size: 17px;  margin-left: 6px; ">Win game Landing page Url</label>
-                                                </div>
-                                                <div class="col-lg-2 Float-Left" style="padding-top:3px;">
-                                                    <div class="onoffswitch">
-                                                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchVoucherONOFf" data-bind="checked: $root.buyItQuestionStatus, event: { click: $root.addBuyItPrice}">
-                                                        <label class="onoffswitch-label" for="switchVoucherONOFf">
-                                                            <div class="onoffswitch-inner"></div>
-                                                            <div class="onoffswitch-switch"></div>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-2 text-campaign-left Float-Left" style="margin-left:6px;display:none;">
-                                                    <span class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;color:red; " data-bind="text: '(' +  $root.buyItPriceLbl() + ')'"></span>
-                                                </div>
-                                                <div class="col-lg-3 Float-Left" style="margin-left:40px;">
-                                                    <a href="#" id="idpreviewquizscreen" class="btn btn-primary pull-right" data-toggle="modal" data-target=".model_BuyItQ_ph" style="margin-left:6px;display:none;">
-                                                        Preview
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>*@
+                            <div class="form-group" style="margin-bottom:20px; margin-top:20px;">
+                                <div class="col-lg-4 text-campaign-left  Float-Left">
+                                    <label class="control-label text-right tooltip-float font20 floatNone hideInGames" style="float:left !important;       font-size: 17px; margin-left: 6px; ">Video Landing page Url</label>
+                                    <label class="control-label text-right tooltip-float font20 floatNone showInGames" style="float:left !important;      font-size: 17px;  margin-left: 6px; ">Win game Landing page Url</label>
+                                </div>
+                                <div class="col-lg-2 Float-Left" style="padding-top:3px;">
+                                    <div class="onoffswitch">
+                                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchVoucherONOFf" data-bind="checked: $root.buyItQuestionStatus, event: { click: $root.addBuyItPrice}">
+                                        <label class="onoffswitch-label" for="switchVoucherONOFf">
+                                            <div class="onoffswitch-inner"></div>
+                                            <div class="onoffswitch-switch"></div>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 text-campaign-left Float-Left" style="margin-left:6px;display:none;">
+                                    <span class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;color:red; " data-bind="text: '(' +  $root.buyItPriceLbl() + ')'"></span>
+                                </div>
+                                <div class="col-lg-3 Float-Left" style="margin-left:40px;">
+                                    <a href="#" id="idpreviewquizscreen" class="btn btn-primary pull-right" data-toggle="modal" data-target=".model_BuyItQ_ph" style="margin-left:6px;display:none;">
+                                        Preview
+                                    </a>
+                                </div>
+                            </div>
+                        </div>*@
                                         <div class="col-lg-12">
                                             <div style="height:34px;" class="borderbtmline">
 
@@ -415,6 +423,7 @@ else
                                             </div>
                                         </div>
                                      
+                                        <!-- /ko -->
                                         <div class="form-group" data-bind="visible:$root.showLandingPageUrl() == true">
                                             <div class="col-lg-2">
                                                 <label for="txtBuyItUrl" class="control-label text-right tooltip-float floatNone">Landing page url </label>
@@ -481,7 +490,7 @@ else
                                     </div>
                                 </div>
                                 <div class="col-lg-12" style="margin:auto;float:none !important;    " data-bind="visible: $root.previewScreenNumber() == 2">
-                                 
+
                                     <div class="form-group" style="margin-top:10px; margin-left:-8px;display:none;">
                                         <div class="col-lg-8 text-campaign-left">
                                             <label class="control-label text-right tooltip-float font20 floatNone" style="float:left !important; ">Target Audience Criteria</label>
@@ -577,8 +586,8 @@ else
                                             </div>
                                         </div>
                                     </div>
-                                      
-                                 
+
+
 
                                     <div id="secondCont">
                                         <div class="form-group margin-btm26">
@@ -729,14 +738,14 @@ else
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                     <div id="thirdCont">
-                                     
+
                                         <div class="col-lg-12" style="height:45px;">
                                             <div style="height:34px;" class="borderbtmline ">
                                                 <div class="col-lg-10 adsubHeading Theme_standard_clr">
 
-                                                    <div class="adsubHeading Theme_standard_clr" >
+                                                    <div class="adsubHeading Theme_standard_clr">
                                                         Refine further using results from surveys , polls and quiz questions.
                                                     </div>
                                                 </div>
@@ -755,7 +764,7 @@ else
 
                                         <div class="form-group margin-btm26">
                                             @*<div class="col-lg-2">*@
-                                                @*<label for="txtadditionalCrit" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Advanced matching options</label>*@
+                                            @*<label for="txtadditionalCrit" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Advanced matching options</label>*@
                                             @*</div>*@
                                             <div class="col-lg-12" style="padding: 23px;padding-top: 0px;">
 
@@ -781,7 +790,7 @@ else
                                                 </div>
                                                 <div>
                                                     <div id="MainTble_div">
-                                                
+
                                                         <div class="table-responsive">
                                                             <table class="table table-striped table-hover">
                                                                 <tbody>
@@ -791,7 +800,7 @@ else
 
                                                                     <!-- ko template: { name: 'answersTemplate', foreach:$root.campaignModel().AdCampaignTargetCriterias } -->
                                                                     <!-- /ko -->
-                                                                    
+
                                                                 </tbody>
                                                             </table>
                                                         </div>
@@ -802,7 +811,7 @@ else
                                         </div>
                                     </div>
                                     @*</div>
-                        </div>*@
+                    </div>*@
                                 </div>
                                 <div class="col-lg-12" style="margin:auto;float:none !important;" data-bind="visible: $root.previewScreenNumber() == 3">
                                     <div class="form-group" style="margin-top:10px; margin-left:-8px;display:none;">
@@ -857,8 +866,8 @@ else
                                         </div>
                                         <div class="col-lg-3">
                                             @*<a href="#" id="idpreviewquizscreen" class="btn btn-primary " data-toggle="modal" data-target=".model_quizQ_ph">
-                                    Preview
-                                </a>*@
+                                Preview
+                            </a>*@
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -876,10 +885,10 @@ else
                                             &nbsp;
                                         </div>
                                         <div class="col-lg-2">
-                                           
+
                                         </div>
                                     </div>
-                                
+
                                 </div>
                                 <div class="col-lg-12" style="margin:auto;float:none !important;    " data-bind="visible: $root.previewScreenNumber() == 4">
                                     <span class=" adBottomHeadingtext-campaign-left defaultThemeTxtClr font14" data-bind="visible:!$root.isDisplayCouponsAds(),text:tab4SubHeading" style="    color: rgb(52,152,219) !important;">
@@ -887,7 +896,7 @@ else
                                     </span>
                                     <div class="clearfix">
                                     </div><br />
-                           
+
                                     <div class="radio col-lg-12" style="text-align: left; display:none;">
                                         <input type="radio" name="optionsRadiosDelvTypes" value="1" id="optionsRadiosApplyFilterFree" data-bind="checked: DeliveryDays">
                                         <label for="optionsRadiosApplyFilterFree">
@@ -951,7 +960,7 @@ else
 
                         </div>
 
-
+                        @Html.Partial("~/Areas/Ads/Views/Ads/_advertDashboard.cshtml")
                         <div class="col-lg-3 form-horizontal" style=" height:566px;
     margin-left: 0px !important;">
 
@@ -1175,6 +1184,7 @@ else
                             </div>
                         </div>
                     </div>
+
                     
                 <div class="clearfix">
                 </div>
@@ -1935,6 +1945,7 @@ else
 </div>
 @Html.Partial("~/Areas/Ads/Views/Ads/_addEditCouponCategories.cshtml")
 @Html.Partial("~/Areas/Ads/Views/Ads/_addEditCouponCodes.cshtml")
+
 <!-- ko if: $root.campaignModel() != null -->
 <div class="modal fade my-modal model_quizQ_ph" id="phQuizDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" style=" width:700px;  ">

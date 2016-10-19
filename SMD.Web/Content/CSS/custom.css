@@ -519,3 +519,6 @@ a.reportAnchor a:hover {
 
 /*table tr:nth-child(even) td{
 }*/
+svg{
+  width: 100% !important
+}

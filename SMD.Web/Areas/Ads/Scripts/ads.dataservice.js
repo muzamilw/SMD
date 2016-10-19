@@ -61,6 +61,11 @@ define("ads/ads.dataservice", function () {
                         //contentType: "application/json; charset=utf-8",
                         type: 'Get'
                     });
+					 amplify.request.define('getAdsByCampaignIdAnalytics', 'ajax', {
+                        url: '/Api/AdsCampaignAnalytic',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
                 }
             };
 
@@ -121,6 +126,15 @@ define("ads/ads.dataservice", function () {
                      error: callbacks.error,
                  });
              },
+			 getAdsByCampaignIdAnalytics = function (params, callbacks) {
+                 initialize();
+                 return amplify.request({
+                     resourceId: 'getAdsByCampaignIdAnalytics',
+                     data: params,
+                     success: callbacks.success,
+                     error: callbacks.error,
+                 });
+             },
         generateCouponCodes = function (params, callbacks) {
                  initialize();
                  return amplify.request({
@@ -137,7 +151,8 @@ define("ads/ads.dataservice", function () {
             UpdateCampaignCriteriaOrLocation: UpdateCampaignCriteriaOrLocation,
             getAudienceData: getAudienceData,
             copyCampaignById: copyCampaignById,
-            generateCouponCodes: generateCouponCodes
+            generateCouponCodes: generateCouponCodes,
+			getAdsByCampaignIdAnalytics:getAdsByCampaignIdAnalytics
         };
     })();
     return dataService;

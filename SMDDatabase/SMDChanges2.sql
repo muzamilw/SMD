@@ -2099,3 +2099,23 @@ ADD CouponImage5 nvarchar(MAX)
 
 ALTER TABLE Coupon
 ADD CouponImage6 nvarchar(MAX)
+
+
+
+------------------------------------------ all above scripts executed on live server.
+
+
+
+ALTER TABLE AdCampaign
+ADD IsPaymentCollected bit
+
+ALTER TABLE AdCampaign
+ADD PaymentDate datetime
+
+
+
+ALTER TABLE Coupon
+ADD IsPaymentCollected bit
+
+ALTER TABLE Coupon
+ADD PaymentDate datetime

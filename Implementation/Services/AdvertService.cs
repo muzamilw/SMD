@@ -1311,17 +1311,16 @@ namespace SMD.Implementation.Services
 
         #endregion
 
-        public IEnumerable<getAdsCampaignByCampaignId_Result> getAdsCampaignByCampaignIdForAnalytics(int compaignId, int CampStatus, int dateRange, int Granularity)
+        public IEnumerable<getDisplayAdsCampaignByCampaignIdAnalytics_Result> getAdsCampaignByCampaignIdAnalytics(int compaignId, int CampStatus, int dateRange, int Granularity)
         {
 
-            return this._adCampaignRepository.getAdsCampaignByCampaignIdForAnalytics(compaignId, CampStatus, dateRange, Granularity);
+            return _adCampaignRepository.getAdsCampaignByCampaignIdAnalytics(compaignId, CampStatus, dateRange, Granularity);
         }
-        public IEnumerable<getDisplayAdsCampaignByCampaignIdAnalytics_Result> getDisplayAdsCampaignByCampaignIdAnalytics(int compaignId, int CampStatus, int dateRange, int Granularity)
+
+        public IEnumerable<getAdsCampaignByCampaignIdRatioAnalytic_Result> getAdsCampaignByCampaignIdRatioAnalytic(int ID, int dateRange)
         {
 
-            return _adCampaignRepository.getDisplayAdsCampaignByCampaignIdAnalytics(compaignId, CampStatus, dateRange, Granularity);
+            return _adCampaignRepository.getAdsCampaignByCampaignIdRatioAnalytic(ID, dateRange);
         }
-
-
     }
 }

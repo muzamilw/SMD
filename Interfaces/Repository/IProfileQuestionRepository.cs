@@ -41,5 +41,9 @@ namespace SMD.Interfaces.Repository
         void AddProfileQuestions(ProfileQuestion Obj);
         UserBaseData getBaseData();
         IEnumerable<ProfileQuestion> GetProfileQuestionsForApproval(GetPagedListRequest request, out int rowCount);
+        IEnumerable<getSurvayByPQID_Result> getSurvayByPQIDAnalytics(int PQId, int CampStatus, int dateRange, int Granularity);
+        IEnumerable<getSurveyByPQIDRatioAnalytic_Result> getSurveyByPQIDRatioAnalytic(int ID, int dateRange);
+        
     }
+
 }

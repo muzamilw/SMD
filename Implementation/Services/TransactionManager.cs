@@ -212,17 +212,16 @@ namespace SMD.Implementation.Services
                   //get money from stripe
 
                   // update company  stripe accont debit 
-                  updateStripeAccount(userCompany, Payment, dbContext, TransactionType.ApproveCoupon, false,null,AdId, null);
+                  updateStripeAccount(userCompany, Payment, dbContext, TransactionType.ApproveAd, false,null,AdId, null);
                   // update smd users  stripe accont credit 
-                  updateStripeAccount(smdCompany, Payment, dbContext, TransactionType.ApproveCoupon, true,null,AdId, null);
-
+                  updateStripeAccount(smdCompany, Payment, dbContext, TransactionType.ApproveAd, true, null, AdId, null);
 
 
                   // 1 UsD = 100 Centz into virtual
                   // update users  virutal accont debit 
-                  updateVirtualAccount(userCompany, Payment * 100, dbContext, TransactionType.ApproveCoupon, true,null,AdId, null);
+                  updateVirtualAccount(userCompany, Payment * 100, dbContext, TransactionType.ApproveAd, true, null, AdId, null);
                   // update smd users  virutal accont credit 
-                  updateVirtualAccount(smdCompany, Payment * 100, dbContext, TransactionType.ApproveCoupon, false,null,AdId,null);
+                  updateVirtualAccount(smdCompany, Payment * 100, dbContext, TransactionType.ApproveAd, false, null, AdId, null);
 
 
                   // update smd users  virutal accont credit 

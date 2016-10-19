@@ -162,6 +162,12 @@
     <Compile Include="GetAdminDashBoardInsights_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="getAdsCampaignByCampaignIdRatioAnalytic_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="getAdsCampaignByCampaignIdtblAnalytic_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="getAdsCampaignByCampaignId_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -172,6 +178,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="GetCouponByID_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="getDealByCouponIdRatioAnalytic_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="getDealByCouponID_Result.cs">
@@ -189,6 +198,12 @@
     <Compile Include="getPayoutVSRevenueOverTime_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="getPollBySQIDRatioAnalytic_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="getPollBySQIDtblAnalytic_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="getPollsBySQID_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -201,6 +216,9 @@
     <Compile Include="GetRevenueOverTime_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="getSurvayByPQIDtblAnalytic_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="getSurvayByPQID_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -208,6 +226,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="GetSurvayQestionsAnswered_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="getSurveyByPQIDRatioAnalytic_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="GetTransactions_Result.cs">

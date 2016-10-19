@@ -269,5 +269,15 @@ namespace SMD.Repository.Repositories
         {
             return DbSet.Where(ans => ans.SqId == SurveyQuestionId && ans.Status != 0).ToList();
         }
+        public IEnumerable<getPollsBySQID_Result> getPollsBySQIDAnalytics(int SQId, int CampStatus, int dateRange, int Granularity)
+        {
+           
+            return db.getPollsBySQIDAnalytics(SQId, CampStatus, dateRange, Granularity);
+        }
+        public IEnumerable<getPollBySQIDRatioAnalytic_Result> getPollBySQIDRatioAnalytic(int ID, int dateRange)
+        {
+          
+            return db.getPollBySQIDRatioAnalytic(ID, dateRange);
+        }
     }
 }

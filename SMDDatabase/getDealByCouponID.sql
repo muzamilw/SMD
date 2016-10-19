@@ -1,6 +1,6 @@
 ﻿
 GO
-/****** Object:  StoredProcedure [dbo].[getPollsBySQID]    Script Date: 10/13/2016 2:10:05 PM ******/
+/****** Object:  StoredProcedure [dbo].[getDealByCouponID]    Script Date: 10/14/2016 9:21:21 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -10,7 +10,7 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-Alter PROCEDURE [dbo].[getDealByCouponID] (
+ALTER PROCEDURE [dbo].[getDealByCouponID] (
 @CouponID INT,
 @DateRange INT, -- 1 for last 30 days , 2 for All time
 @Granularity INT		----- 1 for day, 2 for week, 3 for month and 4 for year
@@ -22,7 +22,7 @@ BEGIN
 SET NOCOUNT ON;
 DECLARE @StartDate DATE = '20000101', @NumberOfYears INT = 30, @dateFrom DATE = getdate()-30, @tmp BIGINT =0;
 
-select 'hkkkkkkkkkkkkkkkkkkkkkkkkk' Granual , @tmp openStats, @tmp ConvrsionStats
+--select 'hkkkkkkkkkkkkkkkkkkkkkkkkk' Granual , @tmp openStats, @tmp ConvrsionStats
 -- prevent set or regional settings from interfering with 
 -- interpretation of dates / literals
 
@@ -86,7 +86,7 @@ DECLARE @CutoffDate DATE = DATEADD(YEAR, @NumberOfYears, @StartDate);
 	)
 IF @DateRange = 2
 	BEGIN
-	 Select top 1 @dateFrom= ViewDateTime from UserCouponView where CouponId = @CouponID
+	 Select top 1 @dateFrom= ViewDateTime-4 from UserCouponView where CouponId = @CouponID
 	END
 
 	IF @Granularity = 1
@@ -146,5 +146,4 @@ END
 
 
 --EXEC [getDealByCouponID] 10078, 2, 1
-
 

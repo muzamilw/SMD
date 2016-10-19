@@ -75,6 +75,7 @@ namespace SMD.Implementation.Services
             Company company = companyRepository.GetCompanyWithoutChilds(companyId);
             User loginUser = _manageUserRepository.GetLoginUser(userId);
             var defaultBranch = _companyBranchRepository.GetDefaultCompanyBranch(companyId);
+            var currencyCode = _countryRepository.GetCurrencyCode(company.BillingCountryId ?? 0);
 
             return new CompanyResponseModel
             {
@@ -115,7 +116,8 @@ namespace SMD.Implementation.Services
                 PassportNumber = loginUser.PassportNo,
                 UserId = loginUser.Id,
                 BillingCountryName = _countryRepository.GetCountryNameById(defaultBranch != null ? defaultBranch.CountryId??0 : 0),
-                BranchId = defaultBranch != null ? defaultBranch.BranchId : 0
+                BranchId = defaultBranch != null ? defaultBranch.BranchId : 0,
+                CurrencyID = currencyCode
             };
         }
 

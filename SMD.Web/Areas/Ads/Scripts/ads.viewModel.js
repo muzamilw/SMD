@@ -150,6 +150,56 @@ define("ads/ads.viewModel",
 
                 CurrPage = ko.observable(9);
                 MaxPage = ko.observable(12);
+				// Advertiser dashBoard Section
+				selectedCampStatusAnalytics = ko.observable(1),
+				selecteddateRangeAnalytics = ko.observable(1),
+				selectedGranularityAnalytics = ko.observable(1) ,
+				selectedCampaignIdAnalytics = ko.observable() ,
+				AdsCampaignAnalyticsData = ko.observableArray([]), 
+				CampaignRatioAnalyticData = ko.observable(1), 
+				granularityDropDown = ko.observableArray([{ id: 1, name: "Daily" }, { id: 2, name: "Weekly" }, { id: 3, name: "Monthly" }, { id: 4, name: "Quarterly" }, { id: 5, name: "Yearly" }]),
+				DateRangeDropDown  = ko.observableArray([{ id: 1, name: "One month" }, { id: 2, name: "All Time" }]),
+				CampaignStatusDropDown  = ko.observableArray([{ id: 1, name: "Answered" }, { id: 2, name: "Referred" }, { id: 3, name: "Skipped" }]),
+				
+				openAdvertiserDashboardScreen = function (Campaign) {
+					//getDisplayAdsCampaignByCampaignIdAnalytics
+				//	var s = isAdvertdashboardVisible(); ;
+			
+					selectedCampaignIdAnalytics(Campaign.CampaignID());
+					getAdsByCampaignIdAnalytics();
+					$("#ddGranularityDropDown").removeAttr("disabled");
+					$("#ddDateRangeDropDown").removeAttr("disabled");
+					$("#ddCampaignStatusDropDown").removeAttr("disabled");
+					
+					//isEditCampaign(false);
+					//previewScreenNumber(5);
+					isAdvertdashboardVisible(true);
+				},
+				getAdsByCampaignIdAnalytics = function () {
+					dataservice.getAdsByCampaignIdAnalytics({
+						compaignId:selectedCampaignIdAnalytics(),
+						CampStatus : selectedCampStatusAnalytics(),
+						dateRange :selecteddateRangeAnalytics(),
+						Granularity : selectedGranularityAnalytics(),
+					},{
+						success: function (data) {
+							
+							AdsCampaignAnalyticsData.removeAll();
+							ko.utils.arrayPushAll(AdsCampaignAnalyticsData(), data.lineCharts);
+							AdsCampaignAnalyticsData.valueHasMutated();
+							CampaignRatioAnalyticData(data.pieCharts);
+						},
+						error: function (response) {
+
+                        }
+					});
+					
+				},
+				CloseCampaignADAnalyticView = function () {
+					isAdvertdashboardVisible(false);
+				},
+				
+				// End Advertiser dashBoard Section
                 getCampaignBaseContent = function () {
                     dataservice.getBaseData({
                         RequestId: 1,
@@ -1812,14 +1862,14 @@ define("ads/ads.viewModel",
                                     } else {
                                         isLocationPerClickPriceAdded(true);
                                     }
-
+									if (UserAndCostDetail() != null) {
                                     if (UserAndCostDetail().GenderClausePrice != null) {
                                         pricePerclick(pricePerclick() + UserAndCostDetail().GenderClausePrice);
                                     }
                                     if (UserAndCostDetail().AgeClausePrice != null) {
                                         pricePerclick(pricePerclick() + UserAndCostDetail().AgeClausePrice);
                                     }
-
+									}
                                     _.each(campaignModel().AdCampaignTargetCriterias(), function (item) {
 
                                         if (item.Type() == 1) { // profile
@@ -1874,8 +1924,9 @@ define("ads/ads.viewModel",
                                     }
                                     if (campaignModel().BuuyItLine1() != null || campaignModel().BuyItLine2() != null || campaignModel().BuyItLine3() != null || campaignModel().BuyItButtonLabel() != null) {
                                         buyItQuestionStatus(true);
-
+									if (UserAndCostDetail() != null) {
                                         pricePerclick(pricePerclick() + UserAndCostDetail().BuyItClausePrice);
+									}
                                         isBuyItPerClickPriceAdded(true);
 
 
@@ -3043,6 +3094,7 @@ define("ads/ads.viewModel",
                     });
                     Status[0].selectedIndex = 0;
                 },
+				
                 // Initialize the view model
                 initialize = function (specifiedView) {
                     if (mode == 4) {
@@ -3074,6 +3126,7 @@ define("ads/ads.viewModel",
                     getAdCampaignGridContent();
                     getCampaignBaseContent();
                     isEditorVisible(false);
+					//isAdvertdashboardVisible(false);
                 };
                 return {
                     initialize: initialize,
@@ -3084,7 +3137,7 @@ define("ads/ads.viewModel",
                     addNewCampaign: addNewCampaign,
                     langs: langs,
                     campaignModel: campaignModel,
-
+					openAdvertiserDashboardScreen :openAdvertiserDashboardScreen,
                     closeNewCampaignDialog: closeNewCampaignDialog,
                     selectedCriteria: selectedCriteria,
                     profileQuestionList: profileQuestionList,
@@ -3252,12 +3305,24 @@ define("ads/ads.viewModel",
                     IsprofileQuestion: IsprofileQuestion,
                     Modelheading: Modelheading,
                     GetAudienceCount: GetAudienceCount,
+					isAdvertdashboardVisible:isAdvertdashboardVisible,
+					AdsCampaignAnalyticsData:AdsCampaignAnalyticsData,
+					granularityDropDown:granularityDropDown,
+					selectedGranularityAnalytics :selectedGranularityAnalytics,
+					getAdsByCampaignIdAnalytics:getAdsByCampaignIdAnalytics,
+					DateRangeDropDown:DateRangeDropDown,
                     isAdvertdashboardVisible: isAdvertdashboardVisible,
                     handleBuyIt: handleBuyIt,
                     BuyItStatus: BuyItStatus,
                     showLandingPageUrl:showLandingPageUrl,
                     buyItQuestionStatus: buyItQuestionStatus,
-                    ButItOtherLabel: ButItOtherLabel
+                    ButItOtherLabel: ButItOtherLabel,
+					CampaignStatusDropDown:CampaignStatusDropDown,
+					selectedCampStatusAnalytics : selectedCampStatusAnalytics,
+					selecteddateRangeAnalytics : selecteddateRangeAnalytics,
+					CloseCampaignADAnalyticView:CloseCampaignADAnalyticView,
+					CampaignRatioAnalyticData:CampaignRatioAnalyticData
+					
                 };
             })()
         };

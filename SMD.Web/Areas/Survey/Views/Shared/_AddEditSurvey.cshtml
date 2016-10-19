@@ -120,11 +120,10 @@
 
                                     <div class="pull-left" style="width:623px;">
                                         <div>
-                                            <div class="pull-right ads-numbering-main" style="width:99px;
-    border-left: 1px solid rgb(220,220,220);
+                                            <div class="pull-right ads-numbering-main" style="width:99px;  border-left: 1px solid rgb(220,220,220);
     padding-left: 32px;
     text-align: left;">
-                                                <a data-toggle="modal" data-target=".model_quizQ_ph">
+                                                <a data-toggle="modal" data-bind="click:$root.openAdvertiserDashboardPollScreen">
                                                     <div class="ads-numbering-box" style="background:#9690cf;">
                                                         <img src="/Content/Images/AD_Campaign_mobileStencil.png" width="20px">
                                                     </div>
@@ -146,8 +145,16 @@
                             </div>
                         </div>
                         <div class="col-lg-12">
+                            <div class="col-lg-9">
+                                <div class="clearfix" data-bind="visible: $root.isAdvertdashboardPollVisible()">
+                                    <span class="pull-left " style="color:black!important; padding-left: 0px; font-size: 23px;" data-bind="text: Question"></span>
 
-                            <div class="no-header clearfix col-lg-9 form-horizontal" style="padding-left:0px;">
+                                    <div style="float:right;margin-top:-9px;"><img data-bind="click: $root.ClosePollAnalyticView" src="/Content/Images/Close_Button.png" style="width:27px;height:27px;float:right;cursor:pointer;"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                            </div>
+                            <div class="no-header clearfix col-lg-9 form-horizontal" data-bind="visible: !$root.isAdvertdashboardPollVisible()" style="padding-left:0px;">
 
 
                                 <div class="main-box header" style=" background-color:white;">
@@ -250,7 +257,7 @@
                                                         <div style="width:210px">
                                                             @*<div data-bind="visible:LeftPictureBytes()==null,attr: { backgroundImage:  LeftPicturePath() }" class="surveyLeftImagePc">
 
-                                                                </div>*@
+                                        </div>*@
                                                             <img style="width:150px;height:300px;" data-bind="attr: { src:  LeftPicturePath }" id="leftImgPath" />
                                                             @*<img style="width:150px;height:300px;" data-bind="visible:LeftPictureBytes()!=null,attr: { src: LeftPictureBytes }" />*@
 
@@ -261,10 +268,10 @@
                                                     <div class="col-lg-12" style="margin-top:15px;width:240px;padding-right:0px;">
                                                         <div class="col-lg-2" style="padding-right:10px;">
                                                             @*<div class="bs-example-tooltips tooltip-float-width">
-                                                                    <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="left" data-html="true" data-content="" data-original-title="" title="">
-                                                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                                    </a>
-                                                                </div>*@
+                                            <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="left" data-html="true" data-content="" data-original-title="" title="">
+                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                            </a>
+                                        </div>*@
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <div class="fileUpload btn btn-primary" onclick="changeIframeSrc(1)" data-toggle="modal" data-target="#damModel">
@@ -290,7 +297,7 @@
                                                         <div style="width:210px;">
                                                             @*<div data-bind="visible:RightPictureBytes()==null" class="surveyLeftImagePc">
 
-                                                                </div>*@
+                                        </div>*@
                                                             <img id="rightImgPath" style="width:150px;height:300px;" data-bind="attr: { src:  RightPicturePath }," />
                                                             @*<img style="width:150px;height:300px;" data-bind="visible:RightPictureBytes()!=null,attr: { src: RightPictureBytes }" />*@
                                                         </div>
@@ -300,10 +307,10 @@
                                                     <div class="col-lg-12" style="margin-top:15px;width:240px;padding-right:0px;">
                                                         <div class="col-lg-2" style="padding-right:10px;">
                                                             @*<div class="bs-example-tooltips tooltip-float-width">
-                                                                    <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="left" data-html="true" data-content="" data-original-title="" title="">
-                                                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                                    </a>
-                                                                </div>*@
+                                            <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="left" data-html="true" data-content="" data-original-title="" title="">
+                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                            </a>
+                                        </div>*@
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <div class="fileUpload btn btn-primary" onclick="changeIframeSrc(2)" data-toggle="modal" data-target="#damModel">
@@ -541,10 +548,10 @@
                                             <div class="form-group" style="display:none;">
                                                 <div class="col-lg-2">
                                                     @*<div class="bs-example-tooltips tooltip-float-width">
-                                                            <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
-                                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                            </a>
-                                                        </div>*@
+                                    <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
+                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                    </a>
+                                </div>*@
                                                     <label for="txtLanguages" class="control-label text-right tooltip-float floatNone">Professions</label>
                                                 </div>
                                                 <div class="col-lg-6">
@@ -583,10 +590,10 @@
                                             <div class="form-group" style="display:none;">
                                                 <div class="col-lg-3">
                                                     @*<div class="bs-example-tooltips tooltip-float-width">
-                                                            <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
-                                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                            </a>
-                                                        </div>*@
+                                    <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
+                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                    </a>
+                                </div>*@
                                                     <label for="txtLanguages" class="control-label text-right tooltip-float floatNone">Education</label>
                                                 </div>
                                                 <div class="col-lg-6">
@@ -622,31 +629,31 @@
                                                 </div>
                                             </div>
                                             @*<div class="form-group">
-                                                    <div class="col-lg-3">
-                                                        <label for="txtBudget" class="control-label text-right tooltip-float floatNone">Schedule</label>
-                                                    </div>
-                                                    <div class="col-sm-6 padding13" style="background-color: gainsboro">
-                                                        <div class="form-group " style="margin-top: 15px;">
-                                                            <div class="col-sm-4">
-                                                                <label for="validFromDate" class="control-label text-right tooltip-float floatNone">Start Date</label>
-                                                            </div>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" class="form-control" id="validFromDate" data-bind="datetimepicker:StartDate,validationTooltip: StartDate, validationOnElement: StartDate">
-                                                            </div>
+                            <div class="col-lg-3">
+                                <label for="txtBudget" class="control-label text-right tooltip-float floatNone">Schedule</label>
+                            </div>
+                            <div class="col-sm-6 padding13" style="background-color: gainsboro">
+                                <div class="form-group " style="margin-top: 15px;">
+                                    <div class="col-sm-4">
+                                        <label for="validFromDate" class="control-label text-right tooltip-float floatNone">Start Date</label>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" id="validFromDate" data-bind="datetimepicker:StartDate,validationTooltip: StartDate, validationOnElement: StartDate">
+                                    </div>
 
-                                                        </div>
-                                                        <div class="form-group ">
-                                                            <div class="col-sm-4">
-                                                                <label for="validUptoDate" class="control-label text-right tooltip-float floatNone">End Date</label>
-                                                            </div>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" class="form-control" id="validUptoDate" data-bind="datetimepicker:EndDate,validationTooltip: EndDate, validationOnElement: EndDate">
-                                                            </div>
-                                                        </div>
+                                </div>
+                                <div class="form-group ">
+                                    <div class="col-sm-4">
+                                        <label for="validUptoDate" class="control-label text-right tooltip-float floatNone">End Date</label>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" id="validUptoDate" data-bind="datetimepicker:EndDate,validationTooltip: EndDate, validationOnElement: EndDate">
+                                    </div>
+                                </div>
 
-                                                    </div>
+                            </div>
 
-                                                </div>*@
+                        </div>*@
                                             <div class="col-lg-12" style="height:45px;padding:0px;">
                                                 <div style="height:34px;" class="borderbtmline ">
                                                     <div class="col-lg-10 adsubHeading Theme_standard_clr">
@@ -897,103 +904,103 @@
                                                 </div>
                                                 @*<div  id="reachTableContainer" style="position:absolute;top:10px;">
 
-                                                        <div class="aud_cnt">
-                                                            <h4 class="ad_h4">Audience Definition</h4>
+                                <div class="aud_cnt">
+                                    <h4 class="ad_h4">Audience Definition</h4>
 
-                                                            <div class="clearfix _1gab VAGUE">
-                                                                <div class="_1g9- lfloat">
-                                                                    <div class="_1g9_">
-                                                                        <i class="_1ga0 broad_aud img sp_NQc91B1T0mb sx_f05cb6 meterPin"></i>
-                                                                        <i class="_1ga1 img sp_NQc91B1T0mb3 sx_0eeab0"></i>
-                                                                        <div class="_1ga2 clearfix">
-                                                                            <div class="_ohe lfloat">
-                                                                                <span class="_1ga3">Specific</span>
-                                                                            </div>
-                                                                            <div class="_ohf rfloat">
-                                                                                <span class="_1ga3">Broad</span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="rfloat fsm _1ga4">
-                                                                    <p data-bind="visible: $root.audienceReachMode()  == 1">Your audience is too specific for your ads to be shown. Try making it broader.</p>
-                                                                    <p data-bind="visible: $root.audienceReachMode()  == 3">Your audience selection is fairly broad.</p>
-                                                                    <p data-bind="visible: $root.audienceReachMode()  == 2">Your audience is defined.</p>
+                                    <div class="clearfix _1gab VAGUE">
+                                        <div class="_1g9- lfloat">
+                                            <div class="_1g9_">
+                                                <i class="_1ga0 broad_aud img sp_NQc91B1T0mb sx_f05cb6 meterPin"></i>
+                                                <i class="_1ga1 img sp_NQc91B1T0mb3 sx_0eeab0"></i>
+                                                <div class="_1ga2 clearfix">
+                                                    <div class="_ohe lfloat">
+                                                        <span class="_1ga3">Specific</span>
+                                                    </div>
+                                                    <div class="_ohf rfloat">
+                                                        <span class="_1ga3">Broad</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="rfloat fsm _1ga4">
+                                            <p data-bind="visible: $root.audienceReachMode()  == 1">Your audience is too specific for your ads to be shown. Try making it broader.</p>
+                                            <p data-bind="visible: $root.audienceReachMode()  == 3">Your audience selection is fairly broad.</p>
+                                            <p data-bind="visible: $root.audienceReachMode()  == 2">Your audience is defined.</p>
 
-                                                                </div>
-                                                                <div class="clearfix">
-                                                                    &nbsp;
-                                                                </div>
-                                                            </div>
-                                                            <div>
-                                                                <span class="ad_h4_noborder">Audience Details:</span>
-                                                                <ul>
-                                                                    <li class="li-audul" data-bind="visible: $root.selectedQuestion().SurveyQuestionTargetLocation().length > 0" style="display: none;">
-                                                                        <div class="fsm_bold">Locations:</div>
+                                        </div>
+                                        <div class="clearfix">
+                                            &nbsp;
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <span class="ad_h4_noborder">Audience Details:</span>
+                                        <ul>
+                                            <li class="li-audul" data-bind="visible: $root.selectedQuestion().SurveyQuestionTargetLocation().length > 0" style="display: none;">
+                                                <div class="fsm_bold">Locations:</div>
 
-                                                                        <ul class="pad-11">
-                                                                            <!-- ko template: { name: 'targetLocationAudienceTemplate' , foreach: SurveyQuestionTargetLocation } --><!-- /ko -->
-                                                                        </ul>
-                                                                    </li>
-                                                                    <li class="li-audul" data-bind="visible: $root.visibleTargetAudience(4)  == 1" style="display: none;">
-                                                                        <div class="fsm_bold">Industries:</div>
-                                                                        <ul class="pad-11">
-                                                                            <!-- ko template: { name: 'targetIndustryAudienceTemplate' , foreach: SurveyQuestionTargetCriteria } --><!-- /ko -->
+                                                <ul class="pad-11">
+                                                    <!-- ko template: { name: 'targetLocationAudienceTemplate' , foreach: SurveyQuestionTargetLocation } --><!-- /ko -->
+                                                </ul>
+                                            </li>
+                                            <li class="li-audul" data-bind="visible: $root.visibleTargetAudience(4)  == 1" style="display: none;">
+                                                <div class="fsm_bold">Industries:</div>
+                                                <ul class="pad-11">
+                                                    <!-- ko template: { name: 'targetIndustryAudienceTemplate' , foreach: SurveyQuestionTargetCriteria } --><!-- /ko -->
 
-                                                                        </ul>
-                                                                    </li>
-                                                                    <li class="li-audul" data-bind="visible: $root.visibleTargetAudience(3)  == 1" style="display: none;">
-                                                                        <div class="fsm_bold">Languages:</div>
-                                                                        <ul class="pad-11">
-                                                                            <!-- ko template: { name: 'targetLanguageAudienceTemplate' , foreach: SurveyQuestionTargetCriteria } --><!-- /ko -->
+                                                </ul>
+                                            </li>
+                                            <li class="li-audul" data-bind="visible: $root.visibleTargetAudience(3)  == 1" style="display: none;">
+                                                <div class="fsm_bold">Languages:</div>
+                                                <ul class="pad-11">
+                                                    <!-- ko template: { name: 'targetLanguageAudienceTemplate' , foreach: SurveyQuestionTargetCriteria } --><!-- /ko -->
 
-                                                                        </ul>
-                                                                    </li>
-                                                                    <li class="li-audul" data-bind="visible: $root.visibleTargetAudience(5)  == 1" style="display: none;">
-                                                                        <div class="fsm_bold">Education:</div>
-                                                                        <ul class="pad-11">
-                                                                            <!-- ko template: { name: 'targetIndustryEducationTemplate' , foreach: SurveyQuestionTargetCriteria } --><!-- /ko -->
+                                                </ul>
+                                            </li>
+                                            <li class="li-audul" data-bind="visible: $root.visibleTargetAudience(5)  == 1" style="display: none;">
+                                                <div class="fsm_bold">Education:</div>
+                                                <ul class="pad-11">
+                                                    <!-- ko template: { name: 'targetIndustryEducationTemplate' , foreach: SurveyQuestionTargetCriteria } --><!-- /ko -->
 
-                                                                        </ul>
-                                                                    </li>
-                                                                    <li class="li-audul" data-bind="visible: $root.visibleTargetAudience(1) == 1 || $root.visibleTargetAudience(2)  == 1" style="display: none;">
-                                                                        <div class="fsm_bold">ADDITIONAL TARGETING CRITERIA'S:</div>
+                                                </ul>
+                                            </li>
+                                            <li class="li-audul" data-bind="visible: $root.visibleTargetAudience(1) == 1 || $root.visibleTargetAudience(2)  == 1" style="display: none;">
+                                                <div class="fsm_bold">ADDITIONAL TARGETING CRITERIA'S:</div>
 
-                                                                        <ul class="pad-11">
-                                                                            <!-- ko template: { name: 'targetCriteriasAudienceTemplate', foreach: SurveyQuestionTargetCriteria } --><!-- /ko -->
-                                                                        </ul>
-                                                                    </li>
+                                                <ul class="pad-11">
+                                                    <!-- ko template: { name: 'targetCriteriasAudienceTemplate', foreach: SurveyQuestionTargetCriteria } --><!-- /ko -->
+                                                </ul>
+                                            </li>
 
-                                                                    <li class="li-audul">
-                                                                        <div class="fsm_bold">Age:</div>
-                                                                        <ul class="pad-11">
-                                                                            <li>
-                                                                                <span data-bind="text: $root.selectedQuestion().AgeRangeStart() +' - '+ $root.selectedQuestion().AgeRangeEnd()">13 - 13</span>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </li>
-                                                                    <li class="li-audul">
-                                                                        <div class="fsm_bold">Gender:</div>
-                                                                        <ul class="pad-11">
-                                                                            <li>
-                                                                                <!--ko if:$root.selectedQuestion().Gender() == 1 -->
-                                                                                <span class="aud_licontent">All</span><!--/ko-->
-                                                                                <!--ko if:$root.selectedQuestion().Gender() == 2 -->
-                                                                                <span class="aud_licontent">Men</span>
-                                                                                <!--/ko-->
-                                                                                <!--ko if:$root.selectedQuestion().Gender() == 3 -->
-                                                                                <span class="aud_licontent">Women</span><!--/ko-->
+                                            <li class="li-audul">
+                                                <div class="fsm_bold">Age:</div>
+                                                <ul class="pad-11">
+                                                    <li>
+                                                        <span data-bind="text: $root.selectedQuestion().AgeRangeStart() +' - '+ $root.selectedQuestion().AgeRangeEnd()">13 - 13</span>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li class="li-audul">
+                                                <div class="fsm_bold">Gender:</div>
+                                                <ul class="pad-11">
+                                                    <li>
+                                                        <!--ko if:$root.selectedQuestion().Gender() == 1 -->
+                                                        <span class="aud_licontent">All</span><!--/ko-->
+                                                        <!--ko if:$root.selectedQuestion().Gender() == 2 -->
+                                                        <span class="aud_licontent">Men</span>
+                                                        <!--/ko-->
+                                                        <!--ko if:$root.selectedQuestion().Gender() == 3 -->
+                                                        <span class="aud_licontent">Women</span><!--/ko-->
 
-                                                                            </li>
-                                                                        </ul>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                            <div>Survey Cost : <span data-bind="text: $root.userBaseData().CurrencySymbol"></span><span data-bind="text: $root.setupPrice()"></span></div>
-                                                            <div>Potential Reach: <span data-bind="text:$root.reachedAudience()">0</span> people</div>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div>Survey Cost : <span data-bind="text: $root.userBaseData().CurrencySymbol"></span><span data-bind="text: $root.setupPrice()"></span></div>
+                                    <div>Potential Reach: <span data-bind="text:$root.reachedAudience()">0</span> people</div>
 
-                                                        </div>
-                                                    </div>*@
+                                </div>
+                            </div>*@
 
                                             </div>
 
@@ -1015,7 +1022,8 @@
                                 </div>
 
                             </div>
-                            <div class="col-lg-3 form-horizontal">
+                            @Html.Partial("~/Areas/Survey/Views/Shared/_advertSurveyAnalytic.cshtml")
+                             <div class="col-lg-3 form-horizontal">
 
                                 <div class="row Subpanels" style="line-height: 2;padding:3px;">
 
@@ -1085,7 +1093,7 @@
                                                         <button class="btn  btn-danger " id="btnArchive" data-bind="visible: $root.isShowArchiveBtn" style="width:229px; margin-bottom: 10px; display: none;">Archive Campaign</button>
                                                         <button class="btn  btn-info Theme_standard_clr" id="btnCopyCampaign" style="display:none;width:229px;">Create Copy - New Campaign</button>
                                                         <button class="btn  btn-success" id="btnPauseCampaign" data-bind="click:$root.SavePassChanges" style="display:none;width:229px;">Pause</button>
-                                                        <button class="btn  btn-success" id="btnResumeCampagin" style="display:none;width:229px;">Resume</button>
+                                                        <button class="btn  btn-success" id="btnResumeCampagin" data-bind="click:$root.submitResumeData" style="display:none;width:229px;">Resume</button>
                                                     </div>
 
                                                 </div>

@@ -547,7 +547,16 @@ namespace SMD.Implementation.Services
         {
             return surveyQuestionRepository.Find(sqid);
         }
+        public IEnumerable<getPollsBySQID_Result> getPollsBySQIDAnalytics(int SQId, int CampStatus, int dateRange, int Granularity)
+        {
 
+            return this.surveyQuestionRepository.getPollsBySQIDAnalytics(SQId, CampStatus, dateRange, Granularity);
+        }
+        public IEnumerable<getPollBySQIDRatioAnalytic_Result> getPollBySQIDRatioAnalytic(int ID, int dateRange)
+        {
+
+            return surveyQuestionRepository.getPollBySQIDRatioAnalytic(ID, dateRange);
+        }
         #endregion
     }
 

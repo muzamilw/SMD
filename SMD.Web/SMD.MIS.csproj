@@ -384,13 +384,16 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SecurityConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Api\Controllers\CouponAnalyticsController.cs" />
     <Compile Include="Areas\Api\Controllers\ApprovePayOutHistoryController.cs" />
     <Compile Include="Areas\Api\Controllers\GetApprovalCountController.cs" />
-    <Compile Include="Areas\Api\Controllers\DisplayAdsCampaignAnalyticController.cs" />
+    <Compile Include="Areas\Api\Controllers\AdsCampaignAnalyticController.cs" />
     <Compile Include="Areas\Api\Controllers\GetCouponPriceOptionController.cs" />
     <Compile Include="Areas\Api\Controllers\GetPayOutHistoryController.cs" />
     <Compile Include="Areas\Api\Controllers\PayoutRevenueController.cs" />
+    <Compile Include="Areas\Api\Controllers\profileQuestionAnalyticController.cs" />
     <Compile Include="Areas\Api\Controllers\SuperNovaCampaignController.cs" />
+    <Compile Include="Areas\Api\Controllers\SurvayQuestionAnalyticController.cs" />
     <Compile Include="Areas\Api\Controllers\UserFeedbackController.cs" />
     <Compile Include="Areas\Api\Controllers\UserController.cs" />
     <Compile Include="Areas\Api\Controllers\ApproveProfileQuestionAnsController.cs" />
@@ -415,8 +418,8 @@
     <Compile Include="Areas\Api\Controllers\ReferralComponiesController.cs" />
     <Compile Include="Areas\Api\Controllers\RevenueController.cs" />
     <Compile Include="Areas\Api\Controllers\UserCashoutController.cs" />
-    <Compile Include="Areas\Api\Controllers\VideoAdsCampaignAnalyticController.cs" />
     <Compile Include="Areas\Api\Models\AddCouponsResponseModelForApproval.cs" />
+    <Compile Include="Areas\Api\Models\AdsCampaignByCampaignIdForAnalyticsResponse.cs" />
     <Compile Include="Areas\Api\Models\ApproveProfileQuestion.cs" />
     <Compile Include="Areas\Api\Models\BranchCategory.cs" />
     <Compile Include="Areas\Api\Models\BranchCategoryResponseModel.cs" />
@@ -424,11 +427,13 @@
     <Compile Include="Areas\Api\Models\CompanyBranch.cs" />
     <Compile Include="Areas\Api\Models\CouponsApproval.cs" />
     <Compile Include="Areas\Api\Models\CurrencyApprov.cs" />
+    <Compile Include="Areas\Api\Models\DealByCouponIdForAnalyticsResponse.cs" />
     <Compile Include="Areas\Api\Models\GetApprovalCount_Result.cs" />
     <Compile Include="Areas\Api\Models\PayOutHistory.cs" />
     <Compile Include="Areas\Api\Models\PayOutResponseModelForApproval.cs" />
     <Compile Include="Areas\Api\Models\Phrase.cs" />
     <Compile Include="Areas\Api\Models\PhraseResponseModel.cs" />
+    <Compile Include="Areas\Api\Models\PQByPQIDForAnalyticsResponse.cs" />
     <Compile Include="Areas\Api\Models\PQResponseModelForApproval.cs" />
     <Compile Include="Areas\Api\Models\Product.cs" />
     <Compile Include="Areas\Api\Models\ProfileQuestionGroupApp.cs" />
@@ -436,6 +441,7 @@
     <Compile Include="Areas\Api\Models\ProfileQuestionTargetLocation.cs" />
     <Compile Include="Areas\Api\Models\Section.cs" />
     <Compile Include="Areas\Api\Models\CompanyApiModel.cs" />
+    <Compile Include="Areas\Api\Models\SurvayBySQIDForAnalyticsResponse.cs" />
     <Compile Include="Areas\Coupons\CouponsAreaRegistration.cs" />
     <Compile Include="Areas\Coupons\Controllers\CouponsController.cs" />
     <Compile Include="Areas\Ads\AdsAreaRegistration.cs" />
@@ -740,6 +746,9 @@
     <Content Include="Areas\Franchise\Views\ApprovePayPal\PayPalDashboard.cshtml" />
     <Content Include="Areas\Franchise\Scripts\payPallApp.view.js" />
     <Content Include="Areas\Franchise\Views\ApprovePayPal\_payPallEditorForApp.cshtml" />
+    <Content Include="Areas\Coupons\Views\Coupons\_advertDashboardDeal.cshtml" />
+    <Content Include="Areas\Survey\Views\Shared\_advertSurveyAnalytic.cshtml" />
+    <Content Include="Areas\ProfileQuestion\Views\Manage\_advertProfileQuestionAnalytic.cshtml" />
     <None Include="config\Web.connectionstrings.config">
       <SubType>Designer</SubType>
     </None>

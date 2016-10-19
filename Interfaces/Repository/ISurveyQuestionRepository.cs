@@ -48,5 +48,8 @@ namespace SMD.Interfaces.Repository
         GetAudience_Result GetAudienceCount(GetAudienceCountRequest request);
         UserBaseData getBaseData();
         IEnumerable<SurveyQuestion> GetSurveyQuestionAnswer(long SurveyQuestionId);
+        IEnumerable<getPollsBySQID_Result> getPollsBySQIDAnalytics(int SQId, int CampStatus, int dateRange, int Granularity);
+        IEnumerable<getPollBySQIDRatioAnalytic_Result> getPollBySQIDRatioAnalytic(int ID, int dateRange);
+        
     }
 }

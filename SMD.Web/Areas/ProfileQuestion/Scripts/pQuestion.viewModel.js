@@ -100,6 +100,53 @@ define("pQuestion/pQuestion.viewModel",
                     // Random number
                     randomIdForNewObjects = -1,
                     price = ko.observable(0),
+					// Advertiser Analytics 
+					isAdvertdashboardSurvayVisible = ko.observable(false),
+					selectedCampStatusAnalytics = ko.observable(1),
+					selecteddateRangeAnalytics = ko.observable(1),
+					selectedGranularityAnalytics = ko.observable(1) ,
+				    selectedPQIDAnalytics = ko.observable() ,
+					PQAnalyticsData = ko.observableArray([]), 
+					granularityDropDown = ko.observableArray([{ id: 1, name: "Daily" }, { id: 2, name: "Weekly" }, { id: 3, name: "Monthly" }, { id: 4, name: "Quarterly" }, { id: 5, name: "Yearly" }]),
+					DateRangeDropDown  = ko.observableArray([{ id: 1, name: "One month" }, { id: 2, name: "All Time" }]),
+					CampaignStatusDropDown  = ko.observableArray([{ id: 1, name: "Answered" }, { id: 2, name: "Skipped" }]),
+				    CampaignRatioAnalyticData = ko.observable(1), 
+					openAdvertiserDashboardSurvayScreen = function () {
+					getSurvayAnalytics();
+					$("#ddGranularityDropDown").removeAttr("disabled");
+					$("#ddDateRangeDropDown").removeAttr("disabled");
+					$("#ddCampaignStatusDropDown").removeAttr("disabled");
+					isAdvertdashboardSurvayVisible(true);
+				},
+					
+				getSurvayAnalytics = function () {
+					dataservice.getSurvayAnalytics({
+						PQId: selectedPQIDAnalytics(),
+						CampStatus : selectedCampStatusAnalytics(),
+						dateRange :selecteddateRangeAnalytics(),
+						Granularity : selectedGranularityAnalytics(),
+					},{
+						success: function (data) {
+							
+							PQAnalyticsData.removeAll();
+							ko.utils.arrayPushAll(PQAnalyticsData(), data.lineCharts);
+							PQAnalyticsData.valueHasMutated();
+							CampaignRatioAnalyticData(data.pieCharts);
+						},
+						error: function (response) {
+
+                        }
+					});
+					
+				},					
+					
+					CloseSurvayAnalyticView = function () {
+					isAdvertdashboardSurvayVisible(false);
+				},
+					
+					//End Advertiser Analytics 
+					
+					
                     //Get Questions
                     getQuestions = function (defaultCountryId, defaultLanguageId) {
                         dataservice.searchProfileQuestions(
@@ -655,9 +702,10 @@ define("pQuestion/pQuestion.viewModel",
                 //},
                 // On editing of existing PQ
                 onEditProfileQuestion = function (item) {
+					selectedPQIDAnalytics(item.qId());
                     IsPauseBtnVisible(false);
                     canSubmitForApproval(false);
-
+				
                     $("#panelArea,#topArea,#Heading_div").css("display", "none");
 
                     AgeRangeStart(13);
@@ -699,7 +747,8 @@ define("pQuestion/pQuestion.viewModel",
 
                     } else if (selectedQuestion().status() == 4) {
                         $("input,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
-                        //$("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
+                       // $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
+                        $("#btnResumeCampagin").css("display", "inline-block");
                         //    $("#saveBtn").css("display", "none");
                         //$("#btnResumeCampagin").css("display", "none");
                         $("#btnCancel,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
@@ -1781,7 +1830,9 @@ define("pQuestion/pQuestion.viewModel",
                     },
 
                     CloseContent = function () {
-                        isEditorVisible(false); enableControls();
+                        isEditorVisible(false); 
+						isAdvertdashboardSurvayVisible(false);
+						enableControls();
                         $("#panelArea,#topArea,#headlabel,#Heading_div").css("display", "block");
                         filterProfileQuestion();
 
@@ -2223,7 +2274,20 @@ define("pQuestion/pQuestion.viewModel",
                     getQuestionByFilter: getQuestionByFilter,
                     Modelheading: Modelheading,
                     IsShowPriceDiv: IsShowPriceDiv,
-                    DefaultRangeValue: DefaultRangeValue
+                    DefaultRangeValue: DefaultRangeValue,
+					isAdvertdashboardSurvayVisible : isAdvertdashboardSurvayVisible,
+					selectedCampStatusAnalytics: selectedCampStatusAnalytics,
+					selecteddateRangeAnalytics : selecteddateRangeAnalytics,
+					selectedGranularityAnalytics : selectedGranularityAnalytics ,
+				    selectedPQIDAnalytics : selectedPQIDAnalytics ,
+					PQAnalyticsData : PQAnalyticsData, 
+					granularityDropDown : granularityDropDown,
+					DateRangeDropDown : DateRangeDropDown,
+					CampaignStatusDropDown : CampaignStatusDropDown,
+				    openAdvertiserDashboardSurvayScreen:openAdvertiserDashboardSurvayScreen,
+					getSurvayAnalytics:getSurvayAnalytics,
+					CloseSurvayAnalyticView:CloseSurvayAnalyticView,
+					CampaignRatioAnalyticData:CampaignRatioAnalyticData
                 };
             })()
         };

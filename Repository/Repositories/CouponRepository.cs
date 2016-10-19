@@ -205,8 +205,15 @@ namespace SMD.Repository.Repositories
                     .Take(toRow);
 
         }
-    
-       
+        public IEnumerable<getDealByCouponID_Result> getDealByCouponIDAnalytics(int CouponID, int dateRange, int Granularity)
+        {
+            return db.getDealByCouponIDAnalytics(CouponID, dateRange, Granularity);
+        }
+        public IEnumerable<getDealByCouponIdRatioAnalytic_Result> getDealByCouponIdRatioAnalytic(int ID, int dateRange)
+        {
+            
+            return db.getDealByCouponIdRatioAnalytic(ID, dateRange);
+        }
         #endregion
     }
 }
