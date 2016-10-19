@@ -26,7 +26,6 @@ namespace SMD.MIS.Controllers
     public class AccountController : Controller
     {
         #region Private
-
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private IClaimsSecurityService claimsSecurityService;
