@@ -439,7 +439,7 @@
     var // ReSharper disable InconsistentNaming
       AdCampaignTargetCriteriasModel = function (CriteriaID, CampaignID, Type, PQID, PQAnswerID, SQID, SQAnswer, IncludeorExclude, questionString,
        answerString, surveyQuestLeftImageSrc, surveyQuestRightImageSrc, LanguageID, Language, IndustryID, Industry, EducationID, Education, QuizCampaignId, QuizAnswerId
-       , criteriaPrice) {
+       , criteriaPrice, surveyQuestThirdImageSrc) {
 
           var
               //type and userID will be set on server sside
@@ -455,6 +455,7 @@
                answerString = ko.observable(answerString),
                surveyQuestLeftImageSrc = ko.observable(surveyQuestLeftImageSrc),
                surveyQuestRightImageSrc = ko.observable(surveyQuestRightImageSrc),
+               surveyQuestThirdImageSrc = ko.observable(surveyQuestThirdImageSrc)
                LanguageID = ko.observable(LanguageID),
                Language = ko.observable(Language),
                IndustryID = ko.observable(IndustryID),
@@ -499,6 +500,7 @@
               answerString: answerString,
               surveyQuestLeftImageSrc: surveyQuestLeftImageSrc,
               surveyQuestRightImageSrc: surveyQuestRightImageSrc,
+              surveyQuestThirdImageSrc:surveyQuestThirdImageSrc,
               LanguageID: LanguageID,
               Language: Language,
               IndustryID: IndustryID,
@@ -647,7 +649,7 @@
         
         return new AdCampaignTargetCriteriasModel(source.CriteriaId, source.CampaignId, source.Type, source.PQId, source.PQAnswerId, source.SQId, source.SQAnswer,
             source.IncludeorExclude, source.questionString, source.answerString, source.surveyQuestLeftImageSrc, source.surveyQuestRightImageSrc, source.LanguageId,
-            source.Language, source.IndustryId, source.Industry, source.EducationId, source.Education, source.QuizCampaignId, source.QuizAnswerId, source.criteriaPrice);
+            source.Language, source.IndustryId, source.Industry, source.EducationId, source.Education, source.QuizCampaignId, source.QuizAnswerId, source.criteriaPrice,source.surveyQuestThirdImageSrc);
     };
     AdCampaignTargetLocation.Create = function (source) {
        

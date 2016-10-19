@@ -1180,6 +1180,7 @@ define("pQuestion/pQuestion.viewModel",
                     });
                 }),
                 onEditCriteria = function (item) {
+                    debugger;
                     isNewCriteria(false);
                     var val = item.PQAnswerID() + 0;
                     if (item.Type() == "1") {
@@ -1190,7 +1191,7 @@ define("pQuestion/pQuestion.viewModel",
                             QuestionId: item.PQQuestionID(),
                         }, {
                             success: function (data) {
-                                debugger;
+                               
                                 if (data != null) {
                                     _.each(data.ProfileQuestionAnswers, function (question) {
                                         question.PQID = question.PqId;
@@ -1270,7 +1271,6 @@ define("pQuestion/pQuestion.viewModel",
                                         selectedCriteria().profileQuestLeftImageSrc(matchSurveyQuestion.Answer1);
                                         selectedCriteria().profileQuestRightImageSrc(matchSurveyQuestion.Answer2);
                                     }
-
                                 },
                                 error: function (response) {
 
@@ -1885,7 +1885,7 @@ define("pQuestion/pQuestion.viewModel",
             ,
 
                         showAdditionQuizCriteria = function () {
-
+                            
                             Modelheading('Your Quiz Questions');
                             //   selectedCriteria(null);
                             //   isNewCriteria(true);
@@ -1935,6 +1935,7 @@ define("pQuestion/pQuestion.viewModel",
                                             myQuizQuestions.valueHasMutated();
                                             TemporaryQuizQuestions.clear;
                                             TemporaryQuizQuestions(myQuizQuestions());
+                                            debugger;
                                         }
 
                                     },

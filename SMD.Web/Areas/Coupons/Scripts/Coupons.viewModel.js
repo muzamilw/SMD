@@ -738,7 +738,7 @@ define("Coupons/Coupons.viewModel",
                     },
                 //Create Price option
                      onCreatePriceOption = function () {
-                         if (couponModel().CouponPriceOptions().length <= 20) {
+                         if (couponModel().CouponPriceOptions().length <= 5) {
                              var priceOption = couponModel().CouponPriceOptions()[0];
                              //Create Price option for the very First Time
                              if (priceOption == undefined) {
