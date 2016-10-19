@@ -83,7 +83,7 @@
     <None Include="getAdsCampaignByCampaignIdtblAnalytic.sql" />
     <None Include="getPollBySQIDtblAnalytic.sql" />
     <None Include="GetAudience.sql" />
-    <None Include="getVideoCampaignROItblAnalytic.sql" />
+    <None Include="getCampaignROItblAnalytic.sql" />
     <None Include="GetProducts.sql" />
     <None Include="GetUserProfileCompletness.sql" />
     <None Include="GetAdminDashBoardInsights.sql" />

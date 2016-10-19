@@ -1,5 +1,5 @@
-﻿
-GO
+﻿GO
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -9,8 +9,8 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-create PROCEDURE [dbo].[getVideoCampaignROItblAnalytic] (
-@Id INT  
+Create PROCEDURE [dbo].[getCampaignROItblAnalytic] (
+@Id INT  -- CampaignId
 )
 AS
 BEGIN
@@ -52,4 +52,4 @@ DECLARE @dateFrom DATE = getdate()-30, @openAds int = 1;
 END
  
  
---EXEC [getVideoCampaignROItblAnalytic] 20303
+--EXEC [getCampaignROItblAnalytic] 20303
