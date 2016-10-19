@@ -104,6 +104,9 @@ namespace SMD.MIS.Areas.Api.Models
         public string Locationss { get; set; }
         public Nullable<double> MaxDailyBudget { get; set; }
         public Nullable<System.DateTime> SubmissionDateTime { get; set; }
+        public Nullable<bool> IsPaymentCollected { get; set; }
+
+        public Nullable<System.DateTime> PaymentDate { get; set; }
 
 
     }
@@ -186,6 +189,9 @@ namespace SMD.MIS.Areas.Api.Models
 
         public virtual IEnumerable<SMD.MIS.Areas.Api.Models.CouponCategories> CouponCategories { get; set; }
         public string YoutubeLink { get; set; }
+        public Nullable<bool> IsPaymentCollected { get; set; }
+
+        public Nullable<System.DateTime> PaymentDate { get; set; }
         
         public virtual IEnumerable<CouponPriceOption> CouponPriceOptions { get; set; }
     }
