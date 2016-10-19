@@ -171,6 +171,7 @@ define("Coupons/Coupons.viewModel",
 				},
 				CloseCouponsAnalyticView = function () {
 					isAdvertdashboardDealVisible(false);
+					CampaignRatioAnalyticData(1);
 				},
 				
 				//
@@ -2052,7 +2053,7 @@ define("Coupons/Coupons.viewModel",
                     couponModel();
                     selectedCriteria();
                     isEditorVisible(false);
-					isAdvertdashboardDealVisible(false);
+					CloseCouponsAnalyticView();
                     if (isFromEdit() == true) {
                         isListVisible(true);
                         isWelcomeScreenVisible(false);

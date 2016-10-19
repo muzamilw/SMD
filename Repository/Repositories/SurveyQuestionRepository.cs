@@ -279,5 +279,9 @@ namespace SMD.Repository.Repositories
           
             return db.getPollBySQIDRatioAnalytic(ID, dateRange);
         }
+        public IEnumerable<getPollBySQIDtblAnalytic_Result> getPollBySQIDtblAnalytic(int ID)
+        {
+            return db.getPollBySQIDtblAnalytic(ID);
+        }
     }
 }

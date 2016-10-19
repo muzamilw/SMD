@@ -160,19 +160,16 @@ define("ads/ads.viewModel",
 				granularityDropDown = ko.observableArray([{ id: 1, name: "Daily" }, { id: 2, name: "Weekly" }, { id: 3, name: "Monthly" }, { id: 4, name: "Quarterly" }, { id: 5, name: "Yearly" }]),
 				DateRangeDropDown  = ko.observableArray([{ id: 1, name: "One month" }, { id: 2, name: "All Time" }]),
 				CampaignStatusDropDown  = ko.observableArray([{ id: 1, name: "Answered" }, { id: 2, name: "Referred" }, { id: 3, name: "Skipped" }]),
-				
+				CampaignTblAnalyticsData = ko.observableArray([]),
 				openAdvertiserDashboardScreen = function (Campaign) {
-					//getDisplayAdsCampaignByCampaignIdAnalytics
-				//	var s = isAdvertdashboardVisible(); ;
-			
+					
 					selectedCampaignIdAnalytics(Campaign.CampaignID());
 					getAdsByCampaignIdAnalytics();
 					$("#ddGranularityDropDown").removeAttr("disabled");
 					$("#ddDateRangeDropDown").removeAttr("disabled");
 					$("#ddCampaignStatusDropDown").removeAttr("disabled");
 					
-					//isEditCampaign(false);
-					//previewScreenNumber(5);
+					
 					isAdvertdashboardVisible(true);
 				},
 				getAdsByCampaignIdAnalytics = function () {
@@ -183,11 +180,16 @@ define("ads/ads.viewModel",
 						Granularity : selectedGranularityAnalytics(),
 					},{
 						success: function (data) {
+							if (data != null) {
+								AdsCampaignAnalyticsData.removeAll();
+								ko.utils.arrayPushAll(AdsCampaignAnalyticsData(), data.lineCharts);
+								AdsCampaignAnalyticsData.valueHasMutated();
+								CampaignRatioAnalyticData(data.pieCharts);
+								CampaignTblAnalyticsData.removeAll();
+								ko.utils.arrayPushAll(CampaignTblAnalyticsData(), data.tbl);
+								CampaignTblAnalyticsData.valueHasMutated();
+							}
 							
-							AdsCampaignAnalyticsData.removeAll();
-							ko.utils.arrayPushAll(AdsCampaignAnalyticsData(), data.lineCharts);
-							AdsCampaignAnalyticsData.valueHasMutated();
-							CampaignRatioAnalyticData(data.pieCharts);
 						},
 						error: function (response) {
 
@@ -197,6 +199,7 @@ define("ads/ads.viewModel",
 				},
 				CloseCampaignADAnalyticView = function () {
 					isAdvertdashboardVisible(false);
+					CampaignRatioAnalyticData(1);
 				},
 				
 				// End Advertiser dashBoard Section
@@ -561,6 +564,7 @@ define("ads/ads.viewModel",
                     campaignModel();
                     selectedCriteria();
                     isEditorVisible(false);
+					CloseCampaignADAnalyticView();
                     if (isFromEdit() == true) {
                         isListVisible(true);
                         isWelcomeScreenVisible(false);
@@ -680,7 +684,7 @@ define("ads/ads.viewModel",
                   // campaignModel().LogoImageBytes("/images/default-placeholder.png");
 
                   campaignModel().IsShowVoucherSetting(false);
-                  if (UserAndCostDetail() != null || UserAndCostDetail() != undefined) {
+                  if (UserAndCostDetail() != null && UserAndCostDetail() != undefined) {
                       alreadyAddedDeliveryValue(10);
                       quizQuestionStatus(true);
                       isQuizQPerClickPriceAdded(true);
@@ -1934,7 +1938,9 @@ define("ads/ads.viewModel",
 
                                     if ((campaignModel().VerifyQuestion() != null && campaignModel().VerifyQuestion() != '') || (campaignModel().Answer1() != null && campaignModel().Answer1() != '') || (campaignModel().Answer2() != null && campaignModel().Answer2() != '')) {
                                         quizQuestionStatus(true);
+										if (UserAndCostDetail() != null) {
                                         pricePerclick(pricePerclick() + UserAndCostDetail().QuizQuestionClausePrice);
+										}
                                         isQuizQPerClickPriceAdded(true);
                                     } else {
                                         quizQuestionStatus(false);
@@ -2007,7 +2013,7 @@ define("ads/ads.viewModel",
                                         pricePerclick(pricePerclick() + UserAndCostDetail().TenDayDeliveryClausePrice);
                                     }
 
-                                    if ((campaignModel().IsShowVoucherSetting() != null && campaignModel().IsShowVoucherSetting() != true)) {
+                                    if ((campaignModel().IsShowVoucherSetting() != null && campaignModel().IsShowVoucherSetting() != true && UserAndCostDetail()!= null)) {
                                         pricePerclick(pricePerclick() + UserAndCostDetail().VoucherClausePrice);
                                         isVoucherPerClickPriceAdded(true);
                                     }
@@ -3126,7 +3132,7 @@ define("ads/ads.viewModel",
                     getAdCampaignGridContent();
                     getCampaignBaseContent();
                     isEditorVisible(false);
-					//isAdvertdashboardVisible(false);
+					
                 };
                 return {
                     initialize: initialize,
@@ -3305,7 +3311,6 @@ define("ads/ads.viewModel",
                     IsprofileQuestion: IsprofileQuestion,
                     Modelheading: Modelheading,
                     GetAudienceCount: GetAudienceCount,
-					isAdvertdashboardVisible:isAdvertdashboardVisible,
 					AdsCampaignAnalyticsData:AdsCampaignAnalyticsData,
 					granularityDropDown:granularityDropDown,
 					selectedGranularityAnalytics :selectedGranularityAnalytics,
@@ -3321,7 +3326,8 @@ define("ads/ads.viewModel",
 					selectedCampStatusAnalytics : selectedCampStatusAnalytics,
 					selecteddateRangeAnalytics : selecteddateRangeAnalytics,
 					CloseCampaignADAnalyticView:CloseCampaignADAnalyticView,
-					CampaignRatioAnalyticData:CampaignRatioAnalyticData
+					CampaignRatioAnalyticData:CampaignRatioAnalyticData,
+					CampaignTblAnalyticsData:CampaignTblAnalyticsData
 					
                 };
             })()

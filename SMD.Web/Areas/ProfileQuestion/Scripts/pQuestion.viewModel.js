@@ -107,6 +107,7 @@ define("pQuestion/pQuestion.viewModel",
 					selectedGranularityAnalytics = ko.observable(1) ,
 				    selectedPQIDAnalytics = ko.observable() ,
 					PQAnalyticsData = ko.observableArray([]), 
+					CampaignTblAnalyticsData = ko.observableArray([]), 
 					granularityDropDown = ko.observableArray([{ id: 1, name: "Daily" }, { id: 2, name: "Weekly" }, { id: 3, name: "Monthly" }, { id: 4, name: "Quarterly" }, { id: 5, name: "Yearly" }]),
 					DateRangeDropDown  = ko.observableArray([{ id: 1, name: "One month" }, { id: 2, name: "All Time" }]),
 					CampaignStatusDropDown  = ko.observableArray([{ id: 1, name: "Answered" }, { id: 2, name: "Skipped" }]),
@@ -127,11 +128,15 @@ define("pQuestion/pQuestion.viewModel",
 						Granularity : selectedGranularityAnalytics(),
 					},{
 						success: function (data) {
-							
+							if (data != null) {
 							PQAnalyticsData.removeAll();
 							ko.utils.arrayPushAll(PQAnalyticsData(), data.lineCharts);
 							PQAnalyticsData.valueHasMutated();
 							CampaignRatioAnalyticData(data.pieCharts);
+							CampaignTblAnalyticsData.removeAll();
+							ko.utils.arrayPushAll(CampaignTblAnalyticsData(), data.tbl);
+							CampaignTblAnalyticsData.valueHasMutated();
+							}
 						},
 						error: function (response) {
 
@@ -142,6 +147,7 @@ define("pQuestion/pQuestion.viewModel",
 					
 					CloseSurvayAnalyticView = function () {
 					isAdvertdashboardSurvayVisible(false);
+					CampaignRatioAnalyticData(1);
 				},
 					
 					//End Advertiser Analytics 
@@ -1831,7 +1837,7 @@ define("pQuestion/pQuestion.viewModel",
 
                     CloseContent = function () {
                         isEditorVisible(false); 
-						isAdvertdashboardSurvayVisible(false);
+						CloseSurvayAnalyticView();
 						enableControls();
                         $("#panelArea,#topArea,#headlabel,#Heading_div").css("display", "block");
                         filterProfileQuestion();
@@ -2287,7 +2293,8 @@ define("pQuestion/pQuestion.viewModel",
 				    openAdvertiserDashboardSurvayScreen:openAdvertiserDashboardSurvayScreen,
 					getSurvayAnalytics:getSurvayAnalytics,
 					CloseSurvayAnalyticView:CloseSurvayAnalyticView,
-					CampaignRatioAnalyticData:CampaignRatioAnalyticData
+					CampaignRatioAnalyticData:CampaignRatioAnalyticData,
+					CampaignTblAnalyticsData:CampaignTblAnalyticsData
                 };
             })()
         };

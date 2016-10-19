@@ -259,7 +259,10 @@ namespace SMD.Repository.Repositories
         {
             return db.getSurveyByPQIDRatioAnalytic(ID, dateRange);
         }
-
+        public IEnumerable<getSurvayByPQIDtblAnalytic_Result> getSurvayByPQIDtblAnalytic(int ID)
+        {
+            return db.getSurvayByPQIDtblAnalytic(ID);
+        }
         #endregion
     }
 }

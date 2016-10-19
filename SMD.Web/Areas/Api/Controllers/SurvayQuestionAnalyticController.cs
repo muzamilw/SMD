@@ -27,6 +27,8 @@ namespace SMD.MIS.Areas.Api.Controllers
             SurvayBySQIDForAnalyticsResponse data = new SurvayBySQIDForAnalyticsResponse();
             data.lineCharts = _ISurveyQuestionService.getPollsBySQIDAnalytics(SQId, CampStatus, dateRange, Granularity);
             data.pieCharts = _ISurveyQuestionService.getPollBySQIDRatioAnalytic(SQId, dateRange);
+            data.tbl = _ISurveyQuestionService.getPollBySQIDtblAnalytic(SQId);
+        
             return data;
 
             

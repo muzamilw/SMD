@@ -331,5 +331,9 @@ namespace SMD.Repository.Repositories
             
             return db.getAdsCampaignByCampaignIdRatioAnalytic(ID, dateRange);
         }
+        public IEnumerable<getAdsCampaignByCampaignIdtblAnalytic_Result> getAdsCampaignByCampaignIdtblAnalytic(int ID)
+        {
+            return db.getAdsCampaignByCampaignIdtblAnalytic(ID);
+        }
     }
 }
