@@ -888,7 +888,11 @@ namespace SMD.Implementation.Services
 
             return couponRepository.getDealByCouponIdRatioAnalytic(ID, dateRange);
         }
+        public DateTime getExpiryDate(int CouponId)
+        {
 
+            return couponRepository.getExpiryDate(CouponId);
+        }
         #endregion
     }
 }
