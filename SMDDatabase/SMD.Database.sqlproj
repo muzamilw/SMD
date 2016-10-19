@@ -82,6 +82,7 @@
     <None Include="getSurvayByPQIDtblAnalytic.sql" />
     <None Include="getAdsCampaignByCampaignIdtblAnalytic.sql" />
     <None Include="getPollBySQIDtblAnalytic.sql" />
+    <None Include="getVideoCampaignROItblAnalytic.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="getCampaignsByStatus.sql" />
