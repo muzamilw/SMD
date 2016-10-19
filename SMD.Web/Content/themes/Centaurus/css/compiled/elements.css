@@ -116,8 +116,8 @@ h1 small, h2 small, h3 small, h1 .small, h2 .small, h3 .small {
 
 
 .btn-default, .wizard-cancel, .wizard-back {
-    background-color: #81d3dc;
-    border-color: #7f8c8d;
+    background-color: #1d3d52;
+    border-color: #1d3d52;
     color: #fff;
 }
 
@@ -133,7 +133,7 @@ h1 small, h2 small, h3 small, h1 .small, h2 .small, h3 .small {
 
     .btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default {
         background-color: #34b9c7;
-        border-color: #5c6667;
+        border-color: #34b9c7;
     }
 
 .btn-info {
@@ -418,8 +418,8 @@ a.list-group-item.active, a.list-group-item.active:hover, a.list-group-item.acti
 }
 
 .nav .caret {
-    border-bottom-color: #3498db;
-    border-top-color: #3498db;
+    border-bottom-color:#fff;
+    border-top-color: #fff;
 }
 
 .main-box .tabs-header {
@@ -582,7 +582,8 @@ a.list-group-item.active, a.list-group-item.active:hover, a.list-group-item.acti
 
 .table a.table-link {
     margin: 0px;
-    font-size: 1.125em;
+    /*font-size: 1.125em;*/
+    font-size: 1.5em;
 }
 
     .table a.table-link:hover {
@@ -1848,7 +1849,7 @@ input[type="radio"] {
 }
 
 #login-logo {
-    background: none repeat scroll 0 0 #262626;
+    background: none repeat scroll 0 0 #0f68a1;
     color: #fff;
     display: block;
     font-size: 2em;
@@ -4079,7 +4080,7 @@ input[type="radio"] {
 }
 
 .theme-blue-gradient #header-navbar, #config-tool #skin-colors li a.skin-changer.blue-gradient {
-    background: #262626    !important;
+    background: #0f68a1!important;
     background: -moz-linear-gradient(top,#3498db 0%,#2980b9 100%);
     background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#3498db),color-stop(100%,#2980b9));
     background: -webkit-linear-gradient(top,#3498db 0%,#2980b9 100%);
@@ -5606,7 +5607,10 @@ background-image: url(/Images/crowdcentz_logo.png) !important;
     font-size:18px!important;
 }
 
-
+.home_pagefontsize {
+    font-size:1.2em!important;
+    color:#fff!important;
+}
 
 
 .validation-summary-errors {
