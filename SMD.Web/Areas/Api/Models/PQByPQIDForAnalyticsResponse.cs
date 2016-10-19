@@ -12,5 +12,6 @@ namespace SMD.MIS.Areas.Api.Models
         
         public IEnumerable<getSurvayByPQID_Result> lineCharts { get; set; }
         public IEnumerable<getSurveyByPQIDRatioAnalytic_Result> pieCharts { get; set; }
+        public IEnumerable<getSurvayByPQIDtblAnalytic_Result> tbl { get; set; }
     }
 }

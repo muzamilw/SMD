@@ -6,7 +6,7 @@
             LocationLine1, LocationLine2, LocationLON, LocationPhone, LocationState, LocationTitle, LocationZipCode, LogoUrl, ModifiedBy, ModifiedDateTime, Price, RejectedBy,
             Rejecteddatetime, RejectedReason, Savings, SearchKeywords, Status, SwapCost, UserId, CouponTitle, CouponExpirydate, CouponQtyPerUser, CouponId, couponImage1, CouponImage2, CouponImage3,
             CurrencyId, couponListingMode, CouponActiveMonth, CouponActiveYear, CouponRedeemedCount, CouponViewCount, CouponIssuedCount, SubmissionDateTime, LocationCountryId, CouponStartDate, CouponEndDate, Priority,
-            ShowBuyitBtn, BuyitLandingPageUrl, BuyitBtnLabel, YoutubeLink, CouponImage4, CouponImage5, CouponImage6
+            ShowBuyitBtn, BuyitLandingPageUrl, BuyitBtnLabel, YoutubeLink, CouponImage4, CouponImage5, CouponImage6,IsPaymentCollected,PaymentDate
           ) {
           var
               //type and userID will be set on server sside
@@ -19,6 +19,8 @@
               CouponImage4 = ko.observable(CouponImage4),
               CouponImage5 = ko.observable(CouponImage5),
               CouponImage6 = ko.observable(CouponImage6),
+              IsPaymentCollected = ko.observable(IsPaymentCollected),
+              PaymentDate = ko.observable(PaymentDate),
               CouponCategories = ko.observableArray([]),
               CouponActiveMonth = ko.observable(CouponActiveMonth),
               CouponActiveMonthName = ko.computed(function () {
@@ -108,7 +110,9 @@
              dirtyFlag = new ko.dirtyFlag({
                  YoutubeLink:YoutubeLink,
                  ApprovalDateTime : ApprovalDateTime,
-                 Approved : Approved,
+                 Approved: Approved,
+                 IsPaymentCollected:IsPaymentCollected,
+                 PaymentDate :PaymentDate,
                  ApprovedBy : ApprovedBy,
                  Archived : Archived,
                  CompanyId : CompanyId,
@@ -230,6 +234,8 @@
                       CouponImage4: bannerImage4 == "" ? CouponImage4() : bannerImage4,
                       CouponImage5: bannerImage5 == "" ? CouponImage5() : bannerImage5,
                       CouponImage6: bannerImage6 == "" ? CouponImage6() : bannerImage6,
+                      IsPaymentCollected: IsPaymentCollected(),
+                      PaymentDate: PaymentDate(),
 
                       CouponIssuedCount: CouponIssuedCount(),
                       CouponListingMode: CouponListingMode(),
@@ -296,6 +302,8 @@
               };
           return {
               ApprovalDateTime: (ApprovalDateTime),
+              IsPaymentCollected:(IsPaymentCollected),
+              PaymentDate:(PaymentDate),
               Approved: (Approved),
               ApprovedBy: (ApprovedBy),
               Archived: (Archived),
@@ -390,7 +398,7 @@
             source.LocationTitle, source.LocationZipCode, source.LogoUrl, source.ModifiedBy, source.ModifiedDateTime, source.Price, source.RejectedBy,
             source.Rejecteddatetime, source.RejectedReason, source.Savings, source.SearchKeywords, source.Status, source.SwapCost, source.UserId,source.CouponTitle,source.CouponExpirydate,
             source.CouponQtyPerUser, source.CouponId, source.couponImage1, source.CouponImage2, source.CouponImage3, source.CurrencyId, source.CouponListingMode, source.CouponActiveMonth, source.CouponActiveYear, source.CouponRedeemedCount, source.CouponViewCount, source.CouponIssuedCount, source.SubmissionDateTime, source.LocationCountryId, source.CouponStartDate, source.CouponEndDate, source.Priority
-            , source.ShowBuyitBtn, source.BuyitLandingPageUrl, source.BuyitBtnLabel, source.YoutubeLink, source.CouponImage4, source.CouponImage5, source.CouponImage6
+            , source.ShowBuyitBtn, source.BuyitLandingPageUrl, source.BuyitBtnLabel, source.YoutubeLink, source.CouponImage4, source.CouponImage5, source.CouponImage6, source.IsPaymentCollected,source.PaymentDate
             );
 
         _.each(source.CouponCategories, function (item) {

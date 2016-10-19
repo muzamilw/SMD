@@ -30,12 +30,30 @@
             </div>
 
         </div>
-        <div class="row main-box">
-            <div class="col-lg-2">
-            </div>
-            <div class="col-lg-10">
-                <div class="margin-Top-30" data-bind="morris: {type: 'Donut', data: $root.CampaignRatioAnalyticData, resize:true }" style="width:400px;height:400px;"></div>
+        <div class="row main-box margin-Top-30">
 
+            <div class="col-lg-7">
+                <div data-bind="morris: {type: 'Donut', data: $root.CampaignRatioAnalyticData, resize:true }" style="width:400px;height:350px;"></div>
+
+            </div>
+            <div class="col-lg-5">
+                <table style="margin-top:70px;">
+                    <thead>
+                        <tr>
+                            <th>
+                                &nbsp;
+                            </th>
+                            <th class="padingL15 text-right">
+                                All time
+                            </th>
+                            <th class="padingL15 text-right">
+                                30 days
+                            </th>
+                        </tr>
+                    </thead>
+                    <!-- ko template: { name: 'CampaignTblAnalyticsDataTemplate' , foreach: $root.CampaignTblAnalyticsData } -->
+                    <!-- /ko -->
+                </table>
             </div>
 
         </div>
@@ -47,4 +65,22 @@
 
 </div>
 
+<script id="CampaignTblAnalyticsDataTemplate" type="text/html">
+    <tr>
+        <td><span data-bind="text: label"></span></td>
+        
+        <td class="padingL15 text-right">
+            <!-- ko if: ordr === 4  -->
+            $
+            <!-- /ko -->
+            <span data-bind="text: All_time"></span>
+        </td>
+        <td class="padingL15 text-right">
+            <!-- ko if: ordr === 4  -->
+            $
+            <!-- /ko -->
+            <span data-bind="text: C30_days"></span>
+        </td>
+    </tr>
+</script>
 

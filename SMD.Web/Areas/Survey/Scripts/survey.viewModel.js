@@ -89,6 +89,7 @@ define("survey/survey.viewModel",
 					selectedGranularityAnalytics = ko.observable(1) ,
 				    selectedSQIDAnalytics = ko.observable() ,
 					SQAnalyticsData = ko.observableArray([]), 
+					CampaignTblAnalyticsData = ko.observableArray([]), 
 					granularityDropDown = ko.observableArray([{ id: 1, name: "Daily" }, { id: 2, name: "Weekly" }, { id: 3, name: "Monthly" }, { id: 4, name: "Quarterly" }, { id: 5, name: "Yearly" }]),
 					DateRangeDropDown  = ko.observableArray([{ id: 1, name: "One month" }, { id: 2, name: "All Time" }]),
 					CampaignStatusDropDown  = ko.observableArray([{ id: 1, name: "Answered" }, { id: 2, name: "Skipped" }]),
@@ -108,11 +109,15 @@ define("survey/survey.viewModel",
 						Granularity : selectedGranularityAnalytics(),
 					},{
 						success: function (data) {
-							
-							SQAnalyticsData.removeAll();
-							ko.utils.arrayPushAll(SQAnalyticsData(), data.lineCharts);
-							SQAnalyticsData.valueHasMutated();
-							CampaignRatioAnalyticData(data.pieCharts);
+							if (data != null) {
+								SQAnalyticsData.removeAll();
+								ko.utils.arrayPushAll(SQAnalyticsData(), data.lineCharts);
+								SQAnalyticsData.valueHasMutated();
+								CampaignRatioAnalyticData(data.pieCharts);
+								CampaignTblAnalyticsData.removeAll();
+								ko.utils.arrayPushAll(CampaignTblAnalyticsData(), data.tbl);
+								CampaignTblAnalyticsData.valueHasMutated();
+							}
 						},
 						error: function (response) {
 
@@ -123,6 +128,7 @@ define("survey/survey.viewModel",
 					
 					ClosePollAnalyticView = function () {
 					isAdvertdashboardPollVisible(false);
+					CampaignRatioAnalyticData(1);
 				},
 					
 					//End Advertiser Analytics 
@@ -379,7 +385,7 @@ define("survey/survey.viewModel",
                 },
               CloseContent = function () {
                   isEditorVisible(false); 
-				  isAdvertdashboardPollVisible(false);
+				  ClosePollAnalyticView();
 				  enableControls();
                   $("#panelArea,#topArea,#Heading_div").css("display", "block");
               },
@@ -2068,7 +2074,8 @@ define("survey/survey.viewModel",
 					DateRangeDropDown : DateRangeDropDown ,
 					CampaignStatusDropDown : CampaignStatusDropDown , 
 					openAdvertiserDashboardPollScreen : openAdvertiserDashboardPollScreen,
-					CampaignRatioAnalyticData:CampaignRatioAnalyticData
+					CampaignRatioAnalyticData:CampaignRatioAnalyticData,
+					CampaignTblAnalyticsData:CampaignTblAnalyticsData
                 };
             })()
         };

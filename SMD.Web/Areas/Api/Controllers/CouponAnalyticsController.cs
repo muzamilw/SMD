@@ -30,6 +30,7 @@ namespace SMD.MIS.Areas.Api.Controllers
             DealByCouponIdForAnalyticsResponse data = new DealByCouponIdForAnalyticsResponse();
             data.lineCharts = _ICouponService.getDealByCouponIDAnalytics(CouponID, dateRange, Granularity);
             data.pieCharts = _ICouponService.getDealByCouponIdRatioAnalytic(CouponID, dateRange);
+            data.expiryDate = _ICouponService.getExpiryDate(CouponID).ToString("D");
             return data;
         }
         #endregion

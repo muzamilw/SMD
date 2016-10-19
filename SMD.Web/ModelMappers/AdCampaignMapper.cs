@@ -145,7 +145,10 @@ namespace SMD.MIS.ModelMappers
                 DeliveryDays = source.DeliveryDays ?? 1,
                 MaxDailyBudget = source.MaxDailyBudget ?? 0,
                 SubmissionDateTime =source.SubmissionDateTime,
-                ShowBuyitBtn=source.ShowBuyitBtn
+                ShowBuyitBtn=source.ShowBuyitBtn,
+                IsPaymentCollected =source.IsPaymentCollected,
+                PaymentDate =source.PaymentDate
+                
             };
 
 
@@ -353,6 +356,8 @@ namespace SMD.MIS.ModelMappers
                         AnswerString = source.QuizCampaign.Answer1;
                     if (source.QuizAnswerId == 2)
                         AnswerString = source.QuizCampaign.Answer2;
+                    if (source.QuizAnswerId == 3)
+                       AnswerString = source.QuizCampaign.Answer3;
                 }
             }
             return new SMD.MIS.Areas.Api.Models.AdCampaignTargetCriteria
@@ -579,7 +584,9 @@ namespace SMD.MIS.ModelMappers
                 YoutubeLink=source.YoutubeLink,
                 CouponImage4=source.CouponImage4,
                 CouponImage5=source.CouponImage5,
-                CouponImage6=source.CouponImage6
+                CouponImage6=source.CouponImage6,
+                IsPaymentCollected =source.IsPaymentCollected,
+                PaymentDate = source.PaymentDate
               };
 
 
