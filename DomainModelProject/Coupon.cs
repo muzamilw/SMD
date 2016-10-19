@@ -95,6 +95,8 @@ namespace DomainModelProject
         public string CouponImage4 { get; set; }
         public string CouponImage5 { get; set; }
         public string CouponImage6 { get; set; }
+        public Nullable<bool> IsPaymentCollected { get; set; }
+        public Nullable<System.DateTime> PaymentDate { get; set; }
     
         public virtual CompanyBranch CompanyBranch { get; set; }
         public virtual Language Language { get; set; }
