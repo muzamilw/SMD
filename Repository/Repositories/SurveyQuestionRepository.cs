@@ -274,5 +274,10 @@ namespace SMD.Repository.Repositories
            
             return db.getPollsBySQIDAnalytics(SQId, CampStatus, dateRange, Granularity);
         }
+        public IEnumerable<getPollBySQIDRatioAnalytic_Result> getPollBySQIDRatioAnalytic(int ID, int dateRange)
+        {
+          
+            return db.getPollBySQIDRatioAnalytic(ID, dateRange);
+        }
     }
 }

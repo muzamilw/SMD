@@ -28,6 +28,7 @@ namespace SMD.Models.ResponseModels
         public string BillingEmail { get; set; }
         public string BillingCountryName { get; set; }
         public int? Gender { get; set; }
+        public Nullable<int> CurrencyID { get; set; }
 
 
         #region Additional User Profile Properties

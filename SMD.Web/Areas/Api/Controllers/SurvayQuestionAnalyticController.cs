@@ -1,4 +1,5 @@
 ﻿using SMD.Interfaces.Services;
+using SMD.MIS.Areas.Api.Models;
 using SMD.Models.DomainModels;
 using System;
 using System.Collections.Generic;
@@ -21,10 +22,14 @@ namespace SMD.MIS.Areas.Api.Controllers
         }
 
 
-        public IEnumerable<getPollsBySQID_Result> getPollsBySQIDAnalytics(int SQId, int CampStatus, int dateRange, int Granularity)
+        public SurvayBySQIDForAnalyticsResponse getPollsBySQIDAnalytics(int SQId, int CampStatus, int dateRange, int Granularity)
         {
+            SurvayBySQIDForAnalyticsResponse data = new SurvayBySQIDForAnalyticsResponse();
+            data.lineCharts = _ISurveyQuestionService.getPollsBySQIDAnalytics(SQId, CampStatus, dateRange, Granularity);
+            data.pieCharts = _ISurveyQuestionService.getPollBySQIDRatioAnalytic(SQId, dateRange);
+            return data;
 
-            return _ISurveyQuestionService.getPollsBySQIDAnalytics(SQId, CampStatus, dateRange, Granularity);
+            
         }
     }
 }

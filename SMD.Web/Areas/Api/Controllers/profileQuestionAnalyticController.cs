@@ -1,4 +1,5 @@
 ﻿using SMD.Interfaces.Services;
+using SMD.MIS.Areas.Api.Models;
 using SMD.Models.DomainModels;
 using System;
 using System.Collections.Generic;
@@ -20,10 +21,12 @@ namespace SMD.MIS.Areas.Api.Controllers
             _IProfileQuestionService = IProfileQuestionService;
         }
         #endregion
-        public IEnumerable<getSurvayByPQID_Result> getSurvayByPQIDAnalytics(int PQId, int CampStatus, int dateRange, int Granularity)
+        public PQByPQIDForAnalyticsResponse getSurvayByPQIDAnalytics(int PQId, int CampStatus, int dateRange, int Granularity)
         {
-
-            return _IProfileQuestionService.getSurvayByPQIDAnalytics(PQId, CampStatus, dateRange, Granularity);
+            PQByPQIDForAnalyticsResponse data = new PQByPQIDForAnalyticsResponse();
+            data.lineCharts = _IProfileQuestionService.getSurvayByPQIDAnalytics(PQId, CampStatus, dateRange, Granularity);
+            data.pieCharts = _IProfileQuestionService.getSurveyByPQIDRatioAnalytic(PQId, dateRange);
+            return data;
         }
 
     }

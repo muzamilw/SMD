@@ -316,15 +316,20 @@ namespace SMD.Repository.Repositories
             return DbSet.Where(i => i.CampaignId == CampaignID).FirstOrDefault();
         
         }
-        public IEnumerable<getAdsCampaignByCampaignId_Result> getAdsCampaignByCampaignIdForAnalytics(int compaignId, int CampStatus, int dateRange, int Granularity)
-        {
+        //public IEnumerable<getAdsCampaignByCampaignId_Result> getAdsCampaignByCampaignIdForAnalytics(int compaignId, int CampStatus, int dateRange, int Granularity)
+        //{
 
-            return db.getAdsCampaignByCampaignId(compaignId, CampStatus, dateRange, Granularity);
-        }
-        public IEnumerable<getDisplayAdsCampaignByCampaignIdAnalytics_Result> getDisplayAdsCampaignByCampaignIdAnalytics(int compaignId, int CampStatus, int dateRange, int Granularity)
+        //    return db.getAdsCampaignByCampaignId(compaignId, CampStatus, dateRange, Granularity);
+        //}
+        public IEnumerable<getDisplayAdsCampaignByCampaignIdAnalytics_Result> getAdsCampaignByCampaignIdAnalytics(int compaignId, int CampStatus, int dateRange, int Granularity)
         {
            
-            return db.getDisplayAdsCampaignByCampaignIdAnalytics(compaignId, CampStatus, dateRange, Granularity);
+            return db.getAdsCampaignByCampaignIdAnalytics(compaignId, CampStatus, dateRange, Granularity);
+        }
+        public IEnumerable<getAdsCampaignByCampaignIdRatioAnalytic_Result> getAdsCampaignByCampaignIdRatioAnalytic(int ID, int dateRange)
+        {
+            
+            return db.getAdsCampaignByCampaignIdRatioAnalytic(ID, dateRange);
         }
     }
 }

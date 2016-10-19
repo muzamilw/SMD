@@ -1,4 +1,5 @@
 ﻿using SMD.Interfaces.Services;
+using SMD.MIS.Areas.Api.Models;
 using SMD.Models.DomainModels;
 using System;
 using System.Collections.Generic;
@@ -23,9 +24,13 @@ namespace SMD.MIS.Areas.Api.Controllers
          #endregion
         
         #region public
-        public IEnumerable<getDealByCouponID_Result> getDealByCouponIDAnalytics(int CouponID, int dateRange, int Granularity)
+        public DealByCouponIdForAnalyticsResponse getDealByCouponIDAnalytics(int CouponID, int dateRange, int Granularity)
         {
-            return _ICouponService.getDealByCouponIDAnalytics(CouponID, dateRange, Granularity);
+
+            DealByCouponIdForAnalyticsResponse data = new DealByCouponIdForAnalyticsResponse();
+            data.lineCharts = _ICouponService.getDealByCouponIDAnalytics(CouponID, dateRange, Granularity);
+            data.pieCharts = _ICouponService.getDealByCouponIdRatioAnalytic(CouponID, dateRange);
+            return data;
         }
         #endregion
     }

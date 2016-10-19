@@ -137,19 +137,17 @@ define("Coupons/Coupons.viewModel",
 					granularityDropDown = ko.observableArray([{ id: 1, name: "Daily" }, { id: 2, name: "Weekly" }, { id: 3, name: "Monthly" }, { id: 4, name: "Quarterly" }, { id: 5, name: "Yearly" }]),
 					DateRangeDropDown  = ko.observableArray([{ id: 1, name: "One month" }, { id: 2, name: "All Time" }]),
 					CampaignStatusDropDown  = ko.observableArray([{ id: 1, name: "Answered" }, { id: 2, name: "Referred" }, { id: 3, name: "Skipped" }]),
-                    Banner2Flag = ko.observable(false),
+					CampaignRatioAnalyticData = ko.observable(1), 
+					Banner2Flag = ko.observable(false),
                     Banner3Flag = ko.observable(false),
                     Banner4Flag = ko.observable(false),
                     Banner5Flag = ko.observable(false),
                     Banner6Flag = ko.observable(false)
-
-
-
 				    openAdvertiserDashboardDealScreen = function () {
-					getDealsAnalytics();
-					$("#ddGranularityDropDown").removeAttr("disabled");
-					$("#ddDateRangeDropDown").removeAttr("disabled");
-					isAdvertdashboardDealVisible(true);
+						getDealsAnalytics();
+						$("#ddGranularityDropDown").removeAttr("disabled");
+						$("#ddDateRangeDropDown").removeAttr("disabled");
+						isAdvertdashboardDealVisible(true);
 				},
 				getDealsAnalytics = function () {
 					dataservice.getDealsAnalytics({
@@ -160,9 +158,9 @@ define("Coupons/Coupons.viewModel",
 						success: function (data) {
 
 							DealsAnalyticsData.removeAll();
-							ko.utils.arrayPushAll(DealsAnalyticsData(), data);
+							ko.utils.arrayPushAll(DealsAnalyticsData(), data.lineCharts);
 							DealsAnalyticsData.valueHasMutated();
-                  
+							CampaignRatioAnalyticData(data.pieCharts);
                     
 						},
 						error: function (response) {
@@ -2054,6 +2052,7 @@ define("Coupons/Coupons.viewModel",
                     couponModel();
                     selectedCriteria();
                     isEditorVisible(false);
+					isAdvertdashboardDealVisible(false);
                     if (isFromEdit() == true) {
                         isListVisible(true);
                         isWelcomeScreenVisible(false);
@@ -2291,7 +2290,8 @@ define("Coupons/Coupons.viewModel",
 					selecteddateRangeAnalytics:selecteddateRangeAnalytics,
 					selectedCouponIdAnalytics:selectedCouponIdAnalytics,
 					DealsAnalyticsData:DealsAnalyticsData,
-					CampaignStatusDropDown:CampaignStatusDropDown
+					CampaignStatusDropDown:CampaignStatusDropDown,
+					CampaignRatioAnalyticData:CampaignRatioAnalyticData
 					
 					
 					
