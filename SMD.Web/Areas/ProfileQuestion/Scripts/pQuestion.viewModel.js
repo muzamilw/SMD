@@ -1270,6 +1270,8 @@ define("pQuestion/pQuestion.viewModel",
                                         });
                                         selectedCriteria().profileQuestLeftImageSrc(matchSurveyQuestion.Answer1);
                                         selectedCriteria().profileQuestRightImageSrc(matchSurveyQuestion.Answer2);
+
+                                        selectedCriteria().profileQuestThirdImageSrc(matchSurveyQuestion.Answer3);
                                     }
                                 },
                                 error: function (response) {
@@ -1282,6 +1284,7 @@ define("pQuestion/pQuestion.viewModel",
                             });
                             selectedCriteria().profileQuestLeftImageSrc(matchSurveyQuestion.Answer1);
                             selectedCriteria().profileQuestRightImageSrc(matchSurveyQuestion.Answer2);
+                            selectedCriteria().profileQuestThirdImageSrc(matchSurveyQuestion.Answer3);
                             // adjust item
                         }
                     }
@@ -1842,21 +1845,15 @@ define("pQuestion/pQuestion.viewModel",
                 selectedCriteria().questionString(selectedQuestionstring);
                 if (type == 1) {
                     selectedCriteria().answerString(item.Answer1);
-                } else {
+                } else if (type == 2) {
                     selectedCriteria().answerString(item.Answer2);
+                }
+                else {
+                    selectedCriteria().answerString(item.Answer3);
                 }
                 selectedCriteria().AdCampaignID(item.CampaignId);
 
                 var matchedSurveyCriteriaRec = null;
-
-                //_.each(selectedQuestion().ProfileQuestionTargetCriteria(), function (itemarry) {
-
-                //    if (itemarry.QuizCampaignId() == item.CampaignId) {
-
-                //        matchedSurveyCriteriaRec = itemarry;
-                //    }
-                //});
-
 
 
                 selectedQuestion().ProfileQuestionTargetCriteria().push(new model.ProfileQuestionTargetCriteria.Create({
@@ -1885,7 +1882,7 @@ define("pQuestion/pQuestion.viewModel",
             ,
 
                         showAdditionQuizCriteria = function () {
-                            
+                           
                             Modelheading('Your Quiz Questions');
                             //   selectedCriteria(null);
                             //   isNewCriteria(true);
@@ -2134,8 +2131,11 @@ define("pQuestion/pQuestion.viewModel",
                                     selectedCriteria().LinkedSQAnswer(type);
                                     if (type == 1) {
                                         selectedCriteria().answerString(selectedCriteria().profileQuestLeftImageSrc());
-                                    } else {
+                                    } else if (type == 2) {
                                         selectedCriteria().answerString(selectedCriteria().profileQuestRightImageSrc());
+                                    }
+                                    else {
+                                        selectedCriteria().answerString(selectedCriteria().profileQuestThirdImageSrc());
                                     }
                                     $(".close").click();
                                 },
