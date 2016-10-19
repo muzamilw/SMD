@@ -82,14 +82,13 @@
     <None Include="getSurvayByPQIDtblAnalytic.sql" />
     <None Include="getAdsCampaignByCampaignIdtblAnalytic.sql" />
     <None Include="getPollBySQIDtblAnalytic.sql" />
+    <None Include="GetAudience.sql" />
+    <None Include="GetProducts.sql" />
+    <None Include="GetUserProfileCompletness.sql" />
+    <None Include="GetAdminDashBoardInsights.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="getCampaignsByStatus.sql" />
     <None Include="GetUserCounts.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <Build Include="GetProducts.sql" />
-    <Build Include="GetAdminDashBoardInsights.sql" />
-    <Build Include="GetUserProfileCompletness.sql" />
   </ItemGroup>
 </Project>

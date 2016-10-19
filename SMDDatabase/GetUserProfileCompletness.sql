@@ -1,4 +1,4 @@
-﻿USE [SMDv2]
+﻿
 GO
 /****** Object:  StoredProcedure [dbo].[GetUserProfileCompletness]    Script Date: 10/13/2016 9:00:45 AM ******/
 SET ANSI_NULLS ON
