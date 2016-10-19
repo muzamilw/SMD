@@ -2119,3 +2119,6 @@ ADD IsPaymentCollected bit
 
 ALTER TABLE Coupon
 ADD PaymentDate datetime
+
+
+------------------------------------------ all above scripts executed on live server.
