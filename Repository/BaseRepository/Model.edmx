@@ -2483,6 +2483,12 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Parameter Name="FromRow" Type="int" Mode="In" />
           <Parameter Name="ToRow" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetRegisteredUserData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Status" Type="int" Mode="In" />
+          <Parameter Name="keyword" Type="nvarchar" Mode="In" />
+          <Parameter Name="fromRoww" Type="int" Mode="In" />
+          <Parameter Name="toRow" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetRevenueByCampaignOverTime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CompanyId" Type="int" Mode="In" />
           <Parameter Name="CampaignType" Type="int" Mode="In" />
@@ -3849,6 +3855,12 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           </FunctionImport>
           <FunctionImport Name="getSurvayByPQIDtblAnalytic" ReturnType="Collection(DomainModels.getSurvayByPQIDtblAnalytic_Result)">
           <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetRegisteredUserData" ReturnType="Collection(DomainModels.GetRegisteredUserData_Result)">
+            <Parameter Name="Status" Mode="In" Type="Int32" />
+            <Parameter Name="keyword" Mode="In" Type="String" />
+            <Parameter Name="fromRoww" Mode="In" Type="Int32" />
+            <Parameter Name="toRow" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
@@ -6928,6 +6940,17 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="Double" Name="All_time" Nullable="true" />
           <Property Type="Double" Name="C30_days" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="GetRegisteredUserData_Result">
+          <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="fullname" Nullable="false" MaxLength="200" />
+          <Property Type="DateTime" Name="LastLoginTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="256" />
+          <Property Type="Int32" Name="Status" Nullable="true" />
+          <Property Type="Int32" Name="CompanyId" Nullable="false" />
+          <Property Type="String" Name="CompanyName" Nullable="true" />
+          <Property Type="Double" Name="AccountBalance" Nullable="true" />
+          <Property Type="Int32" Name="TotalItems" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -8673,6 +8696,21 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
                 <ScalarProperty Name="label" ColumnName="label" />
                 <ScalarProperty Name="All_time" ColumnName="All time" />
                 <ScalarProperty Name="C30_days" ColumnName="30 days" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetRegisteredUserData" FunctionName="SMDModel.Store.GetRegisteredUserData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.GetRegisteredUserData_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
+                <ScalarProperty Name="LastLoginTime" ColumnName="LastLoginTime" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="AccountBalance" ColumnName="AccountBalance" />
+                <ScalarProperty Name="TotalItems" ColumnName="TotalItems" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

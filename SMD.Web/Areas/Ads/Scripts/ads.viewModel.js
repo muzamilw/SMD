@@ -1623,7 +1623,7 @@ define("ads/ads.viewModel",
 
                   },
                 onEditCampaign = function (item) {
-                    debugger;
+                    
                     previewScreenNumber(1);
                     isTerminateBtnVisible(false);
                     isNewCampaignVisible(false);
@@ -2360,15 +2360,15 @@ define("ads/ads.viewModel",
                         } else {
                             if (item.IncludeorExclude() == '0') {
                                 if (cityIdsExcluded == '') {
-                                    cityIdsExcluded += item.CityID();
+                                    cityIdsExcluded += item.City();
                                 } else {
-                                    cityIdsExcluded += ',' + item.CityID();
+                                    cityIdsExcluded += ',' + item.City();
                                 }
                             } else {
                                 if (cityIds == '') {
-                                    cityIds += item.CityID();
+                                    cityIds += item.City();
                                 } else {
-                                    cityIds += ',' + item.CityID();
+                                    cityIds += ',' + item.City();
                                 }
                             }
                         }
