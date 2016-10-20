@@ -413,7 +413,10 @@ namespace SMD.Repository.BaseRepository
             , string educationIds
             , string educationIdsExcluded
             , string profileQuestionIdsExcluded
-            , string surveyQuestionIdsExcluded)
+            , string surveyQuestionIdsExcluded
+            , string CampaignQuizIds
+            ,string CampaignQuizAnswerIds
+            ,string CampaignQuizIdsExcluded)
         {
             var ageFromParameter = new ObjectParameter("ageFrom", ageFrom);
             var ageToParameter = new ObjectParameter("ageTo", ageTo);
@@ -434,6 +437,14 @@ namespace SMD.Repository.BaseRepository
             var educationIdsExcludedParameter = new ObjectParameter("educationIdsExcluded", educationIdsExcluded);
             var profileQuestionIdsExcludedParameter = new ObjectParameter("profileQuestionIdsExcluded", profileQuestionIdsExcluded);
             var surveyQuestionIdsExcludedParameter = new ObjectParameter("surveyQuestionIdsExcluded", surveyQuestionIdsExcluded);
+
+            var CampaignQuizIdsParameter = new ObjectParameter("CampaignQuizIds", CampaignQuizIds);
+
+            var CampaignQuizAnswerIdsParameter = new ObjectParameter("CampaignQuizAnswerIds", CampaignQuizAnswerIds);
+
+            var CampaignQuizIdsExcludedParameter = new ObjectParameter("CampaignQuizIdsExcluded", CampaignQuizIdsExcluded);
+
+
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAudience_Result>("GetAudience",
                 ageFromParameter, ageToParameter, genderParameter, countryIdsParameter, cityIdsParameter, languageIdsParameter,
                 industryIdsParameter, profileQuestionIdsParameter, profileAnswerIdsParameter, surveyQuestionIdsParameter
@@ -442,7 +453,7 @@ namespace SMD.Repository.BaseRepository
                 , educationIdsParameter
                 , educationIdsExcludedParameter
                 , profileQuestionIdsExcludedParameter
-                , surveyQuestionIdsExcludedParameter);
+                , surveyQuestionIdsExcludedParameter, CampaignQuizIdsParameter, CampaignQuizAnswerIdsParameter, CampaignQuizIdsExcludedParameter);
         }
 
         /// <summary>
