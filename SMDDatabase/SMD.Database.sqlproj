@@ -87,6 +87,7 @@
     <None Include="GetProducts.sql" />
     <None Include="GetUserProfileCompletness.sql" />
     <None Include="GetAdminDashBoardInsights.sql" />
+    <None Include="GetRegisteredUserData.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="getCampaignsByStatus.sql" />
