@@ -18,13 +18,13 @@ namespace DomainModelProject
         {
             this.AdCampaignTargetCriterias = new HashSet<AdCampaignTargetCriteria>();
             this.ProfileQuestionAnswers = new HashSet<ProfileQuestionAnswer>();
-            this.ProfileQuestionUserAnswers = new HashSet<ProfileQuestionUserAnswer>();
             this.SurveyQuestionTargetCriterias = new HashSet<SurveyQuestionTargetCriteria>();
             this.ProfileQuestionTargetCriterias = new HashSet<ProfileQuestionTargetCriteria>();
             this.ProfileQuestionTargetLocations = new HashSet<ProfileQuestionTargetLocation>();
             this.InvoiceDetails = new HashSet<InvoiceDetail>();
             this.ProfileQuestionTargetCriterias1 = new HashSet<ProfileQuestionTargetCriteria>();
             this.CampaignEventHistories = new HashSet<CampaignEventHistory>();
+            this.ProfileQuestionUserAnswers = new HashSet<ProfileQuestionUserAnswer>();
         }
     
         public int PQID { get; set; }
@@ -62,7 +62,6 @@ namespace DomainModelProject
         public virtual ICollection<AdCampaignTargetCriteria> AdCampaignTargetCriterias { get; set; }
         public virtual ICollection<ProfileQuestionAnswer> ProfileQuestionAnswers { get; set; }
         public virtual ProfileQuestionGroup ProfileQuestionGroup { get; set; }
-        public virtual ICollection<ProfileQuestionUserAnswer> ProfileQuestionUserAnswers { get; set; }
         public virtual ICollection<SurveyQuestionTargetCriteria> SurveyQuestionTargetCriterias { get; set; }
         public virtual ICollection<ProfileQuestionTargetCriteria> ProfileQuestionTargetCriterias { get; set; }
         public virtual ICollection<ProfileQuestionTargetLocation> ProfileQuestionTargetLocations { get; set; }
@@ -70,5 +69,6 @@ namespace DomainModelProject
         public virtual ICollection<ProfileQuestionTargetCriteria> ProfileQuestionTargetCriterias1 { get; set; }
         public virtual Company Company { get; set; }
         public virtual ICollection<CampaignEventHistory> CampaignEventHistories { get; set; }
+        public virtual ICollection<ProfileQuestionUserAnswer> ProfileQuestionUserAnswers { get; set; }
     }
 }

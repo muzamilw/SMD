@@ -2168,3 +2168,7 @@ END
 
 
 
+
+
+
+ALTER TABLE profilequestionuseranswer ALTER COLUMN PQAnswerID int NULL

@@ -79,6 +79,10 @@ namespace SMD.MIS.Areas.Api.Controllers
         //[ApiExceptionCustom]
         public async Task<BaseApiResponse> Post(string authenticationToken, ProductActionRequest request)
         {
+            try
+            {
+
+            
             if (string.IsNullOrEmpty(authenticationToken) || request == null || !ModelState.IsValid || string.IsNullOrEmpty(request.UserId))
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
@@ -86,6 +90,17 @@ namespace SMD.MIS.Areas.Api.Controllers
 
             BaseApiResponse response = await webApiUserService.ExecuteActionOnProductsResponse(request);
             return response;
+
+            }
+            catch (Exception e)
+            {
+
+                return new BaseApiResponse
+                {
+                    Status = false,
+                    Message = e.ToString()
+                };
+            }
         }
         
         #endregion

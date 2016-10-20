@@ -58,11 +58,12 @@ namespace SMD.Implementation.Services
                 {
                     var newAnswer = new ProfileQuestionUserAnswer
                     {
-                        PqId = request.ProfileQuestionId,
+                        PQID = request.ProfileQuestionId,
                         AnswerDateTime = DateTime.Now,
-                        PqAnswerId = ansId,
-                        UserId = request.UserId,
-                        ResponseType =  (int)request.ResponeEventType
+                        PQAnswerID = ansId,
+                        UserID = request.UserId,
+                        ResponseType =  (int)request.ResponeEventType,
+                        CompanyId = request.companyId
                     };
                     profileQuestionUserAnswerRepository.Add(newAnswer);
                 }
@@ -73,11 +74,12 @@ namespace SMD.Implementation.Services
 
                 var newAnswer = new ProfileQuestionUserAnswer
                     {
-                        PqId = request.ProfileQuestionId,
+                        PQID = request.ProfileQuestionId,
                         AnswerDateTime = DateTime.Now,
-                        PqAnswerId = 0,
-                        UserId = request.UserId,
-                        ResponseType =  (int)request.ResponeEventType
+                        PQAnswerID = null,
+                        UserID = request.UserId,
+                        ResponseType =  (int)request.ResponeEventType,
+                        CompanyId = request.companyId
                     };
                     profileQuestionUserAnswerRepository.Add(newAnswer);
             }

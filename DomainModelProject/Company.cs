@@ -27,10 +27,10 @@ namespace DomainModelProject
             this.DamImages = new HashSet<DamImage>();
             this.Invoices = new HashSet<Invoice>();
             this.ProfileQuestions = new HashSet<ProfileQuestion>();
-            this.ProfileQuestionUserAnswers = new HashSet<ProfileQuestionUserAnswer>();
             this.SurveyQuestions = new HashSet<SurveyQuestion>();
             this.SurveyQuestionResponses = new HashSet<SurveyQuestionResponse>();
             this.PayOutHistories = new HashSet<PayOutHistory>();
+            this.ProfileQuestionUserAnswers = new HashSet<ProfileQuestionUserAnswer>();
         }
     
         public int CompanyId { get; set; }
@@ -97,9 +97,9 @@ namespace DomainModelProject
         public virtual ICollection<DamImage> DamImages { get; set; }
         public virtual ICollection<Invoice> Invoices { get; set; }
         public virtual ICollection<ProfileQuestion> ProfileQuestions { get; set; }
-        public virtual ICollection<ProfileQuestionUserAnswer> ProfileQuestionUserAnswers { get; set; }
         public virtual ICollection<SurveyQuestion> SurveyQuestions { get; set; }
         public virtual ICollection<SurveyQuestionResponse> SurveyQuestionResponses { get; set; }
         public virtual ICollection<PayOutHistory> PayOutHistories { get; set; }
+        public virtual ICollection<ProfileQuestionUserAnswer> ProfileQuestionUserAnswers { get; set; }
     }
 }

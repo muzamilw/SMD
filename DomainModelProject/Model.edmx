@@ -896,7 +896,7 @@
           <Property Name="PQID" Type="int" Nullable="false" />
           <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="AnswerDateTime" Type="datetime" Nullable="false" />
-          <Property Name="PQAnswerID" Type="int" Nullable="false" />
+          <Property Name="PQAnswerID" Type="int" />
           <Property Name="CompanyId" Type="int" />
           <Property Name="ResponseType" Type="int" />
         </EntityType>
@@ -2137,7 +2137,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ProfileQuestionUserAnswer_ProfileQuestionAnswer">
-          <End Role="ProfileQuestionAnswer" Type="Self.ProfileQuestionAnswer" Multiplicity="1" />
+          <End Role="ProfileQuestionAnswer" Type="Self.ProfileQuestionAnswer" Multiplicity="0..1" />
           <End Role="ProfileQuestionUserAnswer" Type="Self.ProfileQuestionUserAnswer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ProfileQuestionAnswer">
@@ -3470,7 +3470,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <NavigationProperty Name="Language" Relationship="Self.FK_AspNetUsers_Language" FromRole="AspNetUsers" ToRole="Language" />
           <NavigationProperty Name="CompaniesAspNetUsers" Relationship="Self.FK_CompaniesAspNetUsers_AspNetUsers" FromRole="AspNetUsers" ToRole="CompaniesAspNetUsers" />
           <NavigationProperty Name="CouponCodes" Relationship="Self.FK_CouponCodes_AspNetUsers" FromRole="AspNetUsers" ToRole="CouponCodes" />
-          <NavigationProperty Name="ProfileQuestionUserAnswers" Relationship="Self.FK_ProfileQuestionUserAnswer_AspNetUsers" FromRole="AspNetUsers" ToRole="ProfileQuestionUserAnswer" />
           <NavigationProperty Name="SurveyQuestions" Relationship="Self.FK_SurveyQuestion_AspNetUsers" FromRole="AspNetUsers" ToRole="SurveyQuestion" />
           <NavigationProperty Name="SurveyQuestionResponses" Relationship="Self.FK_SurveyQuestionResponse_AspNetUsers" FromRole="AspNetUsers" ToRole="SurveyQuestionResponse" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
@@ -3482,6 +3481,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_AspNetUsers_Company" FromRole="AspNetUser" ToRole="Company" />
           <Property Name="PassportNo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="Title" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="ProfileQuestionUserAnswers" Relationship="SMDDevModel.FK_ProfileQuestionUserAnswer_AspNetUsers" FromRole="AspNetUser" ToRole="ProfileQuestionUserAnswer" />
         </EntityType>
         <EntityType Name="AuditLog">
           <Key>
@@ -3934,7 +3934,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <NavigationProperty Name="AdCampaignTargetCriterias" Relationship="Self.FK_AdCampaignTargetCriteria_ProfileQuestion" FromRole="ProfileQuestion" ToRole="AdCampaignTargetCriteria" />
           <NavigationProperty Name="ProfileQuestionAnswers" Relationship="Self.FK_ProfileQuestionAnswer_ProfileQuestion" FromRole="ProfileQuestion" ToRole="ProfileQuestionAnswer" />
           <NavigationProperty Name="ProfileQuestionGroup" Relationship="Self.FK_ProfileQuestionGroup_ProfileQuestion" FromRole="ProfileQuestion" ToRole="ProfileQuestionGroup" />
-          <NavigationProperty Name="ProfileQuestionUserAnswers" Relationship="Self.FK_ProfileQuestionUserAnswer_ProfileQuestion" FromRole="ProfileQuestion" ToRole="ProfileQuestionUserAnswer" />
           <NavigationProperty Name="SurveyQuestionTargetCriterias" Relationship="Self.FK_SurveyQuestionTargetCriteria_ProfileQuestion" FromRole="ProfileQuestion" ToRole="SurveyQuestionTargetCriteria" />
           <Property Name="CompanyId" Type="Int32" />
           <Property Name="AnswerNeeded" Type="Int32" />
@@ -3957,6 +3956,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="EndDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_ProfileQuestion_Company" FromRole="ProfileQuestion" ToRole="Company" />
           <NavigationProperty Name="CampaignEventHistories" Relationship="SMDDevModel.FK_CampaignEventHistory_ProfileQuestion" FromRole="ProfileQuestion" ToRole="CampaignEventHistory" />
+          <NavigationProperty Name="ProfileQuestionUserAnswers" Relationship="SMDDevModel.FK_ProfileQuestionUserAnswer_ProfileQuestion" FromRole="ProfileQuestion" ToRole="ProfileQuestionUserAnswer" />
         </EntityType>
         <EntityType Name="ProfileQuestionAnswer">
           <Key>
@@ -3977,9 +3977,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="Status" Type="Int32" />
           <NavigationProperty Name="AdCampaignTargetCriterias" Relationship="Self.FK_AdCampaignTargetCriteria_ProfileQuestionAnswer" FromRole="ProfileQuestionAnswer" ToRole="AdCampaignTargetCriteria" />
           <NavigationProperty Name="ProfileQuestion" Relationship="Self.FK_ProfileQuestionAnswer_ProfileQuestion" FromRole="ProfileQuestionAnswer" ToRole="ProfileQuestion" />
-          <NavigationProperty Name="ProfileQuestionUserAnswers" Relationship="Self.FK_ProfileQuestionUserAnswer_ProfileQuestionAnswer" FromRole="ProfileQuestionAnswer" ToRole="ProfileQuestionUserAnswer" />
           <NavigationProperty Name="SurveyQuestionTargetCriterias" Relationship="Self.FK_SurveyQuestionTargetCriteria_ProfileQuestionAnswer" FromRole="ProfileQuestionAnswer" ToRole="SurveyQuestionTargetCriteria" />
           <NavigationProperty Name="ProfileQuestionTargetCriterias" Relationship="SMDDevModel.FK_ProfileQuestionTargetCriteria_ProfileQuestionAnswer" FromRole="ProfileQuestionAnswer" ToRole="ProfileQuestionTargetCriteria" />
+          <NavigationProperty Name="ProfileQuestionUserAnswers" Relationship="SMDDevModel.FK_ProfileQuestionUserAnswer_ProfileQuestionAnswer" FromRole="ProfileQuestionAnswer" ToRole="ProfileQuestionUserAnswer" />
         </EntityType>
         <EntityType Name="ProfileQuestionGroup">
           <Key>
@@ -3992,22 +3992,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="CountryID" Type="Int32" />
           <NavigationProperty Name="Country" Relationship="Self.FK_ProfileQuestionGroup_Country" FromRole="ProfileQuestionGroup" ToRole="Country" />
           <NavigationProperty Name="ProfileQuestions" Relationship="Self.FK_ProfileQuestionGroup_ProfileQuestion" FromRole="ProfileQuestionGroup" ToRole="ProfileQuestion" />
-        </EntityType>
-        <EntityType Name="ProfileQuestionUserAnswer">
-          <Key>
-            <PropertyRef Name="PQUAnswerID" />
-          </Key>
-          <Property Name="PQUAnswerID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PQID" Type="Int32" Nullable="false" />
-          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="AnswerDateTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="PQAnswerID" Type="Int32" Nullable="false" />
-          <Property Name="CompanyId" Type="Int32" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_ProfileQuestionUserAnswer_AspNetUsers" FromRole="ProfileQuestionUserAnswer" ToRole="AspNetUsers" />
-          <NavigationProperty Name="ProfileQuestion" Relationship="Self.FK_ProfileQuestionUserAnswer_ProfileQuestion" FromRole="ProfileQuestionUserAnswer" ToRole="ProfileQuestion" />
-          <NavigationProperty Name="ProfileQuestionAnswer" Relationship="Self.FK_ProfileQuestionUserAnswer_ProfileQuestionAnswer" FromRole="ProfileQuestionUserAnswer" ToRole="ProfileQuestionAnswer" />
-          <Property Name="ResponseType" Type="Int32" />
-          <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_ProfileQuestionUserAnswer_Company" FromRole="ProfileQuestionUserAnswer" ToRole="Company" />
         </EntityType>
         <EntityType Name="SurveyQuestion">
           <Key>
@@ -4514,18 +4498,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ProfileQuestionUserAnswer_AspNetUsers">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
-          <End Role="ProfileQuestionUserAnswer" Type="Self.ProfileQuestionUserAnswer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ProfileQuestionUserAnswer">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_SurveyQuestion_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
           <End Role="SurveyQuestion" Type="Self.SurveyQuestion" Multiplicity="*" />
@@ -4802,18 +4774,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ProfileQuestionUserAnswer_ProfileQuestion">
-          <End Role="ProfileQuestion" Type="Self.ProfileQuestion" Multiplicity="1" />
-          <End Role="ProfileQuestionUserAnswer" Type="Self.ProfileQuestionUserAnswer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProfileQuestion">
-              <PropertyRef Name="PQID" />
-            </Principal>
-            <Dependent Role="ProfileQuestionUserAnswer">
-              <PropertyRef Name="PQID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_SurveyQuestionTargetCriteria_ProfileQuestion">
           <End Role="ProfileQuestion" Type="Self.ProfileQuestion" Multiplicity="0..1" />
           <End Role="SurveyQuestionTargetCriteria" Type="Self.SurveyQuestionTargetCriteria" Multiplicity="*" />
@@ -4823,18 +4783,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             </Principal>
             <Dependent Role="SurveyQuestionTargetCriteria">
               <PropertyRef Name="PQID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProfileQuestionUserAnswer_ProfileQuestionAnswer">
-          <End Role="ProfileQuestionAnswer" Type="Self.ProfileQuestionAnswer" Multiplicity="1" />
-          <End Role="ProfileQuestionUserAnswer" Type="Self.ProfileQuestionUserAnswer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProfileQuestionAnswer">
-              <PropertyRef Name="PQAnswerID" />
-            </Principal>
-            <Dependent Role="ProfileQuestionUserAnswer">
-              <PropertyRef Name="PQAnswerID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4955,7 +4903,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySet Name="ProfileQuestions" EntityType="Self.ProfileQuestion" />
           <EntitySet Name="ProfileQuestionAnswers" EntityType="Self.ProfileQuestionAnswer" />
           <EntitySet Name="ProfileQuestionGroups" EntityType="Self.ProfileQuestionGroup" />
-          <EntitySet Name="ProfileQuestionUserAnswers" EntityType="Self.ProfileQuestionUserAnswer" />
           <EntitySet Name="SurveyQuestions" EntityType="Self.SurveyQuestion" />
           <EntitySet Name="SurveyQuestionResponses" EntityType="Self.SurveyQuestionResponse" />
           <EntitySet Name="SurveyQuestionTargetCriterias" EntityType="Self.SurveyQuestionTargetCriteria" />
@@ -5070,10 +5017,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="CouponCodes" EntitySet="CouponCodes" />
           </AssociationSet>
-          <AssociationSet Name="FK_ProfileQuestionUserAnswer_AspNetUsers" Association="Self.FK_ProfileQuestionUserAnswer_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="ProfileQuestionUserAnswer" EntitySet="ProfileQuestionUserAnswers" />
-          </AssociationSet>
           <AssociationSet Name="FK_SurveyQuestion_AspNetUsers" Association="Self.FK_SurveyQuestion_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="SurveyQuestion" EntitySet="SurveyQuestions" />
@@ -5166,17 +5109,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <End Role="ProfileQuestionGroup" EntitySet="ProfileQuestionGroups" />
             <End Role="ProfileQuestion" EntitySet="ProfileQuestions" />
           </AssociationSet>
-          <AssociationSet Name="FK_ProfileQuestionUserAnswer_ProfileQuestion" Association="Self.FK_ProfileQuestionUserAnswer_ProfileQuestion">
-            <End Role="ProfileQuestion" EntitySet="ProfileQuestions" />
-            <End Role="ProfileQuestionUserAnswer" EntitySet="ProfileQuestionUserAnswers" />
-          </AssociationSet>
           <AssociationSet Name="FK_SurveyQuestionTargetCriteria_ProfileQuestion" Association="Self.FK_SurveyQuestionTargetCriteria_ProfileQuestion">
             <End Role="ProfileQuestion" EntitySet="ProfileQuestions" />
             <End Role="SurveyQuestionTargetCriteria" EntitySet="SurveyQuestionTargetCriterias" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProfileQuestionUserAnswer_ProfileQuestionAnswer" Association="Self.FK_ProfileQuestionUserAnswer_ProfileQuestionAnswer">
-            <End Role="ProfileQuestionAnswer" EntitySet="ProfileQuestionAnswers" />
-            <End Role="ProfileQuestionUserAnswer" EntitySet="ProfileQuestionUserAnswers" />
           </AssociationSet>
           <AssociationSet Name="FK_SurveyQuestionTargetCriteria_ProfileQuestionAnswer" Association="Self.FK_SurveyQuestionTargetCriteria_ProfileQuestionAnswer">
             <End Role="ProfileQuestionAnswer" EntitySet="ProfileQuestionAnswers" />
@@ -5383,10 +5318,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <End Role="Company" EntitySet="Companies" />
             <End Role="ProfileQuestion" EntitySet="ProfileQuestions" />
           </AssociationSet>
-          <AssociationSet Name="FK_ProfileQuestionUserAnswer_Company" Association="SMDDevModel.FK_ProfileQuestionUserAnswer_Company">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="ProfileQuestionUserAnswer" EntitySet="ProfileQuestionUserAnswers" />
-          </AssociationSet>
           <AssociationSet Name="FK_SurveyQuestion_Company" Association="SMDDevModel.FK_SurveyQuestion_Company">
             <End Role="Company" EntitySet="Companies" />
             <End Role="SurveyQuestion" EntitySet="SurveyQuestions" />
@@ -5558,8 +5489,25 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <Parameter Name="toRow" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="getCampaignROItblAnalytic" ReturnType="Collection(SMDDevModel.getCampaignROItblAnalytic_Result)">
-            <Parameter Name="Id" Mode="In" Type="Int32" />
+          <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="ProfileQuestionUserAnswers" EntityType="SMDDevModel.ProfileQuestionUserAnswer" />
+          <AssociationSet Name="FK_ProfileQuestionUserAnswer_AspNetUsers" Association="SMDDevModel.FK_ProfileQuestionUserAnswer_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="ProfileQuestionUserAnswer" EntitySet="ProfileQuestionUserAnswers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfileQuestionUserAnswer_Company" Association="SMDDevModel.FK_ProfileQuestionUserAnswer_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="ProfileQuestionUserAnswer" EntitySet="ProfileQuestionUserAnswers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfileQuestionUserAnswer_ProfileQuestion" Association="SMDDevModel.FK_ProfileQuestionUserAnswer_ProfileQuestion">
+            <End Role="ProfileQuestion" EntitySet="ProfileQuestions" />
+            <End Role="ProfileQuestionUserAnswer" EntitySet="ProfileQuestionUserAnswers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfileQuestionUserAnswer_ProfileQuestionAnswer" Association="SMDDevModel.FK_ProfileQuestionUserAnswer_ProfileQuestionAnswer">
+            <End Role="ProfileQuestionAnswer" EntitySet="ProfileQuestionAnswers" />
+            <End Role="ProfileQuestionUserAnswer" EntitySet="ProfileQuestionUserAnswers" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="CouponCategories">
           <Key>
@@ -6219,7 +6167,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <NavigationProperty Name="DamImages" Relationship="SMDDevModel.FK_DamImages_Company" FromRole="Company" ToRole="DamImage" />
           <NavigationProperty Name="Invoices" Relationship="SMDDevModel.FK_Invoice_Company" FromRole="Company" ToRole="Invoice" />
           <NavigationProperty Name="ProfileQuestions" Relationship="SMDDevModel.FK_ProfileQuestion_Company" FromRole="Company" ToRole="ProfileQuestion" />
-          <NavigationProperty Name="ProfileQuestionUserAnswers" Relationship="SMDDevModel.FK_ProfileQuestionUserAnswer_Company" FromRole="Company" ToRole="ProfileQuestionUserAnswer" />
           <NavigationProperty Name="SurveyQuestions" Relationship="SMDDevModel.FK_SurveyQuestion_Company" FromRole="Company" ToRole="SurveyQuestion" />
           <NavigationProperty Name="SurveyQuestionResponses" Relationship="SMDDevModel.FK_SurveyQuestionResponse_Company" FromRole="Company" ToRole="SurveyQuestionResponse" />
           <Property Name="CompanyRegNo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -6231,6 +6178,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="DeleteDate" Type="DateTime" Precision="3" />
           <Property Name="IsSpecialAccount" Type="Boolean" />
           <NavigationProperty Name="PayOutHistories" Relationship="SMDDevModel.FK_PayOutHistory_Company" FromRole="Company" ToRole="PayOutHistory" />
+          <NavigationProperty Name="ProfileQuestionUserAnswers" Relationship="SMDDevModel.FK_ProfileQuestionUserAnswer_Company" FromRole="Company" ToRole="ProfileQuestionUserAnswer" />
         </EntityType>
         <Association Name="FK_Account_Company">
           <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
@@ -6372,18 +6320,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
               <PropertyRef Name="CompanyId" />
             </Principal>
             <Dependent Role="ProfileQuestion">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProfileQuestionUserAnswer_Company">
-          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
-          <End Type="SMDDevModel.ProfileQuestionUserAnswer" Role="ProfileQuestionUserAnswer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="CompanyId" />
-            </Principal>
-            <Dependent Role="ProfileQuestionUserAnswer">
               <PropertyRef Name="CompanyId" />
             </Dependent>
           </ReferentialConstraint>
@@ -6856,6 +6792,70 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="String" Name="label3" Nullable="false" MaxLength="32" />
           <Property Type="Int32" Name="Stats3" Nullable="true" />
         </ComplexType>
+        <EntityType Name="ProfileQuestionUserAnswer">
+          <Key>
+            <PropertyRef Name="PQUAnswerID" />
+          </Key>
+          <Property Name="PQUAnswerID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PQID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="AnswerDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PQAnswerID" Type="Int32" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="ResponseType" Type="Int32" />
+          <NavigationProperty Name="AspNetUser" Relationship="SMDDevModel.FK_ProfileQuestionUserAnswer_AspNetUsers" FromRole="ProfileQuestionUserAnswer" ToRole="AspNetUser" />
+          <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_ProfileQuestionUserAnswer_Company" FromRole="ProfileQuestionUserAnswer" ToRole="Company" />
+          <NavigationProperty Name="ProfileQuestion" Relationship="SMDDevModel.FK_ProfileQuestionUserAnswer_ProfileQuestion" FromRole="ProfileQuestionUserAnswer" ToRole="ProfileQuestion" />
+          <NavigationProperty Name="ProfileQuestionAnswer" Relationship="SMDDevModel.FK_ProfileQuestionUserAnswer_ProfileQuestionAnswer" FromRole="ProfileQuestionUserAnswer" ToRole="ProfileQuestionAnswer" />
+        </EntityType>
+        <Association Name="FK_ProfileQuestionUserAnswer_AspNetUsers">
+          <End Type="SMDDevModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="SMDDevModel.ProfileQuestionUserAnswer" Role="ProfileQuestionUserAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProfileQuestionUserAnswer">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfileQuestionUserAnswer_Company">
+          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="SMDDevModel.ProfileQuestionUserAnswer" Role="ProfileQuestionUserAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="ProfileQuestionUserAnswer">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfileQuestionUserAnswer_ProfileQuestion">
+          <End Type="SMDDevModel.ProfileQuestion" Role="ProfileQuestion" Multiplicity="1" />
+          <End Type="SMDDevModel.ProfileQuestionUserAnswer" Role="ProfileQuestionUserAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProfileQuestion">
+              <PropertyRef Name="PQID" />
+            </Principal>
+            <Dependent Role="ProfileQuestionUserAnswer">
+              <PropertyRef Name="PQID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfileQuestionUserAnswer_ProfileQuestionAnswer">
+          <End Type="SMDDevModel.ProfileQuestionAnswer" Role="ProfileQuestionAnswer" Multiplicity="0..1" />
+          <End Type="SMDDevModel.ProfileQuestionUserAnswer" Role="ProfileQuestionUserAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProfileQuestionAnswer">
+              <PropertyRef Name="PQAnswerID" />
+            </Principal>
+            <Dependent Role="ProfileQuestionUserAnswer">
+              <PropertyRef Name="PQAnswerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -7572,19 +7572,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
                 <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
                 <ScalarProperty Name="LangaugeID" ColumnName="LangaugeID" />
                 <ScalarProperty Name="CountryID" ColumnName="CountryID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProfileQuestionUserAnswers">
-            <EntityTypeMapping TypeName="SMDDevModel.ProfileQuestionUserAnswer">
-              <MappingFragment StoreEntitySet="ProfileQuestionUserAnswer">
-                <ScalarProperty Name="ResponseType" ColumnName="ResponseType" />
-                <ScalarProperty Name="PQUAnswerID" ColumnName="PQUAnswerID" />
-                <ScalarProperty Name="PQID" ColumnName="PQID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="AnswerDateTime" ColumnName="AnswerDateTime" />
-                <ScalarProperty Name="PQAnswerID" ColumnName="PQAnswerID" />
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -8594,6 +8581,19 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="ProfileQuestionUserAnswers">
+            <EntityTypeMapping TypeName="SMDDevModel.ProfileQuestionUserAnswer">
+              <MappingFragment StoreEntitySet="ProfileQuestionUserAnswer">
+                <ScalarProperty Name="ResponseType" ColumnName="ResponseType" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="PQAnswerID" ColumnName="PQAnswerID" />
+                <ScalarProperty Name="AnswerDateTime" ColumnName="AnswerDateTime" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="PQID" ColumnName="PQID" />
+                <ScalarProperty Name="PQUAnswerID" ColumnName="PQUAnswerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
