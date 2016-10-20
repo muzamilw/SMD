@@ -343,18 +343,124 @@
                 </div>
                 <div class="row" id="topArea" style="margin-left:-15px;">
                     <div class="row">
-                        <div class="col-sm-8 pull-left" style="padding-top:3px;padding-left:3px;">
+                        <div class="col-lg-12" style="padding-top:3px;padding-left:0px;">
 
-                            <a class="btn  btn-default btn-gray" style="float:left;width:136px;height:58px;white-space:normal;    padding-top: 18px;" href="/Coupons/Coupons" id="btnCoupons">Deals </a>
+                            @*<a class="btn  btn-default btn-gray" style="float:left;width:136px;height:58px;white-space:normal;    padding-top: 18px;" href="/Coupons/Coupons" id="btnCoupons">Deals </a>
                             <a class="btn  btn-default btn-gray" style="float:left; width:136px;height:58px;padding-top:16px;margin-right:15px; white-space:normal;" id="btncampaigns" href="/Ads/Ads?mode=1">Videos ads</a>
                             <a class="btn  btn-default btn-gray" style="float:left; width:136px;height:58px;padding-top:16px;margin-right:15px; white-space:normal;" id="btnspnsergames" href="/Ads/Ads?mode=4">Display Ads</a>
                             <a class="btn  btn-default btn-gray" style="display:none;float:left;width:136px;height:58px;padding-top:16px;white-space:normal;" href="/Survey/" id="btnSurvey">Polls</a>
-                            <a class="btn  btn-default btn-gray" style="float:left;width:136px;height:58px;padding-top:16px;white-space:normal;" href="~/ProfileQuestion/Manage/Index" id="btnSurveyQuestion">Surveys</a>
+                            <a class="btn  btn-default btn-gray" style="float:left;width:136px;height:58px;padding-top:16px;white-space:normal;" href="~/ProfileQuestion/Manage/Index" id="btnSurveyQuestion">Surveys</a>*@
 
-                            @*<a class="btn  btn-default btn-gray" style="float:left;width:20%;height:66px;white-space:normal;" href="~/ProfileQuestion/Manage/Index" id="btnProQuestions">Profile Questions</a>*@
+                            <div id="deals_btn" class="homePanels pull-left" onclick="GoToDeals()">
+                                <div style="margin-top:10px;">
+                                    <div class="pull-left"><span class="homePanels_headers">Deal Listings </span></div><div class="pull-right" style="width:53px;"><i class="fa fa-play  font-size13 play_btn" aria-hidden="true" style="color: rgb(103, 103, 103) !important;display:none;"></i> <i class="fa fa-plus plus_btn  font-size13 pull-right" aria-hidden="true" style="color: rgb(103, 103, 103) !important;"></i><div class="clearfix"></div></div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <br>
+                                <div class="pg" style="margin-top: 8px; height: 148px; display:none;"id="content_div">
+
+                                        <div><div class="pull-left"><i class="fa fa-circle greyclr fontsize4" aria-hidden="true"></i> </div> <div class="pull-left" style="margin-left:3px;">Group deals together.</div> </div>
+
+                                        <div><div class="pull-left"><i class="fa fa-circle greyclr fontsize4" aria-hidden="true"></i>  </div><div class="pull-left" style="margin-left:3px;">Link deal lines to your website pages.</div> </div>
+
+                                        <div><div class="pull-left"><i class="fa fa-circle greyclr fontsize4" aria-hidden="true"></i> </div> <div class="pull-left" style="margin-left:3px;">Zero commision fee for all referrals.</div> </div>
+
+                                        <div><div class="pull-left"><i class="fa fa-circle greyclr fontsize4" aria-hidden="true"></i> </div> <div class="pull-left" style="margin-left:3px;">You do the eCommerce for your website.</div> </div>
+
+                                        <div><div class="pull-left" style="margin-left:3px;">List 1 deal group with up to 6 deal lines</div> </div>
+                                        <div> <div class="pull-left" style="margin-left:3px;">for 14 days-FREE.OR list unlimited deal groups for 1 year for $49.</div> </div>
+                                </div>
+                            </div>
+                          
+
+                            <div id="video_ads_btn" class="homePanels pull-left" onclick="GotoVideoAds()">
+                                <div style="margin-top:10px;">
+                                    <div class="pull-left"><span class="homePanels_headers">Deal Listings </span></div><div class="pull-right" style="width:53px;"><i class="fa fa-play  font-size13 play_btn" aria-hidden="true" style="color: rgb(103, 103, 103) !important;display:none;"></i> <i class="fa fa-plus plus_btn  font-size13 pull-right" aria-hidden="true" style="color: rgb(103, 103, 103) !important;"></i><div class="clearfix"></div></div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <br>
+                                <div class="pg" style="margin-top: 8px; height: 148px; display:none" id="content_div">
+
+                                    <div><div class="pull-left"><i class="fa fa-circle greyclr fontsize4" aria-hidden="true"></i> </div> <div class="pull-left" style="margin-left:3px;">Group deals together.</div> </div>
+
+                                    <div><div class="pull-left"><i class="fa fa-circle greyclr fontsize4" aria-hidden="true"></i>  </div><div class="pull-left" style="margin-left:3px;">Link deal lines to your website pages.</div> </div>
+
+                                    <div><div class="pull-left"><i class="fa fa-circle greyclr fontsize4" aria-hidden="true"></i> </div> <div class="pull-left" style="margin-left:3px;">Zero commision fee for all referrals.</div> </div>
+
+                                    <div><div class="pull-left"><i class="fa fa-circle greyclr fontsize4" aria-hidden="true"></i> </div> <div class="pull-left" style="margin-left:3px;">You do the eCommerce for your website.</div> </div>
+
+                                    <div><div class="pull-left" style="margin-left:3px;">List 1 deal group with up to 6 deal lines</div> </div>
+                                    <div> <div class="pull-left" style="margin-left:3px;">for 14 days-FREE.OR list unlimited deal groups for 1 year for $49.</div> </div>
+                                </div>
+                            </div>
+                            
+                            <div id="display_ads_btn" class="homePanels pull-left" onclick="GotodisplayAds()">
+                                <div style="margin-top:10px;">
+                                    <div class="pull-left"><span class="homePanels_headers">Display Ads</span></div><div class="pull-right" style="width:53px;"><i class="fa fa-play  font-size13 play_btn" aria-hidden="true" style="color: rgb(103, 103, 103) !important;display:none;"></i> <i class="fa fa-plus plus_btn  font-size13 pull-right" aria-hidden="true" style="color: rgb(103, 103, 103) !important;"></i><div class="clearfix"></div></div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <br>
+                                <div class="pg" style="margin-top: 8px; height: 148px; display:none" id="content_div">
+
+                                    <div><div class="pull-left"><i class="fa fa-circle greyclr fontsize4" aria-hidden="true"></i> </div> <div class="pull-left" style="margin-left:3px;">Group deals together.</div> </div>
+
+                                    <div><div class="pull-left"><i class="fa fa-circle greyclr fontsize4" aria-hidden="true"></i>  </div><div class="pull-left" style="margin-left:3px;">Link deal lines to your website pages.</div> </div>
+
+                                    <div><div class="pull-left"><i class="fa fa-circle greyclr fontsize4" aria-hidden="true"></i> </div> <div class="pull-left" style="margin-left:3px;">Zero commision fee for all referrals.</div> </div>
+
+                                    <div><div class="pull-left"><i class="fa fa-circle greyclr fontsize4" aria-hidden="true"></i> </div> <div class="pull-left" style="margin-left:3px;">You do the eCommerce for your website.</div> </div>
+
+                                    <div><div class="pull-left" style="margin-left:3px;">List 1 deal group with up to 6 deal lines</div> </div>
+                                    <div> <div class="pull-left" style="margin-left:3px;">for 14 days-FREE.OR list unlimited deal groups for 1 year for $49.</div> </div>
+                                </div>
+                            </div>
+                            
+                            <div id="Polls_btn" class="homePanels pull-left" onclick="Gotopolls()">
+                                <div style="margin-top:10px;">
+                                    <div class="pull-left"><span class="homePanels_headers">Polls</span></div><div class="pull-right" style="width:53px;"><i class="fa fa-play  font-size13 play_btn" aria-hidden="true" style="color: rgb(103, 103, 103) !important;display:none;"></i> <i class="fa fa-plus plus_btn  font-size13 pull-right" aria-hidden="true" style="color: rgb(103, 103, 103) !important;"></i><div class="clearfix"></div></div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <br>
+                                <div class="pg" style="margin-top: 8px; height: 148px; display:none" id="content_div">
+
+                                    <div><div class="pull-left"><i class="fa fa-circle greyclr fontsize4" aria-hidden="true"></i> </div> <div class="pull-left" style="margin-left:3px;">Group deals together.</div> </div>
+
+                                    <div><div class="pull-left"><i class="fa fa-circle greyclr fontsize4" aria-hidden="true"></i>  </div><div class="pull-left" style="margin-left:3px;">Link deal lines to your website pages.</div> </div>
+
+                                    <div><div class="pull-left"><i class="fa fa-circle greyclr fontsize4" aria-hidden="true"></i> </div> <div class="pull-left" style="margin-left:3px;">Zero commision fee for all referrals.</div> </div>
+
+                                    <div><div class="pull-left"><i class="fa fa-circle greyclr fontsize4" aria-hidden="true"></i> </div> <div class="pull-left" style="margin-left:3px;">You do the eCommerce for your website.</div> </div>
+
+                                    <div><div class="pull-left" style="margin-left:3px;">List 1 deal group with up to 6 deal lines</div> </div>
+                                    <div> <div class="pull-left" style="margin-left:3px;">for 14 days-FREE.OR list unlimited deal groups for 1 year for $49.</div> </div>
+                                </div>
+                            </div>
+                            
+
+                            <div id="surveyQuestion_btn" class="homePanels pull-left" onclick="Gotosurveys()">
+                                <div style="margin-top:10px;">
+                                    <div class="pull-left"><span class="homePanels_headers">Surveys</span></div><div class="pull-right" style="width:53px;"><i class="fa fa-play  font-size13 play_btn" aria-hidden="true" style="color: rgb(103, 103, 103) !important;display:none;"></i> <i class="fa fa-plus plus_btn  font-size13 pull-right" aria-hidden="true" style="color: rgb(103, 103, 103) !important;"></i><div class="clearfix"></div></div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <br>
+                                <div class="pg" style="margin-top: 8px; height: 148px; display:none" id="content_div">
+
+                                    <div><div class="pull-left"><i class="fa fa-circle greyclr fontsize4" aria-hidden="true"></i> </div> <div class="pull-left" style="margin-left:3px;">Group deals together.</div> </div>
+
+                                    <div><div class="pull-left"><i class="fa fa-circle greyclr fontsize4" aria-hidden="true"></i>  </div><div class="pull-left" style="margin-left:3px;">Link deal lines to your website pages.</div> </div>
+
+                                    <div><div class="pull-left"><i class="fa fa-circle greyclr fontsize4" aria-hidden="true"></i> </div> <div class="pull-left" style="margin-left:3px;">Zero commision fee for all referrals.</div> </div>
+
+                                    <div><div class="pull-left"><i class="fa fa-circle greyclr fontsize4" aria-hidden="true"></i> </div> <div class="pull-left" style="margin-left:3px;">You do the eCommerce for your website.</div> </div>
+
+                                    <div><div class="pull-left" style="margin-left:3px;">List 1 deal group with up to 6 deal lines</div> </div>
+                                    <div> <div class="pull-left" style="margin-left:3px;">for 14 days-FREE.OR list unlimited deal groups for 1 year for $49.</div> </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
                         </div>
 
-                        <div class="col-sm-4 hideInCoupons" style="padding-left:42px;margin-top:3px;">
+                        <div class="col-sm-4 hideInCoupons" style="padding-left:42px;margin-top:3px;display:none;">
                             <div id="InviteUserBinding" style="display:none">
                                 <a class="btn btn-default btn-gray" data-bind="click:showInviteUserPopup" id="btninviteusers" style="  height:58px;  width: 136px;float:right;margin-right:50px;padding-top:17px">Invite users</a>
 
@@ -494,60 +600,107 @@
                 $("#btnPhraseLibrary").css("background-color", "#7f8c8d");
                 $("#btnPhraseLibrary").css("border-color", "#5c6667");
             });
+            $(document).on('mouseenter', '.homePanels', function () {
+                $(this).find("#content_div").show();
+                $(this).find(".play_btn").show();
 
+            }).on('mouseleave', '.homePanels', function () {
+                $(this).find("#content_div").hide();
+                $(this).find(".play_btn").hide();
+            });
+
+        
+            $('.play_btn').hover(function () {
+            
+                $(this).css("cssText", "color:red!important;");
+            },
+           function () {
+               $(this).css("cssText", "color:#676767!important;");
+           
+           });
+
+            $('.plus_btn').hover(function () {
+
+                $(this).css("cssText", "color:#fff!important;");
+            },
+         function () {
+             $(this).css("cssText", "color:#676767!important;");
+
+         });
         });
 
+        
+        function GoToDeals()
+        {
+            window.location.href = "/Coupons/Coupons";
+        }
+        function GotoVideoAds()
+        {
+            window.location.href = "/Ads/Ads?mode=1";
+        }
+        function GotodisplayAds()
+        {
+            window.location.href = "/Ads/Ads?mode=4";
+        }
+        function Gotopolls()
+        {
+            window.location.href = "/Survey/";
+        }
+        function Gotosurveys()
+        {
+            window.location.href = "/ProfileQuestion/Manage/Index";
+        }
         function OpenPhraseLibrary()
         {
             $("#btnPhraseLibrary").click();
         }
-        function OpenBranchLocation() {
-            $("#btnBranchLocations").click();
-        }
+            function OpenBranchLocation() {
+                $("#btnBranchLocations").click();
+            }
        
-        //////////////var logoImage = "";
-        //////////////var bannerImage1 = "";
-        //////////////var bannerImage2 = "";
-        //////////////var bannerImage3 = "";
-        //////////////var mode = 1;
+            //////////////var logoImage = "";
+            //////////////var bannerImage1 = "";
+            //////////////var bannerImage2 = "";
+            //////////////var bannerImage3 = "";
+            //////////////var mode = 1;
 
 
-        //////////////function changeIframeSrc(mode1) {
-        //////////////    mode = mode1;
-        //////////////    if (mode1 != 1)
-        //////////////        mode1 = 2;
-        //////////////    $("#iframe").attr("src", "/DamImages?mode=" + mode1 + "&selection=true");
+            //////////////function changeIframeSrc(mode1) {
+            //////////////    mode = mode1;
+            //////////////    if (mode1 != 1)
+            //////////////        mode1 = 2;
+            //////////////    $("#iframe").attr("src", "/DamImages?mode=" + mode1 + "&selection=true");
 
-        //////////////    console.log(mode);
-        //////////////}
+            //////////////    console.log(mode);
+            //////////////}
 
-        //////////////function iframeLoaded() {
+            //////////////function iframeLoaded() {
             
-        //////////////    var iframeBody = $('body', $('#iframe')[0].contentWindow.document);
-        //////////////    $(iframeBody).on('click', '.damImgContainer img', function (event) {
-        //////////////        console.log(mode);
-        //////////////        if (mode == 1) {
-        //////////////            $("#imgLogo").attr("src", this.src).change();
-        //////////////            logoImage = this.src;
-        //////////////            $(".DamModelclose").click();
-        //////////////        } else if (mode == 2) {
-        //////////////            $("#bannerImage1").attr("src", this.src).change();
-        //////////////            bannerImage1 = this.src;
-        //////////////            $(".DamModelclose").click();
-        //////////////        } else if (mode == 3) {
-        //////////////            $("#bannerImage2").attr("src", this.src).change();
-        //////////////            bannerImage2 = this.src;
-        //////////////            $(".DamModelclose").click();
-        //////////////        } else if (mode == 4) {
-        //////////////            $("#bannerImage3").attr("src", this.src).change();
-        //////////////            bannerImage3 = this.src;
-        //////////////            $(".DamModelclose").click();
-        //////////////        }
-        //////////////    });
-        //////////////}
-        function ShowInviteUserPopup() {
-            $('#btninviteusers').click();
-        }
+            //////////////    var iframeBody = $('body', $('#iframe')[0].contentWindow.document);
+            //////////////    $(iframeBody).on('click', '.damImgContainer img', function (event) {
+            //////////////        console.log(mode);
+            //////////////        if (mode == 1) {
+            //////////////            $("#imgLogo").attr("src", this.src).change();
+            //////////////            logoImage = this.src;
+            //////////////            $(".DamModelclose").click();
+            //////////////        } else if (mode == 2) {
+            //////////////            $("#bannerImage1").attr("src", this.src).change();
+            //////////////            bannerImage1 = this.src;
+            //////////////            $(".DamModelclose").click();
+            //////////////        } else if (mode == 3) {
+            //////////////            $("#bannerImage2").attr("src", this.src).change();
+            //////////////            bannerImage2 = this.src;
+            //////////////            $(".DamModelclose").click();
+            //////////////        } else if (mode == 4) {
+            //////////////            $("#bannerImage3").attr("src", this.src).change();
+            //////////////            bannerImage3 = this.src;
+            //////////////            $(".DamModelclose").click();
+            //////////////        }
+            //////////////    });
+            //////////////}
+            function ShowInviteUserPopup() {
+                $('#btninviteusers').click();
+            }
     </script>
 
 
