@@ -41,7 +41,6 @@
         <EntityTypeShape EntityType="SMDDevModel.ProfileQuestion" Width="1.5" PointX="5.25" PointY="58.125" IsExpanded="true" />
         <EntityTypeShape EntityType="SMDDevModel.ProfileQuestionAnswer" Width="1.5" PointX="7.5" PointY="58.5" IsExpanded="true" />
         <EntityTypeShape EntityType="SMDDevModel.ProfileQuestionGroup" Width="1.5" PointX="3" PointY="59.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="SMDDevModel.ProfileQuestionUserAnswer" Width="1.5" PointX="19.75" PointY="56.875" IsExpanded="true" />
         <EntityTypeShape EntityType="SMDDevModel.SurveyQuestion" Width="1.5" PointX="22.75" PointY="57.625" IsExpanded="true" />
         <EntityTypeShape EntityType="SMDDevModel.SurveyQuestionResponse" Width="1.5" PointX="25" PointY="54.875" IsExpanded="true" />
         <EntityTypeShape EntityType="SMDDevModel.SurveyQuestionTargetCriteria" Width="1.5" PointX="25" PointY="60.125" IsExpanded="true" />
@@ -78,7 +77,6 @@
         <AssociationConnector Association="SMDDevModel.FK_AspNetUsers_Language" ManuallyRouted="false" />
         <AssociationConnector Association="SMDDevModel.FK_CompaniesAspNetUsers_AspNetUsers" ManuallyRouted="false" />
         <AssociationConnector Association="SMDDevModel.FK_CouponCodes_AspNetUsers" ManuallyRouted="false" />
-        <AssociationConnector Association="SMDDevModel.FK_ProfileQuestionUserAnswer_AspNetUsers" ManuallyRouted="false" />
         <AssociationConnector Association="SMDDevModel.FK_SurveyQuestion_AspNetUsers" ManuallyRouted="false" />
         <AssociationConnector Association="SMDDevModel.FK_SurveyQuestionResponse_AspNetUsers" ManuallyRouted="false" />
         <AssociationConnector Association="SMDDevModel.FK_CompanyBranch_BranchCategory" ManuallyRouted="false" />
@@ -102,9 +100,7 @@
         <AssociationConnector Association="SMDDevModel.FK_SurveyQuestionTargetCriteria_Language" ManuallyRouted="false" />
         <AssociationConnector Association="SMDDevModel.FK_ProfileQuestionAnswer_ProfileQuestion" ManuallyRouted="false" />
         <AssociationConnector Association="SMDDevModel.FK_ProfileQuestionGroup_ProfileQuestion" ManuallyRouted="false" />
-        <AssociationConnector Association="SMDDevModel.FK_ProfileQuestionUserAnswer_ProfileQuestion" ManuallyRouted="false" />
         <AssociationConnector Association="SMDDevModel.FK_SurveyQuestionTargetCriteria_ProfileQuestion" ManuallyRouted="false" />
-        <AssociationConnector Association="SMDDevModel.FK_ProfileQuestionUserAnswer_ProfileQuestionAnswer" ManuallyRouted="false" />
         <AssociationConnector Association="SMDDevModel.FK_SurveyQuestionTargetCriteria_ProfileQuestionAnswer" ManuallyRouted="false" />
         <AssociationConnector Association="SMDDevModel.FK_SurveyQuestionResponse_SurveyQuestion" ManuallyRouted="false" />
         <AssociationConnector Association="SMDDevModel.FK_SurveyQuestionTargetCriteria_SurveyQuestion" ManuallyRouted="false" />
@@ -154,7 +150,6 @@
         <AssociationConnector Association="SMDDevModel.FK_DamImages_Company" />
         <AssociationConnector Association="SMDDevModel.FK_Invoice_Company" />
         <AssociationConnector Association="SMDDevModel.FK_ProfileQuestion_Company" />
-        <AssociationConnector Association="SMDDevModel.FK_ProfileQuestionUserAnswer_Company" />
         <AssociationConnector Association="SMDDevModel.FK_SurveyQuestion_Company" />
         <AssociationConnector Association="SMDDevModel.FK_SurveyQuestionResponse_Company" />
         <EntityTypeShape EntityType="SMDDevModel.vw_Coupons" Width="1.5" PointX="0.75" PointY="11.75" />
@@ -176,6 +171,11 @@
         <AssociationConnector Association="SMDDevModel.FK_AdCampaignClickRateHistory_AdCampaign" />
         <EntityTypeShape EntityType="SMDDevModel.PayOutHistory" Width="1.5" PointX="5.25" PointY="43.25" />
         <AssociationConnector Association="SMDDevModel.FK_PayOutHistory_Company" />
+        <EntityTypeShape EntityType="SMDDevModel.ProfileQuestionUserAnswer" Width="1.5" PointX="19.75" PointY="56.625" />
+        <AssociationConnector Association="SMDDevModel.FK_ProfileQuestionUserAnswer_AspNetUsers" />
+        <AssociationConnector Association="SMDDevModel.FK_ProfileQuestionUserAnswer_Company" />
+        <AssociationConnector Association="SMDDevModel.FK_ProfileQuestionUserAnswer_ProfileQuestion" />
+        <AssociationConnector Association="SMDDevModel.FK_ProfileQuestionUserAnswer_ProfileQuestionAnswer" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

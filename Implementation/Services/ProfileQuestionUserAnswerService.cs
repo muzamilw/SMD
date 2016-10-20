@@ -52,17 +52,18 @@ namespace SMD.Implementation.Services
             //#endregion
             #region Updation
 
-            if (request.ProfileQuestionAnswerIds != null && request.ProfileQuestionAnswerIds.Count > 0)
+            if (request.ProfileQuestionAnswerIds != null && request.ProfileQuestionAnswerIds.Count > 0 && request.ProfileQuestionAnswerIds[0] != -1)
             {
                 foreach (var ansId in request.ProfileQuestionAnswerIds)
                 {
                     var newAnswer = new ProfileQuestionUserAnswer
                     {
-                        PqId = request.ProfileQuestionId,
+                        PQID = request.ProfileQuestionId,
                         AnswerDateTime = DateTime.Now,
-                        PqAnswerId = ansId,
-                        UserId = request.UserId,
-                        ResponseType =  (int)request.ResponeEventType
+                        PQAnswerID = ansId,
+                        UserID = request.UserId,
+                        ResponseType =  (int)request.ResponeEventType,
+                        CompanyId = request.companyId
                     };
                     profileQuestionUserAnswerRepository.Add(newAnswer);
                 }
@@ -73,11 +74,12 @@ namespace SMD.Implementation.Services
 
                 var newAnswer = new ProfileQuestionUserAnswer
                     {
-                        PqId = request.ProfileQuestionId,
+                        PQID = request.ProfileQuestionId,
                         AnswerDateTime = DateTime.Now,
-                        PqAnswerId = 0,
-                        UserId = request.UserId,
-                        ResponseType =  (int)request.ResponeEventType
+                        PQAnswerID = null,
+                        UserID = request.UserId,
+                        ResponseType =  (int)request.ResponeEventType,
+                        CompanyId = request.companyId
                     };
                     profileQuestionUserAnswerRepository.Add(newAnswer);
             }

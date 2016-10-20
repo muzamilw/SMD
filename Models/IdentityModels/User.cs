@@ -85,6 +85,8 @@ namespace SMD.Models.IdentityModels
 
         public virtual ICollection<CompaniesAspNetUser> CompaniesAspNetUsers { get; set; }
 
+        
+
 
         public virtual Education Education { get; set; }
 

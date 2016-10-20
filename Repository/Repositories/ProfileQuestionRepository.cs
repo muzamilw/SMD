@@ -151,7 +151,7 @@ namespace SMD.Repository.Repositories
         {
             var countOfUnAnsweredQuestions = (from question in db.ProfileQuestions
                                               where (question.ProfileGroupId == groupId &&
-                                              !(db.ProfileQuestionUserAnswers.Distinct().Any(ans => ans.PqId == question.PqId && ans.UserId == userId)))
+                                              !(db.ProfileQuestionUserAnswers.Distinct().Any(ans => ans.PQID == question.PqId && ans.UserID == userId)))
                                               select question.PqId).ToList().Count;
             return countOfUnAnsweredQuestions;
         }
@@ -166,7 +166,7 @@ namespace SMD.Repository.Repositories
             int toRow = request.PageSize;
 
             var unAnsweredQuestions = (from question in db.ProfileQuestions
-                     where (question.ProfileGroupId==request.GroupId && !(db.ProfileQuestionUserAnswers.Any(ans => ans.PqId == question.PqId)))
+                     where (question.ProfileGroupId==request.GroupId && !(db.ProfileQuestionUserAnswers.Any(ans => ans.PQID == question.PqId)))
                 select question)
                 .OrderBy(qst => qst.ProfileQuestionGroup.ProfileGroupName)
                  .Skip(fromRow)

@@ -17,9 +17,9 @@ namespace DomainModelProject
         public ProfileQuestionAnswer()
         {
             this.AdCampaignTargetCriterias = new HashSet<AdCampaignTargetCriteria>();
-            this.ProfileQuestionUserAnswers = new HashSet<ProfileQuestionUserAnswer>();
             this.SurveyQuestionTargetCriterias = new HashSet<SurveyQuestionTargetCriteria>();
             this.ProfileQuestionTargetCriterias = new HashSet<ProfileQuestionTargetCriteria>();
+            this.ProfileQuestionUserAnswers = new HashSet<ProfileQuestionUserAnswer>();
         }
     
         public int PQAnswerID { get; set; }
@@ -38,8 +38,8 @@ namespace DomainModelProject
     
         public virtual ICollection<AdCampaignTargetCriteria> AdCampaignTargetCriterias { get; set; }
         public virtual ProfileQuestion ProfileQuestion { get; set; }
-        public virtual ICollection<ProfileQuestionUserAnswer> ProfileQuestionUserAnswers { get; set; }
         public virtual ICollection<SurveyQuestionTargetCriteria> SurveyQuestionTargetCriterias { get; set; }
         public virtual ICollection<ProfileQuestionTargetCriteria> ProfileQuestionTargetCriterias { get; set; }
+        public virtual ICollection<ProfileQuestionUserAnswer> ProfileQuestionUserAnswers { get; set; }
     }
 }
