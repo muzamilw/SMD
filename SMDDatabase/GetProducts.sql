@@ -1,6 +1,6 @@
 ﻿
 GO
-/****** Object:  StoredProcedure [dbo].[GetProducts]    Script Date: 10/8/2016 5:49:17 AM ******/
+/****** Object:  StoredProcedure [dbo].[GetProducts]    Script Date: 10/19/2016 1:20:12 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -9,9 +9,9 @@ GO
 
 ALTER PROCEDURE [dbo].[GetProducts] 
 
---  select weightage,* from [GetUserProfileQuestions]('b8a3884f-73f3-41ec-9926-293ea919a5e1', 214) x order by x.weightage
+--  select weightage,* from [GetUserProfileQuestions]('b8a3884f-73f3-41ec-9926-293ea919a5e11', 214) x order by x.weightage
 
--- exec [dbo].[GetProducts] 		@UserID = N'b8a3884f-73f3-41ec-9926-293ea919a5e1', 		@FromRow = 0, 		@ToRow = 100
+-- exec [dbo].[GetProducts] 		@UserID = N'b8a3884f-73f3-41ec-9926-393ea919a5e11', 		@FromRow = 0, 		@ToRow = 30
 	-- Add the parameters for the stored procedure here
 	@UserID nvarchar(128) = 0 ,
 	@FromRow int = 0,
@@ -41,31 +41,13 @@ else
 	end
 
         -- Setting local variables
-		   SELECT @dob = DOB FROM AspNetUsers where id=@UserID
-		   SELECT @gender = gender FROM AspNetUsers where id=@UserID
+		   SELECT @dob = DOB,@gender = gender ,@languageId = LanguageID,@industryId = industryId FROM AspNetUsers where id=@UserID
+		 
 		     SELECT @countryId = NULL--countryId FROM Company where @companyId=@companyId
 		   SELECT @cityId = NULL--cityId FROM Company where @companyId=@companyId
-		   SELECT @languageId = LanguageID FROM AspNetUsers where id=@UserID
-		   SELECT @industryId = industryId FROM AspNetUsers where id=@UserID
+		  		 
 		   SET @currentDate = getDate()
 		   SET @age = DATEDIFF(year, @age, @currentDate)
-
-
-select @cash4adsSocialHandle = case when c.TwitterHandle is not null or c.TwitterHandle <> '' then c.TwitterHandle 
-	when c.FacebookHandle is not null or c.FacebookHandle <> '' then c.FacebookHandle 
-	when c.InstagramHandle is not null or c.InstagramHandle <> '' then c.InstagramHandle 
-	when c.PinterestHandle is not null or c.PinterestHandle <> '' then c.PinterestHandle 
-	else ''
-
-	end ,
-	@cash4adsSocialHandleType = case when c.TwitterHandle is not null or c.TwitterHandle <> '' then 't'
-	when c.FacebookHandle is not null or c.FacebookHandle <> '' then 'f'
-	when c.InstagramHandle is not null or c.InstagramHandle <> '' then 'i'
-	when c.PinterestHandle is not null or c.PinterestHandle <> '' then 'p'
-	else ''
-
-	end from company c inner join AspNetUsers u on u.CompanyId = c.CompanyId and u.email = 'cash4ads@cash4ads.com'
-
 
 
 select *, COUNT(*) OVER() AS TotalItems--, 
@@ -159,45 +141,119 @@ from
 			null as FreeCouponID
 			 
 			from adcampaign
-			--- voucher join for the same company.
+			inner join Company cc on adcampaign.CompanyId = cc.CompanyId and cc.IsSpecialAccount is null
+			--calc of max daily budget for the campaign for current date. converting centz to dollar amount by 100 division
+			outer apply
+				(
+					select isnull(sum(debitamount),0)/100 as todaySpent from [transaction] t
+					inner join account a on t.accountid = a.accountid and a.AccountType = 4 and a.companyid = adcampaign.companyid
+					where t.adcampaignid = adcampaign.campaignid and CAST(TransactionDate AS DATE) = CAST(getdate() AS DATE)
+				) as campaignbudget
+			--  profile question filtering join
+			outer apply
+				(	
+					select count(*) totalcrit, count(uans.pqid) matchcrit from [AdCampaignTargetCriteria]  crit
+					left outer join
+						( --get the most recent answer
+							select * from 
+							(
+									select pqa.*, row_number() over (partition by userid,pqid order by answerdatetime desc) as rn
+								   from [ProfileQuestionUserAnswer] pqa where userid = @UserID and responsetype = 3 -- 3 is valid response type which has answer
+
+							) dans  where dans.rn = 1 
+
+						) uans on (crit.IncludeorExclude = 1 and uans.PQAnswerID = crit.PQAnswerID) or (crit.IncludeorExclude = 0 and uans.PQAnswerID <> crit.PQAnswerID) --type 1 is profile question
+						where crit.campaignid = adcampaign.campaignid and crit.[type] = 1
+			) pqf  
+			--  my/user survey questions filtering join not enabled right now
+			--outer apply
+			--	(	
+			--		select count(*) totalcrit, count(uans.sqid) matchcrit from [AdCampaignTargetCriteria]  crit
+			--		left outer join
+			--			( --get the most recent answer
+			--				select * from 
+			--				(
+			--						select sqr.*, row_number() over (partition by userid,sqid order by ResoponseDateTime desc) as rn
+			--					   from [SurveyQuestionResponse] sqr where userid = @UserID and responsetype = 3 -- 3 is valid response type which has answer
+
+			--				) dans  where dans.rn = 1 
+
+			--			) uans on crit.[type] = 2  and crit.IncludeorExclude = 1 and uans.UserSelection = crit.SQAnswer  --type 2 is user survey question
+			--			where crit.campaignid = adcampaign.campaignid
+			--) mysqf  
+
+			--  user Campaign quiz question filtering join 
+			outer apply
+				(	
+					select count(*) totalcrit, count(uans.CampaignId) matchcrit from [AdCampaignTargetCriteria]  crit
+					left outer join
+						( --get the most recent answer
+							select * from 
+							(
+									select acr.*, row_number() over (partition by userid,campaignid order by CreatedDateTime desc) as rn
+								   from AdCampaignResponse acr where userid = @UserID and responsetype = 3 -- 3 is valid response type which has answer
+
+							) dans  where dans.rn = 1 
+
+						) uans on (crit.IncludeorExclude = 1 and uans.UserQuestionResponse = crit.QuizAnswerId ) or (crit.IncludeorExclude = 0 and uans.UserQuestionResponse <> crit.QuizAnswerId )  --type 6 is user Quiz answer selection
+						where crit.campaignid = adcampaign.campaignid and crit.[type] = 6
+			) acf  
+
+
 	
-			where (
-				((@age is null) or (adcampaign.AgeRangeEnd >= @age and  @age >= adcampaign.AgeRangeStart))
-				and
-				((@gender is null) or (adcampaign.Gender = @gender))
-				and
-				((@languageId is null) or (adcampaign.LanguageId = @languageId))
-				and
-				(adcampaign.EndDateTime >= @currentDate and @currentDate >= adcampaign.StartDateTime)
-				and
-				(adcampaign.Approved = 1)
-				and
-				(adcampaign.Type  <> 5)		-- do not load coupons
-				and
-				(adcampaign.Status = 3) -- live
-				and
-				((adcampaign.AmountSpent is null) or (adcampaign.MaxBudget > adcampaign.AmountSpent))
-				and
-				((@countryId is null or @cityId is null) or ((select count(*) from AdCampaignTargetLocation MyCampaignLoc
-					 where MyCampaignLoc.CampaignID=adcampaign.CampaignID and MyCampaignLoc.CountryID=@countryId and
-					 MyCampaignLoc.CityID=@cityId) > 0))
-				and
-				((@languageId is null or @industryId is null) or ((select count(*) from AdCampaignTargetCriteria MyCampaignCrit
-					 where MyCampaignCrit.CampaignID = adcampaign.CampaignID and 
-					 MyCampaignCrit.LanguageID=@languageId and MyCampaignCrit.IndustryID=@industryId) > 0 ))
-				and
-				(((select count(*) from AdCampaignResponse adResponse where  
-					adResponse.CampaignID = adcampaign.CampaignID and adResponse.UserID = @UserID and datepart(day,getdate()) = datepart(day,adResponse.CreatedDateTime) and datepart(month,getdate()) = datepart(month,adResponse.CreatedDateTime) ) = 0)
-				 or
-				 ((select top 1 adResponse.UserSelection from AdCampaignResponse adResponse 
-					where adResponse.CampaignID = adcampaign.CampaignID and adResponse.UserID = @UserID) 
-					is null)
-				) 
+			where ( 
+						((@age is null) or (adcampaign.AgeRangeEnd >= @age and  @age >= adcampaign.AgeRangeStart))
+						and
+						((@gender is null) or (adcampaign.Gender = @gender))
+						and
+						((@languageId is null) or (adcampaign.LanguageId = @languageId))
+						and
+						(@currentDate >= adcampaign.approvaldatetime)
+						and
+						(adcampaign.Approved = 1)
+						and
+						(adcampaign.Status = 3) -- live
+						and
+						( adcampaign.MaxdailyBudget >= campaignbudget.todaySpent)
+
+						and
+						((@countryId is null or @cityId is null) or ((select count(*) from AdCampaignTargetLocation MyCampaignLoc
+							 where MyCampaignLoc.CampaignID=adcampaign.CampaignID and MyCampaignLoc.CountryID=@countryId and
+							 MyCampaignLoc.CityID=@cityId) > 0))
+						and
+						-- industry type matching clauses
+						((@industryId is null) or ((select count(*) from AdCampaignTargetCriteria MyCampaignCrit
+							 where MyCampaignCrit.CampaignID = adcampaign.CampaignID and MyCampaignCrit.[type] = 4 and	-- 4 is the type for industry
+							 MyCampaignCrit.IndustryID=@industryId) > 0 ))
+						and
+						--- system profile questions - the filtering logic of profile insights 
+						(
+
+						
+							(pqf.totalcrit  = pqf.matchcrit ) --(pqf.totalcrit > 0 ) or 
+							--pqf.totalcrit  = pqf.matchcrit
+						)
+						and
+						--- user adcampaing quiz answer - the filtering logic of ad quiz results 
+						(
+						(acf.totalcrit  = acf.matchcrit ) --(acf.totalcrit > 0 ) or 
+							
+							--acf.totalcrit  = acf.matchcrit
+						)
+						and 
+						--do not show the ad again to the user if already watched today.
+						(((select count(*) from AdCampaignResponse adResponse where  
+							adResponse.CampaignID = adcampaign.CampaignID and responsetype = 3 and adResponse.UserID = @UserID and datepart(day,getdate()) = datepart(day,adResponse.CreatedDateTime) and datepart(month,getdate()) = datepart(month,adResponse.CreatedDateTime) ) = 0)
+						 or
+						 ((select top 1 adResponse.UserSelection from AdCampaignResponse adResponse 
+							where adResponse.CampaignID = adcampaign.CampaignID and adResponse.UserID = @UserID) 
+							is null)
+						) 
 			)  
 			union
 
-			-------- fall back 1 show free games
-		select adcampaign.campaignid as ItemId, adcampaign.CampaignName ItemName, 'freeGame' Type, 
+			 --------fall back 1 show free games
+			select adcampaign.campaignid as ItemId, adcampaign.CampaignName ItemName, 'freeGame' Type, 
 			adcampaign.Description +'\n' + adcampaign.CampaignDescription as description,
 			Case 
 				when adcampaign.Type = 3  -- Flyer
@@ -245,8 +301,8 @@ from
 			NULL as PQA6LinkedQ3,NULL as  PQA6LinkedQ4,NULL as  PQA6LinkedQ5,NULL as PQA6LinkedQ6,
 			NULL as PqA6Type, NULL as PqA6SortOrder, NULL as PqA6ImagePath,
 
-			--((row_number() over (order by ABS(CHECKSUM(NewId())) % 100 desc) * 100) + 1) Weightage,
-			--((row_number() over (order by isNUll(adcampaign.maxdailybudget,0) desc) * 100) + 1) Weightage,
+			----((row_number() over (order by ABS(CHECKSUM(NewId())) % 100 desc) * 100) + 1) Weightage,
+			----((row_number() over (order by isNUll(adcampaign.maxdailybudget,0) desc) * 100) + 1) Weightage,
 			cast((@FreeAdsPosition + MaxDailyBudget) * 100 as int) Weightage,
 			NULL as SqLeftImagePercentage, NULL as SqRightImagePercentage,
 			null as SocialHandle, null as SocialHandleType,
@@ -269,7 +325,7 @@ from
 			adcampaign.BuyItButtonLabel as BuyItButtonText, 
 			 'http://manage.cash4ads.com/' +adcampaign.BuyItImageUrl as BuyItImageUrl,
 			'http://manage.cash4ads.com/' + adcampaign.Voucher1ImagePath as VoucherImagePath,
-			--(select count(*) from coupon v where AdCampaign.CompanyId = v.CompanyId and v.Status = 3) as VoucherCount,
+			
 			0 as VoucherCount,
 			AdCampaign.CompanyId,VideoLink2,IsShowVoucherSetting,
 			
@@ -287,7 +343,7 @@ from
 			inner join Company cc on adcampaign.CompanyId = cc.CompanyId and cc.IsSpecialAccount = 1 and adcampaign.Type = 4
 			
 			
-			-------- fall back 2 show 2 free video ads
+			------ fall back 2 show 2 free video ads
 			union
 
 			select adcampaign.campaignid as ItemId, adcampaign.CampaignName ItemName, 'freeAd' Type, 
@@ -338,8 +394,7 @@ from
 			NULL as PQA6LinkedQ3,NULL as  PQA6LinkedQ4,NULL as  PQA6LinkedQ5,NULL as PQA6LinkedQ6,
 			NULL as PqA6Type, NULL as PqA6SortOrder, NULL as PqA6ImagePath,
 
-			--((row_number() over (order by ABS(CHECKSUM(NewId())) % 100 desc) * 100) + 1) Weightage,
-			--((row_number() over (order by isNUll(maxdailybudget,0) desc) * 100) + 1) Weightage,
+		
 			cast((@FreeAdsPosition + MaxDailyBudget) * 100 as int) Weightage,
 			NULL as SqLeftImagePercentage, NULL as SqRightImagePercentage,
 			null as SocialHandle, null as SocialHandleType,
@@ -362,7 +417,7 @@ from
 			adcampaign.BuyItButtonLabel as BuyItButtonText, 
 			 'http://manage.cash4ads.com/' +adcampaign.BuyItImageUrl as BuyItImageUrl,
 			'http://manage.cash4ads.com/' + adcampaign.Voucher1ImagePath as VoucherImagePath,
-			--(select count(*) from coupon v where AdCampaign.CompanyId = v.CompanyId and v.Status = 3) as VoucherCount,
+			
 			0 as VoucherCount,
 			AdCampaign.CompanyId,VideoLink2,IsShowVoucherSetting,
 			
@@ -398,7 +453,7 @@ from
 	
 	
 
-	--------------------- survey questions
+	------------------- survey questions
 	union
 	select *, NULL as AdvertisersLogoPath,
 	null as LandingPageUrl,
@@ -472,7 +527,7 @@ from
   --  pqz.pqid  NOT in  ( select  LinkedQuestion6ID  from ProfileQuestionAnswer where PQAnswerID in 
   --(select PQAnswerID from ProfileQuestionUserAnswer where
   -- UserID = @UserID) and LinkedQuestion6ID IS NOT NULL)
-	) as items
+) as items
 	
 	order by Weightage
 	OFFSET @FromRow ROWS

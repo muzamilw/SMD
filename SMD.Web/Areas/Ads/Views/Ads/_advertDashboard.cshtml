@@ -1,9 +1,9 @@
 ﻿<div data-bind="visible: $root.isAdvertdashboardVisible()" style="display: none" class=" col-lg-9 form-horizontal" style="padding-left:0px;">
     <div class="main-box main-box-subpage">
         <div class="row">
-            <div class="col-lg-12">
+            <div class="adsubHeading Theme_standard_clr borderbtmline">
                 <br />
-                <h1 style="padding-left:7px!important;">Ad campaign timeline</h1>
+                Ad campaign timeline
             </div>
         </div>
         <div>
@@ -33,11 +33,22 @@
             </div>
 
         </div>
+        <div class="row">
+            <div class="adsubHeading Theme_standard_clr borderbtmline">
+                <br />
+                Landing page conversions vs reward click count
+            </div>
+        </div>
         <div class="row main-box margin-Top-30">
 
             <div class="col-lg-7">
                 <div data-bind="morris: {type: 'Donut', data: $root.CampaignRatioAnalyticData, resize:true }" style="width:400px;height:350px;"></div>
-
+                <!--ko if: $root.selecteddateRangeAnalytics() == 1 -->
+                <div>Date range : Last 30 days </div>
+                <!--/ko-->
+                <!--ko if: $root.selecteddateRangeAnalytics() == 2 -->
+                <div>Date range : All time </div>
+                <!--/ko-->
             </div>
             <div class="col-lg-5">
                 <table style="margin-top:70px;">
@@ -60,7 +71,24 @@
             </div>
 
         </div>
-        <div class="clearfix">
+        <div class="row">
+            <div class="adsubHeading Theme_standard_clr borderbtmline">
+                <br />
+                Campaign ROI   
+            </div>
+        </div>
+          <div class="row main-box margin-Top-30">
+
+           
+            @*<div class="col-lg-12">
+                <table style="margin-top:70px;">
+                    <!-- ko template: { name: 'CampaignROITblAnalyticsDataTemplate' , foreach: $root.CampaignROItblAnalyticData } -->
+                    <!-- /ko -->
+                </table>
+            </div>*@
+
+        </div>
+         <div class="clearfix">
         </div>
         <div class="clearfix">
         </div>
@@ -87,3 +115,27 @@
     </tr>
 </script>
 
+<script id="CampaignROITblAnalyticsDataTemplate" type="text/html">
+    <tr>
+        <td><span data-bind="text: label1"></span></td>
+
+        <td class="padingL15 text-right">
+            <span data-bind="text: Stats1"></span>
+        </td>
+        <td class="padingL15 text-right">
+            <span data-bind="text: label2"></span>
+        </td>
+
+        <td class="padingL15 text-right">
+            $<span data-bind="text: Stats2"></span>
+        </td>
+        <td class="padingL15 text-right">
+            <span data-bind="text: label3"></span>
+        </td>
+
+        <td class="padingL15 text-right">
+            <span data-bind="text: Stats3"></span>%
+        </td>
+        
+    </tr>
+</script>
