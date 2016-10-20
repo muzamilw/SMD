@@ -838,6 +838,7 @@
     <Content Include="Content\Images\arrow-up-small.png" />
     <Content Include="Content\Images\arrow-up.png" />
     <Content Include="Content\Images\Back_Footer_Tab.png" />
+    <Content Include="Content\Images\Charts.png" />
     <Content Include="Content\Images\Close_Button.png" />
     <Content Include="Content\Images\colorpicker_background.png" />
     <Content Include="Content\Images\colorpicker_hex.png" />

@@ -30,6 +30,7 @@ namespace SMD.MIS.Areas.Api.Controllers
             data.lineCharts = _IAdvertService.getAdsCampaignByCampaignIdAnalytics(compaignId, CampStatus, dateRange, Granularity);
             data.pieCharts = _IAdvertService.getAdsCampaignByCampaignIdRatioAnalytic(compaignId, dateRange);
             data.tbl = _IAdvertService.getAdsCampaignByCampaignIdtblAnalytic(compaignId);
+            data.ROItbl = _IAdvertService.getCampaignROItblAnalytic(compaignId);
             return data;
         }
 

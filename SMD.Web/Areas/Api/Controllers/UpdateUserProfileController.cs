@@ -64,7 +64,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Update User Profile
         /// </summary>
-        [ApiExceptionCustom]
+       
         public async Task<BaseApiResponse> Post(string authenticationToken, [FromUri] UpdateUserProfileRequest request)
         {
             if (string.IsNullOrEmpty(authenticationToken) || request == null || !ModelState.IsValid)

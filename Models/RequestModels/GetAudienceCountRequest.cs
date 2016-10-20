@@ -8,9 +8,9 @@ namespace SMD.Models.RequestModels
 {
     public class GetAudienceCountRequest
     {
-        public int ageFrom {get;set;}
-        public int ageTo {get;set;}
-        public int gender {get;set;}
+        public int ageFrom { get; set; }
+        public int ageTo { get; set; }
+        public int gender { get; set; }
         public string countryIds { get; set; }
         public string cityIds { get; set; }
         public string languageIds { get; set; }
@@ -29,5 +29,11 @@ namespace SMD.Models.RequestModels
         public string surveyAnswerIdsExcluded { get; set; }
         public string educationIds { get; set; }
         public string educationIdsExcluded { get; set; }
+        public string CampaignQuizIds { get; set; }
+        public string CampaignQuizAnswerIds { get; set; }
+        public string CampaignQuizIdsExcluded { get; set; }
+
+        public string CampaignQuizAnswerIdsExcluded { get; set; }
+
     }
 }

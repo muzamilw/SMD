@@ -63,7 +63,6 @@ namespace DomainModelProject
         public virtual DbSet<ProfileQuestion> ProfileQuestions { get; set; }
         public virtual DbSet<ProfileQuestionAnswer> ProfileQuestionAnswers { get; set; }
         public virtual DbSet<ProfileQuestionGroup> ProfileQuestionGroups { get; set; }
-        public virtual DbSet<ProfileQuestionUserAnswer> ProfileQuestionUserAnswers { get; set; }
         public virtual DbSet<SurveyQuestion> SurveyQuestions { get; set; }
         public virtual DbSet<SurveyQuestionResponse> SurveyQuestionResponses { get; set; }
         public virtual DbSet<SurveyQuestionTargetCriteria> SurveyQuestionTargetCriterias { get; set; }
@@ -92,6 +91,7 @@ namespace DomainModelProject
         public virtual DbSet<vw_ReferringCompanies> vw_ReferringCompanies { get; set; }
         public virtual DbSet<AdCampaignClickRateHistory> AdCampaignClickRateHistories { get; set; }
         public virtual DbSet<PayOutHistory> PayOutHistories { get; set; }
+        public virtual DbSet<ProfileQuestionUserAnswer> ProfileQuestionUserAnswers { get; set; }
     
         public virtual ObjectResult<SearchCoupons_Result> SearchCoupons(Nullable<int> categoryId, Nullable<int> type, string keywords, Nullable<int> distance, string lat, string lon, string userId, Nullable<int> fromRow, Nullable<int> toRow)
         {
@@ -611,6 +611,15 @@ namespace DomainModelProject
                 new ObjectParameter("toRow", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetRegisteredUserData_Result>("GetRegisteredUserData", statusParameter, keywordParameter, fromRowwParameter, toRowParameter);
+        }
+    
+        public virtual ObjectResult<getCampaignROItblAnalytic_Result> getCampaignROItblAnalytic(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getCampaignROItblAnalytic_Result>("getCampaignROItblAnalytic", idParameter);
         }
     }
 }

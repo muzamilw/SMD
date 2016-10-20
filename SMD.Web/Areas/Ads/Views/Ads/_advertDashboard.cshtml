@@ -77,15 +77,15 @@
                 Campaign ROI   
             </div>
         </div>
-          <div class="row main-box margin-Top-30">
+          <div class="row main-box" style="margin-top:20px;">
 
            
-            @*<div class="col-lg-12">
-                <table style="margin-top:70px;">
+            <div class="col-lg-12">
+                <table >
                     <!-- ko template: { name: 'CampaignROITblAnalyticsDataTemplate' , foreach: $root.CampaignROItblAnalyticData } -->
                     <!-- /ko -->
                 </table>
-            </div>*@
+            </div>
 
         </div>
          <div class="clearfix">
@@ -119,22 +119,24 @@
     <tr>
         <td><span data-bind="text: label1"></span></td>
 
-        <td class="padingL15 text-right">
+        <td class="padingRL15 text-right">
             <span data-bind="text: Stats1"></span>
         </td>
-        <td class="padingL15 text-right">
+        <td class="padingL15" style="background-color: #eee">
             <span data-bind="text: label2"></span>
         </td>
 
-        <td class="padingL15 text-right">
+        <td class="padingRL15 text-right" style="background-color: #eee">
             $<span data-bind="text: Stats2"></span>
         </td>
-        <td class="padingL15 text-right">
+        <td class="padingL15">
             <span data-bind="text: label3"></span>
         </td>
 
         <td class="padingL15 text-right">
+            <!--ko if: Stats3 != null-->
             <span data-bind="text: Stats3"></span>%
+            <!--/ko-->
         </td>
         
     </tr>

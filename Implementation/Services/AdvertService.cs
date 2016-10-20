@@ -1335,5 +1335,9 @@ namespace SMD.Implementation.Services
         {
             return _adCampaignRepository.getAdsCampaignByCampaignIdtblAnalytic(ID);
         }
+        public IEnumerable<getCampaignROItblAnalytic_Result> getCampaignROItblAnalytic(int ID)
+        {
+            return _adCampaignRepository.getCampaignROItblAnalytic(ID);
+        }
     }
 }

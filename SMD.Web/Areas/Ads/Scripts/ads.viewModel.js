@@ -157,6 +157,7 @@ define("ads/ads.viewModel",
 				selectedGranularityAnalytics = ko.observable(1) ,
 				selectedCampaignIdAnalytics = ko.observable() ,
 				AdsCampaignAnalyticsData = ko.observableArray([]), 
+				CampaignROItblAnalyticData = ko.observableArray([]), 
 				CampaignRatioAnalyticData = ko.observable(1), 
 				granularityDropDown = ko.observableArray([{ id: 1, name: "Daily" }, { id: 2, name: "Weekly" }, { id: 3, name: "Monthly" }, { id: 4, name: "Quarterly" }, { id: 5, name: "Yearly" }]),
 				DateRangeDropDown  = ko.observableArray([{ id: 1, name: "One month" }, { id: 2, name: "All Time" }]),
@@ -189,6 +190,10 @@ define("ads/ads.viewModel",
 								CampaignTblAnalyticsData.removeAll();
 								ko.utils.arrayPushAll(CampaignTblAnalyticsData(), data.tbl);
 								CampaignTblAnalyticsData.valueHasMutated();
+								
+								CampaignROItblAnalyticData.removeAll();
+								ko.utils.arrayPushAll(CampaignROItblAnalyticData(), data.ROItbl);
+								CampaignROItblAnalyticData.valueHasMutated();
 							}
 							
 						},
@@ -1623,7 +1628,7 @@ define("ads/ads.viewModel",
 
                   },
                 onEditCampaign = function (item) {
-                    
+                    debugger;
                     previewScreenNumber(1);
                     isTerminateBtnVisible(false);
                     isNewCampaignVisible(false);
@@ -2360,15 +2365,15 @@ define("ads/ads.viewModel",
                         } else {
                             if (item.IncludeorExclude() == '0') {
                                 if (cityIdsExcluded == '') {
-                                    cityIdsExcluded += item.City();
+                                    cityIdsExcluded += item.CityID();
                                 } else {
-                                    cityIdsExcluded += ',' + item.City();
+                                    cityIdsExcluded += ',' + item.CityID();
                                 }
                             } else {
                                 if (cityIds == '') {
-                                    cityIds += item.City();
+                                    cityIds += item.CityID();
                                 } else {
-                                    cityIds += ',' + item.City();
+                                    cityIds += ',' + item.CityID();
                                 }
                             }
                         }
@@ -2376,7 +2381,9 @@ define("ads/ads.viewModel",
                     var languageIds = '', industryIds = '', languageIdsExcluded = '',
                         industryIdsExcluded = '', profileQuestionIds = '', profileAnswerIds = '',
                         surveyQuestionIds = '', surveyAnswerIds = '', profileQuestionIdsExcluded = '', profileAnswerIdsExcluded = '',
-                        surveyQuestionIdsExcluded = '', surveyAnswerIdsExcluded = '';
+                        surveyQuestionIdsExcluded = '', surveyAnswerIdsExcluded = '', CampaignQuizIds = '', CampaignQuizAnswerIds = '', CampaignQuizAnswerIdsExcluded = '',CampaignQuizIdsExcluded='';
+
+
                     _.each(campaignModel().AdCampaignTargetCriterias(), function (item) {
                         if (item.Type() == 1) {
                             if (item.IncludeorExclude() == '0') {
@@ -2470,6 +2477,31 @@ define("ads/ads.viewModel",
                                 }
                             }
                         }
+                        else if (item.Type() == 6) {        //Quiz questions
+                            if (item.IncludeorExclude() == '0') {
+                                if (CampaignQuizIdsExcluded == '') {
+                                    CampaignQuizIdsExcluded += item.QuizCampaignId();
+                                } else {
+                                    surveyQuestionIdsExcluded += ',' + item.QuizCampaignId();
+                                }
+                                if (CampaignQuizAnswerIdsExcluded == '') {
+                                    CampaignQuizAnswerIdsExcluded += item.QuizAnswerId();
+                                } else {
+                                    CampaignQuizAnswerIdsExcluded += ',' + item.QuizAnswerId();
+                                }
+                            } else {
+                                if (CampaignQuizIds == '') {
+                                    CampaignQuizIds += item.QuizCampaignId();
+                                } else {
+                                    CampaignQuizIds += ',' + item.QuizCampaignId();
+                                }
+                                if (CampaignQuizAnswerIds == '') {
+                                    CampaignQuizAnswerIds += item.QuizAnswerId();
+                                } else {
+                                    CampaignQuizAnswerIds += ',' + item.QuizAnswerId();
+                                }
+                            }
+                        }
                     });
                     var campData = {
                         ageFrom: campaignModel().AgeRangeStart(),
@@ -2492,7 +2524,12 @@ define("ads/ads.viewModel",
                         surveyQuestionIdsExcluded: surveyQuestionIdsExcluded,
                         surveyAnswerIdsExcluded: surveyAnswerIdsExcluded,
                         educationIds: educationIds,
-                        educationIdsExcluded: educationIdsExcluded
+                        educationIdsExcluded: educationIdsExcluded,
+
+                        CampaignQuizIds: CampaignQuizIds,
+                        CampaignQuizAnswerIds: CampaignQuizAnswerIds,
+                        CampaignQuizAnswerIdsExcluded: CampaignQuizAnswerIdsExcluded,
+                        CampaignQuizIdsExcluded: CampaignQuizIdsExcluded
                     };
                     $("#spinnerAudience").css("display", "block");
                     dataservice.getAudienceData(campData, {
@@ -3335,7 +3372,8 @@ define("ads/ads.viewModel",
 					CloseCampaignADAnalyticView:CloseCampaignADAnalyticView,
 					CampaignRatioAnalyticData:CampaignRatioAnalyticData,
 					CampaignTblAnalyticsData:CampaignTblAnalyticsData,
-					isClickRateVisible: isClickRateVisible
+					isClickRateVisible: isClickRateVisible,
+					CampaignROItblAnalyticData:CampaignROItblAnalyticData
 					
                 };
             })()
