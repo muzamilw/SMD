@@ -52,7 +52,7 @@ namespace SMD.Implementation.Services
             //#endregion
             #region Updation
 
-            if (request.ProfileQuestionAnswerIds != null && request.ProfileQuestionAnswerIds.Count > 0)
+            if (request.ProfileQuestionAnswerIds != null && request.ProfileQuestionAnswerIds.Count > 0 && request.ProfileQuestionAnswerIds[0] != -1)
             {
                 foreach (var ansId in request.ProfileQuestionAnswerIds)
                 {
