@@ -11,6 +11,11 @@ define("FranchiseDashboard/registeredUsers.viewModel",
                 var view,
                     registeredUsers = ko.observableArray([]),
                     company = ko.observable(),
+                    searchSelectedStatus = ko.observable(),
+                    searchFilterValue = ko.observable(),
+                    isEditorVisible = ko.observable(false),
+                    selectedUser = ko.observable(),
+                    selectedCompany = ko.observable(),
                    
                     //pager
                     pager = ko.observable(),
@@ -18,29 +23,83 @@ define("FranchiseDashboard/registeredUsers.viewModel",
                     sortOn = ko.observable(5),
                     //Assending  / Desending
                     sortIsAsc = ko.observable(true),
-                   
+                    getCompanyData = function (selectedItem) {
+
+                           dataservice.getCompanyData(
+                        {
+                            companyId: selectedItem.companyId,
+                            userId: selectedItem.userId,
+                        },
+                        {
+                            success: function (comData) {
+                                selectedCompany(comData);
+                                var cType = companyTypes().find(function (item) {
+                                    return comData.CompanyType === item.Id;
+                                });
+                                if (cType != undefined)
+                                    company(cType.Name);
+                                else
+                                    company(null);
+                                isEditorVisible(true);
+
+                            },
+                            error: function () {
+                                toastr.error("Failed to load Company");
+                            }
+                        });
+
+                       },
                     getRegisteredUsers = function () {
                        
-                        dataservice.getpayOutHistoryForApproval(
+                        dataservice.getRegisteredUsers(
                              {
                                  PageSize: pager().pageSize(),
                                  PageNo: pager().currentPage(),
                                  SortBy: sortOn(),
-                                 IsAsc: sortIsAsc(),
-                                 UserRole: UserRole
+                                 status: searchSelectedStatus(),
+                                 SearchText: searchFilterValue(),
+                                 IsAsc: sortIsAsc()
+                              
 
                              },
                              {
                                  success: function (data) {
-                                  
+                                     registeredUsers.removeAll();
+                                     console.log("Registered Userrs");
+                                     console.log(data.RegisteredUser);
+                                     _.each(data.RegisteredUser, function (item) {
+                                         registeredUsers.push(model.RegisteredUserServertoClientMapper(item));
+                                     });
+                                
                                      ////pager().totalCount(0);
-                                     //pager().totalCount(data.TotalCount);
+                                     pager().totalCount(data.TotalCount);
                                  },
                                  error: function (msg) {
                                      toastr.error("Failed to load data" + msg);
                                  }
                              });
                     },
+                       getCampaignByFilter = function () {
+                           getRegisteredUsers();
+                       },
+                          changeStatus = function () {
+                             
+                          },
+                    onEditUSer = function (item) {
+
+                           $("#topArea").css("display", "none");
+                           $("#divApprove").css("display", "none");
+                        selectedUser(item);
+                           getCompanyData(item);
+                          
+                    },
+                    closeEditDialog = function () {
+
+                        selectedUser(undefined);
+                        isEditorVisible(false);
+                          $("#topArea").css("display", "block");
+                          $("#divApprove").css("display", "block");
+                      },
                     companyTypes = ko.observableArray([
                     { Id: 1, Name: 'Amusement, Gambling, and Recreation Industries' },
                     { Id: 2, Name: 'Arts, Entertainment, and Recreation' },
@@ -103,7 +162,16 @@ define("FranchiseDashboard/registeredUsers.viewModel",
                     sortIsAsc: sortIsAsc,
                     getRegisteredUsers: getRegisteredUsers,
                     companyTypes: companyTypes,
-                    company: company
+                    company: company,
+                    isEditorVisible: isEditorVisible,
+                    selectedUser: selectedUser,
+                    onEditUSer: onEditUSer,
+                    selectedCompany: selectedCompany,
+                    closeEditDialog: closeEditDialog,
+                    getCampaignByFilter: getCampaignByFilter,
+                    searchSelectedStatus: searchSelectedStatus,
+                    searchFilterValue: searchFilterValue,
+                    changeStatus:changeStatus
 
 
 

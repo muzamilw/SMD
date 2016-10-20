@@ -10,14 +10,14 @@ define("FranchiseDashboard/registeredUsers.view",
                 // View model 
                 viewModel = specifiedViewModel,
                 // Binding root used with knockout
-                bindingRoot = $("#PPApprovalBindingSpot")[0],
+                bindingRoot = $("#RegisterUsersBindingSpot")[0],
                 // Initialize
                 initialize = function () {
                     if (!bindingRoot) {
                         return;
                     }
                     // Handle Sorting
-                    handleSorting("payPallApprovalLVTable", viewModel.sortOn, viewModel.sortIsAsc, viewModel.getRegisteredUsers);
+                    handleSorting("registerUsersLVTable", viewModel.sortOn, viewModel.sortIsAsc, viewModel.getRegisteredUsers);
                 };
             initialize();
             return {

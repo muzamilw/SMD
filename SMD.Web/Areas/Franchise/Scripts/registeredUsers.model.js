@@ -1,17 +1,16 @@
 ﻿define(["ko", "underscore", "underscore-ko"], function (ko) {
 
     var // ReSharper disable InconsistentNaming
-        RegisteredUser = function (poStageOneUserId, poCentzAmount, poTargetPayoutAccount, poCompanyId, poPayOutId, poCompanyName, poDollarAmount, poStageOneRejectionReason) {
+        RegisteredUser = function (ruLastLoginTime, ruEmail, ruAccountBalance, ruStatus, ruCompanyId, ruCompanyName, ruId, rufullname) {
             var
-                stageOneUserId = ko.observable(poStageOneUserId),
-                centzAmount = ko.observable(poCentzAmount),
-                targetPayoutAccount = ko.observable(poTargetPayoutAccount),
-                companyId = ko.observable(poCompanyId),
-                payOutId = ko.observable(poPayOutId),
-                companyName = ko.observable(poCompanyName),
-                dollarAmount = ko.observable(poDollarAmount),
-                //isApproved = ko.observable(spcIsApproved),
-                rejectionReasonStage1 = ko.observable(poStageOneRejectionReason),
+                lastLoginTime = ko.observable(ruLastLoginTime),
+                email = ko.observable(ruEmail),
+                accountBalance = ko.observable(ruAccountBalance),
+                status = ko.observable(ruStatus),
+                companyId = ko.observable(ruCompanyId),
+                companyName = ko.observable(ruCompanyName),
+                userId = ko.observable(ruId),
+                fullname = ko.observable(rufullname),
                 
 
                 errors = ko.validation.group({
@@ -41,15 +40,15 @@
                 };
             return {
 
-                stageOneUserId: stageOneUserId,
-                centzAmount: centzAmount,
-                targetPayoutAccount: targetPayoutAccount,
+                lastLoginTime: lastLoginTime,
+                email: email,
+                accountBalance: accountBalance,
+                status: status,
                 companyId: companyId,
-                payOutId: payOutId,
                 companyName: companyName,
-                dollarAmount: dollarAmount,
+                userId: userId,
                 //isApproved: isApproved,
-                rejectionReasonStage1: rejectionReasonStage1,
+                fullname: fullname,
                 hasChanges: hasChanges,
                 convertToServerData: convertToServerData,
                 reset: reset,
@@ -65,7 +64,7 @@
     var RegisteredUserServertoClientMapper = function (itemFromServer) {
 
 
-        return new RegisteredUser(itemFromServer.StageOneUserId, itemFromServer.CentzAmount, itemFromServer.TargetPayoutAccount, itemFromServer.CompanyId, itemFromServer.PayOutId, itemFromServer.CompanyName, itemFromServer.DollarAmount, itemFromServer.StageOneRejectionReason);
+        return new RegisteredUser(itemFromServer.LastLoginTime, itemFromServer.Email, itemFromServer.AccountBalance, itemFromServer.Status, itemFromServer.CompanyId, itemFromServer.CompanyName, itemFromServer.Id, itemFromServer.fullname);
     };
 
     // Function to attain cancel button functionality ProfileQuestion

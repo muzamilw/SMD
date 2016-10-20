@@ -227,6 +227,7 @@
                   ChannelType: ChannelType,
                   VideoBytes: VideoBytes,
                   LogoUrl: LogoUrl,
+                  Gender: Gender,
                 //  ClickRate: ClickRate,
                   
               }),

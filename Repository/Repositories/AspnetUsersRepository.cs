@@ -60,11 +60,11 @@ namespace SMD.Repository.Repositories
         }
         public IEnumerable<GetRegisteredUserData_Result> GetRegisteredUsers(RegisteredUsersSearchRequest request, out int rowCount)
         {
-            var RegisterdUsers = db.GetRegisteredUserData(request.status, request.SearchString, (request.PageNo - 1) * request.PageSize, request.PageSize);
+            var RegisterdUsers = db.GetRegisteredUserData(request.status, request.SearchText, (request.PageNo - 1) * request.PageSize, request.PageSize).ToList();
             if (RegisterdUsers.Count() > 0)
             {
-                var firstrec = RegisterdUsers.First();
-                rowCount = firstrec.TotalItems.Value;
+                //var firstrec = RegisterdUsers.First();
+                rowCount = RegisterdUsers[0].TotalItems.Value;
             }
             else
                 rowCount = 0;

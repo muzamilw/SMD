@@ -78,7 +78,7 @@ namespace SMD.Implementation.Services
             Company company = companyRepository.GetCompanyWithoutChilds(companyId);
             User loginUser = _manageUserRepository.GetLoginUser(userId);
             var defaultBranch = _companyBranchRepository.GetDefaultCompanyBranch(companyId);
-            var currencyCode = _countryRepository.GetCurrencyCode(company.BillingCountryId ?? 0);
+            var currencyCode = _countryRepository.GetCurrencyCode(company.BillingCountryId!=null?company.BillingCountryId ?? 0:1);
 
             return new CompanyResponseModel
             {
