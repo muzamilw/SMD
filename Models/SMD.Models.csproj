@@ -239,6 +239,7 @@
     <Compile Include="RequestModels\BuyItModel.cs" />
     <Compile Include="RequestModels\GetUserRequestModel.cs" />
     <Compile Include="RequestModels\InviteUserEmail.cs" />
+    <Compile Include="RequestModels\RegisteredUsersSearchRequest.cs" />
     <Compile Include="RequestModels\UserBalanceInquiryRequest.cs" />
     <Compile Include="RequestModels\ProductActionRequest.cs" />
     <Compile Include="RequestModels\ApproveSurveyRequest.cs" />
@@ -271,6 +272,7 @@
     <Compile Include="ResponseModels\PayOutResponseModelForApproval.cs" />
     <Compile Include="ResponseModels\RandomGameResponse.cs" />
     <Compile Include="ResponseModels\ProfileQuestionResponseModelForApproval.cs" />
+    <Compile Include="ResponseModels\RegisteredUsersResponseModel.cs" />
     <Compile Include="ResponseModels\RevenueOverTimeResponseModel.cs" />
     <Compile Include="ResponseModels\SearchCouponsResponse.cs" />
     <Compile Include="ResponseModels\IndustryResponse.cs" />

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SMD.Models.ResponseModels;
+using SMD.Models.RequestModels;
 
 namespace SMD.Interfaces.Services
 {
@@ -24,5 +25,6 @@ namespace SMD.Interfaces.Services
         CompanyResponseModel GetCompanyDetails(int companyId = 0, string userId = "");
         bool UpdateCompanyProfile(CompanyResponseModel company, byte[] logoImageBytes);
         List<vw_ReferringCompanies> GetRefferalComponiesByCid();
+        RegisteredUsersResponseModel GetRegisterdUsers(RegisteredUsersSearchRequest request);
     }
 }
