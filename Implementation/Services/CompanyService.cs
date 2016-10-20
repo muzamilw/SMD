@@ -13,32 +13,35 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using SMD.Models.ResponseModels;
+using SMD.Models.RequestModels;
 
 namespace SMD.Implementation.Services
 {
     public class CompanyService : ICompanyService
     {
-       #region Private
+        #region Private
 
         private readonly ICompanyRepository companyRepository;
         private readonly IManageUserRepository _manageUserRepository;
         private readonly ICompanyBranchRepository _companyBranchRepository;
         private readonly IBranchCategoryRepository _branchCategoryRepository;
         private readonly ICountryRepository _countryRepository;
+        private readonly IAspnetUsersRepository _IAspnetUsersRepository;
 
-        #endregion 
+        #endregion
         #region Constructor
         /// <summary>
         /// Constructor 
         /// </summary>
         public CompanyService(ICompanyRepository companyRepository, IManageUserRepository managerUserRepository, ICompanyBranchRepository companyBranchRepository, IBranchCategoryRepository branchCategoryRepository,
-            ICountryRepository countryRepository)
+            ICountryRepository countryRepository, IAspnetUsersRepository _IAspnetUsersRepository)
         {
             this.companyRepository = companyRepository;
             this._manageUserRepository = managerUserRepository;
             this._companyBranchRepository = companyBranchRepository;
             this._branchCategoryRepository = branchCategoryRepository;
             this._countryRepository = countryRepository;
+            this._IAspnetUsersRepository = _IAspnetUsersRepository;
         }
 
         #endregion
@@ -49,7 +52,7 @@ namespace SMD.Implementation.Services
         /// </summary>
         public int GetUserCompany(string userId)
         {
-           return companyRepository.GetUserCompany(userId);
+            return companyRepository.GetUserCompany(userId);
         }
 
 
@@ -75,13 +78,13 @@ namespace SMD.Implementation.Services
             Company company = companyRepository.GetCompanyWithoutChilds(companyId);
             User loginUser = _manageUserRepository.GetLoginUser(userId);
             var defaultBranch = _companyBranchRepository.GetDefaultCompanyBranch(companyId);
-            var currencyCode = _countryRepository.GetCurrencyCode(company.BillingCountryId ?? 0);
+            var currencyCode = _countryRepository.GetCurrencyCode(company.BillingCountryId!=null?company.BillingCountryId ?? 0:1);
 
             return new CompanyResponseModel
             {
                 CompanyId = company.CompanyId,
                 AboutUs = company.AboutUsDescription,
-                BillingAddressLine1 = defaultBranch != null? defaultBranch.BranchAddressLine1 : string.Empty,
+                BillingAddressLine1 = defaultBranch != null ? defaultBranch.BranchAddressLine1 : string.Empty,
                 BillingAddressLine2 = defaultBranch != null ? defaultBranch.BranchAddressLine2 : string.Empty,
                 BillingBusinessName = company.BillingAddressName,
                 BillingCity = defaultBranch != null ? defaultBranch.BranchCity : string.Empty,
@@ -93,29 +96,29 @@ namespace SMD.Implementation.Services
                 BranchName = defaultBranch != null ? defaultBranch.BranchTitle : string.Empty,
                 CompanyName = company.CompanyName,
                 CompanyRegistrationNo = company.CompanyRegNo,
-                CompanyType = company.CompanyType??0,
+                CompanyType = company.CompanyType ?? 0,
                 StripeCustomerId = company.StripeCustomerId,
-                PayPalId =  company.PaypalCustomerId,
+                PayPalId = company.PaypalCustomerId,
                 FirstName = loginUser.FullName,
                 Gender = loginUser.Gender,
                 Email = loginUser.Email,
                 Solutation = loginUser.Title == "Mr." ? 1 : (loginUser.Title == "Ms." ? 2 : 3),
                 Mobile = loginUser.Phone1,
                 DateOfBirth = loginUser.DOB,
-                IsReceiveDeals = loginUser.optDealsNearMeEmails??false,
-                IsReceiveLatestServices = loginUser.optLatestNewsEmails??false,
-                IsReceiveWeeklyUpdates = loginUser.optMarketingEmails??false,
+                IsReceiveDeals = loginUser.optDealsNearMeEmails ?? false,
+                IsReceiveLatestServices = loginUser.optLatestNewsEmails ?? false,
+                IsReceiveWeeklyUpdates = loginUser.optMarketingEmails ?? false,
                 Logo = company.Logo,
                 WebsiteLink = company.WebsiteLink,
                 SalesEmail = company.SalesEmail,
                 SalesPhone = company.Tel1,
                 VatNumber = company.TaxRegNo,
-                BranchesCount =  company.NoOfBranches??0,
+                BranchesCount = company.NoOfBranches ?? 0,
                 BusinessStartDate = company.CreationDateTime,
-                Profession = loginUser.IndustryId??0,
+                Profession = loginUser.IndustryId ?? 0,
                 PassportNumber = loginUser.PassportNo,
                 UserId = loginUser.Id,
-                BillingCountryName = _countryRepository.GetCountryNameById(defaultBranch != null ? defaultBranch.CountryId??0 : 0),
+                BillingCountryName = _countryRepository.GetCountryNameById(defaultBranch != null ? defaultBranch.CountryId ?? 0 : 0),
                 BranchId = defaultBranch != null ? defaultBranch.BranchId : 0,
                 CurrencyID = currencyCode
             };
@@ -130,7 +133,7 @@ namespace SMD.Implementation.Services
 
 
 
-            if (company.Logo != null && company.Logo!=string.Empty)
+            if (company.Logo != null && company.Logo != string.Empty)
             {
 
                 var currentCompany = companyRepository.Find(companyRepository.CompanyId);
@@ -142,7 +145,7 @@ namespace SMD.Implementation.Services
             }
 
             companyRepository.updateCompany(company);
-            
+
 
 
             return true;
@@ -154,23 +157,23 @@ namespace SMD.Implementation.Services
             var currentCompany = companyRepository.GetCompanyWithoutChilds();
             if (currentCompany != null)
             {
-               
-                    string smdContentPath = ConfigurationManager.AppSettings["SMD_Content"];
-                    HttpServerUtility server = HttpContext.Current.Server;
-                    string mapPath = server.MapPath(smdContentPath + "/Users/" + requestData.CompanyId);
 
-                    // Create directory if not there
-                    if (!Directory.Exists(mapPath))
-                    {
-                        Directory.CreateDirectory(mapPath);
-                    }
+                string smdContentPath = ConfigurationManager.AppSettings["SMD_Content"];
+                HttpServerUtility server = HttpContext.Current.Server;
+                string mapPath = server.MapPath(smdContentPath + "/Users/" + requestData.CompanyId);
 
-                if ( requestData.LogoChanged)
-                   currentCompany.Logo = ImageHelper.SaveImage(mapPath, requestData.Logo, string.Empty, string.Empty,
-                        "blah", logoImageBytes, requestData.CompanyId);
+                // Create directory if not there
+                if (!Directory.Exists(mapPath))
+                {
+                    Directory.CreateDirectory(mapPath);
+                }
+
+                if (requestData.LogoChanged)
+                    currentCompany.Logo = ImageHelper.SaveImage(mapPath, requestData.Logo, string.Empty, string.Empty,
+                         "blah", logoImageBytes, requestData.CompanyId);
 
 
-                
+
                 var defaultBranch = _companyBranchRepository.GetDefaultCompanyBranch();
                 if (defaultBranch == null)
                 {
@@ -181,14 +184,14 @@ namespace SMD.Implementation.Services
                     updateCompanyBranch(defaultBranch, requestData);
                 }
 
-              //UpdatedCurrentCompany(requestData, currentCompany);
+                //UpdatedCurrentCompany(requestData, currentCompany);
 
 
                 companyRepository.updateCompanyForProfile(requestData, currentCompany);
 
                 UpdateUserProfile(requestData);
 
-               
+
             }
             return true;
         }
@@ -198,7 +201,7 @@ namespace SMD.Implementation.Services
 
             target.CompanyName = source.CompanyName;
             target.AboutUsDescription = source.AboutUs;
-           target.BillingAddressLine1 = source.BillingAddressLine1;
+            target.BillingAddressLine1 = source.BillingAddressLine1;
             target.BillingAddressLine2 = source.BillingAddressLine2;
             target.BillingAddressName = source.BillingBusinessName;
             target.BillingCity = source.BillingCity;
@@ -218,7 +221,7 @@ namespace SMD.Implementation.Services
             target.TaxRegNo = source.CompanyRegistrationNo;
             target.Tel1 = source.SalesPhone;
             target.CountryId = source.BillingCountryId;
-           
+
             return target;
         }
         private CompanyBranch CreateNewCompanyBranch(CompanyResponseModel source)
@@ -245,12 +248,12 @@ namespace SMD.Implementation.Services
                 _branchCategoryRepository.SaveChanges();
                 return itemTarget;
             }
-           
+
         }
 
         private CompanyBranch updateCompanyBranch(CompanyBranch target, CompanyResponseModel source)
         {
-            
+
             target.BranchCity = source.BillingCity;
             target.BranchAddressLine1 = source.BillingAddressLine1;
             target.BranchAddressLine2 = source.BillingAddressLine2;
@@ -261,7 +264,7 @@ namespace SMD.Implementation.Services
             target.BranchTitle = source.BranchName;
             target.BranchLocationLat = source.BranchLocationLat;
             target.BranchLocationLong = source.BranchLocationLong;
-            
+
             return target;
         }
 
@@ -287,8 +290,8 @@ namespace SMD.Implementation.Services
             }
 
             currentUser.FullName = source.FirstName;
-            
-           // currentUser.Email = source.Email;
+
+            // currentUser.Email = source.Email;
             currentUser.DOB = source.DateOfBirth;
             currentUser.IndustryId = source.Profession;
             currentUser.Phone1 = source.Mobile;
@@ -296,9 +299,9 @@ namespace SMD.Implementation.Services
             currentUser.optDealsNearMeEmails = source.IsReceiveDeals;
             currentUser.optLatestNewsEmails = source.IsReceiveLatestServices;
             currentUser.optMarketingEmails = source.IsReceiveWeeklyUpdates;
-          
+
             _manageUserRepository.SaveChanges();
-            
+
         }
 
 
@@ -314,8 +317,8 @@ namespace SMD.Implementation.Services
                 Directory.CreateDirectory(mapPath);
             }
 
-            return ImageHelper.SaveImage(mapPath,request.Logo, string.Empty, string.Empty,
-                "blah", LogoImageBytes,request.CompanyId);
+            return ImageHelper.SaveImage(mapPath, request.Logo, string.Empty, string.Empty,
+                "blah", LogoImageBytes, request.CompanyId);
 
         }
         public Company GetCompanyForAddress()
@@ -325,6 +328,17 @@ namespace SMD.Implementation.Services
         public List<vw_ReferringCompanies> GetRefferalComponiesByCid()
         {
             return companyRepository.GetReferralCompaniesByCID();
+        }
+
+        public RegisteredUsersResponseModel GetRegisterdUsers(RegisteredUsersSearchRequest request)
+        {
+            int rowCount;
+            return new RegisteredUsersResponseModel
+            {
+                RegisteredUser = _IAspnetUsersRepository.GetRegisteredUsers(request, out rowCount),
+                TotalCount = rowCount
+
+            };
         }
         #endregion
     }

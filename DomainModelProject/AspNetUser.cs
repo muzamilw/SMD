@@ -21,11 +21,11 @@ namespace DomainModelProject
             this.AspNetUserLogins = new HashSet<AspNetUserLogin>();
             this.CompaniesAspNetUsers = new HashSet<CompaniesAspNetUser>();
             this.CouponCodes = new HashSet<CouponCode>();
-            this.ProfileQuestionUserAnswers = new HashSet<ProfileQuestionUserAnswer>();
             this.SurveyQuestions = new HashSet<SurveyQuestion>();
             this.SurveyQuestionResponses = new HashSet<SurveyQuestionResponse>();
             this.AspNetRoles = new HashSet<AspNetRole>();
             this.Apps = new HashSet<App>();
+            this.ProfileQuestionUserAnswers = new HashSet<ProfileQuestionUserAnswer>();
         }
     
         public string Id { get; set; }
@@ -80,11 +80,11 @@ namespace DomainModelProject
         public virtual Language Language { get; set; }
         public virtual ICollection<CompaniesAspNetUser> CompaniesAspNetUsers { get; set; }
         public virtual ICollection<CouponCode> CouponCodes { get; set; }
-        public virtual ICollection<ProfileQuestionUserAnswer> ProfileQuestionUserAnswers { get; set; }
         public virtual ICollection<SurveyQuestion> SurveyQuestions { get; set; }
         public virtual ICollection<SurveyQuestionResponse> SurveyQuestionResponses { get; set; }
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
         public virtual ICollection<App> Apps { get; set; }
         public virtual Company Company { get; set; }
+        public virtual ICollection<ProfileQuestionUserAnswer> ProfileQuestionUserAnswers { get; set; }
     }
 }

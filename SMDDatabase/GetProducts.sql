@@ -1,6 +1,6 @@
-﻿
+﻿USE [SMDv2]
 GO
-/****** Object:  StoredProcedure [dbo].[GetProducts]    Script Date: 10/19/2016 1:20:12 PM ******/
+/****** Object:  StoredProcedure [dbo].[GetProducts]    Script Date: 10/20/2016 10:36:22 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -11,7 +11,7 @@ ALTER PROCEDURE [dbo].[GetProducts]
 
 --  select weightage,* from [GetUserProfileQuestions]('b8a3884f-73f3-41ec-9926-293ea919a5e11', 214) x order by x.weightage
 
--- exec [dbo].[GetProducts] 		@UserID = N'b8a3884f-73f3-41ec-9926-393ea919a5e11', 		@FromRow = 0, 		@ToRow = 30
+-- exec [dbo].[GetProducts] 		@UserID = N'bc23eeda-1605-482c-86ec-401901b2fb13', 		@FromRow = 0, 		@ToRow = 30
 	-- Add the parameters for the stored procedure here
 	@UserID nvarchar(128) = 0 ,
 	@FromRow int = 0,
@@ -47,7 +47,7 @@ else
 		   SELECT @cityId = NULL--cityId FROM Company where @companyId=@companyId
 		  		 
 		   SET @currentDate = getDate()
-		   SET @age = DATEDIFF(year, @age, @currentDate)
+		   SET @age = DATEDIFF(year, @dob, @currentDate)
 
 
 select *, COUNT(*) OVER() AS TotalItems--, 
@@ -199,16 +199,44 @@ from
 						where crit.campaignid = adcampaign.campaignid and crit.[type] = 6
 			) acf  
 
+			--  Industry criteria
+			outer apply
+				(	
+					select count(*) totalcrit, count(uans.id) matchcrit from [AdCampaignTargetCriteria]  crit
+					left outer join
+						( --get the most recent answer
+							select isnull(IndustryID,0) industryid,id from aspnetusers where id = @UserID
+							   
+
+						) uans on (crit.IncludeorExclude = 1 and uans.industryid = crit.industryid ) or (crit.IncludeorExclude = 0 and uans.industryid <> crit.industryid ) --type 4 is industry
+						where crit.campaignid = adcampaign.campaignid and crit.[type] = 4
+			) indf  
+
+			--  Location criteria
+
+			outer apply
+			(	
+				select count(*) totalcrit, count(uans.id) matchcrit from [AdCampaignTargetLocation]  crit
+				left outer join
+					( --get the most recent answer
+						select isnull(cit.cityid,0) BillingCityID,c.BillingCity, cityid,c.billingCountryid,id from aspnetusers u inner join Company c on u.companyid = c.companyid and id = @UserID 
+						left outer join city cit on c.BillingCity LIKE CONCAT(cit.CityName, '%') 
+							   
+
+					) uans on (crit.IncludeorExclude = 1 and uans.BillingCityID = crit.CityID  and uans.BillingCountryID = crit.CountryID ) or (crit.IncludeorExclude = 0 and uans.BillingCityID <> crit.CityID  and uans.BillingCountryID <> crit.CountryID ) --type 4 is industry
+					where crit.campaignid = adcampaign.campaignid
+		) locf  
+
 
 	
 			where ( 
 						((@age is null) or (adcampaign.AgeRangeEnd >= @age and  @age >= adcampaign.AgeRangeStart))
 						and
-						((@gender is null) or (adcampaign.Gender = @gender))
+						((adcampaign.Gender = 1) or (adcampaign.Gender = @gender ))
+						--and
+						--((@languageId is null) or (adcampaign.LanguageId = @languageId))
 						and
-						((@languageId is null) or (adcampaign.LanguageId = @languageId))
-						and
-						(@currentDate >= adcampaign.approvaldatetime)
+							(@currentDate >= adcampaign.approvaldatetime)
 						and
 						(adcampaign.Approved = 1)
 						and
@@ -216,29 +244,34 @@ from
 						and
 						( adcampaign.MaxdailyBudget >= campaignbudget.todaySpent)
 
+						--and
+						--((@countryId is null or @cityId is null) or ((select count(*) from AdCampaignTargetLocation MyCampaignLoc
+						--	 where MyCampaignLoc.CampaignID=adcampaign.CampaignID and MyCampaignLoc.CountryID=@countryId and
+						--	 MyCampaignLoc.CityID=@cityId) > 0))
+
 						and
-						((@countryId is null or @cityId is null) or ((select count(*) from AdCampaignTargetLocation MyCampaignLoc
-							 where MyCampaignLoc.CampaignID=adcampaign.CampaignID and MyCampaignLoc.CountryID=@countryId and
-							 MyCampaignLoc.CityID=@cityId) > 0))
+						-- location type matching clauses -  the filtering logic of location country and city
+						(
+							(locf.matchcrit > 0 )
+						)
+
 						and
-						-- industry type matching clauses
-						((@industryId is null) or ((select count(*) from AdCampaignTargetCriteria MyCampaignCrit
-							 where MyCampaignCrit.CampaignID = adcampaign.CampaignID and MyCampaignCrit.[type] = 4 and	-- 4 is the type for industry
-							 MyCampaignCrit.IndustryID=@industryId) > 0 ))
+						-- industry type matching clauses -  the filtering logic of industry types
+						(
+							(indf.matchcrit > 0 )
+						)
 						and
 						--- system profile questions - the filtering logic of profile insights 
 						(
-
 						
-							(pqf.totalcrit  = pqf.matchcrit ) --(pqf.totalcrit > 0 ) or 
-							--pqf.totalcrit  = pqf.matchcrit
+							(pqf.totalcrit  = pqf.matchcrit ) 
+						
 						)
 						and
 						--- user adcampaing quiz answer - the filtering logic of ad quiz results 
 						(
-						(acf.totalcrit  = acf.matchcrit ) --(acf.totalcrit > 0 ) or 
-							
-							--acf.totalcrit  = acf.matchcrit
+							(acf.totalcrit  = acf.matchcrit ) 
+
 						)
 						and 
 						--do not show the ad again to the user if already watched today.

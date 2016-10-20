@@ -92,7 +92,7 @@ else
                                 <div class="pull-left ads-numbering-main">
                                     <a data-toggle="modal" data-target=".model_quizQ_ph">
                                         <div class="ads-numbering-box" style="background: rgb(104,179,89);">
-                                            <img src="~/Content/Images/AD_Campaign_mobileStencil.png" width="20px" />
+                                            <img src="~/Content/Images/AD_Campaign_mobileStencil.png" style="width:20px" />
                                         </div>
                                         <br />
                                         <span>Preview</span>
@@ -110,7 +110,7 @@ else
                                     text-align: left;">
                                             <a data-toggle="modal" data-bind="click:$root.openAdvertiserDashboardScreen">
                                                 <div class="ads-numbering-box" style="background:#9690cf;">
-                                                    <img src="~/Content/Images/AD_Campaign_mobileStencil.png" width="20px" />
+                                                    <img src="~/Content/Images/Charts.png" width="20px" />
                                                 </div>
                                                 <br />
                                                 <span style="color:gainsboro;margin-left:6px;">Charts</span>
@@ -1016,7 +1016,7 @@ else
 
                                                 <div class="col-lg-5" data-bind="with: $root.campaignModel">
                                                     <div class="col-lg-12" style="padding-left:0px;">
-                                                        <input type="text" style="float:left; color:#81d3dc; font-weight: bold;font-size: 15px; width:65px;" name="Budget" class="form-control" id="txtPerClick" data-bind="autoNumeric: ClickRate,settings:{mDec:2},validationTooltip:ClickRate, validationOnElement: ClickRate"> <span style="float:right;margin-top:7px;font-size:11px;">usd</span>
+                                                        <input type="text" style="float:left; color:#127abd; font-weight: bold;font-size: 15px; width:65px;" name="Budget" class="form-control" id="txtPerClick" data-bind="autoNumeric: ClickRate,settings:{mDec:2},validationTooltip:ClickRate, validationOnElement: ClickRate"> <span style="float:right;margin-top:7px;font-size:11px;">usd</span>
                                                     </div>
 
                                                 </div>
@@ -1037,7 +1037,7 @@ else
 
                                                 <div class="col-lg-5" style="" data-bind="with: $root.campaignModel">
                                                     <div class="col-lg-12" style="padding-left:0px;">
-                                                        <input type="text" style="float:left;width:65px; color:#81d3dc; font-weight: bold;font-size: 15px; " name="Budget" class="form-control" id="txtPerClick" data-bind="autoNumeric: MaxDailyBudget,settings:{mDec:2},validationTooltip:MaxDailyBudget, validationOnElement: MaxDailyBudget"> <span style="float:right;margin-top:7px;font-size:11px;">usd</span>
+                                                        <input type="text" style="float:left;width:65px; color:#127abd; font-weight: bold;font-size: 15px; " name="Budget" class="form-control" id="txtPerClick" data-bind="autoNumeric: MaxDailyBudget,settings:{mDec:2},validationTooltip:MaxDailyBudget, validationOnElement: MaxDailyBudget"> <span style="float:right;margin-top:7px;font-size:11px;">usd</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2736,7 +2736,7 @@ else
     <div class="list ListRowHov">
         <div class="parent-list-title" data-bind="click:$root.onChangeProfileQuestion"><span data-bind="text:Question"></span></div>
         <div class="listview list-type-tiles chlidList" data-role="listview">
-            <div><span class="listlabels">Select audience who have answered one of the following results.</span></div>
+            <div><span class="listlabels">Select one of the following answers results to ‘Join’ your Target audience.</span></div>
             <!-- ko template: { name: 'profileQuestionAnsTiles' , foreach: $root.profileAnswerList } --><!-- /ko -->
             <div class="clear-both"></div>
         </div>
@@ -2748,7 +2748,7 @@ else
         <div class="parent-list-title" data-bind="click:$root.onChangeProfileQuestion"><span data-bind="text:Question"></span></div>
         <div class="listview list-type-tiles chlidList" data-role="listview">
 
-            <div><span class="listlabels">Select audience who have answered one of the following results.</span></div>
+            <div><span class="listlabels">Select one of the following answers results to ‘Join’ your Target audience.</span></div>
             <div>
                 <!-- ko template: { name: 'profileQuestionAnsTiles' , foreach: $root.profileAnswerList } --><!-- /ko -->
             </div>
@@ -2786,7 +2786,7 @@ else
         <div class="parent-list-title"><span data-bind="text:DisplayQuestion"></span></div>
         
         <div class="listview  padding10 list-type-tiles chlidList" data-role="listview" style="padding-left:0px;">
-            <div><span class="listlabels">Select audience who have answered one of the following results.</span></div>
+            <div><span class="listlabels">Select one of the following answers results to ‘Join’ your Target audience.</span></div>
             @*<!-- ko template: { name: 'SurveyQuestionAnsTiles' , foreach: $root.profileAnswerList } --><!-- /ko -->*@
             <div>
                 <img data-bind="attr: { src:LeftPicturePath},click:$root.saveSurveyQuestion.bind($data, 1)" style="width:100px;height:150px" />
@@ -2809,7 +2809,7 @@ else
         <div class="parent-list-title"><span data-bind="text:VerifyQuestion"></span></div>
 
         <div class="listview list-type-tiles chlidList" data-role="listview">
-            <div><span class="listlabels">Select audience who have answered one of the following results.</span></div>
+            <div><span class="listlabels">Select one of the following answers results to ‘Join’ your Target audience.</span></div>
             <div>
                 <div class="list childList leftImg filterCrtTilesClr" data-bind="click:$root.saveCriteria.bind($data, 1)"><span class="list-title" data-bind="text:Answer1"></span> </div>
                 <div class="list childList rightImg filterCrtTilesClr" data-bind="click:$root.saveCriteria.bind($data, 2)"> <span class="list-title" data-bind="text:Answer2"></span> </div>

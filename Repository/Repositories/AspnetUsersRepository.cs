@@ -2,6 +2,7 @@
 using SMD.Interfaces.Repository;
 using SMD.Models.DomainModels;
 using SMD.Models.IdentityModels;
+using SMD.Models.RequestModels;
 using SMD.Repository.BaseRepository;
 using System;
 using System.Collections.Generic;
@@ -56,6 +57,18 @@ namespace SMD.Repository.Repositories
             db.Configuration.LazyLoadingEnabled = false;
             return db.Users.Where(g => g.CompanyId == companyId).SingleOrDefault().Id;
 
+        }
+        public IEnumerable<GetRegisteredUserData_Result> GetRegisteredUsers(RegisteredUsersSearchRequest request, out int rowCount)
+        {
+            var RegisterdUsers = db.GetRegisteredUserData(request.status, request.SearchText, (request.PageNo - 1) * request.PageSize, request.PageSize).ToList();
+            if (RegisterdUsers.Count() > 0)
+            {
+                //var firstrec = RegisterdUsers.First();
+                rowCount = RegisterdUsers[0].TotalItems.Value;
+            }
+            else
+                rowCount = 0;
+            return RegisterdUsers;
         }
 
 
