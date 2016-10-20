@@ -36,7 +36,10 @@ ALTER PROCEDURE [dbo].[GetAudience]
 		 @educationIds as nvarchar(500),
 		 @educationIdsExcluded as nvarchar(500),
 		 @profileQuestionIdsExcluded as nvarchar(500),
-		 @surveyQuestionIdsExcluded as nvarchar(500)
+		 @surveyQuestionIdsExcluded as nvarchar(500),
+		 @CampaignQuizIds as nvarchar(500),
+		 @CampaignQuizAnswerIds as nvarchar(500),
+		 @CampaignQuizIdsExcluded as nvarchar(500)
 
 AS
 BEGIN
@@ -131,6 +134,9 @@ BEGIN
 	begin
 		set @where = @where + ' and SMDUser.EducationId not in ('+ @educationIdsExcluded +')'
 	end
+
+
+	--profile questions
 	if(@profileQuestionIds IS NOT NULL AND @profileQuestionIds != '')
 	begin
 		
@@ -188,6 +194,10 @@ BEGIN
 		end
 		set @where = @where + ' and SMDUser.Id in (' + @Profilewhere + ')'
 	end
+
+
+
+	--survey answers
 	if(@surveyAnswerIds IS NOT NULL AND @surveyAnswerIds != '')
 	begin
 		set @counter = 1;
@@ -246,6 +256,70 @@ BEGIN
 		 
 		end
 		set @where = @where + ' and SMDUser.Id in (' + @Surveywhere + ')'
+	end
+
+
+
+	--campaign quiz answers
+	if(@CampaignQuizIds IS NOT NULL AND @CampaignQuizIds != '')
+	begin
+		set @counter = 1;
+		Declare @CampQuizwhere nvarchar(max)
+		declare @QuizIDFROMARRAY nvarchar(max)
+		
+		set @CampQuizwhere = 'SELECT DISTINCT UserID FROM AdCampaignResponse where '
+		while len(@CampaignQuizIds) > 0
+		begin
+		 
+			if(@counter = 1)
+			begin
+				 set @counter = @counter + 1;
+				 if(@CampaignQuizIdsExcluded IS NOT NULL AND @CampaignQuizIdsExcluded != '')
+					 begin
+						 
+						 set @QuizIDFROMARRAY = left(@CampaignQuizIds, charindex(',', @CampaignQuizIds+',')-1)	
+						 IF (charindex(@QuizIDFROMARRAY, @CampaignQuizIdsExcluded) > 0)
+							begin
+								 set @CampQuizwhere = @CampQuizwhere + ' (CampaignID !=' + left(@CampaignQuizIds, charindex(',', @CampaignQuizIds+',')-1) + ' and UserQuestionResponse !=' + left(@CampaignQuizAnswerIds, charindex(',', @CampaignQuizAnswerIds +',')-1) + ')'
+							end
+						else
+							begin
+								set @CampQuizwhere = @CampQuizwhere + ' (CampaignID =' + left(@CampaignQuizIds, charindex(',', @CampaignQuizIds+',')-1) + ' and UserQuestionResponse =' + left(@CampaignQuizAnswerIds, charindex(',', @CampaignQuizAnswerIds +',')-1) + ')'
+							end
+					  
+					 end
+				 else
+					begin
+						 set @CampQuizwhere = @CampQuizwhere + ' (CampaignID =' + left(@CampaignQuizIds, charindex(',', @CampaignQuizIds+',')-1) + ' and UserQuestionResponse =' + left(@CampaignQuizAnswerIds, charindex(',', @CampaignQuizAnswerIds +',')-1) + ')'
+					end
+				
+			end
+			else if(@counter != 1)
+			begin
+				 if(@CampaignQuizIdsExcluded IS NOT NULL AND @CampaignQuizIdsExcluded != '')
+					 begin
+						 set @QuizIDFROMARRAY = left(@CampaignQuizIds, charindex(',', @CampaignQuizIds+',')-1)	
+						 IF (charindex(@QuizIDFROMARRAY, @CampaignQuizIdsExcluded) > 0)
+							begin
+								 set @CampQuizwhere = @CampQuizwhere + ' and (CampaignID !=' + left(@CampaignQuizIds, charindex(',', @CampaignQuizIds+',')-1) + ' and UserQuestionResponse !=' + left(@CampaignQuizAnswerIds, charindex(',', @CampaignQuizAnswerIds +',')-1) + ')'
+							end
+						else
+							begin
+								set @CampQuizwhere = @CampQuizwhere + ' and (CampaignID =' + left(@CampaignQuizIds, charindex(',', @CampaignQuizIds+',')-1) + ' and UserQuestionResponse =' + left(@CampaignQuizAnswerIds, charindex(',', @CampaignQuizAnswerIds +',')-1) + ')'
+							end
+					  
+					 end
+				 else
+					begin
+						 set @CampQuizwhere = @CampQuizwhere + ' and (CampaignID =' + left(@CampaignQuizIds, charindex(',', @CampaignQuizIds+',')-1) + ' and UserQuestionResponse =' + left(@CampaignQuizAnswerIds, charindex(',', @CampaignQuizAnswerIds +',')-1) + ')'
+					end
+			end
+
+		  set @CampaignQuizIds= stuff(@CampaignQuizIds, 1, charindex(',', @CampaignQuizIds+','), '')
+		  set @CampaignQuizAnswerIds = stuff(@CampaignQuizAnswerIds, 1, charindex(',', @CampaignQuizAnswerIds +','), '')
+		 
+		end
+		set @where = @where + ' and SMDUser.Id in (' + @CampQuizwhere + ')'
 	end
 
 --select (@query + @join + @where)
