@@ -524,4 +524,7 @@ svg{
 
 }
 .padingL15 {padding-left: 15px !important; }
-
+.padingRL15 {
+    padding-left: 15px !important;
+    padding-right : 15px !important;
+}
