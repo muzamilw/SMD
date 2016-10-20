@@ -1068,4 +1068,115 @@ div#spinner {
         left: auto !important;
     right: 0px;
 }
+.homePanels {
+  background-color: #1d3d52;
+    min-height: 48px;
+    border-radius: 5px;
+    width: 224px;
+    padding: 10px;
+    margin: 3px;
+}
+.space {
+    width:20px;
+}
+.pg >div{
+    color:#d3d3d3!important;
+    font-size:12px!important;
+    margin:0px!important;
+    padding:0px!important;
+    font-family: 'PT Sans', sans-serif!important;
+}
+.homePanels_headers {
+    font-size:1.2em;
+    color:#fff
+}
+.whiteclr {
+    color:#fff!important;
+}
+.greyclr {
+     color:#d3d3d3!important;
+}
+.fontsize4 {
+    font-size:4px!important;
+}
+.font-size13 {
+    font-size:19px!important;
+    color:#676767!important;
+}
+.graph_panels {
+    background-color: #f9f9f9;
+    height: 480px;
+    margin: 10px;
+    width: 265px;
+    padding:9px;
+}
+.graphParent_div {
+    padding:6px;
+    height:600px;
+}
+.btnpanels {
+    padding: 3px;
+    width: 100%;
+    height: 48px;
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    padding-top: 9px;
+}
+.blueclr {
+    background-color:#127abd;
+}
+.greypanel {
+    width:100%;
+    margin-top:5px;
+    background-color:#e4e0e0;
+    height:262px;
+    padding: 10px;
+}
+.gheader {
+   width: 100%;
+    font-size: 16px;
+    color: black;
+    
+}
+.gwhitepanels {
+     background: #FFFFFF;
+    -moz-box-shadow: 1px 1px 2px 0 #CCCCCC;
+    -o-box-shadow: 1px 1px 2px 0 #CCCCCC;
+    -ms-box-shadow: 1px 1px 2px 0 #CCCCCC;
+    box-shadow: 1px 1px 2px 0 #CCCCCC;
+    -webikt-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    margin-top: 5px;
+    height: 214px;
+    padding:10px;
+}
+.datespan {
+    color:gainsboro;
+    font-size:12px;
+}
+.conspan {
+    font-size:17px;
+}
+.lightgreen {
+   color:#66CD00;
+}
+.lightgreenbc {
+    background-color:#87c747;
+}
+.lightblue {
+    color:#34afff;
+}
+.skyclr {
+    background-color:#81d3dc;
+}
+.blueclor {
+    background-color:blue;
+}
+.gtable {
+    width:60%;
+
+}
+
 /*# sourceMappingURL=MainSite.css.map */
