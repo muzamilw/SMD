@@ -1,5 +1,5 @@
 ﻿GO
-/****** Object:  StoredProcedure [dbo].[getAdsCampaignByCampaignIdRatioAnalytic]    Script Date: 10/18/2016 1:26:40 PM ******/
+/****** Object:  StoredProcedure [dbo].[getAdsCampaignByCampaignIdtblAnalytic]    Script Date: 10/20/2016 2:21:59 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -9,7 +9,7 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-alter PROCEDURE [dbo].[getAdsCampaignByCampaignIdtblAnalytic] (
+ALTER PROCEDURE [dbo].[getAdsCampaignByCampaignIdtblAnalytic] (
 @Id INT  -- 1 for Viewed, 2 for Conversions or 3 for Skipped
 )
 AS

@@ -109,7 +109,7 @@ define("pQuestion/pQuestion.viewModel",
 					PQAnalyticsData = ko.observableArray([]), 
 					CampaignTblAnalyticsData = ko.observableArray([]), 
 					granularityDropDown = ko.observableArray([{ id: 1, name: "Daily" }, { id: 2, name: "Weekly" }, { id: 3, name: "Monthly" }, { id: 4, name: "Quarterly" }, { id: 5, name: "Yearly" }]),
-					DateRangeDropDown  = ko.observableArray([{ id: 1, name: "One month" }, { id: 2, name: "All Time" }]),
+					DateRangeDropDown  = ko.observableArray([{ id: 1, name: "Last 30 days" }, { id: 2, name: "All Time" }]),
 					CampaignStatusDropDown  = ko.observableArray([{ id: 1, name: "Answered" }, { id: 2, name: "Skipped" }]),
 				    CampaignRatioAnalyticData = ko.observable(1), 
 					openAdvertiserDashboardSurvayScreen = function () {
@@ -1276,8 +1276,6 @@ define("pQuestion/pQuestion.viewModel",
                                         });
                                         selectedCriteria().profileQuestLeftImageSrc(matchSurveyQuestion.Answer1);
                                         selectedCriteria().profileQuestRightImageSrc(matchSurveyQuestion.Answer2);
-
-                                        selectedCriteria().profileQuestThirdImageSrc(matchSurveyQuestion.Answer3);
                                     }
                                 },
                                 error: function (response) {
@@ -1290,7 +1288,6 @@ define("pQuestion/pQuestion.viewModel",
                             });
                             selectedCriteria().profileQuestLeftImageSrc(matchSurveyQuestion.Answer1);
                             selectedCriteria().profileQuestRightImageSrc(matchSurveyQuestion.Answer2);
-                            selectedCriteria().profileQuestThirdImageSrc(matchSurveyQuestion.Answer3);
                             // adjust item
                         }
                     }
@@ -1851,15 +1848,21 @@ define("pQuestion/pQuestion.viewModel",
                 selectedCriteria().questionString(selectedQuestionstring);
                 if (type == 1) {
                     selectedCriteria().answerString(item.Answer1);
-                } else if (type == 2) {
+                } else {
                     selectedCriteria().answerString(item.Answer2);
-                }
-                else {
-                    selectedCriteria().answerString(item.Answer3);
                 }
                 selectedCriteria().AdCampaignID(item.CampaignId);
 
                 var matchedSurveyCriteriaRec = null;
+
+                //_.each(selectedQuestion().ProfileQuestionTargetCriteria(), function (itemarry) {
+
+                //    if (itemarry.QuizCampaignId() == item.CampaignId) {
+
+                //        matchedSurveyCriteriaRec = itemarry;
+                //    }
+                //});
+
 
 
                 selectedQuestion().ProfileQuestionTargetCriteria().push(new model.ProfileQuestionTargetCriteria.Create({
@@ -1888,7 +1891,7 @@ define("pQuestion/pQuestion.viewModel",
             ,
 
                         showAdditionQuizCriteria = function () {
-                           
+                            
                             Modelheading('Your Quiz Questions');
                             //   selectedCriteria(null);
                             //   isNewCriteria(true);
@@ -2137,11 +2140,8 @@ define("pQuestion/pQuestion.viewModel",
                                     selectedCriteria().LinkedSQAnswer(type);
                                     if (type == 1) {
                                         selectedCriteria().answerString(selectedCriteria().profileQuestLeftImageSrc());
-                                    } else if (type == 2) {
+                                    } else {
                                         selectedCriteria().answerString(selectedCriteria().profileQuestRightImageSrc());
-                                    }
-                                    else {
-                                        selectedCriteria().answerString(selectedCriteria().profileQuestThirdImageSrc());
                                     }
                                     $(".close").click();
                                 },

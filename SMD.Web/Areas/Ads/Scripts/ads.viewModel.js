@@ -160,7 +160,7 @@ define("ads/ads.viewModel",
 				CampaignROItblAnalyticData = ko.observableArray([]), 
 				CampaignRatioAnalyticData = ko.observable(1), 
 				granularityDropDown = ko.observableArray([{ id: 1, name: "Daily" }, { id: 2, name: "Weekly" }, { id: 3, name: "Monthly" }, { id: 4, name: "Quarterly" }, { id: 5, name: "Yearly" }]),
-				DateRangeDropDown  = ko.observableArray([{ id: 1, name: "One month" }, { id: 2, name: "All Time" }]),
+				DateRangeDropDown  = ko.observableArray([{ id: 1, name: "Last 30 days" }, { id: 2, name: "All Time" }]),
 				CampaignStatusDropDown  = ko.observableArray([{ id: 1, name: "Answered" }, { id: 2, name: "Referred" }, { id: 3, name: "Skipped" }]),
 				CampaignTblAnalyticsData = ko.observableArray([]),
 				openAdvertiserDashboardScreen = function (Campaign) {

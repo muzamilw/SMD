@@ -91,7 +91,7 @@ define("survey/survey.viewModel",
 					SQAnalyticsData = ko.observableArray([]), 
 					CampaignTblAnalyticsData = ko.observableArray([]), 
 					granularityDropDown = ko.observableArray([{ id: 1, name: "Daily" }, { id: 2, name: "Weekly" }, { id: 3, name: "Monthly" }, { id: 4, name: "Quarterly" }, { id: 5, name: "Yearly" }]),
-					DateRangeDropDown  = ko.observableArray([{ id: 1, name: "One month" }, { id: 2, name: "All Time" }]),
+					DateRangeDropDown  = ko.observableArray([{ id: 1, name: "Last 30 days" }, { id: 2, name: "All Time" }]),
 					CampaignStatusDropDown  = ko.observableArray([{ id: 1, name: "Answered" }, { id: 2, name: "Skipped" }]),
 					CampaignRatioAnalyticData = ko.observable(1), 
 				    openAdvertiserDashboardPollScreen = function () {

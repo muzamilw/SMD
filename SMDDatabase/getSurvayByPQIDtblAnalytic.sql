@@ -1,5 +1,5 @@
 ﻿GO
-/****** Object:  StoredProcedure [dbo].[getAdsCampaignByCampaignIdRatioAnalytic]    Script Date: 10/18/2016 1:26:40 PM ******/
+/****** Object:  StoredProcedure [dbo].[getSurvayByPQIDtblAnalytic]    Script Date: 10/20/2016 2:23:24 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -9,7 +9,7 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-Create PROCEDURE [dbo].[getSurvayByPQIDtblAnalytic] (
+ALTER PROCEDURE [dbo].[getSurvayByPQIDtblAnalytic] (
 @Id INT  -- 1 for Viewed, 2 for Conversions or 3 for Skipped
 )
 AS
@@ -42,7 +42,7 @@ DECLARE @dateFrom DATE = getdate()-30;--, @Ctype int = 1;
 		from ProfileQuestionUserAnswer pqu
 		where pqu.AnswerDateTime >= @dateFrom and pqu.AnswerDateTime <= getdate() and pqu.ResponseType = 3 and pqu.PQID = @Id
 		union
-		Select 6 ordr, 'Cost ($)' label, isnull(sum(t.DebitAmount)/100, 0) 'All time' , 
+		Select 4 ordr, 'Cost' label, isnull(sum(t.DebitAmount)/100, 0) 'All time' , 
 			(Select isnull(sum(t.DebitAmount)/100, 0) from [Transaction] t
 			where t.TransactionDate >= getdate() - 30 and t.TransactionDate <= getdate() and t.PQID = @Id) '30 days'
 		from [Transaction] t
@@ -52,4 +52,4 @@ END
  
  
 --EXEC [getSurvayByPQIDtblAnalytic] 3
-
+--select * from [Transaction]
