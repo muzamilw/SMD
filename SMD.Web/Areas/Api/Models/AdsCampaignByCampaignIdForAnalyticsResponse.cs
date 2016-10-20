@@ -11,5 +11,6 @@ namespace SMD.MIS.Areas.Api.Models
         public IEnumerable<getDisplayAdsCampaignByCampaignIdAnalytics_Result> lineCharts { get; set; }
         public IEnumerable<getAdsCampaignByCampaignIdRatioAnalytic_Result> pieCharts { get; set; }
         public IEnumerable<getAdsCampaignByCampaignIdtblAnalytic_Result> tbl { get; set; }
+        public IEnumerable<getCampaignROItblAnalytic_Result> ROItbl { get; set; }
     }
 }

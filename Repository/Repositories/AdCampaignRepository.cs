@@ -335,5 +335,9 @@ namespace SMD.Repository.Repositories
         {
             return db.getAdsCampaignByCampaignIdtblAnalytic(ID);
         }
+        public IEnumerable<getCampaignROItblAnalytic_Result> getCampaignROItblAnalytic(int ID)
+        {            
+            return db.getCampaignROItblAnalytic(ID);
+        }
     }
 }
