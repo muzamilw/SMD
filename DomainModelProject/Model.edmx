@@ -2492,6 +2492,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Parameter Name="Id" Type="int" Mode="In" />
         </Function>
         <Function Name="GetApprovalCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="getCampaignROItblAnalytic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
         <Function Name="getCampaignsByStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetCouponByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CouponId" Type="bigint" Mode="In" />
@@ -5554,6 +5557,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <Parameter Name="fromRoww" Mode="In" Type="Int32" />
             <Parameter Name="toRow" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="getCampaignROItblAnalytic" ReturnType="Collection(SMDDevModel.getCampaignROItblAnalytic_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="CouponCategories">
           <Key>
@@ -6840,6 +6846,15 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="String" Name="CompanyName" Nullable="true" />
           <Property Type="Double" Name="AccountBalance" Nullable="true" />
           <Property Type="Int32" Name="TotalItems" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="getCampaignROItblAnalytic_Result">
+          <Property Type="Int32" Name="ordr" Nullable="false" />
+          <Property Type="String" Name="label1" Nullable="false" MaxLength="27" />
+          <Property Type="Int32" Name="Stats1" Nullable="true" />
+          <Property Type="String" Name="label2" Nullable="false" MaxLength="21" />
+          <Property Type="Double" Name="Stats2" Nullable="true" />
+          <Property Type="String" Name="label3" Nullable="false" MaxLength="32" />
+          <Property Type="Int32" Name="Stats3" Nullable="true" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -8563,6 +8578,19 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
                 <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
                 <ScalarProperty Name="AccountBalance" ColumnName="AccountBalance" />
                 <ScalarProperty Name="TotalItems" ColumnName="TotalItems" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getCampaignROItblAnalytic" FunctionName="SMDDevModel.Store.getCampaignROItblAnalytic">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SMDDevModel.getCampaignROItblAnalytic_Result">
+                <ScalarProperty Name="ordr" ColumnName="ordr" />
+                <ScalarProperty Name="label1" ColumnName="label1" />
+                <ScalarProperty Name="Stats1" ColumnName="Stats1" />
+                <ScalarProperty Name="label2" ColumnName="label2" />
+                <ScalarProperty Name="Stats2" ColumnName="Stats2" />
+                <ScalarProperty Name="label3" ColumnName="label3" />
+                <ScalarProperty Name="Stats3" ColumnName="Stats3" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
