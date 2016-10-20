@@ -1044,7 +1044,7 @@ blockquote.pull-right:before {
     -o-box-shadow: 1px 1px 2px 0 #CCCCCC;
     -ms-box-shadow: 1px 1px 2px 0 #CCCCCC;
     box-shadow: 1px 1px 2px 0 #CCCCCC;
-    margin-bottom: 16px;
+    margin-bottom:7px;
     -webikt-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
@@ -1128,6 +1128,7 @@ blockquote.pull-right:before {
 #footer-copyright {
     text-align: center;
     margin: 0;
+    color:#fff;
 }
 
 #footer-copyright a {
