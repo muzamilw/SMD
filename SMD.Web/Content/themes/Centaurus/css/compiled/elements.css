@@ -1209,7 +1209,7 @@ input[type="radio"] {
     }
 
     .onoffswitch-inner:before {
-        content: "YES";
+        content: "Enabled";
         padding-left: 10px;
         background-color: #3498db;
         color: #FFFFFF;
@@ -1228,8 +1228,8 @@ input[type="radio"] {
 }
 
 .onoffswitch-inner:after {
-    content: "NO";
-    padding-right: 10px;
+    content: "Disabled";
+    padding-right: 6px;
     background-color: #EEEEEE;
     color: #999999;
     text-align: right;
@@ -1244,7 +1244,7 @@ input[type="radio"] {
     position: absolute;
     top: 0;
     bottom: 0;
-    right: 56px;
+    right: 64px;
     -moz-transition: all 0.3s ease-in 0s;
     -webkit-transition: all 0.3s ease-in 0s;
     -o-transition: all 0.3s ease-in 0s;

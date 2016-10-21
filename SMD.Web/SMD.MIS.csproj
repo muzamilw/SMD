@@ -392,6 +392,7 @@
     <Compile Include="Areas\Api\Controllers\GetPayOutHistoryController.cs" />
     <Compile Include="Areas\Api\Controllers\PayoutRevenueController.cs" />
     <Compile Include="Areas\Api\Controllers\profileQuestionAnalyticController.cs" />
+    <Compile Include="Areas\Api\Controllers\RegisteredUsersController.cs" />
     <Compile Include="Areas\Api\Controllers\SuperNovaCampaignController.cs" />
     <Compile Include="Areas\Api\Controllers\SurvayQuestionAnalyticController.cs" />
     <Compile Include="Areas\Api\Controllers\UserFeedbackController.cs" />
@@ -575,6 +576,7 @@
     <Compile Include="Areas\DAM\DAMAreaRegistration.cs" />
     <Compile Include="Areas\DAM\Models\Images.cs" />
     <Compile Include="Areas\Franchise\Controllers\ApprovePayPalController.cs" />
+    <Compile Include="Areas\Franchise\Controllers\RegisterUsersController.cs" />
     <Compile Include="Areas\ProfileQuestion\Controllers\ManageController.cs" />
     <Compile Include="Areas\Report\Controllers\ReportController.cs" />
     <Compile Include="Areas\Report\ReportAreaRegistration.cs" />
@@ -705,6 +707,10 @@
     <Content Include="Areas\Franchise\Scripts\profileQuestionApp.model.js" />
     <Content Include="Areas\Franchise\Scripts\profileQuestionApp.view.js" />
     <Content Include="Areas\Franchise\Scripts\profileQuestionApp.viewModel.js" />
+    <Content Include="Areas\Franchise\Scripts\registeredUsers.dataservice.js" />
+    <Content Include="Areas\Franchise\Scripts\registeredUsers.model.js" />
+    <Content Include="Areas\Franchise\Scripts\registeredUsers.view.js" />
+    <Content Include="Areas\Franchise\Scripts\registeredUsers.viewModel.js" />
     <Content Include="Areas\ProfileQuestion\Scripts\pQuestion.dataservice.js" />
     <Content Include="Areas\ProfileQuestion\Scripts\pQuestion.model.js" />
     <Content Include="Areas\ProfileQuestion\Scripts\paypalExample.view.js" />
@@ -749,6 +755,8 @@
     <Content Include="Areas\Coupons\Views\Coupons\_advertDashboardDeal.cshtml" />
     <Content Include="Areas\Survey\Views\Shared\_advertSurveyAnalytic.cshtml" />
     <Content Include="Areas\ProfileQuestion\Views\Manage\_advertProfileQuestionAnalytic.cshtml" />
+    <Content Include="Areas\Franchise\Views\RegisterUsers\UsersDashboard.cshtml" />
+    <Content Include="Areas\Franchise\Views\RegisterUsers\_registeredUserEditor.cshtml" />
     <None Include="config\Web.connectionstrings.config">
       <SubType>Designer</SubType>
     </None>
