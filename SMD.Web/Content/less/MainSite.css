@@ -1088,8 +1088,9 @@ div#spinner {
 }
 .homePanels_headers {
     font-size:1.2em;
-    color:#fff
+    color:rgb(103, 103, 103);
 }
+
 .whiteclr {
     color:#fff!important;
 }

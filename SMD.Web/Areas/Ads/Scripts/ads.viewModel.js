@@ -16,6 +16,7 @@ define("ads/ads.viewModel",
                     isClickRateVisible = ko.observable(null),
                     buyItQuestionStatus = ko.observable(false),
 					isAdvertdashboardVisible = ko.observable(false),
+                    hideLandingPageURl = ko.observable(false),
                     ButItOtherLabel = ko.observable(''),
                     langs = ko.observableArray([]),
                     TemporaryList = ko.observableArray([]),
@@ -23,7 +24,7 @@ define("ads/ads.viewModel",
                     TemporaryQuizQuestions = ko.observableArray([]),
                     TemporarySurveyList = ko.observableArray([]),
                     BuyItStatus = ko.observable(false),
-                    showLandingPageUrl = ko.observable(true),
+                    showLandingPageUrl = ko.observable(false),
                     countoryidList = [],
                     cityidList = [],
                     langidList = [],
@@ -66,6 +67,7 @@ define("ads/ads.viewModel",
                     isTerminateBtnVisible = ko.observable(false),
                     correctAnswers = ko.observableArray([{ id: 1, name: "Choice 1" }, { id: 2, name: "Choice 2" }, { id: 3, name: "Choice 3" }, { id: 0, name: "Any of the above" }]),
                     DefaultTextBtns = ko.observableArray([
+                        { id: "No Button", name: "No Button" },
                         { id: "Apply Now", name: "Apply Now" },
                         { id: "Book Now", name: "Book Now" },
                         { id: "Contact Us", name: "Contact Us" },
@@ -76,8 +78,7 @@ define("ads/ads.viewModel",
                         { id: "Watch More", name: "Watch More" },
                         { id: "Buy Now", name: "Buy Now" },
                         { id: "Check Availability", name: "Check Availability" },
-                        { id: "Custom Button Label", name: "Custom Button Label" },
-                        { id: "No Button", name: "No Button" }
+                        { id: "Custom Button Label", name: "Custom Button Label" }
                     ]),
                     selectedIndustryIncludeExclude = ko.observable(true),
                     UserAndCostDetail = ko.observable(),
@@ -368,8 +369,12 @@ define("ads/ads.viewModel",
             },
                 // Add new Profile Question
             addNewCampaign = function () {
-
-
+              
+                var selectionoption = $("#ddTextBtns").val();
+                
+                if (selectionoption == 'No Button' || selectionoption==undefined) {
+                    showLandingPageUrl(false);
+                } 
 
                 $("#logo_div").css("display", "block");
 
@@ -1200,9 +1205,11 @@ define("ads/ads.viewModel",
                          ButItOtherLabel('');
                          campaignModel().BuyItButtonLabel('');
                      }
+             
                      if (selectionoption == 'No Button') {
                          showLandingPageUrl(false);
-                     } else {
+                     }
+                     else {
                          showLandingPageUrl(true);
                      }
                  },
@@ -3373,8 +3380,8 @@ define("ads/ads.viewModel",
 					CampaignRatioAnalyticData:CampaignRatioAnalyticData,
 					CampaignTblAnalyticsData:CampaignTblAnalyticsData,
 					isClickRateVisible: isClickRateVisible,
-					CampaignROItblAnalyticData:CampaignROItblAnalyticData
-					
+					CampaignROItblAnalyticData: CampaignROItblAnalyticData,
+					hideLandingPageURl: hideLandingPageURl
                 };
             })()
         };
