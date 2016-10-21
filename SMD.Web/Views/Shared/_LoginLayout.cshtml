@@ -67,7 +67,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-4  col-lg-offset-1">
-                    <div id="login-box">
+
+                    <div class="text-center hidden-xs">
+                        <h4 style="color:white;margin-top:35px;" class="text-center;">@RenderSection("headerText", required: false)</h4>
+                    </div>
+
+
+                    <div id="login-box" class="hidden-xs">
                         <div class="row">
                             <div class="col-xs-12">
                                 <header id="login-header">
@@ -98,8 +104,20 @@
 
                    
 
-                </div>
+
+                    <div class="text-center visible-xs" style="margin-top:60px;padding:20px">
+                        <h4 style="color:white;margin-top:35px;font-size:2em;font-weight:bolder" class="text-center;">Sign In from your laptop<br /></h4>
+                        <h4 style="color:white;margin-top:35px;font-size:2em" class="text-center;">We're working hard to allow you to manage campaigns from your mobile.<br /><br /> In the mean time have fun playing games, Watching ads and Earning Cash<br /> with our apps.</h4>
+                        </div>
+
+                    <div class="text-center visible-xs" style="margin-top:30px;" >
+                        <img style="height:47px" src="../../Images/app-store.png" alt="" /><img style="margin-left:10px;width:152px" src="../../Images/download-on-google-play.png" alt="" />
+                    </div>
+
+
+                    </div>
                 <div class="col-xs-6 hidden-xs">@RenderSection("Sidebar", required: false)</div>
+                
             </div>
         </div>
     </div>

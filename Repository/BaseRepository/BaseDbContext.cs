@@ -166,7 +166,7 @@ namespace SMD.Repository.BaseRepository
         public DbSet<vw_Coupons> vw_Coupons { get; set; }
 
         public DbSet<vw_ReferringCompanies> vwvw_ReferringCompanies { get; set; }
-        
+
         /// <summary>
         /// Profile Question Answers
         /// </summary>
@@ -191,7 +191,7 @@ namespace SMD.Repository.BaseRepository
         /// Profile Question User Answers
         /// </summary>
         public DbSet<ProfileQuestionUserAnswer> ProfileQuestionUserAnswers { get; set; }
-       
+
         /// <summary>
         /// Industry
         /// </summary>
@@ -200,12 +200,12 @@ namespace SMD.Repository.BaseRepository
         /// Product
         /// </summary>
         public DbSet<Product> Products { get; set; }
-        
+
         /// <summary>
         /// Currency
         /// </summary>
         public DbSet<Currency> Currencies { get; set; }
-        
+
         /// <summary>
         /// Account
         /// </summary>
@@ -221,7 +221,7 @@ namespace SMD.Repository.BaseRepository
         public DbSet<Invoice> Invoices { get; set; }
 
         public DbSet<PayOutHistory> PayOutHistory { get; set; }
-        
+
 
 
         /// <summary>
@@ -244,7 +244,7 @@ namespace SMD.Repository.BaseRepository
         /// </summary>
         public DbSet<CustomUrl> CustomUrls { get; set; }
         //public DbSet<CouponCode> CouponCodes { get; set; }
-     
+
         /// <summary>
         /// Transaction
         /// </summary>
@@ -406,17 +406,17 @@ namespace SMD.Repository.BaseRepository
                ("GetAudienceAdCampaign", age, gender, countryId, cityId, languageId, industryId, pqIds);
         }
 
-        public ObjectResult<GetAudience_Result> GetAudienceCampaignAndSurveyCounts(int ageFrom, int ageTo, int gender, string countryIds, string cityIds, string languageIds, 
+        public ObjectResult<GetAudience_Result> GetAudienceCampaignAndSurveyCounts(int ageFrom, int ageTo, int gender, string countryIds, string cityIds, string languageIds,
             string industryIds, string profileQuestionIds, string profileAnswerIds, string surveyQuestionIds
-            , string surveyAnswerIds, string countryIdsExcluded, string cityIdsExcluded, 
+            , string surveyAnswerIds, string countryIdsExcluded, string cityIdsExcluded,
             string languageIdsExcluded, string industryIdsExcluded
             , string educationIds
             , string educationIdsExcluded
             , string profileQuestionIdsExcluded
             , string surveyQuestionIdsExcluded
             , string CampaignQuizIds
-            ,string CampaignQuizAnswerIds
-            ,string CampaignQuizIdsExcluded)
+            , string CampaignQuizAnswerIds
+            , string CampaignQuizIdsExcluded)
         {
             var ageFromParameter = new ObjectParameter("ageFrom", ageFrom);
             var ageToParameter = new ObjectParameter("ageTo", ageTo);
@@ -492,7 +492,7 @@ namespace SMD.Repository.BaseRepository
                 new ObjectParameter("UserID", userId) :
                 new ObjectParameter("UserID", typeof(string));
 
-           
+
 
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCoupons_Result>("GetCoupons", userIdParameter);
         }
@@ -505,7 +505,7 @@ namespace SMD.Repository.BaseRepository
                 new ObjectParameter("CompanyId", CompanyId) :
                 new ObjectParameter("CompanyId", typeof(string));
 
-            
+
 
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCouponsByCompanyId_Result>("GetCouponsByCompanyId", userIdParameter);
         }
@@ -513,7 +513,7 @@ namespace SMD.Repository.BaseRepository
 
 
 
-        public ObjectResult<SearchCoupons_Result> SearchCoupons(int categoryId, int type, string keywords, int distance, string Lat, string Lon,string userId, int? fromRow, int? toRow)
+        public ObjectResult<SearchCoupons_Result> SearchCoupons(int categoryId, int type, string keywords, int distance, string Lat, string Lon, string userId, int? fromRow, int? toRow)
         {
             var categoryIdParameter = categoryId != null ?
                 new ObjectParameter("categoryId", categoryId) :
@@ -610,9 +610,9 @@ namespace SMD.Repository.BaseRepository
 
 
             var adminModeParameter = new ObjectParameter("adminMode", adminMode);
-               
 
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SearchCampaigns_Result>("SearchCampaigns", statusParameter, keywordParameter, companyIdParameter, fromRowParameter, toRowParameter,adminModeParameter);
+
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SearchCampaigns_Result>("SearchCampaigns", statusParameter, keywordParameter, companyIdParameter, fromRowParameter, toRowParameter, adminModeParameter);
         }
 
         public ObjectResult<GetRegisteredUserData_Result> GetRegisteredUserData(int status, string keyword, int fromRow, int toRow)
@@ -625,7 +625,7 @@ namespace SMD.Repository.BaseRepository
                new ObjectParameter("keyword", keyword) :
                new ObjectParameter("keyword", typeof(string));
 
-        
+
 
             var fromRowParameter = new ObjectParameter("fromRoww", fromRow);
 
@@ -638,6 +638,27 @@ namespace SMD.Repository.BaseRepository
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetRegisteredUserData_Result>("GetRegisteredUserData", statusParameter, keywordParameter, fromRowParameter, toRowParameter);
         }
 
+        public void UpdateCompanyStatus(int status, string userId, string comments, int companyId)
+        {
+            var statusParameter = status != null ?
+                new ObjectParameter("status", status) :
+                new ObjectParameter("status", typeof(int));
+
+            var userIdParameter = userId != null ?
+               new ObjectParameter("userId", userId) :
+               new ObjectParameter("userId", typeof(string));
+
+
+
+            var commentsParameter = new ObjectParameter("comments", comments);
+
+
+           var companyIdParameter = companyId != null ?
+             new ObjectParameter("companyId", companyId) :
+             new ObjectParameter("companyId", typeof(int));
+
+            ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateCompanyStatus",statusParameter, userIdParameter, commentsParameter, companyIdParameter);
+        }
 
         /// <summary>
         /// Returns the transactiopns agaisnt a companyid's account

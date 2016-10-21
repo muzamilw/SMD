@@ -2566,6 +2566,12 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             </CollectionType>
           </ReturnType>
         </Function>
+        <Function Name="UpdateCompanyStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="status" Type="int" Mode="In" />
+          <Parameter Name="userId" Type="nvarchar" Mode="In" />
+          <Parameter Name="comments" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="companyId" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="SMDModelStoreContainer">
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AdCampaign" EntityType="Self.AdCampaign" Schema="dbo" store:Type="Tables" />
@@ -3868,6 +3874,12 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <End Role="ProfileQuestionAnswer" EntitySet="ProfileQuestionAnswers" />
             <End Role="ProfileQuestionUserAnswer" EntitySet="ProfileQuestionUserAnswers" />
           </AssociationSet>
+          <FunctionImport Name="UpdateCompanyStatus">
+            <Parameter Name="status" Mode="In" Type="Int32" />
+            <Parameter Name="userId" Mode="In" Type="String" />
+            <Parameter Name="comments" Mode="In" Type="String" />
+            <Parameter Name="companyId" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -8742,6 +8754,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UpdateCompanyStatus" FunctionName="SMDModel.Store.UpdateCompanyStatus" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

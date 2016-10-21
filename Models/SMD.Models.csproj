@@ -241,6 +241,7 @@
     <Compile Include="RequestModels\GetUserRequestModel.cs" />
     <Compile Include="RequestModels\InviteUserEmail.cs" />
     <Compile Include="RequestModels\RegisteredUsersSearchRequest.cs" />
+    <Compile Include="RequestModels\RequestModelForUpdateCompanyStatus.cs" />
     <Compile Include="RequestModels\UserBalanceInquiryRequest.cs" />
     <Compile Include="RequestModels\ProductActionRequest.cs" />
     <Compile Include="RequestModels\ApproveSurveyRequest.cs" />
@@ -280,6 +281,7 @@
     <Compile Include="ResponseModels\GetProductsResponse.cs" />
     <Compile Include="ResponseModels\InvoiceSearchRequestResponse.cs" />
     <Compile Include="ResponseModels\EducationResponse.cs" />
+    <Compile Include="ResponseModels\StripeSubscriptionResponse.cs" />
     <Compile Include="ResponseModels\UserBalanceInquiryResponse.cs" />
     <Compile Include="ResponseModels\UpdateProfileImageResponse.cs" />
     <Compile Include="ResponseModels\LoginResponse.cs" />

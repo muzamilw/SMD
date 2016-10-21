@@ -29,6 +29,7 @@ define("Coupons/Coupons.viewModel",
                     criteriaCount = ko.observable(0),
                     CouponActiveMonth = ko.observable(),
                     isShowSurveyAns = ko.observable(false),
+                    hideLandingPageURl = ko.observable(false),
                      // selected location 
                     selectedLocation = ko.observable(),
                     selectedLocationRadius = ko.observable(),
@@ -435,6 +436,15 @@ define("Coupons/Coupons.viewModel",
 
 
                 $("#Heading_div").css("display", "none");
+
+                var selectionoption = $("#buyItddl").val();
+                if (selectionoption == 0) {
+                    hideLandingPageURl(false);
+                }
+                else {
+                    hideLandingPageURl(true);
+                }
+
                 isShowArchiveBtn(false);
                 CouponTitle('New Deal');
                 StatusValue('Draft');
@@ -1096,6 +1106,7 @@ define("Coupons/Coupons.viewModel",
                         couponModel().ShowBuyitBtn(false);
                         buyItQuestionLabelStatus(false);
                         ButItOtherLabel('');
+                        hideLandingPageURl(false);
                     }
                     else if (selectionoption == '999')  //other scenario
                     {
@@ -1103,7 +1114,7 @@ define("Coupons/Coupons.viewModel",
                         couponModel().ShowBuyitBtn(true);
                         buyItQuestionLabelStatus(true);
                         couponModel().BuyitBtnLabel('');
-                        
+                        hideLandingPageURl(true);
                     }
                     else
                     {
@@ -1112,6 +1123,7 @@ define("Coupons/Coupons.viewModel",
                         buyItQuestionLabelStatus(false);
                         ButItOtherLabel('');
                         couponModel().BuyitBtnLabel('');
+                        hideLandingPageURl(true);
                     }
 
                  },
@@ -2295,10 +2307,8 @@ define("Coupons/Coupons.viewModel",
 					DealsAnalyticsData:DealsAnalyticsData,
 					CampaignStatusDropDown:CampaignStatusDropDown,
 					CampaignRatioAnalyticData:CampaignRatioAnalyticData,
-					dealExpirydate : dealExpirydate
-					
-					
-					
+					dealExpirydate : dealExpirydate,
+                    hideLandingPageURl:hideLandingPageURl
                 };
             })()
         };

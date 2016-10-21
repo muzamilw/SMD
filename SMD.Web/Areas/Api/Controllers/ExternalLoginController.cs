@@ -44,9 +44,13 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// External Login
         /// </summary>
-        [ApiExceptionCustom]
+        //[ApiExceptionCustom]
         public async Task<LoginResponse> Get([FromUri] ExternalLoginRequest request)
         {
+            try
+            {
+
+           
             if (request == null || !ModelState.IsValid)
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
@@ -55,6 +59,14 @@ namespace SMD.MIS.Areas.Api.Controllers
             // Check For Extenal Login 
             SMD.Models.ResponseModels.LoginResponse response = await webApiUserService.ExternalLogin(request); 
             return response.CreateFrom();
+
+
+            }
+            catch (Exception e)
+            {
+
+                return new LoginResponse { Status = false, Message = e.ToString() };
+            }
         }
 
         #endregion

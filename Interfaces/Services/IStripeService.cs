@@ -1,6 +1,8 @@
 ﻿using System.Threading.Tasks;
 using SMD.Models.RequestModels;
 
+using SMD.Models.ResponseModels;
+
 namespace SMD.Interfaces.Services
 {
     /// <summary>
@@ -18,5 +20,11 @@ namespace SMD.Interfaces.Services
         /// </summary>
         Task<string> CreateCustomer(StripeChargeCustomerRequest request);
         Task<string> UpdateCustomer(StripeChargeCustomerRequest request, string CustomerId);
+
+
+        Task<bool> CreateCustomerSubscription(string StripeCustomerId);
+
+
+        StripeSubscriptionResponse GetCustomerSubscription(string StripeSubscriptionId, string StripeCustomerId);
     }
 }

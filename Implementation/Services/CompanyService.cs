@@ -264,6 +264,7 @@ namespace SMD.Implementation.Services
             target.BranchTitle = source.BranchName;
             target.BranchLocationLat = source.BranchLocationLat;
             target.BranchLocationLong = source.BranchLocationLong;
+            target.CompanyId = source.CompanyId;
 
             return target;
         }
@@ -339,6 +340,12 @@ namespace SMD.Implementation.Services
                 TotalCount = rowCount
 
             };
+        }
+
+        public Boolean UpdateCompanyStatus(int status, string userId, string comments, int companyId)
+        {
+            companyRepository.UpdateCompanyStatus(status, userId, comments, companyId);
+            return true;
         }
         #endregion
     }
