@@ -264,6 +264,7 @@ namespace SMD.Implementation.Services
             target.BranchTitle = source.BranchName;
             target.BranchLocationLat = source.BranchLocationLat;
             target.BranchLocationLong = source.BranchLocationLong;
+            target.CompanyId = source.CompanyId;
 
             return target;
         }
