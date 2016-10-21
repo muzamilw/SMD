@@ -1075,6 +1075,7 @@ div#spinner {
     width: 224px;
     padding: 10px;
     margin: 3px;
+    cursor:pointer;
 }
 .space {
     width:20px;
@@ -1088,8 +1089,9 @@ div#spinner {
 }
 .homePanels_headers {
     font-size:1.2em;
-    color:#fff
+    color:rgb(103, 103, 103);
 }
+
 .whiteclr {
     color:#fff!important;
 }
