@@ -1075,6 +1075,7 @@ div#spinner {
     width: 224px;
     padding: 10px;
     margin: 3px;
+    cursor:pointer;
 }
 .space {
     width:20px;
