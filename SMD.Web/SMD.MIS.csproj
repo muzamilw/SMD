@@ -1181,6 +1181,7 @@
     <Content Include="Images\1_Splash_screen_1.png" />
     <Content Include="Images\accent.png" />
     <Content Include="Images\ads.png" />
+    <Content Include="Images\app-store.png" />
     <Content Include="Images\beta.jpg" />
     <Content Include="Images\bullet.png" />
     <Content Include="Images\Cash4ads_logo-circle.png" />
@@ -1191,6 +1192,7 @@
     <Content Include="Images\commute.jpg" />
     <Content Include="Images\crowdcentz_logo.png" />
     <Content Include="Images\crowdcentz_logo_whitebg.png" />
+    <Content Include="Images\download-on-google-play.png" />
     <Content Include="Images\guru.png" />
     <Content Include="Images\heroAccent.png" />
     <Content Include="Images\iphoneStencil.png" />

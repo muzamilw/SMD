@@ -2569,8 +2569,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
         <Function Name="UpdateCompanyStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="status" Type="int" Mode="In" />
           <Parameter Name="userId" Type="nvarchar" Mode="In" />
-          <Parameter Name="commentDateTime" Type="datetime" Mode="In" />
-          <Parameter Name="comments" Type="int" Mode="In" />
+          <Parameter Name="comments" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="companyId" Type="int" Mode="In" />
         </Function>
         <EntityContainer Name="SMDModelStoreContainer">
@@ -3878,8 +3877,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <FunctionImport Name="UpdateCompanyStatus">
             <Parameter Name="status" Mode="In" Type="Int32" />
             <Parameter Name="userId" Mode="In" Type="String" />
-            <Parameter Name="commentDateTime" Mode="In" Type="DateTime" />
-            <Parameter Name="comments" Mode="In" Type="Int32" />
+            <Parameter Name="comments" Mode="In" Type="String" />
             <Parameter Name="companyId" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
