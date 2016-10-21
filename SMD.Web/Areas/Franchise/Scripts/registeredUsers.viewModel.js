@@ -121,6 +121,10 @@ define("FranchiseDashboard/registeredUsers.viewModel",
                     },
                     onSave = function ()
                     {
+                        if (userComments() == undefined || userComments() == "" || userComments() == " " || userComments() == null) {
+                            toastr.info("Please add Comments and check Status!");
+                            return false;
+                        }
                         dataservice.updateComanyStatus(
                   {
                       status:  selectedUser().status(),
@@ -131,7 +135,12 @@ define("FranchiseDashboard/registeredUsers.viewModel",
                   },
                   {
                       success: function (result) {
-                        var a = result
+                          if (result == true) {
+                              toastr.success("User Status is Successfuly updated!");
+                              isEditorVisible(false);
+                              userComments(null);
+                          }
+
                       },
                       error: function (error) {
                           toastr.error("Failed to UPDATE user Status");
