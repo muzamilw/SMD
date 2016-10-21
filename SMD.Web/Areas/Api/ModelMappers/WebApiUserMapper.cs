@@ -32,7 +32,7 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                        UserTimeZone = source.UserTimeZone,
                        Gender = source.Gender,
                        Address2 = source.Company.AddressLine2,
-                       DOB =  source.DOB.Value.ToShortDateString(),
+                       DOB =  source.DOB.HasValue ? source.DOB.Value.ToShortDateString() : "",
                        //CityId = source.Company.CityId,
                        ContactNotes = source.ContactNotes,
                        CountryId = source.Company.CountryId,
