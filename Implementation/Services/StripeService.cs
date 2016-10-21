@@ -9,6 +9,7 @@ using SMD.Interfaces.Services;
 using SMD.Models.IdentityModels;
 using SMD.Models.RequestModels;
 using Stripe;
+using SMD.Models.ResponseModels;
 
 namespace SMD.Implementation.Services
 {
@@ -160,6 +161,45 @@ namespace SMD.Implementation.Services
                 throw new SMDException(exp.Message);
             }
         }
+
+
+
+
+
+        public async Task<bool> CreateCustomerSubscription(string StripeCustomerId)
+        {
+
+            //StripeConfiguration.SetApiKey("[your api key here]");
+
+          
+            var customerService = new StripeCustomerService();
+            StripeCustomer stripeCustomer = customerService.Get(StripeCustomerId);
+
+            StripeSubscriptionService subscriptionSvc = new StripeSubscriptionService();
+            subscriptionSvc.Create(StripeCustomerId, "Deals_Unlimited"); //use the PlanId you configured in the Stripe Portal to create a subscription
+            //Do something here to give your customer what they are paying for
+            //CHEERS!
+
+            return true;
+
+        }
+
+
+        public StripeSubscriptionResponse GetCustomerSubscription(string StripeSubscriptionId, string StripeCustomerId)
+    {
+         StripeSubscriptionService subscriptionSvc = new StripeSubscriptionService();
+         var sub = subscriptionSvc.Get(StripeSubscriptionId, StripeCustomerId); //use the PlanId you configured in the Stripe Portal to create a subscription
+
+         if (sub != null)
+         {
+             return new StripeSubscriptionResponse { ApplicationFeePercent = sub.ApplicationFeePercent, CancelAtPeriodEnd = sub.CancelAtPeriodEnd, Customer = sub.Customer.Email, CustomerId = sub.CustomerId, CanceledAt = sub.CanceledAt, EndedAt = sub.EndedAt, Metadata = sub.Metadata, PeriodEnd = sub.PeriodEnd, PeriodStart = sub.PeriodStart, Quantity = sub.Quantity, Start = sub.Start, Status = sub.Status, StripePlan = sub.StripePlan.Name, TaxPercent = sub.TaxPercent };
+         }
+         else
+             return null;
+
+
+
+    }
         #endregion
     }
 }

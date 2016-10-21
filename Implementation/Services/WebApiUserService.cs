@@ -1157,10 +1157,10 @@ namespace SMD.Implementation.Services
                 throw new InvalidOperationException(string.Format("Failed to add user to role {0}", SecurityRoles.EndUser_Admin));
             }
             int companyId = companyRepository.createCompany(user.Id, request.Email, request.FullName, Guid.NewGuid().ToString());
-            
 
 
             accountService.AddAccountsForNewUser(companyId);
+            TransactionManager.UserSignupFreeGiftBalanceTransaction(500, companyId);
 
 
             // Login user
