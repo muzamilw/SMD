@@ -20,8 +20,8 @@ define("FranchiseDashboard/registeredUsers.dataservice", function () {
 
 
                     // Edit AdCampaign
-                    amplify.request.define('savePayOut', 'ajax', {
-                        url: '/Api/ApprovePayOutHistory',
+                    amplify.request.define('updateComanyStatus', 'ajax', {
+                        url: '/Api/RegisteredUsers',
                         dataType: 'json',
                         type: 'POST'
                     });
@@ -45,10 +45,10 @@ define("FranchiseDashboard/registeredUsers.dataservice", function () {
                 });
             },
             // Save Ad Campaign edit
-            savePayOut = function (params, callbacks) {
+            updateComanyStatus = function (params, callbacks) {
                 initialize();
                 return amplify.request({
-                    resourceId: 'savePayOut',
+                    resourceId: 'updateComanyStatus',
                     success: callbacks.success,
                     error: callbacks.error,
                     data: params
@@ -65,7 +65,7 @@ define("FranchiseDashboard/registeredUsers.dataservice", function () {
          };
             
         return {
-            savePayOut: savePayOut,
+            updateComanyStatus: updateComanyStatus,
             getRegisteredUsers: getRegisteredUsers,
             getCompanyData: getCompanyData
           

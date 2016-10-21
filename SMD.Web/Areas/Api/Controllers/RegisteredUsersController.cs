@@ -41,6 +41,16 @@ namespace SMD.MIS.Areas.Api.Controllers
                 return response;
             }
         }
+        public Boolean Post(RequestModelForUpdateCompanyStatus request)
+        {
+         
+            if (!ModelState.IsValid)
+            {
+                throw new HttpException((int)HttpStatusCode.BadRequest, "Invalid Request");
+            }
+            companyService.UpdateCompanyStatus(request.status, request.userid, request.comments, request.companyid);
+            return true;
+        }
         #endregion
     }
 }

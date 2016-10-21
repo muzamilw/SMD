@@ -18,6 +18,7 @@ define("FranchiseDashboard/registeredUsers.viewModel",
                     selectedCompany = ko.observable(),
                     isEnableBtnVisible = ko.observable(false),
                     isDisableBtnVisible = ko.observable(false),
+                    userComments = ko.observable(),
 
                     //pager
                     pager = ko.observable(),
@@ -81,10 +82,10 @@ define("FranchiseDashboard/registeredUsers.viewModel",
                                  }
                              });
                     },
-                       getCampaignByFilter = function () {
+                    getCampaignByFilter = function () {
                            getRegisteredUsers();
                        },
-                          changeStatus = function (item) {
+                    changeStatus = function (item) {
                               if (item.status() == true) {
                                   confirmation.messageText("Are you sure? you want to ENABLE this user");
                                   confirmation.show();
@@ -103,7 +104,7 @@ define("FranchiseDashboard/registeredUsers.viewModel",
                               });
 
                           },
-                        onEditUSer = function (item) {
+                    onEditUSer = function (item) {
 
                             $("#topArea").css("display", "none");
                             $("#divApprove").css("display", "none");
@@ -111,14 +112,43 @@ define("FranchiseDashboard/registeredUsers.viewModel",
                             getCompanyData(item);
 
                         },
-                        closeEditDialog = function () {
+                    closeEditDialog = function () {
 
                             selectedUser(undefined);
                             isEditorVisible(false);
                             $("#topArea").css("display", "block");
                             $("#divApprove").css("display", "block");
-                        },
-                        companyTypes = ko.observableArray([
+                    },
+                    onSave = function ()
+                    {
+                        dataservice.updateComanyStatus(
+                  {
+                      status:  selectedUser().status(),
+                      userid:  selectedUser().userId(),
+                      comments:  userComments(),
+                      companyid: selectedUser().companyId(),
+
+                  },
+                  {
+                      success: function (result) {
+                        var a = result
+                      },
+                      error: function (error) {
+                          toastr.error("Failed to UPDATE user Status");
+                      }
+                  });
+                       
+                       
+                       
+                        
+
+
+
+
+
+
+                    },
+                    companyTypes = ko.observableArray([
                         { Id: 1, Name: 'Amusement, Gambling, and Recreation Industries' },
                         { Id: 2, Name: 'Arts, Entertainment, and Recreation' },
                         { Id: 3, Name: 'Broadcasting (except Internet)' },
@@ -191,7 +221,9 @@ define("FranchiseDashboard/registeredUsers.viewModel",
                     searchFilterValue: searchFilterValue,
                     changeStatus: changeStatus,
                     isEnableBtnVisible: isEnableBtnVisible,
-                    isDisableBtnVisible: isDisableBtnVisible
+                    isDisableBtnVisible: isDisableBtnVisible,
+                    userComments: userComments,
+                    onSave: onSave
 
 
 

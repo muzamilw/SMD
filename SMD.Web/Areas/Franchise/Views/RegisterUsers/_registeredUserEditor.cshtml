@@ -251,7 +251,7 @@
                                                             <label class="control-label text-right tooltip-float">Comments</label>
                                                         </div>
                                                         <div class="col-lg-6">
-                                                            <textarea placeholder="Enter comments " style="resize: none" class="form-control"></textarea>
+                                                            <textarea placeholder="Enter comments " data-bind="value:$root.userComments" style="resize: none" class="form-control"></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -261,7 +261,7 @@
 
                                                         </div>
                                                         <div class="col-lg-6">
-                                                            <button class="btn  btn-success" id="saveBtn">Save</button>
+                                                            <button class="btn  btn-success" id="saveBtn" data-bind="click:$root.onSave">Save</button>
 
                                                         </div>
                                                     </div>

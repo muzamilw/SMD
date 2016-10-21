@@ -180,7 +180,7 @@ namespace SMD.Repository.Repositories
 
                 db.Entry(target).State = EntityState.Modified;
                 db.SaveChanges();
-                
+
 
             }
             return true;
@@ -193,6 +193,12 @@ namespace SMD.Repository.Repositories
         {
             var appCount = db.GetApprovalCount();
             return appCount != null ? appCount.FirstOrDefault() : null;
+        }
+
+        public Boolean UpdateCompanyStatus(int status, string userId, string comments, int companyId)
+        {
+            db.UpdateCompanyStatus(status, userId, comments, companyId);
+            return true;
         }
     }
 }
