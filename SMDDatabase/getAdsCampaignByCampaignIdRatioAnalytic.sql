@@ -1,5 +1,5 @@
 ﻿GO
-/****** Object:  StoredProcedure [dbo].[getAdsCampaignByCampaignIdRatioAnalytic]    Script Date: 10/16/2016 7:56:13 PM ******/
+/****** Object:  StoredProcedure [dbo].[getAdsCampaignByCampaignIdRatioAnalytic]    Script Date: 10/21/2016 7:13:03 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -9,7 +9,7 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-Create PROCEDURE [dbo].[getAdsCampaignByCampaignIdRatioAnalytic] (
+ALTER PROCEDURE [dbo].[getAdsCampaignByCampaignIdRatioAnalytic] (
 @Id INT,  -- 1 for Viewed, 2 for Conversions or 3 for Skipped
 @DateRange INT -- 1 for last 30 days , 2 for All time
 		
@@ -29,15 +29,15 @@ IF @DateRange = 2
 	END
 
 
-		Select 'Landing Page Conversions' label, count(acr.CampaignID) value
-		from AdCampaignResponse acr
-		where acr.CreatedDateTime >= @dateFrom and acr.CreatedDateTime <= getdate() and acr.ResponseType = 2 and acr.CampaignID = @Id
-		union 
-		Select 'Reward Click count' label, count(acr.CampaignID) value
+		
+		
+		Select 'Reward Click' label, count(acr.CampaignID) value
 		from AdCampaignResponse acr
 		where acr.CreatedDateTime >= @dateFrom and acr.CreatedDateTime <= getdate() and acr.ResponseType = 3 and acr.CampaignID = @Id
-
-
+		union 
+		Select 'Click thru' label, count(acr.CampaignID) value
+		from AdCampaignResponse acr
+		where acr.CreatedDateTime >= @dateFrom and acr.CreatedDateTime <= getdate() and acr.ResponseType = 2 and acr.CampaignID = @Id
 	
 END
  

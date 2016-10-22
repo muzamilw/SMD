@@ -24,10 +24,29 @@ namespace SMD.MIS.Areas.Api.Controllers
 
         public SurvayBySQIDForAnalyticsResponse getPollsBySQIDAnalytics(int SQId, int CampStatus, int dateRange, int Granularity)
         {
+            List<getPollBySQIDRatioAnalytic_Result> listtbl = new List<getPollBySQIDRatioAnalytic_Result>();
             SurvayBySQIDForAnalyticsResponse data = new SurvayBySQIDForAnalyticsResponse();
             data.lineCharts = _ISurveyQuestionService.getPollsBySQIDAnalytics(SQId, CampStatus, dateRange, Granularity);
-            data.pieCharts = _ISurveyQuestionService.getPollBySQIDRatioAnalytic(SQId, dateRange);
+            List<getPollBySQIDRatioAnalytic_Result> list = _ISurveyQuestionService.getPollBySQIDRatioAnalytic(SQId, dateRange);
+            data.pieCharts = list;
             data.tbl = _ISurveyQuestionService.getPollBySQIDtblAnalytic(SQId);
+            int total = 0;
+            
+            if (list != null)
+            {
+                foreach (getPollBySQIDRatioAnalytic_Result res in list)
+                {
+                    total = total + (int)(res.value != null ? res.value : 0);
+                }
+                foreach (getPollBySQIDRatioAnalytic_Result res in list)
+                {
+                    getPollBySQIDRatioAnalytic_Result item = new getPollBySQIDRatioAnalytic_Result();
+                    item.label = res.label;
+                    item.value = (int)(((float)res.value / (float)total) * 100);
+                    listtbl.Add(item);
+                }
+            }
+            data.pieChartstbl = listtbl;
         
             return data;
 

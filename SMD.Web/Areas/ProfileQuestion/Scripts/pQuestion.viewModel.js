@@ -108,6 +108,7 @@ define("pQuestion/pQuestion.viewModel",
 				    selectedPQIDAnalytics = ko.observable() ,
 					PQAnalyticsData = ko.observableArray([]), 
 					CampaignTblAnalyticsData = ko.observableArray([]), 
+					CampaignROItblAnalyticData = ko.observableArray([]), 
 					granularityDropDown = ko.observableArray([{ id: 1, name: "Daily" }, { id: 2, name: "Weekly" }, { id: 3, name: "Monthly" }, { id: 4, name: "Quarterly" }, { id: 5, name: "Yearly" }]),
 					DateRangeDropDown  = ko.observableArray([{ id: 1, name: "Last 30 days" }, { id: 2, name: "All Time" }]),
 					CampaignStatusDropDown  = ko.observableArray([{ id: 1, name: "Answered" }, { id: 2, name: "Skipped" }]),
@@ -136,6 +137,10 @@ define("pQuestion/pQuestion.viewModel",
 							CampaignTblAnalyticsData.removeAll();
 							ko.utils.arrayPushAll(CampaignTblAnalyticsData(), data.tbl);
 							CampaignTblAnalyticsData.valueHasMutated();
+							
+							CampaignROItblAnalyticData.removeAll();
+								ko.utils.arrayPushAll(CampaignROItblAnalyticData(), data.pieChartstbl);
+								CampaignROItblAnalyticData.valueHasMutated();
 							}
 						},
 						error: function (response) {
@@ -2292,7 +2297,8 @@ define("pQuestion/pQuestion.viewModel",
 					getSurvayAnalytics:getSurvayAnalytics,
 					CloseSurvayAnalyticView:CloseSurvayAnalyticView,
 					CampaignRatioAnalyticData:CampaignRatioAnalyticData,
-					CampaignTblAnalyticsData:CampaignTblAnalyticsData
+					CampaignTblAnalyticsData:CampaignTblAnalyticsData,
+					CampaignROItblAnalyticData:CampaignROItblAnalyticData
                 };
             })()
         };
