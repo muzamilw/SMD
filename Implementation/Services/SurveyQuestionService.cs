@@ -6,6 +6,7 @@ using SMD.Interfaces.Repository;
 using SMD.Interfaces.Services;
 using SMD.Models.Common;
 using SMD.Models.DomainModels;
+using SMD.Models.IdentityModels;
 using SMD.Models.RequestModels;
 using SMD.Models.ResponseModels;
 using Stripe;

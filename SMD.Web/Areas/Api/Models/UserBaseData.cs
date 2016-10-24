@@ -24,5 +24,7 @@ namespace SMD.MIS.Areas.Api.Models
         public bool isUserAddmin { get; set; }
 
         public bool? IsSpecialAccount { get; set; }
+
+        public Nullable<int> Status { get; set; }
     }
 }
