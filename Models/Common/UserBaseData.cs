@@ -25,5 +25,7 @@ namespace SMD.Models.Common
         public bool isUserAdmin { get; set; }
 
         public bool? IsSpecialAccount { get; set; }
+
+        public Nullable<int> Status { get; set; }
     }
 }

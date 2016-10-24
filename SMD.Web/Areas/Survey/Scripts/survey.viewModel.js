@@ -1290,14 +1290,21 @@ define("survey/survey.viewModel",
                         if (ValidateSurvey() == true) {
 
                             if (reachedAudience() > 0) {
-
-                                if (userBaseData().isStripeIntegrated == false) {
-                                    stripeChargeCustomer.show(function () {
-                                        userBaseData().isStripeIntegrated = true;
+                                if (userBaseData().Status == null || userBaseData().Status == 0)
+                                {
+                                    confirmation.showOKpopupforinfo();
+                                    return;
+                                }
+                                else
+                                {
+                                    if (userBaseData().isStripeIntegrated == false) {
+                                        stripeChargeCustomer.show(function () {
+                                            userBaseData().isStripeIntegrated = true;
+                                            saveSurveyQuestion(2);
+                                        }, 2000, 'Enter your details');
+                                    } else {
                                         saveSurveyQuestion(2);
-                                    }, 2000, 'Enter your details');
-                                } else {
-                                    saveSurveyQuestion(2);
+                                    }
                                 }
                             } else {
                                 toastr.error("You have no audience against the specified criteria please broad your audience definition.");
