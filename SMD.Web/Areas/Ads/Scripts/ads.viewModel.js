@@ -1635,7 +1635,7 @@ define("ads/ads.viewModel",
 
                   },
                 onEditCampaign = function (item) {
-                    debugger;
+                  
                     previewScreenNumber(1);
                     isTerminateBtnVisible(false);
                     isNewCampaignVisible(false);
@@ -2533,12 +2533,14 @@ define("ads/ads.viewModel",
                         educationIds: educationIds,
                         educationIdsExcluded: educationIdsExcluded,
 
+
                         CampaignQuizIds: CampaignQuizIds,
                         CampaignQuizAnswerIds: CampaignQuizAnswerIds,
                         CampaignQuizAnswerIdsExcluded: CampaignQuizAnswerIdsExcluded,
                         CampaignQuizIdsExcluded: CampaignQuizIdsExcluded
                     };
                     $("#spinnerAudience").css("display", "block");
+                 
                     dataservice.getAudienceData(campData, {
                         success: function (data) {
                             $("#spinnerAudience").css("display", "none");
