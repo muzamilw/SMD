@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets837A1BBF679F08000921BCE7AC6580F5990036DED6069CA039C313B4AA4A0E3D))]
+[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets1605A9835243FD863D6D47A588E4247C8600B8107B0EBE717BAA1B6AA5A59D16))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -17,18 +17,18 @@ namespace Edm_EntityMappingGeneratedViews
     /// <Summary>
     /// The type contains views for EntitySets and AssociationSets that were generated at design time.
     /// </Summary>
-    public sealed class ViewsForBaseEntitySets837A1BBF679F08000921BCE7AC6580F5990036DED6069CA039C313B4AA4A0E3D : System.Data.Mapping.EntityViewContainer
+    public sealed class ViewsForBaseEntitySets1605A9835243FD863D6D47A588E4247C8600B8107B0EBE717BAA1B6AA5A59D16 : System.Data.Mapping.EntityViewContainer
     {
         
         /// <Summary>
         /// The constructor stores the views for the extents and also the hash values generated based on the metadata and mapping closure and views.
         /// </Summary>
-        public ViewsForBaseEntitySets837A1BBF679F08000921BCE7AC6580F5990036DED6069CA039C313B4AA4A0E3D()
+        public ViewsForBaseEntitySets1605A9835243FD863D6D47A588E4247C8600B8107B0EBE717BAA1B6AA5A59D16()
         {
             this.EdmEntityContainerName = "BaseDbContext";
             this.StoreEntityContainerName = "SMDModelStoreContainer";
-            this.HashOverMappingClosure = "a20987f9ce1451fac72cbbdd93b9439c2b8d6da4ca45fbaeff877a9f247bcd8d";
-            this.HashOverAllExtentViews = "a738bdcf1c4006d59493a08c0d018686226caea9494a7e4a0238a24c1eb154cd";
+            this.HashOverMappingClosure = "daafa373fab64fb3cb254883cbde091c5016106638c2c83bf72473897e65267b";
+            this.HashOverAllExtentViews = "6f1f69357697279c56e476c9d01b7cb6631f515a35a977a9a00e28dbc3aab176";
             this.ViewCount = 124;
         }
         
@@ -1012,7 +1012,7 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.Invoice", @"
     SELECT VALUE -- Constructing Invoice
-        [SMDModel.Store.Invoice](T1.Invoice_InvoiceId, T1.Invoice_InvoiceDate, T1.Invoice_InvoiceDueDate, T1.Invoice_TaxPercentage, T1.Invoice_Total, T1.Invoice_NetTotal, T1.Invoice_TaxValue, T1.Invoice_CompanyName, T1.Invoice_Address1, T1.Invoice_Address2, T1.Invoice_City, T1.Invoice_State, T1.Invoice_Country, T1.Invoice_ZipCode, T1.Invoice_CreditCardRef, T1.Invoice_CompanyId)
+        [SMDModel.Store.Invoice](T1.Invoice_InvoiceId, T1.Invoice_InvoiceDate, T1.Invoice_InvoiceDueDate, T1.Invoice_TaxPercentage, T1.Invoice_Total, T1.Invoice_NetTotal, T1.Invoice_TaxValue, T1.Invoice_CompanyName, T1.Invoice_Address1, T1.Invoice_Address2, T1.Invoice_City, T1.Invoice_State, T1.Invoice_Country, T1.Invoice_ZipCode, T1.Invoice_CreditCardRef, T1.Invoice_CompanyId, T1.Invoice_StripeReceiptNo, T1.Invoice_StripeInvoiceId)
     FROM (
         SELECT 
             T.InvoiceId AS Invoice_InvoiceId, 
@@ -1031,6 +1031,8 @@ namespace Edm_EntityMappingGeneratedViews
             T.ZipCode AS Invoice_ZipCode, 
             T.CreditCardRef AS Invoice_CreditCardRef, 
             T.CompanyId AS Invoice_CompanyId, 
+            T.StripeReceiptNo AS Invoice_StripeReceiptNo, 
+            T.StripeInvoiceId AS Invoice_StripeInvoiceId, 
             True AS _from0
         FROM BaseDbContext.Invoices AS T
     ) AS T1");
@@ -2379,7 +2381,7 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Invoices", @"
     SELECT VALUE -- Constructing Invoices
-        [DomainModels.Invoice](T1.Invoice_InvoiceId, T1.Invoice_InvoiceDate, T1.Invoice_InvoiceDueDate, T1.Invoice_TaxPercentage, T1.Invoice_Total, T1.Invoice_NetTotal, T1.Invoice_TaxValue, T1.Invoice_CompanyName, T1.Invoice_Address1, T1.Invoice_Address2, T1.Invoice_City, T1.Invoice_State, T1.Invoice_Country, T1.Invoice_ZipCode, T1.Invoice_CreditCardRef, T1.Invoice_CompanyId)
+        [DomainModels.Invoice](T1.Invoice_InvoiceId, T1.Invoice_InvoiceDate, T1.Invoice_InvoiceDueDate, T1.Invoice_TaxPercentage, T1.Invoice_Total, T1.Invoice_NetTotal, T1.Invoice_TaxValue, T1.Invoice_CompanyName, T1.Invoice_Address1, T1.Invoice_Address2, T1.Invoice_City, T1.Invoice_State, T1.Invoice_Country, T1.Invoice_ZipCode, T1.Invoice_CreditCardRef, T1.Invoice_CompanyId, T1.Invoice_StripeReceiptNo, T1.Invoice_StripeInvoiceId)
     FROM (
         SELECT 
             T.InvoiceId AS Invoice_InvoiceId, 
@@ -2398,6 +2400,8 @@ namespace Edm_EntityMappingGeneratedViews
             T.ZipCode AS Invoice_ZipCode, 
             T.CreditCardRef AS Invoice_CreditCardRef, 
             T.CompanyId AS Invoice_CompanyId, 
+            T.StripeReceiptNo AS Invoice_StripeReceiptNo, 
+            T.StripeInvoiceId AS Invoice_StripeInvoiceId, 
             True AS _from0
         FROM SMDModelStoreContainer.Invoice AS T
     ) AS T1");

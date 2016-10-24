@@ -46,7 +46,8 @@ namespace SMD.Implementation.Services
         private readonly ITaxRepository _taxRepository;
         private readonly IInvoiceRepository _invoiceRepository;
         private readonly IInvoiceDetailRepository _invoiceDetailRepository;
-        private readonly ICompanyRepository _iCompanyRepository;                                          
+        private readonly ICompanyRepository _iCompanyRepository;
+        private readonly ICampaignEventHistoryRepository campaignEventHistoryRepository;                          
         private ApplicationUserManager UserManager
         {
             get { return HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
@@ -61,7 +62,7 @@ namespace SMD.Implementation.Services
         public ProfileQuestionService(IProfileQuestionRepository profileQuestionRepository, ICountryRepository countryRepository,
             ILanguageRepository languageRepository, IProfileQuestionGroupRepository profileQuestionGroupRepository,
             IProfileQuestionAnswerRepository profileQuestionAnswerRepository, IIndustryRepository industoryRepository, IEducationRepository educationRepository, IProfileQuestionTargetCriteriaRepository profileQuestionTargetCriteriaRepository, IProfileQuestionTargetLocationRepository profileQuestionTargetLocationRepository
-            , IEmailManagerService emailManagerService, IStripeService stripeService, IProductRepository productRepository, ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository, ICompanyRepository iCompanyRepository)
+            , IEmailManagerService emailManagerService, IStripeService stripeService, IProductRepository productRepository, ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository, ICompanyRepository iCompanyRepository, ICampaignEventHistoryRepository campaignEventHistoryRepository)
         {
             _profileQuestionRepository = profileQuestionRepository;
             _countryRepository = countryRepository;
@@ -80,6 +81,7 @@ namespace SMD.Implementation.Services
             _invoiceRepository = invoiceRepository;
             _invoiceDetailRepository = invoiceDetailRepository;
             _iCompanyRepository = iCompanyRepository;
+             this.campaignEventHistoryRepository = campaignEventHistoryRepository;
         }
 
         #endregion
@@ -180,6 +182,12 @@ namespace SMD.Implementation.Services
                 serverObj.ModifiedDate = DateTime.Now.Add(-(_profileQuestionRepository.UserTimezoneOffSet));
 
                 _profileQuestionRepository.SaveChanges();
+
+
+                //event history
+                campaignEventHistoryRepository.InsertProfileQuestionEvent((AdCampaignStatus)serverObj.Status, serverObj.PqId);
+
+
 
                 if (source.ProfileQuestionAnswers != null)
                 {
@@ -316,6 +324,12 @@ namespace SMD.Implementation.Services
                 serverObj.CreationDate = DateTime.Now;
                 _profileQuestionRepository.Add(serverObj);
                 _profileQuestionRepository.SaveChanges();
+
+
+                 //event history
+                campaignEventHistoryRepository.InsertProfileQuestionEvent((AdCampaignStatus)serverObj.Status, serverObj.PqId);
+
+
 
                 if (serverObj.ProfileQuestionAnswers == null)
                 {
@@ -526,6 +540,10 @@ namespace SMD.Implementation.Services
                 dbCo.ModifiedDate = DateTime.Now;
                 dbCo.ModifiedBy = _profileQuestionRepository.LoggedInUserIdentity;
                 _profileQuestionRepository.SaveChanges();
+
+                    //event history
+                campaignEventHistoryRepository.InsertProfileQuestionEvent((AdCampaignStatus)dbCo.Status, dbCo.PqId);
+
 
             }
             return respMesg;

@@ -40,6 +40,7 @@ namespace SMD.Implementation.Services
         private readonly IEducationRepository _educationRepository;
         private readonly IIndustryRepository _industryRepository;
         private readonly ICompanyRepository _companyRepository;
+        private readonly ICampaignEventHistoryRepository campaignEventHistoryRepository;         
         private ApplicationUserManager UserManager
         {
             get { return HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
@@ -195,7 +196,7 @@ namespace SMD.Implementation.Services
         /// <summary>
         ///  Constructor
         /// </summary>
-        public SurveyQuestionService(ISurveyQuestionRepository _surveyQuestionRepository, ICountryRepository _countryRepository, ILanguageRepository _languageRepository, IEmailManagerService emailManagerService, ISurveyQuestionTargetCriteriaRepository _surveyQuestionTargtCriteriaRepository, ISurveyQuestionTargetLocationRepository _surveyQuestionTargetLocationRepository, IProductRepository productRepository, ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository, IStripeService stripeService, WebApiUserService webApiUserService, IEducationRepository educationRepository, IIndustryRepository industryRepository, ICompanyRepository companyRepository)
+        public SurveyQuestionService(ISurveyQuestionRepository _surveyQuestionRepository, ICountryRepository _countryRepository, ILanguageRepository _languageRepository, IEmailManagerService emailManagerService, ISurveyQuestionTargetCriteriaRepository _surveyQuestionTargtCriteriaRepository, ISurveyQuestionTargetLocationRepository _surveyQuestionTargetLocationRepository, IProductRepository productRepository, ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository, IStripeService stripeService, WebApiUserService webApiUserService, IEducationRepository educationRepository, IIndustryRepository industryRepository, ICompanyRepository companyRepository, ICampaignEventHistoryRepository campaignEventHistoryRepository)
         {
             this.surveyQuestionRepository = _surveyQuestionRepository;
             this.languageRepository = _languageRepository;
@@ -212,6 +213,7 @@ namespace SMD.Implementation.Services
             this._educationRepository = educationRepository;
             this._industryRepository = industryRepository;
             this._companyRepository = companyRepository;
+            this.campaignEventHistoryRepository = campaignEventHistoryRepository;
         }
 
         #endregion
@@ -312,6 +314,12 @@ namespace SMD.Implementation.Services
                 dbServey.ModifiedBy = surveyQuestionRepository.LoggedInUserIdentity;
             }
             surveyQuestionRepository.SaveChanges();
+
+
+
+            //event history
+            campaignEventHistoryRepository.InsertSurveyQuestionEvent((AdCampaignStatus)dbServey.Status, dbServey.SqId);
+
             return surveyQuestionRepository.Find(source.SqId);
         }
 
@@ -344,6 +352,10 @@ namespace SMD.Implementation.Services
                 if (survey.RightPictureBytes != null)
                     survey.RightPicturePath = paths[1];
                 surveyQuestionRepository.SaveChanges();
+
+                //event history
+                campaignEventHistoryRepository.InsertSurveyQuestionEvent((AdCampaignStatus)survey.Status, survey.SqId);
+
                 return true;
 
             }
@@ -414,6 +426,10 @@ namespace SMD.Implementation.Services
                 surveyQuestionTargetLocationRepository.SaveChanges();
                 surveyQuestionTargtCriteriaRepository.SaveChanges();
                 surveyQuestionRepository.SaveChanges();
+
+                //event history
+                campaignEventHistoryRepository.InsertSurveyQuestionEvent((AdCampaignStatus)survey.Status, survey.SqId);
+
                 return true;
 
             }

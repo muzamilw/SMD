@@ -42,6 +42,8 @@ namespace SMD.Implementation.Services
         private readonly ICompanyRepository _iCompanyRepository;
 
         private readonly ICouponPriceOptionRepository couponPriceOptionRepository;
+        private readonly ICampaignEventHistoryRepository campaignEventHistoryRepository;
+
         private ApplicationUserManager UserManager
         {
             get { return HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
@@ -134,7 +136,7 @@ namespace SMD.Implementation.Services
         /// </summary>
         public CouponService(ICouponRepository couponRepository, IUserFavouriteCouponRepository userFavouriteCouponRepository, ICompanyService _companyService,
             IUserPurchasedCouponRepository _userPurchasedCouponRepository, IAccountRepository _accountRepository, ICouponCategoriesRepository _couponCategoriesRepository, ICurrencyRepository _currencyRepository, IWebApiUserService _userService, IUserCouponViewRepository userCouponViewRepository, IEmailManagerService emailManagerService, WebApiUserService webApiUserService, IStripeService stripeService, IProductRepository productRepository
-            , ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository, ICompanyRepository iCompanyRepository, ICouponPriceOptionRepository couponPriceOptionRepository)
+            , ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository, ICompanyRepository iCompanyRepository, ICouponPriceOptionRepository couponPriceOptionRepository,, ICampaignEventHistoryRepository campaignEventHistoryRepository)
         {
             this.couponRepository = couponRepository;
             this._userFavouriteCouponRepository = userFavouriteCouponRepository;
@@ -154,6 +156,7 @@ namespace SMD.Implementation.Services
             this.invoiceDetailRepository = invoiceDetailRepository;
             _iCompanyRepository = iCompanyRepository;
             this.couponPriceOptionRepository = couponPriceOptionRepository;
+             this.campaignEventHistoryRepository = campaignEventHistoryRepository;
         }
 
         #endregion
@@ -326,6 +329,11 @@ namespace SMD.Implementation.Services
             }
 
 
+              //event history
+                campaignEventHistoryRepository.InsertCouponEvent((AdCampaignStatus)couponModel.Status,couponModel.CouponId);
+
+
+
             //savint the categories if any. do we need it ?
 
             ////if (couponModel.CouponCategories != null && couponModel.CouponCategories.Count() > 0)
@@ -426,6 +434,11 @@ namespace SMD.Implementation.Services
 
             couponRepository.Update(couponModel);
             couponRepository.SaveChanges();
+
+            //event history
+            campaignEventHistoryRepository.InsertCouponEvent((AdCampaignStatus)couponModel.Status,couponModel.CouponId);
+
+
 
 
             //price option logic
@@ -780,6 +793,9 @@ namespace SMD.Implementation.Services
 
                 couponRepository.SaveChanges();
 
+                //event history
+                campaignEventHistoryRepository.InsertCouponEvent((AdCampaignStatus)couponModel.Status,couponModel.CouponId);
+
                 if (source.Approved == false)
                 {
                     emailManagerService.SendCouponRejectionEmail(dbCo.UserId, dbCo.RejectedReason);
@@ -902,6 +918,13 @@ namespace SMD.Implementation.Services
 
             return couponRepository.getExpiryDate(CouponId);
         }
+
+
+        public bool PauseAllCoupons(int CompanyId)
+        {
+            return couponRepository.PauseAllCoupons(CompanyId);
+        }
+
         #endregion
     }
 }

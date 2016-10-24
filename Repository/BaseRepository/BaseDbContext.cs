@@ -131,6 +131,10 @@ namespace SMD.Repository.BaseRepository
         /// </summary>
         public DbSet<AdCampaignTargetLocation> AdCampaignTargetLocations { get; set; }
 
+
+        public DbSet<CampaignEventHistory> CampaignEventHistory { get; set; }
+
+        
         /// <summary>
         /// Survey Question
         /// </summary>

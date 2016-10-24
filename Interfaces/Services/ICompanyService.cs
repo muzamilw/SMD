@@ -16,6 +16,8 @@ namespace SMD.Interfaces.Services
 
         Company GetCompanyById(int CompanyId);
 
+        Company GetCompanyByStripeCustomerId(string StripeCustomerId);
+
         Company GetCurrentCompany();
 
 

@@ -67,6 +67,11 @@ namespace SMD.Implementation.Services
             return companyRepository.Find(CompanyId);
         }
 
+        public Company GetCompanyByStripeCustomerId(string StripeCustomerId)
+        {
+            return companyRepository.GetCompanyByStripeCustomerId(StripeCustomerId);
+        }
+
 
         public Company GetCurrentCompany()
         {

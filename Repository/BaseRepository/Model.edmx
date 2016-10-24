@@ -633,6 +633,8 @@
           <Property Name="ZipCode" Type="nvarchar" MaxLength="20" />
           <Property Name="CreditCardRef" Type="nvarchar" MaxLength="250" />
           <Property Name="CompanyId" Type="int" />
+          <Property Name="StripeReceiptNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="StripeInvoiceId" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="InvoiceDetail">
           <Key>
@@ -4617,6 +4619,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="CompanyId" Type="Int32" />
           <NavigationProperty Name="InvoiceDetails" Relationship="DomainModels.FK_InvoiceDetail_Invoice" FromRole="Invoice" ToRole="InvoiceDetail" />
           <NavigationProperty Name="Company" Relationship="DomainModels.FK_Invoice_Company" FromRole="Invoice" ToRole="Company" />
+          <Property Name="StripeReceiptNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StripeInvoiceId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="SurveyQuestion">
           <Key>
@@ -7374,6 +7378,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="Invoices">
             <EntityTypeMapping TypeName="DomainModels.Invoice">
               <MappingFragment StoreEntitySet="Invoice">
+                <ScalarProperty Name="StripeInvoiceId" ColumnName="StripeInvoiceId" />
+                <ScalarProperty Name="StripeReceiptNo" ColumnName="StripeReceiptNo" />
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
                 <ScalarProperty Name="CreditCardRef" ColumnName="CreditCardRef" />
                 <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />

@@ -2198,3 +2198,9 @@ GO
 ALTER TABLE dbo.Company SET (LOCK_ESCALATION = TABLE)
 GO
 COMMIT
+
+
+
+ALTER TABLE dbo.Invoice ADD
+	StripeReceiptNo nvarchar(50) NULL,
+	StripeInvoiceId nvarchar(50) NULL
