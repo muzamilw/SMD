@@ -81,135 +81,135 @@ define("survey/survey.viewModel",
                     HeaderText = ko.observable(0),
                     StatusValue = ko.observable(0),
                     qStatuses = ko.observableArray([{ id: 0, value: 'All' }, { id: 1, value: 'Draft' }, { id: 2, value: 'Submitted for Approval' }, { id: 3, value: 'Live' }, { id: 4, value: 'Paused' }, { id: 5, value: 'Completed' }, { id: 6, value: 'Rejected' }]);
-					statusFilterValue = ko.observable();
-				// Advertiser Analytics 
-					isAdvertdashboardPollVisible = ko.observable(false),
-					selectedCampStatusAnalytics = ko.observable(1),
-					selecteddateRangeAnalytics = ko.observable(1),
-					selectedGranularityAnalytics = ko.observable(1) ,
-				    selectedSQIDAnalytics = ko.observable() ,
-					SQAnalyticsData = ko.observableArray([]), 
-					CampaignTblAnalyticsData = ko.observableArray([]), 
-					CampaignROItblAnalyticData = ko.observableArray([]), 
-					granularityDropDown = ko.observableArray([{ id: 1, name: "Daily" }, { id: 2, name: "Weekly" }, { id: 3, name: "Monthly" }, { id: 4, name: "Quarterly" }, { id: 5, name: "Yearly" }]),
-					DateRangeDropDown  = ko.observableArray([{ id: 1, name: "Last 30 days" }, { id: 2, name: "All Time" }]),
-					CampaignStatusDropDown  = ko.observableArray([{ id: 1, name: "Answered" }, { id: 2, name: "Skipped" }]),
-					CampaignRatioAnalyticData = ko.observable(1), 
-				    openAdvertiserDashboardPollScreen = function () {
-					getSurvayAnalytics();
-					$("#ddGranularityDropDown").removeAttr("disabled");
-					$("#ddDateRangeDropDown").removeAttr("disabled");
-					$("#ddCampaignStatusDropDown").removeAttr("disabled");
-					
-					isAdvertdashboardPollVisible(true);
-				},
-				getSurvayAnalytics = function () {
-					dataservice.getSurvayAnalytics({
-						SQId: selectedSQIDAnalytics(),
-						CampStatus : selectedCampStatusAnalytics(),
-						dateRange :selecteddateRangeAnalytics(),
-						Granularity : selectedGranularityAnalytics(),
-					},{
-						success: function (data) {
-							if (data != null) {
-								SQAnalyticsData.removeAll();
-								ko.utils.arrayPushAll(SQAnalyticsData(), data.lineCharts);
-								SQAnalyticsData.valueHasMutated();
-								CampaignRatioAnalyticData(data.pieCharts);
-								CampaignTblAnalyticsData.removeAll();
-								ko.utils.arrayPushAll(CampaignTblAnalyticsData(), data.tbl);
-								CampaignTblAnalyticsData.valueHasMutated();
-								
-								CampaignROItblAnalyticData.removeAll();
-								ko.utils.arrayPushAll(CampaignROItblAnalyticData(), data.pieChartstbl);
-								CampaignROItblAnalyticData.valueHasMutated();
-								
-							}
-						},
-						error: function (response) {
+                statusFilterValue = ko.observable();
+                // Advertiser Analytics 
+                isAdvertdashboardPollVisible = ko.observable(false),
+                selectedCampStatusAnalytics = ko.observable(1),
+                selecteddateRangeAnalytics = ko.observable(1),
+                selectedGranularityAnalytics = ko.observable(1),
+                selectedSQIDAnalytics = ko.observable(),
+                SQAnalyticsData = ko.observableArray([]),
+                CampaignTblAnalyticsData = ko.observableArray([]),
+                CampaignROItblAnalyticData = ko.observableArray([]),
+                granularityDropDown = ko.observableArray([{ id: 1, name: "Daily" }, { id: 2, name: "Weekly" }, { id: 3, name: "Monthly" }, { id: 4, name: "Quarterly" }, { id: 5, name: "Yearly" }]),
+                DateRangeDropDown = ko.observableArray([{ id: 1, name: "Last 30 days" }, { id: 2, name: "All Time" }]),
+                CampaignStatusDropDown = ko.observableArray([{ id: 1, name: "Answered" }, { id: 2, name: "Skipped" }]),
+                CampaignRatioAnalyticData = ko.observable(1),
+                openAdvertiserDashboardPollScreen = function () {
+                    getSurvayAnalytics();
+                    $("#ddGranularityDropDown").removeAttr("disabled");
+                    $("#ddDateRangeDropDown").removeAttr("disabled");
+                    $("#ddCampaignStatusDropDown").removeAttr("disabled");
+
+                    isAdvertdashboardPollVisible(true);
+                },
+            getSurvayAnalytics = function () {
+                dataservice.getSurvayAnalytics({
+                    SQId: selectedSQIDAnalytics(),
+                    CampStatus: selectedCampStatusAnalytics(),
+                    dateRange: selecteddateRangeAnalytics(),
+                    Granularity: selectedGranularityAnalytics(),
+                }, {
+                    success: function (data) {
+                        if (data != null) {
+                            SQAnalyticsData.removeAll();
+                            ko.utils.arrayPushAll(SQAnalyticsData(), data.lineCharts);
+                            SQAnalyticsData.valueHasMutated();
+                            CampaignRatioAnalyticData(data.pieCharts);
+                            CampaignTblAnalyticsData.removeAll();
+                            ko.utils.arrayPushAll(CampaignTblAnalyticsData(), data.tbl);
+                            CampaignTblAnalyticsData.valueHasMutated();
+
+                            CampaignROItblAnalyticData.removeAll();
+                            ko.utils.arrayPushAll(CampaignROItblAnalyticData(), data.pieChartstbl);
+                            CampaignROItblAnalyticData.valueHasMutated();
 
                         }
-					});
-					
-				},					
-					
-					ClosePollAnalyticView = function () {
-					isAdvertdashboardPollVisible(false);
-					CampaignRatioAnalyticData(1);
-				},
-					
-					//End Advertiser Analytics 
-			   //Get Questions
-                getQuestions = function () {
-                    dataservice.searchSurveyQuestions(
-                        {
-                            SearchText: filterValue(),
-                            LanguageFilter: langfilterValue(),
-                            CountryFilter: countryfilterValue(),
-                            PageSize: pager().pageSize(),
-                            PageNo: pager().currentPage(),
-                            Status: statusFilterValue(),
-                            FirstLoad: false,
-                            fmode: isfMode()
-                        },
-                        {
-                            success: function (data) {
-                                populateSurveyQuestions(data);
-                            },
-                            error: function () {
-                                toastr.error("Failed to load  questions!");
-                            }
-                        });
+                    },
+                    error: function (response) {
+
+                    }
+                });
+
+            },
+
+                ClosePollAnalyticView = function () {
+                    isAdvertdashboardPollVisible(false);
+                    CampaignRatioAnalyticData(1);
                 },
 
-                // //Get Base Data for Questions
-                getBasedata = function () {
-                    dataservice.searchSurveyQuestions({
-                        FirstLoad: true,
+                //End Advertiser Analytics 
+                //Get Questions
+            getQuestions = function () {
+                dataservice.searchSurveyQuestions(
+                    {
+                        SearchText: filterValue(),
+                        LanguageFilter: langfilterValue(),
+                        CountryFilter: countryfilterValue(),
                         PageSize: pager().pageSize(),
                         PageNo: pager().currentPage(),
+                        Status: statusFilterValue(),
+                        FirstLoad: false,
                         fmode: isfMode()
                     },
-                        {
-
-                            success: function (data) {
-
-                                // popullate base data 
-                                langs.removeAll();
-                                countries.removeAll();
-                                ko.utils.arrayPushAll(langs(), data.LanguageDropdowns);
-                                ko.utils.arrayPushAll(countries(), data.CountryDropdowns);
-                                langs.valueHasMutated();
-                                countries.valueHasMutated();
-                                // populate survey questions 
-                                //populateSurveyQuestions(data);
-                                userBaseData(data.objBaseData);
-                                setupPrice(data.setupPrice);
-
-                                educations.removeAll();
-                                ko.utils.arrayPushAll(educations(), data.Educations);
-                                educations.valueHasMutated();
-
-                                professions.removeAll();
-                                ko.utils.arrayPushAll(professions(), data.Professions);
-                                professions.valueHasMutated();
-
-                            },
-                            error: function () {
-                                toastr.error("Failed to load base data!");
-                            }
-                        });
-
-                },
-                // update survey questions 
-                populateSurveyQuestions = function (data) {
-                    questions.removeAll();
-
-                    _.each(data.SurveyQuestions, function (item) {
-                        questions.push(model.Survey.Create(updateSurveryItem(item)));
+                    {
+                        success: function (data) {
+                            populateSurveyQuestions(data);
+                        },
+                        error: function () {
+                            toastr.error("Failed to load  questions!");
+                        }
                     });
-                    pager().totalCount(data.TotalCount);
-                }
+            },
+
+                // //Get Base Data for Questions
+            getBasedata = function () {
+                dataservice.searchSurveyQuestions({
+                    FirstLoad: true,
+                    PageSize: pager().pageSize(),
+                    PageNo: pager().currentPage(),
+                    fmode: isfMode()
+                },
+                    {
+
+                        success: function (data) {
+
+                            // popullate base data 
+                            langs.removeAll();
+                            countries.removeAll();
+                            ko.utils.arrayPushAll(langs(), data.LanguageDropdowns);
+                            ko.utils.arrayPushAll(countries(), data.CountryDropdowns);
+                            langs.valueHasMutated();
+                            countries.valueHasMutated();
+                            // populate survey questions 
+                            //populateSurveyQuestions(data);
+                            userBaseData(data.objBaseData);
+                            setupPrice(data.setupPrice);
+
+                            educations.removeAll();
+                            ko.utils.arrayPushAll(educations(), data.Educations);
+                            educations.valueHasMutated();
+
+                            professions.removeAll();
+                            ko.utils.arrayPushAll(professions(), data.Professions);
+                            professions.valueHasMutated();
+
+                        },
+                        error: function () {
+                            toastr.error("Failed to load base data!");
+                        }
+                    });
+
+            },
+                // update survey questions 
+            populateSurveyQuestions = function (data) {
+                questions.removeAll();
+
+                _.each(data.SurveyQuestions, function (item) {
+                    questions.push(model.Survey.Create(updateSurveryItem(item)));
+                });
+                pager().totalCount(data.TotalCount);
+            }
                 // populate country, language and status fields 
                 updateSurveryItem = function (item) {
 
@@ -273,7 +273,7 @@ define("survey/survey.viewModel",
                 },
                 // Add new Profile Question
                 addNewSurvey = function () {
-                    bindAudienceReachCount();
+
                     $("#panelArea,#topArea,#Heading_div").css("display", "none");
                     selectedQuestionCountryList([]);
                     gotoScreen(1);
@@ -307,6 +307,8 @@ define("survey/survey.viewModel",
                     buildParentSQList();
 
                     getAudienceCount();
+
+                    bindAudienceReachCount();
                     isEditorVisible(true);
                     canSubmitForApproval(true);
                     view.initializeTypeahead();
@@ -391,9 +393,9 @@ define("survey/survey.viewModel",
                     selectedQuestion().reset();
                 },
               CloseContent = function () {
-                  isEditorVisible(false); 
-				  ClosePollAnalyticView();
-				  enableControls();
+                  isEditorVisible(false);
+                  ClosePollAnalyticView();
+                  enableControls();
                   $("#panelArea,#topArea,#Heading_div").css("display", "block");
               },
                 SurveyQuestionsByFilter = function () {
@@ -422,7 +424,7 @@ define("survey/survey.viewModel",
             },
                 // On editing of existing PQ
                 onEditSurvey = function (item) {
-					selectedSQIDAnalytics(item.SQID());
+                    selectedSQIDAnalytics(item.SQID());
                     selectedQuestionCountryList([]); $("#panelArea,#topArea,#Heading_div").css("display", "none");
                     gotoScreen(1);
                     isTerminateBtnVisible(false);
@@ -1288,14 +1290,19 @@ define("survey/survey.viewModel",
                         if (ValidateSurvey() == true) {
 
                             if (reachedAudience() > 0) {
-
-                                if (userBaseData().isStripeIntegrated == false) {
-                                    stripeChargeCustomer.show(function () {
-                                        userBaseData().isStripeIntegrated = true;
+                                if (userBaseData().Status == null || userBaseData().Status == 0) {
+                                    confirmation.showOKpopupforinfo();
+                                    return;
+                                }
+                                else {
+                                    if (userBaseData().isStripeIntegrated == false) {
+                                        stripeChargeCustomer.show(function () {
+                                            userBaseData().isStripeIntegrated = true;
+                                            saveSurveyQuestion(2);
+                                        }, 2000, 'Enter your details');
+                                    } else {
                                         saveSurveyQuestion(2);
-                                    }, 2000, 'Enter your details');
-                                } else {
-                                    saveSurveyQuestion(2);
+                                    }
                                 }
                             } else {
                                 toastr.error("You have no audience against the specified criteria please broad your audience definition.");
@@ -1399,7 +1406,7 @@ define("survey/survey.viewModel",
                     var languageIds = '', industryIds = '', languageIdsExcluded = '',
                         industryIdsExcluded = '', profileQuestionIds = '', profileAnswerIds = '',
                         surveyQuestionIds = '', surveyAnswerIds = '', profileQuestionIdsExcluded = '', profileAnswerIdsExcluded = '',
-                        surveyQuestionIdsExcluded = '', surveyAnswerIdsExcluded = '';
+                        surveyQuestionIdsExcluded = '', surveyAnswerIdsExcluded = '', CampaignQuizIds = '', CampaignQuizAnswerIds = '', CampaignQuizAnswerIdsExcluded = '', CampaignQuizIdsExcluded = '';
                     _.each(selectedQuestion().SurveyQuestionTargetCriteria(), function (item) {
                         if (item.Type() == 1) {
                             if (item.IncludeorExclude() == '0') {
@@ -1493,7 +1500,35 @@ define("survey/survey.viewModel",
                                 }
                             }
                         }
+                        else if (item.Type() == 6) {
+                            //Quiz questions
+                           
+                            if (item.IncludeorExclude() == '0') {
+                                if (CampaignQuizIdsExcluded == '') {
+                                    CampaignQuizIdsExcluded += item.QuizCampaignId();
+                                } else {
+                                    surveyQuestionIdsExcluded += ',' + item.QuizCampaignId();
+                                }
+                                if (CampaignQuizAnswerIdsExcluded == '') {
+                                    CampaignQuizAnswerIdsExcluded += item.QuizAnswerId();
+                                } else {
+                                    CampaignQuizAnswerIdsExcluded += ',' + item.QuizAnswerId();
+                                }
+                            } else {
+                                if (CampaignQuizIds == '') {
+                                    CampaignQuizIds += item.QuizCampaignId();
+                                } else {
+                                    CampaignQuizIds += ',' + item.QuizCampaignId();
+                                }
+                                if (CampaignQuizAnswerIds == '') {
+                                    CampaignQuizAnswerIds += item.QuizAnswerId();
+                                } else {
+                                    CampaignQuizAnswerIds += ',' + item.QuizAnswerId();
+                                }
+                            }
+                        }
                     });
+
                     var ProfileData = {
                         ageFrom: selectedQuestion().AgeRangeStart(),
                         ageTo: selectedQuestion().AgeRangeEnd(),
@@ -1515,7 +1550,11 @@ define("survey/survey.viewModel",
                         surveyQuestionIdsExcluded: surveyQuestionIdsExcluded,
                         surveyAnswerIdsExcluded: surveyAnswerIdsExcluded,
                         educationIds: educationIds,
-                        educationIdsExcluded: educationIdsExcluded
+                        educationIdsExcluded: educationIdsExcluded,
+                        CampaignQuizIds: CampaignQuizIds,
+                        CampaignQuizAnswerIds: CampaignQuizAnswerIds,
+                        CampaignQuizAnswerIdsExcluded: CampaignQuizAnswerIdsExcluded,
+                        CampaignQuizIdsExcluded: CampaignQuizIdsExcluded
                     };
 
                     dataservice.getAudienceData(ProfileData, {
@@ -1541,7 +1580,7 @@ define("survey/survey.viewModel",
                             $(".meterPin").css("-webkit-transform", "rotate(" + dialPercent + "deg)");
                         },
                         error: function (response) {
-                            toastr.error("Error while getting audience count.");
+                            //  toastr.error("Error while getting audience count.");
                         }
                     });
                 },
@@ -1639,9 +1678,15 @@ define("survey/survey.viewModel",
                         });
                     },
                      submitResumeData = function () {
-                         if (selectedQuestion() != undefined)
-                             saveSurveyQuestion(3);
+                         if (userBaseData().Status == null || userBaseData().Status == 0) {
+                             confirmation.showOKpopupforinfo();
+                             return;
+                         }
+                         else {
 
+                             if (selectedQuestion() != undefined)
+                                 saveSurveyQuestion(3);
+                         }
                          //$("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
                          //$("#btnSubmitForApproval,#saveBtn,.lang_delSurvey,.table-link").css("display", "inline-block");
                          //$("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign").removeAttr('disabled');
@@ -1738,7 +1783,7 @@ define("survey/survey.viewModel",
                     var languageIds = '', industryIds = '', languageIdsExcluded = '',
                         industryIdsExcluded = '', profileQuestionIds = '', profileAnswerIds = '',
                         surveyQuestionIds = '', surveyAnswerIds = '', profileQuestionIdsExcluded = '', profileAnswerIdsExcluded = '',
-                        surveyQuestionIdsExcluded = '', surveyAnswerIdsExcluded = '';
+                        surveyQuestionIdsExcluded = '', surveyAnswerIdsExcluded = '', CampaignQuizIds = '', CampaignQuizAnswerIds = '', CampaignQuizAnswerIdsExcluded = '', CampaignQuizIdsExcluded = '';
                     _.each(selectedQuestion().SurveyQuestionTargetCriteria(), function (item) {
                         if (item.Type() == 1) {
                             if (item.IncludeorExclude() == '0') {
@@ -1832,6 +1877,31 @@ define("survey/survey.viewModel",
                                 }
                             }
                         }
+                        else if (item.Type() == 6) {        //Quiz questions
+                            if (item.IncludeorExclude() == '0') {
+                                if (CampaignQuizIdsExcluded == '') {
+                                    CampaignQuizIdsExcluded += item.QuizCampaignId();
+                                } else {
+                                    surveyQuestionIdsExcluded += ',' + item.QuizCampaignId();
+                                }
+                                if (CampaignQuizAnswerIdsExcluded == '') {
+                                    CampaignQuizAnswerIdsExcluded += item.QuizAnswerId();
+                                } else {
+                                    CampaignQuizAnswerIdsExcluded += ',' + item.QuizAnswerId();
+                                }
+                            } else {
+                                if (CampaignQuizIds == '') {
+                                    CampaignQuizIds += item.QuizCampaignId();
+                                } else {
+                                    CampaignQuizIds += ',' + item.QuizCampaignId();
+                                }
+                                if (CampaignQuizAnswerIds == '') {
+                                    CampaignQuizAnswerIds += item.QuizAnswerId();
+                                } else {
+                                    CampaignQuizAnswerIds += ',' + item.QuizAnswerId();
+                                }
+                            }
+                        }
                     });
                     var ProfileData = {
                         ageFrom: selectedQuestion().AgeRangeStart(),
@@ -1854,7 +1924,11 @@ define("survey/survey.viewModel",
                         surveyQuestionIdsExcluded: surveyQuestionIdsExcluded,
                         surveyAnswerIdsExcluded: surveyAnswerIdsExcluded,
                         educationIds: educationIds,
-                        educationIdsExcluded: educationIdsExcluded
+                        educationIdsExcluded: educationIdsExcluded,
+                        CampaignQuizIds: CampaignQuizIds,
+                        CampaignQuizAnswerIds: CampaignQuizAnswerIds,
+                        CampaignQuizAnswerIdsExcluded: CampaignQuizAnswerIdsExcluded,
+                        CampaignQuizIdsExcluded: CampaignQuizIdsExcluded
                     };
 
                     dataservice.getAudienceData(ProfileData, {
@@ -1899,6 +1973,7 @@ define("survey/survey.viewModel",
                         } else if (status == 4) {
                             $("#btnResumeCampagin").css("display", "inline-block");
                             $("#btnResumeCampagin").removeAttr('disabled');
+                            $("#dialog-confrominfo").removeAttr('disabled');
                         }
                         $("#topArea a").removeAttr('disabled');
                     },
@@ -2061,29 +2136,29 @@ define("survey/survey.viewModel",
                     totalPrice: totalPrice,
                     SavePassChanges: SavePassChanges,
                     terminateSaveChanges: terminateSaveChanges,
-                    DefaultRangeValue: DefaultRangeValue ,
-					getSurvayAnalytics:getSurvayAnalytics,
-					ClosePollAnalyticView:ClosePollAnalyticView,
-					isAdvertdashboardPollVisible :isAdvertdashboardPollVisible,
-					selectedCampStatusAnalytics:selectedCampStatusAnalytics,
-					selecteddateRangeAnalytics:selecteddateRangeAnalytics,
-					selectedGranularityAnalytics :selectedGranularityAnalytics,
+                    DefaultRangeValue: DefaultRangeValue,
+                    getSurvayAnalytics: getSurvayAnalytics,
+                    ClosePollAnalyticView: ClosePollAnalyticView,
+                    isAdvertdashboardPollVisible: isAdvertdashboardPollVisible,
+                    selectedCampStatusAnalytics: selectedCampStatusAnalytics,
+                    selecteddateRangeAnalytics: selecteddateRangeAnalytics,
+                    selectedGranularityAnalytics: selectedGranularityAnalytics,
                     Modelheading: Modelheading,
                     getQuestionByFilter: getQuestionByFilter,
                     SearchProfileQuestion: SearchProfileQuestion,
-                    TemporaryProfileList:TemporaryProfileList,
-                    TemporaryQuizQuestions:TemporaryQuizQuestions,
+                    TemporaryProfileList: TemporaryProfileList,
+                    TemporaryQuizQuestions: TemporaryQuizQuestions,
                     TemporarySurveyList: TemporarySurveyList,
                     submitResumeData: submitResumeData,
-					selectedSQIDAnalytics : selectedSQIDAnalytics,
-					SQAnalyticsData : SQAnalyticsData,
-					granularityDropDown : granularityDropDown,
-					DateRangeDropDown : DateRangeDropDown ,
-					CampaignStatusDropDown : CampaignStatusDropDown , 
-					openAdvertiserDashboardPollScreen : openAdvertiserDashboardPollScreen,
-					CampaignRatioAnalyticData:CampaignRatioAnalyticData,
-					CampaignTblAnalyticsData:CampaignTblAnalyticsData,
-					CampaignROItblAnalyticData:CampaignROItblAnalyticData
+                    selectedSQIDAnalytics: selectedSQIDAnalytics,
+                    SQAnalyticsData: SQAnalyticsData,
+                    granularityDropDown: granularityDropDown,
+                    DateRangeDropDown: DateRangeDropDown,
+                    CampaignStatusDropDown: CampaignStatusDropDown,
+                    openAdvertiserDashboardPollScreen: openAdvertiserDashboardPollScreen,
+                    CampaignRatioAnalyticData: CampaignRatioAnalyticData,
+                    CampaignTblAnalyticsData: CampaignTblAnalyticsData,
+                    CampaignROItblAnalyticData: CampaignROItblAnalyticData
                 };
             })()
         };

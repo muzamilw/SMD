@@ -345,7 +345,6 @@
           <Property Name="TimeZone" Type="nvarchar" MaxLength="50" />
           <Property Name="Logo" Type="nvarchar" MaxLength="200" />
           <Property Name="StripeCustomerId" Type="nvarchar" MaxLength="50" />
-          <Property Name="ChargeBeesubscriptionID" Type="nvarchar" MaxLength="50" />
           <Property Name="RegisteredViaReferral" Type="bit" />
           <Property Name="ReferringCompanyID" Type="int" />
           <Property Name="PaypalCustomerId" Type="nvarchar" MaxLength="250" />
@@ -383,6 +382,8 @@
           <Property Name="IsDeleted" Type="bit" />
           <Property Name="DeleteDate" Type="datetime" />
           <Property Name="IsSpecialAccount" Type="bit" />
+          <Property Name="StripeSubscriptionId" Type="nvarchar" MaxLength="70" />
+          <Property Name="StripeSubscriptionStatus" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="CompanyBranch">
           <Key>
@@ -6243,7 +6244,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="TimeZone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Logo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="StripeCustomerId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ChargeBeesubscriptionID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="RegisteredViaReferral" Type="Boolean" />
           <Property Name="ReferringCompanyID" Type="Int32" />
           <Property Name="PaypalCustomerId" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
@@ -6297,6 +6297,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <NavigationProperty Name="PayOutHistories" Relationship="DomainModels.FK_PayOutHistory_Company" FromRole="Company" ToRole="PayOutHistory" />
           <Property Name="IsSpecialAccount" Type="Boolean" />
           <NavigationProperty Name="ProfileQuestionUserAnswers" Relationship="DomainModels.FK_ProfileQuestionUserAnswer_Company" FromRole="Company" ToRole="ProfileQuestionUserAnswer" />
+          <Property Name="StripeSubscriptionId" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="StripeSubscriptionStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Account_Company">
           <End Type="DomainModels.Company" Role="Company" Multiplicity="0..1" />
@@ -8316,6 +8318,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="Companies">
             <EntityTypeMapping TypeName="DomainModels.Company">
               <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="StripeSubscriptionStatus" ColumnName="StripeSubscriptionStatus" />
+                <ScalarProperty Name="StripeSubscriptionId" ColumnName="StripeSubscriptionId" />
                 <ScalarProperty Name="IsSpecialAccount" ColumnName="IsSpecialAccount" />
                 <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
@@ -8353,7 +8357,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
                 <ScalarProperty Name="PaypalCustomerId" ColumnName="PaypalCustomerId" />
                 <ScalarProperty Name="ReferringCompanyID" ColumnName="ReferringCompanyID" />
                 <ScalarProperty Name="RegisteredViaReferral" ColumnName="RegisteredViaReferral" />
-                <ScalarProperty Name="ChargeBeesubscriptionID" ColumnName="ChargeBeesubscriptionID" />
                 <ScalarProperty Name="StripeCustomerId" ColumnName="StripeCustomerId" />
                 <ScalarProperty Name="Logo" ColumnName="Logo" />
                 <ScalarProperty Name="TimeZone" ColumnName="TimeZone" />

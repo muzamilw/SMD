@@ -247,7 +247,8 @@ namespace SMD.MIS.ModelMappers
                     Longitude = source.Longitude,
                     isStripeIntegrated = source.isStripeIntegrated,
                     isUserAddmin = source.isUserAdmin,
-                    IsSpecialAccount = source.IsSpecialAccount
+                    IsSpecialAccount = source.IsSpecialAccount,
+                    Status = source.Status,
                 };
             }
             else

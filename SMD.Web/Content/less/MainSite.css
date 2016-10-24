@@ -1076,6 +1076,7 @@ div#spinner {
     padding: 10px;
     margin: 3px;
     cursor:pointer;
+    height:180px;
 }
 .space {
     width:20px;
@@ -1083,7 +1084,7 @@ div#spinner {
 .pg >div{
     color:#d3d3d3!important;
     font-size:12px!important;
-    margin:0px!important;
+    margin:0px;
     padding:0px!important;
     font-family: 'PT Sans', sans-serif!important;
 }
@@ -1193,7 +1194,7 @@ div#spinner {
     color: #fff;
     padding-left: 10px;
     padding-right: 10px;
-   display:none;
+  
     
 }
 .setStacksVideoAds {
@@ -1209,7 +1210,7 @@ div#spinner {
     color: #fff;
      padding-left: 10px;
     padding-right: 10px;
-    display:none;
+    
 }
 
 .setStacksDisplayAds {
@@ -1225,7 +1226,7 @@ div#spinner {
     color: #fff;
      padding-left: 10px;
     padding-right: 10px;
-  display:none;
+  
 }
 
 .setStackspolls {
@@ -1241,7 +1242,7 @@ div#spinner {
     color: #fff;
      padding-left: 10px;
     padding-right: 10px;
-  display:none;
+  
 }
 .setStackssurveys {
     margin-top: 8px;
@@ -1256,9 +1257,37 @@ div#spinner {
     color: #fff;
      padding-left: 10px;
     padding-right: 10px;
-    display:none;
+    
 }
 .fbold {
     font-weight:bold;
 }
+.panel_Image {
+    
+    text-align:center;
+   
+}
+
+.images {
+    width:109px;
+    height:105px;
+}
+.Dealdescription_panel {
+    display:none;
+}
+.deals_image {
+    width: 88px;
+    height: 79px;
+}
+.standard_img_size {
+    width:60px;
+    height:60px;
+}
+.polls_Images {
+        width: 125px;
+    height: 86px;
+}
+/*.videopanel,.displayadspanel {
+    padding-top:15px;
+}*/
 /*# sourceMappingURL=MainSite.css.map */

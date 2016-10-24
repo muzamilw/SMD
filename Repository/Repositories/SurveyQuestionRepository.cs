@@ -2,6 +2,7 @@
 using SMD.Interfaces.Repository;
 using SMD.Models.Common;
 using SMD.Models.DomainModels;
+using SMD.Models.IdentityModels;
 using SMD.Models.RequestModels;
 using SMD.Repository.BaseRepository;
 using System;
@@ -239,6 +240,7 @@ namespace SMD.Repository.Repositories
                 //data.Longitude = usr.Company.City != null ? usr.Company.City.GeoLong : "";
                  data.isUserAdmin = isAdmin;
                  data.IsSpecialAccount = usr.IsSpecialAccount;
+                 data.Status = user.Status;
             }
 
             return data;
@@ -283,5 +285,6 @@ namespace SMD.Repository.Repositories
         {
             return db.getPollBySQIDtblAnalytic(ID);
         }
+
     }
 }
