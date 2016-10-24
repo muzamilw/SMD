@@ -341,6 +341,12 @@ namespace SMD.Implementation.Services
 
             };
         }
+
+        public Boolean UpdateCompanyStatus(int status, string userId, string comments, int companyId)
+        {
+            companyRepository.UpdateCompanyStatus(status, userId, comments, companyId);
+            return true;
+        }
         #endregion
     }
 }

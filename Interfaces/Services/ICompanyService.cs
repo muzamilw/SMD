@@ -26,5 +26,7 @@ namespace SMD.Interfaces.Services
         bool UpdateCompanyProfile(CompanyResponseModel company, byte[] logoImageBytes);
         List<vw_ReferringCompanies> GetRefferalComponiesByCid();
         RegisteredUsersResponseModel GetRegisterdUsers(RegisteredUsersSearchRequest request);
+
+        Boolean UpdateCompanyStatus(int status, string userId, string comments, int companyId);
     }
 }

@@ -1,16 +1,29 @@
 ﻿         <div data-bind="visible: $root.isAdvertdashboardDealVisible()" style="display: none" class=" col-lg-9 form-horizontal" >
              <div class="main-box main-box-subpage">
                  <div class="row">
-                     <div class="adsubHeading Theme_standard_clr borderbtmline">
+                     
                          <br />
-                         Deal group timeline
+                     <div class="col-lg-6 adsubHeading Theme_standard_clr borderbtmline" style="padding-bottom:10px;">
+                         Group timeline
                      </div>
+                         <div class="col-lg-3 adsubHeading Theme_standard_clr borderbtmline" style="padding-bottom:10px;">
+                             <label class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn" >Date range </label> 
+                             </div>
+                     <div class="col-lg-3 adsubHeading Theme_standard_clr borderbtmline" style="padding-bottom:2px;">
+                         <select class="form-control"  id="ddDateRangeDropDown" data-bind="options: $root.DateRangeDropDown, optionsText: 'name', optionsValue: 'id', value:$root.selecteddateRangeAnalytics, event: { change: $root.getDealsAnalytics }"></select>
+                     </div>
+                        
+                        
+                     
                  </div>
                  <div>
                      <div class="col-lg-6"></div>
-                     <div class="col-lg-6">
-                         <select class="form-control margin10 pull-left" style="width:43%!important;" id="ddGranularityDropDown" data-bind="options: $root.granularityDropDown, optionsText: 'name', optionsValue: 'id', value:$root.selectedGranularityAnalytics, event: { change: $root.getDealsAnalytics }"></select>
-                         <select class="form-control margin10 pull-left" style="width:43%!important;" id="ddDateRangeDropDown" data-bind="options: $root.DateRangeDropDown, optionsText: 'name', optionsValue: 'id', value:$root.selecteddateRangeAnalytics, event: { change: $root.getDealsAnalytics }"></select>
+                     <div class="col-lg-3">
+                         <label class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Granularity level </label> 
+                         </div>
+                     <div class="col-lg-3">
+                         <select class="form-control margin10 pull-left" id="ddGranularityDropDown" data-bind="options: $root.granularityDropDown, optionsText: 'name', optionsValue: 'id', value:$root.selectedGranularityAnalytics, event: { change: $root.getDealsAnalytics }"></select>
+
 
                      </div>
 
@@ -19,7 +32,7 @@
                  <div class="row main-box">
                      <div class="col-lg-12">
                          <div class=" margin10">
-                             <div class="margin-Top-30" data-bind="morris: {type: 'Line', data: $root.DealsAnalyticsData, xkey: 'Granual', ykeys: ['openStats', 'ConvrsionStats'], labels: ['Total Impressions', 'Referred'], parseTime:false, setAxisAlignFirstX: true, lineColors: ['blue','red'] }"></div>
+                             <div style="height:200px;" data-bind="morris: {type: 'Line', data: $root.DealsAnalyticsData, xkey: 'Granual', ykeys: ['openStats', 'ConvrsionStats'], labels: ['Opened', 'Click thru'], parseTime:false, setAxisAlignFirstX: true, lineColors: ['blue','green'] }"></div>
                             
                          </div>
                      </div>
@@ -28,25 +41,29 @@
                  <div class="row">
                      <div class="adsubHeading Theme_standard_clr borderbtmline">
                          <br />
-                         Deal group campaign by opened vs conversion
+                         Group campaign by opened vs conversion
                      </div>
                  </div>
 
                  <div class="row main-box">
-
-                     <div class="col-lg-7">
-                         <div class="margin-Top-30" data-bind="morris: {type: 'Donut', data: $root.CampaignRatioAnalyticData, resize:true }" style="width:400px;height:400px;"></div>
+                     <div class="col-lg-3">
                          <!--ko if: $root.selecteddateRangeAnalytics() == 1 -->
                          <div>Date range : Last 30 days </div>
                          <!--/ko-->
                          <!--ko if: $root.selecteddateRangeAnalytics() == 2 -->
                          <div>Date range : All time </div>
                          <!--/ko-->
+                       
                      </div>
-                     <div class="col-lg-5">
+                     <div class="col-lg-9">
+                        
+                         <div data-bind="morris: {type: 'Donut', data: $root.CampaignRatioAnalyticData, resize:true, colors: ['green', 'blue' ] }" style="width:250px;height:250px;"></div>
+                         
+                     </div>
+                     @*<div class="col-lg-5">
                          <span style="margin-top:70px;">Listing Expiry Date : </span>
                          <span data-bind="text:$root.dealExpirydate"> </span>
-                     </div>
+                     </div>*@
                  </div>
                  <div class="clearfix">
                  </div>

@@ -552,11 +552,12 @@ namespace SMD.Implementation.Services
 
             return this.surveyQuestionRepository.getPollsBySQIDAnalytics(SQId, CampStatus, dateRange, Granularity);
         }
-        public IEnumerable<getPollBySQIDRatioAnalytic_Result> getPollBySQIDRatioAnalytic(int ID, int dateRange)
+        public List<getPollBySQIDRatioAnalytic_Result> getPollBySQIDRatioAnalytic(int ID, int dateRange)
         {
 
             return surveyQuestionRepository.getPollBySQIDRatioAnalytic(ID, dateRange);
         }
+       
         public IEnumerable<getPollBySQIDtblAnalytic_Result> getPollBySQIDtblAnalytic(int ID)
         {
             return surveyQuestionRepository.getPollBySQIDtblAnalytic(ID);

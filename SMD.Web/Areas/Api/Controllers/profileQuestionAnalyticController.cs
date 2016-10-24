@@ -25,9 +25,34 @@ namespace SMD.MIS.Areas.Api.Controllers
         {
             PQByPQIDForAnalyticsResponse data = new PQByPQIDForAnalyticsResponse();
             data.lineCharts = _IProfileQuestionService.getSurvayByPQIDAnalytics(PQId, CampStatus, dateRange, Granularity);
-            data.pieCharts = _IProfileQuestionService.getSurveyByPQIDRatioAnalytic(PQId, dateRange);
+          //  data.pieCharts = _IProfileQuestionService.getSurveyByPQIDRatioAnalytic(PQId, dateRange);
             data.tbl = _IProfileQuestionService.getSurvayByPQIDtblAnalytic(PQId);
         
+            ///
+
+            List<getSurveyByPQIDRatioAnalytic_Result> listtbl = new List<getSurveyByPQIDRatioAnalytic_Result>();
+            List<getSurveyByPQIDRatioAnalytic_Result> list = _IProfileQuestionService.getSurveyByPQIDRatioAnalytic(PQId, dateRange).ToList();
+            data.pieCharts = list;
+           
+            int total = 0;
+
+            if (list != null)
+            {
+                foreach (getSurveyByPQIDRatioAnalytic_Result res in list)
+                {
+                    total = total + (int)(res.value != null ? res.value : 0);
+                }
+                foreach (getSurveyByPQIDRatioAnalytic_Result res in list)
+                {
+                    getSurveyByPQIDRatioAnalytic_Result item = new getSurveyByPQIDRatioAnalytic_Result();
+                    item.label = res.label;
+                    item.value = (int)(((float)res.value / (float)total) * 100);
+                    listtbl.Add(item);
+                }
+            }
+            data.pieChartstbl = listtbl;
+
+
             return data;
         }
 

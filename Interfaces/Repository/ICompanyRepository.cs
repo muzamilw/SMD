@@ -15,7 +15,7 @@ namespace SMD.Interfaces.Repository
         int GetUserCompany(string userId);
         bool updateCompanyLogo(string url, int companyId);
 
-        int createCompany(string userId, string email, string fullname,string guid);
+        int createCompany(string userId, string email, string fullname, string guid);
         bool updateCompany(Company request);
 
         User getUserBasedOnAuthenticationToken(string token);
@@ -25,5 +25,6 @@ namespace SMD.Interfaces.Repository
         List<vw_ReferringCompanies> GetReferralCompaniesByCID();
         bool updateCompanyForProfile(CompanyResponseModel RequestData, Company Target);
         GetApprovalCount_Result GetApprovalCount();
+        Boolean UpdateCompanyStatus(int status, string userId, string comments, int companyId);
     }
 }

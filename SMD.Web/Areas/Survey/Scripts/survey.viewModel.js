@@ -90,8 +90,9 @@ define("survey/survey.viewModel",
 				    selectedSQIDAnalytics = ko.observable() ,
 					SQAnalyticsData = ko.observableArray([]), 
 					CampaignTblAnalyticsData = ko.observableArray([]), 
+					CampaignROItblAnalyticData = ko.observableArray([]), 
 					granularityDropDown = ko.observableArray([{ id: 1, name: "Daily" }, { id: 2, name: "Weekly" }, { id: 3, name: "Monthly" }, { id: 4, name: "Quarterly" }, { id: 5, name: "Yearly" }]),
-					DateRangeDropDown  = ko.observableArray([{ id: 1, name: "One month" }, { id: 2, name: "All Time" }]),
+					DateRangeDropDown  = ko.observableArray([{ id: 1, name: "Last 30 days" }, { id: 2, name: "All Time" }]),
 					CampaignStatusDropDown  = ko.observableArray([{ id: 1, name: "Answered" }, { id: 2, name: "Skipped" }]),
 					CampaignRatioAnalyticData = ko.observable(1), 
 				    openAdvertiserDashboardPollScreen = function () {
@@ -99,6 +100,7 @@ define("survey/survey.viewModel",
 					$("#ddGranularityDropDown").removeAttr("disabled");
 					$("#ddDateRangeDropDown").removeAttr("disabled");
 					$("#ddCampaignStatusDropDown").removeAttr("disabled");
+					
 					isAdvertdashboardPollVisible(true);
 				},
 				getSurvayAnalytics = function () {
@@ -117,6 +119,11 @@ define("survey/survey.viewModel",
 								CampaignTblAnalyticsData.removeAll();
 								ko.utils.arrayPushAll(CampaignTblAnalyticsData(), data.tbl);
 								CampaignTblAnalyticsData.valueHasMutated();
+								
+								CampaignROItblAnalyticData.removeAll();
+								ko.utils.arrayPushAll(CampaignROItblAnalyticData(), data.pieChartstbl);
+								CampaignROItblAnalyticData.valueHasMutated();
+								
 							}
 						},
 						error: function (response) {
@@ -2077,7 +2084,8 @@ define("survey/survey.viewModel",
 					CampaignStatusDropDown : CampaignStatusDropDown , 
 					openAdvertiserDashboardPollScreen : openAdvertiserDashboardPollScreen,
 					CampaignRatioAnalyticData:CampaignRatioAnalyticData,
-					CampaignTblAnalyticsData:CampaignTblAnalyticsData
+					CampaignTblAnalyticsData:CampaignTblAnalyticsData,
+					CampaignROItblAnalyticData:CampaignROItblAnalyticData
                 };
             })()
         };

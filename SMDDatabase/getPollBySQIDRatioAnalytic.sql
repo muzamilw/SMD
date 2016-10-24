@@ -1,5 +1,5 @@
 ﻿GO
-/****** Object:  StoredProcedure [dbo].[getAdsCampaignByCampaignId]    Script Date: 10/15/2016 10:36:05 PM ******/
+/****** Object:  StoredProcedure [dbo].[getPollBySQIDRatioAnalytic]    Script Date: 10/22/2016 1:32:34 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -9,7 +9,7 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-create PROCEDURE [dbo].[getPollBySQIDRatioAnalytic] (
+ALTER PROCEDURE [dbo].[getPollBySQIDRatioAnalytic] (
 @Id INT,  -- SQID
 @DateRange INT -- 1 for last 30 days , 2 for All time	
 )
@@ -22,7 +22,7 @@ DECLARE @dateFrom DATE = getdate()-30;
   
 IF @DateRange = 2
 	BEGIN
-	 Select top 1 @dateFrom = AnswerDateTime from ProfileQuestionUserAnswer where PQID = @Id
+	 Select top 1 @dateFrom = ResoponseDateTime from SurveyQuestionResponse where SQID = @Id
 	END
 		Select r.UserSelection label, count(r.SQResponseID) value 
 		from  SurveyQuestionResponse r 
@@ -32,4 +32,4 @@ IF @DateRange = 2
 END
  
  
---EXEC [getPollBySQIDRatioAnalytic] 12, 2
+--EXEC [getPollBySQIDRatioAnalytic] 18, 2
