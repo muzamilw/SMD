@@ -1,5 +1,5 @@
 ﻿GO
-/****** Object:  StoredProcedure [dbo].[getPollBySQIDtblAnalytic]    Script Date: 10/20/2016 2:24:20 PM ******/
+/****** Object:  StoredProcedure [dbo].[getPollBySQIDtblAnalytic]    Script Date: 10/24/2016 9:34:26 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -46,7 +46,7 @@ DECLARE @dateFrom DATE = getdate()-30;
 		where sqr.ResoponseDateTime >= @dateFrom and sqr.ResoponseDateTime <= getdate() and sqr.ResponseType = 3 and sqr.SQID = @Id
 			
 		union
-		Select 4 ordr, 'Cost' label, isnull(sum(t.DebitAmount)/100, 0) 'All time' , 
+		Select 4 ordr, 'Total incurred cost' label, isnull(sum(t.DebitAmount)/100, 0) 'All time' , 
 			(Select isnull(sum(t.DebitAmount)/100, 0) from [Transaction] t
 			where t.TransactionDate >= getdate() - 30 and t.TransactionDate <= getdate() and t.SQID = @Id) '30 days'
 		from [Transaction] t

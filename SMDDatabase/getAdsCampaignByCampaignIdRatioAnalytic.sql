@@ -1,5 +1,5 @@
 ﻿GO
-/****** Object:  StoredProcedure [dbo].[getAdsCampaignByCampaignIdRatioAnalytic]    Script Date: 10/21/2016 7:13:03 PM ******/
+/****** Object:  StoredProcedure [dbo].[getAdsCampaignByCampaignIdRatioAnalytic]    Script Date: 10/24/2016 8:51:46 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -38,6 +38,10 @@ IF @DateRange = 2
 		Select 'Click thru' label, count(acr.CampaignID) value
 		from AdCampaignResponse acr
 		where acr.CreatedDateTime >= @dateFrom and acr.CreatedDateTime <= getdate() and acr.ResponseType = 2 and acr.CampaignID = @Id
+		union 
+		Select 'Skipped' label, count(acr.CampaignID) value
+		from AdCampaignResponse acr
+		where acr.CreatedDateTime >= @dateFrom and acr.CreatedDateTime <= getdate() and acr.ResponseType = 4 and acr.CampaignID = @Id
 	
 END
  

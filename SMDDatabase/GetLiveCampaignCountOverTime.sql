@@ -1,5 +1,5 @@
 ﻿GO
-/****** Object:  StoredProcedure [dbo].[GetLiveCampaignCountOverTime]    Script Date: 10/7/2016 4:57:20 PM ******/
+/****** Object:  StoredProcedure [dbo].[GetLiveCampaignCountOverTime]    Script Date: 10/24/2016 8:09:24 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -119,115 +119,97 @@ FROM
 	Select  t.Granual, min(t.date) ordr
 	from @T1 t 
 	group by t.Granual
-		
-		-- for Video ads
-	--insert into @rev
-	--select t.date, count(case when ac.Type = 4 and CONVERT(date, ac.StartDateTime) <= t.date then ac.CampaignID else null end) GameStats, count(case when ac.Type = 1 and CONVERT(date, ac.StartDateTime) <= t.date then ac.CampaignID else null end) as videoStats 
-	--from AdCampaign ac
-	--right outer join   @T1 t on t.date < CONVERT(date, ac.EndDateTime)
-	--group by t.date
-
+	
 	 IF @CampaignType = 1
 		BEGIN -- for video ads
 				
 			insert into @rev
-			select gg.Granual,  count(evntHis.CampaignID) stats --evntHis.maxdate , evntHis.CampaignID
-			from @T1 gg left outer join (
-			select Max(c.EventDateTime) maxdate, c.CampaignID  from
-			@T1 t 
-			left outer join CampaignEventHistory c on c.EventDateTime <= t.date
-			inner join AdCampaign ac on ac.CampaignID = c.CampaignID 
-			where  c.CampaignID is not null and ac.Type = 1 and c.EventStatusId = 3
-			
-			group by c.CampaignID 
-			) evntHis on gg.date > =  evntHis.maxdate
-			group by gg.Granual
-			--insert into @rev
-			--select gg.Granual,  count(evntHis.CampaignID) stats 
-			--from @T1 gg left outer join (
-			--select DISTINCT (c.CampaignID) , c.EventDateTime maxdate, c.EventId, c.EventStatusId from
-			--@T1 t 
-			--inner join CampaignEventHistory c on c.EventDateTime <= t.date
-			--inner join AdCampaign ac on ac.CampaignID = c.CampaignID 
-			--where c.CampaignID is not null and ac.Type = 1 --and c.EventStatusId = 3
-			--group by c.CampaignID 	 
-			
-			--) evntHis on gg.date > =  evntHis.maxdate
-			--group by gg.Granual
+			select rst.gran Granual , count(case when camp.EventStatusId = 3 then camp.CampaignID else null end) stats from CampaignEventHistory camp 
+			inner join (
+			select Max(c.EventDateTime) maxdate, c.CampaignID, Max(c.EventId) Id , t.Granual gran  from
+				CampaignEventHistory c
+				inner join AdCampaign ac on ac.CampaignID = c.CampaignID 
+				inner join CampaignEventHistory ceh on c.EventId = ceh.EventId
+				inner join @T1 t on c.EventDateTime < dateadd(d,1,t.date)
+				where c.CampaignID is not null and ac.Type = 1 
+				group by c.CampaignID ,  t.Granual 
+				) rst on rst.maxdate = camp.EventDateTime and rst.Id = camp.EventId
+				group by rst.gran
 		END
 		ELSE  IF @CampaignType = 2
 		BEGIN -- for Display ads
 				
 			insert into @rev
-			select gg.Granual,  count(evntHis.CampaignID) stats --evntHis.maxdate , evntHis.CampaignID
-			from @T1 gg left outer join (
-			select Max(c.EventDateTime) maxdate, c.CampaignID  from
-			@T1 t 
-			left outer join CampaignEventHistory c on c.EventDateTime <= t.date
-			inner join AdCampaign ac on ac.CampaignID = c.CampaignID 
-			where  c.CampaignID is not null and ac.Type = 2 and c.EventStatusId = 3
-			
-			group by c.CampaignID 
-			) evntHis on gg.date > =  evntHis.maxdate
-			group by gg.Granual
+			select rst.gran Granual , count(case when camp.EventStatusId = 3 then camp.CampaignID else null end) stats from CampaignEventHistory camp 
+			inner join (
+			select Max(c.EventDateTime) maxdate, c.CampaignID, Max(c.EventId) Id , t.Granual gran  from
+				CampaignEventHistory c
+				inner join AdCampaign ac on ac.CampaignID = c.CampaignID 
+				inner join CampaignEventHistory ceh on c.EventId = ceh.EventId
+				inner join @T1 t on c.EventDateTime < dateadd(d,1,t.date)
+				where c.CampaignID is not null and ac.Type = 4 
+				group by c.CampaignID ,  t.Granual 
+				) rst on rst.maxdate = camp.EventDateTime and rst.Id = camp.EventId
+				group by rst.gran
 		END 
 		ElSE  IF @CampaignType = 3
 		BEGIN -- Survay
 				
 			insert into @rev
-			select gg.Granual,  count(evntHis.PQID) stats --evntHis.maxdate , evntHis.CampaignID
-			from @T1 gg left outer join (
-			select Max(c.EventDateTime) maxdate, c.PQID  from
-			@T1 t 
-			left outer join CampaignEventHistory c on c.EventDateTime <= t.date
-			where  c.PQID is not null  and c.EventStatusId = 3
-			group by c.PQID 
-			) evntHis on gg.date > =  evntHis.maxdate
-			group by gg.Granual
+			select rst.gran Granual , count(case when camp.EventStatusId = 3 then camp.PQID else null end) stats from CampaignEventHistory camp 
+			inner join (
+			select Max(c.EventDateTime) maxdate, c.PQID, Max(c.EventId) Id , t.Granual gran  from
+				CampaignEventHistory c
+				inner join @T1 t on c.EventDateTime < dateadd(d,1,t.date)
+				where c.PQID is not null  
+				group by c.PQID ,  t.Granual 
+				) rst on rst.maxdate = camp.EventDateTime and rst.Id = camp.EventId
+				group by rst.gran
 		END
 		ElSE  IF @CampaignType = 4
 		BEGIN -- Polls
-				
 			insert into @rev
-			select gg.Granual,  count(evntHis.SQID) stats --evntHis.maxdate , evntHis.CampaignID
-			from @T1 gg left outer join (
-			select Max(c.EventDateTime) maxdate, c.SQID  from
-			@T1 t 
-			left outer join CampaignEventHistory c on c.EventDateTime <= t.date
-			where  c.SQID is not null  and c.EventStatusId = 3
-			group by c.SQID 
-			) evntHis on gg.date > =  evntHis.maxdate
-			group by gg.Granual
+			select rst.gran Granual , count(case when camp.EventStatusId = 3 then camp.SQID else null end) stats from CampaignEventHistory camp 
+			inner join (
+			select Max(c.EventDateTime) maxdate, c.SQID, Max(c.EventId) Id , t.Granual gran  from
+				CampaignEventHistory c
+				inner join @T1 t on c.EventDateTime < dateadd(d,1,t.date)
+				where c.SQID is not null  
+				group by c.SQID ,  t.Granual 
+				) rst on rst.maxdate = camp.EventDateTime and rst.Id = camp.EventId
+				group by rst.gran
 		END
 		ELSE  IF @CampaignType = 5
 		BEGIN -- for Free Deals
-				
 			insert into @rev
-			select gg.Granual,  count(evntHis.CouponId) stats --evntHis.maxdate , evntHis.CampaignID
-			from @T1 gg left outer join (
-			select Max(c.EventDateTime) maxdate, c.CouponId  from
-			@T1 t 
-			left outer join CampaignEventHistory c on c.EventDateTime <= t.date
-			inner join Coupon ac on ac.CouponId = c.CouponId 
-			where  c.CouponId is not null and ac.CouponListingMode = 1 and c.EventStatusId = 3
-			group by c.CouponId 
-			) evntHis on gg.date > =  evntHis.maxdate
-			group by gg.Granual
+			select rst.gran Granual , count(case when camp.EventStatusId = 3 then camp.CouponId else null end) stats from CampaignEventHistory camp 
+			inner join (
+			select Max(c.EventDateTime) maxdate, c.CouponId, Max(c.EventId) Id , t.Granual gran  from
+				CampaignEventHistory c
+				inner join Coupon ac on ac.CouponId = c.CouponId 
+				inner join CampaignEventHistory ceh on c.EventId = ceh.EventId
+				inner join @T1 t on c.EventDateTime < dateadd(d,1,t.date)
+				where c.CouponId is not null and ac.CouponListingMode = 1
+				group by c.CouponId ,  t.Granual 
+				) rst on rst.maxdate = camp.EventDateTime and rst.Id = camp.EventId
+				group by rst.gran
+
 		END 
 		ELSE  IF @CampaignType = 6
 		BEGIN -- for Paid Deals
 				
 			insert into @rev
-			select gg.Granual,  count(evntHis.CouponId) stats --evntHis.maxdate , evntHis.CampaignID
-			from @T1 gg left outer join (
-			select Max(c.EventDateTime) maxdate, c.CouponId  from
-			@T1 t 
-			left outer join CampaignEventHistory c on c.EventDateTime <= t.date
-			inner join Coupon ac on ac.CouponId = c.CouponId 
-			where  c.CouponId is not null and ac.CouponListingMode = 2 and c.EventStatusId = 3
-			group by c.CouponId 
-			) evntHis on gg.date > =  evntHis.maxdate
-			group by gg.Granual
+			select rst.gran Granual , count(case when camp.EventStatusId = 3 then camp.CouponId else null end) stats from CampaignEventHistory camp 
+			inner join (
+			select Max(c.EventDateTime) maxdate, c.CouponId, Max(c.EventId) Id , t.Granual gran  from
+				CampaignEventHistory c
+				inner join Coupon ac on ac.CouponId = c.CouponId 
+				inner join CampaignEventHistory ceh on c.EventId = ceh.EventId
+				inner join @T1 t on c.EventDateTime < dateadd(d,1,t.date)
+				where c.CouponId is not null and ac.CouponListingMode = 1
+				group by c.CouponId ,  t.Granual 
+				) rst on rst.maxdate = camp.EventDateTime and rst.Id = camp.EventId
+				group by rst.gran
 		END 
 	
 	select g.Granual, (case when r.campCount is not null then r.campCount else 0 end) campCount from @gran g
