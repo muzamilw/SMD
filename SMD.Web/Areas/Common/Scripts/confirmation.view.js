@@ -36,6 +36,12 @@ define("common/confirmation.view",
                   hideshowOKpopup = function () {
                       $("#dialog-okWarning").modal("hide");
                   },
+                   showOKpopupforinfo = function () {
+                        $("#dialog-okWarningforinfo").modal("show");
+                   },
+                    hidesOKpopupforinfo = function () {
+                        $("#dialog-okWarningforinfo").modal("hide");
+                    },
                 // Hide the dialog
                 hideWarningPopup = function() {
                     $("#dialog-ok").modal("hide");
@@ -69,7 +75,9 @@ define("common/confirmation.view",
                 showActionPopup: showActionPopup,
                 hideActionPopup: hideActionPopup,
                 showOKpopup: showOKpopup,
-                hideshowOKpopup: hideshowOKpopup
+                hideshowOKpopup: hideshowOKpopup,
+                showOKpopupforinfo: showOKpopupforinfo,
+                hidesOKpopupforinfo: hidesOKpopupforinfo
             };
         })(ist.confirmation.viewModel);
 
