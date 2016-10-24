@@ -225,6 +225,7 @@ namespace SMD.Repository.Repositories
                 //data.Latitude = usr.Company.City != null ? usr.Company.City.GeoLat : "";
                 //data.Longitude = usr.Company.City != null ? usr.Company.City.GeoLong : "";
                 data.isUserAdmin = isAdmin;
+                data.Status = usr.Status;
             }
 
             return data;
