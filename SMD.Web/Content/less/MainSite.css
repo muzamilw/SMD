@@ -1193,7 +1193,7 @@ div#spinner {
     color: #fff;
     padding-left: 10px;
     padding-right: 10px;
-   display:none;
+  
     
 }
 .setStacksVideoAds {
@@ -1209,7 +1209,7 @@ div#spinner {
     color: #fff;
      padding-left: 10px;
     padding-right: 10px;
-    display:none;
+    
 }
 
 .setStacksDisplayAds {
@@ -1225,7 +1225,7 @@ div#spinner {
     color: #fff;
      padding-left: 10px;
     padding-right: 10px;
-  display:none;
+  
 }
 
 .setStackspolls {
@@ -1241,7 +1241,7 @@ div#spinner {
     color: #fff;
      padding-left: 10px;
     padding-right: 10px;
-  display:none;
+  
 }
 .setStackssurveys {
     margin-top: 8px;
@@ -1256,9 +1256,28 @@ div#spinner {
     color: #fff;
      padding-left: 10px;
     padding-right: 10px;
-    display:none;
+    
 }
 .fbold {
     font-weight:bold;
+}
+.panel_Image {
+    
+    text-align:center;
+}
+.images {
+    width:109px;
+    height:105px;
+}
+#content_div {
+    height:106px;
+}
+.deals_image {
+    width: 88px;
+    height: 79px;
+}
+.standard_img_size {
+    width:60px;
+    height:60px;
 }
 /*# sourceMappingURL=MainSite.css.map */

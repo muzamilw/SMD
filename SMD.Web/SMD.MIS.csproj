@@ -861,9 +861,11 @@
     <Content Include="Content\Images\CompanyLogo.png" />
     <Content Include="Content\Images\Company_Default.png" />
     <Content Include="Content\Images\CZ_AOFDdEE7.png" />
+    <Content Include="Content\Images\Deals.png" />
     <Content Include="Content\Images\Drop_Arrow.png" />
     <Content Include="Content\Images\facebookNew.png" />
     <Content Include="Content\Images\foldericon3.png" />
+    <Content Include="Content\Images\Games.png" />
     <Content Include="Content\Images\help2.png" />
     <Content Include="Content\Images\ImageAttach.png" />
     <Content Include="Content\Images\company_contact.jpg" />
@@ -874,12 +876,14 @@
     <Content Include="Content\Images\movie_up.png" />
     <Content Include="Content\Images\pin.png" />
     <Content Include="Content\Images\placeholder.png" />
+    <Content Include="Content\Images\Polls.png" />
     <Content Include="Content\Images\ReportControlbg.jpg" />
     <Content Include="Content\Images\TwitterNew.png" />
     <Content Include="Content\Images\UK-Union-Flag.png" />
     <Content Include="Content\Images\up-arrow-small.png" />
     <Content Include="Content\Images\updatedMovie_lg.png" />
     <Content Include="Content\Images\vide.png" />
+    <Content Include="Content\Images\Videos.png" />
     <Content Include="Content\layout.css" />
     <Content Include="Content\less\Campaign.css">
       <DependentUpon>Campaign.less</DependentUpon>
