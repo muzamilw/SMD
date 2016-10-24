@@ -281,6 +281,7 @@ namespace SMD.Implementation.Services
                 objUC.LanguageName = loggedInUser.Language != null ? loggedInUser.Language.LanguageName : "";
                 objUC.isStripeIntegrated = company == null ? false : (String.IsNullOrEmpty(company.StripeCustomerId) || company.StripeCustomerId == "undefined" ? false : true);
                 objUC.IsSpecialAccount = company.IsSpecialAccount;
+                objUC.Status = loggedInUser.Status;
 
 
 

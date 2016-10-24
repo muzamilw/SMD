@@ -457,6 +457,8 @@ namespace SMD.MIS.ModelMappers
                 IsSpecialAccount = source.IsSpecialAccount,
                 CurrencyCode = source.CurrencyCode,
                 CurrencySymbol = source.CurrencySymbol,
+                Status = source.Status,
+                
                
             };
 

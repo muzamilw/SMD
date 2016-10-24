@@ -40,6 +40,8 @@ namespace SMD.MIS.Areas.Api.Models
 
         public string CurrencySymbol { get; set; }
 
+        public Nullable<int> Status { get; set; }
+
 
     }
 }

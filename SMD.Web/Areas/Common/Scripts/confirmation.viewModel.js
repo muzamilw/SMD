@@ -124,6 +124,10 @@ define("common/confirmation.viewModel",
                       isLoading(true);
                       view.showOKpopup();
                   },
+                   showOKpopupforinfo = function () {
+                         isLoading(true);
+                         view.showOKpopupforinfo();
+                     },
                     showUpgradePopup = function () {
                         isLoading(true);
                         view.showUpgradePopup();
@@ -149,6 +153,12 @@ define("common/confirmation.viewModel",
                        view.hideshowOKpopup();
                        view.hide();
                    },
+                    hidesOKpopupforInfo = function () {
+                        // Reset Call Backs
+                        resetDialog();
+                        view.hidesOKpopupforinfo();
+                        view.hide();
+                    },
 
                      // Hide the dialog
                     hideActionPopup = function () {
@@ -225,7 +235,9 @@ define("common/confirmation.viewModel",
                     comment: comment,
                     ActionPopupCancel: ActionPopupCancel,
                     //errors: errors,
-                    UserRandomNum: UserRandomNum
+                    UserRandomNum: UserRandomNum,
+                    showOKpopupforinfo: showOKpopupforinfo,
+                    hidesOKpopupforInfo: hidesOKpopupforInfo
                 };
             })()
         };
