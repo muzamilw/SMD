@@ -1,5 +1,5 @@
 ﻿GO
-
+/****** Object:  StoredProcedure [dbo].[getVideoCampaignROItblAnalytic]    Script Date: 10/19/2016 11:54:42 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
