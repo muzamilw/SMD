@@ -240,7 +240,7 @@ namespace SMD.Repository.Repositories
                 //data.Longitude = usr.Company.City != null ? usr.Company.City.GeoLong : "";
                  data.isUserAdmin = isAdmin;
                  data.IsSpecialAccount = usr.IsSpecialAccount;
-                 data.Status = usr.Status;
+                 data.Status = user.Status;
             }
 
             return data;
