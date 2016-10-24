@@ -2539,6 +2539,7 @@ define("ads/ads.viewModel",
                         CampaignQuizIdsExcluded: CampaignQuizIdsExcluded
                     };
                     $("#spinnerAudience").css("display", "block");
+                 
                     dataservice.getAudienceData(campData, {
                         success: function (data) {
                             $("#spinnerAudience").css("display", "none");

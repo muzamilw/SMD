@@ -266,7 +266,7 @@ define("survey/survey.viewModel",
                 },
                 // Add new Profile Question
                 addNewSurvey = function () {
-                    bindAudienceReachCount();
+                   
                     $("#panelArea,#topArea,#Heading_div").css("display", "none");
                     selectedQuestionCountryList([]);
                     gotoScreen(1);
@@ -300,6 +300,8 @@ define("survey/survey.viewModel",
                     buildParentSQList();
 
                     getAudienceCount();
+
+                    bindAudienceReachCount();
                     isEditorVisible(true);
                     canSubmitForApproval(true);
                     view.initializeTypeahead();
@@ -1510,7 +1512,7 @@ define("survey/survey.viewModel",
                         educationIds: educationIds,
                         educationIdsExcluded: educationIdsExcluded
                     };
-
+                    debugger;
                     dataservice.getAudienceData(ProfileData, {
                         success: function (data) {
 
