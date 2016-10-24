@@ -1635,7 +1635,7 @@ define("ads/ads.viewModel",
 
                   },
                 onEditCampaign = function (item) {
-                    debugger;
+                  
                     previewScreenNumber(1);
                     isTerminateBtnVisible(false);
                     isNewCampaignVisible(false);
@@ -2532,6 +2532,7 @@ define("ads/ads.viewModel",
                         surveyAnswerIdsExcluded: surveyAnswerIdsExcluded,
                         educationIds: educationIds,
                         educationIdsExcluded: educationIdsExcluded,
+
 
                         CampaignQuizIds: CampaignQuizIds,
                         CampaignQuizAnswerIds: CampaignQuizAnswerIds,

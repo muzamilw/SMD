@@ -39,18 +39,18 @@ namespace SMD.MIS.Areas.Api.Controllers
             }
             else
             {
-                if (request.CampaignQuizIds == null)
-                {
-                    request.CampaignQuizIds = string.Empty;
-                }
-                if (request.CampaignQuizAnswerIds == null)
-                {
-                    request.CampaignQuizAnswerIds = string.Empty;
-                }
-                if(request.CampaignQuizIdsExcluded == null)
-                {
-                    request.CampaignQuizIdsExcluded = string.Empty;
-                }
+                //if (request.CampaignQuizIds == null)
+                //{
+                //    request.CampaignQuizIds = string.Empty;
+                //}
+                //if (request.CampaignQuizAnswerIds == null)
+                //{
+                //    request.CampaignQuizAnswerIds = string.Empty;
+                //}
+                //if(request.CampaignQuizIdsExcluded == null)
+                //{
+                //    request.CampaignQuizIdsExcluded = string.Empty;
+                //}
                 return _surveyQuestionService.GetAudienceCount(request);
             }
 
