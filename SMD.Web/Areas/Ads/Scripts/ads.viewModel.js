@@ -118,7 +118,7 @@ define("ads/ads.viewModel",
                 professions = ko.observableArray([]),
                 surveyquestionList = ko.observableArray([]),
                 voucherQuestionStatus = ko.observable(false),
-                
+
                 AditionalCriteriaMode = ko.observable("1"), //1 = main buttons, 2 = profile questions , 3 = ad linked questions
             showCompanyProfileQuestions = ko.observable(false),
                 couponCategories = ko.observableArray([]),
@@ -152,64 +152,64 @@ define("ads/ads.viewModel",
 
                 CurrPage = ko.observable(9);
                 MaxPage = ko.observable(12);
-				// Advertiser dashBoard Section
-				selectedCampStatusAnalytics = ko.observable(1),
+                // Advertiser dashBoard Section
+                selectedCampStatusAnalytics = ko.observable(1),
 				selecteddateRangeAnalytics = ko.observable(1),
-				selectedGranularityAnalytics = ko.observable(1) ,
-				selectedCampaignIdAnalytics = ko.observable() ,
-				AdsCampaignAnalyticsData = ko.observableArray([]), 
-				CampaignROItblAnalyticData = ko.observableArray([]), 
-				CampaignRatioAnalyticData = ko.observable(1), 
+				selectedGranularityAnalytics = ko.observable(1),
+				selectedCampaignIdAnalytics = ko.observable(),
+				AdsCampaignAnalyticsData = ko.observableArray([]),
+				CampaignROItblAnalyticData = ko.observableArray([]),
+				CampaignRatioAnalyticData = ko.observable(1),
 				granularityDropDown = ko.observableArray([{ id: 1, name: "Daily" }, { id: 2, name: "Weekly" }, { id: 3, name: "Monthly" }, { id: 4, name: "Quarterly" }, { id: 5, name: "Yearly" }]),
-				DateRangeDropDown  = ko.observableArray([{ id: 1, name: "Last 30 days" }, { id: 2, name: "All Time" }]),
-				CampaignStatusDropDown  = ko.observableArray([{ id: 1, name: "Answered" }, { id: 2, name: "Referred" }, { id: 3, name: "Skipped" }]),
+				DateRangeDropDown = ko.observableArray([{ id: 1, name: "Last 30 days" }, { id: 2, name: "All Time" }]),
+				CampaignStatusDropDown = ko.observableArray([{ id: 1, name: "Answered" }, { id: 2, name: "Referred" }, { id: 3, name: "Skipped" }]),
 				CampaignTblAnalyticsData = ko.observableArray([]),
 				openAdvertiserDashboardScreen = function (Campaign) {
-					
-					selectedCampaignIdAnalytics(Campaign.CampaignID());
-					getAdsByCampaignIdAnalytics();
-					$("#ddGranularityDropDown").removeAttr("disabled");
-					$("#ddDateRangeDropDown").removeAttr("disabled");
-					$("#ddCampaignStatusDropDown").removeAttr("disabled");
-					
-					
-					isAdvertdashboardVisible(true);
+
+				    selectedCampaignIdAnalytics(Campaign.CampaignID());
+				    getAdsByCampaignIdAnalytics();
+				    $("#ddGranularityDropDown").removeAttr("disabled");
+				    $("#ddDateRangeDropDown").removeAttr("disabled");
+				    $("#ddCampaignStatusDropDown").removeAttr("disabled");
+
+
+				    isAdvertdashboardVisible(true);
 				},
 				getAdsByCampaignIdAnalytics = function () {
-					dataservice.getAdsByCampaignIdAnalytics({
-						compaignId:selectedCampaignIdAnalytics(),
-						CampStatus : selectedCampStatusAnalytics(),
-						dateRange :selecteddateRangeAnalytics(),
-						Granularity : selectedGranularityAnalytics(),
-					},{
-						success: function (data) {
-							if (data != null) {
-								AdsCampaignAnalyticsData.removeAll();
-								ko.utils.arrayPushAll(AdsCampaignAnalyticsData(), data.lineCharts);
-								AdsCampaignAnalyticsData.valueHasMutated();
-								CampaignRatioAnalyticData(data.pieCharts);
-								CampaignTblAnalyticsData.removeAll();
-								ko.utils.arrayPushAll(CampaignTblAnalyticsData(), data.tbl);
-								CampaignTblAnalyticsData.valueHasMutated();
-								
-								CampaignROItblAnalyticData.removeAll();
-								ko.utils.arrayPushAll(CampaignROItblAnalyticData(), data.ROItbl);
-								CampaignROItblAnalyticData.valueHasMutated();
-							}
-							
-						},
-						error: function (response) {
+				    dataservice.getAdsByCampaignIdAnalytics({
+				        compaignId: selectedCampaignIdAnalytics(),
+				        CampStatus: selectedCampStatusAnalytics(),
+				        dateRange: selecteddateRangeAnalytics(),
+				        Granularity: selectedGranularityAnalytics(),
+				    }, {
+				        success: function (data) {
+				            if (data != null) {
+				                AdsCampaignAnalyticsData.removeAll();
+				                ko.utils.arrayPushAll(AdsCampaignAnalyticsData(), data.lineCharts);
+				                AdsCampaignAnalyticsData.valueHasMutated();
+				                CampaignRatioAnalyticData(data.pieCharts);
+				                CampaignTblAnalyticsData.removeAll();
+				                ko.utils.arrayPushAll(CampaignTblAnalyticsData(), data.tbl);
+				                CampaignTblAnalyticsData.valueHasMutated();
 
-                        }
-					});
-					
+				                CampaignROItblAnalyticData.removeAll();
+				                ko.utils.arrayPushAll(CampaignROItblAnalyticData(), data.ROItbl);
+				                CampaignROItblAnalyticData.valueHasMutated();
+				            }
+
+				        },
+				        error: function (response) {
+
+				        }
+				    });
+
 				},
 				CloseCampaignADAnalyticView = function () {
-					isAdvertdashboardVisible(false);
-					CampaignRatioAnalyticData(1);
+				    isAdvertdashboardVisible(false);
+				    CampaignRatioAnalyticData(1);
 				},
-				
-				// End Advertiser dashBoard Section
+
+                // End Advertiser dashBoard Section
                 getCampaignBaseContent = function () {
                     dataservice.getBaseData({
                         RequestId: 1,
@@ -369,12 +369,12 @@ define("ads/ads.viewModel",
             },
                 // Add new Profile Question
             addNewCampaign = function () {
-              
+
                 var selectionoption = $("#ddTextBtns").val();
-                
-                if (selectionoption == 'No Button' || selectionoption==undefined) {
+
+                if (selectionoption == 'No Button' || selectionoption == undefined) {
                     showLandingPageUrl(false);
-                } 
+                }
 
                 $("#logo_div").css("display", "block");
 
@@ -485,7 +485,7 @@ define("ads/ads.viewModel",
                                 });
                             }
                         }
-                      
+
 
 
 
@@ -559,7 +559,7 @@ define("ads/ads.viewModel",
                 $("#topArea").css("display", "block");
                 $("#headlabel").css("display", "block");
                 $("#headdesc").css("display", "block")
-               
+
             },
 
 
@@ -575,7 +575,7 @@ define("ads/ads.viewModel",
                     campaignModel();
                     selectedCriteria();
                     isEditorVisible(false);
-					CloseCampaignADAnalyticView();
+                    CloseCampaignADAnalyticView();
                     if (isFromEdit() == true) {
                         isListVisible(true);
                         isWelcomeScreenVisible(false);
@@ -714,21 +714,28 @@ define("ads/ads.viewModel",
             submitCampaignData = function () {
                 //if (campaignModel().isValid()) {
                 if (ValidateCampaign(2)) {
-                    if (UserAndCostDetail().IsSpecialAccount == true) {
-                        campaignModel().ClickRate(0);
-                        saveCampaign(2);
+                    if (UserAndCostDetail().Status == null || UserAndCostDetail().Status == 0) {
+                        confirmation.showOKpopupforinfo();
+                        return;
+
                     }
                     else {
-                        if (UserAndCostDetail().isStripeIntegrated == false) {
-
-                            stripeChargeCustomer.show(function () {
-                                UserAndCostDetail().isStripeIntegrated = true;
-                                saveCampaign(2);
-                            }, 2000, 'Enter your details');
-
-
-                        } else {
+                        if (UserAndCostDetail().IsSpecialAccount == true) {
+                            campaignModel().ClickRate(0);
                             saveCampaign(2);
+                        }
+                        else {
+                            if (UserAndCostDetail().isStripeIntegrated == false) {
+
+                                stripeChargeCustomer.show(function () {
+                                    UserAndCostDetail().isStripeIntegrated = true;
+                                    saveCampaign(2);
+                                }, 2000, 'Enter your details');
+
+
+                            } else {
+                                saveCampaign(2);
+                            }
                         }
                     }
 
@@ -945,7 +952,7 @@ define("ads/ads.viewModel",
                 } else {
                     campaignModel().IsUseFilter(1);
                 }
-                
+
                 campaignModel().Status(mode);
 
                 //disabling the following line so that user can customize their click rate.
@@ -1189,12 +1196,11 @@ define("ads/ads.viewModel",
                      {
                          buyItQuestionStatus(true);
                          campaignModel().ShowBuyitBtn(true);
-                          BuyItStatus(true);
+                         BuyItStatus(true);
                          campaignModel().BuyItButtonLabel('');
 
                      }
-                     else if (selectionoption == 'Custom Button Label')
-                     {
+                     else if (selectionoption == 'Custom Button Label') {
                          BuyItStatus(true);
                          campaignModel().ShowBuyitBtn(true);
                      }
@@ -1205,7 +1211,7 @@ define("ads/ads.viewModel",
                          ButItOtherLabel('');
                          campaignModel().BuyItButtonLabel('');
                      }
-             
+
                      if (selectionoption == 'No Button') {
                          showLandingPageUrl(false);
                      }
@@ -1542,13 +1548,13 @@ define("ads/ads.viewModel",
                         isLocationPerClickPriceAdded(true);
                     }
                     $(".twitter-typeahead input").val("");
-                  
+
                 },
 
                 resetLocations = function () {
                     $("#searchCampaignLocations").val("");
                     selectedLocationRadius(100);
-               
+
                 },
 
                 addLanguage = function (selected) {
@@ -1664,7 +1670,7 @@ define("ads/ads.viewModel",
                             SearchText: ""
                         }, {
                             success: function (data) {
-                              
+
                                 if (data != null) {
                                     // set languages drop down
                                     var profileQIds = [];
@@ -1681,7 +1687,7 @@ define("ads/ads.viewModel",
                                     });
 
                                     campaignModel(model.Campaign.Create(data.Campaigns[0]));
-                                    
+
                                     campaignModel().AdCampaignTargetCriterias.removeAll();
                                     if (campaignModel().LogoUrl() == '' || campaignModel().LogoUrl() == undefined) {
 
@@ -1706,7 +1712,7 @@ define("ads/ads.viewModel",
                                     //    TodisplayImg(true);
                                     //}
                                     _.each(clonedVersofCariterias, function (cclist) {
-                                       
+
                                         if (cclist.Type == 1) {
 
                                             if (profileQIds.indexOf(cclist.PQId) == -1) {
@@ -1726,7 +1732,7 @@ define("ads/ads.viewModel",
                                                     CriteriaId: cclist.CriteriaId
                                                 }));
                                             } else {
-                                             
+
                                                 campaignModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
 
                                                     Type: cclist.Type,
@@ -1745,7 +1751,7 @@ define("ads/ads.viewModel",
 
 
                                         } else if (cclist.Type == 6) {
-                                         
+
                                             if (surveyQIds.indexOf(cclist.QuizCampaignId) == -1) {
                                                 surveyQIds.push(cclist.QuizCampaignId);
                                                 campaignModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
@@ -1763,9 +1769,9 @@ define("ads/ads.viewModel",
                                                     CriteriaId: cclist.CriteriaId
                                                 }));
                                             } else {
-                                              
+
                                                 campaignModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
-                                                    
+
                                                     Type: cclist.Type,
                                                     PQId: cclist.PQId,
                                                     PQAnswerId: cclist.PQAnswerId,
@@ -1782,7 +1788,7 @@ define("ads/ads.viewModel",
                                         }
 
                                     });
-                                   
+
                                     var ff = campaignModel().AdCampaignTargetCriterias();
                                     DefaultTextBtns.push({ id: campaignModel().BuyItButtonLabel(), name: campaignModel().BuyItButtonLabel() });
                                     campaignModel().reset();
@@ -1883,14 +1889,14 @@ define("ads/ads.viewModel",
                                     } else {
                                         isLocationPerClickPriceAdded(true);
                                     }
-									if (UserAndCostDetail() != null) {
-                                    if (UserAndCostDetail().GenderClausePrice != null) {
-                                        pricePerclick(pricePerclick() + UserAndCostDetail().GenderClausePrice);
+                                    if (UserAndCostDetail() != null) {
+                                        if (UserAndCostDetail().GenderClausePrice != null) {
+                                            pricePerclick(pricePerclick() + UserAndCostDetail().GenderClausePrice);
+                                        }
+                                        if (UserAndCostDetail().AgeClausePrice != null) {
+                                            pricePerclick(pricePerclick() + UserAndCostDetail().AgeClausePrice);
+                                        }
                                     }
-                                    if (UserAndCostDetail().AgeClausePrice != null) {
-                                        pricePerclick(pricePerclick() + UserAndCostDetail().AgeClausePrice);
-                                    }
-									}
                                     _.each(campaignModel().AdCampaignTargetCriterias(), function (item) {
 
                                         if (item.Type() == 1) { // profile
@@ -1945,9 +1951,9 @@ define("ads/ads.viewModel",
                                     }
                                     if (campaignModel().BuuyItLine1() != null || campaignModel().BuyItLine2() != null || campaignModel().BuyItLine3() != null || campaignModel().BuyItButtonLabel() != null) {
                                         buyItQuestionStatus(true);
-									if (UserAndCostDetail() != null) {
-                                        pricePerclick(pricePerclick() + UserAndCostDetail().BuyItClausePrice);
-									}
+                                        if (UserAndCostDetail() != null) {
+                                            pricePerclick(pricePerclick() + UserAndCostDetail().BuyItClausePrice);
+                                        }
                                         isBuyItPerClickPriceAdded(true);
 
 
@@ -1955,9 +1961,9 @@ define("ads/ads.viewModel",
 
                                     if ((campaignModel().VerifyQuestion() != null && campaignModel().VerifyQuestion() != '') || (campaignModel().Answer1() != null && campaignModel().Answer1() != '') || (campaignModel().Answer2() != null && campaignModel().Answer2() != '')) {
                                         quizQuestionStatus(true);
-										if (UserAndCostDetail() != null) {
-                                        pricePerclick(pricePerclick() + UserAndCostDetail().QuizQuestionClausePrice);
-										}
+                                        if (UserAndCostDetail() != null) {
+                                            pricePerclick(pricePerclick() + UserAndCostDetail().QuizQuestionClausePrice);
+                                        }
                                         isQuizQPerClickPriceAdded(true);
                                     } else {
                                         quizQuestionStatus(false);
@@ -2030,7 +2036,7 @@ define("ads/ads.viewModel",
                                         pricePerclick(pricePerclick() + UserAndCostDetail().TenDayDeliveryClausePrice);
                                     }
 
-                                    if ((campaignModel().IsShowVoucherSetting() != null && campaignModel().IsShowVoucherSetting() != true && UserAndCostDetail()!= null)) {
+                                    if ((campaignModel().IsShowVoucherSetting() != null && campaignModel().IsShowVoucherSetting() != true && UserAndCostDetail() != null)) {
                                         pricePerclick(pricePerclick() + UserAndCostDetail().VoucherClausePrice);
                                         isVoucherPerClickPriceAdded(true);
                                     }
@@ -2082,20 +2088,27 @@ define("ads/ads.viewModel",
                     }
                 },
                 changeStatus = function (status) {
-                    if (campaignModel() != undefined)
-                        saveCampaign(status);
+                   
+                        if (campaignModel() != undefined)
+                            saveCampaign(status);
 
-                    $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
-                    $("#btnSubmitForApproval,#saveBtn,.lang_delSurvey,.table-link").css("display", "inline-block");
-                    $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign").removeAttr('disabled');
+                        $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
+                        $("#btnSubmitForApproval,#saveBtn,.lang_delSurvey,.table-link").css("display", "inline-block");
+                        $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign").removeAttr('disabled');
                 },
                 submitResumeData = function () {
-                    if (campaignModel() != undefined)
-                        saveCampaign(3);
+                    if (UserAndCostDetail() != undefined && (UserAndCostDetail().Status == null || UserAndCostDetail().Status == 0)) {
+                        confirmation.showOKpopupforinfo();
+                        return;
+                    }
+                    else {
+                        if (campaignModel() != undefined)
+                            saveCampaign(3);
 
-                    $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
-                    $("#btnSubmitForApproval,#saveBtn,.lang_delSurvey,.table-link").css("display", "inline-block");
-                    $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign").removeAttr('disabled');
+                        $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
+                        $("#btnSubmitForApproval,#saveBtn,.lang_delSurvey,.table-link").css("display", "inline-block");
+                        $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign").removeAttr('disabled');
+                    }
                 },
                 nextPreviewScreen = function () {
 
@@ -2388,7 +2401,7 @@ define("ads/ads.viewModel",
                     var languageIds = '', industryIds = '', languageIdsExcluded = '',
                         industryIdsExcluded = '', profileQuestionIds = '', profileAnswerIds = '',
                         surveyQuestionIds = '', surveyAnswerIds = '', profileQuestionIdsExcluded = '', profileAnswerIdsExcluded = '',
-                        surveyQuestionIdsExcluded = '', surveyAnswerIdsExcluded = '', CampaignQuizIds = '', CampaignQuizAnswerIds = '', CampaignQuizAnswerIdsExcluded = '',CampaignQuizIdsExcluded='';
+                        surveyQuestionIdsExcluded = '', surveyAnswerIdsExcluded = '', CampaignQuizIds = '', CampaignQuizAnswerIds = '', CampaignQuizAnswerIdsExcluded = '', CampaignQuizIdsExcluded = '';
 
 
                     _.each(campaignModel().AdCampaignTargetCriterias(), function (item) {
@@ -2539,7 +2552,7 @@ define("ads/ads.viewModel",
                         CampaignQuizIdsExcluded: CampaignQuizIdsExcluded
                     };
                     $("#spinnerAudience").css("display", "block");
-                 
+
                     dataservice.getAudienceData(campData, {
                         success: function (data) {
                             $("#spinnerAudience").css("display", "none");
@@ -3152,7 +3165,7 @@ define("ads/ads.viewModel",
                     });
                     Status[0].selectedIndex = 0;
                 },
-				
+
                 // Initialize the view model
                 initialize = function (specifiedView) {
                     if (mode == 4) {
@@ -3184,7 +3197,7 @@ define("ads/ads.viewModel",
                     getAdCampaignGridContent();
                     getCampaignBaseContent();
                     isEditorVisible(false);
-					
+
                 };
                 return {
                     initialize: initialize,
@@ -3195,7 +3208,7 @@ define("ads/ads.viewModel",
                     addNewCampaign: addNewCampaign,
                     langs: langs,
                     campaignModel: campaignModel,
-					openAdvertiserDashboardScreen :openAdvertiserDashboardScreen,
+                    openAdvertiserDashboardScreen: openAdvertiserDashboardScreen,
                     closeNewCampaignDialog: closeNewCampaignDialog,
                     selectedCriteria: selectedCriteria,
                     profileQuestionList: profileQuestionList,
@@ -3267,7 +3280,7 @@ define("ads/ads.viewModel",
                     saveProfileQuestion: saveProfileQuestion,
                     updateProfileQuestion: updateProfileQuestion,
                     updateSurveyCriteria: updateSurveyCriteria,
-                    
+
                     buyItImageCallback: buyItImageCallback,
                     openEditScreen: openEditScreen,
                     isWelcomeScreenVisible: isWelcomeScreenVisible,
@@ -3363,26 +3376,26 @@ define("ads/ads.viewModel",
                     IsprofileQuestion: IsprofileQuestion,
                     Modelheading: Modelheading,
                     GetAudienceCount: GetAudienceCount,
-					AdsCampaignAnalyticsData:AdsCampaignAnalyticsData,
-					granularityDropDown:granularityDropDown,
-					selectedGranularityAnalytics :selectedGranularityAnalytics,
-					getAdsByCampaignIdAnalytics:getAdsByCampaignIdAnalytics,
-					DateRangeDropDown:DateRangeDropDown,
+                    AdsCampaignAnalyticsData: AdsCampaignAnalyticsData,
+                    granularityDropDown: granularityDropDown,
+                    selectedGranularityAnalytics: selectedGranularityAnalytics,
+                    getAdsByCampaignIdAnalytics: getAdsByCampaignIdAnalytics,
+                    DateRangeDropDown: DateRangeDropDown,
                     isAdvertdashboardVisible: isAdvertdashboardVisible,
                     handleBuyIt: handleBuyIt,
                     BuyItStatus: BuyItStatus,
-                    showLandingPageUrl:showLandingPageUrl,
+                    showLandingPageUrl: showLandingPageUrl,
                     buyItQuestionStatus: buyItQuestionStatus,
                     ButItOtherLabel: ButItOtherLabel,
-					CampaignStatusDropDown:CampaignStatusDropDown,
-					selectedCampStatusAnalytics : selectedCampStatusAnalytics,
-					selecteddateRangeAnalytics : selecteddateRangeAnalytics,
-					CloseCampaignADAnalyticView:CloseCampaignADAnalyticView,
-					CampaignRatioAnalyticData:CampaignRatioAnalyticData,
-					CampaignTblAnalyticsData:CampaignTblAnalyticsData,
-					isClickRateVisible: isClickRateVisible,
-					CampaignROItblAnalyticData: CampaignROItblAnalyticData,
-					hideLandingPageURl: hideLandingPageURl
+                    CampaignStatusDropDown: CampaignStatusDropDown,
+                    selectedCampStatusAnalytics: selectedCampStatusAnalytics,
+                    selecteddateRangeAnalytics: selecteddateRangeAnalytics,
+                    CloseCampaignADAnalyticView: CloseCampaignADAnalyticView,
+                    CampaignRatioAnalyticData: CampaignRatioAnalyticData,
+                    CampaignTblAnalyticsData: CampaignTblAnalyticsData,
+                    isClickRateVisible: isClickRateVisible,
+                    CampaignROItblAnalyticData: CampaignROItblAnalyticData,
+                    hideLandingPageURl: hideLandingPageURl
                 };
             })()
         };

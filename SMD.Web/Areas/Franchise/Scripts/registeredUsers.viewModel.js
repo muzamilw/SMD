@@ -86,6 +86,7 @@ define("FranchiseDashboard/registeredUsers.viewModel",
                            getRegisteredUsers();
                        },
                     changeStatus = function (item) {
+                        var st = item.status();
                               if (item.status() == true) {
                                   confirmation.messageText("Are you sure? you want to ENABLE this user");
                                   confirmation.show();
@@ -100,7 +101,10 @@ define("FranchiseDashboard/registeredUsers.viewModel",
                                   confirmation.hide();
                               });
                               confirmation.afterProceed(function () {
-                                  selectedUser().status(1);
+                                  if(st==true)
+                                      selectedUser().status(1);
+                                  else
+                                      selectedUser().status(0);
                               });
 
                           },
