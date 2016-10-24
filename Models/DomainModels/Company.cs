@@ -24,7 +24,7 @@ namespace SMD.Models.DomainModels
         public string TimeZone { get; set; }
         public string Logo { get; set; }
         public string StripeCustomerId { get; set; }
-        public string ChargeBeesubscriptionID { get; set; }
+        public string StripeSubscriptionId { get; set; }
         public Nullable<bool> RegisteredViaReferral { get; set; }
         public int? ReferringCompanyID { get; set; }
         public string PaypalCustomerId { get; set; }
@@ -51,6 +51,11 @@ namespace SMD.Models.DomainModels
         public string PinterestHandle { get; set; }
 
         public Nullable<bool> IsSpecialAccount { get; set; }
+
+
+        public string StripeSubscriptionStatus { get; set; }
+
+        
         
 
 
