@@ -637,6 +637,9 @@
     <Compile Include="ReportViewers\User.aspx.designer.cs">
       <DependentUpon>User.aspx</DependentUpon>
     </Compile>
+    <Compile Include="StripeWebhooks\StripeHandler.ashx.cs">
+      <DependentUpon>StripeHandler.ashx</DependentUpon>
+    </Compile>
     <Compile Include="TypeRegistrations.cs" />
     <Compile Include="Views\EmailTester.aspx.cs">
       <DependentUpon>EmailTester.aspx</DependentUpon>
@@ -2928,6 +2931,7 @@
     <Content Include="Views\Home\TrainingVideos.cshtml" />
     <Content Include="Views\Home\HelpCenter.cshtml" />
     <Content Include="Views\Home\ContactUs.cshtml" />
+    <Content Include="StripeWebhooks\StripeHandler.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
