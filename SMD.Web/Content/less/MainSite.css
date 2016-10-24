@@ -1076,6 +1076,7 @@ div#spinner {
     padding: 10px;
     margin: 3px;
     cursor:pointer;
+    height:180px;
 }
 .space {
     width:20px;
@@ -1083,7 +1084,7 @@ div#spinner {
 .pg >div{
     color:#d3d3d3!important;
     font-size:12px!important;
-    margin:0px!important;
+    margin:0px;
     padding:0px!important;
     font-family: 'PT Sans', sans-serif!important;
 }
@@ -1264,13 +1265,15 @@ div#spinner {
 .panel_Image {
     
     text-align:center;
+   
 }
+
 .images {
     width:109px;
     height:105px;
 }
-#content_div {
-    height:106px;
+.Dealdescription_panel {
+    display:none;
 }
 .deals_image {
     width: 88px;
@@ -1280,4 +1283,11 @@ div#spinner {
     width:60px;
     height:60px;
 }
+.polls_Images {
+        width: 125px;
+    height: 86px;
+}
+/*.videopanel,.displayadspanel {
+    padding-top:15px;
+}*/
 /*# sourceMappingURL=MainSite.css.map */

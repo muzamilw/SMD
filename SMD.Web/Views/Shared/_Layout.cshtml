@@ -373,11 +373,11 @@
 
 
                                     <div class="panel_Image">
-                                        <img class="deals_image" src="/Content/Images/Deals.png" />
+                                        <img src="/Content/Images/Dealsuicon.png" />
                                         
                                     </div>
 
-                                    <div class="Dealdescription_panel" style="display:none;">
+                                    <div class="Dealdescription_panel">
                                         <div>
                                             <div class="pull-left"><i class="fa fa-circle greyclr fontsize4" aria-hidden="true"></i> </div> <div class="pull-left" style="margin-left:3px;">Link deals to landing pages.</div>
 
@@ -413,9 +413,9 @@
                                 <br>
                                 <div class="pg videopanel" id="content_div">
                                     <div class="panel_Image">
-                                        <img class="images" src="/Content/Images/Videos.png" />
+                                        <img  src="/Content/Images/Videosuicon.png" />
                                     </div>
-                                    <div class="Dealdescription_panel" style="display:none;">
+                                    <div class="Dealdescription_panel">
                                         <div>
                                             <div class="pull-left"><i class="fa fa-circle greyclr fontsize4" aria-hidden="true"></i> </div> <div class="pull-left" style="margin-left:3px;">Broadcast full length video ads.</div>
                                             <div class="clearfix"></div>
@@ -453,9 +453,9 @@
                                 <br>
                                 <div class="pg displayadspanel" id="content_div">
                                     <div class="panel_Image">
-                                        <img class="images" src="/Content/Images/Games.png" />
+                                        <img  src="/Content/Images/Games_icon.png" />
                                     </div>
-                                    <div class="Dealdescription_panel" style="display:none;">
+                                    <div class="Dealdescription_panel" >
                                         <div>
                                             <div class="pull-left"><i class="fa fa-circle greyclr fontsize4" aria-hidden="true"></i> </div> <div class="pull-left" style="margin-left:3px;">Drive audiences to landing pages</div>
                                             <div class="clearfix"></div>
@@ -491,9 +491,9 @@
                                 <br>
                                 <div class="pg pollspanel" id="content_div">
                                     <div class="panel_Image">
-                                        <img class="images" src="/Content/Images/Polls.png" />
+                                        <img src="/Content/Images/Poll_icon.png" />
                                     </div>
-                                    <div class="Dealdescription_panel" style="display:none;">
+                                    <div class="Dealdescription_panel">
                                         <div>
                                             <div class="pull-left"><i class="fa fa-circle greyclr fontsize4" aria-hidden="true"></i> </div> <div class="pull-left" style="margin-left:3px;">Conduct a 2 Picture card poll.</div>
                                             <div class="clearfix"></div>
@@ -528,9 +528,9 @@
                                 <br>
                                 <div class="pg surveypanel" id="content_div">
                                     <div class="panel_Image">
-                                        <img class="images" src="/Content/Images/Polls.png" />
+                                        <img  src="/Content/Images/Surveys_icon.png" />
                                     </div>
-                                    <div class="Dealdescription_panel" style="display:none;">
+                                    <div class="Dealdescription_panel">
                                         <div>
                                             <div class="pull-left"><i class="fa fa-circle greyclr fontsize4" aria-hidden="true"></i> </div> <div class="pull-left" style="margin-left:3px;">1 Question & Up to 6 choices.</div>
                                             <div class="clearfix"></div>
@@ -795,91 +795,93 @@
 
 
 
-            //$(".dealspanel").hover(function(){
+            $(".dealspanel").hover(function(){
 
-            //    $(this).find(".panel_Image").hide();
+                $(this).find(".panel_Image").hide();
 
-            //    $(this).find(".Dealdescription_panel").show();
+                $(this).find(".Dealdescription_panel").show();
                 
               
-            //},function(){
+            },function(){
              
-            //    $(this).find(".panel_Image").show();
+                $(this).find(".panel_Image").show();
 
-            //    $(this).find(".Dealdescription_panel").hide();
-            //});
+                $(this).find(".Dealdescription_panel").hide();
+            });
 
 
 
-            //$(".videopanel").hover(function(){
+            $(".videopanel").hover(function(){
 
-            //    $(this).find(".panel_Image").hide();
+                $(this).find(".panel_Image").hide();
 
-            //    $(this).find(".Dealdescription_panel").show();
+                $(this).find(".Dealdescription_panel").show();
+                
+               // $(this).find(".videopanel").css("cssText", "padding-top:0px!important;");
+
+            },function(){
+             
+                $(this).find(".panel_Image").show();
+
+                $(this).find(".Dealdescription_panel").hide();
+              //  $(this).find(".videopanel").css("cssText", "padding-top:15px;");
+            });
+
+
+
+            $(".displayadspanel").hover(function(){
+
+                $(this).find(".panel_Image").hide();
+
+                $(this).find(".Dealdescription_panel").show();
                 
               
-            //},function(){
+            },function(){
              
-            //    $(this).find(".panel_Image").show();
+                $(this).find(".panel_Image").show();
 
-            //    $(this).find(".Dealdescription_panel").hide();
-            //});
+                $(this).find(".Dealdescription_panel").hide();
+            });
 
 
+            $(".pollspanel").hover(function(){
 
-            //$(".displayadspanel").hover(function(){
+                $(this).find(".panel_Image").hide();
 
-            //    $(this).find(".panel_Image").hide();
-
-            //    $(this).find(".Dealdescription_panel").show();
+                $(this).find(".Dealdescription_panel").show();
                 
               
-            //},function(){
+            },function(){
              
-            //    $(this).find(".panel_Image").show();
+                $(this).find(".panel_Image").show();
 
-            //    $(this).find(".Dealdescription_panel").hide();
-            //});
+                $(this).find(".Dealdescription_panel").hide();
+            });
 
 
-            //$(".pollspanel").hover(function(){
 
-            //    $(this).find(".panel_Image").hide();
+            $(".surveypanel").hover(function(){
 
-            //    $(this).find(".Dealdescription_panel").show();
+                $(this).find(".panel_Image").hide();
+
+                $(this).find(".Dealdescription_panel").show();
                 
               
-            //},function(){
+            },function(){
              
-            //    $(this).find(".panel_Image").show();
+                $(this).find(".panel_Image").show();
 
-            //    $(this).find(".Dealdescription_panel").hide();
-            //});
+                $(this).find(".Dealdescription_panel").hide();
+            });
 
-
-
-            //$(".surveypanel").hover(function(){
-
-            //    $(this).find(".panel_Image").hide();
-
-            //    $(this).find(".Dealdescription_panel").show();
-                
-              
-            //},function(){
-             
-            //    $(this).find(".panel_Image").show();
-
-            //    $(this).find(".Dealdescription_panel").hide();
-            //});
-
-         //   $('.play_btn').hover(function () {
+            $('.play_btn').hover(function () {
             
-         //       $(this).css("cssText", "color:red!important;");
-         //   },
-         //  function () {
-         //      $(this).css("cssText", "color:#676767!important;");
+                $(this).css("cssText", "color:red!important;");
+            },
+           function () {
+               $(this).css("cssText", "color:#676767!important;");
            
-         //  });
+           });
 
             $('.plus_btn').hover(function () {
 
