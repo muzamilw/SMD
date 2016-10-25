@@ -17,6 +17,7 @@ define("pQuestion/pQuestion.viewModel",
                     langs = ko.observableArray([]),
                     Modelheading = ko.observable(''),
                     IsShowPriceDiv = ko.observable(false),
+                    iSfmodevar = ko.observable(false),
                     surveyQuestionList = ko.observableArray([]),
                     surveyquestionList = ko.observableArray([]),
                     countries = ko.observableArray([]),
@@ -2168,6 +2169,7 @@ define("pQuestion/pQuestion.viewModel",
                                 },
                 // Initialize the view model
                 initialize = function (specifiedView) {
+                    iSfmodevar(fmodevar);
                     view = specifiedView;
                     ko.applyBindings(view.viewModel, view.bindingRoot);
                     pager(pagination.Pagination({ PageSize: 10 }, questions, getQuestions));
@@ -2314,7 +2316,8 @@ define("pQuestion/pQuestion.viewModel",
                     CloseSurvayAnalyticView: CloseSurvayAnalyticView,
                     CampaignRatioAnalyticData: CampaignRatioAnalyticData,
                     CampaignTblAnalyticsData: CampaignTblAnalyticsData,
-                    CampaignROItblAnalyticData: CampaignROItblAnalyticData
+                    CampaignROItblAnalyticData: CampaignROItblAnalyticData,
+                    iSfmodevar: iSfmodevar
                 };
             })()
         };
