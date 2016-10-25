@@ -633,6 +633,8 @@
           <Property Name="ZipCode" Type="nvarchar" MaxLength="20" />
           <Property Name="CreditCardRef" Type="nvarchar" MaxLength="250" />
           <Property Name="CompanyId" Type="int" />
+          <Property Name="StripeReceiptNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="StripeInvoiceId" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="InvoiceDetail">
           <Key>
@@ -1113,6 +1115,12 @@ warning 6002: The table/view 'SMDDev.dbo.vw_Coupons' does not have a primary key
           <Property Name="ShowBuyitBtn" Type="bit" />
           <Property Name="BuyitLandingPageUrl" Type="nvarchar" MaxLength="500" />
           <Property Name="BuyitBtnLabel" Type="nvarchar" MaxLength="200" />
+          <Property Name="YoutubeLink" Type="varchar(max)" />
+          <Property Name="CouponImage4" Type="nvarchar(max)" />
+          <Property Name="CouponImage5" Type="nvarchar(max)" />
+          <Property Name="CouponImage6" Type="nvarchar(max)" />
+          <Property Name="IsPaymentCollected" Type="bit" />
+          <Property Name="PaymentDate" Type="datetime" />
           <Property Name="Categories" Type="nvarchar(max)" />
           <Property Name="CurrencyCode" Type="nvarchar" MaxLength="50" />
           <Property Name="CurrencySymbol" Type="nvarchar" MaxLength="50" />
@@ -2729,6 +2737,12 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
     [vw_Coupons].[ShowBuyitBtn] AS [ShowBuyitBtn], 
     [vw_Coupons].[BuyitLandingPageUrl] AS [BuyitLandingPageUrl], 
     [vw_Coupons].[BuyitBtnLabel] AS [BuyitBtnLabel], 
+    [vw_Coupons].[YoutubeLink] AS [YoutubeLink], 
+    [vw_Coupons].[CouponImage4] AS [CouponImage4], 
+    [vw_Coupons].[CouponImage5] AS [CouponImage5], 
+    [vw_Coupons].[CouponImage6] AS [CouponImage6], 
+    [vw_Coupons].[IsPaymentCollected] AS [IsPaymentCollected], 
+    [vw_Coupons].[PaymentDate] AS [PaymentDate], 
     [vw_Coupons].[Categories] AS [Categories], 
     [vw_Coupons].[CurrencyCode] AS [CurrencyCode], 
     [vw_Coupons].[CurrencySymbol] AS [CurrencySymbol]
@@ -4617,6 +4631,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="CompanyId" Type="Int32" />
           <NavigationProperty Name="InvoiceDetails" Relationship="DomainModels.FK_InvoiceDetail_Invoice" FromRole="Invoice" ToRole="InvoiceDetail" />
           <NavigationProperty Name="Company" Relationship="DomainModels.FK_Invoice_Company" FromRole="Invoice" ToRole="Company" />
+          <Property Name="StripeReceiptNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StripeInvoiceId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="SurveyQuestion">
           <Key>
@@ -6606,6 +6622,12 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="Categories" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CurrencyCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CurrencySymbol" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="YoutubeLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CouponImage4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CouponImage5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CouponImage6" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsPaymentCollected" Type="Boolean" />
+          <Property Name="PaymentDate" Type="DateTime" Precision="3" />
         </EntityType>
         <Association Name="FK_Country_Currency">
           <End Type="DomainModels.Currency" Role="Currency" Multiplicity="0..1" />
@@ -7374,6 +7396,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="Invoices">
             <EntityTypeMapping TypeName="DomainModels.Invoice">
               <MappingFragment StoreEntitySet="Invoice">
+                <ScalarProperty Name="StripeInvoiceId" ColumnName="StripeInvoiceId" />
+                <ScalarProperty Name="StripeReceiptNo" ColumnName="StripeReceiptNo" />
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
                 <ScalarProperty Name="CreditCardRef" ColumnName="CreditCardRef" />
                 <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
@@ -8388,6 +8412,12 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="vw_Coupons">
             <EntityTypeMapping TypeName="DomainModels.vw_Coupons">
               <MappingFragment StoreEntitySet="vw_Coupons">
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="IsPaymentCollected" ColumnName="IsPaymentCollected" />
+                <ScalarProperty Name="CouponImage6" ColumnName="CouponImage6" />
+                <ScalarProperty Name="CouponImage5" ColumnName="CouponImage5" />
+                <ScalarProperty Name="CouponImage4" ColumnName="CouponImage4" />
+                <ScalarProperty Name="YoutubeLink" ColumnName="YoutubeLink" />
                 <ScalarProperty Name="CurrencySymbol" ColumnName="CurrencySymbol" />
                 <ScalarProperty Name="CurrencyCode" ColumnName="CurrencyCode" />
                 <ScalarProperty Name="Categories" ColumnName="Categories" />

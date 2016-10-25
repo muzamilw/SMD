@@ -116,6 +116,11 @@ namespace SMD.Repository.Repositories
                 company.PinterestHandle = request.PinterestHandle;
 
 
+                company.StripeCustomerId = request.StripeCustomerId;
+                company.StripeSubscriptionId = request.StripeSubscriptionId;
+                company.StripeSubscriptionStatus = request.StripeSubscriptionStatus;
+
+
                 db.SaveChanges();
                 return true;
             }
@@ -200,5 +205,17 @@ namespace SMD.Repository.Repositories
             db.UpdateCompanyStatus(status, userId, comments, companyId);
             return true;
         }
+
+
+
+        public Company GetCompanyByStripeCustomerId(string StripeCustomerId)
+        {
+            return DbSet.Where(g => g.StripeCustomerId == StripeCustomerId).SingleOrDefault();
+        }
+
+
+
+
+
     }
 }

@@ -28,6 +28,8 @@ namespace SMD.Interfaces.Repository
         IEnumerable<getDealByCouponID_Result> getDealByCouponIDAnalytics(int CouponID, int dateRange, int Granularity);
         IEnumerable<getDealByCouponIdRatioAnalytic_Result> getDealByCouponIdRatioAnalytic(int ID, int dateRange);
         DateTime getExpiryDate(int CouponId);
+
+        bool PauseAllCoupons(int CompanyId);
         
     }
 }

@@ -222,6 +222,7 @@
     <Compile Include="Repositories\InvoiceDetailRepository.cs" />
     <Compile Include="Repositories\ProductRepository.cs" />
     <Compile Include="Repositories\AdCampaignClickRateHistoryRepository.cs" />
+    <Compile Include="Repositories\CampaignEventHistoryRepository.cs" />
     <Compile Include="Repositories\UserCouponViewRepository.cs" />
     <Compile Include="Repositories\TaxRepository.cs" />
     <Compile Include="Repositories\IndustryRepository.cs" />
