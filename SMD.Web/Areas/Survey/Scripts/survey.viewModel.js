@@ -106,7 +106,7 @@ define("survey/survey.viewModel",
             getSurvayAnalytics = function () {
                 dataservice.getSurvayAnalytics({
                     SQId: selectedSQIDAnalytics(),
-                    CampStatus: selectedCampStatusAnalytics(),
+                    CampStatus: 0,
                     dateRange: selecteddateRangeAnalytics(),
                     Granularity: selectedGranularityAnalytics(),
                 }, {

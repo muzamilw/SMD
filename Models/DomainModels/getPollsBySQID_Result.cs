@@ -11,5 +11,6 @@ namespace SMD.Models.DomainModels
         public string Granual { get; set; }
         public Nullable<long> openStats { get; set; }
         public Nullable<long> Stats { get; set; }
+        public Nullable<long> SkipStats { get; set; }
     }
 }
