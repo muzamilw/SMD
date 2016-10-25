@@ -1,5 +1,5 @@
 ﻿GO
-/****** Object:  StoredProcedure [dbo].[getPollsBySQID]    Script Date: 10/15/2016 7:29:17 PM ******/
+/****** Object:  StoredProcedure [dbo].[getPollsBySQID]    Script Date: 10/24/2016 9:56:57 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -11,7 +11,7 @@ GO
 -- =============================================
 ALTER PROCEDURE [dbo].[getPollsBySQID] (
 @SQID INT,
-@status INT, -- 1 for answered, 2 for Skipped
+--@status INT, -- 1 for answered, 2 for Skipped
 @DateRange INT, -- 1 for last 30 days , 2 for All time
 @Granularity INT		----- 1 for day, 2 for week, 3 for month and 4 for year
 )
@@ -76,7 +76,8 @@ DECLARE @CutoffDate DATE = DATEADD(YEAR, @NumberOfYears, @StartDate);
 	)
 	DECLARE @stats TABLE (
 	Granual  VARCHAR(200),
-	Stats bigint
+	Stats bigint,
+	SkipStats bigint
 	)
 
 	DECLARE @open TABLE (
@@ -132,29 +133,19 @@ IF @DateRange = 2
 	right outer join   @T1 t on t.date = CONVERT(date, sqr.ResoponseDateTime) and sqr.SQID = @SQID
 	group by t.Granual
 
-	IF @status = 1 -- answered
-		BEGIN
 		insert into @stats
-		Select  t.Granual, count(case when sqr.ResponseType = 3 then sqr.SQID else null end) Stats
+		Select  t.Granual, count(case when sqr.ResponseType = 3 then sqr.SQID else null end) AnsStats, count(case when sqr.ResponseType = 4 then sqr.SQID else null end) SkipStats
 		from SurveyQuestionResponse sqr 
 		right outer join   @T1 t on t.date = CONVERT(date, sqr.ResoponseDateTime) and sqr.SQID = @SQID
 		group by t.Granual
-		END
-	IF @status = 2 -- skipped
-		BEGIN
-		insert into @stats
-		Select  t.Granual, count(case when sqr.ResponseType = 4 then sqr.SQID else null end) Stats
-		from SurveyQuestionResponse sqr 
-		right outer join   @T1 t on t.date = CONVERT(date, sqr.ResoponseDateTime) and sqr.SQID = @SQID
-		group by t.Granual
-		END
+
 			
-	select c.Granual, c.openStats, ln.Stats
+	select c.Granual, c.openStats, st.Stats, st.SkipStats
 	from @open c
-	inner join @stats ln on ln.Granual = c.Granual
+	inner join @stats st on st.Granual = c.Granual
 	order by c.ordr
 END
 
 
---EXEC [getPollsBySQID] 41, 1, 1, 2
+--EXEC [getPollsBySQID] 41, 1, 2
 
