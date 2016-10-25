@@ -23,6 +23,8 @@ namespace SMD.Interfaces.Services
 
         bool UpdateCompany(Company company, byte[] LogoImageBytes);
 
+        bool UpdateCompany(Company company);
+
         Company GetCompanyForAddress();
         CompanyResponseModel GetCompanyDetails(int companyId = 0, string userId = "");
         bool UpdateCompanyProfile(CompanyResponseModel company, byte[] logoImageBytes);

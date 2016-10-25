@@ -157,6 +157,16 @@ namespace SMD.Implementation.Services
 
         }
 
+        public bool UpdateCompany(Company company)
+        {
+
+            companyRepository.updateCompany(company);
+
+            return true;
+
+        }
+
+
         public bool UpdateCompanyProfile(CompanyResponseModel requestData, byte[] logoImageBytes)
         {
             var currentCompany = companyRepository.GetCompanyWithoutChilds();

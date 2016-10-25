@@ -185,7 +185,21 @@ namespace SMD.Implementation.Services
 
             if (sub != null)
             {
-                return new StripeSubscriptionResponse {SubscriptionId = sub.Id,  ApplicationFeePercent = sub.ApplicationFeePercent, CancelAtPeriodEnd = sub.CancelAtPeriodEnd, Customer = sub.Customer.Email, CustomerId = sub.CustomerId, CanceledAt = sub.CanceledAt, EndedAt = sub.EndedAt, Metadata = sub.Metadata, PeriodEnd = sub.PeriodEnd, PeriodStart = sub.PeriodStart, Quantity = sub.Quantity, Start = sub.Start, Status = sub.Status, StripePlan = sub.StripePlan.Name, TaxPercent = sub.TaxPercent };
+                return new StripeSubscriptionResponse {SubscriptionId = sub.Id,  
+                    ApplicationFeePercent = sub.ApplicationFeePercent.HasValue? sub.ApplicationFeePercent.Value : 0, 
+                    CancelAtPeriodEnd = sub.CancelAtPeriodEnd, 
+                    Customer = sub.Customer != null ? sub.Customer.Email : "",
+                    CustomerId = sub.CustomerId, 
+                    CanceledAt = sub.CanceledAt.HasValue ? sub.CanceledAt.Value : DateTime.Now, 
+                    EndedAt = sub.EndedAt,
+                    Metadata = sub.Metadata,
+                    PeriodEnd = sub.PeriodEnd,
+                    PeriodStart = sub.PeriodStart,
+                    Quantity = sub.Quantity, 
+                    Start = sub.Start, 
+                    Status = sub.Status, 
+                    StripePlan = sub.StripePlan.Name, 
+                    TaxPercent = sub.TaxPercent };
             }
             else
                 return null;
@@ -196,11 +210,28 @@ namespace SMD.Implementation.Services
         public StripeSubscriptionResponse GetCustomerSubscription(string StripeSubscriptionId, string StripeCustomerId)
     {
          StripeSubscriptionService subscriptionSvc = new StripeSubscriptionService();
-         var sub = subscriptionSvc.Get(StripeSubscriptionId, StripeCustomerId); //use the PlanId you configured in the Stripe Portal to create a subscription
+         var sub = subscriptionSvc.Get(StripeCustomerId,StripeSubscriptionId); //use the PlanId you configured in the Stripe Portal to create a subscription
 
          if (sub != null)
          {
-             return new StripeSubscriptionResponse { SubscriptionId = sub.Id, ApplicationFeePercent = sub.ApplicationFeePercent, CancelAtPeriodEnd = sub.CancelAtPeriodEnd, Customer = sub.Customer.Email, CustomerId = sub.CustomerId, CanceledAt = sub.CanceledAt, EndedAt = sub.EndedAt, Metadata = sub.Metadata, PeriodEnd = sub.PeriodEnd, PeriodStart = sub.PeriodStart, Quantity = sub.Quantity, Start = sub.Start, Status = sub.Status, StripePlan = sub.StripePlan.Name, TaxPercent = sub.TaxPercent };
+             return new StripeSubscriptionResponse
+             {
+                 SubscriptionId = sub.Id,
+                 ApplicationFeePercent = sub.ApplicationFeePercent.HasValue ? sub.ApplicationFeePercent.Value : 0,
+                 CancelAtPeriodEnd = sub.CancelAtPeriodEnd,
+                 Customer = sub.Customer != null ? sub.Customer.Email : "",
+                 CustomerId = sub.CustomerId,
+                 CanceledAt = sub.CanceledAt.HasValue ? sub.CanceledAt.Value : DateTime.Now,
+                 EndedAt = sub.EndedAt,
+                 Metadata = sub.Metadata,
+                 PeriodEnd = sub.PeriodEnd,
+                 PeriodStart = sub.PeriodStart,
+                 Quantity = sub.Quantity,
+                 Start = sub.Start,
+                 Status = sub.Status,
+                 StripePlan = sub.StripePlan.Name,
+                 TaxPercent = sub.TaxPercent
+             };
          }
          else
              return null;
