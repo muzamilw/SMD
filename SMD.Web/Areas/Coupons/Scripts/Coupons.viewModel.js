@@ -635,7 +635,8 @@ define("Coupons/Coupons.viewModel",
         },
           terminateCampaign = function (item) {
               if (item.Status() == 1)
-                  couponModel().CouponId(item.CouponId());
+              { couponModel(item); }
+                  
 
               confirmation.messageText("Are you sure you want to remove this ad ? This action cannot be undone.");
               confirmation.show();
@@ -643,7 +644,8 @@ define("Coupons/Coupons.viewModel",
                   confirmation.hide();
               });
               confirmation.afterProceed(function () {
-                  if (couponModel() != undefined)
+                  if (couponModel() == undefined)
+                      couponModel(item);
                       saveCampaign(7);
               });
 
@@ -2078,7 +2080,7 @@ define("Coupons/Coupons.viewModel",
                     isWelcomeScreenVisible(false);
                 }
                 else {
-                    isListVisible(false);
+                    isListVisible(true);
                     isWelcomeScreenVisible(true);
                 }
 

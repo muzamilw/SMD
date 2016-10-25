@@ -804,15 +804,17 @@ define("ads/ads.viewModel",
                 },
 
               removeAdd = function (item) {
-                  if (item.Status() == 1)
-                      campaignModel().CampaignID(item.CampaignID());
+                  if (item.Status() == 1) {
+                      campaignModel(item);
+                  }
                   confirmation.messageText("Are you sure you want to remove this ad ? This action cannot be undone.");
                   confirmation.show();
                   confirmation.afterCancel(function () {
                       confirmation.hide();
                   });
                   confirmation.afterProceed(function () {
-                      if (campaignModel() != undefined)
+                      if (campaignModel() == undefined)
+                          campaignModel(item);
                           saveCampaign(7);
                   });
               },
