@@ -41,9 +41,6 @@ namespace SMD.Models.DomainModels
         public string couponImage1 { get; set; }
         public string CouponImage2 { get; set; }
         public string CouponImage3 { get; set; }
-        public string CouponImage4 { get; set; }
-        public string CouponImage5 { get; set; }
-        public string CouponImage6 { get; set; }
         public string LogoUrl { get; set; }
         public string HighlightLine1 { get; set; }
         public string HighlightLine2 { get; set; }
@@ -82,5 +79,11 @@ namespace SMD.Models.DomainModels
         public string Categories { get; set; }
         public string CurrencyCode { get; set; }
         public string CurrencySymbol { get; set; }
+        public string YoutubeLink { get; set; }
+        public string CouponImage4 { get; set; }
+        public string CouponImage5 { get; set; }
+        public string CouponImage6 { get; set; }
+        public Nullable<bool> IsPaymentCollected { get; set; }
+        public Nullable<System.DateTime> PaymentDate { get; set; }
     }
 }

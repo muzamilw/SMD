@@ -35,6 +35,8 @@ namespace DomainModelProject
         public string ZipCode { get; set; }
         public string CreditCardRef { get; set; }
         public Nullable<int> CompanyId { get; set; }
+        public string StripeReceiptNo { get; set; }
+        public string StripeInvoiceId { get; set; }
     
         public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }
         public virtual Company Company { get; set; }

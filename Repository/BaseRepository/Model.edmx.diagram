@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b6ef084096a74d0cbd3034e3cafbef32" Name="Diagram1" ZoomLevel="99">
+      <Diagram DiagramId="b6ef084096a74d0cbd3034e3cafbef32" Name="Diagram1" ZoomLevel="101">
         <EntityTypeShape EntityType="DomainModels.Role" Width="1.5" PointX="11.875" PointY="79" IsExpanded="true" />
         <EntityTypeShape EntityType="DomainModels.UserLogin" Width="1.5" PointX="16.375" PointY="91.125" IsExpanded="true" />
         <EntityTypeShape EntityType="DomainModels.ProfileQuestion" Width="2.5" PointX="6.625" PointY="56.5" />
@@ -147,7 +147,7 @@
         <AssociationConnector Association="DomainModels.FK_City_Country" />
         <AssociationConnector Association="DomainModels.FK_ProfileQuestionTargetLocation_City" />
         <AssociationConnector Association="DomainModels.FK_SurveyQuestionTargetLocation_City" />
-        <EntityTypeShape EntityType="DomainModels.vw_Coupons" Width="1.5" PointX="15" PointY="0.875" />
+        <EntityTypeShape EntityType="DomainModels.vw_Coupons" Width="1.5" PointX="9.375" PointY="7.75" />
         <AssociationConnector Association="DomainModels.FK_Country_Currency" />
         <EntityTypeShape EntityType="DomainModels.CampaignEventHistory" Width="1.5" PointX="31.875" PointY="72.625" />
         <EntityTypeShape EntityType="DomainModels.EventStatus" Width="1.5" PointX="29.625" PointY="69.5" />
