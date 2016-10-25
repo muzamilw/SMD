@@ -73,23 +73,6 @@
             </div>
             <div class="col-lg-6">
                 <table style="margin-top:70px;">
-                    <!-- ko template: { name: 'ROITblAnalyticsDataTemplate' , foreach: $root.CampaignROItblAnalyticData } -->
-                    <!-- /ko -->
-                </table>
-            </div>
-
-        </div>
-        <div class="row">
-            <div class="adsubHeading Theme_standard_clr borderbtmline">
-                <br />
-                Campaign ROI
-            </div>
-        </div>
-        <div class="row">
-
-
-            <div class="col-lg-12">
-                <table class="roitbl" style="">
                     <thead>
                         <tr>
                             <th>
@@ -104,6 +87,24 @@
                         </tr>
                     </thead>
                     <!-- ko template: { name: 'CampaignTblAnalyticsDataTemplate' , foreach: $root.CampaignTblAnalyticsData } -->
+                    <!-- /ko -->
+                    
+                </table>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="adsubHeading Theme_standard_clr borderbtmline">
+                <br />
+                @*Campaign ROI*@
+            </div>
+        </div>
+        <div class="row">
+
+
+            <div class="col-lg-12">
+                <table class="roitbl" style="">
+                    <!-- ko template: { name: 'ROITblAnalyticsDataTemplate' , foreach: $root.CampaignROItblAnalyticData } -->
                     <!-- /ko -->
                    
                 </table>
