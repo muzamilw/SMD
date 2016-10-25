@@ -46,6 +46,12 @@ namespace SMD.Models.Common
         public string CurrencySymbol { get; set; }
 
         public Nullable<int> Status { get; set; }
+
+
+        public string StripeSubscriptionId { get; set; }
+
+        public string StripeSubscriptionStatus { get; set; }
+        
         
     }
 }

@@ -10,6 +10,7 @@ using SMD.Models.IdentityModels;
 using SMD.Models.RequestModels;
 using Stripe;
 using SMD.Models.ResponseModels;
+using System.Configuration;
 
 namespace SMD.Implementation.Services
 {
@@ -166,7 +167,7 @@ namespace SMD.Implementation.Services
 
 
 
-        public async Task<bool> CreateCustomerSubscription(string StripeCustomerId)
+        public StripeSubscriptionResponse CreateCustomerSubscription(string StripeCustomerId)
         {
 
             //StripeConfiguration.SetApiKey("[your api key here]");
@@ -176,11 +177,18 @@ namespace SMD.Implementation.Services
             StripeCustomer stripeCustomer = customerService.Get(StripeCustomerId);
 
             StripeSubscriptionService subscriptionSvc = new StripeSubscriptionService();
-            subscriptionSvc.Create(StripeCustomerId, "Deals_Unlimited"); //use the PlanId you configured in the Stripe Portal to create a subscription
+            var sub = subscriptionSvc.Create(StripeCustomerId, ConfigurationManager.AppSettings["CouponSubscriptionPlan"]); //use the PlanId you configured in the Stripe Portal to create a subscription
             //Do something here to give your customer what they are paying for
             //CHEERS!
 
-            return true;
+            
+
+            if (sub != null)
+            {
+                return new StripeSubscriptionResponse {SubscriptionId = sub.Id,  ApplicationFeePercent = sub.ApplicationFeePercent, CancelAtPeriodEnd = sub.CancelAtPeriodEnd, Customer = sub.Customer.Email, CustomerId = sub.CustomerId, CanceledAt = sub.CanceledAt, EndedAt = sub.EndedAt, Metadata = sub.Metadata, PeriodEnd = sub.PeriodEnd, PeriodStart = sub.PeriodStart, Quantity = sub.Quantity, Start = sub.Start, Status = sub.Status, StripePlan = sub.StripePlan.Name, TaxPercent = sub.TaxPercent };
+            }
+            else
+                return null;
 
         }
 
@@ -192,7 +200,7 @@ namespace SMD.Implementation.Services
 
          if (sub != null)
          {
-             return new StripeSubscriptionResponse { ApplicationFeePercent = sub.ApplicationFeePercent, CancelAtPeriodEnd = sub.CancelAtPeriodEnd, Customer = sub.Customer.Email, CustomerId = sub.CustomerId, CanceledAt = sub.CanceledAt, EndedAt = sub.EndedAt, Metadata = sub.Metadata, PeriodEnd = sub.PeriodEnd, PeriodStart = sub.PeriodStart, Quantity = sub.Quantity, Start = sub.Start, Status = sub.Status, StripePlan = sub.StripePlan.Name, TaxPercent = sub.TaxPercent };
+             return new StripeSubscriptionResponse { SubscriptionId = sub.Id, ApplicationFeePercent = sub.ApplicationFeePercent, CancelAtPeriodEnd = sub.CancelAtPeriodEnd, Customer = sub.Customer.Email, CustomerId = sub.CustomerId, CanceledAt = sub.CanceledAt, EndedAt = sub.EndedAt, Metadata = sub.Metadata, PeriodEnd = sub.PeriodEnd, PeriodStart = sub.PeriodStart, Quantity = sub.Quantity, Start = sub.Start, Status = sub.Status, StripePlan = sub.StripePlan.Name, TaxPercent = sub.TaxPercent };
          }
          else
              return null;

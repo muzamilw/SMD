@@ -1,5 +1,6 @@
 ﻿using Microsoft.Practices.Unity;
 using SMD.Implementation.Identity;
+using SMD.Implementation.Services;
 using SMD.Interfaces.Repository;
 using SMD.Interfaces.Services;
 using SMD.Models.DomainModels;
@@ -27,6 +28,10 @@ namespace SMD.MIS.StripeWebhooks
         [Dependency]
         private static IInvoiceDetailRepository invoiceDetailRepository { get; set; }
 
+        [Dependency]
+        private static IEmailManagerService emailManagerService { get; set; }
+        
+
 
         [Dependency]
         private static ICouponService couponService { get; set; }
@@ -38,6 +43,8 @@ namespace SMD.MIS.StripeWebhooks
              invoiceRepository = UnityConfig.UnityContainer.Resolve<IInvoiceRepository>();
              invoiceDetailRepository = UnityConfig.UnityContainer.Resolve<IInvoiceDetailRepository>();
              couponService = UnityConfig.UnityContainer.Resolve<ICouponService>();
+             emailManagerService = UnityConfig.UnityContainer.Resolve<IEmailManagerService>();
+             
 
             context.Response.ContentType = "text/plain";
             context.Response.Write("Hello World");
@@ -92,6 +99,8 @@ namespace SMD.MIS.StripeWebhooks
                         //generate invoice and send email
 
                         comp = companyService.GetCompanyByStripeCustomerId(StripeCustoemrID);
+                        TransactionManager.CouponSubscriptionPaymentTransaction(null, inv.Total, comp.CompanyId);
+                       
                         //generate invoice
 
                         //send the invoice subscription event email
@@ -147,13 +156,18 @@ namespace SMD.MIS.StripeWebhooks
                     inv= Stripe.Mapper<StripeInvoice>.MapFromJson(stripeEvent.Data.Object.ToString());
                       StripeCustoemrID = inv.CustomerId;
                     StripeSubscriptionID = inv.SubscriptionId;
+
+                     comp = companyService.GetCompanyByStripeCustomerId(StripeCustoemrID);
+                    
+                    emailManagerService.SendPaymentRejectionEmail(comp.AspNetUsers.FirstOrDefault().Id,comp.CompanyId,"credit card issue ?. find and enter the correct reason",inv.AttemptCount,inv.NextPaymentAttempt.Value.ToLongDateString());
+
                     if ( inv.AttemptCount == 3)// last attempt
                     {
                         
                         var subs = subscriptionService.Get(StripeCustoemrID, StripeSubscriptionID);
                         if ( subs != null && subs.Status== "canceled")
                         {
-                            comp = companyService.GetCompanyByStripeCustomerId(StripeCustoemrID);
+                           
                             if (comp != null)
                             {
                                 comp.StripeSubscriptionId = null;
