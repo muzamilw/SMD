@@ -288,6 +288,8 @@ namespace SMD.Implementation.Services
                 objUC.Status = loggedInUser.Status;
 
 
+                objUC.StripeSubscriptionId = company.StripeSubscriptionId;
+                objUC.StripeSubscriptionStatus = company.StripeSubscriptionStatus;
 
 
                 var currency = _countryRepository.Find(company.BillingCountryId.Value).Currency;

@@ -129,6 +129,45 @@ namespace SMD.Implementation.Services
           }
 
 
+          public static bool CouponSubscriptionPaymentTransaction(long? couponId, double Payment, int CompanyId)
+          {
+
+              using (var dbContext = new BaseDbContext())
+              {
+
+                  var userCompany = dbContext.Companies.Where(g => g.CompanyId == CompanyId).SingleOrDefault();
+
+                  var smdCompany = GetCash4AdsUser(dbContext).Company;
+
+
+                  //get money from stripe
+
+                  // update company  stripe accont debit 
+                  updateStripeAccount(userCompany, Payment, dbContext, TransactionType.ApproveCoupon, false, couponId, null);
+                  // update smd users  stripe accont credit 
+                  updateStripeAccount(smdCompany, Payment, dbContext, TransactionType.ApproveCoupon, true, couponId, null);
+
+
+
+                  // 1 UsD = 100 Centz into virtual
+                  // update users  virutal accont debit 
+                  updateVirtualAccount(userCompany, Payment * 100, dbContext, TransactionType.ApproveCoupon, true, couponId, null);
+                  // update smd users  virutal accont credit 
+                  updateVirtualAccount(smdCompany, Payment * 100, dbContext, TransactionType.ApproveCoupon, false, couponId, null);
+
+
+                  // update smd users  virutal accont credit 
+                  //updateUsersVirtualAccount(coupon.Company, SwapCost, dbContext, 2, true, null, couponId);
+
+                  dbContext.SaveChanges();
+                  return true;
+              }
+
+          }
+
+
+
+
           public static bool SurveyApproveTransaction(long SQID, double Payment, int CompanyId)
           {
               using (var dbContext = new BaseDbContext())

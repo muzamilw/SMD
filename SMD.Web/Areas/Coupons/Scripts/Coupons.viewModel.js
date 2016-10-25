@@ -625,7 +625,7 @@ define("Coupons/Coupons.viewModel",
                         stripeChargeCustomer.show(function () {
                             UserAndCostDetail().isStripeIntegrated = true;
                             saveCampaign(2);
-                        }, 1000, 'Configure your credit card');
+                        }, 1000, 'Configure your Subscription');
 
                     } else {
                         saveCampaign(2);

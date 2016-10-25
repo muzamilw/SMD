@@ -2486,7 +2486,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
         </Function>
         <Function Name="getPollsBySQID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="SQID" Type="int" Mode="In" />
-          <Parameter Name="status" Type="int" Mode="In" />
           <Parameter Name="DateRange" Type="int" Mode="In" />
           <Parameter Name="Granularity" Type="int" Mode="In" />
         </Function>
@@ -2510,7 +2509,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
         </Function>
         <Function Name="getSurvayByPQID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="PQId" Type="int" Mode="In" />
-          <Parameter Name="status" Type="int" Mode="In" />
           <Parameter Name="DateRange" Type="int" Mode="In" />
           <Parameter Name="Granularity" Type="int" Mode="In" />
         </Function>
@@ -3821,13 +3819,11 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           </FunctionImport>
           <FunctionImport Name="getPollsBySQID" ReturnType="Collection(DomainModels.getPollsBySQID_Result)">
             <Parameter Name="SQID" Mode="In" Type="Int32" />
-            <Parameter Name="status" Mode="In" Type="Int32" />
             <Parameter Name="DateRange" Mode="In" Type="Int32" />
             <Parameter Name="Granularity" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="getSurvayByPQID" ReturnType="Collection(DomainModels.getSurvayByPQID_Result)">
             <Parameter Name="PQId" Mode="In" Type="Int32" />
-            <Parameter Name="status" Mode="In" Type="Int32" />
             <Parameter Name="DateRange" Mode="In" Type="Int32" />
             <Parameter Name="Granularity" Mode="In" Type="Int32" />
           </FunctionImport>

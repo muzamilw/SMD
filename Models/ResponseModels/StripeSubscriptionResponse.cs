@@ -8,7 +8,9 @@ namespace SMD.Models.ResponseModels
 {
     public class StripeSubscriptionResponse
     {
-        
+
+        public string SubscriptionId { get; set; }
+
         public decimal? ApplicationFeePercent { get; set; }
         
         public bool CancelAtPeriodEnd { get; set; }

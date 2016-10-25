@@ -47,7 +47,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// Charge Customer
         /// </summary>
         [ApiException]
-        public async Task<bool> Put(string StripeCustomerId)
+        public StripeSubscriptionResponse Put(string StripeCustomerId)
         {
             //if (request == null || !ModelState.IsValid)
             //{
@@ -66,7 +66,7 @@ namespace SMD.MIS.Areas.Api.Controllers
             //}
 
 
-            return await stripeService.CreateCustomerSubscription(StripeCustomerId);
+            return stripeService.CreateCustomerSubscription(StripeCustomerId);
         }
 
         public StripeSubscriptionResponse Get(string StripeSubscriptionId, string StripeCustomerId)
