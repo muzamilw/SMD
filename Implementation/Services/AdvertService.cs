@@ -568,12 +568,12 @@ namespace SMD.Implementation.Services
                 {
                     campaignModel.LogoUrl = paths[7];
                 }
-                else if (campaignModel.LogoUrl.Contains("Content/Images"))
+                else if (campaignModel.LogoUrl != null && campaignModel.LogoUrl.Contains("Content/Images"))
                 {
                     campaignModel.LogoUrl = null;
                 }
 
-                if (campaignModel.LogoUrl.StartsWith("/"))
+                if (campaignModel.LogoUrl!=null && campaignModel.LogoUrl.StartsWith("/"))
                 {
 
                     string path = campaignModel.LogoUrl.Substring(1);
