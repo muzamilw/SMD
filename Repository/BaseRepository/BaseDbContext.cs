@@ -727,10 +727,10 @@ namespace SMD.Repository.BaseRepository
         public ObjectResult<getSurvayByPQID_Result> getSurvayByPQIDAnalytics(int PQId, int CampStatus, int dateRange, int Granularity)
         {
             var _PQId = new ObjectParameter("PQId", PQId);
-            var _CampStatus = new ObjectParameter("status", CampStatus);
+           // var _CampStatus = new ObjectParameter("status", CampStatus);
             var _dateRange = new ObjectParameter("DateRange", dateRange);
             var _Granularity = new ObjectParameter("Granularity", Granularity);
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getSurvayByPQID_Result>("getSurvayByPQID", _PQId, _CampStatus, _dateRange, _Granularity);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getSurvayByPQID_Result>("getSurvayByPQID", _PQId, _dateRange, _Granularity);
         }
         public ObjectResult<getPollsBySQID_Result> getPollsBySQIDAnalytics(int SQId, int CampStatus, int dateRange, int Granularity)
         {
@@ -738,7 +738,7 @@ namespace SMD.Repository.BaseRepository
             var _CampStatus = new ObjectParameter("status", CampStatus);
             var _dateRange = new ObjectParameter("DateRange", dateRange);
             var _Granularity = new ObjectParameter("Granularity", Granularity);
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getPollsBySQID_Result>("getPollsBySQID", _SQId, _CampStatus, _dateRange, _Granularity);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getPollsBySQID_Result>("getPollsBySQID", _SQId, _dateRange, _Granularity);
         }
         public ObjectResult<getDealByCouponID_Result> getDealByCouponIDAnalytics(int CouponID, int dateRange, int Granularity)
         {

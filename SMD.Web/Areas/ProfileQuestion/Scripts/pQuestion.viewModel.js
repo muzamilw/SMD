@@ -124,7 +124,7 @@ define("pQuestion/pQuestion.viewModel",
 				getSurvayAnalytics = function () {
 				    dataservice.getSurvayAnalytics({
 				        PQId: selectedPQIDAnalytics(),
-				        CampStatus: selectedCampStatusAnalytics(),
+				        CampStatus: 0,
 				        dateRange: selecteddateRangeAnalytics(),
 				        Granularity: selectedGranularityAnalytics(),
 				    }, {

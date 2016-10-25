@@ -18,7 +18,7 @@
 
             </div>
             <div>
-                <div class="col-lg-3"></div>
+                <div class="col-lg-7"></div>
 
                 <div class="col-lg-2">
                     <label style="padding-top:18px;" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Granularity level </label>
@@ -27,12 +27,12 @@
                     <select class="form-control margin10 pull-left" id="ddGranularityDropDown" data-bind="options: $root.granularityDropDown, optionsText: 'name', optionsValue: 'id', value:$root.selectedGranularityAnalytics, event: { change: $root.getSurvayAnalytics }"></select>
                 </div>
 
-                <div class="col-lg-1">
+                @*<div class="col-lg-1">
                     <label style="padding-top:18px;" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Status </label>
                 </div>
                 <div class="col-lg-3">
                     <select class="form-control margin10 pull-left" id="ddCampaignStatusDropDown" data-bind="options: $root.CampaignStatusDropDown, optionsText: 'name', optionsValue: 'id', value:$root.selectedCampStatusAnalytics, event: { change: $root.getSurvayAnalytics }"></select>
-                </div>
+                </div>*@
 
             </div>
 
@@ -41,12 +41,9 @@
         <div class="row main-box">
             <div class="col-lg-12">
                 <div class=" margin10">
-                    <!-- ko if: $root.selectedCampStatusAnalytics() === 1  -->
-                    <div style="height:150px;" data-bind="morris: {type: 'Line', data: $root.SQAnalyticsData, xkey: 'Granual', ykeys: ['openStats', 'Stats'], labels: ['Opened', 'Answered'], parseTime:false, setAxisAlignFirstX: true, lineColors: ['blue','green'] }"></div>
-                    <!-- /ko -->
-                    <!-- ko if: $root.selectedCampStatusAnalytics() === 2  -->
-                    <div style="height:150px;" data-bind="morris: {type: 'Line', data: $root.SQAnalyticsData, xkey: 'Granual', ykeys: ['openStats', 'Stats'], labels: ['Opened', 'Skipped'], parseTime:false, setAxisAlignFirstX: true, lineColors: ['blue','red'] }"></div>
-                    <!-- /ko -->
+                   
+                    <div style="height:150px;" data-bind="morris: {type: 'Line', data: $root.SQAnalyticsData, xkey: 'Granual', ykeys: ['openStats', 'Stats', 'SkipStats'], labels: ['Opened', 'Answered','Skipped'], parseTime:false, setAxisAlignFirstX: true, lineColors: ['blue','green','red'] }"></div>
+                   
 
 
                 </div>
@@ -68,13 +65,14 @@
                 <div>Date range : All time </div>
                 <!--/ko-->
 
-                <div data-bind="morris: {type: 'Donut', data: $root.CampaignRatioAnalyticData, resize:true, colors: ['green', 'blue' ]  }" style="width:250px;height:250px;padding-left:50px;"></div>
+                <div data-bind="morris: {type: 'Donut', data: $root.CampaignRatioAnalyticData, resize:true, colors: ['green', 'blue' ]  }" style="width:250px;height:250px;padding-left:50px;cursor:pointer;"></div>
                 
             </div>
             <div class="col-lg-6">
                 <table style="margin-top:70px;">
                     <!-- ko template: { name: 'ROITblAnalyticsDataTemplate' , foreach: $root.CampaignROItblAnalyticData } -->
                     <!-- /ko -->
+                    
                 </table>
             </div>
 
@@ -82,7 +80,7 @@
         <div class="row">
             <div class="adsubHeading Theme_standard_clr borderbtmline">
                 <br />
-                Campaign ROI
+                @*Campaign ROI*@
             </div>
         </div>
         <div class="row">
@@ -90,12 +88,13 @@
 
             <div class="col-lg-12">
                 <table class="roitbl" style="">
+                    
                     <thead>
                         <tr>
                             <th>
                                 &nbsp;
                             </th>
-                            <th class="padingL15 text-right">
+                            <th class="padingL15 text-right" style="background-color: #eee">
                                 All time
                             </th>
                             <th class="padingL15 text-right">
@@ -105,7 +104,6 @@
                     </thead>
                     <!-- ko template: { name: 'CampaignTblAnalyticsDataTemplate' , foreach: $root.CampaignTblAnalyticsData } -->
                     <!-- /ko -->
-                   
                 </table>
             </div>
 
@@ -122,7 +120,7 @@
     <tr>
         <td><span data-bind="text: label"></span></td>
         
-        <td class="padingL15 text-right">
+        <td class="padingL15 text-right" style="background-color: #eee">
             <!-- ko if: ordr === 4  -->
             $
             <!-- /ko -->
