@@ -1740,7 +1740,7 @@ define("survey/survey.viewModel",
                         confirmation.hide();
                     });
                     confirmation.afterProceed(function () {
-                        if (selectedQuestion() != undefined)
+                            selectedQuestion(item);
                             saveSurveyQuestion(7);
                     });
                 },

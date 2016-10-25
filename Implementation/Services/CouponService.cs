@@ -413,6 +413,10 @@ namespace SMD.Implementation.Services
                 couponModel.CouponEndDate = DateTime.Now;
 
             }
+            if (couponModel.Status == 2)
+            {
+                couponModel.SubmissionDateTime = DateTime.Now;
+            }
 
             if (couponModel.CouponCategories != null && couponModel.CouponCategories.Count() > 0)
             {
