@@ -148,6 +148,12 @@ namespace SMD.Implementation.Services
         public string BuyItURL { get; set; }
         public string CampaignName { get; set; }
         public string RejectionReason { get; set; }
+
+        public string PaymentFailedReason { get; set; }
+
+        public string PaymentFailedAttempt { get; set; }
+
+        public string NextPaymentAttempt { get; set; }
         public string CampaignLabel { get; set; }
 
         public string RoleName { get; set; }
@@ -195,6 +201,8 @@ namespace SMD.Implementation.Services
             MBody = MBody.Replace("++campaignlabel++", CampaignLabel);
             MBody = MBody.Replace("++CurrentDateTime++", DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToLongTimeString() + " GMT");
             MBody = MBody.Replace("++EmailConfirmationLink++", EmailConfirmationLink);
+            MBody = MBody.Replace("++companyname++", CompanyNameInviteUser);
+
             if (Mid == (int)EmailTypes.ResetPassword)
             {
                 MBody = MBody.Replace("++PasswordResetLink++", PasswordResetLink);
@@ -310,6 +318,11 @@ namespace SMD.Implementation.Services
             MBody = MBody.Replace("++feedback++", feedback);
 
             MBody = MBody.Replace("++countryname++", CountryName);
+
+            MBody = MBody.Replace("++paymentfailedattempt++", PaymentFailedAttempt);
+            MBody = MBody.Replace("++paymentfailedreason++", PaymentFailedReason);
+            MBody = MBody.Replace("++nextpaymentattempt++", NextPaymentAttempt);
+            
 
             MBody = MBody.Replace("++city++", City);
 
@@ -1035,6 +1048,32 @@ namespace SMD.Implementation.Services
 
         //}
         #endregion
+
+
+
+        public void SendPaymentRejectionEmail(string aspnetUserId, int CompanyId,  string sPaymentFailedReason, int Attempt, string sNextPaymentAttempt)
+        {
+            var oUser = manageUserRepository.GetByUserId(aspnetUserId);
+            var comp = companyService.GetCompanyById(CompanyId);
+
+            if (oUser != null)
+            {
+                MMailto.Add(oUser.Email);
+                Mid = (int)EmailTypes.SubscriptionPaymentFailed;
+                CompanyName = comp.CompanyName;
+                Muser = oUser.FullName;
+                PaymentFailedAttempt = Attempt.ToString();
+                PaymentFailedReason = sPaymentFailedReason;
+                NextPaymentAttempt = sNextPaymentAttempt;
+                
+                SendEmailNotAysnc();
+            }
+            else
+            {
+                throw new Exception("Email could not be sent!");
+            }
+        }
+
 
     }
 }

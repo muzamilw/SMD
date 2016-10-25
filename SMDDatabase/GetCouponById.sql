@@ -1,6 +1,6 @@
-﻿
+﻿USE [SMDv2]
 GO
-/****** Object:  StoredProcedure [dbo].[GetCouponByID]    Script Date: 10/7/2016 10:30:20 AM ******/
+/****** Object:  StoredProcedure [dbo].[GetCouponByID]    Script Date: 10/25/2016 12:06:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -42,11 +42,13 @@ DECLARE @source geography = geography::Point(@lat, @lon, 4326)
 INSERT INTO [dbo].[UserCouponView]
            ([CouponId]
            ,[UserId]
-           ,[ViewDateTime])
+           ,[ViewDateTime],
+		   userLocationLAT,
+		   userLocationLONG)
      VALUES
            (@CouponId
            ,@UserId
-           ,GETDATE())
+           ,GETDATE(),@Lat,@Lon)
 
 
 SELECT [CouponId]

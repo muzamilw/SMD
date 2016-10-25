@@ -22,7 +22,7 @@ namespace SMD.Interfaces.Services
         Task<string> UpdateCustomer(StripeChargeCustomerRequest request, string CustomerId);
 
 
-        Task<bool> CreateCustomerSubscription(string StripeCustomerId);
+        StripeSubscriptionResponse CreateCustomerSubscription(string StripeCustomerId);
 
 
         StripeSubscriptionResponse GetCustomerSubscription(string StripeSubscriptionId, string StripeCustomerId);

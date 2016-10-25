@@ -76,5 +76,7 @@ namespace SMD.Interfaces.Services
 
 
         void SendAppFeedback(string UserId, string feedback, string City, string Country, string FullName, string email, string phone);
+
+        void SendPaymentRejectionEmail(string aspnetUserId, int CompanyId, string sPaymentFailedReason, int Attempt,string NextPaymentAttempt);
     }
 }
