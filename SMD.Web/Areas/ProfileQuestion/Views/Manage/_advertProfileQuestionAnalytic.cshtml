@@ -38,10 +38,10 @@
             <div class="col-lg-12">
                 <div class=" margin10">
                     <!-- ko if: $root.selectedCampStatusAnalytics() === 1  -->
-                    <div style="height:200px;" data-bind="morris: {type: 'Line', data: $root.PQAnalyticsData, xkey: 'Granual', ykeys: ['openStats', 'Stats'], labels: ['Opened', 'Answered'], parseTime:false, setAxisAlignFirstX: true, lineColors: ['blue','green'] }"></div>
+                    <div style="height:150px;" data-bind="morris: {type: 'Line', data: $root.PQAnalyticsData, xkey: 'Granual', ykeys: ['openStats', 'Stats'], labels: ['Opened', 'Answered'], parseTime:false, setAxisAlignFirstX: true, lineColors: ['blue','green'] }"></div>
                     <!-- /ko -->
                     <!-- ko if: $root.selectedCampStatusAnalytics() === 2  -->
-                    <div style="height:200px;" data-bind="morris: {type: 'Line', data: $root.PQAnalyticsData, xkey: 'Granual', ykeys: ['openStats', 'Stats'], labels: ['Opened', 'Skipped'], parseTime:false, setAxisAlignFirstX: true, lineColors: ['blue','red'] }"></div>
+                    <div style="height:150px;" data-bind="morris: {type: 'Line', data: $root.PQAnalyticsData, xkey: 'Granual', ykeys: ['openStats', 'Stats'], labels: ['Opened', 'Skipped'], parseTime:false, setAxisAlignFirstX: true, lineColors: ['blue','red'] }"></div>
                     <!-- /ko -->
                   
 
@@ -69,21 +69,8 @@
                
             </div>
             <div class="col-lg-5">
-                <table style="margin-top:70px;">
-                    <thead>
-                        <tr>
-                            <th>
-                                &nbsp;
-                            </th>
-                            <th class="padingL15 text-right">
-                                All time
-                            </th>
-                            <th class="padingL15 text-right">
-                                30 days
-                            </th>
-                        </tr>
-                    </thead>
-                    <!-- ko template: { name: 'CampaignTblAnalyticsDataTemplate' , foreach: $root.CampaignTblAnalyticsData } -->
+                <table class="roitbl" style="margin-top:70px;">
+                    <!-- ko template: { name: 'ROITblAnalyticsDataTemplate' , foreach: $root.CampaignROItblAnalyticData } -->
                     <!-- /ko -->
                 </table>
             </div>
@@ -92,7 +79,7 @@
         <div class="row">
             <div class="adsubHeading Theme_standard_clr borderbtmline">
                 <br />
-                Campaign ROI
+                @*Campaign ROI*@
             </div>
         </div>
         <div class="row">
@@ -100,8 +87,22 @@
 
             <div class="col-lg-12">
                 <table class="roitbl" style="">
-                    <!-- ko template: { name: 'ROITblAnalyticsDataTemplate' , foreach: $root.CampaignROItblAnalyticData } -->
+                    <thead>
+                        <tr>
+                            <th class="col-lg-4">
+                                &nbsp;
+                            </th>
+                            <th class="col-lg-4 padingL15 text-right">
+                                All time
+                            </th>
+                            <th class="col-lg-4 padingL15 text-right">
+                                Last 30 days
+                            </th>
+                        </tr>
+                    </thead>
+                    <!-- ko template: { name: 'CampaignTblAnalyticsDataTemplate' , foreach: $root.CampaignTblAnalyticsData } -->
                     <!-- /ko -->
+                   
                 </table>
             </div>
 
