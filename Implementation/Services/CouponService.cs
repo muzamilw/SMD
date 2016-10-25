@@ -136,7 +136,7 @@ namespace SMD.Implementation.Services
         /// </summary>
         public CouponService(ICouponRepository couponRepository, IUserFavouriteCouponRepository userFavouriteCouponRepository, ICompanyService _companyService,
             IUserPurchasedCouponRepository _userPurchasedCouponRepository, IAccountRepository _accountRepository, ICouponCategoriesRepository _couponCategoriesRepository, ICurrencyRepository _currencyRepository, IWebApiUserService _userService, IUserCouponViewRepository userCouponViewRepository, IEmailManagerService emailManagerService, WebApiUserService webApiUserService, IStripeService stripeService, IProductRepository productRepository
-            , ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository, ICompanyRepository iCompanyRepository, ICouponPriceOptionRepository couponPriceOptionRepository,, ICampaignEventHistoryRepository campaignEventHistoryRepository)
+            , ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository, ICompanyRepository iCompanyRepository, ICouponPriceOptionRepository couponPriceOptionRepository, ICampaignEventHistoryRepository campaignEventHistoryRepository)
         {
             this.couponRepository = couponRepository;
             this._userFavouriteCouponRepository = userFavouriteCouponRepository;
@@ -794,7 +794,7 @@ namespace SMD.Implementation.Services
                 couponRepository.SaveChanges();
 
                 //event history
-                campaignEventHistoryRepository.InsertCouponEvent((AdCampaignStatus)couponModel.Status,couponModel.CouponId);
+                campaignEventHistoryRepository.InsertCouponEvent((AdCampaignStatus)dbCo.Status, dbCo.CouponId);
 
                 if (source.Approved == false)
                 {
