@@ -834,15 +834,15 @@ define("pQuestion/pQuestion.viewModel",
                              //$("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign").removeAttr('disabled');
                          }
                      },
-                   terminateCampaign = function () {
+                   terminateCampaign = function (item) {
                        confirmation.messageText("Are you sure you want to remove this Survey ? This action cannot be undone.");
                        confirmation.show();
                        confirmation.afterCancel(function () {
                            confirmation.hide();
                        });
                        confirmation.afterProceed(function () {
-                           if (selectedQuestion() != undefined)
-                               onSaveProfileQuestion(7);
+                           selectedQuestion(item)
+                           onSaveProfileQuestion(7);
                        });
                    },
 
@@ -1114,9 +1114,13 @@ define("pQuestion/pQuestion.viewModel",
                 },
                 onSaveProfileQuestion = function (mode) {
                     debugger;
-                    if (!doBeforeSavepq()) {
-                        return;
+                    if (mode != 7)
+                    {
+                        if (!doBeforeSavepq()) {
+                            return;
+                        }
                     }
+                   
                     var serverAnswers = [];
                     _.each(selectedQuestion().answers(), function (item) {
                         if (item !== null && typeof item === 'object') {

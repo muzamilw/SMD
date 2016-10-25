@@ -565,8 +565,10 @@ namespace SMD.Implementation.Services
             // Total includes tax
             if (product != null)
             {
+                if (source.AmountCharged!=null)
                 amount = source.AmountCharged ?? 0 + tax.TaxValue ?? 0;
-
+                else
+                    amount = 0 ;
                 // If It is not System User then make transation 
                 //if (user.Roles.Any(role => role.Name.ToLower().Equals("user")))
                 //{
