@@ -839,7 +839,7 @@ namespace SMD.Implementation.Services
                         company.StripeSubscriptionId = resp.SubscriptionId;
                         company.StripeSubscriptionStatus = resp.Status;
 
-                        _companyService.UpdateCompany(company, null);
+                        _companyService.UpdateCompany(company);
 
                     }
                     else
@@ -857,7 +857,7 @@ namespace SMD.Implementation.Services
                             company.StripeSubscriptionId = resp.SubscriptionId;
                             company.StripeSubscriptionStatus = resp.Status;
 
-                            _companyService.UpdateCompany(company, null);
+                            _companyService.UpdateCompany(company);
 
                         }
 
