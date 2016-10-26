@@ -1,6 +1,6 @@
 ﻿USE [SMDv2]
 GO
-/****** Object:  StoredProcedure [dbo].[GetAudience]    Script Date: 10/19/2016 3:46:16 PM ******/
+/****** Object:  StoredProcedure [dbo].[GetAudience]    Script Date: 10/26/2016 2:32:16 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -17,6 +17,9 @@ GO
 
 ALTER PROCEDURE [dbo].[GetAudience] 
 
+
+
+--      exec [GetAudience] 1,80,1,'','13885','','','','','','','','','','','','','','','','',''
 	-- Add the parameters for the stored procedure here
 	     @ageFrom AS INT,
 		 @ageTo AS INT,
@@ -94,9 +97,9 @@ BEGIN
 	end
 	if(@cityIds IS NOT NULL AND @cityIds != '')
 	begin
-		if(@join = '')
+		if(@join = '')  --CONCAT(UserCompany.BillingCity, ''%'')
 		begin
-			set @join = ' inner join Company UserCompany on  SMDUser.CompanyId = UserCompany.CompanyId  inner join splitString(@Cityids,'','') cities on  UserCompany.BillingCity LIKE CONCAT(''%'', Cities.item, ''%'')  '
+			set @join = ' inner join Company UserCompany on  SMDUser.CompanyId = UserCompany.CompanyId inner join City on ltrim(rtrim(lower(city.CityName))) =  ltrim(rtrim(lower(UserCompany.BillingCity)))  inner join splitString(@Cityids,'','') cities on City.CityId = Cities.Item   '--  UserCompany.BillingCity LIKE CONCAT(''%'', Cities.item, ''%'')  '
 		end
 		
 		--set @where = @where + ' and  contains( UserCompany.BillingCity, '+ @cityIds +')'
@@ -106,7 +109,7 @@ BEGIN
 		if(@join = '')
 		begin
 			--set @join = ' inner join Company UserCompany on  SMDUser.CompanyId = UserCompany.CompanyId'
-			set @join = ' inner join Company UserCompanyn on  SMDUser.CompanyId = UserCompanyn.CompanyId  inner join splitString(@Cityidsex,'','') cities on  UserCompanyn.BillingCity NOT LIKE CONCAT(''%'', Cities.item, ''%'')  '
+			set @join = ' inner join Company UserCompany on  SMDUser.CompanyId = UserCompany.CompanyId inner join City on ltrim(rtrim(lower(city.CityName))) <>  ltrim(rtrim(lower(UserCompany.BillingCity)))  inner join splitString(@Cityids,'','') cities on City.CityId = Cities.Item   '--  UserCompany.BillingCity LIKE CONCAT(''%'', Cities.item, ''%'')  '
 		end
 		--set @where = @where + ' and UserCompany.City not in ('+ @cityIdsExcluded +')'
 	end
