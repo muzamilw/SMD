@@ -16,20 +16,17 @@ else
 }
 
    <div class="row" id="Heading_div" style="opacity: 1;">
-    <div class="col-lg-12" style="padding-left: 0px;">
-        <div style="width:305px;" class="pull-left">
+    <div class="col-lg-12" style="padding-left: 0px;padding-right:0px;">
+        <div class="pull-left" id="subdiv">
 
-            <label id="headlabel" style="font-size:24px;color:#fff!important;margin-top:7px;">Manage your Ad Campaigns - </label>
-
+            <label id="headlabel" class="pull-left" style="font-size:24px;color:#fff!important;margin-top:7px;">Manage your Ad Campaigns - </label>
+            <label id="headdesc" class="pull-left" style="color:#fff;font-size:14px;margin-top:15px;">Click on a campaign to view Analytic,Graphs and to modify.</label>
+            <div class="clearfix"></div>
         </div>
-        <div style="width:5px;">
-
+        <div class="pull-right">
+            <img class="pull-right closecls" src="~/Content/Images/Close_Button.png" style="margin-top:15px;" onclick="GotoHome();" />
         </div>
 
-        <div style="width:600px" class="pull-left">
-            <label id="headdesc" style="color:#fff;font-size:14px;margin-top:15px;">Click on a campaign to view Analytic,Graphs and to modify.</label>
-
-        </div>
         <div class="clearfix;"></div>
     </div>
 </div> 
@@ -324,9 +321,9 @@ else
                 </div>
             </form>
 
-            <div class="col-sm-3" style="float:right;margin-top:2px; text-align:right">
-                <img class="vid_image" src="/Content/Images/Videosuicon.png" data-bind="visible:$root.VideoImage">
-                <img class="Game_image" src="/Content/Images/Games_icon.png" data-bind="visible:$root.DisplayImage">
+            <div class="col-sm-3" style="float:right;margin-top:0px; text-align:right">
+                <img class="defvideoimage" src="/Content/Images/Videos_small.png" data-bind="visible:$root.VideoImage">
+                <img class="Game_image" src="/Content/Images/Display_small.png" data-bind="visible:$root.DisplayImage">
 
                 <button class="btn btn-primary" style="" data-bind="click:$root.addNewCampaign,visible:!$root.isDisplayCouponsAds()">
                     Create New Campaign
@@ -369,6 +366,9 @@ else
         }
         $(document).ready(function () {
          
+            $("#main_btnPannels").css("display", "none");
+            $("#MarketobjDiv").css("display", "none");
+            $(".hideInCoupons").css("display", "none");
             var modeLoc = GetURLParameter("mode");
             if(modeLoc == 1)
             {

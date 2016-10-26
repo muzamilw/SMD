@@ -11,7 +11,9 @@
     string userName = companyClaimValues != null && companyClaimValues.Any() ? companyClaimValues.ElementAt(0).UserName : "Claim not found";
     string MobileNo = companyClaimValues != null && companyClaimValues.Any() ? companyClaimValues.ElementAt(0).MobileNumber : "Claim not found";
     string CompanyID = companyClaimValues != null && companyClaimValues.Any() ? companyClaimValues.ElementAt(0).CompanyId.ToString() : "Claim not found";
+    
     string Email = companyClaimValues != null && companyClaimValues.Any() ? companyClaimValues.ElementAt(0).Email : "Claim not found";
+    
     IEnumerable<SmdRoleClaimValue> roleClaim = ClaimHelper.GetClaimsByType<SmdRoleClaimValue>(SmdClaimTypes.Role);
 
     string RoleName = roleClaim != null && roleClaim.Any() ? roleClaim.ElementAt(0).Role : "Role Not Loaded";
@@ -376,7 +378,7 @@
 
 
                                     <div class="panel_Image">
-                                        <img src="/Content/Images/Dealsuicon.png" />
+                                        <img src="/Content/Images/Deals_Small.png" />
                                         
                                     </div>
 
@@ -416,7 +418,7 @@
                                 <br>
                                 <div class="pg videopanel" id="content_div">
                                     <div class="panel_Image">
-                                        <img  src="/Content/Images/Videosuicon.png" />
+                                        <img src="/Content/Images/Videos_small.png" />
                                     </div>
                                     <div class="Dealdescription_panel">
                                         <div>
@@ -456,7 +458,7 @@
                                 <br>
                                 <div class="pg displayadspanel" id="content_div">
                                     <div class="panel_Image">
-                                        <img  src="/Content/Images/Games_icon.png" />
+                                        <img src="/Content/Images/Display_small.png" />
                                     </div>
                                     <div class="Dealdescription_panel" >
                                         <div>
@@ -494,7 +496,7 @@
                                 <br>
                                 <div class="pg pollspanel" id="content_div">
                                     <div class="panel_Image">
-                                        <img src="/Content/Images/Poll_icon.png" />
+                                        <img src="/Content/Images/Polls_small.png" />
                                     </div>
                                     <div class="Dealdescription_panel">
                                         <div>
@@ -531,7 +533,7 @@
                                 <br>
                                 <div class="pg surveypanel" id="content_div">
                                     <div class="panel_Image">
-                                        <img  src="/Content/Images/Surveys_icon.png" />
+                                        <img src="/Content/Images/Surveys_small.png" />
                                     </div>
                                     <div class="Dealdescription_panel">
                                         <div>
@@ -798,83 +800,104 @@
 
 
 
-            $(".dealspanel").hover(function(){
+            $("#deals_btn").hover(function(){
 
                 $(this).find(".panel_Image").hide();
 
                 $(this).find(".Dealdescription_panel").show();
+
+                $(this).find("#deal_heading").css("color","#fff");
                 
+                $(this).find(".plus_btn").css("cssText", "color:#fff!important;");
+               
               
             },function(){
              
                 $(this).find(".panel_Image").show();
 
                 $(this).find(".Dealdescription_panel").hide();
+                $(this).find("#deal_heading").css("color","rgb(103, 103, 103)");
+              
+                $(this).find(".plus_btn").css("cssText", "color:rgb(103, 103, 103)!important;");
             });
 
 
 
-            $(".videopanel").hover(function(){
+            $("#video_ads_btn").hover(function(){
 
                 $(this).find(".panel_Image").hide();
 
                 $(this).find(".Dealdescription_panel").show();
-                
-               // $(this).find(".videopanel").css("cssText", "padding-top:0px!important;");
+                $(this).find("#video_heading").css("color","#fff");
+                // $(this).find(".videopanel").css("cssText", "padding-top:0px!important;");
+
+                $(this).find(".plus_btn").css("cssText", "color:#fff!important;");
 
             },function(){
              
                 $(this).find(".panel_Image").show();
 
                 $(this).find(".Dealdescription_panel").hide();
-              //  $(this).find(".videopanel").css("cssText", "padding-top:15px;");
+                $(this).find("#video_heading").css("color","rgb(103, 103, 103)");
+                //  $(this).find(".videopanel").css("cssText", "padding-top:15px;");
+                $(this).find(".plus_btn").css("cssText", "color:rgb(103, 103, 103)!important;");
             });
 
 
 
-            $(".displayadspanel").hover(function(){
+            $("#display_ads_btn").hover(function(){
 
                 $(this).find(".panel_Image").hide();
 
                 $(this).find(".Dealdescription_panel").show();
-                
+                $(this).find("#display_heading").css("color","#fff");
+                $(this).find(".plus_btn").css("cssText", "color:#fff!important;");
               
             },function(){
              
                 $(this).find(".panel_Image").show();
 
                 $(this).find(".Dealdescription_panel").hide();
+                $(this).find("#display_heading").css("color","rgb(103, 103, 103)");
+                $(this).find(".plus_btn").css("cssText", "color:rgb(103, 103, 103)!important;");
             });
 
 
-            $(".pollspanel").hover(function(){
+            $("#Polls_btn").hover(function(){
+                $(this).find(".plus_btn").css("cssText", "color:#fff!important;");
 
                 $(this).find(".panel_Image").hide();
 
                 $(this).find(".Dealdescription_panel").show();
-                
+                $(this).find("#polls_heading").css("color","#fff");
               
             },function(){
              
                 $(this).find(".panel_Image").show();
 
                 $(this).find(".Dealdescription_panel").hide();
+                $(this).find("#polls_heading").css("color","rgb(103, 103, 103)");
+                $(this).find(".plus_btn").css("cssText", "color:rgb(103, 103, 103)!important;");
             });
 
 
 
-            $(".surveypanel").hover(function(){
+            $("#surveyQuestion_btn").hover(function(){
 
                 $(this).find(".panel_Image").hide();
 
                 $(this).find(".Dealdescription_panel").show();
-                
+                $(this).find("#surveysheading").css("color","#fff");
+                $(this).find("#polls_heading").css("color","#fff");
+                $(this).find(".plus_btn").css("cssText", "color:#fff!important;");
               
             },function(){
              
                 $(this).find(".panel_Image").show();
 
                 $(this).find(".Dealdescription_panel").hide();
+                $(this).find("#surveysheading").css("color","rgb(103, 103, 103)");
+                $(this).find(".plus_btn").css("cssText", "color:rgb(103, 103, 103)!important;");
             });
 
             $('.play_btn').hover(function () {
@@ -894,8 +917,17 @@
              $(this).css("cssText", "color:#676767!important;");
 
          });
-        });
 
+
+
+
+
+         
+        });
+        function GotoHome()
+        {
+            window.location.href = "/";
+        }
         function GoToDeals()
         {
             window.location.href = "/Coupons/Coupons";

@@ -27,6 +27,8 @@ define("ads/ads.viewModel",
                     TemporarySurveyList = ko.observableArray([]),
                     BuyItStatus = ko.observable(false),
                     showLandingPageUrl = ko.observable(false),
+                    StatusCodeName = ko.observable(''),
+                    StatusCodeImage = ko.observable(''),
                     countoryidList = [],
                     cityidList = [],
                     langidList = [],
@@ -393,7 +395,7 @@ define("ads/ads.viewModel",
                 $("#MarketobjDiv").css("display", "none");
                 $("#topArea").css("display", "none");
                 $("#headlabel,#headdesc").css("display", "none");
-
+                $(".closecls").css("display", "none");
                 collapseMainMenu();
                 TodisplayImg(true);
                 openEditScreen(1);
@@ -480,10 +482,10 @@ define("ads/ads.viewModel",
                             $("#headlabel, #Heading_div").css("display", "block");
 
                             $("#panelArea,#headdesc").css("display", "block");
+                            $(".closecls").css("display", "block");
                             //show the main menu;
                             showMainMenu();
                             logoImage = '';
-
 
                         }
                         else {
@@ -516,10 +518,11 @@ define("ads/ads.viewModel",
                         $("input,button,textarea,a,select").removeAttr('disabled');
                         $("#headlabel").css("display", "block");
 
-                        $(".hideInCoupons").css("display", "block");
+                        $(".hideInCoupons").css("display", "none");
 
-                        $("#MarketobjDiv").css("display", "block");
+                        $("#MarketobjDiv").css("display", "none");
                         $("#topArea,#headdesc").css("display", "block");
+                        $(".closecls").css("display", "block");
                     });
 
                     confirmation.show();
@@ -561,12 +564,13 @@ define("ads/ads.viewModel",
                 }
                 isFromEdit(false);
                 $("#panelArea").css("display", "block");
-                $(".hideInCoupons").css("display", "block");
+                $(".hideInCoupons").css("display", "none");
 
-                $("#MarketobjDiv").css("display", "block");
+                $("#MarketobjDiv").css("display", "none");
                 $("#topArea").css("display", "block");
                 $("#headlabel").css("display", "block");
-                $("#headdesc").css("display", "block")
+                $("#headdesc").css("display", "block");
+                $(".closecls").css("display", "block");
 
             },
 
@@ -1665,6 +1669,7 @@ define("ads/ads.viewModel",
 
                     $("#Heading_div").css("display", "none");
 
+                    $(".closecls").css("display", "none");
 
                     if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == 6 || item.Status() == null || item.Status() == 7 || item.Status() == 9) {
                         collapseMainMenu();
@@ -3191,11 +3196,18 @@ define("ads/ads.viewModel",
                         tab4SubHeading("Select your game campaign delivery mode:");
                         UrlHeadings("Leatherboard banner click thru url to your landing  page.");
                         DisplayImage(true);
+                        StatusCodeName("Display Ad");
+                        StatusCodeImage("/Content/Images/Display_small.png");
+                        
                     }
                     else {
                         UrlHeadings("Direct viewers to a landing page at the end of your video ad.");
                         IsShownforVideo(true);
                         VideoImage(true);
+
+                        StatusCodeName("Display Ad");
+
+                        StatusCodeImage("/Content/Images/Videos_small.png");
                     }
                     view = specifiedView;
                     ko.applyBindings(view.viewModel, view.bindingRoot);
@@ -3411,7 +3423,9 @@ define("ads/ads.viewModel",
                     CampaignROItblAnalyticData: CampaignROItblAnalyticData,
                     hideLandingPageURl: hideLandingPageURl,
                     VideoImage: VideoImage,
-                    DisplayImage: DisplayImage
+                    DisplayImage: DisplayImage,
+                    StatusCodeName: StatusCodeName,
+                    StatusCodeImage: StatusCodeImage
                 };
             })()
         };

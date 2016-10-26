@@ -19,7 +19,7 @@
                     <div class="col-xs-12" style="text-align: right; padding-right:0;margin-bottom:10px;">
                         <button style="display:none;" class="btn  btn-info" id="saveBtn" data-bind="click:$root.onSaveProfileQuestion, enable: $root.hasChangesOnQuestion, css: { 'btn-warning': $root.hasChangesOnQuestion }">Save</button>
 
-                        <img data-bind="click: $root.closeEditDialog" src="/Content/Images/Close_Button.png" style="width:27px;height:27px;float:right;cursor:pointer;">
+                        <img data-bind="click: $root.closeEditDialog" src="/Content/Images/Close_Button.png" style="width:20px;height:20px;float:right;cursor:pointer;">
                     </div>
                 </div>
             </div>
@@ -85,10 +85,10 @@
                                 <span>Preview</span>
                             </a>
                         </div>
-                        <div class="pull-left" style="width:617px;">
+                        <div class="pull-left" style="width:515px;">
                             <div>
-                                <div class="pull-right ads-numbering-main" style="width:99px;
-    border-left: 1px solid rgb(220,220,220);
+                                <div class="pull-right ads-numbering-main" style="width:103px;
+    border-right: 1px solid rgb(220,220,220);
     padding-left: 32px;
     text-align: left;">
                                     <a data-toggle="modal" data-bind="click:$root.openAdvertiserDashboardSurvayScreen">
@@ -101,8 +101,34 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="statusDiv" class="pull-left" style="width:138px;text-align: right; padding-top: 71px;height: auto;">
-                            <span style="font-size:16px;color:black;margin-right:2px;">Status</span><span>:</span><span style="font-size:16px;color:black;margin-left:2px;" data-bind="text:statusValue()"></span>
+                       
+
+                        <div id="statusDiv" class="pull-left statusesdiv">
+
+                            <div class="pull-left">
+                                <div>
+                                    <span class="datespanheader">Survey</span>
+                                </div>
+
+                                <div class="datespansclr">
+                                    Date created: <span style="margin-left:3px"></span><span>12 april 2014</span>
+                                </div>
+                                <div class="datespansclr">
+                                    Date modified: <span style="margin-left:3px"></span><span>12 april 2014</span>
+                                </div>
+
+                                <br>
+
+                                <span style="font-size:16px;color:black;margin-left:2px;" data-bind="text:statusValue()">Draft</span>
+                            </div>
+                            <div class="pull-right">
+
+                                <img class="vid_image" src="/Content/Images/Surveys_small.png" style="display: block;">
+
+                            </div>
+
+
+
                         </div>
                         <div class="clearfix"></div>
                     </div>
