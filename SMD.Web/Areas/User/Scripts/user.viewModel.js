@@ -142,7 +142,12 @@ define("user/user.viewModel",
                                }
                            });
                    },
-
+                   onCloseClick =function() 
+                   {
+                   
+                       $("#MarketobjDiv").css("display", "block");
+                       $("#topArea").css("display", "block");
+                   },
                    // Update City DD on country change 
                    updateCities = function (cityId) {
                        if (!selectedUser().countryId()) {
@@ -443,7 +448,8 @@ define("user/user.viewModel",
                     InviteEmail: InviteEmail,
                     onRemoveUser: onRemoveUser,
                     onEditManagedUser : onEditManagedUser,
-                    SelectedMangeUser: SelectedMangeUser
+                    SelectedMangeUser: SelectedMangeUser,
+                    onCloseClick: onCloseClick,
                 };
             })()
         };

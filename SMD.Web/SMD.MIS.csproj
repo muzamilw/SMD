@@ -761,6 +761,7 @@
     <Content Include="Areas\ProfileQuestion\Views\Manage\_advertProfileQuestionAnalytic.cshtml" />
     <Content Include="Areas\Franchise\Views\RegisterUsers\UsersDashboard.cshtml" />
     <Content Include="Areas\Franchise\Views\RegisterUsers\_registeredUserEditor.cshtml" />
+    <Content Include="Areas\Report\Views\Report\ReferAdvertises.cshtml" />
     <None Include="config\Web.connectionstrings.config">
       <SubType>Designer</SubType>
     </None>
