@@ -173,7 +173,7 @@
 
             @*content wrapper goes here*@
             <div style="margin-top:20px;margin-left:12px;" id="divApprove">
-                <span style="font-weight:bold;color:#7f8c8d;font-size:14px;">Approve or Rejected</span>
+                <span style="color:#ffffff;font-size:24px;">Approve or Reject</span>
 
             </div>
            
@@ -192,20 +192,22 @@
                         <div class="col-sm-12 pull-left">
 
                             <a class="btn btn-default btn-gray " aria-expanded="false" style="padding-top:16px;" id="btnDealsApprov" href="~/Franchise/Dashboard/CouponsAproval">
-                                Deals(<label id="couponCount"> </label>)
+                                Deals <br /><br /><label style="font-size:30px;font-weight:bold" id="couponCount"> </label>
                             </a>
                            
                             <a class="btn btn-default btn-gray " aria-expanded="false" style="padding-top:16px;" id="btnVideaAddApprov" href="~/Franchise/Dashboard/AddAproval?adType=1">
-                                Video Ads(<label id="vidioAdCount"> </label>)
-                            </a>
+                                Video Ads<br /><br /><label style="font-size:30px;font-weight:bold" id="vidioAdCount"></label></a>
                             <a class="btn btn-default btn-gray " aria-expanded="false" style="padding-top:16px;" id="btnsponserGameApprov" href="~/Franchise/Dashboard/AddAproval?adType=4">
-                                Display Ads(<label id="displayAdCount"> </label>)
+                                Display Ads<br /><br /><label style="font-size:30px;font-weight:bold" id="displayAdCount"></label>
+                                
                             </a>
                             <a class="btn  btn-default btn-gray " aria-expanded="false" style="padding-top:16px;" id="btnPollsApprov" href="~/Franchise/Dashboard/SurveyQuestionApproval">
-                                Polls(<label id="surveyCount"> </label>)
+                                Polls<br /><br /><label style="font-size:30px;font-weight:bold" id="surveyCount"></label>
+                                
                             </a>
                             <a class="btn btn-default btn-gray " aria-expanded="false" style="padding-top:16px;" id="btnSurveyApprove" href="~/Franchise/Dashboard/ProfileQuestionApproval">
-                                Surveys(<label id="profileCount"> </label>)
+                                Surveys<br /><br /><label style="font-size:30px;font-weight:bold" id="profileCount"></label>
+                                
                             </a>
                             @*<a class="btn btn-default btn-gray " aria-expanded="false" id="btnTransferRates" style="padding-top:16px;" href="~/Franchise/Dashboard/TransferRateDashboard">
                                 Transfers
@@ -213,7 +215,7 @@
                             <a class="btn btn-default btn-gray " aria-expanded="false" id="btnAppUsers" style="padding-top:16px;" href="~/Franchise/RegisterUsers/UsersDashboard">
                                 App Users
                             </a>
-                            <a class="btn btn-default btn-gray " aria-expanded="false" id="btnAprroveTransfer" style="padding-top:16px;" href="~/Franchise/ApprovePayPal/PayPalDashboard">
+                            <a class="btn btn-default btn-gray " aria-expanded="false" id="btnAprroveTransfer" style="padding-top:16px; display:none" href="~/Franchise/ApprovePayPal/PayPalDashboard">
                                 Pay Out
                             </a>
 
@@ -232,7 +234,7 @@
 
                                 </ul>
                                 </div>
-                            <div class="btn-group">
+                            <div class="btn-group" style="display:none">
                                 <button type="button" class="btn btn-default btn-gray dropdown-toggle" id="btnManageApprov" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Manage <span class="caret"></span>
                                 </button>
@@ -333,7 +335,7 @@
             </div>
             <footer id="footer-bar" class="row">
                 <p id="footer-copyright" class="col-xs-12">
-                    &copy; @DateTime.Now.Year Powered by CrowdCentz Ltd (UK)
+                    © Copyright  @DateTime.Now.Year Cash4Ads Inc. USA. All Rights Reserved.
                 </p>
             </footer>
         </div>
