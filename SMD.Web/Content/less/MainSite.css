@@ -1287,6 +1287,77 @@ div#spinner {
         width: 125px;
     height: 86px;
 }
+.potentreachclr {
+    color:#5fb761!important;
+}
+.margintop13 {
+    margin-top:13px;
+}
+.filterbloclkspos {
+margin-top:2px;
+}
+.panelbtnImg {
+    background-color:#127abd;
+}
+.dealsImage {
+         height: 36px;
+    margin-right: 4px;
+    width: 34px;
+
+}
+.vid_image {
+    height:60px;
+    width: 60px;
+}
+.defvideoimage {
+    height: 48px;
+    width: 59px;
+}
+.Game_image {
+   
+    height: 32px;
+   
+    width: 37px;
+}
+.polls_image {
+       
+    height: 32px;
+    width: 37px;
+    
+}
+.width80percent {
+    width:80%!important;
+}
+.closecls {
+    height:20px;
+   
+     width:20px;
+}
+.statusesdiv {
+    width: 258px;
+    text-align: left;
+    padding-left: 20px;
+}
+.datespansclr {
+    color:gainsboro;
+    font-style: italic;
+    font-size:12px;
+}
+
+.datespanheader {
+    font-size:21px;
+    color:#7f8c8d ;
+}
+.dealsstatus_img {
+        height: 60px;
+    width:60px;
+}
+.pollsstatus_img {
+        height:60px;
+    width: 60px;
+}
+.backgroundbtn {
+}
 /*.videopanel,.displayadspanel {
     padding-top:15px;
 }*/

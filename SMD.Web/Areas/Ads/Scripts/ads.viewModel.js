@@ -17,6 +17,8 @@ define("ads/ads.viewModel",
                     buyItQuestionStatus = ko.observable(false),
 					isAdvertdashboardVisible = ko.observable(false),
                     hideLandingPageURl = ko.observable(false),
+                    VideoImage = ko.observable(false),
+                    DisplayImage = ko.observable(false),
                     ButItOtherLabel = ko.observable(''),
                     langs = ko.observableArray([]),
                     TemporaryList = ko.observableArray([]),
@@ -25,6 +27,8 @@ define("ads/ads.viewModel",
                     TemporarySurveyList = ko.observableArray([]),
                     BuyItStatus = ko.observable(false),
                     showLandingPageUrl = ko.observable(false),
+                    StatusCodeName = ko.observable(''),
+                    StatusCodeImage = ko.observable(''),
                     countoryidList = [],
                     cityidList = [],
                     langidList = [],
@@ -165,15 +169,21 @@ define("ads/ads.viewModel",
 				CampaignStatusDropDown = ko.observableArray([{ id: 1, name: "Answered" }, { id: 2, name: "Referred" }, { id: 3, name: "Skipped" }]),
 				CampaignTblAnalyticsData = ko.observableArray([]),
 				openAdvertiserDashboardScreen = function (Campaign) {
+				 
+				    if (!isNewCampaign()) {
+				        selectedCampaignIdAnalytics(Campaign.CampaignID());
+				        getAdsByCampaignIdAnalytics();
+				        $("#ddGranularityDropDown").removeAttr("disabled");
+				        $("#ddDateRangeDropDown").removeAttr("disabled");
+				        $("#ddCampaignStatusDropDown").removeAttr("disabled");
 
-				    selectedCampaignIdAnalytics(Campaign.CampaignID());
-				    getAdsByCampaignIdAnalytics();
-				    $("#ddGranularityDropDown").removeAttr("disabled");
-				    $("#ddDateRangeDropDown").removeAttr("disabled");
-				    $("#ddCampaignStatusDropDown").removeAttr("disabled");
 
+				        isAdvertdashboardVisible(true);
+				    }
+				    else {
+				        confirmation.showOKpopupforChart();
 
-				    isAdvertdashboardVisible(true);
+				    }
 				},
 				getAdsByCampaignIdAnalytics = function () {
 				    dataservice.getAdsByCampaignIdAnalytics({
@@ -385,7 +395,7 @@ define("ads/ads.viewModel",
                 $("#MarketobjDiv").css("display", "none");
                 $("#topArea").css("display", "none");
                 $("#headlabel,#headdesc").css("display", "none");
-
+                $(".closecls").css("display", "none");
                 collapseMainMenu();
                 TodisplayImg(true);
                 openEditScreen(1);
@@ -472,10 +482,10 @@ define("ads/ads.viewModel",
                             $("#headlabel, #Heading_div").css("display", "block");
 
                             $("#panelArea,#headdesc").css("display", "block");
+                            $(".closecls").css("display", "block");
                             //show the main menu;
                             showMainMenu();
                             logoImage = '';
-
 
                         }
                         else {
@@ -508,10 +518,11 @@ define("ads/ads.viewModel",
                         $("input,button,textarea,a,select").removeAttr('disabled');
                         $("#headlabel").css("display", "block");
 
-                        $(".hideInCoupons").css("display", "block");
+                        $(".hideInCoupons").css("display", "none");
 
-                        $("#MarketobjDiv").css("display", "block");
+                        $("#MarketobjDiv").css("display", "none");
                         $("#topArea,#headdesc").css("display", "block");
+                        $(".closecls").css("display", "block");
                     });
 
                     confirmation.show();
@@ -553,12 +564,13 @@ define("ads/ads.viewModel",
                 }
                 isFromEdit(false);
                 $("#panelArea").css("display", "block");
-                $(".hideInCoupons").css("display", "block");
+                $(".hideInCoupons").css("display", "none");
 
-                $("#MarketobjDiv").css("display", "block");
+                $("#MarketobjDiv").css("display", "none");
                 $("#topArea").css("display", "block");
                 $("#headlabel").css("display", "block");
-                $("#headdesc").css("display", "block")
+                $("#headdesc").css("display", "block");
+                $(".closecls").css("display", "block");
 
             },
 
@@ -1457,7 +1469,7 @@ define("ads/ads.viewModel",
 
                                 profileAnswerList.valueHasMutated();
 
-                                $(".listview").scrollTop(y + 60);
+                                $(".listview").scrollTop(y +40);
                             }
 
                         },
@@ -1657,6 +1669,7 @@ define("ads/ads.viewModel",
 
                     $("#Heading_div").css("display", "none");
 
+                    $(".closecls").css("display", "none");
 
                     if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == 6 || item.Status() == null || item.Status() == 7 || item.Status() == 9) {
                         collapseMainMenu();
@@ -3171,6 +3184,7 @@ define("ads/ads.viewModel",
 
                 // Initialize the view model
                 initialize = function (specifiedView) {
+                    
                     if (mode == 4) {
                         MainHeading("Sponsor an app ‘brain game’.");
                         SubHeading("Reward audiences 50% of your ‘ad click’Drive people to your web site, ask a reinforcing question and show your deals –All for one ‘ad click’ fee.");
@@ -3181,10 +3195,19 @@ define("ads/ads.viewModel",
                         tab2Heading("Define the target audience to deliver game ad.");
                         tab4SubHeading("Select your game campaign delivery mode:");
                         UrlHeadings("Leatherboard banner click thru url to your landing  page.");
+                        DisplayImage(true);
+                        StatusCodeName("Display Ad");
+                        StatusCodeImage("/Content/Images/Display_small.png");
+                        
                     }
                     else {
                         UrlHeadings("Direct viewers to a landing page at the end of your video ad.");
                         IsShownforVideo(true);
+                        VideoImage(true);
+
+                        StatusCodeName("Display Ad");
+
+                        StatusCodeImage("/Content/Images/Videos_small.png");
                     }
                     view = specifiedView;
                     ko.applyBindings(view.viewModel, view.bindingRoot);
@@ -3398,7 +3421,11 @@ define("ads/ads.viewModel",
                     CampaignTblAnalyticsData: CampaignTblAnalyticsData,
                     isClickRateVisible: isClickRateVisible,
                     CampaignROItblAnalyticData: CampaignROItblAnalyticData,
-                    hideLandingPageURl: hideLandingPageURl
+                    hideLandingPageURl: hideLandingPageURl,
+                    VideoImage: VideoImage,
+                    DisplayImage: DisplayImage,
+                    StatusCodeName: StatusCodeName,
+                    StatusCodeImage: StatusCodeImage
                 };
             })()
         };

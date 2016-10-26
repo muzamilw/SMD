@@ -430,7 +430,7 @@ define("Coupons/Coupons.viewModel",
 
             $("#MarketobjDiv").css("display", "none");
             $("#topArea").css("display", "none");
-
+            $(".closecls").css("display", "none");
 
             $("#Heading_div").css("display", "none");
 
@@ -818,7 +818,7 @@ define("Coupons/Coupons.viewModel",
 
               },
             onEditCampaign = function (item) {
-                debugger;
+              
                 EditorLoading(true);
                 //resetting flags
                 IsSubmitBtnVisible(false);
@@ -844,6 +844,7 @@ define("Coupons/Coupons.viewModel",
                 $("#panelArea").css("display", "none");
 
                 $("#Heading_div").css("display", "none");
+                $(".closecls").css("display", "none");
 
                 ShowImages(item);
 
@@ -2065,14 +2066,13 @@ define("Coupons/Coupons.viewModel",
             }
             ,
             CloseContent = function () {
-                $(".hideInCoupons").css("display", "block");
+                $(".hideInCoupons").css("display", "none");
                 $("#MarketobjDiv").css("display", "block");
 
                 $("#topArea").css("display", "block");
                 $("#Heading_div").css("display", "block");
-
-                couponModel();
-                selectedCriteria();
+                $(".closecls").css("display", "block");
+                
                 isEditorVisible(false);
                 CloseCouponsAnalyticView();
                 if (isFromEdit() == true) {

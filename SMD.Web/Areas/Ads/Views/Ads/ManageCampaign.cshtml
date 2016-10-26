@@ -28,7 +28,7 @@ else
                 <div class="col-lg-3" style="padding:0px;">
                     @*<div style="margin-top:-5px;float:right;background:url(/Content/Images/Close_Button.png);background-repeat: no-repeat;width:40px;height:40px;border: 0;"><button style="margin-top:9px;" id="MainBtnClose" data-bind="click: $root.closeNewCampaignDialog" class="btn btn-default CloseBtn">Close</button></div>*@
 
-                    <img data-bind="click: $root.closeNewCampaignDialog" src="/Content/Images/Close_Button.png" style="width:27px;height:27px;float:right;cursor:pointer;" />
+                    <img data-bind="click: $root.closeNewCampaignDialog" src="/Content/Images/Close_Button.png" style="width:20px;height:20px;float:right;cursor:pointer;margin-top:17px;" />
 
                     <div style="clear:both;"></div>
                 </div>
@@ -102,12 +102,12 @@ else
                                     &nbsp;
                                 </div>
 
-                                <div class="pull-left" style="width:450px;">
+                                <div class="pull-left" style="width:349px;">
                                     <div>
-                                        <div class="pull-right ads-numbering-main" style="width:99px;
-                                    border-left: 1px solid rgb(220,220,220);
+                                        <div class="pull-right ads-numbering-main" style="width:107px;
+                                    border-right: 1px solid rgb(220,220,220);
                                     padding-left: 32px;
-                                    text-align: left;">
+                                    text-align: left;height:108px;">
                                             <a data-toggle="modal" data-bind="click:$root.openAdvertiserDashboardScreen">
                                                 <div class="ads-numbering-box" style="background:#9690cf;">
                                                     <img src="~/Content/Images/Charts.png" width="20px" />
@@ -118,10 +118,32 @@ else
                                         </div>
                                     </div>
                                 </div>
-                                <div id="statusDiv" class="pull-left" style="width:140px;text-align: right; padding-top: 71px;height: auto;">
+                                <div id="statusDiv" class="pull-left statusesdiv">
+
+                                    <div class="pull-left">
+                                        <div>
+                                            <span class="datespanheader">Video</span>
+                                        </div>
+
+                                        <div class="datespansclr">
+                                            Date created: <span style="margin-left:3px"></span><span>12 april 2014</span>
+                                        </div>
+                                        <div class="datespansclr">
+                                            Date modified: <span style="margin-left:3px"></span><span>12 april 2014</span>
+                                        </div>
+                               
+                                        <br />
+                                       
+                                        <span style="font-size:16px;color:black;margin-left:2px;" data-bind="text:StatusValue()"></span>
+                                    </div>
+                                    <div class="pull-right">
+
+                                        <img class="vid_image" data-bind="attr: { src: $root.StatusCodeImage }" /> 
+
+                                    </div>
+                                  
 
 
-                                    <span style="font-size:16px;color:black;margin-right:2px;">Status</span><span>:</span><span style="font-size:16px;color:black;margin-left:2px;" data-bind="text:StatusValue()"></span>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -279,7 +301,7 @@ else
                                             <label for="txtCampaignDisplayName" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn" data-bind="text:$root.lblAdTitle">Campaign Title</label>
                                         </div>
                                         <div class="col-lg-7">
-                                            <input type="text" maxlength="76" name="Campaign Display Name" class="form-control" id="txtCampaignDisplayName" placeholder="Campaign title (76 characters)" data-bind="value: CampaignName,validationTooltip: DisplayTitle, validationOnElement: DisplayTitle">
+                                            <input type="text" maxlength="76" name="Campaign Display Name" class="form-control width80percent" id="txtCampaignDisplayName" placeholder="Campaign title (76 characters)" data-bind="value: CampaignName,validationTooltip: DisplayTitle, validationOnElement: DisplayTitle">
                                         </div>
                                         <div class="col-lg-1" data-bind="visible:!$root.isDisplayCouponsAds()" style="  text-align: right;
     font-size: 17px;
@@ -399,7 +421,7 @@ else
                                                 <label for="txtBuyItLine1" class="control-label text-right tooltip-float floatNone">Call for action</label>
                                             </div>
                                             <div class="col-lg-8">
-                                                <input style="width:420px!important;" type="text" class="form-control" id="txtBuyItLine1" placeholder="Shown after video (72 characters)" data-bind="value: BuuyItLine1" maxlength="72">
+                                                <input style="width:70%!important;" type="text" class="form-control width80percent" id="txtBuyItLine1" placeholder="Shown after video (72 characters)" data-bind="value: BuuyItLine1" maxlength="72">
                                             </div>
                                         </div>
 
@@ -408,7 +430,7 @@ else
                                                 <label for="txtBuyItlbl" class="control-label text-right tooltip-float floatNone">Button</label>
                                             </div>
                                             <div class="col-lg-10">
-                                                <select style="width:420px!important;" id="ddTextBtns" class="form-control" data-bind="options: $root.DefaultTextBtns, optionsText: 'name', optionsValue: 'id',event:{ change: $root.handleBuyIt}"></select>
+                                                <select style="width:56%!important;" id="ddTextBtns" class="form-control " data-bind="options: $root.DefaultTextBtns, optionsText: 'name', optionsValue: 'id',event:{ change: $root.handleBuyIt}"></select>
                                             </div>
                                         </div>
                                         
@@ -418,7 +440,7 @@ else
                                                     <label for="txtBuyItlbl" class="control-label text-right tooltip-float floatNone">Custom button</label>
                                                 </div>
                                                 <div class="col-lg-8">
-                                                    <input style="width:420px!important;" type="text" class="form-control txtBuyItlbl" data-bind="value:BuyItButtonLabel" id="txtBuyItlbl" placeholder="(12 characters)" maxlength="12">
+                                                    <input style="width:70%!important;" type="text" class="form-control txtBuyItlbl width80percent" data-bind="value:BuyItButtonLabel" id="txtBuyItlbl" placeholder="(12 characters)" maxlength="12">
                                                 </div>
                                             </div>
                                         </div>
@@ -428,10 +450,10 @@ else
                                             <div class="col-lg-2">
                                                 <label for="txtBuyItUrl" class="control-label text-right tooltip-float floatNone">Landing page url </label>
                                             </div>
-                                            <div class="col-lg-7">
-                                                <textarea style="width:420px!important;margin-top:5px;resize:none" class="form-control" id="urlBx" rows="1" placeholder="Enter in landing page url " data-bind="value:LandingPageVideoLink"></textarea>
+                                            <div class="col-lg-6">
+                                                <textarea style="width:94%!important;margin-top:5px;resize:none" class="form-control" id="urlBx" rows="1" placeholder="Enter in landing page url " data-bind="value:LandingPageVideoLink"></textarea>
                                             </div>
-                                            <div class="col-lg-3">
+                                            <div class="col-lg-4" style="padding-top:3px;">
                                                 <button style="width:123px;height:33px;" class="btn  btn-success gtild-color urlbtn" id="btnNext" onclick="openUrl();">Test URL Link</button>
                                             </div>
                                         </div>
@@ -973,7 +995,7 @@ else
                                     </div>
 
                                     <div style="text-align:right;padding-right:22px">
-                                        <span style="color:#9690cf;margin-left:100px;" data-bind="text:$root.ShowAudienceCounter()">0</span><span style="color:#7f8c8d !important;margin-left:4px;">people</span>
+                                        <span class="potentreachclr" style="margin-left:100px;" data-bind="text:$root.ShowAudienceCounter()">0</span><span style="color:#7f8c8d !important;margin-left:4px;">people</span>
                                     </div>
 
 
@@ -992,7 +1014,7 @@ else
                                                     <span style="color:black !important;float:left;" class="panelfntSize">Potential Reach</span>
                                                 </div>
                                                 <div class="col-lg-5" style="padding-right:36px;padding-left:0px;text-align:right;">
-                                                    <span class="panelfntSize" style="color:#9690cf;" data-bind="text:$root.ShowAudienceCounter()">1112</span>
+                                                    <span class="panelfntSize potentreachclr" data-bind="text:$root.ShowAudienceCounter()">1112</span>
                                                 </div>
                                             </div>
 
@@ -1006,7 +1028,7 @@ else
 
                                                 <div class="col-lg-7" style="padding-top:3px;">
                                                     <div class="col-lg-8">
-                                                        <span class="text-campaign-left panelfntSize" style="margin-top:-4px;">Ad click</span>
+                                                        <span class="text-campaign-left panelfntSize" style="margin-top:-4px;">Pay Per Result(PPR)</span>
 
                                                     </div>
                                                     <div class="col-lg-4" style="padding-right:0px;text-align:right;">
