@@ -37,12 +37,9 @@
         <div class="row main-box">
             <div class="col-lg-12">
                 <div class=" margin10">
-                    <!-- ko if: $root.selectedCampStatusAnalytics() === 1  -->
-                    <div style="height:200px;" data-bind="morris: {type: 'Line', data: $root.PQAnalyticsData, xkey: 'Granual', ykeys: ['openStats', 'Stats'], labels: ['Opened', 'Answered'], parseTime:false, setAxisAlignFirstX: true, lineColors: ['blue','green'] }"></div>
-                    <!-- /ko -->
-                    <!-- ko if: $root.selectedCampStatusAnalytics() === 2  -->
-                    <div style="height:200px;" data-bind="morris: {type: 'Line', data: $root.PQAnalyticsData, xkey: 'Granual', ykeys: ['openStats', 'Stats'], labels: ['Opened', 'Skipped'], parseTime:false, setAxisAlignFirstX: true, lineColors: ['blue','red'] }"></div>
-                    <!-- /ko -->
+                   
+                    <div style="height:150px;" data-bind="morris: {type: 'Line', data: $root.PQAnalyticsData, xkey: 'Granual', ykeys: ['openStats', 'Stats','SkipStats'], labels: ['Opened', 'Answered','Skipped'], parseTime:false, setAxisAlignFirstX: true, lineColors: ['blue','green','red'] }"></div>
+                   
                   
 
                 </div>
@@ -65,25 +62,12 @@
                 <div>Date range : All time </div>
                 <!--/ko-->
 
-                <div data-bind="morris: {type: 'Donut', data: $root.CampaignRatioAnalyticData, resize:true, colors: ['green', 'blue','red', 'yellow' ,'purple', 'orange' ]  }" style="width:250px;height:250px;padding-left:50px;"></div>
+                <div data-bind="morris: {type: 'Donut', data: $root.CampaignRatioAnalyticData, resize:true, colors: ['green', 'blue','red', 'yellow' ,'purple', 'orange' ]  }" style="width:250px;height:250px;padding-left:50px;cursor:pointer;"></div>
                
             </div>
             <div class="col-lg-5">
-                <table style="margin-top:70px;">
-                    <thead>
-                        <tr>
-                            <th>
-                                &nbsp;
-                            </th>
-                            <th class="padingL15 text-right">
-                                All time
-                            </th>
-                            <th class="padingL15 text-right">
-                                30 days
-                            </th>
-                        </tr>
-                    </thead>
-                    <!-- ko template: { name: 'CampaignTblAnalyticsDataTemplate' , foreach: $root.CampaignTblAnalyticsData } -->
+                <table class="roitbl" style="margin-top:70px;">
+                    <!-- ko template: { name: 'ROITblAnalyticsDataTemplate' , foreach: $root.CampaignROItblAnalyticData } -->
                     <!-- /ko -->
                 </table>
             </div>
@@ -92,7 +76,7 @@
         <div class="row">
             <div class="adsubHeading Theme_standard_clr borderbtmline">
                 <br />
-                Campaign ROI
+                @*Campaign ROI*@
             </div>
         </div>
         <div class="row">
@@ -100,8 +84,22 @@
 
             <div class="col-lg-12">
                 <table class="roitbl" style="">
-                    <!-- ko template: { name: 'ROITblAnalyticsDataTemplate' , foreach: $root.CampaignROItblAnalyticData } -->
+                    <thead>
+                        <tr>
+                            <th class="col-lg-4">
+                                &nbsp;
+                            </th>
+                            <th class="col-lg-4 padingL15 text-right" style="background-color: #eee">
+                                All time
+                            </th>
+                            <th class="col-lg-4 padingL15 text-right">
+                                Last 30 days
+                            </th>
+                        </tr>
+                    </thead>
+                    <!-- ko template: { name: 'CampaignTblAnalyticsDataTemplate' , foreach: $root.CampaignTblAnalyticsData } -->
                     <!-- /ko -->
+                   
                 </table>
             </div>
 
@@ -119,7 +117,7 @@
     <tr>
         <td><span data-bind="text: label"></span></td>
 
-        <td class="padingL15 text-right">
+        <td class="padingL15 text-right" style="background-color: #eee">
             <!-- ko if: ordr === 4  -->
             $
             <!-- /ko -->

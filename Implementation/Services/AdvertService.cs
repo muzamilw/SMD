@@ -54,6 +54,8 @@ namespace SMD.Implementation.Services
 
         private readonly IAdCampaignClickRateHistoryRepository _adCampaignClickRateHistoryRepository;
 
+        private readonly ICampaignEventHistoryRepository campaignEventHistoryRepository;
+
         #region Private Funcs
         private ApplicationUserManager UserManager
         {
@@ -216,7 +218,7 @@ namespace SMD.Implementation.Services
             IStripeService stripeService, WebApiUserService webApiUserService, ICompanyRepository companyRepository, IAdCampaignResponseRepository adcampaignResponseRepository
             , ICouponCategoryRepository couponCategoryRepository
             , ICampaignCategoriesRepository campaignCategoriesRepository
-            , IUserFavouriteCouponRepository userFavouriteCouponRepository, ICurrencyRepository currencyRepository, IAdCampaignClickRateHistoryRepository adCampaignClickRateHistoryRepository)
+            , IUserFavouriteCouponRepository userFavouriteCouponRepository, ICurrencyRepository currencyRepository, IAdCampaignClickRateHistoryRepository adCampaignClickRateHistoryRepository, ICampaignEventHistoryRepository campaignEventHistoryRepository)
         {
             this._adCampaignRepository = adCampaignRepository;
             this._languageRepository = languageRepository;
@@ -244,6 +246,8 @@ namespace SMD.Implementation.Services
             this._userFavouriteCouponRepository = userFavouriteCouponRepository;
             this._currencyRepository = currencyRepository;
             this._adCampaignClickRateHistoryRepository = adCampaignClickRateHistoryRepository;
+
+            this.campaignEventHistoryRepository = campaignEventHistoryRepository;
         }
 
         /// <summary>
@@ -284,6 +288,8 @@ namespace SMD.Implementation.Services
                 objUC.Status = loggedInUser.Status;
 
 
+                objUC.StripeSubscriptionId = company.StripeSubscriptionId;
+                objUC.StripeSubscriptionStatus = company.StripeSubscriptionStatus;
 
 
                 var currency = _countryRepository.Find(company.BillingCountryId.Value).Currency;
@@ -386,13 +392,16 @@ namespace SMD.Implementation.Services
             if (campaignModel.Status == 2)
             {
                 campaignModel.SubmissionDateTime = DateTime.Now;
-
-
-              
             }
+
+          
+
 
             _adCampaignRepository.Add(campaignModel);
             _adCampaignRepository.SaveChanges();
+
+            //event history
+            campaignEventHistoryRepository.InsertCampaignEvent((AdCampaignStatus)campaignModel.Status, campaignModel.CampaignId);
 
             //maintaining click rate history
            
@@ -561,12 +570,12 @@ namespace SMD.Implementation.Services
                 {
                     campaignModel.LogoUrl = paths[7];
                 }
-                else if (campaignModel.LogoUrl.Contains("Content/Images"))
+                else if (campaignModel.LogoUrl != null && campaignModel.LogoUrl.Contains("Content/Images"))
                 {
                     campaignModel.LogoUrl = null;
                 }
 
-                if (campaignModel.LogoUrl.StartsWith("/"))
+                if (campaignModel.LogoUrl!=null && campaignModel.LogoUrl.StartsWith("/"))
                 {
 
                     string path = campaignModel.LogoUrl.Substring(1);
@@ -612,6 +621,10 @@ namespace SMD.Implementation.Services
                 _adCampaignClickRateHistoryRepository.Add(new AdCampaignClickRateHistory { CampaignID = campaignModel.CampaignId, ClickRate = campaignModel.ClickRate, RateChangeDateTime = DateTime.Now });
                 _adCampaignClickRateHistoryRepository.SaveChanges();
             }
+
+
+
+            campaignEventHistoryRepository.InsertCampaignEvent((AdCampaignStatus)campaignModel.Status, campaignModel.CampaignId);
 
 
 
@@ -1253,6 +1266,10 @@ namespace SMD.Implementation.Services
                 dbAd.ModifiedBy = _adCampaignRepository.LoggedInUserIdentity;
 
                 _adCampaignRepository.SaveChanges();
+
+                //event history
+                campaignEventHistoryRepository.InsertCampaignEvent((AdCampaignStatus)dbAd.Status, dbAd.CampaignId);
+
 
                 if (source.Approved != true)
                 {

@@ -67,6 +67,11 @@ namespace SMD.Implementation.Services
             return companyRepository.Find(CompanyId);
         }
 
+        public Company GetCompanyByStripeCustomerId(string StripeCustomerId)
+        {
+            return companyRepository.GetCompanyByStripeCustomerId(StripeCustomerId);
+        }
+
 
         public Company GetCurrentCompany()
         {
@@ -151,6 +156,16 @@ namespace SMD.Implementation.Services
             return true;
 
         }
+
+        public bool UpdateCompany(Company company)
+        {
+
+            companyRepository.updateCompany(company);
+
+            return true;
+
+        }
+
 
         public bool UpdateCompanyProfile(CompanyResponseModel requestData, byte[] logoImageBytes)
         {

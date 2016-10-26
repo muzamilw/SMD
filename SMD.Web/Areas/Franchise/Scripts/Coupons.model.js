@@ -1,7 +1,7 @@
 ﻿define(["ko", "underscore", "underscore-ko"], function (ko) {
 
     var // ReSharper disable InconsistentNaming
-      Coupons = function (coSubBy, coTitle, coCategory, coSwabCost, coSubDate, couponid, coApproved,coRejectedReason, coExpireDate, coImage1, coImage2, coImage3, coLogoUrl, cohighlight1, cohighlight2, cohighlight3, cohighlight4, cohighlight5, coCurrencyId, coPrice
+      Coupons = function (coSubBy, coTitle, coCategory, coSwabCost, coSubDate, couponid, coApproved, coRejectedReason, coExpireDate, coImage1, coImage2, coImage3, coImage4, coImage5, coImage6, coLogoUrl, cohighlight1, cohighlight2, cohighlight3, cohighlight4, cohighlight5, coCurrencyId, coPrice
           , coSavings, couponExpirydate, couponListingMode, coSearchKeywords, couponQtyPerUser, coMonthYear, coFinePrintLine1, coFinePrintLine2, coFinePrintLine3, coFinePrintLine4, coFinePrintLine5, coHowToRedeemLine1, coHowToRedeemLine2
           , coHowToRedeemLine3, coHowToRedeemLine4, coHowToRedeemLine5, coLocationTitle, coLocationLine1, coLocationLine2, coLocationCity, coLocationState, coLocationZipCode, coLocationLAT, coLocationLON, coLocationPhone, coCategories, cobuyItBtnLabel, cobuyitLandingPageUrl, coCompanyId, coUserID) {
           var
@@ -22,6 +22,9 @@
               couponImage1 = ko.observable(coImage1),
               couponImage2 = ko.observable(coImage2),
               couponImage3 = ko.observable(coImage3),
+              couponImage4 = ko.observable(coImage4),
+              couponImage5 = ko.observable(coImage5),
+              couponImage6 = ko.observable(coImage6),
               logoUrl = ko.observable(coLogoUrl.startsWith('http') ? coLogoUrl : '/' + coLogoUrl),
               highlight1 = ko.observable(cohighlight1),
               highlight2 = ko.observable(cohighlight2),
@@ -105,6 +108,9 @@
               couponImage1: couponImage1,
               couponImage2: couponImage2,
               couponImage3: couponImage3,
+              couponImage4: couponImage4,
+              couponImage5: couponImage5,
+              couponImage6:couponImage6,
               logoUrl: logoUrl,
               highlight1: highlight1,
               highlight2: highlight2,
@@ -161,7 +167,7 @@
 
 
         return new Coupons(itemFromServer.CreatedBy, itemFromServer.CouponTitle, itemFromServer.CreatedBy,
-            itemFromServer.SwapCost, itemFromServer.SubmissionDateTime, itemFromServer.CouponId, itemFromServer.Approved,itemFromServer.RejectedReason, itemFromServer.CouponExpirydate, itemFromServer.couponImage1, itemFromServer.CouponImage2, itemFromServer.CouponImage3, itemFromServer.LogoUrl, itemFromServer.HighlightLine1, itemFromServer.HighlightLine2, itemFromServer.HighlightLine3, itemFromServer.HighlightLine4, itemFromServer.HighlightLine5, itemFromServer.CurrencyId, itemFromServer.Price
+            itemFromServer.SwapCost, itemFromServer.SubmissionDateTime, itemFromServer.CouponId, itemFromServer.Approved, itemFromServer.RejectedReason, itemFromServer.CouponExpirydate, itemFromServer.couponImage1, itemFromServer.CouponImage2, itemFromServer.CouponImage3, itemFromServer.CouponImage4, itemFromServer.CouponImage5, itemFromServer.CouponImage6, itemFromServer.LogoUrl, itemFromServer.HighlightLine1, itemFromServer.HighlightLine2, itemFromServer.HighlightLine3, itemFromServer.HighlightLine4, itemFromServer.HighlightLine5, itemFromServer.CurrencyId, itemFromServer.Price
             , itemFromServer.Savings, itemFromServer.CouponExpirydate, itemFromServer.CouponListingMode, itemFromServer.SearchKeywords, itemFromServer.CouponQtyPerUser, GetMonth(itemFromServer.CouponActiveMonth, itemFromServer.CouponActiveYear), itemFromServer.FinePrintLine1, itemFromServer.FinePrintLine2, itemFromServer.FinePrintLine3, itemFromServer.FinePrintLine4, itemFromServer.FinePrintLine5, itemFromServer.HowToRedeemLine1
             , itemFromServer.HowToRedeemLine2, itemFromServer.HowToRedeemLine3, itemFromServer.HowToRedeemLine4, itemFromServer.HowToRedeemLine5, itemFromServer.LocationTitle, itemFromServer.LocationLine1, itemFromServer.LocationLine2, itemFromServer.LocationCity, itemFromServer.LocationState, itemFromServer.LocationZipCode, itemFromServer.LocationLAT, itemFromServer.LocationLON, itemFromServer.LocationPhone, itemFromServer.Categories, itemFromServer.BuyitBtnLabel, itemFromServer.BuyitLandingPageUrl, itemFromServer.CompanyId, itemFromServer.UserId);
     };

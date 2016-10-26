@@ -17,6 +17,7 @@ define("pQuestion/pQuestion.viewModel",
                     langs = ko.observableArray([]),
                     Modelheading = ko.observable(''),
                     IsShowPriceDiv = ko.observable(false),
+                    iSfmodevar = ko.observable(false),
                     surveyQuestionList = ko.observableArray([]),
                     surveyquestionList = ko.observableArray([]),
                     countries = ko.observableArray([]),
@@ -124,7 +125,7 @@ define("pQuestion/pQuestion.viewModel",
 				getSurvayAnalytics = function () {
 				    dataservice.getSurvayAnalytics({
 				        PQId: selectedPQIDAnalytics(),
-				        CampStatus: selectedCampStatusAnalytics(),
+				        CampStatus: 0,
 				        dateRange: selecteddateRangeAnalytics(),
 				        Granularity: selectedGranularityAnalytics(),
 				    }, {
@@ -834,15 +835,15 @@ define("pQuestion/pQuestion.viewModel",
                              //$("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign").removeAttr('disabled');
                          }
                      },
-                   terminateCampaign = function () {
+                   terminateCampaign = function (item) {
                        confirmation.messageText("Are you sure you want to remove this Survey ? This action cannot be undone.");
                        confirmation.show();
                        confirmation.afterCancel(function () {
                            confirmation.hide();
                        });
                        confirmation.afterProceed(function () {
-                           if (selectedQuestion() != undefined)
-                               onSaveProfileQuestion(7);
+                           selectedQuestion(item)
+                           onSaveProfileQuestion(7);
                        });
                    },
 
@@ -1114,9 +1115,13 @@ define("pQuestion/pQuestion.viewModel",
                 },
                 onSaveProfileQuestion = function (mode) {
                     debugger;
-                    if (!doBeforeSavepq()) {
-                        return;
+                    if (mode != 7)
+                    {
+                        if (!doBeforeSavepq()) {
+                            return;
+                        }
                     }
+                   
                     var serverAnswers = [];
                     _.each(selectedQuestion().answers(), function (item) {
                         if (item !== null && typeof item === 'object') {
@@ -2164,6 +2169,7 @@ define("pQuestion/pQuestion.viewModel",
                                 },
                 // Initialize the view model
                 initialize = function (specifiedView) {
+                    iSfmodevar(fmodevar);
                     view = specifiedView;
                     ko.applyBindings(view.viewModel, view.bindingRoot);
                     pager(pagination.Pagination({ PageSize: 10 }, questions, getQuestions));
@@ -2310,7 +2316,8 @@ define("pQuestion/pQuestion.viewModel",
                     CloseSurvayAnalyticView: CloseSurvayAnalyticView,
                     CampaignRatioAnalyticData: CampaignRatioAnalyticData,
                     CampaignTblAnalyticsData: CampaignTblAnalyticsData,
-                    CampaignROItblAnalyticData: CampaignROItblAnalyticData
+                    CampaignROItblAnalyticData: CampaignROItblAnalyticData,
+                    iSfmodevar: iSfmodevar
                 };
             })()
         };

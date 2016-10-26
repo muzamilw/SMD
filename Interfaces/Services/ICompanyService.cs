@@ -16,10 +16,14 @@ namespace SMD.Interfaces.Services
 
         Company GetCompanyById(int CompanyId);
 
+        Company GetCompanyByStripeCustomerId(string StripeCustomerId);
+
         Company GetCurrentCompany();
 
 
         bool UpdateCompany(Company company, byte[] LogoImageBytes);
+
+        bool UpdateCompany(Company company);
 
         Company GetCompanyForAddress();
         CompanyResponseModel GetCompanyDetails(int companyId = 0, string userId = "");

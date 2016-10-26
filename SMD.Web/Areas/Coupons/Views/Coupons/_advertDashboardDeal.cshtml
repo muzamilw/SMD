@@ -32,7 +32,7 @@
                  <div class="row main-box">
                      <div class="col-lg-12">
                          <div class=" margin10">
-                             <div style="height:200px;" data-bind="morris: {type: 'Line', data: $root.DealsAnalyticsData, xkey: 'Granual', ykeys: ['openStats', 'ConvrsionStats'], labels: ['Opened', 'Click thru'], parseTime:false, setAxisAlignFirstX: true, lineColors: ['blue','green'] }"></div>
+                             <div style="height:150px;" data-bind="morris: {type: 'Line', data: $root.DealsAnalyticsData, xkey: 'Granual', ykeys: ['openStats', 'ConvrsionStats'], labels: ['Opened', 'Click thru'], parseTime:false, setAxisAlignFirstX: true, lineColors: ['blue','green'] }"></div>
                             
                          </div>
                      </div>
@@ -57,7 +57,7 @@
                      </div>
                      <div class="col-lg-9">
                         
-                         <div data-bind="morris: {type: 'Donut', data: $root.CampaignRatioAnalyticData, resize:true, colors: ['green', 'blue' ] }" style="width:250px;height:250px;"></div>
+                         <div data-bind="morris: {type: 'Donut', data: $root.CampaignRatioAnalyticData, resize:true, colors: ['green', 'blue' ] }" style="width:250px;height:250px;cursor:pointer;"></div>
                          
                      </div>
                      @*<div class="col-lg-5">

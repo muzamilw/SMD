@@ -106,7 +106,7 @@ define("survey/survey.viewModel",
             getSurvayAnalytics = function () {
                 dataservice.getSurvayAnalytics({
                     SQId: selectedSQIDAnalytics(),
-                    CampStatus: selectedCampStatusAnalytics(),
+                    CampStatus: 0,
                     dateRange: selecteddateRangeAnalytics(),
                     Granularity: selectedGranularityAnalytics(),
                 }, {
@@ -1740,7 +1740,7 @@ define("survey/survey.viewModel",
                         confirmation.hide();
                     });
                     confirmation.afterProceed(function () {
-                        if (selectedQuestion() != undefined)
+                            selectedQuestion(item);
                             saveSurveyQuestion(7);
                     });
                 },

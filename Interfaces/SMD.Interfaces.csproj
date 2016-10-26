@@ -104,6 +104,7 @@
     <Compile Include="Repository\IInvoiceDetailRepository.cs" />
     <Compile Include="Repository\IInvoiceRepository.cs" />
     <Compile Include="Repository\IAdCampaignClickRateHistoryRepository.cs" />
+    <Compile Include="Repository\ICampaignEventHistoryRepository.cs" />
     <Compile Include="Repository\IUserCouponViewRepository.cs" />
     <Compile Include="Repository\ITaxRepository.cs" />
     <Compile Include="Repository\IProductRepository.cs" />

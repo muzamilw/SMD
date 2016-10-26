@@ -42,6 +42,8 @@ namespace SMD.Implementation.Services
         private readonly ICompanyRepository _iCompanyRepository;
 
         private readonly ICouponPriceOptionRepository couponPriceOptionRepository;
+        private readonly ICampaignEventHistoryRepository campaignEventHistoryRepository;
+
         private ApplicationUserManager UserManager
         {
             get { return HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
@@ -134,7 +136,7 @@ namespace SMD.Implementation.Services
         /// </summary>
         public CouponService(ICouponRepository couponRepository, IUserFavouriteCouponRepository userFavouriteCouponRepository, ICompanyService _companyService,
             IUserPurchasedCouponRepository _userPurchasedCouponRepository, IAccountRepository _accountRepository, ICouponCategoriesRepository _couponCategoriesRepository, ICurrencyRepository _currencyRepository, IWebApiUserService _userService, IUserCouponViewRepository userCouponViewRepository, IEmailManagerService emailManagerService, WebApiUserService webApiUserService, IStripeService stripeService, IProductRepository productRepository
-            , ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository, ICompanyRepository iCompanyRepository, ICouponPriceOptionRepository couponPriceOptionRepository)
+            , ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository, ICompanyRepository iCompanyRepository, ICouponPriceOptionRepository couponPriceOptionRepository, ICampaignEventHistoryRepository campaignEventHistoryRepository)
         {
             this.couponRepository = couponRepository;
             this._userFavouriteCouponRepository = userFavouriteCouponRepository;
@@ -154,6 +156,7 @@ namespace SMD.Implementation.Services
             this.invoiceDetailRepository = invoiceDetailRepository;
             _iCompanyRepository = iCompanyRepository;
             this.couponPriceOptionRepository = couponPriceOptionRepository;
+             this.campaignEventHistoryRepository = campaignEventHistoryRepository;
         }
 
         #endregion
@@ -326,6 +329,11 @@ namespace SMD.Implementation.Services
             }
 
 
+              //event history
+                campaignEventHistoryRepository.InsertCouponEvent((AdCampaignStatus)couponModel.Status,couponModel.CouponId);
+
+
+
             //savint the categories if any. do we need it ?
 
             ////if (couponModel.CouponCategories != null && couponModel.CouponCategories.Count() > 0)
@@ -405,6 +413,10 @@ namespace SMD.Implementation.Services
                 couponModel.CouponEndDate = DateTime.Now;
 
             }
+            if (couponModel.Status == 2)
+            {
+                couponModel.SubmissionDateTime = DateTime.Now;
+            }
 
             if (couponModel.CouponCategories != null && couponModel.CouponCategories.Count() > 0)
             {
@@ -426,6 +438,11 @@ namespace SMD.Implementation.Services
 
             couponRepository.Update(couponModel);
             couponRepository.SaveChanges();
+
+            //event history
+            campaignEventHistoryRepository.InsertCouponEvent((AdCampaignStatus)couponModel.Status,couponModel.CouponId);
+
+
 
 
             //price option logic
@@ -725,6 +742,7 @@ namespace SMD.Implementation.Services
                 TotalCount = rowCount
             };
         }
+
         public string UpdateCouponForApproval(Coupon source)
         {
             string respMesg = "True";
@@ -737,7 +755,7 @@ namespace SMD.Implementation.Services
                 // Approval
                 if (source.Approved == true)
                 {
-                    double PaymentToBeCharged = 0;
+                   
 
                     dbCo.Approved = true;
                     dbCo.ApprovalDateTime = DateTime.Now;
@@ -755,15 +773,15 @@ namespace SMD.Implementation.Services
                     {
                         if (isFlag != true)
                         {
-                            respMesg = MakeStripePaymentandAddInvoiceForCoupon(dbCo, out PaymentToBeCharged);
-                            if (respMesg.Contains("Failed"))
-                            {
-                                return respMesg;
-                            }
-                            else
-                            {
-                                TransactionManager.CouponApprovalTransaction(dbCo.CouponId, PaymentToBeCharged, dbCo.CompanyId.Value);
-                            }
+                            respMesg = CreateStripeSubscription(dbCo);
+                            ////if (respMesg.Contains("Failed"))
+                            ////{
+                            ////    return respMesg;
+                            ////}
+                            ////else
+                            ////{
+                            ////    //TransactionManager.CouponApprovalTransaction(dbCo.CouponId, PaymentToBeCharged, dbCo.CompanyId.Value);
+                            ////}
                         }
                     }
                 }
@@ -780,6 +798,9 @@ namespace SMD.Implementation.Services
 
                 couponRepository.SaveChanges();
 
+                //event history
+                campaignEventHistoryRepository.InsertCouponEvent((AdCampaignStatus)dbCo.Status, dbCo.CouponId);
+
                 if (source.Approved == false)
                 {
                     emailManagerService.SendCouponRejectionEmail(dbCo.UserId, dbCo.RejectedReason);
@@ -788,100 +809,115 @@ namespace SMD.Implementation.Services
             }
             return respMesg;
         }
-        private string MakeStripePaymentandAddInvoiceForCoupon(Coupon source, out double PaymentAmount)
+        private string CreateStripeSubscription(Coupon source)
         {
-            #region Stripe Payment
-            string response = null;
-            Boolean isSystemUser = false;
-            double amount = 0;
-            // User who added Campaign for approval 
-            var user = webApiUserService.GetUserByUserId(source.UserId);
-            // Get Current Product
-            var product = (dynamic)null;
 
-            if (source.CouponListingMode == 1)
-                product = productRepository.GetProductByCountryId("couponfree");
-            else if (source.CouponListingMode == 2)
-                product = productRepository.GetProductByCountryId("couponunlimited");
-            else if (source.CouponListingMode == 3)
-                product = productRepository.GetProductByCountryId("couponnationwide");
-            else
+            if (source.CompanyId != null)
             {
-                product = productRepository.GetProductByCountryId("couponfree");
-            }
-            // Tax Applied
-            var tax = taxRepository.GetTaxByCountryId(user.Company.CountryId);
-            // Total includes tax
-            if (product != null)
-            {
-                amount = product.SetupPrice ?? 0 + tax.TaxValue ?? 0;
 
-                PaymentAmount = amount;
+                string response = null;
+                Boolean isSystemUser = false;
+                double amount = 0;
+                // User who added Campaign for approval 
+                //var user = webApiUserService.GetUserByUserId(source.UserId);
+
+                var company = _companyService.GetCompanyById(source.CompanyId.Value);
+
+                // Get Current Product
+                var product = (dynamic)null;
+
+                if (source.CouponListingMode == 1)
+                    product = productRepository.GetProductByCountryId("couponfree");
+                else if (source.CouponListingMode == 2)
+                {
+                    //product = productRepository.GetProductByCountryId("couponunlimited");
+
+                    if (company.StripeSubscriptionId == null)
+                    {
+                        var resp = stripeService.CreateCustomerSubscription(company.StripeCustomerId);
+
+                        company.StripeSubscriptionId = resp.SubscriptionId;
+                        company.StripeSubscriptionStatus = resp.Status;
+
+                        _companyService.UpdateCompany(company);
+
+                    }
+                    else
+                    {
+                        var resp = stripeService.GetCustomerSubscription(company.StripeSubscriptionId, company.StripeCustomerId);
+                        if (resp != null && resp.Status == "active")
+                        {
+                            //all good .. subscription is active.
+
+                        }
+                        else   //create a new subscription
+                        {
+                            resp = stripeService.CreateCustomerSubscription(company.StripeCustomerId);
+
+                            company.StripeSubscriptionId = resp.SubscriptionId;
+                            company.StripeSubscriptionStatus = resp.Status;
+
+                            _companyService.UpdateCompany(company);
+
+                        }
 
 
-                // If It is not System User then make transation 
-                //if (user.Roles.Any(role => role.Name.ToLower().Equals("user")))
-                //{
-                // Make Stripe actual payment 
-                response = stripeService.ChargeCustomer((int?)amount, user.Company.StripeCustomerId);
+                    }
+                }
+
+
+                ////// Make Stripe actual payment 
+                ////response = stripeService.ChargeCustomer((int?)amount, user.Company.StripeCustomerId);
                 isSystemUser = false;
 
+
+                //if (response != null && !response.Contains("Failed"))
+                //{
+
+                //    String CompanyName = _iCompanyRepository.GetCompanyNameByID(source.CompanyId.Value);
+                //    #region Add Invoice
+
+                //    // Add invoice data
+                //    var invoice = new Invoice
+                //    {
+                //        Country = user.Company.CountryId.ToString(),
+                //        Total = (double)amount,
+                //        NetTotal = (double)amount,
+                //        InvoiceDate = DateTime.Now,
+                //        InvoiceDueDate = DateTime.Now.AddDays(7),
+                //        Address1 = user.Company.CountryId.ToString(),
+                //        CompanyId = user.Company.CompanyId,
+                //        CompanyName = CompanyName,
+                //        CreditCardRef = response
+                //    };
+                //    invoiceRepository.Add(invoice);
+
+                //    #endregion
+                //    #region Add Invoice Detail
+
+                //    // Add Invoice Detail Data 
+                //    var invoiceDetail = new InvoiceDetail
+                //    {
+                //        InvoiceId = invoice.InvoiceId,
+                //        SqId = null,
+                //        PQID = null,
+                //        ProductId = product.ProductId,
+                //        ItemName = product.ProductName,
+                //        ItemAmount = (double)amount,
+                //        ItemTax = (double)(tax != null ? tax.TaxValue : 0),
+                //        ItemDescription = "This is description!",
+                //        ItemGrossAmount = (double)amount,
+                //        CouponID = source.CouponId,
+
+                //    };
+                //    invoiceDetailRepository.Add(invoiceDetail);
+                //    invoiceDetailRepository.SaveChanges();
+
+                //    #endregion
+
+                //}
             }
-            else
-            {
-                PaymentAmount = 0;
-                response = "Failed : Product not defined";
-            }
-
-            #endregion
-
-            if (response != null && !response.Contains("Failed"))
-            {
-                if (source.CompanyId != null)
-                {
-                    String CompanyName = _iCompanyRepository.GetCompanyNameByID(source.CompanyId.Value);
-                    #region Add Invoice
-
-                    // Add invoice data
-                    var invoice = new Invoice
-                    {
-                        Country = user.Company.CountryId.ToString(),
-                        Total = (double)amount,
-                        NetTotal = (double)amount,
-                        InvoiceDate = DateTime.Now,
-                        InvoiceDueDate = DateTime.Now.AddDays(7),
-                        Address1 = user.Company.CountryId.ToString(),
-                        CompanyId = user.Company.CompanyId,
-                        CompanyName = CompanyName,
-                        CreditCardRef = response
-                    };
-                    invoiceRepository.Add(invoice);
-
-                    #endregion
-                    #region Add Invoice Detail
-
-                    // Add Invoice Detail Data 
-                    var invoiceDetail = new InvoiceDetail
-                    {
-                        InvoiceId = invoice.InvoiceId,
-                        SqId = null,
-                        PQID = null,
-                        ProductId = product.ProductId,
-                        ItemName = product.ProductName,
-                        ItemAmount = (double)amount,
-                        ItemTax = (double)(tax != null ? tax.TaxValue : 0),
-                        ItemDescription = "This is description!",
-                        ItemGrossAmount = (double)amount,
-                        CouponID = source.CouponId,
-
-                    };
-                    invoiceDetailRepository.Add(invoiceDetail);
-                    invoiceDetailRepository.SaveChanges();
-
-                    #endregion
-                }
-            }
-            return response;
+            return "";
         }
 
         public Currency GetCurrenyById(int id)
@@ -902,6 +938,13 @@ namespace SMD.Implementation.Services
 
             return couponRepository.getExpiryDate(CouponId);
         }
+
+
+        public bool PauseAllCoupons(int CompanyId)
+        {
+            return couponRepository.PauseAllCoupons(CompanyId);
+        }
+
         #endregion
     }
 }

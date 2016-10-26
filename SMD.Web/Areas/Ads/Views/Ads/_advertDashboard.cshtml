@@ -38,16 +38,25 @@
             <div class="col-lg-12">
                 <div class=" margin10">
                     <!-- ko if: $root.selectedCampStatusAnalytics() === 1  -->
-                    <div style="height:200px;" data-bind="morris: {type: 'Line', data: $root.AdsCampaignAnalyticsData, xkey: 'Granual', ykeys: ['openStats', 'avgAdClickStats', 'Stats'], labels: ['Open', 'Ad Click ($)','Answered'], parseTime:false, setAxisAlignFirstX: true, lineColors: ['blue','green','orange'] }"></div>
+                    <div style="height:150px;" data-bind="morris: {type: 'Line', data: $root.AdsCampaignAnalyticsData, xkey: 'Granual', ykeys: ['openStats', 'Stats'], labels: ['Open', 'Answered'], yLabelFormat: function(y){return y != Math.round(y)?'':y;}, parseTime:false, setAxisAlignFirstX: true, lineColors: ['blue','green'] }"></div>
                     <!-- /ko -->
                     <!-- ko if: $root.selectedCampStatusAnalytics() === 2  -->
-                    <div style="height:200px;" data-bind="morris: {type: 'Line', data: $root.AdsCampaignAnalyticsData, xkey: 'Granual', ykeys: ['openStats', 'avgAdClickStats', 'Stats'], labels: ['Total Impressions', 'Ad Click ($)','Reffered'], parseTime:false, setAxisAlignFirstX: true, lineColors: ['blue','orange' ,'green'] }"></div>
+                    <div style="height:150px;" data-bind="morris: {type: 'Line', data: $root.AdsCampaignAnalyticsData, xkey: 'Granual', ykeys: ['openStats', 'Stats'], labels: ['Total Impressions', 'Reffered'], yLabelFormat: function(y){return y != Math.round(y)?'':y;},  parseTime:false, setAxisAlignFirstX: true, lineColors: ['blue','green'] }"></div>
                     <!-- /ko -->
                     <!-- ko if: $root.selectedCampStatusAnalytics() === 3  -->
-                    <div style="height:200px;" data-bind="morris: {type: 'Line', data: $root.AdsCampaignAnalyticsData, xkey: 'Granual', ykeys: ['openStats', 'avgAdClickStats', 'Stats'], labels: ['Total Impressions', 'Ad Click ($)','Skipped'], parseTime:false, setAxisAlignFirstX: true, lineColors: ['blue','green','red'] }"></div>
+                    <div style="height:150px;" data-bind="morris: {type: 'Line', data: $root.AdsCampaignAnalyticsData, xkey: 'Granual', ykeys: ['openStats', 'Stats'], labels: ['Total Impressions', 'Skipped'], yLabelFormat: function(y){return y != Math.round(y)?'':y;},  parseTime:false, setAxisAlignFirstX: true, lineColors: ['blue','red'] }"></div>
                     <!-- /ko -->
 
 
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row main-box">
+            <div class="col-lg-12">
+                <div class=" margin10">
+                   <div style="height:150px;" data-bind="morris: {type: 'Line', data: $root.AdsCampaignAnalyticsData, xkey: 'Granual', ykeys: ['avgAdClickStats'], labels: ['Ad Click Charge'], parseTime:false, setAxisAlignFirstX: true, lineColors: ['blue','orange' ,'green'], preUnits:'$' }"></div>
                 </div>
             </div>
 
@@ -68,7 +77,7 @@
                 <div>Date range : All time </div>
                 <!--/ko-->
 
-                <div data-bind="morris: {type: 'Donut', data: $root.CampaignRatioAnalyticData, resize:true, colors: ['green', 'blue' ] }" style="width:250px;height:250px;padding-left:50px;"></div>
+                <div data-bind="morris: {type: 'Donut', data: $root.CampaignRatioAnalyticData, resize:true, colors: ['green', 'blue','orange' ] }" style="width:250px;height:250px;padding-left:50px;cursor: pointer;"></div>
                
             </div>
             <div class="col-lg-6">
@@ -82,7 +91,7 @@
                                 All time
                             </th>
                             <th class="padingL15">
-                                30 days
+                                Last 30 days
                             </th>
                         </tr>
                     </thead>
@@ -99,8 +108,7 @@
             </div>
         </div>
           <div class="row" >
-
-           
+         
             <div class="col-lg-12" >
                 <table class="roitbl" style="">
                     <!-- ko template: { name: 'CampaignROITblAnalyticsDataTemplate' , foreach: $root.CampaignROItblAnalyticData } -->

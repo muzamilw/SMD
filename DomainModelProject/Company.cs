@@ -84,6 +84,8 @@ namespace DomainModelProject
         public Nullable<bool> IsDeleted { get; set; }
         public Nullable<System.DateTime> DeleteDate { get; set; }
         public Nullable<bool> IsSpecialAccount { get; set; }
+        public string StripeSubscriptionId { get; set; }
+        public string StripeSubscriptionStatus { get; set; }
     
         public virtual ICollection<Account> Accounts { get; set; }
         public virtual ICollection<AdCampaign> AdCampaigns { get; set; }

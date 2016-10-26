@@ -26,5 +26,7 @@ namespace SMD.Interfaces.Repository
         bool updateCompanyForProfile(CompanyResponseModel RequestData, Company Target);
         GetApprovalCount_Result GetApprovalCount();
         Boolean UpdateCompanyStatus(int status, string userId, string comments, int companyId);
+
+        Company GetCompanyByStripeCustomerId(string StripeCustomerId);
     }
 }

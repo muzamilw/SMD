@@ -26,6 +26,14 @@ namespace SMD.Models.DomainModels
         public string Country { get; set; }
         public string ZipCode { get; set; }
         public string CreditCardRef { get; set; }
+
+
+
+           public string StripeReceiptNo { get; set; }
+
+           public string StripeInvoiceId { get; set; }
+
+
         public Nullable<int> CompanyId { get; set; }
 
     

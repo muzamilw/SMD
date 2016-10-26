@@ -222,6 +222,17 @@ namespace SMD.Repository.Repositories
            }
            return default(DateTime);
         }
+
+
+
+        public bool PauseAllCoupons(int CompanyId)
+        {
+            db.Database.ExecuteSqlCommand("update coupon set status=4 where companyId=" + CompanyId);
+            return true;
+
+        }
+
+
         #endregion
     }
 }
