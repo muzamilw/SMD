@@ -15,6 +15,7 @@ define("ads/ads.viewModel",
                     isEditorVisible = ko.observable(false),
                     isClickRateVisible = ko.observable(null),
                     buyItQuestionStatus = ko.observable(false),
+                    buyItQuestionLabelStatus = ko.observable(false),
 					isAdvertdashboardVisible = ko.observable(false),
                     hideLandingPageURl = ko.observable(false),
                     ButItOtherLabel = ko.observable(''),
@@ -24,7 +25,7 @@ define("ads/ads.viewModel",
                     TemporaryQuizQuestions = ko.observableArray([]),
                     TemporarySurveyList = ko.observableArray([]),
                     BuyItStatus = ko.observable(false),
-                    showLandingPageUrl = ko.observable(false),
+                    showLandingPageUrl = ko.observable(true),
                     countoryidList = [],
                     cityidList = [],
                     langidList = [],
@@ -67,7 +68,7 @@ define("ads/ads.viewModel",
                     isTerminateBtnVisible = ko.observable(false),
                     correctAnswers = ko.observableArray([{ id: 1, name: "Choice 1" }, { id: 2, name: "Choice 2" }, { id: 3, name: "Choice 3" }, { id: 0, name: "Any of the above" }]),
                     DefaultTextBtns = ko.observableArray([
-                        { id: "No Button", name: "No Button" },
+                        { id: "0", name: "No Button" },
                         { id: "Apply Now", name: "Apply Now" },
                         { id: "Book Now", name: "Book Now" },
                         { id: "Contact Us", name: "Contact Us" },
@@ -78,7 +79,7 @@ define("ads/ads.viewModel",
                         { id: "Watch More", name: "Watch More" },
                         { id: "Buy Now", name: "Buy Now" },
                         { id: "Check Availability", name: "Check Availability" },
-                        { id: "Custom Button Label", name: "Custom Button Label" }
+                        { id: "999", name: "Custom Button Label" }
                     ]),
                     selectedIndustryIncludeExclude = ko.observable(true),
                     UserAndCostDetail = ko.observable(),
@@ -372,9 +373,11 @@ define("ads/ads.viewModel",
 
                 var selectionoption = $("#ddTextBtns").val();
 
-                if (selectionoption == 'No Button' || selectionoption == undefined) {
+                if (selectionoption == '0' || selectionoption == undefined) {
                     showLandingPageUrl(false);
                 }
+                else
+                    showLandingPageUrl(true);
 
                 $("#logo_div").css("display", "block");
 
@@ -922,6 +925,23 @@ define("ads/ads.viewModel",
                 ////    campaignModel().Answer2('');
 
                 ////}
+
+
+
+                //buy it button logic
+                campaignModel().ShowBuyitBtn(buyItQuestionStatus());
+
+                //if other question then
+                if (buyItQuestionLabelStatus() == true) {
+                    debugger;
+                    campaignModel().BuyItButtonLabel();
+
+                    // couponModel().BuyitBtnLabel(ButItOtherLabel());
+                }
+                else {
+                    campaignModel().BuyItButtonLabel($("#ddTextBtns").val());
+                }
+
                 if (isDisplayCouponsAds() == true) {
 
                     var selectedCouponCategories = $.grep(couponCategories(), function (n, i) {
@@ -1193,6 +1213,7 @@ define("ads/ads.viewModel",
                          campaignModel().ShowBuyitBtn(false);
                          BuyItStatus(false);
                          ButItOtherLabel('');
+                         buyItQuestionLabelStatus(false);
                      }
                      else if (selectionoption == '999')  //other scenario
                      {
@@ -1200,21 +1221,19 @@ define("ads/ads.viewModel",
                          campaignModel().ShowBuyitBtn(true);
                          BuyItStatus(true);
                          campaignModel().BuyItButtonLabel('');
+                         buyItQuestionLabelStatus(true);
 
                      }
-                     else if (selectionoption == 'Custom Button Label') {
-                         BuyItStatus(true);
-                         campaignModel().ShowBuyitBtn(true);
-                     }
                      else {
-                         buyItQuestionStatus(false);
+                         buyItQuestionStatus(true);
                          campaignModel().ShowBuyitBtn(true);
                          BuyItStatus(false);
                          ButItOtherLabel('');
                          campaignModel().BuyItButtonLabel('');
+                         buyItQuestionLabelStatus(false);
                      }
 
-                     if (selectionoption == 'No Button') {
+                     if (selectionoption == '0') {
                          showLandingPageUrl(false);
                      }
                      else {
@@ -1648,6 +1667,7 @@ define("ads/ads.viewModel",
                     isTerminateBtnVisible(false);
                     isNewCampaignVisible(false);
                     isShowArchiveBtn(false);
+                    buyItQuestionLabelStatus(false);
                     $("#logo_div").css("display", "block");
                     $(".hideInCoupons").css("display", "none");
 
@@ -1792,7 +1812,7 @@ define("ads/ads.viewModel",
                                     });
 
                                     var ff = campaignModel().AdCampaignTargetCriterias();
-                                    DefaultTextBtns.push({ id: campaignModel().BuyItButtonLabel(), name: campaignModel().BuyItButtonLabel() });
+                                    //DefaultTextBtns.push({ id: campaignModel().BuyItButtonLabel(), name: campaignModel().BuyItButtonLabel() });
                                     campaignModel().reset();
 
 
@@ -1987,32 +2007,35 @@ define("ads/ads.viewModel",
                                     });
 
 
-                                    //BuyItButtonLabel(campaignModel().ShowBuyitBtn());
+                                    //but it button cases
+                                    buyItQuestionStatus(campaignModel().ShowBuyitBtn());
 
-                                    //var buyitbuttonlabel = couponModel().BuyitBtnLabel();
+                                    var buyitbuttonlabel = campaignModel().BuyItButtonLabel();
 
-                                    //if (couponModel().ShowBuyitBtn() == false) {
-                                    //    $("#buyItddl").val('0');
-                                    //}
-                                    //else {
-                                    //    if (buyitbuttonlabel == 'Apply Now' ||
-                                    //        buyitbuttonlabel == 'Book Now' ||
-                                    //        buyitbuttonlabel == 'Contact Us' ||
-                                    //        buyitbuttonlabel == 'Download' ||
-                                    //        buyitbuttonlabel == 'Learn More' ||
-                                    //        buyitbuttonlabel == 'Shop Now' ||
-                                    //        buyitbuttonlabel == 'Sign Up' ||
-                                    //        buyitbuttonlabel == 'Watch More'
-                                    //         ) {
-                                    //        buyItQuestionLabelStatus(false);
-                                    //        $("#buyItddl").val(buyitbuttonlabel);
-                                    //    }
-                                    //    else {
-                                    //        $("#buyItddl").val('999');
-                                    //        buyItQuestionLabelStatus(true);
-                                    //        ButItOtherLabel(buyitbuttonlabel);
-                                    //    }
-                                    //}
+                                    if (campaignModel().ShowBuyitBtn() == false) {
+                                        $("#ddTextBtns").val('0');
+                                    }
+                                    else {
+                                        if (buyitbuttonlabel == 'Apply Now' ||
+                                            buyitbuttonlabel == 'Book Now' ||
+                                            buyitbuttonlabel == 'Contact Us' ||
+                                            buyitbuttonlabel == 'Download' ||
+                                            buyitbuttonlabel == 'Learn More' ||
+                                            buyitbuttonlabel == 'Shop Now' ||
+                                            buyitbuttonlabel == 'Sign Up' ||
+                                            buyitbuttonlabel == 'Watch More' ||
+                                            buyitbuttonlabel == 'Buy Now' ||
+                                            buyitbuttonlabel == 'Check Availability'
+                                             ) {
+                                            buyItQuestionLabelStatus(false);
+                                            $("#ddTextBtns").val(buyitbuttonlabel);
+                                        }
+                                        else {
+                                            $("#ddTextBtns").val('999');
+                                            buyItQuestionLabelStatus(true);
+                                            ButItOtherLabel(buyitbuttonlabel);
+                                        }
+                                    }
 
 
                                     if (campaignModel().DeliveryDays() != null) {
@@ -3389,6 +3412,7 @@ define("ads/ads.viewModel",
                     BuyItStatus: BuyItStatus,
                     showLandingPageUrl: showLandingPageUrl,
                     buyItQuestionStatus: buyItQuestionStatus,
+                    buyItQuestionLabelStatus: buyItQuestionLabelStatus,
                     ButItOtherLabel: ButItOtherLabel,
                     CampaignStatusDropDown: CampaignStatusDropDown,
                     selectedCampStatusAnalytics: selectedCampStatusAnalytics,

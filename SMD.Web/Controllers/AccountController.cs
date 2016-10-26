@@ -316,7 +316,7 @@ namespace SMD.MIS.Controllers
             {
 
                
-                var user = new User { UserName = model.Email, Email = model.Email, FullName = model.FullName, DOB = null };
+                var user = new User { UserName = model.Email, Email = model.Email, FullName = model.FullName, DOB = null, Status = 1 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -620,7 +620,7 @@ namespace SMD.MIS.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new User { UserName = model.Email, Email = model.Email, FullName = info.DefaultUserName, DOB = null };
+                var user = new User { UserName = model.Email, Email = model.Email, FullName = info.DefaultUserName, DOB = null, Status =1 };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {

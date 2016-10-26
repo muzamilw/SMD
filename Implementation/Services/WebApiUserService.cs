@@ -1101,7 +1101,7 @@ namespace SMD.Implementation.Services
         /// </summary>
         public async Task<LoginResponse> RegisterCustom(RegisterCustomRequest request)
         {
-            var user = new User { UserName = request.Email, Email = request.Email, FullName = request.FullName };
+            var user = new User { UserName = request.Email, Email = request.Email, FullName = request.FullName, DOB = null, Status = 1 };
             var result = await UserManager.CreateAsync(user, request.Password);
             if (!result.Succeeded)
             {
@@ -1137,7 +1137,7 @@ namespace SMD.Implementation.Services
         /// </summary>
         public async Task<LoginResponse> RegisterExternal(RegisterExternalRequest request)
         {
-            var user = new User { UserName = request.Email, Email = request.Email, FullName = request.FullName, DOB = null };
+            var user = new User { UserName = request.Email, Email = request.Email, FullName = request.FullName, DOB = null, Status = 1 };
             var result = await UserManager.CreateAsync(user);
             if (!result.Succeeded)
             {

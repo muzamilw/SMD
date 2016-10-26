@@ -394,7 +394,7 @@ else
                                             </div>
                                         </div>
 
-                                        <div class="form-group" data-bind="visible:$root.IsShownforVideo()">
+                                        <div class="form-group" style="display:none">
                                             <div class="col-lg-2">
                                                 <label for="txtBuyItLine1" class="control-label text-right tooltip-float floatNone">Call for action</label>
                                             </div>
@@ -415,7 +415,7 @@ else
                                         <div class="form-group" data-bind="visible:$root.BuyItStatus() == true">
                                             <div>
                                                 <div class="col-lg-2">
-                                                    <label for="txtBuyItlbl" class="control-label text-right tooltip-float floatNone">Custom button</label>
+                                                    <label for="txtBuyItlbl" class="control-label text-right tooltip-float floatNone">BuyItButtonLabel</label>
                                                 </div>
                                                 <div class="col-lg-8">
                                                     <input style="width:420px!important;" type="text" class="form-control txtBuyItlbl" data-bind="value:BuyItButtonLabel" id="txtBuyItlbl" placeholder="(12 characters)" maxlength="12">

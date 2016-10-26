@@ -1002,7 +1002,9 @@ define("Coupons/Coupons.viewModel",
                                         buyitbuttonlabel == 'Learn More' ||
                                         buyitbuttonlabel == 'Shop Now' ||
                                         buyitbuttonlabel == 'Sign Up' ||
-                                        buyitbuttonlabel == 'Watch More'
+                                        buyitbuttonlabel == 'Watch More' ||
+                                        buyitbuttonlabel == 'Buy Now' ||
+                                           buyitbuttonlabel == 'Check Availability'
                                          ) {
                                         buyItQuestionLabelStatus(false);
                                         $("#buyItddl").val(buyitbuttonlabel);
