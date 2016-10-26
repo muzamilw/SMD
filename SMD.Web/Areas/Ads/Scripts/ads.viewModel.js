@@ -165,15 +165,21 @@ define("ads/ads.viewModel",
 				CampaignStatusDropDown = ko.observableArray([{ id: 1, name: "Answered" }, { id: 2, name: "Referred" }, { id: 3, name: "Skipped" }]),
 				CampaignTblAnalyticsData = ko.observableArray([]),
 				openAdvertiserDashboardScreen = function (Campaign) {
+				    debugger;
+				    if (!isNewCampaign()) {
+				        selectedCampaignIdAnalytics(Campaign.CampaignID());
+				        getAdsByCampaignIdAnalytics();
+				        $("#ddGranularityDropDown").removeAttr("disabled");
+				        $("#ddDateRangeDropDown").removeAttr("disabled");
+				        $("#ddCampaignStatusDropDown").removeAttr("disabled");
 
-				    selectedCampaignIdAnalytics(Campaign.CampaignID());
-				    getAdsByCampaignIdAnalytics();
-				    $("#ddGranularityDropDown").removeAttr("disabled");
-				    $("#ddDateRangeDropDown").removeAttr("disabled");
-				    $("#ddCampaignStatusDropDown").removeAttr("disabled");
 
+				        isAdvertdashboardVisible(true);
+				    }
+				    else {
+				        confirmation.showOKpopupforChart();
 
-				    isAdvertdashboardVisible(true);
+				    }
 				},
 				getAdsByCampaignIdAnalytics = function () {
 				    dataservice.getAdsByCampaignIdAnalytics({

@@ -1287,6 +1287,9 @@ div#spinner {
         width: 125px;
     height: 86px;
 }
+.potentreachclr {
+    color:#5fb761!important;
+}
 /*.videopanel,.displayadspanel {
     padding-top:15px;
 }*/
