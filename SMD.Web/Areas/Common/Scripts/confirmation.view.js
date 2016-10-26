@@ -39,6 +39,9 @@ define("common/confirmation.view",
                    showOKpopupforinfo = function () {
                         $("#dialog-okWarningforinfo").modal("show");
                    },
+                   showOKpopupforchart = function () {
+                       $("#dialog-chartmessage").modal("show");
+                   },
                     hidesOKpopupforinfo = function () {
                         $("#dialog-okWarningforinfo").modal("hide");
                     },
@@ -77,7 +80,8 @@ define("common/confirmation.view",
                 showOKpopup: showOKpopup,
                 hideshowOKpopup: hideshowOKpopup,
                 showOKpopupforinfo: showOKpopupforinfo,
-                hidesOKpopupforinfo: hidesOKpopupforinfo
+                hidesOKpopupforinfo: hidesOKpopupforinfo,
+                showOKpopupforchart: showOKpopupforchart
             };
         })(ist.confirmation.viewModel);
 

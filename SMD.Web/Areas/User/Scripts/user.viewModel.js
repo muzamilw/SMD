@@ -144,9 +144,7 @@ define("user/user.viewModel",
                    },
                    onCloseClick =function() 
                    {
-                   
-                       $("#MarketobjDiv").css("display", "block");
-                       $("#topArea").css("display", "block");
+                       window.location.href = "/";
                    },
                    // Update City DD on country change 
                    updateCities = function (cityId) {
