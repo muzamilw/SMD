@@ -1306,8 +1306,8 @@ margin-top:2px;
 
 }
 .vid_image {
-    height: 79px;
-    width: 65px;
+    height:60px;
+    width: 60px;
 }
 .defvideoimage {
     height: 48px;
@@ -1349,11 +1349,11 @@ margin-top:2px;
     color:#7f8c8d ;
 }
 .dealsstatus_img {
-        height: 79px;
-    width: 77px;
+        height: 60px;
+    width:60px;
 }
 .pollsstatus_img {
-        height: 83px;
+        height:60px;
     width: 60px;
 }
 .backgroundbtn {
