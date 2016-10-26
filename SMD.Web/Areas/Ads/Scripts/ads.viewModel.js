@@ -17,6 +17,8 @@ define("ads/ads.viewModel",
                     buyItQuestionStatus = ko.observable(false),
 					isAdvertdashboardVisible = ko.observable(false),
                     hideLandingPageURl = ko.observable(false),
+                    VideoImage = ko.observable(false),
+                    DisplayImage = ko.observable(false),
                     ButItOtherLabel = ko.observable(''),
                     langs = ko.observableArray([]),
                     TemporaryList = ko.observableArray([]),
@@ -165,7 +167,7 @@ define("ads/ads.viewModel",
 				CampaignStatusDropDown = ko.observableArray([{ id: 1, name: "Answered" }, { id: 2, name: "Referred" }, { id: 3, name: "Skipped" }]),
 				CampaignTblAnalyticsData = ko.observableArray([]),
 				openAdvertiserDashboardScreen = function (Campaign) {
-				    debugger;
+				 
 				    if (!isNewCampaign()) {
 				        selectedCampaignIdAnalytics(Campaign.CampaignID());
 				        getAdsByCampaignIdAnalytics();
@@ -1463,7 +1465,7 @@ define("ads/ads.viewModel",
 
                                 profileAnswerList.valueHasMutated();
 
-                                $(".listview").scrollTop(y + 60);
+                                $(".listview").scrollTop(y +40);
                             }
 
                         },
@@ -3177,6 +3179,7 @@ define("ads/ads.viewModel",
 
                 // Initialize the view model
                 initialize = function (specifiedView) {
+                    
                     if (mode == 4) {
                         MainHeading("Sponsor an app ‘brain game’.");
                         SubHeading("Reward audiences 50% of your ‘ad click’Drive people to your web site, ask a reinforcing question and show your deals –All for one ‘ad click’ fee.");
@@ -3187,10 +3190,12 @@ define("ads/ads.viewModel",
                         tab2Heading("Define the target audience to deliver game ad.");
                         tab4SubHeading("Select your game campaign delivery mode:");
                         UrlHeadings("Leatherboard banner click thru url to your landing  page.");
+                        DisplayImage(true);
                     }
                     else {
                         UrlHeadings("Direct viewers to a landing page at the end of your video ad.");
                         IsShownforVideo(true);
+                        VideoImage(true);
                     }
                     view = specifiedView;
                     ko.applyBindings(view.viewModel, view.bindingRoot);
@@ -3404,7 +3409,9 @@ define("ads/ads.viewModel",
                     CampaignTblAnalyticsData: CampaignTblAnalyticsData,
                     isClickRateVisible: isClickRateVisible,
                     CampaignROItblAnalyticData: CampaignROItblAnalyticData,
-                    hideLandingPageURl: hideLandingPageURl
+                    hideLandingPageURl: hideLandingPageURl,
+                    VideoImage: VideoImage,
+                    DisplayImage: DisplayImage
                 };
             })()
         };

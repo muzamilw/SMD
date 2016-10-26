@@ -1290,6 +1290,44 @@ div#spinner {
 .potentreachclr {
     color:#5fb761!important;
 }
+.margintop13 {
+    margin-top:13px;
+}
+.filterbloclkspos {
+margin-top:2px;
+}
+.panelbtnImg {
+    background-color:#127abd;
+}
+.dealsImage {
+        background-color: blue;
+    height: 32px;
+    margin-right: 4px;
+    width: 34px;
+}
+.vid_image {
+      background-color: blue;
+    height: 32px;
+    margin-right: 4px;
+    width: 37px;
+}
+.Game_image {
+     background-color: blue;
+    height: 32px;
+    margin-right: 4px;
+    width: 37px;
+}
+.polls_image {
+        background-color: blue;
+    height: 32px;
+    width: 37px;
+    margin-right: 4px;
+    margin-top: 4px;
+}
+.width80percent {
+    width:80%!important;
+}
+
 /*.videopanel,.displayadspanel {
     padding-top:15px;
 }*/
