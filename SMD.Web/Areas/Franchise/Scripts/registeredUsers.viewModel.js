@@ -88,16 +88,20 @@ define("FranchiseDashboard/registeredUsers.viewModel",
                     changeStatus = function (item) {
                         var st = item.status();
                               if (item.status() == true) {
-                                  confirmation.messageText("Are you sure? you want to ENABLE this user");
+                                  confirmation.messageText("Are you sure you want to ENABLE this user?");
                                   confirmation.show();
                               }
                               else {
-                                  confirmation.messageText("Are you sure? you want to DISABLE this user");
+                                  confirmation.messageText("Are you sure you want to DISABLE this user?");
                                   confirmation.show();
 
                               }
                               confirmation.afterCancel(function () {
-                                  selectedUser().status(0);
+                                  if (item.status() == false)
+                                      selectedUser().status(1)
+                                  else
+                                      selectedUser().status(0)
+
                                   confirmation.hide();
                               });
                               confirmation.afterProceed(function () {

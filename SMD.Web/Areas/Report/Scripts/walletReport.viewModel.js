@@ -10,11 +10,13 @@
                     referralComponies = ko.observableArray([]),
                     linkedComponiesCount = ko.observable(),
                     activeCampaignsCount = ko.observable(),
-                    balance = ko.observable();
+                    balance = ko.observable().extend({ numberInput: ist.numberFormatwod}),
                     dollarBalance = ko.observable();
                     //pager
                    
-                
+                onCloseClick = function () {
+                    window.location.href = "/";
+                },
                     getWalletReportHistory = function () {
                         dataservice.getWalletReport(
                             {
@@ -79,6 +81,7 @@
                     activeCampaignsCount:activeCampaignsCount,
                     balance: balance,
                     dollarBalance: dollarBalance,
+                    onCloseClick: onCloseClick
                 };
             })()
         };
