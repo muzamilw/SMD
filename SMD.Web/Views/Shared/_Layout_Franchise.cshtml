@@ -11,10 +11,11 @@
     string CompanyName = companyClaimValues != null && companyClaimValues.Any() ? companyClaimValues.ElementAt(0).CompanyName : "Company Not Loaded";
     string CompanyLogo = companyClaimValues != null && companyClaimValues.Any() ? companyClaimValues.ElementAt(0).CompanyLogo : "Claim not found";
     string CompanyID = companyClaimValues != null && companyClaimValues.Any() ? companyClaimValues.ElementAt(0).CompanyId.ToString() : "Claim not found";
-    
+
     IEnumerable<SmdRoleClaimValue> roleClaim = ClaimHelper.GetClaimsByType<SmdRoleClaimValue>(SmdClaimTypes.Role);
     string RoleName = roleClaim != null && roleClaim.Any() ? roleClaim.ElementAt(0).Role : "Role Not Loaded";
-   
+    string RoleId = roleClaim != null && roleClaim.Any() ? roleClaim.ElementAt(0).RoleId : "Role Not Loaded";
+
 
 }
 <!DOCTYPE html>
@@ -45,7 +46,7 @@
         <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
 
     }
-    
+
     <script>
         var gCompanyID = @CompanyID;
         var UserRole = '@RoleName';
@@ -59,11 +60,9 @@
 </head>
 <body class="theme-blue-gradient">
     <header class="navbar" id="header-navbar">
-        <div class="col-md-12 col-lg-12 col-sm-12" style="height: 4px; background-color: black; position: absolute; margin-top: 100px;"></div>
+        <div class="col-md-12 col-lg-12 col-sm-12" style="height: 4px; position: absolute; margin-top: 100px;"></div>
         <div class="container" style="height:100px;">
             <a href="~/" id="header" class="cashlogox my-navigator navbar-brand logoAnchor "></a>
-
-
 
             <a href="~/" id="beta" class="cashbeta"></a>
             <div class="clearfix">
@@ -71,13 +70,12 @@
                     <span class="sr-only">Toggle navigation</span>
                     @*<span class="fa fa-bars"></span>*@
                 </button>
-
                 <div style="display:inline-block;margin-top:20px;width:795px;">
                     <div style="float:right;">
                         <div class="pull-left" style="display:inline-block;margin-top:20px;">
                             @*<p style="box-shadow: inset 0 0px 0 white, inset 0 -1px 0 white;margin-bottom:3px;display:inline-block;font-size:11px;color:white">
-                                Franchise Dashboard
-                            </p>*@
+                                    Franchise Dashboard
+                                </p>*@
                             <p style="font-size:16px;color:white;">@CompanyName</p>
                         </div>
                         <div class="pull-left" style="color:white;margin-left: 10px;margin-top: 12px;margin-right: 9px;"><img style="width:87px;height:41px;    background-color: white; border: 1px solid white;" src="~/@CompanyLogo" /></div>
@@ -90,8 +88,8 @@
                             @if (!User.IsInRole("User"))
                             {
                                 @*<a class="btn" id="make-small-nav">
-                                <i class="fa fa-bars"></i>
-                            </a>*@
+                                        <i class="fa fa-bars"></i>
+                                    </a>*@
                             }
                             else
                             {
@@ -102,9 +100,7 @@
                     </ul>
                 </div>
 
-
                 <div class="nav-no-collapse pull-right" id="header-nav" style="margin-top:23px;">
-
                     <ul class="nav navbar-nav pull-right">
                         <!-- MPC Admin Menu-->
                         <li class="dropdown profile-dropdown @classesMenu" style="display:none;">
@@ -113,7 +109,6 @@
                                 <div class="user-positioner" style="position:fixed;">
                                 </div>
                             </a>
-
                         </li>
                         <!-- Normal Menu-->
                         <li class="dropdown profile-dropdown">
@@ -129,31 +124,36 @@
                             </a>
                             <ul class="dropdown-menu loginMenu">
                                 <li><a href="">Role : @RoleName</a></li>
-
                                 <li id="companyProfileBinding"><a data-bind="click:showCompanyProfileDialog">Marketing profile/logo</a></li>
                                 <li id="userProfileBinding">
                                     <a data-bind="click:showUserProfileDialog">User Profile</a>
                                     <a data-bind="click:ChangePassword">Change Password</a>
                                 </li>
-
                                 <li><a href="~/Account/LogOff"><i class="fa fa-power-off"></i>Logout</a></li>
                             </ul>
                         </li>
-                        <li class="dropdown profile-dropdown">
+
+                        <li>
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <span class="hidden-xs">
-                                    <i class="fa fa-life-ring"></i>
-                                </span> <b class="caret"></b>
+
+                                <i class="fa fa-life-ring"></i>
 
                             </a>
-                            <ul class="dropdown-menu loginMenu">
-                                <li><a href="">Startup Guide</a></li>
-                                <li><a href="">Training Videos</a></li>
-                                <li><a href="">Help Center</a></li>
-                                <li><a href="">Contact Us</a></li>
-                            </ul>
                         </li>
 
+                        @*<li class="dropdown profile-dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <span class="hidden-xs">
+                                        <i class="fa fa-life-ring"></i>
+                                    </span> <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu loginMenu">
+                                    <li><a href="">Startup Guide</a></li>
+                                    <li><a href="">Training Videos</a></li>
+                                    <li><a href="">Help Center</a></li>
+                                    <li><a href="">Contact Us</a></li>
+                                </ul>
+                            </li>*@
 
                         <li class="hidden-xxs">
                             <a href="~/Account/LogOff">
@@ -168,72 +168,94 @@
     <div id="page-wrapper" class="container">
         <div class="row topMenuBtns">
 
-
             @RenderSection("leftmenue", required: false)
-
             @*content wrapper goes here*@
-            <div style="margin-top:20px;margin-left:12px;" id="divApprove">
-                <span style="color:#ffffff;font-size:24px;">Approve or Reject</span>
+            <div style="margin-top:20px;margin-left:8px;" id="divApprove">
+                @if (RoleId != "Franchise_Creative")
+                { 
+                    <span style="color:#ffffff;font-size:24px;">Approve or Reject</span>
+                }
 
+                @if (RoleId == "Franchise_Account_Manager")
+                {
+                     <span style="color:#ffffff;font-size:24px; margin-left:284px;">Enable or Disable</span>
+                }
             </div>
-           
+
+
             <div id="content-wrapper" style="padding-bottom:0px;" class="removeMenuMargin">
-               
-               
+
+
                 <div class="row" id="topArea" style="padding-left:0px; ">
-                    
-                      
-                       
-                    
+
+
+
+
                     <div class="pull-left hideInCoupons" style=" position: absolute;top:32%;">
-                       
+
                     </div>
                     <div class="row">
                         <div class="col-sm-12 pull-left">
 
-                            <a class="btn btn-default btn-gray " aria-expanded="false" style="padding-top:16px;" id="btnDealsApprov" href="~/Franchise/Dashboard/CouponsAproval">
-                                Deals <br /><br /><label style="font-size:30px;font-weight:bold" id="couponCount"> </label>
-                            </a>
-                           
-                            <a class="btn btn-default btn-gray " aria-expanded="false" style="padding-top:16px;" id="btnVideaAddApprov" href="~/Franchise/Dashboard/AddAproval?adType=1">
-                                Video Ads<br /><br /><label style="font-size:30px;font-weight:bold" id="vidioAdCount"></label></a>
-                            <a class="btn btn-default btn-gray " aria-expanded="false" style="padding-top:16px;" id="btnsponserGameApprov" href="~/Franchise/Dashboard/AddAproval?adType=4">
-                                Display Ads<br /><br /><label style="font-size:30px;font-weight:bold" id="displayAdCount"></label>
-                                
-                            </a>
-                            <a class="btn  btn-default btn-gray " aria-expanded="false" style="padding-top:16px;" id="btnPollsApprov" href="~/Franchise/Dashboard/SurveyQuestionApproval">
-                                Polls<br /><br /><label style="font-size:30px;font-weight:bold" id="surveyCount"></label>
-                                
-                            </a>
-                            <a class="btn btn-default btn-gray " aria-expanded="false" style="padding-top:16px;" id="btnSurveyApprove" href="~/Franchise/Dashboard/ProfileQuestionApproval">
-                                Surveys<br /><br /><label style="font-size:30px;font-weight:bold" id="profileCount"></label>
-                                
-                            </a>
-                            @*<a class="btn btn-default btn-gray " aria-expanded="false" id="btnTransferRates" style="padding-top:16px;" href="~/Franchise/Dashboard/TransferRateDashboard">
-                                Transfers
-                            </a>*@
-                            <a class="btn btn-default btn-gray " aria-expanded="false" id="btnAppUsers" style="padding-top:16px;" href="~/Franchise/RegisterUsers/UsersDashboard">
-                                App Users
-                            </a>
-                            <a class="btn btn-default btn-gray " aria-expanded="false" id="btnAprroveTransfer" style="padding-top:16px; display:none" href="~/Franchise/ApprovePayPal/PayPalDashboard">
-                                Pay Out
-                            </a>
+                            @if (RoleId == "Franchise_Admin")
+                            {
 
-                            <div class="btn-group"style="display:none">
+                                <a class="btn btn-default btn-gray " aria-expanded="false" style="padding-top:16px;" id="btnDealsApprov" href="~/Franchise/Dashboard/CouponsAproval">
+                                    Deals <br /><br /><label style="font-size:30px;font-weight:bold" id="couponCount"> </label>
+                                </a>
+                                <a class="btn btn-default btn-gray " aria-expanded="false" style="padding-top:16px;" id="btnVideaAddApprov" href="~/Franchise/Dashboard/AddAproval?adType=1">
+                                    Video Ads<br /><br /><label style="font-size:30px;font-weight:bold" id="vidioAdCount"></label>
+                                </a>
+                                <a class="btn btn-default btn-gray " aria-expanded="false" style="padding-top:16px;" id="btnsponserGameApprov" href="~/Franchise/Dashboard/AddAproval?adType=4">
+                                    Display Ads<br /><br /><label style="font-size:30px;font-weight:bold" id="displayAdCount"></label>
+                                </a>
+                                <a class="btn  btn-default btn-gray " aria-expanded="false" style="padding-top:16px;" id="btnPollsApprov" href="~/Franchise/Dashboard/SurveyQuestionApproval">
+                                    Polls<br /><br /><label style="font-size:30px;font-weight:bold" id="surveyCount"></label>
+                                </a>
+                                <a class="btn btn-default btn-gray " aria-expanded="false" style="padding-top:16px;" id="btnSurveyApprove" href="~/Franchise/Dashboard/ProfileQuestionApproval">
+                                    Surveys<br /><br /><label style="font-size:30px;font-weight:bold" id="profileCount"></label>
+
+                                </a>
+
+                                <a class="btn btn-default btn-gray " aria-expanded="false" id="btnAprroveTransfer" style="padding-top:16px;" href="~/Franchise/ApprovePayPal/PayPalDashboard">
+                                    Payment Approval 1
+                                </a>
+                            }
+                            @if (RoleId == "Franchise_Account_Manager")
+                            {
+                                <a class="btn btn-default btn-gray " aria-expanded="false" id="btnAprroveTransfer" style="padding-top:16px;margin-bottom:13px;" href="~/Franchise/ApprovePayPal/PayPalDashboard">
+                                    Payment Approval 2<br /><br /><label></label>
+                                </a>
+                                @*<a class="btn btn-default btn-gray " aria-expanded="false" id="btnTransferRates" style="padding-top:16px;" href="~/Franchise/Dashboard/TransferRateDashboard">
+                                        Transfers
+                                    </a>*@
+                                <a class="btn btn-default btn-gray " aria-expanded="false" id="btnAppUsers" style="padding-top:16px; margin-left:300px;margin-bottom:13px;" href="~/Franchise/RegisterUsers/UsersDashboard">
+                                    App Users<br /><br /><label></label>
+                                </a>
+                            }
+                            @if (RoleId == "Franchise_Creative")
+                            {
+                                <a class="btn btn-default btn-gray " aria-expanded="false" id="btnAppUsers" style="padding-top:16px;" href="~/survey/?m=1">
+                                    System Polls
+                                </a>
+                                <a class="btn btn-default btn-gray " aria-expanded="false" id="btnAppUsers" style="padding-top:16px;" href="~/ProfileQuestion/Manage/Index">
+                                    System Survey Questions
+                                </a>
+                            }
+
+                            <div class="btn-group" style="display:none">
                                 <button type="button" class="btn btn-default btn-gray dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width:177px;">
                                     Approve/Reject <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu">
-
 
                                     <li><a href="~/Franchise/Dashboard/AddAproval">Ad Campaigns</a></li>
                                     <li><a href="~/Franchise/Dashboard/CouponsAproval">Coupons</a></li>
                                     <li><a href="~/Franchise/Dashboard/SurveyQuestionApproval">Survey Questions</a></li>
                                     <li><a href="~/Franchise/Dashboard/ProfileQuestionApproval">Profile Questions</a></li>
 
-
                                 </ul>
-                                </div>
+                            </div>
                             <div class="btn-group" style="display:none">
                                 <button type="button" class="btn btn-default btn-gray dropdown-toggle" id="btnManageApprov" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Manage <span class="caret"></span>
@@ -246,45 +268,37 @@
 
                                 </ul>
                             </div>
-
                             <div class="btn-group">
                                 <button type="button" class="btn btn-default btn-gray dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="display:none">
                                     Reports <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu">
 
-
                                     <li><a href="#">All Live Campaigns Report</a></li>
                                     <li><a href="#">Afilliated Companies Report</a></li>
                                     <li><a href="~/Billing/Manage/Invoice">Invoices</a></li>
                                     <li><a href="~/Report/Report/TransactionReport">Transaction Report</a></li>
-
                                 </ul>
                             </div>
-
                             <div class="btn-group">
                                 <button type="button" class="btn btn-default btn-gray dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="display:none ">
                                     Actions <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu">
-
                                     <li class=""><a href="~/user/ManageUser/ManageUsers">Invite Users </a></li>
-                                    
+
                                     <li><a href="~/survey/?m=1">Invite A Business</a></li>
-                                  
 
 
                                 </ul>
                             </div>
 
+                            @*<a class="btn  btn-default btn-gray" style="float:left; width:20%;height:66px;margin-right:15px; white-space:normal;" id="btncampaigns" href="/Ads/Ads/AddAproval">Approve Video Campaigns</a>
+                                <a class="btn  btn-default btn-gray" style="float:left;width:20%;height:66px;white-space:normal;" href="/Coupons/Coupons" id="btnCoupons">Approve Cooupons</a>
+                                <a class="btn  btn-default btn-gray" style="float:left;width:20%;height:66px;white-space:normal;" href="/Survey/" id="btnSurvey">Approve Survey Questions</a>
+                                <a class="btn  btn-default btn-gray" style="float:left;width:20%;height:66px;white-space:normal;" href="~/ProfileQuestion/Manage/Index" id="btnProQuestions">Approve Profile Questions</a>*@
 
-                                @*<a class="btn  btn-default btn-gray" style="float:left; width:20%;height:66px;margin-right:15px; white-space:normal;" id="btncampaigns" href="/Ads/Ads/AddAproval">Approve Video Campaigns</a>
-            <a class="btn  btn-default btn-gray" style="float:left;width:20%;height:66px;white-space:normal;" href="/Coupons/Coupons" id="btnCoupons">Approve Cooupons</a>
-            <a class="btn  btn-default btn-gray" style="float:left;width:20%;height:66px;white-space:normal;" href="/Survey/" id="btnSurvey">Approve Survey Questions</a>
-            <a class="btn  btn-default btn-gray" style="float:left;width:20%;height:66px;white-space:normal;" href="~/ProfileQuestion/Manage/Index" id="btnProQuestions">Approve Profile Questions</a>*@
-
-
-                            </div>
+                        </div>
                         @*<div class="col-sm-6 pull-right text-right" >
 
                             <a class="btn btn-default btn-gray " id="btninviteusers" style="    width: 100px;float:right;margin-right:0px;" href="~/user/ManageUser/ManageUsers">Create Global Surveys</a>
@@ -295,12 +309,10 @@
                             <a class="btn btn-default btn-gray " id="btninviteusers" style="    width: 100px;float:right;margin-right:0px;" href="~/user/ManageUser/ManageUsers">Invite Users</a>
 
                             </div>*@
-                        </div>
+                    </div>
                 </div>
 
-
             </div>
-
 
             @RenderBody()
             <!-- ko stopBinding: true -->
@@ -316,19 +328,16 @@
                     Html.RenderPartial("~/Areas/Common/Views/Shared/_phraseLibrary.cshtml");
                 }
             </div>
-
             <div id="bindingUserProfilePartialViews">
                 @{
                     Html.RenderPartial("~/Areas/Common/Views/Shared/_UserProfile.cshtml");
                 }
             </div>
-
             <div id="bindingCompanyProfilePartialViews">
                 @{
                     Html.RenderPartial("~/Areas/Common/Views/Shared/_companyProfile.cshtml");
                 }
             </div>
-
             <div id="spinner" style="display: none">
             </div>
             <div id="siteUrl">
@@ -340,7 +349,7 @@
             </footer>
         </div>
     </div>
-   
+
     @*<!-- ko stopBinding: true -->
         @Html.Partial("~/Areas/Common/Views/Shared/_ConfirmationDialog.cshtml")
         <!-- /ko -->*@
@@ -362,6 +371,10 @@
         function showMainMenu() {
 
             $('#topArea').collapse('show');
+        }
+        function GotoHome()
+        {
+            window.location.href = "/";
         }
 
     </script>
