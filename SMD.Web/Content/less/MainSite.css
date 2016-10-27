@@ -1062,7 +1062,7 @@ div#spinner {
 }
 
 .close>span {
-    color:#ffffff!important;
+    color:white!important;
 }
 .loginMenu {
         left: auto !important;
@@ -1426,6 +1426,10 @@ margin-top:2px;
     padding: 8px 10px 8px 47px!important;
     background-repeat: no-repeat!important;
     background-color: #3071a9!important;
+}
+.modal-title {
+    color:#fff!important;
+
 }
 .searchCount {
     color:#fff;
