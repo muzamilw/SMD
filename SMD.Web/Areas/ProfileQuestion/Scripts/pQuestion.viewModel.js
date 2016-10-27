@@ -23,6 +23,7 @@ define("pQuestion/pQuestion.viewModel",
                     countries = ko.observableArray([]),
                     userBaseData = ko.observable({ CurrencySymbol: '', isStripeIntegrated: false }),
                     qGroup = ko.observableArray([]),
+                    showAnswerTable = ko.observable(false),
                     selectedQuestionCountryList = ko.observableArray([]),
                     professions = ko.observableArray([]),
                     ageRange = ko.observableArray([]),
@@ -510,7 +511,7 @@ define("pQuestion/pQuestion.viewModel",
                     var languageIds = '', industryIds = '', languageIdsExcluded = '',
                         industryIdsExcluded = '', profileQuestionIds = '', profileAnswerIds = '',
                         surveyQuestionIds = '', surveyAnswerIds = '', profileQuestionIdsExcluded = '', profileAnswerIdsExcluded = '',
-                        surveyQuestionIdsExcluded = '', surveyAnswerIdsExcluded = '';
+                        surveyQuestionIdsExcluded = '', surveyAnswerIdsExcluded = '', CampaignQuizIds = '', CampaignQuizAnswerIds = '', CampaignQuizAnswerIdsExcluded = '', CampaignQuizIdsExcluded = '';;
                     _.each(selectedQuestion().ProfileQuestionTargetCriteria(), function (item) {
                         if (item.Type() == 1) {
                             if (item.IncludeorExclude() == '0') {
@@ -605,6 +606,31 @@ define("pQuestion/pQuestion.viewModel",
                                 }
                             }
                         }
+                        else if (item.Type() == 6) {        //Quiz questions
+                            if (item.IncludeorExclude() == '0') {
+                                if (CampaignQuizIdsExcluded == '') {
+                                    CampaignQuizIdsExcluded += item.QuizCampaignId();
+                                } else {
+                                    surveyQuestionIdsExcluded += ',' + item.QuizCampaignId();
+                                }
+                                if (CampaignQuizAnswerIdsExcluded == '') {
+                                    CampaignQuizAnswerIdsExcluded += item.QuizAnswerId();
+                                } else {
+                                    CampaignQuizAnswerIdsExcluded += ',' + item.QuizAnswerId();
+                                }
+                            } else {
+                                if (CampaignQuizIds == '') {
+                                    CampaignQuizIds += item.QuizCampaignId();
+                                } else {
+                                    CampaignQuizIds += ',' + item.QuizCampaignId();
+                                }
+                                if (CampaignQuizAnswerIds == '') {
+                                    CampaignQuizAnswerIds += item.QuizAnswerId();
+                                } else {
+                                    CampaignQuizAnswerIds += ',' + item.QuizAnswerId();
+                                }
+                            }
+                        }
                     });
                     var surveyData = {
                         ageFrom: selectedQuestion().AgeRangeStart(),
@@ -627,7 +653,12 @@ define("pQuestion/pQuestion.viewModel",
                         surveyQuestionIdsExcluded: surveyQuestionIdsExcluded,
                         surveyAnswerIdsExcluded: surveyAnswerIdsExcluded,
                         educationIds: educationIds,
-                        educationIdsExcluded: educationIdsExcluded
+                        educationIdsExcluded: educationIdsExcluded,
+                        CampaignQuizIds:CampaignQuizIds,
+                        CampaignQuizAnswerIds:CampaignQuizAnswerIds,
+                        CampaignQuizAnswerIdsExcluded:CampaignQuizAnswerIdsExcluded,
+                        CampaignQuizIdsExcluded: CampaignQuizIdsExcluded
+
                     };
 
                     dataservice.getAudienceData(surveyData, {
@@ -1457,7 +1488,7 @@ define("pQuestion/pQuestion.viewModel",
                  var languageIds = '', industryIds = '', languageIdsExcluded = '',
                      industryIdsExcluded = '', profileQuestionIds = '', profileAnswerIds = '',
                      surveyQuestionIds = '', surveyAnswerIds = '', profileQuestionIdsExcluded = '', profileAnswerIdsExcluded = '',
-                     surveyQuestionIdsExcluded = '', surveyAnswerIdsExcluded = '';
+                     surveyQuestionIdsExcluded = '', surveyAnswerIdsExcluded = '', CampaignQuizIds = '', CampaignQuizAnswerIds = '', CampaignQuizAnswerIdsExcluded = '', CampaignQuizIdsExcluded = '';;
                  _.each(selectedQuestion().ProfileQuestionTargetCriteria(), function (item) {
                      if (item.Type() == 1) {
                          if (item.IncludeorExclude() == '0') {
@@ -1552,6 +1583,31 @@ define("pQuestion/pQuestion.viewModel",
                              }
                          }
                      }
+                     else if (item.Type() == 6) {        //Quiz questions
+                         if (item.IncludeorExclude() == '0') {
+                             if (CampaignQuizIdsExcluded == '') {
+                                 CampaignQuizIdsExcluded += item.QuizCampaignId();
+                             } else {
+                                 surveyQuestionIdsExcluded += ',' + item.QuizCampaignId();
+                             }
+                             if (CampaignQuizAnswerIdsExcluded == '') {
+                                 CampaignQuizAnswerIdsExcluded += item.QuizAnswerId();
+                             } else {
+                                 CampaignQuizAnswerIdsExcluded += ',' + item.QuizAnswerId();
+                             }
+                         } else {
+                             if (CampaignQuizIds == '') {
+                                 CampaignQuizIds += item.QuizCampaignId();
+                             } else {
+                                 CampaignQuizIds += ',' + item.QuizCampaignId();
+                             }
+                             if (CampaignQuizAnswerIds == '') {
+                                 CampaignQuizAnswerIds += item.QuizAnswerId();
+                             } else {
+                                 CampaignQuizAnswerIds += ',' + item.QuizAnswerId();
+                             }
+                         }
+                     }
                  });
                  var surveyData = {
                      ageFrom: selectedQuestion().AgeRangeStart(),
@@ -1574,7 +1630,12 @@ define("pQuestion/pQuestion.viewModel",
                      surveyQuestionIdsExcluded: surveyQuestionIdsExcluded,
                      surveyAnswerIdsExcluded: surveyAnswerIdsExcluded,
                      educationIds: educationIds,
-                     educationIdsExcluded: educationIdsExcluded
+                     educationIdsExcluded: educationIdsExcluded,
+                     ampaignQuizIds:ampaignQuizIds,
+                     CampaignQuizAnswerIds:CampaignQuizAnswerIds,
+                     CampaignQuizAnswerIdsExcluded:CampaignQuizAnswerIdsExcluded,
+                     CampaignQuizIdsExcluded: CampaignQuizIdsExcluded
+
                  };
 
                  dataservice.getAudienceData(surveyData, {
@@ -2317,7 +2378,8 @@ define("pQuestion/pQuestion.viewModel",
                     CampaignRatioAnalyticData: CampaignRatioAnalyticData,
                     CampaignTblAnalyticsData: CampaignTblAnalyticsData,
                     CampaignROItblAnalyticData: CampaignROItblAnalyticData,
-                    iSfmodevar: iSfmodevar
+                    iSfmodevar: iSfmodevar,
+                    showAnswerTable: showAnswerTable
                 };
             })()
         };

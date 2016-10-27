@@ -190,7 +190,7 @@ define("Coupons/Coupons.viewModel",
                         if (data != null) {
                             currency = ' (' + data.UserAndCostDetails.CurrencySymbol + ')';
                             UserAndCostDetail(data.UserAndCostDetails);
-                            currencyCode(currency + ' ← Price');
+                            currencyCode(currency);
                             currencySymbol(data.UserAndCostDetails.CurrencySymbol);
 
                             if (data.Currencies != null) {
@@ -486,8 +486,9 @@ define("Coupons/Coupons.viewModel",
             });
             confirmation.afterCancel(function () {
 
-                couponModel();
-                selectedCriteria();
+               
+               
+
                 isEditorVisible(false);
                 if (isFromEdit() == true) {
                     isListVisible(true);
@@ -2069,7 +2070,7 @@ define("Coupons/Coupons.viewModel",
             ,
             CloseContent = function () {
                 $(".hideInCoupons").css("display", "none");
-                $("#MarketobjDiv").css("display", "block");
+                $("#MarketobjDiv").css("display", "none");
 
                 $("#topArea").css("display", "block");
                 $("#Heading_div").css("display", "block");

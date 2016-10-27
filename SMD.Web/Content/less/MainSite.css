@@ -1072,7 +1072,7 @@ div#spinner {
   background-color: #1d3d52;
     min-height: 48px;
     border-radius: 5px;
-    width: 224px;
+    width: 225px;
     padding: 10px;
     margin: 3px;
     cursor:pointer;
@@ -1330,8 +1330,8 @@ margin-top:2px;
 }
 .closecls {
     height:20px;
-   
-     width:20px;
+    width:20px;
+    cursor:pointer;
 }
 .statusesdiv {
     width: 258px;
@@ -1339,7 +1339,7 @@ margin-top:2px;
     padding-left: 20px;
 }
 .datespansclr {
-    color:gainsboro;
+    color:#c7c5c5;
     font-style: italic;
     font-size:12px;
 }
@@ -1353,12 +1353,87 @@ margin-top:2px;
     width:60px;
 }
 .pollsstatus_img {
-        height:60px;
+    height:60px;
     width: 60px;
 }
 .backgroundbtn {
 }
-/*.videopanel,.displayadspanel {
-    padding-top:15px;
-}*/
-/*# sourceMappingURL=MainSite.css.map */
+.paddingright0px {
+    padding-right:0px!important;
+}
+.paddingleft0px {
+    padding-left:0px!important;
+}
+.fontsize13px {
+    font-size:13px!important;
+}
+.fontitalic {
+    font-style:italic;
+}
+.padding0px {
+    padding:0px!important;
+}
+.margin_panelbtns {
+    margin-top:9px!important;
+}
+.textalignright {
+    text-align:right;
+}
+.textalignleft {
+    text-align:right;
+}
+.message_label {
+    font-size:16px;
+    color: #7f8c8d;
+    margin-top:17px;
+}
+#headdesc {
+    font-style:italic;
+}
+.create_deal_btn {
+  background: url(/Content/Images/Deals_Small_36.png);
+    background-position: 2px 0px;
+    padding: 10px 32px 8px 49px!important;
+    background-repeat: no-repeat;
+    background-color: #3071a9;
+}
+
+.create_Campaign_btn {
+      background: url(/Content/Images/Videos_small_36.png);
+    background-position: 6px 1px;
+    padding: 8px 10px 8px 47px!important;
+    background-repeat: no-repeat;
+    background-color: #3071a9;
+}
+
+.create_polls_btn {
+  background: url(/Content/Images/Polls_small_36.png);
+    background-position: 5px 1px;
+    padding: 8px 10px 8px 47px!important;
+    background-repeat: no-repeat;
+    background-color: #3071a9;
+}
+.create_survey_btn {
+  background: url(/Content/Images/Surveys_small_36.png);
+    background-position: 6px 0px;
+    padding: 8px 10px 8px 47px!important;
+    background-repeat: no-repeat;
+    background-color: #3071a9;
+}
+.create_game_btn {
+  background: url(/Content/Images/Display_small_36.png);
+    background-position: 5px 0px;
+    padding: 8px 10px 8px 47px!important;
+    background-repeat: no-repeat;
+    background-color: #3071a9;
+}
+.searchCount {
+    color:#fff;
+}
+.margintop12px {
+    margin-top:12px;
+}
+.previewImg {
+    width: 30px;
+    margin-bottom: 4px;
+}

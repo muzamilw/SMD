@@ -92,7 +92,7 @@ else
                                 <div class="pull-left ads-numbering-main">
                                     <a data-toggle="modal" data-target=".model_quizQ_ph">
                                         <div class="ads-numbering-box" style="background: rgb(104,179,89);">
-                                            <img src="~/Content/Images/AD_Campaign_mobileStencil.png" style="width:20px" />
+                                            <img src="~/Content/Images/Preview.png" class="previewImg" />
                                         </div>
                                         <br />
                                         <span>Preview</span>
@@ -122,7 +122,7 @@ else
 
                                     <div class="pull-left">
                                         <div>
-                                            <span class="datespanheader">Video</span>
+                                            <span class="datespanheader" data-bind="text:$root.CampaignHeader()"></span>
                                         </div>
 
                                         <div class="datespansclr">
@@ -1027,11 +1027,11 @@ else
                                             <div class="col-lg-12">
 
                                                 <div class="col-lg-7" style="padding-top:3px;">
-                                                    <div class="col-lg-8">
-                                                        <span class="text-campaign-left panelfntSize" style="margin-top:-4px;">Pay Per Result(PPR)</span>
+                                                    <div class="col-lg-11 paddingright0px">
+                                                        <span class="text-campaign-left fontsize13px" style="margin-top:-4px;">Pay Per Result(PPR)</span>
 
                                                     </div>
-                                                    <div class="col-lg-4" style="padding-right:0px;text-align:right;">
+                                                    <div class="col-lg-1" style="padding-right:0px;text-align:right;">
                                                         <span>$</span>
                                                     </div>
                                                 </div>
@@ -1048,7 +1048,7 @@ else
 
                                                 <div class="col-lg-7" style="float:left;padding-top:4px;">
                                                     <div class="col-lg-11">
-                                                        <span class="text-campaign-left panelfntSize" style="margin-top:-4px;">Daily budget</span>
+                                                        <span class="text-campaign-left fontsize13px" style="margin-top:-4px;">Daily budget</span>
                                                     </div>
 
                                                     <div class="col-lg-1" style="padding-right:0px;text-align:right;">
@@ -1089,7 +1089,7 @@ else
 
                                         </div>
 
-                                        <div class="col-lg-12" style="padding-left:24px;">
+                                        <div class="col-lg-12" style="padding-left:24px;margin-top:6px;">
 
                                             <span style=" font-size:12px;">  Learn more about 'Ad Click'</span><img style="height:14px;" src="/Content/Images/Drop_Arrow.png" data-toggle="collapse" data-target="#demo" />
 
