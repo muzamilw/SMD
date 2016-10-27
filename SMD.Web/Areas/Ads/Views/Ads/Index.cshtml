@@ -19,8 +19,8 @@ else
     <div class="col-lg-12" style="padding-left: 0px;padding-right:0px;">
         <div class="pull-left" id="subdiv">
 
-            <label id="headlabel" class="pull-left" style="font-size:24px;color:#fff!important;margin-top:7px;">Manage your Ad Campaigns - </label>
-            <label id="headdesc" class="pull-left" style="color:#fff;font-size:14px;margin-top:15px;">Click on a campaign to view Analytic,Graphs and to modify.</label>
+            <label id="headlabel" class="pull-left" style="font-size:24px;color:#fff!important;margin-top:7px;">Video Ads</label>
+            <label id="headdesc" class="pull-left" style="color:#fff;font-size:14px;margin-top:15px;margin-left:10px;">Click on a campaign to view Analytic,Graphs and to modify.</label>
             <div class="clearfix"></div>
         </div>
         <div class="pull-right">
@@ -94,7 +94,7 @@ else
                     <div class="clearfix">
                     </div>
                 </div>
-                <div data-bind="visible: $root.campaignGridContent().length == 0" style="display:none;">
+                <div data-bind="visible: $root.campaignGridContent().length == 0" style="display:none;" class="margintop12px">
                     <div class="main-box no-header clearfix" style="padding:20px;" data-bind="visible:!isDisplayCouponsAds()">
                         No campaigns found.
                     </div>
@@ -284,7 +284,7 @@ else
                
                 <div style="width:100%;">
                     <span style="font-size:18px;float:left;color:#81d3dc!important;"  data-bind="text:$root.MainHeading"></span>
-                    <button style="float:right;margin-top:-15px;" class="btn btn-primary" data-bind="click:$root.addNewCampaign,visible:!$root.isDisplayCouponsAds()">
+                    <button style="float:right;margin-top:-15px;" class="btn btn-primary create_Campaign_btn" data-bind="click:$root.addNewCampaign,visible:!$root.isDisplayCouponsAds()">
                         Create New Campaign
                     </button>
                     <div style="clear:both;"></div>
@@ -320,14 +320,20 @@ else
                     </select>
                 </div>
             </form>
-
+            
             <div class="col-sm-3" style="float:right;margin-top:0px; text-align:right">
-                <img class="defvideoimage" src="/Content/Images/Videos_small.png" data-bind="visible:$root.VideoImage">
-                <img class="Game_image" src="/Content/Images/Display_small.png" data-bind="visible:$root.DisplayImage">
-
-                <button class="btn btn-primary" style="" data-bind="click:$root.addNewCampaign,visible:!$root.isDisplayCouponsAds()">
-                    Create New Campaign
-                </button>
+                @*<img class="defvideoimage" src="/Content/Images/Videos_small.png" data-bind="visible:$root.VideoImage">
+                <img class="Game_image" src="/Content/Images/Display_small.png" data-bind="visible:$root.DisplayImage">*@
+                <div data-bind="visible:$root.IsvideoBtn()">
+                    <button class=" btn btn-primary create_Campaign_btn" style="" data-bind="click:$root.addNewCampaign,visible:!$root.isDisplayCouponsAds()">
+                        Create Video Ad
+                    </button>
+                </div>
+                <div data-bind="visible:$root.IsGameAds()">
+                    <button class="btn btn-primary create_game_btn" style="" data-bind="click:$root.addNewCampaign,visible:!$root.isDisplayCouponsAds()">
+                        Create Display Ad
+                    </button>
+                </div>
                 @*<button class="btn btn-primary" style="display:none;" data-bind="click:$root.addNewCampaign,visible:$root.isDisplayCouponsAds()">
                     Create Coupon
                 </button>*@

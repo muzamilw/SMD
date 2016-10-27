@@ -85,7 +85,8 @@ define("FranchiseDashboard/Coupons.viewModel",
                             });
                     },
                     onApproveCoupon = function () {
-                             confirmation.messageText("Do you want to approve this Coupon ? System will attempt to collect payment and generate invoice");
+                        var conformTet = "Do you want to approve this Deal ? " + "<br\>" + "System will attempt to collect payment and generate invoice";
+                        confirmation.messageText(conformTet);
                              confirmation.show();
                              confirmation.afterCancel(function () {
                                  confirmation.hide();

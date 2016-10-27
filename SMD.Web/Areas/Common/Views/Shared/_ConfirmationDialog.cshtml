@@ -1,15 +1,16 @@
 ﻿<div id="dialog-confirm" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialogConfirmModalLabel" aria-hidden="true" style="z-index: 100000">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" id="dismiss" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="myModalLabel" data-bind="text: headingText">Confirmation</h4>
+            <div class="modal-header"style="background-color: #0f68a1">
+                <img src="/Content/Images/Close_Button.png" class="close" data-dismiss="modal" style="width:20px;height:20px;float:right;cursor:pointer;">
+                @*<button type="button" class="close" id="dismiss" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>*@
+                <h4 class="modal-title" id="myModalLabel" style="color:#fff" data-bind="text: headingText">Confirmation</h4>
             </div>
             <div class="modal-body">
                 <div>
                     <form class="form-horizontal">
                         <div>
-                            <span data-bind="text: messageText"></span>
+                            <p data-bind="html: messageText"></p>
                         </div>
                     </form>
                 </div>

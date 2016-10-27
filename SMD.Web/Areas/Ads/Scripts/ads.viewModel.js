@@ -21,6 +21,7 @@ define("ads/ads.viewModel",
                     VideoImage = ko.observable(false),
                     DisplayImage = ko.observable(false),
                     ButItOtherLabel = ko.observable(''),
+                    CampaignHeader = ko.observable(''),
                     langs = ko.observableArray([]),
                     TemporaryList = ko.observableArray([]),
                     TemporaryProfileList = ko.observableArray([]),
@@ -30,6 +31,8 @@ define("ads/ads.viewModel",
                     showLandingPageUrl = ko.observable(true),
                     StatusCodeName = ko.observable(''),
                     StatusCodeImage = ko.observable(''),
+                    IsvideoBtn = ko.observable(false),
+                    IsGameAds = ko.observable(false),
                     countoryidList = [],
                     cityidList = [],
                     langidList = [],
@@ -530,6 +533,8 @@ define("ads/ads.viewModel",
                         $("#MarketobjDiv").css("display", "none");
                         $("#topArea,#headdesc").css("display", "block");
                         $(".closecls").css("display", "block");
+                   
+                        $("#Heading_div").css("display", "block");
                     });
 
                     confirmation.show();
@@ -578,6 +583,7 @@ define("ads/ads.viewModel",
                 $("#headlabel").css("display", "block");
                 $("#headdesc").css("display", "block");
                 $(".closecls").css("display", "block");
+                $("#Heading_div").css("display", "block");
 
             },
 
@@ -634,13 +640,14 @@ define("ads/ads.viewModel",
                     isFromEdit(false);
                     $("#panelArea").css("display", "block");
 
-                    $(".hideInCoupons").css("display", "block");
+                    $(".hideInCoupons").css("display", "none");
 
-                    $("#MarketobjDiv").css("display", "block");
+                    $("#MarketobjDiv").css("display", "none");
                     $("#topArea").css("display", "block");
                     $("#headlabel").css("display", "block");
 
                     $("#headdesc").css("display", "block");
+                    $(".closecls").css("display", "block");
                 },
 
              BackToAds = function () {
@@ -957,7 +964,7 @@ define("ads/ads.viewModel",
 
                 //if other question then
                 if (buyItQuestionLabelStatus() == true) {
-                    debugger;
+             
                     campaignModel().BuyItButtonLabel();
 
                     // couponModel().BuyitBtnLabel(ButItOtherLabel());
@@ -1479,6 +1486,7 @@ define("ads/ads.viewModel",
                 onChangeProfileQuestion = function (item) {
 
                     var y = $(".listview").scrollTop();  //your current y position on the page
+                   
 
                     if (item == null)
                         return;
@@ -1500,7 +1508,8 @@ define("ads/ads.viewModel",
 
                                 profileAnswerList.valueHasMutated();
 
-                                $(".listview").scrollTop(y +40);
+                                // $(".listview").scrollTop(y+40);
+                              
                             }
 
                         },
@@ -3237,15 +3246,18 @@ define("ads/ads.viewModel",
                         DisplayImage(true);
                         StatusCodeName("Display Ad");
                         StatusCodeImage("/Content/Images/Display_small.png");
-                        
+                        IsvideoBtn(false);
+                        IsGameAds(true);
+                        CampaignHeader('Display');
                     }
                     else {
                         UrlHeadings("Direct viewers to a landing page at the end of your video ad.");
                         IsShownforVideo(true);
                         VideoImage(true);
-
-                        StatusCodeName("Display Ad");
-
+                        IsvideoBtn(true);
+                        IsGameAds(false);
+                        StatusCodeName("Display");
+                        CampaignHeader('Video');
                         StatusCodeImage("/Content/Images/Videos_small.png");
                     }
                     view = specifiedView;
@@ -3465,7 +3477,10 @@ define("ads/ads.viewModel",
                     VideoImage: VideoImage,
                     DisplayImage: DisplayImage,
                     StatusCodeName: StatusCodeName,
-                    StatusCodeImage: StatusCodeImage
+                    StatusCodeImage: StatusCodeImage,
+                    IsvideoBtn: IsvideoBtn,
+                    IsGameAds: IsGameAds,
+                    CampaignHeader: CampaignHeader
                 };
             })()
         };

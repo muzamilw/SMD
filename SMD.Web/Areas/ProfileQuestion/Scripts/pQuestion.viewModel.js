@@ -23,6 +23,7 @@ define("pQuestion/pQuestion.viewModel",
                     countries = ko.observableArray([]),
                     userBaseData = ko.observable({ CurrencySymbol: '', isStripeIntegrated: false }),
                     qGroup = ko.observableArray([]),
+                    showAnswerTable = ko.observable(false),
                     selectedQuestionCountryList = ko.observableArray([]),
                     professions = ko.observableArray([]),
                     ageRange = ko.observableArray([]),
@@ -660,6 +661,7 @@ define("pQuestion/pQuestion.viewModel",
                         CampaignQuizAnswerIds: CampaignQuizAnswerIds,
                         CampaignQuizAnswerIdsExcluded: CampaignQuizAnswerIdsExcluded,
                         CampaignQuizIdsExcluded: CampaignQuizIdsExcluded
+
                     };
 
                     dataservice.getAudienceData(surveyData, {
@@ -1638,6 +1640,7 @@ define("pQuestion/pQuestion.viewModel",
                      CampaignQuizAnswerIds: CampaignQuizAnswerIds,
                      CampaignQuizAnswerIdsExcluded: CampaignQuizAnswerIdsExcluded,
                      CampaignQuizIdsExcluded: CampaignQuizIdsExcluded
+
                  };
 
                  dataservice.getAudienceData(surveyData, {
@@ -2386,7 +2389,8 @@ define("pQuestion/pQuestion.viewModel",
                     CampaignRatioAnalyticData: CampaignRatioAnalyticData,
                     CampaignTblAnalyticsData: CampaignTblAnalyticsData,
                     CampaignROItblAnalyticData: CampaignROItblAnalyticData,
-                    iSfmodevar: iSfmodevar
+                    iSfmodevar: iSfmodevar,
+                    showAnswerTable: showAnswerTable
                 };
             })()
         };

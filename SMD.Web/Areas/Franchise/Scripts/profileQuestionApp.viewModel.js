@@ -80,7 +80,7 @@ define("FranchiseDashboard/profileQuestionApp.viewModel",
                             });
                     },
                     onApprovePq = function () {
-                        confirmation.messageText("Do you want to approve this Survay question ? System will attempt to collect payment and generate invoice");
+                        confirmation.messageText("Do you want to approve this Survay question ?"+"<br\>" + "System will attempt to collect payment and generate invoice");
                         confirmation.show();
                         confirmation.afterCancel(function () {
                             confirmation.hide();

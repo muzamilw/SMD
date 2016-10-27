@@ -34,7 +34,7 @@ namespace SMD.Implementation
 
 
 
-        public void AddCompanyIdClaimToIdentity(ClaimsIdentity identity, int CompanyId, string CompanyName, string CompanyLogo, string RoleName,string userName,string MobileNumber,string email)
+        public void AddCompanyIdClaimToIdentity(ClaimsIdentity identity, int CompanyId, string CompanyName, string CompanyLogo, string RoleName,string userName,string MobileNumber,string email, string sRoleId)
         {
             Claim claim = new Claim(SmdClaimTypes.CompanyId,
                 // ReSharper restore SuggestUseVarKeywordEvident
@@ -43,7 +43,7 @@ namespace SMD.Implementation
                                         typeof(CompanyIdClaimValue).AssemblyQualifiedName);
             identity.AddClaim(claim);
 
-            identity.AddClaim(new Claim(SmdClaimTypes.Role, ClaimHelper.Serialize(new SmdRoleClaimValue { Role = RoleName }), typeof(SmdRoleClaimValue).AssemblyQualifiedName));
+            identity.AddClaim(new Claim(SmdClaimTypes.Role, ClaimHelper.Serialize(new SmdRoleClaimValue { Role = RoleName, RoleId= sRoleId }), typeof(SmdRoleClaimValue).AssemblyQualifiedName));
         }
         #endregion
     }

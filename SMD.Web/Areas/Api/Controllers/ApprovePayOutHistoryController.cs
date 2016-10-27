@@ -30,7 +30,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         #region Methods
         public SMD.Models.ResponseModels.PayOutResponseModelForApproval Get([FromUri]GetPagedListRequest request)
         {
-            var obj = request.UserRole == "Franchise_Approver1" ? _payOutHistoryService.GetPayOutHistoryForApprovalStage1(request) : _payOutHistoryService.GetPayOutHistoryForApprovalStage2(request);
+            var obj = request.UserRole == "Franchise Admin" ? _payOutHistoryService.GetPayOutHistoryForApprovalStage1(request) : request.UserRole == "Franchise Account Manager" ? _payOutHistoryService.GetPayOutHistoryForApprovalStage2(request) : null;
             return obj;
         }
         public string Post(PayOutHistory payOut)

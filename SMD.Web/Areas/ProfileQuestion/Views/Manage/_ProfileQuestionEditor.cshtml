@@ -79,21 +79,21 @@
                         <div class="pull-left ads-numbering-main">
                             <a data-toggle="modal" data-target=".model_quizQ_ph">
                                 <div class="ads-numbering-box" style="background: rgb(104,179,89);">
-                                    <img src="/Content/Images/AD_Campaign_mobileStencil.png" width="20px">
+                                    <img src="~/Content/Images/Preview.png" class="previewImg" />
                                 </div>
                                 <br>
                                 <span>Preview</span>
                             </a>
                         </div>
-                        <div class="pull-left" style="width:515px;">
+                        <div class="pull-left" style="width:519px;">
                             <div>
                                 <div class="pull-right ads-numbering-main" style="width:103px;
     border-right: 1px solid rgb(220,220,220);
     padding-left: 32px;
-    text-align: left;">
+    text-align: left;height:106px;">
                                     <a data-toggle="modal" data-bind="click:$root.openAdvertiserDashboardSurvayScreen">
                                         <div class="ads-numbering-box" style="background:#9690cf;">
-                                            <img src="/Content/Images/AD_Campaign_mobileStencil.png" width="20px">
+                                            <img src="~/Content/Images/Preview.png" class="previewImg" />
                                         </div>
                                         <br>
                                         <span style="color:gainsboro;margin-left:6px;">Charts</span>
@@ -133,7 +133,7 @@
                         <div class="clearfix"></div>
                     </div>
                 </div>
-                <div class="col-lg-12">
+                <div class="col-lg-12 padding0px">
                     <div class="col-lg-9">
                         <div class="clearfix" data-bind="visible: $root.isAdvertdashboardSurvayVisible()">
                             <span class="pull-left " style="color:black!important; padding-left: 0px; font-size: 23px;" data-bind="text: questionString"></span>
@@ -148,7 +148,7 @@
                                 <div class="col-lg-12">
                                     <div style="height:34px;" class="borderbtmline ">
                                         <div class="col-lg-10 adsubHeading Theme_standard_clr">
-                                            <div class="adsubHeading Theme_standard_clr">Survey Question General Info.</div>
+                                            <div class="adsubHeading Theme_standard_clr">Survey Question</div>
                                         </div>
                                         <div class="col-lg-2">
                                             <div class="bs-example-tooltips tooltip-float-width tooltip ">
@@ -164,7 +164,7 @@
                                 </div>
                                 <div class="tab-content">
                                     <div class="tab-pane fade in active" data-bind="with: $root.selectedQuestion" id="tab-generalinfo">
-                                        <div class="col-lg-12 form-horizontal">
+                                        <div class="col-lg-12 form-horizontal padding0px">
 
                                             <div class="col-lg-9">
                                                 <div class="form-group">
@@ -250,6 +250,9 @@
                                                     </div>
                                                 </div>
                                             </div>
+
+                                         
+
                                             <div class="col-lg-9">
                                                 <div class="form-group" style="display:none;">
                                                     <div class="col-lg-4 text-right">
@@ -350,7 +353,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-9">
-                                                <div class="form-group" data-bind="visible:$root.iSfmodevar()==true">
+                                                <div class="form-group" style="display:none">@*data-bind="visible:$root.iSfmodevar()==true"*@
                                                     <div class="col-lg-3 text-right">
 
                                                         <label class="control-label text-right tooltip-float defaultImgUploadImageBtn">Has Linked Questions</label>
@@ -380,24 +383,49 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="col-lg-12 padding0px">
+                                                <div style="height:34px;" class="borderbtmline ">
+                                                    <div class="col-lg-10 adsubHeading Theme_standard_clr" style="margin-bottom:10px;">
+                                                        <div class="adsubHeading Theme_standard_clr" style="margin-bottom:10px;">Add 2,4 or 6 possible responses to your survey question</div>
+                                                    </div>
+                                                    <div class="col-lg-2">
+                                                        <div class="bs-example-tooltips tooltip-float-width tooltip ">
+                                                            <a class="input-group-addon" tabindex="-1" href="#" data-toggle="tooltip" title="" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;    padding: 0px;
+    padding-top: 5px;" data-container="body" data-placement="right" data-content="Add a city" data-original-title="Hooray!">
+                                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                            </a>
+                                                            <i class="fa fa-chevron-up" aria-hidden="true" style="color:#68b359;"></i>
+                                                            <span class="tooltiptext">Tooltip text</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 textalignright padding0px" >
+                                                <span class="message_label pull-left">No responses created yet.</span>
+                                                <a href="#" id="addTemplatePageBtn" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bs-example-modal-lg1" data-bind="click: $root.addNewAnswer, visible: $root.CanAddAnswers()">
+                                                    Add Answer
+                                                </a>
+                                                <div class="clearfix"></div>
+                                            </div>
                                             <div class="col-lg-9 form-horizontal">
                                                 @*<div class="tabsdescriptions" style="margin-top:25px;margin-left:2px;">
-                                                        <p class="group-header-description">All possible answers to the question. </p>
-                                                    </div>*@
+                    <p class="group-header-description">All possible answers to the question. </p>
+                </div>*@
                                                 <div class="form-group" @*data-bind="with: template"*@ style="padding-left:3px;padding-right:0px;">
                                                     <div class="col-lg-3"></div>
                                                     <div class="col-lg-8">
+
+                                                       
+
                                                         <header class="main-box-header clearfix" style="padding-right:0px;">
                                                             <div class="filter-block pull-right">
-                                                                <a href="#" id="addTemplatePageBtn" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bs-example-modal-lg1" data-bind="click: $root.addNewAnswer, visible: $root.CanAddAnswers()">
-                                                                    Add Answer
-                                                                </a>
+                                                                
                                                                 <div class="modal fade bs-example-modal-lg1" id="pqAnswerDialog" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
                                                                     <div class="modal-dialog modal-lg">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
                                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                                                <h4 class="modal-title Theme_standard_clr" id="gridSystemModalLabel">Add Question's Answer</h4>
+                                                                                <h4 class="modal-title" id="gridSystemModalLabel">Add Question's Answer</h4>
                                                                             </div>
                                                                             <div class="modal-body" data-bind="with:$root.selectedAnswer">
                                                                                 <div class="row">
@@ -436,7 +464,7 @@
                                                                                     <div class="col-lg-11 marginBottom12" data-bind="visible:type()=='1'">
                                                                                         <div class="form-group">
                                                                                             <div class="col-lg-3 text-right">
-                                                                                                <label class="control-label text-right tooltip-float">Answer String</label>
+                                                                                                <label class="control-label text-right tooltip-float">Response String</label>
                                                                                             </div>
                                                                                             <div class="col-lg-7">
                                                                                                 <input type="text" class="form-control" data-bind="value: answerString, validationTooltip: answerString">
@@ -457,7 +485,7 @@
                                                                                     <div class="col-lg-11 marginBottom12">
                                                                                         <div class="form-group">
                                                                                             <div class="col-lg-3 text-right">
-                                                                                                <label class="control-label text-right tooltip-float">Sort Order</label>
+                                                                                                <label class="control-label text-right tooltip-float">Button Sort Order</label>
                                                                                             </div>
                                                                                             <div class="col-lg-7">
                                                                                                 <input type="text" class="form-control" data-bind="value: sortOrder">
@@ -576,6 +604,8 @@
                                                                 </div>
                                                             </div>
                                                         </header>
+
+                                                        <!--ko if:$root.getSortedAnswers().length >  0 -->
                                                         <div class="table-responsive">
                                                             <table class="table table-striped table-hover">
                                                                 <thead>
@@ -590,6 +620,7 @@
                                                                 </tbody>
                                                             </table>
                                                         </div>
+                                                        <!--/ko-->
                                                     </div>
                                                     <div class="col-lg-1"></div>
                                                 </div>
@@ -924,17 +955,17 @@
                                     <div class="col-lg-12" style="padding-left:24px;">
                                         <div style="margin-top:0px;min-height:59px;">
                                             <div>
-                                                <button class="btn  btn-success btnSubmitApproval" id="btnSubmitForApproval2" data-bind="visible:$root.canSubmitForApproval,click:$root.SaveChanges" style="width:229px;margin-bottom:4px;">Submit for Approval</button>
-                                                <button class="btn  btn-success btnSubmitApproval bluethemeclr drafthov" id="btnSaveAsDraft" data-bind="visible:$root.isNewCampaign,click:$root.SaveAsDraft" style="width:229px;margin-bottom:4px;">Save as Draft</button>
-                                                <button class="btn  btn-info " id="btnStopAndTerminate" data-bind="visible:$root.isTerminateBtnVisible" style="width:229px; margin-bottom: 10px; display: none;">Stop &amp; Terminate Early</button>
-                                                <button class="btn  btn-danger " id="btnArchive" data-bind="visible: $root.isShowArchiveBtn" style="width: 229px; margin-bottom: 10px; display: none;">Archive Campaign</button>
-                                                <button class="btn  btn-info Theme_standard_clr" id="btnCopyCampaign" style="display:none;width: 229px;margin-bottom: 10px;">Create Copy - New Campaign</button>
+                                                <button class="btn  btn-success margin_panelbtns" id="btnSubmitForApproval2" data-bind="visible:$root.canSubmitForApproval,click:$root.SaveChanges" style="width:229px;margin-bottom:4px;">Submit for Approval</button>
+                                                <button class="btn  btn-success margin_panelbtns bluethemeclr drafthov" id="btnSaveAsDraft" data-bind="visible:$root.isNewCampaign,click:$root.SaveAsDraft" style="width:229px;margin-bottom:4px;">Save as Draft</button>
+                                                <button class="btn  btn-info margin_panelbtns" id="btnStopAndTerminate" data-bind="visible:$root.isTerminateBtnVisible" style="width:229px; margin-bottom: 10px; display: none;">Stop &amp; Terminate Early</button>
+                                                <button class="btn  btn-danger margin_panelbtns " id="btnArchive" data-bind="visible: $root.isShowArchiveBtn" style="width: 229px; margin-bottom: 10px; display: none;">Archive Campaign</button>
+                                                <button class="btn  btn-info Theme_standard_clr margin_panelbtns" id="btnCopyCampaign" style="display:none;width: 229px;margin-bottom: 10px;">Create Copy - New Campaign</button>
                                                 <button style="width: 229px; margin-bottom: 10px; display: none;" class="btn  btn-success" id="btnPauseCampaign" data-bind="click:$root.SavePassChanges,  visible: $root.IsPauseBtnVisible()">Pause</button>
-                                                <button class="btn  btn-success" id="btnResumeCampagin" data-bind="click:$root.SaveResumeChanges" style="display:none;width: 229px;margin-bottom: 10px;">Resume</button>
+                                                <button class="btn  btn-success margin_panelbtns" id="btnResumeCampagin" data-bind="click:$root.SaveResumeChanges" style="display:none;width: 229px;margin-bottom: 10px;">Resume</button>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-12" style="padding-left:24px;">
+                                    <div class="col-lg-12" style="padding-left:24px;margin-top:6px;">
                                         <span style=" font-size:12px;">  Learn more about 'Ad Click'</span><img style="height:14px;" src="/Content/Images/Drop_Arrow.png" data-toggle="collapse" data-target="#demo" />
                                     </div>
                                 </div>
