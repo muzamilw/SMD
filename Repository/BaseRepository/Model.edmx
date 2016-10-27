@@ -1040,6 +1040,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_CompanyUsers' does not have a primar
           <Property Name="companyid" Type="int" />
           <Property Name="CompanyName" Type="nvarchar(max)" />
           <Property Name="RoleId" Type="nvarchar" MaxLength="128" />
+          <Property Name="Logo" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SMDDev.dbo.vw_Coupons' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -2662,7 +2663,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
     [vw_CompanyUsers].[status] AS [status], 
     [vw_CompanyUsers].[companyid] AS [companyid], 
     [vw_CompanyUsers].[CompanyName] AS [CompanyName], 
-    [vw_CompanyUsers].[RoleId] AS [RoleId]
+    [vw_CompanyUsers].[RoleId] AS [RoleId], 
+    [vw_CompanyUsers].[Logo] AS [Logo]
     FROM [dbo].[vw_CompanyUsers] AS [vw_CompanyUsers]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vw_Coupons" EntityType="Self.vw_Coupons" store:Type="Views" store:Schema="dbo">
@@ -5518,6 +5520,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="companyid" Type="Int32" />
           <Property Name="CompanyName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="RoleId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Logo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="BranchCategory">
           <Key>
@@ -7849,6 +7852,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="vw_CompanyUsers">
             <EntityTypeMapping TypeName="DomainModels.vw_CompanyUsers">
               <MappingFragment StoreEntitySet="vw_CompanyUsers">
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
                 <ScalarProperty Name="companyid" ColumnName="companyid" />
