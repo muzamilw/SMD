@@ -60,8 +60,8 @@ define("FranchiseDashboard/payPallApp.viewModel",
                     },
                     onEditPayPallHistory = function (item) {
 
-                            //$("#topArea").css("display", "none");
-                            //$("#divApprove").css("display", "none");
+                            $("#topArea").css("display", "none");
+                            $("#divApprove").css("display", "none");
                             selectedPayPall(item);
                             getCompanyData(item);
                             // isEditorVisible(true);
@@ -70,8 +70,8 @@ define("FranchiseDashboard/payPallApp.viewModel",
                           
                         selectedPayPall(undefined);
                            isEditorVisible(false);
-                           //$("#topArea").css("display", "block");
-                           //$("#divApprove").css("display", "block");
+                           $("#topArea").css("display", "block");
+                           $("#divApprove").css("display", "block");
                     },
                     getCompanyData = function (selectedItem) {
                         
@@ -117,8 +117,8 @@ define("FranchiseDashboard/payPallApp.viewModel",
                               else
                                   selectedPayPall().stageTwoStatus(2)
                               onSavePayOut();
-                              //$("#topArea").css("display", "block");
-                              //$("#divApprove").css("display", "block");
+                              $("#topArea").css("display", "block");
+                              $("#divApprove").css("display", "block");
                           });
 
                     },
@@ -139,8 +139,8 @@ define("FranchiseDashboard/payPallApp.viewModel",
                               else
                                   selectedPayPall().stageTwoStatus(4)
                               onSavePayOut();
-                              //$("#topArea").css("display", "block");
-                              //$("#divApprove").css("display", "block");
+                              $("#topArea").css("display", "block");
+                              $("#divApprove").css("display", "block");
                           });
 
                       },
@@ -160,8 +160,8 @@ define("FranchiseDashboard/payPallApp.viewModel",
                                      selectedPayPall().stageTwoStatus(3)
                                      onSavePayOut();
                                  }
-                                 //$("#topArea").css("display", "block");
-                                 //$("#divApprove").css("display", "block");
+                                 $("#topArea").css("display", "block");
+                                 $("#divApprove").css("display", "block");
                              });
 
                          },

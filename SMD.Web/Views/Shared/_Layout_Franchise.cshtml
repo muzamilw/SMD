@@ -171,8 +171,17 @@
             @RenderSection("leftmenue", required: false)
             @*content wrapper goes here*@
             <div style="margin-top:20px;margin-left:8px;" id="divApprove">
-                <span style="color:#ffffff;font-size:24px;">Approve or Reject</span>
+                @if (RoleId != "Franchise_Creative")
+                { 
+                    <span style="color:#ffffff;font-size:24px;">Approve or Reject</span>
+                }
+
+                @if (RoleId == "Franchise_Account_Manager")
+                {
+                     <span style="color:#ffffff;font-size:24px; margin-left:284px;">Enable or Disable</span>
+                }
             </div>
+
 
             <div id="content-wrapper" style="padding-bottom:0px;" class="removeMenuMargin">
 
@@ -214,14 +223,14 @@
                             }
                             @if (RoleId == "Franchise_Account_Manager")
                             {
-                                <a class="btn btn-default btn-gray " aria-expanded="false" id="btnAprroveTransfer" style="padding-top:16px;" href="~/Franchise/ApprovePayPal/PayPalDashboard">
-                                    Payment Approval 2
+                                <a class="btn btn-default btn-gray " aria-expanded="false" id="btnAprroveTransfer" style="padding-top:16px;margin-bottom:13px;" href="~/Franchise/ApprovePayPal/PayPalDashboard">
+                                    Payment Approval 2<br /><br /><label></label>
                                 </a>
-                                <a class="btn btn-default btn-gray " aria-expanded="false" id="btnTransferRates" style="padding-top:16px;" href="~/Franchise/Dashboard/TransferRateDashboard">
-                                    Transfers
-                                </a>
-                                <a class="btn btn-default btn-gray " aria-expanded="false" id="btnAppUsers" style="padding-top:16px;" href="~/Franchise/RegisterUsers/UsersDashboard">
-                                    App Users
+                                @*<a class="btn btn-default btn-gray " aria-expanded="false" id="btnTransferRates" style="padding-top:16px;" href="~/Franchise/Dashboard/TransferRateDashboard">
+                                        Transfers
+                                    </a>*@
+                                <a class="btn btn-default btn-gray " aria-expanded="false" id="btnAppUsers" style="padding-top:16px; margin-left:300px;margin-bottom:13px;" href="~/Franchise/RegisterUsers/UsersDashboard">
+                                    App Users<br /><br /><label></label>
                                 </a>
                             }
                             @if (RoleId == "Franchise_Creative")
@@ -232,7 +241,7 @@
                                 <a class="btn btn-default btn-gray " aria-expanded="false" id="btnAppUsers" style="padding-top:16px;" href="~/ProfileQuestion/Manage/Index">
                                     System Survey Questions
                                 </a>
-                                }
+                            }
 
                             <div class="btn-group" style="display:none">
                                 <button type="button" class="btn btn-default btn-gray dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width:177px;">
@@ -362,6 +371,10 @@
         function showMainMenu() {
 
             $('#topArea').collapse('show');
+        }
+        function GotoHome()
+        {
+            window.location.href = "/";
         }
 
     </script>
