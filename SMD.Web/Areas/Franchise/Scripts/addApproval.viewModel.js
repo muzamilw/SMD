@@ -141,7 +141,7 @@ define("FranchiseDashboard/addApproval.viewModel",
                         return (selectedCampaign().hasChanges());
                     }),
                     onApproveCampaign = function () {
-                        confirmation.messageText("Do you want to Approve this vidio ad campaign ? system will attempt to collect payment and generate invoice");
+                        confirmation.messageText("Do you want to Approve this vidio ad campaign ?" + "<br\>" +  "System will attempt to collect payment and generate invoice");
                         confirmation.show();
                         confirmation.afterCancel(function () {
                             confirmation.hide();
@@ -237,7 +237,7 @@ define("FranchiseDashboard/addApproval.viewModel",
                         // First request for LV
                         var type = $('#typeParam').val();
                         if (type == 1) {
-                            lblPageTitle("Ad Campaigns For Approval");
+                            lblPageTitle("Video Ads For Approval");
                             $("#btnVideaAddApprov").css("background-color", "#34b9c7");
                         }
                         else {

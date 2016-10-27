@@ -23,10 +23,15 @@ define("FranchiseDashboard/payPallApp.viewModel",
                     approval1 = ko.observable(false),
                     approval2 = ko.observable(false),
                     getPayOutHistory = function () {
-                        if (UserRole == 'Franchise_Approver1')
+                        if (UserRole == 'Franchise Admin')
                             approval1(true);
-                        else
+                        else if (UserRole == 'Franchise Account Manager')
                             approval2(true);
+                        else
+                        {
+                            approval1(false);
+                            approval2(false);
+                        }
 
                            dataservice.getpayOutHistoryForApproval(
                                 {
@@ -107,7 +112,7 @@ define("FranchiseDashboard/payPallApp.viewModel",
                                   return false;
                               }
                               //selectedPayPall().isApproved(false);
-                              if (UserRole == 'Franchise_Approver1')
+                              if (UserRole == 'Franchise Admin')
                                   selectedPayPall().stageOneStatus(2)
                               else
                                   selectedPayPall().stageTwoStatus(2)
@@ -129,7 +134,7 @@ define("FranchiseDashboard/payPallApp.viewModel",
                                   return false;
                               }
                               //selectedPayPall().isApproved(false);
-                              if (UserRole == 'Franchise_Approver1')
+                              if (UserRole == 'Franchise Admin')
                                   selectedPayPall().stageOneStatus(1)
                               else
                                   selectedPayPall().stageTwoStatus(4)
@@ -151,7 +156,7 @@ define("FranchiseDashboard/payPallApp.viewModel",
                                      return false;
                                  }
                                  //selectedPayPall().isApproved(false);
-                                 if (UserRole == 'Franchise_Approver2') {
+                                 if (UserRole == 'Franchise Account Manager') {
                                      selectedPayPall().stageTwoStatus(3)
                                      onSavePayOut();
                                  }
