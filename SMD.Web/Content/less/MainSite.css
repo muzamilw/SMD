@@ -1339,7 +1339,7 @@ margin-top:2px;
     padding-left: 20px;
 }
 .datespansclr {
-    color:#c7c5c5;
+    color:#a4a4a4;
     font-style: italic;
     font-size:12px;
 }
@@ -1391,41 +1391,41 @@ margin-top:2px;
     font-style:italic;
 }
 .create_deal_btn {
-  background: url(/Content/Images/Deals_Small_36.png);
-    background-position: 2px 0px;
+  background: url(/Content/Images/Deals_Small_36.png)!important;
+    background-position: 2px 0px!important;
     padding: 10px 32px 8px 49px!important;
-    background-repeat: no-repeat;
-    background-color: #3071a9;
+    background-repeat: no-repeat!important;
+    background-color: #3071a9!important;
 }
 
 .create_Campaign_btn {
-      background: url(/Content/Images/Videos_small_36.png);
-    background-position: 6px 1px;
+      background: url(/Content/Images/Videos_small_36.png)!important;
+    background-position: 6px 1px!important;
     padding: 8px 10px 8px 47px!important;
-    background-repeat: no-repeat;
-    background-color: #3071a9;
+    background-repeat: no-repeat!important;
+    background-color: #3071a9!important;
 }
 
 .create_polls_btn {
-  background: url(/Content/Images/Polls_small_36.png);
-    background-position: 5px 1px;
+  background: url(/Content/Images/Polls_small_36.png)!important;
+    background-position: 5px 1px!important;
     padding: 8px 10px 8px 47px!important;
-    background-repeat: no-repeat;
-    background-color: #3071a9;
+    background-repeat: no-repeat!important;
+    background-color: #3071a9!important;
 }
 .create_survey_btn {
-  background: url(/Content/Images/Surveys_small_36.png);
-    background-position: 6px 0px;
+  background: url(/Content/Images/Surveys_small_36.png)!important;
+    background-position: 6px 0px!important;
     padding: 8px 10px 8px 47px!important;
-    background-repeat: no-repeat;
-    background-color: #3071a9;
+    background-repeat: no-repeat!important;
+    background-color: #3071a9!important;
 }
 .create_game_btn {
-  background: url(/Content/Images/Display_small_36.png);
-    background-position: 5px 0px;
+  background: url(/Content/Images/Display_small_36.png)!important;
+    background-position: 5px 0px!important;
     padding: 8px 10px 8px 47px!important;
-    background-repeat: no-repeat;
-    background-color: #3071a9;
+    background-repeat: no-repeat!important;
+    background-color: #3071a9!important;
 }
 .searchCount {
     color:#fff;
