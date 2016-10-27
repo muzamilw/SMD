@@ -342,34 +342,37 @@ define("survey/survey.viewModel",
                    });
                },
             totalPrice = ko.computed(function () {
-
+                var setupPrice = 19;
+                var PircePerclick = 0.04;
                 var ansNeeeded;
                 var calculatePrice
                 if (selectedQuestion() == undefined) {
                     return 0;
                 }
                 else {
-                    ansNeeeded = selectedQuestion().answerNeeded();
-                    if (ansNeeeded > 0 && ansNeeeded <= 1000) {
-                        calculatePrice = price();
-                        selectedQuestion().AmountCharged(calculatePrice);
-                        return "$ " + calculatePrice + " usd";
-                    }
-                    if (ansNeeeded > 1000 && ansNeeeded % 1000 == 0) {
-                        var val = ansNeeeded / 1000;
-                        calculatePrice = val * price();
-                        selectedQuestion().AmountCharged(calculatePrice);
-                        return "$ " + calculatePrice + " usd";
-                    }
-                    else {
-                        if (ansNeeeded > 1000 && ansNeeeded % 1000 != 0) {
-                            var val2 = ansNeeeded / 1000
-                            calculatePrice = price() * Math.ceil(val2);
-                            selectedQuestion().AmountCharged(calculatePrice);
-                            return "$ " + calculatePrice + " usd";
-                        }
+                    return "$ " + (setupPrice + (selectedQuestion().answerNeeded() * PircePerclick)).toFixed(2) + " usd";
 
-                    }
+                    //ansNeeeded = selectedQuestion().answerNeeded();
+                    //if (ansNeeeded > 0 && ansNeeeded <= 1000) {
+                    //    calculatePrice = price();
+                    //    selectedQuestion().AmountCharged(calculatePrice);
+                    //    return "$ " + calculatePrice + " usd";
+                    //}
+                    //if (ansNeeeded > 1000 && ansNeeeded % 1000 == 0) {
+                    //    var val = ansNeeeded / 1000;
+                    //    calculatePrice = val * price();
+                    //    selectedQuestion().AmountCharged(calculatePrice);
+                    //    return "$ " + calculatePrice + " usd";
+                    //}
+                    //else {
+                    //    if (ansNeeeded > 1000 && ansNeeeded % 1000 != 0) {
+                    //        var val2 = ansNeeeded / 1000
+                    //        calculatePrice = price() * Math.ceil(val2);
+                    //        selectedQuestion().AmountCharged(calculatePrice);
+                    //        return "$ " + calculatePrice + " usd";
+                    //    }
+
+                    //}
                 }
             }),
                 closeEditDialog = function () {

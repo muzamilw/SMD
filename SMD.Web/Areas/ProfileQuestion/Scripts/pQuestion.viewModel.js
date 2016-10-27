@@ -473,6 +473,9 @@ define("pQuestion/pQuestion.viewModel",
                     isEditorVisible(true);
                 },
                 getAudienceCountForAdd = function (SelectedQuestion) {
+
+                    alert('getAudienceCountForAdd');
+
                     var countryIds = '', cityIds = '', countryIdsExcluded = '', cityIdsExcluded = '';
                     var educationIds = '', educationIdsExcluded = '';
                     _.each(selectedQuestion().ProfileQuestionTargetLocation(), function (item) {
@@ -510,7 +513,7 @@ define("pQuestion/pQuestion.viewModel",
                     var languageIds = '', industryIds = '', languageIdsExcluded = '',
                         industryIdsExcluded = '', profileQuestionIds = '', profileAnswerIds = '',
                         surveyQuestionIds = '', surveyAnswerIds = '', profileQuestionIdsExcluded = '', profileAnswerIdsExcluded = '',
-                        surveyQuestionIdsExcluded = '', surveyAnswerIdsExcluded = '';
+                        surveyQuestionIdsExcluded = '', surveyAnswerIdsExcluded = '', CampaignQuizIds = '', CampaignQuizAnswerIds = '', CampaignQuizAnswerIdsExcluded = '', CampaignQuizIdsExcluded = '';
                     _.each(selectedQuestion().ProfileQuestionTargetCriteria(), function (item) {
                         if (item.Type() == 1) {
                             if (item.IncludeorExclude() == '0') {
@@ -605,6 +608,31 @@ define("pQuestion/pQuestion.viewModel",
                                 }
                             }
                         }
+                        else if (item.Type() == 6) {        //Quiz questions
+                            if (item.IncludeorExclude() == '0') {
+                                if (CampaignQuizIdsExcluded == '') {
+                                    CampaignQuizIdsExcluded += item.QuizCampaignId();
+                                } else {
+                                    surveyQuestionIdsExcluded += ',' + item.QuizCampaignId();
+                                }
+                                if (CampaignQuizAnswerIdsExcluded == '') {
+                                    CampaignQuizAnswerIdsExcluded += item.QuizAnswerId();
+                                } else {
+                                    CampaignQuizAnswerIdsExcluded += ',' + item.QuizAnswerId();
+                                }
+                            } else {
+                                if (CampaignQuizIds == '') {
+                                    CampaignQuizIds += item.QuizCampaignId();
+                                } else {
+                                    CampaignQuizIds += ',' + item.QuizCampaignId();
+                                }
+                                if (CampaignQuizAnswerIds == '') {
+                                    CampaignQuizAnswerIds += item.QuizAnswerId();
+                                } else {
+                                    CampaignQuizAnswerIds += ',' + item.QuizAnswerId();
+                                }
+                            }
+                        }
                     });
                     var surveyData = {
                         ageFrom: selectedQuestion().AgeRangeStart(),
@@ -627,7 +655,11 @@ define("pQuestion/pQuestion.viewModel",
                         surveyQuestionIdsExcluded: surveyQuestionIdsExcluded,
                         surveyAnswerIdsExcluded: surveyAnswerIdsExcluded,
                         educationIds: educationIds,
-                        educationIdsExcluded: educationIdsExcluded
+                        educationIdsExcluded: educationIdsExcluded,
+                        CampaignQuizIds: CampaignQuizIds,
+                        CampaignQuizAnswerIds: CampaignQuizAnswerIds,
+                        CampaignQuizAnswerIdsExcluded: CampaignQuizAnswerIdsExcluded,
+                        CampaignQuizIdsExcluded: CampaignQuizIdsExcluded
                     };
 
                     dataservice.getAudienceData(surveyData, {
@@ -1420,6 +1452,8 @@ define("pQuestion/pQuestion.viewModel",
                      }
                  },
              getAudienceCount = function () {
+                 alert('getAudienceCount');
+
                  var countryIds = '', cityIds = '', countryIdsExcluded = '', cityIdsExcluded = '';
                  var educationIds = '', educationIdsExcluded = '';
                  _.each(selectedQuestion().ProfileQuestionTargetLocation(), function (item) {
@@ -1457,7 +1491,7 @@ define("pQuestion/pQuestion.viewModel",
                  var languageIds = '', industryIds = '', languageIdsExcluded = '',
                      industryIdsExcluded = '', profileQuestionIds = '', profileAnswerIds = '',
                      surveyQuestionIds = '', surveyAnswerIds = '', profileQuestionIdsExcluded = '', profileAnswerIdsExcluded = '',
-                     surveyQuestionIdsExcluded = '', surveyAnswerIdsExcluded = '';
+                     surveyQuestionIdsExcluded = '', surveyAnswerIdsExcluded = '', CampaignQuizIds = '', CampaignQuizAnswerIds = '', CampaignQuizAnswerIdsExcluded = '', CampaignQuizIdsExcluded = '';
                  _.each(selectedQuestion().ProfileQuestionTargetCriteria(), function (item) {
                      if (item.Type() == 1) {
                          if (item.IncludeorExclude() == '0') {
@@ -1552,6 +1586,31 @@ define("pQuestion/pQuestion.viewModel",
                              }
                          }
                      }
+                     else if (item.Type() == 6) {        //Quiz questions
+                         if (item.IncludeorExclude() == '0') {
+                             if (CampaignQuizIdsExcluded == '') {
+                                 CampaignQuizIdsExcluded += item.QuizCampaignId();
+                             } else {
+                                 surveyQuestionIdsExcluded += ',' + item.QuizCampaignId();
+                             }
+                             if (CampaignQuizAnswerIdsExcluded == '') {
+                                 CampaignQuizAnswerIdsExcluded += item.QuizAnswerId();
+                             } else {
+                                 CampaignQuizAnswerIdsExcluded += ',' + item.QuizAnswerId();
+                             }
+                         } else {
+                             if (CampaignQuizIds == '') {
+                                 CampaignQuizIds += item.QuizCampaignId();
+                             } else {
+                                 CampaignQuizIds += ',' + item.QuizCampaignId();
+                             }
+                             if (CampaignQuizAnswerIds == '') {
+                                 CampaignQuizAnswerIds += item.QuizAnswerId();
+                             } else {
+                                 CampaignQuizAnswerIds += ',' + item.QuizAnswerId();
+                             }
+                         }
+                     }
                  });
                  var surveyData = {
                      ageFrom: selectedQuestion().AgeRangeStart(),
@@ -1574,7 +1633,11 @@ define("pQuestion/pQuestion.viewModel",
                      surveyQuestionIdsExcluded: surveyQuestionIdsExcluded,
                      surveyAnswerIdsExcluded: surveyAnswerIdsExcluded,
                      educationIds: educationIds,
-                     educationIdsExcluded: educationIdsExcluded
+                     educationIdsExcluded: educationIdsExcluded,
+                     CampaignQuizIds: CampaignQuizIds,
+                     CampaignQuizAnswerIds: CampaignQuizAnswerIds,
+                     CampaignQuizAnswerIdsExcluded: CampaignQuizAnswerIdsExcluded,
+                     CampaignQuizIdsExcluded: CampaignQuizIdsExcluded
                  };
 
                  dataservice.getAudienceData(surveyData, {
@@ -2065,33 +2128,39 @@ define("pQuestion/pQuestion.viewModel",
                       },
                         totalPrice = ko.computed(function () {
                             IsShowPriceDiv(true);
+                            var setupPrice = 19;
+                            var PircePerclick = 0.04;
+
                             var ansNeeeded;
-                            var calculatePrice
+                            var calculatePrice;
                             if (selectedQuestion() == undefined) {
                                 return 0;
                             }
                             else {
-                                ansNeeeded = selectedQuestion().answerNeeded();
-                                if (ansNeeeded > 0 && ansNeeeded <= 1000) {
-                                    calculatePrice = price();
-                                    selectedQuestion().amountCharge(calculatePrice);
-                                    return "$ " + calculatePrice + " usd";
-                                }
-                                if (ansNeeeded > 1000 && ansNeeeded % 1000 == 0) {
-                                    var val = ansNeeeded / 1000;
-                                    calculatePrice = val * price();
-                                    selectedQuestion().amountCharge(calculatePrice);
-                                    return "$ " + calculatePrice + " usd";
-                                }
-                                else {
-                                    if (ansNeeeded > 1000 && ansNeeeded % 1000 != 0) {
-                                        var val2 = ansNeeeded / 1000
-                                        calculatePrice = price() * Math.ceil(val2);
-                                        selectedQuestion().amountCharge(calculatePrice);
-                                        return "$ " + calculatePrice + " usd";
-                                    }
 
-                                }
+                                return "$ " + (setupPrice + (selectedQuestion().answerNeeded() * PircePerclick)).toFixed(2) + " usd";
+
+                                //ansNeeeded = selectedQuestion().answerNeeded();
+                                //if (ansNeeeded > 0 && ansNeeeded <= 1000) {
+                                //    calculatePrice = price();
+                                //    selectedQuestion().amountCharge(calculatePrice);
+                                //    return "$ " + calculatePrice + " usd";
+                                //}
+                                //if (ansNeeeded > 1000 && ansNeeeded % 1000 == 0) {
+                                //    var val = ansNeeeded / 1000;
+                                //    calculatePrice = val * price();
+                                //    selectedQuestion().amountCharge(calculatePrice);
+                                //    return "$ " + calculatePrice + " usd";
+                                //}
+                                //else {
+                                //    if (ansNeeeded > 1000 && ansNeeeded % 1000 != 0) {
+                                //        var val2 = ansNeeeded / 1000
+                                //        calculatePrice = price() * Math.ceil(val2);
+                                //        selectedQuestion().amountCharge(calculatePrice);
+                                //        return "$ " + calculatePrice + " usd";
+                                //    }
+
+                                //}
                             }
                         }),
                            saveSurveyQuestionCriteria = function (type, item) {

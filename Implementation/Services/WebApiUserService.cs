@@ -961,6 +961,18 @@ namespace SMD.Implementation.Services
             user.UserName = user.UserName + "_archived" + numb.ToString();
             user.Email = user.Email + "_archived" + numb.ToString();
 
+            var company = companyRepository.Find(user.CompanyId.Value);
+            if ( company != null)
+            {
+                company.IsDeleted = true;
+                company.DeleteDate = DateTime.Now;
+                company.AboutUsDescription = user.ContactNotes;
+
+                companyRepository.Update(company);
+                companyRepository.SaveChanges();
+
+            }
+
 
             //removing any provider logins.
             var logins = UserManager.GetLogins(userId);
