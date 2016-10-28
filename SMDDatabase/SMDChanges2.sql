@@ -2241,3 +2241,42 @@ select a.*, ( select
 
 
 GO
+
+
+
+
+USE [SMDv2]
+GO
+
+/****** Object:  View [dbo].[vw_CompanyUsers]    Script Date: 10/27/2016 6:52:17 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+
+
+ALTER VIEW [dbo].[vw_CompanyUsers]
+AS
+
+select cu.id,u.id as UserId, 
+
+(case when u.email is null then cu.InvitationEmail else u.email end) as email
+
+
+, u.FullName, r.Name as RoleName, cu.CreatedOn, (case  when cu.status = 1 then 'Invitation Sent' when cu.status = 2 then 'Active' end) status, cu.companyid , c.CompanyName, cu.RoleId, c.Logo
+from dbo.CompaniesAspNetUsers  cu
+inner join   dbo.AspNetRoles r on r.Id = roleid
+left outer join AspNetUsers u on u.Id = cu.userid
+inner join Company c on cu.CompanyId = c.CompanyId
+
+
+
+
+
+GO
+
+

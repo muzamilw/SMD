@@ -417,21 +417,25 @@ define("ads/ads.viewModel",
                 VideoLink2src(null);
                 isShowArchiveBtn(false);
                 campaignModel().ChannelType("1");
-                campaignModel().ClickRate("0.12");
+
                 campaignModel().MaxDailyBudget("5");
                 campaignModel().MaxBudget("20");
                 campaignModel().Type(mode);
                 campaignModel().DeliveryDays("3");
                 campaignModel().LandingPageVideoLink("https://www.");
                 previewScreenNumber(1);
+
+                //if display ad then
                 if (mode == 4) {
                     campaignModel().CampaignName("New display ad");
                     $("#logo_div").css("display", "block");
+                    campaignModel().ClickRate("0.08");
                 }
 
-                else {
+                else {//video ad
                     campaignModel().CampaignName("New video campaign");
                     $("#logo_div").css("display", "none");
+                    campaignModel().ClickRate("0.16");
                 }
 
 
@@ -789,8 +793,16 @@ define("ads/ads.viewModel",
                          campaignModel().ClickRate(0);
                      }
 
-                     if (campaignModel().ClickRate() < 0.06) {
-                         errorListNew.push({ name: "Ad Click should be greater than $ 0.06 USD", element: "" });
+                     var minclickrate = 0;
+                     if (mode == 4)
+                         minclickrate = 0.08;
+                     else
+                         minclickrate = 0.16;
+               
+
+
+                     if (campaignModel().ClickRate() < minclickrate) {
+                         errorListNew.push({ name: "Ad Click should be greater than $ "+minclickrate+" USD", element: "" });
                      }
 
                      if ((parseInt(campaignModel().MaxBudget()) < parseInt(campaignModel().ClickRate()))) {
@@ -2029,13 +2041,14 @@ define("ads/ads.viewModel",
                                     });
 
 
-                                    //but it button cases
+                                    //buy it button cases
                                     buyItQuestionStatus(campaignModel().ShowBuyitBtn());
 
                                     var buyitbuttonlabel = campaignModel().BuyItButtonLabel();
 
                                     if (campaignModel().ShowBuyitBtn() == false) {
                                         $("#ddTextBtns").val('0');
+                                        BuyItStatus(false);
                                     }
                                     else {
                                         if (buyitbuttonlabel == 'Apply Now' ||
@@ -2051,11 +2064,14 @@ define("ads/ads.viewModel",
                                              ) {
                                             buyItQuestionLabelStatus(false);
                                             $("#ddTextBtns").val(buyitbuttonlabel);
+                                            BuyItStatus(false);
+                                            
                                         }
                                         else {
                                             $("#ddTextBtns").val('999');
                                             buyItQuestionLabelStatus(true);
                                             ButItOtherLabel(buyitbuttonlabel);
+                                            BuyItStatus(true);
                                         }
                                     }
 

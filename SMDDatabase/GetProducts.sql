@@ -1,6 +1,6 @@
 ﻿USE [SMDv2]
 GO
-/****** Object:  StoredProcedure [dbo].[GetProducts]    Script Date: 10/20/2016 10:36:22 AM ******/
+/****** Object:  StoredProcedure [dbo].[GetProducts]    Script Date: 10/27/2016 9:56:00 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -71,11 +71,16 @@ from
 				END as
 			  ItemType, 
 			((adcampaign.ClickRate * 50) / 100) * 100 as AdClickRate,  -- Amount AdViewer will get
-			adcampaign.ImagePath as AdImagePath, 
+			case  when adcampaign.Type = 4  -- Flyer
+				then
+				  'http://manage.cash4ads.com/' + AdCampaign.LogoUrl
+				  end
+			as AdImagePath,  --adcampaign.ImagePath 
 			Case 
 				when adcampaign.Type = 3  -- Flyer
 				THEN
 				  adcampaign.LandingPageVideoLink--'http://manage.cash4ads.com/' +   LandingPageVideoLink -- 'http://manage.cash4ads.com/Ads/Ads/Content/' + CONVERT(NVARCHAR, CampaignID)
+				
 				when adcampaign.Type != 3
 				THEN
 					adcampaign.LandingPageVideoLink
@@ -110,16 +115,16 @@ from
 			NULL as SqLeftImagePercentage, NULL as SqRightImagePercentage,
 			null as SocialHandle, null as SocialHandleType,
 			
-				case when AdCampaign.Type = 1 then
+				--case when AdCampaign.Type = 1 then
 					(select 'http://manage.cash4ads.com/' + c.logo from Company c
 					where c.CompanyId = adcampaign.CompanyId)
-				when AdCampaign.Type = 4 then
-					'http://manage.cash4ads.com/' + AdCampaign.LogoUrl
-				end
+				--when AdCampaign.Type = 4 then
+				--	'http://manage.cash4ads.com/' + AdCampaign.LogoUrl
+				--end
 
 			 as AdvertisersLogoPath,
 
-			adcampaign.VideoUrl as LandingPageUrl,
+			adcampaign.LandingPageVideoLink as LandingPageUrl,--adcampaign.VideoUrl as LandingPageUrl,
 			adcampaign.BuuyItLine1 as BuyItLine1,
 			adcampaign.BuyItLine2 as BuyItLine2,
 			 adcampaign.BuyItLine3 as BuyItLine3,
@@ -252,13 +257,13 @@ from
 						and
 						-- location type matching clauses -  the filtering logic of location country and city
 						(
-							(locf.matchcrit > 0 )
+							1=1--(locf.matchcrit > 0 )
 						)
 
 						and
 						-- industry type matching clauses -  the filtering logic of industry types
 						(
-							(indf.matchcrit > 0 )
+							1=1--(indf.matchcrit > 0 )
 						)
 						and
 						--- system profile questions - the filtering logic of profile insights 
@@ -268,7 +273,7 @@ from
 						
 						)
 						and
-						--- user adcampaing quiz answer - the filtering logic of ad quiz results 
+						--- user adcampaign quiz answer - the filtering logic of ad quiz results 
 						(
 							(acf.totalcrit  = acf.matchcrit ) 
 
@@ -301,7 +306,11 @@ from
 				END as
 			  ItemType, 
 			0 as AdClickRate,  -- Amount AdViewer will get
-			adcampaign.ImagePath as AdImagePath, 
+			case  when adcampaign.Type = 4  -- Flyer
+				then
+				  'http://manage.cash4ads.com/' + AdCampaign.LogoUrl
+				  end
+			as AdImagePath,  --adcampaign.ImagePath 
 			Case 
 				when adcampaign.Type = 3  -- Flyer
 				THEN
@@ -340,18 +349,18 @@ from
 			NULL as SqLeftImagePercentage, NULL as SqRightImagePercentage,
 			null as SocialHandle, null as SocialHandleType,
 			
-				case when AdCampaign.Type = 1 then
+				--case when AdCampaign.Type = 1 then
 					(select 'http://manage.cash4ads.com/' + c.logo from Company c
 					where c.CompanyId = adcampaign.CompanyId)
-				when AdCampaign.Type = 4 then
-					'http://manage.cash4ads.com/' + AdCampaign.LogoUrl
-				end
+				--when AdCampaign.Type = 4 then
+				--	'http://manage.cash4ads.com/' + AdCampaign.LogoUrl
+				--end
 
 			 as AdvertisersLogoPath,
 
 			
 
-			adcampaign.VideoUrl as LandingPageUrl,
+			adcampaign.LandingPageVideoLink as LandingPageUrl,--adcampaign.VideoUrl as LandingPageUrl,
 			adcampaign.BuuyItLine1 as BuyItLine1,
 			adcampaign.BuyItLine2 as BuyItLine2,
 			 adcampaign.BuyItLine3 as BuyItLine3,
@@ -394,7 +403,11 @@ from
 				END as
 			  ItemType, 
 			0 as AdClickRate,  -- Amount AdViewer will get
-			adcampaign.ImagePath as AdImagePath, 
+			case  when adcampaign.Type = 4  -- Flyer
+				then
+				  'http://manage.cash4ads.com/' + AdCampaign.LogoUrl
+				  end
+			as AdImagePath,  --adcampaign.ImagePath 
 			Case 
 				when adcampaign.Type = 3  -- Flyer
 				THEN
@@ -432,18 +445,18 @@ from
 			NULL as SqLeftImagePercentage, NULL as SqRightImagePercentage,
 			null as SocialHandle, null as SocialHandleType,
 		
-				case when AdCampaign.Type = 1 then
+				--case when AdCampaign.Type = 1 then
 					(select 'http://manage.cash4ads.com/' + c.logo from Company c
 					where c.CompanyId = adcampaign.CompanyId)
-				when AdCampaign.Type = 4 then
-					'http://manage.cash4ads.com/' + AdCampaign.LogoUrl
-				end
+				--when AdCampaign.Type = 4 then
+				--	'http://manage.cash4ads.com/' + AdCampaign.LogoUrl
+				--end
 
 			 as AdvertisersLogoPath,
 
 			
 
-			adcampaign.VideoUrl as LandingPageUrl,
+			adcampaign.LandingPageVideoLink as LandingPageUrl,--adcampaign.VideoUrl as LandingPageUrl,
 			adcampaign.BuuyItLine1 as BuyItLine1,
 			adcampaign.BuyItLine2 as BuyItLine2,
 			 adcampaign.BuyItLine3 as BuyItLine3,
