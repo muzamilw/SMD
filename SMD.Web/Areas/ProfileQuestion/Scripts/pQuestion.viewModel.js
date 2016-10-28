@@ -29,6 +29,7 @@ define("pQuestion/pQuestion.viewModel",
                     ageRange = ko.observableArray([]),
                     AgeRangeEnd = ko.observable(80),
                     AgeRangeStart = ko.observable(13),
+                    IsnewSurveyQuestion = ko.observable(false),
                     ShowAudienceCounter = ko.observable(0),
                     SelectedPvcVal = ko.observable(0),
                     isNewCriteria = ko.observable(true),
@@ -116,11 +117,17 @@ define("pQuestion/pQuestion.viewModel",
 					CampaignStatusDropDown = ko.observableArray([{ id: 1, name: "Answered" }, { id: 2, name: "Skipped" }]),
 				    CampaignRatioAnalyticData = ko.observable(1),
 					openAdvertiserDashboardSurvayScreen = function () {
-					    getSurvayAnalytics();
-					    $("#ddGranularityDropDown").removeAttr("disabled");
-					    $("#ddDateRangeDropDown").removeAttr("disabled");
-					    $("#ddCampaignStatusDropDown").removeAttr("disabled");
-					    isAdvertdashboardSurvayVisible(true);
+					    if (!IsnewSurveyQuestion()) {
+					        getSurvayAnalytics();
+					        $("#ddGranularityDropDown").removeAttr("disabled");
+					        $("#ddDateRangeDropDown").removeAttr("disabled");
+					        $("#ddCampaignStatusDropDown").removeAttr("disabled");
+					        isAdvertdashboardSurvayVisible(true);
+					    }
+					    else {
+					        confirmation.showOKpopupforChart();
+
+					    }
 					},
 
 				getSurvayAnalytics = function () {
@@ -433,7 +440,7 @@ define("pQuestion/pQuestion.viewModel",
                     HeaderText("New Survey Question");
 
 
-
+                    IsnewSurveyQuestion(true);
 
                     StatusText("Draft");
                     isTerminateBtnVisible(false);
@@ -475,7 +482,7 @@ define("pQuestion/pQuestion.viewModel",
                 },
                 getAudienceCountForAdd = function (SelectedQuestion) {
 
-                    alert('getAudienceCountForAdd');
+                    
 
                     var countryIds = '', cityIds = '', countryIdsExcluded = '', cityIdsExcluded = '';
                     var educationIds = '', educationIdsExcluded = '';
@@ -751,7 +758,7 @@ define("pQuestion/pQuestion.viewModel",
                     selectedPQIDAnalytics(item.qId());
                     IsPauseBtnVisible(false);
                     canSubmitForApproval(false);
-
+                    IsnewSurveyQuestion(false);
                     $("#panelArea,#topArea,#Heading_div").css("display", "none");
 
                     AgeRangeStart(13);
@@ -1454,8 +1461,7 @@ define("pQuestion/pQuestion.viewModel",
                      }
                  },
              getAudienceCount = function () {
-                 alert('getAudienceCount');
-
+                 
                  var countryIds = '', cityIds = '', countryIdsExcluded = '', cityIdsExcluded = '';
                  var educationIds = '', educationIdsExcluded = '';
                  _.each(selectedQuestion().ProfileQuestionTargetLocation(), function (item) {
@@ -2390,7 +2396,8 @@ define("pQuestion/pQuestion.viewModel",
                     CampaignTblAnalyticsData: CampaignTblAnalyticsData,
                     CampaignROItblAnalyticData: CampaignROItblAnalyticData,
                     iSfmodevar: iSfmodevar,
-                    showAnswerTable: showAnswerTable
+                    showAnswerTable: showAnswerTable,
+                    IsnewSurveyQuestion: IsnewSurveyQuestion
                 };
             })()
         };
