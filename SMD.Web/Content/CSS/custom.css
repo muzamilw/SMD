@@ -435,8 +435,9 @@ a.reportAnchor a:hover {
 .close {
     float: right;
     font-size: 1.429em;
- color: #7a7a7a;
+    color: #7a7a7a;
     cursor: pointer;
+    opacity:initial!important;
 }
     .line-separator{
 
