@@ -54,7 +54,8 @@ define("survey/survey.viewModel",
                     isNewCriteria = ko.observable(true),
                     canSubmitForApproval = ko.observable(true),
                     isTerminateBtnVisible = ko.observable(true),
-                     showCompanyProfileQuestions = ko.observable(false),
+                    showCompanyProfileQuestions = ko.observable(false),
+                    IsnewSurvey = ko.observable(false),
                      criteriaCount = ko.observable(0),
                     // age list 
                     ageRange = ko.observableArray([]),
@@ -96,12 +97,18 @@ define("survey/survey.viewModel",
                 CampaignStatusDropDown = ko.observableArray([{ id: 1, name: "Answered" }, { id: 2, name: "Skipped" }]),
                 CampaignRatioAnalyticData = ko.observable(1),
                 openAdvertiserDashboardPollScreen = function () {
-                    getSurvayAnalytics();
-                    $("#ddGranularityDropDown").removeAttr("disabled");
-                    $("#ddDateRangeDropDown").removeAttr("disabled");
-                    $("#ddCampaignStatusDropDown").removeAttr("disabled");
+                    if (!IsnewSurvey()) {
+                        getSurvayAnalytics();
+                        $("#ddGranularityDropDown").removeAttr("disabled");
+                        $("#ddDateRangeDropDown").removeAttr("disabled");
+                        $("#ddCampaignStatusDropDown").removeAttr("disabled");
 
-                    isAdvertdashboardPollVisible(true);
+                        isAdvertdashboardPollVisible(true);
+                    }
+                    else {
+                        confirmation.showOKpopupforChart();
+
+                    }
                 },
             getSurvayAnalytics = function () {
                 dataservice.getSurvayAnalytics({
@@ -283,6 +290,7 @@ define("survey/survey.viewModel",
                     StatusValue('');
                     isNewCampaign(true);
                     StatusValue("Draft");
+                    IsnewSurvey(true);
                     selectedQuestion(new model.Survey());
                     selectedQuestion().Gender("1");
                     selectedQuestion().LeftPicturePath("/Images/select_image.jpg");
@@ -427,6 +435,7 @@ define("survey/survey.viewModel",
             },
                 // On editing of existing PQ
                 onEditSurvey = function (item) {
+                    IsnewSurvey(false);
                     selectedSQIDAnalytics(item.SQID());
                     selectedQuestionCountryList([]); $("#panelArea,#topArea,#Heading_div").css("display", "none");
                     gotoScreen(1);
@@ -2161,7 +2170,8 @@ define("survey/survey.viewModel",
                     openAdvertiserDashboardPollScreen: openAdvertiserDashboardPollScreen,
                     CampaignRatioAnalyticData: CampaignRatioAnalyticData,
                     CampaignTblAnalyticsData: CampaignTblAnalyticsData,
-                    CampaignROItblAnalyticData: CampaignROItblAnalyticData
+                    CampaignROItblAnalyticData: CampaignROItblAnalyticData,
+                    IsnewSurvey: IsnewSurvey
                 };
             })()
         };

@@ -93,7 +93,7 @@
     text-align: left;height:106px;">
                                     <a data-toggle="modal" data-bind="click:$root.openAdvertiserDashboardSurvayScreen">
                                         <div class="ads-numbering-box" style="background:#9690cf;">
-                                            <img src="~/Content/Images/Preview.png" class="previewImg" />
+                                            <img src="~/Content/Images/Charts.png" style="width:20px;" />
                                         </div>
                                         <br>
                                         <span style="color:gainsboro;margin-left:6px;">Charts</span>
@@ -872,7 +872,7 @@
                                                 <button class="btn  btn-danger btnAdsCampaign ButtonWidth filterbtnclrs" id="" data-toggle="modal" data-target=".bs-example-modal-lg" data-bind="click:$root.showAdditionQuizCriteria">Ad Click Answers</button>
                                             </div>
 
-                                            <div class="pull-left filtersDiv_width" style="display:none;">
+                                            <div class="pull-left filtersDiv_width">
                                                 <button class="btn  btn-danger btnAdsCampaign ButtonWidth filterbtnclrs" id="" data-toggle="modal" data-bind="click:$root.showAdditionUserSurveyCriteria" data-target=".bs-example-modal-lg">My poll results</button>
                                             </div>
                                             <div class="pull-left filtersDiv_width">
@@ -1030,11 +1030,11 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal fade bs-example-modal-lg" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><img class="pull-right closecls_main" src="/Content/Images/Close_Button.png"></button>
                         <h4 class="modal-title" id="gridSystemModalLabel">Add Criteria</h4>
                     </div>
                     <div class="modal-body" data-bind="with:$root.selectedCriteria">
@@ -1098,8 +1098,8 @@
                                         <div class="clearfix"></div>
                                         <div class="" data-bind="visible: $root.AditionalCriteriaMode() == '4'">
                                             @*<div class="row header">
-                                                    <label class="control-label modelHeading">Survey Questions</label>
-                                                </div>*@
+                                                <label class="control-label modelHeading">Survey Questions</label>
+                                            </div>*@
                                             <div class="listview parentList set-border padding10 list-type-tiles" data-role="listview" id="lv1">
                                                 <!-- ko template: { name: 'SurveyssQuestionTiles' , foreach: $root.surveyquestionList} --><!-- /ko -->
                                                 <div class="clear-both"></div>
@@ -1108,8 +1108,8 @@
 
                                         <div class="" data-bind="visible: $root.AditionalCriteriaMode() == '3'">
                                             @*<div class="row header">
-                                                    <label class="control-label modelHeading">Your Quiz Questions</label>
-                                                </div>*@
+                                                <label class="control-label modelHeading">Your Quiz Questions</label>
+                                            </div>*@
                                             <div class="listview parentList set-border padding10 list-type-tiles" data-role="listview" id="lv2">
                                                 <!-- ko template: { name: 'surveyQuestionTiles' , foreach: $root.myQuizQuestions} --><!-- /ko -->
                                                 <div data-bind="visible: $root.myQuizQuestions().length == 0" style="display:none;">

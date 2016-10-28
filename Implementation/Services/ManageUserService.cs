@@ -75,7 +75,8 @@ namespace SMD.Implementation.Services
                     RoleName = usr.Roles.FirstOrDefault() != null ? usr.Roles.FirstOrDefault().Name : "",
                     status = "active",
                     UserId = UserId,
-                    RoleId = usr.Roles.FirstOrDefault() != null ? usr.Roles.FirstOrDefault().Id : ""
+                    RoleId = usr.Roles.FirstOrDefault() != null ? usr.Roles.FirstOrDefault().Id : "",
+                    Logo = company.Logo
 
                 };
 

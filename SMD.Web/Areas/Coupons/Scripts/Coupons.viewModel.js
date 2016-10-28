@@ -16,6 +16,7 @@ define("Coupons/Coupons.viewModel",
                     isEditorVisible = ko.observable(false),
                     EditorLoading = ko.observable(false),
                     ISshowPhone = ko.observable(false),
+                    IsnewCoupon = ko.observable(false),
                     langs = ko.observableArray([]),
                     countoryidList = [],
                     cityidList = [],
@@ -146,10 +147,17 @@ define("Coupons/Coupons.viewModel",
                 Banner5Flag = ko.observable(false),
                 Banner6Flag = ko.observable(false),
                 openAdvertiserDashboardDealScreen = function () {
-                    getDealsAnalytics();
-                    $("#ddGranularityDropDown").removeAttr("disabled");
-                    $("#ddDateRangeDropDown").removeAttr("disabled");
-                    isAdvertdashboardDealVisible(true);
+                    if (!IsnewCoupon()) {
+                        getDealsAnalytics();
+                        $("#ddGranularityDropDown").removeAttr("disabled");
+                        $("#ddDateRangeDropDown").removeAttr("disabled");
+                        isAdvertdashboardDealVisible(true);
+                    }
+                    else {
+                        confirmation.showOKpopupforChart();
+
+                    }
+
                 },
             getDealsAnalytics = function () {
                 dataservice.getDealsAnalytics({
@@ -424,6 +432,7 @@ define("Coupons/Coupons.viewModel",
             isBtnSaveDraftVisible(true);
             isTerminateBtnVisible(false);
             isNewCampaignVisible(false);
+            IsnewCoupon(true);
 
             $("#btnCancel").css("display", "block");
             $(".hideInCoupons").css("display", "none");
@@ -833,7 +842,7 @@ define("Coupons/Coupons.viewModel",
 
                 //hide the main menu;
                 collapseMainMenu();
-
+                IsnewCoupon(false);
                 previewScreenNumber(1);
                 CouponTitle(item.CouponTitle());
                 selectedCouponIdAnalytics(item.CouponId());
@@ -2318,7 +2327,8 @@ define("Coupons/Coupons.viewModel",
                     CampaignStatusDropDown: CampaignStatusDropDown,
                     CampaignRatioAnalyticData: CampaignRatioAnalyticData,
                     dealExpirydate: dealExpirydate,
-                    hideLandingPageURl: hideLandingPageURl
+                    hideLandingPageURl: hideLandingPageURl,
+                    IsnewCoupon: IsnewCoupon
                 };
             })()
         };
