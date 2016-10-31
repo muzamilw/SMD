@@ -413,6 +413,10 @@ namespace SMD.Implementation.Services
                 couponModel.CouponEndDate = DateTime.Now;
 
             }
+            if (couponModel.Status == 2)
+            {
+                couponModel.SubmissionDateTime = DateTime.Now;
+            }
 
             if (couponModel.CouponCategories != null && couponModel.CouponCategories.Count() > 0)
             {
@@ -835,7 +839,7 @@ namespace SMD.Implementation.Services
                         company.StripeSubscriptionId = resp.SubscriptionId;
                         company.StripeSubscriptionStatus = resp.Status;
 
-                        _companyService.UpdateCompany(company, null);
+                        _companyService.UpdateCompany(company);
 
                     }
                     else
@@ -853,7 +857,7 @@ namespace SMD.Implementation.Services
                             company.StripeSubscriptionId = resp.SubscriptionId;
                             company.StripeSubscriptionStatus = resp.Status;
 
-                            _companyService.UpdateCompany(company, null);
+                            _companyService.UpdateCompany(company);
 
                         }
 

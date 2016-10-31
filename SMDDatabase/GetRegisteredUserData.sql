@@ -1,6 +1,6 @@
-﻿
+﻿USE [SMDv2]
 GO
-
+/****** Object:  StoredProcedure [dbo].[GetRegisteredUserData]    Script Date: 10/27/2016 11:35:34 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -28,7 +28,7 @@ select *, COUNT(*) OVER() AS TotalItems
 
   SELECT AspNetUsers.Id,AspNetUsers.fullname,AspNetUsers.LastLoginTime,AspNetUsers.Email,AspNetUsers.[Status],Company.CompanyId, Company.CompanyName,acc.AccountBalance
   FROM AspNetUsers
-  INNER JOIN Company ON AspNetUsers.CompanyId=Company.CompanyId
+  INNER JOIN Company ON AspNetUsers.CompanyId=Company.CompanyId and company.isdeleted is null
   inner join Account acc on company.CompanyId = acc.CompanyId and acc.AccountType = 4
   where AspNetUsers.EmailConfirmed =1
   and (

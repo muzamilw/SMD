@@ -34,16 +34,16 @@ namespace SMD.Implementation
 
 
 
-        public void AddCompanyIdClaimToIdentity(ClaimsIdentity identity, int CompanyId, string CompanyName, string CompanyLogo, string RoleName,string userName,string MobileNumber)
+        public void AddCompanyIdClaimToIdentity(ClaimsIdentity identity, int CompanyId, string CompanyName, string CompanyLogo, string RoleName,string userName,string MobileNumber,string email, string sRoleId)
         {
             Claim claim = new Claim(SmdClaimTypes.CompanyId,
                 // ReSharper restore SuggestUseVarKeywordEvident
                                         ClaimHelper.Serialize(
-                                            new CompanyIdClaimValue { CompanyId = CompanyId, CompanyName = CompanyName, CompanyLogo = CompanyLogo, UserName = userName, MobileNumber = MobileNumber}),
+                                            new CompanyIdClaimValue { CompanyId = CompanyId, CompanyName = CompanyName, CompanyLogo = CompanyLogo, UserName = userName, MobileNumber = MobileNumber,Email =email}),
                                         typeof(CompanyIdClaimValue).AssemblyQualifiedName);
             identity.AddClaim(claim);
 
-            identity.AddClaim(new Claim(SmdClaimTypes.Role, ClaimHelper.Serialize(new SmdRoleClaimValue { Role = RoleName }), typeof(SmdRoleClaimValue).AssemblyQualifiedName));
+            identity.AddClaim(new Claim(SmdClaimTypes.Role, ClaimHelper.Serialize(new SmdRoleClaimValue { Role = RoleName, RoleId= sRoleId }), typeof(SmdRoleClaimValue).AssemblyQualifiedName));
         }
         #endregion
     }

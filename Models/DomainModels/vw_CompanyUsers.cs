@@ -22,6 +22,8 @@ namespace SMD.Models.DomainModels
 
         public string RoleId { get; set; }
 
+        public string Logo { get; set; }
+
 
     }
 }

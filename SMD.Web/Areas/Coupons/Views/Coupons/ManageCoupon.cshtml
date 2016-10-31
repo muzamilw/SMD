@@ -24,7 +24,7 @@ else
                 <div class="clearfix">
                     <span class="pull-left " style="color:#fff!important; padding-left: 0px; font-size: 23px;" data-bind="text: $root.CouponTitle"></span>
                    
-                    <div  style="float:right;margin-top:-9px;"><img data-bind="click: $root.CloseCouponsView" src="/Content/Images/Close_Button.png" style="width:27px;height:27px;float:right;cursor:pointer;"></div>
+                    <div  style="float:right;margin-top:-9px;"><img data-bind="click: $root.CloseCouponsView" src="/Content/Images/Close_Button.png" style="width:20px;height:20px;float:right;cursor:pointer;margin-top:17px;"></div>
                 </div>
 
                 <div class="row" style="margin-bottom:15px;">
@@ -96,7 +96,7 @@ else
 
                                 <div class="ads-numbering-box" style="background: rgb(104,179,89);">
 
-                                    <img src="~/Content/Images/AD_Campaign_mobileStencil.png" width="20px" />
+                                    <img src="~/Content/Images/Preview.png" class="previewImg" />
                                 </div>
 
                                 <br />
@@ -105,15 +105,15 @@ else
                         </div>
 
                         
-                        <div class="pull-left" style="width:458px;">
+                        <div class="pull-left" style="width:361px;">
                             <div>
-                                <div class="pull-right ads-numbering-main" style="width:99px;
-                                    border-left: 1px solid rgb(220,220,220);
+                                <div class="pull-right ads-numbering-main" style="width:105px;
+                                    border-right: 1px solid rgb(220,220,220);
                                     padding-left: 32px;
-                                    text-align: left;">
+                                    text-align: left;height:106px;">
                                     <a data-toggle="modal" data-bind="click:$root.openAdvertiserDashboardDealScreen">
                                         <div class="ads-numbering-box" style="background:#9690cf;">
-                                            <img src="~/Content/Images/AD_Campaign_mobileStencil.png" width="20px" />
+                                            <img src="~/Content/Images/Charts.png" width="20px" />
                                         </div>
                                         <br />
                                         <span style="color:gainsboro;margin-left:6px;">Charts</span>
@@ -121,10 +121,32 @@ else
                                 </div>
                             </div>
                         </div>
-                        <div id="statusDiv" class="pull-left" style="width:146px;text-align: right; padding-top: 71px;height: auto;">
+                        <div id="statusDiv" class="pull-left statusesdiv">
+
+                            <div class="pull-left">
+                                <div>
+                                    <span class="datespanheader">Deal</span>
+                                </div>
+
+                                <div class="datespansclr">
+                                    Date created: <span style="margin-left:3px"></span><span>12 april 2014</span>
+                                </div>
+                                <div class="datespansclr">
+                                    Date modified: <span style="margin-left:3px"></span><span>12 april 2014</span>
+                                </div>
+
+                                <br>
+
+                                <span style="font-size:16px;color:black;margin-left:2px;" data-bind="text:StatusValue()">Draft</span>
+                            </div>
+                            <div class="pull-right">
+
+                                <img class="dealsstatus_img" src="/Content/Images/Deals_Small.png">
+
+                            </div>
 
 
-                            <span style="font-size:16px;color:black;margin-right:2px;">Status</span><span>:</span><span style="font-size:16px;color:black;margin-left:2px;" data-bind="text:StatusValue()">Draft</span>
+
                         </div>
 
                         <div class="clearfix"></div>
@@ -1248,7 +1270,7 @@ else
                                                 <span style="color:black !important;float:left;" class="panelfntSize">Potential Reach</span>
                                             </div>
                                             <div class="col-lg-5" style="padding-right:36px;padding-left:0px;text-align:right;">
-                                                <span class="panelfntSize" style="color:#9690cf;" data-bind="text:$root.reachedAudience()">1,111</span>
+                                                <span class="panelfntSize potentreachclr" data-bind="text:$root.reachedAudience()">1,111</span>
                                             </div>
                                         </div>
 
@@ -1257,7 +1279,7 @@ else
 
 
                                 <div class="row" style="margin-top:10px;">
-                                    <div class="col-lg-12" data-bind="with: $root.couponModel" style="padding-left:23px;">
+                                    <div class="col-lg-12" data-bind="with: $root.couponModel" style="padding-left:23px;display:none;">
 
 
 
@@ -1270,7 +1292,7 @@ else
 
                                     </div>
 
-                                    <div style="padding-left:23px;" class="col-lg-12" data-bind="with: $root.couponModel">
+                                    <div style="padding-left:23px;display:none;" class="col-lg-12" data-bind="with: $root.couponModel">
 
                                         <input type="radio" name="optionsRadiosDelvTypes" value="2" id="optionsRadiosApplyFilterOnce" data-bind="checked:CouponListingMode">
                                         <label for="optionsRadiosApplyFilterOnce">
@@ -1307,7 +1329,7 @@ else
 
                             </div>
 
-                            <div class="col-lg-12" style="padding-left:24px;">
+                            <div class="col-lg-12" style="padding-left:24px;margin-top:12px;">
 
                                 <span style=" font-size:12px;">  Learn more about 'Ad Click'</span><img style="height:14px;" src="/Content/Images/Drop_Arrow.png" data-toggle="collapse" data-target="#demo">
 
@@ -1442,7 +1464,7 @@ else
             <input style="width:90px;" type="text" class="form-control" data-bind="value: Savings" maxlength="7" />
         </td>
         <td>
-            <input style="width:138px;" type="text" class="form-control" data-bind="value: URL" maxlength="37" />
+            <input style="width:138px;" type="text" class="form-control" data-bind="value: URL" maxlength="400" />
         </td>
         <td>
             <input style="width:90px;" type="text" class="form-control" data-bind="datepicker:ExpiryDate" maxlength="37" />
@@ -1540,6 +1562,7 @@ else
         $('#myCode').html('<iframe width="412" height="315" src="//www.youtube.com/embed/' + myId + '" frameborder="0" allowfullscreen></iframe>');
 
     }
+    
 
     function openUrl() {
      

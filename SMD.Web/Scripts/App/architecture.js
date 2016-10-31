@@ -73,6 +73,7 @@ var ist = {
     numberFormat: "0,0.00",
     ordinalFormat: "0",
     lengthFormat: "0.000",
+    numberFormatwod: "0,0",
     // Sections enumeration
     sectionsEnum: [
         { id: 1, name: "Estimates" },

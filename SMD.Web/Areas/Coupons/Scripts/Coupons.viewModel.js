@@ -16,6 +16,7 @@ define("Coupons/Coupons.viewModel",
                     isEditorVisible = ko.observable(false),
                     EditorLoading = ko.observable(false),
                     ISshowPhone = ko.observable(false),
+                    IsnewCoupon = ko.observable(false),
                     langs = ko.observableArray([]),
                     countoryidList = [],
                     cityidList = [],
@@ -146,10 +147,17 @@ define("Coupons/Coupons.viewModel",
                 Banner5Flag = ko.observable(false),
                 Banner6Flag = ko.observable(false),
                 openAdvertiserDashboardDealScreen = function () {
-                    getDealsAnalytics();
-                    $("#ddGranularityDropDown").removeAttr("disabled");
-                    $("#ddDateRangeDropDown").removeAttr("disabled");
-                    isAdvertdashboardDealVisible(true);
+                    if (!IsnewCoupon()) {
+                        getDealsAnalytics();
+                        $("#ddGranularityDropDown").removeAttr("disabled");
+                        $("#ddDateRangeDropDown").removeAttr("disabled");
+                        isAdvertdashboardDealVisible(true);
+                    }
+                    else {
+                        confirmation.showOKpopupforChart();
+
+                    }
+
                 },
             getDealsAnalytics = function () {
                 dataservice.getDealsAnalytics({
@@ -192,7 +200,7 @@ define("Coupons/Coupons.viewModel",
                         if (data != null) {
                             currency = ' (' + data.UserAndCostDetails.CurrencySymbol + ')';
                             UserAndCostDetail(data.UserAndCostDetails);
-                            currencyCode(currency + ' ← Price');
+                            currencyCode(currency);
                             currencySymbol(data.UserAndCostDetails.CurrencySymbol);
 
                             if (data.Currencies != null) {
@@ -426,13 +434,14 @@ define("Coupons/Coupons.viewModel",
             isBtnSaveDraftVisible(true);
             isTerminateBtnVisible(false);
             isNewCampaignVisible(false);
+            IsnewCoupon(true);
 
             $("#btnCancel").css("display", "block");
             $(".hideInCoupons").css("display", "none");
 
             $("#MarketobjDiv").css("display", "none");
             $("#topArea").css("display", "none");
-
+            $(".closecls").css("display", "none");
 
             $("#Heading_div").css("display", "none");
 
@@ -488,8 +497,9 @@ define("Coupons/Coupons.viewModel",
             });
             confirmation.afterCancel(function () {
 
-                couponModel();
-                selectedCriteria();
+               
+               
+
                 isEditorVisible(false);
                 if (isFromEdit() == true) {
                     isListVisible(true);
@@ -820,7 +830,7 @@ define("Coupons/Coupons.viewModel",
 
               },
             onEditCampaign = function (item) {
-                debugger;
+              
                 EditorLoading(true);
                 //resetting flags
                 IsSubmitBtnVisible(false);
@@ -834,7 +844,7 @@ define("Coupons/Coupons.viewModel",
 
                 //hide the main menu;
                 collapseMainMenu();
-
+                IsnewCoupon(false);
                 previewScreenNumber(1);
                 CouponTitle(item.CouponTitle());
                 selectedCouponIdAnalytics(item.CouponId());
@@ -846,6 +856,7 @@ define("Coupons/Coupons.viewModel",
                 $("#panelArea").css("display", "none");
 
                 $("#Heading_div").css("display", "none");
+                $(".closecls").css("display", "none");
 
                 ShowImages(item);
 
@@ -1004,7 +1015,9 @@ define("Coupons/Coupons.viewModel",
                                         buyitbuttonlabel == 'Learn More' ||
                                         buyitbuttonlabel == 'Shop Now' ||
                                         buyitbuttonlabel == 'Sign Up' ||
-                                        buyitbuttonlabel == 'Watch More'
+                                        buyitbuttonlabel == 'Watch More' ||
+                                        buyitbuttonlabel == 'Buy Now' ||
+                                           buyitbuttonlabel == 'Check Availability'
                                          ) {
                                         buyItQuestionLabelStatus(false);
                                         $("#buyItddl").val(buyitbuttonlabel);
@@ -2067,14 +2080,13 @@ define("Coupons/Coupons.viewModel",
             }
             ,
             CloseContent = function () {
-                $(".hideInCoupons").css("display", "block");
-                $("#MarketobjDiv").css("display", "block");
+                $(".hideInCoupons").css("display", "none");
+                $("#MarketobjDiv").css("display", "none");
 
                 $("#topArea").css("display", "block");
                 $("#Heading_div").css("display", "block");
-
-                couponModel();
-                selectedCriteria();
+                $(".closecls").css("display", "block");
+                
                 isEditorVisible(false);
                 CloseCouponsAnalyticView();
                 if (isFromEdit() == true) {
@@ -2317,7 +2329,8 @@ define("Coupons/Coupons.viewModel",
                     CampaignStatusDropDown: CampaignStatusDropDown,
                     CampaignRatioAnalyticData: CampaignRatioAnalyticData,
                     dealExpirydate: dealExpirydate,
-                    hideLandingPageURl: hideLandingPageURl
+                    hideLandingPageURl: hideLandingPageURl,
+                    IsnewCoupon: IsnewCoupon
                 };
             })()
         };

@@ -961,6 +961,18 @@ namespace SMD.Implementation.Services
             user.UserName = user.UserName + "_archived" + numb.ToString();
             user.Email = user.Email + "_archived" + numb.ToString();
 
+            var company = companyRepository.Find(user.CompanyId.Value);
+            if ( company != null)
+            {
+                company.IsDeleted = true;
+                company.DeleteDate = DateTime.Now;
+                company.AboutUsDescription = user.ContactNotes;
+
+                companyRepository.Update(company);
+                companyRepository.SaveChanges();
+
+            }
+
 
             //removing any provider logins.
             var logins = UserManager.GetLogins(userId);
@@ -1101,7 +1113,7 @@ namespace SMD.Implementation.Services
         /// </summary>
         public async Task<LoginResponse> RegisterCustom(RegisterCustomRequest request)
         {
-            var user = new User { UserName = request.Email, Email = request.Email, FullName = request.FullName };
+            var user = new User { UserName = request.Email, Email = request.Email, FullName = request.FullName, DOB = null, Status = 1 };
             var result = await UserManager.CreateAsync(user, request.Password);
             if (!result.Succeeded)
             {
@@ -1137,7 +1149,7 @@ namespace SMD.Implementation.Services
         /// </summary>
         public async Task<LoginResponse> RegisterExternal(RegisterExternalRequest request)
         {
-            var user = new User { UserName = request.Email, Email = request.Email, FullName = request.FullName, DOB = null };
+            var user = new User { UserName = request.Email, Email = request.Email, FullName = request.FullName, DOB = null, Status = 1 };
             var result = await UserManager.CreateAsync(user);
             if (!result.Succeeded)
             {

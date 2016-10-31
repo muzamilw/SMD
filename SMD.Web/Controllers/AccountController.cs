@@ -316,7 +316,7 @@ namespace SMD.MIS.Controllers
             {
 
                
-                var user = new User { UserName = model.Email, Email = model.Email, FullName = model.FullName, DOB = null };
+                var user = new User { UserName = model.Email, Email = model.Email, FullName = model.FullName, DOB = null, Status = 1 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -620,7 +620,7 @@ namespace SMD.MIS.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new User { UserName = model.Email, Email = model.Email, FullName = info.DefaultUserName, DOB = null };
+                var user = new User { UserName = model.Email, Email = model.Email, FullName = info.DefaultUserName, DOB = null, Status =1 };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
@@ -729,14 +729,19 @@ namespace SMD.MIS.Controllers
             List<vw_CompanyUsers> comapnies = manageUserService.GetCompaniesByUserId(User.Identity.GetUserId());
 
             if (comapnies != null && comapnies.Count > 1)
-                return View("SelectCompany", comapnies);
-            else if  (comapnies != null && comapnies.Count == 1)
             {
-                 var company = comapnies.First();
-                 var companyrec = companyService.GetCompanyById(company.companyid);
+                User user = UserManager.FindById(User.Identity.GetUserId());
+                ViewBag.fullname = user.FullName;
+
+                return View("SelectCompany", comapnies);
+            }
+            else if (comapnies != null && comapnies.Count == 1)
+            {
+                var company = comapnies.First();
+                var companyrec = companyService.GetCompanyById(company.companyid);
 
 
-                 return RedirectToAction("SetCompany", "Account", new { CompanyId = company.companyid, Role = company.RoleName, CompanyName = company.CompanyName, CompanyLogo = companyrec.Logo, RoleId = company.RoleId });
+                return RedirectToAction("SetCompany", "Account", new { CompanyId = company.companyid, Role = company.RoleName, CompanyName = company.CompanyName, CompanyLogo = companyrec.Logo, RoleId = company.RoleId });
             }
             else
             {
@@ -757,7 +762,7 @@ namespace SMD.MIS.Controllers
              if (identity != null)
              {
                  SetupUserClaims(identity);
-                 claimsSecurityService.AddCompanyIdClaimToIdentity(identity, Convert.ToInt32(CompanyId), CompanyName, CompanyLogo, Role,user.FullName,user.Phone1);
+                 claimsSecurityService.AddCompanyIdClaimToIdentity(identity, Convert.ToInt32(CompanyId), CompanyName, CompanyLogo, Role, user.FullName, user.Phone1, user.Email, RoleId);
                  
                  AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = false }, identity);
 

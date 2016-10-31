@@ -15,13 +15,13 @@
         <div class="row" id="user-profile">
             <div class="col-lg-12 col-md-8 col-sm-8" style="padding-bottom: 10px;">
                 <div class="clearfix ">
-                    <div class="col-xs-12" style="text-align: right; padding-right:0;margin-bottom:1px;margin-top:10px;">
-
-                        <button class="btn btn-default" id="saveBtn" data-bind="click: $root.closeEditDialog">Close</button>
+                    <div class="col-xs-12" style="text-align: right; padding-right:23px;margin-bottom:1px;margin-top:10px;">
+                        <div style="float:right;margin-top:-9px;"><img data-bind="click: $root.closeEditDialog" src="/Content/Images/Close_Button.png" style="width:20px;height:20px;float:right;cursor:pointer;"></div>
+                        @*<button class="btn btn-default" id="saveBtn" data-bind="click: $root.closeEditDialog">Close</button>*@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="col-lg-12 col-md-12 col-sm-12" style="margin-left:8px;padding-right:41px;">
                 <div class="main-box clearfix" id="tabsHeader">
                     <div class="tabs-wrapper profile-tabs">
                         <ul class="nav nav-tabs" style="display:none;">
@@ -331,24 +331,24 @@
                                                 </div>
                                             </div>
                                             @*<div class="col-lg-3 marginBottom12" style="margin-bottom:0px;" data-bind="visible:imagePath()!=''">
-                                                    <div class="col-md-6">
-                                                        <label>Logo</label>
-                                                        <img id="vehicleImage" alt="" style="width: auto;height:80px" data-bind="attr:{src:imagePath()}" />
-                                                    </div>
-                                                </div>*@
+                                            <div class="col-md-6">
+                                                <label>Logo</label>
+                                                <img id="vehicleImage" alt="" style="width: auto;height:80px" data-bind="attr:{src:imagePath()}" />
+                                            </div>
+                                        </div>*@
                                         </div>
 
 
                                         @*<div class="col-lg-9" data-bind="visible:!$root.isShowCopounMode()">
-                                                <div class="form-group">
-                                                    <div class="col-lg-4 text-right">
-                                                        <label class="control-label text-right tooltip-float">Max Daily Budget</label>
-                                                    </div>
-                                                    <div class="col-lg-6">
-                                                        <input type="text" readonly class="form-control" data-bind="value:maxDailyBudget">
-                                                    </div>
-                                                </div>
-                                            </div>*@
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-right">
+                                                <label class="control-label text-right tooltip-float">Max Daily Budget</label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <input type="text" readonly class="form-control" data-bind="value:maxDailyBudget">
+                                            </div>
+                                        </div>
+                                    </div>*@
                                         <div class="col-lg-9" data-bind="visible:!$root.isShowCopounMode()">
                                             <div class="form-group">
                                                 <div class="col-lg-4 text-right">
@@ -370,15 +370,15 @@
                                             </div>
                                         </div>
                                         @*<div class="col-lg-9" data-bind="visible:!$root.isShowCopounMode()" style="display:none">
-                                                <div class="form-group">
-                                                    <div class="col-lg-4 text-right">
-                                                        <label class="control-label text-right tooltip-float">Type</label>
-                                                    </div>
-                                                    <div class="col-lg-6">
-                                                        <input type="text" readonly class="form-control" data-bind="value: type()==1 ? 'Video':'Link'">
-                                                    </div>
-                                                </div>
-                                            </div>*@
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-right">
+                                                <label class="control-label text-right tooltip-float">Type</label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <input type="text" readonly class="form-control" data-bind="value: type()==1 ? 'Video':'Link'">
+                                            </div>
+                                        </div>
+                                    </div>*@
                                         <div class="col-lg-9" style="display:none;">
                                             @*Todo::pilot data-bind="visible:!$root.isShowCopounMode()"*@
                                             <div class="form-group">
@@ -545,10 +545,10 @@
                                                     <div class="form-group">
                                                         <div class="col-lg-4 text-right">
                                                             @*<div class="bs-example-tooltips tooltip-float-width">
-                                                                    <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                                                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                                    </a>
-                                                                </div>*@
+                                                            <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
+                                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                            </a>
+                                                        </div>*@
                                                             <label class="control-label text-right tooltip-float">Rejection Reason</label>
                                                         </div>
                                                         <div class="col-lg-6">

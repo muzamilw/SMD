@@ -1,0 +1,243 @@
+﻿@{
+    ViewBag.Title = "ManageCampaign";
+    ;
+}
+<link href="~/Content/textboxLabel.css" rel="stylesheet" />
+<div class="row" id="walletreportBindingRoot">
+    <div class="col-lg-12" style="padding:0px;">
+        <div class="row" id="Heading_div">
+            <div class="col-lg-12" style="padding-left: 2px;">
+                <div style="width:230px;" class="pull-left">
+
+                    <label id="headlabel" style="font-size:24px;color:#fff!important;margin-top:7px;margin-left:22px;margin-bottom:17px;">Refer Advertisers</label>
+
+                </div>
+                <div style="float:right;margin-top:7px; margin-right:30px;">
+                    <img src="/Content/Images/Close_Button.png" data-bind="click:$root.onCloseClick" style="width:20px;height:20px;float:right;cursor:pointer;">
+                </div>
+                <div style="width:5px;">
+
+                </div>
+
+                <div style="width:600px" class="pull-left">
+                    <label id="headdesc" style="color:#fff;font-size:14px;margin-top:17px; margin-bottom:17px;">Invite businesses and earn cash credit faster.</label>
+                </div>
+                <div class="clearfix;"></div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="col-lg-12">
+            <div class="col-lg-12">
+                @*<div class=" col-lg-9 form-horizontal" style="padding-left:0px;">
+                        <div class="main-box main-box-subpage" style="margin-left:-13px;">
+                            <div style="border-bottom: 1px solid rgb(220,220,220);width: 100%;margin-left: 0px;margin-bottom:10px;display:none;" class="adsubHeading Theme_standard_clr">
+                                Invite businesses and earn centz faster.
+                                <div class="bs-example-tooltips tooltip-float-width tooltip" style=" margin-top: -5px; ">
+                                    <a class="input-group-addon" tabindex="-1" href="#" data-toggle="tooltip" title="Hooray!" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;    padding: 0px;padding-top: 5px;"
+                                       data-container="body" data-placement="right" data-content="Add a city">
+                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                    </a>
+                                    <i class="fa fa-chevron-up" aria-hidden="true" style="color:#68b359;"></i>
+                                    <span class="tooltiptext">Tooltip text</span>
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-bottom:0px;">
+                                <div class="col-lg-5">
+                                    <label class="control-label" style="padding-top:0px;padding-left:7px;font-size:11px;color:gray">Statement Date:</label>
+                                    <label style="font-size:11px; " data-bind="text:moment(new Date()).format('DD MMM YY')"></label>
+
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-bottom:0px;">
+                                <div class=" col-lg-8">
+                                    <label class="control-label" style="padding-top:0px;padding-left:7px; font-size: 13px;color:gray">Wallet Balance:</label>
+                                    <label style="font-size:13px;" data-bind="text:$root.balance"></label>
+                                    <label style="font-size:13px;">(approx $</label><label style="font-size:11px;" data-bind="text:$root.dollarBalance"> </label><label style="font-size:11px;">&nbsp; usd)</label>
+                                </div>
+                                <div class="col-lg-4">
+                                    <button class="btn  btn-default btnSubmitApproval" id="btnpayoutPayPal" style="width: 232px;margin-top:0px;">Payout to my PayPal account</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12" style="padding-top:20px;">
+                                    <div class="table-responsive">
+                                        <table class="table" id="adCampaignApprovalLVTable">
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-lg-3 th-pointer"><span id="1">Date<span></span></span></th>
+                                                    <th class="col-lg-6 th-pointer"><span id="2">Activity<span></span></span> </th>
+                                                    <th class="col-lg-3 text-right th-pointer"><span id="3">centz(Cash Credits)<span></span></span></th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- ko template: { name: 'walletReportTemplate',foreach: walletReport} -->
+                                                <!-- /ko -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>*@
+                <div class="col-lg-6 form-horizontal" style=" height:566px; margin-left: 0px !important;">
+                    <div class="row">
+                        <div class="Subpanels " style="height:150px;width:97%;padding:3px;padding-left:10px;">
+                            <div style="padding:0px;">
+                                <div style="border-bottom: 1px solid rgb(220,220,220);width: 100%;margin-left: 0px;margin-bottom:10px;margin-top:13px;" class="adsubHeading Theme_standard_clr">
+                                    <span style="color:black !important;">Linked Businesses</span>
+                                    <label class="text-right" style="margin-left:365px;" data-bind="text:$root.linkedComponiesCount"></label>
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-bottom:0px;">
+                                <div class=" col-lg-12 text-right" >
+                                    <button class="btn  btn-success btnInviteBusinesses" data-bind="click:ShowInviteUserPopup" id="btnpayoutPayPal" style="width: 232px;margin-top:15px; margin-right:21px;">Invite Businesses</button>
+                                </div>
+                            </div>
+                            <div class="col-lg-12" style="padding-left:14px;padding-top:15px;">
+                                <span style=" font-size:12px;">  Why invite businesses'</span><img style="height:14px;" src="/Content/Images/Drop_Arrow.png" data-toggle="collapse" data-target="#demo" onclick="PageScroll()">
+                            </div>
+
+                            <div style="text-align:right;padding-right:22px">
+
+                            </div>
+                        </div>
+                        <div class="row Subpanels collapse" id="demo" style="width:97%;margin-left:1px;">
+                            <div class="col-lg-12" style="font-size:12px;">
+                                <div class="row">
+                                    <div class="col-lg-11" style="padding-left:32px;">
+                                        <br />
+                                        <p>
+                                            The ad click is charged after app users have watched your video ad AND successfully answered your quiz survey.
+                                            <br />
+                                        <p>
+                                            Half of th¬e ad click is rewarded to the viewer for participating in your quiz survey. If users opt to skip the video ad, or skip the quiz survey at any time, then no ad click is charged.
+                                        </p>
+                                        <br />
+                                        <p>
+                                            Higher the ad click campaigns get seen sooner.If you notice that your daily budget isn’t achieved then either increase your ad click for higher priority or try the ‘Broadcast Repeat’ mode.
+
+
+                                        </p>
+                                        <br />
+                                        <p>Minimum video ad click is $0.04 USD, with a maximum of $2 USD.</p>
+
+                                    </div>
+                                    <div class="col-lg-1"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 form-horizontal" style=" height:566px; margin-left: 0px !important;">
+                    <div class="row">
+                        
+
+                        <div class="row Subpanels" style="width:97%;margin-left:1px;">
+                            <div class="col-lg-12" style="font-size:12px;">
+                                <div class="row">
+                                    <div class="col-lg-12" style="padding-left:8px;" data-bind="visible:$root.referralComponies().length>0">
+                                        <div style="border-bottom: 1px solid rgb(220,220,220);width: 100%;margin-left: 0px;margin-bottom:10px; margin-top:15px;" class="adsubHeading Theme_standard_clr">
+                                            <span style="color:black !important;">Live campaigns which I am earning 15% commission on.</span>
+                                            <label class="text-left"> &nbsp;</label>
+                                        </div>
+                                        <!-- ko template: { name: 'ComponyDetails',foreach: $root.referralComponies} -->
+                                        <!-- /ko -->
+                                    </div>
+                                    <div class="col-lg-12" style="padding-left:8px;" data-bind="visible:$root.referralComponies().length==0">
+                                        <div style="border-bottom: 1px solid rgb(220,220,220);width: 100%;margin-left: 0px;margin-bottom:10px; margin-top:15px;" class="adsubHeading Theme_standard_clr">
+                                            <span style="color:black !important;">Live campaigns which I am earning 15% commission on.           </span>
+                                            <label class="text-left"> &nbsp;</label>
+                                        </div>
+                                        <br />
+                                        <br />
+                                        <p style="color:gray;text-align:center">You have not referred any businesses yet.</p>
+                                        <br />
+                                        <br />
+                                       
+
+
+                                    </div>
+
+                                    <div class="col-lg-1"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<script id="walletReportTemplate" type="text/html">
+    <tr style="cursor: pointer;">
+        <td>
+
+            <p data-bind="text:moment(transatinDate()).format('DD MMM YY,h:mm')" style="font-size:small"></p>
+            @*<p data-bind="text:moment(transatinDate()).format('DD MMM YYYY,h:mm:ss a')"></p>*@
+        </td>
+        <td>
+            <p data-bind="text:description"></p>
+        </td>
+        <td class="text-right">
+            <p data-bind="text:creditAmount"></p>
+        </td>
+
+    </tr>
+</script>
+<script type="text/html" id="ComponyDetails">
+
+    <div class="form-group" style="margin-bottom:0px;">
+        <div class=" col-lg-8 text-left">
+            <label class="control-label" style="padding-top:0px;padding-left:10px;" data-bind="text:FullName"></label>
+        </div>
+    </div>
+    <div class="form-group" style="margin-bottom:0px;">
+        <div class=" col-lg-8 text-left">
+            <label class="control-label" style="padding-top:0px;padding-left:10px;" data-bind="text:CompanyName,visible:CompanyName!=FullName && CompanyName!=null"></label>
+        </div>
+    </div>
+    <div class="form-group" style="margin-bottom:0px;">
+        <div class=" col-lg-8 text-left">
+            <label class="control-label" style="padding-top:0px;padding-left:10px;">Active Campaigns</label>
+        </div>
+        <div class=" col-lg-4 text-right" style="margin-left:-18px;">
+            <label class="control-label" style="padding-top:0px;" data-bind="text:pcount + vcount+ scount"></label>
+        </div>
+    </div>
+    <div style="border-bottom: 1px solid rgb(220,220,220);width: 100%;margin-left: 0px;margin-bottom:10px;" class="adsubHeading Theme_standard_clr">
+    </div>
+
+
+
+</script>
+@section Scripts{
+    <script type="text/javascript">
+        require(["Report/walletReport.view", "common/confirmation.view"]);
+        $("#btnWallet").css("background-color", "#34b9c7");
+        $("#MarketobjDiv").css("display", "none");
+        $("#topArea").css("display", "none");
+        $("#panelArea").css("display", "none");
+    </script>
+    <script>
+        function getParameter(url, param) {
+            if (url.indexOf('?') == -1)
+                return 1;
+            url = url.split('?');
+            var pattern = new RegExp(param + '=(.*?)(;|&|$)', 'gi');
+            return url[1].split(pattern)[1];
+        }
+    </script>
+    <script>
+        function PageScroll() {
+            $('html, body').animate({ scrollTop: 0 }, 800);
+
+        }
+
+    </script>
+}
+
+

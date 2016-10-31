@@ -761,6 +761,8 @@
     <Content Include="Areas\ProfileQuestion\Views\Manage\_advertProfileQuestionAnalytic.cshtml" />
     <Content Include="Areas\Franchise\Views\RegisterUsers\UsersDashboard.cshtml" />
     <Content Include="Areas\Franchise\Views\RegisterUsers\_registeredUserEditor.cshtml" />
+    <Content Include="Areas\Report\Views\Report\ReferAdvertises.cshtml" />
+    <Content Include="Areas\Report\Views\Report\ManageAdvertises.cshtml" />
     <None Include="config\Web.connectionstrings.config">
       <SubType>Designer</SubType>
     </None>
@@ -864,7 +866,12 @@
     <Content Include="Content\Images\Deals.png" />
     <Content Include="Content\Images\Dealsicon.png" />
     <Content Include="Content\Images\Dealsuicon.png" />
+    <Content Include="Content\Images\Deals_Small.png" />
+    <Content Include="Content\Images\Deals_Small_36.png" />
+    <Content Include="Content\Images\Display_small.png" />
+    <Content Include="Content\Images\Display_small_36.png" />
     <Content Include="Content\Images\Drop_Arrow.png" />
+    <Content Include="Content\Images\Email_icon.png" />
     <Content Include="Content\Images\facebookNew.png" />
     <Content Include="Content\Images\foldericon3.png" />
     <Content Include="Content\Images\Games.png" />
@@ -880,9 +887,14 @@
     <Content Include="Content\Images\pin.png" />
     <Content Include="Content\Images\placeholder.png" />
     <Content Include="Content\Images\Polls.png" />
+    <Content Include="Content\Images\Polls_small.png" />
+    <Content Include="Content\Images\Polls_small_36.png" />
     <Content Include="Content\Images\Poll_icon.png" />
+    <Content Include="Content\Images\Preview.png" />
     <Content Include="Content\Images\ReportControlbg.jpg" />
     <Content Include="Content\Images\Surveys_icon.png" />
+    <Content Include="Content\Images\Surveys_small.png" />
+    <Content Include="Content\Images\Surveys_small_36.png" />
     <Content Include="Content\Images\TwitterNew.png" />
     <Content Include="Content\Images\UK-Union-Flag.png" />
     <Content Include="Content\Images\up-arrow-small.png" />
@@ -890,6 +902,9 @@
     <Content Include="Content\Images\vide.png" />
     <Content Include="Content\Images\Videos.png" />
     <Content Include="Content\Images\Videosuicon.png" />
+    <Content Include="Content\Images\Videos_small.png" />
+    <Content Include="Content\Images\Videos_small_20.png" />
+    <Content Include="Content\Images\Videos_small_36.png" />
     <Content Include="Content\layout.css" />
     <Content Include="Content\less\Campaign.css">
       <DependentUpon>Campaign.less</DependentUpon>
@@ -1222,6 +1237,7 @@
     <Content Include="Images\orderedList8.png" />
     <Content Include="Images\orderedList9.png" />
     <Content Include="Images\Phones4u.png" />
+    <Content Include="Images\Preview.png" />
     <Content Include="Images\preview_game.jpg" />
     <Content Include="Images\select_image.jpg" />
     <Content Include="Images\Sign_In_Image.png" />

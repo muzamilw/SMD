@@ -291,8 +291,13 @@ namespace SMD.Implementation.Services
                 objUC.StripeSubscriptionId = company.StripeSubscriptionId;
                 objUC.StripeSubscriptionStatus = company.StripeSubscriptionStatus;
 
+                var billingCountryid = 0;
+                if (company.BillingCountryId.HasValue)
+                    billingCountryid = company.BillingCountryId.Value;
+                else
+                    billingCountryid = 1;
 
-                var currency = _countryRepository.Find(company.BillingCountryId.Value).Currency;
+                var currency = _countryRepository.Find(billingCountryid).Currency;
                 objUC.CurrencyCode = currency.CurrencyCode;
                 objUC.CurrencySymbol = currency.CurrencySymbol;
 

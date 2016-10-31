@@ -8,13 +8,13 @@
         <div class="row" id="user-profile">
             <div class="col-lg-12 col-md-8 col-sm-8" style="padding-bottom: 10px;">
                 <div class="clearfix ">
-                    <div class="col-xs-12" style="text-align: right; padding-right:0;margin-bottom:1px; margin-top:10px;">
-
-                        <button class="btn btn-default" data-bind="click:$root.closeEditDialog" id="saveBtn">Close</button>
+                    <div class="col-xs-12" style="text-align: right; padding-right:23px;margin-bottom:1px; margin-top:10px;">
+                        <div style="float:right;margin-top:-9px;"><img data-bind="click: $root.closeEditDialog" src="/Content/Images/Close_Button.png" style="width:20px;height:20px;float:right;cursor:pointer;"></div>
+                        @*<button class="btn btn-default" data-bind="click:$root.closeEditDialog" id="saveBtn">Close</button>*@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="col-lg-12 col-md-12 col-sm-12" style="margin-left:8px;padding-right:41px;">
                 <div class="main-box clearfix" id="tabsHeader">
                     <div class="tabs-wrapper profile-tabs">
                         <ul class="nav nav-tabs" style="display:none;">
@@ -230,14 +230,14 @@
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="onoffswitch" style="width:100px;">
-                                                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchMailLetter"  data-bind="checked:status,event:{ change: $root.changeStatus}">
+                                                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchMailLetter" data-bind="checked:status,event:{ change: $root.changeStatus}">
                                                         <label class="onoffswitch-label" for="switchMailLetter">
                                                             <div class="onoffswitch-inner"></div>
                                                             <div class="onoffswitch-switch"></div>
                                                         </label>
                                                     </div>
                                                     @*<button class="btn  btn-success" id="saveBtn">Enable</button>
-                                                    <button class="btn  btn-danger" id="saveBtn">Disable</button>*@
+                                                <button class="btn  btn-danger" id="saveBtn">Disable</button>*@
                                                 </div>
                                             </div>
                                         </div>
@@ -270,7 +270,7 @@
 
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </div>

@@ -15,16 +15,24 @@ define("ads/ads.viewModel",
                     isEditorVisible = ko.observable(false),
                     isClickRateVisible = ko.observable(null),
                     buyItQuestionStatus = ko.observable(false),
+                    buyItQuestionLabelStatus = ko.observable(false),
 					isAdvertdashboardVisible = ko.observable(false),
                     hideLandingPageURl = ko.observable(false),
+                    VideoImage = ko.observable(false),
+                    DisplayImage = ko.observable(false),
                     ButItOtherLabel = ko.observable(''),
+                    CampaignHeader = ko.observable(''),
                     langs = ko.observableArray([]),
                     TemporaryList = ko.observableArray([]),
                     TemporaryProfileList = ko.observableArray([]),
                     TemporaryQuizQuestions = ko.observableArray([]),
                     TemporarySurveyList = ko.observableArray([]),
                     BuyItStatus = ko.observable(false),
-                    showLandingPageUrl = ko.observable(false),
+                    showLandingPageUrl = ko.observable(true),
+                    StatusCodeName = ko.observable(''),
+                    StatusCodeImage = ko.observable(''),
+                    IsvideoBtn = ko.observable(false),
+                    IsGameAds = ko.observable(false),
                     countoryidList = [],
                     cityidList = [],
                     langidList = [],
@@ -67,7 +75,7 @@ define("ads/ads.viewModel",
                     isTerminateBtnVisible = ko.observable(false),
                     correctAnswers = ko.observableArray([{ id: 1, name: "Choice 1" }, { id: 2, name: "Choice 2" }, { id: 3, name: "Choice 3" }, { id: 0, name: "Any of the above" }]),
                     DefaultTextBtns = ko.observableArray([
-                        { id: "No Button", name: "No Button" },
+                        { id: "0", name: "No Button" },
                         { id: "Apply Now", name: "Apply Now" },
                         { id: "Book Now", name: "Book Now" },
                         { id: "Contact Us", name: "Contact Us" },
@@ -78,7 +86,7 @@ define("ads/ads.viewModel",
                         { id: "Watch More", name: "Watch More" },
                         { id: "Buy Now", name: "Buy Now" },
                         { id: "Check Availability", name: "Check Availability" },
-                        { id: "Custom Button Label", name: "Custom Button Label" }
+                        { id: "999", name: "Custom Button Label" }
                     ]),
                     selectedIndustryIncludeExclude = ko.observable(true),
                     UserAndCostDetail = ko.observable(),
@@ -165,15 +173,21 @@ define("ads/ads.viewModel",
 				CampaignStatusDropDown = ko.observableArray([{ id: 1, name: "Answered" }, { id: 2, name: "Referred" }, { id: 3, name: "Skipped" }]),
 				CampaignTblAnalyticsData = ko.observableArray([]),
 				openAdvertiserDashboardScreen = function (Campaign) {
+				 
+				    if (!isNewCampaign()) {
+				        selectedCampaignIdAnalytics(Campaign.CampaignID());
+				        getAdsByCampaignIdAnalytics();
+				        $("#ddGranularityDropDown").removeAttr("disabled");
+				        $("#ddDateRangeDropDown").removeAttr("disabled");
+				        $("#ddCampaignStatusDropDown").removeAttr("disabled");
 
-				    selectedCampaignIdAnalytics(Campaign.CampaignID());
-				    getAdsByCampaignIdAnalytics();
-				    $("#ddGranularityDropDown").removeAttr("disabled");
-				    $("#ddDateRangeDropDown").removeAttr("disabled");
-				    $("#ddCampaignStatusDropDown").removeAttr("disabled");
 
+				        isAdvertdashboardVisible(true);
+				    }
+				    else {
+				        confirmation.showOKpopupforChart();
 
-				    isAdvertdashboardVisible(true);
+				    }
 				},
 				getAdsByCampaignIdAnalytics = function () {
 				    dataservice.getAdsByCampaignIdAnalytics({
@@ -374,9 +388,11 @@ define("ads/ads.viewModel",
 
                 var selectionoption = $("#ddTextBtns").val();
 
-                if (selectionoption == 'No Button' || selectionoption == undefined) {
+                if (selectionoption == '0' || selectionoption == undefined) {
                     showLandingPageUrl(false);
                 }
+                else
+                    showLandingPageUrl(true);
 
                 $("#logo_div").css("display", "block");
 
@@ -387,7 +403,7 @@ define("ads/ads.viewModel",
                 $("#MarketobjDiv").css("display", "none");
                 $("#topArea").css("display", "none");
                 $("#headlabel,#headdesc").css("display", "none");
-
+                $(".closecls").css("display", "none");
                 collapseMainMenu();
                 TodisplayImg(true);
                 openEditScreen(1);
@@ -403,21 +419,25 @@ define("ads/ads.viewModel",
                 VideoLink2src(null);
                 isShowArchiveBtn(false);
                 campaignModel().ChannelType("1");
-                campaignModel().ClickRate("0.12");
+
                 campaignModel().MaxDailyBudget("5");
                 campaignModel().MaxBudget("20");
                 campaignModel().Type(mode);
                 campaignModel().DeliveryDays("3");
                 campaignModel().LandingPageVideoLink("https://www.");
                 previewScreenNumber(1);
+
+                //if display ad then
                 if (mode == 4) {
                     campaignModel().CampaignName("New display ad");
                     $("#logo_div").css("display", "block");
+                    campaignModel().ClickRate("0.08");
                 }
 
-                else {
+                else {//video ad
                     campaignModel().CampaignName("New video campaign");
                     $("#logo_div").css("display", "none");
+                    campaignModel().ClickRate("0.16");
                 }
 
 
@@ -474,10 +494,10 @@ define("ads/ads.viewModel",
                             $("#headlabel, #Heading_div").css("display", "block");
 
                             $("#panelArea,#headdesc").css("display", "block");
+                            $(".closecls").css("display", "block");
                             //show the main menu;
                             showMainMenu();
                             logoImage = '';
-
 
                         }
                         else {
@@ -510,10 +530,13 @@ define("ads/ads.viewModel",
                         $("input,button,textarea,a,select").removeAttr('disabled');
                         $("#headlabel").css("display", "block");
 
-                        $(".hideInCoupons").css("display", "block");
+                        $(".hideInCoupons").css("display", "none");
 
-                        $("#MarketobjDiv").css("display", "block");
+                        $("#MarketobjDiv").css("display", "none");
                         $("#topArea,#headdesc").css("display", "block");
+                        $(".closecls").css("display", "block");
+                   
+                        $("#Heading_div").css("display", "block");
                     });
 
                     confirmation.show();
@@ -555,12 +578,14 @@ define("ads/ads.viewModel",
                 }
                 isFromEdit(false);
                 $("#panelArea").css("display", "block");
-                $(".hideInCoupons").css("display", "block");
+                $(".hideInCoupons").css("display", "none");
 
-                $("#MarketobjDiv").css("display", "block");
+                $("#MarketobjDiv").css("display", "none");
                 $("#topArea").css("display", "block");
                 $("#headlabel").css("display", "block");
-                $("#headdesc").css("display", "block")
+                $("#headdesc").css("display", "block");
+                $(".closecls").css("display", "block");
+                $("#Heading_div").css("display", "block");
 
             },
 
@@ -617,13 +642,14 @@ define("ads/ads.viewModel",
                     isFromEdit(false);
                     $("#panelArea").css("display", "block");
 
-                    $(".hideInCoupons").css("display", "block");
+                    $(".hideInCoupons").css("display", "none");
 
-                    $("#MarketobjDiv").css("display", "block");
+                    $("#MarketobjDiv").css("display", "none");
                     $("#topArea").css("display", "block");
                     $("#headlabel").css("display", "block");
 
                     $("#headdesc").css("display", "block");
+                    $(".closecls").css("display", "block");
                 },
 
              BackToAds = function () {
@@ -769,8 +795,16 @@ define("ads/ads.viewModel",
                          campaignModel().ClickRate(0);
                      }
 
-                     if (campaignModel().ClickRate() < 0.06) {
-                         errorListNew.push({ name: "Ad Click should be greater than $ 0.06 USD", element: "" });
+                     var minclickrate = 0;
+                     if (mode == 4)
+                         minclickrate = 0.08;
+                     else
+                         minclickrate = 0.16;
+               
+
+
+                     if (campaignModel().ClickRate() < minclickrate) {
+                         errorListNew.push({ name: "Ad Click should be greater than $ "+minclickrate+" USD", element: "" });
                      }
 
                      if ((parseInt(campaignModel().MaxBudget()) < parseInt(campaignModel().ClickRate()))) {
@@ -924,6 +958,23 @@ define("ads/ads.viewModel",
                 ////    campaignModel().Answer2('');
 
                 ////}
+
+
+
+                //buy it button logic
+                campaignModel().ShowBuyitBtn(buyItQuestionStatus());
+
+                //if other question then
+                if (buyItQuestionLabelStatus() == true) {
+             
+                    campaignModel().BuyItButtonLabel();
+
+                    // couponModel().BuyitBtnLabel(ButItOtherLabel());
+                }
+                else {
+                    campaignModel().BuyItButtonLabel($("#ddTextBtns").val());
+                }
+
                 if (isDisplayCouponsAds() == true) {
 
                     var selectedCouponCategories = $.grep(couponCategories(), function (n, i) {
@@ -1195,6 +1246,7 @@ define("ads/ads.viewModel",
                          campaignModel().ShowBuyitBtn(false);
                          BuyItStatus(false);
                          ButItOtherLabel('');
+                         buyItQuestionLabelStatus(false);
                      }
                      else if (selectionoption == '999')  //other scenario
                      {
@@ -1202,21 +1254,19 @@ define("ads/ads.viewModel",
                          campaignModel().ShowBuyitBtn(true);
                          BuyItStatus(true);
                          campaignModel().BuyItButtonLabel('');
+                         buyItQuestionLabelStatus(true);
 
                      }
-                     else if (selectionoption == 'Custom Button Label') {
-                         BuyItStatus(true);
-                         campaignModel().ShowBuyitBtn(true);
-                     }
                      else {
-                         buyItQuestionStatus(false);
+                         buyItQuestionStatus(true);
                          campaignModel().ShowBuyitBtn(true);
                          BuyItStatus(false);
                          ButItOtherLabel('');
                          campaignModel().BuyItButtonLabel('');
+                         buyItQuestionLabelStatus(false);
                      }
 
-                     if (selectionoption == 'No Button') {
+                     if (selectionoption == '0') {
                          showLandingPageUrl(false);
                      }
                      else {
@@ -1438,6 +1488,7 @@ define("ads/ads.viewModel",
                 onChangeProfileQuestion = function (item) {
 
                     var y = $(".listview").scrollTop();  //your current y position on the page
+                   
 
                     if (item == null)
                         return;
@@ -1459,7 +1510,8 @@ define("ads/ads.viewModel",
 
                                 profileAnswerList.valueHasMutated();
 
-                                $(".listview").scrollTop(y + 60);
+                                // $(".listview").scrollTop(y+40);
+                              
                             }
 
                         },
@@ -1650,6 +1702,7 @@ define("ads/ads.viewModel",
                     isTerminateBtnVisible(false);
                     isNewCampaignVisible(false);
                     isShowArchiveBtn(false);
+                    buyItQuestionLabelStatus(false);
                     $("#logo_div").css("display", "block");
                     $(".hideInCoupons").css("display", "none");
 
@@ -1659,6 +1712,7 @@ define("ads/ads.viewModel",
 
                     $("#Heading_div").css("display", "none");
 
+                    $(".closecls").css("display", "none");
 
                     if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == 6 || item.Status() == null || item.Status() == 7 || item.Status() == 9) {
                         collapseMainMenu();
@@ -1794,7 +1848,7 @@ define("ads/ads.viewModel",
                                     });
 
                                     var ff = campaignModel().AdCampaignTargetCriterias();
-                                    DefaultTextBtns.push({ id: campaignModel().BuyItButtonLabel(), name: campaignModel().BuyItButtonLabel() });
+                                    //DefaultTextBtns.push({ id: campaignModel().BuyItButtonLabel(), name: campaignModel().BuyItButtonLabel() });
                                     campaignModel().reset();
 
 
@@ -1989,32 +2043,39 @@ define("ads/ads.viewModel",
                                     });
 
 
-                                    //BuyItButtonLabel(campaignModel().ShowBuyitBtn());
+                                    //buy it button cases
+                                    buyItQuestionStatus(campaignModel().ShowBuyitBtn());
 
-                                    //var buyitbuttonlabel = couponModel().BuyitBtnLabel();
+                                    var buyitbuttonlabel = campaignModel().BuyItButtonLabel();
 
-                                    //if (couponModel().ShowBuyitBtn() == false) {
-                                    //    $("#buyItddl").val('0');
-                                    //}
-                                    //else {
-                                    //    if (buyitbuttonlabel == 'Apply Now' ||
-                                    //        buyitbuttonlabel == 'Book Now' ||
-                                    //        buyitbuttonlabel == 'Contact Us' ||
-                                    //        buyitbuttonlabel == 'Download' ||
-                                    //        buyitbuttonlabel == 'Learn More' ||
-                                    //        buyitbuttonlabel == 'Shop Now' ||
-                                    //        buyitbuttonlabel == 'Sign Up' ||
-                                    //        buyitbuttonlabel == 'Watch More'
-                                    //         ) {
-                                    //        buyItQuestionLabelStatus(false);
-                                    //        $("#buyItddl").val(buyitbuttonlabel);
-                                    //    }
-                                    //    else {
-                                    //        $("#buyItddl").val('999');
-                                    //        buyItQuestionLabelStatus(true);
-                                    //        ButItOtherLabel(buyitbuttonlabel);
-                                    //    }
-                                    //}
+                                    if (campaignModel().ShowBuyitBtn() == false) {
+                                        $("#ddTextBtns").val('0');
+                                        BuyItStatus(false);
+                                    }
+                                    else {
+                                        if (buyitbuttonlabel == 'Apply Now' ||
+                                            buyitbuttonlabel == 'Book Now' ||
+                                            buyitbuttonlabel == 'Contact Us' ||
+                                            buyitbuttonlabel == 'Download' ||
+                                            buyitbuttonlabel == 'Learn More' ||
+                                            buyitbuttonlabel == 'Shop Now' ||
+                                            buyitbuttonlabel == 'Sign Up' ||
+                                            buyitbuttonlabel == 'Watch More' ||
+                                            buyitbuttonlabel == 'Buy Now' ||
+                                            buyitbuttonlabel == 'Check Availability'
+                                             ) {
+                                            buyItQuestionLabelStatus(false);
+                                            $("#ddTextBtns").val(buyitbuttonlabel);
+                                            BuyItStatus(false);
+                                            
+                                        }
+                                        else {
+                                            $("#ddTextBtns").val('999');
+                                            buyItQuestionLabelStatus(true);
+                                            ButItOtherLabel(buyitbuttonlabel);
+                                            BuyItStatus(true);
+                                        }
+                                    }
 
 
                                     if (campaignModel().DeliveryDays() != null) {
@@ -3173,6 +3234,7 @@ define("ads/ads.viewModel",
 
                 // Initialize the view model
                 initialize = function (specifiedView) {
+                    
                     if (mode == 4) {
                         MainHeading("Sponsor an app ‘brain game’.");
                         SubHeading("Reward audiences 50% of your ‘ad click’Drive people to your web site, ask a reinforcing question and show your deals –All for one ‘ad click’ fee.");
@@ -3183,10 +3245,22 @@ define("ads/ads.viewModel",
                         tab2Heading("Define the target audience to deliver game ad.");
                         tab4SubHeading("Select your game campaign delivery mode:");
                         UrlHeadings("Leatherboard banner click thru url to your landing  page.");
+                        DisplayImage(true);
+                        StatusCodeName("Display Ad");
+                        StatusCodeImage("/Content/Images/Display_small.png");
+                        IsvideoBtn(false);
+                        IsGameAds(true);
+                        CampaignHeader('Display');
                     }
                     else {
                         UrlHeadings("Direct viewers to a landing page at the end of your video ad.");
                         IsShownforVideo(true);
+                        VideoImage(true);
+                        IsvideoBtn(true);
+                        IsGameAds(false);
+                        StatusCodeName("Display");
+                        CampaignHeader('Video');
+                        StatusCodeImage("/Content/Images/Videos_small.png");
                     }
                     view = specifiedView;
                     ko.applyBindings(view.viewModel, view.bindingRoot);
@@ -3391,6 +3465,7 @@ define("ads/ads.viewModel",
                     BuyItStatus: BuyItStatus,
                     showLandingPageUrl: showLandingPageUrl,
                     buyItQuestionStatus: buyItQuestionStatus,
+                    buyItQuestionLabelStatus: buyItQuestionLabelStatus,
                     ButItOtherLabel: ButItOtherLabel,
                     CampaignStatusDropDown: CampaignStatusDropDown,
                     selectedCampStatusAnalytics: selectedCampStatusAnalytics,
@@ -3400,7 +3475,14 @@ define("ads/ads.viewModel",
                     CampaignTblAnalyticsData: CampaignTblAnalyticsData,
                     isClickRateVisible: isClickRateVisible,
                     CampaignROItblAnalyticData: CampaignROItblAnalyticData,
-                    hideLandingPageURl: hideLandingPageURl
+                    hideLandingPageURl: hideLandingPageURl,
+                    VideoImage: VideoImage,
+                    DisplayImage: DisplayImage,
+                    StatusCodeName: StatusCodeName,
+                    StatusCodeImage: StatusCodeImage,
+                    IsvideoBtn: IsvideoBtn,
+                    IsGameAds: IsGameAds,
+                    CampaignHeader: CampaignHeader
                 };
             })()
         };

@@ -132,7 +132,7 @@ namespace SMD.Repository.Repositories
         /// </summary>
         public IEnumerable<ProfileQuestion> GetAllProfileQuestions()
         {
-            return DbSet.Where(question => question.Status == null || question.Status == 1).ToList();
+            return DbSet.Where(question => question.Status == 3 && question.CompanyId == null).ToList();
         }
 
 

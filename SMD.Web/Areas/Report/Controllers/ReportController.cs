@@ -17,5 +17,13 @@ namespace SMD.MIS.Areas.Report.Controllers
         {
             return View();
         }
+        public ActionResult ReferAdvertises()
+        {
+            return View();
+        }
+        public ActionResult ManageAdvertises()
+        {
+            return View();
+        }
     }
 }

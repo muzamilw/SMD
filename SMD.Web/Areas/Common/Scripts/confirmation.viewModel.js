@@ -127,7 +127,11 @@ define("common/confirmation.viewModel",
                    showOKpopupforinfo = function () {
                          isLoading(true);
                          view.showOKpopupforinfo();
-                     },
+                   },
+                 showOKpopupforChart = function () {
+                     isLoading(true);
+                     view.showOKpopupforchart();
+                 },
                     showUpgradePopup = function () {
                         isLoading(true);
                         view.showUpgradePopup();
@@ -237,7 +241,8 @@ define("common/confirmation.viewModel",
                     //errors: errors,
                     UserRandomNum: UserRandomNum,
                     showOKpopupforinfo: showOKpopupforinfo,
-                    hidesOKpopupforInfo: hidesOKpopupforInfo
+                    hidesOKpopupforInfo: hidesOKpopupforInfo,
+                    showOKpopupforChart: showOKpopupforChart
                 };
             })()
         };

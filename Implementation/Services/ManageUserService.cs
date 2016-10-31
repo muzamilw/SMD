@@ -51,9 +51,9 @@ namespace SMD.Implementation.Services
             //special case of getting the main company of this user
             var usr = userService.GetUserByUserId(UserId);
 
-            if (usr == null)
+            if (usr == null || usr.CompanyId.HasValue == false)
             {
-                throw new Exception("Catestrophic errror, user is null. with userid = " + UserId);
+                throw new Exception("Catestrophic errror, user is null. with userid = " + UserId + usr.ToString());
             }
 
             var company = companyService.GetCompanyById(usr.CompanyId.Value);
@@ -72,10 +72,11 @@ namespace SMD.Implementation.Services
                     CreatedOn = usr.CreatedDateTime.HasValue == true ? usr.CreatedDateTime.Value : DateTime.Now,
                     email = usr.Email,
                     FullName = usr.FullName,
-                    RoleName = usr.Roles.First().Name,
+                    RoleName = usr.Roles.FirstOrDefault() != null ? usr.Roles.FirstOrDefault().Name : "",
                     status = "active",
                     UserId = UserId,
-                    RoleId = usr.Roles.First().Id
+                    RoleId = usr.Roles.FirstOrDefault() != null ? usr.Roles.FirstOrDefault().Id : "",
+                    Logo = company.Logo
 
                 };
 

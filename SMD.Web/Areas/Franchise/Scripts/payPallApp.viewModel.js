@@ -23,10 +23,15 @@ define("FranchiseDashboard/payPallApp.viewModel",
                     approval1 = ko.observable(false),
                     approval2 = ko.observable(false),
                     getPayOutHistory = function () {
-                        if (UserRole == 'Franchise_Approver1')
+                        if (UserRole == 'Franchise Admin')
                             approval1(true);
-                        else
+                        else if (UserRole == 'Franchise Account Manager')
                             approval2(true);
+                        else
+                        {
+                            approval1(false);
+                            approval2(false);
+                        }
 
                            dataservice.getpayOutHistoryForApproval(
                                 {
@@ -55,8 +60,8 @@ define("FranchiseDashboard/payPallApp.viewModel",
                     },
                     onEditPayPallHistory = function (item) {
 
-                            //$("#topArea").css("display", "none");
-                            //$("#divApprove").css("display", "none");
+                            $("#topArea").css("display", "none");
+                            $("#divApprove").css("display", "none");
                             selectedPayPall(item);
                             getCompanyData(item);
                             // isEditorVisible(true);
@@ -65,8 +70,8 @@ define("FranchiseDashboard/payPallApp.viewModel",
                           
                         selectedPayPall(undefined);
                            isEditorVisible(false);
-                           //$("#topArea").css("display", "block");
-                           //$("#divApprove").css("display", "block");
+                           $("#topArea").css("display", "block");
+                           $("#divApprove").css("display", "block");
                     },
                     getCompanyData = function (selectedItem) {
                         
@@ -107,13 +112,13 @@ define("FranchiseDashboard/payPallApp.viewModel",
                                   return false;
                               }
                               //selectedPayPall().isApproved(false);
-                              if (UserRole == 'Franchise_Approver1')
+                              if (UserRole == 'Franchise Admin')
                                   selectedPayPall().stageOneStatus(2)
                               else
                                   selectedPayPall().stageTwoStatus(2)
                               onSavePayOut();
-                              //$("#topArea").css("display", "block");
-                              //$("#divApprove").css("display", "block");
+                              $("#topArea").css("display", "block");
+                              $("#divApprove").css("display", "block");
                           });
 
                     },
@@ -129,13 +134,13 @@ define("FranchiseDashboard/payPallApp.viewModel",
                                   return false;
                               }
                               //selectedPayPall().isApproved(false);
-                              if (UserRole == 'Franchise_Approver1')
+                              if (UserRole == 'Franchise Admin')
                                   selectedPayPall().stageOneStatus(1)
                               else
                                   selectedPayPall().stageTwoStatus(4)
                               onSavePayOut();
-                              //$("#topArea").css("display", "block");
-                              //$("#divApprove").css("display", "block");
+                              $("#topArea").css("display", "block");
+                              $("#divApprove").css("display", "block");
                           });
 
                       },
@@ -151,12 +156,12 @@ define("FranchiseDashboard/payPallApp.viewModel",
                                      return false;
                                  }
                                  //selectedPayPall().isApproved(false);
-                                 if (UserRole == 'Franchise_Approver2') {
+                                 if (UserRole == 'Franchise Account Manager') {
                                      selectedPayPall().stageTwoStatus(3)
                                      onSavePayOut();
                                  }
-                                 //$("#topArea").css("display", "block");
-                                 //$("#divApprove").css("display", "block");
+                                 $("#topArea").css("display", "block");
+                                 $("#divApprove").css("display", "block");
                              });
 
                          },

@@ -56,13 +56,13 @@ namespace SMD.Implementation.Services
             if (amount <= 0)
             {
                 //throw new ArgumentException("Amount");
-                return "Failed, Amount is not sufficient!"; 
+                return "Failed, Amount is not sufficient!";
             }
 
             if (string.IsNullOrEmpty(customerStripeId))
             {
                 //throw new ArgumentException("customerStripeId");
-                return "Failed, Account not configured!";  
+                return "Failed, Account not configured!";
             }
 
             // Verify If Credit Card is not expired
@@ -70,8 +70,8 @@ namespace SMD.Implementation.Services
             var customer = customerService.Get(customerStripeId);
             if (customer == null)
             {
-               // throw new SMDException("Customer Not Found!");
-                return "Failed, Customer Not Found!";  
+                // throw new SMDException("Customer Not Found!");
+                return "Failed, Customer Not Found!";
             }
 
             // If Card has been expired then skip payment
@@ -82,14 +82,14 @@ namespace SMD.Implementation.Services
                  && (Convert.ToInt32(defaultStripeCard.ExpirationYear) == DateTime.Now.Year && Convert.ToInt32(defaultStripeCard.ExpirationMonth) < DateTime.Now.Month))
                 {
                     //throw new SMDException("Card Expired!");
-                    return "Failed, Card Expired!";  
+                    return "Failed, Card Expired!";
                 }
             }
 
             var stripeChargeCreateOptions = new StripeChargeCreateOptions
             {
                 CustomerId = customerStripeId,
-                Amount = amount *100,
+                Amount = amount * 100,
                 Currency = "usd",
                 Capture = true
                 // (not required) set this to false if you don't want to capture the charge yet - requires you call capture later
@@ -100,7 +100,7 @@ namespace SMD.Implementation.Services
             {
                 return resposne.BalanceTransactionId;
             }
-            return "Failed";  
+            return "Failed";
         }
 
 
@@ -146,7 +146,7 @@ namespace SMD.Implementation.Services
             {
                 Email = request.Email,
                 Source = stripeSourceOptions,
-                
+
             };
             var customerService = new StripeCustomerService();
             try
@@ -172,7 +172,7 @@ namespace SMD.Implementation.Services
 
             //StripeConfiguration.SetApiKey("[your api key here]");
 
-          
+
             var customerService = new StripeCustomerService();
             StripeCustomer stripeCustomer = customerService.Get(StripeCustomerId);
 
@@ -181,11 +181,28 @@ namespace SMD.Implementation.Services
             //Do something here to give your customer what they are paying for
             //CHEERS!
 
-            
+
 
             if (sub != null)
             {
-                return new StripeSubscriptionResponse {SubscriptionId = sub.Id,  ApplicationFeePercent = sub.ApplicationFeePercent, CancelAtPeriodEnd = sub.CancelAtPeriodEnd, Customer = sub.Customer.Email, CustomerId = sub.CustomerId, CanceledAt = sub.CanceledAt, EndedAt = sub.EndedAt, Metadata = sub.Metadata, PeriodEnd = sub.PeriodEnd, PeriodStart = sub.PeriodStart, Quantity = sub.Quantity, Start = sub.Start, Status = sub.Status, StripePlan = sub.StripePlan.Name, TaxPercent = sub.TaxPercent };
+                return new StripeSubscriptionResponse
+                {
+                    SubscriptionId = sub.Id,
+                    ApplicationFeePercent = sub.ApplicationFeePercent.HasValue ? sub.ApplicationFeePercent.Value : 0,
+                    CancelAtPeriodEnd = sub.CancelAtPeriodEnd,
+                    Customer = sub.Customer != null ? sub.Customer.Email : "",
+                    CustomerId = sub.CustomerId,
+                    CanceledAt = sub.CanceledAt.HasValue ? sub.CanceledAt.Value : DateTime.Now,
+                    EndedAt = sub.EndedAt,
+                    Metadata = sub.Metadata,
+                    PeriodEnd = sub.PeriodEnd,
+                    PeriodStart = sub.PeriodStart,
+                    Quantity = sub.Quantity,
+                    Start = sub.Start,
+                    Status = sub.Status,
+                    StripePlan = sub.StripePlan.Name,
+                    TaxPercent = sub.TaxPercent
+                };
             }
             else
                 return null;
@@ -194,20 +211,37 @@ namespace SMD.Implementation.Services
 
 
         public StripeSubscriptionResponse GetCustomerSubscription(string StripeSubscriptionId, string StripeCustomerId)
-    {
-         StripeSubscriptionService subscriptionSvc = new StripeSubscriptionService();
-         var sub = subscriptionSvc.Get(StripeSubscriptionId, StripeCustomerId); //use the PlanId you configured in the Stripe Portal to create a subscription
+        {
+            StripeSubscriptionService subscriptionSvc = new StripeSubscriptionService();
+            var sub = subscriptionSvc.Get(StripeCustomerId, StripeSubscriptionId); //use the PlanId you configured in the Stripe Portal to create a subscription
 
-         if (sub != null)
-         {
-             return new StripeSubscriptionResponse { SubscriptionId = sub.Id, ApplicationFeePercent = sub.ApplicationFeePercent, CancelAtPeriodEnd = sub.CancelAtPeriodEnd, Customer = sub.Customer.Email, CustomerId = sub.CustomerId, CanceledAt = sub.CanceledAt, EndedAt = sub.EndedAt, Metadata = sub.Metadata, PeriodEnd = sub.PeriodEnd, PeriodStart = sub.PeriodStart, Quantity = sub.Quantity, Start = sub.Start, Status = sub.Status, StripePlan = sub.StripePlan.Name, TaxPercent = sub.TaxPercent };
-         }
-         else
-             return null;
+            if (sub != null)
+            {
+                return new StripeSubscriptionResponse
+                {
+                    SubscriptionId = sub.Id,
+                    ApplicationFeePercent = sub.ApplicationFeePercent.HasValue ? sub.ApplicationFeePercent.Value : 0,
+                    CancelAtPeriodEnd = sub.CancelAtPeriodEnd,
+                    Customer = sub.Customer != null ? sub.Customer.Email : "",
+                    CustomerId = sub.CustomerId,
+                    CanceledAt = sub.CanceledAt.HasValue ? sub.CanceledAt.Value : DateTime.Now,
+                    EndedAt = sub.EndedAt,
+                    Metadata = sub.Metadata,
+                    PeriodEnd = sub.PeriodEnd,
+                    PeriodStart = sub.PeriodStart,
+                    Quantity = sub.Quantity,
+                    Start = sub.Start,
+                    Status = sub.Status,
+                    StripePlan = sub.StripePlan.Name,
+                    TaxPercent = sub.TaxPercent
+                };
+            }
+            else
+                return null;
 
 
 
-    }
+        }
         #endregion
     }
 }

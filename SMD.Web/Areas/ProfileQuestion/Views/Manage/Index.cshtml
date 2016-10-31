@@ -6,8 +6,8 @@
 
 
 <div class="row" id="Heading_div">
-    <div class="col-lg-12" style="padding-left: 0px;">
-        <div style="width:106px;" class="pull-left">
+    <div class="col-lg-12" style="padding-left: 0px;padding-right:0px;">
+        <div style="width:91px;" class="pull-left">
 
             <label id="headlabel" style="font-size:24px;color:#fff!important;margin-top:7px;">Surveys</label>
 
@@ -16,8 +16,10 @@
 
         </div>
 
-        <div style="width:600px" class="pull-left">
+        <div style="width:1065px" class="pull-left">
             <label id="headdesc" style="color:#fff;font-size:14px;margin-top:17px;">Run a 2, 4 or 6 Q & A survey to a target audience.</label>
+            <img class="pull-right closecls" src="~/Content/Images/Close_Button.png" style="margin-top:15px;" onclick="GotoHome();" />
+            <div class="clearfix"></div>
         </div>
         <div class="clearfix;"></div>
     </div>
@@ -33,7 +35,7 @@
         <!-- /ko -->
         <!-- ko template: { name: 'filterTemplate' } -->
         <!-- /ko -->
-        <div class="col-lg-12">
+        <div class="col-lg-12 margintop13">
             <div class="row main-box no-header clearfix">
                 <div class="main-box-body clearfix">
                     <div class="table-responsive">
@@ -47,7 +49,6 @@
                                     <th class="col-lg-2 th-pointer"><span class="GridHeaderFont_size" id="1">Delivered%</span></th>
                                     <th class="col-lg-2 th-pointer"><span style="display:none;" class="GridHeaderFont_size" id="1">SkippedCount</span></th>
                                     <th class="col-lg-2 th-pointer"><span class="GridHeaderFont_size" id="1">Status</span></th>
-
 
                                     <th class="col-lg-1 th-pointer" style="display:none;"><span class="GridHeaderFont_size" id="3">Priority<span></span></span></th>
                                     <th id="hasLinkedtableHeader" style="display:none;" class="col-lg-1 th-pointer"><span class="GridHeaderFont_size" id="4">Has Link Q<span></span></span></th>
@@ -186,12 +187,13 @@
                        <br />
                         <div>
                             <span style="font-size:18px;float:left;color:#81d3dc!important;">Run a 2, 4 or 6 Q & A survey.</span>
-                            <button style="float:right;margin-top:-17px;" class="btn btn-primary" data-bind="click:$root.addNewProfileQuestion">
+                            
+                            <button style=" float:right;margin-top:-17px;" class="btn btn-primary" data-bind="click:$root.addNewProfileQuestion">
                                 Create Survey Questions
                             </button>
                         </div>
+
                         <div style="clear:both;"></div>
-                       
                         @*<span class="red bold rightAlign" style="display:none;"> Watch Video <img src="/Images/youtube_play.JPG" height="25px" /> </span>   </span><br />*@
                         <span style="font-size: 14px;" class="Theme_subheading-Clr ">Run a question and answer survey and create new target audience groups <br />that can be used in any of your video or display ads campaigns.  .</span>
                     </div>
@@ -223,10 +225,10 @@
                         </div>
                     </form>
                     <div class="col-sm-8" style="float:right;padding:0px;padding-top: 13px;padding-right: 15px; text-align:right">
-    
-                        <button class="btn btn-primary" data-bind="click:$root.addNewProfileQuestion">
-                                Create Survey Questions
-                            </button>
+                     
+                        <button class="btn btn-primary create_survey_btn" data-bind="click:$root.addNewProfileQuestion">
+                            Create Survey 
+                        </button>
 
                     </div>
                     <div class="clearfix">
@@ -255,6 +257,11 @@
      //   $("#MainSpan").css("display", "none");
         $("#btnSurveyQuestion").css("background-color", "#34b9c7");
         $("#btnManageApprov").css("background-color", "#34b9c7");
+        $("#main_btnPannels").css("display", "none");
+        $("#MarketobjDiv").css("display", "none");
+        $(".hideInCoupons").css("display", "none");
+        $("#topArea").css("display", "none");
+        $("#divApprove").css("display", "none");
     </script>
 
 }

@@ -95,6 +95,9 @@ define("invoice/invoice.viewModel",
                         toDateFilter(undefined);
                         getInvoices();
                     },
+                     onCloseClick = function () {
+                         window.location.href = "/";
+                     },
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView;
@@ -118,7 +121,8 @@ define("invoice/invoice.viewModel",
                     fromDateFilter: fromDateFilter,
                     toDateFilter: toDateFilter,
                     onSearchButtonClick: onSearchButtonClick,
-                    resetData: resetData
+                    resetData: resetData,
+                    onCloseClick: onCloseClick
                 };
             })()
         };

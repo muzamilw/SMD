@@ -1,20 +1,180 @@
 ﻿@model List<SMD.Models.DomainModels.vw_CompanyUsers>
-
 @{
-    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    Layout = "";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cash4ads.com</title>
+    <script type="text/javascript">
+        //<![CDATA[
+        try { if (!window.CloudFlare) { var CloudFlare = [{ verbose: 0, p: 0, byc: 0, owlid: "cf", bag2: 1, mirage2: 0, oracle: 0, paths: { cloudflare: "/cdn-cgi/nexp/dokv=88e434a982/" }, atok: "dd9c6b9d970c21043597a4fadd80e4dd", petok: "c72ad64ff02a636e9ee15a6b938d94e820ea3f2d-1408352066-1800", zone: "adbee.technology", rocket: "0", apps: { "ga_key": { "ua": "UA-49262924-2", "ga_bs": "2" } } }]; !function (a, b) { a = document.createElement("script"), b = document.getElementsByTagName("script")[0], a.async = !0, a.src = "//ajax.cloudflare.com/cdn-cgi/nexp/dokv=97fb4d042e/cloudflare.min.js", b.parentNode.insertBefore(a, b) }() } } catch (e) { };
+        //]]>
+    </script>
+    <link href="../Content/themes/Centaurus/css/bootstrap/bootstrap.css" rel="stylesheet" />
+    <link href="../Content/themes/Centaurus/css/libs/font-awesome.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../Content/themes/Centaurus/css/compiled/layout.css">
+    <link rel="stylesheet" type="text/css" href="../Content/themes/Centaurus/css/compiled/elements.css">
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+    <link type="image/x-icon" href="~/Views/Account/favicon.png" rel="shortcut icon" />
 
-
-    }
-<h3>You have access to following Companies, select one to proceed and login.</h3>
-<table>
-    @{
-        foreach (var company in Model)
-        {
-            <tr>
-                <td>@company.CompanyName</td>
-                <td>@company.RoleName</td>
-                <td><button><a href='@Url.Action("SetCompany", "Account", new { companyid= company.companyid, Role = company.RoleName,Companyname = company.CompanyName }, Request.Url.Scheme)'>Manage</a> </button></td>
-            </tr>
+    <style>
+        #login-box {
+            max-width:100% !important;
         }
-    }
-</table>
+
+        .col-centered{
+    float: none;
+    margin: 0 auto;
+}
+
+        .table.table-hover tbody > tr > td {
+    -webkit-transition: background-color 0.15s ease-in-out 0s;
+    transition: background-color 0.15s ease-in-out 0s;
+    
+}
+
+         .table.table-hover tbody > tr > td a { visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s linear;}
+
+          .table.table-hover tbody > tr:hover > td a { visibility: visible;
+  opacity: 1;}
+
+    </style>
+
+    <!--[if lt IE 9]>
+        <script src="~/Views/Account/js/html5shiv.js"></script>
+        <script src="~/Views/Account/js/respond.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+        /* <![CDATA[ */
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-49262924-2']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+        (function (b) { (function (a) { "__CF" in b && "DJS" in b.__CF ? b.__CF.DJS.push(a) : "addEventListener" in b ? b.addEventListener("load", a, !1) : b.attachEvent("onload", a) })(function () { "FB" in b && "Event" in FB && "subscribe" in FB.Event && (FB.Event.subscribe("edge.create", function (a) { _gaq.push(["_trackSocial", "facebook", "like", a]) }), FB.Event.subscribe("edge.remove", function (a) { _gaq.push(["_trackSocial", "facebook", "unlike", a]) }), FB.Event.subscribe("message.send", function (a) { _gaq.push(["_trackSocial", "facebook", "send", a]) })); "twttr" in b && "events" in twttr && "bind" in twttr.events && twttr.events.bind("tweet", function (a) { if (a) { var b; if (a.target && a.target.nodeName == "IFRAME") a: { if (a = a.target.src) { a = a.split("#")[0].match(/[^?=&]+=([^&]*)?/g); b = 0; for (var c; c = a[b]; ++b) if (c.indexOf("url") === 0) { b = unescape(c.split("=")[1]); break a } } b = void 0 } _gaq.push(["_trackSocial", "twitter", "tweet", b]) } }) }) })(window);
+        /* ]]> */
+    </script>
+    @* Get Local Time Zone and Keep in Cache *@
+    <script type="text/javascript">
+        function cookieExists(name) {
+            var nameToFind = name + "=";
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                if (cookies[i].trim().indexOf(nameToFind) === 0) return true;
+            }
+            return false;
+        }
+        function addTimeZoneOffSetCookie() {
+            if (!cookieExists("_timeZoneOffset") && '@HttpContext.Current.Request.Url.Authority' != "localhost" &&
+                '@HttpContext.Current.Request.Url.Authority' != "smd" && '@HttpContext.Current.Request.Url.Authority' != "smdpreview.com") {
+                var now = new Date();
+                var timeZoneOffset = -now.getTimezoneOffset();  // in minutes
+                now.setTime(now.getTime() + 10 * 24 * 60 * 60 * 1000); // keep it for 10 days
+                document.cookie = "_timeZoneOffset=" + timeZoneOffset.toString() + ";expires=" + now.toGMTString() + ";path=/;" + document.cookie;
+            }
+        }
+
+        // Get Time Zone OffSet and Keep it in cookie
+        addTimeZoneOffSetCookie();
+    </script>
+</head>
+<body id="login-page-full">
+    <div id="login-full-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-centered">
+
+                    <div class="text-center hidden-xs">
+                        
+                    </div>
+
+
+                    <div id="login-box" class="hidden-xs">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <header id="login-header">
+                                    <div id="login-logo" style="">
+                                        <a href="~/" id="beta" style="         background-image: url(/Images/beta.jpg);
+    background-repeat: no-repeat;
+    background-size: 63%;
+    margin-top: 16px;
+    margin-left: 17px;
+    width: 72px;
+    height: 18px;
+    position: absolute;
+    z-index:100;">
+
+                                        </a>
+                                        <div class="login-logo-bakImg">
+
+                                        </div>
+                                        @*<img src="~/Images/Cash4Ads_White_pink.png" />*@
+                                    </div>
+
+                                    <div style="float:right; position:absolute; right:26px;top:16px;">
+                                        <span style="color:white">@ViewBag.fullname</span>
+                                        <a style="color:white;margin-left:10px;" href="~/Account/LogOff"><i class="fa fa-power-off"></i></a>
+                                    </div>
+                                </header>
+                                <div id="login-box-inner">
+
+                                    <h4>You have access to manage the following companies.</h4>
+                                    <p style="" class="text-center">Select which company you would like to manage qt this time.</p>
+                                    <table style="border-top:solid 1px lightgray;width:100%" class="table table-hover">
+                                        @{
+                                            foreach (var company in Model)
+                                            {
+                                                <tr style="height:70px;vertical-align:middle;border-top:solid 1px lightgray;width:100%">
+                                                    <td style="margin-left:20px;    "><img style="width: 60px; height: 30px; background-color: white; border-radius: 5px;" src="/@company.Logo" /></td>
+                                                    <td>@company.CompanyName</td>
+                                                    <td>@company.RoleName</td>
+                                                    <td style="text-align:right;width:200px;" class=""><a class="btn btn-success btn-sm" style=" padding: 5px 10px; font-size: 12px; line-height: 1.5; border-radius: 3px;color:white; text-transform:none"  href='@Url.Action("SetCompany", "Account", new { companyid = company.companyid, Role = company.RoleName, Companyname = company.CompanyName, CompanyLogo = company.Logo, RoleId = company.RoleId }, Request.Url.Scheme)'>Manage Now</a></td>
+                                                </tr>
+                                            }
+                                        }
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="text-center visible-xs" style="margin-top:40px;padding:20px">
+
+                        <img src="~/Images/Cash4ads_logo-circle.png" style="width:115px;" />
+
+                        <h4 style="color:white;margin-top:35px;font-size:2em;font-weight:bolder" class="text-center;">Sign In from your laptop<br /></h4>
+                        <h4 style="color:white;margin-top:35px;font-size:2em" class="text-center;">We're working hard to allow you to manage campaigns from your mobile.<br /><br /> In the meanwhile have fun playing games, Watching ads and Earning Cash<br /> with our apps.</h4>
+                    </div>
+
+                    <div class="text-center visible-xs" style="margin-top:30px;">
+                        <img style="height:47px" src="../../Images/app-store.png" alt="" /><img style="margin-left:10px;width:152px" src="../../Images/download-on-google-play.png" alt="" />
+                    </div>
+
+
+                </div>
+                
+
+            </div>
+        </div>
+    </div>
+    <script src="../Content/themes/Centaurus/js/jquery.js"></script>
+    <script src="../Content/themes/Centaurus/js/bootstrap.js"></script>
+    <script src="../Content/themes/Centaurus/js/jquery.nanoscroller.min.js"></script>
+    <script src="../Content/themes/Centaurus/js/scripts.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+</body>
+</html>

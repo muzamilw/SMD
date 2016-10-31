@@ -11,7 +11,7 @@
           CouponDiscountValue, couponImage2, CouponImage3, CouponImage4, CouponExpiryLabel,
           couponSmdComission, CouponCategories, DeliveryDays, IsUseFilter, logoUrl,
           VoucherAdditionalInfo, CouponId, IsShowVoucherSetting, VideoLink2, CouponType, IsSavedCoupon, viewCountToday, viewCountYesterday, viewCountAllTime, MaxDailyBudget, Locationss,ApprovalDateTime,
-          ChannelType, VideoBytes, ShowBuyitBtn) {
+          ChannelType, VideoBytes, showBuyitBtn) {
          
           var
               //type and userID will be set on server sside
@@ -37,7 +37,7 @@
               CouponDiscountValue = ko.observable(CouponDiscountValue),
               CouponCategories = ko.observableArray([]),
               VideoBytes = ko.observable(VideoBytes),
-              ShowBuyitBtn = ko.observable(ShowBuyitBtn),
+              ShowBuyitBtn = ko.observable(showBuyitBtn),
               StartDateTime = ko.observable((StartDateTime !== null && StartDateTime !== undefined) ? moment(StartDateTime).toDate() : undefined).extend({  // custom message
                   required: true
               }),//ko.observable(),
@@ -632,7 +632,7 @@
             source.CampaignTypeImagePath, source.Description, source.ClickRate, source.Voucher1Heading, source.Voucher1Description, source.Voucher1Value, source.Voucher2Heading, source.Voucher2Description,
              source.Voucher2Value, source.Voucher1ImagePath, source.VoucherImagePath, source.CreatedBy, source.VideoUrl, source.BuuyItLine1, source.BuyItLine2, source.BuyItLine3, source.BuyItButtonLabel, source.BuyItImageUrl,source.AdViews,source.CompanyId,
             source.CouponSwapValue, source.CouponActualValue,source.CouponQuantity,source.CouponTakenCount, source.priority, source.CouponDiscountValue,
-             source.couponImage2, source.CouponImage3, source.CouponImage4, source.CouponExpiryLabel, source.couponSmdComission, null, source.DeliveryDays + "", source.IsUseFilter + "", source.LogoUrl, source.VoucherAdditionalInfo, source.CouponId, source.IsShowVoucherSetting, source.VideoLink2, source.CouponType + "", source.IsSavedCoupon, source.viewCountToday, source.viewCountYesterday, source.viewCountAllTime, source.MaxDailyBudget, source.Locationss, source.ApprovalDateTime, source.ChannelType + "", source.ShowBuyitBtn);
+             source.couponImage2, source.CouponImage3, source.CouponImage4, source.CouponExpiryLabel, source.couponSmdComission, null, source.DeliveryDays + "", source.IsUseFilter + "", source.LogoUrl, source.VoucherAdditionalInfo, source.CouponId, source.IsShowVoucherSetting, source.VideoLink2, source.CouponType + "", source.IsSavedCoupon, source.viewCountToday, source.viewCountYesterday, source.viewCountAllTime, source.MaxDailyBudget, source.Locationss, source.ApprovalDateTime, source.ChannelType + "",source.VideoBytes, source.ShowBuyitBtn);
         
         _.each(source.AdCampaignTargetCriterias, function (item) {
           

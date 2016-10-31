@@ -94,9 +94,9 @@ h1 small, h2 small, h3 small, h1 .small, h2 .small, h3 .small {
     background-color: #81d3dc;
     border-color: #7f8c8d;
     color: #fff;
-    height:60px;
+    height:120px;
     font-size:14px;
-    width:124px;
+    width:174px;
     white-space:normal;
     margin-right:15px;
 }
@@ -5478,7 +5478,7 @@ color:red !important;
     -o-box-shadow: 1px 1px 2px 0 #CCCCCC;
     -ms-box-shadow: 1px 1px 2px 0 #CCCCCC;
     box-shadow: 1px 1px 2px 0 #CCCCCC;
-    margin-bottom: 16px;
+    margin-bottom:8px;
     -webikt-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;

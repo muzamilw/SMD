@@ -6,8 +6,9 @@
     <div class="modal-dialog" style="width:900px;border-radius:5px;">
         <div class="modal-content">
             <div class="modal-content partial-contents" style="background-color:#dedede;margin-top:-1px;" id="">
-                <div class="modal-header" id="" style="background-color: #81d3dc;text-align: center;">
-                    <button id="btnCloseP" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <div class="modal-header" id="" style="background-color: #0f68a1;text-align: center;">
+                    <img src="/Content/Images/Close_Button.png" class="close" data-dismiss="modal"   style="width:20px;height:20px;float:right;cursor:pointer;">
+                    @*<button id="btnCloseP" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>*@
                     <span class="text-center" style="font-size:24px;color: #ffffff; line-height: 2.5 !important;">Account Settings</span>
                     
                 </div>
@@ -107,13 +108,13 @@
                                                 <label for="txtEmail" class="requiredlabel">Email </label>
                                                 <input type="email" class="form-control" id="txtEmail" placeholder="Enter email" data-bind="value:email, enable:false">
                                             </div>
-                                            <div class="form-group">
+                                            @*<div class="form-group">
                                                 <label for="txtDob" class="requiredlabel">Date of Birth </label>
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                                     <input type="text" class="form-control" id="txtDob" name="Missing date of birth" placeholder="Enter Date of birth" data-bind="datepicker:dateOfBirth, datepickerOptions: { yearRange: '-60:+0' }, validationOnElement: dateOfBirth">
                                                 </div>
-                                            </div>
+                                            </div>*@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -129,11 +130,24 @@
                                             <div class="form-group">
                                                 <label for="txtMobileNo" class="requiredlabel">Mobile Number </label>
                                                 <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-plus"></i></span>
+                                                    <select class="form-control" style="width:85%" id="countryCode" name="countryCode" >
+                                                        <option value="92">92</option>
+                                                        <option value="92">27</option>
+                                                        <option value="92">44</option>
+                                                    </select>
                                                     <span class="input-group-addon"><i class="fa fa-phone"></i></span>
                                                     <input type="text" id="txtMobileNo" class="form-control" name="Missing mobile number" maxlength="16" placeholder="Enter Mobile Number" data-bind="value:mobileNumber, validationOnElement: mobileNumber">
                                                 </div>
                                             </div>
                                             <div class="form-group">
+                                                <label for="txtDob" class="requiredlabel">Date of Birth </label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    <input type="text" class="form-control" id="txtDob" name="Missing date of birth" placeholder="Enter Date of birth" data-bind="datepicker:dateOfBirth, datepickerOptions: { yearRange: '-60:+0' }, validationOnElement: dateOfBirth">
+                                                </div>
+                                            </div>
+                                            <div class="form-group" style="display:none">
                                                 <label for="txtPasportNo">User Id (i.e Passport #, DrivingLicense #)</label>
                                                 <input type="text" id="txtPasportNo" class="form-control" maxlength="16" placeholder="Enter Valid Passport number" data-bind="value:passportNumber">
                                             </div>

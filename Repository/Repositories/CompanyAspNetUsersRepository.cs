@@ -74,7 +74,7 @@ namespace SMD.Repository.Repositories
         public vw_CompanyUsers CompanyUserExists(string Email)
         {
 
-            return db.vw_CompanyUsers.Where(g => g.email.Contains(Email)).FirstOrDefault();
+            return db.vw_CompanyUsers.Where(g => g.email.Contains(Email) && g.companyid == CompanyId).FirstOrDefault();
         }
 
 

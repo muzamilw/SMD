@@ -18,16 +18,15 @@
                 <div class="clearfix" style="float:right;margin-top:-5px;">
                     <div class="col-xs-12" style="text-align: right; padding-right:0;margin-bottom:10px;">
                         <button style="display:none;" class="btn  btn-info" id="saveBtn" data-bind="click:$root.onSaveProfileQuestion, enable: $root.hasChangesOnQuestion, css: { 'btn-warning': $root.hasChangesOnQuestion }">Save</button>
-                      
 
-                        <img data-bind="click: $root.closeEditDialog" src="/Content/Images/Close_Button.png" style="width:27px;height:27px;float:right;cursor:pointer;">
+                        <img data-bind="click: $root.closeEditDialog" src="/Content/Images/Close_Button.png" style="width:20px;height:20px;float:right;cursor:pointer;">
                     </div>
                 </div>
             </div>
         </div>
         <div class="row" style="margin-bottom:15px;">
             <div class="col-xs-6 pull-left validationSummaryContainer">
-                <ul ></ul>
+                <ul></ul>
             </div>
             <div class="pull-right top-page-ui" style="margin-right:5px;margin-bottom:5px;">
             </div>
@@ -54,48 +53,47 @@
                         </div>
                         @*<div class="pull-left ads-numbering-linebar" data-bind="css: $root.previewScreenNumber() == 6 ? 'ads-selected-numbering-box' : ''">
 
-                </div>*@
+                            </div>*@
                         @*<div class="pull-left ads-numbering-main">
-                    <div class="ads-numbering-box" data-bind="css: $root.previewScreenNumber() == 3 ? 'ads-selected-numbering-box' : '',click: $root.gotoScreen.bind(null,3)">
-                        3
-                    </div>
+                                <div class="ads-numbering-box" data-bind="css: $root.previewScreenNumber() == 3 ? 'ads-selected-numbering-box' : '',click: $root.gotoScreen.bind(null,3)">
+                                    3
+                                </div>
 
-                    <br>
-                    <span data-bind="css: $root.previewScreenNumber() == 3  ? 'ads-selected-numbering-text' : ''">Fine print <br> &amp; Redeem</span>
-                </div>
-                <div class="pull-left ads-numbering-linebar" data-bind="css: $root.previewScreenNumber() == 6 ? 'ads-selected-numbering-box' : ''">
+                                <br>
+                                <span data-bind="css: $root.previewScreenNumber() == 3  ? 'ads-selected-numbering-text' : ''">Fine print <br> &amp; Redeem</span>
+                            </div>
+                            <div class="pull-left ads-numbering-linebar" data-bind="css: $root.previewScreenNumber() == 6 ? 'ads-selected-numbering-box' : ''">
 
-                </div>
-                <div class="pull-left ads-numbering-main">
-                    <div class="ads-numbering-box" data-bind="css: $root.previewScreenNumber() == 4 ? 'ads-selected-numbering-box' : '',click: $root.gotoScreen.bind(null,4)">
-                        4
-                    </div>
+                            </div>
+                            <div class="pull-left ads-numbering-main">
+                                <div class="ads-numbering-box" data-bind="css: $root.previewScreenNumber() == 4 ? 'ads-selected-numbering-box' : '',click: $root.gotoScreen.bind(null,4)">
+                                    4
+                                </div>
 
-                    <br>
-                    <span data-bind="css: $root.previewScreenNumber() == 4 ? 'ads-selected-numbering-text' : ''">Branch <br> &amp; Images</span>
-                </div>*@
+                                <br>
+                                <span data-bind="css: $root.previewScreenNumber() == 4 ? 'ads-selected-numbering-text' : ''">Branch <br> &amp; Images</span>
+                            </div>*@
                         <div class="pull-left" style="width:49px;">
                             &nbsp;
                         </div>
                         <div class="pull-left ads-numbering-main">
                             <a data-toggle="modal" data-target=".model_quizQ_ph">
                                 <div class="ads-numbering-box" style="background: rgb(104,179,89);">
-                                    <img src="/Content/Images/AD_Campaign_mobileStencil.png" width="20px">
+                                    <img src="~/Content/Images/Preview.png" class="previewImg" />
                                 </div>
                                 <br>
                                 <span>Preview</span>
                             </a>
                         </div>
-
-                        <div class="pull-left" style="width:617px;">
+                        <div class="pull-left" style="width:519px;">
                             <div>
-                                <div class="pull-right ads-numbering-main" style="width:99px;
-    border-left: 1px solid rgb(220,220,220);
+                                <div class="pull-right ads-numbering-main" style="width:103px;
+    border-right: 1px solid rgb(220,220,220);
     padding-left: 32px;
-    text-align: left;">
+    text-align: left;height:106px;">
                                     <a data-toggle="modal" data-bind="click:$root.openAdvertiserDashboardSurvayScreen">
                                         <div class="ads-numbering-box" style="background:#9690cf;">
-                                            <img src="/Content/Images/AD_Campaign_mobileStencil.png" width="20px">
+                                            <img src="~/Content/Images/Charts.png" style="width:20px;" />
                                         </div>
                                         <br>
                                         <span style="color:gainsboro;margin-left:6px;">Charts</span>
@@ -103,31 +101,54 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="statusDiv" class="pull-left" style="width:138px;text-align: right; padding-top: 71px;height: auto;">
+                       
 
-                            <span style="font-size:16px;color:black;margin-right:2px;">Status</span><span>:</span><span style="font-size:16px;color:black;margin-left:2px;" data-bind="text:statusValue()"></span>
+                        <div id="statusDiv" class="pull-left statusesdiv">
+
+                            <div class="pull-left">
+                                <div>
+                                    <span class="datespanheader">Survey</span>
+                                </div>
+
+                                <div class="datespansclr">
+                                    Date created: <span style="margin-left:3px"></span><span>12 april 2014</span>
+                                </div>
+                                <div class="datespansclr">
+                                    Date modified: <span style="margin-left:3px"></span><span>12 april 2014</span>
+                                </div>
+
+                                <br>
+
+                                <span style="font-size:16px;color:black;margin-left:2px;" data-bind="text:statusValue()">Draft</span>
+                            </div>
+                            <div class="pull-right">
+
+                                <img class="vid_image" src="/Content/Images/Surveys_small.png" style="display: block;">
+
+                            </div>
+
+
+
                         </div>
                         <div class="clearfix"></div>
                     </div>
                 </div>
-                <div class="col-lg-12">
+                <div class="col-lg-12 padding0px">
                     <div class="col-lg-9">
                         <div class="clearfix" data-bind="visible: $root.isAdvertdashboardSurvayVisible()">
                             <span class="pull-left " style="color:black!important; padding-left: 0px; font-size: 23px;" data-bind="text: questionString"></span>
-
                             <div style="float:right;margin-top:-9px;"><img data-bind="click: $root.CloseSurvayAnalyticView" src="/Content/Images/Close_Button.png" style="width:27px;height:27px;float:right;cursor:pointer;"></div>
                         </div>
                     </div>
                     <div class="col-lg-3">
                     </div>
                     <div class="no-header clearfix col-lg-9 form-horizontal" data-bind="visible: !$root.isAdvertdashboardSurvayVisible()" style="padding-left:0px;">
-
                         <div class="main-box clearfix" id="tabsHeader" style="padding-left:20px;padding-right:20px;" data-bind="visible: $root.previewScreenNumber() == 1">
                             <div class="tabs-wrapper profile-tabs">
                                 <div class="col-lg-12">
                                     <div style="height:34px;" class="borderbtmline ">
                                         <div class="col-lg-10 adsubHeading Theme_standard_clr">
-                                            <div class="adsubHeading Theme_standard_clr">Survey Question General Info.</div>
+                                            <div class="adsubHeading Theme_standard_clr">Survey Question</div>
                                         </div>
                                         <div class="col-lg-2">
                                             <div class="bs-example-tooltips tooltip-float-width tooltip ">
@@ -143,13 +164,10 @@
                                 </div>
                                 <div class="tab-content">
                                     <div class="tab-pane fade in active" data-bind="with: $root.selectedQuestion" id="tab-generalinfo">
-                                        <div class="col-lg-12 form-horizontal">
-
-
+                                        <div class="col-lg-12 form-horizontal padding0px">
 
                                             <div class="col-lg-9">
                                                 <div class="form-group">
-
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-lg-3 text-right" style="padding-right:17px;">
@@ -159,7 +177,6 @@
                                                         <input type="text" class="form-control" maxlength="64" data-bind="value: questionString, validationTooltip: questionString">
                                                     </div>
                                                     <div class="col-lg-1">
-
                                                     </div>
                                                 </div>
                                             </div>
@@ -202,7 +219,6 @@
                                                         <select class="form-control" data-bind="options: $root.qGroup, optionsText: 'ProfileGroupName', optionsValue: 'ProfileGroupId', optionsCaption: '&lt;' + 'All'+ '&gt;' , value:profileGroupId, validationTooltip: profileGroupId"></select>
                                                     </div>
                                                     <div class="col-lg-1">
-
                                                     </div>
                                                 </div>
                                             </div>
@@ -231,10 +247,12 @@
                                                         <select class="form-control" data-bind="options: $root.questiontype, optionsText: 'typeName', optionsValue: 'typeId', optionsCaption: '&lt;' + 'All'+ '&gt;' , value:type, validationTooltip: type"></select>
                                                     </div>
                                                     <div class="col-lg-1">
-
                                                     </div>
                                                 </div>
                                             </div>
+
+                                         
+
                                             <div class="col-lg-9">
                                                 <div class="form-group" style="display:none;">
                                                     <div class="col-lg-4 text-right">
@@ -335,18 +353,14 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-9">
-                                                <div class="form-group" style="display:none;">
-                                                    <div class="col-lg-4 text-right">
-                                                        <div class="bs-example-tooltips tooltip-float-width">
-                                                            <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                            </a>
-                                                        </div>
+                                                <div class="form-group" style="display:none">@*data-bind="visible:$root.iSfmodevar()==true"*@
+                                                    <div class="col-lg-3 text-right">
+
                                                         <label class="control-label text-right tooltip-float defaultImgUploadImageBtn">Has Linked Questions</label>
                                                     </div>
                                                     <div class="col-lg-3">
                                                         <div>
-                                                            <div class="onoffswitch">
+                                                            <div class="onoffswitch" style="width:100px;">
                                                                 <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchB" data-bind="checked: hasLinkedQuestions">
                                                                 <label class="onoffswitch-label" for="switchB">
                                                                     <div class="onoffswitch-inner"></div>
@@ -355,27 +369,63 @@
                                                             </div>
                                                             <span class="help-block text-right"></span>
                                                         </div>
+
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <div class="bs-example-tooltips tooltip-float-width tooltip ">
+                                                            <a class="input-group-addon" tabindex="-1" href="#" data-toggle="tooltip" title="" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;    padding: 0px;
+                                                             padding-top: 5px;" data-container="body" data-placement="right" data-content="Add a city" data-original-title="Hooray!">
+                                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                            </a>
+                                                            <i class="fa fa-chevron-up" aria-hidden="true" style="color:#68b359;"></i>
+                                                            <span class="tooltiptext">Tooltip text</span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="col-lg-12 padding0px">
+                                                <div style="height:34px;" class="borderbtmline ">
+                                                    <div class="col-lg-10 adsubHeading Theme_standard_clr" style="margin-bottom:10px;">
+                                                        <div class="adsubHeading Theme_standard_clr" style="margin-bottom:10px;">Add 2,4 or 6 possible responses to your survey question</div>
+                                                    </div>
+                                                    <div class="col-lg-2">
+                                                        <div class="bs-example-tooltips tooltip-float-width tooltip ">
+                                                            <a class="input-group-addon" tabindex="-1" href="#" data-toggle="tooltip" title="" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;    padding: 0px;
+    padding-top: 5px;" data-container="body" data-placement="right" data-content="Add a city" data-original-title="Hooray!">
+                                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                            </a>
+                                                            <i class="fa fa-chevron-up" aria-hidden="true" style="color:#68b359;"></i>
+                                                            <span class="tooltiptext">Tooltip text</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 textalignright padding0px" >
+                                                <span class="message_label pull-left">No responses created yet.</span>
+                                                <a href="#" id="addTemplatePageBtn" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bs-example-modal-lg1" data-bind="click: $root.addNewAnswer, visible: $root.CanAddAnswers()">
+                                                    Add Answer
+                                                </a>
+                                                <div class="clearfix"></div>
+                                            </div>
                                             <div class="col-lg-9 form-horizontal">
                                                 @*<div class="tabsdescriptions" style="margin-top:25px;margin-left:2px;">
-                                        <p class="group-header-description">All possible answers to the question. </p>
-                                    </div>*@
+                    <p class="group-header-description">All possible answers to the question. </p>
+                </div>*@
                                                 <div class="form-group" @*data-bind="with: template"*@ style="padding-left:3px;padding-right:0px;">
                                                     <div class="col-lg-3"></div>
                                                     <div class="col-lg-8">
+
+                                                       
+
                                                         <header class="main-box-header clearfix" style="padding-right:0px;">
                                                             <div class="filter-block pull-right">
-                                                                <a href="#" id="addTemplatePageBtn" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bs-example-modal-lg1" data-bind="click: $root.addNewAnswer, visible: $root.CanAddAnswers()">
-                                                                    Add Answer
-                                                                </a>
+                                                                
                                                                 <div class="modal fade bs-example-modal-lg1" id="pqAnswerDialog" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
                                                                     <div class="modal-dialog modal-lg">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
                                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                                                <h4 class="modal-title Theme_standard_clr" id="gridSystemModalLabel">Add Question's Answer</h4>
+                                                                                <h4 class="modal-title" id="gridSystemModalLabel">Add Question's Answer</h4>
                                                                             </div>
                                                                             <div class="modal-body" data-bind="with:$root.selectedAnswer">
                                                                                 <div class="row">
@@ -414,7 +464,7 @@
                                                                                     <div class="col-lg-11 marginBottom12" data-bind="visible:type()=='1'">
                                                                                         <div class="form-group">
                                                                                             <div class="col-lg-3 text-right">
-                                                                                                <label class="control-label text-right tooltip-float">Answer String</label>
+                                                                                                <label class="control-label text-right tooltip-float">Response String</label>
                                                                                             </div>
                                                                                             <div class="col-lg-7">
                                                                                                 <input type="text" class="form-control" data-bind="value: answerString, validationTooltip: answerString">
@@ -435,7 +485,7 @@
                                                                                     <div class="col-lg-11 marginBottom12">
                                                                                         <div class="form-group">
                                                                                             <div class="col-lg-3 text-right">
-                                                                                                <label class="control-label text-right tooltip-float">Sort Order</label>
+                                                                                                <label class="control-label text-right tooltip-float">Button Sort Order</label>
                                                                                             </div>
                                                                                             <div class="col-lg-7">
                                                                                                 <input type="text" class="form-control" data-bind="value: sortOrder">
@@ -469,7 +519,7 @@
                                                                                     </div>
                                                                                     <div id="questionContainer" data-bind="visible:$root.selectedQuestion().hasLinkedQuestions()">
                                                                                         <div class="col-lg-9 marginBottom12">
-                                                                                            <div class="form-group" style="display:none;">
+                                                                                            <div class="form-group">
                                                                                                 <div class="col-lg-4 text-right">
                                                                                                     <div class="bs-example-tooltips tooltip-float-width">
                                                                                                         <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
@@ -484,7 +534,7 @@
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="col-lg-9 marginBottom12">
-                                                                                            <div class="form-group" style="display:none;">
+                                                                                            <div class="form-group">
                                                                                                 <div class="col-lg-4 text-right">
                                                                                                     <div class="bs-example-tooltips tooltip-float-width">
                                                                                                     </div>
@@ -496,7 +546,7 @@
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="col-lg-9 marginBottom12">
-                                                                                            <div class="form-group" style="display:none;">
+                                                                                            <div class="form-group">
                                                                                                 <div class="col-lg-4 text-right">
                                                                                                     <div class="bs-example-tooltips tooltip-float-width">
                                                                                                     </div>
@@ -508,7 +558,7 @@
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="col-lg-9 marginBottom12">
-                                                                                            <div class="form-group" style="display:none;">
+                                                                                            <div class="form-group">
                                                                                                 <div class="col-lg-4 text-right">
                                                                                                     <div class="bs-example-tooltips tooltip-float-width">
                                                                                                     </div>
@@ -520,7 +570,7 @@
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="col-lg-9 marginBottom12">
-                                                                                            <div class="form-group" style="display:none;">
+                                                                                            <div class="form-group">
                                                                                                 <div class="col-lg-4 text-right">
                                                                                                     <div class="bs-example-tooltips tooltip-float-width">
                                                                                                     </div>
@@ -532,7 +582,7 @@
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="col-lg-9 marginBottom12">
-                                                                                            <div class="form-group" style="display:none;">
+                                                                                            <div class="form-group">
                                                                                                 <div class="col-lg-4 text-right">
                                                                                                     <div class="bs-example-tooltips tooltip-float-width">
                                                                                                     </div>
@@ -554,6 +604,8 @@
                                                                 </div>
                                                             </div>
                                                         </header>
+
+                                                        <!--ko if:$root.getSortedAnswers().length >  0 -->
                                                         <div class="table-responsive">
                                                             <table class="table table-striped table-hover">
                                                                 <thead>
@@ -568,6 +620,7 @@
                                                                 </tbody>
                                                             </table>
                                                         </div>
+                                                        <!--/ko-->
                                                     </div>
                                                     <div class="col-lg-1"></div>
                                                 </div>
@@ -672,11 +725,9 @@
                                             <span>(0p)</span>
                                         </div>
                                         <div class="col-lg-2">
-
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-lg-12" style="padding:0px;">
                                     <div style="height:34px;" class="borderbtmline">
                                         <div class="col-lg-9 ">
@@ -714,7 +765,6 @@
                                             <span data-bind="text: $root.genderppc()"></span>
                                         </div>
                                         <div class="col-lg-2">
-
                                         </div>
                                     </div>
                                     <div class="form-group margin-btm26">
@@ -812,20 +862,17 @@
                                 <div id="third">
                                     <div class="form-group margin-btm26">
                                         @*<div class="col-lg-2">
-                                <label for="txtadditionalCrit" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Advanced matching options</label>
-                            </div>*@
+                                                <label for="txtadditionalCrit" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Advanced matching options</label>
+                                            </div>*@
                                         <div class="col-lg-12" style="padding: 23px;padding-top: 0px;">
-
                                             <div class="pull-left filtersDiv_width">
                                                 <button class="btn  btn-danger btnAdsCampaign ButtonWidth filterbtnclrs" id="" data-toggle="modal" data-target=".bs-example-modal-lg" data-bind="click:$root.showAdditionUserCriteria">Profle Insights</button>
                                             </div>
-
                                             <div class="pull-left filtersDiv_width">
                                                 <button class="btn  btn-danger btnAdsCampaign ButtonWidth filterbtnclrs" id="" data-toggle="modal" data-target=".bs-example-modal-lg" data-bind="click:$root.showAdditionQuizCriteria">Ad Click Answers</button>
                                             </div>
 
-
-                                            <div class="pull-left filtersDiv_width" style="display:none;">
+                                            <div class="pull-left filtersDiv_width">
                                                 <button class="btn  btn-danger btnAdsCampaign ButtonWidth filterbtnclrs" id="" data-toggle="modal" data-bind="click:$root.showAdditionUserSurveyCriteria" data-target=".bs-example-modal-lg">My poll results</button>
                                             </div>
                                             <div class="pull-left filtersDiv_width">
@@ -863,25 +910,24 @@
                         </div>
                     </div>
                     @Html.Partial("~/Areas/ProfileQuestion/Views/Manage/_advertProfileQuestionAnalytic.cshtml")
-              
-                      <div class="col-lg-3 form-horizontal">
+
+                    <div class="col-lg-3 form-horizontal">
                         <div class="row Subpanels" style="line-height: 2;padding:3px;">
                             <div class="col-lg-12">
                                 <div class="row" style="margin-top:9px;">
                                     <div class="col-lg-11" style="padding-left:24px;padding-right:0px;">
                                         @*<div style="padding-top:13px;height:51px;border-bottom :1px solid rgb(220,220,220);">
-                                    <div class="col-lg-7" style="padding-left:16px;">
-                                        <span style="color:black !important;float:left;" class="panelfntSize">Potential Reach</span>
-                                    </div>
-                                    <div class="col-lg-5" style="padding-right:36px;padding-left:0px;text-align:right;">
-                                        <span class="panelfntSize" style="color:#9690cf;" data-bind="text:$root.ShowAudienceCounter()">1,112</span>
-                                    </div>
-                                </div>*@
+                                                <div class="col-lg-7" style="padding-left:16px;">
+                                                    <span style="color:black !important;float:left;" class="panelfntSize">Potential Reach</span>
+                                                </div>
+                                                <div class="col-lg-5" style="padding-right:36px;padding-left:0px;text-align:right;">
+                                                    <span class="panelfntSize" style="color:#9690cf;" data-bind="text:$root.ShowAudienceCounter()">1,112</span>
+                                                </div>
+                                            </div>*@
                                         <input id="Ranges" type="range" min="0"
                                                oninput="showVal(this.value)" data-bind="attr:{max:$root.reachedAudience,value:$root.reachedAudience}" onchange="showVal(this.value)">
                                     </div>
                                 </div>
-
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="col-lg-7" style="padding-top:3px;padding-left:16px;">
@@ -890,7 +936,7 @@
                                         <div class="col-lg-5" data-bind="with: $root.selectedQuestion">
                                             <div class=" col-lg-12" style="padding-left:0px;padding-top:2px;">
                                                 <input type="text" style="float:left; color:#81d3dc; font-weight: bold;font-size: 15px; width:65px;display:none;" name="Budget" class="form-control" id="txtPerClick" data-bind="value:answerNeeded" />
-                                                <span data-bind="text:$root.reachedAudience" id="show_audience" class="panelfntSize" style="color:#9690cf;"></span>
+                                                <span data-bind="text:$root.reachedAudience" id="show_audience" class="panelfntSize potentreachclr"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -907,28 +953,25 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-12" style="padding-left:24px;">
-
                                         <div style="margin-top:0px;min-height:59px;">
                                             <div>
-                                                <button class="btn  btn-success btnSubmitApproval" id="btnSubmitForApproval2" data-bind="visible:$root.canSubmitForApproval,click:$root.SaveChanges" style="width:229px;margin-bottom:4px;">Submit for Approval</button>
-                                                <button class="btn  btn-success btnSubmitApproval bluethemeclr drafthov" id="btnSaveAsDraft" data-bind="visible:$root.isNewCampaign,click:$root.SaveAsDraft" style="width:229px;margin-bottom:4px;">Save as Draft</button>
-                                                <button class="btn  btn-info " id="btnStopAndTerminate" data-bind="visible:$root.isTerminateBtnVisible" style="width:229px; margin-bottom: 10px; display: none;">Stop &amp; Terminate Early</button>
-                                                <button class="btn  btn-danger " id="btnArchive" data-bind="visible: $root.isShowArchiveBtn" style="width: 229px; margin-bottom: 10px; display: none;">Archive Campaign</button>
-                                                <button class="btn  btn-info Theme_standard_clr" id="btnCopyCampaign" style="display:none;width: 229px;margin-bottom: 10px;">Create Copy - New Campaign</button>
+                                                <button class="btn  btn-success margin_panelbtns" id="btnSubmitForApproval2" data-bind="visible:$root.canSubmitForApproval,click:$root.SaveChanges" style="width:229px;margin-bottom:4px;">Submit for Approval</button>
+                                                <button class="btn  btn-success margin_panelbtns bluethemeclr drafthov" id="btnSaveAsDraft" data-bind="visible:$root.isNewCampaign,click:$root.SaveAsDraft" style="width:229px;margin-bottom:4px;">Save as Draft</button>
+                                                <button class="btn  btn-info margin_panelbtns" id="btnStopAndTerminate" data-bind="visible:$root.isTerminateBtnVisible" style="width:229px; margin-bottom: 10px; display: none;">Stop &amp; Terminate Early</button>
+                                                <button class="btn  btn-danger margin_panelbtns " id="btnArchive" data-bind="visible: $root.isShowArchiveBtn" style="width: 229px; margin-bottom: 10px; display: none;">Archive Campaign</button>
+                                                <button class="btn  btn-info Theme_standard_clr margin_panelbtns" id="btnCopyCampaign" style="display:none;width: 229px;margin-bottom: 10px;">Create Copy - New Campaign</button>
                                                 <button style="width: 229px; margin-bottom: 10px; display: none;" class="btn  btn-success" id="btnPauseCampaign" data-bind="click:$root.SavePassChanges,  visible: $root.IsPauseBtnVisible()">Pause</button>
-                                            <button class="btn  btn-success" id="btnResumeCampagin" data-bind="click:$root.SaveResumeChanges" style="display:none;width: 229px;margin-bottom: 10px;">Resume</button>
+                                                <button class="btn  btn-success margin_panelbtns" id="btnResumeCampagin" data-bind="click:$root.SaveResumeChanges" style="display:none;width: 229px;margin-bottom: 10px;">Resume</button>
                                             </div>
                                         </div>
-
                                     </div>
-                                    <div class="col-lg-12" style="padding-left:24px;">
+                                    <div class="col-lg-12" style="padding-left:24px;margin-top:6px;">
                                         <span style=" font-size:12px;">  Learn more about 'Ad Click'</span><img style="height:14px;" src="/Content/Images/Drop_Arrow.png" data-toggle="collapse" data-target="#demo" />
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row Subpanels collapse" id="demo">
-
                             <div class="col-lg-12" style="font-size:12px;">
                                 <div class="row">
                                     <div class="col-lg-11" style="padding-left:32px;">
@@ -950,10 +993,7 @@
                                     </div>
                                     <div class="col-lg-1"></div>
                                 </div>
-
                             </div>
-
-
 
                         </div>
                         <div class="clearfix">
@@ -969,7 +1009,7 @@
                             </div>
                             <div style="    background: rgb(107,106,254);color: white;font-size: 12px; line-height: 2;display:none;">
                                 <div class="pull-left">
-                                    <img src="/Content/Images/AD_Campaign_cartoon.png" style="width: 64px;margin-top: -3px;margin-left: 20px;">
+                                    @*<img src="/Content/Images/AD_Campaign_cartoon.png" style="width: 64px;margin-top: -3px;margin-left: 20px;">*@
                                 </div>
                                 <div class="pull-left" style="margin-left: 20px;">
                                     <span>Make video Ads</span><br><br>
@@ -988,27 +1028,23 @@
                         </div>
                     </div>
                 </div>
-          </div>
+            </div>
         </div>
-        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal fade bs-example-modal-lg" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><img class="pull-right closecls_main" src="/Content/Images/Close_Button.png"></button>
                         <h4 class="modal-title" id="gridSystemModalLabel">Add Criteria</h4>
                     </div>
                     <div class="modal-body" data-bind="with:$root.selectedCriteria">
                         <div class="row">
-
                             <div>
                                 <div class="col-lg-12 marginBottom12">
-
                                     <div data-bind="visible:$root.isNewCriteria">
                                         <div class="col-lg-12" style="padding:0px;">
                                             <div class="adsubHeading Theme_standard_clr">
-
                                                 <div style="height:48px;" class="borderbtmline ">
-
                                                     <div class="col-lg-2 row header" style="margin-top:20px;">
                                                         <label class="control-label modelHeading">Criteria</label>
                                                     </div>
@@ -1024,7 +1060,6 @@
                                                             Exclude
                                                         </label>
                                                     </div>
-
                                                     <div class="col-lg-2 "></div>
                                                     <div class="col-lg-2 "></div>
                                                     <div class="col-lg-2 "></div>
@@ -1032,15 +1067,12 @@
                                             </div>
                                         </div>
                                         <div class="clearfix"></div>
-
                                         <div class="col-lg-12" style="padding:0px;">
                                             <div class="adsubHeading Theme_standard_clr">
-
                                                 <div style="height:48px;" class="borderbtmline ">
                                                     <div class="col-lg-6" style="padding-top:15px;padding-left:0px;">
                                                         <label class="control-label modelHeading" data-bind="text: $root.Modelheading">Profile Questions</label>
                                                     </div>
-
                                                     <div class="col-lg-6" style="padding:0px;">
                                                         <form data-bind="submit: $root.getQuestionByFilter">
                                                             <div>
@@ -1057,34 +1089,27 @@
                                             </div>
                                         </div>
                                         <div class="clearfix"></div>
-
                                         <div class="" data-bind="visible: $root.AditionalCriteriaMode() == '2'">
-
                                             <div class="listview parentList set-border padding10 list-type-tiles" data-role="listview" id="ProfileQtsList">
                                                 <!-- ko template: { name: 'profileQuestionTiles' , foreach: $root.profileQuestionList} --><!-- /ko -->
                                                 <div class="clear-both"></div>
                                             </div>
-
                                         </div>
                                         <div class="clearfix"></div>
-
                                         <div class="" data-bind="visible: $root.AditionalCriteriaMode() == '4'">
                                             @*<div class="row header">
-                                    <label class="control-label modelHeading">Survey Questions</label>
-                                </div>*@
+                                                <label class="control-label modelHeading">Survey Questions</label>
+                                            </div>*@
                                             <div class="listview parentList set-border padding10 list-type-tiles" data-role="listview" id="lv1">
                                                 <!-- ko template: { name: 'SurveyssQuestionTiles' , foreach: $root.surveyquestionList} --><!-- /ko -->
                                                 <div class="clear-both"></div>
                                             </div>
                                         </div>
 
-
                                         <div class="" data-bind="visible: $root.AditionalCriteriaMode() == '3'">
-
                                             @*<div class="row header">
-                                    <label class="control-label modelHeading">Your Quiz Questions</label>
-                                </div>*@
-
+                                                <label class="control-label modelHeading">Your Quiz Questions</label>
+                                            </div>*@
                                             <div class="listview parentList set-border padding10 list-type-tiles" data-role="listview" id="lv2">
                                                 <!-- ko template: { name: 'surveyQuestionTiles' , foreach: $root.myQuizQuestions} --><!-- /ko -->
                                                 <div data-bind="visible: $root.myQuizQuestions().length == 0" style="display:none;">
@@ -1108,7 +1133,6 @@
                                                         <div class="listview  padding10 list-type-tiles chlidList" data-role="listview">
                                                             <!--ko if:Type() == 2 -->
                                                             <div style="padding-top: 14px;padding-right: 11px;" class="list childList leftImg filterCrtTilesClr" data-bind="click:$root.updateSurveyCriteriass.bind($data, 1),css: { 'active': SQAnswer() ==1 }"> <img data-bind="attr: { src:surveyQuestLeftImageSrc}" style="height:75px;width:auto;" /></div>
-
                                                             <div style="padding-top: 14px;padding-right: 11px;" class="list childList rightImg filterCrtTilesClr" data-bind="click:$root.updateSurveyCriteriass.bind($data, 2),css: { 'active': SQAnswer() ==2 }"><img data-bind="attr: { src:surveyQuestRightImageSrc}" style="height:75px;width:auto;" /></div>
                                                             <!--/ko-->
                                                             <!--ko if:Type() == 6 -->
@@ -1136,11 +1160,10 @@
             </div>
         </div>
         @*Template Page Template *@
-      
+
         <script id="filterAnswersTemplate" type="text/html">
             <!--ko if:Type() == 1  || Type() == 2   || Type() == 5  || Type() == 6-->
             <tr>
-
                 <!--ko if:IncludeorExclude() == '0' -->
                 <td class="col-lg-3">
                     <!-- ko if:   Type() != "2" -->
@@ -1170,26 +1193,21 @@
                 </td>
                 <!--/ko-->
 
-
                 <td class="col-lg-1" style=" padding: 0px !important; text-align:right;">
                     <a class="table-link">
                         <span class="fa-stack">
                             <i class="fa fa-pencil-square-o" data-bind="click:$root.onEditCriteria" data-toggle="modal" data-target=".bs-example-modal-lg"></i>
                         </span>
-
                     </a>
                 </td>
                 <td class="col-lg-1" style=" padding: 0px !important;">
-
                     <a class="table-link danger">
                         <span class="fa-stack">
                             <i class="fa fa-trash-o" data-bind="click:$root.onDeleteCriteria"></i>
                         </span>
-
                     </a>
                 </td>
             </tr>
-
             <!--/ko-->
         </script>
         <script id="AdCampaignLocationTemplate" type="text/html">
@@ -1215,7 +1233,6 @@
                     <li>
                         <ul>
                             <!-- ko template: { name: 'SubSurveyQuestionLocationTemplate' , foreach: $root.findLocationsInCountry(id) } --><!-- /ko -->
-
                         </ul>
                     </li>
                 </ul>
@@ -1241,7 +1258,6 @@
                                 </a>
                             </span>
                         </div>
-
                         <div class="_4bl8 _4bl7">
                             <div>
                             </div>
@@ -1296,7 +1312,6 @@
                     </div>
                 </li>
                 <!--/ko-->
-
             </div>
             <div class="clear"></div>
         </script>
@@ -1320,7 +1335,6 @@
                 <!--ko if:!IsDeleted()-->
                 <!--ko if:Type() == 4 -->
                 <!--ko if:Industry()!='' -->
-
                 <span class="form-control lang_nr_box areaCity" data-bind="text:Industry() " style=" "></span>
                 <!--ko if:IncludeorExclude() == '1'-->
                 <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Included)' "></span>
@@ -1329,7 +1343,6 @@
                 <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Excluded)' "></span>
                 <!--/ko-->
                 <a id="" data-bind="click:$root.onRemoveIndustry" title=" delete" class="lang_delSurvey"> <i class="fa fa-times "></i></a>
-
                 <!--/ko-->
                 <!--/ko-->
                 <!--/ko-->
@@ -1389,9 +1402,9 @@
             <!--/ko-->
             <!--/ko-->
         </script>
-     
-       
-     
+
+
+
         <script id="criteriaEditorTemplate" type="text/html">
             <div class="list childList" data-bind="click:$root.updateProfileQuestion,css: { 'active': $root.selectedCriteria().PQAnswerID() == PqAnswerId }" data-dismiss="modal"> <span class="list-title" data-bind="text:Answer"></span> </div>
         </script>
@@ -1418,9 +1431,7 @@
         <div class="clear-both"></div>
     </div>
     <!--/ko-->
-
 </script>
-
 <script id="SurveyssQuestionTiles" type="text/html">
     <div class="list">
         <div class="parent-list-title"><span data-bind="text:DisplayQuestion"></span></div>
@@ -1437,18 +1448,15 @@
     </div>
 </script>
 
-
 <script id="profileQuestionAnsTiles" type="text/html">
     <div class="list childList filterCrtTilesClr" data-bind="click:$root.saveProfileQuestion" data-dismiss="modal"> <span class="list-title" data-bind="text:Answer"></span> </div>
 </script>
-
 <script id="SurveyQuestionAnsTiles" type="text/html">
     <div class="list childList" data-bind="click:$root.saveProfileQuestion" data-dismiss="modal"> <span class="list-title" data-bind="text:Answer"></span> </div>
 </script>
 <script id="surveyQuestionTiles" type="text/html">
     <div class="list">
         <div class="parent-list-title"><span data-bind="text:VerifyQuestion"></span></div>
-
         <div class="listview list-type-tiles chlidList" data-role="listview">
             <div><span class="listlabels">Select audience who have answered one of the following results.</span></div>
             <div>
@@ -1539,19 +1547,18 @@
 </script>
 <script src="/Content/Range/rangeslider.js"></script>
 <script src="/Content/Range/rangeslider.min.js"></script>
-
 <script type="text/javascript">
 
-        $(function () {
-            $('#demo').on('.collapse', function (e) {
+    $(function () {
+        $('#demo').on('.collapse', function (e) {
 
-                $('html,body').animate({
-                    scrollTop: $('#demo p').offset().top - 20
-                }, 600);
+            $('html,body').animate({
+                scrollTop: $('#demo p').offset().top - 20
+            }, 600);
 
-            });
         });
-   
+    });
+
     $('input[type="range"]').rangeslider({
     });
 

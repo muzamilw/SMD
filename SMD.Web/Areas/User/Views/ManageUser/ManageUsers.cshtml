@@ -5,22 +5,19 @@
     string userClasses = "";
 }
 
-
-
 <div class="row" id="manageUserBinding">
     <div class="col-lg-12">
         <div class="row" id="Heading_div">
-            <label style="font-size:24px;color:black!important;margin-top:14px;">Manage Campaigns</label>
+            <label style="font-size:24px;color:#fff!important;margin-top:14px;margin-bottom:23px;">Manage Users</label>
+            <div style="float:right;margin-top:7px; margin-right:10px;">
+                <img src="/Content/Images/Close_Button.png" data-bind="click:$root.onCloseClick" style="width:20px;height:20px;float:right;cursor:pointer;">
+            </div>
         </div>
         <div class="row">
-
-            <div class="col-lg-12" style="padding-left:0px;padding-right:0px;" >
-
+            <div class="col-lg-12" style="padding-left:0px;padding-right:10px;">
 
                 <div class="filter-body" id="filter" style="padding:20px;">
-
                     <div class="row">
-
 
                         <div class="col-sm-12" style="float: left; ">
                             <div style="border-bottom: 1px solid rgb(220,220,220);width: 100%;margin-left: 0px;margin-bottom:10px;" class="adsubHeading Theme_standard_clr">
@@ -35,13 +32,11 @@
                                 </div>
                             </div>
                             @*<br />
-                            <span style="font-size: 24px;"> Invite collegues to manage your marketing campaigns</span><br />
-                            <span style="font-size: 14px;"></span>  &nbsp; &nbsp; &nbsp; <span class="red bold rightAlign"> Watch Video <img src="/Images/youtube_play.JPG" height="25px" /> </span>   </span><br />*@
+                                <span style="font-size: 24px;"> Invite collegues to manage your marketing campaigns</span><br />
+                                <span style="font-size: 14px;"></span>  &nbsp; &nbsp; &nbsp; <span class="red bold rightAlign"> Watch Video <img src="/Images/youtube_play.JPG" height="25px" /> </span>   </span><br />*@
                         </div>
 
-
                     </div>
-
                     <div class="row">
                         <div class="col-sm-3" style="float:left;">
                             <div class="clearfix"></div>
@@ -55,8 +50,6 @@
                         </div>
                     </div>
                 </div>
-
-
 
                 <div class="main-box no-header clearfix" style="padding-top:0px;">
                     <div class="main-box-body clearfix" style="padding-left:20px;padding-right:22px;">
@@ -73,7 +66,6 @@
                                         <th class="col-sm-2 th-pointer"><span>Status</span></th>
                                         <th class="col-sm-2 th-pointer"><span>Added On</span></th>
                                         <th class="col-sm-2 th-pointer"><span>&nbsp; </span></th>
-
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -85,7 +77,6 @@
                     </div>
                 </div>
                 <div id="pagerDivForStore" class="pull-right">
-
                 </div>
             </div>
             <div class="col-lg-3">
@@ -93,14 +84,11 @@
         </div>
 
 
-           
-           
-    </div>
 
+    </div>
     @Html.Partial("~/Areas/User/Views/Shared/_InviteUser.cshtml")
     @Html.Partial("~/Areas/User/Views/Shared/_EditManagedUser.cshtml")
     <script id="ManageUserTemplate" type="text/html">
-
 
         <tr style="cursor: pointer">
             <td>
@@ -119,7 +107,6 @@
                 <p style="margin-top:8px;" data-bind="dateString: CreatedOn, datePattern: 'DD/MM/YYYY'"></p>
             </td>
             <td>
-               
 
                 <a class="table-link danger" style="float: right" title="Remove User">
                     <span class="fa-stack">
@@ -128,18 +115,18 @@
                     </span>
                 </a>
             </td>
-
         </tr>
     </script>
-
 </div>
-
 @Html.Partial("~/Areas/Common/Views/Shared/_ConfirmationDialog.cshtml")
 <!-- /ko -->
 @section Scripts{
     <script src="~/Scripts/jquery.tokenize.js"></script>
     <script type="text/javascript">
         require(["user/user.view", "common/confirmation.view"]);
+        $("#MarketobjDiv").css("display", "none");
+        $("#topArea").css("display", "none");
+        $("#panelArea").css("display", "none");
     </script>
     <script>
         function getParameter(url, param) {
