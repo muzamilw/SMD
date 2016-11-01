@@ -445,16 +445,12 @@ namespace DomainModelProject
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getDealByCouponID_Result>("getDealByCouponID", couponIDParameter, dateRangeParameter, granularityParameter);
         }
     
-        public virtual ObjectResult<getPollsBySQID_Result> getPollsBySQID(Nullable<int> sQID, Nullable<int> status, Nullable<int> dateRange, Nullable<int> granularity)
+        public virtual ObjectResult<getPollsBySQID_Result> getPollsBySQID(Nullable<int> sQID, Nullable<int> dateRange, Nullable<int> granularity)
         {
             var sQIDParameter = sQID.HasValue ?
                 new ObjectParameter("SQID", sQID) :
                 new ObjectParameter("SQID", typeof(int));
     
-            var statusParameter = status.HasValue ?
-                new ObjectParameter("status", status) :
-                new ObjectParameter("status", typeof(int));
-    
             var dateRangeParameter = dateRange.HasValue ?
                 new ObjectParameter("DateRange", dateRange) :
                 new ObjectParameter("DateRange", typeof(int));
@@ -463,19 +459,15 @@ namespace DomainModelProject
                 new ObjectParameter("Granularity", granularity) :
                 new ObjectParameter("Granularity", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getPollsBySQID_Result>("getPollsBySQID", sQIDParameter, statusParameter, dateRangeParameter, granularityParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getPollsBySQID_Result>("getPollsBySQID", sQIDParameter, dateRangeParameter, granularityParameter);
         }
     
-        public virtual ObjectResult<getSurvayByPQID_Result> getSurvayByPQID(Nullable<int> pQId, Nullable<int> status, Nullable<int> dateRange, Nullable<int> granularity)
+        public virtual ObjectResult<getSurvayByPQID_Result> getSurvayByPQID(Nullable<int> pQId, Nullable<int> dateRange, Nullable<int> granularity)
         {
             var pQIdParameter = pQId.HasValue ?
                 new ObjectParameter("PQId", pQId) :
                 new ObjectParameter("PQId", typeof(int));
     
-            var statusParameter = status.HasValue ?
-                new ObjectParameter("status", status) :
-                new ObjectParameter("status", typeof(int));
-    
             var dateRangeParameter = dateRange.HasValue ?
                 new ObjectParameter("DateRange", dateRange) :
                 new ObjectParameter("DateRange", typeof(int));
@@ -484,7 +476,7 @@ namespace DomainModelProject
                 new ObjectParameter("Granularity", granularity) :
                 new ObjectParameter("Granularity", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getSurvayByPQID_Result>("getSurvayByPQID", pQIdParameter, statusParameter, dateRangeParameter, granularityParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getSurvayByPQID_Result>("getSurvayByPQID", pQIdParameter, dateRangeParameter, granularityParameter);
         }
     
         public virtual ObjectResult<GetApprovalCount_Result> GetApprovalCount()
