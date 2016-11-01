@@ -2283,7 +2283,7 @@ GO
 
 
 
-
+USE [SMDv2]
 GO
 /****** Object:  StoredProcedure [dbo].[SearchCampaigns]    Script Date: 01/11/2016 10:16:17 AM ******/
 SET ANSI_NULLS ON
@@ -2320,12 +2320,12 @@ BEGIN
 
     -- Insert statements for procedure here
 	select  a.CampaignID,a.CompanyId, a.CampaignName,
-	(select count (*) from adcampaignresponse cr where cr.campaignid = a.campaignid and  cast(CreatedDateTime as DATE)  = cast (GETDATE() as DATE) and responsetype = 1 ) viewCountToday,
-	(select count (*) from adcampaignresponse cr where cr.campaignid = a.campaignid and cast(CreatedDateTime as date) = cast(getdate()-1 as date) and responsetype = 1) viewCountYesterday,
-	(select count (*) from adcampaignresponse cr where cr.campaignid = a.campaignid and responsetype = 1) viewCountAllTime,
-	(select count (*) from adcampaignresponse cr where cr.campaignid = a.campaignid and  cast(CreatedDateTime as DATE)  = cast (GETDATE() as DATE) and responsetype = 2 ) clicThroughsToday,
-	(select count (*) from adcampaignresponse cr where cr.campaignid = a.campaignid and cast(CreatedDateTime as date) = cast(getdate()-1 as date) and responsetype = 2) clicThroughsYesterday,
-	(select count (*) from adcampaignresponse cr where cr.campaignid = a.campaignid and responsetype = 2) clicThroughsAllTime,
+	(select isnull(count (*),0) from adcampaignresponse cr where cr.campaignid = a.campaignid and  cast(CreatedDateTime as DATE)  = cast (GETDATE() as DATE) and responsetype = 1 ) viewCountToday,
+	(select isnull(count (*),0) from adcampaignresponse cr where cr.campaignid = a.campaignid and cast(CreatedDateTime as date) = cast(getdate()-1 as date) and responsetype = 1) viewCountYesterday,
+	(select isnull(count (*),0) from adcampaignresponse cr where cr.campaignid = a.campaignid and responsetype = 1) viewCountAllTime,
+	(select isnull(count (*),0) from adcampaignresponse cr where cr.campaignid = a.campaignid and  cast(CreatedDateTime as DATE)  = cast (GETDATE() as DATE) and responsetype = 2 ) clicThroughsToday,
+	(select isnull(count (*),0) from adcampaignresponse cr where cr.campaignid = a.campaignid and cast(CreatedDateTime as date) = cast(getdate()-1 as date) and responsetype = 2) clicThroughsYesterday,
+	(select isnull(count (*),0)from adcampaignresponse cr where cr.campaignid = a.campaignid and responsetype = 2) clicThroughsAllTime,
 	left(( select
 			stuff((
 					select ', ' + c1.CountryName, ', ' + ci.CityName
@@ -2343,9 +2343,14 @@ BEGIN
 		
 		 StartDateTime, MaxBudget, MaxDailyBudget,AmountSpent,
 		Status, ApprovalDateTime, ClickRate, a.CreatedDateTime, a.Type, a.priority
+		
+		
+		
+	
 	 from AdCampaign a
 	 
 	--inner join AspNetUsers u on 
+	
 	
 	--left outer join AdCampaignResponse aResp on a.CampaignID = aResp.CampaignID 
 	where 
@@ -2358,6 +2363,8 @@ BEGIN
 
 	)
 	
+
+
 	group by CampaignID, CampaignName,StartDateTime,MaxBudget,MaxDailyBudget,AmountSpent,Status, ApprovalDateTime, ClickRate, a.CreatedDateTime, a.Type, a.priority,a.CompanyId
 		)as items
 	order by priority desc
