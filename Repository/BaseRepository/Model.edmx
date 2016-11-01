@@ -5786,6 +5786,11 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="DateTime" Name="CreatedDateTime" Nullable="true" Precision="23" />
           <Property Type="Int32" Name="TotalItems" Nullable="true" />
           <Property Type="Int32" Name="Type" Nullable="true" />
+          <Property Type="Int32" Name="CompanyId" Nullable="true" />
+          <Property Type="Int32" Name="clickThroughsToday" Nullable="true" />
+          <Property Type="Int32" Name="clickThroughsYesterday" Nullable="true" />
+          <Property Type="Int32" Name="clickThroughsAllTime" Nullable="true" />
+          <Property Type="Int32" Name="priority" Nullable="true" />
         </ComplexType>
         <EntityType Name="DamImage">
           <Key>
@@ -8037,6 +8042,11 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
                 <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
                 <ScalarProperty Name="TotalItems" ColumnName="TotalItems" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="clickThroughsToday" ColumnName="clickThroughsToday" />
+                <ScalarProperty Name="clickThroughsYesterday" ColumnName="clickThroughsYesterday" />
+                <ScalarProperty Name="clickThroughsAllTime" ColumnName="clickThroughsAllTime" />
+                <ScalarProperty Name="priority" ColumnName="priority" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
