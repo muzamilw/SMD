@@ -231,6 +231,11 @@ namespace SMD.Repository.Repositories
             return true;
 
         }
+        public int GetCouponByBranchId(long id)
+        {
+
+            return db.Coupons.Where(c => c.LocationBranchId == id).ToList().Count;
+        }
 
 
         #endregion
