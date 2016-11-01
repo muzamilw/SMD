@@ -2282,7 +2282,6 @@ GO
 
 
 
-
 USE [SMDv2]
 GO
 /****** Object:  StoredProcedure [dbo].[SearchCampaigns]    Script Date: 01/11/2016 10:16:17 AM ******/
