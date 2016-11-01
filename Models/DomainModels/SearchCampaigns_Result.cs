@@ -30,5 +30,10 @@ namespace SMD.Models.DomainModels
         public Nullable<int> TotalItems { get; set; }
 
         public Nullable<int> Type { get; set; }
+
+
+        public Nullable<int> clickThroughsToday { get; set; }
+        public Nullable<int> clickThroughsYesterday { get; set; }
+        public Nullable<int> clickThroughsAllTime { get; set; }
     }
 }
