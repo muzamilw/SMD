@@ -1,5 +1,5 @@
 ﻿GO
-/****** Object:  StoredProcedure [dbo].[getAdsCampaignByCampaignId]    Script Date: 10/15/2016 10:36:05 PM ******/
+/****** Object:  StoredProcedure [dbo].[getDealByCouponIdRatioAnalytic]    Script Date: 10/31/2016 1:07:32 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -9,7 +9,7 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-Create PROCEDURE [dbo].[getDealByCouponIdRatioAnalytic] (
+ALTER PROCEDURE [dbo].[getDealByCouponIdRatioAnalytic] (
 @Id INT,  -- 1 for Viewed, 2 for Conversions or 3 for Skipped
 @DateRange INT -- 1 for last 30 days , 2 for All time	
 )
@@ -29,7 +29,7 @@ IF @DateRange = 2
 		from  UserCouponView r 
 		where r.CouponId = @Id and r.ViewDateTime >= @dateFrom and r.ViewDateTime <= getdate() 
 		union
-		Select 'Landing Page Conversion' label, count(r.CouponPurchaseId) value 
+		Select 'Click thru' label, count(r.CouponPurchaseId) value 
 		from  UserPurchasedCoupon r
 		where r.CouponId = @Id and r.ResponseType = 2 and r.PurchaseDateTime >= @dateFrom and r.PurchaseDateTime <= getdate() 
 
