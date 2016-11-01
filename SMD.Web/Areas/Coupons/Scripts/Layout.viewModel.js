@@ -249,20 +249,26 @@
                         dataService.DeleteCurrentBranch(
                                  selectedBranch().convertToServerData(), {
                                      success: function (data) {
+                                         if (data == true) {
+                                             _.each(selectedCategory().brachFeilds(), function (item) {
+                                                 if (item.branchId() == selectedBranch().branchId()) {
+                                                     selectedCategory().brachFeilds.remove(item);
+                                                     selectedCategory().isExpanded(false);
+                                                     isSaveChangesEnable(false);
+                                                     isdeleteEnable(false);
 
-                                         _.each(selectedCategory().brachFeilds(), function (item) {
-                                             if (item.branchId() == selectedBranch().branchId()) {
-                                                 selectedCategory().brachFeilds.remove(item);
-                                                 selectedCategory().isExpanded(false);
-                                                 isSaveChangesEnable(false);
-                                                 isdeleteEnable(false);
 
-
+                                                 }
+                                             })
+                                             selectedBranch(null);
+                                             if (afterBranchSelect && typeof afterBranchSelect === "function") {
+                                                 afterBranchSelect();
                                              }
-                                         })
-                                         selectedBranch(null);
-                                         if (afterBranchSelect && typeof afterBranchSelect === "function") {
-                                             afterBranchSelect();
+                                         }
+                                         else {
+
+                                             toastr.warning("We cantnot delete this branch,it is associate with multiple Coupons. ");
+                                             return;
                                          }
                                      },
                                      error: function (response) {

@@ -1144,7 +1144,7 @@ define("Coupons/Coupons.viewModel",
                      hideLandingPageURl(true);
                  }
                  else {
-                     buyItQuestionStatus(false);
+                     buyItQuestionStatus(true);
                      couponModel().ShowBuyitBtn(true);
                      buyItQuestionLabelStatus(false);
                      ButItOtherLabel('');
