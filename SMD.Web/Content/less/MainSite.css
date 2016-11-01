@@ -1404,6 +1404,13 @@ margin-top:2px;
     background-repeat: no-repeat!important;
     background-color: #3071a9!important;
 }
+.create_invite_btn {
+  background: url(/Content/Images/Email_icon.png)!important;
+    background-position: 2px 0px!important;
+    padding: 10px 32px 8px 49px!important;
+    background-repeat: no-repeat!important;
+    background-color: #3071a9!important;
+}
 
 .create_Campaign_btn {
       background: url(/Content/Images/Videos_small_36.png)!important;

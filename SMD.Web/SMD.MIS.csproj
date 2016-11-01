@@ -762,6 +762,7 @@
     <Content Include="Areas\Franchise\Views\RegisterUsers\UsersDashboard.cshtml" />
     <Content Include="Areas\Franchise\Views\RegisterUsers\_registeredUserEditor.cshtml" />
     <Content Include="Areas\Report\Views\Report\ReferAdvertises.cshtml" />
+    <Content Include="Areas\Report\Views\Report\ManageAdvertises.cshtml" />
     <None Include="config\Web.connectionstrings.config">
       <SubType>Designer</SubType>
     </None>
@@ -870,6 +871,7 @@
     <Content Include="Content\Images\Display_small.png" />
     <Content Include="Content\Images\Display_small_36.png" />
     <Content Include="Content\Images\Drop_Arrow.png" />
+    <Content Include="Content\Images\Email_icon.png" />
     <Content Include="Content\Images\facebookNew.png" />
     <Content Include="Content\Images\foldericon3.png" />
     <Content Include="Content\Images\Games.png" />

@@ -34,7 +34,9 @@
             <link rel="stylesheet" href="~/Content/themes/Centaurus/css/libs/fullcalendar.css" type="text/css" />
         <link rel="stylesheet" href="~/Content/themes/Centaurus/css/libs/fullcalendar.print.css" type="text/css" media="print" />*@
     @Styles.Render("~/Content/themes/Centaurus/css/bundleCentaurus/css")
+
     <link href="~/Content/metroUI/css/metro.css" rel="stylesheet" />
+    <link href="~/Content/textboxLabel.css" rel="stylesheet" />
     <script src="~/Content/metroUI/js/metro.js"></script>
     @* If Debuggin is Enabled then pick css *@
     @if (HttpContext.Current.IsDebuggingEnabled)
@@ -166,10 +168,10 @@
                             </a>
                             <ul class="dropdown-menu loginMenu">
 
-                                <li><span  style="font-style:italic;color:lightgray;margin-left:36px;font-size:13px;">@Name</span></li>
-                                <li><span style="font-style:italic;color:lightgray;margin-left:36px;font-size:13px;">@Email</span></li>
-                                <li><span style="font-style:italic;color:lightgray;margin-left:36px;font-size:13px;">@MobileNo</span></li>
-                                <li><span style="font-style:italic;color:lightgray;margin-left:36px;font-size:13px;">Role : @RoleName</span></li>
+                                <li><span  style="color:#ada7a7;margin-left:36px;font-size:13px;">@Name</span></li>
+                                <li><span style="color:#ada7a7;margin-left:36px;font-size:13px;">@Email</span></li>
+                                <li><span style="color:#ada7a7;margin-left:36px;font-size:13px;">@MobileNo</span></li>
+                                <li><span style="color:#ada7a7;margin-left:36px;font-size:13px;">Role : @RoleName</span></li>
                                 @*<li style="height:9px;"></li>*@
                                 <li style="display: block;
                                 margin-top: 0.5em;
@@ -185,7 +187,7 @@
                                 <li><a href="~/Billing/Manage/Invoice">Billing History</a></li>
 
                                 <li><a href="/User/ManageUser/ManageUsers">Manage Users</a></li>
-
+                                <li><a onclick="OpenBranchLocation();">Manage Branch</a></li>
                                 <li><a onclick="OpenBranchLocation();">Manage Branches</a></li>
                                 @*<li><a href="/DamImages/Grid">Image library</a></li>*@
                                 @*<li><a onclick="OpenPhraseLibrary();">Phrase library</a></li>*@

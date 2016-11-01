@@ -94,10 +94,12 @@ namespace SMD.MIS.Areas.Api.Controllers
         }
         public Boolean Delete(CompanyBranch branch)
         {
+            
             Mapper.Initialize(cfg => cfg.CreateMap<ApiModel.CompanyBranch, DomainModel.CompanyBranch>());
             var mappedBranch = Mapper.Map<ApiModel.CompanyBranch, DomainModel.CompanyBranch>(branch);
-            _companyBranchservice.DeleteCompanyBranch(mappedBranch);
-            return true;
+            return _companyBranchservice.DeleteCompanyBranch(mappedBranch);
+           
+
         }
 
     }

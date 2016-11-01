@@ -2280,3 +2280,94 @@ inner join Company c on cu.CompanyId = c.CompanyId
 GO
 
 
+
+
+USE [SMDv2]
+GO
+/****** Object:  StoredProcedure [dbo].[SearchCampaigns]    Script Date: 01/11/2016 10:16:17 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Mz
+-- Create date: 8 dec 2015
+-- Description:	
+-- =============================================
+ALTER PROCEDURE [dbo].[SearchCampaigns] 
+--  exec [SearchCampaigns] 0,'',416,0,10,0
+	-- Add the parameters for the stored procedure here
+	@Status int,
+	@keyword nvarchar(100),
+	@companyId int,
+	@fromRoww int,
+	@toRow int,
+	@adminMode bit
+	
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	--select @toRow, @fromRow
+	--return
+
+
+	select *, COUNT(*) OVER() AS TotalItems
+	from (
+
+    -- Insert statements for procedure here
+	select  a.CampaignID,a.CompanyId, a.CampaignName,
+	(select isnull(count (*),0) from adcampaignresponse cr where cr.campaignid = a.campaignid and  cast(CreatedDateTime as DATE)  = cast (GETDATE() as DATE) and responsetype = 1 ) viewCountToday,
+	(select isnull(count (*),0) from adcampaignresponse cr where cr.campaignid = a.campaignid and cast(CreatedDateTime as date) = cast(getdate()-1 as date) and responsetype = 1) viewCountYesterday,
+	(select isnull(count (*),0) from adcampaignresponse cr where cr.campaignid = a.campaignid and responsetype = 1) viewCountAllTime,
+	(select isnull(count (*),0) from adcampaignresponse cr where cr.campaignid = a.campaignid and  cast(CreatedDateTime as DATE)  = cast (GETDATE() as DATE) and responsetype = 2 ) clicThroughsToday,
+	(select isnull(count (*),0) from adcampaignresponse cr where cr.campaignid = a.campaignid and cast(CreatedDateTime as date) = cast(getdate()-1 as date) and responsetype = 2) clicThroughsYesterday,
+	(select isnull(count (*),0)from adcampaignresponse cr where cr.campaignid = a.campaignid and responsetype = 2) clicThroughsAllTime,
+	left(( select
+			stuff((
+					select ', ' + c1.CountryName, ', ' + ci.CityName
+					from [AdCampaignTargetLocation] l1 
+					left outer join country c1 on l1.countryid = c1.countryid
+					left outer join city ci on l1.CityID = ci.CityID
+					where l1.campaignid = l.campaignid
+					order by c1.CountryName
+					for xml path('')
+				),1,1,'') as name_csv
+			from [AdCampaignTargetLocation] l 
+			where CampaignID = a.CampaignID
+			group by l.campaignid  
+		),30) +'..' Locationss,
+		
+		 StartDateTime, MaxBudget, MaxDailyBudget,AmountSpent,
+		Status, ApprovalDateTime, ClickRate, a.CreatedDateTime, a.Type, a.priority
+		
+		
+		
+	
+	 from AdCampaign a
+	 
+	--inner join AspNetUsers u on 
+	
+	
+	--left outer join AdCampaignResponse aResp on a.CampaignID = aResp.CampaignID 
+	where 
+	(
+		(@keyword is null or (a.CampaignName like '%'+ @keyword +'%' or a.DisplayTitle like '%'+ @keyword +'%'  ))
+		and a.Status <> 7
+		and 
+		( @Status = 0 or a.[status] = @Status)
+		and  ( @adminMode = 1 or a.companyid = @companyId )
+
+	)
+	
+
+
+	group by CampaignID, CampaignName,StartDateTime,MaxBudget,MaxDailyBudget,AmountSpent,Status, ApprovalDateTime, ClickRate, a.CreatedDateTime, a.Type, a.priority,a.CompanyId
+		)as items
+	order by priority desc
+	OFFSET @fromRoww ROWS
+	FETCH NEXT @toRow ROWS ONLY
+	
+END

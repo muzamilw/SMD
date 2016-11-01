@@ -729,14 +729,19 @@ namespace SMD.MIS.Controllers
             List<vw_CompanyUsers> comapnies = manageUserService.GetCompaniesByUserId(User.Identity.GetUserId());
 
             if (comapnies != null && comapnies.Count > 1)
-                return View("SelectCompany", comapnies);
-            else if  (comapnies != null && comapnies.Count == 1)
             {
-                 var company = comapnies.First();
-                 var companyrec = companyService.GetCompanyById(company.companyid);
+                User user = UserManager.FindById(User.Identity.GetUserId());
+                ViewBag.fullname = user.FullName;
+
+                return View("SelectCompany", comapnies);
+            }
+            else if (comapnies != null && comapnies.Count == 1)
+            {
+                var company = comapnies.First();
+                var companyrec = companyService.GetCompanyById(company.companyid);
 
 
-                 return RedirectToAction("SetCompany", "Account", new { CompanyId = company.companyid, Role = company.RoleName, CompanyName = company.CompanyName, CompanyLogo = companyrec.Logo, RoleId = company.RoleId });
+                return RedirectToAction("SetCompany", "Account", new { CompanyId = company.companyid, Role = company.RoleName, CompanyName = company.CompanyName, CompanyLogo = companyrec.Logo, RoleId = company.RoleId });
             }
             else
             {

@@ -30,6 +30,8 @@ namespace SMD.Interfaces.Repository
         DateTime getExpiryDate(int CouponId);
 
         bool PauseAllCoupons(int CompanyId);
+
+        int GetCouponByBranchId(long id);
         
     }
 }
