@@ -14,11 +14,13 @@ namespace SMD.Implementation.Services
         private readonly ICompanyBranchRepository _companybranchrepository;
         private readonly ICountryRepository _countryRepository;
         private readonly ICityRepository _cityRepository;
-        public CompanyBranchService(ICompanyBranchRepository _companybranchrepository, ICountryRepository countryRepository, ICityRepository cityRepository)
+        private readonly ICouponRepository couponRepository;
+        public CompanyBranchService(ICompanyBranchRepository _companybranchrepository, ICountryRepository countryRepository, ICityRepository cityRepository, ICouponRepository couponRepository)
         {
             this._companybranchrepository = _companybranchrepository;
             _countryRepository = countryRepository;
             _cityRepository = cityRepository;
+            this.couponRepository = couponRepository;
 
         }
 
@@ -66,11 +68,19 @@ namespace SMD.Implementation.Services
         }
         public bool DeleteCompanyBranch(CompanyBranch branch)
         {
-            var delBranch = _companybranchrepository.Find(branch.BranchId);
-            if (delBranch != null)
-                _companybranchrepository.Delete(delBranch);
-            _companybranchrepository.SaveChanges();
-            return true;
+            int refCouponCount = couponRepository.GetCouponByBranchId(branch.BranchId);
+            if (refCouponCount == 0)
+            {
+                var delBranch = _companybranchrepository.Find(branch.BranchId);
+                if (delBranch != null)
+                    _companybranchrepository.Delete(delBranch);
+                _companybranchrepository.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         public List<Country> GetAllCountries()
         {
