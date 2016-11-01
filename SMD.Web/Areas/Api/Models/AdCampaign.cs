@@ -108,6 +108,10 @@ namespace SMD.MIS.Areas.Api.Models
 
         public Nullable<System.DateTime> PaymentDate { get; set; }
 
+        public Nullable<int> clickThroughsToday { get; set; }
+        public Nullable<int> clickThroughsYesterday { get; set; }
+        public Nullable<int> clickThroughsAllTime { get; set; }
+
 
     }
     public class Coupon
