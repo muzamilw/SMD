@@ -17,6 +17,7 @@ define("ads/ads.viewModel",
                     buyItQuestionStatus = ko.observable(false),
                     buyItQuestionLabelStatus = ko.observable(false),
 					isAdvertdashboardVisible = ko.observable(false),
+                    IsNewVideoCampaign = ko.observable(false),
                     hideLandingPageURl = ko.observable(false),
                     VideoImage = ko.observable(false),
                     DisplayImage = ko.observable(false),
@@ -2174,7 +2175,7 @@ define("ads/ads.viewModel",
                     }
                 },
                 nextPreviewScreen = function () {
-
+                    debugger;
                     var noErrors = true;
                     if (previewScreenNumber() == 1) {
 
@@ -2226,10 +2227,10 @@ define("ads/ads.viewModel",
                     }
                     if (noErrors == true) {
 
-                        if (previewScreenNumber() < 5) {
-                            previewScreenNumber(previewScreenNumber() + 1);
-                            $('html, body').animate({ scrollTop: 0 }, 800);
-                        }
+                    //    if (previewScreenNumber() < 5) {
+                        //    previewScreenNumber(previewScreenNumber() + 1);
+                          //  $('html, body').animate({ scrollTop: 0 }, 800);
+                        //}
 
                     }
 
@@ -3249,6 +3250,7 @@ define("ads/ads.viewModel",
                         IsvideoBtn(false);
                         IsGameAds(true);
                         CampaignHeader('Display');
+                        IsNewVideoCampaign(false);
                     }
                     else {
                         UrlHeadings("Direct viewers to a landing page at the end of your video ad.");
@@ -3259,6 +3261,7 @@ define("ads/ads.viewModel",
                         StatusCodeName("Display");
                         CampaignHeader('Video');
                         StatusCodeImage("/Content/Images/Videos_small.png");
+                        IsNewVideoCampaign(true);
                     }
                     view = specifiedView;
                     ko.applyBindings(view.viewModel, view.bindingRoot);
@@ -3308,6 +3311,7 @@ define("ads/ads.viewModel",
                     selectedLocationLat: selectedLocationLat,
                     selectedLocationLong: selectedLocationLong,
                     onAddLocation: onAddLocation,
+                    IsNewVideoCampaign:IsNewVideoCampaign,
                     onRemoveLocation: onRemoveLocation,
                     deleteLocation: deleteLocation,
                     addLanguage: addLanguage,

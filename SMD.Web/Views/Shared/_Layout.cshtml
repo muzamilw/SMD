@@ -17,6 +17,7 @@
     IEnumerable<SmdRoleClaimValue> roleClaim = ClaimHelper.GetClaimsByType<SmdRoleClaimValue>(SmdClaimTypes.Role);
 
     string RoleName = roleClaim != null && roleClaim.Any() ? roleClaim.ElementAt(0).Role : "Role Not Loaded";
+    string RoleId = roleClaim != null && roleClaim.Any() ? roleClaim.ElementAt(0).RoleId : "Role Not Loaded";
     var Name = string.Empty;
 }
 <!DOCTYPE html>
@@ -62,7 +63,7 @@
 
     <script>
         var gCompanyID = @CompanyID;
-
+        var UserRoleId = '@RoleId';
     </script>
 </head>
 <body class="theme-blue-gradient">
@@ -181,9 +182,11 @@
                               
                                 @*<li id="userProfileBinding"><a data-bind="click:showUserProfileDialog">Personal Profile</a></li>*@
                                 <li id="companyProfileBinding"><a style="cursor: pointer" data-bind="click:showCompanyProfileDialog">Account Settings</a></li>
+                                <li><a href="~/Billing/Manage/Invoice">Billing History</a></li>
+
                                 <li><a href="/User/ManageUser/ManageUsers">Manage Users</a></li>
 
-                                <li><a onclick="OpenBranchLocation();">Branch locations</a></li>
+                                <li><a onclick="OpenBranchLocation();">Manage Branches</a></li>
                                 @*<li><a href="/DamImages/Grid">Image library</a></li>*@
                                 @*<li><a onclick="OpenPhraseLibrary();">Phrase library</a></li>*@
 
@@ -196,8 +199,8 @@
                                 border-width: 1px;"></li>
                                 @*<li><a href="~/">Analytics and Charts</a></li>*@
                                 <li><a class=" " id="btnWalletHistory" href="~/Report/report/WalletReport">Wallet History</a></li>
-                                <li><a class=" " id="btnReferAdvert" href="~/Report/report/ReferAdvertises">Refer Advertisers</a></li>
-                                <li><a href="~/Billing/Manage/Invoice">Billing History</a></li>
+                                <li><a class=" " id="btnReferAdvert" href="~/Report/report/ReferAdvertises">Manage Advertisers</a></li>
+                                
                                 @*<li class="inlineMenuItem"><a href="~/Billing/Manage/Invoice">&nbsp;&nbsp;View Invoices</a></li>
                                     <li class="inlineMenuItem"><a href="">&nbsp;&nbsp;Payment Methods</a></li>*@
 
