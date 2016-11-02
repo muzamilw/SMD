@@ -162,6 +162,8 @@ define("pQuestion/pQuestion.viewModel",
 					CloseSurvayAnalyticView = function () {
 					    isAdvertdashboardSurvayVisible(false);
 					    CampaignRatioAnalyticData(1);
+						selecteddateRangeAnalytics(1);
+						selectedGranularityAnalytics(1);
 					},
 
 					//End Advertiser Analytics 

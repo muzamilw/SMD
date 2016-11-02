@@ -222,6 +222,8 @@ define("ads/ads.viewModel",
 				CloseCampaignADAnalyticView = function () {
 				    isAdvertdashboardVisible(false);
 				    CampaignRatioAnalyticData(1);
+					selecteddateRangeAnalytics(1);
+						selectedGranularityAnalytics(1);
 				},
 
                 // End Advertiser dashBoard Section

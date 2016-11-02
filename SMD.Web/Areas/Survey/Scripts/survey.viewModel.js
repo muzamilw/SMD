@@ -145,6 +145,8 @@ define("survey/survey.viewModel",
                 ClosePollAnalyticView = function () {
                     isAdvertdashboardPollVisible(false);
                     CampaignRatioAnalyticData(1);
+					selecteddateRangeAnalytics(1);
+						selectedGranularityAnalytics(1);
                 },
 
                 //End Advertiser Analytics 

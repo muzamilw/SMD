@@ -183,6 +183,8 @@ define("Coupons/Coupons.viewModel",
             CloseCouponsAnalyticView = function () {
                 isAdvertdashboardDealVisible(false);
                 CampaignRatioAnalyticData(1);
+				selecteddateRangeAnalytics(1);
+				selectedGranularityAnalytics(1);
             },
 
                 //
