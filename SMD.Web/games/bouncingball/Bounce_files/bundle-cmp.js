@@ -2252,7 +2252,7 @@ function Game() {
     DOM.on(document.body, "keyup", this.handleKeyUpEvent.bind(this));
     DOM.on(document.body, "mousewheel DOMMouseScroll", this.handleWheelEvent.bind(this));
     this.kikInit();
-    this.initAdManager();
+    //this.initAdManager();
     if (P.cocoon) {
         CocoonJS.App.setAppShouldFinishCallback(this.handleBackButton.bind(this))
     }
@@ -2412,76 +2412,76 @@ Game.prototype = {
     },
     end: function () { // game end program here 
 
-        var successparam = getParameterByName("Success");
+        var successparam = getParameterByName("success");
         
         if (successparam == '')
         {
-            if (this.curScreen.score >= 20)
-                window.location.href = window.location.href + "?Success=1";
+            if (this.curScreen.score >= 1)
+                window.location.href = window.location.href + "?success=1";
             else {
-                //window.location.href = window.location.href + "?Success=0";
+                window.location.href = window.location.href + "?success=0";
             }
         }
         else
         {
-            if (this.curScreen.score >= 20)
+            if (this.curScreen.score >= 1)
             {
-                window.location.href = updateQueryStringParameter(window.location.href,'Success','1');
+                window.location.href = updateQueryStringParameter(window.location.href,'success','1');
             }
             else
             {
-               // window.location.href = updateQueryStringParameter(window.location.href, 'Success', '0');
+                window.location.href = updateQueryStringParameter(window.location.href, 'success', '0');
             }
 
 
         }
+        debugger;
+        //var score = this.curScreen.score;
+        //var frames = this.curScreen.frames;
+        //var time = this.curScreen.time;
+        //this.lastRank = 0;
+        //this.previousHighscore = this.state.highscore;
+        //this.state.highscore = Math.max(this.state.highscore, score || 0);
+        //this.state.save();
+        //this.lastScore = score;
+        //this.setOverlay(new EndScreen(this));
+        //var me = this;
+        //this.requestUsername(function() {
+		//	debugger;
+        //    var stats = {
+        //        name: me.state.username,
+        //        frames: frames,
+        //        score: score,
+        //        check: Math.random() * 256,
+        //        time: time
+        //    };
+        //    var encodedStats;
+        //    if (!P.cocoon) {
+        //        encodedStats = Encoder.encode(stats)
+        //    } else {
+        //        encodedStats = encodeURIComponent(Encoder.buildString(stats))
+        //    }
+        //    //Ajax.send(P.ajaxPrefix + P.leaderboardSubmitURL, P.cocoon ? "GET" : "POST", {
+        //    //    params: encodedStats,
+        //    //    format: "json",
+        //    //    mode: P.cocoon ? "raw" : "encrypted"
+        //    //}, function(code, content) {
+        //    //    json = JSON.parse(content);
+        //    //    me.lastRank = parseInt(json.rank);
+        //    //    me.state.addAttemptId(parseInt(json.entity.id));
+        //    //    me.state.save()
+        //    //});
 
-        var score = this.curScreen.score;
-        var frames = this.curScreen.frames;
-        var time = this.curScreen.time;
-        this.lastRank = 0;
-        this.previousHighscore = this.state.highscore;
-        this.state.highscore = Math.max(this.state.highscore, score || 0);
-        this.state.save();
-        this.lastScore = score;
-        this.setOverlay(new EndScreen(this));
-        var me = this;
-        this.requestUsername(function() {
-			debugger;
-            var stats = {
-                name: me.state.username,
-                frames: frames,
-                score: score,
-                check: Math.random() * 256,
-                time: time
-            };
-            var encodedStats;
-            if (!P.cocoon) {
-                encodedStats = Encoder.encode(stats)
-            } else {
-                encodedStats = encodeURIComponent(Encoder.buildString(stats))
-            }
-            //Ajax.send(P.ajaxPrefix + P.leaderboardSubmitURL, P.cocoon ? "GET" : "POST", {
-            //    params: encodedStats,
-            //    format: "json",
-            //    mode: P.cocoon ? "raw" : "encrypted"
-            //}, function(code, content) {
-            //    json = JSON.parse(content);
-            //    me.lastRank = parseInt(json.rank);
-            //    me.state.addAttemptId(parseInt(json.entity.id));
-            //    me.state.save()
-            //});
-
-            me.lastRank = parseInt(json.rank);
-            me.state.addAttemptId(parseInt(json.entity.id));
-            me.state.save()
+        //    me.lastRank = parseInt(json.rank);
+        //    me.state.addAttemptId(parseInt(json.entity.id));
+        //    me.state.save()
 
 
-            if (!me.showedAddToHome && me.addToHome) {
-                me.showedAddToHome = true;
-                me.addToHome.show()
-            }
-        })
+        //    if (!me.showedAddToHome && me.addToHome) {
+        //        me.showedAddToHome = true;
+        //        me.addToHome.show()
+        //    }
+        //})
     },
     mainMenu: function() {
         this.setScreen(new GameplayScreen(this,{
