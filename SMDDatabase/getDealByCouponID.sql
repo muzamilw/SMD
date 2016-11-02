@@ -1,6 +1,5 @@
-﻿
-GO
-/****** Object:  StoredProcedure [dbo].[getDealByCouponID]    Script Date: 10/14/2016 9:21:21 PM ******/
+﻿GO
+/****** Object:  StoredProcedure [dbo].[getDealByCouponID]    Script Date: 10/31/2016 12:36:11 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON

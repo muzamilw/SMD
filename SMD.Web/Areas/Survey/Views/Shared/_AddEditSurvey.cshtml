@@ -87,6 +87,9 @@
                                         <br>
                                         <span data-bind="css: $root.previewScreenNumber() == 1 ? 'ads-selected-numbering-text' : '',click: $root.gotoScreen.bind(null,1)" class="">Question</span>
                                     </div>
+
+                                    <div id="target_audience" data-bind="visible:$root.IsVisibleAudience">
+                                        @*data-bind="visibility:$root.IsVisibleAudience"*@
                                     <div class="pull-left ads-numbering-linebar" data-bind="css: $root.previewScreenNumber() == 6 ? 'ads-selected-numbering-box' : ''">
 
 
@@ -99,7 +102,7 @@
                                         <br>
                                         <span data-bind="css: $root.previewScreenNumber() == 2 ? 'ads-selected-numbering-text' : '',click: $root.gotoScreen.bind(null,2)" class="ads-selected-numbering-text">Target</span>
                                     </div>
-
+                                </div>
 
                                     <div class="pull-left" style="width:30px;">
                                         &nbsp;
@@ -118,7 +121,7 @@
                                         </a>
                                     </div>
 
-                                    <div class="pull-left" style="width:525px;">
+                                    <div id="chart_div" class="pull-left" data-bind="style: { width:$root.AudienceWidth}">
                                         <div>
                                             <div class="pull-right ads-numbering-main" style="width:103px;  border-right: 1px solid rgb(220,220,220);
     padding-left: 32px;
@@ -1052,32 +1055,31 @@
                                     <div class="clearfix"></div>
                                     <div class="col-lg-12">
                                         <div class="row" style="margin-top:9px;">
-                                            <div class="col-lg-11" style="padding-left:24px;padding-right:0px;">
-                                                @*<div style="padding-top:13px;height:51px;border-bottom :1px solid rgb(220,220,220);">
-                                                        <div class="col-lg-7" style="padding-left:16px;">
-                                                            <span style="color:black !important;float:left;" class="panelfntSize">Potential Reach</span>
-                                                        </div>
-                                                        <div class="col-lg-5" style="padding-right:36px;padding-left:0px;text-align:right;">
-                                                            <span class="panelfntSize" style="color:#9690cf;" data-bind="text:$root.ShowAudienceCounter()">1,112</span>
-                                                        </div>
-                                                    </div>*@
-                                                <input id="Ranges" type="range" min="0"
-                                                       oninput="showVal(this.value)" data-bind="attr:{max:$root.reachedAudience,value:$root.reachedAudience}" onchange="showVal(this.value)">
+                                            <div class="col-lg-12">
+                                                <div style="padding-top:7px;height:42px;border-bottom :1px solid rgb(220,220,220);">
+                                                    <div class="col-lg-7" style="padding-left:16px;">
+                                                        <span style="color:black !important;float:left;" class="panelfntSize">Potential Reach</span>
+                                                    </div>
+                                                    <div class="col-lg-5" style="padding-right:36px;padding-left:0px;text-align:right;">
+                                                        <span class="panelfntSize potentreachclr" data-bind="text:$root.ShowAudienceCounter()">1,120</span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
 
 
-                                        <div class="row">
+                                        <div class="row" style="margin-top:6px;">
                                             <div class="col-lg-12">
-
-                                                <div class="col-lg-7" style="padding-top:3px;padding-left:16px;">
-
-                                                    <span class="text-campaign-left panelfntSize" style="margin-top:-4px;">Potential Reach</span>
-
+                                                <div class="col-lg-5" style="padding-top:3px;padding-left:16px; font-size:13px;">
+                                                    <span class="text-campaign-left " style="margin-top:-4px;">Delivered to %</span>
+                                                </div>
+                                                <div class="col-lg-6" style="padding-top:8px;padding-right:16px;">
+                                                    <input id="Ranges" type="range" min="0"
+                                                           oninput="showVal(this.value)" data-bind="attr:{max:$root.reachedAudience,value:$root.reachedAudience}" onchange="showVal(this.value)">
                                                 </div>
 
-                                                <div class="col-lg-5" data-bind="with: $root.selectedQuestion">
 
+                                                <div class="col-lg-5" data-bind="with: $root.selectedQuestion" style="display:none;">
                                                     <div class=" col-lg-12" style="padding-left:0px;padding-top:2px;">
                                                         <input type="text" style="float:left; color:#81d3dc; font-weight: bold;font-size: 15px; width:65px;display:none;" name="Budget" class="form-control" id="txtPerClick" data-bind="value:answerNeeded" />
                                                         <span data-bind="text:$root.reachedAudience" id="show_audience" class="panelfntSize potentreachclr"></span>
@@ -1086,19 +1088,15 @@
                                             </div>
 
                                             <div class="col-lg-12">
-
-                                                <div style="float:left;padding-top:4px;width:153px;text-align:right;">
-                                                    <span class="text-campaign-left panelfntSize" style="margin-top:-4px;">Cost to run survey</span>
+                                                <div style="float:left;padding-top:4px;width:116px;text-align:right;">
+                                                    <span class="text-campaign-left" style="margin-top:-4px;font-size:13px">Cost to run survey</span>
                                                 </div>
                                                 <div style="width:5px;">
-
                                                 </div>
-
-                                                <div style="padding-top:8px;padding-right:2px;padding-left:2px;float:right;width:102px;">
-                                                    <span data-bind="text:$root.totalPrice" style="color:#7f8c8d !important;font-size:15px;"></span>
+                                                <div style="padding-top:5px;padding-right:2px;padding-left:2px;float:right;width:102px;">
+                                                    <span data-bind="text:$root.totalPrice" style="color:#7f8c8d !important;font-size:13px;"></span>
                                                 </div>
                                                 <div style="clear:both;">
-
                                                 </div>
                                             </div>
 

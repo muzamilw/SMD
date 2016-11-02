@@ -2282,7 +2282,21 @@ GO
 
 
 
-USE [SMDv2]
+
+
+
+
+ALTER TABLE dbo.Coupon
+ADD IsShowReviews bit Null,
+ IsShowAddress bit Null,
+ IsShowPhoneNo bit Null,
+ IsShowMap     bit Null,
+ IsShowyouTube bit Null,
+ IsShowAboutUs bit Null
+
+
+
+ use smdv2
 GO
 /****** Object:  StoredProcedure [dbo].[SearchCampaigns]    Script Date: 01/11/2016 10:16:17 AM ******/
 SET ANSI_NULLS ON
@@ -2322,9 +2336,9 @@ BEGIN
 	(select isnull(count (*),0) from adcampaignresponse cr where cr.campaignid = a.campaignid and  cast(CreatedDateTime as DATE)  = cast (GETDATE() as DATE) and responsetype = 1 ) viewCountToday,
 	(select isnull(count (*),0) from adcampaignresponse cr where cr.campaignid = a.campaignid and cast(CreatedDateTime as date) = cast(getdate()-1 as date) and responsetype = 1) viewCountYesterday,
 	(select isnull(count (*),0) from adcampaignresponse cr where cr.campaignid = a.campaignid and responsetype = 1) viewCountAllTime,
-	(select isnull(count (*),0) from adcampaignresponse cr where cr.campaignid = a.campaignid and  cast(CreatedDateTime as DATE)  = cast (GETDATE() as DATE) and responsetype = 2 ) clicThroughsToday,
-	(select isnull(count (*),0) from adcampaignresponse cr where cr.campaignid = a.campaignid and cast(CreatedDateTime as date) = cast(getdate()-1 as date) and responsetype = 2) clicThroughsYesterday,
-	(select isnull(count (*),0)from adcampaignresponse cr where cr.campaignid = a.campaignid and responsetype = 2) clicThroughsAllTime,
+	(select isnull(count (*),0) from adcampaignresponse cr where cr.campaignid = a.campaignid and  cast(CreatedDateTime as DATE)  = cast (GETDATE() as DATE) and responsetype = 2 ) clickThroughsToday,
+	(select isnull(count (*),0) from adcampaignresponse cr where cr.campaignid = a.campaignid and cast(CreatedDateTime as date) = cast(getdate()-1 as date) and responsetype = 2) clickThroughsYesterday,
+	(select isnull(count (*),0)from adcampaignresponse cr where cr.campaignid = a.campaignid and responsetype = 2) clickThroughsAllTime,
 	left(( select
 			stuff((
 					select ', ' + c1.CountryName, ', ' + ci.CityName

@@ -25,6 +25,7 @@ define("survey/survey.viewModel",
                     TemporaryQuizQuestions = ko.observableArray([]),
                     TemporarySurveyList = ko.observableArray([]),
                     price = ko.observable(0),
+                    IsVisibleAudience = ko.observable(false),
                     SearchProfileQuestion = ko.observable(''),
                     // Controlls editor visibility 
                     isEditorVisible = ko.observable(false),
@@ -37,6 +38,7 @@ define("survey/survey.viewModel",
                     selectedLangIncludeExclude = ko.observable(true),
                     selectedIndustryIncludeExclude = ko.observable(true),
                     selectedEducationIncludeExclude = ko.observable(true),
+                    AudienceWidth = ko.observable('547px'),
                     selectedLocationLat = ko.observable(0),
                     selectedLocationLong = ko.observable(0),
                     ShowAudienceCounter = ko.observable(),
@@ -143,6 +145,8 @@ define("survey/survey.viewModel",
                 ClosePollAnalyticView = function () {
                     isAdvertdashboardPollVisible(false);
                     CampaignRatioAnalyticData(1);
+					selecteddateRangeAnalytics(1);
+						selectedGranularityAnalytics(1);
                 },
 
                 //End Advertiser Analytics 
@@ -281,6 +285,13 @@ define("survey/survey.viewModel",
                 // Add new Profile Question
                 addNewSurvey = function () {
 
+                    if (UserRoleId != undefined) {
+                        if (UserRoleId == 'Franchise_Creative') {
+                            IsVisibleAudience(false);
+                            // $("#chart_div").css("cssText", "width:679px!important;");
+                            AudienceWidth('677px');
+                        }
+                    }
                     $("#panelArea,#topArea,#Heading_div").css("display", "none");
                     selectedQuestionCountryList([]);
                     gotoScreen(1);
@@ -2039,8 +2050,15 @@ define("survey/survey.viewModel",
                         getBasedata();
                         getQuestions();
                         getProductPrice();
-
-
+                        
+                        if (UserRoleId == 'Franchise_Creative') {
+                            IsVisibleAudience(false);
+                           // $("#chart_div").css("cssText", "width:679px!important;");
+                        }
+                        else {
+                            AudienceWidth('525px');
+                            IsVisibleAudience(true);
+                        }
                     };
                 return {
                     initialize: initialize,
@@ -2171,7 +2189,9 @@ define("survey/survey.viewModel",
                     CampaignRatioAnalyticData: CampaignRatioAnalyticData,
                     CampaignTblAnalyticsData: CampaignTblAnalyticsData,
                     CampaignROItblAnalyticData: CampaignROItblAnalyticData,
-                    IsnewSurvey: IsnewSurvey
+                    IsnewSurvey: IsnewSurvey,
+                    IsVisibleAudience: IsVisibleAudience,
+                    AudienceWidth: AudienceWidth
                 };
             })()
         };

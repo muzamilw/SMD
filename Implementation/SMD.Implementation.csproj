@@ -178,6 +178,7 @@
     <Compile Include="Services\IndustryService.cs" />
     <Compile Include="Services\ManageUserService.cs" />
     <Compile Include="Services\PayOutHistoryService.cs" />
+    <Compile Include="Services\SmsService.cs" />
     <Compile Include="Services\TransactionManager.cs" />
     <Compile Include="Services\EmailManagerService.cs" />
     <Compile Include="Services\InvoiceDetailService.cs" />

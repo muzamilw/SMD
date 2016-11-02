@@ -52,6 +52,7 @@ namespace SMD.Implementation.Services
         private readonly IManageUserRepository manageUserRepository;
         private readonly IAccountService accountService;
         private readonly IProfileQuestionRepository profileQuestionRepository;
+        private readonly ISmsServiceCustom smsService;
 
         private readonly IAspnetUsersRepository aspnetUsersRepository;
 
@@ -622,7 +623,7 @@ namespace SMD.Implementation.Services
             ITaxRepository taxRepository, IProfileQuestionUserAnswerService profileQuestionAnswerService,
             ICountryRepository countryRepository, IIndustryRepository industryRepository,
             IProfileQuestionService profileQuestionService, IAdCampaignResponseRepository adCampaignResponseRepository,
-            ISurveyQuestionResponseRepository surveyQuestionResponseRepository, IEducationRepository educationRepository, ICityRepository cityRepository, ICompanyRepository companyRepository, IManageUserRepository manageUserRepository, IAccountService accountService, IProfileQuestionRepository profileQuestionRepository, IAspnetUsersRepository aspnetUsersRepository)
+            ISurveyQuestionResponseRepository surveyQuestionResponseRepository, IEducationRepository educationRepository, ICityRepository cityRepository, ICompanyRepository companyRepository, IManageUserRepository manageUserRepository, IAccountService accountService, IProfileQuestionRepository profileQuestionRepository, IAspnetUsersRepository aspnetUsersRepository, ISmsServiceCustom smsService)
         {
             if (emailManagerService == null)
             {
@@ -691,6 +692,7 @@ namespace SMD.Implementation.Services
             this.accountService = accountService;
             this.profileQuestionRepository = profileQuestionRepository;
             this.aspnetUsersRepository = aspnetUsersRepository;
+            this.smsService = smsService;
         }
 
 
@@ -1456,16 +1458,26 @@ namespace SMD.Implementation.Services
             }
             Random _rdm = new Random(); 
             int code = _rdm.Next(1000, 9999);
-            if (String.IsNullOrEmpty(user.Phone1))
-                return 0;
-            var messagingService = new MessagingService("omar.c@me.com", "DBVgYFGNCWwK");
+            //if (String.IsNullOrEmpty(user.Phone1))
+            //    return 0;
             if (!string.IsNullOrEmpty(phone))
             {
-                messagingService.SendMessage(new SmsMessage(phone, "Your verification code for Cash4Ads profile update is " + code.ToString() + ". Please enter this code in Cash4Ads app to update your profile.", "EX0205631"));
-            } else
-            {
-                messagingService.SendMessage(new SmsMessage(user.Phone1, "Your verification code for Cash4Ads profile update is " + code.ToString() + ". Please enter this code in Cash4Ads app to update your profile.", "EX0205631"));
+                smsService.SendSMS(phone, "Your verification code for Cash4Ads profile update is " + code.ToString() + ". Please enter this code in Cash4Ads app to update your profile.");
             }
+            else
+            {
+                smsService.SendSMS(user.Phone1, "Your verification code for Cash4Ads profile update is " + code.ToString() + ". Please enter this code in Cash4Ads app to update your profile.");
+            }
+
+            
+            //var messagingService = new MessagingService("omar.c@me.com", "DBVgYFGNCWwK");
+            //if (!string.IsNullOrEmpty(phone))
+            //{
+            //    messagingService.SendMessage(new SmsMessage(phone, "Your verification code for Cash4Ads profile update is " + code.ToString() + ". Please enter this code in Cash4Ads app to update your profile.", "EX0205631"));
+            //} else
+            //{
+            //    messagingService.SendMessage(new SmsMessage(user.Phone1, "Your verification code for Cash4Ads profile update is " + code.ToString() + ". Please enter this code in Cash4Ads app to update your profile.", "EX0205631"));
+            //}
             
             return code;
         }
