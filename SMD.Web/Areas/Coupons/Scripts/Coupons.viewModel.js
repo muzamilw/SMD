@@ -1181,8 +1181,12 @@ define("Coupons/Coupons.viewModel",
                 if (hasErrors)
                     return;
                 if (previewScreenNumber() < 5) {
-                    previewScreenNumber(previewScreenNumber() + 1);
-                    $('html, body').animate({ scrollTop: 0 }, 800);
+                    if (previewScreenNumber() == 3)
+                        return;
+                    else {
+                        previewScreenNumber(previewScreenNumber() + 1);
+                        $('html, body').animate({ scrollTop: 0 }, 800);
+                    }
                 }
 
             },
