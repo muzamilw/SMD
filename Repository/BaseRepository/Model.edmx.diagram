@@ -166,6 +166,14 @@
         <AssociationConnector Association="DomainModels.FK_ProfileQuestionUserAnswer_Company" />
         <AssociationConnector Association="DomainModels.FK_ProfileQuestionUserAnswer_ProfileQuestion" />
         <AssociationConnector Association="DomainModels.FK_ProfileQuestionUserAnswer_ProfileQuestionAnswer" />
+        <EntityTypeShape EntityType="DomainModels.SharedSurveyQuestion" Width="1.5" PointX="11.375" PointY="6.5" />
+        <EntityTypeShape EntityType="DomainModels.SharedSurveyQuestionResponse" Width="1.5" PointX="13.625" PointY="5.125" />
+        <EntityTypeShape EntityType="DomainModels.SurveySharingGroup" Width="1.5" PointX="11.375" PointY="11.875" />
+        <EntityTypeShape EntityType="DomainModels.SurveySharingGroupMember" Width="1.5" PointX="13.625" PointY="11.875" />
+        <EntityTypeShape EntityType="DomainModels.SurveySharingGroupShare" Width="1.5" PointX="13.625" PointY="8" />
+        <AssociationConnector Association="DomainModels.FK_SharedSurveyQuestionResponse_SharedSurveyQuestion" />
+        <AssociationConnector Association="DomainModels.FK_SurveySharingGroupShares_SharedSurveyQuestion" />
+        <AssociationConnector Association="DomainModels.FK_SurveySharingGroupMembers_SurveySharingGroup" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

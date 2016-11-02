@@ -55,14 +55,14 @@ namespace SMD.MIS
             app.UseTwoFactorRememberBrowserCookie(DefaultAuthenticationTypes.TwoFactorRememberBrowserCookie);
 
             // Use Google Authentication
-            app.UseGoogleAuthentication(
-                clientId: "197085324979-kfdqdvse9bod3m9f1rdmjs2h73hl1abv.apps.googleusercontent.com",
-                clientSecret: "DOpWlpb4Kz97gsvpqj9ks9LU");
+            //app.UseGoogleAuthentication(
+            //    clientId: "197085324979-kfdqdvse9bod3m9f1rdmjs2h73hl1abv.apps.googleusercontent.com",
+            //    clientSecret: "DOpWlpb4Kz97gsvpqj9ks9LU");
 
             // Use Facebook Authentication
-            app.UseFacebookAuthentication(
-                appId: "900194280062971",
-                appSecret: "acd6c38978bc63083321cb5ad7122aa2");
+            //app.UseFacebookAuthentication(
+            //    appId: "900194280062971",
+            //    appSecret: "acd6c38978bc63083321cb5ad7122aa2");
 
 
             //app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);

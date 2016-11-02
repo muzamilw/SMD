@@ -835,6 +835,28 @@
           <Property Name="SectionName" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="SecOrder" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="SharedSurveyQuestion">
+          <Key>
+            <PropertyRef Name="SSQID" />
+          </Key>
+          <Property Name="SSQID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="SurveyTitle" Type="nvarchar" MaxLength="200" />
+          <Property Name="LeftPicturePath" Type="nvarchar" MaxLength="300" />
+          <Property Name="RightPicturePath" Type="nvarchar" MaxLength="300" />
+          <Property Name="CreationDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SharedSurveyQuestionResponse">
+          <Key>
+            <PropertyRef Name="SSQResponseId" />
+          </Key>
+          <Property Name="SSQResponseId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SSQID" Type="bigint" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="ResponseDateTime" Type="datetime" />
+          <Property Name="UserSelection" Type="int" />
+        </EntityType>
         <EntityType Name="SurveyQuestion">
           <Key>
             <PropertyRef Name="SQID" />
@@ -917,6 +939,38 @@
           <Property Name="CityID" Type="int" />
           <Property Name="Radius" Type="int" />
           <Property Name="IncludeorExclude" Type="bit" />
+        </EntityType>
+        <EntityType Name="SurveySharingGroup">
+          <Key>
+            <PropertyRef Name="SharingGroupId" />
+          </Key>
+          <Property Name="SharingGroupId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="GroupName" Type="nvarchar" MaxLength="500" />
+          <Property Name="CreationDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SurveySharingGroupMembers">
+          <Key>
+            <PropertyRef Name="SharingGroupMemberId" />
+          </Key>
+          <Property Name="SharingGroupMemberId" Type="bigint" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="150" />
+          <Property Name="MemberStatus" Type="int" />
+          <Property Name="SharingGroupId" Type="bigint" />
+        </EntityType>
+        <EntityType Name="SurveySharingGroupShares">
+          <Key>
+            <PropertyRef Name="ShareId" />
+          </Key>
+          <Property Name="ShareId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SharingGroupId" Type="bigint" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="SharingGroupMemberId" Type="bigint" />
+          <Property Name="SharingDate" Type="datetime" />
+          <Property Name="SSQID" Type="bigint" />
+          <Property Name="Status" Type="int" />
         </EntityType>
         <EntityType Name="SystemMails">
           <Key>
@@ -2090,6 +2144,18 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SharedSurveyQuestionResponse_SharedSurveyQuestion">
+          <End Role="SharedSurveyQuestion" Type="Self.SharedSurveyQuestion" Multiplicity="0..1" />
+          <End Role="SharedSurveyQuestionResponse" Type="Self.SharedSurveyQuestionResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SharedSurveyQuestion">
+              <PropertyRef Name="SSQID" />
+            </Principal>
+            <Dependent Role="SharedSurveyQuestionResponse">
+              <PropertyRef Name="SSQID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SMDPrice_Country">
           <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
           <End Role="Products" Type="Self.Products" Multiplicity="*" />
@@ -2327,6 +2393,30 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             </Principal>
             <Dependent Role="SurveyQuestionTargetLocation">
               <PropertyRef Name="SQID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurveySharingGroupMembers_SurveySharingGroup">
+          <End Role="SurveySharingGroup" Type="Self.SurveySharingGroup" Multiplicity="0..1" />
+          <End Role="SurveySharingGroupMembers" Type="Self.SurveySharingGroupMembers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SurveySharingGroup">
+              <PropertyRef Name="SharingGroupId" />
+            </Principal>
+            <Dependent Role="SurveySharingGroupMembers">
+              <PropertyRef Name="SharingGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurveySharingGroupShares_SharedSurveyQuestion">
+          <End Role="SharedSurveyQuestion" Type="Self.SharedSurveyQuestion" Multiplicity="0..1" />
+          <End Role="SurveySharingGroupShares" Type="Self.SurveySharingGroupShares" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SharedSurveyQuestion">
+              <PropertyRef Name="SSQID" />
+            </Principal>
+            <Dependent Role="SurveySharingGroupShares">
+              <PropertyRef Name="SSQID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2632,10 +2722,15 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySet Name="ProfileQuestionTargetLocation" EntityType="Self.ProfileQuestionTargetLocation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProfileQuestionUserAnswer" EntityType="Self.ProfileQuestionUserAnswer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Section" EntityType="Self.Section" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SharedSurveyQuestion" EntityType="Self.SharedSurveyQuestion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SharedSurveyQuestionResponse" EntityType="Self.SharedSurveyQuestionResponse" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SurveyQuestion" EntityType="Self.SurveyQuestion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SurveyQuestionResponse" EntityType="Self.SurveyQuestionResponse" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SurveyQuestionTargetCriteria" EntityType="Self.SurveyQuestionTargetCriteria" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SurveyQuestionTargetLocation" EntityType="Self.SurveyQuestionTargetLocation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SurveySharingGroup" EntityType="Self.SurveySharingGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SurveySharingGroupMembers" EntityType="Self.SurveySharingGroupMembers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SurveySharingGroupShares" EntityType="Self.SurveySharingGroupShares" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SystemMails" EntityType="Self.SystemMails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tax" EntityType="Self.Tax" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Transaction" EntityType="Self.Transaction" Schema="dbo" store:Type="Tables" />
@@ -3092,6 +3187,10 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <End Role="Section" EntitySet="Section" />
             <End Role="Phrase" EntitySet="Phrase" />
           </AssociationSet>
+          <AssociationSet Name="FK_SharedSurveyQuestionResponse_SharedSurveyQuestion" Association="Self.FK_SharedSurveyQuestionResponse_SharedSurveyQuestion">
+            <End Role="SharedSurveyQuestion" EntitySet="SharedSurveyQuestion" />
+            <End Role="SharedSurveyQuestionResponse" EntitySet="SharedSurveyQuestionResponse" />
+          </AssociationSet>
           <AssociationSet Name="FK_SMDPrice_Country" Association="Self.FK_SMDPrice_Country">
             <End Role="Country" EntitySet="Country" />
             <End Role="Products" EntitySet="Products" />
@@ -3171,6 +3270,14 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <AssociationSet Name="FK_SurveyQuestionTargetLocation_SurveyQuestion" Association="Self.FK_SurveyQuestionTargetLocation_SurveyQuestion">
             <End Role="SurveyQuestion" EntitySet="SurveyQuestion" />
             <End Role="SurveyQuestionTargetLocation" EntitySet="SurveyQuestionTargetLocation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveySharingGroupMembers_SurveySharingGroup" Association="Self.FK_SurveySharingGroupMembers_SurveySharingGroup">
+            <End Role="SurveySharingGroup" EntitySet="SurveySharingGroup" />
+            <End Role="SurveySharingGroupMembers" EntitySet="SurveySharingGroupMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveySharingGroupShares_SharedSurveyQuestion" Association="Self.FK_SurveySharingGroupShares_SharedSurveyQuestion">
+            <End Role="SharedSurveyQuestion" EntitySet="SharedSurveyQuestion" />
+            <End Role="SurveySharingGroupShares" EntitySet="SurveySharingGroupShares" />
           </AssociationSet>
           <AssociationSet Name="FK_Tax_Country" Association="Self.FK_Tax_Country">
             <End Role="Country" EntitySet="Country" />
@@ -3899,6 +4006,23 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <Parameter Name="comments" Mode="In" Type="String" />
             <Parameter Name="companyId" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="SharedSurveyQuestions" EntityType="DomainModels.SharedSurveyQuestion" />
+          <EntitySet Name="SharedSurveyQuestionResponses" EntityType="DomainModels.SharedSurveyQuestionResponse" />
+          <EntitySet Name="SurveySharingGroups" EntityType="DomainModels.SurveySharingGroup" />
+          <EntitySet Name="SurveySharingGroupMembers" EntityType="DomainModels.SurveySharingGroupMember" />
+          <EntitySet Name="SurveySharingGroupShares" EntityType="DomainModels.SurveySharingGroupShare" />
+          <AssociationSet Name="FK_SharedSurveyQuestionResponse_SharedSurveyQuestion" Association="DomainModels.FK_SharedSurveyQuestionResponse_SharedSurveyQuestion">
+            <End Role="SharedSurveyQuestion" EntitySet="SharedSurveyQuestions" />
+            <End Role="SharedSurveyQuestionResponse" EntitySet="SharedSurveyQuestionResponses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveySharingGroupShares_SharedSurveyQuestion" Association="DomainModels.FK_SurveySharingGroupShares_SharedSurveyQuestion">
+            <End Role="SharedSurveyQuestion" EntitySet="SharedSurveyQuestions" />
+            <End Role="SurveySharingGroupShare" EntitySet="SurveySharingGroupShares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveySharingGroupMembers_SurveySharingGroup" Association="DomainModels.FK_SurveySharingGroupMembers_SurveySharingGroup">
+            <End Role="SurveySharingGroup" EntitySet="SurveySharingGroups" />
+            <End Role="SurveySharingGroupMember" EntitySet="SurveySharingGroupMembers" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -7018,6 +7142,102 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="SharedSurveyQuestion">
+          <Key>
+            <PropertyRef Name="SSQID" />
+          </Key>
+          <Property Name="SSQID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="SurveyTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LeftPicturePath" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="RightPicturePath" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="CreationDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="SharedSurveyQuestionResponses" Relationship="DomainModels.FK_SharedSurveyQuestionResponse_SharedSurveyQuestion" FromRole="SharedSurveyQuestion" ToRole="SharedSurveyQuestionResponse" />
+          <NavigationProperty Name="SurveySharingGroupShares" Relationship="DomainModels.FK_SurveySharingGroupShares_SharedSurveyQuestion" FromRole="SharedSurveyQuestion" ToRole="SurveySharingGroupShare" />
+        </EntityType>
+        <EntityType Name="SharedSurveyQuestionResponse">
+          <Key>
+            <PropertyRef Name="SSQResponseId" />
+          </Key>
+          <Property Name="SSQResponseId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SSQID" Type="Int64" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ResponseDateTime" Type="DateTime" Precision="3" />
+          <Property Name="UserSelection" Type="Int32" />
+          <NavigationProperty Name="SharedSurveyQuestion" Relationship="DomainModels.FK_SharedSurveyQuestionResponse_SharedSurveyQuestion" FromRole="SharedSurveyQuestionResponse" ToRole="SharedSurveyQuestion" />
+        </EntityType>
+        <EntityType Name="SurveySharingGroup">
+          <Key>
+            <PropertyRef Name="SharingGroupId" />
+          </Key>
+          <Property Name="SharingGroupId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="GroupName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CreationDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="SurveySharingGroupMembers" Relationship="DomainModels.FK_SurveySharingGroupMembers_SurveySharingGroup" FromRole="SurveySharingGroup" ToRole="SurveySharingGroupMember" />
+        </EntityType>
+        <EntityType Name="SurveySharingGroupMember">
+          <Key>
+            <PropertyRef Name="SharingGroupMemberId" />
+          </Key>
+          <Property Name="SharingGroupMemberId" Type="Int64" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="MemberStatus" Type="Int32" />
+          <Property Name="SharingGroupId" Type="Int64" />
+          <NavigationProperty Name="SurveySharingGroup" Relationship="DomainModels.FK_SurveySharingGroupMembers_SurveySharingGroup" FromRole="SurveySharingGroupMember" ToRole="SurveySharingGroup" />
+        </EntityType>
+        <EntityType Name="SurveySharingGroupShare">
+          <Key>
+            <PropertyRef Name="ShareId" />
+          </Key>
+          <Property Name="ShareId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SharingGroupId" Type="Int64" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="SharingGroupMemberId" Type="Int64" />
+          <Property Name="SharingDate" Type="DateTime" Precision="3" />
+          <Property Name="SSQID" Type="Int64" />
+          <Property Name="Status" Type="Int32" />
+          <NavigationProperty Name="SharedSurveyQuestion" Relationship="DomainModels.FK_SurveySharingGroupShares_SharedSurveyQuestion" FromRole="SurveySharingGroupShare" ToRole="SharedSurveyQuestion" />
+        </EntityType>
+        <Association Name="FK_SharedSurveyQuestionResponse_SharedSurveyQuestion">
+          <End Type="DomainModels.SharedSurveyQuestion" Role="SharedSurveyQuestion" Multiplicity="0..1" />
+          <End Type="DomainModels.SharedSurveyQuestionResponse" Role="SharedSurveyQuestionResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SharedSurveyQuestion">
+              <PropertyRef Name="SSQID" />
+            </Principal>
+            <Dependent Role="SharedSurveyQuestionResponse">
+              <PropertyRef Name="SSQID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurveySharingGroupShares_SharedSurveyQuestion">
+          <End Type="DomainModels.SharedSurveyQuestion" Role="SharedSurveyQuestion" Multiplicity="0..1" />
+          <End Type="DomainModels.SurveySharingGroupShare" Role="SurveySharingGroupShare" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SharedSurveyQuestion">
+              <PropertyRef Name="SSQID" />
+            </Principal>
+            <Dependent Role="SurveySharingGroupShare">
+              <PropertyRef Name="SSQID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurveySharingGroupMembers_SurveySharingGroup">
+          <End Type="DomainModels.SurveySharingGroup" Role="SurveySharingGroup" Multiplicity="0..1" />
+          <End Type="DomainModels.SurveySharingGroupMember" Role="SurveySharingGroupMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SurveySharingGroup">
+              <PropertyRef Name="SharingGroupId" />
+            </Principal>
+            <Dependent Role="SurveySharingGroupMember">
+              <PropertyRef Name="SharingGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -8816,6 +9036,65 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="UpdateCompanyStatus" FunctionName="SMDModel.Store.UpdateCompanyStatus" />
+          <EntitySetMapping Name="SharedSurveyQuestions">
+            <EntityTypeMapping TypeName="DomainModels.SharedSurveyQuestion">
+              <MappingFragment StoreEntitySet="SharedSurveyQuestion">
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="RightPicturePath" ColumnName="RightPicturePath" />
+                <ScalarProperty Name="LeftPicturePath" ColumnName="LeftPicturePath" />
+                <ScalarProperty Name="SurveyTitle" ColumnName="SurveyTitle" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="SSQID" ColumnName="SSQID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SharedSurveyQuestionResponses">
+            <EntityTypeMapping TypeName="DomainModels.SharedSurveyQuestionResponse">
+              <MappingFragment StoreEntitySet="SharedSurveyQuestionResponse">
+                <ScalarProperty Name="UserSelection" ColumnName="UserSelection" />
+                <ScalarProperty Name="ResponseDateTime" ColumnName="ResponseDateTime" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="SSQID" ColumnName="SSQID" />
+                <ScalarProperty Name="SSQResponseId" ColumnName="SSQResponseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SurveySharingGroups">
+            <EntityTypeMapping TypeName="DomainModels.SurveySharingGroup">
+              <MappingFragment StoreEntitySet="SurveySharingGroup">
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="SharingGroupId" ColumnName="SharingGroupId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SurveySharingGroupMembers">
+            <EntityTypeMapping TypeName="DomainModels.SurveySharingGroupMember">
+              <MappingFragment StoreEntitySet="SurveySharingGroupMembers">
+                <ScalarProperty Name="SharingGroupId" ColumnName="SharingGroupId" />
+                <ScalarProperty Name="MemberStatus" ColumnName="MemberStatus" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="SharingGroupMemberId" ColumnName="SharingGroupMemberId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SurveySharingGroupShares">
+            <EntityTypeMapping TypeName="DomainModels.SurveySharingGroupShare">
+              <MappingFragment StoreEntitySet="SurveySharingGroupShares">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="SSQID" ColumnName="SSQID" />
+                <ScalarProperty Name="SharingDate" ColumnName="SharingDate" />
+                <ScalarProperty Name="SharingGroupMemberId" ColumnName="SharingGroupMemberId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="SharingGroupId" ColumnName="SharingGroupId" />
+                <ScalarProperty Name="ShareId" ColumnName="ShareId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -92,6 +92,11 @@ namespace DomainModelProject
         public virtual DbSet<AdCampaignClickRateHistory> AdCampaignClickRateHistories { get; set; }
         public virtual DbSet<PayOutHistory> PayOutHistories { get; set; }
         public virtual DbSet<ProfileQuestionUserAnswer> ProfileQuestionUserAnswers { get; set; }
+        public virtual DbSet<SharedSurveyQuestion> SharedSurveyQuestions { get; set; }
+        public virtual DbSet<SharedSurveyQuestionResponse> SharedSurveyQuestionResponses { get; set; }
+        public virtual DbSet<SurveySharingGroup> SurveySharingGroups { get; set; }
+        public virtual DbSet<SurveySharingGroupMember> SurveySharingGroupMembers { get; set; }
+        public virtual DbSet<SurveySharingGroupShare> SurveySharingGroupShares { get; set; }
     
         public virtual ObjectResult<SearchCoupons_Result> SearchCoupons(Nullable<int> categoryId, Nullable<int> type, string keywords, Nullable<int> distance, string lat, string lon, string userId, Nullable<int> fromRow, Nullable<int> toRow)
         {

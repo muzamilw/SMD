@@ -159,6 +159,11 @@
     <Compile Include="DomainModels\ProfileQuestionTargetLocation.cs" />
     <Compile Include="DomainModels\SearchCampaigns_Result.cs" />
     <Compile Include="DomainModels\Section.cs" />
+    <Compile Include="DomainModels\SharedSurveyQuestion.cs" />
+    <Compile Include="DomainModels\SharedSurveyQuestionResponse.cs" />
+    <Compile Include="DomainModels\SurveySharingGroup.cs" />
+    <Compile Include="DomainModels\SurveySharingGroupMember.cs" />
+    <Compile Include="DomainModels\SurveySharingGroupShare.cs" />
     <Compile Include="DomainModels\UserCouponView.cs" />
     <Compile Include="DomainModels\UserPurchasedCoupon.cs" />
     <Compile Include="DomainModels\vw_CompanyUsers.cs" />
