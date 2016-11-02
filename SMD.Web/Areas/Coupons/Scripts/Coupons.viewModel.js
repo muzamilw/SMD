@@ -1891,7 +1891,7 @@ define("Coupons/Coupons.viewModel",
             },
              gotoScreen = function (number) {
                  previewScreenNumber(number);
-
+                 isAdvertdashboardDealVisible(false);
              },
              updateCouponCategories = function () {
 

@@ -672,7 +672,7 @@ define("pQuestion/pQuestion.viewModel",
                         CampaignQuizIdsExcluded: CampaignQuizIdsExcluded
 
                     };
-
+                    debugger;
                     dataservice.getAudienceData(surveyData, {
                         success: function (data) {
 
@@ -1650,7 +1650,7 @@ define("pQuestion/pQuestion.viewModel",
                      CampaignQuizIdsExcluded: CampaignQuizIdsExcluded
 
                  };
-
+                 debugger;
                  dataservice.getAudienceData(surveyData, {
                      success: function (data) {
 

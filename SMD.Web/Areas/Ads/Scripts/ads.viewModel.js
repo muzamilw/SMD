@@ -1698,7 +1698,7 @@ define("ads/ads.viewModel",
 
                   },
                 onEditCampaign = function (item) {
-                  
+             
                     previewScreenNumber(1);
                     isTerminateBtnVisible(false);
                     isNewCampaignVisible(false);
@@ -3170,7 +3170,7 @@ define("ads/ads.viewModel",
                 },
                  gotoScreen = function (number) {
                      //  toastr.error("Validation.");
-
+                     isAdvertdashboardVisible(false);
                      previewScreenNumber(number);
 
                  },

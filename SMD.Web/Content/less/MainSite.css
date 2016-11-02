@@ -1461,3 +1461,7 @@ margin-top:2px;
 .paddingtop0px {
     padding-top:0px!important;
 }
+.charts_label {
+  color:#3498db;
+  font-size:17px;
+}

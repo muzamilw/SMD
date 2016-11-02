@@ -1,24 +1,24 @@
-﻿         <div data-bind="visible: $root.isAdvertdashboardDealVisible()" style="display: none" class=" col-lg-9 form-horizontal" >
+﻿         <div data-bind="visible: $root.isAdvertdashboardDealVisible()" style="display: none;padding-left:0px;" class=" col-lg-9 form-horizontal" >
              <div class="main-box main-box-subpage">
                  <div class="row">
-                     
-                         <br />
-                     <div class="col-lg-6 adsubHeading Theme_standard_clr borderbtmline" style="padding-bottom:10px;">
-                         Group timeline
+                     <span class="charts_label" style="margin-left: 16px;">Charts &amp; Analytics</span>
+                     <div id="roor_panel" style="margin-top:11px;">
+                         <div class="col-lg-6 adsubHeading Theme_standard_clr borderbtmline" style="padding-bottom:10px;padding-left:16px;" >
+                             Group timeline
+                         </div>
+                         <div class="col-lg-3 adsubHeading Theme_standard_clr borderbtmline" style="padding-bottom:10px; padding-left:16px;">
+                             <label class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Date range </label>
+                         </div>
+                         <div class="col-lg-3 adsubHeading Theme_standard_clr borderbtmline" style="padding-bottom:2px; padding-left:16px;">
+                             <select class="form-control" id="ddDateRangeDropDown" data-bind="options: $root.DateRangeDropDown, optionsText: 'name', optionsValue: 'id', value:$root.selecteddateRangeAnalytics, event: { change: $root.getDealsAnalytics }"></select>
+                         </div>
+
                      </div>
-                         <div class="col-lg-3 adsubHeading Theme_standard_clr borderbtmline" style="padding-bottom:10px;">
-                             <label class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn" >Date range </label> 
-                             </div>
-                     <div class="col-lg-3 adsubHeading Theme_standard_clr borderbtmline" style="padding-bottom:2px;">
-                         <select class="form-control"  id="ddDateRangeDropDown" data-bind="options: $root.DateRangeDropDown, optionsText: 'name', optionsValue: 'id', value:$root.selecteddateRangeAnalytics, event: { change: $root.getDealsAnalytics }"></select>
+
                      </div>
-                        
-                        
-                     
-                 </div>
                  <div>
-                     <div class="col-lg-6"></div>
-                     <div class="col-lg-3">
+                     
+                     <div class="col-lg-2" style="padding-top:9px;">
                          <label class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Granularity level </label> 
                          </div>
                      <div class="col-lg-3">
@@ -39,7 +39,7 @@
 
                  </div>
                  <div class="row">
-                     <div class="adsubHeading Theme_standard_clr borderbtmline">
+                     <div class="adsubHeading Theme_standard_clr borderbtmline" style="padding-left:16px;">
                          <br />
                          Group campaign by opened vs conversion
                      </div>
@@ -48,10 +48,10 @@
                  <div class="row main-box">
                      <div class="col-lg-3">
                          <!--ko if: $root.selecteddateRangeAnalytics() == 1 -->
-                         <div>Date range : Last 30 days </div>
+                         <div >Date range : Last 30 days </div>
                          <!--/ko-->
                          <!--ko if: $root.selecteddateRangeAnalytics() == 2 -->
-                         <div>Date range : All time </div>
+                         <div >Date range : All time </div>
                          <!--/ko-->
                        
                      </div>
