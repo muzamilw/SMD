@@ -78,6 +78,13 @@ namespace SMD.Repository
             unityContainer.RegisterType<IAspnetUsersRepository, AspnetUsersRepository>();
 
             unityContainer.RegisterType<ICampaignEventHistoryRepository, CampaignEventHistoryRepository>();
+
+
+            unityContainer.RegisterType<INotificationRepository, NotificationRepository>();
+            unityContainer.RegisterType<ISurveySharingGroupRepository, SurveySharingGroupRepository>();
+            unityContainer.RegisterType<ISurveySharingGroupShareRepository, SurveySharingGroupShareRepository>();
+            unityContainer.RegisterType<ISurveySharingGroupMemberRepository, SurveySharingGroupMemberRepository>();
+            unityContainer.RegisterType<ISharedSurveyQuestionRepository, SharedSurveyQuestionRepository>();
             
             
         }

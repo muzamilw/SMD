@@ -137,21 +137,6 @@
         <AssociationConnector Association="SMDDevModel.FK_SurveyQuestionTargetCriteria_AdCampaign" />
         <EntityTypeShape EntityType="SMDDevModel.CouponPriceOption" Width="1.5" PointX="17.25" PointY="69.125" />
         <AssociationConnector Association="SMDDevModel.FK_CouponPriceOption_Coupon" />
-        <EntityTypeShape EntityType="SMDDevModel.Company" Width="1.5" PointX="3" PointY="39.25" />
-        <AssociationConnector Association="SMDDevModel.FK_Account_Company" />
-        <AssociationConnector Association="SMDDevModel.FK_AdCampaign_Company" />
-        <AssociationConnector Association="SMDDevModel.FK_AdCampaignResponse_Company" />
-        <AssociationConnector Association="SMDDevModel.FK_AspNetUsers_Company" />
-        <AssociationConnector Association="SMDDevModel.FK_BranchCategory_Company" />
-        <AssociationConnector Association="SMDDevModel.FK_CompaniesAspNetUsers_Company" />
-        <AssociationConnector Association="SMDDevModel.FK_Company_Country" />
-        <AssociationConnector Association="SMDDevModel.FK_CompanyBranch_Company" />
-        <AssociationConnector Association="SMDDevModel.FK_Coupon_Company" />
-        <AssociationConnector Association="SMDDevModel.FK_DamImages_Company" />
-        <AssociationConnector Association="SMDDevModel.FK_Invoice_Company" />
-        <AssociationConnector Association="SMDDevModel.FK_ProfileQuestion_Company" />
-        <AssociationConnector Association="SMDDevModel.FK_SurveyQuestion_Company" />
-        <AssociationConnector Association="SMDDevModel.FK_SurveyQuestionResponse_Company" />
         <EntityTypeShape EntityType="SMDDevModel.vw_Coupons" Width="1.5" PointX="0.75" PointY="11.75" />
         <AssociationConnector Association="SMDDevModel.FK_Country_Currency" />
         <EntityTypeShape EntityType="SMDDevModel.City" Width="1.5" PointX="3" PointY="34.875" />
@@ -170,12 +155,37 @@
         <EntityTypeShape EntityType="SMDDevModel.AdCampaignClickRateHistory" Width="1.5" PointX="19.75" PointY="44.25" />
         <AssociationConnector Association="SMDDevModel.FK_AdCampaignClickRateHistory_AdCampaign" />
         <EntityTypeShape EntityType="SMDDevModel.PayOutHistory" Width="1.5" PointX="5.25" PointY="43.25" />
-        <AssociationConnector Association="SMDDevModel.FK_PayOutHistory_Company" />
         <EntityTypeShape EntityType="SMDDevModel.ProfileQuestionUserAnswer" Width="1.5" PointX="19.75" PointY="56.625" />
         <AssociationConnector Association="SMDDevModel.FK_ProfileQuestionUserAnswer_AspNetUsers" />
-        <AssociationConnector Association="SMDDevModel.FK_ProfileQuestionUserAnswer_Company" />
         <AssociationConnector Association="SMDDevModel.FK_ProfileQuestionUserAnswer_ProfileQuestion" />
         <AssociationConnector Association="SMDDevModel.FK_ProfileQuestionUserAnswer_ProfileQuestionAnswer" />
+        <EntityTypeShape EntityType="SMDDevModel.SharedSurveyQuestion" Width="1.5" PointX="12.375" PointY="6.5" />
+        <EntityTypeShape EntityType="SMDDevModel.SharedSurveyQuestionResponse" Width="1.5" PointX="14.625" PointY="5.125" />
+        <EntityTypeShape EntityType="SMDDevModel.SurveySharingGroup" Width="1.5" PointX="12.375" PointY="11.875" />
+        <EntityTypeShape EntityType="SMDDevModel.SurveySharingGroupMember" Width="1.5" PointX="14.625" PointY="11.875" />
+        <AssociationConnector Association="SMDDevModel.FK_SharedSurveyQuestionResponse_SharedSurveyQuestion" />
+        <AssociationConnector Association="SMDDevModel.FK_SurveySharingGroupMembers_SurveySharingGroup" />
+        <EntityTypeShape EntityType="SMDDevModel.Company" Width="1.5" PointX="3" PointY="67.25" />
+        <EntityTypeShape EntityType="SMDDevModel.SurveySharingGroupShare" Width="1.5" PointX="16.875" PointY="8.875" />
+        <AssociationConnector Association="SMDDevModel.FK_Account_Company" />
+        <AssociationConnector Association="SMDDevModel.FK_AdCampaign_Company" />
+        <AssociationConnector Association="SMDDevModel.FK_AdCampaignResponse_Company" />
+        <AssociationConnector Association="SMDDevModel.FK_AspNetUsers_Company" />
+        <AssociationConnector Association="SMDDevModel.FK_BranchCategory_Company" />
+        <AssociationConnector Association="SMDDevModel.FK_CompaniesAspNetUsers_Company" />
+        <AssociationConnector Association="SMDDevModel.FK_Company_Country" />
+        <AssociationConnector Association="SMDDevModel.FK_CompanyBranch_Company" />
+        <AssociationConnector Association="SMDDevModel.FK_Coupon_Company" />
+        <AssociationConnector Association="SMDDevModel.FK_DamImages_Company" />
+        <AssociationConnector Association="SMDDevModel.FK_Invoice_Company" />
+        <AssociationConnector Association="SMDDevModel.FK_PayOutHistory_Company" />
+        <AssociationConnector Association="SMDDevModel.FK_ProfileQuestion_Company" />
+        <AssociationConnector Association="SMDDevModel.FK_ProfileQuestionUserAnswer_Company" />
+        <AssociationConnector Association="SMDDevModel.FK_SurveyQuestion_Company" />
+        <AssociationConnector Association="SMDDevModel.FK_SurveyQuestionResponse_Company" />
+        <AssociationConnector Association="SMDDevModel.FK_Notifications_SurveySharingGroupShares" />
+        <AssociationConnector Association="SMDDevModel.FK_SurveySharingGroupShares_SharedSurveyQuestion" />
+        <AssociationConnector Association="SMDDevModel.FK_SurveySharingGroupShares_SurveySharingGroupMembers" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

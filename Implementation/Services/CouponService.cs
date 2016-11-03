@@ -944,6 +944,10 @@ namespace SMD.Implementation.Services
         {
             return couponRepository.PauseAllCoupons(CompanyId);
         }
+        public int GetFreeCouponCount()
+        {
+            return couponRepository.GetFreeCouponCount();
+        }
 
         #endregion
     }
