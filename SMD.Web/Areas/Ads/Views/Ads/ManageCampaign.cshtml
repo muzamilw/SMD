@@ -1113,13 +1113,13 @@ else
                                                         <button class="btn  btn-info " id="btnStopAndTerminate" data-bind="visible: $root.isTerminateBtnVisible " style="width:229px;margin-top:10px;">Stop & Terminate Early</button>
                                                         <button class="btn  btn-danger " id="btnArchive" data-bind=" click:$root.ArchiveCampaign,visible: $root.isShowArchiveBtn " style="width:229px;margin-bottom:10px;">Archive Campaign</button>
                                                         <button class="btn  btn-info Theme_standard_clr" id="btnCopyCampaign" data-bind=" click:$root.copyCampaign  " style="display:none;">Create Copy - New Campaign</button>@*visible: $root.isNewCampaignVisible*@
-                                                        <button class="btn  btn-success" id="btnPauseCampaign" data-bind="click:$root.changeStatus(4)" style="display:none;width:229px;margin-bottom:10px;">Pause</button>
+                                                        <button class="btn  btn-success" id="btnPauseCampaign" data-bind="click:$root.changeStatus(4)" style="display:none;width:229px;margin-top:10px;">Pause</button>
                                                         <div data-bind="with: $root.campaignModel">
-                                                            <button class="btn  btn-success" id="btnResumeAdd" data-bind="click:$root.submitResumeData,visible:hasChanges()==false&& Status() == 4" style="display:none;width:229px;margin-top:10px">Resume</button>
+                                                            <button class="btn  btn-success" id="btnResumeAdd" data-bind="click:$root.submitResumeData,visible:Status() == 4" style="display:none;width:229px;margin-top:10px">Resume</button>
                                                             @*<button class="btn  btn-success" id="btnResumeCampagin" data-bind="click:$root.submitResumeData,visible:hasChanges()==false&& Status() == 4" style="display:none;width:229px;margin-top:10px">Resume</button>*@
-                                                            <button class="btn  btn-success " id="btnSubmitForApproval23" data-bind="click:$root.submitCampaignData, visible:hasChanges()==true && Status() == 4" style="width:229px;margin-top:10px">Submit for Approval</button>
+                                                            @*<button class="btn  btn-success " id="btnSubmitForApproval23" data-bind="click:$root.submitCampaignData, visible:hasChanges()==true && Status() == 4" style="width:229px;margin-top:10px">Submit for Approval</button>*@
                                                         </div>
-                                                        <button class="btn  btn-success gtild-color " id="btnChart" data-bind="visible: !$root.isNewCampaign()" style="margin-top: 10px;width:229px;color:gainsboro;">Charts</button>
+                                                        @*<button class="btn  btn-success gtild-color " id="btnChart" data-bind="visible: !$root.isNewCampaign()" style="margin-top: 10px;width:229px;color:gainsboro;">Charts</button>*@
                                                     </div>
 
                                                 </div>

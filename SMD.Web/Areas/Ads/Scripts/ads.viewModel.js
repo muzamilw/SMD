@@ -648,7 +648,7 @@ define("ads/ads.viewModel",
                     $("#MarketobjDiv").css("display", "none");
                     $("#topArea").css("display", "block");
                     $("#headlabel").css("display", "block");
-
+                    $("#Heading_div").css("display", "block");
                     $("#headdesc").css("display", "block");
                     $(".closecls").css("display", "block");
                 },

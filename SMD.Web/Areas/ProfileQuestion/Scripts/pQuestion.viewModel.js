@@ -99,7 +99,7 @@ define("pQuestion/pQuestion.viewModel",
                     ageppc = ko.observable(),
                     GetObj = ko.observable(),
                     isTerminateBtnVisible = ko.observable(true),
-                    previewScreenNumber = ko.observable(0),
+                    previewScreenNumber = ko.observable(1),
                     // Random number
                     randomIdForNewObjects = -1,
                     price = ko.observable(0),
@@ -1821,7 +1821,22 @@ define("pQuestion/pQuestion.viewModel",
                      }
                  });
              },
+                    nextPreviewScreen = function () {
+                        //  var hasErrors = false;
 
+                        //if (hasErrors)
+                        //    return;
+                        if (previewScreenNumber() < 3) {
+                            if (previewScreenNumber() == 3)
+                                return;
+                            else {
+                                previewScreenNumber(previewScreenNumber() + 1);
+
+                                // $('html, body').animate({ scrollTop: 0 }, 800);
+                            }
+                        }
+
+                    },
              onChangeSurveyQuestion = function (item) {
                  //var selectedSurveyQuestionId = $("#ddsurveyQuestion").val();
                  //var matchSurveyQuestion = ko.utils.arrayFirst(surveyQuestionList(), function (item) {
@@ -2141,6 +2156,13 @@ define("pQuestion/pQuestion.viewModel",
                               }
                           });
                       },
+                backScreen = function () {
+
+                    if (previewScreenNumber() > 1) {
+                        previewScreenNumber(previewScreenNumber() - 1);
+                        // $('html, body').animate({ scrollTop: 0 }, 800);
+                    }
+                },
                         totalPrice = ko.computed(function () {
                             IsShowPriceDiv(true);
                             var setupPrice = 19;
@@ -2403,7 +2425,9 @@ define("pQuestion/pQuestion.viewModel",
                     CampaignROItblAnalyticData: CampaignROItblAnalyticData,
                     iSfmodevar: iSfmodevar,
                     showAnswerTable: showAnswerTable,
-                    IsnewSurveyQuestion: IsnewSurveyQuestion
+                    IsnewSurveyQuestion: IsnewSurveyQuestion,
+                    nextPreviewScreen: nextPreviewScreen,
+                    backScreen: backScreen
                 };
             })()
         };

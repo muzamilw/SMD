@@ -2100,6 +2100,8 @@ define("Coupons/Coupons.viewModel",
                 $("#Heading_div").css("display", "block");
                 $(".closecls").css("display", "block");
                 
+
+
                 isEditorVisible(false);
                 CloseCouponsAnalyticView();
                 if (isFromEdit() == true) {
