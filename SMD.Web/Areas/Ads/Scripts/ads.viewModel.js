@@ -1698,7 +1698,7 @@ define("ads/ads.viewModel",
 
                   },
                 onEditCampaign = function (item) {
-                  
+             
                     previewScreenNumber(1);
                     isTerminateBtnVisible(false);
                     isNewCampaignVisible(false);
@@ -2431,6 +2431,7 @@ define("ads/ads.viewModel",
 
                 },
                 getAudienceCount = function () {
+                    
                     var countryIds = '', cityIds = '', countryIdsExcluded = '', cityIdsExcluded = '';
                     var educationIds = '', educationIdsExcluded = '';
                     _.each(campaignModel().AdCampaignTargetLocations(), function (item) {
@@ -2589,6 +2590,8 @@ define("ads/ads.viewModel",
                             }
                         }
                     });
+
+                   
                     var campData = {
                         ageFrom: campaignModel().AgeRangeStart(),
                         ageTo: campaignModel().AgeRangeEnd(),
@@ -3170,7 +3173,7 @@ define("ads/ads.viewModel",
                 },
                  gotoScreen = function (number) {
                      //  toastr.error("Validation.");
-
+                     isAdvertdashboardVisible(false);
                      previewScreenNumber(number);
 
                  },

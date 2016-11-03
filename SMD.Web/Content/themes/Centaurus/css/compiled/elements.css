@@ -1192,6 +1192,14 @@ input[type="radio"] {
     -o-transition: margin 0.3s ease-in 0s;
     transition: margin 0.3s ease-in 0s;
 }
+.enabledisable-inner {
+    width: 200%;
+    margin-left: -100%;
+    -moz-transition: margin 0.3s ease-in 0s;
+    -webkit-transition: margin 0.3s ease-in 0s;
+    -o-transition: margin 0.3s ease-in 0s;
+    transition: margin 0.3s ease-in 0s;
+}
 
     .onoffswitch-inner:before, .onoffswitch-inner:after {
         float: left;
@@ -1207,8 +1215,28 @@ input[type="radio"] {
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
     }
+     .enabledisable-inner:before, .enabledisable-inner:after {
+        float: left;
+        width: 50%;
+        height: 30px;
+        padding: 0;
+        line-height: 30px;
+        font-size: 14px;
+        color: white;
+        font-family: Trebuchet,Arial,sans-serif;
+        font-weight: bold;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+    }
 
     .onoffswitch-inner:before {
+        content: "Yes";
+        padding-left: 10px;
+        background-color: #3498db;
+        color: #FFFFFF;
+    }
+    .enabledisable-inner:before {
         content: "Enabled";
         padding-left: 10px;
         background-color: #3498db;
@@ -1216,6 +1244,9 @@ input[type="radio"] {
     }
 
 .onoffswitch.onoffswitch-success .onoffswitch-inner:before {
+    background-color: #2ecc71;
+}
+.onoffswitch.onoffswitch-success .enabledisable-inner:before {
     background-color: #2ecc71;
 }
 
@@ -1228,6 +1259,13 @@ input[type="radio"] {
 }
 
 .onoffswitch-inner:after {
+    content: "No";
+    padding-right: 6px;
+    background-color: #EEEEEE;
+    color: #999999;
+    text-align: right;
+}
+.enabledisable-inner:after {
     content: "Disabled";
     padding-right: 6px;
     background-color: #EEEEEE;
@@ -1254,6 +1292,9 @@ input[type="radio"] {
 }
 
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .enabledisable-inner {
     margin-left: 0;
 }
 

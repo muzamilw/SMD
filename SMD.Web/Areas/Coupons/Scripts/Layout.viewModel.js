@@ -267,7 +267,7 @@
                                          }
                                          else {
 
-                                             toastr.warning("We cantnot delete this branch,it is associate with multiple Coupons. ");
+                                             toastr.warning("We cantnot delete this branch,it is associate with multiple Deals. ");
                                              return;
                                          }
                                      },
