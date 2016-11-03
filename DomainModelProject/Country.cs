@@ -23,8 +23,8 @@ namespace DomainModelProject
             this.SurveyQuestionTargetLocations = new HashSet<SurveyQuestionTargetLocation>();
             this.Taxes = new HashSet<Tax>();
             this.ProfileQuestionTargetLocations = new HashSet<ProfileQuestionTargetLocation>();
-            this.Companies = new HashSet<Company>();
             this.Cities = new HashSet<City>();
+            this.Companies = new HashSet<Company>();
         }
     
         public int CountryID { get; set; }
@@ -39,8 +39,8 @@ namespace DomainModelProject
         public virtual ICollection<SurveyQuestionTargetLocation> SurveyQuestionTargetLocations { get; set; }
         public virtual ICollection<Tax> Taxes { get; set; }
         public virtual ICollection<ProfileQuestionTargetLocation> ProfileQuestionTargetLocations { get; set; }
-        public virtual ICollection<Company> Companies { get; set; }
         public virtual Currency Currency { get; set; }
         public virtual ICollection<City> Cities { get; set; }
+        public virtual ICollection<Company> Companies { get; set; }
     }
 }

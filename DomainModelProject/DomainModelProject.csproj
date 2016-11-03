@@ -316,6 +316,12 @@
     <Compile Include="Section.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="SharedSurveyQuestion.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SharedSurveyQuestionResponse.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="SurveyQuestion.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -326,6 +332,15 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="SurveyQuestionTargetLocation.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SurveySharingGroup.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SurveySharingGroupMember.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SurveySharingGroupShare.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="sysdiagram.cs">
