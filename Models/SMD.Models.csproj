@@ -161,7 +161,6 @@
     <Compile Include="DomainModels\SearchCampaigns_Result.cs" />
     <Compile Include="DomainModels\Section.cs" />
     <Compile Include="DomainModels\SharedSurveyQuestion.cs" />
-    <Compile Include="DomainModels\SharedSurveyQuestionResponse.cs" />
     <Compile Include="DomainModels\SurveySharingGroup.cs" />
     <Compile Include="DomainModels\SurveySharingGroupMember.cs" />
     <Compile Include="DomainModels\SurveySharingGroupShare.cs" />

@@ -23,7 +23,7 @@ namespace SMD.Models.DomainModels{
         public string RightPicturePath { get; set; }
         public Nullable<System.DateTime> CreationDate { get; set; }
     
-        public virtual ICollection<SharedSurveyQuestionResponse> SharedSurveyQuestionResponses { get; set; }
+       
         public virtual ICollection<SurveySharingGroupShare> SurveySharingGroupShares { get; set; }
     }
 }

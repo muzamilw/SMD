@@ -22,6 +22,9 @@ namespace SMD.Models.DomainModels
         public Nullable<long> SSQID { get; set; }
         public Nullable<int> Status { get; set; }
 
+        public Nullable<System.DateTime> ResponseDateTime { get; set; }
+        public Nullable<int> UserSelection { get; set; }
+
         public virtual ICollection<Notification> Notifications { get; set; }
         public virtual SharedSurveyQuestion SharedSurveyQuestion { get; set; }
         public virtual SurveySharingGroupMember SurveySharingGroupMember { get; set; }
