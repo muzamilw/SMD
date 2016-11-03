@@ -588,7 +588,14 @@ namespace SMD.MIS.ModelMappers
                 CouponImage5=source.CouponImage5,
                 CouponImage6=source.CouponImage6,
                 IsPaymentCollected =source.IsPaymentCollected,
-                PaymentDate = source.PaymentDate
+                PaymentDate = source.PaymentDate,
+                IsShowReviews = source.IsShowReviews,
+                IsShowAddress = source.IsShowAddress,
+                IsShowPhoneNo = source.IsShowPhoneNo,
+                IsShowMap = source.IsShowMap,
+                IsShowyouTube = source.IsShowyouTube,
+                IsShowAboutUs=source.IsShowAboutUs
+
               };
 
 
