@@ -467,6 +467,15 @@ define("Coupons/Coupons.viewModel",
             Banner6Flag(false);
             selectedPriceOption(couponModel().CouponPriceOptions()[0]);
             couponModel().reset();
+            if (couponCategories().length>0)
+           _.each(couponCategories(), function (coupcc) {
+               coupcc.IsSelected = false;
+           });
+            var arrayOfUpdatedList = couponCategories().slice(0);
+            couponCategories.removeAll();
+            ko.utils.arrayPushAll(couponCategories(), arrayOfUpdatedList);
+            couponCategories.valueHasMutated();
+         
         },
 
         closeNewCampaignDialog = function () {
