@@ -128,6 +128,10 @@ define("common/confirmation.viewModel",
                          isLoading(true);
                          view.showOKpopupforinfo();
                    },
+                  showOKpopupforFreeCoupon = function () {
+                      isLoading(true);
+                      view.showOKpopupforFreeCoupon();
+                  },
                  showOKpopupforChart = function () {
                      isLoading(true);
                      view.showOKpopupforchart();
@@ -242,7 +246,8 @@ define("common/confirmation.viewModel",
                     UserRandomNum: UserRandomNum,
                     showOKpopupforinfo: showOKpopupforinfo,
                     hidesOKpopupforInfo: hidesOKpopupforInfo,
-                    showOKpopupforChart: showOKpopupforChart
+                    showOKpopupforChart: showOKpopupforChart,
+                    showOKpopupforFreeCoupon: showOKpopupforFreeCoupon
                 };
             })()
         };

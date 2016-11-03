@@ -41,7 +41,7 @@ namespace SMD.Interfaces.Services
         CouponsResponseModelForApproval GetAdCampaignForAproval(GetPagedListRequest request);
 
 
-        List<CouponPriceOption> GetCouponPriceOptions(long CouponId );
+        List<CouponPriceOption> GetCouponPriceOptions(long CouponId);
         string UpdateCouponForApproval(Coupon source);
         Currency GetCurrenyById(int id);
         IEnumerable<getDealByCouponID_Result> getDealByCouponIDAnalytics(int CouponID, int dateRange, int Granularity);
@@ -49,7 +49,8 @@ namespace SMD.Interfaces.Services
         DateTime getExpiryDate(int CouponId);
 
         bool PauseAllCoupons(int CompanyId);
-        
+
+        int GetFreeCouponCount();
 
     }
 }

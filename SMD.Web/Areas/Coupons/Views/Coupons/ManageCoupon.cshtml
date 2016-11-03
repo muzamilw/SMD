@@ -515,7 +515,7 @@ else
                                 <div class="form-group" style="margin-bottom:5px;">
                                     <div class="col-lg-2"></div>
                                     <div class="col-lg-4 text-left">
-                                        <span style="font-size:13px!important;margin-left:4px;" >
+                                        <span style="font-size:13px!important;margin-left:4px;">
                                             Show Address in deal footer
                                         </span>
                                     </div>
@@ -1377,25 +1377,37 @@ else
 
 
                             <div class="row" style="margin-top:10px;">
-                                <div class="col-lg-12" data-bind="with: $root.couponModel" style="padding-left:23px;display:none;">
-
-
-
-                                    <input type="radio" name="optionsRadiosDelvTypes" value="1" id="optionsRadiosApplyFilterFree" data-bind="checked:CouponListingMode">
-                                    <label for="optionsRadiosApplyFilterFree">
-                                        <span class="panelfntSize">List for 14 days-FREE</span> .
-
-                                    </label>
-
-
+                                <div class="col-lg-12" data-bind="with: $root.couponModel" style="padding-left:23px;">
+                                    @*<input type="radio" name="optionsRadiosDelvTypes" value="1" id="optionsRadiosApplyFilterFree" data-bind="checked:CouponListingMode">
+                                        <label for="optionsRadiosApplyFilterFree">
+                                            <span class="panelfntSize">List for 14 days-FREE</span> .
+                                        </label>*@
+                                    <div class="col-lg-9 fontsize11" style="padding-left: 2px;padding-top: 12px;">
+                                        List for 14 days-FREE.
+                                    </div>
+                                    <div class="radio col-lg-3" style="text-align: left;font-size:14px !important;padding-left:8px;">
+                                        <input type="radio" name="optionsRadiosDelvTypes" value="1" id="optionsRadiosApplyFilterFree" data-bind="checked: CouponListingMode">
+                                        <label for="optionsRadiosApplyFilterFree" class="fontsize11" style="padding-left:24px!important;">
+                                            <span class="defaultThemeTxtClr"></span>
+                                        </label>
+                                        <span class="help-block text-right"></span>
+                                    </div>
                                 </div>
-
-                                <div style="padding-left:23px;display:none;" class="col-lg-12" data-bind="with: $root.couponModel">
-
-                                    <input type="radio" name="optionsRadiosDelvTypes" value="2" id="optionsRadiosApplyFilterOnce" data-bind="checked:CouponListingMode">
-                                    <label for="optionsRadiosApplyFilterOnce">
-                                        <span class="panelfntSize" style="margin-left:1px;">List for 6 months-$29 usd</span>.
-                                    </label>
+                                <div style="padding-left:23px;" class="col-lg-12" data-bind="with: $root.couponModel">
+                                    <div class="col-lg-9 fontsize11" style="padding-left: 0px;padding-top: 12px;">
+                                        Unlimited listing for $19 USD /month.
+                                    </div>
+                                    <div class="radio col-lg-3" style="text-align: left;font-size:14px !important;padding-left:8px;">
+                                        <input type="radio" name="optionsRadiosDelvTypes" value="2" id="optionsRadiosApplyFilterOnce" data-bind="checked: CouponListingMode">
+                                        <label for="optionsRadiosApplyFilterOnce" class="fontsize11" style="padding-left:24px!important;">
+                                            <span class="defaultThemeTxtClr"></span>
+                                        </label>
+                                        <span class="help-block text-right"></span>
+                                    </div>
+                                    @*<input type="radio" name="optionsRadiosDelvTypes" value="2" id="optionsRadiosApplyFilterOnce" data-bind="checked:CouponListingMode">
+                                        <label for="optionsRadiosApplyFilterOnce">
+                                            <span class="panelfntSize" style="margin-left:1px;">List for 6 months-$29 usd</span>.
+                                        </label>*@
                                 </div>
 
                                 <div class="col-lg-12" style="padding-left:24px;">
