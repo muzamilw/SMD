@@ -132,6 +132,10 @@ define("common/confirmation.viewModel",
                       isLoading(true);
                       view.showOKpopupforFreeCoupon();
                   },
+                 showOKpopupfordealheadline = function () {
+                     isLoading(true);
+                     view.showOKpopupfordealheadline();
+                 },
                  showOKpopupforChart = function () {
                      isLoading(true);
                      view.showOKpopupforchart();
@@ -247,7 +251,8 @@ define("common/confirmation.viewModel",
                     showOKpopupforinfo: showOKpopupforinfo,
                     hidesOKpopupforInfo: hidesOKpopupforInfo,
                     showOKpopupforChart: showOKpopupforChart,
-                    showOKpopupforFreeCoupon: showOKpopupforFreeCoupon
+                    showOKpopupforFreeCoupon: showOKpopupforFreeCoupon,
+                    showOKpopupfordealheadline: showOKpopupfordealheadline
                 };
             })()
         };

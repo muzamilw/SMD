@@ -619,11 +619,19 @@ getfreeCouponCount = function () {
 
 
         submitCampaignData = function () {
-            if (freeCouponCount() > 0 && couponModel().CouponListingMode()==1)
-            {
+
+           
+            if (freeCouponCount() > 0 && couponModel().CouponListingMode() == 1) {
 
                 confirmation.showOKpopupforFreeCoupon();
                 return;
+            }
+            else {
+                if (couponModel().CouponListingMode() == 1 && couponModel().CouponPriceOptions().length > 1)
+                {
+                    confirmation.showOKpopupfordealheadline();
+                    return;
+                }
             }
             hasErrors = false;
             if (couponModel().CouponTitle() == "" || couponModel().CouponTitle() == undefined) {
