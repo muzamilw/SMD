@@ -13,5 +13,7 @@ namespace SMD.Interfaces.Repository
         String GetUserEmail(int companyId);
         String GetUserid(int companyId);
         IEnumerable<GetRegisteredUserData_Result> GetRegisteredUsers(RegisteredUsersSearchRequest request, out int rowCount);
+
+        User GetUserbyPhoneNo(string phoneNo);
     }
 }

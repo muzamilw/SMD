@@ -160,6 +160,8 @@
     <Compile Include="Services\IProfileQuestionAnswerService.cs" />
     <Compile Include="Services\IProfileQuestionUserAnswerService.cs" />
     <Compile Include="Services\ISectionService.cs" />
+    <Compile Include="Services\ISurveySharingGroupService.cs" />
+    <Compile Include="Services\ISharedSurveyQuestionService.cs" />
     <Compile Include="Services\ISmsService.cs" />
     <Compile Include="Services\IStripeService.cs" />
     <Compile Include="Services\ITransactionLogService.cs" />

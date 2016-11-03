@@ -72,6 +72,14 @@ namespace SMD.Repository.Repositories
         }
 
 
+        public User GetUserbyPhoneNo(string phoneNo)
+        {
+            db.Configuration.LazyLoadingEnabled = false;
+            return db.Users.Where(g => g.Phone1 == phoneNo).SingleOrDefault();
+
+        }
+
+
       
 
         #endregion
