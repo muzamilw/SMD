@@ -32,6 +32,7 @@ namespace SMD.Interfaces.Repository
         bool PauseAllCoupons(int CompanyId);
 
         int GetCouponByBranchId(long id);
-        
+        int GetFreeCouponCount();
+
     }
 }

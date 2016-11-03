@@ -458,6 +458,7 @@ namespace SMD.MIS.ModelMappers
                 CurrencyCode = source.CurrencyCode,
                 CurrencySymbol = source.CurrencySymbol,
                 Status = source.Status,
+                StripeSubscriptionStatus = source.StripeSubscriptionStatus
                 
                
             };

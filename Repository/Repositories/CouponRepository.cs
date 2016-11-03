@@ -39,7 +39,7 @@ namespace SMD.Repository.Repositories
         #endregion
 
         
-        #region Public
+        #region Publi
 
 
         public Coupon Find(long id)
@@ -235,6 +235,10 @@ namespace SMD.Repository.Repositories
         {
 
             return db.Coupons.Where(c => c.LocationBranchId == id).ToList().Count;
+        }
+        public int GetFreeCouponCount()
+        {
+            return db.Coupons.Where(c => c.CompanyId==CompanyId && c.CouponListingMode==1&&(c.Status==2||c.Status==3)).ToList().Count;
         }
 
 

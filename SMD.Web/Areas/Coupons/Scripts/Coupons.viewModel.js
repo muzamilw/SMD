@@ -146,6 +146,7 @@ define("Coupons/Coupons.viewModel",
                 Banner4Flag = ko.observable(false),
                 Banner5Flag = ko.observable(false),
                 Banner6Flag = ko.observable(false),
+                freeCouponCount = ko.observable(0),
                 openAdvertiserDashboardDealScreen = function () {
                     if (!IsnewCoupon()) {
                         getDealsAnalytics();
@@ -183,8 +184,8 @@ define("Coupons/Coupons.viewModel",
             CloseCouponsAnalyticView = function () {
                 isAdvertdashboardDealVisible(false);
                 CampaignRatioAnalyticData(1);
-				selecteddateRangeAnalytics(1);
-				selectedGranularityAnalytics(1);
+                selecteddateRangeAnalytics(1);
+                selectedGranularityAnalytics(1);
             },
 
                 //
@@ -419,7 +420,19 @@ define("Coupons/Coupons.viewModel",
             }
             return item;
         },
+getfreeCouponCount = function () {
+    dataservice.getfreeCouponCount({
+        success: function (count) {
+            freeCouponCount(0);
+            freeCouponCount(count);
+        },
+        error: function () {
+            toastr.error("Failed to load free deal counts");
+        }
+    });
 
+
+},
         getCampaignByFilter = function () {
             getAdCampaignGridContent();
         },
@@ -427,7 +440,7 @@ define("Coupons/Coupons.viewModel",
 
             //show the main menu;
             collapseMainMenu();
-
+            getfreeCouponCount();
             openEditScreen(5);
             isFromEdit(true);
             isListVisible(false);
@@ -467,15 +480,15 @@ define("Coupons/Coupons.viewModel",
             Banner6Flag(false);
             selectedPriceOption(couponModel().CouponPriceOptions()[0]);
             couponModel().reset();
-            if (couponCategories().length>0)
-           _.each(couponCategories(), function (coupcc) {
-               coupcc.IsSelected = false;
-           });
+            if (couponCategories().length > 0)
+                _.each(couponCategories(), function (coupcc) {
+                    coupcc.IsSelected = false;
+                });
             var arrayOfUpdatedList = couponCategories().slice(0);
             couponCategories.removeAll();
             ko.utils.arrayPushAll(couponCategories(), arrayOfUpdatedList);
             couponCategories.valueHasMutated();
-         
+
         },
 
         closeNewCampaignDialog = function () {
@@ -506,8 +519,8 @@ define("Coupons/Coupons.viewModel",
             });
             confirmation.afterCancel(function () {
 
-               
-               
+
+
 
                 isEditorVisible(false);
                 if (isFromEdit() == true) {
@@ -606,6 +619,20 @@ define("Coupons/Coupons.viewModel",
 
 
         submitCampaignData = function () {
+
+           
+            if (freeCouponCount() > 0 && couponModel().CouponListingMode() == 1) {
+
+                confirmation.showOKpopupforFreeCoupon();
+                return;
+            }
+            else {
+                if (couponModel().CouponListingMode() == 1 && couponModel().CouponPriceOptions().length > 1)
+                {
+                    confirmation.showOKpopupfordealheadline();
+                    return;
+                }
+            }
             hasErrors = false;
             if (couponModel().CouponTitle() == "" || couponModel().CouponTitle() == undefined) {
                 hasErrors = true;
@@ -638,18 +665,24 @@ define("Coupons/Coupons.viewModel",
 
             }
             else {
-                if (UserAndCostDetail().IsSpecialAccount == true) {
+                if (couponModel().CouponListingMode() == 1) {
                     saveCampaign(2);
+
                 }
                 else {
-                    if (UserAndCostDetail().isStripeIntegrated == false) {
-                        stripeChargeCustomer.show(function () {
-                            UserAndCostDetail().isStripeIntegrated = true;
-                            saveCampaign(2);
-                        }, 1000, 'Configure your Subscription');
-
-                    } else {
+                    if (UserAndCostDetail().IsSpecialAccount == true) {
                         saveCampaign(2);
+                    }
+                    else {
+                        if (UserAndCostDetail().isStripeIntegrated == false) {
+                            stripeChargeCustomer.show(function () {
+                                UserAndCostDetail().isStripeIntegrated = true;
+                                saveCampaign(2);
+                            }, 1000, 'Configure your Subscription');
+
+                        } else {
+                            saveCampaign(2);
+                        }
                     }
                 }
             }
@@ -657,7 +690,7 @@ define("Coupons/Coupons.viewModel",
           terminateCampaign = function (item) {
               if (item.Status() == 1)
               { couponModel(item); }
-                  
+
 
               confirmation.messageText("Are you sure you want to remove this ad ? This action cannot be undone.");
               confirmation.show();
@@ -667,7 +700,7 @@ define("Coupons/Coupons.viewModel",
               confirmation.afterProceed(function () {
                   if (couponModel() == undefined)
                       couponModel(item);
-                      saveCampaign(7);
+                  saveCampaign(7);
               });
 
           },
@@ -839,7 +872,7 @@ define("Coupons/Coupons.viewModel",
 
               },
             onEditCampaign = function (item) {
-              
+
                 EditorLoading(true);
                 //resetting flags
                 IsSubmitBtnVisible(false);
@@ -2099,7 +2132,9 @@ define("Coupons/Coupons.viewModel",
                 $("#topArea").css("display", "block");
                 $("#Heading_div").css("display", "block");
                 $(".closecls").css("display", "block");
-                
+
+
+
                 isEditorVisible(false);
                 CloseCouponsAnalyticView();
                 if (isFromEdit() == true) {

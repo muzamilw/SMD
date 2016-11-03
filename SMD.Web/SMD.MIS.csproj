@@ -386,6 +386,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Api\Controllers\CouponAnalyticsController.cs" />
     <Compile Include="Areas\Api\Controllers\ApprovePayOutHistoryController.cs" />
+    <Compile Include="Areas\Api\Controllers\CouponCountController.cs" />
     <Compile Include="Areas\Api\Controllers\StripeSubscribeCustomerController.cs" />
     <Compile Include="Areas\Api\Controllers\GetApprovalCountController.cs" />
     <Compile Include="Areas\Api\Controllers\AdsCampaignAnalyticController.cs" />

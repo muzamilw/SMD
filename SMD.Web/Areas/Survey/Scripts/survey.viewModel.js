@@ -13,6 +13,7 @@ define("survey/survey.viewModel",
                     questions = ko.observableArray([]),
                     // Base Data
                     langs = ko.observableArray([]),
+                    previewScreenNumber = ko.observable(1),
                     countries = ko.observableArray([]),
                     //pager
                     pager = ko.observable(),
@@ -25,6 +26,7 @@ define("survey/survey.viewModel",
                     TemporaryQuizQuestions = ko.observableArray([]),
                     TemporarySurveyList = ko.observableArray([]),
                     price = ko.observable(0),
+                
                     IsVisibleAudience = ko.observable(false),
                     SearchProfileQuestion = ko.observable(''),
                     // Controlls editor visibility 
@@ -1767,7 +1769,29 @@ define("survey/survey.viewModel",
                             saveSurveyQuestion(7);
                     });
                 },
+                backScreen = function () {
 
+                    if (previewScreenNumber() > 1) {
+                        previewScreenNumber(previewScreenNumber() - 1);
+                       // $('html, body').animate({ scrollTop: 0 }, 800);
+                    }
+                },
+                nextPreviewScreen = function () {
+                  //  var hasErrors = false;
+                  
+                    //if (hasErrors)
+                    //    return;
+                    if (previewScreenNumber() < 3) {
+                        if (previewScreenNumber() == 3)
+                            return;
+                        else {
+                            previewScreenNumber(previewScreenNumber() + 1);
+                            
+                           // $('html, body').animate({ scrollTop: 0 }, 800);
+                        }
+                    }
+
+                },
                 getAudienceCountForAdd = function (SelectedQuestion) {
 
                     var countryIds = '', cityIds = '', countryIdsExcluded = '', cityIdsExcluded = '';
@@ -2191,7 +2215,10 @@ define("survey/survey.viewModel",
                     CampaignROItblAnalyticData: CampaignROItblAnalyticData,
                     IsnewSurvey: IsnewSurvey,
                     IsVisibleAudience: IsVisibleAudience,
-                    AudienceWidth: AudienceWidth
+                    AudienceWidth: AudienceWidth,
+                    nextPreviewScreen: nextPreviewScreen,
+                    previewScreenNumber: previewScreenNumber,
+                    backScreen: backScreen
                 };
             })()
         };
