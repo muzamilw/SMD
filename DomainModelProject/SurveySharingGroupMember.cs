@@ -14,6 +14,11 @@ namespace DomainModelProject
     
     public partial class SurveySharingGroupMember
     {
+        public SurveySharingGroupMember()
+        {
+            this.SurveySharingGroupShares = new HashSet<SurveySharingGroupShare>();
+        }
+    
         public long SharingGroupMemberId { get; set; }
         public string UserId { get; set; }
         public string PhoneNumber { get; set; }
@@ -21,5 +26,6 @@ namespace DomainModelProject
         public Nullable<long> SharingGroupId { get; set; }
     
         public virtual SurveySharingGroup SurveySharingGroup { get; set; }
+        public virtual ICollection<SurveySharingGroupShare> SurveySharingGroupShares { get; set; }
     }
 }

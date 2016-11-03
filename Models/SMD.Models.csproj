@@ -153,6 +153,7 @@
     <Compile Include="DomainModels\GetTransactions_Result.cs" />
     <Compile Include="DomainModels\getUserActivitiesOverTime_Result.cs" />
     <Compile Include="DomainModels\GetUserCounts.cs" />
+    <Compile Include="DomainModels\Notification.cs" />
     <Compile Include="DomainModels\PayOutHistory.cs" />
     <Compile Include="DomainModels\Phrase.cs" />
     <Compile Include="DomainModels\ProfileQuestionTargetCriteria.cs" />

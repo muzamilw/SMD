@@ -73,7 +73,7 @@ namespace DomainModelProject
         public virtual ICollection<SurveyQuestionTargetCriteria> SurveyQuestionTargetCriterias1 { get; set; }
         public virtual ICollection<SurveyQuestionTargetLocation> SurveyQuestionTargetLocations { get; set; }
         public virtual ICollection<ProfileQuestionTargetCriteria> ProfileQuestionTargetCriterias { get; set; }
-        public virtual Company Company { get; set; }
         public virtual ICollection<CampaignEventHistory> CampaignEventHistories { get; set; }
+        public virtual Company Company { get; set; }
     }
 }

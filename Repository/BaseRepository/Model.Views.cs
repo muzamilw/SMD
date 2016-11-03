@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets13E511461B604192F4947EAF847D609D92A5C5E48B6939EF791C87B5175BC355))]
+[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets883849577E1A4E443E403A67FECA4C6262BE2A5DA513A6E5BAE50DE177D5B1C1))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -17,19 +17,19 @@ namespace Edm_EntityMappingGeneratedViews
     /// <Summary>
     /// The type contains views for EntitySets and AssociationSets that were generated at design time.
     /// </Summary>
-    public sealed class ViewsForBaseEntitySets13E511461B604192F4947EAF847D609D92A5C5E48B6939EF791C87B5175BC355 : System.Data.Mapping.EntityViewContainer
+    public sealed class ViewsForBaseEntitySets883849577E1A4E443E403A67FECA4C6262BE2A5DA513A6E5BAE50DE177D5B1C1 : System.Data.Mapping.EntityViewContainer
     {
         
         /// <Summary>
         /// The constructor stores the views for the extents and also the hash values generated based on the metadata and mapping closure and views.
         /// </Summary>
-        public ViewsForBaseEntitySets13E511461B604192F4947EAF847D609D92A5C5E48B6939EF791C87B5175BC355()
+        public ViewsForBaseEntitySets883849577E1A4E443E403A67FECA4C6262BE2A5DA513A6E5BAE50DE177D5B1C1()
         {
             this.EdmEntityContainerName = "BaseDbContext";
             this.StoreEntityContainerName = "SMDModelStoreContainer";
-            this.HashOverMappingClosure = "68c4758bcdd04177d4af71bddbd7beb7cf57fb2e9d95026e172127664c8d22fb";
-            this.HashOverAllExtentViews = "9fd166ddddcec0843ac3ab8dd23c1e0406cc04a7f42d6a0dafa9acd162048481";
-            this.ViewCount = 134;
+            this.HashOverMappingClosure = "03ef581a2b269e23dedbcee171e1b8919e39815d42667e8a2862ccc99ff3b88c";
+            this.HashOverAllExtentViews = "5b475c12f9abc592b17df74c1e5fb1716472ea2ea65a376265baa3f63b30e747";
+            this.ViewCount = 136;
         }
         
         /// <Summary>
@@ -572,6 +572,14 @@ namespace Edm_EntityMappingGeneratedViews
             if ((index == 133))
             {
                 return GetView133();
+            }
+            if ((index == 134))
+            {
+                return GetView134();
+            }
+            if ((index == 135))
+            {
+                return GetView135();
             }
             throw new System.IndexOutOfRangeException();
         }
@@ -4197,16 +4205,78 @@ namespace Edm_EntityMappingGeneratedViews
         }
         
         /// <Summary>
-        /// return view for SMDModelStoreContainer.SurveySharingGroupShares
+        /// return view for SMDModelStoreContainer.SurveySharingGroup
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView126()
         {
-            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.SurveySharingGroupShares", @"
-    SELECT VALUE -- Constructing SurveySharingGroupShares
-        [SMDModel.Store.SurveySharingGroupShares](T1.SurveySharingGroupShares_ShareId, T1.SurveySharingGroupShares_SharingGroupId, T1.SurveySharingGroupShares_UserId, T1.SurveySharingGroupShares_SharingGroupMemberId, T1.SurveySharingGroupShares_SharingDate, T1.SurveySharingGroupShares_SSQID, T1.SurveySharingGroupShares_Status)
+            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.SurveySharingGroup", @"
+    SELECT VALUE -- Constructing SurveySharingGroup
+        [SMDModel.Store.SurveySharingGroup](T1.SurveySharingGroup_SharingGroupId, T1.SurveySharingGroup_CompanyId, T1.SurveySharingGroup_UserId, T1.SurveySharingGroup_GroupName, T1.SurveySharingGroup_CreationDate)
     FROM (
         SELECT 
-            T.ShareId AS SurveySharingGroupShares_ShareId, 
+            T.SharingGroupId AS SurveySharingGroup_SharingGroupId, 
+            T.CompanyId AS SurveySharingGroup_CompanyId, 
+            T.UserId AS SurveySharingGroup_UserId, 
+            T.GroupName AS SurveySharingGroup_GroupName, 
+            T.CreationDate AS SurveySharingGroup_CreationDate, 
+            True AS _from0
+        FROM BaseDbContext.SurveySharingGroups AS T
+    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for SMDModelStoreContainer.SurveySharingGroupMembers
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView127()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.SurveySharingGroupMembers", @"
+    SELECT VALUE -- Constructing SurveySharingGroupMembers
+        [SMDModel.Store.SurveySharingGroupMembers](T1.SurveySharingGroupMembers_SharingGroupMemberId, T1.SurveySharingGroupMembers_UserId, T1.SurveySharingGroupMembers_PhoneNumber, T1.SurveySharingGroupMembers_MemberStatus, T1.SurveySharingGroupMembers_SharingGroupId)
+    FROM (
+        SELECT 
+            T.SharingGroupMemberId AS SurveySharingGroupMembers_SharingGroupMemberId, 
+            T.UserId AS SurveySharingGroupMembers_UserId, 
+            T.PhoneNumber AS SurveySharingGroupMembers_PhoneNumber, 
+            T.MemberStatus AS SurveySharingGroupMembers_MemberStatus, 
+            T.SharingGroupId AS SurveySharingGroupMembers_SharingGroupId, 
+            True AS _from0
+        FROM BaseDbContext.SurveySharingGroupMembers AS T
+    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for SMDModelStoreContainer.Notifications
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView128()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.Notifications", @"
+    SELECT VALUE -- Constructing Notifications
+        [SMDModel.Store.Notifications](T1.Notifications_ID, T1.Notifications_Type, T1.Notifications_UserID, T1.Notifications_IsRead, T1.Notifications_GeneratedOn, T1.Notifications_GeneratedBy, T1.Notifications_SurveyQuestionShareId)
+    FROM (
+        SELECT 
+            T.ID AS Notifications_ID, 
+            T.Type AS Notifications_Type, 
+            T.UserID AS Notifications_UserID, 
+            T.IsRead AS Notifications_IsRead, 
+            T.GeneratedOn AS Notifications_GeneratedOn, 
+            T.GeneratedBy AS Notifications_GeneratedBy, 
+            T.SurveyQuestionShareId AS Notifications_SurveyQuestionShareId, 
+            True AS _from0
+        FROM BaseDbContext.Notifications AS T
+    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for SMDModelStoreContainer.SurveySharingGroupShares
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView129()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.SurveySharingGroupShares", @"
+    SELECT VALUE -- Constructing SurveySharingGroupShares
+        [SMDModel.Store.SurveySharingGroupShares](T1.SurveySharingGroupShares_SurveyQuestionShareId, T1.SurveySharingGroupShares_SharingGroupId, T1.SurveySharingGroupShares_UserId, T1.SurveySharingGroupShares_SharingGroupMemberId, T1.SurveySharingGroupShares_SharingDate, T1.SurveySharingGroupShares_SSQID, T1.SurveySharingGroupShares_Status)
+    FROM (
+        SELECT 
+            T.SurveyQuestionShareId AS SurveySharingGroupShares_SurveyQuestionShareId, 
             T.SharingGroupId AS SurveySharingGroupShares_SharingGroupId, 
             T.UserId AS SurveySharingGroupShares_UserId, 
             T.SharingGroupMemberId AS SurveySharingGroupShares_SharingGroupMemberId, 
@@ -4221,7 +4291,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.SharedSurveyQuestions
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView127()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView130()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.SharedSurveyQuestions", @"
     SELECT VALUE -- Constructing SharedSurveyQuestions
@@ -4243,7 +4313,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.SharedSurveyQuestionResponses
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView128()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView131()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.SharedSurveyQuestionResponses", @"
     SELECT VALUE -- Constructing SharedSurveyQuestionResponses
@@ -4257,68 +4327,6 @@ namespace Edm_EntityMappingGeneratedViews
             T.UserSelection AS SharedSurveyQuestionResponse_UserSelection, 
             True AS _from0
         FROM SMDModelStoreContainer.SharedSurveyQuestionResponse AS T
-    ) AS T1");
-        }
-        
-        /// <Summary>
-        /// return view for BaseDbContext.SurveySharingGroupShares
-        /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView129()
-        {
-            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.SurveySharingGroupShares", @"
-    SELECT VALUE -- Constructing SurveySharingGroupShares
-        [DomainModels.SurveySharingGroupShare](T1.SurveySharingGroupShare_ShareId, T1.SurveySharingGroupShare_SharingGroupId, T1.SurveySharingGroupShare_UserId, T1.SurveySharingGroupShare_SharingGroupMemberId, T1.SurveySharingGroupShare_SharingDate, T1.SurveySharingGroupShare_SSQID, T1.SurveySharingGroupShare_Status)
-    FROM (
-        SELECT 
-            T.ShareId AS SurveySharingGroupShare_ShareId, 
-            T.SharingGroupId AS SurveySharingGroupShare_SharingGroupId, 
-            T.UserId AS SurveySharingGroupShare_UserId, 
-            T.SharingGroupMemberId AS SurveySharingGroupShare_SharingGroupMemberId, 
-            T.SharingDate AS SurveySharingGroupShare_SharingDate, 
-            T.SSQID AS SurveySharingGroupShare_SSQID, 
-            T.Status AS SurveySharingGroupShare_Status, 
-            True AS _from0
-        FROM SMDModelStoreContainer.SurveySharingGroupShares AS T
-    ) AS T1");
-        }
-        
-        /// <Summary>
-        /// return view for SMDModelStoreContainer.SurveySharingGroup
-        /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView130()
-        {
-            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.SurveySharingGroup", @"
-    SELECT VALUE -- Constructing SurveySharingGroup
-        [SMDModel.Store.SurveySharingGroup](T1.SurveySharingGroup_SharingGroupId, T1.SurveySharingGroup_CompanyId, T1.SurveySharingGroup_UserId, T1.SurveySharingGroup_GroupName, T1.SurveySharingGroup_CreationDate)
-    FROM (
-        SELECT 
-            T.SharingGroupId AS SurveySharingGroup_SharingGroupId, 
-            T.CompanyId AS SurveySharingGroup_CompanyId, 
-            T.UserId AS SurveySharingGroup_UserId, 
-            T.GroupName AS SurveySharingGroup_GroupName, 
-            T.CreationDate AS SurveySharingGroup_CreationDate, 
-            True AS _from0
-        FROM BaseDbContext.SurveySharingGroups AS T
-    ) AS T1");
-        }
-        
-        /// <Summary>
-        /// return view for SMDModelStoreContainer.SurveySharingGroupMembers
-        /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView131()
-        {
-            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.SurveySharingGroupMembers", @"
-    SELECT VALUE -- Constructing SurveySharingGroupMembers
-        [SMDModel.Store.SurveySharingGroupMembers](T1.SurveySharingGroupMembers_SharingGroupMemberId, T1.SurveySharingGroupMembers_UserId, T1.SurveySharingGroupMembers_PhoneNumber, T1.SurveySharingGroupMembers_MemberStatus, T1.SurveySharingGroupMembers_SharingGroupId)
-    FROM (
-        SELECT 
-            T.SharingGroupMemberId AS SurveySharingGroupMembers_SharingGroupMemberId, 
-            T.UserId AS SurveySharingGroupMembers_UserId, 
-            T.PhoneNumber AS SurveySharingGroupMembers_PhoneNumber, 
-            T.MemberStatus AS SurveySharingGroupMembers_MemberStatus, 
-            T.SharingGroupId AS SurveySharingGroupMembers_SharingGroupId, 
-            True AS _from0
-        FROM BaseDbContext.SurveySharingGroupMembers AS T
     ) AS T1");
         }
         
@@ -4359,6 +4367,50 @@ namespace Edm_EntityMappingGeneratedViews
             T.SharingGroupId AS SurveySharingGroupMember_SharingGroupId, 
             True AS _from0
         FROM SMDModelStoreContainer.SurveySharingGroupMembers AS T
+    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for BaseDbContext.Notifications
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView134()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Notifications", @"
+    SELECT VALUE -- Constructing Notifications
+        [DomainModels.Notification](T1.Notification_ID, T1.Notification_Type, T1.Notification_UserID, T1.Notification_IsRead, T1.Notification_GeneratedOn, T1.Notification_GeneratedBy, T1.Notification_SurveyQuestionShareId)
+    FROM (
+        SELECT 
+            T.ID AS Notification_ID, 
+            T.Type AS Notification_Type, 
+            T.UserID AS Notification_UserID, 
+            T.IsRead AS Notification_IsRead, 
+            T.GeneratedOn AS Notification_GeneratedOn, 
+            T.GeneratedBy AS Notification_GeneratedBy, 
+            T.SurveyQuestionShareId AS Notification_SurveyQuestionShareId, 
+            True AS _from0
+        FROM SMDModelStoreContainer.Notifications AS T
+    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for BaseDbContext.SurveySharingGroupShares
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView135()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.SurveySharingGroupShares", @"
+    SELECT VALUE -- Constructing SurveySharingGroupShares
+        [DomainModels.SurveySharingGroupShare](T1.SurveySharingGroupShare_SurveyQuestionShareId, T1.SurveySharingGroupShare_SharingGroupId, T1.SurveySharingGroupShare_UserId, T1.SurveySharingGroupShare_SharingGroupMemberId, T1.SurveySharingGroupShare_SharingDate, T1.SurveySharingGroupShare_SSQID, T1.SurveySharingGroupShare_Status)
+    FROM (
+        SELECT 
+            T.SurveyQuestionShareId AS SurveySharingGroupShare_SurveyQuestionShareId, 
+            T.SharingGroupId AS SurveySharingGroupShare_SharingGroupId, 
+            T.UserId AS SurveySharingGroupShare_UserId, 
+            T.SharingGroupMemberId AS SurveySharingGroupShare_SharingGroupMemberId, 
+            T.SharingDate AS SurveySharingGroupShare_SharingDate, 
+            T.SSQID AS SurveySharingGroupShare_SSQID, 
+            T.Status AS SurveySharingGroupShare_Status, 
+            True AS _from0
+        FROM SMDModelStoreContainer.SurveySharingGroupShares AS T
     ) AS T1");
         }
     }

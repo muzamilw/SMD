@@ -14,7 +14,12 @@ namespace DomainModelProject
     
     public partial class SurveySharingGroupShare
     {
-        public long ShareId { get; set; }
+        public SurveySharingGroupShare()
+        {
+            this.Notifications = new HashSet<Notification>();
+        }
+    
+        public long SurveyQuestionShareId { get; set; }
         public Nullable<long> SharingGroupId { get; set; }
         public string UserId { get; set; }
         public Nullable<long> SharingGroupMemberId { get; set; }
@@ -22,6 +27,8 @@ namespace DomainModelProject
         public Nullable<long> SSQID { get; set; }
         public Nullable<int> Status { get; set; }
     
+        public virtual ICollection<Notification> Notifications { get; set; }
         public virtual SharedSurveyQuestion SharedSurveyQuestion { get; set; }
+        public virtual SurveySharingGroupMember SurveySharingGroupMember { get; set; }
     }
 }

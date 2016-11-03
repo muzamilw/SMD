@@ -138,8 +138,8 @@ namespace DomainModelProject
         public virtual ICollection<CouponCode> CouponCodes { get; set; }
         public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }
         public virtual ICollection<SurveyQuestionTargetCriteria> SurveyQuestionTargetCriterias { get; set; }
-        public virtual Company Company { get; set; }
         public virtual ICollection<CampaignEventHistory> CampaignEventHistories { get; set; }
         public virtual ICollection<AdCampaignClickRateHistory> AdCampaignClickRateHistories { get; set; }
+        public virtual Company Company { get; set; }
     }
 }

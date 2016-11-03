@@ -84,7 +84,7 @@ namespace DomainModelProject
         public virtual ICollection<SurveyQuestionResponse> SurveyQuestionResponses { get; set; }
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
         public virtual ICollection<App> Apps { get; set; }
-        public virtual Company Company { get; set; }
         public virtual ICollection<ProfileQuestionUserAnswer> ProfileQuestionUserAnswers { get; set; }
+        public virtual Company Company { get; set; }
     }
 }

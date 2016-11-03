@@ -12,16 +12,16 @@ namespace SMD.Models.DomainModels
     using System;
     using System.Collections.Generic;
     
-    public partial class SurveySharingGroupMember
+    public partial class Notification
     {
-        public long SharingGroupMemberId { get; set; }
-        public string UserId { get; set; }
-        public string PhoneNumber { get; set; }
-        public Nullable<int> MemberStatus { get; set; }
-        public Nullable<long> SharingGroupId { get; set; }
+        public long ID { get; set; }
+        public Nullable<int> Type { get; set; }
+        public string UserID { get; set; }
+        public Nullable<bool> IsRead { get; set; }
+        public Nullable<System.DateTime> GeneratedOn { get; set; }
+        public string GeneratedBy { get; set; }
+        public Nullable<long> SurveyQuestionShareId { get; set; }
     
-        public virtual SurveySharingGroup SurveySharingGroup { get; set; }
-
-        public virtual ICollection<SurveySharingGroupShare> SurveySharingGroupShares { get; set; }
+        public virtual SurveySharingGroupShare SurveySharingGroupShare { get; set; }
     }
 }
