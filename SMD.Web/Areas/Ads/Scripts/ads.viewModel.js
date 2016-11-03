@@ -2177,7 +2177,7 @@ define("ads/ads.viewModel",
                     }
                 },
                 nextPreviewScreen = function () {
-                    debugger;
+                    
                     var noErrors = true;
                     if (previewScreenNumber() == 1) {
 
@@ -2229,11 +2229,14 @@ define("ads/ads.viewModel",
                     }
                     if (noErrors == true) {
 
-                    //    if (previewScreenNumber() < 5) {
-                        //    previewScreenNumber(previewScreenNumber() + 1);
-                          //  $('html, body').animate({ scrollTop: 0 }, 800);
-                        //}
-
+                        if (previewScreenNumber() < 5) {
+                            if (previewScreenNumber() == 3)
+                                return;
+                            else {
+                                previewScreenNumber(previewScreenNumber() + 1);
+                                //$('html, body').animate({ scrollTop: 0 }, 800);
+                            }
+                        }
                     }
 
                 },
