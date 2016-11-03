@@ -2431,6 +2431,7 @@ define("ads/ads.viewModel",
 
                 },
                 getAudienceCount = function () {
+                    
                     var countryIds = '', cityIds = '', countryIdsExcluded = '', cityIdsExcluded = '';
                     var educationIds = '', educationIdsExcluded = '';
                     _.each(campaignModel().AdCampaignTargetLocations(), function (item) {
@@ -2589,6 +2590,8 @@ define("ads/ads.viewModel",
                             }
                         }
                     });
+
+                   
                     var campData = {
                         ageFrom: campaignModel().AgeRangeStart(),
                         ageTo: campaignModel().AgeRangeEnd(),

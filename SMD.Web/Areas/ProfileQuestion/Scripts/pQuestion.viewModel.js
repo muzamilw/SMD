@@ -485,7 +485,7 @@ define("pQuestion/pQuestion.viewModel",
                 getAudienceCountForAdd = function (SelectedQuestion) {
 
                     
-
+                    
                     var countryIds = '', cityIds = '', countryIdsExcluded = '', cityIdsExcluded = '';
                     var educationIds = '', educationIdsExcluded = '';
                     _.each(selectedQuestion().ProfileQuestionTargetLocation(), function (item) {
@@ -519,7 +519,7 @@ define("pQuestion/pQuestion.viewModel",
                             }
                         }
                     });
-
+                   
                     var languageIds = '', industryIds = '', languageIdsExcluded = '',
                         industryIdsExcluded = '', profileQuestionIds = '', profileAnswerIds = '',
                         surveyQuestionIds = '', surveyAnswerIds = '', profileQuestionIdsExcluded = '', profileAnswerIdsExcluded = '',
@@ -539,9 +539,9 @@ define("pQuestion/pQuestion.viewModel",
                                 }
                             } else {
                                 if (profileQuestionIds == '') {
-                                    profileQuestionIds += item.PQID();
+                                    profileQuestionIds += item.PqId();
                                 } else {
-                                    profileQuestionIds += ',' + item.PQID();
+                                    profileQuestionIds += ',' + item.PqId();
                                 }
                                 if (profileAnswerIds == '') {
                                     profileAnswerIds += item.PQAnswerID();
@@ -644,6 +644,7 @@ define("pQuestion/pQuestion.viewModel",
                             }
                         }
                     });
+                   
                     var surveyData = {
                         ageFrom: selectedQuestion().AgeRangeStart(),
                         ageTo: selectedQuestion().AgeRangeEnd(),
@@ -672,7 +673,7 @@ define("pQuestion/pQuestion.viewModel",
                         CampaignQuizIdsExcluded: CampaignQuizIdsExcluded
 
                     };
-                    debugger;
+                   
                     dataservice.getAudienceData(surveyData, {
                         success: function (data) {
 
@@ -1157,7 +1158,7 @@ define("pQuestion/pQuestion.viewModel",
                     onSaveProfileQuestion(1);
                 },
                 onSaveProfileQuestion = function (mode) {
-                    debugger;
+                    
                     if (mode != 7)
                     {
                         if (!doBeforeSavepq()) {
@@ -1251,7 +1252,7 @@ define("pQuestion/pQuestion.viewModel",
                     });
                 }),
                 onEditCriteria = function (item) {
-                    debugger;
+                    
                     isNewCriteria(false);
                     var val = item.PQAnswerID() + 0;
                     if (item.Type() == "1") {
@@ -1503,6 +1504,7 @@ define("pQuestion/pQuestion.viewModel",
                      surveyQuestionIds = '', surveyAnswerIds = '', profileQuestionIdsExcluded = '', profileAnswerIdsExcluded = '',
                      surveyQuestionIdsExcluded = '', surveyAnswerIdsExcluded = '', CampaignQuizIds = '', CampaignQuizAnswerIds = '', CampaignQuizAnswerIdsExcluded = '', CampaignQuizIdsExcluded = '';
                  _.each(selectedQuestion().ProfileQuestionTargetCriteria(), function (item) {
+                    
                      if (item.Type() == 1) {
                          if (item.IncludeorExclude() == '0') {
                              if (profileQuestionIdsExcluded == '') {
@@ -1622,6 +1624,7 @@ define("pQuestion/pQuestion.viewModel",
                          }
                      }
                  });
+               
                  var surveyData = {
                      ageFrom: selectedQuestion().AgeRangeStart(),
                      ageTo: selectedQuestion().AgeRangeEnd(),
@@ -1650,7 +1653,7 @@ define("pQuestion/pQuestion.viewModel",
                      CampaignQuizIdsExcluded: CampaignQuizIdsExcluded
 
                  };
-                 debugger;
+
                  dataservice.getAudienceData(surveyData, {
                      success: function (data) {
 
@@ -1842,7 +1845,8 @@ define("pQuestion/pQuestion.viewModel",
                  $(".close").click();
              },
                  saveProfileQuestion = function (item) {
-                     debugger;
+
+                     
                      var selectedQuestionstring = $(".active .parent-list-title").text();
                      selectedCriteria().questionString(selectedQuestionstring);
                      selectedCriteria().PQID(item.PQID);
@@ -1865,7 +1869,7 @@ define("pQuestion/pQuestion.viewModel",
                          //}
                          selectedQuestion().ProfileQuestionTargetCriteria.push(new model.ProfileQuestionTargetCriteria.Create({
                              Type: 1,
-                             PqId: selectedCriteria().PQID(),
+                             PQID: selectedCriteria().PQID(),
                              PQAnswerID: selectedCriteria().PQAnswerID(),
                              SqId: selectedCriteria().SQID(),
                              //SQAnswer: selectedCriteria().SQAnswer(),
@@ -1963,7 +1967,7 @@ define("pQuestion/pQuestion.viewModel",
 
                 selectedQuestion().ProfileQuestionTargetCriteria().push(new model.ProfileQuestionTargetCriteria.Create({
                     Type: 6,
-                    PqId: selectedCriteria().PQID(),
+                    PQID: selectedCriteria().PQID(),
                     PqAnswerId: selectedCriteria().PQAnswerID(),
                     AdCampaignAnswer: type,
                     questionString: selectedCriteria().questionString(),
@@ -2037,7 +2041,7 @@ define("pQuestion/pQuestion.viewModel",
                                             myQuizQuestions.valueHasMutated();
                                             TemporaryQuizQuestions.clear;
                                             TemporaryQuizQuestions(myQuizQuestions());
-                                            debugger;
+                                            
                                         }
 
                                     },
