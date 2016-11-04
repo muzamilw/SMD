@@ -21,6 +21,7 @@ define("pQuestion/pQuestion.viewModel",
                     surveyQuestionList = ko.observableArray([]),
                     surveyquestionList = ko.observableArray([]),
                     countries = ko.observableArray([]),
+                    EditPrice = ko.observable(0),
                     userBaseData = ko.observable({ CurrencySymbol: '', isStripeIntegrated: false }),
                     qGroup = ko.observableArray([]),
                     showAnswerTable = ko.observable(false),
@@ -678,7 +679,7 @@ define("pQuestion/pQuestion.viewModel",
                         success: function (data) {
 
                             reachedAudience(data.MatchingUsers);
-
+                         
                             ShowAudienceCounter(GetAudienceCount(data.MatchingUsers));
                             totalAudience(data.AllUsers);
                             SelectedQuestion.answerNeeded(data.MatchingUsers);
@@ -766,18 +767,28 @@ define("pQuestion/pQuestion.viewModel",
 
                     AgeRangeStart(13);
                     AgeRangeEnd(80);
+                     
+
                     isTerminateBtnVisible(false);
                     isShowArchiveBtn(false);
                     if (item.status() == 1 || item.status() == 2 || item.status() == 3 || item.status() == 4 || item.status() == null || item.status() == 7 || item.status() == 9) {
                         canSubmitForApproval(true);
                     }
                     getQuestionAnswer(item.qId());
+                    
+                  
                     selectedQuestion(item);
+                    // debugger;
+
+                  //  selectedQuestion().answerNeeded(2);
+
+
+                 //  selectedQuestion().answerNeeded(ShowSliderPriceOnEdit(item.AmountCharged()));
+
                     if (selectedQuestion().status() == 1) {
                         selectedQuestion().statusValue("Draft");
                     } else if (selectedQuestion().status() == 2) {
                         canSubmitForApproval(false);
-
                         $("input,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
 
 
@@ -1158,7 +1169,7 @@ define("pQuestion/pQuestion.viewModel",
                     onSaveProfileQuestion(1);
                 },
                 onSaveProfileQuestion = function (mode) {
-                    
+                    debugger;
                     if (mode != 7)
                     {
                         if (!doBeforeSavepq()) {
@@ -2163,7 +2174,18 @@ define("pQuestion/pQuestion.viewModel",
                         // $('html, body').animate({ scrollTop: 0 }, 800);
                     }
                 },
+                ShowSliderPriceOnEdit =function(AmountCharged)
+                {
+                 
+                    var p = AmountCharged - 19;
+                    var r = p / 0.04;
+
+                   // EditPrice = AmountCharged - 17.08;
+                    return r.toFixed(2);
+                    //Math.round
+                },
                         totalPrice = ko.computed(function () {
+                           
                             IsShowPriceDiv(true);
                             var setupPrice = 19;
                             var PircePerclick = 0.04;
@@ -2174,13 +2196,18 @@ define("pQuestion/pQuestion.viewModel",
                                 return 0;
                             }
                             else {
-
+                               
+                                calculatePrice = price();
+                                calculatePrice = (setupPrice + (selectedQuestion().answerNeeded() * PircePerclick)).toFixed(2);
+                                selectedQuestion().AmountCharged(calculatePrice);
                                 return "$ " + (setupPrice + (selectedQuestion().answerNeeded() * PircePerclick)).toFixed(2) + " usd";
+
+                              
 
                                 //ansNeeeded = selectedQuestion().answerNeeded();
                                 //if (ansNeeeded > 0 && ansNeeeded <= 1000) {
                                 //    calculatePrice = price();
-                                //    selectedQuestion().amountCharge(calculatePrice);
+                               // selectedQuestion().amountCharge(calculatePrice);
                                 //    return "$ " + calculatePrice + " usd";
                                 //}
                                 //if (ansNeeeded > 1000 && ansNeeeded % 1000 == 0) {
@@ -2427,7 +2454,9 @@ define("pQuestion/pQuestion.viewModel",
                     showAnswerTable: showAnswerTable,
                     IsnewSurveyQuestion: IsnewSurveyQuestion,
                     nextPreviewScreen: nextPreviewScreen,
-                    backScreen: backScreen
+                    backScreen: backScreen,
+                    ShowSliderPriceOnEdit: ShowSliderPriceOnEdit,
+                    EditPrice: EditPrice
                 };
             })()
         };
