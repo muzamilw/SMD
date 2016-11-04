@@ -2829,3 +2829,7 @@ GO
 ALTER TABLE dbo.Notifications SET (LOCK_ESCALATION = TABLE)
 GO
 COMMIT
+
+
+
+--all scripts above executed on live server  11 nov 2016
