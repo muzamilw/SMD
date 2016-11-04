@@ -971,7 +971,11 @@
                                         </div>
                                         <div class="col-lg-6" style="padding-top:8px;padding-right:16px;">
                                             <input id="Ranges" type="range" min="0"
-                                                   oninput="showVal(this.value)" data-bind="attr:{max:$root.reachedAudience,value:$root.reachedAudience}" onchange="showVal(this.value)">
+                                                   oninput="showVal(this.value)" data-bind="attr:{max:$root.reachedAudience,value:$root.reachedAudience},visible:$root.IsnewSurveyQuestion()==true" onchange="showVal(this.value)">
+
+                                            <input id="Ranges" type="range" min="0" value="1"
+                                                   oninput="showVal(this.value)" data-bind="attr:{max:$root.reachedAudience,value:$root.EditPrice},visible:$root.IsnewSurveyQuestion()==false" onchange="showVal(this.value)">
+
                                         </div>
                                         
 
@@ -981,6 +985,7 @@
                                                 <span data-bind="text:$root.reachedAudience" id="show_audience" class="panelfntSize potentreachclr"></span>
                                             </div>
                                         </div>
+
                                     </div>
                                     <div class="col-lg-12">
                                         <div style="float:left;padding-top:4px;width:116px;text-align:right;">
@@ -1590,7 +1595,7 @@
 <script src="/Content/Range/rangeslider.js"></script>
 <script src="/Content/Range/rangeslider.min.js"></script>
 <script type="text/javascript">
-
+    //("#txtPerClick").val(19.04).change();
     $(function () {
         $('#demo').on('.collapse', function (e) {
 
@@ -1600,13 +1605,14 @@
 
         });
     });
-
+   // $("#show_audience").text(GetAudienceCount(19.04)).change();
     $('input[type="range"]').rangeslider({
     });
 
     $('input[type="range"]').rangeslider('update', true);
 
     function showVal(val) {
+        
         $("#show_audience").text(GetAudienceCount(val)).change();
         $("#txtPerClick").val(val).change();
     }
