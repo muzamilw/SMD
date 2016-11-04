@@ -95,12 +95,15 @@ namespace SMD.Implementation.Identity
                 RequireLowercase = false,
                 RequireUppercase = false,
             };
+
             // Configure user lockout defaults
             manager.UserLockoutEnabledByDefault = true;
             manager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
             manager.MaxFailedAccessAttemptsBeforeLockout = 5;
             // Register two factor authentication providers. This application uses Phone and Emails as a step of receiving a code for verifying the user
             // You can write your own provider and plug in here.
+
+
             manager.RegisterTwoFactorProvider("PhoneCode", new PhoneNumberTokenProvider<User, string>
             {
                 MessageFormat = "Your security code is: {0}"
@@ -122,6 +125,8 @@ namespace SMD.Implementation.Identity
 
             
         }
+
+
 
     }
 }

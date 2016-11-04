@@ -85,5 +85,12 @@ namespace SMD.Models.DomainModels
         public string CouponImage6 { get; set; }
         public Nullable<bool> IsPaymentCollected { get; set; }
         public Nullable<System.DateTime> PaymentDate { get; set; }
+        public Nullable<bool> IsShowReviews { get; set; }
+        public Nullable<bool> IsShowAddress { get; set; }
+        public Nullable<bool> IsShowPhoneNo { get; set; }
+        public Nullable<bool> IsShowMap { get; set; }
+        public Nullable<bool> IsShowyouTube { get; set; }
+        public Nullable<bool> IsShowAboutUs { get; set; }
+     
     }
 }

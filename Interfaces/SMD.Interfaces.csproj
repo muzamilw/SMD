@@ -98,6 +98,9 @@
     <Compile Include="Repository\ICouponCodeRepository.cs" />
     <Compile Include="Repository\ICouponRepository.cs" />
     <Compile Include="Repository\IManageUserRepository.cs" />
+    <Compile Include="Repository\INotificationRepository.cs" />
+    <Compile Include="Repository\ISurveySharingGroupRepository.cs" />
+    <Compile Include="Repository\ISurveySharingGroupMemberRepository.cs" />
     <Compile Include="Repository\ISurveyQuestionResponseRepository.cs" />
     <Compile Include="Repository\IEducationRepository.cs" />
     <Compile Include="Repository\IIndustryRepository.cs" />
@@ -105,6 +108,8 @@
     <Compile Include="Repository\IInvoiceRepository.cs" />
     <Compile Include="Repository\IAdCampaignClickRateHistoryRepository.cs" />
     <Compile Include="Repository\ICampaignEventHistoryRepository.cs" />
+    <Compile Include="Repository\ISharedSurveyQuestionRepository.cs" />
+    <Compile Include="Repository\ISurveySharingGroupShareRepository.cs" />
     <Compile Include="Repository\IUserCouponViewRepository.cs" />
     <Compile Include="Repository\ITaxRepository.cs" />
     <Compile Include="Repository\IProductRepository.cs" />
@@ -155,6 +160,9 @@
     <Compile Include="Services\IProfileQuestionAnswerService.cs" />
     <Compile Include="Services\IProfileQuestionUserAnswerService.cs" />
     <Compile Include="Services\ISectionService.cs" />
+    <Compile Include="Services\ISurveySharingGroupService.cs" />
+    <Compile Include="Services\ISharedSurveyQuestionService.cs" />
+    <Compile Include="Services\ISmsService.cs" />
     <Compile Include="Services\IStripeService.cs" />
     <Compile Include="Services\ITransactionLogService.cs" />
     <Compile Include="Services\ITransactionService.cs" />

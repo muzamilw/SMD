@@ -55,6 +55,10 @@ namespace SMD.Implementation
             unityContainer.RegisterType<IActiveUser, ActiveUser>();
             unityContainer.RegisterType<IDashboardService, DashboardService>();
             unityContainer.RegisterType<IPayOutHistoryService, PayOutHistoryService>();
+            unityContainer.RegisterType<ISmsServiceCustom, SmsServiceCustom>();
+            unityContainer.RegisterType<ISurveySharingGroupService, SurveySharingGroupService>();
+            unityContainer.RegisterType<ISurveyQuestionService, SurveyQuestionService>();
+            
             
         }
     }

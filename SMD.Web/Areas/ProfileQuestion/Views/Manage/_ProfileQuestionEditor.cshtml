@@ -134,14 +134,14 @@
                     </div>
                 </div>
                 <div class="col-lg-12 padding0px">
-                    <div class="col-lg-9">
+                    @*<div class="col-lg-9">
                         <div class="clearfix" data-bind="visible: $root.isAdvertdashboardSurvayVisible()">
                             <span class="pull-left " style="color:black!important; padding-left: 0px; font-size: 23px;" data-bind="text: questionString"></span>
                             <div style="float:right;margin-top:-9px;"><img data-bind="click: $root.CloseSurvayAnalyticView" src="/Content/Images/Close_Button.png" style="width:27px;height:27px;float:right;cursor:pointer;"></div>
                         </div>
                     </div>
                     <div class="col-lg-3">
-                    </div>
+                    </div>*@
                     <div class="no-header clearfix col-lg-9 form-horizontal" data-bind="visible: !$root.isAdvertdashboardSurvayVisible()" style="padding-left:0px;">
                         <div class="main-box clearfix" id="tabsHeader" style="padding-left:20px;padding-right:20px;" data-bind="visible: $root.previewScreenNumber() == 1">
                             <div class="tabs-wrapper profile-tabs">
@@ -401,7 +401,9 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 textalignright padding0px" >
+                                                <!--ko if:$root.getSortedAnswers().length ==  0 -->
                                                 <span class="message_label pull-left">No responses created yet.</span>
+                                                <!--/ko-->
                                                 <a href="#" id="addTemplatePageBtn" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bs-example-modal-lg1" data-bind="click: $root.addNewAnswer, visible: $root.CanAddAnswers()">
                                                     Add Answer
                                                 </a>
@@ -623,6 +625,21 @@
                                                         <!--/ko-->
                                                     </div>
                                                     <div class="col-lg-1"></div>
+                                                </div>
+
+                                              
+                                            </div>
+                                            <div class="form-group">
+                                                
+                                                <div class="col-lg-12">
+                                                    <div class="pull-right col-lg-2" style="padding-left:26px;">
+                                                        <button class="btn  btn-success gtild-color" id="btnNext" data-bind="visible:$root.previewScreenNumber()==1,click:$root.nextPreviewScreen">Next</button>
+                                                    </div>
+                                                    <div class="pull-left col-lg-10" style="text-align:right;padding-right:32px;">
+                                                        <button class="btn  btn-success gtild-color" id="btnBack" data-bind="visible:$root.previewScreenNumber() > 1, click:$root.backScreen">Back</button>
+                                                    </div>
+                                                    <div class="clearfix">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -896,6 +913,26 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="form-group">
+                                    <div class="col-lg-3">
+                                        &nbsp;
+                                    </div>
+                                    <div class="col-lg-3">
+                                        &nbsp;
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="pull-right col-lg-5" style="padding-left:20px;">
+                                            <button class="btn  btn-success gtild-color" id="btnNext" data-bind="visible:$root.previewScreenNumber() ==1,click:$root.nextPreviewScreen">Next</button>
+                                        </div>
+                                        <div class="pull-left col-lg-7" style="text-align:right;padding-right:25px;">
+                                            <button class="btn  btn-success gtild-color" id="btnBack" data-bind="visible:$root.previewScreenNumber() > 1, click:$root.backScreen">Back</button>
+                                        </div>
+                                        <div class="clearfix">
+
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="adBottomHeading" data-bind="visible: $root.previewScreenNumber() == 1">
                                 Advertising to mobile users has overtaken all other forms<br />
@@ -934,7 +971,11 @@
                                         </div>
                                         <div class="col-lg-6" style="padding-top:8px;padding-right:16px;">
                                             <input id="Ranges" type="range" min="0"
-                                                   oninput="showVal(this.value)" data-bind="attr:{max:$root.reachedAudience,value:$root.reachedAudience}" onchange="showVal(this.value)">
+                                                   oninput="showVal(this.value)" data-bind="attr:{max:$root.reachedAudience,value:$root.reachedAudience},visible:$root.IsnewSurveyQuestion()==true" onchange="showVal(this.value)">
+
+                                            <input id="Ranges" type="range" min="0" value="1"
+                                                   oninput="showVal(this.value)" data-bind="attr:{max:$root.reachedAudience,value:$root.EditPrice},visible:$root.IsnewSurveyQuestion()==false" onchange="showVal(this.value)">
+
                                         </div>
                                         
 
@@ -944,6 +985,7 @@
                                                 <span data-bind="text:$root.reachedAudience" id="show_audience" class="panelfntSize potentreachclr"></span>
                                             </div>
                                         </div>
+
                                     </div>
                                     <div class="col-lg-12">
                                         <div style="float:left;padding-top:4px;width:116px;text-align:right;">
@@ -1553,7 +1595,7 @@
 <script src="/Content/Range/rangeslider.js"></script>
 <script src="/Content/Range/rangeslider.min.js"></script>
 <script type="text/javascript">
-
+    //("#txtPerClick").val(19.04).change();
     $(function () {
         $('#demo').on('.collapse', function (e) {
 
@@ -1563,13 +1605,14 @@
 
         });
     });
-
+   // $("#show_audience").text(GetAudienceCount(19.04)).change();
     $('input[type="range"]').rangeslider({
     });
 
     $('input[type="range"]').rangeslider('update', true);
 
     function showVal(val) {
+        
         $("#show_audience").text(GetAudienceCount(val)).change();
         $("#txtPerClick").val(val).change();
     }

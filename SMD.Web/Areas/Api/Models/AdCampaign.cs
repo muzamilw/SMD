@@ -198,5 +198,11 @@ namespace SMD.MIS.Areas.Api.Models
         public Nullable<System.DateTime> PaymentDate { get; set; }
         
         public virtual IEnumerable<CouponPriceOption> CouponPriceOptions { get; set; }
+        public Nullable<bool> IsShowReviews { get; set; }
+        public Nullable<bool> IsShowAddress { get; set; }
+        public Nullable<bool> IsShowPhoneNo { get; set; }
+        public Nullable<bool> IsShowMap { get; set; }
+        public Nullable<bool> IsShowyouTube { get; set; }
+        public Nullable<bool> IsShowAboutUs { get; set; }
     }
 }

@@ -110,7 +110,7 @@ namespace DomainModelProject
         public virtual ICollection<UserPurchasedCoupon> UserPurchasedCoupons { get; set; }
         public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }
         public virtual ICollection<CouponPriceOption> CouponPriceOptions { get; set; }
-        public virtual Company Company { get; set; }
         public virtual ICollection<CampaignEventHistory> CampaignEventHistories { get; set; }
+        public virtual Company Company { get; set; }
     }
 }

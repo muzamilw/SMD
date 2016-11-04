@@ -216,7 +216,7 @@
                   priority: priority,
                   VoucherImagePath: VoucherImagePath,
                   CouponDiscountValue: CouponDiscountValue,
-                  DeliveryDays: DeliveryDays,
+                //  DeliveryDays: DeliveryDays,
                   CouponCodes: CouponCodes,
                   IsUseFilter: IsUseFilter,
                   CouponType: CouponType,

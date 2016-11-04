@@ -761,7 +761,7 @@ namespace SMD.Implementation.Services
                     dbCo.ApprovalDateTime = DateTime.Now;
                     dbCo.ApprovedBy = couponRepository.LoggedInUserIdentity;
                     dbCo.Status = (Int32)AdCampaignStatus.Live;
-                    if (dbCo.IsPaymentCollected != true)
+                    if (dbCo.IsPaymentCollected != true && dbCo.CouponListingMode!=1)
                     {
                         dbCo.IsPaymentCollected = true;
                         dbCo.PaymentDate = DateTime.Now;
@@ -943,6 +943,10 @@ namespace SMD.Implementation.Services
         public bool PauseAllCoupons(int CompanyId)
         {
             return couponRepository.PauseAllCoupons(CompanyId);
+        }
+        public int GetFreeCouponCount()
+        {
+            return couponRepository.GetFreeCouponCount();
         }
 
         #endregion

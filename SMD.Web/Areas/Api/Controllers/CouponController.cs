@@ -11,7 +11,7 @@ namespace SMD.MIS.Areas.Api.Controllers
 {
     public class CouponController : ApiController
     {
-        
+
         #region Public
         private readonly ICouponService _couponService;
         #endregion
@@ -43,14 +43,12 @@ namespace SMD.MIS.Areas.Api.Controllers
                 {
                     return _couponService.GetCouponById(request.CampaignId).CreateCampaignFrom();
                 }
-                else 
+                else
                 {
                     return _couponService.GetCoupons(request).CreateCampaignFrom();
                 }
             }
         }
-
-
         public void Post(SMD.Models.DomainModels.Coupon couponModel)
         {
             //couponModel.Status = (int)AdCampaignStatus.Draft;
@@ -64,7 +62,7 @@ namespace SMD.MIS.Areas.Api.Controllers
                 _couponService.CreateCampaign(couponModel);
 
             }
-           
+
         }
         #endregion
     }

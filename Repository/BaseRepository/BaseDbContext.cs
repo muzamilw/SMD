@@ -291,6 +291,14 @@ namespace SMD.Repository.BaseRepository
         public DbSet<CouponPriceOption> CouponPriceOption { get; set; }
 
 
+        public DbSet<SurveySharingGroup> SurveySharingGroup { get; set; }
+        public DbSet<SurveySharingGroupMember> SurveySharingGroupMember { get; set; }
+        public DbSet<Notification> Notification { get; set; }
+        public DbSet<SurveySharingGroupShare> SurveySharingGroupShare { get; set; }
+        public DbSet<SharedSurveyQuestion> SharedSurveyQuestion { get; set; }
+
+
+
 
 
         /// <summary>

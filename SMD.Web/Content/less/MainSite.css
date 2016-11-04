@@ -998,8 +998,8 @@ div#spinner {
 }
 #btnNext,#btnBack {
     
- background-color: gainsboro!important;
-    border-color:gainsboro!important;
+ background-color: #127abd!important;
+ border-color:#127abd!important;
 
 }
 .filterbtnclrs {
@@ -1460,4 +1460,8 @@ margin-top:2px;
 }
 .paddingtop0px {
     padding-top:0px!important;
+}
+.charts_label {
+  color:#3498db;
+  font-size:17px;
 }

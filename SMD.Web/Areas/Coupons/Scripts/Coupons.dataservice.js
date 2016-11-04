@@ -59,13 +59,18 @@ define("Coupons/Coupons.dataservice", function () {
                     });
 
                     // 
-                    amplify.request.define('generateCouponCodes', 'ajax', {
-                        url: '/Api/GenerateCoupon',
-                        dataType: 'json',
-                        ////dataMap: JSON.stringify,
-                        //contentType: "application/json; charset=utf-8",
-                        type: 'Get'
-                    });
+					amplify.request.define('generateCouponCodes', 'ajax', {
+					    url: '/Api/GenerateCoupon',
+					    dataType: 'json',
+					    ////dataMap: JSON.stringify,
+					    //contentType: "application/json; charset=utf-8",
+					    type: 'Get'
+					});
+					amplify.request.define('getfreeCouponCount', 'ajax', {
+					    url: '/Api/CouponCount',
+					    dataType: 'json',
+					    type: 'GET'
+					});
                 }
             };
 		getDealsAnalytics = function (params, callbacks) {
@@ -141,7 +146,16 @@ define("Coupons/Coupons.dataservice", function () {
                      success: callbacks.success,
                      error: callbacks.error,
                  });
-             }
+        },
+           getfreeCouponCount = function (callbacks) {
+            initialize();
+            
+            return amplify.request({
+                resourceId: 'getfreeCouponCount',
+                success: callbacks.success,
+                error: callbacks.error,
+            });
+        }
         return {
             getBaseData: getBaseData,
             getCampaignData: getCampaignData,
@@ -150,7 +164,8 @@ define("Coupons/Coupons.dataservice", function () {
             getAudienceData: getAudienceData,
             copyCampaignById: copyCampaignById,
             generateCouponCodes: generateCouponCodes,
-			getDealsAnalytics:getDealsAnalytics
+            getDealsAnalytics: getDealsAnalytics,
+            getfreeCouponCount: getfreeCouponCount
         };
     })();
     return dataService;

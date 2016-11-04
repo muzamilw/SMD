@@ -386,6 +386,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Api\Controllers\CouponAnalyticsController.cs" />
     <Compile Include="Areas\Api\Controllers\ApprovePayOutHistoryController.cs" />
+    <Compile Include="Areas\Api\Controllers\CouponCountController.cs" />
     <Compile Include="Areas\Api\Controllers\StripeSubscribeCustomerController.cs" />
     <Compile Include="Areas\Api\Controllers\GetApprovalCountController.cs" />
     <Compile Include="Areas\Api\Controllers\AdsCampaignAnalyticController.cs" />
@@ -396,6 +397,7 @@
     <Compile Include="Areas\Api\Controllers\RegisteredUsersController.cs" />
     <Compile Include="Areas\Api\Controllers\SuperNovaCampaignController.cs" />
     <Compile Include="Areas\Api\Controllers\SurvayQuestionAnalyticController.cs" />
+    <Compile Include="Areas\Api\Controllers\SurveySharingGroupController.cs" />
     <Compile Include="Areas\Api\Controllers\UserFeedbackController.cs" />
     <Compile Include="Areas\Api\Controllers\UserController.cs" />
     <Compile Include="Areas\Api\Controllers\ApproveProfileQuestionAnsController.cs" />
@@ -444,6 +446,7 @@
     <Compile Include="Areas\Api\Models\Section.cs" />
     <Compile Include="Areas\Api\Models\CompanyApiModel.cs" />
     <Compile Include="Areas\Api\Models\SurvayBySQIDForAnalyticsResponse.cs" />
+    <Compile Include="Areas\Api\Models\SurveySharingGroupApiModel.cs" />
     <Compile Include="Areas\Coupons\CouponsAreaRegistration.cs" />
     <Compile Include="Areas\Coupons\Controllers\CouponsController.cs" />
     <Compile Include="Areas\Ads\AdsAreaRegistration.cs" />
@@ -1205,6 +1208,20 @@
     <Content Include="Content\themes\Centaurus\js\xcharts.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="games\bouncingball\Bounce_files\abg.js" />
+    <Content Include="games\bouncingball\Bounce_files\bundle-cmp.js" />
+    <Content Include="games\bouncingball\Bounce_files\desktop.css" />
+    <Content Include="games\bouncingball\Bounce_files\ima3_debug.js" />
+    <Content Include="games\bouncingball\Bounce_files\kik.js" />
+    <Content Include="games\bouncingball\Bounce_files\layout_engine.js" />
+    <Content Include="games\bouncingball\Bounce_files\osd.js" />
+    <Content Include="games\bouncingball\Bounce_files\scream_V3_display_url_single_css.css" />
+    <Content Include="games\bouncingball\Bounce_files\scream_V3_display_url_single_css.js" />
+    <Content Include="games\bouncingball\Bounce_files\style.css" />
+    <Content Include="games\bouncingball\img\blk.jpg" />
+    <Content Include="games\bouncingball\img\kik.png" />
+    <Content Include="games\bouncingball\img\more.png" />
+    <Content Include="games\bouncingball\index.html" />
     <Content Include="Global.asax" />
     <Content Include="Images\1_Splash_screen_1.png" />
     <Content Include="Images\accent.png" />

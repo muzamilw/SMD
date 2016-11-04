@@ -748,6 +748,7 @@
           <Property Name="IsRead" Type="bit" />
           <Property Name="GeneratedOn" Type="datetime" />
           <Property Name="GeneratedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="SurveyQuestionShareId" Type="bigint" />
         </EntityType>
         <EntityType Name="PayOutHistory">
           <Key>
@@ -917,6 +918,28 @@
           <Property Name="SectionName" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="SecOrder" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="SharedSurveyQuestion">
+          <Key>
+            <PropertyRef Name="SSQID" />
+          </Key>
+          <Property Name="SSQID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="SurveyTitle" Type="nvarchar" MaxLength="200" />
+          <Property Name="LeftPicturePath" Type="nvarchar" MaxLength="300" />
+          <Property Name="RightPicturePath" Type="nvarchar" MaxLength="300" />
+          <Property Name="CreationDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SharedSurveyQuestionResponse">
+          <Key>
+            <PropertyRef Name="SSQResponseId" />
+          </Key>
+          <Property Name="SSQResponseId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SSQID" Type="bigint" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="ResponseDateTime" Type="datetime" />
+          <Property Name="UserSelection" Type="int" />
+        </EntityType>
         <EntityType Name="SurveyQuestion">
           <Key>
             <PropertyRef Name="SQID" />
@@ -999,6 +1022,38 @@
           <Property Name="CityID" Type="int" />
           <Property Name="Radius" Type="int" />
           <Property Name="IncludeorExclude" Type="bit" />
+        </EntityType>
+        <EntityType Name="SurveySharingGroup">
+          <Key>
+            <PropertyRef Name="SharingGroupId" />
+          </Key>
+          <Property Name="SharingGroupId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="GroupName" Type="nvarchar" MaxLength="500" />
+          <Property Name="CreationDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SurveySharingGroupMembers">
+          <Key>
+            <PropertyRef Name="SharingGroupMemberId" />
+          </Key>
+          <Property Name="SharingGroupMemberId" Type="bigint" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="150" />
+          <Property Name="MemberStatus" Type="int" />
+          <Property Name="SharingGroupId" Type="bigint" />
+        </EntityType>
+        <EntityType Name="SurveySharingGroupShares">
+          <Key>
+            <PropertyRef Name="SurveyQuestionShareId" />
+          </Key>
+          <Property Name="SurveyQuestionShareId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SharingGroupId" Type="bigint" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="SharingGroupMemberId" Type="bigint" />
+          <Property Name="SharingDate" Type="datetime" />
+          <Property Name="SSQID" Type="bigint" />
+          <Property Name="Status" Type="int" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -1947,6 +2002,18 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Notifications_SurveySharingGroupShares">
+          <End Role="SurveySharingGroupShares" Type="Self.SurveySharingGroupShares" Multiplicity="0..1" />
+          <End Role="Notifications" Type="Self.Notifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SurveySharingGroupShares">
+              <PropertyRef Name="SurveyQuestionShareId" />
+            </Principal>
+            <Dependent Role="Notifications">
+              <PropertyRef Name="SurveyQuestionShareId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PayOutHistory_Company">
           <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
           <End Role="PayOutHistory" Type="Self.PayOutHistory" Multiplicity="*" />
@@ -2172,6 +2239,18 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             </Principal>
             <Dependent Role="Phrase">
               <PropertyRef Name="SectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SharedSurveyQuestionResponse_SharedSurveyQuestion">
+          <End Role="SharedSurveyQuestion" Type="Self.SharedSurveyQuestion" Multiplicity="0..1" />
+          <End Role="SharedSurveyQuestionResponse" Type="Self.SharedSurveyQuestionResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SharedSurveyQuestion">
+              <PropertyRef Name="SSQID" />
+            </Principal>
+            <Dependent Role="SharedSurveyQuestionResponse">
+              <PropertyRef Name="SSQID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2412,6 +2491,42 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             </Principal>
             <Dependent Role="SurveyQuestionTargetLocation">
               <PropertyRef Name="SQID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurveySharingGroupMembers_SurveySharingGroup">
+          <End Role="SurveySharingGroup" Type="Self.SurveySharingGroup" Multiplicity="0..1" />
+          <End Role="SurveySharingGroupMembers" Type="Self.SurveySharingGroupMembers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SurveySharingGroup">
+              <PropertyRef Name="SharingGroupId" />
+            </Principal>
+            <Dependent Role="SurveySharingGroupMembers">
+              <PropertyRef Name="SharingGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurveySharingGroupShares_SharedSurveyQuestion">
+          <End Role="SharedSurveyQuestion" Type="Self.SharedSurveyQuestion" Multiplicity="0..1" />
+          <End Role="SurveySharingGroupShares" Type="Self.SurveySharingGroupShares" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SharedSurveyQuestion">
+              <PropertyRef Name="SSQID" />
+            </Principal>
+            <Dependent Role="SurveySharingGroupShares">
+              <PropertyRef Name="SSQID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurveySharingGroupShares_SurveySharingGroupMembers">
+          <End Role="SurveySharingGroupMembers" Type="Self.SurveySharingGroupMembers" Multiplicity="0..1" />
+          <End Role="SurveySharingGroupShares" Type="Self.SurveySharingGroupShares" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SurveySharingGroupMembers">
+              <PropertyRef Name="SharingGroupMemberId" />
+            </Principal>
+            <Dependent Role="SurveySharingGroupShares">
+              <PropertyRef Name="SharingGroupMemberId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2668,10 +2783,15 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySet Name="ProfileQuestionTargetLocation" EntityType="Self.ProfileQuestionTargetLocation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProfileQuestionUserAnswer" EntityType="Self.ProfileQuestionUserAnswer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Section" EntityType="Self.Section" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SharedSurveyQuestion" EntityType="Self.SharedSurveyQuestion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SharedSurveyQuestionResponse" EntityType="Self.SharedSurveyQuestionResponse" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SurveyQuestion" EntityType="Self.SurveyQuestion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SurveyQuestionResponse" EntityType="Self.SurveyQuestionResponse" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SurveyQuestionTargetCriteria" EntityType="Self.SurveyQuestionTargetCriteria" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SurveyQuestionTargetLocation" EntityType="Self.SurveyQuestionTargetLocation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SurveySharingGroup" EntityType="Self.SurveySharingGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SurveySharingGroupMembers" EntityType="Self.SurveySharingGroupMembers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SurveySharingGroupShares" EntityType="Self.SurveySharingGroupShares" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SystemMails" EntityType="Self.SystemMails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tax" EntityType="Self.Tax" Schema="dbo" store:Type="Tables" />
@@ -3017,6 +3137,10 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <End Role="SurveyQuestion" EntitySet="SurveyQuestion" />
             <End Role="InvoiceDetail" EntitySet="InvoiceDetail" />
           </AssociationSet>
+          <AssociationSet Name="FK_Notifications_SurveySharingGroupShares" Association="Self.FK_Notifications_SurveySharingGroupShares">
+            <End Role="SurveySharingGroupShares" EntitySet="SurveySharingGroupShares" />
+            <End Role="Notifications" EntitySet="Notifications" />
+          </AssociationSet>
           <AssociationSet Name="FK_PayOutHistory_Company" Association="Self.FK_PayOutHistory_Company">
             <End Role="Company" EntitySet="Company" />
             <End Role="PayOutHistory" EntitySet="PayOutHistory" />
@@ -3092,6 +3216,10 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <AssociationSet Name="fk_sectionId" Association="Self.fk_sectionId">
             <End Role="Section" EntitySet="Section" />
             <End Role="Phrase" EntitySet="Phrase" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SharedSurveyQuestionResponse_SharedSurveyQuestion" Association="Self.FK_SharedSurveyQuestionResponse_SharedSurveyQuestion">
+            <End Role="SharedSurveyQuestion" EntitySet="SharedSurveyQuestion" />
+            <End Role="SharedSurveyQuestionResponse" EntitySet="SharedSurveyQuestionResponse" />
           </AssociationSet>
           <AssociationSet Name="FK_SMDPrice_Country" Association="Self.FK_SMDPrice_Country">
             <End Role="Country" EntitySet="Country" />
@@ -3172,6 +3300,18 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <AssociationSet Name="FK_SurveyQuestionTargetLocation_SurveyQuestion" Association="Self.FK_SurveyQuestionTargetLocation_SurveyQuestion">
             <End Role="SurveyQuestion" EntitySet="SurveyQuestion" />
             <End Role="SurveyQuestionTargetLocation" EntitySet="SurveyQuestionTargetLocation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveySharingGroupMembers_SurveySharingGroup" Association="Self.FK_SurveySharingGroupMembers_SurveySharingGroup">
+            <End Role="SurveySharingGroup" EntitySet="SurveySharingGroup" />
+            <End Role="SurveySharingGroupMembers" EntitySet="SurveySharingGroupMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveySharingGroupShares_SharedSurveyQuestion" Association="Self.FK_SurveySharingGroupShares_SharedSurveyQuestion">
+            <End Role="SharedSurveyQuestion" EntitySet="SharedSurveyQuestion" />
+            <End Role="SurveySharingGroupShares" EntitySet="SurveySharingGroupShares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveySharingGroupShares_SurveySharingGroupMembers" Association="Self.FK_SurveySharingGroupShares_SurveySharingGroupMembers">
+            <End Role="SurveySharingGroupMembers" EntitySet="SurveySharingGroupMembers" />
+            <End Role="SurveySharingGroupShares" EntitySet="SurveySharingGroupShares" />
           </AssociationSet>
           <AssociationSet Name="FK_Tax_Country" Association="Self.FK_Tax_Country">
             <End Role="Country" EntitySet="Country" />
@@ -3324,12 +3464,12 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="MaxDailyBudget" Type="Double" />
           <Property Name="SubmissionDateTime" Type="DateTime" Precision="3" />
           <NavigationProperty Name="SurveyQuestionTargetCriterias" Relationship="SMDDevModel.FK_SurveyQuestionTargetCriteria_AdCampaign" FromRole="AdCampaign" ToRole="SurveyQuestionTargetCriteria" />
-          <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_AdCampaign_Company" FromRole="AdCampaign" ToRole="Company" />
           <NavigationProperty Name="CampaignEventHistories" Relationship="SMDDevModel.FK_CampaignEventHistory_AdCampaign" FromRole="AdCampaign" ToRole="CampaignEventHistory" />
           <NavigationProperty Name="AdCampaignClickRateHistories" Relationship="SMDDevModel.FK_AdCampaignClickRateHistory_AdCampaign" FromRole="AdCampaign" ToRole="AdCampaignClickRateHistory" />
           <Property Name="ShowBuyitBtn" Type="Boolean" />
           <Property Name="IsPaymentCollected" Type="Boolean" />
           <Property Name="PaymentDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_AdCampaign_Company" FromRole="AdCampaign" ToRole="Company" />
         </EntityType>
         <EntityType Name="AdCampaignResponse">
           <Key>
@@ -3497,10 +3637,10 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="optDealsNearMeEmails" Type="Boolean" />
           <Property Name="optLatestNewsEmails" Type="Boolean" />
           <Property Name="optMarketingEmails" Type="Boolean" />
-          <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_AspNetUsers_Company" FromRole="AspNetUser" ToRole="Company" />
           <Property Name="PassportNo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="Title" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="ProfileQuestionUserAnswers" Relationship="SMDDevModel.FK_ProfileQuestionUserAnswer_AspNetUsers" FromRole="AspNetUser" ToRole="ProfileQuestionUserAnswer" />
+          <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_AspNetUsers_Company" FromRole="AspNetUser" ToRole="Company" />
         </EntityType>
         <EntityType Name="AuditLog">
           <Key>
@@ -3587,8 +3727,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <NavigationProperty Name="BranchCategory" Relationship="Self.FK_CompanyBranch_BranchCategory" FromRole="CompanyBranch" ToRole="BranchCategory" />
           <NavigationProperty Name="Coupons" Relationship="Self.FK_Coupon_CompanyBranch" FromRole="CompanyBranch" ToRole="Coupon" />
           <Property Name="CountryId" Type="Int32" />
-          <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_CompanyBranch_Company" FromRole="CompanyBranch" ToRole="Company" />
           <Property Name="IsDefault" Type="Boolean" />
+          <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_CompanyBranch_Company" FromRole="CompanyBranch" ToRole="Company" />
         </EntityType>
         <EntityType Name="Country">
           <Key>
@@ -3604,10 +3744,10 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <NavigationProperty Name="SurveyQuestionTargetLocations" Relationship="Self.FK_SurveyQuestionTargetLocation_Country" FromRole="Country" ToRole="SurveyQuestionTargetLocation" />
           <NavigationProperty Name="Taxes" Relationship="Self.FK_Tax_Country" FromRole="Country" ToRole="Tax" />
           <NavigationProperty Name="ProfileQuestionTargetLocations" Relationship="SMDDevModel.FK_ProfileQuestionTargetLocation_Country" FromRole="Country" ToRole="ProfileQuestionTargetLocation" />
-          <NavigationProperty Name="Companies" Relationship="SMDDevModel.FK_Company_Country" FromRole="Country" ToRole="Company" />
           <Property Name="CurrencyID" Type="Int32" />
           <NavigationProperty Name="Currency" Relationship="SMDDevModel.FK_Country_Currency" FromRole="Country" ToRole="Currency" />
           <NavigationProperty Name="Cities" Relationship="SMDDevModel.FK_City_Country" FromRole="Country" ToRole="City" />
+          <NavigationProperty Name="Companies" Relationship="SMDDevModel.FK_Company_Country" FromRole="Country" ToRole="Company" />
         </EntityType>
         <EntityType Name="Coupon">
           <Key>
@@ -3687,7 +3827,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="BuyitLandingPageUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="BuyitBtnLabel" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CouponPriceOptions" Relationship="SMDDevModel.FK_CouponPriceOption_Coupon" FromRole="Coupon" ToRole="CouponPriceOption" />
-          <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_Coupon_Company" FromRole="Coupon" ToRole="Company" />
           <NavigationProperty Name="CampaignEventHistories" Relationship="SMDDevModel.FK_CampaignEventHistory_Coupon" FromRole="Coupon" ToRole="CampaignEventHistory" />
           <Property Name="YoutubeLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="CouponImage4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -3701,6 +3840,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="IsShowMap" Type="Boolean" />
           <Property Name="IsShowyouTube" Type="Boolean" />
           <Property Name="IsShowAboutUs" Type="Boolean" />
+          <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_Coupon_Company" FromRole="Coupon" ToRole="Company" />
         </EntityType>
         <EntityType Name="CouponCode">
           <Key>
@@ -3835,9 +3975,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="CreditCardRef" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="CompanyId" Type="Int32" />
           <NavigationProperty Name="InvoiceDetails" Relationship="Self.FK_InvoiceDetail_Invoice" FromRole="Invoice" ToRole="InvoiceDetail" />
-          <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_Invoice_Company" FromRole="Invoice" ToRole="Company" />
           <Property Name="StripeReceiptNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="StripeInvoiceId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_Invoice_Company" FromRole="Invoice" ToRole="Company" />
         </EntityType>
         <EntityType Name="InvoiceDetail">
           <Key>
@@ -3907,6 +4047,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="IsRead" Type="Boolean" />
           <Property Name="GeneratedOn" Type="DateTime" Precision="3" />
           <Property Name="GeneratedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="SurveyQuestionShareId" Type="Int64" />
+          <NavigationProperty Name="SurveySharingGroupShare" Relationship="SMDDevModel.FK_Notifications_SurveySharingGroupShares" FromRole="Notification" ToRole="SurveySharingGroupShare" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -3981,9 +4123,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="AmountCharged" Type="Double" />
           <Property Name="StartDate" Type="DateTime" Precision="3" />
           <Property Name="EndDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_ProfileQuestion_Company" FromRole="ProfileQuestion" ToRole="Company" />
           <NavigationProperty Name="CampaignEventHistories" Relationship="SMDDevModel.FK_CampaignEventHistory_ProfileQuestion" FromRole="ProfileQuestion" ToRole="CampaignEventHistory" />
           <NavigationProperty Name="ProfileQuestionUserAnswers" Relationship="SMDDevModel.FK_ProfileQuestionUserAnswer_ProfileQuestion" FromRole="ProfileQuestion" ToRole="ProfileQuestionUserAnswer" />
+          <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_ProfileQuestion_Company" FromRole="ProfileQuestion" ToRole="Company" />
         </EntityType>
         <EntityType Name="ProfileQuestionAnswer">
           <Key>
@@ -4070,8 +4212,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="AnswerNeeded" Type="Int32" />
           <Property Name="AmountCharged" Type="Double" />
           <NavigationProperty Name="ProfileQuestionTargetCriterias" Relationship="SMDDevModel.FK_ProfileQuestionTargetCriteria_ProfileQuestion1" FromRole="SurveyQuestion" ToRole="ProfileQuestionTargetCriteria" />
-          <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_SurveyQuestion_Company" FromRole="SurveyQuestion" ToRole="Company" />
           <NavigationProperty Name="CampaignEventHistories" Relationship="SMDDevModel.FK_CampaignEventHistory_SurveyQuestion" FromRole="SurveyQuestion" ToRole="CampaignEventHistory" />
+          <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_SurveyQuestion_Company" FromRole="SurveyQuestion" ToRole="Company" />
         </EntityType>
         <EntityType Name="SurveyQuestionResponse">
           <Key>
@@ -5296,63 +5438,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <End Role="Coupon" EntitySet="Coupons" />
             <End Role="CouponPriceOption" EntitySet="CouponPriceOptions" />
           </AssociationSet>
-          <EntitySet Name="Companies" EntityType="SMDDevModel.Company" />
-          <AssociationSet Name="FK_Account_Company" Association="SMDDevModel.FK_Account_Company">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="Account" EntitySet="Accounts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AdCampaign_Company" Association="SMDDevModel.FK_AdCampaign_Company">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="AdCampaign" EntitySet="AdCampaigns" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AdCampaignResponse_Company" Association="SMDDevModel.FK_AdCampaignResponse_Company">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="AdCampaignResponse" EntitySet="AdCampaignResponses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AspNetUsers_Company" Association="SMDDevModel.FK_AspNetUsers_Company">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BranchCategory_Company" Association="SMDDevModel.FK_BranchCategory_Company">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="BranchCategory" EntitySet="BranchCategories" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CompaniesAspNetUsers_Company" Association="SMDDevModel.FK_CompaniesAspNetUsers_Company">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="CompaniesAspNetUser" EntitySet="CompaniesAspNetUsers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Company_Country" Association="SMDDevModel.FK_Company_Country">
-            <End Role="Country" EntitySet="Countries" />
-            <End Role="Company" EntitySet="Companies" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CompanyBranch_Company" Association="SMDDevModel.FK_CompanyBranch_Company">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="CompanyBranch" EntitySet="CompanyBranches" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Coupon_Company" Association="SMDDevModel.FK_Coupon_Company">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="Coupon" EntitySet="Coupons" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DamImages_Company" Association="SMDDevModel.FK_DamImages_Company">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="DamImage" EntitySet="DamImages" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Invoice_Company" Association="SMDDevModel.FK_Invoice_Company">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="Invoice" EntitySet="Invoices" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProfileQuestion_Company" Association="SMDDevModel.FK_ProfileQuestion_Company">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="ProfileQuestion" EntitySet="ProfileQuestions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SurveyQuestion_Company" Association="SMDDevModel.FK_SurveyQuestion_Company">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="SurveyQuestion" EntitySet="SurveyQuestions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SurveyQuestionResponse_Company" Association="SMDDevModel.FK_SurveyQuestionResponse_Company">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="SurveyQuestionResponse" EntitySet="SurveyQuestionResponses" />
-          </AssociationSet>
           <EntitySet Name="vw_Coupons" EntityType="SMDDevModel.vw_Coupons" />
           <AssociationSet Name="FK_Country_Currency" Association="SMDDevModel.FK_Country_Currency">
             <End Role="Currency" EntitySet="Currencies" />
@@ -5494,10 +5579,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <Parameter Name="DateRange" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="PayOutHistories" EntityType="SMDDevModel.PayOutHistory" />
-          <AssociationSet Name="FK_PayOutHistory_Company" Association="SMDDevModel.FK_PayOutHistory_Company">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="PayOutHistory" EntitySet="PayOutHistories" />
-          </AssociationSet>
           <FunctionImport Name="getAdsCampaignByCampaignIdtblAnalytic" ReturnType="Collection(SMDDevModel.getAdsCampaignByCampaignIdtblAnalytic_Result)">
           <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -5521,10 +5602,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="ProfileQuestionUserAnswer" EntitySet="ProfileQuestionUserAnswers" />
           </AssociationSet>
-          <AssociationSet Name="FK_ProfileQuestionUserAnswer_Company" Association="SMDDevModel.FK_ProfileQuestionUserAnswer_Company">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="ProfileQuestionUserAnswer" EntitySet="ProfileQuestionUserAnswers" />
-          </AssociationSet>
           <AssociationSet Name="FK_ProfileQuestionUserAnswer_ProfileQuestion" Association="SMDDevModel.FK_ProfileQuestionUserAnswer_ProfileQuestion">
             <End Role="ProfileQuestion" EntitySet="ProfileQuestions" />
             <End Role="ProfileQuestionUserAnswer" EntitySet="ProfileQuestionUserAnswers" />
@@ -5532,6 +5609,96 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <AssociationSet Name="FK_ProfileQuestionUserAnswer_ProfileQuestionAnswer" Association="SMDDevModel.FK_ProfileQuestionUserAnswer_ProfileQuestionAnswer">
             <End Role="ProfileQuestionAnswer" EntitySet="ProfileQuestionAnswers" />
             <End Role="ProfileQuestionUserAnswer" EntitySet="ProfileQuestionUserAnswers" />
+          </AssociationSet>
+          <EntitySet Name="SharedSurveyQuestions" EntityType="SMDDevModel.SharedSurveyQuestion" />
+          <EntitySet Name="SharedSurveyQuestionResponses" EntityType="SMDDevModel.SharedSurveyQuestionResponse" />
+          <EntitySet Name="SurveySharingGroups" EntityType="SMDDevModel.SurveySharingGroup" />
+          <EntitySet Name="SurveySharingGroupMembers" EntityType="SMDDevModel.SurveySharingGroupMember" />
+          <AssociationSet Name="FK_SharedSurveyQuestionResponse_SharedSurveyQuestion" Association="SMDDevModel.FK_SharedSurveyQuestionResponse_SharedSurveyQuestion">
+            <End Role="SharedSurveyQuestion" EntitySet="SharedSurveyQuestions" />
+            <End Role="SharedSurveyQuestionResponse" EntitySet="SharedSurveyQuestionResponses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveySharingGroupMembers_SurveySharingGroup" Association="SMDDevModel.FK_SurveySharingGroupMembers_SurveySharingGroup">
+            <End Role="SurveySharingGroup" EntitySet="SurveySharingGroups" />
+            <End Role="SurveySharingGroupMember" EntitySet="SurveySharingGroupMembers" />
+          </AssociationSet>
+          <EntitySet Name="Companies" EntityType="SMDDevModel.Company" />
+          <EntitySet Name="SurveySharingGroupShares" EntityType="SMDDevModel.SurveySharingGroupShare" />
+          <AssociationSet Name="FK_Account_Company" Association="SMDDevModel.FK_Account_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Account" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AdCampaign_Company" Association="SMDDevModel.FK_AdCampaign_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="AdCampaign" EntitySet="AdCampaigns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AdCampaignResponse_Company" Association="SMDDevModel.FK_AdCampaignResponse_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="AdCampaignResponse" EntitySet="AdCampaignResponses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsers_Company" Association="SMDDevModel.FK_AspNetUsers_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BranchCategory_Company" Association="SMDDevModel.FK_BranchCategory_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="BranchCategory" EntitySet="BranchCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompaniesAspNetUsers_Company" Association="SMDDevModel.FK_CompaniesAspNetUsers_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="CompaniesAspNetUser" EntitySet="CompaniesAspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Company_Country" Association="SMDDevModel.FK_Company_Country">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="Company" EntitySet="Companies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyBranch_Company" Association="SMDDevModel.FK_CompanyBranch_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="CompanyBranch" EntitySet="CompanyBranches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Coupon_Company" Association="SMDDevModel.FK_Coupon_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Coupon" EntitySet="Coupons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DamImages_Company" Association="SMDDevModel.FK_DamImages_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="DamImage" EntitySet="DamImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_Company" Association="SMDDevModel.FK_Invoice_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Invoice" EntitySet="Invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PayOutHistory_Company" Association="SMDDevModel.FK_PayOutHistory_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="PayOutHistory" EntitySet="PayOutHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfileQuestion_Company" Association="SMDDevModel.FK_ProfileQuestion_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="ProfileQuestion" EntitySet="ProfileQuestions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfileQuestionUserAnswer_Company" Association="SMDDevModel.FK_ProfileQuestionUserAnswer_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="ProfileQuestionUserAnswer" EntitySet="ProfileQuestionUserAnswers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyQuestion_Company" Association="SMDDevModel.FK_SurveyQuestion_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="SurveyQuestion" EntitySet="SurveyQuestions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyQuestionResponse_Company" Association="SMDDevModel.FK_SurveyQuestionResponse_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="SurveyQuestionResponse" EntitySet="SurveyQuestionResponses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notifications_SurveySharingGroupShares" Association="SMDDevModel.FK_Notifications_SurveySharingGroupShares">
+            <End Role="SurveySharingGroupShare" EntitySet="SurveySharingGroupShares" />
+            <End Role="Notification" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveySharingGroupShares_SharedSurveyQuestion" Association="SMDDevModel.FK_SurveySharingGroupShares_SharedSurveyQuestion">
+            <End Role="SharedSurveyQuestion" EntitySet="SharedSurveyQuestions" />
+            <End Role="SurveySharingGroupShare" EntitySet="SurveySharingGroupShares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveySharingGroupShares_SurveySharingGroupMembers" Association="SMDDevModel.FK_SurveySharingGroupShares_SurveySharingGroupMembers">
+            <End Role="SurveySharingGroupMember" EntitySet="SurveySharingGroupMembers" />
+            <End Role="SurveySharingGroupShare" EntitySet="SurveySharingGroupShares" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="CouponCategories">
@@ -6139,248 +6306,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Company">
-          <Key>
-            <PropertyRef Name="CompanyId" />
-          </Key>
-          <Property Name="CompanyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CompanyName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ReplyEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Tel1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Tel2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="AddressLine1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="AddressLine2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CountryId" Type="Int32" />
-          <Property Name="ZipCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="TimeZone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Logo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="StripeCustomerId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ChargeBeesubscriptionID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="RegisteredViaReferral" Type="Boolean" />
-          <Property Name="ReferringCompanyID" Type="Int32" />
-          <Property Name="PaypalCustomerId" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="GoogleWalletCustomerId" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="PreferredPayoutAccount" Type="Int32" />
-          <Property Name="SalesEmail" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="ReferralCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="AfilliatianStatus" Type="Boolean" />
-          <Property Name="WebsiteLink" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="CompanyType" Type="Int32" />
-          <Property Name="BillingAddressLine1" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="BillingAddressLine2" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="BillingState" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="BillingCountryId" Type="Int32" />
-          <Property Name="BillingZipCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="BillingPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="BillingEmail" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="TwitterHandle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="FacebookHandle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="InstagramHandle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="PinterestHandle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="VoucherSecretKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="City" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="BillingCity" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="AboutUsDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Int32" />
-          <Property Name="PaymentMethodStatus" Type="Int32" />
-          <Property Name="LastPaymentMethodErrorDate" Type="DateTime" Precision="3" />
-          <Property Name="LastPaymentMethodError" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Accounts" Relationship="SMDDevModel.FK_Account_Company" FromRole="Company" ToRole="Account" />
-          <NavigationProperty Name="AdCampaigns" Relationship="SMDDevModel.FK_AdCampaign_Company" FromRole="Company" ToRole="AdCampaign" />
-          <NavigationProperty Name="AdCampaignResponses" Relationship="SMDDevModel.FK_AdCampaignResponse_Company" FromRole="Company" ToRole="AdCampaignResponse" />
-          <NavigationProperty Name="AspNetUsers" Relationship="SMDDevModel.FK_AspNetUsers_Company" FromRole="Company" ToRole="AspNetUser" />
-          <NavigationProperty Name="BranchCategories" Relationship="SMDDevModel.FK_BranchCategory_Company" FromRole="Company" ToRole="BranchCategory" />
-          <NavigationProperty Name="CompaniesAspNetUsers" Relationship="SMDDevModel.FK_CompaniesAspNetUsers_Company" FromRole="Company" ToRole="CompaniesAspNetUser" />
-          <NavigationProperty Name="Country" Relationship="SMDDevModel.FK_Company_Country" FromRole="Company" ToRole="Country" />
-          <NavigationProperty Name="CompanyBranches" Relationship="SMDDevModel.FK_CompanyBranch_Company" FromRole="Company" ToRole="CompanyBranch" />
-          <NavigationProperty Name="Coupons" Relationship="SMDDevModel.FK_Coupon_Company" FromRole="Company" ToRole="Coupon" />
-          <NavigationProperty Name="DamImages" Relationship="SMDDevModel.FK_DamImages_Company" FromRole="Company" ToRole="DamImage" />
-          <NavigationProperty Name="Invoices" Relationship="SMDDevModel.FK_Invoice_Company" FromRole="Company" ToRole="Invoice" />
-          <NavigationProperty Name="ProfileQuestions" Relationship="SMDDevModel.FK_ProfileQuestion_Company" FromRole="Company" ToRole="ProfileQuestion" />
-          <NavigationProperty Name="SurveyQuestions" Relationship="SMDDevModel.FK_SurveyQuestion_Company" FromRole="Company" ToRole="SurveyQuestion" />
-          <NavigationProperty Name="SurveyQuestionResponses" Relationship="SMDDevModel.FK_SurveyQuestionResponse_Company" FromRole="Company" ToRole="SurveyQuestionResponse" />
-          <Property Name="CompanyRegNo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="TaxRegNo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="CreationDateTime" Type="DateTime" Precision="3" />
-          <Property Name="NoOfBranches" Type="Int32" />
-          <Property Name="BillingAddressName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="IsDeleted" Type="Boolean" />
-          <Property Name="DeleteDate" Type="DateTime" Precision="3" />
-          <Property Name="IsSpecialAccount" Type="Boolean" />
-          <NavigationProperty Name="PayOutHistories" Relationship="SMDDevModel.FK_PayOutHistory_Company" FromRole="Company" ToRole="PayOutHistory" />
-          <NavigationProperty Name="ProfileQuestionUserAnswers" Relationship="SMDDevModel.FK_ProfileQuestionUserAnswer_Company" FromRole="Company" ToRole="ProfileQuestionUserAnswer" />
-          <Property Name="StripeSubscriptionId" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
-          <Property Name="StripeSubscriptionStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <Association Name="FK_Account_Company">
-          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
-          <End Type="SMDDevModel.Account" Role="Account" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="CompanyId" />
-            </Principal>
-            <Dependent Role="Account">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AdCampaign_Company">
-          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
-          <End Type="SMDDevModel.AdCampaign" Role="AdCampaign" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="CompanyId" />
-            </Principal>
-            <Dependent Role="AdCampaign">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AdCampaignResponse_Company">
-          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
-          <End Type="SMDDevModel.AdCampaignResponse" Role="AdCampaignResponse" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="CompanyId" />
-            </Principal>
-            <Dependent Role="AdCampaignResponse">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AspNetUsers_Company">
-          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
-          <End Type="SMDDevModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="CompanyId" />
-            </Principal>
-            <Dependent Role="AspNetUser">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_BranchCategory_Company">
-          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
-          <End Type="SMDDevModel.BranchCategory" Role="BranchCategory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="CompanyId" />
-            </Principal>
-            <Dependent Role="BranchCategory">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CompaniesAspNetUsers_Company">
-          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
-          <End Type="SMDDevModel.CompaniesAspNetUser" Role="CompaniesAspNetUser" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="CompanyId" />
-            </Principal>
-            <Dependent Role="CompaniesAspNetUser">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Company_Country">
-          <End Type="SMDDevModel.Country" Role="Country" Multiplicity="0..1" />
-          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Country">
-              <PropertyRef Name="CountryID" />
-            </Principal>
-            <Dependent Role="Company">
-              <PropertyRef Name="CountryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CompanyBranch_Company">
-          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
-          <End Type="SMDDevModel.CompanyBranch" Role="CompanyBranch" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="CompanyId" />
-            </Principal>
-            <Dependent Role="CompanyBranch">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Coupon_Company">
-          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
-          <End Type="SMDDevModel.Coupon" Role="Coupon" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="CompanyId" />
-            </Principal>
-            <Dependent Role="Coupon">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DamImages_Company">
-          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
-          <End Type="SMDDevModel.DamImage" Role="DamImage" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="CompanyId" />
-            </Principal>
-            <Dependent Role="DamImage">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Invoice_Company">
-          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
-          <End Type="SMDDevModel.Invoice" Role="Invoice" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="CompanyId" />
-            </Principal>
-            <Dependent Role="Invoice">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProfileQuestion_Company">
-          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
-          <End Type="SMDDevModel.ProfileQuestion" Role="ProfileQuestion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="CompanyId" />
-            </Principal>
-            <Dependent Role="ProfileQuestion">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SurveyQuestion_Company">
-          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
-          <End Type="SMDDevModel.SurveyQuestion" Role="SurveyQuestion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="CompanyId" />
-            </Principal>
-            <Dependent Role="SurveyQuestion">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SurveyQuestionResponse_Company">
-          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
-          <End Type="SMDDevModel.SurveyQuestionResponse" Role="SurveyQuestionResponse" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="CompanyId" />
-            </Principal>
-            <Dependent Role="SurveyQuestionResponse">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="vw_Coupons">
           <Key>
             <PropertyRef Name="CouponId" />
@@ -6781,18 +6706,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="TargetPayoutAccount" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_PayOutHistory_Company" FromRole="PayOutHistory" ToRole="Company" />
         </EntityType>
-        <Association Name="FK_PayOutHistory_Company">
-          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
-          <End Type="SMDDevModel.PayOutHistory" Role="PayOutHistory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="CompanyId" />
-            </Principal>
-            <Dependent Role="PayOutHistory">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <ComplexType Name="getAdsCampaignByCampaignIdtblAnalytic_Result">
           <Property Type="Int32" Name="ordr" Nullable="false" />
           <Property Type="String" Name="label" Nullable="false" MaxLength="24" />
@@ -6843,9 +6756,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="CompanyId" Type="Int32" />
           <Property Name="ResponseType" Type="Int32" />
           <NavigationProperty Name="AspNetUser" Relationship="SMDDevModel.FK_ProfileQuestionUserAnswer_AspNetUsers" FromRole="ProfileQuestionUserAnswer" ToRole="AspNetUser" />
-          <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_ProfileQuestionUserAnswer_Company" FromRole="ProfileQuestionUserAnswer" ToRole="Company" />
           <NavigationProperty Name="ProfileQuestion" Relationship="SMDDevModel.FK_ProfileQuestionUserAnswer_ProfileQuestion" FromRole="ProfileQuestionUserAnswer" ToRole="ProfileQuestion" />
           <NavigationProperty Name="ProfileQuestionAnswer" Relationship="SMDDevModel.FK_ProfileQuestionUserAnswer_ProfileQuestionAnswer" FromRole="ProfileQuestionUserAnswer" ToRole="ProfileQuestionAnswer" />
+          <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_ProfileQuestionUserAnswer_Company" FromRole="ProfileQuestionUserAnswer" ToRole="Company" />
         </EntityType>
         <Association Name="FK_ProfileQuestionUserAnswer_AspNetUsers">
           <End Type="SMDDevModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
@@ -6856,18 +6769,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             </Principal>
             <Dependent Role="ProfileQuestionUserAnswer">
               <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProfileQuestionUserAnswer_Company">
-          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
-          <End Type="SMDDevModel.ProfileQuestionUserAnswer" Role="ProfileQuestionUserAnswer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="CompanyId" />
-            </Principal>
-            <Dependent Role="ProfileQuestionUserAnswer">
-              <PropertyRef Name="CompanyId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6892,6 +6793,394 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             </Principal>
             <Dependent Role="ProfileQuestionUserAnswer">
               <PropertyRef Name="PQAnswerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SharedSurveyQuestion">
+          <Key>
+            <PropertyRef Name="SSQID" />
+          </Key>
+          <Property Name="SSQID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="SurveyTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LeftPicturePath" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="RightPicturePath" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="CreationDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="SharedSurveyQuestionResponses" Relationship="SMDDevModel.FK_SharedSurveyQuestionResponse_SharedSurveyQuestion" FromRole="SharedSurveyQuestion" ToRole="SharedSurveyQuestionResponse" />
+          <NavigationProperty Name="SurveySharingGroupShares" Relationship="SMDDevModel.FK_SurveySharingGroupShares_SharedSurveyQuestion" FromRole="SharedSurveyQuestion" ToRole="SurveySharingGroupShare" />
+        </EntityType>
+        <EntityType Name="SharedSurveyQuestionResponse">
+          <Key>
+            <PropertyRef Name="SSQResponseId" />
+          </Key>
+          <Property Name="SSQResponseId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SSQID" Type="Int64" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ResponseDateTime" Type="DateTime" Precision="3" />
+          <Property Name="UserSelection" Type="Int32" />
+          <NavigationProperty Name="SharedSurveyQuestion" Relationship="SMDDevModel.FK_SharedSurveyQuestionResponse_SharedSurveyQuestion" FromRole="SharedSurveyQuestionResponse" ToRole="SharedSurveyQuestion" />
+        </EntityType>
+        <EntityType Name="SurveySharingGroup">
+          <Key>
+            <PropertyRef Name="SharingGroupId" />
+          </Key>
+          <Property Name="SharingGroupId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="GroupName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CreationDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="SurveySharingGroupMembers" Relationship="SMDDevModel.FK_SurveySharingGroupMembers_SurveySharingGroup" FromRole="SurveySharingGroup" ToRole="SurveySharingGroupMember" />
+        </EntityType>
+        <EntityType Name="SurveySharingGroupMember">
+          <Key>
+            <PropertyRef Name="SharingGroupMemberId" />
+          </Key>
+          <Property Name="SharingGroupMemberId" Type="Int64" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="MemberStatus" Type="Int32" />
+          <Property Name="SharingGroupId" Type="Int64" />
+          <NavigationProperty Name="SurveySharingGroup" Relationship="SMDDevModel.FK_SurveySharingGroupMembers_SurveySharingGroup" FromRole="SurveySharingGroupMember" ToRole="SurveySharingGroup" />
+          <NavigationProperty Name="SurveySharingGroupShares" Relationship="SMDDevModel.FK_SurveySharingGroupShares_SurveySharingGroupMembers" FromRole="SurveySharingGroupMember" ToRole="SurveySharingGroupShare" />
+        </EntityType>
+        <Association Name="FK_SharedSurveyQuestionResponse_SharedSurveyQuestion">
+          <End Type="SMDDevModel.SharedSurveyQuestion" Role="SharedSurveyQuestion" Multiplicity="0..1" />
+          <End Type="SMDDevModel.SharedSurveyQuestionResponse" Role="SharedSurveyQuestionResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SharedSurveyQuestion">
+              <PropertyRef Name="SSQID" />
+            </Principal>
+            <Dependent Role="SharedSurveyQuestionResponse">
+              <PropertyRef Name="SSQID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurveySharingGroupMembers_SurveySharingGroup">
+          <End Type="SMDDevModel.SurveySharingGroup" Role="SurveySharingGroup" Multiplicity="0..1" />
+          <End Type="SMDDevModel.SurveySharingGroupMember" Role="SurveySharingGroupMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SurveySharingGroup">
+              <PropertyRef Name="SharingGroupId" />
+            </Principal>
+            <Dependent Role="SurveySharingGroupMember">
+              <PropertyRef Name="SharingGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="CompanyId" />
+          </Key>
+          <Property Name="CompanyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ReplyEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Tel1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Tel2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AddressLine1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AddressLine2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CountryId" Type="Int32" />
+          <Property Name="ZipCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TimeZone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Logo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="StripeCustomerId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RegisteredViaReferral" Type="Boolean" />
+          <Property Name="ReferringCompanyID" Type="Int32" />
+          <Property Name="PaypalCustomerId" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="GoogleWalletCustomerId" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="PreferredPayoutAccount" Type="Int32" />
+          <Property Name="SalesEmail" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="ReferralCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="AfilliatianStatus" Type="Boolean" />
+          <Property Name="WebsiteLink" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyType" Type="Int32" />
+          <Property Name="BillingAddressLine1" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="BillingAddressLine2" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="BillingState" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BillingCountryId" Type="Int32" />
+          <Property Name="BillingZipCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BillingPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BillingEmail" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="TwitterHandle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="FacebookHandle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="InstagramHandle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PinterestHandle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="VoucherSecretKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="BillingCity" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="AboutUsDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="PaymentMethodStatus" Type="Int32" />
+          <Property Name="LastPaymentMethodErrorDate" Type="DateTime" Precision="3" />
+          <Property Name="LastPaymentMethodError" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyRegNo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TaxRegNo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreationDateTime" Type="DateTime" Precision="3" />
+          <Property Name="NoOfBranches" Type="Int32" />
+          <Property Name="BillingAddressName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="DeleteDate" Type="DateTime" Precision="3" />
+          <Property Name="IsSpecialAccount" Type="Boolean" />
+          <Property Name="StripeSubscriptionId" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="StripeSubscriptionStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Accounts" Relationship="SMDDevModel.FK_Account_Company" FromRole="Company" ToRole="Account" />
+          <NavigationProperty Name="AdCampaigns" Relationship="SMDDevModel.FK_AdCampaign_Company" FromRole="Company" ToRole="AdCampaign" />
+          <NavigationProperty Name="AdCampaignResponses" Relationship="SMDDevModel.FK_AdCampaignResponse_Company" FromRole="Company" ToRole="AdCampaignResponse" />
+          <NavigationProperty Name="AspNetUsers" Relationship="SMDDevModel.FK_AspNetUsers_Company" FromRole="Company" ToRole="AspNetUser" />
+          <NavigationProperty Name="BranchCategories" Relationship="SMDDevModel.FK_BranchCategory_Company" FromRole="Company" ToRole="BranchCategory" />
+          <NavigationProperty Name="CompaniesAspNetUsers" Relationship="SMDDevModel.FK_CompaniesAspNetUsers_Company" FromRole="Company" ToRole="CompaniesAspNetUser" />
+          <NavigationProperty Name="Country" Relationship="SMDDevModel.FK_Company_Country" FromRole="Company" ToRole="Country" />
+          <NavigationProperty Name="CompanyBranches" Relationship="SMDDevModel.FK_CompanyBranch_Company" FromRole="Company" ToRole="CompanyBranch" />
+          <NavigationProperty Name="Coupons" Relationship="SMDDevModel.FK_Coupon_Company" FromRole="Company" ToRole="Coupon" />
+          <NavigationProperty Name="DamImages" Relationship="SMDDevModel.FK_DamImages_Company" FromRole="Company" ToRole="DamImage" />
+          <NavigationProperty Name="Invoices" Relationship="SMDDevModel.FK_Invoice_Company" FromRole="Company" ToRole="Invoice" />
+          <NavigationProperty Name="PayOutHistories" Relationship="SMDDevModel.FK_PayOutHistory_Company" FromRole="Company" ToRole="PayOutHistory" />
+          <NavigationProperty Name="ProfileQuestions" Relationship="SMDDevModel.FK_ProfileQuestion_Company" FromRole="Company" ToRole="ProfileQuestion" />
+          <NavigationProperty Name="ProfileQuestionUserAnswers" Relationship="SMDDevModel.FK_ProfileQuestionUserAnswer_Company" FromRole="Company" ToRole="ProfileQuestionUserAnswer" />
+          <NavigationProperty Name="SurveyQuestions" Relationship="SMDDevModel.FK_SurveyQuestion_Company" FromRole="Company" ToRole="SurveyQuestion" />
+          <NavigationProperty Name="SurveyQuestionResponses" Relationship="SMDDevModel.FK_SurveyQuestionResponse_Company" FromRole="Company" ToRole="SurveyQuestionResponse" />
+        </EntityType>
+        <EntityType Name="SurveySharingGroupShare">
+          <Key>
+            <PropertyRef Name="SurveyQuestionShareId" />
+          </Key>
+          <Property Name="SurveyQuestionShareId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SharingGroupId" Type="Int64" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="SharingGroupMemberId" Type="Int64" />
+          <Property Name="SharingDate" Type="DateTime" Precision="3" />
+          <Property Name="SSQID" Type="Int64" />
+          <Property Name="Status" Type="Int32" />
+          <NavigationProperty Name="Notifications" Relationship="SMDDevModel.FK_Notifications_SurveySharingGroupShares" FromRole="SurveySharingGroupShare" ToRole="Notification" />
+          <NavigationProperty Name="SharedSurveyQuestion" Relationship="SMDDevModel.FK_SurveySharingGroupShares_SharedSurveyQuestion" FromRole="SurveySharingGroupShare" ToRole="SharedSurveyQuestion" />
+          <NavigationProperty Name="SurveySharingGroupMember" Relationship="SMDDevModel.FK_SurveySharingGroupShares_SurveySharingGroupMembers" FromRole="SurveySharingGroupShare" ToRole="SurveySharingGroupMember" />
+        </EntityType>
+        <Association Name="FK_Account_Company">
+          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="SMDDevModel.Account" Role="Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AdCampaign_Company">
+          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="SMDDevModel.AdCampaign" Role="AdCampaign" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="AdCampaign">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AdCampaignResponse_Company">
+          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="SMDDevModel.AdCampaignResponse" Role="AdCampaignResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="AdCampaignResponse">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsers_Company">
+          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="SMDDevModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="AspNetUser">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BranchCategory_Company">
+          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="SMDDevModel.BranchCategory" Role="BranchCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="BranchCategory">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompaniesAspNetUsers_Company">
+          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="SMDDevModel.CompaniesAspNetUser" Role="CompaniesAspNetUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="CompaniesAspNetUser">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Company_Country">
+          <End Type="SMDDevModel.Country" Role="Country" Multiplicity="0..1" />
+          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="Company">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyBranch_Company">
+          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="SMDDevModel.CompanyBranch" Role="CompanyBranch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="CompanyBranch">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Coupon_Company">
+          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="SMDDevModel.Coupon" Role="Coupon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="Coupon">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DamImages_Company">
+          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="SMDDevModel.DamImage" Role="DamImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="DamImage">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_Company">
+          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="SMDDevModel.Invoice" Role="Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PayOutHistory_Company">
+          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="SMDDevModel.PayOutHistory" Role="PayOutHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="PayOutHistory">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfileQuestion_Company">
+          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="SMDDevModel.ProfileQuestion" Role="ProfileQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="ProfileQuestion">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfileQuestionUserAnswer_Company">
+          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="SMDDevModel.ProfileQuestionUserAnswer" Role="ProfileQuestionUserAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="ProfileQuestionUserAnswer">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurveyQuestion_Company">
+          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="SMDDevModel.SurveyQuestion" Role="SurveyQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="SurveyQuestion">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurveyQuestionResponse_Company">
+          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="SMDDevModel.SurveyQuestionResponse" Role="SurveyQuestionResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="SurveyQuestionResponse">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notifications_SurveySharingGroupShares">
+          <End Type="SMDDevModel.SurveySharingGroupShare" Role="SurveySharingGroupShare" Multiplicity="0..1" />
+          <End Type="SMDDevModel.Notification" Role="Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SurveySharingGroupShare">
+              <PropertyRef Name="SurveyQuestionShareId" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="SurveyQuestionShareId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurveySharingGroupShares_SharedSurveyQuestion">
+          <End Type="SMDDevModel.SharedSurveyQuestion" Role="SharedSurveyQuestion" Multiplicity="0..1" />
+          <End Type="SMDDevModel.SurveySharingGroupShare" Role="SurveySharingGroupShare" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SharedSurveyQuestion">
+              <PropertyRef Name="SSQID" />
+            </Principal>
+            <Dependent Role="SurveySharingGroupShare">
+              <PropertyRef Name="SSQID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurveySharingGroupShares_SurveySharingGroupMembers">
+          <End Type="SMDDevModel.SurveySharingGroupMember" Role="SurveySharingGroupMember" Multiplicity="0..1" />
+          <End Type="SMDDevModel.SurveySharingGroupShare" Role="SurveySharingGroupShare" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SurveySharingGroupMember">
+              <PropertyRef Name="SharingGroupMemberId" />
+            </Principal>
+            <Dependent Role="SurveySharingGroupShare">
+              <PropertyRef Name="SharingGroupMemberId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -7519,6 +7808,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="Notifications">
             <EntityTypeMapping TypeName="SMDDevModel.Notification">
               <MappingFragment StoreEntitySet="Notifications">
+                <ScalarProperty Name="SurveyQuestionShareId" ColumnName="SurveyQuestionShareId" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -8207,64 +8497,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Companies">
-            <EntityTypeMapping TypeName="SMDDevModel.Company">
-              <MappingFragment StoreEntitySet="Company">
-                <ScalarProperty Name="StripeSubscriptionStatus" ColumnName="StripeSubscriptionStatus" />
-                <ScalarProperty Name="StripeSubscriptionId" ColumnName="StripeSubscriptionId" />
-                <ScalarProperty Name="IsSpecialAccount" ColumnName="IsSpecialAccount" />
-                <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="BillingAddressName" ColumnName="BillingAddressName" />
-                <ScalarProperty Name="NoOfBranches" ColumnName="NoOfBranches" />
-                <ScalarProperty Name="CreationDateTime" ColumnName="CreationDateTime" />
-                <ScalarProperty Name="TaxRegNo" ColumnName="TaxRegNo" />
-                <ScalarProperty Name="CompanyRegNo" ColumnName="CompanyRegNo" />
-                <ScalarProperty Name="LastPaymentMethodError" ColumnName="LastPaymentMethodError" />
-                <ScalarProperty Name="LastPaymentMethodErrorDate" ColumnName="LastPaymentMethodErrorDate" />
-                <ScalarProperty Name="PaymentMethodStatus" ColumnName="PaymentMethodStatus" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="AboutUsDescription" ColumnName="AboutUsDescription" />
-                <ScalarProperty Name="BillingCity" ColumnName="BillingCity" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="VoucherSecretKey" ColumnName="VoucherSecretKey" />
-                <ScalarProperty Name="PinterestHandle" ColumnName="PinterestHandle" />
-                <ScalarProperty Name="InstagramHandle" ColumnName="InstagramHandle" />
-                <ScalarProperty Name="FacebookHandle" ColumnName="FacebookHandle" />
-                <ScalarProperty Name="TwitterHandle" ColumnName="TwitterHandle" />
-                <ScalarProperty Name="BillingEmail" ColumnName="BillingEmail" />
-                <ScalarProperty Name="BillingPhone" ColumnName="BillingPhone" />
-                <ScalarProperty Name="BillingZipCode" ColumnName="BillingZipCode" />
-                <ScalarProperty Name="BillingCountryId" ColumnName="BillingCountryId" />
-                <ScalarProperty Name="BillingState" ColumnName="BillingState" />
-                <ScalarProperty Name="BillingAddressLine2" ColumnName="BillingAddressLine2" />
-                <ScalarProperty Name="BillingAddressLine1" ColumnName="BillingAddressLine1" />
-                <ScalarProperty Name="CompanyType" ColumnName="CompanyType" />
-                <ScalarProperty Name="WebsiteLink" ColumnName="WebsiteLink" />
-                <ScalarProperty Name="AfilliatianStatus" ColumnName="AfilliatianStatus" />
-                <ScalarProperty Name="ReferralCode" ColumnName="ReferralCode" />
-                <ScalarProperty Name="SalesEmail" ColumnName="SalesEmail" />
-                <ScalarProperty Name="PreferredPayoutAccount" ColumnName="PreferredPayoutAccount" />
-                <ScalarProperty Name="GoogleWalletCustomerId" ColumnName="GoogleWalletCustomerId" />
-                <ScalarProperty Name="PaypalCustomerId" ColumnName="PaypalCustomerId" />
-                <ScalarProperty Name="ReferringCompanyID" ColumnName="ReferringCompanyID" />
-                <ScalarProperty Name="RegisteredViaReferral" ColumnName="RegisteredViaReferral" />
-                <ScalarProperty Name="StripeCustomerId" ColumnName="StripeCustomerId" />
-                <ScalarProperty Name="Logo" ColumnName="Logo" />
-                <ScalarProperty Name="TimeZone" ColumnName="TimeZone" />
-                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
-                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
-                <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
-                <ScalarProperty Name="Tel2" ColumnName="Tel2" />
-                <ScalarProperty Name="Tel1" ColumnName="Tel1" />
-                <ScalarProperty Name="ReplyEmail" ColumnName="ReplyEmail" />
-                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="vw_Coupons">
             <EntityTypeMapping TypeName="SMDDevModel.vw_Coupons">
               <MappingFragment StoreEntitySet="vw_Coupons">
@@ -8651,6 +8883,123 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="PQID" ColumnName="PQID" />
                 <ScalarProperty Name="PQUAnswerID" ColumnName="PQUAnswerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SharedSurveyQuestions">
+            <EntityTypeMapping TypeName="SMDDevModel.SharedSurveyQuestion">
+              <MappingFragment StoreEntitySet="SharedSurveyQuestion">
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="RightPicturePath" ColumnName="RightPicturePath" />
+                <ScalarProperty Name="LeftPicturePath" ColumnName="LeftPicturePath" />
+                <ScalarProperty Name="SurveyTitle" ColumnName="SurveyTitle" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="SSQID" ColumnName="SSQID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SharedSurveyQuestionResponses">
+            <EntityTypeMapping TypeName="SMDDevModel.SharedSurveyQuestionResponse">
+              <MappingFragment StoreEntitySet="SharedSurveyQuestionResponse">
+                <ScalarProperty Name="UserSelection" ColumnName="UserSelection" />
+                <ScalarProperty Name="ResponseDateTime" ColumnName="ResponseDateTime" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="SSQID" ColumnName="SSQID" />
+                <ScalarProperty Name="SSQResponseId" ColumnName="SSQResponseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SurveySharingGroups">
+            <EntityTypeMapping TypeName="SMDDevModel.SurveySharingGroup">
+              <MappingFragment StoreEntitySet="SurveySharingGroup">
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="SharingGroupId" ColumnName="SharingGroupId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SurveySharingGroupMembers">
+            <EntityTypeMapping TypeName="SMDDevModel.SurveySharingGroupMember">
+              <MappingFragment StoreEntitySet="SurveySharingGroupMembers">
+                <ScalarProperty Name="SharingGroupId" ColumnName="SharingGroupId" />
+                <ScalarProperty Name="MemberStatus" ColumnName="MemberStatus" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="SharingGroupMemberId" ColumnName="SharingGroupMemberId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="SMDDevModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="StripeSubscriptionStatus" ColumnName="StripeSubscriptionStatus" />
+                <ScalarProperty Name="StripeSubscriptionId" ColumnName="StripeSubscriptionId" />
+                <ScalarProperty Name="IsSpecialAccount" ColumnName="IsSpecialAccount" />
+                <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="BillingAddressName" ColumnName="BillingAddressName" />
+                <ScalarProperty Name="NoOfBranches" ColumnName="NoOfBranches" />
+                <ScalarProperty Name="CreationDateTime" ColumnName="CreationDateTime" />
+                <ScalarProperty Name="TaxRegNo" ColumnName="TaxRegNo" />
+                <ScalarProperty Name="CompanyRegNo" ColumnName="CompanyRegNo" />
+                <ScalarProperty Name="LastPaymentMethodError" ColumnName="LastPaymentMethodError" />
+                <ScalarProperty Name="LastPaymentMethodErrorDate" ColumnName="LastPaymentMethodErrorDate" />
+                <ScalarProperty Name="PaymentMethodStatus" ColumnName="PaymentMethodStatus" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="AboutUsDescription" ColumnName="AboutUsDescription" />
+                <ScalarProperty Name="BillingCity" ColumnName="BillingCity" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="VoucherSecretKey" ColumnName="VoucherSecretKey" />
+                <ScalarProperty Name="PinterestHandle" ColumnName="PinterestHandle" />
+                <ScalarProperty Name="InstagramHandle" ColumnName="InstagramHandle" />
+                <ScalarProperty Name="FacebookHandle" ColumnName="FacebookHandle" />
+                <ScalarProperty Name="TwitterHandle" ColumnName="TwitterHandle" />
+                <ScalarProperty Name="BillingEmail" ColumnName="BillingEmail" />
+                <ScalarProperty Name="BillingPhone" ColumnName="BillingPhone" />
+                <ScalarProperty Name="BillingZipCode" ColumnName="BillingZipCode" />
+                <ScalarProperty Name="BillingCountryId" ColumnName="BillingCountryId" />
+                <ScalarProperty Name="BillingState" ColumnName="BillingState" />
+                <ScalarProperty Name="BillingAddressLine2" ColumnName="BillingAddressLine2" />
+                <ScalarProperty Name="BillingAddressLine1" ColumnName="BillingAddressLine1" />
+                <ScalarProperty Name="CompanyType" ColumnName="CompanyType" />
+                <ScalarProperty Name="WebsiteLink" ColumnName="WebsiteLink" />
+                <ScalarProperty Name="AfilliatianStatus" ColumnName="AfilliatianStatus" />
+                <ScalarProperty Name="ReferralCode" ColumnName="ReferralCode" />
+                <ScalarProperty Name="SalesEmail" ColumnName="SalesEmail" />
+                <ScalarProperty Name="PreferredPayoutAccount" ColumnName="PreferredPayoutAccount" />
+                <ScalarProperty Name="GoogleWalletCustomerId" ColumnName="GoogleWalletCustomerId" />
+                <ScalarProperty Name="PaypalCustomerId" ColumnName="PaypalCustomerId" />
+                <ScalarProperty Name="ReferringCompanyID" ColumnName="ReferringCompanyID" />
+                <ScalarProperty Name="RegisteredViaReferral" ColumnName="RegisteredViaReferral" />
+                <ScalarProperty Name="StripeCustomerId" ColumnName="StripeCustomerId" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="TimeZone" ColumnName="TimeZone" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
+                <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
+                <ScalarProperty Name="Tel2" ColumnName="Tel2" />
+                <ScalarProperty Name="Tel1" ColumnName="Tel1" />
+                <ScalarProperty Name="ReplyEmail" ColumnName="ReplyEmail" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SurveySharingGroupShares">
+            <EntityTypeMapping TypeName="SMDDevModel.SurveySharingGroupShare">
+              <MappingFragment StoreEntitySet="SurveySharingGroupShares">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="SSQID" ColumnName="SSQID" />
+                <ScalarProperty Name="SharingDate" ColumnName="SharingDate" />
+                <ScalarProperty Name="SharingGroupMemberId" ColumnName="SharingGroupMemberId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="SharingGroupId" ColumnName="SharingGroupId" />
+                <ScalarProperty Name="SurveyQuestionShareId" ColumnName="SurveyQuestionShareId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

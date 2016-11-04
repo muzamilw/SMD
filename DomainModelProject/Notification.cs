@@ -20,5 +20,8 @@ namespace DomainModelProject
         public Nullable<bool> IsRead { get; set; }
         public Nullable<System.DateTime> GeneratedOn { get; set; }
         public string GeneratedBy { get; set; }
+        public Nullable<long> SurveyQuestionShareId { get; set; }
+    
+        public virtual SurveySharingGroupShare SurveySharingGroupShare { get; set; }
     }
 }
