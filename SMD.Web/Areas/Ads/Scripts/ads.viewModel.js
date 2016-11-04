@@ -850,7 +850,6 @@ define("ads/ads.viewModel",
                       confirmation.hide();
                   });
                   confirmation.afterProceed(function () {
-                      if (campaignModel() == undefined)
                           campaignModel(item);
                           saveCampaign(7);
                   });

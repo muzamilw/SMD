@@ -698,8 +698,7 @@ getfreeCouponCount = function () {
                   confirmation.hide();
               });
               confirmation.afterProceed(function () {
-                  if (couponModel() == undefined)
-                      couponModel(item);
+                  couponModel(item);
                   saveCampaign(7);
               });
 
