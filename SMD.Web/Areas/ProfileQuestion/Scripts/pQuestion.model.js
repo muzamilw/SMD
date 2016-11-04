@@ -2,7 +2,7 @@
 
     var // ReSharper disable InconsistentNaming
         question = function (questionId, spcQuestion, pr,linkQ,gName, langId, countId, groupId, spcType,
-        spcRefreshtime, spcSkipped, spcCreationD, spcModDate, penality, spcStatus, CreatedBy, StatusValue, AnswerNeeded,AmountCharge ,AnswerCount, Gender, AgeRangeStart,AgeRangeEnd) {
+        spcRefreshtime, spcSkipped, spcCreationD, spcModDate, penality, spcStatus, CreatedBy, StatusValue, AnswerNeeded, AmountCharged, AnswerCount, Gender, AgeRangeStart, AgeRangeEnd) {
             var 
                 qId = ko.observable(questionId),
                 questionString = ko.observable(spcQuestion).extend({ required: true }),
@@ -10,7 +10,7 @@
                 hasLinkedQuestions = ko.observable(linkQ),
                 profileGroupName = ko.observable(gName),
                 answerNeeded = ko.observable(AnswerNeeded).extend({ required: true }),
-                amountCharge = ko.observable(AmountCharge),
+                AmountCharged = ko.observable(AmountCharged),
                 answerCount = ko.observable(AnswerCount),
                 languageId = ko.observable(langId),
                 countryId = ko.observable(countId),
@@ -74,7 +74,7 @@
                     createdBy: createdBy,
                     statusValue: statusValue,
                     answerCount: answerCount,
-                    amountCharge:amountCharge,
+                    AmountCharged: AmountCharged,
                     answerNeeded: answerNeeded,
                     AgeRangeStart: AgeRangeStart,
                     AgeRangeEnd: AgeRangeEnd
@@ -122,7 +122,7 @@
                         ProfileQuestionTargetLocation: targetLocation,
                         ProfileQuestionTargetCriteria: targetCriteria,
                         AnswerNeeded:answerNeeded,
-                        AmountCharged: amountCharge,
+                        AmountCharged: AmountCharged(),
                         creationDate: moment(creationDate()).format(ist.utcFormat) + 'Z'
                     };
                 };
@@ -154,7 +154,7 @@
                 isValid: isValid,
                 statusValue: statusValue,
                 answerNeeded: answerNeeded,
-                amountCharge:amountCharge,
+                AmountCharged: AmountCharged,
                 answerCount:answerCount,
                 errors: errors,
                 ProfileQuestionTargetLocation: ProfileQuestionTargetLocation,
@@ -304,7 +304,7 @@
     /////////////////////////////////////////////////////////QUESTION
     //server to client mapper For QUESTION
     var questionServertoClientMapper = function (itemFromServer) {
-     
+        debugger;
         var Question =  new question(itemFromServer.PqId, itemFromServer.Question, itemFromServer.Priority,
             itemFromServer.HasLinkedQuestions, itemFromServer.ProfileGroupName, itemFromServer.LanguageId, itemFromServer.CountryId, itemFromServer.ProfileGroupId, itemFromServer.Type, itemFromServer.RefreshTime
         , itemFromServer.SkippedCount, moment(itemFromServer.CreationDate), itemFromServer.ModifiedDate, itemFromServer.PenalityForNotAnswering, itemFromServer.Status, itemFromServer.CreatedBy, itemFromServer.StatusValue, itemFromServer.AnswerNeeded,itemFromServer.AmountCharged, itemFromServer.AsnswerCount, itemFromServer.Gender, itemFromServer.AgeRangeStart, itemFromServer.AgeRangeEnd);
