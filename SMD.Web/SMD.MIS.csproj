@@ -397,6 +397,7 @@
     <Compile Include="Areas\Api\Controllers\RegisteredUsersController.cs" />
     <Compile Include="Areas\Api\Controllers\SuperNovaCampaignController.cs" />
     <Compile Include="Areas\Api\Controllers\SurvayQuestionAnalyticController.cs" />
+    <Compile Include="Areas\Api\Controllers\SurveySharingGroupController.cs" />
     <Compile Include="Areas\Api\Controllers\UserFeedbackController.cs" />
     <Compile Include="Areas\Api\Controllers\UserController.cs" />
     <Compile Include="Areas\Api\Controllers\ApproveProfileQuestionAnsController.cs" />
@@ -445,6 +446,7 @@
     <Compile Include="Areas\Api\Models\Section.cs" />
     <Compile Include="Areas\Api\Models\CompanyApiModel.cs" />
     <Compile Include="Areas\Api\Models\SurvayBySQIDForAnalyticsResponse.cs" />
+    <Compile Include="Areas\Api\Models\SurveySharingGroupApiModel.cs" />
     <Compile Include="Areas\Coupons\CouponsAreaRegistration.cs" />
     <Compile Include="Areas\Coupons\Controllers\CouponsController.cs" />
     <Compile Include="Areas\Ads\AdsAreaRegistration.cs" />

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets48CCCC6FA0C5FD86D178FDFF0BCA36E6D58DEF7A4D76B7DBE716A8EAA2BD5083))]
+[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets415708C02BE2654F240822E83FF2DDE3679D99DDFDCEC0239D6B5380CBF07A66))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -17,18 +17,18 @@ namespace Edm_EntityMappingGeneratedViews
     /// <Summary>
     /// The type contains views for EntitySets and AssociationSets that were generated at design time.
     /// </Summary>
-    public sealed class ViewsForBaseEntitySets48CCCC6FA0C5FD86D178FDFF0BCA36E6D58DEF7A4D76B7DBE716A8EAA2BD5083 : System.Data.Mapping.EntityViewContainer
+    public sealed class ViewsForBaseEntitySets415708C02BE2654F240822E83FF2DDE3679D99DDFDCEC0239D6B5380CBF07A66 : System.Data.Mapping.EntityViewContainer
     {
         
         /// <Summary>
         /// The constructor stores the views for the extents and also the hash values generated based on the metadata and mapping closure and views.
         /// </Summary>
-        public ViewsForBaseEntitySets48CCCC6FA0C5FD86D178FDFF0BCA36E6D58DEF7A4D76B7DBE716A8EAA2BD5083()
+        public ViewsForBaseEntitySets415708C02BE2654F240822E83FF2DDE3679D99DDFDCEC0239D6B5380CBF07A66()
         {
             this.EdmEntityContainerName = "BaseDbContext";
             this.StoreEntityContainerName = "SMDModelStoreContainer";
-            this.HashOverMappingClosure = "725890b9dd723dc297f2673fa3776b7f0b506b429160cb02a7081c68fc3f9ecb";
-            this.HashOverAllExtentViews = "33580c756fa1cf4fff752eb3fce7224f833a08bc0f892e04b1ad957575af76e6";
+            this.HashOverMappingClosure = "1ad8f1005965f9a991af98d4e55f2b204f62d086be22c8e52abb5d34ce219a7e";
+            this.HashOverAllExtentViews = "098ee64cf96f014060502fa42e41de46074fd4ee497e13c2ba4ece762e338312";
             this.ViewCount = 134;
         }
         
@@ -4217,7 +4217,7 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.SurveySharingGroupMembers", @"
     SELECT VALUE -- Constructing SurveySharingGroupMembers
-        [SMDModel.Store.SurveySharingGroupMembers](T1.SurveySharingGroupMembers_SharingGroupMemberId, T1.SurveySharingGroupMembers_UserId, T1.SurveySharingGroupMembers_PhoneNumber, T1.SurveySharingGroupMembers_MemberStatus, T1.SurveySharingGroupMembers_SharingGroupId)
+        [SMDModel.Store.SurveySharingGroupMembers](T1.SurveySharingGroupMembers_SharingGroupMemberId, T1.SurveySharingGroupMembers_UserId, T1.SurveySharingGroupMembers_PhoneNumber, T1.SurveySharingGroupMembers_MemberStatus, T1.SurveySharingGroupMembers_SharingGroupId, T1.SurveySharingGroupMembers_FullName)
     FROM (
         SELECT 
             T.SharingGroupMemberId AS SurveySharingGroupMembers_SharingGroupMemberId, 
@@ -4225,6 +4225,7 @@ namespace Edm_EntityMappingGeneratedViews
             T.PhoneNumber AS SurveySharingGroupMembers_PhoneNumber, 
             T.MemberStatus AS SurveySharingGroupMembers_MemberStatus, 
             T.SharingGroupId AS SurveySharingGroupMembers_SharingGroupId, 
+            T.FullName AS SurveySharingGroupMembers_FullName, 
             True AS _from0
         FROM BaseDbContext.SurveySharingGroupMembers AS T
     ) AS T1");
@@ -4325,7 +4326,7 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.SurveySharingGroupMembers", @"
     SELECT VALUE -- Constructing SurveySharingGroupMembers
-        [DomainModels.SurveySharingGroupMember](T1.SurveySharingGroupMember_SharingGroupMemberId, T1.SurveySharingGroupMember_UserId, T1.SurveySharingGroupMember_PhoneNumber, T1.SurveySharingGroupMember_MemberStatus, T1.SurveySharingGroupMember_SharingGroupId)
+        [DomainModels.SurveySharingGroupMember](T1.SurveySharingGroupMember_SharingGroupMemberId, T1.SurveySharingGroupMember_UserId, T1.SurveySharingGroupMember_PhoneNumber, T1.SurveySharingGroupMember_MemberStatus, T1.SurveySharingGroupMember_SharingGroupId, T1.SurveySharingGroupMember_FullName)
     FROM (
         SELECT 
             T.SharingGroupMemberId AS SurveySharingGroupMember_SharingGroupMemberId, 
@@ -4333,6 +4334,7 @@ namespace Edm_EntityMappingGeneratedViews
             T.PhoneNumber AS SurveySharingGroupMember_PhoneNumber, 
             T.MemberStatus AS SurveySharingGroupMember_MemberStatus, 
             T.SharingGroupId AS SurveySharingGroupMember_SharingGroupId, 
+            T.FullName AS SurveySharingGroupMember_FullName, 
             True AS _from0
         FROM SMDModelStoreContainer.SurveySharingGroupMembers AS T
     ) AS T1");

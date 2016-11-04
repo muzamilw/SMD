@@ -46,6 +46,13 @@ namespace SMD.Repository.Repositories
         }
 
 
+
+        public IEnumerable< SurveySharingGroup> GetUserGroups(string UserId)
+        {
+            return DbSet.Where(c => c.UserId == UserId);
+        }
+
+
         #endregion
     }
 }

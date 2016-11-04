@@ -47,6 +47,16 @@ namespace SMD.Implementation.Services
         #endregion
         #region public
 
+
+        public List<SurveySharingGroup> GetUserGroups(string UserId)
+        {
+            return surveySharingGroupRepository.GetUserGroups(UserId).ToList();
+        }
+        public SurveySharingGroup GetGroupDetails(long SharingGroupId)
+        {
+            return surveySharingGroupRepository.Find(SharingGroupId);
+        }
+
         public SurveySharingGroup Create(SurveySharingGroup group)
         {
 
@@ -76,6 +86,8 @@ namespace SMD.Implementation.Services
 
                 }
 
+                item.SharingGroupId = group.SharingGroupId;
+
                 surveySharingGroupMemberRepository.Add(item);
 
                 
@@ -87,7 +99,57 @@ namespace SMD.Implementation.Services
             return group;
         }
 
+        public SurveySharingGroup Update(SurveySharingGroup group)
+        {
 
+            group.CreationDate = DateTime.Now;
+
+
+
+            surveySharingGroupRepository.Add(group);
+            surveySharingGroupRepository.SaveChanges();
+
+
+            foreach (var item in group.SurveySharingGroupMembers)
+            {
+
+                var user = aspnetUserRepository.GetUserbyPhoneNo(item.PhoneNumber);
+                if (user != null)
+                {
+                    item.UserId = user.Id;
+                    item.MemberStatus = 1;
+                }
+                else
+                {
+                    item.MemberStatus = 0;
+                    //call the sms api
+
+                    //user not found send SMS to join
+
+                }
+
+                surveySharingGroupMemberRepository.Add(item);
+
+
+            }
+            surveySharingGroupMemberRepository.SaveChanges();
+
+
+
+            return group;
+        }
+
+        public bool DeleteGroup(long SharingGroupId)
+        {
+            var group = surveySharingGroupRepository.Find(SharingGroupId);
+            if (group != null)
+            {
+                surveySharingGroupRepository.Delete(group);
+                return true;
+            }
+            else
+                return false;
+        }
 
         #endregion
     }

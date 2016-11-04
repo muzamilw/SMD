@@ -961,6 +961,7 @@
           <Property Name="PhoneNumber" Type="nvarchar" MaxLength="150" />
           <Property Name="MemberStatus" Type="int" />
           <Property Name="SharingGroupId" Type="bigint" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="SurveySharingGroupShares">
           <Key>
@@ -7219,6 +7220,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="SharingGroupId" Type="Int64" />
           <NavigationProperty Name="SurveySharingGroup" Relationship="DomainModels.FK_SurveySharingGroupMembers_SurveySharingGroup" FromRole="SurveySharingGroupMember" ToRole="SurveySharingGroup" />
           <NavigationProperty Name="SurveySharingGroupShares" Relationship="DomainModels.FK_SurveySharingGroupShares_SurveySharingGroupMembers" FromRole="SurveySharingGroupMember" ToRole="SurveySharingGroupShare" />
+          <Property Name="FullName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_SurveySharingGroupMembers_SurveySharingGroup">
           <End Type="DomainModels.SurveySharingGroup" Role="SurveySharingGroup" Multiplicity="0..1" />
@@ -9129,6 +9131,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="SurveySharingGroupMembers">
             <EntityTypeMapping TypeName="DomainModels.SurveySharingGroupMember">
               <MappingFragment StoreEntitySet="SurveySharingGroupMembers">
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
                 <ScalarProperty Name="SharingGroupId" ColumnName="SharingGroupId" />
                 <ScalarProperty Name="MemberStatus" ColumnName="MemberStatus" />
                 <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
