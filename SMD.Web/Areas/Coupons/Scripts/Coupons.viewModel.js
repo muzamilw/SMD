@@ -664,7 +664,6 @@ getfreeCouponCount = function () {
                     confirmation.afterProceed(function () {
                         couponModel().CouponListingMode(2);
                         saveCampaign(2);
-                        return;
                     });
                     confirmation.afterCancel(function () {
                         return;
