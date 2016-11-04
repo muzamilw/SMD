@@ -2178,10 +2178,12 @@ define("pQuestion/pQuestion.viewModel",
                 {
                  
                     var p = AmountCharged - 19;
-                    var r = p / 0.04;
-
+                    var r = (p / 0.04).toFixed(2);
+                    EditPrice(r)
                    // EditPrice = AmountCharged - 17.08;
-                    return r.toFixed(2);
+                    return r;
+
+
                     //Math.round
                 },
                         totalPrice = ko.computed(function () {
