@@ -620,19 +620,6 @@ getfreeCouponCount = function () {
 
         submitCampaignData = function () {
 
-           
-            if (freeCouponCount() > 0 && couponModel().CouponListingMode() == 1) {
-
-                confirmation.showOKpopupforFreeCoupon();
-                return;
-            }
-            else {
-                if (couponModel().CouponListingMode() == 1 && couponModel().CouponPriceOptions().length > 1)
-                {
-                    confirmation.showOKpopupfordealheadline();
-                    return;
-                }
-            }
             hasErrors = false;
             if (couponModel().CouponTitle() == "" || couponModel().CouponTitle() == undefined) {
                 hasErrors = true;
@@ -659,29 +646,78 @@ getfreeCouponCount = function () {
 
             if (hasErrors)
                 return;
-            if (UserAndCostDetail().Status == null || UserAndCostDetail().Status == 0) {
-                confirmation.showOKpopupforinfo();
-                return false;
-
+            if (freeCouponCount() > 0 && UserAndCostDetail().StripeSubscriptionStatus == null) {
+                confirmation.messageText("Your deal cannot be submitted as there is already a free deal active. Please subscribe to avail unlimited deals.")
+                confirmation.afterProceed(function () {
+                    couponModel().CouponListingMode(2);
+                    saveCampaign(2);
+                    return;
+                });
+                confirmation.afterCancel(function () {
+                    return;
+                });
+                confirmation.show();
             }
             else {
-                if (couponModel().CouponListingMode() == 1) {
-                    saveCampaign(2);
-
+                if (couponModel().CouponListingMode() == 1 && couponModel().CouponPriceOptions().length > 1 && UserAndCostDetail().StripeSubscriptionStatus == null) {
+                    confirmation.messageText("Your deal cannot be submitted as it has more than one deal headlines. Please subscribe to avail unlimited deal headlines.");
+                    confirmation.afterProceed(function () {
+                        couponModel().CouponListingMode(2);
+                        saveCampaign(2);
+                        return;
+                    });
+                    confirmation.afterCancel(function () {
+                        return;
+                    });
+                    confirmation.show();
                 }
                 else {
-                    if (UserAndCostDetail().IsSpecialAccount == true) {
+                    if (couponModel().CouponListingMode() == 1 && couponModel().CouponPriceOptions().length ==1 && UserAndCostDetail().StripeSubscriptionStatus == null)
+                    {
                         saveCampaign(2);
                     }
-                    else {
-                        if (UserAndCostDetail().isStripeIntegrated == false) {
-                            stripeChargeCustomer.show(function () {
-                                UserAndCostDetail().isStripeIntegrated = true;
+                    else
+                    {
+                        if (UserAndCostDetail().Status == null || UserAndCostDetail().Status == 0) {
+                            confirmation.showOKpopupforinfo();
+                            return false;
+                        }
+                        else {
+                            if (UserAndCostDetail().IsSpecialAccount == true) {
                                 saveCampaign(2);
-                            }, 1000, 'Configure your Subscription');
+                            }
+                            else {
+                                if (UserAndCostDetail().isStripeIntegrated == false) {
+                                    if (couponModel().CouponPriceOptions().length > 1 && UserAndCostDetail().StripeSubscriptionStatus != 'active') {
+                                        confirmation.messageText("Your deal cannot be submitted as it has more than one deal headlines. Please subscribe to avail unlimited deal headlines.");
+                                        confirmation.afterProceed(function () {
+                                            stripeChargeCustomer.show(function () {
+                                                UserAndCostDetail().isStripeIntegrated = true;
+                                                couponModel().CouponListingMode(2);
+                                                saveCampaign(2);
+                                            }, 1000, 'Configure your Subscription');
 
-                        } else {
-                            saveCampaign(2);
+
+                                        });
+                                        confirmation.afterCancel(function () {
+                                            return;
+                                        });
+                                        confirmation.show();
+                                    }
+                                    else {
+                                        stripeChargeCustomer.show(function () {
+                                            UserAndCostDetail().isStripeIntegrated = true;
+                                            couponModel().CouponListingMode(1)
+                                            saveCampaign(2);
+                                        }, 1000, 'Configure your Subscription');
+                                    }
+                                }
+                                else {
+                                    couponModel().CouponListingMode(2)
+                                    saveCampaign(2);
+                                }
+                            }
+
                         }
                     }
                 }
@@ -698,8 +734,7 @@ getfreeCouponCount = function () {
                   confirmation.hide();
               });
               confirmation.afterProceed(function () {
-                  if (couponModel() == undefined)
-                      couponModel(item);
+                  couponModel(item);
                   saveCampaign(7);
               });
 
@@ -872,7 +907,7 @@ getfreeCouponCount = function () {
 
               },
             onEditCampaign = function (item) {
-
+                getfreeCouponCount();
                 EditorLoading(true);
                 //resetting flags
                 IsSubmitBtnVisible(false);
