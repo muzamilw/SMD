@@ -678,6 +678,7 @@
           <Property Name="GeneratedOn" Type="datetime" />
           <Property Name="GeneratedBy" Type="nvarchar" MaxLength="128" />
           <Property Name="SurveyQuestionShareId" Type="bigint" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="PayOutHistory">
           <Key>
@@ -956,7 +957,7 @@
           <Key>
             <PropertyRef Name="SharingGroupMemberId" />
           </Key>
-          <Property Name="SharingGroupMemberId" Type="bigint" Nullable="false" />
+          <Property Name="SharingGroupMemberId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserId" Type="nvarchar" MaxLength="128" />
           <Property Name="PhoneNumber" Type="nvarchar" MaxLength="150" />
           <Property Name="MemberStatus" Type="int" />
@@ -7246,6 +7247,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="GeneratedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="SurveyQuestionShareId" Type="Int64" />
           <NavigationProperty Name="SurveySharingGroupShare" Relationship="DomainModels.FK_Notifications_SurveySharingGroupShares" FromRole="Notification" ToRole="SurveySharingGroupShare" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="SurveySharingGroupShare">
           <Key>
@@ -9143,6 +9145,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="Notifications">
             <EntityTypeMapping TypeName="DomainModels.Notification">
               <MappingFragment StoreEntitySet="Notifications">
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
                 <ScalarProperty Name="SurveyQuestionShareId" ColumnName="SurveyQuestionShareId" />
                 <ScalarProperty Name="GeneratedBy" ColumnName="GeneratedBy" />
                 <ScalarProperty Name="GeneratedOn" ColumnName="GeneratedOn" />

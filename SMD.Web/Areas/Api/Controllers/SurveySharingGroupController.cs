@@ -69,7 +69,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Update group
         /// </summary>
-        public SurveySharingGroupApiModel Post([FromUri] SurveySharingGroupApiModel group)
+        public SurveySharingGroupApiModel Post(string authenticationToken, SurveySharingGroupApiModel group)
         {
 
             Mapper.Initialize(cfg =>
@@ -79,7 +79,10 @@ namespace SMD.MIS.Areas.Api.Controllers
             });
 
 
-            var result =  surveySharingGroupService.Update(Mapper.Map<SurveySharingGroupApiModel, SurveySharingGroup>(group));
+
+
+
+            var result = surveySharingGroupService.Update(Mapper.Map<SurveySharingGroupApiModel, SurveySharingGroup>(group), Mapper.Map<ICollection<SurveySharingGroupMemberApiModel>, ICollection<SurveySharingGroupMember>>(group.SurveySharingGroupAddedMembers), Mapper.Map<ICollection<SurveySharingGroupMemberApiModel>, ICollection<SurveySharingGroupMember>>(group.SurveySharingGroupDeletedMembers));
 
             Mapper.Initialize(cfg =>
             {
@@ -95,7 +98,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// create group
         /// </summary>
-        public SurveySharingGroupApiModel Put([FromUri] SurveySharingGroupApiModel group)
+        public SurveySharingGroupApiModel Put(string authenticationToken, SurveySharingGroupApiModel group)
         {
 
             if (string.IsNullOrEmpty(group.GroupName))

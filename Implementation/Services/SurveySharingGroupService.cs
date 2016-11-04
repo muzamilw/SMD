@@ -64,9 +64,6 @@ namespace SMD.Implementation.Services
             
 
 
-            surveySharingGroupRepository.Add(group);
-            surveySharingGroupRepository.SaveChanges();
-
 
             foreach (var item in group.SurveySharingGroupMembers)
             {
@@ -86,33 +83,29 @@ namespace SMD.Implementation.Services
 
                 }
 
-                item.SharingGroupId = group.SharingGroupId;
+                //item.SharingGroupId = group.SharingGroupId;
 
-                surveySharingGroupMemberRepository.Add(item);
+                //surveySharingGroupMemberRepository.Update(item);
 
                 
             }
-            surveySharingGroupMemberRepository.SaveChanges();
+
+            surveySharingGroupRepository.Add(group);
+            surveySharingGroupRepository.SaveChanges();
+
+            //surveySharingGroupMemberRepository.SaveChanges();
 
 
 
             return group;
         }
 
-        public SurveySharingGroup Update(SurveySharingGroup group)
+        public SurveySharingGroup Update(SurveySharingGroup group, ICollection<SurveySharingGroupMember> addedMembers, ICollection<SurveySharingGroupMember> deletedMembers)
         {
 
-            group.CreationDate = DateTime.Now;
-
-
-
-            surveySharingGroupRepository.Add(group);
-            surveySharingGroupRepository.SaveChanges();
-
-
-            foreach (var item in group.SurveySharingGroupMembers)
+            //new user add logic.
+            foreach (var item in addedMembers)
             {
-
                 var user = aspnetUserRepository.GetUserbyPhoneNo(item.PhoneNumber);
                 if (user != null)
                 {
@@ -127,13 +120,23 @@ namespace SMD.Implementation.Services
                     //user not found send SMS to join
 
                 }
+                group.SurveySharingGroupMembers.Add(item);
+            }
 
-                surveySharingGroupMemberRepository.Add(item);
 
+
+            //delete user logic
+            foreach (var item in deletedMembers)
+            {
+
+                var member = group.SurveySharingGroupMembers.Where(g => g.SharingGroupMemberId == item.SharingGroupMemberId).SingleOrDefault();
+                member.MemberStatus = 3;
 
             }
-            surveySharingGroupMemberRepository.SaveChanges();
-
+           
+                      
+            surveySharingGroupRepository.Update(group);
+            surveySharingGroupRepository.SaveChanges();
 
 
             return group;

@@ -17,7 +17,7 @@ namespace SMD.Interfaces.Services
         SurveySharingGroup GetGroupDetails(long SharingGroupId);
 
 
-        SurveySharingGroup Update(SurveySharingGroup group);
+        SurveySharingGroup Update(SurveySharingGroup group, ICollection<SurveySharingGroupMember> addedMembers, ICollection<SurveySharingGroupMember> deletedMembers);
 
         bool DeleteGroup(long SharingGroupId);
     }

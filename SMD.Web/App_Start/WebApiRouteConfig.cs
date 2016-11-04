@@ -315,7 +315,7 @@ namespace SMD.MIS
       "SurveySharingGroup/{AuthenticationToken}/",
       new { controller = "SurveySharingGroup" },
       null,
-      routeHandlers);
+      null);
 
 
             
