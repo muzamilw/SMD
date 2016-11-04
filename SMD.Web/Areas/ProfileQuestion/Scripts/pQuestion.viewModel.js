@@ -759,6 +759,7 @@ define("pQuestion/pQuestion.viewModel",
                 //},
                 // On editing of existing PQ
                 onEditProfileQuestion = function (item) {
+                    debugger;
                     selectedPQIDAnalytics(item.qId());
                     IsPauseBtnVisible(false);
                     canSubmitForApproval(false);
@@ -778,13 +779,14 @@ define("pQuestion/pQuestion.viewModel",
                     
                   
                     selectedQuestion(item);
+
                     // debugger;
 
                   //  selectedQuestion().answerNeeded(2);
 
 
                  //  selectedQuestion().answerNeeded(ShowSliderPriceOnEdit(item.AmountCharged()));
-
+                    ShowSliderPriceOnEdit(item.AmountCharged());
                     if (selectedQuestion().status() == 1) {
                         selectedQuestion().statusValue("Draft");
                     } else if (selectedQuestion().status() == 2) {
@@ -2176,14 +2178,12 @@ define("pQuestion/pQuestion.viewModel",
                 },
                 ShowSliderPriceOnEdit =function(AmountCharged)
                 {
-                 
+                    debugger;
                     var p = AmountCharged - 19;
                     var r = (p / 0.04).toFixed(2);
-                    EditPrice(r)
+                    EditPrice(Math.ceil(r));
                    // EditPrice = AmountCharged - 17.08;
                     return r;
-
-
                     //Math.round
                 },
                         totalPrice = ko.computed(function () {
