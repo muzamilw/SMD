@@ -1,6 +1,6 @@
-﻿USE [SMDv2]
+﻿
 GO
-/****** Object:  StoredProcedure [dbo].[GetCouponByID]    Script Date: 10/25/2016 12:06:02 PM ******/
+/****** Object:  StoredProcedure [dbo].[GetCouponByID]    Script Date: 11/7/2016 10:31:41 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -12,7 +12,7 @@ GO
 -- =============================================
 ALTER PROCEDURE [dbo].[GetCouponByID] 
 
---    getcouponbyid 23, '','','d70b04d3-e76c-4ca2-95fe-9746ceff1a88',
+--    getcouponbyid 10085, '','','d70b04d3-e76c-4ca2-95fe-9746ceff1a88',
 	-- Add the parameters for the stored procedure here
 	@CouponId as bigint = 0, 
 	@Lat as nvarchar(50),
@@ -84,6 +84,9 @@ SELECT [CouponId]
       ,[couponImage1]
       ,[CouponImage2]
       ,[CouponImage3]
+	  ,[CouponImage4]
+	  ,[CouponImage5]
+	  ,[CouponImage6]
       
       ,[HighlightLine1]
       ,[HighlightLine2]
@@ -152,7 +155,13 @@ SELECT [CouponId]
 	c.BuyitBtnLabel,
 	comp.AboutUsDescription,
 	comp.CompanyName,
-	curr.CurrencyCode
+	curr.CurrencyCode,
+	c.IsShowReviews,
+c.IsShowAddress,
+c.IsShowPhoneNo,
+c.IsShowMap,
+c.IsShowyouTube,
+c.IsShowAboutUs
 
 
 

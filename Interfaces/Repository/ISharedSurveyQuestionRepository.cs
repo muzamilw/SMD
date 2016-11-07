@@ -7,6 +7,6 @@ namespace SMD.Interfaces.Repository
     /// </summary>
     public interface ISharedSurveyQuestionRepository : IBaseRepository<SharedSurveyQuestion, long>
     {
-        
+        bool DeleteSharedSurveyQuestion(long SSQID);
     }
 }

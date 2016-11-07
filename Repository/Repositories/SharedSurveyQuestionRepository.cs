@@ -45,6 +45,29 @@ namespace SMD.Repository.Repositories
             return DbSet.Where(c => c.SSQID == id).FirstOrDefault();
         }
 
+
+
+        //delete a survey
+        public bool DeleteSharedSurveyQuestion(long SSQID)
+        {
+
+            //deleting notifications
+
+            db.Database.ExecuteSqlCommand("delete n from notification n inner join SurveySharingGroupShares s on n.SurveyQuestionShareId =  s.SurveyQuestionShareId where SSQID=" + SSQID.ToString());
+
+            //deleting shares
+            db.Database.ExecuteSqlCommand("delete from SurveySharingGroupShares where SSQID=" + SSQID.ToString());
+
+
+            //deleting the actual survey
+
+            var survey = this.Find(SSQID);
+
+            this.Delete(survey);
+            this.SaveChanges();
+            return true;
+        }
+
         #endregion
     }
 }

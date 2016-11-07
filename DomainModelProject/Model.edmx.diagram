@@ -186,6 +186,7 @@
         <AssociationConnector Association="SMDDevModel.FK_Notifications_SurveySharingGroupShares" />
         <AssociationConnector Association="SMDDevModel.FK_SurveySharingGroupShares_SharedSurveyQuestion" />
         <AssociationConnector Association="SMDDevModel.FK_SurveySharingGroupShares_SurveySharingGroupMembers" />
+        <AssociationConnector Association="SMDDevModel.FK_SharedSurveyQuestion_SurveySharingGroup" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

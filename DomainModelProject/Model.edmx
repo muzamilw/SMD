@@ -930,6 +930,7 @@
           <Property Name="LeftPicturePath" Type="nvarchar" MaxLength="300" />
           <Property Name="RightPicturePath" Type="nvarchar" MaxLength="300" />
           <Property Name="CreationDate" Type="datetime" />
+          <Property Name="SharingGroupId" Type="bigint" />
         </EntityType>
         <EntityType Name="SurveyQuestion">
           <Key>
@@ -2242,6 +2243,18 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SharedSurveyQuestion_SurveySharingGroup">
+          <End Role="SurveySharingGroup" Type="Self.SurveySharingGroup" Multiplicity="0..1" />
+          <End Role="SharedSurveyQuestion" Type="Self.SharedSurveyQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SurveySharingGroup">
+              <PropertyRef Name="SharingGroupId" />
+            </Principal>
+            <Dependent Role="SharedSurveyQuestion">
+              <PropertyRef Name="SharingGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SMDPrice_Country">
           <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
           <End Role="Products" Type="Self.Products" Multiplicity="*" />
@@ -3209,6 +3222,10 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <AssociationSet Name="fk_sectionId" Association="Self.fk_sectionId">
             <End Role="Section" EntitySet="Section" />
             <End Role="Phrase" EntitySet="Phrase" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SharedSurveyQuestion_SurveySharingGroup" Association="Self.FK_SharedSurveyQuestion_SurveySharingGroup">
+            <End Role="SurveySharingGroup" EntitySet="SurveySharingGroup" />
+            <End Role="SharedSurveyQuestion" EntitySet="SharedSurveyQuestion" />
           </AssociationSet>
           <AssociationSet Name="FK_SMDPrice_Country" Association="Self.FK_SMDPrice_Country">
             <End Role="Country" EntitySet="Country" />
@@ -5690,6 +5707,10 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <End Role="SurveySharingGroupMember" EntitySet="SurveySharingGroupMembers" />
             <End Role="SurveySharingGroupShare" EntitySet="SurveySharingGroupShares" />
           </AssociationSet>
+          <AssociationSet Name="FK_SharedSurveyQuestion_SurveySharingGroup" Association="SMDDevModel.FK_SharedSurveyQuestion_SurveySharingGroup">
+            <End Role="SurveySharingGroup" EntitySet="SurveySharingGroups" />
+            <End Role="SharedSurveyQuestion" EntitySet="SharedSurveyQuestions" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="CouponCategories">
           <Key>
@@ -6816,6 +6837,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="CreationDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="SharedSurveyQuestionResponses" Relationship="SMDDevModel.FK_SharedSurveyQuestionResponse_SharedSurveyQuestion" FromRole="SharedSurveyQuestion" ToRole="SharedSurveyQuestionResponse" />
           <NavigationProperty Name="SurveySharingGroupShares" Relationship="SMDDevModel.FK_SurveySharingGroupShares_SharedSurveyQuestion" FromRole="SharedSurveyQuestion" ToRole="SurveySharingGroupShare" />
+          <Property Name="SharingGroupId" Type="Int64" />
+          <NavigationProperty Name="SurveySharingGroup" Relationship="SMDDevModel.FK_SharedSurveyQuestion_SurveySharingGroup" FromRole="SharedSurveyQuestion" ToRole="SurveySharingGroup" />
         </EntityType>
         <EntityType Name="SharedSurveyQuestionResponse">
           <Key>
@@ -6838,6 +6861,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="GroupName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="CreationDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="SurveySharingGroupMembers" Relationship="SMDDevModel.FK_SurveySharingGroupMembers_SurveySharingGroup" FromRole="SurveySharingGroup" ToRole="SurveySharingGroupMember" />
+          <NavigationProperty Name="SharedSurveyQuestions" Relationship="SMDDevModel.FK_SharedSurveyQuestion_SurveySharingGroup" FromRole="SurveySharingGroup" ToRole="SharedSurveyQuestion" />
         </EntityType>
         <EntityType Name="SurveySharingGroupMember">
           <Key>
@@ -7191,6 +7215,18 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             </Principal>
             <Dependent Role="SurveySharingGroupShare">
               <PropertyRef Name="SharingGroupMemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SharedSurveyQuestion_SurveySharingGroup">
+          <End Type="SMDDevModel.SurveySharingGroup" Role="SurveySharingGroup" Multiplicity="0..1" />
+          <End Type="SMDDevModel.SharedSurveyQuestion" Role="SharedSurveyQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SurveySharingGroup">
+              <PropertyRef Name="SharingGroupId" />
+            </Principal>
+            <Dependent Role="SharedSurveyQuestion">
+              <PropertyRef Name="SharingGroupId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -8917,6 +8953,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="SharedSurveyQuestions">
             <EntityTypeMapping TypeName="SMDDevModel.SharedSurveyQuestion">
               <MappingFragment StoreEntitySet="SharedSurveyQuestion">
+                <ScalarProperty Name="SharingGroupId" ColumnName="SharingGroupId" />
                 <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
                 <ScalarProperty Name="RightPicturePath" ColumnName="RightPicturePath" />
                 <ScalarProperty Name="LeftPicturePath" ColumnName="LeftPicturePath" />
