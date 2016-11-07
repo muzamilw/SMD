@@ -6059,6 +6059,15 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="String" Name="AboutUsDescription" Nullable="true" />
           <Property Type="String" Name="CompanyName" Nullable="true" />
           <Property Type="String" Name="CurrencyCode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CouponImage4" Nullable="true" />
+          <Property Type="String" Name="CouponImage5" Nullable="true" />
+          <Property Type="String" Name="CouponImage6" Nullable="true" />
+          <Property Type="Boolean" Name="IsShowReviews" Nullable="true" />
+          <Property Type="Boolean" Name="IsShowAddress" Nullable="true" />
+          <Property Type="Boolean" Name="IsShowPhoneNo" Nullable="true" />
+          <Property Type="Boolean" Name="IsShowMap" Nullable="true" />
+          <Property Type="Boolean" Name="IsShowyouTube" Nullable="true" />
+          <Property Type="Boolean" Name="IsShowAboutUs" Nullable="true" />
         </ComplexType>
         <EntityType Name="ProfileQuestionTargetCriteria">
           <Key>
@@ -8448,6 +8457,15 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
                 <ScalarProperty Name="AboutUsDescription" ColumnName="AboutUsDescription" />
                 <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
                 <ScalarProperty Name="CurrencyCode" ColumnName="CurrencyCode" />
+                <ScalarProperty Name="CouponImage4" ColumnName="CouponImage4" />
+                <ScalarProperty Name="CouponImage5" ColumnName="CouponImage5" />
+                <ScalarProperty Name="CouponImage6" ColumnName="CouponImage6" />
+                <ScalarProperty Name="IsShowReviews" ColumnName="IsShowReviews" />
+                <ScalarProperty Name="IsShowAddress" ColumnName="IsShowAddress" />
+                <ScalarProperty Name="IsShowPhoneNo" ColumnName="IsShowPhoneNo" />
+                <ScalarProperty Name="IsShowMap" ColumnName="IsShowMap" />
+                <ScalarProperty Name="IsShowyouTube" ColumnName="IsShowyouTube" />
+                <ScalarProperty Name="IsShowAboutUs" ColumnName="IsShowAboutUs" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
