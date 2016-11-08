@@ -46,6 +46,11 @@ namespace SMD.Repository.Repositories
         }
 
 
+        public GetSharedSurveyQuestion_Result GetSharedSurveyQuestionDetails(long SSQID)
+        {
+            return db.GetSharedSurveyQuestion(SSQID).FirstOrDefault();
+        }
+
 
         //delete a survey
         public bool DeleteSharedSurveyQuestion(long SSQID)

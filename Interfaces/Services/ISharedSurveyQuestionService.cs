@@ -11,9 +11,9 @@ namespace SMD.Interfaces.Services
     public interface ISharedSurveyQuestionService
     {
 
-          bool CreateAndSend(SharedSurveyQuestion survey);
+          long CreateAndSend(SharedSurveyQuestion survey);
 
-          SharedSurveyQuestion GetSharedSurveyQuestion(long SSQID);
+          GetSharedSurveyQuestion_Result GetSharedSurveyQuestion(long SSQID);
 
           bool updateUserSharedSurveyQuestionResponse(long SurveyQuestionShareId, int UserSelection);
 

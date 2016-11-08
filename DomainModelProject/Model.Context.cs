@@ -92,7 +92,6 @@ namespace DomainModelProject
         public virtual DbSet<PayOutHistory> PayOutHistories { get; set; }
         public virtual DbSet<ProfileQuestionUserAnswer> ProfileQuestionUserAnswers { get; set; }
         public virtual DbSet<SharedSurveyQuestion> SharedSurveyQuestions { get; set; }
-        public virtual DbSet<SharedSurveyQuestionResponse> SharedSurveyQuestionResponses { get; set; }
         public virtual DbSet<SurveySharingGroup> SurveySharingGroups { get; set; }
         public virtual DbSet<SurveySharingGroupMember> SurveySharingGroupMembers { get; set; }
         public virtual DbSet<Company> Companies { get; set; }
@@ -617,6 +616,15 @@ namespace DomainModelProject
                 new ObjectParameter("Id", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getCampaignROItblAnalytic_Result>("getCampaignROItblAnalytic", idParameter);
+        }
+    
+        public virtual ObjectResult<GetSharedSurveyQuestion_Result> GetSharedSurveyQuestion(Nullable<long> sSQID)
+        {
+            var sSQIDParameter = sSQID.HasValue ?
+                new ObjectParameter("SSQID", sSQID) :
+                new ObjectParameter("SSQID", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetSharedSurveyQuestion_Result>("GetSharedSurveyQuestion", sSQIDParameter);
         }
     }
 }

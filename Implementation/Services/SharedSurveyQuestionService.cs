@@ -31,7 +31,7 @@ namespace SMD.Implementation.Services
         }
 
 
-        public bool CreateAndSend(SharedSurveyQuestion survey)
+        public long CreateAndSend(SharedSurveyQuestion survey)
         {
 
             
@@ -71,13 +71,13 @@ namespace SMD.Implementation.Services
 
             }
 
-            return true;
+            return survey.SSQID;
         }
 
 
-        public SharedSurveyQuestion GetSharedSurveyQuestion(long SSQID)
+        public GetSharedSurveyQuestion_Result GetSharedSurveyQuestion(long SSQID)
         {
-            return new SharedSurveyQuestion();
+            return sharedSurveyQuestionRepository.GetSharedSurveyQuestionDetails(SSQID);
         }
 
         //string mapPath = server.MapPath(smdContentPath + "/Users/" + requestData.CompanyId);
@@ -113,10 +113,10 @@ namespace SMD.Implementation.Services
 
 
             ImageHelper.SaveBase64(directoryPath + "\\LeftPicture.jpg", question.LeftPictureDataString);
-            savePaths[0] = directoryPath + "\\LeftPicture." + question.LeftPictureExtention;
+            savePaths[0] = "/SMD_Content/Users/" + question.SSQID + "/LeftPicture." + question.LeftPictureExtention;
 
             ImageHelper.SaveBase64(directoryPath + "\\RightPicture.jpg", question.LeftPictureDataString);
-            savePaths[1] = directoryPath + "\\RightPicture." + question.RightPictureExtention;
+            savePaths[1] = "/SMD_Content/Users/" + question.SSQID + "/RightPicture." + question.RightPictureExtention;
 
          
             

@@ -160,10 +160,8 @@
         <AssociationConnector Association="SMDDevModel.FK_ProfileQuestionUserAnswer_ProfileQuestion" />
         <AssociationConnector Association="SMDDevModel.FK_ProfileQuestionUserAnswer_ProfileQuestionAnswer" />
         <EntityTypeShape EntityType="SMDDevModel.SharedSurveyQuestion" Width="1.5" PointX="12.375" PointY="6.5" />
-        <EntityTypeShape EntityType="SMDDevModel.SharedSurveyQuestionResponse" Width="1.5" PointX="14.625" PointY="5.125" />
         <EntityTypeShape EntityType="SMDDevModel.SurveySharingGroup" Width="1.5" PointX="12.375" PointY="11.875" />
         <EntityTypeShape EntityType="SMDDevModel.SurveySharingGroupMember" Width="1.5" PointX="14.625" PointY="11.875" />
-        <AssociationConnector Association="SMDDevModel.FK_SharedSurveyQuestionResponse_SharedSurveyQuestion" />
         <AssociationConnector Association="SMDDevModel.FK_SurveySharingGroupMembers_SurveySharingGroup" />
         <EntityTypeShape EntityType="SMDDevModel.Company" Width="1.5" PointX="3" PointY="67.25" />
         <EntityTypeShape EntityType="SMDDevModel.SurveySharingGroupShare" Width="1.5" PointX="16.875" PointY="8.875" />

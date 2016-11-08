@@ -39,20 +39,10 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Get Profile Questions
         /// </summary>
-        public SharedSurveyQuestionResponseApiModel Get(long SSQID)
+        public GetSharedSurveyQuestion_Result Get(long SSQID)
         {
 
-
-            Mapper.Initialize(cfg =>
-            {
-                cfg.CreateMap<SurveySharingGroup, SurveySharingGroupApiModel>();
-                cfg.CreateMap<SurveySharingGroupMember, SurveySharingGroupMemberApiModel>();
-            });
-
-
-            //return Mapper.Map<SurveySharingGroup, SurveySharingGroupApiModel>(sharedSurveyQuestionService.GetGroupDetails(SharingGroupId));
-
-            return new SharedSurveyQuestionResponseApiModel();
+            return sharedSurveyQuestionService.GetSharedSurveyQuestion(SSQID);
 
         }
 
@@ -60,10 +50,9 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// create group
         /// </summary>
-        public SharedSurveyQuestionResponseApiModel Put(string authenticationToken, SharedSurveyQuestionRequestApiModel surveyQuestion)
+        public GetSharedSurveyQuestion_Result Put(string authenticationToken, SharedSurveyQuestionRequestApiModel surveyQuestion)
         {
 
-           
 
             Mapper.Initialize(cfg =>
             {
@@ -72,18 +61,10 @@ namespace SMD.MIS.Areas.Api.Controllers
             });
 
 
-            var result = sharedSurveyQuestionService.CreateAndSend(Mapper.Map<SharedSurveyQuestionRequestApiModel, SharedSurveyQuestion>(surveyQuestion));
-
-            //Mapper.Initialize(cfg =>
-            //{
-            //    cfg.CreateMap<SurveySharingGroup, SurveySharingGroupApiModel>();
-            //    cfg.CreateMap<SurveySharingGroupMember, SurveySharingGroupMemberApiModel>();
-            //});
+            var SSQID = sharedSurveyQuestionService.CreateAndSend(Mapper.Map<SharedSurveyQuestionRequestApiModel, SharedSurveyQuestion>(surveyQuestion));
 
 
-            //return Mapper.Map<SurveySharingGroup, SurveySharingGroupApiModel>(result);
-
-            return new SharedSurveyQuestionResponseApiModel();
+            return sharedSurveyQuestionService.GetSharedSurveyQuestion(SSQID);
         }
 
 
@@ -95,7 +76,6 @@ namespace SMD.MIS.Areas.Api.Controllers
 
             try
             {
-
 
                 if (sharedSurveyQuestionService.DeleteSharedSurveyQuestion(SSQID))
                     return new BaseApiResponse { Message = "success", Status = true };

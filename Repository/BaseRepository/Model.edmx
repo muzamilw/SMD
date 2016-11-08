@@ -2641,6 +2641,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Parameter Name="DateTo" Type="datetime" Mode="In" />
           <Parameter Name="Granularity" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetSharedSurveyQuestion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SSQID" Type="bigint" Mode="In" />
+        </Function>
         <Function Name="getSurvayByPQID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="PQId" Type="int" Mode="In" />
           <Parameter Name="DateRange" Type="int" Mode="In" />
@@ -4082,6 +4085,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <End Role="SurveySharingGroup" EntitySet="SurveySharingGroups" />
             <End Role="SharedSurveyQuestion" EntitySet="SharedSurveyQuestions" />
           </AssociationSet>
+          <FunctionImport Name="GetSharedSurveyQuestion" ReturnType="Collection(DomainModels.GetSharedSurveyQuestion_Result)">
+            <Parameter Name="SSQID" Mode="In" Type="Int64" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -7347,6 +7353,27 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="GetSharedSurveyQuestion_Result">
+          <Property Type="Int64" Name="SSQID" Nullable="false" />
+          <Property Type="String" Name="UserId" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="CompanyId" Nullable="true" />
+          <Property Type="String" Name="SurveyTitle" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="LeftPicturePath" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="RightPicturePath" Nullable="true" MaxLength="300" />
+          <Property Type="DateTime" Name="CreationDate" Nullable="true" Precision="23" />
+          <Property Type="Int64" Name="SharingGroupId" Nullable="true" />
+          <Property Type="Int32" Name="TotalShared" Nullable="true" />
+          <Property Type="Int32" Name="TotalAnswers" Nullable="true" />
+          <Property Type="Int32" Name="LeftAnswerCount" Nullable="true" />
+          <Property Type="Int32" Name="RightAnswerCount" Nullable="true" />
+          <Property Type="Int32" Name="LefMmaleCount" Nullable="true" />
+          <Property Type="Int32" Name="LeftFemaleCount" Nullable="true" />
+          <Property Type="Int32" Name="RightMaleCount" Nullable="true" />
+          <Property Type="Int32" Name="RightFemaleCount" Nullable="true" />
+          <Property Type="String" Name="GroupName" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="LeftAnswerPerc" Nullable="true" />
+          <Property Type="Int32" Name="RightAnswerPerc" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -9226,6 +9253,31 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetSharedSurveyQuestion" FunctionName="SMDModel.Store.GetSharedSurveyQuestion">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.GetSharedSurveyQuestion_Result">
+                <ScalarProperty Name="SSQID" ColumnName="SSQID" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="SurveyTitle" ColumnName="SurveyTitle" />
+                <ScalarProperty Name="LeftPicturePath" ColumnName="LeftPicturePath" />
+                <ScalarProperty Name="RightPicturePath" ColumnName="RightPicturePath" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="SharingGroupId" ColumnName="SharingGroupId" />
+                <ScalarProperty Name="TotalShared" ColumnName="TotalShared" />
+                <ScalarProperty Name="TotalAnswers" ColumnName="TotalAnswers" />
+                <ScalarProperty Name="LeftAnswerCount" ColumnName="LeftAnswerCount" />
+                <ScalarProperty Name="RightAnswerCount" ColumnName="RightAnswerCount" />
+                <ScalarProperty Name="LefMmaleCount" ColumnName="LefMmaleCount" />
+                <ScalarProperty Name="LeftFemaleCount" ColumnName="LeftFemaleCount" />
+                <ScalarProperty Name="RightMaleCount" ColumnName="RightMaleCount" />
+                <ScalarProperty Name="RightFemaleCount" ColumnName="RightFemaleCount" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="LeftAnswerPerc" ColumnName="LeftAnswerPerc" />
+                <ScalarProperty Name="RightAnswerPerc" ColumnName="RightAnswerPerc" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

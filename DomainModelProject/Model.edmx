@@ -2689,6 +2689,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Parameter Name="DateTo" Type="datetime" Mode="In" />
           <Parameter Name="Granularity" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetSharedSurveyQuestion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SSQID" Type="bigint" Mode="In" />
+        </Function>
         <Function Name="getSurvayByPQID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="PQId" Type="int" Mode="In" />
           <Parameter Name="DateRange" Type="int" Mode="In" />
@@ -5618,13 +5621,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <End Role="ProfileQuestionUserAnswer" EntitySet="ProfileQuestionUserAnswers" />
           </AssociationSet>
           <EntitySet Name="SharedSurveyQuestions" EntityType="SMDDevModel.SharedSurveyQuestion" />
-          <EntitySet Name="SharedSurveyQuestionResponses" EntityType="SMDDevModel.SharedSurveyQuestionResponse" />
           <EntitySet Name="SurveySharingGroups" EntityType="SMDDevModel.SurveySharingGroup" />
           <EntitySet Name="SurveySharingGroupMembers" EntityType="SMDDevModel.SurveySharingGroupMember" />
-          <AssociationSet Name="FK_SharedSurveyQuestionResponse_SharedSurveyQuestion" Association="SMDDevModel.FK_SharedSurveyQuestionResponse_SharedSurveyQuestion">
-            <End Role="SharedSurveyQuestion" EntitySet="SharedSurveyQuestions" />
-            <End Role="SharedSurveyQuestionResponse" EntitySet="SharedSurveyQuestionResponses" />
-          </AssociationSet>
           <AssociationSet Name="FK_SurveySharingGroupMembers_SurveySharingGroup" Association="SMDDevModel.FK_SurveySharingGroupMembers_SurveySharingGroup">
             <End Role="SurveySharingGroup" EntitySet="SurveySharingGroups" />
             <End Role="SurveySharingGroupMember" EntitySet="SurveySharingGroupMembers" />
@@ -5711,6 +5709,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <End Role="SurveySharingGroup" EntitySet="SurveySharingGroups" />
             <End Role="SharedSurveyQuestion" EntitySet="SharedSurveyQuestions" />
           </AssociationSet>
+          <FunctionImport Name="GetSharedSurveyQuestion" ReturnType="Collection(SMDDevModel.GetSharedSurveyQuestion_Result)">
+            <Parameter Name="SSQID" Mode="In" Type="Int64" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="CouponCategories">
           <Key>
@@ -6835,21 +6836,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="LeftPicturePath" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="RightPicturePath" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="CreationDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="SharedSurveyQuestionResponses" Relationship="SMDDevModel.FK_SharedSurveyQuestionResponse_SharedSurveyQuestion" FromRole="SharedSurveyQuestion" ToRole="SharedSurveyQuestionResponse" />
           <NavigationProperty Name="SurveySharingGroupShares" Relationship="SMDDevModel.FK_SurveySharingGroupShares_SharedSurveyQuestion" FromRole="SharedSurveyQuestion" ToRole="SurveySharingGroupShare" />
           <Property Name="SharingGroupId" Type="Int64" />
           <NavigationProperty Name="SurveySharingGroup" Relationship="SMDDevModel.FK_SharedSurveyQuestion_SurveySharingGroup" FromRole="SharedSurveyQuestion" ToRole="SurveySharingGroup" />
-        </EntityType>
-        <EntityType Name="SharedSurveyQuestionResponse">
-          <Key>
-            <PropertyRef Name="SSQResponseId" />
-          </Key>
-          <Property Name="SSQResponseId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SSQID" Type="Int64" />
-          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="ResponseDateTime" Type="DateTime" Precision="3" />
-          <Property Name="UserSelection" Type="Int32" />
-          <NavigationProperty Name="SharedSurveyQuestion" Relationship="SMDDevModel.FK_SharedSurveyQuestionResponse_SharedSurveyQuestion" FromRole="SharedSurveyQuestionResponse" ToRole="SharedSurveyQuestion" />
         </EntityType>
         <EntityType Name="SurveySharingGroup">
           <Key>
@@ -6876,18 +6865,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <NavigationProperty Name="SurveySharingGroupShares" Relationship="SMDDevModel.FK_SurveySharingGroupShares_SurveySharingGroupMembers" FromRole="SurveySharingGroupMember" ToRole="SurveySharingGroupShare" />
           <Property Name="FullName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
         </EntityType>
-        <Association Name="FK_SharedSurveyQuestionResponse_SharedSurveyQuestion">
-          <End Type="SMDDevModel.SharedSurveyQuestion" Role="SharedSurveyQuestion" Multiplicity="0..1" />
-          <End Type="SMDDevModel.SharedSurveyQuestionResponse" Role="SharedSurveyQuestionResponse" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SharedSurveyQuestion">
-              <PropertyRef Name="SSQID" />
-            </Principal>
-            <Dependent Role="SharedSurveyQuestionResponse">
-              <PropertyRef Name="SSQID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_SurveySharingGroupMembers_SurveySharingGroup">
           <End Type="SMDDevModel.SurveySharingGroup" Role="SurveySharingGroup" Multiplicity="0..1" />
           <End Type="SMDDevModel.SurveySharingGroupMember" Role="SurveySharingGroupMember" Multiplicity="*" />
@@ -7230,6 +7207,27 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="GetSharedSurveyQuestion_Result">
+          <Property Type="Int64" Name="SSQID" Nullable="false" />
+          <Property Type="String" Name="UserId" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="CompanyId" Nullable="true" />
+          <Property Type="String" Name="SurveyTitle" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="LeftPicturePath" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="RightPicturePath" Nullable="true" MaxLength="300" />
+          <Property Type="DateTime" Name="CreationDate" Nullable="true" Precision="23" />
+          <Property Type="Int64" Name="SharingGroupId" Nullable="true" />
+          <Property Type="Int32" Name="TotalShared" Nullable="true" />
+          <Property Type="Int32" Name="TotalAnswers" Nullable="true" />
+          <Property Type="Int32" Name="LeftAnswerCount" Nullable="true" />
+          <Property Type="Int32" Name="RightAnswerCount" Nullable="true" />
+          <Property Type="Int32" Name="LefMmaleCount" Nullable="true" />
+          <Property Type="Int32" Name="LeftFemaleCount" Nullable="true" />
+          <Property Type="Int32" Name="RightMaleCount" Nullable="true" />
+          <Property Type="Int32" Name="RightFemaleCount" Nullable="true" />
+          <Property Type="String" Name="GroupName" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="LeftAnswerPerc" Nullable="true" />
+          <Property Type="Int32" Name="RightAnswerPerc" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -9060,6 +9058,31 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetSharedSurveyQuestion" FunctionName="SMDDevModel.Store.GetSharedSurveyQuestion">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SMDDevModel.GetSharedSurveyQuestion_Result">
+                <ScalarProperty Name="SSQID" ColumnName="SSQID" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="SurveyTitle" ColumnName="SurveyTitle" />
+                <ScalarProperty Name="LeftPicturePath" ColumnName="LeftPicturePath" />
+                <ScalarProperty Name="RightPicturePath" ColumnName="RightPicturePath" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="SharingGroupId" ColumnName="SharingGroupId" />
+                <ScalarProperty Name="TotalShared" ColumnName="TotalShared" />
+                <ScalarProperty Name="TotalAnswers" ColumnName="TotalAnswers" />
+                <ScalarProperty Name="LeftAnswerCount" ColumnName="LeftAnswerCount" />
+                <ScalarProperty Name="RightAnswerCount" ColumnName="RightAnswerCount" />
+                <ScalarProperty Name="LefMmaleCount" ColumnName="LefMmaleCount" />
+                <ScalarProperty Name="LeftFemaleCount" ColumnName="LeftFemaleCount" />
+                <ScalarProperty Name="RightMaleCount" ColumnName="RightMaleCount" />
+                <ScalarProperty Name="RightFemaleCount" ColumnName="RightFemaleCount" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="LeftAnswerPerc" ColumnName="LeftAnswerPerc" />
+                <ScalarProperty Name="RightAnswerPerc" ColumnName="RightAnswerPerc" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
