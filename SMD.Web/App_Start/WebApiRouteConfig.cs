@@ -318,6 +318,14 @@ namespace SMD.MIS
       null);
 
 
+    config.Routes.MapHttpRoute(
+      "SharedSurveyQuestion",
+      "SharedSurveyQuestion/{AuthenticationToken}/",
+      new { controller = "SharedSurveyQuestion" },
+      null,
+      null);
+
+            
             
 
            //config.Routes.MapHttpRoute(

@@ -7,18 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DomainModelProject
+namespace SMD.Models.DomainModels
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class SharedSurveyQuestion
+    public partial class GetSharedSurveyQuestion_Result
     {
-        public SharedSurveyQuestion()
-        {
-            this.SurveySharingGroupShares = new HashSet<SurveySharingGroupShare>();
-        }
-    
         public long SSQID { get; set; }
         public string UserId { get; set; }
         public Nullable<int> CompanyId { get; set; }
@@ -27,8 +21,16 @@ namespace DomainModelProject
         public string RightPicturePath { get; set; }
         public Nullable<System.DateTime> CreationDate { get; set; }
         public Nullable<long> SharingGroupId { get; set; }
-    
-        public virtual ICollection<SurveySharingGroupShare> SurveySharingGroupShares { get; set; }
-        public virtual SurveySharingGroup SurveySharingGroup { get; set; }
+        public Nullable<int> TotalShared { get; set; }
+        public Nullable<int> TotalAnswers { get; set; }
+        public Nullable<int> LeftAnswerCount { get; set; }
+        public Nullable<int> RightAnswerCount { get; set; }
+        public Nullable<int> LefMmaleCount { get; set; }
+        public Nullable<int> LeftFemaleCount { get; set; }
+        public Nullable<int> RightMaleCount { get; set; }
+        public Nullable<int> RightFemaleCount { get; set; }
+        public string GroupName { get; set; }
+        public Nullable<int> LeftAnswerPerc { get; set; }
+        public Nullable<int> RightAnswerPerc { get; set; }
     }
 }

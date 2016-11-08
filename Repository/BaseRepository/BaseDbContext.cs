@@ -799,6 +799,18 @@ namespace SMD.Repository.BaseRepository
             var _ID = new ObjectParameter("Id", ID);
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getCampaignROItblAnalytic_Result>("getCampaignROItblAnalytic", _ID);
         }
+
+
+
+        /// <summary>
+        /// Get Shared survey question details
+        /// </summary>
+        public ObjectResult<GetSharedSurveyQuestion_Result> GetSharedSurveyQuestion(long SSQID)
+        {
+            var oSSQID = new ObjectParameter("SSQID", SSQID);
+
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetSharedSurveyQuestion_Result>("GetSharedSurveyQuestion", oSSQID);
+        }
         #endregion
     }
 }
