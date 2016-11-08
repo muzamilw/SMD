@@ -160,14 +160,14 @@ else
 
             <div class="col-lg-12">
                 @*<div class="col-lg-9">
-                    <div class="clearfix" data-bind="with: $root.couponModel, visible: $root.isAdvertdashboardDealVisible()">
-                        <span class="pull-left " style="color:black!important; padding-left: 0px; font-size: 23px;" data-bind="text: $root.CouponTitle"></span>
+                        <div class="clearfix" data-bind="with: $root.couponModel, visible: $root.isAdvertdashboardDealVisible()">
+                            <span class="pull-left " style="color:black!important; padding-left: 0px; font-size: 23px;" data-bind="text: $root.CouponTitle"></span>
 
-                        <div style="float:right;margin-top:-9px;"><img data-bind="click: $root.CloseCouponsAnalyticView" src="/Content/Images/Close_Button.png" style="width:27px;height:27px;float:right;cursor:pointer;"></div>
+                            <div style="float:right;margin-top:-9px;"><img data-bind="click: $root.CloseCouponsAnalyticView" src="/Content/Images/Close_Button.png" style="width:27px;height:27px;float:right;cursor:pointer;"></div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-3">
-                </div>*@
+                    <div class="col-lg-3">
+                    </div>*@
 
                 <div class="no-header clearfix col-lg-9 form-horizontal" data-bind="with: $root.couponModel, visible: !$root.isAdvertdashboardDealVisible()" style="padding-left:0px;">
 
@@ -623,113 +623,113 @@ else
                                     </div>
                                 </div>
 
-                                        <div class="form-group" style="margin-bottom:5px;margin-top:15px;">
-                                            <div class="col-lg-2"></div>
-                                            <div class="col-lg-4 text-left">
-                                                <span style="font-size:13px!important;margin-left:4px;">
-                                                    Show Phone Number in deal footer
-                                                </span>
-                                            </div>
-                                            <div class="col-lg-3" style="padding-left:22px;">
-                                                <div class="onoffswitch" style="width:95px;">
-                                                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchPhoneNo" data-bind="checked:IsShowPhoneNo">
-                                                    <label class="onoffswitch-label" for="switchPhoneNo">
-                                                        <div class="onoffswitch-inner"></div>
-                                                        <div class="onoffswitch-switch"></div>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="form-group" style="margin-bottom:5px;">
-                                            <div class="col-lg-2"></div>
-                                            <div class="col-lg-4 text-left">
-                                                <span style="font-size:13px!important;margin-left:4px;">
-                                                    Show Map in deal footer
-                                                </span>
-                                            </div>
-                                            <div class="col-lg-3" style="padding-left:22px;">
-                                                <div class="onoffswitch" style="width:95px;">
-                                                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchMap" data-bind="checked:IsShowMap">
-                                                    <label class="onoffswitch-label" for="switchMap">
-                                                        <div class="onoffswitch-inner"></div>
-                                                        <div class="onoffswitch-switch"></div>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group" style="margin-bottom:5px;margin-top:10px;">
-                                            <div class="col-lg-2"></div>
-                                            <div class="col-lg-4 text-left">
-                                                <span style="font-size:13px!important;margin-left:4px;">
-                                                    Show Reviews in Deal header
-                                                </span>
-                                            </div>
-                                            <div class="col-lg-3" style="padding-left:22px;">
-                                                <div class="onoffswitch" style="width:95px;">
-                                                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchreview" data-bind="checked:IsShowReviews">
-                                                    <label class="onoffswitch-label" for="switchreview">
-                                                        <div class="onoffswitch-inner"></div>
-                                                        <div class="onoffswitch-switch"></div>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group" style="margin-bottom:5px;margin-top:10px;">
-                                            <div class="col-lg-2"></div>
-                                            <div class="col-lg-4 text-left">
-                                                <span style="font-size:13px!important;margin-left:4px;">
-                                                    Show About Us in deal footer
-                                                </span>
-                                            </div>
-                                            <div class="col-lg-3" style="padding-left:22px;">
-                                                <div class="onoffswitch" style="width:95px;">
-                                                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchaboutus" data-bind="checked:IsShowAboutUs">
-                                                    <label class="onoffswitch-label" for="switchaboutus">
-                                                        <div class="onoffswitch-inner"></div>
-                                                        <div class="onoffswitch-switch"></div>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group" style="margin-bottom:5px;margin-top:10px;">
-                                            <div class="col-lg-2"></div>
-                                            <div class="col-lg-4 text-left">
-                                                <span style="font-size:13px!important;margin-left:4px;">
-                                                    Show Youtube video in deal footer
-                                                </span>
-                                            </div>
-                                            <div class="col-lg-3" style="padding-left:22px;">
-                                                <div class="onoffswitch" style="width:95px;">
-                                                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchvideo" data-bind="checked:IsShowyouTube">
-                                                    <label class="onoffswitch-label" for="switchvideo">
-                                                        <div class="onoffswitch-inner"></div>
-                                                        <div class="onoffswitch-switch"></div>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group" style="margin-bottom:10px;">
-                                            <div class="col-lg-2">
-                                                <label for="txtCampaignDesc" style="" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">Video Url</label>
-                                            </div>
-                                            <div class="col-lg-7 " style="padding-left:14px;">
-                                                @*@*<video id="videoTag" controls style="width:300px;height:150px;" onclick="showvideoUploadDialog();" data-bind="    attr: { src: $root.VideoLink2src()+$root.randonNumber() }"></video>*@
-                                                <input class="form-control" id="viedoLink" placeholder="max 400 characters" data-bind="value:YoutubeLink" maxlength="400" />
-                                                <br />
-                                                <pre id="myCode" style="width:433px!important;display:none;"></pre>
-                                            </div>
-
-                                            <div class="col-lg-3" style="padding-left:47px;">
-                                                <button style="width:123px;height:33px;" class="btn  btn-success gtild-color" id="btnNext" onclick="openYoutubeVideo();">Test URL Link</button>
-                                            </div>
-
-                                            <div class="col-lg-2">
-                                            </div>
-
+                                <div class="form-group" style="margin-bottom:5px;margin-top:15px;">
+                                    <div class="col-lg-2"></div>
+                                    <div class="col-lg-4 text-left">
+                                        <span style="font-size:13px!important;margin-left:4px;">
+                                            Show Phone Number in deal footer
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-3" style="padding-left:22px;">
+                                        <div class="onoffswitch" style="width:95px;">
+                                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchPhoneNo" data-bind="checked:IsShowPhoneNo">
+                                            <label class="onoffswitch-label" for="switchPhoneNo">
+                                                <div class="onoffswitch-inner"></div>
+                                                <div class="onoffswitch-switch"></div>
+                                            </label>
                                         </div>
                                     </div>
+                                </div>
+
+
+                                <div class="form-group" style="margin-bottom:5px;">
+                                    <div class="col-lg-2"></div>
+                                    <div class="col-lg-4 text-left">
+                                        <span style="font-size:13px!important;margin-left:4px;">
+                                            Show Map in deal footer
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-3" style="padding-left:22px;">
+                                        <div class="onoffswitch" style="width:95px;">
+                                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchMap" data-bind="checked:IsShowMap">
+                                            <label class="onoffswitch-label" for="switchMap">
+                                                <div class="onoffswitch-inner"></div>
+                                                <div class="onoffswitch-switch"></div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom:5px;margin-top:10px;">
+                                    <div class="col-lg-2"></div>
+                                    <div class="col-lg-4 text-left">
+                                        <span style="font-size:13px!important;margin-left:4px;">
+                                            Show Reviews in Deal header
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-3" style="padding-left:22px;">
+                                        <div class="onoffswitch" style="width:95px;">
+                                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchreview" data-bind="checked:IsShowReviews">
+                                            <label class="onoffswitch-label" for="switchreview">
+                                                <div class="onoffswitch-inner"></div>
+                                                <div class="onoffswitch-switch"></div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom:5px;margin-top:10px;">
+                                    <div class="col-lg-2"></div>
+                                    <div class="col-lg-4 text-left">
+                                        <span style="font-size:13px!important;margin-left:4px;">
+                                            Show About Us in deal footer
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-3" style="padding-left:22px;">
+                                        <div class="onoffswitch" style="width:95px;">
+                                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchaboutus" data-bind="checked:IsShowAboutUs">
+                                            <label class="onoffswitch-label" for="switchaboutus">
+                                                <div class="onoffswitch-inner"></div>
+                                                <div class="onoffswitch-switch"></div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom:5px;margin-top:10px;">
+                                    <div class="col-lg-2"></div>
+                                    <div class="col-lg-4 text-left">
+                                        <span style="font-size:13px!important;margin-left:4px;">
+                                            Show Youtube video in deal footer
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-3" style="padding-left:22px;">
+                                        <div class="onoffswitch" style="width:95px;">
+                                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchvideo" data-bind="checked:IsShowyouTube">
+                                            <label class="onoffswitch-label" for="switchvideo">
+                                                <div class="onoffswitch-inner"></div>
+                                                <div class="onoffswitch-switch"></div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom:10px;">
+                                    <div class="col-lg-2">
+                                        <label for="txtCampaignDesc" style="" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">Video Url</label>
+                                    </div>
+                                    <div class="col-lg-7 " style="padding-left:14px;">
+                                        @*@*<video id="videoTag" controls style="width:300px;height:150px;" onclick="showvideoUploadDialog();" data-bind="    attr: { src: $root.VideoLink2src()+$root.randonNumber() }"></video>*@
+                                        <input class="form-control" id="viedoLink" placeholder="max 400 characters" data-bind="value:YoutubeLink" maxlength="400" />
+                                        <br />
+                                        <pre id="myCode" style="width:433px!important;display:none;"></pre>
+                                    </div>
+
+                                    <div class="col-lg-3" style="padding-left:47px;">
+                                        <button style="width:123px;height:33px;" class="btn  btn-success gtild-color" id="btnNext" onclick="openYoutubeVideo();">Test URL Link</button>
+                                    </div>
+
+                                    <div class="col-lg-2">
+                                    </div>
+
+                                </div>
+                            </div>
 
 
 
@@ -792,9 +792,14 @@ else
                                     </div>
                                     <div class="col-lg-8">
                                         <div class="col-lg-4">
-                                            <div style="margin-top:5px;    text-align: center;cursor:pointer;">
+                                            <div style="margin-top:5px;   text-align: center;cursor:pointer;" id="divimg1">
                                                 @*<img style="height:90px;" data-bind="visible: couponImage1() == '' || couponImage1() == null"  src="/Content/Images/placeholder.png" onclick="showCouponDialog4();" />*@
-
+                                                <div class="imageBoxName" id="div1" data-bind="visible:$root.diveNo()==1" style="display:none">
+                                                    <a class="" style="float: right;"  onclick="onDeletebutton(1)">
+                                                        <span class=" glyphicon glyphicon-trash" style="color:red" aria-hidden="true">
+                                                        </span>
+                                                    </a>
+                                                </div>
                                                 <img style="height:70px;" data-bind="visible:couponImage1()!='',attr:{ src:couponImage1}" id="bannerImage1" data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(2)" />
 
                                                 @*<div id="couponImage1" class="placeholders" data-bind="visible: couponImage1() == '/images/default-placeholder.png'" onclick="changeIframeSrc(2);"><span><i class="fa fa-plus" aria-hidden="true" style="color:#32CD32"></i></span></div>*@
@@ -812,6 +817,11 @@ else
                                         <div class="col-lg-4" style="display:none;" id="CouponImage2panel" data-bind="visible:$root.Banner2Flag">
                                             <div style="margin-top:5px;    text-align: center;cursor:pointer;">
                                                 @*<img style="height:90px;" data-bind="visible: CouponImage2() == '' || CouponImage2() == null" src="/Content/Images/placeholder.png" onclick="showCouponDialog2();" />*@
+                                                <div id="div2" data-bind="visible:$root.diveNo()==2" style="display:none">
+                                                    <a class="" style="float: right;" onclick="onDeletebutton(2)">
+                                                        <span class="glyphicon glyphicon-trash" style="color:red" aria-hidden="true"></span>
+                                                    </a>
+                                                </div>
                                                 <img style="height:70px;" data-bind="visible: CouponImage2() != '' && CouponImage2() != null ,attr: { src: CouponImage2 }" data-toggle="modal" data-target="#damModel" id="bannerImage2" onclick="changeIframeSrc(3)" />
                                                 <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
                                                     (450 x 300 pixels)
@@ -826,6 +836,11 @@ else
                                         <div class="col-lg-4" style="display:none;" id="CouponImage3panel" data-bind="visible:$root.Banner3Flag">
                                             <div style="margin-top:5px;    text-align: center;cursor:pointer;">
                                                 @*<img style="height:90px;" data-bind="visible: CouponImage3() == '' || CouponImage3() == null" src="/Content/Images/placeholder.png" onclick="showCouponDialog3();" />*@
+                                                <div class="imageBoxName" id="div3" data-bind="visible:$root.diveNo()==3" style="display:none">
+                                                    <a class="" style="float: right;" onclick="onDeletebutton(3)">
+                                                        <span class="glyphicon glyphicon-trash" style="color:red" aria-hidden="true"></span>
+                                                    </a>
+                                                </div>
                                                 <img style="height:70px;" data-bind="visible: CouponImage3() != '' && CouponImage3() != null,attr: { src: CouponImage3 }" id="bannerImage3" data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(4)" />
                                                 <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
                                                     (450 x 300 pixels)
@@ -851,6 +866,11 @@ else
                                         <div class="col-lg-4" style="display:none;" id="CouponImage4panel" data-bind="visible:$root.Banner4Flag">
                                             <div style="margin-top:5px;    text-align: center;cursor:pointer;">
                                                 @*<img style="height:90px;" data-bind="visible: couponImage1() == '' || couponImage1() == null"  src="/Content/Images/placeholder.png" onclick="showCouponDialog4();" />*@
+                                                <div class="imageBoxName" id="div4" data-bind="visible:$root.diveNo()==4" style="display:none">
+                                                    <a class="" style="float: right;" onclick="onDeletebutton(4)">
+                                                        <span class="glyphicon glyphicon-trash" style="color:red" aria-hidden="true"></span>
+                                                    </a>
+                                                </div>
 
                                                 <img style="height:70px;" data-bind="visible: CouponImage4()!='',attr: { src: CouponImage4 }" id="bannerImage4" data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(5)" />
 
@@ -870,6 +890,11 @@ else
                                         <div class="col-lg-4" style="display:none;" id="CouponImage5panel" data-bind="visible:$root.Banner5Flag">
                                             <div style="margin-top:5px;    text-align: center;cursor:pointer;">
                                                 @*<img style="height:90px;" data-bind="visible: CouponImage2() == '' || CouponImage2() == null" src="/Content/Images/placeholder.png" onclick="showCouponDialog2();" />*@
+                                                <div class="imageBoxName" id="div5" data-bind="visible:$root.diveNo()==5" style="display:none">
+                                                    <a class="" style="float: right;" onclick="onDeletebutton(5)">
+                                                        <span class="glyphicon glyphicon-trash" style="color:red" aria-hidden="true"></span>
+                                                    </a>
+                                                </div>
                                                 <img style="height:70px;" data-bind="visible: CouponImage5() != '' && CouponImage5() != null ,attr: { src: CouponImage5 }" data-toggle="modal" data-target="#damModel" id="bannerImage5" onclick="changeIframeSrc(6)" />
                                                 <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
                                                     (450 x 300 pixels)
@@ -884,6 +909,11 @@ else
                                         <div class="col-lg-4" style="display:none;" id="CouponImage6panel" data-bind="visible:$root.Banner6Flag">
                                             <div style="margin-top:5px;    text-align: center;cursor:pointer;">
                                                 @*<img style="height:90px;" data-bind="visible: CouponImage3() == '' || CouponImage3() == null" src="/Content/Images/placeholder.png" onclick="showCouponDialog3();" />*@
+                                                <div class="imageBoxName" id="div6" data-bind="visible:$root.diveNo()==6" style="display:none">
+                                                    <a class="" style="float: right;" onclick="onDeletebutton(6)">
+                                                        <span class="glyphicon glyphicon-trash" style="color:red" aria-hidden="true"></span>
+                                                    </a>
+                                                </div>
                                                 <img style="height:70px;" data-bind="visible: CouponImage6() != '' && CouponImage6() != null,attr: { src: CouponImage6 }" id="bannerImage6" data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(7)" />
                                                 <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
                                                     (450 x 300 pixels)
@@ -1741,7 +1771,7 @@ else
 
     var mode = 1;
     function changeIframeSrc(mode1) {
-
+        debugger;
         mode = mode1;
         if (mode1 != 1)
             mode1 = 2;
@@ -1752,21 +1782,36 @@ else
     }
 
     function SetMode(mode) {
+        debugger;
         if (mode == 2) {
             $("#CouponImage2panel").css('display', 'block');
+            $("#div1").css('display', 'block');
 
         }
         else if (mode == 3) {
             $("#CouponImage3panel").css('display', 'block');
+            $("#div2").css('display', 'block');
+            $("#div1").css('display', 'none');
         }
         else if (mode == 4) {
             $("#CouponImage4panel").css('display', 'block');
+            $("#div3").css('display', 'block');
+            $("#div2").css('display', 'none');
         }
         else if (mode == 5) {
             $("#CouponImage5panel").css('display', 'block');
+            $("#div4").css('display', 'block');
+            $("#div3").css('display', 'none');
         }
         else if (mode == 6) {
             $("#CouponImage6panel").css('display', 'block');
+            $("#div5").css('display', 'block');
+            $("#div4").css('display', 'none');
+        }
+        else if (mode == 7) {
+
+            $("#div6").css('display', 'block');
+            $("#div5").css('display', 'none');
         }
 
     }
@@ -1809,6 +1854,66 @@ else
             }
             SetMode(mode);
         });
+    }
+    function onDeletebutton(mode) {
+        if (mode == 1) {
+            onDeleteImage(1);
+            $("#bannerImage1").attr("src",null);
+            $("#bannerImage1").attr("src", "/images/standardplaceholder.png");
+            $("#CouponImage2panel").css('display', 'none');
+            $("#divimg1").css('display', 'block');
+            $("#div1").css('display', 'none');
+        }
+        else if (mode == 2)
+        {
+            onDeleteImage(2);
+            $("#bannerImage2").attr("src",null);
+            $("#bannerImage2").attr("src", "/images/standardplaceholder.png");
+            $("#CouponImage3panel").css('display', 'none');
+            $("#CouponImage2panel").css('display', 'block');
+            $("#div1").css('display', 'block');
+            $("#div2").css('display', 'none');
+        }
+        else if (mode == 3) {
+            onDeleteImage(3);
+            $("#bannerImage3").attr("src", null);
+            $("#bannerImage3").attr("src", "/images/standardplaceholder.png");
+            $("#CouponImage4panel").css('display', 'none');
+            $("#CouponImage3panel").css('display', 'block');
+            $("#div2").css('display', 'block');
+            $("#div3").css('display', 'none');
+           
+        }
+        else if (mode == 4) {
+            onDeleteImage(4);
+            $("#bannerImage4").attr("src", null);
+            $("#bannerImage4").attr("src", "/images/standardplaceholder.png");
+            $("#CouponImage5panel").css('display', 'none');
+            $("#CouponImage4panel").css('display', 'block');
+            $("#div3").css('display', 'block');
+            $("#div4").css('display', 'none');
+        }
+        else if (mode == 5) {
+            onDeleteImage(5);
+            $("#bannerImage5").attr("src", null);
+            $("#bannerImage5").attr("src", "/images/standardplaceholder.png");
+            $("#CouponImage6panel").css('display', 'none');
+            $("#CouponImage5panel").css('display', 'block');
+            $("#div4").css('display', 'block');
+            $("#div5").css('display', 'none');
+        }
+        else if (mode == 6) {
+            onDeleteImage(6);
+            $("#bannerImage6").attr("src", null);
+            $("#bannerImage6").attr("src", "/images/standardplaceholder.png");
+            $("#CouponImage6panel").css('display', 'bolck');
+            $("#div5").css('display', 'bolck');
+            $("#div6").css('display', 'none');
+        }
+
+     
+
+
     }
 
 </script>
