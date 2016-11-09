@@ -456,7 +456,7 @@ define("ads/ads.viewModel",
                // showMainMenu();
            },
             closeNewCampaignDialog = function () {
-
+				CloseCampaignADAnalyticView();	
                 if (campaignModel().hasChanges() || logoImage != '') {    //&& (campaignModel().Status() == null || campaignModel().Status() == 1)
 
                     confirmation.messageText("Do you want to save changes?");
