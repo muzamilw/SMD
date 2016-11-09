@@ -10,6 +10,7 @@
 namespace SMD.Models.DomainModels{
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations.Schema;
     
     public partial class SharedSurveyQuestion
     {
@@ -22,8 +23,21 @@ namespace SMD.Models.DomainModels{
         public string LeftPicturePath { get; set; }
         public string RightPicturePath { get; set; }
         public Nullable<System.DateTime> CreationDate { get; set; }
-    
-       
+
+        public long SharingGroupId { get; set; }
+
         public virtual ICollection<SurveySharingGroupShare> SurveySharingGroupShares { get; set; }
+
+
+        public virtual SurveySharingGroup SurveySharingGroup { get; set; }
+
+        [NotMapped]
+        public string LeftPictureDataString { get; set; }
+        [NotMapped]
+        public string LeftPictureExtention { get; set; }
+        [NotMapped]
+        public string RightPictureDataString { get; set; }
+        [NotMapped]
+        public string RightPictureExtention { get; set; }
     }
 }

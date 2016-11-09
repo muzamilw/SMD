@@ -23,5 +23,9 @@ namespace SMD.Models.DomainModels
         public Nullable<System.DateTime> CreationDate { get; set; }
     
         public virtual ICollection<SurveySharingGroupMember> SurveySharingGroupMembers { get; set; }
+
+
+        public virtual ICollection<SharedSurveyQuestion> SharedSurveyQuestions { get; set; }
+
     }
 }

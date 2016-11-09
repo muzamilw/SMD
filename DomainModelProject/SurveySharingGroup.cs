@@ -17,6 +17,7 @@ namespace DomainModelProject
         public SurveySharingGroup()
         {
             this.SurveySharingGroupMembers = new HashSet<SurveySharingGroupMember>();
+            this.SharedSurveyQuestions = new HashSet<SharedSurveyQuestion>();
         }
     
         public long SharingGroupId { get; set; }
@@ -26,5 +27,6 @@ namespace DomainModelProject
         public Nullable<System.DateTime> CreationDate { get; set; }
     
         public virtual ICollection<SurveySharingGroupMember> SurveySharingGroupMembers { get; set; }
+        public virtual ICollection<SharedSurveyQuestion> SharedSurveyQuestions { get; set; }
     }
 }

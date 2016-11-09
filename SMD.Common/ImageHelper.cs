@@ -104,6 +104,27 @@ namespace SMD.Common
 
 
 
+
+
+
+        public static string SaveBase64(string mapPath, string fileSource)
+        {
+            // return if no file specified
+            if (string.IsNullOrEmpty(fileSource))
+            {
+                return null;
+            }
+
+
+            // First Time Upload
+            string imageurl = mapPath;
+            File.WriteAllBytes(imageurl, Convert.FromBase64String( fileSource));
+
+            int indexOf = imageurl.LastIndexOf("SMD_Content", StringComparison.Ordinal);
+            imageurl = imageurl.Substring(indexOf, imageurl.Length - indexOf);
+            return imageurl;
+        }
+
         public static string RemoveQueryStringByKey(string url, string key)
         {
             var uri = new Uri(url);

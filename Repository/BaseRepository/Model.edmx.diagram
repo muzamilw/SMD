@@ -175,6 +175,7 @@
         <AssociationConnector Association="DomainModels.FK_Notifications_SurveySharingGroupShares" />
         <AssociationConnector Association="DomainModels.FK_SurveySharingGroupShares_SharedSurveyQuestion" />
         <AssociationConnector Association="DomainModels.FK_SurveySharingGroupShares_SurveySharingGroupMembers" />
+        <AssociationConnector Association="DomainModels.FK_SharedSurveyQuestion_SurveySharingGroup" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
