@@ -14,6 +14,7 @@ define("ads/ads.viewModel",
                     searchFilterValue = ko.observable(),
                     isEditorVisible = ko.observable(false),
                     isClickRateVisible = ko.observable(null),
+                    IsthisEditCamapiagn= ko.observable(false),
                     buyItQuestionStatus = ko.observable(false),
                     buyItQuestionLabelStatus = ko.observable(false),
 					isAdvertdashboardVisible = ko.observable(false),
@@ -386,7 +387,7 @@ define("ads/ads.viewModel",
             },
                 // Add new Profile Question
             addNewCampaign = function () {
-
+                IsthisEditCamapiagn(false);
                 var selectionoption = $("#ddTextBtns").val();
 
                 if (selectionoption == '0' || selectionoption == undefined) {
@@ -405,6 +406,8 @@ define("ads/ads.viewModel",
                 $("#topArea").css("display", "none");
                 $("#headlabel,#headdesc").css("display", "none");
                 $(".closecls").css("display", "none");
+
+
                 collapseMainMenu();
                 TodisplayImg(true);
                 openEditScreen(1);
@@ -456,8 +459,11 @@ define("ads/ads.viewModel",
                // showMainMenu();
            },
             closeNewCampaignDialog = function () {
+                
+                CloseCampaignADAnalyticView();
+              //  if (IsthisEditCamapiagn())
 
-                if (campaignModel().hasChanges() || logoImage != '') {    //&& (campaignModel().Status() == null || campaignModel().Status() == 1)
+				if (campaignModel().hasChanges() || (logoImage != '' && mode == 4 && (campaignModel().Status() == null || campaignModel().Status() == 1))) {    //&& (campaignModel().Status() == null || campaignModel().Status() == 1)
 
                     confirmation.messageText("Do you want to save changes?");
                     confirmation.afterProceed(function () {
@@ -1036,7 +1042,7 @@ define("ads/ads.viewModel",
                         $("#topArea").css("display", "block");
                         //$("#MainBtnClose").click();
                         //GoToHomePage();
-
+                         logoImage = '';
                         closeContent();
                     },
                     error: function (response) {
@@ -1697,7 +1703,7 @@ define("ads/ads.viewModel",
 
                   },
                 onEditCampaign = function (item) {
-             
+                    IsthisEditCamapiagn(true);
                     previewScreenNumber(1);
                     isTerminateBtnVisible(false);
                     isNewCampaignVisible(false);
@@ -3491,7 +3497,8 @@ define("ads/ads.viewModel",
                     StatusCodeImage: StatusCodeImage,
                     IsvideoBtn: IsvideoBtn,
                     IsGameAds: IsGameAds,
-                    CampaignHeader: CampaignHeader
+                    CampaignHeader: CampaignHeader,
+                    IsthisEditCamapiagn:IsthisEditCamapiagn
                 };
             })()
         };

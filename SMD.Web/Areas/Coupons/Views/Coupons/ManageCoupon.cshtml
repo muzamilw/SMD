@@ -13,9 +13,9 @@ else
 }
 <div data-bind="visible: $root.isEditorVisible()" style="display: none">
 
-    <div class="col-lg-12">
+    <div class="col-lg-12" style="padding-left:0px;padding-right:18px;">
         <div class="row">
-            <div class="col-lg-12" id="topArea">
+            <div class="col-lg-12" id="topArea" style="padding-left:7px;">
 
                 <ol class="breadcrumb" style="display:none;">
                     <li><a href="/Dashboard/Index" class="my-navigator">Home</a></li>
@@ -42,7 +42,7 @@ else
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-12" data-bind="visible: !$root.isAdvertdashboardDealVisible()">
                 <div class="main-box header" style="padding-left:52px;">
                     <div class="col-lg-12" style="margin:auto;float:none !important">
                         <div class="pull-left ads-numbering-main">
@@ -158,16 +158,8 @@ else
 
             </div>
 
-            <div class="col-lg-12">
-                @*<div class="col-lg-9">
-                    <div class="clearfix" data-bind="with: $root.couponModel, visible: $root.isAdvertdashboardDealVisible()">
-                        <span class="pull-left " style="color:black!important; padding-left: 0px; font-size: 23px;" data-bind="text: $root.CouponTitle"></span>
+            <div class="col-lg-12" data-bind="visible: !$root.isAdvertdashboardDealVisible()">
 
-                        <div style="float:right;margin-top:-9px;"><img data-bind="click: $root.CloseCouponsAnalyticView" src="/Content/Images/Close_Button.png" style="width:27px;height:27px;float:right;cursor:pointer;"></div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                </div>*@
 
                 <div class="no-header clearfix col-lg-9 form-horizontal" data-bind="with: $root.couponModel, visible: !$root.isAdvertdashboardDealVisible()" style="padding-left:0px;">
 
@@ -178,7 +170,7 @@ else
 
                         @*<div class="adsubHeading Theme_standard_clr borderbtmline " style="padding-left:27px;" data-bind="visible: $root.previewScreenNumber() == 1">
 
-                            </div>*@
+                    </div>*@
 
                         <div class="col-lg-12" data-bind="visible: $root.previewScreenNumber() == 1">
                             <div style="height:34px;" class="borderbtmline ">
@@ -257,7 +249,7 @@ else
                                     <label for="txtCampaignDisplayName" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Group HeadLine</label>
                                 </div>
                                 <div class="col-lg-7">
-                                    <textarea maxlength="55" style="height:60px; resize:none" name="Coupon Display Name" class="form-control  " id="txtCampaignDisplayName" placeholder="Deal title (55 characters)" data-bind="value: CouponTitle,click: $root.selectJobDescription"></textarea>
+                                    <textarea maxlength="48" style="height:60px; resize:none" name="Coupon Display Name" class="form-control  " id="txtCampaignDisplayName" placeholder="Deal title (48 characters)" data-bind="value: CouponTitle,click: $root.selectJobDescription"></textarea>
                                 </div>
                                 <div class="col-lg-1">
                                     <a id="P0" data-bind="visible:$root.selectedJobDescription()=== 'txtCampaignDisplayName',click:$root.openPhraseLibrary" style="padding: 4px 8px;display:none;" class="btn btn-primary pull-right">
@@ -323,7 +315,7 @@ else
                                 <div class="col-lg-7">
                                     <textarea maxlength="76" name="Coupon Display Name" class="form-control  " rows="2" id="txtCampaignDescription" style="resize:none" placeholder="Deal Summary (76 characters)" data-bind="value:HowToRedeemLine2,click: $root.selectJobDescription"></textarea>
                                 </div>
-                                <div class="col-lg-1">
+                                <div class="col-lg-1" style="display:none">
                                     <a id="P0" data-bind="visible:$root.selectedJobDescription()=== 'txtCampaignDescription',click:$root.openPhraseLibrary" style="padding: 4px 8px;display:none;" class="btn btn-primary pull-right">
                                         <i class="fa fa-lg"></i>&nbsp;....
                                     </a>
@@ -350,9 +342,9 @@ else
                                 <div class="col-lg-7">
                                     <textarea class="form-control" id="highlightedfield1" rows="4" style="resize:none" placeholder="max 800 characters" data-bind="value:HighlightLine1, click: $root.selectJobDescription" maxlength="800"></textarea>
                                 </div>
-                                <div class="col-lg-1">
-                                    <a id="P1" data-bind="visible:$root.selectedJobDescription()=== 'highlightedfield1',click:$root.openPhraseLibrary" style="padding: 4px 8px;display:none;" class="btn btn-primary pull-right">
-                                        <i class="fa fa-lg"></i>&nbsp;....
+                                <div class="col-lg-1" style="display:none">
+                                    <a id=" p1" data-bind="visible:$root.selectedJobDescription()=== 'highlightedfield1',click:$root.openPhraseLibrary" style="padding: 4px 8px;display:none;" class="btn btn-primary pull-right">
+                                    <i class="fa fa-lg"></i>&nbsp;....
                                     </a>
                                 </div>
 
@@ -416,7 +408,7 @@ else
                                 <div class="col-lg-7">
                                     <textarea class="form-control" id="fineprint1" rows="4" style="resize:none" placeholder="max 800 characters" data-bind="value: FinePrintLine1,click:$root.selectJobDescription" maxlength="800"></textarea>
                                 </div>
-                                <div class="col-lg-1">
+                                <div class="col-lg-1" style="display:none">
                                     <a id="P0" data-bind="visible:$root.selectedJobDescription()=== 'fineprint1',click:$root.openPhraseLibrary" style="padding: 4px 8px;" class="btn btn-primary pull-right">
                                         <i class="fa fa-lg"></i>&nbsp;....
                                     </a>
@@ -623,113 +615,113 @@ else
                                     </div>
                                 </div>
 
-                                        <div class="form-group" style="margin-bottom:5px;margin-top:15px;">
-                                            <div class="col-lg-2"></div>
-                                            <div class="col-lg-4 text-left">
-                                                <span style="font-size:13px!important;margin-left:4px;">
-                                                    Show Phone Number in deal footer
-                                                </span>
-                                            </div>
-                                            <div class="col-lg-3" style="padding-left:22px;">
-                                                <div class="onoffswitch" style="width:95px;">
-                                                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchPhoneNo" data-bind="checked:IsShowPhoneNo">
-                                                    <label class="onoffswitch-label" for="switchPhoneNo">
-                                                        <div class="onoffswitch-inner"></div>
-                                                        <div class="onoffswitch-switch"></div>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="form-group" style="margin-bottom:5px;">
-                                            <div class="col-lg-2"></div>
-                                            <div class="col-lg-4 text-left">
-                                                <span style="font-size:13px!important;margin-left:4px;">
-                                                    Show Map in deal footer
-                                                </span>
-                                            </div>
-                                            <div class="col-lg-3" style="padding-left:22px;">
-                                                <div class="onoffswitch" style="width:95px;">
-                                                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchMap" data-bind="checked:IsShowMap">
-                                                    <label class="onoffswitch-label" for="switchMap">
-                                                        <div class="onoffswitch-inner"></div>
-                                                        <div class="onoffswitch-switch"></div>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group" style="margin-bottom:5px;margin-top:10px;">
-                                            <div class="col-lg-2"></div>
-                                            <div class="col-lg-4 text-left">
-                                                <span style="font-size:13px!important;margin-left:4px;">
-                                                    Show Reviews in Deal header
-                                                </span>
-                                            </div>
-                                            <div class="col-lg-3" style="padding-left:22px;">
-                                                <div class="onoffswitch" style="width:95px;">
-                                                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchreview" data-bind="checked:IsShowReviews">
-                                                    <label class="onoffswitch-label" for="switchreview">
-                                                        <div class="onoffswitch-inner"></div>
-                                                        <div class="onoffswitch-switch"></div>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group" style="margin-bottom:5px;margin-top:10px;">
-                                            <div class="col-lg-2"></div>
-                                            <div class="col-lg-4 text-left">
-                                                <span style="font-size:13px!important;margin-left:4px;">
-                                                    Show About Us in deal footer
-                                                </span>
-                                            </div>
-                                            <div class="col-lg-3" style="padding-left:22px;">
-                                                <div class="onoffswitch" style="width:95px;">
-                                                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchaboutus" data-bind="checked:IsShowAboutUs">
-                                                    <label class="onoffswitch-label" for="switchaboutus">
-                                                        <div class="onoffswitch-inner"></div>
-                                                        <div class="onoffswitch-switch"></div>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group" style="margin-bottom:5px;margin-top:10px;">
-                                            <div class="col-lg-2"></div>
-                                            <div class="col-lg-4 text-left">
-                                                <span style="font-size:13px!important;margin-left:4px;">
-                                                    Show Youtube video in deal footer
-                                                </span>
-                                            </div>
-                                            <div class="col-lg-3" style="padding-left:22px;">
-                                                <div class="onoffswitch" style="width:95px;">
-                                                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchvideo" data-bind="checked:IsShowyouTube">
-                                                    <label class="onoffswitch-label" for="switchvideo">
-                                                        <div class="onoffswitch-inner"></div>
-                                                        <div class="onoffswitch-switch"></div>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group" style="margin-bottom:10px;">
-                                            <div class="col-lg-2">
-                                                <label for="txtCampaignDesc" style="" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">Video Url</label>
-                                            </div>
-                                            <div class="col-lg-7 " style="padding-left:14px;">
-                                                @*@*<video id="videoTag" controls style="width:300px;height:150px;" onclick="showvideoUploadDialog();" data-bind="    attr: { src: $root.VideoLink2src()+$root.randonNumber() }"></video>*@
-                                                <input class="form-control" id="viedoLink" placeholder="max 400 characters" data-bind="value:YoutubeLink" maxlength="400" />
-                                                <br />
-                                                <pre id="myCode" style="width:433px!important;display:none;"></pre>
-                                            </div>
-
-                                            <div class="col-lg-3" style="padding-left:47px;">
-                                                <button style="width:123px;height:33px;" class="btn  btn-success gtild-color" id="btnNext" onclick="openYoutubeVideo();">Test URL Link</button>
-                                            </div>
-
-                                            <div class="col-lg-2">
-                                            </div>
-
+                                <div class="form-group" style="margin-bottom:5px;margin-top:15px;">
+                                    <div class="col-lg-2"></div>
+                                    <div class="col-lg-4 text-left">
+                                        <span style="font-size:13px!important;margin-left:4px;">
+                                            Show Phone Number in deal footer
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-3" style="padding-left:22px;">
+                                        <div class="onoffswitch" style="width:95px;">
+                                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchPhoneNo" data-bind="checked:IsShowPhoneNo">
+                                            <label class="onoffswitch-label" for="switchPhoneNo">
+                                                <div class="onoffswitch-inner"></div>
+                                                <div class="onoffswitch-switch"></div>
+                                            </label>
                                         </div>
                                     </div>
+                                </div>
+
+
+                                <div class="form-group" style="margin-bottom:5px;">
+                                    <div class="col-lg-2"></div>
+                                    <div class="col-lg-4 text-left">
+                                        <span style="font-size:13px!important;margin-left:4px;">
+                                            Show Map in deal footer
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-3" style="padding-left:22px;">
+                                        <div class="onoffswitch" style="width:95px;">
+                                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchMap" data-bind="checked:IsShowMap">
+                                            <label class="onoffswitch-label" for="switchMap">
+                                                <div class="onoffswitch-inner"></div>
+                                                <div class="onoffswitch-switch"></div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom:5px;margin-top:10px;">
+                                    <div class="col-lg-2"></div>
+                                    <div class="col-lg-4 text-left">
+                                        <span style="font-size:13px!important;margin-left:4px;">
+                                            Show Reviews in Deal header
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-3" style="padding-left:22px;">
+                                        <div class="onoffswitch" style="width:95px;">
+                                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchreview" data-bind="checked:IsShowReviews">
+                                            <label class="onoffswitch-label" for="switchreview">
+                                                <div class="onoffswitch-inner"></div>
+                                                <div class="onoffswitch-switch"></div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom:5px;margin-top:10px;">
+                                    <div class="col-lg-2"></div>
+                                    <div class="col-lg-4 text-left">
+                                        <span style="font-size:13px!important;margin-left:4px;">
+                                            Show About Us in deal footer
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-3" style="padding-left:22px;">
+                                        <div class="onoffswitch" style="width:95px;">
+                                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchaboutus" data-bind="checked:IsShowAboutUs">
+                                            <label class="onoffswitch-label" for="switchaboutus">
+                                                <div class="onoffswitch-inner"></div>
+                                                <div class="onoffswitch-switch"></div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom:5px;margin-top:10px;">
+                                    <div class="col-lg-2"></div>
+                                    <div class="col-lg-4 text-left">
+                                        <span style="font-size:13px!important;margin-left:4px;">
+                                            Show Youtube video in deal footer
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-3" style="padding-left:22px;">
+                                        <div class="onoffswitch" style="width:95px;">
+                                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchvideo" data-bind="checked:IsShowyouTube">
+                                            <label class="onoffswitch-label" for="switchvideo">
+                                                <div class="onoffswitch-inner"></div>
+                                                <div class="onoffswitch-switch"></div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom:10px;">
+                                    <div class="col-lg-2">
+                                        <label for="txtCampaignDesc" style="" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">Video Url</label>
+                                    </div>
+                                    <div class="col-lg-7 " style="padding-left:14px;">
+                                        @*@*<video id="videoTag" controls style="width:300px;height:150px;" onclick="showvideoUploadDialog();" data-bind="    attr: { src: $root.VideoLink2src()+$root.randonNumber() }"></video>*@
+                                        <input class="form-control" id="viedoLink" placeholder="max 400 characters" data-bind="value:YoutubeLink" maxlength="400" />
+                                        <br />
+                                        <pre id="myCode" style="width:433px!important;display:none;"></pre>
+                                    </div>
+
+                                    <div class="col-lg-3" style="padding-left:47px;">
+                                        <button style="width:123px;height:33px;" class="btn  btn-success gtild-color" id="btnNext" onclick="openYoutubeVideo();">Test URL Link</button>
+                                    </div>
+
+                                    <div class="col-lg-2">
+                                    </div>
+
+                                </div>
+                            </div>
 
 
 
@@ -792,9 +784,14 @@ else
                                     </div>
                                     <div class="col-lg-8">
                                         <div class="col-lg-4">
-                                            <div style="margin-top:5px;    text-align: center;cursor:pointer;">
+                                            <div style="margin-top:5px;   text-align: center;cursor:pointer;" id="divimg1">
                                                 @*<img style="height:90px;" data-bind="visible: couponImage1() == '' || couponImage1() == null"  src="/Content/Images/placeholder.png" onclick="showCouponDialog4();" />*@
-
+                                                <div class="imageBoxName" id="div1" data-bind="visible:$root.diveNo()==1" style="display:none">
+                                                    <a class="" style="float: right;" onclick="onDeletebutton(1)">
+                                                        <span class=" glyphicon glyphicon-trash" style="color:red" aria-hidden="true">
+                                                        </span>
+                                                    </a>
+                                                </div>
                                                 <img style="height:70px;" data-bind="visible:couponImage1()!='',attr:{ src:couponImage1}" id="bannerImage1" data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(2)" />
 
                                                 @*<div id="couponImage1" class="placeholders" data-bind="visible: couponImage1() == '/images/default-placeholder.png'" onclick="changeIframeSrc(2);"><span><i class="fa fa-plus" aria-hidden="true" style="color:#32CD32"></i></span></div>*@
@@ -812,6 +809,11 @@ else
                                         <div class="col-lg-4" style="display:none;" id="CouponImage2panel" data-bind="visible:$root.Banner2Flag">
                                             <div style="margin-top:5px;    text-align: center;cursor:pointer;">
                                                 @*<img style="height:90px;" data-bind="visible: CouponImage2() == '' || CouponImage2() == null" src="/Content/Images/placeholder.png" onclick="showCouponDialog2();" />*@
+                                                <div id="div2" data-bind="visible:$root.diveNo()==2" style="display:none">
+                                                    <a class="" style="float: right;" onclick="onDeletebutton(2)">
+                                                        <span class="glyphicon glyphicon-trash" style="color:red" aria-hidden="true"></span>
+                                                    </a>
+                                                </div>
                                                 <img style="height:70px;" data-bind="visible: CouponImage2() != '' && CouponImage2() != null ,attr: { src: CouponImage2 }" data-toggle="modal" data-target="#damModel" id="bannerImage2" onclick="changeIframeSrc(3)" />
                                                 <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
                                                     (450 x 300 pixels)
@@ -826,6 +828,11 @@ else
                                         <div class="col-lg-4" style="display:none;" id="CouponImage3panel" data-bind="visible:$root.Banner3Flag">
                                             <div style="margin-top:5px;    text-align: center;cursor:pointer;">
                                                 @*<img style="height:90px;" data-bind="visible: CouponImage3() == '' || CouponImage3() == null" src="/Content/Images/placeholder.png" onclick="showCouponDialog3();" />*@
+                                                <div class="imageBoxName" id="div3" data-bind="visible:$root.diveNo()==3" style="display:none">
+                                                    <a class="" style="float: right;" onclick="onDeletebutton(3)">
+                                                        <span class="glyphicon glyphicon-trash" style="color:red" aria-hidden="true"></span>
+                                                    </a>
+                                                </div>
                                                 <img style="height:70px;" data-bind="visible: CouponImage3() != '' && CouponImage3() != null,attr: { src: CouponImage3 }" id="bannerImage3" data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(4)" />
                                                 <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
                                                     (450 x 300 pixels)
@@ -851,6 +858,11 @@ else
                                         <div class="col-lg-4" style="display:none;" id="CouponImage4panel" data-bind="visible:$root.Banner4Flag">
                                             <div style="margin-top:5px;    text-align: center;cursor:pointer;">
                                                 @*<img style="height:90px;" data-bind="visible: couponImage1() == '' || couponImage1() == null"  src="/Content/Images/placeholder.png" onclick="showCouponDialog4();" />*@
+                                                <div class="imageBoxName" id="div4" data-bind="visible:$root.diveNo()==4" style="display:none">
+                                                    <a class="" style="float: right;" onclick="onDeletebutton(4)">
+                                                        <span class="glyphicon glyphicon-trash" style="color:red" aria-hidden="true"></span>
+                                                    </a>
+                                                </div>
 
                                                 <img style="height:70px;" data-bind="visible: CouponImage4()!='',attr: { src: CouponImage4 }" id="bannerImage4" data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(5)" />
 
@@ -870,6 +882,11 @@ else
                                         <div class="col-lg-4" style="display:none;" id="CouponImage5panel" data-bind="visible:$root.Banner5Flag">
                                             <div style="margin-top:5px;    text-align: center;cursor:pointer;">
                                                 @*<img style="height:90px;" data-bind="visible: CouponImage2() == '' || CouponImage2() == null" src="/Content/Images/placeholder.png" onclick="showCouponDialog2();" />*@
+                                                <div class="imageBoxName" id="div5" data-bind="visible:$root.diveNo()==5" style="display:none">
+                                                    <a class="" style="float: right;" onclick="onDeletebutton(5)">
+                                                        <span class="glyphicon glyphicon-trash" style="color:red" aria-hidden="true"></span>
+                                                    </a>
+                                                </div>
                                                 <img style="height:70px;" data-bind="visible: CouponImage5() != '' && CouponImage5() != null ,attr: { src: CouponImage5 }" data-toggle="modal" data-target="#damModel" id="bannerImage5" onclick="changeIframeSrc(6)" />
                                                 <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
                                                     (450 x 300 pixels)
@@ -884,6 +901,11 @@ else
                                         <div class="col-lg-4" style="display:none;" id="CouponImage6panel" data-bind="visible:$root.Banner6Flag">
                                             <div style="margin-top:5px;    text-align: center;cursor:pointer;">
                                                 @*<img style="height:90px;" data-bind="visible: CouponImage3() == '' || CouponImage3() == null" src="/Content/Images/placeholder.png" onclick="showCouponDialog3();" />*@
+                                                <div class="imageBoxName" id="div6" data-bind="visible:$root.diveNo()==6" style="display:none">
+                                                    <a style="float: right;" onclick="onDeletebutton(6)">
+                                                        <span class="glyphicon glyphicon-trash" style="color:red" aria-hidden="true"></span>
+                                                    </a>
+                                                </div>
                                                 <img style="height:70px;" data-bind="visible: CouponImage6() != '' && CouponImage6() != null,attr: { src: CouponImage6 }" id="bannerImage6" data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(7)" />
                                                 <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
                                                     (450 x 300 pixels)
@@ -941,7 +963,7 @@ else
 
                         <div class="col-lg-12" style="margin:auto;float:none !important;" data-bind="visible: $root.previewScreenNumber() == 3">
                             @*<div class="form-group formcontrol-bg" data-bind="visible: $root.isEnableVedioVerificationLink">
-                                <div class="col-lg-11">*@
+                        <div class="col-lg-11">*@
                             <div class="form-group">
                                 <div class="col-lg-2">
                                     <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn"> Deal category</label>
@@ -954,27 +976,27 @@ else
                                         </ol>
                                     </div>
                                     @*<div class="col-lg-4">
-                                            <!-- ko template: { name: 'ListOfSelectedCouponCats2' , foreach: $root.couponCategoriesCol2 } -->
-                                            <!-- /ko -->
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <!-- ko template: { name: 'ListOfSelectedCouponCats2' , foreach: $root.couponCategoriesCol3 } -->
-                                            <!-- /ko -->
-                                        </div>*@
+                                    <!-- ko template: { name: 'ListOfSelectedCouponCats2' , foreach: $root.couponCategoriesCol2 } -->
+                                    <!-- /ko -->
+                                </div>
+                                <div class="col-lg-4">
+                                    <!-- ko template: { name: 'ListOfSelectedCouponCats2' , foreach: $root.couponCategoriesCol3 } -->
+                                    <!-- /ko -->
+                                </div>*@
                                 </div>
                                 @*<div class="col-lg-7">
-                                    <div class="row">
-                                        <div>
-                                            <a href="#" id="couponCategorySelectorLink" class="btn btn-warning" style="margin-left:0px;" data-bind="click: $root.openProductCategoryDialog">
-                                                <i class="fa fa-lg"></i>&nbsp;Select Deal Categories
-                                            </a>
-                                        </div>
-                                        <div>
-                                            <!-- ko template: { name: 'ListOfSelectedCouponCats' , foreach: $root.couponCategories } -->
-                                            <!-- /ko -->
-                                        </div>
-                                    </div>
-                                    </div>*@
+                            <div class="row">
+                                <div>
+                                    <a href="#" id="couponCategorySelectorLink" class="btn btn-warning" style="margin-left:0px;" data-bind="click: $root.openProductCategoryDialog">
+                                        <i class="fa fa-lg"></i>&nbsp;Select Deal Categories
+                                    </a>
+                                </div>
+                                <div>
+                                    <!-- ko template: { name: 'ListOfSelectedCouponCats' , foreach: $root.couponCategories } -->
+                                    <!-- /ko -->
+                                </div>
+                            </div>
+                            </div>*@
                             </div>
                             <div class="col-lg-12" style="margin-bottom:20px;">
                                 <div class="adsubHeading Theme_standard_clr borderbtmline" data-bind="visible: $root.previewScreenNumber() == 3">
@@ -1031,13 +1053,13 @@ else
 
 
                             @*<div class="form-group" data-bind="visible: $root.buyItQuestionLabelStatus() == true && $root.buyItQuestionStatus() == true ">
-                                    <div class="col-lg-2">
-                                        <label for="txtBuyItlbl" class="control-label text-right tooltip-float floatNone">Enter Label</label>
-                                    </div>
-                                    <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="txtBuyItlbl" placeholder="(12 characters)" style="width:50%!important;" maxlength="12" data-bind="value: $root.ButItOtherLabel">
-                                    </div>
-                                </div>*@
+                            <div class="col-lg-2">
+                                <label for="txtBuyItlbl" class="control-label text-right tooltip-float floatNone">Enter Label</label>
+                            </div>
+                            <div class="col-lg-8">
+                                <input type="text" class="form-control" id="txtBuyItlbl" placeholder="(12 characters)" style="width:50%!important;" maxlength="12" data-bind="value: $root.ButItOtherLabel">
+                            </div>
+                        </div>*@
 
 
 
@@ -1138,73 +1160,73 @@ else
                             </div>
 
                             @*<div class="col-lg-11">
-                                <div class="form-group" style="margin-bottom:20px; margin-top:20px;">
-                                    <div class="col-lg-4 text-campaign-left  Float-Left">
-                                        <label class="control-label text-right tooltip-float font20 floatNone hideInGames" style="float:left !important;       font-size: 17px; margin-left: 6px; ">Buy Landing page Url</label>*@
+                        <div class="form-group" style="margin-bottom:20px; margin-top:20px;">
+                            <div class="col-lg-4 text-campaign-left  Float-Left">
+                                <label class="control-label text-right tooltip-float font20 floatNone hideInGames" style="float:left !important;       font-size: 17px; margin-left: 6px; ">Buy Landing page Url</label>*@
                             @*<label class="control-label text-right tooltip-float font20 floatNone showInGames" style="float:left !important;      font-size: 17px;  margin-left: 6px; ">Win game Landing page Url</label>*@
                             @*</div>*@
                             @*<div class="col-lg-2 Float-Left" style="padding-top:3px;">
-                                            <div class="onoffswitch">
-                                                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchVoucher" data-bind="checked: $root.buyItQuestionStatus, event: { click: $root.addBuyItPrice}">
-                                                <label class="onoffswitch-label" for="switchVoucher">
-                                                    <div class="onoffswitch-inner"></div>
-                                                    <div class="onoffswitch-switch"></div>
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-2 text-campaign-left Float-Left" style="margin-left:6px;display:none;">
-                                            <span class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;color:red;" ></span>
-                                        </div>
-                                        <div class="col-lg-3 Float-Left" style="margin-left:40px;">
-                                            <a href="#" id="idpreviewquizscreen" class="btn btn-primary pull-right" data-toggle="modal" data-target=".model_BuyItQ_ph" style="margin-left:6px;display:none;">
-                                                Preview
-                                            </a>
-                                        </div>
+                                    <div class="onoffswitch">
+                                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchVoucher" data-bind="checked: $root.buyItQuestionStatus, event: { click: $root.addBuyItPrice}">
+                                        <label class="onoffswitch-label" for="switchVoucher">
+                                            <div class="onoffswitch-inner"></div>
+                                            <div class="onoffswitch-switch"></div>
+                                        </label>
                                     </div>
+                                </div>
+                                <div class="col-lg-2 text-campaign-left Float-Left" style="margin-left:6px;display:none;">
+                                    <span class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;color:red;" ></span>
+                                </div>
+                                <div class="col-lg-3 Float-Left" style="margin-left:40px;">
+                                    <a href="#" id="idpreviewquizscreen" class="btn btn-primary pull-right" data-toggle="modal" data-target=".model_BuyItQ_ph" style="margin-left:6px;display:none;">
+                                        Preview
+                                    </a>
+                                </div>
+                            </div>
 
-                                </div>*@
+                        </div>*@
 
                             @*<div class="form-group" data-bind="visible: $root.buyItQuestionStatus()">
-                                    <div class="col-lg-2">
-                                        <label for="txtBuyItLine1" class="control-label text-right tooltip-float floatNone">Description</label>
-                                    </div>
-                                    <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="txtBuyItLine1" placeholder="Enter Description  (150 characters)" maxlength="150">
-                                    </div>
-                                </div>*@
+                            <div class="col-lg-2">
+                                <label for="txtBuyItLine1" class="control-label text-right tooltip-float floatNone">Description</label>
+                            </div>
+                            <div class="col-lg-8">
+                                <input type="text" class="form-control" id="txtBuyItLine1" placeholder="Enter Description  (150 characters)" maxlength="150">
+                            </div>
+                        </div>*@
 
 
                             @*<div class="form-group" data-bind="visible: $root.buyItQuestionStatus() == 1 ">
-                                    <div class="col-lg-2">
-                                        <label for="txtBuyItUrl" class="control-label text-right tooltip-float floatNone">Landing page url </label>
-                                    </div>
-                                    <div class="col-lg-8">
-                                        <textarea class="form-control" id="txtBuyItUrl" rows="1" placeholder="Enter in landing page url "  style="margin-top:5px;"></textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group" data-bind="visible: $root.buyItQuestionStatus() == 1 ">
-                                    <div class="col-lg-2">
-                                        <label for="txtBuyItlbl" class="control-label text-right tooltip-float floatNone">Button Label </label>
-                                    </div>
-                                    <div class="col-lg-8">
+                            <div class="col-lg-2">
+                                <label for="txtBuyItUrl" class="control-label text-right tooltip-float floatNone">Landing page url </label>
+                            </div>
+                            <div class="col-lg-8">
+                                <textarea class="form-control" id="txtBuyItUrl" rows="1" placeholder="Enter in landing page url "  style="margin-top:5px;"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group" data-bind="visible: $root.buyItQuestionStatus() == 1 ">
+                            <div class="col-lg-2">
+                                <label for="txtBuyItlbl" class="control-label text-right tooltip-float floatNone">Button Label </label>
+                            </div>
+                            <div class="col-lg-8">
 
-                                        <select class="form-control" style="width:50%!important;">
-                                            <option>Label1</option>
-                                            <option>Label2</option>
-                                            <option>Label3</option>
-                                            <option>Label4</option>
-                                            <option>Label5</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group" data-bind="visible: $root.buyItQuestionStatus() == 1 ">
-                                    <div class="col-lg-2">
-                                        <label for="txtBuyItlbl" class="control-label text-right tooltip-float floatNone">Enter Label</label>
-                                    </div>
-                                    <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="txtBuyItlbl" placeholder="(12 characters)" style="width:50%!important;" maxlength="12">
-                                    </div>
-                                </div>*@
+                                <select class="form-control" style="width:50%!important;">
+                                    <option>Label1</option>
+                                    <option>Label2</option>
+                                    <option>Label3</option>
+                                    <option>Label4</option>
+                                    <option>Label5</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group" data-bind="visible: $root.buyItQuestionStatus() == 1 ">
+                            <div class="col-lg-2">
+                                <label for="txtBuyItlbl" class="control-label text-right tooltip-float floatNone">Enter Label</label>
+                            </div>
+                            <div class="col-lg-8">
+                                <input type="text" class="form-control" id="txtBuyItlbl" placeholder="(12 characters)" style="width:50%!important;" maxlength="12">
+                            </div>
+                        </div>*@
 
 
 
@@ -1215,7 +1237,7 @@ else
                                 <div class="col-lg-7">
                                     <textarea class="form-control" id="fineprint2" rows="1" placeholder="max 72 characters" data-bind="value: FinePrintLine2,click:$root.selectJobDescription" maxlength="72"></textarea>
                                 </div>
-                                <div class="col-lg-1">
+                                <div class="col-lg-1" style="display:none">
                                     <a id="P1" data-bind="visible:$root.selectedJobDescription()=== 'fineprint2',click:$root.openPhraseLibrary" style="padding: 4px 8px;" class="btn btn-primary pull-right">
                                         <i class="fa fa-lg"></i>&nbsp;....
                                     </a>
@@ -1356,7 +1378,7 @@ else
 
                     </div>
                 </div>
-                @Html.Partial("~/Areas/Coupons/Views/Coupons/_advertDashboardDeal.cshtml")
+               
 
                 <div class="col-lg-3 form-horizontal" style=" height:566px;
     margin-left: 0px !important;">
@@ -1384,9 +1406,9 @@ else
                             <div class="row" style="margin-top:10px;">
                                 <div class="col-lg-12" data-bind="with: $root.couponModel" style="padding-left:23px;display:none">
                                     @*<input type="radio" name="optionsRadiosDelvTypes" value="1" id="optionsRadiosApplyFilterFree" data-bind="checked:CouponListingMode">
-                                        <label for="optionsRadiosApplyFilterFree">
-                                            <span class="panelfntSize">List for 14 days-FREE</span> .
-                                        </label>*@
+                                <label for="optionsRadiosApplyFilterFree">
+                                    <span class="panelfntSize">List for 14 days-FREE</span> .
+                                </label>*@
                                     <div class="col-lg-9 fontsize11" style="padding-left: 2px;padding-top: 12px;">
                                         List for 14 days-FREE.
                                     </div>
@@ -1410,9 +1432,9 @@ else
                                         <span class="help-block text-right"></span>
                                     </div>
                                     @*<input type="radio" name="optionsRadiosDelvTypes" value="2" id="optionsRadiosApplyFilterOnce" data-bind="checked:CouponListingMode">
-                                        <label for="optionsRadiosApplyFilterOnce">
-                                            <span class="panelfntSize" style="margin-left:1px;">List for 6 months-$29 usd</span>.
-                                        </label>*@
+                                <label for="optionsRadiosApplyFilterOnce">
+                                    <span class="panelfntSize" style="margin-left:1px;">List for 6 months-$29 usd</span>.
+                                </label>*@
                                 </div>
 
                                 <div class="col-lg-12" style="padding-left:24px;">
@@ -1489,7 +1511,7 @@ else
                     </div>
                 </div>
             </div>
-
+            @Html.Partial("~/Areas/Coupons/Views/Coupons/_advertDashboardDeal.cshtml")
             <div class="clearfix">
             </div>
 
@@ -1741,7 +1763,7 @@ else
 
     var mode = 1;
     function changeIframeSrc(mode1) {
-
+        debugger;
         mode = mode1;
         if (mode1 != 1)
             mode1 = 2;
@@ -1752,21 +1774,36 @@ else
     }
 
     function SetMode(mode) {
+        debugger;
         if (mode == 2) {
             $("#CouponImage2panel").css('display', 'block');
+            $("#div1").css('display', 'block');
 
         }
         else if (mode == 3) {
             $("#CouponImage3panel").css('display', 'block');
+            $("#div2").css('display', 'block');
+            $("#div1").css('display', 'none');
         }
         else if (mode == 4) {
             $("#CouponImage4panel").css('display', 'block');
+            $("#div3").css('display', 'block');
+            $("#div2").css('display', 'none');
         }
         else if (mode == 5) {
             $("#CouponImage5panel").css('display', 'block');
+            $("#div4").css('display', 'block');
+            $("#div3").css('display', 'none');
         }
         else if (mode == 6) {
             $("#CouponImage6panel").css('display', 'block');
+            $("#div5").css('display', 'block');
+            $("#div4").css('display', 'none');
+        }
+        else if (mode == 7) {
+
+            $("#div6").css('display', 'block');
+            $("#div5").css('display', 'none');
         }
 
     }
@@ -1809,6 +1846,69 @@ else
             }
             SetMode(mode);
         });
+    }
+    function onDeletebutton(mode) {
+        var attr = $("a").attr('disabled');
+        if (attr == "disabled")
+            return;
+        if (mode == 1) {
+            onDeleteImage(1);
+            $("#bannerImage1").attr("src",null);
+            $("#bannerImage1").attr("src", "/images/standardplaceholder.png");
+            $("#CouponImage2panel").css('display', 'none');
+            $("#divimg1").css('display', 'block');
+            $("#div1").css('display', 'none');
+        }
+        else if (mode == 2)
+        {
+            onDeleteImage(2);
+            $("#bannerImage2").attr("src",null);
+            $("#bannerImage2").attr("src", "/images/standardplaceholder.png");
+            $("#CouponImage3panel").css('display', 'none');
+            $("#CouponImage2panel").css('display', 'block');
+            $("#div1").css('display', 'block');
+            $("#div2").css('display', 'none');
+        }
+        else if (mode == 3) {
+            onDeleteImage(3);
+            $("#bannerImage3").attr("src", null);
+            $("#bannerImage3").attr("src", "/images/standardplaceholder.png");
+            $("#CouponImage4panel").css('display', 'none');
+            $("#CouponImage3panel").css('display', 'block');
+            $("#div2").css('display', 'block');
+            $("#div3").css('display', 'none');
+           
+        }
+        else if (mode == 4) {
+            onDeleteImage(4);
+            $("#bannerImage4").attr("src", null);
+            $("#bannerImage4").attr("src", "/images/standardplaceholder.png");
+            $("#CouponImage5panel").css('display', 'none');
+            $("#CouponImage4panel").css('display', 'block');
+            $("#div3").css('display', 'block');
+            $("#div4").css('display', 'none');
+        }
+        else if (mode == 5) {
+            onDeleteImage(5);
+            $("#bannerImage5").attr("src", null);
+            $("#bannerImage5").attr("src", "/images/standardplaceholder.png");
+            $("#CouponImage6panel").css('display', 'none');
+            $("#CouponImage5panel").css('display', 'block');
+            $("#div4").css('display', 'block');
+            $("#div5").css('display', 'none');
+        }
+        else if (mode == 6) {
+            onDeleteImage(6);
+            $("#bannerImage6").attr("src", null);
+            $("#bannerImage6").attr("src", "/images/standardplaceholder.png");
+            $("#CouponImage6panel").css('display', 'bolck');
+            $("#div5").css('display', 'bolck');
+            $("#div6").css('display', 'none');
+        }
+
+     
+
+
     }
 
 </script>

@@ -14,7 +14,7 @@ else
 <div data-bind="visible: $root.isEditorVisible()" style="display: none">
     <div class="col-lg-12">
         <div class="row">
-            <div class="col-lg-12" id="topArea">
+            <div class="col-lg-12" style="padding-left:1px;" id="topArea">
                 <ol class="breadcrumb" style="display:none;">
                     <li><a href="~/Dashboard/Index" class="my-navigator">Home</a></li>
                     <li><a data-bind="click: $root.closeNewCampaignDialog" class="my-navigator">Video Campaigns</a></li>
@@ -25,7 +25,7 @@ else
 
                     @*<span id="newdisplay_Ad" class="pull-left " style="color:black!important; padding-left:0px;font-size:23px;margin-top:12px;display:none;" data-bind="NewCampaignBinding: CampaignName">New display ad</span>*@
                 </div>
-                <div class="col-lg-3" style="padding:0px;">
+                <div class="col-lg-3" style="padding-left:0px;padding-right:10px;">
                     @*<div style="margin-top:-5px;float:right;background:url(/Content/Images/Close_Button.png);background-repeat: no-repeat;width:40px;height:40px;border: 0;"><button style="margin-top:9px;" id="MainBtnClose" data-bind="click: $root.closeNewCampaignDialog" class="btn btn-default CloseBtn">Close</button></div>*@
 
                     <img data-bind="click: $root.closeNewCampaignDialog" src="/Content/Images/Close_Button.png" style="width:20px;height:20px;float:right;cursor:pointer;margin-top:17px;" />
@@ -47,9 +47,9 @@ else
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-12" style="padding-left:0px;">
                 <div>
-                    <div class="no-header clearfix col-lg-12 form-horizontal" data-bind="with: $root.campaignModel">
+                    <div class="no-header clearfix col-lg-12 form-horizontal"  style="padding-left:0px;" data-bind="with: $root.campaignModel, visible: !$root.isAdvertdashboardVisible()">
                         <div class="main-box header" style="padding-left:42px;">
                             <div class="col-lg-12" style="margin:auto;float:none !important">
                                 <div class="pull-left ads-numbering-main">
@@ -78,14 +78,14 @@ else
                                     <span data-bind="css: $root.previewScreenNumber() == 3  ? 'ads-selected-numbering-text' : '',click: $root.gotoScreen.bind(null,3)">Quiz</span>
                                 </div>
                                 @*<div class="pull-left ads-numbering-linebar" data-bind="css: $root.previewScreenNumber() == 6 ? 'ads-selected-numbering-box' : ''">
-                                </div>
-                                <div class="pull-left ads-numbering-main">
-                                    <div class="ads-numbering-box" data-bind="css: $root.previewScreenNumber() == 4 ? 'ads-selected-numbering-box' : '',click: $root.gotoScreen.bind(null,4)">
-                                        4
-                                    </div>
-                                    <br />
-                                    <span data-bind="css: $root.previewScreenNumber() == 4 ? 'ads-selected-numbering-text' : '',click: $root.gotoScreen.bind(null,4)">Delivery</span>
-                                </div>*@
+                    </div>
+                    <div class="pull-left ads-numbering-main">
+                        <div class="ads-numbering-box" data-bind="css: $root.previewScreenNumber() == 4 ? 'ads-selected-numbering-box' : '',click: $root.gotoScreen.bind(null,4)">
+                            4
+                        </div>
+                        <br />
+                        <span data-bind="css: $root.previewScreenNumber() == 4 ? 'ads-selected-numbering-text' : '',click: $root.gotoScreen.bind(null,4)">Delivery</span>
+                    </div>*@
                                 <div class="pull-left" style="width:49px;">
                                     &nbsp;
                                 </div>
@@ -131,17 +131,17 @@ else
                                         <div class="datespansclr">
                                             Date modified: <span style="margin-left:3px"></span><span>12 april 2014</span>
                                         </div>
-                               
+
                                         <br />
-                                       
+
                                         <span style="font-size:16px;color:black;margin-left:2px;" data-bind="text:StatusValue()"></span>
                                     </div>
                                     <div class="pull-right">
 
-                                        <img class="vid_image" data-bind="attr: { src: $root.StatusCodeImage }" /> 
+                                        <img class="vid_image" data-bind="attr: { src: $root.StatusCodeImage }" />
 
                                     </div>
-                                  
+
 
 
                                 </div>
@@ -150,17 +150,9 @@ else
                         </div>
 
                     </div>
-                    <div class="col-lg-12">
-                        @*<div class="col-lg-9">
-                            <div class="clearfix" data-bind="with: $root.campaignModel, visible: $root.isAdvertdashboardVisible()">
-                                <span class="pull-left " style="color:black!important; padding-left: 0px; font-size: 23px;" data-bind="text: CampaignName"></span>
+                    <div class="col-lg-12" style="padding-left:0px;" data-bind="visible: !$root.isAdvertdashboardVisible()">
 
-                                <div style="float:right;margin-top:-9px;"><img data-bind="click: $root.CloseCampaignADAnalyticView" src="/Content/Images/Close_Button.png" style="width:27px;height:27px;float:right;cursor:pointer;"></div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                        </div>*@
-                        <div class="col-lg-9 form-horizontal" data-bind="with: $root.campaignModel, visible: !$root.isAdvertdashboardVisible()" style="padding-left:0px;">
+                        <div class="col-lg-9 form-horizontal" data-bind="with: $root.campaignModel" style="padding-left:0px;">
                             <div class="main-box main-box-subpage">
 
                                 <div class="col-lg-12" data-bind="visible: $root.previewScreenNumber() == 1">
@@ -301,7 +293,7 @@ else
                                             <label for="txtCampaignDisplayName" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn" data-bind="text:$root.lblAdTitle">Campaign Title</label>
                                         </div>
                                         <div class="col-lg-7">
-                                            <input type="text" maxlength="76" name="Campaign Display Name" class="form-control width80percent" id="txtCampaignDisplayName" placeholder="Campaign title (76 characters)" data-bind="value: CampaignName,validationTooltip: DisplayTitle, validationOnElement: DisplayTitle">
+                                            <input type="text" maxlength="48" name="Campaign Display Name" class="form-control width80percent" id="txtCampaignDisplayName" placeholder="Campaign title (48 characters)" data-bind="value: CampaignName,validationTooltip: DisplayTitle, validationOnElement: DisplayTitle">
                                         </div>
                                         <div class="col-lg-1" data-bind="visible:!$root.isDisplayCouponsAds()" style="  text-align: right;
     font-size: 17px;
@@ -369,30 +361,30 @@ else
                                     </div>
                                     <div>
                                         @*<div class="col-lg-11">
-                            <div class="form-group" style="margin-bottom:20px; margin-top:20px;">
-                                <div class="col-lg-4 text-campaign-left  Float-Left">
-                                    <label class="control-label text-right tooltip-float font20 floatNone hideInGames" style="float:left !important;       font-size: 17px; margin-left: 6px; ">Video Landing page Url</label>
-                                    <label class="control-label text-right tooltip-float font20 floatNone showInGames" style="float:left !important;      font-size: 17px;  margin-left: 6px; ">Win game Landing page Url</label>
-                                </div>
-                                <div class="col-lg-2 Float-Left" style="padding-top:3px;">
-                                    <div class="onoffswitch">
-                                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchVoucherONOFf" data-bind="checked: $root.buyItQuestionStatus, event: { click: $root.addBuyItPrice}">
-                                        <label class="onoffswitch-label" for="switchVoucherONOFf">
-                                            <div class="onoffswitch-inner"></div>
-                                            <div class="onoffswitch-switch"></div>
-                                        </label>
+                                <div class="form-group" style="margin-bottom:20px; margin-top:20px;">
+                                    <div class="col-lg-4 text-campaign-left  Float-Left">
+                                        <label class="control-label text-right tooltip-float font20 floatNone hideInGames" style="float:left !important;       font-size: 17px; margin-left: 6px; ">Video Landing page Url</label>
+                                        <label class="control-label text-right tooltip-float font20 floatNone showInGames" style="float:left !important;      font-size: 17px;  margin-left: 6px; ">Win game Landing page Url</label>
+                                    </div>
+                                    <div class="col-lg-2 Float-Left" style="padding-top:3px;">
+                                        <div class="onoffswitch">
+                                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchVoucherONOFf" data-bind="checked: $root.buyItQuestionStatus, event: { click: $root.addBuyItPrice}">
+                                            <label class="onoffswitch-label" for="switchVoucherONOFf">
+                                                <div class="onoffswitch-inner"></div>
+                                                <div class="onoffswitch-switch"></div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 text-campaign-left Float-Left" style="margin-left:6px;display:none;">
+                                        <span class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;color:red; " data-bind="text: '(' +  $root.buyItPriceLbl() + ')'"></span>
+                                    </div>
+                                    <div class="col-lg-3 Float-Left" style="margin-left:40px;">
+                                        <a href="#" id="idpreviewquizscreen" class="btn btn-primary pull-right" data-toggle="modal" data-target=".model_BuyItQ_ph" style="margin-left:6px;display:none;">
+                                            Preview
+                                        </a>
                                     </div>
                                 </div>
-                                <div class="col-lg-2 text-campaign-left Float-Left" style="margin-left:6px;display:none;">
-                                    <span class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;color:red; " data-bind="text: '(' +  $root.buyItPriceLbl() + ')'"></span>
-                                </div>
-                                <div class="col-lg-3 Float-Left" style="margin-left:40px;">
-                                    <a href="#" id="idpreviewquizscreen" class="btn btn-primary pull-right" data-toggle="modal" data-target=".model_BuyItQ_ph" style="margin-left:6px;display:none;">
-                                        Preview
-                                    </a>
-                                </div>
-                            </div>
-                        </div>*@
+                            </div>*@
                                         <div class="col-lg-12">
                                             <div style="height:34px;" class="borderbtmline">
 
@@ -433,7 +425,7 @@ else
                                                 <select style="width:56%!important;" id="ddTextBtns" class="form-control " data-bind="options: $root.DefaultTextBtns, optionsText: 'name', optionsValue: 'id',event:{ change: $root.handleBuyIt}"></select>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="form-group" data-bind="visible:$root.BuyItStatus() == true">
                                             <div>
                                                 <div class="col-lg-2">
@@ -444,8 +436,8 @@ else
                                                 </div>
                                             </div>
                                         </div>
-                                     
-                                  
+
+
                                         <div class="form-group" data-bind="visible:$root.showLandingPageUrl">
                                             <div class="col-lg-2">
                                                 <label for="txtBuyItUrl" class="control-label text-right tooltip-float floatNone">Landing page url </label>
@@ -800,7 +792,7 @@ else
                                                     <button class="btn  btn-danger btnAdsCampaign ButtonWidth filterbtnclrs" id="" data-toggle="modal" data-target=".bs-example-modal-lg" data-bind="click:$root.showAdditionQuizCriteria,enable:$root.isClickRateVisible()!=true">Ad quiz results</button>
                                                 </div>
 
-                                                <div class="pull-left filtersDiv_width" >
+                                                <div class="pull-left filtersDiv_width">
                                                     <button class="btn  btn-danger btnAdsCampaign ButtonWidth filterbtnclrs" id="" data-toggle="modal" data-bind="click:$root.showAdditionUserSurveyCriteria,enable:$root.isClickRateVisible()!=true" data-target=".bs-example-modal-lg">My poll results</button>
                                                 </div>
 
@@ -833,7 +825,7 @@ else
                                         </div>
                                     </div>
                                     @*</div>
-                    </div>*@
+                        </div>*@
                                 </div>
                                 <div class="col-lg-12" style="margin:auto;float:none !important;" data-bind="visible: $root.previewScreenNumber() == 3">
                                     <div class="form-group" style="margin-top:10px; margin-left:-8px;display:none;">
@@ -888,8 +880,8 @@ else
                                         </div>
                                         <div class="col-lg-3">
                                             @*<a href="#" id="idpreviewquizscreen" class="btn btn-primary " data-toggle="modal" data-target=".model_quizQ_ph">
-                                Preview
-                            </a>*@
+                                    Preview
+                                </a>*@
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -913,48 +905,48 @@ else
 
                                 </div>
                                 @*<div class="col-lg-12" style="margin:auto;float:none !important;    " data-bind="visible: $root.previewScreenNumber() == 4">
-                                    <span class=" adBottomHeadingtext-campaign-left defaultThemeTxtClr font14" data-bind="visible:!$root.isDisplayCouponsAds(),text:tab4SubHeading" style="    color: rgb(52,152,219) !important;">
-                                        Select your ad campaign delivery mode:
-                                    </span>
-                                    <div class="clearfix">
-                                    </div><br />
+                        <span class=" adBottomHeadingtext-campaign-left defaultThemeTxtClr font14" data-bind="visible:!$root.isDisplayCouponsAds(),text:tab4SubHeading" style="    color: rgb(52,152,219) !important;">
+                            Select your ad campaign delivery mode:
+                        </span>
+                        <div class="clearfix">
+                        </div><br />
 
-                                    <div class="radio col-lg-12" style="text-align: left; display:none;">
-                                        <input type="radio" name="optionsRadiosDelvTypes" value="1" id="optionsRadiosApplyFilterFree" data-bind="checked: DeliveryDays">
-                                        <label for="optionsRadiosApplyFilterFree">
-                                            <span style="color:red; font-weight:bold;">Free</span> - Show video to any 10 random app users per day. Max 10 days
-                                            <br /><br />
-                                            Note. You can have only one free campaign at a time.
-                                        </label>
-                                        <span class="help-block text-right"></span>
-                                    </div>
+                        <div class="radio col-lg-12" style="text-align: left; display:none;">
+                            <input type="radio" name="optionsRadiosDelvTypes" value="1" id="optionsRadiosApplyFilterFree" data-bind="checked: DeliveryDays">
+                            <label for="optionsRadiosApplyFilterFree">
+                                <span style="color:red; font-weight:bold;">Free</span> - Show video to any 10 random app users per day. Max 10 days
+                                <br /><br />
+                                Note. You can have only one free campaign at a time.
+                            </label>
+                            <span class="help-block text-right"></span>
+                        </div>
 
-                                    <div class="radio col-lg-12" style="text-align: left;font-size:14px !important;">
-                                        <input type="radio" name="optionsRadiosDelvTypes" value="3" id="optionsRadiosNoFilterDaily" data-bind="checked: DeliveryDays">
-                                        <label for="optionsRadiosNoFilterDaily" class="font14">
-                                            <span class="defaultThemeTxtClr">BROADCAST DAILY</span> - Only once for this campaign.
-                                        </label>
-                                        <span class="help-block text-right"></span>
-                                    </div>
+                        <div class="radio col-lg-12" style="text-align: left;font-size:14px !important;">
+                            <input type="radio" name="optionsRadiosDelvTypes" value="3" id="optionsRadiosNoFilterDaily" data-bind="checked: DeliveryDays">
+                            <label for="optionsRadiosNoFilterDaily" class="font14">
+                                <span class="defaultThemeTxtClr">BROADCAST DAILY</span> - Only once for this campaign.
+                            </label>
+                            <span class="help-block text-right"></span>
+                        </div>
 
-                                    <div class="radio col-lg-12" style="text-align: left;font-size:14px !important;">
-                                        <input type="radio" name="optionsRadiosDelvTypes" value="2" id="optionsRadiosApplyFilterOnce" data-bind="checked: DeliveryDays">
-                                        <label for="optionsRadiosApplyFilterOnce" class="font14">
-                                            <span class="defaultThemeTxtClr">BROADCAST ONCE</span> - Potentially more than once for this campaign, but show on separate days.
-                                        </label>
-                                        <span class="help-block text-right"></span>
-                                    </div>
+                        <div class="radio col-lg-12" style="text-align: left;font-size:14px !important;">
+                            <input type="radio" name="optionsRadiosDelvTypes" value="2" id="optionsRadiosApplyFilterOnce" data-bind="checked: DeliveryDays">
+                            <label for="optionsRadiosApplyFilterOnce" class="font14">
+                                <span class="defaultThemeTxtClr">BROADCAST ONCE</span> - Potentially more than once for this campaign, but show on separate days.
+                            </label>
+                            <span class="help-block text-right"></span>
+                        </div>
 
-                                    <div class="radio col-lg-12" style="text-align: left; display:none;">
-                                        <input type="radio" name="optionsRadiosDelvTypes" value="4" id="optionsRadiosApplyFilterAudience" data-bind="checked: DeliveryDays">
-                                        <label for="optionsRadiosApplyFilterAudience">
-                                            <span style="color:red; font-weight:bold;">TARGET AUDIENCE</span> - Show video to only Target Audience.
-                                        </label>
-                                        <span class="help-block text-right"></span>
-                                    </div>
-                                </div>
-                                <div class="clearfix">
-                                </div>*@
+                        <div class="radio col-lg-12" style="text-align: left; display:none;">
+                            <input type="radio" name="optionsRadiosDelvTypes" value="4" id="optionsRadiosApplyFilterAudience" data-bind="checked: DeliveryDays">
+                            <label for="optionsRadiosApplyFilterAudience">
+                                <span style="color:red; font-weight:bold;">TARGET AUDIENCE</span> - Show video to only Target Audience.
+                            </label>
+                            <span class="help-block text-right"></span>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                    </div>*@
                                 <div class="next-back-btns col-lg-12" style="margin:auto;float:none !important">
                                     <div class="form-group">
                                         <div class="col-lg-3">
@@ -982,7 +974,7 @@ else
 
                         </div>
 
-                        @Html.Partial("~/Areas/Ads/Views/Ads/_advertDashboard.cshtml")
+                    
                         <div class="col-lg-3 form-horizontal" style=" height:566px;
     margin-left: 0px !important;">
 
@@ -1036,144 +1028,144 @@ else
 
 
 
-                                                 
+
 
                                                 <div class="col-lg-9 fontsize11" style="padding-left: 17px;padding-top: 12px;">
                                                     Repeat ad to each person in target audience on seperate days.
                                                 </div>
                                                 <div class="radio col-lg-3 paddingtop0px" style="text-align: left;font-size:14px !important;padding-left:8px;">
-            <input type="radio" name="optionsRadiosDelvTypes" value="2" id="optionsRadiosApplyFilterOnce" data-bind="checked: DeliveryDays">
-            <label for="optionsRadiosApplyFilterOnce" class="fontsize11" style="padding-left:24px!important;">
-                <span class="defaultThemeTxtClr"></span>
-            </label>
-            <span class="help-block text-right"></span>
-        </div>
+                                                    <input type="radio" name="optionsRadiosDelvTypes" value="2" id="optionsRadiosApplyFilterOnce" data-bind="checked: DeliveryDays">
+                                                    <label for="optionsRadiosApplyFilterOnce" class="fontsize11" style="padding-left:24px!important;">
+                                                        <span class="defaultThemeTxtClr"></span>
+                                                    </label>
+                                                    <span class="help-block text-right"></span>
+                                                </div>
 
 
 
                                                 @*<div class="radio col-lg-12 paddingtop0px" style="text-align: left;font-size:14px !important;">
-                                                    <input type="radio" name="optionsRadiosDelvTypes" value="2" id="optionsRadiosApplyFilterOnce" data-bind="checked: DeliveryDays">
-                                                    <label for="optionsRadiosApplyFilterOnce" class="fontsize11" style="padding-left:24px!important;">
-                                                        <span class="defaultThemeTxtClr">Repeat ad to each person in target audience on seperate days.</span>
-                                                    </label>
-                                                    <span class="help-block text-right"></span>
-                                                </div>*@
+                                        <input type="radio" name="optionsRadiosDelvTypes" value="2" id="optionsRadiosApplyFilterOnce" data-bind="checked: DeliveryDays">
+                                        <label for="optionsRadiosApplyFilterOnce" class="fontsize11" style="padding-left:24px!important;">
+                                            <span class="defaultThemeTxtClr">Repeat ad to each person in target audience on seperate days.</span>
+                                        </label>
+                                        <span class="help-block text-right"></span>
+                                    </div>*@
                                             </div>
                                         </div>
                                     </div>
-                                        <div class="row" style="margin-top:12px;">
-                                            <div data-bind="visible:$root.isClickRateVisible()!=true">
-                                                <div class="col-lg-12" style="margin-top:14px;">
+                                    <div class="row" style="margin-top:12px;">
+                                        <div data-bind="visible:$root.isClickRateVisible()!=true">
+                                            <div class="col-lg-12" style="margin-top:14px;">
 
-                                                    <div class="col-lg-7" style="padding-top:3px;">
-                                                        <div class="col-lg-11 paddingright0px">
-                                                            <span class="text-campaign-left fontsize13px" style="margin-top:-4px;">Pay Per Result(PPR)</span>
-                                                        </div>
-                                                        <div class="col-lg-1" style="padding-right:0px;text-align:right;">
-                                                            <span>$</span>
-                                                        </div>
+                                                <div class="col-lg-7" style="padding-top:3px;">
+                                                    <div class="col-lg-11 paddingright0px">
+                                                        <span class="text-campaign-left fontsize13px" style="margin-top:-4px;">Pay Per Result(PPR)</span>
                                                     </div>
-
-                                                    <div class="col-lg-5" data-bind="with: $root.campaignModel">
-                                                        <div class="col-lg-12" style="padding-left:0px;">
-                                                            <input type="text" style="float:left; color:#127abd; font-weight: bold;font-size: 15px; width:65px;" name="Budget" class="form-control" id="txtPerClick" data-bind="autoNumeric: ClickRate,settings:{mDec:2},validationTooltip:ClickRate, validationOnElement: ClickRate"> <span style="float:right;margin-top:7px;font-size:11px;">usd</span>
-                                                        </div>
-
+                                                    <div class="col-lg-1" style="padding-right:0px;text-align:right;">
+                                                        <span>$</span>
                                                     </div>
                                                 </div>
 
-                                                <div style="margin-top:12px;" class="col-lg-12">
-
-                                                    <div class="col-lg-7" style="float:left;padding-top:4px;">
-                                                        <div class="col-lg-11">
-                                                            <span class="text-campaign-left fontsize13px" style="margin-top:-4px;">Daily budget</span>
-                                                        </div>
-
-                                                        <div class="col-lg-1" style="padding-right:0px;text-align:right;">
-                                                            <span>$</span>
-                                                        </div>
-
+                                                <div class="col-lg-5" data-bind="with: $root.campaignModel">
+                                                    <div class="col-lg-12" style="padding-left:0px;">
+                                                        <input type="text" style="float:left; color:#127abd; font-weight: bold;font-size: 15px; width:65px;" name="Budget" class="form-control" id="txtPerClick" data-bind="autoNumeric: ClickRate,settings:{mDec:2},validationTooltip:ClickRate, validationOnElement: ClickRate"> <span style="float:right;margin-top:7px;font-size:11px;">usd</span>
                                                     </div>
 
-                                                    <div class="col-lg-5" style="" data-bind="with: $root.campaignModel">
-                                                        <div class="col-lg-12" style="padding-left:0px;">
-                                                            <input type="text" style="float:left;width:65px; color:#127abd; font-weight: bold;font-size: 15px; " name="Budget" class="form-control" id="txtPerClick" data-bind="autoNumeric: MaxDailyBudget,settings:{mDec:2},validationTooltip:MaxDailyBudget, validationOnElement: MaxDailyBudget"> <span style="float:right;margin-top:7px;font-size:11px;">usd</span>
-                                                        </div>
-                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-12" style="padding-left:24px;">
 
+                                            <div style="margin-top:12px;" class="col-lg-12">
 
-                                                <div style="margin-top:0px;min-height:59px;">
-                                                    <div>
+                                                <div class="col-lg-7" style="float:left;padding-top:4px;">
+                                                    <div class="col-lg-11">
+                                                        <span class="text-campaign-left fontsize13px" style="margin-top:-4px;">Daily budget</span>
+                                                    </div>
 
-                                                        <button class="btn  btn-success btnSubmitApproval" id="btnSubmitForApproval2" data-bind="click:$root.submitCampaignData, visible: $root.isNewCampaign() " style="width:229px;">Submit for Approval</button>
-                                                        <button class="btn  btn-success btnSubmitApproval bluethemeclr drafthov" id="btnSaveAsDraft" data-bind="click:$root.SaveDraftCampaign, visible: $root.isNewCampaign() " style="width:229px;display:none;">Save as Draft</button>
-                                                        <button class="btn  btn-info " id="btnStopAndTerminate" data-bind="visible: $root.isTerminateBtnVisible " style="width:229px;margin-top:10px;">Stop & Terminate Early</button>
-                                                        <button class="btn  btn-danger " id="btnArchive" data-bind=" click:$root.ArchiveCampaign,visible: $root.isShowArchiveBtn " style="width:229px;margin-bottom:10px;">Archive Campaign</button>
-                                                        <button class="btn  btn-info Theme_standard_clr" id="btnCopyCampaign" data-bind=" click:$root.copyCampaign  " style="display:none;">Create Copy - New Campaign</button>@*visible: $root.isNewCampaignVisible*@
-                                                        <button class="btn  btn-success" id="btnPauseCampaign" data-bind="click:$root.changeStatus(4)" style="display:none;width:229px;margin-top:10px;">Pause</button>
-                                                        <div data-bind="with: $root.campaignModel">
-                                                            @*<button class="btn  btn-success" id="btnResumeAdd" data-bind="click:$root.submitResumeData,visible:Status() == 4" style="display:none;width:229px;margin-top:10px">Resume</button>*@
-                                                            <button class="btn  btn-success" id="btnResumeCampagin" data-bind="click:$root.submitResumeData,visible:hasChanges()==false&& Status() == 4" style="display:none;width:229px;margin-top:10px">Resume</button>
-                                                            <button class="btn  btn-success " id="btnSubmitForApproval23" data-bind="click:$root.submitCampaignData, visible:hasChanges()==true && Status() == 4" style="width:229px;margin-top:10px">Submit for Approval</button>
-                                                        </div>
-                                                        @*<button class="btn  btn-success gtild-color " id="btnChart" data-bind="visible: !$root.isNewCampaign()" style="margin-top: 10px;width:229px;color:gainsboro;">Charts</button>*@
+                                                    <div class="col-lg-1" style="padding-right:0px;text-align:right;">
+                                                        <span>$</span>
                                                     </div>
 
                                                 </div>
 
-
-                                            </div>
-
-                                            <div class="col-lg-12" style="padding-left:24px;margin-top:6px;">
-
-                                                <span style=" font-size:12px;">  Learn more about 'Ad Click'</span><img style="height:14px;" src="/Content/Images/Drop_Arrow.png" data-toggle="collapse" data-target="#demo" />
-
+                                                <div class="col-lg-5" style="" data-bind="with: $root.campaignModel">
+                                                    <div class="col-lg-12" style="padding-left:0px;">
+                                                        <input type="text" style="float:left;width:65px; color:#127abd; font-weight: bold;font-size: 15px; " name="Budget" class="form-control" id="txtPerClick" data-bind="autoNumeric: MaxDailyBudget,settings:{mDec:2},validationTooltip:MaxDailyBudget, validationOnElement: MaxDailyBudget"> <span style="float:right;margin-top:7px;font-size:11px;">usd</span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
+                                        <div class="col-lg-12" style="padding-left:24px;">
+
+
+                                            <div style="margin-top:0px;min-height:59px;">
+                                                <div>
+
+                                                    <button class="btn  btn-success btnSubmitApproval" id="btnSubmitForApproval2" data-bind="click:$root.submitCampaignData, visible: $root.isNewCampaign() " style="width:229px;">Submit for Approval</button>
+                                                    <button class="btn  btn-success btnSubmitApproval bluethemeclr drafthov" id="btnSaveAsDraft" data-bind="click:$root.SaveDraftCampaign, visible: $root.isNewCampaign() " style="width:229px;display:none;">Save as Draft</button>
+                                                    <button class="btn  btn-info " id="btnStopAndTerminate" data-bind="visible: $root.isTerminateBtnVisible " style="width:229px;margin-top:10px;">Stop & Terminate Early</button>
+                                                    <button class="btn  btn-danger " id="btnArchive" data-bind=" click:$root.ArchiveCampaign,visible: $root.isShowArchiveBtn " style="width:229px;margin-bottom:10px;">Archive Campaign</button>
+                                                    <button class="btn  btn-info Theme_standard_clr" id="btnCopyCampaign" data-bind=" click:$root.copyCampaign  " style="display:none;">Create Copy - New Campaign</button>@*visible: $root.isNewCampaignVisible*@
+                                                    <button class="btn  btn-success" id="btnPauseCampaign" data-bind="click:$root.changeStatus(4)" style="display:none;width:229px;margin-top:10px;">Pause</button>
+                                                    <div data-bind="with: $root.campaignModel">
+                                                        @*<button class="btn  btn-success" id="btnResumeAdd" data-bind="click:$root.submitResumeData,visible:Status() == 4" style="display:none;width:229px;margin-top:10px">Resume</button>*@
+                                                        <button class="btn  btn-success" id="btnResumeCampagin" data-bind="click:$root.submitResumeData,visible:hasChanges()==false&& Status() == 4" style="display:none;width:229px;margin-top:10px">Resume</button>
+                                                        <button class="btn  btn-success " id="btnSubmitForApproval23" data-bind="click:$root.submitCampaignData, visible:hasChanges()==true && Status() == 4" style="width:229px;margin-top:10px">Submit for Approval</button>
+                                                    </div>
+                                                    @*<button class="btn  btn-success gtild-color " id="btnChart" data-bind="visible: !$root.isNewCampaign()" style="margin-top: 10px;width:229px;color:gainsboro;">Charts</button>*@
+                                                </div>
+
+                                            </div>
+
+
+                                        </div>
+
+                                        <div class="col-lg-12" style="padding-left:24px;margin-top:6px;">
+
+                                            <span style=" font-size:12px;">  Learn more about 'Ad Click'</span><img style="height:14px;" src="/Content/Images/Drop_Arrow.png" data-toggle="collapse" data-target="#demo" />
+
+                                        </div>
                                     </div>
+                                </div>
 
                             </div>
 
-                           
+
                             <div class="row Subpanels collapse" id="demo">
 
 
-                        <div class="col-lg-12" style="font-size:12px;">
-                            <div class="row">
+                                <div class="col-lg-12" style="font-size:12px;">
+                                    <div class="row">
 
-                                <div class="col-lg-11" style="padding-left:32px;">
-                                    <br />
-                                    <p>
-                                        The ad click is charged after app users have watched your video ad AND successfully answered your quiz survey.
-                                        <br />
-                                    <p>
-                                        Half of th¬e ad click is rewarded to the viewer for participating in your quiz survey. If users opt to skip the video ad, or skip the quiz survey at any time, then no ad click is charged.
-                                    </p>
-                                    <br />
-                                    <p>
-                                        Higher the ad click campaigns get seen sooner.If you notice that your daily budget isn’t achieved then either increase your ad click for higher priority or try the ‘Broadcast Repeat’ mode.
+                                        <div class="col-lg-11" style="padding-left:32px;">
+                                            <br />
+                                            <p>
+                                                The ad click is charged after app users have watched your video ad AND successfully answered your quiz survey.
+                                                <br />
+                                            <p>
+                                                Half of th¬e ad click is rewarded to the viewer for participating in your quiz survey. If users opt to skip the video ad, or skip the quiz survey at any time, then no ad click is charged.
+                                            </p>
+                                            <br />
+                                            <p>
+                                                Higher the ad click campaigns get seen sooner.If you notice that your daily budget isn’t achieved then either increase your ad click for higher priority or try the ‘Broadcast Repeat’ mode.
 
 
-                                    </p>
-                                    <br />
-                                    <p>Minimum video ad click is $0.04 USD, with a maximum of $2 USD.</p>
+                                            </p>
+                                            <br />
+                                            <p>Minimum video ad click is $0.04 USD, with a maximum of $2 USD.</p>
+
+                                        </div>
+                                        <div class="col-lg-1"></div>
+                                    </div>
+
 
                                 </div>
-                                <div class="col-lg-1"></div>
+
+
+
+
+
+
                             </div>
-
-
-                        </div>
-
-
-
-
-
-
-                    </div>
 
 
 
@@ -1245,7 +1237,7 @@ else
                             </div>
                         </div>
                     </div>
-
+                    @Html.Partial("~/Areas/Ads/Views/Ads/_advertDashboard.cshtml")
                     
                 <div class="clearfix">
                 </div>
