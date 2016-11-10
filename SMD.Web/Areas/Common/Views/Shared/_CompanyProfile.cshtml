@@ -299,7 +299,8 @@
                                             <div class="form-group">
                                                 <label for="divLogo" class="requiredlabel">Logo </label>
                                                 <div id="divLogo" style="background-color: #dedede; height: auto;width:50%">
-                                                    <img style="height:auto;width:100%;" data-bind="attr: { src: $root.selectedCompany().Logo() }, validationOnElement: Logo" name="Missing logo" src="/Content/Images/Company_Default.png" id="imgLogoCProfile" data-toggle="modal" data-target="#damModelcpo" onclick="changeIframeSrcCProfile(1)" />
+                                                    <img style="height:auto;width:100%;" data-bind="attr: { src: $root.selectedCompany().Logo()()==null?'/images/standardplaceholder.png' : $root.selectedCompany().Logo()}, validationOnElement: Logo" name="Missing logo" src="/Content/Images/Company_Default.png" id="imgLogoCProfile" data-toggle="modal" data-target="#damModelcpo" onclick="changeIframeSrcCProfile(1)" />
+                    
                                                 </div>
                                             </div>
                                             <div class="form-group">
