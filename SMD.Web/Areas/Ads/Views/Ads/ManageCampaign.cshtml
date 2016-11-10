@@ -14,7 +14,7 @@ else
 <div data-bind="visible: $root.isEditorVisible()" style="display: none">
     <div class="col-lg-12">
         <div class="row">
-            <div class="col-lg-12" id="topArea">
+            <div class="col-lg-12" style="padding-left:1px;" id="topArea">
                 <ol class="breadcrumb" style="display:none;">
                     <li><a href="~/Dashboard/Index" class="my-navigator">Home</a></li>
                     <li><a data-bind="click: $root.closeNewCampaignDialog" class="my-navigator">Video Campaigns</a></li>
@@ -25,7 +25,7 @@ else
 
                     @*<span id="newdisplay_Ad" class="pull-left " style="color:black!important; padding-left:0px;font-size:23px;margin-top:12px;display:none;" data-bind="NewCampaignBinding: CampaignName">New display ad</span>*@
                 </div>
-                <div class="col-lg-3" style="padding:0px;">
+                <div class="col-lg-3" style="padding-left:0px;padding-right:10px;">
                     @*<div style="margin-top:-5px;float:right;background:url(/Content/Images/Close_Button.png);background-repeat: no-repeat;width:40px;height:40px;border: 0;"><button style="margin-top:9px;" id="MainBtnClose" data-bind="click: $root.closeNewCampaignDialog" class="btn btn-default CloseBtn">Close</button></div>*@
 
                     <img data-bind="click: $root.closeNewCampaignDialog" src="/Content/Images/Close_Button.png" style="width:20px;height:20px;float:right;cursor:pointer;margin-top:17px;" />
@@ -47,9 +47,9 @@ else
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-12" style="padding-left:0px;">
                 <div>
-                    <div class="no-header clearfix col-lg-12 form-horizontal" data-bind="with: $root.campaignModel, visible: !$root.isAdvertdashboardVisible()">
+                    <div class="no-header clearfix col-lg-12 form-horizontal"  style="padding-left:0px;" data-bind="with: $root.campaignModel, visible: !$root.isAdvertdashboardVisible()">
                         <div class="main-box header" style="padding-left:42px;">
                             <div class="col-lg-12" style="margin:auto;float:none !important">
                                 <div class="pull-left ads-numbering-main">
@@ -150,7 +150,7 @@ else
                         </div>
 
                     </div>
-                    <div class="col-lg-12" data-bind="visible: !$root.isAdvertdashboardVisible()">
+                    <div class="col-lg-12" style="padding-left:0px;" data-bind="visible: !$root.isAdvertdashboardVisible()">
 
                         <div class="col-lg-9 form-horizontal" data-bind="with: $root.campaignModel" style="padding-left:0px;">
                             <div class="main-box main-box-subpage">
