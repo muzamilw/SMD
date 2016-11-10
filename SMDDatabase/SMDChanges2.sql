@@ -2279,13 +2279,6 @@ inner join Company c on cu.CompanyId = c.CompanyId
 
 GO
 
-
-
-
-
-
-
-
 ALTER TABLE dbo.Coupon
 ADD IsShowReviews bit Null,
  IsShowAddress bit Null,
