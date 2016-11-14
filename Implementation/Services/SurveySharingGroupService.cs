@@ -144,14 +144,7 @@ namespace SMD.Implementation.Services
 
         public bool DeleteGroup(long SharingGroupId)
         {
-            var group = surveySharingGroupRepository.Find(SharingGroupId);
-            if (group != null)
-            {
-                surveySharingGroupRepository.Delete(group);
-                return true;
-            }
-            else
-                return false;
+            return surveySharingGroupRepository.DeleteUserGroup(SharingGroupId);
         }
 
         #endregion
