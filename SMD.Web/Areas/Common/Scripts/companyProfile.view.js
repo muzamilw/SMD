@@ -18,6 +18,8 @@ define("common/companyProfile.view",
                 showCompanyProfileDialog = function () {
                  
                     $("#companyProfileDialog").modal("show");
+                    testm();
+                   
                 },
                 CloseCompanyProfileDialog = function () {
 

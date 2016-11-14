@@ -220,19 +220,19 @@ else
                                 <select class="form-control" data-bind="options: $root.qStatuses, optionsText: 'value', optionsValue: 'id',value:$root.statusFilterValue,event:{ change: $root.SurveyQuestionsByFilter}"></select>
                             </div>
 
-                            <div class="col-xs-8" style="padding:0px;text-align:right;">
-                                @*<button class="btn  btn-info SurvyButtons" id="saveBtn" data-bind="click:$root.filterProfileQuestion" style="display:none!important;">Search</button>
-                                    <button class="btn btn-default SurvyButtons" id="saveBtn" data-bind="click:$root.clearFilters" style="display:none!important;">Reset</button>*@
-                              
-                                <button class="btn btn-primary btnclick FloatRight create_polls_btn" data-bind="click:$root.addNewSurvey" style="float:right;margin-top:2px; text-align:right">
-                                    Create Poll
-                                </button>
-                            </div>
+                            
 
                         </div>
                     </div>
                 </form>
+                <div class="col-xs-8" style="padding:0px;text-align:right;">
+                    @*<button class="btn  btn-info SurvyButtons" id="saveBtn" data-bind="click:$root.filterProfileQuestion" style="display:none!important;">Search</button>
+            <button class="btn btn-default SurvyButtons" id="saveBtn" data-bind="click:$root.clearFilters" style="display:none!important;">Reset</button>*@
 
+                    <button class="btn btn-primary btnclick FloatRight create_polls_btn" data-bind="click:$root.addNewSurvey" style="float:right;margin-top:2px; text-align:right">
+                        Create Poll
+                    </button>
+                </div>
                 <div class="clearfix">
 
                 </div>
