@@ -759,7 +759,7 @@ define("pQuestion/pQuestion.viewModel",
                 //},
                 // On editing of existing PQ
                 onEditProfileQuestion = function (item) {
-                    debugger;
+            
                     selectedPQIDAnalytics(item.qId());
                     IsPauseBtnVisible(false);
                     canSubmitForApproval(false);

@@ -421,6 +421,7 @@
     <Compile Include="Areas\Api\Controllers\ReferralComponiesController.cs" />
     <Compile Include="Areas\Api\Controllers\RevenueController.cs" />
     <Compile Include="Areas\Api\Controllers\UserCashoutController.cs" />
+    <Compile Include="Areas\Api\DashboardAnalyticsController.cs" />
     <Compile Include="Areas\Api\Models\AddCouponsResponseModelForApproval.cs" />
     <Compile Include="Areas\Api\Models\AdsCampaignByCampaignIdForAnalyticsResponse.cs" />
     <Compile Include="Areas\Api\Models\ApproveProfileQuestion.cs" />
@@ -663,6 +664,10 @@
     <Content Include="Areas\Common\Scripts\InviteUser.model.js" />
     <Content Include="Areas\Common\Scripts\InviteUser.view.js" />
     <Content Include="Areas\Common\Scripts\InviteUser.viewModel.js" />
+    <Content Include="Areas\Common\Scripts\Dashboardanalytics.dataservice .js" />
+    <Content Include="Areas\Common\Scripts\Dashboardanalytics.model.js" />
+    <Content Include="Areas\Common\Scripts\Dashboardanalytics.view.js" />
+    <Content Include="Areas\Common\Scripts\Dashboardanalytics.viewModel.js" />
     <Content Include="Areas\Common\Scripts\userProfile.viewModel.js" />
     <Content Include="Areas\Common\Scripts\userProfile.dataservice.js" />
     <Content Include="Areas\Common\Scripts\userProfile.model.js" />
