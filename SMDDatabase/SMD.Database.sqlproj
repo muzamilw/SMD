@@ -89,6 +89,7 @@
     <None Include="GetAdminDashBoardInsights.sql" />
     <None Include="GetRegisteredUserData.sql" />
     <None Include="GetUserSurveySelectionPercentage.sql" />
+    <None Include="GetSharedSurveyQuestion.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="getCampaignsByStatus.sql" />

@@ -141,6 +141,9 @@
     <Compile Include="DamImage.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Dashboard_analytics_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="DiscountVoucher.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
