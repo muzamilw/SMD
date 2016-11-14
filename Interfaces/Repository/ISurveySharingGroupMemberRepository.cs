@@ -1,4 +1,5 @@
 ﻿using SMD.Models.DomainModels;
+using System.Collections.Generic;
 
 namespace SMD.Interfaces.Repository
 {
@@ -7,6 +8,6 @@ namespace SMD.Interfaces.Repository
     /// </summary>
     public interface ISurveySharingGroupMemberRepository : IBaseRepository<SurveySharingGroupMember, long>
     {
-        
+        List<SurveySharingGroupMember> GetAllGroupMembers(long SharingGroupId);
     }
 }

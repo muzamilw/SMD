@@ -491,6 +491,9 @@ define("common/companyProfile.viewModel",
                     ko.applyBindings(view.viewModel, view.bindingPartial);
 
                     getBasedata();
+
+
+
                     
 
 

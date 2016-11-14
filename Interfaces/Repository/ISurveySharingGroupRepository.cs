@@ -9,5 +9,7 @@ namespace SMD.Interfaces.Repository
     public interface ISurveySharingGroupRepository : IBaseRepository<SurveySharingGroup, long>
     {
         IEnumerable<SurveySharingGroup> GetUserGroups(string UserId);
+
+        bool DeleteUserGroup(long SharingGroupId);
     }
 }
