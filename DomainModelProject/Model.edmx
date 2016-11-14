@@ -2603,6 +2603,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="Dashboard_analytics" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UderID" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="getActiveCampaignsOverTime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DateFrom" Type="datetime" Mode="In" />
           <Parameter Name="DateTo" Type="datetime" Mode="In" />
@@ -5710,7 +5713,10 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <End Role="SharedSurveyQuestion" EntitySet="SharedSurveyQuestions" />
           </AssociationSet>
           <FunctionImport Name="GetSharedSurveyQuestion" ReturnType="Collection(SMDDevModel.GetSharedSurveyQuestion_Result)">
-            <Parameter Name="SSQID" Mode="In" Type="Int64" />
+          <Parameter Name="SSQID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="Dashboard_analytics" ReturnType="Collection(SMDDevModel.Dashboard_analytics_Result)">
+            <Parameter Name="UderID" Mode="In" Type="String" />
           </FunctionImport>
           </EntityContainer>
         <EntityType Name="CouponCategories">
@@ -7227,6 +7233,45 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="String" Name="GroupName" Nullable="true" MaxLength="500" />
           <Property Type="Int32" Name="LeftAnswerPerc" Nullable="true" />
           <Property Type="Int32" Name="RightAnswerPerc" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Dashboard_analytics_Result">
+          <Property Type="Int64" Name="CampaignID" Nullable="true" />
+          <Property Type="Int64" Name="CouponID" Nullable="true" />
+          <Property Type="Int32" Name="PQID" Nullable="true" />
+          <Property Type="String" Name="Question" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="CampaignName" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="Status" Nullable="true" />
+          <Property Type="Int32" Name="LandingPageConv" Nullable="true" />
+          <Property Type="Int32" Name="AdViewed" Nullable="true" />
+          <Property Type="String" Name="Answer1" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Answer2" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Answer3" Nullable="true" MaxLength="500" />
+          <Property Type="DateTime" Name="EventDateTime" Nullable="true" Precision="23" />
+          <Property Type="Double" Name="Ans1Percentage" Nullable="true" />
+          <Property Type="Double" Name="Ans2Percentage" Nullable="true" />
+          <Property Type="Double" Name="Ans3Percentage" Nullable="true" />
+          <Property Type="Double" Name="LastSevenDaysPer" Nullable="true" />
+          <Property Type="Double" Name="LastfourteenDaysPer" Nullable="true" />
+          <Property Type="String" Name="Option1" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Option2" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Option3" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Option4" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Option5" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Option6" Nullable="true" MaxLength="100" />
+          <Property Type="Double" Name="Option1Percentage" Nullable="true" />
+          <Property Type="Double" Name="Option2Percentage" Nullable="true" />
+          <Property Type="Double" Name="Option3Percentage" Nullable="true" />
+          <Property Type="Double" Name="Option4Percentage" Nullable="true" />
+          <Property Type="Double" Name="Option5Percentage" Nullable="true" />
+          <Property Type="Double" Name="Option6Percentage" Nullable="true" />
+          <Property Type="Int32" Name="AnsweredQuestion" Nullable="true" />
+          <Property Type="Double" Name="Completed" Nullable="true" />
+          <Property Type="Int32" Name="Option1TAnswers" Nullable="true" />
+          <Property Type="Int32" Name="Option2TAnswers" Nullable="true" />
+          <Property Type="Int32" Name="Option3TAnswers" Nullable="true" />
+          <Property Type="Int32" Name="Option4TAnswers" Nullable="true" />
+          <Property Type="Int32" Name="Option5TAnswers" Nullable="true" />
+          <Property Type="Int32" Name="Option6TAnswers" Nullable="true" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -9080,6 +9125,49 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
                 <ScalarProperty Name="GroupName" ColumnName="GroupName" />
                 <ScalarProperty Name="LeftAnswerPerc" ColumnName="LeftAnswerPerc" />
                 <ScalarProperty Name="RightAnswerPerc" ColumnName="RightAnswerPerc" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Dashboard_analytics" FunctionName="SMDDevModel.Store.Dashboard_analytics">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SMDDevModel.Dashboard_analytics_Result">
+                <ScalarProperty Name="CampaignID" ColumnName="CampaignID" />
+                <ScalarProperty Name="CouponID" ColumnName="CouponID" />
+                <ScalarProperty Name="PQID" ColumnName="PQID" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="CampaignName" ColumnName="CampaignName" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="LandingPageConv" ColumnName="LandingPageConv" />
+                <ScalarProperty Name="AdViewed" ColumnName="AdViewed" />
+                <ScalarProperty Name="Answer1" ColumnName="Answer1" />
+                <ScalarProperty Name="Answer2" ColumnName="Answer2" />
+                <ScalarProperty Name="Answer3" ColumnName="Answer3" />
+                <ScalarProperty Name="EventDateTime" ColumnName="EventDateTime" />
+                <ScalarProperty Name="Ans1Percentage" ColumnName="Ans1Percentage" />
+                <ScalarProperty Name="Ans2Percentage" ColumnName="Ans2Percentage" />
+                <ScalarProperty Name="Ans3Percentage" ColumnName="Ans3Percentage" />
+                <ScalarProperty Name="LastSevenDaysPer" ColumnName="LastSevenDaysPer" />
+                <ScalarProperty Name="LastfourteenDaysPer" ColumnName="LastfourteenDaysPer" />
+                <ScalarProperty Name="Option1" ColumnName="Option1" />
+                <ScalarProperty Name="Option2" ColumnName="Option2" />
+                <ScalarProperty Name="Option3" ColumnName="Option3" />
+                <ScalarProperty Name="Option4" ColumnName="Option4" />
+                <ScalarProperty Name="Option5" ColumnName="Option5" />
+                <ScalarProperty Name="Option6" ColumnName="Option6" />
+                <ScalarProperty Name="Option1Percentage" ColumnName="Option1Percentage" />
+                <ScalarProperty Name="Option2Percentage" ColumnName="Option2Percentage" />
+                <ScalarProperty Name="Option3Percentage" ColumnName="Option3Percentage" />
+                <ScalarProperty Name="Option4Percentage" ColumnName="Option4Percentage" />
+                <ScalarProperty Name="Option5Percentage" ColumnName="Option5Percentage" />
+                <ScalarProperty Name="Option6Percentage" ColumnName="Option6Percentage" />
+                <ScalarProperty Name="AnsweredQuestion" ColumnName="AnsweredQuestion" />
+                <ScalarProperty Name="Completed" ColumnName="Completed" />
+                <ScalarProperty Name="Option1TAnswers" ColumnName="Option1TAnswers" />
+                <ScalarProperty Name="Option2TAnswers" ColumnName="Option2TAnswers" />
+                <ScalarProperty Name="Option3TAnswers" ColumnName="Option3TAnswers" />
+                <ScalarProperty Name="Option4TAnswers" ColumnName="Option4TAnswers" />
+                <ScalarProperty Name="Option5TAnswers" ColumnName="Option5TAnswers" />
+                <ScalarProperty Name="Option6TAnswers" ColumnName="Option6TAnswers" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
