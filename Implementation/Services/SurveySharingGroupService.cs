@@ -12,6 +12,7 @@ using SMD.Models.ResponseModels;
 using Stripe;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -103,42 +104,68 @@ namespace SMD.Implementation.Services
         public SurveySharingGroup Update(SurveySharingGroup group, ICollection<SurveySharingGroupMember> addedMembers, ICollection<SurveySharingGroupMember> deletedMembers)
         {
 
-            //new user add logic.
-            foreach (var item in addedMembers)
-            {
-                var user = aspnetUserRepository.GetUserbyPhoneNo(item.PhoneNumber);
-                if (user != null)
-                {
-                    item.UserId = user.Id;
-                    item.MemberStatus = 1;
-                }
-                else
-                {
-                    item.MemberStatus = 0;
-                    //call the sms api
 
-                    //user not found send SMS to join
-
-                }
-                group.SurveySharingGroupMembers.Add(item);
-            }
-
-
-
-            //delete user logic
-            foreach (var item in deletedMembers)
+            var dbGroup = surveySharingGroupRepository.Find(group.SharingGroupId);
+            if (dbGroup != null)
             {
 
-                var member = group.SurveySharingGroupMembers.Where(g => g.SharingGroupMemberId == item.SharingGroupMemberId).SingleOrDefault();
-                member.MemberStatus = 3;
+
+                dbGroup.GroupName = group.GroupName;
+
+                var dbExistingMembers = surveySharingGroupMemberRepository.GetAllGroupMembers(group.SharingGroupId);
+                if (addedMembers.Count > 0)
+                {}
+
+
+                //new user add logic.
+                foreach (var item in addedMembers)
+                {
+
+                    //if already exists then do not add again.
+                    if (dbExistingMembers.FindAll(g => g.PhoneNumber == item.PhoneNumber).Count == 0)
+                    {
+
+                        item.SharingGroupId = dbGroup.SharingGroupId;
+                        var user = aspnetUserRepository.GetUserbyPhoneNo(item.PhoneNumber);
+                        if (user != null)
+                        {
+                            item.UserId = user.Id;
+                            item.MemberStatus = 1;
+                        }
+                        else
+                        {
+                            item.MemberStatus = 0;
+                            //call the sms api
+
+                            //user not found send SMS to join
+
+                        }
+
+                        if (dbGroup.SurveySharingGroupMembers == null)
+                        {
+                            dbGroup.SurveySharingGroupMembers = new Collection<SurveySharingGroupMember>();
+                        }
+
+                        dbGroup.SurveySharingGroupMembers.Add(item);
+                    }
+                }
+
+
+
+                //delete user logic
+                foreach (var item in deletedMembers)
+                {
+
+                    var member = dbGroup.SurveySharingGroupMembers.Where(g => g.SharingGroupMemberId == item.SharingGroupMemberId).SingleOrDefault();
+                    member.MemberStatus = 3;
+
+                }
+
+
+                surveySharingGroupRepository.Update(dbGroup);
+                surveySharingGroupRepository.SaveChanges();
 
             }
-           
-                      
-            surveySharingGroupRepository.Update(group);
-            surveySharingGroupRepository.SaveChanges();
-
-
             return group;
         }
 

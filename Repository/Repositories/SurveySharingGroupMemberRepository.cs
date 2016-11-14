@@ -45,6 +45,12 @@ namespace SMD.Repository.Repositories
             return DbSet.Where(c => c.SharingGroupMemberId == id).FirstOrDefault();
         }
 
+
+        public List<SurveySharingGroupMember> GetAllGroupMembers(long SharingGroupId)
+        {
+            return DbSet.Where(c => c.SharingGroupId == SharingGroupId).ToList();
+        }
+
         #endregion
     }
 }
