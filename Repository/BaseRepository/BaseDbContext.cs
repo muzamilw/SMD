@@ -485,7 +485,9 @@ namespace SMD.Repository.BaseRepository
                 new ObjectParameter("ToRow", toRow) :
                 new ObjectParameter("ToRow", typeof(int));
 
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetProducts_Result>("GetProducts", userIdParameter, fromRowParameter, toRowParameter);
+            return  ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetProducts_Result>("GetProducts", userIdParameter, fromRowParameter, toRowParameter);
+
+          
         }
 
         /// <summary>

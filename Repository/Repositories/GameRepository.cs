@@ -53,6 +53,14 @@ namespace SMD.Repository.Repositories
             int intRandomAnswer = (new Random()).Next(1, games.Count()+1);
             return games.ElementAt(intRandomAnswer-1);
         }
+
+
+        public Game GetRandomGame()
+        {
+            var games = DbSet.Where(g => g.Status == true).ToList();
+            int intRandomAnswer = (new Random()).Next(1, games.Count() + 1);
+            return games.ElementAt(intRandomAnswer - 1);
+        }
       
         
         #endregion
