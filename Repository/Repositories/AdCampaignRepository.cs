@@ -237,6 +237,28 @@ namespace SMD.Repository.Repositories
             return DbSet.Where(query);
 
         }
+
+
+
+        /// <summary>
+        /// Get Ad Campaign by id
+        /// </summary>
+        public IEnumerable<AdCampaign> GetSpecialAdCampaigns(out string CompanyLogoPath)
+        {
+
+
+            var res = (from p in db.AdCampaigns 
+                      join c in db.Companies on p.CompanyId equals c.CompanyId
+                      where c.IsSpecialAccount == true
+                      select p).ToList();
+
+
+            var comp = db.Companies.Where(g => g.IsSpecialAccount == true).FirstOrDefault();
+            CompanyLogoPath = "http://manage.cash4ads.com/" + comp.Logo;
+                      
+            return res;
+
+        }
         /// <summary>
         /// Get user by id
         /// </summary>

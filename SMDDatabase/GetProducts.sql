@@ -1,6 +1,6 @@
 ﻿USE [SMDv2]
 GO
-/****** Object:  StoredProcedure [dbo].[GetProducts]    Script Date: 10/27/2016 9:56:00 AM ******/
+/****** Object:  StoredProcedure [dbo].[GetProducts]    Script Date: 11/15/2016 11:28:22 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -555,24 +555,24 @@ from
 	null as GameUrl,
 	null as AdCount
 	from [GetUserProfileQuestions](@UserID, @countryId,@cash4adsSocialHandle,@cash4adsSocialHandleType)
-	--pqz where pqz.pqid  NOT in  ( select  LinkedQuestion1ID  from ProfileQuestionAnswer where PQAnswerID in 
-  --(select PQAnswerID from ProfileQuestionUserAnswer where
-  -- UserID = @UserID) and LinkedQuestion1ID IS NOT NULL) and 
-   -- pqz.pqid  NOT in  ( select  LinkedQuestion2ID  from ProfileQuestionAnswer where PQAnswerID in 
-  --(select PQAnswerID from ProfileQuestionUserAnswer where
-  -- UserID = @UserID) and LinkedQuestion2ID IS NOT NULL) and 
-  --  pqz.pqid  NOT in  ( select  LinkedQuestion3ID  from ProfileQuestionAnswer where PQAnswerID in 
-  --(select PQAnswerID from ProfileQuestionUserAnswer where
-  -- UserID = @UserID) and LinkedQuestion3ID IS NOT NULL) and 
-  --  pqz.pqid  NOT in  ( select  LinkedQuestion4ID  from ProfileQuestionAnswer where PQAnswerID in 
-  --(select PQAnswerID from ProfileQuestionUserAnswer where
-  -- UserID = @UserID) and LinkedQuestion4ID IS NOT NULL) and 
-  --  pqz.pqid  NOT in  ( select  LinkedQuestion5ID  from ProfileQuestionAnswer where PQAnswerID in 
-  --(select PQAnswerID from ProfileQuestionUserAnswer where
-  -- UserID = @UserID) and LinkedQuestion5ID IS NOT NULL) and 
-  --  pqz.pqid  NOT in  ( select  LinkedQuestion6ID  from ProfileQuestionAnswer where PQAnswerID in 
-  --(select PQAnswerID from ProfileQuestionUserAnswer where
-  -- UserID = @UserID) and LinkedQuestion6ID IS NOT NULL)
+	pqz where pqz.pqid  NOT in  ( select  LinkedQuestion1ID  from ProfileQuestionAnswer where PQAnswerID in 
+  (select PQAnswerID from ProfileQuestionUserAnswer where
+   UserID = @UserID) and LinkedQuestion1ID IS NOT NULL) and 
+    pqz.pqid  NOT in  ( select  LinkedQuestion2ID  from ProfileQuestionAnswer where PQAnswerID in 
+  (select PQAnswerID from ProfileQuestionUserAnswer where
+   UserID = @UserID) and LinkedQuestion2ID IS NOT NULL) and 
+    pqz.pqid  NOT in  ( select  LinkedQuestion3ID  from ProfileQuestionAnswer where PQAnswerID in 
+  (select PQAnswerID from ProfileQuestionUserAnswer where
+   UserID = @UserID) and LinkedQuestion3ID IS NOT NULL) and 
+    pqz.pqid  NOT in  ( select  LinkedQuestion4ID  from ProfileQuestionAnswer where PQAnswerID in 
+  (select PQAnswerID from ProfileQuestionUserAnswer where
+   UserID = @UserID) and LinkedQuestion4ID IS NOT NULL) and 
+    pqz.pqid  NOT in  ( select  LinkedQuestion5ID  from ProfileQuestionAnswer where PQAnswerID in 
+  (select PQAnswerID from ProfileQuestionUserAnswer where
+   UserID = @UserID) and LinkedQuestion5ID IS NOT NULL) and 
+    pqz.pqid  NOT in  ( select  LinkedQuestion6ID  from ProfileQuestionAnswer where PQAnswerID in 
+  (select PQAnswerID from ProfileQuestionUserAnswer where
+   UserID = @UserID) and LinkedQuestion6ID IS NOT NULL)
 ) as items
 	
 	order by Weightage
