@@ -527,7 +527,7 @@ namespace SMD.MIS.ModelMappers
                 couponImage1 = source.couponImage1,
                 CouponImage2 = source.CouponImage2,
                 CouponImage3 = source.CouponImage3,
-                CouponIssuedCount = source.CouponIssuedCount,
+                CouponIssuedCount = source.UserPurchasedCoupons != null ? source.UserPurchasedCoupons.Count : 0,
                 CouponListingMode = source.CouponListingMode,
                 CouponQtyPerUser = source.CouponQtyPerUser,
                 CouponRedeemedCount = source.CouponRedeemedCount,

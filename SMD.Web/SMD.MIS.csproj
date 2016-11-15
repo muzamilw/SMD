@@ -790,6 +790,7 @@
     <Content Include="Content\CSS\fonts\typicons.svg" />
     <Content Include="Content\CSS\fonts\wpzoom.svg" />
     <Content Include="Content\CSS\icons.css" />
+    <Content Include="Content\CSS\intlTelInput.css" />
     <Content Include="Content\CSS\jquery-Slider.css" />
     <Content Include="Content\CSS\jquery.tokenize.css" />
     <Content Include="Content\CSS\main.css" />
@@ -878,6 +879,8 @@
     <Content Include="Content\Images\Drop_Arrow.png" />
     <Content Include="Content\Images\Email_icon.png" />
     <Content Include="Content\Images\facebookNew.png" />
+    <Content Include="Content\Images\flags%402x.png" />
+    <Content Include="Content\Images\flags.png" />
     <Content Include="Content\Images\foldericon3.png" />
     <Content Include="Content\Images\Games.png" />
     <Content Include="Content\Images\Games_icon.png" />
@@ -1599,6 +1602,8 @@
     <Content Include="Scripts\Ace\lib\ace\worker-css.js" />
     <Content Include="Scripts\autoNumeric\autoNumeric-1.9.25.js" />
     <Content Include="Scripts\autoNumeric\autoNumeric-1.9.25.min.js" />
+    <Content Include="Scripts\intlTelInput.min.js" />
+    <Content Include="Scripts\intphnumutils.js" />
     <Content Include="Scripts\jquery.imgareaselect.js" />
     <Content Include="Scripts\jquery.tokenize.js" />
     <Content Include="Scripts\knockout-3.1.0.debug.js" />

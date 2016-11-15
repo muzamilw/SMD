@@ -257,7 +257,7 @@
                             position: 'absolute',
                             zIndex: 0,
                             top: -this.bgBorderWidthArray[0],
-                            right: -this.bgBorderWidthArray[1],
+                            //right: -this.bgBorderWidthArray[1],
                             bottom: -this.bgBorderWidthArray[2],
                             left: -this.bgBorderWidthArray[3]
                         }).append(this.$bg);
