@@ -309,6 +309,25 @@ namespace SMD.MIS
       null,
       routeHandlers);
 
+
+               config.Routes.MapHttpRoute(
+      "SurveySharingGroup",
+      "SurveySharingGroup/{AuthenticationToken}/",
+      new { controller = "SurveySharingGroup" },
+      null,
+      null);
+
+
+    config.Routes.MapHttpRoute(
+      "SharedSurveyQuestion",
+      "SharedSurveyQuestion/{AuthenticationToken}/",
+      new { controller = "SharedSurveyQuestion" },
+      null,
+      null);
+
+            
+            
+
            //config.Routes.MapHttpRoute(
            //"CouponApproval",
            //"CouponApproval/{AuthenticationToken}/",

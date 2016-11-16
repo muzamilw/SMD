@@ -1152,15 +1152,18 @@ div#spinner {
     -moz-border-radius: 3px;
     border-radius: 3px;
     margin-top: 5px;
-    height: 214px;
+    height:322px;
     padding:10px;
+}
+.width180px {
+    width:180px;
 }
 .datespan {
     color:gainsboro;
     font-size:12px;
 }
 .conspan {
-    font-size:17px;
+    font-size:16px;
 }
 .lightgreen {
    color:#66CD00;

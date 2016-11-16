@@ -46,6 +46,42 @@ namespace SMD.Repository.Repositories
         }
 
 
+
+        public IEnumerable< SurveySharingGroup> GetUserGroups(string UserId)
+        {
+            return DbSet.Where(c => c.UserId == UserId);
+        }
+
+
+
+        public bool DeleteUserGroup(long SharingGroupId)
+        {
+            var group = this.Find(SharingGroupId);
+
+
+            //deleting notifications
+            db.Database.ExecuteSqlCommand("delete n from Notifications n inner join SurveySharingGroupShares s on n.SurveyQuestionShareId = s.SurveyQuestionShareId where s.SharingGroupId=" + SharingGroupId.ToString());
+
+            //deleting shares
+            db.Database.ExecuteSqlCommand("delete from SurveySharingGroupShares where SharingGroupId=" + SharingGroupId.ToString());
+
+            //deleting members
+            db.Database.ExecuteSqlCommand("delete from SurveySharingGroupMembers where SharingGroupId=" + SharingGroupId.ToString());
+
+            //deleting the questions
+            db.Database.ExecuteSqlCommand("delete from SharedSurveyQuestion where SharingGroupId=" + SharingGroupId.ToString());
+
+            if (group != null)
+            {
+                this.Delete(group);
+                this.SaveChanges();
+                return true;
+            }
+            else
+                return false;
+        }
+
+
         #endregion
     }
 }

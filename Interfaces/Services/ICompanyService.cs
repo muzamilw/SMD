@@ -32,5 +32,6 @@ namespace SMD.Interfaces.Services
         RegisteredUsersResponseModel GetRegisterdUsers(RegisteredUsersSearchRequest request);
 
         Boolean UpdateCompanyStatus(int status, string userId, string comments, int companyId);
+        List<Dashboard_analytics_Result> GetDashboardAnalytics(string UserID);
     }
 }

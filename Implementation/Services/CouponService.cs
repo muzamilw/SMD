@@ -50,7 +50,7 @@ namespace SMD.Implementation.Services
         }
         private string[] SaveImages(Coupon campaign)
         {
-            string[] savePaths = new string[8];
+            string[] savePaths = new string[12];
             string directoryPath = HttpContext.Current.Server.MapPath("~/SMD_Content/Coupons/" + campaign.CouponId);
 
             if (directoryPath != null && !Directory.Exists(directoryPath))
@@ -91,6 +91,64 @@ namespace SMD.Implementation.Services
                     campaign.CouponImage3 = savePath;
                 }
             }
+
+            if (!string.IsNullOrEmpty(campaign.CouponImage4) && !campaign.CouponImage4.Contains("guid_Coupon4DefaultImage") && !campaign.CouponImage4.Contains("http://manage.cash4ads.com/"))
+            {
+                if (campaign.CouponImage4.Contains("SMD_Content"))
+                {
+                    string[] paths = campaign.CouponImage4.Split(new string[] { "SMD_Content" }, StringSplitOptions.None);
+                    string url = HttpContext.Current.Server.MapPath("~/SMD_Content/" + paths[paths.Length - 1]);
+                    //string base64 = campaign.CouponImage3.Substring(campaign.CouponImage3.IndexOf(',') + 1);
+                    //base64 = base64.Trim('\0');
+                    //byte[] data = Convert.FromBase64String(base64);
+                    string savePath = directoryPath + "\\guid_Coupon4DefaultImage.jpg";
+                    // File.WriteAllBytes(savePath, data);
+                    File.Copy(url, savePath, true);
+                    int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
+                    savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
+                    savePaths[8] = savePath;
+                    campaign.CouponImage4 = savePath;
+                }
+            }
+
+            if (!string.IsNullOrEmpty(campaign.CouponImage5) && !campaign.CouponImage5.Contains("guid_Coupon5DefaultImage") && !campaign.CouponImage5.Contains("http://manage.cash4ads.com/"))
+            {
+                if (campaign.CouponImage5.Contains("SMD_Content"))
+                {
+                    string[] paths = campaign.CouponImage5.Split(new string[] { "SMD_Content" }, StringSplitOptions.None);
+                    string url = HttpContext.Current.Server.MapPath("~/SMD_Content/" + paths[paths.Length - 1]);
+                    //string base64 = campaign.CouponImage3.Substring(campaign.CouponImage3.IndexOf(',') + 1);
+                    //base64 = base64.Trim('\0');
+                    //byte[] data = Convert.FromBase64String(base64);
+                    string savePath = directoryPath + "\\guid_Coupon5DefaultImage.jpg";
+                    // File.WriteAllBytes(savePath, data);
+                    File.Copy(url, savePath, true);
+                    int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
+                    savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
+                    savePaths[9] = savePath;
+                    campaign.CouponImage5 = savePath;
+                }
+            }
+            if (!string.IsNullOrEmpty(campaign.CouponImage6) && !campaign.CouponImage6.Contains("guid_Coupon6DefaultImage") && !campaign.CouponImage6.Contains("http://manage.cash4ads.com/"))
+            {
+                if (campaign.CouponImage6.Contains("SMD_Content"))
+                {
+                    string[] paths = campaign.CouponImage6.Split(new string[] { "SMD_Content" }, StringSplitOptions.None);
+                    string url = HttpContext.Current.Server.MapPath("~/SMD_Content/" + paths[paths.Length - 1]);
+                    //string base64 = campaign.CouponImage3.Substring(campaign.CouponImage3.IndexOf(',') + 1);
+                    //base64 = base64.Trim('\0');
+                    //byte[] data = Convert.FromBase64String(base64);
+                    string savePath = directoryPath + "\\guid_Coupon6DefaultImage.jpg";
+                    // File.WriteAllBytes(savePath, data);
+                    File.Copy(url, savePath, true);
+                    int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
+                    savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
+                    savePaths[10] = savePath;
+                    campaign.CouponImage6 = savePath;
+                }
+            }
+
+
             if (!string.IsNullOrEmpty(campaign.couponImage1) && !campaign.couponImage1.Contains("guid_Voucher4DefaultImage") && !campaign.couponImage1.Contains("http://manage.cash4ads.com/"))
             {
                 if (campaign.couponImage1.Contains("SMD_Content"))
@@ -128,6 +186,53 @@ namespace SMD.Implementation.Services
             }
             return savePaths;
         }
+        private void DeleteImages(Coupon couponModel)
+        {
+            Coupon coupon = couponRepository.GetCouponByIdSingle(couponModel.CouponId);
+            if (couponModel.couponImage1 == "/images/standardplaceholder.png" && coupon.couponImage1.Contains("SMD_Content"))
+            {
+                string directoryPath = HttpContext.Current.Server.MapPath("~/SMD_Content/Coupons/" + couponModel.CouponId);
+                string delpath = directoryPath + "\\guid_Voucher4DefaultImage.jpg";
+                File.Delete(delpath);
+
+            }
+            if (couponModel.CouponImage2 == "/images/standardplaceholder.png" && coupon.CouponImage2.Contains("SMD_Content"))
+            {
+                string directoryPath = HttpContext.Current.Server.MapPath("~/SMD_Content/Coupons/" + couponModel.CouponId);
+                string delpath = directoryPath + "\\guid_Voucher2DefaultImage.jpg";
+                File.Delete(delpath);
+
+            }
+            if (couponModel.CouponImage3 == "/images/standardplaceholder.png" && coupon.CouponImage3.Contains("SMD_Content"))
+            {
+                string directoryPath = HttpContext.Current.Server.MapPath("~/SMD_Content/Coupons/" + couponModel.CouponId);
+                string delpath = directoryPath + "\\guid_Coupon3DefaultImage.jpg";
+                File.Delete(delpath);
+
+            }
+            if (couponModel.CouponImage4 == "/images/standardplaceholder.png" && coupon.CouponImage4.Contains("SMD_Content"))
+            {
+                string directoryPath = HttpContext.Current.Server.MapPath("~/SMD_Content/Coupons/" + couponModel.CouponId);
+                string delpath = directoryPath + "\\guid_Coupon4DefaultImage.jpg";
+                File.Delete(delpath);
+
+            }
+            if (couponModel.CouponImage5 == "/images/standardplaceholder.png" && coupon.CouponImage5.Contains("SMD_Content"))
+            {
+                string directoryPath = HttpContext.Current.Server.MapPath("~/SMD_Content/Coupons/" + couponModel.CouponId);
+                string delpath = directoryPath + "\\guid_Coupon5DefaultImage.jpg";
+                File.Delete(delpath);
+
+            }
+            if (couponModel.CouponImage6 == "/images/standardplaceholder.png" && coupon.CouponImage6.Contains("SMD_Content"))
+            {
+                string directoryPath = HttpContext.Current.Server.MapPath("~/SMD_Content/Coupons/" + couponModel.CouponId);
+                string delpath = directoryPath + "\\guid_Coupon6DefaultImage.jpg";
+                File.Delete(delpath);
+
+            }
+
+        }
 
         #endregion
         #region Constructor
@@ -156,7 +261,7 @@ namespace SMD.Implementation.Services
             this.invoiceDetailRepository = invoiceDetailRepository;
             _iCompanyRepository = iCompanyRepository;
             this.couponPriceOptionRepository = couponPriceOptionRepository;
-             this.campaignEventHistoryRepository = campaignEventHistoryRepository;
+            this.campaignEventHistoryRepository = campaignEventHistoryRepository;
         }
 
         #endregion
@@ -316,6 +421,23 @@ namespace SMD.Implementation.Services
                 {
                     couponModel.couponImage1 = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + paths[6];
                 }
+
+
+                if (!string.IsNullOrEmpty(paths[8]))
+                {
+                    couponModel.CouponImage4 = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + paths[8];
+                }
+                if (!string.IsNullOrEmpty(paths[9]))
+                {
+                    couponModel.CouponImage5 = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + paths[9];
+                }
+                if (!string.IsNullOrEmpty(paths[10]))
+                {
+                    couponModel.CouponImage6 = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + paths[10];
+                }
+
+
+
                 if (!string.IsNullOrEmpty(paths[7]))
                 {
                     couponModel.LogoUrl = paths[7];
@@ -329,8 +451,8 @@ namespace SMD.Implementation.Services
             }
 
 
-              //event history
-                campaignEventHistoryRepository.InsertCouponEvent((AdCampaignStatus)couponModel.Status,couponModel.CouponId);
+            //event history
+            campaignEventHistoryRepository.InsertCouponEvent((AdCampaignStatus)couponModel.Status, couponModel.CouponId);
 
 
 
@@ -369,6 +491,7 @@ namespace SMD.Implementation.Services
                 }
             }
             string[] paths = SaveImages(couponModel);
+            DeleteImages(couponModel);
 
             if (paths != null && paths.Count() > 0)
             {
@@ -388,6 +511,32 @@ namespace SMD.Implementation.Services
                     if (!paths[6].ToLower().Contains(HttpContext.Current.Request.Url.Authority.ToLower()))
                         couponModel.couponImage1 = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + paths[6];
                 }
+
+
+
+
+                if (!string.IsNullOrEmpty(paths[8]))
+                {
+                    if (!paths[8].ToLower().Contains(HttpContext.Current.Request.Url.Authority.ToLower()))
+                        couponModel.CouponImage4 = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + paths[8];
+                }
+
+                if (!string.IsNullOrEmpty(paths[9]))
+                {
+                    if (!paths[9].ToLower().Contains(HttpContext.Current.Request.Url.Authority.ToLower()))
+                        couponModel.CouponImage5 = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + paths[9];
+                }
+
+                if (!string.IsNullOrEmpty(paths[10]))
+                {
+                    if (!paths[10].ToLower().Contains(HttpContext.Current.Request.Url.Authority.ToLower()))
+                        couponModel.CouponImage6 = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + paths[10];
+                }
+
+
+
+
+
                 if (!string.IsNullOrEmpty(paths[7]))
                 {
                     couponModel.LogoUrl = paths[7];
@@ -440,7 +589,7 @@ namespace SMD.Implementation.Services
             couponRepository.SaveChanges();
 
             //event history
-            campaignEventHistoryRepository.InsertCouponEvent((AdCampaignStatus)couponModel.Status,couponModel.CouponId);
+            campaignEventHistoryRepository.InsertCouponEvent((AdCampaignStatus)couponModel.Status, couponModel.CouponId);
 
 
 
@@ -755,13 +904,13 @@ namespace SMD.Implementation.Services
                 // Approval
                 if (source.Approved == true)
                 {
-                   
+
 
                     dbCo.Approved = true;
                     dbCo.ApprovalDateTime = DateTime.Now;
                     dbCo.ApprovedBy = couponRepository.LoggedInUserIdentity;
                     dbCo.Status = (Int32)AdCampaignStatus.Live;
-                    if (dbCo.IsPaymentCollected != true && dbCo.CouponListingMode!=1)
+                    if (dbCo.IsPaymentCollected != true && dbCo.CouponListingMode != 1)
                     {
                         dbCo.IsPaymentCollected = true;
                         dbCo.PaymentDate = DateTime.Now;

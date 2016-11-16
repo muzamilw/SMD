@@ -19,6 +19,9 @@ namespace SMD.Models.DomainModels
         public string PhoneNumber { get; set; }
         public Nullable<int> MemberStatus { get; set; }
         public Nullable<long> SharingGroupId { get; set; }
+
+        public string FullName { get; set; }
+        
     
         public virtual SurveySharingGroup SurveySharingGroup { get; set; }
 

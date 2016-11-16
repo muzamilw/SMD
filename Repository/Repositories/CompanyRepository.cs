@@ -213,8 +213,11 @@ namespace SMD.Repository.Repositories
             return DbSet.Where(g => g.StripeCustomerId == StripeCustomerId).SingleOrDefault();
         }
 
+        public List<Dashboard_analytics_Result> GetDashboardAnalytics(string UserID)
+        {
 
-
+            return db.GetMainDashboardAnalytics(UserID).ToList();
+        }
 
 
     }

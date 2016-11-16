@@ -2,6 +2,7 @@
     ViewBag.Title = "User Profile";
 }
 
+
 <div class="modal fade my-modal" id="companyProfileDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true" style="z-index:1450 !important">
     <div class="modal-dialog" style="width:900px;border-radius:5px;">
         <div class="modal-content">
@@ -128,16 +129,16 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="txtMobileNo" class="requiredlabel">Mobile Number </label>
+                                                <label for="phone" class="requiredlabel">Mobile Number </label>
                                                 <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-plus"></i></span>
+                                                    @*<span class="input-group-addon"><i class="fa fa-plus"></i></span>
                                                     <select class="form-control" style="width:85%" id="countryCode" name="countryCode" >
                                                         <option value="92">92</option>
                                                         <option value="92">27</option>
                                                         <option value="92">44</option>
                                                     </select>
-                                                    <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                                                    <input type="text" id="txtMobileNo" class="form-control" name="Missing mobile number" maxlength="16" placeholder="Enter Mobile Number" data-bind="value:mobileNumber, validationOnElement: mobileNumber">
+                                                    <span class="input-group-addon"><i class="fa fa-phone"></i></span>*@
+                                                    <input type="tel" id="phone"  class="form-control" style="border-radius:3px;height:34px;width:180%;" name="Missing mobile number"  placeholder="Enter Mobile Number" data-bind="value:mobileNumber, validationOnElement: mobileNumber">
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -299,7 +300,8 @@
                                             <div class="form-group">
                                                 <label for="divLogo" class="requiredlabel">Logo </label>
                                                 <div id="divLogo" style="background-color: #dedede; height: auto;width:50%">
-                                                    <img style="height:auto;width:100%;" data-bind="attr: { src: $root.selectedCompany().Logo() }, validationOnElement: Logo" name="Missing logo" src="/Content/Images/Company_Default.png" id="imgLogoCProfile" data-toggle="modal" data-target="#damModelcpo" onclick="changeIframeSrcCProfile(1)" />
+                                                    <img style="height:auto;width:100%;" data-bind="attr: { src: $root.selectedCompany().Logo()()==null?'/images/standardplaceholder.png' : $root.selectedCompany().Logo()}, validationOnElement: Logo" name="Missing logo" src="/Content/Images/Company_Default.png" id="imgLogoCProfile" data-toggle="modal" data-target="#damModelcpo" onclick="changeIframeSrcCProfile(1)" />
+                    
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -475,8 +477,6 @@
 
 
 
-
-
 <script type="text/javascript">
 
     var logoImage = "";
@@ -529,7 +529,31 @@
             }
         });
     }
-   
+    function testm()
+    {
+        $("#phone").intlTelInput({
+            allowExtensions: true,
+            autoFormat: true,
+            autoHideDialCode: false,
+            autoPlaceholder: true,
+            customPlaceholder: function (selectedCountryPlaceholder, selectedCountryData) {
+                return 'Phone (include country code) e.g. ' + selectedCountryPlaceholder;
+            },
+            //defaultCountry: "auto",
+            //geoIpLookup: function(callback) {
+            //  $.get('http://ipinfo.io', function() {}, "jsonp").always(function(resp) {
+            //    var countryCode = (resp && resp.country) ? resp.country : "";
+            //    callback(countryCode);
+            //  });
+            //},
+            nationalMode: false,
+            //numberType: "MOBILE",
+            //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+            preferredCountries: ['gb', 'us', 'au'],
+            utilsScript: "../Scripts/intphnumutils.js"
+
+        });
+    }
 
 </script>
 

@@ -21,6 +21,7 @@ namespace DomainModelProject
         public Nullable<System.DateTime> GeneratedOn { get; set; }
         public string GeneratedBy { get; set; }
         public Nullable<long> SurveyQuestionShareId { get; set; }
+        public string PhoneNumber { get; set; }
     
         public virtual SurveySharingGroupShare SurveySharingGroupShare { get; set; }
     }

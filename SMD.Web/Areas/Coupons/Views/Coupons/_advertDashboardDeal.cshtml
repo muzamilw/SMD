@@ -1,4 +1,4 @@
-﻿         <div data-bind="visible: $root.isAdvertdashboardDealVisible()" style="display: none;padding-left:0px;" class=" col-lg-9 form-horizontal" >
+﻿         <div data-bind="visible: $root.isAdvertdashboardDealVisible()" style="display: none;padding-left:0px;" class=" col-lg-12 form-horizontal" >
              <div class="main-box main-box-subpage">
                  <div class="row">
                      <span class="charts_label" style="margin-left: 16px;">Charts &amp; Analytics</span>
@@ -17,17 +17,18 @@
 
                      </div>
                  <div>
-                     
-                     <div class="col-lg-2" style="padding-top:9px;">
-                         <label class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Granularity level </label> 
+                     <div class="col-lg-7">
                          </div>
-                     <div class="col-lg-3">
-                         <select class="form-control margin10 pull-left" id="ddGranularityDropDown" data-bind="options: $root.granularityDropDown, optionsText: 'name', optionsValue: 'id', value:$root.selectedGranularityAnalytics, event: { change: $root.getDealsAnalytics }"></select>
+                         <div class="col-lg-2" style="padding-top:9px;">
+                             <label class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Granularity level </label>
+                         </div>
+                         <div class="col-lg-3">
+                             <select class="form-control margin10 pull-left" id="ddGranularityDropDown" data-bind="options: $root.granularityDropDown, optionsText: 'name', optionsValue: 'id', value:$root.selectedGranularityAnalytics, event: { change: $root.getDealsAnalytics }"></select>
 
+
+                         </div>
 
                      </div>
-
-                 </div>
 
                  <div class="row main-box">
                      <div class="col-lg-12">

@@ -56,6 +56,7 @@
 
     }
     <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+    <link href="~/Content/CSS/intlTelInput.css" rel="stylesheet" />
 
     <!--[if lt IE 9]>
         <script src="js/html5shiv.js"></script>
@@ -690,8 +691,9 @@
     @Scripts.Render("~/Bundle/BaseLibs")
     <script src="~/Content/themes/Centaurus/js/fullcalendar.min.js"></script>
     @Scripts.Render("~/Bundle/CentaurusLibs")
+    <script src="~/Scripts/intlTelInput.min.js"></script>
+    
     <script>
-
         require(["common/confirmation.view"]);
         require(["Layout/Layout.view"]);
         require(["PhraseLibrary/phraseLibrary.view"]);
@@ -699,11 +701,16 @@
         require(["common/companyProfile.view"]);
         require(["common/InviteUser.view"]);
 
+        require(["common/dashboardGraphAnalytics.view"]);
+
+
         $(document).ready(function () {
             $("#make-small-nav").click(function () {
                 $("#header-logo").toggle();
                 $("#menu-logo").toggle();
             });
+         
+        });
 
             $('#topArea').collapse();
 
@@ -719,98 +726,6 @@
                 $("#btnPhraseLibrary").css("background-color", "#7f8c8d");
                 $("#btnPhraseLibrary").css("border-color", "#5c6667");
             });
-
-            
-            //$(".dealfront").hover(function(){
-            //    $(this).find(".play_btn").show();
-            //    $(this).find("#deal_heading").css("cssText", "color:#fff!important;");
-            //    $(".dealspanel").animate({
-            //        height: 'toggle'
-            //    },500);
-              
-            //},function(){
-            //    $(".dealspanel").animate({
-            //        height: 'toggle'
-            //    },500);
-            //    $(this).find(".play_btn").hide();
-            //    $(this).find("#deal_heading").css("cssText", "color:rgb(103, 103, 103)!important;");
-            //});
-
-
-
-            //$(".video_front").hover(function(){
-            //    $(this).find(".play_btn").show();
-            //    $(this).find("#video_heading").css("cssText", "color:#fff!important;");
-            //    $(".videopanel").animate({
-            //        height: 'toggle'
-            //    },500);
-            //},function(){
-            //    $(".videopanel").animate({
-            //        height: 'toggle'
-            //    },500);
-            //    $(this).find("#video_heading").css("cssText", "color:rgb(103, 103, 103)!important;");
-            //    $(this).find(".play_btn").hide();
-            //});
-
-
-
-            //$(".display_front").hover(function(){
-            //    $(this).find(".play_btn").show();
-            //    $(this).find("#display_heading").css("cssText", "color:#fff!important;");
-            //    $(".displayadspanel").animate({
-            //        height: 'toggle'
-            //    },500);
-            //},function(){
-            //    $(".displayadspanel").animate({
-            //        height: 'toggle'
-            //    },500);
-            //    $(this).find("#display_heading").css("cssText", "color:rgb(103, 103, 103)!important;");
-            //    $(this).find(".play_btn").hide();
-            //});
-
-
-
-            //$(".polls_front").hover(function(){
-            //    $(this).find(".play_btn").show();
-            //    $(this).find("#polls_heading").css("cssText", "color:#fff!important;");
-            //    $(".pollspanel").animate({
-            //        height: 'toggle'
-            //    },500);
-            //},function(){
-            //    $(".pollspanel").animate({
-            //        height: 'toggle'
-            //    },500);
-            //    $(this).find(".play_btn").hide();
-            //    $(this).find("#polls_heading").css("cssText", "color:rgb(103, 103, 103)!important;");
-            //});
-
-            
-            //$(".survey_front").hover(function(){
-            //    $(this).find(".play_btn").show();
-            //    $(this).find("#surveysheading").css("cssText", "color:#fff!important;");
-            //    $(".surveypanel").animate({
-            //        height: 'toggle'
-            //    },500);
-            //},function(){
-            //    $(".surveypanel").animate({
-            //        height: 'toggle'
-            //    },500);
-            //    $(this).find(".play_btn").hide();
-            //    $(this).find("#surveysheading").css("cssText", "color:rgb(103, 103, 103)!important;");
-            //});
-            //$(document).on('mouseenter', '.homePanels', function () {
-               
-            //    $(this).find(".play_btn").show();
-
-            //}).on('mouseleave', '.homePanels', function () {
-               
-            //    $(this).find(".play_btn").hide();
-            //});
-
-        
-
-
-
 
             $("#deals_btn").hover(function(){
 
@@ -930,12 +845,6 @@
 
          });
 
-
-
-
-
-         
-        });
         function GotoHome()
         {
             window.location.href = "/";
@@ -968,46 +877,6 @@
                 $("#btnBranchLocations").click();
             }
        
-            //////////////var logoImage = "";
-            //////////////var bannerImage1 = "";
-            //////////////var bannerImage2 = "";
-            //////////////var bannerImage3 = "";
-            //////////////var mode = 1;
-
-
-            //////////////function changeIframeSrc(mode1) {
-            //////////////    mode = mode1;
-            //////////////    if (mode1 != 1)
-            //////////////        mode1 = 2;
-            //////////////    $("#iframe").attr("src", "/DamImages?mode=" + mode1 + "&selection=true");
-
-            //////////////    console.log(mode);
-            //////////////}
-
-            //////////////function iframeLoaded() {
-            
-            //////////////    var iframeBody = $('body', $('#iframe')[0].contentWindow.document);
-            //////////////    $(iframeBody).on('click', '.damImgContainer img', function (event) {
-            //////////////        console.log(mode);
-            //////////////        if (mode == 1) {
-            //////////////            $("#imgLogo").attr("src", this.src).change();
-            //////////////            logoImage = this.src;
-            //////////////            $(".DamModelclose").click();
-            //////////////        } else if (mode == 2) {
-            //////////////            $("#bannerImage1").attr("src", this.src).change();
-            //////////////            bannerImage1 = this.src;
-            //////////////            $(".DamModelclose").click();
-            //////////////        } else if (mode == 3) {
-            //////////////            $("#bannerImage2").attr("src", this.src).change();
-            //////////////            bannerImage2 = this.src;
-            //////////////            $(".DamModelclose").click();
-            //////////////        } else if (mode == 4) {
-            //////////////            $("#bannerImage3").attr("src", this.src).change();
-            //////////////            bannerImage3 = this.src;
-            //////////////            $(".DamModelclose").click();
-            //////////////        }
-            //////////////    });
-            //////////////}
             function ShowInviteUserPopup() {
                 $('#btninviteusers').click();
             }

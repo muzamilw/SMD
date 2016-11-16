@@ -12,6 +12,7 @@ namespace SMD.Interfaces.Repository
 {
     public interface ICompanyRepository : IBaseRepository<Company, int>
     {
+        List<Dashboard_analytics_Result> GetDashboardAnalytics(string UserID);
         int GetUserCompany(string userId);
         bool updateCompanyLogo(string url, int companyId);
 

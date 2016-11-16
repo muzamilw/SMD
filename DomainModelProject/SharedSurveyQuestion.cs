@@ -16,7 +16,6 @@ namespace DomainModelProject
     {
         public SharedSurveyQuestion()
         {
-            this.SharedSurveyQuestionResponses = new HashSet<SharedSurveyQuestionResponse>();
             this.SurveySharingGroupShares = new HashSet<SurveySharingGroupShare>();
         }
     
@@ -27,8 +26,9 @@ namespace DomainModelProject
         public string LeftPicturePath { get; set; }
         public string RightPicturePath { get; set; }
         public Nullable<System.DateTime> CreationDate { get; set; }
+        public Nullable<long> SharingGroupId { get; set; }
     
-        public virtual ICollection<SharedSurveyQuestionResponse> SharedSurveyQuestionResponses { get; set; }
         public virtual ICollection<SurveySharingGroupShare> SurveySharingGroupShares { get; set; }
+        public virtual SurveySharingGroup SurveySharingGroup { get; set; }
     }
 }

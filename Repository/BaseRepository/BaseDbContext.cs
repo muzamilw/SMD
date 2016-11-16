@@ -712,10 +712,11 @@ namespace SMD.Repository.BaseRepository
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Int32>("GetUserProfileCompletness", UserIdParam);
         }
 
-        public ObjectResult<Int32> GetMainDashboardData(string UserId)
+        public ObjectResult<Dashboard_analytics_Result> GetMainDashboardAnalytics(string UserId)
         {
             var UserIdParam = new ObjectParameter("UderID", UserId);
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Int32>("dashboard_MenifestData", UserIdParam);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Dashboard_analytics_Result>("Dashboard_analytics", UserIdParam);
+
         }
 
         public ObjectResult<GetApprovalCount_Result> GetApprovalCount()
@@ -805,6 +806,18 @@ namespace SMD.Repository.BaseRepository
         {
             var _ID = new ObjectParameter("Id", ID);
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getCampaignROItblAnalytic_Result>("getCampaignROItblAnalytic", _ID);
+        }
+
+
+
+        /// <summary>
+        /// Get Shared survey question details
+        /// </summary>
+        public ObjectResult<GetSharedSurveyQuestion_Result> GetSharedSurveyQuestion(long SSQID)
+        {
+            var oSSQID = new ObjectParameter("SSQID", SSQID);
+
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetSharedSurveyQuestion_Result>("GetSharedSurveyQuestion", oSSQID);
         }
         #endregion
     }

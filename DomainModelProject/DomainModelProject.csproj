@@ -141,6 +141,9 @@
     <Compile Include="DamImage.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Dashboard_analytics_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="DiscountVoucher.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -220,6 +223,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="GetRevenueOverTime_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetSharedSurveyQuestion_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="getSurvayByPQIDtblAnalytic_Result.cs">
@@ -317,9 +323,6 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="SharedSurveyQuestion.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SharedSurveyQuestionResponse.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="SurveyQuestion.cs">

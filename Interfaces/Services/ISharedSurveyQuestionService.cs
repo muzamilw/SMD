@@ -5,11 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace SMD.Interfaces.Services
 {
     public interface ISharedSurveyQuestionService
     {
 
-        bool Create(SharedSurveyQuestion survey);
+          long CreateAndSend(SharedSurveyQuestion survey);
+
+          GetSharedSurveyQuestion_Result GetSharedSurveyQuestion(long SSQID);
+
+          bool updateUserSharedSurveyQuestionResponse(long SurveyQuestionShareId, int UserSelection);
+
+          bool DeleteSharedSurveyQuestion(long SSQID);
     }
 }

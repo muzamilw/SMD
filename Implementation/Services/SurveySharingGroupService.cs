@@ -12,6 +12,7 @@ using SMD.Models.ResponseModels;
 using Stripe;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -47,15 +48,22 @@ namespace SMD.Implementation.Services
         #endregion
         #region public
 
+
+        public List<SurveySharingGroup> GetUserGroups(string UserId)
+        {
+            return surveySharingGroupRepository.GetUserGroups(UserId).ToList();
+        }
+        public SurveySharingGroup GetGroupDetails(long SharingGroupId)
+        {
+            return surveySharingGroupRepository.Find(SharingGroupId);
+        }
+
         public SurveySharingGroup Create(SurveySharingGroup group)
         {
 
             group.CreationDate = DateTime.Now;
             
 
-
-            surveySharingGroupRepository.Add(group);
-            surveySharingGroupRepository.SaveChanges();
 
 
             foreach (var item in group.SurveySharingGroupMembers)
@@ -76,18 +84,95 @@ namespace SMD.Implementation.Services
 
                 }
 
-                surveySharingGroupMemberRepository.Add(item);
+                //item.SharingGroupId = group.SharingGroupId;
+
+                //surveySharingGroupMemberRepository.Update(item);
 
                 
             }
-            surveySharingGroupMemberRepository.SaveChanges();
+
+            surveySharingGroupRepository.Add(group);
+            surveySharingGroupRepository.SaveChanges();
+
+            //surveySharingGroupMemberRepository.SaveChanges();
 
 
 
             return group;
         }
 
+        public SurveySharingGroup Update(SurveySharingGroup group, ICollection<SurveySharingGroupMember> addedMembers, ICollection<SurveySharingGroupMember> deletedMembers)
+        {
 
+
+            var dbGroup = surveySharingGroupRepository.Find(group.SharingGroupId);
+            if (dbGroup != null)
+            {
+
+
+                dbGroup.GroupName = group.GroupName;
+
+                var dbExistingMembers = surveySharingGroupMemberRepository.GetAllGroupMembers(group.SharingGroupId);
+                if (addedMembers.Count > 0)
+                {}
+
+
+                //new user add logic.
+                foreach (var item in addedMembers)
+                {
+
+                    //if already exists then do not add again.
+                    if (dbExistingMembers.FindAll(g => g.PhoneNumber == item.PhoneNumber).Count == 0)
+                    {
+
+                        item.SharingGroupId = dbGroup.SharingGroupId;
+                        var user = aspnetUserRepository.GetUserbyPhoneNo(item.PhoneNumber);
+                        if (user != null)
+                        {
+                            item.UserId = user.Id;
+                            item.MemberStatus = 1;
+                        }
+                        else
+                        {
+                            item.MemberStatus = 0;
+                            //call the sms api
+
+                            //user not found send SMS to join
+
+                        }
+
+                        if (dbGroup.SurveySharingGroupMembers == null)
+                        {
+                            dbGroup.SurveySharingGroupMembers = new Collection<SurveySharingGroupMember>();
+                        }
+
+                        dbGroup.SurveySharingGroupMembers.Add(item);
+                    }
+                }
+
+
+
+                //delete user logic
+                foreach (var item in deletedMembers)
+                {
+
+                    var member = dbGroup.SurveySharingGroupMembers.Where(g => g.SharingGroupMemberId == item.SharingGroupMemberId).SingleOrDefault();
+                    member.MemberStatus = 3;
+
+                }
+
+
+                surveySharingGroupRepository.Update(dbGroup);
+                surveySharingGroupRepository.SaveChanges();
+
+            }
+            return group;
+        }
+
+        public bool DeleteGroup(long SharingGroupId)
+        {
+            return surveySharingGroupRepository.DeleteUserGroup(SharingGroupId);
+        }
 
         #endregion
     }

@@ -362,6 +362,11 @@ namespace SMD.Implementation.Services
             companyRepository.UpdateCompanyStatus(status, userId, comments, companyId);
             return true;
         }
+
+        public List<Dashboard_analytics_Result> GetDashboardAnalytics(string UserID)
+        {
+           return  companyRepository.GetDashboardAnalytics(UserID);
+        }
         #endregion
     }
 }

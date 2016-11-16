@@ -132,6 +132,7 @@
     <Compile Include="DomainModels\CouponCategories.cs" />
     <Compile Include="DomainModels\CouponPriceOption.cs" />
     <Compile Include="DomainModels\DamImage.cs" />
+    <Compile Include="DomainModels\Dashboard_analytics_Result.cs" />
     <Compile Include="DomainModels\EventStatus.cs" />
     <Compile Include="DomainModels\GetActiveVSNewUsers_Result.cs" />
     <Compile Include="DomainModels\GetAdminDashBoardInsights_Result.cs" />
@@ -149,6 +150,7 @@
     <Compile Include="DomainModels\GetRegisteredUserData_Result.cs" />
     <Compile Include="DomainModels\GetRevenueByCampaignOverTime_Result.cs" />
     <Compile Include="DomainModels\GetRevenueOverTime_Result.cs" />
+    <Compile Include="DomainModels\GetSharedSurveyQuestion_Result.cs" />
     <Compile Include="DomainModels\getSurvayByPQID_Result.cs" />
     <Compile Include="DomainModels\GetTransactions_Result.cs" />
     <Compile Include="DomainModels\getUserActivitiesOverTime_Result.cs" />
