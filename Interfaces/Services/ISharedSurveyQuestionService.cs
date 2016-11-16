@@ -18,5 +18,8 @@ namespace SMD.Interfaces.Services
           bool updateUserSharedSurveyQuestionResponse(long SurveyQuestionShareId, int UserSelection);
 
           bool DeleteSharedSurveyQuestion(long SSQID);
+
+
+          List<GetSharedSurveyQuestionsByUserId_Result> GetSharedSurveysByuserID(string UserId);
     }
 }

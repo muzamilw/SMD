@@ -802,7 +802,7 @@ namespace SMD.Repository.BaseRepository
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getCampaignROItblAnalytic_Result>("getCampaignROItblAnalytic", _ID);
         }
 
-
+        
 
         /// <summary>
         /// Get Shared survey question details
@@ -812,6 +812,17 @@ namespace SMD.Repository.BaseRepository
             var oSSQID = new ObjectParameter("SSQID", SSQID);
 
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetSharedSurveyQuestion_Result>("GetSharedSurveyQuestion", oSSQID);
+        }
+
+
+        /// <summary>
+        /// Get Shared survey question details
+        /// </summary>
+        public ObjectResult<GetSharedSurveyQuestionsByUserId_Result> GetSharedSurveyQuestionsByUserId(string UserId)
+        {
+            var oUserId = new ObjectParameter("UserId", UserId);
+
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetSharedSurveyQuestionsByUserId_Result>("GetSharedSurveyQuestionsByUserId", oUserId);
         }
         #endregion
     }

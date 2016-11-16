@@ -47,25 +47,41 @@ namespace SMD.MIS.Areas.Api.Controllers
         }
 
 
+       
+
+
+        public List<GetSharedSurveyQuestionsByUserId_Result> Get (string UserId)
+        {
+            return sharedSurveyQuestionService.GetSharedSurveysByuserID(UserId);
+        }
+
+
         /// <summary>
         /// create group
         /// </summary>
-        public GetSharedSurveyQuestion_Result Put(string authenticationToken, SharedSurveyQuestionRequestApiModel surveyQuestion)
+        public SharedSurveyQuestionResponse Put(string authenticationToken, SharedSurveyQuestionRequestApiModel surveyQuestion)
         {
-
-
-            Mapper.Initialize(cfg =>
+            try
             {
-                cfg.CreateMap<SharedSurveyQuestionRequestApiModel, SharedSurveyQuestion>();
-                
-            });
+                Mapper.Initialize(cfg =>
+                {
+                    cfg.CreateMap<SharedSurveyQuestionRequestApiModel, SharedSurveyQuestion>();
+
+                });
 
 
-            var SSQID = sharedSurveyQuestionService.CreateAndSend(Mapper.Map<SharedSurveyQuestionRequestApiModel, SharedSurveyQuestion>(surveyQuestion));
+                var SSQID = sharedSurveyQuestionService.CreateAndSend(Mapper.Map<SharedSurveyQuestionRequestApiModel, SharedSurveyQuestion>(surveyQuestion));
 
 
-            return sharedSurveyQuestionService.GetSharedSurveyQuestion(SSQID);
+                return new SharedSurveyQuestionResponse { GetSharedSurveyQuestion = sharedSurveyQuestionService.GetSharedSurveyQuestion(SSQID), Message = "Success", Status = true };
+            }
+            catch (Exception e)
+            {
+
+                return new SharedSurveyQuestionResponse { Message = e.ToString(), Status = false };
+            }
         }
+
 
 
         /// <summary>

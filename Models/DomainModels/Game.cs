@@ -10,5 +10,8 @@
         public int? GameType { get; set; }
         public int? Complexity { get; set; }
         public string GameUrl { get; set; }
+
+        public string GameSmallImage { get; set; }
+        public string GameLargeImage { get; set; }
     }
 }

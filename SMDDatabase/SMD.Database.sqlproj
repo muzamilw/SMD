@@ -90,6 +90,7 @@
     <None Include="GetRegisteredUserData.sql" />
     <None Include="GetUserSurveySelectionPercentage.sql" />
     <None Include="GetSharedSurveyQuestion.sql" />
+    <None Include="GetSharedSurveyQuestionsByUserId.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="getCampaignsByStatus.sql" />
