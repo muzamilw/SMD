@@ -6,7 +6,7 @@
             LocationLine1, LocationLine2, LocationLON, LocationPhone, LocationState, LocationTitle, LocationZipCode, LogoUrl, ModifiedBy, ModifiedDateTime, Price, RejectedBy,
             Rejecteddatetime, RejectedReason, Savings, SearchKeywords, Status, SwapCost, UserId, CouponTitle, CouponExpirydate, CouponQtyPerUser, CouponId, couponImage1, CouponImage2, CouponImage3,
             CurrencyId, couponListingMode, CouponActiveMonth, CouponActiveYear, CouponRedeemedCount, CouponViewCount, CouponIssuedCount, SubmissionDateTime, LocationCountryId, CouponStartDate, CouponEndDate, Priority,
-            ShowBuyitBtn, BuyitLandingPageUrl, BuyitBtnLabel, YoutubeLink, CouponImage4, CouponImage5, CouponImage6, IsPaymentCollected, PaymentDate, IsShowReviews, IsShowAddress, IsShowPhoneNo, IsShowMap, IsShowyouTube, IsShowAboutUs
+            ShowBuyitBtn, BuyitLandingPageUrl, BuyitBtnLabel, YoutubeLink, CouponImage4, CouponImage5, CouponImage6, IsPaymentCollected, PaymentDate, IsShowReviews, IsShowAddress, IsShowPhoneNo, IsShowMap, IsShowyouTube, IsShowAboutUs, DealsinGroupCount
           ) {
           var
               //type and userID will be set on server sside
@@ -105,6 +105,7 @@
               IsShowMap = ko.observable(IsShowMap),
               IsShowyouTube = ko.observable(IsShowyouTube),
               IsShowAboutUs = ko.observable(IsShowAboutUs),
+              DealsinGroupCount = ko.observable(DealsinGroupCount),
                // Errors
           errors = ko.validation.group({
               CouponTitle: CouponTitle
@@ -198,6 +199,7 @@
                  IsShowMap:IsShowMap,
                  IsShowyouTube: IsShowyouTube,
                  IsShowAboutUs: IsShowAboutUs,
+                 DealsinGroupCount :DealsinGroupCount,
 
           }),
     // Has Changes
@@ -315,6 +317,7 @@
                   IsShowMap: IsShowMap(),
                   IsShowyouTube: IsShowyouTube(),
                   IsShowAboutUs: IsShowAboutUs(),
+                  DealsinGroupCount:DealsinGroupCount(),
                     
               };
           };
@@ -407,6 +410,8 @@
         IsShowMap: (IsShowMap),
         IsShowyouTube: (IsShowyouTube),
         IsShowAboutUs: (IsShowAboutUs),
+        DealsinGroupCount: (DealsinGroupCount),
+
     };
 };
 
@@ -422,7 +427,7 @@ Coupon.Create = function (source) {
         source.LocationTitle, source.LocationZipCode, source.LogoUrl, source.ModifiedBy, source.ModifiedDateTime, source.Price, source.RejectedBy,
         source.Rejecteddatetime, source.RejectedReason, source.Savings, source.SearchKeywords, source.Status, source.SwapCost, source.UserId,source.CouponTitle,source.CouponExpirydate,
         source.CouponQtyPerUser, source.CouponId, source.couponImage1, source.CouponImage2, source.CouponImage3, source.CurrencyId, source.CouponListingMode, source.CouponActiveMonth, source.CouponActiveYear, source.CouponRedeemedCount, source.CouponViewCount, source.CouponIssuedCount, source.SubmissionDateTime, source.LocationCountryId, source.CouponStartDate, source.CouponEndDate, source.Priority
-        , source.ShowBuyitBtn, source.BuyitLandingPageUrl, source.BuyitBtnLabel, source.YoutubeLink, source.CouponImage4, source.CouponImage5, source.CouponImage6, source.IsPaymentCollected, source.PaymentDate, source.IsShowReviews, source.IsShowAddress, source.IsShowPhoneNo, source.IsShowMap, source.IsShowyouTube, source.IsShowAboutUs
+        , source.ShowBuyitBtn, source.BuyitLandingPageUrl, source.BuyitBtnLabel, source.YoutubeLink, source.CouponImage4, source.CouponImage5, source.CouponImage6, source.IsPaymentCollected, source.PaymentDate, source.IsShowReviews, source.IsShowAddress, source.IsShowPhoneNo, source.IsShowMap, source.IsShowyouTube, source.IsShowAboutUs, source.DealsinGroupCount
         );
 
     _.each(source.CouponCategories, function (item) {

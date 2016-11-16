@@ -595,7 +595,8 @@ namespace SMD.MIS.ModelMappers
                 IsShowPhoneNo = source.IsShowPhoneNo,
                 IsShowMap = source.IsShowMap,
                 IsShowyouTube = source.IsShowyouTube,
-                IsShowAboutUs=source.IsShowAboutUs
+                IsShowAboutUs=source.IsShowAboutUs,
+                DealsinGroupCount = source.CouponPriceOptions != null ? source.CouponPriceOptions.Count : 0,
 
               };
 
