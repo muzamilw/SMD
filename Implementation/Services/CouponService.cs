@@ -898,6 +898,7 @@ namespace SMD.Implementation.Services
             var dbCo = couponRepository.GetCouponByIdSingle(source.CouponId);
             var userData = webApiUserService.GetUserByUserId(dbCo.UserId);
             var isFlag = dbCo.IsPaymentCollected;
+            dbCo.IsMarketingStories = source.IsMarketingStories;
             // Update 
             if (dbCo != null)
             {
@@ -939,6 +940,7 @@ namespace SMD.Implementation.Services
                 {
                     dbCo.Status = (Int32)AdCampaignStatus.ApprovalRejected;
                     dbCo.Approved = false;
+                    dbCo.IsMarketingStories = false;
                     dbCo.RejectedReason = source.RejectedReason.ToString();
 
                 }
