@@ -20,6 +20,12 @@ namespace SMD.MIS.Areas.Api.Models
         public Nullable<System.DateTime> CreationDate { get; set; }
 
         public long SharingGroupId { get; set; }
+
+
+
+        public string LeftPictureExtention { get; set; }
+    
+        public string RightPictureExtention { get; set; }
        
 
     }

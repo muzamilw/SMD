@@ -124,6 +124,9 @@ namespace SMD.Repository.Repositories
 
                 rowCount = DbSet.Count(query);
 
+                adCampaigns.ToList().ForEach(a => a.CouponViewCount = GetViewdCount(a.CouponId));
+                              
+
                 //if (adCampaigns != null && adCampaigns.Count() > 0)
                 //{
                 //    foreach (var ad in adCampaigns)
@@ -134,6 +137,10 @@ namespace SMD.Repository.Repositories
                 //}
                 return adCampaigns;
             }
+        }
+        private int GetViewdCount(long couponId)
+        {
+            return db.UserCouponView.ToList().Count(a => a.CouponId == couponId);
         }
         public IEnumerable<Coupon> GetCouponById(long campaignId)
         {

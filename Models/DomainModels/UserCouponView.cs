@@ -14,5 +14,7 @@ namespace SMD.Models.DomainModels
         public Nullable<long> CouponId { get; set; }
         public string UserId { get; set; }
         public Nullable<System.DateTime> ViewDateTime { get; set; }
+        public string userLocationLAT { get; set; }
+        public string userLocationLONG { get; set; }
     }
 }

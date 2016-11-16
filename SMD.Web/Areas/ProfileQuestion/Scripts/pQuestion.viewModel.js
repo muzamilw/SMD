@@ -813,6 +813,7 @@ define("pQuestion/pQuestion.viewModel",
                         isNewCampaignVisible(true);
                         canSubmitForApproval(false);
                         IsPauseBtnVisible(true);
+                        isNewCampaign(false);
 
                     } else if (selectedQuestion().status() == 4) {
                         $("input,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
@@ -825,6 +826,7 @@ define("pQuestion/pQuestion.viewModel",
                         isTerminateBtnVisible(true);
                         isNewCampaignVisible(true);
                         canSubmitForApproval(false);
+                        isNewCampaign(false);
                     } else if (selectedQuestion().status() == 5) {
                         selectedQuestion().statusValue("Completed");
                     } else if (selectedQuestion().status() == 6) {

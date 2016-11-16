@@ -489,6 +489,9 @@ getfreeCouponCount = function () {
             couponCategories.removeAll();
             ko.utils.arrayPushAll(couponCategories(), arrayOfUpdatedList);
             couponCategories.valueHasMutated();
+            IsResumeBtnVisible(false);
+            IsPauseBtnVisible(false);
+
 
         },
 

@@ -635,5 +635,14 @@ namespace DomainModelProject
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Dashboard_analytics_Result>("Dashboard_analytics", uderIDParameter);
         }
+    
+        public virtual ObjectResult<GetSharedSurveyQuestionsByUserId_Result> GetSharedSurveyQuestionsByUserId(string userId)
+        {
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetSharedSurveyQuestionsByUserId_Result>("GetSharedSurveyQuestionsByUserId", userIdParameter);
+        }
     }
 }

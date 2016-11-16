@@ -52,6 +52,13 @@ namespace SMD.Repository.Repositories
         }
 
 
+        public List<GetSharedSurveyQuestionsByUserId_Result> GetSharedSurveysByuserID(string UserId)
+        {
+
+            return db.GetSharedSurveyQuestionsByUserId(UserId).ToList();
+        }
+
+
         //delete a survey
         public bool DeleteSharedSurveyQuestion(long SSQID)
         {

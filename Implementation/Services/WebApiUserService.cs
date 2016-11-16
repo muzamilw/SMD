@@ -53,6 +53,7 @@ namespace SMD.Implementation.Services
         private readonly IAccountService accountService;
         private readonly IProfileQuestionRepository profileQuestionRepository;
         private readonly ISmsServiceCustom smsService;
+        private readonly IGameRepository gameRepositry;
 
         private readonly IAspnetUsersRepository aspnetUsersRepository;
 
@@ -623,7 +624,7 @@ namespace SMD.Implementation.Services
             ITaxRepository taxRepository, IProfileQuestionUserAnswerService profileQuestionAnswerService,
             ICountryRepository countryRepository, IIndustryRepository industryRepository,
             IProfileQuestionService profileQuestionService, IAdCampaignResponseRepository adCampaignResponseRepository,
-            ISurveyQuestionResponseRepository surveyQuestionResponseRepository, IEducationRepository educationRepository, ICityRepository cityRepository, ICompanyRepository companyRepository, IManageUserRepository manageUserRepository, IAccountService accountService, IProfileQuestionRepository profileQuestionRepository, IAspnetUsersRepository aspnetUsersRepository, ISmsServiceCustom smsService)
+            ISurveyQuestionResponseRepository surveyQuestionResponseRepository, IEducationRepository educationRepository, ICityRepository cityRepository, ICompanyRepository companyRepository, IManageUserRepository manageUserRepository, IAccountService accountService, IProfileQuestionRepository profileQuestionRepository, IAspnetUsersRepository aspnetUsersRepository, ISmsServiceCustom smsService, IGameRepository gameRepositry)
         {
             if (emailManagerService == null)
             {
@@ -693,6 +694,7 @@ namespace SMD.Implementation.Services
             this.profileQuestionRepository = profileQuestionRepository;
             this.aspnetUsersRepository = aspnetUsersRepository;
             this.smsService = smsService;
+            this.gameRepositry = gameRepositry;
         }
 
 
@@ -931,6 +933,32 @@ namespace SMD.Implementation.Services
         public GetProductsResponse GetProducts(GetProductsRequest request)
         {
             List<GetProducts_Result> products = adCampaignRepository.GetProducts(request).ToList();
+
+            //no ads found in this page then insert the manual pages
+            if (products.FindAll( g=> g.Type == "Ad").Count == 0)
+            {
+                
+
+                string companylogo = "";
+
+                var specialads = adCampaignRepository.GetSpecialAdCampaigns(out companylogo);
+                var gamead = specialads.Where(g => g.Type == 4).FirstOrDefault();
+                var videoad = specialads.Where(g => g.Type == 1).FirstOrDefault();
+
+                if (gamead != null)
+                {
+                    var game = gameRepositry.GetRandomGame();
+                    var freeGame = new GetProducts_Result { ItemId = gamead.CampaignId, ItemName = gamead.CampaignName, Type = "freeGame", ItemType = 3, AdImagePath = "http://manage.cash4ads.com/" + gamead.LogoUrl, AdClickRate = 0, AdvertisersLogoPath = companylogo, BuyItImageUrl = "http://manage.cash4ads.com/" + gamead.BuyItImageUrl, GameId = game.GameId, GameUrl = game.GameUrl, AdVerifyQuestion = videoad.VerifyQuestion, AdAnswer1 = videoad.Answer1, AdAnswer2 = videoad.Answer2, AdAnswer3 = videoad.Answer3, AdCorrectAnswer = videoad.CorrectAnswer };
+                    products.Insert(0, freeGame);
+                }
+
+                if (videoad != null)
+                {
+                    var freevideoAd = new GetProducts_Result { ItemId = videoad.CampaignId, ItemName = videoad.CampaignName, Type = "freeAd", ItemType = 1, AdImagePath = "http://manage.cash4ads.com/" + videoad.LogoUrl, AdClickRate = 0, AdvertisersLogoPath = companylogo, BuyItImageUrl = "http://manage.cash4ads.com/" + videoad.BuyItImageUrl, GameId = 1, GameUrl = "", AdVideoLink = videoad.LandingPageVideoLink, VideoLink2 = videoad.VideoLink2, AdVerifyQuestion = videoad.VerifyQuestion, AdAnswer1 = videoad.Answer1, AdAnswer2 = videoad.Answer2, AdAnswer3 = videoad.Answer3, AdCorrectAnswer = videoad.CorrectAnswer };
+                    products.Insert(3, freevideoAd);
+                }
+            }
+
             return new GetProductsResponse
             {
                 Status = true,

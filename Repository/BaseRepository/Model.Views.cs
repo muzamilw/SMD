@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets25EF69D3A90E69C7244D49F19FE09C82D000A8270FDD5638492C0CD81D477441))]
+[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets7278AB04A2CA9CBA1FB1029F56350CB62D9C8A52DE45BE81F5C0012FAB11361D))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -17,18 +17,18 @@ namespace Edm_EntityMappingGeneratedViews
     /// <Summary>
     /// The type contains views for EntitySets and AssociationSets that were generated at design time.
     /// </Summary>
-    public sealed class ViewsForBaseEntitySets25EF69D3A90E69C7244D49F19FE09C82D000A8270FDD5638492C0CD81D477441 : System.Data.Mapping.EntityViewContainer
+    public sealed class ViewsForBaseEntitySets7278AB04A2CA9CBA1FB1029F56350CB62D9C8A52DE45BE81F5C0012FAB11361D : System.Data.Mapping.EntityViewContainer
     {
         
         /// <Summary>
         /// The constructor stores the views for the extents and also the hash values generated based on the metadata and mapping closure and views.
         /// </Summary>
-        public ViewsForBaseEntitySets25EF69D3A90E69C7244D49F19FE09C82D000A8270FDD5638492C0CD81D477441()
+        public ViewsForBaseEntitySets7278AB04A2CA9CBA1FB1029F56350CB62D9C8A52DE45BE81F5C0012FAB11361D()
         {
             this.EdmEntityContainerName = "BaseDbContext";
             this.StoreEntityContainerName = "SMDModelStoreContainer";
-            this.HashOverMappingClosure = "fd9bceaac62557a832c767f1e1ff09c9f070df3a0bfafaa6da1704b4e92b0ac1";
-            this.HashOverAllExtentViews = "5e3a8559ac9f24c86a4649d8396b9fb797ca13c0c253a555d7eda6b0957014ee";
+            this.HashOverMappingClosure = "88b1b48459c9b4171614c9f4546fc7d70d8e001177df5fb6d3213771d539512e";
+            this.HashOverAllExtentViews = "39e828b1ccafd018589956dd234ecb819310ecdbe678a657f7d74f8442730fd3";
             this.ViewCount = 134;
         }
         
@@ -3463,7 +3463,7 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.Game", @"
     SELECT VALUE -- Constructing Game
-        [SMDModel.Store.Game](T1.Game_GameId, T1.Game_GameName, T1.Game_Status, T1.Game_AgeRangeStart, T1.Game_AgeRangeEnd, T1.Game_GameType, T1.Game_Complexity, T1.Game_GameUrl)
+        [SMDModel.Store.Game](T1.Game_GameId, T1.Game_GameName, T1.Game_Status, T1.Game_AgeRangeStart, T1.Game_AgeRangeEnd, T1.Game_GameType, T1.Game_Complexity, T1.Game_GameUrl, T1.Game_GameSmallImage, T1.Game_GameLargeImage)
     FROM (
         SELECT 
             T.GameId AS Game_GameId, 
@@ -3474,6 +3474,8 @@ namespace Edm_EntityMappingGeneratedViews
             T.GameType AS Game_GameType, 
             T.Complexity AS Game_Complexity, 
             T.GameUrl AS Game_GameUrl, 
+            T.GameSmallImage AS Game_GameSmallImage, 
+            T.GameLargeImage AS Game_GameLargeImage, 
             True AS _from0
         FROM BaseDbContext.Games AS T
     ) AS T1");
@@ -3486,7 +3488,7 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Games", @"
     SELECT VALUE -- Constructing Games
-        [DomainModels.Game](T1.Game_GameId, T1.Game_GameName, T1.Game_Status, T1.Game_AgeRangeStart, T1.Game_AgeRangeEnd, T1.Game_GameType, T1.Game_Complexity, T1.Game_GameUrl)
+        [DomainModels.Game](T1.Game_GameId, T1.Game_GameName, T1.Game_Status, T1.Game_AgeRangeStart, T1.Game_AgeRangeEnd, T1.Game_GameType, T1.Game_Complexity, T1.Game_GameUrl, T1.Game_GameSmallImage, T1.Game_GameLargeImage)
     FROM (
         SELECT 
             T.GameId AS Game_GameId, 
@@ -3497,6 +3499,8 @@ namespace Edm_EntityMappingGeneratedViews
             T.GameType AS Game_GameType, 
             T.Complexity AS Game_Complexity, 
             T.GameUrl AS Game_GameUrl, 
+            T.GameSmallImage AS Game_GameSmallImage, 
+            T.GameLargeImage AS Game_GameLargeImage, 
             True AS _from0
         FROM SMDModelStoreContainer.Game AS T
     ) AS T1");

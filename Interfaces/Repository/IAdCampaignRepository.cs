@@ -43,6 +43,8 @@ namespace SMD.Interfaces.Repository
         IEnumerable<getAdsCampaignByCampaignIdRatioAnalytic_Result> getAdsCampaignByCampaignIdRatioAnalytic(int ID, int dateRange);
         IEnumerable<getAdsCampaignByCampaignIdtblAnalytic_Result> getAdsCampaignByCampaignIdtblAnalytic(int ID);
         IEnumerable<getCampaignROItblAnalytic_Result> getCampaignROItblAnalytic(int ID);
+
+        IEnumerable<AdCampaign> GetSpecialAdCampaigns(out string CompanyLogoPath);
        
     }
 }

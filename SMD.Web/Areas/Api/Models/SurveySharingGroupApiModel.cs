@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SMD.Models.ResponseModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -19,6 +20,12 @@ namespace SMD.MIS.Areas.Api.Models
         public virtual ICollection<SurveySharingGroupMemberApiModel> SurveySharingGroupAddedMembers { get; set; }
 
         public virtual ICollection<SurveySharingGroupMemberApiModel> SurveySharingGroupDeletedMembers { get; set; }
+    }
+
+
+    public partial class SurveySharingGroupApiResponseModel :BaseApiResponse
+    {
+        public SurveySharingGroupApiModel SurveySharingGroup { get; set; }
     }
 
 

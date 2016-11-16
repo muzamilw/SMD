@@ -1,4 +1,4 @@
-﻿USE [SMDv2]
+﻿
 GO
 /****** Object:  StoredProcedure [dbo].[GetSharedSurveyQuestion]    Script Date: 11/16/2016 10:40:24 AM ******/
 SET ANSI_NULLS ON
@@ -10,11 +10,11 @@ GO
 -- Create date: 
 -- Description:	
 -- =============================================
-
---   GetSharedSurveyQuestion 5
-ALTER PROCEDURE [dbo].[GetSharedSurveyQuestion] 
+-- 
+--   [GetSharedSurveyQuestionsByUserId] '576be178-9d5b-4775-a902-420b4d7ee1d0'
+alter PROCEDURE [dbo].[GetSharedSurveyQuestionsByUserId] 
 	-- Add the parameters for the stored procedure here
-	@SSQID bigint = 0
+	@UserId nvarchar(128) 
 
 AS
 BEGIN
@@ -41,7 +41,7 @@ BEGIN
 
 
   FROM [dbo].[SharedSurveyQuestion] survey
-  inner join SurveySharingGroup grp on survey.SharingGroupId = grp.SharingGroupId and survey.SSQID = @SSQID
+  inner join SurveySharingGroup grp on survey.SharingGroupId = grp.SharingGroupId and survey.userid = @UserId
   outer apply 
 (Select count(*) tcount from [dbo].[SurveySharingGroupShares] s where s.SSQID = survey.SSQID
 ) totalshares
@@ -62,6 +62,7 @@ Select count(*) tcount,sum(case when u.gender = 1 then 1 else 0 end) malecount,s
 inner join AspNetUsers u on s.UserId = u.Id
 where s.SSQID = survey.SSQID and s.Status = 2 and s.UserSelection = 2
 ) rightanswercount
+order by survey.CreationDate desc
 
 
 END

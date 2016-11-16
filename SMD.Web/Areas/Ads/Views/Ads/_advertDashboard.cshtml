@@ -5,7 +5,7 @@
         <div class="row">
 
             <span class="charts_label" style="margin-left: 16px;">Charts & Analytics</span>
-          
+
             <div id="roor_panel" style="margin-top:11px;">
                 <div class="col-lg-6 adsubHeading Theme_standard_clr borderbtmline" style="padding-bottom:10px;padding-left:15px;">
                     Timeline
@@ -20,19 +20,19 @@
         </div>
         <div id="ddpanel">
             <div class="col-lg-3"></div>
-           
-                <div class="col-lg-2">
-                    <label style="padding-top:18px;" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Granularity level </label>
-                </div>
+
+            <div class="col-lg-2">
+                <label style="padding-top:18px;" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Granularity level </label>
+            </div>
             <div class="col-lg-3">
                 <select class="form-control margin10 pull-left" id="ddGranularityDropDown" data-bind="options: $root.granularityDropDown, optionsText: 'name', optionsValue: 'id', value:$root.selectedGranularityAnalytics, event: { change: $root.getAdsByCampaignIdAnalytics }"></select>
             </div>
 
             <div class="col-lg-1">
                 <label style="padding-top:18px;" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Status </label>
-            </div  >
+            </div>
             <div class="col-lg-3">
-                <select class="form-control margin10 pull-left"  id="ddCampaignStatusDropDown" data-bind="options: $root.CampaignStatusDropDown, optionsText: 'name', optionsValue: 'id', value:$root.selectedCampStatusAnalytics, event: { change: $root.getAdsByCampaignIdAnalytics }"></select>
+                <select class="form-control margin10 pull-left" id="ddCampaignStatusDropDown" data-bind="options: $root.CampaignStatusDropDown, optionsText: 'name', optionsValue: 'id', value:$root.selectedCampStatusAnalytics, event: { change: $root.getAdsByCampaignIdAnalytics }"></select>
             </div>
 
         </div>
@@ -58,7 +58,7 @@
         <div class="row main-box">
             <div class="col-lg-12">
                 <div class=" margin10">
-                   <div style="height:150px;" data-bind="morris: {type: 'Line', data: $root.AdsCampaignAnalyticsData, xkey: 'Granual', ykeys: ['avgAdClickStats'], labels: ['Ad Click Charge'], parseTime:false, setAxisAlignFirstX: true, lineColors: ['blue','orange' ,'green'], preUnits:'$' }"></div>
+                    <div style="height:150px;" data-bind="morris: {type: 'Line', data: $root.AdsCampaignAnalyticsData, xkey: 'Granual', ykeys: ['avgAdClickStats'], labels: ['Ad Click Charge'], parseTime:false, setAxisAlignFirstX: true, lineColors: ['blue','orange' ,'green'], preUnits:'$' }"></div>
                 </div>
             </div>
 
@@ -70,7 +70,7 @@
             </div>
         </div>
         <div class="row main-box">
-            
+
             <div class="col-lg-6">
                 <!--ko if: $root.selecteddateRangeAnalytics() == 1 -->
                 <div>Date range : Last 30 days </div>
@@ -80,7 +80,7 @@
                 <!--/ko-->
 
                 <div data-bind="morris: {type: 'Donut', data: $root.CampaignRatioAnalyticData, resize:true, colors: ['green', 'blue','orange' ] }" style="width:250px;height:250px;padding-left:50px;cursor: pointer;"></div>
-               
+
             </div>
             <div class="col-lg-6">
                 <table style="margin-top:70px;">
@@ -109,9 +109,9 @@
                 Campaign ROI
             </div>
         </div>
-          <div class="row" >
-         
-            <div class="col-lg-12" >
+        <div class="row">
+
+            <div class="col-lg-12">
                 <table class="roitbl" style="">
                     <!-- ko template: { name: 'CampaignROITblAnalyticsDataTemplate' , foreach: $root.CampaignROItblAnalyticData } -->
                     <!-- /ko -->
@@ -119,7 +119,7 @@
             </div>
 
         </div>
-         <div class="clearfix">
+        <div class="clearfix">
         </div>
         <div class="clearfix">
         </div>
@@ -154,13 +154,13 @@
             <span data-bind="text: Stats1"></span>
         </td>
         <td style="background-color: #eee">
-            <span data-bind="text: label2" ></span>
+            <span data-bind="text: label2"></span>
         </td>
 
         <td class="text-right" style="background-color: #eee">
             $<span data-bind="text: Stats2"></span>
         </td>
-        <td >
+        <td>
             <span data-bind="text: label3"></span>
         </td>
 
@@ -169,6 +169,6 @@
             <span data-bind="text: Stats3"></span>%
             <!--/ko-->
         </td>
-        
+
     </tr>
 </script>
