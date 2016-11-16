@@ -2913,6 +2913,10 @@ COMMIT
 
 
 
+ALTER TABLE Coupon
+  ADD IsMarketingStories bit Null;
+
+
 
 
 
@@ -3015,3 +3019,7 @@ GO
 ALTER TABLE dbo.GameExerciseCategories SET (LOCK_ESCALATION = TABLE)
 GO
 COMMIT
+
+
+
+
