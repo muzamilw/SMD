@@ -150,6 +150,7 @@
     <Compile Include="DomainModels\GetRegisteredUserData_Result.cs" />
     <Compile Include="DomainModels\GetRevenueByCampaignOverTime_Result.cs" />
     <Compile Include="DomainModels\GetRevenueOverTime_Result.cs" />
+    <Compile Include="DomainModels\GetSharedSurveyQuestionsByUserId_Result.cs" />
     <Compile Include="DomainModels\GetSharedSurveyQuestion_Result.cs" />
     <Compile Include="DomainModels\getSurvayByPQID_Result.cs" />
     <Compile Include="DomainModels\GetTransactions_Result.cs" />

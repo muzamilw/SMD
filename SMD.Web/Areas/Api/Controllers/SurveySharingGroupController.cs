@@ -98,8 +98,12 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// create group
         /// </summary>
-        public SurveySharingGroupApiModel Put(string authenticationToken, SurveySharingGroupApiModel group)
+        public SurveySharingGroupApiResponseModel Put(string authenticationToken, SurveySharingGroupApiModel group)
         {
+            try
+            {
+
+          
 
             if (string.IsNullOrEmpty(group.GroupName))
                 throw new Exception("Group name cannot be empty");
@@ -120,7 +124,14 @@ namespace SMD.MIS.Areas.Api.Controllers
             });
 
 
-            return Mapper.Map<SurveySharingGroup, SurveySharingGroupApiModel>(result);
+            return new SurveySharingGroupApiResponseModel { SurveySharingGroup = Mapper.Map<SurveySharingGroup, SurveySharingGroupApiModel>(result), Message = "success", Status = true };
+
+            }
+            catch (Exception e)
+            {
+
+                return new SurveySharingGroupApiResponseModel { Status = false, Message = e.ToString() };
+            }
         }
 
 

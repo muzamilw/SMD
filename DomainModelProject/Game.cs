@@ -22,5 +22,7 @@ namespace DomainModelProject
         public Nullable<int> GameType { get; set; }
         public Nullable<int> Complexity { get; set; }
         public string GameUrl { get; set; }
+        public string GameSmallImage { get; set; }
+        public string GameLargeImage { get; set; }
     }
 }

@@ -75,6 +75,13 @@ namespace SMD.Implementation.Services
         }
 
 
+
+        public List<GetSharedSurveyQuestionsByUserId_Result> GetSharedSurveysByuserID (string UserId)
+        {
+            return sharedSurveyQuestionRepository.GetSharedSurveysByuserID(UserId);
+        }
+
+
         public GetSharedSurveyQuestion_Result GetSharedSurveyQuestion(long SSQID)
         {
             return sharedSurveyQuestionRepository.GetSharedSurveyQuestionDetails(SSQID);
@@ -104,7 +111,7 @@ namespace SMD.Implementation.Services
         private string[] SaveSurveyImages(SharedSurveyQuestion question)
         {
             string[] savePaths = new string[2];
-            string directoryPath = HttpContext.Current.Server.MapPath("~/SMD_Content/Users/" + question.SSQID);
+            string directoryPath = HttpContext.Current.Server.MapPath("~/SMD_Content/Users/" + question.UserId + "/" + question.SSQID);
 
             if (directoryPath != null && !Directory.Exists(directoryPath))
             {
@@ -112,11 +119,11 @@ namespace SMD.Implementation.Services
             }
 
 
-            ImageHelper.SaveBase64(directoryPath + "\\LeftPicture.jpg", question.LeftPictureDataString);
-            savePaths[0] = "/SMD_Content/Users/" + question.SSQID + "/LeftPicture." + question.LeftPictureExtention;
+            ImageHelper.SaveBase64(directoryPath + "\\LeftPicture" + question.LeftPictureExtention, question.LeftPictureDataString);
+            savePaths[0] = "/SMD_Content/Users/" + question.UserId +"/" + question.SSQID + "/LeftPicture" + question.LeftPictureExtention;
 
-            ImageHelper.SaveBase64(directoryPath + "\\RightPicture.jpg", question.LeftPictureDataString);
-            savePaths[1] = "/SMD_Content/Users/" + question.SSQID + "/RightPicture." + question.RightPictureExtention;
+            ImageHelper.SaveBase64(directoryPath + "\\RightPicture" + question.RightPictureExtention, question.RightPictureDataString);
+            savePaths[1] = "/SMD_Content/Users/" + question.UserId + "/" + question.SSQID + "/RightPicture" + question.RightPictureExtention;
 
          
             

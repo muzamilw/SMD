@@ -55,7 +55,28 @@ namespace SMD.Implementation.Services
         }
         public SurveySharingGroup GetGroupDetails(long SharingGroupId)
         {
-            return surveySharingGroupRepository.Find(SharingGroupId);
+            var result =  surveySharingGroupRepository.Find(SharingGroupId);
+
+            //filtering the members with status 3 as they are marked as deleted.
+            //foreach (var item in result.SurveySharingGroupMembers)
+            //{
+            //    if (item.MemberStatus == 3)
+            //        result.SurveySharingGroupMembers.Remove(item);
+            //}
+
+
+            for (int i = result.SurveySharingGroupMembers.Count - 1; i >= 0; i--)
+            {
+                if (result.SurveySharingGroupMembers.ToArray()[i].MemberStatus == 3)
+                    result.SurveySharingGroupMembers.Remove(result.SurveySharingGroupMembers.ToArray()[i]);
+            }
+
+
+            //result.SurveySharingGroupMembers = result.SurveySharingGroupMembers.Where(i => i.MemberStatus != 3);
+
+            
+
+            return result;
         }
 
         public SurveySharingGroup Create(SurveySharingGroup group)
