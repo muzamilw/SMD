@@ -497,6 +497,7 @@
           <Property Name="IsShowMap" Type="bit" />
           <Property Name="IsShowyouTube" Type="bit" />
           <Property Name="IsShowAboutUs" Type="bit" />
+          <Property Name="IsMarketingStories" Type="bit" />
         </EntityType>
         <EntityType Name="CouponCategories">
           <Key>
@@ -1197,6 +1198,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_Coupons' does not have a primary key
           <Property Name="IsShowMap" Type="bit" />
           <Property Name="IsShowyouTube" Type="bit" />
           <Property Name="IsShowAboutUs" Type="bit" />
+          <Property Name="IsMarketingStories" Type="bit" />
           <Property Name="Categories" Type="nvarchar(max)" />
           <Property Name="CurrencyCode" Type="nvarchar" MaxLength="50" />
           <Property Name="CurrencySymbol" Type="nvarchar" MaxLength="50" />
@@ -2898,6 +2900,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
     [vw_Coupons].[IsShowMap] AS [IsShowMap], 
     [vw_Coupons].[IsShowyouTube] AS [IsShowyouTube], 
     [vw_Coupons].[IsShowAboutUs] AS [IsShowAboutUs], 
+    [vw_Coupons].[IsMarketingStories] AS [IsMarketingStories], 
     [vw_Coupons].[Categories] AS [Categories], 
     [vw_Coupons].[CurrencyCode] AS [CurrencyCode], 
     [vw_Coupons].[CurrencySymbol] AS [CurrencySymbol]
@@ -4100,7 +4103,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Parameter Name="UderID" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetSharedSurveyQuestionsByUserId" ReturnType="Collection(DomainModels.GetSharedSurveyQuestionsByUserId_Result)">
-            <Parameter Name="UserId" Mode="In" Type="String" />
+          <Parameter Name="UserId" Mode="In" Type="String" />
           </FunctionImport>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
@@ -5857,6 +5860,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="IsShowMap" Type="Boolean" />
           <Property Name="IsShowyouTube" Type="Boolean" />
           <Property Name="IsShowAboutUs" Type="Boolean" />
+          <Property Name="IsMarketingStories" Type="Boolean" />
         </EntityType>
         <Association Name="FK_CompanyBranch_BranchCategory">
           <End Type="DomainModels.BranchCategory" Role="BranchCategory" Multiplicity="0..1" />
@@ -6416,7 +6420,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="String" Name="description" Nullable="true" MaxLength="516" />
         </ComplexType>
         <ComplexType Name="GetAdminDashBoardInsights_Result">
-          <Property Type="String" Name="rectype" Nullable="false" MaxLength="32" />
+          <Property Type="String" Name="rectype" Nullable="false" MaxLength="38" />
           <Property Type="String" Name="pMonth" Nullable="false" MaxLength="7" />
           <Property Type="Double" Name="us" Nullable="true" />
           <Property Type="Double" Name="uk" Nullable="true" />
@@ -6864,6 +6868,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="IsShowMap" Type="Boolean" />
           <Property Name="IsShowyouTube" Type="Boolean" />
           <Property Name="IsShowAboutUs" Type="Boolean" />
+          <Property Name="IsMarketingStories" Type="Boolean" />
         </EntityType>
         <Association Name="FK_Country_Currency">
           <End Type="DomainModels.Currency" Role="Currency" Multiplicity="0..1" />
@@ -8349,6 +8354,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="Coupons">
             <EntityTypeMapping TypeName="DomainModels.Coupon">
               <MappingFragment StoreEntitySet="Coupon">
+                <ScalarProperty Name="IsMarketingStories" ColumnName="IsMarketingStories" />
                 <ScalarProperty Name="IsShowAboutUs" ColumnName="IsShowAboutUs" />
                 <ScalarProperty Name="IsShowyouTube" ColumnName="IsShowyouTube" />
                 <ScalarProperty Name="IsShowMap" ColumnName="IsShowMap" />
@@ -8883,6 +8889,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="vw_Coupons">
             <EntityTypeMapping TypeName="DomainModels.vw_Coupons">
               <MappingFragment StoreEntitySet="vw_Coupons">
+                <ScalarProperty Name="IsMarketingStories" ColumnName="IsMarketingStories" />
                 <ScalarProperty Name="IsShowAboutUs" ColumnName="IsShowAboutUs" />
                 <ScalarProperty Name="IsShowyouTube" ColumnName="IsShowyouTube" />
                 <ScalarProperty Name="IsShowMap" ColumnName="IsShowMap" />
