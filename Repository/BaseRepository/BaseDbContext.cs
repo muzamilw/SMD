@@ -294,6 +294,9 @@ namespace SMD.Repository.BaseRepository
         public DbSet<SurveySharingGroup> SurveySharingGroup { get; set; }
         public DbSet<SurveySharingGroupMember> SurveySharingGroupMember { get; set; }
         public DbSet<Notification> Notification { get; set; }
+
+
+        public DbSet<vw_Notifications> vw_Notifications { get; set; }
         public DbSet<SurveySharingGroupShare> SurveySharingGroupShare { get; set; }
         public DbSet<SharedSurveyQuestion> SharedSurveyQuestion { get; set; }
 

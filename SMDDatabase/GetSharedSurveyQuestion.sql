@@ -1,6 +1,6 @@
-﻿USE [SMDv2]
+﻿
 GO
-/****** Object:  StoredProcedure [dbo].[GetSharedSurveyQuestion]    Script Date: 11/16/2016 10:40:24 AM ******/
+/****** Object:  StoredProcedure [dbo].[GetSharedSurveyQuestion]    Script Date: 11/17/2016 10:47:47 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -27,13 +27,13 @@ BEGIN
       ,survey.[CreationDate]
       ,survey.[SharingGroupId],
 	  totalshares.tcount TotalShared,
-	  answers.tcount TotalAnswers,
-	  leftanswercount.tcount LeftAnswerCount,
-	  rightanswercount.tcount RightAnswerCount,
-	  leftanswercount.malecount LefMmaleCount,
-	  leftanswercount.femalecount LeftFemaleCount,
-	    rightanswercount.malecount RightMaleCount,
-	  rightanswercount.femalecount RightFemaleCount,
+	  isnull(answers.tcount,0) TotalAnswers,
+	  isnull(leftanswercount.tcount,0) LeftAnswerCount,
+	  isnull(rightanswercount.tcount,0) RightAnswerCount,
+	  isnull(leftanswercount.malecount,0) LefMmaleCount,
+	  isnull(leftanswercount.femalecount,0) LeftFemaleCount,
+	    isnull(rightanswercount.malecount,0) RightMaleCount,
+	  isnull(rightanswercount.femalecount,0) RightFemaleCount,
 	  grp.GroupName,
 
 	  (case when answers.tcount > 0 then leftanswercount.tcount/answers.tcount*100 else 0 end ) LeftAnswerPerc,

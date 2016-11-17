@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets6167D15CF83388D97A55720335A60918C72E4791326595AAB969BD8DE629AC9C))]
+[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetsE6DB6A14F9C091592E12540713C32C9FC629F2C8445DBA63306C7CAFA4E9BCED))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -17,19 +17,19 @@ namespace Edm_EntityMappingGeneratedViews
     /// <Summary>
     /// The type contains views for EntitySets and AssociationSets that were generated at design time.
     /// </Summary>
-    public sealed class ViewsForBaseEntitySets6167D15CF83388D97A55720335A60918C72E4791326595AAB969BD8DE629AC9C : System.Data.Mapping.EntityViewContainer
+    public sealed class ViewsForBaseEntitySetsE6DB6A14F9C091592E12540713C32C9FC629F2C8445DBA63306C7CAFA4E9BCED : System.Data.Mapping.EntityViewContainer
     {
         
         /// <Summary>
         /// The constructor stores the views for the extents and also the hash values generated based on the metadata and mapping closure and views.
         /// </Summary>
-        public ViewsForBaseEntitySets6167D15CF83388D97A55720335A60918C72E4791326595AAB969BD8DE629AC9C()
+        public ViewsForBaseEntitySetsE6DB6A14F9C091592E12540713C32C9FC629F2C8445DBA63306C7CAFA4E9BCED()
         {
             this.EdmEntityContainerName = "BaseDbContext";
             this.StoreEntityContainerName = "SMDModelStoreContainer";
-            this.HashOverMappingClosure = "d047847aeeed4767768c869b24daf5f81c8e59b6c17bb613e0987573d4cf333c";
-            this.HashOverAllExtentViews = "91768586efa6d01dd4b92c3c9a48cb1454d613edca96b933d4acbfe85d4c9779";
-            this.ViewCount = 134;
+            this.HashOverMappingClosure = "7cf69a008b36ba633c0e4420164410f17979210d25aae1f13c83b651a3098120";
+            this.HashOverAllExtentViews = "fd9202b3f9a198ea9262239efb901b11b654d9c0d0bd85b7a2585a95abac8df2";
+            this.ViewCount = 136;
         }
         
         /// <Summary>
@@ -572,6 +572,14 @@ namespace Edm_EntityMappingGeneratedViews
             if ((index == 133))
             {
                 return GetView133();
+            }
+            if ((index == 134))
+            {
+                return GetView134();
+            }
+            if ((index == 135))
+            {
+                return GetView135();
             }
             throw new System.IndexOutOfRangeException();
         }
@@ -4395,6 +4403,56 @@ namespace Edm_EntityMappingGeneratedViews
             T.UserSelection AS SurveySharingGroupShare_UserSelection, 
             True AS _from0
         FROM SMDModelStoreContainer.SurveySharingGroupShares AS T
+    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for SMDModelStoreContainer.vw_Notifications
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView134()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.vw_Notifications", @"
+    SELECT VALUE -- Constructing vw_Notifications
+        [SMDModel.Store.vw_Notifications](T1.[vw_Notifications.ID], T1.[vw_Notifications.Type], T1.[vw_Notifications.UserID], T1.[vw_Notifications.IsRead], T1.[vw_Notifications.GeneratedOn], T1.[vw_Notifications.GeneratedBy], T1.[vw_Notifications.SurveyQuestionShareId], T1.[vw_Notifications.PhoneNumber], T1.[vw_Notifications.NotificationDetails], T1.[vw_Notifications.PollTitle])
+    FROM (
+        SELECT 
+            T.ID AS [vw_Notifications.ID], 
+            T.Type AS [vw_Notifications.Type], 
+            T.UserID AS [vw_Notifications.UserID], 
+            T.IsRead AS [vw_Notifications.IsRead], 
+            T.GeneratedOn AS [vw_Notifications.GeneratedOn], 
+            T.GeneratedBy AS [vw_Notifications.GeneratedBy], 
+            T.SurveyQuestionShareId AS [vw_Notifications.SurveyQuestionShareId], 
+            T.PhoneNumber AS [vw_Notifications.PhoneNumber], 
+            T.NotificationDetails AS [vw_Notifications.NotificationDetails], 
+            T.PollTitle AS [vw_Notifications.PollTitle], 
+            True AS _from0
+        FROM BaseDbContext.vw_Notifications AS T
+    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for BaseDbContext.vw_Notifications
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView135()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.vw_Notifications", @"
+    SELECT VALUE -- Constructing vw_Notifications
+        [DomainModels.vw_Notifications](T1.[vw_Notifications.ID], T1.[vw_Notifications.Type], T1.[vw_Notifications.UserID], T1.[vw_Notifications.IsRead], T1.[vw_Notifications.GeneratedOn], T1.[vw_Notifications.GeneratedBy], T1.[vw_Notifications.SurveyQuestionShareId], T1.[vw_Notifications.PhoneNumber], T1.[vw_Notifications.NotificationDetails], T1.[vw_Notifications.PollTitle])
+    FROM (
+        SELECT 
+            T.ID AS [vw_Notifications.ID], 
+            T.Type AS [vw_Notifications.Type], 
+            T.UserID AS [vw_Notifications.UserID], 
+            T.IsRead AS [vw_Notifications.IsRead], 
+            T.GeneratedOn AS [vw_Notifications.GeneratedOn], 
+            T.GeneratedBy AS [vw_Notifications.GeneratedBy], 
+            T.SurveyQuestionShareId AS [vw_Notifications.SurveyQuestionShareId], 
+            T.PhoneNumber AS [vw_Notifications.PhoneNumber], 
+            T.NotificationDetails AS [vw_Notifications.NotificationDetails], 
+            T.PollTitle AS [vw_Notifications.PollTitle], 
+            True AS _from0
+        FROM SMDModelStoreContainer.vw_Notifications AS T
     ) AS T1");
         }
     }

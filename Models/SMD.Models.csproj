@@ -216,6 +216,7 @@
     <Compile Include="DomainModels\vw_Cash4AdsReport.cs" />
     <Compile Include="DomainModels\vw_Coupons.cs" />
     <Compile Include="DomainModels\vw_GetUserTransactions.cs" />
+    <Compile Include="DomainModels\vw_Notifications.cs" />
     <Compile Include="DomainModels\vw_PublisherTransaction.cs" />
     <Compile Include="DomainModels\vw_ReferringCompanies.cs" />
     <Compile Include="IdentityModels\Role.cs" />

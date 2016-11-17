@@ -102,6 +102,11 @@ namespace SMD.Implementation.Services
                 surveySharingGroupShareRepository.Update(share);
                 surveySharingGroupShareRepository.SaveChanges();
 
+                //markign the notification as read when user answers it
+                var notification = notificationRepository.GetNotificationBySurveyQuestionShareId(SurveyQuestionShareId);
+                notification.IsRead = true;
+                notificationRepository.Update(notification);
+                notificationRepository.SaveChanges();
 
             }
 

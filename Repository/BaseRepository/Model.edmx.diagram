@@ -176,6 +176,7 @@
         <AssociationConnector Association="DomainModels.FK_SurveySharingGroupShares_SharedSurveyQuestion" />
         <AssociationConnector Association="DomainModels.FK_SurveySharingGroupShares_SurveySharingGroupMembers" />
         <AssociationConnector Association="DomainModels.FK_SharedSurveyQuestion_SurveySharingGroup" />
+        <EntityTypeShape EntityType="DomainModels.vw_Notifications" Width="1.5" PointX="3.375" PointY="12.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

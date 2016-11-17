@@ -175,6 +175,7 @@
     <Compile Include="Services\DashboardService.cs" />
     <Compile Include="Services\EducationService.cs" />
     <Compile Include="Services\EmailScheduler.cs" />
+    <Compile Include="Services\NotificationService.cs" />
     <Compile Include="Services\IndustryService.cs" />
     <Compile Include="Services\ManageUserService.cs" />
     <Compile Include="Services\PayOutHistoryService.cs" />
