@@ -184,7 +184,7 @@ define("ads/ads.viewModel",
                 QuizQuestionAnalyticData = ko.observable(),
                 selectedQQGAnalytics = ko.observable(0),
                 selectedQQCAnalytics = ko.observable(0),
-                selectedQQCtAnalytics = ko.observable(0),
+                selectedQQCtAnalytics = ko.observable("All"),
                 selectedQQAAnalytics = ko.observable(0),
                 selectedQQPAnalytics = ko.observable("All"),
 				openAdvertiserDashboardScreen = function (Campaign) {

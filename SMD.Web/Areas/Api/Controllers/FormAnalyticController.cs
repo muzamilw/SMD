@@ -27,29 +27,29 @@ namespace SMD.MIS.Areas.Api.Controllers
 
         }
         // GET: api/FormAnalytic
-        public FormAnalyticResponseModel Get(long Id)
+        public FormAnalyticDDResponseModel Get(long Id)
         {
-            FormAnalyticResponseModel data = new FormAnalyticResponseModel();
+            FormAnalyticDDResponseModel data = new FormAnalyticDDResponseModel();
             IEnumerable<City> citiesList = _ICityService.GetCities();
             List<CityDD> Citieslst = new List<CityDD>(); 
-            CityDD cityitem = new CityDD("All", 0);
+            CityDD cityitem = new CityDD("All");
             Citieslst.Add(cityitem);
             foreach(City item in citiesList){
                 if (item != null)
                 {
-                    cityitem = new CityDD(item.CityName, item.CityId);
+                    cityitem = new CityDD(item.CityName);
                 }
                  Citieslst.Add(cityitem);
             }
             data.Cities = Citieslst;
             IEnumerable<String> prfList =_IActiveUser.getProfessions();
             List<Profession> Prof = new List<Profession>();
-            Profession prfItem = new Profession("All", "All");
+            Profession prfItem = new Profession("All");
             Prof.Add(prfItem);
             foreach(String item in prfList){
                 if (item != null)
                 {
-                    prfItem = new Profession(item, item); 
+                    prfItem = new Profession(item); 
                 }
                 Prof.Add(prfItem);
             }

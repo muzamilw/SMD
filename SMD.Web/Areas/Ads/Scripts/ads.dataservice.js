@@ -57,7 +57,12 @@ define("ads/ads.dataservice", function () {
                         dataType: 'json',
                         type: 'GET'
                     });
-
+                    
+                    amplify.request.define('getQQAnalytic', 'ajax', {
+                        url: '/Api/FormAnalytic',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
                     // 
                     amplify.request.define('generateCouponCodes', 'ajax', {
                         url: '/Api/GenerateCoupon',
@@ -87,6 +92,15 @@ define("ads/ads.dataservice", function () {
             initialize();
             return amplify.request({
                 resourceId: 'getFormAnalytic',
+                data: params,
+                success: callbacks.success,
+                error: callbacks.error,
+            });
+        },
+        getQQAnalytic = function (params, callbacks) {
+            initialize();
+            return amplify.request({
+                resourceId: 'getQQAnalytic',
                 data: params,
                 success: callbacks.success,
                 error: callbacks.error,
@@ -167,7 +181,8 @@ define("ads/ads.dataservice", function () {
             copyCampaignById: copyCampaignById,
             generateCouponCodes: generateCouponCodes,
             getAdsByCampaignIdAnalytics: getAdsByCampaignIdAnalytics,
-            getFormAnalytic: getFormAnalytic
+            getFormAnalytic: getFormAnalytic,
+            getQQAnalytic: getQQAnalytic
         };
     })();
     return dataService;
