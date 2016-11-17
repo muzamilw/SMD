@@ -34,5 +34,8 @@ namespace SMD.Implementation.Services
         {
             return companyAspNetUsersRepository.GetActiveVSNewUsers();
         }
+        public List<String> getProfessions() {
+            return companyAspNetUsersRepository.getProfessions();
+        }
     }
 }
