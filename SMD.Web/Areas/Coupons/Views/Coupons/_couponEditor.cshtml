@@ -273,9 +273,9 @@
                                                                         <th class="col-lg-1 GridHeaderFont_size"> <span>Was&nbsp;<span data-bind="text:$root.currencyCode"></span></span></th>
                                                                         <th class="col-lg-2 GridHeaderFont_size"> <span>Url<span></span></span></th>
                                                                         <th class="col-lg-2 GridHeaderFont_size"> <span>Expiry<span></span></span></th>
-                                                                    
+
                                                                         @*<th class="col-lg-1"></th>
-                                                                        <th class="col-lg-2">&nbsp;</th>*@
+                                                                            <th class="col-lg-2">&nbsp;</th>*@
 
                                                                     </tr>
                                                                 </thead>
@@ -287,7 +287,7 @@
                                                                         <td data-bind="text: Savings"></td>
                                                                         <td data-bind="text: URL"></td>
                                                                         <td data-bind="dateString:ExpiryDate,datePattern: 'DD/MM/YYYY'"></td>
-                                                                       
+
                                                                     </tr>
                                                                 </tbody>
                                                             </table>
@@ -789,8 +789,26 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-12 col-md-12 col-sm-12">
-                                            <div style="padding-left:0px;padding-right:0px;padding-bottom:5px;padding:15px; min-height: 128.90px;background-color:#f9f9f9">
+                                            <div style="padding-left:0px;padding-right:0px;padding-bottom:5px;padding:15px; min-height: 176.90px;background-color:#f9f9f9">
                                                 <div class="col-lg-9">
+                                                    <div class="form-group">
+                                                        <div class="col-lg-4 text-right">
+
+                                                            <label class="control-label text-right tooltip-float">Marked for Marketing & Stories</label>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="col-lg-3" style="padding-left:0px;">
+                                                                <div class="onoffswitch" style="width:95px;">
+                                                                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" data-bind="checked:IsMarketingStories" id="switchMarkeeting">
+                                                                    <label class="onoffswitch-label" for="switchMarkeeting">
+                                                                        <div class="onoffswitch-inner"></div>
+                                                                        <div class="onoffswitch-switch"></div>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
                                                     <div class="form-group">
                                                         <div class="col-lg-4 text-right">
                                                             @*<div class="bs-example-tooltips tooltip-float-width">

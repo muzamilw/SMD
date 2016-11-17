@@ -2910,3 +2910,143 @@ GO
 ALTER TABLE dbo.Game SET (LOCK_ESCALATION = TABLE)
 GO
 COMMIT
+
+
+
+ALTER TABLE Coupon
+  ADD IsMarketingStories bit Null;
+
+
+
+
+
+
+/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+CREATE TABLE dbo.UserGameResponse
+	(
+	ResponseId bigint NOT NULL,
+	UserId nvarchar(128) NULL,
+	GameId bigint NULL,
+	ResponseDateTime datetime NULL,
+	PlayTime float(53) NULL,
+	Score int NULL,
+	Accuracy float(53) NULL
+	)  ON [PRIMARY]
+GO
+ALTER TABLE dbo.UserGameResponse ADD CONSTRAINT
+	PK_UserGameResponse PRIMARY KEY CLUSTERED 
+	(
+	ResponseId
+	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+
+GO
+ALTER TABLE dbo.UserGameResponse SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+CREATE TABLE dbo.GameExerciseCategory
+	(
+	ExerciseCategoryId int NOT NULL IDENTITY (1, 1),
+	ExerciseCategoryName nvarchar(150) NULL
+	)  ON [PRIMARY]
+GO
+ALTER TABLE dbo.GameExerciseCategory ADD CONSTRAINT
+	PK_GameExerciseCategory PRIMARY KEY CLUSTERED 
+	(
+	ExerciseCategoryId
+	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+
+GO
+ALTER TABLE dbo.GameExerciseCategory SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.Game SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+CREATE TABLE dbo.GameExerciseCategories
+	(
+	GameId bigint NOT NULL,
+	ExerciseCategoryId int NOT NULL,
+	CategoryContribution int NULL
+	)  ON [PRIMARY]
+GO
+ALTER TABLE dbo.GameExerciseCategories ADD CONSTRAINT
+	PK_GameExerciseCategories PRIMARY KEY CLUSTERED 
+	(
+	GameId,
+	ExerciseCategoryId
+	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+
+GO
+ALTER TABLE dbo.GameExerciseCategories ADD CONSTRAINT
+	FK_GameExerciseCategories_GameExerciseCategory FOREIGN KEY
+	(
+	ExerciseCategoryId
+	) REFERENCES dbo.GameExerciseCategory
+	(
+	ExerciseCategoryId
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+ALTER TABLE dbo.GameExerciseCategories ADD CONSTRAINT
+	FK_GameExerciseCategories_Game FOREIGN KEY
+	(
+	GameId
+	) REFERENCES dbo.Game
+	(
+	GameId
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+ALTER TABLE dbo.GameExerciseCategories SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
+
+
+
+
+
+
+
+
+GO
+
+/****** Object:  View [dbo].[vw_Notifications]    Script Date: 11/17/2016 9:48:12 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+-- select * from [vw_Notifications]
+alter VIEW [dbo].[vw_Notifications]
+AS
+SELECT        n.ID, Type, n.UserID, IsRead, GeneratedOn, GeneratedBy, n.SurveyQuestionShareId, n.PhoneNumber,
+				(case when n.[type] = 1 then u.FullName +  ' wants your opinion' else '' end) NotificationDetails,
+				(case when n.[type] = 1 then q.SurveyTitle else '' end) PollTitle
+FROM            dbo.Notifications n
+			left outer join SurveySharingGroupShares s on n.SurveyQuestionShareId = s.SurveyQuestionShareId
+			left outer join SharedSurveyQuestion q on q.SSQID = s.SSQID
+			left outer join AspNetUsers u on q.UserId = u.Id
+
+GO
+
+

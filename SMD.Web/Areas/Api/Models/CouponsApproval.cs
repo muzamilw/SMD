@@ -78,6 +78,7 @@ namespace SMD.MIS.Areas.Api.Models
         public string CurrencySymbol { get; set; }
         public string BuyitLandingPageUrl { get; set; }
         public string BuyitBtnLabel { get; set; }
+        public Nullable<bool> IsMarketingStories { get; set; }
 
      
     }

@@ -69,7 +69,7 @@ namespace SMD.MIS.Areas.Api.ModelMappers
 
             bool isProfilecomplete = true;
 
-            if (source.IndustryId.HasValue == false || source.DOB.HasValue == false || source.Title == "" || source.Title == null)
+            if (source.IndustryId.HasValue == false || source.DOB.HasValue == false || source.Title == "" || source.Title == null || source.Phone1 == null || source.Phone1 == "")
             {
                 isProfilecomplete = false;
             }
@@ -91,6 +91,8 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                 IndustryName = source.Industry != null ? source.Industry.IndustryName : "",
 
                 GenderString = source.Gender == 1 ? "Male" : "Female",
+
+                Phone1 = string.IsNullOrEmpty(source.Phone1) ? "" : source.Phone1,
          
                 ImageUrl = !string.IsNullOrEmpty(source.Company.Logo) ? HttpContext.Current.Request.Url.Scheme + "://" +
                 HttpContext.Current.Request.Url.Host + "/" + source.ProfileImage + "?" + DateTime.Now : string.Empty,

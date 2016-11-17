@@ -1,6 +1,6 @@
 ﻿
 GO
-/****** Object:  StoredProcedure [dbo].[GetSharedSurveyQuestion]    Script Date: 11/17/2016 10:47:47 AM ******/
+/****** Object:  StoredProcedure [dbo].[GetSharedSurveyQuestion]    Script Date: 11/16/2016 10:40:24 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -10,11 +10,11 @@ GO
 -- Create date: 
 -- Description:	
 -- =============================================
-
---   GetSharedSurveyQuestion 5
-ALTER PROCEDURE [dbo].[GetSharedSurveyQuestion] 
+-- 
+--   [GetSharedSurveyQuestionsByUserId] '576be178-9d5b-4775-a902-420b4d7ee1d0'
+alter PROCEDURE [dbo].[GetSharedSurveyQuestionsByUserId] 
 	-- Add the parameters for the stored procedure here
-	@SSQID bigint = 0
+	@UserId nvarchar(128) 
 
 AS
 BEGIN
@@ -27,13 +27,13 @@ BEGIN
       ,survey.[CreationDate]
       ,survey.[SharingGroupId],
 	  totalshares.tcount TotalShared,
-	  isnull(answers.tcount,0) TotalAnswers,
-	  isnull(leftanswercount.tcount,0) LeftAnswerCount,
-	  isnull(rightanswercount.tcount,0) RightAnswerCount,
-	  isnull(leftanswercount.malecount,0) LefMmaleCount,
-	  isnull(leftanswercount.femalecount,0) LeftFemaleCount,
-	    isnull(rightanswercount.malecount,0) RightMaleCount,
-	  isnull(rightanswercount.femalecount,0) RightFemaleCount,
+	  answers.tcount TotalAnswers,
+	  leftanswercount.tcount LeftAnswerCount,
+	  rightanswercount.tcount RightAnswerCount,
+	  leftanswercount.malecount LefMmaleCount,
+	  leftanswercount.femalecount LeftFemaleCount,
+	    rightanswercount.malecount RightMaleCount,
+	  rightanswercount.femalecount RightFemaleCount,
 	  grp.GroupName,
 
 	  (case when answers.tcount > 0 then leftanswercount.tcount/answers.tcount*100 else 0 end ) LeftAnswerPerc,
@@ -41,7 +41,7 @@ BEGIN
 
 
   FROM [dbo].[SharedSurveyQuestion] survey
-  inner join SurveySharingGroup grp on survey.SharingGroupId = grp.SharingGroupId and survey.SSQID = @SSQID
+  inner join SurveySharingGroup grp on survey.SharingGroupId = grp.SharingGroupId and survey.userid = @UserId
   outer apply 
 (Select count(*) tcount from [dbo].[SurveySharingGroupShares] s where s.SSQID = survey.SSQID
 ) totalshares
@@ -62,6 +62,7 @@ Select count(*) tcount,sum(case when u.gender = 1 then 1 else 0 end) malecount,s
 inner join AspNetUsers u on s.UserId = u.Id
 where s.SSQID = survey.SSQID and s.Status = 2 and s.UserSelection = 2
 ) rightanswercount
+order by survey.CreationDate desc
 
 
 END

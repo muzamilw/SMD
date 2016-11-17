@@ -52,13 +52,20 @@ namespace SMD.Repository.Repositories
         }
 
 
+        public List<GetSharedSurveyQuestionsByUserId_Result> GetSharedSurveysByuserID(string UserId)
+        {
+
+            return db.GetSharedSurveyQuestionsByUserId(UserId).ToList();
+        }
+
+
         //delete a survey
         public bool DeleteSharedSurveyQuestion(long SSQID)
         {
 
             //deleting notifications
 
-            db.Database.ExecuteSqlCommand("delete n from notification n inner join SurveySharingGroupShares s on n.SurveyQuestionShareId =  s.SurveyQuestionShareId where SSQID=" + SSQID.ToString());
+            db.Database.ExecuteSqlCommand("delete n from notifications n inner join SurveySharingGroupShares s on n.SurveyQuestionShareId =  s.SurveyQuestionShareId where SSQID=" + SSQID.ToString());
 
             //deleting shares
             db.Database.ExecuteSqlCommand("delete from SurveySharingGroupShares where SSQID=" + SSQID.ToString());

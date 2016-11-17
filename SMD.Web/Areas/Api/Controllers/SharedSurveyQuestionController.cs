@@ -47,25 +47,64 @@ namespace SMD.MIS.Areas.Api.Controllers
         }
 
 
-        /// <summary>
-        /// create group
-        /// </summary>
-        public GetSharedSurveyQuestion_Result Put(string authenticationToken, SharedSurveyQuestionRequestApiModel surveyQuestion)
+       
+
+
+        public List<GetSharedSurveyQuestionsByUserId_Result> Get (string UserId)
         {
-
-
-            Mapper.Initialize(cfg =>
-            {
-                cfg.CreateMap<SharedSurveyQuestionRequestApiModel, SharedSurveyQuestion>();
-                
-            });
-
-
-            var SSQID = sharedSurveyQuestionService.CreateAndSend(Mapper.Map<SharedSurveyQuestionRequestApiModel, SharedSurveyQuestion>(surveyQuestion));
-
-
-            return sharedSurveyQuestionService.GetSharedSurveyQuestion(SSQID);
+            return sharedSurveyQuestionService.GetSharedSurveysByuserID(UserId);
         }
+
+
+        /// <summary>
+        /// create Question
+        /// </summary>
+        public SharedSurveyQuestionResponse Put(string authenticationToken, SharedSurveyQuestionRequestApiModel surveyQuestion)
+        {
+            try
+            {
+                Mapper.Initialize(cfg =>
+                {
+                    cfg.CreateMap<SharedSurveyQuestionRequestApiModel, SharedSurveyQuestion>();
+
+                });
+
+
+                var SSQID = sharedSurveyQuestionService.CreateAndSend(Mapper.Map<SharedSurveyQuestionRequestApiModel, SharedSurveyQuestion>(surveyQuestion));
+
+
+                return new SharedSurveyQuestionResponse { GetSharedSurveyQuestion = sharedSurveyQuestionService.GetSharedSurveyQuestion(SSQID), Message = "Success", Status = true };
+            }
+            catch (Exception e)
+            {
+
+                return new SharedSurveyQuestionResponse { Message = e.ToString(), Status = false };
+            }
+        }
+
+
+        public BaseApiResponse Post(string authenticationToken, long SurveyQuestionShareId, int UserSelection)
+        {
+            try
+            {
+                if (sharedSurveyQuestionService.updateUserSharedSurveyQuestionResponse(SurveyQuestionShareId, UserSelection) == true)
+                {
+                    return new BaseApiResponse { Message = "Success", Status = true };
+                }
+                else
+                {
+                    return new BaseApiResponse { Message = "Failure", Status = false };
+                }
+
+
+            }
+            catch (Exception e)
+            {
+
+                return new BaseApiResponse { Message = e.ToString(), Status = false };
+            }
+        }
+        
 
 
         /// <summary>

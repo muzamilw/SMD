@@ -325,6 +325,13 @@ namespace SMD.MIS
       null,
       null);
 
+              config.Routes.MapHttpRoute(
+      "Notifications",
+      "Notifications/{AuthenticationToken}/",
+      new { controller = "Notifications" },
+      null,
+      null);
+
             
             
 

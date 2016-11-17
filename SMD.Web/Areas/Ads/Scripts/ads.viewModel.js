@@ -510,11 +510,9 @@ define("ads/ads.viewModel",
                     $("#logo_div").css("display", "none");
                     campaignModel().ClickRate("0.16");
                 }
-
-
                 campaignModel().reset();
-
-
+                $("#btnPauseCampaign").css("display", "none");
+                $("#btnResumeCampagin").css("display", "none");
             },
            GoToHomePage = function () {
                //isListVisible(false);

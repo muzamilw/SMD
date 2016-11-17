@@ -96,6 +96,7 @@ namespace DomainModelProject
         public virtual DbSet<SurveySharingGroupMember> SurveySharingGroupMembers { get; set; }
         public virtual DbSet<Company> Companies { get; set; }
         public virtual DbSet<SurveySharingGroupShare> SurveySharingGroupShares { get; set; }
+        public virtual DbSet<vw_Notifications> vw_Notifications { get; set; }
     
         public virtual ObjectResult<SearchCoupons_Result> SearchCoupons(Nullable<int> categoryId, Nullable<int> type, string keywords, Nullable<int> distance, string lat, string lon, string userId, Nullable<int> fromRow, Nullable<int> toRow)
         {
@@ -634,6 +635,15 @@ namespace DomainModelProject
                 new ObjectParameter("UderID", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Dashboard_analytics_Result>("Dashboard_analytics", uderIDParameter);
+        }
+    
+        public virtual ObjectResult<GetSharedSurveyQuestionsByUserId_Result> GetSharedSurveyQuestionsByUserId(string userId)
+        {
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetSharedSurveyQuestionsByUserId_Result>("GetSharedSurveyQuestionsByUserId", userIdParameter);
         }
     }
 }
