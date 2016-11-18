@@ -1,16 +1,9 @@
-﻿USE [SMDv2]
-GO
-/****** Object:  StoredProcedure [dbo].[getAdsCampaignByCampaignIdRatioAnalytic]    Script Date: 11/15/2016 11:03:46 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
--- =============================================
+﻿-- =============================================
 -- Author:		<Author,,Name>
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-alter PROCEDURE [dbo].[getCampaignByIdFormDataAnalytic] (
+create PROCEDURE [dbo].[getCampaignByIdFormDataAnalytic] (
 @Id INT
 )
 AS
