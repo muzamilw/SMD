@@ -43,6 +43,7 @@ namespace SMD.Implementation.Services
 
         private readonly ICouponPriceOptionRepository couponPriceOptionRepository;
         private readonly ICampaignEventHistoryRepository campaignEventHistoryRepository;
+        private readonly IAspnetUsersRepository aspnetUserRepository;
 
         private ApplicationUserManager UserManager
         {
@@ -241,7 +242,7 @@ namespace SMD.Implementation.Services
         /// </summary>
         public CouponService(ICouponRepository couponRepository, IUserFavouriteCouponRepository userFavouriteCouponRepository, ICompanyService _companyService,
             IUserPurchasedCouponRepository _userPurchasedCouponRepository, IAccountRepository _accountRepository, ICouponCategoriesRepository _couponCategoriesRepository, ICurrencyRepository _currencyRepository, IWebApiUserService _userService, IUserCouponViewRepository userCouponViewRepository, IEmailManagerService emailManagerService, WebApiUserService webApiUserService, IStripeService stripeService, IProductRepository productRepository
-            , ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository, ICompanyRepository iCompanyRepository, ICouponPriceOptionRepository couponPriceOptionRepository, ICampaignEventHistoryRepository campaignEventHistoryRepository)
+            , ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository, ICompanyRepository iCompanyRepository, ICouponPriceOptionRepository couponPriceOptionRepository, ICampaignEventHistoryRepository campaignEventHistoryRepository, IAspnetUsersRepository aspnetUserRepository)
         {
             this.couponRepository = couponRepository;
             this._userFavouriteCouponRepository = userFavouriteCouponRepository;
@@ -262,6 +263,7 @@ namespace SMD.Implementation.Services
             _iCompanyRepository = iCompanyRepository;
             this.couponPriceOptionRepository = couponPriceOptionRepository;
             this.campaignEventHistoryRepository = campaignEventHistoryRepository;
+            this.aspnetUserRepository = aspnetUserRepository;
         }
 
         #endregion
@@ -898,6 +900,7 @@ namespace SMD.Implementation.Services
             var dbCo = couponRepository.GetCouponByIdSingle(source.CouponId);
             var userData = webApiUserService.GetUserByUserId(dbCo.UserId);
             var isFlag = dbCo.IsPaymentCollected;
+            dbCo.IsMarketingStories = source.IsMarketingStories;
             // Update 
             if (dbCo != null)
             {
@@ -939,6 +942,7 @@ namespace SMD.Implementation.Services
                 {
                     dbCo.Status = (Int32)AdCampaignStatus.ApprovalRejected;
                     dbCo.Approved = false;
+                    dbCo.IsMarketingStories = false;
                     dbCo.RejectedReason = source.RejectedReason.ToString();
 
                 }
@@ -955,6 +959,24 @@ namespace SMD.Implementation.Services
                     emailManagerService.SendCouponRejectionEmail(dbCo.UserId, dbCo.RejectedReason);
                 }
 
+            }
+            return respMesg;
+        }
+        public string UpdateDealMarketing(Coupon source)
+        {
+            string respMesg = "True";
+            var dbCo = couponRepository.GetCouponByIdSingle(source.CouponId);
+            if (dbCo != null)
+            {
+                if (source.IsMarketingStories == true)
+                {
+                    dbCo.IsMarketingStories = false;
+                    couponRepository.SaveChanges();
+                }
+            }
+            else
+            {
+                respMesg = "false";
             }
             return respMesg;
         }
@@ -1096,6 +1118,19 @@ namespace SMD.Implementation.Services
         public int GetFreeCouponCount()
         {
             return couponRepository.GetFreeCouponCount();
+        }
+        public CouponsResponseModelForApproval GetMarketingDeals(GetPagedListRequest request)
+        {
+            int rowCount;
+            return new CouponsResponseModelForApproval
+            {
+                Coupons = couponRepository.GetMarketingDeals(request, out rowCount).ToList(),
+                TotalCount = rowCount
+            };
+        }
+        public String GetUserName(string id)
+        {
+            return aspnetUserRepository.GetUserName(id);
         }
 
         #endregion

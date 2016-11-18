@@ -177,6 +177,9 @@
     <Compile Include="GetApprovalCount_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="getCampaignByIdFormDataAnalytic_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="getCampaignROItblAnalytic_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -374,6 +377,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="vw_Coupons.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vw_Notifications.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="vw_ReferringCompanies.cs">

@@ -384,10 +384,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SecurityConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Api\Controllers\CountryController.cs" />
+    <Compile Include="Areas\Api\Controllers\NotificationsController.cs" />
     <Compile Include="Areas\Api\Controllers\CouponAnalyticsController.cs" />
     <Compile Include="Areas\Api\Controllers\ApprovePayOutHistoryController.cs" />
     <Compile Include="Areas\Api\Controllers\CouponCountController.cs" />
-    <Compile Include="Areas\Api\Controllers\DashboardStatusCounterController.cs" />
+    <Compile Include="Areas\Api\Controllers\FormAnalyticController.cs" />
     <Compile Include="Areas\Api\Controllers\SharedSurveyQuestionController.cs" />
     <Compile Include="Areas\Api\Controllers\StripeSubscribeCustomerController.cs" />
     <Compile Include="Areas\Api\Controllers\GetApprovalCountController.cs" />
@@ -436,7 +438,9 @@
     <Compile Include="Areas\Api\Models\CurrencyApprov.cs" />
     <Compile Include="Areas\Api\Models\Dashboard_analytics_Result.cs" />
     <Compile Include="Areas\Api\Models\DealByCouponIdForAnalyticsResponse.cs" />
+    <Compile Include="Areas\Api\Models\FormAnalyticResponseModel.cs" />
     <Compile Include="Areas\Api\Models\GetApprovalCount_Result.cs" />
+    <Compile Include="Areas\Api\Models\GenerateSMSResponse.cs" />
     <Compile Include="Areas\Api\Models\SharedSurveyQuestionResponse.cs" />
     <Compile Include="Areas\Api\Models\SharedSurveyQuestionApiModel.cs" />
     <Compile Include="Areas\Api\Models\PayOutHistory.cs" />
@@ -719,6 +723,10 @@
     <Content Include="Areas\Franchise\Scripts\Coupons.dataservice.js" />
     <Content Include="Areas\Franchise\Scripts\Coupons.view.js" />
     <Content Include="Areas\Franchise\Scripts\Coupons.viewModel.js" />
+    <Content Include="Areas\Franchise\Scripts\MarketingDeals.dataservice.js" />
+    <Content Include="Areas\Franchise\Scripts\MarketingDeals.model.js" />
+    <Content Include="Areas\Franchise\Scripts\MarketingDeals.view.js" />
+    <Content Include="Areas\Franchise\Scripts\MarketingDeals.viewModel.js" />
     <Content Include="Areas\Franchise\Scripts\payPallApp.dataservice.js" />
     <Content Include="Areas\Franchise\Scripts\payPallApp.viewModel.js" />
     <Content Include="Areas\Franchise\Scripts\profileQuestionApp.model.js" />
@@ -776,6 +784,8 @@
     <Content Include="Areas\Franchise\Views\RegisterUsers\_registeredUserEditor.cshtml" />
     <Content Include="Areas\Report\Views\Report\ReferAdvertises.cshtml" />
     <Content Include="Areas\Report\Views\Report\ManageAdvertises.cshtml" />
+    <Content Include="Areas\Franchise\Views\Dashboard\MarketingDealsStories.cshtml" />
+    <Content Include="Areas\Coupons\Views\Coupons\marketingDealeditor.cshtml" />
     <None Include="config\Web.connectionstrings.config">
       <SubType>Designer</SubType>
     </None>
@@ -1276,6 +1286,7 @@
     <Content Include="Images\preview_game.jpg" />
     <Content Include="Images\select_image.jpg" />
     <Content Include="Images\Sign_In_Image.png" />
+    <Content Include="Images\splaceholder.png" />
     <Content Include="Images\standardplaceholder.png" />
     <Content Include="Images\topbarph.png" />
     <Content Include="Images\youtube_play.JPG" />

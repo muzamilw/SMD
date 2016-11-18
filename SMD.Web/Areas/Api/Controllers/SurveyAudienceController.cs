@@ -14,7 +14,7 @@ namespace SMD.MIS.Areas.Api.Controllers
     public class SurveyAudienceController : ApiController
     {
 
-        #region Public
+        #region Private
         private readonly ISurveyQuestionService _surveyQuestionService;
         #endregion
         #region Constructor

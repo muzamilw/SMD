@@ -211,15 +211,23 @@ define("FranchiseDashboard/Coupons.viewModel",
                            return (selectedCoupon().hasChanges());
                         }),
                     onRejectCoupon = function () {
-                          if (selectedCoupon().rejectedReason() == undefined || selectedCoupon().rejectedReason() == "" || selectedCoupon().rejectedReason() == " ") {
-                                 toastr.info("Please add rejection reason!");
-                                 return false;
-                             }
-                             selectedCoupon().isApproved(false);
-                             onSaveCoupon();
-                             $("#topArea").css("display", "block");
-                             $("#divApprove").css("display", "block");
-                             toastr.success("Rejected Successfully.");
+
+                        confirmation.messageText("Do you want to Reject this deal ?");
+                        confirmation.show();
+                        confirmation.afterCancel(function () {
+                            confirmation.hide();
+                        });
+                        confirmation.afterProceed(function () {
+                            if (selectedCoupon().rejectedReason() == undefined || selectedCoupon().rejectedReason() == "" || selectedCoupon().rejectedReason() == " ") {
+                                toastr.info("Please add rejection reason!");
+                                return false;
+                            }
+                            selectedCoupon().isApproved(false);
+                            onSaveCoupon();
+                            $("#topArea").css("display", "block");
+                            $("#divApprove").css("display", "block");
+                            toastr.success("Rejected Successfully.");
+                        });     
                     },
                     getCompanyData = function (selectedItem)
                     {

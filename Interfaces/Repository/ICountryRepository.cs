@@ -11,7 +11,7 @@ namespace SMD.Interfaces.Repository
         /// <summary>
         /// Get List of Coutries 
         /// </summary>
-        IEnumerable<Country> GetAllCountries();
+        List<Country> GetAllCountries();
 
         IEnumerable<Country> GetSearchedCountries(string searchString);
         int GetCountryId(string name);

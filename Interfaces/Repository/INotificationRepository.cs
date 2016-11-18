@@ -9,7 +9,12 @@ namespace SMD.Interfaces.Repository
     public interface INotificationRepository : IBaseRepository<Notification, long>
     {
 
-        IEnumerable<Notification> GetAllUnReadNotificationsByUserId(string UserId);
+        IEnumerable<vw_Notifications> GetAllUnReadNotificationsByUserId(string UserId, string PhoneNumber);
+
+
+        Notification GetNotificationBySurveyQuestionShareId(long SurveyQuestionShareId);
+
+        bool UserHasNotifications(string UserId);
 
     }
 }

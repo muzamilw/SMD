@@ -325,8 +325,21 @@ namespace SMD.MIS
       null,
       null);
 
-            
-            
+              config.Routes.MapHttpRoute(
+      "Notifications",
+      "Notifications/{AuthenticationToken}/",
+      new { controller = "Notifications" },
+      null,
+      null);
+
+              config.Routes.MapHttpRoute(
+      "Country",
+      "Country/{AuthenticationToken}/",
+      new { controller = "Country" },
+      null,
+      null);
+
+
 
            //config.Routes.MapHttpRoute(
            //"CouponApproval",

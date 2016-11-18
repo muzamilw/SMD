@@ -148,8 +148,10 @@ define("Coupons/Coupons.viewModel",
                 Banner5Flag = ko.observable(false),
                 Banner6Flag = ko.observable(false),
                 freeCouponCount = ko.observable(0),
+                isflageClose = ko.observable(false),
                 openAdvertiserDashboardDealScreen = function () {
                     if (!IsnewCoupon()) {
+                        isflageClose(true);
                         getDealsAnalytics();
                         $("#ddGranularityDropDown").removeAttr("disabled");
                         $("#ddDateRangeDropDown").removeAttr("disabled");
@@ -187,6 +189,7 @@ define("Coupons/Coupons.viewModel",
                 CampaignRatioAnalyticData(1);
                 selecteddateRangeAnalytics(1);
                 selectedGranularityAnalytics(1);
+                isflageClose(false);
             },
 
                 //
@@ -2489,7 +2492,8 @@ getfreeCouponCount = function () {
                     IsnewCoupon: IsnewCoupon,
                     DeleteImage: DeleteImage,
                     diveNo: diveNo,
-                    onDeleteImage:onDeleteImage
+                    onDeleteImage: onDeleteImage,
+                    isflageClose: isflageClose
                 };
             })()
         };

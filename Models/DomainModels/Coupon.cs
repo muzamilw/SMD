@@ -15,7 +15,7 @@ namespace SMD.Models.DomainModels
         {
             this.CouponCategories = new HashSet<CouponCategories>();
         }
-     
+
 
         public long CouponId { get; set; }
         public Nullable<int> LanguageId { get; set; }
@@ -97,7 +97,7 @@ namespace SMD.Models.DomainModels
 
         public Nullable<bool> ShowBuyitBtn { get; set; }
         public string BuyitLandingPageUrl { get; set; }
-	    public string BuyitBtnLabel { get; set; }
+        public string BuyitBtnLabel { get; set; }
 
         public string YoutubeLink { get; set; }
 
@@ -111,8 +111,10 @@ namespace SMD.Models.DomainModels
         public Nullable<bool> IsShowMap { get; set; }
         public Nullable<bool> IsShowyouTube { get; set; }
         public Nullable<bool> IsShowAboutUs { get; set; }
-        
-        
+        public Nullable<bool> IsMarketingStories { get; set; }
+
+
+
 
         public virtual ICollection<CouponCategories> CouponCategories { get; set; }
 

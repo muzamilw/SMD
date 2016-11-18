@@ -137,6 +137,7 @@
     <Compile Include="DomainModels\GetActiveVSNewUsers_Result.cs" />
     <Compile Include="DomainModels\GetAdminDashBoardInsights_Result.cs" />
     <Compile Include="DomainModels\GetApprovalCount_Result.cs" />
+    <Compile Include="DomainModels\getCampaignByIdFormDataAnalytic_Result.cs" />
     <Compile Include="DomainModels\getCampaignRatioAnalytic_Result.cs" />
     <Compile Include="DomainModels\getCampaignROItblAnalytic_Result.cs" />
     <Compile Include="DomainModels\getCampaignsByStatus.cs" />
@@ -216,6 +217,7 @@
     <Compile Include="DomainModels\vw_Cash4AdsReport.cs" />
     <Compile Include="DomainModels\vw_Coupons.cs" />
     <Compile Include="DomainModels\vw_GetUserTransactions.cs" />
+    <Compile Include="DomainModels\vw_Notifications.cs" />
     <Compile Include="DomainModels\vw_PublisherTransaction.cs" />
     <Compile Include="DomainModels\vw_ReferringCompanies.cs" />
     <Compile Include="IdentityModels\Role.cs" />

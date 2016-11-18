@@ -119,6 +119,48 @@
             </div>
 
         </div>
+        <div class="row">
+            <div class="adsubHeading Theme_standard_clr borderbtmline" style="padding-left:16px;">
+                <br />
+                You can further filter this campaign to reveal deeper insights by :
+            </div>
+            <div class="col-lg-12">
+                Target Filters
+             </div>
+                <div class="col-lg-12">
+                    <table>
+                        <tr>
+                            <td >
+                                <span data-bind="text: $root.QuizQuestionAnalyticData"></span>
+
+                            </td>
+                            <td><select class="form-control" id="ddQQCDropDown" data-bind="options: $root.QQChoicesAnalyticsData, optionsText: 'ChoiceDescription', optionsValue: 'ChoiceId', value:$root.selectedQQCAnalytics, event: { change: $root.getQQAnalytic }"></select></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Gender : </td>
+                            <td><select class="form-control" id="ddQQGDropDown" data-bind="options: $root.GenderAnalyticsData, optionsText: 'name', optionsValue: 'id', value:$root.selectedQQGAnalytics, event: { change: $root.getQQAnalytic }"></select></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Age range : </td>
+                            <td><select class="form-control" id="ddQQADropDown" data-bind="options: $root.AgeRangeAnalyticsData, optionsText: 'name', optionsValue: 'id', value:$root.selectedQQAAnalytics, event: { change: $root.getQQAnalytic }"></select></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Profession : </td>
+                            <td><select class="form-control" id="ddQQPDropDown" data-bind="options: $root.ProfessionAnalyticsData, optionsText: 'name', optionsValue: 'id', value:$root.selectedQQPAnalytics, event: { change: $root.getQQAnalytic }"></select></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>City : </td>
+                            <td><select class="form-control" id="ddQQCtDropDown" data-bind="options: $root.CitiesAnalyticsData, optionsText: 'name', optionsValue: 'id', value:$root.selectedQQCtAnalytics, event: { change: $root.getQQAnalytic }"></select></td>
+                            <td></td>
+                        </tr>
+                      
+                    </table>
+                </div>
+            </div>
         <div class="clearfix">
         </div>
         <div class="clearfix">

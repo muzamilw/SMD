@@ -12,5 +12,6 @@ namespace SMD.Interfaces.Services
     {
 
         IEnumerable<GetActiveVSNewUsers_Result> GetActiveVSNewUsers();
+        List<String> getProfessions();
     }
 }

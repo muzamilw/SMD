@@ -46,11 +46,24 @@ namespace SMD.Repository.Repositories
         }
 
 
-        public IEnumerable<Notification> GetAllUnReadNotificationsByUserId(string UserId)
+        public IEnumerable<vw_Notifications> GetAllUnReadNotificationsByUserId(string UserId, string PhoneNumber)
         {
-            return DbSet.Where(c => c.UserID == UserId && c.IsRead == false);
+            return db.vw_Notifications.Where(c => (c.UserID == UserId || c.PhoneNumber == PhoneNumber) && (c.IsRead == false || c.IsRead == null) );
         }
 
+        public bool UserHasNotifications(string UserId)
+        {
+            if (DbSet.Where(c => (c.UserID == UserId) && (c.IsRead == false || c.IsRead == null)).Count() > 0)
+                return true;
+            else
+                return false;
+        }
+
+
+        public Notification GetNotificationBySurveyQuestionShareId(long SurveyQuestionShareId)
+        {
+            return DbSet.Where(g => g.SurveyQuestionShareId == SurveyQuestionShareId).SingleOrDefault();
+        }
         #endregion
     }
 }

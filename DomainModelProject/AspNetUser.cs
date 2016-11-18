@@ -71,6 +71,7 @@ namespace DomainModelProject
         public Nullable<bool> optMarketingEmails { get; set; }
         public string PassportNo { get; set; }
         public string Title { get; set; }
+        public string Phone1CountryCode { get; set; }
     
         public virtual ICollection<AdCampaignResponse> AdCampaignResponses { get; set; }
         public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }

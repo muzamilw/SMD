@@ -59,7 +59,8 @@ namespace SMD.Implementation
             unityContainer.RegisterType<ISurveySharingGroupService, SurveySharingGroupService>();
             unityContainer.RegisterType<ISurveyQuestionService, SurveyQuestionService>();
             unityContainer.RegisterType<ISharedSurveyQuestionService, SharedSurveyQuestionService>();
-            
+            unityContainer.RegisterType<INotificationService, NotificationService>();
+            unityContainer.RegisterType<ICountryService, CountryService>();
         }
     }
 }

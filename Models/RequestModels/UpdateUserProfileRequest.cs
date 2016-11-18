@@ -37,6 +37,10 @@ namespace SMD.Models.RequestModels
         public string FullName { get; set; }
 
         public int ProfessionID { get; set; }
+
+        public string Phone1CountryCode { get; set; }
+
+        public string Phone1 { get; set; }
              
     }
 }

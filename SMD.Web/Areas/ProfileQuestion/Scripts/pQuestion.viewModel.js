@@ -67,6 +67,7 @@ define("pQuestion/pQuestion.viewModel",
                     DefaultRangeValue = ko.observable(100),
                     IsOnAddLocationAdded = ko.observable(false),
                     isNewCampaignVisible = ko.observable(false),
+                    isflageClose = ko.observable(false),
                     profileAnswerList = ko.observable([]),
                     questiontype = ko.observableArray([{
                         typeId: 1,
@@ -119,6 +120,7 @@ define("pQuestion/pQuestion.viewModel",
 				    CampaignRatioAnalyticData = ko.observable(1),
 					openAdvertiserDashboardSurvayScreen = function () {
 					    if (!IsnewSurveyQuestion()) {
+					        isflageClose(true);
 					        getSurvayAnalytics();
 					        $("#ddGranularityDropDown").removeAttr("disabled");
 					        $("#ddDateRangeDropDown").removeAttr("disabled");
@@ -165,6 +167,7 @@ define("pQuestion/pQuestion.viewModel",
 					    CampaignRatioAnalyticData(1);
 						selecteddateRangeAnalytics(1);
 						selectedGranularityAnalytics(1);
+						isflageClose(false);
 					},
 
 					//End Advertiser Analytics 
@@ -2460,7 +2463,8 @@ define("pQuestion/pQuestion.viewModel",
                     nextPreviewScreen: nextPreviewScreen,
                     backScreen: backScreen,
                     ShowSliderPriceOnEdit: ShowSliderPriceOnEdit,
-                    EditPrice: EditPrice
+                    EditPrice: EditPrice,
+                    isflageClose: isflageClose
                 };
             })()
         };

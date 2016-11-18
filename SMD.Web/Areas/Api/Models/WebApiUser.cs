@@ -162,5 +162,7 @@ namespace SMD.MIS.Areas.Api.Models
 
 
         public bool ProfileComplete { get; set; }
+
+        public string Phone1CountryCode { get; set; }
     }
 }
