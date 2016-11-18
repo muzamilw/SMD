@@ -1,4 +1,5 @@
 ﻿using SMD.Interfaces.Services;
+using SMD.MIS.Areas.Api.Models;
 using SMD.Models.RequestModels;
 using SMD.WebBase.Mvc;
 using System;
@@ -34,14 +35,29 @@ namespace SMD.MIS.Areas.Api.Controllers
         #endregion
         #region Public
         [ApiExceptionCustom]
-        public int Get(string authenticationToken, [FromUri] GenerateSmsApiRequest request)
+        public GenerateSMSResponse Get(string authenticationToken, [FromUri] GenerateSmsApiRequest request)
         {
-            if (string.IsNullOrEmpty(authenticationToken) || request == null || !ModelState.IsValid)
+            try
             {
-                throw new HttpException((int)HttpStatusCode.BadRequest, "Invalid Request");
+
+
+                if (string.IsNullOrEmpty(authenticationToken) || request == null || !ModelState.IsValid)
+                {
+                    throw new HttpException((int)HttpStatusCode.BadRequest, "Invalid Request");
+                }
+
+                var resposne = webApiUserService.generateAndSmsCode(request.UserId, request.PhoneCountryCode+request.phoneNo);
+
+
+
+                return new GenerateSMSResponse { Message = "Success", Status = true, VerificationCode = resposne.ToString() };
+
             }
-            var resposne = webApiUserService.generateAndSmsCode(request.UserId,request.phoneNo);
-            return resposne;
+            catch (Exception e)
+            {
+
+                return new GenerateSMSResponse { Message = e.ToString(), Status = false };
+            }
         }
 
         #endregion

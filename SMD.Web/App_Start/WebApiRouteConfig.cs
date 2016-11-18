@@ -332,8 +332,14 @@ namespace SMD.MIS
       null,
       null);
 
-            
-            
+              config.Routes.MapHttpRoute(
+      "Country",
+      "Country/{AuthenticationToken}/",
+      new { controller = "Country" },
+      null,
+      null);
+
+
 
            //config.Routes.MapHttpRoute(
            //"CouponApproval",

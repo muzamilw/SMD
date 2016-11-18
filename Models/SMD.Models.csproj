@@ -137,6 +137,7 @@
     <Compile Include="DomainModels\GetActiveVSNewUsers_Result.cs" />
     <Compile Include="DomainModels\GetAdminDashBoardInsights_Result.cs" />
     <Compile Include="DomainModels\GetApprovalCount_Result.cs" />
+    <Compile Include="DomainModels\getCampaignByIdFormDataAnalytic_Result.cs" />
     <Compile Include="DomainModels\getCampaignRatioAnalytic_Result.cs" />
     <Compile Include="DomainModels\getCampaignROItblAnalytic_Result.cs" />
     <Compile Include="DomainModels\getCampaignsByStatus.cs" />

@@ -645,5 +645,43 @@ namespace DomainModelProject
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetSharedSurveyQuestionsByUserId_Result>("GetSharedSurveyQuestionsByUserId", userIdParameter);
         }
+    
+        public virtual ObjectResult<getCampaignByIdFormDataAnalytic_Result> getCampaignByIdFormDataAnalytic(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getCampaignByIdFormDataAnalytic_Result>("getCampaignByIdFormDataAnalytic", idParameter);
+        }
+    
+        public virtual int getCampaignByIdQQFormAnalytic(Nullable<int> id, Nullable<int> coice, Nullable<int> gender, Nullable<int> ageRange, string profession, string city)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            var coiceParameter = coice.HasValue ?
+                new ObjectParameter("coice", coice) :
+                new ObjectParameter("coice", typeof(int));
+    
+            var genderParameter = gender.HasValue ?
+                new ObjectParameter("gender", gender) :
+                new ObjectParameter("gender", typeof(int));
+    
+            var ageRangeParameter = ageRange.HasValue ?
+                new ObjectParameter("ageRange", ageRange) :
+                new ObjectParameter("ageRange", typeof(int));
+    
+            var professionParameter = profession != null ?
+                new ObjectParameter("Profession", profession) :
+                new ObjectParameter("Profession", typeof(string));
+    
+            var cityParameter = city != null ?
+                new ObjectParameter("city", city) :
+                new ObjectParameter("city", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("getCampaignByIdQQFormAnalytic", idParameter, coiceParameter, genderParameter, ageRangeParameter, professionParameter, cityParameter);
+        }
     }
 }

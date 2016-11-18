@@ -1057,6 +1057,18 @@ namespace SMD.Implementation.Services
                 user.IndustryId = request.ProfessionID;
                 user.FullName= request.FullName;
 
+
+            if (! string.IsNullOrEmpty( request.Phone1))
+            {
+                user.Phone1 = request.Phone1;
+
+            }
+
+            if (!string.IsNullOrEmpty(request.Phone1CountryCode))
+            {
+                user.Phone1CountryCode = request.Phone1CountryCode;
+            }
+
             // Save Changes
            await UserManager.UpdateAsync(user);
 
