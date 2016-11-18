@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetsE6DB6A14F9C091592E12540713C32C9FC629F2C8445DBA63306C7CAFA4E9BCED))]
+[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets14796E928D44372AC0517E77578A8293F0A4D0915BE4848ACC231191BB55E809))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -17,18 +17,18 @@ namespace Edm_EntityMappingGeneratedViews
     /// <Summary>
     /// The type contains views for EntitySets and AssociationSets that were generated at design time.
     /// </Summary>
-    public sealed class ViewsForBaseEntitySetsE6DB6A14F9C091592E12540713C32C9FC629F2C8445DBA63306C7CAFA4E9BCED : System.Data.Mapping.EntityViewContainer
+    public sealed class ViewsForBaseEntitySets14796E928D44372AC0517E77578A8293F0A4D0915BE4848ACC231191BB55E809 : System.Data.Mapping.EntityViewContainer
     {
         
         /// <Summary>
         /// The constructor stores the views for the extents and also the hash values generated based on the metadata and mapping closure and views.
         /// </Summary>
-        public ViewsForBaseEntitySetsE6DB6A14F9C091592E12540713C32C9FC629F2C8445DBA63306C7CAFA4E9BCED()
+        public ViewsForBaseEntitySets14796E928D44372AC0517E77578A8293F0A4D0915BE4848ACC231191BB55E809()
         {
             this.EdmEntityContainerName = "BaseDbContext";
             this.StoreEntityContainerName = "SMDModelStoreContainer";
-            this.HashOverMappingClosure = "7cf69a008b36ba633c0e4420164410f17979210d25aae1f13c83b651a3098120";
-            this.HashOverAllExtentViews = "fd9202b3f9a198ea9262239efb901b11b654d9c0d0bd85b7a2585a95abac8df2";
+            this.HashOverMappingClosure = "c2e5b19a972d43f4f3d989e9966390e8498a4601b02f1d97db00b697aa3e4a38";
+            this.HashOverAllExtentViews = "74d9c66cb52f8cf1e75c2a77bef388a77d31313d9b18e9a983b0fd38a98a9c6f";
             this.ViewCount = 136;
         }
         
@@ -741,13 +741,14 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.Country", @"
     SELECT VALUE -- Constructing Country
-        [SMDModel.Store.Country](T1.Country_CountryID, T1.Country_CountryName, T1.Country_CountryCode, T1.Country_CurrencyID)
+        [SMDModel.Store.Country](T1.Country_CountryID, T1.Country_CountryName, T1.Country_CountryCode, T1.Country_CurrencyID, T1.Country_CountryPhoneCode)
     FROM (
         SELECT 
             T.CountryId AS Country_CountryID, 
             T.CountryName AS Country_CountryName, 
             T.CountryCode AS Country_CountryCode, 
             T.CurrencyID AS Country_CurrencyID, 
+            T.CountryPhoneCode AS Country_CountryPhoneCode, 
             True AS _from0
         FROM BaseDbContext.Countries AS T
     ) AS T1");
@@ -1167,7 +1168,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView23()
         {
-            System.Text.StringBuilder viewString = new System.Text.StringBuilder(3889);
+            System.Text.StringBuilder viewString = new System.Text.StringBuilder(3991);
             viewString.Append("\r\n    SELECT VALUE -- Constructing AspNetUsers\r\n        [SMDModel.Store.AspNetUs");
             viewString.Append("ers](T1.AspNetUsers_Id, T1.AspNetUsers_Email, T1.AspNetUsers_EmailConfirmed, T1.");
             viewString.Append("AspNetUsers_PasswordHash, T1.AspNetUsers_SecurityStamp, T1.AspNetUsers_PhoneNumb");
@@ -1184,39 +1185,40 @@ namespace Edm_EntityMappingGeneratedViews
             viewString.Append("eLink, T1.AspNetUsers_DOB, T1.AspNetUsers_CompanyId, T1.AspNetUsers_authenticati");
             viewString.Append("onToken, T1.AspNetUsers_DevicePlatform, T1.AspNetUsers_optDealsNearMeEmails, T1.");
             viewString.Append("AspNetUsers_optLatestNewsEmails, T1.AspNetUsers_optMarketingEmails, T1.AspNetUse");
-            viewString.Append("rs_PassportNo, T1.AspNetUsers_Title)\r\n    FROM (\r\n        SELECT \r\n            T");
-            viewString.Append(".Id AS AspNetUsers_Id, \r\n            T.Email AS AspNetUsers_Email, \r\n           ");
-            viewString.Append(" T.EmailConfirmed AS AspNetUsers_EmailConfirmed, \r\n            T.PasswordHash AS");
-            viewString.Append(" AspNetUsers_PasswordHash, \r\n            T.SecurityStamp AS AspNetUsers_Security");
-            viewString.Append("Stamp, \r\n            T.PhoneNumberConfirmed AS AspNetUsers_PhoneNumberConfirmed,");
-            viewString.Append(" \r\n            T.TwoFactorEnabled AS AspNetUsers_TwoFactorEnabled, \r\n           ");
-            viewString.Append(" T.LockoutEndDateUtc AS AspNetUsers_LockoutEndDateUtc, \r\n            T.LockoutEn");
-            viewString.Append("abled AS AspNetUsers_LockoutEnabled, \r\n            T.AccessFailedCount AS AspNet");
-            viewString.Append("Users_AccessFailedCount, \r\n            T.UserName AS AspNetUsers_UserName, \r\n   ");
-            viewString.Append("         T.FullName AS AspNetUsers_FullName, \r\n            T.AlternateEmail AS A");
-            viewString.Append("spNetUsers_AlternateEmail, \r\n            T.IsEmailVerified AS AspNetUsers_IsEmai");
-            viewString.Append("lVerified, \r\n            T.Status AS AspNetUsers_Status, \r\n            T.Created");
-            viewString.Append("DateTime AS AspNetUsers_CreatedDateTime, \r\n            T.ModifiedDateTime AS Asp");
-            viewString.Append("NetUsers_ModifiedDateTime, \r\n            T.LastLoginTime AS AspNetUsers_LastLogi");
-            viewString.Append("nTime, \r\n            T.Phone1 AS AspNetUsers_Phone1, \r\n            T.Phone2 AS A");
-            viewString.Append("spNetUsers_Phone2, \r\n            T.Jobtitle AS AspNetUsers_Jobtitle, \r\n         ");
-            viewString.Append("   T.ContactNotes AS AspNetUsers_ContactNotes, \r\n            T.IsSubscribed AS A");
-            viewString.Append("spNetUsers_IsSubscribed, \r\n            T.AppID AS AspNetUsers_AppID, \r\n         ");
-            viewString.Append("   T.IsCompanyRepresentative AS AspNetUsers_IsCompanyRepresentative, \r\n         ");
-            viewString.Append("   T.UserTimeZone AS AspNetUsers_UserTimeZone, \r\n            T.Gender AS AspNetU");
-            viewString.Append("sers_Gender, \r\n            T.LanguageId AS AspNetUsers_LanguageID, \r\n           ");
-            viewString.Append(" T.IndustryId AS AspNetUsers_IndustryID, \r\n            T.EducationId AS AspNetUs");
-            viewString.Append("ers_EducationId, \r\n            T.ProfileImage AS AspNetUsers_ProfileImage, \r\n   ");
-            viewString.Append("         T.UserCode AS AspNetUsers_UserCode, \r\n            T.SmsCode AS AspNetUs");
-            viewString.Append("ers_SmsCode, \r\n            T.WebsiteLink AS AspNetUsers_WebsiteLink, \r\n         ");
-            viewString.Append("   T.DOB AS AspNetUsers_DOB, \r\n            T.CompanyId AS AspNetUsers_CompanyId,");
-            viewString.Append(" \r\n            T.AuthenticationToken AS AspNetUsers_authenticationToken, \r\n     ");
-            viewString.Append("       T.DevicePlatform AS AspNetUsers_DevicePlatform, \r\n            T.optDealsN");
-            viewString.Append("earMeEmails AS AspNetUsers_optDealsNearMeEmails, \r\n            T.optLatestNewsEm");
-            viewString.Append("ails AS AspNetUsers_optLatestNewsEmails, \r\n            T.optMarketingEmails AS A");
-            viewString.Append("spNetUsers_optMarketingEmails, \r\n            T.PassportNo AS AspNetUsers_Passpor");
-            viewString.Append("tNo, \r\n            T.Title AS AspNetUsers_Title, \r\n            True AS _from0\r\n ");
-            viewString.Append("       FROM BaseDbContext.Users AS T\r\n    ) AS T1");
+            viewString.Append("rs_PassportNo, T1.AspNetUsers_Title, T1.AspNetUsers_Phone1CountryCode)\r\n    FROM");
+            viewString.Append(" (\r\n        SELECT \r\n            T.Id AS AspNetUsers_Id, \r\n            T.Email A");
+            viewString.Append("S AspNetUsers_Email, \r\n            T.EmailConfirmed AS AspNetUsers_EmailConfirme");
+            viewString.Append("d, \r\n            T.PasswordHash AS AspNetUsers_PasswordHash, \r\n            T.Sec");
+            viewString.Append("urityStamp AS AspNetUsers_SecurityStamp, \r\n            T.PhoneNumberConfirmed AS");
+            viewString.Append(" AspNetUsers_PhoneNumberConfirmed, \r\n            T.TwoFactorEnabled AS AspNetUse");
+            viewString.Append("rs_TwoFactorEnabled, \r\n            T.LockoutEndDateUtc AS AspNetUsers_LockoutEnd");
+            viewString.Append("DateUtc, \r\n            T.LockoutEnabled AS AspNetUsers_LockoutEnabled, \r\n       ");
+            viewString.Append("     T.AccessFailedCount AS AspNetUsers_AccessFailedCount, \r\n            T.UserN");
+            viewString.Append("ame AS AspNetUsers_UserName, \r\n            T.FullName AS AspNetUsers_FullName, \r");
+            viewString.Append("\n            T.AlternateEmail AS AspNetUsers_AlternateEmail, \r\n            T.IsE");
+            viewString.Append("mailVerified AS AspNetUsers_IsEmailVerified, \r\n            T.Status AS AspNetUse");
+            viewString.Append("rs_Status, \r\n            T.CreatedDateTime AS AspNetUsers_CreatedDateTime, \r\n   ");
+            viewString.Append("         T.ModifiedDateTime AS AspNetUsers_ModifiedDateTime, \r\n            T.Las");
+            viewString.Append("tLoginTime AS AspNetUsers_LastLoginTime, \r\n            T.Phone1 AS AspNetUsers_P");
+            viewString.Append("hone1, \r\n            T.Phone2 AS AspNetUsers_Phone2, \r\n            T.Jobtitle AS");
+            viewString.Append(" AspNetUsers_Jobtitle, \r\n            T.ContactNotes AS AspNetUsers_ContactNotes,");
+            viewString.Append(" \r\n            T.IsSubscribed AS AspNetUsers_IsSubscribed, \r\n            T.AppID");
+            viewString.Append(" AS AspNetUsers_AppID, \r\n            T.IsCompanyRepresentative AS AspNetUsers_Is");
+            viewString.Append("CompanyRepresentative, \r\n            T.UserTimeZone AS AspNetUsers_UserTimeZone,");
+            viewString.Append(" \r\n            T.Gender AS AspNetUsers_Gender, \r\n            T.LanguageId AS Asp");
+            viewString.Append("NetUsers_LanguageID, \r\n            T.IndustryId AS AspNetUsers_IndustryID, \r\n   ");
+            viewString.Append("         T.EducationId AS AspNetUsers_EducationId, \r\n            T.ProfileImage ");
+            viewString.Append("AS AspNetUsers_ProfileImage, \r\n            T.UserCode AS AspNetUsers_UserCode, \r");
+            viewString.Append("\n            T.SmsCode AS AspNetUsers_SmsCode, \r\n            T.WebsiteLink AS As");
+            viewString.Append("pNetUsers_WebsiteLink, \r\n            T.DOB AS AspNetUsers_DOB, \r\n            T.C");
+            viewString.Append("ompanyId AS AspNetUsers_CompanyId, \r\n            T.AuthenticationToken AS AspNet");
+            viewString.Append("Users_authenticationToken, \r\n            T.DevicePlatform AS AspNetUsers_DeviceP");
+            viewString.Append("latform, \r\n            T.optDealsNearMeEmails AS AspNetUsers_optDealsNearMeEmail");
+            viewString.Append("s, \r\n            T.optLatestNewsEmails AS AspNetUsers_optLatestNewsEmails, \r\n   ");
+            viewString.Append("         T.optMarketingEmails AS AspNetUsers_optMarketingEmails, \r\n            T");
+            viewString.Append(".PassportNo AS AspNetUsers_PassportNo, \r\n            T.Title AS AspNetUsers_Titl");
+            viewString.Append("e, \r\n            T.Phone1CountryCode AS AspNetUsers_Phone1CountryCode, \r\n       ");
+            viewString.Append("     True AS _from0\r\n        FROM BaseDbContext.Users AS T\r\n    ) AS T1");
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.AspNetUsers", viewString.ToString());
         }
         
@@ -2118,13 +2120,14 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Countries", @"
     SELECT VALUE -- Constructing Countries
-        [DomainModels.Country](T1.Country_CountryId, T1.Country_CountryName, T1.Country_CountryCode, T1.Country_CurrencyID)
+        [DomainModels.Country](T1.Country_CountryId, T1.Country_CountryName, T1.Country_CountryCode, T1.Country_CurrencyID, T1.Country_CountryPhoneCode)
     FROM (
         SELECT 
             T.CountryID AS Country_CountryId, 
             T.CountryName AS Country_CountryName, 
             T.CountryCode AS Country_CountryCode, 
             T.CurrencyID AS Country_CurrencyID, 
+            T.CountryPhoneCode AS Country_CountryPhoneCode, 
             True AS _from0
         FROM SMDModelStoreContainer.Country AS T
     ) AS T1");
@@ -2543,7 +2546,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView70()
         {
-            System.Text.StringBuilder viewString = new System.Text.StringBuilder(3287);
+            System.Text.StringBuilder viewString = new System.Text.StringBuilder(3375);
             viewString.Append("\r\n    SELECT VALUE -- Constructing Users\r\n        [DomainModels.User](T1.User_Id");
             viewString.Append(", T1.User_Email, T1.User_EmailConfirmed, T1.User_PasswordHash, T1.User_SecurityS");
             viewString.Append("tamp, T1.User_PhoneNumberConfirmed, T1.User_TwoFactorEnabled, T1.User_LockoutEnd");
@@ -2556,36 +2559,37 @@ namespace Edm_EntityMappingGeneratedViews
             viewString.Append("ser_ProfileImage, T1.User_UserCode, T1.User_SmsCode, T1.User_WebsiteLink, T1.Use");
             viewString.Append("r_DOB, T1.User_CompanyId, T1.User_AuthenticationToken, T1.User_DevicePlatform, T");
             viewString.Append("1.User_optDealsNearMeEmails, T1.User_optLatestNewsEmails, T1.User_optMarketingEm");
-            viewString.Append("ails, T1.User_PassportNo, T1.User_Title)\r\n    FROM (\r\n        SELECT \r\n         ");
-            viewString.Append("   T.Id AS User_Id, \r\n            T.Email AS User_Email, \r\n            T.EmailCo");
-            viewString.Append("nfirmed AS User_EmailConfirmed, \r\n            T.PasswordHash AS User_PasswordHas");
-            viewString.Append("h, \r\n            T.SecurityStamp AS User_SecurityStamp, \r\n            T.PhoneNum");
-            viewString.Append("berConfirmed AS User_PhoneNumberConfirmed, \r\n            T.TwoFactorEnabled AS U");
-            viewString.Append("ser_TwoFactorEnabled, \r\n            T.LockoutEndDateUtc AS User_LockoutEndDateUt");
-            viewString.Append("c, \r\n            T.LockoutEnabled AS User_LockoutEnabled, \r\n            T.Access");
-            viewString.Append("FailedCount AS User_AccessFailedCount, \r\n            T.UserName AS User_UserName");
-            viewString.Append(", \r\n            T.FullName AS User_FullName, \r\n            T.AlternateEmail AS U");
-            viewString.Append("ser_AlternateEmail, \r\n            T.IsEmailVerified AS User_IsEmailVerified, \r\n ");
-            viewString.Append("           T.Status AS User_Status, \r\n            T.CreatedDateTime AS User_Crea");
-            viewString.Append("tedDateTime, \r\n            T.ModifiedDateTime AS User_ModifiedDateTime, \r\n      ");
-            viewString.Append("      T.LastLoginTime AS User_LastLoginTime, \r\n            T.Phone1 AS User_Phon");
-            viewString.Append("e1, \r\n            T.Phone2 AS User_Phone2, \r\n            T.Jobtitle AS User_Jobt");
-            viewString.Append("itle, \r\n            T.ContactNotes AS User_ContactNotes, \r\n            T.IsSubsc");
-            viewString.Append("ribed AS User_IsSubscribed, \r\n            T.AppID AS User_AppID, \r\n            T");
-            viewString.Append(".IsCompanyRepresentative AS User_IsCompanyRepresentative, \r\n            T.UserTi");
-            viewString.Append("meZone AS User_UserTimeZone, \r\n            T.Gender AS User_Gender, \r\n          ");
-            viewString.Append("  T.LanguageID AS User_LanguageId, \r\n            T.IndustryID AS User_IndustryId");
-            viewString.Append(", \r\n            T.EducationId AS User_EducationId, \r\n            T.ProfileImage ");
-            viewString.Append("AS User_ProfileImage, \r\n            T.UserCode AS User_UserCode, \r\n            T");
-            viewString.Append(".SmsCode AS User_SmsCode, \r\n            T.WebsiteLink AS User_WebsiteLink, \r\n   ");
-            viewString.Append("         T.DOB AS User_DOB, \r\n            T.CompanyId AS User_CompanyId, \r\n     ");
-            viewString.Append("       T.authenticationToken AS User_AuthenticationToken, \r\n            T.Device");
-            viewString.Append("Platform AS User_DevicePlatform, \r\n            T.optDealsNearMeEmails AS User_op");
-            viewString.Append("tDealsNearMeEmails, \r\n            T.optLatestNewsEmails AS User_optLatestNewsEma");
-            viewString.Append("ils, \r\n            T.optMarketingEmails AS User_optMarketingEmails, \r\n          ");
-            viewString.Append("  T.PassportNo AS User_PassportNo, \r\n            T.Title AS User_Title, \r\n      ");
-            viewString.Append("      True AS _from0\r\n        FROM SMDModelStoreContainer.AspNetUsers AS T\r\n    ");
-            viewString.Append(") AS T1");
+            viewString.Append("ails, T1.User_PassportNo, T1.User_Title, T1.User_Phone1CountryCode)\r\n    FROM (\r");
+            viewString.Append("\n        SELECT \r\n            T.Id AS User_Id, \r\n            T.Email AS User_Ema");
+            viewString.Append("il, \r\n            T.EmailConfirmed AS User_EmailConfirmed, \r\n            T.Passw");
+            viewString.Append("ordHash AS User_PasswordHash, \r\n            T.SecurityStamp AS User_SecurityStam");
+            viewString.Append("p, \r\n            T.PhoneNumberConfirmed AS User_PhoneNumberConfirmed, \r\n        ");
+            viewString.Append("    T.TwoFactorEnabled AS User_TwoFactorEnabled, \r\n            T.LockoutEndDateU");
+            viewString.Append("tc AS User_LockoutEndDateUtc, \r\n            T.LockoutEnabled AS User_LockoutEnab");
+            viewString.Append("led, \r\n            T.AccessFailedCount AS User_AccessFailedCount, \r\n            ");
+            viewString.Append("T.UserName AS User_UserName, \r\n            T.FullName AS User_FullName, \r\n      ");
+            viewString.Append("      T.AlternateEmail AS User_AlternateEmail, \r\n            T.IsEmailVerified A");
+            viewString.Append("S User_IsEmailVerified, \r\n            T.Status AS User_Status, \r\n            T.C");
+            viewString.Append("reatedDateTime AS User_CreatedDateTime, \r\n            T.ModifiedDateTime AS User");
+            viewString.Append("_ModifiedDateTime, \r\n            T.LastLoginTime AS User_LastLoginTime, \r\n      ");
+            viewString.Append("      T.Phone1 AS User_Phone1, \r\n            T.Phone2 AS User_Phone2, \r\n        ");
+            viewString.Append("    T.Jobtitle AS User_Jobtitle, \r\n            T.ContactNotes AS User_ContactNot");
+            viewString.Append("es, \r\n            T.IsSubscribed AS User_IsSubscribed, \r\n            T.AppID AS ");
+            viewString.Append("User_AppID, \r\n            T.IsCompanyRepresentative AS User_IsCompanyRepresentat");
+            viewString.Append("ive, \r\n            T.UserTimeZone AS User_UserTimeZone, \r\n            T.Gender A");
+            viewString.Append("S User_Gender, \r\n            T.LanguageID AS User_LanguageId, \r\n            T.In");
+            viewString.Append("dustryID AS User_IndustryId, \r\n            T.EducationId AS User_EducationId, \r\n");
+            viewString.Append("            T.ProfileImage AS User_ProfileImage, \r\n            T.UserCode AS Use");
+            viewString.Append("r_UserCode, \r\n            T.SmsCode AS User_SmsCode, \r\n            T.WebsiteLink");
+            viewString.Append(" AS User_WebsiteLink, \r\n            T.DOB AS User_DOB, \r\n            T.CompanyId");
+            viewString.Append(" AS User_CompanyId, \r\n            T.authenticationToken AS User_AuthenticationTo");
+            viewString.Append("ken, \r\n            T.DevicePlatform AS User_DevicePlatform, \r\n            T.optD");
+            viewString.Append("ealsNearMeEmails AS User_optDealsNearMeEmails, \r\n            T.optLatestNewsEmai");
+            viewString.Append("ls AS User_optLatestNewsEmails, \r\n            T.optMarketingEmails AS User_optMa");
+            viewString.Append("rketingEmails, \r\n            T.PassportNo AS User_PassportNo, \r\n            T.Ti");
+            viewString.Append("tle AS User_Title, \r\n            T.Phone1CountryCode AS User_Phone1CountryCode, ");
+            viewString.Append("\r\n            True AS _from0\r\n        FROM SMDModelStoreContainer.AspNetUsers AS");
+            viewString.Append(" T\r\n    ) AS T1");
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Users", viewString.ToString());
         }
         

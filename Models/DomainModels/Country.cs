@@ -9,6 +9,7 @@ namespace SMD.Models.DomainModels
         public int CountryId { get; set; }
         public string CountryName { get; set; }
         public string CountryCode { get; set; }
+        public string CountryPhoneCode { get; set; }
 
         public Nullable<int> CurrencyID { get; set; }
 

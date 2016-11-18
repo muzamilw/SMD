@@ -48,7 +48,7 @@ namespace SMD.Repository.Repositories
         /// <summary>
         /// Get List of Coutries 
         /// </summary>
-        public IEnumerable<Country> GetAllCountries()
+        public List<Country> GetAllCountries()
         {
            return DbSet.Select(country => country).ToList();
         }
