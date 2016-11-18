@@ -78,6 +78,12 @@ namespace SMD.Repository.Repositories
             return db.Users.Where(g => g.Phone1 == phoneNo).SingleOrDefault();
 
         }
+        public String GetUserName(string id)
+        {
+            db.Configuration.LazyLoadingEnabled = false;
+            return db.Users.Where(g =>g.Id==id).SingleOrDefault().FullName;
+
+        }
 
 
       

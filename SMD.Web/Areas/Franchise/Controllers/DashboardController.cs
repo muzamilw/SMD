@@ -50,6 +50,10 @@ namespace SMD.MIS.Areas.Franchise.Controllers
         {
             return View();
         }
+        public ActionResult MarketingDealsStories()
+        {
+            return View();
+        }
 
     }
 }
