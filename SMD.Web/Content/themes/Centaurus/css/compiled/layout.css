@@ -299,7 +299,7 @@ blockquote.pull-right:before {
 }
 
 #header-navbar .nav>li>a {
-    height: 50px;
+    height: 35px;
 }
 
 #header-navbar .nav>li>a>span.count {
@@ -828,6 +828,7 @@ blockquote.pull-right:before {
     box-shadow: 0 6px 12px rgba(0,0,0,0.176);
     left: 0;
     position: absolute;
+    z-index:111;
 }
 
 #sidebar-nav .nav>.open>.submenu .submenu {
@@ -1332,8 +1333,11 @@ svg {
     padding-left: 5px;
 }
 .navbar-nav>li>a:hover {
-    background-color: #1a1d22 !important;
-    color: #fc813b !important;
+    /*background-color: #1a1d22 !important;
+    color: #fc813b !important;*/
+    
+     background-color: #2b7eb6 !important;
+    color: white !important;
 }
 .navbar-toggle:hover {
     background-color: #1a1d22 !important;
@@ -1353,3 +1357,33 @@ svg {
     font-size:18px;
     margin-bottom:20px;
 }
+
+.dash_header-btn {
+    background: -webkit-linear-gradient(top,rgba(255,255,255,.3) 0,rgba(255,255,255,.2) 100%)!important;
+    background: linear-gradient(to bottom,rgba(255,255,255,.3) 0,rgba(255,255,255,.2) 100%) !important;
+    color: #f3f3f3!important;
+    display: block!important;
+    font-weight: 700!important;
+    line-height: 30px!important;
+    margin-right: 8px!important;
+    min-width: 30px!important;
+    padding: 0!important;
+    user-select: none!important;
+    border-radius: 5px!important;
+    padding-top: 2px!important;
+    padding-left: 6px!important;
+    padding-right: 6px!important;
+}
+.icon-lg, .icon-sm {
+    display: inline-block;
+    font-family: trellicons;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-style: normal;
+    font-weight: 400;
+    text-align: center;
+    text-decoration: none;
+    color: #999;
+    padding-top:6px!important;
+}
+

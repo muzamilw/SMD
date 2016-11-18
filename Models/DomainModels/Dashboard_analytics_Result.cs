@@ -19,6 +19,8 @@ namespace SMD.Models.DomainModels
         public string Question { get; set; }
         public string CampaignName { get; set; }
         public Nullable<int> Status { get; set; }
+
+       
         public Nullable<int> LandingPageConv { get; set; }
         public Nullable<int> AdViewed { get; set; }
         public string Answer1 { get; set; }
@@ -50,5 +52,6 @@ namespace SMD.Models.DomainModels
         public Nullable<int> Option4TAnswers { get; set; }
         public Nullable<int> Option5TAnswers { get; set; }
         public Nullable<int> Option6TAnswers { get; set; }
+        public Nullable<int> Type { get; set; }
     }
 }

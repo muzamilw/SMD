@@ -716,6 +716,14 @@ namespace SMD.Repository.BaseRepository
             var UserIdParam = new ObjectParameter("UserId", UserId);
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Int32>("GetUserProfileCompletness", UserIdParam);
         }
+
+        public ObjectResult<Dashboard_analytics_Result> GetMainDashboardAnalytics(string UserId)
+        {
+            var UserIdParam = new ObjectParameter("UderID", UserId);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Dashboard_analytics_Result>("Dashboard_analytics", UserIdParam);
+
+        }
+
         public ObjectResult<GetApprovalCount_Result> GetApprovalCount()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetApprovalCount_Result>("GetApprovalCount");

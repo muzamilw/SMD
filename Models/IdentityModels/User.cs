@@ -67,6 +67,8 @@ namespace SMD.Models.IdentityModels
         public Nullable<bool> optLatestNewsEmails { get; set; }
         public Nullable<bool> optMarketingEmails { get; set; }
 
+        public string Phone1CountryCode { get; set; }
+
 
         public string Title { get; set; }
 

@@ -24,7 +24,10 @@ else
                 <div class="clearfix">
                     <span class="pull-left " style="color:#fff!important; padding-left: 0px; font-size: 23px;" data-bind="text: $root.CouponTitle"></span>
 
-                    <div style="float:right;margin-top:-9px;"><img data-bind="click: $root.CloseCouponsView" src="/Content/Images/Close_Button.png" style="width:20px;height:20px;float:right;cursor:pointer;margin-top:17px;"></div>
+                    <div style="float:right;margin-top:-9px;">
+                        <img data-bind="click: $root.CloseCouponsView,visible:$root.isflageClose()==false" src="/Content/Images/Close_Button.png" style="width:20px;height:20px;float:right;cursor:pointer;margin-top:17px;">
+                        <img data-bind="click: $root.CloseCouponsAnalyticView,visible:$root.isflageClose()==true" id="img2" src="/Content/Images/Close_Button.png" style="width:20px;height:20px;float:right;cursor:pointer;margin-top:17px;">
+                    </div>
                 </div>
 
                 <div class="row" style="margin-bottom:15px;">
@@ -251,7 +254,7 @@ else
                                 <div class="col-lg-7">
                                     <textarea maxlength="48" style="height:60px; resize:none" name="Coupon Display Name" class="form-control  " id="txtCampaignDisplayName" placeholder="Deal title (48 characters)" data-bind="value: CouponTitle,click: $root.selectJobDescription"></textarea>
                                 </div>
-                                <div class="col-lg-1">
+                                <div class="col-lg-1" style="display:none">
                                     <a id="P0" data-bind="visible:$root.selectedJobDescription()=== 'txtCampaignDisplayName',click:$root.openPhraseLibrary" style="padding: 4px 8px;display:none;" class="btn btn-primary pull-right">
                                         <i class="fa fa-lg"></i>&nbsp;....
                                     </a>
@@ -1851,59 +1854,66 @@ else
         var attr = $("a").attr('disabled');
         if (attr == "disabled")
             return;
-        if (mode == 1) {
-            onDeleteImage(1);
-            $("#bannerImage1").attr("src",null);
-            $("#bannerImage1").attr("src", "/images/standardplaceholder.png");
-            $("#CouponImage2panel").css('display', 'none');
-            $("#divimg1").css('display', 'block');
-            $("#div1").css('display', 'none');
+        var r = confirm("Are you sure you want to delete this image?");
+        if (r == true) {
+
+            if (mode == 1) {
+                onDeleteImage(1);
+                $("#bannerImage1").attr("src", null);
+                $("#bannerImage1").attr("src", "/images/standardplaceholder.png");
+                $("#CouponImage2panel").css('display', 'none');
+                $("#divimg1").css('display', 'block');
+                $("#div1").css('display', 'none');
+            }
+            else if (mode == 2) {
+                onDeleteImage(2);
+                $("#bannerImage2").attr("src", null);
+                $("#bannerImage2").attr("src", "/images/standardplaceholder.png");
+                $("#CouponImage3panel").css('display', 'none');
+                $("#CouponImage2panel").css('display', 'block');
+                $("#div1").css('display', 'block');
+                $("#div2").css('display', 'none');
+            }
+            else if (mode == 3) {
+                onDeleteImage(3);
+                $("#bannerImage3").attr("src", null);
+                $("#bannerImage3").attr("src", "/images/standardplaceholder.png");
+                $("#CouponImage4panel").css('display', 'none');
+                $("#CouponImage3panel").css('display', 'block');
+                $("#div2").css('display', 'block');
+                $("#div3").css('display', 'none');
+
+            }
+            else if (mode == 4) {
+                onDeleteImage(4);
+                $("#bannerImage4").attr("src", null);
+                $("#bannerImage4").attr("src", "/images/standardplaceholder.png");
+                $("#CouponImage5panel").css('display', 'none');
+                $("#CouponImage4panel").css('display', 'block');
+                $("#div3").css('display', 'block');
+                $("#div4").css('display', 'none');
+            }
+            else if (mode == 5) {
+                onDeleteImage(5);
+                $("#bannerImage5").attr("src", null);
+                $("#bannerImage5").attr("src", "/images/standardplaceholder.png");
+                $("#CouponImage6panel").css('display', 'none');
+                $("#CouponImage5panel").css('display', 'block');
+                $("#div4").css('display', 'block');
+                $("#div5").css('display', 'none');
+            }
+            else if (mode == 6) {
+                onDeleteImage(6);
+                $("#bannerImage6").attr("src", null);
+                $("#bannerImage6").attr("src", "/images/standardplaceholder.png");
+                $("#CouponImage6panel").css('display', 'bolck');
+                $("#div5").css('display', 'bolck');
+                $("#div6").css('display', 'none');
+            }
         }
-        else if (mode == 2)
-        {
-            onDeleteImage(2);
-            $("#bannerImage2").attr("src",null);
-            $("#bannerImage2").attr("src", "/images/standardplaceholder.png");
-            $("#CouponImage3panel").css('display', 'none');
-            $("#CouponImage2panel").css('display', 'block');
-            $("#div1").css('display', 'block');
-            $("#div2").css('display', 'none');
-        }
-        else if (mode == 3) {
-            onDeleteImage(3);
-            $("#bannerImage3").attr("src", null);
-            $("#bannerImage3").attr("src", "/images/standardplaceholder.png");
-            $("#CouponImage4panel").css('display', 'none');
-            $("#CouponImage3panel").css('display', 'block');
-            $("#div2").css('display', 'block');
-            $("#div3").css('display', 'none');
-           
-        }
-        else if (mode == 4) {
-            onDeleteImage(4);
-            $("#bannerImage4").attr("src", null);
-            $("#bannerImage4").attr("src", "/images/standardplaceholder.png");
-            $("#CouponImage5panel").css('display', 'none');
-            $("#CouponImage4panel").css('display', 'block');
-            $("#div3").css('display', 'block');
-            $("#div4").css('display', 'none');
-        }
-        else if (mode == 5) {
-            onDeleteImage(5);
-            $("#bannerImage5").attr("src", null);
-            $("#bannerImage5").attr("src", "/images/standardplaceholder.png");
-            $("#CouponImage6panel").css('display', 'none');
-            $("#CouponImage5panel").css('display', 'block');
-            $("#div4").css('display', 'block');
-            $("#div5").css('display', 'none');
-        }
-        else if (mode == 6) {
-            onDeleteImage(6);
-            $("#bannerImage6").attr("src", null);
-            $("#bannerImage6").attr("src", "/images/standardplaceholder.png");
-            $("#CouponImage6panel").css('display', 'bolck');
-            $("#div5").css('display', 'bolck');
-            $("#div6").css('display', 'none');
+        else {
+
+            return;
         }
 
      

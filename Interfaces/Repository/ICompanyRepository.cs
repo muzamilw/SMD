@@ -12,6 +12,7 @@ namespace SMD.Interfaces.Repository
 {
     public interface ICompanyRepository : IBaseRepository<Company, int>
     {
+        List<Dashboard_analytics_Result> GetDashboardAnalytics(string UserID);
         int GetUserCompany(string userId);
         bool updateCompanyLogo(string url, int companyId);
 
@@ -28,5 +29,6 @@ namespace SMD.Interfaces.Repository
         Boolean UpdateCompanyStatus(int status, string userId, string comments, int companyId);
 
         Company GetCompanyByStripeCustomerId(string StripeCustomerId);
+        Dictionary<string, int> GetStatusesCounters();
     }
 }

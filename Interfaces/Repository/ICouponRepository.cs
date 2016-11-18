@@ -33,6 +33,7 @@ namespace SMD.Interfaces.Repository
 
         int GetCouponByBranchId(long id);
         int GetFreeCouponCount();
+        IEnumerable<vw_Coupons> GetMarketingDeals(GetPagedListRequest request, out int rowCount);
 
     }
 }

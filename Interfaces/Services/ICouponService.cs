@@ -51,6 +51,9 @@ namespace SMD.Interfaces.Services
         bool PauseAllCoupons(int CompanyId);
 
         int GetFreeCouponCount();
+        CouponsResponseModelForApproval GetMarketingDeals(GetPagedListRequest request);
+        String GetUserName(string id);
+        string UpdateDealMarketing(Coupon source);
 
     }
 }

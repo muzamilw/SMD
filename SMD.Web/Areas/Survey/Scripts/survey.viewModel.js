@@ -100,8 +100,10 @@ define("survey/survey.viewModel",
                 DateRangeDropDown = ko.observableArray([{ id: 1, name: "Last 30 days" }, { id: 2, name: "All Time" }]),
                 CampaignStatusDropDown = ko.observableArray([{ id: 1, name: "Answered" }, { id: 2, name: "Skipped" }]),
                 CampaignRatioAnalyticData = ko.observable(1),
+                isflageClose = ko.observable(false),
                 openAdvertiserDashboardPollScreen = function () {
                     if (!IsnewSurvey()) {
+                        isflageClose(true);
                         getSurvayAnalytics();
                         $("#ddGranularityDropDown").removeAttr("disabled");
                         $("#ddDateRangeDropDown").removeAttr("disabled");
@@ -148,7 +150,8 @@ define("survey/survey.viewModel",
                     isAdvertdashboardPollVisible(false);
                     CampaignRatioAnalyticData(1);
 					selecteddateRangeAnalytics(1);
-						selectedGranularityAnalytics(1);
+					selectedGranularityAnalytics(1);
+					isflageClose(false);
                 },
 
                 //End Advertiser Analytics 
@@ -2224,7 +2227,8 @@ define("survey/survey.viewModel",
                     AudienceWidth: AudienceWidth,
                     nextPreviewScreen: nextPreviewScreen,
                     previewScreenNumber: previewScreenNumber,
-                    backScreen: backScreen
+                    backScreen: backScreen,
+                    isflageClose: isflageClose
                 };
             })()
         };

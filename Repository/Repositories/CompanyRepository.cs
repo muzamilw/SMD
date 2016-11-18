@@ -213,9 +213,23 @@ namespace SMD.Repository.Repositories
             return DbSet.Where(g => g.StripeCustomerId == StripeCustomerId).SingleOrDefault();
         }
 
+        public List<Dashboard_analytics_Result> GetDashboardAnalytics(string UserID)
+        {
 
+            return db.GetMainDashboardAnalytics(UserID).ToList();
 
+          
+        }
 
+        public Dictionary<string, int> GetStatusesCounters()
+        {
+            Dictionary<string, int> StDictionary = new Dictionary<string, int>();
+            StDictionary.Add("liveVidCamp", db.AdCampaigns.Where(i => i.Status == 3 && i.Type ==1 && i.UserId==this.LoggedInUserIdentity).ToList().Count);
+            StDictionary.Add("liveDisplayCamp", db.AdCampaigns.Where(i => i.Status == 3 && i.Type == 4 && i.UserId == this.LoggedInUserIdentity).ToList().Count);
+            StDictionary.Add("Deals", db.Coupons.Where(i => i.Status == 3 && i.UserId == this.LoggedInUserIdentity).ToList().Count);
+            StDictionary.Add("Polls", db.SurveyQuestions.Where(i => i.Status == 3 && i.UserId == this.LoggedInUserIdentity).ToList().Count);
 
+            return StDictionary;
+        }
     }
 }

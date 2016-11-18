@@ -263,6 +263,7 @@
           <Property Name="optMarketingEmails" Type="bit" />
           <Property Name="PassportNo" Type="nvarchar" MaxLength="150" />
           <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone1CountryCode" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="AuditLog">
           <Key>
@@ -412,6 +413,7 @@
           <Property Name="CountryName" Type="nvarchar" MaxLength="200" />
           <Property Name="CountryCode" Type="nvarchar" MaxLength="50" />
           <Property Name="CurrencyID" Type="int" />
+          <Property Name="CountryPhoneCode" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Coupon">
           <Key>
@@ -2593,6 +2595,17 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Parameter Name="industryId" Type="int" Mode="In" />
           <Parameter Name="profileQuestionIds" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="getCampaignByIdFormDataAnalytic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getCampaignByIdQQFormAnalytic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="coice" Type="int" Mode="In" />
+          <Parameter Name="gender" Type="int" Mode="In" />
+          <Parameter Name="ageRange" Type="int" Mode="In" />
+          <Parameter Name="Profession" Type="nvarchar" Mode="In" />
+          <Parameter Name="city" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="getCampaignROItblAnalytic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="int" Mode="In" />
         </Function>
@@ -4137,6 +4150,17 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Parameter Name="UserId" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="vw_Notifications" EntityType="DomainModels.vw_Notifications" />
+          <FunctionImport Name="getCampaignByIdFormDataAnalytic" ReturnType="Collection(DomainModels.getCampaignByIdFormDataAnalytic_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getCampaignByIdQQFormAnalytic">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="coice" Mode="In" Type="Int32" />
+            <Parameter Name="gender" Mode="In" Type="Int32" />
+            <Parameter Name="ageRange" Mode="In" Type="Int32" />
+            <Parameter Name="Profession" Mode="In" Type="String" />
+            <Parameter Name="city" Mode="In" Type="String" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -4260,6 +4284,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <NavigationProperty Name="Cities" Relationship="DomainModels.FK_City_Country" FromRole="Country" ToRole="City" />
           <Property Name="CurrencyID" Type="Int32" />
           <NavigationProperty Name="Currency" Relationship="DomainModels.FK_Country_Currency" FromRole="Country" ToRole="Currency" />
+          <Property Name="CountryPhoneCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Language">
           <Key>
@@ -5113,6 +5138,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="PassportNo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="Title" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="ProfileQuestionUserAnswers" Relationship="DomainModels.FK_ProfileQuestionUserAnswer_AspNetUsers" FromRole="User" ToRole="ProfileQuestionUserAnswer" />
+          <Property Name="Phone1CountryCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Type="DomainModels.User" Role="AspNetUser" Multiplicity="1">
@@ -7502,6 +7528,12 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="NotificationDetails" Type="String" MaxLength="219" FixedLength="false" Unicode="true" />
           <Property Name="PollTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
+        <ComplexType Name="getCampaignByIdFormDataAnalytic_Result">
+          <Property Type="String" Name="Question" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="answer" Nullable="true" MaxLength="500" />
+          <Property Type="Int64" Name="Id" Nullable="true" />
+          <Property Type="Int32" Name="typ" Nullable="false" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -7605,6 +7637,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="Countries">
             <EntityTypeMapping TypeName="DomainModels.Country">
               <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="CountryPhoneCode" ColumnName="CountryPhoneCode" />
                 <ScalarProperty Name="CurrencyID" ColumnName="CurrencyID" />
                 <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
                 <ScalarProperty Name="CountryName" ColumnName="CountryName" />
@@ -7978,6 +8011,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="DomainModels.User">
               <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Phone1CountryCode" ColumnName="Phone1CountryCode" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="PassportNo" ColumnName="PassportNo" />
                 <ScalarProperty Name="optMarketingEmails" ColumnName="optMarketingEmails" />
@@ -9494,6 +9528,17 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="getCampaignByIdFormDataAnalytic" FunctionName="SMDModel.Store.getCampaignByIdFormDataAnalytic">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.getCampaignByIdFormDataAnalytic_Result">
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="answer" ColumnName="answer" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="typ" ColumnName="typ" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getCampaignByIdQQFormAnalytic" FunctionName="SMDModel.Store.getCampaignByIdQQFormAnalytic" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

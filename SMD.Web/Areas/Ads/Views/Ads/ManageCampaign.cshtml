@@ -28,7 +28,8 @@ else
                 <div class="col-lg-3" style="padding-left:0px;padding-right:10px;">
                     @*<div style="margin-top:-5px;float:right;background:url(/Content/Images/Close_Button.png);background-repeat: no-repeat;width:40px;height:40px;border: 0;"><button style="margin-top:9px;" id="MainBtnClose" data-bind="click: $root.closeNewCampaignDialog" class="btn btn-default CloseBtn">Close</button></div>*@
 
-                    <img data-bind="click: $root.closeNewCampaignDialog" src="/Content/Images/Close_Button.png" style="width:20px;height:20px;float:right;cursor:pointer;margin-top:17px;" />
+                    <img data-bind="click: $root.closeNewCampaignDialog,visible:$root.isflageClose()==false" src="/Content/Images/Close_Button.png" style="width:20px;height:20px;float:right;cursor:pointer;margin-top:17px;" />
+                    <img data-bind="click: $root.CloseCampaignADAnalyticView,visible:$root.isflageClose()==true" id="imgclose" src="/Content/Images/Close_Button.png" style="width:20px;height:20px;float:right;cursor:pointer;margin-top:17px;" />
 
                     <div style="clear:both;"></div>
                 </div>
@@ -717,10 +718,10 @@ else
                                             </div>
                                         </div>
                                         <div class="form-group margin-btm26">
-                                            <div class="col-lg-2">
+                                            <div class="col-lg-2" style="display:none">
                                                 <label for="txtLanguages" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Profession</label>
                                             </div>
-                                            <div class="col-lg-7">
+                                            <div class="col-lg-7" style="display:none">
                                                 <div>
                                                     <div id="lang_token_cnt">
                                                         <!-- ko template: { name: 'AdCampaignIndustryTemplate' , foreach: AdCampaignTargetCriterias } -->
@@ -796,7 +797,7 @@ else
                                                     <button class="btn  btn-danger btnAdsCampaign ButtonWidth filterbtnclrs" id="" data-toggle="modal" data-bind="click:$root.showAdditionUserSurveyCriteria,enable:$root.isClickRateVisible()!=true" data-target=".bs-example-modal-lg">My poll results</button>
                                                 </div>
 
-                                                <div class="pull-left filtersDiv_width">
+                                                <div class="pull-left filtersDiv_width" style="display:none">
                                                     <button class="btn  btn-danger btnAdsCampaign ButtonWidth filterbtnclrs" id="" data-toggle="modal" data-bind="click:$root.showAdditionalSurveyQuestions,enable:$root.isClickRateVisible()!=true" data-target=".bs-example-modal-lg">My survey results</button>
                                                 </div>
                                                 <div class="clearfix">

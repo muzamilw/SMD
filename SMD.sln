@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMD.Repository", "Repository\SMD.Repository.csproj", "{852BDC39-3388-4CB1-A959-F3BD06E9DF92}"
 EndProject
@@ -16,6 +16,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMD.ExceptionHandling", "ExceptionHandling\SMD.ExceptionHandling.csproj", "{5A6ACD2D-0701-4E38-99B7-65CC4E6CB8E8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3AD62C55-B413-47D5-83DF-7CCD3B40AFC5}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMD.MIS", "SMD.Web\SMD.MIS.csproj", "{426080DD-D8CB-49F2-9645-DFD962ADFFDF}"
 EndProject
@@ -28,6 +31,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainModelProject", "DomainModelProject\DomainModelProject.csproj", "{87FEE8D6-72C2-4B47-95FE-A563B7F659F9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrowdCentz", "CrowdCentz\CrowdCentz.csproj", "{87D005DE-8C0B-41AF-828B-9A2FF223E2AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoadTester", "LoadTester\LoadTester.csproj", "{C42186C5-12DB-4E62-BCF3-AD55166B7CAB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,6 +110,12 @@ Global
 		{87D005DE-8C0B-41AF-828B-9A2FF223E2AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87D005DE-8C0B-41AF-828B-9A2FF223E2AB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{87D005DE-8C0B-41AF-828B-9A2FF223E2AB}.Release|x86.ActiveCfg = Release|Any CPU
+		{C42186C5-12DB-4E62-BCF3-AD55166B7CAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C42186C5-12DB-4E62-BCF3-AD55166B7CAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C42186C5-12DB-4E62-BCF3-AD55166B7CAB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C42186C5-12DB-4E62-BCF3-AD55166B7CAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C42186C5-12DB-4E62-BCF3-AD55166B7CAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C42186C5-12DB-4E62-BCF3-AD55166B7CAB}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -57,7 +57,8 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                        AuthenticationToken = source.AuthenticationToken,
                        Password = source.PasswordHash,
                        RoleId = source.Roles.Select(c => c.Id).FirstOrDefault(),
-                       VoucherSecretKey = source.Company.VoucherSecretKey
+                       VoucherSecretKey = source.Company.VoucherSecretKey,
+                       Phone1CountryCode = source.Phone1CountryCode
                    };
 
             return user;
@@ -69,7 +70,7 @@ namespace SMD.MIS.Areas.Api.ModelMappers
 
             bool isProfilecomplete = true;
 
-            if (source.IndustryId.HasValue == false || source.DOB.HasValue == false || source.Title == "" || source.Title == null || source.Phone1 == null || source.Phone1 == "")
+            if (source.IndustryId.HasValue == false || source.DOB.HasValue == false || source.Title == "" || source.Title == null )//|| source.Phone1 == null || source.Phone1 == "")
             {
                 isProfilecomplete = false;
             }
@@ -97,7 +98,8 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                 ImageUrl = !string.IsNullOrEmpty(source.Company.Logo) ? HttpContext.Current.Request.Url.Scheme + "://" +
                 HttpContext.Current.Request.Url.Host + "/" + source.ProfileImage + "?" + DateTime.Now : string.Empty,
                 Title = source.Title == null ? "": source.Title,
-                ProfileComplete = isProfilecomplete
+                ProfileComplete = isProfilecomplete,
+                Phone1CountryCode = string.IsNullOrEmpty(source.Phone1CountryCode) ? "" : source.Phone1CountryCode,
                
             };
 

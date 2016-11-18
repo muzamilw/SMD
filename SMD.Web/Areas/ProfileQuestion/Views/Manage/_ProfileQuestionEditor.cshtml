@@ -19,7 +19,8 @@
                     <div class="col-xs-12" style="text-align: right; padding-right:16px;margin-bottom:10px;">
                         <button style="display:none;" class="btn  btn-info" id="saveBtn" data-bind="click:$root.onSaveProfileQuestion, enable: $root.hasChangesOnQuestion, css: { 'btn-warning': $root.hasChangesOnQuestion }">Save</button>
 
-                        <img data-bind="click: $root.closeEditDialog" src="/Content/Images/Close_Button.png" style="width:20px;height:20px;float:right;cursor:pointer;">
+                        <img data-bind="click: $root.closeEditDialog,visible:$root.isflageClose()==false" src="/Content/Images/Close_Button.png" style="width:20px;height:20px;float:right;cursor:pointer;">
+                        <img data-bind="click: $root.CloseSurvayAnalyticView,visible:$root.isflageClose()==true" id="image2" src="/Content/Images/Close_Button.png" style="width:20px;height:20px;float:right;cursor:pointer;">
                     </div>
                 </div>
             </div>
@@ -815,10 +816,10 @@
                                     </div>
                                 </div>
                                 <div class="form-group margin-btm26">
-                                    <div class="col-lg-2">
+                                    <div class="col-lg-2" style="display:none">
                                         <label for="txtLanguages" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Profession</label>
                                     </div>
-                                    <div class="col-lg-7">
+                                    <div class="col-lg-7" style="display:none">
                                         <div>
                                             <div id="lang_token_cnt">
                                                 <!-- ko template: { name: 'ProfileQuestionIndustryTemplate' , foreach: ProfileQuestionTargetCriteria } -->
@@ -885,7 +886,7 @@
                                         <div class="pull-left filtersDiv_width">
                                             <button class="btn  btn-danger btnAdsCampaign ButtonWidth filterbtnclrs" id="" data-toggle="modal" data-bind="click:$root.showAdditionUserSurveyCriteria" data-target=".bs-example-modal-lg">My poll results</button>
                                         </div>
-                                        <div class="pull-left filtersDiv_width">
+                                        <div class="pull-left filtersDiv_width" style="display:none">
                                             <button class="btn  btn-danger btnAdsCampaign ButtonWidth filterbtnclrs" id="" data-toggle="modal" data-bind="click:$root.showAdditionalSurveyQuestions" data-target=".bs-example-modal-lg">My survey results</button>
                                         </div>
                                         <div class="clearfix">
@@ -966,7 +967,7 @@
                                         <input id="Ranges" type="range" min="0"
                                                oninput="showVal(this.value)" data-bind="attr:{max:$root.reachedAudience,value:$root.reachedAudience},visible:$root.IsnewSurveyQuestion()==true" onchange="showVal(this.value)">
 
-                                        <input id="Ranges" type="range" min="0" value="1"
+                                            <input id="Ranges" type="range" min="0" 
                                                oninput="showVal(this.value)" data-bind="attr:{max:$root.reachedAudience,value:$root.EditPrice},visible:$root.IsnewSurveyQuestion()==false" onchange="showVal(this.value)">
 
                                     </div>
