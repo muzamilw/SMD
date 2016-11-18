@@ -108,6 +108,7 @@ define("ads/ads.viewModel",
                 isDetailEditorVisible = ko.observable(false),
                 isNewCampaign = ko.observable(false),
                 isFromEdit = ko.observable(false),
+                isflageClose = ko.observable(false),
                 //audience reach
                 reachedAudience = ko.observable(0),
                 //total audience
@@ -190,6 +191,7 @@ define("ads/ads.viewModel",
 				openAdvertiserDashboardScreen = function (Campaign) {
 				 
 				    if (!isNewCampaign()) {
+				        isflageClose(true);
 				        selectedCampaignIdAnalytics(Campaign.CampaignID());
 				        getAdsByCampaignIdAnalytics();
 				        getFormAnalytic();
@@ -291,7 +293,8 @@ define("ads/ads.viewModel",
 				    isAdvertdashboardVisible(false);
 				    CampaignRatioAnalyticData(1);
 					selecteddateRangeAnalytics(1);
-						selectedGranularityAnalytics(1);
+					selectedGranularityAnalytics(1);
+					isflageClose(false);
 				},
 
                 // End Advertiser dashBoard Section
@@ -3573,7 +3576,8 @@ define("ads/ads.viewModel",
                     selectedQQAAnalytics: selectedQQAAnalytics,
                     selectedQQPAnalytics: selectedQQPAnalytics,
                     selectedQQCtAnalytics:selectedQQCtAnalytics,
-                    AgeRangeAnalyticsData: AgeRangeAnalyticsData
+                    AgeRangeAnalyticsData: AgeRangeAnalyticsData,
+                    isflageClose: isflageClose
                     
                 };
             })()

@@ -194,7 +194,7 @@ define("FranchiseDashboard/addApproval.viewModel",
                       ]),
                     // Reject buttoin handler 
                     onRejectCampaign = function () {
-                        confirmation.messageText("Do you want to Reject this video ad campaign ?");
+                        confirmation.messageText("Do you want to Reject this ad campaign ?");
                         confirmation.show();
                         confirmation.afterCancel(function () {
                             confirmation.hide();

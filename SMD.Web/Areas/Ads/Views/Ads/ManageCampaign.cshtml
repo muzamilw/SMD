@@ -28,7 +28,8 @@ else
                 <div class="col-lg-3" style="padding-left:0px;padding-right:10px;">
                     @*<div style="margin-top:-5px;float:right;background:url(/Content/Images/Close_Button.png);background-repeat: no-repeat;width:40px;height:40px;border: 0;"><button style="margin-top:9px;" id="MainBtnClose" data-bind="click: $root.closeNewCampaignDialog" class="btn btn-default CloseBtn">Close</button></div>*@
 
-                    <img data-bind="click: $root.closeNewCampaignDialog" src="/Content/Images/Close_Button.png" style="width:20px;height:20px;float:right;cursor:pointer;margin-top:17px;" />
+                    <img data-bind="click: $root.closeNewCampaignDialog,visible:$root.isflageClose()==false" src="/Content/Images/Close_Button.png" style="width:20px;height:20px;float:right;cursor:pointer;margin-top:17px;" />
+                    <img data-bind="click: $root.CloseCampaignADAnalyticView,visible:$root.isflageClose()==true" id="imgclose" src="/Content/Images/Close_Button.png" style="width:20px;height:20px;float:right;cursor:pointer;margin-top:17px;" />
 
                     <div style="clear:both;"></div>
                 </div>
