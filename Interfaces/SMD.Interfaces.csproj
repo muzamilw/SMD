@@ -91,7 +91,7 @@
     <Compile Include="Repository\IProfileQuestionTargetCriteriaRepository.cs" />
     <Compile Include="Repository\ISectionRepository.cs" />
     <Compile Include="Repository\IPhraseRepository.cs" />
-    <Compile Include="Repository\ICityService.cs" />
+    <Compile Include="Services\ICityService.cs" />
     <Compile Include="Repository\ICompanyRepository.cs" />
     <Compile Include="Repository\ICompanyAspNetUsersRepository.cs" />
     <Compile Include="Repository\ICouponCategoryRepository.cs" />
@@ -147,6 +147,7 @@
     <Compile Include="Services\IDashboardService.cs" />
     <Compile Include="Services\IEducationService.cs" />
     <Compile Include="Services\IEmailManagerService.cs" />
+    <Compile Include="Services\INotificationService.cs" />
     <Compile Include="Services\IIndustryService.cs" />
     <Compile Include="Services\IInvoiceDetailService.cs" />
     <Compile Include="Services\IInvoiceService.cs" />

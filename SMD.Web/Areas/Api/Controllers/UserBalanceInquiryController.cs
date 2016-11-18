@@ -19,6 +19,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         #region Private
 
         private readonly IWebApiUserService webApiUserService;
+        private readonly INotificationService notificationService;
 
         #endregion
 
@@ -27,7 +28,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Constructor
         /// </summary>
-        public UserBalanceInquiryController(IWebApiUserService webApiUserService)
+        public UserBalanceInquiryController(IWebApiUserService webApiUserService, INotificationService notificationService)
         {
             if (webApiUserService == null)
             {
@@ -35,6 +36,7 @@ namespace SMD.MIS.Areas.Api.Controllers
             }
 
             this.webApiUserService = webApiUserService;
+            this.notificationService = notificationService;
         }
 
         #endregion
@@ -59,6 +61,8 @@ namespace SMD.MIS.Areas.Api.Controllers
             LoginResponse response = await webApiUserService.GetById(request.UserId);
             var finalResponse =  response.CreateFromForBalance();
             finalResponse.ProfileCompleteness = webApiUserService.GetUserProfileCompletness(request.UserId);
+            finalResponse.HasUnredNotifications = notificationService.UserHasNotifications(request.UserId);
+
             return finalResponse;
 
 	        }

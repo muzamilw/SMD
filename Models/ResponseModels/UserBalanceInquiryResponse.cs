@@ -12,6 +12,8 @@ namespace SMD.Models.ResponseModels
         public double? Balance { get; set; }
 
         public double? ProfileCompleteness { get; set; }
+
+        public bool HasUnredNotifications { get; set; }
     }
     public class StatementInquiryResponse : BaseApiResponse
     {

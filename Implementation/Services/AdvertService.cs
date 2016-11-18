@@ -1362,5 +1362,6 @@ namespace SMD.Implementation.Services
         {
             return _adCampaignRepository.getCampaignROItblAnalytic(ID);
         }
+        
     }
 }

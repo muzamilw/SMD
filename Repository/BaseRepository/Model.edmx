@@ -1221,6 +1221,23 @@ warning 6002: The table/view 'SMDDev.dbo.vw_GetUserTransactions' does not have a
           <Property Name="VoucherTitle" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'SMDDev.dbo.vw_Notifications' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_Notifications">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="Type" Type="int" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="IsRead" Type="bit" />
+          <Property Name="GeneratedOn" Type="datetime" />
+          <Property Name="GeneratedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="SurveyQuestionShareId" Type="bigint" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="150" />
+          <Property Name="NotificationDetails" Type="nvarchar" MaxLength="219" />
+          <Property Name="PollTitle" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vw_PublisherTransaction">
           <Key>
@@ -2919,6 +2936,20 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
     [vw_GetUserTransactions].[VoucherTitle] AS [VoucherTitle]
     FROM [dbo].[vw_GetUserTransactions] AS [vw_GetUserTransactions]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="vw_Notifications" EntityType="Self.vw_Notifications" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_Notifications].[ID] AS [ID], 
+    [vw_Notifications].[Type] AS [Type], 
+    [vw_Notifications].[UserID] AS [UserID], 
+    [vw_Notifications].[IsRead] AS [IsRead], 
+    [vw_Notifications].[GeneratedOn] AS [GeneratedOn], 
+    [vw_Notifications].[GeneratedBy] AS [GeneratedBy], 
+    [vw_Notifications].[SurveyQuestionShareId] AS [SurveyQuestionShareId], 
+    [vw_Notifications].[PhoneNumber] AS [PhoneNumber], 
+    [vw_Notifications].[NotificationDetails] AS [NotificationDetails], 
+    [vw_Notifications].[PollTitle] AS [PollTitle]
+    FROM [dbo].[vw_Notifications] AS [vw_Notifications]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vw_PublisherTransaction" EntityType="Self.vw_PublisherTransaction" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vw_PublisherTransaction].[tid] AS [tid], 
@@ -4105,6 +4136,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <FunctionImport Name="GetSharedSurveyQuestionsByUserId" ReturnType="Collection(DomainModels.GetSharedSurveyQuestionsByUserId_Result)">
           <Parameter Name="UserId" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="vw_Notifications" EntityType="DomainModels.vw_Notifications" />
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -7455,6 +7487,21 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="Int32" Name="LeftAnswerPerc" Nullable="true" />
           <Property Type="Int32" Name="RightAnswerPerc" Nullable="true" />
         </ComplexType>
+        <EntityType Name="vw_Notifications">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="Type" Type="Int32" />
+          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IsRead" Type="Boolean" />
+          <Property Name="GeneratedOn" Type="DateTime" Precision="3" />
+          <Property Name="GeneratedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="SurveyQuestionShareId" Type="Int64" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="NotificationDetails" Type="String" MaxLength="219" FixedLength="false" Unicode="true" />
+          <Property Name="PollTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -9431,6 +9478,22 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="vw_Notifications">
+            <EntityTypeMapping TypeName="DomainModels.vw_Notifications">
+              <MappingFragment StoreEntitySet="vw_Notifications">
+                <ScalarProperty Name="PollTitle" ColumnName="PollTitle" />
+                <ScalarProperty Name="NotificationDetails" ColumnName="NotificationDetails" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SurveyQuestionShareId" ColumnName="SurveyQuestionShareId" />
+                <ScalarProperty Name="GeneratedBy" ColumnName="GeneratedBy" />
+                <ScalarProperty Name="GeneratedOn" ColumnName="GeneratedOn" />
+                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

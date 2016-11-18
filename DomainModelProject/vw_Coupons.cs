@@ -97,5 +97,6 @@ namespace DomainModelProject
         public Nullable<bool> IsShowMap { get; set; }
         public Nullable<bool> IsShowyouTube { get; set; }
         public Nullable<bool> IsShowAboutUs { get; set; }
+        public Nullable<bool> IsMarketingStories { get; set; }
     }
 }

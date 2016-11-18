@@ -57,7 +57,7 @@ namespace SMD.MIS.Areas.Api.Controllers
 
 
         /// <summary>
-        /// create group
+        /// create Question
         /// </summary>
         public SharedSurveyQuestionResponse Put(string authenticationToken, SharedSurveyQuestionRequestApiModel surveyQuestion)
         {
@@ -82,6 +82,29 @@ namespace SMD.MIS.Areas.Api.Controllers
             }
         }
 
+
+        public BaseApiResponse Post(string authenticationToken, long SurveyQuestionShareId, int UserSelection)
+        {
+            try
+            {
+                if (sharedSurveyQuestionService.updateUserSharedSurveyQuestionResponse(SurveyQuestionShareId, UserSelection) == true)
+                {
+                    return new BaseApiResponse { Message = "Success", Status = true };
+                }
+                else
+                {
+                    return new BaseApiResponse { Message = "Failure", Status = false };
+                }
+
+
+            }
+            catch (Exception e)
+            {
+
+                return new BaseApiResponse { Message = e.ToString(), Status = false };
+            }
+        }
+        
 
 
         /// <summary>

@@ -384,10 +384,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SecurityConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Api\Controllers\NotificationsController.cs" />
     <Compile Include="Areas\Api\Controllers\CouponAnalyticsController.cs" />
     <Compile Include="Areas\Api\Controllers\ApprovePayOutHistoryController.cs" />
     <Compile Include="Areas\Api\Controllers\CouponCountController.cs" />
     <Compile Include="Areas\Api\Controllers\MarketingDealsController.cs" />
+    <Compile Include="Areas\Api\Controllers\FormAnalyticController.cs" />
     <Compile Include="Areas\Api\Controllers\SharedSurveyQuestionController.cs" />
     <Compile Include="Areas\Api\Controllers\StripeSubscribeCustomerController.cs" />
     <Compile Include="Areas\Api\Controllers\GetApprovalCountController.cs" />
@@ -434,6 +436,7 @@
     <Compile Include="Areas\Api\Models\CouponsApproval.cs" />
     <Compile Include="Areas\Api\Models\CurrencyApprov.cs" />
     <Compile Include="Areas\Api\Models\DealByCouponIdForAnalyticsResponse.cs" />
+    <Compile Include="Areas\Api\Models\FormAnalyticResponseModel.cs" />
     <Compile Include="Areas\Api\Models\GetApprovalCount_Result.cs" />
     <Compile Include="Areas\Api\Models\SharedSurveyQuestionResponse.cs" />
     <Compile Include="Areas\Api\Models\SharedSurveyQuestionApiModel.cs" />

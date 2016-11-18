@@ -174,15 +174,33 @@ define("ads/ads.viewModel",
 				DateRangeDropDown = ko.observableArray([{ id: 1, name: "Last 30 days" }, { id: 2, name: "All Time" }]),
 				CampaignStatusDropDown = ko.observableArray([{ id: 1, name: "Answered" }, { id: 2, name: "Referred" }, { id: 3, name: "Skipped" }]),
 				CampaignTblAnalyticsData = ko.observableArray([]),
+                CitiesAnalyticsData = ko.observableArray([]),
+                ProfessionAnalyticsData = ko.observableArray([]),
+                QQChoicesAnalyticsData = ko.observableArray([]),
+
+                GenderAnalyticsData = ko.observableArray([{ id: 0, name: "All" }, { id: 1, name: "male" }, { id: 2, name: "female" } ]),
+                AgeRangeAnalyticsData = ko.observableArray([{ id: 0, name: "All" }, { id: 1, name: "10-20" }, { id: 2, name: "20-30" }, { id: 3, name: "30-40" }, { id: 4, name: "40-50" }, { id: 5, name: "50-60" }, { id: 6, name: "60-70" }, { id: 7, name: "70-80" }, { id: 8, name: "80-90" }, { id: 9, name: "90+" }]),
+                
+                QuizQuestionAnalyticData = ko.observable(),
+                selectedQQGAnalytics = ko.observable(0),
+                selectedQQCAnalytics = ko.observable(0),
+                selectedQQCtAnalytics = ko.observable(0),
+                selectedQQAAnalytics = ko.observable(0),
+                selectedQQPAnalytics = ko.observable("All"),
 				openAdvertiserDashboardScreen = function (Campaign) {
 				 
 				    if (!isNewCampaign()) {
 				        selectedCampaignIdAnalytics(Campaign.CampaignID());
 				        getAdsByCampaignIdAnalytics();
+				        getFormAnalytic();
 				        $("#ddGranularityDropDown").removeAttr("disabled");
 				        $("#ddDateRangeDropDown").removeAttr("disabled");
 				        $("#ddCampaignStatusDropDown").removeAttr("disabled");
-
+				        $("#ddQQCDropDown").removeAttr("disabled");
+				        $("#ddQQGDropDown").removeAttr("disabled");
+				        $("#ddQQADropDown").removeAttr("disabled");
+				        $("#ddQQPDropDown").removeAttr("disabled");
+				        $("#ddQQCtDropDown").removeAttr("disabled");
 
 				        isAdvertdashboardVisible(true);
 				    }
@@ -191,6 +209,55 @@ define("ads/ads.viewModel",
 
 				    }
 				},
+                getQQAnalytic = function () {
+                    dataservice.getQQAnalytic({
+                        Id: selectedCampaignIdAnalytics(),
+                        choice: selectedQQCAnalytics(),
+                        gender: selectedQQGAnalytics(),
+                        city : selectedQQCtAnalytics(),
+                        age :  selectedQQAAnalytics(),
+                        profession: selectedQQPAnalytics()
+                    }, {
+                        success: function (data) {
+                            if (data != null) {
+                                
+
+                            }
+
+                        },
+                        error: function (response) {
+
+                        }
+                    });
+
+
+                },
+                getFormAnalytic = function () {
+                    dataservice.getFormAnalytic({
+                        Id: selectedCampaignIdAnalytics(),
+                    }, {
+                        success: function (data) {
+                            if (data != null) {
+                                CitiesAnalyticsData.removeAll();
+                                ko.utils.arrayPushAll(CitiesAnalyticsData(), data.Cities);
+                                CitiesAnalyticsData.valueHasMutated();
+                                ProfessionAnalyticsData.removeAll();
+                                ko.utils.arrayPushAll(ProfessionAnalyticsData(), data.Profession);
+                                ProfessionAnalyticsData.valueHasMutated();
+                                QuizQuestionAnalyticData(data.Question);
+                                QQChoicesAnalyticsData.removeAll();
+                                ko.utils.arrayPushAll(QQChoicesAnalyticsData(), data.Choices);
+                                QQChoicesAnalyticsData.valueHasMutated();
+                                
+                            }
+
+                        },
+                        error: function (response) {
+
+                        }
+                    });
+
+                },
 				getAdsByCampaignIdAnalytics = function () {
 				    dataservice.getAdsByCampaignIdAnalytics({
 				        compaignId: selectedCampaignIdAnalytics(),
@@ -787,7 +854,7 @@ define("ads/ads.viewModel",
                 //    toastr.error("Please fill the required feilds to continue.");
                 //}
             },
-                 ValidateCampaign = function (mode) {
+                ValidateCampaign = function (mode) {
 
                      errorListNew.removeAll();
 
@@ -1345,9 +1412,6 @@ define("ads/ads.viewModel",
                      $(".close").click();
                      isShowSurveyAns(false);
                  },
-
-
-
 
                 onEditCriteria = function (item) {
 
@@ -3496,7 +3560,21 @@ define("ads/ads.viewModel",
                     IsvideoBtn: IsvideoBtn,
                     IsGameAds: IsGameAds,
                     CampaignHeader: CampaignHeader,
-                    IsthisEditCamapiagn:IsthisEditCamapiagn
+                    IsthisEditCamapiagn: IsthisEditCamapiagn,
+                    ProfessionAnalyticsData: ProfessionAnalyticsData,
+                    getFormAnalytic: getFormAnalytic,
+                    CitiesAnalyticsData: CitiesAnalyticsData,
+                    QuizQuestionAnalyticData: QuizQuestionAnalyticData,
+                    QQChoicesAnalyticsData: QQChoicesAnalyticsData,
+                    getQQAnalytic:getQQAnalytic,
+                    GenderAnalyticsData:GenderAnalyticsData,
+                    selectedQQCAnalytics: selectedQQCAnalytics,
+                    selectedQQGAnalytics: selectedQQGAnalytics,
+                    selectedQQAAnalytics: selectedQQAAnalytics,
+                    selectedQQPAnalytics: selectedQQPAnalytics,
+                    selectedQQCtAnalytics:selectedQQCtAnalytics,
+                    AgeRangeAnalyticsData: AgeRangeAnalyticsData
+                    
                 };
             })()
         };

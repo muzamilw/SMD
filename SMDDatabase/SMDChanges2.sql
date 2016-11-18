@@ -3023,3 +3023,30 @@ COMMIT
 
 
 
+
+
+
+
+
+GO
+
+/****** Object:  View [dbo].[vw_Notifications]    Script Date: 11/17/2016 9:48:12 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+-- select * from [vw_Notifications]
+alter VIEW [dbo].[vw_Notifications]
+AS
+SELECT        n.ID, Type, n.UserID, IsRead, GeneratedOn, GeneratedBy, n.SurveyQuestionShareId, n.PhoneNumber,
+				(case when n.[type] = 1 then u.FullName +  ' wants your opinion' else '' end) NotificationDetails,
+				(case when n.[type] = 1 then q.SurveyTitle else '' end) PollTitle
+FROM            dbo.Notifications n
+			left outer join SurveySharingGroupShares s on n.SurveyQuestionShareId = s.SurveyQuestionShareId
+			left outer join SharedSurveyQuestion q on q.SSQID = s.SSQID
+			left outer join AspNetUsers u on q.UserId = u.Id
+
+GO
+
+

@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
-using SMD.Interfaces.Repository;
+
 using SMD.Models.DomainModels;
+using SMD.Interfaces.Services;
+using SMD.Interfaces.Repository;
 
 namespace SMD.Implementation.Services
 {
@@ -31,6 +33,10 @@ namespace SMD.Implementation.Services
         public IEnumerable<City> GetCitiesByCountryId(long countryId)
         {
             return cityRepository.GetAllCitiesOfCountry(countryId);
+        }
+        public IEnumerable<City> GetCities()
+        {
+            return cityRepository.GetCities();
         }
         #endregion
     }
