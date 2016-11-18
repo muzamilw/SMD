@@ -10,23 +10,114 @@ define("common/dashboardGraphAnalytics.viewModel",
                 var view,
                      // Current User
                      Deals = ko.observable(),
+
                      ProfileQuestion = ko.observable(),
                      AdCampaign = ko.observable(0),
+                     Draftlist = ko.observableArray([]),
+                     currentDraft = ko.observable(),
+                     LiveList = ko.observableArray([]),
+                     PauseList = ko.observableArray([]),
+                     ApprovalList = ko.observableArray([]),
+                     AnalyticsList = ko.observableArray([]),
+
+                     LiveVidCampaign = ko.observable(0),
+                     LiveDisplayCampaign = ko.observable(0),
+                     LiveCoupons = ko.observable(0),
+                     LivePolls = ko.observable(0),
+
                      getBaseData = function ()
                      {
-                         dataService.getBaseData(null, {
+                         //dataService.getBaseData(null, {
 
+                         //    success: function (data) {
+                                
+                         //        _.each(data.AnalyticsList, function (item, index) {
+                                     
+                        
+                                    
+                         //            AnalyticsList.push(CreateGraph(model.EntityServertoClientMapper(updateStatusValue(item, index)), index));
+                         //        });
+                                 
+                         //    },
+                         //    error: function () {
+                         //    }
+                         //});
+
+
+                         dataService.GetCounters(null, {
+                             
                              success: function (data) {
-                                 Deals(model.EntityServertoClientMapper(updateStatusValue(data.Deals)));
-                                 ProfileQuestion(model.EntityServertoClientMapper(updateStatusValue(data.ProfileQuestion)));
-                                 AdCampaign(model.EntityServertoClientMapper(updateStatusValue(data.VideoCampaign)));
+                                 
+                                 LiveVidCampaign(data.LiveVideoCampaign);
+                                 LiveDisplayCampaign(data.LiveDisplayCampaign);
+                                 LiveCoupons(data.LiveDeals);
+                                 LivePolls(data.LivePolls);
+
                              },
                              error: function () {
                              }
                          });
-
                      },
-                      updateStatusValue = function (item) {
+                     CreateGraph = function (data,index)
+                     {
+                        
+                         var gdata = [];
+
+                         if (data.PQID  > 0)
+                         {
+                             var serial1 = new Array(data.Option1, data.Option1Percentage);
+                             gdata.push(serial1);
+                             var serial2 = new Array(data.Option2, data.Option2Percentage);
+                             gdata.push(serial2);
+                             var serial3 = new Array(data.Option3, data.Option3Percentage);
+                             gdata.push(serial3);
+                             var serial4 = new Array(data.Option4, data.Option4Percentage);
+                             gdata.push(serial4);
+                             var serial5 = new Array(data.Option5, data.Option5Percentage);
+                             gdata.push(serial5);
+                             var serial6 = new Array(data.Option6, data.Option6Percentage);
+                             gdata.push(serial6);
+                             data.DivId='Pq'+index;
+
+                             //var chart = new Highcharts.Chart({
+
+                             //    chart: {
+                             //        renderTo:'abc',   //Target Div for chart
+                             //        defaultSeriesType: 'pie'
+                             //    },
+
+                             //    series: [{
+                             //        data: gdata   //Binding json data to chart
+                             //    }]
+                             //});
+                         }
+                         else if (data.CampaignID > 0)
+                         {
+                             var serial1 = new Array(data.Answer1, data.Ans1Percentage);
+                             gdata.push(serial1);
+                             var serial2 = new Array(data.Answer2, data.Ans2Percentage);
+                             gdata.push(serial2);
+                             var serial3 = new Array(data.Answer3, data.Ans3Percentage);
+                             gdata.push(serial3);
+                             data.DivId='camp'+index;
+
+                             //var chart = new Highcharts.Chart({
+
+                             //    chart: {
+                             //        renderTo: data.DivId,   //Target Div for chart
+                             //        defaultSeriesType: 'pie'
+                             //    },
+
+                             //    series: [{
+                             //        data: gdata   //Binding json data to chart
+                             //    }]
+                             //});
+                         }
+
+                         return data;
+                     },
+
+                      updateStatusValue = function (item,index) {
 
                           if (item.Status == 1) {
                               item.StatusValue = "Draft";
@@ -101,7 +192,7 @@ define("common/dashboardGraphAnalytics.viewModel",
                               }
                               item.StatusValue = ("Archived");
                           }
-                          return item;
+                          return CreateGraph(item, index)
                       },
 
                     initialize = function (specifiedView) {
@@ -115,7 +206,16 @@ define("common/dashboardGraphAnalytics.viewModel",
                     initialize: initialize,
                     Deals: Deals,
                     ProfileQuestion: ProfileQuestion,
-                    AdCampaign: AdCampaign
+                    AdCampaign: AdCampaign,
+                    Draftlist: Draftlist,
+                    ApprovalList:ApprovalList,
+                    PauseList:PauseList,
+                    LiveList: LiveList,
+                    AnalyticsList: AnalyticsList,
+                    LiveVidCampaign:LiveVidCampaign,
+                    LiveDisplayCampaign:LiveDisplayCampaign,
+                    LiveCoupons:LiveCoupons,
+                    LivePolls: LivePolls
                 };
             })()
         };

@@ -10,8 +10,6 @@ define("common/dashboardGraphAnalytics.dataService", function () {
             // Initialize
             initialize = function () {
                
-
-
                 if (!isInitialized) {
 
                     isInitialized = true;
@@ -21,9 +19,29 @@ define("common/dashboardGraphAnalytics.dataService", function () {
                         type: 'GET'
                     });
                  
+
+                    amplify.request.define('GetCounters', 'ajax', {
+                        url: '/Api/DashboardStatusCounter',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
                 }
             };
 
+        
+                
+
+
+
+        GetCounters = function (params, callbacks) {
+            initialize();
+            return amplify.request({
+                resourceId: 'GetCounters',
+                data: params,
+                success: callbacks.success,
+                error: callbacks.error,
+            });
+        };
         getBaseData = function (params, callbacks) {
             initialize();
             return amplify.request({
@@ -34,8 +52,8 @@ define("common/dashboardGraphAnalytics.dataService", function () {
             });
         };
         return {
-            
-            getBaseData:getBaseData
+            getBaseData: getBaseData,
+            GetCounters: GetCounters
         };
     })();
     return dataService;

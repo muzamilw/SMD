@@ -20,42 +20,27 @@ namespace SMD.MIS.Areas.Api
         public ChartsObject GetChartsData()
         {
 
-            ChartsObject RetrunObj=new ChartsObject();
+            ChartsObject RetrunObj = new ChartsObject();
 
-            string UserId="b2f0532a-4c8a-431a-85dc-c4af0c1a2b93";
-
-         
-
-         foreach (var obj in _companyService.GetDashboardAnalytics(UserId))
-            {
-               if(obj.CampaignID!=null&&obj.CampaignID > 0)
-               {
-                   RetrunObj.VideoCampaign = obj;
-               }
-               else if(obj.CouponID!=null&&obj.CouponID > 0)
-               {
-                  RetrunObj.Deals=obj;
-               }
-               else if(obj.PQID!=null&&obj.PQID > 0)
-               {
-                 RetrunObj.ProfileQuestion=obj;
-               }
-            }
+            //string UserId = "b2f0532a-4c8a-431a-85dc-c4af0c1a2b93";
+            //RetrunObj.AnalyticsList = _companyService.GetDashboardAnalytics(UserId).ToList();
+          
             return RetrunObj;
+            
         }
+        public class ChartsObject
+        {
+            //public  Dashboard_analytics_Result Deals;
 
-    }
-    public class ChartsObject
-    {
-         public  Dashboard_analytics_Result Deals;
+            //public  Dashboard_analytics_Result VideoCampaign;
 
-         public  Dashboard_analytics_Result VideoCampaign;
+            //public  Dashboard_analytics_Result ProfileQuestion;
 
-         public  Dashboard_analytics_Result ProfileQuestion;
-
-         public List<Dashboard_analytics_Result> DraftList;
-         public List<Dashboard_analytics_Result> LiveList;
-         public List<Dashboard_analytics_Result> PendingApprList;
-         public List<Dashboard_analytics_Result> PauseApprList;
+            //public List<Dashboard_analytics_Result> DraftList;
+            //public List<Dashboard_analytics_Result> LiveList;
+            //public List<Dashboard_analytics_Result> PendingApprList;
+            //public List<Dashboard_analytics_Result> PauseApprList;
+            public List<Dashboard_analytics_Result> AnalyticsList;
+        }
     }
 }

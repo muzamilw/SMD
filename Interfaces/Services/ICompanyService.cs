@@ -11,6 +11,7 @@ namespace SMD.Interfaces.Services
 {
     public interface ICompanyService
     {
+        Dictionary<string, int> GetStatusesCounters();
         int GetUserCompany(string userId);
         int createCompany(string userId, string email, string fullName, string guid);
 

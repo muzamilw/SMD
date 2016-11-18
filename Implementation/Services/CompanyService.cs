@@ -367,6 +367,12 @@ namespace SMD.Implementation.Services
         {
            return  companyRepository.GetDashboardAnalytics(UserID);
         }
+        public Dictionary<string, int> GetStatusesCounters()
+        {
+            return companyRepository.GetStatusesCounters();
+        
+        }
+
         #endregion
     }
 }

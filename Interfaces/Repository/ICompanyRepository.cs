@@ -29,5 +29,6 @@ namespace SMD.Interfaces.Repository
         Boolean UpdateCompanyStatus(int status, string userId, string comments, int companyId);
 
         Company GetCompanyByStripeCustomerId(string StripeCustomerId);
+        Dictionary<string, int> GetStatusesCounters();
     }
 }

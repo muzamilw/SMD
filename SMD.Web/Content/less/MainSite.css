@@ -1108,14 +1108,14 @@ div#spinner {
 }
 .graph_panels {
     background-color: #f9f9f9;
-    height: 480px;
+    height: auto;
     margin: 10px;
     width: 265px;
     padding:9px;
 }
 .graphParent_div {
     padding:6px;
-    height:600px;
+    height:auto;
 }
 .btnpanels {
     padding: 3px;
@@ -1133,7 +1133,7 @@ div#spinner {
     width:100%;
     margin-top:5px;
     background-color:#e4e0e0;
-    height:262px;
+    height:auto;
     padding: 10px;
 }
 .gheader {
@@ -1141,6 +1141,30 @@ div#spinner {
     font-size: 16px;
     color: black;
     
+}
+
+.couters_left {
+    color:white;
+    font-size:15px;
+    padding-left:14px;
+}
+.cnt_left_width {
+    width:122px;
+}
+
+.couters_Right {
+       
+      color: white;
+    font-size: 15px;
+    
+    text-align: right;
+    padding-right: 16px;
+}
+.cnt_right_right {
+    width:80px;
+}
+.margintop8px {
+    margin-top:8px;
 }
 .gwhitepanels {
      background: #FFFFFF;
@@ -1152,8 +1176,11 @@ div#spinner {
     -moz-border-radius: 3px;
     border-radius: 3px;
     margin-top: 5px;
-    height:322px;
+    height:auto;
     padding:10px;
+}
+.bluebck {
+   background-color:#0f6aa5!important;
 }
 .width180px {
     width:180px;

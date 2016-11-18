@@ -387,6 +387,7 @@
     <Compile Include="Areas\Api\Controllers\CouponAnalyticsController.cs" />
     <Compile Include="Areas\Api\Controllers\ApprovePayOutHistoryController.cs" />
     <Compile Include="Areas\Api\Controllers\CouponCountController.cs" />
+    <Compile Include="Areas\Api\Controllers\DashboardStatusCounterController.cs" />
     <Compile Include="Areas\Api\Controllers\SharedSurveyQuestionController.cs" />
     <Compile Include="Areas\Api\Controllers\StripeSubscribeCustomerController.cs" />
     <Compile Include="Areas\Api\Controllers\GetApprovalCountController.cs" />
@@ -801,6 +802,7 @@
     <Content Include="Content\CSS\jquery-Slider.css" />
     <Content Include="Content\CSS\jquery.tokenize.css" />
     <Content Include="Content\CSS\main.css" />
+    <Content Include="Content\CSS\Slider.css" />
     <Content Include="Content\CSS\spectrum.css" />
     <Content Include="Content\CSS\supr-theme\images\ui-bg_diagonals-small_100_f4f4f4_40x40.png" />
     <Content Include="Content\CSS\supr-theme\images\ui-bg_dots-small_75_dedede_2x2.png" />
@@ -848,6 +850,10 @@
     <Content Include="Content\DAM\Preloader_3.gif" />
     <Content Include="Content\DAM\utils.js" />
     <Content Include="Content\DAM\zoomer.js" />
+    <Content Include="Content\DashBannnerImages\Banner_1_deals.jpg" />
+    <Content Include="Content\DashBannnerImages\Banner_2_Videos.jpg" />
+    <Content Include="Content\DashBannnerImages\Banner_3_Games.jpg" />
+    <Content Include="Content\DashBannnerImages\Banner_4_Polls.jpg" />
     <Content Include="Content\Images\5_Main_4.png" />
     <Content Include="Content\Images\a5485b563efc4511e0cd8bd04ad0fe9e.png" />
     <Content Include="Content\Images\AD_Campaign_mobileStencil.png" />
