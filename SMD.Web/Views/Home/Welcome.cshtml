@@ -4,274 +4,839 @@
 
 <div class="row">
     <div class="row" id="dashboardBindingRoot" style="z-index:0;">
-        <div class="row">
+        @*<div class="row">
             <div class="col-lg-12">
                 <br />
                 <span class="home_pagefontsize" style="padding-left:7px!important;"><span style="font-size:24px!important;color:#fff!important;">Manage Campaigns - </span><span class="fontitalic">Click on a campaign to view Analytics, Graphs and to modify.</span></span>
             </div>
-        </div>
-        <div class="col-lg-12">
-            <div class="row" style="display:none;">
-                <div class="col-md-12">
-                    <div class="social-box-wrapper">
-                        <a href="/mis/Orders/Home/EstimatesList?status=unconfirmed">
-                            <div class="social-box col-lg-3 col-sm-6 col-xs-6  estimates" style="cursor:pointer;" title="Pending Estimates">
-                                @*<i class="fa fa-fax"></i>*@
-                                <div class="clearfix">
-                                    <span class="social-count">£1024.00</span>
-                                    <span class="social-action">All time spend</span>
-                                    @*<span class="social-action" style="font-size: 11px!important;">50% of this was rewarded to your audience</span>*@
+            
+        </div>*@
+        @*<div id="pieChartDiv" style="width: 300px; height: 300px;"></div>*@
+      
+        
+            <div class="col-lg-12">
+                <div class="row" style="display:none;">
+                    <div class="col-md-12">
+                        <div class="social-box-wrapper">
+                            <a href="/mis/Orders/Home/EstimatesList?status=unconfirmed">
+                                <div class="social-box col-lg-3 col-sm-6 col-xs-6  estimates" style="cursor:pointer;" title="Pending Estimates">
+                                    @*<i class="fa fa-fax"></i>*@
+                                    <div class="clearfix">
+                                        <span class="social-count">£1024.00</span>
+                                        <span class="social-action">All time spend</span>
+                                        @*<span class="social-action" style="font-size: 11px!important;">50% of this was rewarded to your audience</span>*@
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
-                        <a href="/mis/Orders/Home?status=pending">
-                            <div class="social-box col-lg-3 col-sm-6 col-xs-6  facebook" style="cursor:pointer;" title="Pending Orders">
-                                @*<i class="fa fa-cubes"></i>*@
-                                <div class="clearfix">
-                                    <span class="social-count">3405</span>
-                                    <span class="social-action">Ads Delivered</span>
-                                    @*<span class="social-action" style="font-size: 11px!important;">Video Ads and Sponsored Games</span>*@
-                                </div>
+                            </a>
+                            <a href="/mis/Orders/Home?status=pending">
+                                <div class="social-box col-lg-3 col-sm-6 col-xs-6  facebook" style="cursor:pointer;" title="Pending Orders">
+                                    @*<i class="fa fa-cubes"></i>*@
+                                    <div class="clearfix">
+                                        <span class="social-count">3405</span>
+                                        <span class="social-action">Ads Delivered</span>
+                                        @*<span class="social-action" style="font-size: 11px!important;">Video Ads and Sponsored Games</span>*@
+                                    </div>
 
-                            </div>
-                        </a>
-                        <a href="/mis/Orders/Home?status=production">
-                            <div class="social-box col-lg-3 col-sm-6 col-xs-6  twitter" style="cursor:pointer;" title="In Production">
-                                @*<i class="glyphicon glyphicon-list-alt"></i>*@
-                                <div class="clearfix">
-                                    <span class="social-count">21</span>
-                                    <span class="social-action"> Landing Page Conversions</span>
-                                    @*<span class="social-action" style="font-size: 11px!important;">Advertise offers in app </span>*@
                                 </div>
+                            </a>
+                            <a href="/mis/Orders/Home?status=production">
+                                <div class="social-box col-lg-3 col-sm-6 col-xs-6  twitter" style="cursor:pointer;" title="In Production">
+                                    @*<i class="glyphicon glyphicon-list-alt"></i>*@
+                                    <div class="clearfix">
+                                        <span class="social-count">21</span>
+                                        <span class="social-action"> Landing Page Conversions</span>
+                                        @*<span class="social-action" style="font-size: 11px!important;">Advertise offers in app </span>*@
+                                    </div>
 
-                            </div>
-                        </a>
-                        <a href="/mis/Orders/Home?status=completed">
-                            <div class="social-box col-lg-3 col-sm-6 col-xs-6  google" style="cursor:pointer;" title="Completed">
-                                @*<i class="glyphicon glyphicon-file"></i>*@
-                                <div class="clearfix">
-                                    <span class="social-count">5</span>
-                                    <span class="social-action">Live Campaigns</span>
-                                    @*<span class="social-action" style="font-size: 12px!important;">Extend, Pause or Tweak campaigns</span>*@
                                 </div>
+                            </a>
+                            <a href="/mis/Orders/Home?status=completed">
+                                <div class="social-box col-lg-3 col-sm-6 col-xs-6  google" style="cursor:pointer;" title="Completed">
+                                    @*<i class="glyphicon glyphicon-file"></i>*@
+                                    <div class="clearfix">
+                                        <span class="social-count">5</span>
+                                        <span class="social-action">Live Campaigns</span>
+                                        @*<span class="social-action" style="font-size: 12px!important;">Extend, Pause or Tweak campaigns</span>*@
+                                    </div>
 
-                            </div>
-                        </a>
+                                </div>
+                            </a>
+                        </div>
                     </div>
+
+                </div>
+                <br />
+                <div class="main-box graphParent_div" style="display:none;" id="bindingRootgraphs">
+                   
+                    
+                    <div class=" graph_panels pull-left">
+                        <div id="Draft_div">
+                            <div class="btnpanels blueclr">
+                                Draft/Review
+                            </div>
+                            
+                            <div id="Campaign_counter" data-bind="foreach: AnalyticsList()">
+                                <!-- ko if:campaignID() > 0 && status()==1  -->
+                                <div class="greypanel">
+                                    <div class="gheader">Android or IOS?</div>
+                                    <div class="gwhitepanels">
+                                        <div class="conspan" data-bind="text:campaignName()"></div>
+                                        <span class="datespan">
+
+                                            Last Updated:<span data-bind="dateString:eventDateTime()"></span>
+                                        </span>
+                                        <br />
+                                        <br />
+                                        <div class="conspan lightgreen width180px">
+                                            <span class="pull-left">Landing page conv.</span> <span class="pull-right" data-bind="text:landingPageConv()"></span>
+                                            <div class="clearfix"></div>
+                                        </div>
+
+                                        <div class="conspan lightblue width180px">
+                                            <span class="pull-left">Video Ad views</span><span class="pull-right" data-bind="text:adViewed()"></span>
+                                            <div class="clearfix"></div>
+                                        </div>
+
+                                        <br />
+                                        <br />
+                                        <span class="conspan lightblue">
+                                            Insights 3,214
+                                        </span>
+                                        <div class="gtable">
+                                            <div style="width:100%">
+                                                <div class="pull-left lightblue" data-bind="html:answer1()"></div>
+                                                <div class="pull-right lightblue" data-bind="html:ans1Percentage()"></div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div style="width:100%">
+                                                <div class="pull-left lightblue" data-bind="html:answer2()"></div>
+                                                <div class="pull-right lightblue" data-bind="html:ans2Percentage()"></div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div style="width:100%">
+                                                <div class="pull-left lightblue" data-bind="html:answer3()"></div>
+                                                <div class="pull-right lightblue" data-bind="html:ans3Percentage()"></div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <!-- /ko -->
+                                <!-- ko if:pQID() > 0 &&  status()==1 -->
+                                <div class="greypanel">
+                                    <div class="gheader">Android or IOS?</div>
+                                    <div class="gwhitepanels">
+                                        <div class="conspan" data-bind="text:question()"></div>
+                                        <span class="datespan">
+                                            Last Updated:<span data-bind="dateString:eventDateTime()"></span>
+                                        </span>
+                                        <br />
+                                        <br />
+                                        <span class="conspan lightgreen">
+                                            Completed.<span data-bind="text:completed()"></span>
+                                        </span>
+
+                                        <span class="conspan lightblue">
+                                            Answered <span data-bind="text:answeredQuestion()"></span>
+                                        </span>
+                                        <br />
+                                        <br />
+                                        <span class="conspan lightblue">
+                                            Insights 3,214
+                                        </span>
+
+                                        <div class="gtable">
+
+                                            <div style="width:100%">
+                                                <div class="pull-left lightblue" data-bind="text:option1()"></div>
+                                                <div class="pull-right lightblue" data-bind="text:option1Percentage()"></div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div style="width:100%">
+                                                <div class="pull-left lightblue" data-bind="text:option2()"></div>
+                                                <div class="pull-right lightblue" data-bind="text:option2Percentage()"></div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div style="width:100%">
+                                                <div class="pull-left lightblue" data-bind="text:option3()"></div>
+                                                <div class="pull-right lightblue" data-bind="text:option3Percentage()"></div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div style="width:100%">
+                                                <div class="pull-left lightblue" data-bind="text:option4()"></div>
+                                                <div class="pull-right lightblue" data-bind="text:option4Percentage()"></div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div style="width:100%">
+                                                <div class="pull-left lightblue" data-bind="text:option5()"></div>
+                                                <div class="pull-right lightblue" data-bind="text:option5Percentage()"></div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div style="width:100%">
+                                                <div class="pull-left lightblue" data-bind="text:option6()"></div>
+                                                <div class="pull-right lightblue" data-bind="text:option6Percentage()"></div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            
+                                           
+                                        </div>
+
+                                        <div id="abc"  style="width:200px; height: 120px;"></div>
+                                    </div>
+                                    <!-- /ko -->
+                                </div>
+
+                                <!-- /ko -->
+                                <!-- ko if:couponID() > 0 && status()==1  -->
+                                <div class="greypanel">
+                                    <div class="gheader">Android or IOS?</div>
+                                    <div class="gwhitepanels">
+                                        <div class="conspan" data-bind="html:campaignName()"></div>
+                                        <span class="datespan">
+
+                                            Last Updated:<span data-bind="dateString:eventDateTime()"></span>
+                                        </span>
+                                        <br />
+                                        <br />
+
+                                        <div class="conspan lightgreen width180px">
+                                            <span class="pull-left">Landing page conv.</span> <span class="pull-right" data-bind="text:landingPageConv()"></span>
+                                            <div class="clearfix"></div>
+                                        </div>
+
+                                        <div class="conspan lightblue width180px">
+                                            <span class="pull-left">Video Ad views</span><span class="pull-right" data-bind="text:adViewed()"></span>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <br />
+                                        <br />
+                                        <span class="conspan lightblue">
+                                            Insights 3,214
+                                        </span>
+                                        <span>Last 7 days</span><span data-bind="text:lastSevenDaysPer"></span>
+                                        <span>Last 14 days</span><span data-bind="text:lastfourteenDaysPer"></span>
+                                    </div>
+                                    <!-- /ko -->
+                                </div>
+                                <!-- /ko -->
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="graph_panels pull-left">
+                        <div id="Pending_div">
+                            <div class="btnpanels blueclr">
+                                Pending Approval
+                            </div>
+                            <div id="Campaign_counter" data-bind="foreach: AnalyticsList()">
+                                <!-- ko if:campaignID() > 0 && status()==2  -->
+                                <div class="greypanel">
+                                    <div class="gheader">Android or IOS?</div>
+                                    <div class="gwhitepanels">
+                                        <div class="conspan" data-bind="text:campaignName()"></div>
+                                        <span class="datespan">
+
+                                            Last Updated:<span data-bind="dateString:eventDateTime()"></span>
+                                        </span>
+                                        <br />
+                                        <br />
+                                        <div class="conspan lightgreen width180px">
+                                            <span class="pull-left">Landing page conv.</span> <span class="pull-right" data-bind="text:landingPageConv()"></span>
+                                            <div class="clearfix"></div>
+                                        </div>
+
+                                        <div class="conspan lightblue width180px">
+                                            <span class="pull-left">Video Ad views</span><span class="pull-right" data-bind="text:adViewed()"></span>
+                                            <div class="clearfix"></div>
+                                        </div>
+
+                                        <br />
+                                        <br />
+                                        <span class="conspan lightblue">
+                                            Insights 3,214
+                                        </span>
+                                        <div class="gtable">
+                                            <div style="width:100%">
+                                                <div class="pull-left lightblue" data-bind="html:answer1()"></div>
+                                                <div class="pull-right lightblue" data-bind="html:ans1Percentage()"></div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div style="width:100%">
+                                                <div class="pull-left lightblue" data-bind="html:answer2()"></div>
+                                                <div class="pull-right lightblue" data-bind="html:ans2Percentage()"></div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div style="width:100%">
+                                                <div class="pull-left lightblue" data-bind="html:answer3()"></div>
+                                                <div class="pull-right lightblue" data-bind="html:ans3Percentage()"></div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <!-- /ko -->
+                                <!-- ko if:pQID() > 0 &&  status()==2 -->
+                                <div class="greypanel">
+                                    <div class="gheader">Android or IOS?</div>
+                                    <div class="gwhitepanels">
+                                        <div class="conspan" data-bind="text:question()"></div>
+                                        <span class="datespan">
+                                            Last Updated:<span data-bind="dateString:eventDateTime()"></span>
+                                        </span>
+                                        <br />
+                                        <br />
+                                        <span class="conspan lightgreen">
+                                            Completed.<span data-bind="text:completed()"></span>
+                                        </span>
+
+                                        <span class="conspan lightblue">
+                                            Answered <span data-bind="text:answeredQuestion()"></span>
+                                        </span>
+                                        <br />
+                                        <br />
+                                        <span class="conspan lightblue">
+                                            Insights 3,214
+                                        </span>
+
+                                        <div class="gtable">
+
+                                            <div style="width:100%">
+                                                <div class="pull-left lightblue" data-bind="text:option1()"></div>
+                                                <div class="pull-right lightblue" data-bind="text:option1Percentage()"></div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div style="width:100%">
+                                                <div class="pull-left lightblue" data-bind="text:option2()"></div>
+                                                <div class="pull-right lightblue" data-bind="text:option2Percentage()"></div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div style="width:100%">
+                                                <div class="pull-left lightblue" data-bind="text:option3()"></div>
+                                                <div class="pull-right lightblue" data-bind="text:option3Percentage()"></div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div style="width:100%">
+                                                <div class="pull-left lightblue" data-bind="text:option4()"></div>
+                                                <div class="pull-right lightblue" data-bind="text:option4Percentage()"></div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div style="width:100%">
+                                                <div class="pull-left lightblue" data-bind="text:option5()"></div>
+                                                <div class="pull-right lightblue" data-bind="text:option5Percentage()"></div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div style="width:100%">
+                                                <div class="pull-left lightblue" data-bind="text:option6()"></div>
+                                                <div class="pull-right lightblue" data-bind="text:option6Percentage()"></div>
+                                                <div class="clearfix"></div>
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+                                    <!-- /ko -->
+                                </div>
+                                <!-- /ko -->
+                                <!-- ko if:couponID() > 0 && status()==2  -->
+                                <div class="greypanel">
+                                    <div class="gheader">Android or IOS?</div>
+                                    <div class="gwhitepanels">
+                                        <div class="conspan" data-bind="html:campaignName()"></div>
+                                        <span class="datespan">
+
+                                            Last Updated:<span data-bind="dateString:eventDateTime()"></span>
+                                        </span>
+                                        <br />
+                                        <br />
+
+                                        <div class="conspan lightgreen width180px">
+                                            <span class="pull-left">Landing page conv.</span> <span class="pull-right" data-bind="text:landingPageConv()"></span>
+                                            <div class="clearfix"></div>
+                                        </div>
+
+                                        <div class="conspan lightblue width180px">
+                                            <span class="pull-left">Video Ad views</span><span class="pull-right" data-bind="text:adViewed()"></span>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <br />
+                                        <br />
+                                        <span class="conspan lightblue">
+                                            Insights 3,214
+                                        </span>
+                                        <span>Last 7 days</span><span data-bind="text:lastSevenDaysPer"></span>
+                                        <span>Last 14 days</span><span data-bind="text:lastfourteenDaysPer"></span>
+                                    </div>
+                                    <!-- /ko -->
+                                </div>
+                                <!-- /ko -->
+                                @*<canvas id="mycanvas" width="74" height="74" style="margin-left:147px;"></canvas>*@
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="graph_panels pull-left">
+                        <div id="Draft_div">
+                            <div class="btnpanels blueclr">
+                                Live
+                            </div>
+                            <div id="Campaign_counter" data-bind="foreach: AnalyticsList()">
+                                <!-- ko if:campaignID() > 0 && status()==3  -->
+                                <div class="greypanel">
+                                    <div class="gheader">Android or IOS?</div>
+                                    <div class="gwhitepanels">
+                                        <div class="conspan" data-bind="text:campaignName()"></div>
+                                        <span class="datespan">
+
+                                            Last Updated:<span data-bind="dateString:eventDateTime()"></span>
+                                        </span>
+                                        <br />
+                                        <br />
+                                        <div class="conspan lightgreen width180px">
+                                            <span class="pull-left">Landing page conv.</span> <span class="pull-right" data-bind="text:landingPageConv()"></span>
+                                            <div class="clearfix"></div>
+                                        </div>
+
+                                        <div class="conspan lightblue width180px">
+                                            <span class="pull-left">Video Ad views</span><span class="pull-right" data-bind="text:adViewed()"></span>
+                                            <div class="clearfix"></div>
+                                        </div>
+
+                                        <br />
+                                        <br />
+                                        <span class="conspan lightblue">
+                                            Insights 3,214
+                                        </span>
+                                        <div class="gtable">
+                                            <div style="width:100%">
+                                                <div class="pull-left lightblue" data-bind="html:answer1()"></div>
+                                                <div class="pull-right lightblue" data-bind="html:ans1Percentage()"></div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div style="width:100%">
+                                                <div class="pull-left lightblue" data-bind="html:answer2()"></div>
+                                                <div class="pull-right lightblue" data-bind="html:ans2Percentage()"></div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div style="width:100%">
+                                                <div class="pull-left lightblue" data-bind="html:answer3()"></div>
+                                                <div class="pull-right lightblue" data-bind="html:ans3Percentage()"></div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <!-- /ko -->
+                                <!-- ko if:pQID() > 0 &&  status()==3 -->
+                                <div class="greypanel">
+                                    <div class="gheader">Android or IOS?</div>
+                                    <div class="gwhitepanels">
+                                        <div class="conspan" data-bind="text:question()"></div>
+                                        <span class="datespan">
+                                            Last Updated:<span data-bind="dateString:eventDateTime()"></span>
+                                        </span>
+                                        <br />
+                                        <br />
+                                        <span class="conspan lightgreen">
+                                            Completed.<span data-bind="text:completed()"></span>
+                                        </span>
+
+                                        <span class="conspan lightblue">
+                                            Answered <span data-bind="text:answeredQuestion()"></span>
+                                        </span>
+                                        <br />
+                                        <br />
+                                        <span class="conspan lightblue">
+                                            Insights 3,214
+                                        </span>
+
+                                        <div class="gtable">
+
+                                            <div style="width:100%">
+                                                <div class="pull-left lightblue" data-bind="text:option1()"></div>
+                                                <div class="pull-right lightblue" data-bind="text:option1Percentage()"></div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div style="width:100%">
+                                                <div class="pull-left lightblue" data-bind="text:option2()"></div>
+                                                <div class="pull-right lightblue" data-bind="text:option2Percentage()"></div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div style="width:100%">
+                                                <div class="pull-left lightblue" data-bind="text:option3()"></div>
+                                                <div class="pull-right lightblue" data-bind="text:option3Percentage()"></div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div style="width:100%">
+                                                <div class="pull-left lightblue" data-bind="text:option4()"></div>
+                                                <div class="pull-right lightblue" data-bind="text:option4Percentage()"></div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div style="width:100%">
+                                                <div class="pull-left lightblue" data-bind="text:option5()"></div>
+                                                <div class="pull-right lightblue" data-bind="text:option5Percentage()"></div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div style="width:100%">
+                                                <div class="pull-left lightblue" data-bind="text:option6()"></div>
+                                                <div class="pull-right lightblue" data-bind="text:option6Percentage()"></div>
+                                                <div class="clearfix"></div>
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+                                    <!-- /ko -->
+                                </div>
+                                <!-- /ko -->
+                                <!-- ko if:couponID() > 0 && status()==3  -->
+                                <div class="greypanel">
+                                    <div class="gheader">Android or IOS?</div>
+                                    <div class="gwhitepanels">
+                                        <div class="conspan" data-bind="html:campaignName()"></div>
+                                        <span class="datespan">
+
+                                            Last Updated:<span data-bind="dateString:eventDateTime()"></span>
+                                        </span>
+                                        <br />
+                                        <br />
+
+                                        <div class="conspan lightgreen width180px">
+                                            <span class="pull-left">Landing page conv.</span> <span class="pull-right" data-bind="text:landingPageConv()"></span>
+                                            <div class="clearfix"></div>
+                                        </div>
+
+                                        <div class="conspan lightblue width180px">
+                                            <span class="pull-left">Video Ad views</span><span class="pull-right" data-bind="text:adViewed()"></span>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <br />
+                                        <br />
+                                        <span class="conspan lightblue">
+                                            Insights 3,214
+                                        </span>
+                                        <span>Last 7 days</span><span data-bind="text:lastSevenDaysPer"></span>
+                                        <span>Last 14 days</span><span data-bind="text:lastfourteenDaysPer"></span>
+                                    </div>
+                                    <!-- /ko -->
+                                </div>
+                                <!-- /ko -->
+                                @*<canvas id="mycanvas" width="74" height="74" style="margin-left:147px;"></canvas>*@
+
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="graph_panels pull-left">
+                        <div id="Draft_div">
+                            <div class="btnpanels blueclr">
+                                Pause
+                            </div>
+                            <div id="Campaign_counter" data-bind="foreach: AnalyticsList()">
+                                <!-- ko if:campaignID() > 0 && status()==4  -->
+                                <div class="greypanel">
+                                    <div class="gheader">Android or IOS?</div>
+                                    <div class="gwhitepanels">
+                                        <div class="conspan" data-bind="text:campaignName()"></div>
+                                        <span class="datespan">
+
+                                            Last Updated:<span data-bind="dateString:eventDateTime()"></span>
+                                        </span>
+                                        <br />
+                                        <br />
+                                        <div class="conspan lightgreen width180px">
+                                            <span class="pull-left">Landing page conv.</span> <span class="pull-right" data-bind="text:landingPageConv()"></span>
+                                            <div class="clearfix"></div>
+                                        </div>
+
+                                        <div class="conspan lightblue width180px">
+                                            <span class="pull-left">Video Ad views</span><span class="pull-right" data-bind="text:adViewed()"></span>
+                                            <div class="clearfix"></div>
+                                        </div>
+
+                                        <br />
+                                        <br />
+                                        <span class="conspan lightblue">
+                                            Insights 3,214
+                                        </span>
+                                        <div class="gtable">
+                                            <div style="width:100%">
+                                                <div class="pull-left lightblue" data-bind="html:answer1()"></div>
+                                                <div class="pull-right lightblue" data-bind="html:ans1Percentage()"></div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div style="width:100%">
+                                                <div class="pull-left lightblue" data-bind="html:answer2()"></div>
+                                                <div class="pull-right lightblue" data-bind="html:ans2Percentage()"></div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div style="width:100%">
+                                                <div class="pull-left lightblue" data-bind="html:answer3()"></div>
+                                                <div class="pull-right lightblue" data-bind="html:ans3Percentage()"></div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <!-- /ko -->
+                                <!-- ko if:pQID() > 0 &&  status()==4 -->
+                                <div class="greypanel">
+                                    <div class="gheader">Android or IOS?</div>
+                                    <div class="gwhitepanels">
+                                        <div class="conspan" data-bind="text:question()"></div>
+                                        <span class="datespan">
+                                            Last Updated:<span data-bind="dateString:eventDateTime()"></span>
+                                        </span>
+                                        <br />
+                                        <br />
+                                        <span class="conspan lightgreen">
+                                            Completed.<span data-bind="text:completed()"></span>
+                                        </span>
+
+                                        <span class="conspan lightblue">
+                                            Answered <span data-bind="text:answeredQuestion()"></span>
+                                        </span>
+                                        <br />
+                                        <br />
+                                        <span class="conspan lightblue">
+                                            Insights 3,214
+                                        </span>
+
+                                        <div class="gtable">
+
+                                            <div style="width:100%">
+                                                <div class="pull-left lightblue" data-bind="text:option1()"></div>
+                                                <div class="pull-right lightblue" data-bind="text:option1Percentage()"></div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div style="width:100%">
+                                                <div class="pull-left lightblue" data-bind="text:option2()"></div>
+                                                <div class="pull-right lightblue" data-bind="text:option2Percentage()"></div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div style="width:100%">
+                                                <div class="pull-left lightblue" data-bind="text:option3()"></div>
+                                                <div class="pull-right lightblue" data-bind="text:option3Percentage()"></div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div style="width:100%">
+                                                <div class="pull-left lightblue" data-bind="text:option4()"></div>
+                                                <div class="pull-right lightblue" data-bind="text:option4Percentage()"></div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div style="width:100%">
+                                                <div class="pull-left lightblue" data-bind="text:option5()"></div>
+                                                <div class="pull-right lightblue" data-bind="text:option5Percentage()"></div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div style="width:100%">
+                                                <div class="pull-left lightblue" data-bind="text:option6()"></div>
+                                                <div class="pull-right lightblue" data-bind="text:option6Percentage()"></div>
+                                                <div class="clearfix"></div>
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+                                    <!-- /ko -->
+                                </div>
+                                <!-- /ko -->
+                                <!-- ko if:couponID() > 0 && status()==4  -->
+                                <div class="greypanel">
+                                    <div class="gheader">Android or IOS?</div>
+                                    <div class="gwhitepanels">
+                                        <div class="conspan" data-bind="html:campaignName()"></div>
+                                        <span class="datespan">
+
+                                            Last Updated:<span data-bind="dateString:eventDateTime()"></span>
+                                        </span>
+                                        <br />
+                                        <br />
+
+                                        <div class="conspan lightgreen width180px">
+                                            <span class="pull-left">Landing page conv.</span> <span class="pull-right" data-bind="text:landingPageConv()"></span>
+                                            <div class="clearfix"></div>
+                                        </div>
+
+                                        <div class="conspan lightblue width180px">
+                                            <span class="pull-left">Video Ad views</span><span class="pull-right" data-bind="text:adViewed()"></span>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <br />
+                                        <br />
+                                        <span class="conspan lightblue">
+                                            Insights 3,214
+                                        </span>
+                                        <span>Last 7 days</span><span data-bind="text:lastSevenDaysPer"></span>
+                                        <span>Last 14 days</span><span data-bind="text:lastfourteenDaysPer"></span>
+                                    </div>
+                                    <!-- /ko -->
+                                </div>
+                                <!-- /ko -->
+                                @*<canvas id="mycanvas" width="74" height="74" style="margin-left:147px;"></canvas>*@
+
+                            </div>
+                        </div>
+                    </div>
+
+                    
+
+
+                    <div class="clearfix"></div>
                 </div>
 
             </div>
-            <br />
-            <div class="main-box graphParent_div" >
-                <div class="graph_panels pull-left">
-                    <div class="btnpanels blueclr">
-                        Draft/Review
-                    </div>
-
-                    <div class="greypanel">
-                        <div class="gheader">Android or IOS?</div>
-                        <div class="gwhitepanels">
-                            <div class="conspan">Video Ad Campaign</div>
-                            <span class="datespan">
-                                Last Updated:12 April 2016
-                            </span>
-                            <br />
-                            <br />
-                            <span class="conspan lightgreen">
-                                Landing page conv. 75
-                            </span>
-
-                            <span class="conspan lightblue">
-                                Video Ad views 3,214
-                            </span>
-                            <br />
-                            <br />
-                            <span class="conspan lightblue">
-                                Insights 3,214
-                            </span>
-                            <div class="gtable">
-                                <div style="width:100%">
-                                    <div class="pull-left lightblue">Q1</div>
-                                    <div class="pull-right lightblue">34%</div>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div style="width:100%">
-                                    <div class="pull-left lightblue">Q2</div>
-                                    <div class="pull-right lightblue">34%</div>
-                                    <div class="clearfix"></div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
 
-
-                <div class="graph_panels pull-left">
-                    <div class="btnpanels skyclr">
-                        Paused
-                    </div>
-
-                    <div class="greypanel">
-                        <div class="gheader">Android or IOS?</div>
-                        <div class="gwhitepanels">
-                            <div class="conspan">Video Ad Campaign</div>
-                            <span class="datespan">
-                                Last Updated:12 April 2016
-                            </span>
-                            <br />
-                            <br />
-                            <span class="conspan lightgreen">
-                                Landing page conv. 75
-                            </span>
-
-                            <span class="conspan lightblue">
-                                Video Ad views 3,214
-                            </span>
-                            <br />
-                            <br />
-                            <span class="conspan lightblue">
-                                Insights 3,214
-                            </span>
-                            <div class="gtable">
-                                <div style="width:100%">
-                                    <div class="pull-left lightblue">Q1</div>
-                                    <div class="pull-right lightblue">34%</div>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div style="width:100%">
-                                    <div class="pull-left lightblue">Q2</div>
-                                    <div class="pull-right lightblue">34%</div>
-                                    <div class="clearfix"></div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="graph_panels pull-left">
-                    <div class="btnpanels lightgreenbc">
-                        Live
-                    </div>
-
-                    <div class="greypanel">
-                        <div class="gheader">Android or IOS?</div>
-                        <div class="gwhitepanels">
-                            <div class="conspan">Video Ad Campaign</div>
-                            <span class="datespan">
-                                Last Updated:12 April 2016
-                            </span>
-                            <br />
-                            <br />
-                            <span class="conspan lightgreen">
-                                Landing page conv. 75
-                            </span>
-
-                            <span class="conspan lightblue">
-                                Video Ad views 3,214
-                            </span>
-                            <br />
-                            <br />
-                            <span class="conspan lightblue">
-                                Insights 3,214
-                            </span>
-
-                            <div class="gtable">
-                                <div style="width:100%">
-                                    <div class="pull-left lightblue">Q1</div>
-                                    <div class="pull-right lightblue">34%</div>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div style="width:100%">
-                                    <div class="pull-left lightblue">Q2</div>
-                                    <div class="pull-right lightblue">34%</div>
-                                    <div class="clearfix"></div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="graph_panels pull-left">
-                    <div class="btnpanels blueclor">
-                        Live
-                    </div>
-
-                    <div class="greypanel">
-                        <div class="gheader">Android or IOS?</div>
-                        <div class="gwhitepanels">
-                            <div class="conspan">Video Ad Campaign</div>
-                            <span class="datespan">
-                                Last Updated:12 April 2016
-                            </span>
-                            <br />
-                            <br />
-                            <span class="conspan lightgreen">
-                                Landing page conv. 75
-                            </span>
-
-                            <span class="conspan lightblue">
-                                Video Ad views 3,214
-                            </span>
-                            <br />
-                            <br />
-                            <span class="conspan lightblue">
-                                Insights 3,214
-                            </span>
-                            <div class="gtable">
-                                <div style="width:100%">
-                                    <div class="pull-left lightblue">Q1</div>
-                                    <div class="pull-right lightblue">34%</div>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div style="width:100%">
-                                    <div class="pull-left lightblue">Q2</div>
-                                    <div class="pull-right lightblue">34%</div>
-                                    <div class="clearfix"></div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-
-        </div>
-
-
-    </div>
+</div>
 </div>
 
-@*<script >
-    $(document).ready(function () {
-        $(document).on('mouseenter', '.homePanels', function () {
-            $(this).find("#content_div").show();
-        }).on('mouseleave', '.homePanels', function () {
-            $(this).find("#content_div").hide();
-        });
+@*<script src="~/Scripts/Charts/jquery.min.js"></script>
+<script src="/Scripts/Charts/highcharts.js"></script>
+<script src="/Scripts/Charts/exporting.js"></script>*@
 
-        
-        $('.play_btn').hover(function () {
-            
-            $(this).css("cssText", "color:red!important;");
+
+<script src="~/Scripts/Charts/highcharts.js"></script>
+@*<script src="~/Scripts/Charts/exporting.js"></script>*@
+@*<script>
+    
+
+        $('#grapth').highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: 1, //null,
+            plotShadow: false,
+            backgroundColor: {
+                linearGradient: [0, 0, 500, 500],
+                stops: [
+            [0, 'rgb(255, 255, 255)'],
+            [1, 'rgb(200, 200, 255)']
+                ]
+            }
+
         },
-       function () {
-           $(this).css("cssText", "color:#676767!important;");
-           
-       });
-
-        $('.plus_btn').hover(function () {
-
-            $(this).css("cssText", "color:#fff!important;");
+        title: {
+            text: 'fruit  market shares at a specific month, 2014'
         },
-     function () {
-         $(this).css("cssText", "color:#676767!important;");
-
-     });
-        
+        tooltip: {
+            pointFormat: '{series.id}: <b>{series.name:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{series.id}</b>: {point.name:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: 'Fruit share',
+            data: series
+        }]
     });
 
 </script>*@
+<script>
 
+    //$(document).ready(function () {
+    //    var population = [];
+    //    var serial = new Array("Federal",55.5);
+    //    population.push(serial);
+    //    var serial1 = new Array("Punjab",23.0);
+    //    population.push(serial1);
+    //    var serial2 = new Array("Sindh", 13.4);
+    //    population.push(serial2);
+    //    var serial3 = new Array("Balochistan", 5.0);
+    //    population.push(serial3);
+    //    var serial4 = new Array("Fata", 2.4);
+
+    //    population.push(serial4);
+
+    //    var chart;
+    //    chart = new Highcharts.Chart({
+
+    //        chart: {
+    //            renderTo: 'pieChartDiv',   //Target Div for chart
+    //            defaultSeriesType: 'pie'
+    //        },
+    //        title: {
+    //            //text: 'Population Province wise, Census 1998'
+    //        },
+    //        series: [{
+    //            data: population   //Binding json data to chart
+    //        }]
+    //    });
+    //});
+
+</script>
+@*<script src="~/Scripts/Charts/Chart.js"></script>*@
+@*<script>
+    $(document).ready(function () {
+        var ctx = $("#mycanvas").get(0).getContext("2d");
+
+        //pie chart data
+        //sum of values = 360
+        var data = [
+            {
+                value: 8,
+                color: "cornflowerblue",
+                highlight: "lightskyblue",
+                label: "Corn Flower Blue"
+            },
+            {
+                value: 6.5,
+                color: "lightgreen",
+                highlight: "yellowgreen",
+                label: "Lightgreen"
+            },
+            {
+                value: 5.6,
+                color: "orange",
+                highlight: "darkorange",
+                label: "Orange"
+            },
+            {
+                value: 4.6,
+                color: "orange",
+                highlight: "darkorange",
+                label: "Orange"
+            },
+            {
+                value: 3.6,
+                color: "orange",
+                highlight: "darkorange",
+                label: "Orange"
+            },
+            {
+                value: 2,
+                color: "orange",
+                highlight: "darkorange",
+                label: "Orange"
+            }
+        ];
+
+        //draw
+        var piechart = new Chart(ctx).Pie(data);
+       
+    });
+
+
+</script>*@

@@ -11,6 +11,7 @@ namespace SMD.Interfaces.Services
 {
     public interface ICompanyService
     {
+        Dictionary<string, int> GetStatusesCounters();
         int GetUserCompany(string userId);
         int createCompany(string userId, string email, string fullName, string guid);
 
@@ -32,5 +33,6 @@ namespace SMD.Interfaces.Services
         RegisteredUsersResponseModel GetRegisterdUsers(RegisteredUsersSearchRequest request);
 
         Boolean UpdateCompanyStatus(int status, string userId, string comments, int companyId);
+        List<Dashboard_analytics_Result> GetDashboardAnalytics(string UserID);
     }
 }

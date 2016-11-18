@@ -179,6 +179,7 @@ namespace SMD.Implementation.Services
                 serverObj.ModifiedDate = source.ModifiedDate;
                 serverObj.PenalityForNotAnswering = source.PenalityForNotAnswering;
                 serverObj.Status = source.Status;
+                serverObj.AmountCharged = source.AmountCharged;
                 serverObj.ModifiedDate = DateTime.Now.Add(-(_profileQuestionRepository.UserTimezoneOffSet));
 
                 _profileQuestionRepository.SaveChanges();
