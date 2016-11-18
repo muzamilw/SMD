@@ -119,6 +119,11 @@ namespace SMD.Repository.Repositories
         {
           return  db.GetActiveVSNewUsers();
         }
+        public List<String> getProfessions()
+        {
+          return db.Users.Select(g => g.Jobtitle).Distinct().ToList();
+
+        }
         #endregion
     }
 }

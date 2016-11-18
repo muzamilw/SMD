@@ -247,6 +247,26 @@ namespace SMD.Repository.Repositories
         {
             return db.Coupons.Where(c => c.CompanyId==CompanyId && c.CouponListingMode==1&&(c.Status==2||c.Status==3)).ToList().Count;
         }
+        public IEnumerable<vw_Coupons> GetMarketingDeals(GetPagedListRequest request, out int rowCount)
+        {
+            int fromRow = (request.PageNo - 1) * request.PageSize;
+            int toRow = request.PageSize;
+            Expression<Func<Coupon, bool>> query =
+                c => c.Approved==true&& c.IsMarketingStories ==true;
+
+            //if (request.ShowCoupons.HasValue && request.ShowCoupons.Value == true)
+            //    query = c => c.Status == (Int32)AdCampaignStatus.SubmitForApproval;
+
+            rowCount = DbSet.Count(query);
+
+            var res = db.vw_Coupons.Where(g => g.Approved == true && g.IsMarketingStories == true)
+                    .OrderByDescending(p => p.ApprovalDateTime);
+
+
+            return res.Skip(fromRow)
+                    .Take(toRow);
+
+        }
 
 
         #endregion

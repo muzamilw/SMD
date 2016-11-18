@@ -63,6 +63,11 @@ namespace SMD.Repository.Repositories
         {
             return DbSet.Where(city => city.CountryId == countryId).ToList();
         }
+        public IEnumerable<City> GetCities()
+        {
+            long id = 20;
+            return DbSet.Where(city => city.CountryId == id).OrderBy(g=>g.CityName).ToList();
+        }
         public int GetCityId(string name)
         {
             int cityId = 0;

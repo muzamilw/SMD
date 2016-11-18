@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using SMD.Models.DomainModels;
 
-namespace SMD.Interfaces.Repository
+namespace SMD.Interfaces.Services
 {
     /// <summary>
     /// City Interface
@@ -13,5 +13,6 @@ namespace SMD.Interfaces.Repository
         /// List of Country's Cities
         /// </summary>
         IEnumerable<City> GetCitiesByCountryId(long countryId);
+        IEnumerable<City> GetCities();
     }
 }

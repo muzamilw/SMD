@@ -15,5 +15,6 @@ namespace SMD.Interfaces.Repository
         IEnumerable<GetRegisteredUserData_Result> GetRegisteredUsers(RegisteredUsersSearchRequest request, out int rowCount);
 
         User GetUserbyPhoneNo(string phoneNo);
+        String GetUserName(string id);
     }
 }

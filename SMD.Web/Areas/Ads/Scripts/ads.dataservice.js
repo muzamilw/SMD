@@ -52,6 +52,11 @@ define("ads/ads.dataservice", function () {
                         dataType: 'json',
                         type: 'GET'
                     });
+                    amplify.request.define('getFormAnalytic', 'ajax', {
+                        url: '/Api/FormAnalytic',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
 
                     // 
                     amplify.request.define('generateCouponCodes', 'ajax', {
@@ -73,6 +78,15 @@ define("ads/ads.dataservice", function () {
             initialize();
             return amplify.request({
                 resourceId: 'getBaseData',
+                data: params,
+                success: callbacks.success,
+                error: callbacks.error,
+            });
+        },
+        getFormAnalytic = function (params, callbacks) {
+            initialize();
+            return amplify.request({
+                resourceId: 'getFormAnalytic',
                 data: params,
                 success: callbacks.success,
                 error: callbacks.error,
@@ -152,7 +166,8 @@ define("ads/ads.dataservice", function () {
             getAudienceData: getAudienceData,
             copyCampaignById: copyCampaignById,
             generateCouponCodes: generateCouponCodes,
-			getAdsByCampaignIdAnalytics:getAdsByCampaignIdAnalytics
+            getAdsByCampaignIdAnalytics: getAdsByCampaignIdAnalytics,
+            getFormAnalytic: getFormAnalytic
         };
     })();
     return dataService;
