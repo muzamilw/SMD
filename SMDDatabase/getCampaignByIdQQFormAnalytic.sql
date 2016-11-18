@@ -5,7 +5,7 @@
 -- =============================================
 create PROCEDURE [dbo].[getCampaignByIdQQFormAnalytic] (
 @Id INT,
-@coice INT,
+@choice INT,
 @gender INT,  -- 0 for all, 1 for male and 2 for female
 @ageRange INT, -- 0 for All , 1 for 10-20 , 2 for 20-30, 3 for 30-40 , 4 for 40-50, 5 for 50-60, 6 for 60-70, 7 for 70-80, 8 for 80-90, 9 for 90+
 @Profession nvarchar(250),	
@@ -68,7 +68,7 @@ IF @ageRange = 2
 	select count(*) from AdCampaignResponse ac
 	inner join AspNetUsers usr on ac.UserID = usr.Id
 	where ac.CampaignID = @Id and ac.ResponseType = 3 
-	and (ac.UserSelection = @coice OR @coice = 0) and (usr.Gender = @gender OR @gender = 0)
+	and (ac.UserSelection = @choice OR @choice = 0) and (usr.Gender = @gender OR @gender = 0)
 	and (usr.Jobtitle = @Profession OR @Profession = 'All') and (ac.UserLocationCity = @city OR @city = 'All')
 	and usr.DOB > = @AgedateFrom and usr.DOB < @AgedateTo
 		
@@ -76,8 +76,3 @@ IF @ageRange = 2
 		
 	
 END
-
- 
---EXEC [getCampaignByIdQQFormAnalytic] 20369, 0, 0, 0, 'All', 'All'
-
-

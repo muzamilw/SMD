@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace SMD.Interfaces.Services
 {
-    public class IAdCampaignResponseService
+    public interface IAdCampaignResponseService
     {
+        int getCampaignByIdQQFormAnalytic(int CampaignId, int Choice, int Gender, int age, string Profession, string City);
     }
 }

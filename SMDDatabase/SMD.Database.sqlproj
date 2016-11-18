@@ -98,6 +98,6 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="getCampaignByIdFormDataAnalytic.sql" />
-    <Build Include="getAdsCampaignByIdFormAnalytic.sql" />
+    <Build Include="getCampaignByIdQQFormAnalytic.sql" />
   </ItemGroup>
 </Project>
