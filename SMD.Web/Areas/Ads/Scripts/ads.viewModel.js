@@ -462,11 +462,15 @@ define("ads/ads.viewModel",
 
                 },
             addNewCampaign = function () {
+               
                 IsthisEditCamapiagn(false);
                
                 var selectionoption = $("#ddTextBtns").val();
 
                 if (selectionoption == '0' || selectionoption == undefined) {
+                    if (mode == 4)
+                        showLandingPageUrl(true);
+                    else
                     showLandingPageUrl(false);
                 }
                 else
@@ -1302,6 +1306,7 @@ define("ads/ads.viewModel",
                                 CampaignId: campaignModel().CampaignID,
                                 criteriaPrice: 0
                             }));
+
 
                         }
                     }

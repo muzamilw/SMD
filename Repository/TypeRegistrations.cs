@@ -85,6 +85,9 @@ namespace SMD.Repository
             unityContainer.RegisterType<ISurveySharingGroupShareRepository, SurveySharingGroupShareRepository>();
             unityContainer.RegisterType<ISurveySharingGroupMemberRepository, SurveySharingGroupMemberRepository>();
             unityContainer.RegisterType<ISharedSurveyQuestionRepository, SharedSurveyQuestionRepository>();
+
+            unityContainer.RegisterType<ICouponRatingReviewRepository, CouponRatingReviewRepository>();
+            
             
             
         }

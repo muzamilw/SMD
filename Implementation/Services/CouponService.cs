@@ -45,6 +45,8 @@ namespace SMD.Implementation.Services
         private readonly ICampaignEventHistoryRepository campaignEventHistoryRepository;
         private readonly IAspnetUsersRepository aspnetUserRepository;
 
+        private readonly ICouponRatingReviewRepository couponRatingReviewRepository;
+
         private ApplicationUserManager UserManager
         {
             get { return HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
@@ -242,7 +244,7 @@ namespace SMD.Implementation.Services
         /// </summary>
         public CouponService(ICouponRepository couponRepository, IUserFavouriteCouponRepository userFavouriteCouponRepository, ICompanyService _companyService,
             IUserPurchasedCouponRepository _userPurchasedCouponRepository, IAccountRepository _accountRepository, ICouponCategoriesRepository _couponCategoriesRepository, ICurrencyRepository _currencyRepository, IWebApiUserService _userService, IUserCouponViewRepository userCouponViewRepository, IEmailManagerService emailManagerService, WebApiUserService webApiUserService, IStripeService stripeService, IProductRepository productRepository
-            , ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository, ICompanyRepository iCompanyRepository, ICouponPriceOptionRepository couponPriceOptionRepository, ICampaignEventHistoryRepository campaignEventHistoryRepository, IAspnetUsersRepository aspnetUserRepository)
+            , ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository, ICompanyRepository iCompanyRepository, ICouponPriceOptionRepository couponPriceOptionRepository, ICampaignEventHistoryRepository campaignEventHistoryRepository, IAspnetUsersRepository aspnetUserRepository, ICouponRatingReviewRepository couponRatingReviewRepository)
         {
             this.couponRepository = couponRepository;
             this._userFavouriteCouponRepository = userFavouriteCouponRepository;
@@ -264,6 +266,7 @@ namespace SMD.Implementation.Services
             this.couponPriceOptionRepository = couponPriceOptionRepository;
             this.campaignEventHistoryRepository = campaignEventHistoryRepository;
             this.aspnetUserRepository = aspnetUserRepository;
+            this.couponRatingReviewRepository = couponRatingReviewRepository;
         }
 
         #endregion
@@ -664,13 +667,16 @@ namespace SMD.Implementation.Services
 
 
         //called from mobile apps
-        public GetCouponByID_Result GetCouponByIdDefault(long CouponId, string UserId, string Lat, string Lon)
+        public GetCouponByID_Result GetCouponByIdDefault(long CouponId, string UserId, string Lat, string Lon , out CouponRatingReviewOverallResponse rating)
         {
 
-            return couponRepository.GetCouponByIdSP(CouponId, UserId, Lat, Lon);
+            var result =  couponRepository.GetCouponByIdSP(CouponId, UserId, Lat, Lon);
 
 
+            rating = couponRatingReviewRepository.GetPublishedCouponRatingReview(CouponId);
 
+
+            return result;
 
             //if (coupon.LogoUrl == null)
             //{
