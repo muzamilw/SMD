@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SMD.Models.ResponseModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -90,10 +91,13 @@ namespace SMD.MIS.Areas.Api.Models
         public Nullable<bool> IsShowMap { get; set; }
         public Nullable<bool> IsShowyouTube { get; set; }
         public Nullable<bool> IsShowAboutUs { get; set; }
-        
 
+
+        public double? OverAllStarRating { get; set; }
 
         public virtual ICollection<CouponPriceOption> CouponPriceOptions { get; set; }
+
+        public List<CouponRatingReviewResponse> CouponRatingReviewResponses { get; set; }
         
     }
 

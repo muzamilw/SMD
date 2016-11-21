@@ -533,6 +533,22 @@
           <Property Name="ExpiryDate" Type="datetime" />
           <Property Name="URL" Type="varchar(max)" />
         </EntityType>
+        <EntityType Name="CouponRatingReview">
+          <Key>
+            <PropertyRef Name="CouponReviewId" />
+          </Key>
+          <Property Name="CouponReviewId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CouponId" Type="bigint" />
+          <Property Name="StarRating" Type="int" />
+          <Property Name="Review" Type="nvarchar" MaxLength="800" />
+          <Property Name="RatingDateTime" Type="datetime" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="Status" Type="int" />
+          <Property Name="ReviewImage1" Type="nvarchar" MaxLength="250" />
+          <Property Name="ReviewImage2" Type="nvarchar" MaxLength="250" />
+          <Property Name="Reviewimage3" Type="nvarchar" MaxLength="250" />
+        </EntityType>
         <EntityType Name="Currency">
           <Key>
             <PropertyRef Name="CurrencyID" />
@@ -1800,6 +1816,18 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CouponRatingReview_Coupon">
+          <End Role="Coupon" Type="Self.Coupon" Multiplicity="0..1" />
+          <End Role="CouponRatingReview" Type="Self.CouponRatingReview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coupon">
+              <PropertyRef Name="CouponId" />
+            </Principal>
+            <Dependent Role="CouponRatingReview">
+              <PropertyRef Name="CouponId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DamImages_Company">
           <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
           <End Role="DamImages" Type="Self.DamImages" Multiplicity="*" />
@@ -2781,6 +2809,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySet Name="CouponCategories" EntityType="Self.CouponCategories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CouponCategory" EntityType="Self.CouponCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CouponPriceOption" EntityType="Self.CouponPriceOption" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CouponRatingReview" EntityType="Self.CouponRatingReview" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Currency" EntityType="Self.Currency" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CustomUrl" EntityType="Self.CustomUrl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DamImages" EntityType="Self.DamImages" Schema="dbo" store:Type="Tables" />
@@ -3163,6 +3192,10 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <AssociationSet Name="FK_CouponPriceOption_Coupon" Association="Self.FK_CouponPriceOption_Coupon">
             <End Role="Coupon" EntitySet="Coupon" />
             <End Role="CouponPriceOption" EntitySet="CouponPriceOption" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CouponRatingReview_Coupon" Association="Self.FK_CouponRatingReview_Coupon">
+            <End Role="Coupon" EntitySet="Coupon" />
+            <End Role="CouponRatingReview" EntitySet="CouponRatingReview" />
           </AssociationSet>
           <AssociationSet Name="FK_DamImages_Company" Association="Self.FK_DamImages_Company">
             <End Role="Company" EntitySet="Company" />
@@ -4151,7 +4184,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           </FunctionImport>
           <EntitySet Name="vw_Notifications" EntityType="DomainModels.vw_Notifications" />
           <FunctionImport Name="getCampaignByIdFormDataAnalytic" ReturnType="Collection(DomainModels.getCampaignByIdFormDataAnalytic_Result)">
-            <Parameter Name="Id" Mode="In" Type="Int32" />
+          <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="getCampaignByIdQQFormAnalytic">
             <Parameter Name="Id" Mode="In" Type="Int32" />
@@ -4161,6 +4194,11 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <Parameter Name="Profession" Mode="In" Type="String" />
             <Parameter Name="city" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="CouponRatingReviews" EntityType="DomainModels.CouponRatingReview" />
+          <AssociationSet Name="FK_CouponRatingReview_Coupon" Association="DomainModels.FK_CouponRatingReview_Coupon">
+            <End Role="Coupon" EntitySet="Coupons" />
+            <End Role="CouponRatingReview" EntitySet="CouponRatingReviews" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -5919,6 +5957,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="IsShowyouTube" Type="Boolean" />
           <Property Name="IsShowAboutUs" Type="Boolean" />
           <Property Name="IsMarketingStories" Type="Boolean" />
+          <NavigationProperty Name="CouponRatingReviews" Relationship="DomainModels.FK_CouponRatingReview_Coupon" FromRole="Coupon" ToRole="CouponRatingReview" />
         </EntityType>
         <Association Name="FK_CompanyBranch_BranchCategory">
           <End Type="DomainModels.BranchCategory" Role="BranchCategory" Multiplicity="0..1" />
@@ -7534,6 +7573,35 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="Int64" Name="Id" Nullable="true" />
           <Property Type="Int32" Name="typ" Nullable="false" />
         </ComplexType>
+        <EntityType Name="CouponRatingReview">
+          <Key>
+            <PropertyRef Name="CouponReviewId" />
+          </Key>
+          <Property Name="CouponReviewId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CouponId" Type="Int64" />
+          <Property Name="StarRating" Type="Int32" />
+          <Property Name="Review" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
+          <Property Name="RatingDateTime" Type="DateTime" Precision="3" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="ReviewImage1" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ReviewImage2" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Reviewimage3" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Coupon" Relationship="DomainModels.FK_CouponRatingReview_Coupon" FromRole="CouponRatingReview" ToRole="Coupon" />
+        </EntityType>
+        <Association Name="FK_CouponRatingReview_Coupon">
+          <End Type="DomainModels.Coupon" Role="Coupon" Multiplicity="0..1" />
+          <End Type="DomainModels.CouponRatingReview" Role="CouponRatingReview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coupon">
+              <PropertyRef Name="CouponId" />
+            </Principal>
+            <Dependent Role="CouponRatingReview">
+              <PropertyRef Name="CouponId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -9539,6 +9607,23 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="getCampaignByIdQQFormAnalytic" FunctionName="SMDModel.Store.getCampaignByIdQQFormAnalytic" />
+          <EntitySetMapping Name="CouponRatingReviews">
+            <EntityTypeMapping TypeName="DomainModels.CouponRatingReview">
+              <MappingFragment StoreEntitySet="CouponRatingReview">
+                <ScalarProperty Name="Reviewimage3" ColumnName="Reviewimage3" />
+                <ScalarProperty Name="ReviewImage2" ColumnName="ReviewImage2" />
+                <ScalarProperty Name="ReviewImage1" ColumnName="ReviewImage1" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="RatingDateTime" ColumnName="RatingDateTime" />
+                <ScalarProperty Name="Review" ColumnName="Review" />
+                <ScalarProperty Name="StarRating" ColumnName="StarRating" />
+                <ScalarProperty Name="CouponId" ColumnName="CouponId" />
+                <ScalarProperty Name="CouponReviewId" ColumnName="CouponReviewId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

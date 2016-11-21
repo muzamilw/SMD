@@ -17,9 +17,9 @@ namespace DomainModelProject
         public string CouponTitle { get; set; }
         public string CouponImage1 { get; set; }
         public string LogoUrl { get; set; }
-        public Nullable<double> Price { get; set; }
-        public Nullable<double> Savings { get; set; }
-        public Nullable<double> SwapCost { get; set; }
+        public double Price { get; set; }
+        public double Savings { get; set; }
+        public double SwapCost { get; set; }
         public Nullable<int> CompanyId { get; set; }
         public Nullable<int> CouponActiveMonth { get; set; }
         public Nullable<int> CouponActiveYear { get; set; }
@@ -30,5 +30,9 @@ namespace DomainModelProject
         public string CompanyName { get; set; }
         public string LocationTitle { get; set; }
         public string LocationCity { get; set; }
+        public Nullable<int> DealsCount { get; set; }
+        public string CurrencyCode { get; set; }
+        public string CurrencySymbol { get; set; }
+        public int AvgRating { get; set; }
     }
 }

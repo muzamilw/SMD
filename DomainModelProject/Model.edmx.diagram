@@ -186,6 +186,8 @@
         <AssociationConnector Association="SMDDevModel.FK_SurveySharingGroupShares_SurveySharingGroupMembers" />
         <AssociationConnector Association="SMDDevModel.FK_SharedSurveyQuestion_SurveySharingGroup" />
         <EntityTypeShape EntityType="SMDDevModel.vw_Notifications" Width="1.5" PointX="13.375" PointY="0.75" />
+        <EntityTypeShape EntityType="SMDDevModel.CouponRatingReview" Width="1.5" PointX="17.25" PointY="73.125" />
+        <AssociationConnector Association="SMDDevModel.FK_CouponRatingReview_Coupon" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
