@@ -168,6 +168,9 @@ namespace SMD.Repository.BaseRepository
 
 
         public DbSet<vw_Coupons> vw_Coupons { get; set; }
+        public DbSet<CouponRatingReview> CouponRatingReview { get; set; }
+
+        
 
         public DbSet<vw_ReferringCompanies> vwvw_ReferringCompanies { get; set; }
 

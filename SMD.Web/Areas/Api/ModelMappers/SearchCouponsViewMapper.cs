@@ -41,6 +41,7 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                        DealsCount = source.DealsCount ,
                        CurrencyCode = source.CurrencyCode== null ? "" : source.CurrencyCode,
                        CurrencySymbol = source.CurrencySymbol == null ? "" : source.CurrencySymbol,
+                       AvgRating = source.AvgRating == null ? 0 : source.AvgRating
 
                    };
         }

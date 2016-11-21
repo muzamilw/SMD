@@ -36,6 +36,8 @@ namespace SMD.Models.Common
         public string CurrencyCode { get; set; }
 
         public string CurrencySymbol { get; set; }
+
+        public int AvgRating { get; set; }
         
     }
 

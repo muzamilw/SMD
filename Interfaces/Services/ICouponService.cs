@@ -26,7 +26,7 @@ namespace SMD.Interfaces.Services
         SearchCouponsResponse SearchCoupons(int categoryId, int type, int size, string keywords, int pageNo, int distance, string Lat, string Lon, string UserId);
 
 
-        GetCouponByID_Result GetCouponByIdDefault(long CouponId, string UserId, string Lat, string Lon);
+        GetCouponByID_Result GetCouponByIdDefault(long CouponId, string UserId, string Lat, string Lon, out CouponRatingReviewOverallResponse rating);
 
         bool CheckCouponFlaggedByUser(long CouponId, string UserId);
 
@@ -54,6 +54,8 @@ namespace SMD.Interfaces.Services
         CouponsResponseModelForApproval GetMarketingDeals(GetPagedListRequest request);
         String GetUserName(string id);
         string UpdateDealMarketing(Coupon source);
+
+        bool InsertCouponRatingReview(CouponRatingReview model, string Image1String, string Image2String, string Image3String, string Image1ext, string Image2ext, string Image3ext);
 
     }
 }

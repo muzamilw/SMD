@@ -132,6 +132,9 @@
     <Compile Include="CouponPriceOption.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="CouponRatingReview.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Currency.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

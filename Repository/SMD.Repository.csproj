@@ -199,6 +199,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BranchCategoryRepository.cs" />
     <Compile Include="Repositories\CampaignCategoriesRepository.cs" />
+    <Compile Include="Repositories\CouponRatingReviewRepository.cs" />
     <Compile Include="Repositories\SurveySharingGroupShareRepository.cs" />
     <Compile Include="Repositories\SharedSurveyQuestionRepository.cs" />
     <Compile Include="Repositories\NotificationRepository.cs" />

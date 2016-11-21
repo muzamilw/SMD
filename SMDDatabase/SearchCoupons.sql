@@ -1,13 +1,13 @@
-﻿USE [SMDv2]
+﻿
 GO
-/****** Object:  StoredProcedure [dbo].[SearchCoupons]    Script Date: 10/13/2016 3:57:37 PM ******/
+/****** Object:  StoredProcedure [dbo].[SearchCoupons]    Script Date: 11/21/2016 5:23:42 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
 ALTER PROCEDURE [dbo].[SearchCoupons]
---   EXEC [dbo].[SearchCoupons] 		@categoryId =2,		@type = 1,		@keywords = N'',		@distance = 1000000000,		@Lat = N'31.483177',		@Lon = N'74.288167',		@UserId = N'88d8d269-6d4f-4310-9efdd-aed888ef7ac5lk',		@FromRow = 0,		@ToRow = 100
+--   EXEC [dbo].[SearchCoupons] 		@categoryId =0,		@type = 1,		@keywords = N'',		@distance = 1000000000,		@Lat = N'31.483177',		@Lon = N'74.288167',		@UserId = N'b18b8879-055f-406f-8fbb-e2e8bf286ca5',		@FromRow = 0,		@ToRow = 100
 
 	-- Add the parameters for the stored procedure here
 	@categoryId INT = 1 ,
@@ -24,6 +24,7 @@ AS
 BEGIN
 
 
+set @distance = 1000000
 
 
 declare @currentDate datetime
@@ -66,7 +67,10 @@ DECLARE @source geography = geography::Point(@lat, @lon, 4326)
 				vchr.LocationCity,
 				cpoptc.cnt DealsCount,
 				curr.CurrencyCode,
-				curr.CurrencySymbol
+				curr.CurrencySymbol,
+				isnull(crrRatingAvg.arravg,0)+5 AvgRating,
+				(case when uReview.UserId is null then 0 else 1 end) UserHasRated
+				
 	
 
 				from Coupon vchr
@@ -74,6 +78,7 @@ DECLARE @source geography = geography::Point(@lat, @lon, 4326)
 				inner join Company comp on vchr.CompanyId = comp.CompanyId
 				inner join Country cntry on comp.BillingCountryId = cntry.CountryID
 				inner join Currency curr on cntry.CurrencyID = curr.CurrencyID
+				left outer join CouponRatingReview uReview on vchr.CouponId = uReview.CouponId and uReview.UserId = @UserId
 
 				OUTER APPLY (SELECT TOp 1 Price, Savings
 								FROM   CouponPriceOption cpo
@@ -83,6 +88,11 @@ DECLARE @source geography = geography::Point(@lat, @lon, 4326)
 								FROM   CouponPriceOption cpo
 								WHERE  cpo.CouponId = vchr.CouponId
 								) cpoptc
+
+				OUTER APPLY (SELECT avg(crr.StarRating) arravg
+								FROM   CouponRatingReview crr
+								WHERE  crr.CouponId = vchr.CouponId
+								) crrRatingAvg
 
 	
 				where (
@@ -117,13 +127,10 @@ DECLARE @source geography = geography::Point(@lat, @lon, 4326)
 					CouponListingMode = 3 and @currentDate between DATEFROMPARTS(vchr.CouponActiveYear, vchr.CouponActiveMonth,1) and dateadd(month,2,DATEFROMPARTS(vchr.CouponActiveYear, vchr.CouponActiveMonth,day(EOMONTH ( DATEFROMPARTS(vchr.CouponActiveYear, vchr.CouponActiveMonth,1)))))
 						and  vchr.CouponQtyPerUser > (select count(*) from [dbo].[UserPurchasedCoupon] upc where upc.couponID = vchr.couponid and upc.userId = @UserId) 
 					)
-		
-		
-		
 
 		
 					)
-					group by vchr.CouponId, CouponTitle,vchr.CouponImage1,LogoUrl,cpopt.Price, cpopt.Savings,SwapCost,vchr.CompanyId,CouponActiveMonth,CouponActiveYear,vchr.LocationLAT, vchr.LocationLON,CouponListingMode, comp.companyname, vchr.LocationTitle, vchr.LocationCity,vchr.ApprovalDateTime, cpoptc.cnt,curr.CurrencyCode,curr.CurrencySymbol
+					group by vchr.CouponId, CouponTitle,vchr.CouponImage1,LogoUrl,cpopt.Price, cpopt.Savings,SwapCost,vchr.CompanyId,CouponActiveMonth,CouponActiveYear,vchr.LocationLAT, vchr.LocationLON,CouponListingMode, comp.companyname, vchr.LocationTitle, vchr.LocationCity,vchr.ApprovalDateTime, cpoptc.cnt,curr.CurrencyCode,curr.CurrencySymbol,crrRatingAvg.arravg,uReview.UserId
 
 
 					
@@ -154,6 +161,9 @@ DECLARE @source geography = geography::Point(@lat, @lon, 4326)
 					cpoptc.cnt DealsCount,
 					curr.CurrencyCode,
 					curr.CurrencySymbol,
+					isnull(crrRatingAvg.arravg,0)+5 AvgRating,
+					(case when uReview.UserId is null then 0 else 1 end) UserHasRated,
+				
 					0 as TotalItems
 
 					from Coupon vchr
@@ -161,6 +171,7 @@ DECLARE @source geography = geography::Point(@lat, @lon, 4326)
 					inner join Company comp on vchr.CompanyId = comp.CompanyId
 					inner join Country cntry on comp.BillingCountryId = cntry.CountryID
 					inner join Currency curr on cntry.CurrencyID = curr.CurrencyID
+					left outer join CouponRatingReview uReview on vchr.CouponId = uReview.CouponId and uReview.UserId = @UserId
 
 					OUTER APPLY (SELECT TOp 1 Price, Savings
 									FROM   CouponPriceOption cpo
@@ -170,6 +181,11 @@ DECLARE @source geography = geography::Point(@lat, @lon, 4326)
 									FROM   CouponPriceOption cpo
 									WHERE  cpo.CouponId = vchr.CouponId
 									) cpoptc
+
+					OUTER APPLY (SELECT avg(crr.StarRating) arravg
+								FROM   CouponRatingReview crr
+								WHERE  crr.CouponId = vchr.CouponId
+								) crrRatingAvg
 
 					where comp.IsSpecialAccount = 1
 
