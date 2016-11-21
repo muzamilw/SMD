@@ -852,7 +852,12 @@ namespace SMD.Repository.BaseRepository
             ObjectResult<Int32> res = ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Int32>("getCampaignByIdQQFormAnalytic", Id, chioce, gender, ageRange, profession, city);
             return res;
         }
+        public ObjectResult<getCampaignByIdFormDataAnalytic_Result> getCampaignByIdFormDataAnalytic(long CampaignId)
+        {
+            var Id = new ObjectParameter("Id", CampaignId);
 
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getCampaignByIdFormDataAnalytic_Result>("getCampaignByIdFormDataAnalytic", Id);
+        }
 
         #endregion
     }

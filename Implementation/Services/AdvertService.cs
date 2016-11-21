@@ -1362,6 +1362,9 @@ namespace SMD.Implementation.Services
         {
             return _adCampaignRepository.getCampaignROItblAnalytic(ID);
         }
-        
+        public List<getCampaignByIdFormDataAnalytic_Result> getCampaignByIdFormDataAnalytic(long CampaignId)
+        {
+            return _adCampaignRepository.getCampaignByIdFormDataAnalytic(CampaignId);
+        }
     }
 }

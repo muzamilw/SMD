@@ -178,7 +178,7 @@ define("ads/ads.viewModel",
                 CitiesAnalyticsData = ko.observableArray([]),
                 ProfessionAnalyticsData = ko.observableArray([]),
                 QQChoicesAnalyticsData = ko.observableArray([]),
-
+                formAnalyticsData = ko.observableArray([]),
                 GenderAnalyticsData = ko.observableArray([{ id: 0, name: "All" }, { id: 1, name: "male" }, { id: 2, name: "female" } ]),
                 AgeRangeAnalyticsData = ko.observableArray([{ id: 0, name: "All" }, { id: 1, name: "10-20" }, { id: 2, name: "20-30" }, { id: 3, name: "30-40" }, { id: 4, name: "40-50" }, { id: 5, name: "50-60" }, { id: 6, name: "60-70" }, { id: 7, name: "70-80" }, { id: 8, name: "80-90" }, { id: 9, name: "90+" }]),
                 
@@ -252,6 +252,9 @@ define("ads/ads.viewModel",
                                 QQChoicesAnalyticsData.removeAll();
                                 ko.utils.arrayPushAll(QQChoicesAnalyticsData(), data.Choices);
                                 QQChoicesAnalyticsData.valueHasMutated();
+                                formAnalyticsData.removeAll();
+                                ko.utils.arrayPushAll(formAnalyticsData(), data.formData);
+                                formAnalyticsData.valueHasMutated();
                                 
                             }
 
@@ -3588,7 +3591,8 @@ define("ads/ads.viewModel",
                     selectedQQCtAnalytics:selectedQQCtAnalytics,
                     AgeRangeAnalyticsData: AgeRangeAnalyticsData,
                     QQStatsAnalytics:QQStatsAnalytics,
-                    isflageClose: isflageClose
+                    isflageClose: isflageClose,
+                    formAnalyticsData: formAnalyticsData
                     
                 };
             })()
