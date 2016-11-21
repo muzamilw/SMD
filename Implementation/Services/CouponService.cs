@@ -1134,6 +1134,17 @@ namespace SMD.Implementation.Services
                 TotalCount = rowCount
             };
         }
+
+
+
+
+        public bool InsertCouponRatingReview(CouponRatingReview model)
+        {
+
+            couponRatingReviewRepository.Add(model);
+            couponRatingReviewRepository.SaveChanges();
+            return true;
+        }
         public String GetUserName(string id)
         {
             return aspnetUserRepository.GetUserName(id);

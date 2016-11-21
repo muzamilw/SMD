@@ -386,6 +386,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Api\Controllers\CampaignFormAnalyticController.cs" />
     <Compile Include="Areas\Api\Controllers\CountryController.cs" />
+    <Compile Include="Areas\Api\Controllers\CouponRatingReviewController.cs" />
     <Compile Include="Areas\Api\Controllers\NotificationsController.cs" />
     <Compile Include="Areas\Api\Controllers\CouponAnalyticsController.cs" />
     <Compile Include="Areas\Api\Controllers\ApprovePayOutHistoryController.cs" />
@@ -435,6 +436,7 @@
     <Compile Include="Areas\Api\Models\BranchCategoryResponseModel.cs" />
     <Compile Include="Areas\Api\Models\CompanybillingAddress.cs" />
     <Compile Include="Areas\Api\Models\CompanyBranch.cs" />
+    <Compile Include="Areas\Api\Models\CouponRatingReviewRequest.cs" />
     <Compile Include="Areas\Api\Models\CouponsApproval.cs" />
     <Compile Include="Areas\Api\Models\CurrencyApprov.cs" />
     <Compile Include="Areas\Api\Models\Dashboard_analytics_Result.cs" />
