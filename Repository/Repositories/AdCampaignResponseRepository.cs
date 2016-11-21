@@ -44,7 +44,7 @@ namespace SMD.Repository.Repositories
         }
         public int getCampaignByIdQQFormAnalytic(int CampaignId, int Choice, int Gender, int age, string Profession, string City)
         { 
-             return db.getCampaignByIdQQFormAnalytic(CampaignId, Choice, Gender, age, Profession, City);
+             return db.getCampaignByIdQQFormAnalytic(CampaignId, Choice, Gender, age, Profession, City).ToList().FirstOrDefault();
         }
     }
 }

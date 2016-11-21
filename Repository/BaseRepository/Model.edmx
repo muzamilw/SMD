@@ -4153,7 +4153,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <FunctionImport Name="getCampaignByIdFormDataAnalytic" ReturnType="Collection(DomainModels.getCampaignByIdFormDataAnalytic_Result)">
             <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="getCampaignByIdQQFormAnalytic">
+          <FunctionImport Name="getCampaignByIdQQFormAnalytic" ReturnType="Collection(Int32)">
             <Parameter Name="Id" Mode="In" Type="Int32" />
             <Parameter Name="coice" Mode="In" Type="Int32" />
             <Parameter Name="gender" Mode="In" Type="Int32" />

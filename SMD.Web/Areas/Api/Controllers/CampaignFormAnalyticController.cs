@@ -18,12 +18,12 @@ namespace SMD.MIS.Areas.Api.Controllers
 
         public CampaignFormAnalyticController(IAdCampaignResponseService IAdCampaignResponseService)
         {
-            _IAdCampaignResponseService = IAdCampaignResponseService;
+            this._IAdCampaignResponseService = IAdCampaignResponseService;
         }
         public FormAnalyticResponseModel Get(int Id, int Choice, int Gender, int age, string profession, string City)
         {
             FormAnalyticResponseModel data = new FormAnalyticResponseModel();
-                data.QQStats = _IAdCampaignResponseService.getCampaignByIdQQFormAnalytic(CampaignId, Choice,  Gender, age, profession, City);
+                data.QQStats = _IAdCampaignResponseService.getCampaignByIdQQFormAnalytic(Id, Choice,  Gender, age, profession, City);
             return data;
         }
 
