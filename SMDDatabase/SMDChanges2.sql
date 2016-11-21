@@ -3103,3 +3103,63 @@ set c.CountryPhoneCode = p.code
 from country c
 inner join [dbo].[Country_Phone_codes] p on c.countryname like CONCAT('%', p.name, '%') 
 
+
+
+
+
+
+
+
+/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.Coupon SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+CREATE TABLE dbo.CouponRatingReview
+	(
+	CouponReviewId bigint NOT NULL IDENTITY (1, 1),
+	CouponId bigint NULL,
+	StarRating int NULL,
+	Review nvarchar(800) NULL,
+	RatingDateTime datetime NULL,
+	UserId nvarchar(128) NULL,
+	CompanyId int NULL,
+	Status int NULL,
+	ReviewImage1 nvarchar(250) NULL,
+	ReviewImage2 nvarchar(250) NULL,
+	Reviewimage3 nvarchar(250) NULL
+	)  ON [PRIMARY]
+GO
+ALTER TABLE dbo.CouponRatingReview ADD CONSTRAINT
+	PK_CouponRatingReview PRIMARY KEY CLUSTERED 
+	(
+	CouponReviewId
+	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+
+GO
+ALTER TABLE dbo.CouponRatingReview ADD CONSTRAINT
+	FK_CouponRatingReview_Coupon FOREIGN KEY
+	(
+	CouponId
+	) REFERENCES dbo.Coupon
+	(
+	CouponId
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+ALTER TABLE dbo.CouponRatingReview SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT

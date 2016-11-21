@@ -3,6 +3,7 @@ using SMD.Interfaces.Services;
 using SMD.MIS.Areas.Api.Models;
 using SMD.Models.Common;
 using SMD.Models.DomainModels;
+using SMD.Models.ResponseModels;
 using SMD.WebBase.Mvc;
 using System;
 using System.Collections.Generic;
@@ -54,7 +55,10 @@ namespace SMD.MIS.Areas.Api.Controllers
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
             }
-            var coupon = _couponService.GetCouponByIdDefault(Convert.ToInt64( CouponId),UserId,Lat,Lon);
+            CouponRatingReviewOverallResponse rating = null;
+
+
+            var coupon = _couponService.GetCouponByIdDefault(Convert.ToInt64(CouponId), UserId, Lat, Lon, out rating);
 
             var couponPriceoptions = _couponService.GetCouponPriceOptions(Convert.ToInt64( CouponId));
 
@@ -69,6 +73,9 @@ namespace SMD.MIS.Areas.Api.Controllers
 
 
             var res = Mapper.Map<SMD.Models.DomainModels.GetCouponByID_Result, CouponDetails>(coupon);
+
+            res.OverAllStarRating = rating.OverAllStarRating;
+            res.CouponRatingReviewResponses = rating.CouponRatingReviewResponses;
 
             if (couponPriceoptions != null && couponPriceoptions.Count > 0)
                 res.CouponPriceOptions = couponPriceoptions.Select(a => Mapper.Map<SMD.Models.DomainModels.CouponPriceOption, SMD.MIS.Areas.Api.Models.CouponPriceOption>(a)).ToList();

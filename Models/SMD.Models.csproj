@@ -131,6 +131,7 @@
     <Compile Include="DomainModels\Coupon.cs" />
     <Compile Include="DomainModels\CouponCategories.cs" />
     <Compile Include="DomainModels\CouponPriceOption.cs" />
+    <Compile Include="DomainModels\CouponRatingReview.cs" />
     <Compile Include="DomainModels\DamImage.cs" />
     <Compile Include="DomainModels\Dashboard_analytics_Result.cs" />
     <Compile Include="DomainModels\EventStatus.cs" />
@@ -281,6 +282,7 @@
     <Compile Include="ResponseModels\BaseApiResponse.cs" />
     <Compile Include="ResponseModels\CompanyResponseModel.cs" />
     <Compile Include="ResponseModels\CouponsResponseModelForApproval.cs" />
+    <Compile Include="ResponseModels\CouponRatingReviewResponse.cs" />
     <Compile Include="ResponseModels\PayOutResponseModelForApproval.cs" />
     <Compile Include="ResponseModels\RandomGameResponse.cs" />
     <Compile Include="ResponseModels\ProfileQuestionResponseModelForApproval.cs" />

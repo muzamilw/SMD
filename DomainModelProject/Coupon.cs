@@ -21,6 +21,7 @@ namespace DomainModelProject
             this.InvoiceDetails = new HashSet<InvoiceDetail>();
             this.CouponPriceOptions = new HashSet<CouponPriceOption>();
             this.CampaignEventHistories = new HashSet<CampaignEventHistory>();
+            this.CouponRatingReviews = new HashSet<CouponRatingReview>();
         }
     
         public long CouponId { get; set; }
@@ -113,5 +114,6 @@ namespace DomainModelProject
         public virtual ICollection<CouponPriceOption> CouponPriceOptions { get; set; }
         public virtual ICollection<CampaignEventHistory> CampaignEventHistories { get; set; }
         public virtual Company Company { get; set; }
+        public virtual ICollection<CouponRatingReview> CouponRatingReviews { get; set; }
     }
 }

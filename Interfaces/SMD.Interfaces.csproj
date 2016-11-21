@@ -75,6 +75,7 @@
     <Compile Include="Data\SecurityAccessRight.cs" />
     <Compile Include="IAuthorizationChecker.cs" />
     <Compile Include="IClaimsSecurityService.cs" />
+    <Compile Include="Repository\ICouponRatingReviewRepository.cs" />
     <Compile Include="Repository\ICouponPriceOptionRepository.cs" />
     <Compile Include="Repository\IAspnetUsersRepository.cs" />
     <Compile Include="Repository\IPayOutHistoryRepository.cs" />
