@@ -7,7 +7,7 @@ using System.Web;
 
 namespace SMD.MIS.Areas.Api.Models
 {
-    public class FormAnalyticResponseModel 
+    public class FormAnalyticDDResponseModel
     {
 
         public List<CityDD> Cities { get; set; }
@@ -26,37 +26,43 @@ namespace SMD.MIS.Areas.Api.Models
         public QuizChoice()
         {
 
-        }  
+        }
         public String ChoiceDescription { get; set; }
         public int ChoiceId { get; set; }
     }
-}
-
- public class Profession
+        public class Profession
     {
-        public Profession(String _name, String _id)
+        public Profession(String _name)
         {
-            id = id;
+            //  id = id;
             name = _name;
         }
         public Profession()
         {
 
-        }  
-        public String id { get; set; }
+        }
+        //  public String id { get; set; }
         public String name { get; set; }
     }
- public class CityDD
- {
-     public CityDD(String _name, int _id)
-     {
-         id = id;
-         name = _name;
-     }
-     public CityDD()
-     {
+    public class CityDD
+    {
+        public CityDD(String _name)
+        {
+            //id = id;
+            name = _name;
+        }
+        public CityDD()
+        {
 
-     }
-     public int id { get; set; }
-     public String name { get; set; }
- }
+        }
+        // public int id { get; set; }
+        public String name { get; set; }
+    }
+    public class FormAnalyticResponseModel
+    {
+
+        public int QQStats { get; set; }
+        
+    }
+
+}
