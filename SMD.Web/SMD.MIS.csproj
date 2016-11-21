@@ -924,6 +924,7 @@
     <Content Include="Content\Images\Poll_icon.png" />
     <Content Include="Content\Images\Preview.png" />
     <Content Include="Content\Images\ReportControlbg.jpg" />
+    <Content Include="Content\Images\Share_icon_100.png" />
     <Content Include="Content\Images\Surveys_icon.png" />
     <Content Include="Content\Images\Surveys_small.png" />
     <Content Include="Content\Images\Surveys_small_36.png" />

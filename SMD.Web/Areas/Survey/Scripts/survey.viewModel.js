@@ -2089,7 +2089,7 @@ define("survey/survey.viewModel",
                            // $("#chart_div").css("cssText", "width:679px!important;");
                         }
                         else {
-                            AudienceWidth('525px');
+                            AudienceWidth('431px');
                             IsVisibleAudience(true);
                         }
                     };

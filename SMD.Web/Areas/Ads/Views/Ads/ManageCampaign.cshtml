@@ -102,8 +102,20 @@ else
                                 <div class="pull-left" style="width:26px;">
                                     &nbsp;
                                 </div>
-
-                                <div class="pull-left" style="width:349px;">
+                                <div class="pull-left" style="width:254px;">
+                                    <div>
+                                        <div class="pull-right ads-numbering-main">
+                                            <a data-toggle="modal">
+                                                <div class="ads-numbering-box socialbck">
+                                                    <img src="~/Content/Images/Share_icon_100.png" width="20px" />
+                                                </div>
+                                                <br />
+                                                <span class="goSocial">Go Social</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="pull-left" >
                                     <div>
                                         <div class="pull-right ads-numbering-main" style="width:107px;
                                     border-right: 1px solid rgb(220,220,220);
@@ -177,7 +189,7 @@ else
                                     </div>
                                 </div>
                                 <div class="col-lg-12" data-bind="visible: $root.previewScreenNumber() == 2">
-                                    <div style="height:34px;" class="borderbtmline ">
+                                    <div style="height:34px; display:none;" class="borderbtmline">
                                         <div class="col-lg-9">
                                             <div class="adsubHeading Theme_standard_clr" data-bind="visible: $root.previewScreenNumber() == 2,text: $root.tab2Heading">
                                                 Target audience in different cities.
@@ -511,41 +523,181 @@ else
                                             <label class="control-label text-right tooltip-float font20 floatNone" style="float:left !important; ">Target Audience Criteria</label>
                                         </div>
                                     </div>
-                                    <div id="first_cont">
-                                        <div class="form-group margin-btm26">
-                                            <div class="col-lg-2">
-                                                <label for="txtCity" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Target city</label>
+
+                                    <div id="secondCont">
+                                        <div class="form-group">
+                                            <div class="col-lg-2"></div>
+                                            <div class="col-lg-3">
+                                         
+                                                <div class="radio">
+                                                    <input type="radio" name="optionsRadiosfilters" id="optionsRadiosfiltersBroad" value="1" data-bind="checked: IsUseFilter">
+                                                    <label for="optionsRadiosfiltersBroad" style="font-size:18px;">
+                                                        Broad Trageting
+                                                    </label>
+                                                </div>
                                             </div>
                                             <div class="col-lg-7">
-                                                <div id="count_edt">
-                                                    <div class="coun_in_ex_cnt" style="display:none;">
-                                                        <select id="in_ex_count_opt" class="form-control" data-bind="value: $root.selectedLocationIncludeExclude">
-                                                            <option value="1">Include</option>
-                                                            <option value="0">Exclude</option>
-                                                        </select>
+                                                <div class="radio">
+                                                    <input type="radio" name="optionsRadiosfilters" id="optionsRadiosfiltersHyper" value="0" data-bind="checked: IsUseFilter">
+                                                    <label for="optionsRadiosfiltersHyper" style="font-size:18px;">
+                                                        Hyper Trageting (Insights)
+                                                    </label>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                        <div id="basic_targeting" data-bind="visible:$root.campaignModel().IsUseFilter()==1">
+                                            <div class="form-group margin-btm26">
+                                                <div class="col-lg-2">
+                                                    <label for="txtAge" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Age Range</label>
+                                                </div>
+                                                <div class="col-lg-7">
+                                                    <div class="col-lg-2" style=" padding: 0px !important;     margin-left: 8px;">
+                                                        <select class="form-control" data-bind="options: $root.ageRange, optionsText: 'text', optionsValue: 'value', value: AgeRangeStart,enable:$root.isClickRateVisible()!=true"></select>
                                                     </div>
-                                                    <div class="sep-line" style="display:none;">
+                                                    <div class="pull-left range_dash">
+                                                        -
                                                     </div>
-                                                    <div class="count_token_opt_cnt">
-                                                        <input type="text" data-autocomplete="off" class="" id="searchCampaignLocations" placeholder="Add City or Town" />
-                                                        <input type="text" id="us3-radius" placeholder="Radius (meters)" data-bind="value: $root.selectedLocationRadius " class="locRadius locVisibility" />
-                                                        <button data-bind="click:$root.onAddLocation" class="locVisibility btn btn-info">Add Location</button>
-                                                    </div>
-                                                </div><div class="clearfix"></div>
-                                                <div class="count_token_opt_cnt_map locMap">
-                                                    <div id="mapContainer" style="width: 100%; height: 200px;"></div>
-                                                    <div class="clearfix">&nbsp;</div>
-                                                    <div class="m-t-small" style="display:none;">
-                                                        <label class="p-r-small col-sm-1 control-label">Lat.:</label>
-                                                        <div class="col-sm-3"><input type="text" class="form-control" style="width: 110px" id="us3-lat" data-bind="value: $root.selectedLocationLat " /></div>
-                                                        <label class="p-r-small col-sm-2 control-label">Long.:</label>
-                                                        <div class="col-sm-3"><input type="text" class="form-control" style="width: 110px" id="us3-lon" data-bind="value: $root.selectedLocationLong " /></div>
+                                                    <div class="col-lg-2" style=" padding: 0px !important;">
+                                                        <select class="form-control" data-bind="options: $root.ageRange, optionsText: 'text', optionsValue: 'value', value: AgeRangeEnd,validationTooltip: AgeRangeEnd, validationOnElement: AgeRangeEnd,enable:$root.isClickRateVisible()!=true"></select>
                                                     </div>
                                                 </div>
-                                                <div class="clearfix">
+                                                <div class="col-lg-1" style=" padding: 0px !important;    display:none;   text-align: left;    font-size: 17px;    color: red;">
+                                                    <span data-bind="text: $root.genderppc()"></span>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                </div>
+                                            </div>
+                                            <div class="form-group margin-btm26">
+                                                <div class="col-lg-2">
+                                                    <label for="txtGender" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Gender</label>
+                                                </div>
+                                                <div class="col-lg-7">
+                                                    <div class="radio col-lg-3">
+                                                        <input type="radio" name="optionsRadiosGender" id="optionsRadiosGenderAll" value="1" data-bind="checked: Gender,enable:$root.isClickRateVisible()!=true">
+                                                        <label for="optionsRadiosGenderAll">
+                                                            All
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio col-lg-3">
+                                                        <input type="radio" name="optionsRadiosGender" id="optionsRadiosGenderMEn" value="2" data-bind="checked: Gender,enable:$root.isClickRateVisible()!=true">
+                                                        <label for="optionsRadiosGenderMEn">
+                                                            Men
+                                                        </label>
+                                                        <span class="help-block text-right"></span>
+                                                    </div>
+                                                    <div class="radio col-lg-3">
+                                                        <input type="radio" name="optionsRadiosGender" id="optionsRadiosGenderWMEn" value="3" data-bind="checked: Gender,enable:$root.isClickRateVisible()!=true">
+                                                        <label for="optionsRadiosGenderWMEn">
+                                                            Women
+                                                        </label>
+                                                        <span class="help-block text-right"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3" style=" padding: 0px !important; display:none;   text-align: left;
+    font-size: 17px;
+    color: red;">
+                                                    <span data-bind="text: $root.ageppc()"></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group margin-btm26" style="display:none;">
+                                                <div class="col-lg-3">
+                                                    <label for="txtLanguages" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Languages</label>
+                                                </div>
+                                                <div class="col-lg-8">
+                                                    <div>
+                                                        <div id="lang_token_cnt">
+                                                            <!-- ko template: { name: 'AdCampaignLanguageTemplate' , foreach: AdCampaignTargetCriterias } -->
+                                                            <!-- /ko -->
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                        <div id="land_edt">
+                                                            <div class="coun_in_ex_cnt">
+                                                                <select id="in_ex_count_opt" class="form-control" data-bind="value: $root.selectedLangIncludeExclude">
+                                                                    <option value="1">Include</option>
+                                                                    <option value="0">Exclude</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="sep-line">
+                                                            </div>
+                                                            <div class="count_token_opt_cnt">
+                                                                <input type="text" data-autocomplete="off" class="" id="searchLanguages" placeholder="Enter a language" />
+                                                            </div>
+                                                            <div class="clearfix">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group margin-btm26" style="display:none;">
+                                                <div class="col-lg-3">
+                                                    <label for="txtLanguages" class="control-label text-right tooltip-float floatNone">Education</label>
+                                                </div>
+                                                <div class="col-lg-8">
+                                                    <div>
+                                                        <div id="lang_token_cnt">
+                                                            <!-- ko template: { name: 'AdCampaignEducationTemplate' , foreach: AdCampaignTargetCriterias } -->
+                                                            <!-- /ko -->
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                        <div id="land_edt">
+                                                            <div class="coun_in_ex_cnt" style="display:none;">
+                                                                <select id="in_ex_count_opt" class="form-control" data-bind="value: $root.selectedEducationIncludeExclude">
+                                                                    <option value="1">Include</option>
+                                                                    <option value="0">Exclude</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="sep-line" style="display:none;">
+                                                            </div>
+                                                            <div class="count_token_opt_prof_cnt">
+                                                                <select id="ddpEducation" class="form-control" data-bind="options: $root.educations, optionsText: 'Title', optionsValue: 'EducationId',optionsCaption: '<ALL>', event: { change: addNewEducationCriteria }"></select>
+                                                                @*<input type="text" data-autocomplete="off" class="" id="searchEducations" placeholder="Enter an Education" />*@
+                                                            </div>
+                                                            <div class="clearfix">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group margin-btm26">
+                                                <div class="col-lg-2" style="display:none">
+                                                    <label for="txtLanguages" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Profession</label>
+                                                </div>
+                                                <div class="col-lg-7" style="display:none">
+                                                    <div>
+                                                        <div id="lang_token_cnt">
+                                                            <!-- ko template: { name: 'AdCampaignIndustryTemplate' , foreach: AdCampaignTargetCriterias } -->
+                                                            <!-- /ko -->
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                        <div id="land_edt">
+                                                            <div class="coun_in_ex_cnt" style="display:none;">
+                                                                <select id="in_ex_count_opt" class="form-control" data-bind="value: $root.selectedIndustryIncludeExclude">
+                                                                    <option value="1">Include</option>
+                                                                    <option value="0">Exclude</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="sep-line" style="display:none;">
+                                                            </div>
+                                                            <div class="count_token_opt_prof_cnt">
+                                                                <select id="ddpIndustory" class="form-control" data-bind="options: $root.professions, optionsText: 'IndustryName', optionsValue: 'IndustryId',optionsCaption: '<ALL>', event: { change: addNewProfessionCriteria },enable:$root.isClickRateVisible()!=true"></select>
+                                                                @*<input type="text" data-autocomplete="off" class="" id="searchIndustries" placeholder="Enter an industry" />*@
+                                                            </div>
+                                                            <div class="clearfix">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3" style="  text-align: left;   display:none; padding: 0px !important;
+    font-size: 17px;
+    color: red;">
+                                                    <span data-bind="text: $root.professionppc()"></span>
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div id="first_cont" data-bind="visible:$root.campaignModel().IsUseFilter()==1">
                                         <div class="form-group margin-btm26">
                                             <div class="col-lg-2">
                                                 <label for="txtCountries" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Target country</label>
@@ -581,7 +733,42 @@ else
 
                                             </div>
                                         </div>
-                                        <div class="col-lg-12" style="padding:0px;">
+                                        <div class="form-group margin-btm26">
+                                            <div class="col-lg-2">
+                                                <label for="txtCity" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Target city</label>
+                                            </div>
+                                            <div class="col-lg-7">
+                                                <div id="count_edt">
+                                                    <div class="coun_in_ex_cnt" style="display:none;">
+                                                        <select id="in_ex_count_opt" class="form-control" data-bind="value: $root.selectedLocationIncludeExclude">
+                                                            <option value="1">Include</option>
+                                                            <option value="0">Exclude</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="sep-line" style="display:none;">
+                                                    </div>
+                                                    <div class="count_token_opt_cnt">
+                                                        <input type="text" data-autocomplete="off" class="" id="searchCampaignLocations" placeholder="Add City or Town" />
+                                                        <input type="text" id="us3-radius" placeholder="Radius (meters)" data-bind="value: $root.selectedLocationRadius " class="locRadius locVisibility" />
+                                                        <button data-bind="click:$root.onAddLocation" class="locVisibility btn btn-info">Add Location</button>
+                                                    </div>
+                                                </div><div class="clearfix"></div>
+                                                <div class="count_token_opt_cnt_map locMap">
+                                                    <div id="mapContainer" style="width: 100%; height: 200px;"></div>
+                                                    <div class="clearfix">&nbsp;</div>
+                                                    <div class="m-t-small" style="display:none;">
+                                                        <label class="p-r-small col-sm-1 control-label">Lat.:</label>
+                                                        <div class="col-sm-3"><input type="text" class="form-control" style="width: 110px" id="us3-lat" data-bind="value: $root.selectedLocationLat " /></div>
+                                                        <label class="p-r-small col-sm-2 control-label">Long.:</label>
+                                                        <div class="col-sm-3"><input type="text" class="form-control" style="width: 110px" id="us3-lon" data-bind="value: $root.selectedLocationLong " /></div>
+                                                    </div>
+                                                </div>
+                                                <div class="clearfix">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-12" style="padding:0px;display:none;">
                                             <div style="height:34px;" class="borderbtmline">
                                                 <div class="col-lg-9 ">
                                                     <div class="adsubHeading Theme_standard_clr  ">Segment audience by age , range , gender and professions.</div>
@@ -604,164 +791,16 @@ else
 
 
 
-                                    <div id="secondCont">
-                                        <div class="form-group margin-btm26">
-                                            <div class="col-lg-2">
-                                                <label for="txtAge" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Age Range</label>
-                                            </div>
-                                            <div class="col-lg-7">
-                                                <div class="col-lg-2" style=" padding: 0px !important;     margin-left: 8px;">
-                                                    <select class="form-control" data-bind="options: $root.ageRange, optionsText: 'text', optionsValue: 'value', value: AgeRangeStart,enable:$root.isClickRateVisible()!=true"></select>
-                                                </div>
-                                                <div class="pull-left range_dash">
-                                                    -
-                                                </div>
-                                                <div class="col-lg-2" style=" padding: 0px !important;">
-                                                    <select class="form-control" data-bind="options: $root.ageRange, optionsText: 'text', optionsValue: 'value', value: AgeRangeEnd,validationTooltip: AgeRangeEnd, validationOnElement: AgeRangeEnd,enable:$root.isClickRateVisible()!=true"></select>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-1" style=" padding: 0px !important;    display:none;   text-align: left;    font-size: 17px;    color: red;">
-                                                <span data-bind="text: $root.genderppc()"></span>
-                                            </div>
-                                            <div class="col-lg-2">
-                                            </div>
-                                        </div>
-                                        <div class="form-group margin-btm26">
-                                            <div class="col-lg-2">
-                                                <label for="txtGender" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Gender</label>
-                                            </div>
-                                            <div class="col-lg-7">
-                                                <div class="radio col-lg-3">
-                                                    <input type="radio" name="optionsRadiosGender" id="optionsRadiosGenderAll" value="1" data-bind="checked: Gender,enable:$root.isClickRateVisible()!=true">
-                                                    <label for="optionsRadiosGenderAll">
-                                                        All
-                                                    </label>
-                                                </div>
-                                                <div class="radio col-lg-3">
-                                                    <input type="radio" name="optionsRadiosGender" id="optionsRadiosGenderMEn" value="2" data-bind="checked: Gender,enable:$root.isClickRateVisible()!=true">
-                                                    <label for="optionsRadiosGenderMEn">
-                                                        Men
-                                                    </label>
-                                                    <span class="help-block text-right"></span>
-                                                </div>
-                                                <div class="radio col-lg-3">
-                                                    <input type="radio" name="optionsRadiosGender" id="optionsRadiosGenderWMEn" value="3" data-bind="checked: Gender,enable:$root.isClickRateVisible()!=true">
-                                                    <label for="optionsRadiosGenderWMEn">
-                                                        Women
-                                                    </label>
-                                                    <span class="help-block text-right"></span>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3" style=" padding: 0px !important; display:none;   text-align: left;
-    font-size: 17px;
-    color: red;">
-                                                <span data-bind="text: $root.ageppc()"></span>
-                                            </div>
-                                        </div>
-                                        <div class="form-group margin-btm26" style="display:none;">
-                                            <div class="col-lg-3">
-                                                <label for="txtLanguages" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Languages</label>
-                                            </div>
-                                            <div class="col-lg-8">
-                                                <div>
-                                                    <div id="lang_token_cnt">
-                                                        <!-- ko template: { name: 'AdCampaignLanguageTemplate' , foreach: AdCampaignTargetCriterias } -->
-                                                        <!-- /ko -->
-                                                    </div>
-                                                    <div class="clearfix"></div>
-                                                    <div id="land_edt">
-                                                        <div class="coun_in_ex_cnt">
-                                                            <select id="in_ex_count_opt" class="form-control" data-bind="value: $root.selectedLangIncludeExclude">
-                                                                <option value="1">Include</option>
-                                                                <option value="0">Exclude</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="sep-line">
-                                                        </div>
-                                                        <div class="count_token_opt_cnt">
-                                                            <input type="text" data-autocomplete="off" class="" id="searchLanguages" placeholder="Enter a language" />
-                                                        </div>
-                                                        <div class="clearfix">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group margin-btm26" style="display:none;">
-                                            <div class="col-lg-3">
-                                                <label for="txtLanguages" class="control-label text-right tooltip-float floatNone">Education</label>
-                                            </div>
-                                            <div class="col-lg-8">
-                                                <div>
-                                                    <div id="lang_token_cnt">
-                                                        <!-- ko template: { name: 'AdCampaignEducationTemplate' , foreach: AdCampaignTargetCriterias } -->
-                                                        <!-- /ko -->
-                                                    </div>
-                                                    <div class="clearfix"></div>
-                                                    <div id="land_edt">
-                                                        <div class="coun_in_ex_cnt" style="display:none;">
-                                                            <select id="in_ex_count_opt" class="form-control" data-bind="value: $root.selectedEducationIncludeExclude">
-                                                                <option value="1">Include</option>
-                                                                <option value="0">Exclude</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="sep-line" style="display:none;">
-                                                        </div>
-                                                        <div class="count_token_opt_prof_cnt">
-                                                            <select id="ddpEducation" class="form-control" data-bind="options: $root.educations, optionsText: 'Title', optionsValue: 'EducationId',optionsCaption: '<ALL>', event: { change: addNewEducationCriteria }"></select>
-                                                            @*<input type="text" data-autocomplete="off" class="" id="searchEducations" placeholder="Enter an Education" />*@
-                                                        </div>
-                                                        <div class="clearfix">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group margin-btm26">
-                                            <div class="col-lg-2" style="display:none">
-                                                <label for="txtLanguages" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Profession</label>
-                                            </div>
-                                            <div class="col-lg-7" style="display:none">
-                                                <div>
-                                                    <div id="lang_token_cnt">
-                                                        <!-- ko template: { name: 'AdCampaignIndustryTemplate' , foreach: AdCampaignTargetCriterias } -->
-                                                        <!-- /ko -->
-                                                    </div>
-                                                    <div class="clearfix"></div>
-                                                    <div id="land_edt">
-                                                        <div class="coun_in_ex_cnt" style="display:none;">
-                                                            <select id="in_ex_count_opt" class="form-control" data-bind="value: $root.selectedIndustryIncludeExclude">
-                                                                <option value="1">Include</option>
-                                                                <option value="0">Exclude</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="sep-line" style="display:none;">
-                                                        </div>
-                                                        <div class="count_token_opt_prof_cnt">
-                                                            <select id="ddpIndustory" class="form-control" data-bind="options: $root.professions, optionsText: 'IndustryName', optionsValue: 'IndustryId',optionsCaption: '<ALL>', event: { change: addNewProfessionCriteria },enable:$root.isClickRateVisible()!=true"></select>
-                                                            @*<input type="text" data-autocomplete="off" class="" id="searchIndustries" placeholder="Enter an industry" />*@
-                                                        </div>
-                                                        <div class="clearfix">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3" style="  text-align: left;   display:none; padding: 0px !important;
-    font-size: 17px;
-    color: red;">
-                                                <span data-bind="text: $root.professionppc()"></span>
-                                            </div>
-                                        </div>
-                                    </div>
+                                  
 
-                                    <div id="thirdCont">
+                                    <div id="thirdCont" data-bind="visible:$root.campaignModel().IsUseFilter() == 0">
 
                                         <div class="col-lg-12" style="height:45px;">
                                             <div style="height:34px;" class="borderbtmline ">
                                                 <div class="col-lg-10 adsubHeading Theme_standard_clr">
 
                                                     <div class="adsubHeading Theme_standard_clr">
-                                                        Refine further using results from surveys , polls and quiz questions.
+                                                        Target audience using results from Surveys,Polls and Quiz Questions.
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-2">
@@ -777,7 +816,7 @@ else
                                             </div>
                                         </div>
 
-                                        <div class="form-group margin-btm26">
+                                        <div class="form-group margin-btm26" data-bind="visible:$root.campaignModel().IsUseFilter() == 0">
                                             @*<div class="col-lg-2">*@
                                             @*<label for="txtadditionalCrit" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Advanced matching options</label>*@
                                             @*</div>*@
@@ -1014,12 +1053,13 @@ else
                                     <div class="col-lg-12" data-bind="visible:$root.IsNewVideoCampaign">
 
                                         <div class="row" style="line-height:initial" data-bind="with: $root.campaignModel">
-                                            <div style="height:95px;border-bottom :1px solid rgb(220,220,220);">
-                                                <div class="col-lg-9 fontsize11" style="padding-left: 17px;padding-top: 12px;">
+                                            <div style="height:55px;border-bottom :1px solid rgb(220,220,220);">
+
+                                                <div class="col-lg-9 fontsize11" style="padding-left: 17px;padding-top: 12px;display:none;">
 
                                                     Show ad only once to each person in target audience.
                                                 </div>
-                                                <div class="radio col-lg-3" style="text-align: left;font-size:14px !important;padding-left:8px;">
+                                                <div class="radio col-lg-3" style="text-align: left;font-size:14px !important;padding-left:8px;display:none;">
                                                     <input type="radio" name="optionsRadiosDelvTypes" value="3" id="optionsRadiosNoFilterDaily" data-bind="checked: DeliveryDays">
                                                     <label for="optionsRadiosNoFilterDaily" class="fontsize11" style="padding-left:24px!important;">
                                                         <span class="defaultThemeTxtClr"></span>
@@ -1031,10 +1071,10 @@ else
 
 
 
-                                                <div class="col-lg-9 fontsize11" style="padding-left: 17px;padding-top: 12px;">
+                                                <div class="col-lg-9 fontsize11" style="padding-left: 17px;padding-top: 12px;display:none;">
                                                     Repeat ad to each person in target audience on seperate days.
                                                 </div>
-                                                <div class="radio col-lg-3 paddingtop0px" style="text-align: left;font-size:14px !important;padding-left:8px;">
+                                                <div class="radio col-lg-3 paddingtop0px" style="text-align: left;font-size:14px !important;padding-left:8px;display:none;">
                                                     <input type="radio" name="optionsRadiosDelvTypes" value="2" id="optionsRadiosApplyFilterOnce" data-bind="checked: DeliveryDays">
                                                     <label for="optionsRadiosApplyFilterOnce" class="fontsize11" style="padding-left:24px!important;">
                                                         <span class="defaultThemeTxtClr"></span>
@@ -1060,7 +1100,7 @@ else
 
                                                 <div class="col-lg-7" style="padding-top:3px;">
                                                     <div class="col-lg-11 paddingright0px">
-                                                        <span class="text-campaign-left fontsize13px" style="margin-top:-4px;">Pay Per Result(PPR)</span>
+                                                        <span class="text-campaign-left fontsize13px" style="margin-top:-4px;">Pay Per Confirmed View(PPCV)</span>
                                                     </div>
                                                     <div class="col-lg-1" style="padding-right:0px;text-align:right;">
                                                         <span>$</span>
@@ -1122,7 +1162,7 @@ else
 
                                         <div class="col-lg-12" style="padding-left:24px;margin-top:6px;">
 
-                                            <span style=" font-size:12px;">  Learn more about 'Ad Click'</span><img style="height:14px;" src="/Content/Images/Drop_Arrow.png" data-toggle="collapse" data-target="#demo" />
+                                            <span style=" font-size:12px;">  Learn more about 'PPCV'</span><img style="height:14px;" src="/Content/Images/Drop_Arrow.png" data-toggle="collapse" data-target="#demo" />
 
                                         </div>
                                     </div>

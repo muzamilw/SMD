@@ -456,8 +456,14 @@ define("ads/ads.viewModel",
                 getAdCampaignGridContent();
             },
                 // Add new Profile Question
+                IsBroadMarketing = function ()
+                {
+                    alert(campaignModel().IsUseFilter());
+
+                },
             addNewCampaign = function () {
                 IsthisEditCamapiagn(false);
+               
                 var selectionoption = $("#ddTextBtns").val();
 
                 if (selectionoption == '0' || selectionoption == undefined) {
@@ -497,8 +503,9 @@ define("ads/ads.viewModel",
                 campaignModel().MaxDailyBudget("5");
                 campaignModel().MaxBudget("20");
                 campaignModel().Type(mode);
-                campaignModel().DeliveryDays("3");
+                campaignModel().DeliveryDays("2");
                 campaignModel().LandingPageVideoLink("https://www.");
+                campaignModel().IsUseFilter('1');
                 previewScreenNumber(1);
 
                 //if display ad then
@@ -788,7 +795,7 @@ define("ads/ads.viewModel",
 
                   campaignModel().CampaignTypeImagePath("");
 
-                  campaignModel().IsUseFilter('0');
+                  //campaignModel().IsUseFilter('0');
                   campaignModel().CampaignImagePath("");
                   campaignModel().VoucherImagePath("");
                   campaignModel().LanguageId(41);
@@ -1063,29 +1070,19 @@ define("ads/ads.viewModel",
                         }));
                     });
 
-                    //_.each(allCouponCodeItems(), function (coupcode) {
-
-                    //    campaignModel().CouponCodes.push(new model.AdCampaignCouponCodes.Create({
-                    //        CodeId: 0,
-                    //        CampaignId: campaignModel().CampaignID(),
-                    //        Code: coupcode,
-                    //        IsTaken: null,
-                    //        UserId: null
-                    //    }));
-                    //});
-                }
-
-
-                if (campaignModel().IsUseFilter() == "0") {
-                    campaignModel().IsUseFilter(0);
-                } else {
-                    campaignModel().IsUseFilter(1);
                 }
 
                 campaignModel().Status(mode);
-
-                //disabling the following line so that user can customize their click rate.
-                //campaignModel().ClickRate(pricePerclick());
+                debugger;
+                if (campaignModel().IsUseFilter() == 0) {
+                    campaignModel().AdCampaignTargetLocations.removeAll();
+                    campaignModel().AdCampaignTargetCriterias.removeAll();
+                    campaignModel().AgeRangeEnd(80);
+                    campaignModel().AgeRangeStart(13);
+                    campaignModel().Gender('1');
+                    
+                }
+                
 
 
                 var campignServerObj = campaignModel().convertToServerData();
@@ -1108,8 +1105,7 @@ define("ads/ads.viewModel",
                         allCouponCodeItems.removeAll();
 
                         $("#topArea").css("display", "block");
-                        //$("#MainBtnClose").click();
-                        //GoToHomePage();
+                   
                          logoImage = '';
                         closeContent();
                     },
@@ -3048,7 +3044,7 @@ define("ads/ads.viewModel",
                 },
 
                 showAdditionQuizCriteria = function () {
-                    debugger;
+                  
                     Modelheading('Your Quiz Questions');
                     IsprofileQuestion(false);
                     isNewCriteria(true);
