@@ -838,6 +838,22 @@ namespace SMD.Repository.BaseRepository
 
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetSharedSurveyQuestionsByUserId_Result>("GetSharedSurveyQuestionsByUserId", oUserId);
         }
+
+        public int getCampaignByIdQQFormAnalytic(int CampaignId, int Choice, int Gender, int age, String Profession, String City)
+        {
+
+         
+            var Id = new ObjectParameter("Id", CampaignId);
+            var chioce = new ObjectParameter("choice", Choice);
+            var gender = new ObjectParameter("gender", Gender);
+            var ageRange = new ObjectParameter("ageRange", age);
+            var profession = new ObjectParameter("Profession", Profession);
+            var city = new ObjectParameter("city", City);
+
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("getCampaignByIdQQFormAnalytic", Id,chioce,gender, ageRange, profession, city);
+        }
+
+
         #endregion
     }
 }

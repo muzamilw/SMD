@@ -96,4 +96,8 @@
     <None Include="getCampaignsByStatus.sql" />
     <None Include="GetUserCounts.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <Build Include="getCampaignByIdFormDataAnalytic.sql" />
+    <Build Include="getCampaignByIdQQFormAnalytic.sql" />
+  </ItemGroup>
 </Project>

@@ -185,7 +185,7 @@ define("ads/ads.viewModel",
                 QuizQuestionAnalyticData = ko.observable(),
                 selectedQQGAnalytics = ko.observable(0),
                 selectedQQCAnalytics = ko.observable(0),
-                selectedQQCtAnalytics = ko.observable(0),
+                selectedQQCtAnalytics = ko.observable("All"),
                 selectedQQAAnalytics = ko.observable(0),
                 selectedQQPAnalytics = ko.observable("All"),
 				openAdvertiserDashboardScreen = function (Campaign) {
@@ -457,10 +457,14 @@ define("ads/ads.viewModel",
             },
                 // Add new Profile Question
             addNewCampaign = function () {
+               
                 IsthisEditCamapiagn(false);
                 var selectionoption = $("#ddTextBtns").val();
 
                 if (selectionoption == '0' || selectionoption == undefined) {
+                    if (mode == 4)
+                        showLandingPageUrl(true);
+                    else
                     showLandingPageUrl(false);
                 }
                 else
@@ -1306,6 +1310,7 @@ define("ads/ads.viewModel",
                                 CampaignId: campaignModel().CampaignID,
                                 criteriaPrice: 0
                             }));
+
 
                         }
                     }

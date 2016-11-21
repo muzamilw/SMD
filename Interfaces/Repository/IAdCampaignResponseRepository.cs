@@ -8,5 +8,6 @@ namespace SMD.Interfaces.Repository
         /// Returns Users Response for Campaign
         /// </summary>
         AdCampaignResponse GetByUserId(long campaignId, string userId);
+        int getCampaignByIdQQFormAnalytic(int CampaignId, int Choice, int Gender, int age, string Profession, string City);
     }
 }
