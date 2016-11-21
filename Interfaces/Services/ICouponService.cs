@@ -55,7 +55,7 @@ namespace SMD.Interfaces.Services
         String GetUserName(string id);
         string UpdateDealMarketing(Coupon source);
 
-        bool InsertCouponRatingReview(CouponRatingReview model);
+        bool InsertCouponRatingReview(CouponRatingReview model, string Image1String, string Image2String, string Image3String, string Image1ext, string Image2ext, string Image3ext);
 
     }
 }

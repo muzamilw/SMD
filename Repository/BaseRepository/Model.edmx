@@ -5766,6 +5766,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="Int32" Name="DealsCount" Nullable="true" />
           <Property Type="String" Name="CurrencyCode" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="CurrencySymbol" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="AvgRating" Nullable="false" />
+          <Property Type="Int32" Name="UserHasRated" Nullable="false" />
         </ComplexType>
         <EntityType Name="UserFavouriteCoupon">
           <Key>
@@ -8428,6 +8430,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
                 <ScalarProperty Name="DealsCount" ColumnName="DealsCount" />
                 <ScalarProperty Name="CurrencyCode" ColumnName="CurrencyCode" />
                 <ScalarProperty Name="CurrencySymbol" ColumnName="CurrencySymbol" />
+                <ScalarProperty Name="AvgRating" ColumnName="AvgRating" />
+                <ScalarProperty Name="UserHasRated" ColumnName="UserHasRated" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

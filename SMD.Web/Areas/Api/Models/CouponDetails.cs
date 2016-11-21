@@ -95,6 +95,8 @@ namespace SMD.MIS.Areas.Api.Models
 
         public double? OverAllStarRating { get; set; }
 
+        public int UserHasRated { get; set; }
+
         public virtual ICollection<CouponPriceOption> CouponPriceOptions { get; set; }
 
         public List<CouponRatingReviewResponse> CouponRatingReviewResponses { get; set; }
