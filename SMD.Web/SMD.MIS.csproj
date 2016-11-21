@@ -702,6 +702,10 @@
     <Content Include="Areas\Ads\Scripts\ads.model.js" />
     <Content Include="Areas\Ads\Scripts\ads.view.js" />
     <Content Include="Areas\Ads\Scripts\ads.viewModel.js" />
+    <Content Include="Areas\Coupons\Scripts\couponReview.dataservice.js" />
+    <Content Include="Areas\Coupons\Scripts\couponReview.model.js" />
+    <Content Include="Areas\Coupons\Scripts\couponReview.view.js" />
+    <Content Include="Areas\Coupons\Scripts\couponReview.viewModel.js" />
     <Content Include="Areas\Franchise\Scripts\addApproval.dataservice.js" />
     <Content Include="Areas\Franchise\Scripts\addApproval.model.js" />
     <Content Include="Areas\Franchise\Scripts\addApproval.view.js" />
@@ -787,6 +791,7 @@
     <Content Include="Areas\Report\Views\Report\ManageAdvertises.cshtml" />
     <Content Include="Areas\Franchise\Views\Dashboard\MarketingDealsStories.cshtml" />
     <Content Include="Areas\Coupons\Views\Coupons\marketingDealeditor.cshtml" />
+    <Content Include="Areas\Coupons\Views\Coupons\CouponReviews.cshtml" />
     <None Include="config\Web.connectionstrings.config">
       <SubType>Designer</SubType>
     </None>
