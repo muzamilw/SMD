@@ -635,6 +635,30 @@
           convertToServerData: convertToServerData
       };
   };
+    var formAnalyticsDataModel = function (source) {
+
+     var
+         //type and userID will be set on server sside
+         Question = ko.observable(source.Question),
+         answer = ko.observable(source.answer),
+         Id = ko.observable(source.Id),
+         typ = ko.observable(source.typ),
+         selectedGenderAnalytics = ko.observable(0),
+         selectedAgeAnalytics = ko.observable(0),
+         selectedCityAnalytics = ko.observable("All")
+
+         
+     return {
+         Question: Question,
+         answer: answer,
+         Id: Id,
+         typ: typ,
+         selectedGenderAnalytics: selectedGenderAnalytics,
+         selectedAgeAnalytics: selectedAgeAnalytics,
+         selectedCityAnalytics: selectedCityAnalytics
+       
+     };
+ };
 
     // Factory Method
     Campaign.Create = function (source) {
@@ -692,6 +716,7 @@
         AdCampaignTargetCriteriasModel: AdCampaignTargetCriteriasModel,
         AdCampaignTargetLocation: AdCampaignTargetLocation,
         selectedCouponCategory: selectedCouponCategory,
-        AdCampaignCouponCodes: AdCampaignCouponCodes
+        AdCampaignCouponCodes: AdCampaignCouponCodes,
+        formAnalyticsDataModel: formAnalyticsDataModel
     };
 });

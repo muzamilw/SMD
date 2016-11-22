@@ -213,7 +213,33 @@ define("ads/ads.viewModel",
 
 				    }
 				},
+                      getQAnalytic = function (item) {
+                          var data = item;
+                          dataservice.getQQAnalytic({
+                              Id: selectedCampaignIdAnalytics(),
+                              Gender: item.selectedGenderAnalytics(),
+                              age: item.selectedQQAAnalytics(),
+                              profession: "All",
+                              City: selectedCityAnalytics(),
+                              QId: item.Id(),
+                              type :item.type()
+                          }, {
+                              success: function (data) {
+                                  if (data != null) {
+                                      QQStatsAnalytics(data.QQStats);
+
+                                  }
+
+                              },
+                              error: function (response) {
+
+                              }
+                          });
+
+
+                      },
                 getQQAnalytic = function () {
+                   
                     dataservice.getQQAnalytic({
                         Id: selectedCampaignIdAnalytics(),
                         Choice: selectedQQCAnalytics(),
@@ -253,8 +279,10 @@ define("ads/ads.viewModel",
                                 ko.utils.arrayPushAll(QQChoicesAnalyticsData(), data.Choices);
                                 QQChoicesAnalyticsData.valueHasMutated();
                                 formAnalyticsData.removeAll();
-                                ko.utils.arrayPushAll(formAnalyticsData(), data.formData);
-                                formAnalyticsData.valueHasMutated();
+                                _.each(data.formData, function (item) {
+                                    formAnalyticsData.push(model.formAnalyticsDataModel(item));
+                                });
+                              
                                 
                             }
 
@@ -3592,7 +3620,8 @@ define("ads/ads.viewModel",
                     AgeRangeAnalyticsData: AgeRangeAnalyticsData,
                     QQStatsAnalytics:QQStatsAnalytics,
                     isflageClose: isflageClose,
-                    formAnalyticsData: formAnalyticsData
+                    formAnalyticsData: formAnalyticsData,
+                    getQAnalytic: getQAnalytic
                     
                 };
             })()
