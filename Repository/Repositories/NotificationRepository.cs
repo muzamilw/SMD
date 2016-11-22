@@ -48,7 +48,10 @@ namespace SMD.Repository.Repositories
 
         public IEnumerable<vw_Notifications> GetAllUnReadNotificationsByUserId(string UserId, string PhoneNumber)
         {
-            return db.vw_Notifications.Where(c => (c.UserID == UserId || c.PhoneNumber == PhoneNumber) && (c.IsRead == false || c.IsRead == null) );
+
+            PhoneNumber = PhoneNumber.Substring(PhoneNumber.Length - 9, PhoneNumber.Length - (PhoneNumber.Length - 9));
+
+            return db.vw_Notifications.Where(c => (c.UserID == UserId || c.PhoneNumber.EndsWith(PhoneNumber)) && (c.IsRead == false || c.IsRead == null) );
         }
 
         public bool UserHasNotifications(string UserId)
