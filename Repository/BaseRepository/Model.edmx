@@ -263,7 +263,7 @@
           <Property Name="optMarketingEmails" Type="bit" />
           <Property Name="PassportNo" Type="nvarchar" MaxLength="150" />
           <Property Name="Title" Type="nvarchar" MaxLength="50" />
-          <Property Name="Phone1CountryCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone1CodeCountryID" Type="int" />
         </EntityType>
         <EntityType Name="AuditLog">
           <Key>
@@ -1513,6 +1513,18 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             </Principal>
             <Dependent Role="AspNetUsers">
               <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsers_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="AspNetUsers">
+              <PropertyRef Name="Phone1CodeCountryID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3093,6 +3105,10 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <End Role="Company" EntitySet="Company" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsers_Country" Association="Self.FK_AspNetUsers_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
           <AssociationSet Name="FK_AspNetUsers_Education" Association="Self.FK_AspNetUsers_Education">
             <End Role="Education" EntitySet="Education" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -4199,6 +4215,10 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <End Role="Coupon" EntitySet="Coupons" />
             <End Role="CouponRatingReview" EntitySet="CouponRatingReviews" />
           </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsers_Country" Association="DomainModels.FK_AspNetUsers_Country">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -4323,6 +4343,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="CurrencyID" Type="Int32" />
           <NavigationProperty Name="Currency" Relationship="DomainModels.FK_Country_Currency" FromRole="Country" ToRole="Currency" />
           <Property Name="CountryPhoneCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="DomainModels.FK_AspNetUsers_Country" FromRole="Country" ToRole="User" />
         </EntityType>
         <EntityType Name="Language">
           <Key>
@@ -5176,7 +5197,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="PassportNo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="Title" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="ProfileQuestionUserAnswers" Relationship="DomainModels.FK_ProfileQuestionUserAnswer_AspNetUsers" FromRole="User" ToRole="ProfileQuestionUserAnswer" />
-          <Property Name="Phone1CountryCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone1CodeCountryID" Type="Int32" />
+          <NavigationProperty Name="Country" Relationship="DomainModels.FK_AspNetUsers_Country" FromRole="User" ToRole="Country" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Type="DomainModels.User" Role="AspNetUser" Multiplicity="1">
@@ -7604,6 +7626,18 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_AspNetUsers_Country">
+          <End Type="DomainModels.Country" Role="Country" Multiplicity="0..1" />
+          <End Type="DomainModels.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="Phone1CodeCountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -8081,7 +8115,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="DomainModels.User">
               <MappingFragment StoreEntitySet="AspNetUsers">
-                <ScalarProperty Name="Phone1CountryCode" ColumnName="Phone1CountryCode" />
+                <ScalarProperty Name="Phone1CodeCountryID" ColumnName="Phone1CodeCountryID" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="PassportNo" ColumnName="PassportNo" />
                 <ScalarProperty Name="optMarketingEmails" ColumnName="optMarketingEmails" />

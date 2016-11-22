@@ -71,7 +71,7 @@ namespace DomainModelProject
         public Nullable<bool> optMarketingEmails { get; set; }
         public string PassportNo { get; set; }
         public string Title { get; set; }
-        public string Phone1CountryCode { get; set; }
+        public Nullable<int> Phone1CodeCountryID { get; set; }
     
         public virtual ICollection<AdCampaignResponse> AdCampaignResponses { get; set; }
         public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
@@ -87,5 +87,6 @@ namespace DomainModelProject
         public virtual ICollection<App> Apps { get; set; }
         public virtual ICollection<ProfileQuestionUserAnswer> ProfileQuestionUserAnswers { get; set; }
         public virtual Company Company { get; set; }
+        public virtual Country Country { get; set; }
     }
 }
