@@ -29,5 +29,7 @@ namespace SMD.Models.DomainModels
         public virtual Currency Currency { get; set; }
 
         public virtual ICollection<ProfileQuestionTargetLocation> ProfileQuestionTargetLocations { get; set; }
+
+        public virtual ICollection<User> AspNetUsers { get; set; }
     }
 }

@@ -38,7 +38,7 @@ namespace SMD.Models.DomainModels
         public string CurrencySymbol { get; set; }
 
         public int AvgRating { get; set; }
-        
-        
+
+        public int UserHasRated { get; set; }
     }
 }

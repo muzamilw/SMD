@@ -18,7 +18,7 @@ namespace SMD.MIS.Areas.Api.Controllers
 
         public CampaignFormAnalyticController(IAdCampaignResponseService IAdCampaignResponseService)
         {
-            _IAdCampaignResponseService = IAdCampaignResponseService;
+            this._IAdCampaignResponseService = IAdCampaignResponseService;
         }
         public FormAnalyticResponseModel Get(int Id, int Choice, int Gender, int age, string profession, string City)
         {

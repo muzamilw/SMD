@@ -339,6 +339,12 @@ namespace SMD.MIS
       null,
       null);
 
+              config.Routes.MapHttpRoute(
+    "CouponRatingReview",
+    "CouponRatingReview/{AuthenticationToken}/",
+    new { controller = "CouponRatingReview" },
+    null,
+    null);
 
 
            //config.Routes.MapHttpRoute(

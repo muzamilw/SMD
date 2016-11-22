@@ -25,6 +25,7 @@ namespace DomainModelProject
             this.ProfileQuestionTargetLocations = new HashSet<ProfileQuestionTargetLocation>();
             this.Cities = new HashSet<City>();
             this.Companies = new HashSet<Company>();
+            this.AspNetUsers = new HashSet<AspNetUser>();
         }
     
         public int CountryID { get; set; }
@@ -43,5 +44,6 @@ namespace DomainModelProject
         public virtual Currency Currency { get; set; }
         public virtual ICollection<City> Cities { get; set; }
         public virtual ICollection<Company> Companies { get; set; }
+        public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
     }
 }

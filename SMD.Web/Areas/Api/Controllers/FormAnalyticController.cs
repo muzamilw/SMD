@@ -72,12 +72,8 @@ namespace SMD.MIS.Areas.Api.Controllers
                 QuizChoice chc3 = new QuizChoice(campaign.Answer3, 3);
                 ChoicesList.Add(chc3);
             }
-            
-            
-            
-            
-            
             data.Choices = ChoicesList;
+            data.formData = _IAdvertService.getCampaignByIdFormDataAnalytic(Id);
             return data;
         }
 

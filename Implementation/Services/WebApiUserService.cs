@@ -1064,10 +1064,9 @@ namespace SMD.Implementation.Services
 
             }
 
-            if (!string.IsNullOrEmpty(request.Phone1CountryCode))
-            {
-                user.Phone1CountryCode = request.Phone1CountryCode;
-            }
+            user.Phone1CodeCountryID = request.Phone1CountryID;
+
+        
 
             // Save Changes
            await UserManager.UpdateAsync(user);

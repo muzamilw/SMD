@@ -16,6 +16,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using Stripe;
+using SMD.Common;
 
 namespace SMD.Implementation.Services
 {
@@ -1134,6 +1135,71 @@ namespace SMD.Implementation.Services
                 TotalCount = rowCount
             };
         }
+
+
+
+
+        public bool InsertCouponRatingReview(CouponRatingReview model,string Image1String,  string Image2String,  string Image3String, string Image1ext,  string Image2ext,  string Image3ext)
+        {
+            
+
+            couponRatingReviewRepository.Add(model);
+            couponRatingReviewRepository.SaveChanges();
+
+            SaveReviewImages(model, Image1String, Image2String, Image3String, Image1ext, Image2ext, Image3ext);
+
+            couponRatingReviewRepository.Update(model);
+            couponRatingReviewRepository.SaveChanges();
+
+
+            return true;
+        }
+
+
+
+        private void SaveReviewImages(CouponRatingReview model, string Image1String, string Image2String, string Image3String,string Image1ext, string Image2ext, string Image3ext)
+        {
+            
+            string directoryPath = HttpContext.Current.Server.MapPath("~/SMD_Content/Coupons/" + model.CouponId + "/" + model.CouponReviewId.ToString());
+
+            if (directoryPath != null && !Directory.Exists(directoryPath))
+            {
+                Directory.CreateDirectory(directoryPath);
+            }
+
+
+            if (!string.IsNullOrEmpty(Image1String) )
+            {
+                 string image1RElpath = "/SMD_Content/Coupons/" + model.CouponId + "/" + model.CouponReviewId.ToString() +  "Image1." + Image1ext;
+                string image1abspath = directoryPath + "\\" + "Image1." + Image1ext;
+
+                ImageHelper.SaveBase64(directoryPath + "\\" + image1abspath, Image1String);
+                model.ReviewImage1 = image1RElpath;
+            }
+
+            if (!string.IsNullOrEmpty(Image2String))
+            {
+                string image2RElpath = "/SMD_Content/Coupons/" + model.CouponId + "/" + model.CouponReviewId.ToString() + "Image2." + Image1ext;
+                string image2abspath = directoryPath + "\\" + "Image2." + Image1ext;
+
+                ImageHelper.SaveBase64(directoryPath + "\\" + image2abspath, Image2String);
+                model.ReviewImage2 = image2RElpath;
+            }
+
+
+            if (!string.IsNullOrEmpty(Image3String))
+            {
+                string image3RElpath = "/SMD_Content/Coupons/" + model.CouponId + "/" + model.CouponReviewId.ToString() + "Image3." + Image3ext;
+                string image3abspath = directoryPath + "\\" + "Image3." + Image3ext;
+
+                ImageHelper.SaveBase64(directoryPath + "\\" + image3abspath, Image3String);
+                model.Reviewimage3 = image3RElpath;
+            }
+
+            
+        }
+
+
         public String GetUserName(string id)
         {
             return aspnetUserRepository.GetUserName(id);
