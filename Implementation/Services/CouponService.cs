@@ -668,10 +668,10 @@ namespace SMD.Implementation.Services
 
 
         //called from mobile apps
-        public GetCouponByID_Result GetCouponByIdDefault(long CouponId, string UserId, string Lat, string Lon , out CouponRatingReviewOverallResponse rating)
+        public GetCouponByID_Result GetCouponByIdDefault(long CouponId, string UserId, string Lat, string Lon, out CouponRatingReviewOverallResponse rating)
         {
 
-            var result =  couponRepository.GetCouponByIdSP(CouponId, UserId, Lat, Lon);
+            var result = couponRepository.GetCouponByIdSP(CouponId, UserId, Lat, Lon);
 
 
             rating = couponRatingReviewRepository.GetPublishedCouponRatingReview(CouponId);
@@ -1204,7 +1204,28 @@ namespace SMD.Implementation.Services
         {
             return aspnetUserRepository.GetUserName(id);
         }
+        public CouponRatingReviewResponseModel GetAllCouponRatingReviewByCompany(GetPagedListRequest request)
+        {
+            int rowCount;
+            return new CouponRatingReviewResponseModel
+            {
+                CouponsReview = couponRatingReviewRepository.GetAllCouponRatingReviewByCompany(request, out rowCount).ToList(),
+                TotalCount = rowCount
+            };
+        }
+        public string UpdateCouponRating(CouponRatingReview source)
+        {
+            string respMesg = "True";
+            var dbCo = couponRatingReviewRepository.Find(source.CouponReviewId);
+            dbCo.Status = source.Status;
+            couponRatingReviewRepository.SaveChanges();
+            return respMesg;
+        }
+        public int CouponReviewCount()
+        {
+            return couponRatingReviewRepository.CouponReviewCount();
 
+        }
         #endregion
     }
 }

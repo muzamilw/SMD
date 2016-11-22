@@ -163,6 +163,8 @@ namespace SMD.MIS.Areas.Api.Models
 
         public bool ProfileComplete { get; set; }
 
-        public string Phone1CountryCode { get; set; }
+        public int Phone1CodeCountryID { get; set; }
+
+        public string Phone1Code { get; set; }
     }
 }

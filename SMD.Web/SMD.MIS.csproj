@@ -387,6 +387,8 @@
     <Compile Include="Areas\Api\Controllers\CampaignFormAnalyticController.cs" />
     <Compile Include="Areas\Api\Controllers\CountryController.cs" />
     <Compile Include="Areas\Api\Controllers\CouponRatingReviewController.cs" />
+    <Compile Include="Areas\Api\Controllers\CouponReviewController.cs" />
+    <Compile Include="Areas\Api\Controllers\CouponReviewCountController.cs" />
     <Compile Include="Areas\Api\Controllers\NotificationsController.cs" />
     <Compile Include="Areas\Api\Controllers\CouponAnalyticsController.cs" />
     <Compile Include="Areas\Api\Controllers\ApprovePayOutHistoryController.cs" />
@@ -436,6 +438,7 @@
     <Compile Include="Areas\Api\Models\BranchCategoryResponseModel.cs" />
     <Compile Include="Areas\Api\Models\CompanybillingAddress.cs" />
     <Compile Include="Areas\Api\Models\CompanyBranch.cs" />
+    <Compile Include="Areas\Api\Models\CouponRatingReviewApiModel.cs" />
     <Compile Include="Areas\Api\Models\CouponRatingReviewRequest.cs" />
     <Compile Include="Areas\Api\Models\CouponsApproval.cs" />
     <Compile Include="Areas\Api\Models\CurrencyApprov.cs" />
@@ -704,6 +707,10 @@
     <Content Include="Areas\Ads\Scripts\ads.model.js" />
     <Content Include="Areas\Ads\Scripts\ads.view.js" />
     <Content Include="Areas\Ads\Scripts\ads.viewModel.js" />
+    <Content Include="Areas\Coupons\Scripts\couponReview.dataservice.js" />
+    <Content Include="Areas\Coupons\Scripts\couponReview.model.js" />
+    <Content Include="Areas\Coupons\Scripts\couponReview.view.js" />
+    <Content Include="Areas\Coupons\Scripts\couponReview.viewModel.js" />
     <Content Include="Areas\Franchise\Scripts\addApproval.dataservice.js" />
     <Content Include="Areas\Franchise\Scripts\addApproval.model.js" />
     <Content Include="Areas\Franchise\Scripts\addApproval.view.js" />
@@ -789,6 +796,7 @@
     <Content Include="Areas\Report\Views\Report\ManageAdvertises.cshtml" />
     <Content Include="Areas\Franchise\Views\Dashboard\MarketingDealsStories.cshtml" />
     <Content Include="Areas\Coupons\Views\Coupons\marketingDealeditor.cshtml" />
+    <Content Include="Areas\Coupons\Views\Coupons\CouponReviews.cshtml" />
     <None Include="config\Web.connectionstrings.config">
       <SubType>Designer</SubType>
     </None>
@@ -1287,6 +1295,7 @@
     <Content Include="Images\Phones4u.png" />
     <Content Include="Images\Preview.png" />
     <Content Include="Images\preview_game.jpg" />
+    <Content Include="Images\Red_Bell.png" />
     <Content Include="Images\select_image.jpg" />
     <Content Include="Images\Sign_In_Image.png" />
     <Content Include="Images\splaceholder.png" />

@@ -56,7 +56,7 @@ namespace SMD.MIS.Areas.Api.Controllers
             WebApiUser apiuser = response.CreateFromUserForMobile();
 
             return apiuser;
-
+             
 
 
         }

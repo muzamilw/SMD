@@ -190,6 +190,7 @@
 
                                 <li><a href="/User/ManageUser/ManageUsers">Manage Users</a></li>
                                 <li><a onclick="OpenBranchLocation();">Manage Branches</a></li>
+                                <li><a href="/Coupons/Coupons/CouponReviews">Manage Reviews</a></li>
                                 @*<li><a href="/DamImages/Grid">Image library</a></li>*@
                                 @*<li><a onclick="OpenPhraseLibrary();">Phrase library</a></li>*@
 
@@ -202,7 +203,7 @@
                                 border-width: 1px;"></li>
                                 @*<li><a href="~/">Analytics and Charts</a></li>*@
                                 <li><a class=" " id="btnWalletHistory" href="~/Report/report/WalletReport">Wallet History</a></li>
-                                <li ><a class=" " id="btnReferAdvert">Manage Advertisers</a></li>  @*href="~/Report/report/ManageAdvertises" use this link when you nedd for now we are disabled it*@
+                                <li ><a class=" " id="btnReferAdvert"  href="~/Report/report/ManageAdvertises">Manage Advertisers</a></li>  @*href="~/Report/report/ManageAdvertises" use this link when you nedd for now we are disabled it*@
                                 
                                 @*<li class="inlineMenuItem"><a href="~/Billing/Manage/Invoice">&nbsp;&nbsp;View Invoices</a></li>
                                     <li class="inlineMenuItem"><a href="">&nbsp;&nbsp;Payment Methods</a></li>*@
@@ -262,11 +263,12 @@
                         </li>
 
                         <li>
-                            <a   class="dash_header-btn icon-lg icon-information">
+                            <a class="dash_header-btn icon-lg icon-information" href="/Coupons/Coupons/CouponReviews">
 
                                 @*<i class=" fa fa-life-ring">
-                </i>*@
-                                <i class="fa fa-bell" aria-hidden="true" style="font-size:19px; color:white;"></i>
+                                </i>*@
+                                <i class="fa fa-bell" id="whiteicon"  aria-hidden="true" style="font-size:19px; color:white;display:none"></i>
+                                <img style="height:25px;width:25px; display:none" id ="imgRedbell"src="/images/Red_Bell.png" />
                             </a>
                         </li>
                         @*<li class="dropdown profile-dropdown">

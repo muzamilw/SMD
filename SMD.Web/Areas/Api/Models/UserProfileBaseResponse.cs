@@ -34,6 +34,8 @@ namespace SMD.MIS.Areas.Api.Models
         public IEnumerable<RoleDropDown> UserRoles { get; set; }
 
         public GetApprovalCount_Result GetApprovalCount { get; set; }
+
+        public int GetCouponReviewCount { get; set; }
         
     }
 }

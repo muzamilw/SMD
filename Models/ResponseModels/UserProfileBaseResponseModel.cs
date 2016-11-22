@@ -12,6 +12,7 @@ namespace SMD.Models.ResponseModels
 
         public IEnumerable<Role> UserRoles { get; set; }
         public GetApprovalCount_Result GetApprovalCount { get; set; }
+        public int GetCouponreviewCount { get; set; }
 
     }
 }

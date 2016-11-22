@@ -92,6 +92,7 @@
     <Compile Include="Repository\IProfileQuestionTargetCriteriaRepository.cs" />
     <Compile Include="Repository\ISectionRepository.cs" />
     <Compile Include="Repository\IPhraseRepository.cs" />
+    <Compile Include="Services\CouponRatingReviewRequest.cs" />
     <Compile Include="Services\IAdCampaignResponseService.cs" />
     <Compile Include="Services\ICountryService.cs" />
     <Compile Include="Services\ICityService.cs" />

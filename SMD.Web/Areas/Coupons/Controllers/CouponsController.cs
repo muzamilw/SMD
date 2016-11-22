@@ -9,6 +9,10 @@ namespace SMD.MIS.Areas.Ads.Controllers
         {
             return View();
         }
+        public ActionResult CouponReviews()
+        {
+            return View();
+        }
         /// <summary>
         /// Approval/rejection of adds
         /// </summary>

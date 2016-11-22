@@ -1,6 +1,7 @@
 ﻿using Microsoft.Practices.Unity;
 using SMD.Interfaces.Repository;
 using SMD.Models.DomainModels;
+using SMD.Models.RequestModels;
 using SMD.Models.ResponseModels;
 using SMD.Repository.BaseRepository;
 using System;
@@ -62,16 +63,25 @@ namespace SMD.Repository.Repositories
            
         }
 
-        public List<CouponRatingReviewResponse> GetAllCouponRatingReviewByCompany(int CompanyId, int Status)
+        public List<CouponRatingReviewResponse> GetAllCouponRatingReviewByCompany(GetPagedListRequest request, out int rowCount)
         {
+            int fromRow = (request.PageNo - 1) * request.PageSize;
+            int toRow = request.PageSize;
             var result = from r in db.CouponRatingReview
                          join c in db.Coupons on r.CouponId equals c.CouponId
                          join u in db.Users on r.UserId equals u.Id
-                         where r.Status == Status && c.CompanyId == CompanyId
+                         where r.Status == request.ReviewStatus && r.CompanyId == CompanyId 
+                         orderby (r.RatingDateTime)
                          select new CouponRatingReviewResponse { CouponId = c.CouponId, CouponReviewId = r.CouponReviewId, FullName = u.FullName, CouponTitle = c.CouponTitle, RatingDateTime = r.RatingDateTime, Review = r.Review, CompanyId = c.CompanyId, ReviewImage1 = r.ReviewImage1, ReviewImage2 = r.ReviewImage2, Reviewimage3 = r.Reviewimage3, StarRating = r.StarRating, Status = r.Status, UserId = r.UserId, ProfileImage = u.ProfileImage };
-
-
-            return result.ToList();
+            rowCount =result.Count();
+           
+            return result.Skip(fromRow)
+                    .Take(toRow).ToList();
+            
+        }
+        public int CouponReviewCount ()
+        {
+            return db.CouponRatingReview.ToList().Count(a => a.CompanyId == CompanyId && a.Status==1 && a.Review!=null);
         }
 
       

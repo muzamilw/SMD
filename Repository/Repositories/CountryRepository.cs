@@ -50,6 +50,8 @@ namespace SMD.Repository.Repositories
         /// </summary>
         public List<Country> GetAllCountries()
         {
+            db.Configuration.LazyLoadingEnabled = false;
+
            return DbSet.Select(country => country).ToList();
         }
         /// <summary>

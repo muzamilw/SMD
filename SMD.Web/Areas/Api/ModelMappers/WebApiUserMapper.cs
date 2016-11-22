@@ -58,7 +58,8 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                        Password = source.PasswordHash,
                        RoleId = source.Roles.Select(c => c.Id).FirstOrDefault(),
                        VoucherSecretKey = source.Company.VoucherSecretKey,
-                       Phone1CountryCode = source.Phone1CountryCode
+                       Phone1CodeCountryID = source.Phone1CodeCountryID.Value,
+                       Phone1Code = source.Country.CountryPhoneCode
                    };
 
             return user;
@@ -98,8 +99,8 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                 ImageUrl = !string.IsNullOrEmpty(source.Company.Logo) ? HttpContext.Current.Request.Url.Scheme + "://" +
                 HttpContext.Current.Request.Url.Host + "/" + source.ProfileImage + "?" + DateTime.Now : string.Empty,
                 Title = source.Title == null ? "": source.Title,
-                ProfileComplete = isProfilecomplete,
-                Phone1CountryCode = string.IsNullOrEmpty(source.Phone1CountryCode) ? "" : source.Phone1CountryCode,
+                Phone1CodeCountryID = source.Phone1CodeCountryID.HasValue == true ?  source.Phone1CodeCountryID.Value : 0,
+                Phone1Code = source.Country != null? source.Country.CountryName + " " + source.Country.CountryPhoneCode : ""
                
             };
 
@@ -249,7 +250,9 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                 EducationDropdowns = source.Educations.Select(edu => edu.CreateFromDd()),
                 UserRoles = source.UserRoles.Select(role => role.CreateFromDd()),
                 TimeZoneDropDowns = timeZones,
-                GetApprovalCount = source.GetApprovalCount.CreateFrom()
+                GetApprovalCount = source.GetApprovalCount.CreateFrom(),
+                GetCouponReviewCount = source.GetCouponreviewCount
+                
             };
         }
 
