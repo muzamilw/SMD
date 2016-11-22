@@ -1077,46 +1077,52 @@ define("ads/ads.viewModel",
                 }
 
                 campaignModel().Status(mode);
-                debugger;
+           
                 if (campaignModel().IsUseFilter() == 0) {
                     campaignModel().AdCampaignTargetLocations.removeAll();
                     campaignModel().AdCampaignTargetCriterias.removeAll();
                     campaignModel().AgeRangeEnd(80);
                     campaignModel().AgeRangeStart(13);
                     campaignModel().Gender('1');
-                    
+                    campaignModel().IsUseFilter(false);
                 }
-                
+                else {
+                    campaignModel().IsUseFilter(true)
+                }
+                if (campaignModel().IsUseFilter() == 0) {
 
+                    toastr.error("No Target Match.");
+                }
+                else {
+                    var campignServerObj = campaignModel().convertToServerData();
 
-                var campignServerObj = campaignModel().convertToServerData();
+                    dataservice.addCampaignData(campignServerObj, {
+                        success: function (data) {
 
-                dataservice.addCampaignData(campignServerObj, {
-                    success: function (data) {
+                            criteriaCount(0);
+                            pricePerclick(0);
+                            isEditorVisible(false);
+                            getAdCampaignGridContent();
+                            isLocationPerClickPriceAdded(false);
+                            isLanguagePerClickPriceAdded(false);
+                            isIndustoryPerClickPriceAdded(false);
+                            isProfileSurveyPerClickPriceAdded(false);
+                            isEducationPerClickPriceAdded(false);
+                            isListVisible(true);
+                            isWelcomeScreenVisible(false);
+                            toastr.success("Successfully saved.");
+                            allCouponCodeItems.removeAll();
 
-                        criteriaCount(0);
-                        pricePerclick(0);
-                        isEditorVisible(false);
-                        getAdCampaignGridContent();
-                        isLocationPerClickPriceAdded(false);
-                        isLanguagePerClickPriceAdded(false);
-                        isIndustoryPerClickPriceAdded(false);
-                        isProfileSurveyPerClickPriceAdded(false);
-                        isEducationPerClickPriceAdded(false);
-                        isListVisible(true);
-                        isWelcomeScreenVisible(false);
-                        toastr.success("Successfully saved.");
-                        allCouponCodeItems.removeAll();
+                            $("#topArea").css("display", "block");
 
-                        $("#topArea").css("display", "block");
-                   
-                         logoImage = '';
-                        closeContent();
-                    },
-                    error: function (response) {
-                        $("#topArea").css("display", "block");
-                    }
-                });
+                            logoImage = '';
+                            closeContent();
+                        },
+                        error: function (response) {
+                            $("#topArea").css("display", "block");
+                        }
+                    });
+                }
             },
 
                 // Add new profile Criteria
@@ -1649,7 +1655,7 @@ define("ads/ads.viewModel",
                     _.each(campaignModel().AdCampaignTargetLocations(), function (item) {
                         addCountryToCountryList(item.CountryID(), item.Country());
                     });
-                    toastr.success("Removed Successfully!");
+                   // toastr.success("Removed Successfully!");
                     // }
 
                 },
@@ -1658,17 +1664,22 @@ define("ads/ads.viewModel",
 
                     selectedLocation().Radius = (selectedLocationRadius);
                     selectedLocation().IncludeorExclude = (selectedLocationIncludeExclude);
-                    campaignModel().AdCampaignTargetLocations.push(new model.AdCampaignTargetLocation.Create({
-                        CountryId: selectedLocation().CountryID,
-                        CityId: selectedLocation().CityID,
-                        Radius: selectedLocation().Radius(),
-                        Country: selectedLocation().Country,
-                        City: selectedLocation().City,
-                        IncludeorExclude: selectedLocation().IncludeorExclude(),
-                        CampaignId: campaignModel().CampaignID(),
-                        Latitude: selectedLocation().Latitude,
-                        Longitude: selectedLocation().Longitude,
-                    }));
+
+                    if ($.grep(campaignModel().AdCampaignTargetLocations(), function (el) { return el.City() === selectedLocation().City; }).length === 0) {
+                        
+
+                        campaignModel().AdCampaignTargetLocations.push(new model.AdCampaignTargetLocation.Create({
+                            CountryId: selectedLocation().CountryID,
+                            CityId: selectedLocation().CityID,
+                            Radius: selectedLocation().Radius(),
+                            Country: selectedLocation().Country,
+                            City: selectedLocation().City,
+                            IncludeorExclude: selectedLocation().IncludeorExclude(),
+                            CampaignId: campaignModel().CampaignID(),
+                            Latitude: selectedLocation().Latitude,
+                            Longitude: selectedLocation().Longitude,
+                        }));
+                    }
                     addCountryToCountryList(selectedLocation().CountryID, selectedLocation().Country);
 
                     if (UserAndCostDetail().LocationClausePrice != null && isLocationPerClickPriceAdded() == false) {
@@ -1768,7 +1779,24 @@ define("ads/ads.viewModel",
                   campaignCSVCallback = function (file, data) {
 
                   },
+                Changefilter = function ()
+                {
+                    
+                    if (campaignModel().IsUseFilter() == 0) {
+                        ShowAudienceCounter(0);
+                    }
+                    else {
+                        getAudienceCount();
+                    }
+                },
+                ChangeBroadfilter = function ()
+                {
+                    alert('broad');
+                    getAudienceCount();
+                },
                 onEditCampaign = function (item) {
+                   
+                   
                     IsthisEditCamapiagn(true);
                     previewScreenNumber(1);
                     isTerminateBtnVisible(false);
@@ -1823,7 +1851,15 @@ define("ads/ads.viewModel",
 
                                         campaignModel().LogoUrl("/images/standardplaceholder.png");
                                     }
+                                  
+                                    //if (item.IsUseFilter() == 0) {
 
+                                    //    campaignModel().IsUseFilter('0');
+                                    //}
+                                    //else {
+
+                                    //    campaignModel().IsUseFilter('1');
+                                    //}
 
                                     VideoLink2src(campaignModel().VideoLink2() + '' + '');
 
@@ -2279,7 +2315,14 @@ define("ads/ads.viewModel",
                         //    toastr.error(" ppvc is required.");
                         //}
                     }
-
+                    if (previewScreenNumber() == 2) {
+                        if (campaignModel().IsUseFilter() == 0)
+                        {
+                            noErrors = false;
+                            toastr.error("No Target Match.");
+                        }
+                       
+                    }
                     if (previewScreenNumber() == 3) {
                         if (campaignModel().VerifyQuestion() == "" || campaignModel().VerifyQuestion() == undefined) {
                             noErrors = false;
@@ -2313,10 +2356,17 @@ define("ads/ads.viewModel",
                 },
 
                  backScreen = function () {
-                     if (previewScreenNumber() > 1) {
-                         previewScreenNumber(previewScreenNumber() - 1);
+                     if (previewScreenNumber() == 2 && campaignModel().IsUseFilter() == 0) {
+                        
+                             toastr.error("No Target Match.");
+                         
                      }
-                     $('html, body').animate({ scrollTop: 0 }, 800);
+                     else {
+                         if (previewScreenNumber() > 1) {
+                             previewScreenNumber(previewScreenNumber() - 1);
+                         }
+                         $('html, body').animate({ scrollTop: 0 }, 800);
+                     }
                  },
                 addIndustry = function (selected) {
 
@@ -2702,6 +2752,8 @@ define("ads/ads.viewModel",
                             $("#spinnerAudience").css("display", "none");
                             reachedAudience(data.MatchingUsers);
                             ShowAudienceCounter(GetAudienceCount(data.MatchingUsers));
+
+
                             totalAudience(data.AllUsers);
                             var percent = data.MatchingUsers / data.AllUsers;
                             if (percent < 0.20) {
@@ -2741,6 +2793,10 @@ define("ads/ads.viewModel",
                     campaignModel().AdCampaignTargetCriterias.subscribe(function (value) {
                         getAudienceCount();
                     });
+                },
+                ChangeTarget = function ()
+                {
+
                 },
                 buildMap = function () {
                     //$(".locMap").css("display", "none");
@@ -3325,10 +3381,10 @@ define("ads/ads.viewModel",
                         UrlHeadings("Leatherboard banner click thru url to your landing  page.");
                         DisplayImage(true);
                         StatusCodeName("Display Ad");
-                        StatusCodeImage("/Content/Images/Display_small.png");
+                        StatusCodeImage("/Content/Images/Displaymod.png");
                         IsvideoBtn(false);
                         IsGameAds(true);
-                        CampaignHeader('Display');
+                        CampaignHeader('( Display Ad )');
                         IsNewVideoCampaign(false);
                     }
                     else {
@@ -3338,8 +3394,8 @@ define("ads/ads.viewModel",
                         IsvideoBtn(true);
                         IsGameAds(false);
                         StatusCodeName("Display");
-                        CampaignHeader('Video');
-                        StatusCodeImage("/Content/Images/Videos_small.png");
+                        CampaignHeader('( Video Ad )');
+                        StatusCodeImage("/Content/Images/Videomod.png");
                         IsNewVideoCampaign(true);
                     }
                     view = specifiedView;
@@ -3578,7 +3634,9 @@ define("ads/ads.viewModel",
                     selectedQQPAnalytics: selectedQQPAnalytics,
                     selectedQQCtAnalytics:selectedQQCtAnalytics,
                     AgeRangeAnalyticsData: AgeRangeAnalyticsData,
-                    isflageClose: isflageClose
+                    isflageClose: isflageClose,
+                    Changefilter: Changefilter,
+                    ChangeBroadfilter: ChangeBroadfilter
                     
                 };
             })()

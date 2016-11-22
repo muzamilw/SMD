@@ -895,9 +895,11 @@
     <Content Include="Content\Images\CZ_AOFDdEE7.png" />
     <Content Include="Content\Images\Deals.png" />
     <Content Include="Content\Images\Dealsicon.png" />
+    <Content Include="Content\Images\Dealsmod.png" />
     <Content Include="Content\Images\Dealsuicon.png" />
     <Content Include="Content\Images\Deals_Small.png" />
     <Content Include="Content\Images\Deals_Small_36.png" />
+    <Content Include="Content\Images\Displaymod.png" />
     <Content Include="Content\Images\Display_small.png" />
     <Content Include="Content\Images\Display_small_36.png" />
     <Content Include="Content\Images\Drop_Arrow.png" />
@@ -918,6 +920,7 @@
     <Content Include="Content\Images\movie_up.png" />
     <Content Include="Content\Images\pin.png" />
     <Content Include="Content\Images\placeholder.png" />
+    <Content Include="Content\Images\Pollmod.png" />
     <Content Include="Content\Images\Polls.png" />
     <Content Include="Content\Images\Polls_small.png" />
     <Content Include="Content\Images\Polls_small_36.png" />
@@ -933,6 +936,7 @@
     <Content Include="Content\Images\up-arrow-small.png" />
     <Content Include="Content\Images\updatedMovie_lg.png" />
     <Content Include="Content\Images\vide.png" />
+    <Content Include="Content\Images\Videomod.png" />
     <Content Include="Content\Images\Videos.png" />
     <Content Include="Content\Images\Videosuicon.png" />
     <Content Include="Content\Images\Videos_small.png" />
