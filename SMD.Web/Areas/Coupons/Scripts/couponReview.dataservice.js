@@ -13,15 +13,20 @@ define("Coupons/couponReview.dataservice", function () {
 
                     //Search AdCampaigns
                     amplify.request.define('getCouponReviews', 'ajax', {
-                        url: '/Api/MarketingDeals',
+                        url: '/Api/CouponReview',
                         dataType: 'json',
                         type: 'GET'
                     });
                     // Edit AdCampaign
                     amplify.request.define('saveCoupon', 'ajax', {
-                        url: '/Api/MarketingDeals',
+                        url: '/Api/CouponReview',
                         dataType: 'json',
                         type: 'POST'
+                    });
+                    amplify.request.define('getReviewCount', 'ajax', {
+                        url: '/Api/GetApprovalCount',
+                        dataType: 'json',
+                        type: 'GET'
                     });
                     isInitialized = true;
                 }
@@ -36,7 +41,14 @@ define("Coupons/couponReview.dataservice", function () {
                     data: params
                 });
             },
-
+              getReviewCount = function (callbacks) {
+                  initialize();
+                  return amplify.request({
+                      resourceId: 'getReviewCount',
+                      success: callbacks.success,
+                      error: callbacks.error,
+                  });
+              },
              // Search Ad Campaigns
 
 
@@ -54,7 +66,8 @@ define("Coupons/couponReview.dataservice", function () {
 
         return {
             saveCoupon: saveCoupon,
-            getCouponReviews: getCouponReviews
+            getCouponReviews: getCouponReviews,
+            getReviewCount: getReviewCount
 
         };
     })();

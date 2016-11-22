@@ -57,5 +57,10 @@ namespace SMD.Interfaces.Services
 
         bool InsertCouponRatingReview(CouponRatingReview model);
 
+        CouponRatingReviewResponseModel GetAllCouponRatingReviewByCompany(GetPagedListRequest request);
+
+        string UpdateCouponRating(CouponRatingReview source);
+        int CouponReviewCount();
+
     }
 }

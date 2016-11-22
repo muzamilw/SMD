@@ -249,7 +249,9 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                 EducationDropdowns = source.Educations.Select(edu => edu.CreateFromDd()),
                 UserRoles = source.UserRoles.Select(role => role.CreateFromDd()),
                 TimeZoneDropDowns = timeZones,
-                GetApprovalCount = source.GetApprovalCount.CreateFrom()
+                GetApprovalCount = source.GetApprovalCount.CreateFrom(),
+                GetCouponReviewCount = source.GetCouponreviewCount
+                
             };
         }
 

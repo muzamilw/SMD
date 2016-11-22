@@ -10,6 +10,7 @@ define("Coupons/couponReview.viewModel",
             viewModel: (function () {
                 var view,
                     couponReview = ko.observableArray([]),
+                    selectedCoupon = ko.observableArray(),
                     //pager
                     pager = ko.observable(),
                     //sorting
@@ -23,18 +24,19 @@ define("Coupons/couponReview.viewModel",
                                     PageNo: pager().currentPage(),
                                     SortBy: sortOn(),
                                     IsAsc: sortIsAsc(),
-
+                                    Status: $('#selectStatus').val(),
                                 },
                                 {
                                     success: function (data) {
-                                        //couponReview.removeAll();
-                                        //console.log("Coupon Reviews");
-                                        //console.log(data.Coupons);
-                                        //_.each(data.Coupons, function (item) {
-                                        //    marketingDeals.push(model.MarketingDealServertoClientMapper(item));
-                                        //});
-                                        ////pager().totalCount(0);
-                                        //pager().totalCount(data.TotalCount);
+                                        couponReview.removeAll();
+                                        console.log("Coupon Reviews");
+                                        console.log(data.CouponsReview);
+                                        _.each(data.CouponsReview, function (item) {
+                                            couponReview.push(model.CouponReviewServertoClientMapper(item));
+                                        });
+                                        //pager().totalCount(0);
+                                        pager().totalCount(data.TotalCount);
+                                        getReviewCount();
 
                                     },
                                     error: function () {
@@ -42,13 +44,13 @@ define("Coupons/couponReview.viewModel",
                                     }
                                 });
                     },
-                    SaveCoupon = function () {
-                         var couponId = selectedCoupon().couponId();
-                         dataservice.saveCoupon(selectedCoupon().convertToServerData(), {
+                    SaveCoupon = function (mode,item) {
+                        selectedCoupon(item);
+                        selectedCoupon().status(mode);
+                        dataservice.saveCoupon(selectedCoupon().convertToServerData(), {
                              success: function (response) {
                                  getCouponReviews();
-                                 isEditorVisible(false);
-                                 toastr.success("Saved Successfully.");
+                          
                              },
                              error: function () {
                                  toastr.error("Failed to save!");
@@ -56,20 +58,46 @@ define("Coupons/couponReview.viewModel",
                          });
                         
                     },
-                    onSaveCoupon = function () {
-                         var conformTet = "Save changes?";
+                    onPublishCoupon = function (item) {
+                         var conformTet = "Are you sure you want to publish this ?";
                          confirmation.messageText(conformTet);
                          confirmation.show();
                          confirmation.afterCancel(function () {
                              confirmation.hide();
                          });
                          confirmation.afterProceed(function () {
-                             SaveCoupon();
-                             //$("#topArea").css("display", "block");
-                             //$("#divApprove").css("display", "block");
-                             //toastr.success("Approved Successfully.");
+                             SaveCoupon(2,item);
                          });
+                    },
+                     onhideCoupon = function (item) {
+                            var conformTet = "Are you sure you want to hide this ?";
+                            confirmation.messageText(conformTet);
+                            confirmation.show();
+                            confirmation.afterCancel(function () {
+                                confirmation.hide();
+                            });
+                            confirmation.afterProceed(function () {
+                                SaveCoupon(3, item);
+                            });
                      },
+                        getReviewCount = function () {
+                            dataservice.getReviewCount({
+                                success: function (data) {
+                                    if (data > 0) {
+                                        $("#imgRedbell").css("display", "block");
+                                        $("#whiteicon").css("display", "none");
+                                    }
+                                    else {
+                                        $("#whiteicon").css("display", "block");
+                                        $("#imgRedbell").css("display", "none");
+                                    }
+
+                                },
+                                error: function () {
+                                    toastr.error("Failed to load Approval Count.");
+                                }
+                            });
+                        },
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView;
@@ -86,7 +114,10 @@ define("Coupons/couponReview.viewModel",
                     pager: pager,
                     sortOn: sortOn,
                     sortIsAsc: sortIsAsc,
-                    onSaveCoupon:onSaveCoupon
+                    onPublishCoupon: onPublishCoupon,
+                    onhideCoupon:onhideCoupon,
+                    SaveCoupon: SaveCoupon,
+                    getReviewCount: getReviewCount
                 };
             })()
         };

@@ -1,12 +1,15 @@
 ﻿define(["ko", "underscore", "underscore-ko"], function (ko) {
 
     var // ReSharper disable InconsistentNaming
-      CouponReview = function (coSubBy, coSubmissionDateTime, couponid, couponTitle) {
+      CouponReview = function (coProfileImage, coFullName, coReview, coRatingDateTime, coStatus, coCouponReviewId) {
           var
-              submittedBy = ko.observable(coSubBy),
-              submissionDate = ko.observable(coSubmissionDateTime),
-              couponId = ko.observable(couponid),
-              title = ko.observable(couponTitle)
+              profileImage = ko.observable(coProfileImage),
+              fullName = ko.observable(coFullName),
+              review = ko.observable(coReview),
+              reviewDate = ko.observable(coRatingDateTime),
+              status = ko.observable(coStatus),
+              couponReviewId = ko.observable(coCouponReviewId),
+
 
               errors = ko.validation.group({
 
@@ -30,17 +33,19 @@
               // Convert to server data
               convertToServerData = function () {
                   return {
-                      //CouponId: couponId(),
-                      //IsMarketingStories: IsMarketingStories(),
+                      CouponReviewId: couponReviewId(),
+                      Status: status(),
 
                   };
               };
           return {
 
-              submittedBy: submittedBy,
-              submissionDate: submissionDate,
-              couponId: couponId,
-              title: title,
+              profileImage: profileImage,
+              fullName: fullName,
+              review: review,
+              reviewDate: reviewDate,
+              status: status,
+              couponReviewId: couponReviewId,
               hasChanges: hasChanges,
               convertToServerData: convertToServerData,
               reset: reset,
@@ -57,7 +62,7 @@
     var CouponReviewServertoClientMapper = function (itemFromServer) {
 
 
-        return new CouponReview(itemFromServer.CreatedBy, itemFromServer.SubmissionDateTime, itemFromServer.CouponId, itemFromServer.CouponTitle);
+        return new CouponReview(itemFromServer.ProfileImage, itemFromServer.FullName, itemFromServer.Review, itemFromServer.RatingDateTime, itemFromServer.Status, itemFromServer.CouponReviewId);
     };
     // Function to attain cancel button functionality Coupons
     CouponReview.CreateFromClientModel = function (item) {

@@ -15,7 +15,7 @@ else
 
 <div class="row" id="Heading_div">
     <div class="col-lg-12 padding0px" style="padding-left: 0px;">
-        <div style="width:170px;" class="pull-left">
+        <div style="width:181px;" class="pull-left">
 
             <label id="headlabel" class="home_pagefontsize" style="font-size:24px!important;color:#fff!important;margin-top:7px;">Manage Reviews</label>
 
@@ -24,7 +24,7 @@ else
 
         </div>
 
-        <div style="width:979px" class="pull-left">
+        <div style="width:971px" class="pull-left">
             <label id="headdesc" class="fontitalic" style="color:#fff;font-size:14px;margin-top:17px;margin-left:10px;">Publish or hide deal reviews.</label>
             <img class="pull-right closecls" src="~/Content/Images/Close_Button.png" style="margin-top:15px;" onclick="GotoHome();" />
             <div class="clearfix"></div>
@@ -49,10 +49,10 @@ else
                     <div class="row">
                         <form>
                             <div class="col-sm-2 filterbloclkspos" style="float:left;">
-                                <select class="form-control" style="float:right;height:36px;">
+                                <select class="form-control" style="float:right;height:36px;" id="selectStatus" data-bind="value : status, event:{ change: $root.getCouponReviews}">
                                     <option value="1">To be Reviewed</option>
                                     <option value="2">Published</option>
-                                    <option value="3">Removed</option>
+                                    <option value="3">Hide</option>
                                 </select>
                             </div>
                         </form>
@@ -91,27 +91,8 @@ else
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr style="cursor: pointer">
-                                                <td class="col-sm-2">
-                                                    <img style="border-radius:50px" height="80" width="80" src="/images/splaceholder.png" />
-                                                </td>
-                                                <td class="col-sm-2">
-                                                    <span>Muhammad Abuzar</span>
-                                                </td>
-
-                                                <td class="col-sm-3">
-                                                    <span>This is review text</span>
-                                                </td>
-                                                <td class="col-sm-3">
-                                                    <span>21-Nov-2016</span>
-                                                </td>
-                                                <td>
-                                                    <button class="btn  btn-success" id="saveBtn">Publish</button>
-                                                    <button class="btn btn-danger " id="saveBtn">Hide</button>
-                                                </td>
-                                            </tr>
-                                            @*<!-- ko template: { name: 'advertsTemplate' } -->
-                                            <!-- /ko -->*@
+                                            <!-- ko template: { name: 'advertsTemplate',foreach:couponReview } -->
+                                            <!-- /ko -->
                                         </tbody>
                                     </table>
                                 </div>
@@ -141,21 +122,21 @@ else
 <script id="advertsTemplate" type="text/html">
     <tr style="cursor: pointer">
         <td class="col-sm-2">
-            <img style="border-radius:50px" height="80" width="80" src="/images/splaceholder.png" />
+            <img style="border-radius:50px" height="80" width="80" />
         </td>
         <td class="col-sm-2">
-            <span>Muhammad Abuzar</span>
+            <span data-bind="text:fullName"></span>
         </td>
 
-        <td class="col-sm-3">
-            <span>This is review text</span>
+        <td class="col-sm-4">
+            <span data-bind="text:review"></span>
         </td>
-        <td class="col-sm-3">
-            <span>21-Nov-2016</span>
-        </td>
-        <td>
-            <button class="btn  btn-success" id="saveBtn">Publish</button>
-            <button class="btn btn-danger " id="saveBtn">Hide</button>
+        <td class="col-sm-2">
+            <span data-bind="dateString:reviewDate,datePattern: 'DD/MM/YYYY'"></span>
+        </td>                                                                                   
+        <td class="col-sm-2">
+            <button class="btn  btn-success" data-bind="visible:status()==1||status()==3,click: $root.onPublishCoupon" id="saveBtn">Publish</button>
+            <button class="btn btn-danger " style="margin-left:10px;" data-bind="visible:status()==1||status()==2,click: $root.onhideCoupon" id="saveBtn">Hide</button>
         </td>
     </tr>
 
