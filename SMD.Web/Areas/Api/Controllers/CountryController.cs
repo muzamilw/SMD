@@ -42,9 +42,11 @@ namespace SMD.MIS.Areas.Api.Controllers
             //var x = countryService.GetCountries()
 
             var result = new List<CountryDropdown>();
-            Mapper.Initialize(cfg => cfg.CreateMap<List<Country>, List<CountryDropdown>>());
+            Mapper.Initialize(cfg => cfg.CreateMap<Country, CountryDropdown>());
             var cc = countryService.GetCountries();
-            return Mapper.Map<List<Country>, List<CountryDropdown>>(cc);
+            var res =  Mapper.Map<List<Country>, List<CountryDropdown>>(cc);
+
+            return res;
         }
 
 
