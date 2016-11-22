@@ -60,6 +60,6 @@ namespace SMD.Models.RequestModels
         /// </summary>
         public int TotalCount { get; set; }
         public String UserRole { get; set; }
-        public int Status { get; set; }
+        public int ReviewStatus { get; set; }
     }
 }

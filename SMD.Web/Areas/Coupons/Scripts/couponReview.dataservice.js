@@ -24,7 +24,7 @@ define("Coupons/couponReview.dataservice", function () {
                         type: 'POST'
                     });
                     amplify.request.define('getReviewCount', 'ajax', {
-                        url: '/Api/GetApprovalCount',
+                        url: '/Api/CouponReviewCount',
                         dataType: 'json',
                         type: 'GET'
                     });

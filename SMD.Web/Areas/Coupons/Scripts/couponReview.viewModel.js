@@ -24,7 +24,7 @@ define("Coupons/couponReview.viewModel",
                                     PageNo: pager().currentPage(),
                                     SortBy: sortOn(),
                                     IsAsc: sortIsAsc(),
-                                    Status: $('#selectStatus').val(),
+                                    ReviewStatus: $('#selectStatus').val(),
                                 },
                                 {
                                     success: function (data) {
