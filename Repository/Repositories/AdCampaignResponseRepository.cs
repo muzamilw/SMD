@@ -2,6 +2,7 @@
 using SMD.Interfaces.Repository;
 using SMD.Models.DomainModels;
 using SMD.Repository.BaseRepository;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 
@@ -44,7 +45,9 @@ namespace SMD.Repository.Repositories
         }
         public int getCampaignByIdQQFormAnalytic(int CampaignId, int Choice, int Gender, int age, string Profession, string City)
         { 
-             return db.getCampaignByIdQQFormAnalytic(CampaignId, Choice, Gender, age, Profession, City);
+             return db.getCampaignByIdQQFormAnalytic(CampaignId, Choice, Gender, age, Profession, City).ToList().FirstOrDefault();
         }
+
+       
     }
 }

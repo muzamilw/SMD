@@ -18,6 +18,10 @@ namespace SMD.MIS.Areas.Api.Models
         public string ReviewImage2 { get; set; }
         public string Reviewimage3 { get; set; }
 
+        public string ReviewImage1ext { get; set; }
+        public string ReviewImage2ext { get; set; }
+        public string Reviewimage3ext { get; set; }
+
     
     }
 

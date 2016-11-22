@@ -95,6 +95,8 @@ namespace SMD.Models.DomainModels
         public string CouponImage5 { get; set; }
         public string CouponImage6 { get; set; }
 
+        public int UserHasRated { get; set; }
+
         public Nullable<bool> IsShowReviews { get; set; }
         public Nullable<bool> IsShowAddress { get; set; }
         public Nullable<bool> IsShowPhoneNo { get; set; }

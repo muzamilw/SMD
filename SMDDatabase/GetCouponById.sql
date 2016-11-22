@@ -1,6 +1,6 @@
 ﻿
 GO
-/****** Object:  StoredProcedure [dbo].[GetCouponByID]    Script Date: 11/7/2016 10:31:41 AM ******/
+/****** Object:  StoredProcedure [dbo].[GetCouponByID]    Script Date: 11/21/2016 6:07:28 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -12,7 +12,7 @@ GO
 -- =============================================
 ALTER PROCEDURE [dbo].[GetCouponByID] 
 
---    getcouponbyid 10085, '','','d70b04d3-e76c-4ca2-95fe-9746ceff1a88',
+--    getcouponbyid 23, '','','d70b04d3-e76c-4ca2-95fe-9746ceff1a88',
 	-- Add the parameters for the stored procedure here
 	@CouponId as bigint = 0, 
 	@Lat as nvarchar(50),
@@ -51,9 +51,9 @@ INSERT INTO [dbo].[UserCouponView]
            ,GETDATE(),@Lat,@Lon)
 
 
-SELECT [CouponId]
+SELECT c.[CouponId]
       ,[LanguageId]
-      ,[UserId]
+      ,c.[UserId]
       ,[CouponTitle]
       ,[SearchKeywords]
       ,c.[Status]
@@ -161,7 +161,8 @@ c.IsShowAddress,
 c.IsShowPhoneNo,
 c.IsShowMap,
 c.IsShowyouTube,
-c.IsShowAboutUs
+c.IsShowAboutUs,
+(case when uReview.UserId is null then 0 else 1 end) UserHasRated
 
 
 
@@ -170,5 +171,6 @@ c.IsShowAboutUs
 	inner join Company comp on c.CompanyId = comp.CompanyId
 	inner join Country countr on comp.BillingCountryId = countr.CountryID
 	inner join Currency curr on countr.CurrencyId = curr.CurrencyID 
+	left outer join CouponRatingReview uReview on c.CouponId = uReview.CouponId and uReview.UserId = @UserId
 	where c.CouponId = @CouponId
 END

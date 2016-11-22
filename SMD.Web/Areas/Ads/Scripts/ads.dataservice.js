@@ -59,7 +59,7 @@ define("ads/ads.dataservice", function () {
                     });
                     
                     amplify.request.define('getQQAnalytic', 'ajax', {
-                        url: '/Api/FormAnalytic',
+                        url: '/Api/CampaignFormAnalytic',
                         dataType: 'json',
                         type: 'GET'
                     });

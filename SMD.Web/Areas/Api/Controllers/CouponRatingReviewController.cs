@@ -31,7 +31,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         #region Public
 
 
-        public BaseApiResponse Put(string authenticationToken, [FromUri] CouponRatingReviewRequest request)
+        public BaseApiResponse Put(string authenticationToken,CouponRatingReviewRequest request)
         {
             try
             {
@@ -39,7 +39,7 @@ namespace SMD.MIS.Areas.Api.Controllers
 
                 var model = new CouponRatingReview { CompanyId = request.CompanyId, CouponId = request.CouponId, RatingDateTime = DateTime.Now, Review = request.Review, StarRating = request.StarRating, Status = 1, UserId = request.UserId };
 
-                return new BaseApiResponse { Message = "Success", Status = _couponService.InsertCouponRatingReview(model) };
+                return new BaseApiResponse { Message = "Success", Status = _couponService.InsertCouponRatingReview(model, request.ReviewImage1, request.ReviewImage2, request.Reviewimage3, request.ReviewImage1ext, request.ReviewImage2ext, request.Reviewimage3ext) };
 
             }
             catch (Exception e)

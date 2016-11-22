@@ -361,5 +361,9 @@ namespace SMD.Repository.Repositories
         {            
             return db.getCampaignROItblAnalytic(ID);
         }
+        public List<getCampaignByIdFormDataAnalytic_Result> getCampaignByIdFormDataAnalytic(long CampaignId)
+        {
+            return db.getCampaignByIdFormDataAnalytic(CampaignId).ToList();
+        }
     }
 }

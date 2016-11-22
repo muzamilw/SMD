@@ -839,20 +839,25 @@ namespace SMD.Repository.BaseRepository
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetSharedSurveyQuestionsByUserId_Result>("GetSharedSurveyQuestionsByUserId", oUserId);
         }
 
-        public int getCampaignByIdQQFormAnalytic(int CampaignId, int Choice, int Gender, int age, String Profession, String City)
+        public ObjectResult<Int32> getCampaignByIdQQFormAnalytic(int CampaignId, int Choice, int Gender, int age, String Profession, String City)
         {
 
          
             var Id = new ObjectParameter("Id", CampaignId);
-            var chioce = new ObjectParameter("choice", Choice);
+            var chioce = new ObjectParameter("coice", Choice);
             var gender = new ObjectParameter("gender", Gender);
             var ageRange = new ObjectParameter("ageRange", age);
             var profession = new ObjectParameter("Profession", Profession);
             var city = new ObjectParameter("city", City);
-
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("getCampaignByIdQQFormAnalytic", Id,chioce,gender, ageRange, profession, city);
+            ObjectResult<Int32> res = ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Int32>("getCampaignByIdQQFormAnalytic", Id, chioce, gender, ageRange, profession, city);
+            return res;
         }
+        public ObjectResult<getCampaignByIdFormDataAnalytic_Result> getCampaignByIdFormDataAnalytic(long CampaignId)
+        {
+            var Id = new ObjectParameter("Id", CampaignId);
 
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getCampaignByIdFormDataAnalytic_Result>("getCampaignByIdFormDataAnalytic", Id);
+        }
 
         #endregion
     }
