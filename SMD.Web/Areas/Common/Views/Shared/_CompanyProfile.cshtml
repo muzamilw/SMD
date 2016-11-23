@@ -7,15 +7,15 @@
     <div class="modal-dialog" style="width:900px;border-radius:5px;">
         <div class="modal-content">
             <div class="modal-content partial-contents" style="background-color:#dedede;margin-top:-1px;" id="">
-                <div class="modal-header" id="" style="background-color: #0f68a1;text-align: center;">
-                    <img src="/Content/Images/Close_Button.png" class="close" data-dismiss="modal"   style="width:20px;height:20px;float:right;cursor:pointer;">
+                <div class="modal-header" id="" style="background-color: #0f68a1;text-align: center;padding-bottom:0px;">
+                    <img src="/Content/Images/Close_Button.png" class="close" data-dismiss="modal" style="width:20px;height:20px;float:right;cursor:pointer;">
                     @*<button id="btnCloseP" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>*@
                     <span class="text-center" style="font-size:24px;color: #ffffff; line-height: 2.5 !important;">Account Settings</span>
-                    
+
                 </div>
                 <div class="row" id="" style="margin-left: 0; margin-right: 0">
 
-                    <div class="col-lg-12" style="padding-top:15px;float:none !important; background-color: #ffffff; padding-bottom: 30px; margin-bottom: 15px;">
+                    <div class="col-lg-12" style="padding-top:10px;float:none !important; background-color: #ffffff; padding-bottom: 5px; margin-bottom: 0px;">
                         <div class="col-lg-3">
 
                         </div>
@@ -64,7 +64,7 @@
                                     </div>
                                 </a>
                                 <br />
-                                <span>Money</span>
+                                <span>Billing</span>
                             </div>
                         </div>
 
@@ -73,7 +73,7 @@
                         </div>
 
                         <div class="clearfix"></div>
-                        <div class="col-xs-9 pull-left validationSummaryContainer" style="padding-top: 15px;">
+                        <div class="col-xs-9 pull-left validationSummaryContainer" style="padding-top: 10px;">
                             <a class="validationSummaryLink" data-bind="visible: $root.errorList().length > 0, bootstrapPopover: { html: true, title: 'Please fix following errors', elementNode: 'validationSummaryPopupForCompany', popoverId: 'validationSummaryPopoverBodyForCompany' }" style="display: none; cursor: pointer">Invalid data: Click here to see details.</a>
                             <div class="well well-small validationSummaryModal" id="validationSummaryPopupForCompany" style="display: none">
                                 <div id="validationSummaryPopoverBodyForCompany">
@@ -101,52 +101,46 @@
                                                 <label for="ddlSalutation" class="requiredlabel">Salutation </label>
                                                 <select class="form-control" id="ddlSalutation" name="Missing Salutation" data-bind="options: $root.genderList, optionsText: 'name', optionsValue: 'id', optionsCaption: '<' + 'Select Title'+ '>' , value:salutation, validationOnElement: salutation"></select>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group" style="margin-bottom:9px">
                                                 <label for="txtFirstName" class="requiredlabel">Full Name </label>
                                                 <input type="text" id="txtFirstName" class="form-control" name="Missing Full Name" placeholder="Enter First Name" maxlength="64" data-bind="value:fullName, validationOnElement: fullName">
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group" style="display:none">
                                                 <label for="txtEmail" class="requiredlabel">Email </label>
                                                 <input type="email" class="form-control" id="txtEmail" placeholder="Enter email" data-bind="value:email, enable:false">
                                             </div>
                                             @*<div class="form-group">
-                                                <label for="txtDob" class="requiredlabel">Date of Birth </label>
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                                    <input type="text" class="form-control" id="txtDob" name="Missing date of birth" placeholder="Enter Date of birth" data-bind="datepicker:dateOfBirth, datepickerOptions: { yearRange: '-60:+0' }, validationOnElement: dateOfBirth">
-                                                </div>
-                                            </div>*@
+                                                    <label for="txtDob" class="requiredlabel">Date of Birth </label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                        <input type="text" class="form-control" id="txtDob" name="Missing date of birth" placeholder="Enter Date of birth" data-bind="datepicker:dateOfBirth, datepickerOptions: { yearRange: '-60:+0' }, validationOnElement: dateOfBirth">
+                                                    </div>
+                                                </div>*@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <header class="main-box-header clearfix" style="padding-left: 0">
-                                            <p style="color:red">* required to verifty <b>money</b> transfers & <b>commission</b> to you. </p>
+                                            <p class="pull-right" style="color:red">* required </p>
                                         </header>
                                         <div class="main-box-body clearfix" style="padding-bottom: 0;">
                                             <div class="form-group">
-                                                <label for="ddlProfession" class="requiredlabel">Profession </label>
-                                                <select class="form-control" id="ddlProfession" name="Missing profession" data-bind="options: $root.professionsList, optionsText: 'IndusteryName', optionsValue: 'IndusteryId', optionsCaption:  'Select ...', value:profession, validationTooltip: profession, validationOnElement: profession"></select>
-                                            </div>
-
-                                            <div class="form-group">
                                                 <label for="phone" class="requiredlabel">Mobile Number </label>
-                                                <div class="input-group">
-                                                    @*<span class="input-group-addon"><i class="fa fa-plus"></i></span>
-                                                    <select class="form-control" style="width:85%" id="countryCode" name="countryCode" >
-                                                        <option value="92">92</option>
-                                                        <option value="92">27</option>
-                                                        <option value="92">44</option>
-                                                    </select>
-                                                    <span class="input-group-addon"><i class="fa fa-phone"></i></span>*@
-                                                    <input type="tel" id="phone"  class="form-control" style="border-radius:3px;height:34px;width:180%;" name="Missing mobile number"  placeholder="Enter Mobile Number" data-bind="value:mobileNumber, validationOnElement: mobileNumber">
-                                                </div>
+                                                <input type="tel" id="phone" class="form-control" style="border-radius:3px;height:34px;" name="Missing mobile number" placeholder="Enter Mobile Number" data-bind="value:mobileNumber, validationOnElement: mobileNumber">
                                             </div>
-                                            <div class="form-group">
+                                            @*<div class="form-group">
+                                                    <label for="ddlProfession" class="requiredlabel">Profession </label>
+                                                    <select class="form-control" id="ddlProfession" name="Missing profession" data-bind="options: $root.professionsList, optionsText: 'IndusteryName', optionsValue: 'IndusteryId', optionsCaption:  'Select ...', value:profession, validationTooltip: profession, validationOnElement: profession"></select>
+                                                </div>*@
+                                            <div class="form-group" style="display:none">
                                                 <label for="txtDob" class="requiredlabel">Date of Birth </label>
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                                     <input type="text" class="form-control" id="txtDob" name="Missing date of birth" placeholder="Enter Date of birth" data-bind="datepicker:dateOfBirth, datepickerOptions: { yearRange: '-60:+0' }, validationOnElement: dateOfBirth">
                                                 </div>
+                                            </div>
+                                            <div class="form-group" style="margin-top:-8px;margin-bottom:9px;">
+                                                <label for="txtEmail" class="requiredlabel">Email </label>
+                                                <input type="email" class="form-control" id="txtEmail" placeholder="Enter email" data-bind="value:email, enable:false">
                                             </div>
                                             <div class="form-group" style="display:none">
                                                 <label for="txtPasportNo">User Id (i.e Passport #, DrivingLicense #)</label>
@@ -157,10 +151,6 @@
                                     </div>
                                     <div class="col-md-12" style="padding-top: 0;padding-left: 20px;">
                                         <div class="col-md-11" style="padding-top: 0;">
-                                            <div class="form-group">
-                                                <span class="help-block text-left">We take your privacy extremely seriously. See our privacy policy for full details on how we use and secure your personal data.</span>
-                                            </div>
-
                                             <div class="form-group" style="margin-bottom:0;">
                                                 <div class="checkbox-nice ">
                                                     <input type="checkbox" name="chkreceiveDeals" value="1" id="chkreceiveDeals" data-bind="checked:isReceiveDeals">
@@ -177,7 +167,7 @@
                                                     </label>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group" style="margin-bottom:8px;">
                                                 <div class="checkbox-nice ">
                                                     <input type="checkbox" name="chklatescasg4ads" value="1" id="chklatescasg4ads" data-bind="checked:isReceiveLatestServices">
                                                     <label for="chklatescasg4ads">
@@ -185,7 +175,7 @@
                                                     </label>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group" style="margin-bottom:15px;">
                                                 <div class="btn-group" style="float: left;">
                                                     <button type="button" class="btn btn-primary" data-bind="click:$root.ChangePassword">Change Password</button>
                                                 </div>
@@ -194,7 +184,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="form-group">
+                                            <div class="form-group" style="display:none">
                                                 <footer id="footer-bar">
                                                     <p id="footer-copyright">
                                                         &copy; @DateTime.Now.Year Powered by CASH 4 Ads Inc.,USA
@@ -208,12 +198,23 @@
                                     </div>
 
                                 </div>
-                                <div style="float: right;">
-                                    <a class="btn btn-default" href="#tab-Business" style="text-decoration: none;margin-bottom: 10px;" data-toggle="tab" data-bind="click: function(){$root.onTabChange(2);}">
-                                        <span>Continue to Step 2</span>
-                                    </a>
-                                    <button class="btn  btn-success" style="margin-bottom: 10px; margin-left: 5px;" id="btnSaveCompProfile" data-bind="click:$root.onUpdateProfile , enable: hasChanges, css: { 'btn-warning': hasChanges }">Save</button>
+                                <div class="col-lg-12">
+                                    <div class="col-lg-9">
+                                        <span class="help-block text-left" style="margin-bottom:0px;">We take your privacy extremely seriously. See our privacy policy for full details on how we use and secure your personal data.</span>
+
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div style="float: right;">
+
+                                            <a class="btn btn-default" href="#tab-Business" style="text-decoration: none;margin-bottom: 10px;" data-toggle="tab" data-bind="click: function(){$root.onTabChange(2);}">
+                                                <span>Continue to Step 2</span>
+                                            </a>
+                                            <button class="btn  btn-success" style="margin-bottom: 10px; margin-left: 4px;" id="btnSaveCompProfile" data-bind="click:$root.onUpdateProfile , enable: hasChanges, css: { 'btn-warning': hasChanges }">Save</button>
+                                        </div>
+                                    </div>
+
                                 </div>
+
 
 
                                 @*<button class="btn  btn-default pull-right" style="margin-bottom: 10px;" id="saveBtn" data-bind="click: $root.onTabChange(2)">Continue to Step 2</button>*@
@@ -229,36 +230,52 @@
                                             <h2>2. Your business data:</h2>
                                         </header>
                                         <div class="main-box-body clearfix" style="padding-bottom: 0">
-                                            <div class="form-group">
-                                                <label for="txtBusinessName" class="requiredlabel">Business Name </label>
-                                                <input type="text" id="txtBusinessName" class="form-control" name="Missing business name" maxlength="64" placeholder="Enter Your Business Name" data-bind="value:CompanyName, validationOnElement: CompanyName">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="txtBusinessName" class="requiredlabel">Business Name </label>
+                                                    <input type="text" id="txtBusinessName" class="form-control" style="width:90%" name="Missing business name" maxlength="64" placeholder="Enter Your Business Name" data-bind="value:CompanyName, validationOnElement: CompanyName">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="txtBranchName" class="requiredlabel">Branch Name </label>
+                                                    <input type="text" id="txtBranchName" class="form-control" style="width:104%" name="Missing branch name" maxlength="32" placeholder="Enter Branch Name" data-bind="value:branchName, validationOnElement: branchName">
+                                                </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="txtBusinessAddress" class="requiredlabel">Business Address </label>
                                                 <input type="text" id="txtBusinessAddress" class="form-control" name="Missing business address" maxlength="128" placeholder="Enter Business Address" data-bind="value:BillingAddressLine1, validationOnElement: BillingAddressLine1">
                                             </div>
-                                            <div class="form-group">
-                                                <label for="txtCity" class="requiredlabel">Town/City</label>
-                                                <input type="text" id="txtCity" class="form-control" name="Missing City" placeholder="Enter Town/City" maxlength="32" data-bind="value:billingCity, validationOnElement: billingCity">
+                                            <div class="col-md-6" style="padding-left:0px;">
+                                                <div class="form-group">
+                                                    <label for="txtCity" class="requiredlabel">Town/City</label>
+                                                    <input type="text" id="txtCity" style=" width:90%" class="form-control" name="Missing City" placeholder="Enter Town/City" maxlength="32" data-bind="value:billingCity, validationOnElement: billingCity">
+                                                </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="txtState" class="requiredlabel">State/County</label>
-                                                <input type="text" id="txtState" class="form-control" name="Missing State" placeholder="Enter State/County" maxlength="32" data-bind="value:BillingState, validationOnElement: BillingState">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="txtState" class="requiredlabel">State/County</label>
+                                                    <input type="text" id="txtState" class="form-control" style=" width:104%" name="Missing State" placeholder="Enter State/County" maxlength="32" data-bind="value:BillingState, validationOnElement: BillingState">
+                                                </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="txtPostCode" class="requiredlabel">Post Code </label>
-                                                <input type="text" id="txtPostCode" class="form-control" name="Missing Post Code" maxlength="12" placeholder="Enter Postal Code" data-bind="value:BillingZipCode, validationOnElement: BillingZipCode">
+                                            <div class="col-md-6" style="padding-left:0px;">
+                                                <div class="form-group">
+                                                    <label for="txtPostCode" class="requiredlabel">Post Code </label>
+                                                    <input type="text" id="txtPostCode" style=" width:90%" class="form-control" name="Missing Post Code" maxlength="12" placeholder="Enter Postal Code" data-bind="value:BillingZipCode, validationOnElement: BillingZipCode">
+                                                </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="ddlCountry" class="requiredlabel">Country </label>
-                                                <select class="form-control" id="ddlCountry" name="Missing Country" data-bind="options: $root.countries, optionsText: 'CountryName', optionsValue: 'CountryId', optionsCaption:  '&lt;' + 'Select Country'+ '&gt;', value:BillingCountryId, validationOnElement: BillingCountryId"></select>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="ddlCountry" class="requiredlabel">Country </label>
+                                                    <select class="form-control" id="ddlCountry" style=" width:104%" name="Missing Country" data-bind="options: $root.countries, optionsText: 'CountryName', optionsValue: 'CountryId', optionsCaption:  '&lt;' + 'Select Country'+ '&gt;', value:BillingCountryId, validationOnElement: BillingCountryId"></select>
+                                                </div>
                                             </div>
 
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <header class="main-box-header clearfix" style="padding-left: 0">
-                                            <p style="color:red">* required if listing <b>Deals</b> or running <b>Campaigns</b></p>
+                                            <p class="pull-right" style="color:red">* required</p>
                                         </header>
                                         <div class="main-box-body clearfix" style="padding-bottom: 0">
                                             <div class="form-group">
@@ -268,11 +285,11 @@
                                                 </div>
 
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group" style="display:none">
                                                 <label for="txtBranchName" class="requiredlabel">Branch Name </label>
                                                 <input type="text" id="txtBranchName" class="form-control" name="Missing branch name" maxlength="32" placeholder="Enter Branch Name" data-bind="value:branchName, validationOnElement: branchName">
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group" style="display:none">
                                                 <label for="txtBranchLocations">How Many Branch Locations do you have? </label>
                                                 <input type="text" id="txtBranchLocations" class="form-control" placeholder="Enter Number of branches" maxlength="12" data-bind="autoNumeric:numberOfBranches,settings:{mDec:0}">
                                             </div>
@@ -280,12 +297,20 @@
                                     </div>
                                 </div>
                                 @*<button class="btn  btn-default pull-right" style="margin-bottom: 10px;" id="saveBtn" data-bind="click: $root.onTabChange(3)">Continue to Step 3</button>*@
-                                <div style="float: right;">
-                                    <a class="btn btn-default" href="#tab-Logo" style="text-decoration: none;margin-bottom: 10px;" data-toggle="tab" data-bind="click: function(){$root.onTabChange(3);}">
-                                        <span>Continue to Step 3</span>
-                                    </a>
-                                    <button class="btn  btn-success" style="margin-bottom: 10px;margin-left: 5px;" id="btnSaveCompProfile" data-bind="click:$root.onUpdateProfile , enable: hasChanges, css: { 'btn-warning': hasChanges }">Save</button>
+                                <div class="col-lg-12">
+                                    <div class="col-lg-9">
+                                        <span class="help-block text-left" style="margin-bottom:0px;">We take your privacy extremely seriously. See our privacy policy for full details on how we use and secure your personal data.</span>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div style="float: right;">
+                                            <a class="btn btn-default" href="#tab-Logo" style="text-decoration: none;margin-bottom: 10px;" data-toggle="tab" data-bind="click: function(){$root.onTabChange(3);}">
+                                                <span>Continue to Step 3</span>
+                                            </a>
+                                            <button class="btn  btn-success" style="margin-bottom: 10px;margin-left: 4px;" id="btnSaveCompProfile" data-bind="click:$root.onUpdateProfile , enable: hasChanges, css: { 'btn-warning': hasChanges }">Save</button>
+                                        </div>
+                                    </div>
                                 </div>
+
 
                             </div>
                         </div>
@@ -300,15 +325,15 @@
                                             <div class="form-group">
                                                 <label for="divLogo" class="requiredlabel">Logo </label>
                                                 <div id="divLogo" style="background-color: #dedede; height: auto;width:40%">
-                                                    <img style="height:150px;width:100%;" data-bind="attr: { src: $root.selectedCompany().Logo()()==null?'/images/splaceholder.png' : $root.selectedCompany().Logo()}, validationOnElement: Logo" name="Missing logo" src="/Content/Images/Company_Default.png" id="imgLogoCProfile" data-toggle="modal" data-target="#damModelcpo" onclick="changeIframeSrcCProfile(1)" />
-                    
+                                                    <img style="height:100%;width:100%;" data-bind="attr: { src: $root.selectedCompany().Logo()()==null?'/images/splaceholder.png' : $root.selectedCompany().Logo()}, validationOnElement: Logo" name="Missing logo" src="/Content/Images/Company_Default.png" id="imgLogoCProfile" data-toggle="modal" data-target="#damModelcpo" onclick="changeIframeSrcCProfile(1)" />
+
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="txtWebsite">Website </label>
                                                 <input type="text" id="txtWebsite" class="form-control" maxlength="64" placeholder="Enter Web Address" data-bind="value:WebsiteLink">
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group" style="display:none">
                                                 <label for="txtSalesEmail">Sales Email</label>
                                                 <input type="text" id="txtSalesEmail" class="form-control" maxlength="64" placeholder="Enter Sales Email" data-bind="value:SalesEmail">
                                             </div>
@@ -317,7 +342,7 @@
                                                 <label for="txtSalesPhone">Sales Phone Line </label>
                                                 <input type="text" id="txtSalesPhone" class="form-control" maxlength="16" placeholder="Enter Sales Phone" data-bind="value:salesPhone">
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group" style="display:none">
                                                 <label for="ddlCompanyType">Industry Type </label>
                                                 <select class="form-control" id="ddlCompanyType" data-bind="options: $root.companyTypes, optionsText: 'Name', optionsValue: 'Id', optionsCaption:  'Select ...', value:companyType"></select>
                                             </div>
@@ -325,24 +350,31 @@
                                     </div>
                                     <div class="col-md-6">
                                         <header class="main-box-header clearfix" style="padding-left: 0">
-                                            <p style="color:red">* required if listing <b>Deals</b> or running <b>Campaigns</b></p>
+                                            <p class="pull-right" style="color:red">* required</p>
                                         </header>
                                         <div class="main-box-body clearfix" style="padding-bottom: 0">
                                             <div class="form-group">
-                                                <label for="txtAboutUs">Tell us more about your business.</label>
-                                                <textarea class="form-control" style="height:268px; border:1px solid" id="txtAboutUs" data-bind="value:aboutUs"></textarea>
-                                                <span class="help-block text-left">This text is used for About Us Section.</span>
+                                                <label for="txtAboutUs">Tell us more about your business. &nbsp;<label class="text-left" style="color:darkgray"> (This text is used for About Us Section)</label></label>
+                                                <textarea class="form-control" style="height:235px; border:1px solid" id="txtAboutUs" data-bind="value:aboutUs"></textarea>
                                             </div>
 
                                         </div>
                                     </div>
                                 </div>
                                 @*<button class="btn  btn-default pull-right" style="margin-bottom: 10px;" id="saveBtn" data-bind="click: $root.onTabChange(4)">Continue to Step 4</button>*@
-                                <div style="float: right;">
-                                    <a class="btn btn-default" href="#tab-Money" style="text-decoration: none;margin-bottom: 10px;" data-toggle="tab" data-bind="click: function(){$root.onTabChange(4);}">
-                                        <span>Continue to Step 4</span>
-                                    </a>
-                                    <button class="btn  btn-success" style="margin-bottom: 10px; margin-left:5px;" id="btnSaveCompProfile" data-bind="click:$root.onUpdateProfile , enable: hasChanges, css: { 'btn-warning': hasChanges }">Save</button>
+                                <div class="col-lg-12">
+                                    <div class="col-lg-9">
+                                        <span class="help-block text-left" style="margin-bottom:0px;">We take your privacy extremely seriously. See our privacy policy for full details on how we use and secure your personal data.</span>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div style="float: right;">
+                                            <a class="btn btn-default" href="#tab-Money" style="text-decoration: none;margin-bottom: 10px;" data-toggle="tab" data-bind="click: function(){$root.onTabChange(4);}">
+                                                <span>Continue to Step 4</span>
+                                            </a>
+                                            <button class="btn  btn-success" style="margin-bottom: 10px; margin-left:4px;" id="btnSaveCompProfile" data-bind="click:$root.onUpdateProfile , enable: hasChanges, css: { 'btn-warning': hasChanges }">Save</button>
+                                        </div>
+
+                                    </div>
                                 </div>
 
                             </div>
@@ -354,7 +386,7 @@
                                         <header class="main-box-header clearfix" style="padding-left: 0">
                                             <h2>4. Money Transfers & Billing Details:</h2>
                                         </header>
-                                        <div class="main-box-body clearfix" style="padding-bottom: 0">
+                                        <div class="main-box-body clearfix" style="padding-bottom: 0;display:none">
                                             <div class="form-group">
                                                 <label for="txtPaypalId" class="requiredlabel">Your Paypal Id (email) </label>
                                                 <input type="text" id="txtPaypalId" class="form-control" name="Missing Paypal Id" placeholder="Enter Your Paypal Id" maxlength="64" data-bind="value:paypalMailId, validationOnElement: paypalMailId">
@@ -364,7 +396,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <header class="main-box-header clearfix" style="padding-left: 0">
-                                            <p style="color:red">* required if listing <b>Deals</b> or running <b>Campaigns</b></p>
+                                            <p class="pull-right" style="color:red">* required</p>
                                         </header>
                                         <div class="main-box-body clearfix" style="padding-bottom: 0">
                                             <div class="form-group">
@@ -381,14 +413,14 @@
                                                 <input type="text" id="txtBillInvoiceTo" class="form-control" name="Missing billing business name" maxlength="64" placeholder="Enter Billing Business Name" data-bind="value:billingBusinessName, validationOnElement: billingBusinessName">
                                             </div>
                                             <div class="form-group">
-                                                <label for="txtBillingEmail" class="requiredlabel">Billing Email </label>
-                                                <input type="text" id="txtBillingEmail" class="form-control" maxlength="64" name="Missing billing email" placeholder="Enter Billing Email" data-bind="value:BillingEmail, validationOnElement: BillingEmail">
+                                                <label for="txtVatNo">Sale Tex / Vat #</label>
+                                                <input type="text" id="txtVatNo" class="form-control" placeholder="Enter VAT Number" maxlength="16" data-bind="value:vatNumber">
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group" style="display:none">
                                                 <label for="txtRegNo">Company Registration Number</label>
                                                 <input type="text" id="txtRegNo" class="form-control" placeholder="Enter Registration Number" maxlength="16" data-bind="value:companyRegNo">
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group" style="display:none">
                                                 <label for="txtBusinessStartDate">Business Start Date </label>
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
@@ -407,23 +439,31 @@
                                                 </div>
 
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group" style="display:none">
                                                 <label for="txtBillingPhone">Billing Phone Line</label>
                                                 <input type="text" id="txtBillingPhone" class="form-control" placeholder="Enter Billing Phone Line" maxlength="16" data-bind="value:BillingPhone">
                                             </div>
                                             <div class="form-group">
-                                                <label for="txtVatNo">VAT Number</label>
-                                                <input type="text" id="txtVatNo" class="form-control" placeholder="Enter VAT Number" maxlength="16" data-bind="value:vatNumber">
+                                                <label for="txtBillingEmail" class="requiredlabel">Billing Email </label>
+                                                <input type="text" id="txtBillingEmail" class="form-control" maxlength="64" name="Missing billing email" placeholder="Enter Billing Email" data-bind="value:BillingEmail, validationOnElement: BillingEmail">
                                             </div>
 
-                                            
+
 
                                             <input id="hdlogchanged" type="checkbox" name="hdlogchanged" data-bind="value:LogoChanged" style="display:none">
                                         </div>
                                     </div>
 
                                 </div>
-                                <button class="btn  btn-success pull-right" style="margin-bottom: 10px;" id="btnSaveCompProfile" data-bind="click:$root.onUpdateProfile , enable: hasChanges, css: { 'btn-warning': hasChanges }">Save</button>
+                                <div class="col-lg-12">
+                                    <div class="col-lg-9">
+                                        <span class="help-block text-left" style="margin-bottom:0px;">We take your privacy extremely seriously. See our privacy policy for full details on how we use and secure your personal data.</span>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <button class="btn  btn-success pull-right" style="margin-bottom: 10px;" id="btnSaveCompProfile" data-bind="click:$root.onUpdateProfile , enable: hasChanges, css: { 'btn-warning': hasChanges }">Save</button>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -494,12 +534,12 @@
         console.log(mode);
     }
     function iframeLoadedCProfile() {
-       
+
         var iframeBodycpo = $('body', $('#iframecpo')[0].contentWindow.document);
 
         //var cpoDamClose = $('body', $('#btnDamClosexp'));
 
-        var cpoDamClose =  $('#btnDamClosexp');
+        var cpoDamClose = $('#btnDamClosexp');
 
 
         $(iframeBodycpo).on('click', '.damImgContainer img', function (event) {
@@ -508,10 +548,10 @@
             if (mode == 1) {
                 $("#imgLogoCProfile").attr("src", this.src).change();
                 logoImage = this.src;
-                
+
                 $('#hdlogchanged').prop('checked', true);
                 $('#hdlogchanged').trigger('change');
-                
+
 
                 cpoDamClose.click();
             } else if (mode == 2) {
@@ -529,8 +569,7 @@
             }
         });
     }
-    function testm()
-    {
+    function testm() {
         $("#phone").intlTelInput({
             allowExtensions: true,
             autoFormat: true,

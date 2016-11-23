@@ -39,5 +39,15 @@ namespace SMD.Models.ResponseModels
         public string ProfileImage { get; set; }
         
     }
+    public class CouponRatingReviewResponseModel
+    {
+        public List<CouponRatingReviewResponse> CouponsReview { get; set; }
+
+        /// <summary>
+        /// Total Count of Ad Campaigns
+        /// </summary>
+        public int TotalCount { get; set; }
+
+    }
 
 }

@@ -1,4 +1,5 @@
 ﻿using SMD.Models.DomainModels;
+using SMD.Models.RequestModels;
 using SMD.Models.ResponseModels;
 using System;
 using System.Collections.Generic;
@@ -10,12 +11,13 @@ namespace SMD.Interfaces.Repository
 {
     public interface ICouponRatingReviewRepository : IBaseRepository<CouponRatingReview, long>
     {
-       
 
 
-        List<CouponRatingReviewResponse> GetAllCouponRatingReviewByCompany(int CompanyId, int Status);
+
+        List<CouponRatingReviewResponse> GetAllCouponRatingReviewByCompany(GetPagedListRequest request, out int rowCount);
 
 
         CouponRatingReviewOverallResponse GetPublishedCouponRatingReview(long CouponId);
+        int CouponReviewCount();
     }
 }

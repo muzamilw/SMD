@@ -54,6 +54,7 @@ namespace SMD.Implementation.Services
         private readonly IProfileQuestionRepository profileQuestionRepository;
         private readonly ISmsServiceCustom smsService;
         private readonly IGameRepository gameRepositry;
+        private readonly ICouponRatingReviewRepository couponRatingReviewRepository;
 
         private readonly IAspnetUsersRepository aspnetUsersRepository;
 
@@ -624,7 +625,7 @@ namespace SMD.Implementation.Services
             ITaxRepository taxRepository, IProfileQuestionUserAnswerService profileQuestionAnswerService,
             ICountryRepository countryRepository, IIndustryRepository industryRepository,
             IProfileQuestionService profileQuestionService, IAdCampaignResponseRepository adCampaignResponseRepository,
-            ISurveyQuestionResponseRepository surveyQuestionResponseRepository, IEducationRepository educationRepository, ICityRepository cityRepository, ICompanyRepository companyRepository, IManageUserRepository manageUserRepository, IAccountService accountService, IProfileQuestionRepository profileQuestionRepository, IAspnetUsersRepository aspnetUsersRepository, ISmsServiceCustom smsService, IGameRepository gameRepositry)
+            ISurveyQuestionResponseRepository surveyQuestionResponseRepository, IEducationRepository educationRepository, ICityRepository cityRepository, ICompanyRepository companyRepository, IManageUserRepository manageUserRepository, IAccountService accountService, IProfileQuestionRepository profileQuestionRepository, IAspnetUsersRepository aspnetUsersRepository, ISmsServiceCustom smsService, IGameRepository gameRepositry, ICouponRatingReviewRepository couponRatingReviewRepository)
         {
             if (emailManagerService == null)
             {
@@ -695,6 +696,7 @@ namespace SMD.Implementation.Services
             this.aspnetUsersRepository = aspnetUsersRepository;
             this.smsService = smsService;
             this.gameRepositry = gameRepositry;
+            this.couponRatingReviewRepository = couponRatingReviewRepository;
         }
 
 
@@ -1485,7 +1487,8 @@ namespace SMD.Implementation.Services
                Industries = industryRepository.GetAll().ToList(),
                Educations = educationRepository.GetAllEducations().ToList(),
                UserRoles = this.RoleManager.Roles.Where(g => g.Id.StartsWith("EndUser")).ToList(), //   manageUserRepository.getUserRoles().ToList()
-               GetApprovalCount = companyRepository.GetApprovalCount()
+               GetApprovalCount = companyRepository.GetApprovalCount(),
+               GetCouponreviewCount = couponRatingReviewRepository.CouponReviewCount()
             };
         }
         public int generateAndSmsCode(string userId, string phone)
