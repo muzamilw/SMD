@@ -28,6 +28,7 @@ define("survey/survey.viewModel",
                     price = ko.observable(0),
                 
                     IsVisibleAudience = ko.observable(false),
+                    IsBroadMarketing = ko.observable(true),
                     SearchProfileQuestion = ko.observable(''),
                     // Controlls editor visibility 
                     isEditorVisible = ko.observable(false),
@@ -1723,6 +1724,51 @@ define("survey/survey.viewModel",
                          //$("#btnSubmitForApproval,#saveBtn,.lang_delSurvey,.table-link").css("display", "inline-block");
                          //$("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign").removeAttr('disabled');
                      },
+                Changefilter = function () {
+
+                    if (campaignModel().IsUseFilter() == 0) {
+
+                        confirmation.messageText("Switching to Basic Targeting will remove all Hyper Targeting filters.Continue to Basic Targeting,  Yes No.");
+                        confirmation.afterProceed(function () {
+                            IsBroadMarketing(false);
+                            campaignModel().AdCampaignTargetLocations.removeAll();
+                            campaignModel().AdCampaignTargetCriterias.removeAll();
+                            //campaignModel().AgeRangeEnd(80);
+                            //campaignModel().AgeRangeStart(13);
+                            // campaignModel().Gender('1');
+
+                            setTimeout(function () {
+                                ShowAudienceCounter(0);
+                            }, 500);
+                        });
+                        confirmation.show();
+                        confirmation.afterCancel(function () {
+                            IsBroadMarketing(true);
+                            campaignModel().IsUseFilter('1');
+                            confirmation.hide();
+                        });
+                    }
+                    else {
+
+                        confirmation.messageText("Switching to Basic Targeting will remove all Hyper Targeting filters.Continue to Basic Targeting,  Yes No.");
+                        confirmation.afterProceed(function () {
+                            IsBroadMarketing(true);
+                            campaignModel().AdCampaignTargetLocations.removeAll();
+                            campaignModel().AdCampaignTargetCriterias.removeAll();
+                            // campaignModel().AgeRangeEnd(80);
+                            //  campaignModel().AgeRangeStart(13);
+                            //    campaignModel().Gender('1');
+                            getAudienceCount();
+                        });
+                        confirmation.show();
+                        confirmation.afterCancel(function () {
+                            campaignModel().IsUseFilter('0');
+                            confirmation.hide();
+                            IsBroadMarketing(false);
+                        });
+                    }
+
+                },
                     buildParentSQList = function () {
                         if (surveyQuestionList().length == 0) {
                             dataservice.getBaseData({
@@ -2228,7 +2274,9 @@ define("survey/survey.viewModel",
                     nextPreviewScreen: nextPreviewScreen,
                     previewScreenNumber: previewScreenNumber,
                     backScreen: backScreen,
-                    isflageClose: isflageClose
+                    isflageClose: isflageClose,
+                    Changefilter: Changefilter,
+                    IsBroadMarketing: IsBroadMarketing
                 };
             })()
         };
