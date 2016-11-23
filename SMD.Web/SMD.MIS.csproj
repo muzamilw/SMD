@@ -389,6 +389,7 @@
     <Compile Include="Areas\Api\Controllers\CouponRatingReviewController.cs" />
     <Compile Include="Areas\Api\Controllers\CouponReviewController.cs" />
     <Compile Include="Areas\Api\Controllers\CouponReviewCountController.cs" />
+    <Compile Include="Areas\Api\Controllers\DashboardStatusCounterController.cs" />
     <Compile Include="Areas\Api\Controllers\NotificationsController.cs" />
     <Compile Include="Areas\Api\Controllers\CouponAnalyticsController.cs" />
     <Compile Include="Areas\Api\Controllers\ApprovePayOutHistoryController.cs" />
@@ -660,12 +661,12 @@
       <DependentUpon>StripeHandler.ashx</DependentUpon>
     </Compile>
     <Compile Include="TypeRegistrations.cs" />
-    <Compile Include="Views\EmailTester.aspx.cs">
-      <DependentUpon>EmailTester.aspx</DependentUpon>
+    <Compile Include="Emails\Welcome_Cash4ads.aspx.cs">
+      <DependentUpon>Welcome_Cash4ads.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\EmailTester.aspx.designer.cs">
-      <DependentUpon>EmailTester.aspx</DependentUpon>
+    <Compile Include="Emails\Welcome_Cash4ads.aspx.designer.cs">
+      <DependentUpon>Welcome_Cash4ads.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -2976,7 +2977,7 @@
     <Content Include="Scripts\underscore.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="ReportViewers\User.aspx" />
-    <Content Include="Views\EmailTester.aspx" />
+    <Content Include="Emails\Welcome_Cash4ads.aspx" />
     <Content Include="Views\Home\-------Login.cshtml" />
     <Content Include="Views\MobileMessageBox\Message.html" />
     <Content Include="Web.config">

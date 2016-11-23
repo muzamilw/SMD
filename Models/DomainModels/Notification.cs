@@ -23,6 +23,8 @@ namespace SMD.Models.DomainModels
         public Nullable<long> SurveyQuestionShareId { get; set; }
 
         public string PhoneNumber { get; set; }
+
+        public Nullable<long> CouponId { get; set; }
     
         public virtual SurveySharingGroupShare SurveySharingGroupShare { get; set; }
     }

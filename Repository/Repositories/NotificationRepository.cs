@@ -6,6 +6,7 @@ using SMD.Models.DomainModels;
 using SMD.Repository.BaseRepository;
 using System;
 using System.Data.Entity;
+using System.Text.RegularExpressions;
 
 namespace SMD.Repository.Repositories
 {
@@ -48,7 +49,7 @@ namespace SMD.Repository.Repositories
 
         public IEnumerable<vw_Notifications> GetAllUnReadNotificationsByUserId(string UserId, string PhoneNumber)
         {
-
+            PhoneNumber = Regex.Replace(PhoneNumber, @"\s+", "");
             PhoneNumber = PhoneNumber.Substring(PhoneNumber.Length - 9, PhoneNumber.Length - (PhoneNumber.Length - 9));
 
             return db.vw_Notifications.Where(c => (c.UserID == UserId || c.PhoneNumber.EndsWith(PhoneNumber)) && (c.IsRead == false || c.IsRead == null) );
