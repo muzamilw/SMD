@@ -1300,7 +1300,9 @@
     <Content Include="Images\Sign_In_Image.png" />
     <Content Include="Images\splaceholder.png" />
     <Content Include="Images\standardplaceholder.png" />
+    <Content Include="Images\Tips-Icon-2.png" />
     <Content Include="Images\topbarph.png" />
+    <Content Include="Images\White_Arrow.png" />
     <Content Include="Images\youtube_play.JPG" />
     <Content Include="ReportViewers\Publisher.aspx" />
     <Content Include="ReportViewers\SMDReport.aspx" />

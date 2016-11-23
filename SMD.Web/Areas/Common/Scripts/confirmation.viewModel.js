@@ -128,6 +128,10 @@ define("common/confirmation.viewModel",
                          isLoading(true);
                          view.showOKpopupforinfo();
                    },
+                 showAccountSetingPopup = function () {
+                     isLoading(true);
+                     view.showAccountSetingPopup();
+                 },
                   showOKpopupforFreeCoupon = function () {
                       isLoading(true);
                       view.showOKpopupforFreeCoupon();
@@ -214,6 +218,7 @@ define("common/confirmation.viewModel",
                         ko.applyBindings(view.viewModel, view.bindingRootq);
                         ko.applyBindings(view.viewModel, view.bindingRootupgrade);
                         ko.applyBindings(view.viewModel, view.bindingRootaction);
+                        showAccountSetingPopup();
                     };
 
                 return {
@@ -252,7 +257,8 @@ define("common/confirmation.viewModel",
                     hidesOKpopupforInfo: hidesOKpopupforInfo,
                     showOKpopupforChart: showOKpopupforChart,
                     showOKpopupforFreeCoupon: showOKpopupforFreeCoupon,
-                    showOKpopupfordealheadline: showOKpopupfordealheadline
+                    showOKpopupfordealheadline: showOKpopupfordealheadline,
+                    showAccountSetingPopup: showAccountSetingPopup
                 };
             })()
         };

@@ -185,7 +185,7 @@
 
                               
                                 @*<li id="userProfileBinding"><a data-bind="click:showUserProfileDialog">Personal Profile</a></li>*@
-                                <li id="companyProfileBinding"><a style="cursor: pointer" data-bind="click:showCompanyProfileDialog">Account Settings</a></li>
+                                <li id="companyProfileBinding"><a  id ="cprofile"style="cursor: pointer" data-bind="click:showCompanyProfileDialog">Account Settings</a></li>
                                 <li><a href="~/Billing/Manage/Invoice">Billing History</a></li>
 
                                 <li><a href="/User/ManageUser/ManageUsers">Manage Users</a></li>
@@ -815,6 +815,7 @@
     <script src="~/Scripts/intlTelInput.min.js"></script>
     
     <script>
+        createCookie();
         require(["common/confirmation.view"]);
         require(["Layout/Layout.view"]);
         require(["PhraseLibrary/phraseLibrary.view"]);
@@ -1001,12 +1002,17 @@
             function ShowInviteUserPopup() {
                 $('#btninviteusers').click();
             }
+            function createCookie() {
+                debugger;
+                var counter = 3;
+                document.cookie = counter;
+            }
+            function openCompanyProfile() {
+               
+                $( "#cprofile" ).click();
+                
+            }
     </script>
-
-   
-
-
-
 
     @RenderSection("scripts", required: false)
     
