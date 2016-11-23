@@ -246,7 +246,9 @@ define("ads/ads.viewModel",
                         Gender: selectedQQGAnalytics(),
                         age: selectedQQAAnalytics(),
                         profession: selectedQQPAnalytics(),
-                        City: selectedQQCtAnalytics()
+                        City: selectedQQCtAnalytics(),
+                        QId: 0,
+                        type : 1
                     }, {
                         success: function (data) {
                             if (data != null) {

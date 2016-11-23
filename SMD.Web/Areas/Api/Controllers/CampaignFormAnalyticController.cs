@@ -20,7 +20,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         {
             this._IAdCampaignResponseService = IAdCampaignResponseService;
         }
-        public FormAnalyticResponseModel Get(int Id, int Choice, int Gender, int age, string profession, string City)
+        public FormAnalyticResponseModel Get(int Id, int Choice, int Gender, int age, string profession, string City, int QId, int type)
         {
             FormAnalyticResponseModel data = new FormAnalyticResponseModel();
             data.QQStats = _IAdCampaignResponseService.getCampaignByIdQQFormAnalytic(Id, Choice, Gender, age, profession, City);
