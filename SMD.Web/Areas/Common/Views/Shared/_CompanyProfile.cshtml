@@ -8,10 +8,10 @@
         <div class="modal-content">
             <div class="modal-content partial-contents" style="background-color:#dedede;margin-top:-1px;" id="">
                 <div class="modal-header" id="" style="background-color: #0f68a1;text-align: center;">
-                    <img src="/Content/Images/Close_Button.png" class="close" data-dismiss="modal"   style="width:20px;height:20px;float:right;cursor:pointer;">
+                    <img src="/Content/Images/Close_Button.png" class="close" data-dismiss="modal" style="width:20px;height:20px;float:right;cursor:pointer;">
                     @*<button id="btnCloseP" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>*@
                     <span class="text-center" style="font-size:24px;color: #ffffff; line-height: 2.5 !important;">Account Settings</span>
-                    
+
                 </div>
                 <div class="row" id="" style="margin-left: 0; margin-right: 0">
 
@@ -64,7 +64,7 @@
                                     </div>
                                 </a>
                                 <br />
-                                <span>Money</span>
+                                <span>Billing</span>
                             </div>
                         </div>
 
@@ -105,17 +105,17 @@
                                                 <label for="txtFirstName" class="requiredlabel">Full Name </label>
                                                 <input type="text" id="txtFirstName" class="form-control" name="Missing Full Name" placeholder="Enter First Name" maxlength="64" data-bind="value:fullName, validationOnElement: fullName">
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group" style="display:none">
                                                 <label for="txtEmail" class="requiredlabel">Email </label>
                                                 <input type="email" class="form-control" id="txtEmail" placeholder="Enter email" data-bind="value:email, enable:false">
                                             </div>
                                             @*<div class="form-group">
-                                                <label for="txtDob" class="requiredlabel">Date of Birth </label>
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                                    <input type="text" class="form-control" id="txtDob" name="Missing date of birth" placeholder="Enter Date of birth" data-bind="datepicker:dateOfBirth, datepickerOptions: { yearRange: '-60:+0' }, validationOnElement: dateOfBirth">
-                                                </div>
-                                            </div>*@
+                                                    <label for="txtDob" class="requiredlabel">Date of Birth </label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                        <input type="text" class="form-control" id="txtDob" name="Missing date of birth" placeholder="Enter Date of birth" data-bind="datepicker:dateOfBirth, datepickerOptions: { yearRange: '-60:+0' }, validationOnElement: dateOfBirth">
+                                                    </div>
+                                                </div>*@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -124,29 +124,23 @@
                                         </header>
                                         <div class="main-box-body clearfix" style="padding-bottom: 0;">
                                             <div class="form-group">
-                                                <label for="ddlProfession" class="requiredlabel">Profession </label>
-                                                <select class="form-control" id="ddlProfession" name="Missing profession" data-bind="options: $root.professionsList, optionsText: 'IndusteryName', optionsValue: 'IndusteryId', optionsCaption:  'Select ...', value:profession, validationTooltip: profession, validationOnElement: profession"></select>
-                                            </div>
-
-                                            <div class="form-group">
                                                 <label for="phone" class="requiredlabel">Mobile Number </label>
-                                                <div class="input-group">
-                                                    @*<span class="input-group-addon"><i class="fa fa-plus"></i></span>
-                                                    <select class="form-control" style="width:85%" id="countryCode" name="countryCode" >
-                                                        <option value="92">92</option>
-                                                        <option value="92">27</option>
-                                                        <option value="92">44</option>
-                                                    </select>
-                                                    <span class="input-group-addon"><i class="fa fa-phone"></i></span>*@
-                                                    <input type="tel" id="phone"  class="form-control" style="border-radius:3px;height:34px;width:180%;" name="Missing mobile number"  placeholder="Enter Mobile Number" data-bind="value:mobileNumber, validationOnElement: mobileNumber">
-                                                </div>
+                                                <input type="tel" id="phone" class="form-control" style="border-radius:3px;height:34px;" name="Missing mobile number" placeholder="Enter Mobile Number" data-bind="value:mobileNumber, validationOnElement: mobileNumber">
                                             </div>
-                                            <div class="form-group">
+                                            @*<div class="form-group">
+                                                    <label for="ddlProfession" class="requiredlabel">Profession </label>
+                                                    <select class="form-control" id="ddlProfession" name="Missing profession" data-bind="options: $root.professionsList, optionsText: 'IndusteryName', optionsValue: 'IndusteryId', optionsCaption:  'Select ...', value:profession, validationTooltip: profession, validationOnElement: profession"></select>
+                                                </div>*@
+                                            <div class="form-group" style="display:none">
                                                 <label for="txtDob" class="requiredlabel">Date of Birth </label>
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                                     <input type="text" class="form-control" id="txtDob" name="Missing date of birth" placeholder="Enter Date of birth" data-bind="datepicker:dateOfBirth, datepickerOptions: { yearRange: '-60:+0' }, validationOnElement: dateOfBirth">
                                                 </div>
+                                            </div>
+                                            <div class="form-group" style="margin-top:-8px;">
+                                                <label for="txtEmail" class="requiredlabel">Email </label>
+                                                <input type="email" class="form-control" id="txtEmail" placeholder="Enter email" data-bind="value:email, enable:false">
                                             </div>
                                             <div class="form-group" style="display:none">
                                                 <label for="txtPasportNo">User Id (i.e Passport #, DrivingLicense #)</label>
@@ -234,27 +228,39 @@
                                                 <input type="text" id="txtBusinessName" class="form-control" name="Missing business name" maxlength="64" placeholder="Enter Your Business Name" data-bind="value:CompanyName, validationOnElement: CompanyName">
                                             </div>
                                             <div class="form-group">
+                                                <label for="txtBranchName" class="requiredlabel">Branch Name </label>
+                                                <input type="text" id="txtBranchName" class="form-control" name="Missing branch name" maxlength="32" placeholder="Enter Branch Name" data-bind="value:branchName, validationOnElement: branchName">
+                                            </div>
+                                            <div class="form-group">
                                                 <label for="txtBusinessAddress" class="requiredlabel">Business Address </label>
                                                 <input type="text" id="txtBusinessAddress" class="form-control" name="Missing business address" maxlength="128" placeholder="Enter Business Address" data-bind="value:BillingAddressLine1, validationOnElement: BillingAddressLine1">
                                             </div>
-                                            <div class="form-group">
-                                                <label for="txtCity" class="requiredlabel">Town/City</label>
-                                                <input type="text" id="txtCity" class="form-control" name="Missing City" placeholder="Enter Town/City" maxlength="32" data-bind="value:billingCity, validationOnElement: billingCity">
+                                            <div class="col-md-6" style="padding-left:0px;">
+                                                <div class="form-group">
+                                                    <label for="txtCity" class="requiredlabel">Town/City</label>
+                                                    <input type="text" id="txtCity" style=" width:90%" class="form-control" name="Missing City" placeholder="Enter Town/City" maxlength="32" data-bind="value:billingCity, validationOnElement: billingCity">
+                                                </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="txtState" class="requiredlabel">State/County</label>
-                                                <input type="text" id="txtState" class="form-control" name="Missing State" placeholder="Enter State/County" maxlength="32" data-bind="value:BillingState, validationOnElement: BillingState">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="txtState" class="requiredlabel">State/County</label>
+                                                    <input type="text" id="txtState" class="form-control" style=" width:104%" name="Missing State" placeholder="Enter State/County" maxlength="32" data-bind="value:BillingState, validationOnElement: BillingState">
+                                                </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="txtPostCode" class="requiredlabel">Post Code </label>
-                                                <input type="text" id="txtPostCode" class="form-control" name="Missing Post Code" maxlength="12" placeholder="Enter Postal Code" data-bind="value:BillingZipCode, validationOnElement: BillingZipCode">
+                                            <div class="col-md-6" style="padding-left:0px;">
+                                                <div class="form-group">
+                                                    <label for="txtPostCode" class="requiredlabel">Post Code </label>
+                                                    <input type="text" id="txtPostCode" style=" width:90%" class="form-control" name="Missing Post Code" maxlength="12" placeholder="Enter Postal Code" data-bind="value:BillingZipCode, validationOnElement: BillingZipCode">
+                                                </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="ddlCountry" class="requiredlabel">Country </label>
-                                                <select class="form-control" id="ddlCountry" name="Missing Country" data-bind="options: $root.countries, optionsText: 'CountryName', optionsValue: 'CountryId', optionsCaption:  '&lt;' + 'Select Country'+ '&gt;', value:BillingCountryId, validationOnElement: BillingCountryId"></select>
-                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="ddlCountry" class="requiredlabel">Country </label>
+                                                    <select class="form-control" id="ddlCountry" style=" width:104%" name="Missing Country" data-bind="options: $root.countries, optionsText: 'CountryName', optionsValue: 'CountryId', optionsCaption:  '&lt;' + 'Select Country'+ '&gt;', value:BillingCountryId, validationOnElement: BillingCountryId"></select>
+                                                </div>
+                                                </div>
 
-                                        </div>
+                                            </div>
                                     </div>
                                     <div class="col-md-6">
                                         <header class="main-box-header clearfix" style="padding-left: 0">
@@ -268,11 +274,11 @@
                                                 </div>
 
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group" style="display:none">
                                                 <label for="txtBranchName" class="requiredlabel">Branch Name </label>
                                                 <input type="text" id="txtBranchName" class="form-control" name="Missing branch name" maxlength="32" placeholder="Enter Branch Name" data-bind="value:branchName, validationOnElement: branchName">
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group" style="display:none">
                                                 <label for="txtBranchLocations">How Many Branch Locations do you have? </label>
                                                 <input type="text" id="txtBranchLocations" class="form-control" placeholder="Enter Number of branches" maxlength="12" data-bind="autoNumeric:numberOfBranches,settings:{mDec:0}">
                                             </div>
@@ -301,7 +307,7 @@
                                                 <label for="divLogo" class="requiredlabel">Logo </label>
                                                 <div id="divLogo" style="background-color: #dedede; height: auto;width:40%">
                                                     <img style="height:150px;width:100%;" data-bind="attr: { src: $root.selectedCompany().Logo()()==null?'/images/splaceholder.png' : $root.selectedCompany().Logo()}, validationOnElement: Logo" name="Missing logo" src="/Content/Images/Company_Default.png" id="imgLogoCProfile" data-toggle="modal" data-target="#damModelcpo" onclick="changeIframeSrcCProfile(1)" />
-                    
+
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -317,7 +323,7 @@
                                                 <label for="txtSalesPhone">Sales Phone Line </label>
                                                 <input type="text" id="txtSalesPhone" class="form-control" maxlength="16" placeholder="Enter Sales Phone" data-bind="value:salesPhone">
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group"style="display:none">
                                                 <label for="ddlCompanyType">Industry Type </label>
                                                 <select class="form-control" id="ddlCompanyType" data-bind="options: $root.companyTypes, optionsText: 'Name', optionsValue: 'Id', optionsCaption:  'Select ...', value:companyType"></select>
                                             </div>
@@ -354,7 +360,7 @@
                                         <header class="main-box-header clearfix" style="padding-left: 0">
                                             <h2>4. Money Transfers & Billing Details:</h2>
                                         </header>
-                                        <div class="main-box-body clearfix" style="padding-bottom: 0">
+                                        <div class="main-box-body clearfix" style="padding-bottom: 0;display:none">
                                             <div class="form-group">
                                                 <label for="txtPaypalId" class="requiredlabel">Your Paypal Id (email) </label>
                                                 <input type="text" id="txtPaypalId" class="form-control" name="Missing Paypal Id" placeholder="Enter Your Paypal Id" maxlength="64" data-bind="value:paypalMailId, validationOnElement: paypalMailId">
@@ -388,7 +394,7 @@
                                                 <label for="txtRegNo">Company Registration Number</label>
                                                 <input type="text" id="txtRegNo" class="form-control" placeholder="Enter Registration Number" maxlength="16" data-bind="value:companyRegNo">
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group"style="display:none">
                                                 <label for="txtBusinessStartDate">Business Start Date </label>
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
@@ -416,7 +422,7 @@
                                                 <input type="text" id="txtVatNo" class="form-control" placeholder="Enter VAT Number" maxlength="16" data-bind="value:vatNumber">
                                             </div>
 
-                                            
+
 
                                             <input id="hdlogchanged" type="checkbox" name="hdlogchanged" data-bind="value:LogoChanged" style="display:none">
                                         </div>
@@ -494,12 +500,12 @@
         console.log(mode);
     }
     function iframeLoadedCProfile() {
-       
+
         var iframeBodycpo = $('body', $('#iframecpo')[0].contentWindow.document);
 
         //var cpoDamClose = $('body', $('#btnDamClosexp'));
 
-        var cpoDamClose =  $('#btnDamClosexp');
+        var cpoDamClose = $('#btnDamClosexp');
 
 
         $(iframeBodycpo).on('click', '.damImgContainer img', function (event) {
@@ -508,10 +514,10 @@
             if (mode == 1) {
                 $("#imgLogoCProfile").attr("src", this.src).change();
                 logoImage = this.src;
-                
+
                 $('#hdlogchanged').prop('checked', true);
                 $('#hdlogchanged').trigger('change');
-                
+
 
                 cpoDamClose.click();
             } else if (mode == 2) {
@@ -529,8 +535,7 @@
             }
         });
     }
-    function testm()
-    {
+    function testm() {
         $("#phone").intlTelInput({
             allowExtensions: true,
             autoFormat: true,
