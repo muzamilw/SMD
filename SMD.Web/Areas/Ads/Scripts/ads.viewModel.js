@@ -1130,6 +1130,17 @@ define("ads/ads.viewModel",
                 }
                 else {
 
+
+                }
+                else {
+                    campaignModel().IsUseFilter('1');
+                }
+                if (campaignModel().IsUseFilter() == 0) {
+
+                    toastr.error("No Target Match.");
+                }
+                else {
+
                     if (campaignModel().IsUseFilter() == 1) {
 
                         campaignModel().IsUseFilter(true);
@@ -3716,10 +3727,14 @@ define("ads/ads.viewModel",
                     isflageClose: isflageClose,
                     Changefilter: Changefilter,
                     ChangeBroadfilter: ChangeBroadfilter,
-                    QQStatsAnalytics:QQStatsAnalytics,
                     isflageClose: isflageClose,
                     formAnalyticsData: formAnalyticsData,
                     getQAnalytic: getQAnalytic,
+                    Changefilter: Changefilter,
+                    ChangeBroadfilter: ChangeBroadfilter,
+                    QQStatsAnalytics:QQStatsAnalytics,
+                    isflageClose: isflageClose,
+                    formAnalyticsData: formAnalyticsData,
                     IsBroadMarketing: IsBroadMarketing
                 };
             })()
