@@ -219,6 +219,7 @@ define("common/confirmation.viewModel",
                         ko.applyBindings(view.viewModel, view.bindingRootupgrade);
                         ko.applyBindings(view.viewModel, view.bindingRootaction);
                         showAccountSetingPopup();
+                       // alert(document.cookie);
                     };
 
                 return {

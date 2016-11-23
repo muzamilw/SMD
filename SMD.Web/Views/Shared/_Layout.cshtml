@@ -815,7 +815,7 @@
     <script src="~/Scripts/intlTelInput.min.js"></script>
     
     <script>
-        createCookie();
+        //createCookie();
         require(["common/confirmation.view"]);
         require(["Layout/Layout.view"]);
         require(["PhraseLibrary/phraseLibrary.view"]);
@@ -1002,16 +1002,11 @@
             function ShowInviteUserPopup() {
                 $('#btninviteusers').click();
             }
-            function createCookie() {
-                debugger;
-                var counter = 3;
-                document.cookie = counter;
-            }
             function openCompanyProfile() {
                
-                $( "#cprofile" ).click();
-                
+                $( "#cprofile" ).click();   
             }
+
     </script>
 
     @RenderSection("scripts", required: false)
