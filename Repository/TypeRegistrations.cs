@@ -87,6 +87,8 @@ namespace SMD.Repository
             unityContainer.RegisterType<ISharedSurveyQuestionRepository, SharedSurveyQuestionRepository>();
 
             unityContainer.RegisterType<ICouponRatingReviewRepository, CouponRatingReviewRepository>();
+
+            unityContainer.RegisterType<IAspNetUsersNotificationTokenRepository,AspNetUsersNotificationTokenRepository>();
             
             
             

@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 
 
@@ -105,6 +106,10 @@ namespace SMD.Implementation.Services
 
                 }
 
+
+                item.PhoneNumber = Regex.Replace(item.PhoneNumber, @"\s+", "");
+
+
                 //item.SharingGroupId = group.SharingGroupId;
 
                 //surveySharingGroupMemberRepository.Update(item);
@@ -135,42 +140,44 @@ namespace SMD.Implementation.Services
 
                 var dbExistingMembers = surveySharingGroupMemberRepository.GetAllGroupMembers(group.SharingGroupId);
                 if (addedMembers.Count > 0)
-                {}
-
-
-                //new user add logic.
-                foreach (var item in addedMembers)
                 {
 
-                    //if already exists then do not add again.
-                    if (dbExistingMembers.FindAll(g => g.PhoneNumber == item.PhoneNumber).Count == 0)
+
+                    //new user add logic.
+                    foreach (var item in addedMembers)
                     {
 
-                        item.SharingGroupId = dbGroup.SharingGroupId;
-                        var user = aspnetUserRepository.GetUserbyPhoneNo(item.PhoneNumber);
-                        if (user != null)
+                        //if already exists then do not add again.
+                        if (dbExistingMembers.FindAll(g => g.PhoneNumber == item.PhoneNumber).Count == 0)
                         {
-                            item.UserId = user.Id;
-                            item.MemberStatus = 1;
+
+                            item.SharingGroupId = dbGroup.SharingGroupId;
+                            var user = aspnetUserRepository.GetUserbyPhoneNo(item.PhoneNumber);
+                            if (user != null)
+                            {
+                                item.UserId = user.Id;
+                                item.MemberStatus = 1;
+                            }
+                            else
+                            {
+                                item.MemberStatus = 0;
+                                //call the sms api
+
+                                //user not found send SMS to join
+
+                            }
+
+                            item.PhoneNumber = Regex.Replace(item.PhoneNumber, @"\s+", "");
+
+                            if (dbGroup.SurveySharingGroupMembers == null)
+                            {
+                                dbGroup.SurveySharingGroupMembers = new Collection<SurveySharingGroupMember>();
+                            }
+
+                            dbGroup.SurveySharingGroupMembers.Add(item);
                         }
-                        else
-                        {
-                            item.MemberStatus = 0;
-                            //call the sms api
-
-                            //user not found send SMS to join
-
-                        }
-
-                        if (dbGroup.SurveySharingGroupMembers == null)
-                        {
-                            dbGroup.SurveySharingGroupMembers = new Collection<SurveySharingGroupMember>();
-                        }
-
-                        dbGroup.SurveySharingGroupMembers.Add(item);
                     }
                 }
-
 
 
                 //delete user logic

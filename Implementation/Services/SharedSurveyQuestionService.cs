@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -59,6 +60,8 @@ namespace SMD.Implementation.Services
                     surveySharingGroupShareRepository.Add(share);
                     surveySharingGroupShareRepository.SaveChanges();
 
+
+                    item.PhoneNumber = Regex.Replace(item.PhoneNumber, @"\s+", "");
 
                     var notification = new Notification { GeneratedOn = DateTime.Now, Type = 1, IsRead = false, PhoneNumber = item.PhoneNumber, SurveyQuestionShareId = share.SurveyQuestionShareId, GeneratedBy = "System", UserID = item.UserId };
 

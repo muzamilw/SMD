@@ -80,6 +80,8 @@ namespace SMD.Models.IdentityModels
         public virtual ICollection<SurveyQuestion> SurveyQuestions { get; set; }
         public virtual ICollection<SurveyQuestionResponse> SurveyQuestionResponses { get; set; }
 
+        public virtual ICollection<AspNetUsersNotificationToken> AspNetUsersNotificationTokens { get; set; }
+
         public virtual ICollection<Account> Accounts { get; set; }
        
         public virtual ICollection<Invoice> Invoices { get; set; }
