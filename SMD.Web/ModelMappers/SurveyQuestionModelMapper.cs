@@ -323,7 +323,8 @@ namespace SMD.MIS.ModelMappers
                 Gender = source.Gender,
                 ParentSurveyId = source.ParentSurveyId,
                 Priority = source.Priority,
-                CompanyId = source.CompanyId
+                CompanyId = source.CompanyId,
+                IsUseFilter=source.IsUseFilter
             };
         }
         public static List<SMD.MIS.Areas.Api.Models.SurveyQuestionTargetCriteria> GetSurveyQuestionTargetCriterias(this Models.DomainModels.SurveyQuestion source)

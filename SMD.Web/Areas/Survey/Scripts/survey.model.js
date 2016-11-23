@@ -4,9 +4,10 @@
         Survey = function (SQID, LanguageID, CountryID, UserID, Status, StatusValue, Question, Gender, Language, Country,
             Description, DisplayQuestion, StartDate, EndDate, ModifiedDate, LeftPicturePath, RightPicturePath, ProjectedReach, AgeRangeStart,
             AgeRangeEnd, LeftPictureBytes, RightPictureBytes, ParentSurveyId, Priority, CreatedBy, CompanyId, AnswerNeeded, ResultClicks, AmountCharged, IsUseFilter) {
-           
+            debugger;
             var
                 //type and userID will be set on server sside
+                
                 SQID = ko.observable(SQID),
                 LanguageID = ko.observable(LanguageID),
                 CountryID = ko.observable(CountryID),
@@ -15,7 +16,9 @@
                 Question = ko.observable(Question).extend({  // custom message
                     required: true
                 }),
+
                 IsUseFilter = ko.observable(IsUseFilter),
+
                 Gender = ko.observable(Gender),
                 Language = ko.observable(Language),
                 Country = ko.observable(Country),
@@ -323,17 +326,18 @@
     };
     // Factory Method
     Survey.Create = function (source) {
+        debugger;
         var survey = new Survey(source.SqId, source.LanguageId, source.CountryId, source.UserId, source.Status, source.StatusValue, source.Question,
             source.Gender + "", source.Language, source.Country, source.Description, source.DisplayQuestion, source.StartDate, source.EndDate, source.ModifiedDate,
             source.LeftPicturePath, source.RightPicturePath, source.ProjectedReach, source.AgeRangeStart, source.AgeRangeEnd, source.LeftPictureBytes,
-            source.RightPictureBytes, source.ParentSurveyId, source.Priority, source.CreatedBy, source.CompanyId, source.AnswerNeeded, source.AmountCharged, source.IsUseFilter);
+            source.RightPictureBytes, source.ParentSurveyId, source.Priority, source.CreatedBy, source.CompanyId, source.AnswerNeeded, source.AmountCharged,0, source.IsUseFilter);
         _.each(source.SurveyQuestionTargetCriterias, function (item) {
             survey.SurveyQuestionTargetCriteria.push(SurveyQuestionTargetCriteria.Create(item));
         });
         _.each(source.SurveyQuestionTargetLocations, function (item) {
             survey.SurveyQuestionTargetLocation.push(SurveyQuestionTargetLocation.Create(item));
         });
-        console.log(source.CompanyId);
+        
         return survey;
     };
     // Factory Method

@@ -1943,7 +1943,7 @@ define("ads/ads.viewModel",
 
                                                     Type: cclist.Type,
                                                     PQId: cclist.PQId,
-                                                    PQAnswerId: cclist.PQAnswerId,
+                                                    PQAnswerId: cclist.PQAnswerId,  
                                                     QuizCampaignId: cclist.QuizCampaignId,
                                                     QuizAnswerId: cclist.QuizAnswerId,
                                                     questionString: cclist.questionString,

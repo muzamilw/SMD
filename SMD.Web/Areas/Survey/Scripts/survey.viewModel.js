@@ -456,6 +456,7 @@ define("survey/survey.viewModel",
             },
                 // On editing of existing PQ
                 onEditSurvey = function (item) {
+
                     IsnewSurvey(false);
                     selectedSQIDAnalytics(item.SQID());
                     selectedQuestionCountryList([]); $("#panelArea,#topArea,#Heading_div").css("display", "none");
@@ -476,6 +477,14 @@ define("survey/survey.viewModel",
                            success: function (data) {
                                //
                                selectedQuestion(model.Survey.Create(updateSurveryItem(data.SurveyQuestion)));
+                               
+                               if (selectedQuestion().IsUseFilter() == true) {
+                                   selectedQuestion().IsUseFilter('1');
+                               }
+                               else {
+                                   selectedQuestion().IsUseFilter('0');
+                               }
+
                                selectedQuestion().reset();
                                view.initializeTypeahead();
                                getAudienceCount();
@@ -1746,7 +1755,7 @@ define("survey/survey.viewModel",
                      },
                 Changefilter = function () {
                   
-                    debugger;
+                 
                     if (selectedQuestion().IsUseFilter() == 0) {
 
                         confirmation.messageText("Switching to Basic Targeting will remove all Hyper Targeting filters.Continue to Basic Targeting,  Yes No.");
