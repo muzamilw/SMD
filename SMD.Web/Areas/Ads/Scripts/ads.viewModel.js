@@ -14,7 +14,8 @@ define("ads/ads.viewModel",
                     searchFilterValue = ko.observable(),
                     isEditorVisible = ko.observable(false),
                     isClickRateVisible = ko.observable(null),
-                    IsthisEditCamapiagn= ko.observable(false),
+                    IsthisEditCamapiagn = ko.observable(false),
+                    IsBroadMarketing = ko.observable(true),
                     buyItQuestionStatus = ko.observable(false),
                     buyItQuestionLabelStatus = ko.observable(false),
 					isAdvertdashboardVisible = ko.observable(false),
@@ -461,11 +462,7 @@ define("ads/ads.viewModel",
                 getAdCampaignGridContent();
             },
                 // Add new Profile Question
-                IsBroadMarketing = function ()
-                {
-                    alert(campaignModel().IsUseFilter());
-
-                },
+               
             addNewCampaign = function () {
                
                 IsthisEditCamapiagn(false);
@@ -1084,12 +1081,15 @@ define("ads/ads.viewModel",
                 campaignModel().Status(mode);
            
                 if (campaignModel().IsUseFilter() == 0) {
+
+
                     campaignModel().AdCampaignTargetLocations.removeAll();
                     campaignModel().AdCampaignTargetCriterias.removeAll();
                     campaignModel().AgeRangeEnd(80);
                     campaignModel().AgeRangeStart(13);
                     campaignModel().Gender('1');
                     campaignModel().IsUseFilter(false);
+
                 }
                 else {
                     campaignModel().IsUseFilter(true)
@@ -1673,7 +1673,7 @@ define("ads/ads.viewModel",
                     selectedLocation().Radius = (selectedLocationRadius);
                     selectedLocation().IncludeorExclude = (selectedLocationIncludeExclude);
 
-                    if ($.grep(campaignModel().AdCampaignTargetLocations(), function (el) { return el.City() === selectedLocation().City; }).length === 0) {
+                    if ($.grep(campaignModel().AdCampaignTargetLocations(), function (el) { return el.City() === selectedLocation().City && el.Country() === selectedLocation().Country; }).length === 0) {
                         
 
                         campaignModel().AdCampaignTargetLocations.push(new model.AdCampaignTargetLocation.Create({
@@ -1791,11 +1791,47 @@ define("ads/ads.viewModel",
                 {
                     
                     if (campaignModel().IsUseFilter() == 0) {
-                        ShowAudienceCounter(0);
+
+                         confirmation.messageText("Switching to Basic Targeting will remove all Hyper Targeting filters.Continue to Basic Targeting,  Yes No.");
+                         confirmation.afterProceed(function () {
+                             IsBroadMarketing(false);
+                            campaignModel().AdCampaignTargetLocations.removeAll();
+                            campaignModel().AdCampaignTargetCriterias.removeAll();
+                            //campaignModel().AgeRangeEnd(80);
+                            //campaignModel().AgeRangeStart(13);
+                           // campaignModel().Gender('1');
+                            
+                            setTimeout(function () {
+                                ShowAudienceCounter(0);
+                            },500);
+                         });
+                         confirmation.show();
+                         confirmation.afterCancel(function () {
+                             IsBroadMarketing(true);
+                             campaignModel().IsUseFilter('1');
+                             confirmation.hide();
+                         });
                     }
                     else {
-                        getAudienceCount();
+                        
+                        confirmation.messageText("Switching to Basic Targeting will remove all Hyper Targeting filters.Continue to Basic Targeting,  Yes No.");
+                        confirmation.afterProceed(function () {
+                            IsBroadMarketing(true);
+                            campaignModel().AdCampaignTargetLocations.removeAll();
+                            campaignModel().AdCampaignTargetCriterias.removeAll();
+                           // campaignModel().AgeRangeEnd(80);
+                          //  campaignModel().AgeRangeStart(13);
+                        //    campaignModel().Gender('1');
+                            getAudienceCount();
+                        });
+                        confirmation.show();
+                        confirmation.afterCancel(function () {
+                            campaignModel().IsUseFilter('0');
+                            confirmation.hide();
+                            IsBroadMarketing(false);
+                        });
                     }
+                    
                 },
                 ChangeBroadfilter = function ()
                 {
@@ -1811,6 +1847,8 @@ define("ads/ads.viewModel",
                     isNewCampaignVisible(false);
                     isShowArchiveBtn(false);
                     buyItQuestionLabelStatus(false);
+
+
                     $("#logo_div").css("display", "block");
                     $(".hideInCoupons").css("display", "none");
 
@@ -1859,15 +1897,9 @@ define("ads/ads.viewModel",
 
                                         campaignModel().LogoUrl("/images/standardplaceholder.png");
                                     }
-                                  
-                                    //if (item.IsUseFilter() == 0) {
+                                    debugger;
+                                   
 
-                                    //    campaignModel().IsUseFilter('0');
-                                    //}
-                                    //else {
-
-                                    //    campaignModel().IsUseFilter('1');
-                                    //}
 
                                     VideoLink2src(campaignModel().VideoLink2() + '' + '');
 
@@ -2756,11 +2788,12 @@ define("ads/ads.viewModel",
                     $("#spinnerAudience").css("display", "block");
 
                     dataservice.getAudienceData(campData, {
+                     
                         success: function (data) {
                             $("#spinnerAudience").css("display", "none");
                             reachedAudience(data.MatchingUsers);
                             ShowAudienceCounter(GetAudienceCount(data.MatchingUsers));
-
+                            debugger;
 
                             totalAudience(data.AllUsers);
                             var percent = data.MatchingUsers / data.AllUsers;
@@ -3642,14 +3675,14 @@ define("ads/ads.viewModel",
                     selectedQQPAnalytics: selectedQQPAnalytics,
                     selectedQQCtAnalytics:selectedQQCtAnalytics,
                     AgeRangeAnalyticsData: AgeRangeAnalyticsData,
-                    isflageClose: isflageClose
                     isflageClose: isflageClose,
+                   
                     Changefilter: Changefilter,
-                    ChangeBroadfilter: ChangeBroadfilter
+                    ChangeBroadfilter: ChangeBroadfilter,
                     QQStatsAnalytics:QQStatsAnalytics,
                     isflageClose: isflageClose,
-                    formAnalyticsData: formAnalyticsData
-                    
+                    formAnalyticsData: formAnalyticsData,
+                    IsBroadMarketing: IsBroadMarketing
                 };
             })()
         };

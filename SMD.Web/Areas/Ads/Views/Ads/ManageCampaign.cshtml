@@ -523,7 +523,7 @@ else
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-12" style="margin:auto;float:none !important;    " data-bind="visible: $root.previewScreenNumber() == 2">
+                            <div class="col-lg-12" style="margin:auto;float:none !important;" data-bind="visible: $root.previewScreenNumber() == 2">
 
                                 <div class="form-group" style="margin-top:10px; margin-left:-8px;display:none;">
                                     <div class="col-lg-8 text-campaign-left">
@@ -537,6 +537,7 @@ else
                                         <div class="col-lg-3">
 
                                             <div class="radio">
+                                                @*<input type="radio" name="optionsRadiosfilters" id="optionsRadiosfiltersBroad" value="1" data-bind="checked: IsUseFilter,event:{ change: $root.Changefilter}">*@
                                                 <input type="radio" name="optionsRadiosfilters" id="optionsRadiosfiltersBroad" value="1" data-bind="checked: IsUseFilter,event:{ change: $root.Changefilter}">
                                                 <label for="optionsRadiosfiltersBroad" style="font-size:18px;">
                                                     Broad Targeting
@@ -545,7 +546,9 @@ else
                                         </div>
                                         <div class="col-lg-7">
                                             <div class="radio">
-                                                <input type="radio" name="optionsRadiosfilters" id="optionsRadiosfiltersHyper" value="0" data-bind="checked: IsUseFilter,event:{ change: $root.Changefilter}">
+                                                @*<input type="radio" name="optionsRadiosfilters1" id="optionsRadiosfiltersHyper" value="0" data-bind="checked: IsUseFilter,event:{ change: $root.Changefilter}">*@
+
+                                                <input type="radio" name="optionsRadiosfilters1" id="optionsRadiosfiltersHyper" value="0" data-bind="checked: IsUseFilter,event:{ change: $root.Changefilter}">
                                                 <label for="optionsRadiosfiltersHyper" style="font-size:18px;">
                                                     Hyper Targeting (Insights)
                                                 </label>
@@ -554,7 +557,7 @@ else
 
                                         </div>
                                     </div>
-                                    <div id="basic_targeting" data-bind="visible:$root.campaignModel().IsUseFilter()==1">
+                                    <div id="basic_targeting" data-bind="visible:$root.IsBroadMarketing()==true">
                                         <div class="form-group margin-btm26">
                                             <div class="col-lg-2">
                                                 <label for="txtAge" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Age Range</label>
@@ -704,7 +707,7 @@ else
                                         </div>
                                     </div>
                                 </div>
-                                <div id="first_cont" data-bind="visible:$root.campaignModel().IsUseFilter()==1">
+                                <div id="first_cont" data-bind="visible:$root.IsBroadMarketing()==true">
                                     <div class="form-group margin-btm26">
                                         <div class="col-lg-2">
                                             <label for="txtCountries" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Target country</label>
@@ -800,7 +803,7 @@ else
 
 
 
-                                <div id="thirdCont" data-bind="visible:$root.campaignModel().IsUseFilter()==0">
+                                <div id="thirdCont" data-bind="visible:$root.IsBroadMarketing()==false">
 
                                     <div class="col-lg-12" style="height:45px;">
                                         <div style="height:34px;" class="borderbtmline ">
@@ -1042,7 +1045,7 @@ else
                         <div class="row Subpanels" style="line-height: 2;padding:3px;">
                             <div class="col-lg-12">
                                 <div class="row">
-                                    <div class="col-lg-12" style="padding-top:13px;border-bottom :1px solid rgb(220,220,220);height:auto;" data-bind="with: $root.campaignModel">
+                                    <div class="col-lg-12" style="padding-top:13px;border-bottom :1px solid rgb(220,220,220);height:auto;line-height:normal;" data-bind="with: $root.campaignModel">
                                         <div>
                                             <div class="col-lg-7" style="padding-left:16px;">
                                                 <span style="color:black !important;float:left;" class="panelfntSize">Potential Reach</span>
@@ -1054,8 +1057,29 @@ else
                                             <div class="col-lg-12">
 
                                                 <div class="status_panels">
-                                                    <span class="pull-left" data-bind="text:AgeRangeStart()"></span><span class="pull-left">-</span><span class="pull-left" data-bind="text:AgeRangeEnd()"></span><span class="pull-left">,</span><span class="pull-left">Male</span><span class="pull-left">,</span><span class="pull-left">Female</span>
+                                                    <div data-bind="visible:$root.IsBroadMarketing()==true">
+                                                        <div><span>Broad targeting</span></div>
+                                                        <!-- ko if: Gender() ==1 -->
+                                                        <span class="pull-left" data-bind="text:AgeRangeStart()"></span>
+                                                        <span class="pull-left">-</span><span class="pull-left" data-bind="text:AgeRangeEnd()"></span>
+                                                        <span class="pull-left">,</span><span class="pull-left">Men</span><span class="pull-left">,
+                                                        </span><span class="pull-left">Women</span>
+                                                        <!-- /ko -->
+                                                        <!-- ko if: Gender() ==2 -->
+                                                        <span class="pull-left" data-bind="text:AgeRangeStart()"></span>
+                                                        <span class="pull-left">-</span><span class="pull-left" data-bind="text:AgeRangeEnd()"></span>
+                                                        <span class="pull-left">,</span><span class="pull-left">Men</span>
+                                                        <!-- /ko -->
+                                                        <!-- ko if: Gender()==3 -->
+                                                        <span class="pull-left" data-bind="text:AgeRangeStart()"></span>
+                                                        <span class="pull-left">-</span><span class="pull-left" data-bind="text:AgeRangeEnd()"></span>
+                                                        <span class="pull-left">,</span><span class="pull-left">Women</span>
+
+                                                        <!-- /ko -->
+                                                    </div>
                                                     <div class="clearfix"></div>
+                                                
+                                                    
                                                     <div data-bind="foreach: AdCampaignTargetLocations">
                                                         <!-- ko if: $index() ==0 -->
                                                         <span class="pull-left" data-bind="text: City()"></span><span class="pull-left" data-bind="text:'(' + Radius() + 'Km)'"></span>
@@ -1064,14 +1088,12 @@ else
                                                         <span class="pull-left" style="margin-left:6px;" data-bind="text: City()"></span><span class="pull-left" data-bind="text:'(' + Radius() + 'Km)'"></span>
                                                         <!-- /ko -->
                                                     </div>
-
+                                                    <!-- ko if: AdCampaignTargetCriterias().length  > 0 -->
+                                                    <div><span>Hyper targeting</span></div>
+                                                    <!-- /ko -->
                                                     <div data-bind="foreach: AdCampaignTargetCriterias">
-                                                        <!-- ko if: $index() ==0 -->
-                                                        <span class="pull-left" data-bind="text: City()"></span><span class="pull-left" data-bind="text:'(' + Radius() + 'Km)'"></span>
-                                                        <!-- /ko -->
-                                                        <!-- ko if: $index() != 0 -->
-                                                        <span class="pull-left" style="margin-left:6px;" data-bind="text: City()"></span><span class="pull-left" data-bind="text:'(' + Radius() + 'Km)'"></span>
-                                                        <!-- /ko -->
+                                                        <span class="pull-left" data-bind="text: questionString()"></span><span class="pull-left" data-bind="text:' = ' + answerString()"></span>
+                                                        <div class="clearfix"></div>
 
                                                     </div>
 
@@ -1126,7 +1148,7 @@ else
 
                                             <div class="col-lg-7" style="padding-top:3px;">
                                                 <div class="col-lg-11 paddingright0px">
-                                                    <span class="text-campaign-left fontsize13px" style="margin-top:-4px;">Pay Per Confirmed View(PPCV)</span>
+                                                    <span class="text-campaign-left fontsize13px" style="margin-top:-4px;">PPCV</span>
                                                 </div>
                                                 <div class="col-lg-1" style="padding-right:0px;text-align:right;">
                                                     <span>$</span>
@@ -1636,30 +1658,9 @@ else
                                         </div>
                                     </div>
 
-                                    <div id="secondCont">
-                                        <div class="form-group">
-                                            <div class="col-lg-2"></div>
-                                            <div class="col-lg-3">
-                                         
-                                                <div class="radio">
-                                                    <input type="radio" name="optionsRadiosfilters" id="optionsRadiosfiltersBroad" value="1" data-bind="checked: IsUseFilter,event:{ change: $root.Changefilter}">
-                                                    <label for="optionsRadiosfiltersBroad" style="font-size:18px;">
-                                                        Broad Targeting
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-7">
-                                                <div class="radio">
-                                                    <input type="radio" name="optionsRadiosfilters" id="optionsRadiosfiltersHyper" value="0" data-bind="checked: IsUseFilter,event:{ change: $root.Changefilter}">
-                                                    <label for="optionsRadiosfiltersHyper" style="font-size:18px;">
-                                                        Hyper Targeting (Insights)
-                                                    </label>
-                                                </div>
-
-
-                                            </div>
-                                        </div>
-                                        <div id="basic_targeting" data-bind="visible:$root.campaignModel().IsUseFilter()==1">
+                                    <div id="secondCont" data-bind="with: $root.campaignModel">
+                                        
+                                        <div id="basic_targeting" data-bind="visible:$root.IsBroadMarketing()==true">
                                             <div class="form-group margin-btm26">
                                                 <div class="col-lg-2">
                                                     <label for="txtAge" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Age Range</label>
@@ -1686,7 +1687,7 @@ else
                                                     <label for="txtGender" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Gender</label>
                                                 </div>
                                                 <div class="col-lg-7">
-                                                    <div class="radio col-lg-3">
+                                                    @*<div class="radio col-lg-3">
                                                         <input type="radio" name="optionsRadiosGender" id="optionsRadiosGenderAll" value="1" data-bind="checked: Gender,enable:$root.isClickRateVisible()!=true">
                                                         <label for="optionsRadiosGenderAll">
                                                             All
@@ -1705,7 +1706,7 @@ else
                                                             Women
                                                         </label>
                                                         <span class="help-block text-right"></span>
-                                                    </div>
+                                                    </div>*@
                                                 </div>
                                                 <div class="col-lg-3" style=" padding: 0px !important; display:none;   text-align: left;
     font-size: 17px;
@@ -1809,7 +1810,7 @@ else
                                             </div>
                                         </div>
                                     </div>
-                                    <div id="first_cont" data-bind="visible:$root.campaignModel().IsUseFilter()==1">
+                                    <div id="first_cont" data-bind="visible:$root.IsBroadMarketing()==true">
                                         <div class="form-group margin-btm26">
                                             <div class="col-lg-2">
                                                 <label for="txtCountries" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Target country</label>
@@ -3811,11 +3812,12 @@ else
                             </span>
                             <span style="float:left;">
                                 <select class="form-control radius_ddp" data-bind="value: Radius">
-                                    <option value="0">No radius</option>
+                                    
                                     <option value="10">10 km</option>
                                     <option value="25">25 km</option>
                                     <option value="40">40 km</option>
                                     <option value="200">200 km</option>
+                                    <option value="250">No radius</option>
                                 </select>
                             </span>
                         </span>
