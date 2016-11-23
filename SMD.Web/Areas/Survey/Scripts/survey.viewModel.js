@@ -1386,7 +1386,7 @@ define("survey/survey.viewModel",
 
                 },
                 saveSurveyQuestion = function (mode) {
-                    debugger;
+                   
                     if (selectedQuestion().isValid()) {
                         if (ValidateSurvey() == true) {
                             selectedQuestion().Status(mode);
@@ -1398,29 +1398,42 @@ define("survey/survey.viewModel",
                                 selectedQuestion().AgeRangeEnd(80);
                                 selectedQuestion().AgeRangeStart(13);
                                 selectedQuestion().Gender('1');
-                                selectedQuestion().IsUseFilter(false);
-
+                                selectedQuestion().IsUseFilter('0');
+                                
                             }
                             else {
-                                selectedQuestion().IsUseFilter(true)
+                                selectedQuestion().IsUseFilter('1')
                             }
+                            if (selectedQuestion().IsUseFilter() == 0) {
 
-                            var surveyData = selectedQuestion().convertToServerData();
-                            dataservice.addSurveyData(surveyData, {
-                                success: function (data) {
-                                    isEditorVisible(false);
-                                    getQuestions();
-                                    toastr.success("Successfully saved.");
+                                toastr.error("No Target Match.");
+                            }
+                            else {
 
-                                    $("#Heading_div").css("display", "block");
-                                    CloseContent();
+                                if (selectedQuestion().IsUseFilter() == 1) {
 
-
-                                },
-                                error: function (response) {
-
+                                    selectedQuestion().IsUseFilter(true);
                                 }
-                            });
+                                else {
+                                    selectedQuestion().IsUseFilter(false);
+                                }
+                                var surveyData = selectedQuestion().convertToServerData();
+                                dataservice.addSurveyData(surveyData, {
+                                    success: function (data) {
+                                        isEditorVisible(false);
+                                        getQuestions();
+                                        toastr.success("Successfully saved.");
+
+                                        $("#Heading_div").css("display", "block");
+                                        CloseContent();
+
+
+                                    },
+                                    error: function (response) {
+
+                                    }
+                                });
+                            }
                         }
                     } else {
                         if (isEditorVisible()) {

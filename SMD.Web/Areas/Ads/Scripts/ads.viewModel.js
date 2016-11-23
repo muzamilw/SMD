@@ -1088,17 +1088,25 @@ define("ads/ads.viewModel",
                     campaignModel().AgeRangeEnd(80);
                     campaignModel().AgeRangeStart(13);
                     campaignModel().Gender('1');
-                    campaignModel().IsUseFilter(false);
+                    campaignModel().IsUseFilter('0');
 
                 }
                 else {
-                    campaignModel().IsUseFilter(true)
+                    campaignModel().IsUseFilter('1');
                 }
                 if (campaignModel().IsUseFilter() == 0) {
 
                     toastr.error("No Target Match.");
                 }
                 else {
+
+                    if (campaignModel().IsUseFilter() == 1) {
+
+                        campaignModel().IsUseFilter(true);
+                    }
+                    else {
+                        campaignModel().IsUseFilter(false);
+                    }
                     var campignServerObj = campaignModel().convertToServerData();
 
                     dataservice.addCampaignData(campignServerObj, {
