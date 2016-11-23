@@ -3331,3 +3331,40 @@ GO
 ALTER TABLE dbo.Notifications SET (LOCK_ESCALATION = TABLE)
 GO
 COMMIT
+
+
+
+
+
+GO
+
+/****** Object:  View [dbo].[vw_Notifications]    Script Date: 11/23/2016 12:32:09 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- select * from [vw_Notifications]
+ALTER VIEW [dbo].[vw_Notifications]
+AS
+SELECT        n.ID, Type, n.UserID, IsRead, GeneratedOn, GeneratedBy, n.SurveyQuestionShareId, n.PhoneNumber,
+				(case when n.[type] = 1 then u.FullName +  ' wants your opinion' else 'New Deal around you is available' end) NotificationDetails,
+				(case when n.[type] = 1 then q.SurveyTitle else '' end) PollTitle, 
+				(case when n.[type] = 1 then q.SSQID else 0 end) SSQID,
+				(case when n.[type] = 2 then n.CouponId else 0 end) CouponId,
+				(case when n.[type] = 2 then c.CouponTitle else '' end) DealTitle
+
+				
+FROM            dbo.Notifications n
+			left outer join SurveySharingGroupShares s on n.SurveyQuestionShareId = s.SurveyQuestionShareId
+			left outer join SharedSurveyQuestion q on q.SSQID = s.SSQID
+			left outer join AspNetUsers u on q.UserId = u.Id
+			left outer join Coupon c on n.CouponId = c.CouponId
+
+
+
+GO
+
+

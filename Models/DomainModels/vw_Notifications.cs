@@ -27,5 +27,8 @@ namespace SMD.Models.DomainModels
         public string PollTitle { get; set; }
 
         public Nullable<long> SSQID { get; set; }
+
+        public Nullable<long> CouponId { get; set; }
+       public string DealTitle { get; set; }
     }
 }

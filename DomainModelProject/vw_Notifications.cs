@@ -25,5 +25,7 @@ namespace DomainModelProject
         public string NotificationDetails { get; set; }
         public string PollTitle { get; set; }
         public Nullable<long> SSQID { get; set; }
+        public Nullable<long> CouponId { get; set; }
+        public Nullable<int> DealTitle { get; set; }
     }
 }
