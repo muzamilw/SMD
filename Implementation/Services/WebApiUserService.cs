@@ -58,6 +58,7 @@ namespace SMD.Implementation.Services
 
         private readonly IAspnetUsersRepository aspnetUsersRepository;
 
+        private readonly IAspNetUsersNotificationTokenRepository aspNetUsersNotificationTokenRepository;
 
         private ApplicationUserManager UserManager
         {
@@ -625,7 +626,7 @@ namespace SMD.Implementation.Services
             ITaxRepository taxRepository, IProfileQuestionUserAnswerService profileQuestionAnswerService,
             ICountryRepository countryRepository, IIndustryRepository industryRepository,
             IProfileQuestionService profileQuestionService, IAdCampaignResponseRepository adCampaignResponseRepository,
-            ISurveyQuestionResponseRepository surveyQuestionResponseRepository, IEducationRepository educationRepository, ICityRepository cityRepository, ICompanyRepository companyRepository, IManageUserRepository manageUserRepository, IAccountService accountService, IProfileQuestionRepository profileQuestionRepository, IAspnetUsersRepository aspnetUsersRepository, ISmsServiceCustom smsService, IGameRepository gameRepositry, ICouponRatingReviewRepository couponRatingReviewRepository)
+            ISurveyQuestionResponseRepository surveyQuestionResponseRepository, IEducationRepository educationRepository, ICityRepository cityRepository, ICompanyRepository companyRepository, IManageUserRepository manageUserRepository, IAccountService accountService, IProfileQuestionRepository profileQuestionRepository, IAspnetUsersRepository aspnetUsersRepository, ISmsServiceCustom smsService, IGameRepository gameRepositry, ICouponRatingReviewRepository couponRatingReviewRepository, IAspNetUsersNotificationTokenRepository aspNetUsersNotificationTokenRepository)
         {
             if (emailManagerService == null)
             {
@@ -697,6 +698,7 @@ namespace SMD.Implementation.Services
             this.smsService = smsService;
             this.gameRepositry = gameRepositry;
             this.couponRatingReviewRepository = couponRatingReviewRepository;
+            this.aspNetUsersNotificationTokenRepository = aspNetUsersNotificationTokenRepository;
         }
 
 
@@ -1192,7 +1194,8 @@ namespace SMD.Implementation.Services
         /// </summary>
         public async Task<LoginResponse> RegisterExternal(RegisterExternalRequest request)
         {
-            var user = new User { UserName = request.Email, Email = request.Email, FullName = request.FullName, DOB = null, Status = 1 };
+
+            var user = new User { UserName = request.Email, Email = request.Email, FullName = request.FullName, DOB = null, Status = 1, ProfileImage = request.ProfilePicturePath, DevicePlatform = request.Client == "android" ? 1 : 0 };
             var result = await UserManager.CreateAsync(user);
             if (!result.Succeeded)
             {
@@ -1217,6 +1220,16 @@ namespace SMD.Implementation.Services
             accountService.AddAccountsForNewUser(companyId);
             TransactionManager.UserSignupFreeGiftBalanceTransaction(500, companyId);
 
+
+            //handling notificationtoken
+            if (!string.IsNullOrEmpty(request.NotificationToken))
+            {
+
+                var token = new AspNetUsersNotificationToken { UserId = user.Id, ClientType = user.DevicePlatform, DateAdded = DateTime.Now, Token = request.NotificationToken };
+
+                aspNetUsersNotificationTokenRepository.Add(token);
+                aspNetUsersNotificationTokenRepository.SaveChanges();
+            }
 
             // Login user
             LoginUser(request.Email);
@@ -1313,18 +1326,30 @@ namespace SMD.Implementation.Services
                 }
                 // update GUID 
                 user.LastLoginTime = DateTime.Now;
-
+                user.ProfileImage = request.ProfilePicturePath;
+                user.DevicePlatform =  request.Client  == "android" ? 1 : 0;
 
                 user.CityName = request.City;
                 user.CountryName = request.Country;
 
 
-                
-
-
                 user.AuthenticationToken = Guid.NewGuid().ToString();
                 
                 await UserManager.UpdateAsync(user);
+
+
+                //handling notificationtoken
+                if ( !string.IsNullOrEmpty( request.NotificationToken ))
+                {
+
+                    var token = new AspNetUsersNotificationToken{ UserId = user.Id, ClientType = user.DevicePlatform, DateAdded = DateTime.Now, Token = request.NotificationToken};
+
+                    aspNetUsersNotificationTokenRepository.Add(token);
+                    aspNetUsersNotificationTokenRepository.SaveChanges();
+                }
+
+
+                
 
                 // Login user
                 LoginUser(request.Email);
@@ -1342,7 +1367,10 @@ namespace SMD.Implementation.Services
                 Email = request.Email,
                 FullName = request.FullName,
                 LoginProvider = request.LoginProvider,
-                LoginProviderKey = request.LoginProviderKey
+                LoginProviderKey = request.LoginProviderKey,
+                 Client = request.Client,
+                  NotificationToken = request.NotificationToken,
+                  ProfilePicturePath = request.ProfilePicturePath
             });
         }
 

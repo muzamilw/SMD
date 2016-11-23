@@ -83,6 +83,9 @@
     <Compile Include="AspNetUserLogin.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="AspNetUsersNotificationToken.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="AuditLog.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

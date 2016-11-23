@@ -274,6 +274,16 @@
           <Property Name="Title" Type="nvarchar" MaxLength="50" />
           <Property Name="Phone1CodeCountryID" Type="int" />
         </EntityType>
+        <EntityType Name="AspNetUsersNotificationTokens">
+          <Key>
+            <PropertyRef Name="NotificationTokenId" />
+          </Key>
+          <Property Name="NotificationTokenId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="ClientType" Type="int" />
+          <Property Name="Token" Type="nvarchar" MaxLength="500" />
+          <Property Name="DateAdded" Type="datetime" />
+        </EntityType>
         <EntityType Name="AuditLog">
           <Key>
             <PropertyRef Name="ID" />
@@ -771,6 +781,7 @@
           <Property Name="GeneratedBy" Type="nvarchar" MaxLength="128" />
           <Property Name="SurveyQuestionShareId" Type="bigint" />
           <Property Name="PhoneNumber" Type="nvarchar" MaxLength="150" />
+          <Property Name="CouponId" Type="bigint" />
         </EntityType>
         <EntityType Name="PayOutHistory">
           <Key>
@@ -993,6 +1004,7 @@
           <Property Name="CompanyId" Type="int" />
           <Property Name="AnswerNeeded" Type="int" />
           <Property Name="AmountCharged" Type="float" />
+          <Property Name="IsUseFilter" Type="bit" />
         </EntityType>
         <EntityType Name="SurveyQuestionResponse">
           <Key>
@@ -1287,6 +1299,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_Notifications' does not have a prima
           <Property Name="PhoneNumber" Type="nvarchar" MaxLength="150" />
           <Property Name="NotificationDetails" Type="nvarchar" MaxLength="219" />
           <Property Name="PollTitle" Type="nvarchar" MaxLength="200" />
+          <Property Name="SSQID" Type="bigint" />
+          <Property Name="CouponId" Type="bigint" />
+          <Property Name="DealTitle" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -1575,6 +1590,18 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             </Principal>
             <Dependent Role="AspNetUsers">
               <PropertyRef Name="LanguageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsersNotificationTokens_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="AspNetUsersNotificationTokens" Type="Self.AspNetUsersNotificationTokens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUsersNotificationTokens">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2827,6 +2854,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsersNotificationTokens" EntityType="Self.AspNetUsersNotificationTokens" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AuditLog" EntityType="Self.AuditLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BranchCategory" EntityType="Self.BranchCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CampaignCategories" EntityType="Self.CampaignCategories" Schema="dbo" store:Type="Tables" />
@@ -2984,7 +3012,10 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
     [vw_Notifications].[SurveyQuestionShareId] AS [SurveyQuestionShareId], 
     [vw_Notifications].[PhoneNumber] AS [PhoneNumber], 
     [vw_Notifications].[NotificationDetails] AS [NotificationDetails], 
-    [vw_Notifications].[PollTitle] AS [PollTitle]
+    [vw_Notifications].[PollTitle] AS [PollTitle], 
+    [vw_Notifications].[SSQID] AS [SSQID], 
+    [vw_Notifications].[CouponId] AS [CouponId], 
+    [vw_Notifications].[DealTitle] AS [DealTitle]
     FROM [dbo].[vw_Notifications] AS [vw_Notifications]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vw_ReferringCompanies" EntityType="Self.vw_ReferringCompanies" store:Type="Views" store:Schema="dbo">
@@ -3089,6 +3120,10 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <AssociationSet Name="FK_AspNetUsers_Language" Association="Self.FK_AspNetUsers_Language">
             <End Role="Language" EntitySet="Language" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsersNotificationTokens_AspNetUsers" Association="Self.FK_AspNetUsersNotificationTokens_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUsersNotificationTokens" EntitySet="AspNetUsersNotificationTokens" />
           </AssociationSet>
           <AssociationSet Name="FK_BranchCategory_Company" Association="Self.FK_BranchCategory_Company">
             <End Role="Company" EntitySet="Company" />
@@ -3756,6 +3791,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_AspNetUsers_Company" FromRole="AspNetUser" ToRole="Company" />
           <Property Name="Phone1CodeCountryID" Type="Int32" />
           <NavigationProperty Name="Country" Relationship="SMDDevModel.FK_AspNetUsers_Country" FromRole="AspNetUser" ToRole="Country" />
+          <NavigationProperty Name="AspNetUsersNotificationTokens" Relationship="SMDDevModel.FK_AspNetUsersNotificationTokens_AspNetUsers" FromRole="AspNetUser" ToRole="AspNetUsersNotificationToken" />
         </EntityType>
         <EntityType Name="AuditLog">
           <Key>
@@ -4171,6 +4207,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="SurveyQuestionShareId" Type="Int64" />
           <NavigationProperty Name="SurveySharingGroupShare" Relationship="SMDDevModel.FK_Notifications_SurveySharingGroupShares" FromRole="Notification" ToRole="SurveySharingGroupShare" />
           <Property Name="PhoneNumber" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="CouponId" Type="Int64" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -4336,6 +4373,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <NavigationProperty Name="ProfileQuestionTargetCriterias" Relationship="SMDDevModel.FK_ProfileQuestionTargetCriteria_ProfileQuestion1" FromRole="SurveyQuestion" ToRole="ProfileQuestionTargetCriteria" />
           <NavigationProperty Name="CampaignEventHistories" Relationship="SMDDevModel.FK_CampaignEventHistory_SurveyQuestion" FromRole="SurveyQuestion" ToRole="CampaignEventHistory" />
           <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_SurveyQuestion_Company" FromRole="SurveyQuestion" ToRole="Company" />
+          <Property Name="IsUseFilter" Type="Boolean" />
         </EntityType>
         <EntityType Name="SurveyQuestionResponse">
           <Key>
@@ -5850,6 +5888,11 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <AssociationSet Name="FK_AspNetUsers_Country" Association="SMDDevModel.FK_AspNetUsers_Country">
             <End Role="Country" EntitySet="Countries" />
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <EntitySet Name="AspNetUsersNotificationTokens" EntityType="SMDDevModel.AspNetUsersNotificationToken" />
+          <AssociationSet Name="FK_AspNetUsersNotificationTokens_AspNetUsers" Association="SMDDevModel.FK_AspNetUsersNotificationTokens_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUsersNotificationToken" EntitySet="AspNetUsersNotificationTokens" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="CouponCategories">
@@ -7447,6 +7490,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="PhoneNumber" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="NotificationDetails" Type="String" MaxLength="219" FixedLength="false" Unicode="true" />
           <Property Name="PollTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SSQID" Type="Int64" />
+          <Property Name="CouponId" Type="Int64" />
+          <Property Name="DealTitle" Type="Int32" />
         </EntityType>
         <ComplexType Name="getCampaignByIdFormDataAnalytic_Result">
           <Property Type="String" Name="Question" Nullable="true" MaxLength="500" />
@@ -7492,6 +7538,29 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             </Principal>
             <Dependent Role="AspNetUser">
               <PropertyRef Name="Phone1CodeCountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AspNetUsersNotificationToken">
+          <Key>
+            <PropertyRef Name="NotificationTokenId" />
+          </Key>
+          <Property Name="NotificationTokenId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ClientType" Type="Int32" />
+          <Property Name="Token" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="DateAdded" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AspNetUser" Relationship="SMDDevModel.FK_AspNetUsersNotificationTokens_AspNetUsers" FromRole="AspNetUsersNotificationToken" ToRole="AspNetUser" />
+        </EntityType>
+        <Association Name="FK_AspNetUsersNotificationTokens_AspNetUsers">
+          <End Type="SMDDevModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="SMDDevModel.AspNetUsersNotificationToken" Role="AspNetUsersNotificationToken" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUsersNotificationToken">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -8124,6 +8193,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="Notifications">
             <EntityTypeMapping TypeName="SMDDevModel.Notification">
               <MappingFragment StoreEntitySet="Notifications">
+                <ScalarProperty Name="CouponId" ColumnName="CouponId" />
                 <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
                 <ScalarProperty Name="SurveyQuestionShareId" ColumnName="SurveyQuestionShareId" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
@@ -8232,6 +8302,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="SurveyQuestions">
             <EntityTypeMapping TypeName="SMDDevModel.SurveyQuestion">
               <MappingFragment StoreEntitySet="SurveyQuestion">
+                <ScalarProperty Name="IsUseFilter" ColumnName="IsUseFilter" />
                 <ScalarProperty Name="AmountCharged" ColumnName="AmountCharged" />
                 <ScalarProperty Name="AnswerNeeded" ColumnName="AnswerNeeded" />
                 <ScalarProperty Name="SQID" ColumnName="SQID" />
@@ -9432,6 +9503,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="vw_Notifications">
             <EntityTypeMapping TypeName="SMDDevModel.vw_Notifications">
               <MappingFragment StoreEntitySet="vw_Notifications">
+                <ScalarProperty Name="DealTitle" ColumnName="DealTitle" />
+                <ScalarProperty Name="CouponId" ColumnName="CouponId" />
+                <ScalarProperty Name="SSQID" ColumnName="SSQID" />
                 <ScalarProperty Name="PollTitle" ColumnName="PollTitle" />
                 <ScalarProperty Name="NotificationDetails" ColumnName="NotificationDetails" />
                 <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
@@ -9470,6 +9544,17 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
                 <ScalarProperty Name="StarRating" ColumnName="StarRating" />
                 <ScalarProperty Name="CouponId" ColumnName="CouponId" />
                 <ScalarProperty Name="CouponReviewId" ColumnName="CouponReviewId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsersNotificationTokens">
+            <EntityTypeMapping TypeName="SMDDevModel.AspNetUsersNotificationToken">
+              <MappingFragment StoreEntitySet="AspNetUsersNotificationTokens">
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="ClientType" ColumnName="ClientType" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="NotificationTokenId" ColumnName="NotificationTokenId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

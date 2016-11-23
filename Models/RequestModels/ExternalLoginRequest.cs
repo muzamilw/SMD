@@ -29,5 +29,11 @@
 
 
         public string Country { get; set; }
+
+        public string ProfilePicturePath { get; set; }
+
+        public string Client { get; set; }
+
+        public string NotificationToken { get; set; }
     }
 }

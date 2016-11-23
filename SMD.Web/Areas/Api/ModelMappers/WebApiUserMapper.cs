@@ -58,8 +58,8 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                        Password = source.PasswordHash,
                        RoleId = source.Roles.Select(c => c.Id).FirstOrDefault(),
                        VoucherSecretKey = source.Company.VoucherSecretKey,
-                       Phone1CodeCountryID = source.Phone1CodeCountryID.Value,
-                       Phone1Code = source.Country.CountryPhoneCode
+                       Phone1CodeCountryID = source.Phone1CodeCountryID.HasValue ? source.Phone1CodeCountryID.Value : 0,
+                       Phone1Code = source.Country != null ? source.Country.CountryPhoneCode : ""
                    };
 
             return user;

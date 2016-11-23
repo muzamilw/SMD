@@ -37,6 +37,8 @@ namespace SMD.Models.DomainModels
         public bool? DiscountVoucherApplied { get; set; }
         public string VoucherCode { get; set; }
         public long? DiscountVoucherId { get; set; }
+
+       
         public string RejectionReason { get; set; }
 
         public int? Status { get; set; }
@@ -53,8 +55,8 @@ namespace SMD.Models.DomainModels
         public int? AnswerNeeded { get; set; }
 
         public double? AmountCharged { get; set; }
-        
 
+        public Nullable<bool> IsUseFilter { get; set; }
 
         public virtual ICollection<AdCampaignTargetCriteria> AdCampaignTargetCriterias { get; set; }
         public virtual User User { get; set; }

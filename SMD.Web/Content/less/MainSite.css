@@ -1336,7 +1336,7 @@ margin-top:2px;
 
 }
 .vid_image {
-    height:60px;
+    height:50px;
     width: 60px;
 }
 .defvideoimage {
@@ -1494,4 +1494,32 @@ margin-top:2px;
 .charts_label {
   color:#3498db;
   font-size:17px;
+}
+.bs-example-tooltips{
+    display:none;
+}
+.goSocial {
+    color: gainsboro;
+    margin-left: 6px;
+    white-space: nowrap;
+    /* margin-right: 11px; */
+    margin-left: -1px;
+}
+.socialbck {
+    background-color:#127abd;
+}
+.subtitle {
+    font-size:14px;
+}
+.status_date_span {
+    font-size: 13px;
+    color: white;
+    margin-left: 7px;
+    margin-top: 11px;
+}
+.status_panels {
+     color:#7f8c8d;
+     font-size:12px;
+     padding-left:9px;
+     margin-bottom:2px;
 }

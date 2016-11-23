@@ -389,6 +389,7 @@
     <Compile Include="Areas\Api\Controllers\CouponRatingReviewController.cs" />
     <Compile Include="Areas\Api\Controllers\CouponReviewController.cs" />
     <Compile Include="Areas\Api\Controllers\CouponReviewCountController.cs" />
+    <Compile Include="Areas\Api\Controllers\DashboardStatusCounterController.cs" />
     <Compile Include="Areas\Api\Controllers\NotificationsController.cs" />
     <Compile Include="Areas\Api\Controllers\CouponAnalyticsController.cs" />
     <Compile Include="Areas\Api\Controllers\ApprovePayOutHistoryController.cs" />
@@ -612,6 +613,13 @@
     <Compile Include="Areas\Survey\SurveyAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UnauthorizedRequestController.cs" />
+    <Compile Include="Emails\Video_Performance.aspx.cs">
+      <DependentUpon>Video_Performance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Video_Performance.aspx.designer.cs">
+      <DependentUpon>Video_Performance.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -660,12 +668,12 @@
       <DependentUpon>StripeHandler.ashx</DependentUpon>
     </Compile>
     <Compile Include="TypeRegistrations.cs" />
-    <Compile Include="Views\EmailTester.aspx.cs">
-      <DependentUpon>EmailTester.aspx</DependentUpon>
+    <Compile Include="Emails\Welcome_Cash4ads.aspx.cs">
+      <DependentUpon>Welcome_Cash4ads.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\EmailTester.aspx.designer.cs">
-      <DependentUpon>EmailTester.aspx</DependentUpon>
+    <Compile Include="Emails\Welcome_Cash4ads.aspx.designer.cs">
+      <DependentUpon>Welcome_Cash4ads.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -905,9 +913,11 @@
     <Content Include="Content\Images\CZ_AOFDdEE7.png" />
     <Content Include="Content\Images\Deals.png" />
     <Content Include="Content\Images\Dealsicon.png" />
+    <Content Include="Content\Images\Dealsmod.png" />
     <Content Include="Content\Images\Dealsuicon.png" />
     <Content Include="Content\Images\Deals_Small.png" />
     <Content Include="Content\Images\Deals_Small_36.png" />
+    <Content Include="Content\Images\Displaymod.png" />
     <Content Include="Content\Images\Display_small.png" />
     <Content Include="Content\Images\Display_small_36.png" />
     <Content Include="Content\Images\Drop_Arrow.png" />
@@ -928,12 +938,14 @@
     <Content Include="Content\Images\movie_up.png" />
     <Content Include="Content\Images\pin.png" />
     <Content Include="Content\Images\placeholder.png" />
+    <Content Include="Content\Images\Pollmod.png" />
     <Content Include="Content\Images\Polls.png" />
     <Content Include="Content\Images\Polls_small.png" />
     <Content Include="Content\Images\Polls_small_36.png" />
     <Content Include="Content\Images\Poll_icon.png" />
     <Content Include="Content\Images\Preview.png" />
     <Content Include="Content\Images\ReportControlbg.jpg" />
+    <Content Include="Content\Images\Share_icon_100.png" />
     <Content Include="Content\Images\Surveys_icon.png" />
     <Content Include="Content\Images\Surveys_small.png" />
     <Content Include="Content\Images\Surveys_small_36.png" />
@@ -942,6 +954,7 @@
     <Content Include="Content\Images\up-arrow-small.png" />
     <Content Include="Content\Images\updatedMovie_lg.png" />
     <Content Include="Content\Images\vide.png" />
+    <Content Include="Content\Images\Videomod.png" />
     <Content Include="Content\Images\Videos.png" />
     <Content Include="Content\Images\Videosuicon.png" />
     <Content Include="Content\Images\Videos_small.png" />
@@ -1245,6 +1258,7 @@
     <Content Include="Content\themes\Centaurus\js\typeahead.min.js" />
     <Content Include="Content\themes\Centaurus\js\wizard.js" />
     <Content Include="Content\themes\Centaurus\js\xcharts.js" />
+    <Content Include="Emails\Video_Performance.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="games\bouncingball\Bounce_files\abg.js" />
@@ -1300,7 +1314,9 @@
     <Content Include="Images\Sign_In_Image.png" />
     <Content Include="Images\splaceholder.png" />
     <Content Include="Images\standardplaceholder.png" />
+    <Content Include="Images\Tips-Icon-2.png" />
     <Content Include="Images\topbarph.png" />
+    <Content Include="Images\White_Arrow.png" />
     <Content Include="Images\youtube_play.JPG" />
     <Content Include="ReportViewers\Publisher.aspx" />
     <Content Include="ReportViewers\SMDReport.aspx" />
@@ -2974,7 +2990,7 @@
     <Content Include="Scripts\underscore.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="ReportViewers\User.aspx" />
-    <Content Include="Views\EmailTester.aspx" />
+    <Content Include="Emails\Welcome_Cash4ads.aspx" />
     <Content Include="Views\Home\-------Login.cshtml" />
     <Content Include="Views\MobileMessageBox\Message.html" />
     <Content Include="Web.config">
