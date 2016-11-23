@@ -303,7 +303,7 @@ define("survey/survey.viewModel",
                     gotoScreen(1);
                     isTerminateBtnVisible(false);
                     isShowArchiveBtn(false);
-                    HeaderText("Add new survey card");
+                    HeaderText("Add new Picture Poll");
                     StatusValue('');
                     isNewCampaign(true);
                     StatusValue("Draft");
@@ -317,7 +317,7 @@ define("survey/survey.viewModel",
                     selectedQuestion().StatusValue("Draft");
                     selectedQuestion().AgeRangeStart(13);
                     selectedQuestion().AgeRangeEnd(80);
-
+                    selectedQuestion().IsUseFilter('1');
                     if (!reachedAudience() > 0) {
                         getAudienceCountForAdd(selectedQuestion());
                     }
@@ -585,18 +585,22 @@ define("survey/survey.viewModel",
 
                     selectedLocation().Radius = (selectedLocationRadius);
                     selectedLocation().IncludeorExclude = (selectedLocationIncludeExclude);
-                    selectedQuestion().SurveyQuestionTargetLocation.push(new model.SurveyQuestionTargetLocation.Create({
-                        CountryId: selectedLocation().CountryID,
-                        CityId: selectedLocation().CityID,
-                        Radius: selectedLocation().Radius(),
-                        Country: selectedLocation().Country,
-                        City: selectedLocation().City,
-                        IncludeorExclude: selectedLocation().IncludeorExclude(),
-                        SQID: selectedQuestion().SQID(),
-                        Latitude: selectedLocation().Latitude,
-                        Longitude: selectedLocation().Longitude,
+                    if ($.grep(selectedQuestion().SurveyQuestionTargetLocation, function (el) { return el.City() === selectedLocation().City && el.Country() === selectedLocation().Country; }).length === 0) {
+                       
+                        selectedQuestion().SurveyQuestionTargetLocation.push(new model.SurveyQuestionTargetLocation.Create({
+                            CountryId: selectedLocation().CountryID,
+                            CityId: selectedLocation().CityID,
+                            Radius: selectedLocation().Radius(),
+                            Country: selectedLocation().Country,
+                            City: selectedLocation().City,
+                            IncludeorExclude: selectedLocation().IncludeorExclude(),
+                            SQID: selectedQuestion().SQID(),
+                            Latitude: selectedLocation().Latitude,
+                            Longitude: selectedLocation().Longitude,
 
-                    }));
+                        }));
+                    }
+
                     addCountryToCountryList(selectedLocation().CountryID, selectedLocation().Country);
                     resetLocations();
                 },
@@ -1373,9 +1377,25 @@ define("survey/survey.viewModel",
 
                 },
                 saveSurveyQuestion = function (mode) {
+                    debugger;
                     if (selectedQuestion().isValid()) {
                         if (ValidateSurvey() == true) {
                             selectedQuestion().Status(mode);
+                            if (selectedQuestion().IsUseFilter() == 0) {
+
+
+                                selectedQuestion().SurveyQuestionTargetLocation.removeAll();
+                                selectedQuestion().SurveyQuestionTargetCriteria.removeAll();
+                                selectedQuestion().AgeRangeEnd(80);
+                                selectedQuestion().AgeRangeStart(13);
+                                selectedQuestion().Gender('1');
+                                selectedQuestion().IsUseFilter(false);
+
+                            }
+                            else {
+                                selectedQuestion().IsUseFilter(true)
+                            }
+
                             var surveyData = selectedQuestion().convertToServerData();
                             dataservice.addSurveyData(surveyData, {
                                 success: function (data) {
@@ -1725,17 +1745,18 @@ define("survey/survey.viewModel",
                          //$("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign").removeAttr('disabled');
                      },
                 Changefilter = function () {
-
-                    if (campaignModel().IsUseFilter() == 0) {
+                  
+                    debugger;
+                    if (selectedQuestion().IsUseFilter() == 0) {
 
                         confirmation.messageText("Switching to Basic Targeting will remove all Hyper Targeting filters.Continue to Basic Targeting,  Yes No.");
                         confirmation.afterProceed(function () {
                             IsBroadMarketing(false);
-                            campaignModel().AdCampaignTargetLocations.removeAll();
-                            campaignModel().AdCampaignTargetCriterias.removeAll();
-                            //campaignModel().AgeRangeEnd(80);
-                            //campaignModel().AgeRangeStart(13);
-                            // campaignModel().Gender('1');
+                            selectedQuestion().SurveyQuestionTargetLocation.removeAll();
+                            selectedQuestion().SurveyQuestionTargetCriteria.removeAll();
+                            selectedQuestion().AgeRangeEnd(80);
+                            selectedQuestion().AgeRangeStart(13);
+                            selectedQuestion().Gender('1');
 
                             setTimeout(function () {
                                 ShowAudienceCounter(0);
@@ -1744,7 +1765,7 @@ define("survey/survey.viewModel",
                         confirmation.show();
                         confirmation.afterCancel(function () {
                             IsBroadMarketing(true);
-                            campaignModel().IsUseFilter('1');
+                            selectedQuestion().IsUseFilter('1');
                             confirmation.hide();
                         });
                     }
@@ -1753,16 +1774,16 @@ define("survey/survey.viewModel",
                         confirmation.messageText("Switching to Basic Targeting will remove all Hyper Targeting filters.Continue to Basic Targeting,  Yes No.");
                         confirmation.afterProceed(function () {
                             IsBroadMarketing(true);
-                            campaignModel().AdCampaignTargetLocations.removeAll();
-                            campaignModel().AdCampaignTargetCriterias.removeAll();
-                            // campaignModel().AgeRangeEnd(80);
-                            //  campaignModel().AgeRangeStart(13);
-                            //    campaignModel().Gender('1');
+                            selectedQuestion().SurveyQuestionTargetLocation.removeAll();
+                            selectedQuestion().SurveyQuestionTargetCriteria.removeAll();
+                            selectedQuestion().AgeRangeEnd(80);
+                            selectedQuestion().AgeRangeStart(13);
+                            selectedQuestion().Gender('1');
                             getAudienceCount();
                         });
                         confirmation.show();
                         confirmation.afterCancel(function () {
-                            campaignModel().IsUseFilter('0');
+                            selectedQuestion().IsUseFilter('0');
                             confirmation.hide();
                             IsBroadMarketing(false);
                         });

@@ -1897,7 +1897,7 @@ define("ads/ads.viewModel",
 
                                         campaignModel().LogoUrl("/images/standardplaceholder.png");
                                     }
-                                    debugger;
+                                   
                                    
 
 

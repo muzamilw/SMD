@@ -427,7 +427,7 @@
 
                                             <div class="radio">
 
-                                                <input type="radio" name="optionsRadiosfilters" id="optionsRadiosfiltersBroad" value="1" data-bind="event:{ change: $root.Changefilter}">
+                                                <input type="radio" name="optionsRadiosfilters" id="optionsRadiosfiltersBroad" value="1" data-bind="checked: IsUseFilter,event:{ change: $root.Changefilter}">
                                                 <label for="optionsRadiosfiltersBroad" style="font-size:18px;">
                                                     Broad Targeting
                                                 </label>
@@ -437,7 +437,7 @@
                                             <div class="radio">
 
 
-                                                <input type="radio" name="optionsRadiosfilters1" id="optionsRadiosfiltersHyper" value="0" data-bind="event:{ change: $root.Changefilter}">
+                                                <input type="radio" name="optionsRadiosfilters1" id="optionsRadiosfiltersHyper" value="0" data-bind="checked: IsUseFilter,event:{ change: $root.Changefilter}">
                                                 <label for="optionsRadiosfiltersHyper" style="font-size:18px;">
                                                     Hyper Targeting (Insights)
                                                 </label>
@@ -786,15 +786,15 @@
 
 
                                                 <div class="pull-left filtersDiv_width">
-                                                    <button class="btn  btn-danger btnAdsCampaign ButtonWidth filterbtnclrs" id="" data-toggle="modal" data-target=".bs-example-modal-lg" data-bind="click:$root.showAdditionQuizCriteria">Ad quiz results</button>
+                                                    <button class="btn  btn-danger btnAdsCampaign ButtonWidth filterbtnclrs" id="" data-toggle="modal" data-target=".bs-example-modal-lg" data-bind="click:$root.showAdditionQuizCriteria">My Survey Results</button>
                                                 </div>
 
                                                 <div class="pull-left filtersDiv_width">
-                                                    <button class="btn  btn-danger btnAdsCampaign ButtonWidth filterbtnclrs" id="" data-toggle="modal" data-bind="click:$root.showAdditionUserSurveyCriteria" data-target=".bs-example-modal-lg">My poll results</button>
+                                                    <button class="btn  btn-danger btnAdsCampaign ButtonWidth filterbtnclrs" id="" data-toggle="modal" data-bind="click:$root.showAdditionUserSurveyCriteria" data-target=".bs-example-modal-lg">My Poll Results</button>
                                                 </div>
 
                                                 <div class="pull-left filtersDiv_width" style="display:none">
-                                                    <button class="btn  btn-danger btnAdsCampaign ButtonWidth filterbtnclrs" id="" data-toggle="modal" data-bind="click:$root.showAdditionalSurveyQuestions" data-target=".bs-example-modal-lg">My survey results</button>
+                                                    <button class="btn  btn-danger btnAdsCampaign ButtonWidth filterbtnclrs" id="" data-toggle="modal" data-bind="click:$root.showAdditionalSurveyQuestions" data-target=".bs-example-modal-lg">My Survey Results</button>
                                                 </div>
                                                 <div class="clearfix">
 
@@ -1160,21 +1160,43 @@
                                                 <div data-bind="visible:$root.IsBroadMarketing()==true">
                                                     <div><span>Broad targeting</span></div>
                                                     <!-- ko if: Gender() ==1 -->
-                                                    <span class="pull-left" data-bind="text:AgeRangeStart()">13</span>
-                                                    <span class="pull-left">-</span><span class="pull-left" data-bind="text:AgeRangeEnd()">80</span>
+                                                    <span class="pull-left" data-bind="text:AgeRangeStart()"></span>
+                                                    <span class="pull-left">-</span><span class="pull-left" data-bind="text:AgeRangeEnd()"></span>
                                                     <span class="pull-left">,</span><span class="pull-left">Men</span><span class="pull-left">
                                                         ,
                                                     </span><span class="pull-left">Women</span>
                                                     <!-- /ko -->
-                                                    <!-- ko if: Gender() ==2 --><!-- /ko -->
-                                                    <!-- ko if: Gender()==3 --><!-- /ko -->
+                                                    <!-- ko if: Gender() ==2 -->
+                                                    <span class="pull-left" data-bind="text:AgeRangeStart()"></span>
+                                                    <span class="pull-left">-</span><span class="pull-left" data-bind="text:AgeRangeEnd()"></span>
+                                                    <span class="pull-left">,</span><span class="pull-left">Men</span>
+                                                    <!-- /ko -->
+                                                    <!-- ko if: Gender()==3 -->
+                                                    <span class="pull-left" data-bind="text:AgeRangeStart()"></span>
+                                                    <span class="pull-left">-</span><span class="pull-left" data-bind="text:AgeRangeEnd()"></span>
+                                                    <span class="pull-left">,</span><span class="pull-left">Women</span>
+
+                                                    <!-- /ko -->
                                                 </div>
                                                 <div class="clearfix"></div>
 
 
-                                                <div data-bind="foreach: SurveyQuestionTargetLocation"></div>
-                                                <!-- ko if: SurveyQuestionTargetCriteria().length  > 0 --><!-- /ko -->
-                                                <div data-bind="foreach: SurveyQuestionTargetCriteria"></div>
+                                                <div data-bind="foreach: SurveyQuestionTargetLocation">
+                                                    <!-- ko if: $index() ==0 -->
+                                                    <span class="pull-left" data-bind="text: City()"></span><span class="pull-left" data-bind="text:'(' + Radius() + 'Km)'"></span>
+                                                    <!-- /ko -->
+                                                    <!-- ko if: $index() != 0 -->
+                                                    <span class="pull-left" style="margin-left:6px;" data-bind="text: City()"></span><span class="pull-left" data-bind="text:'(' + Radius() + 'Km)'"></span>
+                                                    <!-- /ko -->
+                                                </div>
+                                                <!-- ko if: SurveyQuestionTargetCriteria().length  > 0 -->
+                                                <div><span>Hyper targeting</span></div>
+                                                <!-- /ko -->
+                                                <div data-bind="foreach: SurveyQuestionTargetCriteria">
+                                                    <span class="pull-left" data-bind="text: questionString()"></span><span class="pull-left" data-bind="text:' = ' + answerString()"></span>
+                                                    <div class="clearfix"></div>
+
+                                                </div>
 
                                             </div>
                                         </div>
