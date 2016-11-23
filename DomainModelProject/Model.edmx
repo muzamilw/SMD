@@ -1004,6 +1004,7 @@
           <Property Name="CompanyId" Type="int" />
           <Property Name="AnswerNeeded" Type="int" />
           <Property Name="AmountCharged" Type="float" />
+          <Property Name="IsUseFilter" Type="bit" />
         </EntityType>
         <EntityType Name="SurveyQuestionResponse">
           <Key>
@@ -1300,7 +1301,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_Notifications' does not have a prima
           <Property Name="PollTitle" Type="nvarchar" MaxLength="200" />
           <Property Name="SSQID" Type="bigint" />
           <Property Name="CouponId" Type="bigint" />
-          <Property Name="DealTitle" Type="int" />
+          <Property Name="DealTitle" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -4372,6 +4373,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <NavigationProperty Name="ProfileQuestionTargetCriterias" Relationship="SMDDevModel.FK_ProfileQuestionTargetCriteria_ProfileQuestion1" FromRole="SurveyQuestion" ToRole="ProfileQuestionTargetCriteria" />
           <NavigationProperty Name="CampaignEventHistories" Relationship="SMDDevModel.FK_CampaignEventHistory_SurveyQuestion" FromRole="SurveyQuestion" ToRole="CampaignEventHistory" />
           <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_SurveyQuestion_Company" FromRole="SurveyQuestion" ToRole="Company" />
+          <Property Name="IsUseFilter" Type="Boolean" />
         </EntityType>
         <EntityType Name="SurveyQuestionResponse">
           <Key>
@@ -8300,6 +8302,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="SurveyQuestions">
             <EntityTypeMapping TypeName="SMDDevModel.SurveyQuestion">
               <MappingFragment StoreEntitySet="SurveyQuestion">
+                <ScalarProperty Name="IsUseFilter" ColumnName="IsUseFilter" />
                 <ScalarProperty Name="AmountCharged" ColumnName="AmountCharged" />
                 <ScalarProperty Name="AnswerNeeded" ColumnName="AnswerNeeded" />
                 <ScalarProperty Name="SQID" ColumnName="SQID" />

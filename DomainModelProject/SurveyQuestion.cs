@@ -62,6 +62,7 @@ namespace DomainModelProject
         public Nullable<int> CompanyId { get; set; }
         public Nullable<int> AnswerNeeded { get; set; }
         public Nullable<double> AmountCharged { get; set; }
+        public Nullable<bool> IsUseFilter { get; set; }
     
         public virtual ICollection<AdCampaignTargetCriteria> AdCampaignTargetCriterias { get; set; }
         public virtual AspNetUser AspNetUser { get; set; }
