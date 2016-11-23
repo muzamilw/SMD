@@ -923,6 +923,7 @@
           <Property Name="CompanyId" Type="int" />
           <Property Name="AnswerNeeded" Type="int" />
           <Property Name="AmountCharged" Type="float" />
+          <Property Name="IsUseFilter" Type="bit" />
         </EntityType>
         <EntityType Name="SurveyQuestionResponse">
           <Key>
@@ -5020,6 +5021,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <NavigationProperty Name="ProfileQuestionTargetCriterias" Relationship="DomainModels.FK_ProfileQuestionTargetCriteria_ProfileQuestion1" FromRole="SurveyQuestion" ToRole="ProfileQuestionTargetCriteria" />
           <NavigationProperty Name="Company" Relationship="DomainModels.FK_SurveyQuestion_Company" FromRole="SurveyQuestion" ToRole="Company" />
           <NavigationProperty Name="CampaignEventHistories" Relationship="DomainModels.FK_CampaignEventHistory_SurveyQuestion" FromRole="SurveyQuestion" ToRole="CampaignEventHistory" />
+          <Property Name="IsUseFilter" Type="Boolean" />
         </EntityType>
         <EntityType Name="SurveyQuestionResponse">
           <Key>
@@ -8070,6 +8072,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="SurveyQuestions">
             <EntityTypeMapping TypeName="DomainModels.SurveyQuestion">
               <MappingFragment StoreEntitySet="SurveyQuestion">
+                <ScalarProperty Name="IsUseFilter" ColumnName="IsUseFilter" />
                 <ScalarProperty Name="AmountCharged" ColumnName="AmountCharged" />
                 <ScalarProperty Name="AnswerNeeded" ColumnName="AnswerNeeded" />
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
