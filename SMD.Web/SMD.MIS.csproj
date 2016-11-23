@@ -913,9 +913,11 @@
     <Content Include="Content\Images\CZ_AOFDdEE7.png" />
     <Content Include="Content\Images\Deals.png" />
     <Content Include="Content\Images\Dealsicon.png" />
+    <Content Include="Content\Images\Dealsmod.png" />
     <Content Include="Content\Images\Dealsuicon.png" />
     <Content Include="Content\Images\Deals_Small.png" />
     <Content Include="Content\Images\Deals_Small_36.png" />
+    <Content Include="Content\Images\Displaymod.png" />
     <Content Include="Content\Images\Display_small.png" />
     <Content Include="Content\Images\Display_small_36.png" />
     <Content Include="Content\Images\Drop_Arrow.png" />
@@ -936,12 +938,14 @@
     <Content Include="Content\Images\movie_up.png" />
     <Content Include="Content\Images\pin.png" />
     <Content Include="Content\Images\placeholder.png" />
+    <Content Include="Content\Images\Pollmod.png" />
     <Content Include="Content\Images\Polls.png" />
     <Content Include="Content\Images\Polls_small.png" />
     <Content Include="Content\Images\Polls_small_36.png" />
     <Content Include="Content\Images\Poll_icon.png" />
     <Content Include="Content\Images\Preview.png" />
     <Content Include="Content\Images\ReportControlbg.jpg" />
+    <Content Include="Content\Images\Share_icon_100.png" />
     <Content Include="Content\Images\Surveys_icon.png" />
     <Content Include="Content\Images\Surveys_small.png" />
     <Content Include="Content\Images\Surveys_small_36.png" />
@@ -950,6 +954,7 @@
     <Content Include="Content\Images\up-arrow-small.png" />
     <Content Include="Content\Images\updatedMovie_lg.png" />
     <Content Include="Content\Images\vide.png" />
+    <Content Include="Content\Images\Videomod.png" />
     <Content Include="Content\Images\Videos.png" />
     <Content Include="Content\Images\Videosuicon.png" />
     <Content Include="Content\Images\Videos_small.png" />
@@ -1309,7 +1314,9 @@
     <Content Include="Images\Sign_In_Image.png" />
     <Content Include="Images\splaceholder.png" />
     <Content Include="Images\standardplaceholder.png" />
+    <Content Include="Images\Tips-Icon-2.png" />
     <Content Include="Images\topbarph.png" />
+    <Content Include="Images\White_Arrow.png" />
     <Content Include="Images\youtube_play.JPG" />
     <Content Include="ReportViewers\Publisher.aspx" />
     <Content Include="ReportViewers\SMDReport.aspx" />

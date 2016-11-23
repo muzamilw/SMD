@@ -88,7 +88,7 @@
                     @*<span class="fa fa-bars"></span>*@
                 </button>
 
-                <div style="display:inline-block;margin-top:32px;width:906px;">
+                <div style="display:inline-block;margin-top:32px;width:677px;">
                     <div style="float:right;">
                         @*<div class="pull-left" style="display:inline-block;margin-top:20px;">*@
                             @*<p style="box-shadow: inset 0 0px 0 white, inset 0 -1px 0 white;margin-bottom:3px;display:inline-block;font-size:11px;">
@@ -96,7 +96,7 @@
                                 </p>*@
                             @*<p style="font-size:14px;color:white;">@CompanyName</p>*@
                         @*</div>*@
-                        <div class="pull-left" style="color:white;margin-left: 10px;margin-top: 4px;margin-right: -5px;"><img style="width:60px;height:33px;background-color: white;border-radius: 5px;" src="~/@CompanyLogo" /></div>
+                        @*<div class="pull-left" style="color:white;margin-left: 10px;margin-top: 4px;margin-right: -5px;"><img style="width:60px;height:33px;background-color: white;border-radius: 5px;" src="~/@CompanyLogo" /></div>*@
                     </div>
                 </div>
                 <div class="nav-no-collapse navbar-left pull-left hidden-sm hidden-xs" style="margin-top:23px;">
@@ -146,6 +146,13 @@
                             </ul>
                         </li>
                         <!-- Normal Menu-->
+
+                        <li>
+                            <a style="padding-right:7px!important;padding-top:0px!important;">
+                                <img style="width:60px;height:36px;background-color: white;border-radius: 5px;" src="~/@CompanyLogo" />
+                            </a>
+                        </li>
+                        
                         <li class="dropdown profile-dropdown">
                             <a href="#" class="dropdown-toggle dash_header-btn" data-toggle="dropdown">
                                 <span class="hidden-xs" style="font-size:14px;">
@@ -185,7 +192,7 @@
 
                               
                                 @*<li id="userProfileBinding"><a data-bind="click:showUserProfileDialog">Personal Profile</a></li>*@
-                                <li id="companyProfileBinding"><a style="cursor: pointer" data-bind="click:showCompanyProfileDialog">Account Settings</a></li>
+                                <li id="companyProfileBinding"><a  id ="cprofile"style="cursor: pointer" data-bind="click:showCompanyProfileDialog">Account Settings</a></li>
                                 <li><a href="~/Billing/Manage/Invoice">Billing History</a></li>
 
                                 <li><a href="/User/ManageUser/ManageUsers">Manage Users</a></li>
@@ -815,6 +822,7 @@
     <script src="~/Scripts/intlTelInput.min.js"></script>
     
     <script>
+        //createCookie();
         require(["common/confirmation.view"]);
         require(["Layout/Layout.view"]);
         require(["PhraseLibrary/phraseLibrary.view"]);
@@ -1001,12 +1009,12 @@
             function ShowInviteUserPopup() {
                 $('#btninviteusers').click();
             }
+            function openCompanyProfile() {
+               
+                $( "#cprofile" ).click();   
+            }
+
     </script>
-
-   
-
-
-
 
     @RenderSection("scripts", required: false)
     

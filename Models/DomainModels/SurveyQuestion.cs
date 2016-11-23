@@ -37,6 +37,8 @@ namespace SMD.Models.DomainModels
         public bool? DiscountVoucherApplied { get; set; }
         public string VoucherCode { get; set; }
         public long? DiscountVoucherId { get; set; }
+
+       
         public string RejectionReason { get; set; }
 
         public int? Status { get; set; }

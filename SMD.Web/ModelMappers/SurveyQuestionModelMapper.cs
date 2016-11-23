@@ -112,7 +112,8 @@ namespace SMD.MIS.ModelMappers
                 ResultClicks=source.ResultClicks,
                 AmountCharged = source.AmountCharged,
                 Company = source.Company != null ? source.Company.CompanyName : "System Survey",
-                ProjectedReach = source.ProjectedReach
+                ProjectedReach = source.ProjectedReach,
+                IsUseFilter=source.IsUseFilter
             };
         }
 
@@ -147,6 +148,7 @@ namespace SMD.MIS.ModelMappers
                 DiscountVoucherId = source.DiscountVoucherId,
                 RejectionReason = source.RejectionReason,
                 SubmissionDate = source.SubmissionDate,
+                IsUseFilter=source.IsUseFilter
             };
         }
 
@@ -321,7 +323,8 @@ namespace SMD.MIS.ModelMappers
                 Gender = source.Gender,
                 ParentSurveyId = source.ParentSurveyId,
                 Priority = source.Priority,
-                CompanyId = source.CompanyId
+                CompanyId = source.CompanyId,
+                IsUseFilter=source.IsUseFilter
             };
         }
         public static List<SMD.MIS.Areas.Api.Models.SurveyQuestionTargetCriteria> GetSurveyQuestionTargetCriterias(this Models.DomainModels.SurveyQuestion source)
