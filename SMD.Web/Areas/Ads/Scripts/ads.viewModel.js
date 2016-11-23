@@ -3714,18 +3714,13 @@ define("ads/ads.viewModel",
                     selectedQQCtAnalytics:selectedQQCtAnalytics,
                     AgeRangeAnalyticsData: AgeRangeAnalyticsData,
                     isflageClose: isflageClose,
-                   
                     Changefilter: Changefilter,
                     ChangeBroadfilter: ChangeBroadfilter,
                     QQStatsAnalytics:QQStatsAnalytics,
                     isflageClose: isflageClose,
                     formAnalyticsData: formAnalyticsData,
-<<<<<<< HEAD
-                    getQAnalytic: getQAnalytic
-                    
-=======
+                    getQAnalytic: getQAnalytic,
                     IsBroadMarketing: IsBroadMarketing
->>>>>>> fa67246b3e44ab18f32497710f6d372ac7918485
                 };
             })()
         };
