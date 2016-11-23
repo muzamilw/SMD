@@ -5526,8 +5526,8 @@ color:red !important;
    
 }
 .borderbtmline {
-    border-bottom: 1px solid rgb(220,220,220);
-
+    /*border-bottom: 1px solid rgb(220,220,220);*/
+   
 }
 
 .borderPanel {
