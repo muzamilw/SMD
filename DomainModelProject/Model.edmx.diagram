@@ -189,6 +189,8 @@
         <EntityTypeShape EntityType="SMDDevModel.CouponRatingReview" Width="1.5" PointX="17.25" PointY="73.125" />
         <AssociationConnector Association="SMDDevModel.FK_CouponRatingReview_Coupon" />
         <AssociationConnector Association="SMDDevModel.FK_AspNetUsers_Country" />
+        <EntityTypeShape EntityType="SMDDevModel.AspNetUsersNotificationToken" Width="1.5" PointX="12.75" PointY="62.625" />
+        <AssociationConnector Association="SMDDevModel.FK_AspNetUsersNotificationTokens_AspNetUsers" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -125,6 +125,7 @@
     <Compile Include="Common\UserIdentityModel.cs" />
     <Compile Include="Common\Utility.cs" />
     <Compile Include="DomainModels\AdCampaignClickRateHistory.cs" />
+    <Compile Include="DomainModels\AspNetUsersNotificationToken.cs" />
     <Compile Include="DomainModels\BranchCategory.cs" />
     <Compile Include="DomainModels\CampaignEventHistory.cs" />
     <Compile Include="DomainModels\CompanyBranch.cs" />

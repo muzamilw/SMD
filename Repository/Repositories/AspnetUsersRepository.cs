@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace SMD.Repository.Repositories
@@ -74,6 +75,8 @@ namespace SMD.Repository.Repositories
 
         public User GetUserbyPhoneNo(string phoneNo)
         {
+            phoneNo = Regex.Replace(phoneNo, @"\s+", "");
+            phoneNo = phoneNo.Substring(phoneNo.Length - 9, phoneNo.Length - (phoneNo.Length - 9));
             db.Configuration.LazyLoadingEnabled = false;
             return db.Users.Where(g => g.Phone1 == phoneNo).SingleOrDefault();
 

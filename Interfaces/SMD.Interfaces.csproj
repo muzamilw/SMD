@@ -73,6 +73,7 @@
   <ItemGroup>
     <Compile Include="Data\AuthorizationCheckRequest.cs" />
     <Compile Include="Data\SecurityAccessRight.cs" />
+    <Compile Include="Repository\IAspNetUsersNotificationTokenRepository.cs" />
     <Compile Include="IAuthorizationChecker.cs" />
     <Compile Include="IClaimsSecurityService.cs" />
     <Compile Include="Repository\ICouponRatingReviewRepository.cs" />

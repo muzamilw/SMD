@@ -53,8 +53,8 @@ namespace SMD.Models.DomainModels
         public int? AnswerNeeded { get; set; }
 
         public double? AmountCharged { get; set; }
-        
 
+        public Nullable<bool> IsUseFilter { get; set; }
 
         public virtual ICollection<AdCampaignTargetCriteria> AdCampaignTargetCriterias { get; set; }
         public virtual User User { get; set; }

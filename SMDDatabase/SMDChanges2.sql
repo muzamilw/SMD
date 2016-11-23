@@ -3224,3 +3224,147 @@ GO
 ALTER TABLE dbo.AspNetUsers SET (LOCK_ESCALATION = TABLE)
 GO
 COMMIT
+
+
+
+
+
+
+GO
+
+/****** Object:  View [dbo].[vw_Notifications]    Script Date: 11/23/2016 10:12:14 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- select * from [vw_Notifications]
+ALTER VIEW [dbo].[vw_Notifications]
+AS
+SELECT        n.ID, Type, n.UserID, IsRead, GeneratedOn, GeneratedBy, n.SurveyQuestionShareId, n.PhoneNumber,
+				(case when n.[type] = 1 then u.FullName +  ' wants your opinion' else '' end) NotificationDetails,
+				(case when n.[type] = 1 then q.SurveyTitle else '' end) PollTitle, 
+				(case when n.[type] = 1 then q.SSQID else 0 end) SSQID
+
+				
+FROM            dbo.Notifications n
+			left outer join SurveySharingGroupShares s on n.SurveyQuestionShareId = s.SurveyQuestionShareId
+			left outer join SharedSurveyQuestion q on q.SSQID = s.SSQID
+			left outer join AspNetUsers u on q.UserId = u.Id
+
+
+GO
+
+
+
+
+
+
+
+/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.AspNetUsers SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+CREATE TABLE dbo.AspNetUsersNotificationTokens
+	(
+	NotificationTokenId bigint NOT NULL IDENTITY (1, 1),
+	UserId nvarchar(128) NULL,
+	ClientType int NULL,
+	Token nvarchar(500) NULL,
+	DateAdded datetime NULL
+	)  ON [PRIMARY]
+GO
+ALTER TABLE dbo.AspNetUsersNotificationTokens ADD CONSTRAINT
+	PK_AspNetUsersNotificationTokens PRIMARY KEY CLUSTERED 
+	(
+	NotificationTokenId
+	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+
+GO
+ALTER TABLE dbo.AspNetUsersNotificationTokens ADD CONSTRAINT
+	FK_AspNetUsersNotificationTokens_AspNetUsers FOREIGN KEY
+	(
+	UserId
+	) REFERENCES dbo.AspNetUsers
+	(
+	Id
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+ALTER TABLE dbo.AspNetUsersNotificationTokens SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
+
+
+
+/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.Notifications ADD
+	CouponId bigint NULL
+GO
+ALTER TABLE dbo.Notifications SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
+
+
+
+
+GO
+
+/****** Object:  View [dbo].[vw_Notifications]    Script Date: 11/23/2016 12:32:09 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- select * from [vw_Notifications]
+ALTER VIEW [dbo].[vw_Notifications]
+AS
+SELECT        n.ID, Type, n.UserID, IsRead, GeneratedOn, GeneratedBy, n.SurveyQuestionShareId, n.PhoneNumber,
+				(case when n.[type] = 1 then u.FullName +  ' wants your opinion' else 'New Deal around you is available' end) NotificationDetails,
+				(case when n.[type] = 1 then q.SurveyTitle else '' end) PollTitle, 
+				(case when n.[type] = 1 then q.SSQID else 0 end) SSQID,
+				(case when n.[type] = 2 then n.CouponId else 0 end) CouponId,
+				(case when n.[type] = 2 then c.CouponTitle else '' end) DealTitle
+
+				
+FROM            dbo.Notifications n
+			left outer join SurveySharingGroupShares s on n.SurveyQuestionShareId = s.SurveyQuestionShareId
+			left outer join SharedSurveyQuestion q on q.SSQID = s.SSQID
+			left outer join AspNetUsers u on q.UserId = u.Id
+			left outer join Coupon c on n.CouponId = c.CouponId
+
+
+
+GO
+
+

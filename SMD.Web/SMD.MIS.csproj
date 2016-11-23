@@ -389,6 +389,7 @@
     <Compile Include="Areas\Api\Controllers\CouponRatingReviewController.cs" />
     <Compile Include="Areas\Api\Controllers\CouponReviewController.cs" />
     <Compile Include="Areas\Api\Controllers\CouponReviewCountController.cs" />
+    <Compile Include="Areas\Api\Controllers\DashboardStatusCounterController.cs" />
     <Compile Include="Areas\Api\Controllers\NotificationsController.cs" />
     <Compile Include="Areas\Api\Controllers\CouponAnalyticsController.cs" />
     <Compile Include="Areas\Api\Controllers\ApprovePayOutHistoryController.cs" />

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets5D74A1159F72BAA670815061915FED7B86F0DB4DB43D9E74575D955D7ACEEA0B))]
+[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets014BB5D6474D45D2BC223EFF5732C2AFED56E6A58BD68CA05B66B873DCD93587))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -17,18 +17,18 @@ namespace Edm_EntityMappingGeneratedViews
     /// <Summary>
     /// The type contains views for EntitySets and AssociationSets that were generated at design time.
     /// </Summary>
-    public sealed class ViewsForBaseEntitySets5D74A1159F72BAA670815061915FED7B86F0DB4DB43D9E74575D955D7ACEEA0B : System.Data.Mapping.EntityViewContainer
+    public sealed class ViewsForBaseEntitySets014BB5D6474D45D2BC223EFF5732C2AFED56E6A58BD68CA05B66B873DCD93587 : System.Data.Mapping.EntityViewContainer
     {
         
         /// <Summary>
         /// The constructor stores the views for the extents and also the hash values generated based on the metadata and mapping closure and views.
         /// </Summary>
-        public ViewsForBaseEntitySets5D74A1159F72BAA670815061915FED7B86F0DB4DB43D9E74575D955D7ACEEA0B()
+        public ViewsForBaseEntitySets014BB5D6474D45D2BC223EFF5732C2AFED56E6A58BD68CA05B66B873DCD93587()
         {
             this.EdmEntityContainerName = "BaseDbContext";
             this.StoreEntityContainerName = "SMDModelStoreContainer";
-            this.HashOverMappingClosure = "622d6d381735aaf5eda41fc671d05a9ceea602005371304853f061ab2effc73e";
-            this.HashOverAllExtentViews = "d426fa72f6f900802e1840fffc39782f2e116657ab92fc695ea4c8b4e673320a";
+            this.HashOverMappingClosure = "a8a73c8af58d3acfad343169245e2ec010273eeb199cf6f2e61c8c03800a1d68";
+            this.HashOverAllExtentViews = "edce9d217ad290efc41e442f59e72de88999fc1c8fb7886ac672e3e5fb55a665";
             this.ViewCount = 138;
         }
         
@@ -4319,7 +4319,7 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.Notifications", @"
     SELECT VALUE -- Constructing Notifications
-        [SMDModel.Store.Notifications](T1.Notifications_ID, T1.Notifications_Type, T1.Notifications_UserID, T1.Notifications_IsRead, T1.Notifications_GeneratedOn, T1.Notifications_GeneratedBy, T1.Notifications_SurveyQuestionShareId, T1.Notifications_PhoneNumber)
+        [SMDModel.Store.Notifications](T1.Notifications_ID, T1.Notifications_Type, T1.Notifications_UserID, T1.Notifications_IsRead, T1.Notifications_GeneratedOn, T1.Notifications_GeneratedBy, T1.Notifications_SurveyQuestionShareId, T1.Notifications_PhoneNumber, T1.Notifications_CouponId)
     FROM (
         SELECT 
             T.ID AS Notifications_ID, 
@@ -4330,6 +4330,7 @@ namespace Edm_EntityMappingGeneratedViews
             T.GeneratedBy AS Notifications_GeneratedBy, 
             T.SurveyQuestionShareId AS Notifications_SurveyQuestionShareId, 
             T.PhoneNumber AS Notifications_PhoneNumber, 
+            T.CouponId AS Notifications_CouponId, 
             True AS _from0
         FROM BaseDbContext.Notifications AS T
     ) AS T1");
@@ -4430,7 +4431,7 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Notifications", @"
     SELECT VALUE -- Constructing Notifications
-        [DomainModels.Notification](T1.Notification_ID, T1.Notification_Type, T1.Notification_UserID, T1.Notification_IsRead, T1.Notification_GeneratedOn, T1.Notification_GeneratedBy, T1.Notification_SurveyQuestionShareId, T1.Notification_PhoneNumber)
+        [DomainModels.Notification](T1.Notification_ID, T1.Notification_Type, T1.Notification_UserID, T1.Notification_IsRead, T1.Notification_GeneratedOn, T1.Notification_GeneratedBy, T1.Notification_SurveyQuestionShareId, T1.Notification_PhoneNumber, T1.Notification_CouponId)
     FROM (
         SELECT 
             T.ID AS Notification_ID, 
@@ -4441,6 +4442,7 @@ namespace Edm_EntityMappingGeneratedViews
             T.GeneratedBy AS Notification_GeneratedBy, 
             T.SurveyQuestionShareId AS Notification_SurveyQuestionShareId, 
             T.PhoneNumber AS Notification_PhoneNumber, 
+            T.CouponId AS Notification_CouponId, 
             True AS _from0
         FROM SMDModelStoreContainer.Notifications AS T
     ) AS T1");
@@ -4477,7 +4479,7 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.vw_Notifications", @"
     SELECT VALUE -- Constructing vw_Notifications
-        [SMDModel.Store.vw_Notifications](T1.[vw_Notifications.ID], T1.[vw_Notifications.Type], T1.[vw_Notifications.UserID], T1.[vw_Notifications.IsRead], T1.[vw_Notifications.GeneratedOn], T1.[vw_Notifications.GeneratedBy], T1.[vw_Notifications.SurveyQuestionShareId], T1.[vw_Notifications.PhoneNumber], T1.[vw_Notifications.NotificationDetails], T1.[vw_Notifications.PollTitle])
+        [SMDModel.Store.vw_Notifications](T1.[vw_Notifications.ID], T1.[vw_Notifications.Type], T1.[vw_Notifications.UserID], T1.[vw_Notifications.IsRead], T1.[vw_Notifications.GeneratedOn], T1.[vw_Notifications.GeneratedBy], T1.[vw_Notifications.SurveyQuestionShareId], T1.[vw_Notifications.PhoneNumber], T1.[vw_Notifications.NotificationDetails], T1.[vw_Notifications.PollTitle], T1.[vw_Notifications.SSQID], T1.[vw_Notifications.CouponId], T1.[vw_Notifications.DealTitle])
     FROM (
         SELECT 
             T.ID AS [vw_Notifications.ID], 
@@ -4490,6 +4492,9 @@ namespace Edm_EntityMappingGeneratedViews
             T.PhoneNumber AS [vw_Notifications.PhoneNumber], 
             T.NotificationDetails AS [vw_Notifications.NotificationDetails], 
             T.PollTitle AS [vw_Notifications.PollTitle], 
+            T.SSQID AS [vw_Notifications.SSQID], 
+            T.CouponId AS [vw_Notifications.CouponId], 
+            T.DealTitle AS [vw_Notifications.DealTitle], 
             True AS _from0
         FROM BaseDbContext.vw_Notifications AS T
     ) AS T1");
@@ -4502,7 +4507,7 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.vw_Notifications", @"
     SELECT VALUE -- Constructing vw_Notifications
-        [DomainModels.vw_Notifications](T1.[vw_Notifications.ID], T1.[vw_Notifications.Type], T1.[vw_Notifications.UserID], T1.[vw_Notifications.IsRead], T1.[vw_Notifications.GeneratedOn], T1.[vw_Notifications.GeneratedBy], T1.[vw_Notifications.SurveyQuestionShareId], T1.[vw_Notifications.PhoneNumber], T1.[vw_Notifications.NotificationDetails], T1.[vw_Notifications.PollTitle])
+        [DomainModels.vw_Notifications](T1.[vw_Notifications.ID], T1.[vw_Notifications.Type], T1.[vw_Notifications.UserID], T1.[vw_Notifications.IsRead], T1.[vw_Notifications.GeneratedOn], T1.[vw_Notifications.GeneratedBy], T1.[vw_Notifications.SurveyQuestionShareId], T1.[vw_Notifications.PhoneNumber], T1.[vw_Notifications.NotificationDetails], T1.[vw_Notifications.PollTitle], T1.[vw_Notifications.SSQID], T1.[vw_Notifications.CouponId], T1.[vw_Notifications.DealTitle])
     FROM (
         SELECT 
             T.ID AS [vw_Notifications.ID], 
@@ -4515,6 +4520,9 @@ namespace Edm_EntityMappingGeneratedViews
             T.PhoneNumber AS [vw_Notifications.PhoneNumber], 
             T.NotificationDetails AS [vw_Notifications.NotificationDetails], 
             T.PollTitle AS [vw_Notifications.PollTitle], 
+            T.SSQID AS [vw_Notifications.SSQID], 
+            T.CouponId AS [vw_Notifications.CouponId], 
+            T.DealTitle AS [vw_Notifications.DealTitle], 
             True AS _from0
         FROM SMDModelStoreContainer.vw_Notifications AS T
     ) AS T1");

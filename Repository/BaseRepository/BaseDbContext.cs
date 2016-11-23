@@ -303,8 +303,8 @@ namespace SMD.Repository.BaseRepository
         public DbSet<SurveySharingGroupShare> SurveySharingGroupShare { get; set; }
         public DbSet<SharedSurveyQuestion> SharedSurveyQuestion { get; set; }
 
-
-
+        public DbSet<AspNetUsersNotificationToken> AspNetUsersNotificationToken { get; set; }
+        
 
 
         /// <summary>
