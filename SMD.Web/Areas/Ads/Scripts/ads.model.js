@@ -645,7 +645,8 @@
          typ = ko.observable(source.typ),
          selectedGenderAnalytics = ko.observable(0),
          selectedAgeAnalytics = ko.observable(0),
-         selectedCityAnalytics = ko.observable("All")
+         selectedCityAnalytics = ko.observable("All"),
+         Stats = ko.observable()
 
          
      return {
@@ -655,7 +656,8 @@
          typ: typ,
          selectedGenderAnalytics: selectedGenderAnalytics,
          selectedAgeAnalytics: selectedAgeAnalytics,
-         selectedCityAnalytics: selectedCityAnalytics
+         selectedCityAnalytics: selectedCityAnalytics,
+         Stats:Stats
        
      };
  };

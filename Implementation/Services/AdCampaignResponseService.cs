@@ -20,9 +20,9 @@ namespace SMD.Implementation.Services
         }
 
         #region public
-        public int getCampaignByIdQQFormAnalytic(int CampaignId, int Choice, int Gender, int age, string Profession, string City)
+        public int getCampaignByIdQQFormAnalytic(long CampaignId, int Choice, int Gender, int age, string Profession, string City, int type, int questionId)
         {
-           return _adCampaignResponseRepository.getCampaignByIdQQFormAnalytic(CampaignId,  Choice, Gender, age, Profession, City);
+           return _adCampaignResponseRepository.getCampaignByIdQQFormAnalytic(CampaignId,  Choice, Gender, age, Profession, City, type, questionId);
         }
 
         #endregion

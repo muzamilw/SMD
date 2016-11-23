@@ -218,6 +218,7 @@ define("ads/ads.viewModel",
                           var data = item;
                           dataservice.getQQAnalytic({
                               Id: selectedCampaignIdAnalytics(),
+                              Choice :0,
                               Gender: item.selectedGenderAnalytics(),
                               age: item.selectedQQAAnalytics(),
                               profession: "All",
@@ -240,7 +241,6 @@ define("ads/ads.viewModel",
 
                       },
                 getQQAnalytic = function () {
-                   
                     dataservice.getQQAnalytic({
                         Id: selectedCampaignIdAnalytics(),
                         Choice: selectedQQCAnalytics(),
@@ -1124,17 +1124,7 @@ define("ads/ads.viewModel",
                 else {
                     campaignModel().IsUseFilter('1');
                 }
-                if (campaignModel().IsUseFilter() == 0) {
-
-                    toastr.error("No Target Match.");
-                }
-                else {
-
-
-                }
-                else {
-                    campaignModel().IsUseFilter('1');
-                }
+               
                 if (campaignModel().IsUseFilter() == 0) {
 
                     toastr.error("No Target Match.");
@@ -3727,14 +3717,9 @@ define("ads/ads.viewModel",
                     isflageClose: isflageClose,
                     Changefilter: Changefilter,
                     ChangeBroadfilter: ChangeBroadfilter,
-                    isflageClose: isflageClose,
                     formAnalyticsData: formAnalyticsData,
                     getQAnalytic: getQAnalytic,
-                    Changefilter: Changefilter,
-                    ChangeBroadfilter: ChangeBroadfilter,
                     QQStatsAnalytics:QQStatsAnalytics,
-                    isflageClose: isflageClose,
-                    formAnalyticsData: formAnalyticsData,
                     IsBroadMarketing: IsBroadMarketing
                 };
             })()

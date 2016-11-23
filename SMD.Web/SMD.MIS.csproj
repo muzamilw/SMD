@@ -446,6 +446,7 @@
     <Compile Include="Areas\Api\Models\Dashboard_analytics_Result.cs" />
     <Compile Include="Areas\Api\Models\DealByCouponIdForAnalyticsResponse.cs" />
     <Compile Include="Areas\Api\Models\FormAnalyticResponseModel.cs" />
+    <Compile Include="Areas\Api\Models\FormDataAnalyticResponse.cs" />
     <Compile Include="Areas\Api\Models\GetApprovalCount_Result.cs" />
     <Compile Include="Areas\Api\Models\GenerateSMSResponse.cs" />
     <Compile Include="Areas\Api\Models\SharedSurveyQuestionResponse.cs" />

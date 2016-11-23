@@ -18,13 +18,14 @@ namespace SMD.MIS.Areas.Api.Controllers
         private readonly ICityService _ICityService;
         private readonly IActiveUser _IActiveUser;
         private readonly IAdvertService _IAdvertService;
+        private readonly IAdCampaignResponseService _IAdCampaignResponseService;
         #endregion
-        public FormAnalyticController(ICityService _ICityService, IActiveUser _IActiveUser, IAdvertService IAdvertService)
+        public FormAnalyticController(ICityService _ICityService, IActiveUser _IActiveUser, IAdvertService IAdvertService, IAdCampaignResponseService IAdCampaignResponseService)
         {
             this._IActiveUser = _IActiveUser;
             this._ICityService = _ICityService;
             this._IAdvertService = IAdvertService;
-
+            this._IAdCampaignResponseService = IAdCampaignResponseService;
         }
         // GET: api/FormAnalytic
         public FormAnalyticDDResponseModel Get(long Id)
@@ -73,7 +74,15 @@ namespace SMD.MIS.Areas.Api.Controllers
                 ChoicesList.Add(chc3);
             }
             data.Choices = ChoicesList;
-            data.formData = _IAdvertService.getCampaignByIdFormDataAnalytic(Id);
+
+            List<getCampaignByIdFormDataAnalytic_Result> list =  _IAdvertService.getCampaignByIdFormDataAnalytic(Id);
+            List<FormDataAnalyticResponse> listformData = new List<FormDataAnalyticResponse>(); 
+            foreach (getCampaignByIdFormDataAnalytic_Result item in list) {
+                int stat = _IAdCampaignResponseService.getCampaignByIdQQFormAnalytic(Id, 0, 0, 0, "All", "All", item.typ, item.Id!= null ? (int)item.Id : 0);
+                FormDataAnalyticResponse dataItem = new FormDataAnalyticResponse(item.Question, item.answer, item.Id != null ? (long)item.Id : 0, item.typ, stat);
+            
+            }
+            data.formData = listformData;
             return data;
         }
 
