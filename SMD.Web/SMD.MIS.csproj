@@ -446,6 +446,7 @@
     <Compile Include="Areas\Api\Models\Dashboard_analytics_Result.cs" />
     <Compile Include="Areas\Api\Models\DealByCouponIdForAnalyticsResponse.cs" />
     <Compile Include="Areas\Api\Models\FormAnalyticResponseModel.cs" />
+    <Compile Include="Areas\Api\Models\FormDataAnalyticResponse.cs" />
     <Compile Include="Areas\Api\Models\GetApprovalCount_Result.cs" />
     <Compile Include="Areas\Api\Models\GenerateSMSResponse.cs" />
     <Compile Include="Areas\Api\Models\SharedSurveyQuestionResponse.cs" />
@@ -899,6 +900,7 @@
     <Content Include="Content\Images\arrow-up-small.png" />
     <Content Include="Content\Images\arrow-up.png" />
     <Content Include="Content\Images\Back_Footer_Tab.png" />
+    <Content Include="Content\Images\Cash_4_ads_Dial.png" />
     <Content Include="Content\Images\Charts.png" />
     <Content Include="Content\Images\Close_Button.png" />
     <Content Include="Content\Images\colorpicker_background.png" />
@@ -943,8 +945,10 @@
     <Content Include="Content\Images\LinkedInNew.png" />
     <Content Include="Content\Images\meter.png" />
     <Content Include="Content\Images\movie_up.png" />
+    <Content Include="Content\Images\Phone_Preview.png" />
     <Content Include="Content\Images\pin.png" />
     <Content Include="Content\Images\placeholder.png" />
+    <Content Include="Content\Images\Plaz%402x.png" />
     <Content Include="Content\Images\Pollmod.png" />
     <Content Include="Content\Images\Polls.png" />
     <Content Include="Content\Images\Polls_small.png" />

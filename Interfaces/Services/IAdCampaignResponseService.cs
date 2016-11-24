@@ -8,6 +8,6 @@ namespace SMD.Interfaces.Services
 {
     public interface IAdCampaignResponseService
     {
-        int getCampaignByIdQQFormAnalytic(int CampaignId, int Choice, int Gender, int age, string Profession, string City);
+        int getCampaignByIdQQFormAnalytic(long CampaignId, int Choice, int Gender, int age, string Profession, string City, int type, int questionId);
     }
 }
