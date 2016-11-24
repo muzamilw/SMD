@@ -185,12 +185,12 @@
         <AssociationConnector Association="SMDDevModel.FK_SurveySharingGroupShares_SharedSurveyQuestion" />
         <AssociationConnector Association="SMDDevModel.FK_SurveySharingGroupShares_SurveySharingGroupMembers" />
         <AssociationConnector Association="SMDDevModel.FK_SharedSurveyQuestion_SurveySharingGroup" />
-        <EntityTypeShape EntityType="SMDDevModel.vw_Notifications" Width="1.5" PointX="13.375" PointY="0.75" />
         <EntityTypeShape EntityType="SMDDevModel.CouponRatingReview" Width="1.5" PointX="17.25" PointY="73.125" />
         <AssociationConnector Association="SMDDevModel.FK_CouponRatingReview_Coupon" />
         <AssociationConnector Association="SMDDevModel.FK_AspNetUsers_Country" />
         <EntityTypeShape EntityType="SMDDevModel.AspNetUsersNotificationToken" Width="1.5" PointX="12.75" PointY="62.625" />
         <AssociationConnector Association="SMDDevModel.FK_AspNetUsersNotificationTokens_AspNetUsers" />
+        <EntityTypeShape EntityType="SMDDevModel.vw_Notifications" Width="1.5" PointX="13.375" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

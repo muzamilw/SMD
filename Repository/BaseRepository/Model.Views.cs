@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetsB425425A90BEE3AE36F8A495F0108AB712A0098C9CD54B66ED918A0C348CD932))]
+[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets92CED1ECFF8C519C3E191EB93A73B5368EC7FCDD894A4448C24043D4C1D0EDC7))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -17,18 +17,18 @@ namespace Edm_EntityMappingGeneratedViews
     /// <Summary>
     /// The type contains views for EntitySets and AssociationSets that were generated at design time.
     /// </Summary>
-    public sealed class ViewsForBaseEntitySetsB425425A90BEE3AE36F8A495F0108AB712A0098C9CD54B66ED918A0C348CD932 : System.Data.Mapping.EntityViewContainer
+    public sealed class ViewsForBaseEntitySets92CED1ECFF8C519C3E191EB93A73B5368EC7FCDD894A4448C24043D4C1D0EDC7 : System.Data.Mapping.EntityViewContainer
     {
         
         /// <Summary>
         /// The constructor stores the views for the extents and also the hash values generated based on the metadata and mapping closure and views.
         /// </Summary>
-        public ViewsForBaseEntitySetsB425425A90BEE3AE36F8A495F0108AB712A0098C9CD54B66ED918A0C348CD932()
+        public ViewsForBaseEntitySets92CED1ECFF8C519C3E191EB93A73B5368EC7FCDD894A4448C24043D4C1D0EDC7()
         {
             this.EdmEntityContainerName = "BaseDbContext";
             this.StoreEntityContainerName = "SMDModelStoreContainer";
-            this.HashOverMappingClosure = "953bab5c907a3d94d4713d4e43559a4b54075bb8daf42c60d9b68a2caed5ffd9";
-            this.HashOverAllExtentViews = "749fdf768d326eb7b995de39d0f2c50a0ab360ef84fb2cd8db03f361574fead2";
+            this.HashOverMappingClosure = "7d34553c8febcff2252763dbbcf1b93ee7202a8421433f8b4b616fde24e5b0c3";
+            this.HashOverAllExtentViews = "87bad45715da103a543174600e8c7183b91c965272047d3afb806225fb463b36";
             this.ViewCount = 138;
         }
         
@@ -4479,27 +4479,32 @@ namespace Edm_EntityMappingGeneratedViews
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView136()
         {
-            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.vw_Notifications", @"
-    SELECT VALUE -- Constructing vw_Notifications
-        [SMDModel.Store.vw_Notifications](T1.[vw_Notifications.ID], T1.[vw_Notifications.Type], T1.[vw_Notifications.UserID], T1.[vw_Notifications.IsRead], T1.[vw_Notifications.GeneratedOn], T1.[vw_Notifications.GeneratedBy], T1.[vw_Notifications.SurveyQuestionShareId], T1.[vw_Notifications.PhoneNumber], T1.[vw_Notifications.NotificationDetails], T1.[vw_Notifications.PollTitle], T1.[vw_Notifications.SSQID], T1.[vw_Notifications.CouponId], T1.[vw_Notifications.DealTitle])
-    FROM (
-        SELECT 
-            T.ID AS [vw_Notifications.ID], 
-            T.Type AS [vw_Notifications.Type], 
-            T.UserID AS [vw_Notifications.UserID], 
-            T.IsRead AS [vw_Notifications.IsRead], 
-            T.GeneratedOn AS [vw_Notifications.GeneratedOn], 
-            T.GeneratedBy AS [vw_Notifications.GeneratedBy], 
-            T.SurveyQuestionShareId AS [vw_Notifications.SurveyQuestionShareId], 
-            T.PhoneNumber AS [vw_Notifications.PhoneNumber], 
-            T.NotificationDetails AS [vw_Notifications.NotificationDetails], 
-            T.PollTitle AS [vw_Notifications.PollTitle], 
-            T.SSQID AS [vw_Notifications.SSQID], 
-            T.CouponId AS [vw_Notifications.CouponId], 
-            T.DealTitle AS [vw_Notifications.DealTitle], 
-            True AS _from0
-        FROM BaseDbContext.vw_Notifications AS T
-    ) AS T1");
+            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.vw_Notifications", "\r\n    SELECT VALUE -- Constructing vw_Notifications\r\n        [SMDModel.Store.vw_N" +
+                    "otifications](T1.[vw_Notifications.ID], T1.[vw_Notifications.Type], T1.[vw_Notif" +
+                    "ications.UserID], T1.[vw_Notifications.IsRead], T1.[vw_Notifications.GeneratedOn" +
+                    "], T1.[vw_Notifications.GeneratedBy], T1.[vw_Notifications.SurveyQuestionShareId" +
+                    "], T1.[vw_Notifications.PhoneNumber], T1.[vw_Notifications.NotificationDetails]," +
+                    " T1.[vw_Notifications.PollTitle], T1.[vw_Notifications.SSQID], T1.[vw_Notificati" +
+                    "ons.CouponId], T1.[vw_Notifications.DealTitle], T1.[vw_Notifications.DealPrice]," +
+                    " T1.[vw_Notifications.DealSavings], T1.[vw_Notifications.DealCount], T1.[vw_Noti" +
+                    "fications.DealDescription], T1.[vw_Notifications.DealCompany], T1.[vw_Notificati" +
+                    "ons.DealCity])\r\n    FROM (\r\n        SELECT \r\n            T.ID AS [vw_Notificatio" +
+                    "ns.ID], \r\n            T.Type AS [vw_Notifications.Type], \r\n            T.UserID " +
+                    "AS [vw_Notifications.UserID], \r\n            T.IsRead AS [vw_Notifications.IsRead" +
+                    "], \r\n            T.GeneratedOn AS [vw_Notifications.GeneratedOn], \r\n            " +
+                    "T.GeneratedBy AS [vw_Notifications.GeneratedBy], \r\n            T.SurveyQuestionS" +
+                    "hareId AS [vw_Notifications.SurveyQuestionShareId], \r\n            T.PhoneNumber " +
+                    "AS [vw_Notifications.PhoneNumber], \r\n            T.NotificationDetails AS [vw_No" +
+                    "tifications.NotificationDetails], \r\n            T.PollTitle AS [vw_Notifications" +
+                    ".PollTitle], \r\n            T.SSQID AS [vw_Notifications.SSQID], \r\n            T." +
+                    "CouponId AS [vw_Notifications.CouponId], \r\n            T.DealTitle AS [vw_Notifi" +
+                    "cations.DealTitle], \r\n            T.DealPrice AS [vw_Notifications.DealPrice], \r" +
+                    "\n            T.DealSavings AS [vw_Notifications.DealSavings], \r\n            T.De" +
+                    "alCount AS [vw_Notifications.DealCount], \r\n            T.DealDescription AS [vw_" +
+                    "Notifications.DealDescription], \r\n            T.DealCompany AS [vw_Notifications" +
+                    ".DealCompany], \r\n            T.DealCity AS [vw_Notifications.DealCity], \r\n      " +
+                    "      True AS _from0\r\n        FROM BaseDbContext.vw_Notifications AS T\r\n    ) AS" +
+                    " T1");
         }
         
         /// <Summary>
@@ -4507,27 +4512,32 @@ namespace Edm_EntityMappingGeneratedViews
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView137()
         {
-            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.vw_Notifications", @"
-    SELECT VALUE -- Constructing vw_Notifications
-        [DomainModels.vw_Notifications](T1.[vw_Notifications.ID], T1.[vw_Notifications.Type], T1.[vw_Notifications.UserID], T1.[vw_Notifications.IsRead], T1.[vw_Notifications.GeneratedOn], T1.[vw_Notifications.GeneratedBy], T1.[vw_Notifications.SurveyQuestionShareId], T1.[vw_Notifications.PhoneNumber], T1.[vw_Notifications.NotificationDetails], T1.[vw_Notifications.PollTitle], T1.[vw_Notifications.SSQID], T1.[vw_Notifications.CouponId], T1.[vw_Notifications.DealTitle])
-    FROM (
-        SELECT 
-            T.ID AS [vw_Notifications.ID], 
-            T.Type AS [vw_Notifications.Type], 
-            T.UserID AS [vw_Notifications.UserID], 
-            T.IsRead AS [vw_Notifications.IsRead], 
-            T.GeneratedOn AS [vw_Notifications.GeneratedOn], 
-            T.GeneratedBy AS [vw_Notifications.GeneratedBy], 
-            T.SurveyQuestionShareId AS [vw_Notifications.SurveyQuestionShareId], 
-            T.PhoneNumber AS [vw_Notifications.PhoneNumber], 
-            T.NotificationDetails AS [vw_Notifications.NotificationDetails], 
-            T.PollTitle AS [vw_Notifications.PollTitle], 
-            T.SSQID AS [vw_Notifications.SSQID], 
-            T.CouponId AS [vw_Notifications.CouponId], 
-            T.DealTitle AS [vw_Notifications.DealTitle], 
-            True AS _from0
-        FROM SMDModelStoreContainer.vw_Notifications AS T
-    ) AS T1");
+            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.vw_Notifications", "\r\n    SELECT VALUE -- Constructing vw_Notifications\r\n        [DomainModels.vw_Not" +
+                    "ifications](T1.[vw_Notifications.ID], T1.[vw_Notifications.Type], T1.[vw_Notific" +
+                    "ations.UserID], T1.[vw_Notifications.IsRead], T1.[vw_Notifications.GeneratedOn]," +
+                    " T1.[vw_Notifications.GeneratedBy], T1.[vw_Notifications.SurveyQuestionShareId]," +
+                    " T1.[vw_Notifications.PhoneNumber], T1.[vw_Notifications.NotificationDetails], T" +
+                    "1.[vw_Notifications.PollTitle], T1.[vw_Notifications.SSQID], T1.[vw_Notification" +
+                    "s.CouponId], T1.[vw_Notifications.DealTitle], T1.[vw_Notifications.DealPrice], T" +
+                    "1.[vw_Notifications.DealSavings], T1.[vw_Notifications.DealCount], T1.[vw_Notifi" +
+                    "cations.DealDescription], T1.[vw_Notifications.DealCompany], T1.[vw_Notification" +
+                    "s.DealCity])\r\n    FROM (\r\n        SELECT \r\n            T.ID AS [vw_Notifications" +
+                    ".ID], \r\n            T.Type AS [vw_Notifications.Type], \r\n            T.UserID AS" +
+                    " [vw_Notifications.UserID], \r\n            T.IsRead AS [vw_Notifications.IsRead]," +
+                    " \r\n            T.GeneratedOn AS [vw_Notifications.GeneratedOn], \r\n            T." +
+                    "GeneratedBy AS [vw_Notifications.GeneratedBy], \r\n            T.SurveyQuestionSha" +
+                    "reId AS [vw_Notifications.SurveyQuestionShareId], \r\n            T.PhoneNumber AS" +
+                    " [vw_Notifications.PhoneNumber], \r\n            T.NotificationDetails AS [vw_Noti" +
+                    "fications.NotificationDetails], \r\n            T.PollTitle AS [vw_Notifications.P" +
+                    "ollTitle], \r\n            T.SSQID AS [vw_Notifications.SSQID], \r\n            T.Co" +
+                    "uponId AS [vw_Notifications.CouponId], \r\n            T.DealTitle AS [vw_Notifica" +
+                    "tions.DealTitle], \r\n            T.DealPrice AS [vw_Notifications.DealPrice], \r\n " +
+                    "           T.DealSavings AS [vw_Notifications.DealSavings], \r\n            T.Deal" +
+                    "Count AS [vw_Notifications.DealCount], \r\n            T.DealDescription AS [vw_No" +
+                    "tifications.DealDescription], \r\n            T.DealCompany AS [vw_Notifications.D" +
+                    "ealCompany], \r\n            T.DealCity AS [vw_Notifications.DealCity], \r\n        " +
+                    "    True AS _from0\r\n        FROM SMDModelStoreContainer.vw_Notifications AS T\r\n " +
+                    "   ) AS T1");
         }
     }
 }

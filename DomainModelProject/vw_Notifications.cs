@@ -26,6 +26,12 @@ namespace DomainModelProject
         public string PollTitle { get; set; }
         public Nullable<long> SSQID { get; set; }
         public Nullable<long> CouponId { get; set; }
-        public Nullable<int> DealTitle { get; set; }
+        public string DealTitle { get; set; }
+        public double DealPrice { get; set; }
+        public double DealSavings { get; set; }
+        public int DealCount { get; set; }
+        public string DealDescription { get; set; }
+        public string DealCompany { get; set; }
+        public string DealCity { get; set; }
     }
 }
