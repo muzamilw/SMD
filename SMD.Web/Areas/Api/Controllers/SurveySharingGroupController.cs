@@ -103,29 +103,32 @@ namespace SMD.MIS.Areas.Api.Controllers
             try
             {
 
-          
-
-            if (string.IsNullOrEmpty(group.GroupName))
-                throw new Exception("Group name cannot be empty");
-
-            Mapper.Initialize(cfg =>
-            {
-                cfg.CreateMap<SurveySharingGroupApiModel, SurveySharingGroup>();
-                cfg.CreateMap<SurveySharingGroupMemberApiModel, SurveySharingGroupMember>();
-            });
 
 
-            var result = surveySharingGroupService.Create(Mapper.Map<SurveySharingGroupApiModel, SurveySharingGroup>(group));
+                if (string.IsNullOrEmpty(group.GroupName))
+                    throw new Exception("Group name cannot be empty");
 
-            Mapper.Initialize(cfg =>
-            {
-                cfg.CreateMap<SurveySharingGroup, SurveySharingGroupApiModel>();
-                cfg.CreateMap<SurveySharingGroupMember, SurveySharingGroupMemberApiModel>();
-            });
+                Mapper.Initialize(cfg =>
+                {
+                    cfg.CreateMap<SurveySharingGroupApiModel, SurveySharingGroup>();
+                    cfg.CreateMap<SurveySharingGroupMemberApiModel, SurveySharingGroupMember>();
+                });
 
 
-            return new SurveySharingGroupApiResponseModel { SurveySharingGroup = Mapper.Map<SurveySharingGroup, SurveySharingGroupApiModel>(result), Message = "success", Status = true };
+                var result = surveySharingGroupService.Create(Mapper.Map<SurveySharingGroupApiModel, SurveySharingGroup>(group));
 
+                Mapper.Initialize(cfg =>
+                {
+                    cfg.CreateMap<SurveySharingGroup, SurveySharingGroupApiModel>();
+                    cfg.CreateMap<SurveySharingGroupMember, SurveySharingGroupMemberApiModel>();
+                });
+
+
+                return new SurveySharingGroupApiResponseModel { SurveySharingGroup = Mapper.Map<SurveySharingGroup, SurveySharingGroupApiModel>(result), Message = "success", Status = true };
+
+               
+
+             
             }
             catch (Exception e)
             {

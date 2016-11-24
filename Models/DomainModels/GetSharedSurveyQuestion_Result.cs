@@ -32,5 +32,9 @@ namespace SMD.Models.DomainModels
         public string GroupName { get; set; }
         public Nullable<int> LeftAnswerPerc { get; set; }
         public Nullable<int> RightAnswerPerc { get; set; }
+
+        public string SenderFullName { get; set; }
+
+        public string SenderProfileImage { get; set; }
     }
 }

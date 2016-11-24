@@ -3368,3 +3368,7 @@ FROM            dbo.Notifications n
 GO
 
 
+
+
+ALTER TABLE SurveyQuestion
+ADD IsUseFilter bit null

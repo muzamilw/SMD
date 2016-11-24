@@ -83,11 +83,11 @@ namespace SMD.MIS.Areas.Api.Controllers
         }
 
 
-        public BaseApiResponse Post(string authenticationToken, long SurveyQuestionShareId, int UserSelection)
+        public BaseApiResponse Post(string authenticationToken, long SurveyQuestionShareId, int UserSelection, string UserId)
         {
             try
             {
-                if (sharedSurveyQuestionService.updateUserSharedSurveyQuestionResponse(SurveyQuestionShareId, UserSelection) == true)
+                if (sharedSurveyQuestionService.updateUserSharedSurveyQuestionResponse(SurveyQuestionShareId, UserSelection, UserId) == true)
                 {
                     return new BaseApiResponse { Message = "Success", Status = true };
                 }
