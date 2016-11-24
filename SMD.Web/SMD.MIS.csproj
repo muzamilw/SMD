@@ -613,6 +613,13 @@
     <Compile Include="Areas\Survey\SurveyAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UnauthorizedRequestController.cs" />
+    <Compile Include="Emails\AccountVerify.aspx.cs">
+      <DependentUpon>AccountVerify.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\AccountVerify.aspx.designer.cs">
+      <DependentUpon>AccountVerify.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Emails\Video_Performance.aspx.cs">
       <DependentUpon>Video_Performance.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1258,6 +1265,7 @@
     <Content Include="Content\themes\Centaurus\js\typeahead.min.js" />
     <Content Include="Content\themes\Centaurus\js\wizard.js" />
     <Content Include="Content\themes\Centaurus\js\xcharts.js" />
+    <Content Include="Emails\AccountVerify.aspx" />
     <Content Include="Emails\Video_Performance.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />

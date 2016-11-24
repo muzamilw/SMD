@@ -1237,6 +1237,9 @@ namespace SMD.Implementation.Services
             // Login user
             LoginUser(request.Email);
 
+
+            await emailManagerService.SendRegisrationSuccessEmail(user.Id);
+
             return new LoginResponse
             {
                 Status = true,
