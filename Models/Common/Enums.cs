@@ -22,7 +22,7 @@
     }
 
     /// <summary>
-    /// System Email Types
+    /// System Email Types 
     /// </summary>
     public enum EmailTypes
     {

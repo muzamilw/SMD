@@ -1288,6 +1288,12 @@ warning 6002: The table/view 'SMDDev.dbo.vw_Notifications' does not have a prima
         <EntityType Name="vw_Notifications">
           <Key>
             <PropertyRef Name="ID" />
+            <PropertyRef Name="DealPrice" />
+            <PropertyRef Name="DealSavings" />
+            <PropertyRef Name="DealCount" />
+            <PropertyRef Name="DealDescription" />
+            <PropertyRef Name="DealCompany" />
+            <PropertyRef Name="DealCity" />
           </Key>
           <Property Name="ID" Type="bigint" Nullable="false" />
           <Property Name="Type" Type="int" />
@@ -1302,6 +1308,12 @@ warning 6002: The table/view 'SMDDev.dbo.vw_Notifications' does not have a prima
           <Property Name="SSQID" Type="bigint" />
           <Property Name="CouponId" Type="bigint" />
           <Property Name="DealTitle" Type="nvarchar" MaxLength="200" />
+          <Property Name="DealPrice" Type="float" Nullable="false" />
+          <Property Name="DealSavings" Type="float" Nullable="false" />
+          <Property Name="DealCount" Type="int" Nullable="false" />
+          <Property Name="DealDescription" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="DealCompany" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DealCity" Type="nvarchar" MaxLength="500" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -3015,7 +3027,13 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
     [vw_Notifications].[PollTitle] AS [PollTitle], 
     [vw_Notifications].[SSQID] AS [SSQID], 
     [vw_Notifications].[CouponId] AS [CouponId], 
-    [vw_Notifications].[DealTitle] AS [DealTitle]
+    [vw_Notifications].[DealTitle] AS [DealTitle], 
+    [vw_Notifications].[DealPrice] AS [DealPrice], 
+    [vw_Notifications].[DealSavings] AS [DealSavings], 
+    [vw_Notifications].[DealCount] AS [DealCount], 
+    [vw_Notifications].[DealDescription] AS [DealDescription], 
+    [vw_Notifications].[DealCompany] AS [DealCompany], 
+    [vw_Notifications].[DealCity] AS [DealCity]
     FROM [dbo].[vw_Notifications] AS [vw_Notifications]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vw_ReferringCompanies" EntityType="Self.vw_ReferringCompanies" store:Type="Views" store:Schema="dbo">
@@ -5868,7 +5886,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <FunctionImport Name="GetSharedSurveyQuestionsByUserId" ReturnType="Collection(SMDDevModel.GetSharedSurveyQuestionsByUserId_Result)">
           <Parameter Name="UserId" Mode="In" Type="String" />
           </FunctionImport>
-          <EntitySet Name="vw_Notifications" EntityType="SMDDevModel.vw_Notifications" />
           <FunctionImport Name="getCampaignByIdFormDataAnalytic" ReturnType="Collection(SMDDevModel.getCampaignByIdFormDataAnalytic_Result)">
           <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -5894,6 +5911,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="AspNetUsersNotificationToken" EntitySet="AspNetUsersNotificationTokens" />
           </AssociationSet>
+          <EntitySet Name="vw_Notifications" EntityType="SMDDevModel.vw_Notifications" />
           </EntityContainer>
         <EntityType Name="CouponCategories">
           <Key>
@@ -7476,24 +7494,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="Int32" Name="LeftAnswerPerc" Nullable="true" />
           <Property Type="Int32" Name="RightAnswerPerc" Nullable="true" />
         </ComplexType>
-        <EntityType Name="vw_Notifications">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" />
-          <Property Name="Type" Type="Int32" />
-          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="IsRead" Type="Boolean" />
-          <Property Name="GeneratedOn" Type="DateTime" Precision="3" />
-          <Property Name="GeneratedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="SurveyQuestionShareId" Type="Int64" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="NotificationDetails" Type="String" MaxLength="219" FixedLength="false" Unicode="true" />
-          <Property Name="PollTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="SSQID" Type="Int64" />
-          <Property Name="CouponId" Type="Int64" />
-          <Property Name="DealTitle" Type="Int32" />
-        </EntityType>
         <ComplexType Name="getCampaignByIdFormDataAnalytic_Result">
           <Property Type="String" Name="Question" Nullable="true" MaxLength="500" />
           <Property Type="String" Name="answer" Nullable="true" MaxLength="500" />
@@ -7564,6 +7564,36 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="vw_Notifications">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="DealPrice" />
+            <PropertyRef Name="DealSavings" />
+            <PropertyRef Name="DealCount" />
+            <PropertyRef Name="DealDescription" />
+            <PropertyRef Name="DealCompany" />
+            <PropertyRef Name="DealCity" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="Type" Type="Int32" />
+          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IsRead" Type="Boolean" />
+          <Property Name="GeneratedOn" Type="DateTime" Precision="3" />
+          <Property Name="GeneratedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="SurveyQuestionShareId" Type="Int64" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="NotificationDetails" Type="String" MaxLength="219" FixedLength="false" Unicode="true" />
+          <Property Name="PollTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SSQID" Type="Int64" />
+          <Property Name="CouponId" Type="Int64" />
+          <Property Name="DealTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="DealPrice" Type="Double" Nullable="false" />
+          <Property Name="DealSavings" Type="Double" Nullable="false" />
+          <Property Name="DealCount" Type="Int32" Nullable="false" />
+          <Property Name="DealDescription" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="DealCompany" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DealCity" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -9500,25 +9530,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="vw_Notifications">
-            <EntityTypeMapping TypeName="SMDDevModel.vw_Notifications">
-              <MappingFragment StoreEntitySet="vw_Notifications">
-                <ScalarProperty Name="DealTitle" ColumnName="DealTitle" />
-                <ScalarProperty Name="CouponId" ColumnName="CouponId" />
-                <ScalarProperty Name="SSQID" ColumnName="SSQID" />
-                <ScalarProperty Name="PollTitle" ColumnName="PollTitle" />
-                <ScalarProperty Name="NotificationDetails" ColumnName="NotificationDetails" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="SurveyQuestionShareId" ColumnName="SurveyQuestionShareId" />
-                <ScalarProperty Name="GeneratedBy" ColumnName="GeneratedBy" />
-                <ScalarProperty Name="GeneratedOn" ColumnName="GeneratedOn" />
-                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="getCampaignByIdFormDataAnalytic" FunctionName="SMDDevModel.Store.getCampaignByIdFormDataAnalytic">
             <ResultMapping>
               <ComplexTypeMapping TypeName="SMDDevModel.getCampaignByIdFormDataAnalytic_Result">
@@ -9555,6 +9566,31 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
                 <ScalarProperty Name="ClientType" ColumnName="ClientType" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="NotificationTokenId" ColumnName="NotificationTokenId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_Notifications">
+            <EntityTypeMapping TypeName="SMDDevModel.vw_Notifications">
+              <MappingFragment StoreEntitySet="vw_Notifications">
+                <ScalarProperty Name="DealCity" ColumnName="DealCity" />
+                <ScalarProperty Name="DealCompany" ColumnName="DealCompany" />
+                <ScalarProperty Name="DealDescription" ColumnName="DealDescription" />
+                <ScalarProperty Name="DealCount" ColumnName="DealCount" />
+                <ScalarProperty Name="DealSavings" ColumnName="DealSavings" />
+                <ScalarProperty Name="DealPrice" ColumnName="DealPrice" />
+                <ScalarProperty Name="DealTitle" ColumnName="DealTitle" />
+                <ScalarProperty Name="CouponId" ColumnName="CouponId" />
+                <ScalarProperty Name="SSQID" ColumnName="SSQID" />
+                <ScalarProperty Name="PollTitle" ColumnName="PollTitle" />
+                <ScalarProperty Name="NotificationDetails" ColumnName="NotificationDetails" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SurveyQuestionShareId" ColumnName="SurveyQuestionShareId" />
+                <ScalarProperty Name="GeneratedBy" ColumnName="GeneratedBy" />
+                <ScalarProperty Name="GeneratedOn" ColumnName="GeneratedOn" />
+                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

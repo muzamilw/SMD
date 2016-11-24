@@ -1,6 +1,6 @@
 ﻿
 GO
-/****** Object:  StoredProcedure [dbo].[GetCouponByID]    Script Date: 11/21/2016 6:07:28 PM ******/
+/****** Object:  StoredProcedure [dbo].[GetCouponByID]    Script Date: 11/24/2016 10:28:43 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -49,6 +49,16 @@ INSERT INTO [dbo].[UserCouponView]
            (@CouponId
            ,@UserId
            ,GETDATE(),@Lat,@Lon)
+
+
+		   --handle notification scenario and mark it read.
+
+		   declare @userphone nvarchar(128)
+		    select @userphone = right(replace(phone1,' ',''),9) from aspnetusers where id = @UserId
+
+		   update notifications
+		   set isread = 1
+		   where couponID = @couponid and (Userid = @Userid or right(replace(phonenumber,' ',''),9) = @userphone)
 
 
 SELECT c.[CouponId]

@@ -5371,8 +5371,33 @@ div#spinnerAudience {
 color:red !important;
 }
 .preview_screen_advtlogo{
-    width: 150px;
+    width: 108px;
+    height:50px;
     margin-bottom: 10px;
+}
+.modify_btn {
+        width: 100%;
+   
+    background-color: #262626;
+    border-color: #262626;
+    height: 45px;
+    color: white;
+}
+.preview_video {
+         width: 258px;
+    height:170px;
+    display: block;
+    background-color: black;
+    /* padding-bottom: 2px; */
+    /* margin-bottom: 120px; */
+    padding: 15px;
+
+
+
+}
+.logocont {
+    padding-top:52px;  text-align: center;
+    height:126px;
 }
 .preview_screen_vouchrRWlbl{
     font-size: 18px;    color: red;
@@ -5469,19 +5494,34 @@ color:red !important;
     position:absolute;
 }
 .preview_stencilImg {
-     background: url('/Images/iphoneStencil.png');
+     background: url('/Content/Images/Phone_Preview.png');
     background-repeat: no-repeat;
     height: 637px;
     background-size: 100% 100%;
 }
 .preview_topImgCnt {
    width: 89%;
-    margin: auto;     margin-top: 71px;
+    margin: auto;
+    margin-top: 94px;
+    /* border-radius: 118px; */
+    display:none;
+}
+.mobBck {
+    background-color:white;width: 258px;margin-left: 18px;margin-top: 67px;
+    border-radius:2px;
+}
+.buybtn {
+    height:44px;
+    background-color:#1d7bbb!important;
+    border-color:#1d7bbb!important;
+    width:200px;
+        border-radius: 8px;
+        color:white;
 }
 .preview_close {
-    position: absolute;
-    right: 20px;
-    top: 25px;
+        position: absolute;
+    right: -1px;
+    top:-20px;
     cursor: pointer;
 }
 .ads-numbering-main {

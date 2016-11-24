@@ -1245,6 +1245,12 @@ warning 6002: The table/view 'SMDDev.dbo.vw_Notifications' does not have a prima
         <EntityType Name="vw_Notifications">
           <Key>
             <PropertyRef Name="ID" />
+            <PropertyRef Name="DealPrice" />
+            <PropertyRef Name="DealSavings" />
+            <PropertyRef Name="DealCount" />
+            <PropertyRef Name="DealDescription" />
+            <PropertyRef Name="DealCompany" />
+            <PropertyRef Name="DealCity" />
           </Key>
           <Property Name="ID" Type="bigint" Nullable="false" />
           <Property Name="Type" Type="int" />
@@ -1259,6 +1265,12 @@ warning 6002: The table/view 'SMDDev.dbo.vw_Notifications' does not have a prima
           <Property Name="SSQID" Type="bigint" />
           <Property Name="CouponId" Type="bigint" />
           <Property Name="DealTitle" Type="nvarchar" MaxLength="200" />
+          <Property Name="DealPrice" Type="float" Nullable="false" />
+          <Property Name="DealSavings" Type="float" Nullable="false" />
+          <Property Name="DealCount" Type="int" Nullable="false" />
+          <Property Name="DealDescription" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="DealCompany" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DealCity" Type="nvarchar" MaxLength="500" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -3009,7 +3021,13 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
     [vw_Notifications].[PollTitle] AS [PollTitle], 
     [vw_Notifications].[SSQID] AS [SSQID], 
     [vw_Notifications].[CouponId] AS [CouponId], 
-    [vw_Notifications].[DealTitle] AS [DealTitle]
+    [vw_Notifications].[DealTitle] AS [DealTitle], 
+    [vw_Notifications].[DealPrice] AS [DealPrice], 
+    [vw_Notifications].[DealSavings] AS [DealSavings], 
+    [vw_Notifications].[DealCount] AS [DealCount], 
+    [vw_Notifications].[DealDescription] AS [DealDescription], 
+    [vw_Notifications].[DealCompany] AS [DealCompany], 
+    [vw_Notifications].[DealCity] AS [DealCity]
     FROM [dbo].[vw_Notifications] AS [vw_Notifications]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vw_PublisherTransaction" EntityType="Self.vw_PublisherTransaction" store:Type="Views" store:Schema="dbo">
@@ -7510,21 +7528,23 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="String" Name="UserId" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="CompanyId" Nullable="true" />
           <Property Type="String" Name="SurveyTitle" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="LeftPicturePath" Nullable="true" MaxLength="300" />
-          <Property Type="String" Name="RightPicturePath" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="LeftPicturePath" Nullable="true" MaxLength="327" />
+          <Property Type="String" Name="RightPicturePath" Nullable="true" MaxLength="327" />
           <Property Type="DateTime" Name="CreationDate" Nullable="true" Precision="23" />
           <Property Type="Int64" Name="SharingGroupId" Nullable="true" />
           <Property Type="Int32" Name="TotalShared" Nullable="true" />
-          <Property Type="Int32" Name="TotalAnswers" Nullable="true" />
-          <Property Type="Int32" Name="LeftAnswerCount" Nullable="true" />
-          <Property Type="Int32" Name="RightAnswerCount" Nullable="true" />
-          <Property Type="Int32" Name="LefMmaleCount" Nullable="true" />
-          <Property Type="Int32" Name="LeftFemaleCount" Nullable="true" />
-          <Property Type="Int32" Name="RightMaleCount" Nullable="true" />
-          <Property Type="Int32" Name="RightFemaleCount" Nullable="true" />
+          <Property Type="Int32" Name="TotalAnswers" Nullable="false" />
+          <Property Type="Int32" Name="LeftAnswerCount" Nullable="false" />
+          <Property Type="Int32" Name="RightAnswerCount" Nullable="false" />
+          <Property Type="Int32" Name="LefMmaleCount" Nullable="false" />
+          <Property Type="Int32" Name="LeftFemaleCount" Nullable="false" />
+          <Property Type="Int32" Name="RightMaleCount" Nullable="false" />
+          <Property Type="Int32" Name="RightFemaleCount" Nullable="false" />
           <Property Type="String" Name="GroupName" Nullable="true" MaxLength="500" />
           <Property Type="Int32" Name="LeftAnswerPerc" Nullable="true" />
           <Property Type="Int32" Name="RightAnswerPerc" Nullable="true" />
+          <Property Type="String" Name="SenderFullName" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="SenderProfileImage" Nullable="true" MaxLength="200" />
         </ComplexType>
         <ComplexType Name="Dashboard_analytics_Result">
           <Property Type="Int64" Name="CampaignID" Nullable="true" />
@@ -7636,6 +7656,12 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
         <EntityType Name="vw_Notifications">
           <Key>
             <PropertyRef Name="ID" />
+            <PropertyRef Name="DealPrice" />
+            <PropertyRef Name="DealSavings" />
+            <PropertyRef Name="DealCount" />
+            <PropertyRef Name="DealDescription" />
+            <PropertyRef Name="DealCompany" />
+            <PropertyRef Name="DealCity" />
           </Key>
           <Property Name="ID" Type="Int64" Nullable="false" />
           <Property Name="Type" Type="Int32" />
@@ -7650,6 +7676,12 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="SSQID" Type="Int64" />
           <Property Name="CouponId" Type="Int64" />
           <Property Name="DealTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="DealPrice" Type="Double" Nullable="false" />
+          <Property Name="DealSavings" Type="Double" Nullable="false" />
+          <Property Name="DealCount" Type="Int32" Nullable="false" />
+          <Property Name="DealDescription" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="DealCompany" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DealCity" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -9562,6 +9594,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
                 <ScalarProperty Name="GroupName" ColumnName="GroupName" />
                 <ScalarProperty Name="LeftAnswerPerc" ColumnName="LeftAnswerPerc" />
                 <ScalarProperty Name="RightAnswerPerc" ColumnName="RightAnswerPerc" />
+                <ScalarProperty Name="SenderFullName" ColumnName="SenderFullName" />
+                <ScalarProperty Name="SenderProfileImage" ColumnName="SenderProfileImage" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -9664,6 +9698,12 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="vw_Notifications">
             <EntityTypeMapping TypeName="DomainModels.vw_Notifications">
               <MappingFragment StoreEntitySet="vw_Notifications">
+                <ScalarProperty Name="DealCity" ColumnName="DealCity" />
+                <ScalarProperty Name="DealCompany" ColumnName="DealCompany" />
+                <ScalarProperty Name="DealDescription" ColumnName="DealDescription" />
+                <ScalarProperty Name="DealCount" ColumnName="DealCount" />
+                <ScalarProperty Name="DealSavings" ColumnName="DealSavings" />
+                <ScalarProperty Name="DealPrice" ColumnName="DealPrice" />
                 <ScalarProperty Name="DealTitle" ColumnName="DealTitle" />
                 <ScalarProperty Name="CouponId" ColumnName="CouponId" />
                 <ScalarProperty Name="SSQID" ColumnName="SSQID" />

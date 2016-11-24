@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta content="IE=edge" http-equiv="X-UA-Compatible" />
     <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <title>Welcome to Cash4ads!
+    <title>Video Ad Performance!
     </title>
     <style type="text/css">
         /*////// RESET STYLES //////*/
@@ -220,7 +220,7 @@
                     <tr>                      
                       <td align="center" style="padding-bottom:10px;" valign="top">                        
                         <h1 style="color:#FFFFFF; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:30px; font-style:normal; font-weight:600; line-height:42px; letter-spacing:normal; margin:0; padding:0; text-align:center;">
-                          Welcome to Cash4ads!
+                          Video Ad Performance!
                         </h1>
                       </td>
                     </tr>

@@ -66,8 +66,15 @@
 
 
     <script>
-        var gCompanyID = @CompanyID;
-        var UserRoleId = '@RoleId';
+    
+    
+    var gCompanyID = @CompanyID;
+    var UserRoleId = '@RoleId';
+    var url='http://www.w3schools.com/js/js_datatypes.asp';
+   // alert(url);
+  // var  gCompanyLogo='/@CompanyLogo'
+
+  //  alert(UserRoleId);
     </script>
 </head>
 <body class="theme-blue-gradient">
@@ -1017,10 +1024,14 @@
             function ShowInviteUserPopup() {
                 $('#btninviteusers').click();
             }
-            function openCompanyProfile() {
+            var img = document.getElementById('logooImage');
+
+            //alert(img.getAttribute('src')); // foo.jpg
+            
+            var  gCompanyLogo=img.src;
                
-                $( "#cprofile" ).click();   
-            }
+              //  $( "#cprofile" ).click();   
+            //}
 
     </script>
 

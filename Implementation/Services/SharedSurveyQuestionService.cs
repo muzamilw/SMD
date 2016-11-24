@@ -93,7 +93,7 @@ namespace SMD.Implementation.Services
         //string mapPath = server.MapPath(smdContentPath + "/Users/" + requestData.CompanyId);
 
 
-        public bool updateUserSharedSurveyQuestionResponse(long SurveyQuestionShareId, int UserSelection)
+        public bool updateUserSharedSurveyQuestionResponse(long SurveyQuestionShareId, int UserSelection, string UserId)
         {
             var share = surveySharingGroupShareRepository.Find(SurveyQuestionShareId);
             if ( share != null)
@@ -101,6 +101,13 @@ namespace SMD.Implementation.Services
                 share.Status = 2;
                 share.ResponseDateTime = DateTime.Now;
                 share.UserSelection = UserSelection;
+
+
+                if ( string.IsNullOrEmpty( share.UserId) )
+                {
+                    share.UserId = UserId;
+                }
+
 
                 surveySharingGroupShareRepository.Update(share);
                 surveySharingGroupShareRepository.SaveChanges();

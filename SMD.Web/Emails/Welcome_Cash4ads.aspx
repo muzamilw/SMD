@@ -589,6 +589,6 @@
         </tr>
       </table>
     </center>
-    <img height="1" src="http://click.mailchimpapp.com/track/open.php?u=10612303&amp;id=ec89654a88a24d0e8851ef2342c1b10a" width="1" />
+    <img height="1" src="" width="1" />
 </body>
 </html>

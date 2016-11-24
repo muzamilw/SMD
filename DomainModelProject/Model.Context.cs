@@ -96,9 +96,9 @@ namespace DomainModelProject
         public virtual DbSet<SurveySharingGroupMember> SurveySharingGroupMembers { get; set; }
         public virtual DbSet<Company> Companies { get; set; }
         public virtual DbSet<SurveySharingGroupShare> SurveySharingGroupShares { get; set; }
-        public virtual DbSet<vw_Notifications> vw_Notifications { get; set; }
         public virtual DbSet<CouponRatingReview> CouponRatingReviews { get; set; }
         public virtual DbSet<AspNetUsersNotificationToken> AspNetUsersNotificationTokens { get; set; }
+        public virtual DbSet<vw_Notifications> vw_Notifications { get; set; }
     
         public virtual ObjectResult<SearchCoupons_Result> SearchCoupons(Nullable<int> categoryId, Nullable<int> type, string keywords, Nullable<int> distance, string lat, string lon, string userId, Nullable<int> fromRow, Nullable<int> toRow)
         {

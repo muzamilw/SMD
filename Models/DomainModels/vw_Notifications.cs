@@ -30,5 +30,12 @@ namespace SMD.Models.DomainModels
 
         public Nullable<long> CouponId { get; set; }
        public string DealTitle { get; set; }
+
+         public double DealPrice { get; set; }
+        public double DealSavings { get; set; }
+        public int DealCount { get; set; }
+        public string DealDescription { get; set; }
+        public string DealCompany { get; set; }
+        public string DealCity { get; set; }
     }
 }
