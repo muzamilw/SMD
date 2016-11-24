@@ -670,230 +670,6 @@ else
                                 </div>*@
 
                             @*Branch Address*@
-
-                            <div class="row branchAddressContainer" style="display:none">
-                                <div class="form-group" style="margin-bottom:5px;">
-                                    <div class="col-lg-2"></div>
-                                    <div class="col-lg-4 text-left">
-                                        <span style="font-size:13px!important;margin-left:4px;">
-                                            Show Address in deal footer
-                                        </span>
-                                    </div>
-                                    <div class="col-lg-3" style="padding-left:22px;">
-                                        <div class="onoffswitch" style="width:95px;">
-                                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchAddress" data-bind="checked:IsShowAddress">
-                                            <label class="onoffswitch-label" for="switchAddress">
-                                                <div class="onoffswitch-inner"></div>
-                                                <div class="onoffswitch-switch"></div>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group" style="margin-bottom:10px;">
-                                    <div class="col-lg-2">
-                                        <label for="txtCampaignDesc" style="" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">Select Branch  </label>
-                                    </div>
-                                    <div class="col-lg-4 " style="padding-left:14px;">
-                                        <select class="form-control" id="yearDropDown" data-bind="options: $root.branchLocations, optionsText: 'BranchTitle', optionsValue: 'BranchId', value: LocationBranchId, event:{ change: $root.locationChanged},optionsCaption: '&lt;' + 'Select a branch'+ '&gt;'"></select>
-                                    </div>
-
-                                    <div class="col-lg-1">
-                                        <a id="displayBrabchlocatuion" data-bind="click:$root.openBranchLocation" style="padding: 4px 8px;" class="btn btn-primary pull-right">
-                                            <i class="fa fa-lg"></i>&nbsp;....
-                                        </a>
-                                    </div>
-
-                                    <div class="col-lg-2">
-                                    </div>
-                                </div>
-                                <div id="address_cont" data-bind="visible:$root.ISshowPhone">
-                                    <div class="form-group">
-                                        <div class="col-lg-2">
-                                            <label style="display:none;" for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">Branch Address </label>
-                                        </div>
-                                        <div class="col-lg-7 padding_left19">
-                                            <label id="txtCampaignDesc" data-bind="text: LocationLine1"></label>
-                                            @*<textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 72 characters" data-bind="value: LocationLine1" maxlength="72" readonly="readonly"></textarea>*@
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-lg-2">
-                                            <label style="display:none;" for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">Optional </label>
-                                        </div>
-                                        <div class="col-lg-7 padding_left19">
-                                            <label id="txtCampaignDesc" data-bind="text: LocationLine2"></label>
-                                            @*<textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 72 characters" data-bind="value: LocationLine2" maxlength="72" readonly="readonly"></textarea>*@
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-lg-2">
-                                            <label style="display:none;" for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">City </label>
-                                        </div>
-                                        <div class="col-lg-7 padding_left19">
-                                            <label id="txtCampaignDesc" data-bind="text:LocationCity"></label>
-                                            @*<textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationCity" maxlength="36" readonly="readonly"></textarea>*@
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-lg-2">
-                                            <label style="display:none;" for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">State </label>
-                                        </div>
-                                        <div class="col-lg-7 padding_left19">
-                                            <label id="txtCampaignDesc" data-bind="text: LocationState"></label>
-                                            @*<textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationState" maxlength="36" readonly="readonly"></textarea>*@
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-lg-2">
-                                            <label style="display:none;" for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">Zip </label>
-                                        </div>
-                                        <div class="col-lg-7 padding_left19">
-                                            <label id="txtCampaignDesc" data-bind="text: LocationZipCode"></label>
-                                            @*<textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationZipCode" maxlength="36" readonly="readonly"></textarea>*@
-                                        </div>
-                                    </div>
-                                    <div class="form-group" style="display:none;">
-                                        <div class="col-lg-2">
-                                            <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">Geo location Lat</label>
-                                        </div>
-                                        <div class="col-lg-7 padding_left19">
-                                            <label id="txtCampaignDesc" data-bind="text: LocationLAT"></label>
-                                            @*<textarea class="form-control" id="geolocation" rows="1" placeholder="max 72 characters" data-bind="value: LocationLAT" readonly="readonly" maxlength="72"></textarea>*@
-                                        </div>
-
-                                    </div>
-                                    <div class="form-group" style="display:none;">
-                                        <div class="col-lg-2">
-                                            <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">Geo location Long</label>
-                                        </div>
-                                        <div class="col-lg-7 padding_left19">
-                                            <label id="txtCampaignDesc" data-bind="text:LocationLON"></label>
-                                            @*<textarea class="form-control" id="geolocationlong" rows="1" placeholder="max 72 characters" data-bind="value: LocationLON" readonly="readonly" maxlength="72"></textarea>*@
-                                        </div>
-
-                                    </div>
-                                    <div class="form-group" data-bind="visible:$root.ISshowPhone">
-                                        <div class="col-lg-2">
-                                            <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">Phone no </label>
-                                        </div>
-                                        <div class="col-lg-7 padding_left19">
-                                            <label id="txtCampaignDesc" data-bind="text:LocationPhone"></label>
-                                            @*<textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationPhone" readonly="readonly"></textarea>*@
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group" style="margin-bottom:5px;margin-top:15px;">
-                                    <div class="col-lg-2"></div>
-                                    <div class="col-lg-4 text-left">
-                                        <span style="font-size:13px!important;margin-left:4px;">
-                                            Show Phone Number in deal footer
-                                        </span>
-                                    </div>
-                                    <div class="col-lg-3" style="padding-left:22px;">
-                                        <div class="onoffswitch" style="width:95px;">
-                                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchPhoneNo" data-bind="checked:IsShowPhoneNo">
-                                            <label class="onoffswitch-label" for="switchPhoneNo">
-                                                <div class="onoffswitch-inner"></div>
-                                                <div class="onoffswitch-switch"></div>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="form-group" style="margin-bottom:5px;">
-                                    <div class="col-lg-2"></div>
-                                    <div class="col-lg-4 text-left">
-                                        <span style="font-size:13px!important;margin-left:4px;">
-                                            Show Map in deal footer
-                                        </span>
-                                    </div>
-                                    <div class="col-lg-3" style="padding-left:22px;">
-                                        <div class="onoffswitch" style="width:95px;">
-                                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchMap" data-bind="checked:IsShowMap">
-                                            <label class="onoffswitch-label" for="switchMap">
-                                                <div class="onoffswitch-inner"></div>
-                                                <div class="onoffswitch-switch"></div>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group" style="margin-bottom:5px;margin-top:10px;">
-                                    <div class="col-lg-2"></div>
-                                    <div class="col-lg-4 text-left">
-                                        <span style="font-size:13px!important;margin-left:4px;">
-                                            Show Reviews in Deal header
-                                        </span>
-                                    </div>
-                                    <div class="col-lg-3" style="padding-left:22px;">
-                                        <div class="onoffswitch" style="width:95px;">
-                                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchreview" data-bind="checked:IsShowReviews">
-                                            <label class="onoffswitch-label" for="switchreview">
-                                                <div class="onoffswitch-inner"></div>
-                                                <div class="onoffswitch-switch"></div>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group" style="margin-bottom:5px;margin-top:10px;">
-                                    <div class="col-lg-2"></div>
-                                    <div class="col-lg-4 text-left">
-                                        <span style="font-size:13px!important;margin-left:4px;">
-                                            Show About Us in deal footer
-                                        </span>
-                                    </div>
-                                    <div class="col-lg-3" style="padding-left:22px;">
-                                        <div class="onoffswitch" style="width:95px;">
-                                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchaboutus" data-bind="checked:IsShowAboutUs">
-                                            <label class="onoffswitch-label" for="switchaboutus">
-                                                <div class="onoffswitch-inner"></div>
-                                                <div class="onoffswitch-switch"></div>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group" style="margin-bottom:5px;margin-top:10px;">
-                                    <div class="col-lg-2"></div>
-                                    <div class="col-lg-4 text-left">
-                                        <span style="font-size:13px!important;margin-left:4px;">
-                                            Show Youtube video in deal footer
-                                        </span>
-                                    </div>
-                                    <div class="col-lg-3" style="padding-left:22px;">
-                                        <div class="onoffswitch" style="width:95px;">
-                                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchvideo" data-bind="checked:IsShowyouTube">
-                                            <label class="onoffswitch-label" for="switchvideo">
-                                                <div class="onoffswitch-inner"></div>
-                                                <div class="onoffswitch-switch"></div>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group" style="margin-bottom:10px;">
-                                    <div class="col-lg-2">
-                                        <label for="txtCampaignDesc" style="" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">Video Url</label>
-                                    </div>
-                                    <div class="col-lg-7 " style="padding-left:14px;">
-                                        @*@*<video id="videoTag" controls style="width:300px;height:150px;" onclick="showvideoUploadDialog();" data-bind="    attr: { src: $root.VideoLink2src()+$root.randonNumber() }"></video>*@
-                                        <input class="form-control" id="viedoLink" placeholder="max 400 characters" data-bind="value:YoutubeLink" maxlength="400" />
-                                        <br />
-                                        <pre id="myCode" style="width:433px!important;display:none;"></pre>
-                                    </div>
-
-                                    <div class="col-lg-3" style="padding-left:47px;">
-                                        <button style="width:123px;height:33px;" class="btn  btn-success gtild-color" id="btnNext" onclick="openYoutubeVideo();">Test URL Link</button>
-                                    </div>
-
-                                    <div class="col-lg-2">
-                                    </div>
-
-                                </div>
-                            </div>
-
-
-
-
                             <div class="form-group" style="display:none;">
                                 <div class="col-lg-2">
                                     <label for="txtPriorityLabel" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn wrapspace">Priority </label>
@@ -1234,6 +1010,24 @@ else
                                     <div class="col-lg-5">
                                         <div id="address_cont" data-bind="visible:$root.ISshowPhone">
                                             <div class="form-group">
+                                                <div class="col-lg-2">
+
+                                                </div>
+                                                <div class="col-lg-7">
+                                                    <img style="width:90px;height:60px;" data-bind="attr:{src:$root.companyLogo }" />
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-lg-2">
+
+                                                </div>
+                                                <div class="col-lg-7 padding_left19">
+                                                    <label id="txtCampaignDesc" data-bind="text: $root.companyName"></label>
+                                                    @*<textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 72 characters" data-bind="value: LocationLine1" maxlength="72" readonly="readonly"></textarea>*@
+                                                </div>
+                                            </div>
+                                             <div class="form-group">
                                                 <div class="col-lg-2">
                                                     <label style="display:none;" for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">Branch Address </label>
                                                 </div>

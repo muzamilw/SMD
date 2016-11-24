@@ -149,6 +149,8 @@ define("Coupons/Coupons.viewModel",
                 Banner6Flag = ko.observable(false),
                 freeCouponCount = ko.observable(0),
                 isflageClose = ko.observable(false),
+                companyLogo = ko.observable(),
+                companyName = ko.observable(),
                 openAdvertiserDashboardDealScreen = function () {
                     if (!IsnewCoupon()) {
                         isflageClose(true);
@@ -2291,6 +2293,8 @@ getfreeCouponCount = function () {
                             text += "+";
                         ageRange.push({ value: i.toString(), text: text });
                     }
+                    companyLogo(gCompanyLogo),
+                    companyName(ComName),
                     ageRange.push({ value: 120, text: "80+" });
                     pager(pagination.Pagination({ PageSize: 10 }, campaignGridContent, getAdCampaignGridContent));
                     getAdCampaignGridContent();
@@ -2493,7 +2497,9 @@ getfreeCouponCount = function () {
                     DeleteImage: DeleteImage,
                     diveNo: diveNo,
                     onDeleteImage: onDeleteImage,
-                    isflageClose: isflageClose
+                    isflageClose: isflageClose,
+                    companyLogo:companyLogo,
+                    companyName: companyName,
                 };
             })()
         };
