@@ -17,10 +17,10 @@ define("common/confirmation.viewModel",
                     // default confirmation text
                     defaultConfirmationText = "Do you want to proceed with the request?",
                     // Message Text
-                  
+
                     messageText = ko.observable(defaultConfirmationText),
 
-                    
+
                     defaultButtonTextYes = "Yes",
                     yesBtnText = ko.observable(defaultButtonTextYes),
 
@@ -30,197 +30,196 @@ define("common/confirmation.viewModel",
 
                     defaultIsCancelVisible = true;
 
-                   IsCancelVisible = ko.observable(defaultIsCancelVisible),
-                    // On Proceed
-                    afterProceed = ko.observable(),
+                IsCancelVisible = ko.observable(defaultIsCancelVisible),
                 // On Proceed
-                    afterActionProceed = ko.observable(),
+                 afterProceed = ko.observable(),
+                // On Proceed
+                 afterActionProceed = ko.observable(),
 
-                    // On Cancel
-                    afterCancel = ko.observable(),
-                    // On No
-                    afterNo = ko.observable(),
-                    // Is Proceed Visible
-                    isProceedVisible = ko.observable(true),
-
-
-                     // Comments for logs
-                    comment = ko.observable(),
-
-                    UserRandomNum = ko.observable(),
-
-                    RandomNumber = ko.observable(),
-                     //errors = ko.validation.group({
-                     //    comment: comment,
-                     //    UserRandomNum: UserRandomNum
-                     //}),
-                    // Proceed with the request
-                    proceed = function () {
-                        if (typeof afterProceed() === "function") {
-                            afterProceed()();
-                        }
-                        hide();
-                        
-                    },
-                    // Proceed with the request
-                    proceedAction = function () {
-
-                        if (comment() == "" || comment() == undefined)
-                        {
-                            toastr.error("Please enter comment to submit!");
-                            return false;
-                        }
-                        if (UserRandomNum() == "" || UserRandomNum() == undefined) {
-                            toastr.error("Please enter number to submit!");
-                            return false;
-                        }
-
-                        if (UserRandomNum() == RandomNumber())
-                        {
-                           
-                            if (typeof afterActionProceed() === "function") {
-                                afterActionProceed()();
-                            }
-                            hideActionPopup();
-                        }
-                        else
-                        {
-                            toastr.error("Number not match!");
-                            return false;
-                        }
-
-                    },
-                    // Reset Dialog
-                    resetDialog = function () {
-                        afterCancel(undefined);
-                        afterProceed(undefined);
-                        
-                        afterNo(undefined);
-                        isProceedVisible(true);
-                        headingText(defaultHeaderText);
-                        messageText(defaultConfirmationText);
-                        yesBtnText(defaultButtonTextYes);
-                        noBtnText(defaultButtonTextNo);
-                        IsCancelVisible(defaultIsCancelVisible);
-                    },
-                    // Show the dialog
-                    show = function () {
-                        isLoading(true);
-                        view.show();
-                    },
-                    // Hide the dialog
-                    hide = function () {
-                        // Reset Call Backs
-                        resetDialog();
-                        view.hide();
-                    },
+                // On Cancel
+                 afterCancel = ko.observable(),
+                // On No
+                 afterNo = ko.observable(),
+                // Is Proceed Visible
+                 isProceedVisible = ko.observable(true),
 
 
-                    showWarningPopup = function () {
-                        isLoading(true);
-                        view.showWarningPopup();
-                    },
-                  showOKpopup = function () {
-                      isLoading(true);
-                      view.showOKpopup();
-                  },
-                   showOKpopupforinfo = function () {
-                         isLoading(true);
-                         view.showOKpopupforinfo();
-                   },
-                 showAccountSetingPopup = function () {
-                     isLoading(true);
-                     view.showAccountSetingPopup();
+                // Comments for logs
+                 comment = ko.observable(),
+
+                 UserRandomNum = ko.observable(),
+
+                 RandomNumber = ko.observable(),
+                //errors = ko.validation.group({
+                //    comment: comment,
+                //    UserRandomNum: UserRandomNum
+                //}),
+                // Proceed with the request
+                 proceed = function () {
+                     if (typeof afterProceed() === "function") {
+                         afterProceed()();
+                     }
+                     hide();
+
                  },
-                  showOKpopupforFreeCoupon = function () {
-                      isLoading(true);
-                      view.showOKpopupforFreeCoupon();
-                  },
-                 showOKpopupfordealheadline = function () {
-                     isLoading(true);
-                     view.showOKpopupfordealheadline();
-                 },
-                 showOKpopupforChart = function () {
-                     isLoading(true);
-                     view.showOKpopupforchart();
-                 },
-                    showUpgradePopup = function () {
-                        isLoading(true);
-                        view.showUpgradePopup();
-                    },
-                    showActionPopup = function () {
-                        isLoading(true);
-                        var num = Math.floor(Math.random() * 90000) + 10000;
-                        RandomNumber(num);
-                       
-                          view.showActionPopup();
-                      },
+                // Proceed with the request
+                 proceedAction = function () {
 
-                    // Hide the dialog
-                    hideWarningPopup = function () {
-                        // Reset Call Backs
-                        resetDialog();
-                        view.hideWarningPopup();
-                        view.hide();
-                    },
-                   hideshowOKpopup = function () {
-                       // Reset Call Backs
-                       resetDialog();
-                       view.hideshowOKpopup();
-                       view.hide();
-                   },
-                    hidesOKpopupforInfo = function () {
-                        // Reset Call Backs
-                        resetDialog();
-                        view.hidesOKpopupforinfo();
-                        view.hide();
-                    },
+                     if (comment() == "" || comment() == undefined) {
+                         toastr.error("Please enter comment to submit!");
+                         return false;
+                     }
+                     if (UserRandomNum() == "" || UserRandomNum() == undefined) {
+                         toastr.error("Please enter number to submit!");
+                         return false;
+                     }
 
-                     // Hide the dialog
-                    hideActionPopup = function () {
-                        // Reset Call Backs
-                        resetDialog();
-                        view.hideActionPopup();
-                        view.hide();
-                    },
-                    // Cancel 
-                    cancel = function () {
-                        if (typeof afterCancel() === "function") {
-                            afterCancel()();
-                        }
-                        hide();
-                    },
-                      // Cancel 
-                    Warningcancel = function () {
-                        if (typeof afterCancel() === "function") {
-                            afterCancel()();
-                        }
-                        hideWarningPopup();
-                    },
-             
-                    ActionPopupCancel = function () {
-                        if (typeof afterCancel() === "function") {
-                            afterCancel()();
-                        }
-                        hideActionPopup();
-                    },
-                    // No
-                    no = function () {
-                        if (typeof afterNo() === "function") {
-                            afterNo()();
-                        }
-                        hide();
-                    },
-                    // Initialize the view model
-                    initialize = function (specifiedView) {
-                        view = specifiedView;
-                        ko.applyBindings(view.viewModel, view.bindingRoot);
-                        ko.applyBindings(view.viewModel, view.bindingRootq);
-                        ko.applyBindings(view.viewModel, view.bindingRootupgrade);
-                        ko.applyBindings(view.viewModel, view.bindingRootaction);
-                        showAccountSetingPopup();
-                       // alert(document.cookie);
-                    };
+                     if (UserRandomNum() == RandomNumber()) {
+
+                         if (typeof afterActionProceed() === "function") {
+                             afterActionProceed()();
+                         }
+                         hideActionPopup();
+                     }
+                     else {
+                         toastr.error("Number not match!");
+                         return false;
+                     }
+
+                 },
+                // Reset Dialog
+                 resetDialog = function () {
+                     afterCancel(undefined);
+                     afterProceed(undefined);
+
+                     afterNo(undefined);
+                     isProceedVisible(true);
+                     headingText(defaultHeaderText);
+                     messageText(defaultConfirmationText);
+                     yesBtnText(defaultButtonTextYes);
+                     noBtnText(defaultButtonTextNo);
+                     IsCancelVisible(defaultIsCancelVisible);
+                 },
+                // Show the dialog
+                 show = function () {
+                     isLoading(true);
+                     view.show();
+                 },
+                // Hide the dialog
+                 hide = function () {
+                     // Reset Call Backs
+                     resetDialog();
+                     view.hide();
+                 },
+
+
+                 showWarningPopup = function () {
+                     isLoading(true);
+                     view.showWarningPopup();
+                 },
+               showOKpopup = function () {
+                   isLoading(true);
+                   view.showOKpopup();
+               },
+                showOKpopupforinfo = function () {
+                    isLoading(true);
+                    view.showOKpopupforinfo();
+                },
+              showAccountSetingPopup = function () {
+                  isLoading(true);
+                  view.showAccountSetingPopup();
+              },
+               showOKpopupforFreeCoupon = function () {
+                   isLoading(true);
+                   view.showOKpopupforFreeCoupon();
+               },
+              showOKpopupfordealheadline = function () {
+                  isLoading(true);
+                  view.showOKpopupfordealheadline();
+              },
+              showOKpopupforChart = function () {
+                  isLoading(true);
+                  view.showOKpopupforchart();
+              },
+                 showUpgradePopup = function () {
+                     isLoading(true);
+                     view.showUpgradePopup();
+                 },
+                 showActionPopup = function () {
+                     isLoading(true);
+                     var num = Math.floor(Math.random() * 90000) + 10000;
+                     RandomNumber(num);
+
+                     view.showActionPopup();
+                 },
+
+                // Hide the dialog
+                 hideWarningPopup = function () {
+                     // Reset Call Backs
+                     resetDialog();
+                     view.hideWarningPopup();
+                     view.hide();
+                 },
+                hideshowOKpopup = function () {
+                    // Reset Call Backs
+                    resetDialog();
+                    view.hideshowOKpopup();
+                    view.hide();
+                },
+                 hidesOKpopupforInfo = function () {
+                     // Reset Call Backs
+                     resetDialog();
+                     view.hidesOKpopupforinfo();
+                     view.hide();
+                 },
+
+                // Hide the dialog
+                 hideActionPopup = function () {
+                     // Reset Call Backs
+                     resetDialog();
+                     view.hideActionPopup();
+                     view.hide();
+                 },
+                // Cancel 
+                 cancel = function () {
+                     if (typeof afterCancel() === "function") {
+                         afterCancel()();
+                     }
+                     hide();
+                 },
+                // Cancel 
+                 Warningcancel = function () {
+                     if (typeof afterCancel() === "function") {
+                         afterCancel()();
+                     }
+                     hideWarningPopup();
+                 },
+
+                 ActionPopupCancel = function () {
+                     if (typeof afterCancel() === "function") {
+                         afterCancel()();
+                     }
+                     hideActionPopup();
+                 },
+                // No
+                 no = function () {
+                     if (typeof afterNo() === "function") {
+                         afterNo()();
+                     }
+                     hide();
+                 },
+                // Initialize the view model
+                 initialize = function (specifiedView) {
+                     view = specifiedView;
+                     ko.applyBindings(view.viewModel, view.bindingRoot);
+                     ko.applyBindings(view.viewModel, view.bindingRootq);
+                     ko.applyBindings(view.viewModel, view.bindingRootupgrade);
+                     ko.applyBindings(view.viewModel, view.bindingRootaction);
+                     var logo = $('#companyLogo').prop('src');
+                     if (logo == null || logo=="")
+                      showAccountSetingPopup();
+                    
+                 };
 
                 return {
                     isLoading: isLoading,
@@ -245,7 +244,7 @@ define("common/confirmation.viewModel",
                     hide: hide,
                     showWarningPopup: showWarningPopup,
                     showOKpopup: showOKpopup,
-                    hideshowOKpopup:hideshowOKpopup,
+                    hideshowOKpopup: hideshowOKpopup,
                     hideWarningPopup: hideWarningPopup,
                     showUpgradePopup: showUpgradePopup,
                     showActionPopup: showActionPopup,

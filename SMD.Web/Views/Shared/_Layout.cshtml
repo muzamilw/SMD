@@ -149,7 +149,15 @@
 
                         <li>
                             <a style="padding-right:7px!important;padding-top:0px!important;">
-                                <img style="width:60px;height:36px;background-color: white;border-radius: 5px;" src="~/@CompanyLogo" />
+                                @if (!String.IsNullOrEmpty(CompanyLogo))
+                                {
+                                    <img style="width:60px;height:36px;background-color: white;border-radius: 5px;" id="companyLogo" src="~/@CompanyLogo" />
+                                }
+                                else
+                                {
+                                    <img style="width:60px;height:36px;background-color: white;border-radius: 5px;" id="companyLogo" src="@CompanyLogo" />
+                                }
+                               
                             </a>
                         </li>
                         
