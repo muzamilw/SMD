@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace SMD.MIS.Views
 {
-    public partial class EmailTester2 : System.Web.UI.Page
+    public partial class EmailTester : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

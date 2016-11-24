@@ -839,7 +839,7 @@ namespace SMD.Repository.BaseRepository
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetSharedSurveyQuestionsByUserId_Result>("GetSharedSurveyQuestionsByUserId", oUserId);
         }
 
-        public ObjectResult<Int32> getCampaignByIdQQFormAnalytic(int CampaignId, int Choice, int Gender, int age, String Profession, String City)
+        public ObjectResult<Int32> getCampaignByIdQQFormAnalytic(long CampaignId, int Choice, int Gender, int age, String Profession, String City, int type, int QuestionId)
         {
 
          
@@ -849,7 +849,10 @@ namespace SMD.Repository.BaseRepository
             var ageRange = new ObjectParameter("ageRange", age);
             var profession = new ObjectParameter("Profession", Profession);
             var city = new ObjectParameter("city", City);
-            ObjectResult<Int32> res = ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Int32>("getCampaignByIdQQFormAnalytic", Id, chioce, gender, ageRange, profession, city);
+             var _type = new ObjectParameter("type", type);
+             var _QuestionId = new ObjectParameter("QId", QuestionId);
+        
+            ObjectResult<Int32> res = ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Int32>("getCampaignByIdQQFormAnalytic", Id, chioce, gender, ageRange, profession, city, _type, _QuestionId);
             return res;
         }
         public ObjectResult<getCampaignByIdFormDataAnalytic_Result> getCampaignByIdFormDataAnalytic(long CampaignId)

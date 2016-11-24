@@ -55,6 +55,9 @@ define("common/confirmation.view",
                 hideWarningPopup = function() {
                     $("#dialog-ok").modal("hide");
                 },
+                showAccountSetingPopup = function () {
+                    $("#AccountSetingConformation").modal("show");
+                   },
                 // Show Upgrade Plan dialog
                 showUpgradePopup = function() {
                     $("#dialog-okLicensing").modal("show");
@@ -89,7 +92,8 @@ define("common/confirmation.view",
                 hidesOKpopupforinfo: hidesOKpopupforinfo,
                 showOKpopupforchart: showOKpopupforchart,
                 showOKpopupforFreeCoupon: showOKpopupforFreeCoupon,
-                showOKpopupfordealheadline: showOKpopupfordealheadline
+                showOKpopupfordealheadline: showOKpopupfordealheadline,
+                showAccountSetingPopup: showAccountSetingPopup
             };
         })(ist.confirmation.viewModel);
 

@@ -43,9 +43,9 @@ namespace SMD.Repository.Repositories
         {
             return DbSet.FirstOrDefault(adr => adr.CampaignId == campaignId && adr.UserId == userId);
         }
-        public int getCampaignByIdQQFormAnalytic(int CampaignId, int Choice, int Gender, int age, string Profession, string City)
-        { 
-             return db.getCampaignByIdQQFormAnalytic(CampaignId, Choice, Gender, age, Profession, City).ToList().FirstOrDefault();
+        public int getCampaignByIdQQFormAnalytic(long CampaignId, int Choice, int Gender, int age, string Profession, string City, int type, int questionId)
+        {
+            return db.getCampaignByIdQQFormAnalytic(CampaignId, Choice, Gender, age, Profession, City, type, questionId).ToList().FirstOrDefault();
         }
 
        

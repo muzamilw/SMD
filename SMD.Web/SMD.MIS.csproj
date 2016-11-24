@@ -446,6 +446,7 @@
     <Compile Include="Areas\Api\Models\Dashboard_analytics_Result.cs" />
     <Compile Include="Areas\Api\Models\DealByCouponIdForAnalyticsResponse.cs" />
     <Compile Include="Areas\Api\Models\FormAnalyticResponseModel.cs" />
+    <Compile Include="Areas\Api\Models\FormDataAnalyticResponse.cs" />
     <Compile Include="Areas\Api\Models\GetApprovalCount_Result.cs" />
     <Compile Include="Areas\Api\Models\GenerateSMSResponse.cs" />
     <Compile Include="Areas\Api\Models\SharedSurveyQuestionResponse.cs" />
@@ -613,6 +614,13 @@
     <Compile Include="Areas\Survey\SurveyAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UnauthorizedRequestController.cs" />
+    <Compile Include="Emails\Video_Performance.aspx.cs">
+      <DependentUpon>Video_Performance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Video_Performance.aspx.designer.cs">
+      <DependentUpon>Video_Performance.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1254,6 +1262,7 @@
     <Content Include="Content\themes\Centaurus\js\typeahead.min.js" />
     <Content Include="Content\themes\Centaurus\js\wizard.js" />
     <Content Include="Content\themes\Centaurus\js\xcharts.js" />
+    <Content Include="Emails\Video_Performance.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="games\bouncingball\Bounce_files\abg.js" />
@@ -1309,7 +1318,9 @@
     <Content Include="Images\Sign_In_Image.png" />
     <Content Include="Images\splaceholder.png" />
     <Content Include="Images\standardplaceholder.png" />
+    <Content Include="Images\Tips-Icon-2.png" />
     <Content Include="Images\topbarph.png" />
+    <Content Include="Images\White_Arrow.png" />
     <Content Include="Images\youtube_play.JPG" />
     <Content Include="ReportViewers\Publisher.aspx" />
     <Content Include="ReportViewers\SMDReport.aspx" />
