@@ -14,7 +14,7 @@ namespace SMD.MIS.Areas.Api.Models
         public List<Profession> Profession { get; set; }
         public String Question { get; set; }
         public List<QuizChoice> Choices { get; set; }
-        public List<getCampaignByIdFormDataAnalytic_Result> formData { get; set; }
+        public List<FormDataAnalyticResponse> formData { get; set; }
     }
 
     public class QuizChoice

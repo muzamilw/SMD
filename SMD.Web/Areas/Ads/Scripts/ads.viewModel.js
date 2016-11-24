@@ -214,6 +214,32 @@ define("ads/ads.viewModel",
 
 				    }
 				},
+                      getQAnalytic = function (item) {
+                          var data = item;
+                          dataservice.getQQAnalytic({
+                              Id: selectedCampaignIdAnalytics(),
+                              Choice :0,
+                              Gender: item.selectedGenderAnalytics(),
+                              age: item.selectedQQAAnalytics(),
+                              profession: "All",
+                              City: selectedCityAnalytics(),
+                              QId: item.Id(),
+                              type :item.type()
+                          }, {
+                              success: function (data) {
+                                  if (data != null) {
+                                      QQStatsAnalytics(data.QQStats);
+
+                                  }
+
+                              },
+                              error: function (response) {
+
+                              }
+                          });
+
+
+                      },
                 getQQAnalytic = function () {
                     dataservice.getQQAnalytic({
                         Id: selectedCampaignIdAnalytics(),
@@ -221,7 +247,9 @@ define("ads/ads.viewModel",
                         Gender: selectedQQGAnalytics(),
                         age: selectedQQAAnalytics(),
                         profession: selectedQQPAnalytics(),
-                        City: selectedQQCtAnalytics()
+                        City: selectedQQCtAnalytics(),
+                        QId: 0,
+                        type : 1
                     }, {
                         success: function (data) {
                             if (data != null) {
@@ -254,8 +282,10 @@ define("ads/ads.viewModel",
                                 ko.utils.arrayPushAll(QQChoicesAnalyticsData(), data.Choices);
                                 QQChoicesAnalyticsData.valueHasMutated();
                                 formAnalyticsData.removeAll();
-                                ko.utils.arrayPushAll(formAnalyticsData(), data.formData);
-                                formAnalyticsData.valueHasMutated();
+                                _.each(data.formData, function (item) {
+                                    formAnalyticsData.push(model.formAnalyticsDataModel(item));
+                                });
+                              
                                 
                             }
 
@@ -1094,6 +1124,7 @@ define("ads/ads.viewModel",
                 else {
                     campaignModel().IsUseFilter('1');
                 }
+               
                 if (campaignModel().IsUseFilter() == 0) {
 
                     toastr.error("No Target Match.");
@@ -3684,12 +3715,11 @@ define("ads/ads.viewModel",
                     selectedQQCtAnalytics:selectedQQCtAnalytics,
                     AgeRangeAnalyticsData: AgeRangeAnalyticsData,
                     isflageClose: isflageClose,
-                   
                     Changefilter: Changefilter,
                     ChangeBroadfilter: ChangeBroadfilter,
-                    QQStatsAnalytics:QQStatsAnalytics,
-                    isflageClose: isflageClose,
                     formAnalyticsData: formAnalyticsData,
+                    getQAnalytic: getQAnalytic,
+                    QQStatsAnalytics:QQStatsAnalytics,
                     IsBroadMarketing: IsBroadMarketing
                 };
             })()
