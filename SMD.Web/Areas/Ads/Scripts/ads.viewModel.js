@@ -3721,9 +3721,9 @@ define("ads/ads.viewModel",
                     ChangeBroadfilter: ChangeBroadfilter,
                     formAnalyticsData: formAnalyticsData,
                     IsBroadMarketing: IsBroadMarketing,
-                    CompanyLogo: CompanyLogo
+                    CompanyLogo: CompanyLogo,
                     getQAnalytic: getQAnalytic,
-                    QQStatsAnalytics:QQStatsAnalytics,
+                    QQStatsAnalytics:QQStatsAnalytics
                 };
             })()
         };
