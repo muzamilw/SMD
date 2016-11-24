@@ -303,15 +303,15 @@ define("survey/survey.viewModel",
                     gotoScreen(1);
                     isTerminateBtnVisible(false);
                     isShowArchiveBtn(false);
-                    HeaderText("Add new Picture Poll");
+                    HeaderText("Picture Polls");
                     StatusValue('');
                     isNewCampaign(true);
                     StatusValue("Draft");
                     IsnewSurvey(true);
                     selectedQuestion(new model.Survey());
                     selectedQuestion().Gender("1");
-                    selectedQuestion().LeftPicturePath("/Images/select_image.jpg");
-                    selectedQuestion().RightPicturePath("/Images/select_image.jpg");
+                    selectedQuestion().LeftPicturePath("/Images/pollpicture1.png");
+                    selectedQuestion().RightPicturePath("/Images/pollpicture2.png");
                     //selectedQuestion().LeftPicturePath("/images/standardplaceholder.png");
                     //selectedQuestion().RightPicturePath("/images/standardplaceholder.png");
                     selectedQuestion().StatusValue("Draft");
@@ -2178,7 +2178,7 @@ define("survey/survey.viewModel",
                            // $("#chart_div").css("cssText", "width:679px!important;");
                         }
                         else {
-                            AudienceWidth('431px');
+                            AudienceWidth('380px');
                             IsVisibleAudience(true);
                         }
                     };
