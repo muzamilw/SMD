@@ -101,7 +101,7 @@ else
                                 <div class="pull-left" style="width:49px;">
                                     &nbsp;
                                 </div>
-                                <div class="pull-left ads-numbering-main">
+                                <div class="pull-left ads-numbering-main" onclick="RefreshScript()">
                                     <a data-toggle="modal" data-target=".model_quizQ_ph">
                                         <div class="ads-numbering-box" style="background: rgb(104,179,89);">
                                             <img src="~/Content/Images/Preview.png" class="previewImg" />
@@ -929,13 +929,11 @@ else
                                         <input type="text" class="form-control" id="txtVerifyAnswer3" placeholder="Enter your answer 3 (36 characters)" data-bind="value: Answer3,enable:$root.isClickRateVisible()!=true" maxlength="36">
                                     </div>
                                     <div class="col-lg-3">
-                                        @*<a href="#" id="idpreviewquizscreen" class="btn btn-primary " data-toggle="modal" data-target=".model_quizQ_ph">
-                            Preview
-                        </a>*@
+                             
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    @*data-bind="visible: $root.quizQuestionStatus()">*@
+                                    
                                     <div class="col-lg-2">
                                         <label for="txtCorrectAnswer" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn" style="">Correct Answer</label>
                                     </div>
@@ -954,49 +952,7 @@ else
                                 </div>
 
                             </div>
-                            @*<div class="col-lg-12" style="margin:auto;float:none !important;    " data-bind="visible: $root.previewScreenNumber() == 4">
-                <span class=" adBottomHeadingtext-campaign-left defaultThemeTxtClr font14" data-bind="visible:!$root.isDisplayCouponsAds(),text:tab4SubHeading" style="    color: rgb(52,152,219) !important;">
-                    Select your ad campaign delivery mode:
-                </span>
-                <div class="clearfix">
-                </div><br />
-
-                <div class="radio col-lg-12" style="text-align: left; display:none;">
-                    <input type="radio" name="optionsRadiosDelvTypes" value="1" id="optionsRadiosApplyFilterFree" data-bind="checked: DeliveryDays">
-                    <label for="optionsRadiosApplyFilterFree">
-                        <span style="color:red; font-weight:bold;">Free</span> - Show video to any 10 random app users per day. Max 10 days
-                        <br /><br />
-                        Note. You can have only one free campaign at a time.
-                    </label>
-                    <span class="help-block text-right"></span>
-                </div>
-
-                <div class="radio col-lg-12" style="text-align: left;font-size:14px !important;">
-                    <input type="radio" name="optionsRadiosDelvTypes" value="3" id="optionsRadiosNoFilterDaily" data-bind="checked: DeliveryDays">
-                    <label for="optionsRadiosNoFilterDaily" class="font14">
-                        <span class="defaultThemeTxtClr">BROADCAST DAILY</span> - Only once for this campaign.
-                    </label>
-                    <span class="help-block text-right"></span>
-                </div>
-
-                <div class="radio col-lg-12" style="text-align: left;font-size:14px !important;">
-                    <input type="radio" name="optionsRadiosDelvTypes" value="2" id="optionsRadiosApplyFilterOnce" data-bind="checked: DeliveryDays">
-                    <label for="optionsRadiosApplyFilterOnce" class="font14">
-                        <span class="defaultThemeTxtClr">BROADCAST ONCE</span> - Potentially more than once for this campaign, but show on separate days.
-                    </label>
-                    <span class="help-block text-right"></span>
-                </div>
-
-                <div class="radio col-lg-12" style="text-align: left; display:none;">
-                    <input type="radio" name="optionsRadiosDelvTypes" value="4" id="optionsRadiosApplyFilterAudience" data-bind="checked: DeliveryDays">
-                    <label for="optionsRadiosApplyFilterAudience">
-                        <span style="color:red; font-weight:bold;">TARGET AUDIENCE</span> - Show video to only Target Audience.
-                    </label>
-                    <span class="help-block text-right"></span>
-                </div>
-            </div>
-            <div class="clearfix">
-            </div>*@
+                         
                             <div class="next-back-btns col-lg-12" style="margin:auto;float:none !important">
                                 <div class="form-group">
                                     <div class="col-lg-3">
@@ -1461,7 +1417,7 @@ else
                                                 <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;" data-bind="visible: $root.FlagToShowDivs()">
                                                     max length 30 sec
                                                 </div>
-                                                <video id="videoTag" controls style="width:300px;height:150px;" onclick="showvideoUploadDialog();" data-bind="    attr: { src: $root.VideoLink2src()+$root.randonNumber() }"></video>
+                                                <video id="videoTag" controls style="width:300px;height:150px;" onclick="showvideoUploadDialog();" data-bind=" attr: { src: $root.VideoLink2src()+$root.randonNumber() }"></video>
                                             </div>
                                             <div class="defaultImgUploadImageBtn" style="width:75px;">
                                                 <div class="fileUpload" style="margin-top:8px;">
@@ -3158,60 +3114,93 @@ else
 
 <!-- ko if: $root.campaignModel() != null -->
 <div class="modal fade my-modal model_quizQ_ph" id="phQuizDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" style=" width:700px;  ">
-        <div class="col-lg-6 preview_stencilImg" style="    margin-right: 35px; width:310px;">
-            <div style="position:relative;">
-                <img src="~/Images/close2-128.png" width="20" class="preview_close" data-dismiss="modal" onclick="closePreviewDialog();" />
-            </div>
-            <div class="row preview_topImgCnt">
-                <img src="~/Images/topbarph.png" width="100%" />
-            </div>
-            <div class="row" style="padding-top: 15px;  text-align: center;">
-                <img data-bind="visible: $root.campaignModel().LogoUrl() != '', attr:{src: '/' + $root.campaignModel().LogoUrl()+ $root.randonNumber()}" class="preview_screen_advtlogo" />
-                <img data-bind="visible: $root.campaignModel().LogoUrl() == '', attr:{src: '/' + $root.advertiserLogo()+ $root.randonNumber()}" class="preview_screen_advtlogo" />
-            </div>
-            <div style="width: 83%;      margin: 5px auto 15px;" data-bind="visible: $root.campaignModel().Type() != 4">
-                <span data-bind="text: $root.campaignModel().DisplayTitle" style=" font-size: 15px;    color: red;"></span><br />
-                <span data-bind="text: $root.campaignModel().Description" style="font-size: 14px;    color: gray;"></span><br />
-                <span data-bind="text: $root.campaignModel().CampaignDescription" style="font-size: 14px;    color: gray; "></span>
-            </div>
-            <div class="row" id="appendVideoTag" style="text-align: center;    width: 83%;
-    margin: auto;margin-bottom: 80px;" data-bind="visible: $root.campaignModel().Type() == 1">
-            </div>
-            <div style="text-align: center;    width: 83%;margin: auto;" data-bind=" visible: $root.campaignModel().Type()== 3 || $root.campaignModel().Type()== 2">
-                <div style="height: 230px;    padding: 5px;    background: #CECECE;    text-align: center;position:relative;">
-                    <div class="preview_screen_viewFlyer">
-                        VIEW FLAYER AND ANSWER QUIZ
+    <div class="modal-dialog" style=" width:330px;  ">
+        <div class="col-lg-6 preview_stencilImg" style=" margin-right: 35px; width:310px;">
+            <div id="background" style="background-color:white;height:500px;" class="mobBck">
+                <div style="position:relative;">
+                    <img id="closePop" src="~/Images/close2-128.png" width="20" class="preview_close" data-dismiss="modal" onclick="closevid()" />
+                </div>
+                <div class="row preview_topImgCnt">
+                    <img src="~/Images/topbarph.png" width="100%" />
+                </div>
+                <div class="row logocont">
+                    @*<img data-bind="visible: $root.campaignModel().LogoUrl() != '', attr:{src: '/' + $root.campaignModel().LogoUrl()+ $root.randonNumber()}" class="preview_screen_advtlogo" />
+            <img data-bind="visible: $root.campaignModel().LogoUrl() == '', attr:{src: '/' + $root.advertiserLogo()+ $root.randonNumber()}" class="preview_screen_advtlogo" />*@
+
+                    <img data-bind="attr:{src: $root.CompanyLogo()}" class=" preview_screen_advtlogo" />
+
+                    @*<img data-bind="visible: $root.campaignModel().LogoUrl() == '', attr:{src: '/' + $root.advertiserLogo()+ $root.randonNumber()}" class="preview_screen_advtlogo" />*@
+                </div>
+
+                <div id="Campaign_name_panel" class="preview_video" style="text-align: center;color: white;font-size: 17px;padding-top: 72px;">
+
+                    <span data-bind="text:$root.campaignModel().CampaignName()"></span>
+
+                </div>
+                <div id="video_panel">
+
+                    <video id="videoTag_prev" controls="" class="preview_video"  data-bind="attr: { src: $root.VideoLink2src()+$root.randonNumber() }" src="null?r=0"></video>
+                </div>
+
+                <div style="padding-top:30px;text-align: center;height:130px">
+
+                    <div id="play_panel">
+                        <img src="~/Content/Images/Plaz@2x.png" style="height:40px;" onclick="previewImage()" />
+
+                        <p style="color:#127abd" id="ply_ans_desc"></p>
                     </div>
-                    <img style="width:auto;height:220px;" data-bind="visible: $root.campaignModel().CampaignTypeImagePath() == ''" src="/Content/Images/Company_Default.png" />
-                    <img style="width:auto;height:220px;" data-bind="visible: $root.campaignModel().CampaignTypeImagePath() != '' ,attr: { src: $root.campaignModel().CampaignTypeImagePath }" />
+                    <div id="buynow_panel">
+                        <input style="margin: 0 auto; " type="button" value="Buy Now" class="buybtn" onclick="BuyItFunc()" />
+                    </div>
                 </div>
-            </div>
-            <div class="row" style="text-align: center;width: 88%;
+                <div id="mod_btn_cont" style="margin-top:29px;">
+                    <input id="close_btn" type="button" value="Close" class="modify_btn" onclick="CloseDialog();" />
+                    <input id="pause_btn" type="button" value="Pause" class="modify_btn" onclick="NavigateBack();" />
+                </div>
+
+                @*<div style="width: 83%;margin: 5px auto 15px;" data-bind="visible: $root.campaignModel().Type() != 4">
+                    <span data-bind="text: $root.campaignModel().DisplayTitle" style=" font-size: 15px;    color: red;"></span><br />
+                    <span data-bind="text: $root.campaignModel().Description" style="font-size: 14px;    color: gray;"></span><br />
+                    <span data-bind="text: $root.campaignModel().CampaignDescription" style="font-size: 14px;    color: gray; "></span>
+                </div>
+                <div class="row" id="appendVideoTag" style="text-align: center;    width: 83%;
+    margin: auto;margin-bottom: 80px;" data-bind="visible: $root.campaignModel().Type() == 1">
+                </div>
+                <div style="text-align: center;    width: 83%;margin: auto;" data-bind=" visible: $root.campaignModel().Type()== 3 || $root.campaignModel().Type()== 2">
+                    <div style="height: 230px;    padding: 5px;    background: #CECECE;    text-align: center;position:relative;">
+                        <div class="preview_screen_viewFlyer">
+                            VIEW FLAYER AND ANSWER QUIZ
+                        </div>
+                        <img style="width:auto;height:220px;" data-bind="visible: $root.campaignModel().CampaignTypeImagePath() == ''" src="/Content/Images/Company_Default.png" />
+                        <img style="width:auto;height:220px;" data-bind="visible: $root.campaignModel().CampaignTypeImagePath() != '' ,attr: { src: $root.campaignModel().CampaignTypeImagePath }" />
+                    </div>
+                </div>
+                <div class="row" style="text-align: center;width: 88%;
     margin: auto;" data-bind="visible: $root.campaignModel().Type() == 4">
-                <img src="~/Images/preview_game.jpg" style="    width: 100%;" />
-            </div>
-            <br />
-            <div style="  width: 83%;    margin:auto;  text-align: center;    " data-bind="visible: $root.campaignModel().Type() != 4">
-                <div style="float:left;margin-top: 12px;    margin-right: 35px; color:#b6e1e9;font-size: 15px;">
-                    Cash Out
-                </div>
-                <div class="preview_screen_playbtn" style="float:left;">
-                    Play
-                </div>
-                <div style="float:right;margin-top: 12px;    margin-left: 20px;color:#b6e1e9;font-size: 15px;">
-                    Cash Out
-                </div>
-                <div class="clearfix">
+                    <img src="~/Images/preview_game.jpg" style="    width: 100%;" />
                 </div>
                 <br />
+                <div style="  width: 83%;    margin:auto;  text-align: center;    " data-bind="visible: $root.campaignModel().Type() != 4">
+                    <div style="float:left;margin-top: 12px;    margin-right: 35px; color:#b6e1e9;font-size: 15px;">
+                        Cash Out
+                    </div>
+                    <div class="preview_screen_playbtn" style="float:left;">
+                        Play
+                    </div>
+                    <div style="float:right;margin-top: 12px;    margin-left: 20px;color:#b6e1e9;font-size: 15px;">
+                        Cash Out
+                    </div>
+                    <div class="clearfix">
+                    </div>
+                    <br />
+                </div>*@
             </div>
         </div>
-        <div class="col-lg-6 preview_stencilImg" style=" width:310px;">
-            <div style="position:relative;">
+        @*<div class="col-lg-6 preview_stencilImg" style=" width:310px;">*@
+            @*<div style="position:relative;">
                 <img src="~/Images/close2-128.png" width="20" class="preview_close" data-dismiss="modal" />
-            </div>
-            <div class="row preview_topImgCnt">
+            </div>*@
+            @*<div class="row preview_topImgCnt">
                 <img src="~/Images/topbarph.png" width="100%" />
             </div>
             <div class="row" style="padding-top: 15px;  text-align: center;">
@@ -3230,9 +3219,10 @@ else
             <div style="    text-align: center;margin-bottom:30px;">
                 <span style="font-size: 18px;    color: #006633;">Show Ad again :)</span>
             </div>
-        </div>
+        </div>*@
     </div>
 </div>
+
 <div class="modal fade my-modal model_vucherQ_ph" id="phVoucherDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" style="    width: 315px !important;">
         <div class="col-lg-12 preview_stencilImg">
@@ -3937,7 +3927,15 @@ else
 
 
     function closePreviewDialog() {
+        //$("#closePop").click();
+        $( "#closePop" ).trigger( "click" );
+      //  $("#phQuizDialog").css('display','none');
+    }
+    function CloseDialog()
+    {
+        $( "#closePop" ).trigger( "click" );
 
+        $('#videoTag_prev').get(0).pause();
     }
 </script>
 <script id="profileQuestionTiles" type="text/html">
@@ -4042,11 +4040,58 @@ else
     <!--/ko-->
 </script>
 <script>
-   
+    $("#buynow_panel").css('display','none');
+    $("#video_panel").css('display','none');
+    $("#pause_btn").css('display','none');
+
+    function RefreshScript()
+    {
+        $("#buynow_panel").css('display','none');
+        $("#video_panel").css('display','none');
+        $("#pause_btn").css('display','none');
+
+        $("#play_panel").css('display','block');
+        $("#Campaign_name_panel").css('display','block');
+        $("#close_btn").css('display','block');
+     
+
+        if( $("#ddTextBtns").val()==0)
+        {
+            $(".buybtn").css('display','none');
+        }
+        else
+        {
+            
+            $(".buybtn").css('display','block');
+
+            if( !$("#txtBuyItlbl").is(":hidden")==true)
+            {  
+                if($("#txtBuyItlbl").val()!='')
+                {
+                    $(".buybtn").val($("#txtBuyItlbl").val());
+                }
+            }
+            else
+            {
+                $(".buybtn").val($("#ddTextBtns").val());
+            }
+        }
+        var value=($("#txtPerClick").val()/2*100);
+        var string='Play Ad & Answer Survey for ' + value + ' centz';
+        $("#ply_ans_desc").text(string);
+    }
     function openUrl()
     {
         var win = window.open($("#urlBx").val(), '_blank');
         win.focus();
+    }
+
+    function BuyItFunc()
+    {
+        if(!$("#urlBx").is(":hidden")==true)
+        {
+            openUrl();
+        }
     }
     function showUploadDialog() {
         $("#logo_image_file").click();
@@ -4109,13 +4154,22 @@ else
         $("#campaignType_image_file1").click();
 
     }
+
+    //var x = document.querySelectorAll("p");
+    
     function playVideo(event) {
 
         var playSelectedFile = function (event) {
+            
             var file = this.files[0]
             var type = file.type
-            var videoNode = document.querySelector('video')
-            var canPlay = videoNode.canPlayType(type)
+            var videoNode = document.querySelectorAll('video')
+
+            var canPlay = videoNode[0].canPlayType(type)
+            var canPlay = videoNode[1].canPlayType(type)
+            var canPlay = videoNode[2].canPlayType(type)
+
+            videoNode[2].removeAttribute("controls")  
             if (canPlay === '') canPlay = 'no'
             var message = 'Can play type "' + type + '": ' + canPlay
             var isError = canPlay === 'no'
@@ -4125,13 +4179,38 @@ else
             //}
             var fileURL = URL.createObjectURL(file)
 
-            videoNode.src = fileURL
+            videoNode[0].src = fileURL
+            videoNode[1].src = fileURL
+            videoNode[2].src = fileURL
         }
         var inputNode = document.querySelector('#videoUploader')
 
         inputNode.addEventListener('change', playSelectedFile, false)
 
     }
+    //function playVideo(event) {
+
+    //    var playSelectedFile = function (event) {
+    //        var file = this.files[0]
+    //        var type = file.type
+    //        var videoNode = document.querySelector('video')
+    //        var canPlay = videoNode.canPlayType(type)
+    //        if (canPlay === '') canPlay = 'no'
+    //        var message = 'Can play type "' + type + '": ' + canPlay
+    //        var isError = canPlay === 'no'
+    //        //displayMessage(message, isError)
+    //        //if (isError) {
+    //        //    return
+    //        //}
+    //        var fileURL = URL.createObjectURL(file)
+
+    //        videoNode.src = fileURL
+    //    }
+    //    var inputNode = document.querySelector('#videoUploader')
+
+    //    inputNode.addEventListener('change', playSelectedFile, false)
+
+    //}
     $("#videoTag").css("display", "block");
 
 </script>
@@ -4201,7 +4280,41 @@ else
         $('html, body').animate({ scrollTop:0 }, 800);
 
     }
+    function previewImage()
+    {
+        //$("#videoTag_prev").play();
+        $('#videoTag_prev').get(0).play();
+        
+        $("#play_panel").css('display','none');
+        $("#Campaign_name_panel").css('display','none');
+        $("#buynow_panel").css('display','block');
+        $("#video_panel").css('display','block');
+        $("#pause_btn").css('display','block');
+        $("#close_btn").css('display','none');
+    }
+    function NavigateBack()
+    {
+        //$("#play_panel").css('display','block');
+        //$("#Campaign_name_panel").css('display','block');
+        //$("#buynow_panel").css('display','none');
+        //$("#video_panel").css('display','none');
+        //$("#pause_btn").css('display','none');
+        //var val=  $('#videoTag_prev').get(0).paused;
+        
+        if ($('#videoTag_prev').get(0).paused == false) {
+            $('#videoTag_prev').get(0).pause();
+            $('#pause_btn').val('Play'); 
+        } else {
+            $('#videoTag_prev').get(0).play();
+            $('#pause_btn').val('Pause'); 
+        }
 
+        //$("#close_btn").css('display','block');
+    }
+    function closevid()
+    {
+        $('#videoTag_prev').get(0).pause();
+    }
 </script>
 <!-- Modal -->
 <div class="modal fade" id="damModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="z-index:9999">

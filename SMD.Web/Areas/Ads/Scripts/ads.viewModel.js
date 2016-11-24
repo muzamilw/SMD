@@ -15,6 +15,7 @@ define("ads/ads.viewModel",
                     isEditorVisible = ko.observable(false),
                     isClickRateVisible = ko.observable(null),
                     IsthisEditCamapiagn = ko.observable(false),
+                    CompanyLogo = ko.observable(''),
                     IsBroadMarketing = ko.observable(true),
                     buyItQuestionStatus = ko.observable(false),
                     buyItQuestionLabelStatus = ko.observable(false),
@@ -3461,7 +3462,8 @@ define("ads/ads.viewModel",
                     getAdCampaignGridContent();
                     getCampaignBaseContent();
                     isEditorVisible(false);
-
+                    
+                    CompanyLogo(gCompanyLogo);
                 };
                 return {
                     initialize: initialize,
@@ -3690,7 +3692,8 @@ define("ads/ads.viewModel",
                     QQStatsAnalytics:QQStatsAnalytics,
                     isflageClose: isflageClose,
                     formAnalyticsData: formAnalyticsData,
-                    IsBroadMarketing: IsBroadMarketing
+                    IsBroadMarketing: IsBroadMarketing,
+                    CompanyLogo: CompanyLogo
                 };
             })()
         };
