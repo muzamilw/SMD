@@ -471,7 +471,7 @@ getfreeCouponCount = function () {
             }
 
             isShowArchiveBtn(false);
-            CouponTitle('New Deal');
+            CouponTitle('New Deal Groups');
             StatusValue('Draft');
             IsSubmitBtnVisible(true);
             couponModel().CouponPriceOptions.splice(0, 0, new model.CouponPriceOption());
