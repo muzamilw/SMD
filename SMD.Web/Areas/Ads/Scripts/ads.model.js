@@ -646,7 +646,7 @@
          selectedGenderAnalytics = ko.observable(0),
          selectedAgeAnalytics = ko.observable(0),
          selectedCityAnalytics = ko.observable("All"),
-         Stats = ko.observable()
+         Stats = ko.observable(source.Stats)
 
          
      return {
