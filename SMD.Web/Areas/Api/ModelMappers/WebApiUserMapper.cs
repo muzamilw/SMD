@@ -21,6 +21,14 @@ namespace SMD.MIS.Areas.Api.ModelMappers
         /// </summary>
         public static WebApiUser CreateFrom(this SMD.Models.IdentityModels.User source)
         {
+
+            bool isProfilecomplete = true;
+
+            if (source.DOB.HasValue == false || source.Title == "" || source.Title == null || source.Phone1 == null || source.Phone1 == "")
+            {
+                isProfilecomplete = false;
+            }
+
             var user = new WebApiUser
                    {
                        UserId = source.Id,
@@ -59,7 +67,8 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                        RoleId = source.Roles.Select(c => c.Id).FirstOrDefault(),
                        VoucherSecretKey = source.Company.VoucherSecretKey,
                        Phone1CodeCountryID = source.Phone1CodeCountryID.HasValue ? source.Phone1CodeCountryID.Value : 0,
-                       Phone1Code = source.Country != null ? source.Country.CountryPhoneCode : ""
+                       Phone1Code = source.Country != null ? source.Country.CountryName + " " + source.Country.CountryPhoneCode : "",
+                       ProfileComplete = isProfilecomplete
                    };
 
             return user;
@@ -71,7 +80,7 @@ namespace SMD.MIS.Areas.Api.ModelMappers
 
             bool isProfilecomplete = true;
 
-            if (source.IndustryId.HasValue == false || source.DOB.HasValue == false || source.Title == "" || source.Title == null )//|| source.Phone1 == null || source.Phone1 == "")
+            if (source.DOB.HasValue == false || source.Title == "" || source.Title == null || source.Phone1 == null || source.Phone1 == "")
             {
                 isProfilecomplete = false;
             }
@@ -100,7 +109,8 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                 HttpContext.Current.Request.Url.Host + "/" + source.ProfileImage + "?" + DateTime.Now : string.Empty,
                 Title = source.Title == null ? "": source.Title,
                 Phone1CodeCountryID = source.Phone1CodeCountryID.HasValue == true ?  source.Phone1CodeCountryID.Value : 0,
-                Phone1Code = source.Country != null? source.Country.CountryName + " " + source.Country.CountryPhoneCode : ""
+                Phone1Code = source.Country != null? source.Country.CountryName + " " + source.Country.CountryPhoneCode : "",
+                ProfileComplete = isProfilecomplete
                
             };
 

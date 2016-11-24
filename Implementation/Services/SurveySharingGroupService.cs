@@ -90,6 +90,8 @@ namespace SMD.Implementation.Services
 
             foreach (var item in group.SurveySharingGroupMembers)
             {
+                item.PhoneNumber = Regex.Replace(item.PhoneNumber, @"\s+", "");
+                item.PhoneNumber = item.PhoneNumber.Replace("-", "");
 
                 var user = aspnetUserRepository.GetUserbyPhoneNo(item.PhoneNumber);
                 if ( user != null)
@@ -107,7 +109,7 @@ namespace SMD.Implementation.Services
                 }
 
 
-                item.PhoneNumber = Regex.Replace(item.PhoneNumber, @"\s+", "");
+                
 
 
                 //item.SharingGroupId = group.SharingGroupId;

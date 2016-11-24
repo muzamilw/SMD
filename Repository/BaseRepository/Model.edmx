@@ -7510,21 +7510,23 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="String" Name="UserId" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="CompanyId" Nullable="true" />
           <Property Type="String" Name="SurveyTitle" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="LeftPicturePath" Nullable="true" MaxLength="300" />
-          <Property Type="String" Name="RightPicturePath" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="LeftPicturePath" Nullable="true" MaxLength="327" />
+          <Property Type="String" Name="RightPicturePath" Nullable="true" MaxLength="327" />
           <Property Type="DateTime" Name="CreationDate" Nullable="true" Precision="23" />
           <Property Type="Int64" Name="SharingGroupId" Nullable="true" />
           <Property Type="Int32" Name="TotalShared" Nullable="true" />
-          <Property Type="Int32" Name="TotalAnswers" Nullable="true" />
-          <Property Type="Int32" Name="LeftAnswerCount" Nullable="true" />
-          <Property Type="Int32" Name="RightAnswerCount" Nullable="true" />
-          <Property Type="Int32" Name="LefMmaleCount" Nullable="true" />
-          <Property Type="Int32" Name="LeftFemaleCount" Nullable="true" />
-          <Property Type="Int32" Name="RightMaleCount" Nullable="true" />
-          <Property Type="Int32" Name="RightFemaleCount" Nullable="true" />
+          <Property Type="Int32" Name="TotalAnswers" Nullable="false" />
+          <Property Type="Int32" Name="LeftAnswerCount" Nullable="false" />
+          <Property Type="Int32" Name="RightAnswerCount" Nullable="false" />
+          <Property Type="Int32" Name="LefMmaleCount" Nullable="false" />
+          <Property Type="Int32" Name="LeftFemaleCount" Nullable="false" />
+          <Property Type="Int32" Name="RightMaleCount" Nullable="false" />
+          <Property Type="Int32" Name="RightFemaleCount" Nullable="false" />
           <Property Type="String" Name="GroupName" Nullable="true" MaxLength="500" />
           <Property Type="Int32" Name="LeftAnswerPerc" Nullable="true" />
           <Property Type="Int32" Name="RightAnswerPerc" Nullable="true" />
+          <Property Type="String" Name="SenderFullName" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="SenderProfileImage" Nullable="true" MaxLength="200" />
         </ComplexType>
         <ComplexType Name="Dashboard_analytics_Result">
           <Property Type="Int64" Name="CampaignID" Nullable="true" />
@@ -9562,6 +9564,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
                 <ScalarProperty Name="GroupName" ColumnName="GroupName" />
                 <ScalarProperty Name="LeftAnswerPerc" ColumnName="LeftAnswerPerc" />
                 <ScalarProperty Name="RightAnswerPerc" ColumnName="RightAnswerPerc" />
+                <ScalarProperty Name="SenderFullName" ColumnName="SenderFullName" />
+                <ScalarProperty Name="SenderProfileImage" ColumnName="SenderProfileImage" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

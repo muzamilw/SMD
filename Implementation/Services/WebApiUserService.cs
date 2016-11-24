@@ -20,6 +20,7 @@ using SMD.Models.IdentityModels;
 using SMD.Models.RequestModels;
 using SMD.Models.ResponseModels;
 using com.esendex.sdk.messaging;
+using System.Text.RegularExpressions;
 
 namespace SMD.Implementation.Services
 {
@@ -1064,8 +1065,10 @@ namespace SMD.Implementation.Services
 
             if (! string.IsNullOrEmpty( request.Phone1))
             {
-                user.Phone1 = request.Phone1;
 
+                var phone = Regex.Replace(request.Phone1, @"\s+", "");
+                phone = phone.Replace ("-","");
+                user.Phone1 = phone;
             }
 
             user.Phone1CodeCountryID = request.Phone1CountryID;
