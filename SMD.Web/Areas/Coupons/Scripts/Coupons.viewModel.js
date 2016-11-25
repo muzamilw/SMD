@@ -124,6 +124,7 @@ define("Coupons/Coupons.viewModel",
                     numberOFCouponsToGenerate = ko.observable(0),
                     TempSelectedObj = ko.observable(),
                     CouponTitle = ko.observable(),
+                    CouponsubTitle = ko.observable(),
                     StatusValue = ko.observable(),
                     currencyCode = ko.observable(),
                     currencySymbol = ko.observable(),
@@ -469,7 +470,7 @@ getfreeCouponCount = function () {
             isTerminateBtnVisible(false);
             isNewCampaignVisible(false);
             IsnewCoupon(true);
-
+            CouponsubTitle("(Deals)");
             $("#btnCancel").css("display", "block");
             $(".hideInCoupons").css("display", "none");
 
@@ -493,6 +494,10 @@ getfreeCouponCount = function () {
             IsSubmitBtnVisible(true);
             couponModel().CouponPriceOptions.splice(0, 0, new model.CouponPriceOption());
             couponModel().BuyitLandingPageUrl('https://');
+            couponModel().IsShowReviews(true);
+            couponModel().IsShowAddress(true);
+            couponModel().IsShowMap(true);
+            couponModel().IsShowPhoneNo(true);
 
             Banner2Flag(false);
             Banner3Flag(false);
@@ -945,6 +950,7 @@ getfreeCouponCount = function () {
                 IsnewCoupon(false);
                 previewScreenNumber(1);
                 CouponTitle(item.CouponTitle());
+                CouponsubTitle("");
                 selectedCouponIdAnalytics(item.CouponId());
                 $(".hideInCoupons").css("display", "none");
 
@@ -2524,7 +2530,8 @@ getfreeCouponCount = function () {
                     selectedCTGenderAnalytics: selectedCTGenderAnalytics,
                     selectedCTAgeAnalytics: selectedCTAgeAnalytics,
                     getDDCTAnalytic: getDDCTAnalytic,
-                    DDCTStatsAnalytics: DDCTStatsAnalytics
+                    DDCTStatsAnalytics: DDCTStatsAnalytics,
+                    CouponsubTitle: CouponsubTitle
                 };
             })()
         };
