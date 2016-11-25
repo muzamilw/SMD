@@ -2,59 +2,62 @@
 
 <div data-bind="visible: $root.isAdvertdashboardVisible()" style="display: none;padding-left:0px;" class=" col-lg-12 form-horizontal">
     <div class="main-box main-box-subpage">
-        <div class="row">
-
-            <span class="charts_label" style="margin-left: 16px;">Charts & Analytics</span>
-
+        <div class="row" >
             <div id="roor_panel" style="margin-top:11px;">
-                <div class="col-lg-6 adsubHeading Theme_standard_clr borderbtmline" style="padding-bottom:10px;padding-left:15px;">
-                    Timeline
+                <div class="col-lg-3" style="padding-bottom:10px;padding-left:15px;">
+                    <span class="charts_label" style="margin-left: 16px;">Charts & Analytics</span>
                 </div>
-                <div class="col-lg-3 adsubHeading Theme_standard_clr borderbtmline" style="padding-bottom:10px;">
+                <div class="col-lg-4 " style="padding-bottom:10px;padding-left:15px;">
+                    
+                </div>
+                <div class="col-lg-2 adsubHeading Theme_standard_clr borderbtmline" style="padding-bottom:10px;">
                     <label class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Date range </label>
                 </div>
-                <div class="col-lg-3 adsubHeading Theme_standard_clr borderbtmline" style="padding-bottom:2px;">
-                    <select class="form-control" id="ddDateRangeDropDown" data-bind="options: $root.DateRangeDropDown, optionsText: 'name', optionsValue: 'id', value:$root.selecteddateRangeAnalytics, event: { change: $root.getAdsByCampaignIdAnalytics }"></select>
+                <div class="col-lg-3 adsubHeading Theme_standard_clr borderbtmline"  style="padding-bottom:2px;">
+                    <select style="width:73%;" class="form-control" id="ddDateRangeDropDown" data-bind="options: $root.DateRangeDropDown, optionsText: 'name', optionsValue: 'id', value:$root.selecteddateRangeAnalytics, event: { change: $root.getAdsByCampaignIdAnalytics }"></select>
                 </div>
             </div>
         </div>
-        <div id="ddpanel">
-            <div class="col-lg-3"></div>
-            <div class="col-lg-1">
-              
-            </div>
-            <div class="col-lg-3">
-                <select class="form-control margin10 pull-left" id="ddCampaignStatusDropDown" data-bind="options: $root.CampaignStatusDropDown, optionsText: 'name', optionsValue: 'id', value:$root.selectedCampStatusAnalytics, event: { change: $root.getAdsByCampaignIdAnalytics }"></select>
-            </div>
-            <div class="col-lg-2">
-                <label style="padding-top:18px;" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Granularity level </label>
-            </div>
-            <div class="col-lg-3">
-                <select class="form-control margin10 pull-left" id="ddGranularityDropDown" data-bind="options: $root.granularityDropDown, optionsText: 'name', optionsValue: 'id', value:$root.selectedGranularityAnalytics, event: { change: $root.getAdsByCampaignIdAnalytics }"></select>
-            </div>
-
-            
-
-        </div>
-        <div class="row main-box">
-            <div class="col-lg-12">
-                <div class=" margin10">
-                    <!-- ko if: $root.selectedCampStatusAnalytics() === 1  -->
-                    <div style="height:150px;" data-bind="morris: {type: 'Line', data: $root.AdsCampaignAnalyticsData, xkey: 'Granual', ykeys: ['openStats', 'Stats'], labels: ['Total Impressions', 'Answered'], yLabelFormat: function(y){return y != Math.round(y)?'':y;}, parseTime:false, setAxisAlignFirstX: true, lineColors: ['blue','green'] }"></div>
-                    <!-- /ko -->
-                    <!-- ko if: $root.selectedCampStatusAnalytics() === 2  -->
-                    <div style="height:150px;" data-bind="morris: {type: 'Line', data: $root.AdsCampaignAnalyticsData, xkey: 'Granual', ykeys: ['openStats', 'Stats'], labels: ['Total Impressions', 'Reffered'], yLabelFormat: function(y){return y != Math.round(y)?'':y;},  parseTime:false, setAxisAlignFirstX: true, lineColors: ['blue','green'] }"></div>
-                    <!-- /ko -->
-                    <!-- ko if: $root.selectedCampStatusAnalytics() === 3  -->
-                    <div style="height:150px;" data-bind="morris: {type: 'Line', data: $root.AdsCampaignAnalyticsData, xkey: 'Granual', ykeys: ['openStats', 'Stats'], labels: ['Total Impressions', 'Skipped'], yLabelFormat: function(y){return y != Math.round(y)?'':y;},  parseTime:false, setAxisAlignFirstX: true, lineColors: ['blue','red'] }"></div>
-                    <!-- /ko -->
-
+        <div class="analyticsBox">
+            <div id="ddpanel">
+                <div class="col-lg-3">
+                    <select class="analyticH2" disabled="disabled" data-bind="options: $root.CampaignStatusDropDown, optionsText: 'name', optionsValue: 'id', value:$root.selectedCampStatusAnalytics, event: { change: $root.getAdsByCampaignIdAnalytics }"></select>
+                </div>
+                <div class="col-lg-2">
 
                 </div>
+                <div class="col-lg-3">
+                    <select style="width:80%;"  class="form-control margin10" id="ddCampaignStatusDropDown" data-bind="options: $root.CampaignStatusDropDown, optionsText: 'name', optionsValue: 'id', value:$root.selectedCampStatusAnalytics, event: { change: $root.getAdsByCampaignIdAnalytics }"></select>
+                </div>
+                <div class="col-lg-1">
+                    <label style="padding-top:18px;" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Granularity </label>
+                </div>
+                <div class="col-lg-3">
+                    <select style="width:80%;" class="form-control margin10 pull-left" id="ddGranularityDropDown" data-bind="options: $root.granularityDropDown, optionsText: 'name', optionsValue: 'id', value:$root.selectedGranularityAnalytics, event: { change: $root.getAdsByCampaignIdAnalytics }"></select>
+                </div>
+
+
+
             </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class=" margin10">
+                        <!-- ko if: $root.selectedCampStatusAnalytics() === 1  -->
+                        <div style="height:150px;" data-bind="morris: {type: 'Line', data: $root.AdsCampaignAnalyticsData, xkey: 'Granual', ykeys: ['openStats', 'Stats'], labels: ['Total Impressions', 'Answered'], yLabelFormat: function(y){return y != Math.round(y)?'':y;}, parseTime:false, setAxisAlignFirstX: true, lineColors: ['blue','green'] }"></div>
+                        <!-- /ko -->
+                        <!-- ko if: $root.selectedCampStatusAnalytics() === 2  -->
+                        <div style="height:150px;" data-bind="morris: {type: 'Line', data: $root.AdsCampaignAnalyticsData, xkey: 'Granual', ykeys: ['openStats', 'Stats'], labels: ['Total Impressions', 'Reffered'], yLabelFormat: function(y){return y != Math.round(y)?'':y;},  parseTime:false, setAxisAlignFirstX: true, lineColors: ['blue','green'] }"></div>
+                        <!-- /ko -->
+                        <!-- ko if: $root.selectedCampStatusAnalytics() === 3  -->
+                        <div style="height:150px;" data-bind="morris: {type: 'Line', data: $root.AdsCampaignAnalyticsData, xkey: 'Granual', ykeys: ['openStats', 'Stats'], labels: ['Total Impressions', 'Skipped'], yLabelFormat: function(y){return y != Math.round(y)?'':y;},  parseTime:false, setAxisAlignFirstX: true, lineColors: ['blue','red'] }"></div>
+                        <!-- /ko -->
 
+
+                    </div>
+                </div>
+
+            </div>
         </div>
-
         @*<div class="row main-box">
             <div class="col-lg-12">
                 <div class=" margin10">
@@ -63,47 +66,55 @@
             </div>
 
         </div>*@
-        <div class="row">
-            <div class="adsubHeading Theme_standard_clr borderbtmline" style="padding-left:16px;">
-                <br />
-                Click-Thru vs Answered #
+        <br />
+        <div class="analyticsBox">
+            <div class="row">
+                <div class="col-lg-12">
+                    <span class="analyticH2">
+                        Click-Thru vs Answered #
+                    </span>
+                </div>
             </div>
-        </div>
-        <div class="row main-box">
+            <div class="row">
+                <div class="col-lg-6">
+                    <!--ko if: $root.selecteddateRangeAnalytics() == 1 -->
+                    <div>Date range : Last 30 days </div>
+                    <!--/ko-->
+                    <!--ko if: $root.selecteddateRangeAnalytics() == 2 -->
+                    <div>Date range : All time </div>
+                    <!--/ko-->
+                </div>
+                <div class="col-lg-6">
+                </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 main-box">
+                        <div data-bind="morris: {type: 'Donut', data: $root.CampaignRatioAnalyticData, resize:true, colors: ['green', 'blue','orange' ] }" style="width:250px;height:250px;padding-left:50px;cursor: pointer;"></div>
+                    </div>
+                    <div class="col-lg-6">
+                        <table style="margin-top:70px;">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        &nbsp;
+                                    </th>
+                                    <th class="padingL15">
+                                        All time
+                                    </th>
+                                    <th class="padingL15">
+                                        Last 30 days
+                                    </th>
+                                </tr>
+                            </thead>
+                            <!-- ko template: { name: 'CampaignTblAnalyticsDataTemplate' , foreach: $root.CampaignTblAnalyticsData } -->
+                            <!-- /ko -->
+                        </table>
+                    </div>
 
-            <div class="col-lg-6">
-                <!--ko if: $root.selecteddateRangeAnalytics() == 1 -->
-                <div>Date range : Last 30 days </div>
-                <!--/ko-->
-                <!--ko if: $root.selecteddateRangeAnalytics() == 2 -->
-                <div>Date range : All time </div>
-                <!--/ko-->
-
-                <div data-bind="morris: {type: 'Donut', data: $root.CampaignRatioAnalyticData, resize:true, colors: ['green', 'blue','orange' ] }" style="width:250px;height:250px;padding-left:50px;cursor: pointer;"></div>
+                </div>
 
             </div>
-            <div class="col-lg-6">
-                <table style="margin-top:70px;">
-                    <thead>
-                        <tr>
-                            <th>
-                                &nbsp;
-                            </th>
-                            <th class="padingL15">
-                                All time
-                            </th>
-                            <th class="padingL15">
-                                Last 30 days
-                            </th>
-                        </tr>
-                    </thead>
-                    <!-- ko template: { name: 'CampaignTblAnalyticsDataTemplate' , foreach: $root.CampaignTblAnalyticsData } -->
-                    <!-- /ko -->
-                </table>
-            </div>
-
-        </div>
-        <div class="row">
+         <div class="row">
             <div class="adsubHeading Theme_standard_clr borderbtmline" style="padding-left:16px;">
                 <br />
                 Campaign ROI

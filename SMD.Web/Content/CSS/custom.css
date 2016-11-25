@@ -543,3 +543,20 @@ svg{
     padding-top : 5px;
 
 }
+.analyticH2 {
+    -webkit-appearance: none;  /*Removes default chrome and safari style*/
+    -moz-appearance: none;  /*Removes default style Firefox*/
+    border:none;
+    font-weight:bold;
+    background-color:#eee;
+    padding-top: 10px;
+    font-size: x-large;
+
+}
+.analyticsBox{
+     background-color:#eee ;
+     border-radius: 15px;
+     padding : 20px;
+     /*background-color:gainsboro */
+}
+
