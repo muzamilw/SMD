@@ -181,24 +181,28 @@ define("ads/ads.viewModel",
                 ProfessionAnalyticsData = ko.observableArray([]),
                 QQChoicesAnalyticsData = ko.observableArray([]),
                 formAnalyticsData = ko.observableArray([]),
-                GenderAnalyticsData = ko.observableArray([{ id: 0, name: "All" }, { id: 1, name: "male" }, { id: 2, name: "female" } ]),
+                GenderAnalyticsData = ko.observableArray([{ id: 0, name: "All" }, { id: 1, name: "male" }, { id: 2, name: "female" }]),
                 AgeRangeAnalyticsData = ko.observableArray([{ id: 0, name: "All" }, { id: 1, name: "10-20" }, { id: 2, name: "20-30" }, { id: 3, name: "30-40" }, { id: 4, name: "40-50" }, { id: 5, name: "50-60" }, { id: 6, name: "60-70" }, { id: 7, name: "70-80" }, { id: 8, name: "80-90" }, { id: 9, name: "90+" }]),
-                
+
                 QuizQuestionAnalyticData = ko.observable(),
                 selectedQQGAnalytics = ko.observable(0),
                 selectedQQCAnalytics = ko.observable(0),
                 selectedQQCtAnalytics = ko.observable("All"),
                 selectedQQAAnalytics = ko.observable(0),
                 selectedQQPAnalytics = ko.observable("All"),
+                isProfileQuestionUsed = ko.observable(false),
+                isPollQuestionsQuestionUsed = ko.observable(false),
+                isPreviousQuizQuestionsUsed = ko.observable(false),
                 QQStatsAnalytics = ko.observable(),
+                SelectedItemAnalytics = ko.observable(),
 				openAdvertiserDashboardScreen = function (Campaign) {
-				 
+
 				    if (!isNewCampaign()) {
 				        isflageClose(true);
 				        selectedCampaignIdAnalytics(Campaign.CampaignID());
 				        getAdsByCampaignIdAnalytics();
 				        getFormAnalytic();
-				     //   getQQAnalytic();
+				        // getQQAnalytic();
 				        $("#ddGranularityDropDown").removeAttr("disabled");
 				        $("#ddDateRangeDropDown").removeAttr("disabled");
 				        $("#ddCampaignStatusDropDown").removeAttr("disabled");
@@ -216,21 +220,22 @@ define("ads/ads.viewModel",
 				    }
 				},
                       getQAnalytic = function (item) {
-                          var data = item;
+                        //  var data = item;
+                          SelectedItemAnalytics(item);
                           dataservice.getQQAnalytic({
                               Id: selectedCampaignIdAnalytics(),
-                              Choice :0,
+                              Choice: 0,
                               Gender: item.selectedGenderAnalytics(),
-                              age: item.selectedQQAAnalytics(),
+                              age: item.selectedAgeAnalytics(),
                               profession: "All",
-                              City: selectedCityAnalytics(),
+                              City: item.selectedCityAnalytics(),
                               QId: item.Id(),
-                              type :item.type()
+                              type: item.typ()
                           }, {
                               success: function (data) {
                                   if (data != null) {
-                                      QQStatsAnalytics(data.QQStats);
-
+                                    //  QQStatsAnalytics(data.QQStats);
+                                      SelectedItemAnalytics().Stats(data.Stats)
                                   }
 
                               },
@@ -250,7 +255,7 @@ define("ads/ads.viewModel",
                         profession: selectedQQPAnalytics(),
                         City: selectedQQCtAnalytics(),
                         QId: 0,
-                        type : 1
+                        type: 1
                     }, {
                         success: function (data) {
                             if (data != null) {
@@ -285,9 +290,18 @@ define("ads/ads.viewModel",
                                 formAnalyticsData.removeAll();
                                 _.each(data.formData, function (item) {
                                     formAnalyticsData.push(model.formAnalyticsDataModel(item));
+                                    if (item.typ==2) {
+                                        isProfileQuestionUsed(true);
+                                    }
+                                    if (item.typ == 3) {
+                                        isPollQuestionsQuestionUsed(true);
+                                    }
+                                    if (item.typ == 4) {
+                                        isPreviousQuizQuestionsUsed(true);
+                                    }
                                 });
-                              
-                                
+
+                               
                             }
 
                         },
@@ -329,9 +343,9 @@ define("ads/ads.viewModel",
 				CloseCampaignADAnalyticView = function () {
 				    isAdvertdashboardVisible(false);
 				    CampaignRatioAnalyticData(1);
-					selecteddateRangeAnalytics(1);
-					selectedGranularityAnalytics(1);
-					isflageClose(false);
+				    selecteddateRangeAnalytics(1);
+				    selectedGranularityAnalytics(1);
+				    isflageClose(false);
 				},
 
                 // End Advertiser dashBoard Section
@@ -493,18 +507,18 @@ define("ads/ads.viewModel",
                 getAdCampaignGridContent();
             },
                 // Add new Profile Question
-               
+
             addNewCampaign = function () {
-               
+
                 IsthisEditCamapiagn(false);
-               
+
                 var selectionoption = $("#ddTextBtns").val();
 
                 if (selectionoption == '0' || selectionoption == undefined) {
                     if (mode == 4)
                         showLandingPageUrl(true);
                     else
-                    showLandingPageUrl(false);
+                        showLandingPageUrl(false);
                 }
                 else
                     showLandingPageUrl(true);
@@ -571,11 +585,11 @@ define("ads/ads.viewModel",
                // showMainMenu();
            },
             closeNewCampaignDialog = function () {
-                
-                CloseCampaignADAnalyticView();
-              //  if (IsthisEditCamapiagn())
 
-				if (campaignModel().hasChanges() || (logoImage != '' && mode == 4 && (campaignModel().Status() == null || campaignModel().Status() == 1))) {    //&& (campaignModel().Status() == null || campaignModel().Status() == 1)
+                CloseCampaignADAnalyticView();
+                //  if (IsthisEditCamapiagn())
+
+                if (campaignModel().hasChanges() || (logoImage != '' && mode == 4 && (campaignModel().Status() == null || campaignModel().Status() == 1))) {    //&& (campaignModel().Status() == null || campaignModel().Status() == 1)
 
                     confirmation.messageText("Do you want to save changes?");
                     confirmation.afterProceed(function () {
@@ -654,7 +668,7 @@ define("ads/ads.viewModel",
                         $("#MarketobjDiv").css("display", "none");
                         $("#topArea,#headdesc").css("display", "block");
                         $(".closecls").css("display", "block");
-                   
+
                         $("#Heading_div").css("display", "block");
                     });
 
@@ -903,45 +917,45 @@ define("ads/ads.viewModel",
             },
                 ValidateCampaign = function (mode) {
 
-                     errorListNew.removeAll();
+                    errorListNew.removeAll();
 
-                     if (campaignModel().CampaignName() == "" || campaignModel().CampaignName() == undefined) {
-                         errorListNew.push({ name: "Please enter ad Title.", element: "" });
+                    if (campaignModel().CampaignName() == "" || campaignModel().CampaignName() == undefined) {
+                        errorListNew.push({ name: "Please enter ad Title.", element: "" });
 
-                     }
+                    }
 
-                     if (campaignModel().ClickRate() == undefined) {
-                         campaignModel().ClickRate(0);
-                     }
+                    if (campaignModel().ClickRate() == undefined) {
+                        campaignModel().ClickRate(0);
+                    }
 
-                     var minclickrate = 0;
-                     if (mode == 4)
-                         minclickrate = 0.08;
-                     else
-                         minclickrate = 0.16;
-               
+                    var minclickrate = 0;
+                    if (mode == 4)
+                        minclickrate = 0.08;
+                    else
+                        minclickrate = 0.16;
 
 
-                     if (campaignModel().ClickRate() < minclickrate) {
-                         errorListNew.push({ name: "Ad Click should be greater than $ "+minclickrate+" USD", element: "" });
-                     }
 
-                     if ((parseInt(campaignModel().MaxBudget()) < parseInt(campaignModel().ClickRate()))) {
-                         errorListNew.push({ name: "Campaign budget should be greater than Ad click.", element: "" });
-                     }
+                    if (campaignModel().ClickRate() < minclickrate) {
+                        errorListNew.push({ name: "Ad Click should be greater than $ " + minclickrate + " USD", element: "" });
+                    }
 
-                     if (reachedAudience() == 0 && mode != 1) {
-                         errorListNew.push({
-                             name: "You have no audience against the specified criteria please broaden your audience definition.", element: ""
-                         });
-                     }
+                    if ((parseInt(campaignModel().MaxBudget()) < parseInt(campaignModel().ClickRate()))) {
+                        errorListNew.push({ name: "Campaign budget should be greater than Ad click.", element: "" });
+                    }
 
-                     if (errorListNew() == null || errorListNew().length == 0) {
-                         return true;
-                     } else {
-                         return false;
-                     }
-                 },
+                    if (reachedAudience() == 0 && mode != 1) {
+                        errorListNew.push({
+                            name: "You have no audience against the specified criteria please broaden your audience definition.", element: ""
+                        });
+                    }
+
+                    if (errorListNew() == null || errorListNew().length == 0) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                },
                 SaveDraftCampaign = function () {
                     if (ValidateCampaign(1)) {
                         saveCampaign(1);
@@ -968,8 +982,8 @@ define("ads/ads.viewModel",
                       confirmation.hide();
                   });
                   confirmation.afterProceed(function () {
-                          campaignModel(item);
-                          saveCampaign(7);
+                      campaignModel(item);
+                      saveCampaign(7);
                   });
               },
               ArchiveCampaign = function () {
@@ -1084,7 +1098,7 @@ define("ads/ads.viewModel",
 
                 //if other question then
                 if (buyItQuestionLabelStatus() == true) {
-             
+
                     campaignModel().BuyItButtonLabel();
 
                     // couponModel().BuyitBtnLabel(ButItOtherLabel());
@@ -1110,7 +1124,7 @@ define("ads/ads.viewModel",
                 }
 
                 campaignModel().Status(mode);
-           
+
                 if (campaignModel().IsUseFilter() == 0) {
 
 
@@ -1125,7 +1139,7 @@ define("ads/ads.viewModel",
                 else {
                     campaignModel().IsUseFilter('1');
                 }
-               
+
                 if (campaignModel().IsUseFilter() == 0) {
 
                     toastr.error("No Target Match.");
@@ -1327,24 +1341,24 @@ define("ads/ads.viewModel",
                     if (isNewCriteria()) {
                         if (matchedSurveyCriteriaRec == null) {
                             if (UserAndCostDetail() != null) {
-                            if (UserAndCostDetail().OtherClausePrice != null) {
-                                pricePerclick(pricePerclick() + UserAndCostDetail().OtherClausePrice);
+                                if (UserAndCostDetail().OtherClausePrice != null) {
+                                    pricePerclick(pricePerclick() + UserAndCostDetail().OtherClausePrice);
 
+                                }
+
+                                campaignModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
+                                    Type: 6,
+                                    PQId: selectedCriteria().PQID(),
+                                    PQAnswerId: selectedCriteria().PQAnswerID(),
+                                    QuizCampaignId: item.CampaignId,
+                                    QuizAnswerId: type,
+                                    questionString: selectedCriteria().questionString(),
+                                    answerString: selectedCriteria().answerString(),
+                                    IncludeorExclude: selectedCriteria().IncludeorExclude(),
+                                    CampaignId: campaignModel().CampaignID,
+                                    criteriaPrice: UserAndCostDetail().OtherClausePrice
+                                }));
                             }
-
-                            campaignModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
-                                Type: 6,
-                                PQId: selectedCriteria().PQID(),
-                                PQAnswerId: selectedCriteria().PQAnswerID(),
-                                QuizCampaignId: item.CampaignId,
-                                QuizAnswerId: type,
-                                questionString: selectedCriteria().questionString(),
-                                answerString: selectedCriteria().answerString(),
-                                IncludeorExclude: selectedCriteria().IncludeorExclude(),
-                                CampaignId: campaignModel().CampaignID,
-                                criteriaPrice: UserAndCostDetail().OtherClausePrice
-                            }));
-                        }
                         } else {
 
 
@@ -1614,7 +1628,7 @@ define("ads/ads.viewModel",
                 onChangeProfileQuestion = function (item) {
 
                     var y = $(".listview").scrollTop();  //your current y position on the page
-                   
+
 
                     if (item == null)
                         return;
@@ -1637,7 +1651,7 @@ define("ads/ads.viewModel",
                                 profileAnswerList.valueHasMutated();
 
                                 // $(".listview").scrollTop(y+40);
-                              
+
                             }
 
                         },
@@ -1703,7 +1717,7 @@ define("ads/ads.viewModel",
                     _.each(campaignModel().AdCampaignTargetLocations(), function (item) {
                         addCountryToCountryList(item.CountryID(), item.Country());
                     });
-                   // toastr.success("Removed Successfully!");
+                    // toastr.success("Removed Successfully!");
                     // }
 
                 },
@@ -1714,7 +1728,7 @@ define("ads/ads.viewModel",
                     selectedLocation().IncludeorExclude = (selectedLocationIncludeExclude);
 
                     if ($.grep(campaignModel().AdCampaignTargetLocations(), function (el) { return el.City() === selectedLocation().City && el.Country() === selectedLocation().Country; }).length === 0) {
-                        
+
 
                         campaignModel().AdCampaignTargetLocations.push(new model.AdCampaignTargetLocation.Create({
                             CountryId: selectedLocation().CountryID,
@@ -1827,41 +1841,40 @@ define("ads/ads.viewModel",
                   campaignCSVCallback = function (file, data) {
 
                   },
-                Changefilter = function ()
-                {
-                    
+                Changefilter = function () {
+
                     if (campaignModel().IsUseFilter() == 0) {
 
-                         confirmation.messageText("Switching to Basic Targeting will remove all Hyper Targeting filters.Continue to Basic Targeting,  Yes No.");
-                         confirmation.afterProceed(function () {
-                             IsBroadMarketing(false);
+                        confirmation.messageText("Switching to Basic Targeting will remove all Hyper Targeting filters.Continue to Basic Targeting,  Yes No.");
+                        confirmation.afterProceed(function () {
+                            IsBroadMarketing(false);
                             campaignModel().AdCampaignTargetLocations.removeAll();
                             campaignModel().AdCampaignTargetCriterias.removeAll();
                             //campaignModel().AgeRangeEnd(80);
                             //campaignModel().AgeRangeStart(13);
-                           // campaignModel().Gender('1');
-                            
+                            // campaignModel().Gender('1');
+
                             setTimeout(function () {
                                 ShowAudienceCounter(0);
-                            },500);
-                         });
-                         confirmation.show();
-                         confirmation.afterCancel(function () {
-                             IsBroadMarketing(true);
-                             campaignModel().IsUseFilter('1');
-                             confirmation.hide();
-                         });
+                            }, 500);
+                        });
+                        confirmation.show();
+                        confirmation.afterCancel(function () {
+                            IsBroadMarketing(true);
+                            campaignModel().IsUseFilter('1');
+                            confirmation.hide();
+                        });
                     }
                     else {
-                        
+
                         confirmation.messageText("Switching to Basic Targeting will remove all Hyper Targeting filters.Continue to Basic Targeting,  Yes No.");
                         confirmation.afterProceed(function () {
                             IsBroadMarketing(true);
                             campaignModel().AdCampaignTargetLocations.removeAll();
                             campaignModel().AdCampaignTargetCriterias.removeAll();
-                           // campaignModel().AgeRangeEnd(80);
-                          //  campaignModel().AgeRangeStart(13);
-                        //    campaignModel().Gender('1');
+                            // campaignModel().AgeRangeEnd(80);
+                            //  campaignModel().AgeRangeStart(13);
+                            //    campaignModel().Gender('1');
                             getAudienceCount();
                         });
                         confirmation.show();
@@ -1871,16 +1884,15 @@ define("ads/ads.viewModel",
                             IsBroadMarketing(false);
                         });
                     }
-                    
+
                 },
-                ChangeBroadfilter = function ()
-                {
+                ChangeBroadfilter = function () {
                     alert('broad');
                     getAudienceCount();
                 },
                 onEditCampaign = function (item) {
-                   
-                   
+
+
                     IsthisEditCamapiagn(true);
                     previewScreenNumber(1);
                     isTerminateBtnVisible(false);
@@ -1937,8 +1949,8 @@ define("ads/ads.viewModel",
 
                                         campaignModel().LogoUrl("/images/standardplaceholder.png");
                                     }
-                                   
-                                   
+
+
 
 
                                     VideoLink2src(campaignModel().VideoLink2() + '' + '');
@@ -1983,7 +1995,7 @@ define("ads/ads.viewModel",
 
                                                     Type: cclist.Type,
                                                     PQId: cclist.PQId,
-                                                    PQAnswerId: cclist.PQAnswerId,  
+                                                    PQAnswerId: cclist.PQAnswerId,
                                                     QuizCampaignId: cclist.QuizCampaignId,
                                                     QuizAnswerId: cclist.QuizAnswerId,
                                                     questionString: cclist.questionString,
@@ -2255,7 +2267,7 @@ define("ads/ads.viewModel",
                                             buyItQuestionLabelStatus(false);
                                             $("#ddTextBtns").val(buyitbuttonlabel);
                                             BuyItStatus(false);
-                                            
+
                                         }
                                         else {
                                             $("#ddTextBtns").val('999');
@@ -2341,13 +2353,13 @@ define("ads/ads.viewModel",
                     }
                 },
                 changeStatus = function (status) {
-                   
-                        if (campaignModel() != undefined)
-                            saveCampaign(status);
 
-                        $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
-                        $("#btnSubmitForApproval,#saveBtn,.lang_delSurvey,.table-link").css("display", "inline-block");
-                        $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign").removeAttr('disabled');
+                    if (campaignModel() != undefined)
+                        saveCampaign(status);
+
+                    $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
+                    $("#btnSubmitForApproval,#saveBtn,.lang_delSurvey,.table-link").css("display", "inline-block");
+                    $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign").removeAttr('disabled');
                 },
                 submitResumeData = function () {
                     if (UserAndCostDetail() != undefined && (UserAndCostDetail().Status == null || UserAndCostDetail().Status == 0)) {
@@ -2364,7 +2376,7 @@ define("ads/ads.viewModel",
                     }
                 },
                 nextPreviewScreen = function () {
-                    
+
                     var noErrors = true;
                     if (previewScreenNumber() == 1) {
 
@@ -2396,12 +2408,11 @@ define("ads/ads.viewModel",
                         //}
                     }
                     if (previewScreenNumber() == 2) {
-                        if (campaignModel().IsUseFilter() == 0)
-                        {
+                        if (campaignModel().IsUseFilter() == 0) {
                             noErrors = false;
                             toastr.error("No Target Match.");
                         }
-                       
+
                     }
                     if (previewScreenNumber() == 3) {
                         if (campaignModel().VerifyQuestion() == "" || campaignModel().VerifyQuestion() == undefined) {
@@ -2437,9 +2448,9 @@ define("ads/ads.viewModel",
 
                  backScreen = function () {
                      if (previewScreenNumber() == 2 && campaignModel().IsUseFilter() == 0) {
-                        
-                             toastr.error("No Target Match.");
-                         
+
+                         toastr.error("No Target Match.");
+
                      }
                      else {
                          if (previewScreenNumber() > 1) {
@@ -2635,7 +2646,7 @@ define("ads/ads.viewModel",
 
                 },
                 getAudienceCount = function () {
-                    
+
                     var countryIds = '', cityIds = '', countryIdsExcluded = '', cityIdsExcluded = '';
                     var educationIds = '', educationIdsExcluded = '';
                     _.each(campaignModel().AdCampaignTargetLocations(), function (item) {
@@ -2795,7 +2806,7 @@ define("ads/ads.viewModel",
                         }
                     });
 
-                   
+
                     var campData = {
                         ageFrom: campaignModel().AgeRangeStart(),
                         ageTo: campaignModel().AgeRangeEnd(),
@@ -2828,7 +2839,7 @@ define("ads/ads.viewModel",
                     $("#spinnerAudience").css("display", "block");
 
                     dataservice.getAudienceData(campData, {
-                     
+
                         success: function (data) {
                             $("#spinnerAudience").css("display", "none");
                             reachedAudience(data.MatchingUsers);
@@ -2875,8 +2886,7 @@ define("ads/ads.viewModel",
                         getAudienceCount();
                     });
                 },
-                ChangeTarget = function ()
-                {
+                ChangeTarget = function () {
 
                 },
                 buildMap = function () {
@@ -3113,8 +3123,6 @@ define("ads/ads.viewModel",
                     }
                     AditionalCriteriaMode(4);
                 },
-
-
                 getQuestionByFilter = function () {
 
                     if (AditionalCriteriaMode() == 2) {
@@ -3186,7 +3194,7 @@ define("ads/ads.viewModel",
                 },
 
                 showAdditionQuizCriteria = function () {
-                  
+
                     Modelheading('Your Quiz Questions');
                     IsprofileQuestion(false);
                     isNewCriteria(true);
@@ -3449,7 +3457,7 @@ define("ads/ads.viewModel",
 
                 // Initialize the view model
                 initialize = function (specifiedView) {
-                    
+
                     if (mode == 4) {
                         MainHeading("Sponsor an app ‘brain game’.");
                         SubHeading("Reward audiences 50% of your ‘ad click’Drive people to your web site, ask a reinforcing question and show your deals –All for one ‘ad click’ fee.");
@@ -3493,7 +3501,7 @@ define("ads/ads.viewModel",
                     getAdCampaignGridContent();
                     getCampaignBaseContent();
                     isEditorVisible(false);
-                    
+
                     CompanyLogo(gCompanyLogo);
                 };
                 return {
@@ -3528,7 +3536,7 @@ define("ads/ads.viewModel",
                     selectedLocationLat: selectedLocationLat,
                     selectedLocationLong: selectedLocationLong,
                     onAddLocation: onAddLocation,
-                    IsNewVideoCampaign:IsNewVideoCampaign,
+                    IsNewVideoCampaign: IsNewVideoCampaign,
                     onRemoveLocation: onRemoveLocation,
                     deleteLocation: deleteLocation,
                     addLanguage: addLanguage,
@@ -3708,13 +3716,13 @@ define("ads/ads.viewModel",
                     CitiesAnalyticsData: CitiesAnalyticsData,
                     QuizQuestionAnalyticData: QuizQuestionAnalyticData,
                     QQChoicesAnalyticsData: QQChoicesAnalyticsData,
-                    getQQAnalytic:getQQAnalytic,
-                    GenderAnalyticsData:GenderAnalyticsData,
+                    getQQAnalytic: getQQAnalytic,
+                    GenderAnalyticsData: GenderAnalyticsData,
                     selectedQQCAnalytics: selectedQQCAnalytics,
                     selectedQQGAnalytics: selectedQQGAnalytics,
                     selectedQQAAnalytics: selectedQQAAnalytics,
                     selectedQQPAnalytics: selectedQQPAnalytics,
-                    selectedQQCtAnalytics:selectedQQCtAnalytics,
+                    selectedQQCtAnalytics: selectedQQCtAnalytics,
                     AgeRangeAnalyticsData: AgeRangeAnalyticsData,
                     isflageClose: isflageClose,
                     Changefilter: Changefilter,
@@ -3723,7 +3731,11 @@ define("ads/ads.viewModel",
                     IsBroadMarketing: IsBroadMarketing,
                     CompanyLogo: CompanyLogo,
                     getQAnalytic: getQAnalytic,
-                    QQStatsAnalytics:QQStatsAnalytics
+                    QQStatsAnalytics: QQStatsAnalytics,
+                    SelectedItemAnalytics: SelectedItemAnalytics,
+                    isProfileQuestionUsed: isProfileQuestionUsed,
+                    isPollQuestionsQuestionUsed: isPollQuestionsQuestionUsed,
+                    isPreviousQuizQuestionsUsed: isPreviousQuizQuestionsUsed
                 };
             })()
         };

@@ -141,6 +141,15 @@ define("Coupons/Coupons.viewModel",
                 DateRangeDropDown = ko.observableArray([{ id: 1, name: "Last 30 days" }, { id: 2, name: "All Time" }]),
                 CampaignStatusDropDown = ko.observableArray([{ id: 1, name: "Answered" }, { id: 2, name: "Referred" }, { id: 3, name: "Skipped" }]),
                 CampaignRatioAnalyticData = ko.observable(1),
+                GenderAnalyticsData = ko.observableArray([{ id: 0, name: "All" }, { id: 1, name: "male" }, { id: 2, name: "female" }]),
+                AgeRangeAnalyticsData = ko.observableArray([{ id: 0, name: "All" }, { id: 1, name: "10-20" }, { id: 2, name: "20-30" }, { id: 3, name: "30-40" }, { id: 4, name: "40-50" }, { id: 5, name: "50-60" }, { id: 6, name: "60-70" }, { id: 7, name: "70-80" }, { id: 8, name: "80-90" }, { id: 9, name: "90+" }]),
+                selectedOGenderAnalytics = ko.observable(0),
+                selectedOAgeAnalytics = ko.observable(0),
+                DDOStatsAnalytics = ko.observable(),
+                selectedCTGenderAnalytics = ko.observable(0),
+                selectedCTAgeAnalytics = ko.observable(0),
+                DDCTStatsAnalytics = ko.observable(),
+
                 dealExpirydate = ko.observable(),
                 Banner2Flag = ko.observable(false),
                 Banner3Flag = ko.observable(false),
@@ -151,12 +160,18 @@ define("Coupons/Coupons.viewModel",
                 isflageClose = ko.observable(false),
                 companyLogo = ko.observable(),
                 companyName = ko.observable(),
+                getDDOAnalytic = function () { }
+                getDDCTAnalytic = function () { }
                 openAdvertiserDashboardDealScreen = function () {
                     if (!IsnewCoupon()) {
                         isflageClose(true);
                         getDealsAnalytics();
                         $("#ddGranularityDropDown").removeAttr("disabled");
                         $("#ddDateRangeDropDown").removeAttr("disabled");
+                        $("#ddGDropDown").removeAttr("disabled");
+                        $("#ddADropDown").removeAttr("disabled");
+                        $("#ddCTGDropDown").removeAttr("disabled");
+                        $("#ddCTADropDown").removeAttr("disabled");
                         isAdvertdashboardDealVisible(true);
                     }
                     else {
@@ -2498,8 +2513,18 @@ getfreeCouponCount = function () {
                     diveNo: diveNo,
                     onDeleteImage: onDeleteImage,
                     isflageClose: isflageClose,
+                    GenderAnalyticsData: GenderAnalyticsData,
+                    AgeRangeAnalyticsData: AgeRangeAnalyticsData,
                     companyLogo:companyLogo,
                     companyName: companyName,
+                    selectedOGenderAnalytics: selectedOGenderAnalytics,
+                    selectedOAgeAnalytics: selectedOAgeAnalytics,
+                    getDDOAnalytic: getDDOAnalytic,
+                    DDOStatsAnalytics: DDOStatsAnalytics,
+                    selectedCTGenderAnalytics: selectedCTGenderAnalytics,
+                    selectedCTAgeAnalytics: selectedCTAgeAnalytics,
+                    getDDCTAnalytic: getDDCTAnalytic,
+                    DDCTStatsAnalytics: DDCTStatsAnalytics
                 };
             })()
         };

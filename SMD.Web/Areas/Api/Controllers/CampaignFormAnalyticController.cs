@@ -23,7 +23,15 @@ namespace SMD.MIS.Areas.Api.Controllers
         public FormAnalyticResponseModel Get(long Id, int Choice, int Gender, int age, string profession, string City, int QId, int type)
         {
             FormAnalyticResponseModel data = new FormAnalyticResponseModel();
-            data.QQStats = _IAdCampaignResponseService.getCampaignByIdQQFormAnalytic(Id, Choice, Gender, age, profession, City, type, QId);
+            if (type == 1)
+            {
+                data.QQStats = _IAdCampaignResponseService.getCampaignByIdQQFormAnalytic(Id, Choice, Gender, age, profession, City, type, QId);
+            }
+            else
+            {
+                data.Stats = _IAdCampaignResponseService.getCampaignByIdQQFormAnalytic(Id, Choice, Gender, age, profession, City, type, QId);
+            }
+         
             return data;
         }
 

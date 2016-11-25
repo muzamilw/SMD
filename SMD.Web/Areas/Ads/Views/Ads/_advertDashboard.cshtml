@@ -127,7 +127,7 @@
             <div class="col-lg-12">
                 Target Filters
              </div>
-                <div class="col-lg-12">
+            <div class="col-lg-12">
                     <table class="targetfiltertbl">
                         <tr>
                             <td class="col-lg-3">
@@ -157,37 +157,40 @@
 
                     </table>
                 </div>
-
-            <div class="col-lg-12">
+            
+            <div class="col-lg-12" data-bind="visible: $root.isProfileQuestionUsed()" >
+                <br />
                 <br />
                 Profile Question
             </div>
-            <div class="col-lg-12">
+           <div class="col-lg-12">
                 <table class="targetfiltertbl">
                     <!-- ko template: { name: 'ProfileQuestionDataTemplate' , foreach: $root.formAnalyticsData } -->
                     <!-- /ko -->
                     </table>
                </div>
-            <div class="col-lg-12">
+            <div class="col-lg-12" data-bind="visible: $root.isPreviousQuizQuestionsUsed()">
                 <br />
-                Previous Quiz Questions used in campaign  
+                <br />
+                Previous Quiz Questions used in campaign
             </div>
-            <div class="col-lg-12">
-                <table class="targetfiltertbl">
-                    <!-- ko template: { name: 'PreviousQuizQuestionDataTemplate' , foreach: $root.formAnalyticsData } -->
-                    <!-- /ko -->
-                </table>
-            </div>
-            <div class="col-lg-12">
+    <div class="col-lg-12">
+        <table class="targetfiltertbl">
+            <!-- ko template: { name: 'PreviousQuizQuestionDataTemplate' , foreach: $root.formAnalyticsData } -->
+            <!-- /ko -->
+        </table>
+    </div>
+            <div class="col-lg-12" data-bind="visible: $root.isPollQuestionsQuestionUsed()">
+                <br />
                 <br />
                 Poll Questions
             </div>
-            <div class="col-lg-12">
-                <table class="targetfiltertbl">
-                    <!-- ko template: { name: 'SurvayQuestionDataTemplate' , foreach: $root.formAnalyticsData } -->
-                    <!-- /ko -->
-                </table>
-            </div>
+    <div class="col-lg-12">
+        <table class="targetfiltertbl">
+            <!-- ko template: { name: 'SurvayQuestionDataTemplate' , foreach: $root.formAnalyticsData } -->
+            <!-- /ko -->
+        </table>
+    </div>
             </div>
         <div class="clearfix">
         </div>
@@ -209,7 +212,7 @@
     <tr>
         <td class="col-lg-3">Gender : </td>
         <td class="col-lg-3"><select class="form-control" id="ddQQGDropDown" data-bind="options: $root.GenderAnalyticsData, optionsText: 'name', optionsValue: 'id', value:selectedGenderAnalytics, event: { change: $root.getQAnalytic }"></select></td>
-        <td class="col-lg-6"> = <span data-bind="text:Stats"></span></td>
+        <td class="col-lg-6"> = <span data-bind="text:Stats()"></span></td>
     </tr>
     <tr>
         <td class="col-lg-3">Age range : </td>
