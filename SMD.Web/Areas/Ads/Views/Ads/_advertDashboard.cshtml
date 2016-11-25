@@ -20,7 +20,12 @@
         </div>
         <div id="ddpanel">
             <div class="col-lg-3"></div>
-
+            <div class="col-lg-1">
+              
+            </div>
+            <div class="col-lg-3">
+                <select class="form-control margin10 pull-left" id="ddCampaignStatusDropDown" data-bind="options: $root.CampaignStatusDropDown, optionsText: 'name', optionsValue: 'id', value:$root.selectedCampStatusAnalytics, event: { change: $root.getAdsByCampaignIdAnalytics }"></select>
+            </div>
             <div class="col-lg-2">
                 <label style="padding-top:18px;" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Granularity level </label>
             </div>
@@ -28,19 +33,14 @@
                 <select class="form-control margin10 pull-left" id="ddGranularityDropDown" data-bind="options: $root.granularityDropDown, optionsText: 'name', optionsValue: 'id', value:$root.selectedGranularityAnalytics, event: { change: $root.getAdsByCampaignIdAnalytics }"></select>
             </div>
 
-            <div class="col-lg-1">
-                <label style="padding-top:18px;" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Status </label>
-            </div>
-            <div class="col-lg-3">
-                <select class="form-control margin10 pull-left" id="ddCampaignStatusDropDown" data-bind="options: $root.CampaignStatusDropDown, optionsText: 'name', optionsValue: 'id', value:$root.selectedCampStatusAnalytics, event: { change: $root.getAdsByCampaignIdAnalytics }"></select>
-            </div>
+            
 
         </div>
         <div class="row main-box">
             <div class="col-lg-12">
                 <div class=" margin10">
                     <!-- ko if: $root.selectedCampStatusAnalytics() === 1  -->
-                    <div style="height:150px;" data-bind="morris: {type: 'Line', data: $root.AdsCampaignAnalyticsData, xkey: 'Granual', ykeys: ['openStats', 'Stats'], labels: ['Open', 'Answered'], yLabelFormat: function(y){return y != Math.round(y)?'':y;}, parseTime:false, setAxisAlignFirstX: true, lineColors: ['blue','green'] }"></div>
+                    <div style="height:150px;" data-bind="morris: {type: 'Line', data: $root.AdsCampaignAnalyticsData, xkey: 'Granual', ykeys: ['openStats', 'Stats'], labels: ['Total Impressions', 'Answered'], yLabelFormat: function(y){return y != Math.round(y)?'':y;}, parseTime:false, setAxisAlignFirstX: true, lineColors: ['blue','green'] }"></div>
                     <!-- /ko -->
                     <!-- ko if: $root.selectedCampStatusAnalytics() === 2  -->
                     <div style="height:150px;" data-bind="morris: {type: 'Line', data: $root.AdsCampaignAnalyticsData, xkey: 'Granual', ykeys: ['openStats', 'Stats'], labels: ['Total Impressions', 'Reffered'], yLabelFormat: function(y){return y != Math.round(y)?'':y;},  parseTime:false, setAxisAlignFirstX: true, lineColors: ['blue','green'] }"></div>
@@ -66,7 +66,7 @@
         <div class="row">
             <div class="adsubHeading Theme_standard_clr borderbtmline" style="padding-left:16px;">
                 <br />
-                Click Thru vs reward click count
+                Click-Thru vs Answered #
             </div>
         </div>
         <div class="row main-box">
@@ -122,7 +122,7 @@
         <div class="row">
             <div class="adsubHeading Theme_standard_clr borderbtmline" style="padding-left:16px;">
                 <br />
-                You can further filter this campaign to reveal deeper insights by :
+                Survey Statistics
             </div>
             <div class="col-lg-12">
                 Target Filters
