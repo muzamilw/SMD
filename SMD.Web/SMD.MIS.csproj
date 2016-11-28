@@ -1324,6 +1324,7 @@
     <Content Include="Images\accent.png" />
     <Content Include="Images\ads.png" />
     <Content Include="Images\app-store.png" />
+    <Content Include="Images\Arrow.png" />
     <Content Include="Images\beta.jpg" />
     <Content Include="Images\bullet.png" />
     <Content Include="Images\Cash4ads_logo-circle.png" />
@@ -1357,6 +1358,7 @@
     <Content Include="Images\preview_game.jpg" />
     <Content Include="Images\Red_Bell.png" />
     <Content Include="Images\select_image.jpg" />
+    <Content Include="Images\Share_world.png" />
     <Content Include="Images\Sign_In_Image.png" />
     <Content Include="Images\splaceholder.png" />
     <Content Include="Images\standardplaceholder.png" />
