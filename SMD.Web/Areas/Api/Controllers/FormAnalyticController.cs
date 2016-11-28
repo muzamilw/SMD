@@ -80,7 +80,7 @@ namespace SMD.MIS.Areas.Api.Controllers
             foreach (getCampaignByIdFormDataAnalytic_Result item in list) {
                 int stat = _IAdCampaignResponseService.getCampaignByIdQQFormAnalytic(Id, 0, 0, 0, "All", "All", item.typ, item.Id!= null ? (int)item.Id : 0);
                 FormDataAnalyticResponse dataItem = new FormDataAnalyticResponse(item.Question, item.answer, item.Id != null ? (long)item.Id : 0, item.typ, stat);
-            
+                listformData.Add(dataItem);
             }
             data.formData = listformData;
             return data;

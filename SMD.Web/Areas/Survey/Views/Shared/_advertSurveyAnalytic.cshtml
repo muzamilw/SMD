@@ -25,22 +25,22 @@
                 </div>
 
                 @*<div class="col-lg-1">
-                    <label style="padding-top:18px;" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Status </label>
-                </div>
-                <div class="col-lg-3">
-                    <select class="form-control margin10 pull-left" id="ddCampaignStatusDropDown" data-bind="options: $root.CampaignStatusDropDown, optionsText: 'name', optionsValue: 'id', value:$root.selectedCampStatusAnalytics, event: { change: $root.getSurvayAnalytics }"></select>
-                </div>*@
+                        <label style="padding-top:18px;" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Status </label>
+                    </div>
+                    <div class="col-lg-3">
+                        <select class="form-control margin10 pull-left" id="ddCampaignStatusDropDown" data-bind="options: $root.CampaignStatusDropDown, optionsText: 'name', optionsValue: 'id', value:$root.selectedCampStatusAnalytics, event: { change: $root.getSurvayAnalytics }"></select>
+                    </div>*@
 
             </div>
 
-            
+
         </div>
         <div class="row main-box">
             <div class="col-lg-12">
                 <div class=" margin10">
-                   
+
                     <div style="height:150px;" data-bind="morris: {type: 'Line', data: $root.SQAnalyticsData, xkey: 'Granual', ykeys: ['openStats', 'Stats', 'SkipStats'], labels: ['Opened', 'Answered','Skipped'], parseTime:false, setAxisAlignFirstX: true, lineColors: ['blue','green','red'] }"></div>
-                   
+
 
 
                 </div>
@@ -63,13 +63,13 @@
                 <!--/ko-->
 
                 <div data-bind="morris: {type: 'Donut', data: $root.CampaignRatioAnalyticData, resize:true, colors: ['green', 'blue' ]  }" style="width:250px;height:250px;padding-left:50px;cursor:pointer;"></div>
-                
+
             </div>
             <div class="col-lg-6">
                 <table style="margin-top:70px;">
                     <!-- ko template: { name: 'ROITblAnalyticsDataTemplate' , foreach: $root.CampaignROItblAnalyticData } -->
                     <!-- /ko -->
-                    
+
                 </table>
             </div>
 
@@ -85,7 +85,7 @@
 
             <div class="col-lg-12">
                 <table class="roitbl" style="">
-                    
+
                     <thead>
                         <tr>
                             <th>
@@ -105,6 +105,33 @@
             </div>
 
         </div>
+
+        <div class="row">
+            <div class="adsubHeading Theme_standard_clr borderbtmline" style="padding-left:16px;">
+                <br />
+                You can further filter this campaign to reveal deeper insights by :
+            </div>
+            <div class="col-lg-12">
+                Target Filters
+            </div>
+            <div class="col-lg-12">
+                <table class="targetfiltertbl">
+                    <tr>
+                        <td class="col-lg-3">Gender : </td>
+                        <td class="col-lg-3"><select class="form-control" id="ddGDropDown" data-bind="options: $root.GenderAnalyticsData, optionsText: 'name', optionsValue: 'id', value:$root.selectedGenderAnalytics, event: { change: $root.getDDAnalytic }"></select></td>
+                        <td class="col-lg-6">
+                            = <span data-bind="text: $root.DDStatsAnalytics"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-lg-3">Age range : </td>
+                        <td class="col-lg-3"><select class="form-control" id="ddADropDown" data-bind="options: $root.AgeRangeAnalyticsData, optionsText: 'name', optionsValue: 'id', value:$root.selectedAgeAnalytics, event: { change: $root.getDDAnalytic }"></select></td>
+                        <td class="col-lg-6"></td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
         <div class="clearfix">
         </div>
         <div class="clearfix">
@@ -115,7 +142,7 @@
 <script id="CampaignTblAnalyticsDataTemplate" type="text/html">
     <tr>
         <td><span data-bind="text: label"></span></td>
-        
+
         <td class="padingL15 text-right" style="background-color: #eee">
             <!-- ko if: ordr === 4  -->
             $
@@ -138,6 +165,6 @@
         <td class="text-right">
             <span data-bind="text: value"></span>%
         </td>
-       
+
     </tr>
 </script>

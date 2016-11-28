@@ -63,6 +63,7 @@ namespace SMD.MIS.Areas.Api.Models
     {
 
         public int QQStats { get; set; }
+        public int Stats { get; set; }
         
     }
 

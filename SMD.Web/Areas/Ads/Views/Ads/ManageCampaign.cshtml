@@ -22,10 +22,11 @@ else
                 <div class="clearfix col-lg-8" data-bind="with: $root.campaignModel" style="padding:0px;padding-top:3px;">
                     <span class="pull-left Theme_standard_clr" style="padding-left:0px;font-size:21px;" data-bind="NewCampaignBinding: CampaignName,visible:$root.isDisplayCouponsAds()">New Coupon</span>
 
-                    <img class="vid_image pull-left" data-bind="attr: { src: $root.StatusCodeImage }" src="/Content/Images/Videos_small.png"> <span id="newVid" class="pull-left " style="color:#fff!important; padding-left:0px;font-size:23px;margin-top:15px;margin-left:9px;" data-bind="NewCampaignBinding: CampaignName">New video campaign</span> <span style="color:#fff!important;margin-left:14px;margin-top:24px;" class="subtitle pull-left" data-bind="text:$root.CampaignHeader()"></span>
+                    <img class="vid_image pull-left" data-bind="attr: { src: $root.StatusCodeImage }" src="/Content/Images/Videos_small.png"> <span id="newVid" class="pull-left " style="color:#fff!important; padding-left:0px;font-size:23px;margin-top:15px;margin-left:9px;" data-bind="NewCampaignBinding: CampaignName">New video campaign</span> <span style="color:#fff!important;margin-left:3px;margin-top:21px;" class="subtitle pull-left" data-bind="text:$root.CampaignHeader()"></span>
 
                     @*<span id="newdisplay_Ad" class="pull-left " style="color:black!important; padding-left:0px;font-size:23px;margin-top:12px;display:none;" data-bind="NewCampaignBinding: CampaignName">New display ad</span>*@
                 </div>
+
                 <div class="col-lg-4" style="padding-left:0px;padding-right:0px;">
                     @*<div style="margin-top:-5px;float:right;background:url(/Content/Images/Close_Button.png);background-repeat: no-repeat;width:40px;height:40px;border: 0;"><button style="margin-top:9px;" id="MainBtnClose" data-bind="click: $root.closeNewCampaignDialog" class="btn btn-default CloseBtn">Close</button></div>*@
                     <div class="pull-left" data-bind="with: $root.campaignModel" style="margin-left:96px;margin-top: 18px;">
@@ -45,7 +46,7 @@ else
                     <div class="clearfix"></div>
                 </div>
 
-                <div class="row" >
+                <div class="row">
                     <div class="col-xs-6 pull-left validationSummaryContainer">
                         <ul data-bind="foreach: $root.errorList">
                             <li>
@@ -61,7 +62,7 @@ else
         <div class="row">
             <div class="col-lg-12" style="padding-left:0px;">
                 <div>
-                    <div class="no-header clearfix col-lg-9 form-horizontal"  style="padding-left:0px;" data-bind="with: $root.campaignModel, visible: !$root.isAdvertdashboardVisible()">
+                    <div class="no-header clearfix col-lg-9 form-horizontal" style="padding-left:0px;" data-bind="with: $root.campaignModel, visible: !$root.isAdvertdashboardVisible()">
                         <div class="main-box header" style="padding-left:42px;">
                             <div class="col-lg-12" style="margin:auto;float:none !important">
                                 <div class="pull-left ads-numbering-main">
@@ -90,14 +91,14 @@ else
                                     <span data-bind="css: $root.previewScreenNumber() == 3  ? 'ads-selected-numbering-text' : '',click: $root.gotoScreen.bind(null,3)">Survey</span>
                                 </div>
                                 @*<div class="pull-left ads-numbering-linebar" data-bind="css: $root.previewScreenNumber() == 6 ? 'ads-selected-numbering-box' : ''">
-                    </div>
-                    <div class="pull-left ads-numbering-main">
-                        <div class="ads-numbering-box" data-bind="css: $root.previewScreenNumber() == 4 ? 'ads-selected-numbering-box' : '',click: $root.gotoScreen.bind(null,4)">
-                            4
-                        </div>
-                        <br />
-                        <span data-bind="css: $root.previewScreenNumber() == 4 ? 'ads-selected-numbering-text' : '',click: $root.gotoScreen.bind(null,4)">Delivery</span>
-                    </div>*@
+                                    </div>
+                                    <div class="pull-left ads-numbering-main">
+                                        <div class="ads-numbering-box" data-bind="css: $root.previewScreenNumber() == 4 ? 'ads-selected-numbering-box' : '',click: $root.gotoScreen.bind(null,4)">
+                                            4
+                                        </div>
+                                        <br />
+                                        <span data-bind="css: $root.previewScreenNumber() == 4 ? 'ads-selected-numbering-text' : '',click: $root.gotoScreen.bind(null,4)">Delivery</span>
+                                    </div>*@
                                 <div class="pull-left" style="width:49px;">
                                     &nbsp;
                                 </div>
@@ -126,12 +127,12 @@ else
                                         </div>
                                     </div>
                                 </div>
-                                <div class="pull-left" >
+                                <div class="pull-left">
                                     <div>
                                         <div class="pull-right ads-numbering-main" style=" padding-left: 32px;
                                     text-align: left;height:108px;">
-                                   
-                                   
+
+
                                             <a data-toggle="modal" data-bind="click:$root.openAdvertiserDashboardScreen">
                                                 <div class="ads-numbering-box" style="background:#9690cf;">
                                                     <img src="~/Content/Images/Charts.png" width="20px" />
@@ -171,7 +172,7 @@ else
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
-                            
+
                         </div>
                         <div class="main-box main-box-subpage">
 
@@ -312,8 +313,11 @@ else
                                     <div class="col-lg-2">
                                         <label for="txtCampaignDisplayName" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn" data-bind="text:$root.lblAdTitle">Campaign Title</label>
                                     </div>
-                                    <div class="col-lg-7">
-                                        <input type="text" maxlength="48" name="Campaign Display Name" class="form-control width80percent" id="txtCampaignDisplayName" placeholder="Campaign title (48 characters)" data-bind="value: CampaignName,validationTooltip: DisplayTitle, validationOnElement: DisplayTitle">
+                                    <div class="col-lg-6">
+                                        <input type="text" maxlength="48" style="width:91% !important" name="Campaign Display Name" class="form-control width80percent" id="txtCampaignDisplayName" placeholder="Campaign title (48 characters)" data-bind="value: CampaignName,validationTooltip: DisplayTitle, validationOnElement: DisplayTitle">
+                                    </div>
+                                    <div style="margin-top:5px;">
+                                        <label id=" lbltotalCharacter" style="color: lightgray;margin-top:9px;margin-left:-33px;"> 48 chars</label>
                                     </div>
                                     <div class="col-lg-1" data-bind="visible:!$root.isDisplayCouponsAds()" style="  text-align: right;
     font-size: 17px;
@@ -381,31 +385,31 @@ else
                                 </div>
                                 <div>
                                     @*<div class="col-lg-11">
-                        <div class="form-group" style="margin-bottom:20px; margin-top:20px;">
-                            <div class="col-lg-4 text-campaign-left  Float-Left">
-                                <label class="control-label text-right tooltip-float font20 floatNone hideInGames" style="float:left !important;       font-size: 17px; margin-left: 6px; ">Video Landing page Url</label>
-                                <label class="control-label text-right tooltip-float font20 floatNone showInGames" style="float:left !important;      font-size: 17px;  margin-left: 6px; ">Win game Landing page Url</label>
-                            </div>
-                            <div class="col-lg-2 Float-Left" style="padding-top:3px;">
-                                <div class="onoffswitch">
-                                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchVoucherONOFf" data-bind="checked: $root.buyItQuestionStatus, event: { click: $root.addBuyItPrice}">
-                                    <label class="onoffswitch-label" for="switchVoucherONOFf">
-                                        <div class="onoffswitch-inner"></div>
-                                        <div class="onoffswitch-switch"></div>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 text-campaign-left Float-Left" style="margin-left:6px;display:none;">
-                                <span class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;color:red; " data-bind="text: '(' +  $root.buyItPriceLbl() + ')'"></span>
-                            </div>
-                            <div class="col-lg-3 Float-Left" style="margin-left:40px;">
-                                <a href="#" id="idpreviewquizscreen" class="btn btn-primary pull-right" data-toggle="modal" data-target=".model_BuyItQ_ph" style="margin-left:6px;display:none;">
-                                    Preview
-                                </a>
-                            </div>
-                        </div>
-                    </div>*@
-                                    <div class="col-lg-12">
+                                            <div class="form-group" style="margin-bottom:20px; margin-top:20px;">
+                                                <div class="col-lg-4 text-campaign-left  Float-Left">
+                                                    <label class="control-label text-right tooltip-float font20 floatNone hideInGames" style="float:left !important;       font-size: 17px; margin-left: 6px; ">Video Landing page Url</label>
+                                                    <label class="control-label text-right tooltip-float font20 floatNone showInGames" style="float:left !important;      font-size: 17px;  margin-left: 6px; ">Win game Landing page Url</label>
+                                                </div>
+                                                <div class="col-lg-2 Float-Left" style="padding-top:3px;">
+                                                    <div class="onoffswitch">
+                                                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchVoucherONOFf" data-bind="checked: $root.buyItQuestionStatus, event: { click: $root.addBuyItPrice}">
+                                                        <label class="onoffswitch-label" for="switchVoucherONOFf">
+                                                            <div class="onoffswitch-inner"></div>
+                                                            <div class="onoffswitch-switch"></div>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2 text-campaign-left Float-Left" style="margin-left:6px;display:none;">
+                                                    <span class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;color:red; " data-bind="text: '(' +  $root.buyItPriceLbl() + ')'"></span>
+                                                </div>
+                                                <div class="col-lg-3 Float-Left" style="margin-left:40px;">
+                                                    <a href="#" id="idpreviewquizscreen" class="btn btn-primary pull-right" data-toggle="modal" data-target=".model_BuyItQ_ph" style="margin-left:6px;display:none;">
+                                                        Preview
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>*@
+                                    <div class="col-lg-12" data-bind="visible:Type()==1">
                                         <div style="height:34px;" class="borderbtmline">
 
 
@@ -441,32 +445,38 @@ else
                                         <div class="col-lg-2">
                                             <label for="txtBuyItlbl" class="control-label text-right tooltip-float floatNone">Button</label>
                                         </div>
-                                        <div class="col-lg-10">
-                                            <select style="width:56%!important;" id="ddTextBtns" class="form-control " data-bind="options: $root.DefaultTextBtns, optionsText: 'name', optionsValue: 'id',event:{ change: $root.handleBuyIt}"></select>
+                                        <div class="col-lg-6">
+                                            <select style="width:91%!important;" id="ddTextBtns" class="form-control " data-bind="options: $root.DefaultTextBtns, optionsText: 'name', optionsValue: 'id',event:{ change: $root.handleBuyIt}"></select>
                                         </div>
                                     </div>
 
                                     <div class="form-group" data-bind="visible:$root.BuyItStatus() == true">
                                         <div>
                                             <div class="col-lg-2">
-                                                <label for="txtBuyItlbl" class="control-label text-right tooltip-float floatNone">BuyItButtonLabel</label>
+                                                <label for="txtBuyItlbl" class="control-label text-right tooltip-float floatNone">Custom label</label>
                                             </div>
-                                            <div class="col-lg-8">
-                                                <input style="width:70%!important;" type="text" class="form-control txtBuyItlbl width80percent" data-bind="value:BuyItButtonLabel" id="txtBuyItlbl" placeholder="(12 characters)" maxlength="12">
+                                            <div class="col-lg-6">
+                                                <input style="width:91%!important;" type="text" class="form-control txtBuyItlbl width80percent" data-bind="value:BuyItButtonLabel" id="txtBuyItlbl" placeholder="(12 characters)" maxlength="12">
+                                            </div>
+                                            <div style="margin-top:5px;">
+                                                <label id=" lbltotalCharacter" style="color: lightgray;margin-top:9px;margin-left:-33px;"> 12 chars</label>
                                             </div>
                                         </div>
                                     </div>
 
 
                                     <div class="form-group" data-bind="visible:$root.showLandingPageUrl">
+
                                         <div class="col-lg-2">
                                             <label for="txtBuyItUrl" class="control-label text-right tooltip-float floatNone">Landing page url </label>
                                         </div>
-                                        <div class="col-lg-6">
-                                            <textarea style="width:94%!important;margin-top:5px;resize:none" class="form-control" id="urlBx" rows="1" placeholder="Enter in landing page url " data-bind="value:LandingPageVideoLink"></textarea>
-                                        </div>
-                                        <div class="col-lg-4" style="padding-top:3px;">
-                                            <button style="width:123px;height:33px;" class="btn  btn-success gtild-color urlbtn" id="btnNext" onclick="openUrl();">Test URL Link</button>
+                                        <div class="col-lg-9 borderPanel Subpanels" style="padding-bottom:10px;margin-left:7px;">
+                                            <div class="col-lg-9">
+                                                <textarea style="width:100%!important;margin-top:5px;resize:none;color:blue" class="form-control" id="urlBx" rows="1" placeholder="Enter in landing page url " data-bind="value:LandingPageVideoLink"></textarea>
+                                            </div>
+                                            <div class="col-lg-3" style="padding-top:3px;margin-left:0px;">
+                                                <button style="width:123px;height:33px;" class="btn  btn-success gtild-color urlbtn" id="btnNext" onclick="openUrl();">Test Link</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -875,7 +885,7 @@ else
                                     </div>
                                 </div>
                                 @*</div>
-                </div>*@
+                                    </div>*@
                             </div>
                             <div class="col-lg-12" style="margin:auto;float:none !important;" data-bind="visible: $root.previewScreenNumber() == 3">
                                 <div class="form-group" style="margin-top:10px; margin-left:-8px;display:none;">
@@ -904,6 +914,9 @@ else
                                     <div class="col-lg-7">
                                         <input type="text" class="form-control" id="txtVerifyQuestion" placeholder="Enter your question (72 characters)" data-bind="value: VerifyQuestion,enable:$root.isClickRateVisible()!=true" maxlength="72">
                                     </div>
+                                    <div style="margin-top:5px;">
+                                        <label id=" lbltotalCharacter" style="color: lightgray;margin-top:9px;margin-left:0px;"> 72 chars</label>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-lg-2">
@@ -911,6 +924,9 @@ else
                                     </div>
                                     <div class="col-lg-4">
                                         <input type="text" class="form-control" id="txtVerifyAnswer1" placeholder="Enter your answer 1 (36 characters)" data-bind="value: Answer1,enable:$root.isClickRateVisible()!=true" maxlength="36">
+                                    </div>
+                                    <div style="margin-top:5px;">
+                                        <label id=" lbltotalCharacter" style="color: lightgray;margin-top:5px;margin-left:0px;"> 36 chars</label>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -920,6 +936,9 @@ else
                                     <div class="col-lg-4">
                                         <input type="text" class="form-control" id="txtVerifyAnswer2" placeholder="Enter your answer 2 (36 characters)" data-bind="value: Answer2,enable:$root.isClickRateVisible()!=true" maxlength="36">
                                     </div>
+                                    <div style="margin-top:5px;">
+                                        <label id=" lbltotalCharacter" style="color: lightgray;margin-top:5px;margin-left:0px;"> 36 chars</label>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-lg-2">
@@ -928,12 +947,15 @@ else
                                     <div class="col-lg-4">
                                         <input type="text" class="form-control" id="txtVerifyAnswer3" placeholder="Enter your answer 3 (36 characters)" data-bind="value: Answer3,enable:$root.isClickRateVisible()!=true" maxlength="36">
                                     </div>
+                                    <div style="margin-top:5px;">
+                                        <label id=" lbltotalCharacter" style="color: lightgray;margin-top:5px;margin-left:0px;"> 36 chars</label>
+                                    </div>
                                     <div class="col-lg-3">
-                             
+
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    
+
                                     <div class="col-lg-2">
                                         <label for="txtCorrectAnswer" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn" style="">Correct Answer</label>
                                     </div>
@@ -952,7 +974,7 @@ else
                                 </div>
 
                             </div>
-                         
+
                             <div class="next-back-btns col-lg-12" style="margin:auto;float:none !important">
                                 <div class="form-group">
                                     <div class="col-lg-3">
@@ -1018,7 +1040,8 @@ else
                                                         <!-- ko if: Gender() ==1 -->
                                                         <span class="pull-left" data-bind="text:AgeRangeStart()"></span>
                                                         <span class="pull-left">-</span><span class="pull-left" data-bind="text:AgeRangeEnd()"></span>
-                                                        <span class="pull-left">,</span><span class="pull-left">Men</span><span class="pull-left">,
+                                                        <span class="pull-left">,</span><span class="pull-left">Men</span><span class="pull-left">
+                                                            ,
                                                         </span><span class="pull-left">Women</span>
                                                         <!-- /ko -->
                                                         <!-- ko if: Gender() ==2 -->
@@ -1034,8 +1057,8 @@ else
                                                         <!-- /ko -->
                                                     </div>
                                                     <div class="clearfix"></div>
-                                                
-                                                    
+
+
                                                     <div data-bind="foreach: AdCampaignTargetLocations">
                                                         <!-- ko if: $index() ==0 -->
                                                         <span class="pull-left" data-bind="text: City()"></span><span class="pull-left" data-bind="text:'(' + Radius() + 'Km)'"></span>
@@ -1464,30 +1487,30 @@ else
                                     </div>
                                     <div>
                                         @*<div class="col-lg-11">
-                                <div class="form-group" style="margin-bottom:20px; margin-top:20px;">
-                                    <div class="col-lg-4 text-campaign-left  Float-Left">
-                                        <label class="control-label text-right tooltip-float font20 floatNone hideInGames" style="float:left !important;       font-size: 17px; margin-left: 6px; ">Video Landing page Url</label>
-                                        <label class="control-label text-right tooltip-float font20 floatNone showInGames" style="float:left !important;      font-size: 17px;  margin-left: 6px; ">Win game Landing page Url</label>
-                                    </div>
-                                    <div class="col-lg-2 Float-Left" style="padding-top:3px;">
-                                        <div class="onoffswitch">
-                                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchVoucherONOFf" data-bind="checked: $root.buyItQuestionStatus, event: { click: $root.addBuyItPrice}">
-                                            <label class="onoffswitch-label" for="switchVoucherONOFf">
-                                                <div class="onoffswitch-inner"></div>
-                                                <div class="onoffswitch-switch"></div>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2 text-campaign-left Float-Left" style="margin-left:6px;display:none;">
-                                        <span class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;color:red; " data-bind="text: '(' +  $root.buyItPriceLbl() + ')'"></span>
-                                    </div>
-                                    <div class="col-lg-3 Float-Left" style="margin-left:40px;">
-                                        <a href="#" id="idpreviewquizscreen" class="btn btn-primary pull-right" data-toggle="modal" data-target=".model_BuyItQ_ph" style="margin-left:6px;display:none;">
-                                            Preview
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>*@
+                                                <div class="form-group" style="margin-bottom:20px; margin-top:20px;">
+                                                    <div class="col-lg-4 text-campaign-left  Float-Left">
+                                                        <label class="control-label text-right tooltip-float font20 floatNone hideInGames" style="float:left !important;       font-size: 17px; margin-left: 6px; ">Video Landing page Url</label>
+                                                        <label class="control-label text-right tooltip-float font20 floatNone showInGames" style="float:left !important;      font-size: 17px;  margin-left: 6px; ">Win game Landing page Url</label>
+                                                    </div>
+                                                    <div class="col-lg-2 Float-Left" style="padding-top:3px;">
+                                                        <div class="onoffswitch">
+                                                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchVoucherONOFf" data-bind="checked: $root.buyItQuestionStatus, event: { click: $root.addBuyItPrice}">
+                                                            <label class="onoffswitch-label" for="switchVoucherONOFf">
+                                                                <div class="onoffswitch-inner"></div>
+                                                                <div class="onoffswitch-switch"></div>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-2 text-campaign-left Float-Left" style="margin-left:6px;display:none;">
+                                                        <span class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;color:red; " data-bind="text: '(' +  $root.buyItPriceLbl() + ')'"></span>
+                                                    </div>
+                                                    <div class="col-lg-3 Float-Left" style="margin-left:40px;">
+                                                        <a href="#" id="idpreviewquizscreen" class="btn btn-primary pull-right" data-toggle="modal" data-target=".model_BuyItQ_ph" style="margin-left:6px;display:none;">
+                                                            Preview
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>*@
                                         <div class="col-lg-12">
                                             <div style="height:34px;" class="borderbtmline">
 
@@ -1615,7 +1638,7 @@ else
                                     </div>
 
                                     <div id="secondCont" data-bind="with: $root.campaignModel">
-                                        
+
                                         <div id="basic_targeting" data-bind="visible:$root.IsBroadMarketing()==true">
                                             <div class="form-group margin-btm26">
                                                 <div class="col-lg-2">
@@ -1644,25 +1667,25 @@ else
                                                 </div>
                                                 <div class="col-lg-7">
                                                     @*<div class="radio col-lg-3">
-                                                        <input type="radio" name="optionsRadiosGender" id="optionsRadiosGenderAll" value="1" data-bind="checked: Gender,enable:$root.isClickRateVisible()!=true">
-                                                        <label for="optionsRadiosGenderAll">
-                                                            All
-                                                        </label>
-                                                    </div>
-                                                    <div class="radio col-lg-3">
-                                                        <input type="radio" name="optionsRadiosGender" id="optionsRadiosGenderMEn" value="2" data-bind="checked: Gender,enable:$root.isClickRateVisible()!=true">
-                                                        <label for="optionsRadiosGenderMEn">
-                                                            Men
-                                                        </label>
-                                                        <span class="help-block text-right"></span>
-                                                    </div>
-                                                    <div class="radio col-lg-3">
-                                                        <input type="radio" name="optionsRadiosGender" id="optionsRadiosGenderWMEn" value="3" data-bind="checked: Gender,enable:$root.isClickRateVisible()!=true">
-                                                        <label for="optionsRadiosGenderWMEn">
-                                                            Women
-                                                        </label>
-                                                        <span class="help-block text-right"></span>
-                                                    </div>*@
+                                                            <input type="radio" name="optionsRadiosGender" id="optionsRadiosGenderAll" value="1" data-bind="checked: Gender,enable:$root.isClickRateVisible()!=true">
+                                                            <label for="optionsRadiosGenderAll">
+                                                                All
+                                                            </label>
+                                                        </div>
+                                                        <div class="radio col-lg-3">
+                                                            <input type="radio" name="optionsRadiosGender" id="optionsRadiosGenderMEn" value="2" data-bind="checked: Gender,enable:$root.isClickRateVisible()!=true">
+                                                            <label for="optionsRadiosGenderMEn">
+                                                                Men
+                                                            </label>
+                                                            <span class="help-block text-right"></span>
+                                                        </div>
+                                                        <div class="radio col-lg-3">
+                                                            <input type="radio" name="optionsRadiosGender" id="optionsRadiosGenderWMEn" value="3" data-bind="checked: Gender,enable:$root.isClickRateVisible()!=true">
+                                                            <label for="optionsRadiosGenderWMEn">
+                                                                Women
+                                                            </label>
+                                                            <span class="help-block text-right"></span>
+                                                        </div>*@
                                                 </div>
                                                 <div class="col-lg-3" style=" padding: 0px !important; display:none;   text-align: left;
     font-size: 17px;
@@ -1860,7 +1883,7 @@ else
 
 
 
-                                  
+
 
                                     <div id="thirdCont" data-bind="visible:$root.campaignModel().IsUseFilter()==0">
 
@@ -1934,7 +1957,7 @@ else
                                         </div>
                                     </div>
                                     @*</div>
-                        </div>*@
+                                        </div>*@
                                 </div>
                                 <div class="col-lg-12" style="margin:auto;float:none !important;" data-bind="visible: $root.previewScreenNumber() == 3">
                                     <div class="form-group" style="margin-top:10px; margin-left:-8px;display:none;">
@@ -1989,8 +2012,8 @@ else
                                         </div>
                                         <div class="col-lg-3">
                                             @*<a href="#" id="idpreviewquizscreen" class="btn btn-primary " data-toggle="modal" data-target=".model_quizQ_ph">
-                                    Preview
-                                </a>*@
+                                                    Preview
+                                                </a>*@
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -2014,48 +2037,48 @@ else
 
                                 </div>
                                 @*<div class="col-lg-12" style="margin:auto;float:none !important;    " data-bind="visible: $root.previewScreenNumber() == 4">
-                        <span class=" adBottomHeadingtext-campaign-left defaultThemeTxtClr font14" data-bind="visible:!$root.isDisplayCouponsAds(),text:tab4SubHeading" style="    color: rgb(52,152,219) !important;">
-                            Select your ad campaign delivery mode:
-                        </span>
-                        <div class="clearfix">
-                        </div><br />
+                                        <span class=" adBottomHeadingtext-campaign-left defaultThemeTxtClr font14" data-bind="visible:!$root.isDisplayCouponsAds(),text:tab4SubHeading" style="    color: rgb(52,152,219) !important;">
+                                            Select your ad campaign delivery mode:
+                                        </span>
+                                        <div class="clearfix">
+                                        </div><br />
 
-                        <div class="radio col-lg-12" style="text-align: left; display:none;">
-                            <input type="radio" name="optionsRadiosDelvTypes" value="1" id="optionsRadiosApplyFilterFree" data-bind="checked: DeliveryDays">
-                            <label for="optionsRadiosApplyFilterFree">
-                                <span style="color:red; font-weight:bold;">Free</span> - Show video to any 10 random app users per day. Max 10 days
-                                <br /><br />
-                                Note. You can have only one free campaign at a time.
-                            </label>
-                            <span class="help-block text-right"></span>
-                        </div>
+                                        <div class="radio col-lg-12" style="text-align: left; display:none;">
+                                            <input type="radio" name="optionsRadiosDelvTypes" value="1" id="optionsRadiosApplyFilterFree" data-bind="checked: DeliveryDays">
+                                            <label for="optionsRadiosApplyFilterFree">
+                                                <span style="color:red; font-weight:bold;">Free</span> - Show video to any 10 random app users per day. Max 10 days
+                                                <br /><br />
+                                                Note. You can have only one free campaign at a time.
+                                            </label>
+                                            <span class="help-block text-right"></span>
+                                        </div>
 
-                        <div class="radio col-lg-12" style="text-align: left;font-size:14px !important;">
-                            <input type="radio" name="optionsRadiosDelvTypes" value="3" id="optionsRadiosNoFilterDaily" data-bind="checked: DeliveryDays">
-                            <label for="optionsRadiosNoFilterDaily" class="font14">
-                                <span class="defaultThemeTxtClr">BROADCAST DAILY</span> - Only once for this campaign.
-                            </label>
-                            <span class="help-block text-right"></span>
-                        </div>
+                                        <div class="radio col-lg-12" style="text-align: left;font-size:14px !important;">
+                                            <input type="radio" name="optionsRadiosDelvTypes" value="3" id="optionsRadiosNoFilterDaily" data-bind="checked: DeliveryDays">
+                                            <label for="optionsRadiosNoFilterDaily" class="font14">
+                                                <span class="defaultThemeTxtClr">BROADCAST DAILY</span> - Only once for this campaign.
+                                            </label>
+                                            <span class="help-block text-right"></span>
+                                        </div>
 
-                        <div class="radio col-lg-12" style="text-align: left;font-size:14px !important;">
-                            <input type="radio" name="optionsRadiosDelvTypes" value="2" id="optionsRadiosApplyFilterOnce" data-bind="checked: DeliveryDays">
-                            <label for="optionsRadiosApplyFilterOnce" class="font14">
-                                <span class="defaultThemeTxtClr">BROADCAST ONCE</span> - Potentially more than once for this campaign, but show on separate days.
-                            </label>
-                            <span class="help-block text-right"></span>
-                        </div>
+                                        <div class="radio col-lg-12" style="text-align: left;font-size:14px !important;">
+                                            <input type="radio" name="optionsRadiosDelvTypes" value="2" id="optionsRadiosApplyFilterOnce" data-bind="checked: DeliveryDays">
+                                            <label for="optionsRadiosApplyFilterOnce" class="font14">
+                                                <span class="defaultThemeTxtClr">BROADCAST ONCE</span> - Potentially more than once for this campaign, but show on separate days.
+                                            </label>
+                                            <span class="help-block text-right"></span>
+                                        </div>
 
-                        <div class="radio col-lg-12" style="text-align: left; display:none;">
-                            <input type="radio" name="optionsRadiosDelvTypes" value="4" id="optionsRadiosApplyFilterAudience" data-bind="checked: DeliveryDays">
-                            <label for="optionsRadiosApplyFilterAudience">
-                                <span style="color:red; font-weight:bold;">TARGET AUDIENCE</span> - Show video to only Target Audience.
-                            </label>
-                            <span class="help-block text-right"></span>
-                        </div>
-                    </div>
-                    <div class="clearfix">
-                    </div>*@
+                                        <div class="radio col-lg-12" style="text-align: left; display:none;">
+                                            <input type="radio" name="optionsRadiosDelvTypes" value="4" id="optionsRadiosApplyFilterAudience" data-bind="checked: DeliveryDays">
+                                            <label for="optionsRadiosApplyFilterAudience">
+                                                <span style="color:red; font-weight:bold;">TARGET AUDIENCE</span> - Show video to only Target Audience.
+                                            </label>
+                                            <span class="help-block text-right"></span>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix">
+                                    </div>*@
                                 <div class="next-back-btns col-lg-12" style="margin:auto;float:none !important">
                                     <div class="form-group">
                                         <div class="col-lg-3">
@@ -2083,7 +2106,7 @@ else
 
                         </div>
 
-                    
+
                         <div class="col-lg-3 form-horizontal" style="height:566px;
     margin-left: 0px !important;display:none;">
 
@@ -2154,12 +2177,12 @@ else
 
 
                                                 @*<div class="radio col-lg-12 paddingtop0px" style="text-align: left;font-size:14px !important;">
-                                        <input type="radio" name="optionsRadiosDelvTypes" value="2" id="optionsRadiosApplyFilterOnce" data-bind="checked: DeliveryDays">
-                                        <label for="optionsRadiosApplyFilterOnce" class="fontsize11" style="padding-left:24px!important;">
-                                            <span class="defaultThemeTxtClr">Repeat ad to each person in target audience on seperate days.</span>
-                                        </label>
-                                        <span class="help-block text-right"></span>
-                                    </div>*@
+                                                        <input type="radio" name="optionsRadiosDelvTypes" value="2" id="optionsRadiosApplyFilterOnce" data-bind="checked: DeliveryDays">
+                                                        <label for="optionsRadiosApplyFilterOnce" class="fontsize11" style="padding-left:24px!important;">
+                                                            <span class="defaultThemeTxtClr">Repeat ad to each person in target audience on seperate days.</span>
+                                                        </label>
+                                                        <span class="help-block text-right"></span>
+                                                    </div>*@
                                             </div>
                                         </div>
                                     </div>
@@ -2284,34 +2307,34 @@ else
                             <div class="clearfix">
                             </div>
                             @*<div class="col-lg-11" data-bind="visible: !$root.isNewCampaign()" style=" display:none!important;background: white;    padding: 20px;    padding-top: 10px;    position: absolute;    bottom: 15px;    margin-left: -5px;">
-                                        <span style="    font-weight: bold;
-                line-height: 3;">Campaign Summary</span><br />
-                                        <span class=" pull-left" style="color:red;">Matches profiles:</span>
-                                        <span class="pull-right" style="color:red;" data-bind="text:$root.reachedAudience()">0</span>
-                                        <div class="clearfix">
-                                        </div>
-                                        <div style="    margin-top: 20px;
-                background: #f3f3f3;
-                padding: 5px;
-                font-size: 12px">
-                                            <span>Period</span><br />
-                                            <span>21st May 2017 to <bold style="color:red;">CURRENT</bold></span>
-                                            <br />
-                                            <br />
-                                            <span>Quiz answer 1 : 3000 times</span><br />
-                                            <span>Quiz answer 2 : 3000 times</span><br />
-                                            <span>Quiz answer 3 : 3000 times</span>
-                                            <br />
-                                            <br />
-                                            <span>26 coupons were swapped after quiz question card</span>
-                                            <br /><br />
-                                            <span>PPCV to date : £1234.00 </span>
-                                            <br />
-                                            <br />
+                                                        <span style="    font-weight: bold;
+                                line-height: 3;">Campaign Summary</span><br />
+                                                        <span class=" pull-left" style="color:red;">Matches profiles:</span>
+                                                        <span class="pull-right" style="color:red;" data-bind="text:$root.reachedAudience()">0</span>
+                                                        <div class="clearfix">
+                                                        </div>
+                                                        <div style="    margin-top: 20px;
+                                background: #f3f3f3;
+                                padding: 5px;
+                                font-size: 12px">
+                                                            <span>Period</span><br />
+                                                            <span>21st May 2017 to <bold style="color:red;">CURRENT</bold></span>
+                                                            <br />
+                                                            <br />
+                                                            <span>Quiz answer 1 : 3000 times</span><br />
+                                                            <span>Quiz answer 2 : 3000 times</span><br />
+                                                            <span>Quiz answer 3 : 3000 times</span>
+                                                            <br />
+                                                            <br />
+                                                            <span>26 coupons were swapped after quiz question card</span>
+                                                            <br /><br />
+                                                            <span>PPCV to date : £1234.00 </span>
+                                                            <br />
+                                                            <br />
 
-                                            <div class="clearfix"></div>
-                                        </div>
-                                    </div>*@
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                    </div>*@
                             <div class="col-lg-11" data-bind="" style="display:none;  position: absolute;
     bottom: 15px;
     margin-left: -10px;">
@@ -2348,11 +2371,11 @@ else
                         </div>
                     </div>
                     @Html.Partial("~/Areas/Ads/Views/Ads/_advertDashboard.cshtml")
-                    
-                <div class="clearfix">
+
+                    <div class="clearfix">
+                    </div>
                 </div>
             </div>
-        </div>
             <div class="modal fade bs-example-modal-lg" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
@@ -2435,8 +2458,8 @@ else
 
                                             <div class="" data-bind="visible: $root.AditionalCriteriaMode() == '4'">
                                                 @*<div class="row header">
-                                                <label class="control-label modelHeading">Survey Questions</label>
-                                            </div>*@
+                                                        <label class="control-label modelHeading">Survey Questions</label>
+                                                    </div>*@
                                                 <div class="listview parentList set-border padding10 list-type-tiles" data-role="listview" id="lv1">
                                                     <!-- ko template: { name: 'SurveyssQuestionTiles' , foreach: $root.surveyquestionList} --><!-- /ko -->
                                                     <div class="clear-both"></div>
@@ -2447,8 +2470,8 @@ else
                                             <div class="" data-bind="visible: $root.AditionalCriteriaMode() == '3'">
 
                                                 @*<div class="row header">
-                                                <label class="control-label modelHeading">Your Quiz Questions</label>
-                                            </div>*@
+                                                        <label class="control-label modelHeading">Your Quiz Questions</label>
+                                                    </div>*@
 
                                                 <div class="listview parentList set-border padding10 list-type-tiles" data-role="listview" id="lv2">
                                                     <!-- ko template: { name: 'surveyQuestionTiles' , foreach: $root.myQuizQuestions} --><!-- /ko -->
@@ -2500,767 +2523,770 @@ else
                     </div>
                 </div>
             </div>
-        <div class="col-lg-12" style="display:none;">
-            <div class="main-box no-header clearfix">
-                <div class="col-lg-12 form-horizontal" data-bind="with: $root.campaignModel" style="padding: 20px;">
-                    <div class="col-lg-7">
+            <div class="col-lg-12" style="display:none;">
+                <div class="main-box no-header clearfix">
+                    <div class="col-lg-12 form-horizontal" data-bind="with: $root.campaignModel" style="padding: 20px;">
+                        <div class="col-lg-7">
 
-                        <div class="form-group" style="margin-bottom:11px;">
+                            <div class="form-group" style="margin-bottom:11px;">
 
-                            <div data-bind="visible:$root.isDisplayCouponsAds()">
-                                <div class="col-lg-4">
-                                    <div style="margin-top:5px;    text-align: center;cursor:pointer;">
-                                        <img style="height:90px;" data-bind="visible: CampaignImagePath() == '' || CampaignImagePath() == null" src="/Content/Images/placeholder.png" onclick="showCouponDialog1();" />
-                                        <img style="height:90px;" data-bind="visible: CampaignImagePath() != '' &&  CampaignImagePath() != null ,attr: { src: CampaignImagePath }" onclick="showCouponDialog1();" />
-                                        <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
-                                            (200 x 200 pixels)
+                                <div data-bind="visible:$root.isDisplayCouponsAds()">
+                                    <div class="col-lg-4">
+                                        <div style="margin-top:5px;    text-align: center;cursor:pointer;">
+                                            <img style="height:90px;" data-bind="visible: CampaignImagePath() == '' || CampaignImagePath() == null" src="/Content/Images/placeholder.png" onclick="showCouponDialog1();" />
+                                            <img style="height:90px;" data-bind="visible: CampaignImagePath() != '' &&  CampaignImagePath() != null ,attr: { src: CampaignImagePath }" onclick="showCouponDialog1();" />
+                                            <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
+                                                (200 x 200 pixels)
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="fileUpload btn btn-primary" style="display:none;">
+                                            <span>Upload </span>
+                                            <input type="file" class="upload" id="campaignType_coupon_file1" data-bind="files: { onLoaded: $root.campaignImageCallback, fileFilter: 'image.*'}" />
                                         </div>
                                     </div>
-                                    <br />
-                                    <div class="fileUpload btn btn-primary" style="display:none;">
+                                    <div class="col-lg-4">
+                                        <div style="margin-top:5px;  text-align: center;cursor:pointer;">
+                                            <img style="height:90px;" data-bind="visible: couponImage2() == '' || couponImage2() == null" src="/Content/Images/placeholder.png" onclick="showCouponDialog2();" />
+                                            <img style="height:90px;" data-bind="visible: couponImage2() != '' && couponImage2() != null ,attr: { src: couponImage2 }" onclick="showCouponDialog2();" />
+                                            <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
+                                                (200 x 200 pixels)
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="fileUpload btn btn-primary" style="display:none;">
+                                            <span>Upload </span>
+                                            <input type="file" class="upload" id="campaignType_coupon_file2" data-bind="files: { onLoaded: $root.couponImage2Callback, fileFilter: 'image.*'}" />
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div style="margin-top:5px;    text-align: center;cursor:pointer;">
+                                            <img style="height:90px;" data-bind="visible: CouponImage3() == '' || CouponImage3() == null" src="/Content/Images/placeholder.png" onclick="showCouponDialog3();" />
+                                            <img style="height:90px;" data-bind="visible: CouponImage3() != '' && CouponImage3() != null,attr: { src: CouponImage3 }" onclick="showCouponDialog3();" />
+                                            <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
+                                                (200 x 200 pixels)
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="fileUpload btn btn-primary" style="display:none;">
+                                            <span>Upload </span>
+                                            <input type="file" class="upload" id="campaignType_coupon_file3" data-bind="files: { onLoaded: $root.CouponImage3Callback, fileFilter: 'image.*'}" />
+                                        </div>
+                                    </div>
+                                    @*<div class="row">
+                                        <div class="form-group" style="margin-top:10px;">
+                                        <div class="col-lg-3">
+                                        <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Coupon Image 4 (200px x 200px)</label>
+                                        </div>
+                                        <div class="col-lg-8">
+
+                                        <div style="margin-top:5px;">
+                                        <img style="height:80px;" data-bind="visible: CouponImage4() == ''" src="/Content/Images/Company_Default.png" />
+                                        <img style="height:80px;" data-bind="visible: CouponImage4() != '' ,attr: { src: CouponImage4 }" />
+                                        </div>
+                                        <br />
+                                        <div class="fileUpload btn btn-primary">
                                         <span>Upload </span>
-                                        <input type="file" class="upload" id="campaignType_coupon_file1" data-bind="files: { onLoaded: $root.campaignImageCallback, fileFilter: 'image.*'}" />
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div style="margin-top:5px;  text-align: center;cursor:pointer;">
-                                        <img style="height:90px;" data-bind="visible: couponImage2() == '' || couponImage2() == null" src="/Content/Images/placeholder.png" onclick="showCouponDialog2();" />
-                                        <img style="height:90px;" data-bind="visible: couponImage2() != '' && couponImage2() != null ,attr: { src: couponImage2 }" onclick="showCouponDialog2();" />
-                                        <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
-                                            (200 x 200 pixels)
+                                        <input type="file" class="upload" id="campaignType_image_file1" data-bind="files: { onLoaded: $root.CouponImage4Callback, fileFilter: 'image.*'}" />
                                         </div>
-                                    </div>
-                                    <br />
-                                    <div class="fileUpload btn btn-primary" style="display:none;">
-                                        <span>Upload </span>
-                                        <input type="file" class="upload" id="campaignType_coupon_file2" data-bind="files: { onLoaded: $root.couponImage2Callback, fileFilter: 'image.*'}" />
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div style="margin-top:5px;    text-align: center;cursor:pointer;">
-                                        <img style="height:90px;" data-bind="visible: CouponImage3() == '' || CouponImage3() == null" src="/Content/Images/placeholder.png" onclick="showCouponDialog3();" />
-                                        <img style="height:90px;" data-bind="visible: CouponImage3() != '' && CouponImage3() != null,attr: { src: CouponImage3 }" onclick="showCouponDialog3();" />
-                                        <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
-                                            (200 x 200 pixels)
                                         </div>
-                                    </div>
-                                    <br />
-                                    <div class="fileUpload btn btn-primary" style="display:none;">
-                                        <span>Upload </span>
-                                        <input type="file" class="upload" id="campaignType_coupon_file3" data-bind="files: { onLoaded: $root.CouponImage3Callback, fileFilter: 'image.*'}" />
-                                    </div>
-                                </div>
-                                @*<div class="row">
-                                    <div class="form-group" style="margin-top:10px;">
-                                    <div class="col-lg-3">
-                                    <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Coupon Image 4 (200px x 200px)</label>
-                                    </div>
-                                    <div class="col-lg-8">
 
-                                    <div style="margin-top:5px;">
-                                    <img style="height:80px;" data-bind="visible: CouponImage4() == ''" src="/Content/Images/Company_Default.png" />
-                                    <img style="height:80px;" data-bind="visible: CouponImage4() != '' ,attr: { src: CouponImage4 }" />
-                                    </div>
-                                    <br />
-                                    <div class="fileUpload btn btn-primary">
-                                    <span>Upload </span>
-                                    <input type="file" class="upload" id="campaignType_image_file1" data-bind="files: { onLoaded: $root.CouponImage4Callback, fileFilter: 'image.*'}" />
-                                    </div>
-                                    </div>
-
-                                    </div>
-                                    </div>*@
-                                <span class="text-campaign-left font19"> Voucher Type</span>
-                                <div class="clearfix">
-                                    &nbsp;
-                                </div>
-                                <div class="col-lg-3">
-                                    &nbsp;
-                                </div>
-                                <div class="col-lg-9">
-                                    <div class="row">
-                                        <div class="radio col-lg-12 text-left">
-                                            <input type="radio" name="optionsRadiosCouponTypes" value="1" id="optionsRadiosSwapVouchers" data-bind="checked: CouponType">
-                                            <label for="optionsRadiosSwapVouchers">
-                                                Swap 4 Vouchers
-                                            </label>
-                                            <span class="help-block text-right"></span>
                                         </div>
-                                        <div class="radio col-lg-12 text-left">
-                                            <input type="radio" name="optionsRadiosCouponTypes" value="2" id="optionsRadiosOffers" data-bind="checked: CouponType">
-                                            <label for="optionsRadiosOffers">
-                                                2-4-1 Offers
-                                            </label>
-                                            <span class="help-block text-right"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
-                                <span class="text-campaign-left font19"> Voucher Category</span>
-                                <div class="clearfix">
-                                    &nbsp;
-                                </div>
-                                <div class="col-lg-3">
-                                    &nbsp;
-                                </div>
-                                <div class="col-lg-9">
-                                    <div class="row">
-                                        <div>
-                                            <a href="#" id="couponCategorySelectorLink" class="btn btn-warning" style="margin-left:0px;" data-bind="click: $root.openProductCategoryDialog">
-                                                <i class="fa fa-lg"></i>&nbsp;Select Coupon Categories
-                                            </a>
-                                        </div>
-                                        <div>
-                                            <!-- ko template: { name: 'ListOfSelectedCouponCats' , foreach: $root.couponCategories() } -->
-                                            <!-- /ko -->
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="clearfix">
-                                    &nbsp;
-                                </div>
-                                <div class="row">
-                                    <div class="form-group">
-                                        <div class="col-lg-3">
-                                            <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Actual Value</label>
-                                        </div>
-                                        <div class="col-lg-5">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">£</span>
-                                                <input type="number" class="form-control" id="txtActValue" placeholder="Actual Value" data-bind="value:CouponActualValue">
-                                                @*<span class="input-group-addon">.000</span>*@
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-lg-3">
-                                            <label for="txtCouponQtyValue" class="control-label text-right tooltip-float floatNone">Coupon Discounted Value</label>
-                                        </div>
-                                        <div class="col-lg-5">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">£</span>
-                                                <input type="number" class="form-control" id="txtCouponQtyValue" placeholder="Coupon Discounted Value" data-bind="value:CouponDiscountValue">
-                                                @*<span class="input-group-addon">.000</span>*@
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-lg-3">
-                                            <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Purse Swap Value</label>
-                                        </div>
-                                        <div class="col-lg-5">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">£</span>
-                                                <input type="number" class="form-control" id="txtPurseValue" placeholder="Purse Swap Value" data-bind="value:CouponSwapValue">
-                                                @*<span class="input-group-addon">.000</span>*@
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-lg-3">
-                                            &nbsp;
-                                        </div>
-                                        <div class="col-lg-8" style="padding-top:8px;">
-                                            <button class="btn  btn-primary" id="couponCodeSelectorLink" style="margin-bottom:8px;" data-bind="click:$root.opencouponCodesDialog">Manage Coupon Codes</button><br />
-                                            <!--ko if: $root.isNewCampaign() == false -->
-                                            <a data-toggle="modal" data-target=".model_generateCodes">
-                                                <button class="btn  btn-primary" id="btnGenerateCodes">Generate Coupon Codes</button>
-                                            </a>
-                                            <!--/ko-->
-                                            <!--ko if: $root.isNewCampaign() == true -->
-                                            <button class="btn  btn-primary" id="btnGenerateCodes" data-bind="click:$root.showCouponGenerationWarning">Generate Coupon Codes</button>
-                                            <!--/ko-->
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-lg-3">
-                                            <label for="txtccqty" class="control-label text-right tooltip-float floatNone">Coupon Quantity</label>
-                                        </div>
-                                        <div class="col-lg-5" style="padding-top:8px;">
-                                            <span data-bind="text: CouponQuantity"></span>
-                                            @*<input type="number" class="form-control" id="txtPurseValue" placeholder="Quantity" data-bind="value:CouponQuantity">*@
-                                        </div>
-                                    </div>
-                                    <div class="form-group" data-bind="visible: $root.UsedCouponQuantity() != 0">
-                                        <div class="col-lg-3">
-                                            <label for="ccusedqty" class="control-label text-right tooltip-float floatNone">Used Coupon Quantity</label>
-                                        </div>
-                                        <div class="col-lg-5" style="padding-top:8px;">
-                                            <span data-bind="text: $root.UsedCouponQuantity()"></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-lg-3">
-                                            <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Coupon Expiry Label </label>
-                                        </div>
-                                        <div class="col-lg-5">
-                                            <input type="text" class="form-control" id="txtPurseValue" placeholder="Coupon Expiry Label" data-bind="value:CouponExpiryLabel">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-lg-3">
-                                            <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Coupon Comission</label>
-                                        </div>
-                                        <div class="col-lg-5">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">£</span>
-                                                <input type="number" class="form-control" id="txtPurseValue" placeholder="Coupon Cash4Ads Comission" data-bind="value:couponSmdComission">
-                                                @*<span class="input-group-addon">.000</span>*@
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        @*<div class="clearfix" data-bind="visible:!$root.isDisplayCouponsAds()">
-                            &nbsp;
-                            </div>*@
-                        <div>
-                        </div>
-                        @*<div class="form-group formcontrol-bg" data-bind="visible:!$root.isDisplayCouponsAds()">
-                            <div class="col-lg-11">
-
-                            <div class="form-group" style="margin-top:10px; margin-left:-8px;">
-
-                            <div class="col-lg-4 text-campaign-left Float-Left" style="margin-left:6px;">
-                            <label class="control-label text-right tooltip-float font20 floatNone" style="float:left !important; ">Discount Voucher</label>
-                            </div>
-                            <div class="col-lg-2 Float-Left" style="padding-top:3px;padding-left:0px;">
-                            <div class="onoffswitch">
-                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchDicV" data-bind="checked: IsShowVoucherSetting, event: { click: $root.addVoucherClickRate}">
-                            <label class="onoffswitch-label" for="switchDicV">
-                            <div class="onoffswitch-inner"></div>
-                            <div class="onoffswitch-switch"></div>
-                            </label>
-                            </div>
-                            </div>
-                            <div class="col-lg-2 text-campaign-left Float-Left" style="margin-left:6px;">
-                            <span class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;color:red; " data-bind="text: '(' +  $root.voucherPriceLbl() + 'p )'"></span>
-                            </div>
-
-                            </div>
-
-
-
-                            <div class="form-group" data-bind="visible: IsShowVoucherSetting">
-
-                            <div class="col-lg-4">
-
-                            <label for="txtCorrectAnswer" class="control-label text-right tooltip-float floatNone">Select Voucher</label>
-                            </div>
-                            <div class="col-lg-8">
-                            <select class="form-control" id="ddpDiscountV" data-bind="options: $root.vouchers, optionsText: 'Name', optionsValue: 'CouponId', value: CouponId" style="    margin-left: -12px;"></select>
-                            </div>
-                            </div>
-                            </div>
-                            </div>*@
-                        <div class="form-group formcontrol-bg" style="display:none;">
-                            @*data-bind="visible:!$root.isDisplayCouponsAds()"*@
-                            <div class="col-lg-11">
-                                <div class="form-group" style="margin-bottom:20px; margin-top:20px;">
-                                    <div class="col-lg-4 text-campaign-left Float-Left" style="margin-left:6px;">
-                                        <label class="control-label text-right tooltip-float font20 floatNone" style="float:left !important; ">Show voucher</label>
-                                    </div>
-                                    <div class="col-lg-2 Float-Left" style="padding-top:3px;padding-left:0px;">
-                                        <div class="onoffswitch">
-                                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchAB" data-bind="checked: $root.voucherQuestionStatus">
-                                            <label class="onoffswitch-label" for="switchAB">
-                                                <div class="onoffswitch-inner"></div>
-                                                <div class="onoffswitch-switch"></div>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2 Float-Left">
+                                        </div>*@
+                                    <span class="text-campaign-left font19"> Voucher Type</span>
+                                    <div class="clearfix">
                                         &nbsp;
                                     </div>
-                                    <div class="col-lg-3 Float-Left" style="margin-left:40px;" data-bind="visible: $root.voucherQuestionStatus()">
-                                        <a href="#" id="idpreviewvoucherscreen" class="btn btn-primary pull-right" data-toggle="modal" data-target=".model_vucherQ_ph">
-                                            Preview
-                                        </a>
+                                    <div class="col-lg-3">
+                                        &nbsp;
                                     </div>
-                                </div>
-                                <div class="form-group" data-bind="visible: $root.voucherQuestionStatus()">
-                                    <div class="col-lg-4">
-                                        <label for="txtVoucher" class="control-label text-right tooltip-float floatNone">Voucher Line 1</label>
+                                    <div class="col-lg-9">
+                                        <div class="row">
+                                            <div class="radio col-lg-12 text-left">
+                                                <input type="radio" name="optionsRadiosCouponTypes" value="1" id="optionsRadiosSwapVouchers" data-bind="checked: CouponType">
+                                                <label for="optionsRadiosSwapVouchers">
+                                                    Swap 4 Vouchers
+                                                </label>
+                                                <span class="help-block text-right"></span>
+                                            </div>
+                                            <div class="radio col-lg-12 text-left">
+                                                <input type="radio" name="optionsRadiosCouponTypes" value="2" id="optionsRadiosOffers" data-bind="checked: CouponType">
+                                                <label for="optionsRadiosOffers">
+                                                    2-4-1 Offers
+                                                </label>
+                                                <span class="help-block text-right"></span>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="txtVoucher" placeholder="Enter your voucher Line 1  (20 characters)" data-bind="value: Voucher1Heading" maxlength="20">
+                                    <div class="clearfix"></div>
+                                    <span class="text-campaign-left font19"> Voucher Category</span>
+                                    <div class="clearfix">
+                                        &nbsp;
                                     </div>
-                                </div>
-                                <div class="form-group" data-bind="visible: $root.voucherQuestionStatus() == 1 ">
-                                    <div class="col-lg-4">
-                                        <label for="txtVoucherVal" class="control-label text-right tooltip-float floatNone">Voucher Value Discount (£) </label>
+                                    <div class="col-lg-3">
+                                        &nbsp;
                                     </div>
-                                    <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="txtVoucherVal" placeholder="e.g. £1 or 15% off  (20 characters)" data-bind="value: Voucher1Value" maxlength="20">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-lg-4" data-bind="visible: $root.voucherQuestionStatus() == 1 ">
-                                        <label for="txtVoucherVal" class="control-label text-right tooltip-float floatNone">Voucher Email attachment (200 X 200) </label>
-                                    </div>
-                                    <div class="col-lg-8">
-                                        <div class="col-lg-12" style="margin-left:-10px;" data-bind="visible: $root.voucherQuestionStatus() == 1 ">
+                                    <div class="col-lg-9">
+                                        <div class="row">
                                             <div>
-                                                <div class="defaultImgUploadImage">
-                                                    <img style="width:auto;height:80px;max-width:200px;" data-bind="visible: VoucherImagePath() == ''" src="/Content/Images/Company_Default.png" />
-                                                    <img style="width:auto;height:80px;max-width:200px;" data-bind="visible: VoucherImagePath() != '' ,attr: { src: VoucherImagePath() + $root.randonNumber() }" />
+                                                <a href="#" id="couponCategorySelectorLink" class="btn btn-warning" style="margin-left:0px;" data-bind="click: $root.openProductCategoryDialog">
+                                                    <i class="fa fa-lg"></i>&nbsp;Select Coupon Categories
+                                                </a>
+                                            </div>
+                                            <div>
+                                                <!-- ko template: { name: 'ListOfSelectedCouponCats' , foreach: $root.couponCategories() } -->
+                                                <!-- /ko -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix">
+                                        &nbsp;
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <div class="col-lg-3">
+                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Actual Value</label>
+                                            </div>
+                                            <div class="col-lg-5">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">£</span>
+                                                    <input type="number" class="form-control" id="txtActValue" placeholder="Actual Value" data-bind="value:CouponActualValue">
+                                                    @*<span class="input-group-addon">.000</span>*@
                                                 </div>
                                             </div>
-                                            <div class="defaultImgUploadImageBtn" style="width:260px;">
-                                                <div class="fileUpload btn btn-primary">
-                                                    <span>Upload </span>
-                                                    <input type="file" class="upload" id="Voucher_image_file" data-bind="files: { onLoaded: $root.VoucherImageCallback, fileFilter: 'image.*'}" />
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-3">
+                                                <label for="txtCouponQtyValue" class="control-label text-right tooltip-float floatNone">Coupon Discounted Value</label>
+                                            </div>
+                                            <div class="col-lg-5">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">£</span>
+                                                    <input type="number" class="form-control" id="txtCouponQtyValue" placeholder="Coupon Discounted Value" data-bind="value:CouponDiscountValue">
+                                                    @*<span class="input-group-addon">.000</span>*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-3">
+                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Purse Swap Value</label>
+                                            </div>
+                                            <div class="col-lg-5">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">£</span>
+                                                    <input type="number" class="form-control" id="txtPurseValue" placeholder="Purse Swap Value" data-bind="value:CouponSwapValue">
+                                                    @*<span class="input-group-addon">.000</span>*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-3">
+                                                &nbsp;
+                                            </div>
+                                            <div class="col-lg-8" style="padding-top:8px;">
+                                                <button class="btn  btn-primary" id="couponCodeSelectorLink" style="margin-bottom:8px;" data-bind="click:$root.opencouponCodesDialog">Manage Coupon Codes</button><br />
+                                                <!--ko if: $root.isNewCampaign() == false -->
+                                                <a data-toggle="modal" data-target=".model_generateCodes">
+                                                    <button class="btn  btn-primary" id="btnGenerateCodes">Generate Coupon Codes</button>
+                                                </a>
+                                                <!--/ko-->
+                                                <!--ko if: $root.isNewCampaign() == true -->
+                                                <button class="btn  btn-primary" id="btnGenerateCodes" data-bind="click:$root.showCouponGenerationWarning">Generate Coupon Codes</button>
+                                                <!--/ko-->
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-3">
+                                                <label for="txtccqty" class="control-label text-right tooltip-float floatNone">Coupon Quantity</label>
+                                            </div>
+                                            <div class="col-lg-5" style="padding-top:8px;">
+                                                <span data-bind="text: CouponQuantity"></span>
+                                                @*<input type="number" class="form-control" id="txtPurseValue" placeholder="Quantity" data-bind="value:CouponQuantity">*@
+                                            </div>
+                                        </div>
+                                        <div class="form-group" data-bind="visible: $root.UsedCouponQuantity() != 0">
+                                            <div class="col-lg-3">
+                                                <label for="ccusedqty" class="control-label text-right tooltip-float floatNone">Used Coupon Quantity</label>
+                                            </div>
+                                            <div class="col-lg-5" style="padding-top:8px;">
+                                                <span data-bind="text: $root.UsedCouponQuantity()"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-3">
+                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Coupon Expiry Label </label>
+                                            </div>
+                                            <div class="col-lg-5">
+                                                <input type="text" class="form-control" id="txtPurseValue" placeholder="Coupon Expiry Label" data-bind="value:CouponExpiryLabel">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-3">
+                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Coupon Comission</label>
+                                            </div>
+                                            <div class="col-lg-5">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">£</span>
+                                                    <input type="number" class="form-control" id="txtPurseValue" placeholder="Coupon Cash4Ads Comission" data-bind="value:couponSmdComission">
+                                                    @*<span class="input-group-addon">.000</span>*@
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group" data-bind="visible: $root.voucherQuestionStatus() == 1 ">
-                                    <div class="col-lg-4">
-                                        <label for="txtVoucherDes" class="control-label text-right tooltip-float floatNone">Voucher Email Description</label>
-                                    </div>
-                                    <div class="col-lg-8">
-                                        <textarea class="form-control" id="txtVoucherDes" rows="2" placeholder="Enter voucher description  (500 characters)" data-bind="value: Voucher1Description"></textarea>
-                                        @*<input type="text" class="form-control" id="txtVoucherDes" placeholder="Enter voucher description  (500 characters)" data-bind="value: Voucher1Description" maxlength="500">*@
-                                    </div>
-                                </div>
-                                @*<div class="form-group">
-                                    <div class="col-lg-4 text-right">
-                                    <div class="bs-example-tooltips tooltip-float-width">
-                                    <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
-                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                    </a>
-                                    </div>
-                                    <label for="txtVerifyQuestion" class="control-label text-right tooltip-float">Voucher 2 Title</label>
-                                    </div>
-                                    <div class="col-lg-8">
-                                    <input type="text" class="form-control" id="txtVerifyQuestion" placeholder="Enter your voucher title" data-bind="value: Voucher2Heading">
 
-                                    </div>
-                                    </div>
-                                    <div class="form-group">
-                                    <div class="col-lg-4 text-right">
-                                    <div class="bs-example-tooltips tooltip-float-width">
-                                    <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
-                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                    </a>
-                                    </div>
-                                    <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float">Voucher 2 Description</label>
-                                    </div>
-                                    <div class="col-lg-8">
-                                    <input type="text" class="form-control" id="txtVerifyAnswer1" placeholder="Enter voucher description" data-bind="value: Voucher2Description">
-
-                                    </div>
-                                    </div>
-                                    <div class="form-group">
-                                    <div class="col-lg-4 text-right">
-                                    <div class="bs-example-tooltips tooltip-float-width">
-                                    <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
-                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                    </a>
-                                    </div>
-                                    <label for="txtVerifyAnswer2" class="control-label text-right tooltip-float">Voucher 2 Value</label>
-                                    </div>
-                                    <div class="col-lg-8">
-                                    <input type="text" class="form-control" id="txtVerifyAnswer2" placeholder="Enter Voucher Value" data-bind="value: Voucher2Value">
-
-                                    </div>
-                                    </div>*@
                             </div>
-                            <div class="col-lg-2" style="display:none;">
-                                <img src="/Content/Images/5_Main_4.png" class="hidden-sm hidden-xs" alt="" style="   margin-left: 10px; width: 120px;   margin-top: 23px;" />
-                            </div>
-                            <div class="clearfix">
+
+                            @*<div class="clearfix" data-bind="visible:!$root.isDisplayCouponsAds()">
                                 &nbsp;
-
+                                </div>*@
+                            <div>
                             </div>
-                        </div>
-                        <div class="form-group formcontrol-bg" data-bind="visible:$root.isDisplayCouponsAds()">
-                            <div class="col-lg-2" style="display:none;">
-                                <img class="hidden-sm hidden-xs" src="/Content/Images/5_Main_4.png" alt="" style="   margin-left: 10px; width: 120px;
-    margin-top: 23px;" />
-                            </div>
-                            <div class="clearfix">
-                                &nbsp;
+                            @*<div class="form-group formcontrol-bg" data-bind="visible:!$root.isDisplayCouponsAds()">
+                                <div class="col-lg-11">
 
-                            </div>
-                        </div>
-                        @*<div class="form-group formcontrol-bg" data-bind="visible:!$root.isDisplayCouponsAds()" style="margin-bottom:14px;">
+                                <div class="form-group" style="margin-top:10px; margin-left:-8px;">
 
-                            <div class="col-lg-4 text-campaign-left font20">
-                            <span>  Priority</span>
-                            </div>
-                            <div class="col-lg-8" style="padding-left:0px;">
-                            <input type="text" name="Priority" class="form-control" maxlength="36" id="txtPriority" placeholder="Priority" data-bind="value: priority" style="    margin-left: -15px;
-                            width: 91% !important;">
-
-                            </div>
-
-                            </div>*@
-                    </div>
-                    <div class="col-lg-1 col-md-1 col-sm-1" style="display:none;">
-                        &nbsp;
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-4" style="display:none;">
-                        <div style="display:none;">
-                            <div class="clearfix">
-                                <div class="col-lg-12">
-                                    <div style="width:210px;text-align:center;">
-                                        <img style="width:auto;height:80px;max-width:200px;" data-bind="visible:CampaignImagePath() == ''" src="/Content/Images/Company_Default.png" />
-                                        <img style="width:auto;height:80px;max-width:200px;" data-bind="visible:CampaignImagePath() != '' ,attr: { src: CampaignImagePath() + $root.randonNumber() }" />
-                                    </div>
+                                <div class="col-lg-4 text-campaign-left Float-Left" style="margin-left:6px;">
+                                <label class="control-label text-right tooltip-float font20 floatNone" style="float:left !important; ">Discount Voucher</label>
                                 </div>
-                                <div class="col-lg-12" style="margin-top:15px;text-align:center;width:240px;padding-right:0px;">
-                                    <div class="col-lg-5" style="padding-right:10px;">
-                                        <div class="bs-example-tooltips tooltip-float-width">
-                                            <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="left" data-html="true" data-content="" data-original-title="" title="">
-                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                <div class="col-lg-2 Float-Left" style="padding-top:3px;padding-left:0px;">
+                                <div class="onoffswitch">
+                                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchDicV" data-bind="checked: IsShowVoucherSetting, event: { click: $root.addVoucherClickRate}">
+                                <label class="onoffswitch-label" for="switchDicV">
+                                <div class="onoffswitch-inner"></div>
+                                <div class="onoffswitch-switch"></div>
+                                </label>
+                                </div>
+                                </div>
+                                <div class="col-lg-2 text-campaign-left Float-Left" style="margin-left:6px;">
+                                <span class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;color:red; " data-bind="text: '(' +  $root.voucherPriceLbl() + 'p )'"></span>
+                                </div>
+
+                                </div>
+
+
+
+                                <div class="form-group" data-bind="visible: IsShowVoucherSetting">
+
+                                <div class="col-lg-4">
+
+                                <label for="txtCorrectAnswer" class="control-label text-right tooltip-float floatNone">Select Voucher</label>
+                                </div>
+                                <div class="col-lg-8">
+                                <select class="form-control" id="ddpDiscountV" data-bind="options: $root.vouchers, optionsText: 'Name', optionsValue: 'CouponId', value: CouponId" style="    margin-left: -12px;"></select>
+                                </div>
+                                </div>
+                                </div>
+                                </div>*@
+                            <div class="form-group formcontrol-bg" style="display:none;">
+                                @*data-bind="visible:!$root.isDisplayCouponsAds()"*@
+                                <div class="col-lg-11">
+                                    <div class="form-group" style="margin-bottom:20px; margin-top:20px;">
+                                        <div class="col-lg-4 text-campaign-left Float-Left" style="margin-left:6px;">
+                                            <label class="control-label text-right tooltip-float font20 floatNone" style="float:left !important; ">Show voucher</label>
+                                        </div>
+                                        <div class="col-lg-2 Float-Left" style="padding-top:3px;padding-left:0px;">
+                                            <div class="onoffswitch">
+                                                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchAB" data-bind="checked: $root.voucherQuestionStatus">
+                                                <label class="onoffswitch-label" for="switchAB">
+                                                    <div class="onoffswitch-inner"></div>
+                                                    <div class="onoffswitch-switch"></div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2 Float-Left">
+                                            &nbsp;
+                                        </div>
+                                        <div class="col-lg-3 Float-Left" style="margin-left:40px;" data-bind="visible: $root.voucherQuestionStatus()">
+                                            <a href="#" id="idpreviewvoucherscreen" class="btn btn-primary pull-right" data-toggle="modal" data-target=".model_vucherQ_ph">
+                                                Preview
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6" style="text-align:left;">
-                                        <div class="fileUpload btn btn-primary">
-                                            <span>Upload </span>
-                                            <input type="file" class="upload" id="campaign_image_files" data-bind="files: { onLoaded: $root.campaignImageCallback, fileFilter: 'image.*'}" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <br />
-                        <div data-bind="visible:!$root.isDisplayCouponsAds()" style="width:100%;clear:both; margin-bottom:20px;">
-                            <div class="radio col-lg-12">
-                                <span>Deliver in:</span>
-                            </div>
-                            <div class="radio col-lg-12 row radioDelv" style="margin-left: 10px;">
-                                <input type="radio" name="optionsRadiosDeliver" id="optionsRadios3Day" value="3" data-bind="checked: DeliveryDays, event: { click:$root.addDeliveryPrice }">
-                                <label for="optionsRadios3Day">
-                                    3 days <span class="delvPricetxt" data-bind="text: $root.threePriceLbl()" style=""></span>
-                                </label>
-                            </div>
-                            <div class="radio col-lg-12 row radioDelv" style="margin-left: 10px;">
-                                <input type="radio" name="optionsRadiosDeliver" id="optionsRadios5Day" value="5" data-bind="checked: DeliveryDays, event: { click:$root.addDeliveryPrice }">
-                                <label for="optionsRadios5Day">
-                                    5 days <span data-bind="text: $root.fivePriceLbl()" class="delvPricetxt"></span>
-                                </label>
-                            </div>
-                            <div class="radio col-lg-12 row radioDelv" style="margin-left: 10px;">
-                                <input type="radio" name="optionsRadiosDeliver" id="optionsRadios10Day" value="10" data-bind="checked: DeliveryDays, event: { click:$root.addDeliveryPrice }">
-                                <label for="optionsRadios10Day">
-                                    10 days <span data-bind="text: $root.tenPriceLbl()" class="delvPricetxt"></span>
-                                </label>
-                            </div>
-                        </div>
-                        <div data-bind="visible:!$root.isDisplayCouponsAds()" style="margin-top: 16px;clear:both;">
-                            <div style="    margin-bottom: 10px; display:none;">
-                                <div class="yourBudgtHeadingCnt">
-                                    <span>Start date :</span>
-                                </div>
-                                <div class="">
-                                    <span data-bind="dateString:  StartDateTime"></span>
-                                </div>
-                                <div class="clearfix"> </div>
-                            </div>
-                            <button class="btn  btn-success btnSubmitApproval" id="btnSubmitForApproval" data-bind="click:$root.submitCampaignData, visible: $root.canSubmitForApproval" style="width: 100%;">Submit for Approval</button>
-                            <br />
-                            <div class="social-box col-lg-12 col-sm-12 col-xs-12  estimates hidden-sm hidden-xs" style="cursor:pointer;display:none;" title="Pending Estimates">
-                                <div style="    margin-bottom: 10px;">
-                                    <div class="yourBudgtHeadingCnt">
-                                        <span style="white-space:nowrap;">Total Spent</span>
-                                    </div>
-                                    <div class="">
-                                        <span>£1024.00</span>
-                                    </div>
-                                    <div class="clearfix"> </div>
-                                </div>
-                                <div style="    margin-bottom: 10px;">
-                                    <div class="yourBudgtHeadingCnt">
-                                        <span>Ads delivered</span>
-                                    </div>
-                                    <div class="">
-                                        <span>34065</span>
-                                    </div>
-                                    <div class="clearfix"> </div>
-                                </div>
-                            </div>
-                            <div class="social-box col-lg-12 col-sm-12 col-xs-12  facebook hidden-sm hidden-xs" style="cursor:pointer;background-color:#8284FB !important; display:none;" title="Pending Orders">
-                                <div style="margin-bottom: 10px;">
-                                    <div class="yourBudgtHeadingCnt" style="font-weight:bold;    font-size: 16px;">
-                                        <span>Branding views</span>
-                                    </div>
-                                    <div class="">
-                                        <span>&nbsp;</span>
-                                    </div>
-                                    <div class="clearfix"> </div>
-                                </div>
-                                <div style="    margin-bottom: 10px;">
-                                    <div class="yourBudgtHeadingCnt">
-                                        <span>Games played</span>
-                                    </div>
-                                    <div class="">
-                                        <span>405</span>
-                                    </div>
-                                    <div class="clearfix"> </div>
-                                </div>
-                                <div style="    margin-bottom: 10px;">
-                                    <div class="yourBudgtHeadingCnt">
-                                        <span>Videos played</span>
-                                    </div>
-                                    <div class="">
-                                        <span>40</span>
-                                    </div>
-                                    <div class="clearfix"> </div>
-                                </div>
-                                <div style="    margin-bottom: 10px;">
-                                    <div class="yourBudgtHeadingCnt">
-                                        <span>Leaflets viewed</span>
-                                    </div>
-                                    <div class="">
-                                        <span>440</span>
-                                    </div>
-                                    <div class="clearfix"> </div>
-                                </div>
-                            </div>
-                            <div class="social-box col-lg-12 col-sm-12 col-xs-12  twitter hidden-sm hidden-xs" style="cursor:pointer; background-color:#9093FB !important; display:none;" title="In Production">
-                                <div style="    margin-bottom: 10px;">
-                                    <div class="yourBudgtHeadingCnt" style="font-weight:bold;    font-size: 16px;">
-                                        <span>Conversions</span>
-                                    </div>
-                                    <div class="">
-                                        <span>&nbsp;</span>
-                                    </div>
-                                    <div class="clearfix"> </div>
-                                </div>
-                                <div style="    margin-bottom: 10px;">
-                                    <div class="yourBudgtHeadingCnt">
-                                        <span>Landing page hits</span>
-                                    </div>
-                                    <div class="">
-                                        <span>405</span>
-                                    </div>
-                                    <div class="clearfix"> </div>
-                                </div>
-                                <div style="    margin-bottom: 10px;">
-                                    <div class="yourBudgtHeadingCnt">
-                                        <span>Vouchers issued </span>
-                                    </div>
-                                    <div class="">
-                                        <span>1999</span>
-                                    </div>
-                                    <div class="clearfix"> </div>
-                                </div>
-                            </div>
-                            <div class="social-box col-lg-12 col-sm-12 col-xs-12  google hidden-sm hidden-xs" style="cursor:pointer; background-color:#C19AFC !important; display:none;" title="Completed">
-                                <div style="    margin-bottom: 10px;">
-                                    <div class="yourBudgtHeadingCnt" style="font-weight:bold;    font-size: 16px;">
-                                        <span>Paid out</span>
-                                    </div>
-                                    <div class="">
-                                        <span>&nbsp;</span>
-                                    </div>
-                                    <div class="clearfix"> </div>
-                                </div>
-                                <div style="    margin-bottom: 10px;">
-                                    <div class="yourBudgtHeadingCnt">
-                                        <span>To Target Audience</span>
-                                    </div>
-                                    <div class="">
-                                        <span>£512.00</span>
-                                    </div>
-                                    <div class="clearfix"> </div>
-                                </div>
-                            </div>
-                            <div class="clear-fix">
-                                &nbsp;
-                            </div>
-                            <a href="http://pinkcards.com/" target="_blank" style="display:none;">
-                                <div class="aud_cnt_head marketingGuru" style="background-color:#46448E; margin-top:10px;">
-                                    <h4 class="ad_h4" style="    font-size: 0.6em;">Our digital Gurus are ready to help you</h4>
-                                </div>
-                                <div class="aud_cnt_head marketingGuru" style="height: 94px; ">
-                                    <div class="">
+                                    <div class="form-group" data-bind="visible: $root.voucherQuestionStatus()">
                                         <div class="col-lg-4">
-                                            <img src="~/Images/guru.png" height="70px" />
+                                            <label for="txtVoucher" class="control-label text-right tooltip-float floatNone">Voucher Line 1</label>
                                         </div>
-                                        <div class="col-lg-8" style="text-align:left;font-size: 0.7em;">
-                                            <span>Make Video or flyer</span><br />
-                                            <span>Create and manage your</span><br />
-                                            <span>Ad Campaign & survey</span><br />
-                                            <span>Find a digital guru</span>
+                                        <div class="col-lg-8">
+                                            <input type="text" class="form-control" id="txtVoucher" placeholder="Enter your voucher Line 1  (20 characters)" data-bind="value: Voucher1Heading" maxlength="20">
+                                        </div>
+                                    </div>
+                                    <div class="form-group" data-bind="visible: $root.voucherQuestionStatus() == 1 ">
+                                        <div class="col-lg-4">
+                                            <label for="txtVoucherVal" class="control-label text-right tooltip-float floatNone">Voucher Value Discount (£) </label>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <input type="text" class="form-control" id="txtVoucherVal" placeholder="e.g. £1 or 15% off  (20 characters)" data-bind="value: Voucher1Value" maxlength="20">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-4" data-bind="visible: $root.voucherQuestionStatus() == 1 ">
+                                            <label for="txtVoucherVal" class="control-label text-right tooltip-float floatNone">Voucher Email attachment (200 X 200) </label>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <div class="col-lg-12" style="margin-left:-10px;" data-bind="visible: $root.voucherQuestionStatus() == 1 ">
+                                                <div>
+                                                    <div class="defaultImgUploadImage">
+                                                        <img style="width:auto;height:80px;max-width:200px;" data-bind="visible: VoucherImagePath() == ''" src="/Content/Images/Company_Default.png" />
+                                                        <img style="width:auto;height:80px;max-width:200px;" data-bind="visible: VoucherImagePath() != '' ,attr: { src: VoucherImagePath() + $root.randonNumber() }" />
+                                                    </div>
+                                                </div>
+                                                <div class="defaultImgUploadImageBtn" style="width:260px;">
+                                                    <div class="fileUpload btn btn-primary">
+                                                        <span>Upload </span>
+                                                        <input type="file" class="upload" id="Voucher_image_file" data-bind="files: { onLoaded: $root.VoucherImageCallback, fileFilter: 'image.*'}" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" data-bind="visible: $root.voucherQuestionStatus() == 1 ">
+                                        <div class="col-lg-4">
+                                            <label for="txtVoucherDes" class="control-label text-right tooltip-float floatNone">Voucher Email Description</label>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <textarea class="form-control" id="txtVoucherDes" rows="2" placeholder="Enter voucher description  (500 characters)" data-bind="value: Voucher1Description"></textarea>
+                                            @*<input type="text" class="form-control" id="txtVoucherDes" placeholder="Enter voucher description  (500 characters)" data-bind="value: Voucher1Description" maxlength="500">*@
+                                        </div>
+                                    </div>
+                                    @*<div class="form-group">
+                                        <div class="col-lg-4 text-right">
+                                        <div class="bs-example-tooltips tooltip-float-width">
+                                        <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
+                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                        </a>
+                                        </div>
+                                        <label for="txtVerifyQuestion" class="control-label text-right tooltip-float">Voucher 2 Title</label>
+                                        </div>
+                                        <div class="col-lg-8">
+                                        <input type="text" class="form-control" id="txtVerifyQuestion" placeholder="Enter your voucher title" data-bind="value: Voucher2Heading">
+
+                                        </div>
+                                        </div>
+                                        <div class="form-group">
+                                        <div class="col-lg-4 text-right">
+                                        <div class="bs-example-tooltips tooltip-float-width">
+                                        <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
+                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                        </a>
+                                        </div>
+                                        <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float">Voucher 2 Description</label>
+                                        </div>
+                                        <div class="col-lg-8">
+                                        <input type="text" class="form-control" id="txtVerifyAnswer1" placeholder="Enter voucher description" data-bind="value: Voucher2Description">
+
+                                        </div>
+                                        </div>
+                                        <div class="form-group">
+                                        <div class="col-lg-4 text-right">
+                                        <div class="bs-example-tooltips tooltip-float-width">
+                                        <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
+                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                        </a>
+                                        </div>
+                                        <label for="txtVerifyAnswer2" class="control-label text-right tooltip-float">Voucher 2 Value</label>
+                                        </div>
+                                        <div class="col-lg-8">
+                                        <input type="text" class="form-control" id="txtVerifyAnswer2" placeholder="Enter Voucher Value" data-bind="value: Voucher2Value">
+
+                                        </div>
+                                        </div>*@
+                                </div>
+                                <div class="col-lg-2" style="display:none;">
+                                    <img src="/Content/Images/5_Main_4.png" class="hidden-sm hidden-xs" alt="" style="   margin-left: 10px; width: 120px;   margin-top: 23px;" />
+                                </div>
+                                <div class="clearfix">
+                                    &nbsp;
+
+                                </div>
+                            </div>
+                            <div class="form-group formcontrol-bg" data-bind="visible:$root.isDisplayCouponsAds()">
+                                <div class="col-lg-2" style="display:none;">
+                                    <img class="hidden-sm hidden-xs" src="/Content/Images/5_Main_4.png" alt="" style="   margin-left: 10px; width: 120px;
+    margin-top: 23px;" />
+                                </div>
+                                <div class="clearfix">
+                                    &nbsp;
+
+                                </div>
+                            </div>
+                            @*<div class="form-group formcontrol-bg" data-bind="visible:!$root.isDisplayCouponsAds()" style="margin-bottom:14px;">
+
+                                <div class="col-lg-4 text-campaign-left font20">
+                                <span>  Priority</span>
+                                </div>
+                                <div class="col-lg-8" style="padding-left:0px;">
+                                <input type="text" name="Priority" class="form-control" maxlength="36" id="txtPriority" placeholder="Priority" data-bind="value: priority" style="    margin-left: -15px;
+                                width: 91% !important;">
+
+                                </div>
+
+                                </div>*@
+                        </div>
+                        <div class="col-lg-1 col-md-1 col-sm-1" style="display:none;">
+                            &nbsp;
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-sm-4" style="display:none;">
+                            <div style="display:none;">
+                                <div class="clearfix">
+                                    <div class="col-lg-12">
+                                        <div style="width:210px;text-align:center;">
+                                            <img style="width:auto;height:80px;max-width:200px;" data-bind="visible:CampaignImagePath() == ''" src="/Content/Images/Company_Default.png" />
+                                            <img style="width:auto;height:80px;max-width:200px;" data-bind="visible:CampaignImagePath() != '' ,attr: { src: CampaignImagePath() + $root.randonNumber() }" />
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12" style="margin-top:15px;text-align:center;width:240px;padding-right:0px;">
+                                        <div class="col-lg-5" style="padding-right:10px;">
+                                            <div class="bs-example-tooltips tooltip-float-width">
+                                                <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="left" data-html="true" data-content="" data-original-title="" title="">
+                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6" style="text-align:left;">
+                                            <div class="fileUpload btn btn-primary">
+                                                <span>Upload </span>
+                                                <input type="file" class="upload" id="campaign_image_files" data-bind="files: { onLoaded: $root.campaignImageCallback, fileFilter: 'image.*'}" />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </a>
-                            <div class="aud_cnt" style="text-align:center;background-color:white;display:none;">
-                                <br /><span>100%</span><br />
-                                <span>Conversion Rate</span><br /><br />
-                                <span>upto 50% of PPC</span><br />
-                                <span>shared with happy clickers</span>
                             </div>
-                        </div>
-                        <div class="clearfix">
+                            <br />
+                            <div data-bind="visible:!$root.isDisplayCouponsAds()" style="width:100%;clear:both; margin-bottom:20px;">
+                                <div class="radio col-lg-12">
+                                    <span>Deliver in:</span>
+                                </div>
+                                <div class="radio col-lg-12 row radioDelv" style="margin-left: 10px;">
+                                    <input type="radio" name="optionsRadiosDeliver" id="optionsRadios3Day" value="3" data-bind="checked: DeliveryDays, event: { click:$root.addDeliveryPrice }">
+                                    <label for="optionsRadios3Day">
+                                        3 days <span class="delvPricetxt" data-bind="text: $root.threePriceLbl()" style=""></span>
+                                    </label>
+                                </div>
+                                <div class="radio col-lg-12 row radioDelv" style="margin-left: 10px;">
+                                    <input type="radio" name="optionsRadiosDeliver" id="optionsRadios5Day" value="5" data-bind="checked: DeliveryDays, event: { click:$root.addDeliveryPrice }">
+                                    <label for="optionsRadios5Day">
+                                        5 days <span data-bind="text: $root.fivePriceLbl()" class="delvPricetxt"></span>
+                                    </label>
+                                </div>
+                                <div class="radio col-lg-12 row radioDelv" style="margin-left: 10px;">
+                                    <input type="radio" name="optionsRadiosDeliver" id="optionsRadios10Day" value="10" data-bind="checked: DeliveryDays, event: { click:$root.addDeliveryPrice }">
+                                    <label for="optionsRadios10Day">
+                                        10 days <span data-bind="text: $root.tenPriceLbl()" class="delvPricetxt"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div data-bind="visible:!$root.isDisplayCouponsAds()" style="margin-top: 16px;clear:both;">
+                                <div style="    margin-bottom: 10px; display:none;">
+                                    <div class="yourBudgtHeadingCnt">
+                                        <span>Start date :</span>
+                                    </div>
+                                    <div class="">
+                                        <span data-bind="dateString:  StartDateTime"></span>
+                                    </div>
+                                    <div class="clearfix"> </div>
+                                </div>
+                                <button class="btn  btn-success btnSubmitApproval" id="btnSubmitForApproval" data-bind="click:$root.submitCampaignData, visible: $root.canSubmitForApproval" style="width: 100%;">Submit for Approval</button>
+                                <br />
+                                <div class="social-box col-lg-12 col-sm-12 col-xs-12  estimates hidden-sm hidden-xs" style="cursor:pointer;display:none;" title="Pending Estimates">
+                                    <div style="    margin-bottom: 10px;">
+                                        <div class="yourBudgtHeadingCnt">
+                                            <span style="white-space:nowrap;">Total Spent</span>
+                                        </div>
+                                        <div class="">
+                                            <span>£1024.00</span>
+                                        </div>
+                                        <div class="clearfix"> </div>
+                                    </div>
+                                    <div style="    margin-bottom: 10px;">
+                                        <div class="yourBudgtHeadingCnt">
+                                            <span>Ads delivered</span>
+                                        </div>
+                                        <div class="">
+                                            <span>34065</span>
+                                        </div>
+                                        <div class="clearfix"> </div>
+                                    </div>
+                                </div>
+                                <div class="social-box col-lg-12 col-sm-12 col-xs-12  facebook hidden-sm hidden-xs" style="cursor:pointer;background-color:#8284FB !important; display:none;" title="Pending Orders">
+                                    <div style="margin-bottom: 10px;">
+                                        <div class="yourBudgtHeadingCnt" style="font-weight:bold;    font-size: 16px;">
+                                            <span>Branding views</span>
+                                        </div>
+                                        <div class="">
+                                            <span>&nbsp;</span>
+                                        </div>
+                                        <div class="clearfix"> </div>
+                                    </div>
+                                    <div style="    margin-bottom: 10px;">
+                                        <div class="yourBudgtHeadingCnt">
+                                            <span>Games played</span>
+                                        </div>
+                                        <div class="">
+                                            <span>405</span>
+                                        </div>
+                                        <div class="clearfix"> </div>
+                                    </div>
+                                    <div style="    margin-bottom: 10px;">
+                                        <div class="yourBudgtHeadingCnt">
+                                            <span>Videos played</span>
+                                        </div>
+                                        <div class="">
+                                            <span>40</span>
+                                        </div>
+                                        <div class="clearfix"> </div>
+                                    </div>
+                                    <div style="    margin-bottom: 10px;">
+                                        <div class="yourBudgtHeadingCnt">
+                                            <span>Leaflets viewed</span>
+                                        </div>
+                                        <div class="">
+                                            <span>440</span>
+                                        </div>
+                                        <div class="clearfix"> </div>
+                                    </div>
+                                </div>
+                                <div class="social-box col-lg-12 col-sm-12 col-xs-12  twitter hidden-sm hidden-xs" style="cursor:pointer; background-color:#9093FB !important; display:none;" title="In Production">
+                                    <div style="    margin-bottom: 10px;">
+                                        <div class="yourBudgtHeadingCnt" style="font-weight:bold;    font-size: 16px;">
+                                            <span>Conversions</span>
+                                        </div>
+                                        <div class="">
+                                            <span>&nbsp;</span>
+                                        </div>
+                                        <div class="clearfix"> </div>
+                                    </div>
+                                    <div style="    margin-bottom: 10px;">
+                                        <div class="yourBudgtHeadingCnt">
+                                            <span>Landing page hits</span>
+                                        </div>
+                                        <div class="">
+                                            <span>405</span>
+                                        </div>
+                                        <div class="clearfix"> </div>
+                                    </div>
+                                    <div style="    margin-bottom: 10px;">
+                                        <div class="yourBudgtHeadingCnt">
+                                            <span>Vouchers issued </span>
+                                        </div>
+                                        <div class="">
+                                            <span>1999</span>
+                                        </div>
+                                        <div class="clearfix"> </div>
+                                    </div>
+                                </div>
+                                <div class="social-box col-lg-12 col-sm-12 col-xs-12  google hidden-sm hidden-xs" style="cursor:pointer; background-color:#C19AFC !important; display:none;" title="Completed">
+                                    <div style="    margin-bottom: 10px;">
+                                        <div class="yourBudgtHeadingCnt" style="font-weight:bold;    font-size: 16px;">
+                                            <span>Paid out</span>
+                                        </div>
+                                        <div class="">
+                                            <span>&nbsp;</span>
+                                        </div>
+                                        <div class="clearfix"> </div>
+                                    </div>
+                                    <div style="    margin-bottom: 10px;">
+                                        <div class="yourBudgtHeadingCnt">
+                                            <span>To Target Audience</span>
+                                        </div>
+                                        <div class="">
+                                            <span>£512.00</span>
+                                        </div>
+                                        <div class="clearfix"> </div>
+                                    </div>
+                                </div>
+                                <div class="clear-fix">
+                                    &nbsp;
+                                </div>
+                                <a href="http://pinkcards.com/" target="_blank" style="display:none;">
+                                    <div class="aud_cnt_head marketingGuru" style="background-color:#46448E; margin-top:10px;">
+                                        <h4 class="ad_h4" style="    font-size: 0.6em;">Our digital Gurus are ready to help you</h4>
+                                    </div>
+                                    <div class="aud_cnt_head marketingGuru" style="height: 94px; ">
+                                        <div class="">
+                                            <div class="col-lg-4">
+                                                <img src="~/Images/guru.png" height="70px" />
+                                            </div>
+                                            <div class="col-lg-8" style="text-align:left;font-size: 0.7em;">
+                                                <span>Make Video or flyer</span><br />
+                                                <span>Create and manage your</span><br />
+                                                <span>Ad Campaign & survey</span><br />
+                                                <span>Find a digital guru</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <div class="aud_cnt" style="text-align:center;background-color:white;display:none;">
+                                    <br /><span>100%</span><br />
+                                    <span>Conversion Rate</span><br /><br />
+                                    <span>upto 50% of PPC</span><br />
+                                    <span>shared with happy clickers</span>
+                                </div>
+                            </div>
+                            <div class="clearfix">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-@Html.Partial("~/Areas/Ads/Views/Ads/_addEditCouponCategories.cshtml")
-@Html.Partial("~/Areas/Ads/Views/Ads/_addEditCouponCodes.cshtml")
+    @Html.Partial("~/Areas/Ads/Views/Ads/_addEditCouponCategories.cshtml")
+    @Html.Partial("~/Areas/Ads/Views/Ads/_addEditCouponCodes.cshtml")
 
-<!-- ko if: $root.campaignModel() != null -->
-<div class="modal fade my-modal model_quizQ_ph" id="phQuizDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" style=" width:330px;  ">
-        <div class="col-lg-6 preview_stencilImg" style=" margin-right: 35px; width:310px;">
-            <div id="background" style="background-color:white;height:500px;" class="mobBck">
+    <!-- ko if: $root.campaignModel() != null -->
+    <div class="modal fade my-modal model_quizQ_ph" id="phQuizDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style=" width:330px;  ">
+            <div class="col-lg-6 preview_stencilImg" style=" margin-right: 35px; width:310px;">
+                <div id="background" style="background-color:white;height:500px;" class="mobBck">
+                    <div style="position:relative;">
+                        <img id="closePop" src="~/Images/close2-128.png" width="20" class="preview_close" data-dismiss="modal" onclick="closevid()" />
+                    </div>
+                    <div class="row preview_topImgCnt">
+                        <img src="~/Images/topbarph.png" width="100%" />
+                    </div>
+                    <div class="row logocont">
+                        @*<img data-bind="visible: $root.campaignModel().LogoUrl() != '', attr:{src: '/' + $root.campaignModel().LogoUrl()+ $root.randonNumber()}" class="preview_screen_advtlogo" />
+                            <img data-bind="visible: $root.campaignModel().LogoUrl() == '', attr:{src: '/' + $root.advertiserLogo()+ $root.randonNumber()}" class="preview_screen_advtlogo" />*@
+
+                        <img data-bind="attr:{src: $root.CompanyLogo()}" class=" preview_screen_advtlogo" />
+
+                        @*<img data-bind="visible: $root.campaignModel().LogoUrl() == '', attr:{src: '/' + $root.advertiserLogo()+ $root.randonNumber()}" class="preview_screen_advtlogo" />*@
+                    </div>
+
+                    <div id="Campaign_name_panel" class="preview_video" style="text-align: center;color: white;font-size: 17px;padding-top: 72px;">
+
+                        <span data-bind="text:$root.campaignModel().CampaignName()"></span>
+
+                    </div>
+                    <div id="video_panel">
+
+                        <video id="videoTag_prev" controls="" class="preview_video" data-bind="attr: { src: $root.VideoLink2src()+$root.randonNumber() }" src="null?r=0"></video>
+                    </div>
+
+                    <div style="padding-top:30px;text-align: center;height:130px">
+
+                        <div id="play_panel">
+                            <img src="~/Content/Images/Plaz@2x.png" style="height:40px;" onclick="previewImage()" />
+
+                            <p style="color:#127abd" id="ply_ans_desc"></p>
+                        </div>
+                        <div id="buynow_panel">
+                            <input style="margin: 0 auto; " type="button" value="Buy Now" class="buybtn" onclick="BuyItFunc()" />
+                        </div>
+                    </div>
+                    <div id="mod_btn_cont" style="margin-top:29px;">
+                        <input id="close_btn" type="button" value="Close" class="modify_btn" onclick="CloseDialog();" />
+                        <input id="pause_btn" type="button" value="Pause" class="modify_btn" onclick="NavigateBack();" />
+                    </div>
+
+                    @*<div style="width: 83%;margin: 5px auto 15px;" data-bind="visible: $root.campaignModel().Type() != 4">
+                                        <span data-bind="text: $root.campaignModel().DisplayTitle" style=" font-size: 15px;    color: red;"></span><br />
+                                        <span data-bind="text: $root.campaignModel().Description" style="font-size: 14px;    color: gray;"></span><br />
+                                        <span data-bind="text: $root.campaignModel().CampaignDescription" style="font-size: 14px;    color: gray; "></span>
+                                    </div>
+                                    <div class="row" id="appendVideoTag" style="text-align: center;    width: 83%;
+                        margin: auto;margin-bottom: 80px;" data-bind="visible: $root.campaignModel().Type() == 1">
+                                    </div>
+                                    <div style="text-align: center;    width: 83%;margin: auto;" data-bind=" visible: $root.campaignModel().Type()== 3 || $root.campaignModel().Type()== 2">
+                                        <div style="height: 230px;    padding: 5px;    background: #CECECE;    text-align: center;position:relative;">
+                                            <div class="preview_screen_viewFlyer">
+                                                VIEW FLAYER AND ANSWER QUIZ
+                                            </div>
+                                            <img style="width:auto;height:220px;" data-bind="visible: $root.campaignModel().CampaignTypeImagePath() == ''" src="/Content/Images/Company_Default.png" />
+                                            <img style="width:auto;height:220px;" data-bind="visible: $root.campaignModel().CampaignTypeImagePath() != '' ,attr: { src: $root.campaignModel().CampaignTypeImagePath }" />
+                                        </div>
+                                    </div>
+                                    <div class="row" style="text-align: center;width: 88%;
+                        margin: auto;" data-bind="visible: $root.campaignModel().Type() == 4">
+                                        <img src="~/Images/preview_game.jpg" style="    width: 100%;" />
+                                    </div>
+                                    <br />
+                                    <div style="  width: 83%;    margin:auto;  text-align: center;    " data-bind="visible: $root.campaignModel().Type() != 4">
+                                        <div style="float:left;margin-top: 12px;    margin-right: 35px; color:#b6e1e9;font-size: 15px;">
+                                            Cash Out
+                                        </div>
+                                        <div class="preview_screen_playbtn" style="float:left;">
+                                            Play
+                                        </div>
+                                        <div style="float:right;margin-top: 12px;    margin-left: 20px;color:#b6e1e9;font-size: 15px;">
+                                            Cash Out
+                                        </div>
+                                        <div class="clearfix">
+                                        </div>
+                                        <br />
+                                    </div>*@
+                </div>
+            </div>
+            @*<div class="col-lg-6 preview_stencilImg" style=" width:310px;">*@
+            @*<div style="position:relative;">
+                    <img src="~/Images/close2-128.png" width="20" class="preview_close" data-dismiss="modal" />
+                </div>*@
+            @*<div class="row preview_topImgCnt">
+                        <img src="~/Images/topbarph.png" width="100%" />
+                    </div>
+                    <div class="row" style="padding-top: 15px;  text-align: center;">
+                        <img data-bind="visible: $root.campaignModel().LogoUrl() != '', attr:{src: '/' + $root.campaignModel().LogoUrl() + $root.randonNumber()}" class="preview_screen_advtlogo" />
+                        <img data-bind="visible: $root.campaignModel().LogoUrl() == '', attr:{src: '/' + $root.advertiserLogo()+ $root.randonNumber()}" class="preview_screen_advtlogo" />
+                    </div>
+                    <div style="    text-align: center;">
+                        <span data-bind="text: 'Quiz - Win ' +  (($root.campaignModel().ClickRate() * 100)/2).toFixed() + 'p'" style="    font-size: 15px;      font-weight: bold;  color: #bb1923;"></span><br /><br />
+                        <span data-bind="text: $root.campaignModel().VerifyQuestion" style="font-size: 18px;    color: #006633;"></span><br /><br />
+                        <span style="    font-size: 12px;    color: gray;">Select from below</span>
+                        <div data-bind="text: $root.campaignModel().Answer1" class="preview_screen_quizAns1">
+                        </div>
+                        <div data-bind="text: $root.campaignModel().Answer2" class="preview_screen_quizAns2">
+                        </div>
+                    </div>
+                    <div style="    text-align: center;margin-bottom:30px;">
+                        <span style="font-size: 18px;    color: #006633;">Show Ad again :)</span>
+                    </div>
+                </div>*@
+        </div>
+    </div>
+
+    <div class="modal fade my-modal model_vucherQ_ph" id="phVoucherDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="    width: 315px !important;">
+            <div class="col-lg-12 preview_stencilImg">
                 <div style="position:relative;">
-                    <img id="closePop" src="~/Images/close2-128.png" width="20" class="preview_close" data-dismiss="modal" onclick="closevid()" />
+                    <img src="~/Images/close2-128.png" width="20" class="preview_close" data-dismiss="modal" />
                 </div>
                 <div class="row preview_topImgCnt">
                     <img src="~/Images/topbarph.png" width="100%" />
                 </div>
-                <div class="row logocont">
-                    @*<img data-bind="visible: $root.campaignModel().LogoUrl() != '', attr:{src: '/' + $root.campaignModel().LogoUrl()+ $root.randonNumber()}" class="preview_screen_advtlogo" />
-            <img data-bind="visible: $root.campaignModel().LogoUrl() == '', attr:{src: '/' + $root.advertiserLogo()+ $root.randonNumber()}" class="preview_screen_advtlogo" />*@
-
-                    <img data-bind="attr:{src: $root.CompanyLogo()}" class=" preview_screen_advtlogo" />
-
-                    @*<img data-bind="visible: $root.campaignModel().LogoUrl() == '', attr:{src: '/' + $root.advertiserLogo()+ $root.randonNumber()}" class="preview_screen_advtlogo" />*@
+                <div class="row" style="padding-top: 15px;  text-align: center;">
+                    <img data-bind="visible: $root.campaignModel().LogoUrl() != '', attr:{src: '/' + $root.campaignModel().LogoUrl()+ $root.randonNumber()}" class="preview_screen_advtlogo" />
+                    <img data-bind="visible: $root.campaignModel().LogoUrl() == '', attr:{src: '/' + $root.advertiserLogo()+ $root.randonNumber()}" class="preview_screen_advtlogo" />
                 </div>
-
-                <div id="Campaign_name_panel" class="preview_video" style="text-align: center;color: white;font-size: 17px;padding-top: 72px;">
-
-                    <span data-bind="text:$root.campaignModel().CampaignName()"></span>
-
-                </div>
-                <div id="video_panel">
-
-                    <video id="videoTag_prev" controls="" class="preview_video"  data-bind="attr: { src: $root.VideoLink2src()+$root.randonNumber() }" src="null?r=0"></video>
-                </div>
-
-                <div style="padding-top:30px;text-align: center;height:130px">
-
-                    <div id="play_panel">
-                        <img src="~/Content/Images/Plaz@2x.png" style="height:40px;" onclick="previewImage()" />
-
-                        <p style="color:#127abd" id="ply_ans_desc"></p>
-                    </div>
-                    <div id="buynow_panel">
-                        <input style="margin: 0 auto; " type="button" value="Buy Now" class="buybtn" onclick="BuyItFunc()" />
-                    </div>
-                </div>
-                <div id="mod_btn_cont" style="margin-top:29px;">
-                    <input id="close_btn" type="button" value="Close" class="modify_btn" onclick="CloseDialog();" />
-                    <input id="pause_btn" type="button" value="Pause" class="modify_btn" onclick="NavigateBack();" />
-                </div>
-
-                @*<div style="width: 83%;margin: 5px auto 15px;" data-bind="visible: $root.campaignModel().Type() != 4">
-                    <span data-bind="text: $root.campaignModel().DisplayTitle" style=" font-size: 15px;    color: red;"></span><br />
-                    <span data-bind="text: $root.campaignModel().Description" style="font-size: 14px;    color: gray;"></span><br />
-                    <span data-bind="text: $root.campaignModel().CampaignDescription" style="font-size: 14px;    color: gray; "></span>
-                </div>
-                <div class="row" id="appendVideoTag" style="text-align: center;    width: 83%;
-    margin: auto;margin-bottom: 80px;" data-bind="visible: $root.campaignModel().Type() == 1">
-                </div>
-                <div style="text-align: center;    width: 83%;margin: auto;" data-bind=" visible: $root.campaignModel().Type()== 3 || $root.campaignModel().Type()== 2">
-                    <div style="height: 230px;    padding: 5px;    background: #CECECE;    text-align: center;position:relative;">
-                        <div class="preview_screen_viewFlyer">
-                            VIEW FLAYER AND ANSWER QUIZ
-                        </div>
-                        <img style="width:auto;height:220px;" data-bind="visible: $root.campaignModel().CampaignTypeImagePath() == ''" src="/Content/Images/Company_Default.png" />
-                        <img style="width:auto;height:220px;" data-bind="visible: $root.campaignModel().CampaignTypeImagePath() != '' ,attr: { src: $root.campaignModel().CampaignTypeImagePath }" />
-                    </div>
-                </div>
-                <div class="row" style="text-align: center;width: 88%;
-    margin: auto;" data-bind="visible: $root.campaignModel().Type() == 4">
-                    <img src="~/Images/preview_game.jpg" style="    width: 100%;" />
+                <div class="text-center">
+                    <span class="preview_screen_vouchrRWlbl">Choose your Reward</span>
                 </div>
                 <br />
-                <div style="  width: 83%;    margin:auto;  text-align: center;    " data-bind="visible: $root.campaignModel().Type() != 4">
-                    <div style="float:left;margin-top: 12px;    margin-right: 35px; color:#b6e1e9;font-size: 15px;">
-                        Cash Out
+                <div class="preview_screen_vouchrcnt">
+                    <div class="preview_screen_CashCnt">
+                        <div>
+                            <span style="    font-size: 15px;">Bank Cash</span><br />
+                            <span style="font-size: 23px;    font-weight: bold;" data-bind="text: (($root.campaignModel().ClickRate() * 100)/2).toFixed() + 'p'"></span><br />
+                            <span style="    font-size: 18px;">In Wallet</span><br />
+                            <img src="~/Images/1_Splash_screen_1.png" style="    width: 83px;" />
+                        </div>
                     </div>
-                    <div class="preview_screen_playbtn" style="float:left;">
-                        Play
-                    </div>
-                    <div style="float:right;margin-top: 12px;    margin-left: 20px;color:#b6e1e9;font-size: 15px;">
-                        Cash Out
+                    <div class="preview_screen_voucherCntRight">
+                        <span style="    font-size: 15px;    line-height: 0;">Email Voucher</span><br />
+                        <div style="height: 20px;">
+                            &nbsp;
+                        </div>
+                        <span style="font-size: 28px;    line-height: 0;    font-weight: bold;">Free Sample</span>
+                        <div style="height: 12px;">
+                            &nbsp;
+                        </div>
+                        <div class="preview_screen_advtlogoCnt">
+                            <img style="width: 70px;    margin-top: 2px;" data-bind="visible: $root.campaignModel().VoucherImagePath() == ''" src="/Content/Images/Company_Default.png" />
+                            <img style="width: 70px;    margin-top: 2px;" data-bind="visible: $root.campaignModel().VoucherImagePath() != '' ,attr: { src: $root.campaignModel().VoucherImagePath }" />
+                        </div>
                     </div>
                     <div class="clearfix">
-                    </div>
-                    <br />
-                </div>*@
-            </div>
-        </div>
-        @*<div class="col-lg-6 preview_stencilImg" style=" width:310px;">*@
-            @*<div style="position:relative;">
-                <img src="~/Images/close2-128.png" width="20" class="preview_close" data-dismiss="modal" />
-            </div>*@
-            @*<div class="row preview_topImgCnt">
-                <img src="~/Images/topbarph.png" width="100%" />
-            </div>
-            <div class="row" style="padding-top: 15px;  text-align: center;">
-                <img data-bind="visible: $root.campaignModel().LogoUrl() != '', attr:{src: '/' + $root.campaignModel().LogoUrl() + $root.randonNumber()}" class="preview_screen_advtlogo" />
-                <img data-bind="visible: $root.campaignModel().LogoUrl() == '', attr:{src: '/' + $root.advertiserLogo()+ $root.randonNumber()}" class="preview_screen_advtlogo" />
-            </div>
-            <div style="    text-align: center;">
-                <span data-bind="text: 'Quiz - Win ' +  (($root.campaignModel().ClickRate() * 100)/2).toFixed() + 'p'" style="    font-size: 15px;      font-weight: bold;  color: #bb1923;"></span><br /><br />
-                <span data-bind="text: $root.campaignModel().VerifyQuestion" style="font-size: 18px;    color: #006633;"></span><br /><br />
-                <span style="    font-size: 12px;    color: gray;">Select from below</span>
-                <div data-bind="text: $root.campaignModel().Answer1" class="preview_screen_quizAns1">
-                </div>
-                <div data-bind="text: $root.campaignModel().Answer2" class="preview_screen_quizAns2">
-                </div>
-            </div>
-            <div style="    text-align: center;margin-bottom:30px;">
-                <span style="font-size: 18px;    color: #006633;">Show Ad again :)</span>
-            </div>
-        </div>*@
-    </div>
-</div>
-
-<div class="modal fade my-modal model_vucherQ_ph" id="phVoucherDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" style="    width: 315px !important;">
-        <div class="col-lg-12 preview_stencilImg">
-            <div style="position:relative;">
-                <img src="~/Images/close2-128.png" width="20" class="preview_close" data-dismiss="modal" />
-            </div>
-            <div class="row preview_topImgCnt">
-                <img src="~/Images/topbarph.png" width="100%" />
-            </div>
-            <div class="row" style="padding-top: 15px;  text-align: center;">
-                <img data-bind="visible: $root.campaignModel().LogoUrl() != '', attr:{src: '/' + $root.campaignModel().LogoUrl()+ $root.randonNumber()}" class="preview_screen_advtlogo" />
-                <img data-bind="visible: $root.campaignModel().LogoUrl() == '', attr:{src: '/' + $root.advertiserLogo()+ $root.randonNumber()}" class="preview_screen_advtlogo" />
-            </div>
-            <div class="text-center">
-                <span class="preview_screen_vouchrRWlbl">Choose your Reward</span>
-            </div>
-            <br />
-            <div class="preview_screen_vouchrcnt">
-                <div class="preview_screen_CashCnt">
-                    <div>
-                        <span style="    font-size: 15px;">Bank Cash</span><br />
-                        <span style="font-size: 23px;    font-weight: bold;" data-bind="text: (($root.campaignModel().ClickRate() * 100)/2).toFixed() + 'p'"></span><br />
-                        <span style="    font-size: 18px;">In Wallet</span><br />
-                        <img src="~/Images/1_Splash_screen_1.png" style="    width: 83px;" />
-                    </div>
-                </div>
-                <div class="preview_screen_voucherCntRight">
-                    <span style="    font-size: 15px;    line-height: 0;">Email Voucher</span><br />
-                    <div style="height: 20px;">
-                        &nbsp;
-                    </div>
-                    <span style="font-size: 28px;    line-height: 0;    font-weight: bold;">Free Sample</span>
-                    <div style="height: 12px;">
-                        &nbsp;
-                    </div>
-                    <div class="preview_screen_advtlogoCnt">
-                        <img style="width: 70px;    margin-top: 2px;" data-bind="visible: $root.campaignModel().VoucherImagePath() == ''" src="/Content/Images/Company_Default.png" />
-                        <img style="width: 70px;    margin-top: 2px;" data-bind="visible: $root.campaignModel().VoucherImagePath() != '' ,attr: { src: $root.campaignModel().VoucherImagePath }" />
                     </div>
                 </div>
                 <div class="clearfix">
@@ -3268,84 +3294,81 @@ else
             </div>
             <div class="clearfix">
             </div>
-        </div>
-        <div class="clearfix">
-        </div>
-        <div style="    text-align: center;height:30px;">
+            <div style="    text-align: center;height:30px;">
+            </div>
         </div>
     </div>
-</div>
-<div class="modal fade my-modal model_BuyItQ_ph" id="phBuyItDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" style="width: 315px !important;">
-        <div class="col-lg-12 preview_stencilImg">
-            <div style="position:relative;">
-                <img src="~/Images/close2-128.png" width="20" class="preview_close" data-dismiss="modal" />
-            </div>
-            <div class="row preview_topImgCnt">
-                <img src="~/Images/topbarph.png" width="100%" />
-            </div>
-            <div class="row" style="padding-top: 15px;  text-align: center;">
-                <img data-bind="visible: $root.campaignModel().LogoUrl() != '', attr:{src: '/' + $root.campaignModel().LogoUrl()+ $root.randonNumber()}" class="preview_screen_advtlogo" />
-                <img data-bind="visible: $root.campaignModel().LogoUrl() == '', attr:{src: '/' + $root.advertiserLogo()+ $root.randonNumber()}" class="preview_screen_advtlogo" />
-            </div>
-            <div class="row" style="text-align: center;">
-                @*<img style="   width: 85%;    max-height: 150px;" data-bind="visible: $root.campaignModel().buyItImageBytes() == ''" src="/Content/Images/Company_Default.png" />
-                    <img style="   width: 85%;    max-height: 150px;" data-bind="visible: $root.campaignModel().buyItImageBytes() != '' ,attr: { src: $root.campaignModel().buyItImageBytes }" />*@
-                <img style="height: 150px;" data-bind="visible: $root.campaignModel().buyItImageBytes() == '',attr: { src: $root.campaignModel().BuyItImageUrl == ''?'/Content/Images/Company_Default.png':'/'+$root.campaignModel().BuyItImageUrl() }" src="/Content/Images/Company_Default.png" />
-                <img style=" height: 150px;" data-bind="visible: $root.campaignModel().buyItImageBytes() != '' ,attr: { src: $root.campaignModel().buyItImageBytes }" />
-            </div>
-            <br />
-            <div style="width: 85%;    margin: auto;">
-                <span data-bind="text: $root.campaignModel().BuuyItLine1" style=" font-size: 18px;    color: red;"></span><br />
-                <span data-bind="text: $root.campaignModel().BuyItLine2" style="font-size: 18px;    color: red;"></span><br />
-                <span data-bind="text: $root.campaignModel().BuyItLine3" style="font-size: 18px;    color: red; font-weight:bold;"></span>
-                <div data-bind="text: $root.campaignModel().BuyItButtonLabel" class="preview_screen_buyIt2">
+    <div class="modal fade my-modal model_BuyItQ_ph" id="phBuyItDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width: 315px !important;">
+            <div class="col-lg-12 preview_stencilImg">
+                <div style="position:relative;">
+                    <img src="~/Images/close2-128.png" width="20" class="preview_close" data-dismiss="modal" />
+                </div>
+                <div class="row preview_topImgCnt">
+                    <img src="~/Images/topbarph.png" width="100%" />
+                </div>
+                <div class="row" style="padding-top: 15px;  text-align: center;">
+                    <img data-bind="visible: $root.campaignModel().LogoUrl() != '', attr:{src: '/' + $root.campaignModel().LogoUrl()+ $root.randonNumber()}" class="preview_screen_advtlogo" />
+                    <img data-bind="visible: $root.campaignModel().LogoUrl() == '', attr:{src: '/' + $root.advertiserLogo()+ $root.randonNumber()}" class="preview_screen_advtlogo" />
+                </div>
+                <div class="row" style="text-align: center;">
+                    @*<img style="   width: 85%;    max-height: 150px;" data-bind="visible: $root.campaignModel().buyItImageBytes() == ''" src="/Content/Images/Company_Default.png" />
+                        <img style="   width: 85%;    max-height: 150px;" data-bind="visible: $root.campaignModel().buyItImageBytes() != '' ,attr: { src: $root.campaignModel().buyItImageBytes }" />*@
+                    <img style="height: 150px;" data-bind="visible: $root.campaignModel().buyItImageBytes() == '',attr: { src: $root.campaignModel().BuyItImageUrl == ''?'/Content/Images/Company_Default.png':'/'+$root.campaignModel().BuyItImageUrl() }" src="/Content/Images/Company_Default.png" />
+                    <img style=" height: 150px;" data-bind="visible: $root.campaignModel().buyItImageBytes() != '' ,attr: { src: $root.campaignModel().buyItImageBytes }" />
+                </div>
+                <br />
+                <div style="width: 85%;    margin: auto;">
+                    <span data-bind="text: $root.campaignModel().BuuyItLine1" style=" font-size: 18px;    color: red;"></span><br />
+                    <span data-bind="text: $root.campaignModel().BuyItLine2" style="font-size: 18px;    color: red;"></span><br />
+                    <span data-bind="text: $root.campaignModel().BuyItLine3" style="font-size: 18px;    color: red; font-weight:bold;"></span>
+                    <div data-bind="text: $root.campaignModel().BuyItButtonLabel" class="preview_screen_buyIt2">
+                    </div>
+                </div>
+                <div style="    text-align: center;    margin-bottom: 20px;">
+                    <div class="preview_screen_skipbtn">
+                        Skip
+                    </div>
                 </div>
             </div>
-            <div style="    text-align: center;    margin-bottom: 20px;">
-                <div class="preview_screen_skipbtn">
-                    Skip
+        </div>
+    </div>
+    <div class="modal fade my-modal model_AdsQ_ph" id="phAdsDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style=" width: 315px !important;margin-top: 0px !important;">
+        </div>
+    </div>
+    <div class="modal fade my-modal model_generateCodes" id="mdGenerateCC" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Generate Coupon Codes</h4>
+                </div>
+                <div class="col-lg-12">
+                    <div class="row liveExample">
+                        <form data-bind="submit:generateCouponCodes">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    <label for="txtCouponNumb" class="control-label text-right tooltip-float floatNone" style="margin-top: 7px;">Coupon Number</label>
+                                </div>
+                                <div class="col-lg-5">
+                                    <input type="number" class="form-control" data-bind='value:numberOFCouponsToGenerate, valueUpdate: "afterkeydown"' placeholder="Enter number" />
+                                </div>
+                                <div class="col-lg-4">
+                                    <button type="submit" data-bind="enable: numberOFCouponsToGenerate() > 0" class="btn btn-primary">Generate</button>
+                                </div>
+                                <div class="clearfix">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div class="modal fade my-modal model_AdsQ_ph" id="phAdsDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" style=" width: 315px !important;margin-top: 0px !important;">
-    </div>
-</div>
-<div class="modal fade my-modal model_generateCodes" id="mdGenerateCC" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Generate Coupon Codes</h4>
-            </div>
-            <div class="col-lg-12">
-                <div class="row liveExample">
-                    <form data-bind="submit:generateCouponCodes">
-                        <div class="form-group">
-                            <div class="col-lg-3">
-                                <label for="txtCouponNumb" class="control-label text-right tooltip-float floatNone" style="margin-top: 7px;">Coupon Number</label>
-                            </div>
-                            <div class="col-lg-5">
-                                <input type="number" class="form-control" data-bind='value:numberOFCouponsToGenerate, valueUpdate: "afterkeydown"' placeholder="Enter number" />
-                            </div>
-                            <div class="col-lg-4">
-                                <button type="submit" data-bind="enable: numberOFCouponsToGenerate() > 0" class="btn btn-primary">Generate</button>
-                            </div>
-                            <div class="clearfix">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- /ko -->
+    <!-- /ko -->
 </div>
 @*reward your audience screen*@
 <div class="col-lg-12" data-bind="visible: $root.isWelcomeScreenVisible()" style="display: none">
@@ -3422,7 +3445,7 @@ else
                     </span>
                 </a>
             </button>
-         
+
         </td>
         <td class="col-lg-1">
             <button class="btn gridDeletebtn">
@@ -3432,7 +3455,7 @@ else
                     </span>
                 </a>
             </button>
-</td>
+        </td>
     </tr>
     <!--/ko-->
 </script>
@@ -3802,7 +3825,7 @@ else
                             </span>
                             <span style="float:left;">
                                 <select class="form-control radius_ddp" data-bind="value: Radius">
-                                    
+
                                     <option value="10">10 km</option>
                                     <option value="25">25 km</option>
                                     <option value="40">40 km</option>
@@ -3929,7 +3952,7 @@ else
     function closePreviewDialog() {
         //$("#closePop").click();
         $( "#closePop" ).trigger( "click" );
-      //  $("#phQuizDialog").css('display','none');
+        //  $("#phQuizDialog").css('display','none');
     }
     function CloseDialog()
     {
@@ -3967,16 +3990,16 @@ else
 
 
 
- 
+
 </script>
 
 <script id="QuestionsMainGrd" type="text/html">
     <tr style="cursor: pointer">
-      <td><span data-bind="text: Question,click:$root.onChangeProfileQuestion"></span></td>
-      <td>
-          <!-- ko template: { name: 'AnswersTab' , foreach: $root.GetAnswers(PqId) } --><!-- /ko -->
-          
-      </td>
+        <td><span data-bind="text: Question,click:$root.onChangeProfileQuestion"></span></td>
+        <td>
+            <!-- ko template: { name: 'AnswersTab' , foreach: $root.GetAnswers(PqId) } --><!-- /ko -->
+
+        </td>
     </tr>
 </script>
 
@@ -3991,7 +4014,7 @@ else
 <script id="SurveyssQuestionTiles" type="text/html">
     <div class="list">
         <div class="parent-list-title"><span data-bind="text:DisplayQuestion"></span></div>
-        
+
         <div class="listview  padding10 list-type-tiles chlidList" data-role="listview" style="padding-left:0px;">
             <div><span class="listlabels">Select one of the following answers results to ‘Join’ your Target audience.</span></div>
             @*<!-- ko template: { name: 'SurveyQuestionAnsTiles' , foreach: $root.profileAnswerList } --><!-- /ko -->*@
@@ -4053,7 +4076,7 @@ else
         $("#play_panel").css('display','block');
         $("#Campaign_name_panel").css('display','block');
         $("#close_btn").css('display','block');
-     
+
 
         if( $("#ddTextBtns").val()==0)
         {
@@ -4061,11 +4084,11 @@ else
         }
         else
         {
-            
+
             $(".buybtn").css('display','block');
 
             if( !$("#txtBuyItlbl").is(":hidden")==true)
-            {  
+            {
                 if($("#txtBuyItlbl").val()!='')
                 {
                     $(".buybtn").val($("#txtBuyItlbl").val());
@@ -4156,11 +4179,11 @@ else
     }
 
     //var x = document.querySelectorAll("p");
-    
+
     function playVideo(event) {
 
         var playSelectedFile = function (event) {
-            
+
             var file = this.files[0]
             var type = file.type
             var videoNode = document.querySelectorAll('video')
@@ -4169,7 +4192,7 @@ else
             var canPlay = videoNode[1].canPlayType(type)
             var canPlay = videoNode[2].canPlayType(type)
 
-            videoNode[2].removeAttribute("controls")  
+            videoNode[2].removeAttribute("controls")
             if (canPlay === '') canPlay = 'no'
             var message = 'Can play type "' + type + '": ' + canPlay
             var isError = canPlay === 'no'
@@ -4221,14 +4244,14 @@ else
     //  $("#MainSpan").css("display", "none");
     $(function () {
         $('#demo').on('shown.bs.collapse', function (e) {
-            
+
             //var offset = $('.panel.panel-default > .panel-collapse.in').offset();
             //if (offset) {
-                $('html,body').animate({
-                    scrollTop: $('#demo p').offset().top - 20
-                }, 600);
+            $('html,body').animate({
+                scrollTop: $('#demo p').offset().top - 20
+            }, 600);
 
-                
+
             //}
         });
     });
@@ -4240,7 +4263,7 @@ else
     var bannerImage3 = "";
     var dammode = 1;
     function changeIframeSrc(mode1) {
-       
+
 
         var dresult = $('#imgLogo').is(':disabled');
         if (dresult == false) {
@@ -4284,7 +4307,7 @@ else
     {
         //$("#videoTag_prev").play();
         $('#videoTag_prev').get(0).play();
-        
+
         $("#play_panel").css('display','none');
         $("#Campaign_name_panel").css('display','none');
         $("#buynow_panel").css('display','block');
@@ -4300,13 +4323,13 @@ else
         //$("#video_panel").css('display','none');
         //$("#pause_btn").css('display','none');
         //var val=  $('#videoTag_prev').get(0).paused;
-        
+
         if ($('#videoTag_prev').get(0).paused == false) {
             $('#videoTag_prev').get(0).pause();
-            $('#pause_btn').val('Play'); 
+            $('#pause_btn').val('Play');
         } else {
             $('#videoTag_prev').get(0).play();
-            $('#pause_btn').val('Pause'); 
+            $('#pause_btn').val('Pause');
         }
 
         //$("#close_btn").css('display','block');

@@ -89,6 +89,11 @@ define("survey/survey.viewModel",
                     qStatuses = ko.observableArray([{ id: 0, value: 'All' }, { id: 1, value: 'Draft' }, { id: 2, value: 'Submitted for Approval' }, { id: 3, value: 'Live' }, { id: 4, value: 'Paused' }, { id: 5, value: 'Completed' }, { id: 6, value: 'Rejected' }]);
                 statusFilterValue = ko.observable();
                 // Advertiser Analytics 
+                GenderAnalyticsData = ko.observableArray([{ id: 0, name: "All" }, { id: 1, name: "male" }, { id: 2, name: "female" }]),
+                AgeRangeAnalyticsData = ko.observableArray([{ id: 0, name: "All" }, { id: 1, name: "10-20" }, { id: 2, name: "20-30" }, { id: 3, name: "30-40" }, { id: 4, name: "40-50" }, { id: 5, name: "50-60" }, { id: 6, name: "60-70" }, { id: 7, name: "70-80" }, { id: 8, name: "80-90" }, { id: 9, name: "90+" }]),
+                selectedGenderAnalytics = ko.observable(0),
+                selectedAgeAnalytics = ko.observable(0),
+                DDStatsAnalytics = ko.observable(),
                 isAdvertdashboardPollVisible = ko.observable(false),
                 selectedCampStatusAnalytics = ko.observable(1),
                 selecteddateRangeAnalytics = ko.observable(1),
@@ -102,6 +107,7 @@ define("survey/survey.viewModel",
                 CampaignStatusDropDown = ko.observableArray([{ id: 1, name: "Answered" }, { id: 2, name: "Skipped" }]),
                 CampaignRatioAnalyticData = ko.observable(1),
                 isflageClose = ko.observable(false),
+                getDDAnalytic = function () { },
                 openAdvertiserDashboardPollScreen = function () {
                     if (!IsnewSurvey()) {
                         isflageClose(true);
@@ -109,7 +115,8 @@ define("survey/survey.viewModel",
                         $("#ddGranularityDropDown").removeAttr("disabled");
                         $("#ddDateRangeDropDown").removeAttr("disabled");
                         $("#ddCampaignStatusDropDown").removeAttr("disabled");
-
+                        $("#ddGDropDown").removeAttr("disabled");
+                        $("#ddADropDown").removeAttr("disabled");
                         isAdvertdashboardPollVisible(true);
                     }
                     else {
@@ -150,9 +157,9 @@ define("survey/survey.viewModel",
                 ClosePollAnalyticView = function () {
                     isAdvertdashboardPollVisible(false);
                     CampaignRatioAnalyticData(1);
-					selecteddateRangeAnalytics(1);
-					selectedGranularityAnalytics(1);
-					isflageClose(false);
+                    selecteddateRangeAnalytics(1);
+                    selectedGranularityAnalytics(1);
+                    isflageClose(false);
                 },
 
                 //End Advertiser Analytics 
@@ -303,15 +310,15 @@ define("survey/survey.viewModel",
                     gotoScreen(1);
                     isTerminateBtnVisible(false);
                     isShowArchiveBtn(false);
-                    HeaderText("Add new Picture Poll");
+                    HeaderText("Picture Polls");
                     StatusValue('');
                     isNewCampaign(true);
                     StatusValue("Draft");
                     IsnewSurvey(true);
                     selectedQuestion(new model.Survey());
                     selectedQuestion().Gender("1");
-                    selectedQuestion().LeftPicturePath("/Images/select_image.jpg");
-                    selectedQuestion().RightPicturePath("/Images/select_image.jpg");
+                    selectedQuestion().LeftPicturePath("/Images/pollpicture1.png");
+                    selectedQuestion().RightPicturePath("/Images/pollpicture2.png");
                     //selectedQuestion().LeftPicturePath("/images/standardplaceholder.png");
                     //selectedQuestion().RightPicturePath("/images/standardplaceholder.png");
                     selectedQuestion().StatusValue("Draft");
@@ -1861,19 +1868,19 @@ define("survey/survey.viewModel",
                         confirmation.hide();
                     });
                     confirmation.afterProceed(function () {
-                            selectedQuestion(item);
-                            saveSurveyQuestion(7);
+                        selectedQuestion(item);
+                        saveSurveyQuestion(7);
                     });
                 },
                 backScreen = function () {
 
                     if (previewScreenNumber() > 1) {
                         previewScreenNumber(previewScreenNumber() - 1);
-                       // $('html, body').animate({ scrollTop: 0 }, 800);
+                        // $('html, body').animate({ scrollTop: 0 }, 800);
                     }
                 },
                 nextPreviewScreen = function () {
-                  //  var hasErrors = false;
+                    //  var hasErrors = false;
                   
                     //if (hasErrors)
                     //    return;
@@ -1883,7 +1890,7 @@ define("survey/survey.viewModel",
                         else {
                             previewScreenNumber(previewScreenNumber() + 1);
                             
-                           // $('html, body').animate({ scrollTop: 0 }, 800);
+                            // $('html, body').animate({ scrollTop: 0 }, 800);
                         }
                     }
 
@@ -2175,10 +2182,10 @@ define("survey/survey.viewModel",
                         
                         if (UserRoleId == 'Franchise_Creative') {
                             IsVisibleAudience(false);
-                           // $("#chart_div").css("cssText", "width:679px!important;");
+                            // $("#chart_div").css("cssText", "width:679px!important;");
                         }
                         else {
-                            AudienceWidth('431px');
+                            AudienceWidth('380px');
                             IsVisibleAudience(true);
                         }
                     };
@@ -2319,7 +2326,13 @@ define("survey/survey.viewModel",
                     backScreen: backScreen,
                     isflageClose: isflageClose,
                     Changefilter: Changefilter,
-                    IsBroadMarketing: IsBroadMarketing
+                    IsBroadMarketing: IsBroadMarketing,
+                    GenderAnalyticsData : GenderAnalyticsData, 
+                    AgeRangeAnalyticsData : AgeRangeAnalyticsData, 
+                    selectedGenderAnalytics : selectedGenderAnalytics,
+                    selectedAgeAnalytics : selectedAgeAnalytics, 
+                    getDDAnalytic: getDDAnalytic,
+                    DDStatsAnalytics: DDStatsAnalytics
                 };
             })()
         };
