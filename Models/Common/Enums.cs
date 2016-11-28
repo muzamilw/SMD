@@ -44,7 +44,8 @@
         InviteAdvertiser = 21,
         AppFeedbackFromUser = 22,
         SubscriptionPaymentFailed = 23,
-        DeleteAccountConfirmationEmail = 24
+        DeleteAccountConfirmationEmail = 24,
+        SubscriptionCreated = 25
     }
 
     public enum AdCampaignCriteriaType

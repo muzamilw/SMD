@@ -1115,5 +1115,31 @@ namespace SMD.Implementation.Services
         }
 
 
+        public bool SendCouponSubscriptionCreatedEmail(int companyId)
+        {
+            var comp = companyService.GetCompanyById(companyId);
+
+            //if (comp != null)
+            //{
+            //    MMailto.Add(oUser.Email);
+            //    Mid = (int)EmailTypes.SubscriptionPaymentFailed;
+            //    CompanyName = comp.CompanyName;
+            //    Muser = oUser.FullName;
+            //    PaymentFailedAttempt = Attempt.ToString();
+            //    PaymentFailedReason = sPaymentFailedReason;
+            //    NextPaymentAttempt = sNextPaymentAttempt;
+
+            //    SendEmailNotAysnc();
+            //}
+            //else
+            //{
+            //    throw new Exception("Email could not be sent!");
+            //}
+
+            return true;
+
+        }
+
+
     }
 }

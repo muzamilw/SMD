@@ -685,5 +685,10 @@ namespace DomainModelProject
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("getCampaignByIdQQFormAnalytic", idParameter, coiceParameter, genderParameter, ageRangeParameter, professionParameter, cityParameter);
         }
+    
+        public virtual ObjectResult<GetRandom3Deal_Result> GetRandom3Deal()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetRandom3Deal_Result>("GetRandom3Deal");
+        }
     }
 }
