@@ -14,28 +14,31 @@
 
                     @*<span class="pull-left" style="color:#fff!important; padding-left:0px;font-size:23px;" data-bind="text:$root.HeaderText">Are you single ?</span>*@
 
-                    <div class="clearfix col-lg-8" style="padding:0px;padding-top:3px;" data-bind="with: $root.selectedQuestion">
-                        <span class="pull-left Theme_standard_clr" style="padding-left: 0px; font-size: 21px; display: none;" data-bind="text:$root.HeaderText">New video campaign</span>
-
-                        <img class="vid_image pull-left" src="/Content/Images/Pollmod.png" style="display: block;"> <span id="newVid" class="pull-left " style="color:#fff!important; padding-left:0px;font-size:23px;margin-top:15px;margin-left:9px;" data-bind="text:$root.HeaderText">New video campaign</span>
-
-                    </div>
-
-                    <div class="col-lg-4" style="padding-left:0px;padding-right:0px;">
-
-                        <div class="pull-left" data-bind="with: $root.selectedQuestion" style="margin-left:96px;margin-top: 18px;">
-                            <div class="pull-left" style="margin-top:1px;">
-                                <span style="font-size:23px;color:white;" data-bind="text:StatusValue()">Draft</span>
-                            </div>
-                            <div class="pull-left">
-                                <div class="status_date_span">
+                    <div class="clearfix col-lg-9" style="padding:0px;padding-top:3px;" data-bind="with: $root.selectedQuestion">
+                        <div class="col-lg-5" style="margin-left:-11px !important">
+                            <span class="pull-left Theme_standard_clr" style="padding-left: 0px; font-size: 21px; display: none;" data-bind="text:$root.HeaderText">New video campaign</span>
+                            <img class="vid_image pull-left" src="/Content/Images/Pollmod.png" style="display: block;"> <span id="newVid" class="pull-left " style="color:#fff!important; padding-left:0px;font-size:23px;margin-top:15px;margin-left:9px;" data-bind="text:$root.HeaderText">New video campaign</span>
+                        </div>
+                        <div class="col-lg-4 pull-right" style="margin-right:-3px !important;">
+                            <div class="pull-right">
+                                <div class="status_date_span" style="margin-top:25px;">
                                     Last modified <span style="margin-left:3px"></span><span>12 april 2014</span>
                                 </div>
                             </div>
-                            <div class="clearfix"></div>
                         </div>
-                        <img data-bind="click: $root.closeEditDialog,visible:$root.isflageClose()==false" src="/Content/Images/Close_Button.png" style="width:20px;height:20px;float:right;cursor:pointer;margin-top:26px;">
-                        <img data-bind="click: $root.ClosePollAnalyticView,visible:$root.isflageClose()==true" id="img2" src="/Content/Images/Close_Button.png" style="width:20px;height:20px;float:right;cursor:pointer;margin-top:17px;">
+                    </div>
+
+                    <div class="col-lg-3" style="padding-left:0px;padding-right:0px;">
+
+                        <div class="pull-left" data-bind="with: $root.selectedQuestion" style="margin-left:0px;margin-top: 18px;">
+                            <div class="pull-left" style="margin-top:1px;">
+                                <span style="font-size:23px;color:white;" data-bind="text:StatusValue()">Draft</span>
+                            </div>
+                        </div>
+                        <div style="margin-right:-9px !important" >
+                            <img data-bind="click: $root.closeEditDialog,visible:$root.isflageClose()==false" src="/Content/Images/Close_Button.png" style="width:20px;height:20px;float:right;cursor:pointer;margin-top:26px;">
+                            <img data-bind="click: $root.ClosePollAnalyticView,visible:$root.isflageClose()==true" id="img2" src="/Content/Images/Close_Button.png" style="width:20px;height:20px;float:right;cursor:pointer;margin-top:17px;">
+                        </div>
                     </div>
 
 

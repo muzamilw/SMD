@@ -19,31 +19,34 @@ else
                     <li><a href="~/Dashboard/Index" class="my-navigator">Home</a></li>
                     <li><a data-bind="click: $root.closeNewCampaignDialog" class="my-navigator">Video Campaigns</a></li>
                 </ol>
-                <div class="clearfix col-lg-8" data-bind="with: $root.campaignModel" style="padding:0px;padding-top:3px;">
-                    <span class="pull-left Theme_standard_clr" style="padding-left:0px;font-size:21px;" data-bind="NewCampaignBinding: CampaignName,visible:$root.isDisplayCouponsAds()">New Coupon</span>
+                <div class="clearfix col-lg-9" data-bind="with: $root.campaignModel" style="padding:0px;padding-top:3px;margin-left:0px;">
+                    <div class="col-lg-5" style="margin-left:-11px !important;">
+                        <span class="pull-left Theme_standard_clr" style="padding-left:0px;font-size:21px;" data-bind="NewCampaignBinding: CampaignName,visible:$root.isDisplayCouponsAds()">New Coupon</span>
 
-                    <img class="vid_image pull-left" data-bind="attr: { src: $root.StatusCodeImage }" src="/Content/Images/Videos_small.png"> <span id="newVid" class="pull-left " style="color:#fff!important; padding-left:0px;font-size:23px;margin-top:15px;margin-left:9px;" data-bind="NewCampaignBinding: CampaignName">New video campaign</span> <span style="color:#fff!important;margin-left:3px;margin-top:21px;" class="subtitle pull-left" data-bind="text:$root.CampaignHeader()"></span>
+                        <img class="vid_image pull-left" data-bind="attr: { src: $root.StatusCodeImage }" src="/Content/Images/Videos_small.png"> <span id="newVid" class="pull-left " style="color:#fff!important; padding-left:0px;font-size:23px;margin-top:15px;margin-left:9px;" data-bind="NewCampaignBinding: CampaignName">New video campaign</span> <span style="color:#fff!important;margin-left:3px;margin-top:21px;" class="subtitle pull-left" data-bind="text:$root.CampaignHeader()"></span>
 
-                    @*<span id="newdisplay_Ad" class="pull-left " style="color:black!important; padding-left:0px;font-size:23px;margin-top:12px;display:none;" data-bind="NewCampaignBinding: CampaignName">New display ad</span>*@
-                </div>
-
-                <div class="col-lg-4" style="padding-left:0px;padding-right:0px;">
-                    @*<div style="margin-top:-5px;float:right;background:url(/Content/Images/Close_Button.png);background-repeat: no-repeat;width:40px;height:40px;border: 0;"><button style="margin-top:9px;" id="MainBtnClose" data-bind="click: $root.closeNewCampaignDialog" class="btn btn-default CloseBtn">Close</button></div>*@
-                    <div class="pull-left" data-bind="with: $root.campaignModel" style="margin-left:96px;margin-top: 18px;">
-                        <div class="pull-left" style="margin-top:1px;">
-                            <span style="font-size:23px;color:white;" data-bind="text:StatusValue()"></span>
-                        </div>
-                        <div class="pull-left">
-                            <div class="status_date_span">
+                        @*<span id="newdisplay_Ad" class="pull-left " style="color:black!important; padding-left:0px;font-size:23px;margin-top:12px;display:none;" data-bind="NewCampaignBinding: CampaignName">New display ad</span>*@
+                    </div>
+                    <div class="col-lg-4 pull-right" style="margin-right:-1px;">
+                        <div class="pull-right">
+                            <div class="status_date_span" style="margin-top:26px;">
                                 Last modified <span style="margin-left:3px"></span><span>12 april 2014</span>
                             </div>
                         </div>
-                        <div class="clearfix"></div>
                     </div>
-                    <img data-bind="click: $root.closeNewCampaignDialog,visible:$root.isflageClose()==false" class="pull-right" src="/Content/Images/Close_Button.png" style="width:20px;height:20px;cursor:pointer;margin-top:26px;" />
-                    <img data-bind="click: $root.CloseCampaignADAnalyticView,visible:$root.isflageClose()==true" class="pull-right" id="imgclose" src="/Content/Images/Close_Button.png" style="width:20px;height:20px;cursor:pointer;margin-top:17px;" />
+                </div>
 
-                    <div class="clearfix"></div>
+                <div class="col-lg-3" style="padding-left:0px;padding-right:0px;">
+                    @*<div style="margin-top:-5px;float:right;background:url(/Content/Images/Close_Button.png);background-repeat: no-repeat;width:40px;height:40px;border: 0;"><button style="margin-top:9px;" id="MainBtnClose" data-bind="click: $root.closeNewCampaignDialog" class="btn btn-default CloseBtn">Close</button></div>*@
+                    <div class="pull-left" data-bind="with: $root.campaignModel" style="margin-left:0px;margin-top: 18px;">
+                        <div class="pull-left" style="margin-top:1px;">
+                            <span style="font-size:23px;color:white;" data-bind="text:StatusValue()"></span>
+                        </div>
+                    </div>
+                    <div style="margin-right:-3px !important;">
+                        <img data-bind="click: $root.closeNewCampaignDialog,visible:$root.isflageClose()==false" class="pull-right" src="/Content/Images/Close_Button.png" style="width:20px;height:20px;cursor:pointer;margin-top:26px;" />
+                        <img data-bind="click: $root.CloseCampaignADAnalyticView,visible:$root.isflageClose()==true" class="pull-right" id="imgclose" src="/Content/Images/Close_Button.png" style="width:20px;height:20px;cursor:pointer;margin-top:17px;" />
+                    </div>
                 </div>
 
                 <div class="row">
