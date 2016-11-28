@@ -16,5 +16,9 @@ namespace SMD.Interfaces.Repository
 
         User GetUserbyPhoneNo(string phoneNo);
         String GetUserName(string id);
+
+
+
+        User GetUserbyCompanyId(int CompanyId);
     }
 }

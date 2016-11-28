@@ -267,6 +267,10 @@ namespace SMD.Repository.Repositories
                     .Take(toRow);
 
         }
+        public List<GetRandom3Deal_Result> GetRandomDeals()
+        {
+            return db.GetRandom3Deal().ToList();
+        }
 
 
         #endregion

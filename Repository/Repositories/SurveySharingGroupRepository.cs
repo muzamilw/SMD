@@ -49,7 +49,7 @@ namespace SMD.Repository.Repositories
 
         public IEnumerable< SurveySharingGroup> GetUserGroups(string UserId)
         {
-            return DbSet.Where(c => c.UserId == UserId);
+            return DbSet.Where(c => c.UserId == UserId).OrderBy( g=> g.CreationDate);
         }
 
 

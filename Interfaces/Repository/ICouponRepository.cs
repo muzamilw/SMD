@@ -35,5 +35,7 @@ namespace SMD.Interfaces.Repository
         int GetFreeCouponCount();
         IEnumerable<vw_Coupons> GetMarketingDeals(GetPagedListRequest request, out int rowCount);
 
+        List<GetRandom3Deal_Result> GetRandomDeals();
+
     }
 }

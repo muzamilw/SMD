@@ -124,6 +124,7 @@ define("Coupons/Coupons.viewModel",
                     numberOFCouponsToGenerate = ko.observable(0),
                     TempSelectedObj = ko.observable(),
                     CouponTitle = ko.observable(),
+                    CouponsubTitle = ko.observable(),
                     StatusValue = ko.observable(),
                     currencyCode = ko.observable(),
                     currencySymbol = ko.observable(),
@@ -158,6 +159,8 @@ define("Coupons/Coupons.viewModel",
                 Banner6Flag = ko.observable(false),
                 freeCouponCount = ko.observable(0),
                 isflageClose = ko.observable(false),
+                isCouponSearch = ko.observable(false),
+                islblText = ko.observable(false),
                 companyLogo = ko.observable(),
                 companyName = ko.observable(),
                 getDDOAnalytic = function () { }
@@ -330,13 +333,33 @@ define("Coupons/Coupons.viewModel",
             }, {
                 success: function (data) {
                     if (data != null) {
-
                         // set grid content
                         campaignGridContent.removeAll();
                         _.each(data.Coupon, function (item) {
                             campaignGridContent.push(model.Coupon.Create(updateCampaignGridItem(item)));
                         });
                         pager().totalCount(data.TotalCount);
+                        if (data.TotalCount == 0)
+                        {
+                            isCouponSearch(true);
+                            islblText(true);
+                        }
+                        else if (data.TotalCount == 1)
+                        {
+                            isCouponSearch(true);
+                            islblText(false);
+                        }
+                        else if (data.TotalCount > 1 && data.TotalCount<=4)
+                        {
+                            isCouponSearch(false);
+                            islblText(false);
+                        }
+                        else
+                        {
+                            isCouponSearch(false);
+                            islblText(false);
+                        }
+
 
                     }
 
@@ -469,7 +492,7 @@ getfreeCouponCount = function () {
             isTerminateBtnVisible(false);
             isNewCampaignVisible(false);
             IsnewCoupon(true);
-
+            CouponsubTitle("(Deals)");
             $("#btnCancel").css("display", "block");
             $(".hideInCoupons").css("display", "none");
 
@@ -493,6 +516,10 @@ getfreeCouponCount = function () {
             IsSubmitBtnVisible(true);
             couponModel().CouponPriceOptions.splice(0, 0, new model.CouponPriceOption());
             couponModel().BuyitLandingPageUrl('https://');
+            couponModel().IsShowReviews(true);
+            couponModel().IsShowAddress(true);
+            couponModel().IsShowMap(true);
+            couponModel().IsShowPhoneNo(true);
 
             Banner2Flag(false);
             Banner3Flag(false);
@@ -945,6 +972,7 @@ getfreeCouponCount = function () {
                 IsnewCoupon(false);
                 previewScreenNumber(1);
                 CouponTitle(item.CouponTitle());
+                CouponsubTitle("");
                 selectedCouponIdAnalytics(item.CouponId());
                 $(".hideInCoupons").css("display", "none");
 
@@ -2524,7 +2552,10 @@ getfreeCouponCount = function () {
                     selectedCTGenderAnalytics: selectedCTGenderAnalytics,
                     selectedCTAgeAnalytics: selectedCTAgeAnalytics,
                     getDDCTAnalytic: getDDCTAnalytic,
-                    DDCTStatsAnalytics: DDCTStatsAnalytics
+                    DDCTStatsAnalytics: DDCTStatsAnalytics,
+                    CouponsubTitle: CouponsubTitle,
+                    isCouponSearch: isCouponSearch,
+                    islblText: islblText
                 };
             })()
         };
