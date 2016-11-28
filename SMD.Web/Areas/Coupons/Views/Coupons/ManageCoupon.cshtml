@@ -21,14 +21,14 @@ else
                     <li><a href="/Dashboard/Index" class="my-navigator">Home</a></li>
                     <li><a data-bind="click:$root.CloseCouponsView" class="my-navigator">Deal Promotion</a></li>
                 </ol>
-                <div class="clearfix  col-lg-9" style="margin-left:-19px;">
-                    <div class="col-lg-5">
-                    <img class="vid_image pull-left" src="/Images/StartImage.png">
-                    <span class="pull-left " style="color:#fff!important; padding-left: 0px; margin-top:13px; font-size: 23px;" data-bind="text: $root.CouponTitle"></span><span class="pull-left " style="color:#fff!important; padding-left: 2px;padding-top:23px; font-size: 13px;" data-bind="text:$root.CouponsubTitle"></span>
-                        </div> 
-                    <div class="col-lg-4 pull-right" style="margin-right:-21px;">
+                <div class="clearfix  col-lg-9">
+                    <div class="col-lg-6" style="margin-left:-27px !important;">
+                        <img class="vid_image pull-left" src="/Images/StartImage.png">
+                        <span class="pull-left " style="color:#fff!important; padding-left: 0px; margin-top:13px; font-size: 23px;" data-bind="text: $root.CouponTitle"></span><span class="pull-left " style="color:#fff!important; padding-left: 2px;padding-top:23px; font-size: 13px;" data-bind="text:$root.CouponsubTitle"></span>
+                    </div> 
+                    <div class="col-lg-3 pull-right" style="margin-right:-3px !important;">
                         <div class="pull-right">
-                            <div class="status_date_span" style="margin-top:25px;marg">
+                            <div class="status_date_span" style="margin-top:25px;">
                                 Last modified <span style="margin-left:3px"></span><span>12 april 2014</span>
                             </div>
                         </div>
@@ -36,13 +36,14 @@ else
 
                 </div>
                 <div class="col-lg-3" style="padding-left:0px;padding-right:0px;">
-                    <div class="pull-left" data-bind="with: $root.couponModel"style=" margin-left:10px;margin-top: 13px;">
+                    <div class="pull-left" data-bind="with: $root.couponModel"style=" margin-left:-9px !important;margin-top: 13px;">
                         <div class="pull-left" style="margin-top:1px;">
                             <span style="font-size:23px;color:white;" data-bind="text:$root.StatusValue()">Draft</span>
                         </div>
                         
                     </div>
-                    <div style="margin-top:10px; margin-right:-15px;">
+
+                    <div style="margin-top:10px; margin-right:3px;">
                         <img data-bind="click: $root.CloseCouponsView,visible:$root.isflageClose()==false" src="/Content/Images/Close_Button.png" style="width:20px;height:20px;float:right;cursor:pointer;margin-top:10px;">
                         <img data-bind="click: $root.CloseCouponsAnalyticView,visible:$root.isflageClose()==true" id="img2" src="/Content/Images/Close_Button.png" style="width:20px;height:20px;float:right;cursor:pointer;margin-top:10px;">
                     </div>
