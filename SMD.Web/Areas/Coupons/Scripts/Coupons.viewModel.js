@@ -159,6 +159,8 @@ define("Coupons/Coupons.viewModel",
                 Banner6Flag = ko.observable(false),
                 freeCouponCount = ko.observable(0),
                 isflageClose = ko.observable(false),
+                isCouponSearch = ko.observable(false),
+                islblText = ko.observable(false),
                 companyLogo = ko.observable(),
                 companyName = ko.observable(),
                 getDDOAnalytic = function () { }
@@ -331,13 +333,33 @@ define("Coupons/Coupons.viewModel",
             }, {
                 success: function (data) {
                     if (data != null) {
-
                         // set grid content
                         campaignGridContent.removeAll();
                         _.each(data.Coupon, function (item) {
                             campaignGridContent.push(model.Coupon.Create(updateCampaignGridItem(item)));
                         });
                         pager().totalCount(data.TotalCount);
+                        if (data.TotalCount == 0)
+                        {
+                            isCouponSearch(true);
+                            islblText(true);
+                        }
+                        else if (data.TotalCount == 1)
+                        {
+                            isCouponSearch(true);
+                            islblText(false);
+                        }
+                        else if (data.TotalCount > 1 && data.TotalCount<=4)
+                        {
+                            isCouponSearch(false);
+                            islblText(false);
+                        }
+                        else
+                        {
+                            isCouponSearch(false);
+                            islblText(false);
+                        }
+
 
                     }
 
@@ -2531,7 +2553,9 @@ getfreeCouponCount = function () {
                     selectedCTAgeAnalytics: selectedCTAgeAnalytics,
                     getDDCTAnalytic: getDDCTAnalytic,
                     DDCTStatsAnalytics: DDCTStatsAnalytics,
-                    CouponsubTitle: CouponsubTitle
+                    CouponsubTitle: CouponsubTitle,
+                    isCouponSearch: isCouponSearch,
+                    islblText: islblText
                 };
             })()
         };
