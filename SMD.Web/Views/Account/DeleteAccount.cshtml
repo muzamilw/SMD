@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "Delete Account";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+<h2>@ViewBag.Title.</h2>
+<div>
+    
+        @
+        if ( ViewBag.error == "")
+        {
+            <p>
+                Your account has been sucessfully deleted.
+            </p>
+        }
+        else
+
+        {
+            <p>ViewBag.error</p>
+        }
+    
+</div>

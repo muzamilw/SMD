@@ -34,7 +34,10 @@ namespace SMD.Interfaces.Services
         /// <summary>
         /// Archive Account
         /// </summary>
-        Task<BaseApiResponse> Archive(string userId);
+        bool Archive(string userId, string confirmationToken);
+
+
+       Task<BaseApiResponse> ArchiveRequestConfirmation(string userId, string token, string confirmationLink);
         
         /// <summary>
         /// Update Profile

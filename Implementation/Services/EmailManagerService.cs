@@ -132,10 +132,18 @@ namespace SMD.Implementation.Services
         public string SharedDesignLink { get; set; }
         public string CreateAccountLink { get; set; }
         public string PasswordResetLink { get; set; }
+
+        public string DeleteAccountLink { get; set; }
+
+
         public string VoucherDescription { get; set; }
         public string VoucherValue { get; set; }
 
         public string CompanyNameInviteUser { get; set; }
+
+        public string FullNameInviteUser { get; set; }
+
+
         public string InviteURL { get; set; }
         public string AdvertiserLogoURL { get; set; }
 
@@ -192,7 +200,10 @@ namespace SMD.Implementation.Services
             smailsubject = smailsubject.Replace("++firstname++", Fname);
             smailsubject = smailsubject.Replace("++lastname++", Lname);
             smailsubject = smailsubject.Replace("++MailSubject++", Subj);
-            smailsubject = smailsubject.Replace("++companyname++", CompanyNameInviteUser); 
+            smailsubject = smailsubject.Replace("++companyname++", CompanyNameInviteUser);
+            smailsubject = smailsubject.Replace("++inviter++", FullNameInviteUser);
+            
+
             MBody = MBody.Replace("++username++", Muser);
             MBody = MBody.Replace("++firstname++", Fname);
             MBody = MBody.Replace("++lastname++", Lname);
@@ -202,6 +213,9 @@ namespace SMD.Implementation.Services
             MBody = MBody.Replace("++CurrentDateTime++", DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToLongTimeString() + " GMT");
             MBody = MBody.Replace("++EmailConfirmationLink++", EmailConfirmationLink);
             MBody = MBody.Replace("++companyname++", CompanyNameInviteUser);
+            MBody = MBody.Replace("++inviter++", FullNameInviteUser);
+
+            MBody = MBody.Replace("++deleteaccountlink++", DeleteAccountLink);
 
             if (Mid == (int)EmailTypes.ResetPassword)
             {
@@ -217,6 +231,7 @@ namespace SMD.Implementation.Services
                 MBody = MBody.Replace("++companyname++", CompanyNameInviteUser);
                 MBody = MBody.Replace("++inviteurl++", InviteURL);
                 MBody = MBody.Replace("++rolename++", RoleName);
+                MBody = MBody.Replace("++inviter++", FullNameInviteUser);
             }
             if (Mid == (int)EmailTypes.BuyItUsers)
             {
@@ -303,6 +318,8 @@ namespace SMD.Implementation.Services
             smailsubject = smailsubject.Replace("++lastname++", Lname);
             smailsubject = smailsubject.Replace("++MailSubject++", Subj);
             smailsubject = smailsubject.Replace("++companyname++", CompanyNameInviteUser);
+            smailsubject = smailsubject.Replace("++inviter++", FullNameInviteUser);
+
             MBody = MBody.Replace("++username++", Muser);
             MBody = MBody.Replace("++firstname++", Fname);
             MBody = MBody.Replace("++lastname++", Lname);
@@ -314,15 +331,17 @@ namespace SMD.Implementation.Services
             MBody = MBody.Replace("++inviteurl++", InviteURL);
             MBody = MBody.Replace("++fname++", Fname);
             MBody = MBody.Replace("++phone++", PhoneNo);
-
+            MBody = MBody.Replace("++inviter++", FullNameInviteUser);
             MBody = MBody.Replace("++feedback++", feedback);
-
+            MBody = MBody.Replace("++deleteaccountlink++", DeleteAccountLink);
             MBody = MBody.Replace("++countryname++", CountryName);
 
             MBody = MBody.Replace("++paymentfailedattempt++", PaymentFailedAttempt);
             MBody = MBody.Replace("++paymentfailedreason++", PaymentFailedReason);
             MBody = MBody.Replace("++nextpaymentattempt++", NextPaymentAttempt);
-            
+
+
+          
 
             MBody = MBody.Replace("++city++", City);
 
@@ -739,6 +758,25 @@ namespace SMD.Implementation.Services
             PasswordResetLink = passwordResetLink;
             await SendEmail();
         }
+
+
+        /// <summary>
+        /// Send Password Reset Email
+        /// </summary>
+        public async Task SendDeleteAccountConfirmationEmail(User oUser, string deleteTokenLink)
+        {
+            MMailto.Add(oUser.Email);
+            Mid = (int)EmailTypes.DeleteAccountConfirmationEmail;
+            Muser = oUser.Email;
+            Fname = oUser.FullName;
+            PhoneNo = oUser.PhoneNumber;
+            DeleteAccountLink = deleteTokenLink;
+            await SendEmail();
+        }
+
+
+
+
         // ReSharper restore SuggestUseVarKeywordEvident
 
         /// <summary>
@@ -814,7 +852,7 @@ namespace SMD.Implementation.Services
         /// <summary>
         ///Invite User Email
         /// </summary>
-        public void SendEmailInviteToUserManage(string email, string InvitationCode, bool mode, string RoleName)
+        public void SendEmailInviteToUserManage(string email, string InvitationCode, bool mode, string role)
         {
             MMailto.Add(email);
             Mid = (int)EmailTypes.InviteUsers;
@@ -822,6 +860,8 @@ namespace SMD.Implementation.Services
             int companyid = 0;
 
             CompanyNameInviteUser =   manageUserRepository.getCompanyName(out userName, out companyid);
+            FullNameInviteUser = userName;
+            RoleName = role;
             Muser = userName;
 
             if ( mode == true)//user will have to register and a new user will be created etc and link established,.

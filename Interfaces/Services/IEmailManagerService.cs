@@ -29,6 +29,9 @@ namespace SMD.Interfaces.Services
         /// </summary>
         Task SendPasswordResetLinkEmail(User oUser, string passwordResetLink);
 
+
+        Task SendDeleteAccountConfirmationEmail(User oUser, string deleteTokenLink);
+
         /// <summary>
         /// Send Error Log
         /// </summary>

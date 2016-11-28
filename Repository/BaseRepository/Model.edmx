@@ -264,6 +264,7 @@
           <Property Name="PassportNo" Type="nvarchar" MaxLength="150" />
           <Property Name="Title" Type="nvarchar" MaxLength="50" />
           <Property Name="Phone1CodeCountryID" Type="int" />
+          <Property Name="DeleteConfirmationToken" Type="nvarchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="AuditLog">
           <Key>
@@ -5226,6 +5227,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <NavigationProperty Name="ProfileQuestionUserAnswers" Relationship="DomainModels.FK_ProfileQuestionUserAnswer_AspNetUsers" FromRole="User" ToRole="ProfileQuestionUserAnswer" />
           <Property Name="Phone1CodeCountryID" Type="Int32" />
           <NavigationProperty Name="Country" Relationship="DomainModels.FK_AspNetUsers_Country" FromRole="User" ToRole="Country" />
+          <Property Name="DeleteConfirmationToken" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Type="DomainModels.User" Role="AspNetUser" Multiplicity="1">
@@ -8161,6 +8163,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="DomainModels.User">
               <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="DeleteConfirmationToken" ColumnName="DeleteConfirmationToken" />
                 <ScalarProperty Name="Phone1CodeCountryID" ColumnName="Phone1CodeCountryID" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="PassportNo" ColumnName="PassportNo" />

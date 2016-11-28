@@ -614,6 +614,27 @@
     <Compile Include="Areas\Survey\SurveyAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UnauthorizedRequestController.cs" />
+    <Compile Include="Emails\delete_account_confirmation.aspx.cs">
+      <DependentUpon>delete_account_confirmation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\delete_account_confirmation.aspx.designer.cs">
+      <DependentUpon>delete_account_confirmation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Reset_Password.aspx.cs">
+      <DependentUpon>Reset_Password.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Reset_Password.aspx.designer.cs">
+      <DependentUpon>Reset_Password.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Invite_Manage_User.aspx.cs">
+      <DependentUpon>Invite_Manage_User.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Invite_Manage_User.aspx.designer.cs">
+      <DependentUpon>Invite_Manage_User.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Emails\AccountVerify.aspx.cs">
       <DependentUpon>AccountVerify.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1269,6 +1290,9 @@
     <Content Include="Content\themes\Centaurus\js\typeahead.min.js" />
     <Content Include="Content\themes\Centaurus\js\wizard.js" />
     <Content Include="Content\themes\Centaurus\js\xcharts.js" />
+    <Content Include="Emails\delete_account_confirmation.aspx" />
+    <Content Include="Emails\Reset_Password.aspx" />
+    <Content Include="Emails\Invite_Manage_User.aspx" />
     <Content Include="Emails\AccountVerify.aspx" />
     <Content Include="Emails\Video_Performance.aspx" />
     <Content Include="favicon.ico" />
@@ -3054,6 +3078,7 @@
     <Content Include="Views\Home\HelpCenter.cshtml" />
     <Content Include="Views\Home\ContactUs.cshtml" />
     <Content Include="StripeWebhooks\StripeHandler.ashx" />
+    <Content Include="Views\Account\DeleteAccount.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
