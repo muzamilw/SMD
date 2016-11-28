@@ -73,6 +73,7 @@ namespace DomainModelProject
         public string PassportNo { get; set; }
         public string Title { get; set; }
         public Nullable<int> Phone1CodeCountryID { get; set; }
+        public string DeleteConfirmationToken { get; set; }
     
         public virtual ICollection<AdCampaignResponse> AdCampaignResponses { get; set; }
         public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }

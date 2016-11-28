@@ -29,6 +29,9 @@ namespace SMD.Interfaces.Services
         /// </summary>
         Task SendPasswordResetLinkEmail(User oUser, string passwordResetLink);
 
+
+        Task SendDeleteAccountConfirmationEmail(User oUser, string deleteTokenLink);
+
         /// <summary>
         /// Send Error Log
         /// </summary>
@@ -78,5 +81,7 @@ namespace SMD.Interfaces.Services
         void SendAppFeedback(string UserId, string feedback, string City, string Country, string FullName, string email, string phone);
 
         void SendPaymentRejectionEmail(string aspnetUserId, int CompanyId, string sPaymentFailedReason, int Attempt,string NextPaymentAttempt);
+
+        bool SendCouponSubscriptionCreatedEmail(int companyId);
     }
 }

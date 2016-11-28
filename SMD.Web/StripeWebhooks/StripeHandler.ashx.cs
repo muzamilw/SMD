@@ -149,7 +149,7 @@ namespace SMD.MIS.StripeWebhooks
 
 
                     }
-
+                    
                     
                     break;
                 case StripeEvents.InvoicePaymentFailed:
@@ -189,6 +189,17 @@ namespace SMD.MIS.StripeWebhooks
 
                     break;
 
+                case StripeEvents.CustomerSubscriptionCreated:
+
+
+                    StripeSubscription subscription = Stripe.Mapper<StripeSubscription>.MapFromJson(stripeEvent.Data.Object.ToString());
+                     comp = companyService.GetCompanyByStripeCustomerId(subscription.CustomerId);
+
+                     emailManagerService.SendCouponSubscriptionCreatedEmail(comp.CompanyId);
+
+                    break;
+
+                
                 case StripeEvents.CustomerSubscriptionDeleted:
 
                     inv= Stripe.Mapper<StripeInvoice>.MapFromJson(stripeEvent.Data.Object.ToString());
