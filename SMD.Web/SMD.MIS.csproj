@@ -642,6 +642,13 @@
     <Compile Include="Emails\AccountVerify.aspx.designer.cs">
       <DependentUpon>AccountVerify.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Emails\subscription_created.aspx.cs">
+      <DependentUpon>subscription_created.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\subscription_created.aspx.designer.cs">
+      <DependentUpon>subscription_created.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Emails\Video_Performance.aspx.cs">
       <DependentUpon>Video_Performance.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1294,6 +1301,7 @@
     <Content Include="Emails\Reset_Password.aspx" />
     <Content Include="Emails\Invite_Manage_User.aspx" />
     <Content Include="Emails\AccountVerify.aspx" />
+    <Content Include="Emails\subscription_created.aspx" />
     <Content Include="Emails\Video_Performance.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />

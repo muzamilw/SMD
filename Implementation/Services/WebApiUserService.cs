@@ -1534,6 +1534,14 @@ namespace SMD.Implementation.Services
         }
 
 
+        public User GetUserByCompanyId(int CompanyId)
+        {
+
+            return aspnetUsersRepository.GetUserbyCompanyId(CompanyId);
+
+        }
+
+
         /// <summary>
         /// Base Data for User Profile 
         /// </summary>

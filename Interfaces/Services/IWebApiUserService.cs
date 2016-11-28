@@ -115,6 +115,8 @@ namespace SMD.Interfaces.Services
 
         User GetUserByEmail(string email);
 
+        User GetUserByCompanyId(int CompanyId);
+
         string GetRoleNameByRoleId(string RoleId);
 
 
