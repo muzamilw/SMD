@@ -55,8 +55,13 @@ define("survey/survey.dataservice", function () {
                         dataType: 'json',
                         type: 'GET'
                     });
-					amplify.request.define('getSurvayAnalytics', 'ajax', {
+                    amplify.request.define('getSurvayAnalytics', 'ajax', {
                         url: '/Api/SurvayQuestionAnalytic',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
+                    amplify.request.define('getRandomPolls', 'ajax', {
+                        url: '/Api/GetRandomPolls',
                         dataType: 'json',
                         type: 'GET'
                     });
@@ -101,7 +106,7 @@ define("survey/survey.dataservice", function () {
                     data: params
                 });
             },
-              
+
             // get audiance Count
              getAudienceData = function (params, callbacks) {
                  initialize();
@@ -123,14 +128,14 @@ define("survey/survey.dataservice", function () {
                    });
                },
 			  getSurvayAnalytics = function (params, callbacks) {
-                   initialize();
-                   return amplify.request({
-                       resourceId: 'getSurvayAnalytics',
-                       data: params,
-                       success: callbacks.success,
-                       error: callbacks.error,
-                   });
-               }, 
+			      initialize();
+			      return amplify.request({
+			          resourceId: 'getSurvayAnalytics',
+			          data: params,
+			          success: callbacks.success,
+			          error: callbacks.error,
+			      });
+			  },
            addSurveyData = function (params, callbacks) {
                initialize();
                return amplify.request({
@@ -139,8 +144,17 @@ define("survey/survey.dataservice", function () {
                    success: callbacks.success,
                    error: callbacks.error,
                });
-              
-           };
+
+           },
+            getRandomPolls = function (callbacks) {
+                initialize();
+
+                return amplify.request({
+                    resourceId: 'getRandomPolls',
+                    success: callbacks.success,
+                    error: callbacks.error,
+                });
+            };
 
         return {
             getBaseData: getBaseData,
@@ -150,7 +164,8 @@ define("survey/survey.dataservice", function () {
             getAudienceData: getAudienceData,
             getSurveyParentList: getSurveyParentList,
             getProduct: getProduct,
-			getSurvayAnalytics : getSurvayAnalytics
+            getSurvayAnalytics: getSurvayAnalytics,
+            getRandomPolls: getRandomPolls
         };
        
     })();

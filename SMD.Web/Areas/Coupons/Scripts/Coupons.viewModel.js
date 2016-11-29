@@ -2332,9 +2332,9 @@ getfreeCouponCount = function () {
                             dealImg1(data[0].couponImage1);
                             dealImg2(data[1].couponImage1);
                             dealImg3(data[2].couponImage1);
-                            dealtitle1(data[0].CouponTitle)
-                            dealtitle2(data[1].CouponTitle)
-                            dealtitle3(data[2].CouponTitle)
+                            dealtitle1(data[0].CouponTitle);
+                            dealtitle2(data[1].CouponTitle);
+                            dealtitle3(data[2].CouponTitle);
                         },
                         error: function () {
                             toastr.error("Failed to load Random Deal");

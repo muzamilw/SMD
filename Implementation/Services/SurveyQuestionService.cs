@@ -579,6 +579,10 @@ namespace SMD.Implementation.Services
         {
             return surveyQuestionRepository.getPollBySQIDtblAnalytic(ID);
         }
+        public List<GetRandomPolls_Result> GetRandomPolls()
+        {
+            return surveyQuestionRepository.GetRandomPolls();
+        }
         #endregion
     }
 

@@ -60,6 +60,7 @@ namespace SMD.Interfaces.Services
         IEnumerable<getPollsBySQID_Result> getPollsBySQIDAnalytics(int SQId, int CampStatus, int dateRange, int Granularity);
         List<getPollBySQIDRatioAnalytic_Result> getPollBySQIDRatioAnalytic(int ID, int dateRange);
         IEnumerable<getPollBySQIDtblAnalytic_Result> getPollBySQIDtblAnalytic(int ID);
+        List<GetRandomPolls_Result> GetRandomPolls();
         
       
     }
