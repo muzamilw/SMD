@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta content="IE=edge" http-equiv="X-UA-Compatible" />
     <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <title>Video Ad Approved & Published
+    <title>Display Ad Approved & Published
     </title>
     <style type="text/css">
         /*////// RESET STYLES //////*/
@@ -220,7 +220,7 @@
                     <tr>                      
                       <td align="center" style="padding-bottom:10px;" valign="top">                        
                         <h1 style="color:#FFFFFF; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:30px; font-style:normal; font-weight:600; line-height:42px; letter-spacing:normal; margin:0; padding:0; text-align:center;">
-                         Video Ad Approved & Published
+                         Display Ad Approved & Published
                         </h1>
                       </td>
                     </tr>
@@ -295,20 +295,22 @@
                                     <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">                                      
                                       <tr>                                        
                                         <td align="left" style="padding-right:20px; padding-bottom:60px;" valign="top">                                          
-                                          <img alt="Lists" src="http://manage.cash4ads.com/emails/images/Videos_Email_Blue.png" style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:600; height:auto; letter-spacing:-1px; padding:0; margin:0; text-align:center;" width="48"/>
+                                          <img alt="Lists" src="http://manage.cash4ads.com/emails/images/Display_Email_Blue.png" style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:600; height:auto; letter-spacing:-1px; padding:0; margin:0; text-align:center;" width="48"/>
                                         </td>
                                         <td align="left" style="padding-bottom:40px;" valign="top">                                          
                                           <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
-                                           Your Video Ad is LIVE and being delivered to your target audience.
+                                           Your Display Ad is LIVE and being delivered to your target audience.
                                           </p>
                                           
                                                <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
-                                            We will stop sending your Video Ads to your target audience each
+                                            Will will stop sending your Display Ads to your target audience each
 day once ++campaignclicksperday++ ads per day have been watched and your survey
-question answered.</p><br />
+question answered.
+</p><br />
                                                    <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
 You can deliver more video ads per day by increasing your daily
 budget.
+
 
                                           </p>
 
@@ -344,11 +346,12 @@ budget.
                                         </td>
                                         <td align="left" style="padding-bottom:40px;" valign="top">                                          
                                           <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
-                                           Pause & Tweak your messaging and audience Reach
+                                          Pause & Tweak your messaging and audience Reach
                                           </p>
                                           <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
                                           Analyze your campaigns performance charts regularly and tweak
 your campaigns to improve your messaging and conversions.
+
 
 
                                           </p>
@@ -365,7 +368,8 @@ your campaigns to improve your messaging and conversions.
                                           <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
                                            Your campaigns can take priority over other advertisers by increasing
 the PPCV click chrage.  Remember, 50% of your PPCV is awarded to the
-viewer for watching your ad in full and answering your survey question ;)
+viewer for winning a game and answering your survey question ;)
+
 
 
                                           </p>
@@ -382,7 +386,7 @@ viewer for watching your ad in full and answering your survey question ;)
                                           <tr>                                        
                                       
                                         <td align="left" style="padding-bottom:40px;" valign="top" colspan="2">                                          
-                                            <img src="http://manage.cash4ads.com/emails/images/Email_Deal_Ad.png" />
+                                            <img src="http://manage.cash4ads.com/emails/images/Email_Picture_ad.png" />
 
 
                                             

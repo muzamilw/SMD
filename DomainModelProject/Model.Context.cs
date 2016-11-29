@@ -690,5 +690,10 @@ namespace DomainModelProject
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetRandom3Deal_Result>("GetRandom3Deal");
         }
+    
+        public virtual ObjectResult<GetRandomPolls_Result> GetRandomPolls()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetRandomPolls_Result>("GetRandomPolls");
+        }
     }
 }
