@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta content="IE=edge" http-equiv="X-UA-Compatible" />
     <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <title>Deal Plan Activated
+    <title>Video Ad Approved & Published
     </title>
     <style type="text/css">
         /*////// RESET STYLES //////*/
@@ -220,8 +220,15 @@
                     <tr>                      
                       <td align="center" style="padding-bottom:10px;" valign="top">                        
                         <h1 style="color:#FFFFFF; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:30px; font-style:normal; font-weight:600; line-height:42px; letter-spacing:normal; margin:0; padding:0; text-align:center;">
-                          Deal Plan Activated
+                         Video Ad Approved & Published
                         </h1>
+                      </td>
+                    </tr>
+                       <tr>                      
+                      <td align="center" style="padding-bottom:10px;" valign="top">                        
+                        <p style="color:#FFFFFF; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:center;">
+                         ++campaignname++
+                        </p>
                       </td>
                     </tr>
                    
@@ -288,22 +295,22 @@
                                     <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">                                      
                                       <tr>                                        
                                         <td align="left" style="padding-right:20px; padding-bottom:60px;" valign="top">                                          
-                                          <img alt="Lists" src="http://manage.cash4ads.com/emails/images/Deals_Email_Blue.png" style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:600; height:auto; letter-spacing:-1px; padding:0; margin:0; text-align:center;" width="48"/>
+                                          <img alt="Lists" src="http://manage.cash4ads.com/emails/images/Videos_Email_Blue.png" style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:600; height:auto; letter-spacing:-1px; padding:0; margin:0; text-align:center;" width="48"/>
                                         </td>
                                         <td align="left" style="padding-bottom:40px;" valign="top">                                          
                                           <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
-                                           You’ve signed up to the Deal listing plan.
+                                           Your Video Ad is LIVE and being delivered to your target audience.
                                           </p>
                                           
-                                              <ul style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;margin-left:20px">
-                                                  <li>List up to 3 Deal Groups at the same time </li>
-                                                  <li>
-                                                      Link deal lines directly to your shopping cart or landing pages
-                                                  </li>
-                                                  <li>Create Countdown Deals with increasing savings as the deal ends*</li>
-                                                  <li>We notify and email people every time you offer a bigger saving</li>
-                                                  <li>Get your Friends & Customers to Rate and Review your Deals</li>
-                                              </ul>
+                                               <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
+                                            Will will stop sending your Video Ads to your target audience each
+day once 23 ads per day have been watched and your survey
+question answered.</p><br />
+                                                   <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
+You can deliver more video ads per day by increasing your daily
+budget.
+
+                                          </p>
 
 
                                           
@@ -337,12 +344,12 @@
                                         </td>
                                         <td align="left" style="padding-bottom:40px;" valign="top">                                          
                                           <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
-                                           List a 7 Day Flash Deal
+                                           Pause & Tweak your messaging and audience Reach
                                           </p>
                                           <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
-                                            Create a sense or urgency by offering big savings for a limited time.
-                                            We send 5 Push Notifications & 5 Emails promoting your deal on the
-                                            1st, 5th, 6th, 7th day and final 3 hours.
+                                          Analyze your campaigns performance charts regularly and tweak
+your campaigns to improve your messaging and conversions.
+
 
                                           </p>
                                         </td>
@@ -353,11 +360,13 @@
                                         </td>
                                         <td align="left" style="padding-bottom:40px;" valign="top">                                          
                                           <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
-                                           Offer Bigger Discounts ...   *Countdown Deals Coming Soon
+                                          Increase your PPCV to get your ads delivered quicker
                                           </p>
                                           <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
-                                            We’re working hard to bring out a great feature whereby you can
-offer further savings on final days and hours of your deal listing.
+                                           Your campaigns can take priority over other advertisers by increasing
+the PPCV click chrage.  Remember, 50% of your PPCV is awarded to the
+viewer for watching your ad in full and answering your survey question ;)
+
 
                                           </p>
                                         </td>
@@ -373,7 +382,7 @@ offer further savings on final days and hours of your deal listing.
                                           <tr>                                        
                                       
                                         <td align="left" style="padding-bottom:40px;" valign="top" colspan="2">                                          
-                                            <img src="http://manage.cash4ads.com/emails/images/Email_Video_Ad.png" />
+                                            <img src="http://manage.cash4ads.com/emails/images/Email_Deal_Ad.png" />
 
 
                                             

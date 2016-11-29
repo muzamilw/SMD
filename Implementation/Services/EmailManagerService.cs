@@ -508,7 +508,7 @@ namespace SMD.Implementation.Services
         private readonly ISystemMailsRepository systemMailRepository;
         private readonly IManageUserRepository manageUserRepository;
         private readonly ICompanyService companyService;
-        private readonly IWebApiUserService userService;
+        private readonly IAspnetUsersRepository userRepository;
 
 
         #endregion
@@ -519,7 +519,7 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Constructor
         /// </summary>
-        public EmailManagerService(ISystemMailsRepository systemMailRepository, IManageUserRepository manageUserRepository, ICompanyService companyService, IWebApiUserService userService)
+        public EmailManagerService(ISystemMailsRepository systemMailRepository, IManageUserRepository manageUserRepository, ICompanyService companyService, IAspnetUsersRepository userRepository)
         {
             
             if (systemMailRepository == null)
@@ -529,6 +529,7 @@ namespace SMD.Implementation.Services
             this.systemMailRepository = systemMailRepository;
             this.manageUserRepository = manageUserRepository;
             this.companyService = companyService;
+            this.userRepository = userRepository;
         
 
             MMailto = new List<string>();
@@ -956,14 +957,14 @@ namespace SMD.Implementation.Services
                 throw new Exception("Customer is null");
             }
         }
-        public void SendCampaignApprovalEmail(string aspnetUserId, string campaignName, int? Type)
+        public void SendVideoAdCampaignApprovalEmail(string aspnetUserId, string campaignName, int? Type)
         {
             var oUser = manageUserRepository.GetByUserId(aspnetUserId);
 
             if (oUser != null)
             {
                 MMailto.Add(oUser.Email);
-                Mid = (int)EmailTypes.CampaignApproved;
+                Mid = (int)EmailTypes.VideoAdCampaignApproved;
                 Muser = oUser.FullName;
                 if(Type == 5)
                 {
@@ -988,7 +989,13 @@ namespace SMD.Implementation.Services
             if (oUser != null)
             {
                 MMailto.Add(oUser.Email);
-                Mid = (int)EmailTypes.CampaignReject;
+
+                if (Type == 3)
+                {
+                    Mid = (int)EmailTypes.VideoAdCampaignReject;
+                }
+
+               
                 Muser = oUser.FullName;
                 RejectionReason = RReason;
                 CampaignName = campaignName;
@@ -1008,6 +1015,27 @@ namespace SMD.Implementation.Services
             }
         }
 
+
+
+        public void SendCouponApprovedEmail(string aspnetUserId, string RReason)
+        {
+            var oUser = manageUserRepository.GetByUserId(aspnetUserId);
+
+            if (oUser != null)
+            {
+                MMailto.Add(oUser.Email);
+                Mid = (int)EmailTypes.CouponRejected;
+                Muser = oUser.FullName;
+                RejectionReason = RReason;
+                CampaignLabel = "Coupon";
+                SendEmailNotAysnc();
+            }
+            else
+            {
+                throw new Exception("Email could not be sent!");
+            }
+        }
+
         public void SendCouponRejectionEmail(string aspnetUserId, string RReason)
         {
             var oUser = manageUserRepository.GetByUserId(aspnetUserId);
@@ -1015,7 +1043,7 @@ namespace SMD.Implementation.Services
             if (oUser != null)
             {
                 MMailto.Add(oUser.Email);
-                Mid = (int)EmailTypes.CampaignReject;
+                Mid = (int)EmailTypes.CouponRejected;
                 Muser = oUser.FullName;
                 RejectionReason = RReason;
                 CampaignLabel = "Coupon";
@@ -1034,7 +1062,7 @@ namespace SMD.Implementation.Services
             if (oUser != null)
             {
                 MMailto.Add(oUser.Email);
-                Mid = (int)EmailTypes.CampaignReject;
+                Mid = (int)EmailTypes.PicturePollCampaignRejected;
                 Muser = oUser.FullName;
                 RejectionReason = RReason;
                 CampaignLabel = "Profile Question";
@@ -1122,7 +1150,7 @@ namespace SMD.Implementation.Services
         {
             var comp = companyService.GetCompanyById(companyId);
 
-            var oUser = userService.GetUserByCompanyId(companyId);
+            var oUser = userRepository.GetUserbyCompanyId(companyId);
 
             if (oUser != null)
             {

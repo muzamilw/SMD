@@ -7690,6 +7690,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
         <ComplexType Name="GetRandom3Deal_Result">
           <Property Type="Int64" Name="CouponId" Nullable="false" />
           <Property Type="String" Name="couponImage1" Nullable="true" />
+          <Property Type="String" Name="CouponTitle" Nullable="true" MaxLength="200" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -9734,6 +9735,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
               <ComplexTypeMapping TypeName="DomainModels.GetRandom3Deal_Result">
                 <ScalarProperty Name="CouponId" ColumnName="CouponId" />
                 <ScalarProperty Name="couponImage1" ColumnName="couponImage1" />
+                <ScalarProperty Name="CouponTitle" ColumnName="CouponTitle" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

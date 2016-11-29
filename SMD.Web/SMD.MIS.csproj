@@ -390,6 +390,7 @@
     <Compile Include="Areas\Api\Controllers\CouponReviewController.cs" />
     <Compile Include="Areas\Api\Controllers\CouponReviewCountController.cs" />
     <Compile Include="Areas\Api\Controllers\DashboardStatusCounterController.cs" />
+    <Compile Include="Areas\Api\Controllers\GetRandomDealController.cs" />
     <Compile Include="Areas\Api\Controllers\NotificationsController.cs" />
     <Compile Include="Areas\Api\Controllers\CouponAnalyticsController.cs" />
     <Compile Include="Areas\Api\Controllers\ApprovePayOutHistoryController.cs" />
@@ -641,6 +642,13 @@
     </Compile>
     <Compile Include="Emails\AccountVerify.aspx.designer.cs">
       <DependentUpon>AccountVerify.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Video_Ad_Approved.aspx.cs">
+      <DependentUpon>Video_Ad_Approved.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Video_Ad_Approved.aspx.designer.cs">
+      <DependentUpon>Video_Ad_Approved.aspx</DependentUpon>
     </Compile>
     <Compile Include="Emails\subscription_created.aspx.cs">
       <DependentUpon>subscription_created.aspx</DependentUpon>
@@ -1301,6 +1309,7 @@
     <Content Include="Emails\Reset_Password.aspx" />
     <Content Include="Emails\Invite_Manage_User.aspx" />
     <Content Include="Emails\AccountVerify.aspx" />
+    <Content Include="Emails\Video_Ad_Approved.aspx" />
     <Content Include="Emails\subscription_created.aspx" />
     <Content Include="Emails\Video_Performance.aspx" />
     <Content Include="favicon.ico" />
