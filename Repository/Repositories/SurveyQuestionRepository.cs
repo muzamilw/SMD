@@ -21,7 +21,7 @@ namespace SMD.Repository.Repositories
         /// <summary>
         /// Survey Question Orderby clause
         /// </summary>
-        private readonly Dictionary<SurveyQuestionByColumn, Func<SurveyQuestion, object>> _surveyQuestionOrderByClause = 
+        private readonly Dictionary<SurveyQuestionByColumn, Func<SurveyQuestion, object>> _surveyQuestionOrderByClause =
             new Dictionary<SurveyQuestionByColumn, Func<SurveyQuestion, object>>
                     {
                         {SurveyQuestionByColumn.Question, d => d.Question}  ,    
@@ -112,7 +112,7 @@ namespace SMD.Repository.Repositories
             }
 
             rowCount = DbSet.Count(query);
-            return DbSet.Where(query).OrderByDescending(g => g.CreationDate).ThenByDescending( g=> g.StartDate)
+            return DbSet.Where(query).OrderByDescending(g => g.CreationDate).ThenByDescending(g => g.StartDate)
                     .Skip(fromRow)
                     .Take(toRow)
                     .ToList();
@@ -133,7 +133,7 @@ namespace SMD.Repository.Repositories
             return request.IsAsc
                 ? DbSet.Where(query)
                     .OrderBy(_surveyQuestionOrderByClause[request.SurveyQuestionOrderBy])
-                    .OrderByDescending(s=>s.SubmissionDate)
+                    .OrderByDescending(s => s.SubmissionDate)
                     .Skip(fromRow)
                     .Take(toRow)
                     .ToList()
@@ -157,7 +157,7 @@ namespace SMD.Repository.Repositories
         /// </summary>
         public IEnumerable<SurveyQuestion> GetAllByCompanyId()
         {
-            return DbSet.Where(g=> g.CompanyId == CompanyId).Select(survey => survey).ToList();
+            return DbSet.Where(g => g.CompanyId == CompanyId).Select(survey => survey).ToList();
         }
 
 
@@ -185,7 +185,7 @@ namespace SMD.Repository.Repositories
         {
             int fromRow = (request.PageNo - 1) * request.PageSize;
             int toRow = request.PageSize;
-            return db.GetSurveysForApi(request.UserId, fromRow, toRow);  
+            return db.GetSurveysForApi(request.UserId, fromRow, toRow);
         }
 
         /// <summary>
@@ -193,8 +193,8 @@ namespace SMD.Repository.Repositories
         /// </summary>
         public long GetAudienceSurveyCount(GetAudienceSurveyRequest request)
         {
-           var resposne=  db.GetAudienceSurveyCount(request).ToList();
-           return resposne.FirstOrDefault();
+            var resposne = db.GetAudienceSurveyCount(request).ToList();
+            return resposne.FirstOrDefault();
         }
 
         /// <summary>
@@ -203,7 +203,7 @@ namespace SMD.Repository.Repositories
         public long GetAudienceAdCampaignCount(GetAudienceSurveyRequest request)
         {
             var resposne = db.GetAudienceAdCampaignCount(request);
-            return resposne.FirstOrDefault(); 
+            return resposne.FirstOrDefault();
         }
 
         public GetAudience_Result GetAudienceCount(GetAudienceCountRequest request)
@@ -219,28 +219,28 @@ namespace SMD.Repository.Repositories
             var user = db.Users.Where(g => g.Id == LoggedInUserIdentity).SingleOrDefault();
 
             var usr = db.Companies.Where(g => g.CompanyId == CompanyId).SingleOrDefault();
-            
-            if(usr!= null)
+
+            if (usr != null)
             {
                 bool isAdmin = false;
-            
-         
-                 //data.CityId =usr.Company == null? null: usr.Company.CityId;
-                 data.CountryId = usr == null ? null : usr.CountryId; 
-                 data.EducationId = user.EducationId;
-                 data.IndustryId = user.IndustryId;
-                 data.LanguageId = user.LanguageId;
-                 data.City = usr.City != null ? usr.City : "";
-                 data.Country = usr.Country != null ? usr.Country.CountryName : "";
-                 data.Education = user.Education != null?user.Education.Title : "";
-                 data.Industry = user.Industry != null?user.Industry.IndustryName:"";
-                 data.Language = user.Language != null? user.Language.LanguageName: "";
-                data.isStripeIntegrated =usr == null? false: String.IsNullOrEmpty(usr.StripeCustomerId) == true ? false : true;
+
+
+                //data.CityId =usr.Company == null? null: usr.Company.CityId;
+                data.CountryId = usr == null ? null : usr.CountryId;
+                data.EducationId = user.EducationId;
+                data.IndustryId = user.IndustryId;
+                data.LanguageId = user.LanguageId;
+                data.City = usr.City != null ? usr.City : "";
+                data.Country = usr.Country != null ? usr.Country.CountryName : "";
+                data.Education = user.Education != null ? user.Education.Title : "";
+                data.Industry = user.Industry != null ? user.Industry.IndustryName : "";
+                data.Language = user.Language != null ? user.Language.LanguageName : "";
+                data.isStripeIntegrated = usr == null ? false : String.IsNullOrEmpty(usr.StripeCustomerId) == true ? false : true;
                 //data.Latitude = usr.Company.City != null ? usr.Company.City.GeoLat : "";
                 //data.Longitude = usr.Company.City != null ? usr.Company.City.GeoLong : "";
-                 data.isUserAdmin = isAdmin;
-                 data.IsSpecialAccount = usr.IsSpecialAccount;
-                 data.Status = user.Status;
+                data.isUserAdmin = isAdmin;
+                data.IsSpecialAccount = usr.IsSpecialAccount;
+                data.Status = user.Status;
             }
 
             return data;
@@ -264,7 +264,7 @@ namespace SMD.Repository.Repositories
                 db.SaveChanges();
             }
             return SurveyQuestions;
-        
+
         }
 
         public IEnumerable<SurveyQuestion> GetSurveyQuestionAnswer(long SurveyQuestionId)
@@ -273,18 +273,24 @@ namespace SMD.Repository.Repositories
         }
         public IEnumerable<getPollsBySQID_Result> getPollsBySQIDAnalytics(int SQId, int CampStatus, int dateRange, int Granularity)
         {
-           
+
             return db.getPollsBySQIDAnalytics(SQId, CampStatus, dateRange, Granularity);
         }
         public List<getPollBySQIDRatioAnalytic_Result> getPollBySQIDRatioAnalytic(int ID, int dateRange)
         {
-          
+
             return db.getPollBySQIDRatioAnalytic(ID, dateRange).ToList();
         }
         public IEnumerable<getPollBySQIDtblAnalytic_Result> getPollBySQIDtblAnalytic(int ID)
         {
             return db.getPollBySQIDtblAnalytic(ID);
         }
+
+        public List<GetRandomPolls_Result> GetRandomPolls()
+        {
+            return db.GetRandomPolls().ToList();
+        }
+
 
     }
 }
