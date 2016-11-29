@@ -68,7 +68,7 @@ namespace SMD.Interfaces.Services
 
 
         Task SendBuyItEmailToUser(string aspnetUserId, AdCampaign oCampaign);
-        void SendCampaignApprovalEmail(string aspnetUserId, string campaignName, int? Type);
+        void SendVideoAdCampaignApprovalEmail(string aspnetUserId, string campaignName, int? Type);
         void SendCampaignRejectionEmail(string aspnetUserId, string campaignName, string RReason, int? Type);
         void SendCouponRejectionEmail(string aspnetUserId, string RReason);
 

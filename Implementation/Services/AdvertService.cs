@@ -813,7 +813,7 @@ namespace SMD.Implementation.Services
             {
                 if (dbAd.Approved == true)
                 {
-                    emailManagerService.SendCampaignApprovalEmail(dbAd.UserId, dbAd.CampaignName, dbAd.Type);
+                    emailManagerService.SendVideoAdCampaignApprovalEmail(dbAd.UserId, dbAd.CampaignName, dbAd.Type);
 
                 }
                 else
