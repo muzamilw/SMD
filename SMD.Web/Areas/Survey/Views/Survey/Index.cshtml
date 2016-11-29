@@ -17,7 +17,6 @@
     string userClasses = "";
 }
 
-
 @if (!User.IsInRole("User"))
 {
     userClasses = "displayNone";
@@ -26,20 +25,15 @@ else
 {
     adminClasses = "displayNone";
 }
-
 <div class="row" id="Heading_div">
     <div class="col-lg-12" style="padding-left: 0px;padding-right:0px;">
         <div style="width:57px;" class="pull-left">
-
             <label id="headlabel" style="font-size:24px;color:#fff!important;margin-top:7px;">Poll</label>
-
         </div>
         <div style="width:5px;">
-
         </div>
-
         <div style="width: 1083px;" class="pull-left">
-            
+
             <label id="headdesc" style="color:#fff;font-size:14px;margin-top:15px;">Run a 2 picture card poll to a target audience.</label>
             <img class="pull-right closecls" src="~/Content/Images/Close_Button.png" style="margin-top:15px;" onclick="GotoHome();" />
             <div class="clearfix"></div>
@@ -50,49 +44,123 @@ else
 <div class="row" id="surveyBinding" style="margin-top: 5px;">
     <div class="col-lg-12" data-bind="visible: !$root.isEditorVisible()">
         <div class="row">
-            <div class="col-lg-12" style="padding-left:0px;padding-right:19px;">
+            <div class="col-lg-12" style="padding-left:0px;padding-right:19px;padding-bottom:10px;">
                 <!-- ko template: { name: 'filterTemplate' } -->
                 <!-- /ko -->
-                <div class="main-box no-header clearfix margintop13" style="padding-top:0px;">
-                    <div class="main-box-body clearfix" style="padding-left:20px;padding-right:22px;">
-                        <div class="tabsdescriptions" style="margin-left:0px;">
-                            <p class="group-header-description"></p>
-                        </div>
-                        <div class="table-responsive" style="margin-right:-4px;">
-                            <table class="table table-striped table-hover" id="surveyQuestionLVTable">
-                                <thead>
-                                    <tr>
-                                        <th class="col-lg-5 th-pointer"><span class="GridHeaderFont_size">Poll Name</span></th>
-                                        <th class="col-lg-2 th-pointer" style="display:none;"><span class="GridHeaderFont_size">Question</span></th>
-                                        <th class="col-lg-2 th-pointer"><span class="GridHeaderFont_size">Start Date</span></th>
-                                        <th class="col-lg-2 th-pointer"><span class="GridHeaderFont_size">Answered</span></th>
-                                        <th class="col-lg-2 th-pointer"><span class="@userClasses">End Date</span><span class="@adminClasses GridHeaderFont_size">Delivered %</span></th>
-                                        <th class="col-lg-2 th-pointer"><span class="GridHeaderFont_size">Status</span></th>
-                                        <th class="col-lg-2 th-pointer"><span>&nbsp; </span></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- ko template: { name: 'SurveyQuestionTemplate' , foreach: questions } -->
-                                    <!-- /ko -->
-                                </tbody>
-                            </table>
+                <div data-bind="visible: $root.questions().length > 0">
+                    <div class="main-box no-header clearfix margintop13" style="padding-top:0px;">
+                        <div class="main-box-body clearfix" style="padding-left:20px;padding-right:22px;">
+                            <div class="tabsdescriptions" style="margin-left:0px;">
+                                <p class="group-header-description"></p>
+                            </div>
+                            <div class="table-responsive" style="margin-right:-4px;">
+                                <table class="table table-striped table-hover" id="surveyQuestionLVTable">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-lg-5 th-pointer"><span class="GridHeaderFont_size">Poll Name</span></th>
+                                            <th class="col-lg-2 th-pointer" style="display:none;"><span class="GridHeaderFont_size">Question</span></th>
+                                            <th class="col-lg-2 th-pointer"><span class="GridHeaderFont_size">Start Date</span></th>
+                                            <th class="col-lg-2 th-pointer"><span class="GridHeaderFont_size">Answered</span></th>
+                                            <th class="col-lg-2 th-pointer"><span class="@userClasses">End Date</span><span class="@adminClasses GridHeaderFont_size">Delivered %</span></th>
+                                            <th class="col-lg-2 th-pointer"><span class="GridHeaderFont_size">Status</span></th>
+                                            <th class="col-lg-2 th-pointer"><span>&nbsp; </span></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- ko template: { name: 'SurveyQuestionTemplate' , foreach: questions } -->
+                                        <!-- /ko -->
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
+
+                    <div id="pagerDivForStore" class="pull-right">
+                        <!-- ko with: pager -->
+                        @Html.Partial("~/Areas/Common/Views/Shared/_Pager.cshtml")
+                        <!-- /ko -->
+                    </div>
                 </div>
-                <div id="pagerDivForStore" class="pull-right">
-                    <!-- ko with: pager -->
-                    @Html.Partial("~/Areas/Common/Views/Shared/_Pager.cshtml")
-                    <!-- /ko -->
+
+                <div data-bind="visible: $root.questions().length == 0" style="display:none;">
+                    <div class="clearfix" style="padding:20px;padding-bottom:15px;">
+                        <div class="col-lg-5"></div>
+                        <span style="color:white">You haven’t created any Polls yet</span>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
+        <div class="row Subpanels" style="margin-right:10px;padding-top:0px;">
+            <div class="col-lg-12">
+
+                <div class="col-lg-6" style="padding-top:20px;padding-left:15px;" data-bind="visible:$root.questions().length==0">
+                    <div class=" row">
+                        <span style="font-size:20px;">Learn what your customers prefer</span>
+                    </div>
+                    <div class="row center">
+                        <img src="/Images/Share_world.png">
+                    </div>
+                </div>
+                <div class="col-lg-6" style="padding-top:20px;padding-left:15px;display:none;" data-bind="visible:$root.questions().length>0">
+                    <div class="row" style="padding-bottom:10px;">
+                        <span style="font-size:20px;margin-left:5px;">Here’s some Deals listed by local advertisers</span>
+                    </div>
+                    <div class="row center">
+                        <div class="col-lg-4">
+                            <img style="height:140px;width:70px;" src="/images/splaceholder.png">
+                            <img style="height:140px;width:70px;" src="/images/splaceholder.png">
+                            <div class="main-box no-header clearfix text-center" style="padding:8px;margin-top:1px;margin-right:23px;">
+                                <span style="font-size:12px;font-weight:bold;">Test Poll</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <img style="height:140px;width:70px;" src="/images/splaceholder.png">
+                            <img style="height:140px;width:70px;" src="/images/splaceholder.png">
+                            <div class=" main-box no-header clearfix text-center" style="padding:8px;margin-top:1px;margin-right:23px;">
+                                <span style="font-size:12px;font-weight:bold">Test Poll</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <img style="height:140px;width:70px;" src="/images/splaceholder.png">
+                            <img style="height:140px;width:70px;" src="/images/splaceholder.png">
+                            <div class=" main-box no-header clearfix text-center" style="padding:8px;margin-top:1px;margin-right:23px;">
+                                <span style="font-size:12px;font-weight:bold">Test Poll</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="padding-top:0px;padding-left:8px;padding-bottom:16px;">
+                        <a href="http://cash4ads.com/" target="_blank">
+                            More...
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-6" style="padding-top:20px;">
+                    <div class="row" style="padding-bottom:10px;">
+                        <span style="font-size:20px;">Chart Customer Journeys</span>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <ul style="list-style-type:circle;margin-left:17px;">
+                                <li>Target Polls to potential customers near you</li>
+                                <li>Use Poll results to refine your targeting in future video ad campaigns</li>
+                                <li>Combine Poll results with Survey questions to define Target Audience sets</li>
+                                <li>Upload 2 pictures to identify user preferences</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row" style="padding-bottom:30px;margin-top:58px;">
+                        <span style="color:#3498db;font-family:'Gloria Hallelujah',cursive;">Start getting Poll results today !</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
     <script id="SurveyQuestionTemplate" type="text/html">
 
-
         <tr style="cursor: pointer">
-
             <td>
                 <a href="#" class="store-user-link" data-bind="text: Question,click:$root.onEditSurvey"></a>
             </td>
@@ -106,7 +174,6 @@ else
                     <p data-bind="dateString:EndDate" class="@userClasses"></p>
                 </td>*@
             <td>
-
                 <p data-bind="text:resultClicks"></p>
             </td>
             <td>
@@ -167,9 +234,7 @@ else
                     </span>
                 </div>
                 <!-- /ko -->
-
             </td>
-
             <td>
                 <!-- ko if: Status() == 1 ||  Status() == 4|| Status() ==  6-->
                 <a class="table-link danger" style="float: right">
@@ -180,14 +245,11 @@ else
                 </a>
                 <!-- /ko -->
             </td>
-
         </tr>
     </script>
     <script id="filterTemplate" type="text/html">
         <div class="filter-body" id="filter">
-
             <div class="row" style="display:none;">
-
 
                 <div class="col-sm-12" style="float: left; margin-bottom:20px;">
                     <div>
@@ -198,55 +260,58 @@ else
                         <div style="clear:both;"></div>
                     </div>
 
-
                     <span class="red bold rightAlign" style=" margin-right: 14px;margin-top:-11px!important;display:none;"> Watch Video <img src="/Images/youtube_play.JPG" height="25px" /> </span> <span style="font-size: 14px;margin-right:8px;" class="Theme_subheading-Clr">Run a 2 picture card survey and create a new target audience groups <br />that can be used in any of your video or display ads campaigns.</span>&nbsp; &nbsp; &nbsp;<br />
                 </div>
 
-
             </div>
-
             <div class="row">
-
 
                 <form data-bind="submit:$root.filterSurveyQuestion">
                     <div class="filter-block">
                         <div class="form-group">
+                            <div class="col-xs-2" >
+                                <div data-bind ="visible:$root.isPollSearch()==false">
+                                    <input type="text" class="form-control" placeholder="Search..." data-bind="value:$root.filterValue">
+                                    <i data-bind="click:$root.filterSurveyQuestion" class="fa fa-search search-icon" style=" margin-right: 8px;"></i>
+                                </div>
 
-                            <div class="col-xs-2">
-                                <input type="text" class="form-control" placeholder="Search..." data-bind="value:$root.filterValue">
-                                <i data-bind="click:$root.filterSurveyQuestion" class="fa fa-search search-icon" style=" margin-right: 8px;"></i>
                             </div>
                             <div class="col-xs-2">
-                                <select class="form-control" data-bind="options: $root.qStatuses, optionsText: 'value', optionsValue: 'id',value:$root.statusFilterValue,event:{ change: $root.SurveyQuestionsByFilter}"></select>
+                                <select class="form-control" data-bind="options: $root.qStatuses, optionsText: 'value', optionsValue: 'id',value:$root.statusFilterValue,event:{ change: $root.SurveyQuestionsByFilter},visible:$root.isPollSearch()==false"></select>
                             </div>
-
-                            
 
                         </div>
                     </div>
                 </form>
-                <div class="col-xs-8" style="padding:0px;text-align:right;">
+                <div>
+                    <div class="col-sm-3 filterbloclkspos" style="float:left;font-size: 20px;margin-top:6px;padding-left:70px;">
+                        <span data-bind="visible:$root.islblText()==true">DIY Market Research</span>
+
+                    </div>
+                    <div class="col-sm-2">
+                        <img data-bind="visible:$root.islblText()==true" src="/Images/Arrow.png" style="height:35px;">
+                    </div>
+                </div>
+                <div class="col-xs-3" style="padding:0px;text-align:right;">
                     @*<button class="btn  btn-info SurvyButtons" id="saveBtn" data-bind="click:$root.filterProfileQuestion" style="display:none!important;">Search</button>
-            <button class="btn btn-default SurvyButtons" id="saveBtn" data-bind="click:$root.clearFilters" style="display:none!important;">Reset</button>*@
+                        <button class="btn btn-default SurvyButtons" id="saveBtn" data-bind="click:$root.clearFilters" style="display:none!important;">Reset</button>*@
 
                     <button class="btn btn-primary btnclick FloatRight create_polls_btn" data-bind="click:$root.addNewSurvey" style="float:right;margin-top:2px; text-align:right">
                         Create Poll
                     </button>
                 </div>
                 <div class="clearfix">
-
                 </div>
             </div>
-
         </div>
-
     </script>
     @{
         Html.RenderPartial("~/Areas/Survey/Views/Shared/_AddEditSurvey.cshtml");
     }
 </div>
+
 <script>
-    
+
     $("#polls_heading").css("cssText", "color:#fff!important;");
 
 </script>
@@ -270,6 +335,5 @@ else
         $("#divApprove").css("display", "none");
         $(".dash_slide_panel").css("display", "none");
     </script>
-
 
 }

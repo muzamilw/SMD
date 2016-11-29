@@ -107,6 +107,8 @@ define("survey/survey.viewModel",
                 CampaignStatusDropDown = ko.observableArray([{ id: 1, name: "Answered" }, { id: 2, name: "Skipped" }]),
                 CampaignRatioAnalyticData = ko.observable(1),
                 isflageClose = ko.observable(false),
+                isPollSearch = ko.observable(false),
+                islblText = ko.observable(false),
                 getDDAnalytic = function () { },
                 openAdvertiserDashboardPollScreen = function () {
                     if (!IsnewSurvey()) {
@@ -217,7 +219,6 @@ define("survey/survey.viewModel",
                             professions.removeAll();
                             ko.utils.arrayPushAll(professions(), data.Professions);
                             professions.valueHasMutated();
-
                         },
                         error: function () {
                             toastr.error("Failed to load base data!");
@@ -233,6 +234,22 @@ define("survey/survey.viewModel",
                     questions.push(model.Survey.Create(updateSurveryItem(item)));
                 });
                 pager().totalCount(data.TotalCount);
+                if (data.TotalCount == 0) {
+                    isPollSearch(true);
+                    islblText(true);
+                }
+                else if (data.TotalCount == 1) {
+                    isPollSearch(true);
+                    islblText(false);
+                }
+                else if (data.TotalCount > 1 && data.TotalCount <= 4) {
+                    isPollSearch(false);
+                    islblText(false);
+                }
+                else {
+                    isPollSearch(false);
+                    islblText(false);
+                }
             }
                 // populate country, language and status fields 
                 updateSurveryItem = function (item) {
@@ -2332,7 +2349,9 @@ define("survey/survey.viewModel",
                     selectedGenderAnalytics : selectedGenderAnalytics,
                     selectedAgeAnalytics : selectedAgeAnalytics, 
                     getDDAnalytic: getDDAnalytic,
-                    DDStatsAnalytics: DDStatsAnalytics
+                    DDStatsAnalytics: DDStatsAnalytics,
+                    isPollSearch:isPollSearch,
+                    islblText:islblText
                 };
             })()
         };
