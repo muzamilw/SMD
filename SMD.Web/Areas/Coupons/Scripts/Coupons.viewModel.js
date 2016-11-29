@@ -166,6 +166,9 @@ define("Coupons/Coupons.viewModel",
                 dealImg1 = ko.observable(),
                 dealImg2 = ko.observable(),
                 dealImg3 = ko.observable(),
+                dealtitle1 = ko.observable(),
+                dealtitle2 = ko.observable(),
+                dealtitle3 = ko.observable(),
                 getDDOAnalytic = function () { }
                 getDDCTAnalytic = function () { }
                 openAdvertiserDashboardDealScreen = function () {
@@ -342,23 +345,19 @@ define("Coupons/Coupons.viewModel",
                             campaignGridContent.push(model.Coupon.Create(updateCampaignGridItem(item)));
                         });
                         pager().totalCount(data.TotalCount);
-                        if (data.TotalCount == 0)
-                        {
+                        if (data.TotalCount == 0) {
                             isCouponSearch(true);
                             islblText(true);
                         }
-                        else if (data.TotalCount == 1)
-                        {
+                        else if (data.TotalCount == 1) {
                             isCouponSearch(true);
                             islblText(false);
                         }
-                        else if (data.TotalCount > 1 && data.TotalCount<=4)
-                        {
+                        else if (data.TotalCount > 1 && data.TotalCount <= 4) {
                             isCouponSearch(false);
                             islblText(false);
                         }
-                        else
-                        {
+                        else {
                             isCouponSearch(false);
                             islblText(false);
                         }
@@ -1456,14 +1455,12 @@ getfreeCouponCount = function () {
                 else
                     diveNo(0);
             },
-            onDeleteImage = function (item)
-                {
+            onDeleteImage = function (item) {
                 if (item == 1) {
                     bannerImage1 = "";
                     couponModel().couponImage1("/images/standardplaceholder.png")
                 }
-                else if(item==2)
-                {
+                else if (item == 2) {
                     bannerImage2 = "";
                     couponModel().CouponImage2("/images/standardplaceholder.png")
                 }
@@ -1485,9 +1482,9 @@ getfreeCouponCount = function () {
                     bannerImage6 = "";
                     couponModel().CouponImage6("/images/standardplaceholder.png")
                 }
-                    
 
-                },
+
+            },
                 SaveAsDraft = function () {
                     debugger;
                     hasErrors = false;
@@ -2335,6 +2332,9 @@ getfreeCouponCount = function () {
                             dealImg1(data[0].couponImage1);
                             dealImg2(data[1].couponImage1);
                             dealImg3(data[2].couponImage1);
+                            dealtitle1(data[0].CouponTitle)
+                            dealtitle2(data[1].CouponTitle)
+                            dealtitle3(data[2].CouponTitle)
                         },
                         error: function () {
                             toastr.error("Failed to load Random Deal");
@@ -2561,7 +2561,7 @@ getfreeCouponCount = function () {
                     isflageClose: isflageClose,
                     GenderAnalyticsData: GenderAnalyticsData,
                     AgeRangeAnalyticsData: AgeRangeAnalyticsData,
-                    companyLogo:companyLogo,
+                    companyLogo: companyLogo,
                     companyName: companyName,
                     selectedOGenderAnalytics: selectedOGenderAnalytics,
                     selectedOAgeAnalytics: selectedOAgeAnalytics,
@@ -2576,7 +2576,10 @@ getfreeCouponCount = function () {
                     islblText: islblText,
                     dealImg1: dealImg1,
                     dealImg2: dealImg2,
-                    dealImg3: dealImg3
+                    dealImg3: dealImg3,
+                    dealtitle1: dealtitle1,
+                    dealtitle2: dealtitle2,
+                    dealtitle3: dealtitle3,
                 };
             })()
         };
