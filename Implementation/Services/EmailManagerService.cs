@@ -508,7 +508,7 @@ namespace SMD.Implementation.Services
         private readonly ISystemMailsRepository systemMailRepository;
         private readonly IManageUserRepository manageUserRepository;
         private readonly ICompanyService companyService;
-        private readonly IWebApiUserService userService;
+        private readonly IAspnetUsersRepository userRepository;
 
 
         #endregion
@@ -519,7 +519,7 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Constructor
         /// </summary>
-        public EmailManagerService(ISystemMailsRepository systemMailRepository, IManageUserRepository manageUserRepository, ICompanyService companyService, IWebApiUserService userService)
+        public EmailManagerService(ISystemMailsRepository systemMailRepository, IManageUserRepository manageUserRepository, ICompanyService companyService, IAspnetUsersRepository userRepository)
         {
             
             if (systemMailRepository == null)
@@ -529,6 +529,7 @@ namespace SMD.Implementation.Services
             this.systemMailRepository = systemMailRepository;
             this.manageUserRepository = manageUserRepository;
             this.companyService = companyService;
+            this.userRepository = userRepository;
         
 
             MMailto = new List<string>();
@@ -1122,7 +1123,7 @@ namespace SMD.Implementation.Services
         {
             var comp = companyService.GetCompanyById(companyId);
 
-            var oUser = userService.GetUserByCompanyId(companyId);
+            var oUser = userRepository.GetUserbyCompanyId(companyId);
 
             if (oUser != null)
             {
