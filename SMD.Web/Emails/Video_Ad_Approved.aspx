@@ -220,8 +220,15 @@
                     <tr>                      
                       <td align="center" style="padding-bottom:10px;" valign="top">                        
                         <h1 style="color:#FFFFFF; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:30px; font-style:normal; font-weight:600; line-height:42px; letter-spacing:normal; margin:0; padding:0; text-align:center;">
-                          Deal Plan Activated
+                         Video Ad Approved & Published
                         </h1>
+                      </td>
+                    </tr>
+                       <tr>                      
+                      <td align="center" style="padding-bottom:10px;" valign="top">                        
+                        <p style="color:#FFFFFF; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:center;">
+                         ++campaignname++
+                        </p>
                       </td>
                     </tr>
                    
@@ -292,18 +299,14 @@
                                         </td>
                                         <td align="left" style="padding-bottom:40px;" valign="top">                                          
                                           <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
-                                           You’ve signed up to the Deal listing plan.
+                                           Your Video Ad is LIVE and being delivered to your target audience.
                                           </p>
                                           
-                                              <ul style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;margin-left:20px">
-                                                  <li>List up to 3 Deal Groups at the same time </li>
-                                                  <li>
-                                                      Link deal lines directly to your shopping cart or landing pages
-                                                  </li>
-                                                  <li>Create Countdown Deals with increasing savings as the deal ends*</li>
-                                                  <li>We notify and email people every time you offer a bigger saving</li>
-                                                  <li>Get your Friends & Customers to Rate and Review your Deals</li>
-                                              </ul>
+                                               <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
+                                            Your subscribers are
+                                            <a href="http://click.mailchimpapp.com/track/click/10612303/kb.mailchimp.com?p=eyJzIjoiQjdKQXdHQ21LSDBDVEl1YjRialFNMnFDOGg4IiwidiI6MSwicCI6IntcInVcIjoxMDYxMjMwMyxcInZcIjoxLFwidXJsXCI6XCJodHRwOlxcXC9cXFwva2IubWFpbGNoaW1wLmNvbVxcXC9saXN0c1xcXC9ncm93dGhcXFwvZ2V0dGluZy1zdGFydGVkLXdpdGgtbGlzdHM_dXRtX3NvdXJjZT1tYWlsY2hpbXAtYXBwJnV0bV9tZWRpdW09ZW1haWwmdXRtX2NvbnRlbnQ9c2lnbnVwLXdlbGNvbWUmdXRtX2NhbXBhaWduPW9uYm9hcmRpbmdcIixcImlkXCI6XCJlYzg5NjU0YTg4YTI0ZDBlODg1MWVmMjM0MmMxYjEwYVwiLFwidXJsX2lkc1wiOltcIjI2ZDBhYTY4NTM0MDYxNmNjOWU4YzE2NjgxZjcwN2IxODMwODM0NjBcIl19In0" style="color:#6DC6DD; text-decoration:underline;">managed in lists</a>. Check out our
+                                            <a href="http://click.mailchimpapp.com/track/click/10612303/kb.mailchimp.com?p=eyJzIjoiSjRzVUk2eDN3V1RLLUJmeUU1MUhnOXpNU3RJIiwidiI6MSwicCI6IntcInVcIjoxMDYxMjMwMyxcInZcIjoxLFwidXJsXCI6XCJodHRwOlxcXC9cXFwva2IubWFpbGNoaW1wLmNvbVxcXC9hY2NvdW50c1xcXC9jb21wbGlhbmNlLXRpcHNcXFwvZ3VpZGVsaW5lcy1mb3ItbGlzdC1jb21wbGlhbmNlP3V0bV9zb3VyY2U9bWFpbGNoaW1wLWFwcCZ1dG1fbWVkaXVtPWVtYWlsJnV0bV9jb250ZW50PXNpZ251cC13ZWxjb21lJnV0bV9jYW1wYWlnbj1vbmJvYXJkaW5nXCIsXCJpZFwiOlwiZWM4OTY1NGE4OGEyNGQwZTg4NTFlZjIzNDJjMWIxMGFcIixcInVybF9pZHNcIjpbXCIzYzQ0NTEzYjk2MWU3ODZmNTRlODI5MThjZmQzZWY1ZGIyOTRkMjRkXCJdfSJ9" style="color:#6DC6DD; text-decoration:underline;">list requirements</a> and then learn how to grow a list of subscribers.
+                                          </p>
 
 
                                           
