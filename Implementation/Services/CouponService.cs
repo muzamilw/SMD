@@ -1226,6 +1226,11 @@ namespace SMD.Implementation.Services
             return couponRatingReviewRepository.CouponReviewCount();
 
         }
+        public List<GetRandom3Deal_Result> GetRandomDeals()
+        {
+            return couponRepository.GetRandomDeals();
+        }
+
         #endregion
     }
 }

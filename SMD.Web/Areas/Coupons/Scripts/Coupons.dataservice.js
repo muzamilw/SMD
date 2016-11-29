@@ -71,6 +71,11 @@ define("Coupons/Coupons.dataservice", function () {
 					    dataType: 'json',
 					    type: 'GET'
 					});
+					amplify.request.define('getRandomDeal', 'ajax', {
+					    url: '/Api/GetRandomDeal',
+					    dataType: 'json',
+					    type: 'GET'
+					});
                 }
             };
 		getDealsAnalytics = function (params, callbacks) {
@@ -155,7 +160,17 @@ define("Coupons/Coupons.dataservice", function () {
                 success: callbacks.success,
                 error: callbacks.error,
             });
-        }
+           },
+             getRandomDeal = function (callbacks) {
+                 initialize();
+
+                 return amplify.request({
+                     resourceId: 'getRandomDeal',
+                     success: callbacks.success,
+                     error: callbacks.error,
+                 });
+             }
+
         return {
             getBaseData: getBaseData,
             getCampaignData: getCampaignData,
@@ -165,7 +180,8 @@ define("Coupons/Coupons.dataservice", function () {
             copyCampaignById: copyCampaignById,
             generateCouponCodes: generateCouponCodes,
             getDealsAnalytics: getDealsAnalytics,
-            getfreeCouponCount: getfreeCouponCount
+            getfreeCouponCount: getfreeCouponCount,
+            getRandomDeal: getRandomDeal
         };
     })();
     return dataService;

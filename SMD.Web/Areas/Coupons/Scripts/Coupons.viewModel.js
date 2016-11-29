@@ -163,6 +163,9 @@ define("Coupons/Coupons.viewModel",
                 islblText = ko.observable(false),
                 companyLogo = ko.observable(),
                 companyName = ko.observable(),
+                dealImg1 = ko.observable(),
+                dealImg2 = ko.observable(),
+                dealImg3 = ko.observable(),
                 getDDOAnalytic = function () { }
                 getDDCTAnalytic = function () { }
                 openAdvertiserDashboardDealScreen = function () {
@@ -2326,6 +2329,20 @@ getfreeCouponCount = function () {
                     return monthNames[month];
 
                 },
+                getRandomDeal = function () {
+                    dataservice.getRandomDeal({
+                        success: function (data) {
+                            dealImg1(data[0].couponImage1);
+                            dealImg2(data[1].couponImage1);
+                            dealImg3(data[2].couponImage1);
+                        },
+                        error: function () {
+                            toastr.error("Failed to load Random Deal");
+                        }
+                    });
+
+
+                }
                 // Initialize the view model
                 initialize = function (specifiedView) {
                     view = specifiedView;
@@ -2343,6 +2360,7 @@ getfreeCouponCount = function () {
                     getAdCampaignGridContent();
                     getCampaignBaseContent();
                     isEditorVisible(false);
+                    getRandomDeal();
 
 
 
@@ -2555,7 +2573,10 @@ getfreeCouponCount = function () {
                     DDCTStatsAnalytics: DDCTStatsAnalytics,
                     CouponsubTitle: CouponsubTitle,
                     isCouponSearch: isCouponSearch,
-                    islblText: islblText
+                    islblText: islblText,
+                    dealImg1: dealImg1,
+                    dealImg2: dealImg2,
+                    dealImg3: dealImg3
                 };
             })()
         };
