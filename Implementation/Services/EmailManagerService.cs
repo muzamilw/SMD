@@ -508,6 +508,8 @@ namespace SMD.Implementation.Services
         private readonly ISystemMailsRepository systemMailRepository;
         private readonly IManageUserRepository manageUserRepository;
         private readonly ICompanyService companyService;
+        private readonly IWebApiUserService userService;
+
 
         #endregion
 
@@ -517,8 +519,9 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Constructor
         /// </summary>
-        public EmailManagerService(ISystemMailsRepository systemMailRepository, IManageUserRepository manageUserRepository, ICompanyService companyService)
+        public EmailManagerService(ISystemMailsRepository systemMailRepository, IManageUserRepository manageUserRepository, ICompanyService companyService, IWebApiUserService userService)
         {
+            
             if (systemMailRepository == null)
             {
                 throw new ArgumentNullException("systemMailRepository");
@@ -1119,22 +1122,21 @@ namespace SMD.Implementation.Services
         {
             var comp = companyService.GetCompanyById(companyId);
 
-            //if (comp != null)
-            //{
-            //    MMailto.Add(oUser.Email);
-            //    Mid = (int)EmailTypes.SubscriptionPaymentFailed;
-            //    CompanyName = comp.CompanyName;
-            //    Muser = oUser.FullName;
-            //    PaymentFailedAttempt = Attempt.ToString();
-            //    PaymentFailedReason = sPaymentFailedReason;
-            //    NextPaymentAttempt = sNextPaymentAttempt;
+            var oUser = userService.GetUserByCompanyId(companyId);
 
-            //    SendEmailNotAysnc();
-            //}
-            //else
-            //{
-            //    throw new Exception("Email could not be sent!");
-            //}
+            if (oUser != null)
+            {
+                MMailto.Add(oUser.Email);
+                Mid = (int)EmailTypes.SubscriptionCreated;
+                CompanyName = comp.CompanyName;
+                Muser = oUser.FullName;
+
+                SendEmailNotAysnc();
+            }
+            else
+            {
+                throw new Exception("Email could not be sent!");
+            }
 
             return true;
 

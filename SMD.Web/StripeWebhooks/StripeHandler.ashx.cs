@@ -194,7 +194,6 @@ namespace SMD.MIS.StripeWebhooks
 
                     StripeSubscription subscription = Stripe.Mapper<StripeSubscription>.MapFromJson(stripeEvent.Data.Object.ToString());
                      comp = companyService.GetCompanyByStripeCustomerId(subscription.CustomerId);
-
                      emailManagerService.SendCouponSubscriptionCreatedEmail(comp.CompanyId);
 
                     break;
