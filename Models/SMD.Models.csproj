@@ -151,6 +151,7 @@
     <Compile Include="DomainModels\getPayoutVSRevenueOverTime_Result.cs" />
     <Compile Include="DomainModels\getPollsBySQID_Result.cs" />
     <Compile Include="DomainModels\GetRandom3Deal_Result.cs" />
+    <Compile Include="DomainModels\GetRandomPolls_Result.cs" />
     <Compile Include="DomainModels\GetRegisteredUserData_Result.cs" />
     <Compile Include="DomainModels\GetRevenueByCampaignOverTime_Result.cs" />
     <Compile Include="DomainModels\GetRevenueOverTime_Result.cs" />

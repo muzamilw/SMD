@@ -615,12 +615,26 @@
     <Compile Include="Areas\Survey\SurveyAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UnauthorizedRequestController.cs" />
+    <Compile Include="Emails\Video_Ad_Rejected.aspx.cs">
+      <DependentUpon>Video_Ad_Rejected.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Video_Ad_Rejected.aspx.designer.cs">
+      <DependentUpon>Video_Ad_Rejected.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Emails\delete_account_confirmation.aspx.cs">
       <DependentUpon>delete_account_confirmation.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Emails\delete_account_confirmation.aspx.designer.cs">
       <DependentUpon>delete_account_confirmation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Deal_Approved.aspx.cs">
+      <DependentUpon>Deal_Approved.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Deal_Approved.aspx.designer.cs">
+      <DependentUpon>Deal_Approved.aspx</DependentUpon>
     </Compile>
     <Compile Include="Emails\Reset_Password.aspx.cs">
       <DependentUpon>Reset_Password.aspx</DependentUpon>
@@ -642,6 +656,20 @@
     </Compile>
     <Compile Include="Emails\AccountVerify.aspx.designer.cs">
       <DependentUpon>AccountVerify.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Picture_poll_approved.aspx.cs">
+      <DependentUpon>Picture_poll_approved.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Picture_poll_approved.aspx.designer.cs">
+      <DependentUpon>Picture_poll_approved.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Display_Ad_Approved.aspx.cs">
+      <DependentUpon>Display_Ad_Approved.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Display_Ad_Approved.aspx.designer.cs">
+      <DependentUpon>Display_Ad_Approved.aspx</DependentUpon>
     </Compile>
     <Compile Include="Emails\Video_Ad_Approved.aspx.cs">
       <DependentUpon>Video_Ad_Approved.aspx</DependentUpon>
@@ -1305,10 +1333,14 @@
     <Content Include="Content\themes\Centaurus\js\typeahead.min.js" />
     <Content Include="Content\themes\Centaurus\js\wizard.js" />
     <Content Include="Content\themes\Centaurus\js\xcharts.js" />
+    <Content Include="Emails\Video_Ad_Rejected.aspx" />
     <Content Include="Emails\delete_account_confirmation.aspx" />
+    <Content Include="Emails\Deal_Approved.aspx" />
     <Content Include="Emails\Reset_Password.aspx" />
     <Content Include="Emails\Invite_Manage_User.aspx" />
     <Content Include="Emails\AccountVerify.aspx" />
+    <Content Include="Emails\Picture_poll_approved.aspx" />
+    <Content Include="Emails\Display_Ad_Approved.aspx" />
     <Content Include="Emails\Video_Ad_Approved.aspx" />
     <Content Include="Emails\subscription_created.aspx" />
     <Content Include="Emails\Video_Performance.aspx" />
