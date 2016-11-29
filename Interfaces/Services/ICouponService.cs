@@ -61,6 +61,7 @@ namespace SMD.Interfaces.Services
 
         string UpdateCouponRating(CouponRatingReview source);
         int CouponReviewCount();
+        List<GetRandom3Deal_Result> GetRandomDeals();
 
     }
 }

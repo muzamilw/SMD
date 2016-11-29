@@ -15,5 +15,6 @@ namespace SMD.Models.DomainModels
     {
         public long CouponId { get; set; }
         public string couponImage1 { get; set; }
+        public string CouponTitle { get; set; }
     }
 }
