@@ -253,7 +253,7 @@ define("survey/survey.viewModel",
                     islblText(false);
                 }
                 else if (data.TotalCount > 1 && data.TotalCount <= 4) {
-                    isPollSearch(false);
+                    isPollSearch(true);
                     islblText(false);
                 }
                 else {

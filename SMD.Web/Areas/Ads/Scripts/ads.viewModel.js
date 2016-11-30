@@ -453,7 +453,7 @@ define("ads/ads.viewModel",
                                 islblText(false);
                             }
                             else if (data.TotalCount > 1 && data.TotalCount <= 4) {
-                                isAdSearch(false);
+                                isAdSearch(true);
                                 islblText(false);
                             }
                             else {
