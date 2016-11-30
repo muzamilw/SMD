@@ -71,7 +71,9 @@ define("ads/ads.viewModel",
                     lbllSecondLine = ko.observable("Second Line"),
                     lblCampaignSchedule = ko.observable("Schedule"),
                     campaignTypePlaceHolderValue = ko.observable('Enter in the YouTube video link'),
-                //
+                    isAdSearch = ko.observable(false),
+                    islblText = ko.observable(false),
+            
                     isEditCampaign = ko.observable(false),
                     canSubmitForApproval = ko.observable(true),
                     isNewCampaignVisible = ko.observable(false),
@@ -441,6 +443,22 @@ define("ads/ads.viewModel",
                                 campaignGridContent.push(model.Campaign.Create(updateCampaignGridItem(item)));
                             });
                             pager().totalCount(data.TotalCount);
+                            if (data.TotalCount == 0) {
+                                isAdSearch(true);
+                                islblText(true);
+                            }
+                            else if (data.TotalCount == 1) {
+                                isAdSearch(true);
+                                islblText(false);
+                            }
+                            else if (data.TotalCount > 1 && data.TotalCount <= 4) {
+                                isAdSearch(false);
+                                islblText(false);
+                            }
+                            else {
+                                isAdSearch(false);
+                                islblText(false);
+                            }
 
                             //  LoadAnswers();
                         }
@@ -3735,7 +3753,9 @@ define("ads/ads.viewModel",
                     SelectedItemAnalytics: SelectedItemAnalytics,
                     isProfileQuestionUsed: isProfileQuestionUsed,
                     isPollQuestionsQuestionUsed: isPollQuestionsQuestionUsed,
-                    isPreviousQuizQuestionsUsed: isPreviousQuizQuestionsUsed
+                    isPreviousQuizQuestionsUsed: isPreviousQuizQuestionsUsed,
+                    isAdSearch:isAdSearch,
+                    islblText: islblText
                 };
             })()
         };
