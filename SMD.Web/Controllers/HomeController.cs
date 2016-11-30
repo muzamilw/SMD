@@ -78,8 +78,10 @@ namespace SMD.MIS.Controllers
         /// Welcome Page
         /// </summary>
 
+       
         //[SiteAuthorize(MisRoles = new[] { SecurityRoles.EndUser_Admin, SecurityRoles.EndUser_Accounts, SecurityRoles.EndUser_Creative, SecurityRoles.Franchise_Account_Manager, SecurityRoles.Franchise_Admin, SecurityRoles.Franchise_Approvers, SecurityRoles.Franchise_Cashout_Manager, SecurityRoles.Franchise_Creative_ }, AccessRights = new SecurityAccessRight{  })]
         public ActionResult Welcome()
+
         {
             IEnumerable<SmdRoleClaimValue> roleClaim = ClaimHelper.GetClaimsByType<SmdRoleClaimValue>(SmdClaimTypes.Role);
             string RoleName = roleClaim != null && roleClaim.Any() ? roleClaim.ElementAt(0).Role : "Role Not Loaded";
@@ -99,9 +101,10 @@ namespace SMD.MIS.Controllers
                return RedirectToLocal("/Supernova/Dashboard/Index");
 
             ViewBag.isUser = true;
+           
             return View();
         }
-
+        
 
         private ActionResult RedirectToLocal(string returnUrl)
         {

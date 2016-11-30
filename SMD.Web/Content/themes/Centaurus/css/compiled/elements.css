@@ -5518,6 +5518,15 @@ color:red !important;
         border-radius: 8px;
         color:white;
 }
+.st_btn {
+       height: 37px;
+    background-color: #185680!important;
+    border-color: #185680!important;
+    width: 153px;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px
+}
 .preview_close {
         position: absolute;
     right: -1px;
@@ -5591,7 +5600,84 @@ color:red !important;
     width:105px!important;
 }
 
+.bckblack{
+    background-color:black;
+    height:338px;
+    width:100%;
+}
+.yel_descp_panel {
+     background-color:#ffd409;
+    height:65px;
+    width:100%;
+    text-align:center;
+    color:black;
+    padding-top:12px;
+}
+.skip_btn_panel {
+ background-color: #1d7bbb;
+    height: 320px;
+    width: 100%;
+    border-radius: 9px;
+    text-align: center;
+    color: white;
+    font-size: 12px;
+    
+}
+.display_ad_logo_panel {
+    padding-top:24px;
+    text-align: center;
+    height:58px;
+}
 
+.Image_panel {
+    height:184px;
+}
+.hero_image {
+    height: 111px;
+    margin-top: 27px;
+}
+.preview_screen_poll {
+    width: 45px;
+   
+    margin-bottom: 10px;
+}
+.logo_survey {
+    padding-top: 39px;
+    text-align: center;
+    height: 73px;
+}
+.Question_Cont {
+   text-align: center;
+    margin-top:7px;
+    height:25px;
+}
+.Question_poll {
+    font-size: 18px;
+    color: black;
+}
+.polls_image_cont {
+    margin-top:18px;
+    padding: 0px 10px 0px 10px;
+}
+.polls_images {
+       height: 229px;
+    width: 114px;
+    border: 1px solid #f4f4f4;
+    border-radius: 5px;
+    /* padding: 18px; */
+    /* padding: 5px; */
+    padding: 7px 0px 0px 3px;
+}
+.p_images {
+   height:212px;width:106px;
+   
+}
+.display_ad_logo
+{
+width: 79px;
+    height: 39px;
+    margin-bottom: 10px;
+}
 .cashlogox{
        
     background-repeat: no-repeat !important;
@@ -5696,4 +5782,75 @@ background-image: url(/Images/crowdcentz_logo.png) !important;
 
 .validation-summary-errors {
     color:red;
+}
+.mobile_background {
+    background-color:white;height:448px;
+}
+.preview_screen_video {
+    width: 81px;
+    margin-bottom: 10px;
+}
+.dealsPenel_text {
+    font-size:12px;
+    color:white;
+    text-align:center;
+    height:49px;
+    padding-top:17px;
+}
+.deals_search {
+    text-align:center;
+}
+
+.deals_blue_panel {
+    background-color:#127abd;
+    height:125px;
+    width:auto;
+}
+.deals_bannerImage {
+    height:171px;
+    margin-top:20px;
+}
+.deal_group_Pice {
+    
+    padding-left:4px;
+    font-size:11px;
+     color:#585858;
+}
+.deal_group_name {
+    font-size:14px;
+    padding-left:13px;
+    color:#585858;
+}
+
+.deals_panel_des {
+    color:#bdbdbd;
+    font-size:12px;
+    padding-top:6px;
+    border-bottom:1px solid grey;
+    height:67px;
+}
+.desc_cont {
+    
+    padding-left:10px;
+    padding-right:10px;
+}
+.deal_Pice {
+    color:#1d7bbb;
+    font-size:15px;
+    padding-top:13px;
+    padding-right:3px;
+}
+.deals_subtitle {
+    font-size: 12px;
+    color: white;
+    text-align: center;
+    height: 37px;
+    padding-top: 16px;
+
+}
+.dis_strike-through {
+    color:black;text-decoration:line-through;font-size:11px;text-align:left;
+    margin-right: 9px;
+    margin-top: 4px;
+
 }

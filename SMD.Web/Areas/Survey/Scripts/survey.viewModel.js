@@ -20,6 +20,7 @@ define("survey/survey.viewModel",
                     Modelheading = ko.observable(""),
                     // Search Filter value 
                     filterValue = ko.observable(),
+                    CompanyLogo = ko.observable(''),
                     langfilterValue = ko.observable(0),
                     countryfilterValue = ko.observable(0),
                     TemporaryProfileList = ko.observableArray([]),
@@ -2235,6 +2236,7 @@ define("survey/survey.viewModel",
                         AudienceWidth('380px');
                         IsVisibleAudience(true);
                     }
+                        CompanyLogo(gCompanyLogo);
                 };
                 return {
                     initialize: initialize,

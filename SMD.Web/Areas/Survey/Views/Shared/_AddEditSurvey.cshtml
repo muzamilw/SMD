@@ -2153,86 +2153,131 @@
     </div>
 </div>
 
-<script src="/Content/Range/rangeslider.js"></script>
-<script src="/Content/Range/rangeslider.min.js"></script>
+<div class="modal fade my-modal model_quizQ_ph" id="phQuizDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style=" width:330px;">
+        <div class="col-lg-6 preview_stencilImg" style=" margin-right: 35px; width:310px;">
+            <div id="background" class="mobBck mobile_background">
+                <div style="position:relative;">
+                    <img id="closePop" src="~/Images/close2-128.png" width="20" class="preview_close" data-dismiss="modal" />
+                </div>
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        debugger;
-        var text_max = 99;
-        var text_length = 0;
-        $('#lblCountValue').text(text_length);
+                <div class="row logo_survey">
 
-        $('#txtSurveyTtile').keyup(function () {
-            text_length = $('#txtSurveyTtile').val().length;
+                    <img src="~/Content/Images/Cash_4_ads_Dial.png" class=" preview_screen_poll" />
+
+                </div>
+                <div style="text-align:center;font-size:10px;">
+                    <span>Survey</span>
+                </div>
+                <div class="Question_Cont">
+                    <span class="Question_poll" data-bind=" text:$root.selectedQuestion().Question()"></span>
+                </div>
+
+                <div class="polls_image_cont">
+                    <div class="pull-left polls_images">
+                        <img class="p_images" id="preview_leftImage" data-bind="attr: { src:$root.selectedQuestion().LeftPicturePath() }" />
+                    </div>
+                    <div class="pull-right polls_images">
+                        <img class="p_images" id="preview_RightImage" data-bind="attr: { src:$root.selectedQuestion().RightPicturePath() }" />
+                    </div>
+
+                    <div class="clearfix"></div>
+                </div>
+
+                <div style="text-align:center;height:37px;padding-top:7px;">
+                    <span style="font-size:12px;">Tap on your choice</span>
+                </div>
+                <div>
+                    <input id="pause_btn" type="button" value="Skip" class="modify_btn" />
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+ </div>
+    <script src="/Content/Range/rangeslider.js"></script>
+    <script src="/Content/Range/rangeslider.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            debugger;
+            var text_max = 99;
+            var text_length = 0;
             $('#lblCountValue').text(text_length);
 
+            $('#txtSurveyTtile').keyup(function () {
+                text_length = $('#txtSurveyTtile').val().length;
+                $('#lblCountValue').text(text_length);
+
+            });
         });
-    });
-    $(function () {
-        $('#demo').on('shown.bs.collapse', function (e) {
+        $(function () {
+            $('#demo').on('shown.bs.collapse', function (e) {
 
-            //var offset = $('.panel.panel-default > .panel-collapse.in').offset();
-            //if (offset) {
-            $('html,body').animate({
-                scrollTop: $('#demo p').offset().top - 20
-            }, 600);
+                //var offset = $('.panel.panel-default > .panel-collapse.in').offset();
+                //if (offset) {
+                $('html,body').animate({
+                    scrollTop: $('#demo p').offset().top - 20
+                }, 600);
 
 
-            //}
+                //}
+            });
         });
-    });
 
-    $('input[type="range"]').rangeslider({
-    });
+        $('input[type="range"]').rangeslider({
+        });
 
-    $('input[type="range"]').rangeslider('update', true);
-
+        $('input[type="range"]').rangeslider('update', true);
 
 
-    function showVal(val) {
-        $("#show_audience").text(GetAudienceCount(val)).change();
-        $("#txtPerClick").val(val).change();
-    }
-    function DefaultStatus() {
-        var val = $("#Ranges").val();
-        $("#show_audience").text(GetAudienceCount(val)).change();
-        $("#txtPerClick").val(val).change();
-    }
 
-    function GetAudienceCount(val) {
-        while (/(\d+)(\d{3})/.test(val.toString())) {
-            val = val.toString().replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
+        function showVal(val) {
+            $("#show_audience").text(GetAudienceCount(val)).change();
+            $("#txtPerClick").val(val).change();
         }
-        return val;
-    }
+        function DefaultStatus() {
+            var val = $("#Ranges").val();
+            $("#show_audience").text(GetAudienceCount(val)).change();
+            $("#txtPerClick").val(val).change();
+        }
 
-    function PageScroll() {
-        $('html, body').animate({ scrollTop: 0 }, 800);
-
-    }
-    var sImageLeft = "";
-    var sImageRight = "";
-    var mode = 1;
-    function changeIframeSrc(mode1) {
-
-        mode = mode1;
-        $("#iframe").attr("src", "/DamImages?mode=4");
-    }
-    function iframeLoaded() {
-        var iframeBody = $('body', $('#iframe')[0].contentWindow.document);
-        $(iframeBody).on('click', '.damImgContainer img', function (event) {
-            console.log(mode);
-            if (mode == 1) {
-                $("#leftImgPath").attr("src", this.src).change();
-                sImageLeft = this.src;
-                $("#btnDamClose").click();
-            } else if (mode == 2) {
-                $("#rightImgPath").attr("src", this.src).change();
-                sImageRight = this.src;
-                $("#btnDamClose").click();
+        function GetAudienceCount(val) {
+            while (/(\d+)(\d{3})/.test(val.toString())) {
+                val = val.toString().replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
             }
-        });
-    }
+            return val;
+        }
 
-</script>
+        function PageScroll() {
+            $('html, body').animate({ scrollTop: 0 }, 800);
+
+        }
+        var sImageLeft = "";
+        var sImageRight = "";
+        var mode = 1;
+        function changeIframeSrc(mode1) {
+
+            mode = mode1;
+            $("#iframe").attr("src", "/DamImages?mode=4");
+        }
+        function iframeLoaded() {
+            var iframeBody = $('body', $('#iframe')[0].contentWindow.document);
+            $(iframeBody).on('click', '.damImgContainer img', function (event) {
+                console.log(mode);
+                if (mode == 1) {
+                    $("#leftImgPath").attr("src", this.src).change();
+                    $("#preview_leftImage").attr("src", this.src).change();
+                    sImageLeft = this.src;
+                    $("#btnDamClose").click();
+                } else if (mode == 2) {
+                    $("#rightImgPath").attr("src", this.src).change();
+                    $("#preview_RightImage").attr("src", this.src).change();
+                    sImageRight = this.src;
+                    $("#btnDamClose").click();
+                }
+            });
+        }
+
+    </script>
