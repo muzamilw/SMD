@@ -1329,7 +1329,35 @@ define("survey/survey.viewModel",
 
                          if (ValidateSurvey() == true) {
 
-                             saveSurveyQuestion(1);
+                             if (selectedQuestion().IsUseFilter() == 0) {
+
+
+                                 selectedQuestion().SurveyQuestionTargetLocation.removeAll();
+                                 selectedQuestion().SurveyQuestionTargetCriteria.removeAll();
+                                 selectedQuestion().AgeRangeEnd(80);
+                                 selectedQuestion().AgeRangeStart(13);
+                                 selectedQuestion().Gender('1');
+                                 selectedQuestion().IsUseFilter('0');
+
+                             }
+                             else {
+                                 selectedQuestion().IsUseFilter('1')
+                             }
+                             if (selectedQuestion().IsUseFilter() == 0) {
+
+                                 toastr.error("No Target Match.");
+                             }
+
+                             else {
+                                 if (selectedQuestion().IsUseFilter() == 1) {
+
+                                     selectedQuestion().IsUseFilter(true);
+                                 }
+                                 else {
+                                     selectedQuestion().IsUseFilter(false);
+                                 }
+                                 saveSurveyQuestion(1);
+                             }
 
                          }
                          else {
@@ -1378,10 +1406,71 @@ define("survey/survey.viewModel",
                                     if (userBaseData().isStripeIntegrated == false) {
                                         stripeChargeCustomer.show(function () {
                                             userBaseData().isStripeIntegrated = true;
-                                            saveSurveyQuestion(2);
+
+
+                                            if (selectedQuestion().IsUseFilter() == 0) {
+
+
+                                                selectedQuestion().SurveyQuestionTargetLocation.removeAll();
+                                                selectedQuestion().SurveyQuestionTargetCriteria.removeAll();
+                                                selectedQuestion().AgeRangeEnd(80);
+                                                selectedQuestion().AgeRangeStart(13);
+                                                selectedQuestion().Gender('1');
+                                                selectedQuestion().IsUseFilter('0');
+
+                                            }
+                                            else {
+                                                selectedQuestion().IsUseFilter('1')
+                                            }
+                                            if (selectedQuestion().IsUseFilter() == 0) {
+
+                                                toastr.error("No Target Match.");
+                                            }
+
+                                            else {
+                                                if (selectedQuestion().IsUseFilter() == 1) {
+
+                                                    selectedQuestion().IsUseFilter(true);
+                                                }
+                                                else {
+                                                    selectedQuestion().IsUseFilter(false);
+                                                }
+                                                saveSurveyQuestion(2);
+                                            }
+
+
                                         }, 2000, 'Enter your details');
                                     } else {
-                                        saveSurveyQuestion(2);
+
+                                        if (selectedQuestion().IsUseFilter() == 0) {
+
+
+                                            selectedQuestion().SurveyQuestionTargetLocation.removeAll();
+                                            selectedQuestion().SurveyQuestionTargetCriteria.removeAll();
+                                            selectedQuestion().AgeRangeEnd(80);
+                                            selectedQuestion().AgeRangeStart(13);
+                                            selectedQuestion().Gender('1');
+                                            selectedQuestion().IsUseFilter('0');
+
+                                        }
+                                        else {
+                                            selectedQuestion().IsUseFilter('1')
+                                        }
+                                        if (selectedQuestion().IsUseFilter() == 0) {
+
+                                            toastr.error("No Target Match.");
+                                        }
+
+                                        else {
+                                            if (selectedQuestion().IsUseFilter() == 1) {
+
+                                                selectedQuestion().IsUseFilter(true);
+                                            }
+                                            else {
+                                                selectedQuestion().IsUseFilter(false);
+                                            }
+                                            saveSurveyQuestion(2);
+                                        }
                                     }
                                 }
                             } else {
@@ -1424,33 +1513,7 @@ define("survey/survey.viewModel",
                     if (selectedQuestion().isValid()) {
                         if (ValidateSurvey() == true) {
                             selectedQuestion().Status(mode);
-                            if (selectedQuestion().IsUseFilter() == 0) {
-
-
-                                selectedQuestion().SurveyQuestionTargetLocation.removeAll();
-                                selectedQuestion().SurveyQuestionTargetCriteria.removeAll();
-                                selectedQuestion().AgeRangeEnd(80);
-                                selectedQuestion().AgeRangeStart(13);
-                                selectedQuestion().Gender('1');
-                                selectedQuestion().IsUseFilter('0');
-
-                            }
-                            else {
-                                selectedQuestion().IsUseFilter('1')
-                            }
-                            if (selectedQuestion().IsUseFilter() == 0) {
-
-                                toastr.error("No Target Match.");
-                            }
-                            else {
-
-                                if (selectedQuestion().IsUseFilter() == 1) {
-
-                                    selectedQuestion().IsUseFilter(true);
-                                }
-                                else {
-                                    selectedQuestion().IsUseFilter(false);
-                                }
+                            
                                 var surveyData = selectedQuestion().convertToServerData();
                                 dataservice.addSurveyData(surveyData, {
                                     success: function (data) {
@@ -1468,7 +1531,7 @@ define("survey/survey.viewModel",
                                     }
                                 });
                             }
-                        }
+                        
                     } else {
                         if (isEditorVisible()) {
                             selectedQuestion().errors.showAllMessages();

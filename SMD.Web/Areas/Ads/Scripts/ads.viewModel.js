@@ -895,11 +895,9 @@ define("ads/ads.viewModel",
                 //if (campaignModel().isValid()) {
                 if (ValidateCampaign(2)) {
                    
-
                         if (UserAndCostDetail().Status == null || UserAndCostDetail().Status == 0) {
                             confirmation.showOKpopupforinfo();
                             return;
-
                         }
                         else {
                             if (UserAndCostDetail().IsSpecialAccount == true) {
