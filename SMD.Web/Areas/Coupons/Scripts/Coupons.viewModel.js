@@ -17,6 +17,9 @@ define("Coupons/Coupons.viewModel",
                     EditorLoading = ko.observable(false),
                     ISshowPhone = ko.observable(false),
                     IsnewCoupon = ko.observable(false),
+                    mCurrencyCode = ko.observable(),
+                    CompanyCity = ko.observable(),
+                    CompanyName = ko.observable(),
                     langs = ko.observableArray([]),
                     diveNo = ko.observable(0),
                     countoryidList = [],
@@ -232,7 +235,8 @@ define("Coupons/Coupons.viewModel",
                             currency = ' (' + data.UserAndCostDetails.CurrencySymbol + ')';
                             UserAndCostDetail(data.UserAndCostDetails);
                             currencyCode(currency);
-                            currencySymbol(data.UserAndCostDetails.CurrencySymbol);
+                            mCurrencyCode(data.UserAndCostDetails.CurrencySymbol);
+                            
 
                             if (data.Currencies != null) {
                                 CurrencyDropDown.removeAll();
@@ -354,7 +358,7 @@ define("Coupons/Coupons.viewModel",
                             islblText(false);
                         }
                         else if (data.TotalCount > 1 && data.TotalCount <= 4) {
-                            isCouponSearch(false);
+                            isCouponSearch(true);
                             islblText(false);
                         }
                         else {
@@ -700,12 +704,13 @@ getfreeCouponCount = function () {
             if (hasErrors)
                 return;
             if (freeCouponCount() > 0 && UserAndCostDetail().StripeSubscriptionStatus == null) {
-                confirmation.messageText("Your deal cannot be submitted as there is already a free deal active. Please subscribe to avail unlimited deals.")
+                confirmation.messageText("Your deal cannot be submitted as there is already a free deal active." + "<br\>" + "Please subscribe to avail unlimited deals.")
                 confirmation.afterProceed(function () {
                     couponModel().CouponListingMode(2);
                     saveCampaign(2);
                     return;
                 });
+                confirmation.yesBtnText("Upgrade up to Monthly Deal");
                 confirmation.afterCancel(function () {
                     return;
                 });
@@ -832,7 +837,7 @@ getfreeCouponCount = function () {
 
                 //if other question then
                 if (buyItQuestionLabelStatus() == true) {
-                    debugger;
+                  
                     couponModel().BuyitBtnLabel();
 
                     // couponModel().BuyitBtnLabel(ButItOtherLabel());
@@ -1517,6 +1522,40 @@ getfreeCouponCount = function () {
 
 
                 },
+                FirstCouponOption = ko.computed(function () {
+                    
+                    if (couponModel() != undefined) {
+                        
+                        if (couponModel().CouponPriceOptions() != undefined) {
+
+                            if (couponModel().CouponPriceOptions()[0] != undefined) {
+
+                                if (couponModel().CouponPriceOptions()[0].Price() != undefined) {
+                                    return mCurrencyCode() + '' + couponModel().CouponPriceOptions()[0].Price();
+                                }
+                              
+                            } 
+                            }
+                        }
+                        
+                    
+                }, this);
+                SecondCouponOption = ko.computed(function () {
+
+                    if (couponModel() != undefined) {
+
+                        if (couponModel().CouponPriceOptions() != undefined) {
+
+                            if (couponModel().CouponPriceOptions()[0] != undefined) {
+
+                                if (couponModel().CouponPriceOptions()[0].Savings() != undefined) {
+                                    return mCurrencyCode() + '' + couponModel().CouponPriceOptions()[0].Savings();
+                                }
+                            }
+                        }
+
+                    }
+                }, this);
                 onRemoveIndustry = function (item) {
                     // Ask for confirmation
 
@@ -2332,9 +2371,9 @@ getfreeCouponCount = function () {
                             dealImg1(data[0].couponImage1);
                             dealImg2(data[1].couponImage1);
                             dealImg3(data[2].couponImage1);
-                            dealtitle1(data[0].CouponTitle)
-                            dealtitle2(data[1].CouponTitle)
-                            dealtitle3(data[2].CouponTitle)
+                            dealtitle1(data[0].CouponTitle);
+                            dealtitle2(data[1].CouponTitle);
+                            dealtitle3(data[2].CouponTitle);
                         },
                         error: function () {
                             toastr.error("Failed to load Random Deal");
@@ -2354,18 +2393,19 @@ getfreeCouponCount = function () {
                         ageRange.push({ value: i.toString(), text: text });
                     }
                     companyLogo(gCompanyLogo),
-                    companyName(ComName),
+                    CompanyName(ComName),
                     ageRange.push({ value: 120, text: "80+" });
                     pager(pagination.Pagination({ PageSize: 10 }, campaignGridContent, getAdCampaignGridContent));
                     getAdCampaignGridContent();
                     getCampaignBaseContent();
                     isEditorVisible(false);
                     getRandomDeal();
-
-
-
-
-
+                    if (ComCity != '' && ComCity != null) {
+                        CompanyCity(ComCity);
+                    }
+                    else {
+                        CompanyCity('lahore');
+                    }
 
                 };
                 return {
@@ -2580,6 +2620,11 @@ getfreeCouponCount = function () {
                     dealtitle1: dealtitle1,
                     dealtitle2: dealtitle2,
                     dealtitle3: dealtitle3,
+                    CompanyName: CompanyName,
+                    CompanyCity: CompanyCity,
+                    FirstCouponOption: FirstCouponOption,
+                    SecondCouponOption: SecondCouponOption,
+                    mCurrencyCode: mCurrencyCode
                 };
             })()
         };

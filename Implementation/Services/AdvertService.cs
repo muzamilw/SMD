@@ -811,15 +811,21 @@ namespace SMD.Implementation.Services
             // Update 
             if (dbAd != null)
             {
-                if (dbAd.Approved == true)
+                if (dbAd.Type == 1)     //video ad
                 {
-                    emailManagerService.SendVideoAdCampaignApprovalEmail(dbAd.UserId, dbAd.CampaignName, dbAd.Type);
+                    if (dbAd.Approved.Value)
 
+                        emailManagerService.SendVideoAdCampaignApprovalEmail(dbAd.UserId, dbAd.CampaignName, Convert.ToInt32(Math.Ceiling(dbAd.MaxDailyBudget.Value / dbAd.ClickRate.Value)), dbAd.VideoLink2, "");
+                    else
+                        emailManagerService.SendVideoAdCampaignRejectionEmail(dbAd.UserId, dbAd.CampaignName, Convert.ToInt32(Math.Ceiling(dbAd.MaxDailyBudget.Value / dbAd.ClickRate.Value)), dbAd.VideoLink2, "", dbAd.RejectedReason);
                 }
-                else
+                else if (dbAd.Type == 4)        //display ad
                 {
-                    emailManagerService.SendCampaignRejectionEmail(dbAd.UserId, dbAd.CampaignName, dbAd.RejectedReason, dbAd.Type);
+                    if (dbAd.Approved.Value)
 
+                        emailManagerService.SendDisplayAdCampaignApprovalEmail(dbAd.UserId, dbAd.CampaignName, Convert.ToInt32(Math.Ceiling(dbAd.MaxDailyBudget.Value / dbAd.ClickRate.Value)), dbAd.LogoUrl);
+                    else
+                        emailManagerService.SendDisplayAdCampaignRejectionEmail(dbAd.UserId, dbAd.CampaignName, Convert.ToInt32(Math.Ceiling(dbAd.MaxDailyBudget.Value / dbAd.ClickRate.Value)), dbAd.LogoUrl, dbAd.RejectedReason);
                 }
 
             }
@@ -1267,6 +1273,8 @@ namespace SMD.Implementation.Services
                     
                    
                 }
+
+
                 dbAd.ModifiedDateTime = DateTime.Now;
                 dbAd.ModifiedBy = _adCampaignRepository.LoggedInUserIdentity;
 
@@ -1276,9 +1284,21 @@ namespace SMD.Implementation.Services
                 campaignEventHistoryRepository.InsertCampaignEvent((AdCampaignStatus)dbAd.Status, dbAd.CampaignId);
 
 
-                if (source.Approved != true)
+                if (dbAd.Type == 1)     //video ad
                 {
-                   emailManagerService.SendQuestionRejectionEmail(dbAd.UserId);
+                    if (dbAd.Approved.Value)
+
+                        emailManagerService.SendVideoAdCampaignApprovalEmail(dbAd.UserId, dbAd.CampaignName, Convert.ToInt32(Math.Ceiling(dbAd.MaxDailyBudget.Value / dbAd.ClickRate.Value)), dbAd.VideoLink2, "");
+                    else
+                        emailManagerService.SendVideoAdCampaignRejectionEmail(dbAd.UserId, dbAd.CampaignName, Convert.ToInt32(Math.Ceiling(dbAd.MaxDailyBudget.Value / dbAd.ClickRate.Value)), dbAd.VideoLink2, "", dbAd.RejectedReason);
+                }
+                else if (dbAd.Type == 4)        //display ad
+                {
+                    if (dbAd.Approved.Value)
+
+                        emailManagerService.SendDisplayAdCampaignApprovalEmail(dbAd.UserId, dbAd.CampaignName, Convert.ToInt32(Math.Ceiling(dbAd.MaxDailyBudget.Value / dbAd.ClickRate.Value)), dbAd.LogoUrl);
+                    else
+                        emailManagerService.SendDisplayAdCampaignRejectionEmail(dbAd.UserId, dbAd.CampaignName, Convert.ToInt32(Math.Ceiling(dbAd.MaxDailyBudget.Value / dbAd.ClickRate.Value)), dbAd.LogoUrl, dbAd.RejectedReason);
                 }
 
             }

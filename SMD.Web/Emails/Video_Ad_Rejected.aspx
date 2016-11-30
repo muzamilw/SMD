@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta content="IE=edge" http-equiv="X-UA-Compatible" />
     <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <title>Video Ad Approved & Published
+    <title>Attention  - Review Your Video Ad
     </title>
     <style type="text/css">
         /*////// RESET STYLES //////*/
@@ -220,7 +220,7 @@
                     <tr>                      
                       <td align="center" style="padding-bottom:10px;" valign="top">                        
                         <h1 style="color:#FFFFFF; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:30px; font-style:normal; font-weight:600; line-height:42px; letter-spacing:normal; margin:0; padding:0; text-align:center;">
-                         Video Ad Approved & Published
+                        Attention  - Review Your Video Ad
                         </h1>
                       </td>
                     </tr>
@@ -299,18 +299,15 @@
                                         </td>
                                         <td align="left" style="padding-bottom:40px;" valign="top">                                          
                                           <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
-                                           Your Video Ad is LIVE and being delivered to your target audience.
+                                           Your Video Ad requires some improvements to meet our publishing
+standards.
+
+
                                           </p>
                                           
                                                <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
-                                            We will stop sending your Video Ads to your target audience each
-day once ++campaignclicksperday++ ads per day have been watched and your survey
-question answered.</p><br />
-                                                   <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
-You can deliver more video ads per day by increasing your daily
-budget.
-
-                                          </p>
+                                          We have listed some tips on how to make your Deals more effective.
+</p>
 
 
                                           
@@ -344,11 +341,12 @@ budget.
                                         </td>
                                         <td align="left" style="padding-bottom:40px;" valign="top">                                          
                                           <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
-                                           Pause & Tweak your messaging and audience Reach
+                                        Video Length too long
                                           </p>
                                           <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
-                                          Analyze your campaigns performance charts regularly and tweak
-your campaigns to improve your messaging and conversions.
+                                        Your video ads can not exceed 30 seconds.
+
+
 
 
                                           </p>
@@ -360,12 +358,111 @@ your campaigns to improve your messaging and conversions.
                                         </td>
                                         <td align="left" style="padding-bottom:40px;" valign="top">                                          
                                           <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
-                                          Increase your PPCV to get your ads delivered quicker
+                                         Wrong Video File Format
                                           </p>
                                           <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
-                                           Your campaigns can take priority over other advertisers by increasing
-the PPCV click chrage.  Remember, 50% of your PPCV is awarded to the
-viewer for watching your ad in full and answering your survey question ;)
+                                         We recommend that you uplaod standard MP4 format videos
+
+
+
+                                          </p>
+                                        </td>
+                                      </tr>
+                                        <tr>                                        
+                                        <td align="left" style="padding-right:20px; padding-bottom:60px;" valign="top">                                          
+                                          <img alt="Test" src="http://manage.cash4ads.com/emails/images/tip.png" style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:600; height:auto; letter-spacing:-1px; padding:0; margin:0; text-align:center;" width="48"/>
+                                        </td>
+                                        <td align="left" style="padding-bottom:40px;" valign="top">                                          
+                                          <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
+                                          Check Spelling and Descriptions
+                                          </p>
+                                         <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
+                                         We may have noticed a spelling mistake  
+
+
+
+                                          </p>
+                                        </td>
+                                      </tr>
+                                        <tr>                                        
+                                        <td align="left" style="padding-right:20px; padding-bottom:60px;" valign="top">                                          
+                                          <img alt="Test" src="http://manage.cash4ads.com/emails/images/tip.png" style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:600; height:auto; letter-spacing:-1px; padding:0; margin:0; text-align:center;" width="48"/>
+                                        </td>
+                                        <td align="left" style="padding-bottom:40px;" valign="top">                                          
+                                          <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
+                                        Heading Style
+                                          </p>
+                                         <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
+                                         Use simple and inspiring headings with upper case 1st letters e.g. Each First Letter Of Each Word Is In Upper Case
+
+
+                                          </p>
+                                        </td>
+                                      </tr>
+                                         <tr>                                        
+                                        <td align="left" style="padding-right:20px; padding-bottom:60px;" valign="top">                                          
+                                          <img alt="Test" src="http://manage.cash4ads.com/emails/images/tip.png" style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:600; height:auto; letter-spacing:-1px; padding:0; margin:0; text-align:center;" width="48"/>
+                                        </td>
+                                        <td align="left" style="padding-bottom:40px;" valign="top">                                          
+                                          <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
+                                         Broken URL Links
+
+                                          </p>
+                                          <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
+                                         The link that you have used to re-direct to your Landing Page may be
+incorrect or does not exist
+
+
+
+                                          </p>
+                                        </td>
+                                      </tr>
+                                         <tr>                                        
+                                        <td align="left" style="padding-right:20px; padding-bottom:60px;" valign="top">                                          
+                                          <img alt="Test" src="http://manage.cash4ads.com/emails/images/tip.png" style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:600; height:auto; letter-spacing:-1px; padding:0; margin:0; text-align:center;" width="48"/>
+                                        </td>
+                                        <td align="left" style="padding-bottom:40px;" valign="top">                                          
+                                          <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
+                                        Misleading Content
+
+                                          </p>
+                                          <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
+                                         We may feel that your video ad might be misleading to audiences
+
+
+
+                                          </p>
+                                        </td>
+                                      </tr>
+                                         <tr>                                        
+                                        <td align="left" style="padding-right:20px; padding-bottom:60px;" valign="top">                                          
+                                          <img alt="Test" src="http://manage.cash4ads.com/emails/images/tip.png" style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:600; height:auto; letter-spacing:-1px; padding:0; margin:0; text-align:center;" width="48"/>
+                                        </td>
+                                        <td align="left" style="padding-bottom:40px;" valign="top">                                          
+                                          <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
+                                       Inappropriate Content
+
+                                          </p>
+                                          <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
+                                         We follow a moderate and commercial opinion for content
+
+
+
+                                          </p>
+                                        </td>
+                                      </tr>
+                                        <tr>                                        
+                                        <td align="left" style="padding-right:20px; padding-bottom:60px;" valign="top">                                          
+                                          <img alt="Test" src="http://manage.cash4ads.com/emails/images/tip.png" style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:600; height:auto; letter-spacing:-1px; padding:0; margin:0; text-align:center;" width="48"/>
+                                        </td>
+                                        <td align="left" style="padding-bottom:40px;" valign="top">                                          
+                                          <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
+                                       Logo
+
+                                          </p>
+                                          <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
+                                         Make sure your logo is clear and sits well on White backgrounds.
+
 
 
                                           </p>

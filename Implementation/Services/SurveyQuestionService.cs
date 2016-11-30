@@ -301,7 +301,7 @@ namespace SMD.Implementation.Services
                     // Strpe + Invoice Work 
 
 
-                    //  emailManagerService.SendQuestionApprovalEmail(dbServey.UserId);
+                    emailManagerService.SendSurveyCampaignApprovalEmail(dbServey.UserId, dbServey.Question, dbServey.LeftPicturePath, dbServey.RightPicturePath);
 
                 } // Rejected 
                 else
@@ -309,7 +309,7 @@ namespace SMD.Implementation.Services
                     dbServey.Status = (Int32)AdCampaignStatus.ApprovalRejected;
                     dbServey.Approved = false;
                     dbServey.RejectionReason = source.RejectionReason;
-                    //   emailManagerService.SendQuestionRejectionEmail(dbServey.UserId);
+                    emailManagerService.SendSurveyCampaignRejectedEmail(dbServey.UserId, dbServey.Question, dbServey.LeftPicturePath, dbServey.RightPicturePath,dbServey.RejectionReason);
                 }
                 dbServey.ModifiedDate = DateTime.Now;
                 dbServey.ModifiedBy = surveyQuestionRepository.LoggedInUserIdentity;
@@ -578,6 +578,10 @@ namespace SMD.Implementation.Services
         public IEnumerable<getPollBySQIDtblAnalytic_Result> getPollBySQIDtblAnalytic(int ID)
         {
             return surveyQuestionRepository.getPollBySQIDtblAnalytic(ID);
+        }
+        public List<GetRandomPolls_Result> GetRandomPolls()
+        {
+            return surveyQuestionRepository.GetRandomPolls();
         }
         #endregion
     }

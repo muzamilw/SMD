@@ -2794,6 +2794,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Parameter Name="ToRow" Type="int" Mode="In" />
         </Function>
         <Function Name="GetRandom3Deal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetRandomPolls" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetRegisteredUserData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Status" Type="int" Mode="In" />
           <Parameter Name="keyword" Type="nvarchar" Mode="In" />
@@ -5916,6 +5917,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           </AssociationSet>
           <EntitySet Name="vw_Notifications" EntityType="SMDDevModel.vw_Notifications" />
           <FunctionImport Name="GetRandom3Deal" ReturnType="Collection(SMDDevModel.GetRandom3Deal_Result)" />
+          <FunctionImport Name="GetRandomPolls" ReturnType="Collection(SMDDevModel.GetRandomPolls_Result)" />
           </EntityContainer>
         <EntityType Name="CouponCategories">
           <Key>
@@ -7601,6 +7603,12 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
         <ComplexType Name="GetRandom3Deal_Result">
           <Property Type="Int64" Name="CouponId" Nullable="false" />
           <Property Type="String" Name="couponImage1" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetRandomPolls_Result">
+          <Property Type="Int64" Name="SQID" Nullable="false" />
+          <Property Type="String" Name="LeftPicturePath" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="RightPicturePath" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="Question" Nullable="true" MaxLength="500" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -9608,6 +9616,16 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
               <ComplexTypeMapping TypeName="SMDDevModel.GetRandom3Deal_Result">
                 <ScalarProperty Name="CouponId" ColumnName="CouponId" />
                 <ScalarProperty Name="couponImage1" ColumnName="couponImage1" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetRandomPolls" FunctionName="SMDDevModel.Store.GetRandomPolls">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SMDDevModel.GetRandomPolls_Result">
+                <ScalarProperty Name="SQID" ColumnName="SQID" />
+                <ScalarProperty Name="LeftPicturePath" ColumnName="LeftPicturePath" />
+                <ScalarProperty Name="RightPicturePath" ColumnName="RightPicturePath" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
