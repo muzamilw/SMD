@@ -704,12 +704,13 @@ getfreeCouponCount = function () {
             if (hasErrors)
                 return;
             if (freeCouponCount() > 0 && UserAndCostDetail().StripeSubscriptionStatus == null) {
-                confirmation.messageText("Your deal cannot be submitted as there is already a free deal active. Please subscribe to avail unlimited deals.")
+                confirmation.messageText("Your deal cannot be submitted as there is already a free deal active." + "<br\>" + "Please subscribe to avail unlimited deals.")
                 confirmation.afterProceed(function () {
                     couponModel().CouponListingMode(2);
                     saveCampaign(2);
                     return;
                 });
+                confirmation.yesBtnText("Upgrade up to Monthly Deal");
                 confirmation.afterCancel(function () {
                     return;
                 });
