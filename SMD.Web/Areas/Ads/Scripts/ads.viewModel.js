@@ -3757,7 +3757,7 @@ define("ads/ads.viewModel",
                     isPollQuestionsQuestionUsed: isPollQuestionsQuestionUsed,
                     isPreviousQuizQuestionsUsed: isPreviousQuizQuestionsUsed,
                     isAdSearch:isAdSearch,
-                    CurrentMode: CurrentMode
+                    CurrentMode: CurrentMode,
                     islblText: islblText
                 };
             })()
