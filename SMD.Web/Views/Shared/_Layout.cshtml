@@ -4,22 +4,17 @@
     string classes = "";
     string classesMenu = "";
 
-
     IEnumerable<CompanyIdClaimValue> companyClaimValues = ClaimHelper.GetClaimsByType<CompanyIdClaimValue>(SmdClaimTypes.CompanyId);
     string CompanyName = companyClaimValues != null && companyClaimValues.Any() ? companyClaimValues.ElementAt(0).CompanyName : "Company Not Loaded";
     string CompanyLogo = companyClaimValues != null && companyClaimValues.Any() ? companyClaimValues.ElementAt(0).CompanyLogo : "Claim not found";
     string userName = companyClaimValues != null && companyClaimValues.Any() ? companyClaimValues.ElementAt(0).UserName : "Claim not found";
     string MobileNo = companyClaimValues != null && companyClaimValues.Any() ? companyClaimValues.ElementAt(0).MobileNumber : "Claim not found";
     string CompanyID = companyClaimValues != null && companyClaimValues.Any() ? companyClaimValues.ElementAt(0).CompanyId.ToString() : "Claim not found";
-
     string Email = companyClaimValues != null && companyClaimValues.Any() ? companyClaimValues.ElementAt(0).Email : "Claim not found";
-
     IEnumerable<SmdRoleClaimValue> roleClaim = ClaimHelper.GetClaimsByType<SmdRoleClaimValue>(SmdClaimTypes.Role);
-
     string RoleName = roleClaim != null && roleClaim.Any() ? roleClaim.ElementAt(0).Role : "Role Not Loaded";
     string RoleId = roleClaim != null && roleClaim.Any() ? roleClaim.ElementAt(0).RoleId : "Role Not Loaded";
     var Name = string.Empty;
-
 }
 <!DOCTYPE html>
 <html>
@@ -407,7 +402,7 @@
 
                 </div>
                 <div class="row" id="topArea" style="margin-left:-15px;">
-                    <div class="row dash_slide_panel" id="slider" style="padding:0px;">
+                    <div class="row dash_slide_panel" id="slider" style="padding:0px;display:none;">
                         <div id="gallery">
 
                             <a href="#" class="show">
@@ -434,7 +429,7 @@
                         <div class="clear"></div>
 
                     </div>
-                    <div class="row" id="main_btnPannels">
+                    <div class="row" id="main_btnPannels" style="display:none;">
                         <div class="col-lg-12" style="padding-top:3px;padding-left:0px;">
 
                             @*<a class="btn  btn-default btn-gray" style="float:left;width:136px;height:58px;white-space:normal;    padding-top: 18px;" href="/Coupons/Coupons" id="btnCoupons">Deals </a>
@@ -699,7 +694,11 @@
                     </div>
 
                 </div>
-
+                @*@using (Html.BeginForm(new { id = "hiddenForm" }))
+                {
+                    <input type="hidden" value="7" name="Cstatus" />
+                
+                }*@
                 @*<div class="row">
                         <div class="col-sm-8"></div>
                         <div class="col-sm-4">
@@ -760,7 +759,7 @@
     @Scripts.Render("~/bundles/jquery")
     <link href="~/Content/CSS/Slider.css" rel="stylesheet" />
     <script>
-        slideShow();
+        
         (function ($) {
             $("#siteUrl").val("@(Request.ApplicationPath == " / " ? " / " : Request.ApplicationPath)");
         })($);
@@ -775,6 +774,59 @@
         function showMainMenu() {
 
             $('#topArea').collapse('show');
+        }
+        
+
+    </script>
+    @Scripts.Render("~/Bundle/BaseLibs")
+    <script src="~/Content/themes/Centaurus/js/fullcalendar.min.js"></script>
+    @Scripts.Render("~/Bundle/CentaurusLibs")
+    <script src="~/Scripts/intlTelInput.min.js"></script>
+
+    <script>
+        //createCookie();
+       
+        require(["common/confirmation.view"]);
+        require(["Layout/Layout.view"]);
+        require(["PhraseLibrary/phraseLibrary.view"]);
+        require(["common/userProfile.view"]);
+        require(["common/companyProfile.view"]);
+        require(["common/InviteUser.view"]);
+
+        require(["common/dashboardGraphAnalytics.view"]);
+        
+      
+        
+
+        $(document).ready(function () {
+            $("#make-small-nav").click(function () {
+                $("#header-logo").toggle();
+                $("#menu-logo").toggle();
+ 
+            });
+           
+         var pageURL = $(location).attr("href");
+         var m=   pageURL.split("//");
+         var nat= m[1].split("/");
+         if(nat[1]=='Home')
+         {
+             $('.dash_slide_panel').css('display','block');
+             $('#main_btnPannels').css('display','block');
+            
+         }
+         slideShow();
+      
+        });
+        function GetQueryString(sParam) {
+            var sPageURL = window.location.search.substring(1);
+            var sURLVariables = sPageURL.split('&');
+            for (var i = 0; i < sURLVariables.length; i++) {
+                var sParameterName = sURLVariables[i].split('=');
+                if (sParameterName[0] == sParam) {
+                    return sParameterName[1];
+                }
+            }
+            return 0;
         }
         function slideShow() {
 
@@ -830,33 +882,6 @@
 
 
         }
-
-    </script>
-    @Scripts.Render("~/Bundle/BaseLibs")
-    <script src="~/Content/themes/Centaurus/js/fullcalendar.min.js"></script>
-    @Scripts.Render("~/Bundle/CentaurusLibs")
-    <script src="~/Scripts/intlTelInput.min.js"></script>
-
-    <script>
-        //createCookie();
-        require(["common/confirmation.view"]);
-        require(["Layout/Layout.view"]);
-        require(["PhraseLibrary/phraseLibrary.view"]);
-        require(["common/userProfile.view"]);
-        require(["common/companyProfile.view"]);
-        require(["common/InviteUser.view"]);
-
-        require(["common/dashboardGraphAnalytics.view"]);
-
-
-        $(document).ready(function () {
-            $("#make-small-nav").click(function () {
-                $("#header-logo").toggle();
-                $("#menu-logo").toggle();
-            });
-
-        });
-
         $('#topArea').collapse();
 
         $("#btnPhraseLibrary").click(function () {
@@ -997,18 +1022,23 @@
         function GoToDeals()
         {
             window.location.href = "/Coupons/Coupons";
+          
         }
         function GotoVideoAds()
         {
+            bannerflag=false;
             window.location.href = "/Ads/Ads?mode=1";
+          
         }
         function GotodisplayAds()
         {
             window.location.href = "/Ads/Ads?mode=4";
+            
         }
         function Gotopolls()
         {
             window.location.href = "/Survey/";
+          
         }
         function Gotosurveys()
         {

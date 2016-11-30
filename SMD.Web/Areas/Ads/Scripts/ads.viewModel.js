@@ -15,6 +15,7 @@ define("ads/ads.viewModel",
                     isEditorVisible = ko.observable(false),
                     isClickRateVisible = ko.observable(null),
                     IsthisEditCamapiagn = ko.observable(false),
+                    CurrentMode = ko.observable(0),
                     CompanyLogo = ko.observable(''),
                     IsBroadMarketing = ko.observable(true),
                     buyItQuestionStatus = ko.observable(false),
@@ -3457,7 +3458,8 @@ define("ads/ads.viewModel",
 
                 // Initialize the view model
                 initialize = function (specifiedView) {
-
+                  
+                    CurrentMode(mode);
                     if (mode == 4) {
                         MainHeading("Sponsor an app ‘brain game’.");
                         SubHeading("Reward audiences 50% of your ‘ad click’Drive people to your web site, ask a reinforcing question and show your deals –All for one ‘ad click’ fee.");
@@ -3735,7 +3737,8 @@ define("ads/ads.viewModel",
                     SelectedItemAnalytics: SelectedItemAnalytics,
                     isProfileQuestionUsed: isProfileQuestionUsed,
                     isPollQuestionsQuestionUsed: isPollQuestionsQuestionUsed,
-                    isPreviousQuizQuestionsUsed: isPreviousQuizQuestionsUsed
+                    isPreviousQuizQuestionsUsed: isPreviousQuizQuestionsUsed,
+                    CurrentMode: CurrentMode
                 };
             })()
         };

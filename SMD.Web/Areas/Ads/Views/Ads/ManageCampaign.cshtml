@@ -3114,9 +3114,9 @@ else
 
 <!-- ko if: $root.campaignModel() != null -->
 <div class="modal fade my-modal model_quizQ_ph" id="phQuizDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" style=" width:330px;  ">
+    <div class="modal-dialog" style=" width:330px;" data-bind="visible:$root.CurrentMode()==1">
         <div class="col-lg-6 preview_stencilImg" style=" margin-right: 35px; width:310px;">
-            <div id="background" style="background-color:white;height:500px;" class="mobBck">
+            <div id="background" class="mobBck mobile_background">
                 <div style="position:relative;">
                     <img id="closePop" src="~/Images/close2-128.png" width="20" class="preview_close" data-dismiss="modal" onclick="closevid()" />
                 </div>
@@ -3125,9 +3125,9 @@ else
                 </div>
                 <div class="row logocont">
                     @*<img data-bind="visible: $root.campaignModel().LogoUrl() != '', attr:{src: '/' + $root.campaignModel().LogoUrl()+ $root.randonNumber()}" class="preview_screen_advtlogo" />
-            <img data-bind="visible: $root.campaignModel().LogoUrl() == '', attr:{src: '/' + $root.advertiserLogo()+ $root.randonNumber()}" class="preview_screen_advtlogo" />*@
+                <img data-bind="visible: $root.campaignModel().LogoUrl() == '', attr:{src: '/' + $root.advertiserLogo()+ $root.randonNumber()}" class="preview_screen_advtlogo" />*@
 
-                    <img data-bind="attr:{src: $root.CompanyLogo()}" class=" preview_screen_advtlogo" />
+                    <img data-bind="attr:{src: $root.CompanyLogo()}" class=" preview_screen_video" />
 
                     @*<img data-bind="visible: $root.campaignModel().LogoUrl() == '', attr:{src: '/' + $root.advertiserLogo()+ $root.randonNumber()}" class="preview_screen_advtlogo" />*@
                 </div>
@@ -3139,10 +3139,10 @@ else
                 </div>
                 <div id="video_panel">
 
-                    <video id="videoTag_prev" controls="" class="preview_video"  data-bind="attr: { src: $root.VideoLink2src()+$root.randonNumber() }" src="null?r=0"></video>
+                    <video id="videoTag_prev" controls="" class="preview_video" data-bind="attr: { src: $root.VideoLink2src()+$root.randonNumber() }" src="null?r=0"></video>
                 </div>
 
-                <div style="padding-top:30px;text-align: center;height:130px">
+                <div style="padding-top:24px;text-align: center;height:78px">
 
                     <div id="play_panel">
                         <img src="~/Content/Images/Plaz@2x.png" style="height:40px;" onclick="previewImage()" />
@@ -3159,72 +3159,137 @@ else
                 </div>
 
                 @*<div style="width: 83%;margin: 5px auto 15px;" data-bind="visible: $root.campaignModel().Type() != 4">
-                    <span data-bind="text: $root.campaignModel().DisplayTitle" style=" font-size: 15px;    color: red;"></span><br />
-                    <span data-bind="text: $root.campaignModel().Description" style="font-size: 14px;    color: gray;"></span><br />
-                    <span data-bind="text: $root.campaignModel().CampaignDescription" style="font-size: 14px;    color: gray; "></span>
-                </div>
-                <div class="row" id="appendVideoTag" style="text-align: center;    width: 83%;
-    margin: auto;margin-bottom: 80px;" data-bind="visible: $root.campaignModel().Type() == 1">
-                </div>
-                <div style="text-align: center;    width: 83%;margin: auto;" data-bind=" visible: $root.campaignModel().Type()== 3 || $root.campaignModel().Type()== 2">
-                    <div style="height: 230px;    padding: 5px;    background: #CECECE;    text-align: center;position:relative;">
-                        <div class="preview_screen_viewFlyer">
-                            VIEW FLAYER AND ANSWER QUIZ
+                            <span data-bind="text: $root.campaignModel().DisplayTitle" style=" font-size: 15px;    color: red;"></span><br />
+                            <span data-bind="text: $root.campaignModel().Description" style="font-size: 14px;    color: gray;"></span><br />
+                            <span data-bind="text: $root.campaignModel().CampaignDescription" style="font-size: 14px;    color: gray; "></span>
                         </div>
-                        <img style="width:auto;height:220px;" data-bind="visible: $root.campaignModel().CampaignTypeImagePath() == ''" src="/Content/Images/Company_Default.png" />
-                        <img style="width:auto;height:220px;" data-bind="visible: $root.campaignModel().CampaignTypeImagePath() != '' ,attr: { src: $root.campaignModel().CampaignTypeImagePath }" />
-                    </div>
-                </div>
-                <div class="row" style="text-align: center;width: 88%;
-    margin: auto;" data-bind="visible: $root.campaignModel().Type() == 4">
-                    <img src="~/Images/preview_game.jpg" style="    width: 100%;" />
-                </div>
-                <br />
-                <div style="  width: 83%;    margin:auto;  text-align: center;    " data-bind="visible: $root.campaignModel().Type() != 4">
-                    <div style="float:left;margin-top: 12px;    margin-right: 35px; color:#b6e1e9;font-size: 15px;">
-                        Cash Out
-                    </div>
-                    <div class="preview_screen_playbtn" style="float:left;">
-                        Play
-                    </div>
-                    <div style="float:right;margin-top: 12px;    margin-left: 20px;color:#b6e1e9;font-size: 15px;">
-                        Cash Out
-                    </div>
-                    <div class="clearfix">
-                    </div>
-                    <br />
-                </div>*@
+                        <div class="row" id="appendVideoTag" style="text-align: center;    width: 83%;
+            margin: auto;margin-bottom: 80px;" data-bind="visible: $root.campaignModel().Type() == 1">
+                        </div>
+                        <div style="text-align: center;    width: 83%;margin: auto;" data-bind=" visible: $root.campaignModel().Type()== 3 || $root.campaignModel().Type()== 2">
+                            <div style="height: 230px;    padding: 5px;    background: #CECECE;    text-align: center;position:relative;">
+                                <div class="preview_screen_viewFlyer">
+                                    VIEW FLAYER AND ANSWER QUIZ
+                                </div>
+                                <img style="width:auto;height:220px;" data-bind="visible: $root.campaignModel().CampaignTypeImagePath() == ''" src="/Content/Images/Company_Default.png" />
+                                <img style="width:auto;height:220px;" data-bind="visible: $root.campaignModel().CampaignTypeImagePath() != '' ,attr: { src: $root.campaignModel().CampaignTypeImagePath }" />
+                            </div>
+                        </div>
+                        <div class="row" style="text-align: center;width: 88%;
+            margin: auto;" data-bind="visible: $root.campaignModel().Type() == 4">
+                            <img src="~/Images/preview_game.jpg" style="    width: 100%;" />
+                        </div>
+                        <br />
+                        <div style="  width: 83%;    margin:auto;  text-align: center;    " data-bind="visible: $root.campaignModel().Type() != 4">
+                            <div style="float:left;margin-top: 12px;    margin-right: 35px; color:#b6e1e9;font-size: 15px;">
+                                Cash Out
+                            </div>
+                            <div class="preview_screen_playbtn" style="float:left;">
+                                Play
+                            </div>
+                            <div style="float:right;margin-top: 12px;    margin-left: 20px;color:#b6e1e9;font-size: 15px;">
+                                Cash Out
+                            </div>
+                            <div class="clearfix">
+                            </div>
+                            <br />
+                        </div>*@
             </div>
         </div>
         @*<div class="col-lg-6 preview_stencilImg" style=" width:310px;">*@
-            @*<div style="position:relative;">
+        @*<div style="position:relative;">
                 <img src="~/Images/close2-128.png" width="20" class="preview_close" data-dismiss="modal" />
             </div>*@
-            @*<div class="row preview_topImgCnt">
-                <img src="~/Images/topbarph.png" width="100%" />
-            </div>
-            <div class="row" style="padding-top: 15px;  text-align: center;">
-                <img data-bind="visible: $root.campaignModel().LogoUrl() != '', attr:{src: '/' + $root.campaignModel().LogoUrl() + $root.randonNumber()}" class="preview_screen_advtlogo" />
-                <img data-bind="visible: $root.campaignModel().LogoUrl() == '', attr:{src: '/' + $root.advertiserLogo()+ $root.randonNumber()}" class="preview_screen_advtlogo" />
-            </div>
-            <div style="    text-align: center;">
-                <span data-bind="text: 'Quiz - Win ' +  (($root.campaignModel().ClickRate() * 100)/2).toFixed() + 'p'" style="    font-size: 15px;      font-weight: bold;  color: #bb1923;"></span><br /><br />
-                <span data-bind="text: $root.campaignModel().VerifyQuestion" style="font-size: 18px;    color: #006633;"></span><br /><br />
-                <span style="    font-size: 12px;    color: gray;">Select from below</span>
-                <div data-bind="text: $root.campaignModel().Answer1" class="preview_screen_quizAns1">
+        @*<div class="row preview_topImgCnt">
+                    <img src="~/Images/topbarph.png" width="100%" />
                 </div>
-                <div data-bind="text: $root.campaignModel().Answer2" class="preview_screen_quizAns2">
+                <div class="row" style="padding-top: 15px;  text-align: center;">
+                    <img data-bind="visible: $root.campaignModel().LogoUrl() != '', attr:{src: '/' + $root.campaignModel().LogoUrl() + $root.randonNumber()}" class="preview_screen_advtlogo" />
+                    <img data-bind="visible: $root.campaignModel().LogoUrl() == '', attr:{src: '/' + $root.advertiserLogo()+ $root.randonNumber()}" class="preview_screen_advtlogo" />
+                </div>
+                <div style="    text-align: center;">
+                    <span data-bind="text: 'Quiz - Win ' +  (($root.campaignModel().ClickRate() * 100)/2).toFixed() + 'p'" style="    font-size: 15px;      font-weight: bold;  color: #bb1923;"></span><br /><br />
+                    <span data-bind="text: $root.campaignModel().VerifyQuestion" style="font-size: 18px;    color: #006633;"></span><br /><br />
+                    <span style="    font-size: 12px;    color: gray;">Select from below</span>
+                    <div data-bind="text: $root.campaignModel().Answer1" class="preview_screen_quizAns1">
+                    </div>
+                    <div data-bind="text: $root.campaignModel().Answer2" class="preview_screen_quizAns2">
+                    </div>
+                </div>
+                <div style="    text-align: center;margin-bottom:30px;">
+                    <span style="font-size: 18px;    color: #006633;">Show Ad again :)</span>
+                </div>
+            </div>*@
+    </div>
+
+    <div class="modal-dialog" style=" width:660px;" data-bind="visible:$root.CurrentMode()==4">
+        <div class="col-lg-6 preview_stencilImg" style=" margin-right: 35px; width:310px;">
+            <div id="background" class="mobBck mobile_background">
+                <div style="position:relative;">
+                    <img id="closePop" src="~/Images/close2-128.png" width="20" class="preview_close" data-dismiss="modal" onclick="closevid()" />
+                </div>
+
+                <div class="bckblack">
+
+                </div>
+                <div class="yel_descp_panel">
+                    <span>Display ad <br /> 468 × 120</span>
+
+                </div>
+                <div>
+                    <input id="pause_btn" type="button" value="Skip" class="modify_btn" />
+                </div>
+                <div>
+
                 </div>
             </div>
-            <div style="    text-align: center;margin-bottom:30px;">
-                <span style="font-size: 18px;    color: #006633;">Show Ad again :)</span>
+        </div>
+        <div class="col-lg-6 preview_stencilImg" style=" width:310px;">
+            <div id="background" class="mobBck mobile_background">
+                <div style="position:relative;">
+                    <img src="~/Images/close2-128.png" width="20" class="preview_close" data-dismiss="modal" />
+                </div>
+                <div class="row display_ad_logo_panel">
+                    <img data-bind="attr:{src: $root.CompanyLogo()}" class="preview_screen_video" />
+                </div>
+
+                <div style="padding:1px 20px 10px 20px;">
+                    <div class="skip_btn_panel">
+                        <div id="image_container">
+                            <img src="~/Content/Images/Hero.png" class="hero_image" />
+                        </div>
+
+                        <div>
+                            <div style="margin-top:10px;">
+                                <span>Best time / Highest Score</span>
+                            </div>
+                            <div style="margin-top:7px;">
+                                <span>Keep ball up for <br /> 10 seconds</span>
+                            </div>
+                            <div style="margin-top:7px;">
+                                <span style="font-size:15px;" id="display_ad_desc">Earn 5 centz</span>
+                            </div>
+
+                            <div style="margin-top:10px;">
+                                <input type="button" class="st_btn" value="Start Game" />
+                            </div>
+                            <div style="margin-top:13px;">
+                                <span>Change Game</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top:14px;">
+                    <input id="pause_btn" type="button" value="Skip" class="modify_btn" />
+                </div>
+
             </div>
-        </div>*@
+        </div> 
     </div>
 </div>
 
 <div class="modal fade my-modal model_vucherQ_ph" id="phVoucherDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" style="    width: 315px !important;">
+    <div class="modal-dialog" style="width: 315px !important;">
         <div class="col-lg-12 preview_stencilImg">
             <div style="position:relative;">
                 <img src="~/Images/close2-128.png" width="20" class="preview_close" data-dismiss="modal" />
@@ -3259,8 +3324,8 @@ else
                         &nbsp;
                     </div>
                     <div class="preview_screen_advtlogoCnt">
-                        <img style="width: 70px;    margin-top: 2px;" data-bind="visible: $root.campaignModel().VoucherImagePath() == ''" src="/Content/Images/Company_Default.png" />
-                        <img style="width: 70px;    margin-top: 2px;" data-bind="visible: $root.campaignModel().VoucherImagePath() != '' ,attr: { src: $root.campaignModel().VoucherImagePath }" />
+                        <img style="width: 70px;margin-top:2px;" data-bind="visible: $root.campaignModel().VoucherImagePath() == ''" src="/Content/Images/Company_Default.png" />
+                        <img style="width: 70px;margin-top:2px;" data-bind="visible: $root.campaignModel().VoucherImagePath() != '' ,attr: { src: $root.campaignModel().VoucherImagePath }" />
                     </div>
                 </div>
                 <div class="clearfix">
@@ -3271,7 +3336,7 @@ else
         </div>
         <div class="clearfix">
         </div>
-        <div style="    text-align: center;height:30px;">
+        <div style="text-align: center;height:30px;">
         </div>
     </div>
 </div>
@@ -4046,39 +4111,51 @@ else
 
     function RefreshScript()
     {
-        $("#buynow_panel").css('display','none');
-        $("#video_panel").css('display','none');
-        $("#pause_btn").css('display','none');
+        var value=($("#txtPerClick").val()/2*100);
+        if(mode==1)
+        {
+            $("#buynow_panel").css('display','none');
+            $("#video_panel").css('display','none');
+            $("#pause_btn").css('display','none');
 
-        $("#play_panel").css('display','block');
-        $("#Campaign_name_panel").css('display','block');
-        $("#close_btn").css('display','block');
+            $("#play_panel").css('display','block');
+            $("#Campaign_name_panel").css('display','block');
+            $("#close_btn").css('display','block');
      
 
-        if( $("#ddTextBtns").val()==0)
-        {
-            $(".buybtn").css('display','none');
-        }
-        else
-        {
-            
-            $(".buybtn").css('display','block');
-
-            if( !$("#txtBuyItlbl").is(":hidden")==true)
-            {  
-                if($("#txtBuyItlbl").val()!='')
-                {
-                    $(".buybtn").val($("#txtBuyItlbl").val());
-                }
+            if( $("#ddTextBtns").val()==0)
+            {
+                $(".buybtn").css('display','none');
             }
             else
             {
-                $(".buybtn").val($("#ddTextBtns").val());
+            
+                $(".buybtn").css('display','block');
+
+                if( !$("#txtBuyItlbl").is(":hidden")==true)
+                {  
+                    if($("#txtBuyItlbl").val()!='')
+                    {
+                        $(".buybtn").val($("#txtBuyItlbl").val());
+                    }
+                }
+                else
+                {
+                    $(".buybtn").val($("#ddTextBtns").val());
+                }
             }
+            var string='Play Ad & Answer Survey for ' + value + ' centz';
+            $("#ply_ans_desc").text(string);
         }
-        var value=($("#txtPerClick").val()/2*100);
-        var string='Play Ad & Answer Survey for ' + value + ' centz';
-        $("#ply_ans_desc").text(string);
+        else
+        {
+            var string='Earn ' + value + ' centz';
+            $("#display_ad_desc").text(string);
+        
+        
+        }
+       
+        
     }
     function openUrl()
     {

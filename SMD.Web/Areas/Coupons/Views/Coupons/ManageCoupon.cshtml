@@ -97,7 +97,7 @@ else
                         <div class="pull-left" style="width:47px;">
                             &nbsp;
                         </div>
-                        <div class="pull-left ads-numbering-main">
+                        <div class="pull-left ads-numbering-main" onclick="PreviewCoupon()">
                             <a data-toggle="modal" data-target=".model_quizQ_ph">
 
 
@@ -939,10 +939,57 @@ else
                                 </div>
                             </div>
 
+                        </div>
 
 
+                        <div class="modal fade my-modal model_quizQ_ph" id="phQuizDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" style=" width:660px;" =4">
+                                <div class="col-lg-6 preview_stencilImg" style=" margin-right: 35px; width:310px;">
+                                    <div id="background" class="mobBck mobile_background">
+                                        <div style="position:relative;">
+                                            <img id="closePop" src="~/Images/close2-128.png" width="20" class="preview_close" data-dismiss="modal" />
+                                        </div>
+                                        <div class="deals_blue_panel">
+                                            <div class="dealsPenel_text">Deals</div>
+                                            <div class="deals_search"><input type="text" style="width:144px!important; margin:0 auto;height:28px!important;" class="form-control " placeholder="Search"></div>
+                                            <div class="deals_subtitle">Featured near you</div>
+                                        </div>
+                                        <div class="deals_bannerImage">
+
+                                            <img id="deal_preview_img" style="width:258px;" data-bind="attr:{src:$root.couponModel().couponImage1()}" />
 
 
+                                        </div>
+                                        <div class="deals_panel_des">
+                                            <div class="deal_group_name">
+
+                                            </div>
+                                            <div class="desc_cont">
+                                                <div class="deal_group_Pice pull-left">
+                                                    <div id="address">asdasdas</div>
+                                                    <div id="city">Lahore</div>
+                                                </div>
+                                                <div class="deal_Pice pull-right">
+                                                    <div class="dis_strike-through pull-left">
+                                                        400
+                                                    </div>
+                                                    <div class="pull-right">$189</div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 preview_stencilImg" style=" width:310px;">
+                                    <div id="background" class="mobBck mobile_background">
+                                        <div style="position:relative;">
+                                            <img src="~/Images/close2-128.png" width="20" class="preview_close" data-dismiss="modal" />
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
 
                         </div>
 
@@ -1090,7 +1137,6 @@ else
                                                     <label id="txtCampaignDesc" data-bind="text:LocationLON"></label>
                                                     @*<textarea class="form-control" id="geolocationlong" rows="1" placeholder="max 72 characters" data-bind="value: LocationLON" readonly="readonly" maxlength="72"></textarea>*@
                                                 </div>
-
                                             </div>
                                             <div class="form-group" data-bind="visible:$root.ISshowPhone">
                                                 <div class="col-lg-2">
@@ -1637,9 +1683,6 @@ else
                 <div class="col-lg-3 form-horizontal" style=" height:566px;
     margin-left: 0px !important;">
 
-
-
-
                     <div class="row Subpanels" style="line-height: 2;padding:3px;">
                         <div class="col-lg-12">
                             <div class="row">
@@ -1969,7 +2012,6 @@ else
                 scrollTop: $('#demo p').offset().top - 20
             }, 600);
 
-
             //}
         });
     });
@@ -1997,7 +2039,9 @@ else
 
     }
     function onchangeCheckbox() {
+
         $('.bigcheckbox').change(function () {
+           
             if ($('input.bigcheckbox').filter(':checked').length >= 3)
                 $('input.bigcheckbox:not(:checked)').attr('disabled', 'disabled');
             else
@@ -2017,7 +2061,7 @@ else
 
     var mode = 1;
     function changeIframeSrc(mode1) {
-        debugger;
+      
         mode = mode1;
         if (mode1 != 1)
             mode1 = 2;
@@ -2028,7 +2072,7 @@ else
     }
 
     function SetMode(mode) {
-        debugger;
+        
         if (mode == 2) {
             $("#CouponImage2panel").css('display', 'block');
             $("#div1").css('display', 'block');
@@ -2072,6 +2116,7 @@ else
                 $("#btnDamClose").click();
             } else if (mode == 2) {
                 $("#bannerImage1").attr("src", this.src).change();
+                $("#deal_preview_img").attr("src", this.src).change();
                 bannerImage1 = this.src;
                 $("#btnDamClose").click();
             } else if (mode == 3) {
@@ -2174,19 +2219,27 @@ else
 
 </script>
 
-<!-- Modal -->
-<div class="modal fade" id="damModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document" style="width:883px;">
-        <div class="modal-content">
-            <div class="modal-header dam_header">
-                <button type="button" id="btnDamClose" class="close" data-dismiss="modal" aria-label="Close"><span style="color:white!important;">&times;</span></button>
-                <span class="damHeading">Upload/Select Images</span>
-            </div>
-            <div class="modal-body">
-                <iframe src="~/DamImages?mode=1&selection=true" style="width:100%;height:600px;border:none;" id="iframe"></iframe>
-            </div>
-            <div class="modal-footer">
+    <!-- Modal -->
+    <div class="modal fade" id="damModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document" style="width:883px;">
+            <div class="modal-content">
+                <div class="modal-header dam_header">
+                    <button type="button" id="btnDamClose" class="close" data-dismiss="modal" aria-label="Close"><span style="color:white!important;">&times;</span></button>
+                    <span class="damHeading">Upload/Select Images</span>
+                </div>
+                <div class="modal-body">
+                    <iframe src="~/DamImages?mode=1&selection=true" style="width:100%;height:600px;border:none;" id="iframe"></iframe>
+                </div>
+                <div class="modal-footer">
+                </div>
             </div>
         </div>
     </div>
-</div>
+<script>
+    function PreviewCoupon()
+    {
+
+        $(".deal_group_name").html($("#txtCampaignDisplayName").val());
+    }
+
+</script>
