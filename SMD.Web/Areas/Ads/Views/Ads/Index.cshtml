@@ -4,8 +4,6 @@
     string userClasses = "";
 }
 
-
-
 @if (!User.IsInRole("User"))
 {
     userClasses = "displayNone";
@@ -14,29 +12,32 @@ else
 {
     adminClasses = "displayNone";
 }
-
-   <div class="row" id="Heading_div" style="opacity: 1;">
+<div class="row" id="Heading_div" style="opacity: 1;">
     <div class="col-lg-12" style="padding-left: 0px;padding-right:0px;">
-        <div class="pull-left" id="subdiv">
-
-           
-            <label id="headdesc" class="pull-left" style="color:#fff;font-size:14px;margin-top:15px;margin-left:10px;">Click on a campaign to view Analytic,Graphs and to modify.</label>
-            <div class="clearfix"></div>
+        <div class="col-lg-3"style="margin-left:-3px !important;">
+            <div class="pull-left">
+                <label id="headlabel" class="home_pagefontsize" style="font-size:24px!important;color:#fff!important;margin-top:7px;">Video Ads</label>
+            </div>
         </div>
-        <div class="pull-right">
-            <img class="pull-right closecls" src="~/Content/Images/Close_Button.png" style="margin-top:15px;margin-right:15px;" onclick="GotoHome();" />
+        <div class="col-lg-7">
+            <div class="pull-left" id="subdiv"style="display:none">
+                <label id="headdesc" class="pull-left" style="color:#fff;font-size:14px;margin-top:15px;margin-left:10px;">Click on a campaign to view Analytic,Graphs and to modify.</label>
+                <div class="clearfix"></div>
+            </div>
         </div>
+        <div class="col-lg-2">
+            <div class="pull-right">
+                <img class="pull-right closecls" src="~/Content/Images/Close_Button.png" style="margin-top:15px;margin-right:5px;" onclick="GotoHome();" />
+            </div>
 
-        <div class="clearfix;"></div>
+            <div class="clearfix;"></div>
+        </div>
     </div>
-</div> 
+</div>
 <div class="row" id="adsBinding" style="margin-top:5px;">
     <div class="col-lg-12" data-bind="visible: $root.isListVisible()">
-
         <div class="row">
-            <div class="col-lg-12" style="padding-left:0px;padding-right:18px;">
-
-
+            <div class="col-lg-12" style="padding-left:0px;padding-right:18px;padding-bottom:10px;">
 
                 <!-- ko template: { name: 'filterTemplate' } -->
                 <!-- /ko -->
@@ -94,60 +95,140 @@ else
                     <div class="clearfix">
                     </div>
                 </div>
-                <div data-bind="visible: $root.campaignGridContent().length == 0" style="display:none;" class="margintop12px">
-                    <div class="main-box no-header clearfix" style="padding:20px;" data-bind="visible:!isDisplayCouponsAds()">
-                        No campaigns found.
+                <div data-bind="visible: $root.campaignGridContent().length == 0" style="display:none;">
+                    <div class="clearfix text-center" style="padding:20px;padding-bottom:10px;" data-bind="visible:$root.IsGameAds()">
+                        <span style="color:white">You haven’t created any Display Ad yet</span>
                     </div>
-                    <div class="main-box no-header clearfix" style="padding:20px;" data-bind="visible:isDisplayCouponsAds()">
-                        No coupon found.
+                    <div class="clearfix text-center" style="padding:20px;padding-bottom:10px;" data-bind="visible:$root.IsvideoBtn()">
+                        <span style="color:white">You haven’t created any Video Ad yet</span>
                     </div>
                 </div>
             </div>
-
         </div>
         <div class="row">
 
-
             <div class="col-lg-3 col-sm-3" style="float:left;">
-
 
             </div>
             <div class="col-lg-6 col-sm-6" style="float:left;padding-left:50px; display:none;">
-
                 <button class="btn  btn-success btnAdsCampaign" style="width:24%;float:left;padding:0px;" id="btnSubmitForApproval" data-bind="click:$root.ShowCouponPromotions">Coupons</button>
                 <button class="btn  btn-success btnAdsCampaign @adminClasses" style="width:24%;float:left;padding:0px;" id="btnSubmitForApproval" data-bind="click:gotoManageUsers">Manage Users</button>
                 <button class="btn  btn-success btnAdsCampaign" style="width:24%;float:left;padding:0px;" id="btnSubmitForApproval" data-bind="click:gotoProfile">Marketing Info</button>
             </div>
 
-
             <div class="col-lg-2 col-sm-2" style="float:left;">
-
 
             </div>
 
 
 
-
-
-
         </div>
+        <div class="row Subpanels" style="margin-right:10px;padding-top:0px;">
+            <div class="col-lg-12">
 
+                <div class="col-lg-6" style="padding-top:20px;padding-left:15px;display:none;" data-bind="visible: $root.campaignGridContent().length==0">
+                    <div class="row">
+                        <span style="font-size:20px;" data-bind="visible:$root.IsGameAds()">Target & reward audiences near you</span>
+                        <span style="font-size:20px;" data-bind="visible:$root.IsvideoBtn()">Target & reward audiences to watch your Video ad</span>
+                    </div>
+                    <div class="row center">
+                        <img src="/Images/Share_world.png">
+                    </div>
+                </div>
+                <div class="col-lg-6" style="padding-top:20px;padding-left:15px;display:none;" data-bind="visible: $root.campaignGridContent().length>0">
+                    <div class="row" style="padding-bottom:10px;">
+                        <span style="font-size:20px;margin-left:5px;" data-bind="visible:$root.IsGameAds()">Here’s some Display Ads by other advertisers</span>
+                        <span style="font-size:20px;margin-left:5px;" data-bind="visible:$root.IsvideoBtn()">Here’s some Video Ads by other advertisers</span>
+                    </div>
+                    <div class="row center" data-bind="visible:$root.IsGameAds()">
+                        <div class="col-lg-4">
+                            <img style="height:70px;width:168px;" src="/images/splaceholder.png">
+                            <div class="main-box no-header clearfix text-center" style="padding:8px;margin-top:1px;">
+                                <span style="font-size:12px;font-weight:bold">Test Display Add</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <img style="height:70px;width:168px;" src="/images/splaceholder.png">
+                            <div class="main-box no-header clearfix text-center" style="padding:8px;margin-top:1px;">
+                                <span style="font-size:12px;font-weight:bold">Test Display Add</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <img style="height:70px;width:168px;" src="/images/splaceholder.png">
+                            <div class="main-box no-header clearfix text-center" style="padding:8px;margin-top:1px;">
+                                <span style="font-size:12px;font-weight:bold">Test Display Add</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row center" data-bind="visible:$root.IsvideoBtn()">
+                        <div class="col-lg-4">
+                            <video id="videoTag" controls style="width:168px;height:70px;" src="http://smdpreview.com/SMD_Content\AdCampaign\50427\guid_CampaignDefaultVideo.mp4?r=01"></video>
+                            <div class="main-box no-header clearfix text-center" style="padding:8px;margin-top:1px;">
+                                <span style="font-size:12px;font-weight:bold">Test Video Add</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <video id="videoTag" controls style="width:168px;height:70px;" src="http://smdpreview.com/SMD_Content\AdCampaign\50427\guid_CampaignDefaultVideo.mp4?r=01"></video>
+                            <div class="main-box no-header clearfix text-center" style="padding:8px;margin-top:1px;">
+                                <span style="font-size:12px;font-weight:bold">Test Video Add</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <video id="videoTag" controls style="width:168px;height:70px;" src="http://smdpreview.com/SMD_Content\AdCampaign\50427\guid_CampaignDefaultVideo.mp4?r=01"></video>
+                            <div class="main-box no-header clearfix text-center" style="padding:8px;margin-top:1px;">
+                                <span style="font-size:12px;font-weight:bold">Test Video Add</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" style="padding-top:0px;padding-left:8px;padding-bottom:16px;">
+                        <a href="http://cash4ads.com/" target="_blank">
+                            More...
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-6" style="padding-top:20px;">
+                    <div class="row" style="padding-bottom:10px;">
+                        <span style="font-size:20px;" data-bind="visible:$root.IsGameAds()">Get more Click-thrus to your landing pages</span>
+                        <span style="font-size:20px;" data-bind="visible:$root.IsvideoBtn()">Ask an Insight question</span>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <ul style="list-style-type:circle;margin-left:17px;" data-bind="visible:$root.IsGameAds()">
+                                <li>Target audiences near you</li>
+                                <li>Upload a Banner Image and link to your web site</li>
+                                <li>Ask an Insight question and use the result to refine future targeting</li>
+                                <li>Reward Gamers with 50% of the click charge if they answer your survey question</li>
+                            </ul>
+                            <ul style="list-style-type:circle;margin-left:17px;" data-bind="visible:$root.IsvideoBtn()">
+                                <li>Target audiences near you</li>
+                                <li>Upload a 30 sec Video ad / TV commercial</li>
+                                <li>Ask an Insight question and use the result to refine future targeting</li>
+                                <li>Reward audiences with 50% of your PPCV to watch ad and answer survey</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row" style="padding-bottom:30px;margin-top:19px;">
+                        <span style="color:#3498db;font-family:'Gloria Hallelujah',cursive;">You’re only billed the click charge if your survey question is answered</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
     @{
         Html.RenderPartial("~/Areas/Ads/Views/Ads/ManageCampaign.cshtml");
     }
 </div>
-
 <script id="advertsTemplate" type="text/html">
     <tr style="cursor: pointer">
-
-        <td class="col-sm-3" >
+        <td class="col-sm-3">
             <a href="#" class="store-user-link" data-bind="text: CampaignName() ,click:$root.onEditCampaign"></a>
             <br />
             <span style="color:darkgray;font-size:11px;" data-bind="text:  ApprovalDateTime() ? 'Start Date : ' +  ApprovalDateTime() : 'Not Started'"></span>
-
         </td>
-
         @*<td class="col-sm-1">
                 <span class="">&nbsp;</span>
             </td>
@@ -157,7 +238,6 @@ else
             </td>
             <td class="col-sm-1"><span class="" data-bind="text: MaxBudget"></span></td>*@
         <td class="col-sm-1" style="display:none;">
-
             <!-- ko if: Type() == 1-->
             <span class="">Video</span>
             <!-- /ko -->
@@ -189,14 +269,12 @@ else
             <span data-bind="text: '$'+ ClickRate().toFixed(2)"></span>
         </td>
         <td class="col-sm-2">
-
             <span data-bind="text: viewCountToday" style="display:inline-block;width:35px;"></span>
             <span data-bind="text: viewCountYesterday" style="display:inline-block;width:35px;"></span>
             <span data-bind="text: viewCountAllTime" style="display:inline-block;width:35px;"></span>
-
         </td>
-        
-        <td class="col-sm-1" ><span class="@userClasses" data-bind="text: AmountSpent() ? '$'+ AmountSpent().toFixed(2) : '$'+ 0"></span></td>
+
+        <td class="col-sm-1"><span class="@userClasses" data-bind="text: AmountSpent() ? '$'+ AmountSpent().toFixed(2) : '$'+ 0"></span></td>
         <td class="col-sm-2">
             <!-- ko if: Status() == 1-->
             <div class="text-left statusbg" style="background:#6D6EFA;    width: 125px;">
@@ -255,10 +333,7 @@ else
             <span class="@adminClasses" data-bind="text: CreatedBy"></span>
         </td>
 
-
-
         <td class="col-sm-2" style="padding-top:23px;">
-
             <!-- ko if: Status() == 1 ||  Status() == 4|| Status() ==  6-->
             <a class="table-link danger" style="float: right">
                 <span class="fa-stack">
@@ -270,7 +345,6 @@ else
             &nbsp;
         </td>
 
-
     </tr>
 </script>
 @* Filter Template *@
@@ -279,33 +353,27 @@ else
         <div class="row" id="topArea">
         </div>
         <div class="row" style="display:none;">
-
             <div class="col-sm-12" style="float: left;">
-               
+
                 <div style="width:100%;">
-                    <span style="font-size:18px;float:left;color:#81d3dc!important;"  data-bind="text:$root.MainHeading"></span>
+                    <span style="font-size:18px;float:left;color:#81d3dc!important;" data-bind="text:$root.MainHeading"></span>
                     <button style="float:right;margin-top:-15px;" class="btn btn-primary create_Campaign_btn" data-bind="click:$root.addNewCampaign,visible:!$root.isDisplayCouponsAds()">
                         Create New Campaign
                     </button>
                     <div style="clear:both;"></div>
                 </div>
-
                 <div style="width:641px;word-wrap:break-word;">
                     <span style="font-size: 14px;" class="Theme_subheading-Clr " data-bind="text:$root.SubHeading"></span>  &nbsp; &nbsp; &nbsp; <span class="red bold rightAlign" style="display:none;"> Watch Video <img src="/Images/youtube_play.JPG" height="25px" /> </span>   </span><br />
                 </div>
             </div>
 
-
         </div>
-
 
         <div class="row">
 
-
             <form data-bind="submit: $root.getCampaignByFilter">
                 <div class="col-sm-2" style="float:left;">
-
-                    <div class="filter-block " style="margin-right: -10px">
+                    <div class="filter-block " style="margin-right: -10px" data-bind="visible:$root.isAdSearch()==false">
                         <div class="form-group ">
                             <input type="text" class="form-control " placeholder="Search..." data-bind="value: $root.searchFilterValue">
                             <i class="fa fa-search search-icon" data-bind="click: $root.getCampaignByFilter"></i>
@@ -313,17 +381,26 @@ else
                     </div>
                     <div class="clearfix"></div>
                 </div>
-
                 <div class="col-sm-2 filterbloclkspos" style="float:left;">
-                    <select id="ddlStatus" class="form-control" style="float:right;height:36px;" data-bind="value : SearchSelectedStatus, event:{ change: $root.getCampaignByFilter}">
+                    <select id="ddlStatus" class="form-control" style="float:right;height:36px;" data-bind="value : SearchSelectedStatus, event:{ change: $root.getCampaignByFilter},visible:$root.isAdSearch()==false">
                         <option value="0">All Statuses</option>
                     </select>
                 </div>
             </form>
-            
+            <div data-bind="visible:$root.islblText()==true">
+                <div class="col-sm-4 filterbloclkspos" style="float:left;font-size: 20px;margin-top:6px;">
+                    <span data-bind="visible:$root.IsGameAds()">Sponsor a brain training game !</span>
+                    <span data-bind="visible:$root.IsvideoBtn()">Target Audiences with a Video Ad !</span>
+                </div>
+
+                <div class="col-sm-1">
+                    <img src="/Images/Arrow.png" style="height:35px;">
+                </div>
+            </div>
+
             <div class="col-sm-3" style="float:right;margin-top:0px; text-align:right">
                 @*<img class="defvideoimage" src="/Content/Images/Videos_small.png" data-bind="visible:$root.VideoImage">
-                <img class="Game_image" src="/Content/Images/Display_small.png" data-bind="visible:$root.DisplayImage">*@
+                    <img class="Game_image" src="/Content/Images/Display_small.png" data-bind="visible:$root.DisplayImage">*@
                 <div data-bind="visible:$root.IsvideoBtn()">
                     <button class=" btn btn-primary create_Campaign_btn" style="" data-bind="click:$root.addNewCampaign,visible:!$root.isDisplayCouponsAds()">
                         Create Video Ad
@@ -335,16 +412,12 @@ else
                     </button>
                 </div>
                 @*<button class="btn btn-primary" style="display:none;" data-bind="click:$root.addNewCampaign,visible:$root.isDisplayCouponsAds()">
-                    Create Coupon
-                </button>*@
-
+                        Create Coupon
+                    </button>*@
             </div>
-
             <div class="clearfix">
-
             </div>
         </div>
-
     </div>
 </script>
 <!-- ko stopBinding: true -->
@@ -358,7 +431,7 @@ else
     <script type="text/javascript">
         var mode = 1;
         require(["ads/ads.view", "common/stripeChargeCustomer.view", "common/confirmation.view", ]);
-        
+
         function GetURLParameter(sParam) {
             var sPageURL = window.location.search.substring(1);
             var sURLVariables = sPageURL.split('&');
@@ -371,16 +444,15 @@ else
             return 0;
         }
         $(document).ready(function () {
-         
+
             $("#main_btnPannels").css("display", "none");
             $("#MarketobjDiv").css("display", "none");
             $(".hideInCoupons").css("display", "none");
             $(".dash_slide_panel").css("display", "none");
-         
+
             var modeLoc = GetURLParameter("mode");
 
-            if(modeLoc == 1)
-            {
+            if (modeLoc == 1) {
                 $(".vid_image").css("display", "block");
                 $("#video_heading").css("cssText", "color:#fff!important;");
 
@@ -389,18 +461,16 @@ else
                 mode = modeLoc;
             }
 
-            if (modeLoc == 4)
-            {
-               
+            if (modeLoc == 4) {
+
                 $(".Game_image").css("display", "block");
 
                 $("#headlabel").text("Display ads");
             }
         });
-       
 
-       
+
+
     </script>
-
 
 }
