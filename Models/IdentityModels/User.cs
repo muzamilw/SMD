@@ -71,6 +71,8 @@ namespace SMD.Models.IdentityModels
 
         public string Title { get; set; }
 
+        public string DeleteConfirmationToken { get; set; }
+
         public virtual ICollection<UserLogin> UserLogins { get; set; }
         public virtual ICollection<Role> Roles { get; set; }
         public virtual ICollection<UserClaim> Claims { get; set; }

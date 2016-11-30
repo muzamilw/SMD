@@ -132,10 +132,18 @@ namespace SMD.Implementation.Services
         public string SharedDesignLink { get; set; }
         public string CreateAccountLink { get; set; }
         public string PasswordResetLink { get; set; }
+
+        public string DeleteAccountLink { get; set; }
+
+
         public string VoucherDescription { get; set; }
         public string VoucherValue { get; set; }
 
         public string CompanyNameInviteUser { get; set; }
+
+        public string FullNameInviteUser { get; set; }
+
+
         public string InviteURL { get; set; }
         public string AdvertiserLogoURL { get; set; }
 
@@ -147,6 +155,17 @@ namespace SMD.Implementation.Services
 
         public string BuyItURL { get; set; }
         public string CampaignName { get; set; }
+
+        public string CampaignClicksPerDay { get; set; }
+
+        public string CampaignVideoPath { get; set; }
+
+        public string CampaignVideoImage { get; set; }
+
+        public string CampaignBannerImage { get; set; }
+
+        public string DealNoOfDays { get; set; }
+        
         public string RejectionReason { get; set; }
 
         public string PaymentFailedReason { get; set; }
@@ -154,7 +173,7 @@ namespace SMD.Implementation.Services
         public string PaymentFailedAttempt { get; set; }
 
         public string NextPaymentAttempt { get; set; }
-        public string CampaignLabel { get; set; }
+       
 
         public string RoleName { get; set; }
         /// <summary>
@@ -192,16 +211,28 @@ namespace SMD.Implementation.Services
             smailsubject = smailsubject.Replace("++firstname++", Fname);
             smailsubject = smailsubject.Replace("++lastname++", Lname);
             smailsubject = smailsubject.Replace("++MailSubject++", Subj);
-            smailsubject = smailsubject.Replace("++companyname++", CompanyNameInviteUser); 
+            smailsubject = smailsubject.Replace("++companyname++", CompanyNameInviteUser);
+            smailsubject = smailsubject.Replace("++inviter++", FullNameInviteUser);
+            smailsubject = smailsubject.Replace("++campaignname++", CampaignName);
+            
+
             MBody = MBody.Replace("++username++", Muser);
             MBody = MBody.Replace("++firstname++", Fname);
             MBody = MBody.Replace("++lastname++", Lname);
             MBody = MBody.Replace("++campaignname++", CampaignName);
             MBody = MBody.Replace("++rejectionreason++", RejectionReason);
-            MBody = MBody.Replace("++campaignlabel++", CampaignLabel);
+            MBody = MBody.Replace("++campaignclicksperday++", CampaignClicksPerDay);
+            MBody = MBody.Replace("++campaignvideopath++", CampaignVideoPath);
+            MBody = MBody.Replace("++campaignvideoimage++", CampaignVideoImage);
+            MBody = MBody.Replace("++campaignbannerimage++", CampaignBannerImage);
+            MBody = MBody.Replace("++dealnoofdays++", DealNoOfDays);
+            
             MBody = MBody.Replace("++CurrentDateTime++", DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToLongTimeString() + " GMT");
             MBody = MBody.Replace("++EmailConfirmationLink++", EmailConfirmationLink);
             MBody = MBody.Replace("++companyname++", CompanyNameInviteUser);
+            MBody = MBody.Replace("++inviter++", FullNameInviteUser);
+
+            MBody = MBody.Replace("++deleteaccountlink++", DeleteAccountLink);
 
             if (Mid == (int)EmailTypes.ResetPassword)
             {
@@ -217,6 +248,7 @@ namespace SMD.Implementation.Services
                 MBody = MBody.Replace("++companyname++", CompanyNameInviteUser);
                 MBody = MBody.Replace("++inviteurl++", InviteURL);
                 MBody = MBody.Replace("++rolename++", RoleName);
+                MBody = MBody.Replace("++inviter++", FullNameInviteUser);
             }
             if (Mid == (int)EmailTypes.BuyItUsers)
             {
@@ -303,26 +335,35 @@ namespace SMD.Implementation.Services
             smailsubject = smailsubject.Replace("++lastname++", Lname);
             smailsubject = smailsubject.Replace("++MailSubject++", Subj);
             smailsubject = smailsubject.Replace("++companyname++", CompanyNameInviteUser);
+            smailsubject = smailsubject.Replace("++inviter++", FullNameInviteUser);
+            smailsubject = smailsubject.Replace("++campaignname++", CampaignName);
+
             MBody = MBody.Replace("++username++", Muser);
             MBody = MBody.Replace("++firstname++", Fname);
             MBody = MBody.Replace("++lastname++", Lname);
             MBody = MBody.Replace("++campaignname++", CampaignName);
             MBody = MBody.Replace("++rejectionreason++", RejectionReason);
-            MBody = MBody.Replace("++campaignlabel++", CampaignLabel);
+            MBody = MBody.Replace("++campaignclicksperday++", CampaignClicksPerDay);
+            MBody = MBody.Replace("++campaignvideopath++", CampaignVideoPath);
+            MBody = MBody.Replace("++campaignvideoimage++", CampaignVideoImage);
+            MBody = MBody.Replace("++campaignbannerimage++", CampaignBannerImage);
+            MBody = MBody.Replace("++dealnoofdays++", DealNoOfDays);
             MBody = MBody.Replace("++CurrentDateTime++", DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToLongTimeString() + " GMT");
             MBody = MBody.Replace("++EmailConfirmationLink++", EmailConfirmationLink);
             MBody = MBody.Replace("++inviteurl++", InviteURL);
             MBody = MBody.Replace("++fname++", Fname);
             MBody = MBody.Replace("++phone++", PhoneNo);
-
+            MBody = MBody.Replace("++inviter++", FullNameInviteUser);
             MBody = MBody.Replace("++feedback++", feedback);
-
+            MBody = MBody.Replace("++deleteaccountlink++", DeleteAccountLink);
             MBody = MBody.Replace("++countryname++", CountryName);
 
             MBody = MBody.Replace("++paymentfailedattempt++", PaymentFailedAttempt);
             MBody = MBody.Replace("++paymentfailedreason++", PaymentFailedReason);
             MBody = MBody.Replace("++nextpaymentattempt++", NextPaymentAttempt);
-            
+
+
+          
 
             MBody = MBody.Replace("++city++", City);
 
@@ -489,6 +530,8 @@ namespace SMD.Implementation.Services
         private readonly ISystemMailsRepository systemMailRepository;
         private readonly IManageUserRepository manageUserRepository;
         private readonly ICompanyService companyService;
+        private readonly IAspnetUsersRepository userRepository;
+
 
         #endregion
 
@@ -498,8 +541,9 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Constructor
         /// </summary>
-        public EmailManagerService(ISystemMailsRepository systemMailRepository, IManageUserRepository manageUserRepository, ICompanyService companyService)
+        public EmailManagerService(ISystemMailsRepository systemMailRepository, IManageUserRepository manageUserRepository, ICompanyService companyService, IAspnetUsersRepository userRepository)
         {
+            
             if (systemMailRepository == null)
             {
                 throw new ArgumentNullException("systemMailRepository");
@@ -507,6 +551,7 @@ namespace SMD.Implementation.Services
             this.systemMailRepository = systemMailRepository;
             this.manageUserRepository = manageUserRepository;
             this.companyService = companyService;
+            this.userRepository = userRepository;
         
 
             MMailto = new List<string>();
@@ -739,6 +784,25 @@ namespace SMD.Implementation.Services
             PasswordResetLink = passwordResetLink;
             await SendEmail();
         }
+
+
+        /// <summary>
+        /// Send Password Reset Email
+        /// </summary>
+        public async Task SendDeleteAccountConfirmationEmail(User oUser, string deleteTokenLink)
+        {
+            MMailto.Add(oUser.Email);
+            Mid = (int)EmailTypes.DeleteAccountConfirmationEmail;
+            Muser = oUser.Email;
+            Fname = oUser.FullName;
+            PhoneNo = oUser.PhoneNumber;
+            DeleteAccountLink = deleteTokenLink;
+            await SendEmail();
+        }
+
+
+
+
         // ReSharper restore SuggestUseVarKeywordEvident
 
         /// <summary>
@@ -814,7 +878,7 @@ namespace SMD.Implementation.Services
         /// <summary>
         ///Invite User Email
         /// </summary>
-        public void SendEmailInviteToUserManage(string email, string InvitationCode, bool mode, string RoleName)
+        public void SendEmailInviteToUserManage(string email, string InvitationCode, bool mode, string role)
         {
             MMailto.Add(email);
             Mid = (int)EmailTypes.InviteUsers;
@@ -822,6 +886,8 @@ namespace SMD.Implementation.Services
             int companyid = 0;
 
             CompanyNameInviteUser =   manageUserRepository.getCompanyName(out userName, out companyid);
+            FullNameInviteUser = userName;
+            RoleName = role;
             Muser = userName;
 
             if ( mode == true)//user will have to register and a new user will be created etc and link established,.
@@ -913,24 +979,22 @@ namespace SMD.Implementation.Services
                 throw new Exception("Customer is null");
             }
         }
-        public void SendCampaignApprovalEmail(string aspnetUserId, string campaignName, int? Type)
+        public void SendVideoAdCampaignApprovalEmail(string aspnetUserId, string campaignName, int ClicksPerDay, string videoPath, string videoImage)
         {
             var oUser = manageUserRepository.GetByUserId(aspnetUserId);
 
             if (oUser != null)
             {
                 MMailto.Add(oUser.Email);
-                Mid = (int)EmailTypes.CampaignApproved;
+                Mid = (int)EmailTypes.VideoAdCampaignApproved;
                 Muser = oUser.FullName;
-                if(Type == 5)
-                {
-                    CampaignLabel = "Coupon";
-                }
-                if (Type == 3 || Type == 1)
-                {
-                    CampaignLabel = "Campaign";
-                }
+               
                 CampaignName = campaignName;
+                
+                CampaignClicksPerDay = ClicksPerDay.ToString();
+                CampaignVideoPath = videoPath;
+                CampaignVideoImage = videoImage;
+                
                 SendEmailNotAysnc();
             }
             else
@@ -938,25 +1002,25 @@ namespace SMD.Implementation.Services
                 throw new Exception("Email could not be sent!");
             }
         }
-        public void SendCampaignRejectionEmail(string aspnetUserId, string campaignName, string RReason, int? Type)
+        public void SendVideoAdCampaignRejectionEmail(string aspnetUserId, string campaignName, int ClicksPerDay, string videoPath, string videoImage, string RReason)
         {
             var oUser = manageUserRepository.GetByUserId(aspnetUserId);
 
             if (oUser != null)
             {
                 MMailto.Add(oUser.Email);
-                Mid = (int)EmailTypes.CampaignReject;
+
+                Mid = (int)EmailTypes.VideoAdCampaignReject;
+
+
                 Muser = oUser.FullName;
                 RejectionReason = RReason;
                 CampaignName = campaignName;
-                if (Type == 5)
-                {
-                    CampaignLabel = "Coupon";
-                }
-                if (Type == 3 || Type == 1)
-                {
-                    CampaignLabel = "Campaign";
-                }
+                CampaignClicksPerDay = ClicksPerDay.ToString();
+                CampaignVideoPath = videoPath;
+                CampaignVideoImage = videoImage;
+                RejectionReason = RReason;
+
                 SendEmailNotAysnc();
             }
             else
@@ -965,17 +1029,136 @@ namespace SMD.Implementation.Services
             }
         }
 
-        public void SendCouponRejectionEmail(string aspnetUserId, string RReason)
+
+
+        public void SendSurveyCampaignApprovalEmail(string aspnetUserId, string campaignName, string LeftImage,string RightImage)
         {
             var oUser = manageUserRepository.GetByUserId(aspnetUserId);
 
             if (oUser != null)
             {
                 MMailto.Add(oUser.Email);
-                Mid = (int)EmailTypes.CampaignReject;
+                Mid = (int)EmailTypes.PicturePollCampaignApproved;
+                Muser = oUser.FullName;
+
+                CampaignName = campaignName;
+
+                SendEmailNotAysnc();
+            }
+            else
+            {
+                throw new Exception("Email could not be sent!");
+            }
+        }
+
+        public void SendSurveyCampaignRejectedEmail(string aspnetUserId, string campaignName, string LeftImage, string RightImage, string RReason)
+        {
+            var oUser = manageUserRepository.GetByUserId(aspnetUserId);
+
+            if (oUser != null)
+            {
+                MMailto.Add(oUser.Email);
+                Mid = (int)EmailTypes.PicturePollCampaignRejected;
+                Muser = oUser.FullName;
+
+                CampaignName = campaignName;
+                RejectionReason = RReason;
+
+                SendEmailNotAysnc();
+            }
+            else
+            {
+                throw new Exception("Email could not be sent!");
+            }
+        }
+
+
+        public void SendDisplayAdCampaignApprovalEmail(string aspnetUserId, string campaignName, int ClicksPerDay, string BannerPath)
+        {
+            var oUser = manageUserRepository.GetByUserId(aspnetUserId);
+
+            if (oUser != null)
+            {
+                MMailto.Add(oUser.Email);
+                Mid = (int)EmailTypes.DisplayAdCampaignApproved;
+                Muser = oUser.FullName;
+
+                CampaignName = campaignName;
+
+                CampaignClicksPerDay = ClicksPerDay.ToString();
+                CampaignBannerImage = BannerPath;
+                
+
+                SendEmailNotAysnc();
+            }
+            else
+            {
+                throw new Exception("Email could not be sent!");
+            }
+        }
+        public void SendDisplayAdCampaignRejectionEmail(string aspnetUserId, string campaignName, int ClicksPerDay, string BannerPath, string RReason)
+        {
+            var oUser = manageUserRepository.GetByUserId(aspnetUserId);
+
+            if (oUser != null)
+            {
+                MMailto.Add(oUser.Email);
+
+                Mid = (int)EmailTypes.DisplayAdCampaignRejected;
+
+
                 Muser = oUser.FullName;
                 RejectionReason = RReason;
-                CampaignLabel = "Coupon";
+                CampaignName = campaignName;
+                CampaignClicksPerDay = ClicksPerDay.ToString();
+                CampaignBannerImage = BannerPath;
+                RejectionReason = RReason;
+
+                SendEmailNotAysnc();
+            }
+            else
+            {
+                throw new Exception("Email could not be sent!");
+            }
+        }
+
+
+
+        public void SendCouponCampaignApprovalEmail(string aspnetUserId, string campaignName, int dealNoOfDays, string BannerPath)
+        {
+            var oUser = manageUserRepository.GetByUserId(aspnetUserId);
+
+            if (oUser != null)
+            {
+                MMailto.Add(oUser.Email);
+                Mid = (int)EmailTypes.CouponApproved;
+                Muser = oUser.FullName;
+                CampaignName = campaignName;
+                CampaignBannerImage = BannerPath;
+                DealNoOfDays = dealNoOfDays.ToString();
+                
+                SendEmailNotAysnc();
+            }
+            else
+            {
+                throw new Exception("Email could not be sent!");
+            }
+        }
+
+        public void SendCouponCampaignRejectionEmail(string aspnetUserId, string campaignName, int dealNoOfDays, string BannerPath, string RReason)
+        {
+            var oUser = manageUserRepository.GetByUserId(aspnetUserId);
+
+            if (oUser != null)
+            {
+                MMailto.Add(oUser.Email);
+                Mid = (int)EmailTypes.CouponRejected;
+                Muser = oUser.FullName;
+                CampaignName = campaignName;
+                CampaignBannerImage = BannerPath;
+                DealNoOfDays = dealNoOfDays.ToString();
+                RejectionReason = RReason;
+               
                 SendEmailNotAysnc();
             }
             else
@@ -991,10 +1174,10 @@ namespace SMD.Implementation.Services
             if (oUser != null)
             {
                 MMailto.Add(oUser.Email);
-                Mid = (int)EmailTypes.CampaignReject;
+                Mid = (int)EmailTypes.PicturePollCampaignRejected;
                 Muser = oUser.FullName;
                 RejectionReason = RReason;
-                CampaignLabel = "Profile Question";
+                
                 SendEmailNotAysnc();
             }
             else
@@ -1072,6 +1255,31 @@ namespace SMD.Implementation.Services
             {
                 throw new Exception("Email could not be sent!");
             }
+        }
+
+
+        public bool SendCouponSubscriptionCreatedEmail(int companyId)
+        {
+            var comp = companyService.GetCompanyById(companyId);
+
+            var oUser = userRepository.GetUserbyCompanyId(companyId);
+
+            if (oUser != null)
+            {
+                MMailto.Add(oUser.Email);
+                Mid = (int)EmailTypes.SubscriptionCreated;
+                CompanyName = comp.CompanyName;
+                Muser = oUser.FullName;
+
+                SendEmailNotAysnc();
+            }
+            else
+            {
+                throw new Exception("Email could not be sent!");
+            }
+
+            return true;
+
         }
 
 

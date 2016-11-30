@@ -225,6 +225,12 @@
     <Compile Include="GetProducts_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetRandom3Deal_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetRandomPolls_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetRegisteredUserData_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

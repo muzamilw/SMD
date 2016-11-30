@@ -134,7 +134,7 @@ namespace SMD.Repository.BaseRepository
 
         public DbSet<CampaignEventHistory> CampaignEventHistory { get; set; }
 
-        
+
         /// <summary>
         /// Survey Question
         /// </summary>
@@ -170,7 +170,7 @@ namespace SMD.Repository.BaseRepository
         public DbSet<vw_Coupons> vw_Coupons { get; set; }
         public DbSet<CouponRatingReview> CouponRatingReview { get; set; }
 
-        
+
 
         public DbSet<vw_ReferringCompanies> vwvw_ReferringCompanies { get; set; }
 
@@ -304,7 +304,7 @@ namespace SMD.Repository.BaseRepository
         public DbSet<SharedSurveyQuestion> SharedSurveyQuestion { get; set; }
 
         public DbSet<AspNetUsersNotificationToken> AspNetUsersNotificationToken { get; set; }
-        
+
 
 
         /// <summary>
@@ -491,9 +491,9 @@ namespace SMD.Repository.BaseRepository
                 new ObjectParameter("ToRow", toRow) :
                 new ObjectParameter("ToRow", typeof(int));
 
-            return  ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetProducts_Result>("GetProducts", userIdParameter, fromRowParameter, toRowParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetProducts_Result>("GetProducts", userIdParameter, fromRowParameter, toRowParameter);
 
-          
+
         }
 
         /// <summary>
@@ -673,11 +673,11 @@ namespace SMD.Repository.BaseRepository
             var commentsParameter = new ObjectParameter("comments", comments);
 
 
-           var companyIdParameter = companyId != null ?
-             new ObjectParameter("companyId", companyId) :
-             new ObjectParameter("companyId", typeof(int));
+            var companyIdParameter = companyId != null ?
+              new ObjectParameter("companyId", companyId) :
+              new ObjectParameter("companyId", typeof(int));
 
-            ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateCompanyStatus",statusParameter, userIdParameter, commentsParameter, companyIdParameter);
+            ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateCompanyStatus", statusParameter, userIdParameter, commentsParameter, companyIdParameter);
         }
 
         /// <summary>
@@ -731,6 +731,14 @@ namespace SMD.Repository.BaseRepository
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetApprovalCount_Result>("GetApprovalCount");
         }
+        public ObjectResult<GetRandom3Deal_Result> GetRandom3Deal()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetRandom3Deal_Result>("GetRandom3Deal");
+        }
+        public ObjectResult<GetRandomPolls_Result> GetRandomPolls()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetRandomPolls_Result>("GetRandomPolls");
+        }
         //public ObjectResult<getAdsCampaignByCampaignId_Result> getAdsCampaignByCampaignId(int compaignId, int CampStatus, int dateRange, int Granularity)
         //{
         //    var _compaignId = new ObjectParameter("CampaignId", compaignId);
@@ -751,7 +759,7 @@ namespace SMD.Repository.BaseRepository
         public ObjectResult<getSurvayByPQID_Result> getSurvayByPQIDAnalytics(int PQId, int CampStatus, int dateRange, int Granularity)
         {
             var _PQId = new ObjectParameter("PQId", PQId);
-           // var _CampStatus = new ObjectParameter("status", CampStatus);
+            // var _CampStatus = new ObjectParameter("status", CampStatus);
             var _dateRange = new ObjectParameter("DateRange", dateRange);
             var _Granularity = new ObjectParameter("Granularity", Granularity);
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getSurvayByPQID_Result>("getSurvayByPQID", _PQId, _dateRange, _Granularity);
@@ -816,7 +824,7 @@ namespace SMD.Repository.BaseRepository
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getCampaignROItblAnalytic_Result>("getCampaignROItblAnalytic", _ID);
         }
 
-        
+
 
         /// <summary>
         /// Get Shared survey question details
@@ -842,16 +850,16 @@ namespace SMD.Repository.BaseRepository
         public ObjectResult<Int32> getCampaignByIdQQFormAnalytic(long CampaignId, int Choice, int Gender, int age, String Profession, String City, int type, int QuestionId)
         {
 
-         
+
             var Id = new ObjectParameter("Id", CampaignId);
             var chioce = new ObjectParameter("coice", Choice);
             var gender = new ObjectParameter("gender", Gender);
             var ageRange = new ObjectParameter("ageRange", age);
             var profession = new ObjectParameter("Profession", Profession);
             var city = new ObjectParameter("city", City);
-             var _type = new ObjectParameter("type", type);
-             var _QuestionId = new ObjectParameter("QId", QuestionId);
-        
+            var _type = new ObjectParameter("type", type);
+            var _QuestionId = new ObjectParameter("QId", QuestionId);
+
             ObjectResult<Int32> res = ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Int32>("getCampaignByIdQQFormAnalytic", Id, chioce, gender, ageRange, profession, city, _type, _QuestionId);
             return res;
         }

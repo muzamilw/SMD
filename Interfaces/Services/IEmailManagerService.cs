@@ -29,6 +29,9 @@ namespace SMD.Interfaces.Services
         /// </summary>
         Task SendPasswordResetLinkEmail(User oUser, string passwordResetLink);
 
+
+        Task SendDeleteAccountConfirmationEmail(User oUser, string deleteTokenLink);
+
         /// <summary>
         /// Send Error Log
         /// </summary>
@@ -65,9 +68,9 @@ namespace SMD.Interfaces.Services
 
 
         Task SendBuyItEmailToUser(string aspnetUserId, AdCampaign oCampaign);
-        void SendCampaignApprovalEmail(string aspnetUserId, string campaignName, int? Type);
-        void SendCampaignRejectionEmail(string aspnetUserId, string campaignName, string RReason, int? Type);
-        void SendCouponRejectionEmail(string aspnetUserId, string RReason);
+        void SendVideoAdCampaignApprovalEmail(string aspnetUserId, string campaignName, int ClicksPerDay, string videoPath, string videoImage);
+        void SendVideoAdCampaignRejectionEmail(string aspnetUserId, string campaignName, int ClicksPerDay, string videoPath, string videoImage, string RReason);
+       
 
 
         Task SendEmailInviteBusiness(string email, int companyId);
@@ -78,5 +81,19 @@ namespace SMD.Interfaces.Services
         void SendAppFeedback(string UserId, string feedback, string City, string Country, string FullName, string email, string phone);
 
         void SendPaymentRejectionEmail(string aspnetUserId, int CompanyId, string sPaymentFailedReason, int Attempt,string NextPaymentAttempt);
+
+        bool SendCouponSubscriptionCreatedEmail(int companyId);
+
+
+        void SendSurveyCampaignApprovalEmail(string aspnetUserId, string campaignName, string LeftImage, string RightImage);
+        void SendSurveyCampaignRejectedEmail(string aspnetUserId, string campaignName, string LeftImage, string RightImage, string RReason);
+
+
+        void SendDisplayAdCampaignApprovalEmail(string aspnetUserId, string campaignName, int ClicksPerDay, string BannerPath);
+        void SendDisplayAdCampaignRejectionEmail(string aspnetUserId, string campaignName, int ClicksPerDay, string BannerPath, string RReason);
+
+
+        void SendCouponCampaignApprovalEmail(string aspnetUserId, string campaignName, int dealNoOfDays, string BannerPath);
+        void SendCouponCampaignRejectionEmail(string aspnetUserId, string campaignName, int dealNoOfDays, string BannerPath, string RReason);
     }
 }

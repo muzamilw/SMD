@@ -21,6 +21,7 @@ using SMD.Models.RequestModels;
 using SMD.Models.ResponseModels;
 using com.esendex.sdk.messaging;
 using System.Text.RegularExpressions;
+using System.Security.Policy;
 
 namespace SMD.Implementation.Services
 {
@@ -976,7 +977,7 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Archive Account
         /// </summary>
-        public async Task<BaseApiResponse> Archive(string userId)
+        public async Task<BaseApiResponse> ArchiveRequestConfirmation(string userId,string  token, string confirmationLink)
         {
             User user = await UserManager.FindByIdAsync(userId);
             if (user == null)
@@ -984,20 +985,50 @@ namespace SMD.Implementation.Services
                 throw new SMDException(LanguageResources.WebApiUserService_InvalidUserId);
             }
 
+            user.DeleteConfirmationToken = token;
+            UserManager.Update(user);
+
+            await emailManagerService.SendDeleteAccountConfirmationEmail(user, confirmationLink);
+
+            return new BaseApiResponse
+                   {
+                       Status = true,
+                       Message = "Success"
+                   };
+        }
+
+
+        /// <summary>
+        /// Archive Account
+        /// </summary>
+        public bool Archive(string userId, string confirmationToken)
+        {
+            User user =  UserManager.FindById(userId);
+            if (user == null)
+            {
+                throw new SMDException(LanguageResources.WebApiUserService_InvalidUserId);
+            }
+
+            if (user.DeleteConfirmationToken != confirmationToken)
+            {
+                throw new SMDException("Invalid confiramtion token or token expired");
+            }
+
             Random rnd = new Random();
             int numb = rnd.Next(100);
 
 
-            user.ContactNotes = "Archived user on app request="  + DateTime.Now.ToLongDateString() + ", old username=" + user.UserName + ", old email=" + user.Email;
+            user.ContactNotes = "Archived user on app request=" + DateTime.Now.ToLongDateString() + ", old username=" + user.UserName + ", old email=" + user.Email;
 
             // Archive Account
             user.Status = (int)UserStatus.InActive;
             user.ModifiedDateTime = DateTime.Now;
             user.UserName = user.UserName + "_archived" + numb.ToString();
             user.Email = user.Email + "_archived" + numb.ToString();
+            user.DeleteConfirmationToken = "";
 
             var company = companyRepository.Find(user.CompanyId.Value);
-            if ( company != null)
+            if (company != null)
             {
                 company.IsDeleted = true;
                 company.DeleteDate = DateTime.Now;
@@ -1011,24 +1042,20 @@ namespace SMD.Implementation.Services
 
             //removing any provider logins.
             var logins = UserManager.GetLogins(userId);
-            if ( logins != null && logins.Count > 0)
+            if (logins != null && logins.Count > 0)
                 foreach (var item in logins)
                 {
                     UserManager.RemoveLogin(userId, item);
                 }
-            
+
 
             // Save Changes
-            await UserManager.UpdateAsync(user);
+            UserManager.Update(user);
 
             //reset virtual accounts balance and transferring it back to Cash4ads virtual account
             TransactionManager.ArchiveUserResetVirtualAccountBalance(user.CompanyId.Value);
 
-            return new BaseApiResponse
-                   {
-                       Status = true,
-                       Message = "Success"
-                   };
+            return true;
         }
 
         /// <summary>
@@ -1504,6 +1531,14 @@ namespace SMD.Implementation.Services
            
 
             return user;
+        }
+
+
+        public User GetUserByCompanyId(int CompanyId)
+        {
+
+            return aspnetUsersRepository.GetUserbyCompanyId(CompanyId);
+
         }
 
 

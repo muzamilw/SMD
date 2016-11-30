@@ -37,13 +37,21 @@
        InviteUsers = 15,
        BuyItUsers = 16,
        VoucherPaymentEmail = 14,
-       CampaignApproved = 17,
-       CampaignReject = 18,
+       VideoAdCampaignApproved = 17,
+       VideoAdCampaignReject = 18,
        PayoutNotificationToAdmin = 19,
         InviteBusiness = 20,
         InviteAdvertiser = 21,
         AppFeedbackFromUser = 22,
         SubscriptionPaymentFailed = 23,
+        DeleteAccountConfirmationEmail = 24,
+        SubscriptionCreated = 25,
+        CouponApproved = 26,
+        CouponRejected = 27,
+        DisplayAdCampaignApproved = 28,
+        DisplayAdCampaignRejected = 29,
+        PicturePollCampaignApproved = 30,
+        PicturePollCampaignRejected = 31
     }
 
     public enum AdCampaignCriteriaType

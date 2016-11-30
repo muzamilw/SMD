@@ -961,9 +961,12 @@ namespace SMD.Implementation.Services
                 //event history
                 campaignEventHistoryRepository.InsertCouponEvent((AdCampaignStatus)dbCo.Status, dbCo.CouponId);
 
-                if (source.Approved == false)
+                if (source.Approved == true)
                 {
-                    emailManagerService.SendCouponRejectionEmail(dbCo.UserId, dbCo.RejectedReason);
+                    emailManagerService.SendCouponCampaignApprovalEmail(dbCo.UserId, dbCo.CouponTitle,(dbCo.CouponListingMode == 1 ? 7: 30), dbCo.couponImage1);
+                }else
+                {
+                    emailManagerService.SendCouponCampaignRejectionEmail(dbCo.UserId, dbCo.CouponTitle, (dbCo.CouponListingMode == 1 ? 7 : 30), dbCo.couponImage1, dbCo.RejectedReason );
                 }
 
             }
@@ -1226,6 +1229,11 @@ namespace SMD.Implementation.Services
             return couponRatingReviewRepository.CouponReviewCount();
 
         }
+        public List<GetRandom3Deal_Result> GetRandomDeals()
+        {
+            return couponRepository.GetRandomDeals();
+        }
+
         #endregion
     }
 }

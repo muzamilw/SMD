@@ -124,6 +124,7 @@ define("Coupons/Coupons.viewModel",
                     numberOFCouponsToGenerate = ko.observable(0),
                     TempSelectedObj = ko.observable(),
                     CouponTitle = ko.observable(),
+                    CouponsubTitle = ko.observable(),
                     StatusValue = ko.observable(),
                     currencyCode = ko.observable(),
                     currencySymbol = ko.observable(),
@@ -158,8 +159,16 @@ define("Coupons/Coupons.viewModel",
                 Banner6Flag = ko.observable(false),
                 freeCouponCount = ko.observable(0),
                 isflageClose = ko.observable(false),
+                isCouponSearch = ko.observable(false),
+                islblText = ko.observable(false),
                 companyLogo = ko.observable(),
                 companyName = ko.observable(),
+                dealImg1 = ko.observable(),
+                dealImg2 = ko.observable(),
+                dealImg3 = ko.observable(),
+                dealtitle1 = ko.observable(),
+                dealtitle2 = ko.observable(),
+                dealtitle3 = ko.observable(),
                 getDDOAnalytic = function () { }
                 getDDCTAnalytic = function () { }
                 openAdvertiserDashboardDealScreen = function () {
@@ -330,13 +339,29 @@ define("Coupons/Coupons.viewModel",
             }, {
                 success: function (data) {
                     if (data != null) {
-
                         // set grid content
                         campaignGridContent.removeAll();
                         _.each(data.Coupon, function (item) {
                             campaignGridContent.push(model.Coupon.Create(updateCampaignGridItem(item)));
                         });
                         pager().totalCount(data.TotalCount);
+                        if (data.TotalCount == 0) {
+                            isCouponSearch(true);
+                            islblText(true);
+                        }
+                        else if (data.TotalCount == 1) {
+                            isCouponSearch(true);
+                            islblText(false);
+                        }
+                        else if (data.TotalCount > 1 && data.TotalCount <= 4) {
+                            isCouponSearch(false);
+                            islblText(false);
+                        }
+                        else {
+                            isCouponSearch(false);
+                            islblText(false);
+                        }
+
 
                     }
 
@@ -469,7 +494,7 @@ getfreeCouponCount = function () {
             isTerminateBtnVisible(false);
             isNewCampaignVisible(false);
             IsnewCoupon(true);
-
+            CouponsubTitle("(Deals)");
             $("#btnCancel").css("display", "block");
             $(".hideInCoupons").css("display", "none");
 
@@ -493,6 +518,10 @@ getfreeCouponCount = function () {
             IsSubmitBtnVisible(true);
             couponModel().CouponPriceOptions.splice(0, 0, new model.CouponPriceOption());
             couponModel().BuyitLandingPageUrl('https://');
+            couponModel().IsShowReviews(true);
+            couponModel().IsShowAddress(true);
+            couponModel().IsShowMap(true);
+            couponModel().IsShowPhoneNo(true);
 
             Banner2Flag(false);
             Banner3Flag(false);
@@ -945,6 +974,7 @@ getfreeCouponCount = function () {
                 IsnewCoupon(false);
                 previewScreenNumber(1);
                 CouponTitle(item.CouponTitle());
+                CouponsubTitle("");
                 selectedCouponIdAnalytics(item.CouponId());
                 $(".hideInCoupons").css("display", "none");
 
@@ -1425,14 +1455,12 @@ getfreeCouponCount = function () {
                 else
                     diveNo(0);
             },
-            onDeleteImage = function (item)
-                {
+            onDeleteImage = function (item) {
                 if (item == 1) {
                     bannerImage1 = "";
                     couponModel().couponImage1("/images/standardplaceholder.png")
                 }
-                else if(item==2)
-                {
+                else if (item == 2) {
                     bannerImage2 = "";
                     couponModel().CouponImage2("/images/standardplaceholder.png")
                 }
@@ -1454,9 +1482,9 @@ getfreeCouponCount = function () {
                     bannerImage6 = "";
                     couponModel().CouponImage6("/images/standardplaceholder.png")
                 }
-                    
 
-                },
+
+            },
                 SaveAsDraft = function () {
                     debugger;
                     hasErrors = false;
@@ -2298,6 +2326,23 @@ getfreeCouponCount = function () {
                     return monthNames[month];
 
                 },
+                getRandomDeal = function () {
+                    dataservice.getRandomDeal({
+                        success: function (data) {
+                            dealImg1(data[0].couponImage1);
+                            dealImg2(data[1].couponImage1);
+                            dealImg3(data[2].couponImage1);
+                            dealtitle1(data[0].CouponTitle);
+                            dealtitle2(data[1].CouponTitle);
+                            dealtitle3(data[2].CouponTitle);
+                        },
+                        error: function () {
+                            toastr.error("Failed to load Random Deal");
+                        }
+                    });
+
+
+                }
                 // Initialize the view model
                 initialize = function (specifiedView) {
                     view = specifiedView;
@@ -2315,6 +2360,7 @@ getfreeCouponCount = function () {
                     getAdCampaignGridContent();
                     getCampaignBaseContent();
                     isEditorVisible(false);
+                    getRandomDeal();
 
 
 
@@ -2515,7 +2561,7 @@ getfreeCouponCount = function () {
                     isflageClose: isflageClose,
                     GenderAnalyticsData: GenderAnalyticsData,
                     AgeRangeAnalyticsData: AgeRangeAnalyticsData,
-                    companyLogo:companyLogo,
+                    companyLogo: companyLogo,
                     companyName: companyName,
                     selectedOGenderAnalytics: selectedOGenderAnalytics,
                     selectedOAgeAnalytics: selectedOAgeAnalytics,
@@ -2524,7 +2570,16 @@ getfreeCouponCount = function () {
                     selectedCTGenderAnalytics: selectedCTGenderAnalytics,
                     selectedCTAgeAnalytics: selectedCTAgeAnalytics,
                     getDDCTAnalytic: getDDCTAnalytic,
-                    DDCTStatsAnalytics: DDCTStatsAnalytics
+                    DDCTStatsAnalytics: DDCTStatsAnalytics,
+                    CouponsubTitle: CouponsubTitle,
+                    isCouponSearch: isCouponSearch,
+                    islblText: islblText,
+                    dealImg1: dealImg1,
+                    dealImg2: dealImg2,
+                    dealImg3: dealImg3,
+                    dealtitle1: dealtitle1,
+                    dealtitle2: dealtitle2,
+                    dealtitle3: dealtitle3,
                 };
             })()
         };

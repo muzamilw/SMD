@@ -119,7 +119,7 @@ define("ads/ads.viewModel",
                 // audience reach mode 
                 audienceReachMode = ko.observable("1"),
                 MainHeading = ko.observable("Video ads - Upload a video and target audiences near you."),
-                uploadTitle = ko.observable("Video"),
+                uploadTitle = ko.observable("Upload"),
                 SubHeading = ko.observable("Reward audiences 50% of your ‘ad click’ Increase branding and drive people to your web site with one ‘ad click’ Show a video ad, ask a reinforcing question and show your deals.");
 
                 tab1Heading = ko.observable("Upload your video commercial (max 30 seconds , mp4 format).");
@@ -176,7 +176,7 @@ define("ads/ads.viewModel",
 				CampaignRatioAnalyticData = ko.observable(1),
 				granularityDropDown = ko.observableArray([{ id: 1, name: "Daily" }, { id: 2, name: "Weekly" }, { id: 3, name: "Monthly" }, { id: 4, name: "Quarterly" }, { id: 5, name: "Yearly" }]),
 				DateRangeDropDown = ko.observableArray([{ id: 1, name: "Last 30 days" }, { id: 2, name: "All Time" }]),
-				CampaignStatusDropDown = ko.observableArray([{ id: 1, name: "Answered" }, { id: 2, name: "Referred" }, { id: 3, name: "Skipped" }]),
+				CampaignStatusDropDown = ko.observableArray([{ id: 1, name: "Impressions & Answered" }, { id: 2, name: "Impressions & Click-thrus" }, { id: 3, name: "Impressions & Skipped" }]),
 				CampaignTblAnalyticsData = ko.observableArray([]),
                 CitiesAnalyticsData = ko.observableArray([]),
                 ProfessionAnalyticsData = ko.observableArray([]),
@@ -568,7 +568,7 @@ define("ads/ads.viewModel",
                 }
 
                 else {//video ad
-                    campaignModel().CampaignName("New video campaign");
+                    campaignModel().CampaignName("Video Ads");
                     $("#logo_div").css("display", "none");
                     campaignModel().ClickRate("0.16");
                 }
@@ -3479,13 +3479,13 @@ define("ads/ads.viewModel",
                         IsNewVideoCampaign(false);
                     }
                     else {
-                        UrlHeadings("Direct viewers to a landing page at the end of your video ad.");
+                        UrlHeadings("Call for Action Button");
                         IsShownforVideo(true);
                         VideoImage(true);
                         IsvideoBtn(true);
                         IsGameAds(false);
                         StatusCodeName("Display");
-                        CampaignHeader('( Video Ad )');
+                        CampaignHeader("");
                         StatusCodeImage("/Content/Images/Videomod.png");
                         IsNewVideoCampaign(true);
                     }

@@ -216,7 +216,7 @@ define("common/confirmation.viewModel",
                      ko.applyBindings(view.viewModel, view.bindingRootupgrade);
                      ko.applyBindings(view.viewModel, view.bindingRootaction);
                      var logo = $('#companyLogo').prop('src');
-                     if (logo == null || logo=="")
+                     if ((logo == null || logo == "") && UserRoleId!="Franchise_Admin")
                       showAccountSetingPopup();
                     
                  };

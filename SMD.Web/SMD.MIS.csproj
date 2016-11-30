@@ -390,6 +390,8 @@
     <Compile Include="Areas\Api\Controllers\CouponReviewController.cs" />
     <Compile Include="Areas\Api\Controllers\CouponReviewCountController.cs" />
     <Compile Include="Areas\Api\Controllers\DashboardStatusCounterController.cs" />
+    <Compile Include="Areas\Api\Controllers\GetRandomDealController.cs" />
+    <Compile Include="Areas\Api\Controllers\GetRandomPollsController.cs" />
     <Compile Include="Areas\Api\Controllers\NotificationsController.cs" />
     <Compile Include="Areas\Api\Controllers\CouponAnalyticsController.cs" />
     <Compile Include="Areas\Api\Controllers\ApprovePayOutHistoryController.cs" />
@@ -614,12 +616,75 @@
     <Compile Include="Areas\Survey\SurveyAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UnauthorizedRequestController.cs" />
+    <Compile Include="Emails\Video_Ad_Rejected.aspx.cs">
+      <DependentUpon>Video_Ad_Rejected.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Video_Ad_Rejected.aspx.designer.cs">
+      <DependentUpon>Video_Ad_Rejected.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\delete_account_confirmation.aspx.cs">
+      <DependentUpon>delete_account_confirmation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\delete_account_confirmation.aspx.designer.cs">
+      <DependentUpon>delete_account_confirmation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Deal_Approved.aspx.cs">
+      <DependentUpon>Deal_Approved.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Deal_Approved.aspx.designer.cs">
+      <DependentUpon>Deal_Approved.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Reset_Password.aspx.cs">
+      <DependentUpon>Reset_Password.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Reset_Password.aspx.designer.cs">
+      <DependentUpon>Reset_Password.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Invite_Manage_User.aspx.cs">
+      <DependentUpon>Invite_Manage_User.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Invite_Manage_User.aspx.designer.cs">
+      <DependentUpon>Invite_Manage_User.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Emails\AccountVerify.aspx.cs">
       <DependentUpon>AccountVerify.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Emails\AccountVerify.aspx.designer.cs">
       <DependentUpon>AccountVerify.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Picture_poll_approved.aspx.cs">
+      <DependentUpon>Picture_poll_approved.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Picture_poll_approved.aspx.designer.cs">
+      <DependentUpon>Picture_poll_approved.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Display_Ad_Approved.aspx.cs">
+      <DependentUpon>Display_Ad_Approved.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Display_Ad_Approved.aspx.designer.cs">
+      <DependentUpon>Display_Ad_Approved.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Video_Ad_Approved.aspx.cs">
+      <DependentUpon>Video_Ad_Approved.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Video_Ad_Approved.aspx.designer.cs">
+      <DependentUpon>Video_Ad_Approved.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\subscription_created.aspx.cs">
+      <DependentUpon>subscription_created.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\subscription_created.aspx.designer.cs">
+      <DependentUpon>subscription_created.aspx</DependentUpon>
     </Compile>
     <Compile Include="Emails\Video_Performance.aspx.cs">
       <DependentUpon>Video_Performance.aspx</DependentUpon>
@@ -1270,7 +1335,16 @@
     <Content Include="Content\themes\Centaurus\js\typeahead.min.js" />
     <Content Include="Content\themes\Centaurus\js\wizard.js" />
     <Content Include="Content\themes\Centaurus\js\xcharts.js" />
+    <Content Include="Emails\Video_Ad_Rejected.aspx" />
+    <Content Include="Emails\delete_account_confirmation.aspx" />
+    <Content Include="Emails\Deal_Approved.aspx" />
+    <Content Include="Emails\Reset_Password.aspx" />
+    <Content Include="Emails\Invite_Manage_User.aspx" />
     <Content Include="Emails\AccountVerify.aspx" />
+    <Content Include="Emails\Picture_poll_approved.aspx" />
+    <Content Include="Emails\Display_Ad_Approved.aspx" />
+    <Content Include="Emails\Video_Ad_Approved.aspx" />
+    <Content Include="Emails\subscription_created.aspx" />
     <Content Include="Emails\Video_Performance.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -1293,6 +1367,7 @@
     <Content Include="Images\accent.png" />
     <Content Include="Images\ads.png" />
     <Content Include="Images\app-store.png" />
+    <Content Include="Images\Arrow.png" />
     <Content Include="Images\beta.jpg" />
     <Content Include="Images\bullet.png" />
     <Content Include="Images\Cash4ads_logo-circle.png" />
@@ -1326,9 +1401,11 @@
     <Content Include="Images\preview_game.jpg" />
     <Content Include="Images\Red_Bell.png" />
     <Content Include="Images\select_image.jpg" />
+    <Content Include="Images\Share_world.png" />
     <Content Include="Images\Sign_In_Image.png" />
     <Content Include="Images\splaceholder.png" />
     <Content Include="Images\standardplaceholder.png" />
+    <Content Include="Images\StartImage.png" />
     <Content Include="Images\Tips-Icon-2.png" />
     <Content Include="Images\topbarph.png" />
     <Content Include="Images\White_Arrow.png" />
@@ -3054,6 +3131,7 @@
     <Content Include="Views\Home\HelpCenter.cshtml" />
     <Content Include="Views\Home\ContactUs.cshtml" />
     <Content Include="StripeWebhooks\StripeHandler.ashx" />
+    <Content Include="Views\Account\DeleteAccount.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

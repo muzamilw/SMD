@@ -264,6 +264,7 @@
           <Property Name="PassportNo" Type="nvarchar" MaxLength="150" />
           <Property Name="Title" Type="nvarchar" MaxLength="50" />
           <Property Name="Phone1CodeCountryID" Type="int" />
+          <Property Name="DeleteConfirmationToken" Type="nvarchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="AuditLog">
           <Key>
@@ -2722,6 +2723,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Parameter Name="FromRow" Type="int" Mode="In" />
           <Parameter Name="ToRow" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetRandom3Deal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetRandomPolls" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetRegisteredUserData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Status" Type="int" Mode="In" />
           <Parameter Name="keyword" Type="nvarchar" Mode="In" />
@@ -4245,6 +4248,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
           <EntitySet Name="vw_Notifications" EntityType="DomainModels.vw_Notifications" />
+          <FunctionImport Name="GetRandom3Deal" ReturnType="Collection(DomainModels.GetRandom3Deal_Result)" />
+          <FunctionImport Name="GetRandomPolls" ReturnType="Collection(DomainModels.GetRandomPolls_Result)" />
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -5226,6 +5231,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <NavigationProperty Name="ProfileQuestionUserAnswers" Relationship="DomainModels.FK_ProfileQuestionUserAnswer_AspNetUsers" FromRole="User" ToRole="ProfileQuestionUserAnswer" />
           <Property Name="Phone1CodeCountryID" Type="Int32" />
           <NavigationProperty Name="Country" Relationship="DomainModels.FK_AspNetUsers_Country" FromRole="User" ToRole="Country" />
+          <Property Name="DeleteConfirmationToken" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Type="DomainModels.User" Role="AspNetUser" Multiplicity="1">
@@ -7683,6 +7689,17 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="DealCompany" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DealCity" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
+        <ComplexType Name="GetRandom3Deal_Result">
+          <Property Type="Int64" Name="CouponId" Nullable="false" />
+          <Property Type="String" Name="couponImage1" Nullable="true" />
+          <Property Type="String" Name="CouponTitle" Nullable="true" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="GetRandomPolls_Result">
+          <Property Type="Int64" Name="SQID" Nullable="false" />
+          <Property Type="String" Name="LeftPicturePath" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="RightPicturePath" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="Question" Nullable="true" MaxLength="500" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -8161,6 +8178,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="DomainModels.User">
               <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="DeleteConfirmationToken" ColumnName="DeleteConfirmationToken" />
                 <ScalarProperty Name="Phone1CodeCountryID" ColumnName="Phone1CodeCountryID" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="PassportNo" ColumnName="PassportNo" />
@@ -9720,6 +9738,25 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetRandom3Deal" FunctionName="SMDModel.Store.GetRandom3Deal">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.GetRandom3Deal_Result">
+                <ScalarProperty Name="CouponId" ColumnName="CouponId" />
+                <ScalarProperty Name="couponImage1" ColumnName="couponImage1" />
+                <ScalarProperty Name="CouponTitle" ColumnName="CouponTitle" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetRandomPolls" FunctionName="SMDModel.Store.GetRandomPolls">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.GetRandomPolls_Result">
+                <ScalarProperty Name="SQID" ColumnName="SQID" />
+                <ScalarProperty Name="LeftPicturePath" ColumnName="LeftPicturePath" />
+                <ScalarProperty Name="RightPicturePath" ColumnName="RightPicturePath" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

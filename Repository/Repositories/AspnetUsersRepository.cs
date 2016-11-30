@@ -92,6 +92,13 @@ namespace SMD.Repository.Repositories
         }
 
 
+        public User GetUserbyCompanyId(int CompanyId)
+        {
+            db.Configuration.LazyLoadingEnabled = false;
+            return db.Users.Where(g => g.CompanyId == CompanyId).SingleOrDefault();
+        }
+
+
       
 
         #endregion

@@ -399,6 +399,32 @@ namespace SMD.MIS.Controllers
             return View("Error");
         }
 
+
+        //
+        // GET: /Account/ConfirmEmail
+        [AllowAnonymous]
+        public async Task<ActionResult> DeleteAccount(string userId, string code)
+        {
+            //code = HttpUtility.UrlDecode(code);
+            if (userId == null || code == null)
+            {
+                return View("Error");
+            }
+          
+            if (userService.Archive(userId, code))
+            {
+                return View();
+            }
+            else
+            {
+
+                ViewBag.error = "Account not deleted due to an error. please contact info@cash4ads.com ";
+                return View();
+            }
+
+            return View("Error");
+        }
+
         //
         // GET: /Account/ForgotPassword
         [AllowAnonymous]
@@ -429,7 +455,7 @@ namespace SMD.MIS.Controllers
                     protocol: Request.Url.Scheme);
                 await
                     emailManagerService.SendPasswordResetLinkEmail(user, 
-                        "<a href=\"" + callbackUrl + "\">link</a>");
+                        callbackUrl);
                 ViewBag.Link = callbackUrl;
                 return View("ForgotPasswordConfirmation");
             }

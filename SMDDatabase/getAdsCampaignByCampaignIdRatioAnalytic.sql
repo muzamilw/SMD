@@ -1,5 +1,6 @@
-﻿GO
-/****** Object:  StoredProcedure [dbo].[getAdsCampaignByCampaignIdRatioAnalytic]    Script Date: 10/24/2016 8:51:46 PM ******/
+﻿USE [SMDv2]
+GO
+/****** Object:  StoredProcedure [dbo].[getAdsCampaignByCampaignIdRatioAnalytic]    Script Date: 11/25/2016 4:44:27 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -31,7 +32,7 @@ IF @DateRange = 2
 
 		
 		
-		Select 'Reward Click' label, count(acr.CampaignID) value
+		Select 'Answered' label, count(acr.CampaignID) value
 		from AdCampaignResponse acr
 		where acr.CreatedDateTime >= @dateFrom and acr.CreatedDateTime <= getdate() and acr.ResponseType = 3 and acr.CampaignID = @Id
 		union 
