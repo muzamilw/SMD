@@ -195,6 +195,7 @@ define("ads/ads.viewModel",
                 isPreviousQuizQuestionsUsed = ko.observable(false),
                 QQStatsAnalytics = ko.observable(),
                 SelectedItemAnalytics = ko.observable(),
+                hasImpression = ko.observable(false),
 				openAdvertiserDashboardScreen = function (Campaign) {
 
 				    if (!isNewCampaign()) {
@@ -331,6 +332,17 @@ define("ads/ads.viewModel",
 				                CampaignROItblAnalyticData.removeAll();
 				                ko.utils.arrayPushAll(CampaignROItblAnalyticData(), data.ROItbl);
 				                CampaignROItblAnalyticData.valueHasMutated();
+				                if ((selecteddateRangeAnalytics() == 1 && CampaignTblAnalyticsData()[0].C30_days > 0) || (selecteddateRangeAnalytics() == 2 && CampaignTblAnalyticsData()[0].All_time > 0)) {
+
+				                    hasImpression(true);
+                                    
+				                    var browsersChart = Morris.Donut({
+				                        element: 'donutId',
+                                        data: CampaignRatioAnalyticData() , colors: ['green', 'blue', 'orange']
+				                    });
+                                } else {
+				                    hasImpression(false);
+				                }
 				            }
 
 				        },
@@ -3735,7 +3747,8 @@ define("ads/ads.viewModel",
                     SelectedItemAnalytics: SelectedItemAnalytics,
                     isProfileQuestionUsed: isProfileQuestionUsed,
                     isPollQuestionsQuestionUsed: isPollQuestionsQuestionUsed,
-                    isPreviousQuizQuestionsUsed: isPreviousQuizQuestionsUsed
+                    isPreviousQuizQuestionsUsed: isPreviousQuizQuestionsUsed,
+                    hasImpression: hasImpression
                 };
             })()
         };
