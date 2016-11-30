@@ -339,10 +339,29 @@ define("ads/ads.viewModel",
 
 				                    hasImpression(true);
                                     
-				                    var browsersChart = Morris.Donut({
+				                    var DonutChart = Morris.Donut({
 				                        element: 'donutId',
                                         data: CampaignRatioAnalyticData() , colors: ['green', 'blue', 'orange']
 				                    });
+				                    var BarChart1 = Morris.Bar({
+				                        element: 'AgeBarChartId',
+				                        data: AdsCampaignAnalyticsData() ,
+				                        xkey: 'Granual', ykeys: ['openStats', 'Stats'], labels: ['Total Impressions', 'Skipped'],
+				                        parseTime:false, setAxisAlignFirstX: true,
+				                        barColors: ['green', 'blue', 'orange']
+				                    });
+				                    var BarChart2 = Morris.Bar({
+				                        element: 'GenderBarChartId',
+				                        data: AdsCampaignAnalyticsData(),
+				                        xkey: 'Granual', ykeys: ['openStats', 'Stats'], labels: ['male', 'female'],
+				                        parseTime: false, setAxisAlignFirstX: true,
+				                        barColors: ['green', 'blue']
+				                    });
+
+
+
+
+				                     
                                 } else {
 				                    hasImpression(false);
 				                }
@@ -3851,13 +3870,10 @@ define("ads/ads.viewModel",
                     isProfileQuestionUsed: isProfileQuestionUsed,
                     isPollQuestionsQuestionUsed: isPollQuestionsQuestionUsed,
                     isPreviousQuizQuestionsUsed: isPreviousQuizQuestionsUsed,
-<<<<<<< HEAD
-                    hasImpression: hasImpression
-=======
+                    hasImpression: hasImpression,
                     isAdSearch:isAdSearch,
                     CurrentMode: CurrentMode,
                     islblText: islblText
->>>>>>> c3cb6c8131298622098a3ff4b5a467c71467d266
                 };
             })()
         };

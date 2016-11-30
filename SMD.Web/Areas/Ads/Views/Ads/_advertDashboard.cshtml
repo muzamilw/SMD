@@ -189,11 +189,11 @@
 
                             </table>
                         </div>
-                       
+
                         <div class="row" data-bind="visible: $root.isProfileQuestionUsed()">
                             <br />
                             <br />
-                             <span class="filterH">
+                            <span class="filterH">
                                 Profile Question
                             </span>
                             <br />
@@ -207,12 +207,12 @@
 
                             </table>
                         </div>
-                      
+
 
                         <div class="row" data-bind="visible: $root.isPreviousQuizQuestionsUsed()">
                             <br />
                             <br />
-                             <span class="filterH">
+                            <span class="filterH">
                                 Previous Quiz Questions used in campaign
                             </span>
                         </div>
@@ -222,11 +222,11 @@
                                 <!-- /ko -->
                             </table>
                         </div>
-                       
+
                         <div class="row" data-bind="visible: $root.isPollQuestionsQuestionUsed()">
                             <br />
                             <br />
-                             <span class="filterH">
+                            <span class="filterH">
                                 Poll Questions
                             </span>
                         </div>
@@ -243,11 +243,44 @@
 
 
             </div>
-            <div class="clearfix">
+        </div>
+        <br />
+        <div class="analyticsBox" data-bind="visible:$root.hasImpression">
+            <div class="row">
+                <div class="col-lg-12">
+                    <label class="analyticH2"> Per Age Group.....</label>
+                </div>
             </div>
-            <div class="clearfix">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class=" margin10">
+                        <div id="AgeBarChartId" style="height:150px;" ></div>
+                    </div>
+                </div>
+
             </div>
         </div>
+        <br />
+        <div class="analyticsBox" data-bind="visible:$root.hasImpression">
+            <div class="row">
+                <div class="col-lg-12">
+                    <label class="analyticH2"> Per Gender.....</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class=" margin10">
+                        <div style="height:150px;" id="GenderBarChartId"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+            <div class="clearfix">
+            </div>
+            <div class="clearfix">
+            </div>
+        
     </div>
 </div>
 <script id="SurvayQuestionDataTemplate" type="text/html">

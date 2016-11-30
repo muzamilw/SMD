@@ -117,12 +117,9 @@ define("survey/survey.viewModel",
                 CampaignStatusDropDown = ko.observableArray([{ id: 1, name: "Answered" }, { id: 2, name: "Skipped" }]),
                 CampaignRatioAnalyticData = ko.observable(1),
                 isflageClose = ko.observable(false),
-<<<<<<< HEAD
                 hasImpression = ko.observable(false),
-=======
                 isPollSearch = ko.observable(false),
                 islblText = ko.observable(false),
->>>>>>> c3cb6c8131298622098a3ff4b5a467c71467d266
                 getDDAnalytic = function () { },
                 openAdvertiserDashboardPollScreen = function () {
                     if (!IsnewSurvey()) {
@@ -2397,9 +2394,7 @@ define("survey/survey.viewModel",
                     selectedAgeAnalytics: selectedAgeAnalytics,
                     getDDAnalytic: getDDAnalytic,
                     DDStatsAnalytics: DDStatsAnalytics,
-<<<<<<< HEAD
-                    hasImpression: hasImpression
-=======
+                    hasImpression: hasImpression, 
                     isPollSearch: isPollSearch,
                     islblText: islblText,
                     leftPollImg1: leftPollImg1,
@@ -2411,7 +2406,6 @@ define("survey/survey.viewModel",
                     pollQuestion1: pollQuestion1,
                     pollQuestion2: pollQuestion2,
                     pollQuestion3: pollQuestion3
->>>>>>> c3cb6c8131298622098a3ff4b5a467c71467d266
                 };
             })()
         };

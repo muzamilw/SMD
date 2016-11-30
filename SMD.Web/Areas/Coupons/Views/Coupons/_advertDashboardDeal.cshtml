@@ -1,129 +1,190 @@
-﻿         <div data-bind="visible: $root.isAdvertdashboardDealVisible()" style="display: none;padding-left:0px;" class=" col-lg-12 form-horizontal" >
-             <div class="main-box main-box-subpage">
-                 <div class="row">
-                     <span class="charts_label" style="margin-left: 16px;">Charts &amp; Analytics</span>
-                     <div id="roor_panel" style="margin-top:11px;">
-                         <div class="col-lg-6 adsubHeading Theme_standard_clr borderbtmline" style="padding-bottom:10px;padding-left:16px;" >
-                             Group timeline
-                         </div>
-                         <div class="col-lg-3 adsubHeading Theme_standard_clr borderbtmline" style="padding-bottom:10px; padding-left:16px;">
-                             <label class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Date range </label>
-                         </div>
-                         <div class="col-lg-3 adsubHeading Theme_standard_clr borderbtmline" style="padding-bottom:2px; padding-left:16px;">
-                             <select class="form-control" id="ddDateRangeDropDown" data-bind="options: $root.DateRangeDropDown, optionsText: 'name', optionsValue: 'id', value:$root.selecteddateRangeAnalytics, event: { change: $root.getDealsAnalytics }"></select>
-                         </div>
+﻿<div data-bind="visible: $root.isAdvertdashboardDealVisible()" style="display: none;padding-left:0px;" class=" col-lg-12 form-horizontal">
+    <div class="main-box main-box-subpage">
+        <div class="row">
+            <span class="charts_label" style="margin-left: 16px;">Charts &amp; Analytics</span>
+            <div id="roor_panel" style="margin-top:11px;">
+                <div class="col-lg-6 adsubHeading Theme_standard_clr borderbtmline" style="padding-bottom:10px;padding-left:16px;">
+                    Group timeline
+                </div>
+                <div class="col-lg-3 adsubHeading Theme_standard_clr borderbtmline" style="padding-bottom:10px; padding-left:16px;">
+                    <label class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Date range </label>
+                </div>
+                <div class="col-lg-3 adsubHeading Theme_standard_clr borderbtmline" style="padding-bottom:2px; padding-left:16px;">
+                    <select class="form-control" id="ddDateRangeDropDown" data-bind="options: $root.DateRangeDropDown, optionsText: 'name', optionsValue: 'id', value:$root.selecteddateRangeAnalytics, event: { change: $root.getDealsAnalytics }"></select>
+                </div>
 
-                     </div>
-
-                     </div>
-                 <div>
-                     <div class="col-lg-7">
-                         </div>
-                         <div class="col-lg-2" style="padding-top:9px;">
-                             <label class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Granularity level </label>
-                         </div>
-                         <div class="col-lg-3">
-                             <select class="form-control margin10 pull-left" id="ddGranularityDropDown" data-bind="options: $root.granularityDropDown, optionsText: 'name', optionsValue: 'id', value:$root.selectedGranularityAnalytics, event: { change: $root.getDealsAnalytics }"></select>
-
-
-                         </div>
-
-                     </div>
-
-                 <div class="row main-box">
-                     <div class="col-lg-12">
-                         <div class=" margin10">
-                             <div style="height:150px;" data-bind="morris: {type: 'Line', data: $root.DealsAnalyticsData, xkey: 'Granual', ykeys: ['openStats', 'ConvrsionStats'], labels: ['Total Impressions', 'Click thru'], yLabelFormat: function(y){return y != Math.round(y)?'':y;} , parseTime:false, setAxisAlignFirstX: true, lineColors: ['blue','green'] }"></div>
-                            
-                         </div>
-                     </div>
-
-                 </div>
-                 <div class="row">
-                     <div class="adsubHeading Theme_standard_clr borderbtmline" style="padding-left:16px;">
-                         <br />
-                         Group campaign by impression vs click-thru
-                     </div>
-                 </div>
-
-                 <div class="row main-box">
-                     <div class="col-lg-3">
-                         <!--ko if: $root.selecteddateRangeAnalytics() == 1 -->
-                         <div >Date range : Last 30 days </div>
-                         <!--/ko-->
-                         <!--ko if: $root.selecteddateRangeAnalytics() == 2 -->
-                         <div >Date range : All time </div>
-                         <!--/ko-->
-                       
-                     </div>
-                     <div class="col-lg-9">
-                        
-                         <div data-bind="morris: {type: 'Donut', data: $root.CampaignRatioAnalyticData, resize:true, colors: ['green', 'blue' ] }" style="width:250px;height:250px;cursor:pointer;"></div>
-                         
-                     </div>
-                     @*<div class="col-lg-5">
-                         <span style="margin-top:70px;">Listing Expiry Date : </span>
-                         <span data-bind="text:$root.dealExpirydate"> </span>
-                     </div>*@
-                 </div>
-                 <div class="row">
-                     <div class="adsubHeading Theme_standard_clr borderbtmline" style="padding-left:16px;">
-                         <br />
-                         Deal Statistics
-                     </div>
-                     <div class="col-lg-12">
-                         Deal Impression
-                     </div>
-                     <div class="col-lg-12">
-                         <table class="targetfiltertbl">
-                             <tr>
-                                 <td class="col-lg-3">Gender : </td>
-                                 <td class="col-lg-3"><select class="form-control" id="ddGDropDown" data-bind="options: $root.GenderAnalyticsData, optionsText: 'name', optionsValue: 'id', value:$root.selectedOGenderAnalytics, event: { change: $root.getDDOAnalytic }"></select></td>
-                                 <td class="col-lg-6">
-                                     = <span data-bind="text: $root.DDOStatsAnalytics"></span>
-                                 </td>
-                             </tr>
-                             <tr>
-                                 <td class="col-lg-3">Age range : </td>
-                                 <td class="col-lg-3"><select class="form-control" id="ddADropDown" data-bind="options: $root.AgeRangeAnalyticsData, optionsText: 'name', optionsValue: 'id', value:$root.selectedOAgeAnalytics, event: { change: $root.getDDOAnalytic }"></select></td>
-                                 <td class="col-lg-6"></td>
-                             </tr>
-
-                         </table>
-                     </div>
-                
-                
-
-                     <div class="col-lg-12">
-                         <br />
-                         <br />
-                         Deal Click thru
-                     </div>
-                     <div class="col-lg-12">
-                         <table class="targetfiltertbl">
-                             <tr>
-                                 <td class="col-lg-3">Gender : </td>
-                                 <td class="col-lg-3"><select class="form-control" id="ddCTGDropDown" data-bind="options: $root.GenderAnalyticsData, optionsText: 'name', optionsValue: 'id', value:$root.selectedCTGenderAnalytics, event: { change: $root.getDDCTAnalytic }"></select></td>
-                                 <td class="col-lg-6">
-                                     = <span data-bind="text: $root.DDCTStatsAnalytics"></span>
-                                 </td>
-                             </tr>
-                             <tr>
-                                 <td class="col-lg-3">Age range : </td>
-                                 <td class="col-lg-3"><select class="form-control" id="ddCTADropDown" data-bind="options: $root.AgeRangeAnalyticsData, optionsText: 'name', optionsValue: 'id', value:$root.selectedCTAgeAnalytics, event: { change: $root.getDDCTAnalytic }"></select></td>
-                                 <td class="col-lg-6"></td>
-                             </tr>
-
-                         </table>
-                     </div>
-                  </div>
-
-                 <div class="clearfix">
-                 </div>
-                 <div class="clearfix">
-                 </div>
-             </div>
+            </div>
 
         </div>
+        <div class="analyticsBox">
+            <div class="col-lg-7">
+            </div>
+            <div class="col-lg-2" style="padding-top:9px;">
+                <label class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Granularity level </label>
+            </div>
+            <div class="col-lg-3">
+                <select class="form-control margin10 pull-left" id="ddGranularityDropDown" data-bind="options: $root.granularityDropDown, optionsText: 'name', optionsValue: 'id', value:$root.selectedGranularityAnalytics, event: { change: $root.getDealsAnalytics }"></select>
+
+
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class=" margin10">
+                        <div style="height:150px;" data-bind="morris: {type: 'Line', data: $root.DealsAnalyticsData, xkey: 'Granual', ykeys: ['openStats', 'ConvrsionStats'], labels: ['Total Impressions', 'Click thru'], yLabelFormat: function(y){return y != Math.round(y)?'':y;} , parseTime:false, setAxisAlignFirstX: true, lineColors: ['blue','green'] }"></div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <br />
+        <div class="analyticsBox" data-bind="visible:$root.hasImpression">
+            <div class="row">
+                <div class="col-lg-12">
+                    <span class="analyticH2 margin10">
+                        Group campaign by impression vs click-thru
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 margin10">
+                    <!--ko if: $root.selecteddateRangeAnalytics() == 1 -->
+                    <div>Date range : Last 30 days </div>
+                    <!--/ko-->
+                    <!--ko if: $root.selecteddateRangeAnalytics() == 2 -->
+                    <div>Date range : All time </div>
+                    <!--/ko-->
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="whiteBox margin10">
+                        <div id="donutId" style="height:230px;cursor:pointer;"></div>
+                    </div>
+                </div>
+                @*<div class="col-lg-5">
+                <span style="margin-top:70px;">Listing Expiry Date : </span>
+                <span data-bind="text:$root.dealExpirydate"> </span>
+            </div>*@
+            </div>
+
+
+        </div>
+        <br />
+        <div class="analyticsBox" data-bind="visible:$root.hasImpression">
+            <div class="row">
+                <div class="col-lg-12">
+                    <span class="analyticH2 margin10">
+                        Deal Statistics
+                    </span>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="lightgrayBox">
+
+                        <div class="row">
+
+                            <span class="filterH">
+                                Deal Impression
+                            </span>
+                        </div>
+                        <div class="row">
+                            <table style="background-color:white;width:95%;">
+                                <tr>
+                                    <td class="col-lg-2" style="text-align: -webkit-right;">Gender : </td>
+                                    <td class="col-lg-3"><select class="form-control" id="ddGDropDown" data-bind="options: $root.GenderAnalyticsData, optionsText: 'name', optionsValue: 'id', value:$root.selectedOGenderAnalytics, event: { change: $root.getDDOAnalytic }"></select></td>
+                                    <td class="col-lg-2" style="text-align: -webkit-right;">Age : </td>
+                                    <td class="col-lg-3"><select class="form-control" id="ddADropDown" data-bind="options: $root.AgeRangeAnalyticsData, optionsText: 'name', optionsValue: 'id', value:$root.selectedOAgeAnalytics, event: { change: $root.getDDOAnalytic }"></select></td>
+
+                                    <td class="col-lg-2 statsbig">
+                                        <span data-bind="text: $root.DDOStatsAnalytics"></span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <br />
+                        <div class="row">
+
+                            <span class="filterH">
+                                Deal Click thru
+                            </span>
+                        </div>
+                        <div class="row">
+                            <table style="background-color:white;width:95%;">
+                                <tr>
+                                    <td class="col-lg-2" style="text-align: -webkit-right;">Gender : </td>
+                                    <td class="col-lg-3"><select class="form-control" id="ddCTGDropDown" data-bind="options: $root.GenderAnalyticsData, optionsText: 'name', optionsValue: 'id', value:$root.selectedCTGenderAnalytics, event: { change: $root.getDDCTAnalytic }"></select></td>
+                                    <td class="col-lg-2" style="text-align: -webkit-right;">Age : </td>
+                                    <td class="col-lg-3"><select class="form-control" id="ddCTADropDown" data-bind="options: $root.AgeRangeAnalyticsData, optionsText: 'name', optionsValue: 'id', value:$root.selectedCTAgeAnalytics, event: { change: $root.getDDCTAnalytic }"></select></td>
+                                    <td class="col-lg-2 statsbig">
+                                        <span data-bind="text: $root.DDCTStatsAnalytics"></span>
+                                    </td>
+
+                                </tr>
+                            </table>
+                        </div>
+
+
+
+                        @*<div class="row">
+
+                                <div class="col-lg-12">
+                                    Deal Impression
+                                </div>
+                                <div class="col-lg-12">
+                                    <table class="targetfiltertbl">
+                                        <tr>
+                                            <td class="col-lg-3">Gender : </td>
+                                            <td class="col-lg-3"><select class="form-control" id="ddGDropDown" data-bind="options: $root.GenderAnalyticsData, optionsText: 'name', optionsValue: 'id', value:$root.selectedOGenderAnalytics, event: { change: $root.getDDOAnalytic }"></select></td>
+                                            <td class="col-lg-6">
+                                                = <span data-bind="text: $root.DDOStatsAnalytics"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-lg-3">Age range : </td>
+                                            <td class="col-lg-3"><select class="form-control" id="ddADropDown" data-bind="options: $root.AgeRangeAnalyticsData, optionsText: 'name', optionsValue: 'id', value:$root.selectedOAgeAnalytics, event: { change: $root.getDDOAnalytic }"></select></td>
+                                            <td class="col-lg-6"></td>
+                                        </tr>
+
+                                    </table>
+                                </div>
+                                <div class="col-lg-12">
+                                    <br />
+                                    <br />
+                                    Deal Click thru
+                                </div>
+                                <div class="col-lg-12">
+                                    <table class="targetfiltertbl">
+                                        <tr>
+                                            <td class="col-lg-3">Gender : </td>
+                                            <td class="col-lg-3"><select class="form-control" id="ddCTGDropDown" data-bind="options: $root.GenderAnalyticsData, optionsText: 'name', optionsValue: 'id', value:$root.selectedCTGenderAnalytics, event: { change: $root.getDDCTAnalytic }"></select></td>
+                                            <td class="col-lg-6">
+                                                = <span data-bind="text: $root.DDCTStatsAnalytics"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-lg-3">Age range : </td>
+                                            <td class="col-lg-3"><select class="form-control" id="ddCTADropDown" data-bind="options: $root.AgeRangeAnalyticsData, optionsText: 'name', optionsValue: 'id', value:$root.selectedCTAgeAnalytics, event: { change: $root.getDDCTAnalytic }"></select></td>
+                                            <td class="col-lg-6"></td>
+                                        </tr>
+
+                                    </table>
+                                </div>
+                            </div>*@
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix">
+            </div>
+            <div class="clearfix">
+            </div>
+        </div>
+    </div>
+
+</div>
 
 
