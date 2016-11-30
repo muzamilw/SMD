@@ -11,7 +11,7 @@
         public int CompanyId { get; set; }
 
         public string CompanyName { get; set; }
-
+        public string CompanyCity { get; set; }
         public string CompanyLogo { get; set; }
         public string UserName { get; set; }
         public string MobileNumber { get; set; }

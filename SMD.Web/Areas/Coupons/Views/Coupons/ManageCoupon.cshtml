@@ -987,14 +987,15 @@ else
                                             </div>
                                             <div class="desc_cont">
                                                 <div class="deal_group_Pice pull-left">
-                                                    <div id="address">asdasdas</div>
-                                                    <div id="city">Lahore</div>
+                                                   
+                                                    <div id="address" data-bind="html:$root.CompanyName()"></div>
+                                                    <div id="city" data-bind="html:$root.CompanyCity()">Lahore</div>
                                                 </div>
                                                 <div class="deal_Pice pull-right">
-                                                    <div class="dis_strike-through pull-left">
+                                                    <div class="dis_strike-through pull-left" data-bind="text:'$root.mCurrencyCode()'+$root.SecondCouponOption()">
                                                         400
                                                     </div>
-                                                    <div class="pull-right">$189</div>
+                                                    <div class="pull-right" data-bind="text:'$root.mCurrencyCode()'+$root.FirstCouponOption()">$189</div>
                                                     <div class="clearfix"></div>
                                                 </div>
                                             </div>

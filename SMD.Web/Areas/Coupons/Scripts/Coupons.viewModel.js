@@ -17,6 +17,9 @@ define("Coupons/Coupons.viewModel",
                     EditorLoading = ko.observable(false),
                     ISshowPhone = ko.observable(false),
                     IsnewCoupon = ko.observable(false),
+                    mCurrencyCode = ko.observable(),
+                    CompanyCity = ko.observable(),
+                    CompanyName = ko.observable(),
                     langs = ko.observableArray([]),
                     diveNo = ko.observable(0),
                     countoryidList = [],
@@ -232,7 +235,8 @@ define("Coupons/Coupons.viewModel",
                             currency = ' (' + data.UserAndCostDetails.CurrencySymbol + ')';
                             UserAndCostDetail(data.UserAndCostDetails);
                             currencyCode(currency);
-                            currencySymbol(data.UserAndCostDetails.CurrencySymbol);
+                            mCurrencyCode(data.UserAndCostDetails.CurrencySymbol);
+                            
 
                             if (data.Currencies != null) {
                                 CurrencyDropDown.removeAll();
@@ -832,7 +836,7 @@ getfreeCouponCount = function () {
 
                 //if other question then
                 if (buyItQuestionLabelStatus() == true) {
-                    debugger;
+                  
                     couponModel().BuyitBtnLabel();
 
                     // couponModel().BuyitBtnLabel(ButItOtherLabel());
@@ -1517,6 +1521,32 @@ getfreeCouponCount = function () {
 
 
                 },
+                FirstCouponOption = ko.computed(function () {
+                    
+                    if (couponModel() != undefined) {
+                        
+                        if (couponModel().CouponPriceOptions() != undefined) {
+                           
+                            if (couponModel().CouponPriceOptions()[0] != undefined) {
+                                
+                                return couponModel().CouponPriceOptions()[0].Price();
+                            }
+                        }
+                    }
+                }, this);
+                SecondCouponOption = ko.computed(function () {
+
+                    if (couponModel() != undefined) {
+
+                        if (couponModel().CouponPriceOptions() != undefined) {
+
+                            if (couponModel().CouponPriceOptions()[0] != undefined) {
+
+                                return couponModel().CouponPriceOptions()[0].Savings();
+                            }
+                        }
+                    }
+                }, this);
                 onRemoveIndustry = function (item) {
                     // Ask for confirmation
 
@@ -2354,18 +2384,19 @@ getfreeCouponCount = function () {
                         ageRange.push({ value: i.toString(), text: text });
                     }
                     companyLogo(gCompanyLogo),
-                    companyName(ComName),
+                    CompanyName(ComName),
                     ageRange.push({ value: 120, text: "80+" });
                     pager(pagination.Pagination({ PageSize: 10 }, campaignGridContent, getAdCampaignGridContent));
                     getAdCampaignGridContent();
                     getCampaignBaseContent();
                     isEditorVisible(false);
                     getRandomDeal();
-
-
-
-
-
+                    if (ComCity != '' && ComCity != null) {
+                        CompanyCity(ComCity);
+                    }
+                    else {
+                        CompanyCity('lahore');
+                    }
 
                 };
                 return {
@@ -2580,6 +2611,11 @@ getfreeCouponCount = function () {
                     dealtitle1: dealtitle1,
                     dealtitle2: dealtitle2,
                     dealtitle3: dealtitle3,
+                    CompanyName: CompanyName,
+                    CompanyCity: CompanyCity,
+                    FirstCouponOption: FirstCouponOption,
+                    SecondCouponOption: SecondCouponOption,
+                    mCurrencyCode: mCurrencyCode
                 };
             })()
         };

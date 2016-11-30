@@ -92,7 +92,7 @@ else
                                     </div>
                                     <br />
                                     <span data-bind="css: $root.previewScreenNumber() == 3  ? 'ads-selected-numbering-text' : '',click: $root.gotoScreen.bind(null,3)">Survey</span>
-                                </div>preview_screen_advtlogoCnt
+                                </div>
                                 @*<div class="pull-left ads-numbering-linebar" data-bind="css: $root.previewScreenNumber() == 6 ? 'ads-selected-numbering-box' : ''">
                                     </div>
                                     <div class="pull-left ads-numbering-main">
@@ -139,7 +139,7 @@ else
                                             <a data-toggle="modal" data-bind="click:$root.openAdvertiserDashboardScreen">
                                                 <div class="ads-numbering-box" style="background:#9690cf;">
                                                     <img src="~/Content/Images/Charts.png" width="20px" />
-                                                </div>preview_screen_advtlogoCnt
+                                                </div>
                                                 <br />
                                                 <span style="color:gainsboro;margin-left:6px;">Charts</span>
                                             </a>
@@ -724,7 +724,7 @@ else
                                     <div class="form-group margin-btm26">
                                         <div class="col-lg-2">
                                             <label for="txtCountries" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Target country</label>
-                                        </divpreview_screen_advtlogoCnt>
+                                        </div>
                                         <div class="col-lg-7">
                                             <div id="coun_token_cnt">
                                                 <!--ko if:$root.selectedQuestionCountryList().length ==  0 -->
@@ -3350,10 +3350,8 @@ else
                             &nbsp;
                         </div>
                         <div class="preview_screen_advtlogoCnt">
-                        <img style="width: 70px;margin-top:2px;" data-bind="visible: $root.campaignModel().VoucherImagePath() == ''" src="/Content/Images/Company_Default.png" />
-                        <img style="width: 70px;margin-top:2px;" data-bind="visible: $root.campaignModel().VoucherImagePath() != '' ,attr: { src: $root.campaignModel().VoucherImagePath }" />
-                            <img style="width: 70px;    margin-top: 2px;" data-bind="visible: $root.campaignModel().VoucherImagePath() == ''" src="/Content/Images/Company_Default.png" />
-                            <img style="width: 70px;    margin-top: 2px;" data-bind="visible: $root.campaignModel().VoucherImagePath() != '' ,attr: { src: $root.campaignModel().VoucherImagePath }" />
+                            <img style="width: 70px;margin-top: 2px;" data-bind="visible: $root.campaignModel().VoucherImagePath() == ''" src="/Content/Images/Company_Default.png" />
+                            <img style="width: 70px;margin-top: 2px;" data-bind="visible: $root.campaignModel().VoucherImagePath() != '' ,attr: { src: $root.campaignModel().VoucherImagePath }" />
                         </div>
                     </div>
                     <div class="clearfix">

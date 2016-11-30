@@ -5825,12 +5825,12 @@ background-image: url(/Images/crowdcentz_logo.png) !important;
 .deals_panel_des {
     color:#bdbdbd;
     font-size:12px;
-    padding-top:14px;
+    padding-top:6px;
     border-bottom:1px solid grey;
-    height:80px;
+    height:67px;
 }
 .desc_cont {
-    margin-top:7px;
+    
     padding-left:10px;
     padding-right:10px;
 }
