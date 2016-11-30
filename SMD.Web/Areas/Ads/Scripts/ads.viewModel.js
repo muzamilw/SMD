@@ -876,30 +876,113 @@ define("ads/ads.viewModel",
             submitCampaignData = function () {
                 //if (campaignModel().isValid()) {
                 if (ValidateCampaign(2)) {
-                    if (UserAndCostDetail().Status == null || UserAndCostDetail().Status == 0) {
-                        confirmation.showOKpopupforinfo();
-                        return;
+                   
 
-                    }
-                    else {
-                        if (UserAndCostDetail().IsSpecialAccount == true) {
-                            campaignModel().ClickRate(0);
-                            saveCampaign(2);
+                        if (UserAndCostDetail().Status == null || UserAndCostDetail().Status == 0) {
+                            confirmation.showOKpopupforinfo();
+                            return;
+
                         }
                         else {
-                            if (UserAndCostDetail().isStripeIntegrated == false) {
+                            if (UserAndCostDetail().IsSpecialAccount == true) {
+                                campaignModel().ClickRate(0);
+                                if (campaignModel().IsUseFilter() == 0) {
+                                    campaignModel().AdCampaignTargetLocations.removeAll();
+                                    campaignModel().AdCampaignTargetCriterias.removeAll();
+                                    campaignModel().AgeRangeEnd(80);
+                                    campaignModel().AgeRangeStart(13);
+                                    campaignModel().Gender('1');
+                                    campaignModel().IsUseFilter('0');
+                                }
+                                else {
+                                    campaignModel().IsUseFilter('1');
+                                }
+                                if (campaignModel().IsUseFilter() == 0) {
 
-                                stripeChargeCustomer.show(function () {
-                                    UserAndCostDetail().isStripeIntegrated = true;
+                                    toastr.error("No Target Match.");
+                                }
+                                else {
+                                    if (campaignModel().IsUseFilter() == 1) {
+
+                                        campaignModel().IsUseFilter(true);
+                                    }
+                                    else {
+                                        campaignModel().IsUseFilter(false);
+                                    }
                                     saveCampaign(2);
-                                }, 2000, 'Enter your details');
+                                }
+                            }
+                            else {
+                                if (UserAndCostDetail().isStripeIntegrated == false) {
+
+                                    stripeChargeCustomer.show(function () {
+                                        UserAndCostDetail().isStripeIntegrated = true;
 
 
-                            } else {
-                                saveCampaign(2);
+                                        if (campaignModel().IsUseFilter() == 0) {
+
+
+                                            campaignModel().AdCampaignTargetLocations.removeAll();
+                                            campaignModel().AdCampaignTargetCriterias.removeAll();
+                                            campaignModel().AgeRangeEnd(80);
+                                            campaignModel().AgeRangeStart(13);
+                                            campaignModel().Gender('1');
+                                            campaignModel().IsUseFilter('0');
+
+                                        }
+                                        else {
+                                            campaignModel().IsUseFilter('1');
+                                        }
+                                        if (campaignModel().IsUseFilter() == 0) {
+
+                                            toastr.error("No Target Match.");
+                                        }
+                                        else {
+                                            if (campaignModel().IsUseFilter() == 1) {
+
+                                                campaignModel().IsUseFilter(true);
+                                            }
+                                            else {
+                                                campaignModel().IsUseFilter(false);
+                                            }
+                                            saveCampaign(2);
+                                        }
+                                    }, 2000, 'Enter your details');
+
+
+                                } else {
+                                    if (campaignModel().IsUseFilter() == 0) {
+
+
+                                        campaignModel().AdCampaignTargetLocations.removeAll();
+                                        campaignModel().AdCampaignTargetCriterias.removeAll();
+                                        campaignModel().AgeRangeEnd(80);
+                                        campaignModel().AgeRangeStart(13);
+                                        campaignModel().Gender('1');
+                                        campaignModel().IsUseFilter('0');
+
+                                    }
+                                    else {
+                                        campaignModel().IsUseFilter('1');
+                                    }
+                                    if (campaignModel().IsUseFilter() == 0) {
+
+                                        toastr.error("No Target Match.");
+                                    }
+                                    else {
+                                        if (campaignModel().IsUseFilter() == 1) {
+
+                                            campaignModel().IsUseFilter(true);
+                                        }
+                                        else {
+                                            campaignModel().IsUseFilter(false);
+                                        }
+                                        saveCampaign(2);
+                                    }
+                                }
                             }
                         }
-                    }
+                    
 
                 }
                 else {
@@ -959,7 +1042,35 @@ define("ads/ads.viewModel",
                 },
                 SaveDraftCampaign = function () {
                     if (ValidateCampaign(1)) {
-                        saveCampaign(1);
+
+                        if (campaignModel().IsUseFilter() == 0) {
+
+
+                            campaignModel().AdCampaignTargetLocations.removeAll();
+                            campaignModel().AdCampaignTargetCriterias.removeAll();
+                            campaignModel().AgeRangeEnd(80);
+                            campaignModel().AgeRangeStart(13);
+                            campaignModel().Gender('1');
+                            campaignModel().IsUseFilter('0');
+
+                        }
+                        else {
+                            campaignModel().IsUseFilter('1');
+                        }
+                        if (campaignModel().IsUseFilter() == 0) {
+
+                            toastr.error("No Target Match.");
+                        }
+                        else {
+                            if (campaignModel().IsUseFilter() == 1) {
+
+                                campaignModel().IsUseFilter(true);
+                            }
+                            else {
+                                campaignModel().IsUseFilter(false);
+                            }
+                            saveCampaign(1);
+                        }
                     }
                     else {
                         if (errorListNew().length > 0) {
@@ -1124,36 +1235,8 @@ define("ads/ads.viewModel",
 
                 }
 
-                campaignModel().Status(mode);
+                 campaignModel().Status(mode);
 
-                if (campaignModel().IsUseFilter() == 0) {
-
-
-                    campaignModel().AdCampaignTargetLocations.removeAll();
-                    campaignModel().AdCampaignTargetCriterias.removeAll();
-                    campaignModel().AgeRangeEnd(80);
-                    campaignModel().AgeRangeStart(13);
-                    campaignModel().Gender('1');
-                    campaignModel().IsUseFilter('0');
-
-                }
-                else {
-                    campaignModel().IsUseFilter('1');
-                }
-
-                if (campaignModel().IsUseFilter() == 0) {
-
-                    toastr.error("No Target Match.");
-                }
-                else {
-
-                    if (campaignModel().IsUseFilter() == 1) {
-
-                        campaignModel().IsUseFilter(true);
-                    }
-                    else {
-                        campaignModel().IsUseFilter(false);
-                    }
                     var campignServerObj = campaignModel().convertToServerData();
 
                     dataservice.addCampaignData(campignServerObj, {
@@ -1182,7 +1265,7 @@ define("ads/ads.viewModel",
                             $("#topArea").css("display", "block");
                         }
                     });
-                }
+                
             },
 
                 // Add new profile Criteria

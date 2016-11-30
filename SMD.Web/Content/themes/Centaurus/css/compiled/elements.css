@@ -5820,6 +5820,7 @@ background-image: url(/Images/crowdcentz_logo.png) !important;
     font-size:14px;
     padding-left:13px;
     color:#585858;
+    font-weight:bold;
 }
 
 .deals_panel_des {
@@ -5852,5 +5853,5 @@ background-image: url(/Images/crowdcentz_logo.png) !important;
     color:black;text-decoration:line-through;font-size:11px;text-align:left;
     margin-right: 9px;
     margin-top: 4px;
-
+    font-weight:bold;
 }

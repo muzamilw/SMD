@@ -991,13 +991,15 @@ else
                                                     <div id="address" data-bind="html:$root.CompanyName()"></div>
                                                     <div id="city" data-bind="html:$root.CompanyCity()">Lahore</div>
                                                 </div>
+                                                
                                                 <div class="deal_Pice pull-right">
-                                                    <div class="dis_strike-through pull-left" data-bind="text:'$root.mCurrencyCode()'+$root.SecondCouponOption()">
+                                                    <div class="dis_strike-through pull-left" data-bind="text:$root.SecondCouponOption()">
                                                         400
                                                     </div>
-                                                    <div class="pull-right" data-bind="text:'$root.mCurrencyCode()'+$root.FirstCouponOption()">$189</div>
+                                                    <div class="pull-right" style="font-weight:bold;" data-bind="text:$root.FirstCouponOption()">$189</div>
                                                     <div class="clearfix"></div>
                                                 </div>
+                                                
                                             </div>
                                             <div class="clearfix"></div>
                                         </div>

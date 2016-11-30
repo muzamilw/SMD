@@ -1526,13 +1526,18 @@ getfreeCouponCount = function () {
                     if (couponModel() != undefined) {
                         
                         if (couponModel().CouponPriceOptions() != undefined) {
-                           
+
                             if (couponModel().CouponPriceOptions()[0] != undefined) {
-                                
-                                return couponModel().CouponPriceOptions()[0].Price();
+
+                                if (couponModel().CouponPriceOptions()[0].Price() != undefined) {
+                                    return mCurrencyCode() + '' + couponModel().CouponPriceOptions()[0].Price();
+                                }
+                              
+                            } 
                             }
                         }
-                    }
+                        
+                    
                 }, this);
                 SecondCouponOption = ko.computed(function () {
 
@@ -1542,9 +1547,12 @@ getfreeCouponCount = function () {
 
                             if (couponModel().CouponPriceOptions()[0] != undefined) {
 
-                                return couponModel().CouponPriceOptions()[0].Savings();
+                                if (couponModel().CouponPriceOptions()[0].Savings() != undefined) {
+                                    return mCurrencyCode() + '' + couponModel().CouponPriceOptions()[0].Savings();
+                                }
                             }
                         }
+
                     }
                 }, this);
                 onRemoveIndustry = function (item) {
