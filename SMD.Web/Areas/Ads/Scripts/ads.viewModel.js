@@ -15,6 +15,7 @@ define("ads/ads.viewModel",
                     isEditorVisible = ko.observable(false),
                     isClickRateVisible = ko.observable(null),
                     IsthisEditCamapiagn = ko.observable(false),
+                    CurrentMode = ko.observable(0),
                     CompanyLogo = ko.observable(''),
                     IsBroadMarketing = ko.observable(true),
                     buyItQuestionStatus = ko.observable(false),
@@ -71,7 +72,9 @@ define("ads/ads.viewModel",
                     lbllSecondLine = ko.observable("Second Line"),
                     lblCampaignSchedule = ko.observable("Schedule"),
                     campaignTypePlaceHolderValue = ko.observable('Enter in the YouTube video link'),
-                //
+                    isAdSearch = ko.observable(false),
+                    islblText = ko.observable(false),
+            
                     isEditCampaign = ko.observable(false),
                     canSubmitForApproval = ko.observable(true),
                     isNewCampaignVisible = ko.observable(false),
@@ -441,6 +444,22 @@ define("ads/ads.viewModel",
                                 campaignGridContent.push(model.Campaign.Create(updateCampaignGridItem(item)));
                             });
                             pager().totalCount(data.TotalCount);
+                            if (data.TotalCount == 0) {
+                                isAdSearch(true);
+                                islblText(true);
+                            }
+                            else if (data.TotalCount == 1) {
+                                isAdSearch(true);
+                                islblText(false);
+                            }
+                            else if (data.TotalCount > 1 && data.TotalCount <= 4) {
+                                isAdSearch(true);
+                                islblText(false);
+                            }
+                            else {
+                                isAdSearch(false);
+                                islblText(false);
+                            }
 
                             //  LoadAnswers();
                         }
@@ -875,30 +894,113 @@ define("ads/ads.viewModel",
             submitCampaignData = function () {
                 //if (campaignModel().isValid()) {
                 if (ValidateCampaign(2)) {
-                    if (UserAndCostDetail().Status == null || UserAndCostDetail().Status == 0) {
-                        confirmation.showOKpopupforinfo();
-                        return;
+                   
 
-                    }
-                    else {
-                        if (UserAndCostDetail().IsSpecialAccount == true) {
-                            campaignModel().ClickRate(0);
-                            saveCampaign(2);
+                        if (UserAndCostDetail().Status == null || UserAndCostDetail().Status == 0) {
+                            confirmation.showOKpopupforinfo();
+                            return;
+
                         }
                         else {
-                            if (UserAndCostDetail().isStripeIntegrated == false) {
+                            if (UserAndCostDetail().IsSpecialAccount == true) {
+                                campaignModel().ClickRate(0);
+                                if (campaignModel().IsUseFilter() == 0) {
+                                    campaignModel().AdCampaignTargetLocations.removeAll();
+                                    campaignModel().AdCampaignTargetCriterias.removeAll();
+                                    campaignModel().AgeRangeEnd(80);
+                                    campaignModel().AgeRangeStart(13);
+                                    campaignModel().Gender('1');
+                                    campaignModel().IsUseFilter('0');
+                                }
+                                else {
+                                    campaignModel().IsUseFilter('1');
+                                }
+                                if (campaignModel().IsUseFilter() == 0) {
 
-                                stripeChargeCustomer.show(function () {
-                                    UserAndCostDetail().isStripeIntegrated = true;
+                                    toastr.error("No Target Match.");
+                                }
+                                else {
+                                    if (campaignModel().IsUseFilter() == 1) {
+
+                                        campaignModel().IsUseFilter(true);
+                                    }
+                                    else {
+                                        campaignModel().IsUseFilter(false);
+                                    }
                                     saveCampaign(2);
-                                }, 2000, 'Enter your details');
+                                }
+                            }
+                            else {
+                                if (UserAndCostDetail().isStripeIntegrated == false) {
+
+                                    stripeChargeCustomer.show(function () {
+                                        UserAndCostDetail().isStripeIntegrated = true;
 
 
-                            } else {
-                                saveCampaign(2);
+                                        if (campaignModel().IsUseFilter() == 0) {
+
+
+                                            campaignModel().AdCampaignTargetLocations.removeAll();
+                                            campaignModel().AdCampaignTargetCriterias.removeAll();
+                                            campaignModel().AgeRangeEnd(80);
+                                            campaignModel().AgeRangeStart(13);
+                                            campaignModel().Gender('1');
+                                            campaignModel().IsUseFilter('0');
+
+                                        }
+                                        else {
+                                            campaignModel().IsUseFilter('1');
+                                        }
+                                        if (campaignModel().IsUseFilter() == 0) {
+
+                                            toastr.error("No Target Match.");
+                                        }
+                                        else {
+                                            if (campaignModel().IsUseFilter() == 1) {
+
+                                                campaignModel().IsUseFilter(true);
+                                            }
+                                            else {
+                                                campaignModel().IsUseFilter(false);
+                                            }
+                                            saveCampaign(2);
+                                        }
+                                    }, 2000, 'Enter your details');
+
+
+                                } else {
+                                    if (campaignModel().IsUseFilter() == 0) {
+
+
+                                        campaignModel().AdCampaignTargetLocations.removeAll();
+                                        campaignModel().AdCampaignTargetCriterias.removeAll();
+                                        campaignModel().AgeRangeEnd(80);
+                                        campaignModel().AgeRangeStart(13);
+                                        campaignModel().Gender('1');
+                                        campaignModel().IsUseFilter('0');
+
+                                    }
+                                    else {
+                                        campaignModel().IsUseFilter('1');
+                                    }
+                                    if (campaignModel().IsUseFilter() == 0) {
+
+                                        toastr.error("No Target Match.");
+                                    }
+                                    else {
+                                        if (campaignModel().IsUseFilter() == 1) {
+
+                                            campaignModel().IsUseFilter(true);
+                                        }
+                                        else {
+                                            campaignModel().IsUseFilter(false);
+                                        }
+                                        saveCampaign(2);
+                                    }
+                                }
                             }
                         }
-                    }
+                    
 
                 }
                 else {
@@ -958,7 +1060,35 @@ define("ads/ads.viewModel",
                 },
                 SaveDraftCampaign = function () {
                     if (ValidateCampaign(1)) {
-                        saveCampaign(1);
+
+                        if (campaignModel().IsUseFilter() == 0) {
+
+
+                            campaignModel().AdCampaignTargetLocations.removeAll();
+                            campaignModel().AdCampaignTargetCriterias.removeAll();
+                            campaignModel().AgeRangeEnd(80);
+                            campaignModel().AgeRangeStart(13);
+                            campaignModel().Gender('1');
+                            campaignModel().IsUseFilter('0');
+
+                        }
+                        else {
+                            campaignModel().IsUseFilter('1');
+                        }
+                        if (campaignModel().IsUseFilter() == 0) {
+
+                            toastr.error("No Target Match.");
+                        }
+                        else {
+                            if (campaignModel().IsUseFilter() == 1) {
+
+                                campaignModel().IsUseFilter(true);
+                            }
+                            else {
+                                campaignModel().IsUseFilter(false);
+                            }
+                            saveCampaign(1);
+                        }
                     }
                     else {
                         if (errorListNew().length > 0) {
@@ -1123,36 +1253,8 @@ define("ads/ads.viewModel",
 
                 }
 
-                campaignModel().Status(mode);
+                 campaignModel().Status(mode);
 
-                if (campaignModel().IsUseFilter() == 0) {
-
-
-                    campaignModel().AdCampaignTargetLocations.removeAll();
-                    campaignModel().AdCampaignTargetCriterias.removeAll();
-                    campaignModel().AgeRangeEnd(80);
-                    campaignModel().AgeRangeStart(13);
-                    campaignModel().Gender('1');
-                    campaignModel().IsUseFilter('0');
-
-                }
-                else {
-                    campaignModel().IsUseFilter('1');
-                }
-
-                if (campaignModel().IsUseFilter() == 0) {
-
-                    toastr.error("No Target Match.");
-                }
-                else {
-
-                    if (campaignModel().IsUseFilter() == 1) {
-
-                        campaignModel().IsUseFilter(true);
-                    }
-                    else {
-                        campaignModel().IsUseFilter(false);
-                    }
                     var campignServerObj = campaignModel().convertToServerData();
 
                     dataservice.addCampaignData(campignServerObj, {
@@ -1181,7 +1283,7 @@ define("ads/ads.viewModel",
                             $("#topArea").css("display", "block");
                         }
                     });
-                }
+                
             },
 
                 // Add new profile Criteria
@@ -3457,7 +3559,8 @@ define("ads/ads.viewModel",
 
                 // Initialize the view model
                 initialize = function (specifiedView) {
-
+                  
+                    CurrentMode(mode);
                     if (mode == 4) {
                         MainHeading("Sponsor an app ‘brain game’.");
                         SubHeading("Reward audiences 50% of your ‘ad click’Drive people to your web site, ask a reinforcing question and show your deals –All for one ‘ad click’ fee.");
@@ -3735,7 +3838,10 @@ define("ads/ads.viewModel",
                     SelectedItemAnalytics: SelectedItemAnalytics,
                     isProfileQuestionUsed: isProfileQuestionUsed,
                     isPollQuestionsQuestionUsed: isPollQuestionsQuestionUsed,
-                    isPreviousQuizQuestionsUsed: isPreviousQuizQuestionsUsed
+                    isPreviousQuizQuestionsUsed: isPreviousQuizQuestionsUsed,
+                    isAdSearch:isAdSearch,
+                    CurrentMode: CurrentMode,
+                    islblText: islblText
                 };
             })()
         };

@@ -767,7 +767,7 @@ namespace SMD.MIS.Controllers
                 var companyrec = companyService.GetCompanyById(company.companyid);
 
 
-                return RedirectToAction("SetCompany", "Account", new { CompanyId = company.companyid, Role = company.RoleName, CompanyName = company.CompanyName, CompanyLogo = companyrec.Logo, RoleId = company.RoleId });
+                return RedirectToAction("SetCompany", "Account", new { CompanyId = company.companyid, Role = company.RoleName, CompanyName = company.CompanyName, companyrec.City, CompanyLogo = companyrec.Logo, RoleId = company.RoleId });
             }
             else
             {
@@ -777,7 +777,7 @@ namespace SMD.MIS.Controllers
 
 
          [HttpGet]
-         public async Task<ActionResult> SetCompany(string CompanyId, string Role, string CompanyName, string CompanyLogo, string RoleId)
+         public async Task<ActionResult> SetCompany(string CompanyId, string Role, string CompanyName, string CompanyCity, string CompanyLogo, string RoleId)
          {
              User user = UserManager.FindById(User.Identity.GetUserId());
              ClaimsIdentity identity = await user.GenerateUserIdentityAsync(UserManager, DefaultAuthenticationTypes.ApplicationCookie);
@@ -788,7 +788,7 @@ namespace SMD.MIS.Controllers
              if (identity != null)
              {
                  SetupUserClaims(identity);
-                 claimsSecurityService.AddCompanyIdClaimToIdentity(identity, Convert.ToInt32(CompanyId), CompanyName, CompanyLogo, Role, user.FullName, user.Phone1, user.Email, RoleId);
+                 claimsSecurityService.AddCompanyIdClaimToIdentity(identity, Convert.ToInt32(CompanyId), CompanyName, CompanyLogo, Role, user.FullName, user.Phone1, user.Email, RoleId, CompanyCity);
                  
                  AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = false }, identity);
 

@@ -34,12 +34,12 @@ namespace SMD.Implementation
 
 
 
-        public void AddCompanyIdClaimToIdentity(ClaimsIdentity identity, int CompanyId, string CompanyName, string CompanyLogo, string RoleName,string userName,string MobileNumber,string email, string sRoleId)
+        public void AddCompanyIdClaimToIdentity(ClaimsIdentity identity, int CompanyId, string CompanyName, string CompanyLogo, string RoleName,string userName,string MobileNumber,string email, string sRoleId,string CompanyCity)
         {
             Claim claim = new Claim(SmdClaimTypes.CompanyId,
                 // ReSharper restore SuggestUseVarKeywordEvident
                                         ClaimHelper.Serialize(
-                                            new CompanyIdClaimValue { CompanyId = CompanyId, CompanyName = CompanyName, CompanyLogo = CompanyLogo, UserName = userName, MobileNumber = MobileNumber,Email =email}),
+                                            new CompanyIdClaimValue { CompanyId = CompanyId, CompanyName = CompanyName, CompanyLogo = CompanyLogo, UserName = userName, MobileNumber = MobileNumber, Email = email, CompanyCity = CompanyCity }),
                                         typeof(CompanyIdClaimValue).AssemblyQualifiedName);
             identity.AddClaim(claim);
 
