@@ -104,9 +104,8 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                 GenderString = source.Gender == 1 ? "Male" : "Female",
 
                 Phone1 = string.IsNullOrEmpty(source.Phone1) ? "" : source.Phone1,
-         
-                ImageUrl = !string.IsNullOrEmpty(source.Company.Logo) ? HttpContext.Current.Request.Url.Scheme + "://" +
-                HttpContext.Current.Request.Url.Host + "/" + source.ProfileImage + "?" + DateTime.Now : string.Empty,
+
+                ImageUrl = !string.IsNullOrEmpty(source.ProfileImage) ? source.ProfileImage : string.Empty,
                 Title = source.Title == null ? "": source.Title,
                 Phone1CodeCountryID = source.Phone1CodeCountryID.HasValue == true ?  source.Phone1CodeCountryID.Value : 0,
                 Phone1Code = source.Country != null? source.Country.CountryName + " " + source.Country.CountryPhoneCode : "",

@@ -275,5 +275,27 @@ namespace SMD.Implementation.Services
             }
 
         }
+
+
+
+
+
+
+        public static void NewDealAvailableEmail(Registry registry, System.Web.HttpContext context)
+        {
+            RequestContext = context;
+            if (context.Handler != null)
+            {
+                SiteUrl = context.Request.Url.Scheme + "://" + context.Request.Url.Host;
+            }
+            else
+            {
+                SiteUrl = "http://manage.cash4ads.com";
+            }
+
+            // Registration of Debit Process Scheduler Run after every 7 days 
+               registry.Schedule(UserTrainingEmail).ToRunEvery(1).Days();
+            //  registry.Schedule(MonthlyAccountDetailsOfUser).AndEvery(1).Months();
+        }
     }
 }
