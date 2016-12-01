@@ -973,7 +973,7 @@ else
                                         <div class="deals_blue_panel">
                                             <div class="dealsPenel_text">Deals</div>
                                             <div class="deals_search"><input type="text" style="width:144px!important; margin:0 auto;height:28px!important;" class="form-control " placeholder="Search"></div>
-                                            <div class="deals_subtitle">Featured near you</div>
+                                            <div class="deals_subtitle" id="categoryName" ></div>
                                         </div>
                                         <div class="deals_bannerImage">
 
@@ -1985,7 +1985,7 @@ else
         <div class="dd-handle" style=" height:auto;padding-left:5px;">
             <span data-bind="text: Name" style="font-size:12px!important;">
             </span>
-            <input name="mcheck" type="checkbox" onclick="onchangeCheckbox();" class="bigcheckbox" style="float:right" data-bind="checked: IsSelected" />
+            <input type="checkbox" onclick="onchangeCheckbox();" class="bigcheckbox" style="float:right" data-bind="checked: IsSelected" />
         </div>
     </li>
 
@@ -2076,7 +2076,8 @@ else
     function onchangeCheckbox() {
 
         $('.bigcheckbox').change(function () {
-           
+            var text = $(this).siblings("span:first").text();
+            $("#categoryName").html(text);
             if ($('input.bigcheckbox').filter(':checked').length >= 3)
                 $('input.bigcheckbox:not(:checked)').attr('disabled', 'disabled');
             else
@@ -2246,9 +2247,6 @@ else
 
             return;
         }
-
-
-
 
     }
 

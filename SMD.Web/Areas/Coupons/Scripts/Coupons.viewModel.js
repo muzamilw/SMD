@@ -1555,7 +1555,27 @@ getfreeCouponCount = function () {
                         }
 
                     }
-                }, this);
+                }, this),
+                //FirstCategory = ko.computed(function () {
+
+                //    if (couponModel() != undefined) {
+                
+                //        if (couponModel().couponCategories != undefined) {
+                //            debugger;
+                //            var matcharry = ko.utils.arrayFirst(couponModel().couponCategories(), function (item) {
+                //                return item.IsSelected == true;
+                //            });
+                //            alert(matcharry.Name);
+                //            if (matcharry != null)
+                //            {
+                //                debugger;
+                //                return matcharry.Name;
+                //            }
+                //        }
+
+                //    }
+                //}, this),
+                
                 onRemoveIndustry = function (item) {
                     // Ask for confirmation
 
@@ -2625,6 +2645,7 @@ getfreeCouponCount = function () {
                     FirstCouponOption: FirstCouponOption,
                     SecondCouponOption: SecondCouponOption,
                     mCurrencyCode: mCurrencyCode
+                    
                 };
             })()
         };
