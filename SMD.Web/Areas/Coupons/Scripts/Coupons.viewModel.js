@@ -358,7 +358,7 @@ define("Coupons/Coupons.viewModel",
                             islblText(false);
                         }
                         else if (data.TotalCount > 1 && data.TotalCount <= 4) {
-                            isCouponSearch(false);
+                            isCouponSearch(true);
                             islblText(false);
                         }
                         else {
