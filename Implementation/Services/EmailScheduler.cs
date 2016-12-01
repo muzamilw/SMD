@@ -294,7 +294,7 @@ namespace SMD.Implementation.Services
             }
 
             // Registration of Debit Process Scheduler Run after every 7 days 
-               registry.Schedule(UserTrainingEmail).ToRunEvery(1).Days();
+            //   registry.Schedule(UserTrainingEmail).ToRunEvery(1).Days();
             //  registry.Schedule(MonthlyAccountDetailsOfUser).AndEvery(1).Months();
         }
     }
