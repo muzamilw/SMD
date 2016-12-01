@@ -616,6 +616,27 @@
     <Compile Include="Areas\Survey\SurveyAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UnauthorizedRequestController.cs" />
+    <Compile Include="Emails\Display_Ad_Rejected.aspx.cs">
+      <DependentUpon>Display_Ad_Rejected.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Display_Ad_Rejected.aspx.designer.cs">
+      <DependentUpon>Display_Ad_Rejected.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Picture_poll_Rejected.aspx.cs">
+      <DependentUpon>Picture_poll_Rejected.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Picture_poll_Rejected.aspx.designer.cs">
+      <DependentUpon>Picture_poll_Rejected.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Deal_Rejected.aspx.cs">
+      <DependentUpon>Deal_Rejected.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Deal_Rejected.aspx.designer.cs">
+      <DependentUpon>Deal_Rejected.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Emails\Video_Ad_Rejected.aspx.cs">
       <DependentUpon>Video_Ad_Rejected.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1335,6 +1356,9 @@
     <Content Include="Content\themes\Centaurus\js\typeahead.min.js" />
     <Content Include="Content\themes\Centaurus\js\wizard.js" />
     <Content Include="Content\themes\Centaurus\js\xcharts.js" />
+    <Content Include="Emails\Display_Ad_Rejected.aspx" />
+    <Content Include="Emails\Picture_poll_Rejected.aspx" />
+    <Content Include="Emails\Deal_Rejected.aspx" />
     <Content Include="Emails\Video_Ad_Rejected.aspx" />
     <Content Include="Emails\delete_account_confirmation.aspx" />
     <Content Include="Emails\Deal_Approved.aspx" />

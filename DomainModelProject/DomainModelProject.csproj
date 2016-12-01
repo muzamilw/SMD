@@ -228,6 +228,9 @@
     <Compile Include="GetRandom3Deal_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetRandomAdCampaign_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetRandomPolls_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

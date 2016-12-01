@@ -695,5 +695,14 @@ namespace DomainModelProject
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetRandomPolls_Result>("GetRandomPolls");
         }
+    
+        public virtual ObjectResult<GetRandomAdCampaign_Result> GetRandomAdCampaign(Nullable<int> type)
+        {
+            var typeParameter = type.HasValue ?
+                new ObjectParameter("type", type) :
+                new ObjectParameter("type", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetRandomAdCampaign_Result>("GetRandomAdCampaign", typeParameter);
+        }
     }
 }
