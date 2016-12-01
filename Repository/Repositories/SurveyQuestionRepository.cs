@@ -281,6 +281,12 @@ namespace SMD.Repository.Repositories
 
             return db.getPollBySQIDRatioAnalytic(ID, dateRange).ToList();
         }
+        public int getPollImpressionStatBySQIdFormAnalytic(long Id, int Gender, int age)
+        {
+
+            return db.getPollImpressionStatBySQIdFormAnalytic(Id, Gender, age).ToList().FirstOrDefault();
+           
+        }
         public IEnumerable<getPollBySQIDtblAnalytic_Result> getPollBySQIDtblAnalytic(int ID)
         {
             return db.getPollBySQIDtblAnalytic(ID);

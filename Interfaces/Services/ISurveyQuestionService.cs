@@ -61,7 +61,8 @@ namespace SMD.Interfaces.Services
         List<getPollBySQIDRatioAnalytic_Result> getPollBySQIDRatioAnalytic(int ID, int dateRange);
         IEnumerable<getPollBySQIDtblAnalytic_Result> getPollBySQIDtblAnalytic(int ID);
         List<GetRandomPolls_Result> GetRandomPolls();
-        
+
+        int getPollImpressionStatBySQIdFormAnalytic(long Id, int Gender, int age);
       
     }
 }

@@ -587,7 +587,8 @@ svg{
 .statsbig{
     border-left: lightgrey solid 1px;
     font-size: xx-large;
+    text-align: -webkit-center;
 }
 .filterH{
-    font-weight:bold;font-size: x-large;float:left;padding-left:10px;
+    font-weight:bold;font-size: x-large;float:left;padding-left:15px;
 }

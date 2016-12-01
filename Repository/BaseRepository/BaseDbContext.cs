@@ -876,7 +876,36 @@ namespace SMD.Repository.BaseRepository
 
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getCampaignByIdFormDataAnalytic_Result>("getCampaignByIdFormDataAnalytic", Id);
         }
+        public ObjectResult<Int32> getDealStatByCouponIdFormAnalytic(long dealId, int Gender, int age,  int type)
+        {
+            var Id = new ObjectParameter("Id", dealId);
+            var gender = new ObjectParameter("gender", Gender);
+            var ageRange = new ObjectParameter("ageRange", age);
+            var _type = new ObjectParameter("type", type);
 
+            ObjectResult<Int32> res = ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Int32>("getDealStatByCouponIdFormAnalytic", Id, gender, ageRange, _type);
+            return res;
+        }
+        public ObjectResult<Int32> getPollImpressionStatBySQIdFormAnalytic(long CampaignId, int Gender, int age)
+        {
+            var Id = new ObjectParameter("Id", CampaignId);
+            var gender = new ObjectParameter("gender", Gender);
+            var ageRange = new ObjectParameter("ageRange", age);
+            ObjectResult<Int32> res = ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Int32>("getPollImpressionStatBySQIdFormAnalytic", Id, gender, ageRange);
+            return res;
+        }
+        public ObjectResult<getAdsCampaignPerCityPerAgeFormAnalytic_Result> getAdsCampaignPerCityPerAgeFormAnalytic(long _Id)
+        {
+            var Id = new ObjectParameter("Id", _Id);
+
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getAdsCampaignPerCityPerAgeFormAnalytic_Result>("getAdsCampaignPerCityPerAgeFormAnalytic", Id);
+        }
+        public ObjectResult<getAdsCampaignPerCityPerGenderFormAnalytic_Result> getAdsCampaignPerCityPerGenderFormAnalytic(long _Id)
+        {
+            var Id = new ObjectParameter("Id", _Id);
+
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getAdsCampaignPerCityPerGenderFormAnalytic_Result>("getAdsCampaignPerCityPerGenderFormAnalytic", Id);
+        }
         #endregion
     }
 }

@@ -31,6 +31,9 @@ namespace SMD.MIS.Areas.Api.Controllers
             data.pieCharts = _IAdvertService.getAdsCampaignByCampaignIdRatioAnalytic(compaignId, dateRange);
             data.tbl = _IAdvertService.getAdsCampaignByCampaignIdtblAnalytic(compaignId);
             data.ROItbl = _IAdvertService.getCampaignROItblAnalytic(compaignId);
+            data.PerGenderChart = _IAdvertService.getAdsCampaignPerCityPerGenderFormAnalytic(compaignId);
+            data.PerAgeChart =  _IAdvertService.getAdsCampaignPerCityPerAgeFormAnalytic(compaignId);
+            
             return data;
         }
 

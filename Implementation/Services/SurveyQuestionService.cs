@@ -583,6 +583,13 @@ namespace SMD.Implementation.Services
         {
             return surveyQuestionRepository.GetRandomPolls();
         }
+
+        public int getPollImpressionStatBySQIdFormAnalytic(long Id, int Gender, int age)
+        {
+
+            return surveyQuestionRepository.getPollImpressionStatBySQIdFormAnalytic(Id, Gender, age);
+
+        }
         #endregion
     }
 

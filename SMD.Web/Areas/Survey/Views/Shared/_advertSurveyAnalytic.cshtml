@@ -141,21 +141,20 @@
                             <br />
                         </div>
                         <div class="row">
-                            <table style="background-color:white;width:95%;">
+                            <table style="background-color:white;width:92%;">
 
                                 <tr>
-                                    <td class="col-lg-3">Gender : </td>
+                                    <td class="col-lg-3" style="text-align: -webkit-right;">Gender : </td>
                                     <td class="col-lg-2">
                                         <select class="form-control" id="ddGDropDown" data-bind="options: $root.GenderAnalyticsData, optionsText: 'name', optionsValue: 'id', value:$root.selectedGenderAnalytics, event: { change: $root.getDDAnalytic }"></select>
                                     </td>
-                                    <td class="col-lg-1">Age :</td>
+                                    <td class="col-lg-1" style="text-align: -webkit-right;">Age :</td>
                                     <td class="col-lg-2">
                                         <select class="form-control" id="ddADropDown" data-bind="options: $root.AgeRangeAnalyticsData, optionsText: 'name', optionsValue: 'id', value:$root.selectedAgeAnalytics, event: { change: $root.getDDAnalytic }"></select>
                                     </td>
                                     <td class="col-lg-3 statsbig">
                                         <span data-bind="text: $root.DDStatsAnalytics"></span>
                                     </td>
-
 
                                 </tr>
 

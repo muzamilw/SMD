@@ -173,8 +173,53 @@ define("Coupons/Coupons.viewModel",
                 dealtitle1 = ko.observable(),
                 dealtitle2 = ko.observable(),
                 dealtitle3 = ko.observable(),
-                getDDOAnalytic = function () { }
-                getDDCTAnalytic = function () { }
+                getDDOAnalytic = function () {
+                    dataservice.getDealsAnalytics({
+                        CouponID: selectedCouponIdAnalytics(),
+                        dateRange: 0,
+                        Granularity: 0,
+                        type : 2,
+                        Gender : selectedOGenderAnalytics(), 
+                        age : selectedOAgeAnalytics(), 
+                        Stype: 1,
+
+                    }, {
+                        success: function (data) {
+
+                            DDOStatsAnalytics(data.ImpressionStat);
+
+
+                        },
+                        error: function (response) {
+
+                        }
+                    });
+                
+                },
+                getDDCTAnalytic = function () {
+                    dataservice.getDealsAnalytics({
+                        CouponID: selectedCouponIdAnalytics(),
+                        dateRange: 0,
+                        Granularity: 0,
+                        type : 2,
+                        Gender : selectedCTGenderAnalytics(), 
+                        age : selectedCTAgeAnalytics(), 
+                        Stype: 2,
+
+                    }, {
+                        success: function (data) {
+
+                            DDCTStatsAnalytics(data.ClickTrouStat);
+
+
+                        },
+                        error: function (response) {
+
+                        }
+                    });
+                
+                
+                }
                 openAdvertiserDashboardDealScreen = function () {
                     if (!IsnewCoupon()) {
                         isflageClose(true);
@@ -198,6 +243,11 @@ define("Coupons/Coupons.viewModel",
                     CouponID: selectedCouponIdAnalytics(),
                     dateRange: selecteddateRangeAnalytics(),
                     Granularity: selectedGranularityAnalytics(),
+                    type : 1,
+                    Gender: 0, 
+                    age : 0, 
+                    Stype: 0
+
                 }, {
                     success: function (data) {
 
@@ -206,6 +256,8 @@ define("Coupons/Coupons.viewModel",
                         DealsAnalyticsData.valueHasMutated();
                         CampaignRatioAnalyticData(data.pieCharts);
                         dealExpirydate(data.expiryDate);
+                        DDCTStatsAnalytics(data.ClickTrouStat);
+                        DDOStatsAnalytics(data.ImpressionStat);
                         if (CampaignRatioAnalyticData()[0].value > 0) {
 
                             hasImpression(true);

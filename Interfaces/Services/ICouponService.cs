@@ -46,6 +46,8 @@ namespace SMD.Interfaces.Services
         Currency GetCurrenyById(int id);
         IEnumerable<getDealByCouponID_Result> getDealByCouponIDAnalytics(int CouponID, int dateRange, int Granularity);
         IEnumerable<getDealByCouponIdRatioAnalytic_Result> getDealByCouponIdRatioAnalytic(int ID, int dateRange);
+        int getDealStatByCouponIdFormAnalytic(long dealId, int Gender, int age, int type);
+        
         DateTime getExpiryDate(int CouponId);
 
         bool PauseAllCoupons(int CompanyId);
