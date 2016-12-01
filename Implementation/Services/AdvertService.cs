@@ -1386,5 +1386,9 @@ namespace SMD.Implementation.Services
         {
             return _adCampaignRepository.getCampaignByIdFormDataAnalytic(CampaignId);
         }
+        public List<GetRandomAdCampaign_Result> GetRandomAdCampaign(int Type)
+        {
+            return _adCampaignRepository.GetRandomAdCampaign(Type);
+        }
     }
 }

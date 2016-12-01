@@ -142,42 +142,42 @@ else
                     </div>
                     <div class="row center" data-bind="visible:$root.IsGameAds()">
                         <div class="col-lg-4">
-                            <img style="height:70px;width:168px;" src="/images/splaceholder.png">
+                            <img style="height:70px;width:168px;" data-bind="attr:{src:$root.LogoUrl1()!=null?$root.LogoUrl1().startsWith('http')?$root.LogoUrl1():'/' + $root.LogoUrl1():null }">
                             <div class="main-box no-header clearfix text-center" style="padding:8px;margin-top:1px;">
-                                <span style="font-size:12px;font-weight:bold">Test Display Add</span>
+                                <span style="font-size:12px;font-weight:bold" data-bind="text:$root.CampaignName1"></span>
                             </div>
                         </div>
                         <div class="col-lg-4">
-                            <img style="height:70px;width:168px;" src="/images/splaceholder.png">
+                            <img style="height:70px;width:168px;" data-bind="attr:{src:$root.LogoUrl2()!=null?$root.LogoUrl2().startsWith('http')?$root.LogoUrl2():'/' + $root.LogoUrl2():null }">
                             <div class="main-box no-header clearfix text-center" style="padding:8px;margin-top:1px;">
-                                <span style="font-size:12px;font-weight:bold">Test Display Add</span>
+                                <span style="font-size:12px;font-weight:bold" data-bind="text:$root.CampaignName2"></span>
                             </div>
                         </div>
                         <div class="col-lg-4">
-                            <img style="height:70px;width:168px;" src="/images/splaceholder.png">
+                            <img style="height:70px;width:168px;" data-bind="attr:{src:$root.LogoUrl3()!=null?$root.LogoUrl3().startsWith('http')?$root.LogoUrl3():'/' + $root.LogoUrl3():null }">
                             <div class="main-box no-header clearfix text-center" style="padding:8px;margin-top:1px;">
-                                <span style="font-size:12px;font-weight:bold">Test Display Add</span>
+                                <span style="font-size:12px;font-weight:bold" data-bind="text:$root.CampaignName3"></span>
                             </div>
                         </div>
                     </div>
 
                     <div class="row center" data-bind="visible:$root.IsvideoBtn()">
                         <div class="col-lg-4">
-                            <video id="videoTag" controls style="width:168px;height:70px;" src="http://smdpreview.com/SMD_Content\AdCampaign\50427\guid_CampaignDefaultVideo.mp4?r=01"></video>
+                            <video id="videoTag" controls style="width:168px;height:70px;" data-bind="attr:{ src:$root.VideoLink1 }"></video>
                             <div class="main-box no-header clearfix text-center" style="padding:8px;margin-top:1px;">
-                                <span style="font-size:12px;font-weight:bold">Test Video Add</span>
+                                <span style="font-size:12px;font-weight:bold" data-bind="text:$root.CampaignName1"></span>
                             </div>
                         </div>
                         <div class="col-lg-4">
-                            <video id="videoTag" controls style="width:168px;height:70px;" src="http://smdpreview.com/SMD_Content\AdCampaign\50427\guid_CampaignDefaultVideo.mp4?r=01"></video>
+                            <video id="videoTag" controls style="width:168px;height:70px;" data-bind="attr:{ src:$root.VideoLink2 }"></video>
                             <div class="main-box no-header clearfix text-center" style="padding:8px;margin-top:1px;">
-                                <span style="font-size:12px;font-weight:bold">Test Video Add</span>
+                                <span style="font-size:12px;font-weight:bold" data-bind="text:$root.CampaignName2"></span>
                             </div>
                         </div>
                         <div class="col-lg-4">
-                            <video id="videoTag" controls style="width:168px;height:70px;" src="http://smdpreview.com/SMD_Content\AdCampaign\50427\guid_CampaignDefaultVideo.mp4?r=01"></video>
+                            <video id="videoTag" controls style="width:168px;height:70px;" data-bind="attr:{ src:$root.VideoLink3 }"></video>
                             <div class="main-box no-header clearfix text-center" style="padding:8px;margin-top:1px;">
-                                <span style="font-size:12px;font-weight:bold">Test Video Add</span>
+                                <span style="font-size:12px;font-weight:bold" data-bind="text:$root.CampaignName3"></span>
                             </div>
                         </div>
                     </div>

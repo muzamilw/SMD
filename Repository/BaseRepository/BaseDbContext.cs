@@ -739,6 +739,13 @@ namespace SMD.Repository.BaseRepository
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetRandomPolls_Result>("GetRandomPolls");
         }
+        public ObjectResult<GetRandomAdCampaign_Result> GetRandomAdCampaign(int Type)
+        {
+            var type = new ObjectParameter("type", Type);
+
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetRandomAdCampaign_Result>("GetRandomAdCampaign", type);
+        }
+
         //public ObjectResult<getAdsCampaignByCampaignId_Result> getAdsCampaignByCampaignId(int compaignId, int CampStatus, int dateRange, int Granularity)
         //{
         //    var _compaignId = new ObjectParameter("CampaignId", compaignId);
