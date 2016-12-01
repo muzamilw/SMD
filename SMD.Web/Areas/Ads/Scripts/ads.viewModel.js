@@ -196,6 +196,7 @@ define("ads/ads.viewModel",
                 selectedQQAAnalytics = ko.observable(0),
                 selectedQQPAnalytics = ko.observable("All"),
                 isProfileQuestionUsed = ko.observable(false),
+                IsCityUsed = ko.observable(true),
                 isPollQuestionsQuestionUsed = ko.observable(false),
                 isPreviousQuizQuestionsUsed = ko.observable(false),
                 QQStatsAnalytics = ko.observable(),
@@ -303,6 +304,12 @@ define("ads/ads.viewModel",
                                 ko.utils.arrayPushAll(QQChoicesAnalyticsData(), data.Choices);
                                 QQChoicesAnalyticsData.valueHasMutated();
                                 formAnalyticsData.removeAll();
+                                if (CitiesAnalyticsData().length < 2) {
+                                    IsCityUsed(false);
+                                } else {
+                                    IsCityUsed(true);
+                                }
+
                                 _.each(data.formData, function (item) {
                                     formAnalyticsData.push(model.formAnalyticsDataModel(item));
                                     if (item.typ==2) {
@@ -354,7 +361,7 @@ define("ads/ads.viewModel",
 				                PerGenderChartAnalyticsData.removeAll();
 				                ko.utils.arrayPushAll(PerGenderChartAnalyticsData(), data.PerGenderChart);
 				                PerGenderChartAnalyticsData.valueHasMutated();
-
+                                
 				               
 
 
@@ -3911,6 +3918,7 @@ define("ads/ads.viewModel",
                     QQStatsAnalytics: QQStatsAnalytics,
                     SelectedItemAnalytics: SelectedItemAnalytics,
                     isProfileQuestionUsed: isProfileQuestionUsed,
+                    IsCityUsed:IsCityUsed,
                     isPollQuestionsQuestionUsed: isPollQuestionsQuestionUsed,
                     isPreviousQuizQuestionsUsed: isPreviousQuizQuestionsUsed,
                     PerAgeChartAnalyticsData: PerAgeChartAnalyticsData,

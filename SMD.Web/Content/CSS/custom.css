@@ -570,7 +570,7 @@ svg{
      /*text-align:center;*/
      /*vertical-align:-webkit-baseline-middle;*/
      vertical-align:middle;
-      
+           margin:10px;
 }
 
 .lightgrayBox{

@@ -38,6 +38,10 @@ namespace SMD.Implementation.Services
         {
             return cityRepository.GetCities();
         }
+        public List<string> GetTargetCitiesPerCampaign(long id)
+        {
+            return cityRepository.GetTargetCitiesPerCampaign(id);
+        }
         #endregion
     }
 }

@@ -86,6 +86,18 @@ namespace SMD.Repository.Repositories
             }
             return cityId;
         }
+
+        public List<string> GetTargetCitiesPerCampaign(long id)
+        {
+
+            IEnumerable<string> result = from AdCampaignTargetLocatio in db.AdCampaignTargetLocations 
+                                    join city in db.Cities on AdCampaignTargetLocatio.CityId equals city.CityId
+                                     where AdCampaignTargetLocatio.CampaignId == id
+                                    select city.CityName ;
+
+
+            return result.ToList();
+        }
         #endregion
     }
 }
