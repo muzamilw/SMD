@@ -138,6 +138,8 @@
     <Compile Include="DomainModels\EventStatus.cs" />
     <Compile Include="DomainModels\GetActiveVSNewUsers_Result.cs" />
     <Compile Include="DomainModels\GetAdminDashBoardInsights_Result.cs" />
+    <Compile Include="DomainModels\getAdsCampaignPerCityPerAgeFormAnalytic_Result.cs" />
+    <Compile Include="DomainModels\getAdsCampaignPerCityPerGenderFormAnalytic_Result.cs" />
     <Compile Include="DomainModels\GetApprovalCount_Result.cs" />
     <Compile Include="DomainModels\getCampaignByIdFormDataAnalytic_Result.cs" />
     <Compile Include="DomainModels\getCampaignRatioAnalytic_Result.cs" />
@@ -151,6 +153,7 @@
     <Compile Include="DomainModels\getPayoutVSRevenueOverTime_Result.cs" />
     <Compile Include="DomainModels\getPollsBySQID_Result.cs" />
     <Compile Include="DomainModels\GetRandom3Deal_Result.cs" />
+    <Compile Include="DomainModels\GetRandomAdCampaign_Result.cs" />
     <Compile Include="DomainModels\GetRandomPolls_Result.cs" />
     <Compile Include="DomainModels\GetRegisteredUserData_Result.cs" />
     <Compile Include="DomainModels\GetRevenueByCampaignOverTime_Result.cs" />

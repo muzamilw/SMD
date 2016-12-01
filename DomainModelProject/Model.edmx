@@ -2728,6 +2728,12 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
         <Function Name="getAdsCampaignByCampaignIdtblAnalytic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="int" Mode="In" />
         </Function>
+        <Function Name="getAdsCampaignPerCityPerAgeFormAnalytic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getAdsCampaignPerCityPerGenderFormAnalytic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetApprovalCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="getCampaignByIdFormDataAnalytic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="int" Mode="In" />
@@ -2759,6 +2765,12 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Parameter Name="Id" Type="int" Mode="In" />
           <Parameter Name="DateRange" Type="int" Mode="In" />
         </Function>
+        <Function Name="getDealStatByCouponIdFormAnalytic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="gender" Type="int" Mode="In" />
+          <Parameter Name="ageRange" Type="int" Mode="In" />
+          <Parameter Name="type" Type="int" Mode="In" />
+        </Function>
         <Function Name="getDisplayAdsCampaignByCampaignIdAnalytics" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CampaignId" Type="int" Mode="In" />
           <Parameter Name="status" Type="int" Mode="In" />
@@ -2783,6 +2795,11 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
         <Function Name="getPollBySQIDtblAnalytic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="int" Mode="In" />
         </Function>
+        <Function Name="getPollImpressionStatBySQIdFormAnalytic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="gender" Type="int" Mode="In" />
+          <Parameter Name="ageRange" Type="int" Mode="In" />
+        </Function>
         <Function Name="getPollsBySQID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="SQID" Type="int" Mode="In" />
           <Parameter Name="DateRange" Type="int" Mode="In" />
@@ -2794,6 +2811,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Parameter Name="ToRow" Type="int" Mode="In" />
         </Function>
         <Function Name="GetRandom3Deal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetRandomAdCampaign" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="type" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetRandomPolls" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetRegisteredUserData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Status" Type="int" Mode="In" />
@@ -5918,6 +5938,26 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySet Name="vw_Notifications" EntityType="SMDDevModel.vw_Notifications" />
           <FunctionImport Name="GetRandom3Deal" ReturnType="Collection(SMDDevModel.GetRandom3Deal_Result)" />
           <FunctionImport Name="GetRandomPolls" ReturnType="Collection(SMDDevModel.GetRandomPolls_Result)" />
+          <FunctionImport Name="GetRandomAdCampaign" ReturnType="Collection(SMDDevModel.GetRandomAdCampaign_Result)">
+          <Parameter Name="type" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getAdsCampaignPerCityPerAgeFormAnalytic" ReturnType="Collection(SMDDevModel.getAdsCampaignPerCityPerAgeFormAnalytic_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getAdsCampaignPerCityPerGenderFormAnalytic" ReturnType="Collection(SMDDevModel.getAdsCampaignPerCityPerGenderFormAnalytic_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getDealStatByCouponIdFormAnalytic" ReturnType="Collection(Int32)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="gender" Mode="In" Type="Int32" />
+            <Parameter Name="ageRange" Mode="In" Type="Int32" />
+            <Parameter Name="type" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getPollImpressionStatBySQIdFormAnalytic" ReturnType="Collection(Int32)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="gender" Mode="In" Type="Int32" />
+            <Parameter Name="ageRange" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="CouponCategories">
           <Key>
@@ -7609,6 +7649,29 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="String" Name="LeftPicturePath" Nullable="true" MaxLength="300" />
           <Property Type="String" Name="RightPicturePath" Nullable="true" MaxLength="300" />
           <Property Type="String" Name="Question" Nullable="true" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="GetRandomAdCampaign_Result">
+          <Property Type="Int64" Name="CampaignID" Nullable="false" />
+          <Property Type="String" Name="LogoUrl" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="VideoLink2" Nullable="true" />
+          <Property Type="String" Name="CampaignName" Nullable="true" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="getAdsCampaignPerCityPerAgeFormAnalytic_Result">
+          <Property Type="String" Name="city" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="C10_20" Nullable="false" />
+          <Property Type="Int32" Name="C20_30" Nullable="false" />
+          <Property Type="Int32" Name="C30_40" Nullable="false" />
+          <Property Type="Int32" Name="C40_50" Nullable="false" />
+          <Property Type="Int32" Name="C50_60" Nullable="false" />
+          <Property Type="Int32" Name="C60_70" Nullable="false" />
+          <Property Type="Int32" Name="C70_80" Nullable="false" />
+          <Property Type="Int32" Name="C80_90" Nullable="false" />
+          <Property Type="Int32" Name="C90_" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="getAdsCampaignPerCityPerGenderFormAnalytic_Result">
+          <Property Type="String" Name="city" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="male" Nullable="false" />
+          <Property Type="Int32" Name="female" Nullable="false" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -9629,6 +9692,43 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetRandomAdCampaign" FunctionName="SMDDevModel.Store.GetRandomAdCampaign">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SMDDevModel.GetRandomAdCampaign_Result">
+                <ScalarProperty Name="CampaignID" ColumnName="CampaignID" />
+                <ScalarProperty Name="LogoUrl" ColumnName="LogoUrl" />
+                <ScalarProperty Name="VideoLink2" ColumnName="VideoLink2" />
+                <ScalarProperty Name="CampaignName" ColumnName="CampaignName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getAdsCampaignPerCityPerAgeFormAnalytic" FunctionName="SMDDevModel.Store.getAdsCampaignPerCityPerAgeFormAnalytic">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SMDDevModel.getAdsCampaignPerCityPerAgeFormAnalytic_Result">
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="C10_20" ColumnName="10-20" />
+                <ScalarProperty Name="C20_30" ColumnName="20-30" />
+                <ScalarProperty Name="C30_40" ColumnName="30-40" />
+                <ScalarProperty Name="C40_50" ColumnName="40-50" />
+                <ScalarProperty Name="C50_60" ColumnName="50-60" />
+                <ScalarProperty Name="C60_70" ColumnName="60-70" />
+                <ScalarProperty Name="C70_80" ColumnName="70-80" />
+                <ScalarProperty Name="C80_90" ColumnName="80-90" />
+                <ScalarProperty Name="C90_" ColumnName="90+" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getAdsCampaignPerCityPerGenderFormAnalytic" FunctionName="SMDDevModel.Store.getAdsCampaignPerCityPerGenderFormAnalytic">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SMDDevModel.getAdsCampaignPerCityPerGenderFormAnalytic_Result">
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="male" ColumnName="male" />
+                <ScalarProperty Name="female" ColumnName="female" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getDealStatByCouponIdFormAnalytic" FunctionName="SMDDevModel.Store.getDealStatByCouponIdFormAnalytic" />
+          <FunctionImportMapping FunctionImportName="getPollImpressionStatBySQIdFormAnalytic" FunctionName="SMDDevModel.Store.getPollImpressionStatBySQIdFormAnalytic" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
