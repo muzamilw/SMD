@@ -75,7 +75,12 @@ define("ads/ads.dataservice", function () {
                         url: '/Api/AdsCampaignAnalytic',
                         dataType: 'json',
                         type: 'GET'
-                    });
+					 });
+					 amplify.request.define('getRandomCampaign', 'ajax', {
+					     url: '/Api/GetRandomAdCampaign',
+					     dataType: 'json',
+					     type: 'GET'
+					 });
                 }
             };
 
@@ -171,7 +176,16 @@ define("ads/ads.dataservice", function () {
                      success: callbacks.success,
                      error: callbacks.error,
                  });
-             }
+        },
+          getRandomCampaign = function (params, callbacks) {
+              initialize();
+              return amplify.request({
+                  resourceId: 'getRandomCampaign',
+                  data: params,
+                  success: callbacks.success,
+                  error: callbacks.error,
+              });
+          }
         return {
             getBaseData: getBaseData,
             getCampaignData: getCampaignData,
@@ -182,7 +196,8 @@ define("ads/ads.dataservice", function () {
             generateCouponCodes: generateCouponCodes,
             getAdsByCampaignIdAnalytics: getAdsByCampaignIdAnalytics,
             getFormAnalytic: getFormAnalytic,
-            getQQAnalytic: getQQAnalytic
+            getQQAnalytic: getQQAnalytic,
+            getRandomCampaign: getRandomCampaign
         };
     })();
     return dataService;

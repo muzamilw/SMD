@@ -199,6 +199,14 @@ define("ads/ads.viewModel",
                 QQStatsAnalytics = ko.observable(),
                 SelectedItemAnalytics = ko.observable(),
                 hasImpression = ko.observable(false),
+                LogoUrl1 = ko.observable(),
+                VideoLink1 = ko.observable(),
+                CampaignName2 = ko.observable(),
+                LogoUrl2 = ko.observable(),
+                VideoLink2 = ko.observable(),
+                CampaignName3 = ko.observable(),
+                LogoUrl3 = ko.observable(),
+                VideoLink3 = ko.observable(),
 				openAdvertiserDashboardScreen = function (Campaign) {
 
 				    if (!isNewCampaign()) {
@@ -3138,6 +3146,25 @@ define("ads/ads.viewModel",
                         }
                     });
                 },
+               getRandomCampaign = function (Type) {
+
+                   dataservice.getRandomCampaign({ type: Type }, {
+                              success: function (data) {
+                                  CampaignName1(data[0].CampaignName);
+                                  LogoUrl1(data[0].LogoUrl);
+                                  VideoLink1(data[0].VideoLink2);
+                                  CampaignName2(data[1].CampaignName);
+                                  LogoUrl2(data[1].LogoUrl);
+                                  VideoLink2(data[1].VideoLink2);
+                                  CampaignName3(data[2].CampaignName);
+                                  LogoUrl3(data[2].LogoUrl);
+                                  VideoLink3(data[2].VideoLink2);
+                              },
+                              error: function (response) {
+                                  toastr.error("Failed to get random Campaign.");
+                              }
+                          });
+                      },
                 showAdditionCriteria = function (mode) {
                     AditionalCriteriaMode(mode);
                 },
@@ -3635,6 +3662,7 @@ define("ads/ads.viewModel",
                     getAdCampaignGridContent();
                     getCampaignBaseContent();
                     isEditorVisible(false);
+                    getRandomCampaign(mode)
 
                     CompanyLogo(gCompanyLogo);
                 };
@@ -3873,7 +3901,16 @@ define("ads/ads.viewModel",
                     hasImpression: hasImpression,
                     isAdSearch:isAdSearch,
                     CurrentMode: CurrentMode,
-                    islblText: islblText
+                    islblText: islblText,
+                    CampaignName1:CampaignName1,
+                    LogoUrl1:LogoUrl1,
+                    VideoLink1:VideoLink1,
+                    CampaignName2:CampaignName2,
+                    LogoUrl2:LogoUrl2,
+                    VideoLink2:VideoLink2,
+                    CampaignName3:CampaignName3,
+                    LogoUrl3:LogoUrl3,
+                    VideoLink3:VideoLink3
                 };
             })()
         };

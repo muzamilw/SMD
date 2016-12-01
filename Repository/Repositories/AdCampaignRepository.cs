@@ -365,5 +365,9 @@ namespace SMD.Repository.Repositories
         {
             return db.getCampaignByIdFormDataAnalytic(CampaignId).ToList();
         }
+        public List<GetRandomAdCampaign_Result> GetRandomAdCampaign(int Type)
+        {
+            return db.GetRandomAdCampaign(Type).ToList();
+        }
     }
 }
