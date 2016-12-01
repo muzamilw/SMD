@@ -2724,6 +2724,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Parameter Name="ToRow" Type="int" Mode="In" />
         </Function>
         <Function Name="GetRandom3Deal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetRandomAdCampaign" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="type" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetRandomPolls" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetRegisteredUserData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Status" Type="int" Mode="In" />
@@ -4250,6 +4253,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySet Name="vw_Notifications" EntityType="DomainModels.vw_Notifications" />
           <FunctionImport Name="GetRandom3Deal" ReturnType="Collection(DomainModels.GetRandom3Deal_Result)" />
           <FunctionImport Name="GetRandomPolls" ReturnType="Collection(DomainModels.GetRandomPolls_Result)" />
+          <FunctionImport Name="GetRandomAdCampaign" ReturnType="Collection(DomainModels.GetRandomAdCampaign_Result)">
+            <Parameter Name="type" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -7700,6 +7706,12 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="String" Name="RightPicturePath" Nullable="true" MaxLength="300" />
           <Property Type="String" Name="Question" Nullable="true" MaxLength="500" />
         </ComplexType>
+        <ComplexType Name="GetRandomAdCampaign_Result">
+          <Property Type="Int64" Name="CampaignID" Nullable="false" />
+          <Property Type="String" Name="LogoUrl" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="VideoLink2" Nullable="true" />
+          <Property Type="String" Name="CampaignName" Nullable="true" MaxLength="200" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -9754,6 +9766,16 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
                 <ScalarProperty Name="LeftPicturePath" ColumnName="LeftPicturePath" />
                 <ScalarProperty Name="RightPicturePath" ColumnName="RightPicturePath" />
                 <ScalarProperty Name="Question" ColumnName="Question" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetRandomAdCampaign" FunctionName="SMDModel.Store.GetRandomAdCampaign">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.GetRandomAdCampaign_Result">
+                <ScalarProperty Name="CampaignID" ColumnName="CampaignID" />
+                <ScalarProperty Name="LogoUrl" ColumnName="LogoUrl" />
+                <ScalarProperty Name="VideoLink2" ColumnName="VideoLink2" />
+                <ScalarProperty Name="CampaignName" ColumnName="CampaignName" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
