@@ -483,6 +483,7 @@ a.reportAnchor a:hover {
     }*/
     .modal-header ,.modal-footer {
         background-color:#0f68a1;
+        border-radius:4px;
     }
     .showInGames {
         display:none;

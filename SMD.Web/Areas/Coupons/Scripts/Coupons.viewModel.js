@@ -488,6 +488,7 @@ getfreeCouponCount = function () {
         },
         addNewCampaign = function () {
             diveNo(0);
+            buyItQuestionLabelStatus(false);
             //show the main menu;
             collapseMainMenu();
             getfreeCouponCount();

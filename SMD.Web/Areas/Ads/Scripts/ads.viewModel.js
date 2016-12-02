@@ -539,7 +539,8 @@ define("ads/ads.viewModel",
             addNewCampaign = function () {
 
                 IsthisEditCamapiagn(false);
-
+                $("#ddTextBtns").val(0);
+                BuyItStatus(false);
                 var selectionoption = $("#ddTextBtns").val();
 
                 if (selectionoption == '0' || selectionoption == undefined) {
