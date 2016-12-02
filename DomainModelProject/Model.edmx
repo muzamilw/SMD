@@ -588,7 +588,7 @@
           </Key>
           <Property Name="CouponReviewId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CouponId" Type="bigint" />
-          <Property Name="StarRating" Type="int" />
+          <Property Name="StarRating" Type="float" />
           <Property Name="Review" Type="nvarchar" MaxLength="800" />
           <Property Name="RatingDateTime" Type="datetime" />
           <Property Name="UserId" Type="nvarchar" MaxLength="128" />
@@ -6075,8 +6075,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="Int32" Name="DealsCount" Nullable="true" />
           <Property Type="String" Name="CurrencyCode" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="CurrencySymbol" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="AvgRating" Nullable="false" />
+          <Property Type="Double" Name="AvgRating" Nullable="false" />
           <Property Type="Int32" Name="UserHasRated" Nullable="false" />
+          <Property Type="Int32" Name="DaysLeft" Nullable="true" />
         </ComplexType>
         <EntityType Name="UserPurchasedCoupon">
           <Key>
@@ -8668,6 +8669,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
                 <ScalarProperty Name="CurrencySymbol" ColumnName="CurrencySymbol" />
                 <ScalarProperty Name="AvgRating" ColumnName="AvgRating" />
                 <ScalarProperty Name="UserHasRated" ColumnName="UserHasRated" />
+                <ScalarProperty Name="DaysLeft" ColumnName="DaysLeft" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
