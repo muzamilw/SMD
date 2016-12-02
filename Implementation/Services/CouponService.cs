@@ -1116,6 +1116,10 @@ namespace SMD.Implementation.Services
 
             return couponRepository.getDealByCouponIdRatioAnalytic(ID, dateRange);
         }
+        public int getDealStatByCouponIdFormAnalytic(long dealId, int Gender, int age, int type)
+        {
+            return couponRepository.getDealStatByCouponIdFormAnalytic(dealId, Gender, age, type); 
+        }
         public DateTime getExpiryDate(int CouponId)
         {
 

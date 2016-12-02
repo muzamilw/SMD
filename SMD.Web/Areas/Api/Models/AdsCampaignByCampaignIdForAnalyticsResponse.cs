@@ -12,5 +12,7 @@ namespace SMD.MIS.Areas.Api.Models
         public IEnumerable<getAdsCampaignByCampaignIdRatioAnalytic_Result> pieCharts { get; set; }
         public IEnumerable<getAdsCampaignByCampaignIdtblAnalytic_Result> tbl { get; set; }
         public IEnumerable<getCampaignROItblAnalytic_Result> ROItbl { get; set; }
+        public List<getAdsCampaignPerCityPerGenderFormAnalytic_Result> PerGenderChart { get; set; }
+        public List<getAdsCampaignPerCityPerAgeFormAnalytic_Result> PerAgeChart { get; set; }
     }
 }

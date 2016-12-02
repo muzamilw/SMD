@@ -483,6 +483,7 @@ a.reportAnchor a:hover {
     }*/
     .modal-header ,.modal-footer {
         background-color:#0f68a1;
+        border-radius:4px;
     }
     .showInGames {
         display:none;
@@ -529,17 +530,66 @@ svg{
     padding-left: 15px !important;
     padding-right : 15px !important;
 }
-.roitbl {
-    background-color: #f9f9f9; border-radius: 5%
-}
     .roitbl tr td {
     padding:5px;
     padding-left:10px;
     }
+.targetfiltertbl {
+    background-color:white;
+}
 
 .targetfiltertbl tr td {
     padding-right:20px;
     padding-left:20px;
     padding-top : 5px;
+    
 
+}
+.analyticH2 {
+    -webkit-appearance: none;  /*Removes default chrome and safari style*/
+    -moz-appearance: none;  /*Removes default style Firefox*/
+    border:none;
+    font-weight:bold;
+    background-color:#eee;
+    padding-top: 10px;
+    font-size: x-large;
+
+}
+.analyticsBox{
+     background-color:#eee ;
+     border-radius: 15px;
+     padding : 20px;
+     
+     /*background-color:gainsboro */
+}
+
+.whiteBox{
+     background-color:white ;
+     border-radius: 15px;
+     padding : 10px;
+     text-align: -webkit-center;
+     /*text-align:center;*/
+     /*vertical-align:-webkit-baseline-middle;*/
+     vertical-align:middle;
+           margin:10px;
+}
+
+.lightgrayBox{
+     background-color:lightgray ;
+     border-radius: 15px;
+     padding : 10px;
+     text-align: -webkit-center;
+     /*text-align:center;*/
+     /*vertical-align:-webkit-baseline-middle;*/
+     vertical-align:middle;
+     margin:10px;
+      
+}
+.statsbig{
+    border-left: lightgrey solid 1px;
+    font-size: xx-large;
+    text-align: -webkit-center;
+}
+.filterH{
+    font-weight:bold;font-size: x-large;float:left;padding-left:15px;
 }

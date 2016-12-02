@@ -1,22 +1,31 @@
-﻿-- =============================================
+﻿
+GO
+/****** Object:  StoredProcedure [dbo].[getCampaignByIdQQFormAnalytic]    Script Date: 12/1/2016 1:02:25 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
 -- Author:		<Author,,Name>
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-create PROCEDURE [dbo].[getCampaignByIdQQFormAnalytic] (
+ALTER PROCEDURE [dbo].[getCampaignByIdQQFormAnalytic] (
 @Id INT,
-@choice INT,
+@coice INT,
 @gender INT,  -- 0 for all, 1 for male and 2 for female
 @ageRange INT, -- 0 for All , 1 for 10-20 , 2 for 20-30, 3 for 30-40 , 4 for 40-50, 5 for 50-60, 6 for 60-70, 7 for 70-80, 8 for 80-90, 9 for 90+
 @Profession nvarchar(250),	
-@city nvarchar(250)
+@city nvarchar(250),
+@type INT,
+@QId INT
 )
 AS
 BEGIN
 -- SET NOCOUNT ON added to prevent extra result sets from
 -- interfering with SELECT statements.
 SET NOCOUNT ON;
-DECLARE @AgedateFrom DATE =  DATEADD(YYYY,-100,getdate()) ;
+DECLARE @AgedateFrom DATE =  DATEADD(YYYY,-200,getdate()) ;
 DECLARE @AgedateTo DATE = getdate();
  
 
@@ -62,17 +71,55 @@ IF @ageRange = 2
 	END
 	IF @ageRange = 9
 	BEGIN
-		set @AgedateFrom = DATEADD(YYYY,-500,getdate()) ;
+		set @AgedateFrom = DATEADD(YYYY,-200,getdate()) ;
 		set @AgedateTo = DATEADD(YYYY,-90,getdate()) ;
 	END
-	select count(*) from AdCampaignResponse ac
-	inner join AspNetUsers usr on ac.UserID = usr.Id
-	where ac.CampaignID = @Id and ac.ResponseType = 3 
-	and (ac.UserSelection = @choice OR @choice = 0) and (usr.Gender = @gender OR @gender = 0)
-	and (usr.Jobtitle = @Profession OR @Profession = 'All') and (ac.UserLocationCity = @city OR @city = 'All')
-	and usr.DOB > = @AgedateFrom and usr.DOB < @AgedateTo
+	
+	IF @type = 1 
+	BEGIN
+		select count(*) as Stats  from AdCampaignResponse ac
+		inner join AspNetUsers usr on ac.UserID = usr.Id
+		where ac.CampaignID = @Id and ac.ResponseType = 1 
+		and (ac.UserSelection = @coice OR @coice = 0) and (usr.Gender = @gender OR @gender = 0)
+		and (usr.Jobtitle = @Profession OR @Profession = 'All') and (ac.UserLocationCity = @city OR @city = 'All')
+		and usr.DOB > = @AgedateFrom and usr.DOB < @AgedateTo
+	END	
+	IF @type = 2 
+	BEGIN
+		select count(*) as Stats from AdCampaignResponse ac 
+		inner join AdCampaignTargetCriteria adc on adc.CampaignID = ac.CampaignID
+		inner join AspNetUsers usr on ac.UserID = usr.Id
+		inner join ProfileQuestionUserAnswer pqua on pqua.UserID = usr.Id and adc.PQID = pqua.PQID and pqua.PQAnswerID = adc.PQAnswerID
+		where ac.CampaignID = @Id and ac.ResponseType = 1 
+		and pqua.PQID = @QId and (usr.Gender = @gender OR @gender = 0)
+		and (ac.UserLocationCity = @city OR @city = 'All')
+		and usr.DOB > = @AgedateFrom  and usr.DOB < @AgedateTo		
+	END	
+	IF @type = 3 
+	BEGIN
+		select count(*) as Stats from AdCampaignResponse ac 
+		inner join AdCampaignTargetCriteria adc on adc.CampaignID = ac.CampaignID
+		inner join AspNetUsers usr on ac.UserID = usr.Id
+		inner join SurveyQuestionResponse sqr on sqr.UserID = usr.Id and adc.SQID = sqr.SQID and sqr.UserSelection = adc.SQAnswer
+		where ac.CampaignID = @Id and ac.ResponseType = 1 
+		and sqr.SQID = @QId and (usr.Gender = @gender OR @gender = 0)
+		and (ac.UserLocationCity = @city OR @city = 'All')
+		and usr.DOB > = @AgedateFrom  and usr.DOB < @AgedateTo
 		
+	END			
+	IF @type = 4 
+	BEGIN
+		select count(*) as Stats from AdCampaignResponse ac 
+		inner join AdCampaignTargetCriteria adc on adc.CampaignID = ac.CampaignID
+		inner join AspNetUsers usr on ac.UserID = usr.Id
+		inner join AdCampaignResponse sqr on sqr.UserID = usr.Id and adc.QuizCampaignId = sqr.CampaignID and sqr.UserSelection = adc.QuizAnswerId
+		where ac.CampaignID = @Id and ac.ResponseType = 1 
+		and sqr.CampaignID = @QId and (usr.Gender = @gender OR @gender = 0)
+		and (ac.UserLocationCity = @city OR @city = 'All')
+		and usr.DOB > = @AgedateFrom  and usr.DOB < @AgedateTo
 		
-		
+	END		
 	
 END
+ 
+--EXEC [getCampaignByIdQQFormAnalytic] 10043, 0, 0, 0, 'All', 'All', 1, 6

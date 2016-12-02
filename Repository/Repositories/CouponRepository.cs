@@ -221,6 +221,11 @@ namespace SMD.Repository.Repositories
             
             return db.getDealByCouponIdRatioAnalytic(ID, dateRange);
         }
+
+        public int getDealStatByCouponIdFormAnalytic(long dealId, int Gender, int age, int type)
+        {
+              return db.getDealStatByCouponIdFormAnalytic(dealId, Gender, age, type).ToList().FirstOrDefault();
+        }
         public DateTime getExpiryDate(int CouponId)
         {
             Coupon c = db.Coupons.Where(g=>g.CouponId == CouponId).FirstOrDefault();

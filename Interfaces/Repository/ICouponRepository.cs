@@ -27,6 +27,8 @@ namespace SMD.Interfaces.Repository
         GetCouponByID_Result GetCouponByIdSP(long CouponId, string UserId, string Lat, string Lon);
         IEnumerable<getDealByCouponID_Result> getDealByCouponIDAnalytics(int CouponID, int dateRange, int Granularity);
         IEnumerable<getDealByCouponIdRatioAnalytic_Result> getDealByCouponIdRatioAnalytic(int ID, int dateRange);
+        int getDealStatByCouponIdFormAnalytic(long dealId, int Gender, int age, int type);
+        
         DateTime getExpiryDate(int CouponId);
 
         bool PauseAllCoupons(int CompanyId);
