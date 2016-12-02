@@ -994,6 +994,7 @@
     <Content Include="Content\Images\arrow-up-small.png" />
     <Content Include="Content\Images\arrow-up.png" />
     <Content Include="Content\Images\Back_Footer_Tab.png" />
+    <Content Include="Content\Images\bradPit.jpg" />
     <Content Include="Content\Images\Cash_4_ads_Dial.png" />
     <Content Include="Content\Images\Charts.png" />
     <Content Include="Content\Images\Close_Button.png" />
@@ -3068,6 +3069,10 @@
     <Content Include="Scripts\popover.js" />
     <Content Include="Scripts\quick-sidebar.js" />
     <Content Include="Scripts\r.js" />
+    <Content Include="Scripts\Rating\jquery.js" />
+    <Content Include="Scripts\Rating\rating.css" />
+    <Content Include="Scripts\Rating\rating.js" />
+    <Content Include="Scripts\Rating\rating.png" />
     <Content Include="Scripts\README.txt" />
     <Content Include="Scripts\require.js" />
     <Content Include="Scripts\respond.js" />

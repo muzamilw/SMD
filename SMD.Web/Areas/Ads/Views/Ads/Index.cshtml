@@ -12,29 +12,31 @@ else
 {
     adminClasses = "displayNone";
 }
-<div class="row" id="Heading_div" style="opacity: 1;">
-    <div class="col-lg-12" style="padding-left: 0px;padding-right:0px;">
-        <div class="col-lg-3"style="margin-left:-3px !important;">
-            <div class="pull-left">
-                <label id="headlabel" class="home_pagefontsize" style="font-size:24px!important;color:#fff!important;margin-top:7px;">Video Ads</label>
-            </div>
-        </div>
-        <div class="col-lg-7">
-            <div class="pull-left" id="subdiv"style="display:none">
-                <label id="headdesc" class="pull-left" style="color:#fff;font-size:14px;margin-top:15px;margin-left:10px;">Click on a campaign to view Analytic,Graphs and to modify.</label>
-                <div class="clearfix"></div>
-            </div>
-        </div>
-        <div class="col-lg-2">
-            <div class="pull-right">
-                <img class="pull-right closecls" src="~/Content/Images/Close_Button.png" style="margin-top:15px;margin-right:5px;" onclick="GotoHome();" />
-            </div>
 
-            <div class="clearfix;"></div>
+<div class="row" id="adsBinding" style="margin-top:5px;">
+    <div class="row" id="Heading_div" style="opacity: 1;">
+        <div class="col-lg-12" style="padding-left: 0px;padding-right:0px;">
+            <div class="col-lg-3" style="margin-left:-3px !important;">
+                <div class="pull-left">
+                    <img id="headlabel" class="vid_image pull-left" data-bind="attr: { src: $root.StatusCodeImage }" src="/Content/Images/Videos_small.png">
+                    <label id="headlabel" class="home_pagefontsize" style="font-size:24px!important;color:#fff!important;margin-top:11px;margin-left:5px;" data-bind="text:headText"></label>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="pull-left" id="subdiv" style="display:none">
+                    <label id="headdesc" class="pull-left" style="color:#fff;font-size:14px;margin-top:15px;margin-left:10px;">Click on a campaign to view Analytic,Graphs and to modify.</label>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="pull-right">
+                    <img class="pull-right closecls" src="~/Content/Images/Close_Button.png" style="margin-top:15px;margin-right:11px;" onclick="GotoHome();" />
+                </div>
+
+                <div class="clearfix;"></div>
+            </div>
         </div>
     </div>
-</div>
-<div class="row" id="adsBinding" style="margin-top:5px;">
     <div class="col-lg-12" data-bind="visible: $root.isListVisible()">
         <div class="row">
             <div class="col-lg-12" style="padding-left:0px;padding-right:18px;padding-bottom:10px;">

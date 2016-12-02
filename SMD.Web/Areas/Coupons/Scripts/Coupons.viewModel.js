@@ -17,6 +17,7 @@ define("Coupons/Coupons.viewModel",
                     EditorLoading = ko.observable(false),
                     ISshowPhone = ko.observable(false),
                     IsnewCoupon = ko.observable(false),
+                    RatedFigure = ko.observable(3),
                     mCurrencyCode = ko.observable(),
                     CompanyCity = ko.observable(),
                     CompanyName = ko.observable(),
@@ -566,6 +567,8 @@ getfreeCouponCount = function () {
             isNewCampaignVisible(false);
             IsnewCoupon(true);
             CouponsubTitle("(Deals)");
+            //$("#rating_id").val(4);
+            RatedFigure(4);
             $("#btnCancel").css("display", "block");
             $(".hideInCoupons").css("display", "none");
 
@@ -1622,7 +1625,43 @@ getfreeCouponCount = function () {
                         }
 
                     }
-                }, this);
+                }, this),
+                FirstDealName = ko.computed(function () {
+
+                    if (couponModel() != undefined) {
+
+                        if (couponModel().CouponPriceOptions() != undefined) {
+
+                            if (couponModel().CouponPriceOptions()[0] != undefined) {
+
+                                if (couponModel().CouponPriceOptions()[0].Description() != undefined) {
+                                    return couponModel().CouponPriceOptions()[0].Description();
+                                }
+                            }
+                        }
+
+                    }
+                }, this),
+                //FirstCategory = ko.computed(function () {
+
+                //    if (couponModel() != undefined) {
+                
+                //        if (couponModel().couponCategories != undefined) {
+                //            debugger;
+                //            var matcharry = ko.utils.arrayFirst(couponModel().couponCategories(), function (item) {
+                //                return item.IsSelected == true;
+                //            });
+                //            alert(matcharry.Name);
+                //            if (matcharry != null)
+                //            {
+                //                debugger;
+                //                return matcharry.Name;
+                //            }
+                //        }
+
+                //    }
+                //}, this),
+                
                 onRemoveIndustry = function (item) {
                     // Ask for confirmation
 
@@ -1639,6 +1678,86 @@ getfreeCouponCount = function () {
                     toastr.success("Removed Successfully!");
 
                 },
+                //-------Google Map Code--------------
+                googleAddressMap = function () {
+
+                    initializeGeoLocation();
+                    setCompanyAddress();
+                    google.maps.event.addDomListener(window, 'load', initializeGeoLocation);
+
+                },
+                initializeGeoLocation = function () {
+                    geocoderComp = new google.maps.Geocoder();
+                    var latlngComp = new google.maps.LatLng(-34.397, 150.644);
+                    var mapOptions = {
+                        zoom: 15,
+                        center: latlngComp,
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    };
+                    compMap = new google.maps.Map(document.getElementById('map-canvasCompany'), mapOptions);
+
+
+
+                    //map = new google.maps.Map($('#map-canvasCompany'), mapOptions);
+
+                },
+                //setCompanyAddress = function () {
+                //    if (selectedCompany().BillingAddressLine1() != null && selectedCompany().BillingAddressLine1() != '') {
+                //        var address = selectedCompany().BillingAddressLine1().toLowerCase() + ' ' + selectedCompany().billingCity() + ' ' + selectedCompany().BillingZipCode() + ' ' + selectedCompany().BillingState().toLowerCase();
+                //    }
+                //    geocoderComp.geocode({
+                //        'address': address
+                //    }, function (results, status) {
+                //        if (status == google.maps.GeocoderStatus.OK) {
+                //            isMapVisible(true);
+                //            if (isCodeAddressEdit() == false) {
+                //                selectedCompany().branchLocationLat(results[0].geometry.location.lat());
+                //                selectedCompany().branchLocationLong(results[0].geometry.location.lng());
+                //            }
+
+                //            compMap.setCenter(results[0].geometry.location);
+
+                //            var marker = new google.maps.Marker({
+                //                map: compMap,
+                //                position: results[0].geometry.location
+                //            });
+                //            //////google.maps.event.addListener(compMap, 'click', function (event) {
+                //            //////    selectedCompany().branchLocationLat(event.latLng.lat());
+                //            //////    selectedCompany().branchLocationLong(event.latLng.lng());
+                //            //////    var geocoder = new google.maps.Geocoder();
+                //            //////    geocoder.geocode({
+                //            //////        "latLng": event.latLng
+                //            //////    }, function (results, status) {
+                //            //////        console.log(results, status);
+                //            //////        if (status == google.maps.GeocoderStatus.OK) {
+                //            //////            console.log(results);
+                //            //////            var lat = results[0].geometry.location.lat(),
+                //            //////                lng = results[0].geometry.location.lng(),
+                //            //////                placeName = results[0].address_components[0].long_name,
+                //            //////                latlng = new google.maps.LatLng(lat, lng);
+
+                //            //////            moveMarker(placeName, latlng);
+                //            //////        }
+                //            //////    });
+                //            //////});
+                //            ////function moveMarker(placeName, latlng) {
+                //            ////    //marker.setIcon(image);
+                //            ////    marker.setPosition(latlng);
+                //            ////    //infowindow.setContent(placeName);
+                //            ////    //infowindow.open(map, marker);
+                //            ////}
+                //           // isCodeAddressEdit(false);
+
+
+                //        } else {
+                //            toastr.error("Failed to Search Address,please add valid address and search it . Error: " + status);
+                //          //  isMapVisible(false);
+
+                //        }
+                //    });
+
+                //},
+
                 visibleTargetAudience = function (mode) {
 
                     if (mode != undefined) {
@@ -2473,7 +2592,7 @@ getfreeCouponCount = function () {
                     else {
                         CompanyCity('lahore');
                     }
-
+                    
                 };
                 return {
                     initialize: initialize,
@@ -2692,7 +2811,9 @@ getfreeCouponCount = function () {
                     FirstCouponOption: FirstCouponOption,
                     SecondCouponOption: SecondCouponOption,
                     mCurrencyCode: mCurrencyCode,
-                    hasImpression: hasImpression
+                    FirstDealName: FirstDealName,
+                    hasImpression: hasImpression,
+                    RatedFigure:RatedFigure
                 };
             })()
         };

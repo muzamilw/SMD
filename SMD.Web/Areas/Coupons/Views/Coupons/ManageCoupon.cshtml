@@ -973,7 +973,7 @@ else
                                         <div class="deals_blue_panel">
                                             <div class="dealsPenel_text">Deals</div>
                                             <div class="deals_search"><input type="text" style="width:144px!important; margin:0 auto;height:28px!important;" class="form-control " placeholder="Search"></div>
-                                            <div class="deals_subtitle">Featured near you</div>
+                                            <div class="deals_subtitle" id="categoryName" ></div>
                                         </div>
                                         <div class="deals_bannerImage">
 
@@ -982,8 +982,8 @@ else
 
                                         </div>
                                         <div class="deals_panel_des">
-                                            <div class="deal_group_name">
 
+                                            <div class="deal_group_name" data-bind="text:$root.couponModel().CouponTitle()">
                                             </div>
                                             <div class="desc_cont">
                                                 <div class="deal_group_Pice pull-left">
@@ -1010,7 +1010,151 @@ else
                                         <div style="position:relative;">
                                             <img src="~/Images/close2-128.png" width="20" class="preview_close" data-dismiss="modal" />
                                         </div>
+                                        <div class="deals_head_panel" data-bind="text:$root.couponModel().CouponTitle()">
+                                        </div>
 
+                                        <div class="">
+                                            <img id="deal_preview_img_2nd" style="width:258px;height:64px;" data-bind="attr:{src:$root.couponModel().couponImage1()}" />
+                                        </div>
+                                        <div id="logo_panel" class="deal_logo_panel">
+                                            <div class="pull-left">
+                                                <img data-bind="attr:{src: $root.companyLogo()}" class="deal_logo" />
+                                                <div class="city_desc deal_group_Pice ">
+                                                    <div>sdasdas</div>
+                                                    <div>Lahore</div>
+                                                </div>
+                                            </div>
+                                            <div class="pull-right">
+                                                <span class="deal_group_Pice" style="padding-right: 15px;font-size: 11px;">18 Ratings</span>
+                                            </div>
+                                        </div>
+                                        <div id="deal_line">
+                                            <div class="deals_panel_des1">
+
+                                                <div class="deal_group_name" data-bind="text:$root.FirstDealName()"></div>
+                                                <div class="desc_cont">
+                                                    <div class="deal_group_Pice pull-left">
+                                                        10 days Left
+                                                    </div>
+                                                    <div class="deal_Pice pull-right" style="padding-top:0px!important;">
+                                                        <div class="dis_strike-through pull-left" style="margin-top:0px!important;" data-bind="text:$root.SecondCouponOption()">£232</div>
+                                                        <div class="pull-right" style="font-weight:bold;margin-top:-4px!important;" data-bind="text:$root.FirstCouponOption()">£12</div>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+
+                                                    <div class="clearfix"></div>
+                                                    <div style="text-align:center;margin-top:5px;">
+                                                        <input id="save_btn" value="Save 33% - Shop Now" class="saving_btn" />
+                                                    </div>
+
+                                                </div>
+                                                <div id="more_details" style="height: 37px;margin-top:6px;border-bottom: 1px solid grey;padding-top: 11px;">
+                                                    <div class="pull-left"></div>
+                                                    <div class="pull-right blueclrr" style="margin-right:12px;">2 MORE DETAILS</div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                                <div id="more_details" class="deal_highlight" style="height:56px;margin-top:6px; border-bottom: 1px solid grey;">
+                                                    <div class="headers">Highlights</div>
+                                                    <div class="highlight_ext" data-bind="text:$root.couponModel().HighlightLine1()">Highlights</div>
+
+                                                </div>
+                                                <div id="more_details" class="deal_fine_print" style="height:56px;margin-top:6px;border-bottom: 1px solid grey;">
+                                                    <div class="headers">FinePrints</div>
+
+                                                    <div class="highlight_ext" data-bind="text:$root.couponModel().FinePrintLine1()">FinePrint</div>
+
+                                                </div>
+
+                                                <div id="Address" class="deal_fine_print" style="height:67px;margin-top:6px;border-bottom: 1px solid grey;">
+                                                    <div class="headers">Where</div>
+                                                    <div class="highlight_ext" >Stock Park Country Club</div>
+                                                    <div class="highlight_ext">Famham Common Lane</div>
+                                                    <div class="highlight_ext">Jumeriah Beach</div>
+                                                </div>
+                                                
+                                                    <div id="Map_deal">
+                                                        <div id="map-canvasCompany" style="width:100%;height:134px; border:2px solid"></div>
+                                                    </div>
+                                                <div id="about_us_div" style="height:56px;margin-top:6px;border-bottom: 1px solid grey;">
+                                                    <div class="headers">About Us</div>
+                                                    <div class="highlight_ext">dlas asdkajk asjdkad askdas sdjjs js sdad</div>
+                                                </div>
+                                                
+                                                <div id="Review_panel" style="height:48px;border-bottom: 1px solid grey;">
+                                                    <div class="pull-left" style="padding-left:44px;padding-top:18px;">
+                                                        <i class="fa fa-heart" aria-hidden="true" style="font-size:18px;color:#A1134a"></i>
+                                                    </div>
+                                                    <div class="pull-right" style="padding-right:44px;padding-top:18px;">
+                                                        <i class="fa fa-pencil" aria-hidden="true" style="font-size:18px;color:#6f4376"></i>
+                                                    </div>
+
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                                
+                                                <div id="rating" class="rating_divs">
+
+                                                    <!-- ko if: $root.RatedFigure()==3 -->
+
+                                                    <input type="text" id="rating_id" class="rating rating8"  value="3" />
+                                                    <!-- /ko -->
+                                                    <!-- ko if: $root.RatedFigure()==4 -->
+
+                                                    <input type="text" id="rating_id" class="rating rating8"  value="4" />
+                                                    <!-- /ko -->
+                                                    <!-- ko if: $root.RatedFigure()==5 -->
+
+                                                    <input type="text" id="rating_id" class="rating rating8"  value="5" />
+                                                    <!-- /ko -->
+                                                    <!-- ko if: $root.RatedFigure()==6 -->
+
+                                                    <input type="text" id="rating_id" class="rating rating8"  value="6" />
+                                                    <!-- /ko -->
+                                                    <!-- ko if: $root.RatedFigure()==7 -->
+
+                                                    <input type="text" id="rating_id" class="rating rating8"  value="6" />
+                                                    <!-- /ko -->
+                                                    <!-- ko if: $root.RatedFigure()==8 -->
+
+                                                    <input type="text" id="rating_id" class="rating rating8"  value="6" />
+                                                    <!-- /ko -->
+                                                </div>
+                                                <div id="Review_1" style="width:100%;height: 68px;border:2px solid;padding-top :12px;">
+                                                    <div class="pull-left" style="width:40px;">
+                                                        <img src="~/Content/Images/bradPit.jpg" style="border-radius: 29px;height:40px" />
+                                                    </div>
+                                                    <div class="pull-right" style="width:197px;padding-left:4px;">
+                                                        <div class="pull-left">
+                                                            <div class="Review_heading" style="font-size:14px;color:black">ABC</div>
+                                                        </div>
+                                                        <div class="pull-right" style="padding-right:4px;color:black;font-size:10px;">
+                                                            <span>16 dec 2016</span>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                        <div class="review_description" style="font-size:10px;color:black"> this is sensational website ,and  i really like this.</div>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                                <div id="Review_2" style="width:100%;height: 68px;border:2px solid;padding-top :12px;">
+                                                    <div class="pull-left" style="width:40px;">
+                                                        <img src="~/Content/Images/bradPit.jpg" style="border-radius: 29px;height:40px" />
+                                                    </div>
+                                                    <div class="pull-right" style="width:197px;padding-left:4px;">
+                                                        <div class="pull-left">
+                                                            <div class="Review_heading" style="font-size:14px;color:black">ABC</div>
+                                                        </div>
+                                                        <div class="pull-right" style="padding-right:4px;color:black;font-size:10px;">
+                                                            <span>16 dec 2016</span>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                        <div class="review_description" style="font-size:10px;color:black"> this is sensational website ,and  i really like this.</div>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+
+                                                <div class="clearfix"></div>
+                                            </div>
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1985,7 +2129,7 @@ else
         <div class="dd-handle" style=" height:auto;padding-left:5px;">
             <span data-bind="text: Name" style="font-size:12px!important;">
             </span>
-            <input name="mcheck" type="checkbox" onclick="onchangeCheckbox();" class="bigcheckbox" style="float:right" data-bind="checked: IsSelected" />
+            <input type="checkbox" onclick="onchangeCheckbox();" class="bigcheckbox" style="float:right" data-bind="checked: IsSelected" />
         </div>
     </li>
 
@@ -2076,7 +2220,8 @@ else
     function onchangeCheckbox() {
 
         $('.bigcheckbox').change(function () {
-           
+            var text = $(this).siblings("span:first").text();
+            $("#categoryName").html(text);
             if ($('input.bigcheckbox').filter(':checked').length >= 3)
                 $('input.bigcheckbox:not(:checked)').attr('disabled', 'disabled');
             else
@@ -2152,6 +2297,7 @@ else
             } else if (mode == 2) {
                 $("#bannerImage1").attr("src", this.src).change();
                 $("#deal_preview_img").attr("src", this.src).change();
+                $("#deal_preview_img_2nd").attr("src", this.src).change();
                 bannerImage1 = this.src;
                 $("#btnDamClose").click();
             } else if (mode == 3) {
@@ -2247,9 +2393,6 @@ else
             return;
         }
 
-
-
-
     }
 
 </script>
@@ -2270,11 +2413,17 @@ else
             </div>
         </div>
     </div>
+<script src="~/Scripts/Rating/jquery.js"></script>
+<script src="~/Scripts/Rating/rating.js"></script>
+<link href="~/Scripts/Rating/rating.css" rel="stylesheet" />
 <script>
+    $('.rating').rating();
     function PreviewCoupon()
     {
 
-        $(".deal_group_name").html($("#txtCampaignDisplayName").val());
+        //$(".deal_group_name").html($("#txtCampaignDisplayName").val());
     }
-
+    $(function () {
+       
+    });
 </script>

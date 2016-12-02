@@ -5784,7 +5784,10 @@ background-image: url(/Images/crowdcentz_logo.png) !important;
     color:red;
 }
 .mobile_background {
-    background-color:white;height:448px;
+   background-color: white;
+    height: 448px;
+    overflow-y: scroll;
+    
 }
 .preview_screen_video {
     width: 81px;
@@ -5828,7 +5831,14 @@ background-image: url(/Images/crowdcentz_logo.png) !important;
     font-size:12px;
     padding-top:6px;
     border-bottom:1px solid grey;
-    height:67px;
+    height:59px;
+}
+.deals_panel_des1 {
+    color:#bdbdbd;
+    font-size:12px;
+    padding-top:6px;
+    border-bottom:1px solid grey;
+    height:87px;
 }
 .desc_cont {
     
@@ -5854,4 +5864,60 @@ background-image: url(/Images/crowdcentz_logo.png) !important;
     margin-right: 9px;
     margin-top: 4px;
     font-weight:bold;
+}
+
+.deals_head_panel {
+    background-color: #127abd;
+    color: white;
+    font-size: 16px;
+    height: 41px;
+    text-align: center;
+    padding-top: 8px;
+}
+
+.deal_logo_panel {
+    height:39px;
+    border-bottom: 1px solid grey;
+}
+.city_desc {
+    padding-left:84px;
+}
+.deal_logo {
+    width:63px;
+    position: absolute;
+    top: 25%;
+    left: 11%;
+}
+
+.saving_btn {
+       background-color: #1D7BB9;
+    height: 33px;
+    border-radius: 5px;
+    color: white;
+    text-align: center;
+    width: 200px;
+    border-color: #1d7bbb;
+}
+
+.blueclrr {
+    color:#1d7bbb;
+}
+
+.headers {
+    color:black;
+    padding-left: 9px;
+
+}
+.highlight_ext {
+ margin-top: 1px;
+    padding-left: 9px;
+    color: black;
+    font-size: 10px;
+}
+.rating_divs {
+    height: 37px;
+    text-align: center;
+    padding-left: 40px;
+    padding-top: 8px;
+    border-bottom: 1px solid grey;
 }
