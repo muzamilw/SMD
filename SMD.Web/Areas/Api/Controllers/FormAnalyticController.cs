@@ -31,14 +31,14 @@ namespace SMD.MIS.Areas.Api.Controllers
         public FormAnalyticDDResponseModel Get(long Id)
         {
             FormAnalyticDDResponseModel data = new FormAnalyticDDResponseModel();
-            IEnumerable<City> citiesList = _ICityService.GetCities();
+            List<string> citiesList = _ICityService.GetTargetCitiesPerCampaign(Id);
             List<CityDD> Citieslst = new List<CityDD>(); 
             CityDD cityitem = new CityDD("All");
             Citieslst.Add(cityitem);
-            foreach(City item in citiesList){
+            foreach(string item in citiesList){
                 if (item != null)
                 {
-                    cityitem = new CityDD(item.CityName);
+                    cityitem = new CityDD(item);
                 }
                  Citieslst.Add(cityitem);
             }

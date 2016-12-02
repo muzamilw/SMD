@@ -11,6 +11,7 @@ namespace SMD.MIS.Areas.Api.Models
         public IEnumerable<getDealByCouponID_Result> lineCharts { get; set; }
         public IEnumerable<getDealByCouponIdRatioAnalytic_Result> pieCharts { get; set; }
         public String expiryDate { get; set; }
-
+        public int ImpressionStat { get; set; }
+        public int ClickTrouStat { get; set; }
     }
 }

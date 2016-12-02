@@ -1,5 +1,5 @@
 ﻿GO
-/****** Object:  StoredProcedure [dbo].[getDealByCouponIdRatioAnalytic]    Script Date: 10/31/2016 1:07:32 PM ******/
+/****** Object:  StoredProcedure [dbo].[getDealByCouponIdRatioAnalytic]    Script Date: 11/25/2016 5:13:25 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -25,7 +25,7 @@ IF @DateRange = 2
 	 Select top 1 @dateFrom = ViewDateTime from UserCouponView where CouponId = @Id
 	END
 
-		Select 'Opened' label, count(r.UserCouponViewId) value 
+		Select 'Impressions' label, count(r.UserCouponViewId) value 
 		from  UserCouponView r 
 		where r.CouponId = @Id and r.ViewDateTime >= @dateFrom and r.ViewDateTime <= getdate() 
 		union

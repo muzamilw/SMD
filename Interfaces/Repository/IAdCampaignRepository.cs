@@ -47,6 +47,10 @@ namespace SMD.Interfaces.Repository
         IEnumerable<AdCampaign> GetSpecialAdCampaigns(out string CompanyLogoPath);
         List<getCampaignByIdFormDataAnalytic_Result> getCampaignByIdFormDataAnalytic(long CampaignId);
         List<GetRandomAdCampaign_Result> GetRandomAdCampaign(int Type);
+        List<getAdsCampaignPerCityPerGenderFormAnalytic_Result> getAdsCampaignPerCityPerGenderFormAnalytic(long _Id);
+        
+        List<getAdsCampaignPerCityPerAgeFormAnalytic_Result> getAdsCampaignPerCityPerAgeFormAnalytic(long _Id);
+        
 
     }
 }

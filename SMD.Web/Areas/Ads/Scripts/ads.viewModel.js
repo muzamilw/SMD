@@ -174,6 +174,8 @@ define("ads/ads.viewModel",
 				selectedGranularityAnalytics = ko.observable(1),
 				selectedCampaignIdAnalytics = ko.observable(),
 				AdsCampaignAnalyticsData = ko.observableArray([]),
+                PerAgeChartAnalyticsData = ko.observableArray([]),
+                PerGenderChartAnalyticsData = ko.observableArray([]),
 				CampaignROItblAnalyticData = ko.observableArray([]),
 				CampaignRatioAnalyticData = ko.observable(1),
 				granularityDropDown = ko.observableArray([{ id: 1, name: "Daily" }, { id: 2, name: "Weekly" }, { id: 3, name: "Monthly" }, { id: 4, name: "Quarterly" }, { id: 5, name: "Yearly" }]),
@@ -194,13 +196,15 @@ define("ads/ads.viewModel",
                 selectedQQAAnalytics = ko.observable(0),
                 selectedQQPAnalytics = ko.observable("All"),
                 isProfileQuestionUsed = ko.observable(false),
+                IsCityUsed = ko.observable(true),
                 isPollQuestionsQuestionUsed = ko.observable(false),
                 isPreviousQuizQuestionsUsed = ko.observable(false),
                 QQStatsAnalytics = ko.observable(),
                 SelectedItemAnalytics = ko.observable(),
-                CampaignName1 = ko.observable(),
+                hasImpression = ko.observable(false),
                 LogoUrl1 = ko.observable(),
                 VideoLink1 = ko.observable(),
+                CampaignName1 = ko.observable(),
                 CampaignName2 = ko.observable(),
                 LogoUrl2 = ko.observable(),
                 VideoLink2 = ko.observable(),
@@ -300,6 +304,12 @@ define("ads/ads.viewModel",
                                 ko.utils.arrayPushAll(QQChoicesAnalyticsData(), data.Choices);
                                 QQChoicesAnalyticsData.valueHasMutated();
                                 formAnalyticsData.removeAll();
+                                if (CitiesAnalyticsData().length < 2) {
+                                    IsCityUsed(false);
+                                } else {
+                                    IsCityUsed(true);
+                                }
+
                                 _.each(data.formData, function (item) {
                                     formAnalyticsData.push(model.formAnalyticsDataModel(item));
                                     if (item.typ==2) {
@@ -343,6 +353,48 @@ define("ads/ads.viewModel",
 				                CampaignROItblAnalyticData.removeAll();
 				                ko.utils.arrayPushAll(CampaignROItblAnalyticData(), data.ROItbl);
 				                CampaignROItblAnalyticData.valueHasMutated();
+
+				                PerAgeChartAnalyticsData.removeAll();
+				                ko.utils.arrayPushAll(PerAgeChartAnalyticsData(), data.PerAgeChart);
+				                PerAgeChartAnalyticsData.valueHasMutated();
+
+				                PerGenderChartAnalyticsData.removeAll();
+				                ko.utils.arrayPushAll(PerGenderChartAnalyticsData(), data.PerGenderChart);
+				                PerGenderChartAnalyticsData.valueHasMutated();
+                                
+				               
+
+
+				                if ((selecteddateRangeAnalytics() == 1 && CampaignTblAnalyticsData()[0].C30_days > 0) || (selecteddateRangeAnalytics() == 2 && CampaignTblAnalyticsData()[0].All_time > 0)) {
+
+				                    hasImpression(true);
+                                    
+				                    var DonutChart = Morris.Donut({
+				                        element: 'donutId',
+                                        data: CampaignRatioAnalyticData() , colors: ['green', 'blue', 'orange']
+				                    });
+				                    var BarChart1 = Morris.Bar({
+				                        element: 'AgeBarChartId',
+				                        data: PerAgeChartAnalyticsData(),
+				                        xkey: 'city', ykeys: ['C10_20', 'C20_30', 'C30_40', 'C40_50', 'C50_60', 'C60_70', 'C70_80', 'C80_90', 'C90_'], labels: ['10_20', '20_30', '30_40', '40_50', '50_60', '60_70', '70_80', '80_90', '90+']
+				                        //parseTime:false, setAxisAlignFirstX: true,
+				                        //barColors: ['green', 'blue', 'orange']
+				                    });
+				                    var BarChart2 = Morris.Bar({
+				                        element: 'GenderBarChartId',
+				                        data: PerGenderChartAnalyticsData(),
+				                        xkey: 'city', ykeys: ['male', 'female'], labels: ['male', 'female'],
+				                        parseTime: false, setAxisAlignFirstX: true,
+				                        barColors: ['green', 'blue']
+				                    });
+
+
+
+
+				                     
+                                } else {
+				                    hasImpression(false);
+				                }
 				            }
 
 				        },
@@ -3867,8 +3919,12 @@ define("ads/ads.viewModel",
                     QQStatsAnalytics: QQStatsAnalytics,
                     SelectedItemAnalytics: SelectedItemAnalytics,
                     isProfileQuestionUsed: isProfileQuestionUsed,
+                    IsCityUsed:IsCityUsed,
                     isPollQuestionsQuestionUsed: isPollQuestionsQuestionUsed,
                     isPreviousQuizQuestionsUsed: isPreviousQuizQuestionsUsed,
+                    PerAgeChartAnalyticsData: PerAgeChartAnalyticsData,
+                    PerGenderChartAnalyticsData: PerGenderChartAnalyticsData,
+                    hasImpression: hasImpression,
                     isAdSearch:isAdSearch,
                     CurrentMode: CurrentMode,
                     islblText: islblText,

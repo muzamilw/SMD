@@ -14,5 +14,6 @@ namespace SMD.Interfaces.Services
         /// </summary>
         IEnumerable<City> GetCitiesByCountryId(long countryId);
         IEnumerable<City> GetCities();
+        List<string> GetTargetCitiesPerCampaign(long id);
     }
 }

@@ -100,4 +100,10 @@
     <Build Include="getCampaignByIdFormDataAnalytic.sql" />
     <Build Include="getCampaignByIdQQFormAnalytic.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="getAdsCampaignPerCityPerGenderFormAnalytic.sql" />
+    <None Include="getAdsCampaignPerCityPerAgeFormAnalytic.sql" />
+    <None Include="getPollImpressionStatBySQIdFormAnalytic.sql" />
+    <None Include="getDealStatByCouponIdFormAnalytic.sql" />
+  </ItemGroup>
 </Project>
