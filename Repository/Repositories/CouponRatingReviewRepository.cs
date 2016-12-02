@@ -81,7 +81,7 @@ namespace SMD.Repository.Repositories
         }
         public int CouponReviewCount ()
         {
-            return db.CouponRatingReview.ToList().Count(a => a.CompanyId == CompanyId && a.Status==1 && (!string.IsNullOrEmpty(a.Review)));
+            return db.CouponRatingReview.ToList().Count(a => a.CompanyId == CompanyId && a.Status==1 && !string.IsNullOrEmpty(a.Review));
         }
 
       
