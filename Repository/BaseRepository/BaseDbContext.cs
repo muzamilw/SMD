@@ -906,6 +906,14 @@ namespace SMD.Repository.BaseRepository
 
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getAdsCampaignPerCityPerGenderFormAnalytic_Result>("getAdsCampaignPerCityPerGenderFormAnalytic", Id);
         }
+
+
+
+        public ObjectResult<GetNewLiveCouponsForEmail_Result> GetNewLiveCouponsForEmail()
+        {
+
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetNewLiveCouponsForEmail_Result>("GetNewLiveCouponsForEmail");
+        }
         #endregion
     }
 }

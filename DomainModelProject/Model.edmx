@@ -2786,6 +2786,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Parameter Name="DateTo" Type="datetime" Mode="In" />
           <Parameter Name="Granularity" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetNewLiveCouponsForEmail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="getPayoutVSRevenueOverTime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DateFrom" Type="datetime" Mode="In" />
           <Parameter Name="DateTo" Type="datetime" Mode="In" />
@@ -5964,6 +5965,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <Parameter Name="gender" Mode="In" Type="Int32" />
             <Parameter Name="ageRange" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="GetNewLiveCouponsForEmail" ReturnType="Collection(SMDDevModel.GetNewLiveCouponsForEmail_Result)" />
           </EntityContainer>
         <EntityType Name="CouponCategories">
           <Key>
@@ -7679,6 +7681,17 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="String" Name="city" Nullable="true" MaxLength="100" />
           <Property Type="Int32" Name="male" Nullable="false" />
           <Property Type="Int32" Name="female" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetNewLiveCouponsForEmail_Result">
+          <Property Type="String" Name="UserId" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="FullName" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="256" />
+          <Property Type="Int64" Name="CouponId" Nullable="false" />
+          <Property Type="String" Name="CouponTitle" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="couponimage1" Nullable="true" />
+          <Property Type="Double" Name="price" Nullable="true" />
+          <Property Type="Double" Name="savings" Nullable="true" />
+          <Property Type="Int32" Name="DaysLeft" Nullable="true" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -9740,6 +9753,21 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="getDealStatByCouponIdFormAnalytic" FunctionName="SMDDevModel.Store.getDealStatByCouponIdFormAnalytic" />
           <FunctionImportMapping FunctionImportName="getPollImpressionStatBySQIdFormAnalytic" FunctionName="SMDDevModel.Store.getPollImpressionStatBySQIdFormAnalytic" />
+          <FunctionImportMapping FunctionImportName="GetNewLiveCouponsForEmail" FunctionName="SMDDevModel.Store.GetNewLiveCouponsForEmail">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SMDDevModel.GetNewLiveCouponsForEmail_Result">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="CouponId" ColumnName="CouponId" />
+                <ScalarProperty Name="CouponTitle" ColumnName="CouponTitle" />
+                <ScalarProperty Name="couponimage1" ColumnName="couponimage1" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="savings" ColumnName="savings" />
+                <ScalarProperty Name="DaysLeft" ColumnName="DaysLeft" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
