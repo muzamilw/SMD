@@ -1,6 +1,7 @@
 ﻿using SMD.Models.DomainModels;
 using SMD.Models.IdentityModels;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace SMD.Interfaces.Services
 {
@@ -95,5 +96,8 @@ namespace SMD.Interfaces.Services
 
         void SendCouponCampaignApprovalEmail(string aspnetUserId, string campaignName, int dealNoOfDays, string BannerPath);
         void SendCouponCampaignRejectionEmail(string aspnetUserId, string campaignName, int dealNoOfDays, string BannerPath, string RReason);
+
+
+        void SendNewDealsEmail();
     }
 }

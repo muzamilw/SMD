@@ -1,6 +1,5 @@
 ﻿
-GO
-/****** Object:  StoredProcedure [dbo].[SearchCoupons]    Script Date: 11/21/2016 5:23:42 PM ******/
+/****** Object:  StoredProcedure [dbo].[SearchCoupons]    Script Date: 12/2/2016 12:29:49 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -24,7 +23,7 @@ AS
 BEGIN
 
 
-set @distance = 1000000
+set @distance = 10000000
 
 
 declare @currentDate datetime
@@ -69,8 +68,8 @@ DECLARE @source geography = geography::Point(@lat, @lon, 4326)
 				curr.CurrencyCode,
 				curr.CurrencySymbol,
 				isnull(crrRatingAvg.arravg,0)+5 AvgRating,
-				(case when uReview.UserId is null then 0 else 1 end) UserHasRated
-				
+				(case when uReview.UserId is null then 0 else 1 end) UserHasRated,
+				datediff(d,ApprovalDateTime,getdate()) as DaysLeft
 	
 
 				from Coupon vchr
@@ -163,7 +162,7 @@ DECLARE @source geography = geography::Point(@lat, @lon, 4326)
 					curr.CurrencySymbol,
 					isnull(crrRatingAvg.arravg,0)+5 AvgRating,
 					(case when uReview.UserId is null then 0 else 1 end) UserHasRated,
-				
+					datediff(d,ApprovalDateTime,getdate()) as DaysLeft,
 					0 as TotalItems
 
 					from Coupon vchr

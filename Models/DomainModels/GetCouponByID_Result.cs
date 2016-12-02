@@ -103,6 +103,8 @@ namespace SMD.Models.DomainModels
         public Nullable<bool> IsShowMap { get; set; }
         public Nullable<bool> IsShowyouTube { get; set; }
         public Nullable<bool> IsShowAboutUs { get; set; }
+
+        public Nullable<int> RatingCount { get; set; }
         
     }
 }

@@ -16,7 +16,7 @@ namespace SMD.Models.DomainModels
     {
         public long CouponReviewId { get; set; }
         public Nullable<long> CouponId { get; set; }
-        public Nullable<int> StarRating { get; set; }
+        public Nullable<double> StarRating { get; set; }
         public string Review { get; set; }
         public Nullable<System.DateTime> RatingDateTime { get; set; }
         public string UserId { get; set; }
