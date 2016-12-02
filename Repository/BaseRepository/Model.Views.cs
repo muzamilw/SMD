@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetsD4D9B398CC2503486BB70DA582E5AAC1EF30337FC23B81C8FA18E5C58804B359))]
+[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets2D73F3B63D4E245860FA3744FF86C7E54E5AD0B02866D02BDE6AD3D191850A41))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -17,18 +17,18 @@ namespace Edm_EntityMappingGeneratedViews
     /// <Summary>
     /// The type contains views for EntitySets and AssociationSets that were generated at design time.
     /// </Summary>
-    public sealed class ViewsForBaseEntitySetsD4D9B398CC2503486BB70DA582E5AAC1EF30337FC23B81C8FA18E5C58804B359 : System.Data.Mapping.EntityViewContainer
+    public sealed class ViewsForBaseEntitySets2D73F3B63D4E245860FA3744FF86C7E54E5AD0B02866D02BDE6AD3D191850A41 : System.Data.Mapping.EntityViewContainer
     {
         
         /// <Summary>
         /// The constructor stores the views for the extents and also the hash values generated based on the metadata and mapping closure and views.
         /// </Summary>
-        public ViewsForBaseEntitySetsD4D9B398CC2503486BB70DA582E5AAC1EF30337FC23B81C8FA18E5C58804B359()
+        public ViewsForBaseEntitySets2D73F3B63D4E245860FA3744FF86C7E54E5AD0B02866D02BDE6AD3D191850A41()
         {
             this.EdmEntityContainerName = "BaseDbContext";
             this.StoreEntityContainerName = "SMDModelStoreContainer";
-            this.HashOverMappingClosure = "1bf41c48d93c9260de1c0753483780718922afcac17afc2479bf4d544d787187";
-            this.HashOverAllExtentViews = "7fc83a5afede329aacf9c3d14555db3289b513da5eb6712992ebadcd3e3913bc";
+            this.HashOverMappingClosure = "3d53d9fb7ab71cc6920bf76feab2d9bd045032fd1a2fd339ff5a9e551ae2c83d";
+            this.HashOverAllExtentViews = "2e656a2a1ca3268de88e3e3e1240b0fd1b66dd93be30f0205a8d890f3b405451";
             this.ViewCount = 138;
         }
         
@@ -1973,7 +1973,7 @@ namespace Edm_EntityMappingGeneratedViews
         SELECT 
             T.CouponReviewId AS CouponRatingReview_CouponReviewId, 
             T.CouponId AS CouponRatingReview_CouponId, 
-            CAST(T.StarRating AS [Edm.Double]) AS CouponRatingReview_StarRating, 
+            T.StarRating AS CouponRatingReview_StarRating, 
             T.Review AS CouponRatingReview_Review, 
             T.RatingDateTime AS CouponRatingReview_RatingDateTime, 
             T.UserId AS CouponRatingReview_UserId, 
@@ -3376,7 +3376,7 @@ namespace Edm_EntityMappingGeneratedViews
         SELECT 
             T.CouponReviewId AS CouponRatingReview_CouponReviewId, 
             T.CouponId AS CouponRatingReview_CouponId, 
-            CAST(T.StarRating AS [Edm.Int32]) AS CouponRatingReview_StarRating, 
+            T.StarRating AS CouponRatingReview_StarRating, 
             T.Review AS CouponRatingReview_Review, 
             T.RatingDateTime AS CouponRatingReview_RatingDateTime, 
             T.UserId AS CouponRatingReview_UserId, 
