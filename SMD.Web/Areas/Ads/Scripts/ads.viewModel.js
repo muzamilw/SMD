@@ -1087,6 +1087,12 @@ define("ads/ads.viewModel",
                         errorListNew.push({ name: "Please enter ad Title.", element: "" });
 
                     }
+                    if (campaignModel().Type() == "4") {
+                        if (campaignModel().LogoUrl() == "" || campaignModel().LogoUrl() == undefined || campaignModel().LogoUrl() =="/images/standardplaceholder.png") {
+                            noErrors = false;
+                            toastr.error("Please upload Banner.");
+                        }
+                    }
 
                     if (campaignModel().ClickRate() == undefined) {
                         campaignModel().ClickRate(0);

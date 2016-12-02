@@ -141,7 +141,9 @@
               CouponCodes = ko.observableArray([]),
               IsUseFilter = ko.observable(IsUseFilter),
 
-              LogoUrl = ko.observable(logoUrl != null ? logoUrl.startsWith('http') ? logoUrl : '/' + logoUrl : null),
+              LogoUrl = ko.observable(logoUrl != null ? logoUrl.startsWith('http') ? logoUrl : '/' + logoUrl : null).extend({  // custom message
+                  required: true
+              }),
 
               VoucherAdditionalInfo = ko.observable(VoucherAdditionalInfo),
               LogoImageBytes = ko.observable(''),
@@ -168,7 +170,8 @@
                     //StartDateTime: StartDateTime,
                     //EndDateTime: EndDateTime,
                     MaxBudget: MaxBudget,
-                    AgeRangeEnd: AgeRangeEnd
+                    AgeRangeEnd: AgeRangeEnd,
+                    LogoUrl: LogoUrl
                 }),
                 // Is Valid 
                 isValid = ko.computed(function () {

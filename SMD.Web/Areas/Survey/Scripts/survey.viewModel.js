@@ -1392,7 +1392,7 @@ define("survey/survey.viewModel",
                          if (isEditorVisible()) {
                              selectedQuestion().errors.showAllMessages();
 
-                             toastr.error("Please fill the required feilds to continue.");
+                             toastr.error("Please fill the required feilds and upload pictures to continue.");
                              if (errorList().length > 0) {
                                  $.each(errorList(), function (key, value) {
                                      toastr.error(value);
@@ -1449,7 +1449,7 @@ define("survey/survey.viewModel",
                         if (isEditorVisible()) {
                             selectedQuestion().errors.showAllMessages();
 
-                            toastr.error("Please fill the required feilds to continue.");
+                            toastr.error("Please fill the required feilds and upload pictures to continue.");
                             if (errorList().length > 0) {
                                 $.each(errorList(), function (key, value) {
                                     toastr.error(value);
