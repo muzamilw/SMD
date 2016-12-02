@@ -274,6 +274,9 @@
           <Property Name="Title" Type="nvarchar" MaxLength="50" />
           <Property Name="Phone1CodeCountryID" Type="int" />
           <Property Name="DeleteConfirmationToken" Type="nvarchar" MaxLength="150" />
+          <Property Name="LastKnownLocationLat" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastKnownLocationLong" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastKnownLocation" Type="geography" />
         </EntityType>
         <EntityType Name="AspNetUsersNotificationTokens">
           <Key>
@@ -3834,6 +3837,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <NavigationProperty Name="Country" Relationship="SMDDevModel.FK_AspNetUsers_Country" FromRole="AspNetUser" ToRole="Country" />
           <NavigationProperty Name="AspNetUsersNotificationTokens" Relationship="SMDDevModel.FK_AspNetUsersNotificationTokens_AspNetUsers" FromRole="AspNetUser" ToRole="AspNetUsersNotificationToken" />
           <Property Name="DeleteConfirmationToken" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="LastKnownLocationLat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastKnownLocationLong" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastKnownLocation" Type="Geography" />
         </EntityType>
         <EntityType Name="AuditLog">
           <Key>
@@ -5942,10 +5948,10 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Parameter Name="type" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="getAdsCampaignPerCityPerAgeFormAnalytic" ReturnType="Collection(SMDDevModel.getAdsCampaignPerCityPerAgeFormAnalytic_Result)">
-            <Parameter Name="Id" Mode="In" Type="Int32" />
+          <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="getAdsCampaignPerCityPerGenderFormAnalytic" ReturnType="Collection(SMDDevModel.getAdsCampaignPerCityPerGenderFormAnalytic_Result)">
-            <Parameter Name="Id" Mode="In" Type="Int32" />
+          <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="getDealStatByCouponIdFormAnalytic" ReturnType="Collection(Int32)">
             <Parameter Name="Id" Mode="In" Type="Int32" />
@@ -7892,6 +7898,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="SMDDevModel.AspNetUser">
               <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="LastKnownLocation" ColumnName="LastKnownLocation" />
+                <ScalarProperty Name="LastKnownLocationLong" ColumnName="LastKnownLocationLong" />
+                <ScalarProperty Name="LastKnownLocationLat" ColumnName="LastKnownLocationLat" />
                 <ScalarProperty Name="DeleteConfirmationToken" ColumnName="DeleteConfirmationToken" />
                 <ScalarProperty Name="Phone1CodeCountryID" ColumnName="Phone1CodeCountryID" />
                 <ScalarProperty Name="Title" ColumnName="Title" />

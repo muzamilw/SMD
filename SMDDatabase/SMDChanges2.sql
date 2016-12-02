@@ -3393,3 +3393,103 @@ GO
 ALTER TABLE dbo.AspNetUsers SET (LOCK_ESCALATION = TABLE)
 GO
 COMMIT
+
+
+
+
+
+/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.AspNetUsers ADD
+	LastKnownLocationLat nvarchar(50) NULL,
+	LastKnownLocationLong nvarchar(50) NULL,
+	LastKnownLocation geography NULL
+GO
+ALTER TABLE dbo.AspNetUsers SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
+
+
+
+
+
+
+/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.CouponRatingReview
+	DROP CONSTRAINT FK_CouponRatingReview_Coupon
+GO
+ALTER TABLE dbo.Coupon SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+CREATE TABLE dbo.Tmp_CouponRatingReview
+	(
+	CouponReviewId bigint NOT NULL IDENTITY (1, 1),
+	CouponId bigint NULL,
+	StarRating float(53) NULL,
+	Review nvarchar(800) NULL,
+	RatingDateTime datetime NULL,
+	UserId nvarchar(128) NULL,
+	CompanyId int NULL,
+	Status int NULL,
+	ReviewImage1 nvarchar(250) NULL,
+	ReviewImage2 nvarchar(250) NULL,
+	Reviewimage3 nvarchar(250) NULL
+	)  ON [PRIMARY]
+GO
+ALTER TABLE dbo.Tmp_CouponRatingReview SET (LOCK_ESCALATION = TABLE)
+GO
+SET IDENTITY_INSERT dbo.Tmp_CouponRatingReview ON
+GO
+IF EXISTS(SELECT * FROM dbo.CouponRatingReview)
+	 EXEC('INSERT INTO dbo.Tmp_CouponRatingReview (CouponReviewId, CouponId, StarRating, Review, RatingDateTime, UserId, CompanyId, Status, ReviewImage1, ReviewImage2, Reviewimage3)
+		SELECT CouponReviewId, CouponId, CONVERT(float(53), StarRating), Review, RatingDateTime, UserId, CompanyId, Status, ReviewImage1, ReviewImage2, Reviewimage3 FROM dbo.CouponRatingReview WITH (HOLDLOCK TABLOCKX)')
+GO
+SET IDENTITY_INSERT dbo.Tmp_CouponRatingReview OFF
+GO
+DROP TABLE dbo.CouponRatingReview
+GO
+EXECUTE sp_rename N'dbo.Tmp_CouponRatingReview', N'CouponRatingReview', 'OBJECT' 
+GO
+ALTER TABLE dbo.CouponRatingReview ADD CONSTRAINT
+	PK_CouponRatingReview PRIMARY KEY CLUSTERED 
+	(
+	CouponReviewId
+	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+
+GO
+ALTER TABLE dbo.CouponRatingReview ADD CONSTRAINT
+	FK_CouponRatingReview_Coupon FOREIGN KEY
+	(
+	CouponId
+	) REFERENCES dbo.Coupon
+	(
+	CouponId
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+COMMIT

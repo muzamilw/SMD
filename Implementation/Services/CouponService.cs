@@ -673,9 +673,11 @@ namespace SMD.Implementation.Services
 
             var result = couponRepository.GetCouponByIdSP(CouponId, UserId, Lat, Lon);
 
+            int RatingCount = 0;
 
-            rating = couponRatingReviewRepository.GetPublishedCouponRatingReview(CouponId);
+            rating = couponRatingReviewRepository.GetPublishedCouponRatingReview(CouponId, out RatingCount);
 
+            result.RatingCount = RatingCount;
 
             return result;
 

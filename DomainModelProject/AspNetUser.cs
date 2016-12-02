@@ -74,6 +74,9 @@ namespace DomainModelProject
         public string Title { get; set; }
         public Nullable<int> Phone1CodeCountryID { get; set; }
         public string DeleteConfirmationToken { get; set; }
+        public string LastKnownLocationLat { get; set; }
+        public string LastKnownLocationLong { get; set; }
+        public System.Data.Entity.Spatial.DbGeography LastKnownLocation { get; set; }
     
         public virtual ICollection<AdCampaignResponse> AdCampaignResponses { get; set; }
         public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }

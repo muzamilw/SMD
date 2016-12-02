@@ -9,7 +9,7 @@ namespace SMD.MIS.Areas.Api.Models
     {
        
         public Nullable<long> CouponId { get; set; }
-        public Nullable<int> StarRating { get; set; }
+        public Nullable<double> StarRating { get; set; }
         public string Review { get; set; }
                public string UserId { get; set; }
         public Nullable<int> CompanyId { get; set; }

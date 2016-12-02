@@ -273,6 +273,12 @@ namespace SMD.Repository.Repositories
         }
 
 
+        public List<Coupon> GetNewLiveCouponsForEmail()
+        {
+            return db.Coupons.Where(c => c.Status == 3 && DateTime.Compare( c.ApprovalDateTime.Value.Date, DateTime.Today.Date) == 0).ToList();
+        }
+
+
         #endregion
     }
 }
