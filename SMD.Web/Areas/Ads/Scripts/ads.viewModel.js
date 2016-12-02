@@ -63,6 +63,7 @@ define("ads/ads.viewModel",
                     isNewCriteria = ko.observable(true),
                     IsShownforVideo = ko.observable(true),
                     isEnableVedioVerificationLink = ko.observable(false),
+                    headText = ko.observable(),
                     //caption variablels 
                     lblCampaignName = ko.observable("Campaign Name"),
                     Modelheading = ko.observable(""),
@@ -2015,7 +2016,7 @@ define("ads/ads.viewModel",
 
                     if (campaignModel().IsUseFilter() == 0) {
 
-                        confirmation.messageText("Switching to Basic Targeting will remove all Hyper Targeting filters.Continue to Basic Targeting,  Yes No.");
+                        confirmation.messageText("Switching to Basic Targeting will remove all Hyper Targeting filters."+"</br>"+"Continue to Basic Targeting.");
                         confirmation.afterProceed(function () {
                             IsBroadMarketing(false);
                             campaignModel().AdCampaignTargetLocations.removeAll();
@@ -2037,7 +2038,7 @@ define("ads/ads.viewModel",
                     }
                     else {
 
-                        confirmation.messageText("Switching to Basic Targeting will remove all Hyper Targeting filters.Continue to Basic Targeting,  Yes No.");
+                        confirmation.messageText("Switching to Basic Targeting will remove all Hyper Targeting filters."+"</br>"+"Continue to Basic Targeting.");
                         confirmation.afterProceed(function () {
                             IsBroadMarketing(true);
                             campaignModel().AdCampaignTargetLocations.removeAll();
@@ -3665,6 +3666,7 @@ define("ads/ads.viewModel",
                         IsGameAds(true);
                         CampaignHeader('( Display Ad )');
                         IsNewVideoCampaign(false);
+                        headText("Display Ads");
                     }
                     else {
                         UrlHeadings("Call for Action Button");
@@ -3673,6 +3675,7 @@ define("ads/ads.viewModel",
                         IsvideoBtn(true);
                         IsGameAds(false);
                         StatusCodeName("Display");
+                        headText("Video Ads");
                         CampaignHeader("");
                         StatusCodeImage("/Content/Images/Videomod.png");
                         IsNewVideoCampaign(true);
@@ -3942,7 +3945,8 @@ define("ads/ads.viewModel",
                     VideoLink2:VideoLink2,
                     CampaignName3:CampaignName3,
                     LogoUrl3:LogoUrl3,
-                    VideoLink3:VideoLink3
+                    VideoLink3: VideoLink3,
+                    headText: headText
                 };
             })()
         };
