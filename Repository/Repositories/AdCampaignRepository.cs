@@ -365,5 +365,18 @@ namespace SMD.Repository.Repositories
         {
             return db.getCampaignByIdFormDataAnalytic(CampaignId).ToList();
         }
+        public List<GetRandomAdCampaign_Result> GetRandomAdCampaign(int Type)
+        {
+            return db.GetRandomAdCampaign(Type).ToList();
+        }
+
+        public List<getAdsCampaignPerCityPerGenderFormAnalytic_Result> getAdsCampaignPerCityPerGenderFormAnalytic(long _Id) {
+            return db.getAdsCampaignPerCityPerGenderFormAnalytic(_Id).ToList();
+        
+        }
+        public List<getAdsCampaignPerCityPerAgeFormAnalytic_Result> getAdsCampaignPerCityPerAgeFormAnalytic(long _Id)
+        {
+            return db.getAdsCampaignPerCityPerAgeFormAnalytic(_Id).ToList();
+        }
     }
 }

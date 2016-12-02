@@ -24,15 +24,39 @@ namespace SMD.MIS.Areas.Api.Controllers
          #endregion
         
         #region public
-        public DealByCouponIdForAnalyticsResponse getDealByCouponIDAnalytics(int CouponID, int dateRange, int Granularity)
+        public DealByCouponIdForAnalyticsResponse getDealByCouponIDAnalytics(int CouponID, int dateRange, int Granularity, int type, int Gender, int age, int Stype)
         {
 
             DealByCouponIdForAnalyticsResponse data = new DealByCouponIdForAnalyticsResponse();
-            data.lineCharts = _ICouponService.getDealByCouponIDAnalytics(CouponID, dateRange, Granularity);
-            data.pieCharts = _ICouponService.getDealByCouponIdRatioAnalytic(CouponID, dateRange);
-            data.expiryDate = _ICouponService.getExpiryDate(CouponID).ToString("D");
+            
+            if (type == 1)
+            {
+                data.lineCharts = _ICouponService.getDealByCouponIDAnalytics(CouponID, dateRange, Granularity);
+                data.pieCharts = _ICouponService.getDealByCouponIdRatioAnalytic(CouponID, dateRange);
+                data.ImpressionStat = _ICouponService.getDealStatByCouponIdFormAnalytic(CouponID, Gender, age, 1);
+                data.ClickTrouStat = _ICouponService.getDealStatByCouponIdFormAnalytic(CouponID, Gender, age, 2); 
+            }
+            else
+            {
+                if (Stype == 1) {
+                     data.ImpressionStat = _ICouponService.getDealStatByCouponIdFormAnalytic(CouponID, Gender, age, 1);
+                }
+                else if (Stype == 2) 
+                {
+                    data.ClickTrouStat = _ICouponService.getDealStatByCouponIdFormAnalytic(CouponID, Gender, age, 2); 
+                }
+               
+                
+            }
+
+         //   data.expiryDate = _ICouponService.getExpiryDate(CouponID).ToString("D");
             return data;
         }
         #endregion
     }
 }
+
+ //public int getDealStatByCouponIdFormAnalytic(long dealId, int Gender, int age, int type)
+ //       {
+ //           return couponRepository.getDealStatByCouponIdFormAnalytic(dealId, Gender, age, type); 
+ //       }

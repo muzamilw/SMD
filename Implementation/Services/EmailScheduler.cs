@@ -47,7 +47,7 @@ namespace SMD.Implementation.Services
         {
 
             // Registration of Debit Process Scheduler Run after every 7 days 
-          //  registry.Schedule(SendEmailFromQueue).ToRunNow().AndEvery(10).Minutes();
+            //registry.Schedule(SendEmailFromQueue).ToRunNow().AndEvery(10).Minutes();
         }
         public static void MonthlyAccountDetailsOfUser()
         {
@@ -274,6 +274,30 @@ namespace SMD.Implementation.Services
 
             }
 
+        }
+
+
+
+
+
+
+        public static void NewDealAvailableEmail(Registry registry, System.Web.HttpContext context)
+        {
+            RequestContext = context;
+            if (context.Handler != null)
+            {
+                SiteUrl = context.Request.Url.Scheme + "://" + context.Request.Url.Host;
+            }
+            else
+            {
+                SiteUrl = "http://manage.cash4ads.com";
+            }
+
+          
+
+            // Registration of Debit Process Scheduler Run after every 7 days 
+            //registry.Schedule( new Action(  EmailManagerService.SendNewDealsEmail).ToRunEvery(1).Days().At(10,0);
+            //  registry.Schedule(MonthlyAccountDetailsOfUser).AndEvery(1).Months();
         }
     }
 }

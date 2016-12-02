@@ -23,6 +23,8 @@ namespace SMD.Interfaces.Repository
         /// </summary>
         IEnumerable<City> GetAllCitiesOfCountry(long countryId);
         IEnumerable<City> GetCities();
+        List<string> GetTargetCitiesPerCampaign(long id);
+        
         int GetCityId(string name);
     }
 }

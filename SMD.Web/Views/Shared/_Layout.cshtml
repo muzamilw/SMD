@@ -128,78 +128,79 @@
                 </div>
 
 
+                <div id="companyProfileBinding">
+                    <div class="nav-no-collapse pull-right" id="header-nav" style="margin-top:35px;">
 
-                <div class="nav-no-collapse pull-right" id="header-nav" style="margin-top:35px;">
+                        <ul class="nav navbar-nav pull-right">
+                            <!-- MPC Admin Menu-->
+                            <li class="dropdown profile-dropdown @classesMenu" style="display:none;">
+                                <a href="#" class="dropdown-toggle " data-toggle="dropdown">
+                                    <span class="hidden-xs"> Admin Options  </span> <b class="caret"></b>
+                                    <div class="user-positioner" style="position:fixed;">
+                                    </div>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="">Approve/Reject </a></li>
+                                    <li class="inlineMenuItem"><a href="~/Ads/Ads/AddAproval">&nbsp;&nbsp; Ad Campaigns</a></li>
+                                    <li class="inlineMenuItem"><a href="~/Survey/SurveyQuestionApproval">&nbsp;&nbsp;User Suvey Slides</a></li>
+                                    <li class="inlineMenuItem"><a href="~/Ads/Ads/AddAproval?mode=2">&nbsp;&nbsp;Coupons</a></li>
+                                    <li><a href="">Edit</a></li>
+                                    <li class="inlineMenuItem"><a href="~/ProfileQuestion/Manage/Index">&nbsp;&nbsp;Profile Questions</a></li>
+                                    <li class="inlineMenuItem"><a href="~/survey">&nbsp;&nbsp;Survey Questions</a></li>
+                                    <li><a href="">View</a></li>
+                                    <li class="inlineMenuItem"><a href="~/Ads/Ads/Index">&nbsp;&nbsp;All Live Ad Campaigns</a></li>
+                                    <li class="inlineMenuItem"><a href="~/survey">&nbsp;&nbsp;All Live Survey Slides</a></li>
+                                    <li><a href="~/Billing/Manage/Invoice">Reports and Analytics</a></li>
+                                    <li><a href="~/Report/Report/TransactionReport">Cash4Ads Transaction Report</a></li>
+                                </ul>
+                            </li>
+                            <!-- Normal Menu-->
 
-                    <ul class="nav navbar-nav pull-right">
-                        <!-- MPC Admin Menu-->
-                        <li class="dropdown profile-dropdown @classesMenu" style="display:none;">
-                            <a href="#" class="dropdown-toggle " data-toggle="dropdown">
-                                <span class="hidden-xs"> Admin Options  </span> <b class="caret"></b>
-                                <div class="user-positioner" style="position:fixed;">
-                                </div>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="">Approve/Reject </a></li>
-                                <li class="inlineMenuItem"><a href="~/Ads/Ads/AddAproval">&nbsp;&nbsp; Ad Campaigns</a></li>
-                                <li class="inlineMenuItem"><a href="~/Survey/SurveyQuestionApproval">&nbsp;&nbsp;User Suvey Slides</a></li>
-                                <li class="inlineMenuItem"><a href="~/Ads/Ads/AddAproval?mode=2">&nbsp;&nbsp;Coupons</a></li>
-                                <li><a href="">Edit</a></li>
-                                <li class="inlineMenuItem"><a href="~/ProfileQuestion/Manage/Index">&nbsp;&nbsp;Profile Questions</a></li>
-                                <li class="inlineMenuItem"><a href="~/survey">&nbsp;&nbsp;Survey Questions</a></li>
-                                <li><a href="">View</a></li>
-                                <li class="inlineMenuItem"><a href="~/Ads/Ads/Index">&nbsp;&nbsp;All Live Ad Campaigns</a></li>
-                                <li class="inlineMenuItem"><a href="~/survey">&nbsp;&nbsp;All Live Survey Slides</a></li>
-                                <li><a href="~/Billing/Manage/Invoice">Reports and Analytics</a></li>
-                                <li><a href="~/Report/Report/TransactionReport">Cash4Ads Transaction Report</a></li>
-                            </ul>
-                        </li>
-                        <!-- Normal Menu-->
-
-                        <li>
-                            <a style="padding-right:7px!important;padding-top:0px!important;">
-                                @if (!String.IsNullOrEmpty(CompanyLogo))
-                                {
-                                    <img style="width:60px;height:36px;background-color: white;border-radius: 5px;" id="companyLogo" src="~/@CompanyLogo" />
-                                }
-                                else
-                                {
-                                    <img style="width:60px;height:36px;background-color: white;border-radius: 5px;" id="companyLogo" src="@CompanyLogo" />
-                                }
-
-                            </a>
-                        </li>
-
-                        <li class="dropdown profile-dropdown">
-                            <a href="#" class="dropdown-toggle dash_header-btn" data-toggle="dropdown">
-                                <span class="hidden-xs" style="font-size:14px;">
-                                    @if (!String.IsNullOrEmpty(userName))
+                            <li>
+                                <a style="padding-right:7px!important;padding-top:0px!important;" data-bind="click:showCompanyProfileDialog">
+                                    @if (!String.IsNullOrEmpty(CompanyLogo))
                                     {
-                                        @userName;
-                                                 Name = userName;
+                                        <img style="width:60px;height:36px;background-color: white;border-radius: 5px;" id="companyLogo" src="~/@CompanyLogo" />
                                     }
                                     else
                                     {
-                                        if (User != null && User.Identity != null)
-                                        {
-                                            @User.Identity.Name;
-                                                               Name = User.Identity.Name;
-                                        }
+                                        <img style="width:60px;height:36px;background-color: white;border-radius: 5px;" id="companyLogo" src="@CompanyLogo" />
                                     }
 
+                                </a>
+                            </li>
 
-                                    @*</span> <b class="caret"></b>
-                                        <div class="user-positioner" style="position:fixed;">
-                                        </div>*@
-                            </a>
-                            <ul class="dropdown-menu loginMenu">
+                            <li class="dropdown profile-dropdown">
+                                <a href="#" class="dropdown-toggle dash_header-btn" data-toggle="dropdown">
+                                    <span class="hidden-xs" style="font-size:14px;">
+                                        @if (!String.IsNullOrEmpty(userName))
+                                        {
+                                            @userName;
+                                                     Name = userName;
+                                        }
+                                        else
+                                        {
+                                            if (User != null && User.Identity != null)
+                                            {
+                                                @User.Identity.Name;
+                                                               Name = User.Identity.Name;
+                                            }
+                                        }
 
-                                <li><span style="color:#ada7a7;margin-left:36px;font-size:13px;">@Name</span></li>
-                                <li><span style="color:#ada7a7;margin-left:36px;font-size:13px;">@Email</span></li>
-                                <li><span style="color:#ada7a7;margin-left:36px;font-size:13px;">@MobileNo</span></li>
-                                <li><span style="color:#ada7a7;margin-left:36px;font-size:13px;">Role : @RoleName</span></li>
-                                @*<li style="height:9px;"></li>*@
-                                <li style="display: block;
+
+                                        @*</span> <b class="caret"></b>
+                                <div class="user-positioner" style="position:fixed;">
+                                </div>*@
+                                </a>
+                                <ul class="dropdown-menu loginMenu">
+
+                                    <li><span style="color:#ada7a7;margin-left:36px;font-size:13px;">@Name</span></li>
+                                    <li><span style="color:#ada7a7;margin-left:36px;font-size:13px;">@Email</span></li>
+                                    <li><span style="color:#ada7a7;margin-left:36px;font-size:13px;">@MobileNo</span></li>
+                                    <li><span style="color:#ada7a7;margin-left:36px;font-size:13px;">@CompanyName</span></li>
+                                    <li><span style="color:#ada7a7;margin-left:36px;font-size:13px;">Role : @RoleName</span></li>
+                                    @*<li style="height:9px;"></li>*@
+                                    <li style="display: block;
                                 margin-top: 0.5em;
                                 margin-bottom: 0.5em;
                                 margin-left: auto;
@@ -208,31 +209,31 @@
                                 border-width: 1px;"></li>
 
 
-                                @*<li id="userProfileBinding"><a data-bind="click:showUserProfileDialog">Personal Profile</a></li>*@
-                                <li id="companyProfileBinding"><a id="cprofile" style="cursor: pointer" data-bind="click:showCompanyProfileDialog">Account Settings</a></li>
-                                <li><a href="~/Billing/Manage/Invoice">Billing History</a></li>
+                                    @*<li id="userProfileBinding"><a data-bind="click:showUserProfileDialog">Personal Profile</a></li>*@
+                                    <li><a id="cprofile" style="cursor: pointer" data-bind="click:showCompanyProfileDialog">Account Settings</a></li>
+                                    <li><a href="~/Billing/Manage/Invoice">Billing History</a></li>
 
-                                <li><a href="/User/ManageUser/ManageUsers">Manage Users</a></li>
-                                <li><a onclick="OpenBranchLocation();">Manage Branches</a></li>
-                                <li><a href="/Coupons/Coupons/CouponReviews">Manage Reviews</a></li>
-                                @*<li><a href="/DamImages/Grid">Image library</a></li>*@
-                                @*<li><a onclick="OpenPhraseLibrary();">Phrase library</a></li>*@
+                                    <li><a href="/User/ManageUser/ManageUsers">Manage Users</a></li>
+                                    <li><a onclick="OpenBranchLocation();">Manage Branches</a></li>
+                                    <li><a href="/Coupons/Coupons/CouponReviews">Manage Reviews</a></li>
+                                    @*<li><a href="/DamImages/Grid">Image library</a></li>*@
+                                    @*<li><a onclick="OpenPhraseLibrary();">Phrase library</a></li>*@
 
-                                <li style="display: block;
+                                    <li style="display: block;
                                 margin-top: 0.5em;
                                 margin-bottom: 0.5em;
                                 margin-left: auto;
                                 margin-right: auto;
                                 border-style: inset;
-                                border-width: 1px;"></li>
-                                @*<li><a href="~/">Analytics and Charts</a></li>*@
-                                <li><a class=" " id="btnWalletHistory" href="~/Report/report/WalletReport">Wallet History</a></li>
-                                <li><a class=" " id="btnReferAdvert" href="~/Report/report/ManageAdvertises">Manage Advertisers</a></li>  @*href="~/Report/report/ManageAdvertises" use this link when you nedd for now we are disabled it*@
+                                border-width: 1px;display:none"></li>
+                                    @*<li><a href="~/">Analytics and Charts</a></li>*@
+                                    <li><a class=" " id="btnWalletHistory" style="display:none" href="~/Report/report/WalletReport">Wallet History</a></li>
+                                    <li><a class=" " id="btnReferAdvert" style="display:none" href="~/Report/report/ManageAdvertises">Manage Advertisers</a></li>  @*href="~/Report/report/ManageAdvertises" use this link when you nedd for now we are disabled it*@
 
-                                @*<li class="inlineMenuItem"><a href="~/Billing/Manage/Invoice">&nbsp;&nbsp;View Invoices</a></li>
-                                    <li class="inlineMenuItem"><a href="">&nbsp;&nbsp;Payment Methods</a></li>*@
+                                    @*<li class="inlineMenuItem"><a href="~/Billing/Manage/Invoice">&nbsp;&nbsp;View Invoices</a></li>
+                            <li class="inlineMenuItem"><a href="">&nbsp;&nbsp;Payment Methods</a></li>*@
 
-                                <li style="display: block;
+                                    <li style="display: block;
     margin-top: 0.5em;
     margin-bottom: 0.5em;
     margin-left: auto;
@@ -240,18 +241,18 @@
     border-style: inset;
     border-width: 1px;"></li>
 
-                                <li><a href="">Delete my Account</a></li>
+                                    <li><a href="">Delete my Account</a></li>
 
-                                @*<li><a href="">Ad Campaigns</a></li>
-                                    <li class="inlineMenuItem" style="display:none;"><a href="~/Ads/Ads">&nbsp;&nbsp;Create Ad Campaigns</a></li>
-                                    <li class="inlineMenuItem"><a href="~/Ads/Ads">&nbsp;&nbsp;View Ad Campaigns</a></li>
-                                    <li><a href="">Survey Slides</a></li>
-                                    <li class="inlineMenuItem" style="display:none;"><a href="~/survey">&nbsp;&nbsp;Create Survey Slides</a></li>
-                                    <li class="inlineMenuItem"><a href="~/survey">&nbsp;&nbsp;View Survey Slides</a></li>*@
+                                    @*<li><a href="">Ad Campaigns</a></li>
+                            <li class="inlineMenuItem" style="display:none;"><a href="~/Ads/Ads">&nbsp;&nbsp;Create Ad Campaigns</a></li>
+                            <li class="inlineMenuItem"><a href="~/Ads/Ads">&nbsp;&nbsp;View Ad Campaigns</a></li>
+                            <li><a href="">Survey Slides</a></li>
+                            <li class="inlineMenuItem" style="display:none;"><a href="~/survey">&nbsp;&nbsp;Create Survey Slides</a></li>
+                            <li class="inlineMenuItem"><a href="~/survey">&nbsp;&nbsp;View Survey Slides</a></li>*@
 
-                                @*<li class=""><a href="~/user/ManageUser/ManageUsers">Invite users </a></li>*@
+                                    @*<li class=""><a href="~/user/ManageUser/ManageUsers">Invite users </a></li>*@
 
-                                <li style="display: block;
+                                    <li style="display: block;
     margin-top: 0.5em;
     margin-bottom: 0.5em;
     margin-left: auto;
@@ -259,62 +260,63 @@
     border-style: inset;
     border-width: 1px;"></li>
 
-                                <li><a href="~/Account/LogOff"><i class="fa fa-power-off"></i>Logout</a></li>
-                            </ul>
-                        </li>
-                        @*<li class="dropdown profile-dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <span class="hidden-xs">
-                                        <i class="fa fa-life-ring"></i>
-                                    </span> <b class="caret"></b>
-
-                                </a>
-                                <ul class="dropdown-menu loginMenu">
-                                    <li><a href="">Startup Guide</a></li>
-                                    <li><a href="">Training Videos</a></li>
-                                    <li><a href="">Help Center</a></li>
-                                    <li><a href="">Contact Us</a></li>
+                                    <li><a href="~/Account/LogOff"><i class="fa fa-power-off"></i>Logout</a></li>
                                 </ul>
-                            </li>*@
+                            </li>
+                            @*<li class="dropdown profile-dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <span class="hidden-xs">
+                                <i class="fa fa-life-ring"></i>
+                            </span> <b class="caret"></b>
 
-                        <li>
-                            <a href="http://cash4ads.com/" target="_blank" class="dash_header-btn icon-lg icon-information">
+                        </a>
+                        <ul class="dropdown-menu loginMenu">
+                            <li><a href="">Startup Guide</a></li>
+                            <li><a href="">Training Videos</a></li>
+                            <li><a href="">Help Center</a></li>
+                            <li><a href="">Contact Us</a></li>
+                        </ul>
+                    </li>*@
 
-                                @*<i class=" fa fa-life-ring">
-                                    </i>*@
-                                <i class="fa fa-exclamation-circle" aria-hidden="true" style="font-size:19px;"></i>
-                            </a>
-                        </li>
+                            <li>
+                                <a href="http://cash4ads.com/" target="_blank" class="dash_header-btn icon-lg icon-information">
 
-                        <li>
-                            <a class="dash_header-btn icon-lg icon-information" href="/Coupons/Coupons/CouponReviews">
-
-                                @*<i class=" fa fa-life-ring">
-                                    </i>*@
-                                <i class="fa fa-bell" id="whiteicon" aria-hidden="true" style="font-size:19px; color:white;display:none"></i>
-                                <img style="height:25px;width:25px; display:none" id="imgRedbell" src="/images/Red_Bell.png" />
-                            </a>
-                        </li>
-                        @*<li class="dropdown profile-dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <span class="hidden-xs" style="color:#fff;">
-                                        <i class="fa fa-life-ring"></i>
-                                    </span> <b class="caret"></b>
+                                    @*<i class=" fa fa-life-ring">
+                            </i>*@
+                                    <i class="fa fa-exclamation-circle" aria-hidden="true" style="font-size:19px;"></i>
                                 </a>
-                                <ul class="dropdown-menu loginMenu">
-                                    <li><a href="/Home/StartupGuide">Startup Guide</a></li>
-                                    <li><a href="/Home/TrainingVideos">Training Videos</a></li>
-                                    <li><a href="/Home/ContactUs">Contact Us</a></li>
-                                </ul>
-                            </li>*@
+                            </li>
+
+                            <li>
+                                <a class="dash_header-btn icon-lg icon-information" href="/Coupons/Coupons/CouponReviews">
+
+                                    @*<i class=" fa fa-life-ring">
+                            </i>*@
+                                    <i class="fa fa-bell" id="whiteicon" aria-hidden="true" style="font-size:19px; color:white;display:none"></i>
+                                    <img style="height:25px;width:25px; display:none" id="imgRedbell" src="/images/Red_Bell.png" />
+                                </a>
+                            </li>
+                            @*<li class="dropdown profile-dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <span class="hidden-xs" style="color:#fff;">
+                                <i class="fa fa-life-ring"></i>
+                            </span> <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu loginMenu">
+                            <li><a href="/Home/StartupGuide">Startup Guide</a></li>
+                            <li><a href="/Home/TrainingVideos">Training Videos</a></li>
+                            <li><a href="/Home/ContactUs">Contact Us</a></li>
+                        </ul>
+                    </li>*@
 
 
-                        <li class="hidden-xxs">
-                            <a class="dash_header-btn icon-lg icon-information" href="~/Account/LogOff">
-                                <i class="fa fa-power-off" style="font-size:19px; color:white;"></i>
-                            </a>
-                        </li>
-                    </ul>
+                            <li class="hidden-xxs">
+                                <a class="dash_header-btn icon-lg icon-information" href="~/Account/LogOff">
+                                    <i class="fa fa-power-off" style="font-size:19px; color:white;"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

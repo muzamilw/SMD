@@ -704,5 +704,61 @@ namespace DomainModelProject
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetRandomAdCampaign_Result>("GetRandomAdCampaign", typeParameter);
         }
+    
+        public virtual ObjectResult<getAdsCampaignPerCityPerAgeFormAnalytic_Result> getAdsCampaignPerCityPerAgeFormAnalytic(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getAdsCampaignPerCityPerAgeFormAnalytic_Result>("getAdsCampaignPerCityPerAgeFormAnalytic", idParameter);
+        }
+    
+        public virtual ObjectResult<getAdsCampaignPerCityPerGenderFormAnalytic_Result> getAdsCampaignPerCityPerGenderFormAnalytic(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getAdsCampaignPerCityPerGenderFormAnalytic_Result>("getAdsCampaignPerCityPerGenderFormAnalytic", idParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> getDealStatByCouponIdFormAnalytic(Nullable<int> id, Nullable<int> gender, Nullable<int> ageRange, Nullable<int> type)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            var genderParameter = gender.HasValue ?
+                new ObjectParameter("gender", gender) :
+                new ObjectParameter("gender", typeof(int));
+    
+            var ageRangeParameter = ageRange.HasValue ?
+                new ObjectParameter("ageRange", ageRange) :
+                new ObjectParameter("ageRange", typeof(int));
+    
+            var typeParameter = type.HasValue ?
+                new ObjectParameter("type", type) :
+                new ObjectParameter("type", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("getDealStatByCouponIdFormAnalytic", idParameter, genderParameter, ageRangeParameter, typeParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> getPollImpressionStatBySQIdFormAnalytic(Nullable<int> id, Nullable<int> gender, Nullable<int> ageRange)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            var genderParameter = gender.HasValue ?
+                new ObjectParameter("gender", gender) :
+                new ObjectParameter("gender", typeof(int));
+    
+            var ageRangeParameter = ageRange.HasValue ?
+                new ObjectParameter("ageRange", ageRange) :
+                new ObjectParameter("ageRange", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("getPollImpressionStatBySQIdFormAnalytic", idParameter, genderParameter, ageRangeParameter);
+        }
     }
 }

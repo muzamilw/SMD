@@ -22,35 +22,47 @@ namespace SMD.MIS.Areas.Api.Controllers
         }
 
 
-        public SurvayBySQIDForAnalyticsResponse getPollsBySQIDAnalytics(int SQId, int CampStatus, int dateRange, int Granularity)
+        public SurvayBySQIDForAnalyticsResponse getPollsBySQIDAnalytics(int SQId, int CampStatus, int dateRange, int Granularity, int gender, int age, int type)
         {
-            List<getPollBySQIDRatioAnalytic_Result> listtbl = new List<getPollBySQIDRatioAnalytic_Result>();
             SurvayBySQIDForAnalyticsResponse data = new SurvayBySQIDForAnalyticsResponse();
-            data.lineCharts = _ISurveyQuestionService.getPollsBySQIDAnalytics(SQId, CampStatus, dateRange, Granularity);
-            List<getPollBySQIDRatioAnalytic_Result> list = _ISurveyQuestionService.getPollBySQIDRatioAnalytic(SQId, dateRange);
-            data.pieCharts = list;
-            data.tbl = _ISurveyQuestionService.getPollBySQIDtblAnalytic(SQId);
-            int total = 0;
+            if (type == 1) {
+                List<getPollBySQIDRatioAnalytic_Result> listtbl = new List<getPollBySQIDRatioAnalytic_Result>();
+
+                data.lineCharts = _ISurveyQuestionService.getPollsBySQIDAnalytics(SQId, CampStatus, dateRange, Granularity);
+                List<getPollBySQIDRatioAnalytic_Result> list = _ISurveyQuestionService.getPollBySQIDRatioAnalytic(SQId, dateRange);
+                data.pieCharts = list;
+                data.tbl = _ISurveyQuestionService.getPollBySQIDtblAnalytic(SQId);
+                int total = 0;
+
+                if (list != null)
+                {
+                    foreach (getPollBySQIDRatioAnalytic_Result res in list)
+                    {
+                        total = total + (int)(res.value != null ? res.value : 0);
+                    }
+                    foreach (getPollBySQIDRatioAnalytic_Result res in list)
+                    {
+                        getPollBySQIDRatioAnalytic_Result item = new getPollBySQIDRatioAnalytic_Result();
+                        item.label = res.label;
+                        item.value = (int)(((float)res.value / (float)total) * 100);
+                        listtbl.Add(item);
+                    }
+                }
+                data.pieChartstbl = listtbl;
+                data.filteredStat = _ISurveyQuestionService.getPollImpressionStatBySQIdFormAnalytic(SQId, gender, age);
             
-            if (list != null)
-            {
-                foreach (getPollBySQIDRatioAnalytic_Result res in list)
-                {
-                    total = total + (int)(res.value != null ? res.value : 0);
-                }
-                foreach (getPollBySQIDRatioAnalytic_Result res in list)
-                {
-                    getPollBySQIDRatioAnalytic_Result item = new getPollBySQIDRatioAnalytic_Result();
-                    item.label = res.label;
-                    item.value = (int)(((float)res.value / (float)total) * 100);
-                    listtbl.Add(item);
-                }
+            
+            } else if (type == 2) {
+
+
+                data.filteredStat = _ISurveyQuestionService.getPollImpressionStatBySQIdFormAnalytic(SQId, gender, age);
+
             }
-            data.pieChartstbl = listtbl;
-        
+           
             return data;
 
             
         }
     }
 }
+

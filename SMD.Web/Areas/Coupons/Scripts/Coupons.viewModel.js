@@ -150,6 +150,7 @@ define("Coupons/Coupons.viewModel",
                 AgeRangeAnalyticsData = ko.observableArray([{ id: 0, name: "All" }, { id: 1, name: "10-20" }, { id: 2, name: "20-30" }, { id: 3, name: "30-40" }, { id: 4, name: "40-50" }, { id: 5, name: "50-60" }, { id: 6, name: "60-70" }, { id: 7, name: "70-80" }, { id: 8, name: "80-90" }, { id: 9, name: "90+" }]),
                 selectedOGenderAnalytics = ko.observable(0),
                 selectedOAgeAnalytics = ko.observable(0),
+                hasImpression = ko.observable(true),
                 DDOStatsAnalytics = ko.observable(),
                 selectedCTGenderAnalytics = ko.observable(0),
                 selectedCTAgeAnalytics = ko.observable(0),
@@ -173,8 +174,53 @@ define("Coupons/Coupons.viewModel",
                 dealtitle1 = ko.observable(),
                 dealtitle2 = ko.observable(),
                 dealtitle3 = ko.observable(),
-                getDDOAnalytic = function () { }
-                getDDCTAnalytic = function () { }
+                getDDOAnalytic = function () {
+                    dataservice.getDealsAnalytics({
+                        CouponID: selectedCouponIdAnalytics(),
+                        dateRange: 0,
+                        Granularity: 0,
+                        type : 2,
+                        Gender : selectedOGenderAnalytics(), 
+                        age : selectedOAgeAnalytics(), 
+                        Stype: 1,
+
+                    }, {
+                        success: function (data) {
+
+                            DDOStatsAnalytics(data.ImpressionStat);
+
+
+                        },
+                        error: function (response) {
+
+                        }
+                    });
+                
+                },
+                getDDCTAnalytic = function () {
+                    dataservice.getDealsAnalytics({
+                        CouponID: selectedCouponIdAnalytics(),
+                        dateRange: 0,
+                        Granularity: 0,
+                        type : 2,
+                        Gender : selectedCTGenderAnalytics(), 
+                        age : selectedCTAgeAnalytics(), 
+                        Stype: 2,
+
+                    }, {
+                        success: function (data) {
+
+                            DDCTStatsAnalytics(data.ClickTrouStat);
+
+
+                        },
+                        error: function (response) {
+
+                        }
+                    });
+                
+                
+                }
                 openAdvertiserDashboardDealScreen = function () {
                     if (!IsnewCoupon()) {
                         isflageClose(true);
@@ -198,6 +244,11 @@ define("Coupons/Coupons.viewModel",
                     CouponID: selectedCouponIdAnalytics(),
                     dateRange: selecteddateRangeAnalytics(),
                     Granularity: selectedGranularityAnalytics(),
+                    type : 1,
+                    Gender: 0, 
+                    age : 0, 
+                    Stype: 0
+
                 }, {
                     success: function (data) {
 
@@ -206,6 +257,21 @@ define("Coupons/Coupons.viewModel",
                         DealsAnalyticsData.valueHasMutated();
                         CampaignRatioAnalyticData(data.pieCharts);
                         dealExpirydate(data.expiryDate);
+                        DDCTStatsAnalytics(data.ClickTrouStat);
+                        DDOStatsAnalytics(data.ImpressionStat);
+                        if (CampaignRatioAnalyticData()[0].value > 0) {
+
+                            hasImpression(true);
+
+                            var browsersChart = Morris.Donut({
+                                element: 'donutId',
+                                data: CampaignRatioAnalyticData(), colors: ['green', 'blue', 'orange']
+                            });
+                        } else {
+                            hasImpression(false);
+                        }
+
+
 
                     },
                     error: function (response) {
@@ -489,6 +555,7 @@ getfreeCouponCount = function () {
         },
         addNewCampaign = function () {
             diveNo(0);
+            buyItQuestionLabelStatus(false);
             //show the main menu;
             collapseMainMenu();
             getfreeCouponCount();
@@ -2745,6 +2812,7 @@ getfreeCouponCount = function () {
                     SecondCouponOption: SecondCouponOption,
                     mCurrencyCode: mCurrencyCode,
                     FirstDealName: FirstDealName,
+                    hasImpression: hasImpression,
                     RatedFigure:RatedFigure
                 };
             })()

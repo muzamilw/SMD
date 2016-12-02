@@ -27,18 +27,18 @@ namespace SMD.Interfaces.Repository
 
 
         IEnumerable<SearchCampaigns_Result> SearchCampaigns(AdCampaignSearchRequest request, out int rowCount);
-        
+
 
         IEnumerable<AdCampaign> GetAdCampaignById(long campaignId);
         UserAndCostDetail GetUserAndCostDetail();
         User GetUserById();
-      
+
         List<GetCoupons_Result> GetCoupons(string UserId);
         IEnumerable<CompanyBranch> GetAllBranches();
 
         string CampaignVerifyQuestionById(int CampaignID);
         AdCampaign GetCampaignByID(long CampaignID);
-        
+
         IEnumerable<getDisplayAdsCampaignByCampaignIdAnalytics_Result> getAdsCampaignByCampaignIdAnalytics(int compaignId, int CampStatus, int dateRange, int Granularity);
         IEnumerable<getAdsCampaignByCampaignIdRatioAnalytic_Result> getAdsCampaignByCampaignIdRatioAnalytic(int ID, int dateRange);
         IEnumerable<getAdsCampaignByCampaignIdtblAnalytic_Result> getAdsCampaignByCampaignIdtblAnalytic(int ID);
@@ -46,6 +46,11 @@ namespace SMD.Interfaces.Repository
 
         IEnumerable<AdCampaign> GetSpecialAdCampaigns(out string CompanyLogoPath);
         List<getCampaignByIdFormDataAnalytic_Result> getCampaignByIdFormDataAnalytic(long CampaignId);
+        List<GetRandomAdCampaign_Result> GetRandomAdCampaign(int Type);
+        List<getAdsCampaignPerCityPerGenderFormAnalytic_Result> getAdsCampaignPerCityPerGenderFormAnalytic(long _Id);
         
+        List<getAdsCampaignPerCityPerAgeFormAnalytic_Result> getAdsCampaignPerCityPerAgeFormAnalytic(long _Id);
+        
+
     }
 }

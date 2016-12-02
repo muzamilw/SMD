@@ -265,6 +265,9 @@
           <Property Name="Title" Type="nvarchar" MaxLength="50" />
           <Property Name="Phone1CodeCountryID" Type="int" />
           <Property Name="DeleteConfirmationToken" Type="nvarchar" MaxLength="150" />
+          <Property Name="LastKnownLocationLat" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastKnownLocationLong" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastKnownLocation" Type="geography" />
         </EntityType>
         <EntityType Name="AuditLog">
           <Key>
@@ -540,7 +543,7 @@
           </Key>
           <Property Name="CouponReviewId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CouponId" Type="bigint" />
-          <Property Name="StarRating" Type="int" />
+          <Property Name="StarRating" Type="float" />
           <Property Name="Review" Type="nvarchar" MaxLength="800" />
           <Property Name="RatingDateTime" Type="datetime" />
           <Property Name="UserId" Type="nvarchar" MaxLength="128" />
@@ -2613,6 +2616,12 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
         <Function Name="getAdsCampaignByCampaignIdtblAnalytic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="int" Mode="In" />
         </Function>
+        <Function Name="getAdsCampaignPerCityPerAgeFormAnalytic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getAdsCampaignPerCityPerGenderFormAnalytic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetApprovalCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetAudience" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ageFrom" Type="int" Mode="In" />
@@ -2689,6 +2698,12 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Parameter Name="Id" Type="int" Mode="In" />
           <Parameter Name="DateRange" Type="int" Mode="In" />
         </Function>
+        <Function Name="getDealStatByCouponIdFormAnalytic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="gender" Type="int" Mode="In" />
+          <Parameter Name="ageRange" Type="int" Mode="In" />
+          <Parameter Name="type" Type="int" Mode="In" />
+        </Function>
         <Function Name="getDisplayAdsCampaignByCampaignIdAnalytics" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CampaignId" Type="int" Mode="In" />
           <Parameter Name="status" Type="int" Mode="In" />
@@ -2712,6 +2727,11 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
         </Function>
         <Function Name="getPollBySQIDtblAnalytic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getPollImpressionStatBySQIdFormAnalytic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="gender" Type="int" Mode="In" />
+          <Parameter Name="ageRange" Type="int" Mode="In" />
         </Function>
         <Function Name="getPollsBySQID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="SQID" Type="int" Mode="In" />
@@ -4241,11 +4261,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <Parameter Name="Profession" Mode="In" Type="String" />
             <Parameter Name="city" Mode="In" Type="String" />
           </FunctionImport>
-          <EntitySet Name="CouponRatingReviews" EntityType="DomainModels.CouponRatingReview" />
-          <AssociationSet Name="FK_CouponRatingReview_Coupon" Association="DomainModels.FK_CouponRatingReview_Coupon">
-            <End Role="Coupon" EntitySet="Coupons" />
-            <End Role="CouponRatingReview" EntitySet="CouponRatingReviews" />
-          </AssociationSet>
           <AssociationSet Name="FK_AspNetUsers_Country" Association="DomainModels.FK_AspNetUsers_Country">
             <End Role="Country" EntitySet="Countries" />
             <End Role="User" EntitySet="Users" />
@@ -4254,8 +4269,30 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <FunctionImport Name="GetRandom3Deal" ReturnType="Collection(DomainModels.GetRandom3Deal_Result)" />
           <FunctionImport Name="GetRandomPolls" ReturnType="Collection(DomainModels.GetRandomPolls_Result)" />
           <FunctionImport Name="GetRandomAdCampaign" ReturnType="Collection(DomainModels.GetRandomAdCampaign_Result)">
+          <Parameter Name="type" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getAdsCampaignPerCityPerAgeFormAnalytic" ReturnType="Collection(DomainModels.getAdsCampaignPerCityPerAgeFormAnalytic_Result)">
+          <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getAdsCampaignPerCityPerGenderFormAnalytic" ReturnType="Collection(DomainModels.getAdsCampaignPerCityPerGenderFormAnalytic_Result)">
+          <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getDealStatByCouponIdFormAnalytic" ReturnType="Collection(Int32)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="gender" Mode="In" Type="Int32" />
+            <Parameter Name="ageRange" Mode="In" Type="Int32" />
             <Parameter Name="type" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="getPollImpressionStatBySQIdFormAnalytic" ReturnType="Collection(Int32)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="gender" Mode="In" Type="Int32" />
+            <Parameter Name="ageRange" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="CouponRatingReviews" EntityType="DomainModels.CouponRatingReview" />
+          <AssociationSet Name="FK_CouponRatingReview_Coupon" Association="DomainModels.FK_CouponRatingReview_Coupon">
+            <End Role="Coupon" EntitySet="Coupons" />
+            <End Role="CouponRatingReview" EntitySet="CouponRatingReviews" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -5238,6 +5275,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="Phone1CodeCountryID" Type="Int32" />
           <NavigationProperty Name="Country" Relationship="DomainModels.FK_AspNetUsers_Country" FromRole="User" ToRole="Country" />
           <Property Name="DeleteConfirmationToken" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="LastKnownLocationLat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastKnownLocationLong" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastKnownLocation" Type="Geography" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Type="DomainModels.User" Role="AspNetUser" Multiplicity="1">
@@ -5827,8 +5867,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="Int32" Name="DealsCount" Nullable="true" />
           <Property Type="String" Name="CurrencyCode" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="CurrencySymbol" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="AvgRating" Nullable="false" />
+          <Property Type="Double" Name="AvgRating" Nullable="false" />
           <Property Type="Int32" Name="UserHasRated" Nullable="false" />
+          <Property Type="Int32" Name="DaysLeft" Nullable="true" />
         </ComplexType>
         <EntityType Name="UserFavouriteCoupon">
           <Key>
@@ -7624,35 +7665,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="Int64" Name="Id" Nullable="true" />
           <Property Type="Int32" Name="typ" Nullable="false" />
         </ComplexType>
-        <EntityType Name="CouponRatingReview">
-          <Key>
-            <PropertyRef Name="CouponReviewId" />
-          </Key>
-          <Property Name="CouponReviewId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CouponId" Type="Int64" />
-          <Property Name="StarRating" Type="Int32" />
-          <Property Name="Review" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
-          <Property Name="RatingDateTime" Type="DateTime" Precision="3" />
-          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="CompanyId" Type="Int32" />
-          <Property Name="Status" Type="Int32" />
-          <Property Name="ReviewImage1" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="ReviewImage2" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Reviewimage3" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Coupon" Relationship="DomainModels.FK_CouponRatingReview_Coupon" FromRole="CouponRatingReview" ToRole="Coupon" />
-        </EntityType>
-        <Association Name="FK_CouponRatingReview_Coupon">
-          <End Type="DomainModels.Coupon" Role="Coupon" Multiplicity="0..1" />
-          <End Type="DomainModels.CouponRatingReview" Role="CouponRatingReview" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Coupon">
-              <PropertyRef Name="CouponId" />
-            </Principal>
-            <Dependent Role="CouponRatingReview">
-              <PropertyRef Name="CouponId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_AspNetUsers_Country">
           <End Type="DomainModels.Country" Role="Country" Multiplicity="0..1" />
           <End Type="DomainModels.User" Role="User" Multiplicity="*" />
@@ -7712,6 +7724,52 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="String" Name="VideoLink2" Nullable="true" />
           <Property Type="String" Name="CampaignName" Nullable="true" MaxLength="200" />
         </ComplexType>
+        <ComplexType Name="getAdsCampaignPerCityPerAgeFormAnalytic_Result">
+          <Property Type="String" Name="city" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="C10_20" Nullable="false" />
+          <Property Type="Int32" Name="C20_30" Nullable="false" />
+          <Property Type="Int32" Name="C30_40" Nullable="false" />
+          <Property Type="Int32" Name="C40_50" Nullable="false" />
+          <Property Type="Int32" Name="C50_60" Nullable="false" />
+          <Property Type="Int32" Name="C60_70" Nullable="false" />
+          <Property Type="Int32" Name="C70_80" Nullable="false" />
+          <Property Type="Int32" Name="C80_90" Nullable="false" />
+          <Property Type="Int32" Name="C90_" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="getAdsCampaignPerCityPerGenderFormAnalytic_Result">
+          <Property Type="String" Name="city" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="male" Nullable="false" />
+          <Property Type="Int32" Name="female" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="CouponRatingReview">
+          <Key>
+            <PropertyRef Name="CouponReviewId" />
+          </Key>
+          <Property Name="CouponReviewId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CouponId" Type="Int64" />
+          <Property Name="StarRating" Type="Double" />
+          <Property Name="Review" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
+          <Property Name="RatingDateTime" Type="DateTime" Precision="3" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="ReviewImage1" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ReviewImage2" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Reviewimage3" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Coupon" Relationship="DomainModels.FK_CouponRatingReview_Coupon" FromRole="CouponRatingReview" ToRole="Coupon" />
+        </EntityType>
+        <Association Name="FK_CouponRatingReview_Coupon">
+          <End Type="DomainModels.Coupon" Role="Coupon" Multiplicity="0..1" />
+          <End Type="DomainModels.CouponRatingReview" Role="CouponRatingReview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coupon">
+              <PropertyRef Name="CouponId" />
+            </Principal>
+            <Dependent Role="CouponRatingReview">
+              <PropertyRef Name="CouponId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -8190,6 +8248,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="DomainModels.User">
               <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="LastKnownLocation" ColumnName="LastKnownLocation" />
+                <ScalarProperty Name="LastKnownLocationLong" ColumnName="LastKnownLocationLong" />
+                <ScalarProperty Name="LastKnownLocationLat" ColumnName="LastKnownLocationLat" />
                 <ScalarProperty Name="DeleteConfirmationToken" ColumnName="DeleteConfirmationToken" />
                 <ScalarProperty Name="Phone1CodeCountryID" ColumnName="Phone1CodeCountryID" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
@@ -8542,6 +8603,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
                 <ScalarProperty Name="CurrencySymbol" ColumnName="CurrencySymbol" />
                 <ScalarProperty Name="AvgRating" ColumnName="AvgRating" />
                 <ScalarProperty Name="UserHasRated" ColumnName="UserHasRated" />
+                <ScalarProperty Name="DaysLeft" ColumnName="DaysLeft" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -9708,23 +9770,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="getCampaignByIdQQFormAnalytic" FunctionName="SMDModel.Store.getCampaignByIdQQFormAnalytic" />
-          <EntitySetMapping Name="CouponRatingReviews">
-            <EntityTypeMapping TypeName="DomainModels.CouponRatingReview">
-              <MappingFragment StoreEntitySet="CouponRatingReview">
-                <ScalarProperty Name="Reviewimage3" ColumnName="Reviewimage3" />
-                <ScalarProperty Name="ReviewImage2" ColumnName="ReviewImage2" />
-                <ScalarProperty Name="ReviewImage1" ColumnName="ReviewImage1" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="RatingDateTime" ColumnName="RatingDateTime" />
-                <ScalarProperty Name="Review" ColumnName="Review" />
-                <ScalarProperty Name="StarRating" ColumnName="StarRating" />
-                <ScalarProperty Name="CouponId" ColumnName="CouponId" />
-                <ScalarProperty Name="CouponReviewId" ColumnName="CouponReviewId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="vw_Notifications">
             <EntityTypeMapping TypeName="DomainModels.vw_Notifications">
               <MappingFragment StoreEntitySet="vw_Notifications">
@@ -9779,6 +9824,50 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getAdsCampaignPerCityPerAgeFormAnalytic" FunctionName="SMDModel.Store.getAdsCampaignPerCityPerAgeFormAnalytic">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.getAdsCampaignPerCityPerAgeFormAnalytic_Result">
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="C10_20" ColumnName="10-20" />
+                <ScalarProperty Name="C20_30" ColumnName="20-30" />
+                <ScalarProperty Name="C30_40" ColumnName="30-40" />
+                <ScalarProperty Name="C40_50" ColumnName="40-50" />
+                <ScalarProperty Name="C50_60" ColumnName="50-60" />
+                <ScalarProperty Name="C60_70" ColumnName="60-70" />
+                <ScalarProperty Name="C70_80" ColumnName="70-80" />
+                <ScalarProperty Name="C80_90" ColumnName="80-90" />
+                <ScalarProperty Name="C90_" ColumnName="90+" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getAdsCampaignPerCityPerGenderFormAnalytic" FunctionName="SMDModel.Store.getAdsCampaignPerCityPerGenderFormAnalytic">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.getAdsCampaignPerCityPerGenderFormAnalytic_Result">
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="male" ColumnName="male" />
+                <ScalarProperty Name="female" ColumnName="female" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getDealStatByCouponIdFormAnalytic" FunctionName="SMDModel.Store.getDealStatByCouponIdFormAnalytic" />
+          <FunctionImportMapping FunctionImportName="getPollImpressionStatBySQIdFormAnalytic" FunctionName="SMDModel.Store.getPollImpressionStatBySQIdFormAnalytic" />
+          <EntitySetMapping Name="CouponRatingReviews">
+            <EntityTypeMapping TypeName="DomainModels.CouponRatingReview">
+              <MappingFragment StoreEntitySet="CouponRatingReview">
+                <ScalarProperty Name="Reviewimage3" ColumnName="Reviewimage3" />
+                <ScalarProperty Name="ReviewImage2" ColumnName="ReviewImage2" />
+                <ScalarProperty Name="ReviewImage1" ColumnName="ReviewImage1" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="RatingDateTime" ColumnName="RatingDateTime" />
+                <ScalarProperty Name="Review" ColumnName="Review" />
+                <ScalarProperty Name="StarRating" ColumnName="StarRating" />
+                <ScalarProperty Name="CouponId" ColumnName="CouponId" />
+                <ScalarProperty Name="CouponReviewId" ColumnName="CouponReviewId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

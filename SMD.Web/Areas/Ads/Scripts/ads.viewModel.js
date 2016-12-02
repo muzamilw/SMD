@@ -63,6 +63,7 @@ define("ads/ads.viewModel",
                     isNewCriteria = ko.observable(true),
                     IsShownforVideo = ko.observable(true),
                     isEnableVedioVerificationLink = ko.observable(false),
+                    headText = ko.observable(),
                     //caption variablels 
                     lblCampaignName = ko.observable("Campaign Name"),
                     Modelheading = ko.observable(""),
@@ -174,6 +175,8 @@ define("ads/ads.viewModel",
 				selectedGranularityAnalytics = ko.observable(1),
 				selectedCampaignIdAnalytics = ko.observable(),
 				AdsCampaignAnalyticsData = ko.observableArray([]),
+                PerAgeChartAnalyticsData = ko.observableArray([]),
+                PerGenderChartAnalyticsData = ko.observableArray([]),
 				CampaignROItblAnalyticData = ko.observableArray([]),
 				CampaignRatioAnalyticData = ko.observable(1),
 				granularityDropDown = ko.observableArray([{ id: 1, name: "Daily" }, { id: 2, name: "Weekly" }, { id: 3, name: "Monthly" }, { id: 4, name: "Quarterly" }, { id: 5, name: "Yearly" }]),
@@ -194,10 +197,21 @@ define("ads/ads.viewModel",
                 selectedQQAAnalytics = ko.observable(0),
                 selectedQQPAnalytics = ko.observable("All"),
                 isProfileQuestionUsed = ko.observable(false),
+                IsCityUsed = ko.observable(true),
                 isPollQuestionsQuestionUsed = ko.observable(false),
                 isPreviousQuizQuestionsUsed = ko.observable(false),
                 QQStatsAnalytics = ko.observable(),
                 SelectedItemAnalytics = ko.observable(),
+                hasImpression = ko.observable(false),
+                LogoUrl1 = ko.observable(),
+                VideoLink1 = ko.observable(),
+                CampaignName1 = ko.observable(),
+                CampaignName2 = ko.observable(),
+                LogoUrl2 = ko.observable(),
+                VideoLink2 = ko.observable(),
+                CampaignName3 = ko.observable(),
+                LogoUrl3 = ko.observable(),
+                VideoLink3 = ko.observable(),
 				openAdvertiserDashboardScreen = function (Campaign) {
 
 				    if (!isNewCampaign()) {
@@ -291,6 +305,12 @@ define("ads/ads.viewModel",
                                 ko.utils.arrayPushAll(QQChoicesAnalyticsData(), data.Choices);
                                 QQChoicesAnalyticsData.valueHasMutated();
                                 formAnalyticsData.removeAll();
+                                if (CitiesAnalyticsData().length < 2) {
+                                    IsCityUsed(false);
+                                } else {
+                                    IsCityUsed(true);
+                                }
+
                                 _.each(data.formData, function (item) {
                                     formAnalyticsData.push(model.formAnalyticsDataModel(item));
                                     if (item.typ==2) {
@@ -334,6 +354,48 @@ define("ads/ads.viewModel",
 				                CampaignROItblAnalyticData.removeAll();
 				                ko.utils.arrayPushAll(CampaignROItblAnalyticData(), data.ROItbl);
 				                CampaignROItblAnalyticData.valueHasMutated();
+
+				                PerAgeChartAnalyticsData.removeAll();
+				                ko.utils.arrayPushAll(PerAgeChartAnalyticsData(), data.PerAgeChart);
+				                PerAgeChartAnalyticsData.valueHasMutated();
+
+				                PerGenderChartAnalyticsData.removeAll();
+				                ko.utils.arrayPushAll(PerGenderChartAnalyticsData(), data.PerGenderChart);
+				                PerGenderChartAnalyticsData.valueHasMutated();
+                                
+				               
+
+
+				                if ((selecteddateRangeAnalytics() == 1 && CampaignTblAnalyticsData()[0].C30_days > 0) || (selecteddateRangeAnalytics() == 2 && CampaignTblAnalyticsData()[0].All_time > 0)) {
+
+				                    hasImpression(true);
+                                    
+				                    var DonutChart = Morris.Donut({
+				                        element: 'donutId',
+                                        data: CampaignRatioAnalyticData() , colors: ['green', 'blue', 'orange']
+				                    });
+				                    var BarChart1 = Morris.Bar({
+				                        element: 'AgeBarChartId',
+				                        data: PerAgeChartAnalyticsData(),
+				                        xkey: 'city', ykeys: ['C10_20', 'C20_30', 'C30_40', 'C40_50', 'C50_60', 'C60_70', 'C70_80', 'C80_90', 'C90_'], labels: ['10_20', '20_30', '30_40', '40_50', '50_60', '60_70', '70_80', '80_90', '90+']
+				                        //parseTime:false, setAxisAlignFirstX: true,
+				                        //barColors: ['green', 'blue', 'orange']
+				                    });
+				                    var BarChart2 = Morris.Bar({
+				                        element: 'GenderBarChartId',
+				                        data: PerGenderChartAnalyticsData(),
+				                        xkey: 'city', ykeys: ['male', 'female'], labels: ['male', 'female'],
+				                        parseTime: false, setAxisAlignFirstX: true,
+				                        barColors: ['green', 'blue']
+				                    });
+
+
+
+
+				                     
+                                } else {
+				                    hasImpression(false);
+				                }
 				            }
 
 				        },
@@ -530,7 +592,8 @@ define("ads/ads.viewModel",
             addNewCampaign = function () {
 
                 IsthisEditCamapiagn(false);
-
+                $("#ddTextBtns").val(0);
+                BuyItStatus(false);
                 var selectionoption = $("#ddTextBtns").val();
 
                 if (selectionoption == '0' || selectionoption == undefined) {
@@ -1022,6 +1085,12 @@ define("ads/ads.viewModel",
                     if (campaignModel().CampaignName() == "" || campaignModel().CampaignName() == undefined) {
                         errorListNew.push({ name: "Please enter ad Title.", element: "" });
 
+                    }
+                    if (campaignModel().Type() == "4") {
+                        if (campaignModel().LogoUrl() == "" || campaignModel().LogoUrl() == undefined || campaignModel().LogoUrl() =="/images/standardplaceholder.png") {
+                            noErrors = false;
+                            toastr.error("Please upload Banner.");
+                        }
                     }
 
                     if (campaignModel().ClickRate() == undefined) {
@@ -1945,7 +2014,7 @@ define("ads/ads.viewModel",
 
                     if (campaignModel().IsUseFilter() == 0) {
 
-                        confirmation.messageText("Switching to Basic Targeting will remove all Hyper Targeting filters.Continue to Basic Targeting,  Yes No.");
+                        confirmation.messageText("Switching to Basic Targeting will remove all Hyper Targeting filters."+"</br>"+"Continue to Basic Targeting.");
                         confirmation.afterProceed(function () {
                             IsBroadMarketing(false);
                             campaignModel().AdCampaignTargetLocations.removeAll();
@@ -1967,7 +2036,7 @@ define("ads/ads.viewModel",
                     }
                     else {
 
-                        confirmation.messageText("Switching to Basic Targeting will remove all Hyper Targeting filters.Continue to Basic Targeting,  Yes No.");
+                        confirmation.messageText("Switching to Basic Targeting will remove all Hyper Targeting filters."+"</br>"+"Continue to Basic Targeting.");
                         confirmation.afterProceed(function () {
                             IsBroadMarketing(true);
                             campaignModel().AdCampaignTargetLocations.removeAll();
@@ -3105,6 +3174,25 @@ define("ads/ads.viewModel",
                         }
                     });
                 },
+               getRandomCampaign = function (Type) {
+
+                   dataservice.getRandomCampaign({ type: Type }, {
+                              success: function (data) {
+                                  CampaignName1(data[0].CampaignName);
+                                  LogoUrl1(data[0].LogoUrl);
+                                  VideoLink1(data[0].VideoLink2);
+                                  CampaignName2(data[1].CampaignName);
+                                  LogoUrl2(data[1].LogoUrl);
+                                  VideoLink2(data[1].VideoLink2);
+                                  CampaignName3(data[2].CampaignName);
+                                  LogoUrl3(data[2].LogoUrl);
+                                  VideoLink3(data[2].VideoLink2);
+                              },
+                              error: function (response) {
+                                  toastr.error("Failed to get random Campaign.");
+                              }
+                          });
+                      },
                 showAdditionCriteria = function (mode) {
                     AditionalCriteriaMode(mode);
                 },
@@ -3576,6 +3664,7 @@ define("ads/ads.viewModel",
                         IsGameAds(true);
                         CampaignHeader('( Display Ad )');
                         IsNewVideoCampaign(false);
+                        headText("Display Ads");
                     }
                     else {
                         UrlHeadings("Call for Action Button");
@@ -3584,6 +3673,7 @@ define("ads/ads.viewModel",
                         IsvideoBtn(true);
                         IsGameAds(false);
                         StatusCodeName("Display");
+                        headText("Video Ads");
                         CampaignHeader("");
                         StatusCodeImage("/Content/Images/Videomod.png");
                         IsNewVideoCampaign(true);
@@ -3602,6 +3692,7 @@ define("ads/ads.viewModel",
                     getAdCampaignGridContent();
                     getCampaignBaseContent();
                     isEditorVisible(false);
+                    getRandomCampaign(mode)
 
                     CompanyLogo(gCompanyLogo);
                 };
@@ -3835,11 +3926,25 @@ define("ads/ads.viewModel",
                     QQStatsAnalytics: QQStatsAnalytics,
                     SelectedItemAnalytics: SelectedItemAnalytics,
                     isProfileQuestionUsed: isProfileQuestionUsed,
+                    IsCityUsed:IsCityUsed,
                     isPollQuestionsQuestionUsed: isPollQuestionsQuestionUsed,
                     isPreviousQuizQuestionsUsed: isPreviousQuizQuestionsUsed,
+                    PerAgeChartAnalyticsData: PerAgeChartAnalyticsData,
+                    PerGenderChartAnalyticsData: PerGenderChartAnalyticsData,
+                    hasImpression: hasImpression,
                     isAdSearch:isAdSearch,
                     CurrentMode: CurrentMode,
-                    islblText: islblText
+                    islblText: islblText,
+                    CampaignName1:CampaignName1,
+                    LogoUrl1:LogoUrl1,
+                    VideoLink1:VideoLink1,
+                    CampaignName2:CampaignName2,
+                    LogoUrl2:LogoUrl2,
+                    VideoLink2:VideoLink2,
+                    CampaignName3:CampaignName3,
+                    LogoUrl3:LogoUrl3,
+                    VideoLink3: VideoLink3,
+                    headText: headText
                 };
             })()
         };

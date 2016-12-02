@@ -44,7 +44,7 @@ namespace SMD.Repository.Repositories
         }
 
 
-        public CouponRatingReviewOverallResponse GetPublishedCouponRatingReview(long CouponId)
+        public CouponRatingReviewOverallResponse GetPublishedCouponRatingReview(long CouponId, out int Count)
         {
 
             var result = new CouponRatingReviewOverallResponse { CouponId = CouponId, OverAllStarRating = db.CouponRatingReview.Where(r => r.CouponId == CouponId).Average(r => r.StarRating) };
@@ -52,12 +52,15 @@ namespace SMD.Repository.Repositories
             if (result.OverAllStarRating.HasValue == false)
                 result.OverAllStarRating = 0;
 
-            result.CouponRatingReviewResponses = (from r in db.CouponRatingReview
+            var allrows = (from r in db.CouponRatingReview
                          join c in db.Coupons on r.CouponId equals c.CouponId
                          join u in db.Users on r.UserId equals u.Id
                          where r.Status == 2 && r.CouponId == CouponId
-                         select new CouponRatingReviewResponse {  CouponId = c.CouponId, CouponReviewId = r.CouponReviewId, FullName = u.FullName, CouponTitle = c.CouponTitle, RatingDateTime = r.RatingDateTime, Review = r.Review, CompanyId = c.CompanyId, ReviewImage1 = r.ReviewImage1, ReviewImage2 = r.ReviewImage2, Reviewimage3 = r.Reviewimage3, StarRating = r.StarRating, Status = r.Status, UserId = r.UserId, ProfileImage = u.ProfileImage  }).ToList();
+                         select new CouponRatingReviewResponse {  CouponId = c.CouponId, CouponReviewId = r.CouponReviewId, FullName = u.FullName, CouponTitle = c.CouponTitle, RatingDateTime = r.RatingDateTime, Review = r.Review, CompanyId = c.CompanyId, ReviewImage1 = r.ReviewImage1, ReviewImage2 = r.ReviewImage2, Reviewimage3 = r.Reviewimage3, StarRating = r.StarRating, Status = r.Status, UserId = r.UserId, ProfileImage = u.ProfileImage  });
 
+            Count = allrows.Count();
+
+            result.CouponRatingReviewResponses = allrows.OrderBy(r => Guid.NewGuid()).Take(6).ToList();
 
             return result;
            
@@ -70,7 +73,7 @@ namespace SMD.Repository.Repositories
             var result = from r in db.CouponRatingReview
                          join c in db.Coupons on r.CouponId equals c.CouponId
                          join u in db.Users on r.UserId equals u.Id
-                         where r.Status == request.ReviewStatus && r.CompanyId == CompanyId 
+                         where r.Status == request.ReviewStatus && u.CompanyId == CompanyId 
                          orderby (r.RatingDateTime)
                          select new CouponRatingReviewResponse { CouponId = c.CouponId, CouponReviewId = r.CouponReviewId, FullName = u.FullName, CouponTitle = c.CouponTitle, RatingDateTime = r.RatingDateTime, Review = r.Review, CompanyId = c.CompanyId, ReviewImage1 = r.ReviewImage1, ReviewImage2 = r.ReviewImage2, Reviewimage3 = r.Reviewimage3, StarRating = r.StarRating, Status = r.Status, UserId = r.UserId, ProfileImage = u.ProfileImage };
             rowCount =result.Count();
@@ -81,7 +84,7 @@ namespace SMD.Repository.Repositories
         }
         public int CouponReviewCount ()
         {
-            return db.CouponRatingReview.ToList().Count(a => a.CompanyId == CompanyId && a.Status==1 && a.Review!=null);
+            return db.CouponRatingReview.ToList().Count(a => a.CompanyId == CompanyId && a.Status==1 && !string.IsNullOrEmpty(a.Review));
         }
 
       

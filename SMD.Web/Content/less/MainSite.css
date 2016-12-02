@@ -1028,8 +1028,9 @@ div#spinner {
     font-size:16px;color:black !important;
 }
 .dam_header {
-    background-color:#81d3dc!important;
+    background-color:#0f68a1!important;
     text-align:center;
+    border-radius: 4px;
 }
 .damHeading {
     font-size:24px;color: #ffffff; line-height: 2.5 !important;

@@ -117,9 +117,35 @@ define("survey/survey.viewModel",
                 CampaignStatusDropDown = ko.observableArray([{ id: 1, name: "Answered" }, { id: 2, name: "Skipped" }]),
                 CampaignRatioAnalyticData = ko.observable(1),
                 isflageClose = ko.observable(false),
+                hasImpression = ko.observable(false),
                 isPollSearch = ko.observable(false),
                 islblText = ko.observable(false),
-                getDDAnalytic = function () { },
+                getDDAnalytic = function () {
+                    dataservice.getSurvayAnalytics({
+                        SQId: selectedSQIDAnalytics(),
+                        CampStatus: 0,
+                        dateRange: 0,
+                        Granularity: 0,
+                        gender: selectedGenderAnalytics(),
+                        age: selectedAgeAnalytics(),
+                        type: 2,
+                    }, {
+                        success: function (data) {
+                            if (data != null) {
+                          
+                                DDStatsAnalytics(data.filteredStat);
+                               
+
+                            }
+                        },
+                        error: function (response) {
+
+                        }
+                    });
+
+
+
+                },
                 openAdvertiserDashboardPollScreen = function () {
                     if (!IsnewSurvey()) {
                         isflageClose(true);
@@ -142,6 +168,9 @@ define("survey/survey.viewModel",
                     CampStatus: 0,
                     dateRange: selecteddateRangeAnalytics(),
                     Granularity: selectedGranularityAnalytics(),
+                    gender : 0,
+                    age: 0,
+                    type:1,
                 }, {
                     success: function (data) {
                         if (data != null) {
@@ -156,6 +185,18 @@ define("survey/survey.viewModel",
                             CampaignROItblAnalyticData.removeAll();
                             ko.utils.arrayPushAll(CampaignROItblAnalyticData(), data.pieChartstbl);
                             CampaignROItblAnalyticData.valueHasMutated();
+                            DDStatsAnalytics(data.filteredStat);
+                            if ((selecteddateRangeAnalytics() == 1 && CampaignTblAnalyticsData()[0].C30_days > 0) || (selecteddateRangeAnalytics() == 2 && CampaignTblAnalyticsData()[0].All_time > 0)) {
+
+                                hasImpression(true);
+
+                                var browsersChart = Morris.Donut({
+                                    element: 'donutId',
+                                    data: CampaignRatioAnalyticData(), colors: ['green', 'blue', 'orange']
+                                });
+                            } else {
+                                hasImpression(false);
+                            }
 
                         }
                     },
@@ -1379,7 +1420,7 @@ define("survey/survey.viewModel",
                          if (isEditorVisible()) {
                              selectedQuestion().errors.showAllMessages();
 
-                             toastr.error("Please fill the required feilds to continue.");
+                             toastr.error("Please fill the required feilds and upload pictures to continue.");
                              if (errorList().length > 0) {
                                  $.each(errorList(), function (key, value) {
                                      toastr.error(value);
@@ -1497,7 +1538,7 @@ define("survey/survey.viewModel",
                         if (isEditorVisible()) {
                             selectedQuestion().errors.showAllMessages();
 
-                            toastr.error("Please fill the required feilds to continue.");
+                            toastr.error("Please fill the required feilds and upload pictures to continue.");
                             if (errorList().length > 0) {
                                 $.each(errorList(), function (key, value) {
                                     toastr.error(value);
@@ -1868,7 +1909,7 @@ define("survey/survey.viewModel",
 
                     if (selectedQuestion().IsUseFilter() == 0) {
 
-                        confirmation.messageText("Switching to Basic Targeting will remove all Hyper Targeting filters.Continue to Basic Targeting,  Yes No.");
+                        confirmation.messageText("Switching to Basic Targeting will remove all Hyper Targeting filters."+"</br>"+"Continue to Basic Targeting.");
                         confirmation.afterProceed(function () {
                             IsBroadMarketing(false);
                             selectedQuestion().SurveyQuestionTargetLocation.removeAll();
@@ -1890,7 +1931,7 @@ define("survey/survey.viewModel",
                     }
                     else {
 
-                        confirmation.messageText("Switching to Basic Targeting will remove all Hyper Targeting filters.Continue to Basic Targeting,  Yes No.");
+                        confirmation.messageText("Switching to Basic Targeting will remove all Hyper Targeting filters."+"</br>"+"Continue to Basic Targeting.");
                         confirmation.afterProceed(function () {
                             IsBroadMarketing(true);
                             selectedQuestion().SurveyQuestionTargetLocation.removeAll();
@@ -2445,6 +2486,7 @@ define("survey/survey.viewModel",
                     selectedAgeAnalytics: selectedAgeAnalytics,
                     getDDAnalytic: getDDAnalytic,
                     DDStatsAnalytics: DDStatsAnalytics,
+                    hasImpression: hasImpression, 
                     isPollSearch: isPollSearch,
                     islblText: islblText,
                     leftPollImg1: leftPollImg1,

@@ -673,9 +673,11 @@ namespace SMD.Implementation.Services
 
             var result = couponRepository.GetCouponByIdSP(CouponId, UserId, Lat, Lon);
 
+            int RatingCount = 0;
 
-            rating = couponRatingReviewRepository.GetPublishedCouponRatingReview(CouponId);
+            rating = couponRatingReviewRepository.GetPublishedCouponRatingReview(CouponId, out RatingCount);
 
+            result.RatingCount = RatingCount;
 
             return result;
 
@@ -1113,6 +1115,10 @@ namespace SMD.Implementation.Services
         {
 
             return couponRepository.getDealByCouponIdRatioAnalytic(ID, dateRange);
+        }
+        public int getDealStatByCouponIdFormAnalytic(long dealId, int Gender, int age, int type)
+        {
+            return couponRepository.getDealStatByCouponIdFormAnalytic(dealId, Gender, age, type); 
         }
         public DateTime getExpiryDate(int CouponId)
         {

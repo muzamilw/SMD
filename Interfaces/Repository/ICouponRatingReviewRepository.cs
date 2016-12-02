@@ -17,7 +17,7 @@ namespace SMD.Interfaces.Repository
         List<CouponRatingReviewResponse> GetAllCouponRatingReviewByCompany(GetPagedListRequest request, out int rowCount);
 
 
-        CouponRatingReviewOverallResponse GetPublishedCouponRatingReview(long CouponId);
+        CouponRatingReviewOverallResponse GetPublishedCouponRatingReview(long CouponId, out int Count);
         int CouponReviewCount();
     }
 }

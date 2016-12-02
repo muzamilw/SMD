@@ -1283,5 +1283,13 @@ namespace SMD.Implementation.Services
         }
 
 
+        public void SendNewDealsEmail()
+        {
+
+
+            
+        }
+
+
     }
 }

@@ -180,6 +180,12 @@
     <Compile Include="getAdsCampaignByCampaignId_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="getAdsCampaignPerCityPerAgeFormAnalytic_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="getAdsCampaignPerCityPerGenderFormAnalytic_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetApprovalCount_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

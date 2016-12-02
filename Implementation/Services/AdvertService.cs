@@ -1386,5 +1386,20 @@ namespace SMD.Implementation.Services
         {
             return _adCampaignRepository.getCampaignByIdFormDataAnalytic(CampaignId);
         }
+        public List<GetRandomAdCampaign_Result> GetRandomAdCampaign(int Type)
+        {
+            return _adCampaignRepository.GetRandomAdCampaign(Type);
+        }
+
+
+        public List<getAdsCampaignPerCityPerGenderFormAnalytic_Result> getAdsCampaignPerCityPerGenderFormAnalytic(long _Id)
+        {
+            return _adCampaignRepository.getAdsCampaignPerCityPerGenderFormAnalytic(_Id);
+
+        }
+        public List<getAdsCampaignPerCityPerAgeFormAnalytic_Result> getAdsCampaignPerCityPerAgeFormAnalytic(long _Id)
+        {
+            return _adCampaignRepository.getAdsCampaignPerCityPerAgeFormAnalytic(_Id);
+        }
     }
 }

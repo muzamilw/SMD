@@ -2140,7 +2140,7 @@ input[type="radio"] {
 }
 
 .modal-content {
-    border-radius: 0;
+    border-radius: 1;
 }
 
 #error-page {

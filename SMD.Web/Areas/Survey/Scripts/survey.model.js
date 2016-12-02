@@ -64,8 +64,12 @@
                 SubmissionDate = ko.observable(SubmissionDate),
                 SurveyQuestionTargetCriteria = ko.observableArray([]),
                 SurveyQuestionTargetLocation = ko.observableArray([]),
-                LeftPictureBytes = ko.observable(LeftPictureBytes),
-                RightPictureBytes = ko.observable(RightPictureBytes),
+                LeftPictureBytes = ko.observable(LeftPictureBytes).extend({  // custom message
+                    required: true
+                }),
+                RightPictureBytes = ko.observable(RightPictureBytes).extend({  // custom message
+                    required: true
+                }),
                 ParentSurveyId = ko.observable(ParentSurveyId),
                 Priority = ko.observable(Priority),
 
@@ -73,6 +77,8 @@
 
                 errors = ko.validation.group({
                     Question: Question,
+                    LeftPictureBytes: LeftPictureBytes,
+                    RightPictureBytes: RightPictureBytes,
                     //DisplayQuestion: DisplayQuestion,
                     //StartDate: StartDate,
                     //EndDate: EndDate,

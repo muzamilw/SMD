@@ -390,6 +390,7 @@
     <Compile Include="Areas\Api\Controllers\CouponReviewController.cs" />
     <Compile Include="Areas\Api\Controllers\CouponReviewCountController.cs" />
     <Compile Include="Areas\Api\Controllers\DashboardStatusCounterController.cs" />
+    <Compile Include="Areas\Api\Controllers\GetRandomAdCampaignController.cs" />
     <Compile Include="Areas\Api\Controllers\GetRandomDealController.cs" />
     <Compile Include="Areas\Api\Controllers\GetRandomPollsController.cs" />
     <Compile Include="Areas\Api\Controllers\NotificationsController.cs" />
@@ -706,6 +707,13 @@
     </Compile>
     <Compile Include="Emails\subscription_created.aspx.designer.cs">
       <DependentUpon>subscription_created.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\NewDeals.aspx.cs">
+      <DependentUpon>NewDeals.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\NewDeals.aspx.designer.cs">
+      <DependentUpon>NewDeals.aspx</DependentUpon>
     </Compile>
     <Compile Include="Emails\Video_Performance.aspx.cs">
       <DependentUpon>Video_Performance.aspx</DependentUpon>
@@ -1370,6 +1378,7 @@
     <Content Include="Emails\Display_Ad_Approved.aspx" />
     <Content Include="Emails\Video_Ad_Approved.aspx" />
     <Content Include="Emails\subscription_created.aspx" />
+    <Content Include="Emails\NewDeals.aspx" />
     <Content Include="Emails\Video_Performance.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />

@@ -54,7 +54,7 @@ namespace SMD.Interfaces.Services
         long CopyAddCampaigns(long CampaignId);
         AdCampaignBaseResponse getQuizCampaigns();
         AdCampaignBaseResponse getCompanyBranches();
-        
+
         List<GetCoupons_Result> GetCoupons(string UserId);
 
 
@@ -62,7 +62,7 @@ namespace SMD.Interfaces.Services
         string UpdateAdApprovalCampaign(AdCampaign source);
         IEnumerable<getCampaignsByStatus_Result> getCampaignsByStatus();
         IEnumerable<GetLiveCampaignCountOverTime_Result> GetLiveCampaignCountOverTime(int CampaignType, DateTime DateFrom, DateTime DateTo, int Granularity);
-       
+
 
         //CouponCodeModel GenerateCouponCodes(int numbers, long CampaignId);
         IEnumerable<getDisplayAdsCampaignByCampaignIdAnalytics_Result> getAdsCampaignByCampaignIdAnalytics(int compaignId, int CampStatus, int dateRange, int Granularity);
@@ -70,8 +70,12 @@ namespace SMD.Interfaces.Services
         IEnumerable<getAdsCampaignByCampaignIdtblAnalytic_Result> getAdsCampaignByCampaignIdtblAnalytic(int ID);
         IEnumerable<getCampaignROItblAnalytic_Result> getCampaignROItblAnalytic(int ID);
         List<getCampaignByIdFormDataAnalytic_Result> getCampaignByIdFormDataAnalytic(long CampaignId);
+        List<GetRandomAdCampaign_Result> GetRandomAdCampaign(int Type);
+        List<getAdsCampaignPerCityPerGenderFormAnalytic_Result> getAdsCampaignPerCityPerGenderFormAnalytic(long _Id);
        
-        
-        
+        List<getAdsCampaignPerCityPerAgeFormAnalytic_Result> getAdsCampaignPerCityPerAgeFormAnalytic(long _Id);
+       
+
+
     }
 }

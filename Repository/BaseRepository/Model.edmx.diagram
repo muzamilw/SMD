@@ -176,10 +176,10 @@
         <AssociationConnector Association="DomainModels.FK_SurveySharingGroupShares_SharedSurveyQuestion" />
         <AssociationConnector Association="DomainModels.FK_SurveySharingGroupShares_SurveySharingGroupMembers" />
         <AssociationConnector Association="DomainModels.FK_SharedSurveyQuestion_SurveySharingGroup" />
-        <EntityTypeShape EntityType="DomainModels.CouponRatingReview" Width="1.5" PointX="30.875" PointY="89" />
-        <AssociationConnector Association="DomainModels.FK_CouponRatingReview_Coupon" />
         <AssociationConnector Association="DomainModels.FK_AspNetUsers_Country" />
         <EntityTypeShape EntityType="DomainModels.vw_Notifications" Width="1.5" PointX="3.375" PointY="12.75" />
+        <EntityTypeShape EntityType="DomainModels.CouponRatingReview" Width="1.5" PointX="30.875" PointY="89" />
+        <AssociationConnector Association="DomainModels.FK_CouponRatingReview_Coupon" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
