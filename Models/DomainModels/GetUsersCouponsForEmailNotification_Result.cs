@@ -10,8 +10,8 @@
 namespace SMD.Models.DomainModels
 {
     using System;
-    
-    public partial class GetNewLiveCouponsForEmail_Result
+
+    public partial class GetUsersCouponsForEmailNotification_Result
     {
         public string UserId { get; set; }
         public string FullName { get; set; }

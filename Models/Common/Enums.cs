@@ -51,7 +51,8 @@
         DisplayAdCampaignApproved = 28,
         DisplayAdCampaignRejected = 29,
         PicturePollCampaignApproved = 30,
-        PicturePollCampaignRejected = 31
+        PicturePollCampaignRejected = 31,
+        NewCouponsNearMe = 32
     }
 
     public enum AdCampaignCriteriaType

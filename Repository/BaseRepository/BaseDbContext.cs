@@ -909,10 +909,12 @@ namespace SMD.Repository.BaseRepository
 
 
 
-        public ObjectResult<GetNewLiveCouponsForEmail_Result> GetNewLiveCouponsForEmail()
+        public ObjectResult<GetUsersCouponsForEmailNotification_Result> GetUsersCouponsForEmailNotification(int mode)
         {
 
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetNewLiveCouponsForEmail_Result>("GetNewLiveCouponsForEmail");
+            var modevar = new ObjectParameter("mode", mode);
+
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUsersCouponsForEmailNotification_Result>("GetUsersCouponsForEmailNotification", modevar);
         }
         #endregion
     }
