@@ -36,7 +36,7 @@ namespace SMD.Implementation
             Claim claim = new Claim(SmdClaimTypes.CompanyId,
                 // ReSharper restore SuggestUseVarKeywordEvident
                                         ClaimHelper.Serialize(
-                                            new CompanyIdClaimValue { CompanyId = CompanyId, CompanyName = CompanyName, CompanyLogo = CompanyLogo, UserName = userName, MobileNumber = MobileNumber, Email = email, CompanyCity = CompanyCity, addressLine1 = AddressLine1 }),
+                                            new CompanyIdClaimValue { CompanyId = CompanyId, CompanyName = CompanyName, CompanyLogo = CompanyLogo, UserName = userName, MobileNumber = MobileNumber, Email = email, CompanyCity = CompanyCity, addressLine1 = AddressLine1}),
                                         typeof(CompanyIdClaimValue).AssemblyQualifiedName);
             identity.AddClaim(claim);
 

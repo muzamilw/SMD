@@ -18,6 +18,11 @@ define("Coupons/Coupons.dataservice", function () {
                         type: 'GET'
                     });
 
+                    amplify.request.define('getCompanyData', 'ajax', {
+                        url: '/Api/CompanyDetail',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
                     amplify.request.define('getCampaignData', 'ajax', {
                         url: '/Api/Coupon',
                         dataType: 'json',
@@ -105,6 +110,15 @@ define("Coupons/Coupons.dataservice", function () {
                 error: callbacks.error,
             });
         },
+        getCompanyData = function (params, callbacks) {
+            initialize();
+            return amplify.request({
+                resourceId: 'getCompanyData',
+                success: callbacks.success,
+                error: callbacks.error,
+                data: params
+            });
+        },
         addCampaignData = function (params, callbacks) {
              initialize();
              return amplify.request({
@@ -181,7 +195,8 @@ define("Coupons/Coupons.dataservice", function () {
             generateCouponCodes: generateCouponCodes,
             getDealsAnalytics: getDealsAnalytics,
             getfreeCouponCount: getfreeCouponCount,
-            getRandomDeal: getRandomDeal
+            getRandomDeal: getRandomDeal,
+            getCompanyData: getCompanyData
         };
     })();
     return dataService;

@@ -128,7 +128,6 @@ define("common/companyProfile.viewModel",
                             return true;
                         }
 
-
                     }
                     else {
 
@@ -260,7 +259,9 @@ define("common/companyProfile.viewModel",
                 //Get Base Data for Questions
                 getBasedata = function () {
                     dataservice.getBaseDataForCompanyProfile(null, {
+                        
                         success: function (baseDataFromServer) {
+                            debugger;
                             if (baseDataFromServer.GetCouponReviewCount > 0) {
                                 $("#imgRedbell").css("display", "block");
                                 $("#whiteicon").css("display", "none");
@@ -338,9 +339,8 @@ define("common/companyProfile.viewModel",
                         center: latlngComp,
                         mapTypeId: google.maps.MapTypeId.ROADMAP
                     };
-                    compMap = new google.maps.Map(document.getElementById('map-canvasCompany'), mapOptions);
-
-
+                    debugger;
+                   compMap = new google.maps.Map(document.getElementById('map-canvasCompany'), mapOptions);
 
                     //map = new google.maps.Map($('#map-canvasCompany'), mapOptions);
 
@@ -365,31 +365,31 @@ define("common/companyProfile.viewModel",
                                 map: compMap,
                                 position: results[0].geometry.location
                             });
-                            //////google.maps.event.addListener(compMap, 'click', function (event) {
-                            //////    selectedCompany().branchLocationLat(event.latLng.lat());
-                            //////    selectedCompany().branchLocationLong(event.latLng.lng());
-                            //////    var geocoder = new google.maps.Geocoder();
-                            //////    geocoder.geocode({
-                            //////        "latLng": event.latLng
-                            //////    }, function (results, status) {
-                            //////        console.log(results, status);
-                            //////        if (status == google.maps.GeocoderStatus.OK) {
-                            //////            console.log(results);
-                            //////            var lat = results[0].geometry.location.lat(),
-                            //////                lng = results[0].geometry.location.lng(),
-                            //////                placeName = results[0].address_components[0].long_name,
-                            //////                latlng = new google.maps.LatLng(lat, lng);
+                            google.maps.event.addListener(compMap, 'click', function (event) {
+                                selectedCompany().branchLocationLat(event.latLng.lat());
+                                selectedCompany().branchLocationLong(event.latLng.lng());
+                                var geocoder = new google.maps.Geocoder();
+                                geocoder.geocode({
+                                    "latLng": event.latLng
+                                }, function (results, status) {
+                                    console.log(results, status);
+                                    if (status == google.maps.GeocoderStatus.OK) {
+                                        console.log(results);
+                                        var lat = results[0].geometry.location.lat(),
+                                            lng = results[0].geometry.location.lng(),
+                                            placeName = results[0].address_components[0].long_name,
+                                            latlng = new google.maps.LatLng(lat, lng);
 
-                            //////            moveMarker(placeName, latlng);
-                            //////        }
-                            //////    });
-                            //////});
-                            ////function moveMarker(placeName, latlng) {
-                            ////    //marker.setIcon(image);
-                            ////    marker.setPosition(latlng);
-                            ////    //infowindow.setContent(placeName);
-                            ////    //infowindow.open(map, marker);
-                            ////}
+                                        moveMarker(placeName, latlng);
+                                    }
+                                });
+                            });
+                            function moveMarker(placeName, latlng) {
+                                marker.setIcon(image);
+                                marker.setPosition(latlng);
+                                infowindow.setContent(placeName);
+                                infowindow.open(map, marker);
+                            }
                             isCodeAddressEdit(false);
 
 
@@ -502,11 +502,6 @@ define("common/companyProfile.viewModel",
                     ko.applyBindings(view.viewModel, view.bindingPartial);
 
                     getBasedata();
-
-
-
-
-
 
                 };
                 return {

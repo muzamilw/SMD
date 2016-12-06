@@ -10,6 +10,8 @@ namespace SMD.Models.ResponseModels
     {
         public int CompanyId { get; set; }
         public string CompanyName { get; set; }
+        public string CompanyAddressline1 { get; set; }
+        public string Companyphone1 { get; set; }
         public string SalesPhone { get; set; }
         public string Tel2 { get; set; }
 
