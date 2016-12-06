@@ -35,5 +35,10 @@
         public string Client { get; set; }
 
         public string NotificationToken { get; set; }
+
+        public string LocationLat { get; set; }
+
+        public string LocationLong { get; set; }
+
     }
 }

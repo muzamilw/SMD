@@ -227,7 +227,7 @@
                     <tr>                      
                       <td align="center" style="padding-bottom:40px;" valign="top">                        
                         <p style="color:#FFFFFF; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:center;">
-                          Thank you for joining us, ++firstname++. Here's an overview of how your Cash4ads account works.
+                            Here are few of the newly available deals dear you.
                         </p>
                       </td>
                     </tr>
@@ -292,167 +292,15 @@
                                 <tr>                                  
                                   <td align="left" id="bodyContent" valign="top">                                    
                                     <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">                                      
+                                     
                                       <tr>                                        
-                                        <td align="left" style="padding-right:20px; padding-bottom:60px;" valign="top">                                          
-                                          <img alt="Lists" src="http://manage.cash4ads.com/emails/images/Play_Email.png" style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:600; height:auto; letter-spacing:-1px; padding:0; margin:0; text-align:center;" width="48"/>
-                                        </td>
-                                        <td align="left" style="padding-bottom:40px;" valign="top">                                          
-                                          <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
-                                            Get Paid upto 25c to Watch a Video Ad
-                                          </p>
-                                          <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
-                                            Your subscribers are
-                                            <a href="http://click.mailchimpapp.com/track/click/10612303/kb.mailchimp.com?p=eyJzIjoiQjdKQXdHQ21LSDBDVEl1YjRialFNMnFDOGg4IiwidiI6MSwicCI6IntcInVcIjoxMDYxMjMwMyxcInZcIjoxLFwidXJsXCI6XCJodHRwOlxcXC9cXFwva2IubWFpbGNoaW1wLmNvbVxcXC9saXN0c1xcXC9ncm93dGhcXFwvZ2V0dGluZy1zdGFydGVkLXdpdGgtbGlzdHM_dXRtX3NvdXJjZT1tYWlsY2hpbXAtYXBwJnV0bV9tZWRpdW09ZW1haWwmdXRtX2NvbnRlbnQ9c2lnbnVwLXdlbGNvbWUmdXRtX2NhbXBhaWduPW9uYm9hcmRpbmdcIixcImlkXCI6XCJlYzg5NjU0YTg4YTI0ZDBlODg1MWVmMjM0MmMxYjEwYVwiLFwidXJsX2lkc1wiOltcIjI2ZDBhYTY4NTM0MDYxNmNjOWU4YzE2NjgxZjcwN2IxODMwODM0NjBcIl19In0" style="color:#6DC6DD; text-decoration:underline;">managed in lists</a>. Check out our
-                                            <a href="http://click.mailchimpapp.com/track/click/10612303/kb.mailchimp.com?p=eyJzIjoiSjRzVUk2eDN3V1RLLUJmeUU1MUhnOXpNU3RJIiwidiI6MSwicCI6IntcInVcIjoxMDYxMjMwMyxcInZcIjoxLFwidXJsXCI6XCJodHRwOlxcXC9cXFwva2IubWFpbGNoaW1wLmNvbVxcXC9hY2NvdW50c1xcXC9jb21wbGlhbmNlLXRpcHNcXFwvZ3VpZGVsaW5lcy1mb3ItbGlzdC1jb21wbGlhbmNlP3V0bV9zb3VyY2U9bWFpbGNoaW1wLWFwcCZ1dG1fbWVkaXVtPWVtYWlsJnV0bV9jb250ZW50PXNpZ251cC13ZWxjb21lJnV0bV9jYW1wYWlnbj1vbmJvYXJkaW5nXCIsXCJpZFwiOlwiZWM4OTY1NGE4OGEyNGQwZTg4NTFlZjIzNDJjMWIxMGFcIixcInVybF9pZHNcIjpbXCIzYzQ0NTEzYjk2MWU3ODZmNTRlODI5MThjZmQzZWY1ZGIyOTRkMjRkXCJdfSJ9" style="color:#6DC6DD; text-decoration:underline;">list requirements</a> and then learn how to grow a list of subscribers.
-                                          </p>
+                                        <td align="center" style="padding-bottom:60px;" valign="top" colspan="2">                                          
+                                                                                 
+                                         ++userdealshtml++
                                         </td>
                                       </tr>
-                                      <tr>                                        
-                                        <td align="left" style="padding-right:20px; padding-bottom:60px;" valign="top">                                          
-                                          <img alt="Email" src="http://manage.cash4ads.com/emails/images/Deal_Email.png" style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:600; height:auto; letter-spacing:-1px; padding:0; margin:0; text-align:center;" width="48"/>
-                                        </td>
-                                        <td align="left" style="padding-bottom:40px;" valign="top">                                          
-                                          <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
-                                           Save up to 90% on Deals Near You
-                                          </p>
-                                          <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
-                                            Jump start your
-                                            <a href="http://click.mailchimpapp.com/track/click/10612303/kb.mailchimp.com?p=eyJzIjoiQnlIYTYyYUtqWHFwcTJCblA0Q0dZajNOMnJFIiwidiI6MSwicCI6IntcInVcIjoxMDYxMjMwMyxcInZcIjoxLFwidXJsXCI6XCJodHRwOlxcXC9cXFwva2IubWFpbGNoaW1wLmNvbVxcXC9jYW1wYWlnbnNcXFwvZGVzaWduXFxcL2Rlc2lnbi1mb3ItZW1haWw_dXRtX3NvdXJjZT1tYWlsY2hpbXAtYXBwJnV0bV9tZWRpdW09ZW1haWwmdXRtX2NvbnRlbnQ9c2lnbnVwLXdlbGNvbWUmdXRtX2NhbXBhaWduPW9uYm9hcmRpbmdcIixcImlkXCI6XCJlYzg5NjU0YTg4YTI0ZDBlODg1MWVmMjM0MmMxYjEwYVwiLFwidXJsX2lkc1wiOltcIjM3YzQ1YmRkYjAxNDFkNzcxZThhZjI3YTAzOGYwMGY0N2VhMzUyZTRcIl19In0" style="color:#6DC6DD; text-decoration:underline;">email design</a> knowledge and
-                                            <a href="http://click.mailchimpapp.com/track/click/10612303/kb.mailchimp.com?p=eyJzIjoidGNjemtYVHhUb18yLXlSdFBVNmhDX0FCN2xVIiwidiI6MSwicCI6IntcInVcIjoxMDYxMjMwMyxcInZcIjoxLFwidXJsXCI6XCJodHRwOlxcXC9cXFwva2IubWFpbGNoaW1wLmNvbVxcXC9jYW1wYWlnbnNcXFwvd2F5cy10by1idWlsZFxcXC9jcmVhdGUtYS1jYW1wYWlnbi13aXRoLWNhbXBhaWduLWJ1aWxkZXI_dXRtX3NvdXJjZT1tYWlsY2hpbXAtYXBwJnV0bV9tZWRpdW09ZW1haWwmdXRtX2NvbnRlbnQ9c2lnbnVwLXdlbGNvbWUmdXRtX2NhbXBhaWduPW9uYm9hcmRpbmdcIixcImlkXCI6XCJlYzg5NjU0YTg4YTI0ZDBlODg1MWVmMjM0MmMxYjEwYVwiLFwidXJsX2lkc1wiOltcIjM1ZjZlYTU2OTUxMDM5OWNkY2EwM2I1MDE1NzE4Yzc2NjIyZDA1NGFcIl19In0" style="color:#6DC6DD; text-decoration:underline;">build your campaign</a> to share your message with your subscribers.
-                                          </p>
-                                        </td>
-                                      </tr>
-                                      <tr>                                        
-                                        <td align="left" style="padding-right:20px; padding-bottom:60px;" valign="top">                                          
-                                          <img alt="Test" src="http://manage.cash4ads.com/emails/images/Poll_Email.png" style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:600; height:auto; letter-spacing:-1px; padding:0; margin:0; text-align:center;" width="48"/>
-                                        </td>
-                                        <td align="left" style="padding-bottom:40px;" valign="top">                                          
-                                          <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
-                                           Ask Your Friends What They Prefer
-                                          </p>
-                                          <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">                                            <a href="http://click.mailchimpapp.com/track/click/10612303/kb.mailchimp.com?p=eyJzIjoiVE5YMGdYdElQcmVHOEtjeWctUEdrS3BtTWdrIiwidiI6MSwicCI6IntcInVcIjoxMDYxMjMwMyxcInZcIjoxLFwidXJsXCI6XCJodHRwOlxcXC9cXFwva2IubWFpbGNoaW1wLmNvbVxcXC9jYW1wYWlnbnNcXFwvcHJldmlld3MtYW5kLXRlc3RzXFxcL2VtYWlsLWNhbXBhaWduLXRlc3RpbmctdGlwcz91dG1fc291cmNlPW1haWxjaGltcC1hcHAmdXRtX21lZGl1bT1lbWFpbCZ1dG1fY29udGVudD1zaWdudXAtd2VsY29tZSZ1dG1fY2FtcGFpZ249b25ib2FyZGluZ1wiLFwiaWRcIjpcImVjODk2NTRhODhhMjRkMGU4ODUxZWYyMzQyYzFiMTBhXCIsXCJ1cmxfaWRzXCI6W1wiNDNhMmYwOTY5YjQwZjMxYzJiMGZmMzg0MDhkYTdjOTE5NDE0ZmZlNVwiXX0ifQ" style="color:#6DC6DD; text-decoration:underline;">Test your campaign</a> to get an idea of what your subscribers will see in their inboxes. When you're ready,
-                                            <a href="http://click.mailchimpapp.com/track/click/10612303/kb.mailchimp.com?p=eyJzIjoib0pIMlBMUDd0U05MZlVZZ3VhVGc5Wk5pdjA0IiwidiI6MSwicCI6IntcInVcIjoxMDYxMjMwMyxcInZcIjoxLFwidXJsXCI6XCJodHRwOlxcXC9cXFwva2IubWFpbGNoaW1wLmNvbVxcXC9jYW1wYWlnbnNcXFwvY29uZmlybWF0aW9uLWFuZC1zZW5kaW5nXFxcL3NjaGVkdWxlLXBhdXNlLW9yLXNlbmQtYS1jYW1wYWlnbj91dG1fc291cmNlPW1haWxjaGltcC1hcHAmdXRtX21lZGl1bT1lbWFpbCZ1dG1fY29udGVudD1zaWdudXAtd2VsY29tZSZ1dG1fY2FtcGFpZ249b25ib2FyZGluZ1wiLFwiaWRcIjpcImVjODk2NTRhODhhMjRkMGU4ODUxZWYyMzQyYzFiMTBhXCIsXCJ1cmxfaWRzXCI6W1wiNzMyNzQzMTU0NDkwZDQ0NzI5YjFjOTI1MjU5NzI2MDJlYTRiNzEwYlwiXX0ifQ" style="color:#6DC6DD; text-decoration:underline;">schedule or send</a> your campaign.
-                                          </p>
-                                        </td>
-                                      </tr>
-                                          <tr>                                        
-                                      
-                                        <td align="left" style="padding-bottom:40px;" valign="top" colspan="2">                                          
-                                            
-
-
-                                            <table align="center" bgcolor="#e7f5fb" border="0" cellpadding="0" cellspacing="0" id="subTable" style="background-color:#e7f5fb; border-collapse:separate; border-top-left-radius:4px; border-top-right-radius:4px;" width="100%">                                
-                                <tbody>     
-                                    
-                                    <tr>
-                                        <td colspan="2" align="center" style="padding-right:20px; padding-bottom:40px;padding-top:40px" valign="top">
-                                             <p style="color:#217bbb; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:24px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:center;">
-                                            Want to Advertise in the App ?
-                                          </p>
-                                        </td>
-                                    </tr>
-                                    <tr>                                        
-                                        <td align="left" style="padding-right:20px; padding-bottom:60px;padding-left:10px;" valign="top">                                          
-                                          <img alt="Reports" src="http://manage.cash4ads.com/emails/images/Deals_Email_Blue.png" style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:600; height:auto; letter-spacing:-1px; padding:0; margin:0; text-align:center;" width="48"/>
-                                        </td>
-                                        <td align="left" style="padding-bottom:40px;" valign="top">                                          
-                                          <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
-                                            List Deals to Customers Near You
-                                          </p>
-                                          <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
-                                            Check out campaign performance in
-                                            <a href="http://click.mailchimpapp.com/track/click/10612303/kb.mailchimp.com?p=eyJzIjoic1ZFczZVS0pTRlJqUVloQXNBRVR4ek1uLUVBIiwidiI6MSwicCI6IntcInVcIjoxMDYxMjMwMyxcInZcIjoxLFwidXJsXCI6XCJodHRwOlxcXC9cXFwva2IubWFpbGNoaW1wLmNvbVxcXC9yZXBvcnRzXFxcL2Fib3V0LWNhbXBhaWduLXJlcG9ydHM_dXRtX3NvdXJjZT1tYWlsY2hpbXAtYXBwJnV0bV9tZWRpdW09ZW1haWwmdXRtX2NvbnRlbnQ9c2lnbnVwLXdlbGNvbWUmdXRtX2NhbXBhaWduPW9uYm9hcmRpbmdcIixcImlkXCI6XCJlYzg5NjU0YTg4YTI0ZDBlODg1MWVmMjM0MmMxYjEwYVwiLFwidXJsX2lkc1wiOltcIjQ1MzFkZjE3YzdmNjYxOTIwYzc4NDY4Zjc1NDJjNTc0MGVhMGU3YjNcIl19In0" style="color:#6DC6DD; text-decoration:underline;">reports</a>. Improve your strategy using powerful analytics and data to create campaigns that
-                                            <a href="http://click.mailchimpapp.com/track/click/10612303/kb.mailchimp.com?p=eyJzIjoiQm5QQWc0dkVSZFV3a2k3U0NpNFBCOHVKbjJzIiwidiI6MSwicCI6IntcInVcIjoxMDYxMjMwMyxcInZcIjoxLFwidXJsXCI6XCJodHRwOlxcXC9cXFwva2IubWFpbGNoaW1wLmNvbVxcXC9zZWdtZW50c1xcXC9nZXR0aW5nLXN0YXJ0ZWQtd2l0aC1zZWdtZW50cz91dG1fc291cmNlPW1haWxjaGltcC1hcHAmdXRtX21lZGl1bT1lbWFpbCZ1dG1fY29udGVudD1zaWdudXAtd2VsY29tZSZ1dG1fY2FtcGFpZ249b25ib2FyZGluZ1wiLFwiaWRcIjpcImVjODk2NTRhODhhMjRkMGU4ODUxZWYyMzQyYzFiMTBhXCIsXCJ1cmxfaWRzXCI6W1wiYmY0ZGE2ZTAzODdjYzcwYWJkOGVmMTNjYjJkNzI1MjMxZjJmY2EwNlwiXX0ifQ" style="color:#6DC6DD; text-decoration:underline;">target subscribers</a> based on their interests.
-                                          </p>
-                                        </td>
-                                      </tr>
-                                      <tr>                                        
-                                        <td align="left" style="padding-right:20px; padding-bottom:60px;padding-left:10px;" valign="top">                                          
-                                          <img alt="Learn" src="http://manage.cash4ads.com/emails/images/Videos_Email_Blue.png" style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:600; height:auto; letter-spacing:-1px; padding:0; margin:0; text-align:center;" width="48"/>
-                                        </td>
-                                        <td align="left" style="padding-bottom:40px;" valign="top">                                          
-                                          <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
-                                           Raise Your Brand Awareness using Targeted Video Ads
-                                          </p>
-                                          <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">                                            <a href="http://click.mailchimpapp.com/track/click/10612303/mailchimp.com?p=eyJzIjoidEJyaUVGdWUyR0VlZkhwVklGTmVsWDBrVUVFIiwidiI6MSwicCI6IntcInVcIjoxMDYxMjMwMyxcInZcIjoxLFwidXJsXCI6XCJodHRwOlxcXC9cXFwvbWFpbGNoaW1wLmNvbVxcXC9yZXNvdXJjZXNcXFwvZ3VpZGVzXFxcL2dldHRpbmctc3RhcnRlZC13aXRoLW1haWxjaGltcFxcXC8_dXRtX3NvdXJjZT1tYWlsY2hpbXAtYXBwJnV0bV9tZWRpdW09ZW1haWwmdXRtX2NvbnRlbnQ9c2lnbnVwLXdlbGNvbWUmdXRtX2NhbXBhaWduPW9uYm9hcmRpbmdcIixcImlkXCI6XCJlYzg5NjU0YTg4YTI0ZDBlODg1MWVmMjM0MmMxYjEwYVwiLFwidXJsX2lkc1wiOltcIjczNzY5YjdjYTY3ZGJkYzI1NTVjNDg0MDM1ZjZjZDFkZjNlOTgwNGJcIl19In0" style="color:#6DC6DD; text-decoration:underline;">Getting Started</a> and
-                                            <a href="http://click.mailchimpapp.com/track/click/10612303/kb.mailchimp.com?p=eyJzIjoiNy1iQUtWUnh6ZTFGOXB0OE5TUlNEbGFJY2FrIiwidiI6MSwicCI6IntcInVcIjoxMDYxMjMwMyxcInZcIjoxLFwidXJsXCI6XCJodHRwOlxcXC9cXFwva2IubWFpbGNoaW1wLmNvbVxcXC9hY2NvdW50c1xcXC9hY2NvdW50LXNldHVwXFxcL21haWxjaGltcC1mdW5kYW1lbnRhbHM_dXRtX3NvdXJjZT1tYWlsY2hpbXAtYXBwJnV0bV9tZWRpdW09ZW1haWwmdXRtX2NvbnRlbnQ9c2lnbnVwLXdlbGNvbWUmdXRtX2NhbXBhaWduPW9uYm9hcmRpbmdcIixcImlkXCI6XCJlYzg5NjU0YTg4YTI0ZDBlODg1MWVmMjM0MmMxYjEwYVwiLFwidXJsX2lkc1wiOltcIjliMjQwY2UwMDMzYmQyNWY2NTc1MTkxZjM0MTBjNDFiYjgzYTMxN2JcIl19In0" style="color:#6DC6DD; text-decoration:underline;">Cash4ads Fundamentals</a> help outline the basics of your account, and our comprehensive
-                                            <a href="http://click.mailchimpapp.com/track/click/10612303/kb.mailchimp.com?p=eyJzIjoiaU52N2xTdzNqUEMwS2hzaWpwQmRycG9NNXZ3IiwidiI6MSwicCI6IntcInVcIjoxMDYxMjMwMyxcInZcIjoxLFwidXJsXCI6XCJodHRwOlxcXC9cXFwva2IubWFpbGNoaW1wLmNvbVxcXC8_dXRtX3NvdXJjZT1tYWlsY2hpbXAtYXBwJnV0bV9tZWRpdW09ZW1haWwmdXRtX2NvbnRlbnQ9c2lnbnVwLXdlbGNvbWUmdXRtX2NhbXBhaWduPW9uYm9hcmRpbmdcIixcImlkXCI6XCJlYzg5NjU0YTg4YTI0ZDBlODg1MWVmMjM0MmMxYjEwYVwiLFwidXJsX2lkc1wiOltcIjBmOTQ4MmFhNTkyMDg4ZGQyNGNkMDFlZjA1NzE5NzkyOTdlMmM3NWNcIl19In0" style="color:#6DC6DD; text-decoration:underline;">Knowledge Base</a> is there when you have questions.
-                                          </p>
-                                        </td>
-                                      </tr>
-                                     <tr>                                        
-                                        <td align="left" style="padding-right:20px; padding-bottom:60px;padding-left:10px;" valign="top">                                          
-                                          <img alt="Learn" src="http://manage.cash4ads.com/emails/images/Display_Email_Blue.png" style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:600; height:auto; letter-spacing:-1px; padding:0; margin:0; text-align:center;" width="48"/>
-                                        </td>
-                                        <td align="left" style="padding-bottom:40px;" valign="top">                                          
-                                          <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
-                                          Sponsor a Brain Game in App  (Display Ad)
-                                          </p>
-                                          <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">                                            <a href="http://click.mailchimpapp.com/track/click/10612303/mailchimp.com?p=eyJzIjoidEJyaUVGdWUyR0VlZkhwVklGTmVsWDBrVUVFIiwidiI6MSwicCI6IntcInVcIjoxMDYxMjMwMyxcInZcIjoxLFwidXJsXCI6XCJodHRwOlxcXC9cXFwvbWFpbGNoaW1wLmNvbVxcXC9yZXNvdXJjZXNcXFwvZ3VpZGVzXFxcL2dldHRpbmctc3RhcnRlZC13aXRoLW1haWxjaGltcFxcXC8_dXRtX3NvdXJjZT1tYWlsY2hpbXAtYXBwJnV0bV9tZWRpdW09ZW1haWwmdXRtX2NvbnRlbnQ9c2lnbnVwLXdlbGNvbWUmdXRtX2NhbXBhaWduPW9uYm9hcmRpbmdcIixcImlkXCI6XCJlYzg5NjU0YTg4YTI0ZDBlODg1MWVmMjM0MmMxYjEwYVwiLFwidXJsX2lkc1wiOltcIjczNzY5YjdjYTY3ZGJkYzI1NTVjNDg0MDM1ZjZjZDFkZjNlOTgwNGJcIl19In0" style="color:#6DC6DD; text-decoration:underline;">Getting Started</a> and
-                                            <a href="http://click.mailchimpapp.com/track/click/10612303/kb.mailchimp.com?p=eyJzIjoiNy1iQUtWUnh6ZTFGOXB0OE5TUlNEbGFJY2FrIiwidiI6MSwicCI6IntcInVcIjoxMDYxMjMwMyxcInZcIjoxLFwidXJsXCI6XCJodHRwOlxcXC9cXFwva2IubWFpbGNoaW1wLmNvbVxcXC9hY2NvdW50c1xcXC9hY2NvdW50LXNldHVwXFxcL21haWxjaGltcC1mdW5kYW1lbnRhbHM_dXRtX3NvdXJjZT1tYWlsY2hpbXAtYXBwJnV0bV9tZWRpdW09ZW1haWwmdXRtX2NvbnRlbnQ9c2lnbnVwLXdlbGNvbWUmdXRtX2NhbXBhaWduPW9uYm9hcmRpbmdcIixcImlkXCI6XCJlYzg5NjU0YTg4YTI0ZDBlODg1MWVmMjM0MmMxYjEwYVwiLFwidXJsX2lkc1wiOltcIjliMjQwY2UwMDMzYmQyNWY2NTc1MTkxZjM0MTBjNDFiYjgzYTMxN2JcIl19In0" style="color:#6DC6DD; text-decoration:underline;">Cash4ads Fundamentals</a> help outline the basics of your account, and our comprehensive
-                                            <a href="http://click.mailchimpapp.com/track/click/10612303/kb.mailchimp.com?p=eyJzIjoiaU52N2xTdzNqUEMwS2hzaWpwQmRycG9NNXZ3IiwidiI6MSwicCI6IntcInVcIjoxMDYxMjMwMyxcInZcIjoxLFwidXJsXCI6XCJodHRwOlxcXC9cXFwva2IubWFpbGNoaW1wLmNvbVxcXC8_dXRtX3NvdXJjZT1tYWlsY2hpbXAtYXBwJnV0bV9tZWRpdW09ZW1haWwmdXRtX2NvbnRlbnQ9c2lnbnVwLXdlbGNvbWUmdXRtX2NhbXBhaWduPW9uYm9hcmRpbmdcIixcImlkXCI6XCJlYzg5NjU0YTg4YTI0ZDBlODg1MWVmMjM0MmMxYjEwYVwiLFwidXJsX2lkc1wiOltcIjBmOTQ4MmFhNTkyMDg4ZGQyNGNkMDFlZjA1NzE5NzkyOTdlMmM3NWNcIl19In0" style="color:#6DC6DD; text-decoration:underline;">Knowledge Base</a> is there when you have questions.
-                                          </p>
-                                        </td>
-                                      </tr>
-                                    <tr>                                        
-                                        <td align="left" style="padding-right:20px; padding-bottom:60px;padding-left:10px;" valign="top">                                          
-                                          <img alt="Learn" src="http://manage.cash4ads.com/emails/images/Polls_Email_Blue.png" style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:600; height:auto; letter-spacing:-1px; padding:0; margin:0; text-align:center;" width="48"/>
-                                        </td>
-                                        <td align="left" style="padding-bottom:40px;" valign="top">                                          
-                                          <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
-                                          Run a Picture Poll / Survey
-                                          </p>
-                                          <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">                                            <a href="http://click.mailchimpapp.com/track/click/10612303/mailchimp.com?p=eyJzIjoidEJyaUVGdWUyR0VlZkhwVklGTmVsWDBrVUVFIiwidiI6MSwicCI6IntcInVcIjoxMDYxMjMwMyxcInZcIjoxLFwidXJsXCI6XCJodHRwOlxcXC9cXFwvbWFpbGNoaW1wLmNvbVxcXC9yZXNvdXJjZXNcXFwvZ3VpZGVzXFxcL2dldHRpbmctc3RhcnRlZC13aXRoLW1haWxjaGltcFxcXC8_dXRtX3NvdXJjZT1tYWlsY2hpbXAtYXBwJnV0bV9tZWRpdW09ZW1haWwmdXRtX2NvbnRlbnQ9c2lnbnVwLXdlbGNvbWUmdXRtX2NhbXBhaWduPW9uYm9hcmRpbmdcIixcImlkXCI6XCJlYzg5NjU0YTg4YTI0ZDBlODg1MWVmMjM0MmMxYjEwYVwiLFwidXJsX2lkc1wiOltcIjczNzY5YjdjYTY3ZGJkYzI1NTVjNDg0MDM1ZjZjZDFkZjNlOTgwNGJcIl19In0" style="color:#6DC6DD; text-decoration:underline;">Getting Started</a> and
-                                            <a href="http://click.mailchimpapp.com/track/click/10612303/kb.mailchimp.com?p=eyJzIjoiNy1iQUtWUnh6ZTFGOXB0OE5TUlNEbGFJY2FrIiwidiI6MSwicCI6IntcInVcIjoxMDYxMjMwMyxcInZcIjoxLFwidXJsXCI6XCJodHRwOlxcXC9cXFwva2IubWFpbGNoaW1wLmNvbVxcXC9hY2NvdW50c1xcXC9hY2NvdW50LXNldHVwXFxcL21haWxjaGltcC1mdW5kYW1lbnRhbHM_dXRtX3NvdXJjZT1tYWlsY2hpbXAtYXBwJnV0bV9tZWRpdW09ZW1haWwmdXRtX2NvbnRlbnQ9c2lnbnVwLXdlbGNvbWUmdXRtX2NhbXBhaWduPW9uYm9hcmRpbmdcIixcImlkXCI6XCJlYzg5NjU0YTg4YTI0ZDBlODg1MWVmMjM0MmMxYjEwYVwiLFwidXJsX2lkc1wiOltcIjliMjQwY2UwMDMzYmQyNWY2NTc1MTkxZjM0MTBjNDFiYjgzYTMxN2JcIl19In0" style="color:#6DC6DD; text-decoration:underline;">Cash4ads Fundamentals</a> help outline the basics of your account, and our comprehensive
-                                            <a href="http://click.mailchimpapp.com/track/click/10612303/kb.mailchimp.com?p=eyJzIjoiaU52N2xTdzNqUEMwS2hzaWpwQmRycG9NNXZ3IiwidiI6MSwicCI6IntcInVcIjoxMDYxMjMwMyxcInZcIjoxLFwidXJsXCI6XCJodHRwOlxcXC9cXFwva2IubWFpbGNoaW1wLmNvbVxcXC8_dXRtX3NvdXJjZT1tYWlsY2hpbXAtYXBwJnV0bV9tZWRpdW09ZW1haWwmdXRtX2NvbnRlbnQ9c2lnbnVwLXdlbGNvbWUmdXRtX2NhbXBhaWduPW9uYm9hcmRpbmdcIixcImlkXCI6XCJlYzg5NjU0YTg4YTI0ZDBlODg1MWVmMjM0MmMxYjEwYVwiLFwidXJsX2lkc1wiOltcIjBmOTQ4MmFhNTkyMDg4ZGQyNGNkMDFlZjA1NzE5NzkyOTdlMmM3NWNcIl19In0" style="color:#6DC6DD; text-decoration:underline;">Knowledge Base</a> is there when you have questions.
-                                          </p>
-                                        </td>
-                                      </tr>
-                                    <tr>                                        
-                                        <td align="left" style="padding-right:20px; padding-bottom:60px;padding-left:10px;" valign="top">                                          
-                                          <img alt="Learn" src="http://manage.cash4ads.com/emails/images/Review_Email_Thumbs_Up.png" style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:600; height:auto; letter-spacing:-1px; padding:0; margin:0; text-align:center;" width="48"/>
-                                        </td>
-                                        <td align="left" style="padding-bottom:40px;" valign="top">                                          
-                                          <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
-                                          Publish or Hide Customer Reviews
-                                          </p>
-                                          <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">                                            <a href="http://click.mailchimpapp.com/track/click/10612303/mailchimp.com?p=eyJzIjoidEJyaUVGdWUyR0VlZkhwVklGTmVsWDBrVUVFIiwidiI6MSwicCI6IntcInVcIjoxMDYxMjMwMyxcInZcIjoxLFwidXJsXCI6XCJodHRwOlxcXC9cXFwvbWFpbGNoaW1wLmNvbVxcXC9yZXNvdXJjZXNcXFwvZ3VpZGVzXFxcL2dldHRpbmctc3RhcnRlZC13aXRoLW1haWxjaGltcFxcXC8_dXRtX3NvdXJjZT1tYWlsY2hpbXAtYXBwJnV0bV9tZWRpdW09ZW1haWwmdXRtX2NvbnRlbnQ9c2lnbnVwLXdlbGNvbWUmdXRtX2NhbXBhaWduPW9uYm9hcmRpbmdcIixcImlkXCI6XCJlYzg5NjU0YTg4YTI0ZDBlODg1MWVmMjM0MmMxYjEwYVwiLFwidXJsX2lkc1wiOltcIjczNzY5YjdjYTY3ZGJkYzI1NTVjNDg0MDM1ZjZjZDFkZjNlOTgwNGJcIl19In0" style="color:#6DC6DD; text-decoration:underline;">Getting Started</a> and
-                                            <a href="http://click.mailchimpapp.com/track/click/10612303/kb.mailchimp.com?p=eyJzIjoiNy1iQUtWUnh6ZTFGOXB0OE5TUlNEbGFJY2FrIiwidiI6MSwicCI6IntcInVcIjoxMDYxMjMwMyxcInZcIjoxLFwidXJsXCI6XCJodHRwOlxcXC9cXFwva2IubWFpbGNoaW1wLmNvbVxcXC9hY2NvdW50c1xcXC9hY2NvdW50LXNldHVwXFxcL21haWxjaGltcC1mdW5kYW1lbnRhbHM_dXRtX3NvdXJjZT1tYWlsY2hpbXAtYXBwJnV0bV9tZWRpdW09ZW1haWwmdXRtX2NvbnRlbnQ9c2lnbnVwLXdlbGNvbWUmdXRtX2NhbXBhaWduPW9uYm9hcmRpbmdcIixcImlkXCI6XCJlYzg5NjU0YTg4YTI0ZDBlODg1MWVmMjM0MmMxYjEwYVwiLFwidXJsX2lkc1wiOltcIjliMjQwY2UwMDMzYmQyNWY2NTc1MTkxZjM0MTBjNDFiYjgzYTMxN2JcIl19In0" style="color:#6DC6DD; text-decoration:underline;">Cash4ads Fundamentals</a> help outline the basics of your account, and our comprehensive
-                                            <a href="http://click.mailchimpapp.com/track/click/10612303/kb.mailchimp.com?p=eyJzIjoiaU52N2xTdzNqUEMwS2hzaWpwQmRycG9NNXZ3IiwidiI6MSwicCI6IntcInVcIjoxMDYxMjMwMyxcInZcIjoxLFwidXJsXCI6XCJodHRwOlxcXC9cXFwva2IubWFpbGNoaW1wLmNvbVxcXC8_dXRtX3NvdXJjZT1tYWlsY2hpbXAtYXBwJnV0bV9tZWRpdW09ZW1haWwmdXRtX2NvbnRlbnQ9c2lnbnVwLXdlbGNvbWUmdXRtX2NhbXBhaWduPW9uYm9hcmRpbmdcIixcImlkXCI6XCJlYzg5NjU0YTg4YTI0ZDBlODg1MWVmMjM0MmMxYjEwYVwiLFwidXJsX2lkc1wiOltcIjBmOTQ4MmFhNTkyMDg4ZGQyNGNkMDFlZjA1NzE5NzkyOTdlMmM3NWNcIl19In0" style="color:#6DC6DD; text-decoration:underline;">Knowledge Base</a> is there when you have questions.
-                                          </p>
-                                        </td>
-                                      </tr>
-
-                                     <tr>                                        
-                                        <td align="center" style="padding-right:20px; padding-bottom:60px;" valign="top" colspan="2">
-
-                                            <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">                                      
-                                      <tr>                                        
-                                        <td align="center" valign="middle">                                          
-<!--[if gte mso 9]>
-                                                                                    <table align="center" border="0" cellspacing="0" cellpadding="0" style="width:200px" width="200">
-                                                                                    <tr>
-                                                                                    <td align="center" bgcolor="#6DC6DD" style="padding:20px;" valign="top">
-                                                                                    <![endif]-->
-                                          <a href="http://manage.cash4ads.com/" style="background-color:#6DC6DD; border-collapse:separate; border-top:20px solid #6DC6DD; border-right:40px solid #6DC6DD; border-bottom:20px solid #6DC6DD; border-left:40px solid #6DC6DD; border-radius:3px; color:#FFFFFF; display:inline-block; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:600; letter-spacing:.3px; text-decoration:none;" target="_blank">Get Started</a>
-<!--[if gte mso 9]>
-                                                                                    </td>
-                                                                                    </tr>
-                                                                                    </table>
-                                                                                    <![endif]-->
-                                        </td>
-                                      </tr>
-                                    </table>
-                                            </td>
-                                            </tr>
-                              </tbody></table>
-
-
-
-
-
-                                        </td>
-                                      </tr>
+                                     
+                                         
                                  
                                     </table>
                                   </td>
@@ -470,9 +318,9 @@
                                           <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
                                             Need Additional Support?
                                           </p>
-                                          <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
-                                            Free accounts come with 30 days of email support, and all paid accounts have access to email and live chat support.
-                                          </p>
+                                          <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:normal; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
+                                            You are receiving this email because you 
+                                              have subscribed to our service. If you no longer wish to receive these e-mails, you can unsubscribe from this list by updating your preferences at cash4ads.com</p>
                                         </td>
                                       </tr>
                                     </table>

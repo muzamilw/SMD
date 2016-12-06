@@ -435,7 +435,7 @@ namespace SMD.Implementation.Services
             {
                 objSmtpClient.Send(oMailBody);
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 throw new SMDException(LanguageResources.EmailManagerService_FailedToSendEmail);
             }
@@ -1317,12 +1317,12 @@ namespace SMD.Implementation.Services
 
             foreach (var user in users)
             {
-                userDeals = "<table style='width:100%'>";
+                userDeals = "<table align=\"center\" bgcolor=\"#F2F2F2\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style='width:100%;'>";
                 //user.Key.UserId
                 
                     foreach (var item in user)
                     {
-                        userDeals += "<tr><td><img src='"+ item.couponimage1 +"'/> </td></tr><tr><td><span>"+ item.CouponTitle+"</span></td></tr>";
+                        userDeals += "<tr><td <img style='max-width:560px' src='" + item.couponimage1 + "'/> </td></tr><tr><td align=\"center\" style='text-align:center;padding-bottom:60px;'><p style=\"style=color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;\">" + item.CouponTitle + "</p></td></tr>";
                     }
 
 

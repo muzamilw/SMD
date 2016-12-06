@@ -399,6 +399,7 @@
     <Compile Include="Areas\Api\Controllers\CouponCountController.cs" />
     <Compile Include="Areas\Api\Controllers\FormAnalyticController.cs" />
     <Compile Include="Areas\Api\Controllers\SharedSurveyQuestionController.cs" />
+    <Compile Include="Areas\Api\Controllers\testController.cs" />
     <Compile Include="Areas\Api\Controllers\StripeSubscribeCustomerController.cs" />
     <Compile Include="Areas\Api\Controllers\GetApprovalCountController.cs" />
     <Compile Include="Areas\Api\Controllers\AdsCampaignAnalyticController.cs" />
@@ -907,6 +908,7 @@
     <Content Include="Areas\Franchise\Views\Dashboard\MarketingDealsStories.cshtml" />
     <Content Include="Areas\Coupons\Views\Coupons\marketingDealeditor.cshtml" />
     <Content Include="Areas\Coupons\Views\Coupons\CouponReviews.cshtml" />
+    <Content Include="Areas\SuperNova\Views\Dashboard\mails.cshtml" />
     <None Include="config\Web.connectionstrings.config">
       <SubType>Designer</SubType>
     </None>
