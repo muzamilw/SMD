@@ -597,6 +597,13 @@ namespace SMD.MIS.ModelMappers
                 IsShowyouTube = source.IsShowyouTube,
                 IsShowAboutUs=source.IsShowAboutUs,
                 DealsinGroupCount = source.CouponPriceOptions != null ? source.CouponPriceOptions.Count : 0,
+                IsPerSaving3days = source.IsPerSaving3days,
+                IsPerSaving2days =source.IsPerSaving2days,
+                IsPerSavingLastday =source.IsPerSavingLastday,
+                IsDollarSaving3days = source.IsDollarSaving3days,
+                IsDollarSaving2days = source.IsDollarSaving2days,
+                IsDollarSavingLastday = source.IsDollarSavingLastday,
+                
 
               };
 

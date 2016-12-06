@@ -327,7 +327,7 @@ define("Coupons/Coupons.viewModel",
                 selectedGranularityAnalytics(1);
                 isflageClose(false);
             },
-
+               
                 //
 
                 //end advertiser analytics
@@ -2866,6 +2866,7 @@ getfreeCouponCount = function () {
                     FirstDealName: FirstDealName,
                     hasImpression: hasImpression,
                     RatedFigure: RatedFigure,
+                    
                     CompanyCity:CompanyCity,
                     AddressLine1:AddressLine1,
                     CompanyId: CompanyId,

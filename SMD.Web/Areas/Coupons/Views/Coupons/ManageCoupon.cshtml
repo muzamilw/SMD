@@ -25,7 +25,7 @@ else
                     <div class="col-lg-6" style="margin-left:-27px !important;">
                         <img class="vid_image pull-left" src="/Images/StartImage.png">
                         <span class="pull-left " style="color:#fff!important; padding-left: 0px; margin-top:13px; font-size: 23px;" data-bind="text: $root.CouponTitle"></span><span class="pull-left " style="color:#fff!important; padding-left: 2px;padding-top:23px; font-size: 13px;" data-bind="text:$root.CouponsubTitle"></span>
-                    </div> 
+                    </div>
                     <div class="col-lg-3 pull-right" style="margin-right:-3px !important;">
                         <div class="pull-right">
                             <div class="status_date_span" style="margin-top:25px;">
@@ -37,11 +37,11 @@ else
 
                 </div>
                 <div class="col-lg-3" style="padding-left:0px;padding-right:0px;">
-                    <div class="pull-left" data-bind="with: $root.couponModel"style=" margin-left:-9px !important;margin-top: 13px;">
+                    <div class="pull-left" data-bind="with: $root.couponModel" style=" margin-left:-9px !important;margin-top: 13px;">
                         <div class="pull-left" style="margin-top:1px;">
                             <span style="font-size:23px;color:white;" data-bind="text:$root.StatusValue()">Draft</span>
                         </div>
-                        
+
                     </div>
 
                     <div style="margin-top:10px; margin-right:3px;">
@@ -51,17 +51,17 @@ else
                 </div>
 
                 @*<div class="row" style="margin-bottom:0px;">
-                    <div class="col-xs-6 pull-left validationSummaryContainer">
-                        <ul data-bind="foreach: $root.errorList">
-                            <li>
-                                <a><span data-bind="text: name"></span></a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="pull-right top-page-ui" style="margin-right:5px;margin-bottom:5px;">
+                        <div class="col-xs-6 pull-left validationSummaryContainer">
+                            <ul data-bind="foreach: $root.errorList">
+                                <li>
+                                    <a><span data-bind="text: name"></span></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="pull-right top-page-ui" style="margin-right:5px;margin-bottom:5px;">
 
-                    </div>
-                </div>*@
+                        </div>
+                    </div>*@
             </div>
         </div>
         <div class="row">
@@ -743,6 +743,62 @@ else
 
                             <div class="col-lg-12" style="margin:auto;float:none !important; " data-bind="visible: $root.previewScreenNumber() == 2">
 
+                                <div class="col-lg-12">
+                                    <div class="col-lg-6">
+                                        <div class="row">
+                                            <div class="checkbox-nice ">
+                                                <input type="checkbox" name="chkpo3day" value="1" id="chkp3day" data-bind="checked:IsPerSaving3days">
+                                                <label for="chkp3day">
+                                                    further 20 % Saving on last 3 days
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="checkbox-nice ">
+                                                <input type="checkbox" name="chkpo2day" value="1" id="chkp2day" data-bind="checked:IsPerSaving2days">
+                                                <label for="chkp2day">
+                                                    further 25 % Saving on last 2 days
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="checkbox-nice ">
+                                                <input type="checkbox" name="chkpolday" value="1" id="chkplday" data-bind="checked:IsPerSavingLastday">
+                                                <label for="chkplday">
+                                                    further 30 % Saving on last day
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="row">
+                                            <div class="checkbox-nice ">
+                                                <input type="checkbox" name="chkD3day" value="1" id="chkD3day" data-bind="checked:IsDollarSaving3days">
+                                                <label for="chkD3day">
+                                                    further $10 Saving on last 3 days
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="checkbox-nice ">
+                                                <input type="checkbox" name="chkD2day" value="1" id="chkD2day" data-bind="checked:IsDollarSaving2days">
+                                                <label for="chkD2day">
+                                                    further $20 Saving on last 2 days
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="checkbox-nice ">
+                                                <input type="checkbox" name="chkDlday" value="1" id="chkDlday" data-bind="checked:IsDollarSavingLastday">
+                                                <label for="chkDlday">
+                                                    further $30 Saving on last days
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="clearfix">
 
                                 </div><br />
@@ -758,7 +814,7 @@ else
                                             <label style="color:gray;font-size:13px;">The first Deal Line will be used in all Notification &Emails</label>
                                         </div>
                                         <div class=" col-lg-4" style="padding-left:83px;padding-bottom :20px;">
-                                            <button class="btn  btn-success" id="saveBtn" data-bind="click: $root.onCreatePriceOption" style="width:160px;">Add Deal Lines</button>
+                                            <button class="btn  btn-success" id="saveBtn" style="width:160px;" data-bind="click: $root.onCreatePriceOption">Add Deal Lines</button>
                                         </div>
                                     </div>
                                     @*<div class="adsubHeading Theme_standard_clr" data-bind="visible: $root.previewScreenNumber() == 2">
@@ -769,52 +825,70 @@ else
                                         </div>*@
 
                                 </div>
-
                                 <div class="col-lg-12 borderPanel " style="margin-bottom:20px;">
-                                    <header class="main-box-header clearfix" style="padding-right:0px;padding-left:0px">
-
-                                        <div class="filter-block pull-left">
-                                            <div class="pull-left">
-                                                <span>Deal headlines</span>
-                                            </div>
-                                            <div class="pull-right" style="margin-left:17px;">
-                                                <span>All deal lines are listed inside the group deal listing.<br />Create upto 20 deal lines in order of appearance.</span>
-                                            </div>
-                                            <div class="clearfix"></div>
-                                        </div>
-
-                                        <div class="filter-block pull-right" style="display:none">
-
-                                            <a href="#" class="btn btn-primary pull-right" data-bind="click: $root.onCreatePriceOption">
-                                                Create Deal
-                                            </a>
-                                        </div>
-                                    </header>
-                                    <div class="clearfix">
-                                        <div class="table-responsive">
-                                            <table id="subCategoriesTable" class="table table-striped table-hover">
-                                                <thead>
-                                                    <tr>
-
-                                                        <th class="col-lg-4 GridHeaderFont_size" style="padding-left:7px;"><span>Deal Headline</span></th>
-                                                        <th class="col-lg-2 GridHeaderFont_size"> <span>Now<span data-bind="text:$root.currencyCode"></span></span></th>
-                                                        <th class="col-lg-2 GridHeaderFont_size"> <span>Was<span data-bind="text:$root.currencyCode"></span></span></th>
-                                                        <th class="col-lg-2 GridHeaderFont_size"> <span>Url<span></span></span></th>
-                                                        <th class="col-lg-2 GridHeaderFont_size"> <span>Expiry<span></span></span></th>
-                                                        <th class="col-lg-2 GridHeaderFont_size" style="display:none;"> <span>Voucher Code</span></th>
-                                                        <th class="col-lg-1"></th>
-                                                        <th class="col-lg-2">&nbsp;</th>
-
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <!-- ko template: { name: $root.templateToUsePriceOptions , foreach: $root.couponModel().CouponPriceOptions } -->
-                                                    <!-- /ko -->
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
+                                    <!-- ko template: { name: 'dealLinesTemplate' } -->
+                                    <!-- /ko -->
                                 </div>
+
+
+
+
+
+
+
+
+
+
+
+                                @**************************************************** Previous  Pannel *******************************@
+
+
+
+                                @*<div class="col-lg-12 borderPanel " style="margin-bottom:20px;">
+                                        <header class="main-box-header clearfix" style="padding-right:0px;padding-left:0px">
+
+                                            <div class="filter-block pull-left">
+                                                <div class="pull-left">
+                                                    <span>Deal headlines</span>
+                                                </div>
+                                                <div class="pull-right" style="margin-left:17px;">
+                                                    <span>All deal lines are listed inside the group deal listing.<br />Create upto 20 deal lines in order of appearance.</span>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+
+                                            <div class="filter-block pull-right" style="display:none">
+
+                                                <a href="#" class="btn btn-primary pull-right" data-bind="click: $root.onCreatePriceOption">
+                                                    Create Deal
+                                                </a>
+                                            </div>
+                                        </header>
+                                        <div class="clearfix">
+                                            <div class="table-responsive">
+                                                <table id="subCategoriesTable" class="table table-striped table-hover">
+                                                    <thead>
+                                                        <tr>
+
+                                                            <th class="col-lg-4 GridHeaderFont_size" style="padding-left:7px;"><span>Deal Headline</span></th>
+                                                            <th class="col-lg-2 GridHeaderFont_size"> <span>Now<span data-bind="text:$root.currencyCode"></span></span></th>
+                                                            <th class="col-lg-2 GridHeaderFont_size"> <span>Was<span data-bind="text:$root.currencyCode"></span></span></th>
+                                                            <th class="col-lg-2 GridHeaderFont_size"> <span>Url<span></span></span></th>
+                                                            <th class="col-lg-2 GridHeaderFont_size"> <span>Expiry<span></span></span></th>
+                                                            <th class="col-lg-2 GridHeaderFont_size" style="display:none;"> <span>Voucher Code</span></th>
+                                                            <th class="col-lg-1"></th>
+                                                            <th class="col-lg-2">&nbsp;</th>
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <!-- ko template: { name: $root.templateToUsePriceOptions , foreach: $root.couponModel().CouponPriceOptions } -->
+                                                        <!-- /ko -->
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>*@
 
                                 <div class="col-lg-12" style="padding:0px;">
                                     <div class="adsubHeading Theme_standard_clr borderbtmline">
@@ -964,116 +1038,116 @@ else
                                     </div>
                                 </div>
 
-                        </div>
+                            </div>
            
 
-                        <div class="modal fade my-modal model_quizQ_ph" id="phQuizDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" style=" width:660px;" =4">
-                                <div class="col-lg-6 preview_stencilImg" style=" margin-right: 35px; width:310px;">
-                                    <div id="background" class="mobBck mobile_background">
-                                        <div style="position:relative;">
+                            <div class="modal fade my-modal model_quizQ_ph" id="phQuizDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" style=" width:660px;" =4">
+                                    <div class="col-lg-6 preview_stencilImg" style=" margin-right: 35px; width:310px;">
+                                        <div id="background" class="mobBck mobile_background">
+                                            <div style="position:relative;">
                                             <img id="closePop" src="/Images/close2-128.png" width="20" class="preview_close" data-dismiss="modal" />
-                                        </div>
-                                        <div class="deals_blue_panel">
-                                            <div class="dealsPenel_text">Deals</div>
-                                            <div class="deals_search"><input type="text" style="width:144px!important; margin:0 auto;height:28px!important;" class="form-control " placeholder="Search"></div>
-                                            <div class="deals_subtitle" id="categoryName" ></div>
-                                        </div>
-                                        <div class="deals_bannerImage">
+                                            </div>
+                                            <div class="deals_blue_panel">
+                                                <div class="dealsPenel_text">Deals</div>
+                                                <div class="deals_search"><input type="text" style="width:144px!important; margin:0 auto;height:28px!important;" class="form-control " placeholder="Search"></div>
+                                                <div class="deals_subtitle" id="categoryName"></div>
+                                            </div>
+                                            <div class="deals_bannerImage">
 
                                             <img id="deal_preview_img" style="width:258px;height:173px;" data-bind="attr:{src:$root.couponModel().couponImage1()}" />
 
 
-                                        </div>
-                                        <div class="deals_panel_des">
+                                            </div>
+                                            <div class="deals_panel_des">
 
-                                            <div class="deal_group_name" data-bind="text:$root.couponModel().CouponTitle()">
-                                            </div>
-                                            <div class="desc_cont">
+                                                <div class="deal_group_name" data-bind="text:$root.couponModel().CouponTitle()">
+                                                </div>
+                                                <div class="desc_cont">
                                                 <div class="deal_group_Pice pull-left" style="margin-top:3px;">
-                                                   
-                                                    <div id="address" data-bind="html:$root.CompanyName()"></div>
-                                                    <div id="city" data-bind="html:$root.CompanyCity()">Lahore</div>
-                                                </div>
-                                                
-                                                <div class="deal_Pice pull-right">
-                                                    <div class="dis_strike-through pull-left" data-bind="text:$root.SecondCouponOption()">
-                                                        400
+
+                                                        <div id="address" data-bind="html:$root.CompanyName()"></div>
+                                                        <div id="city" data-bind="html:$root.CompanyCity()">Lahore</div>
                                                     </div>
-                                                    <div class="pull-right" style="font-weight:bold;" data-bind="text:$root.FirstCouponOption()">$189</div>
-                                                    <div class="clearfix"></div>
+
+                                                    <div class="deal_Pice pull-right">
+                                                        <div class="dis_strike-through pull-left" data-bind="text:$root.SecondCouponOption()">
+                                                            400
+                                                        </div>
+                                                        <div class="pull-right" style="font-weight:bold;" data-bind="text:$root.FirstCouponOption()">$189</div>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+
                                                 </div>
-                                                
+                                                <div class="clearfix"></div>
                                             </div>
-                                            <div class="clearfix"></div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6 preview_stencilImg" style=" width:310px;">
-                                    <div id="background" class="mobBck mobile_background">
-                                        <div style="position:relative;">
+                                    <div class="col-lg-6 preview_stencilImg" style=" width:310px;">
+                                        <div id="background" class="mobBck mobile_background">
+                                            <div style="position:relative;">
                                             <img src="/Images/close2-128.png"  width="20" class="preview_close" data-dismiss="modal" />
-                                        </div>
-                                        <div class="deals_head_panel" data-bind="text:$root.couponModel().CouponTitle()">
-                                        </div>
+                                            </div>
+                                            <div class="deals_head_panel" data-bind="text:$root.couponModel().CouponTitle()">
+                                            </div>
 
-                                        <div class="">
-                                            <img id="deal_preview_img_2nd" style="width:258px;height:64px;" data-bind="attr:{src:$root.couponModel().couponImage1()}" />
-                                        </div>
-                                        <div id="logo_panel" class="deal_logo_panel">
-                                            <div class="pull-left">
-                                                <img data-bind="attr:{src: $root.companyLogo()}" class="deal_logo" />
+                                            <div class="">
+                                                <img id="deal_preview_img_2nd" style="width:258px;height:64px;" data-bind="attr:{src:$root.couponModel().couponImage1()}" />
+                                            </div>
+                                            <div id="logo_panel" class="deal_logo_panel">
+                                                <div class="pull-left">
+                                                    <img data-bind="attr:{src: $root.companyLogo()}" class="deal_logo" />
                                                 <div class="city_desc deal_group_Pice " style="font-size:8px;margin-top:-24px;">
                                                     <div data-bind="text:$root.AddressLine1()"></div>
                                                     <div data-bind="text:$root.CompanyCity()"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="pull-right">
+                                                    <span class="deal_group_Pice" style="padding-right: 15px;font-size: 11px;">18 Ratings</span>
                                                 </div>
                                             </div>
-                                            <div class="pull-right">
-                                                <span class="deal_group_Pice" style="padding-right: 15px;font-size: 11px;">18 Ratings</span>
-                                            </div>
-                                        </div>
-                                        <div id="deal_line">
-                                            <div class="deals_panel_des1">
+                                            <div id="deal_line">
+                                                <div class="deals_panel_des1">
 
-                                                <div class="deal_group_name" data-bind="text:$root.FirstDealName()"></div>
-                                                <div class="desc_cont">
-                                                    <div class="deal_group_Pice pull-left">
-                                                        10 days Left
+                                                    <div class="deal_group_name" data-bind="text:$root.FirstDealName()"></div>
+                                                    <div class="desc_cont">
+                                                        <div class="deal_group_Pice pull-left">
+                                                            10 days Left
+                                                        </div>
+                                                        <div class="deal_Pice pull-right" style="padding-top:0px!important;">
+                                                            <div class="dis_strike-through pull-left" style="margin-top:0px!important;" data-bind="text:$root.SecondCouponOption()">£232</div>
+                                                            <div class="pull-right" style="font-weight:bold;margin-top:-4px!important;" data-bind="text:$root.FirstCouponOption()">£12</div>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                        <div style="text-align:center;margin-top:5px;">
+                                                            <input id="save_btn" value="Save 33% - Shop Now" class="saving_btn" />
+                                                        </div>
                                                     </div>
-                                                    <div class="deal_Pice pull-right" style="padding-top:0px!important;">
-                                                        <div class="dis_strike-through pull-left" style="margin-top:0px!important;" data-bind="text:$root.SecondCouponOption()">£232</div>
-                                                        <div class="pull-right" style="font-weight:bold;margin-top:-4px!important;" data-bind="text:$root.FirstCouponOption()">£12</div>
+                                                <div id="more_details" style="height:37px;margin-top:6px;border-bottom:1px solid grey;padding-top:11px;">
+                                                        <div class="pull-left"></div>
+                                                        <div class="pull-right blueclrr" style="margin-right:12px;">2 MORE DETAILS</div>
                                                         <div class="clearfix"></div>
                                                     </div>
-                                                    <div class="clearfix"></div>
-                                                    <div style="text-align:center;margin-top:5px;">
-                                                        <input id="save_btn" value="Save 33% - Shop Now" class="saving_btn" />
+                                                    <div id="more_details" class="deal_highlight" style="height:56px;margin-top:6px; border-bottom: 1px solid grey;">
+                                                        <div class="headers">Highlights</div>
+                                                        <div class="highlight_ext" data-bind="text:$root.couponModel().HighlightLine1()">Highlights</div>
+
                                                     </div>
-                                                </div>
-                                                <div id="more_details" style="height:37px;margin-top:6px;border-bottom:1px solid grey;padding-top:11px;">
-                                                    <div class="pull-left"></div>
-                                                    <div class="pull-right blueclrr" style="margin-right:12px;">2 MORE DETAILS</div>
-                                                    <div class="clearfix"></div>
-                                                </div>
-                                                <div id="more_details" class="deal_highlight" style="height:56px;margin-top:6px; border-bottom: 1px solid grey;">
-                                                    <div class="headers">Highlights</div>
-                                                    <div class="highlight_ext" data-bind="text:$root.couponModel().HighlightLine1()">Highlights</div>
+                                                    <div id="more_details" class="deal_fine_print" style="height:56px;margin-top:6px;border-bottom: 1px solid grey;">
+                                                        <div class="headers">FinePrints</div>
 
-                                                </div>
-                                                <div id="more_details" class="deal_fine_print" style="height:56px;margin-top:6px;border-bottom: 1px solid grey;">
-                                                    <div class="headers">FinePrints</div>
+                                                        <div class="highlight_ext" data-bind="text:$root.couponModel().FinePrintLine1()">FinePrint</div>
 
-                                                    <div class="highlight_ext" data-bind="text:$root.couponModel().FinePrintLine1()">FinePrint</div>
+                                                    </div>
 
-                                                </div>
-
-                                                <div id="Address" class="deal_fine_print" style="height:67px;margin-top:6px;border-bottom: 1px solid grey;">
-                                                    <div class="headers">Where</div>
+                                                    <div id="Address" class="deal_fine_print" style="height:67px;margin-top:6px;border-bottom: 1px solid grey;">
+                                                        <div class="headers">Where</div>
                                                     <div class="highlight_ext" data-bind="text:$root.AddressLine1()"></div>
                                                     <div class="highlight_ext" data-bind="text:$root.CompanyCity()"></div>
                                                     <div class="highlight_ext" data-bind="text:$root.companyzipcode()"></div>
-                                                </div>
-                                                
+                                                    </div>
+
                                                     <div>
                                                         <div id="map_div" style="width:100%;height:134px; border:2px solid"></div>
                                                     </div>
@@ -1097,91 +1171,91 @@ else
 
 
 
-                                                <div id="about_us_div" style="height:56px;margin-top:6px;border-bottom: 1px solid grey;">
-                                                    <div class="headers">About Us</div>
+                                                    <div id="about_us_div" style="height:56px;margin-top:6px;border-bottom: 1px solid grey;">
+                                                        <div class="headers">About Us</div>
                                                     <div class="highlight_ext" data-bind="text:$root.CompanyAboutUs()"></div>
-                                                </div>
-                                                
-                                                <div id="Review_panel" style="height:48px;border-bottom: 1px solid grey;">
-                                                    <div class="pull-left" style="padding-left:44px;padding-top:18px;">
-                                                        <i class="fa fa-heart" aria-hidden="true" style="font-size:18px;color:#A1134a"></i>
-                                                    </div>
-                                                    <div class="pull-right" style="padding-right:44px;padding-top:18px;">
-                                                        <i class="fa fa-pencil" aria-hidden="true" style="font-size:18px;color:#6f4376"></i>
                                                     </div>
 
-                                                    <div class="clearfix"></div>
-                                                </div>
-                                                
-                                                <div id="rating" class="rating_divs">
-
-                                                    <!-- ko if: $root.RatedFigure()==3 -->
-
-                                                    <input type="text" id="rating_id" class="rating rating8"  value="3" />
-                                                    <!-- /ko -->
-                                                    <!-- ko if: $root.RatedFigure()==4 -->
-
-                                                    <input type="text" id="rating_id" class="rating rating8"  value="4" />
-                                                    <!-- /ko -->
-                                                    <!-- ko if: $root.RatedFigure()==5 -->
-
-                                                    <input type="text" id="rating_id" class="rating rating8"  value="5" />
-                                                    <!-- /ko -->
-                                                    <!-- ko if: $root.RatedFigure()==6 -->
-
-                                                    <input type="text" id="rating_id" class="rating rating8"  value="6" />
-                                                    <!-- /ko -->
-                                                    <!-- ko if: $root.RatedFigure()==7 -->
-
-                                                    <input type="text" id="rating_id" class="rating rating8"  value="6" />
-                                                    <!-- /ko -->
-                                                    <!-- ko if: $root.RatedFigure()==8 -->
-
-                                                    <input type="text" id="rating_id" class="rating rating8"  value="6" />
-                                                    <!-- /ko -->
-                                                </div>
-                                                <div id="Review_1" style="width:100%;height: 68px;border:2px solid;padding-top :12px;">
-                                                    <div class="pull-left" style="width:40px;">
-                                                        <img src="~/Content/Images/bradPit.jpg" style="border-radius: 29px;height:40px" />
-                                                    </div>
-                                                    <div class="pull-right" style="width:197px;padding-left:4px;">
-                                                        <div class="pull-left">
-                                                            <div class="Review_heading" style="font-size:14px;color:black">ABC</div>
+                                                    <div id="Review_panel" style="height:48px;border-bottom: 1px solid grey;">
+                                                        <div class="pull-left" style="padding-left:44px;padding-top:18px;">
+                                                            <i class="fa fa-heart" aria-hidden="true" style="font-size:18px;color:#A1134a"></i>
                                                         </div>
-                                                        <div class="pull-right" style="padding-right:4px;color:black;font-size:10px;">
-                                                            <span>16 dec 2016</span>
+                                                        <div class="pull-right" style="padding-right:44px;padding-top:18px;">
+                                                            <i class="fa fa-pencil" aria-hidden="true" style="font-size:18px;color:#6f4376"></i>
+                                                        </div>
+
+                                                        <div class="clearfix"></div>
+                                                    </div>
+
+                                                    <div id="rating" class="rating_divs">
+
+                                                        <!-- ko if: $root.RatedFigure()==3 -->
+
+                                                        <input type="text" id="rating_id" class="rating rating8" value="3" />
+                                                        <!-- /ko -->
+                                                        <!-- ko if: $root.RatedFigure()==4 -->
+
+                                                        <input type="text" id="rating_id" class="rating rating8" value="4" />
+                                                        <!-- /ko -->
+                                                        <!-- ko if: $root.RatedFigure()==5 -->
+
+                                                        <input type="text" id="rating_id" class="rating rating8" value="5" />
+                                                        <!-- /ko -->
+                                                        <!-- ko if: $root.RatedFigure()==6 -->
+
+                                                        <input type="text" id="rating_id" class="rating rating8" value="6" />
+                                                        <!-- /ko -->
+                                                        <!-- ko if: $root.RatedFigure()==7 -->
+
+                                                        <input type="text" id="rating_id" class="rating rating8" value="6" />
+                                                        <!-- /ko -->
+                                                        <!-- ko if: $root.RatedFigure()==8 -->
+
+                                                        <input type="text" id="rating_id" class="rating rating8" value="6" />
+                                                        <!-- /ko -->
+                                                    </div>
+                                                    <div id="Review_1" style="width:100%;height: 68px;border:2px solid;padding-top :12px;">
+                                                        <div class="pull-left" style="width:40px;">
+                                                            <img src="~/Content/Images/bradPit.jpg" style="border-radius: 29px;height:40px" />
+                                                        </div>
+                                                        <div class="pull-right" style="width:197px;padding-left:4px;">
+                                                            <div class="pull-left">
+                                                                <div class="Review_heading" style="font-size:14px;color:black">ABC</div>
+                                                            </div>
+                                                            <div class="pull-right" style="padding-right:4px;color:black;font-size:10px;">
+                                                                <span>16 dec 2016</span>
+                                                            </div>
+                                                            <div class="clearfix"></div>
+                                                            <div class="review_description" style="font-size:10px;color:black"> this is sensational website ,and  i really like this.</div>
                                                         </div>
                                                         <div class="clearfix"></div>
-                                                        <div class="review_description" style="font-size:10px;color:black"> this is sensational website ,and  i really like this.</div>
                                                     </div>
-                                                    <div class="clearfix"></div>
-                                                </div>
-                                                <div id="Review_2" style="width:100%;height: 68px;border:2px solid;padding-top :12px;">
-                                                    <div class="pull-left" style="width:40px;">
+                                                    <div id="Review_2" style="width:100%;height: 68px;border:2px solid;padding-top :12px;">
+                                                        <div class="pull-left" style="width:40px;">
                                                         <img src="~/Content/Images/tom_cruis.jpg" style="border-radius: 29px;height:40px" />
-                                                    </div>
-                                                    <div class="pull-right" style="width:197px;padding-left:4px;">
-                                                        <div class="pull-left">
-                                                            <div class="Review_heading" style="font-size:14px;color:black">ABC</div>
                                                         </div>
-                                                        <div class="pull-right" style="padding-right:4px;color:black;font-size:10px;">
-                                                            <span>16 dec 2016</span>
+                                                        <div class="pull-right" style="width:197px;padding-left:4px;">
+                                                            <div class="pull-left">
+                                                                <div class="Review_heading" style="font-size:14px;color:black">ABC</div>
+                                                            </div>
+                                                            <div class="pull-right" style="padding-right:4px;color:black;font-size:10px;">
+                                                                <span>16 dec 2016</span>
+                                                            </div>
+                                                            <div class="clearfix"></div>
+                                                            <div class="review_description" style="font-size:10px;color:black"> this is sensational website ,and  i really like this.</div>
                                                         </div>
                                                         <div class="clearfix"></div>
-                                                        <div class="review_description" style="font-size:10px;color:black"> this is sensational website ,and  i really like this.</div>
                                                     </div>
+
                                                     <div class="clearfix"></div>
                                                 </div>
 
-                                                <div class="clearfix"></div>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                        </div>
+                            </div>
 
 
                             <div class="col-lg-12" style="margin:auto;float:none !important;" data-bind="visible: $root.previewScreenNumber() == 3">
@@ -1210,7 +1284,8 @@ else
                                         <div class="col-lg-2">
                                             <label for="txtCampaignDesc" style="display:none" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn padding_top">Select Branch  </label>
                                         </div>
-                                        <div class="col-lg-4 " style="padding-left:14px;">preview_screen_advtlogoCnt
+                                        <div class="col-lg-4 " style="padding-left:14px;">
+                                            preview_screen_advtlogoCnt
                                             <select class="form-control" id="yearDropDown" data-bind="options: $root.branchLocations, optionsText: 'BranchTitle', optionsValue: 'BranchId', value: LocationBranchId, event:{ change: $root.locationChanged},optionsCaption: '&lt;' + 'Select a branch'+ '&gt;'"></select>
                                             <div class="form-group" style="padding-top:20px;margin-bottom:20px;padding-left:15px;">
                                                 <div class="checkbox-nice ">
@@ -2158,6 +2233,251 @@ else
 
 </script>
 
+
+@**************************************** Tab Script ***********************************************************@
+
+<script id="dealLinesTemplate" type="text/html">
+    <div>&nbsp;</div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12" style="padding-left:18px;padding-right:18px;">
+            <div>
+                <div class="tabs-wrapper profile-tabs">
+                    <ul id="stockLabelTabListItem" class="nav nav-tabs">
+                        <!-- ko template: { name: 'tabListTemplate', foreach: $root.couponModel().CouponPriceOptions } -->
+                        <!-- /ko -->
+                    </ul>
+                    <div class="tab-content" id="stockLabelTabListItemDetails">
+                        <!-- ko template: { name: 'TabDetailTemplate', foreach: $root.couponModel().CouponPriceOptions } -->
+                        <!-- /ko -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script id="TabDetailTemplate" type="text/html">
+
+
+    <div class="tab-pane active" data-bind="attr: { id: 'tab-stockLabel' + $index() }">
+        <div class=" row" style="margin-bottom:10px;background-color:white;">
+            <div class="col-lg-6"></div>
+            <span class="col-lg-2 GridHeaderFont_size"> <span>Was<span data-bind="text:$root.currencyCode"></span></span></span>
+            <span class="col-lg-2 GridHeaderFont_size"> <span>Now<span data-bind="text:$root.currencyCode"></span></span></span>
+            <span class="col-lg-2 GridHeaderFont_size"> <span>Saving %</span></span>
+        </div>
+        <div class="col-lg-12 borderPanel Subpanels " style="margin-bottom:20px;">
+
+            <div class="row" style="margin-top:20px;">
+                <div class="col-lg-6">
+                    <input class="form-control" data-bind="value: Description" placeholder="Max 56 characters" maxlength="56" />
+                </div>
+                <div class="col-lg-2">
+                    <input class="form-control" data-bind="value: Price" maxlength="7" />
+                </div>
+                <div class="col-lg-2">
+                    <input class="form-control" data-bind="value: Savings" maxlength="7" />
+                </div>
+                <div class="col-lg-2" style="margin-top:5px;">
+                    <span style="color:green" data-bind="text:perSaving"> </span>
+                </div>
+            </div>
+
+            <div class="row" style="padding-top:20px;">
+                <div class="col-lg-4" style="padding-right:0px;">
+                    <div>
+                        <label>
+                            further 20 % Saving on last 3 days
+                        </label>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <label class="pull-right" style="margin-top:5px;">
+                        Coupon Code
+                    </label>
+                </div>
+                <div class="col-lg-2">
+                    <input class="form-control" />
+                </div>
+                <div class="col-lg-2">
+                    <span> $60</span>
+                </div>
+                <div class="col-lg-2" style="margin-top:5px;">
+                    <span style="color:green">80 %</span>
+                </div>
+            </div>
+
+            <div class="row" style="padding-top:20px;">
+                <div class="col-lg-4" style="padding-right:0px;">
+                    <div>
+                        <label>
+                            further 25 % Saving on last 2 days
+                        </label>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <label class="pull-right" style="margin-top:5px;">
+                        Coupon Code
+                    </label>
+                </div>
+                <div class="col-lg-2">
+                    <input class="form-control" />
+                </div>
+                <div class="col-lg-2">
+                    <span> $60</span>
+                </div>
+                <div class="col-lg-2" style="margin-top:5px;">
+                    <span style="color:green">85 %</span>
+                </div>
+            </div>
+
+            <div class="row" style="padding-top:20px;">
+                <div class="col-lg-4" style="padding-right:0px;">
+                    <div>
+                        <label>
+                            further 30 % Saving on last day
+                        </label>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <label class="pull-right" style="margin-top:5px;">
+                        Coupon Code
+                    </label>
+                </div>
+                <div class="col-lg-2">
+                    <input class="form-control" />
+                </div>
+                <div class="col-lg-2">
+                    <span> $60</span>
+                </div>
+                <div class="col-lg-2" style="margin-top:5px;">
+                    <span style="color:green">90 %</span>
+                </div>
+            </div>
+
+            <div class="row" style="padding-top:20px;">
+                <div class="col-lg-12 text-center">
+                    <label class="text-center">OR</label>
+                </div>
+            </div>
+
+            <div class="row" style="padding-top:20px;">
+                <div class="col-lg-4" style="padding-right:0px;">
+                    <div>
+                        <label>
+                            further $10 Saving on last 3 days
+                        </label>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <label class="pull-right" style="margin-top:5px;">
+                        Coupon Code
+                    </label>
+                </div>
+                <div class="col-lg-2">
+                    <input class="form-control" />
+                </div>
+                <div class="col-lg-2">
+                    <span> $60</span>
+                </div>
+                <div class="col-lg-2" style="margin-top:5px;">
+                    <span style="color:green">59 %</span>
+                </div>
+            </div>
+
+            <div class="row" style="padding-top:20px;">
+                <div class="col-lg-4" style="padding-right:0px;">
+                    <div>
+                        <label>
+                            further $20 Saving on last 2 days
+                        </label>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <label class="pull-right" style="margin-top:5px;">
+                        Coupon Code
+                    </label>
+                </div>
+                <div class="col-lg-2">
+                    <input class="form-control" />
+                </div>
+                <div class="col-lg-2">
+                    <span> $60</span>
+                </div>
+                <div class="col-lg-2" style="margin-top:5px;">
+                    <span style="color:green">63 %</span>
+                </div>
+            </div>
+
+            <div class="row" style="padding-top:20px;">
+                <div class="col-lg-4" style="padding-right:0px;">
+                    <div>
+                        <label>
+                            further $30 Saving on last days
+                        </label>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <label class="pull-right" style="margin-top:5px;">
+                        Coupon Code
+                    </label>
+                </div>
+                <div class="col-lg-2">
+                    <input class="form-control" />
+                </div>
+                <div class="col-lg-2">
+                    <span> $60</span>
+                </div>
+                <div class="col-lg-2" style="margin-top:5px;">
+                    <span style="color:green">68 %</span>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top:10px;">
+                <div class="col-lg-8">
+                    <input class="form-control" placeholder="Paste 'Call for Action' UNK to your Landing Page" data-bind="value: URL" maxlength="400" />
+                </div>
+                <div class="col-lg-2">
+                    <button class="btn  btn-success gtild-color" id="btnBack">Test Link</button>
+                </div>
+                <div class="col-lg-2">
+                    <div class="col-lg-1">
+                        <a class="table-link">
+                            <span class="fa-stack">
+                                <i class="fa fa-square fa-stack-2x"></i>
+                                <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="col-lg-1" style="padding-left:25px;">
+                        <a href="#" class="table-link danger" style="color:#e74c3c" title="Delete" data-bind="click: $root.onDeletePriceOption">
+                            <span class="fa-stack">
+                                <i class="fa fa-square fa-stack-2x"></i>
+                                <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script id="tabListTemplate" type="text/html">
+    <li data-bind="css:{'active': $index() == 0}">
+        <a data-toggle="tab" data-bind="attr: { href: '#tab-stockLabel' + $index()}">
+
+            Price Column Attribute <span data-bind="text:$index() + 1"></span>
+        </a>
+    </li>
+</script>
+
+
+
+
+
+
+
 <script>
     //function PageScroll() {
     //    $('html, body').animate({ scrollTop: 0 }, 800);
@@ -2263,7 +2583,7 @@ else
 
     var mode = 1;
     function changeIframeSrc(mode1) {
-      
+
         mode = mode1;
         if (mode1 != 1)
             mode1 = 2;
@@ -2274,7 +2594,7 @@ else
     }
 
     function SetMode(mode) {
-        
+
         if (mode == 2) {
             $("#CouponImage2panel").css('display', 'block');
             $("#div1").css('display', 'block');
@@ -2419,33 +2739,33 @@ else
 
 </script>
 
-    <!-- Modal -->
-    <div class="modal fade" id="damModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document" style="width:883px;">
-            <div class="modal-content">
-                <div class="modal-header dam_header">
-                    <button type="button" id="btnDamClose" class="close" data-dismiss="modal" aria-label="Close"><span style="color:white!important;">&times;</span></button>
-                    <span class="damHeading">Upload/Select Images</span>
-                </div>
-                <div class="modal-body">
-                    <iframe src="~/DamImages?mode=1&selection=true" style="width:100%;height:600px;border:none;" id="iframe"></iframe>
-                </div>
-                <div class="modal-footer">
-                </div>
+<!-- Modal -->
+<div class="modal fade" id="damModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document" style="width:883px;">
+        <div class="modal-content">
+            <div class="modal-header dam_header">
+                <button type="button" id="btnDamClose" class="close" data-dismiss="modal" aria-label="Close"><span style="color:white!important;">&times;</span></button>
+                <span class="damHeading">Upload/Select Images</span>
+            </div>
+            <div class="modal-body">
+                <iframe src="~/DamImages?mode=1&selection=true" style="width:100%;height:600px;border:none;" id="iframe"></iframe>
+            </div>
+            <div class="modal-footer">
             </div>
         </div>
     </div>
+</div>
 <script src="~/Scripts/Rating/jquery.js"></script>
 <script src="~/Scripts/Rating/rating.js"></script>
 <link href="~/Scripts/Rating/rating.css" rel="stylesheet" />
 <script>
     $('.rating').rating();
-    function PreviewCoupon()
+        function PreviewCoupon()
     {
 
         //$(".deal_group_name").html($("#txtCampaignDisplayName").val());
     }
     $(function () {
-       
+
     });
 </script>
