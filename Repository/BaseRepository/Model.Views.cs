@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets2D73F3B63D4E245860FA3744FF86C7E54E5AD0B02866D02BDE6AD3D191850A41))]
+[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets5D34DE2140B4D1725C345D937B0D50395BF3BA11F010D5D6154118AD03DA7999))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -17,18 +17,18 @@ namespace Edm_EntityMappingGeneratedViews
     /// <Summary>
     /// The type contains views for EntitySets and AssociationSets that were generated at design time.
     /// </Summary>
-    public sealed class ViewsForBaseEntitySets2D73F3B63D4E245860FA3744FF86C7E54E5AD0B02866D02BDE6AD3D191850A41 : System.Data.Mapping.EntityViewContainer
+    public sealed class ViewsForBaseEntitySets5D34DE2140B4D1725C345D937B0D50395BF3BA11F010D5D6154118AD03DA7999 : System.Data.Mapping.EntityViewContainer
     {
         
         /// <Summary>
         /// The constructor stores the views for the extents and also the hash values generated based on the metadata and mapping closure and views.
         /// </Summary>
-        public ViewsForBaseEntitySets2D73F3B63D4E245860FA3744FF86C7E54E5AD0B02866D02BDE6AD3D191850A41()
+        public ViewsForBaseEntitySets5D34DE2140B4D1725C345D937B0D50395BF3BA11F010D5D6154118AD03DA7999()
         {
             this.EdmEntityContainerName = "BaseDbContext";
             this.StoreEntityContainerName = "SMDModelStoreContainer";
-            this.HashOverMappingClosure = "3d53d9fb7ab71cc6920bf76feab2d9bd045032fd1a2fd339ff5a9e551ae2c83d";
-            this.HashOverAllExtentViews = "2e656a2a1ca3268de88e3e3e1240b0fd1b66dd93be30f0205a8d890f3b405451";
+            this.HashOverMappingClosure = "83aade518fa9b690cc88933204b67e00490d692ae180442327e4f872c007c595";
+            this.HashOverAllExtentViews = "bc24feba9aa952d96b3b77bb228bd10a631a787b3f6438f6e4b5153a0fd85137";
             this.ViewCount = 138;
         }
         
@@ -1747,23 +1747,28 @@ namespace Edm_EntityMappingGeneratedViews
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView38()
         {
-            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.CouponPriceOption", @"
-    SELECT VALUE -- Constructing CouponPriceOption
-        [SMDModel.Store.CouponPriceOption](T1.CouponPriceOption_CouponPriceOptionId, T1.CouponPriceOption_CouponId, T1.CouponPriceOption_Description, T1.CouponPriceOption_Price, T1.CouponPriceOption_Savings, T1.CouponPriceOption_VoucherCode, T1.CouponPriceOption_OptionUrl, T1.CouponPriceOption_ExpiryDate, T1.CouponPriceOption_URL)
-    FROM (
-        SELECT 
-            T.CouponPriceOptionId AS CouponPriceOption_CouponPriceOptionId, 
-            T.CouponId AS CouponPriceOption_CouponId, 
-            T.Description AS CouponPriceOption_Description, 
-            T.Price AS CouponPriceOption_Price, 
-            T.Savings AS CouponPriceOption_Savings, 
-            T.VoucherCode AS CouponPriceOption_VoucherCode, 
-            T.OptionUrl AS CouponPriceOption_OptionUrl, 
-            T.ExpiryDate AS CouponPriceOption_ExpiryDate, 
-            T.URL AS CouponPriceOption_URL, 
-            True AS _from0
-        FROM BaseDbContext.CouponPriceOptions AS T
-    ) AS T1");
+            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.CouponPriceOption", "\r\n    SELECT VALUE -- Constructing CouponPriceOption\r\n        [SMDModel.Store.Cou" +
+                    "ponPriceOption](T1.CouponPriceOption_CouponPriceOptionId, T1.CouponPriceOption_C" +
+                    "ouponId, T1.CouponPriceOption_Description, T1.CouponPriceOption_Price, T1.Coupon" +
+                    "PriceOption_Savings, T1.CouponPriceOption_VoucherCode, T1.CouponPriceOption_Opti" +
+                    "onUrl, T1.CouponPriceOption_ExpiryDate, T1.CouponPriceOption_URL, T1.CouponPrice" +
+                    "Option_IsPerSaving3days, T1.CouponPriceOption_IsPerSaving2days, T1.CouponPriceOp" +
+                    "tion_IsPerSavingLastday, T1.CouponPriceOption_IsDollarSaving3days, T1.CouponPric" +
+                    "eOption_IsDollarSaving2days, T1.CouponPriceOption_IsDollarSavingLastday)\r\n    FR" +
+                    "OM (\r\n        SELECT \r\n            T.CouponPriceOptionId AS CouponPriceOption_Co" +
+                    "uponPriceOptionId, \r\n            T.CouponId AS CouponPriceOption_CouponId, \r\n   " +
+                    "         T.Description AS CouponPriceOption_Description, \r\n            T.Price A" +
+                    "S CouponPriceOption_Price, \r\n            T.Savings AS CouponPriceOption_Savings," +
+                    " \r\n            T.VoucherCode AS CouponPriceOption_VoucherCode, \r\n            T.O" +
+                    "ptionUrl AS CouponPriceOption_OptionUrl, \r\n            T.ExpiryDate AS CouponPri" +
+                    "ceOption_ExpiryDate, \r\n            T.URL AS CouponPriceOption_URL, \r\n           " +
+                    " T.IsPerSaving3days AS CouponPriceOption_IsPerSaving3days, \r\n            T.IsPer" +
+                    "Saving2days AS CouponPriceOption_IsPerSaving2days, \r\n            T.IsPerSavingLa" +
+                    "stday AS CouponPriceOption_IsPerSavingLastday, \r\n            T.IsDollarSaving3da" +
+                    "ys AS CouponPriceOption_IsDollarSaving3days, \r\n            T.IsDollarSaving2days" +
+                    " AS CouponPriceOption_IsDollarSaving2days, \r\n            T.IsDollarSavingLastday" +
+                    " AS CouponPriceOption_IsDollarSavingLastday, \r\n            True AS _from0\r\n     " +
+                    "   FROM BaseDbContext.CouponPriceOptions AS T\r\n    ) AS T1");
         }
         
         /// <Summary>
@@ -3150,23 +3155,28 @@ namespace Edm_EntityMappingGeneratedViews
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView86()
         {
-            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.CouponPriceOptions", @"
-    SELECT VALUE -- Constructing CouponPriceOptions
-        [DomainModels.CouponPriceOption](T1.CouponPriceOption_CouponPriceOptionId, T1.CouponPriceOption_CouponId, T1.CouponPriceOption_Description, T1.CouponPriceOption_Price, T1.CouponPriceOption_Savings, T1.CouponPriceOption_OptionUrl, T1.CouponPriceOption_VoucherCode, T1.CouponPriceOption_ExpiryDate, T1.CouponPriceOption_URL)
-    FROM (
-        SELECT 
-            T.CouponPriceOptionId AS CouponPriceOption_CouponPriceOptionId, 
-            T.CouponId AS CouponPriceOption_CouponId, 
-            T.Description AS CouponPriceOption_Description, 
-            T.Price AS CouponPriceOption_Price, 
-            T.Savings AS CouponPriceOption_Savings, 
-            T.OptionUrl AS CouponPriceOption_OptionUrl, 
-            T.VoucherCode AS CouponPriceOption_VoucherCode, 
-            T.ExpiryDate AS CouponPriceOption_ExpiryDate, 
-            T.URL AS CouponPriceOption_URL, 
-            True AS _from0
-        FROM SMDModelStoreContainer.CouponPriceOption AS T
-    ) AS T1");
+            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.CouponPriceOptions", "\r\n    SELECT VALUE -- Constructing CouponPriceOptions\r\n        [DomainModels.Coup" +
+                    "onPriceOption](T1.CouponPriceOption_CouponPriceOptionId, T1.CouponPriceOption_Co" +
+                    "uponId, T1.CouponPriceOption_Description, T1.CouponPriceOption_Price, T1.CouponP" +
+                    "riceOption_Savings, T1.CouponPriceOption_OptionUrl, T1.CouponPriceOption_Voucher" +
+                    "Code, T1.CouponPriceOption_ExpiryDate, T1.CouponPriceOption_URL, T1.CouponPriceO" +
+                    "ption_IsPerSaving3days, T1.CouponPriceOption_IsPerSaving2days, T1.CouponPriceOpt" +
+                    "ion_IsPerSavingLastday, T1.CouponPriceOption_IsDollarSaving3days, T1.CouponPrice" +
+                    "Option_IsDollarSaving2days, T1.CouponPriceOption_IsDollarSavingLastday)\r\n    FRO" +
+                    "M (\r\n        SELECT \r\n            T.CouponPriceOptionId AS CouponPriceOption_Cou" +
+                    "ponPriceOptionId, \r\n            T.CouponId AS CouponPriceOption_CouponId, \r\n    " +
+                    "        T.Description AS CouponPriceOption_Description, \r\n            T.Price AS" +
+                    " CouponPriceOption_Price, \r\n            T.Savings AS CouponPriceOption_Savings, " +
+                    "\r\n            T.OptionUrl AS CouponPriceOption_OptionUrl, \r\n            T.Vouche" +
+                    "rCode AS CouponPriceOption_VoucherCode, \r\n            T.ExpiryDate AS CouponPric" +
+                    "eOption_ExpiryDate, \r\n            T.URL AS CouponPriceOption_URL, \r\n            " +
+                    "T.IsPerSaving3days AS CouponPriceOption_IsPerSaving3days, \r\n            T.IsPerS" +
+                    "aving2days AS CouponPriceOption_IsPerSaving2days, \r\n            T.IsPerSavingLas" +
+                    "tday AS CouponPriceOption_IsPerSavingLastday, \r\n            T.IsDollarSaving3day" +
+                    "s AS CouponPriceOption_IsDollarSaving3days, \r\n            T.IsDollarSaving2days " +
+                    "AS CouponPriceOption_IsDollarSaving2days, \r\n            T.IsDollarSavingLastday " +
+                    "AS CouponPriceOption_IsDollarSavingLastday, \r\n            True AS _from0\r\n      " +
+                    "  FROM SMDModelStoreContainer.CouponPriceOption AS T\r\n    ) AS T1");
         }
         
         /// <Summary>
