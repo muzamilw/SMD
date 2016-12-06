@@ -81,7 +81,16 @@ namespace SMD.Implementation.Services
         public CompanyResponseModel GetCompanyDetails(int companyId = 0, string userId = "")
         {
             Company company = companyRepository.GetCompanyWithoutChilds(companyId);
-            User loginUser = _manageUserRepository.GetLoginUser(userId);
+            User loginUser = null;
+
+            if (userId.Equals("abc"))
+            {
+                loginUser = _manageUserRepository.GetLoginUser(_manageUserRepository.LoggedInUserIdentity);
+            }
+            else
+            {
+                 loginUser = _manageUserRepository.GetLoginUser(userId);
+            }
             var defaultBranch = _companyBranchRepository.GetDefaultCompanyBranch(companyId);
             var currencyCode = _countryRepository.GetCurrencyCode(company.BillingCountryId!=null?company.BillingCountryId ?? 0:1);
 
@@ -89,6 +98,9 @@ namespace SMD.Implementation.Services
             {
                 CompanyId = company.CompanyId,
                 AboutUs = company.AboutUsDescription,
+                CompanyAddressline1=company.AddressLine1,
+                Companyphone1=company.Tel1,
+
                 BillingAddressLine1 = defaultBranch != null ? defaultBranch.BranchAddressLine1 : string.Empty,
                 BillingAddressLine2 = defaultBranch != null ? defaultBranch.BranchAddressLine2 : string.Empty,
                 BillingBusinessName = company.BillingAddressName,
@@ -372,7 +384,11 @@ namespace SMD.Implementation.Services
             return companyRepository.GetStatusesCounters();
         
         }
-
+        public Company GetCompanyInfo()
+        {
+            return companyRepository.GetCompanyInfo();
+        }
+         
         #endregion
     }
 }

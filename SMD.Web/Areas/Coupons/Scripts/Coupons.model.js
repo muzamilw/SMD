@@ -6,7 +6,7 @@
             LocationLine1, LocationLine2, LocationLON, LocationPhone, LocationState, LocationTitle, LocationZipCode, LogoUrl, ModifiedBy, ModifiedDateTime, Price, RejectedBy,
             Rejecteddatetime, RejectedReason, Savings, SearchKeywords, Status, SwapCost, UserId, CouponTitle, CouponExpirydate, CouponQtyPerUser, CouponId, couponImage1, CouponImage2, CouponImage3,
             CurrencyId, couponListingMode, CouponActiveMonth, CouponActiveYear, CouponRedeemedCount, CouponViewCount, CouponIssuedCount, SubmissionDateTime, LocationCountryId, CouponStartDate, CouponEndDate, Priority,
-            ShowBuyitBtn, BuyitLandingPageUrl, BuyitBtnLabel, YoutubeLink, CouponImage4, CouponImage5, CouponImage6, IsPaymentCollected, PaymentDate, IsShowReviews, IsShowAddress, IsShowPhoneNo, IsShowMap, IsShowyouTube, IsShowAboutUs, DealsinGroupCount
+            ShowBuyitBtn, BuyitLandingPageUrl, BuyitBtnLabel, YoutubeLink, CouponImage4, CouponImage5, CouponImage6, IsPaymentCollected, PaymentDate, IsShowReviews, IsShowAddress, IsShowPhoneNo, IsShowMap, IsShowyouTube, IsShowAboutUs, DealsinGroupCount, IsPerSaving3days, IsPerSaving2days, IsPerSavingLastday, IsDollarSaving3days, IsDollarSaving2days, IsDollarSavingLastday
           ) {
           var
               //type and userID will be set on server sside
@@ -106,6 +106,13 @@
               IsShowyouTube = ko.observable(IsShowyouTube),
               IsShowAboutUs = ko.observable(IsShowAboutUs),
               DealsinGroupCount = ko.observable(DealsinGroupCount),
+              IsPerSaving3days = ko.observable(IsPerSaving3days),
+              IsPerSaving2days = ko.observable(IsPerSaving2days),
+              IsPerSavingLastday = ko.observable(IsPerSavingLastday),
+              IsDollarSaving3days = ko.observable(IsDollarSaving3days),
+              IsDollarSaving2days = ko.observable(IsDollarSaving2days),
+              IsDollarSavingLastday = ko.observable(IsDollarSavingLastday),
+
                // Errors
           errors = ko.validation.group({
               CouponTitle: CouponTitle
@@ -199,7 +206,14 @@
                  IsShowMap:IsShowMap,
                  IsShowyouTube: IsShowyouTube,
                  IsShowAboutUs: IsShowAboutUs,
-                 DealsinGroupCount :DealsinGroupCount,
+                 DealsinGroupCount: DealsinGroupCount,
+                 IsPerSaving3days: IsPerSaving3days,
+                 IsPerSaving2days: IsPerSaving2days,
+                 IsPerSavingLastday: IsPerSavingLastday,
+                 IsDollarSaving3days: IsDollarSaving3days,
+                 IsDollarSaving2days: IsDollarSaving2days,
+                 IsDollarSavingLastday: IsDollarSavingLastday,
+
 
           }),
     // Has Changes
@@ -317,7 +331,13 @@
                   IsShowMap: IsShowMap(),
                   IsShowyouTube: IsShowyouTube(),
                   IsShowAboutUs: IsShowAboutUs(),
-                  DealsinGroupCount:DealsinGroupCount(),
+                  DealsinGroupCount: DealsinGroupCount(),
+                  IsPerSaving3days: IsPerSaving3days(),
+                  IsPerSaving2days: IsPerSaving2days(),
+                  IsPerSavingLastday: IsPerSavingLastday(),
+                  IsDollarSaving3days: IsDollarSaving3days(),
+                  IsDollarSaving2days: IsDollarSaving2days(),
+                  IsDollarSavingLastday: IsDollarSavingLastday(),
                     
               };
           };
@@ -411,6 +431,12 @@
         IsShowyouTube: (IsShowyouTube),
         IsShowAboutUs: (IsShowAboutUs),
         DealsinGroupCount: (DealsinGroupCount),
+        IsPerSaving3days: (IsPerSaving3days),
+        IsPerSaving2days: (IsPerSaving2days),
+        IsPerSavingLastday: (IsPerSavingLastday),
+        IsDollarSaving3days: (IsDollarSaving3days),
+        IsDollarSaving2days: (IsDollarSaving2days),
+        IsDollarSavingLastday: (IsDollarSavingLastday),
 
     };
 };
@@ -427,7 +453,8 @@ Coupon.Create = function (source) {
         source.LocationTitle, source.LocationZipCode, source.LogoUrl, source.ModifiedBy, source.ModifiedDateTime, source.Price, source.RejectedBy,
         source.Rejecteddatetime, source.RejectedReason, source.Savings, source.SearchKeywords, source.Status, source.SwapCost, source.UserId,source.CouponTitle,source.CouponExpirydate,
         source.CouponQtyPerUser, source.CouponId, source.couponImage1, source.CouponImage2, source.CouponImage3, source.CurrencyId, source.CouponListingMode, source.CouponActiveMonth, source.CouponActiveYear, source.CouponRedeemedCount, source.CouponViewCount, source.CouponIssuedCount, source.SubmissionDateTime, source.LocationCountryId, source.CouponStartDate, source.CouponEndDate, source.Priority
-        , source.ShowBuyitBtn, source.BuyitLandingPageUrl, source.BuyitBtnLabel, source.YoutubeLink, source.CouponImage4, source.CouponImage5, source.CouponImage6, source.IsPaymentCollected, source.PaymentDate, source.IsShowReviews, source.IsShowAddress, source.IsShowPhoneNo, source.IsShowMap, source.IsShowyouTube, source.IsShowAboutUs, source.DealsinGroupCount
+        , source.ShowBuyitBtn, source.BuyitLandingPageUrl, source.BuyitBtnLabel, source.YoutubeLink, source.CouponImage4, source.CouponImage5, source.CouponImage6, source.IsPaymentCollected, source.PaymentDate, source.IsShowReviews, source.IsShowAddress, source.IsShowPhoneNo, source.IsShowMap, source.IsShowyouTube, source.IsShowAboutUs, source.DealsinGroupCount, source.IsPerSaving3days, source.IsPerSaving2days
+        , source.IsPerSavingLastday, source.IsDollarSaving3days, source.IsDollarSaving2days, source.IsDollarSavingLastday
         );
 
     _.each(source.CouponCategories, function (item) {
@@ -495,6 +522,14 @@ CouponPriceOption = function (specifiedCouponPriceOptionId, specifiedCouponId, s
     isValid = ko.computed(function () {
         return errors().length === 0 ? true : false;
     }),
+    perSaving = ko.computed(function () {
+  
+        var price = Price();
+        var saving = Savings();
+        var result = 0;
+        result = ((price - saving) * 100) / price;
+        return result.toFixed(2) +"%";
+    }),
 
     // True if the booking has been changed
     // ReSharper disable InconsistentNaming
@@ -544,7 +579,8 @@ CouponPriceOption = function (specifiedCouponPriceOptionId, specifiedCouponId, s
         convertToServerData: convertToServerData,
         ExpiryDate: ExpiryDate,
         URL:URL,
-        reset: reset
+        reset: reset,
+        perSaving: perSaving
     };
     return self;
 };

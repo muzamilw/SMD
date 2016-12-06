@@ -758,7 +758,7 @@ namespace SMD.MIS.Controllers
             {
                 User user = UserManager.FindById(User.Identity.GetUserId());
                 ViewBag.fullname = user.FullName;
-
+                ViewBag.UserId = user.Id;
                 return View("SelectCompany", comapnies);
             }
             else if (comapnies != null && comapnies.Count == 1)
@@ -766,8 +766,7 @@ namespace SMD.MIS.Controllers
                 var company = comapnies.First();
                 var companyrec = companyService.GetCompanyById(company.companyid);
 
-
-                return RedirectToAction("SetCompany", "Account", new { CompanyId = company.companyid, Role = company.RoleName, CompanyName = company.CompanyName, companyrec.City, CompanyLogo = companyrec.Logo, RoleId = company.RoleId, Addressline1 = companyrec .AddressLine1});
+                return RedirectToAction("SetCompany", "Account", new { CompanyId = company.companyid, Role = company.RoleName, CompanyName = company.CompanyName, companyrec.City, CompanyLogo = companyrec.Logo, RoleId = company.RoleId, Addressline1 = companyrec.AddressLine1});
             }
             else
             {

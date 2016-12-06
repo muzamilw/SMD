@@ -231,5 +231,9 @@ namespace SMD.Repository.Repositories
 
             return StDictionary;
         }
+        public Company GetCompanyInfo()
+        {
+            return db.Companies.Where(i => i.CompanyId == this.CompanyId).FirstOrDefault();
+        }
     }
 }
