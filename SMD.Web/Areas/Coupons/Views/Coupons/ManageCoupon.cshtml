@@ -739,6 +739,62 @@ else
 
                             <div class="col-lg-12" style="margin:auto;float:none !important; " data-bind="visible: $root.previewScreenNumber() == 2">
 
+                                <div class="col-lg-12">
+                                    <div class="col-lg-6">
+                                        <div class="row">
+                                            <div class="checkbox-nice ">
+                                                <input type="checkbox" name="chkpo3day" value="1" id="chkp3day" data-bind="checked:IsPerSaving3days">
+                                                <label for="chkp3day">
+                                                    further 20 % Saving on last 3 days
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="checkbox-nice ">
+                                                <input type="checkbox" name="chkpo2day" value="1" id="chkp2day" data-bind="checked:IsPerSaving2days">
+                                                <label for="chkp2day">
+                                                    further 25 % Saving on last 2 days
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="checkbox-nice ">
+                                                <input type="checkbox" name="chkpolday" value="1" id="chkplday" data-bind="checked:IsPerSavingLastday">
+                                                <label for="chkplday">
+                                                    further 30 % Saving on last day
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="row">
+                                            <div class="checkbox-nice ">
+                                                <input type="checkbox" name="chkD3day" value="1" id="chkD3day" data-bind="checked:IsDollarSaving3days">
+                                                <label for="chkD3day">
+                                                    further $10 Saving on last 3 days
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="checkbox-nice ">
+                                                <input type="checkbox" name="chkD2day" value="1" id="chkD2day" data-bind="checked:IsDollarSaving2days">
+                                                <label for="chkD2day">
+                                                    further $20 Saving on last 2 days
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="checkbox-nice ">
+                                                <input type="checkbox" name="chkDlday" value="1" id="chkDlday" data-bind="checked:IsDollarSavingLastday">
+                                                <label for="chkDlday">
+                                                    further $30 Saving on last days
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="clearfix">
 
                                 </div><br />
@@ -2169,9 +2225,9 @@ else
                         <!-- /ko -->
                     </ul>
                     <div class="tab-content" id="stockLabelTabListItemDetails">
-                            <!-- ko template: { name: 'TabDetailTemplate', foreach: $root.couponModel().CouponPriceOptions } -->
-                            <!-- /ko -->
-                        
+                        <!-- ko template: { name: 'TabDetailTemplate', foreach: $root.couponModel().CouponPriceOptions } -->
+                        <!-- /ko -->
+
                     </div>
                 </div>
             </div>
@@ -2183,11 +2239,11 @@ else
 
     <div class="tab-pane active" data-bind="attr: { id: 'tab-stockLabel' + $index() }">
         <div class=" row" style="margin-bottom:10px;background-color:white;">
-        <div class="col-lg-6"></div>
-        <span class="col-lg-2 GridHeaderFont_size"> <span>Was<span data-bind="text:$root.currencyCode"></span></span></span>
-        <span class="col-lg-2 GridHeaderFont_size"> <span>Now<span data-bind="text:$root.currencyCode"></span></span></span>
-        <span class="col-lg-2 GridHeaderFont_size"> <span>Saving %</span></span>
-    </div>
+            <div class="col-lg-6"></div>
+            <span class="col-lg-2 GridHeaderFont_size"> <span>Was<span data-bind="text:$root.currencyCode"></span></span></span>
+            <span class="col-lg-2 GridHeaderFont_size"> <span>Now<span data-bind="text:$root.currencyCode"></span></span></span>
+            <span class="col-lg-2 GridHeaderFont_size"> <span>Saving %</span></span>
+        </div>
         <div class="col-lg-12 borderPanel Subpanels " style="margin-bottom:20px;">
 
             <div class="row" style="margin-top:20px;">
@@ -2195,19 +2251,19 @@ else
                     <input class="form-control" data-bind="value: Description" placeholder="Max 56 characters" maxlength="56" />
                 </div>
                 <div class="col-lg-2">
-                    <input class="form-control" data-bind="value: Savings" maxlength="7" />
-                </div>
-                <div class="col-lg-2">
                     <input class="form-control" data-bind="value: Price" maxlength="7" />
                 </div>
+                <div class="col-lg-2">
+                    <input class="form-control" data-bind="value: Savings" maxlength="7" />
+                </div>
                 <div class="col-lg-2" style="margin-top:5px;">
-                    <span style="color:green">60 %</span>
+                    <span style="color:green" data-bind="text:perSaving"> </span>
                 </div>
             </div>
 
             <div class="row" style="padding-top:20px;">
                 <div class="col-lg-4" style="padding-right:0px;">
-                    <div >
+                    <div>
                         <label>
                             further 20 % Saving on last 3 days
                         </label>
@@ -2256,7 +2312,7 @@ else
             <div class="row" style="padding-top:20px;">
                 <div class="col-lg-4" style="padding-right:0px;">
                     <div>
-                        <label >
+                        <label>
                             further 30 % Saving on last day
                         </label>
                     </div>
@@ -2285,7 +2341,7 @@ else
 
             <div class="row" style="padding-top:20px;">
                 <div class="col-lg-4" style="padding-right:0px;">
-                    <div >
+                    <div>
                         <label>
                             further $10 Saving on last 3 days
                         </label>

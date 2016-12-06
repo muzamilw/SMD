@@ -287,7 +287,7 @@ define("Coupons/Coupons.viewModel",
                 selectedGranularityAnalytics(1);
                 isflageClose(false);
             },
-
+               
                 //
 
                 //end advertiser analytics
@@ -2813,7 +2813,7 @@ getfreeCouponCount = function () {
                     mCurrencyCode: mCurrencyCode,
                     FirstDealName: FirstDealName,
                     hasImpression: hasImpression,
-                    RatedFigure:RatedFigure
+                    RatedFigure: RatedFigure
                 };
             })()
         };

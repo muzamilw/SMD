@@ -205,5 +205,11 @@ namespace SMD.MIS.Areas.Api.Models
         public Nullable<bool> IsShowyouTube { get; set; }
         public Nullable<bool> IsShowAboutUs { get; set; }
         public int DealsinGroupCount { get; set; }
+        public Nullable<bool> IsPerSaving3days { get; set; }
+        public Nullable<bool> IsPerSaving2days { get; set; }
+        public Nullable<bool> IsPerSavingLastday { get; set; }
+        public Nullable<bool> IsDollarSaving3days { get; set; }
+        public Nullable<bool> IsDollarSaving2days { get; set; }
+        public Nullable<bool> IsDollarSavingLastday { get; set; }
     }
 }
