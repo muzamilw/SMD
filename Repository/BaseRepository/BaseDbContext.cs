@@ -906,6 +906,16 @@ namespace SMD.Repository.BaseRepository
 
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getAdsCampaignPerCityPerGenderFormAnalytic_Result>("getAdsCampaignPerCityPerGenderFormAnalytic", Id);
         }
+
+
+
+        public ObjectResult<GetUsersCouponsForEmailNotification_Result> GetUsersCouponsForEmailNotification(int mode)
+        {
+
+            var modevar = new ObjectParameter("mode", mode);
+
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUsersCouponsForEmailNotification_Result>("GetUsersCouponsForEmailNotification", modevar);
+        }
         #endregion
     }
 }

@@ -39,5 +39,7 @@ namespace SMD.Interfaces.Repository
 
         List<GetRandom3Deal_Result> GetRandomDeals();
 
+        List<GetUsersCouponsForEmailNotification_Result> GetUsersCouponsForEmailNotification(int mode); 
+
     }
 }

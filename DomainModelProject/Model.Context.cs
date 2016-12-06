@@ -760,5 +760,10 @@ namespace DomainModelProject
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("getPollImpressionStatBySQIdFormAnalytic", idParameter, genderParameter, ageRangeParameter);
         }
+    
+        public virtual ObjectResult<GetNewLiveCouponsForEmail_Result> GetNewLiveCouponsForEmail()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetNewLiveCouponsForEmail_Result>("GetNewLiveCouponsForEmail");
+        }
     }
 }
