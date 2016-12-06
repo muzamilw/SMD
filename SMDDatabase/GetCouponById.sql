@@ -1,6 +1,6 @@
-﻿
+﻿USE [SMDv2]
 GO
-/****** Object:  StoredProcedure [dbo].[GetCouponByID]    Script Date: 11/24/2016 10:28:43 AM ******/
+/****** Object:  StoredProcedure [dbo].[GetCouponByID]    Script Date: 12/2/2016 3:37:24 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -140,16 +140,7 @@ SELECT c.[CouponId]
 		
 	 [LogoUrl],
 
-	 case when c.CouponListingMode  = 2
-	 then 
-	  DATEDIFF(d, getdate(), DATEFROMPARTS(c.CouponActiveYear, c.CouponActiveMonth+2,day(EOMONTH ( DATEFROMPARTS(c.CouponActiveYear, c.CouponActiveMonth,1)))))
-	   when c.CouponListingMode  = 3
-	 then 
-	  DATEDIFF(d, getdate(), DATEFROMPARTS(c.CouponActiveYear, c.CouponActiveMonth+2,day(EOMONTH ( DATEFROMPARTS(c.CouponActiveYear, c.CouponActiveMonth,1)))))
-	 when CouponListingMode = 1
-	 then
-	 DATEDIFF(d, getdate(), DATEFROMPARTS(c.CouponActiveYear, c.CouponActiveMonth,day(EOMONTH ( DATEFROMPARTS(c.CouponActiveYear, c.CouponActiveMonth,1)))))
-	 end as DaysLeft
+	 (case when c.couponlistingmode = 1 then datediff(d,dateadd(d,7, c.ApprovalDateTime),getdate()) else datediff(d,dateadd(d,30, c.ApprovalDateTime),getdate()) end)  DaysLeft 
 	 ,
 	 case when 
 

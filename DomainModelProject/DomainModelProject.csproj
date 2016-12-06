@@ -216,6 +216,9 @@
     <Compile Include="GetLiveCampaignCountOverTime_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetNewLiveCouponsForEmail_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="getPayoutVSRevenueOverTime_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

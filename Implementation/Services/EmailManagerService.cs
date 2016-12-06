@@ -13,6 +13,7 @@ using SMD.Interfaces.Services;
 using SMD.Models.Common;
 using SMD.Models.DomainModels;
 using SMD.Models.IdentityModels;
+using System.Linq;
 
 namespace SMD.Implementation.Services
 {
@@ -165,6 +166,8 @@ namespace SMD.Implementation.Services
         public string CampaignBannerImage { get; set; }
 
         public string DealNoOfDays { get; set; }
+
+        public string UserDealsHTML { get; set; }
         
         public string RejectionReason { get; set; }
 
@@ -226,6 +229,8 @@ namespace SMD.Implementation.Services
             MBody = MBody.Replace("++campaignvideoimage++", CampaignVideoImage);
             MBody = MBody.Replace("++campaignbannerimage++", CampaignBannerImage);
             MBody = MBody.Replace("++dealnoofdays++", DealNoOfDays);
+            MBody = MBody.Replace("++userdealshtml++", UserDealsHTML);
+             
             
             MBody = MBody.Replace("++CurrentDateTime++", DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToLongTimeString() + " GMT");
             MBody = MBody.Replace("++EmailConfirmationLink++", EmailConfirmationLink);
@@ -348,6 +353,7 @@ namespace SMD.Implementation.Services
             MBody = MBody.Replace("++campaignvideoimage++", CampaignVideoImage);
             MBody = MBody.Replace("++campaignbannerimage++", CampaignBannerImage);
             MBody = MBody.Replace("++dealnoofdays++", DealNoOfDays);
+            MBody = MBody.Replace("++userdealshtml++", UserDealsHTML);
             MBody = MBody.Replace("++CurrentDateTime++", DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToLongTimeString() + " GMT");
             MBody = MBody.Replace("++EmailConfirmationLink++", EmailConfirmationLink);
             MBody = MBody.Replace("++inviteurl++", InviteURL);
@@ -429,7 +435,7 @@ namespace SMD.Implementation.Services
             {
                 objSmtpClient.Send(oMailBody);
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 throw new SMDException(LanguageResources.EmailManagerService_FailedToSendEmail);
             }
@@ -532,6 +538,8 @@ namespace SMD.Implementation.Services
         private readonly ICompanyService companyService;
         private readonly IAspnetUsersRepository userRepository;
 
+        private readonly ICouponRepository couponRepository;
+
 
         #endregion
 
@@ -541,7 +549,7 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Constructor
         /// </summary>
-        public EmailManagerService(ISystemMailsRepository systemMailRepository, IManageUserRepository manageUserRepository, ICompanyService companyService, IAspnetUsersRepository userRepository)
+        public EmailManagerService(ISystemMailsRepository systemMailRepository, IManageUserRepository manageUserRepository, ICompanyService companyService, IAspnetUsersRepository userRepository, ICouponRepository couponRepository)
         {
             
             if (systemMailRepository == null)
@@ -552,6 +560,7 @@ namespace SMD.Implementation.Services
             this.manageUserRepository = manageUserRepository;
             this.companyService = companyService;
             this.userRepository = userRepository;
+            this.couponRepository = couponRepository;
         
 
             MMailto = new List<string>();
@@ -1286,6 +1295,51 @@ namespace SMD.Implementation.Services
         public void SendNewDealsEmail()
         {
 
+            var data = couponRepository.GetUsersCouponsForEmailNotification(1);//new deals for today
+
+            ////var results = (from r in data
+            ////               group r by r.UserId into resultsSet
+            ////               orderby resultsSet.Key
+                          
+            ////               select new
+            ////               {
+            ////                   AlbumTitle = resultsSet.,
+            ////                   TagName = resultsSet.Key.Name,
+            ////                   TagCount = resultsSet.Count()
+            ////               }
+
+
+    //);
+
+            string userDeals = string.Empty;
+
+            var users = data.GroupBy(x => new { x.UserId, x.FullName, x.Email});
+
+            foreach (var user in users)
+            {
+                userDeals = "<table align=\"center\" bgcolor=\"#F2F2F2\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style='width:100%;'>";
+                //user.Key.UserId
+                
+                    foreach (var item in user)
+                    {
+                        userDeals += "<tr><td <img style='max-width:560px' src='" + item.couponimage1 + "'/> </td></tr><tr><td align=\"center\" style='text-align:center;padding-bottom:60px;'><p style=\"style=color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;\">" + item.CouponTitle + "</p></td></tr>";
+                    }
+
+
+                 userDeals += "</table>";
+                
+           
+
+                MMailto.Add(user.Key.Email);
+                Mid = (int)EmailTypes.NewCouponsNearMe;
+                
+                Muser = user.Key.FullName;
+                UserDealsHTML = userDeals;
+               
+
+                SendEmailNotAysnc();
+                
+            }
 
             
         }

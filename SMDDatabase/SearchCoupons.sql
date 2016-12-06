@@ -1,5 +1,6 @@
-﻿
-/****** Object:  StoredProcedure [dbo].[SearchCoupons]    Script Date: 12/2/2016 12:29:49 PM ******/
+﻿USE [SMDv2]
+GO
+/****** Object:  StoredProcedure [dbo].[SearchCoupons]    Script Date: 12/2/2016 3:41:42 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -69,7 +70,7 @@ DECLARE @source geography = geography::Point(@lat, @lon, 4326)
 				curr.CurrencySymbol,
 				isnull(crrRatingAvg.arravg,0)+5 AvgRating,
 				(case when uReview.UserId is null then 0 else 1 end) UserHasRated,
-				datediff(d,ApprovalDateTime,getdate()) as DaysLeft
+				(case when couponlistingmode = 1 then datediff(d,dateadd(d,7, ApprovalDateTime),getdate()) else datediff(d,dateadd(d,30, ApprovalDateTime),getdate()) end)  DaysLeft
 	
 
 				from Coupon vchr

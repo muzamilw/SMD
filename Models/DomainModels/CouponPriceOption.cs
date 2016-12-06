@@ -19,6 +19,8 @@ namespace SMD.Models.DomainModels
 
         public Nullable<DateTime> ExpiryDate { get; set; }
         public string URL { get; set; }
+
+   
         
 
         public virtual Coupon Coupon { get; set; }

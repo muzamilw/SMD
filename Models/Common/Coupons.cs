@@ -37,7 +37,7 @@ namespace SMD.Models.Common
 
         public string CurrencySymbol { get; set; }
 
-        public int AvgRating { get; set; }
+        public double AvgRating { get; set; }
         
     }
 

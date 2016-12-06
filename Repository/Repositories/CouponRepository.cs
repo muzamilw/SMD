@@ -278,9 +278,9 @@ namespace SMD.Repository.Repositories
         }
 
 
-        public List<Coupon> GetNewLiveCouponsForEmail()
+        public List<GetUsersCouponsForEmailNotification_Result> GetUsersCouponsForEmailNotification(int mode)
         {
-            return db.Coupons.Where(c => c.Status == 3 && DateTime.Compare( c.ApprovalDateTime.Value.Date, DateTime.Today.Date) == 0).ToList();
+            return db.GetUsersCouponsForEmailNotification(mode).ToList();
         }
 
 
