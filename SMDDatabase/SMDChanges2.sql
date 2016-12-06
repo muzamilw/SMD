@@ -3493,3 +3493,13 @@ ALTER TABLE dbo.CouponRatingReview ADD CONSTRAINT
 	
 GO
 COMMIT
+
+
+
+ALTER TABLE dbo.Coupon
+ADD  IsPerSaving3days Bit  NULL,
+     IsPerSaving2days Bit Null,
+  IsPerSavingLastday Bit Null,
+  IsDollarSaving3days Bit Null,
+  IsDollarSaving2days Bit Null,
+  IsDollarSavingLastday Bit Null

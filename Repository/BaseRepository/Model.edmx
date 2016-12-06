@@ -504,6 +504,12 @@
           <Property Name="IsShowyouTube" Type="bit" />
           <Property Name="IsShowAboutUs" Type="bit" />
           <Property Name="IsMarketingStories" Type="bit" />
+          <Property Name="IsPerSaving3days" Type="bit" />
+          <Property Name="IsPerSaving2days" Type="bit" />
+          <Property Name="IsPerSavingLastday" Type="bit" />
+          <Property Name="IsDollarSaving3days" Type="bit" />
+          <Property Name="IsDollarSaving2days" Type="bit" />
+          <Property Name="IsDollarSavingLastday" Type="bit" />
         </EntityType>
         <EntityType Name="CouponCategories">
           <Key>
@@ -536,12 +542,6 @@
           <Property Name="OptionUrl" Type="nvarchar" MaxLength="500" />
           <Property Name="ExpiryDate" Type="datetime" />
           <Property Name="URL" Type="varchar(max)" />
-          <Property Name="IsPerSaving3days" Type="bit" />
-          <Property Name="IsPerSaving2days" Type="bit" />
-          <Property Name="IsPerSavingLastday" Type="bit" />
-          <Property Name="IsDollarSaving3days" Type="bit" />
-          <Property Name="IsDollarSaving2days" Type="bit" />
-          <Property Name="IsDollarSavingLastday" Type="bit" />
         </EntityType>
         <EntityType Name="CouponRatingReview">
           <Key>
@@ -6074,6 +6074,12 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="IsShowAboutUs" Type="Boolean" />
           <Property Name="IsMarketingStories" Type="Boolean" />
           <NavigationProperty Name="CouponRatingReviews" Relationship="DomainModels.FK_CouponRatingReview_Coupon" FromRole="Coupon" ToRole="CouponRatingReview" />
+          <Property Name="IsPerSaving3days" Type="Boolean" />
+          <Property Name="IsPerSaving2days" Type="Boolean" />
+          <Property Name="IsPerSavingLastday" Type="Boolean" />
+          <Property Name="IsDollarSaving3days" Type="Boolean" />
+          <Property Name="IsDollarSaving2days" Type="Boolean" />
+          <Property Name="IsDollarSavingLastday" Type="Boolean" />
         </EntityType>
         <Association Name="FK_CompanyBranch_BranchCategory">
           <End Type="DomainModels.BranchCategory" Role="BranchCategory" Multiplicity="0..1" />
@@ -6677,13 +6683,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="VoucherCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="ExpiryDate" Type="DateTime" Precision="3" />
           <Property Name="URL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="IsPerSaving3days" Type="Boolean" />
-          <Property Name="IsPerSaving2days" Type="Boolean" />
-          <Property Name="IsPerSavingLastday" Type="Boolean" />
-          <Property Name="IsDollarSaving3days" Type="Boolean" />
-          <Property Name="IsDollarSaving2days" Type="Boolean" />
-          <Property Name="IsDollarSavingLastday" Type="Boolean" />
-        </EntityType>
+          </EntityType>
         <Association Name="FK_CouponPriceOption_Coupon">
           <End Type="DomainModels.Coupon" Role="Coupon" Multiplicity="0..1" />
           <End Type="DomainModels.CouponPriceOption" Role="CouponPriceOption" Multiplicity="*" />
@@ -8708,6 +8708,12 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="Coupons">
             <EntityTypeMapping TypeName="DomainModels.Coupon">
               <MappingFragment StoreEntitySet="Coupon">
+                <ScalarProperty Name="IsDollarSavingLastday" ColumnName="IsDollarSavingLastday" />
+                <ScalarProperty Name="IsDollarSaving2days" ColumnName="IsDollarSaving2days" />
+                <ScalarProperty Name="IsDollarSaving3days" ColumnName="IsDollarSaving3days" />
+                <ScalarProperty Name="IsPerSavingLastday" ColumnName="IsPerSavingLastday" />
+                <ScalarProperty Name="IsPerSaving2days" ColumnName="IsPerSaving2days" />
+                <ScalarProperty Name="IsPerSaving3days" ColumnName="IsPerSaving3days" />
                 <ScalarProperty Name="IsMarketingStories" ColumnName="IsMarketingStories" />
                 <ScalarProperty Name="IsShowAboutUs" ColumnName="IsShowAboutUs" />
                 <ScalarProperty Name="IsShowyouTube" ColumnName="IsShowyouTube" />
@@ -9158,12 +9164,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="CouponPriceOptions">
             <EntityTypeMapping TypeName="DomainModels.CouponPriceOption">
               <MappingFragment StoreEntitySet="CouponPriceOption">
-                <ScalarProperty Name="IsDollarSavingLastday" ColumnName="IsDollarSavingLastday" />
-                <ScalarProperty Name="IsDollarSaving2days" ColumnName="IsDollarSaving2days" />
-                <ScalarProperty Name="IsDollarSaving3days" ColumnName="IsDollarSaving3days" />
-                <ScalarProperty Name="IsPerSavingLastday" ColumnName="IsPerSavingLastday" />
-                <ScalarProperty Name="IsPerSaving2days" ColumnName="IsPerSaving2days" />
-                <ScalarProperty Name="IsPerSaving3days" ColumnName="IsPerSaving3days" />
                 <ScalarProperty Name="URL" ColumnName="URL" />
                 <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
                 <ScalarProperty Name="VoucherCode" ColumnName="VoucherCode" />
