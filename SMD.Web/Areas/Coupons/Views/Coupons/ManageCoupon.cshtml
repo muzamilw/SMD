@@ -12,7 +12,7 @@ else
     adminClasses = "displayNone";
 }
 <div data-bind="visible: $root.isEditorVisible()" style="display: none">
-
+   
     <div class="col-lg-12" style="padding-left:0px;padding-right:18px;">
         <div class="row">
             <div class="col-lg-12" id="topArea" style="padding-left:7px;padding-right:0px;">
@@ -31,6 +31,7 @@ else
                             <div class="status_date_span" style="margin-top:25px;">
                                 Last modified <span style="margin-left:3px"></span><span>12 april 2014</span>
                             </div>
+           
                         </div>
                     </div>
 
@@ -112,11 +113,13 @@ else
 
                             <br />
                             <span data-bind="css: $root.previewScreenNumber() == 4 ? 'ads-selected-numbering-text' : '',click: $root.gotoScreen.bind(null,4)">Expiry</span>
+
+          
                         </div>
                         <div class="pull-left" style="width:47px;">
                             &nbsp;
                         </div>
-                        <div class="pull-left ads-numbering-main" onclick="PreviewCoupon()">
+                        <div class="pull-left ads-numbering-main" data-bind="click:$root.MapInt">
                             <a data-toggle="modal" data-target=".model_quizQ_ph">
 
 
@@ -127,6 +130,7 @@ else
 
                                 <br />
                                 <span>Preview</span>
+                              
                             </a>
                         </div>
 
@@ -175,7 +179,7 @@ else
                                 </div>
 
                                 <br>
-
+                                
                                 <span style="font-size:16px;color:black;margin-left:2px;" data-bind="text:StatusValue()">Draft</span>
                             </div>
                             <div class="pull-right">
@@ -961,14 +965,14 @@ else
                                 </div>
 
                         </div>
-
+           
 
                         <div class="modal fade my-modal model_quizQ_ph" id="phQuizDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                             <div class="modal-dialog" style=" width:660px;" =4">
                                 <div class="col-lg-6 preview_stencilImg" style=" margin-right: 35px; width:310px;">
                                     <div id="background" class="mobBck mobile_background">
                                         <div style="position:relative;">
-                                            <img id="closePop" src="~/Images/close2-128.png" width="20" class="preview_close" data-dismiss="modal" />
+                                            <img id="closePop" src="/Images/close2-128.png" width="20" class="preview_close" data-dismiss="modal" />
                                         </div>
                                         <div class="deals_blue_panel">
                                             <div class="dealsPenel_text">Deals</div>
@@ -977,7 +981,7 @@ else
                                         </div>
                                         <div class="deals_bannerImage">
 
-                                            <img id="deal_preview_img" style="width:258px;" data-bind="attr:{src:$root.couponModel().couponImage1()}" />
+                                            <img id="deal_preview_img" style="width:258px;height:173px;" data-bind="attr:{src:$root.couponModel().couponImage1()}" />
 
 
                                         </div>
@@ -986,7 +990,7 @@ else
                                             <div class="deal_group_name" data-bind="text:$root.couponModel().CouponTitle()">
                                             </div>
                                             <div class="desc_cont">
-                                                <div class="deal_group_Pice pull-left">
+                                                <div class="deal_group_Pice pull-left" style="margin-top:3px;">
                                                    
                                                     <div id="address" data-bind="html:$root.CompanyName()"></div>
                                                     <div id="city" data-bind="html:$root.CompanyCity()">Lahore</div>
@@ -1008,7 +1012,7 @@ else
                                 <div class="col-lg-6 preview_stencilImg" style=" width:310px;">
                                     <div id="background" class="mobBck mobile_background">
                                         <div style="position:relative;">
-                                            <img src="~/Images/close2-128.png" width="20" class="preview_close" data-dismiss="modal" />
+                                            <img src="/Images/close2-128.png"  width="20" class="preview_close" data-dismiss="modal" />
                                         </div>
                                         <div class="deals_head_panel" data-bind="text:$root.couponModel().CouponTitle()">
                                         </div>
@@ -1019,9 +1023,9 @@ else
                                         <div id="logo_panel" class="deal_logo_panel">
                                             <div class="pull-left">
                                                 <img data-bind="attr:{src: $root.companyLogo()}" class="deal_logo" />
-                                                <div class="city_desc deal_group_Pice ">
-                                                    <div>sdasdas</div>
-                                                    <div>Lahore</div>
+                                                <div class="city_desc deal_group_Pice " style="font-size:8px;margin-top:-24px;">
+                                                    <div data-bind="text:$root.AddressLine1()"></div>
+                                                    <div data-bind="text:$root.CompanyCity()"></div>
                                                 </div>
                                             </div>
                                             <div class="pull-right">
@@ -1041,14 +1045,12 @@ else
                                                         <div class="pull-right" style="font-weight:bold;margin-top:-4px!important;" data-bind="text:$root.FirstCouponOption()">£12</div>
                                                         <div class="clearfix"></div>
                                                     </div>
-
                                                     <div class="clearfix"></div>
                                                     <div style="text-align:center;margin-top:5px;">
                                                         <input id="save_btn" value="Save 33% - Shop Now" class="saving_btn" />
                                                     </div>
-
                                                 </div>
-                                                <div id="more_details" style="height: 37px;margin-top:6px;border-bottom: 1px solid grey;padding-top: 11px;">
+                                                <div id="more_details" style="height:37px;margin-top:6px;border-bottom:1px solid grey;padding-top:11px;">
                                                     <div class="pull-left"></div>
                                                     <div class="pull-right blueclrr" style="margin-right:12px;">2 MORE DETAILS</div>
                                                     <div class="clearfix"></div>
@@ -1067,17 +1069,37 @@ else
 
                                                 <div id="Address" class="deal_fine_print" style="height:67px;margin-top:6px;border-bottom: 1px solid grey;">
                                                     <div class="headers">Where</div>
-                                                    <div class="highlight_ext" >Stock Park Country Club</div>
-                                                    <div class="highlight_ext">Famham Common Lane</div>
-                                                    <div class="highlight_ext">Jumeriah Beach</div>
+                                                    <div class="highlight_ext" data-bind="text:$root.AddressLine1()"></div>
+                                                    <div class="highlight_ext" data-bind="text:$root.CompanyCity()"></div>
+                                                    <div class="highlight_ext" data-bind="text:$root.companyzipcode()"></div>
                                                 </div>
                                                 
-                                                    <div id="Map_deal">
-                                                        <div id="map-canvasCompany" style="width:100%;height:134px; border:2px solid"></div>
+                                                    <div>
+                                                        <div id="map_div" style="width:100%;height:134px; border:2px solid"></div>
                                                     </div>
+
+                                                <div id="contact_no" style="border-bottom: 1px solid grey;height:65px;">
+                                                    <div class="pull-left" style="padding-left:44px;padding-top:18px;">
+                                                        <i class="fa fa-phone" aria-hidden="true" style="font-size:16px;color:#53b6e0"></i>
+                                                        <div id="cellno" style="font-size:10px;color:black;margin-left:-17px;margin-top: 4px;" data-bind="text:$root.CompanyTel1()"></div>
+    
+                                                    </div>
+                                                            <div class="pull-right" style="padding-right:44px;padding-top:18px;">
+                                                                <i class="fa fa-chevron-circle-right" aria-hidden="true" style="font-size:16px;color:#53b6e0"></i>
+                                                                <div id="dist_km" style="font-size:10px;color:black;margin-left:-15px;margin-top:4px;">
+                                                                    24 Km away
+                                                                </div>
+                                                            </div>
+                                                        <div class="clearfix"></div>
+                                                        </div>
+                                                        
+                                                    
+
+
+
                                                 <div id="about_us_div" style="height:56px;margin-top:6px;border-bottom: 1px solid grey;">
                                                     <div class="headers">About Us</div>
-                                                    <div class="highlight_ext">dlas asdkajk asjdkad askdas sdjjs js sdad</div>
+                                                    <div class="highlight_ext" data-bind="text:$root.CompanyAboutUs()"></div>
                                                 </div>
                                                 
                                                 <div id="Review_panel" style="height:48px;border-bottom: 1px solid grey;">
@@ -1136,7 +1158,7 @@ else
                                                 </div>
                                                 <div id="Review_2" style="width:100%;height: 68px;border:2px solid;padding-top :12px;">
                                                     <div class="pull-left" style="width:40px;">
-                                                        <img src="~/Content/Images/bradPit.jpg" style="border-radius: 29px;height:40px" />
+                                                        <img src="~/Content/Images/tom_cruis.jpg" style="border-radius: 29px;height:40px" />
                                                     </div>
                                                     <div class="pull-right" style="width:197px;padding-left:4px;">
                                                         <div class="pull-left">

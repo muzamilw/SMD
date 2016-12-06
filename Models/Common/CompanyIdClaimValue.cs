@@ -20,7 +20,7 @@
 
         public string RoleId { get; set; }
         public string addressLine1 { get; set; }
-         
 
+        public string UserID { get; set; }
     }
 }

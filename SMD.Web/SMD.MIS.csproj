@@ -385,6 +385,7 @@
     <Compile Include="App_Start\SecurityConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Api\Controllers\CampaignFormAnalyticController.cs" />
+    <Compile Include="Areas\Api\Controllers\CompanyInfoController.cs" />
     <Compile Include="Areas\Api\Controllers\CountryController.cs" />
     <Compile Include="Areas\Api\Controllers\CouponRatingReviewController.cs" />
     <Compile Include="Areas\Api\Controllers\CouponReviewController.cs" />
@@ -1056,6 +1057,7 @@
     <Content Include="Content\Images\Surveys_icon.png" />
     <Content Include="Content\Images\Surveys_small.png" />
     <Content Include="Content\Images\Surveys_small_36.png" />
+    <Content Include="Content\Images\tom_cruis.jpg" />
     <Content Include="Content\Images\TwitterNew.png" />
     <Content Include="Content\Images\UK-Union-Flag.png" />
     <Content Include="Content\Images\up-arrow-small.png" />
