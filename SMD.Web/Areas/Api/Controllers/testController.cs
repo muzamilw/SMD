@@ -42,11 +42,11 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// Login
         /// </summary>
         [ApiExceptionCustom]
-        public string Get()
+        public string Get(int mode)
         {
 
 
-            emailService.SendNewDealsEmail();
+            emailService.SendNewDealsEmail(mode);
             return "success";
 
         }

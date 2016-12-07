@@ -99,8 +99,8 @@ namespace SMD.Implementation.Services
                 CompanyId = company.CompanyId,
                 AboutUs = company.AboutUsDescription,
                 CompanyAddressline1=company.AddressLine1,
-                Companyphone1=company.l,
-                
+                Companyphone1=company.Tel1,
+
                 BillingAddressLine1 = defaultBranch != null ? defaultBranch.BranchAddressLine1 : string.Empty,
                 BillingAddressLine2 = defaultBranch != null ? defaultBranch.BranchAddressLine2 : string.Empty,
                 BillingBusinessName = company.BillingAddressName,

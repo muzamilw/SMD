@@ -626,6 +626,48 @@
     <Compile Include="Emails\Display_Ad_Rejected.aspx.designer.cs">
       <DependentUpon>Display_Ad_Rejected.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Emails\LastDayDollarDiscountCouponsNearMe.aspx.cs">
+      <DependentUpon>LastDayDollarDiscountCouponsNearMe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\LastDayDollarDiscountCouponsNearMe.aspx.designer.cs">
+      <DependentUpon>LastDayDollarDiscountCouponsNearMe.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Last2DaysDollarDiscountCouponsNearMe.aspx.cs">
+      <DependentUpon>Last2DaysDollarDiscountCouponsNearMe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Last2DaysDollarDiscountCouponsNearMe.aspx.designer.cs">
+      <DependentUpon>Last2DaysDollarDiscountCouponsNearMe.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Last3DaysDollarDiscountCouponsNearMe.aspx.cs">
+      <DependentUpon>Last3DaysDollarDiscountCouponsNearMe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Last3DaysDollarDiscountCouponsNearMe.aspx.designer.cs">
+      <DependentUpon>Last3DaysDollarDiscountCouponsNearMe.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\LastDayPercentageCouponsNearMe.aspx.cs">
+      <DependentUpon>LastDayPercentageCouponsNearMe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\LastDayPercentageCouponsNearMe.aspx.designer.cs">
+      <DependentUpon>LastDayPercentageCouponsNearMe.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Last2DaysPercentageCouponsNearMe.aspx.cs">
+      <DependentUpon>Last2DaysPercentageCouponsNearMe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Last2DaysPercentageCouponsNearMe.aspx.designer.cs">
+      <DependentUpon>Last2DaysPercentageCouponsNearMe.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Last3DaysPercentageCouponsNearMe.aspx.cs">
+      <DependentUpon>Last3DaysPercentageCouponsNearMe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Last3DaysPercentageCouponsNearMe.aspx.designer.cs">
+      <DependentUpon>Last3DaysPercentageCouponsNearMe.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Emails\Picture_poll_Rejected.aspx.cs">
       <DependentUpon>Picture_poll_Rejected.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1371,6 +1413,12 @@
     <Content Include="Content\themes\Centaurus\js\wizard.js" />
     <Content Include="Content\themes\Centaurus\js\xcharts.js" />
     <Content Include="Emails\Display_Ad_Rejected.aspx" />
+    <Content Include="Emails\LastDayDollarDiscountCouponsNearMe.aspx" />
+    <Content Include="Emails\Last2DaysDollarDiscountCouponsNearMe.aspx" />
+    <Content Include="Emails\Last3DaysDollarDiscountCouponsNearMe.aspx" />
+    <Content Include="Emails\LastDayPercentageCouponsNearMe.aspx" />
+    <Content Include="Emails\Last2DaysPercentageCouponsNearMe.aspx" />
+    <Content Include="Emails\Last3DaysPercentageCouponsNearMe.aspx" />
     <Content Include="Emails\Picture_poll_Rejected.aspx" />
     <Content Include="Emails\Deal_Rejected.aspx" />
     <Content Include="Emails\Video_Ad_Rejected.aspx" />

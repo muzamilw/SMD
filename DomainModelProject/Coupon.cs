@@ -105,6 +105,12 @@ namespace DomainModelProject
         public Nullable<bool> IsShowyouTube { get; set; }
         public Nullable<bool> IsShowAboutUs { get; set; }
         public Nullable<bool> IsMarketingStories { get; set; }
+        public Nullable<bool> IsPerSaving3days { get; set; }
+        public Nullable<bool> IsPerSaving2days { get; set; }
+        public Nullable<bool> IsPerSavingLastday { get; set; }
+        public Nullable<bool> IsDollarSaving3days { get; set; }
+        public Nullable<bool> IsDollarSaving2days { get; set; }
+        public Nullable<bool> IsDollarSavingLastday { get; set; }
     
         public virtual CompanyBranch CompanyBranch { get; set; }
         public virtual Language Language { get; set; }
