@@ -17,7 +17,7 @@ define("Coupons/Coupons.viewModel",
                     EditorLoading = ko.observable(false),
                     ISshowPhone = ko.observable(false),
                     IsnewCoupon = ko.observable(false),
-                    RatedFigure = ko.observable(3),
+                    RatedFigure = ko.observable(2),
                     mCurrencyCode = ko.observable(),
                     CompanyAboutUs = ko.observable(),
                     CompanyTel1 = ko.observable(),
@@ -25,7 +25,7 @@ define("Coupons/Coupons.viewModel",
                     CompanyCity = ko.observable(),
                     AddressLine1 = ko.observable(),
                     companystate = ko.observable(),
-                    companyzipcode= ko.observable(),
+                    companyzipcode = ko.observable(),
                     CompanyName = ko.observable(),
                     langs = ko.observableArray([]),
                     diveNo = ko.observable(0),
@@ -161,7 +161,7 @@ define("Coupons/Coupons.viewModel",
                 selectedCTGenderAnalytics = ko.observable(0),
                 selectedCTAgeAnalytics = ko.observable(0),
                 DDCTStatsAnalytics = ko.observable(),
-
+                SearchSelectedStatus = ko.observable();
                 dealExpirydate = ko.observable(),
                 Banner2Flag = ko.observable(false),
                 Banner3Flag = ko.observable(false),
@@ -185,9 +185,9 @@ define("Coupons/Coupons.viewModel",
                         CouponID: selectedCouponIdAnalytics(),
                         dateRange: 0,
                         Granularity: 0,
-                        type : 2,
-                        Gender : selectedOGenderAnalytics(), 
-                        age : selectedOAgeAnalytics(), 
+                        type: 2,
+                        Gender: selectedOGenderAnalytics(),
+                        age: selectedOAgeAnalytics(),
                         Stype: 1,
 
                     }, {
@@ -201,16 +201,16 @@ define("Coupons/Coupons.viewModel",
 
                         }
                     });
-                
+
                 },
                 getDDCTAnalytic = function () {
                     dataservice.getDealsAnalytics({
                         CouponID: selectedCouponIdAnalytics(),
                         dateRange: 0,
                         Granularity: 0,
-                        type : 2,
-                        Gender : selectedCTGenderAnalytics(), 
-                        age : selectedCTAgeAnalytics(), 
+                        type: 2,
+                        Gender: selectedCTGenderAnalytics(),
+                        age: selectedCTAgeAnalytics(),
                         Stype: 2,
 
                     }, {
@@ -224,8 +224,8 @@ define("Coupons/Coupons.viewModel",
 
                         }
                     });
-                
-                
+
+
                 }
                 openAdvertiserDashboardDealScreen = function () {
                     if (!IsnewCoupon()) {
@@ -250,9 +250,9 @@ define("Coupons/Coupons.viewModel",
                     CouponID: selectedCouponIdAnalytics(),
                     dateRange: selecteddateRangeAnalytics(),
                     Granularity: selectedGranularityAnalytics(),
-                    type : 1,
-                    Gender: 0, 
-                    age : 0, 
+                    type: 1,
+                    Gender: 0,
+                    age: 0,
                     Stype: 0
 
                 }, {
@@ -290,7 +290,7 @@ define("Coupons/Coupons.viewModel",
                         dataservice.getCompanyData(
                      {
                          companyId: ComId,
-                         userId:'abc',
+                         userId: 'abc',
                      },
                      {
                          success: function (comData) {
@@ -327,7 +327,7 @@ define("Coupons/Coupons.viewModel",
                 selectedGranularityAnalytics(1);
                 isflageClose(false);
             },
-               
+
                 //
 
                 //end advertiser analytics
@@ -343,7 +343,7 @@ define("Coupons/Coupons.viewModel",
                             UserAndCostDetail(data.UserAndCostDetails);
                             currencyCode(currency);
                             mCurrencyCode(data.UserAndCostDetails.CurrencySymbol);
-                            
+
 
                             if (data.Currencies != null) {
                                 CurrencyDropDown.removeAll();
@@ -446,6 +446,7 @@ define("Coupons/Coupons.viewModel",
                 PageSize: pager().pageSize(),
                 PageNo: pager().currentPage(),
                 SearchText: searchFilterValue(),
+                status: SearchSelectedStatus(),
                 ShowCoupons: true
             }, {
                 success: function (data) {
@@ -594,7 +595,7 @@ getfreeCouponCount = function () {
             getAdCampaignGridContent();
         },
         addNewCampaign = function () {
-            
+
             diveNo(0);
             buyItQuestionLabelStatus(false);
             //show the main menu;
@@ -609,7 +610,7 @@ getfreeCouponCount = function () {
             IsnewCoupon(true);
             CouponsubTitle("(Deals)");
             //$("#rating_id").val(4);
-            RatedFigure(4);
+            RatedFigure(2);
             $("#btnCancel").css("display", "block");
             $(".hideInCoupons").css("display", "none");
 
@@ -947,7 +948,7 @@ getfreeCouponCount = function () {
 
                 //if other question then
                 if (buyItQuestionLabelStatus() == true) {
-                  
+
                     couponModel().BuyitBtnLabel();
 
                     // couponModel().BuyitBtnLabel(ButItOtherLabel());
@@ -1291,8 +1292,8 @@ getfreeCouponCount = function () {
                         }
                     });
                 }
-                
-                
+
+
             },
             ShowImages = function (Item) {
 
@@ -1555,6 +1556,30 @@ getfreeCouponCount = function () {
 
 
             },
+           disableDolarCheckBoxes = ko.computed(function () {
+               if (couponModel() != undefined) {
+                   if (couponModel().IsPerSaving3days() == true || couponModel().IsPerSaving2days() == true || couponModel().IsPerSavingLastday() == true) {
+                       return true;
+                   }
+                   else {
+
+                       false;
+                   }
+               }
+
+           }),
+           disablePercentageCheckBoxes = ko.computed(function () {
+                     if (couponModel() != undefined) {
+                         if (couponModel().IsDollarSaving3days() == true || couponModel().IsDollarSaving2days() == true || couponModel().IsDollarSavingLastday() == true) {
+                             return true;
+                         }
+                         else {
+
+                             false;
+                         }
+                     }
+
+                 }),
             visibleDeleteimage = function (item) {
                 if (item.couponImage1() != null && item.couponImage1() != "/images/standardplaceholder.png" && item.CouponImage2() == "/images/standardplaceholder.png")
                     diveNo(1);
@@ -1634,9 +1659,9 @@ getfreeCouponCount = function () {
 
                 },
                 FirstCouponOption = ko.computed(function () {
-                    
+
                     if (couponModel() != undefined) {
-                        
+
                         if (couponModel().CouponPriceOptions() != undefined) {
 
                             if (couponModel().CouponPriceOptions()[0] != undefined) {
@@ -1646,12 +1671,12 @@ getfreeCouponCount = function () {
                                 }
                                 else
                                     return mCurrencyCode() + '0';
-                              
-                            } 
+
                             }
                         }
-                        
-                    
+                    }
+
+
                 }, this);
                 SecondCouponOption = ko.computed(function () {
 
@@ -1692,7 +1717,7 @@ getfreeCouponCount = function () {
                 //FirstCategory = ko.computed(function () {
 
                 //    if (couponModel() != undefined) {
-                
+
                 //        if (couponModel().couponCategories != undefined) {
                 //            debugger;
                 //            var matcharry = ko.utils.arrayFirst(couponModel().couponCategories(), function (item) {
@@ -1708,7 +1733,7 @@ getfreeCouponCount = function () {
 
                 //    }
                 //}, this),
-                
+
                 onRemoveIndustry = function (item) {
                     // Ask for confirmation
 
@@ -1751,13 +1776,13 @@ getfreeCouponCount = function () {
                     debugger;
                     //var fulladdress = AddressLine1().toLowerCase() + ' ' + CompanyCity() + ' ' + companyzipcode() + ' ' + companystate().toLowerCase();
                     var fulladdress = AddressLine1().toLowerCase() + ' ' + CompanyCity() + ' ' + companyzipcode() + ' ' + companystate().toLowerCase();
-                
+
                     geocoderComp.geocode({
                         'address': fulladdress
                     }, function (results, status) {
                         debugger;
                         if (status == google.maps.GeocoderStatus.OK) {
-                           // isMapVisible(true);
+                            // isMapVisible(true);
                             //if (isCodeAddressEdit() == false) {
                             //    selectedCompany().branchLocationLat(results[0].geometry.location.lat());
                             //    selectedCompany().branchLocationLong(results[0].geometry.location.lng());
@@ -1770,8 +1795,8 @@ getfreeCouponCount = function () {
                                 position: results[0].geometry.location
                             });
                             google.maps.event.addListener(compMap, 'click', function (event) {
-                              //  selectedCompany().branchLocationLat(event.latLng.lat());
-                             //   selectedCompany().branchLocationLong(event.latLng.lng());
+                                //  selectedCompany().branchLocationLat(event.latLng.lat());
+                                //   selectedCompany().branchLocationLong(event.latLng.lng());
                                 var geocoder = new google.maps.Geocoder();
                                 geocoder.geocode({
                                     "latLng": event.latLng
@@ -1795,12 +1820,12 @@ getfreeCouponCount = function () {
                                 infowindow.setContent(placeName);
                                 infowindow.open(map, marker);
                             }
-                         //   isCodeAddressEdit(false);
+                            //   isCodeAddressEdit(false);
 
 
                         } else {
                             toastr.error("Failed to Search Address,please add valid address and search it . Error: " + status);
-                           // isMapVisible(false);
+                            // isMapVisible(false);
 
                         }
                     });
@@ -2617,8 +2642,7 @@ getfreeCouponCount = function () {
 
 
                 },
-                MapInt = function ()
-                {
+                MapInt = function () {
                     //googleAddressMap();
                 },
                 // Initialize the view model
@@ -2648,7 +2672,7 @@ getfreeCouponCount = function () {
                     else {
                         CompanyCity('lahore');
                     }
-                    
+
                 };
                 return {
                     initialize: initialize,
@@ -2866,15 +2890,18 @@ getfreeCouponCount = function () {
                     FirstDealName: FirstDealName,
                     hasImpression: hasImpression,
                     RatedFigure: RatedFigure,
-                    
-                    CompanyCity:CompanyCity,
-                    AddressLine1:AddressLine1,
+
+                    CompanyCity: CompanyCity,
+                    AddressLine1: AddressLine1,
                     CompanyId: CompanyId,
-                    companystate:companystate,
+                    companystate: companystate,
                     companyzipcode: companyzipcode,
                     MapInt: MapInt,
                     CompanyAboutUs: CompanyAboutUs,
-                    CompanyTel1: CompanyTel1
+                    CompanyTel1: CompanyTel1,
+                    SearchSelectedStatus: SearchSelectedStatus,
+                    disableDolarCheckBoxes: disableDolarCheckBoxes,
+                    disablePercentageCheckBoxes: disablePercentageCheckBoxes
                 };
             })()
         };

@@ -96,7 +96,7 @@ define("survey/survey.viewModel",
                     pollQuestion1 = ko.observable(),
                     pollQuestion2 = ko.observable(),
                     pollQuestion3 = ko.observable(),
-                    qStatuses = ko.observableArray([{ id: 0, value: 'All' }, { id: 1, value: 'Draft' }, { id: 2, value: 'Submitted for Approval' }, { id: 3, value: 'Live' }, { id: 4, value: 'Paused' }, { id: 5, value: 'Completed' }, { id: 6, value: 'Rejected' }]);
+                    qStatuses = ko.observableArray([{ id: 0, value: 'All' }, { id: 1, value: 'Draft' }, { id: 2, value: 'Panding Approval' }, { id: 3, value: 'Live' }, { id: 4, value: 'Paused' },{ id: 6, value: 'Rejected' }]);
                 statusFilterValue = ko.observable();
                 // Advertiser Analytics 
                 GenderAnalyticsData = ko.observableArray([{ id: 0, name: "All" }, { id: 1, name: "male" }, { id: 2, name: "female" }]),
@@ -318,7 +318,7 @@ define("survey/survey.viewModel",
                     if (item.Status == 1) {
                         item.StatusValue = "Draft";
                     } else if (item.Status == 2) {
-                        item.StatusValue = "Submitted for Approval"; canSubmitForApproval(false);
+                        item.StatusValue = "Panding Approval"; canSubmitForApproval(false);
                     } else if (item.Status == 3) {
                         item.StatusValue = "Live"; canSubmitForApproval(false);
                     } else if (item.Status == 4) {

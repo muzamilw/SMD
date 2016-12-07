@@ -97,14 +97,23 @@ namespace SMD.Repository.Repositories
             {
                 int fromRow = (request.PageNo - 1) * request.PageSize;
                 int toRow = request.PageSize;
-                Expression<Func<Coupon, bool>> query =
-                    campaign =>
-                        (string.IsNullOrEmpty(request.SearchText) ||
-                         (campaign.CouponTitle.Contains(request.SearchText)))
-                         && (campaign.CompanyId == CompanyId || isAdmin) && campaign.Status != 7;
-
-
-              
+                Expression<Func<Coupon, bool>> query;
+                if(request.status==0)
+                {
+                    query =
+                        campaign =>
+                            (string.IsNullOrEmpty(request.SearchText) ||
+                             (campaign.CouponTitle.Contains(request.SearchText)))
+                             && (campaign.CompanyId == CompanyId || isAdmin) && campaign.Status != 7;
+                }
+                else{
+                    query =
+                        campaign =>
+                            (string.IsNullOrEmpty(request.SearchText) ||
+                             (campaign.CouponTitle.Contains(request.SearchText))) && (campaign.Status == 0 || campaign.Status == request.status)
+                             && (campaign.CompanyId == CompanyId || isAdmin) && campaign.Status != 7;
+                }
+                 
                 IEnumerable<Coupon> adCampaigns = null;
                 if (request.ShowCoupons != null && request.ShowCoupons == true)
                 {
