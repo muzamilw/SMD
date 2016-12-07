@@ -22,11 +22,11 @@ else
                     <li><a data-bind="click:$root.CloseCouponsView" class="my-navigator">Deal Promotion</a></li>
                 </ol>
                 <div class="clearfix  col-lg-9">
-                    <div class="col-lg-6" style="margin-left:-27px !important;">
+                    <div class="col-lg-9" style="margin-left:-27px !important;">
                         <img class="vid_image pull-left" src="/Images/StartImage.png">
                         <span class="pull-left " style="color:#fff!important; padding-left: 0px; margin-top:13px; font-size: 23px;" data-bind="text: $root.CouponTitle"></span><span class="pull-left " style="color:#fff!important; padding-left: 2px;padding-top:23px; font-size: 13px;" data-bind="text:$root.CouponsubTitle"></span>
                     </div>
-                    <div class="col-lg-3 pull-right" style="margin-right:-3px !important;">
+                    <div class="col-lg-3 pull-right" style="margin-right:-3px !important;display:none">
                         <div class="pull-right">
                             <div class="status_date_span" style="margin-top:25px;">
                                 Last modified <span style="margin-left:3px"></span><span>12 april 2014</span>
@@ -74,34 +74,34 @@ else
                             </div>
 
                             <br />
-                            <div style="width:90px;">
-                                <span data-bind="css: $root.previewScreenNumber() == 1 ? 'ads-selected-numbering-text' : '',click: $root.gotoScreen.bind(null,1)">Group Images</span>
+                            <div style="width:84px;text-align:center">
+                                <span style="text-align:center" data-bind="css: $root.previewScreenNumber() == 1 ? 'ads-selected-numbering-text' : '',click: $root.gotoScreen.bind(null,1)">Group Images</span>
                             </div>
                         </div>
                         <div class="pull-left ads-numbering-linebar" data-bind="css: $root.previewScreenNumber() == 6 ? 'ads-selected-numbering-box' : ''">
 
 
                         </div>
-                        <div class="pull-left ads-numbering-main">
+                        <div class="pull-left ads-numbering-main  text-center">
                             <div class="ads-numbering-box" data-bind="css: $root.previewScreenNumber() == 2 ? 'ads-selected-numbering-box' : '',click: $root.gotoScreen.bind(null,2)">
                                 2
                             </div>
 
                             <br />
-                            <div style="width:84px;">
-                                <span data-bind="css: $root.previewScreenNumber() == 2 ? 'ads-selected-numbering-text' : '',click: $root.gotoScreen.bind(null,2)">Deal Lines</span>
+                            <div style="width:64px;text-align:center">
+                                <span style="text-align:center" data-bind="css: $root.previewScreenNumber() == 2 ? 'ads-selected-numbering-text' : '',click: $root.gotoScreen.bind(null,2)">Deal Lines</span>
                             </div>
                         </div>
                         <div class="pull-left ads-numbering-linebar" data-bind="css: $root.previewScreenNumber() == 6 ? 'ads-selected-numbering-box' : ''">
 
                         </div>
-                        <div class="pull-left ads-numbering-main">
+                        <div class="pull-left ads-numbering-main text-center">
                             <div class="ads-numbering-box" data-bind="css: $root.previewScreenNumber() == 3 ? 'ads-selected-numbering-box' : '',click: $root.gotoScreen.bind(null,3)">
                                 3
                             </div>
 
                             <br />
-                            <span data-bind="css: $root.previewScreenNumber() == 3  ? 'ads-selected-numbering-text' : '',click: $root.gotoScreen.bind(null,3)">Keywords</span>
+                            <span stypeof="text-align:center" data-bind="css: $root.previewScreenNumber() == 3  ? 'ads-selected-numbering-text' : '',click: $root.gotoScreen.bind(null,3)">Keywords</span>
                         </div>
                         <div style="display:none;" class="pull-left ads-numbering-linebar" data-bind="css: $root.previewScreenNumber() == 6 ? 'ads-selected-numbering-box' : ''">
 
@@ -2081,6 +2081,15 @@ else
 
 
                 </div>
+
+                <div class="row">
+                    
+                        <div class="pull-left">
+                            <div class="status_date_span" style="margin-left:0px;margin-top:0px;">
+                                Last modified <span style="margin-left:3px"></span><span>12 april 2014</span>
+                            </div>
+                      </div>
+                </div>
             </div>
 
 
@@ -2283,7 +2292,7 @@ else
                 </div>
             </div>
 
-            <div class="row" style="padding-top:20px;">
+            <div class="row" style="padding-top:20px;" data-bind="visible:$root.couponModel().IsPerSaving3days">
                 <div class="col-lg-4" style="padding-right:0px;">
                     <div>
                         <label>
@@ -2292,22 +2301,22 @@ else
                     </div>
                 </div>
                 <div class="col-lg-2">
-                    <label class="pull-right" style="margin-top:5px;">
+                    <label class="pull-right" style="margin-top:5px;display:none">
                         Coupon Code
                     </label>
                 </div>
                 <div class="col-lg-2">
-                    <input class="form-control" />
+                    <input class="form-control" style="display:none" />
                 </div>
                 <div class="col-lg-2">
-                    <span> $60</span>
+                    <span>$</span><span data-bind="text:per20Saving"></span>
                 </div>
                 <div class="col-lg-2" style="margin-top:5px;">
-                    <span style="color:green">80 %</span>
+                    <span style="color:green" data-bind="text:per20Value"></span>
                 </div>
             </div>
 
-            <div class="row" style="padding-top:20px;">
+            <div class="row" style="padding-top:20px;" data-bind="visible:$root.couponModel().IsPerSaving2days">
                 <div class="col-lg-4" style="padding-right:0px;">
                     <div>
                         <label>
@@ -2316,22 +2325,22 @@ else
                     </div>
                 </div>
                 <div class="col-lg-2">
-                    <label class="pull-right" style="margin-top:5px;">
+                    <label class="pull-right" style="margin-top:5px;display:none">
                         Coupon Code
                     </label>
                 </div>
                 <div class="col-lg-2">
-                    <input class="form-control" />
+                    <input class="form-control" style="display:none" />
                 </div>
                 <div class="col-lg-2">
-                    <span> $60</span>
+                    <span>$</span><span data-bind="text:per25Saving"></span>
                 </div>
                 <div class="col-lg-2" style="margin-top:5px;">
-                    <span style="color:green">85 %</span>
+                    <span style="color:green" data-bind="text:per25Value"></span>
                 </div>
             </div>
 
-            <div class="row" style="padding-top:20px;">
+            <div class="row" style="padding-top:20px;" data-bind="visible:$root.couponModel().IsPerSavingLastday">
                 <div class="col-lg-4" style="padding-right:0px;">
                     <div>
                         <label>
@@ -2340,28 +2349,28 @@ else
                     </div>
                 </div>
                 <div class="col-lg-2">
-                    <label class="pull-right" style="margin-top:5px;">
+                    <label class="pull-right" style="margin-top:5px;display:none">
                         Coupon Code
                     </label>
                 </div>
                 <div class="col-lg-2">
-                    <input class="form-control" />
+                    <input class="form-control" style="display:none" />
                 </div>
                 <div class="col-lg-2">
-                    <span> $60</span>
+                    <span>$</span><span data-bind="text:per30Saving"></span>
                 </div>
                 <div class="col-lg-2" style="margin-top:5px;">
-                    <span style="color:green">90 %</span>
+                    <span style="color:green" data-bind="text:per30Value"></span>
                 </div>
             </div>
 
-            <div class="row" style="padding-top:20px;">
+            @*<div class="row" style="padding-top:20px;">
                 <div class="col-lg-12 text-center">
                     <label class="text-center">OR</label>
                 </div>
-            </div>
+            </div>*@
 
-            <div class="row" style="padding-top:20px;">
+            <div class="row" style="padding-top:20px;" data-bind="visible:$root.couponModel().IsDollarSaving3days">
                 <div class="col-lg-4" style="padding-right:0px;">
                     <div>
                         <label>
@@ -2370,22 +2379,22 @@ else
                     </div>
                 </div>
                 <div class="col-lg-2">
-                    <label class="pull-right" style="margin-top:5px;">
+                    <label class="pull-right" style="margin-top:5px;display:none">
                         Coupon Code
                     </label>
                 </div>
                 <div class="col-lg-2">
-                    <input class="form-control" />
+                    <input class="form-control" style="display:none" />
                 </div>
                 <div class="col-lg-2">
-                    <span> $60</span>
+                    <span>$</span><span data-bind="text:dollar10Value"></span>
                 </div>
                 <div class="col-lg-2" style="margin-top:5px;">
-                    <span style="color:green">59 %</span>
+                    <span style="color:green" data-bind="text:dollar10perSaving"></span>
                 </div>
             </div>
 
-            <div class="row" style="padding-top:20px;">
+            <div class="row" style="padding-top:20px;" data-bind="visible:$root.couponModel().IsDollarSaving2days">
                 <div class="col-lg-4" style="padding-right:0px;">
                     <div>
                         <label>
@@ -2394,22 +2403,22 @@ else
                     </div>
                 </div>
                 <div class="col-lg-2">
-                    <label class="pull-right" style="margin-top:5px;">
+                    <label class="pull-right" style="margin-top:5px;display:none">
                         Coupon Code
                     </label>
                 </div>
                 <div class="col-lg-2">
-                    <input class="form-control" />
+                    <input class="form-control" style="display:none" />
                 </div>
                 <div class="col-lg-2">
-                    <span> $60</span>
+                    <span>$</span><span data-bind="text:dollar20Value"></span>
                 </div>
                 <div class="col-lg-2" style="margin-top:5px;">
-                    <span style="color:green">63 %</span>
+                    <span style="color:green" data-bind="text:dollar20perSaving"></span>
                 </div>
             </div>
 
-            <div class="row" style="padding-top:20px;">
+            <div class="row" style="padding-top:20px;" data-bind="visible:$root.couponModel().IsDollarSavingLastday">
                 <div class="col-lg-4" style="padding-right:0px;">
                     <div>
                         <label>
@@ -2418,18 +2427,18 @@ else
                     </div>
                 </div>
                 <div class="col-lg-2">
-                    <label class="pull-right" style="margin-top:5px;">
+                    <label class="pull-right" style="margin-top:5px;display:none">
                         Coupon Code
                     </label>
                 </div>
                 <div class="col-lg-2">
-                    <input class="form-control" />
+                    <input class="form-control" style="display:none" />
                 </div>
                 <div class="col-lg-2">
-                    <span> $60</span>
+                    <span>$</span><span data-bind="text:dollar30Value"></span>
                 </div>
                 <div class="col-lg-2" style="margin-top:5px;">
-                    <span style="color:green">68 %</span>
+                    <span style="color:green" data-bind="text:dollar30perSaving"></span>
                 </div>
             </div>
 

@@ -161,7 +161,7 @@ define("Coupons/Coupons.viewModel",
                 selectedCTGenderAnalytics = ko.observable(0),
                 selectedCTAgeAnalytics = ko.observable(0),
                 DDCTStatsAnalytics = ko.observable(),
-
+                SearchSelectedStatus = ko.observable();
                 dealExpirydate = ko.observable(),
                 Banner2Flag = ko.observable(false),
                 Banner3Flag = ko.observable(false),
@@ -446,6 +446,7 @@ define("Coupons/Coupons.viewModel",
                 PageSize: pager().pageSize(),
                 PageNo: pager().currentPage(),
                 SearchText: searchFilterValue(),
+                status: SearchSelectedStatus(),
                 ShowCoupons: true
             }, {
                 success: function (data) {
@@ -2874,7 +2875,8 @@ getfreeCouponCount = function () {
                     companyzipcode: companyzipcode,
                     MapInt: MapInt,
                     CompanyAboutUs: CompanyAboutUs,
-                    CompanyTel1: CompanyTel1
+                    CompanyTel1: CompanyTel1,
+                    SearchSelectedStatus: SearchSelectedStatus
                 };
             })()
         };
