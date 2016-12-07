@@ -1292,24 +1292,10 @@ namespace SMD.Implementation.Services
         }
 
 
-        public void SendNewDealsEmail()
+        public void SendNewDealsEmail(int mode)
         {
 
-            var data = couponRepository.GetUsersCouponsForEmailNotification(1);//new deals for today
-
-            ////var results = (from r in data
-            ////               group r by r.UserId into resultsSet
-            ////               orderby resultsSet.Key
-                          
-            ////               select new
-            ////               {
-            ////                   AlbumTitle = resultsSet.,
-            ////                   TagName = resultsSet.Key.Name,
-            ////                   TagCount = resultsSet.Count()
-            ////               }
-
-
-    //);
+            var data = couponRepository.GetUsersCouponsForEmailNotification(mode);//new deals for today
 
             string userDeals = string.Empty;
 
@@ -1331,8 +1317,22 @@ namespace SMD.Implementation.Services
            
 
                 MMailto.Add(user.Key.Email);
-                Mid = (int)EmailTypes.NewCouponsNearMe;
-                
+                if ( mode == 1)
+                    Mid = (int)EmailTypes.NewCouponsNearMe;
+                else if (mode == 2)
+                    Mid = (int)EmailTypes.Last3DaysPercentageCouponsNearMe;
+                else if (mode == 3)
+                    Mid = (int)EmailTypes.Last2DaysPercentageCouponsNearMe;
+                else if (mode == 4)
+                    Mid = (int)EmailTypes.LastDayPercentageCouponsNearMe;
+                else if (mode == 5)
+                    Mid = (int)EmailTypes.Last3DaysDollarDiscountCouponsNearMe;
+                else if (mode == 6)
+                    Mid = (int)EmailTypes.Last2DaysDollarDiscountCouponsNearMe;
+                else if (mode == 7)
+                    Mid = (int)EmailTypes.LastDayDollarDiscountCouponsNearMe;
+
+
                 Muser = user.Key.FullName;
                 UserDealsHTML = userDeals;
                
