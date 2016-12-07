@@ -1308,7 +1308,9 @@ namespace SMD.Implementation.Services
                 
                     foreach (var item in user)
                     {
-                        userDeals += "<tr><td <img style='max-width:560px' src='" + item.couponimage1 + "'/> </td></tr><tr><td align=\"center\" style='text-align:center;padding-bottom:60px;'><p style=\"style=color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;\">" + item.CouponTitle + "</p></td></tr>";
+                        userDeals += "<tr><td colspan='2' align=\"center\"><img style='text-align:center;max-width:560px' src='" + item.couponimage1 + "'/></td></tr>";
+                        userDeals += "<tr><td colspan='2' align=\"center\" style='text-align:center;padding-bottom:10px;'><p style=\"style=color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;\">" + item.CouponTitle  + " <span style='color:red'>" +item.CurrencySymbol + "" + item.SavingsNew + "</span></p></td></tr>";
+                        userDeals += "<tr><td style='padding-left:64px;padding-bottom:60px'><p style=\"style=color:red; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;\">was " + item.CurrencySymbol + "" + item.price + "</p></td><td align='right' style='padding-right:60px'><a href='http://deals.cash4ads.com/deal/" + item.CouponId + "' style=\"background-color:#6DC6DD; border-collapse:separate; border-top:20px solid #6DC6DD; border-right:40px solid #6DC6DD; border-bottom:20px solid #6DC6DD; border-left:40px solid #6DC6DD; border-radius:3px; color:#FFFFFF; display:inline-block; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:600; letter-spacing:.3px; text-decoration:none;\" target='_blank'>VIEW DEAL</a></td></tr>";
                     }
 
 
