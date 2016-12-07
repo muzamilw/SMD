@@ -17,7 +17,7 @@ define("Coupons/Coupons.viewModel",
                     EditorLoading = ko.observable(false),
                     ISshowPhone = ko.observable(false),
                     IsnewCoupon = ko.observable(false),
-                    RatedFigure = ko.observable(3),
+                    RatedFigure = ko.observable(2),
                     mCurrencyCode = ko.observable(),
                     CompanyAboutUs = ko.observable(),
                     CompanyTel1 = ko.observable(),
@@ -161,7 +161,7 @@ define("Coupons/Coupons.viewModel",
                 selectedCTGenderAnalytics = ko.observable(0),
                 selectedCTAgeAnalytics = ko.observable(0),
                 DDCTStatsAnalytics = ko.observable(),
-
+                SearchSelectedStatus = ko.observable();
                 dealExpirydate = ko.observable(),
                 Banner2Flag = ko.observable(false),
                 Banner3Flag = ko.observable(false),
@@ -446,6 +446,7 @@ define("Coupons/Coupons.viewModel",
                 PageSize: pager().pageSize(),
                 PageNo: pager().currentPage(),
                 SearchText: searchFilterValue(),
+                status: SearchSelectedStatus(),
                 ShowCoupons: true
             }, {
                 success: function (data) {
@@ -609,7 +610,7 @@ getfreeCouponCount = function () {
             IsnewCoupon(true);
             CouponsubTitle("(Deals)");
             //$("#rating_id").val(4);
-            RatedFigure(4);
+            RatedFigure(2);
             $("#btnCancel").css("display", "block");
             $(".hideInCoupons").css("display", "none");
 
@@ -2874,7 +2875,8 @@ getfreeCouponCount = function () {
                     companyzipcode: companyzipcode,
                     MapInt: MapInt,
                     CompanyAboutUs: CompanyAboutUs,
-                    CompanyTel1: CompanyTel1
+                    CompanyTel1: CompanyTel1,
+                    SearchSelectedStatus: SearchSelectedStatus
                 };
             })()
         };

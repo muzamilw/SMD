@@ -429,8 +429,13 @@ else
                             <div class="clearfix"></div>
                         </div>
                         <div class="col-sm-2 filterbloclkspos" style="float:left;">
-                            <select class="form-control" style="float:right;height:36px;" data-bind="visible:$root.isCouponSearch()==false">
-                                <option value="0">All Value</option>
+                            <select class="form-control" style="float:right;height:36px;" data-bind="value : $root.SearchSelectedStatus, event:{ change: $root.getCampaignByFilter},visible:$root.isCouponSearch()==false">
+                                <option value="0">All</option>
+                                <option value="1">Draft</option>
+                                <option value="2">Panding Approval</option>
+                                <option value="3">Live</option>
+                                <option value="4">Pause</option>
+                                <option value="6">Rejected</option>
                             </select>
                         </div>
                         <div data-bind="visible:$root.islblText()==true">
