@@ -747,7 +747,7 @@ else
                                     <div class="col-lg-6">
                                         <div class="row">
                                             <div class="checkbox-nice ">
-                                                <input type="checkbox" name="chkpo3day" value="1" id="chkp3day" data-bind="checked:IsPerSaving3days">
+                                                <input type="checkbox" name="chkpo3day" value="1" id="chkp3day" data-bind="checked:IsPerSaving3days,disable:$root.disablePercentageCheckBoxes">
                                                 <label for="chkp3day">
                                                     further 20 % Saving on last 3 days
                                                 </label>
@@ -755,7 +755,7 @@ else
                                         </div>
                                         <div class="row">
                                             <div class="checkbox-nice ">
-                                                <input type="checkbox" name="chkpo2day" value="1" id="chkp2day" data-bind="checked:IsPerSaving2days">
+                                                <input type="checkbox" name="chkpo2day" value="1" id="chkp2day" data-bind="checked:IsPerSaving2days,disable:$root.disablePercentageCheckBoxes">
                                                 <label for="chkp2day">
                                                     further 25 % Saving on last 2 days
                                                 </label>
@@ -763,7 +763,7 @@ else
                                         </div>
                                         <div class="row">
                                             <div class="checkbox-nice ">
-                                                <input type="checkbox" name="chkpolday" value="1" id="chkplday" data-bind="checked:IsPerSavingLastday">
+                                                <input type="checkbox" name="chkpolday" value="1" id="chkplday" data-bind="checked:IsPerSavingLastday,disable:$root.disablePercentageCheckBoxes">
                                                 <label for="chkplday">
                                                     further 30 % Saving on last day
                                                 </label>
@@ -774,7 +774,7 @@ else
                                     <div class="col-lg-6">
                                         <div class="row">
                                             <div class="checkbox-nice ">
-                                                <input type="checkbox" name="chkD3day" value="1" id="chkD3day" data-bind="checked:IsDollarSaving3days">
+                                                <input type="checkbox" name="chkD3day" value="1" id="chkD3day" data-bind="checked:IsDollarSaving3days,disable :$root.disableDolarCheckBoxes">
                                                 <label for="chkD3day">
                                                     further $10 Saving on last 3 days
                                                 </label>
@@ -782,7 +782,7 @@ else
                                         </div>
                                         <div class="row">
                                             <div class="checkbox-nice ">
-                                                <input type="checkbox" name="chkD2day" value="1" id="chkD2day" data-bind="checked:IsDollarSaving2days">
+                                                <input type="checkbox" name="chkD2day" value="1" id="chkD2day" data-bind="checked:IsDollarSaving2days,disable :$root.disableDolarCheckBoxes">
                                                 <label for="chkD2day">
                                                     further $20 Saving on last 2 days
                                                 </label>
@@ -790,7 +790,7 @@ else
                                         </div>
                                         <div class="row">
                                             <div class="checkbox-nice ">
-                                                <input type="checkbox" name="chkDlday" value="1" id="chkDlday" data-bind="checked:IsDollarSavingLastday">
+                                                <input type="checkbox" name="chkDlday" value="1" id="chkDlday" data-bind="checked:IsDollarSavingLastday,disable :$root.disableDolarCheckBoxes">
                                                 <label for="chkDlday">
                                                     further $30 Saving on last days
                                                 </label>
