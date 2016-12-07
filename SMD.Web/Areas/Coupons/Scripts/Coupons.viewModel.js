@@ -17,7 +17,7 @@ define("Coupons/Coupons.viewModel",
                     EditorLoading = ko.observable(false),
                     ISshowPhone = ko.observable(false),
                     IsnewCoupon = ko.observable(false),
-                    RatedFigure = ko.observable(3),
+                    RatedFigure = ko.observable(2),
                     mCurrencyCode = ko.observable(),
                     CompanyAboutUs = ko.observable(),
                     CompanyTel1 = ko.observable(),
@@ -609,7 +609,7 @@ getfreeCouponCount = function () {
             IsnewCoupon(true);
             CouponsubTitle("(Deals)");
             //$("#rating_id").val(4);
-            RatedFigure(4);
+            RatedFigure(2);
             $("#btnCancel").css("display", "block");
             $(".hideInCoupons").css("display", "none");
 

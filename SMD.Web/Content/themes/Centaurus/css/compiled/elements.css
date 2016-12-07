@@ -5376,11 +5376,10 @@ color:red !important;
     margin-bottom: 10px;
 }
 .modify_btn {
-        width: 100%;
-   
+    width: 100%;
     background-color: #262626;
     border-color: #262626;
-    height: 45px;
+    height: 46px;
     color: white;
 }
 .preview_video {
@@ -5528,9 +5527,9 @@ color:red !important;
     font-size: 16px
 }
 .preview_close {
-        position: absolute;
-    right: -1px;
-    top:-3px;
+      position: absolute;
+    right: 30px;
+    top: 50px;
     cursor: pointer;
 }
 .ads-numbering-main {
@@ -5615,7 +5614,7 @@ color:red !important;
 }
 .skip_btn_panel {
  background-color: #1d7bbb;
-    height: 320px;
+    height:319px;
     width: 100%;
     border-radius: 9px;
     text-align: center;
@@ -5657,7 +5656,7 @@ color:red !important;
 }
 .polls_image_cont {
     margin-top:18px;
-    padding: 0px 10px 0px 10px;
+    padding: 0px 5px 0px 5px;
 }
 .polls_images {
        height: 229px;
@@ -5786,8 +5785,6 @@ background-image: url(/Images/crowdcentz_logo.png) !important;
 .mobile_background {
    background-color: white;
     height: 448px;
-    overflow-y: scroll;
-    overflow-x: hidden;
 }
 .preview_screen_video {
     width: 81px;
@@ -5918,7 +5915,7 @@ background-image: url(/Images/crowdcentz_logo.png) !important;
 .rating_divs {
     height: 37px;
     text-align: center;
-    padding-left: 40px;
+    padding-left:69px;
     padding-top: 8px;
     border-bottom: 1px solid grey;
 }
