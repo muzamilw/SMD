@@ -49,6 +49,9 @@ namespace SMD.Repository.Repositories
 
             var result = new CouponRatingReviewOverallResponse { CouponId = CouponId, OverAllStarRating = db.CouponRatingReview.Where(r => r.CouponId == CouponId).Average(r => r.StarRating) };
 
+
+            result.OverAllStarRating += 5;
+
             if (result.OverAllStarRating.HasValue == false)
                 result.OverAllStarRating = 0;
 

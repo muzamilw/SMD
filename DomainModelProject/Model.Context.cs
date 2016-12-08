@@ -769,5 +769,10 @@ namespace DomainModelProject
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUsersCouponsForEmailNotification_Result>("GetUsersCouponsForEmailNotification", modeParameter);
         }
+    
+        public virtual ObjectResult<GetCampaignPerformanceWeeklyStats_Result> GetCampaignPerformanceWeeklyStats()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCampaignPerformanceWeeklyStats_Result>("GetCampaignPerformanceWeeklyStats");
+        }
     }
 }

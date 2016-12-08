@@ -6231,6 +6231,16 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="Int32" Name="clickThroughsYesterday" Nullable="true" />
           <Property Type="Int32" Name="clickThroughsAllTime" Nullable="true" />
           <Property Type="Int32" Name="priority" Nullable="true" />
+          <Property Type="String" Name="ImagePath" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="VerifyQuestion" Nullable="true" MaxLength="500" />
+          <Property Type="DateTime" Name="ModifiedDateTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Answer1" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Answer2" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Answer3" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="SurveyAnsweredAllTime" Nullable="true" />
+          <Property Type="Int32" Name="Answer1Stats" Nullable="true" />
+          <Property Type="Int32" Name="Answer2Stats" Nullable="true" />
+          <Property Type="Int32" Name="Answer3Stats" Nullable="true" />
         </ComplexType>
         <EntityType Name="DamImage">
           <Key>
@@ -8868,6 +8878,16 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
                 <ScalarProperty Name="clickThroughsYesterday" ColumnName="clickThroughsYesterday" />
                 <ScalarProperty Name="clickThroughsAllTime" ColumnName="clickThroughsAllTime" />
                 <ScalarProperty Name="priority" ColumnName="priority" />
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+                <ScalarProperty Name="VerifyQuestion" ColumnName="VerifyQuestion" />
+                <ScalarProperty Name="ModifiedDateTime" ColumnName="ModifiedDateTime" />
+                <ScalarProperty Name="Answer1" ColumnName="Answer1" />
+                <ScalarProperty Name="Answer2" ColumnName="Answer2" />
+                <ScalarProperty Name="Answer3" ColumnName="Answer3" />
+                <ScalarProperty Name="SurveyAnsweredAllTime" ColumnName="SurveyAnsweredAllTime" />
+                <ScalarProperty Name="Answer1Stats" ColumnName="Answer1Stats" />
+                <ScalarProperty Name="Answer2Stats" ColumnName="Answer2Stats" />
+                <ScalarProperty Name="Answer3Stats" ColumnName="Answer3Stats" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
