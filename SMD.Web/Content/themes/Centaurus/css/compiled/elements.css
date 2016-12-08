@@ -5919,3 +5919,6 @@ background-image: url(/Images/crowdcentz_logo.png) !important;
     padding-top: 8px;
     border-bottom: 1px solid grey;
 }
+.lbldisable{
+        color:lightgray;
+    }

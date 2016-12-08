@@ -618,24 +618,24 @@ else
                                         <div class="col-lg-6">
                                             <div class="row">
                                                 <div class="checkbox-nice ">
-                                                    <input type="checkbox" name="chkpo3day" value="1" id="chkp3day" data-bind="checked:IsPerSaving3days">
-                                                    <label for="chkp3day">
+                                                    <input type="checkbox" name="chkpo3day" value="1" id="chkp3day" data-bind="checked:IsPerSaving3days,disable:$root.disablePercentageCheckBoxes">
+                                                    <label for="chkp3day" data-bind="css:{lbldisable:$root.disablePercentageCheckBoxes}">
                                                         further 20 % Saving on last 3 days
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="checkbox-nice ">
-                                                    <input type="checkbox" name="chkpo2day" value="1" id="chkp2day" data-bind="checked:IsPerSaving2days">
-                                                    <label for="chkp2day">
+                                                    <input type="checkbox" name="chkpo2day" value="1" id="chkp2day" data-bind="checked:IsPerSaving2days,disable:$root.disablePercentageCheckBoxes">
+                                                    <label for="chkp2day" data-bind="css:{lbldisable:$root.disablePercentageCheckBoxes}">
                                                         further 25 % Saving on last 2 days
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="checkbox-nice ">
-                                                    <input type="checkbox" name="chkpolday" value="1" id="chkplday" data-bind="checked:IsPerSavingLastday">
-                                                    <label for="chkplday">
+                                                    <input type="checkbox" name="chkpolday" value="1" id="chkplday" data-bind="checked:IsPerSavingLastday,disable:$root.disablePercentageCheckBoxes">
+                                                    <label for="chkplday" data-bind="css:{lbldisable:$root.disablePercentageCheckBoxes}">
                                                         further 30 % Saving on last day
                                                     </label>
                                                 </div>
@@ -645,24 +645,24 @@ else
                                         <div class="col-lg-6">
                                             <div class="row">
                                                 <div class="checkbox-nice ">
-                                                    <input type="checkbox" name="chkD3day" value="1" id="chkD3day" data-bind="checked:IsDollarSaving3days">
-                                                    <label for="chkD3day">
+                                                    <input type="checkbox" name="chkD3day" value="1" id="chkD3day" data-bind="checked:IsDollarSaving3days,disable:$root.disableDolarCheckBoxes">
+                                                    <label for="chkD3day" data-bind="css:{lbldisable:$root.disableDolarCheckBoxes}">
                                                         further $10 Saving on last 3 days
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="checkbox-nice ">
-                                                    <input type="checkbox" name="chkD2day" value="1" id="chkD2day" data-bind="checked:IsDollarSaving2days">
-                                                    <label for="chkD2day">
+                                                    <input type="checkbox" name="chkD2day" value="1" id="chkD2day" data-bind="checked:IsDollarSaving2days,disable:$root.disableDolarCheckBoxes">
+                                                    <label for="chkD2day" data-bind="css:{lbldisable:$root.disableDolarCheckBoxes}">
                                                         further $20 Saving on last 2 days
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="checkbox-nice ">
-                                                    <input type="checkbox" name="chkDlday" value="1" id="chkDlday" data-bind="checked:IsDollarSavingLastday">
-                                                    <label for="chkDlday">
+                                                    <input type="checkbox" name="chkDlday" value="1" id="chkDlday" data-bind="checked:IsDollarSavingLastday,disable:$root.disableDolarCheckBoxes">
+                                                    <label for="chkDlday" data-bind="css:{lbldisable:$root.disableDolarCheckBoxes}">
                                                         further $30 Saving on last days
                                                     </label>
                                                 </div>
@@ -685,7 +685,7 @@ else
                                                 <label style="color:gray;font-size:13px;">The first Deal Line will be used in all Notification &Emails</label>
                                             </div>
                                             <div class=" col-lg-4" style="padding-left:83px;padding-bottom :20px;">
-                                                <button class="btn  btn-success" id="saveBtn" style="width:160px;" data-bind="click: $root.onCreatePriceOption">Add Deal Lines</button>
+                                                <a class="btn  btn-success" id="saveBtn" style="width:160px;" data-bind="click: $root.onCreatePriceOption">Add Deal Lines</a>
                                             </div>
                                         </div>
                                         @*<div class="adsubHeading Theme_standard_clr" data-bind="visible: $root.previewScreenNumber() == 2">
