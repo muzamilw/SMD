@@ -661,6 +661,7 @@ getfreeCouponCount = function () {
 
         closeNewCampaignDialog = function () {
             //if (couponModel().hasChanges() && (couponModel().Status() == null || couponModel().Status() == 1)) {
+            
             confirmation.messageText("Do you want to save changes?");
             confirmation.afterProceed(function () {
                 saveCampaignData();
@@ -1775,7 +1776,13 @@ getfreeCouponCount = function () {
                 setCompanyAddress = function () {
                     debugger;
                     //var fulladdress = AddressLine1().toLowerCase() + ' ' + CompanyCity() + ' ' + companyzipcode() + ' ' + companystate().toLowerCase();
-                    var fulladdress = AddressLine1().toLowerCase() + ' ' + CompanyCity() + ' ' + companyzipcode() + ' ' + companystate().toLowerCase();
+                    var fulladdress = null;
+                    if (AddressLine1() != null) {
+                        fulladdress = AddressLine1().toLowerCase() + ' ' + CompanyCity() + ' ' + companyzipcode() + ' ' + companystate().toLowerCase();
+                    } else {
+
+                    }
+                  
 
                     geocoderComp.geocode({
                         'address': fulladdress
@@ -2559,7 +2566,8 @@ getfreeCouponCount = function () {
                     SelectedTextField(Fieldvalue);
                 },
                 CloseCouponsView = function () {
-
+                    
+                    $(".no_btn_confirm").removeAttr('disabled');
                     if (couponModel().CouponhasChanges()) {
 
                         confirmation.messageText("Do you want to save changes?");
@@ -2589,7 +2597,7 @@ getfreeCouponCount = function () {
                     $(".closecls").css("display", "block");
 
 
-
+                 
                     isEditorVisible(false);
                     CloseCouponsAnalyticView();
                     if (isFromEdit() == true) {

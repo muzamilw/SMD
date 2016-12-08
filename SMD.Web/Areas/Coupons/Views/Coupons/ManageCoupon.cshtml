@@ -618,7 +618,7 @@ else
                                         <div class="col-lg-6">
                                             <div class="row">
                                                 <div class="checkbox-nice ">
-                                                <input type="checkbox" name="chkpo3day" value="1" id="chkp3day" data-bind="checked:IsPerSaving3days,disable:$root.disablePercentageCheckBoxes">
+                                                    <input type="checkbox" name="chkpo3day" value="1" id="chkp3day" data-bind="checked:IsPerSaving3days">
                                                     <label for="chkp3day">
                                                         further 20 % Saving on last 3 days
                                                     </label>
@@ -626,7 +626,7 @@ else
                                             </div>
                                             <div class="row">
                                                 <div class="checkbox-nice ">
-                                                <input type="checkbox" name="chkpo2day" value="1" id="chkp2day" data-bind="checked:IsPerSaving2days,disable:$root.disablePercentageCheckBoxes">
+                                                    <input type="checkbox" name="chkpo2day" value="1" id="chkp2day" data-bind="checked:IsPerSaving2days">
                                                     <label for="chkp2day">
                                                         further 25 % Saving on last 2 days
                                                     </label>
@@ -634,7 +634,7 @@ else
                                             </div>
                                             <div class="row">
                                                 <div class="checkbox-nice ">
-                                                <input type="checkbox" name="chkpolday" value="1" id="chkplday" data-bind="checked:IsPerSavingLastday,disable:$root.disablePercentageCheckBoxes">
+                                                    <input type="checkbox" name="chkpolday" value="1" id="chkplday" data-bind="checked:IsPerSavingLastday">
                                                     <label for="chkplday">
                                                         further 30 % Saving on last day
                                                     </label>
@@ -645,7 +645,7 @@ else
                                         <div class="col-lg-6">
                                             <div class="row">
                                                 <div class="checkbox-nice ">
-                                                <input type="checkbox" name="chkD3day" value="1" id="chkD3day" data-bind="checked:IsDollarSaving3days,disable :$root.disableDolarCheckBoxes">
+                                                    <input type="checkbox" name="chkD3day" value="1" id="chkD3day" data-bind="checked:IsDollarSaving3days">
                                                     <label for="chkD3day">
                                                         further $10 Saving on last 3 days
                                                     </label>
@@ -653,7 +653,7 @@ else
                                             </div>
                                             <div class="row">
                                                 <div class="checkbox-nice ">
-                                                <input type="checkbox" name="chkD2day" value="1" id="chkD2day" data-bind="checked:IsDollarSaving2days,disable :$root.disableDolarCheckBoxes">
+                                                    <input type="checkbox" name="chkD2day" value="1" id="chkD2day" data-bind="checked:IsDollarSaving2days">
                                                     <label for="chkD2day">
                                                         further $20 Saving on last 2 days
                                                     </label>
@@ -661,7 +661,7 @@ else
                                             </div>
                                             <div class="row">
                                                 <div class="checkbox-nice ">
-                                                <input type="checkbox" name="chkDlday" value="1" id="chkDlday" data-bind="checked:IsDollarSavingLastday,disable :$root.disableDolarCheckBoxes">
+                                                    <input type="checkbox" name="chkDlday" value="1" id="chkDlday" data-bind="checked:IsDollarSavingLastday">
                                                     <label for="chkDlday">
                                                         further $30 Saving on last days
                                                     </label>
@@ -696,6 +696,7 @@ else
                     </div>*@
 
                                     </div>
+
                                     <div class="col-lg-12 borderPanel " style="margin-bottom:20px;">
                                         <!-- ko template: { name: 'dealLinesTemplate' } -->
                                         <!-- /ko -->
@@ -971,7 +972,6 @@ else
                                                             <div class="pull-left" style="padding-left:44px;padding-top:18px;">
                                                                 <i class="fa fa-phone" aria-hidden="true" style="font-size:16px;color:#53b6e0"></i>
                                                                 <div id="cellno" style="font-size:10px;color:black;margin-left:-17px;margin-top: 4px;" data-bind="text:$root.CompanyTel1()"></div>
-
                                                             </div>
                                                             <div class="pull-right" style="padding-right:44px;padding-top:18px;">
                                                                 <i class="fa fa-chevron-circle-right" aria-hidden="true" style="font-size:16px;color:#53b6e0"></i>
