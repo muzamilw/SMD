@@ -92,6 +92,7 @@
     <None Include="GetSharedSurveyQuestion.sql" />
     <None Include="GetSharedSurveyQuestionsByUserId.sql" />
     <None Include="GetUsersCouponsForEmailNotification.sql" />
+    <None Include="SearchCampaigns.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="getCampaignsByStatus.sql" />

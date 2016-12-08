@@ -229,6 +229,8 @@ else
         <td class="col-sm-3">
             <a href="#" class="store-user-link" data-bind="text: CampaignName() ,click:$root.onEditCampaign"></a>
             <br />
+            <img style="width:150px;height:150px;" data-bind="attr: { src:  ImagePath()   }">
+            <br />
             <span style="color:darkgray;font-size:11px;" data-bind="text:  ApprovalDateTime() ? 'Start Date : ' +  ApprovalDateTime() : 'Not Started'"></span>
         </td>
         @*<td class="col-sm-1">
