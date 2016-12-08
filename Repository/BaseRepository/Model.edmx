@@ -2679,6 +2679,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Parameter Name="Profession" Type="nvarchar" Mode="In" />
           <Parameter Name="city" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="GetCampaignPerformanceWeeklyStats" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="getCampaignROItblAnalytic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="int" Mode="In" />
         </Function>
@@ -4305,6 +4306,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <FunctionImport Name="GetUsersCouponsForEmailNotification" ReturnType="Collection(DomainModels.GetUsersCouponsForEmailNotification_Result)">
           <Parameter Name="mode" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="GetCampaignPerformanceWeeklyStats" ReturnType="Collection(DomainModels.GetCampaignPerformanceWeeklyStats_Result)" />
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -6231,6 +6233,16 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="Int32" Name="clickThroughsYesterday" Nullable="true" />
           <Property Type="Int32" Name="clickThroughsAllTime" Nullable="true" />
           <Property Type="Int32" Name="priority" Nullable="true" />
+          <Property Type="String" Name="ImagePath" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="VerifyQuestion" Nullable="true" MaxLength="500" />
+          <Property Type="DateTime" Name="ModifiedDateTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Answer1" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Answer2" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Answer3" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="SurveyAnsweredAllTime" Nullable="true" />
+          <Property Type="Int32" Name="Answer1Stats" Nullable="true" />
+          <Property Type="Int32" Name="Answer2Stats" Nullable="true" />
+          <Property Type="Int32" Name="Answer3Stats" Nullable="true" />
         </ComplexType>
         <EntityType Name="DamImage">
           <Key>
@@ -7802,6 +7814,18 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="String" Name="LocationCity" Nullable="true" MaxLength="500" />
           <Property Type="String" Name="CurrencySymbol" Nullable="true" MaxLength="50" />
         </ComplexType>
+        <ComplexType Name="GetCampaignPerformanceWeeklyStats_Result">
+          <Property Type="String" Name="userid" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="companyid" Nullable="true" />
+          <Property Type="Int32" Name="type" Nullable="true" />
+          <Property Type="Int64" Name="campaignid" Nullable="false" />
+          <Property Type="String" Name="CampaignName" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="ClickThroughsLastWeek" Nullable="true" />
+          <Property Type="Int32" Name="ClickThroughsPreviousWeek" Nullable="true" />
+          <Property Type="Int32" Name="ProgressPercentage" Nullable="true" />
+          <Property Type="Int32" Name="AnsweredLastWeek" Nullable="true" />
+          <Property Type="Int32" Name="AnsweredPreviousWeek" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -8868,6 +8892,16 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
                 <ScalarProperty Name="clickThroughsYesterday" ColumnName="clickThroughsYesterday" />
                 <ScalarProperty Name="clickThroughsAllTime" ColumnName="clickThroughsAllTime" />
                 <ScalarProperty Name="priority" ColumnName="priority" />
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+                <ScalarProperty Name="VerifyQuestion" ColumnName="VerifyQuestion" />
+                <ScalarProperty Name="ModifiedDateTime" ColumnName="ModifiedDateTime" />
+                <ScalarProperty Name="Answer1" ColumnName="Answer1" />
+                <ScalarProperty Name="Answer2" ColumnName="Answer2" />
+                <ScalarProperty Name="Answer3" ColumnName="Answer3" />
+                <ScalarProperty Name="SurveyAnsweredAllTime" ColumnName="SurveyAnsweredAllTime" />
+                <ScalarProperty Name="Answer1Stats" ColumnName="Answer1Stats" />
+                <ScalarProperty Name="Answer2Stats" ColumnName="Answer2Stats" />
+                <ScalarProperty Name="Answer3Stats" ColumnName="Answer3Stats" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -9921,6 +9955,22 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
                 <ScalarProperty Name="SavingsNew" ColumnName="SavingsNew" />
                 <ScalarProperty Name="LocationCity" ColumnName="LocationCity" />
                 <ScalarProperty Name="CurrencySymbol" ColumnName="CurrencySymbol" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetCampaignPerformanceWeeklyStats" FunctionName="SMDModel.Store.GetCampaignPerformanceWeeklyStats">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.GetCampaignPerformanceWeeklyStats_Result">
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="companyid" ColumnName="companyid" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="campaignid" ColumnName="campaignid" />
+                <ScalarProperty Name="CampaignName" ColumnName="CampaignName" />
+                <ScalarProperty Name="ClickThroughsLastWeek" ColumnName="ClickThroughsLastWeek" />
+                <ScalarProperty Name="ClickThroughsPreviousWeek" ColumnName="ClickThroughsPreviousWeek" />
+                <ScalarProperty Name="ProgressPercentage" ColumnName="ProgressPercentage" />
+                <ScalarProperty Name="AnsweredLastWeek" ColumnName="AnsweredLastWeek" />
+                <ScalarProperty Name="AnsweredPreviousWeek" ColumnName="AnsweredPreviousWeek" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
