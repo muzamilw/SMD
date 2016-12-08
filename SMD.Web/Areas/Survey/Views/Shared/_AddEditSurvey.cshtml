@@ -1333,8 +1333,8 @@
                         <div class="row">
 
                             <div class="pull-left">
-                                <div class="status_date_span" style="margin-left:0px;margin-top:0px;">
-                                    Last modified <span style="margin-left:3px"></span><span>12 april 2014</span>
+                                <div class="status_date_span" style="margin-left:0px;margin-top:0px;" data-bind="visible:!$root.IsnewSurvey()==true">
+                                    Last modified <span style="margin-left:3px"></span><span data-bind="dateString:LastModified,datePattern: 'DD/MM/YYYY'">12 april 2014</span>
                                 </div>
                             </div>
                         </div>
