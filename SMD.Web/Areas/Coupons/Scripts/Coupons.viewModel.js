@@ -2597,7 +2597,7 @@ getfreeCouponCount = function () {
                     $(".closecls").css("display", "block");
 
 
-
+                 
                     isEditorVisible(false);
                     CloseCouponsAnalyticView();
                     if (isFromEdit() == true) {
