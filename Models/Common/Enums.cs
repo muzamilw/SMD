@@ -52,7 +52,13 @@
         DisplayAdCampaignRejected = 29,
         PicturePollCampaignApproved = 30,
         PicturePollCampaignRejected = 31,
-        NewCouponsNearMe = 32
+        NewCouponsNearMe = 32,
+        Last3DaysPercentageCouponsNearMe = 33,
+        Last2DaysPercentageCouponsNearMe = 34,
+        LastDayPercentageCouponsNearMe = 35,
+        Last3DaysDollarDiscountCouponsNearMe = 36,
+        Last2DaysDollarDiscountCouponsNearMe = 37,
+        LastDayDollarDiscountCouponsNearMe = 38 
     }
 
     public enum AdCampaignCriteriaType

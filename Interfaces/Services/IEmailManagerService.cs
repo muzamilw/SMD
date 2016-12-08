@@ -98,6 +98,6 @@ namespace SMD.Interfaces.Services
         void SendCouponCampaignRejectionEmail(string aspnetUserId, string campaignName, int dealNoOfDays, string BannerPath, string RReason);
 
 
-        void SendNewDealsEmail();
+        void SendNewDealsEmail(int mode);
     }
 }

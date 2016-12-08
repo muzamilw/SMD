@@ -7798,6 +7798,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="Double" Name="price" Nullable="true" />
           <Property Type="Double" Name="savings" Nullable="true" />
           <Property Type="Int32" Name="DaysLeft" Nullable="true" />
+          <Property Type="Double" Name="SavingsNew" Nullable="true" />
+          <Property Type="String" Name="LocationCity" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="CurrencySymbol" Nullable="true" MaxLength="50" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -9915,6 +9918,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
                 <ScalarProperty Name="price" ColumnName="price" />
                 <ScalarProperty Name="savings" ColumnName="savings" />
                 <ScalarProperty Name="DaysLeft" ColumnName="DaysLeft" />
+                <ScalarProperty Name="SavingsNew" ColumnName="SavingsNew" />
+                <ScalarProperty Name="LocationCity" ColumnName="LocationCity" />
+                <ScalarProperty Name="CurrencySymbol" ColumnName="CurrencySymbol" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

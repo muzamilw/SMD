@@ -12,7 +12,7 @@ else
     adminClasses = "displayNone";
 }
 <div data-bind="visible: $root.isEditorVisible()" style="display: none">
-   
+
     <div class="col-lg-12" style="padding-left:0px;padding-right:18px;">
         <div class="row">
             <div class="col-lg-12" id="topArea" style="padding-left:7px;padding-right:0px;">
@@ -31,7 +31,7 @@ else
                             <div class="status_date_span" style="margin-top:25px;">
                                 Last modified <span style="margin-left:3px"></span><span>12 april 2014</span>
                             </div>
-           
+
                         </div>
                     </div>
 
@@ -65,7 +65,7 @@ else
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-9" data-bind="visible: !$root.isAdvertdashboardDealVisible()" style="padding-right:12px;">
+            <div class="col-lg-9" style="padding-right:12px;" data-bind="visible: !$root.isAdvertdashboardDealVisible()">
                 <div class="main-box header" style="padding-left:52px;">
                     <div class="col-lg-12" style="margin:auto;float:none !important">
                         <div class="pull-left ads-numbering-main">
@@ -114,7 +114,7 @@ else
                             <br />
                             <span data-bind="css: $root.previewScreenNumber() == 4 ? 'ads-selected-numbering-text' : '',click: $root.gotoScreen.bind(null,4)">Expiry</span>
 
-          
+
                         </div>
                         <div class="pull-left" style="width:47px;">
                             &nbsp;
@@ -130,7 +130,7 @@ else
 
                                 <br />
                                 <span>Preview</span>
-                              
+
                             </a>
                         </div>
 
@@ -179,7 +179,7 @@ else
                                 </div>
 
                                 <br>
-                                
+
                                 <span style="font-size:16px;color:black;margin-left:2px;" data-bind="text:StatusValue()">Draft</span>
                             </div>
                             <div class="pull-right">
@@ -818,11 +818,8 @@ else
                                         </div>
                                     </div>
                                     @*<div class="adsubHeading Theme_standard_clr" data-bind="visible: $root.previewScreenNumber() == 2">
-                                            Create up to 6 Deal Lines.
+                                               
 
-                                            <label style="color:gray;font-size:13px;">The first Deal Line will be used in all Notification &Emails</label>
-                                            <button class="btn  btn-success" id="saveBtn" style="width:80px;">save Me</button>
-                                        </div>*@
 
                                 </div>
                                 <div class="col-lg-12 borderPanel " style="margin-bottom:20px;">
@@ -1046,7 +1043,7 @@ else
                                     <div class="col-lg-6 preview_stencilImg" style=" margin-right: 35px; width:310px;">
                                         <div id="background" class="mobBck mobile_background">
                                             <div style="position:relative;">
-                                            <img id="closePop" src="/Images/close2-128.png" width="20" class="preview_close" data-dismiss="modal" />
+                                                <img id="closePop" src="/Images/close2-128.png" width="20" class="preview_close" data-dismiss="modal" />
                                             </div>
                                             <div class="deals_blue_panel">
                                                 <div class="dealsPenel_text">Deals</div>
@@ -1152,7 +1149,7 @@ else
                                                         <div id="map_div" style="width:100%;height:134px; border:2px solid"></div>
                                                     </div>
 
-                                                <div id="contact_no" style="border-bottom: 1px solid grey;height:65px;">
+                                                        <div id="contact_no" style="border-bottom: 1px solid grey;height:65px;">
                                                     <div class="pull-left" style="padding-left:44px;padding-top:18px;">
                                                         <i class="fa fa-phone" aria-hidden="true" style="font-size:16px;color:#53b6e0"></i>
                                                         <div id="cellno" style="font-size:10px;color:black;margin-left:-17px;margin-top: 4px;" data-bind="text:$root.CompanyTel1()"></div>
@@ -1260,7 +1257,7 @@ else
 
                             <div class="col-lg-12" style="margin:auto;float:none !important;" data-bind="visible: $root.previewScreenNumber() == 3">
                                 @*<div class="form-group formcontrol-bg" data-bind="visible: $root.isEnableVedioVerificationLink">
-                                    <div class="col-lg-11">*@
+                                        <div class="col-lg-11">*@
                                 <div class="row branchAddressContainer">
                                     <div class="form-group" style="margin-bottom:5px;display:none">
                                         <div class="col-lg-2"></div>
@@ -1905,8 +1902,8 @@ else
                                 </div>
 
 
-
-
+                            <div id="gp_panel" >
+                               
 
 
 
@@ -1956,7 +1953,7 @@ else
             </div>
 
             <div class="col-lg-3 form-horizontal" style=" height:566px;
-    margin-left: -6px !important;">
+    margin-left: -6px !important;" data-bind="visible: !$root.isAdvertdashboardDealVisible()">
 
                 <div class="row Subpanels" style="line-height: 2;padding:3px;">
                     <div class="col-lg-12">
@@ -2083,17 +2080,17 @@ else
                 </div>
 
                 <div class="row">
-                    
-                        <div class="pull-left">
-                            <div class="status_date_span" style="margin-left:0px;margin-top:0px;">
-                                Last modified <span style="margin-left:3px"></span><span>12 april 2014</span>
-                            </div>
-                      </div>
+
+                    <div class="pull-left">
+                        <div class="status_date_span" style="margin-left:0px;margin-top:0px;">
+                            Last modified <span style="margin-left:3px"></span><span>12 april 2014</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
+           
 
-            @Html.Partial("~/Areas/Coupons/Views/Coupons/_advertDashboardDeal.cshtml")
             <div class="clearfix">
             </div>
 
@@ -2131,17 +2128,20 @@ else
                 </div>
             </div>
         </div>
-        <div class="clearfix">
+        <div class="main-box main-box-subpage">
+            @Html.Partial("~/Areas/Coupons/Views/Coupons/_advertDashboardDeal.cshtml");
+        </div>
+            <div class="clearfix">
+
+            </div>
+
 
         </div>
 
-
-    </div>
-
 </div>
-    </div>
+   
 
-</div>
+
 @*@Html.Partial("~/Areas/Coupons/Views/Coupons/_addEditCouponCategories.cshtml")*@
 
 
@@ -2365,10 +2365,10 @@ else
             </div>
 
             @*<div class="row" style="padding-top:20px;">
-                <div class="col-lg-12 text-center">
-                    <label class="text-center">OR</label>
-                </div>
-            </div>*@
+                    <div class="col-lg-12 text-center">
+                        <label class="text-center">OR</label>
+                    </div>
+                </div>*@
 
             <div class="row" style="padding-top:20px;" data-bind="visible:$root.couponModel().IsDollarSaving3days">
                 <div class="col-lg-4" style="padding-right:0px;">
@@ -2769,8 +2769,7 @@ else
 <link href="~/Scripts/Rating/rating.css" rel="stylesheet" />
 <script>
     $('.rating').rating();
-        function PreviewCoupon()
-    {
+    function PreviewCoupon() {
 
         //$(".deal_group_name").html($("#txtCampaignDisplayName").val());
     }

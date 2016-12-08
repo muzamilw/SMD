@@ -1775,7 +1775,13 @@ getfreeCouponCount = function () {
                 setCompanyAddress = function () {
                     debugger;
                     //var fulladdress = AddressLine1().toLowerCase() + ' ' + CompanyCity() + ' ' + companyzipcode() + ' ' + companystate().toLowerCase();
-                    var fulladdress = AddressLine1().toLowerCase() + ' ' + CompanyCity() + ' ' + companyzipcode() + ' ' + companystate().toLowerCase();
+                    var fulladdress = null;
+                    if (AddressLine1() != null) {
+                        fulladdress = AddressLine1().toLowerCase() + ' ' + CompanyCity() + ' ' + companyzipcode() + ' ' + companystate().toLowerCase();
+                    } else {
+
+                    }
+                  
 
                     geocoderComp.geocode({
                         'address': fulladdress

@@ -282,6 +282,9 @@
     <Compile Include="GetUserCounts_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetUsersCouponsForEmailNotification_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Industry.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

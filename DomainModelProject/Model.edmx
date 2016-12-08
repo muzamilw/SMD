@@ -538,6 +538,12 @@
           <Property Name="IsShowyouTube" Type="bit" />
           <Property Name="IsShowAboutUs" Type="bit" />
           <Property Name="IsMarketingStories" Type="bit" />
+          <Property Name="IsPerSaving3days" Type="bit" />
+          <Property Name="IsPerSaving2days" Type="bit" />
+          <Property Name="IsPerSavingLastday" Type="bit" />
+          <Property Name="IsDollarSaving3days" Type="bit" />
+          <Property Name="IsDollarSaving2days" Type="bit" />
+          <Property Name="IsDollarSavingLastday" Type="bit" />
         </EntityType>
         <EntityType Name="CouponCategories">
           <Key>
@@ -581,12 +587,6 @@
           <Property Name="OptionUrl" Type="nvarchar" MaxLength="500" />
           <Property Name="ExpiryDate" Type="datetime" />
           <Property Name="URL" Type="varchar(max)" />
-          <Property Name="IsPerSaving3days" Type="bit" />
-          <Property Name="IsPerSaving2days" Type="bit" />
-          <Property Name="IsPerSavingLastday" Type="bit" />
-          <Property Name="IsDollarSaving3days" Type="bit" />
-          <Property Name="IsDollarSaving2days" Type="bit" />
-          <Property Name="IsDollarSavingLastday" Type="bit" />
         </EntityType>
         <EntityType Name="CouponRatingReview">
           <Key>
@@ -2866,6 +2866,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Parameter Name="Granularity" Type="int" Mode="In" />
         </Function>
         <Function Name="GetUserCounts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetUsersCouponsForEmailNotification" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="mode" Type="int" Mode="In" />
+        </Function>
         <Function Name="SearchCampaigns" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Status" Type="int" Mode="In" />
           <Parameter Name="keyword" Type="nvarchar" Mode="In" />
@@ -4050,6 +4053,12 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_Coupon_Company" FromRole="Coupon" ToRole="Company" />
           <Property Name="IsMarketingStories" Type="Boolean" />
           <NavigationProperty Name="CouponRatingReviews" Relationship="SMDDevModel.FK_CouponRatingReview_Coupon" FromRole="Coupon" ToRole="CouponRatingReview" />
+          <Property Name="IsPerSaving3days" Type="Boolean" />
+          <Property Name="IsPerSaving2days" Type="Boolean" />
+          <Property Name="IsPerSavingLastday" Type="Boolean" />
+          <Property Name="IsDollarSaving3days" Type="Boolean" />
+          <Property Name="IsDollarSaving2days" Type="Boolean" />
+          <Property Name="IsDollarSavingLastday" Type="Boolean" />
         </EntityType>
         <EntityType Name="CouponCode">
           <Key>
@@ -5970,7 +5979,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <Parameter Name="gender" Mode="In" Type="Int32" />
             <Parameter Name="ageRange" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GetNewLiveCouponsForEmail" ReturnType="Collection(SMDDevModel.GetNewLiveCouponsForEmail_Result)" />
+          <FunctionImport Name="GetUsersCouponsForEmailNotification" ReturnType="Collection(SMDDevModel.GetUsersCouponsForEmailNotification_Result)">
+            <Parameter Name="mode" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="CouponCategories">
           <Key>
@@ -6581,13 +6592,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="VoucherCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="ExpiryDate" Type="DateTime" Precision="3" />
           <Property Name="URL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="IsPerSaving3days" Type="Boolean" />
-          <Property Name="IsPerSaving2days" Type="Boolean" />
-          <Property Name="IsPerSavingLastday" Type="Boolean" />
-          <Property Name="IsDollarSaving3days" Type="Boolean" />
-          <Property Name="IsDollarSaving2days" Type="Boolean" />
-          <Property Name="IsDollarSavingLastday" Type="Boolean" />
-        </EntityType>
+          </EntityType>
         <Association Name="FK_CouponPriceOption_Coupon">
           <End Type="SMDDevModel.Coupon" Role="Coupon" Multiplicity="0..1" />
           <End Type="SMDDevModel.CouponPriceOption" Role="CouponPriceOption" Multiplicity="*" />
@@ -7704,6 +7709,20 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="Double" Name="savings" Nullable="true" />
           <Property Type="Int32" Name="DaysLeft" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="GetUsersCouponsForEmailNotification_Result">
+          <Property Type="String" Name="UserId" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="FullName" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="256" />
+          <Property Type="Int64" Name="CouponId" Nullable="false" />
+          <Property Type="String" Name="CouponTitle" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="couponimage1" Nullable="true" />
+          <Property Type="Double" Name="price" Nullable="true" />
+          <Property Type="Double" Name="savings" Nullable="true" />
+          <Property Type="Int32" Name="DaysLeft" Nullable="true" />
+          <Property Type="Double" Name="SavingsNew" Nullable="true" />
+          <Property Type="String" Name="LocationCity" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="CurrencySymbol" Nullable="true" MaxLength="50" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -8070,6 +8089,12 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="Coupons">
             <EntityTypeMapping TypeName="SMDDevModel.Coupon">
               <MappingFragment StoreEntitySet="Coupon">
+                <ScalarProperty Name="IsDollarSavingLastday" ColumnName="IsDollarSavingLastday" />
+                <ScalarProperty Name="IsDollarSaving2days" ColumnName="IsDollarSaving2days" />
+                <ScalarProperty Name="IsDollarSaving3days" ColumnName="IsDollarSaving3days" />
+                <ScalarProperty Name="IsPerSavingLastday" ColumnName="IsPerSavingLastday" />
+                <ScalarProperty Name="IsPerSaving2days" ColumnName="IsPerSaving2days" />
+                <ScalarProperty Name="IsPerSaving3days" ColumnName="IsPerSaving3days" />
                 <ScalarProperty Name="IsMarketingStories" ColumnName="IsMarketingStories" />
                 <ScalarProperty Name="IsShowAboutUs" ColumnName="IsShowAboutUs" />
                 <ScalarProperty Name="IsShowyouTube" ColumnName="IsShowyouTube" />
@@ -9034,12 +9059,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="CouponPriceOptions">
             <EntityTypeMapping TypeName="SMDDevModel.CouponPriceOption">
               <MappingFragment StoreEntitySet="CouponPriceOption">
-                <ScalarProperty Name="IsDollarSavingLastday" ColumnName="IsDollarSavingLastday" />
-                <ScalarProperty Name="IsDollarSaving2days" ColumnName="IsDollarSaving2days" />
-                <ScalarProperty Name="IsDollarSaving3days" ColumnName="IsDollarSaving3days" />
-                <ScalarProperty Name="IsPerSavingLastday" ColumnName="IsPerSavingLastday" />
-                <ScalarProperty Name="IsPerSaving2days" ColumnName="IsPerSaving2days" />
-                <ScalarProperty Name="IsPerSaving3days" ColumnName="IsPerSaving3days" />
                 <ScalarProperty Name="URL" ColumnName="URL" />
                 <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
                 <ScalarProperty Name="VoucherCode" ColumnName="VoucherCode" />
@@ -9770,6 +9789,24 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="getDealStatByCouponIdFormAnalytic" FunctionName="SMDDevModel.Store.getDealStatByCouponIdFormAnalytic" />
           <FunctionImportMapping FunctionImportName="getPollImpressionStatBySQIdFormAnalytic" FunctionName="SMDDevModel.Store.getPollImpressionStatBySQIdFormAnalytic" />
+          <FunctionImportMapping FunctionImportName="GetUsersCouponsForEmailNotification" FunctionName="SMDDevModel.Store.GetUsersCouponsForEmailNotification">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SMDDevModel.GetUsersCouponsForEmailNotification_Result">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="CouponId" ColumnName="CouponId" />
+                <ScalarProperty Name="CouponTitle" ColumnName="CouponTitle" />
+                <ScalarProperty Name="couponimage1" ColumnName="couponimage1" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="savings" ColumnName="savings" />
+                <ScalarProperty Name="DaysLeft" ColumnName="DaysLeft" />
+                <ScalarProperty Name="SavingsNew" ColumnName="SavingsNew" />
+                <ScalarProperty Name="LocationCity" ColumnName="LocationCity" />
+                <ScalarProperty Name="CurrencySymbol" ColumnName="CurrencySymbol" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

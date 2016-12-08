@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SMD.Models.DomainModels
+namespace DomainModelProject
 {
     using System;
-
+    
     public partial class GetUsersCouponsForEmailNotification_Result
     {
         public string UserId { get; set; }
@@ -22,7 +22,6 @@ namespace SMD.Models.DomainModels
         public Nullable<double> price { get; set; }
         public Nullable<double> savings { get; set; }
         public Nullable<int> DaysLeft { get; set; }
-       
         public Nullable<double> SavingsNew { get; set; }
         public string LocationCity { get; set; }
         public string CurrencySymbol { get; set; }
