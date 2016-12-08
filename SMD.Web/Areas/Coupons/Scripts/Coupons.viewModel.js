@@ -599,6 +599,7 @@ getfreeCouponCount = function () {
 
             diveNo(0);
             buyItQuestionLabelStatus(false);
+            modifiedDate(null);
             //show the main menu;
             collapseMainMenu();
             getfreeCouponCount();
