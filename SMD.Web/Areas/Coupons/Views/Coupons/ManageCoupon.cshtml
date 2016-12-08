@@ -12,7 +12,7 @@ else
     adminClasses = "displayNone";
 }
 <div data-bind="visible: $root.isEditorVisible()" style="display: none">
-
+   
     <div class="col-lg-12" style="padding-left:0px;padding-right:18px;">
         <div class="row">
             <div class="col-lg-12" id="topArea" style="padding-left:7px;padding-right:0px;">
@@ -31,7 +31,7 @@ else
                             <div class="status_date_span" style="margin-top:25px;">
                                 Last modified <span style="margin-left:3px"></span><span>12 april 2014</span>
                             </div>
-
+           
                         </div>
                     </div>
 
@@ -65,7 +65,7 @@ else
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-9" style="padding-right:12px;" data-bind="visible: !$root.isAdvertdashboardDealVisible()">
+            <div class="col-lg-9" style="padding-right:12px;">
                 <div class="main-box header" style="padding-left:52px;">
                     <div class="col-lg-12" style="margin:auto;float:none !important">
                         <div class="pull-left ads-numbering-main">
@@ -114,7 +114,7 @@ else
                             <br />
                             <span data-bind="css: $root.previewScreenNumber() == 4 ? 'ads-selected-numbering-text' : '',click: $root.gotoScreen.bind(null,4)">Expiry</span>
 
-
+          
                         </div>
                         <div class="pull-left" style="width:47px;">
                             &nbsp;
@@ -130,7 +130,7 @@ else
 
                                 <br />
                                 <span>Preview</span>
-
+                              
                             </a>
                         </div>
 
@@ -179,7 +179,7 @@ else
                                 </div>
 
                                 <br>
-
+                                
                                 <span style="font-size:16px;color:black;margin-left:2px;" data-bind="text:StatusValue()">Draft</span>
                             </div>
                             <div class="pull-right">
@@ -618,7 +618,7 @@ else
                                         <div class="col-lg-6">
                                             <div class="row">
                                                 <div class="checkbox-nice ">
-                                                <input type="checkbox" name="chkpo3day" value="1" id="chkp3day" data-bind="checked:IsPerSaving3days,disable:$root.disablePercentageCheckBoxes">
+                                                    <input type="checkbox" name="chkpo3day" value="1" id="chkp3day" data-bind="checked:IsPerSaving3days">
                                                     <label for="chkp3day">
                                                         further 20 % Saving on last 3 days
                                                     </label>
@@ -626,7 +626,7 @@ else
                                             </div>
                                             <div class="row">
                                                 <div class="checkbox-nice ">
-                                                <input type="checkbox" name="chkpo2day" value="1" id="chkp2day" data-bind="checked:IsPerSaving2days,disable:$root.disablePercentageCheckBoxes">
+                                                    <input type="checkbox" name="chkpo2day" value="1" id="chkp2day" data-bind="checked:IsPerSaving2days">
                                                     <label for="chkp2day">
                                                         further 25 % Saving on last 2 days
                                                     </label>
@@ -634,7 +634,7 @@ else
                                             </div>
                                             <div class="row">
                                                 <div class="checkbox-nice ">
-                                                <input type="checkbox" name="chkpolday" value="1" id="chkplday" data-bind="checked:IsPerSavingLastday,disable:$root.disablePercentageCheckBoxes">
+                                                    <input type="checkbox" name="chkpolday" value="1" id="chkplday" data-bind="checked:IsPerSavingLastday">
                                                     <label for="chkplday">
                                                         further 30 % Saving on last day
                                                     </label>
@@ -645,7 +645,7 @@ else
                                         <div class="col-lg-6">
                                             <div class="row">
                                                 <div class="checkbox-nice ">
-                                                <input type="checkbox" name="chkD3day" value="1" id="chkD3day" data-bind="checked:IsDollarSaving3days,disable :$root.disableDolarCheckBoxes">
+                                                    <input type="checkbox" name="chkD3day" value="1" id="chkD3day" data-bind="checked:IsDollarSaving3days">
                                                     <label for="chkD3day">
                                                         further $10 Saving on last 3 days
                                                     </label>
@@ -653,7 +653,7 @@ else
                                             </div>
                                             <div class="row">
                                                 <div class="checkbox-nice ">
-                                                <input type="checkbox" name="chkD2day" value="1" id="chkD2day" data-bind="checked:IsDollarSaving2days,disable :$root.disableDolarCheckBoxes">
+                                                    <input type="checkbox" name="chkD2day" value="1" id="chkD2day" data-bind="checked:IsDollarSaving2days">
                                                     <label for="chkD2day">
                                                         further $20 Saving on last 2 days
                                                     </label>
@@ -661,7 +661,7 @@ else
                                             </div>
                                             <div class="row">
                                                 <div class="checkbox-nice ">
-                                                <input type="checkbox" name="chkDlday" value="1" id="chkDlday" data-bind="checked:IsDollarSavingLastday,disable :$root.disableDolarCheckBoxes">
+                                                    <input type="checkbox" name="chkDlday" value="1" id="chkDlday" data-bind="checked:IsDollarSavingLastday">
                                                     <label for="chkDlday">
                                                         further $30 Saving on last days
                                                     </label>
@@ -689,13 +689,14 @@ else
                                             </div>
                                         </div>
                                         @*<div class="adsubHeading Theme_standard_clr" data-bind="visible: $root.previewScreenNumber() == 2">
-                                                Create up to 6 Deal Lines.
+                        Create up to 6 Deal Lines.
 
-                                                <label style="color:gray;font-size:13px;">The first Deal Line will be used in all Notification &Emails</label>
-                                                <button class="btn  btn-success" id="saveBtn" style="width:80px;">save Me</button>
-                                            </div>*@
+                        <label style="color:gray;font-size:13px;">The first Deal Line will be used in all Notification &Emails</label>
+                        <button class="btn  btn-success" id="saveBtn" style="width:80px;">save Me</button>
+                    </div>*@
 
                                     </div>
+
                                     <div class="col-lg-12 borderPanel " style="margin-bottom:20px;">
                                         <!-- ko template: { name: 'dealLinesTemplate' } -->
                                         <!-- /ko -->
@@ -857,7 +858,7 @@ else
                                     <div class="modal-dialog" style=" width:660px;" =4">
                                         <div class="col-lg-6 preview_stencilImg" style=" margin-right: 35px; width:310px;">
                                             <div style="position:relative;">
-                                                <img id="closePop" src="/Images/close2-128.png" width="20" class="preview_close" data-dismiss="modal" />
+                                                <img id="closePop" src="/Images/close2-128.png" width="20" class="preview_close" data-dismiss="modal" style="right:14px!important;" />
                                             </div>
                                             <div id="background" class="mobBck mobile_background">
 
@@ -967,7 +968,7 @@ else
                                                             <div id="map_div" style="width:100%;height:134px; border:2px solid"></div>
                                                         </div>
 
-                                                        <div id="contact_no" style="border-bottom: 1px solid grey;height:65px;">
+                                                        <div id="contact_no" style="border-bottom: 1px solid grey;min-height:65px;">
                                                             <div class="pull-left" style="padding-left:44px;padding-top:18px;">
                                                                 <i class="fa fa-phone" aria-hidden="true" style="font-size:16px;color:#53b6e0"></i>
                                                                 <div id="cellno" style="font-size:10px;color:black;margin-left:-17px;margin-top: 4px;" data-bind="text:$root.CompanyTel1()"></div>
@@ -1079,7 +1080,7 @@ else
 
                                 <div class="col-lg-12" style="margin:auto;float:none !important;" data-bind="visible: $root.previewScreenNumber() == 3">
                                     @*<div class="form-group formcontrol-bg" data-bind="visible: $root.isEnableVedioVerificationLink">
-                                        <div class="col-lg-11">*@
+                <div class="col-lg-11">*@
                                     <div class="row branchAddressContainer">
                                         <div class="form-group" style="margin-bottom:5px;display:none">
                                             <div class="col-lg-2"></div>
@@ -1534,12 +1535,12 @@ else
                                 </div>
                             </div>
 
-                            <div id="gp_panel" >
-                               
+                            <div id="gp_panel" data-bind="visible:$root.isAdvertdashboardDealVisible()">
+                                @Html.Partial("~/Areas/Coupons/Views/Coupons/_advertDashboardDeal.cshtml")
                             </div>
-                            <div class="clearfix">
+    <div class="clearfix">
 
-                            </div>
+    </div>
 
                             <div class="next-back-btns col-lg-12" style="margin:auto;float:none !important;" data-bind="visible:!$root.isAdvertdashboardDealVisible()">
                                 <div class="form-group">
@@ -1566,11 +1567,11 @@ else
 
 
 
-                            <div class="clearfix">
+    <div class="clearfix">
 
-                            </div>
+    </div>
 
-                        </div>
+</div>
                     </div>
 
 
@@ -1582,7 +1583,7 @@ else
             </div>
 
             <div class="col-lg-3 form-horizontal" style=" height:566px;
-    margin-left: -6px !important;" data-bind="visible: !$root.isAdvertdashboardDealVisible()">
+    margin-left: -6px !important;">
 
                 <div class="row Subpanels" style="line-height: 2;padding:3px;">
                     <div class="col-lg-12">
@@ -1709,17 +1710,17 @@ else
                 </div>
 
                 <div class="row">
-
-                    <div class="pull-left">
-                        <div class="status_date_span" style="margin-left:0px;margin-top:0px;">
-                            Last modified <span style="margin-left:3px"></span><span>12 april 2014</span>
-                        </div>
-                    </div>
+                    
+                        <div class="pull-left">
+                            <div class="status_date_span" style="margin-left:0px;margin-top:0px;">
+                                Last modified <span style="margin-left:3px"></span><span>12 april 2014</span>
+                            </div>
+                      </div>
                 </div>
             </div>
 
-           
 
+           
             <div class="clearfix">
             </div>
 
@@ -1757,20 +1758,17 @@ else
                 </div>
             </div>
         </div>
-        <div class="main-box main-box-subpage">
-            @Html.Partial("~/Areas/Coupons/Views/Coupons/_advertDashboardDeal.cshtml");
-        </div>
-            <div class="clearfix">
-
-            </div>
-
+        <div class="clearfix">
 
         </div>
+
+
+    </div>
 
 </div>
-   
+    </div>
 
-
+</div>
 @*@Html.Partial("~/Areas/Coupons/Views/Coupons/_addEditCouponCategories.cshtml")*@
 
 
@@ -1994,10 +1992,10 @@ else
             </div>
 
             @*<div class="row" style="padding-top:20px;">
-                    <div class="col-lg-12 text-center">
-                        <label class="text-center">OR</label>
-                    </div>
-                </div>*@
+                <div class="col-lg-12 text-center">
+                    <label class="text-center">OR</label>
+                </div>
+            </div>*@
 
             <div class="row" style="padding-top:20px;" data-bind="visible:$root.couponModel().IsDollarSaving3days">
                 <div class="col-lg-4" style="padding-right:0px;">
@@ -2398,7 +2396,8 @@ else
 <link href="~/Scripts/Rating/rating.css" rel="stylesheet" />
 <script>
     $('.rating').rating();
-    function PreviewCoupon() {
+        function PreviewCoupon()
+    {
 
         //$(".deal_group_name").html($("#txtCampaignDisplayName").val());
     }
