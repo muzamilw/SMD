@@ -25,6 +25,7 @@ define("Coupons/Coupons.viewModel",
                     CompanyCity = ko.observable(),
                     AddressLine1 = ko.observable(),
                     companystate = ko.observable(),
+                    modifiedDate = ko.observable(),
                     companyzipcode = ko.observable(),
                     CompanyName = ko.observable(),
                     langs = ko.observableArray([]),
@@ -1074,7 +1075,7 @@ getfreeCouponCount = function () {
 
               },
             onEditCampaign = function (item) {
-                debugger;
+                modifiedDate(item.lastModified())
                 getfreeCouponCount();
                 EditorLoading(true);
                 //resetting flags
@@ -2909,7 +2910,8 @@ getfreeCouponCount = function () {
                     CompanyTel1: CompanyTel1,
                     SearchSelectedStatus: SearchSelectedStatus,
                     disableDolarCheckBoxes: disableDolarCheckBoxes,
-                    disablePercentageCheckBoxes: disablePercentageCheckBoxes
+                    disablePercentageCheckBoxes: disablePercentageCheckBoxes,
+                    modifiedDate: modifiedDate
                 };
             })()
         };
