@@ -192,6 +192,9 @@
     <Compile Include="getCampaignByIdFormDataAnalytic_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetCampaignPerformanceWeeklyStats_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="getCampaignROItblAnalytic_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
