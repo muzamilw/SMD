@@ -3029,7 +3029,8 @@ div.payment-set div.a-gift .total-amount, .payment-set .item-gift .item-total-am
             position: absolute;
             left: 0;
             /*top: 0;*/
-            font-size: 57%;
+            
+            font-size:25%;
         }
 
         .payment-set .ctu-discounted .ndod-price .ndod-amount {
@@ -4584,7 +4585,9 @@ html[xmlns] .slides {
         position: absolute;
         left: 0;
         /*top: 0;*/
-        font-size: 57%;
+      
+        font-size: 25%;
+        
     }
 
     .ndod-discount .ndod-price .ndod-amount {
@@ -7085,7 +7088,8 @@ div.content .unit.ctu .slider {
         position: absolute;
         left: 0;
         /*top: 0;*/
-        font-size: 57%;
+        /*font-size:9px;*/
+       font-size: 25%;
     }
 
     .ctu-discounted .ndod-price .ndod-amount {
@@ -9020,9 +9024,11 @@ body .login-join-page h1 {
         }
 
 .ndod-view-mini {
-    margin: 0 0 20px;
+       
     position: relative;
-    width: 100%;
+    width: 48%;
+    float: left;
+    margin: 9px;
 }
 
     .ndod-view-mini .ndod-deal-header h1, .ndod-view-mini .ndod-deal-header h2, .ndod-view-mini .ndod-deal-header h3, .ndod-view-mini .ndod-deal-header h4 {
@@ -17700,3 +17706,28 @@ div.content .unit.ctu .ctu-sponsor div {
     }
 }
 
+.bonus-bought,.stat-bought {
+    display:none!important;
+}
+.ndod-currency {
+    font-size:9px!important;
+}
+#main_copon_cont {
+    margin-top:34px;
+}
+.fp1 {
+    margin-left:7px!important;
+}
+.hl1 {
+    margin-left:16px!important;
+}
+.deal_lines {
+    font-size:12px;
+    font-weight:600;
+}
+.review_description {
+    width:252px;
+}
+.deal_rev {
+    width:100%;min-height: 68px;border:2px solid;padding-top :12px;padding-bottom :12px; margin-top:4px;
+}
