@@ -250,7 +250,7 @@
           <Property Name="LanguageID" Type="int" />
           <Property Name="IndustryID" Type="int" />
           <Property Name="EducationId" Type="bigint" />
-          <Property Name="ProfileImage" Type="nvarchar" MaxLength="200" />
+          <Property Name="ProfileImage" Type="nvarchar" MaxLength="500" />
           <Property Name="UserCode" Type="nvarchar" MaxLength="300" />
           <Property Name="SmsCode" Type="nvarchar" MaxLength="50" />
           <Property Name="WebsiteLink" Type="nvarchar" MaxLength="100" />
@@ -5261,7 +5261,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="LanguageId" Type="Int32" />
           <Property Name="IndustryId" Type="Int32" />
           <Property Name="EducationId" Type="Int64" />
-          <Property Name="ProfileImage" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ProfileImage" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="UserCode" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="SmsCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="WebsiteLink" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -7627,7 +7627,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="Int32" Name="LeftAnswerPerc" Nullable="true" />
           <Property Type="Int32" Name="RightAnswerPerc" Nullable="true" />
           <Property Type="String" Name="SenderFullName" Nullable="false" MaxLength="200" />
-          <Property Type="String" Name="SenderProfileImage" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="SenderProfileImage" Nullable="true" MaxLength="500" />
         </ComplexType>
         <ComplexType Name="Dashboard_analytics_Result">
           <Property Type="Int64" Name="CampaignID" Nullable="true" />
