@@ -1,7 +1,7 @@
 ﻿define(["ko", "underscore", "underscore-ko"], function (ko) {
 
     var // ReSharper disable InconsistentNaming
-        Survey = function (SQID, LanguageID, CountryID, UserID, Status, StatusValue, Question, Gender, Language, Country,
+        Survey = function (SQID, LanguageID, CountryID, UserID, Status, StatusValue, Question,LastModifiedDate, Gender, Language, Country,
             Description, DisplayQuestion, StartDate, EndDate, ModifiedDate, LeftPicturePath, RightPicturePath, ProjectedReach, AgeRangeStart,
             AgeRangeEnd, LeftPictureBytes, RightPictureBytes, ParentSurveyId, Priority, CreatedBy, CompanyId, AnswerNeeded, ResultClicks, AmountCharged, IsUseFilter) {
             var
@@ -15,7 +15,7 @@
                 Question = ko.observable(Question).extend({  // custom message
                     required: true
                 }),
-
+                LastModified = ko.observable(LastModifiedDate),
                 IsUseFilter = ko.observable(IsUseFilter),
 
                 Gender = ko.observable(Gender),
@@ -77,8 +77,8 @@
 
                 errors = ko.validation.group({
                     Question: Question,
-                    LeftPictureBytes: LeftPictureBytes,
-                    RightPictureBytes: RightPictureBytes,
+                    //LeftPictureBytes: LeftPictureBytes,
+                    //RightPictureBytes: RightPictureBytes,
                     //DisplayQuestion: DisplayQuestion,
                     //StartDate: StartDate,
                     //EndDate: EndDate,
@@ -212,7 +212,8 @@
                 answerNeeded: answerNeeded,
                 resultClicks: resultClicks,
                 AmountCharged: AmountCharged,
-                IsUseFilter: IsUseFilter
+                IsUseFilter: IsUseFilter,
+                LastModified:LastModified
             };
         };
 
@@ -331,7 +332,7 @@
     };
     // Factory Method
     Survey.Create = function (source) {
-        var survey = new Survey(source.SqId, source.LanguageId, source.CountryId, source.UserId, source.Status, source.StatusValue, source.Question,
+        var survey = new Survey(source.SqId, source.LanguageId, source.CountryId, source.UserId, source.Status, source.StatusValue, source.Question,source.LastModifiedDate,
             source.Gender + "", source.Language, source.Country, source.Description, source.DisplayQuestion, source.StartDate, source.EndDate, source.ModifiedDate,
             source.LeftPicturePath, source.RightPicturePath, source.ProjectedReach, source.AgeRangeStart, source.AgeRangeEnd, source.LeftPictureBytes,
             source.RightPictureBytes, source.ParentSurveyId, source.Priority, source.CreatedBy, source.CompanyId, source.AnswerNeeded, source.AmountCharged,0, source.IsUseFilter);

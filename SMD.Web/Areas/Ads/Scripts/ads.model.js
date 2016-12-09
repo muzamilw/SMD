@@ -1,7 +1,7 @@
 ﻿define(["ko", "underscore", "underscore-ko"], function (ko) {
-  
+
     var // ReSharper disable InconsistentNaming
-      Campaign = function (IsPaymentCollected, PaymentDate,CampaignID, LanguageID, CampaignName, UserID, Status, StatusValue, CampaignDescription, Gender,
+      Campaign = function (IsPaymentCollected, PaymentDate, CampaignID, LanguageID, CampaignName, UserID, Status, StatusValue, CampaignDescription, Gender,
           Archived, StartDateTime, EndDateTime, MaxBudget, Type, DisplayTitle, LandingPageVideoLink, VerifyQuestion,
           Answer1, Answer2, Answer3, CorrectAnswer, AgeRangeStart, AgeRangeEnd, ResultClicks, AmountSpent
           , ImagePath, CampaignImagePath, CampaignTypeImagePath, Description, ClickRate,
@@ -10,9 +10,10 @@
           BuyItImageUrl, AdViews, CompanyId, CouponSwapValue, CouponActualValue, CouponQuantity, CouponTakenCount, priority,
           CouponDiscountValue, couponImage2, CouponImage3, CouponImage4, CouponExpiryLabel,
           couponSmdComission, CouponCategories, DeliveryDays, IsUseFilter, logoUrl,
-          VoucherAdditionalInfo, CouponId, IsShowVoucherSetting, VideoLink2, CouponType, IsSavedCoupon, viewCountToday, viewCountYesterday, viewCountAllTime, MaxDailyBudget, Locationss,ApprovalDateTime,
-          ChannelType, VideoBytes, showBuyitBtn, clickThroughsToday, clickThroughsYesterday, clickThroughsAllTime) {
-         
+          VoucherAdditionalInfo, CouponId, IsShowVoucherSetting, VideoLink2, CouponType, IsSavedCoupon, viewCountToday, viewCountYesterday, viewCountAllTime, MaxDailyBudget, Locationss, ApprovalDateTime,
+          ChannelType, VideoBytes, showBuyitBtn, clickThroughsToday, clickThroughsYesterday, clickThroughsAllTime, modifiedDateTime, surveyAnsweredAllTime,answer1Stats, answer2Stats, answer3Stats) {
+
+
           var
               //type and userID will be set on server sside
               IsPaymentCollected = ko.observable(IsPaymentCollected),
@@ -38,6 +39,14 @@
               CouponCategories = ko.observableArray([]),
               VideoBytes = ko.observable(VideoBytes),
               ShowBuyitBtn = ko.observable(showBuyitBtn),
+              
+                SurveyAnsweredAllTime = ko.observable(surveyAnsweredAllTime),
+                Answer1Stats = ko.observable(answer1Stats),
+                Answer2Stats = ko.observable(answer2Stats),
+                Answer3Stats = ko.observable(answer3Stats),
+                 ModifiedDateTime = ko.observable(modifiedDateTime),
+                   
+
               StartDateTime = ko.observable((StartDateTime !== null && StartDateTime !== undefined) ? moment(StartDateTime).toDate() : undefined).extend({  // custom message
                   required: true
               }),//ko.observable(),
@@ -46,13 +55,13 @@
               }).extend({
                   validation: {
                       validator: function (val, someOtherVal) {
-                      
+
                           return moment(val).toDate() > moment(StartDateTime()).toDate();
                       },
                       message: 'End date must be greater than start date',
                   }
               }),// ko.observable(EndDateTime),
-              MaxBudget = ko.observable(MaxBudget).extend({ required: true, number: true, min: 1}),
+              MaxBudget = ko.observable(MaxBudget).extend({ required: true, number: true, min: 1 }),
               Type = ko.observable(Type),
               TypeName = ko.computed(function () {
                   var tname = ''
@@ -164,7 +173,7 @@
               clickThroughsAllTime = ko.observable(clickThroughsAllTime),
                // Errors
                 errors = ko.validation.group({
-                    CampaignName:CampaignName,
+                    CampaignName: CampaignName,
                     DisplayTitle: DisplayTitle,
                     LandingPageVideoLink: LandingPageVideoLink,
                     //StartDateTime: StartDateTime,
@@ -179,11 +188,11 @@
                 }),
               dirtyFlag = new ko.dirtyFlag({
                   ShowBuyitBtn: ShowBuyitBtn,
-                  IsPaymentCollected:IsPaymentCollected,
-                  PaymentDate :PaymentDate,
+                  IsPaymentCollected: IsPaymentCollected,
+                  PaymentDate: PaymentDate,
                   CampaignName: CampaignName,
                   CampaignDescription: CampaignDescription,
-                  Description:Description,
+                  Description: Description,
                   StartDateTime: StartDateTime,
                   EndDateTime: EndDateTime,
                   MaxBudget: MaxBudget,
@@ -199,11 +208,11 @@
                   AgeRangeEnd: AgeRangeEnd,
                   AdCampaignTargetCriterias: AdCampaignTargetCriterias,
                   AdCampaignTargetLocations: AdCampaignTargetLocations,
-                  Voucher1Heading:Voucher1Heading,
-                  Voucher1Description:Voucher1Description,
-                  Voucher1Value:Voucher1Value,
-                  Voucher2Heading:Voucher2Heading,
-                  Voucher2Description:Voucher2Description,
+                  Voucher1Heading: Voucher1Heading,
+                  Voucher1Description: Voucher1Description,
+                  Voucher1Value: Voucher1Value,
+                  Voucher2Heading: Voucher2Heading,
+                  Voucher2Description: Voucher2Description,
                   Voucher2Value: Voucher2Value,
                   VideoUrl: VideoUrl,
                   BuuyItLine1: BuuyItLine1,
@@ -219,7 +228,7 @@
                   priority: priority,
                   VoucherImagePath: VoucherImagePath,
                   CouponDiscountValue: CouponDiscountValue,
-                //  DeliveryDays: DeliveryDays,
+                  //  DeliveryDays: DeliveryDays,
                   CouponCodes: CouponCodes,
                   IsUseFilter: IsUseFilter,
                   CouponType: CouponType,
@@ -229,16 +238,21 @@
                   viewCountAllTime: viewCountAllTime,
                   clickThroughsToday: clickThroughsToday,
                   clickThroughsYesterday: clickThroughsYesterday,
-                  clickThroughsAllTime:clickThroughsAllTime,
-                //  MaxDailyBudget : MaxDailyBudget,
+                  clickThroughsAllTime: clickThroughsAllTime,
+                   MaxDailyBudget : MaxDailyBudget,
                   Locationss: Locationss,
-                  ApprovalDateTime : ApprovalDateTime,
+                  ApprovalDateTime: ApprovalDateTime,
                   ChannelType: ChannelType,
                   VideoBytes: VideoBytes,
                   LogoUrl: LogoUrl,
                   Gender: Gender,
-                //  ClickRate: ClickRate,
-                  
+                  ModifiedDateTime : ModifiedDateTime,
+                  SurveyAnsweredAllTime : SurveyAnsweredAllTime,
+                  Answer1Stats : Answer1Stats ,
+                  Answer2Stats : Answer2Stats,
+                  Answer3Stats: Answer3Stats ,
+                   ClickRate: ClickRate,
+
               }),
               // Has Changes
               hasChanges = ko.computed(function () {
@@ -250,16 +264,16 @@
               },
               // Convert to server data
               convertToServerData = function () {
-                  
+
                   var targetCriteria = [];
                   _.each(AdCampaignTargetCriterias(), function (item) {
-                      
+
                       targetCriteria.push(item.convertCriteriaToServerData());
                   });
                   var LocationtargetCriteria = [];
-                 
+
                   _.each(AdCampaignTargetLocations(), function (item) {
-                   
+
                       LocationtargetCriteria.push(item.convertToServerData());
                   });
                   var selectedCoupons = [];
@@ -281,7 +295,7 @@
                       Status: Status(),
                       StatusValue: StatusValue(),
                       CampaignDescription: CampaignDescription(),
-                      Description:Description(),
+                      Description: Description(),
                       Gender: Gender(),
                       Archived: Archived(),
                       StartDateTime: moment(StartDateTime()).format(ist.utcFormat) + 'Z',//StartDateTime(),
@@ -307,7 +321,7 @@
                       CouponExpiryLabel: CouponExpiryLabel(),
                       couponSmdComission: couponSmdComission(),
                       CampaignTypeImagePath: CampaignTypeImagePath(),
-                      ClickRate:ClickRate(),
+                      ClickRate: ClickRate(),
                       AdCampaignTargetCriterias: targetCriteria,
                       AdCampaignTargetLocations: LocationtargetCriteria,
                       Voucher1Heading: Voucher1Heading(),
@@ -316,9 +330,9 @@
                       Voucher2Heading: Voucher2Heading(),
                       Voucher2Description: Voucher2Description(),
                       Voucher2Value: Voucher2Value(),
-                      Voucher1ImagePath:Voucher1ImagePath(),
+                      Voucher1ImagePath: Voucher1ImagePath(),
                       VoucherImagePath: VoucherImagePath(),
-                      VideoBytes:VideoBytes(),
+                      VideoBytes: VideoBytes(),
                       CreatedBy: CreatedBy(),
                       VideoUrl: VideoUrl(),
                       BuuyItLine1: BuuyItLine1(),
@@ -341,10 +355,10 @@
                       IsUseFilter: IsUseFilter(),
                       LogoUrl: LogoUrl(),
                       ShowBuyitBtn: ShowBuyitBtn(),
-                      IsPaymentCollected :IsPaymentCollected(),
-                      PaymentDate:PaymentDate(),
+                      IsPaymentCollected: IsPaymentCollected(),
+                      PaymentDate: PaymentDate(),
                       VoucherAdditionalInfo: VoucherAdditionalInfo(),
-                     
+
                       LogoImageBytes: logoImage == "" ? LogoImageBytes() : logoImage,
 
                       CouponId: CouponId(),
@@ -355,9 +369,9 @@
                       viewCountToday: viewCountToday(),
                       viewCountYesterday: viewCountYesterday(),
                       viewCountAllTime: viewCountAllTime(),
-                      MaxDailyBudget : MaxDailyBudget(),
+                      MaxDailyBudget: MaxDailyBudget(),
                       Locationss: Locationss(),
-                      ApprovalDateTime : ApprovalDateTime(),
+                      ApprovalDateTime: ApprovalDateTime(),
                       ChannelType: ChannelType(),
                       clickThroughsToday: clickThroughsToday(),
                       clickThroughsYesterday: clickThroughsYesterday(),
@@ -373,7 +387,7 @@
               Status: Status,
               StatusValue: StatusValue,
               CampaignDescription: CampaignDescription,
-              Description:Description,
+              Description: Description,
               Gender: Gender,
               Archived: Archived,
               StartDateTime: StartDateTime,
@@ -399,14 +413,14 @@
               CouponExpiryLabel: CouponExpiryLabel,
               couponSmdComission: couponSmdComission,
               CampaignTypeImagePath: CampaignTypeImagePath,
-              ClickRate:ClickRate,
+              ClickRate: ClickRate,
               AdCampaignTargetCriterias: AdCampaignTargetCriterias,
               AdCampaignTargetLocations: AdCampaignTargetLocations,
-              convertToServerData:convertToServerData,
+              convertToServerData: convertToServerData,
               hasChanges: hasChanges,
               reset: reset,
               isValid: isValid,
-              dirtyFlag:dirtyFlag,
+              dirtyFlag: dirtyFlag,
               errors: errors,
               Voucher1Heading: Voucher1Heading,
               Voucher1Description: Voucher1Description,
@@ -423,7 +437,7 @@
               BuyItLine3: BuyItLine3,
               BuyItButtonLabel: BuyItButtonLabel,
               BuyItImageUrl: BuyItImageUrl,
-              buyItImageBytes: buyItImageBytes,              
+              buyItImageBytes: buyItImageBytes,
               AdViews: AdViews,
               CompanyId: CompanyId,
               CouponSwapValue: CouponSwapValue,
@@ -440,24 +454,30 @@
               VoucherAdditionalInfo: VoucherAdditionalInfo,
               LogoImageBytes: LogoImageBytes,
               CouponId: CouponId,
-              IsShowVoucherSetting:IsShowVoucherSetting,
+              IsShowVoucherSetting: IsShowVoucherSetting,
               VideoLink2: VideoLink2,
               CouponType: CouponType,
               IsSavedCoupon: IsSavedCoupon,
               viewCountToday: viewCountToday,
               viewCountYesterday: viewCountYesterday,
               viewCountAllTime: viewCountAllTime,
-              MaxDailyBudget : MaxDailyBudget,
+              MaxDailyBudget: MaxDailyBudget,
               Locationss: Locationss,
-              ApprovalDateTime : ApprovalDateTime,
+              ApprovalDateTime: ApprovalDateTime,
               ChannelType: ChannelType,
               VideoBytes: VideoBytes,
               ShowBuyitBtn: ShowBuyitBtn,
-              IsPaymentCollected :IsPaymentCollected,
+              IsPaymentCollected: IsPaymentCollected,
               PaymentDate: PaymentDate,
               clickThroughsToday: clickThroughsToday,
               clickThroughsYesterday: clickThroughsYesterday,
-              clickThroughsAllTime: clickThroughsAllTime
+              clickThroughsAllTime: clickThroughsAllTime,
+              ModifiedDateTime: ModifiedDateTime,
+              SurveyAnsweredAllTime: SurveyAnsweredAllTime,
+              Answer1Stats: Answer1Stats,
+              Answer2Stats: Answer2Stats,
+              Answer3Stats: Answer3Stats,
+              ClickRate: ClickRate
 
           };
       };
@@ -482,18 +502,18 @@
                surveyQuestLeftImageSrc = ko.observable(surveyQuestLeftImageSrc),
                surveyQuestRightImageSrc = ko.observable(surveyQuestRightImageSrc),
                surveyQuestThirdImageSrc = ko.observable(surveyQuestThirdImageSrc)
-               LanguageID = ko.observable(LanguageID),
-               Language = ko.observable(Language),
-               IndustryID = ko.observable(IndustryID),
-               Industry = ko.observable(Industry),
-               Education = ko.observable(Education),
-               EducationID = ko.observable(EducationID),
-               QuizCampaignId = ko.observable(QuizCampaignId),
-               QuizAnswerId = ko.observable(QuizAnswerId),
-               criteriaPrice = ko.observable(criteriaPrice)
+          LanguageID = ko.observable(LanguageID),
+          Language = ko.observable(Language),
+          IndustryID = ko.observable(IndustryID),
+          Industry = ko.observable(Industry),
+          Education = ko.observable(Education),
+          EducationID = ko.observable(EducationID),
+          QuizCampaignId = ko.observable(QuizCampaignId),
+          QuizAnswerId = ko.observable(QuizAnswerId),
+          criteriaPrice = ko.observable(criteriaPrice)
           // Convert to server data
           convertCriteriaToServerData = function () {
-              
+
               return {
                   CriteriaId: CriteriaID(),
                   CampaignId: CampaignID(),
@@ -526,7 +546,7 @@
               answerString: answerString,
               surveyQuestLeftImageSrc: surveyQuestLeftImageSrc,
               surveyQuestRightImageSrc: surveyQuestRightImageSrc,
-              surveyQuestThirdImageSrc:surveyQuestThirdImageSrc,
+              surveyQuestThirdImageSrc: surveyQuestThirdImageSrc,
               LanguageID: LanguageID,
               Language: Language,
               IndustryID: IndustryID,
@@ -541,7 +561,7 @@
       };
     var // ReSharper disable InconsistentNaming
     AdCampaignTargetLocation = function (ID, CampaignID, CountryID, CityID, Radius, Country, City, IncludeorExclude, Latitude, Longitude) {
-      
+
         var
             //type and userID will be set on server sside
             ID = ko.observable(ID),
@@ -575,7 +595,7 @@
             Radius: Radius,
             Country: Country,
             City: City,
-            IncludeorExclude:IncludeorExclude,
+            IncludeorExclude: IncludeorExclude,
             convertToServerData: convertToServerData,
             Latitude: Latitude,
             Longitude: Longitude
@@ -599,7 +619,7 @@
         return {
             CategoryId: CategoryId,
             Name: Name,
-            IsSelected:IsSelected,
+            IsSelected: IsSelected,
             convertToServerData: convertToServerData
         };
     };
@@ -634,55 +654,55 @@
           IsTaken: IsTaken,
           UserId: UserId,
           UserName: UserName,
-          TakenDateTime:TakenDateTime,
+          TakenDateTime: TakenDateTime,
           convertToServerData: convertToServerData
       };
   };
     var formAnalyticsDataModel = function (source) {
 
-     var
-         //type and userID will be set on server sside
-         Question = ko.observable(source.Question),
-         answer = ko.observable(source.answer),
-         Id = ko.observable(source.Id),
-         typ = ko.observable(source.typ),
-         selectedGenderAnalytics = ko.observable(0),
-         selectedAgeAnalytics = ko.observable(0),
-         selectedCityAnalytics = ko.observable("All"),
-         Stats = ko.observable(source.Stats)
+        var
+            //type and userID will be set on server sside
+            Question = ko.observable(source.Question),
+            answer = ko.observable(source.answer),
+            Id = ko.observable(source.Id),
+            typ = ko.observable(source.typ),
+            selectedGenderAnalytics = ko.observable(0),
+            selectedAgeAnalytics = ko.observable(0),
+            selectedCityAnalytics = ko.observable("All"),
+            Stats = ko.observable(source.Stats)
 
-         
-     return {
-         Question: Question,
-         answer: answer,
-         Id: Id,
-         typ: typ,
-         selectedGenderAnalytics: selectedGenderAnalytics,
-         selectedAgeAnalytics: selectedAgeAnalytics,
-         selectedCityAnalytics: selectedCityAnalytics,
-         Stats:Stats
-       
-     };
- };
+
+        return {
+            Question: Question,
+            answer: answer,
+            Id: Id,
+            typ: typ,
+            selectedGenderAnalytics: selectedGenderAnalytics,
+            selectedAgeAnalytics: selectedAgeAnalytics,
+            selectedCityAnalytics: selectedCityAnalytics,
+            Stats: Stats
+
+        };
+    };
 
     // Factory Method
     Campaign.Create = function (source) {
-       
-        var campaign = new Campaign(source.IsPaymentCollected, source.PaymentDate,source.CampaignId, source.LanguageId, source.CampaignName, source.UserId, source.Status, source.StatusValue,
+
+        var campaign = new Campaign(source.IsPaymentCollected, source.PaymentDate, source.CampaignId, source.LanguageId, source.CampaignName, source.UserId, source.Status, source.StatusValue,
             source.CampaignDescription, source.Gender + "", source.Archived, source.StartDateTime, source.EndDateTime, source.MaxBudget
             , source.Type + "", source.DisplayTitle, source.LandingPageVideoLink, source.VerifyQuestion, source.Answer1, source.Answer2, source.Answer3,
             source.CorrectAnswer, source.AgeRangeStart, source.AgeRangeEnd, source.ResultClicks, source.AmountSpent, source.ImagePath, source.CampaignImagePath,
             source.CampaignTypeImagePath, source.Description, source.ClickRate, source.Voucher1Heading, source.Voucher1Description, source.Voucher1Value, source.Voucher2Heading, source.Voucher2Description,
-             source.Voucher2Value, source.Voucher1ImagePath, source.VoucherImagePath, source.CreatedBy, source.VideoUrl, source.BuuyItLine1, source.BuyItLine2, source.BuyItLine3, source.BuyItButtonLabel, source.BuyItImageUrl,source.AdViews,source.CompanyId,
-            source.CouponSwapValue, source.CouponActualValue,source.CouponQuantity,source.CouponTakenCount, source.priority, source.CouponDiscountValue,
-             source.couponImage2, source.CouponImage3, source.CouponImage4, source.CouponExpiryLabel, source.couponSmdComission, null, source.DeliveryDays + "", source.IsUseFilter + "", source.LogoUrl, source.VoucherAdditionalInfo, source.CouponId, source.IsShowVoucherSetting, source.VideoLink2, source.CouponType + "", source.IsSavedCoupon, source.viewCountToday, source.viewCountYesterday, source.viewCountAllTime, source.MaxDailyBudget, source.Locationss, source.ApprovalDateTime, source.ChannelType + "", source.VideoBytes, source.ShowBuyitBtn, source.clickThroughsToday, source.clickThroughsYesterday, source.clickThroughsAllTime);
-        
+             source.Voucher2Value, source.Voucher1ImagePath, source.VoucherImagePath, source.CreatedBy, source.VideoUrl, source.BuuyItLine1, source.BuyItLine2, source.BuyItLine3, source.BuyItButtonLabel, source.BuyItImageUrl, source.AdViews, source.CompanyId,
+            source.CouponSwapValue, source.CouponActualValue, source.CouponQuantity, source.CouponTakenCount, source.priority, source.CouponDiscountValue,
+             source.couponImage2, source.CouponImage3, source.CouponImage4, source.CouponExpiryLabel, source.couponSmdComission, null, source.DeliveryDays + "", source.IsUseFilter + "", source.LogoUrl, source.VoucherAdditionalInfo, source.CouponId, source.IsShowVoucherSetting, source.VideoLink2, source.CouponType + "", source.IsSavedCoupon, source.viewCountToday, source.viewCountYesterday, source.viewCountAllTime, source.MaxDailyBudget, source.Locationss, source.ApprovalDateTime, source.ChannelType + "", source.VideoBytes, source.ShowBuyitBtn, source.clickThroughsToday, source.clickThroughsYesterday, source.clickThroughsAllTime, source.ModifiedDateTime, source.SurveyAnsweredAllTime, source.VerifyQuestion, source.Answer1, source.Answer2, source.Answer3, source.Answer1Stats, source.Answer2Stats, source.Answer3Stats);
+
         _.each(source.AdCampaignTargetCriterias, function (item) {
-          
+
             campaign.AdCampaignTargetCriterias.push(AdCampaignTargetCriteriasModel.Create(item));
         });
         _.each(source.AdCampaignTargetLocations, function (item) {
-            
+
             campaign.AdCampaignTargetLocations.push(AdCampaignTargetLocation.Create(item));
         });
         _.each(source.CouponCategories, function (item) {
@@ -698,13 +718,13 @@
     };
     // Factory Method
     AdCampaignTargetCriteriasModel.Create = function (source) {
-        
+
         return new AdCampaignTargetCriteriasModel(source.CriteriaId, source.CampaignId, source.Type, source.PQId, source.PQAnswerId, source.SQId, source.SQAnswer,
             source.IncludeorExclude, source.questionString, source.answerString, source.surveyQuestLeftImageSrc, source.surveyQuestRightImageSrc, source.LanguageId,
-            source.Language, source.IndustryId, source.Industry, source.EducationId, source.Education, source.QuizCampaignId, source.QuizAnswerId, source.criteriaPrice,source.surveyQuestThirdImageSrc);
+            source.Language, source.IndustryId, source.Industry, source.EducationId, source.Education, source.QuizCampaignId, source.QuizAnswerId, source.criteriaPrice, source.surveyQuestThirdImageSrc);
     };
     AdCampaignTargetLocation.Create = function (source) {
-       
+
         return new AdCampaignTargetLocation(source.Id, source.CampaignId, source.CountryId, source.CityId, source.Radius, source.Country, source.City, source.IncludeorExclude, source.Latitude, source.Longitude);
     };
     // Factory Method

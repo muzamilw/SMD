@@ -1365,6 +1365,9 @@ namespace SMD.Implementation.Services
                 user.CityName = request.City;
                 user.CountryName = request.Country;
 
+                user.LastKnownLocationLat = request.LocationLat;
+                user.LastKnownLocationLong = request.LocationLong;
+
 
                 user.AuthenticationToken = Guid.NewGuid().ToString();
                 

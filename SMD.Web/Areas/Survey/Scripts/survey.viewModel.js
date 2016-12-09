@@ -559,7 +559,7 @@ define("survey/survey.viewModel",
                                else {
                                    selectedQuestion().IsUseFilter('0');
                                }
-
+                               selectedQuestion().LastModified(item.LastModified());
                                selectedQuestion().reset();
                                view.initializeTypeahead();
                                getAudienceCount();

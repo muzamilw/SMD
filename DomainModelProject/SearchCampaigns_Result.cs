@@ -34,5 +34,15 @@ namespace DomainModelProject
         public Nullable<int> clickThroughsAllTime { get; set; }
         public Nullable<int> Type { get; set; }
         public Nullable<int> priority { get; set; }
+        public string ImagePath { get; set; }
+        public string VerifyQuestion { get; set; }
+        public Nullable<System.DateTime> ModifiedDateTime { get; set; }
+        public string Answer1 { get; set; }
+        public string Answer2 { get; set; }
+        public string Answer3 { get; set; }
+        public Nullable<int> SurveyAnsweredAllTime { get; set; }
+        public Nullable<int> Answer1Stats { get; set; }
+        public Nullable<int> Answer2Stats { get; set; }
+        public Nullable<int> Answer3Stats { get; set; }
     }
 }

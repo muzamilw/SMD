@@ -53,6 +53,8 @@ namespace SMD.MIS.Areas.Api.Models
         public long? ProjectedReach { get; set; }
 
         public Nullable<bool> IsUseFilter { get; set; }
+
+        public DateTime? LastModifiedDate { get; set; }
         
     }
     public class SurveyQuestionTargetCriteria

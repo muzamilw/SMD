@@ -211,5 +211,6 @@ namespace SMD.MIS.Areas.Api.Models
         public Nullable<bool> IsDollarSaving3days { get; set; }
         public Nullable<bool> IsDollarSaving2days { get; set; }
         public Nullable<bool> IsDollarSavingLastday { get; set; }
+        public DateTime? LastModifiedDate { get; set; }
     }
 }

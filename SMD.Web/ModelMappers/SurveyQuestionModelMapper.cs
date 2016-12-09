@@ -113,7 +113,8 @@ namespace SMD.MIS.ModelMappers
                 AmountCharged = source.AmountCharged,
                 Company = source.Company != null ? source.Company.CompanyName : "System Survey",
                 ProjectedReach = source.ProjectedReach,
-                IsUseFilter=source.IsUseFilter
+                IsUseFilter=source.IsUseFilter,
+                LastModifiedDate =source.CampaignEventHistories.ToList().Count>0? source.CampaignEventHistories.ToList().LastOrDefault().EventDateTime:null
             };
         }
 
