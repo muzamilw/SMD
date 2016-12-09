@@ -1909,7 +1909,7 @@ define("survey/survey.viewModel",
 
                     if (selectedQuestion().IsUseFilter() == 0) {
 
-                        confirmation.messageText("Switching to Basic Targeting will remove all Hyper Targeting filters."+"</br>"+"Continue to Basic Targeting.");
+                        confirmation.messageText("Switching to Hyper Targeting will remove all Broad Targeting filters." + "</br>" + "Continue to Hyper Targeting.");
                         confirmation.afterProceed(function () {
                             IsBroadMarketing(false);
                             selectedQuestion().SurveyQuestionTargetLocation.removeAll();
@@ -1931,7 +1931,7 @@ define("survey/survey.viewModel",
                     }
                     else {
 
-                        confirmation.messageText("Switching to Basic Targeting will remove all Hyper Targeting filters."+"</br>"+"Continue to Basic Targeting.");
+                        confirmation.messageText("Switching to Broad Targeting will remove all Hyper Targeting filters." + "</br>" + "Continue to Broad Targeting.");
                         confirmation.afterProceed(function () {
                             IsBroadMarketing(true);
                             selectedQuestion().SurveyQuestionTargetLocation.removeAll();

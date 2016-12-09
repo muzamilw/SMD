@@ -18,6 +18,11 @@ namespace Cash4Ads
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+            routes.MapRoute(
+               name: "GetDeals",
+               url: "{controller}/{action}/{id}",
+               defaults: new { controller = "Deal", action = "Index", id = UrlParameter.Optional }
+           );
         }
     }
 }

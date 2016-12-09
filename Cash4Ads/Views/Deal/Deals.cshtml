@@ -1,0 +1,249 @@
+﻿
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var couponId = Request.QueryString["id"];
+}
+<div class="container">
+    <div class="col-lg-12 col-md-8 col-sm-6 hidden-xs hidden-sm content-main-deals content" id="main_copon_cont">
+
+        <div id="back_btn_div">
+            <div style="float:right;">
+                <img style="height:40px;cursor:pointer" src="~/images/back-arrow.png" title="Back to Categories" onclick="NavigateBack()" />
+            </div>
+            <div style="clear:both;"></div>
+        </div>
+
+        <div class="standard-container" style="padding:0px;" id="inner_coupon_cont">
+
+            <div class="unit ctu  js-main-deal selector-620648" data-om=";620648;" data-dealid="620648">
+                <h1 class="mvtest_header_v2 cld" id="couponMainHeading"></h1>
+
+
+                <div class="cld pos-r main-deal-data parent-container">
+                    <div class="slider">
+                        <div class="">
+                            <ul class="slides">
+                                <li class="clone" style="width: 100%; float: left; display: block;">
+
+                                    <a class="main-deal-image-link" href="/payment/620648" style="cursor: pointer;">
+                                        <img id="voucMainSliderImg" src="https://static.wowcher.co.uk/images/deal/620648/154352.jpg" width="778" height="521" class="picture-slides-image deal-detail-img top" alt="£289 for a PDO threadlift on eye bags, £489 for one facial area of your choice or £985 for the full face at Harley Street Elite Clinic - save up to 59%" title="£289 for a PDO threadlift on eye bags, £489 for one facial area of your choice or £985 for the full face at Harley Street Elite Clinic - save up to 59%">
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div id="deal-of-day-esi" class="flt-r">
+
+                        <div class="corner-container ctu-redeem-now main-deal-data"></div>
+                        <div class="ctu-pointsCollect main-deal-data">
+                            <span style="color:white">
+                                Collect 28,900
+                                Club Wowcher points when you buy this deal
+                            </span>
+                        </div>
+                        <div class="ctu-discounted main-deal-data">
+                            <div class="ndod-multiprice" style="padding-top: 35.5px ; ">
+                                <span class="innerColour">
+
+                                    FROM
+                                </span>
+                            </div>
+                            <div class="ndod-price" style="font-size: 64px; margin: 5.5px 0; letter-spacing: -3px">
+                                <span class="inner innerColour">
+                                    <span id="currency_symb" class="ndod-currency" style="font-size:25%!important;"></span><span id="couDiscountedVal" class="ndod-amount">289</span>
+                                </span>
+                            </div>
+                            <a href="http://harleystreeteliteclinic.com/tear-trough/" target="_blank" class="price-link" rel="nofollow">
+                                <del class="ndod-original-price"><span id="currency_symb" class="ndod-currency"></span><span id="couActualVal" class="ndod-amount"></span></del>
+                            </a>
+                        </div><div class="main-deal-data-wrapper">
+                            <div class="ctu-stats-md-topbg"></div>
+                            <div class="ctu-stats main-deal-data">
+
+                                <table class="ctu-stats-table ctu-stats-table-full-width">
+                                    <tbody>
+                                        <tr>
+
+                                            <td>
+                                                <div class="stat-bought"><span class="innerColour">Bought</span><strong style="font-size:55px;line-height:48px" id="coupBought">0</strong></div>
+                                            </td>
+                                            <td>
+                                                <div class="stat-save">
+                                                    <span class="innerColour">Save </span><span class="innerColour">up to </span><strong style="font-size:52px;line-height:48px" id="coupPerct">59%</strong>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="deal-detail-timer timer-620648">
+
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <a title="Buy this deal" class="ctu-buy-big waMultiPrice" data-multibuy="true" onclick="BuyCoupon();" id="mainDealBuy">BUY!</a>
+
+                                @*<a class="waBuyAsGift js-buy-gift-button-track ctu-buy-gift" href="/payment/620648?gift=1">BUY AS A GIFT</a>*@
+
+                            </div>
+
+                             
+
+
+                            <div class="ctu-stats-md-btmbg"></div>
+                        </div><!-- main-deal-data-wrapper END -->
+
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="ctu-details">
+                <div class="twocol">
+                    <h2>Highlights</h2>
+                    <ul style="margin-left:-15px;">
+                        <li class="hl1" style="display:none;"></li>
+
+
+                    </ul>
+                </div>
+                <div class="twocol">
+                    <h2>The Fine Print</h2>
+                    <ul>
+                        <li class="fp1" style="display:none;"></li>
+
+                    </ul>
+                </div>
+                <div><h2>Deal Lines</h2></div>
+
+                <div id="deal_lines"  class="col-lg-4" style="padding:0px;">
+                    
+                </div>
+
+                <div class="col-lg-8">
+
+                </div>
+                <div class="clearfix"></div>
+
+                <div><h2>Reviews</h2></div>
+                <div class="col-lg-4" style="padding:0px;">
+                    <div id="deal_Reviews">
+                        
+
+                    </div>
+                </div>
+                <div class="col-lg-8"></div>
+
+                <br class="clearing">
+
+                
+
+                <div class="deal-detail-fullview-btmbg"></div>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+<script src="~/Scripts/jquery-2.1.4.min.js"></script>
+<script src="~/Scripts/jquery.loader.min.js"></script>
+<script>
+    var Couponid = '@couponId';
+
+    LoadCoupon();
+
+    function LoadCoupon() {
+        
+        
+        var Copurl = 'http://manage.cash4ads.com/Api_Mobile/getcouponbyid/?couponId='+Couponid+'&UserId=7ed5d090-2055-4cf6-ac80-586e44c711ce&Lat=25.197613&Lon=55.274887';
+
+        $.ajax({
+            dataType: "json",
+            url: Copurl,
+            cache: false,
+            success: function (response) {
+                debugger;
+                
+                $("#couponMainHeading").html(response.CouponTitle + '<span class="mvtest_header_v1">' + '' + '</span><div class="btm-header-bg"></div>');
+                $("#voucMainSliderImg").attr('src', response.CouponImage1);
+
+                $("#couDiscountedVal").html(response.Savings);
+                $("#couActualVal").html(response.Price);
+
+
+                $("#coupPerct").text(100 - parseInt((parseFloat(response.Savings) / parseFloat(response.Price)) * 100) + '%');
+                // $("#coupBought").text(couponObj[0].CouponTakenValue);
+                $("#mainDealBuy").attr('data-couponId', response.CouponId);
+
+                if (response.HighlightLine1 != null)
+                {
+                    $(".hl1").css('display','block');
+                    $(".hl1").text(response.HighlightLine1);
+                }
+                if (response.FinePrintLine1 != null) {
+                    $(".fp1").css('display', 'block');
+                    $(".fp1").text(response.FinePrintLine1);
+                }
+                $("#currency_symb").text(response.CurrencyCode);
+                $("#couDiscountedVal").text(response.Savings);
+                $("#couActualVal").text(response.Price);
+
+               
+
+                $(response.CouponPriceOptions).each(function (i, val) {
+
+                    
+                    $("#deal_lines").append('<div> <div style="float:left;padding:0px;" class="deal_lines col-lg-10">' + val.Description + '</div><div style="float:right" class="col-lg-2"><a title="Buy this deal" class="ctu-buy-big waMultiPrice" data-multibuy="true" onclick="BuyCoupon(' + val.CouponId + ');" id="mainDealBuy">BUY!</a></div><div style="clear:both"></div></div>')
+                });
+
+                
+                $(response.CouponRatingReviewResponses).each(function (i, val) {
+                    debugger;
+                   
+                    var valu = formatDate('dd-mm-yy', val.RatingDateTime);
+
+                    $("#deal_Reviews").append('<div id="Review_1" class="deal_rev"><div class="pull-left col-lg-3"><img src='+ val.ProfileImage+' style="border-radius: 29px;height:40px"/></div><div class="pull-right col-lg-9" style="padding:0px;"><div class="pull-left"><div class="Review_heading" style="font-size:14px;color:black">' + val.FullName + '</div></div><div class="pull-right" style="padding-right:10px;color:black;font-size:10px;"> <span>16 dec 2016</span></div><div class="clearfix"></div><div class="review_description" style="font-size:10px;color:black">' + val.Review + ' </div></div><div class="clearfix"></div></div>')
+
+                                
+                        
+                });
+
+                
+
+                            
+                                
+                            
+
+                           
+
+                                
+                                    
+                                
+
+
+
+                                
+                                    
+                                
+                                
+                                
+
+
+                            
+
+                            
+                       
+                }
+        });
+    }
+
+    function NavigateBack()
+    {
+        var url = "/Home/vouchers";
+        window.location.href = url;
+    }
+</script>

@@ -24,18 +24,13 @@
 }
 
 
-
 @section COLOR
 {
-
     <!-- COLOR STYLE CSS -->
     <link rel="stylesheet" href="~/content/green.css">
-
-
-
 }
 
-@Html.Partial("~/Views/Shared/voucherbar.cshtml")
+@*@Html.Partial("~/Views/Shared/voucherbar.cshtml")*@
 
 
 <section style="@colorOfBak " class="text-blue">
@@ -44,7 +39,7 @@
 
 
             <div class="col-md-12">
-                <h1 class="main_title text-white" style="margin-bottom:0px;">
+                <h1 class="main_title text-white" style="margin-bottom:0px;font-size:29px;">
 
                     @Html.Raw(heading)
                 </h1>
@@ -52,46 +47,50 @@
 </div>
                 <div class=" inner-top-xs" id="couponsContains">
 
-                    <div class="col-lg-4  col-md-4 col-sm-12 col-xs-12">
+                    <div class="col-lg-12">
+                        <div class="col-lg-4" style="padding:0px;">
+                            <div class="input-group formcontrol" style="padding-left:0px;padding-right:0px;width:351px;">
 
-                        <div class="input-group col-md-12 formcontrol" style="padding-left:0px;padding-right:0px;">
-
-
-
-                            <input type="text" id="txtKeyword" class="form-control input-lg" placeholder="Search" style="font-size:22px;" />
-                            <span class="input-group-btn">
-                                <button class="btn btn-default btn-lg" type="button">
-                                    <i class="glyphicon glyphicon-search"></i>
-                                </button>
-                            </span>
-                        </div>
-
-                        <div class="input-group col-md-12 formcontrol" style="padding-top:10px;padding-left:0px;padding-right:0px;margin-right:0px;">
-                            <label class="clabel">
-                                <select class="cselect col-md-12" id="selcat">
-                                    <option selected value="0">All Categories</option>
-
-                                </select>
-                            </label>
-
-                        </div>
-
-
-
-
-                        <div class="standard-container extraMargingStandardContainer" style="margin-top:17px;padding-left:20px;padding-right:20px">
-                            <div id="bonus-deals-side">
-
-
+                                <input type="text" id="txtKeyword" class="form-control input-lg" placeholder="Search" style="font-size:22px;height:45px;" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default btn-lg" type="button">
+                                        <i class="glyphicon glyphicon-search"></i>
+                                    </button>
+                                </span>
                             </div>
                         </div>
 
+                        <div class="col-lg-4" style="padding:0px;">
+                            <div class="input-group  formcontrol" style="padding-top:1px;padding-left:0px;padding-right:0px;margin-right:0px;width:351px;">
+                                <label class="clabel">
+                                    <select class="cselect col-md-12" id="selcat" style="height:44px;">
+                                        <option selected value="0">All Categories</option>
+
+                                    </select>
+                                </label>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            </div>
                     </div>
 
-                    <div class="col-lg-8 col-md-8 col-sm-6 hidden-xs hidden-sm content-main-deals content">
+                    <div class="col-lg-12  col-md-4 col-sm-12 col-xs-12" style="margin-bottom:12px;">
+
+                        
 
 
-                        <div class="standard-container" style="padding:0px;">
+                        <div class="standard-container extraMargingStandardContainer" style="margin-top:17px;padding-left:20px;padding-right:20px">
+                                <div id="bonus-deals-side">
+                                </div>
+                        </div>
+
+                        </div>
+
+                    <div class="col-lg-12 col-md-8 col-sm-6 hidden-xs hidden-sm content-main-deals content" style="display:none;" id="main_copon_cont">
+
+
+                        <div class="standard-container" style="padding:0px; display:none;" id="inner_coupon_cont">
 
                             <div class="unit ctu  js-main-deal selector-620648" data-om=";620648;" data-dealid="620648">
                                 <h1 class="mvtest_header_v2 cld" id="couponMainHeading"></h1>
@@ -399,18 +398,14 @@
     var Coupons = [];
     $(document).ready(function () {
       //  $.LoadingOverlay("");
-
-
-
-        GetCategories();
-
+        LoadCategories();
 
     });
 
 
     function getCoupons()
     {
-        debugger;
+     
         var categoryId = $("#selcat option:selected").val();
         var keywords = $("#txtKeyword").val();
         var vtype = @vtype;
@@ -436,7 +431,7 @@
             cache: false,
             success: function (response) {
 
-                debugger;
+               
                 if ( response.TotalCount > 0)
                 {
                     Coupons = response.Coupons;
@@ -445,11 +440,15 @@
                     }
                     var htmlToBindAllVoucher = [];
                     $(response.Coupons).each(function (i, val) {
-                        debugger;
+                      
+
+                       
                       //  var discountedValPer = 100 - parseInt((parseFloat(val.CouponDiscountedValue) / parseFloat(val.CouponActualValue)) * 100);
-                        $("#bonus-deals-side").append(' <div class="ndod-view-mini ndod-view-mini-nodesc"><div class="ndod-deal-header"><h2>' + val.CouponTitle + '</h2></div><div class="ndod-deal-content"><a class="" href="#"><img class="ndod-deal-image  js-show" data-original="' + val.CouponImage + '" src="' + val.CouponImage + '" alt="" /></a><div class="ndod-redeem-now"></div><div class="ndod-business-logo-wrapper"><div class="ndod-business-logo"><img class="" data-original="http://manage.cash4ads.com/images/vLogo.png" src="http://manage.cash4ads.com/images/vLogo.png" width="70" height="28" /> </div><div class="btm-header-bg-business-logo"></div></div><div class="ndod-discount"><div class="ndod-multiprice" style="padding-top: 22.0px ; "><span class="innerColour">NOW</span></div><div class="ndod-price" style="font-size: 36px; margin: 2.0px 0 -1.0px;"><span class="inner innerColour"><span class="ndod-currency">'+val.CurrencyCode+'</span><span class="ndod-amount">' + val.Savings + '</span></span></div><del class="ndod-original-price"><span class="ndod-currency">'+val.CurrencyCode+'</span><span class="ndod-amount">' + val.Price + '</span></del></div></div><div class="ndod-deal-footer-wrapper">  <div class="ndod-deal-footer cld"> <p class="ndod-bought bonus-bought"><span class="ndod-label innerColour">Bought</span><span class="ndod-amount">' + val.SwapCost + '</span></p><p class="ndod-savings"><span class="ndod-label innerColour">Save <span>up to </span></span><span class="ndod-abount">' + val.DealsCount + '<span class="ndod-percent-sign">%</span></span></p><a href="#" onclick="LoadSelectedVoucher(' + val.CouponId + ')" class="ndod-button-small waViewButton"><span class="outer"><span class="inner">VIEW!</span></span>     </a>        </div>         <div class="ndod-deal-footer-btmbg"></div>    </div>    </div></div>');
+                        $("#bonus-deals-side").append(' <div class="ndod-view-mini ndod-view-mini-nodesc"><div class="ndod-deal-header"><h2>' + val.CouponTitle + '</h2></div><div class="ndod-deal-content"><a class="" href="#"><img class="ndod-deal-image  js-show" data-original="' + val.CouponImage1 + '" src="' + val.CouponImage1 + '" alt="" /></a><div class="ndod-redeem-now"></div><div class="ndod-business-logo-wrapper"><div class="ndod-business-logo"><img id="Company_logo" class="" data-original="' + val.LogoUrl + '" src="' + val.LogoUrl + '" width="70" height="28" /> </div><div class="btm-header-bg-business-logo"></div></div><div class="ndod-discount"><div class="ndod-multiprice" style="padding-top: 22.0px ; "><span class="innerColour">NOW</span></div><div class="ndod-price" style="font-size: 36px; margin: 2.0px 0 -1.0px;"><span class="inner innerColour"><span class="ndod-currency">'+val.CurrencyCode+'</span><span class="ndod-amount">' + val.Savings + '</span></span></div><del class="ndod-original-price"><span class="ndod-currency">'+val.CurrencyCode+'</span><span class="ndod-amount">' + val.Price + '</span></del></div></div><div class="ndod-deal-footer-wrapper">  <div class="ndod-deal-footer cld"> <p class="ndod-bought bonus-bought"><span class="ndod-label innerColour">Bought</span><span class="ndod-amount">' + val.SwapCost + '</span></p><p class="ndod-savings"><span class="ndod-label innerColour">Save <span>up to </span></span><span class="ndod-abount">' + val.DealsCount + '<span class="ndod-percent-sign">%</span></span></p><a href="#" onclick="NavigateToDeal(' + val.CouponId + ')" class="ndod-button-small waViewButton"><span class="outer"><span class="inner">VIEW!</span></span>     </a>        </div>         <div class="ndod-deal-footer-btmbg"></div>    </div>    </div></div>');
                     });
-                    LoadSelectedVoucher(couponFId);
+                    $("#bonus-deals-side").append('<div style="clear:both;"></div>');
+
+                   // LoadSelectedVoucher(couponFId);
 
                 }
                 else
@@ -494,6 +493,7 @@
 
 
     $('#selcat').on('change', function() {
+        $("#bonus-deals-side").css('display','block');
         getCoupons();
     });
 
@@ -502,15 +502,22 @@
         var couponObj = $.grep(Coupons, function (n, i) {
             return (n.CouponId == CouponId);
         });
+
+        
         if (couponObj != null) {
-            $("#couponMainHeading").html(couponObj[0].CouponTitle + '<span class="mvtest_header_v1">' + couponObj[0].Firstline + ' ' + couponObj[0].SecondLine + '</span><div class="btm-header-bg"></div>');
-            $("#voucMainSliderImg").attr('src', couponObj[0].CouponImage);
+            $("#inner_coupon_cont,#main_copon_cont").css('display','block');
+            $("#bonus-deals-side,.extraMargingStandardContainer").css('display','none');
+            //$("#couponMainHeading").html(couponObj[0].CouponTitle + '<span class="mvtest_header_v1">' + couponObj[0].Firstline + ' ' + couponObj[0].SecondLine + '</span><div class="btm-header-bg"></div>');
 
-            $("#couDiscountedVal").html(couponObj[0].CouponDiscountedValue);
-            $("#couActualVal").html(couponObj[0].CouponActualValue);
+            $("#couponMainHeading").html(couponObj[0].CouponTitle + '<span class="mvtest_header_v1">' + '' + '</span><div class="btm-header-bg"></div>');
+            $("#voucMainSliderImg").attr('src', couponObj[0].CouponImage1);
 
-            $("#coupPerct").text(100 - parseInt((parseFloat(couponObj[0].CouponDiscountedValue) / parseFloat(couponObj[0].CouponActualValue)) * 100) + '%');
-            $("#coupBought").text(couponObj[0].CouponTakenValue);
+            $("#couDiscountedVal").html(couponObj[0].Savings);
+            $("#couActualVal").html(couponObj[0].Price);
+
+            
+            $("#coupPerct").text(100 - parseInt((parseFloat(couponObj[0].Savings) / parseFloat(couponObj[0].Price)) * 100) + '%');
+           // $("#coupBought").text(couponObj[0].CouponTakenValue);
             $("#mainDealBuy").attr('data-couponId', couponObj[0].CouponId);
         }
 
@@ -538,5 +545,25 @@
             });
         }
 
+        
     }
+    function LoadCategories()
+    {
+            
+        GetCategories();
+        $("#inner_coupon_cont,#main_copon_cont,#toggle_btn").css('display','none');
+        $("#bonus-deals-side,.extraMargingStandardContainer").css('display','block');
+
+    }
+    function Toggle()
+    {
+        LoadCategories();
+    }
+
+    function NavigateToDeal(id)
+    {
+        var url = "/Deal?id=" + id; 
+        window.location.href = url; 
+    }
+
 </script>
