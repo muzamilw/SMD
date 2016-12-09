@@ -58,7 +58,11 @@
         LastDayPercentageCouponsNearMe = 35,
         Last3DaysDollarDiscountCouponsNearMe = 36,
         Last2DaysDollarDiscountCouponsNearMe = 37,
-        LastDayDollarDiscountCouponsNearMe = 38 
+        LastDayDollarDiscountCouponsNearMe = 38,
+        WeeklyVideoAdPerformanceStats = 39,
+        WeeklyDisplayAdPerformanceStats = 40,
+        WeeklyDealPerformanceStats = 41,
+        WeeklyPollSurveyPerformanceStats = 42,
     }
 
     public enum AdCampaignCriteriaType

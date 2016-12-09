@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta content="IE=edge" http-equiv="X-UA-Compatible" />
     <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <title>Video Ad Performance Update
+    <title>Deal Performance Update
     </title>
     <style type="text/css">
         /*////// RESET STYLES //////*/
@@ -201,7 +201,7 @@
       <table align="center" border="0" cellpadding="0" cellspacing="0" height="100%" id="bodyTable" width="100%">        
         <tr>          
           <td align="center" id="bodyCell" valign="top">            
-            <span style="color:#FFFFFF; display:none; font-size:0px; height:0px; visibility:hidden; width:0px;">Video Ad Performance Update ++campaignname++</span>
+            <span style="color:#FFFFFF; display:none; font-size:0px; height:0px; visibility:hidden; width:0px;">Deal Performance Update ++campaignname++</span>
 <!-- BEGIN TEMPLATE // -->
             <table border="0" cellpadding="0" cellspacing="0" width="100%">              
               <tr>                
@@ -220,7 +220,7 @@
                     <tr>                      
                       <td align="center" style="padding-bottom:10px;" valign="top">                        
                         <h1 style="color:#FFFFFF; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:30px; font-style:normal; font-weight:600; line-height:42px; letter-spacing:normal; margin:0; padding:0; text-align:center;">
-                        Video Ad Performance Update
+                        Deal Performance Update
                         </h1>
                       </td>
                     </tr>
@@ -322,7 +322,7 @@
                                                     <td style="padding:19px 0 15px;text-align:right"><p style="color:++clickthroughcolor++; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:right;">++trendc++%</p></td>
                                                 </tr>
                                                 <tr style="border-bottom:1px solid #e8e8e8">
-                                                    <td style="padding:19px 0 15px"><p style="color:#0f68a1; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:normal; line-height:24px; padding-top:0; margin-top:0; text-align:left;">Landing Page Click Throughs</p></td>
+                                                    <td style="padding:19px 0 15px"><p style="color:#0f68a1; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:normal; line-height:24px; padding-top:0; margin-top:0; text-align:left;">Deal Groups Opened(impressions)</p></td>
                                                     <td style="padding:19px 0 15px;text-align:right"><p style="color:#0f68a1; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:normal; line-height:24px; padding-top:0; margin-top:0; text-align:right;">++alw++</p></td>
                                                     <td style="padding:19px 0 15px;text-align:right"><p style="color:#0f68a1; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:normal; line-height:24px; padding-top:0; margin-top:0; text-align:right;">++apw++</p></td>
                                                     <td style="padding:19px 0 15px;text-align:right"><p style="color:++answercolor++; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:right;">++trenda++%</p></td>
@@ -341,7 +341,7 @@
                                              </td>
                                         <td align="center" style="padding-right:20px; padding-bottom:60px;" valign="top" >
                                             <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
-Open Display Ad Campaign from your dashboard  to view Charts for full analytics.
+Open Deal Campaign from your dashboard  to view Charts for full analytics.
 
                                           </p>
                                             </td>
@@ -374,10 +374,12 @@ Open Display Ad Campaign from your dashboard  to view Charts for full analytics.
                                         </td>
                                         <td align="left" style="padding-bottom:40px;" valign="top">                                          
                                           <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
-                                           Create Seperate Campaigns and Target people in Different Cities
+                                           Create up to 6 Deal Lines per Group
                                           </p>
                                           <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
-                                         Copy a Campaign and change the basic segmentation filters to see campaigns worked best
+                                         Link individual Deal Lines to your seperate Web Site, FaceBook or
+Landing Pages.  
+
 
 
                                           </p>
@@ -389,11 +391,12 @@ Open Display Ad Campaign from your dashboard  to view Charts for full analytics.
                                         </td>
                                         <td align="left" style="padding-bottom:40px;" valign="top">                                          
                                           <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
-                                          Use Your Survey Results To Re-Target people depending on their responses
+                                          Make Your Leader Deal a CountDown Deal
                                           </p>
                                           <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
-                                          Plan Customer Marketing Journies by linking future campaigns based on
-results from Surveys and Poll Pictures.
+                                          Plan a Deal which increases the Saving to consumers as it nears
+the end of the Deal Listing. e.g. offer bigger discount on the Last few days and hours.
+
 
 
 

@@ -157,6 +157,7 @@ namespace SMD.Implementation.Services
         public string BuyItURL { get; set; }
         public string CampaignName { get; set; }
 
+
         public string CampaignClicksPerDay { get; set; }
 
         public string CampaignVideoPath { get; set; }
@@ -168,6 +169,20 @@ namespace SMD.Implementation.Services
         public string DealNoOfDays { get; set; }
 
         public string UserDealsHTML { get; set; }
+
+        public string ctlw { get; set; }
+        public string ctpq { get; set; }
+        public string trendc { get; set; }
+        public string alw { get; set; }
+        public string apw { get; set; }
+        public string trenda { get; set; }
+        public string clickthroughcolor { get; set; }
+        public string answercolor { get; set; }
+
+        public string winnerpoll { get; set; }
+        public string winnerpollperc { get; set; }
+
+        public string pollanswercount { get; set; }
         
         public string RejectionReason { get; set; }
 
@@ -230,6 +245,23 @@ namespace SMD.Implementation.Services
             MBody = MBody.Replace("++campaignbannerimage++", CampaignBannerImage);
             MBody = MBody.Replace("++dealnoofdays++", DealNoOfDays);
             MBody = MBody.Replace("++userdealshtml++", UserDealsHTML);
+
+
+            MBody = MBody.Replace("++ctlw++", ctlw);
+            MBody = MBody.Replace("++ctpq++", ctpq);
+            MBody = MBody.Replace("++trendc++", trendc);
+            MBody = MBody.Replace("++alw++", alw);
+            MBody = MBody.Replace("++apw++", apw);
+            MBody = MBody.Replace("++trenda++", trenda);
+            MBody = MBody.Replace("++clickthroughcolor++", clickthroughcolor);
+            MBody = MBody.Replace("++answercolor++", answercolor);
+
+
+             MBody = MBody.Replace("++winnerpoll++", winnerpoll);
+             MBody = MBody.Replace("++winnerpollperc++", winnerpollperc);
+             MBody = MBody.Replace("++pollanswercount++", pollanswercount);
+
+                       
              
             
             MBody = MBody.Replace("++CurrentDateTime++", DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToLongTimeString() + " GMT");
@@ -354,6 +386,21 @@ namespace SMD.Implementation.Services
             MBody = MBody.Replace("++campaignbannerimage++", CampaignBannerImage);
             MBody = MBody.Replace("++dealnoofdays++", DealNoOfDays);
             MBody = MBody.Replace("++userdealshtml++", UserDealsHTML);
+
+
+            MBody = MBody.Replace("++ctlw++", ctlw);
+            MBody = MBody.Replace("++ctpq++", ctpq);
+            MBody = MBody.Replace("++trendc++", trendc);
+            MBody = MBody.Replace("++alw++", alw);
+            MBody = MBody.Replace("++apw++", apw);
+            MBody = MBody.Replace("++trenda++", trenda);
+            MBody = MBody.Replace("++clickthroughcolor++", clickthroughcolor);
+            MBody = MBody.Replace("++answercolor++", answercolor);
+
+            MBody = MBody.Replace("++winnerpoll++", winnerpoll);
+            MBody = MBody.Replace("++winnerpollperc++", winnerpollperc);
+            MBody = MBody.Replace("++pollanswercount++", pollanswercount);
+                
             MBody = MBody.Replace("++CurrentDateTime++", DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToLongTimeString() + " GMT");
             MBody = MBody.Replace("++EmailConfirmationLink++", EmailConfirmationLink);
             MBody = MBody.Replace("++inviteurl++", InviteURL);
@@ -1292,6 +1339,132 @@ namespace SMD.Implementation.Services
         }
 
 
+        public void SendCampaignPerformanceEmails()
+        {
+
+            var data = userRepository.GetCampaignPerformanceWeeklyStats();//new deals for today
+
+
+            foreach (var campaign in data)
+            {
+                MMailto.Clear();
+
+                MMailto.Add(campaign.email);
+
+                CampaignName = campaign.CampaignName;
+
+                switch (campaign.type)
+                {
+                    case 1:
+                        {
+                            Mid = (int)EmailTypes.WeeklyVideoAdPerformanceStats;
+                            
+                            ctlw = campaign.ClickThroughsLastWeek.ToString();
+                            ctpq = campaign.ClickThroughsPreviousWeek.ToString();
+                            trendc = campaign.ProgressPercentage.ToString();
+
+                            if (campaign.ProgressPercentage > 0)
+                                clickthroughcolor = "green";
+                            else
+                                clickthroughcolor = "red";
+
+
+                            alw = campaign.AnsweredLastWeek.ToString();
+                            apw = campaign.AnsweredPreviousWeek.ToString();
+                            trenda = campaign.ProgressPercentageAnswer.ToString();
+
+                            if (campaign.ProgressPercentageAnswer > 0)
+                                answercolor = "green";
+                            else
+                                answercolor = "red";
+
+
+                            break;
+                        }
+                    case 4:
+                        {
+                            Mid = (int)EmailTypes.WeeklyDisplayAdPerformanceStats;
+
+                            ctlw = campaign.ClickThroughsLastWeek.ToString();
+                            ctpq = campaign.ClickThroughsPreviousWeek.ToString();
+                            trendc = campaign.ProgressPercentage.ToString();
+
+                            if (campaign.ProgressPercentage > 0)
+                                clickthroughcolor = "green";
+                            else
+                                clickthroughcolor = "red";
+
+
+                            alw = campaign.AnsweredLastWeek.ToString();
+                            apw = campaign.AnsweredPreviousWeek.ToString();
+                            trenda = campaign.ProgressPercentageAnswer.ToString();
+
+                            if (campaign.ProgressPercentageAnswer > 0)
+                                answercolor = "green";
+                            else
+                                answercolor = "red";
+
+
+                            break;
+                        }
+                    case 5:
+                        {
+                            Mid = (int)EmailTypes.WeeklyDealPerformanceStats;
+
+                            ctlw = campaign.ClickThroughsLastWeek.ToString();
+                            ctpq = campaign.ClickThroughsPreviousWeek.ToString();
+                            trendc = campaign.ProgressPercentage.ToString();
+
+                            if (campaign.ProgressPercentage > 0)
+                                clickthroughcolor = "green";
+                            else
+                                clickthroughcolor = "red";
+
+
+                            alw = campaign.AnsweredLastWeek.ToString();
+                            apw = campaign.AnsweredPreviousWeek.ToString();
+                            trenda = campaign.ProgressPercentageAnswer.ToString();
+
+                            if (campaign.ProgressPercentageAnswer > 0)
+                                answercolor = "green";
+                            else
+                                answercolor = "red";
+
+
+                            break;
+                        }
+                    case 6:
+                        {
+                            Mid = (int)EmailTypes.WeeklyPollSurveyPerformanceStats;
+
+                           
+                            if( campaign.LeftPicResponseCount > campaign.RightPicResponseCount)
+                            {
+                                winnerpoll = "One";
+                                winnerpollperc = ((campaign.LeftPicResponseCount - campaign.RightPicResponseCount) / campaign.RightPicResponseCount * 100).ToString() + "%";
+                            }
+                            else
+                            {
+                                winnerpoll = "Two";
+                                winnerpollperc = ((campaign.RightPicResponseCount - campaign.LeftPicResponseCount) / campaign.LeftPicResponseCount * 100).ToString() + "%";
+                            }
+
+                            pollanswercount = (campaign.LeftPicResponseCount + campaign.RightPicResponseCount).ToString();
+
+                     
+                            break;
+                        }
+                }
+
+                Muser = campaign.FullName;
+
+                SendEmailNotAysnc();
+                
+            }
+
+            
+        }
+
         public void SendNewDealsEmail(int mode)
         {
 
@@ -1299,27 +1472,27 @@ namespace SMD.Implementation.Services
 
             string userDeals = string.Empty;
 
-            var users = data.GroupBy(x => new { x.UserId, x.FullName, x.Email});
+            var users = data.GroupBy(x => new { x.UserId, x.FullName, x.Email });
 
             foreach (var user in users)
             {
                 userDeals = "<table align=\"center\" bgcolor=\"#F2F2F2\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style='width:100%;'>";
                 //user.Key.UserId
-                
-                    foreach (var item in user)
-                    {
-                        userDeals += "<tr><td colspan='2' align=\"center\"><img style='text-align:center;max-width:560px' src='" + item.couponimage1 + "'/></td></tr>";
-                        userDeals += "<tr><td colspan='2' align=\"center\" style='text-align:center;padding-bottom:10px;'><p style=\"style=color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;\">" + item.CouponTitle  + " <span style='color:red'>" +item.CurrencySymbol + "" + item.SavingsNew + "</span></p></td></tr>";
-                        userDeals += "<tr><td style='padding-left:64px;padding-bottom:60px'><p style=\"style=color:red; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;\">was " + item.CurrencySymbol + "" + item.price + "</p></td><td align='right' style='padding-right:60px'><a href='http://deals.cash4ads.com/deal/" + item.CouponId + "' style=\"background-color:#6DC6DD; border-collapse:separate; border-top:20px solid #6DC6DD; border-right:40px solid #6DC6DD; border-bottom:20px solid #6DC6DD; border-left:40px solid #6DC6DD; border-radius:3px; color:#FFFFFF; display:inline-block; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:600; letter-spacing:.3px; text-decoration:none;\" target='_blank'>VIEW DEAL</a></td></tr>";
-                    }
+
+                foreach (var item in user)
+                {
+                    userDeals += "<tr><td colspan='2' align=\"center\"><img style='text-align:center;max-width:560px' src='" + item.couponimage1 + "'/></td></tr>";
+                    userDeals += "<tr><td colspan='2' align=\"center\" style='text-align:center;padding-bottom:10px;'><p style=\"style=color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;\">" + item.CouponTitle + " <span style='color:red'>" + item.CurrencySymbol + "" + item.SavingsNew + "</span></p></td></tr>";
+                    userDeals += "<tr><td style='padding-left:64px;padding-bottom:60px'><p style=\"style=color:red; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;\">was " + item.CurrencySymbol + "" + item.price + "</p></td><td align='right' style='padding-right:60px'><a href='http://deals.cash4ads.com/deal/" + item.CouponId + "' style=\"background-color:#6DC6DD; border-collapse:separate; border-top:20px solid #6DC6DD; border-right:40px solid #6DC6DD; border-bottom:20px solid #6DC6DD; border-left:40px solid #6DC6DD; border-radius:3px; color:#FFFFFF; display:inline-block; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:600; letter-spacing:.3px; text-decoration:none;\" target='_blank'>VIEW DEAL</a></td></tr>";
+                }
 
 
-                 userDeals += "</table>";
-                
-           
+                userDeals += "</table>";
+
+                MMailto.Clear();
 
                 MMailto.Add(user.Key.Email);
-                if ( mode == 1)
+                if (mode == 1)
                     Mid = (int)EmailTypes.NewCouponsNearMe;
                 else if (mode == 2)
                     Mid = (int)EmailTypes.Last3DaysPercentageCouponsNearMe;
@@ -1337,15 +1510,13 @@ namespace SMD.Implementation.Services
 
                 Muser = user.Key.FullName;
                 UserDealsHTML = userDeals;
-               
+
 
                 SendEmailNotAysnc();
-                
+
             }
 
-            
+
         }
-
-
     }
 }

@@ -1225,7 +1225,7 @@ namespace SMD.Implementation.Services
         public async Task<LoginResponse> RegisterExternal(RegisterExternalRequest request)
         {
 
-            var user = new User { UserName = request.Email, Email = request.Email, FullName = request.FullName, DOB = null, Status = 1, ProfileImage = request.ProfilePicturePath, DevicePlatform = request.Client == "android" ? 1 : 0 };
+            var user = new User { UserName = request.Email, Email = request.Email, FullName = request.FullName, DOB = null, Status = 1, ProfileImage = request.ProfilePicturePath, DevicePlatform = request.Client == "android" ? 1 : 0, optMarketingEmails = true, optLatestNewsEmails = true, optDealsNearMeEmails = true };
             var result = await UserManager.CreateAsync(user);
             if (!result.Succeeded)
             {

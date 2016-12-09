@@ -26,5 +26,8 @@ namespace DomainModelProject
         public Nullable<double> ProgressPercentageAnswer { get; set; }
         public Nullable<int> LeftPicResponseCount { get; set; }
         public Nullable<int> RightPicResponseCount { get; set; }
+        public string email { get; set; }
+        public string FullName { get; set; }
+        public string userid1 { get; set; }
     }
 }

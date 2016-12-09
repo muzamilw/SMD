@@ -7819,12 +7819,17 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="Int32" Name="companyid" Nullable="true" />
           <Property Type="Int32" Name="type" Nullable="true" />
           <Property Type="Int64" Name="campaignid" Nullable="false" />
-          <Property Type="String" Name="CampaignName" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="CampaignName" Nullable="true" MaxLength="500" />
           <Property Type="Int32" Name="ClickThroughsLastWeek" Nullable="true" />
           <Property Type="Int32" Name="ClickThroughsPreviousWeek" Nullable="true" />
-          <Property Type="Int32" Name="ProgressPercentage" Nullable="true" />
+          <Property Type="Double" Name="ProgressPercentage" Nullable="true" />
           <Property Type="Int32" Name="AnsweredLastWeek" Nullable="true" />
           <Property Type="Int32" Name="AnsweredPreviousWeek" Nullable="true" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="FullName" Nullable="false" MaxLength="200" />
+          <Property Type="Double" Name="ProgressPercentageAnswer" Nullable="true" />
+          <Property Type="Int32" Name="LeftPicResponseCount" Nullable="true" />
+          <Property Type="Int32" Name="RightPicResponseCount" Nullable="true" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -9971,6 +9976,11 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
                 <ScalarProperty Name="ProgressPercentage" ColumnName="ProgressPercentage" />
                 <ScalarProperty Name="AnsweredLastWeek" ColumnName="AnsweredLastWeek" />
                 <ScalarProperty Name="AnsweredPreviousWeek" ColumnName="AnsweredPreviousWeek" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="ProgressPercentageAnswer" ColumnName="ProgressPercentageAnswer" />
+                <ScalarProperty Name="LeftPicResponseCount" ColumnName="LeftPicResponseCount" />
+                <ScalarProperty Name="RightPicResponseCount" ColumnName="RightPicResponseCount" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

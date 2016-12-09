@@ -759,6 +759,27 @@
     <Compile Include="Emails\NewDeals.aspx.designer.cs">
       <DependentUpon>NewDeals.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Emails\DisplayAd_Performance.aspx.cs">
+      <DependentUpon>DisplayAd_Performance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\DisplayAd_Performance.aspx.designer.cs">
+      <DependentUpon>DisplayAd_Performance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Deal_Performance.aspx.cs">
+      <DependentUpon>Deal_Performance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Deal_Performance.aspx.designer.cs">
+      <DependentUpon>Deal_Performance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Picture_Poll_Performance.aspx.cs">
+      <DependentUpon>Picture_Poll_Performance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Picture_Poll_Performance.aspx.designer.cs">
+      <DependentUpon>Picture_Poll_Performance.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Emails\Video_Performance.aspx.cs">
       <DependentUpon>Video_Performance.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1432,6 +1453,9 @@
     <Content Include="Emails\Video_Ad_Approved.aspx" />
     <Content Include="Emails\subscription_created.aspx" />
     <Content Include="Emails\NewDeals.aspx" />
+    <Content Include="Emails\DisplayAd_Performance.aspx" />
+    <Content Include="Emails\Deal_Performance.aspx" />
+    <Content Include="Emails\Picture_Poll_Performance.aspx" />
     <Content Include="Emails\Video_Performance.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />

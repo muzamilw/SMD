@@ -46,7 +46,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         {
 
 
-            emailService.SendNewDealsEmail(mode);
+            emailService.SendCampaignPerformanceEmails();
             return "success";
 
         }
