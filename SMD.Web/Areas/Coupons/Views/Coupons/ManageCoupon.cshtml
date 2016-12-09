@@ -1894,7 +1894,7 @@ else
 <script id="TabDetailTemplate" type="text/html">
 
 
-    <div class="tab-pane active" data-bind="attr: { id: 'tab-stockLabel' + $index() }">
+    <div class="tab-pane" data-bind="attr: { id: 'tab-stockLabel' + $index() },css:{active:$index()==0}">
         <div class=" row" style="margin-bottom:10px;background-color:white;">
             <div class="col-lg-6"></div>
             <span class="col-lg-2 GridHeaderFont_size"> <span>Was<span data-bind="text:$root.currencyCode"></span></span></span>
@@ -1991,10 +1991,10 @@ else
             </div>
 
             @*<div class="row" style="padding-top:20px;">
-                <div class="col-lg-12 text-center">
-                    <label class="text-center">OR</label>
-                </div>
-            </div>*@
+                    <div class="col-lg-12 text-center">
+                        <label class="text-center">OR</label>
+                    </div>
+                </div>*@
 
             <div class="row" style="padding-top:20px;" data-bind="visible:$root.couponModel().IsDollarSaving3days">
                 <div class="col-lg-4" style="padding-right:0px;">

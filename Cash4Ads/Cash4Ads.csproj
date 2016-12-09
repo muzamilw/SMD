@@ -159,6 +159,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DealController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -210,6 +211,7 @@
     <Content Include="images\Affiliate_Slider_3.png" />
     <Content Include="images\ajax-loader.gif" />
     <Content Include="images\au.png" />
+    <Content Include="images\back-arrow.png" />
     <Content Include="images\bg-grad-unit-top.png" />
     <Content Include="images\blue-circle.svg" />
     <Content Include="images\brand-icons-sprite1.png" />
@@ -327,6 +329,7 @@
     <Content Include="Views\Home\vouchers.cshtml" />
     <Content Include="Views\Home\advertisers - Copy.cshtml" />
     <Content Include="Views\Home\get_paid_watch_ads - Copy.cshtml" />
+    <Content Include="Views\Deal\Deals.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
