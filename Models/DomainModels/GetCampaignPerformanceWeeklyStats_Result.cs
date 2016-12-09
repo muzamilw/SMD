@@ -20,8 +20,11 @@ namespace SMD.Models.DomainModels
         public string CampaignName { get; set; }
         public Nullable<int> ClickThroughsLastWeek { get; set; }
         public Nullable<int> ClickThroughsPreviousWeek { get; set; }
-        public Nullable<int> ProgressPercentage { get; set; }
+        public Nullable<double> ProgressPercentage { get; set; }
         public Nullable<int> AnsweredLastWeek { get; set; }
         public Nullable<int> AnsweredPreviousWeek { get; set; }
+        public Nullable<double> ProgressPercentageAnswer { get; set; }
+        public Nullable<int> LeftPicResponseCount { get; set; }
+        public Nullable<int> RightPicResponseCount { get; set; }
     }
 }

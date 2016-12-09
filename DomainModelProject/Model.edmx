@@ -259,7 +259,7 @@
           <Property Name="LanguageID" Type="int" />
           <Property Name="IndustryID" Type="int" />
           <Property Name="EducationId" Type="bigint" />
-          <Property Name="ProfileImage" Type="nvarchar" MaxLength="200" />
+          <Property Name="ProfileImage" Type="nvarchar" MaxLength="500" />
           <Property Name="UserCode" Type="nvarchar" MaxLength="300" />
           <Property Name="SmsCode" Type="nvarchar" MaxLength="50" />
           <Property Name="WebsiteLink" Type="nvarchar" MaxLength="100" />
@@ -3816,7 +3816,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="LanguageID" Type="Int32" />
           <Property Name="IndustryID" Type="Int32" />
           <Property Name="EducationId" Type="Int64" />
-          <Property Name="ProfileImage" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ProfileImage" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="UserCode" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="SmsCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="WebsiteLink" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -7740,12 +7740,15 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="Int32" Name="companyid" Nullable="true" />
           <Property Type="Int32" Name="type" Nullable="true" />
           <Property Type="Int64" Name="campaignid" Nullable="false" />
-          <Property Type="String" Name="CampaignName" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="CampaignName" Nullable="true" MaxLength="500" />
           <Property Type="Int32" Name="ClickThroughsLastWeek" Nullable="true" />
           <Property Type="Int32" Name="ClickThroughsPreviousWeek" Nullable="true" />
-          <Property Type="Int32" Name="ProgressPercentage" Nullable="true" />
+          <Property Type="Double" Name="ProgressPercentage" Nullable="true" />
           <Property Type="Int32" Name="AnsweredLastWeek" Nullable="true" />
           <Property Type="Int32" Name="AnsweredPreviousWeek" Nullable="true" />
+          <Property Type="Double" Name="ProgressPercentageAnswer" Nullable="true" />
+          <Property Type="Int32" Name="LeftPicResponseCount" Nullable="true" />
+          <Property Type="Int32" Name="RightPicResponseCount" Nullable="true" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -9854,6 +9857,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
                 <ScalarProperty Name="ProgressPercentage" ColumnName="ProgressPercentage" />
                 <ScalarProperty Name="AnsweredLastWeek" ColumnName="AnsweredLastWeek" />
                 <ScalarProperty Name="AnsweredPreviousWeek" ColumnName="AnsweredPreviousWeek" />
+                <ScalarProperty Name="ProgressPercentageAnswer" ColumnName="ProgressPercentageAnswer" />
+                <ScalarProperty Name="LeftPicResponseCount" ColumnName="LeftPicResponseCount" />
+                <ScalarProperty Name="RightPicResponseCount" ColumnName="RightPicResponseCount" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
