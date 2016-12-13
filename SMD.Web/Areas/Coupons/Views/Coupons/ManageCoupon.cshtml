@@ -757,7 +757,7 @@ else
                                             </select>
                                         </div>
                                         <div class="col-lg-3 pull-right" style="padding-left:16px;">
-                                            <button class="btn  btn-success" id="saveBtn" style="width:160px;">Save 20% - Buy Now</button>
+                                            <button class="btn  btn-success" id="saveBtn" style="width:180px;" data-bind="text:$root.saveBtntext">Save 20% - Buy Now</button>
                                         </div>
                                     </div>
 
@@ -797,7 +797,7 @@ else
                                         </div>
                                         <div class="col-lg-9" style="padding-left:6px;">
                                             <div class="radio col-lg-12" style="text-align: left;">
-                                                <input type="radio" name="optionsRadioSaveBtn" value="1" id="optionsRadiosSave">
+                                                <input type="radio" name="optionsRadioSaveBtn" value="1" id="optionsRadiosSave" data-bind="checked:isSaveBtnLable,click:$root.onSaveBtnLabel">
                                                 <label for="optionsRadiosSave">
                                                     <span style="font-weight:bold;font-size:12px;">Show Save % on Button </span>
 
@@ -805,14 +805,14 @@ else
                                                 <span class="help-block text-right"></span>
                                             </div>
                                             <div class="radio col-lg-12" style="text-align: left;">
-                                                <input type="radio" name="optionsRadioSaveBtn" value="2" id="optionsRadiosApplyPrice">
+                                                <input type="radio" name="optionsRadioSaveBtn" value="2" id="optionsRadiosApplyPrice" data-bind="checked:isSaveBtnLable,click:$root.onSaveBtnLabel">
                                                 <label for="optionsRadiosApplyPrice">
                                                     <span style="font-weight:bold;font-size:12px;">Show Save Price On Button</span>
                                                 </label>
                                                 <span class="help-block text-right"></span>
                                             </div>
                                             <div class="radio col-lg-12" style="text-align: left;">
-                                                <input type="radio" name="optionsRadioSaveBtn" value="3" id="optionsRadiosApplyLabel">
+                                                <input type="radio" name="optionsRadioSaveBtn" value="3" id="optionsRadiosApplyLabel" data-bind="checked:isSaveBtnLable,click:$root.onSaveBtnLabel">
                                                 <label for="optionsRadiosApplyLabel">
                                                     <span style="font-weight:bold;font-size:12px;">Just Show Label On Button</span>
                                                 </label>

@@ -603,7 +603,8 @@ namespace SMD.MIS.ModelMappers
                 IsDollarSaving3days = source.IsDollarSaving3days,
                 IsDollarSaving2days = source.IsDollarSaving2days,
                 IsDollarSavingLastday = source.IsDollarSavingLastday,
-                LastModifiedDate = source.CampaignEventHistories.ToList().Count > 0 ? source.CampaignEventHistories.ToList().LastOrDefault().EventDateTime : null
+                LastModifiedDate = source.CampaignEventHistories.ToList().Count > 0 ? source.CampaignEventHistories.ToList().LastOrDefault().EventDateTime : null,
+                isSaveBtnLable = source.isSaveBtnLable
                 
 
               };
