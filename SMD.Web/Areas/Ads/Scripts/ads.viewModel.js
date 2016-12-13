@@ -212,14 +212,54 @@ define("ads/ads.viewModel",
                 CampaignName3 = ko.observable(),
                 LogoUrl3 = ko.observable(),
                 VideoLink3 = ko.observable(),
+                ischartOpened = ko.observable(false),
 				openAdvertiserDashboardScreen = function (Campaign) {
+				 //   IsthisEditCamapiagn(true);
+				 //   previewScreenNumber(1);
+				   // isTerminateBtnVisible(false);
+				    //isNewCampaignVisible(false);
+				   // isShowArchiveBtn(false);
+				    // buyItQuestionLabelStatus(false);
+				  //  campaignModel(new model.Campaign());
+				    //campaignModel().CampaignName('testing');
+				    collapseMainMenu();
+				  //  TodisplayImg(true);
+				    openEditScreen(1);
+				 
+				    ischartOpened(true);
+				    isListVisible(false);
+				    isNewCampaign(false);
+				    //   isFromEdit(true);
+				    //isNewCampaignVisible(false);
+				   // VideoLink2src(0);
+				   // FlagToShowDivs(false);
 
+				    //$("#logo_div").css("display", "block");
+				    //$(".hideInCoupons").css("display", "none");
+
+				    //$("#MarketobjDiv").css("display", "none");
+				    //$("#topArea").css("display", "none");
+				    //$("#panelArea").css("display", "none");
+
+				    //$("#Heading_div").css("display", "none");
+
+				    //$(".closecls").css("display", "none");
+
+				    //if (Campaign.Status() == 1 || Campaign.Status() == 2 || Campaign.Status() == 3 || Campaign.Status() == 4 || Campaign.Status() == 6 || Campaign.Status() == null || Campaign.Status() == 7 || Campaign.Status() == 9) {
+				    //    collapseMainMenu();
+
+				    //    if (Campaign.Status() == 1)//because it is in draft mode.
+				    //        isNewCampaign(true);
+				    //    else
+				    //        isNewCampaign(false);
+				    //}
+				   
 				    if (!isNewCampaign()) {
 				        isflageClose(true);
 				        selectedCampaignIdAnalytics(Campaign.CampaignID());
 				        getAdsByCampaignIdAnalytics();
 				        getFormAnalytic();
-				        // getQQAnalytic();
+				        getQQAnalytic();
 				        $("#ddGranularityDropDown").removeAttr("disabled");
 				        $("#ddDateRangeDropDown").removeAttr("disabled");
 				        $("#ddCampaignStatusDropDown").removeAttr("disabled");
@@ -237,7 +277,7 @@ define("ads/ads.viewModel",
 				    }
 				},
                       getQAnalytic = function (item) {
-                          //  var data = item;
+                            var data = item;
                           SelectedItemAnalytics(item);
                           dataservice.getQQAnalytic({
                               Id: selectedCampaignIdAnalytics(),
@@ -245,7 +285,7 @@ define("ads/ads.viewModel",
                               Gender: item.selectedGenderAnalytics(),
                               age: item.selectedAgeAnalytics(),
                               profession: "All",
-                              City: item.selectedCityAnalytics(),
+                              City: item.selectedCityAnalytics() != undefined ? item.selectedCityAnalytics() : "All",
                               QId: item.Id(),
                               type: item.typ()
                           }, {
@@ -266,7 +306,7 @@ define("ads/ads.viewModel",
                 getQQAnalytic = function () {
                     dataservice.getQQAnalytic({
                         Id: selectedCampaignIdAnalytics(),
-                        Choice: selectedQQCAnalytics(),
+                        Choice: selectedQQCAnalytics() > 0 ? selectedQQCAnalytics():0 ,
                         Gender: selectedQQGAnalytics(),
                         age: selectedQQAAnalytics(),
                         profession: selectedQQPAnalytics(),
@@ -411,6 +451,15 @@ define("ads/ads.viewModel",
 				    selecteddateRangeAnalytics(1);
 				    selectedGranularityAnalytics(1);
 				    isflageClose(false);
+				    ischartOpened(false);
+
+				    openEditScreen(0);
+				    isEditorVisible(false);
+			        isListVisible(true);
+			        isWelcomeScreenVisible(false);
+
+				    
+
 				},
 
                 // End Advertiser dashBoard Section
@@ -3931,7 +3980,8 @@ define("ads/ads.viewModel",
                     CampaignName3: CampaignName3,
                     LogoUrl3: LogoUrl3,
                     VideoLink3: VideoLink3,
-                    headText: headText
+                    headText: headText,
+                    ischartOpened: ischartOpened
                 };
             })()
         };
