@@ -100,11 +100,12 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Send Email when Payout scheduler run
         /// </summary>
-        public static void EmailNotificationPayOutToUser(BaseDbContext context, User user)
+        public static void EmailNotificationPayOutToUser(BaseDbContext context, User user, double amount)
         {
            
-            SystemMail mail = context.SystemMails.FirstOrDefault(email => email.MailId == (int)EmailTypes.PayoutMade);
-
+            SystemMail mail = context.SystemMails.FirstOrDefault(email => email.MailId == (int)EmailTypes.PayoutNotificationToUser);
+            mail.Body = mail.Body.Replace("++payoutamount++", amount.ToString());
+            mail.Body = mail.Body.Replace("++fname++", user.FullName);
             SendEmail(mail, new List<string> { user.Email });
            
         }
@@ -119,6 +120,7 @@ namespace SMD.Implementation.Services
             SystemMail mail = context.SystemMails.FirstOrDefault(email => email.MailId == (int)EmailTypes.PayoutNotificationToAdmin);
 
             mail.Body = mail.Body.Replace("++email++", user.Email);
+            mail.Body = mail.Body.Replace("++fname++", user.FullName);
             mail.Body = mail.Body.Replace("++payoutamount++", amount.ToString());
             mail.Body = mail.Body.Replace("++datetime++", DateTime.Now.ToLongDateString());
 

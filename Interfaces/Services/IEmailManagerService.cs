@@ -104,5 +104,10 @@ namespace SMD.Interfaces.Services
         void SendCampaignPerformanceEmails();
 
         void previewEmail(int mailid, string email);
+
+        void SendNewReviewAvailableToAdvertiser(string ReviewerUserId, string campaignName, double Rating, string Reviewtext, string ReviwerFullName, string AdvertiserUserId);
+
+
+        void NewUserSignupToAdmin(string UserId, string FullName, string email, string phone, string signuplocation);
     }
 }

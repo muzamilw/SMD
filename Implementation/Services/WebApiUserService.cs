@@ -1173,6 +1173,10 @@ namespace SMD.Implementation.Services
 
             await emailManagerService.SendRegisrationSuccessEmail(userId);
 
+            var user = UserManager.FindById(userId);
+
+            emailManagerService.NewUserSignupToAdmin(user.Id, user.FullName, user.Email, user.Phone1, "Dashboard");
+
             // Login user
             LoginUser(userId);
 
@@ -1266,6 +1270,7 @@ namespace SMD.Implementation.Services
 
 
             await emailManagerService.SendRegisrationSuccessEmail(user.Id);
+            emailManagerService.NewUserSignupToAdmin(user.Id, user.FullName, user.Email, user.Phone1, "App");
 
             return new LoginResponse
             {
