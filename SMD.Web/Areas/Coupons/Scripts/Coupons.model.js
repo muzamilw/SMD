@@ -6,7 +6,7 @@
             LocationLine1, LocationLine2, LocationLON, LocationPhone, LocationState, LocationTitle, LocationZipCode, LogoUrl, ModifiedBy, ModifiedDateTime, Price, RejectedBy,
             Rejecteddatetime, RejectedReason, Savings, SearchKeywords, Status, SwapCost, UserId, CouponTitle, CouponExpirydate, CouponQtyPerUser, CouponId, couponImage1, CouponImage2, CouponImage3,
             CurrencyId, couponListingMode, CouponActiveMonth, CouponActiveYear, CouponRedeemedCount, CouponViewCount, CouponIssuedCount, SubmissionDateTime, LocationCountryId, CouponStartDate, CouponEndDate, Priority,
-            ShowBuyitBtn, BuyitLandingPageUrl, BuyitBtnLabel, YoutubeLink, CouponImage4, CouponImage5, CouponImage6, IsPaymentCollected, PaymentDate, IsShowReviews, IsShowAddress, IsShowPhoneNo, IsShowMap, IsShowyouTube, IsShowAboutUs, DealsinGroupCount, IsPerSaving3days, IsPerSaving2days, IsPerSavingLastday, IsDollarSaving3days, IsDollarSaving2days, IsDollarSavingLastday, LastModifiedDate
+            ShowBuyitBtn, BuyitLandingPageUrl, BuyitBtnLabel, YoutubeLink, CouponImage4, CouponImage5, CouponImage6, IsPaymentCollected, PaymentDate, IsShowReviews, IsShowAddress, IsShowPhoneNo, IsShowMap, IsShowyouTube, IsShowAboutUs, DealsinGroupCount, IsPerSaving3days, IsPerSaving2days, IsPerSavingLastday, IsDollarSaving3days, IsDollarSaving2days, IsDollarSavingLastday, LastModifiedDate, isSaveBtnLable
           ) {
           var
               //type and userID will be set on server sside
@@ -112,6 +112,7 @@
               IsDollarSaving3days = ko.observable(IsDollarSaving3days),
               IsDollarSaving2days = ko.observable(IsDollarSaving2days),
               IsDollarSavingLastday = ko.observable(IsDollarSavingLastday),
+              isSaveBtnLable = ko.observable(isSaveBtnLable ==1 ? "1" :isSaveBtnLable == 2 ? "2" : isSaveBtnLable == 3 ? "3" :null),
     
 
                // Errors
@@ -215,6 +216,7 @@
                  IsDollarSaving2days: IsDollarSaving2days,
                  IsDollarSavingLastday: IsDollarSavingLastday,
                  lastModified: lastModified,
+                 isSaveBtnLable: isSaveBtnLable,
 
 
              }),
@@ -341,6 +343,7 @@
                   IsDollarSaving2days: IsDollarSaving2days(),
                   IsDollarSavingLastday: IsDollarSavingLastday(),
                   lastModified: lastModified(),
+                  isSaveBtnLable: isSaveBtnLable(),
 
               };
           };
@@ -441,6 +444,7 @@
               IsDollarSaving2days: (IsDollarSaving2days),
               IsDollarSavingLastday: (IsDollarSavingLastday),
               lastModified: (lastModified),
+              isSaveBtnLable: (isSaveBtnLable),
 
           };
       };
@@ -458,7 +462,7 @@
             source.Rejecteddatetime, source.RejectedReason, source.Savings, source.SearchKeywords, source.Status, source.SwapCost, source.UserId, source.CouponTitle, source.CouponExpirydate,
             source.CouponQtyPerUser, source.CouponId, source.couponImage1, source.CouponImage2, source.CouponImage3, source.CurrencyId, source.CouponListingMode, source.CouponActiveMonth, source.CouponActiveYear, source.CouponRedeemedCount, source.CouponViewCount, source.CouponIssuedCount, source.SubmissionDateTime, source.LocationCountryId, source.CouponStartDate, source.CouponEndDate, source.Priority
             , source.ShowBuyitBtn, source.BuyitLandingPageUrl, source.BuyitBtnLabel, source.YoutubeLink, source.CouponImage4, source.CouponImage5, source.CouponImage6, source.IsPaymentCollected, source.PaymentDate, source.IsShowReviews, source.IsShowAddress, source.IsShowPhoneNo, source.IsShowMap, source.IsShowyouTube, source.IsShowAboutUs, source.DealsinGroupCount, source.IsPerSaving3days, source.IsPerSaving2days
-            , source.IsPerSavingLastday, source.IsDollarSaving3days, source.IsDollarSaving2days, source.IsDollarSavingLastday,source.LastModifiedDate
+            , source.IsPerSavingLastday, source.IsDollarSaving3days, source.IsDollarSaving2days, source.IsDollarSavingLastday, source.LastModifiedDate, source.isSaveBtnLable
             );
 
         _.each(source.CouponCategories, function (item) {

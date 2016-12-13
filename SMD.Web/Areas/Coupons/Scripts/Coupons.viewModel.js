@@ -30,6 +30,7 @@ define("Coupons/Coupons.viewModel",
                     CompanyName = ko.observable(),
                     langs = ko.observableArray([]),
                     diveNo = ko.observable(0),
+                    saveBtntext = ko.observable("Buy Now"),
                     countoryidList = [],
                     cityidList = [],
                     langidList = [],
@@ -636,6 +637,8 @@ getfreeCouponCount = function () {
             IsSubmitBtnVisible(true);
             couponModel().CouponPriceOptions.splice(0, 0, new model.CouponPriceOption());
             couponModel().BuyitLandingPageUrl('https://');
+            couponModel().isSaveBtnLable("3");
+            saveBtntext("Buy Now");
             couponModel().IsShowReviews(true);
             couponModel().IsShowAddress(true);
             couponModel().IsShowMap(true);
@@ -660,10 +663,48 @@ getfreeCouponCount = function () {
             IsPauseBtnVisible(false);
             googleAddressMap();
         },
+        onSaveBtnLabel = function () {
+            var price = couponModel().CouponPriceOptions()[0].Price();
+            var saving = couponModel().CouponPriceOptions()[0].Savings();
+            var result = 0;
+            var cur = currencyCode();
+            var strlable;
+            if (couponModel().isSaveBtnLable() == 1) {
+                if (price != undefined && saving != undefined) {
+                    result = (((price - saving) * 100) / price).toFixed(2);
+                }
+                strlable = "Save " + result + " %" + " - Buy Now";
+                saveBtntext(strlable);
+                return true;
+            }
+            else {
+                if (couponModel().isSaveBtnLable() == 2) {
+                    if (price != undefined && saving != undefined)
+                        result = (price - saving);
+                    strlable = "Save " + result + cur + " - Buy Now";
+                    saveBtntext(strlable);
+                    return true;
+
+
+                }
+                else {
+                    if (couponModel().isSaveBtnLable() == 3) {
+                        strlable = "Buy Now";
+                        saveBtntext(strlable);
+                        return true;
+                    }
+
+
+                }
+
+            }
+
+
+        },
 
         closeNewCampaignDialog = function () {
             //if (couponModel().hasChanges() && (couponModel().Status() == null || couponModel().Status() == 1)) {
-            
+
             confirmation.messageText("Do you want to save changes?");
             confirmation.afterProceed(function () {
                 saveCampaignData();
@@ -1130,6 +1171,7 @@ getfreeCouponCount = function () {
 
 
                                 view.initializeTypeahead();
+                                onSaveBtnLabel();
                                 if (couponModel().Status() == 1) {
 
                                     isBtnSaveDraftVisible(true);
@@ -1572,17 +1614,17 @@ getfreeCouponCount = function () {
 
            }),
            disablePercentageCheckBoxes = ko.computed(function () {
-                     if (couponModel() != undefined) {
-                         if (couponModel().IsDollarSaving3days() == true || couponModel().IsDollarSaving2days() == true || couponModel().IsDollarSavingLastday() == true) {
-                             return true;
-                         }
-                         else {
+               if (couponModel() != undefined) {
+                   if (couponModel().IsDollarSaving3days() == true || couponModel().IsDollarSaving2days() == true || couponModel().IsDollarSavingLastday() == true) {
+                       return true;
+                   }
+                   else {
 
-                             false;
-                         }
-                     }
+                       false;
+                   }
+               }
 
-                 }),
+           }),
             visibleDeleteimage = function (item) {
                 if (item.couponImage1() != null && item.couponImage1() != "/images/standardplaceholder.png" && item.CouponImage2() == "/images/standardplaceholder.png")
                     diveNo(1);
@@ -1755,7 +1797,7 @@ getfreeCouponCount = function () {
                 },
                 //-------Google Map Code--------------
                 googleAddressMap = function () {
-                    debugger;
+                  
                     initializeGeoLocation();
                     setCompanyAddress();
                     google.maps.event.addDomListener(window, 'load', initializeGeoLocation);
@@ -1784,7 +1826,7 @@ getfreeCouponCount = function () {
                     } else {
 
                     }
-                  
+
 
                     geocoderComp.geocode({
                         'address': fulladdress
@@ -2568,7 +2610,7 @@ getfreeCouponCount = function () {
                     SelectedTextField(Fieldvalue);
                 },
                 CloseCouponsView = function () {
-                    
+
                     $(".no_btn_confirm").removeAttr('disabled');
                     if (couponModel().CouponhasChanges()) {
 
@@ -2911,7 +2953,9 @@ getfreeCouponCount = function () {
                     SearchSelectedStatus: SearchSelectedStatus,
                     disableDolarCheckBoxes: disableDolarCheckBoxes,
                     disablePercentageCheckBoxes: disablePercentageCheckBoxes,
-                    modifiedDate: modifiedDate
+                    modifiedDate: modifiedDate,
+                    onSaveBtnLabel: onSaveBtnLabel,
+                    saveBtntext: saveBtntext
                 };
             })()
         };

@@ -773,7 +773,7 @@ namespace SMD.Implementation.Services
                             dbContext.SaveChanges();
 
                             // Email To User 
-                            BackgroundEmailManagerService.EmailNotificationPayOutToUser(dbContext, user);
+                            BackgroundEmailManagerService.EmailNotificationPayOutToUser(dbContext, user, creditAmount.Value);
                         }
                         catch (Exception exp)
                         {
@@ -860,9 +860,9 @@ namespace SMD.Implementation.Services
                         payoutRepository.SaveChanges();
 
                         // Email To User 
-                        BackgroundEmailManagerService.EmailNotificationPayOutToUser(dbContext, user);
+                        BackgroundEmailManagerService.EmailNotificationPayOutToUser(dbContext, user, dollarAmount);
                         //email to smd admin
-                        BackgroundEmailManagerService.EmailNotificationPayOutToAdmin(dbContext,user,company,CentzAmount);
+                        BackgroundEmailManagerService.EmailNotificationPayOutToAdmin(dbContext, user, company, dollarAmount);
                         return 1;
                     } else
                     {

@@ -32,7 +32,7 @@
         QuestionApproved = 10,
         QuestionRejected = 11,
         CollectionMade=12,
-        PayoutMade=13,
+        PayoutNotificationToUser=13,
         Voucher = 14,
        InviteUsers = 15,
        BuyItUsers = 16,
@@ -63,6 +63,8 @@
         WeeklyDisplayAdPerformanceStats = 40,
         WeeklyDealPerformanceStats = 41,
         WeeklyPollSurveyPerformanceStats = 42,
+        DealReviewNotificationToAdvertiser = 43,
+        NewUserSignupToAdmin = 44,
     }
 
     public enum AdCampaignCriteriaType
