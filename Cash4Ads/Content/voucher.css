@@ -9044,7 +9044,7 @@ body .login-join-page h1 {
     .ndod-view-mini .ndod-deal-image {
         display: block;
         width: 100%;
-        height: 225px;
+        /*height: 225px;*/
     }
 
     .ndod-view-mini .ndod-ending-soon {
@@ -15505,7 +15505,7 @@ div.content .unit.ctu .ctu-stats, .ndod-view-mini .ndod-deal-footer, .bv_temp .h
     background: -webkit-linear-gradient(top,#33d3b4 0,#247C6B  100%);
     background: -o-linear-gradient(top,#33d3b4 0,#247C6B  100%);
     background: -ms-linear-gradient(top,#33d3b4 0,#247C6B  100%);
-    background: linear-gradient(to bottom,#33d3b4 0,#247C6B  100%);
+    background: linear-gradient(to bottom,#1d7bbb 0,#1d7bbb  100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#33d3b4,endColorstr=#247C6B ,GradientType=0);
     box-shadow: 1px 4px 5px #888888;
 }
@@ -17059,10 +17059,10 @@ a:hover, .theme-font-color, .map-location-address-active {
     background: -webkit-linear-gradient(top,#00b8fe 0,#006ffd 100%);
     background: -o-linear-gradient(top,#00b8fe 0,#006ffd 100%);
     background: -ms-linear-gradient(top,#00b8fe 0,#006ffd 100%);
-    background: linear-gradient(to bottom,#00b8fe 0,#006ffd 100%);
+    background: linear-gradient(to bottom,#1d7bbb 0,#1d7bbb 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#00b8fe,endColorstr=#006ffd,GradientType=0);
     text-shadow: 1px 1px #444;
-    border: 1px solid #00b8fe;
+    border: 1px solid #1d7bbb;
     -moz-border-radius: 5px;
     border-radius: 5px;
     box-shadow: 1px 4px 8px rgba(0,0,0,0.3);
@@ -17369,6 +17369,7 @@ a:hover, .theme-font-color, .map-location-address-active {
 .ctu-stats-md-topbg, .less-icon, .more-icon, div.content .unit.ctu .ctu-sponsor div {
     background-image: url('/images/brand-icons-sprite1.png');
     background-repeat: no-repeat;
+    display:none;
 }
 
 .ctu-stats-md-topbg {
@@ -17722,7 +17723,7 @@ div.content .unit.ctu .ctu-sponsor div {
     margin-left:16px!important;
 }
 .deal_lines {
-    font-size:12px;
+    font-size:13px;
     font-weight:600;
 }
 .review_description {
@@ -17730,4 +17731,14 @@ div.content .unit.ctu .ctu-sponsor div {
 }
 .deal_rev {
     width:100%;min-height: 68px;border:2px solid;padding-top :12px;padding-bottom :12px; margin-top:4px;
+}
+
+.ndod-redeem-now {
+    display:none;
+}
+.ndod-savings {
+    font-size:20px!important;
+}
+.waMultiPrice {
+    font-size:13px;
 }
