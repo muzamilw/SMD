@@ -99,6 +99,12 @@ namespace SMD.Repository.Repositories
         }
 
 
+        public List<GetCampaignPerformanceWeeklyStats_Result> GetCampaignPerformanceWeeklyStats()
+        {
+            return db.GetCampaignPerformanceWeeklyStats().ToList();
+        }
+
+
       
 
         #endregion

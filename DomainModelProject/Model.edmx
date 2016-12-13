@@ -7736,7 +7736,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="String" Name="CurrencySymbol" Nullable="true" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="GetCampaignPerformanceWeeklyStats_Result">
-          <Property Type="String" Name="userid" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="userid" Nullable="false" MaxLength="128" />
           <Property Type="Int32" Name="companyid" Nullable="true" />
           <Property Type="Int32" Name="type" Nullable="true" />
           <Property Type="Int64" Name="campaignid" Nullable="false" />
@@ -7749,6 +7749,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="Double" Name="ProgressPercentageAnswer" Nullable="true" />
           <Property Type="Int32" Name="LeftPicResponseCount" Nullable="true" />
           <Property Type="Int32" Name="RightPicResponseCount" Nullable="true" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="FullName" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="userid1" Nullable="true" MaxLength="128" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -9860,6 +9863,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
                 <ScalarProperty Name="ProgressPercentageAnswer" ColumnName="ProgressPercentageAnswer" />
                 <ScalarProperty Name="LeftPicResponseCount" ColumnName="LeftPicResponseCount" />
                 <ScalarProperty Name="RightPicResponseCount" ColumnName="RightPicResponseCount" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="userid1" ColumnName="userid1" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

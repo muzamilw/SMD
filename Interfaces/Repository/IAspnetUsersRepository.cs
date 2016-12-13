@@ -20,5 +20,7 @@ namespace SMD.Interfaces.Repository
 
 
         User GetUserbyCompanyId(int CompanyId);
+
+        List<GetCampaignPerformanceWeeklyStats_Result> GetCampaignPerformanceWeeklyStats();
     }
 }

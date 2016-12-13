@@ -99,5 +99,10 @@ namespace SMD.Interfaces.Services
 
 
         void SendNewDealsEmail(int mode);
+
+
+        void SendCampaignPerformanceEmails();
+
+        void previewEmail(int mailid, string email);
     }
 }

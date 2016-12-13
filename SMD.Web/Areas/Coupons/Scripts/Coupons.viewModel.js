@@ -1032,7 +1032,7 @@ getfreeCouponCount = function () {
                          }
                      }
                      else {
-                         toastr.error("Sorry,you can Create upto 20 deal lines.");
+                         toastr.error("Sorry,you can Create upto 6 deal lines.");
                      }
                  },
                 // Delete a Price option

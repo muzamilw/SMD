@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta content="IE=edge" http-equiv="X-UA-Compatible" />
     <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <title>Video Ad Performance Update
+    <title>Picture Poll Performance Update
     </title>
     <style type="text/css">
         /*////// RESET STYLES //////*/
@@ -201,7 +201,7 @@
       <table align="center" border="0" cellpadding="0" cellspacing="0" height="100%" id="bodyTable" width="100%">        
         <tr>          
           <td align="center" id="bodyCell" valign="top">            
-            <span style="color:#FFFFFF; display:none; font-size:0px; height:0px; visibility:hidden; width:0px;">Video Ad Performance Update ++campaignname++</span>
+            <span style="color:#FFFFFF; display:none; font-size:0px; height:0px; visibility:hidden; width:0px;">Picture Poll Performance Update ++campaignname++</span>
 <!-- BEGIN TEMPLATE // -->
             <table border="0" cellpadding="0" cellspacing="0" width="100%">              
               <tr>                
@@ -220,7 +220,7 @@
                     <tr>                      
                       <td align="center" style="padding-bottom:10px;" valign="top">                        
                         <h1 style="color:#FFFFFF; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:30px; font-style:normal; font-weight:600; line-height:42px; letter-spacing:normal; margin:0; padding:0; text-align:center;">
-                        Video Ad Performance Update
+                        Picture Poll Performance Update
                         </h1>
                       </td>
                     </tr>
@@ -310,23 +310,17 @@
                                                                                                 <thead align="right" style="border-bottom:1px solid #e8e8e8">
                                                 <tr>
                                                 <th></th>
-                                                <th style="padding-bottom:12px; text-transform:uppercase"><span style="color:#898f9c; font-size:11px; font-weight:bold; line-height:16px; font-family:Helvetica Neue,Helvetica,Lucida Grande,tahoma,verdana,arial,sans-serif">Last Week</span></th>
-                                                <th style="padding-bottom:12px; text-transform:uppercase"><span style="color:#898f9c; font-size:11px; font-weight:bold; line-height:16px; font-family:Helvetica Neue,Helvetica,Lucida Grande,tahoma,verdana,arial,sans-serif">Previous Week</span></th>
-                                                <th style="padding-bottom:12px; text-transform:uppercase"><span style="color:#898f9c; font-size:11px; font-weight:bold; line-height:16px; font-family:Helvetica Neue,Helvetica,Lucida Grande,tahoma,verdana,arial,sans-serif">Trend</span></th>
+                                                <th style="padding-bottom:12px; text-transform:uppercase"></th>
                                                 </tr>
                                                 </thead>
                                                 <tr style="border-bottom:1px solid #e8e8e8">
-                                                    <td style="padding:19px 0 15px"><p style="color:#0da32c; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:normal; line-height:24px; padding-top:0; margin-top:0; text-align:left;">Landing Page Click Throughs</p></td>
-                                                    <td style="padding:19px 0 15px;text-align:right"><p style="color:#0da32c; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:normal; line-height:24px; padding-top:0; margin-top:0; text-align:right;">++ctlw++</p></td>
-                                                    <td style="padding:19px 0 15px;text-align:right"><p style="color:#0da32c; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:normal; line-height:24px; padding-top:0; margin-top:0; text-align:right;">++ctpq++</p></td>
-                                                    <td style="padding:19px 0 15px;text-align:right"><p style="color:++clickthroughcolor++; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:right;">++trendc++%</p></td>
-                                                </tr>
+                                                    <td style="padding:19px 0 15px"><p style="color:#0da32c; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:normal; line-height:24px; padding-top:0; margin-top:0; text-align:left;">Picture ++winnerpoll++ Winner</p></td>
+                                                    <td style="padding:19px 0 15px;text-align:right"><p style="color:#0da32c; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:normal; line-height:24px; padding-top:0; margin-top:0; text-align:right;">++winnerpollperc++</p></td>
+                                                  </tr>
                                                 <tr style="border-bottom:1px solid #e8e8e8">
-                                                    <td style="padding:19px 0 15px"><p style="color:#0f68a1; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:normal; line-height:24px; padding-top:0; margin-top:0; text-align:left;">Landing Page Click Throughs</p></td>
-                                                    <td style="padding:19px 0 15px;text-align:right"><p style="color:#0f68a1; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:normal; line-height:24px; padding-top:0; margin-top:0; text-align:right;">++alw++</p></td>
-                                                    <td style="padding:19px 0 15px;text-align:right"><p style="color:#0f68a1; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:normal; line-height:24px; padding-top:0; margin-top:0; text-align:right;">++apw++</p></td>
-                                                    <td style="padding:19px 0 15px;text-align:right"><p style="color:++answercolor++; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:right;">++trenda++%</p></td>
-                                                </tr>
+                                                    <td style="padding:19px 0 15px"><p style="color:#0f68a1; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:normal; line-height:24px; padding-top:0; margin-top:0; text-align:left;">Polls Answered</p></td>
+                                                    <td style="padding:19px 0 15px;text-align:right"><p style="color:#0f68a1; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:normal; line-height:24px; padding-top:0; margin-top:0; text-align:right;">++pollanswercount++</p></td>
+                                                    </tr>
                                                 
                                             </table>
 
@@ -341,7 +335,7 @@
                                              </td>
                                         <td align="center" style="padding-right:20px; padding-bottom:60px;" valign="top" >
                                             <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
-Open Display Ad Campaign from your dashboard  to view Charts for full analytics.
+Open Picture Poll Campaign from your dashboard  to view Charts for full analytics.
 
                                           </p>
                                             </td>
@@ -374,10 +368,10 @@ Open Display Ad Campaign from your dashboard  to view Charts for full analytics.
                                         </td>
                                         <td align="left" style="padding-bottom:40px;" valign="top">                                          
                                           <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
-                                           Create Seperate Campaigns and Target people in Different Cities
+                                           Upload 2 Clear Contrasting Pictures
                                           </p>
                                           <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
-                                         Copy a Campaign and change the basic segmentation filters to see campaigns worked best
+                                         Uplaod 2 images that will help you identify new customers
 
 
                                           </p>
@@ -389,11 +383,10 @@ Open Display Ad Campaign from your dashboard  to view Charts for full analytics.
                                         </td>
                                         <td align="left" style="padding-bottom:40px;" valign="top">                                          
                                           <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
-                                          Use Your Survey Results To Re-Target people depending on their responses
+                                          Use Your Poll Results To Re-Target Audiences
                                           </p>
                                           <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
-                                          Plan Customer Marketing Journies by linking future campaigns based on
-results from Surveys and Poll Pictures.
+                                          Send different video ads to people who preferred one image over the other
 
 
 

@@ -316,7 +316,7 @@ namespace SMD.MIS.Controllers
             {
 
                
-                var user = new User { UserName = model.Email, Email = model.Email, FullName = model.FullName, DOB = null, Status = 1 };
+                var user = new User { UserName = model.Email, Email = model.Email, FullName = model.FullName, DOB = null, Status = 1, optDealsNearMeEmails= true, optLatestNewsEmails = true, optMarketingEmails = true };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
