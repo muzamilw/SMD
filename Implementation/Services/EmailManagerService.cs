@@ -1518,5 +1518,53 @@ namespace SMD.Implementation.Services
 
 
         }
+
+
+        public void previewEmail(int mailid, string email)
+        {
+            //var comp = companyService.GetCompanyById(companyId);
+
+            //var oUser = userRepository.GetUserbyem(companyId);
+
+
+                MMailto.Add(email);
+                Mid = mailid;
+                CompanyName = "Preview Company";
+                Muser = "Preview User";
+                CountryName = "Preview Country";
+                PhoneNo = "+92 333 416 8877";
+                BillingMonth = "month";
+                DueDate = "due date ?";
+                CustomerAccountNo = "customer Accoutn no ";
+                TotalAmount = "Total Amount";
+                InVoiceCode = "Invoice Code";
+                ReceiptBody = "Receipt Body";
+                EmailConfirmationLink = "http://cash4ads.com/confirm";
+                PasswordResetLink = "http://cash4ads.com/reset";
+
+                DeleteAccountLink = "http://cash4ads.com/delete";
+
+                CompanyNameInviteUser = "Mz Inviter comp";
+                FullNameInviteUser = "mz Inviter";
+                InviteURL = "http://cash4ads.com/invite";
+
+                CampaignName = "Campaign XX";
+                CampaignClicksPerDay = "999";
+                CampaignVideoPath = "http://cash4ads.com/videopath";
+                CampaignVideoImage = "http://cash4ads.com/campaignimage";
+                CampaignBannerImage = "http://cash4ads.com/bannerpath";
+            RejectionReason = "damn it the reason is not available ";
+            PaymentFailedReason = "Payment failed ressonnn";
+            PaymentFailedAttempt = "99xx";
+            NextPaymentAttempt = "Very very soon";
+            RoleName = "Role name here";
+
+
+
+                SendEmailNotAysnc();
+           
+
+           
+        }
     }
 }

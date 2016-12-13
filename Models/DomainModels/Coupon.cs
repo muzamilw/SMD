@@ -121,6 +121,9 @@ namespace SMD.Models.DomainModels
         public Nullable<bool> IsDollarSaving2days { get; set; }
         public Nullable<bool> IsDollarSavingLastday { get; set; }
 
+        public Nullable<int> isSaveBtnLable { get; set; }
+        
+
         public virtual ICollection<CouponCategories> CouponCategories { get; set; }
 
         [NotMapped]

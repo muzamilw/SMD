@@ -102,5 +102,7 @@ namespace SMD.Interfaces.Services
 
 
         void SendCampaignPerformanceEmails();
+
+        void previewEmail(int mailid, string email);
     }
 }
