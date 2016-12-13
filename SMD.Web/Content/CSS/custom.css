@@ -593,3 +593,12 @@ svg{
 .filterH{
     font-weight:bold;font-size: x-large;float:left;padding-left:15px;
 }
+.paddingR10px{
+    padding-right:10px;
+}
+.tbl-noborder tbody > tr > td{
+    border-top:none;
+    /*cursor:auto;*/
+    padding:3px;
+
+}

@@ -214,40 +214,15 @@ define("ads/ads.viewModel",
                 VideoLink3 = ko.observable(),
                 ischartOpened = ko.observable(false),
 				openAdvertiserDashboardScreen = function (Campaign) {
-				 //   IsthisEditCamapiagn(true);
-				 //   previewScreenNumber(1);
-				   // isTerminateBtnVisible(false);
-				    //isNewCampaignVisible(false);
-				   // isShowArchiveBtn(false);
-				    // buyItQuestionLabelStatus(false);
-				  //  campaignModel(new model.Campaign());
-				    //campaignModel().CampaignName('testing');
+				 
 				    collapseMainMenu();
-				  //  TodisplayImg(true);
+				
 				    openEditScreen(1);
 				 
 				    ischartOpened(true);
 				    isListVisible(false);
 				    isNewCampaign(false);
-				    //   isFromEdit(true);
-				    //isNewCampaignVisible(false);
-				   // VideoLink2src(0);
-				   // FlagToShowDivs(false);
-
-				    //$("#logo_div").css("display", "block");
-				    //$(".hideInCoupons").css("display", "none");
-
-				    //$("#MarketobjDiv").css("display", "none");
-				    //$("#topArea").css("display", "none");
-				    //$("#panelArea").css("display", "none");
-
-				    //$("#Heading_div").css("display", "none");
-
-				    //$(".closecls").css("display", "none");
-
-				    //if (Campaign.Status() == 1 || Campaign.Status() == 2 || Campaign.Status() == 3 || Campaign.Status() == 4 || Campaign.Status() == 6 || Campaign.Status() == null || Campaign.Status() == 7 || Campaign.Status() == 9) {
-				    //    collapseMainMenu();
-
+				    
 				    //    if (Campaign.Status() == 1)//because it is in draft mode.
 				    //        isNewCampaign(true);
 				    //    else
@@ -450,10 +425,10 @@ define("ads/ads.viewModel",
 				    CampaignRatioAnalyticData(1);
 				    selecteddateRangeAnalytics(1);
 				    selectedGranularityAnalytics(1);
-				    isflageClose(false);
+				   // isflageClose(false);
 				    ischartOpened(false);
 
-				    openEditScreen(0);
+				  //  openEditScreen(0);
 				    isEditorVisible(false);
 			        isListVisible(true);
 			        isWelcomeScreenVisible(false);
