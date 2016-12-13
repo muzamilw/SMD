@@ -28,7 +28,9 @@
 
 
     @RenderSection("COLOR", required: false)
-   
+    <script src="~/Scripts/Rating/jquery.js"></script>
+    <script src="~/Scripts/Rating/rating.js"></script>
+    <link href="~/Scripts/Rating/rating.css" rel="stylesheet" />
 
     <!-- FLEXSLIDER -->
     <link href="~/content//flexslider.css" rel="stylesheet" />
@@ -43,7 +45,12 @@
     <link rel="stylesheet" href="~/content//magnific-popup.css">
 
     <script src="~/scripts/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+
+   
     <link href="~/content//voucher.css" rel="stylesheet" />
+
+
+    
     <script>
     (function (i, s, o, g, r, a, m) {
         i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
@@ -87,11 +94,11 @@
                     
                     @if (sessionVar == null)
                     {
-                        <li><a class="scroll-link" href="@Url.Action("get_paid_watch_ads", "Home")">Get paid to watch ads</a></li>
-                        <li><a class="scroll-link" href="@Url.Action("advertisers", "Home")">Advertise for free</a></li>
+                        <li><a class="scroll-link" href="http://cash4ads.com/download-app/">Get paid to watch ads</a></li>
+                        <li><a class="scroll-link" href="http://cash4ads.com/">Advertise for free</a></li>
 
-                        <li><img src="~/images/United-Kingdom-icon.png" style="padding-top:22px;" /></li>
-                        <li><a href="http://manage.cash4ads.com" title="Login" style="    padding-top: 30px;    font-size: 23px;    margin-left: 12px;"><i class="fa fa-user fa-lg text-white "></i></a></li>
+                        @*<li><img src="~/images/United-Kingdom-icon.png" style="padding-top:22px;" /></li>
+                        <li><a href="http://cash4ads.com/download-app/" title="Login" style="    padding-top: 30px;    font-size: 23px;    margin-left: 12px;"><i class="fa fa-user fa-lg text-white "></i></a></li>*@
 
                     }
                     else

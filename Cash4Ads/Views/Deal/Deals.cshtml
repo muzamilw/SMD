@@ -117,25 +117,74 @@
 
                     </ul>
                 </div>
+                <div style="clear:both;"></div>
                 <div><h2>Deal Lines</h2></div>
 
-                <div id="deal_lines"  class="col-lg-4" style="padding:0px;">
+                <div id="deal_lines"  class="col-lg-6" style="padding:0px;">
                     
                 </div>
 
-                <div class="col-lg-8">
+                <div class="col-lg-6">
 
                 </div>
                 <div class="clearfix"></div>
 
                 <div><h2>Reviews</h2></div>
-                <div class="col-lg-4" style="padding:0px;">
+                <div class="col-lg-6" style="padding:0px;">
                     <div id="deal_Reviews">
-                        
+                        @*<div id="Review_1" class="deal_rev">
 
+                            <div class="pull-left col-lg-3">
+                                <img src="/Images/08.jpg" style="border-radius: 29px;height:40px">
+                            </div>
+
+                            <div class="pull-right col-lg-9" style="padding:0px;">
+
+                                <div class="pull-left">
+                                    <div class="Review_heading" style="font-size:14px;color:black">ABC</div>
+                                </div>
+                                <div class="pull-right" style="padding-right:10px;color:black;font-size:10px;">
+                                    <span>16 dec 2016</span>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="review_description" style="font-size:10px;color:black">  this is sensational websitdsfsdfsd dsffsdfsdf sdfsdfsd sdfsd fdsfsdfsdfdsf dsfsdfsdfds sdfsdfsdf sdfsdfsdfs sdfsdfsd sdfdsfsdf dfsfdsf sfddsf sdfdsf sdfsdf ssdfsdf e ,and  i really like this.</div>
+                                <div id="rating" class="rating_divs"><input type="text" id="rating_id" class="rating rating5" value="2" /></div>
+
+                            </div>
+
+                            <div class="clearfix"></div>
+                        </div>*@
                     </div>
                 </div>
-                <div class="col-lg-8"></div>
+                <div class="col-lg-6">
+
+                    <div id="address_panel">
+                        <div id="Address" class="deal_fine_print" style="min-height:67px;margin-top:6px;border-bottom: 1px solid grey;">
+                            <div class="headers">Where</div>
+                            <div id="Addressline1" class="highlight_ext" >doctor hospital</div>
+                            <div class="highlight_ext" id="deal_city" >Lahore</div>
+                            <div class="highlight_ext" id="postal_code" >54000</div>
+
+                        </div>
+                    </div>
+
+                    <div id="contact_no">
+                        <div class="pull-left" style="padding-left:18px;padding-top:18px;">
+                            <i class="fa fa-phone" aria-hidden="true" style="font-size:16px;color:#53b6e0"></i>
+                            <div id="cellno" style="font-size:10px;color:black;margin-left:-17px;margin-top: 4px;">0247714241</div>
+                        </div>
+                        <div class="pull-left" style="padding-right:44px;padding-top:18px;margin-left:27px;">
+                            <i class="fa fa-chevron-circle-right" aria-hidden="true" style="font-size:16px;color:#53b6e0"></i>
+                            <div id="dist_km" style="font-size:10px;color:black;margin-left:-15px;margin-top:4px;">
+                                24 Km away
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div id="map_div" style="width:100%;height:228px; border:2px solid"><div style="height: 100%; width: 100%;"></div></div>
+                    
+
+                </div>
 
                 <br class="clearing">
 
@@ -149,24 +198,24 @@
     </div>
 
 </div>
-<script src="~/Scripts/jquery-2.1.4.min.js"></script>
-<script src="~/Scripts/jquery.loader.min.js"></script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_N_x3UhG5IHl8GUZ4y5Lj_QkNhGUh91I" type="text/javascript"></script>
+
 <script>
     var Couponid = '@couponId';
-
+    
     LoadCoupon();
-
+    $('.rating').rating();
     function LoadCoupon() {
         
-        
-        var Copurl = 'http://manage.cash4ads.com/Api_Mobile/getcouponbyid/?couponId='+Couponid+'&UserId=7ed5d090-2055-4cf6-ac80-586e44c711ce&Lat=25.197613&Lon=55.274887';
+        var Copurl = 'http://manage.cash4ads.com/Api_Mobile/getcouponbyid/?couponId=' + Couponid + '&UserId=7ed5d090-2055-4cf6-ac80-586e44c711ce&Lat=25.197613&Lon=55.274887';
 
         $.ajax({
             dataType: "json",
             url: Copurl,
             cache: false,
             success: function (response) {
-                debugger;
+                
                 
                 $("#couponMainHeading").html(response.CouponTitle + '<span class="mvtest_header_v1">' + '' + '</span><div class="btm-header-bg"></div>');
                 $("#voucMainSliderImg").attr('src', response.CouponImage1);
@@ -192,53 +241,59 @@
                 $("#couDiscountedVal").text(response.Savings);
                 $("#couActualVal").text(response.Price);
 
+                $("#Addressline1").text(response.LocationLine1);
+                $("#deal_city").text(response.LocationCity);
+                $("#postal_code").text(response.LocationZipCode);
+           
+                googleAddressMap(response);
                
+
+                $("#cellno").text(response.LocationPhone);
 
                 $(response.CouponPriceOptions).each(function (i, val) {
 
-                    
-                    $("#deal_lines").append('<div> <div style="float:left;padding:0px;" class="deal_lines col-lg-10">' + val.Description + '</div><div style="float:right" class="col-lg-2"><a title="Buy this deal" class="ctu-buy-big waMultiPrice" data-multibuy="true" onclick="BuyCoupon(' + val.CouponId + ');" id="mainDealBuy">BUY!</a></div><div style="clear:both"></div></div>')
+                    $("#deal_lines").append('<div style="margin-top:11px;"> <div style="float:left;padding:0px;" class="deal_lines col-lg-9">' + val.Description + '</div><div style="float:right" class="col-lg-3"><a title="Buy this deal" class="ctu-buy-big waMultiPrice" data-multibuy="true" onclick="BuyCoupon(' + val.CouponId + ');" id="mainDealBuy">BUY!</a></div><div style="clear:both"></div></div>')
                 });
 
                 
                 $(response.CouponRatingReviewResponses).each(function (i, val) {
-                    debugger;
-                   
-                    var valu = formatDate('dd-mm-yy', val.RatingDateTime);
-
-                    $("#deal_Reviews").append('<div id="Review_1" class="deal_rev"><div class="pull-left col-lg-3"><img src='+ val.ProfileImage+' style="border-radius: 29px;height:40px"/></div><div class="pull-right col-lg-9" style="padding:0px;"><div class="pull-left"><div class="Review_heading" style="font-size:14px;color:black">' + val.FullName + '</div></div><div class="pull-right" style="padding-right:10px;color:black;font-size:10px;"> <span>16 dec 2016</span></div><div class="clearfix"></div><div class="review_description" style="font-size:10px;color:black">' + val.Review + ' </div></div><div class="clearfix"></div></div>')
-
-                                
-                        
-                });
-
                 
+                    var d = new Date(val.RatingDateTime);
+                    var day = d.getDate();
+                   
+                    var month = d.getMonth() + 1;
+                    var year = d.getFullYear();
 
-                            
-                                
-                            
-
-                           
-
-                                
-                                    
-                                
-
-
-
-                                
-                                    
-                                
-                                
-                                
-
-
-                            
-
-                            
-                       
+                    if (month < 10) {
+                        month = "0" + month;
+                    }
+                    var ReqDate = day + ' ' + GetMonthNameByID(month) + ' ' + year;
+                    
+                    $("#deal_Reviews").append('<div id="Review_1" class="deal_rev"><div class="pull-left col-lg-2"><img src=' + val.ProfileImage + ' style="border-radius: 29px;height:40px"/></div><div class="pull-right col-lg-10" style="padding:0px;"><div class="pull-left"><div class="Review_heading" style="font-size:14px;color:black">' + val.FullName + '</div></div><div class="pull-right" style="padding-right:10px;color:black;font-size:10px;"> <span>' + ReqDate + '</span></div><div class="clearfix"></div><div class="review_description" style="font-size:10px;color:black">' + val.Review + ' </div></div><div class="clearfix"><div id="rating" class="rating_divs" style="display:none"><input type="text" id="rating_id" class="rating rating5" value="2" /></div></div></div>')
+   
+                });
+               
                 }
         });
+
+        GetMonthNameByID = function (monthId) {
+
+            var month = new Array();
+            month[1] = "January";
+            month[2] = "February";
+            month[3] = "March";
+            month[4] = "April";
+            month[5] = "May";
+            month[6] = "June";
+            month[7] = "July";
+            month[8] = "August";
+            month[9] = "September";
+            month[10] = "October";
+            month[11] = "November";
+            month[12] = "December";
+            var m = month[monthId];
+            return m;
+        }
     }
 
     function NavigateBack()
@@ -246,4 +301,90 @@
         var url = "/Home/vouchers";
         window.location.href = url;
     }
+
+    function googleAddressMap(Response) {
+        
+        initializeGeoLocation();
+        setCompanyAddress(Response);
+        google.maps.event.addDomListener(window, 'load', initializeGeoLocation);
+    }
+    function initializeGeoLocation() {
+       
+                    geocoderComp = new google.maps.Geocoder();
+                    var latlngComp = new google.maps.LatLng(-34.397, 150.644);
+                    var mapOptions = {
+                        zoom: 15,
+                        center: latlngComp,
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    };
+                    
+                    compMap = new google.maps.Map(document.getElementById('map_div'), mapOptions);
+
+                    //map = new google.maps.Map($('#map-canvasCompany'), mapOptions);
+
+                }
+    function setCompanyAddress(Response) {
+       
+                    //var fulladdress = AddressLine1().toLowerCase() + ' ' + CompanyCity() + ' ' + companyzipcode() + ' ' + companystate().toLowerCase();
+                    var fulladdress = null;
+
+                    if (Response.LocationLine1 != null) {
+                        fulladdress = Response.LocationLine1.toLowerCase() + ' ' + Response.LocationCity + ' ' + Response.LocationZipCode + ' ' + Response.LocationState.toLowerCase();
+                    } else {
+
+                    }
+                    
+        //fulladdress = "doctor hospital lahore 54000 punjab";
+
+                    geocoderComp.geocode({
+                        'address': fulladdress
+                    }, function (results, status) {
+                        
+                        
+
+                        if (status == google.maps.GeocoderStatus.OK) {
+                           
+                            compMap.setCenter(results[0].geometry.location);
+
+                            var marker = new google.maps.Marker({
+                                map: compMap,
+                                position: results[0].geometry.location
+                            });
+
+
+                            google.maps.event.addListener(compMap, 'click', function (event) {
+                                //  selectedCompany().branchLocationLat(event.latLng.lat());
+                                //   selectedCompany().branchLocationLong(event.latLng.lng());
+                                var geocoder = new google.maps.Geocoder();
+                                geocoder.geocode({
+                                    "latLng": event.latLng
+                                }, function (results, status) {
+                                    
+                                    console.log(results, status);
+                                    if (status == google.maps.GeocoderStatus.OK) {
+                                        console.log(results);
+                                        var lat = results[0].geometry.location.lat(),
+                                            lng = results[0].geometry.location.lng(),
+                                            placeName = results[0].address_components[0].long_name,
+                                            latlng = new google.maps.LatLng(lat, lng);
+                                            moveMarker(placeName, latlng);
+                                    }
+                                });
+                            });
+                            function moveMarker(placeName, latlng) {
+                                marker.setIcon(image);
+                                marker.setPosition(latlng);
+                                infowindow.setContent(placeName);
+                                infowindow.open(map, marker);
+                            }
+                            
+
+                        } else {
+                           // toastr.error("Failed to Search Address,please add valid address and search it . Error: " + status);
+                            // isMapVisible(false);
+
+                        }
+                    });
+
+                }
 </script>
