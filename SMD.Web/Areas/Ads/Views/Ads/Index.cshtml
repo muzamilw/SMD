@@ -62,29 +62,11 @@ else
                                             <th class="col-sm-1" style="vertical-align:top"><span class="GridHeaderFont_size">Survey PPCV</span></th>
                                             <th class="col-sm-1" style="vertical-align:top"><span class="GridHeaderFont_size">Click Thru</span></th>
                                           
-                                            <th class="col-sm-3" style="vertical-align:top">
-                                                <span class="GridHeaderFont_size">Click throughs</span><br />
-                                                <span style="color:darkgray;font-size:10px;">Today</span>
-                                                <span style="color:darkgray;font-size:10px;">Yesterday</span>
-                                                <span style="color:darkgray;font-size:10px;">All Time</span>
-                                            </th>
+                                            <th class="col-sm-2" style="vertical-align:top"><span class="GridHeaderFont_size">Impression to Click Thru Conv.</span></th>
+                                            <th class="col-sm-2" style="vertical-align:top"><span class="GridHeaderFont_size">Impression to Survey Conv.</span></th>
 
-                                            <th class="col-sm-2" style="vertical-align:top"><span class="GridHeaderFont_size">Locations</span></th>
-                                            <th class="col-sm-1" style="vertical-align:top"><span class="GridHeaderFont_size">Daily($)</span></th>
-                                            <th class="col-sm-1" style="vertical-align:top"><span class="GridHeaderFont_size">Ad Click</span></th>
-
-
-                                            <th class="col-sm-3" style="vertical-align:top">
-                                                <span class="GridHeaderFont_size">Views</span><br />
-                                                <span style="color:darkgray;font-size:10px;">Today</span>
-                                                <span style="color:darkgray;font-size:10px;">Yesterday</span>
-                                                <span style="color:darkgray;font-size:10px;">All Time</span>
-                                            </th>
-
-                                            <th class="col-sm-1" style="vertical-align:top"><span style="white-space:nowrap;display:none;" class="GridHeaderFont_size">Total Spent</span></th>
-                                            <th class="col-sm-1" style="vertical-align:top"><span class="GridHeaderFont_size">Status</span></th>
-                                            @*<th class="col-sm-2"><span class="@userClasses">Spent</span><span class="@adminClasses">Created by</span></th>*@
-                                            <th class="col-sm-1">&nbsp;</th>
+                                          
+                                            <th class="col-sm-1" colspan="4">&nbsp;</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -244,10 +226,103 @@ else
         <td class="col-sm-1"><span class="" data-bind="text: ClickRate"></span></td>
         <td class="col-sm-1"><span class="" data-bind="text: MaxDailyBudget()"></span></td>
         <td class="col-sm-3" colspan="3">
-            <div style="height:150px;" class="margin-Top-30" data-bind="morris: {type: 'Bar', data: [{y:'test', a:viewCountAllTime() ,b:SurveyAnsweredAllTime() , c:clickThroughsAllTime()}], xkey: 'y', ykeys: ['a' , 'b', 'c'], labels: ['Total Impression','Survey PPCV', 'Click Thru'], parseTime:false, setAxisAlignFirstX: true,hideHover:'always', barColors: ['green', 'blue','red']}"></div>
+            <div class="col-sm-4"><span class="" data-bind="text: viewCountAllTime()"></span></div>
+            <div class="col-sm-4"><span class="" data-bind="text:SurveyAnsweredAllTime() "></span></div>
+            <div class="col-sm-4"><span class="" data-bind="text: clickThroughsAllTime()"></span></div>
+            <br />
+            <div style="height:150px;" data-bind="morris: {type: 'Bar', data: [{y:'test', a:viewCountAllTime() ,b:SurveyAnsweredAllTime() , c:clickThroughsAllTime()}],axes:false, xkey: 'y', ykeys: ['a' , 'b', 'c'], labels: ['Total Impression','Survey PPCV', 'Click Thru'], parseTime:false, setAxisAlignFirstX: true,hideHover:'always', barColors: ['green', 'blue','red']}"></div>
       
         
         </td>
+        <td class="col-sm-2" >
+            <div class="col-sm-4" style="color:red; font-size:larger;font-weight: bold;"><span data-bind="text: ((viewCountAllTime()/clickThroughsAllTime())*100).toFixed(2)"></span>%</div>
+           
+        </td>
+
+        <td class="col-sm-2">
+            <div class="col-sm-4" style="color:blue; font-size:larger;font-weight: bold;"><span data-bind="text: SurveyAnsweredAllTime()>0 ? ((viewCountAllTime()/SurveyAnsweredAllTime())*100).toFixed(2):0"></span>%</div>
+           
+        </td>
+
+        <td class="col-sm-3">
+            <span data-bind="text:VerifyQuestion()"></span>
+            <br />
+            <div style="height:150px;cursor: pointer;" data-bind="morris: {type: 'donut', data: [{label:'Answer1', value:Answer1Stats() }, {label:'Answer2', value:Answer2Stats() },{label:'Answer3', value:Answer3Stats() }]"></div>
+
+        </td>
+
+
+        <td class="col-sm-2">
+            <span data-bind="text: Answer1"></span>
+            <br />
+            <span data-bind="text: Answer2"></span>
+            <br />
+            <span data-bind="text: Answer3"></span>
+            
+        </td>
+
+        <td class="col-sm-1">
+            <span data-bind="text: ((Answer1Stats/(Answer1Stats+Answer2Stats+Answer3Stats))*100).toFixed(2)"></span>
+            <br />
+            <span data-bind="text: ((Answer2Stats/(Answer1Stats+Answer2Stats+Answer3Stats))*100).toFixed(2)"></span>
+            <br />
+            <span data-bind="text: ((Answer3Stats/(Answer1Stats+Answer2Stats+Answer3Stats))*100).toFixed(2)"></span>
+
+
+        </td>
+        <td class="col-sm-1" style="width: 60%;" >
+            <div style ="font-size:larger;font-weight:bold;">
+                <!-- ko if: Status() == 1-->
+                <span style="color:#6D6EFA; " data-bind="text: StatusValue">
+                </span>
+                <!-- /ko -->
+                <!-- ko if: Status() == 2-->
+                <span style="color:#fc0; " data-bind="text: StatusValue">
+                </span>
+                <!-- /ko -->
+                <!-- ko if:  Status() == 3-->
+                <span style="color:#37c675; " data-bind="text: StatusValue">
+                </span>
+                <!-- /ko -->
+                <!-- ko if: Status() == 4-->
+                <span style="color:#fd008e; " data-bind="text: StatusValue">
+                </span>
+                <!-- /ko -->
+                <!-- ko if: Status() == 5-->
+                <span style="color:#c8e392; " data-bind="text: StatusValue">
+                </span>
+                <!-- /ko -->
+                <!-- ko if: Status() == 6-->
+                <span style="color:red; " data-bind="text: StatusValue">
+                </span>
+                <!-- /ko -->
+                <!-- ko if: Status() == 7-->
+                <span style="color:red; " data-bind="text: 'Remove'">
+                </span>
+                <!-- /ko -->
+                <!-- ko if: Status() == 8-->
+                <span style="color:#fc0; " data-bind="text: StatusValue"> </span>
+                <!-- /ko -->
+                <!-- ko if: Status() == 9-->
+                <span style="color:red; " data-bind="text: StatusValue"> </span>
+                <!-- /ko -->
+                </div>
+                <br />
+                <div class="text-left statusbg" data-bind="click:$root.onEditCampaign" style="background:#37c675;">
+                    <span >
+                        Edit Campaign
+                    </span>
+
+                </div>
+                <br />
+                <div class="text-left statusbg" data-bind="click:$root.openAdvertiserDashboardScreen" style="background:blue;">
+                    <span>
+                        Analyze Charts
+                    </span>
+                </div>
+
+
+</td>
         @*<td class="col-sm-1">
                 <span class="">&nbsp;</span>
             </td>
@@ -255,7 +330,7 @@ else
             <td class="col-sm-1">
                 <span class="">&nbsp;</span>
             </td>
-            <td class="col-sm-1"><span class="" data-bind="text: MaxBudget"></span></td>*@
+            <td class="col-sm-1"><span class="" data-bind="text: MaxBudget"></span></td>
         <td class="col-sm-1" style="display:none;">
             <!-- ko if: Type() == 1-->
             <span class="">Video</span>
@@ -270,100 +345,100 @@ else
             <span class="">Game</span>
             <!-- /ko -->
         </td>
-        <td class="col-sm-3" style="display:none;">
-            <span data-bind="text: StartDateTime"></span>
-        </td>
-        <td class="col-sm-2">
-            <span data-bind="text: clickThroughsToday" style="display:inline-block;width:35px;"></span>
-            <span data-bind="text: clickThroughsYesterday" style="display:inline-block;width:60px;"></span>
-            <span data-bind="text: clickThroughsAllTime" style="display:inline-block;width:47px;"></span>
-        </td>
-        <td class="col-sm-2">
-            <span data-bind="text: Locationss"></span>
-        </td>
-        <td class="col-sm-1">
-            <span data-bind="text: MaxDailyBudget"></span>
-        </td>
-        <td class="col-sm-1">
-            <span data-bind="text: '$'+ ClickRate().toFixed(2)"></span>
-        </td>
-        <td class="col-sm-2">
-            <span data-bind="text: viewCountToday" style="display:inline-block;width:35px;"></span>
-            <span data-bind="text: viewCountYesterday" style="display:inline-block;width:35px;"></span>
-            <span data-bind="text: viewCountAllTime" style="display:inline-block;width:35px;"></span>
-        </td>
+        @*<td class="col-sm-3" style="display:none;">
+        <span data-bind="text: StartDateTime"></span>
+    </td>
+    <td class="col-sm-2">
+        <span data-bind="text: clickThroughsToday" style="display:inline-block;width:35px;"></span>
+        <span data-bind="text: clickThroughsYesterday" style="display:inline-block;width:60px;"></span>
+        <span data-bind="text: clickThroughsAllTime" style="display:inline-block;width:47px;"></span>
+    </td>
+    <td class="col-sm-2">
+        <span data-bind="text: Locationss"></span>
+    </td>
+    <td class="col-sm-1">
+        <span data-bind="text: MaxDailyBudget"></span>
+    </td>
+    <td class="col-sm-1">
+        <span data-bind="text: '$'+ ClickRate().toFixed(2)"></span>
+    </td>
+    <td class="col-sm-2">
+        <span data-bind="text: viewCountToday" style="display:inline-block;width:35px;"></span>
+        <span data-bind="text: viewCountYesterday" style="display:inline-block;width:35px;"></span>
+        <span data-bind="text: viewCountAllTime" style="display:inline-block;width:35px;"></span>
+    </td>
 
-        <td class="col-sm-1"><span class="@userClasses" data-bind="text: AmountSpent() ? '$'+ AmountSpent().toFixed(2) : '$'+ 0"></span></td>
-        <td class="col-sm-2">
-            <!-- ko if: Status() == 1-->
-            <div class="text-left statusbg" style="background:#6D6EFA;    width: 125px;">
-                <span data-bind="text: StatusValue">
-                </span>
-            </div>
-            <!-- /ko -->
-            <!-- ko if: Status() == 2-->
-            <div class="text-left statusbg" style="background:#fc0;width: 125px">
-                <span data-bind="text: StatusValue">
-                </span>
-            </div>
-            <!-- /ko -->
-            <!-- ko if:  Status() == 3-->
-            <div class="text-left statusbg" style="background:#37c675;    width: 125px;">
-                <span data-bind="text: StatusValue">
-                </span>
-            </div>
-            <!-- /ko -->
-            <!-- ko if: Status() == 4-->
-            <div class="text-left statusbg" style="background:#fd008e;width: 125px">
-                <span data-bind="text: StatusValue">
-                </span>
-            </div>
-            <!-- /ko -->
-            <!-- ko if: Status() == 5-->
-            <div class="text-left statusbg" style="background:#c8e392;width: 125px">
-                <span data-bind="text: StatusValue">
-                </span>
-            </div>
-            <!-- /ko -->
-            <!-- ko if: Status() == 6-->
-            <div class="text-left statusbg" style="background:red;width: 125px">
-                <span data-bind="text: StatusValue">
-                </span>
-            </div>
-            <!-- /ko -->
-            <!-- ko if: Status() == 7-->
-            <div class="text-left statusbg" style="background:red;width: 125px">
-                <span data-bind="text: 'Remove'">
-                </span>
-            </div>
-            <!-- /ko -->
-            <!-- ko if: Status() == 8-->
-            <div class="text-left statusbg" style="background:#fc0;width: 125px">
-                <span data-bind="text: StatusValue">
-                </span>
-            </div>
-            <!-- /ko -->
-            <!-- ko if: Status() == 9-->
-            <div class="text-left statusbg" style="background:red;width: 125px">
-                <span data-bind="text: StatusValue">
-                </span>
-            </div>
-            <!-- /ko -->
-            <span class="@adminClasses" data-bind="text: CreatedBy"></span>
-        </td>
+    <td class="col-sm-1"><span class="@userClasses" data-bind="text: AmountSpent() ? '$'+ AmountSpent().toFixed(2) : '$'+ 0"></span></td>
+    <td class="col-sm-2">
+        <!-- ko if: Status() == 1-->
+        <div class="text-left statusbg" style="background:#6D6EFA;    width: 125px;">
+            <span data-bind="text: StatusValue">
+            </span>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: Status() == 2-->
+        <div class="text-left statusbg" style="background:#fc0;width: 125px">
+            <span data-bind="text: StatusValue">
+            </span>
+        </div>
+        <!-- /ko -->
+        <!-- ko if:  Status() == 3-->
+        <div class="text-left statusbg" style="background:#37c675;    width: 125px;">
+            <span data-bind="text: StatusValue">
+            </span>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: Status() == 4-->
+        <div class="text-left statusbg" style="background:#fd008e;width: 125px">
+            <span data-bind="text: StatusValue">
+            </span>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: Status() == 5-->
+        <div class="text-left statusbg" style="background:#c8e392;width: 125px">
+            <span data-bind="text: StatusValue">
+            </span>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: Status() == 6-->
+        <div class="text-left statusbg" style="background:red;width: 125px">
+            <span data-bind="text: StatusValue">
+            </span>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: Status() == 7-->
+        <div class="text-left statusbg" style="background:red;width: 125px">
+            <span data-bind="text: 'Remove'">
+            </span>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: Status() == 8-->
+        <div class="text-left statusbg" style="background:#fc0;width: 125px">
+            <span data-bind="text: StatusValue">
+            </span>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: Status() == 9-->
+        <div class="text-left statusbg" style="background:red;width: 125px">
+            <span data-bind="text: StatusValue">
+            </span>
+        </div>
+        <!-- /ko -->
+        <span class="@adminClasses" data-bind="text: CreatedBy"></span>
+    </td>
 
-        <td class="col-sm-2" style="padding-top:23px;">
-            <!-- ko if: Status() == 1 ||  Status() == 4|| Status() ==  6-->
-            <a class="table-link danger" style="float: right">
-                <span class="fa-stack">
-                    <i class="fa fa-square fa-stack-2x"></i>
-                    <i class="fa fa-trash-o fa-stack-1x fa-inverse" data-bind="click:$root.removeAdd"></i>
-                </span>
-            </a>
-            <!-- /ko -->
-            &nbsp;
-        </td>
-
+    <td class="col-sm-2" style="padding-top:23px;">
+        <!-- ko if: Status() == 1 ||  Status() == 4|| Status() ==  6-->
+        <a class="table-link danger" style="float: right">
+            <span class="fa-stack">
+                <i class="fa fa-square fa-stack-2x"></i>
+                <i class="fa fa-trash-o fa-stack-1x fa-inverse" data-bind="click:$root.removeAdd"></i>
+            </span>
+        </a>
+        <!-- /ko -->
+        &nbsp;
+    </td>
+        *@
     </tr>
 </script>
 @* Filter Template *@
