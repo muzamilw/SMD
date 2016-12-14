@@ -20,7 +20,8 @@ else
                     <li><a data-bind="click: $root.closeNewCampaignDialog" class="my-navigator">Video Campaigns</a></li>
                 </ol>
                 <div class="clearfix col-lg-9" data-bind="with: $root.campaignModel" style="padding:0px;padding-top:3px;margin-left:0px;">
-                    <div class="col-lg-6" style="margin-left:-11px !important;" data-bind="visible : !$root.ischartOpened">
+                    @*<div class="col-lg-6" style="margin-left:-11px !important;" data-bind="visible : !$root.ischartOpened">*@
+                    <div class="col-lg-6" style="margin-left:-11px !important;" >
                         <span class="pull-left Theme_standard_clr" style="padding-left:0px;font-size:21px;" data-bind="NewCampaignBinding: CampaignName,visible:$root.isDisplayCouponsAds()">New Coupon</span>
 
                         <img class="vid_image pull-left" data-bind="attr: { src: $root.StatusCodeImage }" src="/Content/Images/Videos_small.png"> <span id="newVid" class="pull-left " style="color:#fff!important; padding-left:0px;font-size:23px;margin-top:15px;margin-left:9px;" data-bind="NewCampaignBinding: CampaignName">New video campaign</span> <span style="color:#fff!important;margin-left:3px;margin-top:21px;" class="subtitle pull-left" data-bind="text:$root.CampaignHeader()"></span>

@@ -261,7 +261,7 @@ define("common/companyProfile.viewModel",
                     dataservice.getBaseDataForCompanyProfile(null, {
                         
                         success: function (baseDataFromServer) {
-                            debugger;
+                            
                             if (baseDataFromServer.GetCouponReviewCount > 0) {
                                 $("#imgRedbell").css("display", "block");
                                 $("#whiteicon").css("display", "none");

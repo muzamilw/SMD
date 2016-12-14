@@ -170,6 +170,7 @@ define("ads/ads.viewModel",
                 CurrPage = ko.observable(9);
                 MaxPage = ko.observable(12);
                 // Advertiser dashBoard Section
+                TestDonut = ko.observableArray([{label: 'download sales', value: 12},{label: 'In-Store Sales' , value: 30},  {label: 'Mail-Order Sales' , value: 20}]),
                 selectedCampStatusAnalytics = ko.observable(1),
 				selecteddateRangeAnalytics = ko.observable(1),
 				selectedGranularityAnalytics = ko.observable(1),
@@ -525,7 +526,7 @@ define("ads/ads.viewModel",
 
                             // set grid content
                             campaignGridContent.removeAll();
-                            _.each(data.Campaigns, function (item) {
+                            _.each(data.CampaignsList, function (item) {
 
                                 campaignGridContent.push(model.Campaign.Create(updateCampaignGridItem(item)));
                             });
@@ -3956,7 +3957,8 @@ define("ads/ads.viewModel",
                     LogoUrl3: LogoUrl3,
                     VideoLink3: VideoLink3,
                     headText: headText,
-                    ischartOpened: ischartOpened
+                    ischartOpened: ischartOpened,
+                    TestDonut:TestDonut
                 };
             })()
         };

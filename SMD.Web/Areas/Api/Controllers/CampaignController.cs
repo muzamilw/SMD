@@ -44,7 +44,7 @@ namespace SMD.MIS.Areas.Api.Controllers
             else
             {
 
-                   Mapper.Initialize(cfg => cfg.CreateMap<SearchCampaigns_Result, Models.AdCampaign>());
+                Mapper.Initialize(cfg => cfg.CreateMap<SearchCampaigns_Result, Models.SearchCampaigns>());
 
             
 
@@ -57,7 +57,7 @@ namespace SMD.MIS.Areas.Api.Controllers
                     var result =  _campaignService.SearchCampaigns(request);
 
                     var response = new CampaignRequestResponseModel();
-                    response.Campaigns = result.Campaign.Select(a => Mapper.Map<SearchCampaigns_Result, Models.AdCampaign>(a));
+                    response.CampaignsList = result.Campaign.Select(a => Mapper.Map<SearchCampaigns_Result, Models.SearchCampaigns>(a));
                     response.TotalCount = result.TotalCount;
 
                     return response;
