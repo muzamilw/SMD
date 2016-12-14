@@ -1150,7 +1150,7 @@ getfreeCouponCount = function () {
                 ShowImages(item);
                 visibleDeleteimage(item);
 
-                if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == 6 || item.Status() == 7 || item.Status() == 9) {
+                if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == 5|| item.Status() == 6 || item.Status() == 7 || item.Status() == 9) {
 
                     dataservice.getCampaignData({
                         CampaignId: item.CouponId(),
@@ -1224,6 +1224,7 @@ getfreeCouponCount = function () {
                                 } else if (couponModel().Status() == 5) {
                                     isBtnSaveDraftVisible(false);
                                     $("#btnCancel").css("display", "block");
+                                    $("input,button,textarea,a,select").attr('disabled', 'disabled');
                                     couponModel().StatusValue("Completed");
                                 } else if (couponModel().Status() == 6) {
                                     couponModel().StatusValue("Approval Rejected");
