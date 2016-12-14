@@ -212,5 +212,42 @@ namespace SMD.MIS.Areas.Api.Models
         public Nullable<bool> IsDollarSaving2days { get; set; }
         public Nullable<bool> IsDollarSavingLastday { get; set; }
         public DateTime? LastModifiedDate { get; set; }
+        public Nullable<int> isSaveBtnLable { get; set; }
+    }
+    public class SearchCampaigns
+    {
+        public long CampaignID { get; set; }
+        public string CampaignName { get; set; }
+        public Nullable<int> viewCountToday { get; set; }
+        public Nullable<int> viewCountYesterday { get; set; }
+        public Nullable<int> viewCountAllTime { get; set; }
+        public string Locationss { get; set; }
+        public Nullable<System.DateTime> StartDateTime { get; set; }
+        public Nullable<double> MaxBudget { get; set; }
+        public Nullable<double> MaxDailyBudget { get; set; }
+        public Nullable<double> AmountSpent { get; set; }
+        public Nullable<int> Status { get; set; }
+        public Nullable<System.DateTime> ApprovalDateTime { get; set; }
+        public Nullable<double> ClickRate { get; set; }
+        public Nullable<System.DateTime> CreatedDateTime { get; set; }
+        public Nullable<int> TotalItems { get; set; }
+        public Nullable<int> CompanyId { get; set; }
+        public Nullable<int> clickThroughsToday { get; set; }
+        public Nullable<int> clickThroughsYesterday { get; set; }
+        public Nullable<int> clickThroughsAllTime { get; set; }
+        public Nullable<int> Type { get; set; }
+        public Nullable<int> priority { get; set; }
+
+        public string ImagePath { get; set; }
+        public string VerifyQuestion { get; set; }
+        public Nullable<System.DateTime> ModifiedDateTime { get; set; }
+        public string Answer1 { get; set; }
+        public string Answer2 { get; set; }
+        public string Answer3 { get; set; }
+        public Nullable<int> SurveyAnsweredAllTime { get; set; }
+        public Nullable<int> Answer1Stats { get; set; }
+        public Nullable<int> Answer2Stats { get; set; }
+        public Nullable<int> Answer3Stats { get; set; }
+    
     }
 }

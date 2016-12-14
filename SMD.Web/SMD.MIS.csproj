@@ -668,6 +668,20 @@
     <Compile Include="Emails\Last3DaysPercentageCouponsNearMe.aspx.designer.cs">
       <DependentUpon>Last3DaysPercentageCouponsNearMe.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Emails\PayOutRequestNotificationToUser.aspx.cs">
+      <DependentUpon>PayOutRequestNotificationToUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\PayOutRequestNotificationToUser.aspx.designer.cs">
+      <DependentUpon>PayOutRequestNotificationToUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\PayOutRequestNotificationToAdmins.aspx.cs">
+      <DependentUpon>PayOutRequestNotificationToAdmins.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\PayOutRequestNotificationToAdmins.aspx.designer.cs">
+      <DependentUpon>PayOutRequestNotificationToAdmins.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Emails\Picture_poll_Rejected.aspx.cs">
       <DependentUpon>Picture_poll_Rejected.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -681,6 +695,27 @@
     </Compile>
     <Compile Include="Emails\Deal_Rejected.aspx.designer.cs">
       <DependentUpon>Deal_Rejected.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\ReviewRecievedForDeal.aspx.cs">
+      <DependentUpon>ReviewRecievedForDeal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\ReviewRecievedForDeal.aspx.designer.cs">
+      <DependentUpon>ReviewRecievedForDeal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\NewUserSignup.aspx.cs">
+      <DependentUpon>NewUserSignup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\NewUserSignup.aspx.designer.cs">
+      <DependentUpon>NewUserSignup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\UserAppFeedback.aspx.cs">
+      <DependentUpon>UserAppFeedback.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\UserAppFeedback.aspx.designer.cs">
+      <DependentUpon>UserAppFeedback.aspx</DependentUpon>
     </Compile>
     <Compile Include="Emails\Video_Ad_Rejected.aspx.cs">
       <DependentUpon>Video_Ad_Rejected.aspx</DependentUpon>
@@ -1440,8 +1475,13 @@
     <Content Include="Emails\LastDayPercentageCouponsNearMe.aspx" />
     <Content Include="Emails\Last2DaysPercentageCouponsNearMe.aspx" />
     <Content Include="Emails\Last3DaysPercentageCouponsNearMe.aspx" />
+    <Content Include="Emails\PayOutRequestNotificationToUser.aspx" />
+    <Content Include="Emails\PayOutRequestNotificationToAdmins.aspx" />
     <Content Include="Emails\Picture_poll_Rejected.aspx" />
     <Content Include="Emails\Deal_Rejected.aspx" />
+    <Content Include="Emails\ReviewRecievedForDeal.aspx" />
+    <Content Include="Emails\NewUserSignup.aspx" />
+    <Content Include="Emails\UserAppFeedback.aspx" />
     <Content Include="Emails\Video_Ad_Rejected.aspx" />
     <Content Include="Emails\delete_account_confirmation.aspx" />
     <Content Include="Emails\Deal_Approved.aspx" />

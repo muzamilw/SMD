@@ -191,7 +191,16 @@ namespace SMD.Implementation.Services
         public string PaymentFailedAttempt { get; set; }
 
         public string NextPaymentAttempt { get; set; }
-       
+
+
+        public string Reviewer { get; set; }
+
+        public string Review { get; set; }
+
+        public string ReviewRating { get; set; }
+
+
+        public string SignupLocation { get; set; }
 
         public string RoleName { get; set; }
         /// <summary>
@@ -261,8 +270,19 @@ namespace SMD.Implementation.Services
              MBody = MBody.Replace("++winnerpollperc++", winnerpollperc);
              MBody = MBody.Replace("++pollanswercount++", pollanswercount);
 
-                       
+
+             MBody = MBody.Replace("++paymentfailedattempt++", PaymentFailedAttempt);
+             MBody = MBody.Replace("++paymentfailedreason++", PaymentFailedReason);
+             MBody = MBody.Replace("++nextpaymentattempt++", NextPaymentAttempt);
+
+
+             MBody = MBody.Replace("++reviewer++", Reviewer);
+             MBody = MBody.Replace("++review++", Review);
+             MBody = MBody.Replace("++reviewrating++", ReviewRating);
+
+             MBody = MBody.Replace("++signuplocation++", SignupLocation);
              
+
             
             MBody = MBody.Replace("++CurrentDateTime++", DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToLongTimeString() + " GMT");
             MBody = MBody.Replace("++EmailConfirmationLink++", EmailConfirmationLink);
@@ -416,7 +436,11 @@ namespace SMD.Implementation.Services
             MBody = MBody.Replace("++nextpaymentattempt++", NextPaymentAttempt);
 
 
-          
+            MBody = MBody.Replace("++reviewer++", Reviewer);
+            MBody = MBody.Replace("++review++", Review);
+            MBody = MBody.Replace("++reviewrating++", ReviewRating);
+
+            MBody = MBody.Replace("++signuplocation++", SignupLocation);
 
             MBody = MBody.Replace("++city++", City);
 
@@ -918,7 +942,7 @@ namespace SMD.Implementation.Services
             if (oUser != null)
             {
                 MMailto.Add(oUser.Email);
-                Mid = (int)EmailTypes.PayoutMade;
+                Mid = (int)EmailTypes.PayoutNotificationToUser;
                 Muser = oUser.Email;
                 Fname = oUser.FullName;
                 PhoneNo = oUser.PhoneNumber;
@@ -1251,7 +1275,7 @@ namespace SMD.Implementation.Services
         {
             MMailto.Add("info@cash4ads.com");
             Mid = (int)EmailTypes.AppFeedbackFromUser;
-            string userName = FullName;
+            string userName = email;
             
 
             this.Fname = FullName;
@@ -1566,5 +1590,57 @@ namespace SMD.Implementation.Services
 
            
         }
+
+
+        public void SendNewReviewAvailableToAdvertiser(string ReviewerUserId, string campaignName, double Rating, string Reviewtext, string ReviwerFullName, string AdvertiserUserId)
+        {
+            var oUser = manageUserRepository.GetByUserId(AdvertiserUserId);
+           
+
+            if (oUser != null)
+            {
+                MMailto.Add(oUser.Email);
+                Mid = (int)EmailTypes.DealReviewNotificationToAdvertiser;
+                Muser = oUser.FullName;
+                CampaignName = campaignName;
+                Reviewer = ReviwerFullName;
+                ReviewRating = Rating.ToString();
+                Review = Reviewtext;
+
+                SendEmailNotAysnc();
+            }
+            else
+            {
+                throw new Exception("Email could not be sent!");
+            }
+        }
+
+
+
+        /// <summary>
+        ///Invite User Email
+        /// </summary>
+        public void NewUserSignupToAdmin(string UserId, string FullName, string email, string phone, string signuplocation)
+        {
+            MMailto.Add("info@cash4ads.com");
+            Mid = (int)EmailTypes.NewUserSignupToAdmin;
+            string userName = email;
+
+
+            this.Fname = FullName;
+            this.PhoneNo = phone;
+            this.sfemail = email;
+            SignupLocation = signuplocation;
+
+            Muser = FullName;
+
+            SendEmailNotAysnc();
+
+
+
+        }
+
+
+
     }
 }

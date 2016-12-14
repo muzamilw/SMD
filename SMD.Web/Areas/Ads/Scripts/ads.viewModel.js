@@ -212,14 +212,29 @@ define("ads/ads.viewModel",
                 CampaignName3 = ko.observable(),
                 LogoUrl3 = ko.observable(),
                 VideoLink3 = ko.observable(),
+                ischartOpened = ko.observable(false),
 				openAdvertiserDashboardScreen = function (Campaign) {
-
+				 
+				    collapseMainMenu();
+				
+				    openEditScreen(1);
+				 
+				    ischartOpened(true);
+				    isListVisible(false);
+				    isNewCampaign(false);
+				    
+				    //    if (Campaign.Status() == 1)//because it is in draft mode.
+				    //        isNewCampaign(true);
+				    //    else
+				    //        isNewCampaign(false);
+				    //}
+				   
 				    if (!isNewCampaign()) {
 				        isflageClose(true);
 				        selectedCampaignIdAnalytics(Campaign.CampaignID());
 				        getAdsByCampaignIdAnalytics();
 				        getFormAnalytic();
-				        // getQQAnalytic();
+				        getQQAnalytic();
 				        $("#ddGranularityDropDown").removeAttr("disabled");
 				        $("#ddDateRangeDropDown").removeAttr("disabled");
 				        $("#ddCampaignStatusDropDown").removeAttr("disabled");
@@ -237,7 +252,7 @@ define("ads/ads.viewModel",
 				    }
 				},
                       getQAnalytic = function (item) {
-                          //  var data = item;
+                            var data = item;
                           SelectedItemAnalytics(item);
                           dataservice.getQQAnalytic({
                               Id: selectedCampaignIdAnalytics(),
@@ -245,7 +260,7 @@ define("ads/ads.viewModel",
                               Gender: item.selectedGenderAnalytics(),
                               age: item.selectedAgeAnalytics(),
                               profession: "All",
-                              City: item.selectedCityAnalytics(),
+                              City: item.selectedCityAnalytics() != undefined ? item.selectedCityAnalytics() : "All",
                               QId: item.Id(),
                               type: item.typ()
                           }, {
@@ -266,7 +281,7 @@ define("ads/ads.viewModel",
                 getQQAnalytic = function () {
                     dataservice.getQQAnalytic({
                         Id: selectedCampaignIdAnalytics(),
-                        Choice: selectedQQCAnalytics(),
+                        Choice: selectedQQCAnalytics() > 0 ? selectedQQCAnalytics():0 ,
                         Gender: selectedQQGAnalytics(),
                         age: selectedQQAAnalytics(),
                         profession: selectedQQPAnalytics(),
@@ -410,7 +425,16 @@ define("ads/ads.viewModel",
 				    CampaignRatioAnalyticData(1);
 				    selecteddateRangeAnalytics(1);
 				    selectedGranularityAnalytics(1);
-				    isflageClose(false);
+				   // isflageClose(false);
+				    ischartOpened(false);
+
+				  //  openEditScreen(0);
+				    isEditorVisible(false);
+			        isListVisible(true);
+			        isWelcomeScreenVisible(false);
+
+				    
+
 				},
 
                 // End Advertiser dashBoard Section
@@ -3931,7 +3955,8 @@ define("ads/ads.viewModel",
                     CampaignName3: CampaignName3,
                     LogoUrl3: LogoUrl3,
                     VideoLink3: VideoLink3,
-                    headText: headText
+                    headText: headText,
+                    ischartOpened: ischartOpened
                 };
             })()
         };

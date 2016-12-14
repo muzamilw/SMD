@@ -6,7 +6,7 @@
             LocationLine1, LocationLine2, LocationLON, LocationPhone, LocationState, LocationTitle, LocationZipCode, LogoUrl, ModifiedBy, ModifiedDateTime, Price, RejectedBy,
             Rejecteddatetime, RejectedReason, Savings, SearchKeywords, Status, SwapCost, UserId, CouponTitle, CouponExpirydate, CouponQtyPerUser, CouponId, couponImage1, CouponImage2, CouponImage3,
             CurrencyId, couponListingMode, CouponActiveMonth, CouponActiveYear, CouponRedeemedCount, CouponViewCount, CouponIssuedCount, SubmissionDateTime, LocationCountryId, CouponStartDate, CouponEndDate, Priority,
-            ShowBuyitBtn, BuyitLandingPageUrl, BuyitBtnLabel, YoutubeLink, CouponImage4, CouponImage5, CouponImage6, IsPaymentCollected, PaymentDate, IsShowReviews, IsShowAddress, IsShowPhoneNo, IsShowMap, IsShowyouTube, IsShowAboutUs, DealsinGroupCount, IsPerSaving3days, IsPerSaving2days, IsPerSavingLastday, IsDollarSaving3days, IsDollarSaving2days, IsDollarSavingLastday, LastModifiedDate
+            ShowBuyitBtn, BuyitLandingPageUrl, BuyitBtnLabel, YoutubeLink, CouponImage4, CouponImage5, CouponImage6, IsPaymentCollected, PaymentDate, IsShowReviews, IsShowAddress, IsShowPhoneNo, IsShowMap, IsShowyouTube, IsShowAboutUs, DealsinGroupCount, IsPerSaving3days, IsPerSaving2days, IsPerSavingLastday, IsDollarSaving3days, IsDollarSaving2days, IsDollarSavingLastday, LastModifiedDate, isSaveBtnLable
           ) {
           var
               //type and userID will be set on server sside
@@ -112,6 +112,7 @@
               IsDollarSaving3days = ko.observable(IsDollarSaving3days),
               IsDollarSaving2days = ko.observable(IsDollarSaving2days),
               IsDollarSavingLastday = ko.observable(IsDollarSavingLastday),
+              isSaveBtnLable = ko.observable(isSaveBtnLable ==1 ? "1" :isSaveBtnLable == 2 ? "2" : isSaveBtnLable == 3 ? "3" :null),
     
 
                // Errors
@@ -215,6 +216,7 @@
                  IsDollarSaving2days: IsDollarSaving2days,
                  IsDollarSavingLastday: IsDollarSavingLastday,
                  lastModified: lastModified,
+                 isSaveBtnLable: isSaveBtnLable,
 
 
              }),
@@ -341,6 +343,7 @@
                   IsDollarSaving2days: IsDollarSaving2days(),
                   IsDollarSavingLastday: IsDollarSavingLastday(),
                   lastModified: lastModified(),
+                  isSaveBtnLable: isSaveBtnLable(),
 
               };
           };
@@ -441,6 +444,7 @@
               IsDollarSaving2days: (IsDollarSaving2days),
               IsDollarSavingLastday: (IsDollarSavingLastday),
               lastModified: (lastModified),
+              isSaveBtnLable: (isSaveBtnLable),
 
           };
       };
@@ -458,7 +462,7 @@
             source.Rejecteddatetime, source.RejectedReason, source.Savings, source.SearchKeywords, source.Status, source.SwapCost, source.UserId, source.CouponTitle, source.CouponExpirydate,
             source.CouponQtyPerUser, source.CouponId, source.couponImage1, source.CouponImage2, source.CouponImage3, source.CurrencyId, source.CouponListingMode, source.CouponActiveMonth, source.CouponActiveYear, source.CouponRedeemedCount, source.CouponViewCount, source.CouponIssuedCount, source.SubmissionDateTime, source.LocationCountryId, source.CouponStartDate, source.CouponEndDate, source.Priority
             , source.ShowBuyitBtn, source.BuyitLandingPageUrl, source.BuyitBtnLabel, source.YoutubeLink, source.CouponImage4, source.CouponImage5, source.CouponImage6, source.IsPaymentCollected, source.PaymentDate, source.IsShowReviews, source.IsShowAddress, source.IsShowPhoneNo, source.IsShowMap, source.IsShowyouTube, source.IsShowAboutUs, source.DealsinGroupCount, source.IsPerSaving3days, source.IsPerSaving2days
-            , source.IsPerSavingLastday, source.IsDollarSaving3days, source.IsDollarSaving2days, source.IsDollarSavingLastday,source.LastModifiedDate
+            , source.IsPerSavingLastday, source.IsDollarSaving3days, source.IsDollarSaving2days, source.IsDollarSavingLastday, source.LastModifiedDate, source.isSaveBtnLable
             );
 
         _.each(source.CouponCategories, function (item) {
@@ -531,75 +535,114 @@
             var price = Price();
             var saving = Savings();
             var result = 0;
-            result = ((price - saving) * 100) / price;
-            return result.toFixed(2) + "%";
+            if (price != undefined && price!=""&& saving !=undefined && saving!="")
+                result = (((price - saving) * 100) / price).toFixed(2);
+            return result+ "%";
         }),
         per20Saving = ko.computed(function () {
 
-             var result = ((Price() - Savings()) * 100) / Price();
-             var per = result + 20;
-             var formula = ((Price() * per) / 100);
-             return (Price() - formula).toFixed(2);
+            if (Price() != undefined && Price() != "" && Savings() != undefined && Savings() != "") {
+                var result = ((Price() - Savings()) * 100) / Price();
+                var per = result + 20;
+                var formula = ((Price() * per) / 100);
+                return (Price() - formula).toFixed(2);
+            } else
+                return 0;
 
         }),
          per20Value = ko.computed(function () {
-             var result = ((Price() - Savings()) * 100) / Price();
-             return (result + 20).toFixed(2)+"%";
+             var result = 0;
+             if (Price() != undefined && Price() != "" && Savings() != undefined && Savings() != "") {
+                 result = ((Price() - Savings()) * 100) / Price();
+                 result=(result + 20).toFixed(2);
+             }
+             return result+"%";
          }),
           dollar10Value = ko.computed(function () {
-       
-              return (Savings() - 10).toFixed(2);
+              if (Savings() != undefined && Savings() != "")
+                  return (Savings() - 10).toFixed(2);
+              else
+                  return 0;
           }),
          dollar10perSaving = ko.computed(function () {
-
-               var price = Price();
-               var saving = Savings()-10;
-               var result = 0;
-               result = ((price - saving) * 100) / price;
-               return result.toFixed(2) + "%";
+             if (Price() != undefined && Price() != "" && Savings() != undefined && Savings() != "") {
+                 var price = Price();
+                 var saving = Savings() - 10;
+                 var result = 0;
+                 result = ((price - saving) * 100) / price;
+                 return result.toFixed(2) + "%";
+             }
+             else
+                 return 0 + "%";
            }),
        per25Saving = ko.computed(function () {
-                 var result = ((Price() - Savings()) * 100) / Price();
-                 var per = result + 25;
-                 var formula = ((Price() * per) / 100);
-                 return (Price() - formula).toFixed(2);
+           if (Price() != undefined && Price() != "" && Savings() != undefined && Savings() != "") {
+               var result = ((Price() - Savings()) * 100) / Price();
+               var per = result + 25;
+               var formula = ((Price() * per) / 100);
+               return (Price() - formula).toFixed(2);
+           }
+           else
+               return 0;
        }),
         per25Value = ko.computed(function () {
-            var result = ((Price() - Savings()) * 100) / Price();
-            return (result + 25).toFixed(2) + "%";
+            if (Price() != undefined && Price() != "" && Savings() != undefined && Savings() != "") {
+                var result = ((Price() - Savings()) * 100) / Price();
+                return (result + 25).toFixed(2) + "%";
+            } else
+                return 0 + "%";
         }),
          dollar20Value = ko.computed(function () {
-             return (Savings() - 20).toFixed(2);
+             if (Savings() != undefined && Savings() != "")
+                 return (Savings() - 20).toFixed(2);
+             else
+                 return 0;
          }),
            dollar20perSaving = ko.computed(function () {
-
-               var price = Price();
-               var saving = Savings() - 20;
-               var result = 0;
-               result = ((price - saving) * 100) / price;
-               return result.toFixed(2) + "%";
+               if (Price() != undefined && Price() != "" && Savings() != undefined && Savings() != "") {
+                   var price = Price();
+                   var saving = Savings() - 20;
+                   var result = 0;
+                   result = ((price - saving) * 100) / price;
+                   return result.toFixed(2) + "%";
+               }
+               else
+                   return 0 + "%";
            }),
       per30Saving = ko.computed(function () {
-                   var result = ((Price() - Savings()) * 100) / Price();
-                   var per = result + 30;
-                   var formula = ((Price() * per) / 100);
-                   return (Price() - formula).toFixed(2);
+          if (Price() != undefined && Price() != "" && Savings() != undefined && Savings() != "") {
+              var result = ((Price() - Savings()) * 100) / Price();
+              var per = result + 30;
+              var formula = ((Price() * per) / 100);
+              return (Price() - formula).toFixed(2);
+          } else
+              return 0;
 
       }),
        per30Value = ko.computed(function () {
-           var result = ((Price() - Savings()) * 100) / Price();
-           return (result + 30).toFixed(2) + "%";
+           if (Price() != undefined && Price() != "" && Savings() != undefined && Savings() != "") {
+               var result = ((Price() - Savings()) * 100) / Price();
+               return (result + 30).toFixed(2) + "%";
+           }
+           else 
+               return 0 + "%";
        }),
         dollar30Value = ko.computed(function () {
-            return (Savings() - 30).toFixed(2);
+            if (Savings() != undefined && Savings() != "")
+                return (Savings() - 30).toFixed(2);
+            else
+                return 0;
         }),
          dollar30perSaving = ko.computed(function () {
-
-             var price = Price();
-             var saving = Savings() - 30;
-             var result = 0;
-             result = ((price - saving) * 100) / price;
-             return result.toFixed(2) + "%";
+             if (Price() != undefined && Price() != "" && Savings() != undefined && Savings() != "") {
+                 var price = Price();
+                 var saving = Savings() - 30;
+                 var result = 0;
+                 result = ((price - saving) * 100) / price;
+                 return result.toFixed(2) + "%";
+             }
+             else 
+                 return 0 + "%";
          }),
 
         // True if the booking has been changed

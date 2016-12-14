@@ -1151,6 +1151,10 @@ namespace SMD.Implementation.Services
         public bool InsertCouponRatingReview(CouponRatingReview model,string Image1String,  string Image2String,  string Image3String, string Image1ext,  string Image2ext,  string Image3ext)
         {
             
+            var ReviwerUser = UserManager.FindById(model.UserId);
+            var coupon = couponRepository.GetCouponById(model.CouponId.Value).FirstOrDefault();
+            var AdvertiserUser = aspnetUserRepository.GetUserbyCompanyId(coupon.CompanyId.Value);
+
 
             couponRatingReviewRepository.Add(model);
             couponRatingReviewRepository.SaveChanges();
@@ -1159,6 +1163,9 @@ namespace SMD.Implementation.Services
 
             couponRatingReviewRepository.Update(model);
             couponRatingReviewRepository.SaveChanges();
+
+            //send notification
+            emailManagerService.SendNewReviewAvailableToAdvertiser(ReviwerUser.Id, coupon.CouponTitle, model.StarRating.Value, model.Review, ReviwerUser.FullName, AdvertiserUser.Id);
 
 
             return true;
