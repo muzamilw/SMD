@@ -22,6 +22,8 @@ namespace SMD.Implementation.Services
             TransactionManager.SetDebitScheduler(this);
 
             // Ad more Schedulers here ...
+
+            EmailScheduler.DealsRelatedNotifications(this, context);
         }
     }
 
