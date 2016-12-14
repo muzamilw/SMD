@@ -1188,7 +1188,7 @@ getfreeCouponCount = function () {
                                     $("#btnCancel").css("display", "none");
                                     $("#btnCancel,#btnPauseCampaign,#btnClose").removeAttr('disabled');
                                     isBtnSaveDraftVisible(false);
-                                    couponModel().StatusValue("Submitted for Approval");
+                                    couponModel().StatusValue("Panding Approval");
 
 
                                 } else if (couponModel().Status() == 3) {
