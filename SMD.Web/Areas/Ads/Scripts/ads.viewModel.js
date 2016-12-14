@@ -215,15 +215,26 @@ define("ads/ads.viewModel",
                 VideoLink3 = ko.observable(),
                 ischartOpened = ko.observable(false),
 				openAdvertiserDashboardScreen = function (Campaign) {
-				 
-				    collapseMainMenu();
+				    campaignModel(new model.Campaign());
+
+				    campaignModel().CampaignName("Test");
+				 //   collapseMainMenu();
 				
 				    openEditScreen(1);
 				 
-				    ischartOpened(true);
+				 //   ischartOpened(true);
 				    isListVisible(false);
-				    isNewCampaign(false);
-				    
+				   // isNewCampaign(false);
+				    $("#logo_div").css("display", "block");
+				    $(".hideInCoupons").css("display", "none");
+
+				    $("#MarketobjDiv").css("display", "none");
+				    $("#topArea").css("display", "none");
+				    $("#panelArea").css("display", "none");
+
+				    $("#Heading_div").css("display", "none");
+
+				    $(".closecls").css("display", "none");
 				    //    if (Campaign.Status() == 1)//because it is in draft mode.
 				    //        isNewCampaign(true);
 				    //    else
@@ -426,17 +437,28 @@ define("ads/ads.viewModel",
 				    CampaignRatioAnalyticData(1);
 				    selecteddateRangeAnalytics(1);
 				    selectedGranularityAnalytics(1);
-				   // isflageClose(false);
+				   isflageClose(false);
 				    ischartOpened(false);
 
 				  //  openEditScreen(0);
 				    isEditorVisible(false);
 			        isListVisible(true);
 			        isWelcomeScreenVisible(false);
-
-				    
+			        $("#headlabel, #Heading_div").css("display", "block");
+			        showMainMenu();
+			        campaignModel().reset();
+			        $("input,button,textarea,a,select").removeAttr('disabled');
 
 				},
+                CloseAnalyticInnerView = function () {
+                    isAdvertdashboardVisible(false);
+                    CampaignRatioAnalyticData(1);
+                    selecteddateRangeAnalytics(1);
+                    selectedGranularityAnalytics(1);
+                  
+                    ischartOpened(false);
+
+                },
 
                 // End Advertiser dashBoard Section
                 getCampaignBaseContent = function () {
@@ -638,7 +660,7 @@ define("ads/ads.viewModel",
 
                 $("#MarketobjDiv").css("display", "none");
                 $("#topArea").css("display", "none");
-                $("#headlabel,#headdesc").css("display", "none");
+                $("#Heading_div, #headdesc").css("display", "none");
                 $(".closecls").css("display", "none");
 
 
@@ -657,7 +679,7 @@ define("ads/ads.viewModel",
                 VideoLink2src(null);
                 isShowArchiveBtn(false);
                 campaignModel().ChannelType("1");
-
+                
                 campaignModel().MaxDailyBudget("5");
                 campaignModel().MaxBudget("20");
                 campaignModel().Type(mode);
@@ -674,7 +696,7 @@ define("ads/ads.viewModel",
                 }
 
                 else {//video ad
-                    campaignModel().CampaignName("Video Ads");
+                    campaignModel().CampaignName("New Video Ads");
                     $("#logo_div").css("display", "none");
                     campaignModel().ClickRate("0.16");
                 }
@@ -693,7 +715,7 @@ define("ads/ads.viewModel",
            },
             closeNewCampaignDialog = function () {
 
-                CloseCampaignADAnalyticView();
+                CloseAnalyticInnerView();
                 //  if (IsthisEditCamapiagn())
 
                 if (campaignModel().hasChanges() || (logoImage != '' && mode == 4 && (campaignModel().Status() == null || campaignModel().Status() == 1))) {    //&& (campaignModel().Status() == null || campaignModel().Status() == 1)
@@ -799,8 +821,9 @@ define("ads/ads.viewModel",
                     showMainMenu();
                     campaignModel().reset();
                     $("input,button,textarea,a,select").removeAttr('disabled');
-
-
+                    $("#Heading_div").css("display", "block");
+                    $("#panelArea,#headdesc").css("display", "block");
+                    $(".closecls").css("display", "block");
 
                     //    isEditorVisible(false);
                     //    if (isFromEdit() == true) {
@@ -842,7 +865,7 @@ define("ads/ads.viewModel",
                     campaignModel();
                     selectedCriteria();
                     isEditorVisible(false);
-                    CloseCampaignADAnalyticView();
+                    CloseAnalyticInnerView();
                     if (isFromEdit() == true) {
                         isListVisible(true);
                         isWelcomeScreenVisible(false);

@@ -339,7 +339,7 @@ define("common/companyProfile.viewModel",
                         center: latlngComp,
                         mapTypeId: google.maps.MapTypeId.ROADMAP
                     };
-                    debugger;
+               
                    compMap = new google.maps.Map(document.getElementById('map-canvasCompany'), mapOptions);
 
                     //map = new google.maps.Map($('#map-canvasCompany'), mapOptions);

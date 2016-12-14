@@ -129,12 +129,13 @@ define("survey/survey.viewModel",
                         gender: selectedGenderAnalytics(),
                         age: selectedAgeAnalytics(),
                         type: 2,
+                        
                     }, {
                         success: function (data) {
                             if (data != null) {
-                          
+
                                 DDStatsAnalytics(data.filteredStat);
-                               
+
 
                             }
                         },
@@ -146,7 +147,18 @@ define("survey/survey.viewModel",
 
 
                 },
-                openAdvertiserDashboardPollScreen = function () {
+                openAdvertiserDashboardPollScreen = function (item) {
+
+                   // IsnewSurvey(false);
+                    if (item != undefined ){
+                        selectedSQIDAnalytics(item.SQID());
+                        HeaderText(item.Question());
+                    }
+                    isEditorVisible(true);
+                    $("#panelArea,#topArea,#Heading_div").css("display", "none");
+                  //  selectedQuestionCountryList([]); $("#panelArea,#topArea,#Heading_div").css("display", "none");
+                    gotoScreen(1);
+                   // isTerminateBtnVisible(false);
                     if (!IsnewSurvey()) {
                         isflageClose(true);
                         getSurvayAnalytics();
@@ -168,9 +180,10 @@ define("survey/survey.viewModel",
                     CampStatus: 0,
                     dateRange: selecteddateRangeAnalytics(),
                     Granularity: selectedGranularityAnalytics(),
-                    gender : 0,
+                    gender: 0,
                     age: 0,
-                    type:1,
+                    type: 1,
+                   
                 }, {
                     success: function (data) {
                         if (data != null) {
@@ -213,8 +226,18 @@ define("survey/survey.viewModel",
                     selecteddateRangeAnalytics(1);
                     selectedGranularityAnalytics(1);
                     isflageClose(false);
+                    isEditorVisible(false);
+                    enableControls();
+                    $("#panelArea,#topArea,#Heading_div").css("display", "block");
                 },
-
+                ClosePollAnalyticInnerView = function () {
+                    isAdvertdashboardPollVisible(false);
+                    CampaignRatioAnalyticData(1);
+                    selecteddateRangeAnalytics(1);
+                    selectedGranularityAnalytics(1);
+                    isflageClose(false);
+                },
+                
                 //End Advertiser Analytics 
                 //Get Questions
             getQuestions = function () {
@@ -277,12 +300,52 @@ define("survey/survey.viewModel",
                     });
 
             },
+        
+                    getQuestionsResponse = function (SqId) {
+                        dataservice.getSurvayAnalytics({
+                            SQId: SqId,
+                            CampStatus: 0,
+                            dateRange: 0,
+                            Granularity: 0,
+                            gender: 0,
+                            age: 0,
+                            type: 3,
+                            
+                        }, {
+                            success: function (data) {
+                                if (data != null) {
+                                 
+                                    var Element = ko.utils.arrayFirst(questions(), function (item) {
+                                        return item.SQID() == data.SQID;
+                                    });
+
+                                    if (Element) {
+                                      
+                                        Element.PieChartData(data.pieCharts);
+                                    }
+                                 
+
+                                }
+                                },
+                                error: function (response) {
+
+                                }
+                            });
+
+                    },
+
+
                 // update survey questions 
             populateSurveyQuestions = function (data) {
                 questions.removeAll();
 
                 _.each(data.SurveyQuestions, function (item) {
+                 
                     questions.push(model.Survey.Create(updateSurveryItem(item)));
+                });
+                _.each(questions(), function (item) {
+                    getQuestionsResponse(item.SQID());
+                    
                 });
                 pager().totalCount(data.TotalCount);
                 if (data.TotalCount == 0) {
@@ -501,7 +564,7 @@ define("survey/survey.viewModel",
                 },
               CloseContent = function () {
                   isEditorVisible(false);
-                  ClosePollAnalyticView();
+                  ClosePollAnalyticInnerView();
                   enableControls();
                   $("#panelArea,#topArea,#Heading_div").css("display", "block");
               },
@@ -1555,23 +1618,23 @@ define("survey/survey.viewModel",
                         if (ValidateSurvey() == true) {
                             selectedQuestion().Status(mode);
                             
-                                var surveyData = selectedQuestion().convertToServerData();
-                                dataservice.addSurveyData(surveyData, {
-                                    success: function (data) {
-                                        isEditorVisible(false);
-                                        getQuestions();
-                                        toastr.success("Successfully saved.");
+                            var surveyData = selectedQuestion().convertToServerData();
+                            dataservice.addSurveyData(surveyData, {
+                                success: function (data) {
+                                    isEditorVisible(false);
+                                    getQuestions();
+                                    toastr.success("Successfully saved.");
 
-                                        $("#Heading_div").css("display", "block");
-                                        CloseContent();
+                                    $("#Heading_div").css("display", "block");
+                                    CloseContent();
 
 
-                                    },
-                                    error: function (response) {
+                                },
+                                error: function (response) {
 
-                                    }
-                                });
-                            }
+                                }
+                            });
+                        }
                         
                     } else {
                         if (isEditorVisible()) {
@@ -2340,7 +2403,7 @@ define("survey/survey.viewModel",
                         AudienceWidth('380px');
                         IsVisibleAudience(true);
                     }
-                        CompanyLogo(gCompanyLogo);
+                    CompanyLogo(gCompanyLogo);
                 };
                 return {
                     initialize: initialize,
