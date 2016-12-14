@@ -1641,7 +1641,7 @@ namespace SMD.Implementation.Services
         }
 
 
-        void SendDealExpiredNotificationToAdvertiser()
+        public void SendDealExpiredNotificationToAdvertiser()
         {
 
         }
