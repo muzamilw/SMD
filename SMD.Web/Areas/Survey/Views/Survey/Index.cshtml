@@ -164,9 +164,13 @@ else
         <tr style="cursor: pointer">
             <td>
                 <a href="#" class="store-user-link" data-bind="text: Question,click:$root.onEditSurvey"></a>
-            </td>
-            <td style="display:none;">
-                <p data-bind="text:DisplayQuestion"></p>
+            
+                <br />
+                <img style="width:130px;height:130px;" data-bind="attr: { src:  LeftPicturePath()   }"> &nbsp;&nbsp;<img style="width:130px;height:130px;" data-bind="attr: { src:  RightPicturePath()   }">
+                <br />
+                <span style="color:darkgray;font-size:11px;" data-bind="dateString:  StartDate() ? 'Start Date : ' +  StartDate() : 'Not Started'"></span>
+                <br />
+                <span style="color:darkgray;font-size:11px;" data-bind="text:  ModifiedDate() ? 'Last Updated : ' +  ModifiedDate() : ''"></span>
             </td>
             <td>
                 <p data-bind="dateString:StartDate"></p>
@@ -177,66 +181,64 @@ else
             <td>
                 <p data-bind="text:resultClicks"></p>
             </td>
-            <td>
+            <td style="color:blue;font-size:larger;font-weight:bold">
                 <p data-bind="text:CreatedBy" class="@adminClasses"></p>
             </td>
             <td>
-                <!-- ko if: Status() == 1-->
-                <div class="text-left statusbg" style="background:#6D6EFA;    width: 149px;">
-                    <span data-bind="text: StatusValue">
+
+                <div style="font-size:larger;font-weight:bold;">
+                    <!-- ko if: Status() == 1-->
+                    <span style="color:#6D6EFA; " data-bind="text: StatusValue">
                     </span>
-                </div>
-                <!-- /ko -->
-                <!-- ko if: Status() == 2-->
-                <div class="text-left statusbg" style="background:#fc0;width: 149px">
-                    <span data-bind="text: StatusValue">
-                    </span>
-                </div>
-                <!-- /ko -->
-                <!-- ko if:  Status() == 3-->
-                <div class="text-left statusbg" style="background:#37c675;    width: 149px;">
-                    <span data-bind="text: StatusValue">
-                    </span>
-                </div>
-                <!-- /ko -->
-                <!-- ko if: Status() == 4-->
-                <div class="text-left statusbg" style="background:#fd008e;width: 149px">
-                    <span data-bind="text: StatusValue">
-                    </span>
-                </div>
-                <!-- /ko -->
-                <!-- ko if: Status() == 5-->
-                <div class="text-left statusbg" style="background:#c8e392;width: 149px">
-                    <span data-bind="text: StatusValue">
-                    </span>
-                </div>
-                <!-- /ko -->
-                <!-- ko if: Status() == 6-->
-                <div class="text-left statusbg" style="background:red;width: 149px">
-                    <span data-bind="text: StatusValue">
-                    </span>
-                </div>
-                <!-- /ko -->
-                <!-- ko if: Status() == 7-->
-                <div class="text-left statusbg" style="background:red;width: 149px">
-                    <span data-bind="text: 'Remove'">
-                    </span>
-                </div>
-                <!-- /ko -->
-                <!-- ko if: Status() == 8-->
-                <div class="text-left statusbg" style="background:#fc0;width: 149px">
-                    <span data-bind="text: StatusValue">
-                    </span>
-                </div>
-                <!-- /ko -->
-                <!-- ko if: Status() == 9-->
-                <div class="text-left statusbg" style="background:red;width: 149px">
-                    <span data-bind="text: StatusValue">
-                    </span>
-                </div>
-                <!-- /ko -->
-            </td>
-            <td>
+                    <!-- /ko -->
+                    <!-- ko if: Status() == 2-->
+                        <span style="color:#fc0" data-bind="text: StatusValue">
+                        </span>
+                    <!-- /ko -->
+                    <!-- ko if:  Status() == 3-->
+                        <span style="color:#37c675" data-bind="text: StatusValue">
+                        </span>
+                    <!-- /ko -->
+                    <!-- ko if: Status() == 4-->
+                        <span style="color:#fd008e" data-bind="text: StatusValue">
+                        </span>
+                    <!-- /ko -->
+                    <!-- ko if: Status() == 5-->
+                        <span style="color:#c8e392" data-bind="text: StatusValue">
+                        </span>
+                    <!-- /ko -->
+                    <!-- ko if: Status() == 6-->
+                        <span style="color:red" data-bind="text: StatusValue">
+                        </span>
+                    <!-- /ko -->
+                    <!-- ko if: Status() == 7-->
+                        <span style="color:red" data-bind="text: 'Remove'">
+                        </span>
+                    <!-- /ko -->
+                    <!-- ko if: Status() == 8-->
+                        <span style="color:#fc0" data-bind="text: StatusValue">
+                        </span>
+                    <!-- /ko -->
+                    <!-- ko if: Status() == 9-->
+                        <span style="color:red" data-bind="text: StatusValue">
+                        </span>
+                    <!-- /ko -->
+                    </div>
+                    <br />
+                    <div class="text-left statusbg" data-bind="click:$root.onEditSurvey" style="background:#37c675;width:95px;">
+                        <span>
+                            Edit Campaign
+                        </span>
+
+                    </div>
+                    <br />
+                    <div class="text-left statusbg" data-bind="click:$root.openAdvertiserDashboardPollScreen" style="background:blue;width:95px;">
+                        <span>
+                            Analyze Charts
+                        </span>
+                    </div>
+</td>
+            @*<td>
                 <!-- ko if: Status() == 1 ||  Status() == 4|| Status() ==  6-->
                 <a class="table-link danger" style="float: right">
                     <span class="fa-stack">
@@ -245,7 +247,7 @@ else
                     </span>
                 </a>
                 <!-- /ko -->
-            </td>
+            </td>*@
         </tr>
     </script>
     <script id="filterTemplate" type="text/html">
