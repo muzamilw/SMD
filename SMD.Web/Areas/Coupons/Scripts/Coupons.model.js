@@ -535,75 +535,114 @@
             var price = Price();
             var saving = Savings();
             var result = 0;
-            result = ((price - saving) * 100) / price;
-            return result.toFixed(2) + "%";
+            if (price != undefined && price!=""&& saving !=undefined && saving!="")
+                result = (((price - saving) * 100) / price).toFixed(2);
+            return result+ "%";
         }),
         per20Saving = ko.computed(function () {
 
-             var result = ((Price() - Savings()) * 100) / Price();
-             var per = result + 20;
-             var formula = ((Price() * per) / 100);
-             return (Price() - formula).toFixed(2);
+            if (Price() != undefined && Price() != "" && Savings() != undefined && Savings() != "") {
+                var result = ((Price() - Savings()) * 100) / Price();
+                var per = result + 20;
+                var formula = ((Price() * per) / 100);
+                return (Price() - formula).toFixed(2);
+            } else
+                return 0;
 
         }),
          per20Value = ko.computed(function () {
-             var result = ((Price() - Savings()) * 100) / Price();
-             return (result + 20).toFixed(2)+"%";
+             var result = 0;
+             if (Price() != undefined && Price() != "" && Savings() != undefined && Savings() != "") {
+                 result = ((Price() - Savings()) * 100) / Price();
+                 result=(result + 20).toFixed(2);
+             }
+             return result+"%";
          }),
           dollar10Value = ko.computed(function () {
-       
-              return (Savings() - 10).toFixed(2);
+              if (Savings() != undefined && Savings() != "")
+                  return (Savings() - 10).toFixed(2);
+              else
+                  return 0;
           }),
          dollar10perSaving = ko.computed(function () {
-
-               var price = Price();
-               var saving = Savings()-10;
-               var result = 0;
-               result = ((price - saving) * 100) / price;
-               return result.toFixed(2) + "%";
+             if (Price() != undefined && Price() != "" && Savings() != undefined && Savings() != "") {
+                 var price = Price();
+                 var saving = Savings() - 10;
+                 var result = 0;
+                 result = ((price - saving) * 100) / price;
+                 return result.toFixed(2) + "%";
+             }
+             else
+                 return 0 + "%";
            }),
        per25Saving = ko.computed(function () {
-                 var result = ((Price() - Savings()) * 100) / Price();
-                 var per = result + 25;
-                 var formula = ((Price() * per) / 100);
-                 return (Price() - formula).toFixed(2);
+           if (Price() != undefined && Price() != "" && Savings() != undefined && Savings() != "") {
+               var result = ((Price() - Savings()) * 100) / Price();
+               var per = result + 25;
+               var formula = ((Price() * per) / 100);
+               return (Price() - formula).toFixed(2);
+           }
+           else
+               return 0;
        }),
         per25Value = ko.computed(function () {
-            var result = ((Price() - Savings()) * 100) / Price();
-            return (result + 25).toFixed(2) + "%";
+            if (Price() != undefined && Price() != "" && Savings() != undefined && Savings() != "") {
+                var result = ((Price() - Savings()) * 100) / Price();
+                return (result + 25).toFixed(2) + "%";
+            } else
+                return 0 + "%";
         }),
          dollar20Value = ko.computed(function () {
-             return (Savings() - 20).toFixed(2);
+             if (Savings() != undefined && Savings() != "")
+                 return (Savings() - 20).toFixed(2);
+             else
+                 return 0;
          }),
            dollar20perSaving = ko.computed(function () {
-
-               var price = Price();
-               var saving = Savings() - 20;
-               var result = 0;
-               result = ((price - saving) * 100) / price;
-               return result.toFixed(2) + "%";
+               if (Price() != undefined && Price() != "" && Savings() != undefined && Savings() != "") {
+                   var price = Price();
+                   var saving = Savings() - 20;
+                   var result = 0;
+                   result = ((price - saving) * 100) / price;
+                   return result.toFixed(2) + "%";
+               }
+               else
+                   return 0 + "%";
            }),
       per30Saving = ko.computed(function () {
-                   var result = ((Price() - Savings()) * 100) / Price();
-                   var per = result + 30;
-                   var formula = ((Price() * per) / 100);
-                   return (Price() - formula).toFixed(2);
+          if (Price() != undefined && Price() != "" && Savings() != undefined && Savings() != "") {
+              var result = ((Price() - Savings()) * 100) / Price();
+              var per = result + 30;
+              var formula = ((Price() * per) / 100);
+              return (Price() - formula).toFixed(2);
+          } else
+              return 0;
 
       }),
        per30Value = ko.computed(function () {
-           var result = ((Price() - Savings()) * 100) / Price();
-           return (result + 30).toFixed(2) + "%";
+           if (Price() != undefined && Price() != "" && Savings() != undefined && Savings() != "") {
+               var result = ((Price() - Savings()) * 100) / Price();
+               return (result + 30).toFixed(2) + "%";
+           }
+           else 
+               return 0 + "%";
        }),
         dollar30Value = ko.computed(function () {
-            return (Savings() - 30).toFixed(2);
+            if (Savings() != undefined && Savings() != "")
+                return (Savings() - 30).toFixed(2);
+            else
+                return 0;
         }),
          dollar30perSaving = ko.computed(function () {
-
-             var price = Price();
-             var saving = Savings() - 30;
-             var result = 0;
-             result = ((price - saving) * 100) / price;
-             return result.toFixed(2) + "%";
+             if (Price() != undefined && Price() != "" && Savings() != undefined && Savings() != "") {
+                 var price = Price();
+                 var saving = Savings() - 30;
+                 var result = 0;
+                 result = ((price - saving) * 100) / price;
+                 return result.toFixed(2) + "%";
+             }
+             else 
+                 return 0 + "%";
          }),
 
         // True if the booking has been changed
