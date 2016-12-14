@@ -109,5 +109,10 @@ namespace SMD.Interfaces.Services
 
 
         void NewUserSignupToAdmin(string UserId, string FullName, string email, string phone, string signuplocation);
+
+
+
+        void SendDealExpiredNotificationToAdvertiser();
+
     }
 }

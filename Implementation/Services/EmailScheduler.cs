@@ -281,7 +281,7 @@ namespace SMD.Implementation.Services
 
 
 
-        public static void NewDealAvailableEmail(Registry registry, System.Web.HttpContext context)
+        public static void DealsRelatedNotifications(Registry registry, System.Web.HttpContext context)
         {
             RequestContext = context;
             if (context.Handler != null)
@@ -295,7 +295,7 @@ namespace SMD.Implementation.Services
 
           
 
-            // Registration of Debit Process Scheduler Run after every 7 days 
+            // new dealls related emails in different modes of discount types
             registry.Schedule(() => EmailManagerService.SendNewDealsEmail(1)).ToRunNow().AndEvery(1).Days().At(10, 0);
             registry.Schedule(() => EmailManagerService.SendNewDealsEmail(2)).ToRunNow().AndEvery(1).Days().At(10, 10);
             registry.Schedule(() => EmailManagerService.SendNewDealsEmail(3)).ToRunNow().AndEvery(1).Days().At(10, 20);
@@ -306,7 +306,13 @@ namespace SMD.Implementation.Services
             //  registry.Schedule(MonthlyAccountDetailsOfUser).AndEvery(1).Months();
 
 
+
+            //performance emails
             registry.Schedule(() => EmailManagerService.SendCampaignPerformanceEmails()).ToRunEvery(0).Weeks().On(DayOfWeek.Monday).At(9, 0);
+
+
+            registry.Schedule(() => EmailManagerService.SendCampaignPerformanceEmails()).ToRunEvery(0).Weeks().On(DayOfWeek.Monday).At(9, 0);
+
 
 
             
