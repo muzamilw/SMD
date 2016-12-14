@@ -5683,8 +5683,6 @@ width: 79px;
        
 background-size: 100% !important;
        
-margin-top: 5px !important;
-       
 background-position: center !important;
        
 text-align: center !important;
@@ -5922,3 +5920,7 @@ background-image: url(/Images/crowdcentz_logo.png) !important;
 .lbldisable{
         color:lightgray;
     }
+
+.main_list_lay {
+    margin-top:-3px!important;
+}

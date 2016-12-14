@@ -293,6 +293,12 @@ namespace SMD.Repository.Repositories
         }
 
 
+        public List<Coupon> GetDealsWhichHavejustExpired()
+        {
+            return db.Coupons.Where(g => g.Status != 5 && (g.CouponListingMode == 1 && g.ApprovalDateTime.Value.AddDays(7) > DateTime.Now) || (g.CouponListingMode == 2 && g.ApprovalDateTime.Value.AddDays(30) > DateTime.Now)).ToList();
+        }
+
+
         #endregion
     }
 }

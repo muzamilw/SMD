@@ -12,3 +12,5 @@
 /// <reference path="modernizr-2.6.2.js" />
 /// <reference path="owl.carousel.js" />
 /// <reference path="respond.js" />
+/// <reference path="rating/jquery.js" />
+/// <reference path="rating/rating.js" />
