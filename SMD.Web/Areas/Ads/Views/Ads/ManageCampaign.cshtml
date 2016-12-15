@@ -3155,7 +3155,8 @@ else
             <div class="col-lg-6 preview_stencilImg" style=" margin-right: 35px; width:310px;">
                 <div id="background" class="mobBck mobile_background">
                     <div style="position:relative;">
-                        <img id="closePop" src="~/Images/close2-128.png" width="20" class="preview_close" data-dismiss="modal" onclick="closevid()" />
+                        <img id="closePop" src="~/Images/close2-128.png" width="20"  style="float:right;" data-dismiss="modal" onclick="closevid()" />
+                        <div class="clearfix;"></div>
                     </div>
                     <div class="row preview_topImgCnt">
                         <img src="~/Images/topbarph.png" width="100%" />
@@ -4274,7 +4275,7 @@ else
     function playVideo(event) {
 
         var playSelectedFile = function (event) {
-
+            
             var file = this.files[0]
             var type = file.type
             var videoNode = document.querySelectorAll('video')
@@ -4282,6 +4283,10 @@ else
             var canPlay = videoNode[0].canPlayType(type)
             var canPlay = videoNode[1].canPlayType(type)
             var canPlay = videoNode[2].canPlayType(type)
+            var canPlay = videoNode[3].canPlayType(type)
+            var canPlay = videoNode[4].canPlayType(type)
+            var canPlay = videoNode[5].canPlayType(type)
+
 
             videoNode[2].removeAttribute("controls")
             if (canPlay === '') canPlay = 'no'
@@ -4296,6 +4301,9 @@ else
             videoNode[0].src = fileURL
             videoNode[1].src = fileURL
             videoNode[2].src = fileURL
+            videoNode[3].src = fileURL
+            videoNode[4].src = fileURL
+            videoNode[5].src = fileURL
         }
         var inputNode = document.querySelector('#videoUploader')
 
@@ -4396,9 +4404,7 @@ else
     }
     function previewImage()
     {
-        //$("#videoTag_prev").play();
         $('#videoTag_prev').get(0).play();
-
         $("#play_panel").css('display','none');
         $("#Campaign_name_panel").css('display','none');
         $("#buynow_panel").css('display','block');
