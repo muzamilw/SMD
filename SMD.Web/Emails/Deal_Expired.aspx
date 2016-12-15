@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta content="IE=edge" http-equiv="X-UA-Compatible" />
     <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <title>Attention : Review Your Deal
+    <title>Deal Expired
     </title>
     <style type="text/css">
         /*////// RESET STYLES //////*/
@@ -201,7 +201,7 @@
       <table align="center" border="0" cellpadding="0" cellspacing="0" height="100%" id="bodyTable" width="100%">        
         <tr>          
           <td align="center" id="bodyCell" valign="top">            
-            <span style="color:#FFFFFF; display:none; font-size:0px; height:0px; visibility:hidden; width:0px;">Attention : Review Your Deal</span>
+            <span style="color:#FFFFFF; display:none; font-size:0px; height:0px; visibility:hidden; width:0px;">Deal Expired.</span>
 <!-- BEGIN TEMPLATE // -->
             <table border="0" cellpadding="0" cellspacing="0" width="100%">              
               <tr>                
@@ -220,7 +220,7 @@
                     <tr>                      
                       <td align="center" style="padding-bottom:10px;" valign="top">                        
                         <h1 style="color:#FFFFFF; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:30px; font-style:normal; font-weight:600; line-height:42px; letter-spacing:normal; margin:0; padding:0; text-align:center;">
-                       Attention : Review Your Deal
+                         Deal Expired
                         </h1>
                       </td>
                     </tr>
@@ -299,16 +299,19 @@
                                         </td>
                                         <td align="left" style="padding-bottom:40px;" valign="top">                                          
                                           <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
-                                           Your Deal Group and Deals Lines require some improvements
-to meet our publishing standards.
+                                           Your Deal Group and Deals Lines is 
+                                              expired after being live for ++dealnoofdays++ and is no longer available on our website
+and in our app to people near you.
+
+                                          </p>
+                                          
+                                            <br />
+                                                   <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
+You can see detailed analytics and insights related to your deal by visiting the management dashboard.
 
 
 
                                           </p>
-                                          
-                                               <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
-                                          We have listed some tips on how to make your Deals more effective.
-</p>
 
 
                                           
@@ -342,10 +345,11 @@ to meet our publishing standards.
                                         </td>
                                         <td align="left" style="padding-bottom:40px;" valign="top">                                          
                                           <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
-                                       Use Hi-Res Images
+                                         Get higher Ratings and more Reviews
                                           </p>
                                           <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
-                                        We suggest that you upload images  900 x 600 pixels in PNG format
+                                         Get your friends & customers download the app and to give you a
+Rating and a review to improve your ranking.
 
 
 
@@ -359,14 +363,10 @@ to meet our publishing standards.
                                         </td>
                                         <td align="left" style="padding-bottom:40px;" valign="top">                                          
                                           <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
-                                        Do Not Use Text on Slider Images
+                                          Get Us to send out more emails and notification for you
                                           </p>
                                           <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
-                                       Use simple uncluttered images that inspire audiences and provoke
-them to click. We reject images that may offend others and of
-sexual nature.
-
-
+                                           Use Countdown discounting to create a sense of Scarcity & Urgency
 
 
 
@@ -379,14 +379,9 @@ sexual nature.
                                         </td>
                                         <td align="left" style="padding-bottom:40px;" valign="top">                                          
                                           <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
-                                          Check Spelling and Descriptions
+                                          Use Keywords and Categories to improve your listing visibility
                                           </p>
-                                         <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
-                                         We may have noticed a spelling mistake  
-
-
-
-                                          </p>
+                                         
                                         </td>
                                       </tr>
                                         <tr>                                        
@@ -395,13 +390,9 @@ sexual nature.
                                         </td>
                                         <td align="left" style="padding-bottom:40px;" valign="top">                                          
                                           <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
-                                        Heading Style
+                                         Go Social - Post your deal on Facebook
                                           </p>
-                                         <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
-                                        Use to the point and inspiring headings using Upper case 1st letters  i.e. Each First Letter Of Each Word Is In Upper Case
-
-
-                                          </p>
+                                         
                                         </td>
                                       </tr>
                                          <tr>                                        
@@ -410,67 +401,9 @@ sexual nature.
                                         </td>
                                         <td align="left" style="padding-bottom:40px;" valign="top">                                          
                                           <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
-                                         Broken URL Links
-
+                                         Upgrade and create create Up to 6 deal lines per Group
                                           </p>
-                                          <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
-                                         The link that you have used to re-direct to your Landing Page may be
-incorrect or does not exist
-
-
-
-                                          </p>
-                                        </td>
-                                      </tr>
-                                         <tr>                                        
-                                        <td align="left" style="padding-right:20px; padding-bottom:60px;" valign="top">                                          
-                                          <img alt="Test" src="http://manage.cash4ads.com/emails/images/tip.png" style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:600; height:auto; letter-spacing:-1px; padding:0; margin:0; text-align:center;" width="48"/>
-                                        </td>
-                                        <td align="left" style="padding-bottom:40px;" valign="top">                                          
-                                          <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
-                                       Misleading Deal Desciptions
-
-                                          </p>
-                                          <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
-                                         We may feel that your Deal sounds to good to be true or misleading.
-
-
-
-                                          </p>
-                                        </td>
-                                      </tr>
-                                         <tr>                                        
-                                        <td align="left" style="padding-right:20px; padding-bottom:60px;" valign="top">                                          
-                                          <img alt="Test" src="http://manage.cash4ads.com/emails/images/tip.png" style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:600; height:auto; letter-spacing:-1px; padding:0; margin:0; text-align:center;" width="48"/>
-                                        </td>
-                                        <td align="left" style="padding-bottom:40px;" valign="top">                                          
-                                          <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
-                                       Insufficient information
-
-                                          </p>
-                                          <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
-                                         Make sure that your ‘About Us’, ‘Highlights’, deal ‘Fine Print’ are correct and informative. 
-
-
-
-                                          </p>
-                                        </td>
-                                      </tr>
-                                        <tr>                                        
-                                        <td align="left" style="padding-right:20px; padding-bottom:60px;" valign="top">                                          
-                                          <img alt="Test" src="http://manage.cash4ads.com/emails/images/tip.png" style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:600; height:auto; letter-spacing:-1px; padding:0; margin:0; text-align:center;" width="48"/>
-                                        </td>
-                                        <td align="left" style="padding-bottom:40px;" valign="top">                                          
-                                          <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
-                                       Logo
-
-                                          </p>
-                                          <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
-                                         Make sure your logo is clear and sits well on White backgrounds.
-
-
-
-                                          </p>
+                                         
                                         </td>
                                       </tr>
                                         <tr>

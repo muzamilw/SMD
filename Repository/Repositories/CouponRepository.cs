@@ -252,6 +252,14 @@ namespace SMD.Repository.Repositories
             return true;
 
         }
+
+
+        public bool CompleteAllCoupons(int CompanyId)
+        {
+            db.Database.ExecuteSqlCommand("update coupon set status=5 where companyId=" + CompanyId);
+            return true;
+
+        }
         public int GetCouponByBranchId(long id)
         {
 

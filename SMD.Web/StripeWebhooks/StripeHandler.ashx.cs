@@ -175,7 +175,7 @@ namespace SMD.MIS.StripeWebhooks
 
                                 companyService.UpdateCompany(comp, null);
 
-                                couponService.PauseAllCoupons(comp.CompanyId);
+                                couponService.CompleteAllCoupons(comp.CompanyId);
 
                             }
 

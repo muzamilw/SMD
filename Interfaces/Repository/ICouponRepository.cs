@@ -33,6 +33,8 @@ namespace SMD.Interfaces.Repository
 
         bool PauseAllCoupons(int CompanyId);
 
+        bool CompleteAllCoupons(int CompanyId);
+
         int GetCouponByBranchId(long id);
         int GetFreeCouponCount();
         IEnumerable<vw_Coupons> GetMarketingDeals(GetPagedListRequest request, out int rowCount);

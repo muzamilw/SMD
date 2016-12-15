@@ -620,6 +620,13 @@
     <Compile Include="Areas\Survey\SurveyAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UnauthorizedRequestController.cs" />
+    <Compile Include="Emails\Deal_Expired.aspx.cs">
+      <DependentUpon>Deal_Expired.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Deal_Expired.aspx.designer.cs">
+      <DependentUpon>Deal_Expired.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Emails\Display_Ad_Rejected.aspx.cs">
       <DependentUpon>Display_Ad_Rejected.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1469,6 +1476,7 @@
     <Content Include="Content\themes\Centaurus\js\typeahead.min.js" />
     <Content Include="Content\themes\Centaurus\js\wizard.js" />
     <Content Include="Content\themes\Centaurus\js\xcharts.js" />
+    <Content Include="Emails\Deal_Expired.aspx" />
     <Content Include="Emails\Display_Ad_Rejected.aspx" />
     <Content Include="Emails\LastDayDollarDiscountCouponsNearMe.aspx" />
     <Content Include="Emails\Last2DaysDollarDiscountCouponsNearMe.aspx" />
