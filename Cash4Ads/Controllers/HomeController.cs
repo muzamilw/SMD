@@ -11,24 +11,24 @@ namespace Cash4Ads.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
-        {
-            User sessionVar = Session["User"] as Cash4Ads.Models.User;
-            if (sessionVar != null)
-            {
-                ViewBag.userid = sessionVar.UserId;
-                ViewBag.companyid = sessionVar.CompanyId;
-            }
-            else {
-                ViewBag.userid = 0;
-                ViewBag.companyid = 0;
-            }
+        //public ActionResult Index()
+        //{
+        //    //User sessionVar = Session["User"] as Cash4Ads.Models.User;
+        //    //if (sessionVar != null)
+        //    //{
+        //    //    ViewBag.userid = sessionVar.UserId;
+        //    //    ViewBag.companyid = sessionVar.CompanyId;
+        //    //}
+        //    //else {
+        //    //    ViewBag.userid = 0;
+        //    //    ViewBag.companyid = 0;
+        //    //}
           
-            return View();
-        }
+        //    //return View();
+        //}
 
 
-        public ActionResult vouchers()
+        public ActionResult Index()
         {
             User sessionVar = Session["User"] as Cash4Ads.Models.User;
             if (sessionVar != null)

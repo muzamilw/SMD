@@ -509,8 +509,10 @@ define("survey/survey.viewModel",
                    });
                },
             totalPrice = ko.computed(function () {
+
+
                 var setupPrice = 19;
-                var PircePerclick = 0.04;
+                var PircePerclick = 0.02;
                 var ansNeeeded;
                 var calculatePrice
                 if (selectedQuestion() == undefined) {

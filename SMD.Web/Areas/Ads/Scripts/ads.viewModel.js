@@ -1178,7 +1178,6 @@ define("ads/ads.viewModel",
 
                         if (campaignModel().IsUseFilter() == 0) {
 
-
                             campaignModel().AdCampaignTargetLocations.removeAll();
                             campaignModel().AdCampaignTargetCriterias.removeAll();
                             campaignModel().AgeRangeEnd(80);
