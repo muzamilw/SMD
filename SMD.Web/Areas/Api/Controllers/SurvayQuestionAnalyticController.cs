@@ -25,7 +25,15 @@ namespace SMD.MIS.Areas.Api.Controllers
         public SurvayBySQIDForAnalyticsResponse getPollsBySQIDAnalytics(int SQId, int CampStatus, int dateRange, int Granularity, int gender, int age, int type)
         {
             SurvayBySQIDForAnalyticsResponse data = new SurvayBySQIDForAnalyticsResponse();
-            if (type == 1) {
+            if (type == 3)
+            {
+                data.pieCharts = _ISurveyQuestionService.getPollBySQIDRatioAnalytic(SQId, 2);
+                data.SQID = SQId;
+                return data;
+            }
+
+            
+            else if (type == 1) {
                 List<getPollBySQIDRatioAnalytic_Result> listtbl = new List<getPollBySQIDRatioAnalytic_Result>();
 
                 data.lineCharts = _ISurveyQuestionService.getPollsBySQIDAnalytics(SQId, CampStatus, dateRange, Granularity);

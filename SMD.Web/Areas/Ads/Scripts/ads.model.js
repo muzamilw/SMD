@@ -11,7 +11,8 @@
           CouponDiscountValue, couponImage2, CouponImage3, CouponImage4, CouponExpiryLabel,
           couponSmdComission, CouponCategories, DeliveryDays, IsUseFilter, logoUrl,
           VoucherAdditionalInfo, CouponId, IsShowVoucherSetting, VideoLink2, CouponType, IsSavedCoupon, viewCountToday, viewCountYesterday, viewCountAllTime, MaxDailyBudget, Locationss, ApprovalDateTime,
-          ChannelType, VideoBytes, showBuyitBtn, clickThroughsToday, clickThroughsYesterday, clickThroughsAllTime, modifiedDateTime, surveyAnsweredAllTime,answer1Stats, answer2Stats, answer3Stats) {
+          ChannelType, VideoBytes, showBuyitBtn, clickThroughsToday, clickThroughsYesterday, clickThroughsAllTime,
+          modifiedDateTime, surveyAnsweredAllTime, answer1Stats, answer2Stats, answer3Stats) {
 
 
           var
@@ -688,14 +689,16 @@
     // Factory Method
     Campaign.Create = function (source) {
 
-        var campaign = new Campaign(source.IsPaymentCollected, source.PaymentDate, source.CampaignId, source.LanguageId, source.CampaignName, source.UserId, source.Status, source.StatusValue,
+        var campaign = new Campaign(source.IsPaymentCollected, source.PaymentDate, source.CampaignID > 0 ? source.CampaignID: source.CampaignId , source.LanguageId, source.CampaignName, source.UserId, source.Status, source.StatusValue,
             source.CampaignDescription, source.Gender + "", source.Archived, source.StartDateTime, source.EndDateTime, source.MaxBudget
             , source.Type + "", source.DisplayTitle, source.LandingPageVideoLink, source.VerifyQuestion, source.Answer1, source.Answer2, source.Answer3,
             source.CorrectAnswer, source.AgeRangeStart, source.AgeRangeEnd, source.ResultClicks, source.AmountSpent, source.ImagePath, source.CampaignImagePath,
             source.CampaignTypeImagePath, source.Description, source.ClickRate, source.Voucher1Heading, source.Voucher1Description, source.Voucher1Value, source.Voucher2Heading, source.Voucher2Description,
              source.Voucher2Value, source.Voucher1ImagePath, source.VoucherImagePath, source.CreatedBy, source.VideoUrl, source.BuuyItLine1, source.BuyItLine2, source.BuyItLine3, source.BuyItButtonLabel, source.BuyItImageUrl, source.AdViews, source.CompanyId,
             source.CouponSwapValue, source.CouponActualValue, source.CouponQuantity, source.CouponTakenCount, source.priority, source.CouponDiscountValue,
-             source.couponImage2, source.CouponImage3, source.CouponImage4, source.CouponExpiryLabel, source.couponSmdComission, null, source.DeliveryDays + "", source.IsUseFilter + "", source.LogoUrl, source.VoucherAdditionalInfo, source.CouponId, source.IsShowVoucherSetting, source.VideoLink2, source.CouponType + "", source.IsSavedCoupon, source.viewCountToday, source.viewCountYesterday, source.viewCountAllTime, source.MaxDailyBudget, source.Locationss, source.ApprovalDateTime, source.ChannelType + "", source.VideoBytes, source.ShowBuyitBtn, source.clickThroughsToday, source.clickThroughsYesterday, source.clickThroughsAllTime, source.ModifiedDateTime, source.SurveyAnsweredAllTime, source.VerifyQuestion, source.Answer1, source.Answer2, source.Answer3, source.Answer1Stats, source.Answer2Stats, source.Answer3Stats);
+             source.couponImage2, source.CouponImage3, source.CouponImage4, source.CouponExpiryLabel, source.couponSmdComission, null, source.DeliveryDays + "", source.IsUseFilter + "", source.LogoUrl, source.VoucherAdditionalInfo, source.CouponId, source.IsShowVoucherSetting, source.VideoLink2, source.CouponType + "", source.IsSavedCoupon, source.viewCountToday, source.viewCountYesterday, source.viewCountAllTime, source.MaxDailyBudget, source.Locationss, source.ApprovalDateTime, source.ChannelType + "", source.VideoBytes, source.ShowBuyitBtn, source.clickThroughsToday,
+            source.clickThroughsYesterday, source.clickThroughsAllTime, source.ModifiedDateTime, source.SurveyAnsweredAllTime,
+            source.Answer1Stats, source.Answer2Stats, source.Answer3Stats);
 
         _.each(source.AdCampaignTargetCriterias, function (item) {
 

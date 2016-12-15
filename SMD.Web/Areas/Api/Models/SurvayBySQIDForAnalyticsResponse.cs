@@ -13,5 +13,6 @@ namespace SMD.MIS.Areas.Api.Models
         public IEnumerable<getPollBySQIDtblAnalytic_Result> tbl { get; set; }
         public IEnumerable<getPollBySQIDRatioAnalytic_Result> pieChartstbl { get; set; }
         public int filteredStat { get; set; }
+        public long SQID { get; set; }
     }
 }

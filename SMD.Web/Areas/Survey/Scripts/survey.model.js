@@ -25,6 +25,7 @@
                 Description = ko.observable(Description),
                 answerNeeded = ko.observable(AnswerNeeded),
                 resultClicks = ko.observable(ResultClicks),
+                PieChartData = ko.observable([{label: 'download sales', value: 12}]),
                 DisplayQuestion = ko.observable(DisplayQuestion).extend({  // custom message
                     required: true
                 }),
@@ -213,7 +214,8 @@
                 resultClicks: resultClicks,
                 AmountCharged: AmountCharged,
                 IsUseFilter: IsUseFilter,
-                LastModified:LastModified
+                LastModified:LastModified,
+                PieChartData: PieChartData
             };
         };
 
@@ -335,7 +337,7 @@
         var survey = new Survey(source.SqId, source.LanguageId, source.CountryId, source.UserId, source.Status, source.StatusValue, source.Question,source.LastModifiedDate,
             source.Gender + "", source.Language, source.Country, source.Description, source.DisplayQuestion, source.StartDate, source.EndDate, source.ModifiedDate,
             source.LeftPicturePath, source.RightPicturePath, source.ProjectedReach, source.AgeRangeStart, source.AgeRangeEnd, source.LeftPictureBytes,
-            source.RightPictureBytes, source.ParentSurveyId, source.Priority, source.CreatedBy, source.CompanyId, source.AnswerNeeded, source.AmountCharged,0, source.IsUseFilter);
+            source.RightPictureBytes, source.ParentSurveyId, source.Priority, source.CreatedBy, source.CompanyId, source.AnswerNeeded, source.ResultClicks, source.AmountCharged, source.IsUseFilter);
         _.each(source.SurveyQuestionTargetCriterias, function (item) {
             survey.SurveyQuestionTargetCriteria.push(SurveyQuestionTargetCriteria.Create(item));
         });

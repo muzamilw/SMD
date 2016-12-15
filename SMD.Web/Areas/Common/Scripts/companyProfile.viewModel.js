@@ -261,7 +261,7 @@ define("common/companyProfile.viewModel",
                     dataservice.getBaseDataForCompanyProfile(null, {
                         
                         success: function (baseDataFromServer) {
-                            debugger;
+                            
                             if (baseDataFromServer.GetCouponReviewCount > 0) {
                                 $("#imgRedbell").css("display", "block");
                                 $("#whiteicon").css("display", "none");
@@ -339,7 +339,7 @@ define("common/companyProfile.viewModel",
                         center: latlngComp,
                         mapTypeId: google.maps.MapTypeId.ROADMAP
                     };
-                    debugger;
+               
                    compMap = new google.maps.Map(document.getElementById('map-canvasCompany'), mapOptions);
 
                     //map = new google.maps.Map($('#map-canvasCompany'), mapOptions);

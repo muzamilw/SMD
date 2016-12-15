@@ -1812,14 +1812,14 @@ getfreeCouponCount = function () {
                         center: latlngComp,
                         mapTypeId: google.maps.MapTypeId.ROADMAP
                     };
-                    debugger;
+                    
                     compMap = new google.maps.Map(document.getElementById('map_div'), mapOptions);
 
                     //map = new google.maps.Map($('#map-canvasCompany'), mapOptions);
 
                 },
                 setCompanyAddress = function () {
-                    debugger;
+                    
                     //var fulladdress = AddressLine1().toLowerCase() + ' ' + CompanyCity() + ' ' + companyzipcode() + ' ' + companystate().toLowerCase();
                     var fulladdress = null;
                     if (AddressLine1() != null) {

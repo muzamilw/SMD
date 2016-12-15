@@ -223,12 +223,12 @@ else
         </td>
         <td class="col-sm-1"><span class="" data-bind="text: ClickRate"></span></td>
         <td class="col-sm-1"><span class="" data-bind="text: MaxDailyBudget()"></span></td>
-        <td class="col-sm-3" colspan="3">
-            <div class="col-sm-4"><span class="" data-bind="text: viewCountAllTime()"></span></div>
-            <div class="col-sm-4"><span class="" data-bind="text:SurveyAnsweredAllTime() "></span></div>
-            <div class="col-sm-4"><span class="" data-bind="text: clickThroughsAllTime()"></span></div>
+        <td class="col-sm-3" colspan="3" style="text-align: right;">
+            <div class="col-sm-3"><span class="" data-bind="text: viewCountAllTime()"></span></div>
+            <div class="col-sm-3"><span class="" data-bind="text:SurveyAnsweredAllTime() "></span></div>
+            <div class="col-sm-3"><span class="" data-bind="text: clickThroughsAllTime()"></span></div>
             <br />
-            <div style="height:150px;" data-bind="morris: {type: 'Bar', data: [{y:'test', a:viewCountAllTime() ,b:SurveyAnsweredAllTime() , c:clickThroughsAllTime()}],axes:false, xkey: 'y', ykeys: ['a' , 'b', 'c'], labels: ['Total Impression','Survey PPCV', 'Click Thru'], parseTime:false, setAxisAlignFirstX: true,hideHover:'always', barColors: ['green', 'blue','red']}"></div>
+            <div style="height:150px;width:215px;" data-bind="morris: {type: 'Bar', data: [{y:'test', a:viewCountAllTime() ,b:SurveyAnsweredAllTime() , c:clickThroughsAllTime()}],axes:false, xkey: 'y', ykeys: ['a' , 'b', 'c'], labels: ['Total Impression','Survey PPCV', 'Click Thru'], parseTime:false, setAxisAlignFirstX: true,hideHover:'always', barColors: ['green', 'blue','red']}"></div>
       
         
         </td>
@@ -246,9 +246,12 @@ else
             
                             <div style="font-size:small" data-bind="text:VerifyQuestion()"></div>
                        <br />
-            <div style="height:150px;cursor: pointer;" data-bind="morris: {type: 'donut', data: [{label: Answer1(), value:Answer1Stats() }, {label:Answer2(), value:Answer2Stats() },{label:Answer3(), value:Answer3Stats() }], colors: ['green', 'blue', 'orange']"></div>
-                       
-   
+            <!-- ko if: Answer3() != null -->
+            <div data-bind="morris: {type: 'Donut', data: [{label: Answer1(), value: Answer1Stats()},{label: Answer2(), value: Answer2Stats()},{label: Answer3(), value: Answer3Stats()}], resize:true, colors: ['green', 'blue','red' ]  }" style="height:230px;cursor:pointer;"></div>       
+            <!-- /ko -->
+            <!-- ko if: Answer3() == null -->
+            <div data-bind="morris: {type: 'Donut', data: [{label: Answer1(), value: Answer1Stats()},{label: Answer2(), value: Answer2Stats()}], resize:true, colors: ['green', 'blue','red' ]  }" style="height:230px;cursor:pointer;"></div>       
+            <!-- /ko -->
         </td>
 
         <td class="col-sm-1">
@@ -260,7 +263,7 @@ else
                             <span class="col-sm-2" data-bind="text: Answer1"></span>
                         </td>
                         <td>
-                            <span data-bind="text: SurveyAnsweredAllTime() > 0 ? ((Answer1Stats/(SurveyAnsweredAllTime))*100).toFixed(2): 0"></span>%
+                            <span data-bind="text: SurveyAnsweredAllTime() > 0 ? ((Answer1Stats()/(SurveyAnsweredAllTime()))*100).toFixed(2): 0"></span>%
                         </td>
                     </tr>
                     <!-- /ko -->
@@ -270,7 +273,7 @@ else
                             <span class="col-sm-2" data-bind="text: Answer2"></span>
                         </td>
                         <td>
-                            <span data-bind="text: SurveyAnsweredAllTime() > 0 ? ((Answer2Stats/SurveyAnsweredAllTime)*100).toFixed(2):0"></span>%
+                            <span data-bind="text: SurveyAnsweredAllTime() > 0 ? ((Answer2Stats()/SurveyAnsweredAllTime())*100).toFixed(2):0"></span>%
                         </td>
                     </tr>
                     <!-- /ko -->
@@ -280,7 +283,7 @@ else
                             <span class="col-sm-2" data-bind="text: Answer3"></span>
                         </td>
                         <td>
-                            <span data-bind="text: SurveyAnsweredAllTime() > 0 ? ((Answer3Stats/SurveyAnsweredAllTime)*100).toFixed(2):0"></span>%
+                            <span data-bind="text: SurveyAnsweredAllTime() > 0 ? ((Answer3Stats()/SurveyAnsweredAllTime())*100).toFixed(2):0"></span>%
                         </td>
                     </tr>
                     <!-- /ko -->
