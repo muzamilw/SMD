@@ -593,6 +593,12 @@ svg{
 .filterH{
     font-weight:bold;font-size: x-large;float:left;padding-left:15px;
 }
+.activeclor{
+    color:#37c675;
+}
+.cancelcolor{
+    color:red;
+}
 .paddingR10px{
     padding-right:10px;
 }

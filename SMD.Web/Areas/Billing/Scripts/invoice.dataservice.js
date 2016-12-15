@@ -18,7 +18,16 @@ define("invoice/invoice.dataservice", function () {
                         type: 'GET'
                     });
                     
-
+                    amplify.request.define('getCompanySub', 'ajax', {
+                        url: '/Api/CompanySubscription',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
+                    amplify.request.define('saveSubscription', 'ajax', {
+                        url: '/Api/CompanySubscription',
+                        dataType: 'json',
+                        type: 'POST'
+                    });
                     // Edit Invoices / Details
                     amplify.request.define('getInvoiceDetails', 'ajax', {
                         url: '/Api/InvoiceDetail',
@@ -38,6 +47,24 @@ define("invoice/invoice.dataservice", function () {
                     data: params
                 });
             },
+             saveSubscription = function (params, callbacks) {
+                 initialize();
+                 return amplify.request({
+                     resourceId: 'saveSubscription',
+                     success: callbacks.success,
+                     error: callbacks.error,
+                     data: params
+                 });
+             },
+              getCompanySub = function (callbacks) {
+                  initialize();
+
+                  return amplify.request({
+                      resourceId: 'getCompanySub',
+                      success: callbacks.success,
+                      error: callbacks.error,
+                  });
+              },
             
             // Get Invoice Details
             getInvoiceDetails = function (params, callbacks) {
@@ -52,7 +79,9 @@ define("invoice/invoice.dataservice", function () {
 
         return {
             getInvoiceDetails: getInvoiceDetails,
-            searchInvoices: searchInvoices
+            searchInvoices: searchInvoices,
+            getCompanySub: getCompanySub,
+            saveSubscription: saveSubscription
         };
     })();
     return dataService;

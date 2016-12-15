@@ -31,5 +31,6 @@ namespace SMD.Interfaces.Repository
         Company GetCompanyByStripeCustomerId(string StripeCustomerId);
         Dictionary<string, int> GetStatusesCounters();
         Company GetCompanyInfo();
+        CompanySubscription GetCompanySubscription();
     }
 }
