@@ -4535,6 +4535,14 @@ html[xmlns] .slides {
         filter: alpha(opacity=100);
         right: 0;
     }
+    .ndod-view-mini {
+       
+    position: relative;
+    width: 48%;
+    float: left;
+    margin: 9px;
+}
+
 }
 
 .ndod-last-chance-deals h1, .ndod-previous-deals h1, .ndod-content-pwd h1, .login-join-page h1 {
@@ -6971,6 +6979,14 @@ div.content .unit.ctu h1 {
     div.content .unit.ctu h1 {
         width: 650px;
     }
+    .ndod-view-mini {
+       
+    position: relative;
+    width: 48%;
+    float: left;
+    margin: 9px;
+}
+
 }
 
 .btm-header-bg {
@@ -7050,12 +7066,28 @@ div.content .unit.ctu .slider {
     .ctu .ctu-pointsCollect {
         right: 4px;
     }
+    .ndod-view-mini {
+       
+    position: relative;
+    width: 48%;
+    float: left;
+    margin: 9px;
+}
+
 }
 
 @media (min-width: 1200px) {
     .ctu .ctu-pointsCollect {
         right: 22px;
     }
+    .ndod-view-mini {
+       
+    position: relative;
+    width: 48%;
+    float: left;
+    margin: 9px;
+}
+
 }
 
     .ctu .ctu-pointsCollect span {
@@ -7126,6 +7158,14 @@ div.content .unit.ctu .slider {
         margin-right: 86px;
         text-align: center;
     }
+    .ndod-view-mini {
+       
+    position: relative;
+    width: 48%;
+    float: left;
+    margin: 9px;
+}
+
 }
 
 @media (min-width: 1200px) {
@@ -7134,6 +7174,14 @@ div.content .unit.ctu .slider {
         margin-right: 192px;
         text-align: center;
     }
+    .ndod-view-mini {
+       
+    position: relative;
+    width: 48%;
+    float: left;
+    margin: 9px;
+}
+
 }
 
 @media (min-width: 1024px) {
@@ -7141,6 +7189,14 @@ div.content .unit.ctu .slider {
     .ctu .ctu-stats-table-full-width {
         width: 485px;
     }
+    .ndod-view-mini {
+       
+    position: relative;
+    width: 48%;
+    float: left;
+    margin: 9px;
+}
+
 }
 
 .ctu .ctu-stats-table-sold-out-over {
@@ -7248,8 +7304,25 @@ div.content .unit.ctu .slider {
         width: 115px;
         z-index: 6;
     }
+    .ndod-view-mini {
+       
+    position: relative;
+    width: 48%;
+    float: left;
+    margin: 9px;
 }
 
+}
+
+@media (min-width: 320px){
+
+   .ndod-view-mini {
+    position: relative;
+    width: 100%;
+    float: left;
+    margin: 9px;
+}
+}
 @media (min-width: 1200px){
     .ctu .ctu-buy-big {
         font-size: 2.8em;
@@ -7264,6 +7337,14 @@ div.content .unit.ctu .slider {
         width: 157px;
         z-index: 6;
     }
+    .ndod-view-mini {
+       
+    position: relative;
+    width: 48%;
+    float: left;
+    margin: 9px;
+}
+
 }
 
 
@@ -9023,13 +9104,7 @@ body .login-join-page h1 {
             margin: 5px 0 5px 0;
         }
 
-.ndod-view-mini {
-       
-    position: relative;
-    width: 48%;
-    float: left;
-    margin: 9px;
-}
+
 
     .ndod-view-mini .ndod-deal-header h1, .ndod-view-mini .ndod-deal-header h2, .ndod-view-mini .ndod-deal-header h3, .ndod-view-mini .ndod-deal-header h4 {
         padding: 8px 10px;
@@ -12163,7 +12238,15 @@ div.wallet .card {
             cursor: default;
         }
 
-@media screen and (max-width:860px) {
+@media screen and (min-width:860px) {
+    .ndod-view-mini {
+       
+    position: relative;
+    width: 48%;
+    float: left;
+    margin: 9px;
+}
+
     .deal-travel .slider .flex-direction-nav {
         display: none;
     }
@@ -13960,6 +14043,14 @@ div.travel-submenu li {
     }
 
 @media screen and (min-width:1350px) {
+    .ndod-view-mini {
+       
+    position: relative;
+    width: 48%;
+    float: left;
+    margin: 9px;
+}
+
     .search-refine {
         position: absolute;
         margin-left: -190px;
@@ -17220,6 +17311,7 @@ a:hover, .theme-font-color, .map-location-address-active {
 
 .ctu .ctu-redeem-now {
     background-position: -493px -200px;
+    display:none;
 }
 
 .ndod-view-mini .ndod-ending-soon, .aside-ending-soon {
@@ -17683,9 +17775,25 @@ div.content .unit.ctu .ctu-sponsor div {
         margin-left:10%;
         margin-right:10%;
     }
+    .ndod-view-mini {
+       
+    position: relative;
+    width: 48%;
+    float: left;
+    margin: 9px;
+}
+
 }
 
 @media (min-width: 1200px) {
+    .ndod-view-mini {
+       
+    position: relative;
+    width: 48%;
+    float: left;
+    margin: 9px;
+}
+
     .extraMargingStandardContainer {
         margin-left:0px;
         margin-right:0px;
@@ -17701,6 +17809,14 @@ div.content .unit.ctu .ctu-sponsor div {
 
 
 @media (min-width: 1200px) {
+    .ndod-view-mini {
+       
+    position: relative;
+    width: 48%;
+    float: left;
+    margin: 9px;
+}
+
     .formcontrol {
         margin-left:0px;
         margin-right:0px;
@@ -17741,4 +17857,27 @@ div.content .unit.ctu .ctu-sponsor div {
 }
 .waMultiPrice {
     font-size:13px;
+}
+.yel_box {
+    text-align: center;
+    background-color: #fecf0d;
+    height: 37px;
+    width:92px;
+    position: relative;
+    top: -30px;
+    color: white;
+    border-radius: 7px;
+    padding-top: 9px;
+}
+.yel_box_rat {
+  text-align: center;
+    background-color: #fecf0d;
+    height: 37px;
+    width: 46px;
+    position: relative;
+    top: -58px;
+    color: white;
+    border-radius: 7px;
+    padding-top: 9px;
+    left: 598px;
 }
