@@ -183,7 +183,7 @@ namespace SMD.Implementation.Services
         public string winnerpollperc { get; set; }
 
         public string pollanswercount { get; set; }
-        
+
         public string RejectionReason { get; set; }
 
         public string PaymentFailedReason { get; set; }
@@ -241,7 +241,7 @@ namespace SMD.Implementation.Services
             smailsubject = smailsubject.Replace("++companyname++", CompanyNameInviteUser);
             smailsubject = smailsubject.Replace("++inviter++", FullNameInviteUser);
             smailsubject = smailsubject.Replace("++campaignname++", CampaignName);
-            
+
 
             MBody = MBody.Replace("++username++", Muser);
             MBody = MBody.Replace("++firstname++", Fname);
@@ -266,24 +266,24 @@ namespace SMD.Implementation.Services
             MBody = MBody.Replace("++answercolor++", answercolor);
 
 
-             MBody = MBody.Replace("++winnerpoll++", winnerpoll);
-             MBody = MBody.Replace("++winnerpollperc++", winnerpollperc);
-             MBody = MBody.Replace("++pollanswercount++", pollanswercount);
+            MBody = MBody.Replace("++winnerpoll++", winnerpoll);
+            MBody = MBody.Replace("++winnerpollperc++", winnerpollperc);
+            MBody = MBody.Replace("++pollanswercount++", pollanswercount);
 
 
-             MBody = MBody.Replace("++paymentfailedattempt++", PaymentFailedAttempt);
-             MBody = MBody.Replace("++paymentfailedreason++", PaymentFailedReason);
-             MBody = MBody.Replace("++nextpaymentattempt++", NextPaymentAttempt);
+            MBody = MBody.Replace("++paymentfailedattempt++", PaymentFailedAttempt);
+            MBody = MBody.Replace("++paymentfailedreason++", PaymentFailedReason);
+            MBody = MBody.Replace("++nextpaymentattempt++", NextPaymentAttempt);
 
 
-             MBody = MBody.Replace("++reviewer++", Reviewer);
-             MBody = MBody.Replace("++review++", Review);
-             MBody = MBody.Replace("++reviewrating++", ReviewRating);
+            MBody = MBody.Replace("++reviewer++", Reviewer);
+            MBody = MBody.Replace("++review++", Review);
+            MBody = MBody.Replace("++reviewrating++", ReviewRating);
 
-             MBody = MBody.Replace("++signuplocation++", SignupLocation);
-             
+            MBody = MBody.Replace("++signuplocation++", SignupLocation);
 
-            
+
+
             MBody = MBody.Replace("++CurrentDateTime++", DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToLongTimeString() + " GMT");
             MBody = MBody.Replace("++EmailConfirmationLink++", EmailConfirmationLink);
             MBody = MBody.Replace("++companyname++", CompanyNameInviteUser);
@@ -420,7 +420,7 @@ namespace SMD.Implementation.Services
             MBody = MBody.Replace("++winnerpoll++", winnerpoll);
             MBody = MBody.Replace("++winnerpollperc++", winnerpollperc);
             MBody = MBody.Replace("++pollanswercount++", pollanswercount);
-                
+
             MBody = MBody.Replace("++CurrentDateTime++", DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToLongTimeString() + " GMT");
             MBody = MBody.Replace("++EmailConfirmationLink++", EmailConfirmationLink);
             MBody = MBody.Replace("++inviteurl++", InviteURL);
@@ -622,7 +622,7 @@ namespace SMD.Implementation.Services
         /// </summary>
         public EmailManagerService(ISystemMailsRepository systemMailRepository, IManageUserRepository manageUserRepository, ICompanyService companyService, IAspnetUsersRepository userRepository, ICouponRepository couponRepository)
         {
-            
+
             if (systemMailRepository == null)
             {
                 throw new ArgumentNullException("systemMailRepository");
@@ -632,7 +632,7 @@ namespace SMD.Implementation.Services
             this.companyService = companyService;
             this.userRepository = userRepository;
             this.couponRepository = couponRepository;
-        
+
 
             MMailto = new List<string>();
         }
@@ -965,19 +965,19 @@ namespace SMD.Implementation.Services
             string userName = string.Empty;
             int companyid = 0;
 
-            CompanyNameInviteUser =   manageUserRepository.getCompanyName(out userName, out companyid);
+            CompanyNameInviteUser = manageUserRepository.getCompanyName(out userName, out companyid);
             FullNameInviteUser = userName;
             RoleName = role;
             Muser = userName;
 
-            if ( mode == true)//user will have to register and a new user will be created etc and link established,.
+            if (mode == true)//user will have to register and a new user will be created etc and link established,.
                 InviteURL = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/Account/Register?code=" + InvitationCode;
             else//simple link acceptance logic since user already exists.
                 InviteURL = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/Account/AcceptInvitation?code=" + InvitationCode;
 
 
-             SendEmailNotAysnc();
-             
+            SendEmailNotAysnc();
+
 
 
         }
@@ -988,7 +988,7 @@ namespace SMD.Implementation.Services
         ////    MMailto.Add(email);
         ////    Mid = (int)EmailTypes.InviteUsers;
         ////    string userName = string.Empty;
-   
+
         ////    CompanyNameInviteUser = manageUserRepository.getCompanyName(out userName, companyId);
         ////    Muser = userName;
         ////    InviteURL = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/Account/Register?CompanyID=" + companyId;
@@ -1051,7 +1051,7 @@ namespace SMD.Implementation.Services
                 BuyItLine1 = oCampaign.BuuyItLine1;
                 BuyItLine2 = oCampaign.BuyItLine2;
                 BuyItLogoURL = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + oCampaign.BuyItImageUrl;
-                BuyItURL = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" +  oCampaign.LandingPageVideoLink;
+                BuyItURL = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + oCampaign.LandingPageVideoLink;
                 await SendEmail();
             }
             else
@@ -1068,13 +1068,13 @@ namespace SMD.Implementation.Services
                 MMailto.Add(oUser.Email);
                 Mid = (int)EmailTypes.VideoAdCampaignApproved;
                 Muser = oUser.FullName;
-               
+
                 CampaignName = campaignName;
-                
+
                 CampaignClicksPerDay = ClicksPerDay.ToString();
                 CampaignVideoPath = videoPath;
                 CampaignVideoImage = videoImage;
-                
+
                 SendEmailNotAysnc();
             }
             else
@@ -1111,7 +1111,7 @@ namespace SMD.Implementation.Services
 
 
 
-        public void SendSurveyCampaignApprovalEmail(string aspnetUserId, string campaignName, string LeftImage,string RightImage)
+        public void SendSurveyCampaignApprovalEmail(string aspnetUserId, string campaignName, string LeftImage, string RightImage)
         {
             var oUser = manageUserRepository.GetByUserId(aspnetUserId);
 
@@ -1167,7 +1167,7 @@ namespace SMD.Implementation.Services
 
                 CampaignClicksPerDay = ClicksPerDay.ToString();
                 CampaignBannerImage = BannerPath;
-                
+
 
                 SendEmailNotAysnc();
             }
@@ -1216,7 +1216,7 @@ namespace SMD.Implementation.Services
                 CampaignName = campaignName;
                 CampaignBannerImage = BannerPath;
                 DealNoOfDays = dealNoOfDays.ToString();
-                
+
                 SendEmailNotAysnc();
             }
             else
@@ -1238,7 +1238,7 @@ namespace SMD.Implementation.Services
                 CampaignBannerImage = BannerPath;
                 DealNoOfDays = dealNoOfDays.ToString();
                 RejectionReason = RReason;
-               
+
                 SendEmailNotAysnc();
             }
             else
@@ -1257,7 +1257,7 @@ namespace SMD.Implementation.Services
                 Mid = (int)EmailTypes.PicturePollCampaignRejected;
                 Muser = oUser.FullName;
                 RejectionReason = RReason;
-                
+
                 SendEmailNotAysnc();
             }
             else
@@ -1276,7 +1276,7 @@ namespace SMD.Implementation.Services
             MMailto.Add("info@cash4ads.com");
             Mid = (int)EmailTypes.AppFeedbackFromUser;
             string userName = email;
-            
+
 
             this.Fname = FullName;
             this.PhoneNo = phone;
@@ -1314,7 +1314,7 @@ namespace SMD.Implementation.Services
 
 
 
-        public void SendPaymentRejectionEmail(string aspnetUserId, int CompanyId,  string sPaymentFailedReason, int Attempt, string sNextPaymentAttempt)
+        public void SendPaymentRejectionEmail(string aspnetUserId, int CompanyId, string sPaymentFailedReason, int Attempt, string sNextPaymentAttempt)
         {
             var oUser = manageUserRepository.GetByUserId(aspnetUserId);
             var comp = companyService.GetCompanyById(CompanyId);
@@ -1328,7 +1328,7 @@ namespace SMD.Implementation.Services
                 PaymentFailedAttempt = Attempt.ToString();
                 PaymentFailedReason = sPaymentFailedReason;
                 NextPaymentAttempt = sNextPaymentAttempt;
-                
+
                 SendEmailNotAysnc();
             }
             else
@@ -1382,7 +1382,7 @@ namespace SMD.Implementation.Services
                     case 1:
                         {
                             Mid = (int)EmailTypes.WeeklyVideoAdPerformanceStats;
-                            
+
                             ctlw = campaign.ClickThroughsLastWeek.ToString();
                             ctpq = campaign.ClickThroughsPreviousWeek.ToString();
                             trendc = campaign.ProgressPercentage.ToString();
@@ -1461,8 +1461,8 @@ namespace SMD.Implementation.Services
                         {
                             Mid = (int)EmailTypes.WeeklyPollSurveyPerformanceStats;
 
-                           
-                            if( campaign.LeftPicResponseCount > campaign.RightPicResponseCount)
+
+                            if (campaign.LeftPicResponseCount > campaign.RightPicResponseCount)
                             {
                                 winnerpoll = "One";
                                 winnerpollperc = ((campaign.LeftPicResponseCount - campaign.RightPicResponseCount) / campaign.RightPicResponseCount * 100).ToString() + "%";
@@ -1475,7 +1475,7 @@ namespace SMD.Implementation.Services
 
                             pollanswercount = (campaign.LeftPicResponseCount + campaign.RightPicResponseCount).ToString();
 
-                     
+
                             break;
                         }
                 }
@@ -1483,10 +1483,10 @@ namespace SMD.Implementation.Services
                 Muser = campaign.FullName;
 
                 SendEmailNotAysnc();
-                
+
             }
 
-            
+
         }
 
         public void SendNewDealsEmail(int mode)
@@ -1494,50 +1494,54 @@ namespace SMD.Implementation.Services
 
             var data = couponRepository.GetUsersCouponsForEmailNotification(mode);//new deals for today
 
-            string userDeals = string.Empty;
 
-            var users = data.GroupBy(x => new { x.UserId, x.FullName, x.Email });
-
-            foreach (var user in users)
+            if (data != null && data.Count() > 0)
             {
-                userDeals = "<table align=\"center\" bgcolor=\"#F2F2F2\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style='width:100%;'>";
-                //user.Key.UserId
+                string userDeals = string.Empty;
 
-                foreach (var item in user)
+                var users = data.GroupBy(x => new { x.UserId, x.FullName, x.Email });
+
+                foreach (var user in users)
                 {
-                    userDeals += "<tr><td colspan='2' align=\"center\"><img style='text-align:center;max-width:560px' src='" + item.couponimage1 + "'/></td></tr>";
-                    userDeals += "<tr><td colspan='2' align=\"center\" style='text-align:center;padding-bottom:10px;'><p style=\"style=color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;\">" + item.CouponTitle + " <span style='color:red'>" + item.CurrencySymbol + "" + item.SavingsNew + "</span></p></td></tr>";
-                    userDeals += "<tr><td style='padding-left:64px;padding-bottom:60px'><p style=\"style=color:red; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;\">was " + item.CurrencySymbol + "" + item.price + "</p></td><td align='right' style='padding-right:60px'><a href='http://deals.cash4ads.com/deal/" + item.CouponId + "' style=\"background-color:#6DC6DD; border-collapse:separate; border-top:20px solid #6DC6DD; border-right:40px solid #6DC6DD; border-bottom:20px solid #6DC6DD; border-left:40px solid #6DC6DD; border-radius:3px; color:#FFFFFF; display:inline-block; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:600; letter-spacing:.3px; text-decoration:none;\" target='_blank'>VIEW DEAL</a></td></tr>";
+                    userDeals = "<table align=\"center\" bgcolor=\"#F2F2F2\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style='width:100%;'>";
+                    //user.Key.UserId
+
+                    foreach (var item in user)
+                    {
+                        userDeals += "<tr><td colspan='2' align=\"center\"><img style='text-align:center;max-width:560px' src='" + item.couponimage1 + "'/></td></tr>";
+                        userDeals += "<tr><td colspan='2' align=\"center\" style='text-align:center;padding-bottom:10px;'><p style=\"style=color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;\">" + item.CouponTitle + " <span style='color:red'>" + item.CurrencySymbol + "" + item.SavingsNew + "</span></p></td></tr>";
+                        userDeals += "<tr><td style='padding-left:64px;padding-bottom:60px'><p style=\"style=color:red; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;\">was " + item.CurrencySymbol + "" + item.price + "</p></td><td align='right' style='padding-right:60px'><a href='http://deals.cash4ads.com/deal/" + item.CouponId + "' style=\"background-color:#6DC6DD; border-collapse:separate; border-top:20px solid #6DC6DD; border-right:40px solid #6DC6DD; border-bottom:20px solid #6DC6DD; border-left:40px solid #6DC6DD; border-radius:3px; color:#FFFFFF; display:inline-block; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:600; letter-spacing:.3px; text-decoration:none;\" target='_blank'>VIEW DEAL</a></td></tr>";
+                    }
+
+
+                    userDeals += "</table>";
+
+                    MMailto.Clear();
+
+                    MMailto.Add(user.Key.Email);
+                    if (mode == 1)
+                        Mid = (int)EmailTypes.NewCouponsNearMe;
+                    else if (mode == 2)
+                        Mid = (int)EmailTypes.Last3DaysPercentageCouponsNearMe;
+                    else if (mode == 3)
+                        Mid = (int)EmailTypes.Last2DaysPercentageCouponsNearMe;
+                    else if (mode == 4)
+                        Mid = (int)EmailTypes.LastDayPercentageCouponsNearMe;
+                    else if (mode == 5)
+                        Mid = (int)EmailTypes.Last3DaysDollarDiscountCouponsNearMe;
+                    else if (mode == 6)
+                        Mid = (int)EmailTypes.Last2DaysDollarDiscountCouponsNearMe;
+                    else if (mode == 7)
+                        Mid = (int)EmailTypes.LastDayDollarDiscountCouponsNearMe;
+
+
+                    Muser = user.Key.FullName;
+                    UserDealsHTML = userDeals;
+
+
+                    SendEmailNotAysnc();
+
                 }
-
-
-                userDeals += "</table>";
-
-                MMailto.Clear();
-
-                MMailto.Add(user.Key.Email);
-                if (mode == 1)
-                    Mid = (int)EmailTypes.NewCouponsNearMe;
-                else if (mode == 2)
-                    Mid = (int)EmailTypes.Last3DaysPercentageCouponsNearMe;
-                else if (mode == 3)
-                    Mid = (int)EmailTypes.Last2DaysPercentageCouponsNearMe;
-                else if (mode == 4)
-                    Mid = (int)EmailTypes.LastDayPercentageCouponsNearMe;
-                else if (mode == 5)
-                    Mid = (int)EmailTypes.Last3DaysDollarDiscountCouponsNearMe;
-                else if (mode == 6)
-                    Mid = (int)EmailTypes.Last2DaysDollarDiscountCouponsNearMe;
-                else if (mode == 7)
-                    Mid = (int)EmailTypes.LastDayDollarDiscountCouponsNearMe;
-
-
-                Muser = user.Key.FullName;
-                UserDealsHTML = userDeals;
-
-
-                SendEmailNotAysnc();
-
             }
 
 
@@ -1551,32 +1555,32 @@ namespace SMD.Implementation.Services
             //var oUser = userRepository.GetUserbyem(companyId);
 
 
-                MMailto.Add(email);
-                Mid = mailid;
-                CompanyName = "Preview Company";
-                Muser = "Preview User";
-                CountryName = "Preview Country";
-                PhoneNo = "+92 333 416 8877";
-                BillingMonth = "month";
-                DueDate = "due date ?";
-                CustomerAccountNo = "customer Accoutn no ";
-                TotalAmount = "Total Amount";
-                InVoiceCode = "Invoice Code";
-                ReceiptBody = "Receipt Body";
-                EmailConfirmationLink = "http://cash4ads.com/confirm";
-                PasswordResetLink = "http://cash4ads.com/reset";
+            MMailto.Add(email);
+            Mid = mailid;
+            CompanyName = "Preview Company";
+            Muser = "Preview User";
+            CountryName = "Preview Country";
+            PhoneNo = "+92 333 416 8877";
+            BillingMonth = "month";
+            DueDate = "due date ?";
+            CustomerAccountNo = "customer Accoutn no ";
+            TotalAmount = "Total Amount";
+            InVoiceCode = "Invoice Code";
+            ReceiptBody = "Receipt Body";
+            EmailConfirmationLink = "http://cash4ads.com/confirm";
+            PasswordResetLink = "http://cash4ads.com/reset";
 
-                DeleteAccountLink = "http://cash4ads.com/delete";
+            DeleteAccountLink = "http://cash4ads.com/delete";
 
-                CompanyNameInviteUser = "Mz Inviter comp";
-                FullNameInviteUser = "mz Inviter";
-                InviteURL = "http://cash4ads.com/invite";
+            CompanyNameInviteUser = "Mz Inviter comp";
+            FullNameInviteUser = "mz Inviter";
+            InviteURL = "http://cash4ads.com/invite";
 
-                CampaignName = "Campaign XX";
-                CampaignClicksPerDay = "999";
-                CampaignVideoPath = "http://cash4ads.com/videopath";
-                CampaignVideoImage = "http://cash4ads.com/campaignimage";
-                CampaignBannerImage = "http://cash4ads.com/bannerpath";
+            CampaignName = "Campaign XX";
+            CampaignClicksPerDay = "999";
+            CampaignVideoPath = "http://cash4ads.com/videopath";
+            CampaignVideoImage = "http://cash4ads.com/campaignimage";
+            CampaignBannerImage = "http://cash4ads.com/bannerpath";
             RejectionReason = "damn it the reason is not available ";
             PaymentFailedReason = "Payment failed ressonnn";
             PaymentFailedAttempt = "99xx";
@@ -1585,17 +1589,17 @@ namespace SMD.Implementation.Services
 
 
 
-                SendEmailNotAysnc();
-           
+            SendEmailNotAysnc();
 
-           
+
+
         }
 
 
         public void SendNewReviewAvailableToAdvertiser(string ReviewerUserId, string campaignName, double Rating, string Reviewtext, string ReviwerFullName, string AdvertiserUserId)
         {
             var oUser = manageUserRepository.GetByUserId(AdvertiserUserId);
-           
+
 
             if (oUser != null)
             {
@@ -1644,9 +1648,36 @@ namespace SMD.Implementation.Services
         public void SendDealExpiredNotificationToAdvertiser()
         {
 
+
+            var data = couponRepository.GetDealsWhichHavejustExpired();
+            try
+            {
+                foreach (var item in data)
+                {
+                    MMailto.Clear();
+
+                    MMailto.Add(item.Email);
+
+                    Mid = (int)EmailTypes.DealExpiryNotificationToAdvertiser;
+
+                    Muser = item.FullName;
+                    CampaignName = item.CouponTitle;
+                    DealNoOfDays =   item.DaysLeft.Value.ToString();
+                    SendEmailNotAysnc();
+                }
+            }
+            catch (Exception e)
+            {
+                // logg the exception
+            }
+
+            var couponsToComplete = data.Select(g => g.CouponId).ToArray();
+            couponRepository.CompleteCoupons(couponsToComplete);
         }
 
-
-
     }
+
+
+
+
 }

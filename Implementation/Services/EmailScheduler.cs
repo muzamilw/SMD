@@ -311,7 +311,7 @@ namespace SMD.Implementation.Services
             registry.Schedule(() => EmailManagerService.SendCampaignPerformanceEmails()).ToRunEvery(0).Weeks().On(DayOfWeek.Monday).At(9, 0);
 
 
-            registry.Schedule(() => EmailManagerService.SendCampaignPerformanceEmails()).ToRunEvery(0).Weeks().On(DayOfWeek.Monday).At(9, 0);
+            registry.Schedule(() => EmailManagerService.SendDealExpiredNotificationToAdvertiser()).ToRunEvery(0).Weeks().On(DayOfWeek.Monday).At(9, 0);
 
 
 
