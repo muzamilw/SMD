@@ -68,7 +68,7 @@ define("invoice/invoice.viewModel",
 
                     },
                     onSaveSub = function () {
-                        var conformTet = "Are you sure you want to cancel the deal subscription ?";
+                        var conformTet = "Are you sure you want to cancel the deal subscription ? "+"<br/>"+"Your all live deals will be completed.";
                         confirmation.messageText(conformTet);
                         confirmation.show();
                         confirmation.afterCancel(function () {
