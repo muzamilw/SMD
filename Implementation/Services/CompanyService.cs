@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System.Web;
 using SMD.Models.ResponseModels;
 using SMD.Models.RequestModels;
+using Stripe;
 
 namespace SMD.Implementation.Services
 {
@@ -89,17 +90,17 @@ namespace SMD.Implementation.Services
             }
             else
             {
-                 loginUser = _manageUserRepository.GetLoginUser(userId);
+                loginUser = _manageUserRepository.GetLoginUser(userId);
             }
             var defaultBranch = _companyBranchRepository.GetDefaultCompanyBranch(companyId);
-            var currencyCode = _countryRepository.GetCurrencyCode(company.BillingCountryId!=null?company.BillingCountryId ?? 0:1);
+            var currencyCode = _countryRepository.GetCurrencyCode(company.BillingCountryId != null ? company.BillingCountryId ?? 0 : 1);
 
             return new CompanyResponseModel
             {
                 CompanyId = company.CompanyId,
                 AboutUs = company.AboutUsDescription,
-                CompanyAddressline1=company.AddressLine1,
-                Companyphone1=company.Tel1,
+                CompanyAddressline1 = company.AddressLine1,
+                Companyphone1 = company.Tel1,
 
                 BillingAddressLine1 = defaultBranch != null ? defaultBranch.BranchAddressLine1 : string.Empty,
                 BillingAddressLine2 = defaultBranch != null ? defaultBranch.BranchAddressLine2 : string.Empty,
@@ -377,18 +378,38 @@ namespace SMD.Implementation.Services
 
         public List<Dashboard_analytics_Result> GetDashboardAnalytics(string UserID)
         {
-           return  companyRepository.GetDashboardAnalytics(UserID);
+            return companyRepository.GetDashboardAnalytics(UserID);
         }
         public Dictionary<string, int> GetStatusesCounters()
         {
             return companyRepository.GetStatusesCounters();
-        
+
         }
         public Company GetCompanyInfo()
         {
             return companyRepository.GetCompanyInfo();
         }
-         
+        public CompanySubscription GetCompanySubscription()
+        {
+            return companyRepository.GetCompanySubscription();
+        }
+        public String UpdateCompanySubscription(CompanySubscription comSub)
+
+        {
+            StripeSubscriptionService subscriptionSvc = new StripeSubscriptionService();
+            var dbCo = companyRepository.GetCompanyInfo();
+            var sub = subscriptionSvc.Get(comSub.StripeCustomerId, comSub.StripeSubscriptionId);
+            if (sub.Status == "active")
+            {
+                var res = subscriptionSvc.Cancel(comSub.StripeCustomerId, comSub.StripeSubscriptionId);
+                dbCo.StripeSubscriptionStatus = "canceled";
+                dbCo.StripeCustomerId = null;
+                dbCo.StripeSubscriptionId = null;
+                UpdateCompany(dbCo);
+            }
+            return "true";
+        }
+
         #endregion
     }
 }
