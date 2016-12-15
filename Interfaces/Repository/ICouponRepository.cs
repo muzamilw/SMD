@@ -42,7 +42,10 @@ namespace SMD.Interfaces.Repository
         List<GetUsersCouponsForEmailNotification_Result> GetUsersCouponsForEmailNotification(int mode);
 
 
-        List<Coupon> GetDealsWhichHavejustExpired();
+        List<GetUsersCouponsForEmailNotification_Result> GetDealsWhichHavejustExpired();
+
+
+        bool CompleteCoupons(long[] couponIds);
 
     }
 }

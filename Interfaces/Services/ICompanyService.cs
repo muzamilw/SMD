@@ -35,5 +35,7 @@ namespace SMD.Interfaces.Services
         Boolean UpdateCompanyStatus(int status, string userId, string comments, int companyId);
         List<Dashboard_analytics_Result> GetDashboardAnalytics(string UserID);
         Company GetCompanyInfo();
+        CompanySubscription GetCompanySubscription();
+        String UpdateCompanySubscription(CompanySubscription comSub);
     }
 }

@@ -386,6 +386,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Api\Controllers\CampaignFormAnalyticController.cs" />
     <Compile Include="Areas\Api\Controllers\CompanyInfoController.cs" />
+    <Compile Include="Areas\Api\Controllers\CompanySubscriptionController.cs" />
     <Compile Include="Areas\Api\Controllers\CountryController.cs" />
     <Compile Include="Areas\Api\Controllers\CouponRatingReviewController.cs" />
     <Compile Include="Areas\Api\Controllers\CouponReviewController.cs" />

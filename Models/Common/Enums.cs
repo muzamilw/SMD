@@ -65,6 +65,7 @@
         WeeklyPollSurveyPerformanceStats = 42,
         DealReviewNotificationToAdvertiser = 43,
         NewUserSignupToAdmin = 44,
+        DealExpiryNotificationToAdvertiser = 45
     }
 
     public enum AdCampaignCriteriaType

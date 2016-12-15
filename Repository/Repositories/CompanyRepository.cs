@@ -235,5 +235,15 @@ namespace SMD.Repository.Repositories
         {
             return db.Companies.Where(i => i.CompanyId == this.CompanyId).FirstOrDefault();
         }
+        public CompanySubscription GetCompanySubscription()
+        {
+            db.Configuration.LazyLoadingEnabled = false;
+            CompanySubscription obj = new CompanySubscription();
+            var query = from company in db.Companies where company.CompanyId ==CompanyId  select new { company.StripeSubscriptionId, company.StripeCustomerId, company.StripeSubscriptionStatus };
+            obj.StripeCustomerId = query.FirstOrDefault().StripeCustomerId;
+            obj.StripeSubscriptionId = query.FirstOrDefault().StripeSubscriptionId;
+            obj.StripeSubscriptionStatus = query.FirstOrDefault().StripeSubscriptionStatus;
+            return obj;
+        }
     }
 }
