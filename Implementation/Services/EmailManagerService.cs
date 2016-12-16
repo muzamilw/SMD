@@ -1675,6 +1675,37 @@ namespace SMD.Implementation.Services
             couponRepository.CompleteCoupons(couponsToComplete);
         }
 
+
+
+        
+        public void Send3DaysDealExpiredNotificationToAdvertiser()
+        {
+            var data = couponRepository.GetDealsWhichWillExpirein3Days();
+            try
+            {
+                foreach (var item in data)
+                {
+                    MMailto.Clear();
+
+                    MMailto.Add(item.Email);
+
+                    Mid = (int)EmailTypes.ThreeDayDealExpiryNotificationToAdvertiser;
+
+                    Muser = item.FullName;
+                    CampaignName = item.CouponTitle;
+                    DealNoOfDays = item.DaysLeft.Value.ToString();
+                    SendEmailNotAysnc();
+                }
+            }
+            catch (Exception e)
+            {
+                // logg the exception
+            }
+
+            var couponsToComplete = data.Select(g => g.CouponId).ToArray();
+            couponRepository.CompleteCoupons(couponsToComplete);
+        }
+
     }
 
 

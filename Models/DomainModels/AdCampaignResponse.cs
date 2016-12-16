@@ -1,5 +1,6 @@
 ﻿using System;
 using SMD.Models.IdentityModels;
+using System.Collections.Generic;
 
 namespace SMD.Models.DomainModels
 {
@@ -33,6 +34,8 @@ namespace SMD.Models.DomainModels
         public virtual AdCampaign AdCampaign { get; set; }
         public virtual User User { get; set; }
         public virtual Company Company { get; set; }
+
+        public virtual ICollection<UserGameResponse> UserGameResponses { get; set; }
 
         /// <summary>
         /// Makes a copy of Campaign response

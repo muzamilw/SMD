@@ -307,6 +307,12 @@ namespace SMD.Repository.Repositories
             return db.GetUsersCouponsForEmailNotification(8).ToList();
         }
 
+        public List<GetUsersCouponsForEmailNotification_Result> GetDealsWhichWillExpirein3Days()
+        {
+            //mode 9 returns the deals which will expire in 3 days
+            return db.GetUsersCouponsForEmailNotification(9).ToList();
+        }
+
         public bool CompleteCoupons(long[] couponIds)
         {
 

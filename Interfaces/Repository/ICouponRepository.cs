@@ -46,6 +46,8 @@ namespace SMD.Interfaces.Repository
 
         List<GetUsersCouponsForEmailNotification_Result> GetDealsWhichHavejustExpired();
 
+        List<GetUsersCouponsForEmailNotification_Result> GetDealsWhichWillExpirein3Days();
+
 
         bool CompleteCoupons(long[] couponIds);
 

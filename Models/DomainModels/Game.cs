@@ -1,4 +1,5 @@
-﻿namespace SMD.Models.DomainModels
+﻿using System.Collections.Generic;
+namespace SMD.Models.DomainModels
 {
     public class Game
     {
@@ -13,5 +14,12 @@
 
         public string GameSmallImage { get; set; }
         public string GameLargeImage { get; set; }
+
+        public string GameInstructions { get; set; }
+    
+        public virtual ICollection<GameExerciseCategory> GameExerciseCategories { get; set; }
+        public virtual ICollection<UserGameResponse> UserGameResponses { get; set; }
+
+
     }
 }

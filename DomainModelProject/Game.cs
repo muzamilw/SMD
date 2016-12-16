@@ -14,6 +14,12 @@ namespace DomainModelProject
     
     public partial class Game
     {
+        public Game()
+        {
+            this.UserGameResponses = new HashSet<UserGameResponse>();
+            this.GameExerciseCategories = new HashSet<GameExerciseCategory>();
+        }
+    
         public long GameId { get; set; }
         public string GameName { get; set; }
         public Nullable<bool> Status { get; set; }
@@ -24,5 +30,9 @@ namespace DomainModelProject
         public string GameUrl { get; set; }
         public string GameSmallImage { get; set; }
         public string GameLargeImage { get; set; }
+        public string GameInstructions { get; set; }
+    
+        public virtual ICollection<UserGameResponse> UserGameResponses { get; set; }
+        public virtual ICollection<GameExerciseCategory> GameExerciseCategories { get; set; }
     }
 }
