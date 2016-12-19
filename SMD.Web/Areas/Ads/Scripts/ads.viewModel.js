@@ -211,17 +211,18 @@ define("ads/ads.viewModel",
                 LogoUrl2 = ko.observable(),
                 VideoLink2 = ko.observable(),
                 CampaignName3 = ko.observable(),
+               // CampaignName = ko.observable(),
                 LogoUrl3 = ko.observable(),
                 VideoLink3 = ko.observable(),
                 ischartOpened = ko.observable(false),
 				openAdvertiserDashboardScreen = function (Campaign) {
-				    campaignModel(new model.Campaign());
+				//    campaignModel(new model.Campaign());
 
-				    campaignModel().CampaignName("Test");
+				   
 				 //   collapseMainMenu();
 				
 				    openEditScreen(1);
-				 
+				    campaignModel().CampaignName(Campaign.CampaignName());
 				 //   ischartOpened(true);
 				    isListVisible(false);
 				   // isNewCampaign(false);
