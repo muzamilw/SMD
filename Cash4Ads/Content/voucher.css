@@ -4538,7 +4538,7 @@ html[xmlns] .slides {
     .ndod-view-mini {
        
     position: relative;
-    width: 48%;
+    width: 97.5%;
     float: left;
     margin: 9px;
 }
@@ -6982,11 +6982,17 @@ div.content .unit.ctu h1 {
     .ndod-view-mini {
        
     position: relative;
-    width: 48%;
+    width: 97.5%;
     float: left;
     margin: 9px;
 }
-
+    .selec_criter {
+        width:351px!important;
+    }
+    .selec_criter_ctg {
+       width: 351px!important;
+       margin-top: 0px;
+    }
 }
 
 .btm-header-bg {
@@ -7069,11 +7075,17 @@ div.content .unit.ctu .slider {
     .ndod-view-mini {
        
     position: relative;
-    width: 48%;
+    width: 97.5%;
     float: left;
     margin: 9px;
 }
-
+    .selec_criter {
+        width:inherit!important;
+    }
+    .selec_criter_ctg {
+       width: 268px!important;
+       margin-top: 9px;
+    }
 }
 
 @media (min-width: 1200px) {
@@ -7083,11 +7095,17 @@ div.content .unit.ctu .slider {
     .ndod-view-mini {
        
     position: relative;
-    width: 48%;
+    width: 97.5%;
     float: left;
     margin: 9px;
 }
-
+    .selec_criter {
+        width:351px!important;
+    }
+    .selec_criter_ctg {
+       width: 351px!important;
+       margin-top: 0px;
+    }
 }
 
     .ctu .ctu-pointsCollect span {
@@ -7161,11 +7179,17 @@ div.content .unit.ctu .slider {
     .ndod-view-mini {
        
     position: relative;
-    width: 48%;
+    width:97.5%;
     float: left;
     margin: 9px;
 }
-
+    .selec_criter {
+        width:inherit!important;
+    }
+    .selec_criter_ctg {
+       width: 351px!important;
+       margin-top: 0px;
+    }
 }
 
 @media (min-width: 1200px) {
@@ -7177,11 +7201,17 @@ div.content .unit.ctu .slider {
     .ndod-view-mini {
        
     position: relative;
-    width: 48%;
+    width:97.5%;
     float: left;
     margin: 9px;
 }
-
+    .selec_criter {
+        width:351px!important;
+    }
+    .selec_criter_ctg {
+       width: 351px!important;
+       margin-top: 0px;
+    }
 }
 
 @media (min-width: 1024px) {
@@ -7192,11 +7222,17 @@ div.content .unit.ctu .slider {
     .ndod-view-mini {
        
     position: relative;
-    width: 48%;
+    width:97.5%;
     float: left;
     margin: 9px;
 }
-
+    .selec_criter {
+        width:351px!important;
+    }
+    .selec_criter_ctg {
+       width: 351px!important;
+       margin-top: 0px;
+    }
 }
 
 .ctu .ctu-stats-table-sold-out-over {
@@ -7307,11 +7343,17 @@ div.content .unit.ctu .slider {
     .ndod-view-mini {
        
     position: relative;
-    width: 48%;
+    width:97.5%;
     float: left;
     margin: 9px;
 }
-
+    .selec_criter {
+        width:inherit!important;
+    }
+    .selec_criter_ctg {
+       width: 351px!important;
+       margin-top: 0px;
+    }
 }
 
 @media (min-width: 320px){
@@ -7321,7 +7363,15 @@ div.content .unit.ctu .slider {
     width: 100%;
     float: left;
     margin: 9px;
+    margin-left:0px;
 }
+   .selec_criter {
+        width:inherit!important;
+    }
+   .selec_criter_ctg {
+       width: 268px!important;
+       margin-top: 9px;
+    }
 }
 @media (min-width: 1200px){
     .ctu .ctu-buy-big {
@@ -7340,11 +7390,17 @@ div.content .unit.ctu .slider {
     .ndod-view-mini {
        
     position: relative;
-    width: 48%;
+    width: 97.5%;
     float: left;
     margin: 9px;
 }
-
+    .selec_criter {
+        width:351px!important;
+    }
+    .selec_criter_ctg {
+       width: 351px!important;
+       margin-top: 0px;
+    }
 }
 
 
@@ -12242,11 +12298,17 @@ div.wallet .card {
     .ndod-view-mini {
        
     position: relative;
-    width: 48%;
+    width: 97.5%;
     float: left;
     margin: 9px;
 }
-
+    .selec_criter {
+        width:351px!important;
+    }
+    .selec_criter_ctg {
+       width: 351px!important;
+       margin-top: 0px;
+    }
     .deal-travel .slider .flex-direction-nav {
         display: none;
     }
@@ -14046,11 +14108,17 @@ div.travel-submenu li {
     .ndod-view-mini {
        
     position: relative;
-    width: 48%;
+    width:97.5%;
     float: left;
     margin: 9px;
 }
-
+    .selec_criter {
+        width:351px!important;
+    }
+    .selec_criter_ctg {
+       width: 351px!important;
+       margin-top: 0px;
+    }
     .search-refine {
         position: absolute;
         margin-left: -190px;
@@ -15596,7 +15664,7 @@ div.content .unit.ctu .ctu-stats, .ndod-view-mini .ndod-deal-footer, .bv_temp .h
     background: -webkit-linear-gradient(top,#33d3b4 0,#247C6B  100%);
     background: -o-linear-gradient(top,#33d3b4 0,#247C6B  100%);
     background: -ms-linear-gradient(top,#33d3b4 0,#247C6B  100%);
-    background: linear-gradient(to bottom,#1d7bbb 0,#1d7bbb  100%);
+    background: linear-gradient(to bottom,#f9f9f9,#f9f9f9 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#33d3b4,endColorstr=#247C6B ,GradientType=0);
     box-shadow: 1px 4px 5px #888888;
 }
@@ -16076,7 +16144,7 @@ div.content .join .loginicon h1, .join .form-container h1 {
 }
 
 .ndod-view-mini .ndod-bought, .ndod-view-mini .ndod-savings {
-    color: #fff;
+    color:#474747;
 }
 
     .ndod-view-mini .ndod-bought > span.innerColour, .ndod-view-mini .ndod-savings > span.innerColour {
@@ -17342,6 +17410,7 @@ a:hover, .theme-font-color, .map-location-address-active {
 
 .ctu .ctu-pointsCollect {
     background-position: -255px -160px;
+    display:none;
 }
 
 .ctu .ctu-discounted {
@@ -17769,6 +17838,12 @@ div.content .unit.ctu .ctu-sponsor div {
     -webkit-box-shadow: 0 0 4px #bbb;
     box-shadow: 0 0 4px #bbb;
 }
+@media (min-width: 480px) {
+.selec_criter_ctg {
+    width: 416px!important;
+    margin-top: 9px;
+}
+}
 
 @media (min-width: 768px) {
     .extraMargingStandardContainer {
@@ -17778,22 +17853,35 @@ div.content .unit.ctu .ctu-sponsor div {
     .ndod-view-mini {
        
     position: relative;
-    width: 48%;
+    width:97%;
     float: left;
     margin: 9px;
+    margin-left:0px;
 }
-
+    .selec_criter {
+        width:inherit!important;
+    }
+    .selec_criter_ctg {
+    width: 577px!important;
+    margin-top: 6px;
+}
 }
 
 @media (min-width: 1200px) {
     .ndod-view-mini {
        
     position: relative;
-    width: 48%;
+    width: 97.5%;
     float: left;
     margin: 9px;
 }
-
+    .selec_criter {
+        width:351px!important;
+    }
+    .selec_criter_ctg {
+       width: 351px!important;
+       margin-top: 0px;
+    }
     .extraMargingStandardContainer {
         margin-left:0px;
         margin-right:0px;
@@ -17812,7 +17900,7 @@ div.content .unit.ctu .ctu-sponsor div {
     .ndod-view-mini {
        
     position: relative;
-    width: 48%;
+    width:97.5%;
     float: left;
     margin: 9px;
 }
@@ -17880,4 +17968,65 @@ div.content .unit.ctu .ctu-sponsor div {
     border-radius: 7px;
     padding-top: 9px;
     left: 598px;
+}
+#Company_logo {
+    display:none;
+}
+.deals_header_ad
+{
+   font-size:28px;
+    margin-left: 31px;
+    /* margin-top: 14px; */
+    padding-top: 22px;
+}
+#main_deal_ffter {
+    min-height:131px;
+}
+.deal_insder_adPanel {
+    min-height:65px;
+    margin-top: 15px;
+    margin-left: 31px;
+    font-size: 14px;
+    color: #562338;
+}
+.ndod-discount {
+    padding-top:30px;
+    font-size:17px;
+}
+.dis_css {
+    font-size:16px;
+}
+.signIn_btn {
+    height: 43px;
+    width: 304px;
+    color: black;
+    background-color: #137abd;
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+    border-color: #137abd;
+    font-size: 16px;
+}
+.ndod-deal-header {
+    display:none;
+}
+.bck_panels {
+    background-color:#1068a1;width:344px;height:262px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 20px;
+    padding-top: 6px;
+
+}
+.signIn_btn_app {
+      height: 43px;
+    width: 345px;
+    color: black;
+    background-color: #25c248;
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+    border-color: #137abd;
+    font-size: 16px;
+
 }

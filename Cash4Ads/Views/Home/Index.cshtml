@@ -47,9 +47,9 @@
 </div>
                 <div class=" inner-top-xs" id="couponsContains">
 
-                    <div class="col-lg-12">
+                    <div class="col-lg-12 col-sm-12 col-xs-12">
                         <div class="col-lg-4 " style="padding:0px;">
-                            <div class="input-group formcontrol" style="padding-left:0px;padding-right:0px;width:351px;">
+                            <div class="input-group formcontrol selec_criter" style="padding-left:0px;padding-right:0px;width:351px;">
 
                                 <input type="text" id="txtKeyword" class="form-control input-lg" placeholder="Search" style="font-size:22px;height:45px;" />
                                 <span class="input-group-btn">
@@ -60,8 +60,8 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-4" style="padding:0px;">
-                            <div class="input-group  formcontrol" style="padding-top:1px;padding-left:0px;padding-right:0px;margin-right:0px;width:351px;">
+                        <div class="col-lg-4 col-sm-12 col-xs-12" style="padding:0px;">
+                            <div class="input-group  formcontrol selec_criter_ctg" style="padding-top:1px;padding-left:0px;padding-right:0px;margin-right:0px;width:351px;">
                                 <label class="clabel">
                                     <select class="cselect col-md-12" id="selcat" style="height:44px;">
                                         <option selected value="0">All Categories</option>
@@ -71,21 +71,51 @@
 
                             </div>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-lg-4 col-sm-12 col-xs-12" style="padding:0px;">
+                            <div class="input-group  formcontrol selec_criter_ctg" style="padding-top:1px;padding-left:0px;padding-right:0px;margin-right:0px;width:351px;">
+                                <label class="clabel">
+                                    <select class="cselect col-md-12" id="selcat" style="height:44px;">
+                                        <option selected value="0"></option>
+                                    </select>
+                                </label>
+
                             </div>
+                        </div>
                     </div>
 
-                    <div class="col-lg-12  col-md-4 col-sm-12 col-xs-12" style="margin-bottom:12px;">
+                    <div class="col-lg-8  col-md-4 col-sm-12 col-xs-12" style="margin-bottom:12px;padding:0px;">
 
                         
 
 
-                        <div class="standard-container extraMargingStandardContainer" style="margin-top:17px;padding-left:20px;padding-right:20px">
+                        <div class="extraMargingStandardContainer" style="margin-top: 17px;padding-left: 7px; padding-right: 26px;">
+    
                                 <div id="bonus-deals-side">
                                 </div>
                         </div>
 
                         </div>
+                    <div class="col-lg-4" style="padding:0px;padding-top:6px;">
+
+                        <div class="bck_panels">
+                            <div>
+                                <h3 style="color:white">Post a Deal for FREE</h3>
+                            </div>
+
+                            <div style="margin-top:25px;">
+                                <p style="color:white;font-size:16px;">deals for your Landing Pages for any referrals deals together people near you.</p>
+
+                            </div>
+                            <div style="margin-top:36px;">
+
+                                <input value="Sign In / Sign Up" class="signIn_btn" readonly="readonly" onclick="NavigateToLogin();" />
+                            </div>
+
+                        </div>
+                        <div id="dwn_app_btn" style="margin-top:25px;">
+                            <input type="button" class="signIn_btn_app" value="Download the APP" readonly="readonly" onclick="NavigateToApps();" />
+                        </div>
+                    </div>
 
                     <div class="col-lg-12 col-md-8 col-sm-6 hidden-xs hidden-sm content-main-deals content" style="display:none;" id="main_copon_cont">
 
@@ -241,6 +271,52 @@
                     </div>
                 </div>
             </div>
+
+        <div id="AccountSetingConformation" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialogConfirmModalLabel" aria-hidden="true" style="z-index: 100000;">
+            <div class="modal-dialog" style="width:750px;margin:150px auto">
+                <div class="modal-content" style="background-color:#0f68a1">
+                    @*<div class="modal-header" style="padding:30px;">
+                        <div style="float:right;margin-top:-20px;margin-right:-20px;"><img src="/Content/Images/Close_Button.png" class="close" id="dismiss" data-dismiss="modal" style="width:20px;height:20px;float:right;cursor:pointer;"></div>
+                        <span class="text-center" style="font-size:24px;margin-left:50px;color: #ffffff;">Complete your Account Settings and Start Advertising to Mobile Users</span>
+                    </div>*@
+                    <div class="modal-body" style="padding-top:0px;">
+                        <div class="col-lg-12">
+                            <div class="col-lg-6"></div>
+                            <div class="col-lg-3">
+                                <div class="form-group" style="padding-top:20px;padding-left:90px;">
+                                    <img src="/Images/White_Arrow.png" style="height:50px;width:50px;" />
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div style="margin-bottom:20px;">
+                                    <div style="float:right;margin-top:20px;margin-right:-15px;"><img src="/Content/Images/Close_Button.png" class="close" id="dismiss" data-dismiss="modal" style="width:20px;height:20px;float:right;cursor:pointer;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 text-center">
+                            <div class="form-group">
+                                <span class="text-center" style="font-size:24px;padding-top:25px; color: #ffffff;">Upload your logo in Account Settings before</span><br />
+                                <span class="text-center" style="font-size:24px;color: #ffffff;">
+                                    submitting your FREE Deal Listing
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 text-center">
+                            <div class="form-group">
+                                <button class="btn  btn-success" onclick="openCompanyProfile();" data-dismiss="modal" style=" font-size:24px">Upload your Company Logo </button>
+                            </div>
+                        </div>
+
+                        <div class="form-group text-center">
+                            <button class="btn" data-dismiss="modal" style=" background-color:#0f68a1;border-color:#0f68a1; color:white">Skip </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 <!-- Header -->
@@ -364,12 +440,16 @@
         </div>
     </div>
 </section>
+<div class="loading" align="center" id="modalSending">
 
+    <img src="images/rloader.gif" width="200px" />
+
+</div>
 
 <!-- end vodeo -->
 <script src="~/Scripts/jquery-2.1.4.min.js"></script>
-<script src="~/Scripts/jquery.loader.min.js"></script>
-
+@*<script src="~/Scripts/jquery.loader.min.js"></script>*@
+@*<link href="~/Content/loadingLoader.css" rel="stylesheet" />*@
 <script>
 
     //$.LoadingOverlaySetup({
@@ -382,7 +462,7 @@
     //});
 
     $(document).ready(function(){
-
+        ShowSendingProgress();
     });
     $("#selcat").change(function () {
         //var categoryId = this.value;
@@ -390,6 +470,14 @@
         getCoupons();
 
     });
+
+    function NavigateToLogin()
+    {
+         
+        window.location.href = 'http://manage.cash4ads.com/'; 
+    }
+
+
     $(document).ajaxStart(function(){
 
         $.LoadingOverlay("show", {
@@ -399,248 +487,278 @@
 
     });
 
-    $(document).ajaxStop(function(){
-        $.LoadingOverlay("hide");
-    });
+        //$(document).ajaxStop(function(){
+        //    $.LoadingOverlay("hide");
+        //});
 
 
-
-
-    var Coupons = [];
-    $(document).ready(function () {
-      //  $.LoadingOverlay("");
-        LoadCategories();
-
-    });
-
-
-    function getCoupons()
-    {
-        debugger;
-        var categoryId = $("#selcat option:selected").val();
-        var keywords = $("#txtKeyword").val();
-        var vtype = @vtype;
-        var couponFId = 0;
-        var size=10;
-        var pageno=1;
-        var distance=100000;
-        var lat=31.4830349;
-        var lon=74.2886745;
-        var userId='x';
-
-        var urlofcoup = 'http://manage.cash4ads.com/Api_Mobile/SearchCoupons?categoryId=' + categoryId + '&ctype='+vtype+''+'&size='+size+''+'&keywords='+keywords+''+'&pageNo='+pageno+''+'&distance='+distance+''+'&Lat='+lat+''+'&Lon='+lon+''+'&UserId='+userId+'';
-        if(keywords == ""){
-          
-
-            urlofcoup = 'http://manage.cash4ads.com/Api_Mobile/SearchCoupons?categoryId=' + categoryId + '&ctype='+vtype+''+'&size='+size+''+'&keywords='+'&pageNo='+pageno+''+'&distance='+distance+''+'&Lat='+lat+''+'&Lon='+lon+''+'&UserId='+userId+'';
+        function ShowSendingProgress() {
+            var modal = $('<div  />');
+            modal.addClass("modal");
+            modal.attr("id", "modalSending");
+            $('body').append(modal);
+            var loading = $("#modalSending.loading");
+            loading.show();
+            var top = '215px';
+            var left = '560px';
+            loading.css({ top: top, left: left, color: '#ffffff' });
         }
 
-        $.ajax({
-            dataType: "json",
-            url: urlofcoup,
-            cache: false,
-            success: function (response) {
 
-                if ( response.TotalCount > 0)
-                {
-                    Coupons = response.Coupons;
-                    if (couponFId == 0) {
-                        couponFId = response.Coupons[0].CouponId;
-                    }
-                    var htmlToBindAllVoucher = [];
-                    $(response.Coupons).each(function (i, val) {
-                      
-                      //  var discountedValPer = 100 - parseInt((parseFloat(val.CouponDiscountedValue) / parseFloat(val.CouponActualValue)) * 100);
-                        $("#bonus-deals-side").append(' <div class="ndod-view-mini ndod-view-mini-nodesc"><div class="ndod-deal-header"><h2>' + val.CouponTitle + '</h2></div><div class="ndod-deal-content"><a class="" href="#"><img class="ndod-deal-image  js-show" data-original="' + val.CouponImage1 + '" src="' + val.CouponImage1 + '" onclick="NavigateToDeal(' + val.CouponId + ')" alt="" /></a><div class="ndod-redeem-now"></div><div class="ndod-business-logo-wrapper"><div class="ndod-business-logo"><img id="Company_logo" class="" data-original="' + val.LogoUrl + '" src="' + val.LogoUrl + '" width="70" height="28" /> </div><div class="btm-header-bg-business-logo"></div></div><div class="ndod-discount"><div class="ndod-multiprice" style="padding-top: 22.0px ; "><span class="innerColour">NOW</span></div><div class="ndod-price" style="font-size: 36px; margin: 2.0px 0 -1.0px;"><span class="inner innerColour"><span class="ndod-currency">'+val.CurrencyCode+'</span><span class="ndod-amount">' + val.Savings + '</span></span></div><del class="ndod-original-price"><span class="ndod-currency">'+val.CurrencyCode+'</span><span class="ndod-amount">' + val.Price + '</span></del></div></div><div class="ndod-deal-footer-wrapper">  <div class="ndod-deal-footer cld"> <p class="ndod-bought bonus-bought"><span class="ndod-label innerColour">Bought</span><span class="ndod-amount">' + val.SwapCost + '</span></p><p class="ndod-savings"><span class="ndod-label innerColour">Save <span>up to </span></span><span class="ndod-abount">' + val.DealsCount + '<span class="ndod-percent-sign">%</span></span></p><a href="#" onclick="NavigateToDeal(' + val.CouponId + ')" class="ndod-button-small waViewButton"><span class="outer"><span class="inner">VIEW!</span></span>     </a>        </div>         <div class="ndod-deal-footer-btmbg"></div>    </div>    </div></div>');
-                    });
-                    $("#bonus-deals-side").append('<div style="clear:both;"></div>');
+        function StopProgress() {
 
-                   // LoadSelectedVoucher(couponFId);
+            $("div.modal").hide();
 
-                }
-                else
-                {
-                    $('#couponsNotFound').show();
-                    $('#couponsContains').hide();
-                }
-
-            },
-            error : function()
-            {
-
-                $.LoadingOverlay("hide");
-            }
-        });
-
-    }
-
-
-    function getReqCoupons()
-    {
-        var categoryId = 0;
-        var keywords = $("#txtKeyword").val();
-        var vtype = @vtype;
-        var couponFId = 0;
-        var size=10;
-        var pageno=1;
-        var distance=100000;
-        var lat=31.4830349;
-        var lon=74.2886745;
-        var userId='x';
-        var urlofcoup = 'http://manage.cash4ads.com/Api_Mobile/SearchCoupons?categoryId=' + categoryId + '&ctype='+vtype+''+'&size='+size+''+'&keywords='+keywords+''+'&pageNo='+pageno+''+'&distance='+distance+''+'&Lat='+lat+''+'&Lon='+lon+''+'&UserId='+userId+'';
-        if(keywords == ""){
-          
-
-            urlofcoup = 'http://manage.cash4ads.com/Api_Mobile/SearchCoupons?categoryId=' + categoryId + '&ctype='+vtype+''+'&size='+size+''+'&keywords='+'&pageNo='+pageno+''+'&distance='+distance+''+'&Lat='+lat+''+'&Lon='+lon+''+'&UserId='+userId+'';
+            var loading = $(".loading");
+            loading.hide();
         }
 
-        $.ajax({
-            dataType: "json",
-            url: urlofcoup,
-            cache: false,
-            success: function (response) {
-
-                if ( response.TotalCount > 0)
-                {
-                    Coupons = response.Coupons;
-                    if (couponFId == 0) {
-                        couponFId = response.Coupons[0].CouponId;
-                    }
-                    var htmlToBindAllVoucher = [];
-                    $(response.Coupons).each(function (i, val) {
-                      
-                        //  var discountedValPer = 100 - parseInt((parseFloat(val.CouponDiscountedValue) / parseFloat(val.CouponActualValue)) * 100);
-                        $("#bonus-deals-side").append(' <div class="ndod-view-mini ndod-view-mini-nodesc"><div class="ndod-deal-header"><h2>' + val.CouponTitle + '</h2></div><div class="ndod-deal-content"><a class="" href="#"><img class="ndod-deal-image  js-show" data-original="' + val.CouponImage1 + '" src="' + val.CouponImage1 + '" alt="" /></a><div class="ndod-redeem-now"></div><div class="ndod-business-logo-wrapper"><div class="ndod-business-logo"><img id="Company_logo" class="" data-original="' + val.LogoUrl + '" src="' + val.LogoUrl + '" width="70" height="28" /> </div><div class="btm-header-bg-business-logo"></div></div><div class="ndod-discount"><div class="ndod-multiprice" style="padding-top: 22.0px ; "><span class="innerColour">NOW</span></div><div class="ndod-price" style="font-size: 36px; margin: 2.0px 0 -1.0px;"><span class="inner innerColour"><span class="ndod-currency">'+val.CurrencyCode+'</span><span class="ndod-amount">' + val.Savings + '</span></span></div><del class="ndod-original-price"><span class="ndod-currency">'+val.CurrencyCode+'</span><span class="ndod-amount">' + val.Price + '</span></del></div></div><div class="ndod-deal-footer-wrapper">  <div class="ndod-deal-footer cld"> <p class="ndod-bought bonus-bought"><span class="ndod-label innerColour">Bought</span><span class="ndod-amount">' + val.SwapCost + '</span></p><p class="ndod-savings"><span class="ndod-label innerColour">Save <span>up to </span></span><span class="ndod-abount">' + val.DealsCount + '<span class="ndod-percent-sign">%</span></span></p><a href="#" onclick="NavigateToDeal(' + val.CouponId + ')" class="ndod-button-small waViewButton"><span class="outer"><span class="inner">VIEW!</span></span>     </a>        </div>         <div class="ndod-deal-footer-btmbg"></div>    </div>    </div></div>');
-                    });
-                    $("#bonus-deals-side").append('<div style="clear:both;"></div>');
-
-                    // LoadSelectedVoucher(couponFId);
-
-                }
-                else
-                {
-                    $('#couponsNotFound').show();
-                    $('#couponsContains').hide();
-                }
-
-            },
-            error : function()
-            {
-
-                $.LoadingOverlay("hide");
-            }
+        var Coupons = [];
+        $(document).ready(function () {
+            //  $.LoadingOverlay("");
+            LoadCategories();
+           
+         
+            $("#AccountSetingConformation").modal("show");
         });
 
-    }
-
-
-
-
-    function GetCategories()
-    {
-
-        $.ajax({
-            dataType: "json",
-            url: 'http://manage.cash4ads.com/Api_Mobile/CouponCategories/8667e1a9-60af-4d99-8013-a241b81fa550',
-            cache: false,
-            success: function (response) {
-
-                var selcat = $("#selcat");
-                Coupons = response;
-
-                $(response.CouponCategories).each(function (i, val) {
-
-                    selcat.append('<option value="' + val.CategoryId + '">' + val.Name + '</option>');
-                    //$("#bonus-deals-side").append(' <div class="ndod-view-mini ndod-view-mini-nodesc"><div class="ndod-deal-header"><h2>' + val.CouponTitle + '</h2>               </div><div class="ndod-deal-content"><a class="" href="#"><img class="ndod-deal-image  js-show" data-original="' + val.CouponImage + '" src="' + val.CouponImage + '" alt="" /></a><div class="ndod-redeem-now"></div><div class="ndod-business-logo-wrapper"><div class="ndod-business-logo"><img class="" data-original="http://manage.cash4ads.com/images/vLogo.png" src="http://manage.cash4ads.com/images/vLogo.png" width="70" height="28" /> </div><div class="btm-header-bg-business-logo"></div></div><div class="ndod-discount"><div class="ndod-multiprice" style="padding-top: 22.0px ; "><span class="innerColour">NOW</span></div><div class="ndod-price" style="font-size: 36px; margin: 2.0px 0 -1.0px;"><span class="inner innerColour"><span class="ndod-currency">£</span><span class="ndod-amount">' + val.CouponDiscountedValue + '</span></span></div><del class="ndod-original-price"><span class="ndod-currency">£</span><span class="ndod-amount">' + val.CouponActualValue + '</span></del></div></div><div class="ndod-deal-footer-wrapper">  <div class="ndod-deal-footer cld"> <p class="ndod-bought bonus-bought"><span class="ndod-label innerColour">Bought</span><span class="ndod-amount">' + val.CouponTakenValue + '</span>      </p><p class="ndod-savings"><span class="ndod-label innerColour">Save <span>up to </span></span><span class="ndod-abount">' + discountedValPer + '<span class="ndod-percent-sign">%</span></span>            </p><a href="#" onclick="LoadSelectedVoucher(' + val.CouponId + ')" class="ndod-button-small waViewButton">    <span class="outer"><span class="inner">VIEW!</span></span>     </a>        </div>         <div class="ndod-deal-footer-btmbg"></div>    </div>    </div></div>');
-                });
-
-                getCoupons();
-
-            }
-        });
-    }
-
-
-    $('#selcat').on('change', function() {
-        $("#bonus-deals-side").css('display','block');
-        getCoupons();
-    });
-
-    function LoadSelectedVoucher(CouponId) {
-
-        var couponObj = $.grep(Coupons, function (n, i) {
-            return (n.CouponId == CouponId);
-        });
-
+        function NavigateToApps()
+        {
+            window.location.href ='http://cash4ads.com/';
+        }
+        function getCoupons()
+        {
         
-        if (couponObj != null) {
-            $("#inner_coupon_cont,#main_copon_cont").css('display','block');
-            $("#bonus-deals-side,.extraMargingStandardContainer").css('display','none');
-            //$("#couponMainHeading").html(couponObj[0].CouponTitle + '<span class="mvtest_header_v1">' + couponObj[0].Firstline + ' ' + couponObj[0].SecondLine + '</span><div class="btm-header-bg"></div>');
+            var categoryId = $("#selcat option:selected").val();
+            var keywords = $("#txtKeyword").val();
+            var vtype = @vtype;
+            var couponFId = 0;
+            var size=10;
+            var pageno=1;
+            var distance=100000;
+            var lat=31.4830349;
+            var lon=74.2886745;
+            var userId='x';
 
-            $("#couponMainHeading").html(couponObj[0].CouponTitle + '<span class="mvtest_header_v1">' + '' + '</span><div class="btm-header-bg"></div>');
-            $("#voucMainSliderImg").attr('src', couponObj[0].CouponImage1);
+            var urlofcoup = 'http://manage.cash4ads.com/Api_Mobile/SearchCoupons?categoryId=' + categoryId + '&ctype='+vtype+''+'&size='+size+''+'&keywords='+keywords+''+'&pageNo='+pageno+''+'&distance='+distance+''+'&Lat='+lat+''+'&Lon='+lon+''+'&UserId='+userId+'';
+            if(keywords == ""){
+          
 
-            $("#couDiscountedVal").html(couponObj[0].Savings);
-            $("#couActualVal").html(couponObj[0].Price);
+                urlofcoup = 'http://manage.cash4ads.com/Api_Mobile/SearchCoupons?categoryId=' + categoryId + '&ctype='+vtype+''+'&size='+size+''+'&keywords='+'&pageNo='+pageno+''+'&distance='+distance+''+'&Lat='+lat+''+'&Lon='+lon+''+'&UserId='+userId+'';
+            }
 
-            
-            $("#coupPerct").text(100 - parseInt((parseFloat(couponObj[0].Savings) / parseFloat(couponObj[0].Price)) * 100) + '%');
-           // $("#coupBought").text(couponObj[0].CouponTakenValue);
-            $("#mainDealBuy").attr('data-couponId', couponObj[0].CouponId);
-        }
-
-    }
-    function BuyCoupon(){
-        if("@sessionVar" == ""){
-            alert("Please login to buy voucher.");
-
-        }else{
-            var urlToSite = "";
-            urlToSite = 'http://smdpreview.com/Api/RedeemCoupon?authenticationToken='+ '@ViewBag.userid' +'&companyId='+ '@ViewBag.companyid' +'&CouponId='+ $("#mainDealBuy").attr('data-couponId') +'&mode=3&amount='+ $("#couDiscountedVal").text() +'';
-           
-           
             $.ajax({
                 dataType: "json",
-                url: urlToSite,
+                url: urlofcoup,
                 cache: false,
                 success: function (response) {
-                    if(response == false){
-                        alert("Can't purchase voucher because balance is not sufficient.");
-                    }else{
-                        alert("Voucher redeemed successfully.");
+
+                    if ( response.TotalCount > 0)
+                    {
+                        Coupons = response.Coupons;
+                        if (couponFId == 0) {
+                            couponFId = response.Coupons[0].CouponId;
+                        }
+                        var htmlToBindAllVoucher = [];
+                        $(response.Coupons).each(function (i, val) {
+                        
+                            debugger;
+                            var result=GetPercent(val.Savings,val.Price).toFixed(0)+'%';
+                            //  var discountedValPer = 100 - parseInt((parseFloat(val.CouponDiscountedValue) / parseFloat(val.CouponActualValue)) * 100);
+                            $("#bonus-deals-side").append(' <div class="ndod-view-mini ndod-view-mini-nodesc"><div class="ndod-deal-header"><h2>' + val.CouponTitle + '</h2></div><div class="ndod-deal-content"><a class="" href="#"><img class="ndod-deal-image  js-show" data-original="' + val.CouponImage1 + '" src="' + val.CouponImage1 + '" onclick="NavigateToDeal(' + val.CouponId + ')" alt="" /></a><div class="ndod-redeem-now"></div><div class="ndod-business-logo-wrapper"><div class="ndod-business-logo"><img id="Company_logo" class="" data-original="' + val.LogoUrl + '" src="' + val.LogoUrl + '" width="70" height="28" /> </div><div class="btm-header-bg-business-logo"></div></div><div class="ndod-discount"><span class="ndod-amount">save </br>'+result+'</div><div class="ndod-deal-footer-wrapper">  <div class="ndod-deal-footer cld" id="main_deal_ffter"><div style="width:638px;"> <p class="deals_header_ad">' + val.CouponTitle + '</p> <div class="deal_insder_adPanel"><div style="float:left"><p id="loc_1" style="margin-bottom:5px;">'+val.LocationTitle+'</p> <p id="loc-city">'+val.LocationCity+'</p></div><div style="float:right;padding-top:18px;"><p style="float:left;margin-top:16px;">from</p><p style="float:right;margin-left:13px;color:#0e74b7;font-size:28px;"> '+val.CurrencyCode+' '+val.Price+'</p><div style="clear:both;"></div></div> <div style="clear:both;"></div></div></div></div> <a href="#" onclick="NavigateToDeal(' + val.CouponId + ')" class="ndod-button-small waViewButton"><span class="outer"><span class="inner">VIEW!</span></span>     </a>        </div>         <div class="ndod-deal-footer-btmbg"></div>    </div>    </div></div>');
+                        });
+                        $("#bonus-deals-side").append('<div style="clear:both;"></div>');
+
+                        // LoadSelectedVoucher(couponFId);
+                        StopProgress();
                     }
+                    else
+                    {
+                        $('#couponsNotFound').show();
+                        $('#couponsContains').hide();
+                    }
+
+                },
+                error : function()
+                {
+
+                    $.LoadingOverlay("hide");
                 }
             });
+
         }
 
+            function GetPercent(op, sp)
+            {
+                return ((op-sp)*100)/op;
+            }
+
+
+            function getReqCoupons()
+            {
+                var categoryId = 0;
+                var keywords = $("#txtKeyword").val();
+                var vtype = @vtype;
+                var couponFId = 0;
+                var size=10;
+                var pageno=1;
+                var distance=100000;
+                var lat=31.4830349;
+                var lon=74.2886745;
+                var userId='x';
+                var urlofcoup = 'http://manage.cash4ads.com/Api_Mobile/SearchCoupons?categoryId=' + categoryId + '&ctype='+vtype+''+'&size='+size+''+'&keywords='+keywords+''+'&pageNo='+pageno+''+'&distance='+distance+''+'&Lat='+lat+''+'&Lon='+lon+''+'&UserId='+userId+'';
+                if(keywords == ""){
+          
+
+                    urlofcoup = 'http://manage.cash4ads.com/Api_Mobile/SearchCoupons?categoryId=' + categoryId + '&ctype='+vtype+''+'&size='+size+''+'&keywords='+'&pageNo='+pageno+''+'&distance='+distance+''+'&Lat='+lat+''+'&Lon='+lon+''+'&UserId='+userId+'';
+                }
+
+                $.ajax({
+                    dataType: "json",
+                    url: urlofcoup,
+                    cache: false,
+                    success: function (response) {
+
+                        if ( response.TotalCount > 0)
+                        {
+                            Coupons = response.Coupons;
+                            if (couponFId == 0) {
+                                couponFId = response.Coupons[0].CouponId;
+                            }
+                            var htmlToBindAllVoucher = [];
+                            $(response.Coupons).each(function (i, val) {
+                      
+                                //  var discountedValPer = 100 - parseInt((parseFloat(val.CouponDiscountedValue) / parseFloat(val.CouponActualValue)) * 100);
+                                $("#bonus-deals-side").append(' <div class="ndod-view-mini ndod-view-mini-nodesc"><div class="ndod-deal-header"><h2>' + val.CouponTitle + '</h2></div><div class="ndod-deal-content"><a class="" href="#"><img class="ndod-deal-image  js-show" data-original="' + val.CouponImage1 + '" src="' + val.CouponImage1 + '" alt="" /></a><div class="ndod-redeem-now"></div><div class="ndod-business-logo-wrapper"><div class="ndod-business-logo"><img id="Company_logo" class="" data-original="' + val.LogoUrl + '" src="' + val.LogoUrl + '" width="70" height="28" /> </div><div class="btm-header-bg-business-logo"></div></div><div class="ndod-discount"><div class="ndod-multiprice" style="padding-top: 22.0px ; "><span class="innerColour">NOW</span></div><div class="ndod-price" style="font-size: 36px; margin: 2.0px 0 -1.0px;"><span class="inner innerColour"><span class="ndod-currency">'+val.CurrencyCode+'</span><span class="ndod-amount">' + val.Savings + '</span></span></div><del class="ndod-original-price"><span class="ndod-currency">'+val.CurrencyCode+'</span><span class="ndod-amount">' + val.Price + '</span></del></div></div><div class="ndod-deal-footer-wrapper">  <div class="ndod-deal-footer cld" > <p class="ndod-bought bonus-bought"><span class="ndod-label innerColour">Bought</span><span class="ndod-amount">' + val.SwapCost + '</span></p><p class="ndod-savings"><span class="ndod-label innerColour">Save <span>up to </span></span><span class="ndod-abount">' + val.DealsCount + '<span class="ndod-percent-sign">%</span></span></p><a href="#" onclick="NavigateToDeal(' + val.CouponId + ')" class="ndod-button-small waViewButton"><span class="outer"><span class="inner">VIEW!</span></span>     </a>        </div>         <div class="ndod-deal-footer-btmbg"></div>    </div>    </div></div>');
+                            });
+                            $("#bonus-deals-side").append('<div style="clear:both;"></div>');
+
+                            // LoadSelectedVoucher(couponFId);
+
+                        }
+                        else
+                        {
+                            $('#couponsNotFound').show();
+                            $('#couponsContains').hide();
+                        }
+
+                    },
+                    error : function()
+                    {
+
+                        $.LoadingOverlay("hide");
+                    }
+                });
+
+            }
+
+
+
+
+            function GetCategories()
+            {
+
+                $.ajax({
+                    dataType: "json",
+                    url: 'http://manage.cash4ads.com/Api_Mobile/CouponCategories/8667e1a9-60af-4d99-8013-a241b81fa550',
+                    cache: false,
+                    success: function (response) {
+
+                        var selcat = $("#selcat");
+                        Coupons = response;
+
+                        $(response.CouponCategories).each(function (i, val) {
+
+                            selcat.append('<option value="' + val.CategoryId + '">' + val.Name + '</option>');
+                            //$("#bonus-deals-side").append(' <div class="ndod-view-mini ndod-view-mini-nodesc"><div class="ndod-deal-header"><h2>' + val.CouponTitle + '</h2>               </div><div class="ndod-deal-content"><a class="" href="#"><img class="ndod-deal-image  js-show" data-original="' + val.CouponImage + '" src="' + val.CouponImage + '" alt="" /></a><div class="ndod-redeem-now"></div><div class="ndod-business-logo-wrapper"><div class="ndod-business-logo"><img class="" data-original="http://manage.cash4ads.com/images/vLogo.png" src="http://manage.cash4ads.com/images/vLogo.png" width="70" height="28" /> </div><div class="btm-header-bg-business-logo"></div></div><div class="ndod-discount"><div class="ndod-multiprice" style="padding-top: 22.0px ; "><span class="innerColour">NOW</span></div><div class="ndod-price" style="font-size: 36px; margin: 2.0px 0 -1.0px;"><span class="inner innerColour"><span class="ndod-currency">£</span><span class="ndod-amount">' + val.CouponDiscountedValue + '</span></span></div><del class="ndod-original-price"><span class="ndod-currency">£</span><span class="ndod-amount">' + val.CouponActualValue + '</span></del></div></div><div class="ndod-deal-footer-wrapper">  <div class="ndod-deal-footer cld"> <p class="ndod-bought bonus-bought"><span class="ndod-label innerColour">Bought</span><span class="ndod-amount">' + val.CouponTakenValue + '</span>      </p><p class="ndod-savings"><span class="ndod-label innerColour">Save <span>up to </span></span><span class="ndod-abount">' + discountedValPer + '<span class="ndod-percent-sign">%</span></span>            </p><a href="#" onclick="LoadSelectedVoucher(' + val.CouponId + ')" class="ndod-button-small waViewButton">    <span class="outer"><span class="inner">VIEW!</span></span>     </a>        </div>         <div class="ndod-deal-footer-btmbg"></div>    </div>    </div></div>');
+                        });
+
+                        getCoupons();
+
+                    }
+                });
+            }
+
+
+            $('#selcat').on('change', function() {
+                $("#bonus-deals-side").css('display','block');
+                getCoupons();
+            });
+
+            function LoadSelectedVoucher(CouponId) {
+
+                var couponObj = $.grep(Coupons, function (n, i) {
+                    return (n.CouponId == CouponId);
+                });
+
         
-    }
-    function LoadCategories()
-    {
+                if (couponObj != null) {
+                    $("#inner_coupon_cont,#main_copon_cont").css('display','block');
+                    $("#bonus-deals-side,.extraMargingStandardContainer").css('display','none');
+                    //$("#couponMainHeading").html(couponObj[0].CouponTitle + '<span class="mvtest_header_v1">' + couponObj[0].Firstline + ' ' + couponObj[0].SecondLine + '</span><div class="btm-header-bg"></div>');
+
+                    $("#couponMainHeading").html(couponObj[0].CouponTitle + '<span class="mvtest_header_v1">' + '' + '</span><div class="btm-header-bg"></div>');
+                    $("#voucMainSliderImg").attr('src', couponObj[0].CouponImage1);
+
+                    $("#couDiscountedVal").html(couponObj[0].Savings);
+                    $("#couActualVal").html(couponObj[0].Price);
+
             
-        GetCategories();
-        $("#inner_coupon_cont,#main_copon_cont,#toggle_btn").css('display','none');
-        $("#bonus-deals-side,.extraMargingStandardContainer").css('display','block');
+                    $("#coupPerct").text(100 - parseInt((parseFloat(couponObj[0].Savings) / parseFloat(couponObj[0].Price)) * 100) + '%');
+                    // $("#coupBought").text(couponObj[0].CouponTakenValue);
+                    $("#mainDealBuy").attr('data-couponId', couponObj[0].CouponId);
+                }
 
-    }
-    function Toggle()
-    {
-        LoadCategories();
-    }
+            }
+            function BuyCoupon(){
+                if("@sessionVar" == ""){
+                    alert("Please login to buy voucher.");
 
-    function NavigateToDeal(id)
-    {
-        var url = "/Deal?id=" + id; 
-        window.location.href = url; 
-    }
+                }else{
+                    var urlToSite = "";
+                    urlToSite = 'http://smdpreview.com/Api/RedeemCoupon?authenticationToken='+ '@ViewBag.userid' +'&companyId='+ '@ViewBag.companyid' +'&CouponId='+ $("#mainDealBuy").attr('data-couponId') +'&mode=3&amount='+ $("#couDiscountedVal").text() +'';
+           
+                    $.ajax({
+                        dataType: "json",
+                        url: urlToSite,
+                        cache: false,
+                        success: function (response) {
+                            if(response == false){
+                                alert("Can't purchase voucher because balance is not sufficient.");
+                            }else{
+                                alert("Voucher redeemed successfully.");
+                            }
+                        }
+                    });
+                }
 
-    function NavigateOwn()
-    {
-        $("#bonus-deals-side").html('');
-        getReqCoupons();
-        $("#selcat").prop('selectedIndex', 0);
-        $('#couponsNotFound').hide();
-        $('#couponsContains').show();
-    }
+        
+            }
+            function LoadCategories()
+            {
+            
+                GetCategories();
+                $("#inner_coupon_cont,#main_copon_cont,#toggle_btn").css('display','none');
+                $("#bonus-deals-side,.extraMargingStandardContainer").css('display','block');
+
+            }
+            function Toggle()
+            {
+                LoadCategories();
+            }
+
+            function NavigateToDeal(id)
+            {
+                var url = "/Deal?id=" + id; 
+                window.location.href = url; 
+            }
+
+            function NavigateOwn()
+            {
+                $("#bonus-deals-side").html('');
+                getReqCoupons();
+                $("#selcat").prop('selectedIndex', 0);
+                $('#couponsNotFound').hide();
+                $('#couponsContains').show();
+            }
 </script>

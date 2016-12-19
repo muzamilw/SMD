@@ -11,8 +11,10 @@
 
             <div id="back_btn_div">
                 <div style="float:right;">
-                    <img style="height:40px;cursor:pointer" src="~/images/back-arrow.png" title="Back to Categories" onclick="NavigateBack()" />
+                    @*<img style="height:40px;cursor:pointer" src="~/images/back-arrow.png" title="Back to Categories" onclick="NavigateBack()" />*@
+                    <i class="fa fa-arrow-left" style="font-size: 28px;color: white;cursor:pointer" title="Back to Categories" aria-hidden="true" onclick="NavigateBack()"></i>
                 </div>
+               
                 <div style="clear:both;"></div>
             </div>
 
@@ -28,8 +30,8 @@
                                 <ul class="slides">
                                     <li class="clone" style="width: 100%; float: left; display: block;">
 
-                                        <a class="main-deal-image-link" href="/payment/620648" style="cursor: pointer;">
-                                            <img id="voucMainSliderImg" src="https://static.wowcher.co.uk/images/deal/620648/154352.jpg" width="778" height="521" class="picture-slides-image deal-detail-img top" alt="£289 for a PDO threadlift on eye bags, £489 for one facial area of your choice or £985 for the full face at Harley Street Elite Clinic - save up to 59%" title="£289 for a PDO threadlift on eye bags, £489 for one facial area of your choice or £985 for the full face at Harley Street Elite Clinic - save up to 59%">
+                                        <a class="main-deal-image-link"  style="cursor: pointer;">
+                                            <img id="voucMainSliderImg"  width="778" height="521" class="picture-slides-image deal-detail-img top" alt="£289 for a PDO threadlift on eye bags, £489 for one facial area of your choice or £985 for the full face at Harley Street Elite Clinic - save up to 59%" title="£289 for a PDO threadlift on eye bags, £489 for one facial area of your choice or £985 for the full face at Harley Street Elite Clinic - save up to 59%">
                                         </a>
                                     </li>
                                 </ul>
@@ -57,7 +59,7 @@
                                         <span id="currency_symb" class="ndod-currency" style="font-size:25%!important;"></span><span id="couDiscountedVal" class="ndod-amount">289</span>
                                     </span>
                                 </div>
-                                <a href="http://harleystreeteliteclinic.com/tear-trough/" target="_blank" class="price-link" rel="nofollow">
+                                <a href="" target="_blank" class="price-link" rel="nofollow">
                                     <del class="ndod-original-price"><span id="currency_symb" class="ndod-currency"></span><span id="couActualVal" class="ndod-amount"></span></del>
                                 </a>
                             </div><div class="main-deal-data-wrapper">
@@ -67,7 +69,6 @@
                                     <table class="ctu-stats-table ctu-stats-table-full-width">
                                         <tbody>
                                             <tr>
-
                                                 <td>
                                                     <div class="stat-bought"><span class="innerColour">Bought</span><strong style="font-size:55px;line-height:48px" id="coupBought">0</strong></div>
                                                 </td>
@@ -117,7 +118,6 @@
                     </div>
 
                 </div>
-
 
                 <div class="ctu-details">
                     <div class="twocol">
@@ -217,12 +217,17 @@
 
     </div>
     </div>
+<div class="loading" align="center" id="modalSending">
+
+    <img src="images/rloader.gif" width="200px" />
+
+</div>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_N_x3UhG5IHl8GUZ4y5Lj_QkNhGUh91I" type="text/javascript"></script>
     <link rel="stylesheet" href="~/content/green.css">
-}
+     <link href="~/Content/loadingLoader.css" rel="stylesheet" />
     <script>
         var Couponid = '@couponId';
-
+        ShowSendingProgress();
         LoadCoupon();
         $('.rating').rating();
         function LoadCoupon() {
@@ -307,7 +312,7 @@
                         $("#deal_Reviews").append('<div id="Review_1" class="deal_rev"><div class="pull-left col-lg-2"><img src=' + val.ProfileImage + ' style="border-radius: 29px;height:40px"/></div><div class="pull-right col-lg-10" style="padding:0px;"><div class="pull-left"><div class="Review_heading" style="font-size:14px;color:black">' + val.FullName + '</div></div><div class="pull-right" style="padding-right:10px;color:black;font-size:10px;"> <span>' + ReqDate + '</span></div><div class="clearfix"></div><div class="review_description" style="font-size:10px;color:black">' + val.Review + ' </div></div><div class="clearfix"><div id="rating" class="rating_divs" style="display:none"><input type="text" id="rating_id" class="rating rating5" value="2" /></div></div></div>')
 
                     });
-
+                    StopProgress();
                 }
             });
 
@@ -421,4 +426,25 @@
             });
 
         }
+        function ShowSendingProgress() {
+            var modal = $('<div  />');
+            modal.addClass("modal");
+            modal.attr("id", "modalSending");
+            $('body').append(modal);
+            var loading = $("#modalSending.loading");
+            loading.show();
+            var top = '215px';
+            var left = '560px';
+            loading.css({ top: top, left: left, color: '#ffffff' });
+        }
+
+
+        function StopProgress() {
+
+            $("div.modal").hide();
+
+            var loading = $(".loading");
+            loading.hide();
+        }
+
     </script>
