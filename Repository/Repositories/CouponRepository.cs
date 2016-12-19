@@ -325,6 +325,96 @@ namespace SMD.Repository.Repositories
             return true;
         }
 
+        public CouponStatsResponse getDealStats(long Id)
+        {
+            DateTime d7date =System.DateTime.Now.AddDays(-7);
+             DateTime d14date =System.DateTime.Now.AddDays(-14);
+            CouponStatsResponse res = new CouponStatsResponse();
+            res.CouponId = Id;
+            res.DealLines = db.CouponPriceOption.Where(g => g.CouponId == Id).Count();
+           
+            res.DealReviewsCount = db.CouponRatingReview.Where(g => g.CouponId == Id).Count();
+            if (res.DealReviewsCount > 0)
+            {
+                res.DealRating = ((double)db.CouponRatingReview.Where(g => g.CouponId == Id).Sum(t => t.StarRating)) / res.DealReviewsCount;
+            }
+
+            long C7daysOpen = db.UserCouponView.Where(g => g.CouponId == Id && g.ViewDateTime >= d7date).Count();
+            long C14To7daysOpen = db.UserCouponView.Where(g => g.CouponId == Id && g.ViewDateTime >= d14date && g.ViewDateTime <= d7date).Count();
+            if (C14To7daysOpen > 0 && C7daysOpen >0)
+            {
+                res.DealsOpenedComparison = Math.Abs(((double) C7daysOpen / (double)C14To7daysOpen));
+                if (C7daysOpen == C14To7daysOpen)
+                {
+                    res.DealsOpenedDirection = 0;
+                }
+                else if (C7daysOpen > C14To7daysOpen)
+                {
+                    res.DealsOpenedDirection = 1;
+                }
+                else
+                {
+                    res.DealsOpenedDirection = -1;
+                }
+
+
+            }
+            else if (C14To7daysOpen == 0 && C7daysOpen == 0)
+            {
+                res.DealsOpenedDirection = 0;
+                res.DealsOpenedComparison = 0;
+            }
+            else if (C14To7daysOpen > 0)
+            {
+                res.DealsOpenedComparison = C14To7daysOpen * 100;
+                res.DealsOpenedDirection = -1;
+            }
+            else if (C7daysOpen > 0)
+            {
+                res.DealsOpenedComparison = C7daysOpen * 100;
+                res.DealsOpenedDirection = 1;
+            }
+           //Click Thrus Comparison
+            long C7daysClickThru = db.UserPurchasedCoupon.Where(g => g.CouponId == Id && g.PurchaseDateTime >= d7date && g.ResponseType == 2).Count();
+            long C14To7ClickThru = db.UserPurchasedCoupon.Where(g => g.CouponId == Id && g.PurchaseDateTime >= d14date && g.PurchaseDateTime <= d7date && g.ResponseType == 2).Count();
+            if (C14To7ClickThru > 0 && C7daysClickThru > 0)
+            {
+                res.ClickThruComparison = Math.Abs(((double)C7daysClickThru / (double)C14To7ClickThru));
+                if (C7daysClickThru == C14To7ClickThru)
+                {
+                    res.ClickThruDirection = 0;
+                }
+                else if (C7daysClickThru > C14To7ClickThru)
+                {
+                    res.ClickThruDirection = 1;
+                }
+                else
+                {
+                    res.ClickThruDirection = -1;
+                }
+            }
+            else if (C14To7ClickThru == 0 && C7daysClickThru == 0)
+            {
+                res.ClickThruDirection = 0;
+                res.ClickThruComparison = 0;
+            }
+            else if (C14To7ClickThru > 0)
+            {
+                res.ClickThruComparison = C14To7ClickThru * 100;
+                res.ClickThruDirection = -1;
+            }
+            else if (C7daysClickThru > 0)
+            {
+                res.ClickThruComparison = C7daysClickThru * 100;
+                res.ClickThruDirection = 1;
+            }
+           
+
+
+
+            return res;
+
+        }
 
         #endregion
     }
