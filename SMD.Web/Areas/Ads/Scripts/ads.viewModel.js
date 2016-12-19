@@ -444,10 +444,21 @@ define("ads/ads.viewModel",
 				    isEditorVisible(false);
 			        isListVisible(true);
 			        isWelcomeScreenVisible(false);
-			        $("#headlabel, #Heading_div").css("display", "block");
-			        showMainMenu();
-			        campaignModel().reset();
 			        $("input,button,textarea,a,select").removeAttr('disabled');
+			      //  $("#headlabel, #Heading_div").css("display", "block");
+			        $("#panelArea").css("display", "block");
+
+			        $(".hideInCoupons").css("display", "none");
+
+			        $("#MarketobjDiv").css("display", "none");
+			        $("#topArea").css("display", "block");
+			        $("#headlabel").css("display", "block");
+			        $("#Heading_div").css("display", "block");
+			        $("#headdesc").css("display", "block");
+			        $(".closecls").css("display", "block");
+			        showMainMenu();
+			     //   campaignModel().reset();
+			        
 
 				},
                 CloseAnalyticInnerView = function () {
