@@ -56,6 +56,7 @@ define("Coupons/Coupons.viewModel",
                     isEnableVedioVerificationLink = ko.observable(false),
                     SelectedTextField = ko.observable(),
                     BranchLocationId = ko.observable(),
+                    isflage = ko.observable(false),
                     //caption variablels 
 
                 //  Buttons visible properties
@@ -638,6 +639,15 @@ getfreeCouponCount = function () {
             couponModel().CouponPriceOptions.splice(0, 0, new model.CouponPriceOption());
             couponModel().BuyitLandingPageUrl('https://');
             couponModel().isSaveBtnLable("3");
+            if (UserAndCostDetail().isStripeIntegrated) {
+                couponModel().CouponListingMode("2");
+                isflage(true);
+            }
+            else {
+                couponModel().CouponListingMode("1");
+                isflage(false);
+            }
+
             saveBtntext("Buy Now");
             couponModel().IsShowReviews(true);
             couponModel().IsShowAddress(true);
@@ -861,8 +871,11 @@ getfreeCouponCount = function () {
             if (freeCouponCount() > 0 && UserAndCostDetail().StripeSubscriptionStatus == null) {
                 confirmation.messageText("Your deal cannot be submitted as there is already a free deal active." + "<br\>" + "Please subscribe to avail unlimited deals.")
                 confirmation.afterProceed(function () {
-                    couponModel().CouponListingMode(2);
-                    saveCampaign(2);
+                    stripeChargeCustomer.show(function () {
+                        UserAndCostDetail().isStripeIntegrated = true;
+                        couponModel().CouponListingMode(2)
+                        saveCampaign(2);
+                    }, 1000, 'Configure your Subscription');
                     return;
                 });
                 confirmation.yesBtnText("Upgrade up to Monthly Deal");
@@ -878,6 +891,7 @@ getfreeCouponCount = function () {
                         couponModel().CouponListingMode(2);
                         saveCampaign(2);
                     });
+                    confirmation.yesBtnText("Upgrade up to Monthly Deal");
                     confirmation.afterCancel(function () {
                         return;
                     });
@@ -898,7 +912,7 @@ getfreeCouponCount = function () {
                             }
                             else {
                                 if (UserAndCostDetail().isStripeIntegrated == false) {
-                                    if (couponModel().CouponPriceOptions().length > 1 && UserAndCostDetail().StripeSubscriptionStatus != 'active') {
+                                    if (couponModel().CouponPriceOptions().length > 1 && UserAndCostDetail().StripeSubscriptionStatus != 'active' && couponModel().CouponListingMode() != 2) {
                                         confirmation.messageText("Your deal cannot be submitted as it has more than one deal headlines. Please subscribe to avail unlimited deal headlines.");
                                         confirmation.afterProceed(function () {
                                             stripeChargeCustomer.show(function () {
@@ -909,6 +923,7 @@ getfreeCouponCount = function () {
 
 
                                         });
+                                        confirmation.yesBtnText("Upgrade up to Monthly Deal");
                                         confirmation.afterCancel(function () {
                                             return;
                                         });
@@ -917,7 +932,7 @@ getfreeCouponCount = function () {
                                     else {
                                         stripeChargeCustomer.show(function () {
                                             UserAndCostDetail().isStripeIntegrated = true;
-                                            couponModel().CouponListingMode(1)
+                                            // couponModel().CouponListingMode(1)
                                             saveCampaign(2);
                                         }, 1000, 'Configure your Subscription');
                                     }
@@ -1129,6 +1144,10 @@ getfreeCouponCount = function () {
                 isShowArchiveBtn(false);
                 IsPauseBtnVisible(false);
                 IsResumeBtnVisible(false);
+                if (UserAndCostDetail().isStripeIntegrated)
+                    isflage(true);
+                else
+                    isflage(false);
 
                 //hide the main menu;
                 collapseMainMenu();
@@ -1150,7 +1169,7 @@ getfreeCouponCount = function () {
                 ShowImages(item);
                 visibleDeleteimage(item);
 
-                if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == 5|| item.Status() == 6 || item.Status() == 7 || item.Status() == 9) {
+                if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == 5 || item.Status() == 6 || item.Status() == 7 || item.Status() == 9) {
 
                     dataservice.getCampaignData({
                         CampaignId: item.CouponId(),
@@ -1798,7 +1817,7 @@ getfreeCouponCount = function () {
                 },
                 //-------Google Map Code--------------
                 googleAddressMap = function () {
-                  
+
                     initializeGeoLocation();
                     setCompanyAddress();
                     google.maps.event.addDomListener(window, 'load', initializeGeoLocation);
@@ -1812,14 +1831,14 @@ getfreeCouponCount = function () {
                         center: latlngComp,
                         mapTypeId: google.maps.MapTypeId.ROADMAP
                     };
-                    
+
                     compMap = new google.maps.Map(document.getElementById('map_div'), mapOptions);
 
                     //map = new google.maps.Map($('#map-canvasCompany'), mapOptions);
 
                 },
                 setCompanyAddress = function () {
-                    
+
                     //var fulladdress = AddressLine1().toLowerCase() + ' ' + CompanyCity() + ' ' + companyzipcode() + ' ' + companystate().toLowerCase();
                     var fulladdress = null;
                     if (AddressLine1() != null) {
@@ -2956,7 +2975,8 @@ getfreeCouponCount = function () {
                     disablePercentageCheckBoxes: disablePercentageCheckBoxes,
                     modifiedDate: modifiedDate,
                     onSaveBtnLabel: onSaveBtnLabel,
-                    saveBtntext: saveBtntext
+                    saveBtntext: saveBtntext,
+                    isflage: isflage
                 };
             })()
         };

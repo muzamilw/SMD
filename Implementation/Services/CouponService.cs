@@ -1131,6 +1131,12 @@ namespace SMD.Implementation.Services
         {
             return couponRepository.PauseAllCoupons(CompanyId);
         }
+
+        public bool CompleteAllCoupons(int CompanyId)
+        {
+            return couponRepository.CompleteAllCoupons(CompanyId);
+        }
+
         public int GetFreeCouponCount()
         {
             return couponRepository.GetFreeCouponCount();

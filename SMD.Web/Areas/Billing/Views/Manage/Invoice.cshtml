@@ -9,7 +9,7 @@
                 <ol class="breadcrumb" style="display:none">
                     <li><a href="~/Dashboard/Index">&nbsp;</a></li>
                 </ol>
-                <div class="clearfix" style="margin-left:-5px;margin-bottom:10px;">
+                <div class="clearfix" style="margin-left:-5px;margin-bottom:3px;">
                     <span style="font-size: 24px;color: #ffffff">Invoice History</span>
                     <div style="float:right;margin-top:7px; margin-right:-8px;">
                         <img src="/Content/Images/Close_Button.png" data-bind="click:$root.onCloseClick" style="width:20px;height:20px;float:right;cursor:pointer;">
@@ -97,9 +97,25 @@
                             @*<div class="col-xs-2">
                                
                             </div>*@
-                            <div class="col-xs-2" style="margin-top:24px;">
+                            <div class="col-xs-2" style="margin-top:24px;margin-right:-20px;">
                                 <button class="btn  btn-info" id="saveBtn" data-bind="click:$root.onSearchButtonClick">Search</button>
                                 <button class="btn btn-default" id="saveBtn" data-bind="click:$root.resetData">Reset</button>
+                              
+                            </div>
+                            <div class="col-lg-4" style="margin-top:24px;padding-left:0px;padding-right:0px;margin-right:-9px !important" data-bind="visible:$root.StripeSubscriptionStatus()!=null">
+                                <div class="col-lg-6" style="padding-left:0px;margin-top:5px;margin-right:-37px;">
+                                    <span style="margin-top:24px;font-size:13px;color:gray">Your deal subscription status:</span>
+                                </div>
+                                <div class="col-lg-3" style="margin-top:0px;padding-left:0px;text-align:center">
+                                    <label data-bind="text:$root.StripeSubscriptionStatus,css:{activeclor:$root.StripeSubscriptionStatus()=='active',cancelcolor: $root.StripeSubscriptionStatus()=='canceled'}" style="font-size:medium;font-weight:bold;margin-top:4px;text-transform:capitalize"></label>
+                                </div>
+                                <div class="col-lg-2 pull-right" style="margin-right:-28px;">
+                                    <button class="btn btn-danger pull-right" id="saveBtn" data-bind="click:$root.onSaveSub,visible:$root.StripeSubscriptionStatus()=='active'">Cancel Subscription</button>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-4 pull-right" style="margin-top:7px;padding-left:0px;padding-right:0px;" data-bind="visible:$root.StripeSubscriptionStatus()==null">
+                                <span class="pull-right" style="margin-top:24px;font-size:13px;color: red">You are not subscribed for deals</span>
                             </div>
                         </div>
                     </div>

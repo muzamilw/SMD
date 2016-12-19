@@ -252,6 +252,14 @@ namespace SMD.Repository.Repositories
             return true;
 
         }
+
+
+        public bool CompleteAllCoupons(int CompanyId)
+        {
+            db.Database.ExecuteSqlCommand("update coupon set status=5 where companyId=" + CompanyId);
+            return true;
+
+        }
         public int GetCouponByBranchId(long id)
         {
 
@@ -293,9 +301,28 @@ namespace SMD.Repository.Repositories
         }
 
 
-        public List<Coupon> GetDealsWhichHavejustExpired()
+        public List<GetUsersCouponsForEmailNotification_Result> GetDealsWhichHavejustExpired()
         {
-            return db.Coupons.Where(g => g.Status != 5 && (g.CouponListingMode == 1 && g.ApprovalDateTime.Value.AddDays(7) > DateTime.Now) || (g.CouponListingMode == 2 && g.ApprovalDateTime.Value.AddDays(30) > DateTime.Now)).ToList();
+            //mode 8 returns the expired deals
+            return db.GetUsersCouponsForEmailNotification(8).ToList();
+        }
+
+        public List<GetUsersCouponsForEmailNotification_Result> GetDealsWhichWillExpirein3Days()
+        {
+            //mode 9 returns the deals which will expire in 3 days
+            return db.GetUsersCouponsForEmailNotification(9).ToList();
+        }
+
+        public bool CompleteCoupons(long[] couponIds)
+        {
+
+
+            foreach (var item in couponIds)
+            {
+                db.Database.ExecuteSqlCommand("update dbo.coupon set status = 5 where couponid=" + item.ToString());
+            }
+
+            return true;
         }
 
 

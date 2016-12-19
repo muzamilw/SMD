@@ -136,6 +136,8 @@
     <Compile Include="DomainModels\DamImage.cs" />
     <Compile Include="DomainModels\Dashboard_analytics_Result.cs" />
     <Compile Include="DomainModels\EventStatus.cs" />
+    <Compile Include="DomainModels\GameExerciseCategory.cs" />
+    <Compile Include="DomainModels\GameExerciseCategoryList.cs" />
     <Compile Include="DomainModels\GetActiveVSNewUsers_Result.cs" />
     <Compile Include="DomainModels\GetAdminDashBoardInsights_Result.cs" />
     <Compile Include="DomainModels\getAdsCampaignPerCityPerAgeFormAnalytic_Result.cs" />
@@ -178,6 +180,7 @@
     <Compile Include="DomainModels\SurveySharingGroupMember.cs" />
     <Compile Include="DomainModels\SurveySharingGroupShare.cs" />
     <Compile Include="DomainModels\UserCouponView.cs" />
+    <Compile Include="DomainModels\UserGameResponse.cs" />
     <Compile Include="DomainModels\UserPurchasedCoupon.cs" />
     <Compile Include="DomainModels\vw_CompanyUsers.cs" />
     <Compile Include="DomainModels\Account.cs" />
@@ -289,6 +292,7 @@
     <Compile Include="ResponseModels\AdCampaignApiSearchRequestResponse.cs" />
     <Compile Include="ResponseModels\BaseApiResponse.cs" />
     <Compile Include="ResponseModels\CompanyResponseModel.cs" />
+    <Compile Include="ResponseModels\CompanySubscription.cs" />
     <Compile Include="ResponseModels\CouponsResponseModelForApproval.cs" />
     <Compile Include="ResponseModels\CouponRatingReviewResponse.cs" />
     <Compile Include="ResponseModels\PayOutResponseModelForApproval.cs" />

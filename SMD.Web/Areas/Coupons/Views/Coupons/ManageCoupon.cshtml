@@ -282,8 +282,8 @@ else
 
                                         </div>
                                         <div class="col-lg-9">
-                                            <div class="radio col-lg-12" style="text-align: left;">
-                                                <input type="radio" name="optionsRadiosDelvTypes" value="1" id="optionsRadiosApplyFilterFree">
+                                            <div class="radio col-lg-12" style="text-align: left;" data-bind="visible:$root.isflage()==false">
+                                                <input type="radio" name="optionsRadiosDelvTypes" value="1" id="optionsRadiosApplyFilterFree" data-bind="checked:CouponListingMode">
                                                 <label for="optionsRadiosApplyFilterFree">
                                                     <span style="font-weight:bold;font-size:15px;">7 Day Flash Deal &nbsp;&nbsp;</span> <span class="defaultthemetxtclr">7 Day Listing, 1Deal Line, 1Push Notification,4 Email Delivered.</span>
 
@@ -291,7 +291,7 @@ else
                                                 <span class="help-block text-right"></span>
                                             </div>
                                             <div class="radio col-lg-12" style="text-align: left;">
-                                                <input type="radio" name="optionsRadiosDelvTypes" value="2" id="optionsRadiosApplyFilterOnce">
+                                                <input type="radio" name="optionsRadiosDelvTypes" value="2" id="optionsRadiosApplyFilterOnce" data-bind="checked:CouponListingMode">
                                                 <label for="optionsRadiosApplyFilterOnce">
                                                     <span style="font-weight:bold;font-size:15px;">30 Day Listing</span>&nbsp;&nbsp; <span style="margin-left:13px;">30 Day Listing,Upto 6 Deal Lines, 1Push Notification,4 Email Delivered.</span>
                                                 </label>
@@ -1343,7 +1343,7 @@ else
                                         </div>
                                         <div class="col-lg-7">
                                             <div class="radio col-lg-12" style="text-align: left;">
-                                                <input type="radio" name="optionsRadiosDelvTypes" value="1" id="optionsRadiosApplyFilterFree" data-bind="checked:CouponListingMode">
+                                                <input type="radio" name="optionsRadiosDelvTypes" value="1" id="optionsRadiosApplyFilterFree">
                                                 <label for="optionsRadiosApplyFilterFree">
                                                     <span style="color:red; font-weight:bold;">FREE</span> - Auto remove after 7 days listing, unlimited offers Issuance .
 
@@ -1351,7 +1351,7 @@ else
                                                 <span class="help-block text-right"></span>
                                             </div>
                                             <div class="radio col-lg-12" style="text-align: left;">
-                                                <input type="radio" name="optionsRadiosDelvTypes" value="2" id="optionsRadiosApplyFilterOnce" data-bind="checked:CouponListingMode">
+                                                <input type="radio" name="optionsRadiosDelvTypes" value="2" id="optionsRadiosApplyFilterOnce">
                                                 <label for="optionsRadiosApplyFilterOnce">
                                                     <span class="defaultThemeTxtClr defaultImgUploadImageBtn" style="margin-left:1px;"> UNLIMITED </span> <span syle="margin-left:1px;"> - </span> Listed for 30 days upto 50 km, unlimited offers Issuance .
                                                 </label>
@@ -1611,7 +1611,7 @@ else
                                     List for 14 days-FREE.
                                 </div>
                                 <div class="radio col-lg-3" style="text-align: left;font-size:14px !important;padding-left:8px;">
-                                    <input type="radio" name="optionsRadiosDelvTypes" value="1" id="optionsRadiosApplyFilterFree" data-bind="checked: CouponListingMode">
+                                    <input type="radio" name="optionsRadiosDelvTypes" value="1" id="optionsRadiosApplyFilterFree">
                                     <label for="optionsRadiosApplyFilterFree" class="fontsize11" style="padding-left:24px!important;">
                                         <span class="defaultThemeTxtClr"></span>
                                     </label>
@@ -1623,7 +1623,7 @@ else
                                     Unlimited listing for $19 USD /month.
                                 </div>
                                 <div class="radio col-lg-3" style="text-align: left;font-size:14px !important;padding-left:8px;">
-                                    <input type="radio" name="optionsRadiosDelvTypes" value="2" id="optionsRadiosApplyFilterOnce" data-bind="checked: CouponListingMode">
+                                    <input type="radio" name="optionsRadiosDelvTypes" value="2" id="optionsRadiosApplyFilterOnce">
                                     <label for="optionsRadiosApplyFilterOnce" class="fontsize11" style="padding-left:24px!important;">
                                         <span class="defaultThemeTxtClr"></span>
                                     </label>
