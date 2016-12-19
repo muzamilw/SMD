@@ -12,7 +12,7 @@ else
     adminClasses = "displayNone";
 }
 <div data-bind="visible: $root.isEditorVisible()" style="display: none">
-   
+
     <div class="col-lg-12" style="padding-left:0px;padding-right:18px;">
         <div class="row">
             <div class="col-lg-12" id="topArea" style="padding-left:7px;padding-right:0px;">
@@ -31,7 +31,7 @@ else
                             <div class="status_date_span" style="margin-top:25px;">
                                 Last modified <span style="margin-left:3px"></span><span>12 april 2014</span>
                             </div>
-           
+
                         </div>
                     </div>
 
@@ -114,7 +114,7 @@ else
                             <br />
                             <span data-bind="css: $root.previewScreenNumber() == 4 ? 'ads-selected-numbering-text' : '',click: $root.gotoScreen.bind(null,4)">Expiry</span>
 
-          
+
                         </div>
                         <div class="pull-left" style="width:47px;">
                             &nbsp;
@@ -130,7 +130,7 @@ else
 
                                 <br />
                                 <span>Preview</span>
-                              
+
                             </a>
                         </div>
 
@@ -179,7 +179,7 @@ else
                                 </div>
 
                                 <br>
-                                
+
                                 <span style="font-size:16px;color:black;margin-left:2px;" data-bind="text:StatusValue()">Draft</span>
                             </div>
                             <div class="pull-right">
@@ -614,7 +614,7 @@ else
 
                                 <div class="col-lg-12" style="margin:auto;float:none !important; " data-bind="visible: $root.previewScreenNumber() == 2">
 
-                                    <div class="col-lg-12">
+                                    <div class="col-lg-12" style="display:none">
                                         <div class="col-lg-6">
                                             <div class="row">
                                                 <div class="checkbox-nice ">
@@ -673,35 +673,46 @@ else
                                     <div class="clearfix">
 
                                     </div><br />
-                                    @*Banners   Pannel *@
-                                    <div class="col-lg-12">
-                                        <div class="row">
-                                            <div class="adsubHeading Theme_standard_clr" style="margin-bottom:0px;" data-bind="visible: $root.previewScreenNumber() == 2">
-                                                Create up to 6 Deal Lines.
-                                            </div>
+
+
+                                    <div class="form-group">
+                                        <div class="col-lg-2">
+                                            <label for="txtBuyItlbl" class="control-label text-right tooltip-float floatNone">First Discount </label>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-lg-8" style="padding-left:0px;">
-                                                <label style="color:gray;font-size:13px;">The first Deal Line will be used in all Notification &Emails</label>
-                                            </div>
-                                            <div class=" col-lg-4" style="padding-left:83px;padding-bottom :20px;">
-                                                <a class="btn  btn-success" id="saveBtn" style="width:160px;" data-bind="click: $root.onCreatePriceOption">Add Deal Lines</a>
-                                            </div>
+                                        <div class="col-lg-10">
+                                            <select class="form-control" style="width:73%!important;" id="firstDiscount">
+                                                <optgroup label="First Discount">
+                                                    <option value="0">10% Off</option>
+                                                    <option value="1">20% Off</option>
+                                                    <option value="2">25% Off</option>
+                                                    <option value="3">30% Off</option>
+                                                    <option value="4">40% Off</option>
+                                                    <option value="5">50% Off</option>
+                                                    <option value="6">60% Off</option>
+                                                </optgroup>
+                                                <optgroup label="2 for 1 Meal Deal">
+                                                    <option value="7">$1 off</option>
+                                                    <option value="8">$3 off</option>
+                                                    <option value="9">$5 off</option>
+                                                    <option value="10">$10 off</option>
+                                                    <option value="11">$15 off</option>
+                                                    <option value="12">$20 off</option>
+                                                    <option value="13">$25 off</option>
+                                                    <option value="14">$30 off</option>
+                                                    <option value="15">$40 off</option>
+                                                    <option value="16">$50 off</option>
+                                                </optgroup>
+                                            </select>
                                         </div>
-                                        @*<div class="adsubHeading Theme_standard_clr" data-bind="visible: $root.previewScreenNumber() == 2">
-                        Create up to 6 Deal Lines.
-
-                        <label style="color:gray;font-size:13px;">The first Deal Line will be used in all Notification &Emails</label>
-                        <button class="btn  btn-success" id="saveBtn" style="width:80px;">save Me</button>
-                    </div>*@
-
                                     </div>
-
-                                    <div class="col-lg-12 borderPanel " style="margin-bottom:20px;">
-                                        <!-- ko template: { name: 'dealLinesTemplate' } -->
-                                        <!-- /ko -->
+                                    <div class="form-group">
+                                        <div class="col-lg-2" style="padding-left:0px;">
+                                            <label for="txtBuyItlbl" class="control-label text-right tooltip-float floatNone">Deal Ending Discount</label>
+                                        </div>
+                                        <div class="col-lg-10">
+                                            <select class="form-control" style="width:73%!important;" id="firstDiscount" data-bind=" options: $root.dollarAmountDisDD,optionsText: 'name',optionsValue: 'id'"></select>
+                                        </div>
                                     </div>
-
 
                                     <div class="col-lg-12" style="padding:0px;">
                                         <div class="adsubHeading Theme_standard_clr borderbtmline">
@@ -791,7 +802,130 @@ else
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
+                                    @*Banners   Pannel *@
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                            <div class="adsubHeading Theme_standard_clr" style="margin-bottom:0px;" data-bind="visible: $root.previewScreenNumber() == 2">
+                                                Create up to 6 Deal Lines.
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-8" style="padding-left:0px;">
+                                                <label style="color:gray;font-size:13px;">The first Deal Line will be used in all Notification &Emails</label>
+                                            </div>
+
+                                        </div>
+                                        @*<div class="adsubHeading Theme_standard_clr" data-bind="visible: $root.previewScreenNumber() == 2">
+                                                Create up to 6 Deal Lines.
+
+                                                <label style="color:gray;font-size:13px;">The first Deal Line will be used in all Notification &Emails</label>
+                                                <button class="btn  btn-success" id="saveBtn" style="width:80px;">save Me</button>
+                                            </div>*@
+
+                                    </div>
+
+                                    <div class="col-lg-12 borderPanel " style="margin-bottom:20px;">
+                                        <!-- ko template: { name: 'dealLinesTemplate' } -->
+                                        <!-- /ko -->
+                                    </div>
+
+                                    <div class=" col-lg-4" style="padding-left:0px;padding-bottom :20px;">
+                                        <a class="btn  btn-success" id="saveBtn" style="width:160px;" data-bind="click: $root.onCreatePriceOption">Add Deal Lines</a>
+                                    </div>
+
+
+                                    @*<div class="col-lg-12" style="padding:0px;">
+                                            <div class="adsubHeading Theme_standard_clr borderbtmline">
+                                                Call for Action Button.
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="col-lg-2">
+                                                <label for="txtBuyItlbl" class="control-label text-right tooltip-float floatNone">Button Label </label>
+                                            </div>
+                                            <div class="col-lg-7">
+
+                                                <select class="form-control" style="width:50%!important;" id="buyItddl" data-bind="event:{ change: $root.handleBuyIt}">
+
+                                                    <option value="0">Do not show button</option>
+                                                    <option value="Apply Now">
+                                                        Apply Now
+                                                    </option>
+                                                    <option value="Book Now">
+                                                        Book Now
+                                                    </option>
+                                                    <option value="Contact Us">
+                                                        Contact Us
+                                                    </option>
+                                                    <option value="Download">
+                                                        Download
+                                                    </option>
+                                                    <option value="Learn More">
+                                                        Learn More
+                                                    </option>
+                                                    <option value="Shop Now">
+                                                        Shop Now
+                                                    </option>
+                                                    <option value="Sign Up">
+                                                        Sign Up
+                                                    </option>
+                                                    <option value="Watch More">
+                                                        Watch More
+                                                    </option>
+
+                                                    <option value="Buy Now">
+                                                        Watch More
+                                                    </option>
+                                                    <option value="Check Availability">
+                                                        Check Availability
+                                                    </option>
+                                                    <option value="999">
+                                                        Custom Button Label
+                                                    </option>
+
+
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-3 pull-right" style="padding-left:16px;">
+                                                <button class="btn  btn-success" id="saveBtn" style="width:180px;" data-bind="text:$root.saveBtntext">Save 20% - Buy Now</button>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" data-bind="visible:$root.buyItQuestionLabelStatus() == true">
+
+                                            <div>
+
+                                                <div class="col-lg-2">
+                                                    <label for="txtBuyItlbl" class="control-label text-ripreview_screen_advtlogoCntght tooltip-float floatNone">Custom button</label>
+                                                </div>
+
+                                                <div class="col-lg-8">
+                                                    <input style="width:420px!important;" type="text" class=" form-control txtbuyitlbl" id="txtBuyItlbl" placeholder="(12 characters)" data-bind="value:BuyitBtnLabel" maxlength="12">
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group" data-bind="visible:$root.hideLandingPageURl">
+                                            <div class="col-lg-2">
+                                                <label for="txtBuyItUrl" class="control-label text-right tooltip-float floatNone">Landing page url </label>
+                                            </div>
+                                            <div class="col-lg-10">
+                                                <div class="col-lg-8" style="padding-left:0px;">
+                                                    <textarea class="form-control" id="txtBuyItUrl" rows="1" placeholder="Enter in landing page url" style="width:380px;margin-top:5px;resize:none" maxlength="500" data-bind="value:BuyitLandingPageUrl"></textarea>
+                                                </div>
+                                                <div class="col-lg-4" style="padding-top:4px;text-align:right;">
+                                                    <button style="width:123px;height:33px;" class="btn  btn-success gtild-color" id="btnNext" onclick="openUrl();">Test URL Link</button>
+                                                </div>
+                                            </div>
+                                        </div>*@
+
+
+                                    @* --------------Radio Button------ -------- *@
+
+                                    <div class="form-group" style="display:none">
                                         <div class="col-lg-2">
 
                                         </div>
@@ -820,6 +954,7 @@ else
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="row" style="display:none;">
                                         <div class="form-group" style="margin-top:10px;">
                                             <div class="col-lg-2">
@@ -1079,7 +1214,7 @@ else
 
                                 <div class="col-lg-12" style="margin:auto;float:none !important;" data-bind="visible: $root.previewScreenNumber() == 3">
                                     @*<div class="form-group formcontrol-bg" data-bind="visible: $root.isEnableVedioVerificationLink">
-                <div class="col-lg-11">*@
+                                        <div class="col-lg-11">*@
                                     <div class="row branchAddressContainer">
                                         <div class="form-group" style="margin-bottom:5px;display:none">
                                             <div class="col-lg-2"></div>
@@ -1537,9 +1672,9 @@ else
                             <div id="gp_panel" data-bind="visible:$root.isAdvertdashboardDealVisible()">
                                 @Html.Partial("~/Areas/Coupons/Views/Coupons/_advertDashboardDeal.cshtml")
                             </div>
-    <div class="clearfix">
+                            <div class="clearfix">
 
-    </div>
+                            </div>
 
                             <div class="next-back-btns col-lg-12" style="margin:auto;float:none !important;" data-bind="visible:!$root.isAdvertdashboardDealVisible()">
                                 <div class="form-group">
@@ -1566,11 +1701,11 @@ else
 
 
 
-    <div class="clearfix">
+                            <div class="clearfix">
 
-    </div>
+                            </div>
 
-</div>
+                        </div>
                     </div>
 
 
@@ -1709,7 +1844,7 @@ else
                 </div>
 
                 <div class="row">
-                    
+
                     <div class="pull-left" data-bind="visible:$root.IsnewCoupon()==false">
                         <div class="status_date_span" style="margin-left:0px;margin-top:0px;">
                             Last modified <span style="margin-left:3px"></span><span data-bind="dateString:$root.modifiedDate,datePattern: 'DD/MM/YYYY'">12 april 2014</span>
@@ -1719,7 +1854,7 @@ else
             </div>
 
 
-           
+
             <div class="clearfix">
             </div>
 
@@ -2395,8 +2530,7 @@ else
 <link href="~/Scripts/Rating/rating.css" rel="stylesheet" />
 <script>
     $('.rating').rating();
-        function PreviewCoupon()
-    {
+    function PreviewCoupon() {
 
         //$(".deal_group_name").html($("#txtCampaignDisplayName").val());
     }

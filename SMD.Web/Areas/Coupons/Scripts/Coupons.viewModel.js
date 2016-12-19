@@ -29,6 +29,51 @@ define("Coupons/Coupons.viewModel",
                     companyzipcode = ko.observable(),
                     CompanyName = ko.observable(),
                     langs = ko.observableArray([]),
+                    percentageDiscountDD = ko.observableArray([
+                         {
+                             "id": "0",
+                             "name": "10% Off"
+                         },
+                           {
+                               "id": "1",
+                               "name": "20% Off"
+                           },
+                     {
+                         "id": "2",
+                         "name": "25% Off"
+                     },
+                         {
+                             "id": "3",
+                             "name": "30% Off"
+                         },
+                             {
+                                 "id": "4",
+                                 "name": "40% Off"
+                             },
+                             {
+                                 "id": "5",
+                                 "name": "50% Off"
+                             },
+                             {
+                                 "id": "6",
+                                 "name": "60% Off"
+                             },
+
+                    ]),
+                     dollarAmountDisDD = ko.observableArray([
+                         {
+                             "id": "0",
+                             "name": "Extra $10 off on 3rd last day"
+                         },
+                           {
+                               "id": "1",
+                               "name": "Extra $20 off on 3rd last day"
+                           },
+                     {
+                         "id": "2",
+                         "name": "Extra $30 off on 3rd last day"
+                     },
+                     ]),
                     diveNo = ko.observable(0),
                     saveBtntext = ko.observable("Buy Now"),
                     countoryidList = [],
@@ -44,7 +89,7 @@ define("Coupons/Coupons.viewModel",
                     CouponActiveMonth = ko.observable(),
                     isShowSurveyAns = ko.observable(false),
                     hideLandingPageURl = ko.observable(false),
-                     // selected location 
+                // selected location 
                     selectedLocation = ko.observable(),
                     selectedLocationRadius = ko.observable(),
                     selectedLocationIncludeExclude = ko.observable(true),
@@ -57,7 +102,7 @@ define("Coupons/Coupons.viewModel",
                     SelectedTextField = ko.observable(),
                     BranchLocationId = ko.observable(),
                     isflage = ko.observable(false),
-                    //caption variablels 
+                //caption variablels 
 
                 //  Buttons visible properties
                     isEditCampaign = ko.observable(false),
@@ -91,14 +136,14 @@ define("Coupons/Coupons.viewModel",
                     isDetailEditorVisible = ko.observable(false),
                     isBtnSaveDraftVisible = ko.observable(false),
                     isFromEdit = ko.observable(false),
-                     //audience reach
+                //audience reach
                     reachedAudience = ko.observable(0),
-                    //total audience
+                //total audience
                     totalAudience = ko.observable(0),
-                    // audience reach mode 
+                // audience reach mode 
                     audienceReachMode = ko.observable("1"),
                     errorList = ko.observableArray([]),
-                      // unique country list used to bind location dropdown
+                // unique country list used to bind location dropdown
                     selectedQuestionCountryList = ko.observableArray([]),
                     educations = ko.observableArray([]),
                     professions = ko.observableArray([]),
@@ -2976,7 +3021,9 @@ getfreeCouponCount = function () {
                     modifiedDate: modifiedDate,
                     onSaveBtnLabel: onSaveBtnLabel,
                     saveBtntext: saveBtntext,
-                    isflage: isflage
+                    isflage: isflage,
+                    percentageDiscountDD: percentageDiscountDD,
+                    dollarAmountDisDD: dollarAmountDisDD
                 };
             })()
         };
