@@ -310,8 +310,12 @@ namespace SMD.Implementation.Services
             //performance emails
             registry.Schedule(() => EmailManagerService.SendCampaignPerformanceEmails()).ToRunEvery(0).Weeks().On(DayOfWeek.Monday).At(9, 0);
 
+            //deal expiry just now
+            registry.Schedule(() => EmailManagerService.SendDealExpiredNotificationToAdvertiser()).ToRunNow().AndEvery(15).Minutes();
 
-            registry.Schedule(() => EmailManagerService.SendDealExpiredNotificationToAdvertiser()).ToRunEvery(0).Weeks().On(DayOfWeek.Monday).At(9, 0);
+
+            //deal expiry 3 days before
+            registry.Schedule(() => EmailManagerService.Send3DaysDealExpiredNotificationToAdvertiser()).ToRunNow().AndEvery(15).Minutes();
 
 
 

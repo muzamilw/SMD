@@ -32,7 +32,7 @@
 
                         <div class="pull-left" data-bind="with: $root.selectedQuestion" style="margin-left:0px;margin-top: 18px;">
                             <div class="pull-left" style="margin-top:1px;">
-                                <span style="font-size:23px;color:white;" data-bind="text:StatusValue()">Draft</span>
+                                <span style="font-size:23px;color:white;" data-bind="text:StatusValue(),visible:$root.isflageClose()==false">Draft</span>
                             </div>
                         </div>
                         <div style="margin-right:-9px !important" >

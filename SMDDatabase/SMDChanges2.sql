@@ -3503,3 +3503,205 @@ ADD  IsPerSaving3days Bit  NULL,
   IsDollarSaving3days Bit Null,
   IsDollarSaving2days Bit Null,
   IsDollarSavingLastday Bit Null
+
+
+
+
+  ALTER TABLE Coupon
+ADD isSaveBtnLable int Null
+
+
+
+
+
+
+
+GO
+
+/****** Object:  Table [dbo].[UserGameResponse]    Script Date: 12/16/2016 5:46:33 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[UserGameResponse](
+	[UserGameResponseId] [bigint] NOT NULL,
+	[UserId] [nvarchar](128) NULL,
+	[GameId] [bigint] NULL,
+	[ResponseDateTime] [datetime] NULL,
+	[PlayTime] [float] NULL,
+	[Score] [int] NULL,
+	[Accuracy] [float] NULL,
+	[AdCampaignResponseID] [int] NULL,
+ CONSTRAINT [PK_UserGameResponse] PRIMARY KEY CLUSTERED 
+(
+	[UserGameResponseId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[UserGameResponse]  WITH CHECK ADD  CONSTRAINT [FK_UserGameResponse_AdCampaignResponse] FOREIGN KEY([AdCampaignResponseID])
+REFERENCES [dbo].[AdCampaignResponse] ([ResponseID])
+GO
+
+ALTER TABLE [dbo].[UserGameResponse] CHECK CONSTRAINT [FK_UserGameResponse_AdCampaignResponse]
+GO
+
+ALTER TABLE [dbo].[UserGameResponse]  WITH CHECK ADD  CONSTRAINT [FK_UserGameResponse_AspNetUsers] FOREIGN KEY([UserId])
+REFERENCES [dbo].[AspNetUsers] ([Id])
+GO
+
+ALTER TABLE [dbo].[UserGameResponse] CHECK CONSTRAINT [FK_UserGameResponse_AspNetUsers]
+GO
+
+ALTER TABLE [dbo].[UserGameResponse]  WITH CHECK ADD  CONSTRAINT [FK_UserGameResponse_Game] FOREIGN KEY([GameId])
+REFERENCES [dbo].[Game] ([GameId])
+GO
+
+ALTER TABLE [dbo].[UserGameResponse] CHECK CONSTRAINT [FK_UserGameResponse_Game]
+GO
+
+
+
+
+
+
+
+/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.AspNetUsers SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.AdCampaignResponse SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.Game ADD
+	GameInstructions nvarchar(MAX) NULL
+GO
+ALTER TABLE dbo.Game SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+EXECUTE sp_rename N'dbo.UserGameResponse.ResponseId', N'Tmp_UserGameResponseId', 'COLUMN' 
+GO
+EXECUTE sp_rename N'dbo.UserGameResponse.Tmp_UserGameResponseId', N'UserGameResponseId', 'COLUMN' 
+GO
+ALTER TABLE dbo.UserGameResponse ADD
+	AdCampaignResponseID int NULL
+GO
+ALTER TABLE dbo.UserGameResponse ADD CONSTRAINT
+	FK_UserGameResponse_Game FOREIGN KEY
+	(
+	GameId
+	) REFERENCES dbo.Game
+	(
+	GameId
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+ALTER TABLE dbo.UserGameResponse ADD CONSTRAINT
+	FK_UserGameResponse_AspNetUsers FOREIGN KEY
+	(
+	UserId
+	) REFERENCES dbo.AspNetUsers
+	(
+	Id
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+ALTER TABLE dbo.UserGameResponse ADD CONSTRAINT
+	FK_UserGameResponse_AdCampaignResponse FOREIGN KEY
+	(
+	AdCampaignResponseID
+	) REFERENCES dbo.AdCampaignResponse
+	(
+	ResponseID
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+ALTER TABLE dbo.UserGameResponse SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
+
+
+
+
+/****** Object:  Table [dbo].[GameExerciseCategoryList]    Script Date: 12/16/2016 6:18:53 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[GameExerciseCategoryList](
+	[ExerciseCategoryId] [int] IDENTITY(1,1) NOT NULL,
+	[ExerciseCategoryName] [nvarchar](150) NULL,
+ CONSTRAINT [PK_GameExerciseCategory] PRIMARY KEY CLUSTERED 
+(
+	[ExerciseCategoryId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+
+
+
+/****** Object:  Table [dbo].[GameExerciseCategories]    Script Date: 12/16/2016 6:19:08 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[GameExerciseCategories](
+	[GameId] [bigint] NOT NULL,
+	[ExerciseCategoryId] [int] NOT NULL,
+	[CategoryContribution] [int] NULL,
+ CONSTRAINT [PK_GameExerciseCategories] PRIMARY KEY CLUSTERED 
+(
+	[GameId] ASC,
+	[ExerciseCategoryId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[GameExerciseCategories]  WITH CHECK ADD  CONSTRAINT [FK_GameExerciseCategories_Game] FOREIGN KEY([GameId])
+REFERENCES [dbo].[Game] ([GameId])
+GO
+
+ALTER TABLE [dbo].[GameExerciseCategories] CHECK CONSTRAINT [FK_GameExerciseCategories_Game]
+GO
+
+ALTER TABLE [dbo].[GameExerciseCategories]  WITH CHECK ADD  CONSTRAINT [FK_GameExerciseCategories_GameExerciseCategory] FOREIGN KEY([ExerciseCategoryId])
+REFERENCES [dbo].[GameExerciseCategoryList] ([ExerciseCategoryId])
+GO
+
+ALTER TABLE [dbo].[GameExerciseCategories] CHECK CONSTRAINT [FK_GameExerciseCategories_GameExerciseCategory]
+GO
+
+
+
+

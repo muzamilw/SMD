@@ -114,5 +114,7 @@ namespace SMD.Interfaces.Services
 
         void SendDealExpiredNotificationToAdvertiser();
 
+        void Send3DaysDealExpiredNotificationToAdvertiser();
+
     }
 }

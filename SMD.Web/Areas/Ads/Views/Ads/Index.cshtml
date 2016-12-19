@@ -19,7 +19,7 @@ else
             <div class="col-lg-3" style="margin-left:-3px !important;">
                 <div class="pull-left">
                     <img id="headlabel" class="vid_image pull-left" data-bind="attr: { src: $root.StatusCodeImage }" src="/Content/Images/Videos_small.png">
-                    <label id="headlabel" class="home_pagefontsize" style="font-size:24px!important;color:#fff!important;margin-top:11px;margin-left:5px;" data-bind="text:headText"></label>
+                    <label id="headlabel1" class="home_pagefontsize" style="font-size:24px!important;color:#fff!important;margin-top:11px;margin-left:5px;" data-bind="text:headText"></label>
                 </div>
             </div>
             <div class="col-lg-7">
@@ -30,7 +30,7 @@ else
             </div>
             <div class="col-lg-2">
                 <div class="pull-right">
-                    <img class="pull-right closecls" src="~/Content/Images/Close_Button.png" style="margin-top:15px;margin-right:4px;" onclick="GotoHome();" />
+                    <img class="pull-right closecls" src="~/Content/Images/Close_Button.png" style="margin-top:18px;margin-right:4px;" onclick="GotoHome();" />
                 </div>
 
                 <div class="clearfix;"></div>
@@ -233,17 +233,17 @@ else
         
         </td>
         <td class="col-sm-1" >
-            <div style="color:red; font-size:larger;font-weight: bold;"><span data-bind="text:  SurveyAnsweredAllTime()>0 ? ((viewCountAllTime()/clickThroughsAllTime())*100).toFixed(2):0"></span>%</div>
+            <div style="color:red; font-size:larger;font-weight: bold;"><span data-bind="text:  viewCountAllTime()>0 ? ((clickThroughsAllTime()/viewCountAllTime())*100).toFixed(2):0"></span>%</div>
            
         </td>
 
         <td class="col-sm-1">
-            <div style="color:blue; font-size:larger;font-weight: bold;"><span data-bind="text: SurveyAnsweredAllTime()>0 ? ((viewCountAllTime()/SurveyAnsweredAllTime())*100).toFixed(2):0"></span>%</div>
+            <div style="color:blue; font-size:larger;font-weight: bold;"><span data-bind="text: viewCountAllTime()>0 ? ((SurveyAnsweredAllTime()/viewCountAllTime())*100).toFixed(2):0"></span>%</div>
            
         </td>
 
         <td class="col-sm-3">
-            
+            <!-- ko if: VerifyQuestion() != null -->
                             <div style="font-size:small" data-bind="text:VerifyQuestion()"></div>
                        <br />
             <!-- ko if: Answer3() != null -->
@@ -251,6 +251,7 @@ else
             <!-- /ko -->
             <!-- ko if: Answer3() == null -->
             <div data-bind="morris: {type: 'Donut', data: [{label: Answer1(), value: Answer1Stats()},{label: Answer2(), value: Answer2Stats()}], resize:true, colors: ['green', 'blue','red' ]  }" style="height:230px;cursor:pointer;"></div>       
+            <!-- /ko -->
             <!-- /ko -->
         </td>
 

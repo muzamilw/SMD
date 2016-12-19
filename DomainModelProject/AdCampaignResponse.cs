@@ -14,6 +14,11 @@ namespace DomainModelProject
     
     public partial class AdCampaignResponse
     {
+        public AdCampaignResponse()
+        {
+            this.UserGameResponses = new HashSet<UserGameResponse>();
+        }
+    
         public int ResponseID { get; set; }
         public Nullable<long> CampaignID { get; set; }
         public Nullable<System.DateTime> CreatedDateTime { get; set; }
@@ -39,5 +44,6 @@ namespace DomainModelProject
         public virtual AdCampaignResponse AdCampaignResponse2 { get; set; }
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual Company Company { get; set; }
+        public virtual ICollection<UserGameResponse> UserGameResponses { get; set; }
     }
 }
