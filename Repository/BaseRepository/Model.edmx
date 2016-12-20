@@ -511,6 +511,8 @@
           <Property Name="IsDollarSaving2days" Type="bit" />
           <Property Name="IsDollarSavingLastday" Type="bit" />
           <Property Name="isSaveBtnLable" Type="int" />
+          <Property Name="DealFirstDiscountType" Type="int" />
+          <Property Name="DealEndingDiscountType" Type="int" />
         </EntityType>
         <EntityType Name="CouponCategories">
           <Key>
@@ -543,6 +545,13 @@
           <Property Name="OptionUrl" Type="nvarchar" MaxLength="500" />
           <Property Name="ExpiryDate" Type="datetime" />
           <Property Name="URL" Type="varchar(max)" />
+          <Property Name="PromoCode1" Type="varchar" MaxLength="100" />
+          <Property Name="PromoCode2" Type="varchar" MaxLength="100" />
+          <Property Name="PromoCode3" Type="varchar" MaxLength="100" />
+          <Property Name="PromoCode4" Type="varchar" MaxLength="100" />
+          <Property Name="VoucherCode2" Type="varchar" MaxLength="100" />
+          <Property Name="VoucherCode3" Type="varchar" MaxLength="100" />
+          <Property Name="VoucherCode4" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="CouponRatingReview">
           <Key>
@@ -642,6 +651,7 @@
           <Property Name="GameUrl" Type="nvarchar" MaxLength="200" />
           <Property Name="GameSmallImage" Type="nvarchar" MaxLength="500" />
           <Property Name="GameLargeImage" Type="nvarchar" MaxLength="500" />
+          <Property Name="GameInstructions" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Industry">
           <Key>
@@ -1237,6 +1247,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_Coupons' does not have a primary key
           <Property Name="IsDollarSaving2days" Type="bit" />
           <Property Name="IsDollarSavingLastday" Type="bit" />
           <Property Name="isSaveBtnLable" Type="int" />
+          <Property Name="DealFirstDiscountType" Type="int" />
+          <Property Name="DealEndingDiscountType" Type="int" />
           <Property Name="Categories" Type="nvarchar(max)" />
           <Property Name="CurrencyCode" Type="nvarchar" MaxLength="50" />
           <Property Name="CurrencySymbol" Type="nvarchar" MaxLength="50" />
@@ -3040,6 +3052,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
     [vw_Coupons].[IsDollarSaving2days] AS [IsDollarSaving2days], 
     [vw_Coupons].[IsDollarSavingLastday] AS [IsDollarSavingLastday], 
     [vw_Coupons].[isSaveBtnLable] AS [isSaveBtnLable], 
+    [vw_Coupons].[DealFirstDiscountType] AS [DealFirstDiscountType], 
+    [vw_Coupons].[DealEndingDiscountType] AS [DealEndingDiscountType], 
     [vw_Coupons].[Categories] AS [Categories], 
     [vw_Coupons].[CurrencyCode] AS [CurrencyCode], 
     [vw_Coupons].[CurrencySymbol] AS [CurrencySymbol]
@@ -4996,6 +5010,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="GameUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="GameSmallImage" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="GameLargeImage" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="GameInstructions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="TransactionLog">
           <Key>
@@ -6098,6 +6113,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="IsDollarSaving2days" Type="Boolean" />
           <Property Name="IsDollarSavingLastday" Type="Boolean" />
           <Property Name="isSaveBtnLable" Type="Int32" />
+          <Property Name="DealFirstDiscountType" Type="Int32" />
+          <Property Name="DealEndingDiscountType" Type="Int32" />
         </EntityType>
         <Association Name="FK_CompanyBranch_BranchCategory">
           <End Type="DomainModels.BranchCategory" Role="BranchCategory" Multiplicity="0..1" />
@@ -6711,6 +6728,13 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="VoucherCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="ExpiryDate" Type="DateTime" Precision="3" />
           <Property Name="URL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PromoCode1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PromoCode2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PromoCode3" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PromoCode4" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="VoucherCode2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="VoucherCode3" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="VoucherCode4" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           </EntityType>
         <Association Name="FK_CouponPriceOption_Coupon">
           <End Type="DomainModels.Coupon" Role="Coupon" Multiplicity="0..1" />
@@ -7123,6 +7147,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="IsDollarSaving2days" Type="Boolean" />
           <Property Name="IsDollarSavingLastday" Type="Boolean" />
           <Property Name="isSaveBtnLable" Type="Int32" />
+          <Property Name="DealFirstDiscountType" Type="Int32" />
+          <Property Name="DealEndingDiscountType" Type="Int32" />
         </EntityType>
         <Association Name="FK_Country_Currency">
           <End Type="DomainModels.Currency" Role="Currency" Multiplicity="0..1" />
@@ -8200,6 +8226,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="Games">
             <EntityTypeMapping TypeName="DomainModels.Game">
               <MappingFragment StoreEntitySet="Game">
+                <ScalarProperty Name="GameInstructions" ColumnName="GameInstructions" />
                 <ScalarProperty Name="GameLargeImage" ColumnName="GameLargeImage" />
                 <ScalarProperty Name="GameSmallImage" ColumnName="GameSmallImage" />
                 <ScalarProperty Name="GameUrl" ColumnName="GameUrl" />
@@ -8763,6 +8790,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="Coupons">
             <EntityTypeMapping TypeName="DomainModels.Coupon">
               <MappingFragment StoreEntitySet="Coupon">
+                <ScalarProperty Name="DealEndingDiscountType" ColumnName="DealEndingDiscountType" />
+                <ScalarProperty Name="DealFirstDiscountType" ColumnName="DealFirstDiscountType" />
                 <ScalarProperty Name="isSaveBtnLable" ColumnName="isSaveBtnLable" />
                 <ScalarProperty Name="IsDollarSavingLastday" ColumnName="IsDollarSavingLastday" />
                 <ScalarProperty Name="IsDollarSaving2days" ColumnName="IsDollarSaving2days" />
@@ -9230,6 +9259,13 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="CouponPriceOptions">
             <EntityTypeMapping TypeName="DomainModels.CouponPriceOption">
               <MappingFragment StoreEntitySet="CouponPriceOption">
+                <ScalarProperty Name="VoucherCode4" ColumnName="VoucherCode4" />
+                <ScalarProperty Name="VoucherCode3" ColumnName="VoucherCode3" />
+                <ScalarProperty Name="VoucherCode2" ColumnName="VoucherCode2" />
+                <ScalarProperty Name="PromoCode4" ColumnName="PromoCode4" />
+                <ScalarProperty Name="PromoCode3" ColumnName="PromoCode3" />
+                <ScalarProperty Name="PromoCode2" ColumnName="PromoCode2" />
+                <ScalarProperty Name="PromoCode1" ColumnName="PromoCode1" />
                 <ScalarProperty Name="URL" ColumnName="URL" />
                 <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
                 <ScalarProperty Name="VoucherCode" ColumnName="VoucherCode" />
@@ -9315,6 +9351,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="vw_Coupons">
             <EntityTypeMapping TypeName="DomainModels.vw_Coupons">
               <MappingFragment StoreEntitySet="vw_Coupons">
+                <ScalarProperty Name="DealEndingDiscountType" ColumnName="DealEndingDiscountType" />
+                <ScalarProperty Name="DealFirstDiscountType" ColumnName="DealFirstDiscountType" />
                 <ScalarProperty Name="isSaveBtnLable" ColumnName="isSaveBtnLable" />
                 <ScalarProperty Name="IsDollarSavingLastday" ColumnName="IsDollarSavingLastday" />
                 <ScalarProperty Name="IsDollarSaving2days" ColumnName="IsDollarSaving2days" />

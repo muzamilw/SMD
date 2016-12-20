@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetsFC65126FB9AC330F4E25897A08DCF35431933B7A7B3B8D015226EEFB92FFE2AE))]
+[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets0533B5E820B116C35808B9EBEBEB3B437E364EA97E07A578397B329739F26171))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -17,18 +17,18 @@ namespace Edm_EntityMappingGeneratedViews
     /// <Summary>
     /// The type contains views for EntitySets and AssociationSets that were generated at design time.
     /// </Summary>
-    public sealed class ViewsForBaseEntitySetsFC65126FB9AC330F4E25897A08DCF35431933B7A7B3B8D015226EEFB92FFE2AE : System.Data.Mapping.EntityViewContainer
+    public sealed class ViewsForBaseEntitySets0533B5E820B116C35808B9EBEBEB3B437E364EA97E07A578397B329739F26171 : System.Data.Mapping.EntityViewContainer
     {
         
         /// <Summary>
         /// The constructor stores the views for the extents and also the hash values generated based on the metadata and mapping closure and views.
         /// </Summary>
-        public ViewsForBaseEntitySetsFC65126FB9AC330F4E25897A08DCF35431933B7A7B3B8D015226EEFB92FFE2AE()
+        public ViewsForBaseEntitySets0533B5E820B116C35808B9EBEBEB3B437E364EA97E07A578397B329739F26171()
         {
             this.EdmEntityContainerName = "BaseDbContext";
             this.StoreEntityContainerName = "SMDModelStoreContainer";
-            this.HashOverMappingClosure = "a4bdd83c9660057592c99dd3b176334ab94101442779c221862466dd0d6e5def";
-            this.HashOverAllExtentViews = "41c5c06ae8c979c2c5085746adc1144fcf64700718dba50e1013983922605870";
+            this.HashOverMappingClosure = "d53a4bdb510d629bf89ef5fe18e439cfaaea34236484b534a2b3eef39d2350aa";
+            this.HashOverAllExtentViews = "3df3ef3b6007795a31211005fa2b0c874bfa6894ec8d892bede3e4ef91a12728";
             this.ViewCount = 138;
         }
         
@@ -1539,7 +1539,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView32()
         {
-            System.Text.StringBuilder viewString = new System.Text.StringBuilder(7312);
+            System.Text.StringBuilder viewString = new System.Text.StringBuilder(7523);
             viewString.Append("\r\n    SELECT VALUE -- Constructing Coupon\r\n        [SMDModel.Store.Coupon](T1.Co");
             viewString.Append("upon_CouponId, T1.Coupon_LanguageId, T1.Coupon_UserId, T1.Coupon_CouponTitle, T1");
             viewString.Append(".Coupon_SearchKeywords, T1.Coupon_Status, T1.Coupon_Archived, T1.Coupon_Approved");
@@ -1568,70 +1568,73 @@ namespace Edm_EntityMappingGeneratedViews
             viewString.Append("oupon_IsShowMap, T1.Coupon_IsShowyouTube, T1.Coupon_IsShowAboutUs, T1.Coupon_IsM");
             viewString.Append("arketingStories, T1.Coupon_IsPerSaving3days, T1.Coupon_IsPerSaving2days, T1.Coup");
             viewString.Append("on_IsPerSavingLastday, T1.Coupon_IsDollarSaving3days, T1.Coupon_IsDollarSaving2d");
-            viewString.Append("ays, T1.Coupon_IsDollarSavingLastday, T1.Coupon_isSaveBtnLable)\r\n    FROM (\r\n   ");
-            viewString.Append("     SELECT \r\n            T.CouponId AS Coupon_CouponId, \r\n            T.Languag");
-            viewString.Append("eId AS Coupon_LanguageId, \r\n            T.UserId AS Coupon_UserId, \r\n           ");
-            viewString.Append(" T.CouponTitle AS Coupon_CouponTitle, \r\n            T.SearchKeywords AS Coupon_S");
-            viewString.Append("earchKeywords, \r\n            T.Status AS Coupon_Status, \r\n            T.Archived");
-            viewString.Append(" AS Coupon_Archived, \r\n            T.Approved AS Coupon_Approved, \r\n            ");
-            viewString.Append("T.ApprovedBy AS Coupon_ApprovedBy, \r\n            T.ApprovalDateTime AS Coupon_Ap");
-            viewString.Append("provalDateTime, \r\n            T.CreatedDateTime AS Coupon_CreatedDateTime, \r\n   ");
-            viewString.Append("         T.CreatedBy AS Coupon_CreatedBy, \r\n            T.ModifiedDateTime AS Co");
-            viewString.Append("upon_ModifiedDateTime, \r\n            T.ModifiedBy AS Coupon_ModifiedBy, \r\n      ");
-            viewString.Append("      T.RejectedReason AS Coupon_RejectedReason, \r\n            T.Rejecteddatetim");
-            viewString.Append("e AS Coupon_Rejecteddatetime, \r\n            T.RejectedBy AS Coupon_RejectedBy, \r");
-            viewString.Append("\n            T.CurrencyId AS Coupon_CurrencyId, \r\n            T.Price AS Coupon_");
-            viewString.Append("Price, \r\n            T.Savings AS Coupon_Savings, \r\n            T.SwapCost AS Co");
-            viewString.Append("upon_SwapCost, \r\n            T.CouponViewCount AS Coupon_CouponViewCount, \r\n    ");
-            viewString.Append("        T.CouponIssuedCount AS Coupon_CouponIssuedCount, \r\n            T.CouponR");
-            viewString.Append("edeemedCount AS Coupon_CouponRedeemedCount, \r\n            T.CouponQtyPerUser AS ");
-            viewString.Append("Coupon_CouponQtyPerUser, \r\n            T.CouponListingMode AS Coupon_CouponListi");
-            viewString.Append("ngMode, \r\n            T.CompanyId AS Coupon_CompanyId, \r\n            T.CouponAct");
-            viewString.Append("iveMonth AS Coupon_CouponActiveMonth, \r\n            T.CouponActiveYear AS Coupon");
-            viewString.Append("_CouponActiveYear, \r\n            T.CouponExpirydate AS Coupon_CouponExpirydate, ");
-            viewString.Append("\r\n            T.couponImage1 AS Coupon_couponImage1, \r\n            T.CouponImage");
-            viewString.Append("2 AS Coupon_CouponImage2, \r\n            T.CouponImage3 AS Coupon_CouponImage3, \r");
-            viewString.Append("\n            T.LogoUrl AS Coupon_LogoUrl, \r\n            T.HighlightLine1 AS Coup");
-            viewString.Append("on_HighlightLine1, \r\n            T.HighlightLine2 AS Coupon_HighlightLine2, \r\n  ");
-            viewString.Append("          T.HighlightLine3 AS Coupon_HighlightLine3, \r\n            T.HighlightLi");
-            viewString.Append("ne4 AS Coupon_HighlightLine4, \r\n            T.HighlightLine5 AS Coupon_Highlight");
-            viewString.Append("Line5, \r\n            T.FinePrintLine1 AS Coupon_FinePrintLine1, \r\n            T.");
-            viewString.Append("FinePrintLine2 AS Coupon_FinePrintLine2, \r\n            T.FinePrintLine3 AS Coupo");
-            viewString.Append("n_FinePrintLine3, \r\n            T.FinePrintLine4 AS Coupon_FinePrintLine4, \r\n   ");
-            viewString.Append("         T.FinePrintLine5 AS Coupon_FinePrintLine5, \r\n            T.LocationBran");
-            viewString.Append("chId AS Coupon_LocationBranchId, \r\n            T.LocationTitle AS Coupon_Locatio");
-            viewString.Append("nTitle, \r\n            T.LocationLine1 AS Coupon_LocationLine1, \r\n            T.L");
-            viewString.Append("ocationLine2 AS Coupon_LocationLine2, \r\n            T.LocationCity AS Coupon_Loc");
-            viewString.Append("ationCity, \r\n            T.LocationState AS Coupon_LocationState, \r\n            ");
-            viewString.Append("T.LocationZipCode AS Coupon_LocationZipCode, \r\n            T.LocationLAT AS Coup");
-            viewString.Append("on_LocationLAT, \r\n            T.LocationLON AS Coupon_LocationLON, \r\n           ");
-            viewString.Append(" T.LocationPhone AS Coupon_LocationPhone, \r\n            T.GeographyColumn AS Cou");
-            viewString.Append("pon_GeographyColumn, \r\n            T.HowToRedeemLine1 AS Coupon_HowToRedeemLine1");
-            viewString.Append(", \r\n            T.HowToRedeemLine2 AS Coupon_HowToRedeemLine2, \r\n            T.H");
-            viewString.Append("owToRedeemLine3 AS Coupon_HowToRedeemLine3, \r\n            T.HowToRedeemLine4 AS ");
-            viewString.Append("Coupon_HowToRedeemLine4, \r\n            T.HowToRedeemLine5 AS Coupon_HowToRedeemL");
-            viewString.Append("ine5, \r\n            T.SubmissionDateTime AS Coupon_SubmissionDateTime, \r\n       ");
-            viewString.Append("     T.LocationCountryId AS Coupon_LocationCountryId, \r\n            T.CouponStar");
-            viewString.Append("tDate AS Coupon_CouponStartDate, \r\n            T.CouponEndDate AS Coupon_CouponE");
-            viewString.Append("ndDate, \r\n            T.Priority AS Coupon_Priority, \r\n            T.ShowBuyitBt");
-            viewString.Append("n AS Coupon_ShowBuyitBtn, \r\n            T.BuyitLandingPageUrl AS Coupon_BuyitLan");
-            viewString.Append("dingPageUrl, \r\n            T.BuyitBtnLabel AS Coupon_BuyitBtnLabel, \r\n          ");
-            viewString.Append("  T.YoutubeLink AS Coupon_YoutubeLink, \r\n            T.CouponImage4 AS Coupon_Co");
-            viewString.Append("uponImage4, \r\n            T.CouponImage5 AS Coupon_CouponImage5, \r\n            T");
-            viewString.Append(".CouponImage6 AS Coupon_CouponImage6, \r\n            T.IsPaymentCollected AS Coup");
-            viewString.Append("on_IsPaymentCollected, \r\n            T.PaymentDate AS Coupon_PaymentDate, \r\n    ");
-            viewString.Append("        T.IsShowReviews AS Coupon_IsShowReviews, \r\n            T.IsShowAddress A");
-            viewString.Append("S Coupon_IsShowAddress, \r\n            T.IsShowPhoneNo AS Coupon_IsShowPhoneNo, \r");
-            viewString.Append("\n            T.IsShowMap AS Coupon_IsShowMap, \r\n            T.IsShowyouTube AS C");
-            viewString.Append("oupon_IsShowyouTube, \r\n            T.IsShowAboutUs AS Coupon_IsShowAboutUs, \r\n  ");
-            viewString.Append("          T.IsMarketingStories AS Coupon_IsMarketingStories, \r\n            T.IsP");
-            viewString.Append("erSaving3days AS Coupon_IsPerSaving3days, \r\n            T.IsPerSaving2days AS Co");
-            viewString.Append("upon_IsPerSaving2days, \r\n            T.IsPerSavingLastday AS Coupon_IsPerSavingL");
-            viewString.Append("astday, \r\n            T.IsDollarSaving3days AS Coupon_IsDollarSaving3days, \r\n   ");
-            viewString.Append("         T.IsDollarSaving2days AS Coupon_IsDollarSaving2days, \r\n            T.Is");
-            viewString.Append("DollarSavingLastday AS Coupon_IsDollarSavingLastday, \r\n            T.isSaveBtnLa");
-            viewString.Append("ble AS Coupon_isSaveBtnLable, \r\n            True AS _from0\r\n        FROM BaseDbC");
-            viewString.Append("ontext.Coupons AS T\r\n    ) AS T1");
+            viewString.Append("ays, T1.Coupon_IsDollarSavingLastday, T1.Coupon_isSaveBtnLable, T1.Coupon_DealFi");
+            viewString.Append("rstDiscountType, T1.Coupon_DealEndingDiscountType)\r\n    FROM (\r\n        SELECT \r");
+            viewString.Append("\n            T.CouponId AS Coupon_CouponId, \r\n            T.LanguageId AS Coupon");
+            viewString.Append("_LanguageId, \r\n            T.UserId AS Coupon_UserId, \r\n            T.CouponTitl");
+            viewString.Append("e AS Coupon_CouponTitle, \r\n            T.SearchKeywords AS Coupon_SearchKeywords");
+            viewString.Append(", \r\n            T.Status AS Coupon_Status, \r\n            T.Archived AS Coupon_Ar");
+            viewString.Append("chived, \r\n            T.Approved AS Coupon_Approved, \r\n            T.ApprovedBy ");
+            viewString.Append("AS Coupon_ApprovedBy, \r\n            T.ApprovalDateTime AS Coupon_ApprovalDateTim");
+            viewString.Append("e, \r\n            T.CreatedDateTime AS Coupon_CreatedDateTime, \r\n            T.Cr");
+            viewString.Append("eatedBy AS Coupon_CreatedBy, \r\n            T.ModifiedDateTime AS Coupon_Modified");
+            viewString.Append("DateTime, \r\n            T.ModifiedBy AS Coupon_ModifiedBy, \r\n            T.Rejec");
+            viewString.Append("tedReason AS Coupon_RejectedReason, \r\n            T.Rejecteddatetime AS Coupon_R");
+            viewString.Append("ejecteddatetime, \r\n            T.RejectedBy AS Coupon_RejectedBy, \r\n            ");
+            viewString.Append("T.CurrencyId AS Coupon_CurrencyId, \r\n            T.Price AS Coupon_Price, \r\n    ");
+            viewString.Append("        T.Savings AS Coupon_Savings, \r\n            T.SwapCost AS Coupon_SwapCost");
+            viewString.Append(", \r\n            T.CouponViewCount AS Coupon_CouponViewCount, \r\n            T.Cou");
+            viewString.Append("ponIssuedCount AS Coupon_CouponIssuedCount, \r\n            T.CouponRedeemedCount ");
+            viewString.Append("AS Coupon_CouponRedeemedCount, \r\n            T.CouponQtyPerUser AS Coupon_Coupon");
+            viewString.Append("QtyPerUser, \r\n            T.CouponListingMode AS Coupon_CouponListingMode, \r\n   ");
+            viewString.Append("         T.CompanyId AS Coupon_CompanyId, \r\n            T.CouponActiveMonth AS C");
+            viewString.Append("oupon_CouponActiveMonth, \r\n            T.CouponActiveYear AS Coupon_CouponActive");
+            viewString.Append("Year, \r\n            T.CouponExpirydate AS Coupon_CouponExpirydate, \r\n           ");
+            viewString.Append(" T.couponImage1 AS Coupon_couponImage1, \r\n            T.CouponImage2 AS Coupon_C");
+            viewString.Append("ouponImage2, \r\n            T.CouponImage3 AS Coupon_CouponImage3, \r\n            ");
+            viewString.Append("T.LogoUrl AS Coupon_LogoUrl, \r\n            T.HighlightLine1 AS Coupon_HighlightL");
+            viewString.Append("ine1, \r\n            T.HighlightLine2 AS Coupon_HighlightLine2, \r\n            T.H");
+            viewString.Append("ighlightLine3 AS Coupon_HighlightLine3, \r\n            T.HighlightLine4 AS Coupon");
+            viewString.Append("_HighlightLine4, \r\n            T.HighlightLine5 AS Coupon_HighlightLine5, \r\n    ");
+            viewString.Append("        T.FinePrintLine1 AS Coupon_FinePrintLine1, \r\n            T.FinePrintLine");
+            viewString.Append("2 AS Coupon_FinePrintLine2, \r\n            T.FinePrintLine3 AS Coupon_FinePrintLi");
+            viewString.Append("ne3, \r\n            T.FinePrintLine4 AS Coupon_FinePrintLine4, \r\n            T.Fi");
+            viewString.Append("nePrintLine5 AS Coupon_FinePrintLine5, \r\n            T.LocationBranchId AS Coupo");
+            viewString.Append("n_LocationBranchId, \r\n            T.LocationTitle AS Coupon_LocationTitle, \r\n   ");
+            viewString.Append("         T.LocationLine1 AS Coupon_LocationLine1, \r\n            T.LocationLine2 ");
+            viewString.Append("AS Coupon_LocationLine2, \r\n            T.LocationCity AS Coupon_LocationCity, \r\n");
+            viewString.Append("            T.LocationState AS Coupon_LocationState, \r\n            T.LocationZip");
+            viewString.Append("Code AS Coupon_LocationZipCode, \r\n            T.LocationLAT AS Coupon_LocationLA");
+            viewString.Append("T, \r\n            T.LocationLON AS Coupon_LocationLON, \r\n            T.LocationPh");
+            viewString.Append("one AS Coupon_LocationPhone, \r\n            T.GeographyColumn AS Coupon_Geography");
+            viewString.Append("Column, \r\n            T.HowToRedeemLine1 AS Coupon_HowToRedeemLine1, \r\n         ");
+            viewString.Append("   T.HowToRedeemLine2 AS Coupon_HowToRedeemLine2, \r\n            T.HowToRedeemLin");
+            viewString.Append("e3 AS Coupon_HowToRedeemLine3, \r\n            T.HowToRedeemLine4 AS Coupon_HowToR");
+            viewString.Append("edeemLine4, \r\n            T.HowToRedeemLine5 AS Coupon_HowToRedeemLine5, \r\n     ");
+            viewString.Append("       T.SubmissionDateTime AS Coupon_SubmissionDateTime, \r\n            T.Locati");
+            viewString.Append("onCountryId AS Coupon_LocationCountryId, \r\n            T.CouponStartDate AS Coup");
+            viewString.Append("on_CouponStartDate, \r\n            T.CouponEndDate AS Coupon_CouponEndDate, \r\n   ");
+            viewString.Append("         T.Priority AS Coupon_Priority, \r\n            T.ShowBuyitBtn AS Coupon_S");
+            viewString.Append("howBuyitBtn, \r\n            T.BuyitLandingPageUrl AS Coupon_BuyitLandingPageUrl, ");
+            viewString.Append("\r\n            T.BuyitBtnLabel AS Coupon_BuyitBtnLabel, \r\n            T.YoutubeLi");
+            viewString.Append("nk AS Coupon_YoutubeLink, \r\n            T.CouponImage4 AS Coupon_CouponImage4, \r");
+            viewString.Append("\n            T.CouponImage5 AS Coupon_CouponImage5, \r\n            T.CouponImage6");
+            viewString.Append(" AS Coupon_CouponImage6, \r\n            T.IsPaymentCollected AS Coupon_IsPaymentC");
+            viewString.Append("ollected, \r\n            T.PaymentDate AS Coupon_PaymentDate, \r\n            T.IsS");
+            viewString.Append("howReviews AS Coupon_IsShowReviews, \r\n            T.IsShowAddress AS Coupon_IsSh");
+            viewString.Append("owAddress, \r\n            T.IsShowPhoneNo AS Coupon_IsShowPhoneNo, \r\n            ");
+            viewString.Append("T.IsShowMap AS Coupon_IsShowMap, \r\n            T.IsShowyouTube AS Coupon_IsShowy");
+            viewString.Append("ouTube, \r\n            T.IsShowAboutUs AS Coupon_IsShowAboutUs, \r\n            T.I");
+            viewString.Append("sMarketingStories AS Coupon_IsMarketingStories, \r\n            T.IsPerSaving3days");
+            viewString.Append(" AS Coupon_IsPerSaving3days, \r\n            T.IsPerSaving2days AS Coupon_IsPerSav");
+            viewString.Append("ing2days, \r\n            T.IsPerSavingLastday AS Coupon_IsPerSavingLastday, \r\n   ");
+            viewString.Append("         T.IsDollarSaving3days AS Coupon_IsDollarSaving3days, \r\n            T.Is");
+            viewString.Append("DollarSaving2days AS Coupon_IsDollarSaving2days, \r\n            T.IsDollarSavingL");
+            viewString.Append("astday AS Coupon_IsDollarSavingLastday, \r\n            T.isSaveBtnLable AS Coupon");
+            viewString.Append("_isSaveBtnLable, \r\n            T.DealFirstDiscountType AS Coupon_DealFirstDiscou");
+            viewString.Append("ntType, \r\n            T.DealEndingDiscountType AS Coupon_DealEndingDiscountType,");
+            viewString.Append(" \r\n            True AS _from0\r\n        FROM BaseDbContext.Coupons AS T\r\n    ) AS");
+            viewString.Append(" T1");
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.Coupon", viewString.ToString());
         }
         
@@ -1755,23 +1758,28 @@ namespace Edm_EntityMappingGeneratedViews
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView38()
         {
-            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.CouponPriceOption", @"
-    SELECT VALUE -- Constructing CouponPriceOption
-        [SMDModel.Store.CouponPriceOption](T1.CouponPriceOption_CouponPriceOptionId, T1.CouponPriceOption_CouponId, T1.CouponPriceOption_Description, T1.CouponPriceOption_Price, T1.CouponPriceOption_Savings, T1.CouponPriceOption_VoucherCode, T1.CouponPriceOption_OptionUrl, T1.CouponPriceOption_ExpiryDate, T1.CouponPriceOption_URL)
-    FROM (
-        SELECT 
-            T.CouponPriceOptionId AS CouponPriceOption_CouponPriceOptionId, 
-            T.CouponId AS CouponPriceOption_CouponId, 
-            T.Description AS CouponPriceOption_Description, 
-            T.Price AS CouponPriceOption_Price, 
-            T.Savings AS CouponPriceOption_Savings, 
-            T.VoucherCode AS CouponPriceOption_VoucherCode, 
-            T.OptionUrl AS CouponPriceOption_OptionUrl, 
-            T.ExpiryDate AS CouponPriceOption_ExpiryDate, 
-            T.URL AS CouponPriceOption_URL, 
-            True AS _from0
-        FROM BaseDbContext.CouponPriceOptions AS T
-    ) AS T1");
+            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.CouponPriceOption", "\r\n    SELECT VALUE -- Constructing CouponPriceOption\r\n        [SMDModel.Store.Cou" +
+                    "ponPriceOption](T1.CouponPriceOption_CouponPriceOptionId, T1.CouponPriceOption_C" +
+                    "ouponId, T1.CouponPriceOption_Description, T1.CouponPriceOption_Price, T1.Coupon" +
+                    "PriceOption_Savings, T1.CouponPriceOption_VoucherCode, T1.CouponPriceOption_Opti" +
+                    "onUrl, T1.CouponPriceOption_ExpiryDate, T1.CouponPriceOption_URL, T1.CouponPrice" +
+                    "Option_PromoCode1, T1.CouponPriceOption_PromoCode2, T1.CouponPriceOption_PromoCo" +
+                    "de3, T1.CouponPriceOption_PromoCode4, T1.CouponPriceOption_VoucherCode2, T1.Coup" +
+                    "onPriceOption_VoucherCode3, T1.CouponPriceOption_VoucherCode4)\r\n    FROM (\r\n    " +
+                    "    SELECT \r\n            T.CouponPriceOptionId AS CouponPriceOption_CouponPriceO" +
+                    "ptionId, \r\n            T.CouponId AS CouponPriceOption_CouponId, \r\n            T" +
+                    ".Description AS CouponPriceOption_Description, \r\n            T.Price AS CouponPr" +
+                    "iceOption_Price, \r\n            T.Savings AS CouponPriceOption_Savings, \r\n       " +
+                    "     T.VoucherCode AS CouponPriceOption_VoucherCode, \r\n            T.OptionUrl A" +
+                    "S CouponPriceOption_OptionUrl, \r\n            T.ExpiryDate AS CouponPriceOption_E" +
+                    "xpiryDate, \r\n            T.URL AS CouponPriceOption_URL, \r\n            T.PromoCo" +
+                    "de1 AS CouponPriceOption_PromoCode1, \r\n            T.PromoCode2 AS CouponPriceOp" +
+                    "tion_PromoCode2, \r\n            T.PromoCode3 AS CouponPriceOption_PromoCode3, \r\n " +
+                    "           T.PromoCode4 AS CouponPriceOption_PromoCode4, \r\n            T.Voucher" +
+                    "Code2 AS CouponPriceOption_VoucherCode2, \r\n            T.VoucherCode3 AS CouponP" +
+                    "riceOption_VoucherCode3, \r\n            T.VoucherCode4 AS CouponPriceOption_Vouch" +
+                    "erCode4, \r\n            True AS _from0\r\n        FROM BaseDbContext.CouponPriceOpt" +
+                    "ions AS T\r\n    ) AS T1");
         }
         
         /// <Summary>
@@ -2950,7 +2958,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView80()
         {
-            System.Text.StringBuilder viewString = new System.Text.StringBuilder(7319);
+            System.Text.StringBuilder viewString = new System.Text.StringBuilder(7530);
             viewString.Append("\r\n    SELECT VALUE -- Constructing Coupons\r\n        [DomainModels.Coupon](T1.Cou");
             viewString.Append("pon_CouponId, T1.Coupon_LanguageId, T1.Coupon_UserId, T1.Coupon_CouponTitle, T1.");
             viewString.Append("Coupon_SearchKeywords, T1.Coupon_Status, T1.Coupon_Archived, T1.Coupon_Approved,");
@@ -2979,70 +2987,73 @@ namespace Edm_EntityMappingGeneratedViews
             viewString.Append("upon_IsShowMap, T1.Coupon_IsShowyouTube, T1.Coupon_IsShowAboutUs, T1.Coupon_IsMa");
             viewString.Append("rketingStories, T1.Coupon_IsPerSaving3days, T1.Coupon_IsPerSaving2days, T1.Coupo");
             viewString.Append("n_IsPerSavingLastday, T1.Coupon_IsDollarSaving3days, T1.Coupon_IsDollarSaving2da");
-            viewString.Append("ys, T1.Coupon_IsDollarSavingLastday, T1.Coupon_isSaveBtnLable)\r\n    FROM (\r\n    ");
-            viewString.Append("    SELECT \r\n            T.CouponId AS Coupon_CouponId, \r\n            T.Language");
-            viewString.Append("Id AS Coupon_LanguageId, \r\n            T.UserId AS Coupon_UserId, \r\n            ");
-            viewString.Append("T.CouponTitle AS Coupon_CouponTitle, \r\n            T.SearchKeywords AS Coupon_Se");
-            viewString.Append("archKeywords, \r\n            T.Status AS Coupon_Status, \r\n            T.Archived ");
-            viewString.Append("AS Coupon_Archived, \r\n            T.Approved AS Coupon_Approved, \r\n            T");
-            viewString.Append(".ApprovedBy AS Coupon_ApprovedBy, \r\n            T.ApprovalDateTime AS Coupon_App");
-            viewString.Append("rovalDateTime, \r\n            T.CreatedDateTime AS Coupon_CreatedDateTime, \r\n    ");
-            viewString.Append("        T.CreatedBy AS Coupon_CreatedBy, \r\n            T.ModifiedDateTime AS Cou");
-            viewString.Append("pon_ModifiedDateTime, \r\n            T.ModifiedBy AS Coupon_ModifiedBy, \r\n       ");
-            viewString.Append("     T.RejectedReason AS Coupon_RejectedReason, \r\n            T.Rejecteddatetime");
-            viewString.Append(" AS Coupon_Rejecteddatetime, \r\n            T.RejectedBy AS Coupon_RejectedBy, \r\n");
-            viewString.Append("            T.CurrencyId AS Coupon_CurrencyId, \r\n            T.Price AS Coupon_P");
-            viewString.Append("rice, \r\n            T.Savings AS Coupon_Savings, \r\n            T.SwapCost AS Cou");
-            viewString.Append("pon_SwapCost, \r\n            T.CouponViewCount AS Coupon_CouponViewCount, \r\n     ");
-            viewString.Append("       T.CouponIssuedCount AS Coupon_CouponIssuedCount, \r\n            T.CouponRe");
-            viewString.Append("deemedCount AS Coupon_CouponRedeemedCount, \r\n            T.CouponQtyPerUser AS C");
-            viewString.Append("oupon_CouponQtyPerUser, \r\n            T.CouponListingMode AS Coupon_CouponListin");
-            viewString.Append("gMode, \r\n            T.CompanyId AS Coupon_CompanyId, \r\n            T.CouponActi");
-            viewString.Append("veMonth AS Coupon_CouponActiveMonth, \r\n            T.CouponActiveYear AS Coupon_");
-            viewString.Append("CouponActiveYear, \r\n            T.CouponExpirydate AS Coupon_CouponExpirydate, \r");
-            viewString.Append("\n            T.couponImage1 AS Coupon_couponImage1, \r\n            T.CouponImage2");
-            viewString.Append(" AS Coupon_CouponImage2, \r\n            T.CouponImage3 AS Coupon_CouponImage3, \r\n");
-            viewString.Append("            T.LogoUrl AS Coupon_LogoUrl, \r\n            T.HighlightLine1 AS Coupo");
-            viewString.Append("n_HighlightLine1, \r\n            T.HighlightLine2 AS Coupon_HighlightLine2, \r\n   ");
-            viewString.Append("         T.HighlightLine3 AS Coupon_HighlightLine3, \r\n            T.HighlightLin");
-            viewString.Append("e4 AS Coupon_HighlightLine4, \r\n            T.HighlightLine5 AS Coupon_HighlightL");
-            viewString.Append("ine5, \r\n            T.FinePrintLine1 AS Coupon_FinePrintLine1, \r\n            T.F");
-            viewString.Append("inePrintLine2 AS Coupon_FinePrintLine2, \r\n            T.FinePrintLine3 AS Coupon");
-            viewString.Append("_FinePrintLine3, \r\n            T.FinePrintLine4 AS Coupon_FinePrintLine4, \r\n    ");
-            viewString.Append("        T.FinePrintLine5 AS Coupon_FinePrintLine5, \r\n            T.LocationBranc");
-            viewString.Append("hId AS Coupon_LocationBranchId, \r\n            T.LocationTitle AS Coupon_Location");
-            viewString.Append("Title, \r\n            T.LocationLine1 AS Coupon_LocationLine1, \r\n            T.Lo");
-            viewString.Append("cationLine2 AS Coupon_LocationLine2, \r\n            T.LocationCity AS Coupon_Loca");
-            viewString.Append("tionCity, \r\n            T.LocationState AS Coupon_LocationState, \r\n            T");
-            viewString.Append(".LocationZipCode AS Coupon_LocationZipCode, \r\n            T.LocationLAT AS Coupo");
-            viewString.Append("n_LocationLAT, \r\n            T.LocationLON AS Coupon_LocationLON, \r\n            ");
-            viewString.Append("T.LocationPhone AS Coupon_LocationPhone, \r\n            T.GeographyColumn AS Coup");
-            viewString.Append("on_GeographyColumn, \r\n            T.HowToRedeemLine1 AS Coupon_HowToRedeemLine1,");
-            viewString.Append(" \r\n            T.HowToRedeemLine2 AS Coupon_HowToRedeemLine2, \r\n            T.Ho");
-            viewString.Append("wToRedeemLine3 AS Coupon_HowToRedeemLine3, \r\n            T.HowToRedeemLine4 AS C");
-            viewString.Append("oupon_HowToRedeemLine4, \r\n            T.HowToRedeemLine5 AS Coupon_HowToRedeemLi");
-            viewString.Append("ne5, \r\n            T.SubmissionDateTime AS Coupon_SubmissionDateTime, \r\n        ");
-            viewString.Append("    T.LocationCountryId AS Coupon_LocationCountryId, \r\n            T.CouponStart");
-            viewString.Append("Date AS Coupon_CouponStartDate, \r\n            T.CouponEndDate AS Coupon_CouponEn");
-            viewString.Append("dDate, \r\n            T.Priority AS Coupon_Priority, \r\n            T.ShowBuyitBtn");
-            viewString.Append(" AS Coupon_ShowBuyitBtn, \r\n            T.BuyitLandingPageUrl AS Coupon_BuyitLand");
-            viewString.Append("ingPageUrl, \r\n            T.BuyitBtnLabel AS Coupon_BuyitBtnLabel, \r\n           ");
-            viewString.Append(" T.YoutubeLink AS Coupon_YoutubeLink, \r\n            T.CouponImage4 AS Coupon_Cou");
-            viewString.Append("ponImage4, \r\n            T.CouponImage5 AS Coupon_CouponImage5, \r\n            T.");
-            viewString.Append("CouponImage6 AS Coupon_CouponImage6, \r\n            T.IsPaymentCollected AS Coupo");
-            viewString.Append("n_IsPaymentCollected, \r\n            T.PaymentDate AS Coupon_PaymentDate, \r\n     ");
-            viewString.Append("       T.IsShowReviews AS Coupon_IsShowReviews, \r\n            T.IsShowAddress AS");
-            viewString.Append(" Coupon_IsShowAddress, \r\n            T.IsShowPhoneNo AS Coupon_IsShowPhoneNo, \r\n");
-            viewString.Append("            T.IsShowMap AS Coupon_IsShowMap, \r\n            T.IsShowyouTube AS Co");
-            viewString.Append("upon_IsShowyouTube, \r\n            T.IsShowAboutUs AS Coupon_IsShowAboutUs, \r\n   ");
-            viewString.Append("         T.IsMarketingStories AS Coupon_IsMarketingStories, \r\n            T.IsPe");
-            viewString.Append("rSaving3days AS Coupon_IsPerSaving3days, \r\n            T.IsPerSaving2days AS Cou");
-            viewString.Append("pon_IsPerSaving2days, \r\n            T.IsPerSavingLastday AS Coupon_IsPerSavingLa");
-            viewString.Append("stday, \r\n            T.IsDollarSaving3days AS Coupon_IsDollarSaving3days, \r\n    ");
-            viewString.Append("        T.IsDollarSaving2days AS Coupon_IsDollarSaving2days, \r\n            T.IsD");
-            viewString.Append("ollarSavingLastday AS Coupon_IsDollarSavingLastday, \r\n            T.isSaveBtnLab");
-            viewString.Append("le AS Coupon_isSaveBtnLable, \r\n            True AS _from0\r\n        FROM SMDModel");
-            viewString.Append("StoreContainer.Coupon AS T\r\n    ) AS T1");
+            viewString.Append("ys, T1.Coupon_IsDollarSavingLastday, T1.Coupon_isSaveBtnLable, T1.Coupon_DealFir");
+            viewString.Append("stDiscountType, T1.Coupon_DealEndingDiscountType)\r\n    FROM (\r\n        SELECT \r\n");
+            viewString.Append("            T.CouponId AS Coupon_CouponId, \r\n            T.LanguageId AS Coupon_");
+            viewString.Append("LanguageId, \r\n            T.UserId AS Coupon_UserId, \r\n            T.CouponTitle");
+            viewString.Append(" AS Coupon_CouponTitle, \r\n            T.SearchKeywords AS Coupon_SearchKeywords,");
+            viewString.Append(" \r\n            T.Status AS Coupon_Status, \r\n            T.Archived AS Coupon_Arc");
+            viewString.Append("hived, \r\n            T.Approved AS Coupon_Approved, \r\n            T.ApprovedBy A");
+            viewString.Append("S Coupon_ApprovedBy, \r\n            T.ApprovalDateTime AS Coupon_ApprovalDateTime");
+            viewString.Append(", \r\n            T.CreatedDateTime AS Coupon_CreatedDateTime, \r\n            T.Cre");
+            viewString.Append("atedBy AS Coupon_CreatedBy, \r\n            T.ModifiedDateTime AS Coupon_ModifiedD");
+            viewString.Append("ateTime, \r\n            T.ModifiedBy AS Coupon_ModifiedBy, \r\n            T.Reject");
+            viewString.Append("edReason AS Coupon_RejectedReason, \r\n            T.Rejecteddatetime AS Coupon_Re");
+            viewString.Append("jecteddatetime, \r\n            T.RejectedBy AS Coupon_RejectedBy, \r\n            T");
+            viewString.Append(".CurrencyId AS Coupon_CurrencyId, \r\n            T.Price AS Coupon_Price, \r\n     ");
+            viewString.Append("       T.Savings AS Coupon_Savings, \r\n            T.SwapCost AS Coupon_SwapCost,");
+            viewString.Append(" \r\n            T.CouponViewCount AS Coupon_CouponViewCount, \r\n            T.Coup");
+            viewString.Append("onIssuedCount AS Coupon_CouponIssuedCount, \r\n            T.CouponRedeemedCount A");
+            viewString.Append("S Coupon_CouponRedeemedCount, \r\n            T.CouponQtyPerUser AS Coupon_CouponQ");
+            viewString.Append("tyPerUser, \r\n            T.CouponListingMode AS Coupon_CouponListingMode, \r\n    ");
+            viewString.Append("        T.CompanyId AS Coupon_CompanyId, \r\n            T.CouponActiveMonth AS Co");
+            viewString.Append("upon_CouponActiveMonth, \r\n            T.CouponActiveYear AS Coupon_CouponActiveY");
+            viewString.Append("ear, \r\n            T.CouponExpirydate AS Coupon_CouponExpirydate, \r\n            ");
+            viewString.Append("T.couponImage1 AS Coupon_couponImage1, \r\n            T.CouponImage2 AS Coupon_Co");
+            viewString.Append("uponImage2, \r\n            T.CouponImage3 AS Coupon_CouponImage3, \r\n            T");
+            viewString.Append(".LogoUrl AS Coupon_LogoUrl, \r\n            T.HighlightLine1 AS Coupon_HighlightLi");
+            viewString.Append("ne1, \r\n            T.HighlightLine2 AS Coupon_HighlightLine2, \r\n            T.Hi");
+            viewString.Append("ghlightLine3 AS Coupon_HighlightLine3, \r\n            T.HighlightLine4 AS Coupon_");
+            viewString.Append("HighlightLine4, \r\n            T.HighlightLine5 AS Coupon_HighlightLine5, \r\n     ");
+            viewString.Append("       T.FinePrintLine1 AS Coupon_FinePrintLine1, \r\n            T.FinePrintLine2");
+            viewString.Append(" AS Coupon_FinePrintLine2, \r\n            T.FinePrintLine3 AS Coupon_FinePrintLin");
+            viewString.Append("e3, \r\n            T.FinePrintLine4 AS Coupon_FinePrintLine4, \r\n            T.Fin");
+            viewString.Append("ePrintLine5 AS Coupon_FinePrintLine5, \r\n            T.LocationBranchId AS Coupon");
+            viewString.Append("_LocationBranchId, \r\n            T.LocationTitle AS Coupon_LocationTitle, \r\n    ");
+            viewString.Append("        T.LocationLine1 AS Coupon_LocationLine1, \r\n            T.LocationLine2 A");
+            viewString.Append("S Coupon_LocationLine2, \r\n            T.LocationCity AS Coupon_LocationCity, \r\n ");
+            viewString.Append("           T.LocationState AS Coupon_LocationState, \r\n            T.LocationZipC");
+            viewString.Append("ode AS Coupon_LocationZipCode, \r\n            T.LocationLAT AS Coupon_LocationLAT");
+            viewString.Append(", \r\n            T.LocationLON AS Coupon_LocationLON, \r\n            T.LocationPho");
+            viewString.Append("ne AS Coupon_LocationPhone, \r\n            T.GeographyColumn AS Coupon_GeographyC");
+            viewString.Append("olumn, \r\n            T.HowToRedeemLine1 AS Coupon_HowToRedeemLine1, \r\n          ");
+            viewString.Append("  T.HowToRedeemLine2 AS Coupon_HowToRedeemLine2, \r\n            T.HowToRedeemLine");
+            viewString.Append("3 AS Coupon_HowToRedeemLine3, \r\n            T.HowToRedeemLine4 AS Coupon_HowToRe");
+            viewString.Append("deemLine4, \r\n            T.HowToRedeemLine5 AS Coupon_HowToRedeemLine5, \r\n      ");
+            viewString.Append("      T.SubmissionDateTime AS Coupon_SubmissionDateTime, \r\n            T.Locatio");
+            viewString.Append("nCountryId AS Coupon_LocationCountryId, \r\n            T.CouponStartDate AS Coupo");
+            viewString.Append("n_CouponStartDate, \r\n            T.CouponEndDate AS Coupon_CouponEndDate, \r\n    ");
+            viewString.Append("        T.Priority AS Coupon_Priority, \r\n            T.ShowBuyitBtn AS Coupon_Sh");
+            viewString.Append("owBuyitBtn, \r\n            T.BuyitLandingPageUrl AS Coupon_BuyitLandingPageUrl, \r");
+            viewString.Append("\n            T.BuyitBtnLabel AS Coupon_BuyitBtnLabel, \r\n            T.YoutubeLin");
+            viewString.Append("k AS Coupon_YoutubeLink, \r\n            T.CouponImage4 AS Coupon_CouponImage4, \r\n");
+            viewString.Append("            T.CouponImage5 AS Coupon_CouponImage5, \r\n            T.CouponImage6 ");
+            viewString.Append("AS Coupon_CouponImage6, \r\n            T.IsPaymentCollected AS Coupon_IsPaymentCo");
+            viewString.Append("llected, \r\n            T.PaymentDate AS Coupon_PaymentDate, \r\n            T.IsSh");
+            viewString.Append("owReviews AS Coupon_IsShowReviews, \r\n            T.IsShowAddress AS Coupon_IsSho");
+            viewString.Append("wAddress, \r\n            T.IsShowPhoneNo AS Coupon_IsShowPhoneNo, \r\n            T");
+            viewString.Append(".IsShowMap AS Coupon_IsShowMap, \r\n            T.IsShowyouTube AS Coupon_IsShowyo");
+            viewString.Append("uTube, \r\n            T.IsShowAboutUs AS Coupon_IsShowAboutUs, \r\n            T.Is");
+            viewString.Append("MarketingStories AS Coupon_IsMarketingStories, \r\n            T.IsPerSaving3days ");
+            viewString.Append("AS Coupon_IsPerSaving3days, \r\n            T.IsPerSaving2days AS Coupon_IsPerSavi");
+            viewString.Append("ng2days, \r\n            T.IsPerSavingLastday AS Coupon_IsPerSavingLastday, \r\n    ");
+            viewString.Append("        T.IsDollarSaving3days AS Coupon_IsDollarSaving3days, \r\n            T.IsD");
+            viewString.Append("ollarSaving2days AS Coupon_IsDollarSaving2days, \r\n            T.IsDollarSavingLa");
+            viewString.Append("stday AS Coupon_IsDollarSavingLastday, \r\n            T.isSaveBtnLable AS Coupon_");
+            viewString.Append("isSaveBtnLable, \r\n            T.DealFirstDiscountType AS Coupon_DealFirstDiscoun");
+            viewString.Append("tType, \r\n            T.DealEndingDiscountType AS Coupon_DealEndingDiscountType, ");
+            viewString.Append("\r\n            True AS _from0\r\n        FROM SMDModelStoreContainer.Coupon AS T\r\n ");
+            viewString.Append("   ) AS T1");
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Coupons", viewString.ToString());
         }
         
@@ -3166,23 +3177,28 @@ namespace Edm_EntityMappingGeneratedViews
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView86()
         {
-            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.CouponPriceOptions", @"
-    SELECT VALUE -- Constructing CouponPriceOptions
-        [DomainModels.CouponPriceOption](T1.CouponPriceOption_CouponPriceOptionId, T1.CouponPriceOption_CouponId, T1.CouponPriceOption_Description, T1.CouponPriceOption_Price, T1.CouponPriceOption_Savings, T1.CouponPriceOption_OptionUrl, T1.CouponPriceOption_VoucherCode, T1.CouponPriceOption_ExpiryDate, T1.CouponPriceOption_URL)
-    FROM (
-        SELECT 
-            T.CouponPriceOptionId AS CouponPriceOption_CouponPriceOptionId, 
-            T.CouponId AS CouponPriceOption_CouponId, 
-            T.Description AS CouponPriceOption_Description, 
-            T.Price AS CouponPriceOption_Price, 
-            T.Savings AS CouponPriceOption_Savings, 
-            T.OptionUrl AS CouponPriceOption_OptionUrl, 
-            T.VoucherCode AS CouponPriceOption_VoucherCode, 
-            T.ExpiryDate AS CouponPriceOption_ExpiryDate, 
-            T.URL AS CouponPriceOption_URL, 
-            True AS _from0
-        FROM SMDModelStoreContainer.CouponPriceOption AS T
-    ) AS T1");
+            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.CouponPriceOptions", "\r\n    SELECT VALUE -- Constructing CouponPriceOptions\r\n        [DomainModels.Coup" +
+                    "onPriceOption](T1.CouponPriceOption_CouponPriceOptionId, T1.CouponPriceOption_Co" +
+                    "uponId, T1.CouponPriceOption_Description, T1.CouponPriceOption_Price, T1.CouponP" +
+                    "riceOption_Savings, T1.CouponPriceOption_OptionUrl, T1.CouponPriceOption_Voucher" +
+                    "Code, T1.CouponPriceOption_ExpiryDate, T1.CouponPriceOption_URL, T1.CouponPriceO" +
+                    "ption_PromoCode1, T1.CouponPriceOption_PromoCode2, T1.CouponPriceOption_PromoCod" +
+                    "e3, T1.CouponPriceOption_PromoCode4, T1.CouponPriceOption_VoucherCode2, T1.Coupo" +
+                    "nPriceOption_VoucherCode3, T1.CouponPriceOption_VoucherCode4)\r\n    FROM (\r\n     " +
+                    "   SELECT \r\n            T.CouponPriceOptionId AS CouponPriceOption_CouponPriceOp" +
+                    "tionId, \r\n            T.CouponId AS CouponPriceOption_CouponId, \r\n            T." +
+                    "Description AS CouponPriceOption_Description, \r\n            T.Price AS CouponPri" +
+                    "ceOption_Price, \r\n            T.Savings AS CouponPriceOption_Savings, \r\n        " +
+                    "    T.OptionUrl AS CouponPriceOption_OptionUrl, \r\n            T.VoucherCode AS C" +
+                    "ouponPriceOption_VoucherCode, \r\n            T.ExpiryDate AS CouponPriceOption_Ex" +
+                    "piryDate, \r\n            T.URL AS CouponPriceOption_URL, \r\n            T.PromoCod" +
+                    "e1 AS CouponPriceOption_PromoCode1, \r\n            T.PromoCode2 AS CouponPriceOpt" +
+                    "ion_PromoCode2, \r\n            T.PromoCode3 AS CouponPriceOption_PromoCode3, \r\n  " +
+                    "          T.PromoCode4 AS CouponPriceOption_PromoCode4, \r\n            T.VoucherC" +
+                    "ode2 AS CouponPriceOption_VoucherCode2, \r\n            T.VoucherCode3 AS CouponPr" +
+                    "iceOption_VoucherCode3, \r\n            T.VoucherCode4 AS CouponPriceOption_Vouche" +
+                    "rCode4, \r\n            True AS _from0\r\n        FROM SMDModelStoreContainer.Coupon" +
+                    "PriceOption AS T\r\n    ) AS T1");
         }
         
         /// <Summary>
@@ -3566,7 +3582,7 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.Game", @"
     SELECT VALUE -- Constructing Game
-        [SMDModel.Store.Game](T1.Game_GameId, T1.Game_GameName, T1.Game_Status, T1.Game_AgeRangeStart, T1.Game_AgeRangeEnd, T1.Game_GameType, T1.Game_Complexity, T1.Game_GameUrl, T1.Game_GameSmallImage, T1.Game_GameLargeImage)
+        [SMDModel.Store.Game](T1.Game_GameId, T1.Game_GameName, T1.Game_Status, T1.Game_AgeRangeStart, T1.Game_AgeRangeEnd, T1.Game_GameType, T1.Game_Complexity, T1.Game_GameUrl, T1.Game_GameSmallImage, T1.Game_GameLargeImage, T1.Game_GameInstructions)
     FROM (
         SELECT 
             T.GameId AS Game_GameId, 
@@ -3579,6 +3595,7 @@ namespace Edm_EntityMappingGeneratedViews
             T.GameUrl AS Game_GameUrl, 
             T.GameSmallImage AS Game_GameSmallImage, 
             T.GameLargeImage AS Game_GameLargeImage, 
+            T.GameInstructions AS Game_GameInstructions, 
             True AS _from0
         FROM BaseDbContext.Games AS T
     ) AS T1");
@@ -3591,7 +3608,7 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Games", @"
     SELECT VALUE -- Constructing Games
-        [DomainModels.Game](T1.Game_GameId, T1.Game_GameName, T1.Game_Status, T1.Game_AgeRangeStart, T1.Game_AgeRangeEnd, T1.Game_GameType, T1.Game_Complexity, T1.Game_GameUrl, T1.Game_GameSmallImage, T1.Game_GameLargeImage)
+        [DomainModels.Game](T1.Game_GameId, T1.Game_GameName, T1.Game_Status, T1.Game_AgeRangeStart, T1.Game_AgeRangeEnd, T1.Game_GameType, T1.Game_Complexity, T1.Game_GameUrl, T1.Game_GameSmallImage, T1.Game_GameLargeImage, T1.Game_GameInstructions)
     FROM (
         SELECT 
             T.GameId AS Game_GameId, 
@@ -3604,6 +3621,7 @@ namespace Edm_EntityMappingGeneratedViews
             T.GameUrl AS Game_GameUrl, 
             T.GameSmallImage AS Game_GameSmallImage, 
             T.GameLargeImage AS Game_GameLargeImage, 
+            T.GameInstructions AS Game_GameInstructions, 
             True AS _from0
         FROM SMDModelStoreContainer.Game AS T
     ) AS T1");
@@ -4022,7 +4040,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView122()
         {
-            System.Text.StringBuilder viewString = new System.Text.StringBuilder(8646);
+            System.Text.StringBuilder viewString = new System.Text.StringBuilder(8881);
             viewString.Append("\r\n    SELECT VALUE -- Constructing vw_Coupons\r\n        [SMDModel.Store.vw_Coupon");
             viewString.Append("s](T1.[vw_Coupons.CouponId], T1.[vw_Coupons.LanguageId], T1.[vw_Coupons.UserId],");
             viewString.Append(" T1.[vw_Coupons.CouponTitle], T1.[vw_Coupons.SearchKeywords], T1.[vw_Coupons.Sta");
@@ -4058,80 +4076,83 @@ namespace Edm_EntityMappingGeneratedViews
             viewString.Append("w_Coupons.IsMarketingStories], T1.[vw_Coupons.IsPerSaving3days], T1.[vw_Coupons.");
             viewString.Append("IsPerSaving2days], T1.[vw_Coupons.IsPerSavingLastday], T1.[vw_Coupons.IsDollarSa");
             viewString.Append("ving3days], T1.[vw_Coupons.IsDollarSaving2days], T1.[vw_Coupons.IsDollarSavingLa");
-            viewString.Append("stday], T1.[vw_Coupons.isSaveBtnLable], T1.[vw_Coupons.Categories], T1.[vw_Coupo");
-            viewString.Append("ns.CurrencyCode], T1.[vw_Coupons.CurrencySymbol])\r\n    FROM (\r\n        SELECT \r\n");
-            viewString.Append("            T.CouponId AS [vw_Coupons.CouponId], \r\n            T.LanguageId AS [");
-            viewString.Append("vw_Coupons.LanguageId], \r\n            T.UserId AS [vw_Coupons.UserId], \r\n       ");
-            viewString.Append("     T.CouponTitle AS [vw_Coupons.CouponTitle], \r\n            T.SearchKeywords A");
-            viewString.Append("S [vw_Coupons.SearchKeywords], \r\n            T.Status AS [vw_Coupons.Status], \r\n");
-            viewString.Append("            T.Archived AS [vw_Coupons.Archived], \r\n            T.Approved AS [vw");
-            viewString.Append("_Coupons.Approved], \r\n            T.ApprovedBy AS [vw_Coupons.ApprovedBy], \r\n   ");
-            viewString.Append("         T.ApprovalDateTime AS [vw_Coupons.ApprovalDateTime], \r\n            T.Cr");
-            viewString.Append("eatedDateTime AS [vw_Coupons.CreatedDateTime], \r\n            T.CreatedBy AS [vw_");
-            viewString.Append("Coupons.CreatedBy], \r\n            T.ModifiedDateTime AS [vw_Coupons.ModifiedDate");
-            viewString.Append("Time], \r\n            T.ModifiedBy AS [vw_Coupons.ModifiedBy], \r\n            T.Re");
-            viewString.Append("jectedReason AS [vw_Coupons.RejectedReason], \r\n            T.Rejecteddatetime AS");
-            viewString.Append(" [vw_Coupons.Rejecteddatetime], \r\n            T.RejectedBy AS [vw_Coupons.Reject");
-            viewString.Append("edBy], \r\n            T.CurrencyId AS [vw_Coupons.CurrencyId], \r\n            T.Pr");
-            viewString.Append("ice AS [vw_Coupons.Price], \r\n            T.Savings AS [vw_Coupons.Savings], \r\n  ");
-            viewString.Append("          T.SwapCost AS [vw_Coupons.SwapCost], \r\n            T.CouponViewCount A");
-            viewString.Append("S [vw_Coupons.CouponViewCount], \r\n            T.CouponIssuedCount AS [vw_Coupons");
-            viewString.Append(".CouponIssuedCount], \r\n            T.CouponRedeemedCount AS [vw_Coupons.CouponRe");
-            viewString.Append("deemedCount], \r\n            T.CouponQtyPerUser AS [vw_Coupons.CouponQtyPerUser],");
-            viewString.Append(" \r\n            T.CouponListingMode AS [vw_Coupons.CouponListingMode], \r\n        ");
-            viewString.Append("    T.CompanyId AS [vw_Coupons.CompanyId], \r\n            T.CouponActiveMonth AS ");
-            viewString.Append("[vw_Coupons.CouponActiveMonth], \r\n            T.CouponActiveYear AS [vw_Coupons.");
-            viewString.Append("CouponActiveYear], \r\n            T.CouponExpirydate AS [vw_Coupons.CouponExpiryd");
-            viewString.Append("ate], \r\n            T.couponImage1 AS [vw_Coupons.couponImage1], \r\n            T");
-            viewString.Append(".CouponImage2 AS [vw_Coupons.CouponImage2], \r\n            T.CouponImage3 AS [vw_");
-            viewString.Append("Coupons.CouponImage3], \r\n            T.LogoUrl AS [vw_Coupons.LogoUrl], \r\n      ");
-            viewString.Append("      T.HighlightLine1 AS [vw_Coupons.HighlightLine1], \r\n            T.Highlight");
-            viewString.Append("Line2 AS [vw_Coupons.HighlightLine2], \r\n            T.HighlightLine3 AS [vw_Coup");
-            viewString.Append("ons.HighlightLine3], \r\n            T.HighlightLine4 AS [vw_Coupons.HighlightLine");
-            viewString.Append("4], \r\n            T.HighlightLine5 AS [vw_Coupons.HighlightLine5], \r\n           ");
-            viewString.Append(" T.FinePrintLine1 AS [vw_Coupons.FinePrintLine1], \r\n            T.FinePrintLine2");
-            viewString.Append(" AS [vw_Coupons.FinePrintLine2], \r\n            T.FinePrintLine3 AS [vw_Coupons.F");
-            viewString.Append("inePrintLine3], \r\n            T.FinePrintLine4 AS [vw_Coupons.FinePrintLine4], \r");
-            viewString.Append("\n            T.FinePrintLine5 AS [vw_Coupons.FinePrintLine5], \r\n            T.Lo");
-            viewString.Append("cationBranchId AS [vw_Coupons.LocationBranchId], \r\n            T.LocationTitle A");
-            viewString.Append("S [vw_Coupons.LocationTitle], \r\n            T.LocationLine1 AS [vw_Coupons.Locat");
-            viewString.Append("ionLine1], \r\n            T.LocationLine2 AS [vw_Coupons.LocationLine2], \r\n      ");
-            viewString.Append("      T.LocationCity AS [vw_Coupons.LocationCity], \r\n            T.LocationState");
-            viewString.Append(" AS [vw_Coupons.LocationState], \r\n            T.LocationZipCode AS [vw_Coupons.L");
-            viewString.Append("ocationZipCode], \r\n            T.LocationLAT AS [vw_Coupons.LocationLAT], \r\n    ");
-            viewString.Append("        T.LocationLON AS [vw_Coupons.LocationLON], \r\n            T.LocationPhone");
-            viewString.Append(" AS [vw_Coupons.LocationPhone], \r\n            T.GeographyColumn AS [vw_Coupons.G");
-            viewString.Append("eographyColumn], \r\n            T.HowToRedeemLine1 AS [vw_Coupons.HowToRedeemLine");
-            viewString.Append("1], \r\n            T.HowToRedeemLine2 AS [vw_Coupons.HowToRedeemLine2], \r\n       ");
-            viewString.Append("     T.HowToRedeemLine3 AS [vw_Coupons.HowToRedeemLine3], \r\n            T.HowToR");
-            viewString.Append("edeemLine4 AS [vw_Coupons.HowToRedeemLine4], \r\n            T.HowToRedeemLine5 AS");
-            viewString.Append(" [vw_Coupons.HowToRedeemLine5], \r\n            T.SubmissionDateTime AS [vw_Coupon");
-            viewString.Append("s.SubmissionDateTime], \r\n            T.LocationCountryId AS [vw_Coupons.Location");
-            viewString.Append("CountryId], \r\n            T.CouponStartDate AS [vw_Coupons.CouponStartDate], \r\n ");
-            viewString.Append("           T.CouponEndDate AS [vw_Coupons.CouponEndDate], \r\n            T.Priori");
-            viewString.Append("ty AS [vw_Coupons.Priority], \r\n            T.ShowBuyitBtn AS [vw_Coupons.ShowBuy");
-            viewString.Append("itBtn], \r\n            T.BuyitLandingPageUrl AS [vw_Coupons.BuyitLandingPageUrl],");
-            viewString.Append(" \r\n            T.BuyitBtnLabel AS [vw_Coupons.BuyitBtnLabel], \r\n            T.Yo");
-            viewString.Append("utubeLink AS [vw_Coupons.YoutubeLink], \r\n            T.CouponImage4 AS [vw_Coupo");
-            viewString.Append("ns.CouponImage4], \r\n            T.CouponImage5 AS [vw_Coupons.CouponImage5], \r\n ");
-            viewString.Append("           T.CouponImage6 AS [vw_Coupons.CouponImage6], \r\n            T.IsPaymen");
-            viewString.Append("tCollected AS [vw_Coupons.IsPaymentCollected], \r\n            T.PaymentDate AS [v");
-            viewString.Append("w_Coupons.PaymentDate], \r\n            T.IsShowReviews AS [vw_Coupons.IsShowRevie");
-            viewString.Append("ws], \r\n            T.IsShowAddress AS [vw_Coupons.IsShowAddress], \r\n            ");
-            viewString.Append("T.IsShowPhoneNo AS [vw_Coupons.IsShowPhoneNo], \r\n            T.IsShowMap AS [vw_");
-            viewString.Append("Coupons.IsShowMap], \r\n            T.IsShowyouTube AS [vw_Coupons.IsShowyouTube],");
-            viewString.Append(" \r\n            T.IsShowAboutUs AS [vw_Coupons.IsShowAboutUs], \r\n            T.Is");
-            viewString.Append("MarketingStories AS [vw_Coupons.IsMarketingStories], \r\n            T.IsPerSaving");
-            viewString.Append("3days AS [vw_Coupons.IsPerSaving3days], \r\n            T.IsPerSaving2days AS [vw_");
-            viewString.Append("Coupons.IsPerSaving2days], \r\n            T.IsPerSavingLastday AS [vw_Coupons.IsP");
-            viewString.Append("erSavingLastday], \r\n            T.IsDollarSaving3days AS [vw_Coupons.IsDollarSav");
-            viewString.Append("ing3days], \r\n            T.IsDollarSaving2days AS [vw_Coupons.IsDollarSaving2day");
-            viewString.Append("s], \r\n            T.IsDollarSavingLastday AS [vw_Coupons.IsDollarSavingLastday],");
-            viewString.Append(" \r\n            T.isSaveBtnLable AS [vw_Coupons.isSaveBtnLable], \r\n            T.");
-            viewString.Append("Categories AS [vw_Coupons.Categories], \r\n            T.CurrencyCode AS [vw_Coupo");
-            viewString.Append("ns.CurrencyCode], \r\n            T.CurrencySymbol AS [vw_Coupons.CurrencySymbol],");
-            viewString.Append(" \r\n            True AS _from0\r\n        FROM BaseDbContext.vw_Coupons AS T\r\n    )");
-            viewString.Append(" AS T1");
+            viewString.Append("stday], T1.[vw_Coupons.isSaveBtnLable], T1.[vw_Coupons.DealFirstDiscountType], T");
+            viewString.Append("1.[vw_Coupons.DealEndingDiscountType], T1.[vw_Coupons.Categories], T1.[vw_Coupon");
+            viewString.Append("s.CurrencyCode], T1.[vw_Coupons.CurrencySymbol])\r\n    FROM (\r\n        SELECT \r\n ");
+            viewString.Append("           T.CouponId AS [vw_Coupons.CouponId], \r\n            T.LanguageId AS [v");
+            viewString.Append("w_Coupons.LanguageId], \r\n            T.UserId AS [vw_Coupons.UserId], \r\n        ");
+            viewString.Append("    T.CouponTitle AS [vw_Coupons.CouponTitle], \r\n            T.SearchKeywords AS");
+            viewString.Append(" [vw_Coupons.SearchKeywords], \r\n            T.Status AS [vw_Coupons.Status], \r\n ");
+            viewString.Append("           T.Archived AS [vw_Coupons.Archived], \r\n            T.Approved AS [vw_");
+            viewString.Append("Coupons.Approved], \r\n            T.ApprovedBy AS [vw_Coupons.ApprovedBy], \r\n    ");
+            viewString.Append("        T.ApprovalDateTime AS [vw_Coupons.ApprovalDateTime], \r\n            T.Cre");
+            viewString.Append("atedDateTime AS [vw_Coupons.CreatedDateTime], \r\n            T.CreatedBy AS [vw_C");
+            viewString.Append("oupons.CreatedBy], \r\n            T.ModifiedDateTime AS [vw_Coupons.ModifiedDateT");
+            viewString.Append("ime], \r\n            T.ModifiedBy AS [vw_Coupons.ModifiedBy], \r\n            T.Rej");
+            viewString.Append("ectedReason AS [vw_Coupons.RejectedReason], \r\n            T.Rejecteddatetime AS ");
+            viewString.Append("[vw_Coupons.Rejecteddatetime], \r\n            T.RejectedBy AS [vw_Coupons.Rejecte");
+            viewString.Append("dBy], \r\n            T.CurrencyId AS [vw_Coupons.CurrencyId], \r\n            T.Pri");
+            viewString.Append("ce AS [vw_Coupons.Price], \r\n            T.Savings AS [vw_Coupons.Savings], \r\n   ");
+            viewString.Append("         T.SwapCost AS [vw_Coupons.SwapCost], \r\n            T.CouponViewCount AS");
+            viewString.Append(" [vw_Coupons.CouponViewCount], \r\n            T.CouponIssuedCount AS [vw_Coupons.");
+            viewString.Append("CouponIssuedCount], \r\n            T.CouponRedeemedCount AS [vw_Coupons.CouponRed");
+            viewString.Append("eemedCount], \r\n            T.CouponQtyPerUser AS [vw_Coupons.CouponQtyPerUser], ");
+            viewString.Append("\r\n            T.CouponListingMode AS [vw_Coupons.CouponListingMode], \r\n         ");
+            viewString.Append("   T.CompanyId AS [vw_Coupons.CompanyId], \r\n            T.CouponActiveMonth AS [");
+            viewString.Append("vw_Coupons.CouponActiveMonth], \r\n            T.CouponActiveYear AS [vw_Coupons.C");
+            viewString.Append("ouponActiveYear], \r\n            T.CouponExpirydate AS [vw_Coupons.CouponExpiryda");
+            viewString.Append("te], \r\n            T.couponImage1 AS [vw_Coupons.couponImage1], \r\n            T.");
+            viewString.Append("CouponImage2 AS [vw_Coupons.CouponImage2], \r\n            T.CouponImage3 AS [vw_C");
+            viewString.Append("oupons.CouponImage3], \r\n            T.LogoUrl AS [vw_Coupons.LogoUrl], \r\n       ");
+            viewString.Append("     T.HighlightLine1 AS [vw_Coupons.HighlightLine1], \r\n            T.HighlightL");
+            viewString.Append("ine2 AS [vw_Coupons.HighlightLine2], \r\n            T.HighlightLine3 AS [vw_Coupo");
+            viewString.Append("ns.HighlightLine3], \r\n            T.HighlightLine4 AS [vw_Coupons.HighlightLine4");
+            viewString.Append("], \r\n            T.HighlightLine5 AS [vw_Coupons.HighlightLine5], \r\n            ");
+            viewString.Append("T.FinePrintLine1 AS [vw_Coupons.FinePrintLine1], \r\n            T.FinePrintLine2 ");
+            viewString.Append("AS [vw_Coupons.FinePrintLine2], \r\n            T.FinePrintLine3 AS [vw_Coupons.Fi");
+            viewString.Append("nePrintLine3], \r\n            T.FinePrintLine4 AS [vw_Coupons.FinePrintLine4], \r\n");
+            viewString.Append("            T.FinePrintLine5 AS [vw_Coupons.FinePrintLine5], \r\n            T.Loc");
+            viewString.Append("ationBranchId AS [vw_Coupons.LocationBranchId], \r\n            T.LocationTitle AS");
+            viewString.Append(" [vw_Coupons.LocationTitle], \r\n            T.LocationLine1 AS [vw_Coupons.Locati");
+            viewString.Append("onLine1], \r\n            T.LocationLine2 AS [vw_Coupons.LocationLine2], \r\n       ");
+            viewString.Append("     T.LocationCity AS [vw_Coupons.LocationCity], \r\n            T.LocationState ");
+            viewString.Append("AS [vw_Coupons.LocationState], \r\n            T.LocationZipCode AS [vw_Coupons.Lo");
+            viewString.Append("cationZipCode], \r\n            T.LocationLAT AS [vw_Coupons.LocationLAT], \r\n     ");
+            viewString.Append("       T.LocationLON AS [vw_Coupons.LocationLON], \r\n            T.LocationPhone ");
+            viewString.Append("AS [vw_Coupons.LocationPhone], \r\n            T.GeographyColumn AS [vw_Coupons.Ge");
+            viewString.Append("ographyColumn], \r\n            T.HowToRedeemLine1 AS [vw_Coupons.HowToRedeemLine1");
+            viewString.Append("], \r\n            T.HowToRedeemLine2 AS [vw_Coupons.HowToRedeemLine2], \r\n        ");
+            viewString.Append("    T.HowToRedeemLine3 AS [vw_Coupons.HowToRedeemLine3], \r\n            T.HowToRe");
+            viewString.Append("deemLine4 AS [vw_Coupons.HowToRedeemLine4], \r\n            T.HowToRedeemLine5 AS ");
+            viewString.Append("[vw_Coupons.HowToRedeemLine5], \r\n            T.SubmissionDateTime AS [vw_Coupons");
+            viewString.Append(".SubmissionDateTime], \r\n            T.LocationCountryId AS [vw_Coupons.LocationC");
+            viewString.Append("ountryId], \r\n            T.CouponStartDate AS [vw_Coupons.CouponStartDate], \r\n  ");
+            viewString.Append("          T.CouponEndDate AS [vw_Coupons.CouponEndDate], \r\n            T.Priorit");
+            viewString.Append("y AS [vw_Coupons.Priority], \r\n            T.ShowBuyitBtn AS [vw_Coupons.ShowBuyi");
+            viewString.Append("tBtn], \r\n            T.BuyitLandingPageUrl AS [vw_Coupons.BuyitLandingPageUrl], ");
+            viewString.Append("\r\n            T.BuyitBtnLabel AS [vw_Coupons.BuyitBtnLabel], \r\n            T.You");
+            viewString.Append("tubeLink AS [vw_Coupons.YoutubeLink], \r\n            T.CouponImage4 AS [vw_Coupon");
+            viewString.Append("s.CouponImage4], \r\n            T.CouponImage5 AS [vw_Coupons.CouponImage5], \r\n  ");
+            viewString.Append("          T.CouponImage6 AS [vw_Coupons.CouponImage6], \r\n            T.IsPayment");
+            viewString.Append("Collected AS [vw_Coupons.IsPaymentCollected], \r\n            T.PaymentDate AS [vw");
+            viewString.Append("_Coupons.PaymentDate], \r\n            T.IsShowReviews AS [vw_Coupons.IsShowReview");
+            viewString.Append("s], \r\n            T.IsShowAddress AS [vw_Coupons.IsShowAddress], \r\n            T");
+            viewString.Append(".IsShowPhoneNo AS [vw_Coupons.IsShowPhoneNo], \r\n            T.IsShowMap AS [vw_C");
+            viewString.Append("oupons.IsShowMap], \r\n            T.IsShowyouTube AS [vw_Coupons.IsShowyouTube], ");
+            viewString.Append("\r\n            T.IsShowAboutUs AS [vw_Coupons.IsShowAboutUs], \r\n            T.IsM");
+            viewString.Append("arketingStories AS [vw_Coupons.IsMarketingStories], \r\n            T.IsPerSaving3");
+            viewString.Append("days AS [vw_Coupons.IsPerSaving3days], \r\n            T.IsPerSaving2days AS [vw_C");
+            viewString.Append("oupons.IsPerSaving2days], \r\n            T.IsPerSavingLastday AS [vw_Coupons.IsPe");
+            viewString.Append("rSavingLastday], \r\n            T.IsDollarSaving3days AS [vw_Coupons.IsDollarSavi");
+            viewString.Append("ng3days], \r\n            T.IsDollarSaving2days AS [vw_Coupons.IsDollarSaving2days");
+            viewString.Append("], \r\n            T.IsDollarSavingLastday AS [vw_Coupons.IsDollarSavingLastday], ");
+            viewString.Append("\r\n            T.isSaveBtnLable AS [vw_Coupons.isSaveBtnLable], \r\n            T.D");
+            viewString.Append("ealFirstDiscountType AS [vw_Coupons.DealFirstDiscountType], \r\n            T.Deal");
+            viewString.Append("EndingDiscountType AS [vw_Coupons.DealEndingDiscountType], \r\n            T.Categ");
+            viewString.Append("ories AS [vw_Coupons.Categories], \r\n            T.CurrencyCode AS [vw_Coupons.Cu");
+            viewString.Append("rrencyCode], \r\n            T.CurrencySymbol AS [vw_Coupons.CurrencySymbol], \r\n  ");
+            viewString.Append("          True AS _from0\r\n        FROM BaseDbContext.vw_Coupons AS T\r\n    ) AS T");
+            viewString.Append("1");
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.vw_Coupons", viewString.ToString());
         }
         
@@ -4140,7 +4161,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView123()
         {
-            System.Text.StringBuilder viewString = new System.Text.StringBuilder(8653);
+            System.Text.StringBuilder viewString = new System.Text.StringBuilder(8888);
             viewString.Append("\r\n    SELECT VALUE -- Constructing vw_Coupons\r\n        [DomainModels.vw_Coupons]");
             viewString.Append("(T1.[vw_Coupons.CouponId], T1.[vw_Coupons.LanguageId], T1.[vw_Coupons.UserId], T");
             viewString.Append("1.[vw_Coupons.CouponTitle], T1.[vw_Coupons.SearchKeywords], T1.[vw_Coupons.Statu");
@@ -4177,79 +4198,82 @@ namespace Edm_EntityMappingGeneratedViews
             viewString.Append("], T1.[vw_Coupons.IsMarketingStories], T1.[vw_Coupons.IsPerSaving3days], T1.[vw_");
             viewString.Append("Coupons.IsPerSaving2days], T1.[vw_Coupons.IsPerSavingLastday], T1.[vw_Coupons.Is");
             viewString.Append("DollarSaving3days], T1.[vw_Coupons.IsDollarSaving2days], T1.[vw_Coupons.IsDollar");
-            viewString.Append("SavingLastday], T1.[vw_Coupons.isSaveBtnLable])\r\n    FROM (\r\n        SELECT \r\n  ");
-            viewString.Append("          T.CouponId AS [vw_Coupons.CouponId], \r\n            T.LanguageId AS [vw");
-            viewString.Append("_Coupons.LanguageId], \r\n            T.UserId AS [vw_Coupons.UserId], \r\n         ");
-            viewString.Append("   T.CouponTitle AS [vw_Coupons.CouponTitle], \r\n            T.SearchKeywords AS ");
-            viewString.Append("[vw_Coupons.SearchKeywords], \r\n            T.Status AS [vw_Coupons.Status], \r\n  ");
-            viewString.Append("          T.Archived AS [vw_Coupons.Archived], \r\n            T.Approved AS [vw_C");
-            viewString.Append("oupons.Approved], \r\n            T.ApprovedBy AS [vw_Coupons.ApprovedBy], \r\n     ");
-            viewString.Append("       T.ApprovalDateTime AS [vw_Coupons.ApprovalDateTime], \r\n            T.Crea");
-            viewString.Append("tedDateTime AS [vw_Coupons.CreatedDateTime], \r\n            T.CreatedBy AS [vw_Co");
-            viewString.Append("upons.CreatedBy], \r\n            T.ModifiedDateTime AS [vw_Coupons.ModifiedDateTi");
-            viewString.Append("me], \r\n            T.ModifiedBy AS [vw_Coupons.ModifiedBy], \r\n            T.Reje");
-            viewString.Append("ctedReason AS [vw_Coupons.RejectedReason], \r\n            T.Rejecteddatetime AS [");
-            viewString.Append("vw_Coupons.Rejecteddatetime], \r\n            T.RejectedBy AS [vw_Coupons.Rejected");
-            viewString.Append("By], \r\n            T.CurrencyId AS [vw_Coupons.CurrencyId], \r\n            T.Pric");
-            viewString.Append("e AS [vw_Coupons.Price], \r\n            T.Savings AS [vw_Coupons.Savings], \r\n    ");
-            viewString.Append("        T.SwapCost AS [vw_Coupons.SwapCost], \r\n            T.CouponViewCount AS ");
-            viewString.Append("[vw_Coupons.CouponViewCount], \r\n            T.CouponIssuedCount AS [vw_Coupons.C");
-            viewString.Append("ouponIssuedCount], \r\n            T.CouponRedeemedCount AS [vw_Coupons.CouponRede");
-            viewString.Append("emedCount], \r\n            T.CouponQtyPerUser AS [vw_Coupons.CouponQtyPerUser], \r");
-            viewString.Append("\n            T.CouponListingMode AS [vw_Coupons.CouponListingMode], \r\n          ");
-            viewString.Append("  T.CompanyId AS [vw_Coupons.CompanyId], \r\n            T.CouponActiveMonth AS [v");
-            viewString.Append("w_Coupons.CouponActiveMonth], \r\n            T.CouponActiveYear AS [vw_Coupons.Co");
-            viewString.Append("uponActiveYear], \r\n            T.CouponExpirydate AS [vw_Coupons.CouponExpirydat");
-            viewString.Append("e], \r\n            T.couponImage1 AS [vw_Coupons.couponImage1], \r\n            T.C");
-            viewString.Append("ouponImage2 AS [vw_Coupons.CouponImage2], \r\n            T.CouponImage3 AS [vw_Co");
-            viewString.Append("upons.CouponImage3], \r\n            T.LogoUrl AS [vw_Coupons.LogoUrl], \r\n        ");
-            viewString.Append("    T.HighlightLine1 AS [vw_Coupons.HighlightLine1], \r\n            T.HighlightLi");
-            viewString.Append("ne2 AS [vw_Coupons.HighlightLine2], \r\n            T.HighlightLine3 AS [vw_Coupon");
-            viewString.Append("s.HighlightLine3], \r\n            T.HighlightLine4 AS [vw_Coupons.HighlightLine4]");
-            viewString.Append(", \r\n            T.HighlightLine5 AS [vw_Coupons.HighlightLine5], \r\n            T");
-            viewString.Append(".FinePrintLine1 AS [vw_Coupons.FinePrintLine1], \r\n            T.FinePrintLine2 A");
-            viewString.Append("S [vw_Coupons.FinePrintLine2], \r\n            T.FinePrintLine3 AS [vw_Coupons.Fin");
-            viewString.Append("ePrintLine3], \r\n            T.FinePrintLine4 AS [vw_Coupons.FinePrintLine4], \r\n ");
-            viewString.Append("           T.FinePrintLine5 AS [vw_Coupons.FinePrintLine5], \r\n            T.Loca");
-            viewString.Append("tionBranchId AS [vw_Coupons.LocationBranchId], \r\n            T.LocationTitle AS ");
-            viewString.Append("[vw_Coupons.LocationTitle], \r\n            T.LocationLine1 AS [vw_Coupons.Locatio");
-            viewString.Append("nLine1], \r\n            T.LocationLine2 AS [vw_Coupons.LocationLine2], \r\n        ");
-            viewString.Append("    T.LocationCity AS [vw_Coupons.LocationCity], \r\n            T.LocationState A");
-            viewString.Append("S [vw_Coupons.LocationState], \r\n            T.LocationZipCode AS [vw_Coupons.Loc");
-            viewString.Append("ationZipCode], \r\n            T.LocationLAT AS [vw_Coupons.LocationLAT], \r\n      ");
-            viewString.Append("      T.LocationLON AS [vw_Coupons.LocationLON], \r\n            T.LocationPhone A");
-            viewString.Append("S [vw_Coupons.LocationPhone], \r\n            T.GeographyColumn AS [vw_Coupons.Geo");
-            viewString.Append("graphyColumn], \r\n            T.HowToRedeemLine1 AS [vw_Coupons.HowToRedeemLine1]");
-            viewString.Append(", \r\n            T.HowToRedeemLine2 AS [vw_Coupons.HowToRedeemLine2], \r\n         ");
-            viewString.Append("   T.HowToRedeemLine3 AS [vw_Coupons.HowToRedeemLine3], \r\n            T.HowToRed");
-            viewString.Append("eemLine4 AS [vw_Coupons.HowToRedeemLine4], \r\n            T.HowToRedeemLine5 AS [");
-            viewString.Append("vw_Coupons.HowToRedeemLine5], \r\n            T.SubmissionDateTime AS [vw_Coupons.");
-            viewString.Append("SubmissionDateTime], \r\n            T.LocationCountryId AS [vw_Coupons.LocationCo");
-            viewString.Append("untryId], \r\n            T.CouponStartDate AS [vw_Coupons.CouponStartDate], \r\n   ");
-            viewString.Append("         T.CouponEndDate AS [vw_Coupons.CouponEndDate], \r\n            T.Priority");
-            viewString.Append(" AS [vw_Coupons.Priority], \r\n            T.ShowBuyitBtn AS [vw_Coupons.ShowBuyit");
-            viewString.Append("Btn], \r\n            T.BuyitLandingPageUrl AS [vw_Coupons.BuyitLandingPageUrl], \r");
-            viewString.Append("\n            T.BuyitBtnLabel AS [vw_Coupons.BuyitBtnLabel], \r\n            T.Cate");
-            viewString.Append("gories AS [vw_Coupons.Categories], \r\n            T.CurrencyCode AS [vw_Coupons.C");
-            viewString.Append("urrencyCode], \r\n            T.CurrencySymbol AS [vw_Coupons.CurrencySymbol], \r\n ");
-            viewString.Append("           T.YoutubeLink AS [vw_Coupons.YoutubeLink], \r\n            T.CouponImag");
-            viewString.Append("e4 AS [vw_Coupons.CouponImage4], \r\n            T.CouponImage5 AS [vw_Coupons.Cou");
-            viewString.Append("ponImage5], \r\n            T.CouponImage6 AS [vw_Coupons.CouponImage6], \r\n       ");
-            viewString.Append("     T.IsPaymentCollected AS [vw_Coupons.IsPaymentCollected], \r\n            T.Pa");
-            viewString.Append("ymentDate AS [vw_Coupons.PaymentDate], \r\n            T.IsShowReviews AS [vw_Coup");
-            viewString.Append("ons.IsShowReviews], \r\n            T.IsShowAddress AS [vw_Coupons.IsShowAddress],");
-            viewString.Append(" \r\n            T.IsShowPhoneNo AS [vw_Coupons.IsShowPhoneNo], \r\n            T.Is");
-            viewString.Append("ShowMap AS [vw_Coupons.IsShowMap], \r\n            T.IsShowyouTube AS [vw_Coupons.");
-            viewString.Append("IsShowyouTube], \r\n            T.IsShowAboutUs AS [vw_Coupons.IsShowAboutUs], \r\n ");
-            viewString.Append("           T.IsMarketingStories AS [vw_Coupons.IsMarketingStories], \r\n          ");
-            viewString.Append("  T.IsPerSaving3days AS [vw_Coupons.IsPerSaving3days], \r\n            T.IsPerSavi");
-            viewString.Append("ng2days AS [vw_Coupons.IsPerSaving2days], \r\n            T.IsPerSavingLastday AS ");
-            viewString.Append("[vw_Coupons.IsPerSavingLastday], \r\n            T.IsDollarSaving3days AS [vw_Coup");
-            viewString.Append("ons.IsDollarSaving3days], \r\n            T.IsDollarSaving2days AS [vw_Coupons.IsD");
-            viewString.Append("ollarSaving2days], \r\n            T.IsDollarSavingLastday AS [vw_Coupons.IsDollar");
-            viewString.Append("SavingLastday], \r\n            T.isSaveBtnLable AS [vw_Coupons.isSaveBtnLable], \r");
-            viewString.Append("\n            True AS _from0\r\n        FROM SMDModelStoreContainer.vw_Coupons AS T");
-            viewString.Append("\r\n    ) AS T1");
+            viewString.Append("SavingLastday], T1.[vw_Coupons.isSaveBtnLable], T1.[vw_Coupons.DealFirstDiscount");
+            viewString.Append("Type], T1.[vw_Coupons.DealEndingDiscountType])\r\n    FROM (\r\n        SELECT \r\n   ");
+            viewString.Append("         T.CouponId AS [vw_Coupons.CouponId], \r\n            T.LanguageId AS [vw_");
+            viewString.Append("Coupons.LanguageId], \r\n            T.UserId AS [vw_Coupons.UserId], \r\n          ");
+            viewString.Append("  T.CouponTitle AS [vw_Coupons.CouponTitle], \r\n            T.SearchKeywords AS [");
+            viewString.Append("vw_Coupons.SearchKeywords], \r\n            T.Status AS [vw_Coupons.Status], \r\n   ");
+            viewString.Append("         T.Archived AS [vw_Coupons.Archived], \r\n            T.Approved AS [vw_Co");
+            viewString.Append("upons.Approved], \r\n            T.ApprovedBy AS [vw_Coupons.ApprovedBy], \r\n      ");
+            viewString.Append("      T.ApprovalDateTime AS [vw_Coupons.ApprovalDateTime], \r\n            T.Creat");
+            viewString.Append("edDateTime AS [vw_Coupons.CreatedDateTime], \r\n            T.CreatedBy AS [vw_Cou");
+            viewString.Append("pons.CreatedBy], \r\n            T.ModifiedDateTime AS [vw_Coupons.ModifiedDateTim");
+            viewString.Append("e], \r\n            T.ModifiedBy AS [vw_Coupons.ModifiedBy], \r\n            T.Rejec");
+            viewString.Append("tedReason AS [vw_Coupons.RejectedReason], \r\n            T.Rejecteddatetime AS [v");
+            viewString.Append("w_Coupons.Rejecteddatetime], \r\n            T.RejectedBy AS [vw_Coupons.RejectedB");
+            viewString.Append("y], \r\n            T.CurrencyId AS [vw_Coupons.CurrencyId], \r\n            T.Price");
+            viewString.Append(" AS [vw_Coupons.Price], \r\n            T.Savings AS [vw_Coupons.Savings], \r\n     ");
+            viewString.Append("       T.SwapCost AS [vw_Coupons.SwapCost], \r\n            T.CouponViewCount AS [");
+            viewString.Append("vw_Coupons.CouponViewCount], \r\n            T.CouponIssuedCount AS [vw_Coupons.Co");
+            viewString.Append("uponIssuedCount], \r\n            T.CouponRedeemedCount AS [vw_Coupons.CouponRedee");
+            viewString.Append("medCount], \r\n            T.CouponQtyPerUser AS [vw_Coupons.CouponQtyPerUser], \r\n");
+            viewString.Append("            T.CouponListingMode AS [vw_Coupons.CouponListingMode], \r\n           ");
+            viewString.Append(" T.CompanyId AS [vw_Coupons.CompanyId], \r\n            T.CouponActiveMonth AS [vw");
+            viewString.Append("_Coupons.CouponActiveMonth], \r\n            T.CouponActiveYear AS [vw_Coupons.Cou");
+            viewString.Append("ponActiveYear], \r\n            T.CouponExpirydate AS [vw_Coupons.CouponExpirydate");
+            viewString.Append("], \r\n            T.couponImage1 AS [vw_Coupons.couponImage1], \r\n            T.Co");
+            viewString.Append("uponImage2 AS [vw_Coupons.CouponImage2], \r\n            T.CouponImage3 AS [vw_Cou");
+            viewString.Append("pons.CouponImage3], \r\n            T.LogoUrl AS [vw_Coupons.LogoUrl], \r\n         ");
+            viewString.Append("   T.HighlightLine1 AS [vw_Coupons.HighlightLine1], \r\n            T.HighlightLin");
+            viewString.Append("e2 AS [vw_Coupons.HighlightLine2], \r\n            T.HighlightLine3 AS [vw_Coupons");
+            viewString.Append(".HighlightLine3], \r\n            T.HighlightLine4 AS [vw_Coupons.HighlightLine4],");
+            viewString.Append(" \r\n            T.HighlightLine5 AS [vw_Coupons.HighlightLine5], \r\n            T.");
+            viewString.Append("FinePrintLine1 AS [vw_Coupons.FinePrintLine1], \r\n            T.FinePrintLine2 AS");
+            viewString.Append(" [vw_Coupons.FinePrintLine2], \r\n            T.FinePrintLine3 AS [vw_Coupons.Fine");
+            viewString.Append("PrintLine3], \r\n            T.FinePrintLine4 AS [vw_Coupons.FinePrintLine4], \r\n  ");
+            viewString.Append("          T.FinePrintLine5 AS [vw_Coupons.FinePrintLine5], \r\n            T.Locat");
+            viewString.Append("ionBranchId AS [vw_Coupons.LocationBranchId], \r\n            T.LocationTitle AS [");
+            viewString.Append("vw_Coupons.LocationTitle], \r\n            T.LocationLine1 AS [vw_Coupons.Location");
+            viewString.Append("Line1], \r\n            T.LocationLine2 AS [vw_Coupons.LocationLine2], \r\n         ");
+            viewString.Append("   T.LocationCity AS [vw_Coupons.LocationCity], \r\n            T.LocationState AS");
+            viewString.Append(" [vw_Coupons.LocationState], \r\n            T.LocationZipCode AS [vw_Coupons.Loca");
+            viewString.Append("tionZipCode], \r\n            T.LocationLAT AS [vw_Coupons.LocationLAT], \r\n       ");
+            viewString.Append("     T.LocationLON AS [vw_Coupons.LocationLON], \r\n            T.LocationPhone AS");
+            viewString.Append(" [vw_Coupons.LocationPhone], \r\n            T.GeographyColumn AS [vw_Coupons.Geog");
+            viewString.Append("raphyColumn], \r\n            T.HowToRedeemLine1 AS [vw_Coupons.HowToRedeemLine1],");
+            viewString.Append(" \r\n            T.HowToRedeemLine2 AS [vw_Coupons.HowToRedeemLine2], \r\n          ");
+            viewString.Append("  T.HowToRedeemLine3 AS [vw_Coupons.HowToRedeemLine3], \r\n            T.HowToRede");
+            viewString.Append("emLine4 AS [vw_Coupons.HowToRedeemLine4], \r\n            T.HowToRedeemLine5 AS [v");
+            viewString.Append("w_Coupons.HowToRedeemLine5], \r\n            T.SubmissionDateTime AS [vw_Coupons.S");
+            viewString.Append("ubmissionDateTime], \r\n            T.LocationCountryId AS [vw_Coupons.LocationCou");
+            viewString.Append("ntryId], \r\n            T.CouponStartDate AS [vw_Coupons.CouponStartDate], \r\n    ");
+            viewString.Append("        T.CouponEndDate AS [vw_Coupons.CouponEndDate], \r\n            T.Priority ");
+            viewString.Append("AS [vw_Coupons.Priority], \r\n            T.ShowBuyitBtn AS [vw_Coupons.ShowBuyitB");
+            viewString.Append("tn], \r\n            T.BuyitLandingPageUrl AS [vw_Coupons.BuyitLandingPageUrl], \r\n");
+            viewString.Append("            T.BuyitBtnLabel AS [vw_Coupons.BuyitBtnLabel], \r\n            T.Categ");
+            viewString.Append("ories AS [vw_Coupons.Categories], \r\n            T.CurrencyCode AS [vw_Coupons.Cu");
+            viewString.Append("rrencyCode], \r\n            T.CurrencySymbol AS [vw_Coupons.CurrencySymbol], \r\n  ");
+            viewString.Append("          T.YoutubeLink AS [vw_Coupons.YoutubeLink], \r\n            T.CouponImage");
+            viewString.Append("4 AS [vw_Coupons.CouponImage4], \r\n            T.CouponImage5 AS [vw_Coupons.Coup");
+            viewString.Append("onImage5], \r\n            T.CouponImage6 AS [vw_Coupons.CouponImage6], \r\n        ");
+            viewString.Append("    T.IsPaymentCollected AS [vw_Coupons.IsPaymentCollected], \r\n            T.Pay");
+            viewString.Append("mentDate AS [vw_Coupons.PaymentDate], \r\n            T.IsShowReviews AS [vw_Coupo");
+            viewString.Append("ns.IsShowReviews], \r\n            T.IsShowAddress AS [vw_Coupons.IsShowAddress], ");
+            viewString.Append("\r\n            T.IsShowPhoneNo AS [vw_Coupons.IsShowPhoneNo], \r\n            T.IsS");
+            viewString.Append("howMap AS [vw_Coupons.IsShowMap], \r\n            T.IsShowyouTube AS [vw_Coupons.I");
+            viewString.Append("sShowyouTube], \r\n            T.IsShowAboutUs AS [vw_Coupons.IsShowAboutUs], \r\n  ");
+            viewString.Append("          T.IsMarketingStories AS [vw_Coupons.IsMarketingStories], \r\n           ");
+            viewString.Append(" T.IsPerSaving3days AS [vw_Coupons.IsPerSaving3days], \r\n            T.IsPerSavin");
+            viewString.Append("g2days AS [vw_Coupons.IsPerSaving2days], \r\n            T.IsPerSavingLastday AS [");
+            viewString.Append("vw_Coupons.IsPerSavingLastday], \r\n            T.IsDollarSaving3days AS [vw_Coupo");
+            viewString.Append("ns.IsDollarSaving3days], \r\n            T.IsDollarSaving2days AS [vw_Coupons.IsDo");
+            viewString.Append("llarSaving2days], \r\n            T.IsDollarSavingLastday AS [vw_Coupons.IsDollarS");
+            viewString.Append("avingLastday], \r\n            T.isSaveBtnLable AS [vw_Coupons.isSaveBtnLable], \r\n");
+            viewString.Append("            T.DealFirstDiscountType AS [vw_Coupons.DealFirstDiscountType], \r\n   ");
+            viewString.Append("         T.DealEndingDiscountType AS [vw_Coupons.DealEndingDiscountType], \r\n    ");
+            viewString.Append("        True AS _from0\r\n        FROM SMDModelStoreContainer.vw_Coupons AS T\r\n   ");
+            viewString.Append(" ) AS T1");
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.vw_Coupons", viewString.ToString());
         }
         

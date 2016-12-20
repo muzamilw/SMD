@@ -18,6 +18,12 @@ namespace SMD.Models.DomainModels
 
 
         public Nullable<DateTime> ExpiryDate { get; set; }
+
+
+
+        public string VoucherCode2 { get; set; }
+        public string VoucherCode3 { get; set; }
+        public string VoucherCode4 { get; set; }
         public string URL { get; set; }
 
    

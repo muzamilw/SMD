@@ -23,6 +23,13 @@ namespace DomainModelProject
         public string VoucherCode { get; set; }
         public Nullable<System.DateTime> ExpiryDate { get; set; }
         public string URL { get; set; }
+        public string PromoCode1 { get; set; }
+        public string PromoCode2 { get; set; }
+        public string PromoCode3 { get; set; }
+        public string PromoCode4 { get; set; }
+        public string VoucherCode2 { get; set; }
+        public string VoucherCode3 { get; set; }
+        public string VoucherCode4 { get; set; }
     
         public virtual Coupon Coupon { get; set; }
     }

@@ -100,5 +100,8 @@ namespace SMD.Models.DomainModels
         public Nullable<bool> IsDollarSavingLastday { get; set; }
         public Nullable<int> isSaveBtnLable { get; set; }
 
+                public Nullable<int> DealFirstDiscountType { get; set; }
+        public Nullable<int> DealEndingDiscountType { get; set; }
+
     }
 }
