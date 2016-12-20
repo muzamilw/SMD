@@ -297,7 +297,6 @@ define("Coupons/Coupons.viewModel",
                      },
                      {
                          success: function (comData) {
-                             debugger;
                              CompanyCity(comData.BillingCity);
                              AddressLine1(comData.CompanyAddressline1);
                              companystate(comData.BillingState);
@@ -440,11 +439,38 @@ define("Coupons/Coupons.viewModel",
 
 
         },
+              getDealStats = function (CouponId) {
+                  dataservice.getDealStats({
+                      id: CouponId,
+                      
+                  }, {
+                      success: function (data) {
+                          if (data != null) {
 
+                              var Element = ko.utils.arrayFirst(campaignGridContent(), function (item) {
+                                  return item.CouponId() == data.CouponId;
+                              });
+
+                              if (Element) {
+                                  Element.DealLines(data.DealLines);
+                                  Element.ClickThruComparison(data.ClickThruComparison);
+                                  Element.ClickThruDirection(data.ClickThruDirection);
+                                  Element.DealsOpenedComparison(data.DealsOpenedComparison);
+                                  Element.DealsOpenedDirection(data.DealsOpenedDirection);
+                                  Element.DealRating(data.DealRating);
+                                  Element.DealReviewsCount(data.DealReviewsCount);
+                                  
+                              }
+                          }
+                      },
+                      error: function (response) {
+                      }
+                  });
+
+              },
 
         getAdCampaignGridContent = function () {
-
-            dataservice.getCampaignData({
+                dataservice.getCampaignData({
                 CampaignId: 0,
                 PageSize: pager().pageSize(),
                 PageNo: pager().currentPage(),
@@ -458,6 +484,10 @@ define("Coupons/Coupons.viewModel",
                         campaignGridContent.removeAll();
                         _.each(data.Coupon, function (item) {
                             campaignGridContent.push(model.Coupon.Create(updateCampaignGridItem(item)));
+                        });
+                        _.each(campaignGridContent(), function (item) {
+                            getDealStats(item.CouponId());
+
                         });
                         pager().totalCount(data.TotalCount);
                         if (data.TotalCount == 0) {
@@ -674,8 +704,8 @@ getfreeCouponCount = function () {
             googleAddressMap();
         },
         onSaveBtnLabel = function () {
-            var price = couponModel().CouponPriceOptions()[0].Price();
-            var saving = couponModel().CouponPriceOptions()[0].Savings();
+            var price = couponModel().CouponPriceOptions().length > 0 ? couponModel().CouponPriceOptions()[0].Price() : 0;
+            var saving = couponModel().CouponPriceOptions().length > 0 ? couponModel().CouponPriceOptions()[0].Savings():0;
             var result = 0;
             var cur = currencyCode();
             var strlable;
@@ -978,7 +1008,7 @@ getfreeCouponCount = function () {
             }
             ,
         saveCampaign = function (mode) {
-            debugger;
+            
             if (ValidateCoupon() == false) {
 
                 var isPopulateErrorList = false;
@@ -1692,7 +1722,6 @@ getfreeCouponCount = function () {
 
             },
                 SaveAsDraft = function () {
-                    debugger;
                     hasErrors = false;
                     if (couponModel().CouponTitle() == "" || couponModel().CouponTitle() == undefined) {
                         hasErrors = true;
@@ -1794,7 +1823,7 @@ getfreeCouponCount = function () {
                 //                debugger;
                 //                return matcharry.Name;
                 //            }
-                //        }
+                //        }LogoUrl
 
                 //    }
                 //}, this),
@@ -1851,7 +1880,7 @@ getfreeCouponCount = function () {
                     geocoderComp.geocode({
                         'address': fulladdress
                     }, function (results, status) {
-                        debugger;
+                        
                         if (status == google.maps.GeocoderStatus.OK) {
                             // isMapVisible(true);
                             //if (isCodeAddressEdit() == false) {
@@ -1872,7 +1901,7 @@ getfreeCouponCount = function () {
                                 geocoder.geocode({
                                     "latLng": event.latLng
                                 }, function (results, status) {
-                                    debugger;
+                                   
                                     console.log(results, status);
                                     if (status == google.maps.GeocoderStatus.OK) {
                                         console.log(results);
@@ -2718,7 +2747,6 @@ getfreeCouponCount = function () {
                 },
                 // Initialize the view model
                 initialize = function (specifiedView) {
-                    debugger;
                     CompanyId(ComId);
                     getCompanyData(ComId);
                     view = specifiedView;
