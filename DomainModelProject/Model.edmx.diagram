@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b9d0f1d6e4b74ac08101f8f1f3928af5" Name="Diagram1" ZoomLevel="77">
+      <Diagram DiagramId="b9d0f1d6e4b74ac08101f8f1f3928af5" Name="Diagram1" ZoomLevel="95">
         <EntityTypeShape EntityType="SMDDevModel.Account" Width="1.5" PointX="10.5" PointY="44.625" IsExpanded="true" />
         <EntityTypeShape EntityType="SMDDevModel.AdCampaign" Width="1.5" PointX="17.5" PointY="39.25" IsExpanded="true" />
         <EntityTypeShape EntityType="SMDDevModel.AdCampaignResponse" Width="1.5" PointX="19.75" PointY="47.5" IsExpanded="true" />

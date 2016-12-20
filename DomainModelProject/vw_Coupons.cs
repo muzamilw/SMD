@@ -105,5 +105,9 @@ namespace DomainModelProject
         public Nullable<bool> IsDollarSaving2days { get; set; }
         public Nullable<bool> IsDollarSavingLastday { get; set; }
         public Nullable<int> isSaveBtnLable { get; set; }
+        public Nullable<int> DealFirstDiscount { get; set; }
+        public Nullable<int> DealEndingDiscount { get; set; }
+        public Nullable<int> DealFirstDiscountType { get; set; }
+        public Nullable<int> DealEndingDiscountType { get; set; }
     }
 }

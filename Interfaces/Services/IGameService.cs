@@ -11,5 +11,8 @@ namespace SMD.Interfaces.Services
     {
 
         Game GetRandomGame(int ExistingGameId);
+
+
+        GetRandomGameByUser_Result GetRandomGameByUser(long ExistingGameId, string UserId);
     }
 }

@@ -52,9 +52,9 @@ namespace SMD.MIS.Areas.Api.Controllers
                 throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
             }
 
-            var game = gameService.GetRandomGame(ExistingGameId);
+            var game = gameService.GetRandomGameByUser(ExistingGameId, UserId);
 
-            return new RandomGameResponse { GameId = game.GameId, GameName = game.GameName, GameUrl = game.GameUrl, Message = "Success", Status = true };
+            return new RandomGameResponse { GameId = game.GameId, GameName = game.GameName, GameUrl = game.GameUrl, Message = "Success", Status = true, GameInstructions = game.GameInstructions, GameLargeImage = game.GameLargeImage, GameSmallImage = game.GameSmallImage, Accuracy = game.Accuracy, PlayTime = game.PlayTime, Score = game.Score };
             }
             catch (Exception e)
             {
