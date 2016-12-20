@@ -114,7 +114,13 @@
               IsDollarSavingLastday = ko.observable(IsDollarSavingLastday),
               isSaveBtnLable = ko.observable(isSaveBtnLable ==1 ? "1" :isSaveBtnLable == 2 ? "2" : isSaveBtnLable == 3 ? "3" :null),
               FirstDiscount =  ko.observable(FirstDiscount),
-    
+                DealLines = ko.observable(),
+                ClickThruComparison = ko.observable(),
+                ClickThruDirection = ko.observable(),
+                DealsOpenedComparison  = ko.observable(),
+                DealsOpenedDirection   = ko.observable(),
+                DealRating    = ko.observable(),
+                DealReviewsCount = ko.observable(),
 
                // Errors
           errors = ko.validation.group({
@@ -448,7 +454,13 @@
               lastModified: (lastModified),
               isSaveBtnLable: (isSaveBtnLable),
               FirstDiscount:(FirstDiscount),
-
+              DealLines : (DealLines),
+              ClickThruComparison : (ClickThruComparison),
+              ClickThruDirection : (ClickThruDirection),
+              DealsOpenedComparison : (DealsOpenedComparison),
+              DealsOpenedDirection   : ko.observable(DealsOpenedDirection),
+              DealRating    : ko.observable(DealRating),
+              DealReviewsCount : ko.observable(DealReviewsCount)
           };
       };
 

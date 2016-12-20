@@ -50,6 +50,6 @@ namespace SMD.Interfaces.Repository
 
 
         bool CompleteCoupons(long[] couponIds);
-
+        CouponStatsResponse getDealStats(long Id);
     }
 }

@@ -24,7 +24,8 @@ else
                     <div class="col-lg-9" style="margin-left:-11px !important;" >
                         <span class="pull-left Theme_standard_clr" style="padding-left:0px;font-size:21px;" data-bind="NewCampaignBinding: CampaignName,visible:$root.isDisplayCouponsAds()">New Coupon</span>
 
-                        <img class="vid_image pull-left" data-bind="attr: { src: $root.StatusCodeImage }" src="/Content/Images/Videos_small.png"> <span id="newVid" class="pull-left " style="color:#fff!important; padding-left:0px;font-size:23px;margin-top:15px;margin-left:9px;" data-bind="NewCampaignBinding: CampaignName">New video campaign</span> <span style="color:#fff!important;margin-left:3px;margin-top:21px;" class="subtitle pull-left" data-bind="text:$root.CampaignHeader()"></span>
+                        <img class="vid_image pull-left" data-bind="attr: { src: $root.StatusCodeImage }" src="/Content/Images/Videos_small.png">
+                         <span id="newVid" class="pull-left " style="color:#fff!important; padding-left:0px;font-size:23px;margin-top:15px;margin-left:9px;" data-bind="NewCampaignBinding: CampaignName">New video campaign</span> <span style="color:#fff!important;margin-left:3px;margin-top:21px;" class="subtitle pull-left" data-bind="text:$root.CampaignHeader()"></span>
 
                         @*<span id="newdisplay_Ad" class="pull-left " style="color:black!important; padding-left:0px;font-size:23px;margin-top:12px;display:none;" data-bind="NewCampaignBinding: CampaignName">New display ad</span>*@
                     </div>
@@ -2401,7 +2402,6 @@ else
                         </div>
                         <div class="modal-body" data-bind="with:$root.selectedCriteria">
                             <div class="row">
-
                                 <div>
                                     <div class="col-lg-12 marginBottom12">
 
@@ -3261,6 +3261,7 @@ else
         </div>
 
         <div class="modal-dialog" style=" width:660px;" data-bind="visible:$root.CurrentMode()==4">
+
             <div class="col-lg-6 preview_stencilImg" style=" margin-right: 35px; width:310px;">
                 <div id="background" class="mobBck mobile_background">
                     <div style="position:relative;">
@@ -3327,6 +3328,7 @@ else
     </div>
 
     <div class="modal fade my-modal model_vucherQ_ph" id="phVoucherDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
         <div class="modal-dialog" style="width: 315px !important;">
             <div class="col-lg-12 preview_stencilImg">
                 <div style="position:relative;">
@@ -3379,7 +3381,8 @@ else
         </div>
     </div>
     <div class="modal fade my-modal model_BuyItQ_ph" id="phBuyItDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog" style="width: 315px !important;">
+
+        <div class="modal-dialog" style="width: 315px!important;">
             <div class="col-lg-12 preview_stencilImg">
                 <div style="position:relative;">
                     <img src="~/Images/close2-128.png" width="20" class="preview_close" data-dismiss="modal" />
@@ -3451,7 +3454,7 @@ else
     <!-- /ko -->
 </div>
 @*reward your audience screen*@
-<div class="col-lg-12" data-bind="visible: $root.isWelcomeScreenVisible()" style="display: none">
+<div class="col-lg-12" data-bind="visible: $root.isWelcomeScreenVisible()" style="display: none;">
     <div class="main-box no-header clearfix">
         <div class="col-lg-12 form-horizontal" style="padding: 20px;">
             <div class="row">

@@ -154,28 +154,24 @@ else
                                         <table class="table table-striped table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th class="col-sm-3"><span class="GridHeaderFont_size">Deal Group</span></th>
+                                                    <th class="col-sm-4"><span class="GridHeaderFont_size">Campaign Name</span></th>
                                                     <th class="col-sm-2">
                                                         <span class="GridHeaderFont_size">
-                                                            Deals in group
+                                                            Deal Type
                                                         </span>
                                                     </th>
-                                                    <th class="col-sm-2" style="display:none;">
+                                                    <th class="col-sm-1" >
                                                         <span class="GridHeaderFont_size">
-                                                            Participating Branches
+                                                            # Deal Lines
                                                         </span>
                                                     </th>
                                                     <th class="col-sm-1">
-                                                        <span class="GridHeaderFont_size">Viewed</span>
+                                                        <span class="GridHeaderFont_size">End Date</span>
                                                     </th>
-                                                    <th class="col-sm-1">
-                                                        <span class="GridHeaderFont_size">Referred</span>
+                                                    <th class="col-sm-4" colspan="2">
+                                                        <span class="GridHeaderFont_size">Last 7 & 14 Day Comparision </span>
                                                     </th>
-                                                    <th class="col-sm-1">
-                                                        <span class="GridHeaderFont_size" style="display:none;">Redeemed</span>
-                                                    </th>
-                                                    <th class="col-sm-1"><span class="GridHeaderFont_size">Status</span></th>
-                                                    <th class="col-sm-1"></th>
+                                                    
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -290,90 +286,117 @@ else
             <tr style="cursor: pointer">
                 <td class="col-sm-4">
                     <a href="#" class="store-user-link" data-bind="text: CouponTitle,click:$root.onEditCampaign"></a>
+                    <br />
+                    <img style="width:130px;height:130px;" data-bind="attr: { src:  LogoUrl()}">
+                    <br />
+                    <span style="color:darkgray;font-size:11px;" data-bind="text:  ApprovalDateTime() ? 'Start Date : ' +  ApprovalDateTime() : 'Not Started'"></span>
+                    <br />
+                    <span style="color:darkgray;font-size:11px;" data-bind="text:  ModifiedDateTime() ? 'Last Updated : ' +  ModifiedDateTime() : ''"></span>
+
                 </td>
                 <td class="col-sm-2">
-                    <span data-bind="text: DealsinGroupCount"></span>
+                    <!-- ko if: CouponListingMode() == 1-->
+                    <span>7 Day Flash Deal</span>
+                    <!-- /ko -->
+                    <!-- ko if: CouponListingMode() == 2-->
+                    <span>30 Day Listing</span>
+                    <!-- /ko -->
                 </td>
-                <td class="col-sm-2" style="display:none;">
-                    <span>Special Branches : 1</span>
-                </td>
-                <td class="col-sm-2">
-                    <span data-bind="text: CouponViewCount"></span>
-                </td>
-                <td class="col-sm-2">
-                    <span data-bind="text: CouponIssuedCount"></span>
+                <td class="col-sm-1" >
+                    <span data-bind="text:DealLines"></span>
                 </td>
                 <td class="col-sm-1">
-                    <span style="display:none;" data-bind="text: CouponRedeemedCount"></span>
+                    <span data-bind="text: CouponEndDate"></span>
                 </td>
                 <td class="col-sm-2">
-                    <!-- ko if: Status() === 1-->
-                    <div class="text-left statusbg" style="background:#6D6EFA;width:125px;">
-                        <span>
+                    @*<span data-bind="text: CouponIssuedCount"></span>*@
+                    <table class="tbl-noborder">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span>Click-Thrus</span>
+                                </td>
+                                <td>
+                                    <span >count</span>
+                                </td>
+                                <td><span data-bind="text: ClickThruComparison"> </span></td>
+                            </tr>
+                            <tr>
+                                <td><span>Deals Opened</span></td>
+                                <td><span >count</span></td>
+                                <td><span data-bind="text: DealsOpenedComparison"></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </td>
+                
+                <td class="col-sm-2">
+                    <div style="font-size:larger;font-weight:bold;">
+                        <!-- ko if: Status() === 1-->
+                        <span style="color:#6D6EFA;">
                             Draft
                         </span>
-                    </div>
+                    
                     <!-- /ko -->
                     <!-- ko if: Status() === 2-->
-                    <div class="text-left statusbg" style="background:#fc0; width: 125px;">
-                        <span>
+                        <span style="color:#fc0 ;">
                             Pending Approval
                         </span>
-                    </div>
                     <!-- /ko -->
                     <!-- ko if:  Status() === 3-->
-                    <div class="text-left statusbg" style="background:#37c675;    width: 125px;">
-                        <span>
+                        <span style="color:#37c675 ;">
                             Live
                         </span>
-                    </div>
                     <!-- /ko -->
                     <!-- ko if: Status() === 4-->
-                    <div class="text-left statusbg" style="background:#fd008e; width: 125px;">
-                        <span>
+                        <span style="color:#fd008e ;">
                             Paused
                         </span>
-                    </div>
                     <!-- /ko -->
                     <!-- ko if: Status() === 5-->
-                    <div class="text-left statusbg" style="background:#c8e392; width: 125px;">
-                        <span>
+                        <span style="color:#c8e392 ;">
                             Completed
                         </span>
-                    </div>
                     <!-- /ko -->
                     <!-- ko if: Status() === 6-->
-                    <div class="text-left statusbg" style="background:red; width: 125px;">
-                        <span>
+                        <span style="color:red ;">
                             Approval Rejected
                         </span>
-                    </div>
                     <!-- /ko -->
                     <!-- ko if: Status() === 7-->
-                    <div class="text-left statusbg" style="background:red; width: 125px;">
-                        <span>
+                        <span style="color:red ;">
                             Remove
                         </span>
-                    </div>
                     <!-- /ko -->
                     <!-- ko if: Status() === 8-->
-                    <div class="text-left statusbg" style="background:#fc0; width: 125px;">
-                        <span>
+                        <span style="color:#fc0 ;">
                             Completed
                         </span>
-                    </div>
                     <!-- /ko -->
                     <!-- ko if: Status() === 9-->
-                    <div class="text-left statusbg" style="background:red; width: 125px;">
+                            <span style="color:red ;">
+                                Archived
+                            </span>
+                    <!-- /ko -->
+                        </div>
+                    <br />
+                    <div class="text-left statusbg" data-bind="click:$root.onEditCampaign" style="background:#37c675;width:95px;">
                         <span>
-                            Archived
+                            Edit Campaign
+                        </span>
+
+                    </div>
+                    <br />
+                    <div class="text-left statusbg"  style="background:blue;width:95px;"> @*data-bind="click:$root.openAdvertiserDashboardDealScreen"*@
+                        <span>
+                            Analyze Charts
                         </span>
                     </div>
-                    <!-- /ko -->
                 </td>
 
 
-                <td class="col-sm-1">
+                @*<td class="col-sm-1">
                     <!-- ko if: Status() == 1 ||  Status() == 4|| Status() ==  6-->
                     <a class="table-link danger" style="float: right" >
                         <span class="fa-stack" style="height:1em;">
@@ -383,7 +406,7 @@ else
                     </a>
                     <!-- /ko -->
                     &nbsp;
-                </td>
+                </td>*@
 
             </tr>
         </script>
