@@ -545,10 +545,6 @@
           <Property Name="OptionUrl" Type="nvarchar" MaxLength="500" />
           <Property Name="ExpiryDate" Type="datetime" />
           <Property Name="URL" Type="varchar(max)" />
-          <Property Name="PromoCode1" Type="varchar" MaxLength="100" />
-          <Property Name="PromoCode2" Type="varchar" MaxLength="100" />
-          <Property Name="PromoCode3" Type="varchar" MaxLength="100" />
-          <Property Name="PromoCode4" Type="varchar" MaxLength="100" />
           <Property Name="VoucherCode2" Type="varchar" MaxLength="100" />
           <Property Name="VoucherCode3" Type="varchar" MaxLength="100" />
           <Property Name="VoucherCode4" Type="varchar" MaxLength="100" />
@@ -2774,6 +2770,10 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
         <Function Name="GetRandomAdCampaign" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="type" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetRandomGameByUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ExistingGameId" Type="bigint" Mode="In" />
+          <Parameter Name="UserId" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="GetRandomPolls" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetRegisteredUserData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Status" Type="int" Mode="In" />
@@ -4336,6 +4336,10 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Parameter Name="mode" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetCampaignPerformanceWeeklyStats" ReturnType="Collection(DomainModels.GetCampaignPerformanceWeeklyStats_Result)" />
+          <FunctionImport Name="GetRandomGameByUser" ReturnType="Collection(DomainModels.GetRandomGameByUser_Result)">
+            <Parameter Name="ExistingGameId" Mode="In" Type="Int64" />
+            <Parameter Name="UserId" Mode="In" Type="String" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -6547,7 +6551,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="String" Name="description" Nullable="true" MaxLength="1502" />
           <Property Type="Int32" Name="ItemType" Nullable="true" />
           <Property Type="Double" Name="AdClickRate" Nullable="true" />
-          <Property Type="String" Name="AdImagePath" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="AdImagePath" Nullable="true" MaxLength="227" />
           <Property Type="String" Name="AdVideoLink" Nullable="true" MaxLength="1000" />
           <Property Type="String" Name="AdAnswer1" Nullable="true" MaxLength="500" />
           <Property Type="String" Name="AdAnswer2" Nullable="true" MaxLength="500" />
@@ -6647,7 +6651,13 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="Int32" Name="TotalItems" Nullable="true" />
           <Property Type="String" Name="SocialHandle" Nullable="true" MaxLength="200" />
           <Property Type="String" Name="SocialHandleType" Nullable="true" MaxLength="128" />
-          <Property Type="Int64" Name="FreeCouponID" Nullable="true" />
+          <Property Type="Int32" Name="FreeCouponID" Nullable="true" />
+          <Property Type="String" Name="GameInstructions" Nullable="true" />
+          <Property Type="String" Name="GameSmallImage" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="GameLargeImage" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="Score" Nullable="true" />
+          <Property Type="Double" Name="Playtime" Nullable="true" />
+          <Property Type="Double" Name="Accuracy" Nullable="true" />
         </ComplexType>
         <Association Name="FK_ProfileQuestionTargetCriteria_ProfileQuestion2">
           <End Type="DomainModels.ProfileQuestion" Role="ProfileQuestion" Multiplicity="0..1" />
@@ -6728,10 +6738,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="VoucherCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="ExpiryDate" Type="DateTime" Precision="3" />
           <Property Name="URL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="PromoCode1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="PromoCode2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="PromoCode3" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="PromoCode4" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="VoucherCode2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="VoucherCode3" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="VoucherCode4" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
@@ -7879,6 +7885,22 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="Double" Name="ProgressPercentageAnswer" Nullable="true" />
           <Property Type="Int32" Name="LeftPicResponseCount" Nullable="true" />
           <Property Type="Int32" Name="RightPicResponseCount" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetRandomGameByUser_Result">
+          <Property Type="Int64" Name="GameId" Nullable="false" />
+          <Property Type="String" Name="GameName" Nullable="true" MaxLength="200" />
+          <Property Type="Boolean" Name="Status" Nullable="true" />
+          <Property Type="Int32" Name="AgeRangeStart" Nullable="true" />
+          <Property Type="Int32" Name="AgeRangeEnd" Nullable="true" />
+          <Property Type="Int32" Name="GameType" Nullable="true" />
+          <Property Type="Int32" Name="Complexity" Nullable="true" />
+          <Property Type="String" Name="GameUrl" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="GameInstructions" Nullable="true" />
+          <Property Type="String" Name="GameSmallImage" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="GameLargeImage" Nullable="true" MaxLength="500" />
+          <Property Type="Double" Name="PlayTime" Nullable="true" />
+          <Property Type="Int32" Name="Score" Nullable="true" />
+          <Property Type="Double" Name="Accuracy" Nullable="true" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -9213,6 +9235,12 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
                 <ScalarProperty Name="SocialHandle" ColumnName="SocialHandle" />
                 <ScalarProperty Name="SocialHandleType" ColumnName="SocialHandleType" />
                 <ScalarProperty Name="FreeCouponID" ColumnName="FreeCouponID" />
+                <ScalarProperty Name="GameInstructions" ColumnName="GameInstructions" />
+                <ScalarProperty Name="GameSmallImage" ColumnName="GameSmallImage" />
+                <ScalarProperty Name="GameLargeImage" ColumnName="GameLargeImage" />
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="Playtime" ColumnName="Playtime" />
+                <ScalarProperty Name="Accuracy" ColumnName="Accuracy" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -9262,10 +9290,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
                 <ScalarProperty Name="VoucherCode4" ColumnName="VoucherCode4" />
                 <ScalarProperty Name="VoucherCode3" ColumnName="VoucherCode3" />
                 <ScalarProperty Name="VoucherCode2" ColumnName="VoucherCode2" />
-                <ScalarProperty Name="PromoCode4" ColumnName="PromoCode4" />
-                <ScalarProperty Name="PromoCode3" ColumnName="PromoCode3" />
-                <ScalarProperty Name="PromoCode2" ColumnName="PromoCode2" />
-                <ScalarProperty Name="PromoCode1" ColumnName="PromoCode1" />
                 <ScalarProperty Name="URL" ColumnName="URL" />
                 <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
                 <ScalarProperty Name="VoucherCode" ColumnName="VoucherCode" />
@@ -10050,6 +10074,26 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
                 <ScalarProperty Name="ProgressPercentageAnswer" ColumnName="ProgressPercentageAnswer" />
                 <ScalarProperty Name="LeftPicResponseCount" ColumnName="LeftPicResponseCount" />
                 <ScalarProperty Name="RightPicResponseCount" ColumnName="RightPicResponseCount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetRandomGameByUser" FunctionName="SMDModel.Store.GetRandomGameByUser">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.GetRandomGameByUser_Result">
+                <ScalarProperty Name="GameId" ColumnName="GameId" />
+                <ScalarProperty Name="GameName" ColumnName="GameName" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="AgeRangeStart" ColumnName="AgeRangeStart" />
+                <ScalarProperty Name="AgeRangeEnd" ColumnName="AgeRangeEnd" />
+                <ScalarProperty Name="GameType" ColumnName="GameType" />
+                <ScalarProperty Name="Complexity" ColumnName="Complexity" />
+                <ScalarProperty Name="GameUrl" ColumnName="GameUrl" />
+                <ScalarProperty Name="GameInstructions" ColumnName="GameInstructions" />
+                <ScalarProperty Name="GameSmallImage" ColumnName="GameSmallImage" />
+                <ScalarProperty Name="GameLargeImage" ColumnName="GameLargeImage" />
+                <ScalarProperty Name="PlayTime" ColumnName="PlayTime" />
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="Accuracy" ColumnName="Accuracy" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

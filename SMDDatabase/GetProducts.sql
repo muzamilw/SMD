@@ -1,6 +1,6 @@
 ﻿USE [SMDv2]
 GO
-/****** Object:  StoredProcedure [dbo].[GetProducts1]    Script Date: 11/15/2016 9:01:05 AM ******/
+/****** Object:  StoredProcedure [dbo].[GetProducts]    Script Date: 12/20/2016 9:29:17 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -55,7 +55,7 @@ from
 (	
 
 
-	select ads.*, g.GameUrl,0 as AdCount from
+	select ads.*, g.GameUrl,0 as AdCount, g.GameInstructions, g.GameSmallImage, g.GameLargeImage,g.Score, g.Playtime, g.Accuracy from
 	(
 			select adcampaign.campaignid as ItemId, adcampaign.CampaignName ItemName, 'Ad' Type, 
 			adcampaign.Description +'\n' + adcampaign.CampaignDescription as description,
@@ -296,7 +296,21 @@ from
 
 		) ads
 		
-		left outer join Game g on ads.GameId = g.gameId
+		left outer join (
+		
+		
+		select * from Game g left outer join
+			
+				(
+					select gameid as rgameid,Score,PlayTime,Accuracy, row_number() over (partition by GameId order by ResponseDateTime desc) as rn
+					from UserGameResponse gr  where userid = @UserID 
+				
+					group by gr.GameId,gr.score,gr.ResponseDateTime,gr.PlayTime,gr.Accuracy
+						
+
+				) dans on dans.rn = 1  and g.gameid = dans.rgameid
+			
+		)g on ads.GameId = g.gameId
 		--order by type
 		
 			
@@ -328,7 +342,9 @@ from
 	null as GameId,
 	null as FreeCouponID,
 	null as GameUrl,
-	null as AdCount
+	null as AdCount,
+	null as GameInstructions,
+	null as GameSmallImage, null as GameLargeImage, null as Score, null as Playtime, null as Accuracy
 	  from [GetUserSurveys](@UserID,@cash4adsSocialHandle,@cash4adsSocialHandleType)
 	  
 	  
@@ -364,7 +380,9 @@ from
 	null as GameId,
 	null as FreeCouponID,
 	null as GameUrl,
-	null as AdCount
+	null as AdCount,
+	null as GameInstructions,
+	null as GameSmallImage, null as GameLargeImage, null as Score, null as Playtime, null as Accuracy
 	from [GetUserProfileQuestions](@UserID, @countryId,@cash4adsSocialHandle,@cash4adsSocialHandleType)
 	pqz where pqz.pqid  NOT in  ( select  LinkedQuestion1ID  from ProfileQuestionAnswer where PQAnswerID in 
   (select PQAnswerID from ProfileQuestionUserAnswer where

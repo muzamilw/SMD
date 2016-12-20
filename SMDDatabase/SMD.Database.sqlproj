@@ -94,6 +94,7 @@
     <None Include="GetUsersCouponsForEmailNotification.sql" />
     <None Include="SearchCampaigns.sql" />
     <None Include="GetCampaignPerformanceWeeklyStats.sql" />
+    <None Include="GetRandomGameByUser.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="getCampaignsByStatus.sql" />
