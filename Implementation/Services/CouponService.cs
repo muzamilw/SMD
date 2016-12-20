@@ -1252,7 +1252,10 @@ namespace SMD.Implementation.Services
         {
             return couponRepository.GetRandomDeals();
         }
-
+        public CouponStatsResponse getDealStats(long Id)
+        {
+            return couponRepository.getDealStats(Id);
+        }
         #endregion
     }
 }
