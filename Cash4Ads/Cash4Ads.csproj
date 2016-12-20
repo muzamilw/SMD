@@ -236,6 +236,7 @@
     <Content Include="images\ipad_video.png" />
     <Content Include="images\iPhone-5c.png" />
     <Content Include="images\iPhone.png" />
+    <Content Include="images\kickstarter.png" />
     <Content Include="images\lhs-strike.png" />
     <Content Include="images\mockup-ipad-air.png" />
     <Content Include="images\mockup-iphone6.png" />

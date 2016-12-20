@@ -74,8 +74,8 @@
                         <div class="col-lg-4 col-sm-12 col-xs-12" style="padding:0px;">
                             <div class="input-group  formcontrol selec_criter_ctg" style="padding-top:1px;padding-left:0px;padding-right:0px;margin-right:0px;width:351px;">
                                 <label class="clabel">
-                                    <select class="cselect col-md-12" id="selcat" style="height:44px;">
-                                        <option selected value="0"></option>
+                                    <select class="cselect col-md-12" id="selcont" style="height:44px;">
+                                       
                                     </select>
                                 </label>
 
@@ -99,11 +99,30 @@
 
                         <div class="bck_panels">
                             <div>
-                                <h3 style="color:white">Post a Deal for FREE</h3>
+                                <h3 style="color:white">List a Deal for FREE</h3>
                             </div>
 
                             <div style="margin-top:25px;">
-                                <p style="color:white;font-size:16px;">deals for your Landing Pages for any referrals deals together people near you.</p>
+                                <div class="Dealdescription_panel" >
+                                    <div>
+                                        <div class="pull-left"><i class="fa fa-circle " aria-hidden="true" style="font-size:4px;color:#e9eff4;"></i> </div> <div class="pull-left" style="margin-left:3px;color:#e9eff4;">Link deals to landing pages.</div>
+
+                                        <div class="clearfix"></div>
+                                    </div>
+
+                                    <div>
+                                        <div class="pull-left"><i class="fa fa-circle greyclr fontsize4" aria-hidden="true" style="font-size:4px;color:#e9eff4;"></i>  </div><div class="pull-left" style="margin-left:3px;color:#e9eff4;">No fees for any referrals.</div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div>
+                                        <div class="pull-left"><i class="fa fa-circle greyclr fontsize4" aria-hidden="true" style="font-size:4px;color:#e9eff4;"></i>  </div><div class="pull-left" style="margin-left:3px;color:#e9eff4;"> Group deals together.</div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div>
+                                        <div class="pull-left"><i class="fa fa-circle greyclr fontsize4" aria-hidden="true" style="font-size:4px;color:#e9eff4;"></i>  </div><div class="pull-left" style="margin-left:3px;color:#e9eff4;"> List deals to people near you.</div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
 
                             </div>
                             <div style="margin-top:36px;">
@@ -114,6 +133,22 @@
                         </div>
                         <div id="dwn_app_btn" style="margin-top:25px;">
                             <input type="button" class="signIn_btn_app" value="Download the APP" readonly="readonly" onclick="NavigateToApps();" />
+                        </div>
+
+                        <div id="dwn_app_btn" style="margin-top:90px;">
+                            <div class="abcsf">
+                                <div>
+                                    <span style="font-size:12px;color:#4c4c4c">support us on</span>
+                                </div>
+                                <div style="margin-top:11px;">
+                                    <img src="/images/kickstarter.png" style="width:215px;">
+                                </div>
+                                <div style="margin-top:11px;">
+                                    <span style="font-size:12px;color:#4c4c4c">to bring you a richer experience</span>
+                                </div>
+                                
+                            </div>
+
                         </div>
                     </div>
 
@@ -176,8 +211,8 @@
                                                                 <div class="stat-bought"><span class="innerColour">Bought</span><strong style="font-size:55px;line-height:48px" id="coupBought">0</strong></div>
                                                             </td>
                                                             <td>
-                                                                <div class="stat-save">
-                                                                    <span class="innerColour">Save </span><span class="innerColour">up to </span><strong style="font-size:52px;line-height:48px" id="coupPerct">59%</strong>
+                                                                <div class="stat-save" ID="stae_sv">
+                                                                    <span id="savee" class="innerColour">Save </span><span class="innerColour" id="up_too">up to </span><strong style="font-size:52px;line-height:48px" id="coupPerct">59%</strong>
                                                                 </div>
                                                             </td>
                                                             <td>
@@ -272,15 +307,12 @@
                 </div>
             </div>
 
-        <div id="AccountSetingConformation" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialogConfirmModalLabel" aria-hidden="true" style="z-index: 100000;">
-            <div class="modal-dialog" style="width:750px;margin:150px auto">
-                <div class="modal-content" style="background-color:#0f68a1">
-                    @*<div class="modal-header" style="padding:30px;">
-                        <div style="float:right;margin-top:-20px;margin-right:-20px;"><img src="/Content/Images/Close_Button.png" class="close" id="dismiss" data-dismiss="modal" style="width:20px;height:20px;float:right;cursor:pointer;"></div>
-                        <span class="text-center" style="font-size:24px;margin-left:50px;color: #ffffff;">Complete your Account Settings and Start Advertising to Mobile Users</span>
-                    </div>*@
-                    <div class="modal-body" style="padding-top:0px;">
-                        <div class="col-lg-12">
+        <div id="AccountSetingConformation" data-backdrop="static" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialogConfirmModalLabel" aria-hidden="true" style="z-index: 100000;display:block;">
+            <div class="modal-dialog" style="width:578px;margin:150px auto">
+                <div class="modal-content" style="border-radius:267px;">
+
+                    <div class="modal-body" style="padding-top:0px;height:539px;">
+                        <div class="col-lg-12" style="display:none;">
                             <div class="col-lg-6"></div>
                             <div class="col-lg-3">
                                 <div class="form-group" style="padding-top:20px;padding-left:90px;">
@@ -293,15 +325,62 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-12 text-center">
+                        <div class="col-lg-12 text-center" style="padding: 0px;margin-left: -20px;">
+
                             <div class="form-group">
-                                <span class="text-center" style="font-size:24px;padding-top:25px; color: #ffffff;">Upload your logo in Account Settings before</span><br />
-                                <span class="text-center" style="font-size:24px;color: #ffffff;">
-                                    submitting your FREE Deal Listing
-                                </span>
+                                <div id="White_panel" style="height:248px;padding-top: 36px;padding-left:43px;">
+
+                                    <div>
+                                        <span class="text-center" style="font-size:24px;padding-top:25px; color:#137abd;">Why Don't We <br /> Get Paid to Watch Targeted Ads!</span>
+                                    </div>
+                                    <div style="margin-top:7px;">
+                                        <span class="text-center" style="font-size:10px;color: #1068a1;">
+                                            support us on
+                                        </span>
+                                    </div>
+
+                                    <div id="logo_div" style="margin-top:23px;">
+                                        <img src="~/images/kickstarter.png" style="width:275px;" />
+                                    </div>
+                                </div>
+                                <div id="grey_panel">
+                                    <div>
+                                        <span class="text-center" style="font-size:24px;color: #3fc75b;">
+                                            Discover Big Savings near you
+                                        </span>
+                                    </div>
+                                    <div id="rest_spans" style="margin-top:28px;">
+                                        <div>
+                                            <span class="text-center" style="font-size:21px;color: #137abd;">
+                                                Going out to Eat?
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <span class="text-center" style="font-size:21px;color: #137abd;">
+                                                Want to Know events near you?
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <span class="text-center" style="font-size:21px;color: #137abd;">
+                                                Get Fitter?
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <span class="text-center" style="font-size:21px;color: #137abd;">
+                                                Go on, Treat Yourself...
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div style="margin-top:28px;">
+                                        @*<div class="form-group text-center">
+                                            <button class="btn" data-dismiss="modal" style=" background-color:#3fc75b;border-color:#3fc75b; color:white">Skip </button>
+                                        </div>*@
+                                        <span id="start_btn" data-dismiss="modal" style="font-size:25px;color: #3fc75b;">start</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-lg-12 text-center">
+                        @*<div class="col-lg-12 text-center">
                             <div class="form-group">
                                 <button class="btn  btn-success" onclick="openCompanyProfile();" data-dismiss="modal" style=" font-size:24px">Upload your Company Logo </button>
                             </div>
@@ -310,7 +389,7 @@
                         <div class="form-group text-center">
                             <button class="btn" data-dismiss="modal" style=" background-color:#0f68a1;border-color:#0f68a1; color:white">Skip </button>
 
-                        </div>
+                        </div>*@
 
                     </div>
 
@@ -449,7 +528,7 @@
 <!-- end vodeo -->
 <script src="~/Scripts/jquery-2.1.4.min.js"></script>
 @*<script src="~/Scripts/jquery.loader.min.js"></script>*@
-@*<link href="~/Content/loadingLoader.css" rel="stylesheet" />*@
+<link href="~/Content/loadingLoader.css" rel="stylesheet" />
 <script>
 
     //$.LoadingOverlaySetup({
@@ -460,7 +539,7 @@
     //    resizeInterval  : 0,
     //    size            : "50%"
     //});
-
+    var IsCategorySelected=false;
     $(document).ready(function(){
         ShowSendingProgress();
     });
@@ -468,7 +547,10 @@
         //var categoryId = this.value;
         $("#bonus-deals-side").html('');
         getCoupons();
-
+        
+        //$( "#start_btn" ).trigger( "click" );
+        //$("#AccountSetingConformation").modal("hide");
+        //$("#AccountSetingConformation").css('display','none');
     });
 
     function NavigateToLogin()
@@ -478,18 +560,14 @@
     }
 
 
-    $(document).ajaxStart(function(){
+    //$(document).ajaxStart(function(){
 
-        $.LoadingOverlay("show", {
-            image       : "",
-            fontawesome : "fa fa-spinner fa-spin"
-        });
+    //    $.LoadingOverlay("show", {
+    //        image       : "",
+    //        fontawesome : "fa fa-spinner fa-spin"
+    //    });
 
-    });
-
-        //$(document).ajaxStop(function(){
-        //    $.LoadingOverlay("hide");
-        //});
+    //});
 
 
         function ShowSendingProgress() {
@@ -517,9 +595,7 @@
         $(document).ready(function () {
             //  $.LoadingOverlay("");
             LoadCategories();
-           
-         
-            $("#AccountSetingConformation").modal("show");
+            LoadCountriesDD();
         });
 
         function NavigateToApps()
@@ -539,7 +615,7 @@
             var lat=31.4830349;
             var lon=74.2886745;
             var userId='x';
-
+            
             var urlofcoup = 'http://manage.cash4ads.com/Api_Mobile/SearchCoupons?categoryId=' + categoryId + '&ctype='+vtype+''+'&size='+size+''+'&keywords='+keywords+''+'&pageNo='+pageno+''+'&distance='+distance+''+'&Lat='+lat+''+'&Lon='+lon+''+'&UserId='+userId+'';
             if(keywords == ""){
           
@@ -562,14 +638,28 @@
                         var htmlToBindAllVoucher = [];
                         $(response.Coupons).each(function (i, val) {
                         
-                            debugger;
+                           
                             var result=GetPercent(val.Savings,val.Price).toFixed(0)+'%';
                             //  var discountedValPer = 100 - parseInt((parseFloat(val.CouponDiscountedValue) / parseFloat(val.CouponActualValue)) * 100);
-                            $("#bonus-deals-side").append(' <div class="ndod-view-mini ndod-view-mini-nodesc"><div class="ndod-deal-header"><h2>' + val.CouponTitle + '</h2></div><div class="ndod-deal-content"><a class="" href="#"><img class="ndod-deal-image  js-show" data-original="' + val.CouponImage1 + '" src="' + val.CouponImage1 + '" onclick="NavigateToDeal(' + val.CouponId + ')" alt="" /></a><div class="ndod-redeem-now"></div><div class="ndod-business-logo-wrapper"><div class="ndod-business-logo"><img id="Company_logo" class="" data-original="' + val.LogoUrl + '" src="' + val.LogoUrl + '" width="70" height="28" /> </div><div class="btm-header-bg-business-logo"></div></div><div class="ndod-discount"><span class="ndod-amount">save </br>'+result+'</div><div class="ndod-deal-footer-wrapper">  <div class="ndod-deal-footer cld" id="main_deal_ffter"><div style="width:638px;"> <p class="deals_header_ad">' + val.CouponTitle + '</p> <div class="deal_insder_adPanel"><div style="float:left"><p id="loc_1" style="margin-bottom:5px;">'+val.LocationTitle+'</p> <p id="loc-city">'+val.LocationCity+'</p></div><div style="float:right;padding-top:18px;"><p style="float:left;margin-top:16px;">from</p><p style="float:right;margin-left:13px;color:#0e74b7;font-size:28px;"> '+val.CurrencyCode+' '+val.Price+'</p><div style="clear:both;"></div></div> <div style="clear:both;"></div></div></div></div> <a href="#" onclick="NavigateToDeal(' + val.CouponId + ')" class="ndod-button-small waViewButton"><span class="outer"><span class="inner">VIEW!</span></span>     </a>        </div>         <div class="ndod-deal-footer-btmbg"></div>    </div>    </div></div>');
+                            var dayeleft=val.DaysLeft+ " Days Left";
+                            $("#bonus-deals-side").append(' <div class="ndod-view-mini ndod-view-mini-nodesc"><div class="ndod-deal-header"><h2>' + val.CouponTitle + '</h2></div><div class="ndod-deal-content"><a class="" href="#"><img class="ndod-deal-image  js-show" data-original="' + val.CouponImage1 + '" src="' + val.CouponImage1 + '" onclick="NavigateToDeal(' + val.CouponId + ')" alt="" /></a><div class="ndod-redeem-now"></div><div class="ndod-business-logo-wrapper"><div class="ndod-business-logo"><img id="Company_logo" class="" data-original="' + val.LogoUrl + '" src="' + val.LogoUrl + '" width="70" height="28" /> </div><div class="btm-header-bg-business-logo"></div></div><div class="ndod-discount"><span class="ndod-amount">save </br>'+result+'</div><div class="ndod-deal-footer-wrapper"><div class="ndod-deal-footer cld" id="main_deal_ffter"><div id="days_left_div" class="ppl">'+dayeleft+'</div><div class="yel_box_rat_tt">'+val.AvgRating+'</div>  <div style="width:638px;"> <p class="deals_header_ad">' + val.CouponTitle + '</p> <div class="deal_insder_adPanel"><div style="float:left"><p id="loc_1" style="margin-bottom:5px;">'+val.LocationTitle+'</p> <p id="loc-city">'+val.LocationCity+'</p></div><div style="float:right;padding-top:18px;"><p style="float:left;margin-top:16px;">from</p><p style="float:right;margin-left:13px;color:#0e74b7;font-size:28px;"> '+val.CurrencyCode+' '+val.Price+'</p><div style="clear:both;"></div></div> <div style="clear:both;"></div></div></div></div> <a href="#" onclick="NavigateToDeal(' + val.CouponId + ')" class="ndod-button-small waViewButton"><span class="outer"><span class="inner">VIEW!</span></span>     </a>        </div>         <div class="ndod-deal-footer-btmbg"></div>    </div>    </div></div>');
                         });
                         $("#bonus-deals-side").append('<div style="clear:both;"></div>');
 
                         // LoadSelectedVoucher(couponFId);
+
+                        if(IsCategorySelected==true)
+                        {
+                        
+                            $("#AccountSetingConformation").modal("hide");
+                            $("#AccountSetingConformation").css('display','none');
+                        }
+                        else
+                        {
+                            $("#AccountSetingConformation").modal("show");
+                            $("#AccountSetingConformation").css('display','block');
+                        }
+                       
                         StopProgress();
                     }
                     else
@@ -678,10 +768,33 @@
                     }
                 });
             }
+            function LoadCountriesDD()
+            {
+                $.ajax({
+                    dataType: "json",
+                    url: 'http://manage.cash4ads.com/Api_Mobile/Country/abc',
+                    cache: false,
+                    success: function (response) {
+
+                        var selcat = $("#selcont");
+                       
+                        $(response).each(function (i, val) {
+
+                            selcat.append('<option value="' + val.CountryId + '">' + val.CountryName + '</option>');
+                            //$("#bonus-deals-side").append(' <div class="ndod-view-mini ndod-view-mini-nodesc"><div class="ndod-deal-header"><h2>' + val.CouponTitle + '</h2>               </div><div class="ndod-deal-content"><a class="" href="#"><img class="ndod-deal-image  js-show" data-original="' + val.CouponImage + '" src="' + val.CouponImage + '" alt="" /></a><div class="ndod-redeem-now"></div><div class="ndod-business-logo-wrapper"><div class="ndod-business-logo"><img class="" data-original="http://manage.cash4ads.com/images/vLogo.png" src="http://manage.cash4ads.com/images/vLogo.png" width="70" height="28" /> </div><div class="btm-header-bg-business-logo"></div></div><div class="ndod-discount"><div class="ndod-multiprice" style="padding-top: 22.0px ; "><span class="innerColour">NOW</span></div><div class="ndod-price" style="font-size: 36px; margin: 2.0px 0 -1.0px;"><span class="inner innerColour"><span class="ndod-currency">£</span><span class="ndod-amount">' + val.CouponDiscountedValue + '</span></span></div><del class="ndod-original-price"><span class="ndod-currency">£</span><span class="ndod-amount">' + val.CouponActualValue + '</span></del></div></div><div class="ndod-deal-footer-wrapper">  <div class="ndod-deal-footer cld"> <p class="ndod-bought bonus-bought"><span class="ndod-label innerColour">Bought</span><span class="ndod-amount">' + val.CouponTakenValue + '</span>      </p><p class="ndod-savings"><span class="ndod-label innerColour">Save <span>up to </span></span><span class="ndod-abount">' + discountedValPer + '<span class="ndod-percent-sign">%</span></span>            </p><a href="#" onclick="LoadSelectedVoucher(' + val.CouponId + ')" class="ndod-button-small waViewButton">    <span class="outer"><span class="inner">VIEW!</span></span>     </a>        </div>         <div class="ndod-deal-footer-btmbg"></div>    </div>    </div></div>');
+                        });
+
+                       
+
+                    }
+                });
+            
+            }
 
 
             $('#selcat').on('change', function() {
                 $("#bonus-deals-side").css('display','block');
+                IsCategorySelected=true;
                 getCoupons();
             });
 
@@ -761,4 +874,7 @@
                 $('#couponsNotFound').hide();
                 $('#couponsContains').show();
             }
+
+
+          
 </script>

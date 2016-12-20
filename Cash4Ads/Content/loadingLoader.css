@@ -1,4 +1,4 @@
-﻿.modal
+﻿/*.modal
 {
     position: fixed;
     top: 0;
@@ -10,7 +10,7 @@
     -moz-opacity: 0.8;
     min-height: 100%;
     width: 100%;
-}
+}*/
 .loading
 {
     
