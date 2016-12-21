@@ -58,6 +58,13 @@ namespace SMD.MIS.Areas.Api.Controllers
 
         }
 
+        public string Get(int mode)
+        {
+            emailService.SendNewDealsEmail(mode);
+            return "success";
+
+        }
+
         #endregion
     }
 }
