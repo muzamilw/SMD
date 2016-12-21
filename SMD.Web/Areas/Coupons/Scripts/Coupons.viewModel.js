@@ -333,7 +333,7 @@ define("Coupons/Coupons.viewModel",
 
                     perSaving();
                 },
-                  perSaving = function (item) {
+                 perSaving = function (item) {
                       var Price = 0;
                       var result = 0;
                       var perValue;
@@ -497,7 +497,7 @@ define("Coupons/Coupons.viewModel",
                           });
                       }
                   },
-            getDealsAnalytics = function () {
+                getDealsAnalytics = function () {
                 dataservice.getDealsAnalytics({
                     CouponID: selectedCouponIdAnalytics(),
                     dateRange: selecteddateRangeAnalytics(),

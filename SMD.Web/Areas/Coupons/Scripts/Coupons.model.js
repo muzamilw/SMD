@@ -6,7 +6,7 @@
             LocationLine1, LocationLine2, LocationLON, LocationPhone, LocationState, LocationTitle, LocationZipCode, LogoUrl, ModifiedBy, ModifiedDateTime, Price, RejectedBy,
             Rejecteddatetime, RejectedReason, Savings, SearchKeywords, Status, SwapCost, UserId, CouponTitle, CouponExpirydate, CouponQtyPerUser, CouponId, couponImage1, CouponImage2, CouponImage3,
             CurrencyId, couponListingMode, CouponActiveMonth, CouponActiveYear, CouponRedeemedCount, CouponViewCount, CouponIssuedCount, SubmissionDateTime, LocationCountryId, CouponStartDate, CouponEndDate, Priority,
-            ShowBuyitBtn, BuyitLandingPageUrl, BuyitBtnLabel, YoutubeLink, CouponImage4, CouponImage5, CouponImage6, IsPaymentCollected, PaymentDate, IsShowReviews, IsShowAddress, IsShowPhoneNo, IsShowMap, IsShowyouTube, IsShowAboutUs, DealsinGroupCount, IsPerSaving3days, IsPerSaving2days, IsPerSavingLastday, IsDollarSaving3days, IsDollarSaving2days, IsDollarSavingLastday, LastModifiedDate, isSaveBtnLable,FirstDiscount
+            ShowBuyitBtn, BuyitLandingPageUrl, BuyitBtnLabel, YoutubeLink, CouponImage4, CouponImage5, CouponImage6, IsPaymentCollected, PaymentDate, IsShowReviews, IsShowAddress, IsShowPhoneNo, IsShowMap, IsShowyouTube, IsShowAboutUs, DealsinGroupCount, IsPerSaving3days, IsPerSaving2days, IsPerSavingLastday, IsDollarSaving3days, IsDollarSaving2days, IsDollarSavingLastday, LastModifiedDate, isSaveBtnLable, DealFirstDiscountType, DealEndingDiscountType
           ) {
           var
               //type and userID will be set on server sside
@@ -113,7 +113,8 @@
               IsDollarSaving2days = ko.observable(IsDollarSaving2days),
               IsDollarSavingLastday = ko.observable(IsDollarSavingLastday),
               isSaveBtnLable = ko.observable(isSaveBtnLable ==1 ? "1" :isSaveBtnLable == 2 ? "2" : isSaveBtnLable == 3 ? "3" :null),
-              FirstDiscount =  ko.observable(FirstDiscount),
+              DealFirstDiscountType = ko.observable(DealFirstDiscountType),
+              DealEndingDiscountType = ko.observable(DealEndingDiscountType),
                 DealLines = ko.observable(),
                 ClickThruComparison = ko.observable(),
                 ClickThruDirection = ko.observable(),
@@ -224,6 +225,8 @@
                  IsDollarSavingLastday: IsDollarSavingLastday,
                  lastModified: lastModified,
                  isSaveBtnLable: isSaveBtnLable,
+                 DealFirstDiscountType: DealFirstDiscountType,
+                 DealEndingDiscountType: DealEndingDiscountType,
 
 
              }),
@@ -351,7 +354,8 @@
                   IsDollarSavingLastday: IsDollarSavingLastday(),
                   lastModified: lastModified(),
                   isSaveBtnLable: isSaveBtnLable(),
-                  FirstDiscount:FirstDiscount(),
+                  DealFirstDiscountType: DealFirstDiscountType(),
+                  DealEndingDiscountType: DealEndingDiscountType(),
 
               };
           };
@@ -453,7 +457,8 @@
               IsDollarSavingLastday: (IsDollarSavingLastday),
               lastModified: (lastModified),
               isSaveBtnLable: (isSaveBtnLable),
-              FirstDiscount:(FirstDiscount),
+              DealFirstDiscountType: (DealFirstDiscountType),
+              DealEndingDiscountType: (DealEndingDiscountType),
               DealLines : (DealLines),
               ClickThruComparison : (ClickThruComparison),
               ClickThruDirection : (ClickThruDirection),
@@ -477,7 +482,7 @@
             source.Rejecteddatetime, source.RejectedReason, source.Savings, source.SearchKeywords, source.Status, source.SwapCost, source.UserId, source.CouponTitle, source.CouponExpirydate,
             source.CouponQtyPerUser, source.CouponId, source.couponImage1, source.CouponImage2, source.CouponImage3, source.CurrencyId, source.CouponListingMode, source.CouponActiveMonth, source.CouponActiveYear, source.CouponRedeemedCount, source.CouponViewCount, source.CouponIssuedCount, source.SubmissionDateTime, source.LocationCountryId, source.CouponStartDate, source.CouponEndDate, source.Priority
             , source.ShowBuyitBtn, source.BuyitLandingPageUrl, source.BuyitBtnLabel, source.YoutubeLink, source.CouponImage4, source.CouponImage5, source.CouponImage6, source.IsPaymentCollected, source.PaymentDate, source.IsShowReviews, source.IsShowAddress, source.IsShowPhoneNo, source.IsShowMap, source.IsShowyouTube, source.IsShowAboutUs, source.DealsinGroupCount, source.IsPerSaving3days, source.IsPerSaving2days
-            , source.IsPerSavingLastday, source.IsDollarSaving3days, source.IsDollarSaving2days, source.IsDollarSavingLastday, source.LastModifiedDate, source.isSaveBtnLable,source.FirstDiscount
+            , source.IsPerSavingLastday, source.IsDollarSaving3days, source.IsDollarSaving2days, source.IsDollarSavingLastday, source.LastModifiedDate, source.isSaveBtnLable, source.DealFirstDiscountType, source.DealEndingDiscountType
             );
 
         _.each(source.CouponCategories, function (item) {
@@ -520,7 +525,7 @@
 
 
     // ReSharper disable once AssignToImplicitGlobalInFunctionScope
-    CouponPriceOption = function (specifiedCouponPriceOptionId, specifiedCouponId, specifiedDescription, specifiedPrice, specifiedSavings, specifiedOptionUrl, specifiedVoucherCode, ExpiryDate, URL) {
+    CouponPriceOption = function (specifiedCouponPriceOptionId, specifiedCouponId, specifiedDescription, specifiedPrice, specifiedSavings, specifiedOptionUrl, specifiedVoucherCode, ExpiryDate, URL, specifiedVoucherCode2, specifiedVoucherCode3, specifiedVoucherCode4) {
         var
             self,
             CouponPriceOptionId = ko.observable(specifiedCouponPriceOptionId),
@@ -532,6 +537,9 @@
             VoucherCode = ko.observable(specifiedVoucherCode),
             ExpiryDate = ko.observable((ExpiryDate !== null && ExpiryDate !== undefined) ? moment(ExpiryDate).toDate() : undefined),
             URL = ko.observable(URL),
+            VoucherCode2 = ko.observable(specifiedVoucherCode2),
+            VoucherCode3 = ko.observable(specifiedVoucherCode3),
+            VoucherCode4 = ko.observable(specifiedVoucherCode4),
             dealPrice = ko.observable(0),
             percentageSaving = ko.observable(0),
             Saveing3rdlast =  ko.observable(0),
@@ -702,7 +710,10 @@
         Savings: Savings,
         VoucherCode: VoucherCode,
         ExpiryDate: ExpiryDate,
-        URL: URL
+        URL: URL,
+        VoucherCode2: VoucherCode2,
+        VoucherCode3: VoucherCode3,
+        VoucherCode4: VoucherCode4
 
     }),
         // Has Changes
@@ -719,7 +730,10 @@
             OptionUrl: OptionUrl(),
             VoucherCode: VoucherCode(),
             ExpiryDate: moment(ExpiryDate()).format(ist.utcFormat) + 'Z',
-            URL: URL()
+            URL: URL(),
+            VoucherCode2: VoucherCode2(),
+            VoucherCode3: VoucherCode3(),
+            VoucherCode4: VoucherCode4(),
         }
     },
         // Reset
@@ -742,6 +756,9 @@
             convertToServerData: convertToServerData,
             ExpiryDate: ExpiryDate,
             URL: URL,
+            VoucherCode2: VoucherCode2,
+            VoucherCode3: VoucherCode3,
+            VoucherCode4:VoucherCode4,
             reset: reset,
             //perSaving: perSaving,
             per20Saving: per20Saving,
@@ -772,12 +789,12 @@
 
     //function to attain cancel button functionality 
     CouponPriceOption.CreateFromClientModel = function (source) {
-        return new CouponPriceOption(source.CouponPriceOptionId, source.CouponId, source.Description, source.Price, source.Savings, source.OptionUrl, source.VoucherCode, source.ExpiryDate, source.URL);
+        return new CouponPriceOption(source.CouponPriceOptionId, source.CouponId, source.Description, source.Price, source.Savings, source.OptionUrl, source.VoucherCode, source.ExpiryDate, source.URL, source.VoucherCode2, source.VoucherCode3, source.VoucherCode4);
     };
 
 
     CouponPriceOption.Create = function (source) {
-        return new CouponPriceOption(source.CouponPriceOptionId, source.CouponId, source.Description, source.Price, source.Savings, source.OptionUrl, source.VoucherCode, source.ExpiryDate, source.URL);
+        return new CouponPriceOption(source.CouponPriceOptionId, source.CouponId, source.Description, source.Price, source.Savings, source.OptionUrl, source.VoucherCode, source.ExpiryDate, source.URL, source.VoucherCode2, source.VoucherCode3, source.VoucherCode4);
     };
 
     return {

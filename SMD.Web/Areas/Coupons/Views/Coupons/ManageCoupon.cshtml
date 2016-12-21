@@ -680,7 +680,7 @@ else
                                             <label for="txtBuyItlbl" class="control-label text-right tooltip-float floatNone">First Discount </label>
                                         </div>
                                         <div class="col-lg-10">
-                                            <select class="form-control" style="width:73%!important;" id="firstDiscount" data-bind="value : FirstDiscount, event:{ change: $root.getFirstDiscount}">
+                                            <select class="form-control" style="width:73%!important;" id="firstDiscount" data-bind="value:DealFirstDiscountType,event:{ change:$root.getFirstDiscount}">
 
                                                 <option value=" 0">
                                                     10% Off
@@ -711,7 +711,7 @@ else
                                             <label for="txtBuyItlbl" class="control-label text-right tooltip-float floatNone">Deal Ending Discount</label>
                                         </div>
                                         <div class="col-lg-10">
-                                            <select class="form-control" style="width:73%!important;" id="endingDiscount" data-bind="event:{ change: $root.getFirstDiscount}">
+                                            <select class="form-control" style="width:73%!important;" id="endingDiscount" data-bind="value:DealEndingDiscountType,event:{change:$root.getFirstDiscount}">
                                                 <option value=" 0">
                                                     No Further Discounts
                                                 </option>
@@ -2313,16 +2313,16 @@ else
                     <label for="txtSaving" class="control-label text-right tooltip-float floatNone">Promo Code</label>
                 </div>
                 <div class="col-lg-2 ">
-                    <input class="form-control" id="txtpromoCode1" maxlength="7" />
+                    <input class="form-control" id="txtpromoCode1" maxlength="12" data-bind="value:VoucherCode" />
                 </div>
                 <div class="col-lg-2">
-                    <input class="form-control" id="txtpromoCode2" maxlength="7" />
+                    <input class="form-control" id="txtpromoCode2" maxlength="12" data-bind="value:VoucherCode2" />
                 </div>
                 <div class="col-lg-2">
-                    <input class="form-control" id="txtpromoCode3" maxlength="7" />
+                    <input class="form-control" id="txtpromoCode3" maxlength="12" data-bind="value:VoucherCode3" />
                 </div>
                 <div class="col-lg-2">
-                    <input class="form-control" id="txtpromoCode4" maxlength="7" />
+                    <input class="form-control" id="txtpromoCode4" maxlength="12" data-bind="value:VoucherCode4" />
                 </div>
             </div>
         </div>
