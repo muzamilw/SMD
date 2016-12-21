@@ -604,7 +604,9 @@ namespace SMD.MIS.ModelMappers
                 IsDollarSaving2days = source.IsDollarSaving2days,
                 IsDollarSavingLastday = source.IsDollarSavingLastday,
                 LastModifiedDate = source.CampaignEventHistories.ToList().Count > 0 ? source.CampaignEventHistories.ToList().LastOrDefault().EventDateTime : null,
-                isSaveBtnLable = source.isSaveBtnLable
+                isSaveBtnLable = source.isSaveBtnLable,
+                DealFirstDiscountType  = source.DealFirstDiscountType,
+                DealEndingDiscountType  = source.DealEndingDiscountType
                 
 
               };
@@ -635,7 +637,10 @@ namespace SMD.MIS.ModelMappers
                  Savings = source.Savings,
                  VoucherCode = source.VoucherCode,
                  ExpiryDate=source.ExpiryDate,
-                 URL = source.URL
+                 URL = source.URL,
+                 VoucherCode2 =source.VoucherCode2,
+                 VoucherCode3=source.VoucherCode3,
+                 VoucherCode4 = source.VoucherCode4
             };
         }
     }

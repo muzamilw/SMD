@@ -6,7 +6,7 @@
             LocationLine1, LocationLine2, LocationLON, LocationPhone, LocationState, LocationTitle, LocationZipCode, LogoUrl, ModifiedBy, ModifiedDateTime, Price, RejectedBy,
             Rejecteddatetime, RejectedReason, Savings, SearchKeywords, Status, SwapCost, UserId, CouponTitle, CouponExpirydate, CouponQtyPerUser, CouponId, couponImage1, CouponImage2, CouponImage3,
             CurrencyId, couponListingMode, CouponActiveMonth, CouponActiveYear, CouponRedeemedCount, CouponViewCount, CouponIssuedCount, SubmissionDateTime, LocationCountryId, CouponStartDate, CouponEndDate, Priority,
-            ShowBuyitBtn, BuyitLandingPageUrl, BuyitBtnLabel, YoutubeLink, CouponImage4, CouponImage5, CouponImage6, IsPaymentCollected, PaymentDate, IsShowReviews, IsShowAddress, IsShowPhoneNo, IsShowMap, IsShowyouTube, IsShowAboutUs, DealsinGroupCount, IsPerSaving3days, IsPerSaving2days, IsPerSavingLastday, IsDollarSaving3days, IsDollarSaving2days, IsDollarSavingLastday, LastModifiedDate, isSaveBtnLable
+            ShowBuyitBtn, BuyitLandingPageUrl, BuyitBtnLabel, YoutubeLink, CouponImage4, CouponImage5, CouponImage6, IsPaymentCollected, PaymentDate, IsShowReviews, IsShowAddress, IsShowPhoneNo, IsShowMap, IsShowyouTube, IsShowAboutUs, DealsinGroupCount, IsPerSaving3days, IsPerSaving2days, IsPerSavingLastday, IsDollarSaving3days, IsDollarSaving2days, IsDollarSavingLastday, LastModifiedDate, isSaveBtnLable, DealFirstDiscountType, DealEndingDiscountType
           ) {
           var
               //type and userID will be set on server sside
@@ -113,6 +113,8 @@
               IsDollarSaving2days = ko.observable(IsDollarSaving2days),
               IsDollarSavingLastday = ko.observable(IsDollarSavingLastday),
               isSaveBtnLable = ko.observable(isSaveBtnLable ==1 ? "1" :isSaveBtnLable == 2 ? "2" : isSaveBtnLable == 3 ? "3" :null),
+              DealFirstDiscountType = ko.observable(DealFirstDiscountType),
+              DealEndingDiscountType = ko.observable(DealEndingDiscountType),
                 DealLines = ko.observable(),
                 ClickThruComparison = ko.observable(0),
                 ClickThruDirection = ko.observable(),
@@ -223,6 +225,8 @@
                  IsDollarSavingLastday: IsDollarSavingLastday,
                  lastModified: lastModified,
                  isSaveBtnLable: isSaveBtnLable,
+                 DealFirstDiscountType: DealFirstDiscountType,
+                 DealEndingDiscountType: DealEndingDiscountType,
 
 
              }),
@@ -350,6 +354,8 @@
                   IsDollarSavingLastday: IsDollarSavingLastday(),
                   lastModified: lastModified(),
                   isSaveBtnLable: isSaveBtnLable(),
+                  DealFirstDiscountType: DealFirstDiscountType(),
+                  DealEndingDiscountType: DealEndingDiscountType(),
 
               };
           };
@@ -451,6 +457,8 @@
               IsDollarSavingLastday: (IsDollarSavingLastday),
               lastModified: (lastModified),
               isSaveBtnLable: (isSaveBtnLable),
+              DealFirstDiscountType: (DealFirstDiscountType),
+              DealEndingDiscountType: (DealEndingDiscountType),
               DealLines : (DealLines),
               ClickThruComparison : (ClickThruComparison),
               ClickThruDirection : (ClickThruDirection),
@@ -475,7 +483,7 @@
             source.Rejecteddatetime, source.RejectedReason, source.Savings, source.SearchKeywords, source.Status, source.SwapCost, source.UserId, source.CouponTitle, source.CouponExpirydate,
             source.CouponQtyPerUser, source.CouponId, source.couponImage1, source.CouponImage2, source.CouponImage3, source.CurrencyId, source.CouponListingMode, source.CouponActiveMonth, source.CouponActiveYear, source.CouponRedeemedCount, source.CouponViewCount, source.CouponIssuedCount, source.SubmissionDateTime, source.LocationCountryId, source.CouponStartDate, source.CouponEndDate, source.Priority
             , source.ShowBuyitBtn, source.BuyitLandingPageUrl, source.BuyitBtnLabel, source.YoutubeLink, source.CouponImage4, source.CouponImage5, source.CouponImage6, source.IsPaymentCollected, source.PaymentDate, source.IsShowReviews, source.IsShowAddress, source.IsShowPhoneNo, source.IsShowMap, source.IsShowyouTube, source.IsShowAboutUs, source.DealsinGroupCount, source.IsPerSaving3days, source.IsPerSaving2days
-            , source.IsPerSavingLastday, source.IsDollarSaving3days, source.IsDollarSaving2days, source.IsDollarSavingLastday, source.LastModifiedDate, source.isSaveBtnLable
+            , source.IsPerSavingLastday, source.IsDollarSaving3days, source.IsDollarSaving2days, source.IsDollarSavingLastday, source.LastModifiedDate, source.isSaveBtnLable, source.DealFirstDiscountType, source.DealEndingDiscountType
             );
 
         _.each(source.CouponCategories, function (item) {
@@ -518,23 +526,34 @@
 
 
     // ReSharper disable once AssignToImplicitGlobalInFunctionScope
-    CouponPriceOption = function (specifiedCouponPriceOptionId, specifiedCouponId, specifiedDescription, specifiedPrice, specifiedSavings, specifiedOptionUrl, specifiedVoucherCode, ExpiryDate, URL) {
+    CouponPriceOption = function (specifiedCouponPriceOptionId, specifiedCouponId, specifiedDescription, specifiedPrice, specifiedSavings, specifiedOptionUrl, specifiedVoucherCode, ExpiryDate, URL, specifiedVoucherCode2, specifiedVoucherCode3, specifiedVoucherCode4) {
         var
             self,
             CouponPriceOptionId = ko.observable(specifiedCouponPriceOptionId),
             CouponId = ko.observable(specifiedCouponId),
             Price = ko.observable(specifiedPrice).extend({ required: true }),
             Description = ko.observable(specifiedDescription).extend({ required: true }),
-            Savings = ko.observable(specifiedSavings).extend({ required: true }),
+            Savings = ko.observable(specifiedSavings),
             OptionUrl = ko.observable(specifiedOptionUrl),
             VoucherCode = ko.observable(specifiedVoucherCode),
             ExpiryDate = ko.observable((ExpiryDate !== null && ExpiryDate !== undefined) ? moment(ExpiryDate).toDate() : undefined),
             URL = ko.observable(URL),
+            VoucherCode2 = ko.observable(specifiedVoucherCode2),
+            VoucherCode3 = ko.observable(specifiedVoucherCode3),
+            VoucherCode4 = ko.observable(specifiedVoucherCode4),
+            dealPrice = ko.observable(0),
+            percentageSaving = ko.observable(0),
+            Saveing3rdlast =  ko.observable(0),
+            Saveing2ndlast =  ko.observable(0),
+            Saveinglast = ko.observable(0),
+            PerSav3rdlast = ko.observable(0),
+            PerSav2ndlast = ko.observable(0),
+            PerSavlast = ko.observable(0),
         // Errors
         errors = ko.validation.group({
             Description: Description,
             Price: Price,
-            Savings: Savings,
+            //Savings: Savings,
             VoucherCode: VoucherCode,
             ExpiryDate: ExpiryDate,
             URL: URL
@@ -543,153 +562,185 @@
         isValid = ko.computed(function () {
             return errors().length === 0 ? true : false;
         }),
-         perSaving = ko.computed(function () {
+        //     perSaving = ko.computed({
+        //         read: function () {
 
-            var price = Price();
-            var saving = Savings();
-            var result = 0;
-            if (price != undefined && price!=""&& saving !=undefined && saving!="")
-                result = (((price - saving) * 100) / price).toFixed(2);
-            return result+ "%";
-        }),
-        per20Saving = ko.computed(function () {
+        //        var price = Price();
+        //        var dic = 10;
+        //        var disper = $("#firstDiscount").val()
+        //        if (disper == 0)
+        //            dic = 10;
+        //        else if (disper == 1)
+        //            dic = 20;
+        //        else if (disper == 2)
+        //            dic = 25;
+        //        else if (disper == 3)
+        //            dic = 30;
+        //        else if (disper == 4)
+        //            dic = 40;
+        //        else if (disper == 5)
+        //            dic = 50;
+        //        else if (disper == 6)
+        //            dic = 60;
+            
 
-            if (Price() != undefined && Price() != "" && Savings() != undefined && Savings() != "") {
-                var result = ((Price() - Savings()) * 100) / Price();
-                var per = result + 20;
-                var formula = ((Price() * per) / 100);
-                return (Price() - formula).toFixed(2);
-            } else
-                return 0;
 
-        }),
-         per20Value = ko.computed(function () {
+        //        var result = 0;
+        //        if (price != undefined && price!="")
+        //            result = (price - ((price * dic) / 100)).toFixed(2);
+        //        return result;
+        //    },
+        //    write:function(value){
+          
+            
+        //    },
+        //    owner:self
+        //}),
+    
+    per20Saving = ko.computed(function () {
+
+        if (Price() != undefined && Price() != "" && Savings() != undefined && Savings() != "") {
+            var result = ((Price() - Savings()) * 100) / Price();
+            var per = result + 20;
+            var formula = ((Price() * per) / 100);
+            return (Price() - formula).toFixed(2);
+        } else
+            return 0;
+
+    }),
+     per20Value = ko.computed(function () {
+         var result = 0;
+         if (Price() != undefined && Price() != "" && Savings() != undefined && Savings() != "") {
+             result = ((Price() - Savings()) * 100) / Price();
+             result=(result + 20).toFixed(2);
+         }
+         return result+"%";
+     }),
+      dollar10Value = ko.computed(function () {
+          if (Savings() != undefined && Savings() != "")
+              return (Savings() - 10).toFixed(2);
+          else
+              return 0;
+      }),
+     dollar10perSaving = ko.computed(function () {
+         if (Price() != undefined && Price() != "" && Savings() != undefined && Savings() != "") {
+             var price = Price();
+             var saving = Savings() - 10;
              var result = 0;
-             if (Price() != undefined && Price() != "" && Savings() != undefined && Savings() != "") {
-                 result = ((Price() - Savings()) * 100) / Price();
-                 result=(result + 20).toFixed(2);
-             }
-             return result+"%";
-         }),
-          dollar10Value = ko.computed(function () {
-              if (Savings() != undefined && Savings() != "")
-                  return (Savings() - 10).toFixed(2);
-              else
-                  return 0;
-          }),
-         dollar10perSaving = ko.computed(function () {
-             if (Price() != undefined && Price() != "" && Savings() != undefined && Savings() != "") {
-                 var price = Price();
-                 var saving = Savings() - 10;
-                 var result = 0;
-                 result = ((price - saving) * 100) / price;
-                 return result.toFixed(2) + "%";
-             }
-             else
-                 return 0 + "%";
-           }),
-       per25Saving = ko.computed(function () {
+             result = ((price - saving) * 100) / price;
+             return result.toFixed(2) + "%";
+         }
+         else
+             return 0 + "%";
+     }),
+   per25Saving = ko.computed(function () {
+       if (Price() != undefined && Price() != "" && Savings() != undefined && Savings() != "") {
+           var result = ((Price() - Savings()) * 100) / Price();
+           var per = result + 25;
+           var formula = ((Price() * per) / 100);
+           return (Price() - formula).toFixed(2);
+       }
+       else
+           return 0;
+   }),
+    per25Value = ko.computed(function () {
+        if (Price() != undefined && Price() != "" && Savings() != undefined && Savings() != "") {
+            var result = ((Price() - Savings()) * 100) / Price();
+            return (result + 25).toFixed(2) + "%";
+        } else
+            return 0 + "%";
+    }),
+     dollar20Value = ko.computed(function () {
+         if (Savings() != undefined && Savings() != "")
+             return (Savings() - 20).toFixed(2);
+         else
+             return 0;
+     }),
+       dollar20perSaving = ko.computed(function () {
            if (Price() != undefined && Price() != "" && Savings() != undefined && Savings() != "") {
-               var result = ((Price() - Savings()) * 100) / Price();
-               var per = result + 25;
-               var formula = ((Price() * per) / 100);
-               return (Price() - formula).toFixed(2);
+               var price = Price();
+               var saving = Savings() - 20;
+               var result = 0;
+               result = ((price - saving) * 100) / price;
+               return result.toFixed(2) + "%";
            }
            else
-               return 0;
-       }),
-        per25Value = ko.computed(function () {
-            if (Price() != undefined && Price() != "" && Savings() != undefined && Savings() != "") {
-                var result = ((Price() - Savings()) * 100) / Price();
-                return (result + 25).toFixed(2) + "%";
-            } else
-                return 0 + "%";
-        }),
-         dollar20Value = ko.computed(function () {
-             if (Savings() != undefined && Savings() != "")
-                 return (Savings() - 20).toFixed(2);
-             else
-                 return 0;
-         }),
-           dollar20perSaving = ko.computed(function () {
-               if (Price() != undefined && Price() != "" && Savings() != undefined && Savings() != "") {
-                   var price = Price();
-                   var saving = Savings() - 20;
-                   var result = 0;
-                   result = ((price - saving) * 100) / price;
-                   return result.toFixed(2) + "%";
-               }
-               else
-                   return 0 + "%";
-           }),
-      per30Saving = ko.computed(function () {
-          if (Price() != undefined && Price() != "" && Savings() != undefined && Savings() != "") {
-              var result = ((Price() - Savings()) * 100) / Price();
-              var per = result + 30;
-              var formula = ((Price() * per) / 100);
-              return (Price() - formula).toFixed(2);
-          } else
-              return 0;
-
-      }),
-       per30Value = ko.computed(function () {
-           if (Price() != undefined && Price() != "" && Savings() != undefined && Savings() != "") {
-               var result = ((Price() - Savings()) * 100) / Price();
-               return (result + 30).toFixed(2) + "%";
-           }
-           else 
                return 0 + "%";
        }),
-        dollar30Value = ko.computed(function () {
-            if (Savings() != undefined && Savings() != "")
-                return (Savings() - 30).toFixed(2);
-            else
-                return 0;
-        }),
-         dollar30perSaving = ko.computed(function () {
-             if (Price() != undefined && Price() != "" && Savings() != undefined && Savings() != "") {
-                 var price = Price();
-                 var saving = Savings() - 30;
-                 var result = 0;
-                 result = ((price - saving) * 100) / price;
-                 return result.toFixed(2) + "%";
-             }
-             else 
-                 return 0 + "%";
-         }),
+  per30Saving = ko.computed(function () {
+      if (Price() != undefined && Price() != "" && Savings() != undefined && Savings() != "") {
+          var result = ((Price() - Savings()) * 100) / Price();
+          var per = result + 30;
+          var formula = ((Price() * per) / 100);
+          return (Price() - formula).toFixed(2);
+      } else
+          return 0;
+
+  }),
+   per30Value = ko.computed(function () {
+       if (Price() != undefined && Price() != "" && Savings() != undefined && Savings() != "") {
+           var result = ((Price() - Savings()) * 100) / Price();
+           return (result + 30).toFixed(2) + "%";
+       }
+       else 
+           return 0 + "%";
+   }),
+    dollar30Value = ko.computed(function () {
+        if (Savings() != undefined && Savings() != "")
+            return (Savings() - 30).toFixed(2);
+        else
+            return 0;
+    }),
+     dollar30perSaving = ko.computed(function () {
+         if (Price() != undefined && Price() != "" && Savings() != undefined && Savings() != "") {
+             var price = Price();
+             var saving = Savings() - 30;
+             var result = 0;
+             result = ((price - saving) * 100) / price;
+             return result.toFixed(2) + "%";
+         }
+         else 
+             return 0 + "%";
+     }),
 
         // True if the booking has been changed
         // ReSharper disable InconsistentNaming
-        dirtyFlag = new ko.dirtyFlag({
-            Description: Description,
-            Price: Price,
-            Savings: Savings,
-            VoucherCode: VoucherCode,
-            ExpiryDate: ExpiryDate,
-            URL: URL
+    dirtyFlag = new ko.dirtyFlag({
+        Description: Description,
+        Price: Price,
+        Savings: Savings,
+        VoucherCode: VoucherCode,
+        ExpiryDate: ExpiryDate,
+        URL: URL,
+        VoucherCode2: VoucherCode2,
+        VoucherCode3: VoucherCode3,
+        VoucherCode4: VoucherCode4
 
-        }),
+    }),
         // Has Changes
-        hasChanges = ko.computed(function () {
-            return dirtyFlag.isDirty();
-        }),
-        convertToServerData = function () {
-            return {
-                CouponPriceOptionId: CouponPriceOptionId(),
-                CouponId: CouponId(),
-                Price: Price(),
-                Description: Description(),
-                Savings: Savings(),
-                OptionUrl: OptionUrl(),
-                VoucherCode: VoucherCode(),
-                ExpiryDate: moment(ExpiryDate()).format(ist.utcFormat) + 'Z',
-                URL: URL()
-            }
-        },
+    hasChanges = ko.computed(function () {
+        return dirtyFlag.isDirty();
+    }),
+    convertToServerData = function () {
+        return {
+            CouponPriceOptionId: CouponPriceOptionId(),
+            CouponId: CouponId(),
+            Price: Price(),
+            Description: Description(),
+            Savings: Savings(),
+            OptionUrl: OptionUrl(),
+            VoucherCode: VoucherCode(),
+            ExpiryDate: moment(ExpiryDate()).format(ist.utcFormat) + 'Z',
+            URL: URL(),
+            VoucherCode2: VoucherCode2(),
+            VoucherCode3: VoucherCode3(),
+            VoucherCode4: VoucherCode4(),
+        }
+    },
         // Reset
-        reset = function () {
-            dirtyFlag.reset();
-        };
+    reset = function () {
+        dirtyFlag.reset();
+    };
         self = {
 
             CouponPriceOptionId: CouponPriceOptionId,
@@ -706,8 +757,11 @@
             convertToServerData: convertToServerData,
             ExpiryDate: ExpiryDate,
             URL: URL,
+            VoucherCode2: VoucherCode2,
+            VoucherCode3: VoucherCode3,
+            VoucherCode4:VoucherCode4,
             reset: reset,
-            perSaving: perSaving,
+            //perSaving: perSaving,
             per20Saving: per20Saving,
             per25Saving: per25Saving,
             per30Saving: per30Saving,
@@ -719,19 +773,29 @@
             dollar30Value: dollar30Value,
             dollar10perSaving: dollar10perSaving,
             dollar20perSaving: dollar20perSaving,
-            dollar30perSaving: dollar30perSaving
+            dollar30perSaving: dollar30perSaving,
+            dealPrice: dealPrice,
+            percentageSaving: percentageSaving,
+            Saveing3rdlast: Saveing3rdlast,
+            Saveing2ndlast: Saveing2ndlast,
+            Saveinglast: Saveinglast,
+            PerSav3rdlast: PerSav3rdlast,
+            PerSav2ndlast: PerSav2ndlast,
+            PerSavlast: PerSavlast
+
+
         };
         return self;
     };
 
     //function to attain cancel button functionality 
     CouponPriceOption.CreateFromClientModel = function (source) {
-        return new CouponPriceOption(source.CouponPriceOptionId, source.CouponId, source.Description, source.Price, source.Savings, source.OptionUrl, source.VoucherCode, source.ExpiryDate, source.URL);
+        return new CouponPriceOption(source.CouponPriceOptionId, source.CouponId, source.Description, source.Price, source.Savings, source.OptionUrl, source.VoucherCode, source.ExpiryDate, source.URL, source.VoucherCode2, source.VoucherCode3, source.VoucherCode4);
     };
 
 
     CouponPriceOption.Create = function (source) {
-        return new CouponPriceOption(source.CouponPriceOptionId, source.CouponId, source.Description, source.Price, source.Savings, source.OptionUrl, source.VoucherCode, source.ExpiryDate, source.URL);
+        return new CouponPriceOption(source.CouponPriceOptionId, source.CouponId, source.Description, source.Price, source.Savings, source.OptionUrl, source.VoucherCode, source.ExpiryDate, source.URL, source.VoucherCode2, source.VoucherCode3, source.VoucherCode4);
     };
 
     return {

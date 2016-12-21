@@ -922,7 +922,7 @@ namespace SMD.Implementation.Services
                     dbCo.ApprovalDateTime = DateTime.Now;
                     dbCo.ApprovedBy = couponRepository.LoggedInUserIdentity;
                     dbCo.Status = (Int32)AdCampaignStatus.Live;
-                    if (dbCo.IsPaymentCollected != true && dbCo.CouponListingMode != 1)
+                    if (dbCo.IsPaymentCollected != true && userData.Company.StripeCustomerId !=null)
                     {
                         dbCo.IsPaymentCollected = true;
                         dbCo.PaymentDate = DateTime.Now;

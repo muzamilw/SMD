@@ -213,6 +213,8 @@ namespace SMD.MIS.Areas.Api.Models
         public Nullable<bool> IsDollarSavingLastday { get; set; }
         public DateTime? LastModifiedDate { get; set; }
         public Nullable<int> isSaveBtnLable { get; set; }
+        public Nullable<int> DealFirstDiscountType { get; set; }
+        public Nullable<int> DealEndingDiscountType { get; set; }
     }
     public class SearchCampaigns
     {
