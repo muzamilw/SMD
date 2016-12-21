@@ -22,6 +22,13 @@ namespace SMD.Implementation.Services
         {
             return _gameRepository.GetRandomGame(ExistingGameId);
         }
+
+
+
+         public GetRandomGameByUser_Result GetRandomGameByUser(long ExistingGameId,string UserId)
+         {
+             return _gameRepository.GetRandomGameByUser(ExistingGameId, UserId);
+         }
     
     }
 }

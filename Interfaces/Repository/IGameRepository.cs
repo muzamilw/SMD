@@ -7,7 +7,7 @@ namespace SMD.Interfaces.Repository
     {
 
         Game GetRandomGame(int ExistingGameId);
-
+        GetRandomGameByUser_Result GetRandomGameByUser(long ExistingGameId, string UserId);
 
         Game GetRandomGame();
         

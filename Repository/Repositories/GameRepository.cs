@@ -55,6 +55,12 @@ namespace SMD.Repository.Repositories
         }
 
 
+        public GetRandomGameByUser_Result GetRandomGameByUser(long ExistingGameId,string UserId)
+        {
+            return db.GetRandomGameByUser(ExistingGameId, UserId).SingleOrDefault();
+        }
+
+
         public Game GetRandomGame()
         {
             var games = DbSet.Where(g => g.Status == true).ToList();

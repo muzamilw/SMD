@@ -923,6 +923,18 @@ namespace SMD.Repository.BaseRepository
 
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCampaignPerformanceWeeklyStats_Result>("GetCampaignPerformanceWeeklyStats");
         }
+
+
+        public ObjectResult<GetRandomGameByUser_Result> GetRandomGameByUser(long ExistingGameId, string UserId)
+        {
+
+            var varExistingGameId = new ObjectParameter("ExistingGameId", ExistingGameId);
+
+            var varUserId = new ObjectParameter("UserId", UserId);
+
+
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetRandomGameByUser_Result>("GetRandomGameByUser", varExistingGameId, varUserId);
+        }
         #endregion
     }
 }

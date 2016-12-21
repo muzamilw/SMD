@@ -119,6 +119,12 @@ namespace DomainModelProject
         public Nullable<int> TotalItems { get; set; }
         public string SocialHandle { get; set; }
         public string SocialHandleType { get; set; }
-        public Nullable<long> FreeCouponID { get; set; }
+        public Nullable<int> FreeCouponID { get; set; }
+        public string GameInstructions { get; set; }
+        public string GameSmallImage { get; set; }
+        public string GameLargeImage { get; set; }
+        public Nullable<int> Score { get; set; }
+        public Nullable<double> Playtime { get; set; }
+        public Nullable<double> Accuracy { get; set; }
     }
 }

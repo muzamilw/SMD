@@ -3705,3 +3705,20 @@ GO
 
 
 
+
+
+
+
+
+
+
+ALTER TABLE dbo.Coupon
+ADD DealFirstDiscountType int Null,
+DealEndingDiscountType int Null
+
+
+ALTER TABLE dbo.CouponPriceOption
+ADD 
+VoucherCode2 Varchar(100) Null,
+VoucherCode3 Varchar(100) Null,
+VoucherCode4 Varchar(100) Null

@@ -58,7 +58,13 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                         GameId = source.GameId.HasValue == true ? source.GameId.Value:0,
                         FreeCouponID = source.FreeCouponID.HasValue == true ? source.FreeCouponID.Value :0,
                         SocialHandle = source.SocialHandle,
-                        SocialHandleType = source.SocialHandleType
+                        SocialHandleType = source.SocialHandleType,
+                         Accuracy = source.Accuracy,
+                          GameInstructions = source.GameInstructions,
+                           GameLargeImage = source.GameLargeImage,
+                           GameSmallImage = source.GameSmallImage,
+                            Playtime = source.Playtime,
+                             Score = source.Score
                        
                    };
         }

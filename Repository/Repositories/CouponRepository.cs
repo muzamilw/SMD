@@ -330,9 +330,10 @@ namespace SMD.Repository.Repositories
             DateTime d7date =System.DateTime.Now.AddDays(-7);
              DateTime d14date =System.DateTime.Now.AddDays(-14);
             CouponStatsResponse res = new CouponStatsResponse();
+            res.ClickThruComparison = 0;
             res.CouponId = Id;
             res.DealLines = db.CouponPriceOption.Where(g => g.CouponId == Id).Count();
-           
+            res.ClickThruCount = db.UserPurchasedCoupon.Where(g => g.CouponId == Id && g.ResponseType == 2).Count();
             res.DealReviewsCount = db.CouponRatingReview.Where(g => g.CouponId == Id).Count();
             if (res.DealReviewsCount > 0)
             {
@@ -346,6 +347,7 @@ namespace SMD.Repository.Repositories
                 res.DealsOpenedComparison = Math.Abs(((double) C7daysOpen / (double)C14To7daysOpen));
                 if (C7daysOpen == C14To7daysOpen)
                 {
+                    res.DealsOpenedComparison = 0;
                     res.DealsOpenedDirection = 0;
                 }
                 else if (C7daysOpen > C14To7daysOpen)
@@ -382,6 +384,7 @@ namespace SMD.Repository.Repositories
                 res.ClickThruComparison = Math.Abs(((double)C7daysClickThru / (double)C14To7ClickThru));
                 if (C7daysClickThru == C14To7ClickThru)
                 {
+                    res.ClickThruComparison = 0;
                     res.ClickThruDirection = 0;
                 }
                 else if (C7daysClickThru > C14To7ClickThru)

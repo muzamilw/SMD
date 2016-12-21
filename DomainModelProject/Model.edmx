@@ -545,6 +545,8 @@
           <Property Name="IsDollarSaving2days" Type="bit" />
           <Property Name="IsDollarSavingLastday" Type="bit" />
           <Property Name="isSaveBtnLable" Type="int" />
+          <Property Name="DealFirstDiscountType" Type="int" />
+          <Property Name="DealEndingDiscountType" Type="int" />
         </EntityType>
         <EntityType Name="CouponCategories">
           <Key>
@@ -588,6 +590,9 @@
           <Property Name="OptionUrl" Type="nvarchar" MaxLength="500" />
           <Property Name="ExpiryDate" Type="datetime" />
           <Property Name="URL" Type="varchar(max)" />
+          <Property Name="VoucherCode2" Type="varchar" MaxLength="100" />
+          <Property Name="VoucherCode3" Type="varchar" MaxLength="100" />
+          <Property Name="VoucherCode4" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="CouponRatingReview">
           <Key>
@@ -1327,6 +1332,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_Coupons' does not have a primary key
           <Property Name="IsDollarSaving2days" Type="bit" />
           <Property Name="IsDollarSavingLastday" Type="bit" />
           <Property Name="isSaveBtnLable" Type="int" />
+          <Property Name="DealFirstDiscountType" Type="int" />
+          <Property Name="DealEndingDiscountType" Type="int" />
           <Property Name="Categories" Type="nvarchar(max)" />
           <Property Name="CurrencyCode" Type="nvarchar" MaxLength="50" />
           <Property Name="CurrencySymbol" Type="nvarchar" MaxLength="50" />
@@ -2922,6 +2929,10 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
         <Function Name="GetRandomAdCampaign" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="type" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetRandomGameByUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ExistingGameId" Type="bigint" Mode="In" />
+          <Parameter Name="UserId" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="GetRandomPolls" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetRegisteredUserData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Status" Type="int" Mode="In" />
@@ -3152,6 +3163,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
     [vw_Coupons].[IsDollarSaving2days] AS [IsDollarSaving2days], 
     [vw_Coupons].[IsDollarSavingLastday] AS [IsDollarSavingLastday], 
     [vw_Coupons].[isSaveBtnLable] AS [isSaveBtnLable], 
+    [vw_Coupons].[DealFirstDiscountType] AS [DealFirstDiscountType], 
+    [vw_Coupons].[DealEndingDiscountType] AS [DealEndingDiscountType], 
     [vw_Coupons].[Categories] AS [Categories], 
     [vw_Coupons].[CurrencyCode] AS [CurrencyCode], 
     [vw_Coupons].[CurrencySymbol] AS [CurrencySymbol]
@@ -4191,6 +4204,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="IsDollarSaving2days" Type="Boolean" />
           <Property Name="IsDollarSavingLastday" Type="Boolean" />
           <Property Name="isSaveBtnLable" Type="Int32" />
+          <Property Name="DealFirstDiscountType" Type="Int32" />
+          <Property Name="DealEndingDiscountType" Type="Int32" />
         </EntityType>
         <EntityType Name="CouponCode">
           <Key>
@@ -6141,6 +6156,10 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <End Role="GameExerciseCategoryList" EntitySet="GameExerciseCategoryLists" />
             <End Role="GameExerciseCategory" EntitySet="GameExerciseCategories" />
           </AssociationSet>
+          <FunctionImport Name="GetRandomGameByUser" ReturnType="Collection(SMDDevModel.GetRandomGameByUser_Result)">
+            <Parameter Name="ExistingGameId" Mode="In" Type="Int64" />
+            <Parameter Name="UserId" Mode="In" Type="String" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="CouponCategories">
           <Key>
@@ -6586,7 +6605,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="String" Name="description" Nullable="true" MaxLength="1502" />
           <Property Type="Int32" Name="ItemType" Nullable="true" />
           <Property Type="Double" Name="AdClickRate" Nullable="true" />
-          <Property Type="String" Name="AdImagePath" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="AdImagePath" Nullable="true" MaxLength="227" />
           <Property Type="String" Name="AdVideoLink" Nullable="true" MaxLength="1000" />
           <Property Type="String" Name="AdAnswer1" Nullable="true" MaxLength="500" />
           <Property Type="String" Name="AdAnswer2" Nullable="true" MaxLength="500" />
@@ -6686,7 +6705,13 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="Int32" Name="TotalItems" Nullable="true" />
           <Property Type="String" Name="SocialHandle" Nullable="true" MaxLength="200" />
           <Property Type="String" Name="SocialHandleType" Nullable="true" MaxLength="128" />
-          <Property Type="Int64" Name="FreeCouponID" Nullable="true" />
+          <Property Type="Int32" Name="FreeCouponID" Nullable="true" />
+          <Property Type="String" Name="GameInstructions" Nullable="true" />
+          <Property Type="String" Name="GameSmallImage" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="GameLargeImage" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="Score" Nullable="true" />
+          <Property Type="Double" Name="Playtime" Nullable="true" />
+          <Property Type="Double" Name="Accuracy" Nullable="true" />
         </ComplexType>
         <Association Name="FK_ProfileQuestionTargetCriteria_ProfileQuestion2">
           <End Type="SMDDevModel.ProfileQuestion" Role="ProfileQuestion" Multiplicity="0..1" />
@@ -6761,6 +6786,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="VoucherCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="ExpiryDate" Type="DateTime" Precision="3" />
           <Property Name="URL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="VoucherCode2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="VoucherCode3" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="VoucherCode4" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           </EntityType>
         <Association Name="FK_CouponPriceOption_Coupon">
           <End Type="SMDDevModel.Coupon" Role="Coupon" Multiplicity="0..1" />
@@ -6869,6 +6897,10 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="IsDollarSaving2days" Type="Boolean" />
           <Property Name="IsDollarSavingLastday" Type="Boolean" />
           <Property Name="isSaveBtnLable" Type="Int32" />
+          <Property Name="DealFirstDiscount" Type="Int32" />
+          <Property Name="DealEndingDiscount" Type="Int32" />
+          <Property Name="DealFirstDiscountType" Type="Int32" />
+          <Property Name="DealEndingDiscountType" Type="Int32" />
         </EntityType>
         <Association Name="FK_Country_Currency">
           <End Type="SMDDevModel.Currency" Role="Currency" Multiplicity="0..1" />
@@ -8012,6 +8044,22 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="GetRandomGameByUser_Result">
+          <Property Type="Int64" Name="GameId" Nullable="false" />
+          <Property Type="String" Name="GameName" Nullable="true" MaxLength="200" />
+          <Property Type="Boolean" Name="Status" Nullable="true" />
+          <Property Type="Int32" Name="AgeRangeStart" Nullable="true" />
+          <Property Type="Int32" Name="AgeRangeEnd" Nullable="true" />
+          <Property Type="Int32" Name="GameType" Nullable="true" />
+          <Property Type="Int32" Name="Complexity" Nullable="true" />
+          <Property Type="String" Name="GameUrl" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="GameInstructions" Nullable="true" />
+          <Property Type="String" Name="GameSmallImage" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="GameLargeImage" Nullable="true" MaxLength="500" />
+          <Property Type="Double" Name="PlayTime" Nullable="true" />
+          <Property Type="Int32" Name="Score" Nullable="true" />
+          <Property Type="Double" Name="Accuracy" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -8378,6 +8426,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="Coupons">
             <EntityTypeMapping TypeName="SMDDevModel.Coupon">
               <MappingFragment StoreEntitySet="Coupon">
+                <ScalarProperty Name="DealEndingDiscountType" ColumnName="DealEndingDiscountType" />
+                <ScalarProperty Name="DealFirstDiscountType" ColumnName="DealFirstDiscountType" />
                 <ScalarProperty Name="isSaveBtnLable" ColumnName="isSaveBtnLable" />
                 <ScalarProperty Name="IsDollarSavingLastday" ColumnName="IsDollarSavingLastday" />
                 <ScalarProperty Name="IsDollarSaving2days" ColumnName="IsDollarSaving2days" />
@@ -9315,6 +9365,12 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
                 <ScalarProperty Name="SocialHandle" ColumnName="SocialHandle" />
                 <ScalarProperty Name="SocialHandleType" ColumnName="SocialHandleType" />
                 <ScalarProperty Name="FreeCouponID" ColumnName="FreeCouponID" />
+                <ScalarProperty Name="GameInstructions" ColumnName="GameInstructions" />
+                <ScalarProperty Name="GameSmallImage" ColumnName="GameSmallImage" />
+                <ScalarProperty Name="GameLargeImage" ColumnName="GameLargeImage" />
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="Playtime" ColumnName="Playtime" />
+                <ScalarProperty Name="Accuracy" ColumnName="Accuracy" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -9360,6 +9416,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="CouponPriceOptions">
             <EntityTypeMapping TypeName="SMDDevModel.CouponPriceOption">
               <MappingFragment StoreEntitySet="CouponPriceOption">
+                <ScalarProperty Name="VoucherCode4" ColumnName="VoucherCode4" />
+                <ScalarProperty Name="VoucherCode3" ColumnName="VoucherCode3" />
+                <ScalarProperty Name="VoucherCode2" ColumnName="VoucherCode2" />
                 <ScalarProperty Name="URL" ColumnName="URL" />
                 <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
                 <ScalarProperty Name="VoucherCode" ColumnName="VoucherCode" />
@@ -9375,6 +9434,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="vw_Coupons">
             <EntityTypeMapping TypeName="SMDDevModel.vw_Coupons">
               <MappingFragment StoreEntitySet="vw_Coupons">
+                <ScalarProperty Name="DealEndingDiscountType" ColumnName="DealEndingDiscountType" />
+                <ScalarProperty Name="DealFirstDiscountType" ColumnName="DealFirstDiscountType" />
                 <ScalarProperty Name="isSaveBtnLable" ColumnName="isSaveBtnLable" />
                 <ScalarProperty Name="IsDollarSavingLastday" ColumnName="IsDollarSavingLastday" />
                 <ScalarProperty Name="IsDollarSaving2days" ColumnName="IsDollarSaving2days" />
@@ -10168,6 +10229,26 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetRandomGameByUser" FunctionName="SMDDevModel.Store.GetRandomGameByUser">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SMDDevModel.GetRandomGameByUser_Result">
+                <ScalarProperty Name="GameId" ColumnName="GameId" />
+                <ScalarProperty Name="GameName" ColumnName="GameName" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="AgeRangeStart" ColumnName="AgeRangeStart" />
+                <ScalarProperty Name="AgeRangeEnd" ColumnName="AgeRangeEnd" />
+                <ScalarProperty Name="GameType" ColumnName="GameType" />
+                <ScalarProperty Name="Complexity" ColumnName="Complexity" />
+                <ScalarProperty Name="GameUrl" ColumnName="GameUrl" />
+                <ScalarProperty Name="GameInstructions" ColumnName="GameInstructions" />
+                <ScalarProperty Name="GameSmallImage" ColumnName="GameSmallImage" />
+                <ScalarProperty Name="GameLargeImage" ColumnName="GameLargeImage" />
+                <ScalarProperty Name="PlayTime" ColumnName="PlayTime" />
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="Accuracy" ColumnName="Accuracy" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

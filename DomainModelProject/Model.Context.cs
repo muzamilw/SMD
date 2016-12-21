@@ -777,5 +777,18 @@ namespace DomainModelProject
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCampaignPerformanceWeeklyStats_Result>("GetCampaignPerformanceWeeklyStats");
         }
+    
+        public virtual ObjectResult<GetRandomGameByUser_Result> GetRandomGameByUser(Nullable<long> existingGameId, string userId)
+        {
+            var existingGameIdParameter = existingGameId.HasValue ?
+                new ObjectParameter("ExistingGameId", existingGameId) :
+                new ObjectParameter("ExistingGameId", typeof(long));
+    
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetRandomGameByUser_Result>("GetRandomGameByUser", existingGameIdParameter, userIdParameter);
+        }
     }
 }

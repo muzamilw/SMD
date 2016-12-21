@@ -229,8 +229,51 @@ define("Coupons/Coupons.viewModel",
                     });
 
 
-                }
+                },
+                      openAdvertiserDashboardDealScreenOnList = function (item) {
+                          if (item != undefined) {
+                              if (item.CouponId() != undefined) {
+                                  selectedCouponIdAnalytics(item.CouponId());
+                                  CouponTitle(item.CouponTitle());
+                              }
+
+
+                          }
+
+
+                          $(".hideInCoupons").css("display", "none");
+
+                          $("#MarketobjDiv").css("display", "none");
+
+                          $("#topArea").css("display", "none");
+                          $("#panelArea").css("display", "none");
+
+                          $("#Heading_div").css("display", "none");
+                          $(".closecls").css("display", "none");
+
+                          isEditorVisible(true);
+                          isListVisible(false);
+
+                          if (!IsnewCoupon()) {
+                              isflageClose(true);
+                              getDealsAnalytics();
+                              $("#ddGranularityDropDown").removeAttr("disabled");
+                              $("#ddDateRangeDropDown").removeAttr("disabled");
+                              $("#ddGDropDown").removeAttr("disabled");
+                              $("#ddADropDown").removeAttr("disabled");
+                              $("#ddCTGDropDown").removeAttr("disabled");
+                              $("#ddCTADropDown").removeAttr("disabled");
+                              isAdvertdashboardDealVisible(true);
+                          }
+                          else {
+                              confirmation.showOKpopupforChart();
+
+                          }
+
+                      },
                 openAdvertiserDashboardDealScreen = function () {
+                   
+                    
                     if (!IsnewCoupon()) {
                         isflageClose(true);
                         getDealsAnalytics();
@@ -323,12 +366,30 @@ define("Coupons/Coupons.viewModel",
 
                     },
             CloseCouponsAnalyticView = function () {
+                isEditorVisible(false);
+                isListVisible(true);
                 isAdvertdashboardDealVisible(false);
                 CampaignRatioAnalyticData(1);
                 selecteddateRangeAnalytics(1);
                 selectedGranularityAnalytics(1);
                 isflageClose(false);
+                showMainMenu();
+                $(".hideInCoupons").css("display", "none");
+                $("#MarketobjDiv").css("display", "none");
+
+                $("#topArea").css("display", "block");
+                $("#Heading_div").css("display", "block");
+                $(".closecls").css("display", "block");
+                $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign,#btnStopAndTerminate,#btnCopyCampaign").removeAttr('disabled');
+
             },
+                 CloseCouponsInnerAnalyticView = function () {
+                     isAdvertdashboardDealVisible(false);
+                     CampaignRatioAnalyticData(1);
+                     selecteddateRangeAnalytics(1);
+                     selectedGranularityAnalytics(1);
+                     isflageClose(false);
+                 },
 
                 //
 
@@ -459,7 +520,7 @@ define("Coupons/Coupons.viewModel",
                                   Element.DealsOpenedDirection(data.DealsOpenedDirection);
                                   Element.DealRating(data.DealRating);
                                   Element.DealReviewsCount(data.DealReviewsCount);
-                                  
+                                  Element.ClickThruCount(data.ClickThruCount);
                               }
                           }
                       },
@@ -2691,7 +2752,7 @@ getfreeCouponCount = function () {
 
 
                     isEditorVisible(false);
-                    CloseCouponsAnalyticView();
+                    CloseCouponsInnerAnalyticView();
                     if (isFromEdit() == true) {
                         isListVisible(true);
                         isWelcomeScreenVisible(false);
@@ -3004,7 +3065,8 @@ getfreeCouponCount = function () {
                     modifiedDate: modifiedDate,
                     onSaveBtnLabel: onSaveBtnLabel,
                     saveBtntext: saveBtntext,
-                    isflage: isflage
+                    isflage: isflage,
+                    openAdvertiserDashboardDealScreenOnList:openAdvertiserDashboardDealScreenOnList
                 };
             })()
         };

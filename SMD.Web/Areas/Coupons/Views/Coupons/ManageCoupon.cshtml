@@ -64,7 +64,7 @@ else
                     </div>*@
             </div>
         </div>
-        <div class="row">
+        <div class="row" data-bind="visible:!$root.isAdvertdashboardDealVisible()">
             <div class="col-lg-9" style="padding-right:12px;">
                 <div class="main-box header" style="padding-left:52px;">
                     <div class="col-lg-12" style="margin:auto;float:none !important">
@@ -114,7 +114,7 @@ else
                             <br />
                             <span data-bind="css: $root.previewScreenNumber() == 4 ? 'ads-selected-numbering-text' : '',click: $root.gotoScreen.bind(null,4)">Expiry</span>
 
-          
+
                         </div>
                         <div class="pull-left" style="width:47px;">
                             &nbsp;
@@ -130,7 +130,7 @@ else
 
                                 <br />
                                 <span>Preview</span>
-                              
+
                             </a>
                         </div>
 
@@ -179,7 +179,7 @@ else
                                 </div>
 
                                 <br>
-                                
+
                                 <span style="font-size:16px;color:black;margin-left:2px;" data-bind="text:StatusValue()">Draft</span>
                             </div>
                             <div class="pull-right">
@@ -204,7 +204,7 @@ else
 
                         <div class="main-box main-box-subpage">
 
-                            <div id="pre_panel" data-bind="visible:!$root.isAdvertdashboardDealVisible()">
+                            <div id="pre_panel">
                                 <div class="col-lg-12" data-bind="visible: $root.previewScreenNumber() == 1">
                                     <div style="height:34px;" class="borderbtmline ">
                                         <div class="col-lg-9 adsubHeading Theme_standard_clr">
@@ -689,11 +689,11 @@ else
                                             </div>
                                         </div>
                                         @*<div class="adsubHeading Theme_standard_clr" data-bind="visible: $root.previewScreenNumber() == 2">
-                        Create up to 6 Deal Lines.
+                                            Create up to 6 Deal Lines.
 
-                        <label style="color:gray;font-size:13px;">The first Deal Line will be used in all Notification &Emails</label>
-                        <button class="btn  btn-success" id="saveBtn" style="width:80px;">save Me</button>
-                    </div>*@
+                                            <label style="color:gray;font-size:13px;">The first Deal Line will be used in all Notification &Emails</label>
+                                            <button class="btn  btn-success" id="saveBtn" style="width:80px;">save Me</button>
+                                        </div>*@
 
                                     </div>
 
@@ -1079,7 +1079,7 @@ else
 
                                 <div class="col-lg-12" style="margin:auto;float:none !important;" data-bind="visible: $root.previewScreenNumber() == 3">
                                     @*<div class="form-group formcontrol-bg" data-bind="visible: $root.isEnableVedioVerificationLink">
-                <div class="col-lg-11">*@
+                                    <div class="col-lg-11">*@
                                     <div class="row branchAddressContainer">
                                         <div class="form-group" style="margin-bottom:5px;display:none">
                                             <div class="col-lg-2"></div>
@@ -1534,12 +1534,9 @@ else
                                 </div>
                             </div>
 
-                            <div id="gp_panel" data-bind="visible:$root.isAdvertdashboardDealVisible()">
-                                @Html.Partial("~/Areas/Coupons/Views/Coupons/_advertDashboardDeal.cshtml")
-                            </div>
-    <div class="clearfix">
+                            <div class="clearfix">
 
-    </div>
+                            </div>
 
                             <div class="next-back-btns col-lg-12" style="margin:auto;float:none !important;" data-bind="visible:!$root.isAdvertdashboardDealVisible()">
                                 <div class="form-group">
@@ -1566,12 +1563,13 @@ else
 
 
 
-    <div class="clearfix">
+                            <div class="clearfix">
 
-    </div>
+                            </div>
 
-</div>
+                        </div>
                     </div>
+
 
 
 
@@ -1604,9 +1602,9 @@ else
                         <div class="row" style="margin-top:10px;">
                             <div class="col-lg-12" data-bind="with: $root.couponModel" style="padding-left:23px;display:none">
                                 @*<input type="radio" name="optionsRadiosDelvTypes" value="1" id="optionsRadiosApplyFilterFree" data-bind="checked:CouponListingMode">
-                                    <label for="optionsRadiosApplyFilterFree">
-                                        <span class="panelfntSize">List for 14 days-FREE</span> .
-                                    </label>*@
+                                <label for="optionsRadiosApplyFilterFree">
+                                    <span class="panelfntSize">List for 14 days-FREE</span> .
+                                </label>*@
                                 <div class="col-lg-9 fontsize11" style="padding-left: 2px;padding-top: 12px;">
                                     List for 14 days-FREE.
                                 </div>
@@ -1630,9 +1628,9 @@ else
                                     <span class="help-block text-right"></span>
                                 </div>
                                 @*<input type="radio" name="optionsRadiosDelvTypes" value="2" id="optionsRadiosApplyFilterOnce" data-bind="checked:CouponListingMode">
-                                    <label for="optionsRadiosApplyFilterOnce">
-                                        <span class="panelfntSize" style="margin-left:1px;">List for 6 months-$29 usd</span>.
-                                    </label>*@
+                                <label for="optionsRadiosApplyFilterOnce">
+                                    <span class="panelfntSize" style="margin-left:1px;">List for 6 months-$29 usd</span>.
+                                </label>*@
                             </div>
 
                             <div class="col-lg-12" style="padding-left:24px;">
@@ -1709,7 +1707,7 @@ else
                 </div>
 
                 <div class="row">
-                    
+
                     <div class="pull-left" data-bind="visible:$root.IsnewCoupon()==false">
                         <div class="status_date_span" style="margin-left:0px;margin-top:0px;">
                             Last modified <span style="margin-left:3px"></span><span data-bind="dateString:$root.modifiedDate,datePattern: 'DD/MM/YYYY'">12 april 2014</span>
@@ -1719,7 +1717,9 @@ else
             </div>
 
 
-           
+
+
+
             <div class="clearfix">
             </div>
 
@@ -1757,7 +1757,8 @@ else
                 </div>
             </div>
         </div>
-        <div class="clearfix">
+        @Html.Partial("~/Areas/Coupons/Views/Coupons/_advertDashboardDeal.cshtml")
+         <div class="clearfix">
 
         </div>
 
