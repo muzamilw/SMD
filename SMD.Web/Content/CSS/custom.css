@@ -608,3 +608,18 @@ svg{
     padding:3px;
 
 }
+.tbl-noborder-Padding tbody > tr > td {
+    border-top:none;
+    /*cursor:auto;*/
+    padding:8px;
+
+}
+
+.review{
+    background-color: yellow;
+    padding: 8px;
+    border-radius: 40%;
+    color: white;
+    font-weight: BOLD;
+
+}
