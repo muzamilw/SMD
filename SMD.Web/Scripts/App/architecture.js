@@ -9,6 +9,7 @@ var ist = {
     hourPattern: "HH",
     minutePattern: "mm",
     dateTimePattern: "DD/MM/YY HH:mm",
+    customdateTimePattern: "DD MMM YYYY HH:mm",
     dateTimeWithSecondsPattern: "DD/MM/YY HH:mm:ss",
     // UTC Date Format
     utcFormat: "YYYY-MM-DDTHH:mm:ss",
@@ -705,6 +706,22 @@ require(["ko", "knockout-validation"], function (ko) {
         }
     };
 
+    //customdateTimePattern
+    ko.bindingHandlers.dateTimeString = {
+        update: function (element, valueAccessor, allBindingsAccessor) {
+            var value = valueAccessor(),
+                allBindings = allBindingsAccessor();
+            var valueUnwrapped = ko.utils.unwrapObservable(value);
+            var pattern = allBindings.datePattern || ist.datePattern;
+            if (valueUnwrapped !== undefined && valueUnwrapped !== null) {
+                $(element).text(moment(valueUnwrapped).format(ist.customdateTimePattern));
+            }
+            else {
+                $(element).text("");
+            }
+
+        }
+    };
 
     //Custom binding for handling validation messages in tooltip
     ko.bindingHandlers.validationTooltip = {

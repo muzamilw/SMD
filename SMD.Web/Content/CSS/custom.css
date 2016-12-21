@@ -616,11 +616,14 @@ svg{
 }
 
 .review{
-    background-color: yellow;
+    background-color: #fc0;
     padding: 8px;
     border-radius: 40%;
     color: white;
     font-weight: BOLD;
 
 }
+.tbl-intialAlign tbody > tr > td {
+    vertical-align :initial;
 
+}

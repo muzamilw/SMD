@@ -151,7 +151,7 @@ else
                                         <p class="group-header-description"></p>
                                     </div>
                                     <div class="table-responsive" style="margin-right:-4px;">
-                                        <table class="table table-striped table-hover">
+                                        <table class="table table-striped table-hover tbl-intialAlign">
                                             <thead>
                                                 <tr>
                                                     <th class="col-sm-3"><span class="GridHeaderFont_size">Campaign Name</span></th>
@@ -287,15 +287,29 @@ else
                 <td class="col-sm-3">
                     <a href="#" class="store-user-link" data-bind="text: CouponTitle,click:$root.onEditCampaign"></a>
                     <br />
-                    <img style="width:130px;height:130px;" data-bind="attr: { src:  LogoUrl()}">
+                    <img style="width:130px;height:130px;" data-bind="attr: { src:  couponImage1()}">
+                   
                     <br />
-                    <span style="color:darkgray;font-size:11px;" data-bind="dateString:  ApprovalDateTime()"></span>
+                    <!-- ko if: ApprovalDateTime()-->
+                    <span style="color:darkgray;font-size:11px;">
+                        Start Date :
+                    </span>
+                      <span style="color:darkgray;font-size:11px;" data-bind="dateTimeString:  ApprovalDateTime()"></span>
+                    <!-- /ko -->
+                    <!-- ko if: ApprovalDateTime()== null -->
+                    <span style="color:darkgray;font-size:11px;">
+                        Not Started
+                    </span>
+                         
+                    <!-- /ko -->
+                    <!-- ko if: ModifiedDateTime()-->
                     <br />
-                    <span style="color:darkgray;font-size:11px;" data-bind="dateString:  ModifiedDateTime()"></span>
-                    @*<br />
-                    <span style="color:darkgray;font-size:11px;" data-bind="dateString:  ApprovalDateTime() ? 'Start Date : ' +  ApprovalDateTime() : 'Not Started'"></span>
-                    <br />
-                    <span style="color:darkgray;font-size:11px;" data-bind="dateString:  ModifiedDateTime() ? 'Last Updated : ' +  ModifiedDateTime() : ''"></span>*@
+                    <span style="color:darkgray;font-size:11px;">
+                        Last Updated : 
+                    </span>
+                    
+                    <span style="color:darkgray;font-size:11px;" data-bind="dateTimeString:  ModifiedDateTime()"></span>
+                    <!-- /ko -->
                 </td>
                 <td class="col-sm-2">
                     <!-- ko if: CouponListingMode() == 1-->
@@ -304,15 +318,14 @@ else
                     <!-- ko if: CouponListingMode() == 2-->
                     <span>30 Day Listing</span>
                     <!-- /ko -->
-                    <br />
-                    <br />
-                    <br />
-                    <br />
+                   <div style="padding-top: 120px;">
+                       <span class="review" data-bind="text:DealRating().toFixed(1)"></span>
+
+                       &nbsp;&nbsp;&nbsp;
+                       <span data-bind="text:DealReviewsCount"></span>&nbsp;Reviews
+                   </div>
                     
-                    <span class="review" data-bind="text:DealRating().toFixed(2)"></span>
-                    
-                     &nbsp;&nbsp;&nbsp;
-                    <span data-bind="text:DealReviewsCount"></span>&nbsp;Reviews
+                   
                 </td>
                 <td class="col-sm-1" >
                     <span data-bind="text:DealLines"></span>
