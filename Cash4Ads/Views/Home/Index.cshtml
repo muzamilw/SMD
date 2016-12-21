@@ -604,7 +604,7 @@
         }
         function getCoupons()
         {
-        
+         
             var categoryId = $("#selcat option:selected").val();
             var keywords = $("#txtKeyword").val();
             var vtype = @vtype;
@@ -628,8 +628,8 @@
                 url: urlofcoup,
                 cache: false,
                 success: function (response) {
-
-                    if ( response.TotalCount > 0)
+                   
+                    if ( response.Coupons.length > 0)
                     {
                         Coupons = response.Coupons;
                         if (couponFId == 0) {
@@ -638,19 +638,15 @@
                         var htmlToBindAllVoucher = [];
                         $(response.Coupons).each(function (i, val) {
                         
-                           
                             var result=GetPercent(val.Savings,val.Price).toFixed(0)+'%';
-                            //  var discountedValPer = 100 - parseInt((parseFloat(val.CouponDiscountedValue) / parseFloat(val.CouponActualValue)) * 100);
                             var dayeleft=val.DaysLeft+ " Days Left";
-                            $("#bonus-deals-side").append(' <div class="ndod-view-mini ndod-view-mini-nodesc"><div class="ndod-deal-header"><h2>' + val.CouponTitle + '</h2></div><div class="ndod-deal-content"><a class="" href="#"><img class="ndod-deal-image  js-show" data-original="' + val.CouponImage1 + '" src="' + val.CouponImage1 + '" onclick="NavigateToDeal(' + val.CouponId + ')" alt="" /></a><div class="ndod-redeem-now"></div><div class="ndod-business-logo-wrapper"><div class="ndod-business-logo"><img id="Company_logo" class="" data-original="' + val.LogoUrl + '" src="' + val.LogoUrl + '" width="70" height="28" /> </div><div class="btm-header-bg-business-logo"></div></div><div class="ndod-discount"><span class="ndod-amount">save </br>'+result+'</div><div class="ndod-deal-footer-wrapper"><div class="ndod-deal-footer cld" id="main_deal_ffter"><div id="days_left_div" class="ppl">'+dayeleft+'</div><div class="yel_box_rat_tt">'+val.AvgRating+'</div>  <div style="width:638px;"> <p class="deals_header_ad">' + val.CouponTitle + '</p> <div class="deal_insder_adPanel"><div style="float:left"><p id="loc_1" style="margin-bottom:5px;">'+val.LocationTitle+'</p> <p id="loc-city">'+val.LocationCity+'</p></div><div style="float:right;padding-top:18px;"><p style="float:left;margin-top:16px;">from</p><p style="float:right;margin-left:13px;color:#0e74b7;font-size:28px;"> '+val.CurrencyCode+' '+val.Price+'</p><div style="clear:both;"></div></div> <div style="clear:both;"></div></div></div></div> <a href="#" onclick="NavigateToDeal(' + val.CouponId + ')" class="ndod-button-small waViewButton"><span class="outer"><span class="inner">VIEW!</span></span>     </a>        </div>         <div class="ndod-deal-footer-btmbg"></div>    </div>    </div></div>');
+                            $("#bonus-deals-side").append(' <div class="ndod-view-mini ndod-view-mini-nodesc"><div class="ndod-deal-header"><h2>' + val.CouponTitle + '</h2></div><div class="ndod-deal-content"><a class="" href="#"><img class="ndod-deal-image  js-show" data-original="' + val.CouponImage1 + '" src="' + val.CouponImage1 + '" onclick="NavigateToDeal(' + val.CouponId + ')" alt="" /></a><div class="ndod-redeem-now"></div><div class="ndod-business-logo-wrapper"><div class="ndod-business-logo"><img id="Company_logo" class="" data-original="' + val.LogoUrl + '" src="' + val.LogoUrl + '" width="70" height="28" /> </div><div class="btm-header-bg-business-logo"></div></div><div class="ndod-discount"><span class="ndod-amount">save </br>'+result+'</div><div class="ndod-deal-footer-wrapper"><div class="ndod-deal-footer cld" id="main_deal_ffter"><div style="width:638px;"><p class="deals_header_ad">' + val.CouponTitle + '</p> <div class="deal_insder_adPanel"><div style="float:left"><p id="loc_1" style="margin-bottom:5px;">'+val.LocationTitle+'</p> <p id="loc-city">'+val.LocationCity+'</p></div><div style="float:right;padding-top:18px;"><p style="float:left;margin-top:16px;">from</p><p style="float:right;margin-left:13px;color:#0e74b7;font-size:28px;"> '+val.CurrencyCode+' '+val.Price+'</p><div style="clear:both;"></div></div> <div style="clear:both;"></div></div></div></div> <a href="#" onclick="NavigateToDeal(' + val.CouponId + ')" class="ndod-button-small waViewButton"><span class="outer"><span class="inner">VIEW!</span></span></a></div><div class="ndod-deal-footer-btmbg"></div>    </div>    <div id="days_left_div" class="ppl">'+dayeleft+'</div><div class="yel_box_rat_tt">'+val.AvgRating+'</div> </div></div>');
                         });
                         $("#bonus-deals-side").append('<div style="clear:both;"></div>');
 
-                        // LoadSelectedVoucher(couponFId);
 
                         if(IsCategorySelected==true)
                         {
-                        
                             $("#AccountSetingConformation").modal("hide");
                             $("#AccountSetingConformation").css('display','none');
                         }
@@ -718,13 +714,9 @@
                             var htmlToBindAllVoucher = [];
                             $(response.Coupons).each(function (i, val) {
                       
-                                //  var discountedValPer = 100 - parseInt((parseFloat(val.CouponDiscountedValue) / parseFloat(val.CouponActualValue)) * 100);
                                 $("#bonus-deals-side").append(' <div class="ndod-view-mini ndod-view-mini-nodesc"><div class="ndod-deal-header"><h2>' + val.CouponTitle + '</h2></div><div class="ndod-deal-content"><a class="" href="#"><img class="ndod-deal-image  js-show" data-original="' + val.CouponImage1 + '" src="' + val.CouponImage1 + '" alt="" /></a><div class="ndod-redeem-now"></div><div class="ndod-business-logo-wrapper"><div class="ndod-business-logo"><img id="Company_logo" class="" data-original="' + val.LogoUrl + '" src="' + val.LogoUrl + '" width="70" height="28" /> </div><div class="btm-header-bg-business-logo"></div></div><div class="ndod-discount"><div class="ndod-multiprice" style="padding-top: 22.0px ; "><span class="innerColour">NOW</span></div><div class="ndod-price" style="font-size: 36px; margin: 2.0px 0 -1.0px;"><span class="inner innerColour"><span class="ndod-currency">'+val.CurrencyCode+'</span><span class="ndod-amount">' + val.Savings + '</span></span></div><del class="ndod-original-price"><span class="ndod-currency">'+val.CurrencyCode+'</span><span class="ndod-amount">' + val.Price + '</span></del></div></div><div class="ndod-deal-footer-wrapper">  <div class="ndod-deal-footer cld" > <p class="ndod-bought bonus-bought"><span class="ndod-label innerColour">Bought</span><span class="ndod-amount">' + val.SwapCost + '</span></p><p class="ndod-savings"><span class="ndod-label innerColour">Save <span>up to </span></span><span class="ndod-abount">' + val.DealsCount + '<span class="ndod-percent-sign">%</span></span></p><a href="#" onclick="NavigateToDeal(' + val.CouponId + ')" class="ndod-button-small waViewButton"><span class="outer"><span class="inner">VIEW!</span></span>     </a>        </div>         <div class="ndod-deal-footer-btmbg"></div>    </div>    </div></div>');
                             });
                             $("#bonus-deals-side").append('<div style="clear:both;"></div>');
-
-                            // LoadSelectedVoucher(couponFId);
-
                         }
                         else
                         {
