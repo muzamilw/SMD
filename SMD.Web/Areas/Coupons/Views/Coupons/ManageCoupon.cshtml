@@ -275,30 +275,7 @@ else
                                         <div class="col-lg-2">
 
                                         </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="col-lg-2">
-
-                                        </div>
-                                        <div class="col-lg-9">
-                                            <div class="radio col-lg-12" style="text-align: left;" data-bind="visible:$root.isflage()==false">
-                                                <input type="radio" name="optionsRadiosDelvTypes" value="1" id="optionsRadiosApplyFilterFree" data-bind="checked:CouponListingMode">
-                                                <label for="optionsRadiosApplyFilterFree">
-                                                    <span style="font-weight:bold;font-size:15px;">7 Day Flash Deal &nbsp;&nbsp;</span> <span class="defaultthemetxtclr">7 Day Listing, 1Deal Line, 1Push Notification,4 Email Delivered.</span>
-
-                                                </label>
-                                                <span class="help-block text-right"></span>
-                                            </div>
-                                            <div class="radio col-lg-12" style="text-align: left;">
-                                                <input type="radio" name="optionsRadiosDelvTypes" value="2" id="optionsRadiosApplyFilterOnce" data-bind="checked:CouponListingMode">
-                                                <label for="optionsRadiosApplyFilterOnce">
-                                                    <span style="font-weight:bold;font-size:15px;">30 Day Listing</span>&nbsp;&nbsp; <span style="margin-left:13px;">30 Day Listing,Upto 6 Deal Lines, 1Push Notification,4 Email Delivered.</span>
-                                                </label>
-                                                <span class="help-block text-right"></span>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    </div>             
 
                                     <div class="row">
                                         <div class="form-group" style="margin-top:10px;">
@@ -674,6 +651,46 @@ else
 
                                     </div><br />
 
+                                    <div class="row">
+                                        <div class="col-lg-2">
+                                            <label for="txtBuyItlbl" class="control-label text-right tooltip-float floatNone" style="font-weight:bold;font-size:13px">List Deal Group for</label>
+                                        </div>
+                                        <div class="radio col-lg-4">
+                                            <input type="radio" name="optionsRadiosDelvTypes" value="1" id="optionsRadiosApplyFilterFree" data-bind="checked:CouponListingMode">
+                                            <label for="optionsRadiosApplyFilterFree">
+                                                <span style="font-weight:bold;font-size:13px;">7 Day Flash Deal</span>
+                                            </label>
+                                            <span class="help-block text-right"></span>
+                                        </div>
+                                        <div class="radio col-lg-4">
+                                            <input type="radio" name="optionsRadiosDelvTypes" value="2" id="optionsRadiosApplyFilterOnce" data-bind="checked:CouponListingMode">
+                                            <label for="optionsRadiosApplyFilterOnce">
+                                                <span style="font-weight:bold;font-size:13px;">30 Day Listing</span>
+                                            </label>
+                                            <span class="help-block text-right"></span>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="radio col-lg-12" style="text-align: left;">
+
+
+                                        @*<input type="radio" name="optionsRadiosDelvTypes" value="1" id="optionsRadiosApplyFilterFree" data-bind="checked:CouponListingMode">
+                                            <label for="optionsRadiosApplyFilterFree">
+                                                <span style="font-weight:bold;font-size:15px;">7 Day Flash Deal &nbsp;&nbsp;</span> <span class="defaultthemetxtclr">7 Day Listing, 1Deal Line, 1Push Notification,4 Email Delivered.</span>
+
+                                            </label>
+                                            <span class="help-block text-right"></span>*@
+
+
+
+                                        @*<input type="radio" name="optionsRadiosDelvTypes" value="2" id="optionsRadiosApplyFilterOnce" data-bind="checked:CouponListingMode">
+                                            <label for="optionsRadiosApplyFilterOnce">
+                                                <span style="font-weight:bold;font-size:15px;">30 Day Listing</span>&nbsp;&nbsp; <span style="margin-left:13px;">30 Day Listing,Upto 6 Deal Lines, 1Push Notification,4 Email Delivered.</span>
+                                            </label>
+                                            <span class="help-block text-right"></span>*@
+                                    </div>
+
 
                                     <div class="form-group">
                                         <div class="col-lg-2">
@@ -778,7 +795,7 @@ else
 
                                             </select>
                                         </div>
-                                        <div class="col-lg-3 pull-right" style="padding-left:16px;">
+                                        <div class="col-lg-3 pull-right" style="padding-left:16px;display:none">
                                             <button class="btn  btn-success" id="saveBtn" style="width:180px;" data-bind="text:$root.saveBtntext">Save 20% - Buy Now</button>
                                         </div>
                                     </div>
@@ -827,14 +844,14 @@ else
 
                                         </div>
                                         <div class="col-lg-9" style="padding-left:0px;">
-                                            <label style="color:gray;font-size:13px;">Emails are sent to our members on the 1st, 3rd last, 2nd last and the last day the first Deal Line</label>
+                                            <label style="color:gray;font-size:13px;margin-left:-6px;">Emails are sent to our members on the 1st, 3rd last, 2nd last and the last day the first Deal Line</label>
                                         </div>
                                         @*<div class="adsubHeading Theme_standard_clr" data-bind="visible: $root.previewScreenNumber() == 2">
-                                            Create up to 6 Deal Lines.
+                                                Create up to 6 Deal Lines.
 
-                                            <label style="color:gray;font-size:13px;">The first Deal Line will be used in all Notification &Emails</label>
-                                            <button class="btn  btn-success" id="saveBtn" style="width:80px;">save Me</button>
-                                        </div>*@
+                                                <label style="color:gray;font-size:13px;">The first Deal Line will be used in all Notification &Emails</label>
+                                                <button class="btn  btn-success" id="saveBtn" style="width:80px;">save Me</button>
+                                            </div>*@
 
                                     </div>
 
@@ -1228,7 +1245,7 @@ else
 
                                 <div class="col-lg-12" style="margin:auto;float:none !important;" data-bind="visible: $root.previewScreenNumber() == 3">
                                     @*<div class="form-group formcontrol-bg" data-bind="visible: $root.isEnableVedioVerificationLink">
-                                    <div class="col-lg-11">*@
+                                        <div class="col-lg-11">*@
                                     <div class="row branchAddressContainer">
                                         <div class="form-group" style="margin-bottom:5px;display:none">
                                             <div class="col-lg-2"></div>
@@ -1751,9 +1768,9 @@ else
                         <div class="row" style="margin-top:10px;">
                             <div class="col-lg-12" data-bind="with: $root.couponModel" style="padding-left:23px;display:none">
                                 @*<input type="radio" name="optionsRadiosDelvTypes" value="1" id="optionsRadiosApplyFilterFree" data-bind="checked:CouponListingMode">
-                                <label for="optionsRadiosApplyFilterFree">
-                                    <span class="panelfntSize">List for 14 days-FREE</span> .
-                                </label>*@
+                                    <label for="optionsRadiosApplyFilterFree">
+                                        <span class="panelfntSize">List for 14 days-FREE</span> .
+                                    </label>*@
                                 <div class="col-lg-9 fontsize11" style="padding-left: 2px;padding-top: 12px;">
                                     List for 14 days-FREE.
                                 </div>
@@ -1777,9 +1794,9 @@ else
                                     <span class="help-block text-right"></span>
                                 </div>
                                 @*<input type="radio" name="optionsRadiosDelvTypes" value="2" id="optionsRadiosApplyFilterOnce" data-bind="checked:CouponListingMode">
-                                <label for="optionsRadiosApplyFilterOnce">
-                                    <span class="panelfntSize" style="margin-left:1px;">List for 6 months-$29 usd</span>.
-                                </label>*@
+                                    <label for="optionsRadiosApplyFilterOnce">
+                                        <span class="panelfntSize" style="margin-left:1px;">List for 6 months-$29 usd</span>.
+                                    </label>*@
                             </div>
 
                             <div class="col-lg-12" style="padding-left:24px;">
@@ -1907,7 +1924,7 @@ else
             </div>
         </div>
         @Html.Partial("~/Areas/Coupons/Views/Coupons/_advertDashboardDeal.cshtml")
-         <div class="clearfix">
+        <div class="clearfix">
 
         </div>
 
@@ -2022,15 +2039,15 @@ else
 @**************************************** Tab Script ***********************************************************@
 
 <script id="dealLinesTemplate" type="text/html">
-    <div>&nbsp;</div>
+    @*<div>&nbsp;</div>*@
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12" style="padding-left:18px;padding-right:18px;">
             <div>
                 <div class="tabs-wrapper profile-tabs">
-                    <ul id="stockLabelTabListItem" class="nav nav-tabs">
-                        <!-- ko template: { name: 'tabListTemplate', foreach: $root.couponModel().CouponPriceOptions } -->
-                        <!-- /ko -->
-                    </ul>
+                    @*<ul id="stockLabelTabListItem" class="nav nav-tabs">
+                            <!-- ko template: { name: 'tabListTemplate', foreach: $root.couponModel().CouponPriceOptions } -->
+                            <!-- /ko -->
+                        </ul>*@
                     <div class="tab-content" id="stockLabelTabListItemDetails">
                         <!-- ko template: { name: 'TabDetailTemplate', foreach: $root.couponModel().CouponPriceOptions } -->
                         <!-- /ko -->
@@ -2051,7 +2068,7 @@ else
             <span class="col-lg-2 GridHeaderFont_size"> <span>Now<span data-bind="text:$root.currencyCode"></span></span></span>
             <span class="col-lg-2 GridHeaderFont_size"> <span>Saving %</span></span>
         </div>
-        <div class="col-lg-12 borderPanel Subpanels " style="margin-bottom:20px;margin-top:10px;">
+        <div class="col-lg-12 borderPanel Subpanels " style="margin-bottom:20px;margin-top:0px;">
 
             <div class="row" style="margin-top:20px;">
                 <div class="col-lg-3">
@@ -2309,7 +2326,7 @@ else
                 </div>
 
             </div>
-            <div class="row" style="padding-top:10px;">
+            <div class="row" style="padding-top:10px;padding-bottom:15px;">
                 <div class="col-lg-3">
                     <label for="txtSaving" class="control-label text-right tooltip-float floatNone">Promo Code</label>
                 </div>

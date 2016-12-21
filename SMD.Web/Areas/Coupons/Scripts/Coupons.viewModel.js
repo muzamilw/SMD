@@ -337,8 +337,8 @@ define("Coupons/Coupons.viewModel",
 
                       },
                 openAdvertiserDashboardDealScreen = function () {
-                   
-                    
+
+
                     if (!IsnewCoupon()) {
                         isflageClose(true);
                         getDealsAnalytics();
@@ -377,210 +377,210 @@ define("Coupons/Coupons.viewModel",
                     perSaving();
                 },
                  perSaving = function (item) {
-                      var Price = 0;
-                      var result = 0;
-                      var perValue;
-                      var dic = 10;
-                      var edic = 0;
-                      var end20perResult = 0;
-                      var end25perResult = 0;
-                      var end30perResult = 0;
-                      var perVale10D = 0;
-                      var perVale20D = 0;
-                      var perVale30D = 0;
-                      var disper = $("#firstDiscount").val();
-                      var endDis = $("#endingDiscount").val()
-                      if (disper >= 8) {
-                          dealPriceval(true);
-                      }
-                      else {
-                          dealPriceval(false);
-                      }
+                     var Price = 0;
+                     var result = 0;
+                     var perValue;
+                     var dic = 10;
+                     var edic = 0;
+                     var end20perResult = 0;
+                     var end25perResult = 0;
+                     var end30perResult = 0;
+                     var perVale10D = 0;
+                     var perVale20D = 0;
+                     var perVale30D = 0;
+                     var disper = $("#firstDiscount").val();
+                     var endDis = $("#endingDiscount").val()
+                     if (disper >= 8) {
+                         dealPriceval(true);
+                     }
+                     else {
+                         dealPriceval(false);
+                     }
 
-                      if (disper == 0)
-                          dic = 10;
-                      else if (disper == 1)
-                          dic = 20;
-                      else if (disper == 2)
-                          dic = 25;
-                      else if (disper == 3)
-                          dic = 30;
-                      else if (disper == 4)
-                          dic = 40;
-                      else if (disper == 5)
-                          dic = 50;
-                      else if (disper == 6)
-                          dic = 60;
-                      else if (disper == 7)
-                          dic = 50;
-                      else if (disper == 8)
-                          dic = 1;
-                      else if (disper == 9)
-                          dic = 3;
-                      else if (disper == 10)
-                          dic = 5;
-                      else if (disper == 11)
-                          dic = 10;
-                      else if (disper == 12)
-                          dic = 15;
-                      else if (disper == 13)
-                          dic = 20;
-                      else if (disper == 14)
-                          dic = 25;
-                      else if (disper == 15)
-                          dic = 30;
-                      else if (disper == 16)
-                          dic = 40;
-                      else if (disper == 17)
-                          dic = 50;
+                     if (disper == 0)
+                         dic = 10;
+                     else if (disper == 1)
+                         dic = 20;
+                     else if (disper == 2)
+                         dic = 25;
+                     else if (disper == 3)
+                         dic = 30;
+                     else if (disper == 4)
+                         dic = 40;
+                     else if (disper == 5)
+                         dic = 50;
+                     else if (disper == 6)
+                         dic = 60;
+                     else if (disper == 7)
+                         dic = 50;
+                     else if (disper == 8)
+                         dic = 1;
+                     else if (disper == 9)
+                         dic = 3;
+                     else if (disper == 10)
+                         dic = 5;
+                     else if (disper == 11)
+                         dic = 10;
+                     else if (disper == 12)
+                         dic = 15;
+                     else if (disper == 13)
+                         dic = 20;
+                     else if (disper == 14)
+                         dic = 25;
+                     else if (disper == 15)
+                         dic = 30;
+                     else if (disper == 16)
+                         dic = 40;
+                     else if (disper == 17)
+                         dic = 50;
 
-                      if (couponModel() != undefined && couponModel().CouponPriceOptions().length > 0) {
-                          _.each(couponModel().CouponPriceOptions(), function (Item) {
-                              Price = Item.Price();
-                              if (Price != undefined && Price != "" && Price != 0) {
-                                  if (dealPriceval() == false) {
-                                      result = (Price - ((Price * dic) / 100)).toFixed(2);
-                                      end20perResult = (Price - ((Price * (dic + 20)) / 100)).toFixed(2);
-                                      end25perResult = (Price - ((Price * (dic + 25)) / 100)).toFixed(2);
-                                      end30perResult = (Price - ((Price * (dic + 30)) / 100)).toFixed(2);
+                     if (couponModel() != undefined && couponModel().CouponPriceOptions().length > 0) {
+                         _.each(couponModel().CouponPriceOptions(), function (Item) {
+                             Price = Item.Price();
+                             if (Price != undefined && Price != "" && Price != 0) {
+                                 if (dealPriceval() == false) {
+                                     result = (Price - ((Price * dic) / 100)).toFixed(2);
+                                     end20perResult = (Price - ((Price * (dic + 20)) / 100)).toFixed(2);
+                                     end25perResult = (Price - ((Price * (dic + 25)) / 100)).toFixed(2);
+                                     end30perResult = (Price - ((Price * (dic + 30)) / 100)).toFixed(2);
 
-                                      Item.dealPrice(result);
-                                      Item.percentageSaving(dic + "%");
+                                     Item.dealPrice(result);
+                                     Item.percentageSaving(dic + "%");
 
-                                      if (endDis == 1) {
+                                     if (endDis == 1) {
 
-                                          Item.Saveing3rdlast(end20perResult);
-                                          Item.Saveing2ndlast(end20perResult);
-                                          Item.Saveinglast(end20perResult);
-                                          Item.PerSav3rdlast((dic + 20) + "%");
-                                          Item.PerSav2ndlast((dic + 20) + "%");
-                                          Item.PerSavlast((dic + 20) + "%");
-                                      }
-                                      else if (endDis == 2) {
+                                         Item.Saveing3rdlast(end20perResult);
+                                         Item.Saveing2ndlast(end20perResult);
+                                         Item.Saveinglast(end20perResult);
+                                         Item.PerSav3rdlast((dic + 20) + "%");
+                                         Item.PerSav2ndlast((dic + 20) + "%");
+                                         Item.PerSavlast((dic + 20) + "%");
+                                     }
+                                     else if (endDis == 2) {
 
-                                          Item.Saveing3rdlast(end20perResult);
-                                          Item.Saveing2ndlast(end25perResult);
-                                          Item.Saveinglast(end25perResult);
-                                          Item.PerSav3rdlast((dic + 20) + "%");
-                                          Item.PerSav2ndlast((dic + 25) + "%");
-                                          Item.PerSavlast((dic + 25) + "%");
-                                      }
-                                      else if (endDis == 3) {
+                                         Item.Saveing3rdlast(end20perResult);
+                                         Item.Saveing2ndlast(end25perResult);
+                                         Item.Saveinglast(end25perResult);
+                                         Item.PerSav3rdlast((dic + 20) + "%");
+                                         Item.PerSav2ndlast((dic + 25) + "%");
+                                         Item.PerSavlast((dic + 25) + "%");
+                                     }
+                                     else if (endDis == 3) {
 
-                                          Item.Saveing3rdlast(end20perResult);
-                                          Item.Saveing2ndlast(end25perResult);
-                                          Item.Saveinglast(end30perResult);
-                                          Item.PerSav3rdlast((dic + 20) + "%");
-                                          Item.PerSav2ndlast((dic + 25) + "%");
-                                          Item.PerSavlast((dic + 30) + "%");
-                                      }
-                                      else if (endDis == 0) {
+                                         Item.Saveing3rdlast(end20perResult);
+                                         Item.Saveing2ndlast(end25perResult);
+                                         Item.Saveinglast(end30perResult);
+                                         Item.PerSav3rdlast((dic + 20) + "%");
+                                         Item.PerSav2ndlast((dic + 25) + "%");
+                                         Item.PerSavlast((dic + 30) + "%");
+                                     }
+                                     else if (endDis == 0) {
 
-                                          Item.Saveing3rdlast(result);
-                                          Item.Saveing2ndlast(result);
-                                          Item.Saveinglast(result);
-                                          Item.PerSav3rdlast(dic + "%");
-                                          Item.PerSav2ndlast(dic + "%");
-                                          Item.PerSavlast(dic + "%");
-                                      }
-
-
-                                  }
-                                  else {
-                                      result = (Price - dic).toFixed(2);
-                                      var perValue = (((Price - result) * 100) / Price).toFixed(2);
-                                      Item.dealPrice(result);
-                                      Item.percentageSaving(perValue + "%");
-                                      var result10 = (Price - (dic + 10)).toFixed(2);
-                                      var result20 = (Price - (dic + 20)).toFixed(2);
-                                      var result30 = (Price - (dic + 30)).toFixed(2);
-                                      perVale10D = (((Price - result10) * 100) / Price).toFixed(2);
-                                      perVale20D = (((Price - result20) * 100) / Price).toFixed(2);
-                                      perVale30D = (((Price - result30) * 100) / Price).toFixed(2);
+                                         Item.Saveing3rdlast(result);
+                                         Item.Saveing2ndlast(result);
+                                         Item.Saveinglast(result);
+                                         Item.PerSav3rdlast(dic + "%");
+                                         Item.PerSav2ndlast(dic + "%");
+                                         Item.PerSavlast(dic + "%");
+                                     }
 
 
+                                 }
+                                 else {
+                                     result = (Price - dic).toFixed(2);
+                                     var perValue = (((Price - result) * 100) / Price).toFixed(2);
+                                     Item.dealPrice(result);
+                                     Item.percentageSaving(perValue + "%");
+                                     var result10 = (Price - (dic + 10)).toFixed(2);
+                                     var result20 = (Price - (dic + 20)).toFixed(2);
+                                     var result30 = (Price - (dic + 30)).toFixed(2);
+                                     perVale10D = (((Price - result10) * 100) / Price).toFixed(2);
+                                     perVale20D = (((Price - result20) * 100) / Price).toFixed(2);
+                                     perVale30D = (((Price - result30) * 100) / Price).toFixed(2);
 
-                                      if (endDis == 4) {
 
-                                          Item.Saveing3rdlast(result10);
-                                          Item.Saveing2ndlast(result10);
-                                          Item.Saveinglast(result10);
-                                          Item.PerSav3rdlast(perVale10D + "%")
-                                          Item.PerSav2ndlast(perVale10D + "%")
-                                          Item.PerSavlast(perVale10D + "%")
-                                      }
-                                      else if (endDis == 5) {
-                                          Item.Saveing3rdlast(result10);
-                                          Item.Saveing2ndlast(result20);
-                                          Item.Saveinglast(result20);
-                                          Item.PerSav3rdlast(perVale10D + "%")
-                                          Item.PerSav2ndlast(perVale20D + "%")
-                                          Item.PerSavlast(perVale20D + "%")
-                                      }
-                                      else if (endDis == 5) {
-                                          Item.Saveing3rdlast(result10);
-                                          Item.Saveing2ndlast(result20);
-                                          Item.Saveinglast(result30);
-                                          Item.PerSav3rdlast(perVale10D + "%")
-                                          Item.PerSav2ndlast(perVale20D + "%")
-                                          Item.PerSavlast(perVale30D + "%")
-                                      }
-                                  }
-                              }
-                              else {
-                                  Item.dealPrice(result);
-                                  Item.percentageSaving(0 + "%");
-                                  Item.Saveing3rdlast(result);
-                                  Item.Saveing2ndlast(result);
-                                  Item.Saveinglast(result);
-                                  Item.PerSav3rdlast(0 + "%")
-                                  Item.PerSav2ndlast(0 + "%")
-                                  Item.PerSavlast(0 + "%")
-                              }
-                          });
-                      }
-                  },
+
+                                     if (endDis == 4) {
+
+                                         Item.Saveing3rdlast(result10);
+                                         Item.Saveing2ndlast(result10);
+                                         Item.Saveinglast(result10);
+                                         Item.PerSav3rdlast(perVale10D + "%")
+                                         Item.PerSav2ndlast(perVale10D + "%")
+                                         Item.PerSavlast(perVale10D + "%")
+                                     }
+                                     else if (endDis == 5) {
+                                         Item.Saveing3rdlast(result10);
+                                         Item.Saveing2ndlast(result20);
+                                         Item.Saveinglast(result20);
+                                         Item.PerSav3rdlast(perVale10D + "%")
+                                         Item.PerSav2ndlast(perVale20D + "%")
+                                         Item.PerSavlast(perVale20D + "%")
+                                     }
+                                     else if (endDis == 5) {
+                                         Item.Saveing3rdlast(result10);
+                                         Item.Saveing2ndlast(result20);
+                                         Item.Saveinglast(result30);
+                                         Item.PerSav3rdlast(perVale10D + "%")
+                                         Item.PerSav2ndlast(perVale20D + "%")
+                                         Item.PerSavlast(perVale30D + "%")
+                                     }
+                                 }
+                             }
+                             else {
+                                 Item.dealPrice(result);
+                                 Item.percentageSaving(0 + "%");
+                                 Item.Saveing3rdlast(result);
+                                 Item.Saveing2ndlast(result);
+                                 Item.Saveinglast(result);
+                                 Item.PerSav3rdlast(0 + "%")
+                                 Item.PerSav2ndlast(0 + "%")
+                                 Item.PerSavlast(0 + "%")
+                             }
+                         });
+                     }
+                 },
                 getDealsAnalytics = function () {
-                dataservice.getDealsAnalytics({
-                    CouponID: selectedCouponIdAnalytics(),
-                    dateRange: selecteddateRangeAnalytics(),
-                    Granularity: selectedGranularityAnalytics(),
-                    type: 1,
-                    Gender: 0,
-                    age: 0,
-                    Stype: 0
+                    dataservice.getDealsAnalytics({
+                        CouponID: selectedCouponIdAnalytics(),
+                        dateRange: selecteddateRangeAnalytics(),
+                        Granularity: selectedGranularityAnalytics(),
+                        type: 1,
+                        Gender: 0,
+                        age: 0,
+                        Stype: 0
 
-                }, {
-                    success: function (data) {
+                    }, {
+                        success: function (data) {
 
-                        DealsAnalyticsData.removeAll();
-                        ko.utils.arrayPushAll(DealsAnalyticsData(), data.lineCharts);
-                        DealsAnalyticsData.valueHasMutated();
-                        CampaignRatioAnalyticData(data.pieCharts);
-                        dealExpirydate(data.expiryDate);
-                        DDCTStatsAnalytics(data.ClickTrouStat);
-                        DDOStatsAnalytics(data.ImpressionStat);
-                        if (CampaignRatioAnalyticData()[0].value > 0) {
+                            DealsAnalyticsData.removeAll();
+                            ko.utils.arrayPushAll(DealsAnalyticsData(), data.lineCharts);
+                            DealsAnalyticsData.valueHasMutated();
+                            CampaignRatioAnalyticData(data.pieCharts);
+                            dealExpirydate(data.expiryDate);
+                            DDCTStatsAnalytics(data.ClickTrouStat);
+                            DDOStatsAnalytics(data.ImpressionStat);
+                            if (CampaignRatioAnalyticData()[0].value > 0) {
 
-                            hasImpression(true);
+                                hasImpression(true);
 
-                            var browsersChart = Morris.Donut({
-                                element: 'donutId',
-                                data: CampaignRatioAnalyticData(), colors: ['green', 'blue', 'orange']
-                            });
-                        } else {
-                            hasImpression(false);
+                                var browsersChart = Morris.Donut({
+                                    element: 'donutId',
+                                    data: CampaignRatioAnalyticData(), colors: ['green', 'blue', 'orange']
+                                });
+                            } else {
+                                hasImpression(false);
+                            }
+
+
+
+                        },
+                        error: function (response) {
+
                         }
+                    });
 
-
-
-                    },
-                    error: function (response) {
-
-                    }
-                });
-
-            },
+                },
                     getCompanyData = function (ComId) {
                         dataservice.getCompanyData(
                      {
@@ -752,7 +752,7 @@ define("Coupons/Coupons.viewModel",
               getDealStats = function (CouponId) {
                   dataservice.getDealStats({
                       id: CouponId,
-                      
+
                   }, {
                       success: function (data) {
                           if (data != null) {
@@ -780,7 +780,7 @@ define("Coupons/Coupons.viewModel",
               },
 
         getAdCampaignGridContent = function () {
-                dataservice.getCampaignData({
+            dataservice.getCampaignData({
                 CampaignId: 0,
                 PageSize: pager().pageSize(),
                 PageNo: pager().currentPage(),
@@ -979,15 +979,7 @@ getfreeCouponCount = function () {
             couponModel().CouponPriceOptions.splice(0, 0, new model.CouponPriceOption());
             couponModel().BuyitLandingPageUrl('https://');
             couponModel().isSaveBtnLable("3");
-            if (UserAndCostDetail().isStripeIntegrated) {
-                couponModel().CouponListingMode("2");
-                isflage(true);
-            }
-            else {
-                couponModel().CouponListingMode("1");
-                isflage(false);
-            }
-
+            couponModel().CouponListingMode("1");
             saveBtntext("Buy Now");
             couponModel().IsShowReviews(true);
             couponModel().IsShowAddress(true);
@@ -1015,7 +1007,7 @@ getfreeCouponCount = function () {
         },
         onSaveBtnLabel = function () {
             var price = couponModel().CouponPriceOptions().length > 0 ? couponModel().CouponPriceOptions()[0].Price() : 0;
-            var saving = couponModel().CouponPriceOptions().length > 0 ? couponModel().CouponPriceOptions()[0].Savings():0;
+            var saving = couponModel().CouponPriceOptions().length > 0 ? couponModel().CouponPriceOptions()[0].Savings() : 0;
             var result = 0;
             var cur = currencyCode();
             var strlable;
@@ -1208,6 +1200,22 @@ getfreeCouponCount = function () {
 
             if (hasErrors)
                 return;
+            if (freeCouponCount() == 0 && UserAndCostDetail().StripeSubscriptionStatus == null && couponModel().CouponListingMode() == 2) {
+                confirmation.messageText("Your deal cannot be submitted for 30 days.Please subscribe to avail unlimited deals.");
+                confirmation.afterProceed(function () {
+                    stripeChargeCustomer.show(function () {
+                        UserAndCostDetail().isStripeIntegrated = true;
+                        saveCampaign(2);
+                    }, 1000, 'Configure your Subscription');
+                    return;
+                });
+                confirmation.yesBtnText("Subscribe for Subscribtion");
+                confirmation.afterCancel(function () {
+                    return;
+                });
+                confirmation.show();
+                return;
+            }
             if (freeCouponCount() > 0 && UserAndCostDetail().StripeSubscriptionStatus == null) {
                 confirmation.messageText("Your deal cannot be submitted as there is already a free deal active." + "<br\>" + "Please subscribe to avail unlimited deals.")
                 confirmation.afterProceed(function () {
@@ -1218,7 +1226,7 @@ getfreeCouponCount = function () {
                     }, 1000, 'Configure your Subscription');
                     return;
                 });
-                confirmation.yesBtnText("Upgrade up to Monthly Deal");
+                confirmation.yesBtnText("Subscribe for Subscribtion");
                 confirmation.afterCancel(function () {
                     return;
                 });
@@ -1231,7 +1239,7 @@ getfreeCouponCount = function () {
                         couponModel().CouponListingMode(2);
                         saveCampaign(2);
                     });
-                    confirmation.yesBtnText("Upgrade up to Monthly Deal");
+                    confirmation.yesBtnText("Subscribe for Subscribtion");
                     confirmation.afterCancel(function () {
                         return;
                     });
@@ -1263,7 +1271,7 @@ getfreeCouponCount = function () {
 
 
                                         });
-                                        confirmation.yesBtnText("Upgrade up to Monthly Deal");
+                                        confirmation.yesBtnText("Subscribe for Subscribtion");
                                         confirmation.afterCancel(function () {
                                             return;
                                         });
@@ -1278,7 +1286,7 @@ getfreeCouponCount = function () {
                                     }
                                 }
                                 else {
-                                    couponModel().CouponListingMode(2)
+                                   // couponModel().CouponListingMode(2)
                                     saveCampaign(2);
                                 }
                             }
@@ -1318,7 +1326,7 @@ getfreeCouponCount = function () {
             }
             ,
         saveCampaign = function (mode) {
-            
+
             if (ValidateCoupon() == false) {
 
                 var isPopulateErrorList = false;
@@ -2191,7 +2199,7 @@ getfreeCouponCount = function () {
                     geocoderComp.geocode({
                         'address': fulladdress
                     }, function (results, status) {
-                        
+
                         if (status == google.maps.GeocoderStatus.OK) {
                             // isMapVisible(true);
                             //if (isCodeAddressEdit() == false) {
@@ -2212,7 +2220,7 @@ getfreeCouponCount = function () {
                                 geocoder.geocode({
                                     "latLng": event.latLng
                                 }, function (results, status) {
-                                   
+
                                     console.log(results, status);
                                     if (status == google.maps.GeocoderStatus.OK) {
                                         console.log(results);
@@ -3317,7 +3325,7 @@ getfreeCouponCount = function () {
                     saveBtntext: saveBtntext,
                     isflage: isflage,
                     percentageDiscountDD: percentageDiscountDD,
-                    openAdvertiserDashboardDealScreenOnList:openAdvertiserDashboardDealScreenOnList,
+                    openAdvertiserDashboardDealScreenOnList: openAdvertiserDashboardDealScreenOnList,
                     dollarAmountDisDD: dollarAmountDisDD,
                     getFirstDiscount: getFirstDiscount,
                     testVal: testVal,
