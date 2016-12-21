@@ -1221,7 +1221,7 @@ getfreeCouponCount = function () {
                 confirmation.afterProceed(function () {
                     stripeChargeCustomer.show(function () {
                         UserAndCostDetail().isStripeIntegrated = true;
-                        couponModel().CouponListingMode(2)
+                      //  couponModel().CouponListingMode(2)
                         saveCampaign(2);
                     }, 1000, 'Configure your Subscription');
                     return;
@@ -1236,7 +1236,7 @@ getfreeCouponCount = function () {
                 if (couponModel().CouponListingMode() == 1 && couponModel().CouponPriceOptions().length > 1 && UserAndCostDetail().StripeSubscriptionStatus == null) {
                     confirmation.messageText("Your deal cannot be submitted as it has more than one deal headlines. Please subscribe to avail unlimited deal headlines.");
                     confirmation.afterProceed(function () {
-                        couponModel().CouponListingMode(2);
+                        //couponModel().CouponListingMode(2);
                         saveCampaign(2);
                     });
                     confirmation.yesBtnText("Subscribe for Subscribtion");
@@ -1265,7 +1265,7 @@ getfreeCouponCount = function () {
                                         confirmation.afterProceed(function () {
                                             stripeChargeCustomer.show(function () {
                                                 UserAndCostDetail().isStripeIntegrated = true;
-                                                couponModel().CouponListingMode(2);
+                                               // couponModel().CouponListingMode(2);
                                                 saveCampaign(2);
                                             }, 1000, 'Configure your Subscription');
 
