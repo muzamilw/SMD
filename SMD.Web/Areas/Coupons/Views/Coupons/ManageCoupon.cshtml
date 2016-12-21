@@ -39,7 +39,7 @@ else
                 <div class="col-lg-3" style="padding-left:0px;padding-right:0px;">
                     <div class="pull-left" data-bind="with: $root.couponModel" style=" margin-left:-9px !important;margin-top: 13px;">
                         <div class="pull-left" style="margin-top:1px;">
-                            <span style="font-size:23px;color:white;" data-bind="text:$root.StatusValue()">Draft</span>
+                            <span style="font-size:23px;color:white;" data-bind="text:$root.StatusValue(),visible:$root.isflageClose()==false">Draft</span>
                         </div>
 
                     </div>

@@ -4,7 +4,7 @@ var ist = {
     datePattern: "DD/MM/YY",
     shortDatePattern: "dd-M-yy",
     customShortDatePattern: "dd-mm-yy",
-    customDatePattern: "DD-MMM-YYYY",
+    customDatePattern: "DD MMM YYYY",
     timePattern: "HH:mm",
     hourPattern: "HH",
     minutePattern: "mm",
