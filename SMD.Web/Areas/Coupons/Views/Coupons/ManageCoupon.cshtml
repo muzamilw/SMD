@@ -64,7 +64,7 @@ else
                     </div>*@
             </div>
         </div>
-        <div class="row">
+        <div class="row" data-bind="visible:!$root.isAdvertdashboardDealVisible()">
             <div class="col-lg-9" style="padding-right:12px;">
                 <div class="main-box header" style="padding-left:52px;">
                     <div class="col-lg-12" style="margin:auto;float:none !important">
@@ -204,7 +204,7 @@ else
 
                         <div class="main-box main-box-subpage">
 
-                            <div id="pre_panel" data-bind="visible:!$root.isAdvertdashboardDealVisible()">
+                            <div id="pre_panel">
                                 <div class="col-lg-12" data-bind="visible: $root.previewScreenNumber() == 1">
                                     <div style="height:34px;" class="borderbtmline ">
                                         <div class="col-lg-9 adsubHeading Theme_standard_clr">
@@ -834,7 +834,7 @@ else
 
                                             <label style="color:gray;font-size:13px;">The first Deal Line will be used in all Notification &Emails</label>
                                             <button class="btn  btn-success" id="saveBtn" style="width:80px;">save Me</button>
-                                            </div>*@
+                                        </div>*@
 
                                     </div>
 
@@ -1228,7 +1228,7 @@ else
 
                                 <div class="col-lg-12" style="margin:auto;float:none !important;" data-bind="visible: $root.previewScreenNumber() == 3">
                                     @*<div class="form-group formcontrol-bg" data-bind="visible: $root.isEnableVedioVerificationLink">
-                                        <div class="col-lg-11">*@
+                                    <div class="col-lg-11">*@
                                     <div class="row branchAddressContainer">
                                         <div class="form-group" style="margin-bottom:5px;display:none">
                                             <div class="col-lg-2"></div>
@@ -1683,9 +1683,6 @@ else
                                 </div>
                             </div>
 
-                            <div id="gp_panel" data-bind="visible:$root.isAdvertdashboardDealVisible()">
-                                @Html.Partial("~/Areas/Coupons/Views/Coupons/_advertDashboardDeal.cshtml")
-                            </div>
                             <div class="clearfix">
 
                             </div>
@@ -1724,6 +1721,7 @@ else
 
 
 
+
                 </div>
 
 
@@ -1753,9 +1751,9 @@ else
                         <div class="row" style="margin-top:10px;">
                             <div class="col-lg-12" data-bind="with: $root.couponModel" style="padding-left:23px;display:none">
                                 @*<input type="radio" name="optionsRadiosDelvTypes" value="1" id="optionsRadiosApplyFilterFree" data-bind="checked:CouponListingMode">
-                                    <label for="optionsRadiosApplyFilterFree">
+                                <label for="optionsRadiosApplyFilterFree">
                                     <span class="panelfntSize">List for 14 days-FREE</span> .
-                                    </label>*@
+                                </label>*@
                                 <div class="col-lg-9 fontsize11" style="padding-left: 2px;padding-top: 12px;">
                                     List for 14 days-FREE.
                                 </div>
@@ -1779,9 +1777,9 @@ else
                                     <span class="help-block text-right"></span>
                                 </div>
                                 @*<input type="radio" name="optionsRadiosDelvTypes" value="2" id="optionsRadiosApplyFilterOnce" data-bind="checked:CouponListingMode">
-                                    <label for="optionsRadiosApplyFilterOnce">
+                                <label for="optionsRadiosApplyFilterOnce">
                                     <span class="panelfntSize" style="margin-left:1px;">List for 6 months-$29 usd</span>.
-                                    </label>*@
+                                </label>*@
                             </div>
 
                             <div class="col-lg-12" style="padding-left:24px;">
@@ -1869,6 +1867,8 @@ else
 
 
 
+
+
             <div class="clearfix">
             </div>
 
@@ -1906,7 +1906,8 @@ else
                 </div>
             </div>
         </div>
-        <div class="clearfix">
+        @Html.Partial("~/Areas/Coupons/Views/Coupons/_advertDashboardDeal.cshtml")
+         <div class="clearfix">
 
         </div>
 

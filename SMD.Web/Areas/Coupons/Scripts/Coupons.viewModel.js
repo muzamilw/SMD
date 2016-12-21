@@ -294,8 +294,51 @@ define("Coupons/Coupons.viewModel",
                     });
 
 
-                }
+                },
+                      openAdvertiserDashboardDealScreenOnList = function (item) {
+                          if (item != undefined) {
+                              if (item.CouponId() != undefined) {
+                                  selectedCouponIdAnalytics(item.CouponId());
+                                  CouponTitle(item.CouponTitle());
+                              }
+
+
+                          }
+
+
+                          $(".hideInCoupons").css("display", "none");
+
+                          $("#MarketobjDiv").css("display", "none");
+
+                          $("#topArea").css("display", "none");
+                          $("#panelArea").css("display", "none");
+
+                          $("#Heading_div").css("display", "none");
+                          $(".closecls").css("display", "none");
+
+                          isEditorVisible(true);
+                          isListVisible(false);
+
+                          if (!IsnewCoupon()) {
+                              isflageClose(true);
+                              getDealsAnalytics();
+                              $("#ddGranularityDropDown").removeAttr("disabled");
+                              $("#ddDateRangeDropDown").removeAttr("disabled");
+                              $("#ddGDropDown").removeAttr("disabled");
+                              $("#ddADropDown").removeAttr("disabled");
+                              $("#ddCTGDropDown").removeAttr("disabled");
+                              $("#ddCTADropDown").removeAttr("disabled");
+                              isAdvertdashboardDealVisible(true);
+                          }
+                          else {
+                              confirmation.showOKpopupforChart();
+
+                          }
+
+                      },
                 openAdvertiserDashboardDealScreen = function () {
+                   
+                    
                     if (!IsnewCoupon()) {
                         isflageClose(true);
                         getDealsAnalytics();
@@ -572,12 +615,30 @@ define("Coupons/Coupons.viewModel",
 
                     },
             CloseCouponsAnalyticView = function () {
+                isEditorVisible(false);
+                isListVisible(true);
                 isAdvertdashboardDealVisible(false);
                 CampaignRatioAnalyticData(1);
                 selecteddateRangeAnalytics(1);
                 selectedGranularityAnalytics(1);
                 isflageClose(false);
+                showMainMenu();
+                $(".hideInCoupons").css("display", "none");
+                $("#MarketobjDiv").css("display", "none");
+
+                $("#topArea").css("display", "block");
+                $("#Heading_div").css("display", "block");
+                $(".closecls").css("display", "block");
+                $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign,#btnStopAndTerminate,#btnCopyCampaign").removeAttr('disabled');
+
             },
+                 CloseCouponsInnerAnalyticView = function () {
+                     isAdvertdashboardDealVisible(false);
+                     CampaignRatioAnalyticData(1);
+                     selecteddateRangeAnalytics(1);
+                     selectedGranularityAnalytics(1);
+                     isflageClose(false);
+                 },
 
                 //
 
@@ -708,7 +769,7 @@ define("Coupons/Coupons.viewModel",
                                   Element.DealsOpenedDirection(data.DealsOpenedDirection);
                                   Element.DealRating(data.DealRating);
                                   Element.DealReviewsCount(data.DealReviewsCount);
-                                  
+                                  Element.ClickThruCount(data.ClickThruCount);
                               }
                           }
                       },
@@ -1348,7 +1409,7 @@ getfreeCouponCount = function () {
                 },
                 //Create Price option
                  onCreatePriceOption = function () {
-                     if (couponModel().CouponPriceOptions().length <= 5) {
+                     if (couponModel().CouponPriceOptions().length <= 3) {
                          var priceOption = couponModel().CouponPriceOptions()[0];
                          //Create Price option for the very First Time
                          if (priceOption == undefined) {
@@ -1367,7 +1428,7 @@ getfreeCouponCount = function () {
                          }
                      }
                      else {
-                         toastr.error("Sorry,you can Create upto 6 deal lines.");
+                         toastr.error("Sorry,you can Create upto 4 deal lines.");
                      }
                  },
                 // Delete a Price option
@@ -2941,7 +3002,7 @@ getfreeCouponCount = function () {
 
 
                     isEditorVisible(false);
-                    CloseCouponsAnalyticView();
+                    CloseCouponsInnerAnalyticView();
                     if (isFromEdit() == true) {
                         isListVisible(true);
                         isWelcomeScreenVisible(false);
@@ -3256,6 +3317,7 @@ getfreeCouponCount = function () {
                     saveBtntext: saveBtntext,
                     isflage: isflage,
                     percentageDiscountDD: percentageDiscountDD,
+                    openAdvertiserDashboardDealScreenOnList:openAdvertiserDashboardDealScreenOnList,
                     dollarAmountDisDD: dollarAmountDisDD,
                     getFirstDiscount: getFirstDiscount,
                     testVal: testVal,

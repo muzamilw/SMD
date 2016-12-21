@@ -9,6 +9,7 @@ namespace SMD.Models.DomainModels
    public class CouponStatsResponse
     {
        public long DealLines { get; set; }
+       public long ClickThruCount { get; set; }
        public double ClickThruComparison { get; set; }
        public long ClickThruDirection { get; set; }
        public double DealsOpenedComparison { get; set; }

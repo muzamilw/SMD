@@ -116,13 +116,13 @@
               DealFirstDiscountType = ko.observable(DealFirstDiscountType),
               DealEndingDiscountType = ko.observable(DealEndingDiscountType),
                 DealLines = ko.observable(),
-                ClickThruComparison = ko.observable(),
+                ClickThruComparison = ko.observable(0),
                 ClickThruDirection = ko.observable(),
-                DealsOpenedComparison  = ko.observable(),
+                DealsOpenedComparison  = ko.observable(0),
                 DealsOpenedDirection   = ko.observable(),
-                DealRating    = ko.observable(),
+                DealRating    = ko.observable(0),
                 DealReviewsCount = ko.observable(),
-
+                ClickThruCount = ko.observable(),
                // Errors
           errors = ko.validation.group({
               CouponTitle: CouponTitle
@@ -463,9 +463,10 @@
               ClickThruComparison : (ClickThruComparison),
               ClickThruDirection : (ClickThruDirection),
               DealsOpenedComparison : (DealsOpenedComparison),
-              DealsOpenedDirection   : ko.observable(DealsOpenedDirection),
-              DealRating    : ko.observable(DealRating),
-              DealReviewsCount : ko.observable(DealReviewsCount)
+              DealsOpenedDirection   : (DealsOpenedDirection),
+              DealRating    : (DealRating),
+              DealReviewsCount: (DealReviewsCount),
+              ClickThruCount: (ClickThruCount)
           };
       };
 
