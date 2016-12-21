@@ -1246,7 +1246,7 @@ getfreeCouponCount = function () {
                     confirmation.show();
                 }
                 else {
-                    if (couponModel().CouponListingMode() == 1 && couponModel().CouponPriceOptions().length == 1 && UserAndCostDetail().StripeSubscriptionStatus == null) {
+                    if (couponModel().CouponListingMode() == 1 && couponModel().CouponPriceOptions().length == 1 &&(UserAndCostDetail().StripeSubscriptionStatus == null ||UserAndCostDetail().StripeSubscriptionStatus == "canceled")) {
                         saveCampaign(2);
                     }
                     else {
