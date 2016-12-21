@@ -373,19 +373,22 @@ else
         <div class="row">
 
             <form data-bind="submit: $root.getCampaignByFilter">
-                <div class="col-sm-2" style="float:left;">
-                    <div class="filter-block " style="margin-right: -10px" data-bind="visible:$root.isAdSearch()==false">
-                        <div class="form-group ">
-                            <input type="text" class="form-control " placeholder="Search..." data-bind="value: $root.searchFilterValue">
-                            <i class="fa fa-search search-icon" data-bind="click: $root.getCampaignByFilter"></i>
+                <div id="filter_block" >
+
+                    <div class="col-sm-2" style="float:left;">
+                        <div class="filter-block " style="margin-right: -10px" data-bind="visible:$root.isAdSearch()==false">
+                            <div class="form-group ">
+                                <input type="text" class="form-control " placeholder="Search..." data-bind="value: $root.searchFilterValue">
+                                <i class="fa fa-search search-icon" data-bind="click: $root.getCampaignByFilter"></i>
+                            </div>
                         </div>
+                        <div class="clearfix"></div>
                     </div>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="col-sm-2 filterbloclkspos" style="float:left;">
-                    <select id="ddlStatus" class="form-control" style="float:right;height:36px;" data-bind="value : SearchSelectedStatus, event:{ change: $root.getCampaignByFilter},visible:$root.isAdSearch()==false">
-                        <option value="0">All Statuses</option>
-                    </select>
+                    <div class="col-sm-2 filterbloclkspos" style="float:left;">
+                        <select id="ddlStatus" class="form-control" style="float:right;height:36px;" data-bind="value : SearchSelectedStatus, event:{ change: $root.getCampaignByFilter},visible:$root.isAdSearch()==false">
+                            <option value="0">All Statuses</option>
+                        </select>
+                    </div>
                 </div>
             </form>
             <div data-bind="visible:$root.islblText()==true">
