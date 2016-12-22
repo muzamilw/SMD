@@ -1200,7 +1200,7 @@ getfreeCouponCount = function () {
 
             if (hasErrors)
                 return;
-            if (freeCouponCount() == 0 && UserAndCostDetail().StripeSubscriptionStatus == null && couponModel().CouponListingMode() == 2) {
+            if (freeCouponCount() == 0 && (UserAndCostDetail().StripeSubscriptionStatus == null || UserAndCostDetail().StripeSubscriptionStatus == "canceled") && couponModel().CouponListingMode() == 2) {
                 confirmation.messageText("Your deal cannot be submitted for 30 days.Please subscribe to avail unlimited deals.");
                 confirmation.afterProceed(function () {
                     stripeChargeCustomer.show(function () {
@@ -1216,7 +1216,7 @@ getfreeCouponCount = function () {
                 confirmation.show();
                 return;
             }
-            if (freeCouponCount() > 0 && UserAndCostDetail().StripeSubscriptionStatus == null) {
+            if (freeCouponCount() > 0 && (UserAndCostDetail().StripeSubscriptionStatus == null || UserAndCostDetail().StripeSubscriptionStatus == "canceled")) {
                 confirmation.messageText("Your deal cannot be submitted as there is already a free deal active." + "<br\>" + "Please subscribe to avail unlimited deals.")
                 confirmation.afterProceed(function () {
                     stripeChargeCustomer.show(function () {
@@ -1233,11 +1233,15 @@ getfreeCouponCount = function () {
                 confirmation.show();
             }
             else {
-                if (couponModel().CouponListingMode() == 1 && couponModel().CouponPriceOptions().length > 1 && UserAndCostDetail().StripeSubscriptionStatus == null) {
+                if (couponModel().CouponListingMode() == 1 && couponModel().CouponPriceOptions().length > 1 && (UserAndCostDetail().StripeSubscriptionStatus == null ||UserAndCostDetail().StripeSubscriptionStatus == "canceled")) {
                     confirmation.messageText("Your deal cannot be submitted as it has more than one deal headlines. Please subscribe to avail unlimited deal headlines.");
                     confirmation.afterProceed(function () {
-                        //couponModel().CouponListingMode(2);
-                        saveCampaign(2);
+                        stripeChargeCustomer.show(function () {
+                            UserAndCostDetail().isStripeIntegrated = true;
+                            // couponModel().CouponListingMode(2);
+                            saveCampaign(2);
+                        }, 1000, 'Configure your Subscription');
+
                     });
                     confirmation.yesBtnText("Subscribe for Subscribtion");
                     confirmation.afterCancel(function () {

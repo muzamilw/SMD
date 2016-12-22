@@ -246,7 +246,7 @@ namespace SMD.Implementation.Services
             target.StripeCustomerId = source.StripeCustomerId;
             target.SalesEmail = source.SalesEmail;
             target.WebsiteLink = source.WebsiteLink;
-            target.TaxRegNo = source.CompanyRegistrationNo;
+            target.TaxRegNo = source.VatNumber;
             target.Tel1 = source.SalesPhone;
             target.CountryId = source.BillingCountryId;
 
@@ -322,7 +322,8 @@ namespace SMD.Implementation.Services
 
             // currentUser.Email = source.Email;
             currentUser.DOB = source.DateOfBirth;
-            currentUser.IndustryId = source.Profession;
+            //currentUser.IndustryId = source.Profession;
+            currentUser.IndustryId = null;
             currentUser.Phone1 = source.Mobile;
             currentUser.PassportNo = source.PassportNumber;
             currentUser.optDealsNearMeEmails = source.IsReceiveDeals;
