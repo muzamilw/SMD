@@ -1,8 +1,13 @@
 ﻿using Microsoft.Practices.Unity;
 using SMD.Interfaces.Repository;
 using SMD.Models.DomainModels;
+using SMD.Models.RequestModels;
 using SMD.Repository.BaseRepository;
+using System;
+using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq.Expressions;
+using System.Linq;
 
 namespace SMD.Repository.Repositories
 {
@@ -40,6 +45,15 @@ namespace SMD.Repository.Repositories
         public SystemMail Find(int id)
         {
             return DbSet.Find(id);
+        }
+        public IEnumerable<SystemMail> GetEmails(GetPagedListRequest request, out int rowCount)
+        {
+            int fromRow = (request.PageNo - 1) * request.PageSize;
+            int toRow = request.PageSize;
+            rowCount = DbSet.Count();
+            var res = DbSet.OrderBy(c=>c.MailId);
+            return res.Skip(fromRow)
+                .Take(toRow);
         }
 
         #endregion

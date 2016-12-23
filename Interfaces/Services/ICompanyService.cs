@@ -37,5 +37,7 @@ namespace SMD.Interfaces.Services
         Company GetCompanyInfo();
         CompanySubscription GetCompanySubscription();
         String UpdateCompanySubscription(CompanySubscription comSub);
+        EmailResponseModel GetEmails(GetPagedListRequest request);
+        bool UpdateSystemEmail(SystemMail email);
     }
 }

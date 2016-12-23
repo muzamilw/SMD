@@ -934,7 +934,7 @@ namespace SMD.Implementation.Services
                     {
                         if (isFlag != true)
                         {
-                            respMesg = CreateStripeSubscription(dbCo);
+                            respMesg = CreateStripeSubscription(dbCo, userData.Company.StripeCustomerId);
                             ////if (respMesg.Contains("Failed"))
                             ////{
                             ////    return respMesg;
@@ -992,7 +992,7 @@ namespace SMD.Implementation.Services
             }
             return respMesg;
         }
-        private string CreateStripeSubscription(Coupon source)
+        private string CreateStripeSubscription(Coupon source ,string stripeCustomerID)
         {
 
             if (source.CompanyId != null)
@@ -1009,9 +1009,9 @@ namespace SMD.Implementation.Services
                 // Get Current Product
                 var product = (dynamic)null;
 
-                if (source.CouponListingMode == 1)
+                if (source.CouponListingMode == 1 && stripeCustomerID == null)
                     product = productRepository.GetProductByCountryId("couponfree");
-                else if (source.CouponListingMode == 2)
+                else 
                 {
                     //product = productRepository.GetProductByCountryId("couponunlimited");
 

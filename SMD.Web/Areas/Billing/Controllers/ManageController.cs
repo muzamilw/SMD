@@ -13,5 +13,9 @@ namespace SMD.MIS.Areas.Billing.Controllers
         {
             return View();
         }
+        public ActionResult EmailDashboard()
+        {
+            return View();
+        }
 	}
 }

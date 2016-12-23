@@ -133,6 +133,10 @@ define("common/confirmation.viewModel",
                    isLoading(true);
                    view.showOKpopupforFreeCoupon();
                },
+                showOKpopupforMax3Deal = function () {
+                    isLoading(true);
+                    view.showOKpopupforMax3Deal();
+                   },
               showOKpopupfordealheadline = function () {
                   isLoading(true);
                   view.showOKpopupfordealheadline();
@@ -217,8 +221,8 @@ define("common/confirmation.viewModel",
                      ko.applyBindings(view.viewModel, view.bindingRootaction);
                      var logo = $('#companyLogo').prop('src');
                      if ((logo == null || logo == "" || logo == undefined) && (UserRoleId == "EndUser_Admin"))
-                      showAccountSetingPopup();
-                    
+                         showAccountSetingPopup();
+
                  };
 
                 return {
@@ -258,7 +262,8 @@ define("common/confirmation.viewModel",
                     showOKpopupforChart: showOKpopupforChart,
                     showOKpopupforFreeCoupon: showOKpopupforFreeCoupon,
                     showOKpopupfordealheadline: showOKpopupfordealheadline,
-                    showAccountSetingPopup: showAccountSetingPopup
+                    showAccountSetingPopup: showAccountSetingPopup,
+                    showOKpopupforMax3Deal: showOKpopupforMax3Deal
                 };
             })()
         };
