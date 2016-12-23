@@ -656,14 +656,14 @@ else
                                             <label for="txtBuyItlbl" class="control-label text-right tooltip-float floatNone" style="font-weight:bold;font-size:13px">List Deal Group for</label>
                                         </div>
                                         <div class="radio col-lg-4">
-                                            <input type="radio" name="optionsRadiosDelvTypes" value="1" id="optionsRadiosApplyFilterFree" data-bind="checked:CouponListingMode">
+                                            <input type="radio" name="optionsRadiosDelvTypes" value="1" id="optionsRadiosApplyFilterFree" data-bind="checked:CouponListingMode,event:{ change: $root.priceLabel}">
                                             <label for="optionsRadiosApplyFilterFree">
                                                 <span style="font-weight:bold;font-size:13px;">7 Day Flash Deal</span>
                                             </label>
                                             <span class="help-block text-right"></span>
                                         </div>
                                         <div class="radio col-lg-4">
-                                            <input type="radio" name="optionsRadiosDelvTypes" value="2" id="optionsRadiosApplyFilterOnce" data-bind="checked:CouponListingMode">
+                                            <input type="radio" name="optionsRadiosDelvTypes" value="2" id="optionsRadiosApplyFilterOnce" data-bind="checked:CouponListingMode,event:{ change: $root.priceLabel}">
                                             <label for="optionsRadiosApplyFilterOnce">
                                                 <span style="font-weight:bold;font-size:13px;">30 Day Listing</span>
                                             </label>
@@ -732,12 +732,12 @@ else
                                                 <option value=" 0">
                                                     No Further Discounts
                                                 </option>
-                                                <option value="1" data-bind="disable:$root.dealPerOpp()==true">Extra 20% off on last 3 days</option>
-                                                <option value="2" data-bind="disable:$root.dealPerOpp()==true">Extra 20% off on 3rd last day & 25% off on last 2 days"</option>
-                                                <option value="3" data-bind="disable:$root.dealPerOpp()==true">Extra 20% off on 3rd last day, 25% off on 2nd last day & 30% off on last day</option>
-                                                <option value="4" data-bind="disable:$root.disableDollOpp()==true">Extra $10 off on last 3 days</option>
-                                                <option value="5" data-bind="disable:$root.disableDollOpp()==true">Extra $10 off on 3rd last day & $20 off on last 2 days</option>
-                                                <option value="6" data-bind="disable:$root.disableDollOpp()==true">Extra $10 off on 3rd last day, $20 off on 2nd last day & $30 off on last day</option>
+                                                <option value="1" data-bind="visible:$root.dealPerOpp()==true">Extra 20% off on last 3 days</option>
+                                                <option value="2" data-bind="visible:$root.dealPerOpp()==true">Extra 20% off on 3rd last day & 25% off on last 2 days"</option>
+                                                <option value="3" data-bind="visible:$root.dealPerOpp()==true">Extra 20% off on 3rd last day, 25% off on 2nd last day & 30% off on last day</option>
+                                                <option value="4" data-bind="visible:$root.disableDollOpp()==true">Extra $10 off on last 3 days</option>
+                                                <option value="5" data-bind="visible:$root.disableDollOpp()==true">Extra $10 off on 3rd last day & $20 off on last 2 days</option>
+                                                <option value="6" data-bind="visible:$root.disableDollOpp()==true">Extra $10 off on 3rd last day, $20 off on 2nd last day & $30 off on last day</option>
                                             </select>
                                         </div>
                                     </div>
@@ -2114,7 +2114,7 @@ else
                     <input class="form-control" id="txtPrice" data-bind="value: Price,event: { focusout: $root.perSaving}" maxlength="7" />
                 </div>
             </div>
-            <div class="row" style="padding-top:10px;">
+            <div class="row" style="padding-top:10px;display:none" data-bind="visible:$root.islabelvisible()==1">
                 <div class="col-lg-3"></div>
                 <div class="col-lg-2 ">
                     <label class="control-label text-left">1 to Day 4</label>
@@ -2127,6 +2127,21 @@ else
                 </div>
                 <div class="col-lg-2">
                     <label class="control-label text-left">Day 7</label>
+                </div>
+            </div>
+            <div class="row" style="padding-top:10px;display:none" data-bind="visible:$root.islabelvisible()==2">
+                <div class="col-lg-3"></div>
+                <div class="col-lg-2 ">
+                    <label class="control-label text-left">1 to Day 27</label>
+                </div>
+                <div class="col-lg-2">
+                    <label class="control-label text-left">Day 28</label>
+                </div>
+                <div class="col-lg-2">
+                    <label class="control-label text-left">Day 29</label>
+                </div>
+                <div class="col-lg-2">
+                    <label class="control-label text-left">Day 30</label>
                 </div>
             </div>
             <div class="row" style="padding-top:10px;">
@@ -2319,7 +2334,7 @@ else
                     <label for="txtSaving" class="control-label text-right tooltip-float floatNone">Button URL</label>
                 </div>
                 <div class="col-lg-7">
-                    <input class="form-control" placeholder="Paste 'Call for Action' UNK to your Landing Page" data-bind="value: URL" maxlength="400" />
+                    <input class="form-control" placeholder="Paste 'Call for Action' link to your Landing Page" data-bind="value: URL" maxlength="400" />
                 </div>
                 <div class="col-lg-2">
                     <a class="btn  btn-success gtild-color" target="_blank" data-bind="attr: { href: URL }" id="btnBack">Test Link</a>

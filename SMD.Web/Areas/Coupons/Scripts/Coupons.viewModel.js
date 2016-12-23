@@ -115,6 +115,7 @@ define("Coupons/Coupons.viewModel",
                     selectedLocationLong = ko.observable(0),
                     ageRange = ko.observableArray([]),
                     isNewCriteria = ko.observable(true),
+                    islabelvisible = ko.observable(1),
                     isEnableVedioVerificationLink = ko.observable(false),
                     SelectedTextField = ko.observable(),
                     BranchLocationId = ko.observable(),
@@ -148,8 +149,8 @@ define("Coupons/Coupons.viewModel",
                     selectedPriceOption = ko.observable(),
                     testVal = ko.observable(),
                     dealPriceval = ko.observable(false),
-                    disableDollOpp = ko.observable(true),
-                    dealPerOpp = ko.observable(false),
+                    disableDollOpp = ko.observable(false),
+                    dealPerOpp = ko.observable(true),
                     selectedEducationIncludeExclude = ko.observable(true),
                     isListVisible = ko.observable(true),
                     isWelcomeScreenVisible = ko.observable(false),
@@ -359,19 +360,19 @@ define("Coupons/Coupons.viewModel",
                 getFirstDiscount = function () {
                     var fisrDdVal = $("#firstDiscount").val()
                     if (fisrDdVal <= 6) {
-                        disableDollOpp(true);
-                        dealPerOpp(false);
+                        disableDollOpp(false);
+                        dealPerOpp(true);
                     }
                     else
                         if (fisrDdVal == 7) {
 
-                            disableDollOpp(true);
-                            dealPerOpp(true);
+                            disableDollOpp(false);
+                            dealPerOpp(false);
                         }
                         else
                             if (fisrDdVal >= 8) {
-                                disableDollOpp(false);
-                                dealPerOpp(true);
+                                disableDollOpp(true);
+                                dealPerOpp(false);
                             }
 
                     perSaving();
@@ -1460,6 +1461,18 @@ getfreeCouponCount = function () {
                 }
                 return (couponModel().CouponhasChanges() && couponModel().Status() == 4);
             }),
+            priceLabel = function () {
+                if (couponModel() != undefined) {
+                    if (couponModel().CouponListingMode() == 1) {
+                        islabelvisible(1);
+                    }
+                    else {
+                        islabelvisible(2);
+                    }
+                }
+
+            },
+
 
 
 
@@ -1484,6 +1497,7 @@ getfreeCouponCount = function () {
 
               },
             onEditCampaign = function (item) {
+                islabelvisible(item.CouponListingMode());
                 modifiedDate(item.lastModified())
                 getfreeCouponCount();
                 EditorLoading(true);
@@ -1533,7 +1547,7 @@ getfreeCouponCount = function () {
                                 couponModel(model.Coupon.Create(data.Coupon[0]));
 
                                 CouponActiveMonth(couponModel().CouponActiveYear() + ' - ' + GetMonthNameByID(couponModel().CouponActiveMonth()));
-
+                               
 
                                 couponModel().CouponListingMode.subscribe(function (item) {
                                     CouponListingModeChecker(item);
@@ -3336,7 +3350,9 @@ getfreeCouponCount = function () {
                     perSaving: perSaving,
                     dealPriceval: dealPriceval,
                     disableDollOpp: disableDollOpp,
-                    dealPerOpp: dealPerOpp
+                    dealPerOpp: dealPerOpp,
+                    priceLabel: priceLabel,
+                    islabelvisible: islabelvisible
                 };
             })()
         };
