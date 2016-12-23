@@ -55,7 +55,7 @@ else
                                 <p class="group-header-description"></p>
                             </div>
                             <div class="table-responsive" style="margin-right:-4px;">
-                                <table class="table table-striped table-hover" id="surveyQuestionLVTable">
+                                <table class="table table-striped table-hover tbl-intialAlign" id="surveyQuestionLVTable">
                                     <thead>
                                         <tr>
                                             <th class="col-lg-4 th-pointer"><span class="GridHeaderFont_size">Poll Name</span></th>
@@ -166,9 +166,28 @@ else
                 <br />
                 <img style="width:130px;height:130px;" data-bind="attr: { src:  LeftPicturePath()   }"> &nbsp;&nbsp;<img style="width:130px;height:130px;" data-bind="attr: { src:  RightPicturePath()   }">
                 <br />
-                <span style="color:darkgray;font-size:11px;" data-bind="dateString:  StartDate() ? 'Start Date : ' +  StartDate() : 'Not Started'"></span>
+                <!-- ko if: StartDate()-->
+                <span style="color:darkgray;font-size:11px;">
+                    Start Date :
+                </span>
+                <span style="color:darkgray;font-size:11px;" data-bind="dateTimeString:  StartDate()"></span>
+                <!-- /ko -->
+                <!-- ko if: StartDate()== null -->
+                <span style="color:darkgray;font-size:11px;">
+                    Not Started
+                </span>
+
+                <!-- /ko -->
+                <!-- ko if: ModifiedDate()-->
                 <br />
-                <span style="color:darkgray;font-size:11px;" data-bind="text:  ModifiedDate() ? 'Last Updated : ' +  ModifiedDate() : ''"></span>
+                <span style="color:darkgray;font-size:11px;">
+                    Last Updated :
+                </span>
+
+                <span style="color:darkgray;font-size:11px;" data-bind="dateTimeString:  ModifiedDate()"></span>
+                <!-- /ko -->
+
+
             </td>
             <td>
                 <p data-bind="dateString:StartDate"></p>
@@ -195,12 +214,17 @@ else
                 <!-- /ko -->*@
             </td>
             <td >
+                
                 <table class="tbl-noborder">
                     <tbody>
                         <!-- ko if: PieChartData()[0] == undefined -->
-
                         <tr>
+                            <td><br /><br /><br /></td>
+                            <td></td>
+                        </tr>
+<tr>
                             <td>
+
                                 <span> Result 1</span>
                             </td>
                             <td>
@@ -281,14 +305,14 @@ else
                     <!-- /ko -->
                     </div>
                     <br />
-                    <div class="text-left statusbg" data-bind="click:$root.onEditSurvey" style="background:#37c675;width:95px;">
+                    <div class="text-left statusbg" data-bind="click:$root.onEditSurvey" style="background:#37c675;width:95px;white-space:nowrap;">
                         <span>
                             Edit Campaign
                         </span>
 
                     </div>
                     <br />
-                    <div class="text-left statusbg" data-bind="click:$root.openAdvertiserDashboardPollScreen" style="background:blue;width:95px;">
+                    <div class="text-left statusbg" data-bind="click:$root.openAdvertiserDashboardPollScreen" style="background:blue;width:95px;white-space:nowrap;">
                         <span>
                             Analyze Charts
                         </span>
@@ -326,19 +350,21 @@ else
             <div class="row">
 
                 <form data-bind="submit:$root.filterSurveyQuestion">
-                    <div class="filter-block">
-                        <div class="form-group">
-                            <div class="col-xs-2" >
-                                <div data-bind ="visible:$root.isPollSearch()==false">
-                                    <input type="text" class="form-control" placeholder="Search..." data-bind="value:$root.filterValue">
-                                    <i data-bind="click:$root.filterSurveyQuestion" class="fa fa-search search-icon" style=" margin-right: 8px;"></i>
+                    <div class="filter-block" >
+                        <div id="filterdd">
+                            <div class="form-group">
+                                <div class="col-xs-2">
+                                    <div data-bind="visible:$root.isPollSearch()==false">
+                                        <input type="text" class="form-control" placeholder="Search..." data-bind="value:$root.filterValue">
+                                        <i data-bind="click:$root.filterSurveyQuestion" class="fa fa-search search-icon" style=" margin-right: 8px;"></i>
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-2">
+                                    <select class="form-control" data-bind="options: $root.qStatuses, optionsText: 'value', optionsValue: 'id',value:$root.statusFilterValue,event:{ change: $root.SurveyQuestionsByFilter},visible:$root.isPollSearch()==false"></select>
                                 </div>
 
                             </div>
-                            <div class="col-xs-2">
-                                <select class="form-control" data-bind="options: $root.qStatuses, optionsText: 'value', optionsValue: 'id',value:$root.statusFilterValue,event:{ change: $root.SurveyQuestionsByFilter},visible:$root.isPollSearch()==false"></select>
-                            </div>
-
                         </div>
                     </div>
                 </form>

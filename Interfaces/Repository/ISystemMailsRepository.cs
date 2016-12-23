@@ -1,4 +1,6 @@
 ﻿using SMD.Models.DomainModels;
+using SMD.Models.RequestModels;
+using System.Collections.Generic;
 
 namespace SMD.Interfaces.Repository
 {
@@ -6,6 +8,7 @@ namespace SMD.Interfaces.Repository
     /// System Mails Repository Interface 
     /// </summary>
     public interface ISystemMailsRepository : IBaseRepository<SystemMail, int>
-    {   
+    {
+        IEnumerable<SystemMail> GetEmails(GetPagedListRequest request, out int rowCount);
     }
 }

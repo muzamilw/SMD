@@ -177,7 +177,7 @@ namespace SMD.Repository.Repositories
                 target.StripeCustomerId = RequestData.StripeCustomerId;
                 target.SalesEmail = RequestData.SalesEmail;
                 target.WebsiteLink = RequestData.WebsiteLink;
-                target.TaxRegNo = RequestData.CompanyRegistrationNo;
+                target.TaxRegNo = RequestData.VatNumber;
                 target.Tel1 = RequestData.SalesPhone;
                 target.CompanyType = RequestData.CompanyType;
 

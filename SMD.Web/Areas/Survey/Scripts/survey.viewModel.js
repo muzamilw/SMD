@@ -27,6 +27,7 @@ define("survey/survey.viewModel",
                     TemporaryQuizQuestions = ko.observableArray([]),
                     TemporarySurveyList = ko.observableArray([]),
                     price = ko.observable(0),
+                    totalSurveysCount =ko.observable(0),
 
                     IsVisibleAudience = ko.observable(false),
                     IsBroadMarketing = ko.observable(true),
@@ -348,6 +349,7 @@ define("survey/survey.viewModel",
                     
                 });
                 pager().totalCount(data.TotalCount);
+                totalSurveysCount(data.TotalCount);
                 if (data.TotalCount == 0) {
                     isPollSearch(true);
                     islblText(true);
@@ -2562,7 +2564,8 @@ define("survey/survey.viewModel",
                     righPolltImg3: righPolltImg3,
                     pollQuestion1: pollQuestion1,
                     pollQuestion2: pollQuestion2,
-                    pollQuestion3: pollQuestion3
+                    pollQuestion3: pollQuestion3,
+                    totalSurveysCount: totalSurveysCount
                 };
             })()
         };

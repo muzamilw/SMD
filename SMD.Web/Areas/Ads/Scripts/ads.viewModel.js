@@ -15,6 +15,7 @@ define("ads/ads.viewModel",
                     isEditorVisible = ko.observable(false),
                     isClickRateVisible = ko.observable(null),
                     IsthisEditCamapiagn = ko.observable(false),
+                    totalvideoAdsCount = ko.observable(0),
                     CurrentMode = ko.observable(0),
                     CompanyLogo = ko.observable(''),
                     IsBroadMarketing = ko.observable(true),
@@ -564,6 +565,7 @@ define("ads/ads.viewModel",
 
                                 campaignGridContent.push(model.Campaign.Create(updateCampaignGridItem(item)));
                             });
+                            totalvideoAdsCount(data.TotalCount);
                             pager().totalCount(data.TotalCount);
                             if (data.TotalCount == 0) {
                                 isAdSearch(true);
@@ -2071,6 +2073,17 @@ define("ads/ads.viewModel",
                   },
                 Changefilter = function () {
                     
+                    debugger;
+                    $.browser.chrome = /chrome/.test(navigator.userAgent.toLowerCase());
+
+                    /* Detect Chrome */
+                    if ($.browser.chrome) {
+                        /* Do something for Chrome at this point */
+                        alert("You are using Chrome!");
+                    }
+                        /* Finally, if it is Chrome then jQuery thinks it's 
+                           Safari so we have to tell it isn't */
+        
                     if (campaignModel().IsUseFilter() == 0) {
 
                         confirmation.messageText("Switching to Hyper Targeting will remove all Broad Targeting filters." + "</br>" + "Continue to Hyper Targeting.");
@@ -3992,7 +4005,8 @@ define("ads/ads.viewModel",
                     VideoLink3: VideoLink3,
                     headText: headText,
                     ischartOpened: ischartOpened,
-                    TestDonut:TestDonut
+                    TestDonut: TestDonut,
+                    totalvideoAdsCount: totalvideoAdsCount
                 };
             })()
         };

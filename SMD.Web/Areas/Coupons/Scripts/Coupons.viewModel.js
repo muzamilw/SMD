@@ -115,6 +115,7 @@ define("Coupons/Coupons.viewModel",
                     selectedLocationLong = ko.observable(0),
                     ageRange = ko.observableArray([]),
                     isNewCriteria = ko.observable(true),
+                    islabelvisible = ko.observable(1),
                     isEnableVedioVerificationLink = ko.observable(false),
                     SelectedTextField = ko.observable(),
                     BranchLocationId = ko.observable(),
@@ -148,8 +149,8 @@ define("Coupons/Coupons.viewModel",
                     selectedPriceOption = ko.observable(),
                     testVal = ko.observable(),
                     dealPriceval = ko.observable(false),
-                    disableDollOpp = ko.observable(true),
-                    dealPerOpp = ko.observable(false),
+                    disableDollOpp = ko.observable(false),
+                    dealPerOpp = ko.observable(true),
                     selectedEducationIncludeExclude = ko.observable(true),
                     isListVisible = ko.observable(true),
                     isWelcomeScreenVisible = ko.observable(false),
@@ -359,19 +360,19 @@ define("Coupons/Coupons.viewModel",
                 getFirstDiscount = function () {
                     var fisrDdVal = $("#firstDiscount").val()
                     if (fisrDdVal <= 6) {
-                        disableDollOpp(true);
-                        dealPerOpp(false);
+                        disableDollOpp(false);
+                        dealPerOpp(true);
                     }
                     else
                         if (fisrDdVal == 7) {
 
-                            disableDollOpp(true);
-                            dealPerOpp(true);
+                            disableDollOpp(false);
+                            dealPerOpp(false);
                         }
                         else
                             if (fisrDdVal >= 8) {
-                                disableDollOpp(false);
-                                dealPerOpp(true);
+                                disableDollOpp(true);
+                                dealPerOpp(false);
                             }
 
                     perSaving();
@@ -590,7 +591,7 @@ define("Coupons/Coupons.viewModel",
                      {
                          success: function (comData) {
                              CompanyCity(comData.BillingCity);
-                             AddressLine1(comData.CompanyAddressline1);
+                             AddressLine1(comData.BillingAddressLine1);
                              companystate(comData.BillingState);
                              companyzipcode(comData.BillingZipCode);
                              CompanyAboutUs(comData.AboutUs);
@@ -948,6 +949,7 @@ getfreeCouponCount = function () {
             openEditScreen(5);
             isFromEdit(true);
             isListVisible(false);
+            islabelvisible(1);
             isBtnSaveDraftVisible(true);
             isTerminateBtnVisible(false);
             isNewCampaignVisible(false);
@@ -1200,7 +1202,7 @@ getfreeCouponCount = function () {
 
             if (hasErrors)
                 return;
-            if (freeCouponCount() == 0 && UserAndCostDetail().StripeSubscriptionStatus == null && couponModel().CouponListingMode() == 2) {
+            if (freeCouponCount() == 0 && (UserAndCostDetail().StripeSubscriptionStatus == null || UserAndCostDetail().StripeSubscriptionStatus == "canceled") && couponModel().CouponListingMode() == 2) {
                 confirmation.messageText("Your deal cannot be submitted for 30 days.Please subscribe to avail unlimited deals.");
                 confirmation.afterProceed(function () {
                     stripeChargeCustomer.show(function () {
@@ -1216,7 +1218,7 @@ getfreeCouponCount = function () {
                 confirmation.show();
                 return;
             }
-            if (freeCouponCount() > 0 && UserAndCostDetail().StripeSubscriptionStatus == null) {
+            if (freeCouponCount() > 0 && (UserAndCostDetail().StripeSubscriptionStatus == null || UserAndCostDetail().StripeSubscriptionStatus == "canceled")) {
                 confirmation.messageText("Your deal cannot be submitted as there is already a free deal active." + "<br\>" + "Please subscribe to avail unlimited deals.")
                 confirmation.afterProceed(function () {
                     stripeChargeCustomer.show(function () {
@@ -1233,11 +1235,15 @@ getfreeCouponCount = function () {
                 confirmation.show();
             }
             else {
-                if (couponModel().CouponListingMode() == 1 && couponModel().CouponPriceOptions().length > 1 && UserAndCostDetail().StripeSubscriptionStatus == null) {
+                if (couponModel().CouponListingMode() == 1 && couponModel().CouponPriceOptions().length > 1 && (UserAndCostDetail().StripeSubscriptionStatus == null ||UserAndCostDetail().StripeSubscriptionStatus == "canceled")) {
                     confirmation.messageText("Your deal cannot be submitted as it has more than one deal headlines. Please subscribe to avail unlimited deal headlines.");
                     confirmation.afterProceed(function () {
-                        //couponModel().CouponListingMode(2);
-                        saveCampaign(2);
+                        stripeChargeCustomer.show(function () {
+                            UserAndCostDetail().isStripeIntegrated = true;
+                            // couponModel().CouponListingMode(2);
+                            saveCampaign(2);
+                        }, 1000, 'Configure your Subscription');
+
                     });
                     confirmation.yesBtnText("Subscribe for Subscribtion");
                     confirmation.afterCancel(function () {
@@ -1246,7 +1252,7 @@ getfreeCouponCount = function () {
                     confirmation.show();
                 }
                 else {
-                    if (couponModel().CouponListingMode() == 1 && couponModel().CouponPriceOptions().length == 1 && UserAndCostDetail().StripeSubscriptionStatus == null) {
+                    if (couponModel().CouponListingMode() == 1 && couponModel().CouponPriceOptions().length == 1 &&(UserAndCostDetail().StripeSubscriptionStatus == null ||UserAndCostDetail().StripeSubscriptionStatus == "canceled")) {
                         saveCampaign(2);
                     }
                     else {
@@ -1456,6 +1462,18 @@ getfreeCouponCount = function () {
                 }
                 return (couponModel().CouponhasChanges() && couponModel().Status() == 4);
             }),
+            priceLabel = function () {
+                if (couponModel() != undefined) {
+                    if (couponModel().CouponListingMode() == 1) {
+                        islabelvisible(1);
+                    }
+                    else {
+                        islabelvisible(2);
+                    }
+                }
+
+            },
+
 
 
 
@@ -1480,6 +1498,7 @@ getfreeCouponCount = function () {
 
               },
             onEditCampaign = function (item) {
+                islabelvisible(item.CouponListingMode());
                 modifiedDate(item.lastModified())
                 getfreeCouponCount();
                 EditorLoading(true);
@@ -1529,7 +1548,7 @@ getfreeCouponCount = function () {
                                 couponModel(model.Coupon.Create(data.Coupon[0]));
 
                                 CouponActiveMonth(couponModel().CouponActiveYear() + ' - ' + GetMonthNameByID(couponModel().CouponActiveMonth()));
-
+                               
 
                                 couponModel().CouponListingMode.subscribe(function (item) {
                                     CouponListingModeChecker(item);
@@ -2167,8 +2186,9 @@ getfreeCouponCount = function () {
                 googleAddressMap = function () {
 
                     initializeGeoLocation();
-                    setCompanyAddress();
                     google.maps.event.addDomListener(window, 'load', initializeGeoLocation);
+                    setCompanyAddress();
+                  
 
                 },
                 initializeGeoLocation = function () {
@@ -2186,20 +2206,19 @@ getfreeCouponCount = function () {
 
                 },
                 setCompanyAddress = function () {
-
+                    
                     //var fulladdress = AddressLine1().toLowerCase() + ' ' + CompanyCity() + ' ' + companyzipcode() + ' ' + companystate().toLowerCase();
                     var fulladdress = null;
                     if (AddressLine1() != null) {
-                        fulladdress = AddressLine1().toLowerCase() + ' ' + CompanyCity() + ' ' + companyzipcode() + ' ' + companystate().toLowerCase();
+                        fulladdress = AddressLine1().toLowerCase() + ' ' + CompanyCity().toLowerCase() + ' ' + companyzipcode() + ' ' + companystate().toLowerCase();
                     } else {
 
                     }
 
-
                     geocoderComp.geocode({
                         'address': fulladdress
                     }, function (results, status) {
-
+                        
                         if (status == google.maps.GeocoderStatus.OK) {
                             // isMapVisible(true);
                             //if (isCodeAddressEdit() == false) {
@@ -3062,7 +3081,7 @@ getfreeCouponCount = function () {
 
                 },
                 MapInt = function () {
-                    //googleAddressMap();
+                    googleAddressMap();
                 },
                 // Initialize the view model
                 initialize = function (specifiedView) {
@@ -3332,7 +3351,9 @@ getfreeCouponCount = function () {
                     perSaving: perSaving,
                     dealPriceval: dealPriceval,
                     disableDollOpp: disableDollOpp,
-                    dealPerOpp: dealPerOpp
+                    dealPerOpp: dealPerOpp,
+                    priceLabel: priceLabel,
+                    islabelvisible: islabelvisible
                 };
             })()
         };

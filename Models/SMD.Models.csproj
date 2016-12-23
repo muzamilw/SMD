@@ -297,6 +297,7 @@
     <Compile Include="ResponseModels\CompanySubscription.cs" />
     <Compile Include="ResponseModels\CouponsResponseModelForApproval.cs" />
     <Compile Include="ResponseModels\CouponRatingReviewResponse.cs" />
+    <Compile Include="ResponseModels\EmailResponseModel.cs" />
     <Compile Include="ResponseModels\PayOutResponseModelForApproval.cs" />
     <Compile Include="ResponseModels\RandomGameResponse.cs" />
     <Compile Include="ResponseModels\ProfileQuestionResponseModelForApproval.cs" />

@@ -33,19 +33,19 @@ namespace SMD.MIS.Areas.Api.Controllers
 
             var result = new List<CountryDropdown>();
             Mapper.Initialize(cfg => cfg.CreateMap<List<Country>, List<CountryDropdown>>());
-            return Mapper.Map<List<Country>, List < CountryDropdown >>( _companyBranchservice.GetAllCountries());
+            //return Mapper.Map<List<Country>, List < CountryDropdown >>( _companyBranchservice.GetAllCountries());
 
-            //var obj = _companyBranchservice.GetAllCountries();
-            //var retobj = new List<CountryDropdown>();
-            //foreach (var item in obj)
-            //{
-            //    CountryDropdown objCountry = new CountryDropdown();
-            //    objCountry.CountryId = item.CountryId;
-            //    objCountry.CountryName =item.CountryName;
-            //    retobj.Add(objCountry);
-               
-            //}
-            //return retobj;
+            var obj = _companyBranchservice.GetAllCountries();
+            var retobj = new List<CountryDropdown>();
+            foreach (var item in obj)
+            {
+                CountryDropdown objCountry = new CountryDropdown();
+                objCountry.CountryId = item.CountryId;
+                objCountry.CountryName = item.CountryName;
+                retobj.Add(objCountry);
+
+            }
+            return retobj;
         }
         #endregion
     }

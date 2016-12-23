@@ -66,6 +66,9 @@ define("common/confirmation.view",
                 showActionPopup = function () {
                     $("#dialog-okUserActionLog").modal("show");
                 };
+            showOKpopupforMax3Deal = function () {
+                $("#dialog-okMax3Deal").modal("show");
+            },
 
            
                 hideActionPopup = function () {
@@ -93,7 +96,8 @@ define("common/confirmation.view",
                 showOKpopupforchart: showOKpopupforchart,
                 showOKpopupforFreeCoupon: showOKpopupforFreeCoupon,
                 showOKpopupfordealheadline: showOKpopupfordealheadline,
-                showAccountSetingPopup: showAccountSetingPopup
+                showAccountSetingPopup: showAccountSetingPopup,
+                showOKpopupforMax3Deal: showOKpopupforMax3Deal
             };
         })(ist.confirmation.viewModel);
 

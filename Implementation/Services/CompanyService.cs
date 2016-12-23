@@ -28,6 +28,7 @@ namespace SMD.Implementation.Services
         private readonly IBranchCategoryRepository _branchCategoryRepository;
         private readonly ICountryRepository _countryRepository;
         private readonly IAspnetUsersRepository _IAspnetUsersRepository;
+        private readonly ISystemMailsRepository _ISystemMailsRepository;
 
         #endregion
         #region Constructor
@@ -35,7 +36,7 @@ namespace SMD.Implementation.Services
         /// Constructor 
         /// </summary>
         public CompanyService(ICompanyRepository companyRepository, IManageUserRepository managerUserRepository, ICompanyBranchRepository companyBranchRepository, IBranchCategoryRepository branchCategoryRepository,
-            ICountryRepository countryRepository, IAspnetUsersRepository _IAspnetUsersRepository)
+            ICountryRepository countryRepository, IAspnetUsersRepository _IAspnetUsersRepository, ISystemMailsRepository _ISystemMailsRepository)
         {
             this.companyRepository = companyRepository;
             this._manageUserRepository = managerUserRepository;
@@ -43,6 +44,7 @@ namespace SMD.Implementation.Services
             this._branchCategoryRepository = branchCategoryRepository;
             this._countryRepository = countryRepository;
             this._IAspnetUsersRepository = _IAspnetUsersRepository;
+            this._ISystemMailsRepository = _ISystemMailsRepository;
         }
 
         #endregion
@@ -246,7 +248,7 @@ namespace SMD.Implementation.Services
             target.StripeCustomerId = source.StripeCustomerId;
             target.SalesEmail = source.SalesEmail;
             target.WebsiteLink = source.WebsiteLink;
-            target.TaxRegNo = source.CompanyRegistrationNo;
+            target.TaxRegNo = source.VatNumber;
             target.Tel1 = source.SalesPhone;
             target.CountryId = source.BillingCountryId;
 
@@ -322,7 +324,8 @@ namespace SMD.Implementation.Services
 
             // currentUser.Email = source.Email;
             currentUser.DOB = source.DateOfBirth;
-            currentUser.IndustryId = source.Profession;
+            //currentUser.IndustryId = source.Profession;
+            currentUser.IndustryId = null;
             currentUser.Phone1 = source.Mobile;
             currentUser.PassportNo = source.PassportNumber;
             currentUser.optDealsNearMeEmails = source.IsReceiveDeals;
@@ -408,6 +411,30 @@ namespace SMD.Implementation.Services
                 UpdateCompany(dbCo);
             }
             return "true";
+        }
+        public EmailResponseModel GetEmails(GetPagedListRequest request)
+        {
+            int rowCount;
+            return new EmailResponseModel
+            {
+                Emails = _ISystemMailsRepository.GetEmails(request, out rowCount).ToList(),
+                TotalCount = rowCount
+            };
+        }
+        public bool UpdateSystemEmail(SystemMail email)
+        {
+            try
+            {
+                _ISystemMailsRepository.Update(email);
+                _ISystemMailsRepository.SaveChanges();
+                return true; ;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
         }
 
         #endregion

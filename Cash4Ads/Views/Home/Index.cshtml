@@ -21,6 +21,7 @@
         
     }
     var sessionVar = Session["User"] as Cash4Ads.Models.User;
+    var getUpdatedSession = Session["logSession"];
 }
 
 
@@ -375,7 +376,8 @@
                                         @*<div class="form-group text-center">
                                             <button class="btn" data-dismiss="modal" style=" background-color:#3fc75b;border-color:#3fc75b; color:white">Skip </button>
                                         </div>*@
-                                        <span id="start_btn" data-dismiss="modal" style="font-size:25px;color: #3fc75b;">start</span>
+                                        @*<span id="start_btn" data-dismiss="modal" style="font-size:25px;color: #3fc75b;">start</span>*@
+                                        <a id="start_btn" data-dismiss="modal" style="font-size:25px;color: #3fc75b;">start</a>
                                     </div>
                                 </div>
                             </div>
@@ -607,6 +609,7 @@
          
             var categoryId = $("#selcat option:selected").val();
             var keywords = $("#txtKeyword").val();
+            var UdateSession='@getUpdatedSession';
             var vtype = @vtype;
             var couponFId = 0;
             var size=10;
@@ -640,7 +643,7 @@
                         
                             var result=GetPercent(val.Savings,val.Price).toFixed(0)+'%';
                             var dayeleft=val.DaysLeft+ " Days Left";
-                            $("#bonus-deals-side").append(' <div class="ndod-view-mini ndod-view-mini-nodesc"><div class="ndod-deal-header"><h2>' + val.CouponTitle + '</h2></div><div class="ndod-deal-content"><a class="" href="#"><img class="ndod-deal-image  js-show" data-original="' + val.CouponImage1 + '" src="' + val.CouponImage1 + '" onclick="NavigateToDeal(' + val.CouponId + ')" alt="" /></a><div class="ndod-redeem-now"></div><div class="ndod-business-logo-wrapper"><div class="ndod-business-logo"><img id="Company_logo" class="" data-original="' + val.LogoUrl + '" src="' + val.LogoUrl + '" width="70" height="28" /> </div><div class="btm-header-bg-business-logo"></div></div><div class="ndod-discount"><span class="ndod-amount">save </br>'+result+'</div><div class="ndod-deal-footer-wrapper"><div class="ndod-deal-footer cld" id="main_deal_ffter"><div style="width:638px;"><p class="deals_header_ad">' + val.CouponTitle + '</p> <div class="deal_insder_adPanel"><div style="float:left"><p id="loc_1" style="margin-bottom:5px;">'+val.LocationTitle+'</p> <p id="loc-city">'+val.LocationCity+'</p></div><div style="float:right;padding-top:18px;"><p style="float:left;margin-top:16px;">from</p><p style="float:right;margin-left:13px;color:#0e74b7;font-size:28px;"> '+val.CurrencyCode+' '+val.Price+'</p><div style="clear:both;"></div></div> <div style="clear:both;"></div></div></div></div> <a href="#" onclick="NavigateToDeal(' + val.CouponId + ')" class="ndod-button-small waViewButton"><span class="outer"><span class="inner">VIEW!</span></span></a></div><div class="ndod-deal-footer-btmbg"></div>    </div>    <div id="days_left_div" class="ppl">'+dayeleft+'</div><div class="yel_box_rat_tt">'+val.AvgRating+'</div> </div></div>');
+                            $("#bonus-deals-side").append(' <div class="ndod-view-mini ndod-view-mini-nodesc"><div class="ndod-deal-header"><h2>' + val.CouponTitle + '</h2></div><div class="ndod-deal-content"><a class="" href="#"><img class="ndod-deal-image  js-show" data-original="' + val.CouponImage1 + '" src="' + val.CouponImage1 + '" onclick="NavigateToDeal(' + val.CouponId + ')" alt="" /></a><div class="ndod-redeem-now"></div><div class="ndod-business-logo-wrapper"><div class="ndod-business-logo"><img id="Company_logo" class="" data-original="' + val.LogoUrl + '" src="' + val.LogoUrl + '" width="70" height="28" /> </div><div class="btm-header-bg-business-logo"></div></div><div class="ndod-discount"><span class="ndod-amount">save </br>'+result+'</div><div class="ndod-deal-footer-wrapper"><div class="ndod-deal-footer cld" id="main_deal_ffter"><div style="width:638px;"><p class="deals_header_ad">' + val.CouponTitle + '</p> <div class="deal_insder_adPanel"><div style="float:left"><p id="loc_1" style="margin-bottom:5px;">'+val.LocationTitle+'</p> <p id="loc-city">'+val.LocationCity+'</p></div><div style="float:right;padding-top:11px;"><p style="float:left;margin-top:14px;">from</p><p style="float:right;margin-left:13px;color:#0e74b7;font-size:28px;"> '+val.CurrencyCode+' '+val.Price+'</p><div style="clear:both;"></div></div> <div style="clear:both;"></div></div></div></div> <a href="#" onclick="NavigateToDeal(' + val.CouponId + ')" class="ndod-button-small waViewButton"><span class="outer"><span class="inner">VIEW!</span></span></a></div><div class="ndod-deal-footer-btmbg"></div>    </div>    <div id="days_left_div" class="ppl">'+dayeleft+'</div><div class="yel_box_rat_tt">'+val.AvgRating+'</div> </div></div>');
                         });
                         $("#bonus-deals-side").append('<div style="clear:both;"></div>');
 
@@ -652,8 +655,12 @@
                         }
                         else
                         {
+                            if(UdateSession=="")
+                            {
                             $("#AccountSetingConformation").modal("show");
                             $("#AccountSetingConformation").css('display','block');
+                             SetSessionVar('postback');
+                            }
                         }
                        
                         StopProgress();
@@ -846,6 +853,16 @@
                 $("#inner_coupon_cont,#main_copon_cont,#toggle_btn").css('display','none');
                 $("#bonus-deals-side,.extraMargingStandardContainer").css('display','block');
 
+            }
+            function SetSessionVar(updatedSessionvar)
+            {
+                $(function () {
+                    $.post('/Home/SetSession', 
+                           { key : "TestKey", value : updatedSessionvar }, function (data) 
+                           {
+
+                           });
+                });
             }
             function Toggle()
             {
