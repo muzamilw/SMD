@@ -949,6 +949,7 @@ getfreeCouponCount = function () {
             openEditScreen(5);
             isFromEdit(true);
             isListVisible(false);
+            islabelvisible(1);
             isBtnSaveDraftVisible(true);
             isTerminateBtnVisible(false);
             isNewCampaignVisible(false);
