@@ -402,6 +402,7 @@
     <Compile Include="Areas\Api\Controllers\CouponCountController.cs" />
     <Compile Include="Areas\Api\Controllers\FormAnalyticController.cs" />
     <Compile Include="Areas\Api\Controllers\SharedSurveyQuestionController.cs" />
+    <Compile Include="Areas\Api\Controllers\SystemEmailController.cs" />
     <Compile Include="Areas\Api\Controllers\testController.cs" />
     <Compile Include="Areas\Api\Controllers\StripeSubscribeCustomerController.cs" />
     <Compile Include="Areas\Api\Controllers\GetApprovalCountController.cs" />
@@ -452,6 +453,7 @@
     <Compile Include="Areas\Api\Models\CurrencyApprov.cs" />
     <Compile Include="Areas\Api\Models\Dashboard_analytics_Result.cs" />
     <Compile Include="Areas\Api\Models\DealByCouponIdForAnalyticsResponse.cs" />
+    <Compile Include="Areas\Api\Models\EmailResponseModel.cs" />
     <Compile Include="Areas\Api\Models\FormAnalyticResponseModel.cs" />
     <Compile Include="Areas\Api\Models\FormDataAnalyticResponse.cs" />
     <Compile Include="Areas\Api\Models\GetApprovalCount_Result.cs" />
@@ -472,6 +474,7 @@
     <Compile Include="Areas\Api\Models\CompanyApiModel.cs" />
     <Compile Include="Areas\Api\Models\SurvayBySQIDForAnalyticsResponse.cs" />
     <Compile Include="Areas\Api\Models\SurveySharingGroupApiModel.cs" />
+    <Compile Include="Areas\Api\Models\SystemEmailModel.cs" />
     <Compile Include="Areas\Coupons\CouponsAreaRegistration.cs" />
     <Compile Include="Areas\Coupons\Controllers\CouponsController.cs" />
     <Compile Include="Areas\Ads\AdsAreaRegistration.cs" />
@@ -888,6 +891,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Billing\Scripts\Email.dataservice.js" />
+    <Content Include="Areas\Billing\Scripts\Email.model.js" />
+    <Content Include="Areas\Billing\Scripts\Email.view.js" />
+    <Content Include="Areas\Billing\Scripts\Email.viewModel.js" />
     <Content Include="Areas\Common\Scripts\clientSidePagination.js" />
     <Content Include="Areas\Common\Scripts\companyProfile.dataservice.js" />
     <Content Include="Areas\Common\Scripts\companyProfile.model.js" />
@@ -1017,6 +1024,7 @@
     <Content Include="Areas\Coupons\Views\Coupons\marketingDealeditor.cshtml" />
     <Content Include="Areas\Coupons\Views\Coupons\CouponReviews.cshtml" />
     <Content Include="Areas\SuperNova\Views\Dashboard\mails.cshtml" />
+    <Content Include="Areas\Billing\Views\Manage\EmailDashboard.cshtml" />
     <None Include="config\Web.connectionstrings.config">
       <SubType>Designer</SubType>
     </None>
