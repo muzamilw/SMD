@@ -31,6 +31,8 @@ namespace Cash4Ads.Controllers
         public ActionResult Index()
         {
             User sessionVar = Session["User"] as Cash4Ads.Models.User;
+            var logSession = Session["logSession"];
+
             if (sessionVar != null)
             {
                 ViewBag.userid = sessionVar.UserId;
@@ -49,6 +51,13 @@ namespace Cash4Ads.Controllers
         {
             return View();
         }
+        public ActionResult SetSession(string value)
+        {
+            Session["logSession"] = value;
+
+            return this.Json(new { success = true });
+        }
+
 
         public ActionResult afilliates()
         {
@@ -80,6 +89,8 @@ namespace Cash4Ads.Controllers
             return View();
         }
 
+
+       
         public ActionResult logOut()
         {
             //using (var client = new HttpClient())

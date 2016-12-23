@@ -2073,6 +2073,17 @@ define("ads/ads.viewModel",
                   },
                 Changefilter = function () {
                     
+                    debugger;
+                    $.browser.chrome = /chrome/.test(navigator.userAgent.toLowerCase());
+
+                    /* Detect Chrome */
+                    if ($.browser.chrome) {
+                        /* Do something for Chrome at this point */
+                        alert("You are using Chrome!");
+                    }
+                        /* Finally, if it is Chrome then jQuery thinks it's 
+                           Safari so we have to tell it isn't */
+        
                     if (campaignModel().IsUseFilter() == 0) {
 
                         confirmation.messageText("Switching to Hyper Targeting will remove all Broad Targeting filters." + "</br>" + "Continue to Hyper Targeting.");

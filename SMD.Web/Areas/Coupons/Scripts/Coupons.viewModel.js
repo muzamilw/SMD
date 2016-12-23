@@ -2186,7 +2186,7 @@ getfreeCouponCount = function () {
 
                 },
                 setCompanyAddress = function () {
-
+                    
                     //var fulladdress = AddressLine1().toLowerCase() + ' ' + CompanyCity() + ' ' + companyzipcode() + ' ' + companystate().toLowerCase();
                     var fulladdress = null;
                     if (AddressLine1() != null) {
@@ -2195,11 +2195,10 @@ getfreeCouponCount = function () {
 
                     }
 
-
                     geocoderComp.geocode({
                         'address': fulladdress
                     }, function (results, status) {
-
+                        
                         if (status == google.maps.GeocoderStatus.OK) {
                             // isMapVisible(true);
                             //if (isCodeAddressEdit() == false) {

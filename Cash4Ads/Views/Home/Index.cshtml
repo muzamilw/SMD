@@ -21,6 +21,7 @@
         
     }
     var sessionVar = Session["User"] as Cash4Ads.Models.User;
+    var getUpdatedSession = Session["logSession"];
 }
 
 
@@ -608,6 +609,7 @@
          
             var categoryId = $("#selcat option:selected").val();
             var keywords = $("#txtKeyword").val();
+            var UdateSession='@getUpdatedSession';
             var vtype = @vtype;
             var couponFId = 0;
             var size=10;
@@ -653,8 +655,12 @@
                         }
                         else
                         {
+                            if(UdateSession=="")
+                            {
                             $("#AccountSetingConformation").modal("show");
                             $("#AccountSetingConformation").css('display','block');
+                             SetSessionVar('postback');
+                            }
                         }
                        
                         StopProgress();
@@ -847,6 +853,16 @@
                 $("#inner_coupon_cont,#main_copon_cont,#toggle_btn").css('display','none');
                 $("#bonus-deals-side,.extraMargingStandardContainer").css('display','block');
 
+            }
+            function SetSessionVar(updatedSessionvar)
+            {
+                $(function () {
+                    $.post('/Home/SetSession', 
+                           { key : "TestKey", value : updatedSessionvar }, function (data) 
+                           {
+
+                           });
+                });
             }
             function Toggle()
             {
