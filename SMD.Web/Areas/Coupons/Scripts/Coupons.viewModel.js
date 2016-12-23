@@ -591,7 +591,7 @@ define("Coupons/Coupons.viewModel",
                      {
                          success: function (comData) {
                              CompanyCity(comData.BillingCity);
-                             AddressLine1(comData.CompanyAddressline1);
+                             AddressLine1(comData.BillingAddressLine1);
                              companystate(comData.BillingState);
                              companyzipcode(comData.BillingZipCode);
                              CompanyAboutUs(comData.AboutUs);
@@ -2186,8 +2186,9 @@ getfreeCouponCount = function () {
                 googleAddressMap = function () {
 
                     initializeGeoLocation();
-                    setCompanyAddress();
                     google.maps.event.addDomListener(window, 'load', initializeGeoLocation);
+                    setCompanyAddress();
+                  
 
                 },
                 initializeGeoLocation = function () {
@@ -2209,7 +2210,7 @@ getfreeCouponCount = function () {
                     //var fulladdress = AddressLine1().toLowerCase() + ' ' + CompanyCity() + ' ' + companyzipcode() + ' ' + companystate().toLowerCase();
                     var fulladdress = null;
                     if (AddressLine1() != null) {
-                        fulladdress = AddressLine1().toLowerCase() + ' ' + CompanyCity() + ' ' + companyzipcode() + ' ' + companystate().toLowerCase();
+                        fulladdress = AddressLine1().toLowerCase() + ' ' + CompanyCity().toLowerCase() + ' ' + companyzipcode() + ' ' + companystate().toLowerCase();
                     } else {
 
                     }
@@ -3081,7 +3082,7 @@ getfreeCouponCount = function () {
 
                 },
                 MapInt = function () {
-                    //googleAddressMap();
+                    googleAddressMap();
                 },
                 // Initialize the view model
                 initialize = function (specifiedView) {
