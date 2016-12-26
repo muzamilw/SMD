@@ -61,6 +61,14 @@ namespace SMD.MIS.Areas.Api.Models
         public string VoucherCode3 { get; set; }
         public string VoucherCode4 { get; set; }
         public string URL { get; set; }
+        public Nullable<double> ist4dayPrice { get; set; }
+        public Nullable<double> day5Price { get; set; }
+        public Nullable<double> day6Price { get; set; }
+        public Nullable<double> day7Price { get; set; }
+        public Nullable<double> ist4dayPer { get; set; }
+        public Nullable<double> day5Per { get; set; }
+        public Nullable<double> day6Per { get; set; }
+        public Nullable<double> day7Per { get; set; }
     }
 
 

@@ -3,7 +3,7 @@
     var // ReSharper disable InconsistentNaming
       Coupons = function (coSubBy, coTitle, coCategory, coSwabCost, coSubDate, couponid, coApproved, coRejectedReason,coIsMarketingStories, coExpireDate, coImage1, coImage2, coImage3, coImage4, coImage5, coImage6, coLogoUrl, cohighlight1, cohighlight2, cohighlight3, cohighlight4, cohighlight5, coCurrencyId, coPrice
           , coSavings, couponExpirydate, couponListingMode, coSearchKeywords, couponQtyPerUser, coMonthYear, coFinePrintLine1, coFinePrintLine2, coFinePrintLine3, coFinePrintLine4, coFinePrintLine5, coHowToRedeemLine1, coHowToRedeemLine2
-          , coHowToRedeemLine3, coHowToRedeemLine4, coHowToRedeemLine5, coLocationTitle, coLocationLine1, coLocationLine2, coLocationCity, coLocationState, coLocationZipCode, coLocationLAT, coLocationLON, coLocationPhone, coCategories, cobuyItBtnLabel, cobuyitLandingPageUrl, coCompanyId, coUserID) {
+          , coHowToRedeemLine3, coHowToRedeemLine4, coHowToRedeemLine5, coLocationTitle, coLocationLine1, coLocationLine2, coLocationCity, coLocationState, coLocationZipCode, coLocationLAT, coLocationLON, coLocationPhone, coCategories, cobuyItBtnLabel, cobuyitLandingPageUrl, coCompanyId, coUserID, coDealFirstDiscountType, coDealEndingDiscountType) {
           var
               submittedBy = ko.observable(coSubBy),
               title = ko.observable(coTitle),
@@ -64,6 +64,8 @@
               buyitLandingPageUrl = ko.observable(cobuyitLandingPageUrl),
               companyId = ko.observable(coCompanyId),
               userID = ko.observable(coUserID),
+              dealFirstDiscountType = ko.observable(coDealFirstDiscountType),
+              dealEndingDiscountType = ko.observable(coDealEndingDiscountType),
 
 
 
@@ -152,7 +154,9 @@
               buyItBtnLabel: buyItBtnLabel,
               buyitLandingPageUrl: buyitLandingPageUrl,
               companyId: companyId,
-              userID:userID,
+              userID: userID,
+              dealFirstDiscountType: dealFirstDiscountType,
+              dealEndingDiscountType:dealEndingDiscountType,
 
               hasChanges: hasChanges,
               convertToServerData: convertToServerData,
@@ -173,7 +177,7 @@
         return new Coupons(itemFromServer.CreatedBy, itemFromServer.CouponTitle, itemFromServer.CreatedBy,
             itemFromServer.SwapCost, itemFromServer.SubmissionDateTime, itemFromServer.CouponId, itemFromServer.Approved, itemFromServer.RejectedReason, itemFromServer.IsMarketingStories, itemFromServer.CouponExpirydate, itemFromServer.couponImage1, itemFromServer.CouponImage2, itemFromServer.CouponImage3, itemFromServer.CouponImage4, itemFromServer.CouponImage5, itemFromServer.CouponImage6, itemFromServer.LogoUrl, itemFromServer.HighlightLine1, itemFromServer.HighlightLine2, itemFromServer.HighlightLine3, itemFromServer.HighlightLine4, itemFromServer.HighlightLine5, itemFromServer.CurrencyId, itemFromServer.Price
             , itemFromServer.Savings, itemFromServer.CouponExpirydate, itemFromServer.CouponListingMode, itemFromServer.SearchKeywords, itemFromServer.CouponQtyPerUser, GetMonth(itemFromServer.CouponActiveMonth, itemFromServer.CouponActiveYear), itemFromServer.FinePrintLine1, itemFromServer.FinePrintLine2, itemFromServer.FinePrintLine3, itemFromServer.FinePrintLine4, itemFromServer.FinePrintLine5, itemFromServer.HowToRedeemLine1
-            , itemFromServer.HowToRedeemLine2, itemFromServer.HowToRedeemLine3, itemFromServer.HowToRedeemLine4, itemFromServer.HowToRedeemLine5, itemFromServer.LocationTitle, itemFromServer.LocationLine1, itemFromServer.LocationLine2, itemFromServer.LocationCity, itemFromServer.LocationState, itemFromServer.LocationZipCode, itemFromServer.LocationLAT, itemFromServer.LocationLON, itemFromServer.LocationPhone, itemFromServer.Categories, itemFromServer.BuyitBtnLabel, itemFromServer.BuyitLandingPageUrl, itemFromServer.CompanyId, itemFromServer.UserId);
+            , itemFromServer.HowToRedeemLine2, itemFromServer.HowToRedeemLine3, itemFromServer.HowToRedeemLine4, itemFromServer.HowToRedeemLine5, itemFromServer.LocationTitle, itemFromServer.LocationLine1, itemFromServer.LocationLine2, itemFromServer.LocationCity, itemFromServer.LocationState, itemFromServer.LocationZipCode, itemFromServer.LocationLAT, itemFromServer.LocationLON, itemFromServer.LocationPhone, itemFromServer.Categories, itemFromServer.BuyitBtnLabel, itemFromServer.BuyitLandingPageUrl, itemFromServer.CompanyId, itemFromServer.UserId, itemFromServer.DealFirstDiscountType, itemFromServer.DealEndingDiscountType);
     };
     var GetMonth = function (monthstr, year) {
 
