@@ -1234,7 +1234,7 @@ define("ads/ads.viewModel",
                   if (item.Status() == 1) {
                       campaignModel(item);
                   }
-                  confirmation.messageText("Are you sure you want to remove this ad ? This action cannot be undone.");
+                  confirmation.messageText("Are you sure you want to remove this Ad ? This action cannot be undone.");
                   confirmation.show();
                   confirmation.afterCancel(function () {
                       confirmation.hide();
