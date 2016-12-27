@@ -292,7 +292,7 @@ else
                                                                 </span>
                                                             </a>
                                                         </div>
-                                                        <img style="height:70px;" data-bind="visible:couponImage1()!='',attr:{ src:couponImage1}" id="bannerImage1" data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(2)" />
+                                                        <img style="height:70px;" data-bind="visible:couponImage1()!='',disable:$root.IsenableBanner()==true,attr:{ src:couponImage1}" id="bannerImage1" data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(2)" />
 
                                                         @*<div id="couponImage1" class="placeholders" data-bind="visible: couponImage1() == '/images/default-placeholder.png'" onclick="changeIframeSrc(2);"><span><i class="fa fa-plus" aria-hidden="true" style="color:#32CD32"></i></span></div>*@
 
@@ -314,7 +314,7 @@ else
                                                                 <span class="glyphicon glyphicon-trash" style="color:red" aria-hidden="true"></span>
                                                             </a>
                                                         </div>
-                                                        <img style="height:70px;" data-bind="visible: CouponImage2() != '' && CouponImage2() != null ,attr: { src: CouponImage2 }" data-toggle="modal" data-target="#damModel" id="bannerImage2" onclick="changeIframeSrc(3)" />
+                                                        <img style="height:70px;" data-bind="visible: CouponImage2() != '' && CouponImage2() != null,disable:$root.IsenableBanner()==true,attr: { src: CouponImage2 }" data-toggle="modal" data-target="#damModel" id="bannerImage2" onclick="changeIframeSrc(3)" />
                                                         <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
                                                             (450 x 300 pixels)
                                                         </div>
@@ -333,7 +333,7 @@ else
                                                                 <span class="glyphicon glyphicon-trash" style="color:red" aria-hidden="true"></span>
                                                             </a>
                                                         </div>
-                                                        <img style="height:70px;" data-bind="visible: CouponImage3() != '' && CouponImage3() != null,attr: { src: CouponImage3 }" id="bannerImage3" data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(4)" />
+                                                        <img style="height:70px;" data-bind="visible: CouponImage3() != '' && CouponImage3() != null,disable:$root.IsenableBanner()==true,attr: { src: CouponImage3 }" id="bannerImage3" data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(4)" />
                                                         <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
                                                             (450 x 300 pixels)
                                                         </div>
@@ -364,7 +364,7 @@ else
                                                             </a>
                                                         </div>
 
-                                                        <img style="height:70px;" data-bind="visible: CouponImage4()!='',attr: { src: CouponImage4 }" id="bannerImage4" data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(5)" />
+                                                        <img style="height:70px;" data-bind="visible: CouponImage4()!='',disable:$root.IsenableBanner()==true,attr: { src: CouponImage4 }" id="bannerImage4" data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(5)" />
 
                                                         @*<div id="couponImage1" class="placeholders" data-bind="visible: couponImage1() == '/images/default-placeholder.png'" onclick="changeIframeSrc(2);"><span><i class="fa fa-plus" aria-hidden="true" style="color:#32CD32"></i></span></div>*@
 
@@ -387,7 +387,7 @@ else
                                                                 <span class="glyphicon glyphicon-trash" style="color:red" aria-hidden="true"></span>
                                                             </a>
                                                         </div>
-                                                        <img style="height:70px;" data-bind="visible: CouponImage5() != '' && CouponImage5() != null ,attr: { src: CouponImage5 }" data-toggle="modal" data-target="#damModel" id="bannerImage5" onclick="changeIframeSrc(6)" />
+                                                        <img style="height:70px;" data-bind="visible: CouponImage5() != '' && CouponImage5() != null ,disable:$root.IsenableBanner()==true,attr: { src: CouponImage5 }" data-toggle="modal" data-target="#damModel" id="bannerImage5" onclick="changeIframeSrc(6)" />
                                                         <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
                                                             (450 x 300 pixels)
                                                         </div>
@@ -406,7 +406,7 @@ else
                                                                 <span class="glyphicon glyphicon-trash" style="color:red" aria-hidden="true"></span>
                                                             </a>
                                                         </div>
-                                                        <img style="height:70px;" data-bind="visible: CouponImage6() != '' && CouponImage6() != null,attr: { src: CouponImage6 }" id="bannerImage6" data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(7)" />
+                                                        <img style="height:70px;" data-bind="visible: CouponImage6() != '' && CouponImage6() != null,disable:$root.IsenableBanner()==true,attr: { src: CouponImage6 }" id="bannerImage6" data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(7)" />
                                                         <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
                                                             (450 x 300 pixels)
                                                         </div>
@@ -2028,7 +2028,7 @@ else
         <div class="dd-handle" style=" height:auto;padding-left:5px;">
             <span data-bind="text: Name" style="font-size:12px!important;">
             </span>
-            <input type="checkbox" onclick="onchangeCheckbox();" class="bigcheckbox" style="float:right" data-bind="checked: IsSelected" />
+            <input type="checkbox" onclick="onchangeCheckbox();" class="bigcheckbox" style="float:right" data-bind="checked: IsSelected,disable:$root.IsenableBanner()==true" />
         </div>
     </li>
 
