@@ -237,6 +237,7 @@ define("Coupons/Coupons.viewModel",
                 Banner4Flag = ko.observable(false),
                 Banner5Flag = ko.observable(false),
                 Banner6Flag = ko.observable(false),
+                IsenableBanner = ko.observable(false),
                 freeCouponCount = ko.observable(0),
                 isflageClose = ko.observable(false),
                 isCouponSearch = ko.observable(false),
@@ -518,7 +519,7 @@ define("Coupons/Coupons.viewModel",
                                          Item.PerSav2ndlast(perVale20D + "%")
                                          Item.PerSavlast(perVale20D + "%")
                                      }
-                                     else if (endDis == 5) {
+                                     else if (endDis == 6) {
                                          Item.Saveing3rdlast(result10);
                                          Item.Saveing2ndlast(result20);
                                          Item.Saveinglast(result30);
@@ -564,7 +565,7 @@ define("Coupons/Coupons.viewModel",
                             if (CampaignRatioAnalyticData()[0].value > 0) {
 
                                 hasImpression(true);
-
+                                $("#donutId").html("");
                                 var browsersChart = Morris.Donut({
                                     element: 'donutId',
                                     data: CampaignRatioAnalyticData(), colors: ['green', 'blue', 'orange']
@@ -941,6 +942,7 @@ getfreeCouponCount = function () {
         addNewCampaign = function () {
 
             diveNo(0);
+            IsenableBanner(false);
             buyItQuestionLabelStatus(false);
             modifiedDate(null);
             //show the main menu;
@@ -1307,7 +1309,7 @@ getfreeCouponCount = function () {
               { couponModel(item); }
 
 
-              confirmation.messageText("Are you sure you want to remove this ad ? This action cannot be undone.");
+              confirmation.messageText("Are you sure you want to remove this Deal ? This action cannot be undone.");
               confirmation.show();
               confirmation.afterCancel(function () {
                   confirmation.hide();
@@ -1574,6 +1576,7 @@ getfreeCouponCount = function () {
                                     $("#btnCancel").css("display", "none");
                                     $("#btnCancel,#btnPauseCampaign,#btnClose").removeAttr('disabled');
                                     isBtnSaveDraftVisible(false);
+                                    IsenableBanner(true);
                                     couponModel().StatusValue("Panding Approval");
 
 
@@ -1586,7 +1589,7 @@ getfreeCouponCount = function () {
                                     //$("#btnPauseCampaign").css("display", "inline-block");
                                     //$("#btnCancel,#btnPauseCampaign,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
                                     isBtnSaveDraftVisible(false);
-
+                                    IsenableBanner(true);
                                     couponModel().StatusValue("Live");
                                     IsPauseBtnVisible(true);
                                     //isTerminateBtnVisible(true);
@@ -3353,7 +3356,8 @@ getfreeCouponCount = function () {
                     disableDollOpp: disableDollOpp,
                     dealPerOpp: dealPerOpp,
                     priceLabel: priceLabel,
-                    islabelvisible: islabelvisible
+                    islabelvisible: islabelvisible,
+                    IsenableBanner: IsenableBanner
                 };
             })()
         };

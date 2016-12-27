@@ -333,11 +333,11 @@ namespace SMD.Repository.Repositories
             res.ClickThruComparison = 0;
             res.CouponId = Id;
             res.DealLines = db.CouponPriceOption.Where(g => g.CouponId == Id).Count();
-            res.ClickThruCount = db.UserPurchasedCoupon.Where(g => g.CouponId == Id && g.ResponseType == 2).Count();
-            res.DealReviewsCount = db.CouponRatingReview.Where(g => g.CouponId == Id).Count();
+            res.ClickThruCount = db.UserPurchasedCoupon.Where(g => g.CouponId == Id).Count();
+            res.DealReviewsCount = db.CouponRatingReview.Where(g => g.CouponId == Id && g.StarRating !=null).Count();
             if (res.DealReviewsCount > 0)
             {
-                res.DealRating = ((double)db.CouponRatingReview.Where(g => g.CouponId == Id).Sum(t => t.StarRating)) / res.DealReviewsCount;
+                res.DealRating = (((double)db.CouponRatingReview.Where(g => g.CouponId == Id).Sum(t => t.StarRating)) / res.DealReviewsCount)+5;
             }
 
             long C7daysOpen = db.UserCouponView.Where(g => g.CouponId == Id && g.ViewDateTime >= d7date).Count();
@@ -377,8 +377,8 @@ namespace SMD.Repository.Repositories
                 res.DealsOpenedDirection = 1;
             }
            //Click Thrus Comparison
-            long C7daysClickThru = db.UserPurchasedCoupon.Where(g => g.CouponId == Id && g.PurchaseDateTime >= d7date && g.ResponseType == 2).Count();
-            long C14To7ClickThru = db.UserPurchasedCoupon.Where(g => g.CouponId == Id && g.PurchaseDateTime >= d14date && g.PurchaseDateTime <= d7date && g.ResponseType == 2).Count();
+            long C7daysClickThru = db.UserPurchasedCoupon.Where(g => g.CouponId == Id && g.PurchaseDateTime >= d7date ).Count();
+            long C14To7ClickThru = db.UserPurchasedCoupon.Where(g => g.CouponId == Id && g.PurchaseDateTime >= d14date && g.PurchaseDateTime <= d7date).Count();
             if (C14To7ClickThru > 0 && C7daysClickThru > 0)
             {
                 res.ClickThruComparison = Math.Abs(((double)C7daysClickThru / (double)C14To7ClickThru));

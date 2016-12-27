@@ -71,7 +71,7 @@
                     <span class="sr-only">Toggle navigation</span>
                     @*<span class="fa fa-bars"></span>*@
                 </button>
-                <div style="display:inline-block;margin-top:20px;width:795px;">
+                <div style="display:inline-block;margin-top:20px;width:850px;">
                     <div style="float:right;">
                         <div class="pull-left" style="display:inline-block;margin-top:20px;">
                             @*<p style="box-shadow: inset 0 0px 0 white, inset 0 -1px 0 white;margin-bottom:3px;display:inline-block;font-size:11px;color:white">
@@ -79,7 +79,7 @@
                                 </p>*@
                             <p style="font-size:16px;color:white;">@CompanyName</p>
                         </div>
-                        <div class="pull-left" style="color:white;margin-left: 10px;margin-top: 12px;margin-right: 9px;"><img style="width:87px;height:41px;    background-color: white; border: 1px solid white;" src="~/@CompanyLogo" /></div>
+                        <div class="pull-left" style="color:white;margin-left: 10px;margin-top: 12px;margin-right: -5px;"><img style="width:70px;height:35px;    background-color: white; border: 1px solid white;" src="~/@CompanyLogo" /></div>
                     </div>
                 </div>
                 <div class="nav-no-collapse navbar-left pull-left hidden-sm hidden-xs" style="margin-top:23px;">
@@ -101,7 +101,7 @@
                     </ul>
                 </div>
 
-                <div class="nav-no-collapse pull-right" id="header-nav" style="margin-top:23px;">
+                <div class="nav-no-collapse pull-right" id="header-nav" style="margin-top:32px;">
                     <ul class="nav navbar-nav pull-right">
                         <!-- MPC Admin Menu-->
                         <li class="dropdown profile-dropdown @classesMenu" style="display:none;">
@@ -113,7 +113,7 @@
                         </li>
                         <!-- Normal Menu-->
                         <li class="dropdown profile-dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <a href="#" class="dropdown-toggle dash_header-btn" data-toggle="dropdown">
                                 <span class="hidden-xs">
                                     @if (User != null && User.Identity != null)
                                     {
@@ -130,14 +130,16 @@
                                     <a data-bind="click:showUserProfileDialog">User Profile</a>
                                     <a data-bind="click:ChangePassword">Change Password</a>
                                 </li>
-                                <li><a href="~/Account/LogOff"><i class="fa fa-power-off"></i>Logout</a></li>
+                                <li>
+                                <a href="~/Account/LogOff"><i class="fa fa-power-off dash_header-btn"style="margin-top:-7px;"></i>Logout</a>
+                                </li>
                             </ul>
                         </li>
 
                         <li>
-                            <a href="http://cash4ads.com/" target="_blank">
+                            <a class="dash_header-btn" href="http://cash4ads.com/" target="_blank">
 
-                                <i class="fa fa-life-ring"></i>
+                                <i class="fa fa-life-ring" style="padding-left:2px;padding-top:10px;"></i>
 
                             </a>
                         </li>
@@ -156,9 +158,13 @@
                                     <li><a href="">Contact Us</a></li>
                                 </ul>
                             </li>*@
-
+                        @*<li class="hidden-xxs">
+                            <a class="dash_header-btn icon-lg icon-information" href="~/Account/LogOff">
+                                <i class="fa fa-power-off"></i>
+                            </a>
+                        </li>*@
                         <li class="hidden-xxs">
-                            <a href="~/Account/LogOff">
+                            <a class="dash_header-btn icon-lg icon-information" href="~/Account/LogOff">
                                 <i class="fa fa-power-off"></i>
                             </a>
                         </li>

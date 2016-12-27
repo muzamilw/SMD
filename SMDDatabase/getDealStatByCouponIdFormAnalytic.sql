@@ -1,5 +1,6 @@
-﻿GO
-/****** Object:  StoredProcedure [dbo].[getCampaignByIdQQFormAnalytic]    Script Date: 12/1/2016 12:29:39 AM ******/
+﻿USE [SMDv2]
+GO
+/****** Object:  StoredProcedure [dbo].[getDealStatByCouponIdFormAnalytic]    Script Date: 12/27/2016 1:18:34 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -9,7 +10,7 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-create PROCEDURE [dbo].[getDealStatByCouponIdFormAnalytic] (
+ALTER PROCEDURE [dbo].[getDealStatByCouponIdFormAnalytic] (
 @Id INT,
 @gender INT,  -- 0 for all, 1 for male and 2 for female
 @ageRange INT, -- 0 for All , 1 for 10-20 , 2 for 20-30, 3 for 30-40 , 4 for 40-50, 5 for 50-60, 6 for 60-70, 7 for 70-80, 8 for 80-90, 9 for 90+
@@ -82,7 +83,7 @@ IF @ageRange = 2
 	BEGIN
 		select count(*) as Stats  from UserPurchasedCoupon upc
 		inner join AspNetUsers usr on upc.UserID = usr.Id
-		where upc.CouponId = @Id and upc.ResponseType = 2 
+		where upc.CouponId = @Id 
 		and (usr.Gender = @gender OR @gender = 0)
 		and usr.DOB > = @AgedateFrom and usr.DOB < @AgedateTo
 	END	
@@ -90,5 +91,5 @@ IF @ageRange = 2
 	
 END
  
---EXEC [getPollImpressionStatBySQIdFormAnalytic] 17, 2, 8
+--EXEC [getDealStatByCouponIdFormAnalytic] 10175, 0, 0, 2
 

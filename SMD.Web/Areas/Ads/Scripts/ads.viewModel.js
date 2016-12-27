@@ -398,7 +398,7 @@ define("ads/ads.viewModel",
 				                if ((selecteddateRangeAnalytics() == 1 && CampaignTblAnalyticsData()[0].C30_days > 0) || (selecteddateRangeAnalytics() == 2 && CampaignTblAnalyticsData()[0].All_time > 0)) {
 
 				                    hasImpression(true);
-
+				                    $("#donutId").html("")
 				                    var DonutChart = Morris.Donut({
 				                        element: 'donutId',
 				                        data: CampaignRatioAnalyticData(), colors: ['green', 'blue', 'orange']
@@ -1234,7 +1234,7 @@ define("ads/ads.viewModel",
                   if (item.Status() == 1) {
                       campaignModel(item);
                   }
-                  confirmation.messageText("Are you sure you want to remove this ad ? This action cannot be undone.");
+                  confirmation.messageText("Are you sure you want to remove this Ad ? This action cannot be undone.");
                   confirmation.show();
                   confirmation.afterCancel(function () {
                       confirmation.hide();
