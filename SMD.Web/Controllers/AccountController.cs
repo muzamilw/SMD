@@ -160,7 +160,7 @@ namespace SMD.MIS.Controllers
 
                         if ( company.Status != 1)
                         {
-                            ModelState.AddModelError("", "Account not Active");
+                            ModelState.AddModelError("", "Account not Active - Plz contact info@cash4ads.com ");
                             return View(model);
                         }
                         else if (company.IsDeleted.HasValue && company.IsDeleted.Value == true)
