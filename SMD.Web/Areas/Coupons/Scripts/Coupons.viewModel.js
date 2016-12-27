@@ -564,7 +564,7 @@ define("Coupons/Coupons.viewModel",
                             if (CampaignRatioAnalyticData()[0].value > 0) {
 
                                 hasImpression(true);
-
+                                $("#donutId").html("");
                                 var browsersChart = Morris.Donut({
                                     element: 'donutId',
                                     data: CampaignRatioAnalyticData(), colors: ['green', 'blue', 'orange']
