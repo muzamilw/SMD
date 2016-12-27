@@ -101,7 +101,7 @@
                     </ul>
                 </div>
 
-                <div class="nav-no-collapse pull-right" id="header-nav" style="margin-top:23px;">
+                <div class="nav-no-collapse pull-right" id="header-nav" style="margin-top:32px;">
                     <ul class="nav navbar-nav pull-right">
                         <!-- MPC Admin Menu-->
                         <li class="dropdown profile-dropdown @classesMenu" style="display:none;">
@@ -113,7 +113,7 @@
                         </li>
                         <!-- Normal Menu-->
                         <li class="dropdown profile-dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <a href="#" class="dropdown-toggle dash_header-btn" data-toggle="dropdown">
                                 <span class="hidden-xs">
                                     @if (User != null && User.Identity != null)
                                     {
@@ -130,14 +130,16 @@
                                     <a data-bind="click:showUserProfileDialog">User Profile</a>
                                     <a data-bind="click:ChangePassword">Change Password</a>
                                 </li>
-                                <li><a href="~/Account/LogOff"><i class="fa fa-power-off"></i>Logout</a></li>
+                                <li>
+                                <a href="~/Account/LogOff"><i class="fa fa-power-off dash_header-btn"></i>Logout</a>
+                                </li>
                             </ul>
                         </li>
 
                         <li>
-                            <a href="http://cash4ads.com/" target="_blank">
+                            <a class="dash_header-btn" href="http://cash4ads.com/" target="_blank">
 
-                                <i class="fa fa-life-ring"></i>
+                                <i class="fa fa-life-ring" style="padding-left:2px;padding-top:10px;"></i>
 
                             </a>
                         </li>
@@ -156,9 +158,13 @@
                                     <li><a href="">Contact Us</a></li>
                                 </ul>
                             </li>*@
-
+                        @*<li class="hidden-xxs">
+                            <a class="dash_header-btn icon-lg icon-information" href="~/Account/LogOff">
+                                <i class="fa fa-power-off"></i>
+                            </a>
+                        </li>*@
                         <li class="hidden-xxs">
-                            <a href="~/Account/LogOff">
+                            <a class="dash_header-btn icon-lg icon-information" href="~/Account/LogOff">
                                 <i class="fa fa-power-off"></i>
                             </a>
                         </li>

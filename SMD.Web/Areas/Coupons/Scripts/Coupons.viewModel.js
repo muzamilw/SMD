@@ -518,7 +518,7 @@ define("Coupons/Coupons.viewModel",
                                          Item.PerSav2ndlast(perVale20D + "%")
                                          Item.PerSavlast(perVale20D + "%")
                                      }
-                                     else if (endDis == 5) {
+                                     else if (endDis == 6) {
                                          Item.Saveing3rdlast(result10);
                                          Item.Saveing2ndlast(result20);
                                          Item.Saveinglast(result30);

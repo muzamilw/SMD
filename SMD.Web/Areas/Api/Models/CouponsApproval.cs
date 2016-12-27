@@ -79,6 +79,8 @@ namespace SMD.MIS.Areas.Api.Models
         public string BuyitLandingPageUrl { get; set; }
         public string BuyitBtnLabel { get; set; }
         public Nullable<bool> IsMarketingStories { get; set; }
+        public Nullable<int> DealFirstDiscountType { get; set; }
+        public Nullable<int> DealEndingDiscountType { get; set; }
 
      
     }

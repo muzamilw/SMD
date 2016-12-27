@@ -21,6 +21,7 @@ define("FranchiseDashboard/Coupons.viewModel",
                     sortIsAsc = ko.observable(true),
                     isEditorVisible = ko.observable(false),
                     isShowCopounMode = ko.observable(false),
+                    dealPriceval = ko.observable(false),
                     selectedCoupon = ko.observable(),
                     selectedCompany = ko.observable(),
                     onEditCoupon = function (item) {
@@ -28,23 +29,165 @@ define("FranchiseDashboard/Coupons.viewModel",
                         $("#divApprove").css("display", "none");
                         selectedCoupon(item);
                         getCompanyData(item);
-                       
+
 
                         //selectedCoupon(item);
                         //isEditorVisible(true);
                     },
-                    getCouponPriceOption = function (couponid, comData)
-                    {
+                    getCouponPriceOption = function (couponid, comData, coItem) {
+                        var dic = 10;
+                        var result = 0;
+                        var end20perResult = 0;
+                        var end25perResult = 0;
+                        var end30perResult = 0;
+                        var perVale10D = 0;
+                        var perVale20D = 0;
+                        var perVale30D = 0;
+                        var disper = coItem.dealFirstDiscountType();
+                        var endDis = coItem.dealEndingDiscountType();
+                        if (disper >= 8) {
+                            dealPriceval(true);
+                        }
+                        else {
+                            dealPriceval(false);
+                        }
+                        if (disper == 0)
+                            dic = 10;
+                        else if (disper == 1)
+                            dic = 20;
+                        else if (disper == 2)
+                            dic = 25;
+                        else if (disper == 3)
+                            dic = 30;
+                        else if (disper == 4)
+                            dic = 40;
+                        else if (disper == 5)
+                            dic = 50;
+                        else if (disper == 6)
+                            dic = 60;
+                        else if (disper == 7)
+                            dic = 50;
+                        else if (disper == 8)
+                            dic = 1;
+                        else if (disper == 9)
+                            dic = 3;
+                        else if (disper == 10)
+                            dic = 5;
+                        else if (disper == 11)
+                            dic = 10;
+                        else if (disper == 12)
+                            dic = 15;
+                        else if (disper == 13)
+                            dic = 20;
+                        else if (disper == 14)
+                            dic = 25;
+                        else if (disper == 15)
+                            dic = 30;
+                        else if (disper == 16)
+                            dic = 40;
+                        else if (disper == 17)
+                            dic = 50;
                         dataservice.getCouponPriceOption(
                                              { CouponId: couponid },
                                              {
                                                  success: function (data) {
                                                      couponsPriceOption.removeAll();
                                                      _.each(data, function (item) {
+                                                         if (dealPriceval() == false) {
+                                                             result = (item.Price - ((item.Price * dic) / 100)).toFixed(2);
+                                                             end20perResult = (item.Price - ((item.Price * (dic + 20)) / 100)).toFixed(2);
+                                                             end25perResult = (item.Price - ((item.Price * (dic + 25)) / 100)).toFixed(2);
+                                                             end30perResult = (item.Price - ((item.Price * (dic + 30)) / 100)).toFixed(2);
+
+                                                             item.ist4dayPrice = result;
+                                                             item.ist4dayPer = dic + "%";
+
+                                                             if (endDis == 1) {
+                                                                 item.day5Price = end20perResult;
+                                                                 item.day6Price = end20perResult;
+                                                                 item.day7Price = end20perResult;
+
+                                                                 item.day5Per = ((dic + 20) + "%");
+                                                                 item.day6Per = ((dic + 20) + "%");
+                                                                 item.day7Per = ((dic + 20) + "%");
+                                                             }
+                                                             else if (endDis == 2) {
+                                                                 item.day5Price = end20perResult;
+                                                                 item.day6Price = end25perResult;
+                                                                 item.day7Price = end25perResult;
+
+                                                                 item.day5Per = ((dic + 20) + "%");
+                                                                 item.day6Per = ((dic + 25) + "%");
+                                                                 item.day7Per = ((dic + 25) + "%");
+                                                             }
+                                                             else if (endDis == 3) {
+                                                                 item.day5Price = end20perResult;
+                                                                 item.day6Price = end25perResult;
+                                                                 item.day7Price = end30perResult;
+
+                                                                 item.day5Per = ((dic + 20) + "%");
+                                                                 item.day6Per = ((dic + 25) + "%");
+                                                                 item.day7Per = ((dic + 30) + "%");
+                                                             }
+                                                             else if (endDis == 0) {
+                                                                 item.day5Price = result;
+                                                                 item.day6Price = result;
+                                                                 item.day7Price = result;
+
+                                                                 item.day5Per = dic + "%";
+                                                                 item.day6Per = dic + "%";
+                                                                 item.day7Per = dic + "%";
+                                                             }
+
+                                                         }
+                                                         else {
+                                                             result = (item.Price - dic).toFixed(2);
+                                                             var perValue = (((item.Price - result) * 100) / item.Price).toFixed(2);
+                                                             item.ist4dayPrice = result;
+                                                             item.ist4dayPer = perValue + "%";
+                                                             var result10 = (item.Price - (dic + 10)).toFixed(2);
+                                                             var result20 = (item.Price - (dic + 20)).toFixed(2);
+                                                             var result30 = (item.Price - (dic + 30)).toFixed(2);
+                                                             perVale10D = (((item.Price - result10) * 100) / item.Price).toFixed(2);
+                                                             perVale20D = (((item.Price - result20) * 100) / item.Price).toFixed(2);
+                                                             perVale30D = (((item.Price - result30) * 100) / item.Price).toFixed(2);
+
+                                                             if (endDis == 4) {
+
+                                                                 item.day5Price = result10;
+                                                                 item.day6Price = result10;
+                                                                 item.day7Price = result10;
+
+                                                                 item.day5Per = perVale10D + "%";
+                                                                 item.day6Per = perVale10D + "%";
+                                                                 item.day7Per = perVale10D + "%";
+                                                             }
+                                                             else if (endDis == 5) {
+
+                                                                 item.day5Price = result10;
+                                                                 item.day6Price = result20;
+                                                                 item.day7Price = result20;
+
+                                                                 item.day5Per = perVale10D + "%";
+                                                                 item.day6Per = perVale20D + "%";
+                                                                 item.day7Per = perVale20D + "%";
+                                                             }
+                                                             else if (endDis == 6) {
+
+                                                                 item.day5Price = result10;
+                                                                 item.day6Price = result20;
+                                                                 item.day7Price = result30;
+
+                                                                 item.day5Per = perVale10D + "%";
+                                                                 item.day6Per = perVale20D + "%";
+                                                                 item.day7Per = perVale30D + "%";
+                                                             }
+
+                                                         }
                                                          couponsPriceOption.push(item);
                                                      });
                                                      getCurrencyData(comData);
- 
+
                                                  },
                                                  error: function () {
                                                      toastr.error("Failed to load CouponCategory");
@@ -87,53 +230,52 @@ define("FranchiseDashboard/Coupons.viewModel",
                     onApproveCoupon = function () {
                         var conformTet = "Do you want to approve this Deal ? " + "<br\>" + "System will attempt to collect payment and generate invoice";
                         confirmation.messageText(conformTet);
-                             confirmation.show();
-                             confirmation.afterCancel(function () {
-                                 confirmation.hide();
-                             });
-                             confirmation.afterProceed(function () {
-                                 selectedCoupon().isApproved(true);
-                                 onSaveCoupon();
-                                 $("#topArea").css("display", "block");
-                                 $("#divApprove").css("display", "block");
-                                 toastr.success("Approved Successfully.");
-                             });
-                         },
+                        confirmation.show();
+                        confirmation.afterCancel(function () {
+                            confirmation.hide();
+                        });
+                        confirmation.afterProceed(function () {
+                            selectedCoupon().isApproved(true);
+                            onSaveCoupon();
+                            $("#topArea").css("display", "block");
+                            $("#divApprove").css("display", "block");
+                            toastr.success("Approved Successfully.");
+                        });
+                    },
                     onSaveCoupon = function () {
 
-                          var couponId = selectedCoupon().couponId();
-                          dataservice.saveCoupon(selectedCoupon().convertToServerData(), {
-                              success: function (response) {
+                        var couponId = selectedCoupon().couponId();
+                        dataservice.saveCoupon(selectedCoupon().convertToServerData(), {
+                            success: function (response) {
 
-                                  if (response.indexOf("Failed") == -1) {
-                                      dataservice.sendApprovalRejectionEmail(selectedCoupon().convertToServerData(), {
-                                          success: function (obj) {
-                                              getCoupons();
-                                              //var existingCampaigntodelete = $.grep(campaigns(), function (n, i) {
-                                              //    return (n.id() == campId);
-                                              //});
+                                if (response.indexOf("Failed") == -1) {
+                                    dataservice.sendApprovalRejectionEmail(selectedCoupon().convertToServerData(), {
+                                        success: function (obj) {
+                                            getCoupons();
+                                            //var existingCampaigntodelete = $.grep(campaigns(), function (n, i) {
+                                            //    return (n.id() == campId);
+                                            //});
 
-                                              //campaigns.remove(existingCampaigntodelete);
+                                            //campaigns.remove(existingCampaigntodelete);
 
-                                              isEditorVisible(false);
-                                          },
-                                          error: function () {
-                                              toastr.error("Failed to save!");
-                                          }
-                                      });
-                                  }
-                                  else {
+                                            isEditorVisible(false);
+                                        },
+                                        error: function () {
+                                            toastr.error("Failed to save!");
+                                        }
+                                    });
+                                }
+                                else {
 
-                                      toastr.error(response);
-                                  }
-                              },
-                              error: function () {
-                                  toastr.error("Failed to save!");
-                              }
-                          });
+                                    toastr.error(response);
+                                }
+                            },
+                            error: function () {
+                                toastr.error("Failed to save!");
+                            }
+                        });
                     },
-                    getApprovalCount = function ()
-                    {
+                    getApprovalCount = function () {
                         dataservice.getapprovalCount({
                             success: function (data) {
                                 $('#couponCount').text(data.CouponCount);
@@ -148,8 +290,7 @@ define("FranchiseDashboard/Coupons.viewModel",
                             }
                         });
                     },
-                    getCurrencyData = function (item)
-                    {
+                    getCurrencyData = function (item) {
                         dataservice.getCurrenybyID(
                        { id: item.CurrencyID },
                        {
@@ -162,7 +303,7 @@ define("FranchiseDashboard/Coupons.viewModel",
 
                            },
                            error: function () {
-                            
+
                            }
                        });
                     },
@@ -203,13 +344,13 @@ define("FranchiseDashboard/Coupons.viewModel",
                     { Id: 34, Name: 'Telecommunications' },
                     { Id: 35, Name: 'Transportation' },
                     { Id: 36, Name: 'Utilities' }
-                           ]),
+                    ]),
                     hasChangesOnCoupon = ko.computed(function () {
-                           if (selectedCoupon() == undefined) {
-                                return false;
-                            }
-                           return (selectedCoupon().hasChanges());
-                        }),
+                        if (selectedCoupon() == undefined) {
+                            return false;
+                        }
+                        return (selectedCoupon().hasChanges());
+                    }),
                     onRejectCoupon = function () {
 
                         confirmation.messageText("Do you want to Reject this deal ?");
@@ -227,10 +368,9 @@ define("FranchiseDashboard/Coupons.viewModel",
                             $("#topArea").css("display", "block");
                             $("#divApprove").css("display", "block");
                             toastr.success("Rejected Successfully.");
-                        });     
+                        });
                     },
-                    getCompanyData = function (selectedItem)
-                    {
+                    getCompanyData = function (selectedItem) {
                         dataservice.getCompanyData(
                      {
                          companyId: selectedItem.companyId,
@@ -246,10 +386,10 @@ define("FranchiseDashboard/Coupons.viewModel",
                              else
                                  company(null);
                              selectedCompany(comData);
-                             getCouponPriceOption(selectedItem.couponId, comData);
-                           
+                             getCouponPriceOption(selectedItem.couponId, comData, selectedItem);
+
                              isEditorVisible(true);
-                         
+
                          },
                          error: function () {
                              toastr.error("Failed to load Company");
@@ -283,9 +423,9 @@ define("FranchiseDashboard/Coupons.viewModel",
                     onEditCoupon: onEditCoupon,
                     selectedCoupon: selectedCoupon,
                     closeEditDialog: closeEditDialog,
-                    onApproveCoupon:onApproveCoupon,
+                    onApproveCoupon: onApproveCoupon,
                     onSaveCoupon: onSaveCoupon,
-                    selectedCompany:selectedCompany,
+                    selectedCompany: selectedCompany,
                     onRejectCoupon: onRejectCoupon,
                     hasChangesOnCoupon: hasChangesOnCoupon,
                     couponsPriceOption: couponsPriceOption,
@@ -293,6 +433,7 @@ define("FranchiseDashboard/Coupons.viewModel",
                     companyTypes: companyTypes,
                     company: company,
                     currencyCode: currencyCode,
+                    dealPriceval: dealPriceval
 
                 };
             })()
