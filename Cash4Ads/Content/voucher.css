@@ -17934,9 +17934,28 @@ div.content .unit.ctu .ctu-sponsor div {
     width:252px;
 }
 .deal_rev {
-    width:100%;min-height: 68px;border:2px solid;padding-top :12px;padding-bottom :12px; margin-top:4px;
+       width: 100%;
+    min-height: 68px;
+    border: 3px solid #94c2de;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    margin-top: 4px;
+    background-color: white;
+    border-radius:5px;
+}
+#deals_reviews_ss > div:nth-child(1) {
+    margin-top:0px;
 }
 
+.heart_clr {
+    color:#90002d;
+    font-size:12px;
+}
+.pos_rel {
+    position: relative;
+    top: -17px;
+    left: -5px;
+}
 .ndod-redeem-now {
     display:none;
 }
@@ -17969,7 +17988,17 @@ div.content .unit.ctu .ctu-sponsor div {
     padding-top: 9px;
     left: 598px;
 }
-
+.yel_box_rat_for_deal {
+    text-align: center;
+    background-color: #fecf0d;
+    height: 25px;
+    width: 26px;
+    color: white;
+    border-radius: 7px;
+    padding-top: 5px;
+    left: 598px;
+    font-size: 12px;
+}
 
 .yel_box_rat_tt {
  text-align: center;
@@ -18066,8 +18095,91 @@ div.content .unit.ctu .ctu-sponsor div {
     border:3px solid #1c1102;
     padding-top:11px;
 }
+.save_percent_cls {
+    background-color: #15ba3b;
+    height: 40px;
+    width: 306px;
+    color: #fffffd;
+    border-radius: 7px;
+}
+.ppl_delas {
+  text-align: left;
+    padding-left: 19px;
+    background-color: #fecf0d;
+    height: 28px;
+    width: 163px;
+    color: black;
+    padding-top: 6px;
+}
+.line_header {
+        color: #150e0e;
+    font-size: 16px;
+    padding: 10px;
+}
+.rate_panes {
+    font-size: 10px;
+   
+    padding-right: 8px;
+    padding-top: 6px;
+}
+.h_header {
+    text-align: left;
+    color: #8c8c8c;
+    font-size: 14px;
+    padding-left: 19px;
+    padding-top: 8px;
+}
+.striketrough {
+    text-decoration: line-through;
+    color:#959595;
+}
+.deals_white_panel {
+    background-color:white;
+    min-height:100px;
+    border: 3px solid #94c2de;
+    border-radius:5px;
+}
+.strfont {
+  font-size: 18px;
+    margin-left: 10px;
+    /* margin-bottom: 15px; */
+    margin-top: -7px;
+    
+}
 
-
+.hh_des {
+   text-align: left;
+    color: #8c8c8c;
+    font-size: 11px;
+    padding: 7px 19px 19px 19px;
+    
+}
+#map_div {
+        width: 329px;
+    height: 150px;
+    border: 2px solid;
+    position: relative;
+    overflow: hidden;
+    margin-top: 8px;
+    margin-left: 5px;
+    border: 3px solid #94c2de;
+    border-radius:5px;
+}
+#contact_no {
+    height: 69px;
+    background-color: white;
+    width: 330px;
+    margin-left: 4px;
+    border: 3px solid #94c2de;
+    border-radius:5px;
+}
+#Price_costs {
+    color:#00438b;
+}
+#address_panes {
+    padding-left: 10px;
+    font-size: 12px;
+}
 
 /*#stae_sv,#savee,#up_too {
     color:#137abd!important;
@@ -18089,3 +18201,16 @@ div.content .unit.ctu .ctu-sponsor div {
     padding-top:11px;
 }
 
+.deal_address_pans {
+    background-color: #0f68a2;
+    height: 346px;
+    color: #cfdeeb;
+    border-radius: 1px;
+}
+.line_box {
+    background-color:white;
+    min-height:189px;
+    margin-bottom:6px;
+    border: 3px solid #94c2de;
+    border-radius:5px;
+}
