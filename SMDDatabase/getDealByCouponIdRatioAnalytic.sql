@@ -1,5 +1,6 @@
-﻿GO
-/****** Object:  StoredProcedure [dbo].[getDealByCouponIdRatioAnalytic]    Script Date: 11/25/2016 5:13:25 PM ******/
+﻿USE [SMDv2]
+GO
+/****** Object:  StoredProcedure [dbo].[getDealByCouponIdRatioAnalytic]    Script Date: 12/27/2016 12:25:53 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -25,13 +26,13 @@ IF @DateRange = 2
 	 Select top 1 @dateFrom = ViewDateTime from UserCouponView where CouponId = @Id
 	END
 
-		Select 'Impressions' label, count(r.UserCouponViewId) value 
+		Select 'Opened' label, count(r.UserCouponViewId) value 
 		from  UserCouponView r 
 		where r.CouponId = @Id and r.ViewDateTime >= @dateFrom and r.ViewDateTime <= getdate() 
 		union
 		Select 'Click thru' label, count(r.CouponPurchaseId) value 
 		from  UserPurchasedCoupon r
-		where r.CouponId = @Id and r.ResponseType = 2 and r.PurchaseDateTime >= @dateFrom and r.PurchaseDateTime <= getdate() 
+		where r.CouponId = @Id and r.PurchaseDateTime >= @dateFrom and r.PurchaseDateTime <= getdate() 
 
 END
  
