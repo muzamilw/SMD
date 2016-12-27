@@ -52,8 +52,8 @@ namespace SMD.Repository.Repositories
 
             result.OverAllStarRating += 5;
 
-            result.OverAllStarRating = Convert.ToDouble( Math.Round(result.OverAllStarRating.Value, 1, MidpointRounding.AwayFromZero));
-
+            if (result.OverAllStarRating.HasValue)
+                result.OverAllStarRating = Convert.ToDouble( Math.Round(result.OverAllStarRating.Value, 1, MidpointRounding.AwayFromZero));
 
             if (result.OverAllStarRating.HasValue == false)
                 result.OverAllStarRating = 0;

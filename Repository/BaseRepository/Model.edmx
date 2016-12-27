@@ -6383,6 +6383,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="Boolean" Name="IsShowMap" Nullable="true" />
           <Property Type="Boolean" Name="IsShowyouTube" Nullable="true" />
           <Property Type="Boolean" Name="IsShowAboutUs" Nullable="true" />
+          <Property Type="Int32" Name="UserHasRated" Nullable="false" />
         </ComplexType>
         <EntityType Name="ProfileQuestionTargetCriteria">
           <Key>
@@ -9090,6 +9091,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
                 <ScalarProperty Name="IsShowMap" ColumnName="IsShowMap" />
                 <ScalarProperty Name="IsShowyouTube" ColumnName="IsShowyouTube" />
                 <ScalarProperty Name="IsShowAboutUs" ColumnName="IsShowAboutUs" />
+                <ScalarProperty Name="UserHasRated" ColumnName="UserHasRated" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
