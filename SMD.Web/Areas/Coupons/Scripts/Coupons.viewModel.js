@@ -237,6 +237,7 @@ define("Coupons/Coupons.viewModel",
                 Banner4Flag = ko.observable(false),
                 Banner5Flag = ko.observable(false),
                 Banner6Flag = ko.observable(false),
+                IsenableBanner = ko.observable(false),
                 freeCouponCount = ko.observable(0),
                 isflageClose = ko.observable(false),
                 isCouponSearch = ko.observable(false),
@@ -941,6 +942,7 @@ getfreeCouponCount = function () {
         addNewCampaign = function () {
 
             diveNo(0);
+            IsenableBanner(false);
             buyItQuestionLabelStatus(false);
             modifiedDate(null);
             //show the main menu;
@@ -1574,6 +1576,7 @@ getfreeCouponCount = function () {
                                     $("#btnCancel").css("display", "none");
                                     $("#btnCancel,#btnPauseCampaign,#btnClose").removeAttr('disabled');
                                     isBtnSaveDraftVisible(false);
+                                    IsenableBanner(true);
                                     couponModel().StatusValue("Panding Approval");
 
 
@@ -1586,7 +1589,7 @@ getfreeCouponCount = function () {
                                     //$("#btnPauseCampaign").css("display", "inline-block");
                                     //$("#btnCancel,#btnPauseCampaign,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
                                     isBtnSaveDraftVisible(false);
-
+                                    IsenableBanner(true);
                                     couponModel().StatusValue("Live");
                                     IsPauseBtnVisible(true);
                                     //isTerminateBtnVisible(true);
@@ -3353,7 +3356,8 @@ getfreeCouponCount = function () {
                     disableDollOpp: disableDollOpp,
                     dealPerOpp: dealPerOpp,
                     priceLabel: priceLabel,
-                    islabelvisible: islabelvisible
+                    islabelvisible: islabelvisible,
+                    IsenableBanner: IsenableBanner
                 };
             })()
         };
