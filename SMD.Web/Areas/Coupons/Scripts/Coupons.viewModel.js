@@ -1605,6 +1605,7 @@ getfreeCouponCount = function () {
                                     //$("#btnCancel").css("display", "none");
                                     isBtnSaveDraftVisible(false);
                                     IsResumeBtnVisible(true);
+                                    IsenableBanner(false);
                                     couponModel().StatusValue("Paused");
                                     //IsSubmitBtnVisible(true);
                                     //isTerminateBtnVisible(true);
