@@ -28,6 +28,7 @@ define("Coupons/Coupons.viewModel",
                     modifiedDate = ko.observable(),
                     companyzipcode = ko.observable(),
                     CompanyName = ko.observable(),
+                    gridTotalCount = ko.observable(0),
                     langs = ko.observableArray([]),
                     percentageDiscountDD = ko.observableArray([
                          {
@@ -792,7 +793,9 @@ define("Coupons/Coupons.viewModel",
             }, {
                 success: function (data) {
                     if (data != null) {
-                        // set grid content
+                        // set grid cont
+                        if ((searchFilterValue() == "" || searchFilterValue() == undefined) && SearchSelectedStatus() == 0)
+                        gridTotalCount(data.TotalCount);
                         campaignGridContent.removeAll();
                         _.each(data.Coupon, function (item) {
                             campaignGridContent.push(model.Coupon.Create(updateCampaignGridItem(item)));
@@ -803,15 +806,34 @@ define("Coupons/Coupons.viewModel",
                         });
                         pager().totalCount(data.TotalCount);
                         if (data.TotalCount == 0) {
-                            isCouponSearch(true);
+                            if (gridTotalCount() >= 4) {
+                                isCouponSearch(false);
+                                islblText(false);
+                                return;
+                            }
+                            else {
+                                isCouponSearch(true);
+                            }
                             islblText(true);
                         }
                         else if (data.TotalCount == 1) {
-                            isCouponSearch(true);
+                            if (gridTotalCount() >= 4) {
+                                isCouponSearch(false);
+                                islblText(false);
+                            }
+                            else {
+                                isCouponSearch(true);
+                            }
+                            
                             islblText(false);
                         }
                         else if (data.TotalCount > 1 && data.TotalCount <= 4) {
-                            isCouponSearch(true);
+                            if (gridTotalCount() >= 4) {
+                                isCouponSearch(false);
+                            }
+                            else {
+                                isCouponSearch(true);
+                            }
                             islblText(false);
                         }
                         else {
@@ -1605,6 +1627,7 @@ getfreeCouponCount = function () {
                                     //$("#btnCancel").css("display", "none");
                                     isBtnSaveDraftVisible(false);
                                     IsResumeBtnVisible(true);
+                                    IsenableBanner(false);
                                     couponModel().StatusValue("Paused");
                                     //IsSubmitBtnVisible(true);
                                     //isTerminateBtnVisible(true);
@@ -3357,7 +3380,8 @@ getfreeCouponCount = function () {
                     dealPerOpp: dealPerOpp,
                     priceLabel: priceLabel,
                     islabelvisible: islabelvisible,
-                    IsenableBanner: IsenableBanner
+                    IsenableBanner: IsenableBanner,
+                    gridTotalCount: gridTotalCount
                 };
             })()
         };

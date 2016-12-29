@@ -49,6 +49,7 @@ define("survey/survey.viewModel",
                     ShowAudienceCounter = ko.observable(),
                     DefaultRangeValue = ko.observable(100),
                     DefaultCountValue = ko.observable(100),
+                    gridTotalCount = ko.observable(0),
                     // criteria selection 
                     selectedCriteria = ko.observable(),
                     profileQuestionList = ko.observable([]),
@@ -350,16 +351,36 @@ define("survey/survey.viewModel",
                 });
                 pager().totalCount(data.TotalCount);
                 totalSurveysCount(data.TotalCount);
+                if ((filterValue() == "" || filterValue() == undefined) && statusFilterValue() == 0)
+                    gridTotalCount(data.TotalCount);
                 if (data.TotalCount == 0) {
-                    isPollSearch(true);
+                    if (gridTotalCount() >= 4) {
+                        isPollSearch(false);
+                        islblText(false);
+                        return;
+                    }
+                    else {
+                        isPollSearch(true);
+                    }
                     islblText(true);
                 }
                 else if (data.TotalCount == 1) {
-                    isPollSearch(true);
+                    if (gridTotalCount() >= 4) {
+                        isPollSearch(false);
+                        islblText(false);
+                    }
+                    else {
+                        isPollSearch(true);
+                    }
                     islblText(false);
                 }
                 else if (data.TotalCount > 1 && data.TotalCount <= 4) {
-                    isPollSearch(true);
+                    if (gridTotalCount() >= 4) {
+                        isPollSearch(false);
+                    }
+                    else {
+                        isPollSearch(true);
+                    }
                     islblText(false);
                 }
                 else {
@@ -2565,7 +2586,8 @@ define("survey/survey.viewModel",
                     pollQuestion1: pollQuestion1,
                     pollQuestion2: pollQuestion2,
                     pollQuestion3: pollQuestion3,
-                    totalSurveysCount: totalSurveysCount
+                    totalSurveysCount: totalSurveysCount,
+                    gridTotalCount: gridTotalCount
                 };
             })()
         };
