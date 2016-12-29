@@ -123,11 +123,11 @@
                                 <div class="user-positioner" style="position:fixed;">
                                 </div>
                             </a>
-                            <ul class="dropdown-menu loginMenu">
+                            <ul class="dropdown-menu loginMenu" style="min-width:205px;margin-right:8px;">
                                 <li><a href="">Role : @RoleName</a></li>
-                                <li id="companyProfileBinding"><a data-bind="click:showCompanyProfileDialog">Marketing profile/logo</a></li>
+                                <li id="companyProfileBinding"style="display:none"><a data-bind="click:showCompanyProfileDialog">Marketing profile/logo</a></li>
                                 <li id="userProfileBinding">
-                                    <a data-bind="click:showUserProfileDialog">User Profile</a>
+                                    <a data-bind="click:showUserProfileDialog"style="display:none">User Profile</a>
                                     <a data-bind="click:ChangePassword">Change Password</a>
                                 </li>
                                 <li>

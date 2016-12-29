@@ -81,7 +81,7 @@ else
                     </div>
                 </div>
 
-                <div data-bind="visible: $root.questions().length == 0" style="display:none;">
+                <div data-bind="visible: ($root.questions().length == 0 && $root.gridTotalCount() == 0)" style="display:none;">
                     <div class="clearfix" style="padding:20px;padding-bottom:15px;">
                         <div class="col-lg-5"></div>
                         <span style="color:white">You haven’t created any Polls yet</span>
@@ -93,7 +93,7 @@ else
         <div class="row Subpanels" style="margin-right:1px;padding-top:0px;">
             <div class="col-lg-12">
 
-                <div class="col-lg-6" style="padding-top:20px;padding-left:15px;" data-bind="visible:$root.questions().length==0">
+                <div class="col-lg-6" style="padding-top:20px;padding-left:15px;" data-bind="visible:($root.questions().length==0 && $root.gridTotalCount() == 0)">
                     <div class=" row">
                         <span style="font-size:20px;">Learn what your customers prefer</span>
                     </div>

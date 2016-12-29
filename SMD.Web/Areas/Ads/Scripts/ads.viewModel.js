@@ -76,7 +76,7 @@ define("ads/ads.viewModel",
                     campaignTypePlaceHolderValue = ko.observable('Enter in the YouTube video link'),
                     isAdSearch = ko.observable(false),
                     islblText = ko.observable(false),
-
+                    gridTotalCount = ko.observable(0),
                     isEditCampaign = ko.observable(false),
                     canSubmitForApproval = ko.observable(true),
                     isNewCampaignVisible = ko.observable(false),
@@ -558,7 +558,8 @@ define("ads/ads.viewModel",
                 }, {
                     success: function (data) {
                         if (data != null) {
-
+                            if ((searchFilterValue() == "" || searchFilterValue() == undefined) && SearchSelectedStatus() == 0)
+                                gridTotalCount(data.TotalCount);
                             // set grid content
                             campaignGridContent.removeAll();
                             _.each(data.CampaignsList, function (item) {
@@ -568,15 +569,33 @@ define("ads/ads.viewModel",
                             totalvideoAdsCount(data.TotalCount);
                             pager().totalCount(data.TotalCount);
                             if (data.TotalCount == 0) {
-                                isAdSearch(true);
+                                if (gridTotalCount() >= 4) {
+                                    isAdSearch(false);
+                                    islblText(false);
+                                    return;
+                                }
+                                else {
+                                    isAdSearch(true);
+                                }
                                 islblText(true);
                             }
                             else if (data.TotalCount == 1) {
-                                isAdSearch(true);
+                                if (gridTotalCount() >= 4) {
+                                    isAdSearch(false);
+                                    islblText(false);
+                                }
+                                else {
+                                    isAdSearch(true);
+                                }
                                 islblText(false);
                             }
                             else if (data.TotalCount > 1 && data.TotalCount <= 4) {
-                                isAdSearch(true);
+                                if (gridTotalCount() >= 4) {
+                                    isAdSearch(false);
+                                }
+                                else {
+                                    isAdSearch(true);
+                                }
                                 islblText(false);
                             }
                             else {
@@ -4009,7 +4028,8 @@ define("ads/ads.viewModel",
                     headText: headText,
                     ischartOpened: ischartOpened,
                     TestDonut: TestDonut,
-                    totalvideoAdsCount: totalvideoAdsCount
+                    totalvideoAdsCount: totalvideoAdsCount,
+                    gridTotalCount: gridTotalCount
                 };
             })()
         };
