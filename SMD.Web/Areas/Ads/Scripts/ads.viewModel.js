@@ -274,7 +274,7 @@ define("ads/ads.viewModel",
                               Gender: item.selectedGenderAnalytics(),
                               age: item.selectedAgeAnalytics(),
                               profession: "All",
-                              City: item.selectedCityAnalytics() != undefined ? item.selectedCityAnalytics() : "All",
+                              City: item.selectedCityAnalytics() ? item.selectedCityAnalytics() : "All",
                               QId: item.Id(),
                               type: item.typ()
                           }, {
@@ -299,7 +299,7 @@ define("ads/ads.viewModel",
                         Gender: selectedQQGAnalytics(),
                         age: selectedQQAAnalytics(),
                         profession: selectedQQPAnalytics(),
-                        City: selectedQQCtAnalytics(),
+                        City: selectedQQCtAnalytics()?selectedQQCtAnalytics():'All',
                         QId: 0,
                         type: 1
                     }, {
@@ -398,7 +398,7 @@ define("ads/ads.viewModel",
 				                if ((selecteddateRangeAnalytics() == 1 && CampaignTblAnalyticsData()[0].C30_days > 0) || (selecteddateRangeAnalytics() == 2 && CampaignTblAnalyticsData()[0].All_time > 0)) {
 
 				                    hasImpression(true);
-				                    $("#donutId").html("")
+				                    $("#donutId").html("");
 				                    var DonutChart = Morris.Donut({
 				                        element: 'donutId',
 				                        data: CampaignRatioAnalyticData(), colors: ['green', 'blue', 'orange']
@@ -2095,7 +2095,6 @@ define("ads/ads.viewModel",
                   },
                 Changefilter = function () {
 
-                    debugger;
                     $.browser.chrome = /chrome/.test(navigator.userAgent.toLowerCase());
 
                     /* Detect Chrome */
@@ -3107,7 +3106,7 @@ define("ads/ads.viewModel",
                             $("#spinnerAudience").css("display", "none");
                             reachedAudience(data.MatchingUsers);
                             ShowAudienceCounter(GetAudienceCount(data.MatchingUsers));
-                            debugger;
+                            
 
                             totalAudience(data.AllUsers);
                             var percent = data.MatchingUsers / data.AllUsers;
@@ -3494,7 +3493,7 @@ define("ads/ads.viewModel",
                             QuestionId: 0,
                         }, {
                             success: function (data) {
-                                debugger;
+                                
                                 if (data != null) {
                                     myQuizQuestions([]);
                                     ko.utils.arrayPushAll(myQuizQuestions(), data.AdCampaigns);
