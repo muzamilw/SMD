@@ -213,6 +213,17 @@ define("Coupons/Coupons.viewModel",
 					CurrPage = ko.observable(9);
                 MaxPage = ko.observable(12);
                 // advertiser analytics 
+                PieChartValue = ko.observableArray([0, 0]),
+                PieChartlabel = ko.observableArray(["", ""]),
+                CampaignRatioData = ko.observable({
+                    labels: this.PieChartlabel,
+                    datasets: [
+                        {
+                            data: this.PieChartValue,
+                            backgroundColor: ['green', 'blue', 'orange']
+                           
+                        }]                    
+                }),
                 isAdvertdashboardDealVisible = ko.observable(false),
                 selecteddateRangeAnalytics = ko.observable(1),
                 selectedGranularityAnalytics = ko.observable(1),
@@ -563,16 +574,29 @@ define("Coupons/Coupons.viewModel",
                             dealExpirydate(data.expiryDate);
                             DDCTStatsAnalytics(data.ClickTrouStat);
                             DDOStatsAnalytics(data.ImpressionStat);
+                            PieChartValue.removeAll();
+                            PieChartlabel.removeAll();
+                            for(var i = 0; i < data.pieCharts.length; i++) {
+                                PieChartValue.push(data.pieCharts[i].value);
+                                PieChartlabel.push(data.pieCharts[i].label);
+
+                            };
+                            PieChartValue.valueHasMutated();
+                            PieChartlabel.valueHasMutated();
                             if (CampaignRatioAnalyticData()[0].value > 0) {
 
                                 hasImpression(true);
 
-                                $("#donutId").html("");
-                                var browsersChart = Morris.Donut({
-                                    element: 'donutId',
-                                    data: CampaignRatioAnalyticData(), colors: ['green', 'blue', 'orange']
-                                });
+                                //$("#donutId").html("");
+                                //var browsersChart = Morris.Donut({
+                                //    element: 'donutId',
+                                //    data: CampaignRatioAnalyticData(), colors: ['green', 'blue', 'orange']
+                                //});
+                           
 
+                               // DynamicDoughnutData().datasets[0].data = [20, 30, 50];
+                                
+                                
                                 var myLatlng = new google.maps.LatLng(51.509865, -0.118092);
                                 var myOptions = {
                                     zoom: 3,
@@ -3406,7 +3430,8 @@ getfreeCouponCount = function () {
                     priceLabel: priceLabel,
                     islabelvisible: islabelvisible,
                     IsenableBanner: IsenableBanner,
-                    gridTotalCount: gridTotalCount
+                    gridTotalCount: gridTotalCount,
+                    CampaignRatioData: CampaignRatioData
                 };
             })()
         };
