@@ -365,7 +365,7 @@ define("ads/ads.viewModel",
                 },
 				getAdsByCampaignIdAnalytics = function () {
 				    dataservice.getAdsByCampaignIdAnalytics({
-				        compaignId: selectedCampaignIdAnalytics(),
+				        campaignId: selectedCampaignIdAnalytics(),
 				        CampStatus: selectedCampStatusAnalytics(),
 				        dateRange: selecteddateRangeAnalytics(),
 				        Granularity: selectedGranularityAnalytics(),
@@ -396,7 +396,30 @@ define("ads/ads.viewModel",
 
 
 				                if ((selecteddateRangeAnalytics() == 1 && CampaignTblAnalyticsData()[0].C30_days > 0) || (selecteddateRangeAnalytics() == 2 && CampaignTblAnalyticsData()[0].All_time > 0)) {
+				                    var myLatlng = new google.maps.LatLng(51.509865, -0.118092);
+				                    var myOptions = {
+				                        zoom: 3,
+				                        center: myLatlng
+				                    };
+				                    map = new google.maps.Map(document.getElementById("heatmapId"), myOptions);
+				                    heatmap = new HeatmapOverlay(map,
+                                      {
+                                          "radius": 2,
+                                          "maxOpacity": 1,
+                                          "scaleRadius": true,
+                                          "useLocalExtrema": true,
+                                          latField: 'lat',
+                                          lngField: 'lng',
+                                          valueField: 'count'
+                                      }
+                                    );
 
+				                    var testData = {
+				                        max: 8,
+				                        data: data.UserLocation
+				                    };
+
+				                    heatmap.setData(testData);
 				                    hasImpression(true);
 				                    $("#donutId").html("");
 				                    var DonutChart = Morris.Donut({
@@ -407,8 +430,7 @@ define("ads/ads.viewModel",
 				                        element: 'AgeBarChartId',
 				                        data: PerAgeChartAnalyticsData(),
 				                        xkey: 'city', ykeys: ['C10_20', 'C20_30', 'C30_40', 'C40_50', 'C50_60', 'C60_70', 'C70_80', 'C80_90', 'C90_'], labels: ['10_20', '20_30', '30_40', '40_50', '50_60', '60_70', '70_80', '80_90', '90+']
-				                        //parseTime:false, setAxisAlignFirstX: true,
-				                        //barColors: ['green', 'blue', 'orange']
+				                       
 				                    });
 				                    var BarChart2 = Morris.Bar({
 				                        element: 'GenderBarChartId',

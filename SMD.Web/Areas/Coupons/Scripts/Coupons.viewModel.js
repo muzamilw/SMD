@@ -566,11 +566,35 @@ define("Coupons/Coupons.viewModel",
                             if (CampaignRatioAnalyticData()[0].value > 0) {
 
                                 hasImpression(true);
+
                                 $("#donutId").html("");
                                 var browsersChart = Morris.Donut({
                                     element: 'donutId',
                                     data: CampaignRatioAnalyticData(), colors: ['green', 'blue', 'orange']
                                 });
+                                var myLatlng = new google.maps.LatLng(51.509865, -0.118092);
+                                var myOptions = {
+                                    zoom: 3,
+                                    center: myLatlng
+                                };
+                                map = new google.maps.Map(document.getElementById("heatmapId"), myOptions);
+                                heatmap = new HeatmapOverlay(map,
+                                  {
+                                      "radius": 2,
+                                      "maxOpacity": 1,
+                                      "scaleRadius": true,
+                                      "useLocalExtrema": true                                     
+                                  }
+                                );
+
+                                var testData = {
+                                    max: 8,
+                                    data: data.UserLocation
+                                };
+
+                                heatmap.setData(testData);
+
+
                             } else {
                                 hasImpression(false);
                             }

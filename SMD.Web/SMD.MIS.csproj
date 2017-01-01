@@ -1920,6 +1920,9 @@
     <Content Include="Scripts\Charts\highcharts.js" />
     <Content Include="Scripts\Charts\jquery-2.1.4.min.js" />
     <Content Include="Scripts\Charts\jquery.min.js" />
+    <Content Include="Scripts\gmaps-heatmap.js" />
+    <Content Include="Scripts\heatmap.js" />
+    <Content Include="Scripts\heatmap.min.js" />
     <Content Include="Scripts\intlTelInput.min.js" />
     <Content Include="Scripts\intphnumutils.js" />
     <Content Include="Scripts\jquery.imgareaselect.js" />

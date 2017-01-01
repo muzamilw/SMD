@@ -1256,6 +1256,11 @@ namespace SMD.Implementation.Services
         {
             return couponRepository.getDealStats(Id);
         }
+
+        public List<CampaignResponseLocation> getDealUserLocationByCId(long CouponId)
+        {
+            return _userCouponViewRepository.getDealUserLocationByCId(CouponId);
+        }
         #endregion
     }
 }

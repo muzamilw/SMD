@@ -14,30 +14,26 @@ namespace SMD.MIS.Areas.Api.Controllers
 
         #region private
         private readonly IAdvertService _IAdvertService;
+        private readonly IAdCampaignResponseService _IAdCampaignResponseService;
         #endregion
-        public AdsCampaignAnalyticController(IAdvertService IAdvertService)
+        public AdsCampaignAnalyticController(IAdvertService IAdvertService, IAdCampaignResponseService IAdCampaignResponseService)
         {
             this._IAdvertService = IAdvertService;
+            this._IAdCampaignResponseService = IAdCampaignResponseService;
         }
-        // GET api/<controller>
-        //public IEnumerable<getDisplayAdsCampaignByCampaignIdAnalytics_Result> getDisplayAdsCampaignByCampaignIdAnalytics(int compaignId, int CampStatus, int dateRange, int Granularity)
-        //{
-        //    return _IAdCampaignRepository.getDisplayAdsCampaignByCampaignIdAnalytics(compaignId, CampStatus, dateRange, Granularity);
-        //}
-        public AdsCampaignByCampaignIdForAnalyticsResponse getAdsCampaignByCampaignIdForAnalytics(int compaignId, int CampStatus, int dateRange, int Granularity)
+       
+        public AdsCampaignByCampaignIdForAnalyticsResponse getAdsCampaignByCampaignIdForAnalytics(int campaignId, int CampStatus, int dateRange, int Granularity)
         {
             AdsCampaignByCampaignIdForAnalyticsResponse data = new AdsCampaignByCampaignIdForAnalyticsResponse();
-            data.lineCharts = _IAdvertService.getAdsCampaignByCampaignIdAnalytics(compaignId, CampStatus, dateRange, Granularity);
-            data.pieCharts = _IAdvertService.getAdsCampaignByCampaignIdRatioAnalytic(compaignId, dateRange);
-            data.tbl = _IAdvertService.getAdsCampaignByCampaignIdtblAnalytic(compaignId);
-            data.ROItbl = _IAdvertService.getCampaignROItblAnalytic(compaignId);
-            data.PerGenderChart = _IAdvertService.getAdsCampaignPerCityPerGenderFormAnalytic(compaignId);
-            data.PerAgeChart =  _IAdvertService.getAdsCampaignPerCityPerAgeFormAnalytic(compaignId);
-            data.UserLocation = null;
+            data.lineCharts = _IAdvertService.getAdsCampaignByCampaignIdAnalytics(campaignId, CampStatus, dateRange, Granularity);
+            data.pieCharts = _IAdvertService.getAdsCampaignByCampaignIdRatioAnalytic(campaignId, dateRange);
+            data.tbl = _IAdvertService.getAdsCampaignByCampaignIdtblAnalytic(campaignId);
+            data.ROItbl = _IAdvertService.getCampaignROItblAnalytic(campaignId);
+            data.PerGenderChart = _IAdvertService.getAdsCampaignPerCityPerGenderFormAnalytic(campaignId);
+            data.PerAgeChart =  _IAdvertService.getAdsCampaignPerCityPerAgeFormAnalytic(campaignId);
+            data.UserLocation = _IAdCampaignResponseService.getCampaignUserLocationByCId(campaignId);
             return data;
         }
-
-        // GET api/<controller>/5
-        
+              
     }
 }

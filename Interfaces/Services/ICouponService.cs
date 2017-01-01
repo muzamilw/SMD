@@ -67,5 +67,7 @@ namespace SMD.Interfaces.Services
         int CouponReviewCount();
         List<GetRandom3Deal_Result> GetRandomDeals();
         CouponStatsResponse getDealStats(long Id);
+        List<CampaignResponseLocation> getDealUserLocationByCId(long CouponId);
+
     }
 }

@@ -34,7 +34,9 @@ namespace SMD.MIS.Areas.Api.Controllers
                 data.lineCharts = _ICouponService.getDealByCouponIDAnalytics(CouponID, dateRange, Granularity);
                 data.pieCharts = _ICouponService.getDealByCouponIdRatioAnalytic(CouponID, dateRange);
                 data.ImpressionStat = _ICouponService.getDealStatByCouponIdFormAnalytic(CouponID, Gender, age, 1);
-                data.ClickTrouStat = _ICouponService.getDealStatByCouponIdFormAnalytic(CouponID, Gender, age, 2); 
+                data.ClickTrouStat = _ICouponService.getDealStatByCouponIdFormAnalytic(CouponID, Gender, age, 2);
+                data.UserLocation = _ICouponService.getDealUserLocationByCId(CouponID);
+
             }
             else
             {

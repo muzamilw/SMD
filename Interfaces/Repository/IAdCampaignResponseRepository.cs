@@ -1,4 +1,5 @@
 ﻿using SMD.Models.DomainModels;
+using System.Collections.Generic;
 
 namespace SMD.Interfaces.Repository
 {
@@ -9,5 +10,6 @@ namespace SMD.Interfaces.Repository
         /// </summary>
         AdCampaignResponse GetByUserId(long campaignId, string userId);
         int getCampaignByIdQQFormAnalytic(long CampaignId, int Choice, int Gender, int age, string Profession, string City, int type, int questionId);
+        List<CampaignResponseLocation> getCampaignUserLocationByCId(long campaignId);
     }
 }

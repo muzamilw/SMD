@@ -24,4 +24,15 @@ namespace SMD.Models.DomainModels
         public int C80_90 { get; set; }
         public int C90_ { get; set; }
     }
+    public class CampaignResponseLocation
+    {
+
+
+
+        public string lat { get; set; }
+        public string lng { get; set; }
+        public int count { get; set; }
+
+    }
+   
 }
