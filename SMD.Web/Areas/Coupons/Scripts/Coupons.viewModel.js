@@ -572,6 +572,7 @@ define("Coupons/Coupons.viewModel",
                                     element: 'donutId',
                                     data: CampaignRatioAnalyticData(), colors: ['green', 'blue', 'orange']
                                 });
+
                                 var myLatlng = new google.maps.LatLng(51.509865, -0.118092);
                                 var myOptions = {
                                     zoom: 3,

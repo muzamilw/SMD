@@ -422,6 +422,8 @@ define("ads/ads.viewModel",
 				                    heatmap.setData(testData);
 				                    hasImpression(true);
 				                    $("#donutId").html("");
+				                    $("#GenderBarChartId").html("");
+				                    $("#AgeBarChartId").html("");
 				                    var DonutChart = Morris.Donut({
 				                        element: 'donutId',
 				                        data: CampaignRatioAnalyticData(), colors: ['green', 'blue', 'orange']
