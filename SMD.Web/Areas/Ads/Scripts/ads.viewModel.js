@@ -446,13 +446,17 @@ define("ads/ads.viewModel",
 				                    var BarChart1 = Morris.Bar({
 				                        element: 'AgeBarChartId',
 				                        data: PerAgeChartAnalyticsData(),
-				                        xkey: 'city', ykeys: ['C10_20', 'C20_30', 'C30_40', 'C40_50', 'C50_60', 'C60_70', 'C70_80', 'C80_90', 'C90_'], labels: ['10_20', '20_30', '30_40', '40_50', '50_60', '60_70', '70_80', '80_90', '90+']
+				                        xkey: 'city', ykeys: ['C10_20', 'C20_30', 'C30_40', 'C40_50', 'C50_60', 'C60_70', 'C70_80', 'C80_90', 'C90_'],
+				                        labels: ['10_20', '20_30', '30_40', '40_50', '50_60', '60_70', '70_80', '80_90', '90+'],
+				                        yLabelFormat: function (y) { return y != Math.round(y) ? '' : y; },
+				                        setAxisAlignFirstX: true, parseTime: false
 				                       
 				                    });
 				                    var BarChart2 = Morris.Bar({
 				                        element: 'GenderBarChartId',
 				                        data: PerGenderChartAnalyticsData(),
 				                        xkey: 'city', ykeys: ['male', 'female'], labels: ['male', 'female'],
+				                        yLabelFormat: function (y) { return y != Math.round(y) ? '' : y; }, 
 				                        parseTime: false, setAxisAlignFirstX: true,
 				                        barColors: ['green', 'blue']
 				                    });
