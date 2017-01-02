@@ -225,11 +225,11 @@ define("survey/survey.viewModel",
                             if ((selecteddateRangeAnalytics() == 1 && CampaignTblAnalyticsData()[0].C30_days > 0) || (selecteddateRangeAnalytics() == 2 && CampaignTblAnalyticsData()[0].All_time > 0)) {
 
                                 hasImpression(true);
-                                $("#donutId").html("");
-                                var browsersChart = Morris.Donut({
-                                    element: 'donutId',
-                                    data: CampaignRatioAnalyticData(), colors: ['green', 'blue', 'orange']
-                                });
+                                //$("#donutId").html("");
+                                //var browsersChart = Morris.Donut({
+                                //    element: 'donutId',
+                                //    data: CampaignRatioAnalyticData(), colors: ['green', 'blue', 'orange']
+                                //});
                             } else {
                                 hasImpression(false);
                             }

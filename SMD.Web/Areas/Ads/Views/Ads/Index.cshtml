@@ -271,18 +271,29 @@ else
             <!-- ko if: VerifyQuestion() != null -->
             <div style="font-size:small" data-bind="text:VerifyQuestion()"></div>
             <br />
-            <!-- ko if: Answer3() != null -->
+            <div class="piechart">
+                <canvas data-bind="chart: { type: 'pie', data: CampaignRatioData, options: { observeChanges: true, throttle: 1000, legend: { display: false }, maintainAspectRatio: false,responsive: true } }"></canvas>
+            </div>
+                 @*<!-- ko if: Answer3() != null -->
             <div data-bind="morris: {type: 'Donut', data: [{label: Answer1(), value: Answer1Stats()},{label: Answer2(), value: Answer2Stats()},{label: Answer3(), value: Answer3Stats()}], resize:true, colors: ['green', 'blue','red' ]  }" style="height:230px;cursor:pointer;"></div>
             <!-- /ko -->
             <!-- ko if: Answer3() == null -->
             <div data-bind="morris: {type: 'Donut', data: [{label: Answer1(), value: Answer1Stats()},{label: Answer2(), value: Answer2Stats()}], resize:true, colors: ['green', 'blue','red' ]  }" style="height:230px;cursor:pointer;"></div>
-            <!-- /ko -->
+            <!-- /ko -->*@
             <!-- /ko -->
         </td>
 
         <td class="col-sm-1">
             <table class="tbl-noborder">
                 <tbody>
+                    <tr>
+                        <td>
+                            <br /><br />
+                        </td>
+                        <td>
+                           
+                        </td>
+                    </tr>
                     <!-- ko if: Answer1() != null -->
                     <tr>
                         <td>
@@ -363,13 +374,15 @@ else
 
             </div>
             <br />
+            <!-- ko if: Status() != 1 &&  Status() != 2 && Status() !=  6-->
+           
             <div class="text-left statusbg" data-bind="click:$root.openAdvertiserDashboardScreen" style="background:blue;width:95px;white-space:nowrap;">
                 <span>
                     Analyze Charts
                 </span>
             </div>
             <br />
-
+            <!-- /ko -->
             <div style="text-align: center;">
                 <!-- ko if: Status() == 1 ||  Status() == 4|| Status() ==  6-->
                 <a class="table-link danger">
@@ -472,6 +485,8 @@ else
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
     <script src="~/Scripts/heatmap.min.js"></script>
     <script src="~/Scripts/gmaps-heatmap.js"></script>
+    <script src="~/Scripts/chart.js"></script>
+    <script src="~/Scripts/Charts/knockout.chart.js"></script>
     <script type="text/javascript">
         var mode = 1;
         require(["ads/ads.view", "common/stripeChargeCustomer.view", "common/confirmation.view", ]);

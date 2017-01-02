@@ -171,7 +171,17 @@ define("ads/ads.viewModel",
                 CurrPage = ko.observable(9);
                 MaxPage = ko.observable(12);
                 // Advertiser dashBoard Section
-                TestDonut = ko.observableArray([{ label: 'download sales', value: 12 }, { label: 'In-Store Sales', value: 30 }, { label: 'Mail-Order Sales', value: 20 }]),
+                PieChartValue = ko.observableArray([0, 0]),
+                PieChartlabel = ko.observableArray(["", ""]),
+                CampaignRatioData = ko.observable({
+                    labels: this.PieChartlabel,
+                    datasets: [
+                        {
+                            data: this.PieChartValue,
+                            backgroundColor: ['green', 'blue','red' ,'orange','pink']
+
+                        }]
+                }),
                 selectedCampStatusAnalytics = ko.observable(1),
 				selecteddateRangeAnalytics = ko.observable(1),
 				selectedGranularityAnalytics = ko.observable(1),
@@ -391,7 +401,15 @@ define("ads/ads.viewModel",
 				                PerGenderChartAnalyticsData.removeAll();
 				                ko.utils.arrayPushAll(PerGenderChartAnalyticsData(), data.PerGenderChart);
 				                PerGenderChartAnalyticsData.valueHasMutated();
+				                PieChartValue.removeAll();
+				                PieChartlabel.removeAll();
+				                for (var i = 0; i < data.pieCharts.length; i++) {
+				                    PieChartValue.push(data.pieCharts[i].value);
+				                    PieChartlabel.push(data.pieCharts[i].label);
 
+				                };
+				                PieChartValue.valueHasMutated();
+				                PieChartlabel.valueHasMutated();
 
 
 
@@ -421,13 +439,10 @@ define("ads/ads.viewModel",
 
 				                    heatmap.setData(testData);
 				                    hasImpression(true);
-				                    $("#donutId").html("");
+				                    
 				                    $("#GenderBarChartId").html("");
 				                    $("#AgeBarChartId").html("");
-				                    var DonutChart = Morris.Donut({
-				                        element: 'donutId',
-				                        data: CampaignRatioAnalyticData(), colors: ['green', 'blue', 'orange']
-				                    });
+				                    
 				                    var BarChart1 = Morris.Bar({
 				                        element: 'AgeBarChartId',
 				                        data: PerAgeChartAnalyticsData(),
@@ -4050,9 +4065,9 @@ define("ads/ads.viewModel",
                     VideoLink3: VideoLink3,
                     headText: headText,
                     ischartOpened: ischartOpened,
-                    TestDonut: TestDonut,
                     totalvideoAdsCount: totalvideoAdsCount,
-                    gridTotalCount: gridTotalCount
+                    gridTotalCount: gridTotalCount,
+                    CampaignRatioData: CampaignRatioData
                 };
             })()
         };
