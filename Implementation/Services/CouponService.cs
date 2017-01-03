@@ -1256,6 +1256,10 @@ namespace SMD.Implementation.Services
         {
             return couponRepository.getDealStats(Id);
         }
+        public List<CouponCategories> GetDealsByCtgId(int CategoryID)
+        {
+            return couponRepository.GetDealsByCtgId(CategoryID);
+        }
         #endregion
     }
 }

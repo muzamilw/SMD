@@ -12,6 +12,7 @@ namespace SMD.Interfaces.Services
 {
     public interface ICouponService
     {
+        List<CouponCategories> GetDealsByCtgId(int CategoryID);
         IEnumerable<Coupon> GetAllCoupons();
 
         CampaignResponseModel GetCouponById(long CampaignId);

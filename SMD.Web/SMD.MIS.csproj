@@ -392,6 +392,7 @@
     <Compile Include="Areas\Api\Controllers\CouponReviewController.cs" />
     <Compile Include="Areas\Api\Controllers\CouponReviewCountController.cs" />
     <Compile Include="Areas\Api\Controllers\DashboardStatusCounterController.cs" />
+    <Compile Include="Areas\Api\Controllers\DealListingController.cs" />
     <Compile Include="Areas\Api\Controllers\DealStatsController.cs" />
     <Compile Include="Areas\Api\Controllers\GetRandomAdCampaignController.cs" />
     <Compile Include="Areas\Api\Controllers\GetRandomDealController.cs" />
@@ -3315,6 +3316,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Ads\Models\" />
+    <Folder Include="Areas\Api\Views\DealListings\" />
     <Folder Include="Areas\Api\Views\ProfileQuestion\" />
     <Folder Include="Areas\Api\Views\Survey\" />
     <Folder Include="Areas\Billing\Models\" />

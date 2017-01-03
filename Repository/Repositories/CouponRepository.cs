@@ -293,7 +293,11 @@ namespace SMD.Repository.Repositories
         {
             return db.GetRandom3Deal().ToList();
         }
-
+        public List<CouponCategories> GetDealsByCtgId(int CategoryID)
+        {
+            return db.CouponCategories.Where(i => i.CategoryId == CategoryID).ToList();
+        
+        }
 
         public List<GetUsersCouponsForEmailNotification_Result> GetUsersCouponsForEmailNotification(int mode)
         {

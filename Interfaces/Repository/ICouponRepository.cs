@@ -17,7 +17,7 @@ namespace SMD.Interfaces.Repository
 
         Coupon GetCouponByIdSingle(long couponId);
 
-
+        List<CouponCategories> GetDealsByCtgId(int CategoryID);
         IEnumerable<SearchCoupons_Result> SearchCoupons(int categoryId, int type, int size, string keywords, int pageNo, int distance, string Lat, string Lon, string UserId);
 
         List<Coupon> GetCouponsByCompanyId(int CompanyId);

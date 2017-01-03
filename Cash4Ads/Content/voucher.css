@@ -17955,6 +17955,7 @@ div.content .unit.ctu .ctu-sponsor div {
     position: relative;
     top: -17px;
     left: -5px;
+    display:none;
 }
 .ndod-redeem-now {
     display:none;
@@ -17991,13 +17992,13 @@ div.content .unit.ctu .ctu-sponsor div {
 .yel_box_rat_for_deal {
     text-align: center;
     background-color: #fecf0d;
-    height: 25px;
-    width: 26px;
+    height: 33px;
+    width: 44px;
     color: white;
     border-radius: 7px;
-    padding-top: 5px;
+    padding-top: 8px;
     left: 598px;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .yel_box_rat_tt {
@@ -18083,17 +18084,17 @@ div.content .unit.ctu .ctu-sponsor div {
     padding-top:27px;
 }
 .ppl {
-      text-align: left;
+    text-align: left;
     padding-left: 19px;
     background-color: #fecf0d;
-    height: 42px;
-    width: 249px;
+    height: 57px;
+    width: 288px;
     position: relative;
     top: -400px;
     left: 3px;
     color: white;
-    border:3px solid #1c1102;
-    padding-top:11px;
+    padding-top: 14px;
+    font-size: 18px;
 }
 .save_percent_cls {
     background-color: #15ba3b;
@@ -18113,14 +18114,13 @@ div.content .unit.ctu .ctu-sponsor div {
 }
 .line_header {
         color: #150e0e;
-    font-size: 16px;
+    font-size: 18px;
     padding: 10px;
 }
 .rate_panes {
-    font-size: 10px;
-   
+   font-size: 12px;
     padding-right: 8px;
-    padding-top: 6px;
+    padding-top: 2px;
 }
 .h_header {
     text-align: left;
