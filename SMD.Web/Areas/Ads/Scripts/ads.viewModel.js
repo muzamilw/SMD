@@ -76,7 +76,7 @@ define("ads/ads.viewModel",
                     campaignTypePlaceHolderValue = ko.observable('Enter in the YouTube video link'),
                     isAdSearch = ko.observable(false),
                     islblText = ko.observable(false),
-
+                    gridTotalCount = ko.observable(0),
                     isEditCampaign = ko.observable(false),
                     canSubmitForApproval = ko.observable(true),
                     isNewCampaignVisible = ko.observable(false),
@@ -171,7 +171,17 @@ define("ads/ads.viewModel",
                 CurrPage = ko.observable(9);
                 MaxPage = ko.observable(12);
                 // Advertiser dashBoard Section
-                TestDonut = ko.observableArray([{label: 'download sales', value: 12},{label: 'In-Store Sales' , value: 30},  {label: 'Mail-Order Sales' , value: 20}]),
+                PieChartValue = ko.observableArray([0, 0]),
+                PieChartlabel = ko.observableArray(["", ""]),
+                CampaignRatioData = ko.observable({
+                    labels: this.PieChartlabel,
+                    datasets: [
+                        {
+                            data: this.PieChartValue,
+                            backgroundColor: ['green', 'blue','red' ,'orange','pink']
+
+                        }]
+                }),
                 selectedCampStatusAnalytics = ko.observable(1),
 				selecteddateRangeAnalytics = ko.observable(1),
 				selectedGranularityAnalytics = ko.observable(1),
@@ -212,21 +222,21 @@ define("ads/ads.viewModel",
                 LogoUrl2 = ko.observable(),
                 VideoLink2 = ko.observable(),
                 CampaignName3 = ko.observable(),
-               // CampaignName = ko.observable(),
+                // CampaignName = ko.observable(),
                 LogoUrl3 = ko.observable(),
                 VideoLink3 = ko.observable(),
                 ischartOpened = ko.observable(false),
 				openAdvertiserDashboardScreen = function (Campaign) {
-				//    campaignModel(new model.Campaign());
+				    //    campaignModel(new model.Campaign());
 
-				   
-				 //   collapseMainMenu();
-				
+
+				    //   collapseMainMenu();
+
 				    openEditScreen(1);
 				    campaignModel().CampaignName(Campaign.CampaignName());
-				 //   ischartOpened(true);
+				    //   ischartOpened(true);
 				    isListVisible(false);
-				   // isNewCampaign(false);
+				    // isNewCampaign(false);
 				    $("#logo_div").css("display", "block");
 				    $(".hideInCoupons").css("display", "none");
 
@@ -242,7 +252,7 @@ define("ads/ads.viewModel",
 				    //    else
 				    //        isNewCampaign(false);
 				    //}
-				   
+
 				    if (!isNewCampaign()) {
 				        isflageClose(true);
 				        selectedCampaignIdAnalytics(Campaign.CampaignID());
@@ -266,7 +276,7 @@ define("ads/ads.viewModel",
 				    }
 				},
                       getQAnalytic = function (item) {
-                            var data = item;
+                          var data = item;
                           SelectedItemAnalytics(item);
                           dataservice.getQQAnalytic({
                               Id: selectedCampaignIdAnalytics(),
@@ -274,7 +284,7 @@ define("ads/ads.viewModel",
                               Gender: item.selectedGenderAnalytics(),
                               age: item.selectedAgeAnalytics(),
                               profession: "All",
-                              City: item.selectedCityAnalytics() != undefined ? item.selectedCityAnalytics() : "All",
+                              City: item.selectedCityAnalytics() ? item.selectedCityAnalytics() : "All",
                               QId: item.Id(),
                               type: item.typ()
                           }, {
@@ -295,11 +305,11 @@ define("ads/ads.viewModel",
                 getQQAnalytic = function () {
                     dataservice.getQQAnalytic({
                         Id: selectedCampaignIdAnalytics(),
-                        Choice: selectedQQCAnalytics() > 0 ? selectedQQCAnalytics():0 ,
+                        Choice: selectedQQCAnalytics() > 0 ? selectedQQCAnalytics() : 0,
                         Gender: selectedQQGAnalytics(),
                         age: selectedQQAAnalytics(),
                         profession: selectedQQPAnalytics(),
-                        City: selectedQQCtAnalytics(),
+                        City: selectedQQCtAnalytics()?selectedQQCtAnalytics():'All',
                         QId: 0,
                         type: 1
                     }, {
@@ -365,7 +375,7 @@ define("ads/ads.viewModel",
                 },
 				getAdsByCampaignIdAnalytics = function () {
 				    dataservice.getAdsByCampaignIdAnalytics({
-				        compaignId: selectedCampaignIdAnalytics(),
+				        campaignId: selectedCampaignIdAnalytics(),
 				        CampStatus: selectedCampStatusAnalytics(),
 				        dateRange: selecteddateRangeAnalytics(),
 				        Granularity: selectedGranularityAnalytics(),
@@ -391,24 +401,53 @@ define("ads/ads.viewModel",
 				                PerGenderChartAnalyticsData.removeAll();
 				                ko.utils.arrayPushAll(PerGenderChartAnalyticsData(), data.PerGenderChart);
 				                PerGenderChartAnalyticsData.valueHasMutated();
+				                PieChartValue.removeAll();
+				                PieChartlabel.removeAll();
+				                for (var i = 0; i < data.pieCharts.length; i++) {
+				                    PieChartValue.push(data.pieCharts[i].value);
+				                    PieChartlabel.push(data.pieCharts[i].label);
 
+				                };
+				                PieChartValue.valueHasMutated();
+				                PieChartlabel.valueHasMutated();
 
 
 
 				                if ((selecteddateRangeAnalytics() == 1 && CampaignTblAnalyticsData()[0].C30_days > 0) || (selecteddateRangeAnalytics() == 2 && CampaignTblAnalyticsData()[0].All_time > 0)) {
+				                    var myLatlng = new google.maps.LatLng(51.509865, -0.118092);
+				                    var myOptions = {
+				                        zoom: 3,
+				                        center: myLatlng
+				                    };
+				                    map = new google.maps.Map(document.getElementById("heatmapId"), myOptions);
+				                    heatmap = new HeatmapOverlay(map,
+                                      {
+                                          "radius": 2,
+                                          "maxOpacity": 1,
+                                          "scaleRadius": true,
+                                          "useLocalExtrema": true,
+                                          latField: 'lat',
+                                          lngField: 'lng',
+                                          valueField: 'count'
+                                      }
+                                    );
 
+				                    var testData = {
+				                        max: 8,
+				                        data: data.UserLocation
+				                    };
+
+				                    heatmap.setData(testData);
 				                    hasImpression(true);
-				                    $("#donutId").html("")
-				                    var DonutChart = Morris.Donut({
-				                        element: 'donutId',
-				                        data: CampaignRatioAnalyticData(), colors: ['green', 'blue', 'orange']
-				                    });
+				                    
+				                    $("#GenderBarChartId").html("");
+				                    $("#AgeBarChartId").html("");
+				                    
 				                    var BarChart1 = Morris.Bar({
 				                        element: 'AgeBarChartId',
 				                        data: PerAgeChartAnalyticsData(),
 				                        xkey: 'city', ykeys: ['C10_20', 'C20_30', 'C30_40', 'C40_50', 'C50_60', 'C60_70', 'C70_80', 'C80_90', 'C90_'], labels: ['10_20', '20_30', '30_40', '40_50', '50_60', '60_70', '70_80', '80_90', '90+']
-				                        //parseTime:false, setAxisAlignFirstX: true,
-				                        //barColors: ['green', 'blue', 'orange']
+				                       
 				                    });
 				                    var BarChart2 = Morris.Bar({
 				                        element: 'GenderBarChartId',
@@ -439,28 +478,28 @@ define("ads/ads.viewModel",
 				    CampaignRatioAnalyticData(1);
 				    selecteddateRangeAnalytics(1);
 				    selectedGranularityAnalytics(1);
-				   isflageClose(false);
+				    isflageClose(false);
 				    ischartOpened(false);
 
-				  //  openEditScreen(0);
+				    //  openEditScreen(0);
 				    isEditorVisible(false);
-			        isListVisible(true);
-			        isWelcomeScreenVisible(false);
-			        $("input,button,textarea,a,select").removeAttr('disabled');
-			      //  $("#headlabel, #Heading_div").css("display", "block");
-			        $("#panelArea").css("display", "block");
+				    isListVisible(true);
+				    isWelcomeScreenVisible(false);
+				    $("input,button,textarea,a,select").removeAttr('disabled');
+				    //  $("#headlabel, #Heading_div").css("display", "block");
+				    $("#panelArea").css("display", "block");
 
-			        $(".hideInCoupons").css("display", "none");
+				    $(".hideInCoupons").css("display", "none");
 
-			        $("#MarketobjDiv").css("display", "none");
-			        $("#topArea").css("display", "block");
-			        $("#headlabel").css("display", "block");
-			        $("#Heading_div").css("display", "block");
-			        $("#headdesc").css("display", "block");
-			        $(".closecls").css("display", "block");
-			        showMainMenu();
-			     //   campaignModel().reset();
-			        
+				    $("#MarketobjDiv").css("display", "none");
+				    $("#topArea").css("display", "block");
+				    $("#headlabel").css("display", "block");
+				    $("#Heading_div").css("display", "block");
+				    $("#headdesc").css("display", "block");
+				    $(".closecls").css("display", "block");
+				    showMainMenu();
+				    //   campaignModel().reset();
+
 
 				},
                 CloseAnalyticInnerView = function () {
@@ -468,7 +507,7 @@ define("ads/ads.viewModel",
                     CampaignRatioAnalyticData(1);
                     selecteddateRangeAnalytics(1);
                     selectedGranularityAnalytics(1);
-                  
+
                     ischartOpened(false);
 
                 },
@@ -558,7 +597,8 @@ define("ads/ads.viewModel",
                 }, {
                     success: function (data) {
                         if (data != null) {
-
+                            if ((searchFilterValue() == "" || searchFilterValue() == undefined) && SearchSelectedStatus() == 0)
+                                gridTotalCount(data.TotalCount);
                             // set grid content
                             campaignGridContent.removeAll();
                             _.each(data.CampaignsList, function (item) {
@@ -568,15 +608,33 @@ define("ads/ads.viewModel",
                             totalvideoAdsCount(data.TotalCount);
                             pager().totalCount(data.TotalCount);
                             if (data.TotalCount == 0) {
-                                isAdSearch(true);
+                                if (gridTotalCount() >= 4) {
+                                    isAdSearch(false);
+                                    islblText(false);
+                                    return;
+                                }
+                                else {
+                                    isAdSearch(true);
+                                }
                                 islblText(true);
                             }
                             else if (data.TotalCount == 1) {
-                                isAdSearch(true);
+                                if (gridTotalCount() >= 4) {
+                                    isAdSearch(false);
+                                    islblText(false);
+                                }
+                                else {
+                                    isAdSearch(true);
+                                }
                                 islblText(false);
                             }
                             else if (data.TotalCount > 1 && data.TotalCount <= 4) {
-                                isAdSearch(true);
+                                if (gridTotalCount() >= 4) {
+                                    isAdSearch(false);
+                                }
+                                else {
+                                    isAdSearch(true);
+                                }
                                 islblText(false);
                             }
                             else {
@@ -693,7 +751,7 @@ define("ads/ads.viewModel",
                 VideoLink2src(null);
                 isShowArchiveBtn(false);
                 campaignModel().ChannelType("1");
-                
+
                 campaignModel().MaxDailyBudget("5");
                 campaignModel().MaxBudget("20");
                 campaignModel().Type(mode);
@@ -1179,6 +1237,9 @@ define("ads/ads.viewModel",
                         errorListNew.push({
                             name: "You have no audience against the specified criteria please broaden your audience definition.", element: ""
                         });
+                    }
+                    if (campaignModel().VerifyQuestion() == "" || campaignModel().VerifyQuestion() == undefined || campaignModel().Answer1() == "" || campaignModel().Answer1() == undefined || campaignModel().Answer2() == "" || campaignModel().Answer2() == undefined) {
+                        errorListNew.push({ name: "Plz add your survey question and minimum two answers", element: "" });
                     }
 
                     if (errorListNew() == null || errorListNew().length == 0) {
@@ -2072,8 +2133,7 @@ define("ads/ads.viewModel",
 
                   },
                 Changefilter = function () {
-                    
-                    debugger;
+
                     $.browser.chrome = /chrome/.test(navigator.userAgent.toLowerCase());
 
                     /* Detect Chrome */
@@ -2081,9 +2141,9 @@ define("ads/ads.viewModel",
                         /* Do something for Chrome at this point */
                         alert("You are using Chrome!");
                     }
-                        /* Finally, if it is Chrome then jQuery thinks it's 
-                           Safari so we have to tell it isn't */
-        
+                    /* Finally, if it is Chrome then jQuery thinks it's 
+                       Safari so we have to tell it isn't */
+
                     if (campaignModel().IsUseFilter() == 0) {
 
                         confirmation.messageText("Switching to Hyper Targeting will remove all Broad Targeting filters." + "</br>" + "Continue to Hyper Targeting.");
@@ -3085,7 +3145,7 @@ define("ads/ads.viewModel",
                             $("#spinnerAudience").css("display", "none");
                             reachedAudience(data.MatchingUsers);
                             ShowAudienceCounter(GetAudienceCount(data.MatchingUsers));
-                            debugger;
+                            
 
                             totalAudience(data.AllUsers);
                             var percent = data.MatchingUsers / data.AllUsers;
@@ -3472,7 +3532,7 @@ define("ads/ads.viewModel",
                             QuestionId: 0,
                         }, {
                             success: function (data) {
-                                debugger;
+                                
                                 if (data != null) {
                                     myQuizQuestions([]);
                                     ko.utils.arrayPushAll(myQuizQuestions(), data.AdCampaigns);
@@ -4005,8 +4065,9 @@ define("ads/ads.viewModel",
                     VideoLink3: VideoLink3,
                     headText: headText,
                     ischartOpened: ischartOpened,
-                    TestDonut: TestDonut,
-                    totalvideoAdsCount: totalvideoAdsCount
+                    totalvideoAdsCount: totalvideoAdsCount,
+                    gridTotalCount: gridTotalCount,
+                    CampaignRatioData: CampaignRatioData
                 };
             })()
         };

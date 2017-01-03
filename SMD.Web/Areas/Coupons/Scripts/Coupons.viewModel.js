@@ -28,6 +28,7 @@ define("Coupons/Coupons.viewModel",
                     modifiedDate = ko.observable(),
                     companyzipcode = ko.observable(),
                     CompanyName = ko.observable(),
+                    gridTotalCount = ko.observable(0),
                     langs = ko.observableArray([]),
                     percentageDiscountDD = ko.observableArray([
                          {
@@ -212,6 +213,17 @@ define("Coupons/Coupons.viewModel",
 					CurrPage = ko.observable(9);
                 MaxPage = ko.observable(12);
                 // advertiser analytics 
+                PieChartValue = ko.observableArray([0, 0]),
+                PieChartlabel = ko.observableArray(["", ""]),
+                CampaignRatioData = ko.observable({
+                    labels: this.PieChartlabel,
+                    datasets: [
+                        {
+                            data: this.PieChartValue,
+                            backgroundColor: ['green', 'blue', 'orange']
+                           
+                        }]                    
+                }),
                 isAdvertdashboardDealVisible = ko.observable(false),
                 selecteddateRangeAnalytics = ko.observable(1),
                 selectedGranularityAnalytics = ko.observable(1),
@@ -562,14 +574,52 @@ define("Coupons/Coupons.viewModel",
                             dealExpirydate(data.expiryDate);
                             DDCTStatsAnalytics(data.ClickTrouStat);
                             DDOStatsAnalytics(data.ImpressionStat);
+                            PieChartValue.removeAll();
+                            PieChartlabel.removeAll();
+                            for(var i = 0; i < data.pieCharts.length; i++) {
+                                PieChartValue.push(data.pieCharts[i].value);
+                                PieChartlabel.push(data.pieCharts[i].label);
+
+                            };
+                            PieChartValue.valueHasMutated();
+                            PieChartlabel.valueHasMutated();
                             if (CampaignRatioAnalyticData()[0].value > 0) {
 
                                 hasImpression(true);
-                                $("#donutId").html("");
-                                var browsersChart = Morris.Donut({
-                                    element: 'donutId',
-                                    data: CampaignRatioAnalyticData(), colors: ['green', 'blue', 'orange']
-                                });
+
+                                //$("#donutId").html("");
+                                //var browsersChart = Morris.Donut({
+                                //    element: 'donutId',
+                                //    data: CampaignRatioAnalyticData(), colors: ['green', 'blue', 'orange']
+                                //});
+                           
+
+                               // DynamicDoughnutData().datasets[0].data = [20, 30, 50];
+                                
+                                
+                                var myLatlng = new google.maps.LatLng(51.509865, -0.118092);
+                                var myOptions = {
+                                    zoom: 3,
+                                    center: myLatlng
+                                };
+                                map = new google.maps.Map(document.getElementById("heatmapId"), myOptions);
+                                heatmap = new HeatmapOverlay(map,
+                                  {
+                                      "radius": 2,
+                                      "maxOpacity": 1,
+                                      "scaleRadius": true,
+                                      "useLocalExtrema": true                                     
+                                  }
+                                );
+
+                                var testData = {
+                                    max: 8,
+                                    data: data.UserLocation
+                                };
+
+                                heatmap.setData(testData);
+
+
                             } else {
                                 hasImpression(false);
                             }
@@ -792,7 +842,9 @@ define("Coupons/Coupons.viewModel",
             }, {
                 success: function (data) {
                     if (data != null) {
-                        // set grid content
+                        // set grid cont
+                        if ((searchFilterValue() == "" || searchFilterValue() == undefined) && SearchSelectedStatus() == 0)
+                        gridTotalCount(data.TotalCount);
                         campaignGridContent.removeAll();
                         _.each(data.Coupon, function (item) {
                             campaignGridContent.push(model.Coupon.Create(updateCampaignGridItem(item)));
@@ -803,15 +855,34 @@ define("Coupons/Coupons.viewModel",
                         });
                         pager().totalCount(data.TotalCount);
                         if (data.TotalCount == 0) {
-                            isCouponSearch(true);
+                            if (gridTotalCount() >= 4) {
+                                isCouponSearch(false);
+                                islblText(false);
+                                return;
+                            }
+                            else {
+                                isCouponSearch(true);
+                            }
                             islblText(true);
                         }
                         else if (data.TotalCount == 1) {
-                            isCouponSearch(true);
+                            if (gridTotalCount() >= 4) {
+                                isCouponSearch(false);
+                                islblText(false);
+                            }
+                            else {
+                                isCouponSearch(true);
+                            }
+                            
                             islblText(false);
                         }
                         else if (data.TotalCount > 1 && data.TotalCount <= 4) {
-                            isCouponSearch(true);
+                            if (gridTotalCount() >= 4) {
+                                isCouponSearch(false);
+                            }
+                            else {
+                                isCouponSearch(true);
+                            }
                             islblText(false);
                         }
                         else {
@@ -1605,6 +1676,7 @@ getfreeCouponCount = function () {
                                     //$("#btnCancel").css("display", "none");
                                     isBtnSaveDraftVisible(false);
                                     IsResumeBtnVisible(true);
+                                    IsenableBanner(false);
                                     couponModel().StatusValue("Paused");
                                     //IsSubmitBtnVisible(true);
                                     //isTerminateBtnVisible(true);
@@ -3357,7 +3429,9 @@ getfreeCouponCount = function () {
                     dealPerOpp: dealPerOpp,
                     priceLabel: priceLabel,
                     islabelvisible: islabelvisible,
-                    IsenableBanner: IsenableBanner
+                    IsenableBanner: IsenableBanner,
+                    gridTotalCount: gridTotalCount,
+                    CampaignRatioData: CampaignRatioData
                 };
             })()
         };

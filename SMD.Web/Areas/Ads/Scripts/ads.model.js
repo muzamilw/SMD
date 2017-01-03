@@ -40,13 +40,24 @@
               CouponCategories = ko.observableArray([]),
               VideoBytes = ko.observable(VideoBytes),
               ShowBuyitBtn = ko.observable(showBuyitBtn),
-              
+                Answer1 = ko.observable(Answer1).extend({ required: true }),
+              Answer2 = ko.observable(Answer2).extend({ required: true }),
+              Answer3 = ko.observable(Answer3),
                 SurveyAnsweredAllTime = ko.observable(surveyAnsweredAllTime),
                 Answer1Stats = ko.observable(answer1Stats),
                 Answer2Stats = ko.observable(answer2Stats),
                 Answer3Stats = ko.observable(answer3Stats),
                  ModifiedDateTime = ko.observable(modifiedDateTime),
-                   
+                CampaignRatioData = ko.observable({
+                    labels: [Answer1, Answer2, Answer3],
+                    datasets: [
+                        {
+                            data: [answer1Stats, answer2Stats, answer3Stats],
+                            backgroundColor: ['green', 'blue','red']
+
+                        }]
+
+                }),
 
               StartDateTime = ko.observable((StartDateTime !== null && StartDateTime !== undefined) ? moment(StartDateTime).toDate() : undefined).extend({  // custom message
                   required: true
@@ -102,16 +113,14 @@
                       }
                   }
               }),
-              VerifyQuestion = ko.observable(VerifyQuestion),
+              VerifyQuestion = ko.observable(VerifyQuestion).extend({ required: true }),
               Voucher1Heading = ko.observable(Voucher1Heading),
               Voucher1Description = ko.observable(Voucher1Description),
               Voucher1Value = ko.observable(Voucher1Value),
               Voucher2Heading = ko.observable(Voucher2Heading),
               Voucher2Description = ko.observable(Voucher2Description),
               Voucher2Value = ko.observable(Voucher2Value),
-              Answer1 = ko.observable(Answer1),
-              Answer2 = ko.observable(Answer2),
-              Answer3 = ko.observable(Answer3),
+            
               CreatedBy = ko.observable(CreatedBy),
               CorrectAnswer = ko.observable(CorrectAnswer),
               AgeRangeStart = ko.observable(AgeRangeStart),
@@ -175,8 +184,11 @@
                // Errors
                 errors = ko.validation.group({
                     CampaignName: CampaignName,
+                    Answer1: Answer1,
+                    Answer2:Answer2,
                     DisplayTitle: DisplayTitle,
                     LandingPageVideoLink: LandingPageVideoLink,
+                    VerifyQuestion:VerifyQuestion,
                     //StartDateTime: StartDateTime,
                     //EndDateTime: EndDateTime,
                     MaxBudget: MaxBudget,
@@ -478,7 +490,8 @@
               Answer1Stats: Answer1Stats,
               Answer2Stats: Answer2Stats,
               Answer3Stats: Answer3Stats,
-              ClickRate: ClickRate
+              ClickRate: ClickRate,
+              CampaignRatioData: CampaignRatioData
 
           };
       };

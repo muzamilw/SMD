@@ -12,7 +12,8 @@ namespace SMD.Interfaces.Services
 {
     public interface ICouponService
     {
-        List<CouponCategories> GetDealsByCtgId(int CategoryID);
+        List<AdGetCouponCategories> GetDealsByCtgId(long CouponId);
+      
         IEnumerable<Coupon> GetAllCoupons();
 
         CampaignResponseModel GetCouponById(long CampaignId);
@@ -68,5 +69,7 @@ namespace SMD.Interfaces.Services
         int CouponReviewCount();
         List<GetRandom3Deal_Result> GetRandomDeals();
         CouponStatsResponse getDealStats(long Id);
+        List<CampaignResponseLocation> getDealUserLocationByCId(long CouponId);
+
     }
 }

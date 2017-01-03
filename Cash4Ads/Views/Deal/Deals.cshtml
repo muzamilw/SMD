@@ -307,13 +307,44 @@
 
     </div>
     </div>
-<div id="deals_below_panel" class="container" style="height:300px;">
+@*<div id="deals_below_panel" class="container" style="height:300px;">
     <div class="col-lg-12">
-        <div>other Deals Near You for "Lunch"</div>
+        
+
+        <div class="col-lg-6" style="padding-top: 20px; padding-left: 15px;" data-bind="visible: $root.campaignGridContent().length > 0">
+            <div class="row" style="padding-bottom:10px;">
+                <span style="font-size:20px;margin-left:5px;">Here’s some Deals listed by local advertisers</span>
+            </div>
+            <div class="row center">
+                <div class="col-lg-4">
+                    <img style="height:100px;width:166px;"  src="http://manage.cash4ads.com/SMD_Content/DamImages/633/2/text-2016-09-01_12-31-27-PM.png">
+                    <div class="main-box no-header clearfix" style="padding:8px;margin-top:1px;">
+                        <span data-bind="text:$root.dealtitle1" style="font-size:12px;font-weight:bold">Ferrari Driving Experience</span>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <img style="height:100px;width:166px;" src="/images/default-placeholder.png">
+                    <div class="main-box no-header clearfix" style="padding:8px;margin-top:1px;">
+                        <span data-bind="text:$root.dealtitle2" style="font-size:12px;font-weight:bold">oiio</span>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <img style="height:100px;width:166px;" src="http://manage.cash4ads.com/SMD_Content/DamImages/955/2/text-2016-08-31_09-03-03-AM.png">
+                    <div class="main-box no-header clearfix" style="padding:8px;margin-top:1px;">
+                        <span data-bind="text:$root.dealtitle3" style="font-size:12px;font-weight:bold">Skydive Dubai </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="padding-top:0px;padding-left:8px;padding-bottom:16px;">
+                <a href="http://cash4ads.com/" target="_blank">
+                    More...
+                </a>
+            </div>
+        </div>
 
     </div>
 
-</div>
+</div>*@
 <div class="loading" align="center" id="modalSending">
 
     @*<img src="images/rloader.gif" width="200px" />*@
@@ -340,6 +371,8 @@
                 url: Copurl,
                 cache: false,
                 success: function (response) {
+               
+                  //  GetDealCategories(response.CouponId);
                     
                     $("#couponMainHeading").html(response.CouponTitle + '<span class="mvtest_header_v1">' + '' + '</span><div class="btm-header-bg"></div>');
                     $("#voucMainSliderImg").attr('src', response.CouponImage1);
@@ -556,7 +589,23 @@
             });
 
         }
-        
+        function GetDealCategories(couponId) {
+
+            debugger;
+            var bburl = 'http://smdpreview.com/Api/DealListing/Get?CouponId=70';
+            //var bburl = 'http://smdpreview.com/Api/DealListing/Get?CouponId=' + couponId + '';
+
+            $.ajax({
+
+                dataType: "json",
+                url: bburl,
+                cache: false,
+                success: function (response) {
+                   
+                }
+            });
+
+        }
         function ShowSendingProgress() {
             var modal = $('<div  />');
             modal.addClass("modal");

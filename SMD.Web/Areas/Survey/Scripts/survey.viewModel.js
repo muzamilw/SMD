@@ -49,6 +49,7 @@ define("survey/survey.viewModel",
                     ShowAudienceCounter = ko.observable(),
                     DefaultRangeValue = ko.observable(100),
                     DefaultCountValue = ko.observable(100),
+                    gridTotalCount = ko.observable(0),
                     // criteria selection 
                     selectedCriteria = ko.observable(),
                     profileQuestionList = ko.observable([]),
@@ -100,6 +101,17 @@ define("survey/survey.viewModel",
                     qStatuses = ko.observableArray([{ id: 0, value: 'All' }, { id: 1, value: 'Draft' }, { id: 2, value: 'Panding Approval' }, { id: 3, value: 'Live' }, { id: 4, value: 'Paused' },{ id: 6, value: 'Rejected' }]);
                 statusFilterValue = ko.observable();
                 // Advertiser Analytics 
+                PieChartValue = ko.observableArray([0, 0]),
+                PieChartlabel = ko.observableArray(["", ""]),
+                CampaignRatioData = ko.observable({
+                    labels: this.PieChartlabel,
+                    datasets: [
+                        {
+                            data: this.PieChartValue,
+                            backgroundColor: ['green', 'blue', 'orange']
+
+                        }]
+                }),
                 GenderAnalyticsData = ko.observableArray([{ id: 0, name: "All" }, { id: 1, name: "male" }, { id: 2, name: "female" }]),
                 AgeRangeAnalyticsData = ko.observableArray([{ id: 0, name: "All" }, { id: 1, name: "10-20" }, { id: 2, name: "20-30" }, { id: 3, name: "30-40" }, { id: 4, name: "40-50" }, { id: 5, name: "50-60" }, { id: 6, name: "60-70" }, { id: 7, name: "70-80" }, { id: 8, name: "80-90" }, { id: 9, name: "90+" }]),
                 selectedGenderAnalytics = ko.observable(0),
@@ -200,14 +212,24 @@ define("survey/survey.viewModel",
                             ko.utils.arrayPushAll(CampaignROItblAnalyticData(), data.pieChartstbl);
                             CampaignROItblAnalyticData.valueHasMutated();
                             DDStatsAnalytics(data.filteredStat);
+                            PieChartValue.removeAll();
+                            PieChartlabel.removeAll();
+                            for (var i = 0; i < data.pieCharts.length; i++) {
+                                PieChartValue.push(data.pieCharts[i].value);
+                                PieChartlabel.push(data.pieCharts[i].label);
+
+                            };
+                            PieChartValue.valueHasMutated();
+                            PieChartlabel.valueHasMutated();
+
                             if ((selecteddateRangeAnalytics() == 1 && CampaignTblAnalyticsData()[0].C30_days > 0) || (selecteddateRangeAnalytics() == 2 && CampaignTblAnalyticsData()[0].All_time > 0)) {
 
                                 hasImpression(true);
-                                $("#donutId").html("");
-                                var browsersChart = Morris.Donut({
-                                    element: 'donutId',
-                                    data: CampaignRatioAnalyticData(), colors: ['green', 'blue', 'orange']
-                                });
+                                //$("#donutId").html("");
+                                //var browsersChart = Morris.Donut({
+                                //    element: 'donutId',
+                                //    data: CampaignRatioAnalyticData(), colors: ['green', 'blue', 'orange']
+                                //});
                             } else {
                                 hasImpression(false);
                             }
@@ -350,16 +372,36 @@ define("survey/survey.viewModel",
                 });
                 pager().totalCount(data.TotalCount);
                 totalSurveysCount(data.TotalCount);
+                if ((filterValue() == "" || filterValue() == undefined) && statusFilterValue() == 0)
+                    gridTotalCount(data.TotalCount);
                 if (data.TotalCount == 0) {
-                    isPollSearch(true);
+                    if (gridTotalCount() >= 4) {
+                        isPollSearch(false);
+                        islblText(false);
+                        return;
+                    }
+                    else {
+                        isPollSearch(true);
+                    }
                     islblText(true);
                 }
                 else if (data.TotalCount == 1) {
-                    isPollSearch(true);
+                    if (gridTotalCount() >= 4) {
+                        isPollSearch(false);
+                        islblText(false);
+                    }
+                    else {
+                        isPollSearch(true);
+                    }
                     islblText(false);
                 }
                 else if (data.TotalCount > 1 && data.TotalCount <= 4) {
-                    isPollSearch(true);
+                    if (gridTotalCount() >= 4) {
+                        isPollSearch(false);
+                    }
+                    else {
+                        isPollSearch(true);
+                    }
                     islblText(false);
                 }
                 else {
@@ -2565,7 +2607,9 @@ define("survey/survey.viewModel",
                     pollQuestion1: pollQuestion1,
                     pollQuestion2: pollQuestion2,
                     pollQuestion3: pollQuestion3,
-                    totalSurveysCount: totalSurveysCount
+                    totalSurveysCount: totalSurveysCount,
+                    gridTotalCount: gridTotalCount,
+                    CampaignRatioData: CampaignRatioData
                 };
             })()
         };

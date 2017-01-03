@@ -55,7 +55,7 @@ else
                                         <tr style="height:25px;">
                                             <th class="col-sm-2" style="vertical-align:top"><span class="GridHeaderFont_size ">Campaign Name</span></th>
                                             @*<th class="col-sm-1" style="vertical-align:top;display:none;"><span class="GridHeaderFont_size">Type</span></th>
-                    <th class="col-sm-2" style="vertical-align:top;display:none;"><span class="GridHeaderFont_size">Start Date</span></th>*@
+                                                <th class="col-sm-2" style="vertical-align:top;display:none;"><span class="GridHeaderFont_size">Start Date</span></th>*@
                                             <th class="col-sm-1" style="vertical-align:top"><span class="GridHeaderFont_size">PPCV ($)</span></th>
                                             <th class="col-sm-1" style="vertical-align:top"><span class="GridHeaderFont_size">Daily Budget($)</span></th>
                                             <th class="col-sm-1" style="vertical-align:top;text-align: right"><span class="GridHeaderFont_size">Imp.</span></th>
@@ -85,7 +85,7 @@ else
                     <div class="clearfix">
                     </div>
                 </div>
-                <div data-bind="visible: $root.campaignGridContent().length == 0" style="display:none;">
+                <div data-bind="visible: ($root.campaignGridContent().length == 0 && $root.gridTotalCount() == 0)" style="display:none;">
                     <div class="clearfix text-center" style="padding:20px;padding-bottom:10px;" data-bind="visible:$root.IsGameAds()">
                         <span style="color:white">You haven’t created any Display Ad yet</span>
                     </div>
@@ -114,7 +114,7 @@ else
         <div class="row Subpanels" style="margin-right:1px;padding-top:0px;">
             <div class="col-lg-12">
 
-                <div class="col-lg-6" style="padding-top:20px;padding-left:15px;display:none;" data-bind="visible: $root.campaignGridContent().length==0">
+                <div class="col-lg-6" style="padding-top:20px;padding-left:15px;display:none;" data-bind="visible:($root.campaignGridContent().length==0 && $root.gridTotalCount() == 0)">
                     <div class="row">
                         <span style="font-size:20px;" data-bind="visible:$root.IsGameAds()">Target & reward audiences near you</span>
                         <span style="font-size:20px;" data-bind="visible:$root.IsvideoBtn()">Target & reward audiences to watch your Video ad</span>
@@ -221,7 +221,7 @@ else
             <!-- ko if: Type() == 1-->
             <video style="width:130px;height:130px;" data-bind=" attr:{src:ImagePath()!=null?ImagePath().startsWith('http')?ImagePath():'/' + ImagePath():null}"></video>
             <!-- /ko -->
-             <br />
+            <br />
             <!-- ko if: ApprovalDateTime()-->
             <span style="color:darkgray;font-size:11px;">
                 Start Date :
@@ -242,14 +242,9 @@ else
 
             <span style="color:darkgray;font-size:11px;" data-bind="dateString:  ModifiedDateTime()"></span>
             <!-- /ko -->
-
-
-
-
-
             @*<span style="color:darkgray;font-size:11px;" data-bind="text:  ApprovalDateTime() ? 'Start Date : ' +  ApprovalDateTime() : 'Not Started'"></span>
-            <br />
-            <span style="color:darkgray;font-size:11px;" data-bind="text:  ModifiedDateTime() ? 'Last Updated : ' +  ModifiedDateTime() : ''"></span>*@
+                <br />
+                <span style="color:darkgray;font-size:11px;" data-bind="text:  ModifiedDateTime() ? 'Last Updated : ' +  ModifiedDateTime() : ''"></span>*@
         </td>
         <td class="col-sm-1"><span class="" data-bind="text: ClickRate()? '$'+ ClickRate(): '$0.0'"></span></td>
         <td class="col-sm-1"><span class="" data-bind="text: MaxDailyBudget()? '$'+ MaxDailyBudget(): '$0.0'"></span></td>
@@ -259,35 +254,46 @@ else
             <div class="col-sm-3"><span style="color:#ea2e94" data-bind="text: clickThroughsAllTime()"></span></div>
             <br />
             <div style="height:150px;width:215px;" data-bind="morris: {type: 'Bar', data: [{y:'test', a:viewCountAllTime() ,b:SurveyAnsweredAllTime() , c:clickThroughsAllTime()}],axes:false, xkey: 'y', ykeys: ['a' , 'b', 'c'], labels: ['Total Impression','Survey PPCV', 'Click Thru'], parseTime:false, setAxisAlignFirstX: true,hideHover:'always', barColors: ['green', 'blue','#ea2e94']}"></div>
-      
-        
+
+
         </td>
-        <td class="col-sm-1" >
+        <td class="col-sm-1">
             <div style="color:#ea2e94; font-size:larger;font-weight: bold;"><span data-bind="text:  viewCountAllTime()>0 ? ((clickThroughsAllTime()/viewCountAllTime())*100).toFixed(2):0"></span>%</div>
-           
+
         </td>
 
         <td class="col-sm-1">
             <div style="color:blue; font-size:larger;font-weight: bold;"><span data-bind="text: viewCountAllTime()>0 ? ((SurveyAnsweredAllTime()/viewCountAllTime())*100).toFixed(2):0"></span>%</div>
-           
+
         </td>
 
         <td class="col-sm-3">
             <!-- ko if: VerifyQuestion() != null -->
-                            <div style="font-size:small" data-bind="text:VerifyQuestion()"></div>
-                       <br />
-            <!-- ko if: Answer3() != null -->
-            <div data-bind="morris: {type: 'Donut', data: [{label: Answer1(), value: Answer1Stats()},{label: Answer2(), value: Answer2Stats()},{label: Answer3(), value: Answer3Stats()}], resize:true, colors: ['green', 'blue','red' ]  }" style="height:230px;cursor:pointer;"></div>       
+            <div style="font-size:small" data-bind="text:VerifyQuestion()"></div>
+            <br />
+            <div class="piechart">
+                <canvas data-bind="chart: { type: 'pie', data: CampaignRatioData, options: { observeChanges: true, throttle: 1000, legend: { display: false }, maintainAspectRatio: false,responsive: true } }"></canvas>
+            </div>
+                 @*<!-- ko if: Answer3() != null -->
+            <div data-bind="morris: {type: 'Donut', data: [{label: Answer1(), value: Answer1Stats()},{label: Answer2(), value: Answer2Stats()},{label: Answer3(), value: Answer3Stats()}], resize:true, colors: ['green', 'blue','red' ]  }" style="height:230px;cursor:pointer;"></div>
             <!-- /ko -->
             <!-- ko if: Answer3() == null -->
-            <div data-bind="morris: {type: 'Donut', data: [{label: Answer1(), value: Answer1Stats()},{label: Answer2(), value: Answer2Stats()}], resize:true, colors: ['green', 'blue','red' ]  }" style="height:230px;cursor:pointer;"></div>       
-            <!-- /ko -->
+            <div data-bind="morris: {type: 'Donut', data: [{label: Answer1(), value: Answer1Stats()},{label: Answer2(), value: Answer2Stats()}], resize:true, colors: ['green', 'blue','red' ]  }" style="height:230px;cursor:pointer;"></div>
+            <!-- /ko -->*@
             <!-- /ko -->
         </td>
 
         <td class="col-sm-1">
             <table class="tbl-noborder">
                 <tbody>
+                    <tr>
+                        <td>
+                            <br /><br />
+                        </td>
+                        <td>
+                           
+                        </td>
+                    </tr>
                     <!-- ko if: Answer1() != null -->
                     <tr>
                         <td>
@@ -320,10 +326,10 @@ else
                     <!-- /ko -->
                 </tbody>
             </table>
-         </td>
-       
-        <td class="col-sm-1" >
-            <div style ="font-size:larger;font-weight:bold;">
+        </td>
+
+        <td class="col-sm-1">
+            <div style="font-size:larger;font-weight:bold;">
                 <!-- ko if: Status() == 1-->
                 <span style="color:#6D6EFA; " data-bind="text: StatusValue">
                 </span>
@@ -358,36 +364,38 @@ else
                 <!-- ko if: Status() == 9-->
                 <span style="color:red; " data-bind="text: StatusValue"> </span>
                 <!-- /ko -->
-                </div>
-           
-                <br />
-                <div class="text-left statusbg" data-bind="click:$root.onEditCampaign" style="background:#37c675;width:95px;white-space:nowrap;">
-                    <span >
-                        Edit Campaign
-                    </span>
+            </div>
 
-                </div>
-                <br />
-                <div class="text-left statusbg" data-bind="click:$root.openAdvertiserDashboardScreen" style="background:blue;width:95px;white-space:nowrap;">
-                    <span>
-                        Analyze Charts
-                    </span>
-                </div>
             <br />
-           
-                <div style="text-align: center;">
-                    <!-- ko if: Status() == 1 ||  Status() == 4|| Status() ==  6-->
-                    <a class="table-link danger" >
-                        <span class="fa-stack">
-                            <i class="fa fa-square fa-stack-2x"></i>
-                            <i class="fa fa-trash-o fa-stack-1x fa-inverse" data-bind="click:$root.removeAdd"></i>
-                        </span>
-                    </a>
-                    <!-- /ko -->
-                </div>
+            <div class="text-left statusbg" data-bind="click:$root.onEditCampaign" style="background:#37c675;width:95px;white-space:nowrap;">
+                <span>
+                    Edit Campaign
+                </span>
 
-</td>
-       
+            </div>
+            <br />
+            <!-- ko if: Status() != 1 &&  Status() != 2 && Status() !=  6-->
+           
+            <div class="text-left statusbg" data-bind="click:$root.openAdvertiserDashboardScreen" style="background:blue;width:95px;white-space:nowrap;">
+                <span>
+                    Analyze Charts
+                </span>
+            </div>
+            <br />
+            <!-- /ko -->
+            <div style="text-align: center;">
+                <!-- ko if: Status() == 1 ||  Status() == 4|| Status() ==  6-->
+                <a class="table-link danger">
+                    <span class="fa-stack">
+                        <i class="fa fa-square fa-stack-2x"></i>
+                        <i class="fa fa-trash-o fa-stack-1x fa-inverse" data-bind="click:$root.removeAdd"></i>
+                    </span>
+                </a>
+                <!-- /ko -->
+            </div>
+
+        </td>
+
     </tr>
 </script>
 @* Filter Template *@
@@ -415,7 +423,7 @@ else
         <div class="row">
 
             <form data-bind="submit: $root.getCampaignByFilter">
-                <div id="filter_block" >
+                <div id="filter_block">
 
                     <div class="col-sm-2" style="float:left;">
                         <div class="filter-block " style="margin-right: -10px" data-bind="visible:$root.isAdSearch()==false">
@@ -474,8 +482,11 @@ else
 <!-- /ko -->
 @section Scripts{
     <script src="~/Scripts/jquery.tokenize.js"></script>
-
-
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script src="~/Scripts/heatmap.min.js"></script>
+    <script src="~/Scripts/gmaps-heatmap.js"></script>
+    <script src="~/Scripts/chart.js"></script>
+    <script src="~/Scripts/Charts/knockout.chart.js"></script>
     <script type="text/javascript">
         var mode = 1;
         require(["ads/ads.view", "common/stripeChargeCustomer.view", "common/confirmation.view", ]);
@@ -492,7 +503,7 @@ else
             return 0;
         }
         $(document).ready(function () {
-            
+
             $("#main_btnPannels").css("display", "none");
             $("#MarketobjDiv").css("display", "none");
             $(".hideInCoupons").css("display", "none");

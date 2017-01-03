@@ -1,5 +1,6 @@
 ﻿using SMD.Interfaces.Services;
 using SMD.Models.DomainModels;
+using SMD.Models.ResponseModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,10 +18,12 @@ namespace SMD.MIS.Areas.Api.Controllers
         {
             _couponService = couponService;
         }
-        
-        public List<CouponCategories> Get(int categoryid)
+
+        public List<AdGetCouponCategories> Get(long CouponId) 
         {
-            return _couponService.GetDealsByCtgId(categoryid);
+            var ct = _couponService.GetDealsByCtgId(CouponId);
+
+            return _couponService.GetDealsByCtgId(CouponId);
         }
     }
 }

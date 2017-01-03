@@ -89,14 +89,15 @@
             </div>
             <div class="row">
                 <div class="col-lg-6">
-                    <div class="whiteBox margin10">
-                        <div id="donutId" style="height:230px;cursor: pointer;"></div>
+                    <div class="whiteBox margin10" style="height:230px;">
+                        @*<div id=" donutid" style="height:230px;cursor: pointer;"></div>*@
+                        <canvas style=" cursor:pointer;" data-bind="chart: { type: 'pie', data: $root.CampaignRatioData, options: { observeChanges: true, throttle: 1000 } }" width="340"></canvas>
                     </div>
 
                 </div>
                 <div class="col-lg-6">
-                    <div class="lightgrayBox">
-                        <table style="height:230px;">
+                    <div class="lightgrayBox" style="height:230px;">
+                        <table >
                             <thead>
                                 <tr>
                                     <th>
@@ -132,7 +133,7 @@
             <div class="row">
 
                 <div class="col-lg-12">
-                    <div class="whiteBox">
+                    <div class="whiteBox" >
                         <table class="roitbl">
                             <!-- ko template: { name: 'CampaignROITblAnalyticsDataTemplate' , foreach: $root.CampaignROItblAnalyticData } -->
                             <!-- /ko -->
@@ -279,6 +280,7 @@
                 </div>
             </div>
             <br />
+            </div>
             <div class="analyticsBox">
                 <div class="row">
                     <div class="col-lg-12">
@@ -288,8 +290,8 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class=" margin10">
-                            <div style="text-align: -webkit-center;">
-                                <img style="height:250px;" src="~/Content/Images/HeatMap.jpg" />
+                            <div style="height:250px;" id="heatmapId">
+                                @*<img style="height:250px;" src="~/Content/Images/HeatMap.jpg" />*@
 
 
                             </div>
@@ -298,7 +300,7 @@
 
                 </div>
             </div>
-        </div>
+       
 
         <div class="clearfix">
         </div>

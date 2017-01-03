@@ -1256,10 +1256,16 @@ namespace SMD.Implementation.Services
         {
             return couponRepository.getDealStats(Id);
         }
-        public List<CouponCategories> GetDealsByCtgId(int CategoryID)
+
+        public List<CampaignResponseLocation> getDealUserLocationByCId(long CouponId)
         {
-            return couponRepository.GetDealsByCtgId(CategoryID);
+            return _userCouponViewRepository.getDealUserLocationByCId(CouponId);
         }
+        public List<AdGetCouponCategories> GetDealsByCtgId(long CouponId)
+        {
+             return couponRepository.GetDealsByCtgId(CouponId);
+        }
+
         #endregion
     }
 }

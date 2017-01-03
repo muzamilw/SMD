@@ -21,3 +21,17 @@ input:not(:focus):valid ~ .floating-label{
   top: 18px;
   transition: 0.2s ease all;
 }
+.dealDaysLabel {
+    font-weight:bold;
+    color:lightgray;
+    font-size:14px;
+}
+.dealsavLabel {
+   
+    color:green;
+    
+}
+.dealPerLabel {
+   
+    font-size:13px;
+}
