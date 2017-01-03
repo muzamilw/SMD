@@ -563,7 +563,7 @@ define("survey/survey.viewModel",
                     return 0;
                 }
                 else {
-                    return "£" + (setupPrice + (selectedQuestion().answerNeeded() * PircePerclick)).toFixed(2) + " Pound";
+                    return "£" + (setupPrice + (selectedQuestion().answerNeeded() * PircePerclick)).toFixed(2) + " GBP";
 
                     //ansNeeeded = selectedQuestion().answerNeeded();
                     //if (ansNeeeded > 0 && ansNeeeded <= 1000) {
