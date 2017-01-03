@@ -629,3 +629,7 @@ svg{
     vertical-align :initial;
 
 }
+.piechart{
+    height:150px;
+    width:150px;
+}

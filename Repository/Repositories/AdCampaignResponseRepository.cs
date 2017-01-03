@@ -47,7 +47,25 @@ namespace SMD.Repository.Repositories
         {
             return db.getCampaignByIdQQFormAnalytic(CampaignId, Choice, Gender, age, Profession, City, type, questionId).ToList().FirstOrDefault();
         }
+        public List<CampaignResponseLocation> getCampaignUserLocationByCId(long campaignId)
+        {
+            var result = DbSet.Where(g => g.CampaignId == campaignId & g.ResponseType == 1)
+                            .GroupBy(ac => new
+                            {
+                                ac.UserLocationLat,
+                                ac.UserLocationLong,
+                                
+                            })
+                            .Select(ac => new CampaignResponseLocation
+                            {
+                                lat = ac.Key.UserLocationLat,
+                                lng = ac.Key.UserLocationLong,
+                                count = ac.Count()
+                            }).ToList();
 
+
+            return result;
+        }
        
     }
 }

@@ -1918,11 +1918,16 @@
     <Content Include="Scripts\Ace\lib\ace\worker-css.js" />
     <Content Include="Scripts\autoNumeric\autoNumeric-1.9.25.js" />
     <Content Include="Scripts\autoNumeric\autoNumeric-1.9.25.min.js" />
+    <Content Include="Scripts\chart.js" />
     <Content Include="Scripts\Charts\Chart.js" />
     <Content Include="Scripts\Charts\exporting.js" />
     <Content Include="Scripts\Charts\highcharts.js" />
     <Content Include="Scripts\Charts\jquery-2.1.4.min.js" />
     <Content Include="Scripts\Charts\jquery.min.js" />
+    <Content Include="Scripts\Charts\knockout.chart.js" />
+    <Content Include="Scripts\gmaps-heatmap.js" />
+    <Content Include="Scripts\heatmap.js" />
+    <Content Include="Scripts\heatmap.min.js" />
     <Content Include="Scripts\intlTelInput.min.js" />
     <Content Include="Scripts\intphnumutils.js" />
     <Content Include="Scripts\jquery.imgareaselect.js" />

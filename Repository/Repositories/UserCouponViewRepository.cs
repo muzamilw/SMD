@@ -5,6 +5,7 @@ using SMD.Models.DomainModels;
 using SMD.Repository.BaseRepository;
 using System;
 using System.Data.Entity;
+using System.Collections.Generic;
 
 namespace SMD.Repository.Repositories
 {
@@ -35,7 +36,26 @@ namespace SMD.Repository.Repositories
         }
         #endregion
         #region Public
+        public List<CampaignResponseLocation> getDealUserLocationByCId(long CouponId)
+        {
+            var result = DbSet.Where(g => g.CouponId == CouponId)
+                            .GroupBy(ac => new
+                            {
+                                ac.userLocationLAT,
+                                ac.userLocationLONG,
 
+                            })
+                            .Select(ac => new CampaignResponseLocation
+                            {
+                                lat = ac.Key.userLocationLAT,
+                                lng = ac.Key.userLocationLONG,
+                                count = ac.Count()
+                            }).ToList();
+
+
+            return result;
+        }
+      
        
         #endregion
     }

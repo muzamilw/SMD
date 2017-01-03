@@ -101,7 +101,7 @@ define("FranchiseDashboard/payPallApp.viewModel",
 
                     },
                     onRejectPayOut = function () {
-                          confirmation.messageText("Do you want to Reject this PayOut ?");
+                          confirmation.messageText("Do you want to reject this payout?  ");
                           confirmation.show();
                           confirmation.afterCancel(function () {
                               confirmation.hide();
@@ -123,7 +123,7 @@ define("FranchiseDashboard/payPallApp.viewModel",
 
                     },
                     onApprovePayOut = function () {
-                          confirmation.messageText("Do you want to Approve this PayOut ?");
+                          confirmation.messageText("Do you want to approve this payout?");
                           confirmation.show();
                           confirmation.afterCancel(function () {
                               confirmation.hide();
@@ -145,7 +145,7 @@ define("FranchiseDashboard/payPallApp.viewModel",
 
                       },
                     onInvestigationPayOut = function () {
-                             confirmation.messageText("Do you want to Investigate this PayOut ?");
+                             confirmation.messageText("Do you want to investigate this payout?  ");
                              confirmation.show();
                              confirmation.afterCancel(function () {
                                  confirmation.hide();

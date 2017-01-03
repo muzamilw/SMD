@@ -171,7 +171,17 @@ define("ads/ads.viewModel",
                 CurrPage = ko.observable(9);
                 MaxPage = ko.observable(12);
                 // Advertiser dashBoard Section
-                TestDonut = ko.observableArray([{ label: 'download sales', value: 12 }, { label: 'In-Store Sales', value: 30 }, { label: 'Mail-Order Sales', value: 20 }]),
+                PieChartValue = ko.observableArray([0, 0]),
+                PieChartlabel = ko.observableArray(["", ""]),
+                CampaignRatioData = ko.observable({
+                    labels: this.PieChartlabel,
+                    datasets: [
+                        {
+                            data: this.PieChartValue,
+                            backgroundColor: ['green', 'blue','red' ,'orange','pink']
+
+                        }]
+                }),
                 selectedCampStatusAnalytics = ko.observable(1),
 				selecteddateRangeAnalytics = ko.observable(1),
 				selectedGranularityAnalytics = ko.observable(1),
@@ -274,7 +284,7 @@ define("ads/ads.viewModel",
                               Gender: item.selectedGenderAnalytics(),
                               age: item.selectedAgeAnalytics(),
                               profession: "All",
-                              City: item.selectedCityAnalytics() != undefined ? item.selectedCityAnalytics() : "All",
+                              City: item.selectedCityAnalytics() ? item.selectedCityAnalytics() : "All",
                               QId: item.Id(),
                               type: item.typ()
                           }, {
@@ -299,7 +309,7 @@ define("ads/ads.viewModel",
                         Gender: selectedQQGAnalytics(),
                         age: selectedQQAAnalytics(),
                         profession: selectedQQPAnalytics(),
-                        City: selectedQQCtAnalytics(),
+                        City: selectedQQCtAnalytics()?selectedQQCtAnalytics():'All',
                         QId: 0,
                         type: 1
                     }, {
@@ -365,7 +375,7 @@ define("ads/ads.viewModel",
                 },
 				getAdsByCampaignIdAnalytics = function () {
 				    dataservice.getAdsByCampaignIdAnalytics({
-				        compaignId: selectedCampaignIdAnalytics(),
+				        campaignId: selectedCampaignIdAnalytics(),
 				        CampStatus: selectedCampStatusAnalytics(),
 				        dateRange: selecteddateRangeAnalytics(),
 				        Granularity: selectedGranularityAnalytics(),
@@ -391,24 +401,53 @@ define("ads/ads.viewModel",
 				                PerGenderChartAnalyticsData.removeAll();
 				                ko.utils.arrayPushAll(PerGenderChartAnalyticsData(), data.PerGenderChart);
 				                PerGenderChartAnalyticsData.valueHasMutated();
+				                PieChartValue.removeAll();
+				                PieChartlabel.removeAll();
+				                for (var i = 0; i < data.pieCharts.length; i++) {
+				                    PieChartValue.push(data.pieCharts[i].value);
+				                    PieChartlabel.push(data.pieCharts[i].label);
 
+				                };
+				                PieChartValue.valueHasMutated();
+				                PieChartlabel.valueHasMutated();
 
 
 
 				                if ((selecteddateRangeAnalytics() == 1 && CampaignTblAnalyticsData()[0].C30_days > 0) || (selecteddateRangeAnalytics() == 2 && CampaignTblAnalyticsData()[0].All_time > 0)) {
+				                    var myLatlng = new google.maps.LatLng(51.509865, -0.118092);
+				                    var myOptions = {
+				                        zoom: 3,
+				                        center: myLatlng
+				                    };
+				                    map = new google.maps.Map(document.getElementById("heatmapId"), myOptions);
+				                    heatmap = new HeatmapOverlay(map,
+                                      {
+                                          "radius": 2,
+                                          "maxOpacity": 1,
+                                          "scaleRadius": true,
+                                          "useLocalExtrema": true,
+                                          latField: 'lat',
+                                          lngField: 'lng',
+                                          valueField: 'count'
+                                      }
+                                    );
 
+				                    var testData = {
+				                        max: 8,
+				                        data: data.UserLocation
+				                    };
+
+				                    heatmap.setData(testData);
 				                    hasImpression(true);
-				                    $("#donutId").html("")
-				                    var DonutChart = Morris.Donut({
-				                        element: 'donutId',
-				                        data: CampaignRatioAnalyticData(), colors: ['green', 'blue', 'orange']
-				                    });
+				                    
+				                    $("#GenderBarChartId").html("");
+				                    $("#AgeBarChartId").html("");
+				                    
 				                    var BarChart1 = Morris.Bar({
 				                        element: 'AgeBarChartId',
 				                        data: PerAgeChartAnalyticsData(),
 				                        xkey: 'city', ykeys: ['C10_20', 'C20_30', 'C30_40', 'C40_50', 'C50_60', 'C60_70', 'C70_80', 'C80_90', 'C90_'], labels: ['10_20', '20_30', '30_40', '40_50', '50_60', '60_70', '70_80', '80_90', '90+']
-				                        //parseTime:false, setAxisAlignFirstX: true,
-				                        //barColors: ['green', 'blue', 'orange']
+				                       
 				                    });
 				                    var BarChart2 = Morris.Bar({
 				                        element: 'GenderBarChartId',
@@ -1256,7 +1295,7 @@ define("ads/ads.viewModel",
                   if (item.Status() == 1) {
                       campaignModel(item);
                   }
-                  confirmation.messageText("Are you sure you want to remove this Ad ? This action cannot be undone.");
+                  confirmation.messageText("Are you sure you want to remove this Ad?  This action cannot be undone.");
                   confirmation.show();
                   confirmation.afterCancel(function () {
                       confirmation.hide();
@@ -2095,7 +2134,6 @@ define("ads/ads.viewModel",
                   },
                 Changefilter = function () {
 
-                    debugger;
                     $.browser.chrome = /chrome/.test(navigator.userAgent.toLowerCase());
 
                     /* Detect Chrome */
@@ -3107,7 +3145,7 @@ define("ads/ads.viewModel",
                             $("#spinnerAudience").css("display", "none");
                             reachedAudience(data.MatchingUsers);
                             ShowAudienceCounter(GetAudienceCount(data.MatchingUsers));
-                            debugger;
+                            
 
                             totalAudience(data.AllUsers);
                             var percent = data.MatchingUsers / data.AllUsers;
@@ -3494,7 +3532,7 @@ define("ads/ads.viewModel",
                             QuestionId: 0,
                         }, {
                             success: function (data) {
-                                debugger;
+                                
                                 if (data != null) {
                                     myQuizQuestions([]);
                                     ko.utils.arrayPushAll(myQuizQuestions(), data.AdCampaigns);
@@ -4027,9 +4065,9 @@ define("ads/ads.viewModel",
                     VideoLink3: VideoLink3,
                     headText: headText,
                     ischartOpened: ischartOpened,
-                    TestDonut: TestDonut,
                     totalvideoAdsCount: totalvideoAdsCount,
-                    gridTotalCount: gridTotalCount
+                    gridTotalCount: gridTotalCount,
+                    CampaignRatioData: CampaignRatioData
                 };
             })()
         };

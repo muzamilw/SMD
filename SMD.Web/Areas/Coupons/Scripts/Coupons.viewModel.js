@@ -213,6 +213,17 @@ define("Coupons/Coupons.viewModel",
 					CurrPage = ko.observable(9);
                 MaxPage = ko.observable(12);
                 // advertiser analytics 
+                PieChartValue = ko.observableArray([0, 0]),
+                PieChartlabel = ko.observableArray(["", ""]),
+                CampaignRatioData = ko.observable({
+                    labels: this.PieChartlabel,
+                    datasets: [
+                        {
+                            data: this.PieChartValue,
+                            backgroundColor: ['green', 'blue', 'orange']
+                           
+                        }]                    
+                }),
                 isAdvertdashboardDealVisible = ko.observable(false),
                 selecteddateRangeAnalytics = ko.observable(1),
                 selectedGranularityAnalytics = ko.observable(1),
@@ -563,14 +574,52 @@ define("Coupons/Coupons.viewModel",
                             dealExpirydate(data.expiryDate);
                             DDCTStatsAnalytics(data.ClickTrouStat);
                             DDOStatsAnalytics(data.ImpressionStat);
+                            PieChartValue.removeAll();
+                            PieChartlabel.removeAll();
+                            for(var i = 0; i < data.pieCharts.length; i++) {
+                                PieChartValue.push(data.pieCharts[i].value);
+                                PieChartlabel.push(data.pieCharts[i].label);
+
+                            };
+                            PieChartValue.valueHasMutated();
+                            PieChartlabel.valueHasMutated();
                             if (CampaignRatioAnalyticData()[0].value > 0) {
 
                                 hasImpression(true);
-                                $("#donutId").html("");
-                                var browsersChart = Morris.Donut({
-                                    element: 'donutId',
-                                    data: CampaignRatioAnalyticData(), colors: ['green', 'blue', 'orange']
-                                });
+
+                                //$("#donutId").html("");
+                                //var browsersChart = Morris.Donut({
+                                //    element: 'donutId',
+                                //    data: CampaignRatioAnalyticData(), colors: ['green', 'blue', 'orange']
+                                //});
+                           
+
+                               // DynamicDoughnutData().datasets[0].data = [20, 30, 50];
+                                
+                                
+                                var myLatlng = new google.maps.LatLng(51.509865, -0.118092);
+                                var myOptions = {
+                                    zoom: 3,
+                                    center: myLatlng
+                                };
+                                map = new google.maps.Map(document.getElementById("heatmapId"), myOptions);
+                                heatmap = new HeatmapOverlay(map,
+                                  {
+                                      "radius": 2,
+                                      "maxOpacity": 1,
+                                      "scaleRadius": true,
+                                      "useLocalExtrema": true                                     
+                                  }
+                                );
+
+                                var testData = {
+                                    max: 8,
+                                    data: data.UserLocation
+                                };
+
+                                heatmap.setData(testData);
+
+
                             } else {
                                 hasImpression(false);
                             }
@@ -1227,7 +1276,7 @@ getfreeCouponCount = function () {
             if (hasErrors)
                 return;
             if (freeCouponCount() == 0 && (UserAndCostDetail().StripeSubscriptionStatus == null || UserAndCostDetail().StripeSubscriptionStatus == "canceled") && couponModel().CouponListingMode() == 2) {
-                confirmation.messageText("Your deal cannot be submitted for 30 days.Please subscribe to avail unlimited deals.");
+                confirmation.messageText("Your deal cannot be submitted for 30 days." + "<br\>" + "Please subscribe to avail unlimited deals.");
                 confirmation.afterProceed(function () {
                     stripeChargeCustomer.show(function () {
                         UserAndCostDetail().isStripeIntegrated = true;
@@ -1260,7 +1309,7 @@ getfreeCouponCount = function () {
             }
             else {
                 if (couponModel().CouponListingMode() == 1 && couponModel().CouponPriceOptions().length > 1 && (UserAndCostDetail().StripeSubscriptionStatus == null ||UserAndCostDetail().StripeSubscriptionStatus == "canceled")) {
-                    confirmation.messageText("Your deal cannot be submitted as it has more than one deal headlines. Please subscribe to avail unlimited deal headlines.");
+                    confirmation.messageText("Your deal cannot be submitted as it has more than one deal headlines." + "<br\>" + "Please subscribe to avail unlimited deal headlines.");
                     confirmation.afterProceed(function () {
                         stripeChargeCustomer.show(function () {
                             UserAndCostDetail().isStripeIntegrated = true;
@@ -1291,7 +1340,7 @@ getfreeCouponCount = function () {
                             else {
                                 if (UserAndCostDetail().isStripeIntegrated == false) {
                                     if (couponModel().CouponPriceOptions().length > 1 && UserAndCostDetail().StripeSubscriptionStatus != 'active' && couponModel().CouponListingMode() != 2) {
-                                        confirmation.messageText("Your deal cannot be submitted as it has more than one deal headlines. Please subscribe to avail unlimited deal headlines.");
+                                        confirmation.messageText("Your deal cannot be submitted as it has more than one deal headlines. " + "<br\>" + "Please subscribe to avail unlimited deal headlines.");
                                         confirmation.afterProceed(function () {
                                             stripeChargeCustomer.show(function () {
                                                 UserAndCostDetail().isStripeIntegrated = true;
@@ -1331,7 +1380,7 @@ getfreeCouponCount = function () {
               { couponModel(item); }
 
 
-              confirmation.messageText("Are you sure you want to remove this Deal ? This action cannot be undone.");
+              confirmation.messageText("Are you sure you want to remove this Deal?  This action cannot be undone. ");
               confirmation.show();
               confirmation.afterCancel(function () {
                   confirmation.hide();
@@ -1471,7 +1520,7 @@ getfreeCouponCount = function () {
                  },
                 // Delete a Price option
                 onDeletePriceOption = function (priceOption) {
-                    confirmation.messageText("WARNING - This item will be removed from the system and you won’t be able to recover.  There is no undo");
+                    confirmation.messageText("WARNING - This item will be removed from the system and you won’t be able to recover.  There is no undo.");
                     confirmation.afterProceed(function () {
                         couponModel().CouponPriceOptions.remove(priceOption);
                     });
@@ -3381,7 +3430,8 @@ getfreeCouponCount = function () {
                     priceLabel: priceLabel,
                     islabelvisible: islabelvisible,
                     IsenableBanner: IsenableBanner,
-                    gridTotalCount: gridTotalCount
+                    gridTotalCount: gridTotalCount,
+                    CampaignRatioData: CampaignRatioData
                 };
             })()
         };

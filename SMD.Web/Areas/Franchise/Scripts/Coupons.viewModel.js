@@ -228,7 +228,7 @@ define("FranchiseDashboard/Coupons.viewModel",
                             });
                     },
                     onApproveCoupon = function () {
-                        var conformTet = "Do you want to approve this Deal ? " + "<br\>" + "System will attempt to collect payment and generate invoice";
+                        var conformTet = "Do you want to approve this deal? " + "<br\>" + "System will attempt to collect payment and generate invoice.";
                         confirmation.messageText(conformTet);
                         confirmation.show();
                         confirmation.afterCancel(function () {
@@ -353,7 +353,7 @@ define("FranchiseDashboard/Coupons.viewModel",
                     }),
                     onRejectCoupon = function () {
 
-                        confirmation.messageText("Do you want to Reject this deal ?");
+                        confirmation.messageText("Do you want to reject this deal?  ");
                         confirmation.show();
                         confirmation.afterCancel(function () {
                             confirmation.hide();
