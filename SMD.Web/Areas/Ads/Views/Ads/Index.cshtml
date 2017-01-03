@@ -56,8 +56,8 @@ else
                                             <th class="col-sm-2" style="vertical-align:top"><span class="GridHeaderFont_size ">Campaign Name</span></th>
                                             @*<th class="col-sm-1" style="vertical-align:top;display:none;"><span class="GridHeaderFont_size">Type</span></th>
                                                 <th class="col-sm-2" style="vertical-align:top;display:none;"><span class="GridHeaderFont_size">Start Date</span></th>*@
-                                            <th class="col-sm-1" style="vertical-align:top"><span class="GridHeaderFont_size">PPCV ($)</span></th>
-                                            <th class="col-sm-1" style="vertical-align:top"><span class="GridHeaderFont_size">Daily Budget($)</span></th>
+                                            <th class="col-sm-1" style="vertical-align:top"><span class="GridHeaderFont_size">PPCV (£)</span></th>
+                                            <th class="col-sm-1" style="vertical-align:top"><span class="GridHeaderFont_size">Daily Budget(£)</span></th>
                                             <th class="col-sm-1" style="vertical-align:top;text-align: right"><span class="GridHeaderFont_size">Imp.</span></th>
                                             <th class="col-sm-1" style="vertical-align:top"><span class="GridHeaderFont_size">Survey PPCV</span></th>
                                             <th class="col-sm-1" style="vertical-align:top"><span class="GridHeaderFont_size">Click Thru</span></th>
@@ -246,8 +246,8 @@ else
                 <br />
                 <span style="color:darkgray;font-size:11px;" data-bind="text:  ModifiedDateTime() ? 'Last Updated : ' +  ModifiedDateTime() : ''"></span>*@
         </td>
-        <td class="col-sm-1"><span class="" data-bind="text: ClickRate()? '$'+ ClickRate(): '$0.0'"></span></td>
-        <td class="col-sm-1"><span class="" data-bind="text: MaxDailyBudget()? '$'+ MaxDailyBudget(): '$0.0'"></span></td>
+        <td class="col-sm-1"><span class="" data-bind="text: ClickRate()? '£'+ ClickRate(): '£0.0'"></span></td>
+        <td class="col-sm-1"><span class="" data-bind="text: MaxDailyBudget()? '£'+ MaxDailyBudget(): '£0.0'"></span></td>
         <td class="col-sm-3" colspan="3" style="text-align: right;">
             <div class="col-sm-3"><span style="color:green" data-bind="text: viewCountAllTime()"></span></div>
             <div class="col-sm-3"><span style="color:blue" data-bind="text:SurveyAnsweredAllTime() "></span></div>

@@ -99,7 +99,7 @@ define("FranchiseDashboard/surveyQuestionApp.viewModel",
                     }),
                     onRejectQuestion = function () {
 
-                        confirmation.messageText("Do you want to Reject this Survay Cards ?");
+                        confirmation.messageText("Do you want to reject this survay card?");
                         confirmation.show();
                         confirmation.afterCancel(function () {
                             confirmation.hide();
@@ -156,7 +156,7 @@ define("FranchiseDashboard/surveyQuestionApp.viewModel",
                        },
                     onApproveQuestion = function () {
 
-                        confirmation.messageText("Do you want to approve this Poll ?"+ "<br\>" +"System will attempt to collect payment and generate invoice");
+                        confirmation.messageText("Do you want to approve this poll?"+ "<br\>" +"System will attempt to collect payment and generate invoice.");
                          confirmation.show();
                          confirmation.afterCancel(function () {
                              confirmation.hide();

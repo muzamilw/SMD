@@ -1276,7 +1276,7 @@ getfreeCouponCount = function () {
             if (hasErrors)
                 return;
             if (freeCouponCount() == 0 && (UserAndCostDetail().StripeSubscriptionStatus == null || UserAndCostDetail().StripeSubscriptionStatus == "canceled") && couponModel().CouponListingMode() == 2) {
-                confirmation.messageText("Your deal cannot be submitted for 30 days.Please subscribe to avail unlimited deals.");
+                confirmation.messageText("Your deal cannot be submitted for 30 days." + "<br\>" + "Please subscribe to avail unlimited deals.");
                 confirmation.afterProceed(function () {
                     stripeChargeCustomer.show(function () {
                         UserAndCostDetail().isStripeIntegrated = true;
@@ -1309,7 +1309,7 @@ getfreeCouponCount = function () {
             }
             else {
                 if (couponModel().CouponListingMode() == 1 && couponModel().CouponPriceOptions().length > 1 && (UserAndCostDetail().StripeSubscriptionStatus == null ||UserAndCostDetail().StripeSubscriptionStatus == "canceled")) {
-                    confirmation.messageText("Your deal cannot be submitted as it has more than one deal headlines. Please subscribe to avail unlimited deal headlines.");
+                    confirmation.messageText("Your deal cannot be submitted as it has more than one deal headlines." + "<br\>" + "Please subscribe to avail unlimited deal headlines.");
                     confirmation.afterProceed(function () {
                         stripeChargeCustomer.show(function () {
                             UserAndCostDetail().isStripeIntegrated = true;
@@ -1340,7 +1340,7 @@ getfreeCouponCount = function () {
                             else {
                                 if (UserAndCostDetail().isStripeIntegrated == false) {
                                     if (couponModel().CouponPriceOptions().length > 1 && UserAndCostDetail().StripeSubscriptionStatus != 'active' && couponModel().CouponListingMode() != 2) {
-                                        confirmation.messageText("Your deal cannot be submitted as it has more than one deal headlines. Please subscribe to avail unlimited deal headlines.");
+                                        confirmation.messageText("Your deal cannot be submitted as it has more than one deal headlines. " + "<br\>" + "Please subscribe to avail unlimited deal headlines.");
                                         confirmation.afterProceed(function () {
                                             stripeChargeCustomer.show(function () {
                                                 UserAndCostDetail().isStripeIntegrated = true;
@@ -1380,7 +1380,7 @@ getfreeCouponCount = function () {
               { couponModel(item); }
 
 
-              confirmation.messageText("Are you sure you want to remove this Deal ? This action cannot be undone.");
+              confirmation.messageText("Are you sure you want to remove this Deal?  This action cannot be undone. ");
               confirmation.show();
               confirmation.afterCancel(function () {
                   confirmation.hide();
@@ -1520,7 +1520,7 @@ getfreeCouponCount = function () {
                  },
                 // Delete a Price option
                 onDeletePriceOption = function (priceOption) {
-                    confirmation.messageText("WARNING - This item will be removed from the system and you won’t be able to recover.  There is no undo");
+                    confirmation.messageText("WARNING - This item will be removed from the system and you won’t be able to recover.  There is no undo.");
                     confirmation.afterProceed(function () {
                         couponModel().CouponPriceOptions.remove(priceOption);
                     });

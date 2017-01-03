@@ -563,7 +563,7 @@ define("survey/survey.viewModel",
                     return 0;
                 }
                 else {
-                    return "$ " + (setupPrice + (selectedQuestion().answerNeeded() * PircePerclick)).toFixed(2) + " usd";
+                    return "£" + (setupPrice + (selectedQuestion().answerNeeded() * PircePerclick)).toFixed(2) + " Pound";
 
                     //ansNeeeded = selectedQuestion().answerNeeded();
                     //if (ansNeeeded > 0 && ansNeeeded <= 1000) {
@@ -2102,7 +2102,7 @@ define("survey/survey.viewModel",
                      //$("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign").removeAttr('disabled');
                  },
                 terminateSaveChanges = function (item) {
-                    confirmation.messageText("Are you sure you want to remove this Poll ? This action cannot be undone.");
+                    confirmation.messageText("Are you sure you want to remove this Poll?  This action cannot be undone.");
                     confirmation.show();
                     confirmation.afterCancel(function () {
                         confirmation.hide();
