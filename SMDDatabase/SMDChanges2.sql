@@ -3722,3 +3722,30 @@ ADD
 VoucherCode2 Varchar(100) Null,
 VoucherCode3 Varchar(100) Null,
 VoucherCode4 Varchar(100) Null
+
+
+
+USE [SMDv2]
+GO
+
+/****** Object:  Table [dbo].[CompanyComments]    Script Date: 12/27/2016 4:33:16 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[CompanyComments](
+	[CommentId] [int] IDENTITY(1,1) NOT NULL,
+	[CompanyId] [int] NULL,
+	[CommentsDateTime] [datetime] NULL,
+	[Comments] [nvarchar](max) NULL,
+	[CommentingUserId] [nvarchar](128) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[CommentId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+

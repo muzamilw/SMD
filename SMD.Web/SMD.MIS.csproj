@@ -1531,6 +1531,9 @@
     <Content Include="games\bouncingball\img\kik.png" />
     <Content Include="games\bouncingball\img\more.png" />
     <Content Include="games\bouncingball\index.html" />
+    <Content Include="games\connect4\index.html" />
+    <Content Include="games\connect4\script.js" />
+    <Content Include="games\connect4\style.css" />
     <Content Include="Global.asax" />
     <Content Include="Images\1_Splash_screen_1.png" />
     <Content Include="Images\accent.png" />

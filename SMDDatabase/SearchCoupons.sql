@@ -1,10 +1,11 @@
 ﻿USE [SMDv2]
 GO
-/****** Object:  StoredProcedure [dbo].[SearchCoupons]    Script Date: 12/2/2016 3:41:42 PM ******/
+/****** Object:  StoredProcedure [dbo].[SearchCoupons]    Script Date: 12/21/2016 5:50:27 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 ALTER PROCEDURE [dbo].[SearchCoupons]
 --   EXEC [dbo].[SearchCoupons] 		@categoryId =0,		@type = 1,		@keywords = N'',		@distance = 1000000000,		@Lat = N'31.483177',		@Lon = N'74.288167',		@UserId = N'b18b8879-055f-406f-8fbb-e2e8bf286ca5',		@FromRow = 0,		@ToRow = 100
@@ -68,9 +69,9 @@ DECLARE @source geography = geography::Point(@lat, @lon, 4326)
 				cpoptc.cnt DealsCount,
 				curr.CurrencyCode,
 				curr.CurrencySymbol,
-				isnull(crrRatingAvg.arravg,0)+5 AvgRating,
+				cast(isnull(crrRatingAvg.arravg,0)+5 as numeric(36,1)) AvgRating,
 				(case when uReview.UserId is null then 0 else 1 end) UserHasRated,
-				(case when couponlistingmode = 1 then datediff(d,dateadd(d,7, ApprovalDateTime),getdate()) else datediff(d,dateadd(d,30, ApprovalDateTime),getdate()) end)  DaysLeft
+				(case when couponlistingmode = 1 then datediff(d,getdate(),dateadd(d,7, ApprovalDateTime)) else datediff(d,getdate(),dateadd(d,30, ApprovalDateTime)) end)  DaysLeft
 	
 
 				from Coupon vchr
@@ -200,5 +201,6 @@ DECLARE @source geography = geography::Point(@lat, @lon, 4326)
 	FETCH NEXT @TORow ROWS ONLY
 		
 END
+
 
 

@@ -53,5 +53,11 @@ namespace SMD.Models.RequestModels
         public string Country { get; set; }
 
         public CampaignResponseEventType ResponeEventType { get; set; }
+
+
+        public double? GameAccuracy { get; set; }
+        public double? GamePlayTime { get; set; }
+        public int? GameScore { get; set; }
+        public long? GameId { get; set; }
     }
 }
