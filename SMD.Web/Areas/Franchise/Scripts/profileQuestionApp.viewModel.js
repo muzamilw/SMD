@@ -80,7 +80,7 @@ define("FranchiseDashboard/profileQuestionApp.viewModel",
                             });
                     },
                     onApprovePq = function () {
-                        confirmation.messageText("Do you want to approve this Survay question ?"+"<br\>" + "System will attempt to collect payment and generate invoice");
+                        confirmation.messageText("Do you want to approve this survay question?  "+"<br\>" + "System will attempt to collect payment and generate invoice.");
                         confirmation.show();
                         confirmation.afterCancel(function () {
                             confirmation.hide();
@@ -230,7 +230,7 @@ define("FranchiseDashboard/profileQuestionApp.viewModel",
                     { Id: 36, Name: 'Utilities' }
                               ]),
                     onRejectPQ = function () {
-                        confirmation.messageText("Do you want to Reject this Survay question ?");
+                        confirmation.messageText("Do you want to reject this survay question?  ");
                         confirmation.show();
                         confirmation.afterCancel(function () {
                             confirmation.hide();

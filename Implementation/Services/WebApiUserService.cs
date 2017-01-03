@@ -62,6 +62,8 @@ namespace SMD.Implementation.Services
 
         private readonly IAspNetUsersNotificationTokenRepository aspNetUsersNotificationTokenRepository;
 
+        private readonly IUserGameResponseRepository userGameResponseRepository;
+
         private ApplicationUserManager UserManager
         {
             get { return HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
@@ -538,6 +540,30 @@ namespace SMD.Implementation.Services
             adCampaignRepository.SaveChanges();
 
 
+            //game response handling
+            if (request.Type == CampaignType.GameAd && request.ResponeEventType == CampaignResponseEventType.Answered)
+            {
+
+                if (request.GameId.HasValue)
+                {
+                    //storing user's game reponse
+
+                    UserGameResponse gameResponse = new UserGameResponse();
+                    gameResponse.Accuracy = request.GameAccuracy;
+                    gameResponse.AdCampaignResponseID = adCampaignResponse.ResponseId;
+                    gameResponse.GameId = request.GameId;
+                    gameResponse.PlayTime = request.GamePlayTime;
+                    gameResponse.ResponseDateTime = DateTime.Now;
+                    gameResponse.Score = request.GameScore;
+                    gameResponse.UserId = request.UserId;
+
+                    userGameResponseRepository.Add(gameResponse);
+                    userGameResponseRepository.SaveChanges();
+                }
+
+            }
+
+
 
             return new BaseApiResponse
             {
@@ -628,7 +654,7 @@ namespace SMD.Implementation.Services
             ITaxRepository taxRepository, IProfileQuestionUserAnswerService profileQuestionAnswerService,
             ICountryRepository countryRepository, IIndustryRepository industryRepository,
             IProfileQuestionService profileQuestionService, IAdCampaignResponseRepository adCampaignResponseRepository,
-            ISurveyQuestionResponseRepository surveyQuestionResponseRepository, IEducationRepository educationRepository, ICityRepository cityRepository, ICompanyRepository companyRepository, IManageUserRepository manageUserRepository, IAccountService accountService, IProfileQuestionRepository profileQuestionRepository, IAspnetUsersRepository aspnetUsersRepository, ISmsServiceCustom smsService, IGameRepository gameRepositry, ICouponRatingReviewRepository couponRatingReviewRepository, IAspNetUsersNotificationTokenRepository aspNetUsersNotificationTokenRepository)
+            ISurveyQuestionResponseRepository surveyQuestionResponseRepository, IEducationRepository educationRepository, ICityRepository cityRepository, ICompanyRepository companyRepository, IManageUserRepository manageUserRepository, IAccountService accountService, IProfileQuestionRepository profileQuestionRepository, IAspnetUsersRepository aspnetUsersRepository, ISmsServiceCustom smsService, IGameRepository gameRepositry, ICouponRatingReviewRepository couponRatingReviewRepository, IAspNetUsersNotificationTokenRepository aspNetUsersNotificationTokenRepository, IUserGameResponseRepository userGameResponseRepository)
         {
             if (emailManagerService == null)
             {
@@ -701,6 +727,7 @@ namespace SMD.Implementation.Services
             this.gameRepositry = gameRepositry;
             this.couponRatingReviewRepository = couponRatingReviewRepository;
             this.aspNetUsersNotificationTokenRepository = aspNetUsersNotificationTokenRepository;
+            this.userGameResponseRepository = userGameResponseRepository;
         }
 
 

@@ -142,7 +142,7 @@ define("FranchiseDashboard/addApproval.viewModel",
                         return (selectedCampaign().hasChanges());
                     }),
                     onApproveCampaign = function () {
-                        confirmation.messageText(confrmText() + "<br\>" + "System will attempt to collect payment and generate invoice");
+                        confirmation.messageText(confrmText() + "<br\>" + "System will attempt to collect payment and generate invoice.");
                         confirmation.show();
                         confirmation.afterCancel(function () {
                             confirmation.hide();
@@ -194,7 +194,7 @@ define("FranchiseDashboard/addApproval.viewModel",
                       ]),
                     // Reject buttoin handler 
                     onRejectCampaign = function () {
-                        confirmation.messageText("Do you want to Reject this ad campaign ?");
+                        confirmation.messageText("Do you want to reject this ad campaign?");
                         confirmation.show();
                         confirmation.afterCancel(function () {
                             confirmation.hide();
@@ -238,12 +238,12 @@ define("FranchiseDashboard/addApproval.viewModel",
                         // First request for LV
                         var type = $('#typeParam').val();
                         if (type == 1) {
-                            confrmText("Do you want to Approve this video ad campaign ?");
+                            confrmText("Do you want to approve this video ad campaign?");
                             lblPageTitle("Video Ads For Approval");
                             $("#btnVideaAddApprov").css("background-color", "#34b9c7");
                         }
                         else {
-                            confrmText("Do you want to Approve this display ad campaign ?");
+                            confrmText("Do you want to approve this display ad campaign?");
                             lblPageTitle("Display Ads For Approval");
                             $("#btnsponserGameApprov").css("background-color", "#34b9c7");
                         }
