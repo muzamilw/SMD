@@ -1096,6 +1096,19 @@
           <Property Name="CouponId" Type="bigint" />
           <Property Name="UserId" Type="nvarchar" MaxLength="128" />
         </EntityType>
+        <EntityType Name="UserGameResponse">
+          <Key>
+            <PropertyRef Name="UserGameResponseId" />
+          </Key>
+          <Property Name="UserGameResponseId" Type="bigint" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="GameId" Type="bigint" />
+          <Property Name="ResponseDateTime" Type="datetime" />
+          <Property Name="PlayTime" Type="float" />
+          <Property Name="Score" Type="int" />
+          <Property Name="Accuracy" Type="float" />
+          <Property Name="AdCampaignResponseID" Type="int" />
+        </EntityType>
         <EntityType Name="UserPurchasedCoupon">
           <Key>
             <PropertyRef Name="CouponPurchaseId" />
@@ -2599,6 +2612,42 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UserGameResponse_AdCampaignResponse">
+          <End Role="AdCampaignResponse" Type="Self.AdCampaignResponse" Multiplicity="0..1" />
+          <End Role="UserGameResponse" Type="Self.UserGameResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdCampaignResponse">
+              <PropertyRef Name="ResponseID" />
+            </Principal>
+            <Dependent Role="UserGameResponse">
+              <PropertyRef Name="AdCampaignResponseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserGameResponse_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="UserGameResponse" Type="Self.UserGameResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserGameResponse">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserGameResponse_Game">
+          <End Role="Game" Type="Self.Game" Multiplicity="0..1" />
+          <End Role="UserGameResponse" Type="Self.UserGameResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Game">
+              <PropertyRef Name="GameId" />
+            </Principal>
+            <Dependent Role="UserGameResponse">
+              <PropertyRef Name="GameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_UserPurchasedCoupon_Coupon">
           <End Role="Coupon" Type="Self.Coupon" Multiplicity="0..1" />
           <End Role="UserPurchasedCoupon" Type="Self.UserPurchasedCoupon" Multiplicity="*" />
@@ -2931,6 +2980,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySet Name="TransactionLog" EntityType="Self.TransactionLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserCouponView" EntityType="Self.UserCouponView" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserFavouriteCoupon" EntityType="Self.UserFavouriteCoupon" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserGameResponse" EntityType="Self.UserGameResponse" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserPurchasedCoupon" EntityType="Self.UserPurchasedCoupon" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="vw_Cash4AdsReport" EntityType="Self.vw_Cash4AdsReport" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -3539,6 +3589,18 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <AssociationSet Name="FK_TransactionLog_TransactionLog" Association="Self.FK_TransactionLog_TransactionLog">
             <End Role="Transaction" EntitySet="Transaction" />
             <End Role="TransactionLog" EntitySet="TransactionLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserGameResponse_AdCampaignResponse" Association="Self.FK_UserGameResponse_AdCampaignResponse">
+            <End Role="AdCampaignResponse" EntitySet="AdCampaignResponse" />
+            <End Role="UserGameResponse" EntitySet="UserGameResponse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserGameResponse_AspNetUsers" Association="Self.FK_UserGameResponse_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="UserGameResponse" EntitySet="UserGameResponse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserGameResponse_Game" Association="Self.FK_UserGameResponse_Game">
+            <End Role="Game" EntitySet="Game" />
+            <End Role="UserGameResponse" EntitySet="UserGameResponse" />
           </AssociationSet>
           <AssociationSet Name="FK_UserPurchasedCoupon_Coupon" Association="Self.FK_UserPurchasedCoupon_Coupon">
             <End Role="Coupon" EntitySet="Coupon" />
@@ -4340,6 +4402,19 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <Parameter Name="ExistingGameId" Mode="In" Type="Int64" />
             <Parameter Name="UserId" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="UserGameResponses" EntityType="DomainModels.UserGameResponse" />
+          <AssociationSet Name="FK_UserGameResponse_AdCampaignResponse" Association="DomainModels.FK_UserGameResponse_AdCampaignResponse">
+            <End Role="AdCampaignResponse" EntitySet="AdCampaignResponses" />
+            <End Role="UserGameResponse" EntitySet="UserGameResponses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserGameResponse_AspNetUsers" Association="DomainModels.FK_UserGameResponse_AspNetUsers">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserGameResponse" EntitySet="UserGameResponses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserGameResponse_Game" Association="DomainModels.FK_UserGameResponse_Game">
+            <End Role="Game" EntitySet="Games" />
+            <End Role="UserGameResponse" EntitySet="UserGameResponses" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -5015,6 +5090,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="GameSmallImage" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="GameLargeImage" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="GameInstructions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserGameResponses" Relationship="DomainModels.FK_UserGameResponse_Game" FromRole="Game" ToRole="UserGameResponse" />
         </EntityType>
         <EntityType Name="TransactionLog">
           <Key>
@@ -5326,6 +5402,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="LastKnownLocationLat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LastKnownLocationLong" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LastKnownLocation" Type="Geography" />
+          <NavigationProperty Name="UserGameResponses" Relationship="DomainModels.FK_UserGameResponse_AspNetUsers" FromRole="User" ToRole="UserGameResponse" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Type="DomainModels.User" Role="AspNetUser" Multiplicity="1">
@@ -5445,6 +5522,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="UserLocationAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="ResponseType" Type="Int32" />
           <NavigationProperty Name="Company" Relationship="DomainModels.FK_AdCampaignResponse_Company" FromRole="AdCampaignResponse" ToRole="Company" />
+          <NavigationProperty Name="UserGameResponses" Relationship="DomainModels.FK_UserGameResponse_AdCampaignResponse" FromRole="AdCampaignResponse" ToRole="UserGameResponse" />
         </EntityType>
         <Association Name="FK_AdCampaignResponse_AdCampaignResponse">
           <End Type="DomainModels.AdCampaignResponse" Role="AdCampaignResponse" Multiplicity="1" />
@@ -7903,6 +7981,58 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="Int32" Name="Score" Nullable="true" />
           <Property Type="Double" Name="Accuracy" Nullable="true" />
         </ComplexType>
+        <EntityType Name="UserGameResponse">
+          <Key>
+            <PropertyRef Name="UserGameResponseId" />
+          </Key>
+          <Property Name="UserGameResponseId" Type="Int64" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="GameId" Type="Int64" />
+          <Property Name="ResponseDateTime" Type="DateTime" Precision="3" />
+          <Property Name="PlayTime" Type="Double" />
+          <Property Name="Score" Type="Int32" />
+          <Property Name="Accuracy" Type="Double" />
+          <Property Name="AdCampaignResponseID" Type="Int32" />
+          <NavigationProperty Name="AdCampaignResponse" Relationship="DomainModels.FK_UserGameResponse_AdCampaignResponse" FromRole="UserGameResponse" ToRole="AdCampaignResponse" />
+          <NavigationProperty Name="AspNetUser" Relationship="DomainModels.FK_UserGameResponse_AspNetUsers" FromRole="UserGameResponse" ToRole="User" />
+          <NavigationProperty Name="Game" Relationship="DomainModels.FK_UserGameResponse_Game" FromRole="UserGameResponse" ToRole="Game" />
+        </EntityType>
+        <Association Name="FK_UserGameResponse_AdCampaignResponse">
+          <End Type="DomainModels.AdCampaignResponse" Role="AdCampaignResponse" Multiplicity="0..1" />
+          <End Type="DomainModels.UserGameResponse" Role="UserGameResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdCampaignResponse">
+              <PropertyRef Name="ResponseId" />
+            </Principal>
+            <Dependent Role="UserGameResponse">
+              <PropertyRef Name="AdCampaignResponseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserGameResponse_AspNetUsers">
+          <End Type="DomainModels.User" Role="User" Multiplicity="0..1" />
+          <End Type="DomainModels.UserGameResponse" Role="UserGameResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserGameResponse">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserGameResponse_Game">
+          <End Type="DomainModels.Game" Role="Game" Multiplicity="0..1" />
+          <End Type="DomainModels.UserGameResponse" Role="UserGameResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Game">
+              <PropertyRef Name="GameId" />
+            </Principal>
+            <Dependent Role="UserGameResponse">
+              <PropertyRef Name="GameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -10099,6 +10229,20 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="UserGameResponses">
+            <EntityTypeMapping TypeName="DomainModels.UserGameResponse">
+              <MappingFragment StoreEntitySet="UserGameResponse">
+                <ScalarProperty Name="AdCampaignResponseID" ColumnName="AdCampaignResponseID" />
+                <ScalarProperty Name="Accuracy" ColumnName="Accuracy" />
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="PlayTime" ColumnName="PlayTime" />
+                <ScalarProperty Name="ResponseDateTime" ColumnName="ResponseDateTime" />
+                <ScalarProperty Name="GameId" ColumnName="GameId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserGameResponseId" ColumnName="UserGameResponseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

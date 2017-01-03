@@ -268,6 +268,9 @@ namespace SMD.Repository.BaseRepository
         public DbSet<CouponCategories> CouponCategories { get; set; }
         public DbSet<UserFavouriteCoupon> UserFavouriteCoupons { get; set; }
 
+        public DbSet<UserGameResponse> UserGameResponse { get; set; }
+        
+
         public DbSet<UserPurchasedCoupon> UserPurchasedCoupon { get; set; }
 
         public DbSet<UserCouponView> UserCouponView { get; set; }

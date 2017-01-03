@@ -180,6 +180,10 @@
         <EntityTypeShape EntityType="DomainModels.vw_Notifications" Width="1.5" PointX="3.375" PointY="12.75" />
         <EntityTypeShape EntityType="DomainModels.CouponRatingReview" Width="1.5" PointX="30.875" PointY="89" />
         <AssociationConnector Association="DomainModels.FK_CouponRatingReview_Coupon" />
+        <EntityTypeShape EntityType="DomainModels.UserGameResponse" Width="1.5" PointX="29" PointY="42" />
+        <AssociationConnector Association="DomainModels.FK_UserGameResponse_AdCampaignResponse" />
+        <AssociationConnector Association="DomainModels.FK_UserGameResponse_AspNetUsers" />
+        <AssociationConnector Association="DomainModels.FK_UserGameResponse_Game" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
