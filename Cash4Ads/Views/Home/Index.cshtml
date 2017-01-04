@@ -76,7 +76,27 @@
                             <div class="input-group  formcontrol selec_criter_ctg" style="padding-top:1px;padding-left:0px;padding-right:0px;margin-right:0px;width:351px;">
                                 <label class="clabel">
                                     <select class="cselect col-md-12" id="selcont" style="height:44px;">
-                                       
+                                        <option value="1">London</option>
+                                        <option value="2">Manchester</option>
+                                        <option value="2">Birmingham</option>
+                                        <option value="4">Leeds</option>
+                                        <option value="5">Glasgow</option>
+                                        <option value="6">Southampton</option>
+                                        <option value="7">Glasgow</option>
+                                        <option value="8">Liverpool</option>
+                                        <option value="9">Newcastle</option>
+                                        <option value="10">Nottingham</option>
+                                        <option value="11">Sheffield</option>
+                                        <option value="12">Bristol</option>
+                                        <option value="13">Belfast</option>
+                                        <option value="14">Leicester</option>
+                                        <option value="15">Derby</option>
+                                        <option value="16">Coventry</option>
+                                        <option value="17">Durham</option>
+                                        <option value="18">Edinburgh</option>
+                                        <option value="19">Hereford</option>
+                                        <option value="20">Lincoln</option>
+                                        
                                     </select>
                                 </label>
 
@@ -523,8 +543,8 @@
 </section>
 <div class="loading" align="center" id="modalSending">
 
-    <img src="images/rloader.gif" width="200px" />
-
+    @*<img src="images/rloader.gif" width="200px" />*@
+    <img src="images/abcLoader.gif" />
 </div>
 
 <!-- end vodeo -->
@@ -597,12 +617,12 @@
         $(document).ready(function () {
             //  $.LoadingOverlay("");
             LoadCategories();
-            LoadCountriesDD();
+           // LoadCountriesDD();
         });
 
         function NavigateToApps()
         {
-            window.location.href ='http://cash4ads.com/';
+            window.location.href ='http://cash4ads.com/download-app/';
         }
         function getCoupons()
         {

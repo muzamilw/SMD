@@ -205,10 +205,25 @@ else
 
             </div>
         </div>
+
+        <div class="clearfix" style="padding-bottom:75px;">
+
+        </div>
+
+        <div class="row Subpanels" style="margin-right:1px;padding-top:0px;">
+            <div class="col-lg-12">
+
+
+                <div class="row center">
+                    <img width="1147" data-bind="attr:{src:$root.IsGameAds()==true ?'/Images/displayAdimg.jpg':'/Images/videoAdImage.jpg'}" style="padding:1px;">
+                </div>
+            </div>
+        </div>
     </div>
     @{
         Html.RenderPartial("~/Areas/Ads/Views/Ads/ManageCampaign.cshtml");
     }
+    
 </div>
 <script id="advertsTemplate" type="text/html">
     <tr style="cursor: pointer">
@@ -274,12 +289,12 @@ else
             <div class="piechart">
                 <canvas data-bind="chart: { type: 'pie', data: CampaignRatioData, options: { observeChanges: true, throttle: 1000, legend: { display: false }, maintainAspectRatio: false,responsive: true } }"></canvas>
             </div>
-                 @*<!-- ko if: Answer3() != null -->
-            <div data-bind="morris: {type: 'Donut', data: [{label: Answer1(), value: Answer1Stats()},{label: Answer2(), value: Answer2Stats()},{label: Answer3(), value: Answer3Stats()}], resize:true, colors: ['green', 'blue','red' ]  }" style="height:230px;cursor:pointer;"></div>
-            <!-- /ko -->
-            <!-- ko if: Answer3() == null -->
-            <div data-bind="morris: {type: 'Donut', data: [{label: Answer1(), value: Answer1Stats()},{label: Answer2(), value: Answer2Stats()}], resize:true, colors: ['green', 'blue','red' ]  }" style="height:230px;cursor:pointer;"></div>
-            <!-- /ko -->*@
+            @*<!-- ko if: Answer3() != null -->
+                <div data-bind="morris: {type: 'Donut', data: [{label: Answer1(), value: Answer1Stats()},{label: Answer2(), value: Answer2Stats()},{label: Answer3(), value: Answer3Stats()}], resize:true, colors: ['green', 'blue','red' ]  }" style="height:230px;cursor:pointer;"></div>
+                <!-- /ko -->
+                <!-- ko if: Answer3() == null -->
+                <div data-bind="morris: {type: 'Donut', data: [{label: Answer1(), value: Answer1Stats()},{label: Answer2(), value: Answer2Stats()}], resize:true, colors: ['green', 'blue','red' ]  }" style="height:230px;cursor:pointer;"></div>
+                <!-- /ko -->*@
             <!-- /ko -->
         </td>
 
@@ -290,9 +305,7 @@ else
                         <td>
                             <br /><br />
                         </td>
-                        <td>
-                           
-                        </td>
+                        <td></td>
                     </tr>
                     <!-- ko if: Answer1() != null -->
                     <tr>
@@ -375,7 +388,7 @@ else
             </div>
             <br />
             <!-- ko if: Status() != 1 &&  Status() != 2 && Status() !=  6-->
-           
+
             <div class="text-left statusbg" data-bind="click:$root.openAdvertiserDashboardScreen" style="background:blue;width:95px;white-space:nowrap;">
                 <span>
                     Analyze Charts
@@ -408,7 +421,7 @@ else
 
                 <div style="width:100%;">
                     <span style="font-size:18px;float:left;color:#81d3dc!important;" data-bind="text:$root.MainHeading"></span>
-                    <button style="float:right;margin-top:-15px;" class="btn btn-primary create_Campaign_btn" data-bind="click:$root.addNewCampaign,visible:!$root.isDisplayCouponsAds()">
+                    <button style="float:right;margin-top:-15px;" class="btn btn-success create_Campaign_btn" data-bind="click:$root.addNewCampaign,visible:!$root.isDisplayCouponsAds()">
                         Create New Campaign
                     </button>
                     <div style="clear:both;"></div>
@@ -456,7 +469,7 @@ else
                 @*<img class="defvideoimage" src="/Content/Images/Videos_small.png" data-bind="visible:$root.VideoImage">
                     <img class="Game_image" src="/Content/Images/Display_small.png" data-bind="visible:$root.DisplayImage">*@
                 <div data-bind="visible:$root.IsvideoBtn()">
-                    <button class=" btn btn-primary create_Campaign_btn" style="" data-bind="click:$root.addNewCampaign,visible:!$root.isDisplayCouponsAds()">
+                    <button class=" btn btn-success create_Campaign_btn" style="" data-bind="click:$root.addNewCampaign,visible:!$root.isDisplayCouponsAds()">
                         Create Video Ad
                     </button>
                 </div>
@@ -533,3 +546,4 @@ else
     </script>
 
 }
+

@@ -392,6 +392,7 @@
     <Compile Include="Areas\Api\Controllers\CouponReviewController.cs" />
     <Compile Include="Areas\Api\Controllers\CouponReviewCountController.cs" />
     <Compile Include="Areas\Api\Controllers\DashboardStatusCounterController.cs" />
+    <Compile Include="Areas\Api\Controllers\DealListingController.cs" />
     <Compile Include="Areas\Api\Controllers\DealStatsController.cs" />
     <Compile Include="Areas\Api\Controllers\GetRandomAdCampaignController.cs" />
     <Compile Include="Areas\Api\Controllers\GetRandomDealController.cs" />
@@ -1550,6 +1551,8 @@
     <Content Include="Images\commute.jpg" />
     <Content Include="Images\crowdcentz_logo.png" />
     <Content Include="Images\crowdcentz_logo_whitebg.png" />
+    <Content Include="Images\dealFooterimg.jpg" />
+    <Content Include="Images\displayAdimg.jpg" />
     <Content Include="Images\download-on-google-play.png" />
     <Content Include="Images\guru.png" />
     <Content Include="Images\heroAccent.png" />
@@ -1569,6 +1572,7 @@
     <Content Include="Images\Phones4u.png" />
     <Content Include="Images\pollpicture1.png" />
     <Content Include="Images\pollpicture2.png" />
+    <Content Include="Images\pollsFooterImg.jpg" />
     <Content Include="Images\Preview.png" />
     <Content Include="Images\preview_game.jpg" />
     <Content Include="Images\Red_Bell.png" />
@@ -1578,8 +1582,10 @@
     <Content Include="Images\splaceholder.png" />
     <Content Include="Images\standardplaceholder.png" />
     <Content Include="Images\StartImage.png" />
+    <Content Include="Images\Taget.png" />
     <Content Include="Images\Tips-Icon-2.png" />
     <Content Include="Images\topbarph.png" />
+    <Content Include="Images\videoAdImage.jpg" />
     <Content Include="Images\White_Arrow.png" />
     <Content Include="Images\youtube_play.JPG" />
     <Content Include="ReportViewers\Publisher.aspx" />
@@ -3323,6 +3329,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Ads\Models\" />
+    <Folder Include="Areas\Api\Views\DealListings\" />
     <Folder Include="Areas\Api\Views\ProfileQuestion\" />
     <Folder Include="Areas\Api\Views\Survey\" />
     <Folder Include="Areas\Billing\Models\" />
