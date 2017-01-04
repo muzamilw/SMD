@@ -105,6 +105,9 @@ namespace SMD.Models.DomainModels
         public Nullable<bool> IsShowAboutUs { get; set; }
 
         public Nullable<int> RatingCount { get; set; }
-        
+
+        public Nullable<int> discount { get; set; }
+
+        public Nullable<int> discountType { get; set; }
     }
 }
