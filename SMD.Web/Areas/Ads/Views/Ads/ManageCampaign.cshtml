@@ -15,17 +15,17 @@ else
     <div class="col-lg-12">
         <div class="row">
             <div class="col-lg-12" style="padding-left:1px;" id="topArea">
-                <ol class="breadcrumb"  style="display:none;">
+                <ol class="breadcrumb" style="display:none;">
                     <li><a href="~/Dashboard/Index" class="my-navigator">Home</a></li>
                     <li><a data-bind="click: $root.closeNewCampaignDialog" class="my-navigator">Video Campaigns</a></li>
                 </ol>
                 <div class="clearfix col-lg-9" data-bind="with: $root.campaignModel" style="padding:0px;padding-top:3px;margin-left:0px;">
-                    
-                    <div class="col-lg-9" style="margin-left:-11px !important;" >
+
+                    <div class="col-lg-9" style="margin-left:-11px !important;">
                         <span class="pull-left Theme_standard_clr" style="padding-left:0px;font-size:21px;" data-bind="NewCampaignBinding: CampaignName,visible:$root.isDisplayCouponsAds()">New Coupon</span>
 
                         <img class="vid_image pull-left" data-bind="attr: { src: $root.StatusCodeImage }" src="/Content/Images/Videos_small.png">
-                         <span id="newVid" class="pull-left " style="color:#fff!important; padding-left:0px;font-size:23px;margin-top:15px;margin-left:9px;" data-bind="NewCampaignBinding: CampaignName">New video campaign</span> <span style="color:#fff!important;margin-left:3px;margin-top:21px;" class="subtitle pull-left" data-bind="text:$root.CampaignHeader()"></span>
+                        <span id="newVid" class="pull-left " style="color:#fff!important; padding-left:0px;font-size:23px;margin-top:15px;margin-left:9px;" data-bind="NewCampaignBinding: CampaignName">New video campaign</span> <span style="color:#fff!important;margin-left:3px;margin-top:21px;" class="subtitle pull-left" data-bind="text:$root.CampaignHeader()"></span>
 
                         @*<span id="newdisplay_Ad" class="pull-left " style="color:black!important; padding-left:0px;font-size:23px;margin-top:12px;display:none;" data-bind="NewCampaignBinding: CampaignName">New display ad</span>*@
                     </div>
@@ -65,7 +65,7 @@ else
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-12" style="padding-left:0px;" >
+            <div class="col-lg-12" style="padding-left:0px;">
                 <div>
                     <div class="no-header clearfix col-lg-9 form-horizontal" style="padding-left:0px;" data-bind="with: $root.campaignModel, visible: !$root.isAdvertdashboardVisible()">
                         <div class="main-box header" style="padding-left:42px;">
@@ -1204,27 +1204,27 @@ else
 
 
                         <div class="row Subpanels collapse" id="demo">
-
-
                             <div class="col-lg-12" style="font-size:12px;">
                                 <div class="row">
 
                                     <div class="col-lg-11" style="padding-left:32px;">
-                                        <br>
-                                        <p>
+                                        <br />
+                                        <p class="text-justify">
                                             The ad click is charged after app users have watched your video ad AND successfully answered your quiz survey.
-                                            <br>
-                                        </p><p>
-                                            Half of th¬e ad click is rewarded to the viewer for participating in your quiz survey. If users opt to skip the video ad, or skip the quiz survey at any time, then no ad click is charged.
+                                            <br />
+                                        <p class="text-justify">
+                                            Half of the ad click is rewarded to the viewer for participating in your quiz survey. If users opt to skip the video ad, or skip the quiz survey at any time, then no ad click is charged.
                                         </p>
-                                        <br>
-                                        <p>
+
+                                        <img height="112" width="225" src="/Images/Taget.png" style="padding-bottom:10px;">
+                                        <br />
+                                        <p class="text-justify">
                                             Higher the ad click campaigns get seen sooner.If you notice that your daily budget isn’t achieved then either increase your ad click for higher priority or try the ‘Broadcast Repeat’ mode.
 
 
                                         </p>
-                                        <br>
-                                        <p>Minimum video ad click is £0.04 Pound, with a maximum of £2 Pound.</p>
+
+                                        <p style="padding-bottom:8px;" class="text-justify">Minimum video ad click is  £0.04 GBP, with a maximum of  £2 GBP.</p>
 
                                     </div>
                                     <div class="col-lg-1"></div>
@@ -1232,12 +1232,6 @@ else
 
 
                             </div>
-
-
-
-
-
-
                         </div>
                         <div class="row">
 
@@ -3155,7 +3149,7 @@ else
             <div class="col-lg-6 preview_stencilImg" style=" margin-right: 35px; width:310px;">
                 <div id="background" class="mobBck mobile_background">
                     <div style="position:relative;">
-                        <img id="closePop" src="~/Images/close2-128.png" width="20"  style="float:right;" data-dismiss="modal" onclick="closevid()" />
+                        <img id="closePop" src="~/Images/close2-128.png" width="20" style="float:right;" data-dismiss="modal" onclick="closevid()" />
                         <div class="clearfix;"></div>
                     </div>
                     <div class="row preview_topImgCnt">
@@ -4278,7 +4272,7 @@ else
     function playVideo(event) {
 
         var playSelectedFile = function (event) {
-            
+
             var file = this.files[0]
             var type = file.type
             var videoNode = document.querySelectorAll('video')
@@ -4346,7 +4340,7 @@ else
     //  $("#MainSpan").css("display", "none");
     $(function () {
 
-       
+
 
         $('#demo').on('shown.bs.collapse', function (e) {
 
@@ -4447,8 +4441,8 @@ else
     <div class="modal-dialog" role="document" style="width:883px;">
         <div class="modal-content">
             <div class="modal-header dam_header">
-                
-                <img src="/Content/Images/Close_Button.png" id="btnDamClose" class="close" data-dismiss="modal" aria-label="Close" style="width:20px;height:20px;float:right;cursor:pointer;margin-top:0px;"/>
+
+                <img src="/Content/Images/Close_Button.png" id="btnDamClose" class="close" data-dismiss="modal" aria-label="Close" style="width:20px;height:20px;float:right;cursor:pointer;margin-top:0px;" />
                 <span class="damHeading">Upload/Select Images</span>
             </div>
             <div class="modal-body">
