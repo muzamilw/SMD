@@ -1524,3 +1524,12 @@ margin-top:2px;
      padding-left:9px;
      margin-bottom:2px;
 }
+.scrollup {
+    width: 40px;
+    height: 40px;
+    position: fixed;
+    bottom: 81px;
+    right: 50px;
+    display: none;
+    background-color: #127abd;
+}

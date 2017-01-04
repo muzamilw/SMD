@@ -223,6 +223,7 @@ else
     @{
         Html.RenderPartial("~/Areas/Ads/Views/Ads/ManageCampaign.cshtml");
     }
+    
 </div>
 <script id="advertsTemplate" type="text/html">
     <tr style="cursor: pointer">
@@ -288,12 +289,12 @@ else
             <div class="piechart">
                 <canvas data-bind="chart: { type: 'pie', data: CampaignRatioData, options: { observeChanges: true, throttle: 1000, legend: { display: false }, maintainAspectRatio: false,responsive: true } }"></canvas>
             </div>
-                 @*<!-- ko if: Answer3() != null -->
-            <div data-bind="morris: {type: 'Donut', data: [{label: Answer1(), value: Answer1Stats()},{label: Answer2(), value: Answer2Stats()},{label: Answer3(), value: Answer3Stats()}], resize:true, colors: ['green', 'blue','red' ]  }" style="height:230px;cursor:pointer;"></div>
-            <!-- /ko -->
-            <!-- ko if: Answer3() == null -->
-            <div data-bind="morris: {type: 'Donut', data: [{label: Answer1(), value: Answer1Stats()},{label: Answer2(), value: Answer2Stats()}], resize:true, colors: ['green', 'blue','red' ]  }" style="height:230px;cursor:pointer;"></div>
-            <!-- /ko -->*@
+            @*<!-- ko if: Answer3() != null -->
+                <div data-bind="morris: {type: 'Donut', data: [{label: Answer1(), value: Answer1Stats()},{label: Answer2(), value: Answer2Stats()},{label: Answer3(), value: Answer3Stats()}], resize:true, colors: ['green', 'blue','red' ]  }" style="height:230px;cursor:pointer;"></div>
+                <!-- /ko -->
+                <!-- ko if: Answer3() == null -->
+                <div data-bind="morris: {type: 'Donut', data: [{label: Answer1(), value: Answer1Stats()},{label: Answer2(), value: Answer2Stats()}], resize:true, colors: ['green', 'blue','red' ]  }" style="height:230px;cursor:pointer;"></div>
+                <!-- /ko -->*@
             <!-- /ko -->
         </td>
 
@@ -304,9 +305,7 @@ else
                         <td>
                             <br /><br />
                         </td>
-                        <td>
-                           
-                        </td>
+                        <td></td>
                     </tr>
                     <!-- ko if: Answer1() != null -->
                     <tr>
@@ -389,7 +388,7 @@ else
             </div>
             <br />
             <!-- ko if: Status() != 1 &&  Status() != 2 && Status() !=  6-->
-           
+
             <div class="text-left statusbg" data-bind="click:$root.openAdvertiserDashboardScreen" style="background:blue;width:95px;white-space:nowrap;">
                 <span>
                     Analyze Charts
@@ -547,3 +546,4 @@ else
     </script>
 
 }
+
