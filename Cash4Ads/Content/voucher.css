@@ -18010,7 +18010,7 @@ div.content .unit.ctu .ctu-sponsor div {
     top:-213px;
     color: white;
     border-radius: 7px;
-    padding-top: 9px;
+    padding-top: 11px;
     left: 661px;
 }
 #Company_logo {
@@ -18122,6 +18122,18 @@ div.content .unit.ctu .ctu-sponsor div {
     padding-right: 8px;
     padding-top: 2px;
 }
+.main-box {
+    background: #FFFFFF;
+    -moz-box-shadow: 1px 1px 2px 0 #CCCCCC;
+    -o-box-shadow: 1px 1px 2px 0 #CCCCCC;
+    -ms-box-shadow: 1px 1px 2px 0 #CCCCCC;
+    box-shadow: 1px 1px 2px 0 #CCCCCC;
+    margin-bottom: 7px;
+    -webikt-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    width:166px;
+}
 .h_header {
     text-align: left;
     color: #8c8c8c;
@@ -18150,7 +18162,7 @@ div.content .unit.ctu .ctu-sponsor div {
 .hh_des {
    text-align: left;
     color: #8c8c8c;
-    font-size: 11px;
+    font-size: 12px;
     padding: 7px 19px 19px 19px;
     
 }
@@ -18158,12 +18170,13 @@ div.content .unit.ctu .ctu-sponsor div {
         width: 329px;
     height: 150px;
     border: 2px solid;
-    position: relative;
+    
     overflow: hidden;
     margin-top: 8px;
     margin-left: 5px;
     border: 3px solid #94c2de;
     border-radius:5px;
+    Position:relative;
 }
 #contact_no {
     height: 69px;
