@@ -303,17 +303,28 @@ namespace SMD.Repository.Repositories
                        where coupon.CouponId == CouponId
                        select new AdGetCouponCategories {Id=Coupcatg.Id, CouponId = Coupcatg.CouponId??0, couponImage1 = coupon.couponImage1, CouponTitle = coupon.CouponTitle }).ToList();
 
-             return obj;
+             
 
              if (obj.Count > 0)
              {
                  foreach (var item in obj)
                  {
-                     var getCoupon = from coupon in db.Coupons where coupon.CouponId == item.CouponId select new AdGetCouponCategories { CouponId = coupon.CouponId, couponImage1 = coupon.couponImage1, CouponTitle = coupon.CouponTitle };
-                     GetList.Add(getCoupon);
+
+                     var getCoupon = (from coupon in db.Coupons where coupon.CouponId == item.Id select new  { CouponId = coupon.CouponId, couponImage1 = coupon.couponImage1, CouponTitle = coupon.CouponTitle }).FirstOrDefault();
+
+                     if (getCoupon != null)
+                     {
+                         AdGetCouponCategories ctgObj = new AdGetCouponCategories();
+                         ctgObj.CouponId = getCoupon.CouponId;
+                         ctgObj.couponImage1 = getCoupon.couponImage1;
+                         ctgObj.CouponTitle = getCoupon.CouponTitle;
+                         GetList.Add(ctgObj);
+                     }
+                     
 
                  }
              }
+             return GetList;
         }
 
         public List<GetUsersCouponsForEmailNotification_Result> GetUsersCouponsForEmailNotification(int mode)
