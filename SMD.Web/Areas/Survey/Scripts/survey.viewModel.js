@@ -341,10 +341,18 @@ define("survey/survey.viewModel",
                                     var Element = ko.utils.arrayFirst(questions(), function (item) {
                                         return item.SQID() == data.SQID;
                                     });
-
+                                
                                     if (Element) {
-                                      
                                         Element.PieChartData(data.pieCharts);
+                                        Element.PieChartValue.removeAll();
+                                        Element.PieChartlabel.removeAll();
+                                        for (var i = 0; i < data.pieCharts.length; i++) {
+                                            Element.PieChartValue.push(data.pieCharts[i].value);
+                                            Element.PieChartlabel.push(data.pieCharts[i].label);
+                                        };
+                                        Element.PieChartValue.valueHasMutated();
+                                        Element.PieChartlabel.valueHasMutated();
+
                                     }
                                  
 
