@@ -219,6 +219,11 @@ else
                 </div>
             </div>
         </div>
+        <div class="scrollup">
+            <span>
+                <i class="fa fa-chevron-up fa-2x" style="visibility:visible; text-align: center;color:white"></i>
+            </span>
+        </div>
     </div>
     @{
         Html.RenderPartial("~/Areas/Ads/Views/Ads/ManageCampaign.cshtml");
@@ -539,6 +544,21 @@ else
 
                 $("#headlabel").text("Display ads");
             }
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 100) {
+                    $('.scrollup').fadeIn();
+                } else {
+                    $('.scrollup').fadeOut();
+                }
+            });
+
+            $('.scrollup').click(function () {
+                $("html, body").animate({
+                    scrollTop: 0
+                }, 600);
+                return false;
+            });
+
         });
 
 
