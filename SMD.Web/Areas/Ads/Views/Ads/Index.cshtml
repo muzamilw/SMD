@@ -294,28 +294,22 @@ else
             <div class="piechart">
                 <canvas data-bind="chart: { type: 'pie', data: CampaignRatioData, options: { observeChanges: true, throttle: 1000, legend: { display: false }, maintainAspectRatio: false,responsive: true } }"></canvas>
             </div>
-            @*<!-- ko if: Answer3() != null -->
-                <div data-bind="morris: {type: 'Donut', data: [{label: Answer1(), value: Answer1Stats()},{label: Answer2(), value: Answer2Stats()},{label: Answer3(), value: Answer3Stats()}], resize:true, colors: ['green', 'blue','red' ]  }" style="height:230px;cursor:pointer;"></div>
-                <!-- /ko -->
-                <!-- ko if: Answer3() == null -->
-                <div data-bind="morris: {type: 'Donut', data: [{label: Answer1(), value: Answer1Stats()},{label: Answer2(), value: Answer2Stats()}], resize:true, colors: ['green', 'blue','red' ]  }" style="height:230px;cursor:pointer;"></div>
-                <!-- /ko -->*@
             <!-- /ko -->
         </td>
 
         <td class="col-sm-1">
-            <table class="tbl-noborder">
+            <table class="tbl-noborder-Padding">
                 <tbody>
                     <tr>
                         <td>
-                            <br /><br />
+                            <br />
                         </td>
-                        <td></td>
+                        <td><br /></td>
                     </tr>
                     <!-- ko if: Answer1() != null -->
                     <tr>
                         <td>
-                            <span class="col-sm-2" data-bind="text: Answer1"></span>
+                            <span data-bind="text: Answer1"></span>
                         </td>
                         <td>
                             <span data-bind="text: SurveyAnsweredAllTime() > 0 ? ((Answer1Stats()/(SurveyAnsweredAllTime()))*100).toFixed(2): 0"></span>%
@@ -325,7 +319,7 @@ else
                     <!-- ko if: Answer2() != null -->
                     <tr>
                         <td>
-                            <span class="col-sm-2" data-bind="text: Answer2"></span>
+                            <span data-bind="text: Answer2"></span>
                         </td>
                         <td>
                             <span data-bind="text: SurveyAnsweredAllTime() > 0 ? ((Answer2Stats()/SurveyAnsweredAllTime())*100).toFixed(2):0"></span>%
@@ -335,7 +329,7 @@ else
                     <!-- ko if: Answer3() != null -->
                     <tr>
                         <td>
-                            <span class="col-sm-2" data-bind="text: Answer3"></span>
+                            <span data-bind="text: Answer3"></span>
                         </td>
                         <td>
                             <span data-bind="text: SurveyAnsweredAllTime() > 0 ? ((Answer3Stats()/SurveyAnsweredAllTime())*100).toFixed(2):0"></span>%
