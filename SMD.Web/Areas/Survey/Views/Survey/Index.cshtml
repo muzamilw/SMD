@@ -166,9 +166,14 @@ else
 
 
                 <div class="row center">
-                    <img width="1147" src="/Images/pollsFooterImg.jpg" style="padding:1px;">
+                    <img width="1147" src="/Images/dealFooterimg.jpg" style="padding:1px;">
                 </div>
             </div>
+        </div>
+        <div class="scrollup">
+            <span>
+                <i class="fa fa-chevron-up fa-2x" style="visibility:visible; text-align: center;color:white"></i>
+            </span>
         </div>
     </div>
     <script id="SurveyQuestionTemplate" type="text/html">
@@ -451,5 +456,25 @@ else
         $("#divApprove").css("display", "none");
         $(".dash_slide_panel").css("display", "none");
     </script>
+<script>
+    $(document).ready(function () {
+
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 100) {
+                $('.scrollup').fadeIn();
+            } else {
+                $('.scrollup').fadeOut();
+            }
+        });
+
+        $('.scrollup').click(function () {
+            $("html, body").animate({
+                scrollTop: 0
+            }, 600);
+            return false;
+        });
+
+    });
+</script>
 
 }
