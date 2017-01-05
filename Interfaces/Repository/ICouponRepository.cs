@@ -1,5 +1,6 @@
 ﻿using SMD.Models.DomainModels;
 using SMD.Models.RequestModels;
+using SMD.Models.ResponseModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace SMD.Interfaces.Repository
 
         Coupon GetCouponByIdSingle(long couponId);
 
-
+        List<AdGetCouponCategories> GetDealsByCtgId(long CouponId);
         IEnumerable<SearchCoupons_Result> SearchCoupons(int categoryId, int type, int size, string keywords, int pageNo, int distance, string Lat, string Lon, string UserId);
 
         List<Coupon> GetCouponsByCompanyId(int CompanyId);

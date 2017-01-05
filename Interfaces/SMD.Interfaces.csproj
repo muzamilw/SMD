@@ -80,6 +80,7 @@
     <Compile Include="Repository\ICouponPriceOptionRepository.cs" />
     <Compile Include="Repository\IAspnetUsersRepository.cs" />
     <Compile Include="Repository\IPayOutHistoryRepository.cs" />
+    <Compile Include="Repository\IUserGameResponseRepository.cs" />
     <Compile Include="Repository\IProfileQuestionTargetLocationRepository.cs" />
     <Compile Include="Logger\IMPCLogWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

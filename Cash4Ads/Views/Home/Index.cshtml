@@ -76,7 +76,27 @@
                             <div class="input-group  formcontrol selec_criter_ctg" style="padding-top:1px;padding-left:0px;padding-right:0px;margin-right:0px;width:351px;">
                                 <label class="clabel">
                                     <select class="cselect col-md-12" id="selcont" style="height:44px;">
-                                       
+                                        <option value="1">London</option>
+                                        <option value="2">Manchester</option>
+                                        <option value="2">Birmingham</option>
+                                        <option value="4">Leeds</option>
+                                        <option value="5">Glasgow</option>
+                                        <option value="6">Southampton</option>
+                                        <option value="7">Glasgow</option>
+                                        <option value="8">Liverpool</option>
+                                        <option value="9">Newcastle</option>
+                                        <option value="10">Nottingham</option>
+                                        <option value="11">Sheffield</option>
+                                        <option value="12">Bristol</option>
+                                        <option value="13">Belfast</option>
+                                        <option value="14">Leicester</option>
+                                        <option value="15">Derby</option>
+                                        <option value="16">Coventry</option>
+                                        <option value="17">Durham</option>
+                                        <option value="18">Edinburgh</option>
+                                        <option value="19">Hereford</option>
+                                        <option value="20">Lincoln</option>
+                                        
                                     </select>
                                 </label>
 
@@ -100,7 +120,7 @@
 
                         <div class="bck_panels">
                             <div>
-                                <h3 style="color:white">List a Deal for FREE</h3>
+                                <h3 style="color:white">List A Deal For FREE</h3>
                             </div>
 
                             <div style="margin-top:25px;">
@@ -133,7 +153,7 @@
 
                         </div>
                         <div id="dwn_app_btn" style="margin-top:25px;">
-                            <input type="button" class="signIn_btn_app" value="Download the APP" readonly="readonly" onclick="NavigateToApps();" />
+                            <input type="button" class="signIn_btn_app" value="Download The APP" readonly="readonly" onclick="NavigateToApps();" />
                         </div>
 
                         <div id="dwn_app_btn" style="margin-top:90px;">
@@ -332,7 +352,7 @@
                                 <div id="White_panel" style="height:248px;padding-top: 36px;padding-left:43px;">
 
                                     <div>
-                                        <span class="text-center" style="font-size:24px;padding-top:25px; color:#137abd;">Why Don't We <br /> Get Paid to Watch Targeted Ads!</span>
+                                        <span class="text-center" style="font-size:24px;padding-top:25px; color:#137abd;">Why Don't We <br /> Get Paid To Watch Targeted Ads!</span>
                                     </div>
                                     <div style="margin-top:7px;">
                                         <span class="text-center" style="font-size:10px;color: #1068a1;">
@@ -347,18 +367,18 @@
                                 <div id="grey_panel">
                                     <div>
                                         <span class="text-center" style="font-size:24px;color: #3fc75b;">
-                                            Discover Big Savings near you
+                                            Discover Big Savings Near You
                                         </span>
                                     </div>
                                     <div id="rest_spans" style="margin-top:28px;">
                                         <div>
                                             <span class="text-center" style="font-size:21px;color: #137abd;">
-                                                Going out to Eat?
+                                                Going Out To Eat?
                                             </span>
                                         </div>
                                         <div>
                                             <span class="text-center" style="font-size:21px;color: #137abd;">
-                                                Want to Know events near you?
+                                                Want to Know Events Near You?
                                             </span>
                                         </div>
                                         <div>
@@ -368,7 +388,7 @@
                                         </div>
                                         <div>
                                             <span class="text-center" style="font-size:21px;color: #137abd;">
-                                                Go on, Treat Yourself...
+                                                Go On, Treat Yourself...
                                             </span>
                                         </div>
                                     </div>
@@ -377,7 +397,7 @@
                                             <button class="btn" data-dismiss="modal" style=" background-color:#3fc75b;border-color:#3fc75b; color:white">Skip </button>
                                         </div>*@
                                         @*<span id="start_btn" data-dismiss="modal" style="font-size:25px;color: #3fc75b;">start</span>*@
-                                        <a id="start_btn" data-dismiss="modal" style="font-size:25px;color: #3fc75b;">start</a>
+                                        <a id="start_btn" data-dismiss="modal" style="font-size:25px;color: #3fc75b;">Start</a>
                                     </div>
                                 </div>
                             </div>
@@ -523,8 +543,8 @@
 </section>
 <div class="loading" align="center" id="modalSending">
 
-    <img src="images/rloader.gif" width="200px" />
-
+    @*<img src="images/rloader.gif" width="200px" />*@
+    <img src="images/abcLoader.gif" />
 </div>
 
 <!-- end vodeo -->
@@ -597,12 +617,12 @@
         $(document).ready(function () {
             //  $.LoadingOverlay("");
             LoadCategories();
-            LoadCountriesDD();
+           // LoadCountriesDD();
         });
 
         function NavigateToApps()
         {
-            window.location.href ='http://cash4ads.com/';
+            window.location.href ='http://cash4ads.com/download-app/';
         }
         function getCoupons()
         {
@@ -641,13 +661,15 @@
                         var htmlToBindAllVoucher = [];
                         $(response.Coupons).each(function (i, val) {
                         
-                            var result=GetPercent(val.Savings,val.Price).toFixed(0)+'%';
+                            //var result=GetPercent(val.Savings,val.Price).toFixed(0)+'%';
+
+                            var result=GetPercent(val.Price,val.Savings).toFixed(0)+'%';
                             var dayeleft=val.DaysLeft+ " Days Left";
-                            $("#bonus-deals-side").append(' <div class="ndod-view-mini ndod-view-mini-nodesc"><div class="ndod-deal-header"><h2>' + val.CouponTitle + '</h2></div><div class="ndod-deal-content"><a class="" href="#"><img class="ndod-deal-image  js-show" data-original="' + val.CouponImage1 + '" src="' + val.CouponImage1 + '" onclick="NavigateToDeal(' + val.CouponId + ')" alt="" /></a><div class="ndod-redeem-now"></div><div class="ndod-business-logo-wrapper"><div class="ndod-business-logo"><img id="Company_logo" class="" data-original="' + val.LogoUrl + '" src="' + val.LogoUrl + '" width="70" height="28" /> </div><div class="btm-header-bg-business-logo"></div></div><div class="ndod-discount"><span class="ndod-amount">save </br>'+result+'</div><div class="ndod-deal-footer-wrapper"><div class="ndod-deal-footer cld" id="main_deal_ffter"><div style="width:638px;"><p class="deals_header_ad">' + val.CouponTitle + '</p> <div class="deal_insder_adPanel"><div style="float:left"><p id="loc_1" style="margin-bottom:5px;">'+val.LocationTitle+'</p> <p id="loc-city">'+val.LocationCity+'</p></div><div style="float:right;padding-top:11px;"><p style="float:left;margin-top:14px;">from</p><p style="float:right;margin-left:13px;color:#0e74b7;font-size:28px;"> '+val.CurrencyCode+' '+val.Price+'</p><div style="clear:both;"></div></div> <div style="clear:both;"></div></div></div></div> <a href="#" onclick="NavigateToDeal(' + val.CouponId + ')" class="ndod-button-small waViewButton"><span class="outer"><span class="inner">VIEW!</span></span></a></div><div class="ndod-deal-footer-btmbg"></div>    </div>    <div id="days_left_div" class="ppl">'+dayeleft+'</div><div class="yel_box_rat_tt">'+val.AvgRating+'</div> </div></div>');
+                            $("#bonus-deals-side").append(' <div class="ndod-view-mini ndod-view-mini-nodesc"><div class="ndod-deal-header"><h2>' + val.CouponTitle + '</h2></div><div class="ndod-deal-content"><a class="" href="#"><img class="ndod-deal-image  js-show" data-original="' + val.CouponImage1 + '" src="' + val.CouponImage1 + '" onclick="NavigateToDeal(' + val.CouponId + ')" alt="" /></a><div class="ndod-redeem-now"></div><div class="ndod-business-logo-wrapper"><div class="ndod-business-logo"><img id="Company_logo" class="" data-original="' + val.LogoUrl + '" src="' + val.LogoUrl + '" width="70" height="28" /> </div><div class="btm-header-bg-business-logo"></div></div><div class="ndod-discount"><span class="ndod-amount">Save </br>'+result+'</div><div class="ndod-deal-footer-wrapper"><div class="ndod-deal-footer cld" id="main_deal_ffter"><div style="width:638px;"><p class="deals_header_ad">' + val.CouponTitle + '</p> <div class="deal_insder_adPanel"><div style="float:left"><p id="loc_1" style="margin-bottom:5px;">'+val.LocationTitle+'</p> <p id="loc-city">'+val.LocationCity+'</p></div><div style="float:right;padding-top:11px;"><p style="float:left;margin-top:14px;">from</p><p style="float:right;margin-left:13px;color:#0e74b7;font-size:28px;"> '+val.CurrencyCode+' '+val.Price+'</p><div style="clear:both;"></div></div> <div style="clear:both;"></div></div></div></div> <a href="#" onclick="NavigateToDeal(' + val.CouponId + ')" class="ndod-button-small waViewButton"><span class="outer"><span class="inner">VIEW!</span></span></a></div><div class="ndod-deal-footer-btmbg"></div>    </div>    <div id="days_left_div" class="ppl">'+dayeleft+'</div><div class="yel_box_rat_tt">'+val.AvgRating+'</div> </div></div>');
                         });
                         $("#bonus-deals-side").append('<div style="clear:both;"></div>');
 
-
+                       
                         if(IsCategorySelected==true)
                         {
                             $("#AccountSetingConformation").modal("hide");

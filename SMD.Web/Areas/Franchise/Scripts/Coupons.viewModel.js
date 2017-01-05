@@ -228,7 +228,7 @@ define("FranchiseDashboard/Coupons.viewModel",
                             });
                     },
                     onApproveCoupon = function () {
-                        var conformTet = "Do you want to approve this Deal ? " + "<br\>" + "System will attempt to collect payment and generate invoice";
+                        var conformTet = "Do you want to approve this deal? " + "<br\>" + "System will attempt to collect payment and generate invoice.";
                         confirmation.messageText(conformTet);
                         confirmation.show();
                         confirmation.afterCancel(function () {
@@ -248,16 +248,10 @@ define("FranchiseDashboard/Coupons.viewModel",
                         dataservice.saveCoupon(selectedCoupon().convertToServerData(), {
                             success: function (response) {
 
-                                if (response.indexOf("Failed") == -1) {
+                                if (response.indexOf("Failed") == -1 && response!= "True") {
                                     dataservice.sendApprovalRejectionEmail(selectedCoupon().convertToServerData(), {
                                         success: function (obj) {
                                             getCoupons();
-                                            //var existingCampaigntodelete = $.grep(campaigns(), function (n, i) {
-                                            //    return (n.id() == campId);
-                                            //});
-
-                                            //campaigns.remove(existingCampaigntodelete);
-
                                             isEditorVisible(false);
                                         },
                                         error: function () {
@@ -266,8 +260,8 @@ define("FranchiseDashboard/Coupons.viewModel",
                                     });
                                 }
                                 else {
-
-                                    toastr.error(response);
+                                    getCoupons();
+                                    isEditorVisible(false);
                                 }
                             },
                             error: function () {
@@ -353,7 +347,7 @@ define("FranchiseDashboard/Coupons.viewModel",
                     }),
                     onRejectCoupon = function () {
 
-                        confirmation.messageText("Do you want to Reject this deal ?");
+                        confirmation.messageText("Do you want to reject this deal?  ");
                         confirmation.show();
                         confirmation.afterCancel(function () {
                             confirmation.hide();

@@ -1433,7 +1433,7 @@ margin-top:2px;
     background-position: 2px 0px!important;
     padding: 10px 32px 8px 49px!important;
     background-repeat: no-repeat!important;
-    background-color: #3071a9!important;
+    background-color: #27ae60!important;
 }
 .create_invite_btn {
   background: url(/Content/Images/Email_icon.png)!important;
@@ -1448,7 +1448,7 @@ margin-top:2px;
     background-position: 6px 1px!important;
     padding: 8px 10px 8px 47px!important;
     background-repeat: no-repeat!important;
-    background-color: #3071a9!important;
+    background-color: #27ae60!important;
 }
 
 .create_polls_btn {
@@ -1456,14 +1456,14 @@ margin-top:2px;
     background-position: 5px 1px!important;
     padding: 8px 10px 8px 47px!important;
     background-repeat: no-repeat!important;
-    background-color: #3071a9!important;
+    background-color: #27ae60!important;
 }
 .create_survey_btn {
   background: url(/Content/Images/Surveys_small_36.png)!important;
     background-position: 6px 0px!important;
     padding: 8px 10px 8px 47px!important;
     background-repeat: no-repeat!important;
-    background-color: #3071a9!important;
+    background-color: #27ae60!important;
 }
 .create_game_btn {
   background: url(/Content/Images/Display_small_36.png)!important;
@@ -1523,4 +1523,13 @@ margin-top:2px;
      font-size:12px;
      padding-left:9px;
      margin-bottom:2px;
+}
+.scrollup {
+    width: 40px;
+    height: 40px;
+    position: fixed;
+    bottom: 81px;
+    right: 50px;
+    display: none;
+    background-color: #127abd;
 }

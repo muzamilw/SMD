@@ -1100,7 +1100,7 @@ namespace SMD.Implementation.Services
 
                 //}
             }
-            return "";
+            return "True";
         }
 
         public Currency GetCurrenyById(int id)
@@ -1261,6 +1261,11 @@ namespace SMD.Implementation.Services
         {
             return _userCouponViewRepository.getDealUserLocationByCId(CouponId);
         }
+        public List<AdGetCouponCategories> GetDealsByCtgId(long CouponId)
+        {
+             return couponRepository.GetDealsByCtgId(CouponId);
+        }
+
         #endregion
     }
 }

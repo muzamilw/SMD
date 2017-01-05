@@ -178,7 +178,7 @@ define("ads/ads.viewModel",
                     datasets: [
                         {
                             data: this.PieChartValue,
-                            backgroundColor: ['green', 'blue','red' ,'orange','pink']
+                            backgroundColor: ['green', 'blue', 'red', 'orange', 'pink']
 
                         }]
                 }),
@@ -309,7 +309,7 @@ define("ads/ads.viewModel",
                         Gender: selectedQQGAnalytics(),
                         age: selectedQQAAnalytics(),
                         profession: selectedQQPAnalytics(),
-                        City: selectedQQCtAnalytics()?selectedQQCtAnalytics():'All',
+                        City: selectedQQCtAnalytics() ? selectedQQCtAnalytics() : 'All',
                         QId: 0,
                         type: 1
                     }, {
@@ -439,10 +439,10 @@ define("ads/ads.viewModel",
 
 				                    heatmap.setData(testData);
 				                    hasImpression(true);
-				                    
+
 				                    $("#GenderBarChartId").html("");
 				                    $("#AgeBarChartId").html("");
-				                    
+
 				                    var BarChart1 = Morris.Bar({
 				                        element: 'AgeBarChartId',
 				                        data: PerAgeChartAnalyticsData(),
@@ -450,7 +450,7 @@ define("ads/ads.viewModel",
 				                        labels: ['10_20', '20_30', '30_40', '40_50', '50_60', '60_70', '70_80', '80_90', '90+'],
 				                        yLabelFormat: function (y) { return y != Math.round(y) ? '' : y; },
 				                        setAxisAlignFirstX: true, parseTime: false
-				                       
+
 				                    });
 				                    var BarChart2 = Morris.Bar({
 				                        element: 'GenderBarChartId',
@@ -1229,7 +1229,7 @@ define("ads/ads.viewModel",
 
 
 
-                    if (campaignModel().ClickRate() < minclickrate) {
+                    if (campaignModel().ClickRate() < minclickrate && isClickRateVisible()!=true) {
                         errorListNew.push({ name: "Ad Click should be greater than $ " + minclickrate + " USD", element: "" });
                     }
 
@@ -1242,8 +1242,10 @@ define("ads/ads.viewModel",
                             name: "You have no audience against the specified criteria please broaden your audience definition.", element: ""
                         });
                     }
-                    if (campaignModel().VerifyQuestion() == "" || campaignModel().VerifyQuestion() == undefined || campaignModel().Answer1() == "" || campaignModel().Answer1() == undefined || campaignModel().Answer2() == "" || campaignModel().Answer2() == undefined) {
-                        errorListNew.push({ name: "Plz add your survey question and minimum two answers", element: "" });
+                    if (isClickRateVisible() != true) {
+                        if (campaignModel().VerifyQuestion() == "" || campaignModel().VerifyQuestion() == undefined || campaignModel().Answer1() == "" || campaignModel().Answer1() == undefined || campaignModel().Answer2() == "" || campaignModel().Answer2() == undefined) {
+                            errorListNew.push({ name: "Plz add your survey question and minimum two answers", element: "" });
+                        }
                     }
 
                     if (errorListNew() == null || errorListNew().length == 0) {
@@ -1299,7 +1301,7 @@ define("ads/ads.viewModel",
                   if (item.Status() == 1) {
                       campaignModel(item);
                   }
-                  confirmation.messageText("Are you sure you want to remove this Ad ? This action cannot be undone.");
+                  confirmation.messageText("Are you sure you want to remove this Ad?  This action cannot be undone.");
                   confirmation.show();
                   confirmation.afterCancel(function () {
                       confirmation.hide();
@@ -2138,15 +2140,15 @@ define("ads/ads.viewModel",
                   },
                 Changefilter = function () {
 
-                    $.browser.chrome = /chrome/.test(navigator.userAgent.toLowerCase());
+                    //$.browser.chrome = /chrome/.test(navigator.userAgent.toLowerCase());
 
-                    /* Detect Chrome */
-                    if ($.browser.chrome) {
-                        /* Do something for Chrome at this point */
-                        alert("You are using Chrome!");
-                    }
-                    /* Finally, if it is Chrome then jQuery thinks it's 
-                       Safari so we have to tell it isn't */
+                    ///* Detect Chrome */
+                    //if ($.browser.chrome) {
+                    //    /* Do something for Chrome at this point */
+                    //    alert("You are using Chrome!");
+                    //}
+                    ///* Finally, if it is Chrome then jQuery thinks it's 
+                    //   Safari so we have to tell it isn't */
 
                     if (campaignModel().IsUseFilter() == 0) {
 
@@ -3149,7 +3151,7 @@ define("ads/ads.viewModel",
                             $("#spinnerAudience").css("display", "none");
                             reachedAudience(data.MatchingUsers);
                             ShowAudienceCounter(GetAudienceCount(data.MatchingUsers));
-                            
+
 
                             totalAudience(data.AllUsers);
                             var percent = data.MatchingUsers / data.AllUsers;
@@ -3536,7 +3538,7 @@ define("ads/ads.viewModel",
                             QuestionId: 0,
                         }, {
                             success: function (data) {
-                                
+
                                 if (data != null) {
                                     myQuizQuestions([]);
                                     ko.utils.arrayPushAll(myQuizQuestions(), data.AdCampaigns);

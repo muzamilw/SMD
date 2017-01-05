@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using SMD.Models.IdentityModels;
+using SMD.Models.ResponseModels;
 namespace SMD.Repository.Repositories
 {
     public class CouponRepository : BaseRepository<Coupon>, ICouponRepository
@@ -293,13 +294,40 @@ namespace SMD.Repository.Repositories
         {
             return db.GetRandom3Deal().ToList();
         }
+        public List<AdGetCouponCategories> GetDealsByCtgId(long CouponId)
+        {
+            //return db.CouponCategories.Where(i => i.CouponId == CouponId).ToList();
+            List<AdGetCouponCategories> GetList = new List<AdGetCouponCategories>();
+           var  obj = (from coupon in db.Coupons
+                       join Coupcatg in db.CouponCategories on coupon.CouponId equals Coupcatg.CouponId
+                       where coupon.CouponId == CouponId
+                       select new AdGetCouponCategories {Id=Coupcatg.Id, CouponId = Coupcatg.CouponId??0, couponImage1 = coupon.couponImage1, CouponTitle = coupon.CouponTitle }).ToList();
 
+             if (obj.Count > 0)
+             {
+                 foreach (var item in obj)
+                 {
+
+                     var getCoupon = (from coupon in db.Coupons where coupon.CouponId == item.Id select new  { CouponId = coupon.CouponId, couponImage1 = coupon.couponImage1, CouponTitle = coupon.CouponTitle }).FirstOrDefault();
+
+                     if (getCoupon != null)
+                     {
+                         AdGetCouponCategories ctgObj = new AdGetCouponCategories();
+                         ctgObj.CouponId = getCoupon.CouponId;
+                         ctgObj.couponImage1 = getCoupon.couponImage1;
+                         ctgObj.CouponTitle = getCoupon.CouponTitle;
+                         GetList.Add(ctgObj);
+                     }
+                     
+                 }
+             }
+             return GetList;
+        }
 
         public List<GetUsersCouponsForEmailNotification_Result> GetUsersCouponsForEmailNotification(int mode)
         {
             return db.GetUsersCouponsForEmailNotification(mode).ToList();
         }
-
 
         public List<GetUsersCouponsForEmailNotification_Result> GetDealsWhichHavejustExpired()
         {
@@ -315,7 +343,6 @@ namespace SMD.Repository.Repositories
 
         public bool CompleteCoupons(long[] couponIds)
         {
-
 
             foreach (var item in couponIds)
             {

@@ -202,6 +202,7 @@
     <Content Include="images\07.jpg" />
     <Content Include="images\08.jpg" />
     <Content Include="images\09.jpg" />
+    <Content Include="images\abcLoader.gif" />
     <Content Include="images\Advert_Phone_1.png" />
     <Content Include="images\Advert_Slider_1.png" />
     <Content Include="images\Advert_Slider_2.png" />
@@ -211,6 +212,7 @@
     <Content Include="images\Affiliate_Slider_2.png" />
     <Content Include="images\Affiliate_Slider_3.png" />
     <Content Include="images\ajax-loader.gif" />
+    <Content Include="images\ajaxttt-loader.gif" />
     <Content Include="images\au.png" />
     <Content Include="images\back-arrow.png" />
     <Content Include="images\bg-grad-unit-top.png" />

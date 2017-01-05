@@ -3,7 +3,6 @@
     string adminClasses = "";
     string userClasses = "";
 }
-
 @if (!User.IsInRole("User"))
 {
     userClasses = "displayNone";
@@ -15,14 +14,14 @@ else
 <div class="row" id="Heading_div">
     <div class="col-lg-12 padding0px" style="padding-left: 0px;">
         <div style="width:200px;" class="pull-left">
-            <img class="vid_image pull-left" src="/Images/StartImage.png"style="margin-left:-10px !important">
+            <img class="vid_image pull-left" src="/Images/StartImage.png" style="margin-left:-10px !important">
             <label id="headlabel" class="home_pagefontsize" style="font-size:24px!important;color:#fff!important;margin-top:0px;padding-top:11px">Deal Listings</label>
 
         </div>
         <div style="width:5px;">
 
         </div>
-        
+
         <div style="width:949px" class="pull-left">
             <label id="headdesc" class="fontitalic" style="color:#fff;font-size:14px;margin-top:17px;display:none">Use short and inspiring titles that state your deal clearly.</label>
             <img class="pull-right closecls" src="~/Content/Images/Close_Button.png" style="margin-top:18px;" onclick="GotoHome();" />
@@ -32,546 +31,571 @@ else
     </div>
 </div>
 
-        @*<div class="row filter-body" id="HeadlinesDiv" style="margin-top:5px;display:none;">
-            <div class="col-lg-12">
+@*<div class="row filter-body" id="HeadlinesDiv" style="margin-top:5px;display:none;">
+        <div class="col-lg-12">
 
-                <div class="no-header clearfix  form-horizontal">
-                    <div class="row">
-                        <label style="font-size:18px;">Group & post your deals</label>
-                    </div>
-
-                    <div class=" col-lg-8">
-                        <div class="col-lg-2" style="text-align:right;">
-                            <label>Slider Images</label>
-                        </div>
-                        <div class="col-lg-2" style="padding:0px;">
-                            <div style="margin-top:5px;    text-align: center;cursor:pointer;">
-
-                                <img style="height:70px;" data-bind="visible: couponImage1() != '' ,attr: { src: couponImage1 }" id="bannerImage1" data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(2)" src="/images/default-placeholder.png">
-                                <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;display:none;">
-                                    (450 x 300 pixels)
-                                </div>
-                            </div>
-                            <br>
-                            <div class="fileUpload btn btn-primary" style="display:none;">
-                                <span>Upload </span>
-                                <input type="file" class="upload" id="campaignType_image_file1" data-bind="files: { onLoaded: $root.couponImage1Callback, fileFilter: 'image.*'}">
-                            </div>
-                        </div>
-
-                        <div class="col-lg-2" style="padding:0px;">
-                            <div style="margin-top:5px;    text-align: center;cursor:pointer;">
-
-                                <img style="height:70px;" data-bind="visible: CouponImage2() != '' &amp;&amp; CouponImage2() != null ,attr: { src: CouponImage2 }" data-toggle="modal" data-target="#damModel" id="bannerImage2" onclick="changeIframeSrc(3)" src="/images/default-placeholder.png">
-                                <div style=" display:none;   padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
-                                    (450 x 300 pixels)
-                                </div>
-                            </div>
-                            <br>
-                            <div class="fileUpload btn btn-primary" style="display:none;">
-                                <span>Upload </span>
-                                <input type="file" class="upload" id="campaignType_coupon_file2" data-bind="files: { onLoaded: $root.CouponImage2Callback, fileFilter: 'image.*'}">
-                            </div>
-                        </div>
-                        <div class="col-lg-2" style="padding:0px;">
-                            <div style="margin-top:5px;    text-align: center;cursor:pointer;">
-
-                                <img style="height:70px;" data-bind="visible: CouponImage3() != '' &amp;&amp; CouponImage3() != null,attr: { src: CouponImage3 }" id="bannerImage3" data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(4)" src="/images/default-placeholder.png">
-                                <div style="display:none;    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
-                                    (450 x 300 pixels)
-                                </div>
-                            </div>
-                            <br>
-                            <div class="fileUpload btn btn-primary" style="display:none;">
-                                <span>Upload </span>
-                                <input type="file" class="upload" id="campaignType_coupon_file3" data-bind="files: { onLoaded: $root.CouponImage3Callback, fileFilter: 'image.*'}">
-                            </div>
-                        </div>
-                        @*<div class="col-lg-2">
-                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Upload Logo</label>
-                            </div>
-                        <div class="col-lg-3" style="padding:0px;">
-                            <div style="float:left;">
-                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Logo</label>
-
-                            </div>
-
-
-                            <div style="float:right;padding-right:8px;">
-
-                                <div style="margin-top:5px;    text-align: center;cursor:pointer;">
-
-
-                                    <img style="    margin-left: 24px;height:70px;" data-bind="visible: LogoImageBytes() != '' &amp;&amp;  LogoImageBytes() != null ,attr: { src: LogoImageBytes() }" id="imgLogo" data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(1)" src="/images/default-placeholder.png">
-                                    <div style="    padding-top: 10px;padding-left:24px;    text-align: center;    font-size: 12px;    color: gray;">
-                                        (300 x 150 pixels)
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="fileUpload btn btn-primary" style="display:none;">
-                                    <span data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(1)">Upload </span>
-
-                                </div>
-                            </div>
-
-                            <div style="clear:both"></div>
-
-                        </div>
-
-                    </div>
-
-                    <div class=" col-lg-8">
-                        <div class="col-lg-2">
-                            <label style="text-align:right">Group headlines</label>
-                        </div>
-                        <div class="col-lg-6" style="padding-left:24px;">
-                            <textarea maxlength="32" style="height:34px;width:317px!important;" name="Coupon Display Name" class="form-control  " id="txtCampaignDisplayName" placeholder="Deal title (32 characters)" data-bind="value: CouponTitle,click: $root.selectJobDescription"></textarea>
-
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-        </div>*@
-        
-
-
-        <div class="row" id="CouponsBinding" style="margin-top: 0px;">
-            <div class="col-lg-12" data-bind="visible: $root.isListVisible()">
-
+            <div class="no-header clearfix  form-horizontal">
                 <div class="row">
-                    <div class="col-lg-12" style="padding-left:0px;padding-right:9px;">
-                        <!-- ko template: { name: 'filterTemplate' } -->
-                        <!-- /ko -->
-                        <div class="margintop13" data-bind="visible: $root.campaignGridContent().length > 0">
-                            <div class="main-box no-header clearfix" style="padding-top:0px;">
-                                <div class="main-box-body clearfix" style="padding-left:20px;padding-right:22px;">
-                                    <div class="tabsdescriptions" style="margin-left:0px;">
-                                        <p class="group-header-description"></p>
-                                    </div>
-                                    <div class="table-responsive" style="margin-right:-4px;">
-                                        <table class="table table-striped table-hover tbl-intialAlign">
-                                            <thead>
-                                                <tr>
-                                                    <th class="col-sm-3"><span class="GridHeaderFont_size">Campaign Name</span></th>
-                                                    <th class="col-sm-2">
-                                                        <span class="GridHeaderFont_size">
-                                                            Deal Type
-                                                        </span>
-                                                    </th>
-                                                    <th class="col-sm-1" >
-                                                        <span class="GridHeaderFont_size">
-                                                            # Deal Lines
-                                                        </span>
-                                                    </th>
-                                                    <th class="col-sm-1">
-                                                        <span class="GridHeaderFont_size">End Date</span>
-                                                    </th>
-                                                    <th class="col-sm-5" colspan="2">
-                                                        <span class="GridHeaderFont_size">Last 7 & 14 Day Comparision </span>
-                                                    </th>
-                                                    
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <!-- ko template: { name: 'advertsTemplate' , foreach: $root.campaignGridContent } -->
-                                                <!-- /ko -->
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="pagerDivForStore" class="pull-right">
-                                <!-- ko with: pager -->
-                                @Html.Partial("~/Areas/Common/Views/Shared/_Pager.cshtml")
-                                <!-- /ko -->
-                            </div>
-                            <div class="clearfix">
-                            </div>
-                        </div>
-
-                        <div data-bind="visible: ($root.campaignGridContent().length == 0 &&  $root.gridTotalCount() == 0)" style="display:none;">
-                            <div class="clearfix" style="padding:20px;padding-bottom:10px;">
-                                <div class="col-lg-5"></div>
-                                <span style="color:white">You haven’t created any Deals yet</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row" style="padding-top:10px;">
-
-                    <div class="col-lg-3 col-sm-3" style="float:left;">
-
-                    </div>
-                    <div class="col-lg-6 col-sm-6" style="float:left;padding-left:50px; display:none;">
-                        <button class="btn  btn-success btnAdsCampaign" style="width:24%;float:left;padding:0px;" id="btnSubmitForApproval" data-bind="click:$root.ShowCouponPromotions">Deal</button>
-                        <button class="btn  btn-success btnAdsCampaign @adminClasses" style="width:24%;float:left;padding:0px;" id="btnSubmitForApproval" data-bind="click:gotoManageUsers">Manage Users</button>
-                        <button class="btn  btn-success btnAdsCampaign" style="width:24%;float:left;padding:0px;" id="btnSubmitForApproval" data-bind="click:gotoProfile">Marketing Info</button>
-                    </div>
-
-                    <div class="col-lg-2 col-sm-2" style="float:left;">
-                    </div>
+                    <label style="font-size:18px;">Group & post your deals</label>
                 </div>
 
-                <div class="row Subpanels" style="margin-right:1px;padding-top:0px;" >
-                    <div class="col-lg-12">
+                <div class=" col-lg-8">
+                    <div class="col-lg-2" style="text-align:right;">
+                        <label>Slider Images</label>
+                    </div>
+                    <div class="col-lg-2" style="padding:0px;">
+                        <div style="margin-top:5px;    text-align: center;cursor:pointer;">
 
-                        <div class="col-lg-6" style="padding-top:20px;padding-left:15px;display:none;" data-bind="visible: ($root.campaignGridContent().length == 0 && $root.gridTotalCount() == 0)">
-                            <div class="row">
-                                <span style="font-size:20px;">Be amongst the first to advertise in you area</span>
-                            </div>
-                            <div class="row center">
-                                <img src="/Images/Share_world.png">
+                            <img style="height:70px;" data-bind="visible: couponImage1() != '' ,attr: { src: couponImage1 }" id="bannerImage1" data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(2)" src="/images/default-placeholder.png">
+                            <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;display:none;">
+                                (450 x 300 pixels)
                             </div>
                         </div>
-                        <div class="col-lg-6" style="padding-top:20px;padding-left:15px;display:none;" data-bind="visible: $root.campaignGridContent().length > 0">
-                            <div class="row" style="padding-bottom:10px;">
-                                <span style="font-size:20px;margin-left:5px;">Here’s some Deals listed by local advertisers</span>
+                        <br>
+                        <div class="fileUpload btn btn-primary" style="display:none;">
+                            <span>Upload </span>
+                            <input type="file" class="upload" id="campaignType_image_file1" data-bind="files: { onLoaded: $root.couponImage1Callback, fileFilter: 'image.*'}">
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2" style="padding:0px;">
+                        <div style="margin-top:5px;    text-align: center;cursor:pointer;">
+
+                            <img style="height:70px;" data-bind="visible: CouponImage2() != '' &amp;&amp; CouponImage2() != null ,attr: { src: CouponImage2 }" data-toggle="modal" data-target="#damModel" id="bannerImage2" onclick="changeIframeSrc(3)" src="/images/default-placeholder.png">
+                            <div style=" display:none;   padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
+                                (450 x 300 pixels)
                             </div>
-                            <div class="row center">
-                                <div class="col-lg-4">
-                                    <img style="height:100px;width:166px;" data-bind="attr:{src:$root.dealImg1()}">
-                                    <div class="main-box no-header clearfix" style="padding:8px;margin-top:1px;">
-                                        <span data-bind="text:$root.dealtitle1" style="font-size:12px;font-weight:bold"></span>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <img style="height:100px;width:166px;" data-bind="attr:{src:$root.dealImg2()}">
-                                    <div class="main-box no-header clearfix" style="padding:8px;margin-top:1px;">
-                                        <span data-bind="text:$root.dealtitle2" style="font-size:12px;font-weight:bold"></span>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <img style="height:100px;width:166px;" data-bind="attr:{src:$root.dealImg3()}">
-                                    <div class="main-box no-header clearfix"  style="padding:8px;margin-top:1px;">
-                                        <span data-bind="text:$root.dealtitle3" style="font-size:12px;font-weight:bold"></span>
-                                    </div>
+                        </div>
+                        <br>
+                        <div class="fileUpload btn btn-primary" style="display:none;">
+                            <span>Upload </span>
+                            <input type="file" class="upload" id="campaignType_coupon_file2" data-bind="files: { onLoaded: $root.CouponImage2Callback, fileFilter: 'image.*'}">
+                        </div>
+                    </div>
+                    <div class="col-lg-2" style="padding:0px;">
+                        <div style="margin-top:5px;    text-align: center;cursor:pointer;">
+
+                            <img style="height:70px;" data-bind="visible: CouponImage3() != '' &amp;&amp; CouponImage3() != null,attr: { src: CouponImage3 }" id="bannerImage3" data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(4)" src="/images/default-placeholder.png">
+                            <div style="display:none;    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
+                                (450 x 300 pixels)
+                            </div>
+                        </div>
+                        <br>
+                        <div class="fileUpload btn btn-primary" style="display:none;">
+                            <span>Upload </span>
+                            <input type="file" class="upload" id="campaignType_coupon_file3" data-bind="files: { onLoaded: $root.CouponImage3Callback, fileFilter: 'image.*'}">
+                        </div>
+                    </div>
+                    @*<div class="col-lg-2">
+                            <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Upload Logo</label>
+                        </div>
+                    <div class="col-lg-3" style="padding:0px;">
+                        <div style="float:left;">
+                            <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Logo</label>
+
+                        </div>
+
+
+                        <div style="float:right;padding-right:8px;">
+
+                            <div style="margin-top:5px;    text-align: center;cursor:pointer;">
+
+
+                                <img style="    margin-left: 24px;height:70px;" data-bind="visible: LogoImageBytes() != '' &amp;&amp;  LogoImageBytes() != null ,attr: { src: LogoImageBytes() }" id="imgLogo" data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(1)" src="/images/default-placeholder.png">
+                                <div style="    padding-top: 10px;padding-left:24px;    text-align: center;    font-size: 12px;    color: gray;">
+                                    (300 x 150 pixels)
                                 </div>
                             </div>
-                            <div class="row" style="padding-top:0px;padding-left:8px;padding-bottom:16px;">
-                                <a href="http://cash4ads.com/" target="_blank">
-                                    More...
-                                </a>
+                            <br>
+                            <div class="fileUpload btn btn-primary" style="display:none;">
+                                <span data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(1)">Upload </span>
+
                             </div>
                         </div>
 
-                        <div class="col-lg-6" style="padding-top:20px;">
-                            <div class="row" style="padding-bottom:10px;">
-                                <span style="font-size:20px;">Create Demand using Urgency and Scarcity</span>
-                            </div>
-                            <div class="row">
-                                <div class="form-group">
-                                    <ul style="list-style-type:circle;margin-left:17px;">
-                                        <li>Link deal lines directly to your shopping cart or landing pages</li>
-                                        <li>Collect payment directly, we take 0% commission for the referral</li>
-                                        <li>Create Countdown Deals with increasing savings as the deal ends</li>
-                                        <li>Upgrade to a Monthly Plan and list 3 Deals Groups at the same time </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="row"style="padding-bottom:30px;margin-top:19px;">
-                                <span style="color:#3498db;font-family:'Gloria Hallelujah',cursive;">We notify and email people every time you offer a bigger saving</span>
-                            </div>
-                        </div>
+                        <div style="clear:both"></div>
 
                     </div>
+
                 </div>
+
+                <div class=" col-lg-8">
+                    <div class="col-lg-2">
+                        <label style="text-align:right">Group headlines</label>
+                    </div>
+                    <div class="col-lg-6" style="padding-left:24px;">
+                        <textarea maxlength="32" style="height:34px;width:317px!important;" name="Coupon Display Name" class="form-control  " id="txtCampaignDisplayName" placeholder="Deal title (32 characters)" data-bind="value: CouponTitle,click: $root.selectJobDescription"></textarea>
+
+                    </div>
+
+                </div>
+
             </div>
-            @{
-                Html.RenderPartial("~/Areas/Coupons/Views/Coupons/ManageCoupon.cshtml");
-            }
         </div>
-        <script id="advertsTemplate" type="text/html">
-            <tr style="cursor: pointer">
-                <td class="col-sm-3">
-                    <a href="#" class="store-user-link" data-bind="text: CouponTitle,click:$root.onEditCampaign"></a>
-                    <br />
-                    <img style="width:130px;height:130px;" data-bind="attr: { src:  couponImage1()}">
-                   
-                    <br />
-                    <!-- ko if: ApprovalDateTime()-->
-                    <span style="color:darkgray;font-size:11px;">
-                        Start Date :
-                    </span>
-                      <span style="color:darkgray;font-size:11px;" data-bind="dateTimeString:  ApprovalDateTime()"></span>
-                    <!-- /ko -->
-                    <!-- ko if: ApprovalDateTime()== null -->
-                    <span style="color:darkgray;font-size:11px;">
-                        Not Started
-                    </span>
-                         
-                    <!-- /ko -->
-                    <!-- ko if: ModifiedDateTime()-->
-                    <br />
-                    <span style="color:darkgray;font-size:11px;">
-                        Last Updated : 
-                    </span>
-                    
-                    <span style="color:darkgray;font-size:11px;" data-bind="dateTimeString:  ModifiedDateTime()"></span>
-                    <!-- /ko -->
-                </td>
-                <td class="col-sm-2">
-                    <!-- ko if: CouponListingMode() == 1-->
-                    <span>7 Day Flash Deal</span>
-                    <!-- /ko -->
-                    <!-- ko if: CouponListingMode() == 2-->
-                    <span>30 Day Listing</span>
-                    <!-- /ko -->
-                   <div style="padding-top: 120px;">
-                       <span class="review" data-bind="text:DealRating().toFixed(1)"></span>
+    </div>*@
 
-                       &nbsp;&nbsp;&nbsp;
-                       <span data-bind="text:DealReviewsCount"></span>&nbsp;Reviews
-                   </div>
-                    
-                   
-                </td>
-                <td class="col-sm-1" >
-                   Deallines &nbsp; <span data-bind="text:DealLines"></span>
-                </td>
-                <td class="col-sm-1">
-                    <span data-bind="dateString: CouponEndDate"></span>
-                </td>
-                <td class="col-sm-3">
-                    @*<span data-bind="text: CouponIssuedCount"></span>*@
-                    <table class="tbl-noborder-Padding" style="padding:5px;">
-                        <tbody>
-                            <tr style="color:green">
-                                <td>
-                                    <span>Click-Thrus</span>
-                                </td>
-                                <td>
-                                    <span data-bind="text: ClickThruCount"></span>
-                                </td>
-                                <td>
-                                    <!-- ko if: ClickThruDirection() > 0-->
-                                    <i class="fa fa-long-arrow-up" aria-hidden="true"></i>
-                                    <span style="padding-left:10px" data-bind="text: (ClickThruComparison()).toFixed(2)"> </span>%
-                                    <!-- /ko -->
-                                    <!-- ko if: ClickThruDirection() < 0-->
-                                    <span style="color:red">
-                                        <i class="fa fa-long-arrow-down" aria-hidden="true"></i>
-                                        <span style="padding-left:10px" data-bind="text: (ClickThruComparison()).toFixed(2)"> </span>%
-                                    </span>
-                                    <!-- /ko -->
-                                    <!-- ko if: ClickThruDirection() == 0-->
-                                    <span style="padding-left:12px" data-bind="text: (ClickThruComparison()).toFixed(2)"> </span>%
-                                    <!-- /ko -->
-                                 </td>
-                               
-                            </tr>
-                            <tr style="color:blue">
-                                <td><span>Deals Opened</span></td>
-                                <td><span data-bind="text : CouponViewCount"></span></td>
-                                <td>
-                                    <!-- ko if: DealsOpenedDirection() > 0-->
-                                    <i class="fa fa-long-arrow-up" aria-hidden="true"></i>
-                                    <span style="padding-left:10px" data-bind="text: DealsOpenedComparison().toFixed(2)"></span>%
-                                    <!-- /ko -->
-                                    <!-- ko if: DealsOpenedDirection() < 0-->
-                                    <span style="color:red">
-                                        <i class="fa fa-long-arrow-down" aria-hidden="true"></i>
-                                        <span style="padding-left:10px" data-bind="text: DealsOpenedComparison().toFixed(2)"></span>%
-                                    </span>
-                                    <!-- /ko -->
-                                    <!-- ko if: DealsOpenedDirection() == 0-->
-                                    <span style="padding-left:12px" data-bind="text: DealsOpenedComparison().toFixed(2)"></span>%
-                                    <!-- /ko -->
-                                </td>
-                                
-                            </tr>
-                        </tbody>
-                    </table>
 
-                </td>
-                
-                <td class="col-sm-2">
-                    <div style="font-size:larger;font-weight:bold;">
-                        <!-- ko if: Status() === 1-->
-                        <span style="color:#6D6EFA;">
-                            Draft
-                        </span>
-                    
-                    <!-- /ko -->
-                    <!-- ko if: Status() === 2-->
-                        <span style="color:#fc0 ;">
-                            Pending Approval
-                        </span>
-                    <!-- /ko -->
-                    <!-- ko if:  Status() === 3-->
-                        <span style="color:#37c675 ;">
-                            Live
-                        </span>
-                    <!-- /ko -->
-                    <!-- ko if: Status() === 4-->
-                        <span style="color:#fd008e ;">
-                            Paused
-                        </span>
-                    <!-- /ko -->
-                    <!-- ko if: Status() === 5-->
-                        <span style="color:#c8e392 ;">
-                            Completed
-                        </span>
-                    <!-- /ko -->
-                    <!-- ko if: Status() === 6-->
-                        <span style="color:red ;">
-                            Approval Rejected
-                        </span>
-                    <!-- /ko -->
-                    <!-- ko if: Status() === 7-->
-                        <span style="color:red ;">
-                            Remove
-                        </span>
-                    <!-- /ko -->
-                    <!-- ko if: Status() === 8-->
-                        <span style="color:#fc0 ;">
-                            Completed
-                        </span>
-                    <!-- /ko -->
-                    <!-- ko if: Status() === 9-->
-                            <span style="color:red ;">
-                                Archived
-                            </span>
-                    <!-- /ko -->
+<div class="row" id="CouponsBinding" style="margin-top: 0px;">
+    <div class="col-lg-12" data-bind="visible: $root.isListVisible()">
+        <div class="row">
+            <div class="col-lg-12" style="padding-left:0px;padding-right:9px;">
+                <!-- ko template: { name: 'filterTemplate' } -->
+                <!-- /ko -->
+                <div class="margintop13" data-bind="visible: $root.campaignGridContent().length > 0">
+                    <div class="main-box no-header clearfix" style="padding-top:0px;">
+                        <div class="main-box-body clearfix" style="padding-left:20px;padding-right:22px;">
+                            <div class="tabsdescriptions" style="margin-left:0px;">
+                                <p class="group-header-description"></p>
+                            </div>
+                            <div class="table-responsive" style="margin-right:-4px;">
+                                <table class="table table-striped table-hover tbl-intialAlign">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-sm-3"><span class="GridHeaderFont_size">Campaign Name</span></th>
+                                            <th class="col-sm-2">
+                                                <span class="GridHeaderFont_size">
+                                                    Deal Type
+                                                </span>
+                                            </th>
+                                            <th class="col-sm-1">
+                                                <span class="GridHeaderFont_size">
+                                                    # Deal Lines
+                                                </span>
+                                            </th>
+                                            <th class="col-sm-1">
+                                                <span class="GridHeaderFont_size">End Date</span>
+                                            </th>
+                                            <th class="col-sm-5" colspan="2">
+                                                <span class="GridHeaderFont_size">Last 7 & 14 Day Comparision </span>
+                                            </th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- ko template: { name: 'advertsTemplate' , foreach: $root.campaignGridContent } -->
+                                        <!-- /ko -->
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                    <br />
-                    <div class="text-left statusbg" data-bind="click:$root.onEditCampaign" style="background:#37c675;width:95px;white-space:nowrap;">
-                        <span>
-                            Edit Campaign
-                        </span>
-
                     </div>
-                    <br />
-                    <div class="text-left statusbg" data-bind="click:$root.openAdvertiserDashboardDealScreenOnList" style="background:blue;width:95px;white-space:nowrap;">
-                        <span>
-                            Analyze Charts
-                        </span>
-                    </div>
-                    <br />
-
-                    <div style="text-align: left;padding-left:30px;">
-                        <!-- ko if: Status() == 1 ||  Status() == 4|| Status() ==  6-->
-                        <a class="table-link danger">
-                            <span class="fa-stack" style="height:1em;">
-                                <i class="fa fa-square fa-stack-2x"></i>
-                                <i class="fa fa-trash-o fa-stack-1x fa-inverse" data-bind="click:$root.terminateCampaign"></i>
-                            </span>
-                        </a>
+                    <div id="pagerDivForStore" class="pull-right">
+                        <!-- ko with: pager -->
+                        @Html.Partial("~/Areas/Common/Views/Shared/_Pager.cshtml")
                         <!-- /ko -->
-                    </div>
-
-</td>
-
-
-                @*<td class="col-sm-1">
-                    
-                    &nbsp;
-                </td>*@
-
-            </tr>
-        </script>
-        @* Filter Template *@
-        <script id="filterTemplate" type="text/html">
-            <!-- heading-->
-            <div class="row ">
-
-
-                <div class="col-sm-4" style="text-align:right !important;">
-
-                </div>
-
-            </div>
-            <div class="filter-body" id="filter">
-                <div class="row" style="display:none;">
-                    <div class="col-sm-12" style="float: left;">
-                        
-                        <div>
-                            <span style="font-size: 18px;float:left;color:#81d3dc!important;margin-top:15px;" class="Theme_standard_clr">Deals - List for free !</span>
-                           
-                           
-                            <div style="clear:both;"></div>
-                        </div>
-                        <div style="width:641px;word-wrap:break-word;">
-                            <span style="font-size: 14px;" class="Theme_subheading-Clr ">
-                                Use short and inspiring titles that state your deal clearly.<br /> Note : All your deals are listed inside the Group headline
-                            </span>
-                        </div>
-                        <br />
-                    </div>
-                    <br />
-                </div>
-                <div class="row">
-                    <form data-bind="submit: $root.getCampaignByFilter">
-                        <div class="col-sm-2" style="float:left;">
-                            <div class="filter-block filterbloclkspos" style="margin-right: -10px">
-                                <div class="form-group " data-bind="visible:$root.isCouponSearch()==false">
-                                    <input type="text" class="form-control " placeholder="Search..." data-bind="value: $root.searchFilterValue">
-                                    <i class="fa fa-search search-icon" data-bind="click: $root.getCampaignByFilter"></i>
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="col-sm-2 filterbloclkspos" style="float:left;">
-                            <select class="form-control" style="float:right;height:36px;" data-bind="value : $root.SearchSelectedStatus, event:{ change: $root.getCampaignByFilter},visible:$root.isCouponSearch()==false">
-                                <option value="0">All</option>
-                                <option value="1">Draft</option>
-                                <option value="2">Panding Approval</option>
-                                <option value="3">Live</option>
-                                <option value="4">Pause</option>
-                                <option value="5">Completed</option>
-                                <option value="6">Rejected</option>
-                            </select>
-                        </div>
-                        <div data-bind="visible:$root.islblText()==true">
-                            <div class="col-sm-3 filterbloclkspos" style="float:left;font-size: 20px;margin-top:12px;">
-                                <span>List your first Deal for FREE !</span>
-
-                            </div>
-                            <div class="col-sm-2">
-                                <img src="/Images/Arrow.png" style="height:40px;">
-                            </div>
-                        </div>
-                    </form>
-                    <div class="col-sm-3" style="float:right;padding-top:3px; text-align:right">
-                       
-                        <button class="btn btn-primary create_deal_btn" data-bind="click:$root.addNewCampaign">
-                            Create Deal
-                        </button>
                     </div>
                     <div class="clearfix">
                     </div>
                 </div>
+                <div data-bind="visible: ($root.campaignGridContent().length == 0 &&  $root.gridTotalCount() == 0)" style="display:none;">
+                    <div class="clearfix" style="padding:20px;padding-bottom:10px;">
+                        <div class="col-lg-5"></div>
+                        <span style="color:white">You haven’t created any Deals yet</span>
+                    </div>
+                </div>
             </div>
-        </script>
-      <script>
-          $("#deal_heading").css("cssText", "color:#fff!important;");
+        </div>
+        <div class="row" style="padding-top:10px;">
+            <div class="col-lg-3 col-sm-3" style="float:left;">
+            </div>
+            <div class="col-lg-6 col-sm-6" style="float:left;padding-left:50px; display:none;">
+                <button class="btn  btn-success btnAdsCampaign" style="width:24%;float:left;padding:0px;" id="btnSubmitForApproval" data-bind="click:$root.ShowCouponPromotions">Deal</button>
+                <button class="btn  btn-success btnAdsCampaign @adminClasses" style="width:24%;float:left;padding:0px;" id="btnSubmitForApproval" data-bind="click:gotoManageUsers">Manage Users</button>
+                <button class="btn  btn-success btnAdsCampaign" style="width:24%;float:left;padding:0px;" id="btnSubmitForApproval" data-bind="click:gotoProfile">Marketing Info</button>
+            </div>
+            <div class="col-lg-2 col-sm-2" style="float:left;">
+            </div>
+        </div>
+        <div class="row Subpanels" style="margin-right:1px;padding-top:0px;">
+            <div class="col-lg-12">
 
-          $("#main_btnPannels").css("display", "none");
-          $("#MarketobjDiv").css("display", "none");
-          $(".hideInCoupons").css("display", "none");
-          $(".dash_slide_panel").css("display", "none");
-         
-      </script>
-        <!-- ko stopBinding: true -->
-        @Html.Partial("~/Areas/Common/Views/Shared/_ConfirmationDialog.cshtml")
-        <!-- /ko -->
-        <!-- ko stopBinding: true -->
-        @Html.Partial("~/Areas/Common/Views/Shared/_StripeChargeCustomerDialog.cshtml")
-        <!-- /ko -->
-        @section Scripts{
-            <script src="~/Scripts/jquery.tokenize.js"></script>
-            <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
-            <script src="~/Scripts/heatmap.min.js"></script>
-            <script src="~/Scripts/gmaps-heatmap.js"></script>
+                <div class="col-lg-6" style="padding-top:20px;padding-left:15px;display:none;" data-bind="visible: ($root.campaignGridContent().length == 0 && $root.gridTotalCount() == 0)">
+                    <div class="row">
+                        <span style="font-size:20px;">Be amongst the first to advertise in you area</span>
+                    </div>
+                    <div class="row center">
+                        <img src="/Images/Share_world.png">
+                    </div>
+                </div>
+                <div class="col-lg-6" style="padding-top:20px;padding-left:15px;display:none;" data-bind="visible: $root.campaignGridContent().length > 0">
+                    <div class="row" style="padding-bottom:10px;">
+                        <span style="font-size:20px;margin-left:5px;">Here’s some Deals listed by local advertisers</span>
+                    </div>
+                    <div class="row center">
+                        <div class="col-lg-4">
+                            <img style="height:100px;width:166px;" data-bind="attr:{src:$root.dealImg1()}">
+                            <div class="main-box no-header clearfix" style="padding:8px;margin-top:1px;">
+                                <span data-bind="text:$root.dealtitle1" style="font-size:12px;font-weight:bold"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <img style="height:100px;width:166px;" data-bind="attr:{src:$root.dealImg2()}">
+                            <div class="main-box no-header clearfix" style="padding:8px;margin-top:1px;">
+                                <span data-bind="text:$root.dealtitle2" style="font-size:12px;font-weight:bold"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <img style="height:100px;width:166px;" data-bind="attr:{src:$root.dealImg3()}">
+                            <div class="main-box no-header clearfix" style="padding:8px;margin-top:1px;">
+                                <span data-bind="text:$root.dealtitle3" style="font-size:12px;font-weight:bold"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="padding-top:0px;padding-left:8px;padding-bottom:16px;">
+                        <a href="http://cash4ads.com/" target="_blank">
+                            More...
+                        </a>
+                    </div>
+                </div>
 
-            <script src="~/Scripts/chart.js"></script>
-            <script src="~/Scripts/Charts/knockout.chart.js"></script>
-            
-            <script type="text/javascript">
-                require(["Coupons/Coupons.view", "common/stripeChargeCustomer.view", "common/confirmation.view", "PhraseLibrary/phraseLibrary.view"]);
-                $("#btnCoupons").css("background-color", "#34b9c7");
+                <div class="col-lg-6" style="padding-top:20px;">
+                    <div class="row" style="padding-bottom:10px;">
+                        <span style="font-size:20px;">Create Demand using Urgency and Scarcity</span>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <ul style="list-style-type:circle;margin-left:17px;">
+                                <li>Link deal lines directly to your shopping cart or landing pages</li>
+                                <li>Collect payment directly, we take 0% commission for the referral</li>
+                                <li>Create Countdown Deals with increasing savings as the deal ends</li>
+                                <li>Upgrade to a Monthly Plan and list 3 Deals Groups at the same time </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row" style="padding-bottom:30px;margin-top:19px;">
+                        <span style="color:#3498db;font-family:'Gloria Hallelujah',cursive;">We notify and email people every time you offer a bigger saving</span>
+                    </div>
+                </div>
 
-                $("#panelArea").css("display", "block");
-            </script>
-        }
+            </div>
+        </div>
+        <div class="clearfix" style="padding-bottom:75px;">
+
+        </div>
+
+        <div class="row Subpanels" style="margin-right:1px;padding-top:0px;">
+            <div class="col-lg-12">
+
+
+                <div class="row center">
+                    <img width="1147" src="/Images/displayAdimg.jpg" style="padding:1px;">
+                </div>
+            </div>
+        </div>
+        <div class="scrollup">
+            <span >
+                <i class="fa fa-chevron-up fa-2x" style="visibility:visible; text-align: center;color:white"></i>
+            </span>
+        </div>
+        @*<a href="#" class="scrollup">Scroll</a>*@
+    </div>
+    @{
+        Html.RenderPartial("~/Areas/Coupons/Views/Coupons/ManageCoupon.cshtml");
+    }
+</div>
+<script id="advertsTemplate" type="text/html">
+    <tr style="cursor: pointer">
+        <td class="col-sm-3">
+            <a href="#" class="store-user-link" data-bind="text: CouponTitle,click:$root.onEditCampaign"></a>
+            <br />
+            <img style="width:130px;height:130px;" data-bind="attr: { src:  couponImage1()}">
+
+            <br />
+            <!-- ko if: ApprovalDateTime()-->
+            <span style="color:darkgray;font-size:11px;">
+                Start Date :
+            </span>
+            <span style="color:darkgray;font-size:11px;" data-bind="dateTimeString:  ApprovalDateTime()"></span>
+            <!-- /ko -->
+            <!-- ko if: ApprovalDateTime()== null -->
+            <span style="color:darkgray;font-size:11px;">
+                Not Started
+            </span>
+
+            <!-- /ko -->
+            <!-- ko if: ModifiedDateTime()-->
+            <br />
+            <span style="color:darkgray;font-size:11px;">
+                Last Updated :
+            </span>
+
+            <span style="color:darkgray;font-size:11px;" data-bind="dateTimeString:  ModifiedDateTime()"></span>
+            <!-- /ko -->
+        </td>
+        <td class="col-sm-2">
+            <!-- ko if: CouponListingMode() == 1-->
+            <span>7 Day Flash Deal</span>
+            <!-- /ko -->
+            <!-- ko if: CouponListingMode() == 2-->
+            <span>30 Day Listing</span>
+            <!-- /ko -->
+            <div style="padding-top: 120px;">
+                <span class="review" data-bind="text:DealRating().toFixed(1)"></span>
+
+                &nbsp;&nbsp;&nbsp;
+                <span data-bind="text:DealReviewsCount"></span>&nbsp;Reviews
+            </div>
+
+
+        </td>
+        <td class="col-sm-1">
+            Deallines &nbsp; <span data-bind="text:DealLines"></span>
+        </td>
+        <td class="col-sm-1">
+            <span data-bind="dateString: CouponEndDate"></span>
+        </td>
+        <td class="col-sm-3">
+            @*<span data-bind="text: CouponIssuedCount"></span>*@
+            <table class="tbl-noborder-Padding" style="padding:5px;">
+                <tbody>
+                    <tr style="color:green">
+                        <td>
+                            <span>Click-Thrus</span>
+                        </td>
+                        <td>
+                            <span data-bind="text: ClickThruCount"></span>
+                        </td>
+                        <td>
+                            <!-- ko if: ClickThruDirection() > 0-->
+                            <i class="fa fa-long-arrow-up" aria-hidden="true"></i>
+                            <span style="padding-left:10px" data-bind="text: (ClickThruComparison()).toFixed(2)"> </span>%
+                            <!-- /ko -->
+                            <!-- ko if: ClickThruDirection() < 0-->
+                            <span style="color:red">
+                                <i class="fa fa-long-arrow-down" aria-hidden="true"></i>
+                                <span style="padding-left:10px" data-bind="text: (ClickThruComparison()).toFixed(2)"> </span>%
+                            </span>
+                            <!-- /ko -->
+                            <!-- ko if: ClickThruDirection() == 0-->
+                            <span style="padding-left:12px" data-bind="text: (ClickThruComparison()).toFixed(2)"> </span>%
+                            <!-- /ko -->
+                        </td>
+
+                    </tr>
+                    <tr style="color:blue">
+                        <td><span>Deals Opened</span></td>
+                        <td><span data-bind="text : CouponViewCount"></span></td>
+                        <td>
+                            <!-- ko if: DealsOpenedDirection() > 0-->
+                            <i class="fa fa-long-arrow-up" aria-hidden="true"></i>
+                            <span style="padding-left:10px" data-bind="text: DealsOpenedComparison().toFixed(2)"></span>%
+                            <!-- /ko -->
+                            <!-- ko if: DealsOpenedDirection() < 0-->
+                            <span style="color:red">
+                                <i class="fa fa-long-arrow-down" aria-hidden="true"></i>
+                                <span style="padding-left:10px" data-bind="text: DealsOpenedComparison().toFixed(2)"></span>%
+                            </span>
+                            <!-- /ko -->
+                            <!-- ko if: DealsOpenedDirection() == 0-->
+                            <span style="padding-left:12px" data-bind="text: DealsOpenedComparison().toFixed(2)"></span>%
+                            <!-- /ko -->
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+
+        <td class="col-sm-2">
+            <div style="font-size:larger;font-weight:bold;">
+                <!-- ko if: Status() === 1-->
+                <span style="color:#6D6EFA;">
+                    Draft
+                </span>
+
+                <!-- /ko -->
+                <!-- ko if: Status() === 2-->
+                <span style="color:#fc0 ;">
+                    Pending Approval
+                </span>
+                <!-- /ko -->
+                <!-- ko if:  Status() === 3-->
+                <span style="color:#37c675 ;">
+                    Live
+                </span>
+                <!-- /ko -->
+                <!-- ko if: Status() === 4-->
+                <span style="color:#fd008e ;">
+                    Paused
+                </span>
+                <!-- /ko -->
+                <!-- ko if: Status() === 5-->
+                <span style="color:#c8e392 ;">
+                    Completed
+                </span>
+                <!-- /ko -->
+                <!-- ko if: Status() === 6-->
+                <span style="color:red ;">
+                    Approval Rejected
+                </span>
+                <!-- /ko -->
+                <!-- ko if: Status() === 7-->
+                <span style="color:red ;">
+                    Remove
+                </span>
+                <!-- /ko -->
+                <!-- ko if: Status() === 8-->
+                <span style="color:#fc0 ;">
+                    Completed
+                </span>
+                <!-- /ko -->
+                <!-- ko if: Status() === 9-->
+                <span style="color:red ;">
+                    Archived
+                </span>
+                <!-- /ko -->
+            </div>
+            <br />
+            <div class="text-left statusbg" data-bind="click:$root.onEditCampaign" style="background:#37c675;width:95px;white-space:nowrap;">
+                <span>
+                    Edit Campaign
+                </span>
+
+            </div>
+            <br />
+            <div class="text-left statusbg" data-bind="click:$root.openAdvertiserDashboardDealScreenOnList" style="background:blue;width:95px;white-space:nowrap;">
+                <span>
+                    Analyze Charts
+                </span>
+            </div>
+            <br />
+
+            <div style="text-align: left;padding-left:30px;">
+                <!-- ko if: Status() == 1 ||  Status() == 4|| Status() ==  6-->
+                <a class="table-link danger">
+                    <span class="fa-stack" style="height:1em;">
+                        <i class="fa fa-square fa-stack-2x"></i>
+                        <i class="fa fa-trash-o fa-stack-1x fa-inverse" data-bind="click:$root.terminateCampaign"></i>
+                    </span>
+                </a>
+                <!-- /ko -->
+            </div>
+
+        </td>
+
+        @*<td class="col-sm-1">
+
+                &nbsp;
+            </td>*@
+    </tr>
+</script>
+@* Filter Template *@
+<script id="filterTemplate" type="text/html">
+    <!-- heading-->
+    <div class="row ">
+
+        <div class="col-sm-4" style="text-align:right !important;">
+        </div>
+    </div>
+    <div class="filter-body" id="filter">
+        <div class="row" style="display:none;">
+            <div class="col-sm-12" style="float: left;">
+
+                <div>
+                    <span style="font-size: 18px;float:left;color:#81d3dc!important;margin-top:15px;" class="Theme_standard_clr">Deals - List for free !</span>
+
+
+                    <div style="clear:both;"></div>
+                </div>
+                <div style="width:641px;word-wrap:break-word;">
+                    <span style="font-size: 14px;" class="Theme_subheading-Clr ">
+                        Use short and inspiring titles that state your deal clearly.<br /> Note : All your deals are listed inside the Group headline
+                    </span>
+                </div>
+                <br />
+            </div>
+            <br />
+        </div>
+        <div class="row">
+            <form data-bind="submit: $root.getCampaignByFilter">
+                <div class="col-sm-2" style="float:left;">
+                    <div class="filter-block filterbloclkspos" style="margin-right: -10px">
+                        <div class="form-group " data-bind="visible:$root.isCouponSearch()==false">
+                            <input type="text" class="form-control " placeholder="Search..." data-bind="value: $root.searchFilterValue">
+                            <i class="fa fa-search search-icon" data-bind="click: $root.getCampaignByFilter"></i>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="col-sm-2 filterbloclkspos" style="float:left;">
+                    <select class="form-control" style="float:right;height:36px;" data-bind="value : $root.SearchSelectedStatus, event:{ change: $root.getCampaignByFilter},visible:$root.isCouponSearch()==false">
+                        <option value="0">All</option>
+                        <option value="1">Draft</option>
+                        <option value="2">Panding Approval</option>
+                        <option value="3">Live</option>
+                        <option value="4">Pause</option>
+                        <option value="5">Completed</option>
+                        <option value="6">Rejected</option>
+                    </select>
+                </div>
+                <div data-bind="visible:$root.islblText()==true">
+                    <div class="col-sm-3 filterbloclkspos" style="float:left;font-size: 20px;margin-top:12px;">
+                        <span>List your first Deal for FREE !</span>
+
+                    </div>
+                    <div class="col-sm-2">
+                        <img src="/Images/Arrow.png" style="height:40px;">
+                    </div>
+                </div>
+            </form>
+            <div class="col-sm-3" style="float:right;padding-top:3px; text-align:right">
+
+                <button class="btn btn-success create_deal_btn" data-bind="click:$root.addNewCampaign">
+                    Create Deal
+                </button>
+            </div>
+            <div class="clearfix">
+            </div>
+        </div>
+    </div>
+</script>
+<script>
+    $("#deal_heading").css("cssText", "color:#fff!important;");
+
+    $("#main_btnPannels").css("display", "none");
+    $("#MarketobjDiv").css("display", "none");
+    $(".hideInCoupons").css("display", "none");
+    $(".dash_slide_panel").css("display", "none");
+
+</script>
+<!-- ko stopBinding: true -->
+@Html.Partial("~/Areas/Common/Views/Shared/_ConfirmationDialog.cshtml")
+<!-- /ko -->
+<!-- ko stopBinding: true -->
+@Html.Partial("~/Areas/Common/Views/Shared/_StripeChargeCustomerDialog.cshtml")
+<!-- /ko -->
+@section Scripts{
+    <script src="~/Scripts/jquery.tokenize.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script src="~/Scripts/heatmap.min.js"></script>
+    <script src="~/Scripts/gmaps-heatmap.js"></script>
+    <script src="~/Scripts/chart.js"></script>
+    <script src="~/Scripts/Charts/knockout.chart.js"></script>
+
+    <script type="text/javascript">
+        require(["Coupons/Coupons.view", "common/stripeChargeCustomer.view", "common/confirmation.view", "PhraseLibrary/phraseLibrary.view"]);
+        $("#btnCoupons").css("background-color", "#34b9c7");
+
+        $("#panelArea").css("display", "block");
+    </script>
+}
+<script>
+    $(document).ready(function () {
+
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 100) {
+                $('.scrollup').fadeIn();
+            } else {
+                $('.scrollup').fadeOut();
+            }
+        });
+
+        $('.scrollup').click(function () {
+            $("html, body").animate({
+                scrollTop: 0
+            }, 600);
+            return false;
+        });
+
+    });
+</script>

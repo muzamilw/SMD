@@ -292,6 +292,7 @@
     <Compile Include="ResponseModels\AdCampaignBaseResponse.cs" />
     <Compile Include="ResponseModels\AdCampaignResposneModelForAproval.cs" />
     <Compile Include="ResponseModels\AdCampaignApiSearchRequestResponse.cs" />
+    <Compile Include="ResponseModels\AdGetCouponCategories.cs" />
     <Compile Include="ResponseModels\BaseApiResponse.cs" />
     <Compile Include="ResponseModels\CompanyResponseModel.cs" />
     <Compile Include="ResponseModels\CompanySubscription.cs" />

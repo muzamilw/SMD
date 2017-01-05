@@ -1,6 +1,6 @@
-﻿USE [SMDv2]
+﻿
 GO
-/****** Object:  StoredProcedure [dbo].[GetCouponByID]    Script Date: 12/2/2016 3:37:24 PM ******/
+/****** Object:  StoredProcedure [dbo].[GetCouponByID]    Script Date: 1/4/2017 5:15:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -79,8 +79,8 @@ SELECT c.[CouponId]
       ,[Rejecteddatetime]
       ,[RejectedBy]
       ,c.[CurrencyId]
-      ,[Price]
-      ,[Savings]
+      ,[Price] as Savings
+      ,[Savings] as Price
       
       ,[CouponViewCount]
       ,[CouponIssuedCount]
@@ -140,7 +140,7 @@ SELECT c.[CouponId]
 		
 	 [LogoUrl],
 
-	 (case when c.couponlistingmode = 1 then datediff(d,dateadd(d,7, c.ApprovalDateTime),getdate()) else datediff(d,dateadd(d,30, c.ApprovalDateTime),getdate()) end)  DaysLeft 
+	 (case when c.couponlistingmode = 1 then datediff(d,getdate(),dateadd(d,7, c.ApprovalDateTime)) else datediff(d,getdate(),dateadd(d,30, c.ApprovalDateTime)) end)  DaysLeft 
 	 ,
 	 case when 
 
@@ -163,8 +163,50 @@ c.IsShowPhoneNo,
 c.IsShowMap,
 c.IsShowyouTube,
 c.IsShowAboutUs,
-(case when uReview.UserId is null then 0 else 1 end) UserHasRated
+(case when uReview.UserId is null then 0 else 1 end) UserHasRated,
+(case when c.DealFirstDiscountType = 0 then 10
+					when c.DealFirstDiscountType = 1 then 20
+					when c.DealFirstDiscountType = 2 then 25
+					when c.DealFirstDiscountType = 3 then 30
+					when c.DealFirstDiscountType = 4 then 40
+					when c.DealFirstDiscountType = 5 then 50
+					when c.DealFirstDiscountType = 6 then 60
+					when c.DealFirstDiscountType = 7 then 50
+					when c.DealFirstDiscountType = 8 then 1
+					when c.DealFirstDiscountType = 9 then 3
+					when c.DealFirstDiscountType = 10 then 5
+					when c.DealFirstDiscountType = 11 then 10
+					when c.DealFirstDiscountType = 12 then 15
+					when c.DealFirstDiscountType = 13 then 20
+					when c.DealFirstDiscountType = 14 then 25
+					when c.DealFirstDiscountType = 15 then 30
+					when c.DealFirstDiscountType = 16 then 40
+					when c.DealFirstDiscountType = 17 then 50
+					
 
+
+
+					end ) discount,
+					(case when c.DealFirstDiscountType = 0 then 1
+					when c.DealFirstDiscountType = 1 then 1
+					when c.DealFirstDiscountType = 2 then 1
+					when c.DealFirstDiscountType = 3 then 1
+					when c.DealFirstDiscountType = 4 then 1
+					when c.DealFirstDiscountType = 5 then 1
+					when c.DealFirstDiscountType = 6 then 1
+					when c.DealFirstDiscountType = 7 then 1
+					when c.DealFirstDiscountType = 8 then 2
+					when c.DealFirstDiscountType = 9 then 2
+					when c.DealFirstDiscountType = 10 then 2
+					when c.DealFirstDiscountType = 11 then 2
+					when c.DealFirstDiscountType = 12 then 2
+					when c.DealFirstDiscountType = 13 then 2
+					when c.DealFirstDiscountType = 14 then 2
+					when c.DealFirstDiscountType = 15 then 2
+					when c.DealFirstDiscountType = 16 then 2
+					when c.DealFirstDiscountType = 17 then 2
+
+					end ) discountType
 
 
 	from coupon as c 
@@ -173,5 +215,6 @@ c.IsShowAboutUs,
 	inner join Country countr on comp.BillingCountryId = countr.CountryID
 	inner join Currency curr on countr.CurrencyId = curr.CurrencyID 
 	left outer join CouponRatingReview uReview on c.CouponId = uReview.CouponId and uReview.UserId = @UserId
+	
 	where c.CouponId = @CouponId
 END
