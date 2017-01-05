@@ -1553,7 +1553,7 @@ define("survey/survey.viewModel",
                                     return;
                                 }
                                 else {
-                                    if (userBaseData().isStripeIntegrated == false) {
+                                    if (userBaseData().isStripeIntegrated == false && userBaseData().IsSpecialAccount!=true) {
                                         stripeChargeCustomer.show(function () {
                                             userBaseData().isStripeIntegrated = true;
 

@@ -248,16 +248,10 @@ define("FranchiseDashboard/Coupons.viewModel",
                         dataservice.saveCoupon(selectedCoupon().convertToServerData(), {
                             success: function (response) {
 
-                                if (response.indexOf("Failed") == -1) {
+                                if (response.indexOf("Failed") == -1 && response!= "True") {
                                     dataservice.sendApprovalRejectionEmail(selectedCoupon().convertToServerData(), {
                                         success: function (obj) {
                                             getCoupons();
-                                            //var existingCampaigntodelete = $.grep(campaigns(), function (n, i) {
-                                            //    return (n.id() == campId);
-                                            //});
-
-                                            //campaigns.remove(existingCampaigntodelete);
-
                                             isEditorVisible(false);
                                         },
                                         error: function () {
@@ -266,8 +260,8 @@ define("FranchiseDashboard/Coupons.viewModel",
                                     });
                                 }
                                 else {
-
-                                    toastr.error(response);
+                                    getCoupons();
+                                    isEditorVisible(false);
                                 }
                             },
                             error: function () {

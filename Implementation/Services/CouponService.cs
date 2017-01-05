@@ -1100,7 +1100,7 @@ namespace SMD.Implementation.Services
 
                 //}
             }
-            return "";
+            return "True";
         }
 
         public Currency GetCurrenyById(int id)
