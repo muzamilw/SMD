@@ -343,7 +343,7 @@ else
                                             <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;" data-bind="visible: $root.FlagToShowDivs()">
                                                 max length 30 sec
                                             </div>
-                                            <video id="videoTag" controls style="width:300px;height:150px;" onclick="showvideoUploadDialog();" data-bind="    attr: { src: $root.VideoLink2src()+$root.randonNumber() }"></video>
+                                            <video id="videoTag" class="main_video" controls style="width:300px;height:150px;" onclick="showvideoUploadDialog();" data-bind="    attr: { src: $root.VideoLink2src()+$root.randonNumber() }"></video>
                                         </div>
                                         <div class="defaultImgUploadImageBtn" style="width:75px;">
                                             <div class="fileUpload" style="margin-top:8px;">
@@ -3171,7 +3171,7 @@ else
                     </div>
                     <div id="video_panel">
 
-                        <video id="videoTag_prev" controls="" class="preview_video" data-bind="attr: { src: $root.VideoLink2src()+$root.randonNumber() }" src="null?r=0"></video>
+                        <video id="videoTag_prev" controls="" class="preview_video main_video" data-bind="attr: { src: $root.VideoLink2src()+$root.randonNumber() }" src="null?r=0"></video>
                     </div>
 
                     <div style="padding-top:24px;text-align: center;height:78px">
@@ -4272,20 +4272,18 @@ else
     function playVideo(event) {
 
         var playSelectedFile = function (event) {
-
+            
             var file = this.files[0]
             var type = file.type
-            var videoNode = document.querySelectorAll('video')
-
+            
+            var videoNode = document.querySelectorAll('.main_video')
+           
             var canPlay = videoNode[0].canPlayType(type)
             var canPlay = videoNode[1].canPlayType(type)
-            var canPlay = videoNode[2].canPlayType(type)
-            var canPlay = videoNode[3].canPlayType(type)
-            var canPlay = videoNode[4].canPlayType(type)
-            var canPlay = videoNode[5].canPlayType(type)
+            
 
 
-            videoNode[2].removeAttribute("controls")
+            videoNode[1].removeAttribute("controls")
             if (canPlay === '') canPlay = 'no'
             var message = 'Can play type "' + type + '": ' + canPlay
             var isError = canPlay === 'no'
@@ -4297,10 +4295,7 @@ else
 
             videoNode[0].src = fileURL
             videoNode[1].src = fileURL
-            videoNode[2].src = fileURL
-            videoNode[3].src = fileURL
-            videoNode[4].src = fileURL
-            videoNode[5].src = fileURL
+            
         }
         var inputNode = document.querySelector('#videoUploader')
 
