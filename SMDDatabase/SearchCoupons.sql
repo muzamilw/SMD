@@ -1,6 +1,6 @@
-﻿USE [SMDv2]
+﻿
 GO
-/****** Object:  StoredProcedure [dbo].[SearchCoupons]    Script Date: 12/21/2016 5:50:27 PM ******/
+/****** Object:  StoredProcedure [dbo].[SearchCoupons]    Script Date: 1/4/2017 4:35:31 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -54,7 +54,16 @@ DECLARE @source geography = geography::Point(@lat, @lon, 4326)
 					THEN 'http://manage.cash4ads.com/' + vchr.LogoUrl
 				END as AdvertisersLogoPath from company c
 				 where c.CompanyId = vchr.CompanyId) as LogoUrl,
-				isnull(cpopt.Price,0) Price, isnull(cpopt.Savings,0) Savings, isnull(SwapCost,0) SwapCost, vchr.CompanyId, CouponActiveMonth,CouponActiveYear
+				isnull(cpopt.Price,0) Price, 
+				
+				(case when selfr.discountType = 1 then cpopt.price * selfr.discount/100 else   cpopt.price -  selfr.discount end ) as Savings, 
+				
+				
+				
+				
+				
+				
+				isnull(SwapCost,0) SwapCost, vchr.CompanyId, CouponActiveMonth,CouponActiveYear
 				,DATEFROMPARTS(vchr.CouponActiveYear, vchr.CouponActiveMonth,day(EOMONTH ( DATEFROMPARTS(vchr.CouponActiveYear, vchr.CouponActiveMonth,1)))) eod,
 				vchr.ApprovalDateTime strt,
 
@@ -72,7 +81,8 @@ DECLARE @source geography = geography::Point(@lat, @lon, 4326)
 				cast(isnull(crrRatingAvg.arravg,0)+5 as numeric(36,1)) AvgRating,
 				(case when uReview.UserId is null then 0 else 1 end) UserHasRated,
 				(case when couponlistingmode = 1 then datediff(d,getdate(),dateadd(d,7, ApprovalDateTime)) else datediff(d,getdate(),dateadd(d,30, ApprovalDateTime)) end)  DaysLeft
-	
+
+				
 
 				from Coupon vchr
 				inner join CouponCategories cc on cc.CouponId = vchr.CouponId and vchr.LocationLAT is not null and vchr.LocationLON is not null
@@ -94,6 +104,54 @@ DECLARE @source geography = geography::Point(@lat, @lon, 4326)
 								FROM   CouponRatingReview crr
 								WHERE  crr.CouponId = vchr.CouponId
 								) crrRatingAvg
+
+				outer apply (
+							select 
+							(case when crr.DealFirstDiscountType = 0 then 10
+					when crr.DealFirstDiscountType = 1 then 20
+					when crr.DealFirstDiscountType = 2 then 25
+					when crr.DealFirstDiscountType = 3 then 30
+					when crr.DealFirstDiscountType = 4 then 40
+					when crr.DealFirstDiscountType = 5 then 50
+					when crr.DealFirstDiscountType = 6 then 60
+					when crr.DealFirstDiscountType = 7 then 50
+					when crr.DealFirstDiscountType = 8 then 1
+					when crr.DealFirstDiscountType = 9 then 3
+					when crr.DealFirstDiscountType = 10 then 5
+					when crr.DealFirstDiscountType = 11 then 10
+					when crr.DealFirstDiscountType = 12 then 15
+					when crr.DealFirstDiscountType = 13 then 20
+					when crr.DealFirstDiscountType = 14 then 25
+					when crr.DealFirstDiscountType = 15 then 30
+					when crr.DealFirstDiscountType = 16 then 40
+					when crr.DealFirstDiscountType = 17 then 50
+					
+
+
+
+					end ) discount,
+					(case when crr.DealFirstDiscountType = 0 then 1
+					when crr.DealFirstDiscountType = 1 then 1
+					when crr.DealFirstDiscountType = 2 then 1
+					when crr.DealFirstDiscountType = 3 then 1
+					when crr.DealFirstDiscountType = 4 then 1
+					when crr.DealFirstDiscountType = 5 then 1
+					when crr.DealFirstDiscountType = 6 then 1
+					when crr.DealFirstDiscountType = 7 then 1
+					when crr.DealFirstDiscountType = 8 then 2
+					when crr.DealFirstDiscountType = 9 then 2
+					when crr.DealFirstDiscountType = 10 then 2
+					when crr.DealFirstDiscountType = 11 then 2
+					when crr.DealFirstDiscountType = 12 then 2
+					when crr.DealFirstDiscountType = 13 then 2
+					when crr.DealFirstDiscountType = 14 then 2
+					when crr.DealFirstDiscountType = 15 then 2
+					when crr.DealFirstDiscountType = 16 then 2
+					when crr.DealFirstDiscountType = 17 then 2
+
+					end ) discountType
+					from coupon crr where crr.CouponId = vchr.CouponId
+							) selfr
 
 	
 				where (
@@ -131,7 +189,7 @@ DECLARE @source geography = geography::Point(@lat, @lon, 4326)
 
 		
 					)
-					group by vchr.CouponId, CouponTitle,vchr.CouponImage1,LogoUrl,cpopt.Price, cpopt.Savings,SwapCost,vchr.CompanyId,CouponActiveMonth,CouponActiveYear,vchr.LocationLAT, vchr.LocationLON,CouponListingMode, comp.companyname, vchr.LocationTitle, vchr.LocationCity,vchr.ApprovalDateTime, cpoptc.cnt,curr.CurrencyCode,curr.CurrencySymbol,crrRatingAvg.arravg,uReview.UserId
+					group by vchr.CouponId, CouponTitle,vchr.CouponImage1,LogoUrl,cpopt.Price, cpopt.Savings,SwapCost,vchr.CompanyId,CouponActiveMonth,CouponActiveYear,vchr.LocationLAT, vchr.LocationLON,CouponListingMode, comp.companyname, vchr.LocationTitle, vchr.LocationCity,vchr.ApprovalDateTime, cpoptc.cnt,curr.CurrencyCode,curr.CurrencySymbol,crrRatingAvg.arravg,uReview.UserId,selfr.discountType,selfr.discount
 
 
 					

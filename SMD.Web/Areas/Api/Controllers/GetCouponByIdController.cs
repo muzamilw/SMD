@@ -80,6 +80,14 @@ namespace SMD.MIS.Areas.Api.Controllers
             if (couponPriceoptions != null && couponPriceoptions.Count > 0)
                 res.CouponPriceOptions = couponPriceoptions.Select(a => Mapper.Map<SMD.Models.DomainModels.CouponPriceOption, SMD.MIS.Areas.Api.Models.CouponPriceOption>(a)).ToList();
 
+
+                //bloody reversed columns here again. due to omar's and app devs bullshit. it started within SP
+            foreach (var item in res.CouponPriceOptions)
+            {
+                res.Price = coupon.discountType.Value == 1 ? res.Savings * coupon.discount.Value / 100 : res.Savings - coupon.discount.Value;
+            }
+
+
             res.distance = Math.Round(res.distance.Value,1);
             res.FlaggedByCurrentUser = _couponService.CheckCouponFlaggedByUser(Convert.ToInt64(CouponId), UserId);
             return res;
