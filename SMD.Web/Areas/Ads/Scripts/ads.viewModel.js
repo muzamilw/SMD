@@ -178,7 +178,7 @@ define("ads/ads.viewModel",
                     datasets: [
                         {
                             data: this.PieChartValue,
-                            backgroundColor: ['green', 'blue','red' ,'orange','pink']
+                            backgroundColor: ['green', 'blue', 'red', 'orange', 'pink']
 
                         }]
                 }),
@@ -309,7 +309,7 @@ define("ads/ads.viewModel",
                         Gender: selectedQQGAnalytics(),
                         age: selectedQQAAnalytics(),
                         profession: selectedQQPAnalytics(),
-                        City: selectedQQCtAnalytics()?selectedQQCtAnalytics():'All',
+                        City: selectedQQCtAnalytics() ? selectedQQCtAnalytics() : 'All',
                         QId: 0,
                         type: 1
                     }, {
@@ -439,15 +439,15 @@ define("ads/ads.viewModel",
 
 				                    heatmap.setData(testData);
 				                    hasImpression(true);
-				                    
+
 				                    $("#GenderBarChartId").html("");
 				                    $("#AgeBarChartId").html("");
-				                    
+
 				                    var BarChart1 = Morris.Bar({
 				                        element: 'AgeBarChartId',
 				                        data: PerAgeChartAnalyticsData(),
 				                        xkey: 'city', ykeys: ['C10_20', 'C20_30', 'C30_40', 'C40_50', 'C50_60', 'C60_70', 'C70_80', 'C80_90', 'C90_'], labels: ['10_20', '20_30', '30_40', '40_50', '50_60', '60_70', '70_80', '80_90', '90+']
-				                       
+
 				                    });
 				                    var BarChart2 = Morris.Bar({
 				                        element: 'GenderBarChartId',
@@ -1225,7 +1225,7 @@ define("ads/ads.viewModel",
 
 
 
-                    if (campaignModel().ClickRate() < minclickrate) {
+                    if (campaignModel().ClickRate() < minclickrate && isClickRateVisible()!=true) {
                         errorListNew.push({ name: "Ad Click should be greater than $ " + minclickrate + " USD", element: "" });
                     }
 
@@ -1238,8 +1238,10 @@ define("ads/ads.viewModel",
                             name: "You have no audience against the specified criteria please broaden your audience definition.", element: ""
                         });
                     }
-                    if (campaignModel().VerifyQuestion() == "" || campaignModel().VerifyQuestion() == undefined || campaignModel().Answer1() == "" || campaignModel().Answer1() == undefined || campaignModel().Answer2() == "" || campaignModel().Answer2() == undefined) {
-                        errorListNew.push({ name: "Plz add your survey question and minimum two answers", element: "" });
+                    if (isClickRateVisible() != true) {
+                        if (campaignModel().VerifyQuestion() == "" || campaignModel().VerifyQuestion() == undefined || campaignModel().Answer1() == "" || campaignModel().Answer1() == undefined || campaignModel().Answer2() == "" || campaignModel().Answer2() == undefined) {
+                            errorListNew.push({ name: "Plz add your survey question and minimum two answers", element: "" });
+                        }
                     }
 
                     if (errorListNew() == null || errorListNew().length == 0) {
@@ -3145,7 +3147,7 @@ define("ads/ads.viewModel",
                             $("#spinnerAudience").css("display", "none");
                             reachedAudience(data.MatchingUsers);
                             ShowAudienceCounter(GetAudienceCount(data.MatchingUsers));
-                            
+
 
                             totalAudience(data.AllUsers);
                             var percent = data.MatchingUsers / data.AllUsers;
@@ -3532,7 +3534,7 @@ define("ads/ads.viewModel",
                             QuestionId: 0,
                         }, {
                             success: function (data) {
-                                
+
                                 if (data != null) {
                                     myQuizQuestions([]);
                                     ko.utils.arrayPushAll(myQuizQuestions(), data.AdCampaigns);
