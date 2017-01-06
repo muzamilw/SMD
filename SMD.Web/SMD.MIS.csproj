@@ -1556,6 +1556,10 @@
     <Content Include="Images\download-on-google-play.png" />
     <Content Include="Images\guru.png" />
     <Content Include="Images\heroAccent.png" />
+    <Content Include="Images\imgDealFooter.png" />
+    <Content Include="Images\imgAddFooter.png" />
+    <Content Include="Images\imgFooterDisplay.png" />
+    <Content Include="Images\imgFooterPools.png" />
     <Content Include="Images\iphoneStencil.png" />
     <Content Include="Images\New_Register_Image.png" />
     <Content Include="Images\NY-city.jpg" />

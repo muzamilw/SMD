@@ -662,10 +662,10 @@ namespace SMD.Implementation.Services
             MailMessage oMailBody = new MailMessage
                                     {
                                         IsBodyHtml = true,
-                                        From = new MailAddress("info@myprintcloud.com", "Sell My Data"),
-                                        Subject = "WebHook Handler Exception",
+                                        From = new MailAddress("info@cash4ads", "Cash4Ads Error"),
+                                        Subject = "Error See inside",
                                         Body =
-                                            "<p>WebHook Handler have been failed due to following error.<br /><br />" +
+                                            "<p>Error : " +
                                             errormsg + "</p>",
                                         Priority = MailPriority.Normal
                                     };
@@ -674,7 +674,7 @@ namespace SMD.Implementation.Services
             string smtp = ConfigurationManager.AppSettings["SMTPServer"];
             string mailAddress = ConfigurationManager.AppSettings["smtpUser"];
             string mailPassword = ConfigurationManager.AppSettings["smtpPassword"];
-            string mailAddressTo = ConfigurationManager.AppSettings["contactInternalEmail"];
+            string mailAddressTo = ConfigurationManager.AppSettings["CampaignApprovalEmails"];
             oMailBody.To.Add(mailAddressTo);
             SmtpClient objSmtpClient = new SmtpClient(smtp);
             NetworkCredential mailAuthentication = new NetworkCredential(mailAddress, mailPassword);
@@ -1082,6 +1082,36 @@ namespace SMD.Implementation.Services
                 throw new Exception("Email could not be sent!");
             }
         }
+
+
+        public void SendVideoAdCampaignSubmissionEmail(string aspnetUserId, string campaignName, int ClicksPerDay, string videoPath, string videoImage)
+        {
+
+            var emails = System.Configuration.ConfigurationManager.AppSettings["CampaignApprovalEmails"];
+
+
+            var oUser = manageUserRepository.GetByUserId(aspnetUserId);
+
+            if (oUser != null)
+            {
+                MMailto.AddRange(emails.Split(','));
+                Mid = (int)EmailTypes.VideoAdCampaignSubmitted;
+                Muser = oUser.FullName;
+
+                CampaignName = campaignName;
+
+                CampaignClicksPerDay = ClicksPerDay.ToString();
+                CampaignVideoPath = videoPath;
+                CampaignVideoImage = videoImage;
+
+                SendEmailNotAysnc();
+            }
+            else
+            {
+                throw new Exception("Email could not be sent!");
+            }
+        }
+
         public void SendVideoAdCampaignRejectionEmail(string aspnetUserId, string campaignName, int ClicksPerDay, string videoPath, string videoImage, string RReason)
         {
             var oUser = manageUserRepository.GetByUserId(aspnetUserId);
@@ -1131,6 +1161,32 @@ namespace SMD.Implementation.Services
             }
         }
 
+
+        public void SendSurveyCampaignSubmissionEmail(string aspnetUserId, string campaignName, string LeftImage, string RightImage)
+        {
+            var oUser = manageUserRepository.GetByUserId(aspnetUserId);
+
+            var emails = System.Configuration.ConfigurationManager.AppSettings["CampaignApprovalEmails"];
+
+            if (oUser != null)
+            {
+                MMailto.AddRange(emails.Split(','));
+                Mid = (int)EmailTypes.PicturePollCampaignSubmitted;
+                Muser = oUser.FullName;
+
+                CampaignName = campaignName;
+
+                SendEmailNotAysnc();
+            }
+            else
+            {
+                throw new Exception("Email could not be sent!");
+            }
+        }
+
+
+
+
         public void SendSurveyCampaignRejectedEmail(string aspnetUserId, string campaignName, string LeftImage, string RightImage, string RReason)
         {
             var oUser = manageUserRepository.GetByUserId(aspnetUserId);
@@ -1176,6 +1232,36 @@ namespace SMD.Implementation.Services
                 throw new Exception("Email could not be sent!");
             }
         }
+
+
+       
+
+        public void SendDisplayAdCampaignSubmissionEmail(string aspnetUserId, string campaignName, int ClicksPerDay, string BannerPath)
+        {
+            var oUser = manageUserRepository.GetByUserId(aspnetUserId);
+
+            var emails = System.Configuration.ConfigurationManager.AppSettings["CampaignApprovalEmails"];
+
+            if (oUser != null)
+            {
+                MMailto.AddRange(emails.Split(','));
+                Mid = (int)EmailTypes.DisplayAdCampaignSubmitted;
+                Muser = oUser.FullName;
+
+                CampaignName = campaignName;
+
+                CampaignClicksPerDay = ClicksPerDay.ToString();
+                CampaignBannerImage = BannerPath;
+
+
+                SendEmailNotAysnc();
+            }
+            else
+            {
+                throw new Exception("Email could not be sent!");
+            }
+        }
+
         public void SendDisplayAdCampaignRejectionEmail(string aspnetUserId, string campaignName, int ClicksPerDay, string BannerPath, string RReason)
         {
             var oUser = manageUserRepository.GetByUserId(aspnetUserId);
@@ -1212,6 +1298,29 @@ namespace SMD.Implementation.Services
             {
                 MMailto.Add(oUser.Email);
                 Mid = (int)EmailTypes.CouponApproved;
+                Muser = oUser.FullName;
+                CampaignName = campaignName;
+                CampaignBannerImage = BannerPath;
+                DealNoOfDays = dealNoOfDays.ToString();
+
+                SendEmailNotAysnc();
+            }
+            else
+            {
+                throw new Exception("Email could not be sent!");
+            }
+        }
+
+        public void SendCouponCampaignSubmissionEmail(string aspnetUserId, string campaignName, int dealNoOfDays, string BannerPath)
+        {
+            var oUser = manageUserRepository.GetByUserId(aspnetUserId);
+
+            var emails = System.Configuration.ConfigurationManager.AppSettings["CampaignApprovalEmails"];
+
+            if (oUser != null)
+            {
+                MMailto.AddRange(emails.Split(','));
+                Mid = (int)EmailTypes.CouponSubmitted;
                 Muser = oUser.FullName;
                 CampaignName = campaignName;
                 CampaignBannerImage = BannerPath;
@@ -1262,7 +1371,7 @@ namespace SMD.Implementation.Services
             }
             else
             {
-                throw new Exception("Email could not be sent!");
+                SendErrorLog("SendProfileQuestionRejectionEmailForApproval  comp ");
             }
         }
 
@@ -1273,21 +1382,33 @@ namespace SMD.Implementation.Services
         /// </summary>
         public void SendAppFeedback(string UserId, string feedback, string City, string Country, string FullName, string email, string phone)
         {
-            MMailto.Add("info@cash4ads.com");
-            Mid = (int)EmailTypes.AppFeedbackFromUser;
-            string userName = email;
+            try
+            {
 
 
-            this.Fname = FullName;
-            this.PhoneNo = phone;
-            this.sfemail = email;
-            this.feedback = feedback;
-            this.CountryName = Country;
-            this.City = City;
+                MMailto.Add("info@cash4ads.com");
+                Mid = (int)EmailTypes.AppFeedbackFromUser;
+                string userName = email;
 
-            Muser = FullName;
 
-            SendEmailNotAysnc();
+                this.Fname = FullName;
+                this.PhoneNo = phone;
+                this.sfemail = email;
+                this.feedback = feedback;
+                this.CountryName = Country;
+                this.City = City;
+
+                Muser = FullName;
+
+                SendEmailNotAysnc();
+            }
+            catch (Exception e)
+            {
+                // logg the exception
+                SendErrorLog("SendAppFeedback  cname " + email + "   " + feedback + e.ToString());
+            }
+
+
 
 
 
@@ -1333,7 +1454,7 @@ namespace SMD.Implementation.Services
             }
             else
             {
-                throw new Exception("Email could not be sent!");
+                SendErrorLog("SendPaymentRejectionEmail  comp " + comp.CompanyName + "   " + Muser);
             }
         }
 
@@ -1355,7 +1476,7 @@ namespace SMD.Implementation.Services
             }
             else
             {
-                throw new Exception("Email could not be sent!");
+                SendErrorLog("SendCouponSubscriptionCreatedEmail  comp " + comp.CompanyName + "   " + Muser );
             }
 
             return true;
@@ -1371,118 +1492,129 @@ namespace SMD.Implementation.Services
 
             foreach (var campaign in data)
             {
-                MMailto.Clear();
-
-                MMailto.Add(campaign.email);
-
-                CampaignName = campaign.CampaignName;
-
-                switch (campaign.type)
+                try
                 {
-                    case 1:
-                        {
-                            Mid = (int)EmailTypes.WeeklyVideoAdPerformanceStats;
-
-                            ctlw = campaign.ClickThroughsLastWeek.ToString();
-                            ctpq = campaign.ClickThroughsPreviousWeek.ToString();
-                            trendc = campaign.ProgressPercentage.ToString();
-
-                            if (campaign.ProgressPercentage > 0)
-                                clickthroughcolor = "green";
-                            else
-                                clickthroughcolor = "red";
 
 
-                            alw = campaign.AnsweredLastWeek.ToString();
-                            apw = campaign.AnsweredPreviousWeek.ToString();
-                            trenda = campaign.ProgressPercentageAnswer.ToString();
+                    MMailto.Clear();
 
-                            if (campaign.ProgressPercentageAnswer > 0)
-                                answercolor = "green";
-                            else
-                                answercolor = "red";
+                    MMailto.Add(campaign.email);
 
+                    CampaignName = campaign.CampaignName;
 
-                            break;
-                        }
-                    case 4:
-                        {
-                            Mid = (int)EmailTypes.WeeklyDisplayAdPerformanceStats;
-
-                            ctlw = campaign.ClickThroughsLastWeek.ToString();
-                            ctpq = campaign.ClickThroughsPreviousWeek.ToString();
-                            trendc = campaign.ProgressPercentage.ToString();
-
-                            if (campaign.ProgressPercentage > 0)
-                                clickthroughcolor = "green";
-                            else
-                                clickthroughcolor = "red";
-
-
-                            alw = campaign.AnsweredLastWeek.ToString();
-                            apw = campaign.AnsweredPreviousWeek.ToString();
-                            trenda = campaign.ProgressPercentageAnswer.ToString();
-
-                            if (campaign.ProgressPercentageAnswer > 0)
-                                answercolor = "green";
-                            else
-                                answercolor = "red";
-
-
-                            break;
-                        }
-                    case 5:
-                        {
-                            Mid = (int)EmailTypes.WeeklyDealPerformanceStats;
-
-                            ctlw = campaign.ClickThroughsLastWeek.ToString();
-                            ctpq = campaign.ClickThroughsPreviousWeek.ToString();
-                            trendc = campaign.ProgressPercentage.ToString();
-
-                            if (campaign.ProgressPercentage > 0)
-                                clickthroughcolor = "green";
-                            else
-                                clickthroughcolor = "red";
-
-
-                            alw = campaign.AnsweredLastWeek.ToString();
-                            apw = campaign.AnsweredPreviousWeek.ToString();
-                            trenda = campaign.ProgressPercentageAnswer.ToString();
-
-                            if (campaign.ProgressPercentageAnswer > 0)
-                                answercolor = "green";
-                            else
-                                answercolor = "red";
-
-
-                            break;
-                        }
-                    case 6:
-                        {
-                            Mid = (int)EmailTypes.WeeklyPollSurveyPerformanceStats;
-
-
-                            if (campaign.LeftPicResponseCount > campaign.RightPicResponseCount)
+                    switch (campaign.type)
+                    {
+                        case 1:
                             {
-                                winnerpoll = "One";
-                                winnerpollperc = ((campaign.LeftPicResponseCount - campaign.RightPicResponseCount) / campaign.RightPicResponseCount * 100).ToString() + "%";
+                                Mid = (int)EmailTypes.WeeklyVideoAdPerformanceStats;
+
+                                ctlw = campaign.ClickThroughsLastWeek.ToString();
+                                ctpq = campaign.ClickThroughsPreviousWeek.ToString();
+                                trendc = campaign.ProgressPercentage.ToString();
+
+                                if (campaign.ProgressPercentage > 0)
+                                    clickthroughcolor = "green";
+                                else
+                                    clickthroughcolor = "red";
+
+
+                                alw = campaign.AnsweredLastWeek.ToString();
+                                apw = campaign.AnsweredPreviousWeek.ToString();
+                                trenda = campaign.ProgressPercentageAnswer.ToString();
+
+                                if (campaign.ProgressPercentageAnswer > 0)
+                                    answercolor = "green";
+                                else
+                                    answercolor = "red";
+
+
+                                break;
                             }
-                            else
+                        case 4:
                             {
-                                winnerpoll = "Two";
-                                winnerpollperc = ((campaign.RightPicResponseCount - campaign.LeftPicResponseCount) / campaign.LeftPicResponseCount * 100).ToString() + "%";
+                                Mid = (int)EmailTypes.WeeklyDisplayAdPerformanceStats;
+
+                                ctlw = campaign.ClickThroughsLastWeek.ToString();
+                                ctpq = campaign.ClickThroughsPreviousWeek.ToString();
+                                trendc = campaign.ProgressPercentage.ToString();
+
+                                if (campaign.ProgressPercentage > 0)
+                                    clickthroughcolor = "green";
+                                else
+                                    clickthroughcolor = "red";
+
+
+                                alw = campaign.AnsweredLastWeek.ToString();
+                                apw = campaign.AnsweredPreviousWeek.ToString();
+                                trenda = campaign.ProgressPercentageAnswer.ToString();
+
+                                if (campaign.ProgressPercentageAnswer > 0)
+                                    answercolor = "green";
+                                else
+                                    answercolor = "red";
+
+
+                                break;
                             }
+                        case 5:
+                            {
+                                Mid = (int)EmailTypes.WeeklyDealPerformanceStats;
 
-                            pollanswercount = (campaign.LeftPicResponseCount + campaign.RightPicResponseCount).ToString();
+                                ctlw = campaign.ClickThroughsLastWeek.ToString();
+                                ctpq = campaign.ClickThroughsPreviousWeek.ToString();
+                                trendc = campaign.ProgressPercentage.ToString();
+
+                                if (campaign.ProgressPercentage > 0)
+                                    clickthroughcolor = "green";
+                                else
+                                    clickthroughcolor = "red";
 
 
-                            break;
-                        }
+                                alw = campaign.AnsweredLastWeek.ToString();
+                                apw = campaign.AnsweredPreviousWeek.ToString();
+                                trenda = campaign.ProgressPercentageAnswer.ToString();
+
+                                if (campaign.ProgressPercentageAnswer > 0)
+                                    answercolor = "green";
+                                else
+                                    answercolor = "red";
+
+
+                                break;
+                            }
+                        case 6:
+                            {
+                                Mid = (int)EmailTypes.WeeklyPollSurveyPerformanceStats;
+
+
+                                if (campaign.LeftPicResponseCount > campaign.RightPicResponseCount)
+                                {
+                                    winnerpoll = "One";
+                                    winnerpollperc = ((campaign.LeftPicResponseCount - campaign.RightPicResponseCount) / campaign.RightPicResponseCount * 100).ToString() + "%";
+                                }
+                                else
+                                {
+                                    winnerpoll = "Two";
+                                    winnerpollperc = ((campaign.RightPicResponseCount - campaign.LeftPicResponseCount) / campaign.LeftPicResponseCount * 100).ToString() + "%";
+                                }
+
+                                pollanswercount = (campaign.LeftPicResponseCount + campaign.RightPicResponseCount).ToString();
+
+
+                                break;
+                            }
+                    }
+
+                    Muser = campaign.FullName;
+
+                    SendEmailNotAysnc();
+
                 }
-
-                Muser = campaign.FullName;
-
-                SendEmailNotAysnc();
+                catch (Exception e)
+                {
+                    // logg the exception
+                    SendErrorLog("SendCampaignPerformanceEmails  cname " + CampaignName + "   " + Muser + e.ToString());
+                }
 
             }
 
@@ -1503,43 +1635,54 @@ namespace SMD.Implementation.Services
 
                 foreach (var user in users)
                 {
-                    userDeals = "<table align=\"center\" bgcolor=\"#F2F2F2\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style='width:100%;'>";
-                    //user.Key.UserId
-
-                    foreach (var item in user)
+                    try
                     {
-                        userDeals += "<tr><td colspan='2' align=\"center\"><img style='text-align:center;max-width:560px' src='" + item.couponimage1 + "'/></td></tr>";
-                        userDeals += "<tr><td colspan='2' align=\"center\" style='text-align:center;padding-bottom:10px;'><p style=\"style=color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;\">" + item.CouponTitle + " <span style='color:red'>" + item.CurrencySymbol + "" + item.SavingsNew + "</span></p></td></tr>";
-                        userDeals += "<tr><td style='padding-left:64px;padding-bottom:60px'><p style=\"style=color:red; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;\">was " + item.CurrencySymbol + "" + item.price + "</p></td><td align='right' style='padding-right:60px'><a href='http://deals.cash4ads.com/deal/" + item.CouponId + "' style=\"background-color:#6DC6DD; border-collapse:separate; border-top:20px solid #6DC6DD; border-right:40px solid #6DC6DD; border-bottom:20px solid #6DC6DD; border-left:40px solid #6DC6DD; border-radius:3px; color:#FFFFFF; display:inline-block; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:600; letter-spacing:.3px; text-decoration:none;\" target='_blank'>VIEW DEAL</a></td></tr>";
+
+
+                        userDeals = "<table align=\"center\" bgcolor=\"#F2F2F2\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style='width:100%;'>";
+                        //user.Key.UserId
+
+                        foreach (var item in user)
+                        {
+                            userDeals += "<tr><td colspan='2' align=\"center\"><img style='text-align:center;max-width:560px' src='" + item.couponimage1 + "'/></td></tr>";
+                            userDeals += "<tr><td colspan='2' align=\"center\" style='text-align:center;padding-bottom:10px;'><p style=\"style=color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;\">" + item.CouponTitle + " <span style='color:red'>" + item.CurrencySymbol + "" + item.SavingsNew + "</span></p></td></tr>";
+                            userDeals += "<tr><td style='padding-left:64px;padding-bottom:60px'><p style=\"style=color:red; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;\">was " + item.CurrencySymbol + "" + item.price + "</p></td><td align='right' style='padding-right:60px'><a href='http://deals.cash4ads.com/deal/" + item.CouponId + "' style=\"background-color:#6DC6DD; border-collapse:separate; border-top:20px solid #6DC6DD; border-right:40px solid #6DC6DD; border-bottom:20px solid #6DC6DD; border-left:40px solid #6DC6DD; border-radius:3px; color:#FFFFFF; display:inline-block; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:600; letter-spacing:.3px; text-decoration:none;\" target='_blank'>VIEW DEAL</a></td></tr>";
+                        }
+
+
+                        userDeals += "</table>";
+
+                        MMailto.Clear();
+
+                        MMailto.Add(user.Key.Email);
+                        if (mode == 1)
+                            Mid = (int)EmailTypes.NewCouponsNearMe;
+                        else if (mode == 2)
+                            Mid = (int)EmailTypes.Last3DaysPercentageCouponsNearMe;
+                        else if (mode == 3)
+                            Mid = (int)EmailTypes.Last2DaysPercentageCouponsNearMe;
+                        else if (mode == 4)
+                            Mid = (int)EmailTypes.LastDayPercentageCouponsNearMe;
+                        else if (mode == 5)
+                            Mid = (int)EmailTypes.Last3DaysDollarDiscountCouponsNearMe;
+                        else if (mode == 6)
+                            Mid = (int)EmailTypes.Last2DaysDollarDiscountCouponsNearMe;
+                        else if (mode == 7)
+                            Mid = (int)EmailTypes.LastDayDollarDiscountCouponsNearMe;
+
+
+                        Muser = user.Key.FullName;
+                        UserDealsHTML = userDeals;
+
+
+                        SendEmailNotAysnc();
+
                     }
-
-
-                    userDeals += "</table>";
-
-                    MMailto.Clear();
-
-                    MMailto.Add(user.Key.Email);
-                    if (mode == 1)
-                        Mid = (int)EmailTypes.NewCouponsNearMe;
-                    else if (mode == 2)
-                        Mid = (int)EmailTypes.Last3DaysPercentageCouponsNearMe;
-                    else if (mode == 3)
-                        Mid = (int)EmailTypes.Last2DaysPercentageCouponsNearMe;
-                    else if (mode == 4)
-                        Mid = (int)EmailTypes.LastDayPercentageCouponsNearMe;
-                    else if (mode == 5)
-                        Mid = (int)EmailTypes.Last3DaysDollarDiscountCouponsNearMe;
-                    else if (mode == 6)
-                        Mid = (int)EmailTypes.Last2DaysDollarDiscountCouponsNearMe;
-                    else if (mode == 7)
-                        Mid = (int)EmailTypes.LastDayDollarDiscountCouponsNearMe;
-
-
-                    Muser = user.Key.FullName;
-                    UserDealsHTML = userDeals;
-
-
-                    SendEmailNotAysnc();
+                    catch (Exception e)
+                    {
+                        // logg the exception
+                        SendErrorLog("SendNewDealsEmail  type " + Mid+ "   "  + Muser + e.ToString());
+                    }
 
                 }
             }
@@ -1598,24 +1741,35 @@ namespace SMD.Implementation.Services
 
         public void SendNewReviewAvailableToAdvertiser(string ReviewerUserId, string campaignName, double Rating, string Reviewtext, string ReviwerFullName, string AdvertiserUserId)
         {
-            var oUser = manageUserRepository.GetByUserId(AdvertiserUserId);
-
-
-            if (oUser != null)
+            try
             {
-                MMailto.Add(oUser.Email);
-                Mid = (int)EmailTypes.DealReviewNotificationToAdvertiser;
-                Muser = oUser.FullName;
-                CampaignName = campaignName;
-                Reviewer = ReviwerFullName;
-                ReviewRating = Rating.ToString();
-                Review = Reviewtext;
 
-                SendEmailNotAysnc();
+
+                var oUser = manageUserRepository.GetByUserId(AdvertiserUserId);
+
+
+                if (oUser != null)
+                {
+                    MMailto.Add(oUser.Email);
+                    Mid = (int)EmailTypes.DealReviewNotificationToAdvertiser;
+                    Muser = oUser.FullName;
+                    CampaignName = campaignName;
+                    Reviewer = ReviwerFullName;
+                    ReviewRating = Rating.ToString();
+                    Review = Reviewtext;
+
+                    SendEmailNotAysnc();
+                }
+                else
+                {
+                    throw new Exception("Email could not be sent!");
+                }
+
             }
-            else
+            catch (Exception e)
             {
-                throw new Exception("Email could not be sent!");
+                // logg the exception
+                SendErrorLog("SendNewReviewAvailableToAdvertiser  " + campaignName + e.ToString());
             }
         }
 
@@ -1626,21 +1780,29 @@ namespace SMD.Implementation.Services
         /// </summary>
         public void NewUserSignupToAdmin(string UserId, string FullName, string email, string phone, string signuplocation)
         {
-            MMailto.Add("info@cash4ads.com");
-            Mid = (int)EmailTypes.NewUserSignupToAdmin;
-            string userName = email;
+            try
+            {
 
 
-            this.Fname = FullName;
-            this.PhoneNo = phone;
-            this.sfemail = email;
-            SignupLocation = signuplocation;
-
-            Muser = FullName;
-
-            SendEmailNotAysnc();
+                MMailto.Add("info@cash4ads.com");
+                Mid = (int)EmailTypes.NewUserSignupToAdmin;
+                string userName = email;
 
 
+                this.Fname = FullName;
+                this.PhoneNo = phone;
+                this.sfemail = email;
+                SignupLocation = signuplocation;
+
+                Muser = FullName;
+
+                SendEmailNotAysnc();
+            }
+            catch (Exception e)
+            {
+                // logg the exception
+                SendErrorLog("NewUserSignupToAdmin  " + FullName + e.ToString());
+            }
 
         }
 
@@ -1650,9 +1812,10 @@ namespace SMD.Implementation.Services
 
 
             var data = couponRepository.GetDealsWhichHavejustExpired();
-            try
+
+            foreach (var item in data)
             {
-                foreach (var item in data)
+                try
                 {
                     MMailto.Clear();
 
@@ -1662,28 +1825,41 @@ namespace SMD.Implementation.Services
 
                     Muser = item.FullName;
                     CampaignName = item.CouponTitle;
-                    DealNoOfDays =   item.DaysLeft.Value.ToString();
+                    DealNoOfDays = item.DaysLeft.Value.ToString();
                     SendEmailNotAysnc();
                 }
+                catch (Exception e)
+                {
+                    // logg the exception
+                    SendErrorLog("SendDealExpiredNotificationToAdvertiser  " + CampaignName + e.ToString());
+                }
+            }
+         
+
+            long[] couponsToComplete = null;
+            try
+            {
+                couponsToComplete = data.Select(g => g.CouponId).ToArray();
+                couponRepository.CompleteCoupons(couponsToComplete);
             }
             catch (Exception e)
             {
                 // logg the exception
-            }
 
-            var couponsToComplete = data.Select(g => g.CouponId).ToArray();
-            couponRepository.CompleteCoupons(couponsToComplete);
+                SendErrorLog("Send3DaysDealExpiredNotificationToAdvertiser  CompleteCoupons " + couponsToComplete.ToString() + e.ToString());
+            }
         }
 
 
 
-        
+
         public void Send3DaysDealExpiredNotificationToAdvertiser()
         {
             var data = couponRepository.GetDealsWhichWillExpirein3Days();
-            try
+
+            foreach (var item in data)
             {
-                foreach (var item in data)
+                try
                 {
                     MMailto.Clear();
 
@@ -1696,14 +1872,15 @@ namespace SMD.Implementation.Services
                     DealNoOfDays = item.DaysLeft.Value.ToString();
                     SendEmailNotAysnc();
                 }
-            }
-            catch (Exception e)
-            {
-                // logg the exception
+                catch (Exception e)
+                {
+                    // logg the exception
+
+                    SendErrorLog("Send3DaysDealExpiredNotificationToAdvertiser  " + CampaignName + e.ToString());
+                }
             }
 
-            var couponsToComplete = data.Select(g => g.CouponId).ToArray();
-            couponRepository.CompleteCoupons(couponsToComplete);
+            
         }
 
     }
