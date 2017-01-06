@@ -1066,7 +1066,9 @@ getfreeCouponCount = function () {
             Banner4Flag(false);
             Banner5Flag(false);
             Banner6Flag(false);
+            couponModel().CouponPriceOptions()[0].Price(10);
             selectedPriceOption(couponModel().CouponPriceOptions()[0]);
+            perSaving();
             couponModel().reset();
             if (couponCategories().length > 0)
                 _.each(couponCategories(), function (coupcc) {
