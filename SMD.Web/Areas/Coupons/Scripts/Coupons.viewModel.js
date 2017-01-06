@@ -1291,7 +1291,7 @@ getfreeCouponCount = function () {
                 confirmation.show();
                 return;
             }
-            if (freeCouponCount() > 0 && (UserAndCostDetail().StripeSubscriptionStatus == null || UserAndCostDetail().StripeSubscriptionStatus == "canceled")) {
+            if (freeCouponCount() > 0 && (UserAndCostDetail().StripeSubscriptionStatus == null || UserAndCostDetail().StripeSubscriptionStatus == "canceled") && UserAndCostDetail().IsSpecialAccount != true) {
                 confirmation.messageText("Your deal cannot be submitted as there is already a free deal active." + "<br\>" + "Please subscribe to avail unlimited deals.")
                 confirmation.afterProceed(function () {
                     stripeChargeCustomer.show(function () {
@@ -1308,7 +1308,7 @@ getfreeCouponCount = function () {
                 confirmation.show();
             }
             else {
-                if (couponModel().CouponListingMode() == 1 && couponModel().CouponPriceOptions().length > 1 && (UserAndCostDetail().StripeSubscriptionStatus == null ||UserAndCostDetail().StripeSubscriptionStatus == "canceled")) {
+                if (couponModel().CouponListingMode() == 1 && couponModel().CouponPriceOptions().length > 1 && (UserAndCostDetail().StripeSubscriptionStatus == null ||UserAndCostDetail().StripeSubscriptionStatus == "canceled")&& UserAndCostDetail().IsSpecialAccount != true) {
                     confirmation.messageText("Your deal cannot be submitted as it has more than one deal headlines." + "<br\>" + "Please subscribe to avail unlimited deal headlines.");
                     confirmation.afterProceed(function () {
                         stripeChargeCustomer.show(function () {
@@ -1325,7 +1325,7 @@ getfreeCouponCount = function () {
                     confirmation.show();
                 }
                 else {
-                    if (couponModel().CouponListingMode() == 1 && couponModel().CouponPriceOptions().length == 1 &&(UserAndCostDetail().StripeSubscriptionStatus == null ||UserAndCostDetail().StripeSubscriptionStatus == "canceled")) {
+                    if (couponModel().CouponListingMode() == 1 && couponModel().CouponPriceOptions().length == 1 && (UserAndCostDetail().StripeSubscriptionStatus == null || UserAndCostDetail().StripeSubscriptionStatus == "canceled") && UserAndCostDetail().IsSpecialAccount != true) {
                         saveCampaign(2);
                     }
                     else {

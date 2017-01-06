@@ -21,8 +21,7 @@ namespace SMD.MIS.Areas.Api.Controllers
 
         public List<AdGetCouponCategories> Get(long CouponId) 
         {
-            var ct = _couponService.GetDealsByCtgId(CouponId);
-
+            
             return _couponService.GetDealsByCtgId(CouponId);
         }
     }

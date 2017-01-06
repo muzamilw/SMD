@@ -303,8 +303,6 @@ namespace SMD.Repository.Repositories
                        where coupon.CouponId == CouponId
                        select new AdGetCouponCategories {Id=Coupcatg.Id, CouponId = Coupcatg.CouponId??0, couponImage1 = coupon.couponImage1, CouponTitle = coupon.CouponTitle }).ToList();
 
-             
-
              if (obj.Count > 0)
              {
                  foreach (var item in obj)
@@ -321,7 +319,6 @@ namespace SMD.Repository.Repositories
                          GetList.Add(ctgObj);
                      }
                      
-
                  }
              }
              return GetList;

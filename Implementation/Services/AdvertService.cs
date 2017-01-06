@@ -810,6 +810,9 @@ namespace SMD.Implementation.Services
             var dbAd = _adCampaignRepository.Find(source.CampaignId);
             // Update 
             if (dbAd != null)
+                if (dbAd.ClickRate == 0.0)
+                    dbAd.ClickRate = 1;
+
             {
                 if (dbAd.Type == 1)     //video ad
                 {
@@ -1242,7 +1245,7 @@ namespace SMD.Implementation.Services
                     dbAd.Status = (Int32)AdCampaignStatus.Live;
                     dbAd.StartDateTime = DateTime.Now;
                     dbAd.EndDateTime = DateTime.Now.AddDays(30);
-                    if (dbAd.IsPaymentCollected != true)
+                    if (dbAd.IsPaymentCollected != true && userData.Company.IsSpecialAccount != true)
                     {
                         dbAd.IsPaymentCollected = true;
                         dbAd.PaymentDate = DateTime.Now;
@@ -1282,7 +1285,8 @@ namespace SMD.Implementation.Services
 
                 //event history
                 campaignEventHistoryRepository.InsertCampaignEvent((AdCampaignStatus)dbAd.Status, dbAd.CampaignId);
-
+                if (userData.Company.IsSpecialAccount == true)
+                    dbAd.ClickRate = 1;
 
                 if (dbAd.Type == 1)     //video ad
                 {

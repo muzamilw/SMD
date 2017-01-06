@@ -215,9 +215,14 @@ else
 
 
                 <div class="row center">
-                    <img width="1147" data-bind="attr:{src:$root.IsGameAds()==true ?'/Images/displayAdimg.jpg':'/Images/videoAdImage.jpg'}" style="padding:1px;">
+                    <img width="1147" data-bind="attr:{src:$root.IsGameAds()==true ?'/Images/videoAdImage.jpg':'/Images/pollsFooterImg.jpg'}" style="padding:1px;">
                 </div>
             </div>
+        </div>
+        <div class="scrollup">
+            <span>
+                <i class="fa fa-chevron-up fa-2x" style="visibility:visible; text-align: center;color:white"></i>
+            </span>
         </div>
     </div>
     @{
@@ -289,28 +294,22 @@ else
             <div class="piechart">
                 <canvas data-bind="chart: { type: 'pie', data: CampaignRatioData, options: { observeChanges: true, throttle: 1000, legend: { display: false }, maintainAspectRatio: false,responsive: true } }"></canvas>
             </div>
-            @*<!-- ko if: Answer3() != null -->
-                <div data-bind="morris: {type: 'Donut', data: [{label: Answer1(), value: Answer1Stats()},{label: Answer2(), value: Answer2Stats()},{label: Answer3(), value: Answer3Stats()}], resize:true, colors: ['green', 'blue','red' ]  }" style="height:230px;cursor:pointer;"></div>
-                <!-- /ko -->
-                <!-- ko if: Answer3() == null -->
-                <div data-bind="morris: {type: 'Donut', data: [{label: Answer1(), value: Answer1Stats()},{label: Answer2(), value: Answer2Stats()}], resize:true, colors: ['green', 'blue','red' ]  }" style="height:230px;cursor:pointer;"></div>
-                <!-- /ko -->*@
             <!-- /ko -->
         </td>
 
         <td class="col-sm-1">
-            <table class="tbl-noborder">
+            <table class="tbl-noborder-Padding">
                 <tbody>
                     <tr>
                         <td>
-                            <br /><br />
+                            <br />
                         </td>
-                        <td></td>
+                        <td><br /></td>
                     </tr>
                     <!-- ko if: Answer1() != null -->
                     <tr>
                         <td>
-                            <span class="col-sm-2" data-bind="text: Answer1"></span>
+                            <span data-bind="text: Answer1"></span>
                         </td>
                         <td>
                             <span data-bind="text: SurveyAnsweredAllTime() > 0 ? ((Answer1Stats()/(SurveyAnsweredAllTime()))*100).toFixed(2): 0"></span>%
@@ -320,7 +319,7 @@ else
                     <!-- ko if: Answer2() != null -->
                     <tr>
                         <td>
-                            <span class="col-sm-2" data-bind="text: Answer2"></span>
+                            <span data-bind="text: Answer2"></span>
                         </td>
                         <td>
                             <span data-bind="text: SurveyAnsweredAllTime() > 0 ? ((Answer2Stats()/SurveyAnsweredAllTime())*100).toFixed(2):0"></span>%
@@ -330,7 +329,7 @@ else
                     <!-- ko if: Answer3() != null -->
                     <tr>
                         <td>
-                            <span class="col-sm-2" data-bind="text: Answer3"></span>
+                            <span data-bind="text: Answer3"></span>
                         </td>
                         <td>
                             <span data-bind="text: SurveyAnsweredAllTime() > 0 ? ((Answer3Stats()/SurveyAnsweredAllTime())*100).toFixed(2):0"></span>%
@@ -344,11 +343,11 @@ else
         <td class="col-sm-1">
             <div style="font-size:larger;font-weight:bold;">
                 <!-- ko if: Status() == 1-->
-                <span style="color:#6D6EFA; " data-bind="text: StatusValue">
+                <span style="color:red; " data-bind="text: StatusValue">
                 </span>
                 <!-- /ko -->
                 <!-- ko if: Status() == 2-->
-                <span style="color:#fc0; " data-bind="text: StatusValue">
+                <span style="color:red; " data-bind="text: StatusValue">
                 </span>
                 <!-- /ko -->
                 <!-- ko if:  Status() == 3-->
@@ -356,11 +355,11 @@ else
                 </span>
                 <!-- /ko -->
                 <!-- ko if: Status() == 4-->
-                <span style="color:#fd008e; " data-bind="text: StatusValue">
+                <span style="color:red; " data-bind="text: StatusValue">
                 </span>
                 <!-- /ko -->
                 <!-- ko if: Status() == 5-->
-                <span style="color:#c8e392; " data-bind="text: StatusValue">
+                <span style="color:red; " data-bind="text: StatusValue">
                 </span>
                 <!-- /ko -->
                 <!-- ko if: Status() == 6-->
@@ -372,7 +371,7 @@ else
                 </span>
                 <!-- /ko -->
                 <!-- ko if: Status() == 8-->
-                <span style="color:#fc0; " data-bind="text: StatusValue"> </span>
+                <span style="color:red; " data-bind="text: StatusValue"> </span>
                 <!-- /ko -->
                 <!-- ko if: Status() == 9-->
                 <span style="color:red; " data-bind="text: StatusValue"> </span>
@@ -539,6 +538,21 @@ else
 
                 $("#headlabel").text("Display ads");
             }
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 100) {
+                    $('.scrollup').fadeIn();
+                } else {
+                    $('.scrollup').fadeOut();
+                }
+            });
+
+            $('.scrollup').click(function () {
+                $("html, body").animate({
+                    scrollTop: 0
+                }, 600);
+                return false;
+            });
+
         });
 
 

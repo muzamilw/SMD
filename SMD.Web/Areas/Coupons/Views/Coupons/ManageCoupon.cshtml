@@ -816,20 +816,22 @@ else
 
                                     </div>
 
+
                                     <div class="form-group" data-bind="visible:$root.hideLandingPageURl">
+
                                         <div class="col-lg-2">
                                             <label for="txtBuyItUrl" class="control-label text-right tooltip-float floatNone">Landing page url </label>
                                         </div>
-                                        <div class="col-lg-10">
-                                            <div class="col-lg-8" style="padding-left:0px;">
-                                                <textarea class="form-control" id="txtBuyItUrl" rows="1" placeholder="Enter in landing page url" style="width:380px;margin-top:5px;resize:none" maxlength="500" data-bind="value:BuyitLandingPageUrl"></textarea>
+                                        <div class="col-lg-9 borderPanel Subpanels" style="padding-bottom:10px;margin-left:7px;">
+                                            <div class="col-lg-9">
+                                                <textarea style="width:100%!important;margin-top:5px;resize:none;color:blue" class="form-control" id="txtBuyItUrl" rows="1" placeholder="Enter in landing page url " data-bind="value:BuyitLandingPageUrl"></textarea>
                                             </div>
-                                            <div class="col-lg-4" style="padding-top:4px;text-align:right;">
-                                                <button style="width:123px;height:33px;" class="btn  btn-success gtild-color" id="btnNext" onclick="openUrl();">Test URL Link</button>
+                                            <div class="col-lg-3" style="padding-top:3px;margin-left:0px;">
+                                                <button style="width:123px;height:33px;" class="btn  btn-success gtild-color urlbtn" id="btnNext" onclick="openUrl();">Test Link</button>
                                             </div>
                                         </div>
                                     </div>
-
+                               
                                     @*Banners   Pannel *@
                                     <div class="col-lg-12">
                                         <div class="row">
@@ -1067,7 +1069,7 @@ else
                                             <div style="position:relative;">
                                                 <img src="/Images/close2-128.png" width="20" class="preview_close" data-dismiss="modal" />
                                             </div>
-                                            <div id="background" class="mobBck mobile_background" style="height:1052px;">
+                                            <div id="background" class="mobBck mobile_background" style="min-height:1052px;">
 
 
                                                 <div class="deals_head_panel" data-bind="text:$root.couponModel().CouponTitle()">
@@ -1088,6 +1090,7 @@ else
                                                         <span class="deal_group_Pice" style="padding-right: 15px;font-size: 11px;">18 Ratings</span>
                                                     </div>
                                                 </div>
+
                                                 <div id="deal_line">
                                                     <div class="deals_panel_des1">
 
@@ -1147,10 +1150,6 @@ else
                                                             </div>
                                                             <div class="clearfix"></div>
                                                         </div>
-
-
-
-
 
                                                         <div id="about_us_div" style="min-height:56px;margin-top:6px;border-bottom: 1px solid grey;">
                                                             <div class="headers">About Us</div>

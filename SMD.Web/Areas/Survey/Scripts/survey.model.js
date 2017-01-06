@@ -76,6 +76,18 @@
 
                 AmountCharged = ko.observable(AmountCharged),
 
+                PieChartValue = ko.observableArray([0,0]),
+                PieChartlabel = ko.observableArray(["",""]),
+                CampaignRatioData = ko.observable({
+                    labels: PieChartlabel,
+                    datasets: [
+                        {
+                            data: PieChartValue,
+                            backgroundColor: ['green', 'blue', 'red']
+
+                        }]
+
+                }),
                 errors = ko.validation.group({
                     Question: Question,
                     //LeftPictureBytes: LeftPictureBytes,
@@ -215,7 +227,10 @@
                 AmountCharged: AmountCharged,
                 IsUseFilter: IsUseFilter,
                 LastModified:LastModified,
-                PieChartData: PieChartData
+                PieChartData: PieChartData,
+                CampaignRatioData: CampaignRatioData,
+                PieChartValue :PieChartValue ,
+                PieChartlabel : PieChartlabel
             };
         };
 
