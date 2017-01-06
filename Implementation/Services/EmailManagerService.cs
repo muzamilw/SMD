@@ -1082,6 +1082,36 @@ namespace SMD.Implementation.Services
                 throw new Exception("Email could not be sent!");
             }
         }
+
+
+        public void SendVideoAdCampaignSubmissionEmail(string aspnetUserId, string campaignName, int ClicksPerDay, string videoPath, string videoImage)
+        {
+
+            var emails = System.Configuration.ConfigurationManager.AppSettings["CampaignApprovalEmails"];
+
+
+            var oUser = manageUserRepository.GetByUserId(aspnetUserId);
+
+            if (oUser != null)
+            {
+                MMailto.AddRange(emails.Split(','));
+                Mid = (int)EmailTypes.VideoAdCampaignSubmitted;
+                Muser = oUser.FullName;
+
+                CampaignName = campaignName;
+
+                CampaignClicksPerDay = ClicksPerDay.ToString();
+                CampaignVideoPath = videoPath;
+                CampaignVideoImage = videoImage;
+
+                SendEmailNotAysnc();
+            }
+            else
+            {
+                throw new Exception("Email could not be sent!");
+            }
+        }
+
         public void SendVideoAdCampaignRejectionEmail(string aspnetUserId, string campaignName, int ClicksPerDay, string videoPath, string videoImage, string RReason)
         {
             var oUser = manageUserRepository.GetByUserId(aspnetUserId);
@@ -1131,6 +1161,32 @@ namespace SMD.Implementation.Services
             }
         }
 
+
+        public void SendSurveyCampaignSubmissionEmail(string aspnetUserId, string campaignName, string LeftImage, string RightImage)
+        {
+            var oUser = manageUserRepository.GetByUserId(aspnetUserId);
+
+            var emails = System.Configuration.ConfigurationManager.AppSettings["CampaignApprovalEmails"];
+
+            if (oUser != null)
+            {
+                MMailto.AddRange(emails.Split(','));
+                Mid = (int)EmailTypes.PicturePollCampaignSubmitted;
+                Muser = oUser.FullName;
+
+                CampaignName = campaignName;
+
+                SendEmailNotAysnc();
+            }
+            else
+            {
+                throw new Exception("Email could not be sent!");
+            }
+        }
+
+
+
+
         public void SendSurveyCampaignRejectedEmail(string aspnetUserId, string campaignName, string LeftImage, string RightImage, string RReason)
         {
             var oUser = manageUserRepository.GetByUserId(aspnetUserId);
@@ -1176,6 +1232,36 @@ namespace SMD.Implementation.Services
                 throw new Exception("Email could not be sent!");
             }
         }
+
+
+       
+
+        public void SendDisplayAdCampaignSubmissionEmail(string aspnetUserId, string campaignName, int ClicksPerDay, string BannerPath)
+        {
+            var oUser = manageUserRepository.GetByUserId(aspnetUserId);
+
+            var emails = System.Configuration.ConfigurationManager.AppSettings["CampaignApprovalEmails"];
+
+            if (oUser != null)
+            {
+                MMailto.AddRange(emails.Split(','));
+                Mid = (int)EmailTypes.DisplayAdCampaignSubmitted;
+                Muser = oUser.FullName;
+
+                CampaignName = campaignName;
+
+                CampaignClicksPerDay = ClicksPerDay.ToString();
+                CampaignBannerImage = BannerPath;
+
+
+                SendEmailNotAysnc();
+            }
+            else
+            {
+                throw new Exception("Email could not be sent!");
+            }
+        }
+
         public void SendDisplayAdCampaignRejectionEmail(string aspnetUserId, string campaignName, int ClicksPerDay, string BannerPath, string RReason)
         {
             var oUser = manageUserRepository.GetByUserId(aspnetUserId);
@@ -1212,6 +1298,29 @@ namespace SMD.Implementation.Services
             {
                 MMailto.Add(oUser.Email);
                 Mid = (int)EmailTypes.CouponApproved;
+                Muser = oUser.FullName;
+                CampaignName = campaignName;
+                CampaignBannerImage = BannerPath;
+                DealNoOfDays = dealNoOfDays.ToString();
+
+                SendEmailNotAysnc();
+            }
+            else
+            {
+                throw new Exception("Email could not be sent!");
+            }
+        }
+
+        public void SendCouponCampaignSubmissionEmail(string aspnetUserId, string campaignName, int dealNoOfDays, string BannerPath)
+        {
+            var oUser = manageUserRepository.GetByUserId(aspnetUserId);
+
+            var emails = System.Configuration.ConfigurationManager.AppSettings["CampaignApprovalEmails"];
+
+            if (oUser != null)
+            {
+                MMailto.AddRange(emails.Split(','));
+                Mid = (int)EmailTypes.CouponSubmitted;
                 Muser = oUser.FullName;
                 CampaignName = campaignName;
                 CampaignBannerImage = BannerPath;
