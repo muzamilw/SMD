@@ -66,7 +66,12 @@
         DealReviewNotificationToAdvertiser = 43,
         NewUserSignupToAdmin = 44,
         DealExpiryNotificationToAdvertiser = 45,
-        ThreeDayDealExpiryNotificationToAdvertiser = 46
+        ThreeDayDealExpiryNotificationToAdvertiser = 46,
+        VideoAdCampaignSubmitted = 47,
+        DisplayAdCampaignSubmitted = 48,
+        CouponSubmitted = 49,
+        PicturePollCampaignSubmitted = 50
+
     }
 
     public enum AdCampaignCriteriaType
