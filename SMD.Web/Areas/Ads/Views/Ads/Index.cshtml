@@ -215,7 +215,7 @@ else
 
 
                 <div class="row center">
-                    <img width="1147" data-bind="attr:{src:$root.IsGameAds()==true ?'/Images/videoAdImage.jpg':'/Images/pollsFooterImg.jpg'}" style="padding:1px;">
+                    <img width="1147" data-bind="attr:{src:$root.IsGameAds()==true ?'/Images/imgAddFooter.png':'/Images/imgFooterPools.png'}" style="padding:1px;">
                 </div>
             </div>
         </div>
@@ -236,7 +236,7 @@ else
             <a href="#" class="store-user-link" data-bind="text: CampaignName() ,click:$root.onEditCampaign"></a>
             <br />
             <!-- ko if: Type() == 4-->
-            <img style="width:130px;height:130px;" data-bind=" attr:{src:ImagePath()!=null?ImagePath().startsWith('http')?ImagePath():'/' + ImagePath():null}">
+            <img style="width:130px;height:auto;" data-bind=" attr:{src:ImagePath()!=null?ImagePath().startsWith('http')?ImagePath():'/' + ImagePath():null}">
             <!-- /ko -->
             <!-- ko if: Type() == 1-->
             <video style="width:130px;height:130px;" data-bind=" attr:{src:ImagePath()!=null?ImagePath().startsWith('http')?ImagePath():'/' + ImagePath():null}"></video>
