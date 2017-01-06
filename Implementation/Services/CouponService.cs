@@ -459,6 +459,10 @@ namespace SMD.Implementation.Services
 
             //event history
             campaignEventHistoryRepository.InsertCouponEvent((AdCampaignStatus)couponModel.Status, couponModel.CouponId);
+            if (couponModel.Status == 2)
+            {
+                emailManagerService.SendCouponCampaignSubmissionEmail(couponModel.UserId, couponModel.CouponTitle, couponModel.CouponListingMode == 1 ? 7 : 30, couponModel.couponImage1);
+            }
 
 
 
@@ -663,6 +667,10 @@ namespace SMD.Implementation.Services
             couponRepository.SaveChanges();
 
 
+            if (couponModel.Status == 2)
+            {
+                emailManagerService.SendCouponCampaignSubmissionEmail(couponModel.UserId, couponModel.CouponTitle, couponModel.CouponListingMode == 1 ? 7 : 30, couponModel.couponImage1);
+            }
 
         }
 

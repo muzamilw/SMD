@@ -1067,7 +1067,9 @@ getfreeCouponCount = function () {
             Banner5Flag(false);
             Banner6Flag(false);
             couponModel().CouponPriceOptions()[0].Price(10);
+            couponModel().CouponPriceOptions()[0].URL('https://');
             selectedPriceOption(couponModel().CouponPriceOptions()[0]);
+
             perSaving();
             couponModel().reset();
             if (couponCategories().length > 0)

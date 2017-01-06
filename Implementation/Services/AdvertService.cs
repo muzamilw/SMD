@@ -482,6 +482,14 @@ namespace SMD.Implementation.Services
                 _userFavouriteCouponRepository.Add(oFav);
                 _userFavouriteCouponRepository.SaveChanges();
             }
+            if (campaignModel.Type == 1)
+            {
+                emailManagerService.SendVideoAdCampaignSubmissionEmail(campaignModel.UserId, campaignModel.CampaignName, Convert.ToInt32(Math.Ceiling(campaignModel.MaxDailyBudget.Value / campaignModel.ClickRate.Value)), campaignModel.VideoLink2,"");
+            }
+            if (campaignModel.Type == 4)
+            {
+                emailManagerService.SendDisplayAdCampaignSubmissionEmail(campaignModel.UserId, campaignModel.CampaignName, Convert.ToInt32(Math.Ceiling(campaignModel.MaxDailyBudget.Value / campaignModel.ClickRate.Value)), campaignModel.LogoUrl);
+            }
         }
         public CampaignResponseModel GetCampaigns(AdCampaignSearchRequest request)
         {
@@ -742,6 +750,14 @@ namespace SMD.Implementation.Services
             {
                 _userFavouriteCouponRepository.Delete(oFav);
                 _userFavouriteCouponRepository.SaveChanges();
+            }
+            if (campaignModel.Type == 1)
+            {
+                emailManagerService.SendVideoAdCampaignSubmissionEmail(campaignModel.UserId, campaignModel.CampaignName, Convert.ToInt32(Math.Ceiling(campaignModel.MaxDailyBudget.Value / campaignModel.ClickRate.Value)), campaignModel.VideoLink2, "");
+            }
+            if (campaignModel.Type == 4)
+            {
+                emailManagerService.SendDisplayAdCampaignSubmissionEmail(campaignModel.UserId, campaignModel.CampaignName, Convert.ToInt32(Math.Ceiling(campaignModel.MaxDailyBudget.Value / campaignModel.ClickRate.Value)), campaignModel.LogoUrl);
             }
         }
         #endregion

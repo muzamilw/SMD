@@ -41,7 +41,7 @@ namespace SMD.Implementation.Services
         private readonly IEducationRepository _educationRepository;
         private readonly IIndustryRepository _industryRepository;
         private readonly ICompanyRepository _companyRepository;
-        private readonly ICampaignEventHistoryRepository campaignEventHistoryRepository;         
+        private readonly ICampaignEventHistoryRepository campaignEventHistoryRepository;
         private ApplicationUserManager UserManager
         {
             get { return HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
@@ -309,7 +309,7 @@ namespace SMD.Implementation.Services
                     dbServey.Status = (Int32)AdCampaignStatus.ApprovalRejected;
                     dbServey.Approved = false;
                     dbServey.RejectionReason = source.RejectionReason;
-                    emailManagerService.SendSurveyCampaignRejectedEmail(dbServey.UserId, dbServey.Question, dbServey.LeftPicturePath, dbServey.RightPicturePath,dbServey.RejectionReason);
+                    emailManagerService.SendSurveyCampaignRejectedEmail(dbServey.UserId, dbServey.Question, dbServey.LeftPicturePath, dbServey.RightPicturePath, dbServey.RejectionReason);
                 }
                 dbServey.ModifiedDate = DateTime.Now;
                 dbServey.ModifiedBy = surveyQuestionRepository.LoggedInUserIdentity;
@@ -356,6 +356,11 @@ namespace SMD.Implementation.Services
 
                 //event history
                 campaignEventHistoryRepository.InsertSurveyQuestionEvent((AdCampaignStatus)survey.Status, survey.SqId);
+                if (survey.Status == 2)
+                {
+                    emailManagerService.SendSurveyCampaignSubmissionEmail(survey.UserId, survey.Question, survey.LeftPicturePath, survey.RightPicturePath);
+                }
+
 
                 return true;
 
@@ -430,6 +435,10 @@ namespace SMD.Implementation.Services
 
                 //event history
                 campaignEventHistoryRepository.InsertSurveyQuestionEvent((AdCampaignStatus)survey.Status, survey.SqId);
+                if (survey.Status == 2)
+                {
+                    emailManagerService.SendSurveyCampaignSubmissionEmail(survey.UserId, survey.Question, survey.LeftPicturePath, survey.RightPicturePath);
+                }
 
                 return true;
 
@@ -574,7 +583,7 @@ namespace SMD.Implementation.Services
 
             return surveyQuestionRepository.getPollBySQIDRatioAnalytic(ID, dateRange);
         }
-       
+
         public IEnumerable<getPollBySQIDtblAnalytic_Result> getPollBySQIDtblAnalytic(int ID)
         {
             return surveyQuestionRepository.getPollBySQIDtblAnalytic(ID);
