@@ -236,7 +236,7 @@ else
             <a href="#" class="store-user-link" data-bind="text: CampaignName() ,click:$root.onEditCampaign"></a>
             <br />
             <!-- ko if: Type() == 4-->
-            <img style="width:130px;height:130px;" data-bind=" attr:{src:ImagePath()!=null?ImagePath().startsWith('http')?ImagePath():'/' + ImagePath():null}">
+            <img style="width:130px;height:auto;" data-bind=" attr:{src:ImagePath()!=null?ImagePath().startsWith('http')?ImagePath():'/' + ImagePath():null}">
             <!-- /ko -->
             <!-- ko if: Type() == 1-->
             <video style="width:130px;height:130px;" data-bind=" attr:{src:ImagePath()!=null?ImagePath().startsWith('http')?ImagePath():'/' + ImagePath():null}"></video>
