@@ -84,7 +84,7 @@ namespace SMD.MIS.Areas.Api.Controllers
                 //bloody reversed columns here again. due to omar's and app devs bullshit. it started within SP
             foreach (var item in res.CouponPriceOptions)
             {
-                res.Price = coupon.discountType.Value == 1 ? res.Savings * coupon.discount.Value / 100 : res.Savings - coupon.discount.Value;
+                res.Savings = coupon.discountType.Value == 1 ? res.Price * coupon.discount.Value / 100 : res.Price - coupon.discount.Value;
             }
 
 
