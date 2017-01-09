@@ -217,7 +217,7 @@ namespace SMD.Repository.Repositories
             if (results.Count() > 0)
             {
                 var firstrec = results.First();
-                rowCount = firstrec.TotalItems.Value;
+                rowCount = results.Count();
             }
             else
                 rowCount = 0;

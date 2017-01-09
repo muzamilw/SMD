@@ -1,5 +1,6 @@
-﻿GO
-/****** Object:  StoredProcedure [dbo].[getPollBySQIDRatioAnalytic]    Script Date: 10/22/2016 1:32:34 PM ******/
+﻿USE [SMDv2]
+GO
+/****** Object:  StoredProcedure [dbo].[getPollBySQIDRatioAnalytic]    Script Date: 1/9/2017 11:47:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -26,10 +27,10 @@ IF @DateRange = 2
 	END
 		Select r.UserSelection label, count(r.SQResponseID) value 
 		from  SurveyQuestionResponse r 
-		where r.SQID = @Id and r.ResoponseDateTime >= @dateFrom and r.ResoponseDateTime <= getdate() 
+		where r.SQID = @Id and r.ResponseType = 3 and r.ResoponseDateTime >= @dateFrom and r.ResoponseDateTime <= getdate() 
 		group by r.UserSelection
 
 END
  
  
---EXEC [getPollBySQIDRatioAnalytic] 18, 2
+--EXEC [getPollBySQIDRatioAnalytic] 10359, 1
