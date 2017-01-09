@@ -347,7 +347,12 @@ namespace SMD.MIS
     null);
 
 
-
+              config.Routes.MapHttpRoute(
+                "UserCouponCategoryClick",
+                "UserCouponCategoryClick/{AuthenticationToken}/",
+                new { controller = "UserCouponCategoryClick" },
+                null,
+                null);
             
 
 

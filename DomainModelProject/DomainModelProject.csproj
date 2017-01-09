@@ -406,6 +406,9 @@
     <Compile Include="TransactionLog.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="UserCouponCategoryClick.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="UserCouponView.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

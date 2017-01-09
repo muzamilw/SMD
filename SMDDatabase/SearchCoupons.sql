@@ -1,6 +1,6 @@
-﻿
+﻿USE smddev
 GO
-/****** Object:  StoredProcedure [dbo].[SearchCoupons]    Script Date: 1/4/2017 4:35:31 PM ******/
+/****** Object:  StoredProcedure [dbo].[SearchCoupons]    Script Date: 1/9/2017 1:09:49 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -56,7 +56,7 @@ DECLARE @source geography = geography::Point(@lat, @lon, 4326)
 				 where c.CompanyId = vchr.CompanyId) as LogoUrl,
 				isnull(cpopt.Price,0) Price, 
 				
-				(case when selfr.discountType = 1 then cpopt.price * selfr.discount/100 else   cpopt.price -  selfr.discount end ) as Savings, 
+				(case when selfr.discountType = 1 then cpopt.price - (cpopt.price * selfr.discount/100) else   cpopt.price -  selfr.discount end ) as Savings, 
 				
 				
 				

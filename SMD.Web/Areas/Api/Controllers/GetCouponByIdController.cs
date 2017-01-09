@@ -147,7 +147,7 @@ namespace SMD.MIS.Areas.Api.Controllers
                 
             foreach (var item in res.CouponPriceOptions)
             {
-                item.Savings = coupon.discountType.Value == 1 ? item.Price.Value * (coupon.discount.Value + additionalDiscount) / 100 : item.Price.Value - (coupon.discount.Value + additionalDiscount);
+                item.Savings = coupon.discountType.Value == 1 ? item.Price.Value - (item.Price.Value * (coupon.discount.Value + additionalDiscount) / 100) : item.Price.Value - (coupon.discount.Value + additionalDiscount);
             }
 
 

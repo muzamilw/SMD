@@ -181,6 +181,7 @@
     <Compile Include="DomainModels\SurveySharingGroup.cs" />
     <Compile Include="DomainModels\SurveySharingGroupMember.cs" />
     <Compile Include="DomainModels\SurveySharingGroupShare.cs" />
+    <Compile Include="DomainModels\UserCouponCategoryClick.cs" />
     <Compile Include="DomainModels\UserCouponView.cs" />
     <Compile Include="DomainModels\UserGameResponse.cs" />
     <Compile Include="DomainModels\UserPurchasedCoupon.cs" />

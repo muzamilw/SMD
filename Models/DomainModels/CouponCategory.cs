@@ -16,6 +16,8 @@ namespace SMD.Models.DomainModels
 
         public virtual ICollection<CouponCategories> CouponCategories { get; set; }
 
+        public virtual ICollection<UserCouponCategoryClick> UserCouponCategoryClicks { get; set; }
+
         public string ImagePath { get; set; }
 
         public int SortOrder { get; set; }

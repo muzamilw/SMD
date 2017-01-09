@@ -101,6 +101,8 @@ namespace SMD.Models.IdentityModels
 
         public virtual ICollection<UserGameResponse> UserGameResponses { get; set; }
 
+        public virtual ICollection<UserCouponCategoryClick> UserCouponCategoryClicks { get; set; }
+
         public string PassportNo { get; set; }
 
         //public virtual City City { get; set; }
