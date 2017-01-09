@@ -1129,6 +1129,10 @@
     <Content Include="Content\DAM\Preloader_3.gif" />
     <Content Include="Content\DAM\utils.js" />
     <Content Include="Content\DAM\zoomer.js" />
+    <Content Include="Content\DashBannnerImages\1.png" />
+    <Content Include="Content\DashBannnerImages\2.png" />
+    <Content Include="Content\DashBannnerImages\3.png" />
+    <Content Include="Content\DashBannnerImages\4.png" />
     <Content Include="Content\DashBannnerImages\Banner_1_deals.jpg" />
     <Content Include="Content\DashBannnerImages\Banner_2_Videos.jpg" />
     <Content Include="Content\DashBannnerImages\Banner_3_Games.jpg" />
