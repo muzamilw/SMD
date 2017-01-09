@@ -2388,7 +2388,7 @@ define("ads/ads.viewModel",
                                         $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,#btnPauseCampaign,.lang_delSurvey").css("display", "none");
                                         $("#saveBtn").css("display", "none")
                                         $("#btnCancel,#btnPauseCampaign,#btnClose").removeAttr('disabled');
-                                        campaignModel().StatusValue("Submitted for Approval");
+                                        campaignModel().StatusValue("Pending Approval");
                                     } else if (campaignModel().Status() == 3) {
                                         $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
                                         $("#btnStopAndTerminate,#btnPauseCampaign").removeAttr('disabled');

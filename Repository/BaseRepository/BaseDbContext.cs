@@ -613,7 +613,7 @@ namespace SMD.Repository.BaseRepository
         }
 
 
-        public ObjectResult<SearchCampaigns_Result> SearchCampaigns(int status, string keyword, int companyId, int fromRow, int toRow, bool adminMode)
+        public ObjectResult<SearchCampaigns_Result> SearchCampaigns(int status, string keyword, int companyId, int fromRow, int toRow, bool adminMode,int type)
         {
             var statusParameter = status != null ?
                 new ObjectParameter("status", status) :
@@ -636,8 +636,10 @@ namespace SMD.Repository.BaseRepository
 
             var adminModeParameter = new ObjectParameter("adminMode", adminMode);
 
+            var typeParameter = new ObjectParameter("type", type);
 
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SearchCampaigns_Result>("SearchCampaigns", statusParameter, keywordParameter, companyIdParameter, fromRowParameter, toRowParameter, adminModeParameter);
+
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SearchCampaigns_Result>("SearchCampaigns", statusParameter, keywordParameter, companyIdParameter, fromRowParameter, toRowParameter, adminModeParameter, typeParameter);
         }
 
         public ObjectResult<GetRegisteredUserData_Result> GetRegisteredUserData(int status, string keyword, int fromRow, int toRow)
