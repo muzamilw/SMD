@@ -1310,6 +1310,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_Notifications' does not have a prima
           <Property Name="DealDescription" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="DealCompany" Type="nvarchar(max)" Nullable="false" />
           <Property Name="DealCity" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="ProfileImage" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -3142,7 +3143,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
     [vw_Notifications].[DealCount] AS [DealCount], 
     [vw_Notifications].[DealDescription] AS [DealDescription], 
     [vw_Notifications].[DealCompany] AS [DealCompany], 
-    [vw_Notifications].[DealCity] AS [DealCity]
+    [vw_Notifications].[DealCity] AS [DealCity], 
+    [vw_Notifications].[ProfileImage] AS [ProfileImage]
     FROM [dbo].[vw_Notifications] AS [vw_Notifications]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vw_PublisherTransaction" EntityType="Self.vw_PublisherTransaction" store:Type="Views" store:Schema="dbo">
@@ -6464,6 +6466,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="Int32" Name="UserHasRated" Nullable="false" />
           <Property Type="Int32" Name="discount" Nullable="true" />
           <Property Type="Int32" Name="discountType" Nullable="true" />
+          <Property Type="Int32" Name="DealEndingDiscountType" Nullable="true" />
         </ComplexType>
         <EntityType Name="ProfileQuestionTargetCriteria">
           <Key>
@@ -7872,6 +7875,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="DealDescription" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="DealCompany" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DealCity" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ProfileImage" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         <ComplexType Name="GetRandom3Deal_Result">
           <Property Type="Int64" Name="CouponId" Nullable="false" />
@@ -9226,6 +9230,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
                 <ScalarProperty Name="UserHasRated" ColumnName="UserHasRated" />
                 <ScalarProperty Name="discount" ColumnName="discount" />
                 <ScalarProperty Name="discountType" ColumnName="discountType" />
+                <ScalarProperty Name="DealEndingDiscountType" ColumnName="DealEndingDiscountType" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -10079,6 +10084,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="vw_Notifications">
             <EntityTypeMapping TypeName="DomainModels.vw_Notifications">
               <MappingFragment StoreEntitySet="vw_Notifications">
+                <ScalarProperty Name="ProfileImage" ColumnName="ProfileImage" />
                 <ScalarProperty Name="DealCity" ColumnName="DealCity" />
                 <ScalarProperty Name="DealCompany" ColumnName="DealCompany" />
                 <ScalarProperty Name="DealDescription" ColumnName="DealDescription" />

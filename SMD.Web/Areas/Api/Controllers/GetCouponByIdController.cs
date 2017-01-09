@@ -81,10 +81,73 @@ namespace SMD.MIS.Areas.Api.Controllers
                 res.CouponPriceOptions = couponPriceoptions.Select(a => Mapper.Map<SMD.Models.DomainModels.CouponPriceOption, SMD.MIS.Areas.Api.Models.CouponPriceOption>(a)).ToList();
 
 
-                //bloody reversed columns here again. due to omar's and app devs bullshit. it started within SP
+            int additionalDiscount = 0;
+            int daysleft  = 0;
+            if (coupon.CouponListingMode == 1) //7 day deal
+            {
+                daysleft = (coupon.ApprovalDateTime.Value.AddDays(7) - DateTime.Now).Days;
+            }
+            else //30 day deal
+            {
+                daysleft = (coupon.ApprovalDateTime.Value.AddDays(30) - DateTime.Now).Days;
+            }
+
+
+
+            if (coupon.DealEndingDiscountType == 1 && daysleft >= 0 && daysleft <=3) //30% discount on last 3 days
+            {
+                additionalDiscount = 20;
+            }
+            else if (coupon.DealEndingDiscountType == 2 && daysleft == 3) //30% discount on last 3 days
+            {
+                additionalDiscount = 20;
+            }
+            else if (coupon.DealEndingDiscountType == 2 && daysleft >= 0 && daysleft <= 2) //30% discount on last 3 days
+            {
+                additionalDiscount = 25;
+            }
+            else if (coupon.DealEndingDiscountType == 3 && daysleft == 3) //30% discount on last 3 days
+            {
+                additionalDiscount = 20;
+            }
+            else if (coupon.DealEndingDiscountType == 3 && daysleft == 2) //30% discount on last 3 days
+            {
+                additionalDiscount = 25;
+            }
+            else if (coupon.DealEndingDiscountType == 3 && daysleft >= 0 && daysleft <= 1) //30% discount on last 3 days
+            {
+                additionalDiscount = 30;
+            }
+             /////////////////////////////// dollar amount
+            if (coupon.DealEndingDiscountType == 4 && daysleft >= 0 && daysleft <= 3) //30% discount on last 3 days
+            {
+                additionalDiscount = 10;
+            }
+            else if (coupon.DealEndingDiscountType == 5 && daysleft == 3) //30% discount on last 3 days
+            {
+                additionalDiscount = 10;
+            }
+            else if (coupon.DealEndingDiscountType == 5 && daysleft >= 0 && daysleft <= 2) //30% discount on last 3 days
+            {
+                additionalDiscount = 20;
+            }
+            else if (coupon.DealEndingDiscountType == 6 && daysleft == 3) //30% discount on last 3 days
+            {
+                additionalDiscount = 10;
+            }
+            else if (coupon.DealEndingDiscountType == 6 && daysleft == 2) //30% discount on last 3 days
+            {
+                additionalDiscount = 20;
+            }
+            else if (coupon.DealEndingDiscountType == 6 && daysleft >= 0 && daysleft <= 1) //30% discount on last 3 days
+            {
+                additionalDiscount = 30;
+            }
+                
+                
             foreach (var item in res.CouponPriceOptions)
             {
-                res.Savings = coupon.discountType.Value == 1 ? res.Price * coupon.discount.Value / 100 : res.Price - coupon.discount.Value;
+                item.Savings = coupon.discountType.Value == 1 ? item.Price.Value * (coupon.discount.Value + additionalDiscount) / 100 : item.Price.Value - (coupon.discount.Value + additionalDiscount);
             }
 
 
