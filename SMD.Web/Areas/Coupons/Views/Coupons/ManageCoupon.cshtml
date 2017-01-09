@@ -2101,7 +2101,7 @@ else
             </div>
             <div class="row" style="padding-top:20px;">
                 <div class="col-lg-3">
-                    <label for="txtPrice" class="control-label text-right tooltip-float floatNone">Pre Deal Price (AED)</label>
+                    <label for="txtPrice" class="control-label text-right tooltip-float floatNone">Pre Deal Price (£)</label>
                 </div>
                 <div class="col-lg-2">
                     <input class="form-control" id="txtPrice" data-bind="value: Price,event: { focusout: $root.perSaving}" maxlength="7" />
@@ -2139,7 +2139,7 @@ else
             </div>
             <div class="row" style="padding-top:10px;">
                 <div class="col-lg-3">
-                    <label for="txtSaving" class="control-label text-right tooltip-float floatNone">Deal Price (AED)</label>
+                    <label for="txtSaving" class="control-label text-right tooltip-float floatNone">Deal Price (£)</label>
                 </div>
                 <div class="col-lg-2 ">
                     <label class="control-label text-left" data-bind="text:dealPrice"></label>
@@ -2327,7 +2327,7 @@ else
                     <label for="txtSaving" class="control-label text-right tooltip-float floatNone">Button URL</label>
                 </div>
                 <div class="col-lg-7">
-                    <input class="form-control" placeholder="Paste 'Call for Action' link to your Landing Page" data-bind="value: URL" maxlength="400" />
+                    <input class="form-control" placeholder="Paste 'Call for Action' link to your Landing Page" style="color:blue" data-bind="value: URL" maxlength="400" />
                 </div>
                 <div class="col-lg-2">
                     <a class="btn  btn-success gtild-color" target="_blank" data-bind="attr: { href: URL }" id="btnBack">Test Link</a>

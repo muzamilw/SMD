@@ -632,12 +632,26 @@
     <Compile Include="Emails\Deal_Expired.aspx.designer.cs">
       <DependentUpon>Deal_Expired.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Emails\Picture_poll_Submission.aspx.cs">
+      <DependentUpon>Picture_poll_Submission.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Picture_poll_Submission.aspx.designer.cs">
+      <DependentUpon>Picture_poll_Submission.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Emails\Display_Ad_Rejected.aspx.cs">
       <DependentUpon>Display_Ad_Rejected.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Emails\Display_Ad_Rejected.aspx.designer.cs">
       <DependentUpon>Display_Ad_Rejected.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Deal_Submission.aspx.cs">
+      <DependentUpon>Deal_Submission.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Deal_Submission.aspx.designer.cs">
+      <DependentUpon>Deal_Submission.aspx</DependentUpon>
     </Compile>
     <Compile Include="Emails\LastDayDollarDiscountCouponsNearMe.aspx.cs">
       <DependentUpon>LastDayDollarDiscountCouponsNearMe.aspx</DependentUpon>
@@ -729,6 +743,20 @@
     </Compile>
     <Compile Include="Emails\UserAppFeedback.aspx.designer.cs">
       <DependentUpon>UserAppFeedback.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Display_Ad_Submission.aspx.cs">
+      <DependentUpon>Display_Ad_Submission.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Display_Ad_Submission.aspx.designer.cs">
+      <DependentUpon>Display_Ad_Submission.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Video_Ad_Submission.aspx.cs">
+      <DependentUpon>Video_Ad_Submission.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Video_Ad_Submission.aspx.designer.cs">
+      <DependentUpon>Video_Ad_Submission.aspx</DependentUpon>
     </Compile>
     <Compile Include="Emails\Video_Ad_Rejected.aspx.cs">
       <DependentUpon>Video_Ad_Rejected.aspx</DependentUpon>
@@ -1487,7 +1515,9 @@
     <Content Include="Content\themes\Centaurus\js\wizard.js" />
     <Content Include="Content\themes\Centaurus\js\xcharts.js" />
     <Content Include="Emails\Deal_Expired.aspx" />
+    <Content Include="Emails\Picture_poll_Submission.aspx" />
     <Content Include="Emails\Display_Ad_Rejected.aspx" />
+    <Content Include="Emails\Deal_Submission.aspx" />
     <Content Include="Emails\LastDayDollarDiscountCouponsNearMe.aspx" />
     <Content Include="Emails\Last2DaysDollarDiscountCouponsNearMe.aspx" />
     <Content Include="Emails\Last3DaysDollarDiscountCouponsNearMe.aspx" />
@@ -1501,6 +1531,8 @@
     <Content Include="Emails\ReviewRecievedForDeal.aspx" />
     <Content Include="Emails\NewUserSignup.aspx" />
     <Content Include="Emails\UserAppFeedback.aspx" />
+    <Content Include="Emails\Display_Ad_Submission.aspx" />
+    <Content Include="Emails\Video_Ad_Submission.aspx" />
     <Content Include="Emails\Video_Ad_Rejected.aspx" />
     <Content Include="Emails\delete_account_confirmation.aspx" />
     <Content Include="Emails\Deal_Approved.aspx" />
@@ -1556,6 +1588,10 @@
     <Content Include="Images\download-on-google-play.png" />
     <Content Include="Images\guru.png" />
     <Content Include="Images\heroAccent.png" />
+    <Content Include="Images\imgDealFooter.png" />
+    <Content Include="Images\imgAddFooter.png" />
+    <Content Include="Images\imgFooterDisplay.png" />
+    <Content Include="Images\imgFooterPools.png" />
     <Content Include="Images\iphoneStencil.png" />
     <Content Include="Images\New_Register_Image.png" />
     <Content Include="Images\NY-city.jpg" />
