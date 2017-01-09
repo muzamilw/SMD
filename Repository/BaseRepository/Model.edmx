@@ -6797,6 +6797,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="Int32" Name="Score" Nullable="true" />
           <Property Type="Double" Name="Playtime" Nullable="true" />
           <Property Type="Double" Name="Accuracy" Nullable="true" />
+          <Property Type="String" Name="AndroidRSTPVideoStream" Nullable="true" MaxLength="192" />
         </ComplexType>
         <Association Name="FK_ProfileQuestionTargetCriteria_ProfileQuestion2">
           <End Type="DomainModels.ProfileQuestion" Role="ProfileQuestion" Multiplicity="0..1" />
@@ -9472,6 +9473,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
                 <ScalarProperty Name="Score" ColumnName="Score" />
                 <ScalarProperty Name="Playtime" ColumnName="Playtime" />
                 <ScalarProperty Name="Accuracy" ColumnName="Accuracy" />
+                <ScalarProperty Name="AndroidRSTPVideoStream" ColumnName="AndroidRSTPVideoStream" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
