@@ -62,7 +62,7 @@ namespace SMD.Repository.Repositories
                          join c in db.Coupons on r.CouponId equals c.CouponId
                          join u in db.Users on r.UserId equals u.Id
                          where r.Status == 2 && r.CouponId == CouponId
-                         select new CouponRatingReviewResponse {  CouponId = c.CouponId, CouponReviewId = r.CouponReviewId, FullName = u.FullName, CouponTitle = c.CouponTitle, RatingDateTime = r.RatingDateTime, Review = r.Review, CompanyId = c.CompanyId, ReviewImage1 = r.ReviewImage1, ReviewImage2 = r.ReviewImage2, Reviewimage3 = r.Reviewimage3, StarRating = r.StarRating, Status = r.Status, UserId = r.UserId, ProfileImage = u.ProfileImage  });
+                           select new CouponRatingReviewResponse { CouponId = c.CouponId, CouponReviewId = r.CouponReviewId, FullName = u.FullName, CouponTitle = c.CouponTitle, RatingDateTime = DbFunctions.TruncateTime(r.RatingDateTime.Value), Review = r.Review, CompanyId = c.CompanyId, ReviewImage1 = r.ReviewImage1, ReviewImage2 = r.ReviewImage2, Reviewimage3 = r.Reviewimage3, StarRating = r.StarRating, Status = r.Status, UserId = r.UserId, ProfileImage = u.ProfileImage });
 
             Count = allrows.Count();
 
@@ -74,6 +74,7 @@ namespace SMD.Repository.Repositories
 
         public List<CouponRatingReviewResponse> GetAllCouponRatingReviewByCompany(GetPagedListRequest request, out int rowCount)
         {
+
             int fromRow = (request.PageNo - 1) * request.PageSize;
             int toRow = request.PageSize;
             var result = from r in db.CouponRatingReview
@@ -81,7 +82,7 @@ namespace SMD.Repository.Repositories
                          join u in db.Users on r.UserId equals u.Id
                          where r.Status == request.ReviewStatus && c.CompanyId == CompanyId 
                          orderby (r.RatingDateTime)
-                         select new CouponRatingReviewResponse { CouponId = c.CouponId, CouponReviewId = r.CouponReviewId, FullName = u.FullName, CouponTitle = c.CouponTitle, RatingDateTime = r.RatingDateTime, Review = r.Review, CompanyId = c.CompanyId, ReviewImage1 = r.ReviewImage1, ReviewImage2 = r.ReviewImage2, Reviewimage3 = r.Reviewimage3, StarRating = r.StarRating, Status = r.Status, UserId = r.UserId, ProfileImage = u.ProfileImage };
+                         select new CouponRatingReviewResponse { CouponId = c.CouponId, CouponReviewId = r.CouponReviewId, FullName = u.FullName, CouponTitle = c.CouponTitle, RatingDateTime = DbFunctions.TruncateTime(r.RatingDateTime.Value), Review = r.Review, CompanyId = c.CompanyId, ReviewImage1 = r.ReviewImage1, ReviewImage2 = r.ReviewImage2, Reviewimage3 = r.Reviewimage3, StarRating = r.StarRating, Status = r.Status, UserId = r.UserId, ProfileImage = u.ProfileImage };
             rowCount =result.Count();
            
             return result.Skip(fromRow)

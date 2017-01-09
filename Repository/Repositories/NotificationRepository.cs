@@ -57,7 +57,12 @@ namespace SMD.Repository.Repositories
 
         public bool UserHasNotifications(string UserId)
         {
-            if (DbSet.Where(c => (c.UserID == UserId) && (c.IsRead == false || c.IsRead == null)).Count() > 0)
+            var PhoneNumber = db.Users.Where(g => g.Id == UserId).SingleOrDefault().Phone1;
+            PhoneNumber = Regex.Replace(PhoneNumber, @"\s+", "");
+            PhoneNumber = PhoneNumber.Substring(PhoneNumber.Length - 9, PhoneNumber.Length - (PhoneNumber.Length - 9));
+
+
+            if (DbSet.Where(c => (c.UserID == UserId || c.PhoneNumber.EndsWith(PhoneNumber) ) && (c.IsRead == false || c.IsRead == null)).Count() > 0)
                 return true;
             else
                 return false;

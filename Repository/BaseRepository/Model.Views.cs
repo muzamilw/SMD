@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetsFDC2337AD53987B78A25377B13ECC6530A9E6E37311759B41965AC854247EA4A))]
+[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetsF61C908360B105F6B2C0D360F93E0A8E1895094C02B4344654AE4B45F8192572))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -17,18 +17,18 @@ namespace Edm_EntityMappingGeneratedViews
     /// <Summary>
     /// The type contains views for EntitySets and AssociationSets that were generated at design time.
     /// </Summary>
-    public sealed class ViewsForBaseEntitySetsFDC2337AD53987B78A25377B13ECC6530A9E6E37311759B41965AC854247EA4A : System.Data.Mapping.EntityViewContainer
+    public sealed class ViewsForBaseEntitySetsF61C908360B105F6B2C0D360F93E0A8E1895094C02B4344654AE4B45F8192572 : System.Data.Mapping.EntityViewContainer
     {
         
         /// <Summary>
         /// The constructor stores the views for the extents and also the hash values generated based on the metadata and mapping closure and views.
         /// </Summary>
-        public ViewsForBaseEntitySetsFDC2337AD53987B78A25377B13ECC6530A9E6E37311759B41965AC854247EA4A()
+        public ViewsForBaseEntitySetsF61C908360B105F6B2C0D360F93E0A8E1895094C02B4344654AE4B45F8192572()
         {
             this.EdmEntityContainerName = "BaseDbContext";
             this.StoreEntityContainerName = "SMDModelStoreContainer";
-            this.HashOverMappingClosure = "8c105799587feb0914c1dd0c4ef9f77eefbcbfd283601ba29ce98bb025f9240c";
-            this.HashOverAllExtentViews = "6bbae09d18e2029f270c5e7b7f3e6c0d51088a364827519f2877ea49468a66b4";
+            this.HashOverMappingClosure = "c99cc25bdf2c767fbe1c8bb556b6c8ccec7c4e550ec5327c6e4dbe6e0ad7df3e";
+            this.HashOverAllExtentViews = "12ed8664750b0b4567bc59e7cb5115ca077754b1290ee9510a7be826c2501b74";
             this.ViewCount = 140;
         }
         
@@ -4600,32 +4600,35 @@ namespace Edm_EntityMappingGeneratedViews
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView138()
         {
-            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.vw_Notifications", "\r\n    SELECT VALUE -- Constructing vw_Notifications\r\n        [SMDModel.Store.vw_N" +
-                    "otifications](T1.[vw_Notifications.ID], T1.[vw_Notifications.Type], T1.[vw_Notif" +
-                    "ications.UserID], T1.[vw_Notifications.IsRead], T1.[vw_Notifications.GeneratedOn" +
-                    "], T1.[vw_Notifications.GeneratedBy], T1.[vw_Notifications.SurveyQuestionShareId" +
-                    "], T1.[vw_Notifications.PhoneNumber], T1.[vw_Notifications.NotificationDetails]," +
-                    " T1.[vw_Notifications.PollTitle], T1.[vw_Notifications.SSQID], T1.[vw_Notificati" +
-                    "ons.CouponId], T1.[vw_Notifications.DealTitle], T1.[vw_Notifications.DealPrice]," +
-                    " T1.[vw_Notifications.DealSavings], T1.[vw_Notifications.DealCount], T1.[vw_Noti" +
-                    "fications.DealDescription], T1.[vw_Notifications.DealCompany], T1.[vw_Notificati" +
-                    "ons.DealCity])\r\n    FROM (\r\n        SELECT \r\n            T.ID AS [vw_Notificatio" +
-                    "ns.ID], \r\n            T.Type AS [vw_Notifications.Type], \r\n            T.UserID " +
-                    "AS [vw_Notifications.UserID], \r\n            T.IsRead AS [vw_Notifications.IsRead" +
-                    "], \r\n            T.GeneratedOn AS [vw_Notifications.GeneratedOn], \r\n            " +
-                    "T.GeneratedBy AS [vw_Notifications.GeneratedBy], \r\n            T.SurveyQuestionS" +
-                    "hareId AS [vw_Notifications.SurveyQuestionShareId], \r\n            T.PhoneNumber " +
-                    "AS [vw_Notifications.PhoneNumber], \r\n            T.NotificationDetails AS [vw_No" +
-                    "tifications.NotificationDetails], \r\n            T.PollTitle AS [vw_Notifications" +
-                    ".PollTitle], \r\n            T.SSQID AS [vw_Notifications.SSQID], \r\n            T." +
-                    "CouponId AS [vw_Notifications.CouponId], \r\n            T.DealTitle AS [vw_Notifi" +
-                    "cations.DealTitle], \r\n            T.DealPrice AS [vw_Notifications.DealPrice], \r" +
-                    "\n            T.DealSavings AS [vw_Notifications.DealSavings], \r\n            T.De" +
-                    "alCount AS [vw_Notifications.DealCount], \r\n            T.DealDescription AS [vw_" +
-                    "Notifications.DealDescription], \r\n            T.DealCompany AS [vw_Notifications" +
-                    ".DealCompany], \r\n            T.DealCity AS [vw_Notifications.DealCity], \r\n      " +
-                    "      True AS _from0\r\n        FROM BaseDbContext.vw_Notifications AS T\r\n    ) AS" +
-                    " T1");
+            System.Text.StringBuilder viewString = new System.Text.StringBuilder(2105);
+            viewString.Append("\r\n    SELECT VALUE -- Constructing vw_Notifications\r\n        [SMDModel.Store.vw_");
+            viewString.Append("Notifications](T1.[vw_Notifications.ID], T1.[vw_Notifications.Type], T1.[vw_Noti");
+            viewString.Append("fications.UserID], T1.[vw_Notifications.IsRead], T1.[vw_Notifications.GeneratedO");
+            viewString.Append("n], T1.[vw_Notifications.GeneratedBy], T1.[vw_Notifications.SurveyQuestionShareI");
+            viewString.Append("d], T1.[vw_Notifications.PhoneNumber], T1.[vw_Notifications.NotificationDetails]");
+            viewString.Append(", T1.[vw_Notifications.PollTitle], T1.[vw_Notifications.SSQID], T1.[vw_Notificat");
+            viewString.Append("ions.CouponId], T1.[vw_Notifications.DealTitle], T1.[vw_Notifications.DealPrice]");
+            viewString.Append(", T1.[vw_Notifications.DealSavings], T1.[vw_Notifications.DealCount], T1.[vw_Not");
+            viewString.Append("ifications.DealDescription], T1.[vw_Notifications.DealCompany], T1.[vw_Notificat");
+            viewString.Append("ions.DealCity], T1.[vw_Notifications.ProfileImage])\r\n    FROM (\r\n        SELECT ");
+            viewString.Append("\r\n            T.ID AS [vw_Notifications.ID], \r\n            T.Type AS [vw_Notific");
+            viewString.Append("ations.Type], \r\n            T.UserID AS [vw_Notifications.UserID], \r\n           ");
+            viewString.Append(" T.IsRead AS [vw_Notifications.IsRead], \r\n            T.GeneratedOn AS [vw_Notif");
+            viewString.Append("ications.GeneratedOn], \r\n            T.GeneratedBy AS [vw_Notifications.Generate");
+            viewString.Append("dBy], \r\n            T.SurveyQuestionShareId AS [vw_Notifications.SurveyQuestionS");
+            viewString.Append("hareId], \r\n            T.PhoneNumber AS [vw_Notifications.PhoneNumber], \r\n      ");
+            viewString.Append("      T.NotificationDetails AS [vw_Notifications.NotificationDetails], \r\n       ");
+            viewString.Append("     T.PollTitle AS [vw_Notifications.PollTitle], \r\n            T.SSQID AS [vw_N");
+            viewString.Append("otifications.SSQID], \r\n            T.CouponId AS [vw_Notifications.CouponId], \r\n");
+            viewString.Append("            T.DealTitle AS [vw_Notifications.DealTitle], \r\n            T.DealPri");
+            viewString.Append("ce AS [vw_Notifications.DealPrice], \r\n            T.DealSavings AS [vw_Notificat");
+            viewString.Append("ions.DealSavings], \r\n            T.DealCount AS [vw_Notifications.DealCount], \r\n");
+            viewString.Append("            T.DealDescription AS [vw_Notifications.DealDescription], \r\n         ");
+            viewString.Append("   T.DealCompany AS [vw_Notifications.DealCompany], \r\n            T.DealCity AS ");
+            viewString.Append("[vw_Notifications.DealCity], \r\n            T.ProfileImage AS [vw_Notifications.P");
+            viewString.Append("rofileImage], \r\n            True AS _from0\r\n        FROM BaseDbContext.vw_Notifi");
+            viewString.Append("cations AS T\r\n    ) AS T1");
+            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.vw_Notifications", viewString.ToString());
         }
         
         /// <Summary>
@@ -4633,32 +4636,35 @@ namespace Edm_EntityMappingGeneratedViews
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView139()
         {
-            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.vw_Notifications", "\r\n    SELECT VALUE -- Constructing vw_Notifications\r\n        [DomainModels.vw_Not" +
-                    "ifications](T1.[vw_Notifications.ID], T1.[vw_Notifications.Type], T1.[vw_Notific" +
-                    "ations.UserID], T1.[vw_Notifications.IsRead], T1.[vw_Notifications.GeneratedOn]," +
-                    " T1.[vw_Notifications.GeneratedBy], T1.[vw_Notifications.SurveyQuestionShareId]," +
-                    " T1.[vw_Notifications.PhoneNumber], T1.[vw_Notifications.NotificationDetails], T" +
-                    "1.[vw_Notifications.PollTitle], T1.[vw_Notifications.SSQID], T1.[vw_Notification" +
-                    "s.CouponId], T1.[vw_Notifications.DealTitle], T1.[vw_Notifications.DealPrice], T" +
-                    "1.[vw_Notifications.DealSavings], T1.[vw_Notifications.DealCount], T1.[vw_Notifi" +
-                    "cations.DealDescription], T1.[vw_Notifications.DealCompany], T1.[vw_Notification" +
-                    "s.DealCity])\r\n    FROM (\r\n        SELECT \r\n            T.ID AS [vw_Notifications" +
-                    ".ID], \r\n            T.Type AS [vw_Notifications.Type], \r\n            T.UserID AS" +
-                    " [vw_Notifications.UserID], \r\n            T.IsRead AS [vw_Notifications.IsRead]," +
-                    " \r\n            T.GeneratedOn AS [vw_Notifications.GeneratedOn], \r\n            T." +
-                    "GeneratedBy AS [vw_Notifications.GeneratedBy], \r\n            T.SurveyQuestionSha" +
-                    "reId AS [vw_Notifications.SurveyQuestionShareId], \r\n            T.PhoneNumber AS" +
-                    " [vw_Notifications.PhoneNumber], \r\n            T.NotificationDetails AS [vw_Noti" +
-                    "fications.NotificationDetails], \r\n            T.PollTitle AS [vw_Notifications.P" +
-                    "ollTitle], \r\n            T.SSQID AS [vw_Notifications.SSQID], \r\n            T.Co" +
-                    "uponId AS [vw_Notifications.CouponId], \r\n            T.DealTitle AS [vw_Notifica" +
-                    "tions.DealTitle], \r\n            T.DealPrice AS [vw_Notifications.DealPrice], \r\n " +
-                    "           T.DealSavings AS [vw_Notifications.DealSavings], \r\n            T.Deal" +
-                    "Count AS [vw_Notifications.DealCount], \r\n            T.DealDescription AS [vw_No" +
-                    "tifications.DealDescription], \r\n            T.DealCompany AS [vw_Notifications.D" +
-                    "ealCompany], \r\n            T.DealCity AS [vw_Notifications.DealCity], \r\n        " +
-                    "    True AS _from0\r\n        FROM SMDModelStoreContainer.vw_Notifications AS T\r\n " +
-                    "   ) AS T1");
+            System.Text.StringBuilder viewString = new System.Text.StringBuilder(2112);
+            viewString.Append("\r\n    SELECT VALUE -- Constructing vw_Notifications\r\n        [DomainModels.vw_No");
+            viewString.Append("tifications](T1.[vw_Notifications.ID], T1.[vw_Notifications.Type], T1.[vw_Notifi");
+            viewString.Append("cations.UserID], T1.[vw_Notifications.IsRead], T1.[vw_Notifications.GeneratedOn]");
+            viewString.Append(", T1.[vw_Notifications.GeneratedBy], T1.[vw_Notifications.SurveyQuestionShareId]");
+            viewString.Append(", T1.[vw_Notifications.PhoneNumber], T1.[vw_Notifications.NotificationDetails], ");
+            viewString.Append("T1.[vw_Notifications.PollTitle], T1.[vw_Notifications.SSQID], T1.[vw_Notificatio");
+            viewString.Append("ns.CouponId], T1.[vw_Notifications.DealTitle], T1.[vw_Notifications.DealPrice], ");
+            viewString.Append("T1.[vw_Notifications.DealSavings], T1.[vw_Notifications.DealCount], T1.[vw_Notif");
+            viewString.Append("ications.DealDescription], T1.[vw_Notifications.DealCompany], T1.[vw_Notificatio");
+            viewString.Append("ns.DealCity], T1.[vw_Notifications.ProfileImage])\r\n    FROM (\r\n        SELECT \r\n");
+            viewString.Append("            T.ID AS [vw_Notifications.ID], \r\n            T.Type AS [vw_Notificat");
+            viewString.Append("ions.Type], \r\n            T.UserID AS [vw_Notifications.UserID], \r\n            T");
+            viewString.Append(".IsRead AS [vw_Notifications.IsRead], \r\n            T.GeneratedOn AS [vw_Notific");
+            viewString.Append("ations.GeneratedOn], \r\n            T.GeneratedBy AS [vw_Notifications.GeneratedB");
+            viewString.Append("y], \r\n            T.SurveyQuestionShareId AS [vw_Notifications.SurveyQuestionSha");
+            viewString.Append("reId], \r\n            T.PhoneNumber AS [vw_Notifications.PhoneNumber], \r\n        ");
+            viewString.Append("    T.NotificationDetails AS [vw_Notifications.NotificationDetails], \r\n         ");
+            viewString.Append("   T.PollTitle AS [vw_Notifications.PollTitle], \r\n            T.SSQID AS [vw_Not");
+            viewString.Append("ifications.SSQID], \r\n            T.CouponId AS [vw_Notifications.CouponId], \r\n  ");
+            viewString.Append("          T.DealTitle AS [vw_Notifications.DealTitle], \r\n            T.DealPrice");
+            viewString.Append(" AS [vw_Notifications.DealPrice], \r\n            T.DealSavings AS [vw_Notificatio");
+            viewString.Append("ns.DealSavings], \r\n            T.DealCount AS [vw_Notifications.DealCount], \r\n  ");
+            viewString.Append("          T.DealDescription AS [vw_Notifications.DealDescription], \r\n           ");
+            viewString.Append(" T.DealCompany AS [vw_Notifications.DealCompany], \r\n            T.DealCity AS [v");
+            viewString.Append("w_Notifications.DealCity], \r\n            T.ProfileImage AS [vw_Notifications.Pro");
+            viewString.Append("fileImage], \r\n            True AS _from0\r\n        FROM SMDModelStoreContainer.vw");
+            viewString.Append("_Notifications AS T\r\n    ) AS T1");
+            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.vw_Notifications", viewString.ToString());
         }
     }
 }

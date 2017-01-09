@@ -37,5 +37,7 @@ namespace SMD.Models.DomainModels
         public string DealDescription { get; set; }
         public string DealCompany { get; set; }
         public string DealCity { get; set; }
+
+        public string ProfileImage { get; set; }
     }
 }
