@@ -24,7 +24,7 @@ namespace SMD.Models.ResponseModels
         public Nullable<long> CouponId { get; set; }
         public Nullable<double> StarRating { get; set; }
         public string Review { get; set; }
-        public Nullable<System.DateTime> RatingDateTime { get; set; }
+        public Nullable<DateTime> RatingDateTime { get; set; }
         public string UserId { get; set; }
         public Nullable<int> CompanyId { get; set; }
         public Nullable<int> Status { get; set; }
