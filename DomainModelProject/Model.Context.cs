@@ -102,6 +102,7 @@ namespace DomainModelProject
         public virtual DbSet<UserGameResponse> UserGameResponses { get; set; }
         public virtual DbSet<GameExerciseCategory> GameExerciseCategories { get; set; }
         public virtual DbSet<GameExerciseCategoryList> GameExerciseCategoryLists { get; set; }
+        public virtual DbSet<UserCouponCategoryClick> UserCouponCategoryClicks { get; set; }
     
         public virtual ObjectResult<SearchCoupons_Result> SearchCoupons(Nullable<int> categoryId, Nullable<int> type, string keywords, Nullable<int> distance, string lat, string lon, string userId, Nullable<int> fromRow, Nullable<int> toRow)
         {

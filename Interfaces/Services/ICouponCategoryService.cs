@@ -11,5 +11,7 @@ namespace SMD.Interfaces.Services
     public interface ICouponCategoryService
     {
         IEnumerable<CouponCategory> GetAllCategories();
+
+        bool InsertUserCouponCategoryClick(int couponCategoryId, string userId);
     }
 }

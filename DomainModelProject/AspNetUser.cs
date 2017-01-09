@@ -28,6 +28,7 @@ namespace DomainModelProject
             this.ProfileQuestionUserAnswers = new HashSet<ProfileQuestionUserAnswer>();
             this.AspNetUsersNotificationTokens = new HashSet<AspNetUsersNotificationToken>();
             this.UserGameResponses = new HashSet<UserGameResponse>();
+            this.UserCouponCategoryClicks = new HashSet<UserCouponCategoryClick>();
         }
     
         public string Id { get; set; }
@@ -96,5 +97,6 @@ namespace DomainModelProject
         public virtual Country Country { get; set; }
         public virtual ICollection<AspNetUsersNotificationToken> AspNetUsersNotificationTokens { get; set; }
         public virtual ICollection<UserGameResponse> UserGameResponses { get; set; }
+        public virtual ICollection<UserCouponCategoryClick> UserCouponCategoryClicks { get; set; }
     }
 }

@@ -1192,6 +1192,15 @@
           <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="AppID" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="UserCouponCategoryClicks">
+          <Key>
+            <PropertyRef Name="UserCouponCategoryClick" />
+          </Key>
+          <Property Name="UserCouponCategoryClick" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CouponCategoryId" Type="int" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="ClickDateTime" Type="datetime" />
+        </EntityType>
         <EntityType Name="UserCouponView">
           <Key>
             <PropertyRef Name="UserCouponViewId" />
@@ -1369,6 +1378,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_Notifications' does not have a prima
           <Property Name="DealDescription" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="DealCompany" Type="nvarchar(max)" Nullable="false" />
           <Property Name="DealCity" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="ProfileImage" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -2772,6 +2782,30 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UserCouponCategoryClicks_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="UserCouponCategoryClicks" Type="Self.UserCouponCategoryClicks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserCouponCategoryClicks">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserCouponCategoryClicks_CouponCategory">
+          <End Role="CouponCategory" Type="Self.CouponCategory" Multiplicity="0..1" />
+          <End Role="UserCouponCategoryClicks" Type="Self.UserCouponCategoryClicks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CouponCategory">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="UserCouponCategoryClicks">
+              <PropertyRef Name="CouponCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_UserGameResponse_AdCampaignResponse">
           <End Role="AdCampaignResponse" Type="Self.AdCampaignResponse" Multiplicity="0..1" />
           <End Role="UserGameResponse" Type="Self.UserGameResponse" Multiplicity="*" />
@@ -3069,6 +3103,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySet Name="Transaction" EntityType="Self.Transaction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TransactionLog" EntityType="Self.TransactionLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserApps" EntityType="Self.UserApps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserCouponCategoryClicks" EntityType="Self.UserCouponCategoryClicks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserCouponView" EntityType="Self.UserCouponView" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserFavouriteCoupon" EntityType="Self.UserFavouriteCoupon" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserGameResponse" EntityType="Self.UserGameResponse" Schema="dbo" store:Type="Tables" />
@@ -3190,7 +3225,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
     [vw_Notifications].[DealCount] AS [DealCount], 
     [vw_Notifications].[DealDescription] AS [DealDescription], 
     [vw_Notifications].[DealCompany] AS [DealCompany], 
-    [vw_Notifications].[DealCity] AS [DealCity]
+    [vw_Notifications].[DealCity] AS [DealCity], 
+    [vw_Notifications].[ProfileImage] AS [ProfileImage]
     FROM [dbo].[vw_Notifications] AS [vw_Notifications]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vw_ReferringCompanies" EntityType="Self.vw_ReferringCompanies" store:Type="Views" store:Schema="dbo">
@@ -3664,6 +3700,14 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="UserApps" EntitySet="UserApps" />
           </AssociationSet>
+          <AssociationSet Name="FK_UserCouponCategoryClicks_AspNetUsers" Association="Self.FK_UserCouponCategoryClicks_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="UserCouponCategoryClicks" EntitySet="UserCouponCategoryClicks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserCouponCategoryClicks_CouponCategory" Association="Self.FK_UserCouponCategoryClicks_CouponCategory">
+            <End Role="CouponCategory" EntitySet="CouponCategory" />
+            <End Role="UserCouponCategoryClicks" EntitySet="UserCouponCategoryClicks" />
+          </AssociationSet>
           <AssociationSet Name="FK_UserGameResponse_AdCampaignResponse" Association="Self.FK_UserGameResponse_AdCampaignResponse">
             <End Role="AdCampaignResponse" EntitySet="AdCampaignResponse" />
             <End Role="UserGameResponse" EntitySet="UserGameResponse" />
@@ -3993,6 +4037,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="LastKnownLocationLong" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LastKnownLocation" Type="Geography" />
           <NavigationProperty Name="UserGameResponses" Relationship="SMDDevModel.FK_UserGameResponse_AspNetUsers" FromRole="AspNetUser" ToRole="UserGameResponse" />
+          <NavigationProperty Name="UserCouponCategoryClicks" Relationship="SMDDevModel.FK_UserCouponCategoryClicks_AspNetUsers" FromRole="AspNetUser" ToRole="UserCouponCategoryClick" />
         </EntityType>
         <EntityType Name="AuditLog">
           <Key>
@@ -6160,6 +6205,15 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <Parameter Name="ExistingGameId" Mode="In" Type="Int64" />
             <Parameter Name="UserId" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="UserCouponCategoryClicks" EntityType="SMDDevModel.UserCouponCategoryClick" />
+          <AssociationSet Name="FK_UserCouponCategoryClicks_AspNetUsers" Association="SMDDevModel.FK_UserCouponCategoryClicks_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="UserCouponCategoryClick" EntitySet="UserCouponCategoryClicks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserCouponCategoryClicks_CouponCategory" Association="SMDDevModel.FK_UserCouponCategoryClicks_CouponCategory">
+            <End Role="CouponCategory1" EntitySet="CouponCategories1" />
+            <End Role="UserCouponCategoryClick" EntitySet="UserCouponCategoryClicks" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="CouponCategories">
           <Key>
@@ -6194,6 +6248,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="SortOrder" Type="Int32" />
           <NavigationProperty Name="CampaignCategories" Relationship="SMDDevModel.FK_CampaignCategories_CouponCategory" FromRole="CouponCategory1" ToRole="CampaignCategory" />
           <NavigationProperty Name="CouponCategories" Relationship="SMDDevModel.FK_CouponCategories_CouponCategory" FromRole="CouponCategory1" ToRole="CouponCategories" />
+          <NavigationProperty Name="UserCouponCategoryClicks" Relationship="SMDDevModel.FK_UserCouponCategoryClicks_CouponCategory" FromRole="CouponCategory1" ToRole="UserCouponCategoryClick" />
         </EntityType>
         <Association Name="FK_CampaignCategories_CouponCategory">
           <End Type="SMDDevModel.CouponCategory1" Role="CouponCategory1" Multiplicity="1" />
@@ -7872,6 +7927,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="DealDescription" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="DealCompany" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DealCity" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ProfileImage" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         <ComplexType Name="GetRandom3Deal_Result">
           <Property Type="Int64" Name="CouponId" Nullable="false" />
@@ -8060,6 +8116,41 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="Int32" Name="Score" Nullable="true" />
           <Property Type="Double" Name="Accuracy" Nullable="true" />
         </ComplexType>
+        <EntityType Name="UserCouponCategoryClick">
+          <Key>
+            <PropertyRef Name="UserCouponCategoryClick1" />
+          </Key>
+          <Property Name="UserCouponCategoryClick1" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CouponCategoryId" Type="Int32" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ClickDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AspNetUser" Relationship="SMDDevModel.FK_UserCouponCategoryClicks_AspNetUsers" FromRole="UserCouponCategoryClick" ToRole="AspNetUser" />
+          <NavigationProperty Name="CouponCategory" Relationship="SMDDevModel.FK_UserCouponCategoryClicks_CouponCategory" FromRole="UserCouponCategoryClick" ToRole="CouponCategory1" />
+        </EntityType>
+        <Association Name="FK_UserCouponCategoryClicks_AspNetUsers">
+          <End Type="SMDDevModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="SMDDevModel.UserCouponCategoryClick" Role="UserCouponCategoryClick" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserCouponCategoryClick">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserCouponCategoryClicks_CouponCategory">
+          <End Type="SMDDevModel.CouponCategory1" Role="CouponCategory1" Multiplicity="0..1" />
+          <End Type="SMDDevModel.UserCouponCategoryClick" Role="UserCouponCategoryClick" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CouponCategory1">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="UserCouponCategoryClick">
+              <PropertyRef Name="CouponCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -10081,6 +10172,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="vw_Notifications">
             <EntityTypeMapping TypeName="SMDDevModel.vw_Notifications">
               <MappingFragment StoreEntitySet="vw_Notifications">
+                <ScalarProperty Name="ProfileImage" ColumnName="ProfileImage" />
                 <ScalarProperty Name="DealCity" ColumnName="DealCity" />
                 <ScalarProperty Name="DealCompany" ColumnName="DealCompany" />
                 <ScalarProperty Name="DealDescription" ColumnName="DealDescription" />
@@ -10249,6 +10341,16 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="UserCouponCategoryClicks">
+            <EntityTypeMapping TypeName="SMDDevModel.UserCouponCategoryClick">
+              <MappingFragment StoreEntitySet="UserCouponCategoryClicks">
+                <ScalarProperty Name="ClickDateTime" ColumnName="ClickDateTime" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CouponCategoryId" ColumnName="CouponCategoryId" />
+                <ScalarProperty Name="UserCouponCategoryClick1" ColumnName="UserCouponCategoryClick" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

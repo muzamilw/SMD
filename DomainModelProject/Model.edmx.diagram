@@ -199,6 +199,9 @@
         <EntityTypeShape EntityType="SMDDevModel.GameExerciseCategoryList" Width="1.5" PointX="4.75" PointY="14.75" />
         <AssociationConnector Association="SMDDevModel.FK_GameExerciseCategories_Game" />
         <AssociationConnector Association="SMDDevModel.FK_GameExerciseCategories_GameExerciseCategory" />
+        <EntityTypeShape EntityType="SMDDevModel.UserCouponCategoryClick" Width="1.5" PointX="12.75" PointY="35.5" />
+        <AssociationConnector Association="SMDDevModel.FK_UserCouponCategoryClicks_AspNetUsers" />
+        <AssociationConnector Association="SMDDevModel.FK_UserCouponCategoryClicks_CouponCategory" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
