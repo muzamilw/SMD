@@ -68,8 +68,7 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="whiteBox margin10" style="height:230px;">
-                        <canvas style=" cursor:pointer;" data-bind="chart: { type: 'pie', data: $root.CampaignRatioData, options: { observeChanges: true, throttle: 1000 } }" width="340">
-                        </canvas>
+                        <canvas style=" cursor:pointer;" data-bind="chart: { type: 'pie', data: $root.CampaignRatioData, options: { observeChanges: true, legend: { display: false }, throttle: 1000 } }" width="340"></canvas>
                         @*<div id="donutId" style="height:230px;cursor:pointer;"></div>*@
                     
                     </div>
@@ -217,7 +216,7 @@
 <script id="ROITblAnalyticsDataTemplate" type="text/html">
 
     <tr>
-        <td>Card &nbsp;<span data-bind="text: label"></span></td>
+        <td>Picture &nbsp;<span data-bind="text: label"></span></td>
 
         <td class="padingL15 text-right"></td>
         <td class="padingL15 text-right">

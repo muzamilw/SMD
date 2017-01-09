@@ -1,9 +1,10 @@
 ﻿GO
-/****** Object:  StoredProcedure [dbo].[SearchCampaigns]    Script Date: 12/8/2016 2:23:57 AM ******/
+/****** Object:  StoredProcedure [dbo].[SearchCampaigns]    Script Date: 1/9/2017 11:57:25 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
+
 -- =============================================
 -- Author:		Mz
 -- Create date: 8 dec 2015
@@ -33,7 +34,7 @@ BEGIN
 	from (
 
     -- Insert statements for procedure here
-	select  a.CampaignID,a.CompanyId, a.CampaignName, a.ImagePath ,a.VerifyQuestion , a.ModifiedDateTime, a.Answer1, a.Answer2, a.Answer3,
+	select  a.CampaignID,a.CompanyId, a.CampaignName, (case when a.Type = 1 then a.VideoLink2 else a.LogoUrl end )  ImagePath ,a.VerifyQuestion , Max(eh.EventDateTime) ModifiedDateTime, a.Answer1, a.Answer2, a.Answer3,
 	(select isnull(count (*),0) from adcampaignresponse cr where cr.campaignid = a.campaignid and  cast(CreatedDateTime as DATE)  = cast (GETDATE() as DATE) and responsetype = 1 ) viewCountToday,
 	(select isnull(count (*),0) from adcampaignresponse cr where cr.campaignid = a.campaignid and cast(CreatedDateTime as date) = cast(getdate()-1 as date) and responsetype = 1) viewCountYesterday,
 	(select isnull(count (*),0) from adcampaignresponse cr where cr.campaignid = a.campaignid and cr.ResponseType = 1) viewCountAllTime,
@@ -70,7 +71,7 @@ BEGIN
 	--inner join AspNetUsers u on 
 	
 	
-	--left outer join AdCampaignResponse aResp on a.CampaignID = aResp.CampaignID 
+	left outer join CampaignEventHistory eh on a.CampaignID = eh.CampaignID 
 	where 
 	(
 		(@keyword is null or (a.CampaignName like '%'+ @keyword +'%' or a.DisplayTitle like '%'+ @keyword +'%'  ))
@@ -83,13 +84,14 @@ BEGIN
 	
 
 
-	group by CampaignID, CampaignName,StartDateTime,MaxBudget,MaxDailyBudget,AmountSpent,Status, ApprovalDateTime, ClickRate, a.CreatedDateTime, a.Type, a.priority,a.CompanyId, a.ImagePath, a.VerifyQuestion ,  a.Answer1, a.Answer2, a.Answer3, a.ModifiedDateTime
+	group by a.CampaignID, CampaignName,StartDateTime,MaxBudget,MaxDailyBudget,AmountSpent,Status, ApprovalDateTime, ClickRate, a.CreatedDateTime, a.Type, a.priority,a.CompanyId,a.VideoLink2, a.LogoUrl, a.VerifyQuestion ,  a.Answer1, a.Answer2, a.Answer3, a.ModifiedDateTime, eh.CampaignID
 		)as items
 	order by priority desc
 	OFFSET @fromRoww ROWS
 	FETCH NEXT @toRow ROWS ONLY
 	
 END
+
 
 
 
