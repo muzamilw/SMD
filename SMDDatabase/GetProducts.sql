@@ -1,6 +1,6 @@
-﻿USE [SMDv2]
+﻿
 GO
-/****** Object:  StoredProcedure [dbo].[GetProducts]    Script Date: 12/20/2016 9:29:17 AM ******/
+/****** Object:  StoredProcedure [dbo].[GetProducts]    Script Date: 1/9/2017 3:31:42 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -144,7 +144,9 @@ from
 				THEN
 					NULL
 			END as GameId,
-			null as FreeCouponID
+			null as FreeCouponID,
+			--rtsp://manage.cash4ads.com:1935/Cash4ads/_definst_/AdCampaign/20473a/test.mp4
+			'rtsp://manage.cash4ads.com:1935/cash4ads/_definst_/AdCampaign/' + cast( adcampaign.campaignid as nvarchar(100))+'/guid_CampaignDefaultVideo.mp4'  as AndroidRSTPVideoStream
 			 
 			from adcampaign
 			inner join Company cc on adcampaign.CompanyId = cc.CompanyId and cc.IsSpecialAccount is null
@@ -341,6 +343,7 @@ from
 	
 	null as GameId,
 	null as FreeCouponID,
+	null as AndroidRSTPVideoStream,
 	null as GameUrl,
 	null as AdCount,
 	null as GameInstructions,
@@ -379,6 +382,7 @@ from
 	
 	null as GameId,
 	null as FreeCouponID,
+	null as AndroidRSTPVideoStream,
 	null as GameUrl,
 	null as AdCount,
 	null as GameInstructions,
