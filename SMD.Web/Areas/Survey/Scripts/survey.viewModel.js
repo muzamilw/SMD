@@ -216,7 +216,7 @@ define("survey/survey.viewModel",
                             PieChartlabel.removeAll();
                             for (var i = 0; i < data.pieCharts.length; i++) {
                                 PieChartValue.push(data.pieCharts[i].value);
-                                PieChartlabel.push(data.pieCharts[i].label);
+                                PieChartlabel.push('Picture ' + data.pieCharts[i].label);
 
                             };
                             PieChartValue.valueHasMutated();
@@ -348,7 +348,7 @@ define("survey/survey.viewModel",
                                         Element.PieChartlabel.removeAll();
                                         for (var i = 0; i < data.pieCharts.length; i++) {
                                             Element.PieChartValue.push(data.pieCharts[i].value);
-                                            Element.PieChartlabel.push(data.pieCharts[i].label);
+                                            Element.PieChartlabel.push('Picture ' + data.pieCharts[i].label);
                                         };
                                         Element.PieChartValue.valueHasMutated();
                                         Element.PieChartlabel.valueHasMutated();

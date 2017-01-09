@@ -227,13 +227,7 @@ else
                 <div class="piechart">
                     <canvas data-bind="chart: { type: 'pie', data: CampaignRatioData, options: { observeChanges: true, throttle: 1000, legend: { display: false }, maintainAspectRatio: false,responsive: true } }"></canvas>
                 </div>
-                @*<div data-bind="morris: {type: 'Donut', data:PieChartData , resize:true, colors: ['green', 'blue' ]  }" style="height:150px;cursor:pointer;"></div>
-                    <!-- ko if: Answer3() != null -->
-                    <div data-bind="morris: {type: 'Donut', data: [{label: Answer1(), value: Answer1Stats()},{label: Answer2(), value: Answer2Stats()},{label: Answer3(), value: Answer3Stats()}], resize:true, colors: ['green', 'blue','red' ]  }" style="height:230px;cursor:pointer;"></div>
-                    <!-- /ko -->
-                    <!-- ko if: Answer3() == null -->
-                    <div data-bind="morris: {type: 'Donut', data: [{label: Answer1(), value: Answer1Stats()},{label: Answer2(), value: Answer2Stats()}], resize:true, colors: ['green', 'blue','red' ]  }" style="height:230px;cursor:pointer;"></div>
-                    <!-- /ko -->*@
+                
             </td>
             <td >
                 
@@ -247,7 +241,7 @@ else
 <tr>
                             <td>
 
-                                <span> Result 1</span>
+                                <span> Picture 1</span>
                             </td>
                             <td>
                                 <span >0</span>%
@@ -255,7 +249,7 @@ else
                         </tr>
                         <tr>
                             <td>
-                                <span> Result 2</span>
+                                <span> Picture 2</span>
                             </td>
                             <td>
                                 <span>0</span>%
@@ -269,7 +263,7 @@ else
                         </tr>
                         <tr>
                             <td>
-                                <span data-bind="text: 'Result ' + PieChartData()[0].label"> </span>
+                                <span data-bind="text: 'Picture ' + PieChartData()[0].label"> </span>
                             </td>
                             <td>
                                 <span data-bind="text:((PieChartData()[0].value/resultClicks())*100).toFixed(2)"></span>%
@@ -279,7 +273,7 @@ else
                         <!-- ko if: PieChartData()[1] != undefined -->
                         <tr>
                             <td>
-                                <span data-bind="text: 'Result ' + PieChartData()[1].label"> </span>
+                                <span data-bind="text: 'Picture ' + PieChartData()[1].label"> </span>
                             </td>
                             <td>
                                 <span data-bind="text:((PieChartData()[1].value / resultClicks())*100).toFixed(2)"></span>%
