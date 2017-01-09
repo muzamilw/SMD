@@ -32,7 +32,7 @@ else
                     <div class="col-lg-3 pull-right" style="margin-right:-1px;display:none">
                         <div class="pull-right">
                             <div class="status_date_span" style="margin-top:26px;">
-                                Last modified <span style="margin-left:3px"></span><span>12 april 2014</span>
+                                Last modified <span style="margin-left:3px"></span ><span data-bind="dateString:ModifiedDateTime()"></span>
                             </div>
                         </div>
                     </div>
@@ -1233,15 +1233,16 @@ else
 
                             </div>
                         </div>
-                        <div class="row">
+                        <div data-bind="with: $root.campaignModel">
+                            <div class="row" id="last_mod_panel" data-bind="visible:$root.IsthisEditCamapiagn">
 
-                            <div class="pull-left">
-                                <div class="status_date_span" style="margin-left:0px;margin-top:0px;">
-                                    Last modified <span style="margin-left:3px"></span><span>12 april 2014</span>
+                                <div class="pull-left">
+                                    <div class="status_date_span" style="margin-left:0px;margin-top:0px;">
+                                        Last modified <span style="margin-left:3px"></span><span data-bind="dateString:ModifiedDateTime()"></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
 
 
 
