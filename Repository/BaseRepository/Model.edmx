@@ -2919,6 +2919,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Parameter Name="fromRoww" Type="int" Mode="In" />
           <Parameter Name="toRow" Type="int" Mode="In" />
           <Parameter Name="adminMode" Type="bit" Mode="In" />
+          <Parameter Name="type" Type="int" Mode="In" />
         </Function>
         <Function Name="SearchCoupons" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="categoryId" Type="int" Mode="In" />
@@ -4033,6 +4034,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <Parameter Name="fromRoww" Mode="In" Type="Int32" />
             <Parameter Name="toRow" Mode="In" Type="Int32" />
             <Parameter Name="adminMode" Mode="In" Type="Boolean" />
+            <Parameter Name="type" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="DamImages" EntityType="DomainModels.DamImage" />
           <EntitySet Name="UserCouponViews" EntityType="DomainModels.UserCouponView" />
