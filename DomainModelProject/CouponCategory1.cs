@@ -18,6 +18,7 @@ namespace DomainModelProject
         {
             this.CampaignCategories = new HashSet<CampaignCategory>();
             this.CouponCategories = new HashSet<CouponCategories>();
+            this.UserCouponCategoryClicks = new HashSet<UserCouponCategoryClick>();
         }
     
         public int CategoryId { get; set; }
@@ -28,5 +29,6 @@ namespace DomainModelProject
     
         public virtual ICollection<CampaignCategory> CampaignCategories { get; set; }
         public virtual ICollection<CouponCategories> CouponCategories { get; set; }
+        public virtual ICollection<UserCouponCategoryClick> UserCouponCategoryClicks { get; set; }
     }
 }

@@ -701,7 +701,7 @@
 
     // Factory Method
     Campaign.Create = function (source) {
-
+       
         var campaign = new Campaign(source.IsPaymentCollected, source.PaymentDate, source.CampaignID > 0 ? source.CampaignID: source.CampaignId , source.LanguageId, source.CampaignName, source.UserId, source.Status, source.StatusValue,
             source.CampaignDescription, source.Gender + "", source.Archived, source.StartDateTime, source.EndDateTime, source.MaxBudget
             , source.Type + "", source.DisplayTitle, source.LandingPageVideoLink, source.VerifyQuestion, source.Answer1, source.Answer2, source.Answer3,
@@ -712,7 +712,7 @@
              source.couponImage2, source.CouponImage3, source.CouponImage4, source.CouponExpiryLabel, source.couponSmdComission, null, source.DeliveryDays + "", source.IsUseFilter + "", source.LogoUrl, source.VoucherAdditionalInfo, source.CouponId, source.IsShowVoucherSetting, source.VideoLink2, source.CouponType + "", source.IsSavedCoupon, source.viewCountToday, source.viewCountYesterday, source.viewCountAllTime, source.MaxDailyBudget, source.Locationss, source.ApprovalDateTime, source.ChannelType + "", source.VideoBytes, source.ShowBuyitBtn, source.clickThroughsToday,
             source.clickThroughsYesterday, source.clickThroughsAllTime, source.ModifiedDateTime, source.SurveyAnsweredAllTime,
             source.Answer1Stats, source.Answer2Stats, source.Answer3Stats);
-
+       
         _.each(source.AdCampaignTargetCriterias, function (item) {
 
             campaign.AdCampaignTargetCriterias.push(AdCampaignTargetCriteriasModel.Create(item));

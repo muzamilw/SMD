@@ -126,6 +126,8 @@ namespace SMD.Models.DomainModels
         public Nullable<int> Score { get; set; }
         public Nullable<double> Playtime { get; set; }
         public Nullable<double> Accuracy { get; set; }
+        public string AndroidRSTPVideoStream { get; set; }
+        
         
             
         /// <summary>

@@ -184,6 +184,9 @@
         <AssociationConnector Association="DomainModels.FK_UserGameResponse_AdCampaignResponse" />
         <AssociationConnector Association="DomainModels.FK_UserGameResponse_AspNetUsers" />
         <AssociationConnector Association="DomainModels.FK_UserGameResponse_Game" />
+        <EntityTypeShape EntityType="DomainModels.UserCouponCategoryClick" Width="1.5" PointX="29.75" PointY="66" />
+        <AssociationConnector Association="DomainModels.FK_UserCouponCategoryClicks_AspNetUsers" />
+        <AssociationConnector Association="DomainModels.FK_UserCouponCategoryClicks_CouponCategory" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

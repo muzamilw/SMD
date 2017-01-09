@@ -275,6 +275,8 @@ namespace SMD.Repository.BaseRepository
 
         public DbSet<UserCouponView> UserCouponView { get; set; }
 
+        public DbSet<UserCouponCategoryClick> UserCouponCategoryClick { get; set; }
+
         public DbSet<vw_GetUserTransactions> vw_GetUserTransactions { get; set; }
         public DbSet<vw_PublisherTransaction> vw_PublisherTransaction { get; set; }
         public DbSet<vw_Cash4AdsReport> vw_Cash4AdsReport { get; set; }
@@ -611,7 +613,7 @@ namespace SMD.Repository.BaseRepository
         }
 
 
-        public ObjectResult<SearchCampaigns_Result> SearchCampaigns(int status, string keyword, int companyId, int fromRow, int toRow, bool adminMode)
+        public ObjectResult<SearchCampaigns_Result> SearchCampaigns(int status, string keyword, int companyId, int fromRow, int toRow, bool adminMode,int type)
         {
             var statusParameter = status != null ?
                 new ObjectParameter("status", status) :
@@ -634,8 +636,10 @@ namespace SMD.Repository.BaseRepository
 
             var adminModeParameter = new ObjectParameter("adminMode", adminMode);
 
+            var typeParameter = new ObjectParameter("type", type);
 
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SearchCampaigns_Result>("SearchCampaigns", statusParameter, keywordParameter, companyIdParameter, fromRowParameter, toRowParameter, adminModeParameter);
+
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SearchCampaigns_Result>("SearchCampaigns", statusParameter, keywordParameter, companyIdParameter, fromRowParameter, toRowParameter, adminModeParameter, typeParameter);
         }
 
         public ObjectResult<GetRegisteredUserData_Result> GetRegisteredUserData(int status, string keyword, int fromRow, int toRow)
