@@ -212,7 +212,7 @@ namespace SMD.Repository.Repositories
 
         public IEnumerable<SearchCampaigns_Result> SearchCampaigns(AdCampaignSearchRequest request, out int rowCount)
         {
-            var results =  db.SearchCampaigns(request.status, request.SearchText,this.CompanyId, (request.PageNo - 1) * request.PageSize, request.PageSize, false).Where(g=>g.Type == request.mode).ToList();
+            var results =  db.SearchCampaigns(request.status, request.SearchText,this.CompanyId, (request.PageNo - 1) * request.PageSize, request.PageSize, false,request.mode).ToList();
 
             if (results.Count() > 0)
             {
