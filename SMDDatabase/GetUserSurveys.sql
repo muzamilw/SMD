@@ -1,6 +1,6 @@
 ﻿USE [SMDv2]
 GO
-/****** Object:  UserDefinedFunction [dbo].[GetUserSurveys]    Script Date: 10/14/2016 1:05:59 PM ******/
+/****** Object:  UserDefinedFunction [dbo].[GetUserSurveys]    Script Date: 1/10/2017 12:36:55 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -78,11 +78,11 @@ as (
 	where -- If this survey has no response yet
 	(((select count(*) from SurveyQuestionResponse mySurveyQuestionResponse
 			 where mySurveyQuestionResponse.UserID = @userId and 
-			 mySurveyQuestionResponse.SQID = sq.SQID) = 0)
+			 mySurveyQuestionResponse.SQID = sq.SQID and mySurveyQuestionResponse.responsetype = 3) = 0)
 	  or  
 	  ((select top 1 mySurveyQuestionResponse.UserSelection from SurveyQuestionResponse mySurveyQuestionResponse
 			 where mySurveyQuestionResponse.UserID = @userId and 
-			 mySurveyQuestionResponse.SQID = sq.SQID) is null)
+			 mySurveyQuestionResponse.SQID = sq.SQID and mySurveyQuestionResponse.responsetype = 3) is null)
 	)
 	and sq.ParentSurveyId is null and sq.Status = 3 -- live
 	UNION ALL
@@ -119,11 +119,11 @@ as (
 	where -- If this survey has no response yet
 	((((select count(*) from SurveyQuestionResponse mySurveyQuestionResponse
 			 where mySurveyQuestionResponse.UserID = @userId and 
-			 mySurveyQuestionResponse.SQID = sq.SQID) = 0)
+			 mySurveyQuestionResponse.SQID = sq.SQID and mySurveyQuestionResponse.responsetype = 3) = 0 )
 	  or  
 	  ((select top 1 mySurveyQuestionResponse.UserSelection from SurveyQuestionResponse mySurveyQuestionResponse
 			 where mySurveyQuestionResponse.UserID = @userId and 
-			 mySurveyQuestionResponse.SQID = sq.SQID) is null)
+			 mySurveyQuestionResponse.SQID = sq.SQID and mySurveyQuestionResponse.responsetype = 3) is null)
 		)
 	  and
 	  sq.Status = 3 -- live

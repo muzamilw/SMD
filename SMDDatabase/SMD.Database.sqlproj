@@ -95,6 +95,7 @@
     <None Include="SearchCampaigns.sql" />
     <None Include="GetCampaignPerformanceWeeklyStats.sql" />
     <None Include="GetRandomGameByUser.sql" />
+    <None Include="vw_Notifications.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="getCampaignsByStatus.sql" />

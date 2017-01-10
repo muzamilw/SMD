@@ -1,6 +1,6 @@
 ﻿USE [SMDv2]
 GO
-/****** Object:  UserDefinedFunction [dbo].[GetUserProfileQuestions]    Script Date: 10/14/2016 1:30:03 PM ******/
+/****** Object:  UserDefinedFunction [dbo].[GetUserProfileQuestions]    Script Date: 1/10/2017 12:54:28 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -353,11 +353,11 @@ outer apply (
 	where 
 	(
 		(((select count(*) from ProfileQuestionUserAnswer pqu 
-			where pq.PQID = pqu.PQID and pqu.UserID = @UserID )=0)--and pq.CountryID = @countryId) = 0)
+			where pq.PQID = pqu.PQID and pqu.UserID = @UserID and pqu.ResponseType = 3 )=0)--and pq.CountryID = @countryId) = 0)
 		  or 	 
 		  ((select top 1 datediff(day, dateadd(month, pq.refreshtime,pqu.AnswerDateTime), getdate()) 
 			from ProfileQuestionUserAnswer pqu 
-			where pq.PQID = pqu.PQID and pqu.UserID = @UserID --and pq.CountryID = @countryId -- commented because no need for country
+			where pq.PQID = pqu.PQID and pqu.UserID = @UserID and pqu.ResponseType = 3 --and pq.CountryID = @countryId -- commented because no need for country
 			order by pqu.pquanswerid) > 0 )	
 		)
 		and pq.status = 3
@@ -557,11 +557,11 @@ outer apply (
 	and
 	(
 		(((select count(*) from ProfileQuestionUserAnswer pqu 
-			where pq.PQID = pqu.PQID and pqu.UserID = @UserID) =0)-- and pq.CountryID = @countryId) = 0)-- commented because no need for country
+			where pq.PQID = pqu.PQID and pqu.UserID = @UserID and pqu.ResponseType = 3) =0)-- and pq.CountryID = @countryId) = 0)-- commented because no need for country
 		  or 	 
 		  ((select top 1 datediff(day, dateadd(month, pq.refreshtime,pqu.AnswerDateTime), getdate()) 
 			from ProfileQuestionUserAnswer pqu 
-			where pq.PQID = pqu.PQID and pqu.UserID = @UserID --and pq.CountryID = @countryId -- commented because no need for country
+			where pq.PQID = pqu.PQID and pqu.UserID = @UserID and pqu.ResponseType = 3 --and pq.CountryID = @countryId -- commented because no need for country
 			order by pqu.pquanswerid) > 0 )	
 		)
 	)
