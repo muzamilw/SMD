@@ -34,5 +34,7 @@ namespace DomainModelProject
         public string DealCompany { get; set; }
         public string DealCity { get; set; }
         public string ProfileImage { get; set; }
+        public string CurrencyCode { get; set; }
+        public string CurrencySymbol { get; set; }
     }
 }

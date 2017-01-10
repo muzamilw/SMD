@@ -68,6 +68,11 @@ namespace SMD.Repository.Repositories
 
             result.CouponRatingReviewResponses = allrows.OrderBy(r => Guid.NewGuid()).Take(6).ToList();
 
+            foreach (var item in result.CouponRatingReviewResponses)
+            {
+                item.RatingDateTimeString = item.RatingDateTime.Value.ToShortDateString();
+            }
+
             return result;
            
         }

@@ -11,6 +11,7 @@ namespace SMD.Models.DomainModels
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations.Schema;
     
     public partial class CouponRatingReview
     {
@@ -27,6 +28,9 @@ namespace SMD.Models.DomainModels
         public string Reviewimage3 { get; set; }
     
         public virtual Coupon Coupon { get; set; }
+
+        
+        
     }
 
 
