@@ -1234,11 +1234,14 @@ else
                             </div>
                         </div>
                         <div data-bind="with: $root.campaignModel">
-                            <div class="row" id="last_mod_panel" data-bind="visible:$root.IsthisEditCamapiagn">
+                            <div data-bind="visible:$root.IsthisEditCamapiagn">
+                                <div class="row" id="last_mod_panel" data-bind="visible:$root.IsthisEditCamapiagn">
 
-                                <div class="pull-left">
-                                    <div class="status_date_span" style="margin-left:0px;margin-top:0px;">
-                                        Last modified <span style="margin-left:3px"></span><span data-bind="dateString:ModifiedDateTime()"></span>
+                                    <div class="pull-left">
+                                        <div class="status_date_span" style="margin-left:0px;margin-top:0px;">
+                                            Last modified <span style="margin-left:3px"></span><span data-bind="dateString:ModifiedDateTime,datePattern: 'DD/MM/YYYY'"></span>
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>

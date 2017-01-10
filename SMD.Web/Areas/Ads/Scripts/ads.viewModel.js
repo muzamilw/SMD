@@ -15,6 +15,9 @@ define("ads/ads.viewModel",
                     isEditorVisible = ko.observable(false),
                     isClickRateVisible = ko.observable(null),
                     IsthisEditCamapiagn = ko.observable(false),
+                    LastModifiedDateVal = ko.observable(),
+
+
                     totalvideoAdsCount = ko.observable(0),
                     CurrentMode = ko.observable(0),
                     CompanyLogo = ko.observable(''),
@@ -2234,6 +2237,8 @@ define("ads/ads.viewModel",
                         }, {
                             success: function (data) {
 
+                                
+
                                 if (data != null) {
                                     // set languages drop down
                                     var profileQIds = [];
@@ -2251,12 +2256,15 @@ define("ads/ads.viewModel",
 
                                     campaignModel(model.Campaign.Create(data.Campaigns[0]));
 
+                                    LastModifiedDateVal(campaignModel().ModifiedDateTime());
+
                                     campaignModel().AdCampaignTargetCriterias.removeAll();
                                     if (campaignModel().LogoUrl() == '' || campaignModel().LogoUrl() == undefined) {
 
                                         campaignModel().LogoUrl("/images/standardplaceholder.png");
                                     }
 
+                                    campaignModel().ModifiedDateTime(item.ModifiedDateTime());
 
 
 
@@ -4073,7 +4081,8 @@ define("ads/ads.viewModel",
                     ischartOpened: ischartOpened,
                     totalvideoAdsCount: totalvideoAdsCount,
                     gridTotalCount: gridTotalCount,
-                    CampaignRatioData: CampaignRatioData
+                    CampaignRatioData: CampaignRatioData,
+                    LastModifiedDateVal: LastModifiedDateVal
                 };
             })()
         };
