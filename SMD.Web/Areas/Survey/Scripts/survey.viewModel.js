@@ -165,7 +165,12 @@ define("survey/survey.viewModel",
                    // IsnewSurvey(false);
                     if (item != undefined ){
                         selectedSQIDAnalytics(item.SQID());
-                        HeaderText(item.Question());
+                        if (item.Question() != undefined)
+                            HeaderText(item.Question());
+                        else
+                        {
+                            HeaderText("Picture Polls");
+                        }
                     }
                     isEditorVisible(true);
                     $("#panelArea,#topArea,#Heading_div").css("display", "none");
