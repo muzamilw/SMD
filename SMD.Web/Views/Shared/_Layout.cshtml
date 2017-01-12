@@ -210,13 +210,13 @@
 
 
                                     @*<li id="userProfileBinding"><a data-bind="click:showUserProfileDialog">Personal Profile</a></li>*@
-                                    <li><a id="cprofile" style="cursor: pointer" data-bind="click:showCompanyProfileDialog">Account Settings</a></li>
-                                    <li><a href="~/Billing/Manage/Invoice">Billing History</a></li>
+                                    <li><a id="cprofile" style="cursor: pointer" data-bind="click:showCompanyProfileDialog,visible:UserRoleId =='EndUser_Admin'">Account Settings</a></li>
+                                    <li><a href="~/Billing/Manage/Invoice" data-bind="visible:UserRoleId =='EndUser_Accounts'||UserRoleId =='EndUser_Admin'">Billing History</a></li>
                                     @*<li><a href="~/Billing/Manage/EmailDashboard">E Mail Editor</a></li>*@
 
-                                    <li><a href="/User/ManageUser/ManageUsers">Manage Users</a></li>
-                                    <li><a onclick="OpenBranchLocation();">Manage Branches</a></li>
-                                    <li><a href="/Coupons/Coupons/CouponReviews">Manage Reviews</a></li>
+                                    <li><a href="/User/ManageUser/ManageUsers" data-bind="visible:UserRoleId =='EndUser_Admin'">Manage Users</a></li>
+                                    <li><a onclick="OpenBranchLocation();" style="display:none">Manage Branches</a></li>
+                                    <li data-bind="visible:UserRoleId =='EndUser_Creative'||UserRoleId =='EndUser_Admin'"><a href="/Coupons/Coupons/CouponReviews">Manage Reviews</a></li>
                                     @*<li><a href="/DamImages/Grid">Image library</a></li>*@
                                     @*<li><a onclick="OpenPhraseLibrary();">Phrase library</a></li>*@
 
@@ -234,7 +234,7 @@
                                     @*<li class="inlineMenuItem"><a href="~/Billing/Manage/Invoice">&nbsp;&nbsp;View Invoices</a></li>
                             <li class="inlineMenuItem"><a href="">&nbsp;&nbsp;Payment Methods</a></li>*@
 
-                                    <li style="display: block;
+                                    <li style="display: none;
     margin-top: 0.5em;
     margin-bottom: 0.5em;
     margin-left: auto;
@@ -242,7 +242,7 @@
     border-style: inset;
     border-width: 1px;"></li>
 
-                                    <li><a href="">Delete my Account</a></li>
+                                    <li><a href=""  style="display:none">Delete my Account</a></li>
 
                                     @*<li><a href="">Ad Campaigns</a></li>
                             <li class="inlineMenuItem" style="display:none;"><a href="~/Ads/Ads">&nbsp;&nbsp;Create Ad Campaigns</a></li>
