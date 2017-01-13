@@ -227,7 +227,7 @@
                     </tr>
                     <tr>                      
                       <td align="center" style="padding-bottom:40px;" valign="top">                        
-                        <p style="color:#FFFFFF; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:center;">
+                        <p style="color:#FFFFFF; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:30px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:center;">
                            ++firstname++  :(</p>
                       </td>
                     </tr>
@@ -298,10 +298,6 @@
                                       
                                         <td align="center" style="padding-bottom:40px;text-align:center" valign="top" colspan="2">                                          
                                             
-                                             <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
-                                           Delete ++firstname++’s account and reset Wallet Balance to Zero.
-
-                                          </p>
                                             <br />
                                                <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
                                            Your account will no longer be available, and all data and Wallet Balances 
@@ -319,7 +315,7 @@ will be deleted once you confirm to delete your account permanently.
                                                                                     <tr>
                                                                                     <td align="center" bgcolor="#6DC6DD" style="padding:20px;" valign="top">
                                                                                     <![endif]-->
-                                          <a href="++deleteaccountlink++" style="background-color:#6DC6DD; border-collapse:separate; border-top:20px solid #6DC6DD; border-right:40px solid #6DC6DD; border-bottom:20px solid #6DC6DD; border-left:40px solid #6DC6DD; border-radius:3px; color:#FFFFFF; display:inline-block; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:600; letter-spacing:.3px; text-decoration:none;" target="_blank">Confirm Account Delete</a>
+                                          <a href="++deleteaccountlink++" style="background-color:#6DC6DD; border-collapse:separate; border-top:20px solid #6DC6DD; border-right:40px solid #6DC6DD; border-bottom:20px solid #6DC6DD; border-left:40px solid #6DC6DD; border-radius:3px; color:#FFFFFF; display:inline-block; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:600; letter-spacing:.3px; text-decoration:none;" target="_blank">Confirm to Delete Account</a>
 <!--[if gte mso 9]>
                                                                                     </td>
                                                                                     </tr>
@@ -384,7 +380,7 @@ will be deleted once you confirm to delete your account permanently.
                     <tr>                      
                       <td id="footerContent" style="color:#B7B7B7; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:12px; font-weight:400; line-height:24px; padding-bottom:20px; text-align:center;" valign="top">                        
                         <p style="color:#B7B7B7; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:12px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:center;">
-                          &copy; 2016 Cash4ads.com
+                          &copy; 2017 Clydy Ltd.
                           <sup>
                             &reg;
                           </sup>, All Rights Reserved.<br/>67 Hurworth Avenue  &bull; Slough, Berkshire &bull;  United Kingdom SL3 7FF

@@ -985,10 +985,15 @@ namespace SMD.Implementation.Services
                     products.Insert(0, freeGame);
                 }
 
+
+                int insertionPoint = 3;
+                if (products.Count < 3)
+                    insertionPoint = 1;
+
                 if (videoad != null)
                 {
                     var freevideoAd = new GetProducts_Result { ItemId = videoad.CampaignId, ItemName = videoad.CampaignName, Type = "freeAd", ItemType = 1, AdImagePath = "http://manage.cash4ads.com/" + videoad.LogoUrl, AdClickRate = 0, AdvertisersLogoPath = companylogo, BuyItImageUrl = "http://manage.cash4ads.com/" + videoad.BuyItImageUrl, GameId = 1, GameUrl = "", AdVideoLink = videoad.LandingPageVideoLink, VideoLink2 = videoad.VideoLink2, AdVerifyQuestion = videoad.VerifyQuestion, AdAnswer1 = videoad.Answer1, AdAnswer2 = videoad.Answer2, AdAnswer3 = videoad.Answer3, AdCorrectAnswer = videoad.CorrectAnswer };
-                    products.Insert(3, freevideoAd);
+                    products.Insert(insertionPoint, freevideoAd);
                 }
             }
 

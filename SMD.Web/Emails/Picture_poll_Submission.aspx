@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta content="IE=edge" http-equiv="X-UA-Compatible" />
     <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <title>Picture Poll Submitted for Approval
+    <title>Approve or Reject
     </title>
     <style type="text/css">
         /*////// RESET STYLES //////*/
@@ -201,7 +201,7 @@
       <table align="center" border="0" cellpadding="0" cellspacing="0" height="100%" id="bodyTable" width="100%">        
         <tr>          
           <td align="center" id="bodyCell" valign="top">            
-            <span style="color:#FFFFFF; display:none; font-size:0px; height:0px; visibility:hidden; width:0px;">Picture Poll Submitted for Approval.</span>
+            <span style="color:#FFFFFF; display:none; font-size:0px; height:0px; visibility:hidden; width:0px;">Approve or Reject.</span>
 <!-- BEGIN TEMPLATE // -->
             <table border="0" cellpadding="0" cellspacing="0" width="100%">              
               <tr>                
@@ -220,7 +220,7 @@
                     <tr>                      
                       <td align="center" style="padding-bottom:10px;" valign="top">                        
                         <h1 style="color:#FFFFFF; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:30px; font-style:normal; font-weight:600; line-height:42px; letter-spacing:normal; margin:0; padding:0; text-align:center;">
-                         Picture Poll Submitted for Approval
+                         Approve or Reject
                         </h1>
                       </td>
                     </tr>
@@ -448,7 +448,7 @@
                     <tr>                      
                       <td id="footerContent" style="color:#B7B7B7; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:12px; font-weight:400; line-height:24px; padding-bottom:20px; text-align:center;" valign="top">                        
                         <p style="color:#B7B7B7; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:12px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:center;">
-                          &copy; 2016 Cash4ads.com
+                          &copy; 2017 Clydy Ltd.
                           <sup>
                             &reg;
                           </sup>, All Rights Reserved.<br/>67 Hurworth Avenue  &bull; Slough, Berkshire &bull;  United Kingdom SL3 7FF

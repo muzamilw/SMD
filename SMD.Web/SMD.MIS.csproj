@@ -633,6 +633,12 @@
     <Compile Include="Emails\Deal_Expired.aspx.designer.cs">
       <DependentUpon>Deal_Expired.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Emails\Deal_Expiry_3_days.aspx.cs">
+      <DependentUpon>Deal_Expiry_3_days.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Deal_Expiry_3_days.aspx.designer.cs">
+      <DependentUpon>Deal_Expiry_3_days.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Emails\Picture_poll_Submission.aspx.cs">
       <DependentUpon>Picture_poll_Submission.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1520,6 +1526,7 @@
     <Content Include="Content\themes\Centaurus\js\wizard.js" />
     <Content Include="Content\themes\Centaurus\js\xcharts.js" />
     <Content Include="Emails\Deal_Expired.aspx" />
+    <Content Include="Emails\Deal_Expiry_3_days.aspx" />
     <Content Include="Emails\Picture_poll_Submission.aspx" />
     <Content Include="Emails\Display_Ad_Rejected.aspx" />
     <Content Include="Emails\Deal_Submission.aspx" />
