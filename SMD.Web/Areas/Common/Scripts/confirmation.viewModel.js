@@ -14,11 +14,13 @@ define("common/confirmation.viewModel",
                     defaultHeaderText = ist.resourceText.defaultHeaderText,
                     // Heading Text
                     headingText = ko.observable(defaultHeaderText),
+                    headingPaymentText = ko.observable(defaultHeaderText),
                     // default confirmation text
                     defaultConfirmationText = "Do you want to proceed with the request?",
                     // Message Text
 
                     messageText = ko.observable(defaultConfirmationText),
+                     messagePaymentText = ko.observable(defaultConfirmationText),
 
 
                     defaultButtonTextYes = "Yes",
@@ -28,25 +30,25 @@ define("common/confirmation.viewModel",
 
                     noBtnText = ko.observable(defaultButtonTextNo),
 
-                     defaultDealButtonTextYes = "Yes",
-                    yesdealBtnText = ko.observable(defaultDealButtonTextYes),
+                     defaultPaymentTextYes = "Continue",
+                    yesPaymentBtnText = ko.observable(defaultPaymentTextYes),
 
-                    defaultDealButtonTextNo = "No",
+                    defaultPaymentTextNo = "Back To Draft",
 
-                    nodealBtnText = ko.observable(defaultDealButtonTextNo),
+                    noPayemetBtnText = ko.observable(defaultPaymentTextNo),
 
                     defaultIsCancelVisible = true;
 
                 IsCancelVisible = ko.observable(defaultIsCancelVisible),
                 // On Proceed
                  afterProceed = ko.observable(),
-                 afterProceedDeal = ko.observable(),
+                 afterProceedPayment = ko.observable(),
                 // On Proceed
                  afterActionProceed = ko.observable(),
 
                 // On Cancel
                  afterCancel = ko.observable(),
-                afterCancelDeal  = ko.observable(),
+                afterCancelPayment  = ko.observable(),
                 // On No
                  afterNo = ko.observable(),
                 // Is Proceed Visible
@@ -71,11 +73,11 @@ define("common/confirmation.viewModel",
                      hide();
 
                  },
-                proceedDeal = function () {
-                    if (typeof afterProceedDeal() === "function") {
-                        afterProceedDeal()();
+                proceedPayment = function () {
+                    if (typeof afterProceedPayment() === "function") {
+                        afterProceedPayment()();
                     }
-                    hideDeal();
+                    hidePaymentPopup();
 
                 },
                 // Proceed with the request
@@ -107,17 +109,19 @@ define("common/confirmation.viewModel",
                  resetDialog = function () {
                      afterCancel(undefined);
                      afterProceed(undefined);
-                     afterCancelDeal(undefined);
-                     afterProceedDeal(undefined);
+                     afterCancelPayment(undefined);
+                     afterProceedPayment(undefined);
 
                      afterNo(undefined);
                      isProceedVisible(true);
                      headingText(defaultHeaderText);
+                     headingPaymentText(defaultHeaderText);
                      messageText(defaultConfirmationText);
+                     messagePaymentText(defaultConfirmationText);
                      yesBtnText(defaultButtonTextYes);
-                     nodealBtnText(defaultDealButtonTextNo);
-                     yesdealBtnText(defaultDealButtonTextYes);
                      noBtnText(defaultButtonTextNo);
+                     yesPaymentBtnText(defaultPaymentTextYes);
+                     noPayemetBtnText(defaultPaymentTextNo);
                      IsCancelVisible(defaultIsCancelVisible);
                  },
                 // Show the dialog
@@ -131,15 +135,15 @@ define("common/confirmation.viewModel",
                      resetDialog();
                      view.hide();
                  },
-                   showDeal = function () {
+                   showPaymentPopup = function () {
                        isLoading(true);
-                       view.showDeal();
+                       view.showPayment();
                    },
                 // Hide the dialog
-                 hideDeal = function () {
+                 hidePaymentPopup = function () {
                      // Reset Call Backs
                      resetDialog();
-                     view.hideDeal();
+                     view.hidePayment();
                  },
 
 
@@ -221,11 +225,11 @@ define("common/confirmation.viewModel",
                      }
                      hide();
                  },
-                 cancelDeal = function () {
-                     if (typeof afterCancelDeal() === "function") {
-                         afterCancelDeal()();
+                 cancelPayment = function () {
+                     if (typeof afterCancelPayment() === "function") {
+                         afterCancelPayment()();
                      }
-                     hideDeal();
+                     hidePaymentPopup();
                  },
                 // Cancel 
                  Warningcancel = function () {
@@ -255,6 +259,7 @@ define("common/confirmation.viewModel",
                      ko.applyBindings(view.viewModel, view.bindingRootq);
                      ko.applyBindings(view.viewModel, view.bindingRootupgrade);
                      ko.applyBindings(view.viewModel, view.bindingRootaction);
+                     ko.applyBindings(view.viewModel, view.bindingRootPayment);
                      var logo = $('#companyLogo').prop('src');
                      if ((logo == null || logo == "" || logo == undefined) && (UserRoleId == "EndUser_Admin"))
                          showAccountSetingPopup();
@@ -264,32 +269,35 @@ define("common/confirmation.viewModel",
                 return {
                     isLoading: isLoading,
                     headingText: headingText,
+                    headingPaymentText:headingPaymentText,
                     initialize: initialize,
                     show: show,
-                    showDeal:showDeal,
+                    showPaymentPopup: showPaymentPopup,
                     cancel: cancel,
-                    cancelDeal:cancelDeal,
+                    cancelPayment: cancelPayment,
                     Warningcancel: Warningcancel,
                     proceed: proceed,
-                    proceedDeal:proceedDeal,
+                    proceedPayment: proceedPayment,
                     proceedAction: proceedAction,
                     no: no,
                 afterProceed: afterProceed,
-                afterProceedDeal:afterProceedDeal,
+                afterProceedPayment: afterProceedPayment,
                 afterActionProceed: afterActionProceed,
                 afterCancel: afterCancel,
-                afterCancelDeal:afterCancelDeal,
+                afterCancelPayment: afterCancelPayment,
                 afterNo: afterNo,
                 isProceedVisible: isProceedVisible,
                 resetDialog: resetDialog,
                 messageText: messageText,
+                messagePaymentText:messagePaymentText,
                 yesBtnText: yesBtnText,
-                yesdealBtnText: yesdealBtnText,
-                nodealBtnText:nodealBtnText,
                 noBtnText: noBtnText,
+                yesPaymentBtnText: yesPaymentBtnText,
+                noPayemetBtnText: noPayemetBtnText,
+               
                 IsCancelVisible: IsCancelVisible,
                 hide: hide,
-                hideDeal:hideDeal,
+                hidePaymentPopup: hidePaymentPopup,
                 showWarningPopup: showWarningPopup,
                 showOKpopup: showOKpopup,
                 hideshowOKpopup: hideshowOKpopup,

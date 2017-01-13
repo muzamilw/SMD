@@ -1598,17 +1598,17 @@ define("survey/survey.viewModel",
                                                 else {
                                                     selectedQuestion().IsUseFilter(false);
                                                 }
-                                                confirmation.headingText("Submission Fee - One Time Charge  £9");
-                                                confirmation.messageText("Your deal cannot be submitted for 30 days." + "<br\>" + "Please subscribe to avail unlimited deals.");
-                                                confirmation.afterProceed(function () {
+                                                confirmation.headingPaymentText("Picture Poll - Submission Fee");
+                                                confirmation.messagePaymentText("One Time Charge for this Campaign £9." + "<br\>" + "You will not be charged the submission fee again if you pause or resume this campaign after approval.");
+                                                confirmation.afterProceedPayment(function () {
                                                     saveSurveyQuestion(2);
                                                 });
-                                                confirmation.yesBtnText("Continue");
-                                                confirmation.noBtnText("Back to Draft");
-                                                confirmation.afterCancel(function () {
+                                                confirmation.yesPaymentBtnText("Continue");
+                                                confirmation.noPayemetBtnText("Back to Draft");
+                                                confirmation.afterCancelPayment(function () {
                                                     SaveAsDraft();
                                                 });
-                                                confirmation.show();
+                                                confirmation.showPaymentPopup();
                                                // saveSurveyQuestion(2);
                                             }
 
@@ -1643,17 +1643,17 @@ define("survey/survey.viewModel",
                                             else {
                                                 selectedQuestion().IsUseFilter(false);
                                             }
-                                            confirmation.headingText("Submission Fee - One Time Charge  £9");
-                                            confirmation.messageText("Your deal cannot be submitted for 30 days." + "<br\>" + "Please subscribe to avail unlimited deals.");
-                                            confirmation.afterProceed(function () {
+                                            confirmation.headingPaymentText("Picture Poll - Submission Fee");
+                                            confirmation.messagePaymentText("One Time Charge for this Campaign £9." + "<br\>" + "You will not be charged the submission fee again if you pause or resume this campaign after approval.");
+                                            confirmation.afterProceedPayment(function () {
                                                 saveSurveyQuestion(2);
                                             });
-                                            confirmation.yesBtnText("Continue");
-                                            confirmation.noBtnText("Back to Draft");
-                                            confirmation.afterCancel(function () {
+                                            confirmation.yesPaymentBtnText("Continue");
+                                            confirmation.noPayemetBtnText("Back to Draft");
+                                            confirmation.afterCancelPayment(function () {
                                                 SaveAsDraft();
                                             });
-                                            confirmation.show();
+                                            confirmation.showPaymentPopup();
                                             //saveSurveyQuestion(2);
                                         }
                                     }

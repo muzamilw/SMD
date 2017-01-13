@@ -241,7 +241,7 @@ define("ads/ads.viewModel",
 				    isListVisible(false);
 				    // isNewCampaign(false);
 				    if (mode == 4)
-				    $("#logo_div").css("display", "block");
+				        $("#logo_div").css("display", "block");
 				    $(".hideInCoupons").css("display", "none");
 
 				    $("#MarketobjDiv").css("display", "none");
@@ -460,7 +460,7 @@ define("ads/ads.viewModel",
 				                        element: 'GenderBarChartId',
 				                        data: PerGenderChartAnalyticsData(),
 				                        xkey: 'city', ykeys: ['male', 'female'], labels: ['male', 'female'],
-				                        yLabelFormat: function (y) { return y != Math.round(y) ? '' : y; }, 
+				                        yLabelFormat: function (y) { return y != Math.round(y) ? '' : y; },
 				                        parseTime: false, setAxisAlignFirstX: true,
 				                        barColors: ['green', 'blue']
 				                    });
@@ -1083,6 +1083,16 @@ define("ads/ads.viewModel",
 
 
             submitCampaignData = function () {
+                var messageText;
+                var headingtext;
+                if (CurrentMode() == 1) {
+                    messageText = "One Time Charge for this Campaign £19." + "<br\>" + "You will not be charged the submission fee again if you pause, resume or tweak this campaign after approval.";
+                    headingtext = "Video Ad - Submission Fee";
+                }
+                else {
+                    messageText = "One Time Charge for this Campaign £9." + "<br\>" + "You will not be charged the submission fee again if you pause, resume or tweak this campaign after approval.";
+                    headingtext = "Display Ad - Submission Fee";
+                }
                 //if (campaignModel().isValid()) {
                 if (ValidateCampaign(2)) {
 
@@ -1116,17 +1126,17 @@ define("ads/ads.viewModel",
                                 else {
                                     campaignModel().IsUseFilter(false);
                                 }
-                                confirmation.headingText("Submission Fee - One Time Charge  £19");
-                                confirmation.messageText("Your deal cannot be submitted for 30 days." + "<br\>" + "Please subscribe to avail unlimited deals.");
-                                confirmation.afterProceed(function () {
+                                confirmation.headingPaymentText(headingtext);
+                                confirmation.messagePaymentText(messageText);
+                                confirmation.afterProceedPayment(function () {
                                     saveCampaign(2);
                                 });
-                                confirmation.yesBtnText("Continue");
-                                confirmation.noBtnText("Back to Draft");
-                                confirmation.afterCancel(function () {
+                                confirmation.yesPaymentBtnText("Continue");
+                                confirmation.noPayemetBtnText("Back to Draft");
+                                confirmation.afterCancelPayment(function () {
                                     SaveDraftCampaign();
                                 });
-                                confirmation.show();
+                                confirmation.showPaymentPopup();
                                 //saveCampaign(2);
                             }
                         }
@@ -1163,17 +1173,17 @@ define("ads/ads.viewModel",
                                         else {
                                             campaignModel().IsUseFilter(false);
                                         }
-                                        confirmation.headingText("Submission Fee - One Time Charge  £19");
-                                        confirmation.messageText("Your deal cannot be submitted for 30 days." + "<br\>" + "Please subscribe to avail unlimited deals.");
-                                        confirmation.afterProceed(function () {
+                                        confirmation.headingPaymentText(headingtext);
+                                        confirmation.messagePaymentText(messageText);
+                                        confirmation.afterProceedPayment(function () {
                                             saveCampaign(2);
                                         });
-                                        confirmation.yesBtnText("Continue");
-                                        confirmation.noBtnText("Back to Draft");
-                                        confirmation.afterCancel(function () {
+                                        confirmation.yesPaymentBtnText("Continue");
+                                        confirmation.noPayemetBtnText("Back to Draft");
+                                        confirmation.afterCancelPayment(function () {
                                             SaveDraftCampaign();
                                         });
-                                        confirmation.show();
+                                        confirmation.showPaymentPopup();
                                         //saveCampaign(2);
                                     }
                                 }, 2000, 'Enter your details');
@@ -1206,17 +1216,17 @@ define("ads/ads.viewModel",
                                     else {
                                         campaignModel().IsUseFilter(false);
                                     }
-                                    confirmation.headingText("Submission Fee - One Time Charge  £19");
-                                    confirmation.messageText("Your deal cannot be submitted for 30 days." + "<br\>" + "Please subscribe to avail unlimited deals.");
-                                    confirmation.afterProceed(function () {
+                                    confirmation.headingPaymentText(headingtext);
+                                    confirmation.messagePaymentText(messageText);
+                                    confirmation.afterProceedPayment(function () {
                                         saveCampaign(2);
                                     });
-                                    confirmation.yesBtnText("Continue");
-                                    confirmation.noBtnText("Back to Draft");
-                                    confirmation.afterCancel(function () {
+                                    confirmation.yesPaymentBtnText("Continue");
+                                    confirmation.noPayemetBtnText("Back to Draft");
+                                    confirmation.afterCancelPayment(function () {
                                         SaveDraftCampaign();
                                     });
-                                    confirmation.show();
+                                    confirmation.showPaymentPopup();
                                     //saveCampaign(2);
                                 }
                             }
@@ -1266,7 +1276,7 @@ define("ads/ads.viewModel",
 
 
 
-                    if (campaignModel().ClickRate() < minclickrate && isClickRateVisible()!=true) {
+                    if (campaignModel().ClickRate() < minclickrate && isClickRateVisible() != true) {
                         errorListNew.push({ name: "Ad Click should be greater than $ " + minclickrate + " USD", element: "" });
                     }
 
@@ -2271,7 +2281,7 @@ define("ads/ads.viewModel",
                         }, {
                             success: function (data) {
 
-                                
+
 
                                 if (data != null) {
                                     // set languages drop down
