@@ -1825,6 +1825,7 @@ namespace SMD.Implementation.Services
 
                     Muser = item.FullName;
                     CampaignName = item.CouponTitle;
+                    CampaignBannerImage = item.couponimage1;
                     DealNoOfDays = item.DaysLeft.Value.ToString();
                     SendEmailNotAysnc();
                 }
@@ -1846,7 +1847,7 @@ namespace SMD.Implementation.Services
             {
                 // logg the exception
 
-                SendErrorLog("Send3DaysDealExpiredNotificationToAdvertiser  CompleteCoupons " + couponsToComplete.ToString() + e.ToString());
+                SendErrorLog("SendDealExpiredNotificationToAdvertiser  CompleteCoupons " + couponsToComplete.ToString() + e.ToString());
             }
         }
 
@@ -1869,6 +1870,7 @@ namespace SMD.Implementation.Services
 
                     Muser = item.FullName;
                     CampaignName = item.CouponTitle;
+                    CampaignBannerImage = item.couponimage1;
                     DealNoOfDays = item.DaysLeft.Value.ToString();
                     SendEmailNotAysnc();
                 }
@@ -1883,6 +1885,193 @@ namespace SMD.Implementation.Services
             
         }
 
+         
+
+        public void SendNotificationToAdvertiserForAdditional20PercentDiscounton3rdLastDay()
+        {
+            var data = couponRepository.GetUsersCouponsForEmailNotification(10);
+
+            foreach (var item in data)
+            {
+                try
+                {
+                    MMailto.Clear();
+
+                    MMailto.Add(item.Email);
+
+                    Mid = (int)EmailTypes.ToAdvertiserLast3Days20PercentageCoupons;
+
+                    Muser = item.FullName;
+                    CampaignName = item.CouponTitle;
+                    CampaignBannerImage = item.couponimage1;
+                    DealNoOfDays = item.DaysLeft.Value.ToString();
+                    SendEmailNotAysnc();
+                }
+                catch (Exception e)
+                {
+                    // logg the exception
+
+                    SendErrorLog("SendNotificationToAdvertiserForAdditional20PercentDiscounton3rdLastDay  " + CampaignName + e.ToString());
+                }
+            }
+
+
+        }
+
+        public void SendNotificationToAdvertiserForAdditional25PercentDiscounton2ndLastDay()
+        {
+            var data = couponRepository.GetUsersCouponsForEmailNotification(11);
+
+            foreach (var item in data)
+            {
+                try
+                {
+                    MMailto.Clear();
+
+                    MMailto.Add(item.Email);
+
+                    Mid = (int)EmailTypes.ToAdvertiserLast2Days25PercentageCoupons;
+
+                    Muser = item.FullName;
+                    CampaignName = item.CouponTitle;
+                    CampaignBannerImage = item.couponimage1;
+                    DealNoOfDays = item.DaysLeft.Value.ToString();
+                    SendEmailNotAysnc();
+                }
+                catch (Exception e)
+                {
+                    // logg the exception
+
+                    SendErrorLog("SendNotificationToAdvertiserForAdditional25PercentDiscounton2ndLastDay  " + CampaignName + e.ToString());
+                }
+            }
+
+
+        }
+
+        public void SendNotificationToAdvertiserForAdditional30PercentDiscountonLastDay()
+        {
+            var data = couponRepository.GetUsersCouponsForEmailNotification(12);
+
+            foreach (var item in data)
+            {
+                try
+                {
+                    MMailto.Clear();
+
+                    MMailto.Add(item.Email);
+
+                    Mid = (int)EmailTypes.ToAdvertiserLastDay30PercentageCoupons;
+
+                    Muser = item.FullName;
+                    CampaignName = item.CouponTitle;
+                    CampaignBannerImage = item.couponimage1;
+                    DealNoOfDays = item.DaysLeft.Value.ToString();
+                    SendEmailNotAysnc();
+                }
+                catch (Exception e)
+                {
+                    // logg the exception
+
+                    SendErrorLog("SendNotificationToAdvertiserForAdditional30PercentDiscountonLastDay  " + CampaignName + e.ToString());
+                }
+            }
+
+
+        }
+
+        public void SendNotificationToAdvertiserForAdditional10DollarDiscounton3rdLastDay()
+        {
+            var data = couponRepository.GetUsersCouponsForEmailNotification(13);
+
+            foreach (var item in data)
+            {
+                try
+                {
+                    MMailto.Clear();
+
+                    MMailto.Add(item.Email);
+
+                    Mid = (int)EmailTypes.ToAdvertiserLast3Days10DollarDiscountCoupons;
+
+                    Muser = item.FullName;
+                    CampaignName = item.CouponTitle;
+                    CampaignBannerImage = item.couponimage1;
+                    DealNoOfDays = item.DaysLeft.Value.ToString();
+                    SendEmailNotAysnc();
+                }
+                catch (Exception e)
+                {
+                    // logg the exception
+
+                    SendErrorLog("SendNotificationToAdvertiserForAdditional10DollarDiscounton3rdLastDay  " + CampaignName + e.ToString());
+                }
+            }
+
+
+        }
+
+        public void SendNotificationToAdvertiserForAdditional20DollarDiscounton2ndLastDay()
+        {
+            var data = couponRepository.GetUsersCouponsForEmailNotification(14);
+
+            foreach (var item in data)
+            {
+                try
+                {
+                    MMailto.Clear();
+
+                    MMailto.Add(item.Email);
+
+                    Mid = (int)EmailTypes.ToAdvertiserLast2Days20DollarDiscountCoupons;
+
+                    Muser = item.FullName;
+                    CampaignName = item.CouponTitle;
+                    CampaignBannerImage = item.couponimage1;
+                    DealNoOfDays = item.DaysLeft.Value.ToString();
+                    SendEmailNotAysnc();
+                }
+                catch (Exception e)
+                {
+                    // logg the exception
+
+                    SendErrorLog("SendNotificationToAdvertiserForAdditional20DollarDiscounton2ndLastDay  " + CampaignName + e.ToString());
+                }
+            }
+
+
+        }
+
+        public void SendNotificationToAdvertiserForAdditional30DollarDiscountonLastDay()
+        {
+            var data = couponRepository.GetUsersCouponsForEmailNotification(15);
+
+            foreach (var item in data)
+            {
+                try
+                {
+                    MMailto.Clear();
+
+                    MMailto.Add(item.Email);
+
+                    Mid = (int)EmailTypes.ToAdvertiserLastDay30DollarDiscountCoupons;
+
+                    Muser = item.FullName;
+                    CampaignName = item.CouponTitle;
+                    CampaignBannerImage = item.couponimage1;
+                    DealNoOfDays = item.DaysLeft.Value.ToString();
+                    SendEmailNotAysnc();
+                }
+                catch (Exception e)
+                {
+                    // logg the exception
+
+                    SendErrorLog("SendNotificationToAdvertiserForAdditional30DollarDiscountonLastDay  " + CampaignName + e.ToString());
+                }
+            }
+
+
+        }
     }
 
 
