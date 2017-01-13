@@ -235,11 +235,12 @@ define("ads/ads.viewModel",
 
 				    //   collapseMainMenu();
 
-				    openEditScreen(1);
+				    openEditScreen(mode);
 				    campaignModel().CampaignName(Campaign.CampaignName());
 				    //   ischartOpened(true);
 				    isListVisible(false);
 				    // isNewCampaign(false);
+				    if (mode == 4)
 				    $("#logo_div").css("display", "block");
 				    $(".hideInCoupons").css("display", "none");
 
