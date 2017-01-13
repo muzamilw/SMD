@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta content="IE=edge" http-equiv="X-UA-Compatible" />
     <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <title>Attention : Review Your Display Ad Campaign
+    <title>Display Ad Rejected
     </title>
     <style type="text/css">
         /*////// RESET STYLES //////*/
@@ -220,7 +220,7 @@
                     <tr>                      
                       <td align="center" style="padding-bottom:10px;" valign="top">                        
                         <h1 style="color:#FFFFFF; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:30px; font-style:normal; font-weight:600; line-height:42px; letter-spacing:normal; margin:0; padding:0; text-align:center;">
-                       Attention : Review Your Display Ad Campaign
+                       Display Ad Rejected
                         </h1>
                       </td>
                     </tr>
@@ -541,7 +541,7 @@ publishing standards.
                     <tr>                      
                       <td id="footerContent" style="color:#B7B7B7; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:12px; font-weight:400; line-height:24px; padding-bottom:20px; text-align:center;" valign="top">                        
                         <p style="color:#B7B7B7; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:12px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:center;">
-                          &copy; 2016 Cash4ads.com
+                          &copy; 2017 Clydy Ltd.
                           <sup>
                             &reg;
                           </sup>, All Rights Reserved.<br/>67 Hurworth Avenue  &bull; Slough, Berkshire &bull;  United Kingdom SL3 7FF

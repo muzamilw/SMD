@@ -322,7 +322,7 @@
                                                     <td style="padding:19px 0 15px;text-align:right"><p style="color:++clickthroughcolor++; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:right;">++trendc++%</p></td>
                                                 </tr>
                                                 <tr style="border-bottom:1px solid #e8e8e8">
-                                                    <td style="padding:19px 0 15px"><p style="color:#0f68a1; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:normal; line-height:24px; padding-top:0; margin-top:0; text-align:left;">Landing Page Click Throughs</p></td>
+                                                    <td style="padding:19px 0 15px"><p style="color:#0f68a1; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:normal; line-height:24px; padding-top:0; margin-top:0; text-align:left;">Video Watched + Survey Answered</p></td>
                                                     <td style="padding:19px 0 15px;text-align:right"><p style="color:#0f68a1; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:normal; line-height:24px; padding-top:0; margin-top:0; text-align:right;">++alw++</p></td>
                                                     <td style="padding:19px 0 15px;text-align:right"><p style="color:#0f68a1; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:normal; line-height:24px; padding-top:0; margin-top:0; text-align:right;">++apw++</p></td>
                                                     <td style="padding:19px 0 15px;text-align:right"><p style="color:++answercolor++; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:right;">++trenda++%</p></td>
@@ -536,7 +536,7 @@ results from Surveys and Poll Pictures.
                     <tr>                      
                       <td id="footerContent" style="color:#B7B7B7; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:12px; font-weight:400; line-height:24px; padding-bottom:20px; text-align:center;" valign="top">                        
                         <p style="color:#B7B7B7; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:12px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:center;">
-                          &copy; 2016 Cash4ads.com
+                          &copy; 2017 Clydy Ltd.
                           <sup>
                             &reg;
                           </sup>, All Rights Reserved.<br/>67 Hurworth Avenue  &bull; Slough, Berkshire &bull;  United Kingdom SL3 7FF

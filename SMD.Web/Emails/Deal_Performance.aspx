@@ -295,7 +295,7 @@
                                     <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">                                      
                                       <tr>                                        
                                         <td align="left" style="padding-right:20px; padding-bottom:60px;" valign="top">                                          
-                                          <img alt="Lists" src="http://manage.cash4ads.com/emails/images/Videos_Email_Blue.png" style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:600; height:auto; letter-spacing:-1px; padding:0; margin:0; text-align:center;" width="48"/>
+                                          <img alt="Lists" src="http://manage.cash4ads.com/emails/images/Deals_Email_Blue.png" style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:600; height:auto; letter-spacing:-1px; padding:0; margin:0; text-align:center;" width="48"/>
                                         </td>
                                         <td align="left" style="padding-bottom:40px;" valign="top">                                          
                                           <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
@@ -322,7 +322,7 @@
                                                     <td style="padding:19px 0 15px;text-align:right"><p style="color:++clickthroughcolor++; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:right;">++trendc++%</p></td>
                                                 </tr>
                                                 <tr style="border-bottom:1px solid #e8e8e8">
-                                                    <td style="padding:19px 0 15px"><p style="color:#0f68a1; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:normal; line-height:24px; padding-top:0; margin-top:0; text-align:left;">Deal Groups Opened(impressions)</p></td>
+                                                    <td style="padding:19px 0 15px"><p style="color:#0f68a1; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:normal; line-height:24px; padding-top:0; margin-top:0; text-align:left;">Deal Groups Opened (impressions)</p></td>
                                                     <td style="padding:19px 0 15px;text-align:right"><p style="color:#0f68a1; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:normal; line-height:24px; padding-top:0; margin-top:0; text-align:right;">++alw++</p></td>
                                                     <td style="padding:19px 0 15px;text-align:right"><p style="color:#0f68a1; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:normal; line-height:24px; padding-top:0; margin-top:0; text-align:right;">++apw++</p></td>
                                                     <td style="padding:19px 0 15px;text-align:right"><p style="color:++answercolor++; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:right;">++trenda++%</p></td>
@@ -344,6 +344,20 @@
 Open Deal Campaign from your dashboard  to view Charts for full analytics.
 
                                           </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="center" style="padding-right:20px; padding-bottom:10px;" valign="top" colspan="2">
+                                                <table align="center" bgcolor="#F2F2F2" border="0" cellpadding="0" cellspacing="0" style='width:100%;'>
+                      
+                            <tr><td colspan='2' align="center" style="padding-top:20px"><img style='text-align:center;padding-top:20px;max-width:560px' src='++campaignbannerimage++'/></td></tr>
+                            <tr><td colspan='2' align="center" style='text-align:center;padding-bottom:2px;padding-top:10px'><p style="style=color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:center;"><b>++campaignname++</b></p></td></tr>
+                            
+</table>
+                        
+
+
+
                                             </td>
                                         </tr>
                                          <tr>                                        
@@ -539,7 +553,7 @@ the end of the Deal Listing. e.g. offer bigger discount on the Last few days and
                     <tr>                      
                       <td id="footerContent" style="color:#B7B7B7; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:12px; font-weight:400; line-height:24px; padding-bottom:20px; text-align:center;" valign="top">                        
                         <p style="color:#B7B7B7; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:12px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:center;">
-                          &copy; 2016 Cash4ads.com
+                          &copy; 2017 Clydy Ltd.
                           <sup>
                             &reg;
                           </sup>, All Rights Reserved.<br/>67 Hurworth Avenue  &bull; Slough, Berkshire &bull;  United Kingdom SL3 7FF
