@@ -1500,7 +1500,7 @@ getfreeCouponCount = function () {
                 },
                 //Create Price option
                  onCreatePriceOption = function () {
-                     if (couponModel().CouponPriceOptions().length <= 3) {
+                     if (couponModel().CouponPriceOptions().length <= 9) {
                          var priceOption = couponModel().CouponPriceOptions()[0];
                          //Create Price option for the very First Time
                          if (priceOption == undefined) {
@@ -1519,7 +1519,7 @@ getfreeCouponCount = function () {
                          }
                      }
                      else {
-                         toastr.error("Sorry,you can Create upto 4 deal lines.");
+                         toastr.error("Sorry,you can Create upto 10 deal lines.");
                      }
                  },
                 // Delete a Price option

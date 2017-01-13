@@ -19,6 +19,8 @@ define("common/confirmation.view",
                  // Binding root used with knockout for user actions log
                 bindingRootaction = $("#dialog-okUserActionLog")[0],
 
+                 bindingRootPayment = $("#dialog-confirmPayment")[0],
+
                 // Show the dialog
                 show = function() {
                     $("#dialog-confirm").modal("show");
@@ -26,6 +28,13 @@ define("common/confirmation.view",
                 // Hide the dialog
                 hide = function() {
                     $("#dialog-confirm").modal("hide");
+                },
+                  showPayment = function () {
+                      $("#dialog-confirmPayment").modal("show");
+                  },
+                // Hide the dialog
+                hidePayment = function () {
+                    $("#dialog-confirmPayment").modal("hide");
                 },
                 showWarningPopup = function() {
                     $("#dialog-ok").modal("show");
@@ -81,9 +90,12 @@ define("common/confirmation.view",
                 bindingRootq: bindingRootq,
                 bindingRootupgrade: bindingRootupgrade,
                 bindingRootaction: bindingRootaction,
+                bindingRootPayment:bindingRootPayment,
                 viewModel: viewModel,
                 show: show,
                 hide: hide,
+                showPayment: showPayment,
+                hidePayment:hidePayment,
                 showWarningPopup: showWarningPopup,
                 hideWarningPopup: hideWarningPopup,
                 showUpgradePopup: showUpgradePopup,

@@ -446,7 +446,7 @@ define("survey/survey.viewModel",
                     } else if (item.Status == 5) {
                         item.StatusValue = "Completed"; canSubmitForApproval(false);
                     } else if (item.Status == 6) {
-                        item.StatusValue = "Approval Rejected"; canSubmitForApproval(true);
+                        item.StatusValue = "Rejected"; canSubmitForApproval(true);
                     }
                     item.CreatedBy = DilveredPercentage(item);
                     if (item.ResultClicks == null)
@@ -1598,7 +1598,18 @@ define("survey/survey.viewModel",
                                                 else {
                                                     selectedQuestion().IsUseFilter(false);
                                                 }
-                                                saveSurveyQuestion(2);
+                                                confirmation.headingPaymentText("Picture Poll - Submission Fee");
+                                                confirmation.messagePaymentText("One Time Charge for this Campaign £9." + "<br\>" + "You will not be charged the submission fee again if you pause or resume this campaign after approval.");
+                                                confirmation.afterProceedPayment(function () {
+                                                    saveSurveyQuestion(2);
+                                                });
+                                                confirmation.yesPaymentBtnText("Continue");
+                                                confirmation.noPayemetBtnText("Back to Draft");
+                                                confirmation.afterCancelPayment(function () {
+                                                    SaveAsDraft();
+                                                });
+                                                confirmation.showPaymentPopup();
+                                               // saveSurveyQuestion(2);
                                             }
 
 
@@ -1632,7 +1643,18 @@ define("survey/survey.viewModel",
                                             else {
                                                 selectedQuestion().IsUseFilter(false);
                                             }
-                                            saveSurveyQuestion(2);
+                                            confirmation.headingPaymentText("Picture Poll - Submission Fee");
+                                            confirmation.messagePaymentText("One Time Charge for this Campaign £9." + "<br\>" + "You will not be charged the submission fee again if you pause or resume this campaign after approval.");
+                                            confirmation.afterProceedPayment(function () {
+                                                saveSurveyQuestion(2);
+                                            });
+                                            confirmation.yesPaymentBtnText("Continue");
+                                            confirmation.noPayemetBtnText("Back to Draft");
+                                            confirmation.afterCancelPayment(function () {
+                                                SaveAsDraft();
+                                            });
+                                            confirmation.showPaymentPopup();
+                                            //saveSurveyQuestion(2);
                                         }
                                     }
                                 }
