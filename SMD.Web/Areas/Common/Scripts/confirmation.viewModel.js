@@ -28,16 +28,25 @@ define("common/confirmation.viewModel",
 
                     noBtnText = ko.observable(defaultButtonTextNo),
 
+                     defaultDealButtonTextYes = "Yes",
+                    yesdealBtnText = ko.observable(defaultDealButtonTextYes),
+
+                    defaultDealButtonTextNo = "No",
+
+                    nodealBtnText = ko.observable(defaultDealButtonTextNo),
+
                     defaultIsCancelVisible = true;
 
                 IsCancelVisible = ko.observable(defaultIsCancelVisible),
                 // On Proceed
                  afterProceed = ko.observable(),
+                 afterProceedDeal = ko.observable(),
                 // On Proceed
                  afterActionProceed = ko.observable(),
 
                 // On Cancel
                  afterCancel = ko.observable(),
+                afterCancelDeal  = ko.observable(),
                 // On No
                  afterNo = ko.observable(),
                 // Is Proceed Visible
@@ -62,6 +71,13 @@ define("common/confirmation.viewModel",
                      hide();
 
                  },
+                proceedDeal = function () {
+                    if (typeof afterProceedDeal() === "function") {
+                        afterProceedDeal()();
+                    }
+                    hideDeal();
+
+                },
                 // Proceed with the request
                  proceedAction = function () {
 
@@ -91,12 +107,16 @@ define("common/confirmation.viewModel",
                  resetDialog = function () {
                      afterCancel(undefined);
                      afterProceed(undefined);
+                     afterCancelDeal(undefined);
+                     afterProceedDeal(undefined);
 
                      afterNo(undefined);
                      isProceedVisible(true);
                      headingText(defaultHeaderText);
                      messageText(defaultConfirmationText);
                      yesBtnText(defaultButtonTextYes);
+                     nodealBtnText(defaultDealButtonTextNo);
+                     yesdealBtnText(defaultDealButtonTextYes);
                      noBtnText(defaultButtonTextNo);
                      IsCancelVisible(defaultIsCancelVisible);
                  },
@@ -110,6 +130,16 @@ define("common/confirmation.viewModel",
                      // Reset Call Backs
                      resetDialog();
                      view.hide();
+                 },
+                   showDeal = function () {
+                       isLoading(true);
+                       view.showDeal();
+                   },
+                // Hide the dialog
+                 hideDeal = function () {
+                     // Reset Call Backs
+                     resetDialog();
+                     view.hideDeal();
                  },
 
 
@@ -136,7 +166,7 @@ define("common/confirmation.viewModel",
                 showOKpopupforMax3Deal = function () {
                     isLoading(true);
                     view.showOKpopupforMax3Deal();
-                   },
+                },
               showOKpopupfordealheadline = function () {
                   isLoading(true);
                   view.showOKpopupfordealheadline();
@@ -191,6 +221,12 @@ define("common/confirmation.viewModel",
                      }
                      hide();
                  },
+                 cancelDeal = function () {
+                     if (typeof afterCancelDeal() === "function") {
+                         afterCancelDeal()();
+                     }
+                     hideDeal();
+                 },
                 // Cancel 
                  Warningcancel = function () {
                      if (typeof afterCancel() === "function") {
@@ -230,44 +266,52 @@ define("common/confirmation.viewModel",
                     headingText: headingText,
                     initialize: initialize,
                     show: show,
+                    showDeal:showDeal,
                     cancel: cancel,
+                    cancelDeal:cancelDeal,
                     Warningcancel: Warningcancel,
                     proceed: proceed,
+                    proceedDeal:proceedDeal,
                     proceedAction: proceedAction,
                     no: no,
-                    afterProceed: afterProceed,
-                    afterActionProceed: afterActionProceed,
-                    afterCancel: afterCancel,
-                    afterNo: afterNo,
-                    isProceedVisible: isProceedVisible,
-                    resetDialog: resetDialog,
-                    messageText: messageText,
-                    yesBtnText: yesBtnText,
-                    noBtnText: noBtnText,
-                    IsCancelVisible: IsCancelVisible,
-                    hide: hide,
-                    showWarningPopup: showWarningPopup,
-                    showOKpopup: showOKpopup,
-                    hideshowOKpopup: hideshowOKpopup,
-                    hideWarningPopup: hideWarningPopup,
-                    showUpgradePopup: showUpgradePopup,
-                    showActionPopup: showActionPopup,
-                    hideActionPopup: hideActionPopup,
-                    comment: comment,
-                    ActionPopupCancel: ActionPopupCancel,
-                    //errors: errors,
-                    UserRandomNum: UserRandomNum,
-                    showOKpopupforinfo: showOKpopupforinfo,
-                    hidesOKpopupforInfo: hidesOKpopupforInfo,
-                    showOKpopupforChart: showOKpopupforChart,
-                    showOKpopupforFreeCoupon: showOKpopupforFreeCoupon,
-                    showOKpopupfordealheadline: showOKpopupfordealheadline,
-                    showAccountSetingPopup: showAccountSetingPopup,
-                    showOKpopupforMax3Deal: showOKpopupforMax3Deal
-                };
-            })()
-        };
+                afterProceed: afterProceed,
+                afterProceedDeal:afterProceedDeal,
+                afterActionProceed: afterActionProceed,
+                afterCancel: afterCancel,
+                afterCancelDeal:afterCancelDeal,
+                afterNo: afterNo,
+                isProceedVisible: isProceedVisible,
+                resetDialog: resetDialog,
+                messageText: messageText,
+                yesBtnText: yesBtnText,
+                yesdealBtnText: yesdealBtnText,
+                nodealBtnText:nodealBtnText,
+                noBtnText: noBtnText,
+                IsCancelVisible: IsCancelVisible,
+                hide: hide,
+                hideDeal:hideDeal,
+                showWarningPopup: showWarningPopup,
+                showOKpopup: showOKpopup,
+                hideshowOKpopup: hideshowOKpopup,
+                hideWarningPopup: hideWarningPopup,
+                showUpgradePopup: showUpgradePopup,
+                showActionPopup: showActionPopup,
+                hideActionPopup: hideActionPopup,
+                comment: comment,
+                ActionPopupCancel: ActionPopupCancel,
+                //errors: errors,
+                UserRandomNum: UserRandomNum,
+                showOKpopupforinfo: showOKpopupforinfo,
+                hidesOKpopupforInfo: hidesOKpopupforInfo,
+                showOKpopupforChart: showOKpopupforChart,
+                showOKpopupforFreeCoupon: showOKpopupforFreeCoupon,
+                showOKpopupfordealheadline: showOKpopupfordealheadline,
+                showAccountSetingPopup: showAccountSetingPopup,
+                showOKpopupforMax3Deal: showOKpopupforMax3Deal
+            };
+    })()
+};
 
-        return ist.confirmation.viewModel;
-    });
+return ist.confirmation.viewModel;
+});
 

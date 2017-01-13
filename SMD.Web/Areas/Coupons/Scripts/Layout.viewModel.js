@@ -28,6 +28,12 @@
                 viewBranchDialog = function () {
                     view.showBranchCategoryDialog()
                 },
+                countryDd = ko.observableArray([
+                         {
+                             "CountryId": "214",
+                             "CountryName": "United Kingdom"
+                         }, 
+                    ]),
                 getBranchCategories = function (callback) {
                     dataService.getBranchCategory({
                         success: function (data) {
@@ -778,6 +784,7 @@
                     cities: cities,
                     getCitiesByCountryId:getCitiesByCountryId,
                     companyId: companyId,
+                    countryDd: countryDd
                 };
 
             })()

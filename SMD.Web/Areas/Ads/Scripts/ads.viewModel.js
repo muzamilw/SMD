@@ -700,7 +700,7 @@ define("ads/ads.viewModel",
                 } else if (item.Status == 5) {
                     item.StatusValue = "Completed"
                 } else if (item.Status == 6) {
-                    item.StatusValue = "Approval Rejected"
+                    item.StatusValue = "Rejected"
                 } else if (item.Status == 7) {
                     item.StatusValue = ("Remove");
                 } else if (item.Status == 9) {
@@ -1116,7 +1116,18 @@ define("ads/ads.viewModel",
                                 else {
                                     campaignModel().IsUseFilter(false);
                                 }
-                                saveCampaign(2);
+                                confirmation.headingText("Submission Fee - One Time Charge  £19");
+                                confirmation.messageText("Your deal cannot be submitted for 30 days." + "<br\>" + "Please subscribe to avail unlimited deals.");
+                                confirmation.afterProceed(function () {
+                                    saveCampaign(2);
+                                });
+                                confirmation.yesBtnText("Continue");
+                                confirmation.noBtnText("Back to Draft");
+                                confirmation.afterCancel(function () {
+                                    SaveDraftCampaign();
+                                });
+                                confirmation.show();
+                                //saveCampaign(2);
                             }
                         }
                         else {
@@ -1152,7 +1163,18 @@ define("ads/ads.viewModel",
                                         else {
                                             campaignModel().IsUseFilter(false);
                                         }
-                                        saveCampaign(2);
+                                        confirmation.headingText("Submission Fee - One Time Charge  £19");
+                                        confirmation.messageText("Your deal cannot be submitted for 30 days." + "<br\>" + "Please subscribe to avail unlimited deals.");
+                                        confirmation.afterProceed(function () {
+                                            saveCampaign(2);
+                                        });
+                                        confirmation.yesBtnText("Continue");
+                                        confirmation.noBtnText("Back to Draft");
+                                        confirmation.afterCancel(function () {
+                                            SaveDraftCampaign();
+                                        });
+                                        confirmation.show();
+                                        //saveCampaign(2);
                                     }
                                 }, 2000, 'Enter your details');
 
@@ -1184,7 +1206,18 @@ define("ads/ads.viewModel",
                                     else {
                                         campaignModel().IsUseFilter(false);
                                     }
-                                    saveCampaign(2);
+                                    confirmation.headingText("Submission Fee - One Time Charge  £19");
+                                    confirmation.messageText("Your deal cannot be submitted for 30 days." + "<br\>" + "Please subscribe to avail unlimited deals.");
+                                    confirmation.afterProceed(function () {
+                                        saveCampaign(2);
+                                    });
+                                    confirmation.yesBtnText("Continue");
+                                    confirmation.noBtnText("Back to Draft");
+                                    confirmation.afterCancel(function () {
+                                        SaveDraftCampaign();
+                                    });
+                                    confirmation.show();
+                                    //saveCampaign(2);
                                 }
                             }
                         }
@@ -2425,7 +2458,7 @@ define("ads/ads.viewModel",
                                         $("#btnSubmitForApproval2").css("display", "inline-block");
                                         $("#btnSubmitForApproval2").removeAttr('disabled');
                                         $("#btnPauseCampaign").css("display", "none");
-                                        campaignModel().StatusValue("Approval Rejected");
+                                        campaignModel().StatusValue("Rejected");
                                     } else if (campaignModel().Status() == 7) {
 
                                         campaignModel().StatusValue("Remove");
