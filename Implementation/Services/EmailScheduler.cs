@@ -294,28 +294,29 @@ namespace SMD.Implementation.Services
             }
 
           
+            //this is comented since the calls have been shifted to windows scheduler tasks.
 
-            // new dealls related emails in different modes of discount types
-            registry.Schedule(() => EmailManagerService.SendNewDealsEmail(1)).ToRunNow().AndEvery(1).Days().At(10, 0);
-            registry.Schedule(() => EmailManagerService.SendNewDealsEmail(2)).ToRunNow().AndEvery(1).Days().At(10, 10);
-            registry.Schedule(() => EmailManagerService.SendNewDealsEmail(3)).ToRunNow().AndEvery(1).Days().At(10, 20);
-            registry.Schedule(() => EmailManagerService.SendNewDealsEmail(4)).ToRunNow().AndEvery(1).Days().At(10, 30);
-            registry.Schedule(() => EmailManagerService.SendNewDealsEmail(5)).ToRunNow().AndEvery(1).Days().At(10, 40);
-            registry.Schedule(() => EmailManagerService.SendNewDealsEmail(6)).ToRunNow().AndEvery(1).Days().At(10, 50);
-            registry.Schedule(() => EmailManagerService.SendNewDealsEmail(7)).ToRunNow().AndEvery(1).Days().At(11, 0);
-            //  registry.Schedule(MonthlyAccountDetailsOfUser).AndEvery(1).Months();
-
-
-
-            //performance emails
-            registry.Schedule(() => EmailManagerService.SendCampaignPerformanceEmails()).ToRunEvery(0).Weeks().On(DayOfWeek.Monday).At(9, 0);
-
-            //deal expiry just now
-            registry.Schedule(() => EmailManagerService.SendDealExpiredNotificationToAdvertiser()).ToRunNow().AndEvery(15).Minutes();
+            //// new dealls related emails in different modes of discount types
+            //registry.Schedule(() => EmailManagerService.SendNewDealsEmail(1)).ToRunNow().AndEvery(1).Days().At(10, 0);
+            //registry.Schedule(() => EmailManagerService.SendNewDealsEmail(2)).ToRunNow().AndEvery(1).Days().At(10, 10);
+            //registry.Schedule(() => EmailManagerService.SendNewDealsEmail(3)).ToRunNow().AndEvery(1).Days().At(10, 20);
+            //registry.Schedule(() => EmailManagerService.SendNewDealsEmail(4)).ToRunNow().AndEvery(1).Days().At(10, 30);
+            //registry.Schedule(() => EmailManagerService.SendNewDealsEmail(5)).ToRunNow().AndEvery(1).Days().At(10, 40);
+            //registry.Schedule(() => EmailManagerService.SendNewDealsEmail(6)).ToRunNow().AndEvery(1).Days().At(10, 50);
+            //registry.Schedule(() => EmailManagerService.SendNewDealsEmail(7)).ToRunNow().AndEvery(1).Days().At(11, 0);
+            ////  registry.Schedule(MonthlyAccountDetailsOfUser).AndEvery(1).Months();
 
 
-            //deal expiry 3 days before
-            registry.Schedule(() => EmailManagerService.Send3DaysDealExpiredNotificationToAdvertiser()).ToRunNow().AndEvery(15).Minutes();
+
+            ////performance emails
+            //registry.Schedule(() => EmailManagerService.SendCampaignPerformanceEmails()).ToRunEvery(0).Weeks().On(DayOfWeek.Monday).At(9, 0);
+
+            ////deal expiry just now
+            //registry.Schedule(() => EmailManagerService.SendDealExpiredNotificationToAdvertiser()).ToRunNow().AndEvery(15).Minutes();
+
+
+            ////deal expiry 3 days before
+            //registry.Schedule(() => EmailManagerService.Send3DaysDealExpiredNotificationToAdvertiser()).ToRunNow().AndEvery(15).Minutes();
 
 
 

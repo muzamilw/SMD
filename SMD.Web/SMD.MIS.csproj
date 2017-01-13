@@ -635,6 +635,7 @@
     </Compile>
     <Compile Include="Emails\Deal_Expiry_3_days.aspx.cs">
       <DependentUpon>Deal_Expiry_3_days.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Emails\Deal_Expiry_3_days.aspx.designer.cs">
       <DependentUpon>Deal_Expiry_3_days.aspx</DependentUpon>
@@ -1965,6 +1966,16 @@
     <Content Include="RichTextEditor\skins\moono\images\lock.png" />
     <Content Include="RichTextEditor\skins\moono\images\refresh.png" />
     <Content Include="RichTextEditor\styles.js" />
+    <Content Include="scheduler_batch_files\Deal near Me.xml" />
+    <Content Include="scheduler_batch_files\Last2DaysDollarDiscountCouponsNearMe.xml" />
+    <Content Include="scheduler_batch_files\Last2DaysPercentageCouponsNearMe.xml" />
+    <Content Include="scheduler_batch_files\Last3DaysDollarDiscountCouponsNearMe.xml" />
+    <Content Include="scheduler_batch_files\Last3DaysPercentageCouponsNearMe.xml" />
+    <Content Include="scheduler_batch_files\LastDayDollarDiscountCouponsNearMe.xml" />
+    <Content Include="scheduler_batch_files\LastDayPercentageCouponsNearMe.xml" />
+    <Content Include="scheduler_batch_files\Send3DaysDealExpiredNotificationToAdvertiser.xml" />
+    <Content Include="scheduler_batch_files\SendCampaignPerformanceEmails.xml" />
+    <Content Include="scheduler_batch_files\SendDealExpiredNotificationToAdvertiser.xml" />
     <Content Include="Scripts\Ace\lib\ace\ace.js" />
     <Content Include="Scripts\Ace\lib\ace\mode-css.js" />
     <Content Include="Scripts\Ace\lib\ace\theme-clouds.js" />
@@ -2251,6 +2262,16 @@
     <None Include="Properties\PublishProfiles\mz profile.pubxml" />
     <None Include="Properties\PublishProfiles\SMD MIS Saqib.pubxml" />
     <None Include="Properties\PublishProfiles\SMD.pubxml" />
+    <Content Include="scheduler_batch_files\deals_near_me.bat" />
+    <Content Include="scheduler_batch_files\Last2DaysDollar.bat" />
+    <Content Include="scheduler_batch_files\Last2DaysPercentage.bat" />
+    <Content Include="scheduler_batch_files\Last3DaysDollar.bat" />
+    <Content Include="scheduler_batch_files\Last3DaysPercentage.bat" />
+    <Content Include="scheduler_batch_files\LastDayDollar.bat" />
+    <Content Include="scheduler_batch_files\LastDayPercentage.bat" />
+    <Content Include="scheduler_batch_files\Send3DaysDealExpiredNotificationToAdvertiser.bat" />
+    <Content Include="scheduler_batch_files\SendDealExpiredNotificationToAdvertiser.bat" />
+    <Content Include="scheduler_batch_files\SendPerformanceUpdates.bat" />
     <None Include="Scripts\amplify-vsdoc.js" />
     <Content Include="Scripts\amplify.js" />
     <Content Include="Scripts\amplify.min.js" />
