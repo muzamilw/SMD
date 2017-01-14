@@ -142,7 +142,7 @@ define("common/confirmation.viewModel",
                 // Hide the dialog
                  hidePaymentPopup = function () {
                      // Reset Call Backs
-                     resetDialog();
+                     //resetDialog();
                      view.hidePayment();
                  },
 

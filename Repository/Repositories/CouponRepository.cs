@@ -268,7 +268,11 @@ namespace SMD.Repository.Repositories
         }
         public int GetFreeCouponCount()
         {
-            return db.Coupons.Where(c => c.CompanyId==CompanyId && c.CouponListingMode==1&&(c.Status==2||c.Status==3)).ToList().Count;
+            return db.Coupons.Where(c => c.CompanyId==CompanyId &&  c.CouponPriceOptions.Count==1 && c.CouponListingMode==1&&(c.Status==2||c.Status==3)).ToList().Count;
+        }
+        public int GetFreeCouponCountApprove(int comid)
+        {
+            return db.Coupons.Where(c => c.CompanyId == comid && c.CouponListingMode == 1 && c.CouponPriceOptions.Count==1 && (c.Status == 2 || c.Status == 3)).ToList().Count;
         }
         public IEnumerable<vw_Coupons> GetMarketingDeals(GetPagedListRequest request, out int rowCount)
         {
