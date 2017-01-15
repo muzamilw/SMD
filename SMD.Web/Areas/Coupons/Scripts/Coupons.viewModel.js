@@ -1272,37 +1272,7 @@ dealSubscription = function () {
             if (hasErrors)
                 return;
             if (freeCouponCount() == 0 && (UserAndCostDetail().StripeSubscriptionStatus == null ||UserAndCostDetail().isStripeIntegrated != true|| UserAndCostDetail().StripeSubscriptionStatus == "canceled") && couponModel().CouponListingMode() == 2) {
-                confirmation.headingPaymentText("Deal - Submission Fee");
-                confirmation.messagePaymentText("One Time Charge for this Campaign £9." + "<br\>" + "You will NOT be charged the submission fee again if you pause, resume or tweak this deal after approval." + "<br\><br\>" + "Note:" + "<br\>" + "FREE Deal offer allows you to have ONE deal line for a 7 day listing.");
-                confirmation.afterProceedPayment(function () {
-                    confirmation.hidePaymentPopup();
-                    dealSubscription();
-                });
-                confirmation.yesPaymentBtnText("Continue");
-                confirmation.noPayemetBtnText("Back to Draft");
-                confirmation.afterCancelPayment(function () {
-                    SaveAsDraft();
-                });
-                confirmation.showPaymentPopup();
-                return;
-            }
-            if (freeCouponCount() > 0 && UserAndCostDetail().isStripeIntegrated == true && UserAndCostDetail().IsSpecialAccount != true) {
-
-                confirmation.headingPaymentText("Deal - Submission Fee");
-                confirmation.messagePaymentText("One Time Charge for this Campaign £9." + "<br\>" + "You will NOT be charged the submission fee again if you pause, resume or tweak this deal after approval." + "<br\><br\>" + "Note:" + "<br\>" + "FREE Deal offer allows you to have ONE deal line for a 7 day listing.");
-                confirmation.afterProceedPayment(function () {
-                    confirmation.hidePaymentPopup();
-                    saveCampaign(2);
-                });
-                confirmation.yesPaymentBtnText("Continue");
-                confirmation.noPayemetBtnText("Back to Draft");
-                confirmation.afterCancelPayment(function () {
-                    SaveAsDraft();
-                });
-                confirmation.showPaymentPopup();
-            }
-            else {
-                if (couponModel().CouponListingMode() == 1 && couponModel().CouponPriceOptions().length > 1 && (UserAndCostDetail().StripeSubscriptionStatus == null || UserAndCostDetail().StripeSubscriptionStatus == "canceled" || UserAndCostDetail().isStripeIntegrated != true) && UserAndCostDetail().IsSpecialAccount != true) {
+                if (couponModel().IsPaymentCollected() != true) {
                     confirmation.headingPaymentText("Deal - Submission Fee");
                     confirmation.messagePaymentText("One Time Charge for this Campaign £9." + "<br\>" + "You will NOT be charged the submission fee again if you pause, resume or tweak this deal after approval." + "<br\><br\>" + "Note:" + "<br\>" + "FREE Deal offer allows you to have ONE deal line for a 7 day listing.");
                     confirmation.afterProceedPayment(function () {
@@ -1315,27 +1285,36 @@ dealSubscription = function () {
                         SaveAsDraft();
                     });
                     confirmation.showPaymentPopup();
-
-
-                    //confirmation.messageText("Your deal cannot be submitted as it has more than one deal headlines." + "<br\>" + "Please subscribe to avail unlimited deal headlines.");
-                    //confirmation.afterProceed(function () {
-                    //    stripeChargeCustomer.show(function () {
-                    //        UserAndCostDetail().isStripeIntegrated = true;
-                    //        // couponModel().CouponListingMode(2);
-                    //        saveCampaign(2);
-                    //    }, 1000, 'Configure your Subscription');
-
-                    //});
-                    //confirmation.yesBtnText("Subscribe for Subscribtion");
-                    //confirmation.afterCancel(function () {
-                    //    return;
-                    //});
-                    //confirmation.show();
+                    return;
                 }
                 else {
-                    if (couponModel().CouponListingMode() == 1 && couponModel().CouponPriceOptions().length == 1 && (UserAndCostDetail().StripeSubscriptionStatus == null || UserAndCostDetail().StripeSubscriptionStatus == "canceled") && UserAndCostDetail().IsSpecialAccount != true) {
-                        confirmation.headingPaymentText("FREE Deal Submission");
-                        confirmation.messagePaymentText("FREE Deal submission still requires credit card details," + "<br\>" + " but we will not take any payment." + "<br\><br\>" + "Your deal will be listed for 7 days and notifications will still be sent according to your Deal Ending discount selection.");
+                    saveCampaign(2);
+                }
+            }
+            if (freeCouponCount() > 0 && UserAndCostDetail().isStripeIntegrated == true && UserAndCostDetail().IsSpecialAccount != true) {
+                if (couponModel().IsPaymentCollected() != true) {
+                    confirmation.headingPaymentText("Deal - Submission Fee");
+                    confirmation.messagePaymentText("One Time Charge for this Campaign £9." + "<br\>" + "You will NOT be charged the submission fee again if you pause, resume or tweak this deal after approval." + "<br\><br\>" + "Note:" + "<br\>" + "FREE Deal offer allows you to have ONE deal line for a 7 day listing.");
+                    confirmation.afterProceedPayment(function () {
+                        confirmation.hidePaymentPopup();
+                        saveCampaign(2);
+                    });
+                    confirmation.yesPaymentBtnText("Continue");
+                    confirmation.noPayemetBtnText("Back to Draft");
+                    confirmation.afterCancelPayment(function () {
+                        SaveAsDraft();
+                    });
+                    confirmation.showPaymentPopup();
+                }
+                else {
+                    saveCampaign(2);
+                }
+            }
+            else {
+                if (couponModel().CouponListingMode() == 1 && couponModel().CouponPriceOptions().length > 1 && (UserAndCostDetail().StripeSubscriptionStatus == null || UserAndCostDetail().StripeSubscriptionStatus == "canceled" || UserAndCostDetail().isStripeIntegrated != true) && UserAndCostDetail().IsSpecialAccount != true) {
+                    if (couponModel().IsPaymentCollected() != true) {
+                        confirmation.headingPaymentText("Deal - Submission Fee");
+                        confirmation.messagePaymentText("One Time Charge for this Campaign £9." + "<br\>" + "You will NOT be charged the submission fee again if you pause, resume or tweak this deal after approval." + "<br\><br\>" + "Note:" + "<br\>" + "FREE Deal offer allows you to have ONE deal line for a 7 day listing.");
                         confirmation.afterProceedPayment(function () {
                             confirmation.hidePaymentPopup();
                             dealSubscription();
@@ -1346,7 +1325,31 @@ dealSubscription = function () {
                             SaveAsDraft();
                         });
                         confirmation.showPaymentPopup();
-                        // saveCampaign(2);
+                    }
+                    else {
+                        saveCampaign(2);
+                    }
+                }
+                else {
+                    if (couponModel().CouponListingMode() == 1 && couponModel().CouponPriceOptions().length == 1 && (UserAndCostDetail().StripeSubscriptionStatus == null || UserAndCostDetail().StripeSubscriptionStatus == "canceled") && UserAndCostDetail().IsSpecialAccount != true) {
+                        if (couponModel().IsPaymentCollected() != true) {
+                            confirmation.headingPaymentText("FREE Deal Submission");
+                            confirmation.messagePaymentText("FREE Deal submission still requires credit card details," + "<br\>" + " but we will not take any payment." + "<br\><br\>" + "Your deal will be listed for 7 days and notifications will still be sent according to your Deal Ending discount selection.");
+                            confirmation.afterProceedPayment(function () {
+                                confirmation.hidePaymentPopup();
+                                dealSubscription();
+                            });
+                            confirmation.yesPaymentBtnText("Continue");
+                            confirmation.noPayemetBtnText("Back to Draft");
+                            confirmation.afterCancelPayment(function () {
+                                SaveAsDraft();
+                            });
+                            confirmation.showPaymentPopup();
+                        }
+                        else {
+                             saveCampaign(2);
+                        }
+                        
                     }
                     else {
                         if (UserAndCostDetail().Status == null || UserAndCostDetail().Status == 0) {
@@ -1386,20 +1389,25 @@ dealSubscription = function () {
                                 }
                                 else {
                                     // couponModel().CouponListingMode(2)
-                                    confirmation.headingPaymentText("FREE Deal Submission");
-                                    confirmation.messagePaymentText("FREE Deal submission still requires credit card details," + "<br\>" + " but we will not take any payment." + "<br\><br\>" + "Your deal will be listed for 7 days and notifications will still be sent according to your Deal Ending discount selection.");
-                                    confirmation.afterProceedPayment(function () {
-                                        confirmation.hidePaymentPopup();
-                                        saveCampaign(2);
-                                        //dealSubscription();
-                                    });
-                                    confirmation.yesPaymentBtnText("Continue");
-                                    confirmation.noPayemetBtnText("Back to Draft");
-                                    confirmation.afterCancelPayment(function () {
-                                        SaveAsDraft();
-                                    });
-                                    confirmation.showPaymentPopup();
-                                   // saveCampaign(2);
+                                    if (couponModel().IsPaymentCollected() != true) {
+                                        confirmation.headingPaymentText("FREE Deal Submission");
+                                        confirmation.messagePaymentText("FREE Deal submission still requires credit card details," + "<br\>" + " but we will not take any payment." + "<br\><br\>" + "Your deal will be listed for 7 days and notifications will still be sent according to your Deal Ending discount selection.");
+                                        confirmation.afterProceedPayment(function () {
+                                            confirmation.hidePaymentPopup();
+                                            saveCampaign(2);
+                                            //dealSubscription();
+                                        });
+                                        confirmation.yesPaymentBtnText("Continue");
+                                        confirmation.noPayemetBtnText("Back to Draft");
+                                        confirmation.afterCancelPayment(function () {
+                                            SaveAsDraft();
+                                        });
+                                        confirmation.showPaymentPopup();
+                                    }
+                                    else {
+                                         saveCampaign(2);
+                                    }
+                                 
                                 }
                             }
 
