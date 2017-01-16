@@ -599,7 +599,7 @@ define("Coupons/Coupons.viewModel",
 
                                 var myLatlng = new google.maps.LatLng(51.509865, -0.118092);
                                 var myOptions = {
-                                    zoom: 3,
+                                    zoom: 5,
                                     center: myLatlng
                                 };
                                 map = new google.maps.Map(document.getElementById("heatmapId"), myOptions);
