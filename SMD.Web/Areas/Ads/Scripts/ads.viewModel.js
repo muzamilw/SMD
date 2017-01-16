@@ -1126,17 +1126,22 @@ define("ads/ads.viewModel",
                                 else {
                                     campaignModel().IsUseFilter(false);
                                 }
-                                confirmation.headingPaymentText(headingtext);
-                                confirmation.messagePaymentText(messageText);
-                                confirmation.afterProceedPayment(function () {
+                                if (campaignModel().IsPaymentCollected() != true) {
+                                    confirmation.headingPaymentText(headingtext);
+                                    confirmation.messagePaymentText(messageText);
+                                    confirmation.afterProceedPayment(function () {
+                                        saveCampaign(2);
+                                    });
+                                    confirmation.yesPaymentBtnText("Continue");
+                                    confirmation.noPayemetBtnText("Back to Draft");
+                                    confirmation.afterCancelPayment(function () {
+                                        SaveDraftCampaign();
+                                    });
+                                    confirmation.showPaymentPopup();
+                                }
+                                else {
                                     saveCampaign(2);
-                                });
-                                confirmation.yesPaymentBtnText("Continue");
-                                confirmation.noPayemetBtnText("Back to Draft");
-                                confirmation.afterCancelPayment(function () {
-                                    SaveDraftCampaign();
-                                });
-                                confirmation.showPaymentPopup();
+                                }
                                 //saveCampaign(2);
                             }
                         }
