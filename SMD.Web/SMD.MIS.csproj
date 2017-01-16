@@ -2024,6 +2024,12 @@
     <Content Include="scheduler_batch_files\Send3DaysDealExpiredNotificationToAdvertiser.xml" />
     <Content Include="scheduler_batch_files\SendCampaignPerformanceEmails.xml" />
     <Content Include="scheduler_batch_files\SendDealExpiredNotificationToAdvertiser.xml" />
+    <Content Include="scheduler_batch_files\SendNotificationToAdvertiserForAdditional10DollarDiscounton3rdLastDay.xml" />
+    <Content Include="scheduler_batch_files\SendNotificationToAdvertiserForAdditional20DollarDiscounton2ndLastDay.xml" />
+    <Content Include="scheduler_batch_files\SendNotificationToAdvertiserForAdditional20PercentDiscounton3rdLastDay.xml" />
+    <Content Include="scheduler_batch_files\SendNotificationToAdvertiserForAdditional25PercentDiscounton2ndLastDay.xml" />
+    <Content Include="scheduler_batch_files\SendNotificationToAdvertiserForAdditional30DollarDiscountonLastDay.xml" />
+    <Content Include="scheduler_batch_files\SendNotificationToAdvertiserForAdditional30PercentDiscountonLastDay.xml" />
     <Content Include="Scripts\Ace\lib\ace\ace.js" />
     <Content Include="Scripts\Ace\lib\ace\mode-css.js" />
     <Content Include="Scripts\Ace\lib\ace\theme-clouds.js" />
@@ -2320,6 +2326,12 @@
     <Content Include="scheduler_batch_files\Send3DaysDealExpiredNotificationToAdvertiser.bat" />
     <Content Include="scheduler_batch_files\SendDealExpiredNotificationToAdvertiser.bat" />
     <Content Include="scheduler_batch_files\SendPerformanceUpdates.bat" />
+    <Content Include="scheduler_batch_files\SendNotificationToAdvertiserForAdditional10DollarDiscounton3rdLastDay.bat" />
+    <Content Include="scheduler_batch_files\SendNotificationToAdvertiserForAdditional20DollarDiscounton2ndLastDay.bat" />
+    <Content Include="scheduler_batch_files\SendNotificationToAdvertiserForAdditional20PercentDiscounton3rdLastDay.bat" />
+    <Content Include="scheduler_batch_files\SendNotificationToAdvertiserForAdditional25PercentDiscounton2ndLastDay.bat" />
+    <Content Include="scheduler_batch_files\SendNotificationToAdvertiserForAdditional30DollarDiscountonLastDay.bat" />
+    <Content Include="scheduler_batch_files\SendNotificationToAdvertiserForAdditional30PercentDiscountonLastDay.bat" />
     <None Include="Scripts\amplify-vsdoc.js" />
     <Content Include="Scripts\amplify.js" />
     <Content Include="Scripts\amplify.min.js" />
