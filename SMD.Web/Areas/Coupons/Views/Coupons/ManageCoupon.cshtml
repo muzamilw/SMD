@@ -1020,12 +1020,29 @@ else
                                     </div>
 
                                 </div>
+                                <div class="modal fade my-modal model_youtube_link" id="phQuizDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" style=" width:660px;" =4">
+                                        <div class="col-lg-12" style=" margin-right: 35px; width:466px;">
+                                            <div style="position: relative;top:128px;left: 413px;">
+    
+                                                <img id="closePop" src="/Content/Images/Close_Button.png" title="Close" width="20" data-dismiss="modal" style="right:14px!important;cursor:pointer" />
+                                            </div>
+                                            <div id="youtube_body" style="margin-top:95px;">
 
+                                                <pre id="myCodeee" class="preCodeDiv"></pre>
+
+                                            </div>
+                                        </div>
+                                       
+                                    </div>
+
+                                </div>
 
                                 <div class="modal fade my-modal model_quizQ_ph" id="phQuizDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" style=" width:660px;" =4">
                                         <div class="col-lg-6 preview_stencilImg" style=" margin-right: 35px; width:310px;">
                                             <div style="position:relative;">
+    
                                                 <img id="closePop" src="/Images/close2-128.png" width="20" class="preview_close" data-dismiss="modal" style="right:14px!important;" />
                                             </div>
                                             <div id="background" class="mobBck mobile_background">
@@ -1412,7 +1429,7 @@ else
                                             </div>
 
                                             <div class="col-lg-3" style="padding-left:47px;">
-                                                <button style="width:123px;height:33px;" class="btn  btn-success gtild-color" id="btnNext" onclick="openYoutubeVideo();">Test URL Link</button>
+                                                <button style="width:123px;height:33px;" class="btn  btn-success gtild-color" id="btnNext"  onclick="openYoutubeVideo();">Test URL Link</button>
                                             </div>
 
                                             <div class="col-lg-2">
@@ -1837,9 +1854,18 @@ else
                 <div class="row Subpanels collapse" id="demo">
                     <div class="col-lg-12" style="font-size:12px;">
                         <div class="row">
+                           <br />
+                            <div class="col-lg-11">
 
-                            <div class="col-lg-11" style="padding-left:32px;">
-                                <br />
+                                <div class="pull-left" style="font-size:16px;padding-left: 22px; color:#137abd">Deals Explained</div>
+                                <div class="pull-right"><img src="~/Images/qqtt.png" style="width:30px;cursor:pointer;" data-toggle="modal" data-target=".model_youtube_link" onclick="openYoutubeVideo();" /></div>
+                                <div class="clearfix"></div>
+                            </div>
+
+
+                            <div class="col-lg-11" style="padding-left:32px;margin-top:10px;">
+                              
+
                                 <p class="text-justify">
                                     The ad click is charged after app users have watched your video ad AND successfully answered your quiz survey.
                                     <br />
@@ -2382,10 +2408,12 @@ else
     //    console.log($("#ddTextBtns").val());
     //});
     function openYoutubeVideo() {
-        if ($("#viedoLink").val() != '') {
-            $("#myCode").css("display", "block");
-            StartVideo($("#viedoLink").val());
-        }
+     //   if ($("#viedoLink").val() != '') {
+        $("#myCodeee").css("display", "block");
+        
+            StartVideoDef();
+           // StartVideo($("#viedoLink").val());
+       // }
     }
 
     function getId(url) {
@@ -2404,6 +2432,18 @@ else
         $('#myId').html(myId);
 
         $('#myCode').html('<iframe width="412" height="315" src="//www.youtube.com/embed/' + myId + '" frameborder="0" allowfullscreen></iframe>');
+
+    }
+
+    function StartVideoDef() {
+
+        debugger;
+        var vidUrl = 'https://www.youtube.com/watch?v=Xcsp0486olY';
+        var myId = getId(vidUrl);
+
+        $('#myId').html(myId);
+
+        $('#myCodeee').html('<iframe width="412" height="315" src="//www.youtube.com/embed/' + myId + '" frameborder="0" allowfullscreen></iframe>');
 
     }
 

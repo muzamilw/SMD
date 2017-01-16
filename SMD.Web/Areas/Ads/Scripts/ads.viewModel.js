@@ -879,6 +879,7 @@ define("ads/ads.viewModel",
                         $(".closecls").css("display", "block");
 
                         $("#Heading_div").css("display", "block");
+                        IsthisEditCamapiagn(false);
                     });
 
                     confirmation.show();
@@ -1103,30 +1104,30 @@ define("ads/ads.viewModel",
                     else {
                         if (UserAndCostDetail().IsSpecialAccount == true) {
                             campaignModel().ClickRate(0);
-                            if (campaignModel().IsUseFilter() == 0) {
-                                campaignModel().AdCampaignTargetLocations.removeAll();
-                                campaignModel().AdCampaignTargetCriterias.removeAll();
-                                campaignModel().AgeRangeEnd(80);
-                                campaignModel().AgeRangeStart(13);
-                                campaignModel().Gender('1');
-                                campaignModel().IsUseFilter('0');
-                            }
-                            else {
-                                campaignModel().IsUseFilter('1');
-                            }
-                            if (campaignModel().IsUseFilter() == 0) {
+                            //if (campaignModel().IsUseFilter() == 0) {
+                            //    campaignModel().AdCampaignTargetLocations.removeAll();
+                            //    campaignModel().AdCampaignTargetCriterias.removeAll();
+                            //    campaignModel().AgeRangeEnd(80);
+                            //    campaignModel().AgeRangeStart(13);
+                            //    campaignModel().Gender('1');
+                            //    campaignModel().IsUseFilter('0');
+                            //}
+                            //else {
+                            //    campaignModel().IsUseFilter('1');
+                            //}
+                            //if (campaignModel().IsUseFilter() == 0) {
 
-                                toastr.error("No Target Match.");
-                            }
-                            else {
-                                if (campaignModel().IsUseFilter() == 1) {
+                            //    toastr.error("No Target Match.");
+                            //}
+                            //else {
+                            //    if (campaignModel().IsUseFilter() == 1) {
 
-                                    campaignModel().IsUseFilter(true);
-                                }
-                                else {
-                                    campaignModel().IsUseFilter(false);
-                                }
-                                if (campaignModel().IsPaymentCollected() != true) {
+                            //        campaignModel().IsUseFilter(true);
+                            //    }
+                            //    else {
+                            //        campaignModel().IsUseFilter(false);
+                            //    }
+                            //    saveCampaign(2);
                                     confirmation.headingPaymentText(headingtext);
                                     confirmation.messagePaymentText(messageText);
                                     confirmation.afterProceedPayment(function () {
@@ -1143,8 +1144,9 @@ define("ads/ads.viewModel",
                                     saveCampaign(2);
                                 }
                                 //saveCampaign(2);
-                            }
                         }
+
+
                         else {
                             if (UserAndCostDetail().isStripeIntegrated == false) {
 
@@ -1195,32 +1197,35 @@ define("ads/ads.viewModel",
 
 
                             } else {
-                                if (campaignModel().IsUseFilter() == 0) {
+                                //if (campaignModel().IsUseFilter() == 0) {
 
 
-                                    campaignModel().AdCampaignTargetLocations.removeAll();
-                                    campaignModel().AdCampaignTargetCriterias.removeAll();
-                                    campaignModel().AgeRangeEnd(80);
-                                    campaignModel().AgeRangeStart(13);
-                                    campaignModel().Gender('1');
-                                    campaignModel().IsUseFilter('0');
+                                //    campaignModel().AdCampaignTargetLocations.removeAll();
+                                //    campaignModel().AdCampaignTargetCriterias.removeAll();
+                                //    campaignModel().AgeRangeEnd(80);
+                                //    campaignModel().AgeRangeStart(13);
+                                //    campaignModel().Gender('1');
+                                //    campaignModel().IsUseFilter('0');
 
-                                }
-                                else {
-                                    campaignModel().IsUseFilter('1');
-                                }
-                                if (campaignModel().IsUseFilter() == 0) {
+                                //}
+                                //else {
+                                //    campaignModel().IsUseFilter('1');
+                                //}
+                                //if (campaignModel().IsUseFilter() == 0) {
 
-                                    toastr.error("No Target Match.");
-                                }
-                                else {
-                                    if (campaignModel().IsUseFilter() == 1) {
+                                //    toastr.error("No Target Match.");
+                                //}
+                                //else {
+                                //    if (campaignModel().IsUseFilter() == 1) {
 
-                                        campaignModel().IsUseFilter(true);
-                                    }
-                                    else {
-                                        campaignModel().IsUseFilter(false);
-                                    }
+                                //        campaignModel().IsUseFilter(true);
+                                //    }
+                                //    else {
+                                //        campaignModel().IsUseFilter(false);
+                                //    }
+                                //    saveCampaign(2);
+                                //}
+
                                     confirmation.headingPaymentText(headingtext);
                                     confirmation.messagePaymentText(messageText);
                                     confirmation.afterProceedPayment(function () {
@@ -1233,7 +1238,6 @@ define("ads/ads.viewModel",
                                     });
                                     confirmation.showPaymentPopup();
                                     //saveCampaign(2);
-                                }
                             }
                         }
                     }

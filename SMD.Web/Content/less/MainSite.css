@@ -1534,3 +1534,15 @@ margin-top:2px;
     display: none;
     background-color: #127abd;
 }
+.preCodeDiv {
+    width: 448px !important;
+    display: none;
+    padding-left: 17px;
+    height: 321px;
+    padding-top: 26px;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    background-color: black;
+    border-color: black;
+}
+   
