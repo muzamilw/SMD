@@ -783,7 +783,7 @@ else
                                                 </option>
 
                                                 <option value="Buy Now">
-                                                    Watch More
+                                                    Buy Now
                                                 </option>
                                                 <option value="Check Availability">
                                                     Check Availability
@@ -1465,7 +1465,7 @@ else
 
                                     <div class="form-group">
                                         <div class="col-lg-2">
-                                            <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">keywords</label>
+                                            <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Keywords</label>
                                         </div>
                                         <div class="col-lg-7">
                                             <textarea class="form-control" id="txtCampaignDesc" rows="3" maxlength="800" style="resize:none" placeholder="Type in keyword searches to help users find your coupon offer. Seperate with a comma " data-bind="value: SearchKeywords"></textarea>
@@ -1890,12 +1890,13 @@ else
 
                     </div>
                 </div>
-
+             
                 <div class="row">
 
                     <div class="pull-left" data-bind="visible:$root.IsnewCoupon()==false">
                         <div class="status_date_span" style="margin-left:0px;margin-top:0px;">
-                            Last modified <span style="margin-left:3px"></span><span data-bind="dateString:$root.modifiedDate,datePattern: 'DD/MM/YYYY'">12 april 2014</span>
+                            @*Last modified <span style="margin-left:3px"></span><span data-bind="dateString:$root.modifiedDate,datePattern: 'DD/MM/YYYY,h:mm a'">12 april 2014</span>*@
+                            Last modified <span style="margin-left:3px"></span><span data-bind="text: moment($root.modifiedDate()).format('DD MMM YYYY h:mm a')">12 april 2014</span>
                         </div>
                     </div>
                 </div>

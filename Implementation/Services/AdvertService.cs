@@ -482,11 +482,11 @@ namespace SMD.Implementation.Services
                 _userFavouriteCouponRepository.Add(oFav);
                 _userFavouriteCouponRepository.SaveChanges();
             }
-            if (campaignModel.Type == 1)
+            if (campaignModel.Type == 1 && campaignModel.Status==2)
             {
                 emailManagerService.SendVideoAdCampaignSubmissionEmail(campaignModel.UserId, campaignModel.CampaignName, Convert.ToInt32(Math.Ceiling(campaignModel.MaxDailyBudget.Value / campaignModel.ClickRate.Value)), campaignModel.VideoLink2,"");
             }
-            if (campaignModel.Type == 4)
+            if (campaignModel.Type == 4 && campaignModel.Status == 2)
             {
                 emailManagerService.SendDisplayAdCampaignSubmissionEmail(campaignModel.UserId, campaignModel.CampaignName, Convert.ToInt32(Math.Ceiling(campaignModel.MaxDailyBudget.Value / campaignModel.ClickRate.Value)), campaignModel.LogoUrl);
             }
@@ -751,11 +751,11 @@ namespace SMD.Implementation.Services
                 _userFavouriteCouponRepository.Delete(oFav);
                 _userFavouriteCouponRepository.SaveChanges();
             }
-            if (campaignModel.Type == 1)
+            if (campaignModel.Type == 1 && campaignModel.Status==2)
             {
                 emailManagerService.SendVideoAdCampaignSubmissionEmail(campaignModel.UserId, campaignModel.CampaignName, Convert.ToInt32(Math.Ceiling(campaignModel.MaxDailyBudget.Value / campaignModel.ClickRate.Value)), campaignModel.VideoLink2, "");
             }
-            if (campaignModel.Type == 4)
+            if (campaignModel.Type == 4 && campaignModel.Status == 2)
             {
                 emailManagerService.SendDisplayAdCampaignSubmissionEmail(campaignModel.UserId, campaignModel.CampaignName, Convert.ToInt32(Math.Ceiling(campaignModel.MaxDailyBudget.Value / campaignModel.ClickRate.Value)), campaignModel.LogoUrl);
             }

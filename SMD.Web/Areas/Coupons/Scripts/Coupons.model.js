@@ -83,7 +83,7 @@
               Rejecteddatetime = ko.observable(Rejecteddatetime),
               RejectedReason = ko.observable(RejectedReason),
               Savings = ko.observable(Savings),
-              SearchKeywords = ko.observable(SearchKeywords),
+              SearchKeywords = ko.observable(SearchKeywords).extend({ required: true }),
               Status = ko.observable(Status),
               StatusValue = ko.observable(""),
               SwapCost = ko.observable(SwapCost),
@@ -125,7 +125,8 @@
                 ClickThruCount = ko.observable(),
                // Errors
           errors = ko.validation.group({
-              CouponTitle: CouponTitle
+              CouponTitle: CouponTitle,
+              SearchKeywords: SearchKeywords
           }),
                 // Is Valid 
              isValid = ko.computed(function () {
