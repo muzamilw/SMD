@@ -1128,22 +1128,23 @@ define("ads/ads.viewModel",
                             //        campaignModel().IsUseFilter(false);
                             //    }
                             //    saveCampaign(2);
-                                    confirmation.headingPaymentText(headingtext);
-                                    confirmation.messagePaymentText(messageText);
-                                    confirmation.afterProceedPayment(function () {
-                                        saveCampaign(2);
-                                    });
-                                    confirmation.yesPaymentBtnText("Continue");
-                                    confirmation.noPayemetBtnText("Back to Draft");
-                                    confirmation.afterCancelPayment(function () {
-                                        SaveDraftCampaign();
-                                    });
-                                    confirmation.showPaymentPopup();
-                                }
-                                else {
+                            //}
+                            if (campaignModel().IsPaymentCollected() != true) {
+                                confirmation.afterProceedPayment(function () {
                                     saveCampaign(2);
-                                }
-                                //saveCampaign(2);
+                                });
+                                confirmation.yesPaymentBtnText("Continue");
+                                confirmation.noPayemetBtnText("Back to Draft");
+                                confirmation.afterCancelPayment(function () {
+                                    SaveDraftCampaign();
+                                });
+                                confirmation.showPaymentPopup();
+                            }
+                            else {
+                                saveCampaign(2);
+                            }
+
+
                         }
 
 
@@ -1172,14 +1173,15 @@ define("ads/ads.viewModel",
 
                                     //    toastr.error("No Target Match.");
                                     //}
-                                    
-                                        //if (campaignModel().IsUseFilter() == 1) {
 
-                                        //    campaignModel().IsUseFilter(true);
-                                        //}
-                                        //else {
-                                        //    campaignModel().IsUseFilter(false);
-                                        //}
+                                    //if (campaignModel().IsUseFilter() == 1) {
+
+                                    //    campaignModel().IsUseFilter(true);
+                                    //}
+                                    //else {
+                                    //    campaignModel().IsUseFilter(false);
+                                    //}
+                                    if (campaignModel().IsPaymentCollected() != true) {
                                         confirmation.headingPaymentText(headingtext);
                                         confirmation.messagePaymentText(messageText);
                                         confirmation.afterProceedPayment(function () {
@@ -1191,8 +1193,12 @@ define("ads/ads.viewModel",
                                             SaveDraftCampaign();
                                         });
                                         confirmation.showPaymentPopup();
-                                        //saveCampaign(2);
-                                    
+                                    }
+                                    else {
+                                        saveCampaign(2);
+                                    }
+
+
                                 }, 2000, 'Enter your details');
 
 
@@ -1225,7 +1231,7 @@ define("ads/ads.viewModel",
                                 //    }
                                 //    saveCampaign(2);
                                 //}
-
+                                if (campaignModel().IsPaymentCollected() != true) {
                                     confirmation.headingPaymentText(headingtext);
                                     confirmation.messagePaymentText(messageText);
                                     confirmation.afterProceedPayment(function () {
@@ -1237,7 +1243,11 @@ define("ads/ads.viewModel",
                                         SaveDraftCampaign();
                                     });
                                     confirmation.showPaymentPopup();
-                                    //saveCampaign(2);
+                                }
+                                else {
+                                    saveCampaign(2);
+                                }
+                                
                             }
                         }
                     }
