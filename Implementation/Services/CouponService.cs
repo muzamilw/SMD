@@ -916,6 +916,7 @@ namespace SMD.Implementation.Services
             string respMesg = "True";
             var dbCo = couponRepository.GetCouponByIdSingle(source.CouponId);
             var userData = webApiUserService.GetUserByUserId(dbCo.UserId);
+            int freeCount = couponRepository.GetFreeCouponCountApprove(userData.Company.CompanyId);
             var isFlag = dbCo.IsPaymentCollected;
             dbCo.IsMarketingStories = source.IsMarketingStories;
             // Update 
@@ -930,7 +931,7 @@ namespace SMD.Implementation.Services
                     dbCo.ApprovalDateTime = DateTime.Now;
                     dbCo.ApprovedBy = couponRepository.LoggedInUserIdentity;
                     dbCo.Status = (Int32)AdCampaignStatus.Live;
-                    if (dbCo.IsPaymentCollected != true && userData.Company.StripeCustomerId !=null)
+                    if ((dbCo.IsPaymentCollected != true && (freeCount > 1 || dbCo.CouponListingMode == 2)) || (dbCo.IsPaymentCollected != true && (dbCo.CouponListingMode==1 && dbCo.CouponPriceOptions.Count>1)))
                     {
                         dbCo.IsPaymentCollected = true;
                         dbCo.PaymentDate = DateTime.Now;
@@ -942,7 +943,7 @@ namespace SMD.Implementation.Services
                     {
                         if (isFlag != true)
                         {
-                            respMesg = CreateStripeSubscription(dbCo, userData.Company.StripeCustomerId);
+                            respMesg = CreateStripeSubscription(dbCo, userData.Company.StripeCustomerId, freeCount);
                             ////if (respMesg.Contains("Failed"))
                             ////{
                             ////    return respMesg;
@@ -1000,7 +1001,7 @@ namespace SMD.Implementation.Services
             }
             return respMesg;
         }
-        private string CreateStripeSubscription(Coupon source ,string stripeCustomerID)
+        private string CreateStripeSubscription(Coupon source ,string stripeCustomerID,int freeCount )
         {
 
             if (source.CompanyId != null)
@@ -1017,7 +1018,7 @@ namespace SMD.Implementation.Services
                 // Get Current Product
                 var product = (dynamic)null;
 
-                if (source.CouponListingMode == 1 && stripeCustomerID == null)
+                if (source.CouponListingMode == 1 && source.CouponPriceOptions.Count==1 && freeCount ==1)
                     product = productRepository.GetProductByCountryId("couponfree");
                 else 
                 {
