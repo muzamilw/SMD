@@ -47,6 +47,6 @@ namespace SMD.Interfaces.Services
 
         IEnumerable<GetUserProfileQuestionsList_Result> GetUserProfileQuestionsList(string UserID);
 
-        public bool SaveUserProfileQuestionResponse(int PQID, string UserID,int CompanyId, int[] ProfileQuestionAnswerIds)
+        bool SaveUserProfileQuestionResponse(int PQID, string UserID, int CompanyId, int[] ProfileQuestionAnswerIds);
     }
 }
