@@ -111,6 +111,9 @@ namespace SMD.Models.DomainModels
         public Nullable<int> discountType { get; set; }
 
         public Nullable<int> DealEndingDiscountType { get; set; }
+
+        public string CouponLink { get; set; }
+        public int IsTwoForOneDeal { get; set; }
         
     }
 }
