@@ -1081,7 +1081,13 @@ define("ads/ads.viewModel",
                   selectedQuestionCountryList([]);
 
               },
-
+                 addSubscription = function () {
+                     stripeChargeCustomer.show(function () {
+                         UserAndCostDetail().isStripeIntegrated = true;
+                         saveCampaign(2);
+                     }, 2000, 'Enter your details');
+                     
+                 },
 
             submitCampaignData = function () {
                 var messageText;
@@ -1151,8 +1157,8 @@ define("ads/ads.viewModel",
                         else {
                             if (UserAndCostDetail().isStripeIntegrated == false) {
 
-                                stripeChargeCustomer.show(function () {
-                                    UserAndCostDetail().isStripeIntegrated = true;
+                                //stripeChargeCustomer.show(function () {
+                                //    UserAndCostDetail().isStripeIntegrated = true;
 
 
                                     //if (campaignModel().IsUseFilter() == 0) {
@@ -1185,7 +1191,7 @@ define("ads/ads.viewModel",
                                         confirmation.headingPaymentText(headingtext);
                                         confirmation.messagePaymentText(messageText);
                                         confirmation.afterProceedPayment(function () {
-                                            saveCampaign(2);
+                                            addSubscription();
                                         });
                                         confirmation.yesPaymentBtnText("Continue");
                                         confirmation.noPayemetBtnText("Back to Draft");
@@ -1199,7 +1205,7 @@ define("ads/ads.viewModel",
                                     }
 
 
-                                }, 2000, 'Enter your details');
+                                //}, 2000, 'Enter your details');
 
 
                             } else {
