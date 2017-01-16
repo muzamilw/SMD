@@ -296,11 +296,11 @@
                                           </p>
                                           
                                               <ul style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;margin-left:20px">
-                                                  <li>List up to 3 Deal Groups at the same time </li>
+                                                  <li>List up to 10 Deal Lines in one Deal Group </li>
                                                   <li>
                                                       Link deal lines directly to your shopping cart or landing pages
                                                   </li>
-                                                  <li>Create Countdown Deals with increasing savings as the deal ends*</li>
+                                                  <li>Create deal ending discounts*</li>
                                                   <li>We notify and email people every time you offer a bigger saving</li>
                                                   <li>Get your Friends & Customers to Rate and Review your Deals</li>
                                               </ul>
@@ -353,13 +353,9 @@
                                         </td>
                                         <td align="left" style="padding-bottom:40px;" valign="top">                                          
                                           <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
-                                           Offer Bigger Discounts ...   *Countdown Deals Coming Soon
-                                          </p>
+                                              Free classified listing on Cash4ads.com</p>
                                           <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
-                                            We’re working hard to bring out a great feature whereby you can
-offer further savings on final days and hours of your deal listing.
-
-                                          </p>
+                                              &nbsp;</p>
                                         </td>
                                       </tr>
                                         <tr>
@@ -498,7 +494,7 @@ offer further savings on final days and hours of your deal listing.
                     <tr>                      
                       <td id="footerContent" style="color:#B7B7B7; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:12px; font-weight:400; line-height:24px; padding-bottom:20px; text-align:center;" valign="top">                        
                         <p style="color:#B7B7B7; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:12px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:center;">
-                          &copy; 2016 Cash4ads.com
+                          &copy; 2017 Clydy Ltd.
                           <sup>
                             &reg;
                           </sup>, All Rights Reserved.<br/>67 Hurworth Avenue  &bull; Slough, Berkshire &bull;  United Kingdom SL3 7FF

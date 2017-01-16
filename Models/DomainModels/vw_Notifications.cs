@@ -39,5 +39,8 @@ namespace SMD.Models.DomainModels
         public string DealCity { get; set; }
 
         public string ProfileImage { get; set; }
+
+         public string CurrencyCode { get; set; }
+        public string CurrencySymbol { get; set; }
     }
 }

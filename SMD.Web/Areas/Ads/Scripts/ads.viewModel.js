@@ -235,12 +235,13 @@ define("ads/ads.viewModel",
 
 				    //   collapseMainMenu();
 
-				    openEditScreen(1);
+				    openEditScreen(mode);
 				    campaignModel().CampaignName(Campaign.CampaignName());
 				    //   ischartOpened(true);
 				    isListVisible(false);
 				    // isNewCampaign(false);
-				    $("#logo_div").css("display", "block");
+				    if (mode == 4)
+				        $("#logo_div").css("display", "block");
 				    $(".hideInCoupons").css("display", "none");
 
 				    $("#MarketobjDiv").css("display", "none");
@@ -459,7 +460,7 @@ define("ads/ads.viewModel",
 				                        element: 'GenderBarChartId',
 				                        data: PerGenderChartAnalyticsData(),
 				                        xkey: 'city', ykeys: ['male', 'female'], labels: ['male', 'female'],
-				                        yLabelFormat: function (y) { return y != Math.round(y) ? '' : y; }, 
+				                        yLabelFormat: function (y) { return y != Math.round(y) ? '' : y; },
 				                        parseTime: false, setAxisAlignFirstX: true,
 				                        barColors: ['green', 'blue']
 				                    });
@@ -699,7 +700,7 @@ define("ads/ads.viewModel",
                 } else if (item.Status == 5) {
                     item.StatusValue = "Completed"
                 } else if (item.Status == 6) {
-                    item.StatusValue = "Approval Rejected"
+                    item.StatusValue = "Rejected"
                 } else if (item.Status == 7) {
                     item.StatusValue = ("Remove");
                 } else if (item.Status == 9) {
@@ -1083,6 +1084,16 @@ define("ads/ads.viewModel",
 
 
             submitCampaignData = function () {
+                var messageText;
+                var headingtext;
+                if (CurrentMode() == 1) {
+                    messageText = "One Time Charge for this Campaign £19." + "<br\>" + "You will not be charged the submission fee again if you pause, resume or tweak this campaign after approval.";
+                    headingtext = "Video Ad - Submission Fee";
+                }
+                else {
+                    messageText = "One Time Charge for this Campaign £9." + "<br\>" + "You will not be charged the submission fee again if you pause, resume or tweak this campaign after approval.";
+                    headingtext = "Display Ad - Submission Fee";
+                }
                 //if (campaignModel().isValid()) {
                 if (ValidateCampaign(2)) {
 
@@ -1118,7 +1129,16 @@ define("ads/ads.viewModel",
                             //    }
                             //    saveCampaign(2);
                             //}
-                            saveCampaign(2);
+                                confirmation.afterProceedPayment(function () {
+                                    saveCampaign(2);
+                                });
+                                confirmation.yesPaymentBtnText("Continue");
+                                confirmation.noPayemetBtnText("Back to Draft");
+                                confirmation.afterCancelPayment(function () {
+                                    SaveDraftCampaign();
+                                });
+                                confirmation.showPaymentPopup();
+                                //saveCampaign(2);
                         }
 
 
@@ -1155,7 +1175,18 @@ define("ads/ads.viewModel",
                                         else {
                                             campaignModel().IsUseFilter(false);
                                         }
-                                        saveCampaign(2);
+                                        confirmation.headingPaymentText(headingtext);
+                                        confirmation.messagePaymentText(messageText);
+                                        confirmation.afterProceedPayment(function () {
+                                            saveCampaign(2);
+                                        });
+                                        confirmation.yesPaymentBtnText("Continue");
+                                        confirmation.noPayemetBtnText("Back to Draft");
+                                        confirmation.afterCancelPayment(function () {
+                                            SaveDraftCampaign();
+                                        });
+                                        confirmation.showPaymentPopup();
+                                        //saveCampaign(2);
                                     }
                                 }, 2000, 'Enter your details');
 
@@ -1190,8 +1221,18 @@ define("ads/ads.viewModel",
                                 //    saveCampaign(2);
                                 //}
 
-                                saveCampaign(2);
-
+                                    confirmation.headingPaymentText(headingtext);
+                                    confirmation.messagePaymentText(messageText);
+                                    confirmation.afterProceedPayment(function () {
+                                        saveCampaign(2);
+                                    });
+                                    confirmation.yesPaymentBtnText("Continue");
+                                    confirmation.noPayemetBtnText("Back to Draft");
+                                    confirmation.afterCancelPayment(function () {
+                                        SaveDraftCampaign();
+                                    });
+                                    confirmation.showPaymentPopup();
+                                    //saveCampaign(2);
                             }
                         }
                     }
@@ -1239,7 +1280,7 @@ define("ads/ads.viewModel",
 
 
 
-                    if (campaignModel().ClickRate() < minclickrate && isClickRateVisible()!=true) {
+                    if (campaignModel().ClickRate() < minclickrate && isClickRateVisible() != true) {
                         errorListNew.push({ name: "Ad Click should be greater than $ " + minclickrate + " USD", element: "" });
                     }
 
@@ -2244,7 +2285,7 @@ define("ads/ads.viewModel",
                         }, {
                             success: function (data) {
 
-                                
+
 
                                 if (data != null) {
                                     // set languages drop down
@@ -2431,7 +2472,7 @@ define("ads/ads.viewModel",
                                         $("#btnSubmitForApproval2").css("display", "inline-block");
                                         $("#btnSubmitForApproval2").removeAttr('disabled');
                                         $("#btnPauseCampaign").css("display", "none");
-                                        campaignModel().StatusValue("Approval Rejected");
+                                        campaignModel().StatusValue("Rejected");
                                     } else if (campaignModel().Status() == 7) {
 
                                         campaignModel().StatusValue("Remove");

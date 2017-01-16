@@ -76,7 +76,7 @@ namespace SMD.MIS.Areas.Api.Controllers
                         Status = true,
                         Message = "Success",
                         Balance = 0,
-                        Transactions = null
+                        Transactions = new List<StatementTrasaction>()
                     };
                 }
                 

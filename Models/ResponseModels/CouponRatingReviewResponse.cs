@@ -37,6 +37,8 @@ namespace SMD.Models.ResponseModels
         public string CouponTitle { get; set; }
 
         public string ProfileImage { get; set; }
+
+        public string RatingDateTimeString { get; set; }
         
     }
     public class CouponRatingReviewResponseModel

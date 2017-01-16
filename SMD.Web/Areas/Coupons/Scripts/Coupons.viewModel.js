@@ -221,8 +221,8 @@ define("Coupons/Coupons.viewModel",
                         {
                             data: this.PieChartValue,
                             backgroundColor: ['green', 'blue', 'orange']
-                           
-                        }]                    
+
+                        }]
                 }),
                 isAdvertdashboardDealVisible = ko.observable(false),
                 selecteddateRangeAnalytics = ko.observable(1),
@@ -576,7 +576,7 @@ define("Coupons/Coupons.viewModel",
                             DDOStatsAnalytics(data.ImpressionStat);
                             PieChartValue.removeAll();
                             PieChartlabel.removeAll();
-                            for(var i = 0; i < data.pieCharts.length; i++) {
+                            for (var i = 0; i < data.pieCharts.length; i++) {
                                 PieChartValue.push(data.pieCharts[i].value);
                                 PieChartlabel.push(data.pieCharts[i].label);
 
@@ -592,11 +592,11 @@ define("Coupons/Coupons.viewModel",
                                 //    element: 'donutId',
                                 //    data: CampaignRatioAnalyticData(), colors: ['green', 'blue', 'orange']
                                 //});
-                           
 
-                               // DynamicDoughnutData().datasets[0].data = [20, 30, 50];
-                                
-                                
+
+                                // DynamicDoughnutData().datasets[0].data = [20, 30, 50];
+
+
                                 var myLatlng = new google.maps.LatLng(51.509865, -0.118092);
                                 var myOptions = {
                                     zoom: 3,
@@ -608,7 +608,7 @@ define("Coupons/Coupons.viewModel",
                                       "radius": 2,
                                       "maxOpacity": 1,
                                       "scaleRadius": true,
-                                      "useLocalExtrema": true                                     
+                                      "useLocalExtrema": true
                                   }
                                 );
 
@@ -844,7 +844,7 @@ define("Coupons/Coupons.viewModel",
                     if (data != null) {
                         // set grid cont
                         if ((searchFilterValue() == "" || searchFilterValue() == undefined) && SearchSelectedStatus() == 0)
-                        gridTotalCount(data.TotalCount);
+                            gridTotalCount(data.TotalCount);
                         campaignGridContent.removeAll();
                         _.each(data.Coupon, function (item) {
                             campaignGridContent.push(model.Coupon.Create(updateCampaignGridItem(item)));
@@ -873,7 +873,7 @@ define("Coupons/Coupons.viewModel",
                             else {
                                 isCouponSearch(true);
                             }
-                            
+
                             islblText(false);
                         }
                         else if (data.TotalCount > 1 && data.TotalCount <= 4) {
@@ -1249,8 +1249,13 @@ getfreeCouponCount = function () {
               isEditCampaign(false);
 
           },
-
-
+dealSubscription = function () {
+    stripeChargeCustomer.show(function () {
+        UserAndCostDetail().isStripeIntegrated = true;
+        saveCampaign(2);
+    }, 1000, 'Configure your Subscription');
+    return;
+},
         submitCampaignData = function () {
 
             hasErrors = false;
@@ -1264,73 +1269,87 @@ getfreeCouponCount = function () {
                 toastr.error("Please create atleast one Price option");
                 gotoScreen(1);
             }
-
-
-            //if (couponModel().HowToRedeemLine2() == "" || couponModel().HowToRedeemLine2() == undefined) {
-            //    hasErrors = true;
-            //    toastr.error("Please enter deal summary.");
-            //}
-
-            //couponImage1
-            //if (couponModel().couponImage1() == "/images/default-placeholder.png" && couponModel().CouponImage2() == "/images/default-placeholder.png" && couponModel().CouponImage3() == "/images/default-placeholder.png") {
-            //    hasErrors = true;
-            //    toastr.error("Please enter atleast 1 banner image.");
-            //}
-
             if (hasErrors)
                 return;
-            if (freeCouponCount() == 0 && (UserAndCostDetail().StripeSubscriptionStatus == null || UserAndCostDetail().StripeSubscriptionStatus == "canceled") && couponModel().CouponListingMode() == 2) {
-                confirmation.messageText("Your deal cannot be submitted for 30 days." + "<br\>" + "Please subscribe to avail unlimited deals.");
-                confirmation.afterProceed(function () {
-                    stripeChargeCustomer.show(function () {
-                        UserAndCostDetail().isStripeIntegrated = true;
-                        saveCampaign(2);
-                    }, 1000, 'Configure your Subscription');
+            if (freeCouponCount() == 0 && (UserAndCostDetail().StripeSubscriptionStatus == null ||UserAndCostDetail().isStripeIntegrated != true|| UserAndCostDetail().StripeSubscriptionStatus == "canceled") && couponModel().CouponListingMode() == 2) {
+                if (couponModel().IsPaymentCollected() != true) {
+                    confirmation.headingPaymentText("Deal - Submission Fee");
+                    confirmation.messagePaymentText("One Time Charge for this Campaign £9." + "<br\>" + "You will NOT be charged the submission fee again if you pause, resume or tweak this deal after approval." + "<br\><br\>" + "Note:" + "<br\>" + "FREE Deal offer allows you to have ONE deal line for a 7 day listing.");
+                    confirmation.afterProceedPayment(function () {
+                        confirmation.hidePaymentPopup();
+                        dealSubscription();
+                    });
+                    confirmation.yesPaymentBtnText("Continue");
+                    confirmation.noPayemetBtnText("Back to Draft");
+                    confirmation.afterCancelPayment(function () {
+                        SaveAsDraft();
+                    });
+                    confirmation.showPaymentPopup();
                     return;
-                });
-                confirmation.yesBtnText("Subscribe for Subscribtion");
-                confirmation.afterCancel(function () {
-                    return;
-                });
-                confirmation.show();
-                return;
+                }
+                else {
+                    saveCampaign(2);
+                }
             }
-            if (freeCouponCount() > 0 && (UserAndCostDetail().StripeSubscriptionStatus == null || UserAndCostDetail().StripeSubscriptionStatus == "canceled") && UserAndCostDetail().IsSpecialAccount != true) {
-                confirmation.messageText("Your deal cannot be submitted as there is already a free deal active." + "<br\>" + "Please subscribe to avail unlimited deals.")
-                confirmation.afterProceed(function () {
-                    stripeChargeCustomer.show(function () {
-                        UserAndCostDetail().isStripeIntegrated = true;
-                      //  couponModel().CouponListingMode(2)
+            if (freeCouponCount() > 0 && UserAndCostDetail().isStripeIntegrated == true && UserAndCostDetail().IsSpecialAccount != true) {
+                if (couponModel().IsPaymentCollected() != true) {
+                    confirmation.headingPaymentText("Deal - Submission Fee");
+                    confirmation.messagePaymentText("One Time Charge for this Campaign £9." + "<br\>" + "You will NOT be charged the submission fee again if you pause, resume or tweak this deal after approval." + "<br\><br\>" + "Note:" + "<br\>" + "FREE Deal offer allows you to have ONE deal line for a 7 day listing.");
+                    confirmation.afterProceedPayment(function () {
+                        confirmation.hidePaymentPopup();
                         saveCampaign(2);
-                    }, 1000, 'Configure your Subscription');
-                    return;
-                });
-                confirmation.yesBtnText("Subscribe for Subscribtion");
-                confirmation.afterCancel(function () {
-                    return;
-                });
-                confirmation.show();
+                    });
+                    confirmation.yesPaymentBtnText("Continue");
+                    confirmation.noPayemetBtnText("Back to Draft");
+                    confirmation.afterCancelPayment(function () {
+                        SaveAsDraft();
+                    });
+                    confirmation.showPaymentPopup();
+                }
+                else {
+                    saveCampaign(2);
+                }
             }
             else {
-                if (couponModel().CouponListingMode() == 1 && couponModel().CouponPriceOptions().length > 1 && (UserAndCostDetail().StripeSubscriptionStatus == null ||UserAndCostDetail().StripeSubscriptionStatus == "canceled")&& UserAndCostDetail().IsSpecialAccount != true) {
-                    confirmation.messageText("Your deal cannot be submitted as it has more than one deal headlines." + "<br\>" + "Please subscribe to avail unlimited deal headlines.");
-                    confirmation.afterProceed(function () {
-                        stripeChargeCustomer.show(function () {
-                            UserAndCostDetail().isStripeIntegrated = true;
-                            // couponModel().CouponListingMode(2);
-                            saveCampaign(2);
-                        }, 1000, 'Configure your Subscription');
-
-                    });
-                    confirmation.yesBtnText("Subscribe for Subscribtion");
-                    confirmation.afterCancel(function () {
-                        return;
-                    });
-                    confirmation.show();
+                if (couponModel().CouponListingMode() == 1 && couponModel().CouponPriceOptions().length > 1 && (UserAndCostDetail().StripeSubscriptionStatus == null || UserAndCostDetail().StripeSubscriptionStatus == "canceled" || UserAndCostDetail().isStripeIntegrated != true) && UserAndCostDetail().IsSpecialAccount != true) {
+                    if (couponModel().IsPaymentCollected() != true) {
+                        confirmation.headingPaymentText("Deal - Submission Fee");
+                        confirmation.messagePaymentText("One Time Charge for this Campaign £9." + "<br\>" + "You will NOT be charged the submission fee again if you pause, resume or tweak this deal after approval." + "<br\><br\>" + "Note:" + "<br\>" + "FREE Deal offer allows you to have ONE deal line for a 7 day listing.");
+                        confirmation.afterProceedPayment(function () {
+                            confirmation.hidePaymentPopup();
+                            dealSubscription();
+                        });
+                        confirmation.yesPaymentBtnText("Continue");
+                        confirmation.noPayemetBtnText("Back to Draft");
+                        confirmation.afterCancelPayment(function () {
+                            SaveAsDraft();
+                        });
+                        confirmation.showPaymentPopup();
+                    }
+                    else {
+                        saveCampaign(2);
+                    }
                 }
                 else {
                     if (couponModel().CouponListingMode() == 1 && couponModel().CouponPriceOptions().length == 1 && (UserAndCostDetail().StripeSubscriptionStatus == null || UserAndCostDetail().StripeSubscriptionStatus == "canceled") && UserAndCostDetail().IsSpecialAccount != true) {
-                        saveCampaign(2);
+                        if (couponModel().IsPaymentCollected() != true) {
+                            confirmation.headingPaymentText("FREE Deal Submission");
+                            confirmation.messagePaymentText("FREE Deal submission still requires credit card details," + "<br\>" + " but we will not take any payment." + "<br\><br\>" + "Your deal will be listed for 7 days and notifications will still be sent according to your Deal Ending discount selection.");
+                            confirmation.afterProceedPayment(function () {
+                                confirmation.hidePaymentPopup();
+                                dealSubscription();
+                            });
+                            confirmation.yesPaymentBtnText("Continue");
+                            confirmation.noPayemetBtnText("Back to Draft");
+                            confirmation.afterCancelPayment(function () {
+                                SaveAsDraft();
+                            });
+                            confirmation.showPaymentPopup();
+                        }
+                        else {
+                             saveCampaign(2);
+                        }
+                        
                     }
                     else {
                         if (UserAndCostDetail().Status == null || UserAndCostDetail().Status == 0) {
@@ -1348,7 +1367,7 @@ getfreeCouponCount = function () {
                                         confirmation.afterProceed(function () {
                                             stripeChargeCustomer.show(function () {
                                                 UserAndCostDetail().isStripeIntegrated = true;
-                                               // couponModel().CouponListingMode(2);
+                                                // couponModel().CouponListingMode(2);
                                                 saveCampaign(2);
                                             }, 1000, 'Configure your Subscription');
 
@@ -1369,8 +1388,26 @@ getfreeCouponCount = function () {
                                     }
                                 }
                                 else {
-                                   // couponModel().CouponListingMode(2)
-                                    saveCampaign(2);
+                                    // couponModel().CouponListingMode(2)
+                                    if (couponModel().IsPaymentCollected() != true) {
+                                        confirmation.headingPaymentText("FREE Deal Submission");
+                                        confirmation.messagePaymentText("FREE Deal submission still requires credit card details," + "<br\>" + " but we will not take any payment." + "<br\><br\>" + "Your deal will be listed for 7 days and notifications will still be sent according to your Deal Ending discount selection.");
+                                        confirmation.afterProceedPayment(function () {
+                                            confirmation.hidePaymentPopup();
+                                            saveCampaign(2);
+                                            //dealSubscription();
+                                        });
+                                        confirmation.yesPaymentBtnText("Continue");
+                                        confirmation.noPayemetBtnText("Back to Draft");
+                                        confirmation.afterCancelPayment(function () {
+                                            SaveAsDraft();
+                                        });
+                                        confirmation.showPaymentPopup();
+                                    }
+                                    else {
+                                         saveCampaign(2);
+                                    }
+                                 
                                 }
                             }
 
@@ -1500,7 +1537,7 @@ getfreeCouponCount = function () {
                 },
                 //Create Price option
                  onCreatePriceOption = function () {
-                     if (couponModel().CouponPriceOptions().length <= 3) {
+                     if (couponModel().CouponPriceOptions().length <= 9) {
                          var priceOption = couponModel().CouponPriceOptions()[0];
                          //Create Price option for the very First Time
                          if (priceOption == undefined) {
@@ -1519,7 +1556,7 @@ getfreeCouponCount = function () {
                          }
                      }
                      else {
-                         toastr.error("Sorry,you can Create upto 4 deal lines.");
+                         toastr.error("Sorry,you can Create upto 10 deal lines.");
                      }
                  },
                 // Delete a Price option
@@ -1625,7 +1662,7 @@ getfreeCouponCount = function () {
                                 couponModel(model.Coupon.Create(data.Coupon[0]));
 
                                 CouponActiveMonth(couponModel().CouponActiveYear() + ' - ' + GetMonthNameByID(couponModel().CouponActiveMonth()));
-                               
+
 
                                 couponModel().CouponListingMode.subscribe(function (item) {
                                     CouponListingModeChecker(item);
@@ -2267,7 +2304,7 @@ getfreeCouponCount = function () {
                     initializeGeoLocation();
                     google.maps.event.addDomListener(window, 'load', initializeGeoLocation);
                     setCompanyAddress();
-                  
+
 
                 },
                 initializeGeoLocation = function () {
@@ -2285,7 +2322,7 @@ getfreeCouponCount = function () {
 
                 },
                 setCompanyAddress = function () {
-                    
+
                     //var fulladdress = AddressLine1().toLowerCase() + ' ' + CompanyCity() + ' ' + companyzipcode() + ' ' + companystate().toLowerCase();
                     var fulladdress = null;
                     if (AddressLine1() != null) {
@@ -2297,7 +2334,7 @@ getfreeCouponCount = function () {
                     geocoderComp.geocode({
                         'address': fulladdress
                     }, function (results, status) {
-                        
+
                         if (status == google.maps.GeocoderStatus.OK) {
                             // isMapVisible(true);
                             //if (isCodeAddressEdit() == false) {

@@ -122,5 +122,17 @@ namespace SMD.Interfaces.Services
 
         void Send3DaysDealExpiredNotificationToAdvertiser();
 
+        void SendNotificationToAdvertiserForAdditional20PercentDiscounton3rdLastDay();
+
+        void SendNotificationToAdvertiserForAdditional25PercentDiscounton2ndLastDay();
+
+        void SendNotificationToAdvertiserForAdditional30PercentDiscountonLastDay();
+
+        void SendNotificationToAdvertiserForAdditional10DollarDiscounton3rdLastDay();
+
+        void SendNotificationToAdvertiserForAdditional20DollarDiscounton2ndLastDay();
+
+        void SendNotificationToAdvertiserForAdditional30DollarDiscountonLastDay();
+
     }
 }

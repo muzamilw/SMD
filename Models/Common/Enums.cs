@@ -70,10 +70,18 @@
         VideoAdCampaignSubmitted = 47,
         DisplayAdCampaignSubmitted = 48,
         CouponSubmitted = 49,
-        PicturePollCampaignSubmitted = 50
+        PicturePollCampaignSubmitted = 50,
+
+
+        ToAdvertiserLast3Days20PercentageCoupons = 51,
+        ToAdvertiserLast2Days25PercentageCoupons = 52,
+        ToAdvertiserLastDay30PercentageCoupons = 53,
+        ToAdvertiserLast3Days10DollarDiscountCoupons = 54,
+        ToAdvertiserLast2Days20DollarDiscountCoupons = 55,
+        ToAdvertiserLastDay30DollarDiscountCoupons = 56,
 
     }
-
+     
     public enum AdCampaignCriteriaType
     {
         ProfileQuestion = 1,

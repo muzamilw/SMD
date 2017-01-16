@@ -14,11 +14,13 @@ define("common/confirmation.viewModel",
                     defaultHeaderText = ist.resourceText.defaultHeaderText,
                     // Heading Text
                     headingText = ko.observable(defaultHeaderText),
+                    headingPaymentText = ko.observable(defaultHeaderText),
                     // default confirmation text
                     defaultConfirmationText = "Do you want to proceed with the request?",
                     // Message Text
 
                     messageText = ko.observable(defaultConfirmationText),
+                     messagePaymentText = ko.observable(defaultConfirmationText),
 
 
                     defaultButtonTextYes = "Yes",
@@ -28,16 +30,25 @@ define("common/confirmation.viewModel",
 
                     noBtnText = ko.observable(defaultButtonTextNo),
 
+                     defaultPaymentTextYes = "Continue",
+                    yesPaymentBtnText = ko.observable(defaultPaymentTextYes),
+
+                    defaultPaymentTextNo = "Back To Draft",
+
+                    noPayemetBtnText = ko.observable(defaultPaymentTextNo),
+
                     defaultIsCancelVisible = true;
 
                 IsCancelVisible = ko.observable(defaultIsCancelVisible),
                 // On Proceed
                  afterProceed = ko.observable(),
+                 afterProceedPayment = ko.observable(),
                 // On Proceed
                  afterActionProceed = ko.observable(),
 
                 // On Cancel
                  afterCancel = ko.observable(),
+                afterCancelPayment  = ko.observable(),
                 // On No
                  afterNo = ko.observable(),
                 // Is Proceed Visible
@@ -62,6 +73,13 @@ define("common/confirmation.viewModel",
                      hide();
 
                  },
+                proceedPayment = function () {
+                    if (typeof afterProceedPayment() === "function") {
+                        afterProceedPayment()();
+                    }
+                    hidePaymentPopup();
+
+                },
                 // Proceed with the request
                  proceedAction = function () {
 
@@ -91,13 +109,19 @@ define("common/confirmation.viewModel",
                  resetDialog = function () {
                      afterCancel(undefined);
                      afterProceed(undefined);
+                     afterCancelPayment(undefined);
+                     afterProceedPayment(undefined);
 
                      afterNo(undefined);
                      isProceedVisible(true);
                      headingText(defaultHeaderText);
+                     headingPaymentText(defaultHeaderText);
                      messageText(defaultConfirmationText);
+                     messagePaymentText(defaultConfirmationText);
                      yesBtnText(defaultButtonTextYes);
                      noBtnText(defaultButtonTextNo);
+                     yesPaymentBtnText(defaultPaymentTextYes);
+                     noPayemetBtnText(defaultPaymentTextNo);
                      IsCancelVisible(defaultIsCancelVisible);
                  },
                 // Show the dialog
@@ -110,6 +134,16 @@ define("common/confirmation.viewModel",
                      // Reset Call Backs
                      resetDialog();
                      view.hide();
+                 },
+                   showPaymentPopup = function () {
+                       isLoading(true);
+                       view.showPayment();
+                   },
+                // Hide the dialog
+                 hidePaymentPopup = function () {
+                     // Reset Call Backs
+                     //resetDialog();
+                     view.hidePayment();
                  },
 
 
@@ -136,7 +170,7 @@ define("common/confirmation.viewModel",
                 showOKpopupforMax3Deal = function () {
                     isLoading(true);
                     view.showOKpopupforMax3Deal();
-                   },
+                },
               showOKpopupfordealheadline = function () {
                   isLoading(true);
                   view.showOKpopupfordealheadline();
@@ -191,6 +225,12 @@ define("common/confirmation.viewModel",
                      }
                      hide();
                  },
+                 cancelPayment = function () {
+                     if (typeof afterCancelPayment() === "function") {
+                         afterCancelPayment()();
+                     }
+                     hidePaymentPopup();
+                 },
                 // Cancel 
                  Warningcancel = function () {
                      if (typeof afterCancel() === "function") {
@@ -219,6 +259,7 @@ define("common/confirmation.viewModel",
                      ko.applyBindings(view.viewModel, view.bindingRootq);
                      ko.applyBindings(view.viewModel, view.bindingRootupgrade);
                      ko.applyBindings(view.viewModel, view.bindingRootaction);
+                     ko.applyBindings(view.viewModel, view.bindingRootPayment);
                      var logo = $('#companyLogo').prop('src');
                      if ((logo == null || logo == "" || logo == undefined) && (UserRoleId == "EndUser_Admin"))
                          showAccountSetingPopup();
@@ -228,46 +269,57 @@ define("common/confirmation.viewModel",
                 return {
                     isLoading: isLoading,
                     headingText: headingText,
+                    headingPaymentText:headingPaymentText,
                     initialize: initialize,
                     show: show,
+                    showPaymentPopup: showPaymentPopup,
                     cancel: cancel,
+                    cancelPayment: cancelPayment,
                     Warningcancel: Warningcancel,
                     proceed: proceed,
+                    proceedPayment: proceedPayment,
                     proceedAction: proceedAction,
                     no: no,
-                    afterProceed: afterProceed,
-                    afterActionProceed: afterActionProceed,
-                    afterCancel: afterCancel,
-                    afterNo: afterNo,
-                    isProceedVisible: isProceedVisible,
-                    resetDialog: resetDialog,
-                    messageText: messageText,
-                    yesBtnText: yesBtnText,
-                    noBtnText: noBtnText,
-                    IsCancelVisible: IsCancelVisible,
-                    hide: hide,
-                    showWarningPopup: showWarningPopup,
-                    showOKpopup: showOKpopup,
-                    hideshowOKpopup: hideshowOKpopup,
-                    hideWarningPopup: hideWarningPopup,
-                    showUpgradePopup: showUpgradePopup,
-                    showActionPopup: showActionPopup,
-                    hideActionPopup: hideActionPopup,
-                    comment: comment,
-                    ActionPopupCancel: ActionPopupCancel,
-                    //errors: errors,
-                    UserRandomNum: UserRandomNum,
-                    showOKpopupforinfo: showOKpopupforinfo,
-                    hidesOKpopupforInfo: hidesOKpopupforInfo,
-                    showOKpopupforChart: showOKpopupforChart,
-                    showOKpopupforFreeCoupon: showOKpopupforFreeCoupon,
-                    showOKpopupfordealheadline: showOKpopupfordealheadline,
-                    showAccountSetingPopup: showAccountSetingPopup,
-                    showOKpopupforMax3Deal: showOKpopupforMax3Deal
-                };
-            })()
-        };
+                afterProceed: afterProceed,
+                afterProceedPayment: afterProceedPayment,
+                afterActionProceed: afterActionProceed,
+                afterCancel: afterCancel,
+                afterCancelPayment: afterCancelPayment,
+                afterNo: afterNo,
+                isProceedVisible: isProceedVisible,
+                resetDialog: resetDialog,
+                messageText: messageText,
+                messagePaymentText:messagePaymentText,
+                yesBtnText: yesBtnText,
+                noBtnText: noBtnText,
+                yesPaymentBtnText: yesPaymentBtnText,
+                noPayemetBtnText: noPayemetBtnText,
+               
+                IsCancelVisible: IsCancelVisible,
+                hide: hide,
+                hidePaymentPopup: hidePaymentPopup,
+                showWarningPopup: showWarningPopup,
+                showOKpopup: showOKpopup,
+                hideshowOKpopup: hideshowOKpopup,
+                hideWarningPopup: hideWarningPopup,
+                showUpgradePopup: showUpgradePopup,
+                showActionPopup: showActionPopup,
+                hideActionPopup: hideActionPopup,
+                comment: comment,
+                ActionPopupCancel: ActionPopupCancel,
+                //errors: errors,
+                UserRandomNum: UserRandomNum,
+                showOKpopupforinfo: showOKpopupforinfo,
+                hidesOKpopupforInfo: hidesOKpopupforInfo,
+                showOKpopupforChart: showOKpopupforChart,
+                showOKpopupforFreeCoupon: showOKpopupforFreeCoupon,
+                showOKpopupfordealheadline: showOKpopupfordealheadline,
+                showAccountSetingPopup: showAccountSetingPopup,
+                showOKpopupforMax3Deal: showOKpopupforMax3Deal
+            };
+    })()
+};
 
-        return ist.confirmation.viewModel;
-    });
+return ist.confirmation.viewModel;
+});
 

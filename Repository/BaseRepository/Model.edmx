@@ -1320,6 +1320,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_Notifications' does not have a prima
           <Property Name="DealCompany" Type="nvarchar(max)" Nullable="false" />
           <Property Name="DealCity" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="ProfileImage" Type="nvarchar" MaxLength="500" />
+          <Property Name="CurrencyCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="CurrencySymbol" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -3179,7 +3181,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
     [vw_Notifications].[DealDescription] AS [DealDescription], 
     [vw_Notifications].[DealCompany] AS [DealCompany], 
     [vw_Notifications].[DealCity] AS [DealCity], 
-    [vw_Notifications].[ProfileImage] AS [ProfileImage]
+    [vw_Notifications].[ProfileImage] AS [ProfileImage], 
+    [vw_Notifications].[CurrencyCode] AS [CurrencyCode], 
+    [vw_Notifications].[CurrencySymbol] AS [CurrencySymbol]
     FROM [dbo].[vw_Notifications] AS [vw_Notifications]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vw_PublisherTransaction" EntityType="Self.vw_PublisherTransaction" store:Type="Views" store:Schema="dbo">
@@ -7932,6 +7936,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="DealCompany" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DealCity" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="ProfileImage" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CurrencyCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CurrencySymbol" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <ComplexType Name="GetRandom3Deal_Result">
           <Property Type="Int64" Name="CouponId" Nullable="false" />
@@ -10176,6 +10182,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="vw_Notifications">
             <EntityTypeMapping TypeName="DomainModels.vw_Notifications">
               <MappingFragment StoreEntitySet="vw_Notifications">
+                <ScalarProperty Name="CurrencySymbol" ColumnName="CurrencySymbol" />
+                <ScalarProperty Name="CurrencyCode" ColumnName="CurrencyCode" />
                 <ScalarProperty Name="ProfileImage" ColumnName="ProfileImage" />
                 <ScalarProperty Name="DealCity" ColumnName="DealCity" />
                 <ScalarProperty Name="DealCompany" ColumnName="DealCompany" />

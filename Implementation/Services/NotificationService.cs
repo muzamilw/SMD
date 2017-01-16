@@ -26,7 +26,7 @@ namespace SMD.Implementation.Services
             
 
 
-             return notificationRepository.GetAllUnReadNotificationsByUserId(UserId, PhoneNumber).ToList();
+             return notificationRepository.GetAllUnReadNotificationsByUserId(UserId, PhoneNumber).OrderByDescending( g=> g.GeneratedOn).ToList();
          }
 
 

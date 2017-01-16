@@ -1,6 +1,6 @@
-﻿
+﻿USE [SMDv2]
 GO
-/****** Object:  StoredProcedure [dbo].[GetUserProfileCompletness]    Script Date: 10/13/2016 9:00:45 AM ******/
+/****** Object:  StoredProcedure [dbo].[GetUserProfileCompletness]    Script Date: 1/13/2017 12:22:46 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -33,7 +33,7 @@ BEGIN
 				where pqa.UserID = @userid
 				group by pqa.PQID, pqa.UserID
 			) pqans
-		  )  / count(*) * 100,0)
+		  )  / isnull( (case when count(*) = 0 then 1 end),1) * 100,0)
 		 from ProfileQuestion pq 
 
 		where pq.CompanyId is null and pq.Status = 3

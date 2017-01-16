@@ -226,7 +226,7 @@
                     <tr>                      
                       <td align="center" style="padding-bottom:40px;" valign="top">                        
                         <p style="color:#FFFFFF; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:center;">
-                            &nbsp;</p>
+                            $++payoutamount++ USD</p>
                       </td>
                     </tr>
                   </table>
@@ -298,10 +298,10 @@
                                              <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
                                                  Hi ++fname++, 
                                                  <br />
-                                                 <br />Your Payout request of&nbsp;$++payoutamount++ USD has been recieved and will be processed.
+                                                 <br />Your Payout request of&nbsp;$++payoutamount++ USD has been recieved and will be processed within 24 hours.
                                           </p>
                                              <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
-                                           Please note that payout requests approval are subject to international monay tranfer and anti money laundering regulations. 
+                                                 Please note that payout requests approval are subject to international monay tranfer and money laundering regulations. 
 
                                                  </p>
                                              <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
@@ -348,7 +348,7 @@
                     <tr>                      
                       <td id="footerContent" style="color:#B7B7B7; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:12px; font-weight:400; line-height:24px; padding-bottom:20px; text-align:center;" valign="top">                        
                         <p style="color:#B7B7B7; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:12px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:center;">
-                          &copy; 2016 Cash4ads.com
+                          &copy; 2017 Clydy Ltd.
                           <sup>
                             &reg;
                           </sup>, All Rights Reserved.<br/>67 Hurworth Avenue  &bull; Slough, Berkshire &bull;  United Kingdom SL3 7FF

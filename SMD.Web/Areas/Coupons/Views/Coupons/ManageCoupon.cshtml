@@ -15,7 +15,7 @@ else
 
     <div class="col-lg-12" style="padding-left:0px;padding-right:18px;">
         <div class="row">
-            <div class="col-lg-12" id="topArea" style="padding-left:7px;padding-right:0px;">
+            <div class="col-lg-12" id="topArea" style="padding-left:7px;padding-right:0px;padding-bottom:17px;">
 
                 <ol class="breadcrumb" style="display:none;">
                     <li><a href="/Dashboard/Index" class="my-navigator">Home</a></li>
@@ -24,7 +24,7 @@ else
                 <div class="clearfix  col-lg-9">
                     <div class="col-lg-9" style="margin-left:-27px !important;">
                         <img class="vid_image pull-left" src="/Images/StartImage.png">
-                        <span class="pull-left " style="color:#fff!important; padding-left: 0px; margin-top:13px; font-size: 23px;" data-bind="text: $root.CouponTitle"></span><span class="pull-left " style="color:#fff!important; padding-left: 2px;padding-top:23px; font-size: 13px;" data-bind="text:$root.CouponsubTitle"></span>
+                        <span class="pull-left " style="color:#fff!important; padding-left: 0px; margin-top:13px; font-size: 23px;" data-bind="text: $root.CouponTitle"></span><span class="pull-left " style="color:#fff!important; padding-left: 2px;padding-top:23px; font-size: 13px; display:none" data-bind="text:$root.CouponsubTitle"></span>
                     </div>
                     <div class="col-lg-3 pull-right" style="margin-right:-3px !important;display:none">
                         <div class="pull-right">
@@ -262,7 +262,7 @@ else
                                             <label for="txtCampaignDisplayName" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Group HeadLine</label>
                                         </div>
                                         <div class="col-lg-7">
-                                            <textarea maxlength="36" style="height:40px; resize:none" name="Coupon Display Name" class="form-control  " id="txtCampaignDisplayName" placeholder="Deal title (36 characters)" data-bind="value: CouponTitle,click: $root.selectJobDescription"></textarea>
+                                            <textarea maxlength="42" style="height:40px; resize:none" name="Coupon Display Name" class="form-control  " id="txtCampaignDisplayName" placeholder="Deal title (42 characters)" data-bind="value: CouponTitle,click: $root.selectJobDescription"></textarea>
                                         </div>
                                         <div style="margin-top:5px;">
                                             <label id=" lbltotalCharacter" style="color: lightgray;margin-top:9px;"> 36 chars</label>

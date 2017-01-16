@@ -1379,6 +1379,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_Notifications' does not have a prima
           <Property Name="DealCompany" Type="nvarchar(max)" Nullable="false" />
           <Property Name="DealCity" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="ProfileImage" Type="nvarchar" MaxLength="500" />
+          <Property Name="CurrencyCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="CurrencySymbol" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -3020,6 +3022,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Parameter Name="fromRoww" Type="int" Mode="In" />
           <Parameter Name="toRow" Type="int" Mode="In" />
           <Parameter Name="adminMode" Type="bit" Mode="In" />
+          <Parameter Name="type" Type="int" Mode="In" />
         </Function>
         <Function Name="SearchCoupons" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="categoryId" Type="int" Mode="In" />
@@ -3226,7 +3229,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
     [vw_Notifications].[DealDescription] AS [DealDescription], 
     [vw_Notifications].[DealCompany] AS [DealCompany], 
     [vw_Notifications].[DealCity] AS [DealCity], 
-    [vw_Notifications].[ProfileImage] AS [ProfileImage]
+    [vw_Notifications].[ProfileImage] AS [ProfileImage], 
+    [vw_Notifications].[CurrencyCode] AS [CurrencyCode], 
+    [vw_Notifications].[CurrencySymbol] AS [CurrencySymbol]
     FROM [dbo].[vw_Notifications] AS [vw_Notifications]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vw_ReferringCompanies" EntityType="Self.vw_ReferringCompanies" store:Type="Views" store:Schema="dbo">
@@ -5775,6 +5780,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <Parameter Name="fromRoww" Mode="In" Type="Int32" />
             <Parameter Name="toRow" Mode="In" Type="Int32" />
             <Parameter Name="adminMode" Mode="In" Type="Boolean" />
+            <Parameter Name="type" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="DamImages" EntityType="SMDDevModel.DamImage" />
           <EntitySet Name="UserCouponViews" EntityType="SMDDevModel.UserCouponView" />
@@ -7928,6 +7934,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="DealCompany" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DealCity" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="ProfileImage" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CurrencyCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CurrencySymbol" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <ComplexType Name="GetRandom3Deal_Result">
           <Property Type="Int64" Name="CouponId" Nullable="false" />
@@ -10172,6 +10180,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="vw_Notifications">
             <EntityTypeMapping TypeName="SMDDevModel.vw_Notifications">
               <MappingFragment StoreEntitySet="vw_Notifications">
+                <ScalarProperty Name="CurrencySymbol" ColumnName="CurrencySymbol" />
+                <ScalarProperty Name="CurrencyCode" ColumnName="CurrencyCode" />
                 <ScalarProperty Name="ProfileImage" ColumnName="ProfileImage" />
                 <ScalarProperty Name="DealCity" ColumnName="DealCity" />
                 <ScalarProperty Name="DealCompany" ColumnName="DealCompany" />

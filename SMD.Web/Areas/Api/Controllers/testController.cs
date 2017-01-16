@@ -60,7 +60,42 @@ namespace SMD.MIS.Areas.Api.Controllers
 
         public string Get(int mode)
         {
-            emailService.SendNewDealsEmail(mode);
+            if ( mode > 0 && mode <=7)
+                emailService.SendNewDealsEmail(mode);
+            else if ( mode == 8)
+            {
+                emailService.SendDealExpiredNotificationToAdvertiser();
+            }
+            else if ( mode == 9 )
+            {
+                emailService.Send3DaysDealExpiredNotificationToAdvertiser();
+            }
+            else if (mode == 10)
+            {
+                emailService.SendNotificationToAdvertiserForAdditional20PercentDiscounton3rdLastDay();
+            }
+            else if (mode == 11)
+            {
+                emailService.SendNotificationToAdvertiserForAdditional25PercentDiscounton2ndLastDay();
+            }
+            else if (mode == 12)
+            {
+                emailService.SendNotificationToAdvertiserForAdditional30PercentDiscountonLastDay();
+            }
+            else if (mode == 13)
+            {
+                emailService.SendNotificationToAdvertiserForAdditional10DollarDiscounton3rdLastDay();
+            }
+            else if (mode == 14)
+            {
+                emailService.SendNotificationToAdvertiserForAdditional20DollarDiscounton2ndLastDay();
+            }
+            else if (mode == 15)
+            {
+                emailService.SendNotificationToAdvertiserForAdditional30DollarDiscountonLastDay();
+            }
+
+            
             return "success";
 
         }
