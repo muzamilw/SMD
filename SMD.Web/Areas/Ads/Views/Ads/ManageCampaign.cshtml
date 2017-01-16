@@ -547,7 +547,7 @@ else
                                 </div>
 
                                 <div id="secondCont">
-                                    <div class="form-group">
+                                    <div class="form-group" style="display:none;">
                                         <div class="col-lg-2"></div>
                                         <div class="col-lg-3">
 
@@ -570,6 +570,26 @@ else
                                             </div>
 
 
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12" style="height:45px;">
+                                        <div style="height:34px;" class="borderbtmline ">
+                                            <div class="col-lg-10 adsubHeading Theme_standard_clr">
+
+                                                <div class="adsubHeading Theme_standard_clr">
+                                                    Broad Targeting.
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="bs-example-tooltips tooltip-float-width tooltip ">
+                                                    <a class="input-group-addon" tabindex="-1" href="#" data-toggle="tooltip" title="" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;    padding: 0px;
+    padding-top: 5px;" data-container="body" data-placement="right" data-content="Add a city" data-original-title="Hooray!">
+                                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                    </a>
+                                                    <i class="fa fa-chevron-up" aria-hidden="true" style="color:#68b359;"></i>
+                                                    <span class="tooltiptext">Tooltip text</span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div id="basic_targeting" data-bind="visible:$root.IsBroadMarketing()==true">
@@ -685,41 +705,7 @@ else
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group margin-btm26">
-                                            <div class="col-lg-2" style="display:none">
-                                                <label for="txtLanguages" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Profession</label>
-                                            </div>
-                                            <div class="col-lg-7" style="display:none">
-                                                <div>
-                                                    <div id="lang_token_cnt">
-                                                        <!-- ko template: { name: 'AdCampaignIndustryTemplate' , foreach: AdCampaignTargetCriterias } -->
-                                                        <!-- /ko -->
-                                                    </div>
-                                                    <div class="clearfix"></div>
-                                                    <div id="land_edt">
-                                                        <div class="coun_in_ex_cnt" style="display:none;">
-                                                            <select id="in_ex_count_opt" class="form-control" data-bind="value: $root.selectedIndustryIncludeExclude">
-                                                                <option value="1">Include</option>
-                                                                <option value="0">Exclude</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="sep-line" style="display:none;">
-                                                        </div>
-                                                        <div class="count_token_opt_prof_cnt">
-                                                            <select id="ddpIndustory" class="form-control" data-bind="options: $root.professions, optionsText: 'IndustryName', optionsValue: 'IndustryId',optionsCaption: '<ALL>', event: { change: addNewProfessionCriteria },enable:$root.isClickRateVisible()!=true"></select>
-                                                            @*<input type="text" data-autocomplete="off" class="" id="searchIndustries" placeholder="Enter an industry" />*@
-                                                        </div>
-                                                        <div class="clearfix">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3" style="  text-align: left;   display:none; padding: 0px !important;
-    font-size: 17px;
-    color: red;">
-                                                <span data-bind="text: $root.professionppc()"></span>
-                                            </div>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                                 <div id="first_cont" data-bind="visible:$root.IsBroadMarketing()==true">
@@ -813,19 +799,50 @@ else
                                         </div>
                                     </div>
                                 </div>
-
-
-
-
-
-                                <div id="thirdCont" data-bind="visible:$root.IsBroadMarketing()==false">
+                                <div class="form-group margin-btm26">
+                                    <div class="col-lg-2">
+                                        <label for="txtLanguages" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Profession</label>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <div>
+                                            <div id="lang_token_cnt">
+                                                <!-- ko template: { name: 'AdCampaignIndustryTemplate' , foreach: AdCampaignTargetCriterias } -->
+                                                <!-- /ko -->
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <div id="land_edt">
+                                                <div class="coun_in_ex_cnt" style="display:none;">
+                                                    <select id="in_ex_count_opt" class="form-control" data-bind="value: $root.selectedIndustryIncludeExclude">
+                                                        <option value="1">Include</option>
+                                                        <option value="0">Exclude</option>
+                                                    </select>
+                                                </div>
+                                                <div class="sep-line" style="display:none;">
+                                                </div>
+                                                <div class="count_token_opt_prof_cnt">
+                                                    <select id="ddpIndustory" class="form-control" data-bind="options: $root.professions, optionsText: 'IndustryName', optionsValue: 'IndustryId',optionsCaption: '<ALL>', event: { change: addNewProfessionCriteria },enable:$root.isClickRateVisible()!=true"></select>
+                                                    @*<input type="text" data-autocomplete="off" class="" id="searchIndustries" placeholder="Enter an industry" />*@
+                                                </div>
+                                                <div class="clearfix">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3" style="  text-align: left;   display:none; padding: 0px !important;
+    font-size: 17px;
+    color: red;">
+                                        <span data-bind="text: $root.professionppc()"></span>
+                                    </div>
+                                </div>
+                                
+                                <div id="thirdCont" >
 
                                     <div class="col-lg-12" style="height:45px;">
                                         <div style="height:34px;" class="borderbtmline ">
-                                            <div class="col-lg-10 adsubHeading Theme_standard_clr">
+                                            <div class="col-lg-12 adsubHeading Theme_standard_clr">
 
                                                 <div class="adsubHeading Theme_standard_clr">
-                                                    Target audience using results from Surveys,Polls and Quiz Questions.
+                                                    Hyper Targeting - Target audience using results from Surveys, Polls and Quiz Questions.
                                                 </div>
                                             </div>
                                             <div class="col-lg-2">
@@ -841,7 +858,7 @@ else
                                         </div>
                                     </div>
 
-                                    <div class="form-group margin-btm26" data-bind="visible:$root.campaignModel().IsUseFilter() == 0">
+                                    <div class="form-group margin-btm26" >
                                         @*<div class="col-lg-2">*@
                                         @*<label for="txtadditionalCrit" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Advanced matching options</label>*@
                                         @*</div>*@
@@ -1063,21 +1080,31 @@ else
                                                     </div>
                                                     <div class="clearfix"></div>
 
-
-                                                    <div data-bind="foreach: AdCampaignTargetLocations">
-                                                        <!-- ko if: $index() ==0 -->
-                                                        <span class="pull-left" data-bind="text: City()"></span><span class="pull-left" data-bind="text:'(' + Radius() + 'Km)'"></span>
-                                                        <!-- /ko -->
-                                                        <!-- ko if: $index() != 0 -->
-                                                        <span class="pull-left" style="margin-left:6px;" data-bind="text: City()"></span><span class="pull-left" data-bind="text:'(' + Radius() + 'Km)'"></span>
-                                                        <!-- /ko -->
-                                                    </div>
                                                     <!-- ko if: AdCampaignTargetCriterias().length  > 0 -->
                                                     <div><span>Hyper targeting</span></div>
                                                     <!-- /ko -->
+                                                    <div data-bind="foreach: AdCampaignTargetLocations">
+                                                        <!-- ko if: $index() ==0 -->
+                                                        <span class="pull-left" data-bind="text: City()"></span><span class="pull-left" data-bind="text:'(' + Radius() + 'Km)'"></span>
+                                                        
+                                                        <!-- /ko -->
+                                                        <!-- ko if: $index() != 0 -->
+                                                        <span class="pull-left" style="margin-left:6px;" data-bind="text: City()"></span><span class="pull-left" data-bind="text:'(' + Radius() + 'Km)'"></span>
+                                                        
+                                                        <!-- /ko -->
+                                                    </div>
+                                                    <div class="clearfix"></div>
                                                     <div data-bind="foreach: AdCampaignTargetCriterias">
+                                                        <!-- ko if:Type()!=4  -->
+                                                        
                                                         <span class="pull-left" data-bind="text: questionString()"></span><span class="pull-left" data-bind="text:' = ' + answerString()"></span>
                                                         <div class="clearfix"></div>
+                                                        <!-- /ko -->
+                                                        <!-- ko if:Type()==4  -->
+
+                                                        <span class="pull-left" data-bind="text: Industry()"></span></span>
+                                                        <div class="clearfix"></div>
+                                                        <!-- /ko -->
 
                                                     </div>
 
@@ -1169,7 +1196,6 @@ else
                                     </div>
                                     <div class="col-lg-12" style="padding-left:24px;">
 
-
                                         <div style="margin-top:0px;min-height:59px;">
                                             <div>
 
@@ -1180,7 +1206,6 @@ else
                                                 <button class="btn  btn-info Theme_standard_clr" id="btnCopyCampaign" data-bind=" click:$root.copyCampaign  " style="display:none;">Create Copy - New Campaign</button>
                                                 <button class="btn  btn-success" id="btnPauseCampaign" data-bind="click:$root.changeStatus(4)" style="width: 229px; margin-top: 10px; display: none;">Pause</button>
                                                 <div data-bind="with: $root.campaignModel">
-
                                                     <button class="btn  btn-success" id="btnResumeCampagin" data-bind="click:$root.submitResumeData,visible:hasChanges()==false&amp;&amp; Status() == 4" style="width: 229px; margin-top: 10px; display: none;">Resume</button>
                                                     <button class="btn  btn-success " id="btnSubmitForApproval23" data-bind="click:$root.submitCampaignData, visible:hasChanges()==true &amp;&amp; Status() == 4" style="width: 229px; margin-top: 10px; display: none;">Submit for Approval</button>
                                                 </div>
@@ -1207,8 +1232,16 @@ else
                             <div class="col-lg-12" style="font-size:12px;">
                                 <div class="row">
 
+                                    <br />
+                                    <div class="col-lg-11">
+
+                                        <div class="pull-left" style="font-size:16px;padding-left: 22px; color:#137abd">Deals Explained</div>
+                                        <div class="pull-right"><img src="/Images/qqtt.png" style="width:30px;" data-toggle="modal" data-target=".model_youtube_link" onclick="openYoutubeVideo();"></div>
+                                        <div class="clearfix"></div>
+                                    </div>
                                     <div class="col-lg-11" style="padding-left:32px;">
-                                        <br />
+                                        
+                                       
                                         <p class="text-justify">
                                             The ad click is charged after app users have watched your video ad AND successfully answered your quiz survey.
                                             <br />
@@ -1230,7 +1263,6 @@ else
                                     <div class="col-lg-1"></div>
                                 </div>
 
-
                             </div>
                         </div>
                         <div data-bind="with: $root.campaignModel">
@@ -1246,9 +1278,6 @@ else
                                 </div>
                             </div>
                         </div>
-
-
-
 
                         <div class="clearfix">
                         </div>
@@ -1650,6 +1679,8 @@ else
 
                                     <div id="secondCont" data-bind="with: $root.campaignModel">
 
+                                     
+
                                         <div id="basic_targeting" data-bind="visible:$root.IsBroadMarketing()==true">
                                             <div class="form-group margin-btm26">
                                                 <div class="col-lg-2">
@@ -1763,41 +1794,7 @@ else
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group margin-btm26">
-                                                <div class="col-lg-2" style="display:none">
-                                                    <label for="txtLanguages" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Profession</label>
-                                                </div>
-                                                <div class="col-lg-7" style="display:none">
-                                                    <div>
-                                                        <div id="lang_token_cnt">
-                                                            <!-- ko template: { name: 'AdCampaignIndustryTemplate' , foreach: AdCampaignTargetCriterias } -->
-                                                            <!-- /ko -->
-                                                        </div>
-                                                        <div class="clearfix"></div>
-                                                        <div id="land_edt">
-                                                            <div class="coun_in_ex_cnt" style="display:none;">
-                                                                <select id="in_ex_count_opt" class="form-control" data-bind="value: $root.selectedIndustryIncludeExclude">
-                                                                    <option value="1">Include</option>
-                                                                    <option value="0">Exclude</option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="sep-line" style="display:none;">
-                                                            </div>
-                                                            <div class="count_token_opt_prof_cnt">
-                                                                <select id="ddpIndustory" class="form-control" data-bind="options: $root.professions, optionsText: 'IndustryName', optionsValue: 'IndustryId',optionsCaption: '<ALL>', event: { change: addNewProfessionCriteria },enable:$root.isClickRateVisible()!=true"></select>
-                                                                @*<input type="text" data-autocomplete="off" class="" id="searchIndustries" placeholder="Enter an industry" />*@
-                                                            </div>
-                                                            <div class="clearfix">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-3" style="  text-align: left;   display:none; padding: 0px !important;
-    font-size: 17px;
-    color: red;">
-                                                    <span data-bind="text: $root.professionppc()"></span>
-                                                </div>
-                                            </div>
+                                            
                                         </div>
                                     </div>
                                     <div id="first_cont" data-bind="visible:$root.IsBroadMarketing()==true">
@@ -1870,7 +1867,41 @@ else
                                                 </div>
                                             </div>
                                         </div>
-
+                                        <div class="form-group margin-btm26">
+                                            <div class="col-lg-2" style="display:none">
+                                                <label for="txtLanguages" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Profession</label>
+                                            </div>
+                                            <div class="col-lg-7" style="display:none">
+                                                <div>
+                                                    <div id="lang_token_cnt">
+                                                        <!-- ko template: { name: 'AdCampaignIndustryTemplate' , foreach: AdCampaignTargetCriterias } -->
+                                                        <!-- /ko -->
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                    <div id="land_edt">
+                                                        <div class="coun_in_ex_cnt" style="display:none;">
+                                                            <select id="in_ex_count_opt" class="form-control" data-bind="value: $root.selectedIndustryIncludeExclude">
+                                                                <option value="1">Include</option>
+                                                                <option value="0">Exclude</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="sep-line" style="display:none;">
+                                                        </div>
+                                                        <div class="count_token_opt_prof_cnt">
+                                                            <select id="ddpIndustory" class="form-control" data-bind="options: $root.professions, optionsText: 'IndustryName', optionsValue: 'IndustryId',optionsCaption: '<ALL>', event: { change: addNewProfessionCriteria },enable:$root.isClickRateVisible()!=true"></select>
+                                                            @*<input type="text" data-autocomplete="off" class="" id="searchIndustries" placeholder="Enter an industry" />*@
+                                                        </div>
+                                                        <div class="clearfix">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3" style="  text-align: left;   display:none; padding: 0px !important;
+    font-size: 17px;
+    color: red;">
+                                                <span data-bind="text: $root.professionppc()"></span>
+                                            </div>
+                                        </div>
                                         <div class="col-lg-12" style="padding:0px;display:none;">
                                             <div style="height:34px;" class="borderbtmline">
                                                 <div class="col-lg-9 ">
@@ -1893,10 +1924,7 @@ else
                                     </div>
 
 
-
-
-
-                                    <div id="thirdCont" data-bind="visible:$root.campaignModel().IsUseFilter()==0">
+                                    <div id="thirdCont" >
 
                                         <div class="col-lg-12" style="height:45px;">
                                             <div style="height:34px;" class="borderbtmline ">
@@ -1919,7 +1947,7 @@ else
                                             </div>
                                         </div>
 
-                                        <div class="form-group margin-btm26" data-bind="visible:$root.campaignModel().IsUseFilter() == 0">
+                                        <div class="form-group margin-btm26">
                                             @*<div class="col-lg-2">*@
                                             @*<label for="txtadditionalCrit" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Advanced matching options</label>*@
                                             @*</div>*@
@@ -2407,7 +2435,7 @@ else
                                             <div class="col-lg-12" style="padding:0px;">
                                                 <div class="adsubHeading Theme_standard_clr">
 
-                                                    <div style="height:48px;" class="borderbtmline ">
+                                                    <div style="height:48px;display:none;" class="borderbtmline" >
 
                                                         <div class="col-lg-2 row header" style="margin-top:20px;">
                                                             <label class="control-label modelHeading">Criteria</label>
@@ -3417,6 +3445,23 @@ else
         <div class="modal-dialog" style=" width: 315px !important;margin-top: 0px !important;">
         </div>
     </div>
+    <div class="modal fade my-modal model_youtube_link" id="phQuizDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style=" width:660px;" =4">
+            <div class="col-lg-12" style=" margin-right: 35px; width:466px;">
+                <div style="position: relative;top:128px;left: 413px;">
+    
+                    <img id="closePop" src="/Content/Images/Close_Button.png" title="Close" width="20" data-dismiss="modal" style="right:14px!important;cursor:pointer" />
+                </div>
+                <div id="youtube_body" style="margin-top:95px;">
+
+                    <pre id="myCodeee" class="preCodeDiv"></pre>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
     <div class="modal fade my-modal model_generateCodes" id="mdGenerateCC" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -3503,13 +3548,13 @@ else
         <td class="col-lg-2">
             <!-- ko if:Type()  == "2" -->
             <p style="margin-top: 5px;margin-left: 12px;">
-                <span data-bind="text: '(Include) ' + questionString() + ' = ' "></span>
+                <span data-bind="text:questionString() + ' = ' "></span>
                 <img data-bind="attr:{src: answerString()}" width="40" />
             </p>
             <!-- /ko -->
             <!-- ko if:Type() !="2" -->
             <p style="margin-top: 5px;margin-left: 12px; font-size:13px;">
-                <span data-bind="text: '(Include) ' + questionString() + ' = ' + answerString() "></span><span style="color:red;display:none;" data-bind="text:' (' + criteriaPrice() + 'p)'"></span>
+                <span data-bind="text:questionString() + ' = ' + answerString() "></span><span style="color:red;display:none;" data-bind="text:' (' + criteriaPrice() + 'p)'"></span>
             </p>
             <!-- /ko -->
         </td>
@@ -3559,13 +3604,13 @@ else
         <td class="col-lg-2">
             <!-- ko if:Type()  == "2" -->
             <p style="margin-top: 5px;margin-left: 12px;">
-                <span data-bind="text: '(Include) ' + questionString() + ' = ' "></span>
+                <span data-bind="text:questionString() + ' = ' "></span>
                 <img data-bind="attr:{src: answerString()}" width="40" />
             </p>
             <!-- /ko -->
             <!-- ko if:Type() !="2" -->
             <p style="margin-top: 5px;margin-left: 12px; font-size:13px;">
-                <span data-bind="text: '(Include) ' + questionString() + ' = ' + answerString() "></span><span style="color:red;display:none;" data-bind="text:' (' + criteriaPrice() + 'p)'"></span>
+                <span data-bind="text: questionString() + ' = ' + answerString() "></span><span style="color:red;display:none;" data-bind="text:' (' + criteriaPrice() + 'p)'"></span>
             </p>
             <!-- /ko -->
         </td>
@@ -3609,12 +3654,12 @@ else
         <!--ko if:IncludeorExclude() == '1'-->
         <td class="col-lg-3">
             <!-- ko if:   Type() != "2" -->
-            <p style="margin-top: 5px;margin-left: 12px;" data-bind="text: '(Include) ' + questionString() + ' = ' + answerString()">
+            <p style="margin-top: 5px;margin-left: 12px;" data-bind="text: questionString() + ' = ' + answerString()">
             </p>
             <!-- /ko -->
             <!-- ko if:   Type()  == "2" -->
             <p style="margin-top: 5px;margin-left: 12px;">
-                <span data-bind="text: '(Include) ' +  questionString() + ' = ' "></span>
+                <span data-bind="text:   questionString() + ' = ' "></span>
                 <img data-bind="attr:{src: answerString()}" width="80" />
             </p>
             <!-- /ko -->
@@ -3668,10 +3713,10 @@ else
         <!--ko if:Type() == 3 -->
         <span class="form-control lang_nr_box areaCity" data-bind="text:Language() " style=" "></span>
         <!--ko if:IncludeorExclude() == '1'-->
-        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Include)' "></span>
+        <span style="display:none;" class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Include)' "></span>
         <!--/ko-->
         <!--ko if:IncludeorExclude() == '0' -->
-        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Exclude)' "></span>
+        <span style="display:none;" class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Exclude)' "></span>
         <!--/ko-->
         <a id="" data-bind="click:$root.onRemoveLanguage" title=" delete" class="lang_delSurvey"> <i class="fa fa-times "></i></a>
         <!--/ko-->
@@ -3683,10 +3728,10 @@ else
         <!--ko if:Type() == 4 -->
         <span class="form-control lang_nr_box areaCity" data-bind="text:Industry() " style=" "></span>
         <!--ko if:IncludeorExclude() == '1'-->
-        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Include)' "></span>
+        <span style="display:none;" class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Include)' "></span>
         <!--/ko-->
         <!--ko if:IncludeorExclude() == '0' -->
-        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Exclude)' "></span>
+        <span style="display:none;" class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Exclude)' "></span>
         <!--/ko-->
         <a id="" data-bind="click:$root.onRemoveIndustry" title=" delete" class="lang_delSurvey"> <i class="fa fa-times "></i></a>
         <!--/ko-->
@@ -3712,12 +3757,12 @@ else
     <!--ko if:IncludeorExclude() == '1'-->
     <li>
         <!-- ko if:   Type() == "1" -->
-        <p class="aud_licontent" data-bind="text: '(Include) ' + questionString() + ' = ' + answerString()">
+        <p class="aud_licontent" data-bind="text: questionString() + ' = ' + answerString()">
         </p>
         <!-- /ko -->
         <!-- ko if:   Type()  == "2" -->
         <p class="aud_licontent">
-            <span data-bind="text: '(Include) ' + questionString() + ' = ' "></span>
+            <span data-bind="text: questionString() + ' = ' "></span>
             <img data-bind="attr:{src: answerString()}" width="80" />
         </p>
         <!-- /ko -->
@@ -3905,12 +3950,10 @@ else
                             </span>
                             <span style="float:left;">
                                 <select class="form-control radius_ddp" data-bind="value: Radius">
-
-                                    <option value="10">10 km</option>
-                                    <option value="25">25 km</option>
-                                    <option value="40">40 km</option>
                                     <option value="200">200 km</option>
-                                    <option value="250">No radius</option>
+                                    <option value="40">40 km</option>
+                                    <option value="25">25 km</option>
+                                    <option value="10">10 km</option>
                                 </select>
                             </span>
                         </span>
@@ -4410,6 +4453,26 @@ else
         $("#pause_btn").css('display','block');
         $("#close_btn").css('display','none');
     }
+    function getId(url) {
+        var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+        var match = url.match(regExp);
+
+        if (match && match[2].length == 11) {
+            return match[2];
+        } else {
+            return 'error';
+        }
+    }
+    function StartVideoDef() {
+
+        var vidUrl = 'https://www.youtube.com/watch?v=Xcsp0486olY';
+        var myId = getId(vidUrl);
+
+        $('#myId').html(myId);
+
+        $('#myCodeee').html('<iframe width="412" height="315" src="//www.youtube.com/embed/' + myId + '" frameborder="0" allowfullscreen></iframe>');
+
+    }
     function NavigateBack()
     {
         //$("#play_panel").css('display','block');
@@ -4432,6 +4495,14 @@ else
     function closevid()
     {
         $('#videoTag_prev').get(0).pause();
+    }
+    function openYoutubeVideo() {
+        //   if ($("#viedoLink").val() != '') {
+        $("#myCodeee").css("display", "block");
+        
+        StartVideoDef();
+        // StartVideo($("#viedoLink").val());
+        // }
     }
 </script>
 <!-- Modal -->
