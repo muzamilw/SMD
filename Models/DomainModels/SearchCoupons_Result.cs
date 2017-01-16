@@ -42,5 +42,8 @@ namespace SMD.Models.DomainModels
         public int UserHasRated { get; set; }
 
         public Nullable<int> DaysLeft { get; set; }
+
+        public string CouponLink { get; set; }
+        public int IsTwoForOneDeal { get; set; }
     }
 }

@@ -1263,6 +1263,10 @@ dealSubscription = function () {
                 hasErrors = true;
                 toastr.error("Please enter Group Title.");
             }
+            if (couponModel().SearchKeywords() == "" || couponModel().SearchKeywords() == undefined) {
+                hasErrors = true;
+                toastr.error("Please enter Search Keywords.");
+            }
 
             if (couponModel().CouponPriceOptions().length == 0 || couponModel().Savings() == undefined) {
                 hasErrors = true;
@@ -2179,7 +2183,11 @@ dealSubscription = function () {
                     hasErrors = false;
                     if (couponModel().CouponTitle() == "" || couponModel().CouponTitle() == undefined) {
                         hasErrors = true;
-                        toastr.error("Please enter Group Title.");
+                        toastr.error("Please Enter Deal Title.");
+                    }
+                    if (couponModel().SearchKeywords() == "" || couponModel().SearchKeywords() == undefined) {
+                        hasErrors = true;
+                        toastr.error("Please enter Search Keywords.");
                     }
 
 

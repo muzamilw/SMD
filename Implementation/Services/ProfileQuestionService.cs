@@ -47,7 +47,9 @@ namespace SMD.Implementation.Services
         private readonly IInvoiceRepository _invoiceRepository;
         private readonly IInvoiceDetailRepository _invoiceDetailRepository;
         private readonly ICompanyRepository _iCompanyRepository;
-        private readonly ICampaignEventHistoryRepository campaignEventHistoryRepository;                          
+        private readonly ICampaignEventHistoryRepository campaignEventHistoryRepository;     
+        
+        private readonly IProfileQuestionUserAnswerRepository       profileQuestionUserAnswerRepository;
         private ApplicationUserManager UserManager
         {
             get { return HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
@@ -62,7 +64,7 @@ namespace SMD.Implementation.Services
         public ProfileQuestionService(IProfileQuestionRepository profileQuestionRepository, ICountryRepository countryRepository,
             ILanguageRepository languageRepository, IProfileQuestionGroupRepository profileQuestionGroupRepository,
             IProfileQuestionAnswerRepository profileQuestionAnswerRepository, IIndustryRepository industoryRepository, IEducationRepository educationRepository, IProfileQuestionTargetCriteriaRepository profileQuestionTargetCriteriaRepository, IProfileQuestionTargetLocationRepository profileQuestionTargetLocationRepository
-            , IEmailManagerService emailManagerService, IStripeService stripeService, IProductRepository productRepository, ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository, ICompanyRepository iCompanyRepository, ICampaignEventHistoryRepository campaignEventHistoryRepository)
+            , IEmailManagerService emailManagerService, IStripeService stripeService, IProductRepository productRepository, ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository, ICompanyRepository iCompanyRepository, ICampaignEventHistoryRepository campaignEventHistoryRepository,IProfileQuestionUserAnswerRepository       profileQuestionUserAnswerRepository)
         {
             _profileQuestionRepository = profileQuestionRepository;
             _countryRepository = countryRepository;
@@ -82,9 +84,11 @@ namespace SMD.Implementation.Services
             _invoiceDetailRepository = invoiceDetailRepository;
             _iCompanyRepository = iCompanyRepository;
              this.campaignEventHistoryRepository = campaignEventHistoryRepository;
+            this.profileQuestionUserAnswerRepository=        profileQuestionUserAnswerRepository;
         }
 
         #endregion
+
         #region Public
 
        
@@ -648,6 +652,64 @@ namespace SMD.Implementation.Services
         {
             return _profileQuestionRepository.getSurvayByPQIDtblAnalytic(ID);
         }
+
+
+        public IEnumerable<GetUserProfileQuestionsList_Result> GetUserProfileQuestionsList(string UserID)
+        {
+            return _profileQuestionRepository.GetUserProfileQuestionsList(UserID);
+        }
+
+
+        public bool SaveUserProfileQuestionResponse(int PQID, string UserID, int CompanyId, int[] ProfileQuestionAnswerIds)
+        {
+
+            if (ProfileQuestionAnswerIds != null && ProfileQuestionAnswerIds.Count() > 0 && ProfileQuestionAnswerIds[0] != -1)
+            {
+                foreach (var ansId in ProfileQuestionAnswerIds)
+                {
+                    var newAnswer = new ProfileQuestionUserAnswer
+                    {
+                        PQID = PQID,
+                        AnswerDateTime = DateTime.Now,
+                        PQAnswerID = ansId,
+                        UserID = UserID,
+                        ResponseType = 3,
+                        CompanyId = CompanyId
+                    };
+                    profileQuestionUserAnswerRepository.Add(newAnswer);
+                }
+            }
+            else
+            {
+                //other events processing if not answerered
+
+                var newAnswer = new ProfileQuestionUserAnswer
+                    {
+                        PQID = PQID,
+                        AnswerDateTime = DateTime.Now,
+                        PQAnswerID = null,
+                        UserID = UserID,
+                        ResponseType = 3,
+                        CompanyId = CompanyId
+                    };
+                profileQuestionUserAnswerRepository.Add(newAnswer);
+            }
+        
+            profileQuestionUserAnswerRepository.SaveChanges();
+
+            var profileQuestion = _profileQuestionRepository.Find(PQID);
+            //rewarding and increasing count happens only when they answer it.
+            //updating answer count
+            profileQuestion.AsnswerCount = (profileQuestion.AsnswerCount.HasValue ? profileQuestion.AsnswerCount.Value : 0) + 1;
+            _profileQuestionRepository.Update(profileQuestion);
+            _profileQuestionRepository.SaveChanges();
+            return true;
+
+        }
+
+
         #endregion
+
+
     }
 }

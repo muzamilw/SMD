@@ -91,5 +91,11 @@ namespace DomainModelProject
         public Nullable<bool> IsShowMap { get; set; }
         public Nullable<bool> IsShowyouTube { get; set; }
         public Nullable<bool> IsShowAboutUs { get; set; }
+        public int UserHasRated { get; set; }
+        public Nullable<int> discount { get; set; }
+        public Nullable<int> discountType { get; set; }
+        public Nullable<int> DealEndingDiscountType { get; set; }
+        public Nullable<long> CouponLink { get; set; }
+        public int IsTwoForOneDeal { get; set; }
     }
 }

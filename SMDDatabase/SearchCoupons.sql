@@ -1,6 +1,6 @@
-﻿USE smddev
+﻿USE [SMDv2]
 GO
-/****** Object:  StoredProcedure [dbo].[SearchCoupons]    Script Date: 1/9/2017 1:09:49 PM ******/
+/****** Object:  StoredProcedure [dbo].[SearchCoupons]    Script Date: 1/16/2017 1:05:13 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -25,7 +25,7 @@ AS
 BEGIN
 
 
-set @distance = 10000000
+set @distance = 50
 
 
 declare @currentDate datetime

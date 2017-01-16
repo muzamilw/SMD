@@ -795,5 +795,14 @@ namespace DomainModelProject
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetRandomGameByUser_Result>("GetRandomGameByUser", existingGameIdParameter, userIdParameter);
         }
+    
+        public virtual ObjectResult<GetUserProfileQuestionsList_Result> GetUserProfileQuestionsList(string userID)
+        {
+            var userIDParameter = userID != null ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUserProfileQuestionsList_Result>("GetUserProfileQuestionsList", userIDParameter);
+        }
     }
 }

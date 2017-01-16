@@ -118,6 +118,12 @@ define("common/companyProfile.viewModel",
                     { Id: 35, Name: 'Transportation' },
                     { Id: 36, Name: 'Utilities' }
                 ]),
+                 countryDd = ko.observableArray([
+                         {
+                             "CountryId": "214",
+                             "CountryName": "United Kingdom"
+                         },
+                 ]),
                 isAddressFilled = ko.computed(function () {
                     if (selectedCompany() != undefined && selectedCompany() != null) {
                         if ((selectedCompany().BillingAddressLine1() == undefined || selectedCompany().BillingAddressLine1() == "") || (selectedCompany().billingCity() == undefined || selectedCompany().billingCity() == "") || (selectedCompany().BillingState() == undefined || selectedCompany().BillingState() == "")) {
@@ -533,7 +539,8 @@ define("common/companyProfile.viewModel",
                     OldPassword: OldPassword,
                     NewPassword: NewPassword,
                     ConfirmPassword: ConfirmPassword,
-                    logoChangeDetector: logoChangeDetector
+                    logoChangeDetector: logoChangeDetector,
+                    countryDd: countryDd
                 };
             })()
         };

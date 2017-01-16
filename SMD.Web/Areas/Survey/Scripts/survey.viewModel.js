@@ -162,7 +162,7 @@ define("survey/survey.viewModel",
                 },
                 openAdvertiserDashboardPollScreen = function (item) {
 
-                   // IsnewSurvey(false);
+                    // IsnewSurvey(false);
                     if (item != undefined ){
                         selectedSQIDAnalytics(item.SQID());
                         if (item.Question() != undefined)
@@ -174,9 +174,9 @@ define("survey/survey.viewModel",
                     }
                     isEditorVisible(true);
                     $("#panelArea,#topArea,#Heading_div").css("display", "none");
-                  //  selectedQuestionCountryList([]); $("#panelArea,#topArea,#Heading_div").css("display", "none");
+                    //  selectedQuestionCountryList([]); $("#panelArea,#topArea,#Heading_div").css("display", "none");
                     gotoScreen(1);
-                   // isTerminateBtnVisible(false);
+                    // isTerminateBtnVisible(false);
                     if (!IsnewSurvey()) {
                         isflageClose(true);
                         getSurvayAnalytics();
@@ -362,11 +362,11 @@ define("survey/survey.viewModel",
                                  
 
                                 }
-                                },
-                                error: function (response) {
+                            },
+                            error: function (response) {
 
-                                }
-                            });
+                            }
+                        });
 
                     },
 
@@ -1554,6 +1554,48 @@ define("survey/survey.viewModel",
 
                  },
                 // submit  survey question for approval
+
+                surveyStripeSubscription = function()
+                {
+                    stripeChargeCustomer.show(function () {
+                        userBaseData().isStripeIntegrated = true;
+
+
+                        if (selectedQuestion().IsUseFilter() == 0) {
+
+
+                            selectedQuestion().SurveyQuestionTargetLocation.removeAll();
+                            selectedQuestion().SurveyQuestionTargetCriteria.removeAll();
+                            selectedQuestion().AgeRangeEnd(80);
+                            selectedQuestion().AgeRangeStart(13);
+                            selectedQuestion().Gender('1');
+                            selectedQuestion().IsUseFilter('0');
+
+                        }
+                        else {
+                            selectedQuestion().IsUseFilter('1')
+                        }
+                        if (selectedQuestion().IsUseFilter() == 0) {
+
+                            toastr.error("No Target Match.");
+                        }
+
+                        else {
+                            if (selectedQuestion().IsUseFilter() == 1) {
+
+                                selectedQuestion().IsUseFilter(true);
+                            }
+                            else {
+                                selectedQuestion().IsUseFilter(false);
+                            }
+                            saveSurveyQuestion(2);
+                        }
+
+
+                    }, 2000, 'Enter your details');
+
+                },
+
                 onSubmitSurveyQuestion = function () {
 
                     if (selectedQuestion().isValid()) {
@@ -1567,53 +1609,64 @@ define("survey/survey.viewModel",
                                 }
                                 else {
                                     if (userBaseData().isStripeIntegrated == false && userBaseData().IsSpecialAccount!=true) {
-                                        stripeChargeCustomer.show(function () {
-                                            userBaseData().isStripeIntegrated = true;
+                                        confirmation.headingPaymentText("Picture Poll - Submission Fee");
+                                        confirmation.messagePaymentText("One Time Charge for this Campaign £9." + "<br\>" + "You will not be charged the submission fee again if you pause or resume this campaign after approval.");
+                                        confirmation.afterProceedPayment(function () {
+                                            surveyStripeSubscription();
+                                        });
+                                        confirmation.yesPaymentBtnText("Continue");
+                                        confirmation.noPayemetBtnText("Back to Draft");
+                                        confirmation.afterCancelPayment(function () {
+                                            SaveAsDraft();
+                                        });
+                                        confirmation.showPaymentPopup();
+                                        //stripeChargeCustomer.show(function () {
+                                        //    userBaseData().isStripeIntegrated = true;
 
 
-                                            if (selectedQuestion().IsUseFilter() == 0) {
+                                        //    if (selectedQuestion().IsUseFilter() == 0) {
 
 
-                                                selectedQuestion().SurveyQuestionTargetLocation.removeAll();
-                                                selectedQuestion().SurveyQuestionTargetCriteria.removeAll();
-                                                selectedQuestion().AgeRangeEnd(80);
-                                                selectedQuestion().AgeRangeStart(13);
-                                                selectedQuestion().Gender('1');
-                                                selectedQuestion().IsUseFilter('0');
+                                        //        selectedQuestion().SurveyQuestionTargetLocation.removeAll();
+                                        //        selectedQuestion().SurveyQuestionTargetCriteria.removeAll();
+                                        //        selectedQuestion().AgeRangeEnd(80);
+                                        //        selectedQuestion().AgeRangeStart(13);
+                                        //        selectedQuestion().Gender('1');
+                                        //        selectedQuestion().IsUseFilter('0');
 
-                                            }
-                                            else {
-                                                selectedQuestion().IsUseFilter('1')
-                                            }
-                                            if (selectedQuestion().IsUseFilter() == 0) {
+                                        //    }
+                                        //    else {
+                                        //        selectedQuestion().IsUseFilter('1')
+                                        //    }
+                                        //    if (selectedQuestion().IsUseFilter() == 0) {
 
-                                                toastr.error("No Target Match.");
-                                            }
+                                        //        toastr.error("No Target Match.");
+                                        //    }
 
-                                            else {
-                                                if (selectedQuestion().IsUseFilter() == 1) {
+                                        //    else {
+                                        //        if (selectedQuestion().IsUseFilter() == 1) {
 
-                                                    selectedQuestion().IsUseFilter(true);
-                                                }
-                                                else {
-                                                    selectedQuestion().IsUseFilter(false);
-                                                }
-                                                confirmation.headingPaymentText("Picture Poll - Submission Fee");
-                                                confirmation.messagePaymentText("One Time Charge for this Campaign £9." + "<br\>" + "You will not be charged the submission fee again if you pause or resume this campaign after approval.");
-                                                confirmation.afterProceedPayment(function () {
-                                                    saveSurveyQuestion(2);
-                                                });
-                                                confirmation.yesPaymentBtnText("Continue");
-                                                confirmation.noPayemetBtnText("Back to Draft");
-                                                confirmation.afterCancelPayment(function () {
-                                                    SaveAsDraft();
-                                                });
-                                                confirmation.showPaymentPopup();
-                                               // saveSurveyQuestion(2);
-                                            }
+                                        //            selectedQuestion().IsUseFilter(true);
+                                        //        }
+                                        //        else {
+                                        //            selectedQuestion().IsUseFilter(false);
+                                        //        }
+                                        //        confirmation.headingPaymentText("Picture Poll - Submission Fee");
+                                        //        confirmation.messagePaymentText("One Time Charge for this Campaign £9." + "<br\>" + "You will not be charged the submission fee again if you pause or resume this campaign after approval.");
+                                        //        confirmation.afterProceedPayment(function () {
+                                        //            saveSurveyQuestion(2);
+                                        //        });
+                                        //        confirmation.yesPaymentBtnText("Continue");
+                                        //        confirmation.noPayemetBtnText("Back to Draft");
+                                        //        confirmation.afterCancelPayment(function () {
+                                        //            SaveAsDraft();
+                                        //        });
+                                        //        confirmation.showPaymentPopup();
+                                        //        // saveSurveyQuestion(2);
+                                        //    }
 
 
-                                        }, 2000, 'Enter your details');
+                                        //}, 2000, 'Enter your details');
                                     } else {
 
                                         if (selectedQuestion().IsUseFilter() == 0) {

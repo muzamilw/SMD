@@ -770,13 +770,13 @@ define("ads/ads.viewModel",
 
                 //if display ad then
                 if (mode == 4) {
-                    campaignModel().CampaignName("New display ad");
+                  //  campaignModel().CampaignName("New display ad");
                     $("#logo_div").css("display", "block");
                     campaignModel().ClickRate("0.08");
                 }
 
                 else {//video ad
-                    campaignModel().CampaignName("New Video Ads");
+                   // campaignModel().CampaignName("New Video Ads");
                     $("#logo_div").css("display", "none");
                     campaignModel().ClickRate("0.16");
                 }
@@ -1081,7 +1081,13 @@ define("ads/ads.viewModel",
                   selectedQuestionCountryList([]);
 
               },
-
+                 addSubscription = function () {
+                     stripeChargeCustomer.show(function () {
+                         UserAndCostDetail().isStripeIntegrated = true;
+                         saveCampaign(2);
+                     }, 2000, 'Enter your details');
+                     
+                 },
 
             submitCampaignData = function () {
                 var messageText;
@@ -1151,8 +1157,8 @@ define("ads/ads.viewModel",
                         else {
                             if (UserAndCostDetail().isStripeIntegrated == false) {
 
-                                stripeChargeCustomer.show(function () {
-                                    UserAndCostDetail().isStripeIntegrated = true;
+                                //stripeChargeCustomer.show(function () {
+                                //    UserAndCostDetail().isStripeIntegrated = true;
 
 
                                     //if (campaignModel().IsUseFilter() == 0) {
@@ -1185,7 +1191,7 @@ define("ads/ads.viewModel",
                                         confirmation.headingPaymentText(headingtext);
                                         confirmation.messagePaymentText(messageText);
                                         confirmation.afterProceedPayment(function () {
-                                            saveCampaign(2);
+                                            addSubscription();
                                         });
                                         confirmation.yesPaymentBtnText("Continue");
                                         confirmation.noPayemetBtnText("Back to Draft");
@@ -1199,7 +1205,7 @@ define("ads/ads.viewModel",
                                     }
 
 
-                                }, 2000, 'Enter your details');
+                                //}, 2000, 'Enter your details');
 
 
                             } else {
@@ -1305,12 +1311,12 @@ define("ads/ads.viewModel",
 
                     if (reachedAudience() == 0 && mode != 1) {
                         errorListNew.push({
-                            name: "You have no audience against the specified criteria please broaden your audience definition.", element: ""
+                            name: "Potential audience content is to low.Please wider your  target audience reach.", element: ""
                         });
                     }
                     if (isClickRateVisible() != true) {
                         if (campaignModel().VerifyQuestion() == "" || campaignModel().VerifyQuestion() == undefined || campaignModel().Answer1() == "" || campaignModel().Answer1() == undefined || campaignModel().Answer2() == "" || campaignModel().Answer2() == undefined) {
-                            errorListNew.push({ name: "Plz add your survey question and minimum two answers", element: "" });
+                            errorListNew.push({ name: "Plz add your Survey question with minimum two choices", element: "" });
                         }
                     }
 

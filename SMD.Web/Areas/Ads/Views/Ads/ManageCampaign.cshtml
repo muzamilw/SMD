@@ -1159,7 +1159,7 @@ else
 
                                             <div class="col-lg-7" style="padding-top:3px;">
                                                 <div class="col-lg-11 paddingright0px">
-                                                    <span class="text-campaign-left fontsize13px" style="margin-top:-4px;">PPCV</span>
+                                                    <span class="text-campaign-left fontsize13px" style="margin-top:-4px;">PPR</span>
                                                 </div>
                                                 <div class="col-lg-1" style="padding-right:0px;text-align:right;">
                                                     <span>£</span>
@@ -1271,8 +1271,8 @@ else
 
                                     <div class="pull-left">
                                         <div class="status_date_span" style="margin-left:0px;margin-top:0px;">
-                                            Last modified <span style="margin-left:3px"></span><span data-bind="dateString:ModifiedDateTime,datePattern: 'DD/MM/YYYY'"></span>
-
+                                            Last modified <span style="margin-left:3px"></span><span data-bind="text: moment(ModifiedDateTime()).format('DD MMM YYYY h:mm a')"></span>
+                                           
                                         </div>
                                     </div>
                                 </div>
