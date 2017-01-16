@@ -264,6 +264,13 @@ namespace SMD.Repository.Repositories
         {
             return db.getSurvayByPQIDtblAnalytic(ID);
         }
+
+
+        public IEnumerable<GetUserProfileQuestionsList_Result> GetUserProfileQuestionsList(string UserID)
+        {
+            return db.GetUserProfileQuestionsList(UserID);
+        }
+
         #endregion
     }
 }

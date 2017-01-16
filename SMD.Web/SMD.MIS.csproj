@@ -416,6 +416,7 @@
     <Compile Include="Areas\Api\Controllers\SuperNovaCampaignController.cs" />
     <Compile Include="Areas\Api\Controllers\SurvayQuestionAnalyticController.cs" />
     <Compile Include="Areas\Api\Controllers\SurveySharingGroupController.cs" />
+    <Compile Include="Areas\Api\Controllers\UserProfileQuestionsController.cs" />
     <Compile Include="Areas\Api\Controllers\UserCouponCategoryClickController.cs" />
     <Compile Include="Areas\Api\Controllers\UserFeedbackController.cs" />
     <Compile Include="Areas\Api\Controllers\UserController.cs" />

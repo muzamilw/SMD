@@ -42,5 +42,7 @@ namespace SMD.Models.DomainModels
 
          public string CurrencyCode { get; set; }
         public string CurrencySymbol { get; set; }
+
+        public string CouponThumbnail { get; set; }
     }
 }

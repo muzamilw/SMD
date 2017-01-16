@@ -155,6 +155,7 @@
     <Compile Include="DomainModels\getDisplayAdsCampaignByCampaignIdAnalytics_Result.cs" />
     <Compile Include="DomainModels\GetLiveCampaignCountOverTime_Result.cs" />
     <Compile Include="DomainModels\GetRandomGameByUser_Result.cs" />
+    <Compile Include="DomainModels\GetUserProfileQuestionsList_Result.cs" />
     <Compile Include="DomainModels\GetUsersCouponsForEmailNotification_Result.cs" />
     <Compile Include="DomainModels\getPayoutVSRevenueOverTime_Result.cs" />
     <Compile Include="DomainModels\getPollsBySQID_Result.cs" />

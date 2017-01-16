@@ -1322,6 +1322,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_Notifications' does not have a prima
           <Property Name="ProfileImage" Type="nvarchar" MaxLength="500" />
           <Property Name="CurrencyCode" Type="nvarchar" MaxLength="50" />
           <Property Name="CurrencySymbol" Type="nvarchar" MaxLength="50" />
+          <Property Name="CouponThumbnail" Type="nvarchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -2910,6 +2911,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
         <Function Name="GetUserProfileCompletness" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserId" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="GetUserProfileQuestionsList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="GetUsersCouponsForEmailNotification" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="mode" Type="int" Mode="In" />
         </Function>
@@ -3183,7 +3187,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
     [vw_Notifications].[DealCity] AS [DealCity], 
     [vw_Notifications].[ProfileImage] AS [ProfileImage], 
     [vw_Notifications].[CurrencyCode] AS [CurrencyCode], 
-    [vw_Notifications].[CurrencySymbol] AS [CurrencySymbol]
+    [vw_Notifications].[CurrencySymbol] AS [CurrencySymbol], 
+    [vw_Notifications].[CouponThumbnail] AS [CouponThumbnail]
     FROM [dbo].[vw_Notifications] AS [vw_Notifications]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vw_PublisherTransaction" EntityType="Self.vw_PublisherTransaction" store:Type="Views" store:Schema="dbo">
@@ -4474,6 +4479,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <End Role="CouponCategory" EntitySet="CouponCategories" />
             <End Role="UserCouponCategoryClick" EntitySet="UserCouponCategoryClicks" />
           </AssociationSet>
+          <FunctionImport Name="GetUserProfileQuestionsList" ReturnType="Collection(DomainModels.GetUserProfileQuestionsList_Result)">
+          <Parameter Name="UserID" Mode="In" Type="String" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -6040,7 +6048,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="String" Name="CouponImage1" Nullable="true" />
           <Property Type="String" Name="LogoUrl" Nullable="true" MaxLength="227" />
           <Property Type="Double" Name="Price" Nullable="false" />
-          <Property Type="Double" Name="Savings" Nullable="false" />
+          <Property Type="Double" Name="Savings" Nullable="true" />
           <Property Type="Double" Name="SwapCost" Nullable="false" />
           <Property Type="Int32" Name="CompanyId" Nullable="true" />
           <Property Type="Int32" Name="CouponActiveMonth" Nullable="true" />
@@ -6054,9 +6062,11 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="Int32" Name="DealsCount" Nullable="true" />
           <Property Type="String" Name="CurrencyCode" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="CurrencySymbol" Nullable="true" MaxLength="50" />
-          <Property Type="Double" Name="AvgRating" Nullable="false" />
+          <Property Type="Double" Name="AvgRating" Nullable="true" />
           <Property Type="Int32" Name="UserHasRated" Nullable="false" />
           <Property Type="Int32" Name="DaysLeft" Nullable="true" />
+          <Property Type="Int32" Name="IsTwoForOneDeal" Nullable="false" />
+          <Property Type="String" Name="CouponLink" Nullable="true" MaxLength="1034" />
         </ComplexType>
         <EntityType Name="UserFavouriteCoupon">
           <Key>
@@ -6526,6 +6536,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="Int32" Name="discount" Nullable="true" />
           <Property Type="Int32" Name="discountType" Nullable="true" />
           <Property Type="Int32" Name="DealEndingDiscountType" Nullable="true" />
+          <Property Type="String" Name="CouponLink" Nullable="true" MaxLength="1034" />
+          <Property Type="Int32" Name="IsTwoForOneDeal" Nullable="false" />
         </ComplexType>
         <EntityType Name="ProfileQuestionTargetCriteria">
           <Key>
@@ -7938,6 +7950,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="ProfileImage" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="CurrencyCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CurrencySymbol" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CouponThumbnail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <ComplexType Name="GetRandom3Deal_Result">
           <Property Type="Int64" Name="CouponId" Nullable="false" />
@@ -8136,6 +8149,25 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="GetUserProfileQuestionsList_Result">
+          <Property Type="Int32" Name="PQID" Nullable="false" />
+          <Property Type="String" Name="Question" Nullable="true" MaxLength="300" />
+          <Property Type="Int32" Name="Type" Nullable="true" />
+          <Property Type="Int32" Name="PQAnswerID1" Nullable="true" />
+          <Property Type="String" Name="PQAnswer1" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="PQAnswerID2" Nullable="true" />
+          <Property Type="String" Name="PQAnswer2" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="PQAnswerID3" Nullable="true" />
+          <Property Type="String" Name="PQAnswer3" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="PQAnswerID4" Nullable="true" />
+          <Property Type="String" Name="PQAnswer4" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="PQAnswerID5" Nullable="true" />
+          <Property Type="String" Name="PQAnswer5" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="PQAnswerID6" Nullable="true" />
+          <Property Type="String" Name="PQAnswer6" Nullable="true" MaxLength="100" />
+          <Property Type="Int64" Name="LastUserAnswerID" Nullable="true" />
+          <Property Type="String" Name="LastUserAnswer" Nullable="true" MaxLength="100" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -8971,6 +9003,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
                 <ScalarProperty Name="AvgRating" ColumnName="AvgRating" />
                 <ScalarProperty Name="UserHasRated" ColumnName="UserHasRated" />
                 <ScalarProperty Name="DaysLeft" ColumnName="DaysLeft" />
+                <ScalarProperty Name="IsTwoForOneDeal" ColumnName="IsTwoForOneDeal" />
+                <ScalarProperty Name="CouponLink" ColumnName="CouponLink" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -9328,6 +9362,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
                 <ScalarProperty Name="discount" ColumnName="discount" />
                 <ScalarProperty Name="discountType" ColumnName="discountType" />
                 <ScalarProperty Name="DealEndingDiscountType" ColumnName="DealEndingDiscountType" />
+                <ScalarProperty Name="CouponLink" ColumnName="CouponLink" />
+                <ScalarProperty Name="IsTwoForOneDeal" ColumnName="IsTwoForOneDeal" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -10182,6 +10218,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="vw_Notifications">
             <EntityTypeMapping TypeName="DomainModels.vw_Notifications">
               <MappingFragment StoreEntitySet="vw_Notifications">
+                <ScalarProperty Name="CouponThumbnail" ColumnName="CouponThumbnail" />
                 <ScalarProperty Name="CurrencySymbol" ColumnName="CurrencySymbol" />
                 <ScalarProperty Name="CurrencyCode" ColumnName="CurrencyCode" />
                 <ScalarProperty Name="ProfileImage" ColumnName="ProfileImage" />
@@ -10363,6 +10400,29 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetUserProfileQuestionsList" FunctionName="SMDModel.Store.GetUserProfileQuestionsList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.GetUserProfileQuestionsList_Result">
+                <ScalarProperty Name="PQID" ColumnName="PQID" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="PQAnswerID1" ColumnName="PQAnswerID1" />
+                <ScalarProperty Name="PQAnswer1" ColumnName="PQAnswer1" />
+                <ScalarProperty Name="PQAnswerID2" ColumnName="PQAnswerID2" />
+                <ScalarProperty Name="PQAnswer2" ColumnName="PQAnswer2" />
+                <ScalarProperty Name="PQAnswerID3" ColumnName="PQAnswerID3" />
+                <ScalarProperty Name="PQAnswer3" ColumnName="PQAnswer3" />
+                <ScalarProperty Name="PQAnswerID4" ColumnName="PQAnswerID4" />
+                <ScalarProperty Name="PQAnswer4" ColumnName="PQAnswer4" />
+                <ScalarProperty Name="PQAnswerID5" ColumnName="PQAnswerID5" />
+                <ScalarProperty Name="PQAnswer5" ColumnName="PQAnswer5" />
+                <ScalarProperty Name="PQAnswerID6" ColumnName="PQAnswerID6" />
+                <ScalarProperty Name="PQAnswer6" ColumnName="PQAnswer6" />
+                <ScalarProperty Name="LastUserAnswerID" ColumnName="LastUserAnswerID" />
+                <ScalarProperty Name="LastUserAnswer" ColumnName="LastUserAnswer" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

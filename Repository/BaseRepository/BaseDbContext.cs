@@ -942,6 +942,14 @@ namespace SMD.Repository.BaseRepository
 
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetRandomGameByUser_Result>("GetRandomGameByUser", varExistingGameId, varUserId);
         }
+
+
+        public ObjectResult<GetUserProfileQuestionsList_Result> GetUserProfileQuestionsList(string UserId)
+        {
+            var varUserId = new ObjectParameter("UserId", UserId);
+
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUserProfileQuestionsList_Result>("GetUserProfileQuestionsList", varUserId);
+        }
         #endregion
     }
 }
