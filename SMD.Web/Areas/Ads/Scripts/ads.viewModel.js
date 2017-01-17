@@ -420,15 +420,15 @@ define("ads/ads.viewModel",
 				                if ((selecteddateRangeAnalytics() == 1 && CampaignTblAnalyticsData()[0].C30_days > 0) || (selecteddateRangeAnalytics() == 2 && CampaignTblAnalyticsData()[0].All_time > 0)) {
 				                    var myLatlng = new google.maps.LatLng(51.509865, -0.118092);
 				                    var myOptions = {
-				                        zoom: 3,
+				                        zoom: 13,
 				                        center: myLatlng
 				                    };
 				                    map = new google.maps.Map(document.getElementById("heatmapId"), myOptions);
 				                    heatmap = new HeatmapOverlay(map,
                                       {
-                                          "radius": 2,
+                                          "radius": 15,
                                           "maxOpacity": 1,
-                                          "scaleRadius": true,
+                                         // "scaleRadius": true,
                                           "useLocalExtrema": true,
                                           latField: 'lat',
                                           lngField: 'lng',

@@ -281,25 +281,25 @@
             </div>
             <br />
             </div>
-            <div class="analyticsBox">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <label class="analyticH2"> Impressions by city</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class=" margin10">
-                            <div style="height:250px;" id="heatmapId">
-                                @*<img style="height:250px;" src="~/Content/Images/HeatMap.jpg" />*@
-
-
-                            </div>
-                        </div>
-                    </div>
-
+        <div class="analyticsBox" data-bind="visible:$root.hasImpression ">
+            <div class="row">
+                <div class="col-lg-12">
+                    <label class="analyticH2"> Impressions by city</label>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class=" margin10">
+                        <div style="height:500px;" id="heatmapId">
+                            @*<img style="height:250px;" src="~/Content/Images/HeatMap.jpg" />*@
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
        
 
         <div class="clearfix">
