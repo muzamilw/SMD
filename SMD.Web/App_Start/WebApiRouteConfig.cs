@@ -353,6 +353,16 @@ namespace SMD.MIS
                 new { controller = "UserCouponCategoryClick" },
                 null,
                 null);
+
+             config.Routes.MapHttpRoute(
+                "UserProfileQuestions",
+                "UserProfileQuestions/{AuthenticationToken}/",
+                new { controller = "UserProfileQuestions" },
+                null,
+                null);
+
+
+            
             
 
 
