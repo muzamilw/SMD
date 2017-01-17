@@ -1553,12 +1553,12 @@ define("survey/survey.viewModel",
                      }
 
                  },
-                // submit  survey question for approval
+                // submit  survey question for approval  dont remove comment lines in this method we will use it ater esting
 
                 surveyStripeSubscription = function()
                 {
-                    stripeChargeCustomer.show(function () {
-                        userBaseData().isStripeIntegrated = true;
+                    //stripeChargeCustomer.show(function () {
+                    //    userBaseData().isStripeIntegrated = true;
 
 
                         if (selectedQuestion().IsUseFilter() == 0) {
@@ -1592,7 +1592,7 @@ define("survey/survey.viewModel",
                         }
 
 
-                    }, 2000, 'Enter your details');
+                    //}, 2000, 'Enter your details');
 
                 },
 
@@ -1609,10 +1609,10 @@ define("survey/survey.viewModel",
                                 }
                                 else {
                                     if (userBaseData().isStripeIntegrated == false && userBaseData().IsSpecialAccount!=true) {
-                                        confirmation.headingPaymentText("Picture Poll - Submission Fee");
-                                        confirmation.messagePaymentText("One Time Charge for this Campaign £9." + "<br\>" + "You will not be charged the submission fee again if you pause or resume this campaign after approval.");
+                                        confirmation.headingPaymentText("Picture Poll - Submission Fee - FREE");
+                                        confirmation.messagePaymentText("One Time Charge for this Campaign " + "£9.".strike() + " FREE for BETA" + "<br\>" + "You will not be charged the submission fee again if you pause or resume this campaign after approval.");
                                         confirmation.afterProceedPayment(function () {
-                                            surveyStripeSubscription();
+                                             surveyStripeSubscription();
                                         });
                                         confirmation.yesPaymentBtnText("Continue");
                                         confirmation.noPayemetBtnText("Back to Draft");

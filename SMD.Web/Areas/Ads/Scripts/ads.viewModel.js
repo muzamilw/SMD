@@ -1093,12 +1093,12 @@ define("ads/ads.viewModel",
                 var messageText;
                 var headingtext;
                 if (CurrentMode() == 1) {
-                    messageText = "One Time Charge for this Campaign £19." + "<br\>" + "You will not be charged the submission fee again if you pause, resume or tweak this campaign after approval.";
-                    headingtext = "Video Ad - Submission Fee";
+                    messageText = "One Time Charge for this Campaign" + " £19.".strike() + " FREE for BETA" + "<br\>" + "<br\>" + "You will not be charged the submission fee again if you pause, resume or tweak this campaign after approval.";
+                    headingtext = "Video Ad - Submission Fee - FREE";
                 }
                 else {
-                    messageText = "One Time Charge for this Campaign £9." + "<br\>" + "You will not be charged the submission fee again if you pause, resume or tweak this campaign after approval.";
-                    headingtext = "Display Ad - Submission Fee";
+                    messageText = "One Time Charge for this Campaign" + " £19.".strike() + " FREE for BETA" + "<br\>" + "You will not be charged the submission fee again if you pause, resume or tweak this campaign after approval.";
+                    headingtext = "Display Ad - Submission Fee - FREE";
                 }
                 //if (campaignModel().isValid()) {
                 if (ValidateCampaign(2)) {
@@ -1191,7 +1191,8 @@ define("ads/ads.viewModel",
                                         confirmation.headingPaymentText(headingtext);
                                         confirmation.messagePaymentText(messageText);
                                         confirmation.afterProceedPayment(function () {
-                                            addSubscription();
+                                            saveCampaign(2);
+                                            //addSubscription();
                                         });
                                         confirmation.yesPaymentBtnText("Continue");
                                         confirmation.noPayemetBtnText("Back to Draft");
@@ -2431,9 +2432,9 @@ define("ads/ads.viewModel",
 
                                     });
 
-                                   // var ff = campaignModel().AdCampaignTargetCriterias();
+                                    var ff = campaignModel().AdCampaignTargetCriterias();
                                     //DefaultTextBtns.push({ id: campaignModel().BuyItButtonLabel(), name: campaignModel().BuyItButtonLabel() });
-                                   // campaignModel().reset();
+                                    campaignModel().reset();
 
 
                                     view.initializeTypeahead();

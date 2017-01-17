@@ -1649,6 +1649,9 @@
     <Content Include="Images\Cash4ads_logo.png" />
     <Content Include="Images\Cash4Ads_White_pink.png" />
     <Content Include="Images\Cash4Ads_White_text.png" />
+    <Content Include="Images\clidyLogo.png" />
+    <Content Include="Images\clidy_circle_logo.png" />
+    <Content Include="Images\clodyInvoice.png" />
     <Content Include="Images\close2-128.png" />
     <Content Include="Images\commute.jpg" />
     <Content Include="Images\crowdcentz_logo.png" />

@@ -931,11 +931,13 @@ namespace SMD.Implementation.Services
                     dbCo.ApprovalDateTime = DateTime.Now;
                     dbCo.ApprovedBy = couponRepository.LoggedInUserIdentity;
                     dbCo.Status = (Int32)AdCampaignStatus.Live;
-                    if ((dbCo.IsPaymentCollected != true && (freeCount > 1 || dbCo.CouponListingMode == 2)) || (dbCo.IsPaymentCollected != true && (dbCo.CouponListingMode==1 && dbCo.CouponPriceOptions.Count>1)))
-                    {
-                        dbCo.IsPaymentCollected = true;
-                        dbCo.PaymentDate = DateTime.Now;
-                    }
+
+                    // just comment for pilot dent remove this
+                    //if ((dbCo.IsPaymentCollected != true && (freeCount > 1 || dbCo.CouponListingMode == 2)) || (dbCo.IsPaymentCollected != true && (dbCo.CouponListingMode==1 && dbCo.CouponPriceOptions.Count>1)))
+                    //{
+                    //    dbCo.IsPaymentCollected = true;
+                    //    dbCo.PaymentDate = DateTime.Now;
+                    //}
                     // Stripe payment + Invoice Generation
                     // Muzi bhai said we will see it on latter stage 
                     //todo pilot: unCommenting Stripe payment code on Ads approval
@@ -943,7 +945,7 @@ namespace SMD.Implementation.Services
                     {
                         if (isFlag != true)
                         {
-                            respMesg = CreateStripeSubscription(dbCo, userData.Company.StripeCustomerId, freeCount);
+                            //respMesg = CreateStripeSubscription(dbCo, userData.Company.StripeCustomerId, freeCount);
                             ////if (respMesg.Contains("Failed"))
                             ////{
                             ////    return respMesg;
