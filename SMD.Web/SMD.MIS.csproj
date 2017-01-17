@@ -634,6 +634,13 @@
     <Compile Include="Emails\Deal_Expired.aspx.designer.cs">
       <DependentUpon>Deal_Expired.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Emails\DailyuserCategoryClickDeals.aspx.cs">
+      <DependentUpon>DailyuserCategoryClickDeals.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\DailyuserCategoryClickDeals.aspx.designer.cs">
+      <DependentUpon>DailyuserCategoryClickDeals.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Emails\SendNotificationToAdvertiserForAdditional20DollarDiscounton2ndLastDay.aspx.cs">
       <DependentUpon>SendNotificationToAdvertiserForAdditional20DollarDiscounton2ndLastDay.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1570,6 +1577,7 @@
     <Content Include="Content\themes\Centaurus\js\wizard.js" />
     <Content Include="Content\themes\Centaurus\js\xcharts.js" />
     <Content Include="Emails\Deal_Expired.aspx" />
+    <Content Include="Emails\DailyuserCategoryClickDeals.aspx" />
     <Content Include="Emails\SendNotificationToAdvertiserForAdditional20DollarDiscounton2ndLastDay.aspx" />
     <Content Include="Emails\SendNotificationToAdvertiserForAdditional30DollarDiscountonLastDay.aspx" />
     <Content Include="Emails\SendNotificationToAdvertiserForAdditional10DollarDiscounton3rdLastDay.aspx" />

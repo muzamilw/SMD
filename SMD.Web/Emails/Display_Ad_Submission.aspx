@@ -299,17 +299,33 @@
                                         </td>
                                         <td align="left" style="padding-bottom:40px;" valign="top">                                          
                                           <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
-                                           Dear Approvers,
+                                           Attention Approvers,
                                           </p>
                                           
                                                <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
-                                           There is a new Display Ad Campaign available for Approval. Get to work</p><br />
+                                           New Display Ad for Approval Required.</p><br />
                                                    
 
 
                                           
                                         </td>
                                       </tr>
+                                        <tr>
+                                            <td align="center" style="padding-right:20px; padding-bottom:10px;" valign="top" colspan="2">
+                                                <table align="center" bgcolor="#F2F2F2" border="0" cellpadding="0" cellspacing="0" style='width:100%;'>
+                      
+                            <tr><td align="center" colspan='2' style="padding-top:20px"><img style='text-align:center;padding-top:20px;max-width:560px' src='++campaignbannerimage++'/></td>
+                                
+                            </tr>
+                            <tr><td colspan='2' align="center" style='text-align:center;padding-bottom:2px;'><p style="style=color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;"><b>++campaignname++</b></p></td></tr>
+                            
+</table>
+                        
+
+
+
+                                            </td>
+                                        </tr>
                                          <tr>                                        
                                         <td align="center" style="padding-right:20px; padding-bottom:60px;" valign="top" colspan="2">
 
