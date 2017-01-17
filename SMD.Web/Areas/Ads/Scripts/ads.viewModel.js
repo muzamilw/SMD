@@ -772,13 +772,13 @@ define("ads/ads.viewModel",
                 if (mode == 4) {
                   //  campaignModel().CampaignName("New display ad");
                     $("#logo_div").css("display", "block");
-                    campaignModel().ClickRate("0.08");
+                    campaignModel().ClickRate("0.04");
                 }
 
                 else {//video ad
                    // campaignModel().CampaignName("New Video Ads");
                     $("#logo_div").css("display", "none");
-                    campaignModel().ClickRate("0.16");
+                    campaignModel().ClickRate("0.08");
                 }
                 campaignModel().reset();
                 $("#btnPauseCampaign").css("display", "none");
@@ -1282,12 +1282,12 @@ define("ads/ads.viewModel",
                         errorListNew.push({ name: "Please enter ad Title.", element: "" });
 
                     }
-                    if (campaignModel().Type() == "4") {
-                        if (campaignModel().LogoUrl() == "" || campaignModel().LogoUrl() == undefined || campaignModel().LogoUrl() == "/images/standardplaceholder.png") {
-                            noErrors = false;
-                            toastr.error("Please upload Banner.");
-                        }
-                    }
+                    //if (campaignModel().Type() == "4") {
+                    //    if (campaignModel().LogoUrl() == "" || campaignModel().LogoUrl() == undefined || campaignModel().LogoUrl() == "/images/standardplaceholder.png") {
+                    //        noErrors = false;
+                    //        toastr.error("Please upload Banner.");
+                    //    }
+                    //}
 
                     if (campaignModel().ClickRate() == undefined) {
                         campaignModel().ClickRate(0);
@@ -1297,12 +1297,12 @@ define("ads/ads.viewModel",
                     if (mode == 4)
                         minclickrate = 0.08;
                     else
-                        minclickrate = 0.16;
+                        minclickrate = 0.04;
 
 
 
                     if (campaignModel().ClickRate() < minclickrate && isClickRateVisible() != true) {
-                        errorListNew.push({ name: "Ad Click should be greater than $ " + minclickrate + " USD", element: "" });
+                        errorListNew.push({ name: "Ad Click should be greater than £" + minclickrate + " GBP", element: "" });
                     }
 
                     if ((parseInt(campaignModel().MaxBudget()) < parseInt(campaignModel().ClickRate()))) {
@@ -2317,7 +2317,7 @@ define("ads/ads.viewModel",
 
                                     var clonedVersofCariterias = data.Campaigns[0].AdCampaignTargetCriterias.clone();
 
-
+                                    
                                     _.each(data.Campaigns[0].CouponCodes, function (cc) {
 
                                         allCouponCodeItems.push(cc.Code);
@@ -2431,9 +2431,9 @@ define("ads/ads.viewModel",
 
                                     });
 
-                                    var ff = campaignModel().AdCampaignTargetCriterias();
+                                   // var ff = campaignModel().AdCampaignTargetCriterias();
                                     //DefaultTextBtns.push({ id: campaignModel().BuyItButtonLabel(), name: campaignModel().BuyItButtonLabel() });
-                                    campaignModel().reset();
+                                   // campaignModel().reset();
 
 
                                     view.initializeTypeahead();
