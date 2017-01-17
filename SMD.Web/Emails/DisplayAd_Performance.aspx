@@ -346,6 +346,22 @@ Open Display Ad Campaign from your dashboard  to view Charts for full analytics.
                                           </p>
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td align="center" style="padding-right:20px; padding-bottom:10px;" valign="top" colspan="2">
+                                                <table align="center" bgcolor="#F2F2F2" border="0" cellpadding="0" cellspacing="0" style='width:100%;'>
+                      
+                            <tr><td align="center" colspan='2' style="padding-top:20px"><img style='text-align:center;padding-top:20px;max-width:560px' src='++campaignbannerimage++'/></td>
+                                
+                            </tr>
+                            <tr><td colspan='2' align="center" style='text-align:center;padding-bottom:2px;'><p style="style=color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;"><b>++campaignname++</b></p></td></tr>
+                            
+</table>
+                        
+
+
+
+                                            </td>
+                                        </tr>
                                          <tr>                                        
                                         <td align="center" style="padding-right:20px; padding-bottom:60px;" valign="top" colspan="2">
 

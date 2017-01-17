@@ -166,6 +166,10 @@ namespace SMD.Implementation.Services
 
         public string CampaignBannerImage { get; set; }
 
+        public string SurveyLeftImage { get; set; }
+
+        public string SurveyRightImage { get; set; }
+
         public string DealNoOfDays { get; set; }
 
         public string UserDealsHTML { get; set; }
@@ -253,6 +257,9 @@ namespace SMD.Implementation.Services
             MBody = MBody.Replace("++campaignvideopath++", CampaignVideoPath);
             MBody = MBody.Replace("++campaignvideoimage++", CampaignVideoImage);
             MBody = MBody.Replace("++campaignbannerimage++", CampaignBannerImage);
+            MBody = MBody.Replace("++surveyleftimage++", SurveyLeftImage);
+            MBody = MBody.Replace("++surveyrightimage++", SurveyRightImage);
+
             MBody = MBody.Replace("++dealnoofdays++", DealNoOfDays);
             MBody = MBody.Replace("++userdealshtml++", UserDealsHTML);
 
@@ -439,6 +446,9 @@ namespace SMD.Implementation.Services
             MBody = MBody.Replace("++paymentfailedattempt++", PaymentFailedAttempt);
             MBody = MBody.Replace("++paymentfailedreason++", PaymentFailedReason);
             MBody = MBody.Replace("++nextpaymentattempt++", NextPaymentAttempt);
+
+            MBody = MBody.Replace("++surveyleftimage++", SurveyLeftImage);
+            MBody = MBody.Replace("++surveyrightimage++", SurveyRightImage);
 
 
             MBody = MBody.Replace("++reviewer++", Reviewer);
@@ -1155,7 +1165,8 @@ namespace SMD.Implementation.Services
                 MMailto.Add(oUser.Email);
                 Mid = (int)EmailTypes.PicturePollCampaignApproved;
                 Muser = oUser.FullName;
-
+                SurveyLeftImage = LeftImage;
+                SurveyRightImage = RightImage;
                 CampaignName = campaignName;
 
                 SendEmailNotAysnc();
@@ -1178,7 +1189,8 @@ namespace SMD.Implementation.Services
                 MMailto.AddRange(emails.Split(','));
                 Mid = (int)EmailTypes.PicturePollCampaignSubmitted;
                 Muser = oUser.FullName;
-
+                SurveyLeftImage = LeftImage;
+                SurveyRightImage = RightImage;
                 CampaignName = campaignName;
 
                 SendEmailNotAysnc();
@@ -1201,7 +1213,8 @@ namespace SMD.Implementation.Services
                 MMailto.Add(oUser.Email);
                 Mid = (int)EmailTypes.PicturePollCampaignRejected;
                 Muser = oUser.FullName;
-
+                SurveyLeftImage = LeftImage;
+                SurveyRightImage = RightImage;
                 CampaignName = campaignName;
                 RejectionReason = RReason;
 
