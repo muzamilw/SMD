@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMD.Repository", "Repository\SMD.Repository.csproj", "{852BDC39-3388-4CB1-A959-F3BD06E9DF92}"
 EndProject
@@ -33,6 +33,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrowdCentz", "CrowdCentz\CrowdCentz.csproj", "{87D005DE-8C0B-41AF-828B-9A2FF223E2AB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoadTester", "LoadTester\LoadTester.csproj", "{C42186C5-12DB-4E62-BCF3-AD55166B7CAB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMD.ServiceCaller", "SMD.ServiceCaller\SMD.ServiceCaller.csproj", "{5A9A3808-0D4A-4435-B9D6-D1BA14C5D6CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -116,6 +118,12 @@ Global
 		{C42186C5-12DB-4E62-BCF3-AD55166B7CAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C42186C5-12DB-4E62-BCF3-AD55166B7CAB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C42186C5-12DB-4E62-BCF3-AD55166B7CAB}.Release|x86.ActiveCfg = Release|Any CPU
+		{5A9A3808-0D4A-4435-B9D6-D1BA14C5D6CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A9A3808-0D4A-4435-B9D6-D1BA14C5D6CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A9A3808-0D4A-4435-B9D6-D1BA14C5D6CA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5A9A3808-0D4A-4435-B9D6-D1BA14C5D6CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A9A3808-0D4A-4435-B9D6-D1BA14C5D6CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A9A3808-0D4A-4435-B9D6-D1BA14C5D6CA}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

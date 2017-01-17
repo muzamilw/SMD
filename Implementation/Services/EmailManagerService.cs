@@ -243,6 +243,7 @@ namespace SMD.Implementation.Services
             smailsubject = smailsubject.Replace("++campaignname++", CampaignName);
 
 
+            MBody = MBody.Replace("++subject++", smailsubject);
             MBody = MBody.Replace("++username++", Muser);
             MBody = MBody.Replace("++firstname++", Fname);
             MBody = MBody.Replace("++lastname++", Lname);
@@ -359,7 +360,7 @@ namespace SMD.Implementation.Services
             }
         }
 
-        private void SendEmailNotAysnc()
+        private void SendEmailNotAysnc(string overrideSubject = "")
         {
             // ReSharper disable SuggestUseVarKeywordEvident
             MailMessage oMailBody = new MailMessage();
@@ -387,6 +388,9 @@ namespace SMD.Implementation.Services
                 MBody = email.Body;
             }
 
+            if (overrideSubject != "")
+                smailsubject = overrideSubject;
+
             smailsubject = smailsubject.Replace("++username++", Muser);
             smailsubject = smailsubject.Replace("++firstname++", Fname);
             smailsubject = smailsubject.Replace("++lastname++", Lname);
@@ -395,6 +399,7 @@ namespace SMD.Implementation.Services
             smailsubject = smailsubject.Replace("++inviter++", FullNameInviteUser);
             smailsubject = smailsubject.Replace("++campaignname++", CampaignName);
 
+            MBody = MBody.Replace("++subject++", smailsubject);
             MBody = MBody.Replace("++username++", Muser);
             MBody = MBody.Replace("++firstname++", Fname);
             MBody = MBody.Replace("++lastname++", Lname);
@@ -1590,12 +1595,12 @@ namespace SMD.Implementation.Services
                                 if (campaign.LeftPicResponseCount > campaign.RightPicResponseCount)
                                 {
                                     winnerpoll = "One";
-                                    winnerpollperc = ((campaign.LeftPicResponseCount - campaign.RightPicResponseCount) / campaign.RightPicResponseCount * 100).ToString() + "%";
+                                    winnerpollperc = ((campaign.LeftPicResponseCount - campaign.RightPicResponseCount) / (campaign.RightPicResponseCount == 0 ? 1 : campaign.RightPicResponseCount) * 100).ToString() + "%";
                                 }
                                 else
                                 {
                                     winnerpoll = "Two";
-                                    winnerpollperc = ((campaign.RightPicResponseCount - campaign.LeftPicResponseCount) / campaign.LeftPicResponseCount * 100).ToString() + "%";
+                                    winnerpollperc = ((campaign.RightPicResponseCount - campaign.LeftPicResponseCount) / (campaign.LeftPicResponseCount == 0 ? 1 : campaign.LeftPicResponseCount) * 100).ToString() + "%";
                                 }
 
                                 pollanswercount = (campaign.LeftPicResponseCount + campaign.RightPicResponseCount).ToString();
@@ -1644,15 +1649,16 @@ namespace SMD.Implementation.Services
 
                         foreach (var item in user)
                         {
-                            userDeals += "<tr><td colspan='2' align=\"center\" style=\"padding-top:20px\"><img style='text-align:center;padding-top:20px;max-width:560px' src='" + item.couponimage1 + "'/></td></tr>";
-                            userDeals += "<tr><td colspan='2' align=\"left\" style='text-align:left;padding-left:64px;padding-bottom:2px;'><p style=\"style=color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:24px; font-weight:800; line-height:24px; padding-top:0; margin-top:0; text-align:left;\">" + item.CouponTitle + " is now  <span style='color:red'>" + item.CurrencySymbol + "" + item.SavingsNew + "</span></p></td></tr>";
-                            userDeals += "<tr><td style='padding-left:64px;padding-bottom:60px'><p style=\"style=color:red; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:24px; font-weight:800; line-height:24px; padding-top:0; margin-top:0; text-align:left;\">was " + item.CurrencySymbol + "" + item.price + "</p></td><td align='right' style='padding-right:60px'><a href='http://deals.cash4ads.com/deal/" + item.CouponId + "' style=\"background-color:#6DC6DD; border-collapse:separate; border-top:20px solid #6DC6DD; border-right:40px solid #6DC6DD; border-bottom:20px solid #6DC6DD; border-left:40px solid #6DC6DD; border-radius:3px; color:#FFFFFF; display:inline-block; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:600; letter-spacing:.3px; text-decoration:none;\" target='_blank'>VIEW DEAL</a></td></tr>";
+                            userDeals += "<tr><td colspan='2' align=\"center\" style=\"padding-top:20px\"><a style='border:0px' href='http://deals.cash4ads.com/deal?id=" + item.CouponId + "'><img style='text-align:center;padding-top:20px;max-width:560px' src='" + item.couponimage1 + "'/></a></td></tr>";
+                            userDeals += "<tr><td colspan='2' align=\"left\" style='text-align:left;padding-left:64px;padding-bottom:2px;padding-top:5px;'><p style=\"style=color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:24px; font-weight:800; line-height:24px; padding-top:0; margin-top:0; text-align:left;\">" + item.CouponTitle + " <br>is now  <span style='color:red'>" + item.CurrencySymbol + "" + item.SavingsNew + "</span></p></td></tr>";
+                            userDeals += "<tr><td style='padding-left:64px;padding-bottom:60px'><p style=\"color:red; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:18px; font-weight:normal; line-height:24px; padding-top:0; margin-top:0; text-align:left;\">was <strike>" + item.CurrencySymbol + "" + item.price + "</strike></p></td><td align='right' style='padding-right:60px'><a href='http://deals.cash4ads.com/deal?id=" + item.CouponId + "' style=\"background-color:#6DC6DD; border-collapse:separate; border-top:20px solid #6DC6DD; border-right:40px solid #6DC6DD; border-bottom:20px solid #6DC6DD; border-left:40px solid #6DC6DD; border-radius:3px; color:#FFFFFF; display:inline-block; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:600; letter-spacing:.3px; text-decoration:none;\" target='_blank'>VIEW DEAL</a></td></tr>";
                         }
 
 
                         userDeals += "</table>";
 
                         MMailto.Clear();
+                        string overRiddensubject = "";
 
                         MMailto.Add(user.Key.Email);
                         if (mode == 1)
@@ -1669,13 +1675,38 @@ namespace SMD.Implementation.Services
                             Mid = (int)EmailTypes.Last2DaysDollarDiscountCouponsNearMe;
                         else if (mode == 7)
                             Mid = (int)EmailTypes.LastDayDollarDiscountCouponsNearMe;
+                        else if (mode == 16)
+                        {
+                            Mid = (int)EmailTypes.UserCategoryClickWeekdaysEmail;
+                            overRiddensubject = "Dinner for Two ❤";
+                        }
+                        else if (mode == 17)
+                        {
+                            Mid = (int)EmailTypes.UserCategoryClickWeekdaysEmail;
+                            overRiddensubject = "Adventure Weekend Offers 🚁 ";
+                        }
+                        else if (mode == 18)
+                        {
+                            Mid = (int)EmailTypes.UserCategoryClickWeekdaysEmail;
+                            overRiddensubject = "Motoring Savings 🚙 ";
+                        }
+                        else if (mode == 19)
+                        {
+                            Mid = (int)EmailTypes.UserCategoryClickWeekdaysEmail;
+                            overRiddensubject = "Great Getaways ✈ ";
+                        }
+                        else if (mode == 20)
+                        {
+                            Mid = (int)EmailTypes.UserCategoryClickWeekdaysEmail;
+                            overRiddensubject = "Keep Fit Offers ♨  ";
+                        }
 
 
                         Muser = user.Key.FullName;
                         UserDealsHTML = userDeals;
 
 
-                        SendEmailNotAysnc();
+                        SendEmailNotAysnc(overRiddensubject);
 
                     }
                     catch (Exception e)
