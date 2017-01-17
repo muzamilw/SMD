@@ -1261,11 +1261,14 @@ namespace SMD.Implementation.Services
                     dbAd.Status = (Int32)AdCampaignStatus.Live;
                     dbAd.StartDateTime = DateTime.Now;
                     dbAd.EndDateTime = DateTime.Now.AddDays(30);
-                    if (dbAd.IsPaymentCollected != true && userData.Company.IsSpecialAccount != true)
-                    {
-                        dbAd.IsPaymentCollected = true;
-                        dbAd.PaymentDate = DateTime.Now;
-                    }
+
+                    // dont remove these commented lines we will uncommit after pilot
+
+                    //if (dbAd.IsPaymentCollected != true && userData.Company.IsSpecialAccount != true)
+                    //{
+                    //    dbAd.IsPaymentCollected = true;
+                    //    dbAd.PaymentDate = DateTime.Now;
+                    //}
 
                     // Stripe payment + Invoice Generation
                     // Muzi bhai said we will see it on latter stage 
@@ -1273,10 +1276,10 @@ namespace SMD.Implementation.Services
                     //todo pilot: unCommenting Stripe payment code on Ads approval
                     if (userData.Company.IsSpecialAccount != true)
                     {
-                        if (isFlag != true)
-                        {
-                            respMesg = MakeStripePaymentandAddInvoiceForCampaign(dbAd);
-                        }
+                        //if (isFlag != true)
+                        //{
+                        //    respMesg = MakeStripePaymentandAddInvoiceForCampaign(dbAd);
+                        //}
                     }
                     if (respMesg.Contains("Failed"))
                     {

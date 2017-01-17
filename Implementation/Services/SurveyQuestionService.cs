@@ -295,7 +295,7 @@ namespace SMD.Implementation.Services
                     {
                         if (userData.Company.IsSpecialAccount != true)
                         {
-                            MakeStripePaymentandAddInvoice(dbServey);
+                            //MakeStripePaymentandAddInvoice(dbServey);    Dont remove this comment we will use it after pilot.
                         }
                     }
                     // Strpe + Invoice Work 
