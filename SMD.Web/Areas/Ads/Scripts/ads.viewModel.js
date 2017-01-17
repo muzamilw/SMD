@@ -772,13 +772,13 @@ define("ads/ads.viewModel",
                 if (mode == 4) {
                   //  campaignModel().CampaignName("New display ad");
                     $("#logo_div").css("display", "block");
-                    campaignModel().ClickRate("0.08");
+                    campaignModel().ClickRate("0.04");
                 }
 
                 else {//video ad
                    // campaignModel().CampaignName("New Video Ads");
                     $("#logo_div").css("display", "none");
-                    campaignModel().ClickRate("0.16");
+                    campaignModel().ClickRate("0.08");
                 }
                 campaignModel().reset();
                 $("#btnPauseCampaign").css("display", "none");
@@ -1093,12 +1093,12 @@ define("ads/ads.viewModel",
                 var messageText;
                 var headingtext;
                 if (CurrentMode() == 1) {
-                    messageText = "One Time Charge for this Campaign £19." + "<br\>" + "You will not be charged the submission fee again if you pause, resume or tweak this campaign after approval.";
-                    headingtext = "Video Ad - Submission Fee";
+                    messageText = "One Time Charge for this Campaign" + " £19.".strike() + " FREE for BETA" + "<br\>" + "<br\>" + "You will not be charged the submission fee again if you pause, resume or tweak this campaign after approval.";
+                    headingtext = "Video Ad - Submission Fee - FREE";
                 }
                 else {
-                    messageText = "One Time Charge for this Campaign £9." + "<br\>" + "You will not be charged the submission fee again if you pause, resume or tweak this campaign after approval.";
-                    headingtext = "Display Ad - Submission Fee";
+                    messageText = "One Time Charge for this Campaign" + " £19.".strike() + " FREE for BETA" + "<br\>" + "You will not be charged the submission fee again if you pause, resume or tweak this campaign after approval.";
+                    headingtext = "Display Ad - Submission Fee - FREE";
                 }
                 //if (campaignModel().isValid()) {
                 if (ValidateCampaign(2)) {
@@ -1191,7 +1191,8 @@ define("ads/ads.viewModel",
                                         confirmation.headingPaymentText(headingtext);
                                         confirmation.messagePaymentText(messageText);
                                         confirmation.afterProceedPayment(function () {
-                                            addSubscription();
+                                            saveCampaign(2);
+                                            //addSubscription();
                                         });
                                         confirmation.yesPaymentBtnText("Continue");
                                         confirmation.noPayemetBtnText("Back to Draft");
@@ -1282,12 +1283,12 @@ define("ads/ads.viewModel",
                         errorListNew.push({ name: "Please enter ad Title.", element: "" });
 
                     }
-                    if (campaignModel().Type() == "4") {
-                        if (campaignModel().LogoUrl() == "" || campaignModel().LogoUrl() == undefined || campaignModel().LogoUrl() == "/images/standardplaceholder.png") {
-                            noErrors = false;
-                            toastr.error("Please upload Banner.");
-                        }
-                    }
+                    //if (campaignModel().Type() == "4") {
+                    //    if (campaignModel().LogoUrl() == "" || campaignModel().LogoUrl() == undefined || campaignModel().LogoUrl() == "/images/standardplaceholder.png") {
+                    //        noErrors = false;
+                    //        toastr.error("Please upload Banner.");
+                    //    }
+                    //}
 
                     if (campaignModel().ClickRate() == undefined) {
                         campaignModel().ClickRate(0);
@@ -1297,12 +1298,12 @@ define("ads/ads.viewModel",
                     if (mode == 4)
                         minclickrate = 0.08;
                     else
-                        minclickrate = 0.16;
+                        minclickrate = 0.04;
 
 
 
                     if (campaignModel().ClickRate() < minclickrate && isClickRateVisible() != true) {
-                        errorListNew.push({ name: "Ad Click should be greater than $ " + minclickrate + " USD", element: "" });
+                        errorListNew.push({ name: "Ad Click should be greater than £" + minclickrate + " GBP", element: "" });
                     }
 
                     if ((parseInt(campaignModel().MaxBudget()) < parseInt(campaignModel().ClickRate()))) {
@@ -2317,7 +2318,7 @@ define("ads/ads.viewModel",
 
                                     var clonedVersofCariterias = data.Campaigns[0].AdCampaignTargetCriterias.clone();
 
-
+                                    
                                     _.each(data.Campaigns[0].CouponCodes, function (cc) {
 
                                         allCouponCodeItems.push(cc.Code);

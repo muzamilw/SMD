@@ -1,5 +1,6 @@
-﻿
-
+﻿USE [SMDv2]
+GO
+/****** Object:  StoredProcedure [dbo].[SearchCampaigns]    Script Date: 1/17/2017 6:13:03 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -89,7 +90,7 @@ BEGIN
 
  group by a.CampaignID, CampaignName,StartDateTime,MaxBudget,MaxDailyBudget,AmountSpent,Status, ApprovalDateTime, ClickRate, a.CreatedDateTime, a.Type, a.priority,a.CompanyId,a.VideoLink2, a.LogoUrl, a.VerifyQuestion ,  a.Answer1, a.Answer2, a.Answer3, a.ModifiedDateTime, eh.CampaignID
   )as items
- order by priority desc
+ order by ModifiedDateTime desc
  OFFSET @fromRoww ROWS
  FETCH NEXT @toRow ROWS ONLY
  

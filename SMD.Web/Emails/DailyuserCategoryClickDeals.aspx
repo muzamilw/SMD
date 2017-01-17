@@ -1,10 +1,10 @@
-﻿
+﻿<!-- SIGNUP WELCOME -->
 <html>
 <head>
     <meta charset="utf-8" />
     <meta content="IE=edge" http-equiv="X-UA-Compatible" />
     <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <title>Picture Poll Rejected
+    <title>++subject++
     </title>
     <style type="text/css">
         /*////// RESET STYLES //////*/
@@ -201,7 +201,7 @@
       <table align="center" border="0" cellpadding="0" cellspacing="0" height="100%" id="bodyTable" width="100%">        
         <tr>          
           <td align="center" id="bodyCell" valign="top">            
-            <span style="color:#FFFFFF; display:none; font-size:0px; height:0px; visibility:hidden; width:0px;">Picture Poll Rejected.</span>
+            <span style="color:#FFFFFF; display:none; font-size:0px; height:0px; visibility:hidden; width:0px;">++subject++</span>
 <!-- BEGIN TEMPLATE // -->
             <table border="0" cellpadding="0" cellspacing="0" width="100%">              
               <tr>                
@@ -211,7 +211,7 @@
                                     <tr>
                                     <td align="center" valign="top" width="400">
                                     <![endif]-->
-                  <table align="center" border="0" cellpadding="0" cellspacing="0" class="emailContainer" style="max-width:700px;" width="100%">                    
+                  <table align="center" border="0" cellpadding="0" cellspacing="0" class="emailContainer" style="max-width:400px;" width="100%">                    
                     <tr>                      
                       <td align="center" id="logoContainer" style="padding-top:40px; padding-bottom:20px;" valign="top">                        
                         <img alt="MailChimp" height="63" src="http://manage.cash4ads.com/emails/images/Cash4Ads_Email_Logo.png" style="color:#FFFFFF; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:12px; font-weight:400; letter-spacing:-1px; padding:0; margin:0; text-align:center;" width="60"/>
@@ -220,18 +220,17 @@
                     <tr>                      
                       <td align="center" style="padding-bottom:10px;" valign="top">                        
                         <h1 style="color:#FFFFFF; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:30px; font-style:normal; font-weight:600; line-height:42px; letter-spacing:normal; margin:0; padding:0; text-align:center;">
-                        Picture Poll Rejected
+                         ++subject++
                         </h1>
                       </td>
                     </tr>
-                       <tr>                      
-                      <td align="center" style="padding-bottom:10px;" valign="top">                        
+                    <tr>                      
+                      <td align="center" style="padding-bottom:40px;" valign="top">                        
                         <p style="color:#FFFFFF; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:center;">
-                         ++campaignname++
+                            Here are few deals near you.
                         </p>
                       </td>
                     </tr>
-                   
                   </table>
 <!--[if gte mso 9]>
                                     </td>
@@ -293,170 +292,15 @@
                                 <tr>                                  
                                   <td align="left" id="bodyContent" valign="top">                                    
                                     <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">                                      
+                                     
                                       <tr>                                        
-                                        <td align="left" style="padding-right:20px; padding-bottom:60px;" valign="top">                                          
-                                          <img alt="Lists" src="http://manage.cash4ads.com/emails/images/Polls_Email_Blue.png" style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:600; height:auto; letter-spacing:-1px; padding:0; margin:0; text-align:center;" width="48"/>
-                                        </td>
-                                        <td align="left" style="padding-bottom:40px;" valign="top">                                          
-                                          <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
-                                           Your Picture Poll requires some improvements to meet our publishing
-standards.
-
-
-
-                                          </p>
-                                          
-                                               <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
-                                         We have listed some tips on how to make your Picture Polls more effective.
-</p>
-
-
-                                          
+                                        <td align="center" style="padding-bottom:60px;" valign="top" colspan="2">                                          
+                                                                                 
+                                         ++userdealshtml++
                                         </td>
                                       </tr>
-                                        <tr>
-                                            <td align="center" style="padding-right:20px; padding-bottom:10px;" valign="top" colspan="2">
-                                                <table align="center" bgcolor="#F2F2F2" border="0" cellpadding="0" cellspacing="0" style='width:100%;'>
-                      
-                            <tr><td align="center" style="padding-top:20px"><img style='text-align:center;padding-top:20px;max-width:560px' src='++surveyleftimage++'/></td>
-                                <td align="center" style="padding-top:20px"><img style='text-align:center;padding-top:20px;max-width:560px' src='++surveyrightimage++'/></td>
-                            </tr>
-                            <tr><td colspan='2' align="center" style='text-align:center;padding-bottom:2px;'><p style="style=color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;"><b>++campaignname++</b></p></td></tr>
-                            
-</table>
-                        
-
-
-
-                                            </td>
-                                        </tr>
-                                         <tr>                                        
-                                        <td align="center" style="padding-right:20px; padding-bottom:60px;" valign="top" colspan="2">
-
-                                            <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">                                      
-                                      <tr>                                        
-                                        <td align="center" valign="middle">                                          
-<!--[if gte mso 9]>
-                                                                                    <table align="center" border="0" cellspacing="0" cellpadding="0" style="width:200px" width="200">
-                                                                                    <tr>
-                                                                                    <td align="center" bgcolor="#6DC6DD" style="padding:20px;" valign="top">
-                                                                                    <![endif]-->
-                                          <a href="http://manage.cash4ads.com/" style="background-color:#6DC6DD; border-collapse:separate; border-top:20px solid #6DC6DD; border-right:40px solid #6DC6DD; border-bottom:20px solid #6DC6DD; border-left:40px solid #6DC6DD; border-radius:3px; color:#FFFFFF; display:inline-block; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:600; letter-spacing:.3px; text-decoration:none;" target="_blank">Manage Your Campaigns</a>
-<!--[if gte mso 9]>
-                                                                                    </td>
-                                                                                    </tr>
-                                                                                    </table>
-                                                                                    <![endif]-->
-                                        </td>
-                                      </tr>
-                                    </table>
-                                            </td>
-                                            </tr>
-                                      <tr>                                        
-                                        <td align="left" style="padding-right:20px; padding-bottom:60px;" valign="top">                                          
-                                          <img alt="Email" src="http://manage.cash4ads.com/emails/images/tip.png" style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:600; height:auto; letter-spacing:-1px; padding:0; margin:0; text-align:center;" width="48"/>
-                                        </td>
-                                        <td align="left" style="padding-bottom:40px;" valign="top">                                          
-                                          <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
-                                        Use Hi-Res Images
-                                          </p>
-                                          <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
-                                        We suggest that you upload images  300 x 600 pixels in PNG format
-
-
-
-
-                                          </p>
-                                        </td>
-                                      </tr>
-                                      <tr>                                        
-                                        <td align="left" style="padding-right:20px; padding-bottom:60px;" valign="top">                                          
-                                          <img alt="Test" src="http://manage.cash4ads.com/emails/images/tip.png" style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:600; height:auto; letter-spacing:-1px; padding:0; margin:0; text-align:center;" width="48"/>
-                                        </td>
-                                        <td align="left" style="padding-bottom:40px;" valign="top">                                          
-                                          <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
-                                         Try to Avoid Using Text on Picture Polls
-                                          </p>
-                                          <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
-                                        Use simple uncluttered images that inspire audiences to pick a winner.  
-
-
-
-                                          </p>
-                                        </td>
-                                      </tr>
-                                        <tr>                                        
-                                        <td align="left" style="padding-right:20px; padding-bottom:60px;" valign="top">                                          
-                                          <img alt="Test" src="http://manage.cash4ads.com/emails/images/tip.png" style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:600; height:auto; letter-spacing:-1px; padding:0; margin:0; text-align:center;" width="48"/>
-                                        </td>
-                                        <td align="left" style="padding-bottom:40px;" valign="top">                                          
-                                          <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
-                                          Check Spelling and Descriptions
-                                          </p>
-                                         <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
-                                         We may have noticed a spelling mistake  
-
-
-
-                                          </p>
-                                        </td>
-                                      </tr>
-                                        <tr>                                        
-                                        <td align="left" style="padding-right:20px; padding-bottom:60px;" valign="top">                                          
-                                          <img alt="Test" src="http://manage.cash4ads.com/emails/images/tip.png" style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:600; height:auto; letter-spacing:-1px; padding:0; margin:0; text-align:center;" width="48"/>
-                                        </td>
-                                        <td align="left" style="padding-bottom:40px;" valign="top">                                          
-                                          <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
-                                        Heading Style
-                                          </p>
-                                         <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
-                                         Use simple and inspiring headings with upper case 1st letters e.g. Each First Letter Of Each Word Is In Upper Case
-
-
-                                          </p>
-                                        </td>
-                                      </tr>
-                                         <tr>                                        
-                                        <td align="left" style="padding-right:20px; padding-bottom:60px;" valign="top">                                          
-                                          <img alt="Test" src="http://manage.cash4ads.com/emails/images/tip.png" style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:600; height:auto; letter-spacing:-1px; padding:0; margin:0; text-align:center;" width="48"/>
-                                        </td>
-                                        <td align="left" style="padding-bottom:40px;" valign="top">                                          
-                                          <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
-                                         Inappropriate Content
-
-                                          </p>
-                                          <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding:0; margin:0; text-align:left;">
-                                         We follow a moderate and commercial opinion for content. 
-                                              <br />
-                                              We reject images that may offend others and /or of sexual nature.
-
-
-                                          </p>
-                                        </td>
-                                      </tr>
+                                     
                                          
-                                        <tr>
-                                            <td align="left" style="" valign="top" colspan="2">
-                                                <p style="color:#0f68a1; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
-                                                    You may also want to... 
-                                                </p>
-
-                                            </td>
-                                        </tr>
-                                          <tr>                                        
-                                      
-                                        <td align="left" style="padding-bottom:40px;" valign="top" colspan="2">                                          
-                                            <img src="http://manage.cash4ads.com/emails/images/Email_Deal_Ad.png" />
-
-
-                                            
-
-
-
-
-
-                                        </td>
-                                      </tr>
                                  
                                     </table>
                                   </td>
@@ -474,9 +318,9 @@ standards.
                                           <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:700; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
                                             Need Additional Support?
                                           </p>
-                                          <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
-                                            Free accounts come with 30 days of email support, and all paid accounts have access to email and live chat support.
-                                          </p>
+                                          <p style="color:#737373; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight:normal; line-height:24px; padding-top:0; margin-top:0; text-align:left;">
+                                            You are receiving this email because you 
+                                              have subscribed to our service. If you no longer wish to receive these e-mails, you can unsubscribe from this list by updating your preferences at cash4ads.com</p>
                                         </td>
                                       </tr>
                                     </table>
@@ -593,6 +437,6 @@ standards.
         </tr>
       </table>
     </center>
-    <img height="1" src="" width="1" />
+    <img height="1" src="http://click.mailchimpapp.com/track/open.php?u=10612303&amp;id=ec89654a88a24d0e8851ef2342c1b10a" width="1" />
 </body>
 </html>
