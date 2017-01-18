@@ -109,8 +109,14 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                 Title = source.Title == null ? "": source.Title,
                 Phone1CodeCountryID = source.Phone1CodeCountryID.HasValue == true ?  source.Phone1CodeCountryID.Value : 0,
                 Phone1Code = source.Country != null? source.Country.CountryName + " " + source.Country.CountryPhoneCode : "",
-                ProfileComplete = isProfilecomplete
-               
+                ProfileComplete = isProfilecomplete,
+
+                optDealsNearMeEmails = source.optDealsNearMeEmails,
+                optPushNewDeals = source.optPushNewDeals,
+                optPushNewPicturePoll = source.optPushNewPicturePoll
+
+
+
             };
 
             return user;

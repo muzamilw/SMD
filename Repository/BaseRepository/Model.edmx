@@ -268,6 +268,8 @@
           <Property Name="LastKnownLocationLat" Type="nvarchar" MaxLength="50" />
           <Property Name="LastKnownLocationLong" Type="nvarchar" MaxLength="50" />
           <Property Name="LastKnownLocation" Type="geography" />
+          <Property Name="optPushNewDeals" Type="bit" />
+          <Property Name="optPushNewPicturePoll" Type="bit" />
         </EntityType>
         <EntityType Name="AuditLog">
           <Key>
@@ -5471,6 +5473,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="LastKnownLocation" Type="Geography" />
           <NavigationProperty Name="UserGameResponses" Relationship="DomainModels.FK_UserGameResponse_AspNetUsers" FromRole="User" ToRole="UserGameResponse" />
           <NavigationProperty Name="UserCouponCategoryClicks" Relationship="DomainModels.FK_UserCouponCategoryClicks_AspNetUsers" FromRole="User" ToRole="UserCouponCategoryClick" />
+          <Property Name="optPushNewDeals" Type="Boolean" />
+          <Property Name="optPushNewPicturePoll" Type="Boolean" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Type="DomainModels.User" Role="AspNetUser" Multiplicity="1">
@@ -8647,6 +8651,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="DomainModels.User">
               <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="optPushNewPicturePoll" ColumnName="optPushNewPicturePoll" />
+                <ScalarProperty Name="optPushNewDeals" ColumnName="optPushNewDeals" />
                 <ScalarProperty Name="LastKnownLocation" ColumnName="LastKnownLocation" />
                 <ScalarProperty Name="LastKnownLocationLong" ColumnName="LastKnownLocationLong" />
                 <ScalarProperty Name="LastKnownLocationLat" ColumnName="LastKnownLocationLat" />
