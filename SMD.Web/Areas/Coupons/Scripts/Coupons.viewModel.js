@@ -599,15 +599,15 @@ define("Coupons/Coupons.viewModel",
 
                                 var myLatlng = new google.maps.LatLng(51.509865, -0.118092);
                                 var myOptions = {
-                                    zoom: 3,
+                                    zoom: 13,
                                     center: myLatlng
                                 };
                                 map = new google.maps.Map(document.getElementById("heatmapId"), myOptions);
                                 heatmap = new HeatmapOverlay(map,
                                   {
-                                      "radius": 2,
+                                      "radius": 15,
                                       "maxOpacity": 1,
-                                      "scaleRadius": true,
+                                     // "scaleRadius": true,
                                       "useLocalExtrema": true
                                   }
                                 );
