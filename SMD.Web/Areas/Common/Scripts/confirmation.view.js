@@ -22,11 +22,11 @@ define("common/confirmation.view",
                  bindingRootPayment = $("#dialog-confirmPayment")[0],
 
                 // Show the dialog
-                show = function() {
+                show = function () {
                     $("#dialog-confirm").modal("show");
                 },
                 // Hide the dialog
-                hide = function() {
+                hide = function () {
                     $("#dialog-confirm").modal("hide");
                 },
                   showPayment = function () {
@@ -36,7 +36,7 @@ define("common/confirmation.view",
                 hidePayment = function () {
                     $("#dialog-confirmPayment").modal("hide");
                 },
-                showWarningPopup = function() {
+                showWarningPopup = function () {
                     $("#dialog-ok").modal("show");
                 },
                  showOKpopup = function () {
@@ -46,14 +46,17 @@ define("common/confirmation.view",
                       $("#dialog-okWarning").modal("hide");
                   },
                    showOKpopupforinfo = function () {
-                        $("#dialog-okWarningforinfo").modal("show");
+                       $("#dialog-okWarningforinfo").modal("show");
                    },
                      showOKpopupforFreeCoupon = function () {
                          $("#dialog-okWarningforFreeCoupon").modal("show");
                      },
+                      showOKpopupforSocial = function () {
+                          $("#dialog-okSocail").modal("show");
+                      },
                       showOKpopupfordealheadline = function () {
                           $("#dialog-okWarningfordealheadline").modal("show");
-                       },
+                      },
                    showOKpopupforchart = function () {
                        $("#dialog-chartmessage").modal("show");
                    },
@@ -61,25 +64,25 @@ define("common/confirmation.view",
                         $("#dialog-okWarningforinfo").modal("hide");
                     },
                 // Hide the dialog
-                hideWarningPopup = function() {
+                hideWarningPopup = function () {
                     $("#dialog-ok").modal("hide");
                 },
                 showAccountSetingPopup = function () {
                     $("#AccountSetingConformation").modal("show");
-                   },
+                },
                 // Show Upgrade Plan dialog
-                showUpgradePopup = function() {
+                showUpgradePopup = function () {
                     $("#dialog-okLicensing").modal("show");
                 };
-                // Show Upgrade Plan dialog
-                showActionPopup = function () {
-                    $("#dialog-okUserActionLog").modal("show");
-                };
+            // Show Upgrade Plan dialog
+            showActionPopup = function () {
+                $("#dialog-okUserActionLog").modal("show");
+            };
             showOKpopupforMax3Deal = function () {
                 $("#dialog-okMax3Deal").modal("show");
             },
 
-           
+
                 hideActionPopup = function () {
                     $("#dialog-okUserActionLog").modal("hide");
                 };
@@ -90,12 +93,12 @@ define("common/confirmation.view",
                 bindingRootq: bindingRootq,
                 bindingRootupgrade: bindingRootupgrade,
                 bindingRootaction: bindingRootaction,
-                bindingRootPayment:bindingRootPayment,
+                bindingRootPayment: bindingRootPayment,
                 viewModel: viewModel,
                 show: show,
                 hide: hide,
                 showPayment: showPayment,
-                hidePayment:hidePayment,
+                hidePayment: hidePayment,
                 showWarningPopup: showWarningPopup,
                 hideWarningPopup: hideWarningPopup,
                 showUpgradePopup: showUpgradePopup,
@@ -109,7 +112,8 @@ define("common/confirmation.view",
                 showOKpopupforFreeCoupon: showOKpopupforFreeCoupon,
                 showOKpopupfordealheadline: showOKpopupfordealheadline,
                 showAccountSetingPopup: showAccountSetingPopup,
-                showOKpopupforMax3Deal: showOKpopupforMax3Deal
+                showOKpopupforMax3Deal: showOKpopupforMax3Deal,
+                showOKpopupforSocial: showOKpopupforSocial
             };
         })(ist.confirmation.viewModel);
 
