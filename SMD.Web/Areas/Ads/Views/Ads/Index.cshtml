@@ -58,15 +58,10 @@ else
                                                 <th class="col-sm-2" style="vertical-align:top;display:none;"><span class="GridHeaderFont_size">Start Date</span></th>*@
                                             <th class="col-sm-1" style="vertical-align:top"><span class="GridHeaderFont_size">PPCV (£)</span></th>
                                             <th class="col-sm-1" style="vertical-align:top"><span class="GridHeaderFont_size">Daily Budget(£)</span></th>
-                                            <th class="col-sm-1" style="vertical-align:top;text-align: right"><span class="GridHeaderFont_size">Imp.</span></th>
+                                            <th class="col-sm-1" style="vertical-align:top;text-align: right;margin-right: 20px;"><span class="GridHeaderFont_size">Imp. &nbsp;</span></th>
                                             <th class="col-sm-1" style="vertical-align:top"><span class="GridHeaderFont_size">Survey PPCV</span></th>
                                             <th class="col-sm-1" style="vertical-align:top"><span class="GridHeaderFont_size">Click Thru</span></th>
-
-                                            <th class="col-sm-1" style="vertical-align:top"><span class="GridHeaderFont_size">Impression to Click Thru Conv.</span></th>
-                                            <th class="col-sm-1" style="vertical-align:top"><span class="GridHeaderFont_size">Impression to Survey Conv.</span></th>
-
-
-                                            <th class="col-sm-5" colspan="3">&nbsp;</th>
+                                            <th class="col-sm-6" colspan="4">&nbsp;</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -268,36 +263,34 @@ else
         </td>
         <td class="col-sm-1"><span class="" data-bind="text: ClickRate()? '£'+ ClickRate(): '£0.0'"></span></td>
         <td class="col-sm-1"><span class="" data-bind="text: MaxDailyBudget()? '£'+ MaxDailyBudget(): '£0.0'"></span></td>
-        <td class="col-sm-3" colspan="3" style="text-align: right;">
-            <div class="col-sm-3"><span style="color:green" data-bind="text: viewCountAllTime()"></span></div>
-            <div class="col-sm-3"><span style="color:blue" data-bind="text:SurveyAnsweredAllTime() "></span></div>
-            <div class="col-sm-3"><span style="color:#ea2e94" data-bind="text: clickThroughsAllTime()"></span></div>
-            <br />
-            <div style="height:150px;width:215px;" data-bind="morris: {type: 'Bar', data: [{y:'test', a:viewCountAllTime() ,b:SurveyAnsweredAllTime() , c:clickThroughsAllTime()}],axes:false, xkey: 'y', ykeys: ['a' , 'b', 'c'], labels: ['Total Impression','Survey PPCV', 'Click Thru'], parseTime:false, setAxisAlignFirstX: true,hideHover:'always', barColors: ['green', 'blue','#ea2e94']}"></div>
-
-
-        </td>
-        <td class="col-sm-1">
-            <div style="color:#ea2e94; font-size:larger;font-weight: bold;"><span data-bind="text:  viewCountAllTime()>0 ? ((clickThroughsAllTime()/viewCountAllTime())*100).toFixed(2):0"></span>%</div>
-
-        </td>
-
-        <td class="col-sm-1">
-            <div style="color:blue; font-size:larger;font-weight: bold;"><span data-bind="text: viewCountAllTime()>0 ? ((SurveyAnsweredAllTime()/viewCountAllTime())*100).toFixed(2):0"></span>%</div>
-
-        </td>
-
-        <td class="col-sm-3">
-            <!-- ko if: VerifyQuestion() != null -->
-            <div style="font-size:small" data-bind="text:VerifyQuestion()"></div>
-            <br />
-            <div class="piechart">
-                <canvas data-bind="chart: { type: 'pie', data: CampaignRatioData, options: { observeChanges: true, throttle: 1000, legend: { display: false }, maintainAspectRatio: false,responsive: true } }"></canvas>
+        <td class="col-sm-4" colspan="3" style="text-align: right;">
+            <div class ="col-sm-2"></div>
+            <div class="col-sm-3" style="color:green;text-align:left;">
+            &nbsp; 
+            <span data-bind="text: viewCountAllTime()"></span></div>
+            <div class="col-sm-3" style="color:blue;text-align:left;">
+                <span data-bind="text:SurveyAnsweredAllTime() "></span>
+                <br />
+                <span data-bind="text: viewCountAllTime()>0 ? ((SurveyAnsweredAllTime()/viewCountAllTime())*100).toFixed(2):0"></span>%
             </div>
-            <!-- /ko -->
-        </td>
+            <div class="col-sm-3" style="color:#ea2e94;text-align:left;">
+                <span data-bind="text: clickThroughsAllTime()"></span>
+                <br />
+                <span data-bind="text:  viewCountAllTime()>0 ? ((clickThroughsAllTime()/viewCountAllTime())*100).toFixed(2):0"></span>%
+            </div>
+            <div class="col-sm-1"></div>
+            <br />
+            
+            <div style="height:150px;width:250px;" data-bind="morris: {type: 'Bar', data: [{y:'test', a:viewCountAllTime() ,b:SurveyAnsweredAllTime() , c:clickThroughsAllTime()}],axes:false, xkey: 'y',barGap:35,  ykeys: ['a' , 'b', 'c'], labels: ['Total Impression','Survey PPCV', 'Click Thru'], parseTime:false, setAxisAlignFirstX: true,hideHover:'always', barColors: ['green', 'blue','#ea2e94']}"></div>
 
-        <td class="col-sm-1">
+
+        </td>
+        <td class="col-sm-1"></td>
+<td class="col-sm-2">
+            <!-- ko if: VerifyQuestion() != null -->
+            <div style="font-size:small; white-space:nowrap;" data-bind="text:VerifyQuestion()"></div>
+            <br />
+            <!-- /ko -->
             <table class="tbl-noborder-Padding">
                 <tbody>
                     <tr>
@@ -340,6 +333,17 @@ else
             </table>
         </td>
 
+        <td class="col-sm-2">
+            <!-- ko if: VerifyQuestion() != null -->
+           
+            <br />
+            <div class="piechart">
+                <canvas data-bind="chart: { type: 'pie', data: CampaignRatioData, options: { observeChanges: true, throttle: 1000, legend: { display: false }, maintainAspectRatio: false,responsive: true } }"></canvas>
+            </div>
+            <!-- /ko -->
+        </td>
+
+      
         <td class="col-sm-1">
             <div style="font-size:larger;font-weight:bold;">
                 <!-- ko if: Status() == 1-->
