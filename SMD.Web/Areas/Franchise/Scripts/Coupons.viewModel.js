@@ -227,6 +227,122 @@ define("FranchiseDashboard/Coupons.viewModel",
                                 }
                             });
                     },
+                     rejectionReasondd = ko.observableArray([
+                         {
+                             "RejectionId": "1",
+                             "Reason": " Content is of unlawful, harmful, tortious, threatening, abusive, harassing, hateful, racist or homophobic."
+
+                         },
+                           {
+                               "RejectionId": "2",
+                               "Reason": "Content is of infringing, pornographic, violent, misleading, grossly offensive, of an indecent, obscene or menacing character, blasphemous or defamatory."
+
+                           },
+                           {
+                               "RejectionId": "3",
+                               "Reason": "Content is of of a libellous nature of any person or entity, in contempt of court or in breach of confidence, or which infringes the rights of another person or entity, including copyrights, trademarks, trade secrets, patents, rights of personality, publicity or privacy or any other third party rights."
+
+                           },
+                            {
+                                "RejectionId": "4",
+                                "Reason": "We suspect that material, including User Content, you may have not obtained all necessary licenses and/or approvals (from us or third parties); or which constitutes or encourages conduct that would be considered a criminal offence, give rise to civil liability, or otherwise be contrary to the law of or infringe the rights of any third party in any country in the world."
+
+                            },
+                             {
+                                 "RejectionId": "5",
+                                 "Reason": "We suspect material which may technically harmful (including computer viruses, logic bombs, Trojan horses, worms, harmful components, corrupted data, malicious software, harmful data, or anything else which may interrupt, interfere with, corrupt or otherwise cause loss, damage, destruction or limitation to the functionality of any software or computer equipment)."
+
+                             },
+                             {
+                                 "RejectionId": "6",
+                                 "Reason": "Content may  to cause annoyance, inconvenience or needless anxiety to others."
+                             },
+                             {
+                                 "RejectionId": "7",
+                                 "Reason": "We suspect that material, including User Content, may intercept or attempt to intercept any communications transmitted by way of a telecommunications system."
+                             },
+                             {
+                                 "RejectionId": "8",
+                                 "Reason": "We suspect that material, including User Content,  may not be for a purpose other than which we have designed them or intended them to be used."
+                             },
+                              {
+                                  "RejectionId": "9",
+                                  "Reason": "We suspect that material, including User Content, may be for fraudulent purposes."
+                              },
+                              {
+                                  "RejectionId": "10",
+                                  "Reason": "We suspect that material, including User Content, may be used in any way which could be calculated to incite hatred against any ethnic, religious or any other minority or is otherwise could be calculated to adversely affect any individual, group or entity."
+                              },
+                              {
+                                  "RejectionId": "11",
+                                  "Reason": "Poor Imag quality, use higher quality images i.e. 300 dpi and of size 300 x 300 as a minimum."
+                              },
+                              {
+                                  "RejectionId": "12",
+                                  "Reason": "Too much text on image(s), use clear and inspiring images	Not enough text in Descriptions or Titles."
+                              },
+                              {
+                                  "RejectionId": "13",
+                                  "Reason": "URL LINK does not click thru to a vaild website page."
+                              },
+                               {
+                                   "RejectionId": "14",
+                                   "Reason": "Video Ad does not player on our app players, change format to MP4 and less than 30 seconds."
+                               },
+                               {
+                                   "RejectionId": "15",
+                                   "Reason": "Video Ad length is to long, reduce to less than 30 seconds."
+                               },
+                               {
+                                   "RejectionId": "16",
+                                   "Reason": "Incomplete information about campaign promotion."
+                               },
+                                {
+                                    "RejectionId": "17",
+                                    "Reason": "Your Company Logo or Details are incomplete."
+                                },
+                                 {
+                                     "RejectionId": "18",
+                                     "Reason": "Your Discount Pricing seems unrealitic for your promotion."
+                                 },
+                                 {
+                                     "RejectionId": "19",
+                                     "Reason": "Your Branch Address Details must be in the UK and have correct Geo X,Y co ordinates."
+                                 },
+                                 {
+                                     "RejectionId": "20",
+                                     "Reason": "Your telephone number does not work."
+                                 },
+                                 {
+                                     "RejectionId": "21",
+                                     "Reason": "Your web site is not valid or live."
+                                 },
+                                  {
+                                      "RejectionId": "22",
+                                      "Reason": "Your Deal Group Heading is not clear and concise."
+                                  },
+                                  {
+                                      "RejectionId": "23",
+                                      "Reason": "Your Deal Lines are not Clear or are ambiguous."
+                                  },
+                                  {
+                                      "RejectionId": "24",
+                                      "Reason": "Your Video Ad title is not Clear or is ambiguous."
+                                  },
+                                  {
+                                      "RejectionId": "25",
+                                      "Reason": "Your Content is not in line with our ethical or moral publishing policies."
+                                  },
+                                  {
+                                      "RejectionId": "26",
+                                      "Reason": "Your Content is not Clear or is ambiguous."
+                                  },
+                     ]),
+                     onChangeRejectionReason = function () {
+
+                         var reason = $("#rejectReasondd").val();
+                         selectedCoupon().rejectedReason(reason);
+                     },
                     onApproveCoupon = function () {
                         var conformTet = "Do you want to approve this deal? " + "<br\>" + "System will attempt to collect payment and generate invoice.";
                         confirmation.messageText(conformTet);
@@ -248,7 +364,7 @@ define("FranchiseDashboard/Coupons.viewModel",
                         dataservice.saveCoupon(selectedCoupon().convertToServerData(), {
                             success: function (response) {
 
-                                if (response.indexOf("Failed") == -1 && response!= "True") {
+                                if (response.indexOf("Failed") == -1 && response != "True") {
                                     dataservice.sendApprovalRejectionEmail(selectedCoupon().convertToServerData(), {
                                         success: function (obj) {
                                             getCoupons();
@@ -427,7 +543,9 @@ define("FranchiseDashboard/Coupons.viewModel",
                     companyTypes: companyTypes,
                     company: company,
                     currencyCode: currencyCode,
-                    dealPriceval: dealPriceval
+                    dealPriceval: dealPriceval,
+                    onChangeRejectionReason: onChangeRejectionReason,
+                    rejectionReasondd: rejectionReasondd
 
                 };
             })()
