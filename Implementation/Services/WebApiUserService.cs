@@ -1132,7 +1132,16 @@ namespace SMD.Implementation.Services
 
             user.Phone1CodeCountryID = request.Phone1CountryID;
 
-        
+            if (request.optDealsNearMeEmails.HasValue)
+                user.optDealsNearMeEmails = request.optDealsNearMeEmails.Value;
+
+
+            if (request.optPushNewDeals.HasValue)
+                user.optPushNewDeals = request.optPushNewDeals.Value;
+
+            if (request.optPushNewPicturePoll.HasValue)
+                user.optPushNewPicturePoll = request.optPushNewPicturePoll.Value;
+
 
             // Save Changes
            await UserManager.UpdateAsync(user);
