@@ -8,7 +8,7 @@ define("ads/ads.view",
     ["jquery", "ads/ads.viewModel"], function ($, contentViewModel) {
 
         var ist = window.ist || {};
-      //  ist.Ads = window.ist.Ads || {};
+        //  ist.Ads = window.ist.Ads || {};
 
         // View 
         ist.Ads.view = (function (specifiedViewModel) {
@@ -17,198 +17,205 @@ define("ads/ads.view",
                 viewModel = specifiedViewModel,
                 // Binding root used with knockout
                 bindingRoot = $("#adsBinding")[0],
+                bindingRootgoSocial = $("#dialog-goSocial")[0],
+                showSocialDialog = function () {
+                    $("#dialog-goSocial").modal("show");
+                },
+                hideSocialDialog = function () {
+                    $("#dialog-goSocial").modal("hide");
+                },
                 initializeTypeahead = function () {
-                      var array = new Bloodhound({
-                          datumTokenizer: function (d) {
-                              return Bloodhound.tokenizers.whitespace(d.LocationName);
-                          },
-                          queryTokenizer: Bloodhound.tokenizers.whitespace,
-                          remote: {
-                              rateLimitWait: 1000,
-                              url: '/Api/AdCampaignBase?searchText=%QUERY',
-                              ajax: {
-                                  type: 'POST'
-                              },
-                              replace: function (url, query) {
-                                  query = query + "|1";
-                                  return url.replace('%QUERY', query);
-                              },
-                              filter: function (data) {
+                    var array = new Bloodhound({
+                        datumTokenizer: function (d) {
+                            return Bloodhound.tokenizers.whitespace(d.LocationName);
+                        },
+                        queryTokenizer: Bloodhound.tokenizers.whitespace,
+                        remote: {
+                            rateLimitWait: 1000,
+                            url: '/Api/AdCampaignBase?searchText=%QUERY',
+                            ajax: {
+                                type: 'POST'
+                            },
+                            replace: function (url, query) {
+                                query = query + "|1";
+                                return url.replace('%QUERY', query);
+                            },
+                            filter: function (data) {
 
-                                  return data.countriesAndCities;
-                              }
-                          }
-                      });
+                                return data.countriesAndCities;
+                            }
+                        }
+                    });
 
-                      array.initialize();
+                    array.initialize();
                     $('#searchCampaignLocations').typeahead({
-                          highlight: true
-                      }, {
-                          displayKey: 'bindedValue',
-                          source: array.ttAdapter()
-                      }).bind('typeahead:selected', function (obj, selected) {
-                          console.log(obj);
-                          if (selected) {
-                              var CityID = null, CountryID = null, Radius = 0, Country = '', City = '', latitude = '', longitude = '';
-                              if (selected.IsCountry) {
-                                  Country = selected.LocationName;
-                                  CountryID = selected.CountryId;
-                              }
-                              if (selected.IsCity) {
-                                  City = selected.LocationName;
-                                  CountryID = selected.CountryId;
-                                  CityID = selected.CityId;
-                                  latitude = selected.GeoLat;
-                                  longitude = selected.GeoLong;
-                                  Country = selected.parentCountryName;
-                              }
-                              var obj = {
-                                  CountryID: CountryID,
-                                  CityID: CityID,
-                                  Radius: Radius,
-                                  Country: Country,
-                                  City: City,
-                                  Latitude: latitude,
-                                  Longitude: longitude
-                              }
+                        highlight: true
+                    }, {
+                        displayKey: 'bindedValue',
+                        source: array.ttAdapter()
+                    }).bind('typeahead:selected', function (obj, selected) {
+                        console.log(obj);
+                        if (selected) {
+                            var CityID = null, CountryID = null, Radius = 0, Country = '', City = '', latitude = '', longitude = '';
+                            if (selected.IsCountry) {
+                                Country = selected.LocationName;
+                                CountryID = selected.CountryId;
+                            }
+                            if (selected.IsCity) {
+                                City = selected.LocationName;
+                                CountryID = selected.CountryId;
+                                CityID = selected.CityId;
+                                latitude = selected.GeoLat;
+                                longitude = selected.GeoLong;
+                                Country = selected.parentCountryName;
+                            }
+                            var obj = {
+                                CountryID: CountryID,
+                                CityID: CityID,
+                                Radius: Radius,
+                                Country: Country,
+                                City: City,
+                                Latitude: latitude,
+                                Longitude: longitude
+                            }
 
-                              viewModel.selectedLocation(obj);
-                              viewModel.onAddLocation();
-                              $('#searchCampaignLocations').val("");
-                              $('.twitter-typeahead input').val("");
-                              $('#searchCampaignLocations').focus(function () {
-                                  $('.twitter-typeahead input').val("");
-                              });
-                              $('#searchCampaignLocations').focusout(function () {
-                                  $('.twitter-typeahead input').val("");
-                              });
-                              $('#searchCampaignLocations').typeahead('close');
-                              $('#searchCampaignLocations').typeahead('val', '');
-                          }
-                         
-                      });
-                   
-                      var lan_array = new Bloodhound({
-                          datumTokenizer: function (d) {
-                              return Bloodhound.tokenizers.whitespace(d.LanguageName);
-                          },
-                          queryTokenizer: Bloodhound.tokenizers.whitespace,
-                          remote: {
-                              rateLimitWait: 1000,
-                              url: '/Api/AdCampaignBase?searchText=%QUERY',
-                              ajax: {
-                                  type: 'POST'
-                              },
-                              replace: function (url, query) {
-                                  query = query + "|2";
-                                  return url.replace('%QUERY', query);
-                              },
-                              filter: function (data) {
+                            viewModel.selectedLocation(obj);
+                            viewModel.onAddLocation();
+                            $('#searchCampaignLocations').val("");
+                            $('.twitter-typeahead input').val("");
+                            $('#searchCampaignLocations').focus(function () {
+                                $('.twitter-typeahead input').val("");
+                            });
+                            $('#searchCampaignLocations').focusout(function () {
+                                $('.twitter-typeahead input').val("");
+                            });
+                            $('#searchCampaignLocations').typeahead('close');
+                            $('#searchCampaignLocations').typeahead('val', '');
+                        }
 
-                                  return data.Languages;
-                              }
-                          }
-                      });
+                    });
 
-                      lan_array.initialize();
+                    var lan_array = new Bloodhound({
+                        datumTokenizer: function (d) {
+                            return Bloodhound.tokenizers.whitespace(d.LanguageName);
+                        },
+                        queryTokenizer: Bloodhound.tokenizers.whitespace,
+                        remote: {
+                            rateLimitWait: 1000,
+                            url: '/Api/AdCampaignBase?searchText=%QUERY',
+                            ajax: {
+                                type: 'POST'
+                            },
+                            replace: function (url, query) {
+                                query = query + "|2";
+                                return url.replace('%QUERY', query);
+                            },
+                            filter: function (data) {
 
-                      $('#searchLanguages').typeahead({
-                          highlight: true
-                      },
-                          {
-                              displayKey: 'LanguageName',
-                              source: lan_array.ttAdapter()
-                          }).bind('typeahead:selected', function (obj, selected) {
-                              if (selected) {
-                                  console.log(selected);
-                                  viewModel.addLanguage(selected);
-                              }
-                          });
+                                return data.Languages;
+                            }
+                        }
+                    });
+
+                    lan_array.initialize();
+
+                    $('#searchLanguages').typeahead({
+                        highlight: true
+                    },
+                        {
+                            displayKey: 'LanguageName',
+                            source: lan_array.ttAdapter()
+                        }).bind('typeahead:selected', function (obj, selected) {
+                            if (selected) {
+                                console.log(selected);
+                                viewModel.addLanguage(selected);
+                            }
+                        });
                     // industry
-                      var ind_array = new Bloodhound({
-                          datumTokenizer: function (d) {
-                              return Bloodhound.tokenizers.whitespace(d.IndustryName);
-                          },
-                          queryTokenizer: Bloodhound.tokenizers.whitespace,
-                          remote: {
-                              rateLimitWait: 1000,
-                              url: '/Api/AdCampaignBase?searchText=%QUERY',
-                              ajax: {
-                                  type: 'POST'
-                              },
-                              replace: function (url, query) {
-                                  query = query + "|3";
-                                  return url.replace('%QUERY', query);
-                              },
-                              filter: function (data) {
+                    var ind_array = new Bloodhound({
+                        datumTokenizer: function (d) {
+                            return Bloodhound.tokenizers.whitespace(d.IndustryName);
+                        },
+                        queryTokenizer: Bloodhound.tokenizers.whitespace,
+                        remote: {
+                            rateLimitWait: 1000,
+                            url: '/Api/AdCampaignBase?searchText=%QUERY',
+                            ajax: {
+                                type: 'POST'
+                            },
+                            replace: function (url, query) {
+                                query = query + "|3";
+                                return url.replace('%QUERY', query);
+                            },
+                            filter: function (data) {
 
-                                  return data.listIndustry;
-                              }
-                          }
-                      });
+                                return data.listIndustry;
+                            }
+                        }
+                    });
 
-                      ind_array.initialize();
+                    ind_array.initialize();
 
-                      $('#searchIndustries').typeahead({
-                          highlight: true
-                      },
-                              {
-                                  displayKey: 'IndustryName',
-                                  source: ind_array.ttAdapter()
-                              }).bind('typeahead:selected', function (obj, selected) {
-                                  if (selected) {
-                                      viewModel.addIndustry(selected);
-                                  }
-                              });
+                    $('#searchIndustries').typeahead({
+                        highlight: true
+                    },
+                            {
+                                displayKey: 'IndustryName',
+                                source: ind_array.ttAdapter()
+                            }).bind('typeahead:selected', function (obj, selected) {
+                                if (selected) {
+                                    viewModel.addIndustry(selected);
+                                }
+                            });
                     // education
-                      var edu_array = new Bloodhound({
-                          datumTokenizer: function (d) {
-                              return Bloodhound.tokenizers.whitespace(d.Title);
-                          },
-                          queryTokenizer: Bloodhound.tokenizers.whitespace,
-                          remote: {
-                              rateLimitWait: 1000,
-                              url: '/Api/AdCampaignBase?searchText=%QUERY',
-                              ajax: {
-                                  type: 'POST'
-                              },
-                              replace: function (url, query) {
-                                  query = query + "|4";
-                                  return url.replace('%QUERY', query);
-                              },
-                              filter: function (data) {
+                    var edu_array = new Bloodhound({
+                        datumTokenizer: function (d) {
+                            return Bloodhound.tokenizers.whitespace(d.Title);
+                        },
+                        queryTokenizer: Bloodhound.tokenizers.whitespace,
+                        remote: {
+                            rateLimitWait: 1000,
+                            url: '/Api/AdCampaignBase?searchText=%QUERY',
+                            ajax: {
+                                type: 'POST'
+                            },
+                            replace: function (url, query) {
+                                query = query + "|4";
+                                return url.replace('%QUERY', query);
+                            },
+                            filter: function (data) {
 
-                                  return data.listEducation;
-                              }
-                          }
-                      });
+                                return data.listEducation;
+                            }
+                        }
+                    });
 
-                      edu_array.initialize();
+                    edu_array.initialize();
 
-                      $('#searchEducations').typeahead({
-                          highlight: true
-                      },
-                              {
-                                  displayKey: 'Title',
-                                  source: edu_array.ttAdapter()
-                              }).bind('typeahead:selected', function (obj, selected) {
-                                  debugger;
-                                  if (selected) {
-                                      viewModel.addEducation(selected);
-                                  }
-                              });
-                    
-                      var myEvent = window.attachEvent || window.addEventListener;
-                      var chkevent = window.attachEvent ? 'onbeforeunload' : 'beforeunload'; /// make IE7, IE8 compatable
+                    $('#searchEducations').typeahead({
+                        highlight: true
+                    },
+                            {
+                                displayKey: 'Title',
+                                source: edu_array.ttAdapter()
+                            }).bind('typeahead:selected', function (obj, selected) {
+                                debugger;
+                                if (selected) {
+                                    viewModel.addEducation(selected);
+                                }
+                            });
 
-                      myEvent(chkevent, function (e) { // For >=IE7, Chrome, Firefox
-                          if (viewModel.campaignModel().hasChanges()) {
-                              var confirmationMessage = ' ';  // a space
-                              (e || window.event).returnValue = confirmationMessage;
-                              return confirmationMessage;
-                          }
-                      });
-                  },
+                    var myEvent = window.attachEvent || window.addEventListener;
+                    var chkevent = window.attachEvent ? 'onbeforeunload' : 'beforeunload'; /// make IE7, IE8 compatable
+
+                    myEvent(chkevent, function (e) { // For >=IE7, Chrome, Firefox
+                        if (viewModel.campaignModel().hasChanges()) {
+                            var confirmationMessage = ' ';  // a space
+                            (e || window.event).returnValue = confirmationMessage;
+                            return confirmationMessage;
+                        }
+                    });
+                },
                 // Initialize
                 initialize = function () {
                     if (!bindingRoot) {
@@ -220,6 +227,9 @@ define("ads/ads.view",
 
             return {
                 bindingRoot: bindingRoot,
+                bindingRootgoSocial: bindingRootgoSocial,
+                showSocialDialog: showSocialDialog,
+                hideSocialDialog: hideSocialDialog,
                 viewModel: viewModel,
                 initializeTypeahead: initializeTypeahead
             };

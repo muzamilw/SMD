@@ -80,6 +80,10 @@
         ToAdvertiserLast2Days20DollarDiscountCoupons = 55,
         ToAdvertiserLastDay30DollarDiscountCoupons = 56,
 
+
+        UserCategoryClickWeekdaysEmail = 57,
+        
+
     }
      
     public enum AdCampaignCriteriaType

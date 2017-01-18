@@ -154,10 +154,10 @@
                                         <div class="pull-right ads-numbering-main">
                                             <a data-toggle="modal">
                                                 <div class="ads-numbering-box socialbck">
-                                                    <img src="~/Content/Images/Share_icon_100.png" width="20px" />
+                                                    <img src="~/Content/Images/Share_icon_100.png" width="20px" data-bind="click:$root.showSocialPopup"  />
                                                 </div>
                                                 <br />
-                                                <span class="goSocial">Go Social</span>
+                                                <span class="goSocial" data-bind="click:$root.showSocialPopup">Go Social</span>
                                             </a>
                                         </div>
                                     </div>
@@ -1266,7 +1266,7 @@
 
 
                                 <div class="row" style="margin-top:6px;">
-                                    <div class="col-lg-12">
+                                    <div class="col-lg-12" style="display:none">
                                         <div class="col-lg-5" style="padding-top:3px;padding-left:16px; font-size:13px;">
                                             <span class="text-campaign-left " style="margin-top:-4px;">Delivered to %</span>
                                         </div>
@@ -1284,7 +1284,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-12">
+                                    <div class="col-lg-12" style="display:none">
                                         <div style="float:left;padding-top:4px;width:116px;text-align:right;">
                                             <span class="text-campaign-left" style="margin-top:-4px;font-size:13px">Cost to run survey</span>
                                         </div>
@@ -1317,7 +1317,9 @@
 
 
                                     </div>
-
+                                    <div class="col-lg-12 text-center" style="margin-bottom:-8px;padding-top:5px;">
+                                        <p style=" font-size:16px;color:red;font-weight:bold" class="text-center">  BETA Release - Advertise for FREE<br /> Until 1<sup>st</sup> Sep '17</p>
+                                    </div>
                                     <div class="col-lg-12" style="padding-left:24px;">
 
                                         <span style=" font-size:12px;">  Learn more about 'PPCV'</span><img style="height:14px;" src="/Content/Images/Drop_Arrow.png" data-toggle="collapse" data-target="#demo" />
@@ -1446,11 +1448,11 @@
 
 
 
-                            <div class=" text-center">
+                            @*<div class=" text-center">
                                 <label data-bind="text:'Modification date : '+ ModifiedDate() , visible: ModifiedDate() != undefined">   </label>
                                 <label data-bind="text:'Creation date : '+ CreationDate(), visible: CreationDate() != undefined"></label>
 
-                            </div>
+                            </div>*@
 
                         </div>
 
@@ -1475,7 +1477,7 @@
 
 
                                     <div class="row" style="margin-top:6px;">
-                                        <div class="col-lg-12">
+                                        <div class="col-lg-12" style="display:none">
                                             <div class="col-lg-5" style="padding-top:3px;padding-left:16px; font-size:13px;">
                                                 <span class="text-campaign-left " style="margin-top:-4px;">Delivered to %</span>
                                             </div>
@@ -1493,7 +1495,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-lg-12">
+                                        <div class="col-lg-12"style="display:none">
                                             <div style="float:left;padding-top:4px;width:116px;text-align:right;">
                                                 <span class="text-campaign-left" style="margin-top:-4px;font-size:13px">Cost to run survey</span>
                                             </div>
@@ -2148,8 +2150,8 @@
             @*<!-- ko template: { name: 'SurveyQuestionAnsTiles' , foreach: $root.profileAnswerList } --><!-- /ko -->*@
             <div><span class="listlabels">Select audience who have answered one of the following results.</span></div>
             <div>
-                <img data-bind="attr: { src:LeftPicturePath},click:$root.saveSurveyQuestionCriteria.bind($data, 1)" style="width:100px;height:150px" />
-                <img data-bind="attr: { src:RightPicturePath},click:$root.saveSurveyQuestionCriteria.bind($data, 1)" style="width:100px;height:150px" />
+                <img data-bind="attr: { src:LeftPicturePath},click:$root.saveSurveyQuestionCriteria.bind($data, 1)" style="width:75px;height:150px" />
+                <img data-bind="attr: { src:RightPicturePath},click:$root.saveSurveyQuestionCriteria.bind($data, 2)" style="width:75px;height:150px" />
             </div>
             <div class="clear-both"></div>
         </div>
@@ -2216,6 +2218,7 @@
     </div>
 
 </div>
+
 <div class="modal fade my-modal model_quizQ_ph" id="phQuizDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" style=" width:330px;">
         <div class="col-lg-6 preview_stencilImg" style=" margin-right: 35px; width:310px;">

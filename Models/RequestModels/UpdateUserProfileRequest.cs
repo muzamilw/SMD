@@ -41,6 +41,10 @@ namespace SMD.Models.RequestModels
         public int Phone1CountryID { get; set; }
 
         public string Phone1 { get; set; }
+
+        public Nullable<bool> optDealsNearMeEmails { get; set; }
+        public Nullable<bool> optPushNewDeals { get; set; }
+        public Nullable<bool> optPushNewPicturePoll { get; set; }
              
     }
 }

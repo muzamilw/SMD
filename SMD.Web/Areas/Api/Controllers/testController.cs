@@ -94,6 +94,8 @@ namespace SMD.MIS.Areas.Api.Controllers
             {
                 emailService.SendNotificationToAdvertiserForAdditional30DollarDiscountonLastDay();
             }
+            else if (mode >= 16 && mode <= 20)
+                emailService.SendNewDealsEmail(mode);
 
             
             return "success";

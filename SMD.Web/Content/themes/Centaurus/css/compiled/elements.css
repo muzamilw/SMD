@@ -151,13 +151,13 @@ h1 small, h2 small, h3 small, h1 .small, h2 .small, h3 .small {
 }
 
 .btn-primary {
-    background-color: #3498db;
-    border-color: #2980b9;
+    background-color: #27ae60;
+    border-color: #27ae60;
 }
 
     .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
         background-color: #2980b9;
-        border-color: #1c5c87;
+        border-color: #27ae60;
     }
 
 .btn-darkgray {
@@ -5079,7 +5079,7 @@ input[type="radio"] {
     height:100px !important;
 }
 .login-logo-bakImg {
-    background: url(/Images/Cash4ads_logo-circle.png);
+    background: url(/Images/clidy_circle_logo.png);
     width: 228px;
     height: 70px;
     background-size: 31%;
@@ -5695,7 +5695,7 @@ margin-left:0px !important;
        
 margin-right: auto !important;
        
-background-image: url(/Images/crowdcentz_logo.png) !important;
+background-image: url(/Images/clidyLogo.png) !important;
     
 }
 .CreateBtnWidth {

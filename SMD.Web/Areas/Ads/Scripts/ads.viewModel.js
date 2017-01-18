@@ -420,15 +420,15 @@ define("ads/ads.viewModel",
 				                if ((selecteddateRangeAnalytics() == 1 && CampaignTblAnalyticsData()[0].C30_days > 0) || (selecteddateRangeAnalytics() == 2 && CampaignTblAnalyticsData()[0].All_time > 0)) {
 				                    var myLatlng = new google.maps.LatLng(51.509865, -0.118092);
 				                    var myOptions = {
-				                        zoom: 3,
+				                        zoom: 13,
 				                        center: myLatlng
 				                    };
 				                    map = new google.maps.Map(document.getElementById("heatmapId"), myOptions);
 				                    heatmap = new HeatmapOverlay(map,
                                       {
-                                          "radius": 2,
+                                          "radius": 15,
                                           "maxOpacity": 1,
-                                          "scaleRadius": true,
+                                         // "scaleRadius": true,
                                           "useLocalExtrema": true,
                                           latField: 'lat',
                                           lngField: 'lng',
@@ -760,7 +760,7 @@ define("ads/ads.viewModel",
                 isShowArchiveBtn(false);
                 campaignModel().ChannelType("1");
 
-                campaignModel().MaxDailyBudget("5");
+                campaignModel().MaxDailyBudget("500");
                 campaignModel().MaxBudget("20");
                 campaignModel().Type(mode);
                 campaignModel().DeliveryDays("2");
@@ -772,13 +772,13 @@ define("ads/ads.viewModel",
                 if (mode == 4) {
                   //  campaignModel().CampaignName("New display ad");
                     $("#logo_div").css("display", "block");
-                    campaignModel().ClickRate("0.08");
+                    campaignModel().ClickRate("0.04");
                 }
 
                 else {//video ad
                    // campaignModel().CampaignName("New Video Ads");
                     $("#logo_div").css("display", "none");
-                    campaignModel().ClickRate("0.16");
+                    campaignModel().ClickRate("0.08");
                 }
                 campaignModel().reset();
                 $("#btnPauseCampaign").css("display", "none");
@@ -1093,12 +1093,12 @@ define("ads/ads.viewModel",
                 var messageText;
                 var headingtext;
                 if (CurrentMode() == 1) {
-                    messageText = "One Time Charge for this Campaign £19." + "<br\>" + "You will not be charged the submission fee again if you pause, resume or tweak this campaign after approval.";
-                    headingtext = "Video Ad - Submission Fee";
+                    messageText = "One Time Charge for this Campaign" + " £19.".strike() + " FREE for BETA" + "<br\>" + "<br\>" + "You will not be charged the submission fee again if you pause, resume or tweak this campaign after approval.";
+                    headingtext = "Video Ad - Submission Fee - FREE";
                 }
                 else {
-                    messageText = "One Time Charge for this Campaign £9." + "<br\>" + "You will not be charged the submission fee again if you pause, resume or tweak this campaign after approval.";
-                    headingtext = "Display Ad - Submission Fee";
+                    messageText = "One Time Charge for this Campaign" + " £19.".strike() + " FREE for BETA" + "<br\>" + "You will not be charged the submission fee again if you pause, resume or tweak this campaign after approval.";
+                    headingtext = "Display Ad - Submission Fee - FREE";
                 }
                 //if (campaignModel().isValid()) {
                 if (ValidateCampaign(2)) {
@@ -1191,7 +1191,8 @@ define("ads/ads.viewModel",
                                         confirmation.headingPaymentText(headingtext);
                                         confirmation.messagePaymentText(messageText);
                                         confirmation.afterProceedPayment(function () {
-                                            addSubscription();
+                                            saveCampaign(2);
+                                            //addSubscription();
                                         });
                                         confirmation.yesPaymentBtnText("Continue");
                                         confirmation.noPayemetBtnText("Back to Draft");
@@ -1282,12 +1283,12 @@ define("ads/ads.viewModel",
                         errorListNew.push({ name: "Please enter ad Title.", element: "" });
 
                     }
-                    if (campaignModel().Type() == "4") {
-                        if (campaignModel().LogoUrl() == "" || campaignModel().LogoUrl() == undefined || campaignModel().LogoUrl() == "/images/standardplaceholder.png") {
-                            noErrors = false;
-                            toastr.error("Please upload Banner.");
-                        }
-                    }
+                    //if (campaignModel().Type() == "4") {
+                    //    if (campaignModel().LogoUrl() == "" || campaignModel().LogoUrl() == undefined || campaignModel().LogoUrl() == "/images/standardplaceholder.png") {
+                    //        noErrors = false;
+                    //        toastr.error("Please upload Banner.");
+                    //    }
+                    //}
 
                     if (campaignModel().ClickRate() == undefined) {
                         campaignModel().ClickRate(0);
@@ -1297,12 +1298,12 @@ define("ads/ads.viewModel",
                     if (mode == 4)
                         minclickrate = 0.08;
                     else
-                        minclickrate = 0.16;
+                        minclickrate = 0.04;
 
 
 
                     if (campaignModel().ClickRate() < minclickrate && isClickRateVisible() != true) {
-                        errorListNew.push({ name: "Ad Click should be greater than $ " + minclickrate + " USD", element: "" });
+                        errorListNew.push({ name: "Ad Click should be greater than £" + minclickrate + " GBP", element: "" });
                     }
 
                     if ((parseInt(campaignModel().MaxBudget()) < parseInt(campaignModel().ClickRate()))) {
@@ -2317,7 +2318,7 @@ define("ads/ads.viewModel",
 
                                     var clonedVersofCariterias = data.Campaigns[0].AdCampaignTargetCriterias.clone();
 
-
+                                    
                                     _.each(data.Campaigns[0].CouponCodes, function (cc) {
 
                                         allCouponCodeItems.push(cc.Code);
@@ -3790,6 +3791,16 @@ define("ads/ads.viewModel",
                          }
                      });
                  },
+                 showSocialPopup = function () {
+                     // isLoading(true);
+                     view.showSocialDialog();
+                 },
+                // Hide the dialog
+                 hideSocialPopup = function () {
+                     // Reset Call Backs
+                     //resetDialog();
+                     view.hideSocialDialog();
+                 },
                 showCouponGenerationWarning = function () {
                     toastr.warning("Please first save the coupon.");
                 },
@@ -3882,6 +3893,7 @@ define("ads/ads.viewModel",
                     }
                     view = specifiedView;
                     ko.applyBindings(view.viewModel, view.bindingRoot);
+                    ko.applyBindings(view.viewModel, view.bindingRootgoSocial);
                     for (var i = 10; i < 81; i++) {
                         var text = i.toString();
                         if (i == 110)
@@ -4151,7 +4163,9 @@ define("ads/ads.viewModel",
                     totalvideoAdsCount: totalvideoAdsCount,
                     gridTotalCount: gridTotalCount,
                     CampaignRatioData: CampaignRatioData,
-                    LastModifiedDateVal: LastModifiedDateVal
+                    LastModifiedDateVal: LastModifiedDateVal,
+                    showSocialPopup: showSocialPopup,
+                    hideSocialPopup: hideSocialPopup
                 };
             })()
         };

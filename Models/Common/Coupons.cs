@@ -38,6 +38,9 @@ namespace SMD.Models.Common
         public string CurrencySymbol { get; set; }
 
         public double AvgRating { get; set; }
+
+        public string CouponLink { get; set; }
+        public int IsTwoForOneDeal { get; set; }
         
     }
 

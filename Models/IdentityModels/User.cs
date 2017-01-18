@@ -67,6 +67,10 @@ namespace SMD.Models.IdentityModels
         public Nullable<bool> optLatestNewsEmails { get; set; }
         public Nullable<bool> optMarketingEmails { get; set; }
 
+        public Nullable<bool> optPushNewDeals { get; set; }
+        public Nullable<bool> optPushNewPicturePoll { get; set; }
+             
+
         public string LastKnownLocationLat { get; set; }
         public string LastKnownLocationLong { get; set; }
         public System.Data.Entity.Spatial.DbGeography LastKnownLocation { get; set; }

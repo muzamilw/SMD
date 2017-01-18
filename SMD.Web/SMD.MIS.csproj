@@ -397,6 +397,7 @@
     <Compile Include="Areas\Api\Controllers\GetRandomAdCampaignController.cs" />
     <Compile Include="Areas\Api\Controllers\GetRandomDealController.cs" />
     <Compile Include="Areas\Api\Controllers\GetRandomPollsController.cs" />
+    <Compile Include="Areas\Api\Controllers\MarketingDealsController.cs" />
     <Compile Include="Areas\Api\Controllers\NotificationsController.cs" />
     <Compile Include="Areas\Api\Controllers\CouponAnalyticsController.cs" />
     <Compile Include="Areas\Api\Controllers\ApprovePayOutHistoryController.cs" />
@@ -633,6 +634,13 @@
     </Compile>
     <Compile Include="Emails\Deal_Expired.aspx.designer.cs">
       <DependentUpon>Deal_Expired.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\DailyuserCategoryClickDeals.aspx.cs">
+      <DependentUpon>DailyuserCategoryClickDeals.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\DailyuserCategoryClickDeals.aspx.designer.cs">
+      <DependentUpon>DailyuserCategoryClickDeals.aspx</DependentUpon>
     </Compile>
     <Compile Include="Emails\SendNotificationToAdvertiserForAdditional20DollarDiscounton2ndLastDay.aspx.cs">
       <DependentUpon>SendNotificationToAdvertiserForAdditional20DollarDiscounton2ndLastDay.aspx</DependentUpon>
@@ -1570,6 +1578,7 @@
     <Content Include="Content\themes\Centaurus\js\wizard.js" />
     <Content Include="Content\themes\Centaurus\js\xcharts.js" />
     <Content Include="Emails\Deal_Expired.aspx" />
+    <Content Include="Emails\DailyuserCategoryClickDeals.aspx" />
     <Content Include="Emails\SendNotificationToAdvertiserForAdditional20DollarDiscounton2ndLastDay.aspx" />
     <Content Include="Emails\SendNotificationToAdvertiserForAdditional30DollarDiscountonLastDay.aspx" />
     <Content Include="Emails\SendNotificationToAdvertiserForAdditional10DollarDiscounton3rdLastDay.aspx" />
@@ -1641,6 +1650,9 @@
     <Content Include="Images\Cash4ads_logo.png" />
     <Content Include="Images\Cash4Ads_White_pink.png" />
     <Content Include="Images\Cash4Ads_White_text.png" />
+    <Content Include="Images\clidyLogo.png" />
+    <Content Include="Images\clidy_circle_logo.png" />
+    <Content Include="Images\clodyInvoice.png" />
     <Content Include="Images\close2-128.png" />
     <Content Include="Images\commute.jpg" />
     <Content Include="Images\crowdcentz_logo.png" />
@@ -1648,13 +1660,17 @@
     <Content Include="Images\dealFooterimg.jpg" />
     <Content Include="Images\displayAdimg.jpg" />
     <Content Include="Images\download-on-google-play.png" />
+    <Content Include="Images\faceBook_Icon.png" />
+    <Content Include="Images\googleplay_icon.png" />
     <Content Include="Images\guru.png" />
     <Content Include="Images\heroAccent.png" />
     <Content Include="Images\imgDealFooter.png" />
     <Content Include="Images\imgAddFooter.png" />
     <Content Include="Images\imgFooterDisplay.png" />
     <Content Include="Images\imgFooterPools.png" />
+    <Content Include="Images\instragram_icon.png" />
     <Content Include="Images\iphoneStencil.png" />
+    <Content Include="Images\linckedin_icon.png" />
     <Content Include="Images\New_Register_Image.png" />
     <Content Include="Images\NY-city.jpg" />
     <Content Include="Images\orderedList0.png" />
@@ -1676,6 +1692,7 @@
     <Content Include="Images\qqtt.png" />
     <Content Include="Images\Red_Bell.png" />
     <Content Include="Images\select_image.jpg" />
+    <Content Include="Images\share_icon.png" />
     <Content Include="Images\Share_world.png" />
     <Content Include="Images\Sign_In_Image.png" />
     <Content Include="Images\splaceholder.png" />
@@ -1684,6 +1701,7 @@
     <Content Include="Images\Taget.png" />
     <Content Include="Images\Tips-Icon-2.png" />
     <Content Include="Images\topbarph.png" />
+    <Content Include="Images\twiter_Icon.png" />
     <Content Include="Images\videoAdImage.jpg" />
     <Content Include="Images\White_Arrow.png" />
     <Content Include="Images\youtube_play.JPG" />

@@ -166,5 +166,10 @@ namespace SMD.MIS.Areas.Api.Models
         public int Phone1CodeCountryID { get; set; }
 
         public string Phone1Code { get; set; }
+
+
+        public Nullable<bool> optDealsNearMeEmails { get; set; }
+        public Nullable<bool> optPushNewDeals { get; set; }
+        public Nullable<bool> optPushNewPicturePoll { get; set; }
     }
 }
