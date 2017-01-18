@@ -3791,6 +3791,16 @@ define("ads/ads.viewModel",
                          }
                      });
                  },
+                 showSocialPopup = function () {
+                     // isLoading(true);
+                     view.showSocialDialog();
+                 },
+                // Hide the dialog
+                 hideSocialPopup = function () {
+                     // Reset Call Backs
+                     //resetDialog();
+                     view.hideSocialDialog();
+                 },
                 showCouponGenerationWarning = function () {
                     toastr.warning("Please first save the coupon.");
                 },
@@ -3883,6 +3893,7 @@ define("ads/ads.viewModel",
                     }
                     view = specifiedView;
                     ko.applyBindings(view.viewModel, view.bindingRoot);
+                    ko.applyBindings(view.viewModel, view.bindingRootgoSocial);
                     for (var i = 10; i < 81; i++) {
                         var text = i.toString();
                         if (i == 110)
@@ -4152,7 +4163,9 @@ define("ads/ads.viewModel",
                     totalvideoAdsCount: totalvideoAdsCount,
                     gridTotalCount: gridTotalCount,
                     CampaignRatioData: CampaignRatioData,
-                    LastModifiedDateVal: LastModifiedDateVal
+                    LastModifiedDateVal: LastModifiedDateVal,
+                    showSocialPopup: showSocialPopup,
+                    hideSocialPopup: hideSocialPopup
                 };
             })()
         };

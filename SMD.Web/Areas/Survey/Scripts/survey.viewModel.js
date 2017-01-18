@@ -27,7 +27,7 @@ define("survey/survey.viewModel",
                     TemporaryQuizQuestions = ko.observableArray([]),
                     TemporarySurveyList = ko.observableArray([]),
                     price = ko.observable(0),
-                    totalSurveysCount =ko.observable(0),
+                    totalSurveysCount = ko.observable(0),
 
                     IsVisibleAudience = ko.observable(false),
                     IsBroadMarketing = ko.observable(true),
@@ -98,7 +98,7 @@ define("survey/survey.viewModel",
                     pollQuestion1 = ko.observable(),
                     pollQuestion2 = ko.observable(),
                     pollQuestion3 = ko.observable(),
-                    qStatuses = ko.observableArray([{ id: 0, value: 'All' }, { id: 1, value: 'Draft' }, { id: 2, value: 'Panding Approval' }, { id: 3, value: 'Live' }, { id: 4, value: 'Paused' },{ id: 6, value: 'Rejected' }]);
+                    qStatuses = ko.observableArray([{ id: 0, value: 'All' }, { id: 1, value: 'Draft' }, { id: 2, value: 'Panding Approval' }, { id: 3, value: 'Live' }, { id: 4, value: 'Paused' }, { id: 6, value: 'Rejected' }]);
                 statusFilterValue = ko.observable();
                 // Advertiser Analytics 
                 PieChartValue = ko.observableArray([0, 0]),
@@ -142,7 +142,7 @@ define("survey/survey.viewModel",
                         gender: selectedGenderAnalytics(),
                         age: selectedAgeAnalytics(),
                         type: 2,
-                        
+
                     }, {
                         success: function (data) {
                             if (data != null) {
@@ -160,15 +160,24 @@ define("survey/survey.viewModel",
 
 
                 },
+                 showSocialPopup = function () {
+                     // isLoading(true);
+                     view.showSocialDialog();
+                 },
+                // Hide the dialog
+                 hideSocialPopup = function () {
+                     // Reset Call Backs
+                     //resetDialog();
+                     view.hideSocialDialog();
+                 },
                 openAdvertiserDashboardPollScreen = function (item) {
 
                     // IsnewSurvey(false);
-                    if (item != undefined ){
+                    if (item != undefined) {
                         selectedSQIDAnalytics(item.SQID());
                         if (item.Question() != undefined)
                             HeaderText(item.Question());
-                        else
-                        {
+                        else {
                             HeaderText("Picture Polls");
                         }
                     }
@@ -201,7 +210,7 @@ define("survey/survey.viewModel",
                     gender: 0,
                     age: 0,
                     type: 1,
-                   
+
                 }, {
                     success: function (data) {
                         if (data != null) {
@@ -265,7 +274,7 @@ define("survey/survey.viewModel",
                     selectedGranularityAnalytics(1);
                     isflageClose(false);
                 },
-                
+
                 //End Advertiser Analytics 
                 //Get Questions
             getQuestions = function () {
@@ -328,7 +337,7 @@ define("survey/survey.viewModel",
                     });
 
             },
-        
+
                     getQuestionsResponse = function (SqId) {
                         dataservice.getSurvayAnalytics({
                             SQId: SqId,
@@ -338,15 +347,15 @@ define("survey/survey.viewModel",
                             gender: 0,
                             age: 0,
                             type: 3,
-                            
+
                         }, {
                             success: function (data) {
                                 if (data != null) {
-                                 
+
                                     var Element = ko.utils.arrayFirst(questions(), function (item) {
                                         return item.SQID() == data.SQID;
                                     });
-                                
+
                                     if (Element) {
                                         Element.PieChartData(data.pieCharts);
                                         Element.PieChartValue.removeAll();
@@ -359,7 +368,7 @@ define("survey/survey.viewModel",
                                         Element.PieChartlabel.valueHasMutated();
 
                                     }
-                                 
+
 
                                 }
                             },
@@ -376,12 +385,12 @@ define("survey/survey.viewModel",
                 questions.removeAll();
 
                 _.each(data.SurveyQuestions, function (item) {
-                 
+
                     questions.push(model.Survey.Create(updateSurveryItem(item)));
                 });
                 _.each(questions(), function (item) {
                     getQuestionsResponse(item.SQID());
-                    
+
                 });
                 pager().totalCount(data.TotalCount);
                 totalSurveysCount(data.TotalCount);
@@ -1555,41 +1564,40 @@ define("survey/survey.viewModel",
                  },
                 // submit  survey question for approval  dont remove comment lines in this method we will use it ater esting
 
-                surveyStripeSubscription = function()
-                {
+                surveyStripeSubscription = function () {
                     //stripeChargeCustomer.show(function () {
                     //    userBaseData().isStripeIntegrated = true;
 
 
-                        if (selectedQuestion().IsUseFilter() == 0) {
+                    if (selectedQuestion().IsUseFilter() == 0) {
 
 
-                            selectedQuestion().SurveyQuestionTargetLocation.removeAll();
-                            selectedQuestion().SurveyQuestionTargetCriteria.removeAll();
-                            selectedQuestion().AgeRangeEnd(80);
-                            selectedQuestion().AgeRangeStart(13);
-                            selectedQuestion().Gender('1');
-                            selectedQuestion().IsUseFilter('0');
+                        selectedQuestion().SurveyQuestionTargetLocation.removeAll();
+                        selectedQuestion().SurveyQuestionTargetCriteria.removeAll();
+                        selectedQuestion().AgeRangeEnd(80);
+                        selectedQuestion().AgeRangeStart(13);
+                        selectedQuestion().Gender('1');
+                        selectedQuestion().IsUseFilter('0');
 
+                    }
+                    else {
+                        selectedQuestion().IsUseFilter('1')
+                    }
+                    if (selectedQuestion().IsUseFilter() == 0) {
+
+                        toastr.error("No Target Match.");
+                    }
+
+                    else {
+                        if (selectedQuestion().IsUseFilter() == 1) {
+
+                            selectedQuestion().IsUseFilter(true);
                         }
                         else {
-                            selectedQuestion().IsUseFilter('1')
+                            selectedQuestion().IsUseFilter(false);
                         }
-                        if (selectedQuestion().IsUseFilter() == 0) {
-
-                            toastr.error("No Target Match.");
-                        }
-
-                        else {
-                            if (selectedQuestion().IsUseFilter() == 1) {
-
-                                selectedQuestion().IsUseFilter(true);
-                            }
-                            else {
-                                selectedQuestion().IsUseFilter(false);
-                            }
-                            saveSurveyQuestion(2);
-                        }
+                        saveSurveyQuestion(2);
+                    }
 
 
                     //}, 2000, 'Enter your details');
@@ -1608,11 +1616,11 @@ define("survey/survey.viewModel",
                                     return;
                                 }
                                 else {
-                                    if (userBaseData().isStripeIntegrated == false && userBaseData().IsSpecialAccount!=true) {
+                                    if (userBaseData().isStripeIntegrated == false && userBaseData().IsSpecialAccount != true) {
                                         confirmation.headingPaymentText("Picture Poll - Submission Fee - FREE");
                                         confirmation.messagePaymentText("One Time Charge for this Campaign " + "£9.".strike() + " FREE for BETA" + "<br\>" + "You will not be charged the submission fee again if you pause or resume this campaign after approval.");
                                         confirmation.afterProceedPayment(function () {
-                                             surveyStripeSubscription();
+                                            surveyStripeSubscription();
                                         });
                                         confirmation.yesPaymentBtnText("Continue");
                                         confirmation.noPayemetBtnText("Back to Draft");
@@ -1751,7 +1759,7 @@ define("survey/survey.viewModel",
                     if (selectedQuestion().isValid()) {
                         if (ValidateSurvey() == true) {
                             selectedQuestion().Status(mode);
-                            
+
                             var surveyData = selectedQuestion().convertToServerData();
                             dataservice.addSurveyData(surveyData, {
                                 success: function (data) {
@@ -1769,7 +1777,7 @@ define("survey/survey.viewModel",
                                 }
                             });
                         }
-                        
+
                     } else {
                         if (isEditorVisible()) {
                             selectedQuestion().errors.showAllMessages();
@@ -2514,8 +2522,10 @@ define("survey/survey.viewModel",
                 }
                 // Initialize the view model
                 initialize = function (specifiedView) {
+                    debugger;
                     view = specifiedView;
                     ko.applyBindings(view.viewModel, view.bindingRoot);
+                    ko.applyBindings(view.viewModel, view.bindingRootgoSocial);
                     for (var i = 10; i < 111; i++) {
                         var text = i.toString();
                         if (i == 110)
@@ -2683,7 +2693,7 @@ define("survey/survey.viewModel",
                     selectedAgeAnalytics: selectedAgeAnalytics,
                     getDDAnalytic: getDDAnalytic,
                     DDStatsAnalytics: DDStatsAnalytics,
-                    hasImpression: hasImpression, 
+                    hasImpression: hasImpression,
                     isPollSearch: isPollSearch,
                     islblText: islblText,
                     leftPollImg1: leftPollImg1,
@@ -2697,7 +2707,9 @@ define("survey/survey.viewModel",
                     pollQuestion3: pollQuestion3,
                     totalSurveysCount: totalSurveysCount,
                     gridTotalCount: gridTotalCount,
-                    CampaignRatioData: CampaignRatioData
+                    CampaignRatioData: CampaignRatioData,
+                    showSocialPopup: showSocialPopup,
+                    hideSocialPopup: hideSocialPopup
                 };
             })()
         };
