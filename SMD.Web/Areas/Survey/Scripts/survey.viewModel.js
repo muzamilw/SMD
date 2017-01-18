@@ -133,6 +133,8 @@ define("survey/survey.viewModel",
                 hasImpression = ko.observable(false),
                 isPollSearch = ko.observable(false),
                 islblText = ko.observable(false),
+                Picture1Path = ko.observable(),
+                Picture2Path = ko.observable(),
                 getDDAnalytic = function () {
                     dataservice.getSurvayAnalytics({
                         SQId: selectedSQIDAnalytics(),
@@ -171,13 +173,15 @@ define("survey/survey.viewModel",
                      view.hideSocialDialog();
                  },
                 openAdvertiserDashboardPollScreen = function (item) {
-
+                 
                     // IsnewSurvey(false);
                     if (item != undefined) {
                         selectedSQIDAnalytics(item.SQID());
-                        if (item.Question() != undefined)
+                        if (item.Question() != undefined) {
                             HeaderText(item.Question());
-                        else {
+                            Picture1Path(item.LeftPicturePath());
+                            Picture2Path(item.RightPicturePath());
+                        } else {
                             HeaderText("Picture Polls");
                         }
                     }
@@ -2709,7 +2713,9 @@ define("survey/survey.viewModel",
                     gridTotalCount: gridTotalCount,
                     CampaignRatioData: CampaignRatioData,
                     showSocialPopup: showSocialPopup,
-                    hideSocialPopup: hideSocialPopup
+                    hideSocialPopup: hideSocialPopup,
+                    Picture1Path: Picture1Path,
+                    Picture2Path: Picture2Path
                 };
             })()
         };

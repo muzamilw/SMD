@@ -75,14 +75,22 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="lightgrayBox" style="height:230px;">
-                        <table style="height:190px;">
-                            <!-- ko template: { name: 'ROITblAnalyticsDataTemplate' , foreach: $root.CampaignROItblAnalyticData } -->
-                            <!-- /ko -->
+                        <table >
+                            <tr >
+                                <td style="padding-left:20px;padding-top: 25px;">
+                                    <img data-bind="attr: { src: $root.Picture1Path()}" style="width:70px;height:140px" />
+                                </td>
+                                <td style="padding-left:20px;padding-top: 25px;">
+                                    <img data-bind="attr: { src:$root.Picture2Path()}" style="width:70px;height:140px" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <!-- ko template: { name: 'ROITblAnalyticsDataTemplate' , foreach: $root.CampaignROItblAnalyticData } -->
+                                <!-- /ko -->
+                            </tr>
                         </table>
                     </div>
-
-
-                </div>
+               </div>
 
             </div>
             <div class="row">
@@ -214,14 +222,8 @@
 </script>
 
 <script id="ROITblAnalyticsDataTemplate" type="text/html">
-
-    <tr>
-        <td>Picture &nbsp;<span data-bind="text: label"></span></td>
-
-        <td class="padingL15 text-right"></td>
-        <td class="padingL15 text-right">
-
+        <td style="padding-left:40px;font-size:small;padding-top:3px;">
+       
             <span data-bind="text: value"></span>%
         </td>
-    </tr>
 </script>
