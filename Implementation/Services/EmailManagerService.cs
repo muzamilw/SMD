@@ -1240,7 +1240,7 @@ namespace SMD.Implementation.Services
                 CampaignName = campaignName;
 
                 CampaignClicksPerDay = ClicksPerDay.ToString();
-                CampaignBannerImage = BannerPath;
+                CampaignBannerImage = "http://manage.cash4ads.com/" + BannerPath;
 
 
                 SendEmailNotAysnc();
@@ -1269,7 +1269,7 @@ namespace SMD.Implementation.Services
                 CampaignName = campaignName;
 
                 CampaignClicksPerDay = ClicksPerDay.ToString();
-                CampaignBannerImage = BannerPath;
+                CampaignBannerImage = "http://manage.cash4ads.com/" + BannerPath; 
 
 
                 SendEmailNotAysnc();
@@ -1295,7 +1295,7 @@ namespace SMD.Implementation.Services
                 RejectionReason = RReason;
                 CampaignName = campaignName;
                 CampaignClicksPerDay = ClicksPerDay.ToString();
-                CampaignBannerImage = BannerPath;
+                CampaignBannerImage = "http://manage.cash4ads.com/" + BannerPath; 
                 RejectionReason = RReason;
 
                 SendEmailNotAysnc();
@@ -1570,6 +1570,8 @@ namespace SMD.Implementation.Services
                                     answercolor = "green";
                                 else
                                     answercolor = "red";
+
+                                
 
 
                                 break;
