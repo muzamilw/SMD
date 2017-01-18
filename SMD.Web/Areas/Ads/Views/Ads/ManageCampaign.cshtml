@@ -945,10 +945,10 @@ else
                                         <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Choice 1</label>
                                     </div>
                                     <div class="col-lg-4">
-                                        <input type="text" class="form-control" id="txtVerifyAnswer1" placeholder="Enter your answer 1 (14 characters)" data-bind="value: Answer1,enable:$root.isClickRateVisible()!=true" maxlength="14">
+                                        <input type="text" class="form-control" id="txtVerifyAnswer1" placeholder="Enter your answer 1 (20 characters)" data-bind="value: Answer1,enable:$root.isClickRateVisible()!=true" maxlength="20">
                                     </div>
                                     <div style="margin-top:5px;">
-                                        <label id=" lbltotalCharacter" style="color: lightgray;margin-top:5px;margin-left:0px;"> 14 chars</label>
+                                        <label id=" lbltotalCharacter" style="color: lightgray;margin-top:5px;margin-left:0px;"> 20 chars</label>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -956,10 +956,10 @@ else
                                         <label for="txtVerifyAnswer2" class="control-label text-right floatNone defaultImgUploadImageBtn">Choice 2</label>
                                     </div>
                                     <div class="col-lg-4">
-                                        <input type="text" class="form-control" id="txtVerifyAnswer2" placeholder="Enter your answer 2 (14 characters)" data-bind="value: Answer2,enable:$root.isClickRateVisible()!=true" maxlength="14">
+                                        <input type="text" class="form-control" id="txtVerifyAnswer2" placeholder="Enter your answer 2 (20 characters)" data-bind="value: Answer2,enable:$root.isClickRateVisible()!=true" maxlength="20">
                                     </div>
                                     <div style="margin-top:5px;">
-                                        <label id=" lbltotalCharacter" style="color: lightgray;margin-top:5px;margin-left:0px;"> 14 chars</label>
+                                        <label id=" lbltotalCharacter" style="color: lightgray;margin-top:5px;margin-left:0px;"> 20 chars</label>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -967,10 +967,10 @@ else
                                         <label for="txtVerifyAnswer3" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Choice 3</label>
                                     </div>
                                     <div class="col-lg-4">
-                                        <input type="text" class="form-control" id="txtVerifyAnswer3" placeholder="Enter your answer 3 (14 characters)" data-bind="value: Answer3,enable:$root.isClickRateVisible()!=true" maxlength="14">
+                                        <input type="text" class="form-control" id="txtVerifyAnswer3" placeholder="Enter your answer 3 (20 characters)" data-bind="value: Answer3,enable:$root.isClickRateVisible()!=true" maxlength="20">
                                     </div>
                                     <div style="margin-top:5px;">
-                                        <label id=" lbltotalCharacter" style="color: lightgray;margin-top:5px;margin-left:0px;"> 14 chars</label>
+                                        <label id=" lbltotalCharacter" style="color: lightgray;margin-top:5px;margin-left:0px;"> 20 chars</label>
                                     </div>
                                     <div class="col-lg-3">
 
@@ -1155,7 +1155,7 @@ else
                                 </div>
                                 <div class="row" style="margin-top:12px;">
                                     <div data-bind="visible:$root.isClickRateVisible()!=true">
-                                        <div class="col-lg-12" style="margin-top:14px;">
+                                        <div class="col-lg-12" style="margin-top:14px;display:none">
 
                                             <div class="col-lg-7" style="padding-top:3px;">
                                                 <div class="col-lg-11 paddingright0px">
@@ -1168,13 +1168,13 @@ else
 
                                             <div class="col-lg-5" data-bind="with: $root.campaignModel">
                                                 <div class="col-lg-12" style="padding-left:0px;">
-                                                    <input type="text" style="float:left; color:#127abd; font-weight: bold;font-size: 15px; width:65px;" name="Budget" class="form-control" id="txtPerClick" data-bind="autoNumeric: ClickRate,settings:{mDec:2},validationTooltip:ClickRate, validationOnElement: ClickRate"> <span style="float:right;margin-top:7px;font-size:11px;">GBP</span>
+                                                    <input type="text" style="float:left; color:#127abd; font-weight: bold;font-size: 15px; width:65px;" readonly="readonly" name="Budget" class="form-control" id="txtPerClick" data-bind="autoNumeric: ClickRate,settings:{mDec:2},validationTooltip:ClickRate, validationOnElement: ClickRate"> <span style="float:right;margin-top:7px;font-size:11px;">GBP</span>
                                                 </div>
 
                                             </div>
                                         </div>
 
-                                        <div style="margin-top:12px;" class="col-lg-12">
+                                        <div style="margin-top:12px;display:none" class="col-lg-12">
 
                                             <div class="col-lg-7" style="float:left;padding-top:4px;">
                                                 <div class="col-lg-11">
@@ -1189,7 +1189,7 @@ else
 
                                             <div class="col-lg-5" style="" data-bind="with: $root.campaignModel">
                                                 <div class="col-lg-12" style="padding-left:0px;">
-                                                    <input type="text" style="float:left;width:65px; color:#127abd; font-weight: bold;font-size: 15px; " name="Budget" class="form-control" id="txtPerClick" data-bind="autoNumeric: MaxDailyBudget,settings:{mDec:2},validationTooltip:MaxDailyBudget, validationOnElement: MaxDailyBudget"> <span style="float:right;margin-top:7px;font-size:11px;">GBP</span>
+                                                    <input type="text" style="float:left;width:65px; color:#127abd; font-weight: bold;font-size: 15px; " readonly="readonly" name="Budget" class="form-control" id="txtPerClick" data-bind="autoNumeric: MaxDailyBudget,settings:{mDec:2},validationTooltip:MaxDailyBudget, validationOnElement: MaxDailyBudget"> <span style="float:right;margin-top:7px;font-size:11px;">GBP</span>
                                                 </div>
                                             </div>
                                         </div>

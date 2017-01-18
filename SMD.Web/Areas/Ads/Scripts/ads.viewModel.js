@@ -760,7 +760,7 @@ define("ads/ads.viewModel",
                 isShowArchiveBtn(false);
                 campaignModel().ChannelType("1");
 
-                campaignModel().MaxDailyBudget("5");
+                campaignModel().MaxDailyBudget("500");
                 campaignModel().MaxBudget("20");
                 campaignModel().Type(mode);
                 campaignModel().DeliveryDays("2");

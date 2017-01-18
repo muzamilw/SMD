@@ -151,13 +151,13 @@ h1 small, h2 small, h3 small, h1 .small, h2 .small, h3 .small {
 }
 
 .btn-primary {
-    background-color: #3498db;
-    border-color: #2980b9;
+    background-color: #27ae60;
+    border-color: #27ae60;
 }
 
     .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
         background-color: #2980b9;
-        border-color: #1c5c87;
+        border-color: #27ae60;
     }
 
 .btn-darkgray {

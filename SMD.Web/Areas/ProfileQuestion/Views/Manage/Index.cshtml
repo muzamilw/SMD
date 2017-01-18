@@ -6,18 +6,18 @@
 
 
 <div class="row" id="Heading_div">
-    <div class="col-lg-12" style="padding-left: 0px;padding-right:0px;">
-        <div style="width:91px;" class="pull-left">
+    <div class="col-lg-12" style="padding-left: 16px;padding-right:0px;">
+        <div style="width:450px;" class="pull-left">
 
-            <label id="headlabel" style="font-size:24px;color:#fff!important;margin-top:7px;">Surveys</label>
+            <label id="headlabel" style="font-size:24px;color:#fff!important;margin-top:7px;">System Profile Question</label>
 
         </div>
         <div style="width:5px;">
 
         </div>
 
-        <div style="width:1050px" class="pull-left">
-            <label id="headdesc" style="color:#fff;font-size:14px;margin-top:17px;">Run a 2, 4 or 6 Q & A survey to a target audience.</label>
+        <div style="width:650px" class="pull-left">
+            @*<label id="headdesc" style="color:#fff;font-size:14px;margin-top:17px;">Run a 2, 4 or 6 Q & A survey to a target audience.</label>*@
             <img class="pull-right closecls" src="~/Content/Images/Close_Button.png" style="margin-top:15px;" onclick="GotoHome();" />
             <div class="clearfix"></div>
         </div>
@@ -27,8 +27,8 @@
 
  
 
-<div class="row" id="ProfileQuestionBindingSpot" style="margin-top:5px;">
-    <div class="col-lg-12" data-bind="visible: !$root.isEditorVisible()" style="padding-right:18px;padding-left:0px;">
+<div class="row" id="ProfileQuestionBindingSpot" style="margin-top:5px;margin-left:0px;">
+    <div class="col-lg-12" data-bind="visible: !$root.isEditorVisible()" style="padding-right:18px;padding-left:8px;">
 
         <!-- ko stopBinding: true -->
         @Html.Partial("~/Areas/Common/Views/Shared/_StripeChargeCustomerDialog.cshtml")
