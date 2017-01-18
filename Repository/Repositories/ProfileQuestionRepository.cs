@@ -215,13 +215,13 @@ namespace SMD.Repository.Repositories
                 data.EducationId = usr.EducationId;
                 data.IndustryId = usr.IndustryId;
                 data.LanguageId = usr.LanguageId;
-                data.City = usr.Company.City != null ? usr.Company.City : "";
-                data.Country = usr.Company.Country != null ? usr.Company.Country.CountryName : "";
+                data.City = usr.Company != null? usr.Company.City != null ? usr.Company.City : "":"";
+                data.Country =usr.Company!=null? usr.Company.Country != null ? usr.Company.Country.CountryName : "":"";
                 data.Education = usr.Education != null ? usr.Education.Title : "";
                 data.Industry = usr.Industry != null ? usr.Industry.IndustryName : "";
                 data.Language = usr.Language != null ? usr.Language.LanguageName : "";
                 data.isStripeIntegrated = usr.Company == null ? false : String.IsNullOrEmpty(usr.Company.StripeCustomerId) == true ? false : true;
-                data.IsSpecialAccount = usr.Company.IsSpecialAccount;
+                data.IsSpecialAccount = usr.Company!=null? usr.Company.IsSpecialAccount:false;
                 //data.Latitude = usr.Company.City != null ? usr.Company.City.GeoLat : "";
                 //data.Longitude = usr.Company.City != null ? usr.Company.City.GeoLong : "";
                 data.isUserAdmin = isAdmin;
