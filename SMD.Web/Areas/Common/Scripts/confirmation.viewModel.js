@@ -167,6 +167,10 @@ define("common/confirmation.viewModel",
                    isLoading(true);
                    view.showOKpopupforFreeCoupon();
                },
+                 showOKpopupforSocail = function () {
+                     isLoading(true);
+                     view.showOKpopupforSocial();
+                 },
                 showOKpopupforMax3Deal = function () {
                     isLoading(true);
                     view.showOKpopupforMax3Deal();
@@ -315,7 +319,9 @@ define("common/confirmation.viewModel",
                 showOKpopupforFreeCoupon: showOKpopupforFreeCoupon,
                 showOKpopupfordealheadline: showOKpopupfordealheadline,
                 showAccountSetingPopup: showAccountSetingPopup,
-                showOKpopupforMax3Deal: showOKpopupforMax3Deal
+                showOKpopupforMax3Deal: showOKpopupforMax3Deal,
+                showOKpopupforSocail: showOKpopupforSocail
+
             };
     })()
 };

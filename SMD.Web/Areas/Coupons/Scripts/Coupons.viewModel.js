@@ -666,6 +666,21 @@ define("Coupons/Coupons.viewModel",
                      });
 
                     },
+                   showSocialPopup = function () {
+                      // isLoading(true);
+                       view.showSocialDialog();
+                   },
+                // Hide the dialog
+                 hideSocialPopup = function () {
+                     // Reset Call Backs
+                     //resetDialog();
+                     view.hideSocialDialog();
+                 },
+                 onGoSocial = function ()
+                 {
+                     confirmation.showOKpopupforSocail();
+
+                 }
             CloseCouponsAnalyticView = function () {
                 isEditorVisible(false);
                 isListVisible(true);
@@ -3238,6 +3253,7 @@ dealSubscription = function () {
                     getCompanyData(ComId);
                     view = specifiedView;
                     ko.applyBindings(view.viewModel, view.bindingRoot);
+                    ko.applyBindings(view.viewModel, view.bindingRootgoSocial);
                     for (var i = 10; i < 81; i++) {
                         var text = i.toString();
                         if (i == 110)
@@ -3505,7 +3521,10 @@ dealSubscription = function () {
                     islabelvisible: islabelvisible,
                     IsenableBanner: IsenableBanner,
                     gridTotalCount: gridTotalCount,
-                    CampaignRatioData: CampaignRatioData
+                    CampaignRatioData: CampaignRatioData,
+                    showSocialPopup: showSocialPopup,
+                    hideSocialPopup: hideSocialPopup,
+                    onGoSocial: onGoSocial
                 };
             })()
         };
