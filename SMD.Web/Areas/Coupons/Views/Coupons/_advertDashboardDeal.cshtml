@@ -90,78 +90,178 @@
                                 <div class="lightgrayBox">
 
                                     <div class="row">
+                                        <div class="col-lg-6">
+                                            <span class="filterH">
+                                                Deal Impressions (viewed)
+                                            </span>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <span class="filterH">
+                                                Deal Click thru
+                                            </span>
+                                        </div>
+                                    </div>
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <table style="background-color:white;width:92%;">
+                                                        <tr>
+                                                            <td class="col-lg-2" style="text-align: -webkit-right;">Gender : </td>
+                                                            <td class="col-lg-4"><select class="form-control" id="ddGDropDown" data-bind="options: $root.GenderAnalyticsData, optionsText: 'name', optionsValue: 'id', value:$root.selectedOGenderAnalytics, event: { change: $root.getDDOAnalytic }"></select></td>
+                                                            <td class="col-lg-2 statsbig" rowspan="2">
+                                                                <span data-bind="text: $root.DDOStatsAnalytics"></span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-lg-2" style="text-align: -webkit-right;">Age : </td>
+                                                            <td class="col-lg-3"><select class="form-control" id="ddADropDown" data-bind="options: $root.AgeRangeAnalyticsData, optionsText: 'name', optionsValue: 'id', value:$root.selectedOAgeAnalytics, event: { change: $root.getDDOAnalytic }"></select></td>
 
-                                        <span class="filterH">
-                                            Deal Impression
-                                        </span>
+                                                           
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <table style="background-color:white;width:92%;">
+                                                        <tr>
+                                                            <td class="col-lg-2" style="text-align: -webkit-right;">Gender : </td>
+                                                            <td class="col-lg-4"><select class="form-control" id="ddCTGDropDown" data-bind="options: $root.GenderAnalyticsData, optionsText: 'name', optionsValue: 'id', value:$root.selectedCTGenderAnalytics, event: { change: $root.getDDCTAnalytic }"></select></td>
+                                                            <td class="col-lg-2 statsbig" rowspan="2">
+                                                                <span data-bind="text: $root.DDCTStatsAnalytics"></span>
+                                                            </td>   
+                                                        </tr>
+                                                        <tr>
+                                                             <td class="col-lg-2" style="text-align: -webkit-right;">Age : </td>
+                                                            <td class="col-lg-3"><select class="form-control" id="ddCTADropDown" data-bind="options: $root.AgeRangeAnalyticsData, optionsText: 'name', optionsValue: 'id', value:$root.selectedCTAgeAnalytics, event: { change: $root.getDDCTAnalytic }"></select></td>
+                                                            
+
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                                </div>
+                                            <br />
+                                         </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="lightgrayBox">
+
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <span class="filterH">
+                                                By Profession
+                                            </span>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <span class="filterH">
+                                                By Device
+                                            </span>
+                                        </div>
                                     </div>
                                     <div class="row">
-                                        <table style="background-color:white;width:92%;">
-                                            <tr>
-                                                <td class="col-lg-2" style="text-align: -webkit-right;">Gender : </td>
-                                                <td class="col-lg-3"><select class="form-control" id="ddGDropDown" data-bind="options: $root.GenderAnalyticsData, optionsText: 'name', optionsValue: 'id', value:$root.selectedOGenderAnalytics, event: { change: $root.getDDOAnalytic }"></select></td>
-                                                <td class="col-lg-2" style="text-align: -webkit-right;">Age : </td>
-                                                <td class="col-lg-3"><select class="form-control" id="ddADropDown" data-bind="options: $root.AgeRangeAnalyticsData, optionsText: 'name', optionsValue: 'id', value:$root.selectedOAgeAnalytics, event: { change: $root.getDDOAnalytic }"></select></td>
+                                        <div class="col-lg-6">
+                                            <table style="background-color:white;width:92%;">
+                                                <tr>
+                                                    <td class="col-lg-2" style="text-align: -webkit-right;">Profession : </td>
+                                                    <td class="col-lg-4"><select class="form-control" id="ddGDropDown" data-bind="options: $root.ProfessionAnalyticsData, optionsText: 'name', optionsValue: 'name', value:$root.selectedProAnalytics, event: { change: $root.getDDPAnalytic }"></select></td>
+                                                    <td class="col-lg-2 statsbig" >
+                                                        <span data-bind="text: $root.DDPStatsAnalytics"></span>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <table style="background-color:white;width:92%;">
+                                                <tr>
+                                                    <td class="col-lg-2" style="text-align: -webkit-right;">IOS : </td>
+                                                    <td class="col-lg-4">Coming soon</td>
+                                                   
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-lg-2" style="text-align: -webkit-right;">Android : </td>
+                                                    <td class="col-lg-3">Coming soon</td>
 
-                                                <td class="col-lg-2 statsbig">
-                                                    <span data-bind="text: $root.DDOStatsAnalytics"></span>
-                                                </td>
-                                            </tr>
-                                        </table>
+
+                                                </tr>
+                                            </table>
+                                        </div>
                                     </div>
                                     <br />
-                                    <div class="row">
-
-                                        <span class="filterH">
-                                            Deal Click thru
-                                        </span>
-                                    </div>
-                                    <div class="row">
-                                        <table style="background-color:white;width:92%;">
-                                            <tr>
-                                                <td class="col-lg-2" style="text-align: -webkit-right;">Gender : </td>
-                                                <td class="col-lg-3"><select class="form-control" id="ddCTGDropDown" data-bind="options: $root.GenderAnalyticsData, optionsText: 'name', optionsValue: 'id', value:$root.selectedCTGenderAnalytics, event: { change: $root.getDDCTAnalytic }"></select></td>
-                                                <td class="col-lg-2" style="text-align: -webkit-right;">Age : </td>
-                                                <td class="col-lg-3"><select class="form-control" id="ddCTADropDown" data-bind="options: $root.AgeRangeAnalyticsData, optionsText: 'name', optionsValue: 'id', value:$root.selectedCTAgeAnalytics, event: { change: $root.getDDCTAnalytic }"></select></td>
-                                                <td class="col-lg-2 statsbig">
-                                                    <span data-bind="text: $root.DDCTStatsAnalytics"></span>
-                                                </td>
-
-                                            </tr>
-                                        </table>
-                                    </div>
-
-
-
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
                     <br />
-                    <div class="analyticsBox" data-bind="visible:$root.hasImpression">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <label class="analyticH2"> Deal Group Viewed by Location</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class=" margin10">
-                                    <div id="heatmapId" style="height:500px;">
+                    <div class="row">
+                        <div class="col-lg-6">
+
+                            <div class="analyticsBox">
+                                <div class="row">
+                                    <label class="analyticH2"> By Age Group</label>
+                                </div>
+                                <div class="row">
+                                        <div class=" margin10">
+                                            <div style="height:150px;" data-bind="morris: {type: 'Bar', data: $root.DealsAnalyticsData, xkey: 'Granual', ykeys: ['openStats', 'ConvrsionStats'], labels: ['Total Impressions', 'Click thru'], yLabelFormat: function(y){return y != Math.round(y)?'':y;} , parseTime:false, setAxisAlignFirstX: true, lineColors: ['blue','green'] }"></div>
+
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="analyticsBox">
+                                <div class="row">
+                                    
+                                        <label class="analyticH2"> By Gender</label>
+                                </div>
+                                <div class="row">
+                                        <div class=" margin10">
+                                            <div style="height:150px;" data-bind="morris: {type: 'Bar', data: $root.DealsAnalyticsData, xkey: 'Granual', ykeys: ['openStats', 'ConvrsionStats'], labels: ['Total Impressions', 'Click thru'], yLabelFormat: function(y){return y != Math.round(y)?'':y;} , parseTime:false, setAxisAlignFirstX: true, lineColors: ['blue','green'] }"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        <br />
+                        <div class="analyticsBox">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <label class="analyticH2"> By Profession</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class=" margin10">
+                                        <div style="height:150px;" data-bind="morris: {type: 'Line', data: $root.DealsAnalyticsData, xkey: 'Granual', ykeys: ['openStats', 'ConvrsionStats'], labels: ['Total Impressions', 'Click thru'], yLabelFormat: function(y){return y != Math.round(y)?'':y;} , parseTime:false, setAxisAlignFirstX: true, lineColors: ['blue','green'] }"></div>
+
+                                    </div>
+                                </div>
+
+                            </div>
 
                         </div>
-                    </div>
+                        <br />
+                        <div class="analyticsBox" data-bind="visible:$root.hasImpression">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <label class="analyticH2"> Deal Group Viewed by Location</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class=" margin10">
+                                        <div id="heatmapId" style="height:500px;">
+                                        </div>
+                                    </div>
+                                </div>
 
-                    <div class="clearfix">
+                            </div>
+                        </div>
+
+                        <div class="clearfix">
+                        </div>
+                        <div class="clearfix">
+                        </div>
                     </div>
-                    <div class="clearfix">
-                    </div>
-                </div>
 
             </div>
 
