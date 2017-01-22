@@ -271,7 +271,7 @@
                                                         <label for="txtBuyItlbl" class="text-right tooltip-float floatNone">First Discount</label>
                                                     </div>
                                                     <div class="col-lg-6">
-                                                        <select class="form-control"  id="firstDiscount" data-bind="value:dealFirstDiscountType,disable:true">
+                                                        <select class="form-control" id="firstDiscount" data-bind="value:dealFirstDiscountType,disable:true">
 
                                                             <option value=" 0">
                                                                 10% Off
@@ -321,9 +321,9 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                           
+
                                         </div>
-                                        
+
                                         <div class="col-lg-12" style=" margin-left:80px">
 
                                             <div class="col-lg-9 borderPanel " style="margin-bottom:20px;">
@@ -331,19 +331,21 @@
                                                 <!-- /ko -->
                                             </div>
                                         </div>
+                                    </div>
 
 
 
-                                        @*<div class="col-lg-9">
-                                                <div class="form-group">
-                                                    <div class="col-lg-4 text-right">
-                                                        <label class="control-label text-right tooltip-float">Deal Title</label>
-                                                    </div>
-                                                    <div class="col-lg-6">
-                                                        <input type="text" readonly class="form-control" data-bind="value:title">
-                                                    </div>
+                                    @*<div class="col-lg-9">
+                                            <div class="form-group">
+                                                <div class="col-lg-4 text-right">
+                                                    <label class="control-label text-right tooltip-float">Deal Title</label>
                                                 </div>
-                                            </div>*@
+                                                <div class="col-lg-6">
+                                                    <input type="text" readonly class="form-control" data-bind="value:title">
+                                                </div>
+                                            </div>
+                                        </div>*@
+                                    <div data-bind="with: $root.selectedCoupon">
                                         <div class="col-lg-9">
                                             <div class="form-group" style="display:none">
                                                 <div class="col-lg-4 text-right">
@@ -846,13 +848,13 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-lg-2 text-right">
-                         
+
                                                             <label class="control-label text-right tooltip-float">Rejection Reason</label>
                                                         </div>
                                                         <div class="col-lg-8">
                                                             <select class="form-control" id="rejectReasondd" style="width:100%;margin-bottom:15px;" data-bind="options: $root.rejectionReasondd, optionsText: 'Reason', optionsValue: 'Reason', optionsCaption: 'Select Rejection Reason',event:{ change: $root.onChangeRejectionReason}"></select>
                                                             <textarea placeholder="Enter rejection reason " style="resize: none" rows="5" data-bind="value:rejectedReason" class="form-control"></textarea>
-                                  
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -914,7 +916,8 @@
 
             <div class="row" style="margin-top:20px;">
                 <div class="col-lg-3">
-                    <label for="txtDescription" class="control-label text-right tooltip-float floatNone">Deal Line Desc.</label>
+                    <label for="txtDescription" class="control-label t
+                           ext-right tooltip-float floatNone">Deal Line Desc.</label>
                 </div>
                 <div class="col-lg-7">
                     <input class="form-control" id="txtDescription" readonly data-bind="value: Description" placeholder="Max 56 characters" maxlength="56" />
@@ -998,7 +1001,7 @@
                     <label for="txtSaving" class="control-label text-right tooltip-float floatNone">Button URL</label>
                 </div>
                 <div class="col-lg-7">
-                    <input class="form-control" readonly placeholder="Paste 'Call for Action' link to your Landing Page" data-bind="value: URL" maxlength="400" />
+                    <input class="form-control" readonly placeholder="Paste 'Call for Action' link to your Landing Page" data-bind="value: URL==null?'':URL" maxlength="400" />
                 </div>
                 <div class="col-lg-2">
                     <a class="btn  btn-success gtild-color" target="_blank" data-bind="attr: { href: URL }" id="btnBack">Test Link</a>
@@ -1010,16 +1013,16 @@
                     <label for="txtSaving" class="control-label text-right tooltip-float floatNone">Promo Code</label>
                 </div>
                 <div class="col-lg-2 ">
-                    <input class="form-control" readonly id="txtpromoCode1" maxlength="12" data-bind="value:VoucherCode" />
+                    <input class="form-control" readonly id="txtpromoCode1" maxlength="12" data-bind="value:VoucherCode==null?'':VoucherCode" />
                 </div>
                 <div class="col-lg-2">
-                    <input class="form-control" readonly id="txtpromoCode2" maxlength="12" data-bind="value:VoucherCode2" />
+                    <input class="form-control" readonly id="txtpromoCode2" maxlength="12" data-bind="value:VoucherCode2==null?'':VoucherCode2" />
                 </div>
                 <div class="col-lg-2">
-                    <input class="form-control" readonly id="txtpromoCode3" maxlength="12" data-bind="value:VoucherCode3" />
+                    <input class="form-control" readonly id="txtpromoCode3" maxlength="12" data-bind="value:VoucherCode3==null?'':VoucherCode3" />
                 </div>
                 <div class="col-lg-2">
-                    <input class="form-control" readonly id="txtpromoCode4" maxlength="12" data-bind="value:VoucherCode4" />
+                    <input class="form-control" readonly id="txtpromoCode4" maxlength="12" data-bind="value:VoucherCode4==null?'':VoucherCode4" />
                 </div>
             </div>
         </div>

@@ -154,10 +154,10 @@
                                         <div class="pull-right ads-numbering-main">
                                             <a data-toggle="modal">
                                                 <div class="ads-numbering-box socialbck">
-                                                    <img src="~/Content/Images/Share_icon_100.png" width="20px" />
+                                                    <img src="~/Content/Images/Share_icon_100.png" width="20px" data-bind="click:$root.showSocialPopup"  />
                                                 </div>
                                                 <br />
-                                                <span class="goSocial">Go Social</span>
+                                                <span class="goSocial" data-bind="click:$root.showSocialPopup">Go Social</span>
                                             </a>
                                         </div>
                                     </div>
@@ -2218,6 +2218,7 @@
     </div>
 
 </div>
+
 <div class="modal fade my-modal model_quizQ_ph" id="phQuizDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" style=" width:330px;">
         <div class="col-lg-6 preview_stencilImg" style=" margin-right: 35px; width:310px;">

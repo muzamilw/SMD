@@ -589,6 +589,7 @@ svg{
     border-left: lightgrey solid 1px;
     font-size: xx-large;
     text-align: -webkit-center;
+    color:blue;
 }
 .filterH{
     font-weight:bold;font-size: x-large;float:left;padding-left:15px;
@@ -630,6 +631,6 @@ svg{
 
 }
 .piechart{
-    height:140px;
-    width:140px;
+    height:110px;
+    width:110px;
 }

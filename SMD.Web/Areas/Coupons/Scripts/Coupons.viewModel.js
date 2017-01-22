@@ -213,6 +213,7 @@ define("Coupons/Coupons.viewModel",
 					CurrPage = ko.observable(9);
                 MaxPage = ko.observable(12);
                 // advertiser analytics 
+                ProfessionAnalyticsData = ko.observableArray([]),
                 PieChartValue = ko.observableArray([0, 0]),
                 PieChartlabel = ko.observableArray(["", ""]),
                 CampaignRatioData = ko.observable({
@@ -240,6 +241,7 @@ define("Coupons/Coupons.viewModel",
                 hasImpression = ko.observable(true),
                 DDOStatsAnalytics = ko.observable(),
                 selectedCTGenderAnalytics = ko.observable(0),
+                selectedProAnalytics = ko.observable("All"),
                 selectedCTAgeAnalytics = ko.observable(0),
                 DDCTStatsAnalytics = ko.observable(),
                 SearchSelectedStatus = ko.observable();
@@ -262,6 +264,7 @@ define("Coupons/Coupons.viewModel",
                 dealtitle1 = ko.observable(),
                 dealtitle2 = ko.observable(),
                 dealtitle3 = ko.observable(),
+                DDPStatsAnalytics = ko.observable(),
                 getDDOAnalytic = function () {
                     dataservice.getDealsAnalytics({
                         CouponID: selectedCouponIdAnalytics(),
@@ -271,7 +274,7 @@ define("Coupons/Coupons.viewModel",
                         Gender: selectedOGenderAnalytics(),
                         age: selectedOAgeAnalytics(),
                         Stype: 1,
-
+                        profession : 'All',
                     }, {
                         success: function (data) {
 
@@ -285,6 +288,29 @@ define("Coupons/Coupons.viewModel",
                     });
 
                 },
+                getDDPAnalytic = function () {
+                      dataservice.getDealsAnalytics({
+                          CouponID: selectedCouponIdAnalytics(),
+                          dateRange: 0,
+                          Granularity: 0,
+                          type: 2,
+                          Gender: 0,
+                          age: 0,
+                          Stype: 3,
+                          profession: selectedProAnalytics(),
+                      }, {
+                          success: function (data) {
+
+                           //   DDPStatsAnalytics(data.ByProfessionImpStat);
+
+
+                          },
+                          error: function (response) {
+
+                          }
+                      });
+
+                  },
                 getDDCTAnalytic = function () {
                     dataservice.getDealsAnalytics({
                         CouponID: selectedCouponIdAnalytics(),
@@ -294,7 +320,7 @@ define("Coupons/Coupons.viewModel",
                         Gender: selectedCTGenderAnalytics(),
                         age: selectedCTAgeAnalytics(),
                         Stype: 2,
-
+                        profession: 'All',
                     }, {
                         success: function (data) {
 
@@ -309,7 +335,7 @@ define("Coupons/Coupons.viewModel",
 
 
                 },
-                      openAdvertiserDashboardDealScreenOnList = function (item) {
+                openAdvertiserDashboardDealScreenOnList = function (item) {
                           if (item != undefined) {
                               if (item.CouponId() != undefined) {
                                   selectedCouponIdAnalytics(item.CouponId());
@@ -562,7 +588,8 @@ define("Coupons/Coupons.viewModel",
                         type: 1,
                         Gender: 0,
                         age: 0,
-                        Stype: 0
+                        Stype: 0,
+                        profession : 'All'
 
                     }, {
                         success: function (data) {
@@ -574,6 +601,10 @@ define("Coupons/Coupons.viewModel",
                             dealExpirydate(data.expiryDate);
                             DDCTStatsAnalytics(data.ClickTrouStat);
                             DDOStatsAnalytics(data.ImpressionStat);
+                            DDPStatsAnalytics(data.ImpressionStat);
+                            ProfessionAnalyticsData.removeAll();
+                            ko.utils.arrayPushAll(ProfessionAnalyticsData(), data.Profession);
+                            ProfessionAnalyticsData.valueHasMutated();
                             PieChartValue.removeAll();
                             PieChartlabel.removeAll();
                             for (var i = 0; i < data.pieCharts.length; i++) {
@@ -3524,7 +3555,11 @@ dealSubscription = function () {
                     CampaignRatioData: CampaignRatioData,
                     showSocialPopup: showSocialPopup,
                     hideSocialPopup: hideSocialPopup,
-                    onGoSocial: onGoSocial
+                    onGoSocial: onGoSocial,
+                    ProfessionAnalyticsData: ProfessionAnalyticsData,
+                    DDPStatsAnalytics: DDPStatsAnalytics,
+                    getDDPAnalytic: getDDPAnalytic,
+                    selectedProAnalytics: selectedProAnalytics
                 };
             })()
         };

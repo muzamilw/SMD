@@ -216,6 +216,7 @@ define("ads/ads.viewModel",
                 isPollQuestionsQuestionUsed = ko.observable(false),
                 isPreviousQuizQuestionsUsed = ko.observable(false),
                 QQStatsAnalytics = ko.observable(),
+                QQPStatsAnalytics = ko.observable(),
                 SelectedItemAnalytics = ko.observable(),
                 hasImpression = ko.observable(false),
                 LogoUrl1 = ko.observable(),
@@ -306,20 +307,20 @@ define("ads/ads.viewModel",
 
 
                       },
-                getQQAnalytic = function () {
+                getQQPAnalytic = function () {
                     dataservice.getQQAnalytic({
                         Id: selectedCampaignIdAnalytics(),
-                        Choice: selectedQQCAnalytics() > 0 ? selectedQQCAnalytics() : 0,
-                        Gender: selectedQQGAnalytics(),
-                        age: selectedQQAAnalytics(),
+                        Choice: 0,
+                        Gender: 0,
+                        age: 0,
                         profession: selectedQQPAnalytics(),
-                        City: selectedQQCtAnalytics() ? selectedQQCtAnalytics() : 'All',
+                        City: 'All',
                         QId: 0,
                         type: 1
                     }, {
                         success: function (data) {
                             if (data != null) {
-                                QQStatsAnalytics(data.QQStats);
+                                QQPStatsAnalytics(data.QQStats);
 
                             }
 
@@ -331,6 +332,31 @@ define("ads/ads.viewModel",
 
 
                 },
+                getQQAnalytic = function () {
+                    dataservice.getQQAnalytic({
+                           Id: selectedCampaignIdAnalytics(),
+                           Choice: selectedQQCAnalytics() > 0 ? selectedQQCAnalytics() : 0,
+                           Gender: selectedQQGAnalytics(),
+                           age: selectedQQAAnalytics(),
+                           profession: 'All',
+                           City: selectedQQCtAnalytics() ? selectedQQCtAnalytics() : 'All',
+                           QId: 0,
+                           type: 1
+                       }, {
+                           success: function (data) {
+                               if (data != null) {
+                                   QQStatsAnalytics(data.QQStats);
+
+                               }
+
+                           },
+                           error: function (response) {
+
+                           }
+                       });
+
+
+                   },
                 getFormAnalytic = function () {
                     dataservice.getFormAnalytic({
                         Id: selectedCampaignIdAnalytics(),
@@ -3791,6 +3817,16 @@ define("ads/ads.viewModel",
                          }
                      });
                  },
+                 showSocialPopup = function () {
+                     // isLoading(true);
+                     view.showSocialDialog();
+                 },
+                // Hide the dialog
+                 hideSocialPopup = function () {
+                     // Reset Call Backs
+                     //resetDialog();
+                     view.hideSocialDialog();
+                 },
                 showCouponGenerationWarning = function () {
                     toastr.warning("Please first save the coupon.");
                 },
@@ -3883,6 +3919,7 @@ define("ads/ads.viewModel",
                     }
                     view = specifiedView;
                     ko.applyBindings(view.viewModel, view.bindingRoot);
+                    ko.applyBindings(view.viewModel, view.bindingRootgoSocial);
                     for (var i = 10; i < 81; i++) {
                         var text = i.toString();
                         if (i == 110)
@@ -4152,7 +4189,11 @@ define("ads/ads.viewModel",
                     totalvideoAdsCount: totalvideoAdsCount,
                     gridTotalCount: gridTotalCount,
                     CampaignRatioData: CampaignRatioData,
-                    LastModifiedDateVal: LastModifiedDateVal
+                    LastModifiedDateVal: LastModifiedDateVal,
+                    showSocialPopup: showSocialPopup,
+                    hideSocialPopup: hideSocialPopup,
+                    QQPStatsAnalytics: QQPStatsAnalytics,
+                    getQQPAnalytic: getQQPAnalytic
                 };
             })()
         };

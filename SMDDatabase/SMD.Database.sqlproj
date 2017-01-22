@@ -105,11 +105,18 @@
   <ItemGroup>
     <Build Include="getCampaignByIdFormDataAnalytic.sql" />
     <Build Include="getCampaignByIdQQFormAnalytic.sql" />
+    <Build Include="getDealImpressionByProfessionByCouponId.sql" />
+    <Build Include="getDealImpressionByGenderByCouponId.sql" />
+    <Build Include="getDealImpressionByAgeByCouponId.sql" />
+    <Build Include="getCampaignImpressionByProfessionByCId.sql" />
+    <Build Include="getCampaignImpressionByGenderByCId.sql" />
+    <Build Include="getCampaignImpressionByAgeByCId.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="getAdsCampaignPerCityPerGenderFormAnalytic.sql" />
     <None Include="getAdsCampaignPerCityPerAgeFormAnalytic.sql" />
     <None Include="getPollImpressionStatBySQIdFormAnalytic.sql" />
     <None Include="getDealStatByCouponIdFormAnalytic.sql" />
+    <None Include="getDealStatByDDProfessionByCId.sql" />
   </ItemGroup>
 </Project>
