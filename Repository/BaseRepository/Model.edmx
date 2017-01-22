@@ -4507,22 +4507,22 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Parameter Name="UserID" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="getCampaignImpressionByAgeByCId" ReturnType="Collection(DomainModels.getCampaignImpressionByAgeByCId_Result)">
-            <Parameter Name="Id" Mode="In" Type="Int32" />
+          <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="getCampaignImpressionByGenderByCId" ReturnType="Collection(DomainModels.getCampaignImpressionByGenderByCId_Result)">
-            <Parameter Name="Id" Mode="In" Type="Int32" />
+          <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="getCampaignImpressionByProfessionByCId" ReturnType="Collection(DomainModels.getCampaignImpressionByProfessionByCId_Result)">
-            <Parameter Name="Id" Mode="In" Type="Int32" />
+          <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="getDealImpressionByAgeByCouponId" ReturnType="Collection(DomainModels.getDealImpressionByAgeByCouponId_Result)">
-            <Parameter Name="Id" Mode="In" Type="Int32" />
+          <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="getDealImpressionByGenderByCouponId" ReturnType="Collection(DomainModels.getDealImpressionByGenderByCouponId_Result)">
-            <Parameter Name="Id" Mode="In" Type="Int32" />
+          <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="getDealImpressionByProfessionByCouponId" ReturnType="Collection(DomainModels.getDealImpressionByProfessionByCouponId_Result)">
-            <Parameter Name="Id" Mode="In" Type="Int32" />
+          <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="getDealStatByDDProfessionByCId" ReturnType="Collection(Int32)">
             <Parameter Name="Id" Mode="In" Type="Int32" />
@@ -7662,13 +7662,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
         </ComplexType>
         <ComplexType Name="getCampaignROItblAnalytic_Result">
           <Property Type="Int32" Name="ordr" Nullable="false" />
-          <Property Type="String" Name="label1" Nullable="false" MaxLength="27" />
-          <Property Type="Int32" Name="Stats1" Nullable="true" />
-          <Property Type="String" Name="label2" Nullable="false" MaxLength="21" />
-          <Property Type="Double" Name="Stats2" Nullable="true" />
-          <Property Type="String" Name="label3" Nullable="false" MaxLength="32" />
-          <Property Type="Int32" Name="Stats3" Nullable="true" />
-        </ComplexType>
+          <Property Type="String" Name="label" Nullable="false" MaxLength="27" />
+          <Property Type="Double" Name="stats" Nullable="true" />
+          </ComplexType>
         <EntityType Name="ProfileQuestionUserAnswer">
           <Key>
             <PropertyRef Name="PQUAnswerID" />
@@ -10093,13 +10089,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <ResultMapping>
               <ComplexTypeMapping TypeName="DomainModels.getCampaignROItblAnalytic_Result">
                 <ScalarProperty Name="ordr" ColumnName="ordr" />
-                <ScalarProperty Name="label1" ColumnName="label1" />
-                <ScalarProperty Name="Stats1" ColumnName="Stats1" />
-                <ScalarProperty Name="label2" ColumnName="label2" />
-                <ScalarProperty Name="Stats2" ColumnName="Stats2" />
-                <ScalarProperty Name="label3" ColumnName="label3" />
-                <ScalarProperty Name="Stats3" ColumnName="Stats3" />
-              </ComplexTypeMapping>
+                <ScalarProperty Name="label" ColumnName="label" />
+                <ScalarProperty Name="stats" ColumnName="stats" />
+                </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
           <EntitySetMapping Name="ProfileQuestionUserAnswers">
