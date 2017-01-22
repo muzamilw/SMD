@@ -836,6 +836,7 @@ namespace SMD.Repository.BaseRepository
         {
             var _ID = new ObjectParameter("Id", ID);
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getCampaignROItblAnalytic_Result>("getCampaignROItblAnalytic", _ID);
+           
         }
 
 
