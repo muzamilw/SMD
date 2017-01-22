@@ -30,7 +30,7 @@ select city, ISNULL([1], 0) '10-20', ISNULL([2], 0) '20-30', ISNULL([3], 0) '30-
 		inner join AdCampaignTargetLocation atl on atl.CampaignID = acr.CampaignID
 		inner join AspNetUsers usr on usr.Id = acr.UserID
 		inner join City c on atl.CityID = c.CityId and acr.UserLocationCity = c.CityName
-		where acr.ResponseType = 1 and acr.CampaignID = @Id
+		where acr.ResponseType = 3 and acr.CampaignID = @Id
 		group by c.CityName , usr.DOB
 		) src
 pivot

@@ -1,6 +1,6 @@
-﻿
+﻿USE [SMDv2]
 GO
-/****** Object:  StoredProcedure [dbo].[getCampaignImpressionByProfessionByCId]    Script Date: 1/22/2017 6:04:22 PM ******/
+/****** Object:  StoredProcedure [dbo].[getCampaignImpressionByProfessionByCId]    Script Date: 1/22/2017 9:36:15 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -10,7 +10,7 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-create PROCEDURE [dbo].[getCampaignImpressionByProfessionByCId] (
+ALTER PROCEDURE [dbo].[getCampaignImpressionByProfessionByCId] (
 @Id INT
 )
 AS
@@ -22,7 +22,7 @@ SET NOCOUNT ON;
 
 		select count(*) as Stats, usr.Jobtitle label  from AdCampaignResponse ac 
 		inner join AspNetUsers usr on ac.UserID = usr.Id
-		where ac.CampaignID = @Id and ac.ResponseType = 1 
+		where ac.CampaignID = @Id and ac.ResponseType = 3 
 		group by usr.Jobtitle
 			
 	

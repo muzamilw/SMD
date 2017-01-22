@@ -23,7 +23,7 @@ select city, ISNULL([1], 0) male, ISNULL([2], 0) female from (
 		inner join AspNetUsers usr on usr.Id = acr.UserID
 		inner join City c on atl.CityID = c.CityId and acr.UserLocationCity = c.CityName
 		
-		where acr.ResponseType = 1 and acr.CampaignID = @Id
+		where acr.ResponseType = 3 and acr.CampaignID = @Id
 		group by c.CityName , usr.gender
 		) src
 pivot

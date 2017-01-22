@@ -1,6 +1,6 @@
-﻿
+﻿USE [SMDv2]
 GO
-/****** Object:  StoredProcedure [dbo].[getCampaignByIdQQFormAnalytic]    Script Date: 12/1/2016 1:02:25 AM ******/
+/****** Object:  StoredProcedure [dbo].[getCampaignByIdQQFormAnalytic]    Script Date: 1/22/2017 9:32:45 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -79,7 +79,7 @@ IF @ageRange = 2
 	BEGIN
 		select count(*) as Stats  from AdCampaignResponse ac
 		inner join AspNetUsers usr on ac.UserID = usr.Id
-		where ac.CampaignID = @Id and ac.ResponseType = 1 
+		where ac.CampaignID = @Id and ac.ResponseType = 3 
 		and (ac.UserSelection = @coice OR @coice = 0) and (usr.Gender = @gender OR @gender = 0)
 		and (usr.Jobtitle = @Profession OR @Profession = 'All') and (ac.UserLocationCity = @city OR @city = 'All')
 		and usr.DOB > = @AgedateFrom and usr.DOB < @AgedateTo
@@ -90,7 +90,7 @@ IF @ageRange = 2
 		inner join AdCampaignTargetCriteria adc on adc.CampaignID = ac.CampaignID
 		inner join AspNetUsers usr on ac.UserID = usr.Id
 		inner join ProfileQuestionUserAnswer pqua on pqua.UserID = usr.Id and adc.PQID = pqua.PQID and pqua.PQAnswerID = adc.PQAnswerID
-		where ac.CampaignID = @Id and ac.ResponseType = 1 
+		where ac.CampaignID = @Id and ac.ResponseType = 3 
 		and pqua.PQID = @QId and (usr.Gender = @gender OR @gender = 0)
 		and (ac.UserLocationCity = @city OR @city = 'All')
 		and usr.DOB > = @AgedateFrom  and usr.DOB < @AgedateTo		
@@ -101,7 +101,7 @@ IF @ageRange = 2
 		inner join AdCampaignTargetCriteria adc on adc.CampaignID = ac.CampaignID
 		inner join AspNetUsers usr on ac.UserID = usr.Id
 		inner join SurveyQuestionResponse sqr on sqr.UserID = usr.Id and adc.SQID = sqr.SQID and sqr.UserSelection = adc.SQAnswer
-		where ac.CampaignID = @Id and ac.ResponseType = 1 
+		where ac.CampaignID = @Id and ac.ResponseType = 3 
 		and sqr.SQID = @QId and (usr.Gender = @gender OR @gender = 0)
 		and (ac.UserLocationCity = @city OR @city = 'All')
 		and usr.DOB > = @AgedateFrom  and usr.DOB < @AgedateTo
@@ -113,7 +113,7 @@ IF @ageRange = 2
 		inner join AdCampaignTargetCriteria adc on adc.CampaignID = ac.CampaignID
 		inner join AspNetUsers usr on ac.UserID = usr.Id
 		inner join AdCampaignResponse sqr on sqr.UserID = usr.Id and adc.QuizCampaignId = sqr.CampaignID and sqr.UserSelection = adc.QuizAnswerId
-		where ac.CampaignID = @Id and ac.ResponseType = 1 
+		where ac.CampaignID = @Id and ac.ResponseType = 3 
 		and sqr.CampaignID = @QId and (usr.Gender = @gender OR @gender = 0)
 		and (ac.UserLocationCity = @city OR @city = 'All')
 		and usr.DOB > = @AgedateFrom  and usr.DOB < @AgedateTo

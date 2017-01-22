@@ -1,5 +1,6 @@
-﻿GO
-/****** Object:  StoredProcedure [dbo].[getCampaignImpressionByAgeByCId]    Script Date: 1/22/2017 6:03:51 PM ******/
+﻿USE [SMDv2]
+GO
+/****** Object:  StoredProcedure [dbo].[getCampaignImpressionByAgeByCId]    Script Date: 1/22/2017 9:35:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -9,7 +10,7 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE [dbo].[getCampaignImpressionByAgeByCId] (
+ALTER PROCEDURE [dbo].[getCampaignImpressionByAgeByCId] (
 @Id INT
 )
 AS
@@ -20,36 +21,36 @@ SET NOCOUNT ON;
 
 		select count(*) as Stats, '13-20' label  from AdCampaignResponse ac 
 		inner join AspNetUsers usr on ac.UserID = usr.Id
-		where ac.CampaignID = @Id and ac.ResponseType = 1 
+		where ac.CampaignID = @Id and ac.ResponseType = 3 
 		and usr.DOB > = DATEADD(YYYY,-20,getdate()) and usr.DOB < DATEADD(YYYY,-13,getdate())
 		union
 		select count(*) as Stats, '21-30' label  from AdCampaignResponse ac 
 		inner join AspNetUsers usr on ac.UserID = usr.Id
-		where ac.CampaignID = @Id and ac.ResponseType = 1 
+		where ac.CampaignID = @Id and ac.ResponseType = 3 
 		and usr.DOB > = DATEADD(YYYY,-30,getdate()) and usr.DOB < DATEADD(YYYY,-20,getdate())
 		union
 		select count(*) as Stats, '31-40' label  from AdCampaignResponse ac 
 		inner join AspNetUsers usr on ac.UserID = usr.Id
-		where ac.CampaignID = @Id and ac.ResponseType = 1 
+		where ac.CampaignID = @Id and ac.ResponseType = 3 
 		and usr.DOB > = DATEADD(YYYY,-40,getdate()) and usr.DOB < DATEADD(YYYY,-30,getdate())
 		union
 		select count(*) as Stats, '41-50' label  from AdCampaignResponse ac 
 		inner join AspNetUsers usr on ac.UserID = usr.Id
-		where ac.CampaignID = @Id and ac.ResponseType = 1 
+		where ac.CampaignID = @Id and ac.ResponseType = 3 
 		and usr.DOB > = DATEADD(YYYY,-50,getdate()) and usr.DOB < DATEADD(YYYY,-40,getdate())
 		union
 		select count(*) as Stats, '51-60' label  from AdCampaignResponse ac 
 		inner join AspNetUsers usr on ac.UserID = usr.Id
-		where ac.CampaignID = @Id and ac.ResponseType = 1 
+		where ac.CampaignID = @Id and ac.ResponseType = 3 
 		and usr.DOB > = DATEADD(YYYY,-60,getdate()) and usr.DOB < DATEADD(YYYY,-50,getdate())
 		union
 		select count(*) as Stats, '+61' label  from AdCampaignResponse ac 
 		inner join AspNetUsers usr on ac.UserID = usr.Id
-		where ac.CampaignID = @Id and ac.ResponseType = 1 
+		where ac.CampaignID = @Id and ac.ResponseType = 3 
 		and usr.DOB > = DATEADD(YYYY,-200,getdate()) and usr.DOB < DATEADD(YYYY,-60,getdate())
 			
 	
 END
  
---EXEC [getCampaignImpressionByAgeByCId] 20369
+
 

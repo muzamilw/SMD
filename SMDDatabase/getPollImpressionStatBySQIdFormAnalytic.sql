@@ -72,7 +72,7 @@ IF @ageRange = 2
 	BEGIN
 		select count(*) as Stats  from SurveyQuestionResponse sqr
 		inner join AspNetUsers usr on sqr.UserID = usr.Id
-		where sqr.SQID = @Id and sqr.ResponseType = 1 
+		where sqr.SQID = @Id and sqr.ResponseType = 3 
 		and (usr.Gender = @gender OR @gender = 0)
 		and usr.DOB > = @AgedateFrom and usr.DOB < @AgedateTo
 	END	
