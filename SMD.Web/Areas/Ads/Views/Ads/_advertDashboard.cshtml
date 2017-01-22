@@ -120,77 +120,144 @@
             </div>
         </div>
         <br />
-        <div class="analyticsBox" data-bind="visible:$root.hasImpression">
-
-            <div class=" row">
-                <div class="col-lg-12">
+        <div class="row">
+        <div class="col-lg-6" >
+            <div class="analyticsBox" style="height:285px;" data-bind="visible:$root.hasImpression">
+                <div class=" row">
                     <span class="analyticH2 margin10">
                         Campaign ROI
                     </span>
                 </div>
+                <div class="row">
+
+                    <div class="col-lg-12">
+                        <div class="whiteBox">
+                            <table class="roitbl">
+                                <!-- ko template: { name: 'CampaignROITblAnalyticsDataTemplate' , foreach: $root.CampaignROItblAnalyticData } -->
+                                <!-- /ko -->
+                            </table>
+                        </div>
+                    </div>
+                </div>
 
             </div>
-            <div class="row">
+        </div>
+            <div class="col-lg-6" >
+                <div class="analyticsBox" style="height:285px;" data-bind="visible:$root.hasImpression">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <span class="analyticH2 margin10">
 
-                <div class="col-lg-12">
-                    <div class="whiteBox" >
-                        <table class="roitbl">
-                            <!-- ko template: { name: 'CampaignROITblAnalyticsDataTemplate' , foreach: $root.CampaignROItblAnalyticData } -->
-                            <!-- /ko -->
-                        </table>
+                                Survey Statistics
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="lightgrayBox">
+                                <div class="row">
+                                    <span class="filterH">
+                                        Survey Question
+                                    </span>
+                                    <br />
+                                </div>
+                                <div class="row">
+                                    <table style="background-color:white;width:95%;">
+                                        <tr>
+                                            <td class="col-lg-5 redcolor">
+                                                <span data-bind="text: $root.QuizQuestionAnalyticData"></span>
+                                            </td>
+                                            <td class="col-lg-5"><select class="form-control redcolor" id="ddQQCDropDown" data-bind="options: $root.QQChoicesAnalyticsData, optionsText: 'ChoiceDescription', optionsValue: 'ChoiceId', value:$root.selectedQQCAnalytics, event: { change: $root.getQQAnalytic }"></select></td>
+                                            <td class="col-lg-2 statsbig" rowspan="4">
+                                                <span data-bind="text: $root.QQStatsAnalytics"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-lg-5">Gender : </td>
+                                            <td class="col-lg-5"><select class="form-control" id="ddQQGDropDown" data-bind="options: $root.GenderAnalyticsData, optionsText: 'name', optionsValue: 'id', value:$root.selectedQQGAnalytics, event: { change: $root.getQQAnalytic }"></select></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-lg-5">Age :</td>
+                                            <td class="col-lg-5"><select class="form-control" id="ddQQADropDown" data-bind="options: $root.AgeRangeAnalyticsData, optionsText: 'name', optionsValue: 'id', value:$root.selectedQQAAnalytics, event: { change: $root.getQQAnalytic }"></select></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-lg-5">City : </td>
+                                            <td class="col-lg-5"><select class="form-control" id="ddQQCtDropDown" data-bind="options: $root.CitiesAnalyticsData, optionsText: 'name', optionsValue: 'name', value:$root.selectedQQCtAnalytics, event: { change: $root.getQQAnalytic }"></select></td>
+
+                                        </tr>
+
+
+                                    </table>
+                                </div>
+
+
+                                <div class="row" data-bind="visible: $root.isProfileQuestionUsed()">
+                                    <br />
+                                    <br />
+                                    <span class="filterH">
+                                        Target filter 1
+                                    </span>
+                                    <br />
+                                </div>
+                                <div class="row">
+                                    <table style="background-color:white;width:95%;">
+                                        <!-- ko template: { name: 'ProfileQuestionDataTemplate' , foreach: $root.formAnalyticsData } -->
+                                        <!-- /ko -->
+
+
+
+                                    </table>
+                                </div>
+
+
+                                <div class="row" data-bind="visible: $root.isPreviousQuizQuestionsUsed()">
+                                    <br />
+                                    <br />
+                                    <span class="filterH">
+                                        Target filter 2
+                                    </span>
+                                </div>
+                                <div class="row">
+                                    <table style="background-color:white;width:95%;">
+                                        <!-- ko template: { name: 'PreviousQuizQuestionDataTemplate' , foreach: $root.formAnalyticsData } -->
+                                        <!-- /ko -->
+                                    </table>
+                                </div>
+
+                                <div class="row" data-bind="visible: $root.isPollQuestionsQuestionUsed()">
+                                    <br />
+                                    <br />
+                                    <span class="filterH">
+                                        Target filter 3
+                                    </span>
+                                </div>
+                                <div class="row">
+                                    <table style="background-color:white;width:95%;">
+                                        <!-- ko template: { name: 'SurvayQuestionDataTemplate' , foreach: $root.formAnalyticsData } -->
+                                        <!-- /ko -->
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+
                     </div>
                 </div>
             </div>
-
+       
         </div>
+       
         <br />
+        <!--ko if: $root.isProfileQuestionUsed() || $root.isPreviousQuizQuestionsUsed() || $root.isPollQuestionsQuestionUsed()  -->
         <div class="analyticsBox" data-bind="visible:$root.hasImpression">
             <div class="row">
                 <div class="col-lg-12">
-                    <span class="analyticH2 margin10">
-
-                        Survey Statistics
-                    </span>
-                </div>
-
-            </div>
-
-            <div class="row">
-                <div class="col-lg-12">
                     <div class="lightgrayBox">
-                        <div class="row">
-                            <span class="filterH">
-                                Survey Question
-                            </span>
-                            <br />
-                        </div>
-                        <div class="row">
-                            <table style="background-color:white;width:95%;">
-                                <tr>
-                                    <td class="col-lg-3 redcolor">
-                                        <span data-bind="text: $root.QuizQuestionAnalyticData"></span>
-
-                                    </td>
-                                    <td class="col-lg-2"><select class="form-control redcolor" id="ddQQCDropDown" data-bind="options: $root.QQChoicesAnalyticsData, optionsText: 'ChoiceDescription', optionsValue: 'ChoiceId', value:$root.selectedQQCAnalytics, event: { change: $root.getQQAnalytic }"></select></td>
-                                    <td class="col-lg-6" colspan="4"></td>
-                                    <td class="col-lg-1 statsbig" rowspan="2">
-                                        <span data-bind="text: $root.QQStatsAnalytics"></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-lg-3">Gender : </td>
-                                    <td class="col-lg-2"><select class="form-control" id="ddQQGDropDown" data-bind="options: $root.GenderAnalyticsData, optionsText: 'name', optionsValue: 'id', value:$root.selectedQQGAnalytics, event: { change: $root.getQQAnalytic }"></select></td>
-                                    <td class="col-lg-1">Age :</td>
-                                    <td class="col-lg-2"><select class="form-control" id="ddQQADropDown" data-bind="options: $root.AgeRangeAnalyticsData, optionsText: 'name', optionsValue: 'id', value:$root.selectedQQAAnalytics, event: { change: $root.getQQAnalytic }"></select></td>
-                                    <td class="col-lg-1">City : </td>
-                                    <td class="col-lg-2"><select class="form-control" id="ddQQCtDropDown" data-bind="options: $root.CitiesAnalyticsData, optionsText: 'name', optionsValue: 'name', value:$root.selectedQQCtAnalytics, event: { change: $root.getQQAnalytic }"></select></td>
-
-                                </tr>
-
-
-                            </table>
-                        </div>
-
+                      
                         <div class="row" data-bind="visible: $root.isProfileQuestionUsed()">
                             <br />
                             <br />
@@ -203,13 +270,8 @@
                             <table style="background-color:white;width:95%;">
                                 <!-- ko template: { name: 'ProfileQuestionDataTemplate' , foreach: $root.formAnalyticsData } -->
                                 <!-- /ko -->
-
-
-
                             </table>
                         </div>
-
-
                         <div class="row" data-bind="visible: $root.isPreviousQuizQuestionsUsed()">
                             <br />
                             <br />
@@ -223,7 +285,6 @@
                                 <!-- /ko -->
                             </table>
                         </div>
-
                         <div class="row" data-bind="visible: $root.isPollQuestionsQuestionUsed()">
                             <br />
                             <br />
@@ -245,8 +306,112 @@
 
             </div>
         </div>
-        <br />
+       
+        
+         <br />
+        <!--/ko-->
+        <div class="analyticsBox" data-bind="visible:$root.hasImpression">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="lightgrayBox">
 
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <span class="filterH">
+                                    By Profession
+                                </span>
+                            </div>
+                            <div class="col-lg-6">
+                                <span class="filterH">
+                                    By Device
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <table style="background-color:white;width:92%;">
+                                    <tr>
+                                        <td class="col-lg-2" style="text-align: -webkit-right;">Profession : </td>
+                                        <td class="col-lg-4">
+                                            <select class="form-control" id="ddGDropDown" data-bind="options: $root.ProfessionAnalyticsData, optionsText: 'name', optionsValue: 'name', value:$root.selectedQQPAnalytics, event: { change: $root.getQQPAnalytic }"></select>
+                                        </td>
+                                        <td class="col-lg-2 statsbig">
+                                            <span data-bind="text: $root.QQPStatsAnalytics"></span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-lg-6">
+                                <table style="background-color:white;width:92%;">
+                                    <tr>
+                                        <td class="col-lg-2" style="text-align: -webkit-right;">IOS : </td>
+                                        <td class="col-lg-4">Coming soon</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td class="col-lg-2" style="text-align: -webkit-right;">Android : </td>
+                                        <td class="col-lg-3">Coming soon</td>
+
+
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-6">
+
+                <div class="analyticsBox">
+                    <div class="row">
+                        <label class="analyticH2"> By Age Group</label>
+                    </div>
+                    <div class="row">
+                        <div class=" margin10">
+                            <div style="height:150px;" data-bind="morris: {type: 'Bar', data: $root.DealsAnalyticsData, xkey: 'Granual', ykeys: ['openStats', 'ConvrsionStats'], labels: ['Total Impressions', 'Click thru'], yLabelFormat: function(y){return y != Math.round(y)?'':y;} , parseTime:false, setAxisAlignFirstX: true, lineColors: ['blue','green'] }"></div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="analyticsBox">
+                    <div class="row">
+
+                        <label class="analyticH2"> By Gender</label>
+                    </div>
+                    <div class="row">
+                        <div class=" margin10">
+                            <div style="height:150px;" data-bind="morris: {type: 'Bar', data: $root.DealsAnalyticsData, xkey: 'Granual', ykeys: ['openStats', 'ConvrsionStats'], labels: ['Total Impressions', 'Click thru'], yLabelFormat: function(y){return y != Math.round(y)?'':y;} , parseTime:false, setAxisAlignFirstX: true, lineColors: ['blue','green'] }"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="analyticsBox">
+            <div class="row">
+                <div class="col-lg-12">
+                    <label class="analyticH2"> By Profession</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class=" margin10">
+                        <div style="height:150px;" data-bind="morris: {type: 'Line', data: $root.DealsAnalyticsData, xkey: 'Granual', ykeys: ['openStats', 'ConvrsionStats'], labels: ['Total Impressions', 'Click thru'], yLabelFormat: function(y){return y != Math.round(y)?'':y;} , parseTime:false, setAxisAlignFirstX: true, lineColors: ['blue','green'] }"></div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        
+        <br />
         <div data-bind="visible: $root.IsCityUsed()">
             <div class="analyticsBox" data-bind="visible:$root.hasImpression">
                 <div class="row" >
@@ -281,7 +446,8 @@
             </div>
             <br />
             </div>
-        <div class="analyticsBox" data-bind="visible:$root.hasImpression ">
+        <br />
+         <div class="analyticsBox" data-bind="visible:$root.hasImpression ">
             <div class="row">
                 <div class="col-lg-12">
                     <label class="analyticH2"> Impressions by city</label>

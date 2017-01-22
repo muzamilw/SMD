@@ -216,6 +216,7 @@ define("ads/ads.viewModel",
                 isPollQuestionsQuestionUsed = ko.observable(false),
                 isPreviousQuizQuestionsUsed = ko.observable(false),
                 QQStatsAnalytics = ko.observable(),
+                QQPStatsAnalytics = ko.observable(),
                 SelectedItemAnalytics = ko.observable(),
                 hasImpression = ko.observable(false),
                 LogoUrl1 = ko.observable(),
@@ -306,20 +307,20 @@ define("ads/ads.viewModel",
 
 
                       },
-                getQQAnalytic = function () {
+                getQQPAnalytic = function () {
                     dataservice.getQQAnalytic({
                         Id: selectedCampaignIdAnalytics(),
-                        Choice: selectedQQCAnalytics() > 0 ? selectedQQCAnalytics() : 0,
-                        Gender: selectedQQGAnalytics(),
-                        age: selectedQQAAnalytics(),
+                        Choice: 0,
+                        Gender: 0,
+                        age: 0,
                         profession: selectedQQPAnalytics(),
-                        City: selectedQQCtAnalytics() ? selectedQQCtAnalytics() : 'All',
+                        City: 'All',
                         QId: 0,
                         type: 1
                     }, {
                         success: function (data) {
                             if (data != null) {
-                                QQStatsAnalytics(data.QQStats);
+                                QQPStatsAnalytics(data.QQStats);
 
                             }
 
@@ -331,6 +332,31 @@ define("ads/ads.viewModel",
 
 
                 },
+                getQQAnalytic = function () {
+                    dataservice.getQQAnalytic({
+                           Id: selectedCampaignIdAnalytics(),
+                           Choice: selectedQQCAnalytics() > 0 ? selectedQQCAnalytics() : 0,
+                           Gender: selectedQQGAnalytics(),
+                           age: selectedQQAAnalytics(),
+                           profession: 'All',
+                           City: selectedQQCtAnalytics() ? selectedQQCtAnalytics() : 'All',
+                           QId: 0,
+                           type: 1
+                       }, {
+                           success: function (data) {
+                               if (data != null) {
+                                   QQStatsAnalytics(data.QQStats);
+
+                               }
+
+                           },
+                           error: function (response) {
+
+                           }
+                       });
+
+
+                   },
                 getFormAnalytic = function () {
                     dataservice.getFormAnalytic({
                         Id: selectedCampaignIdAnalytics(),
@@ -4165,7 +4191,9 @@ define("ads/ads.viewModel",
                     CampaignRatioData: CampaignRatioData,
                     LastModifiedDateVal: LastModifiedDateVal,
                     showSocialPopup: showSocialPopup,
-                    hideSocialPopup: hideSocialPopup
+                    hideSocialPopup: hideSocialPopup,
+                    QQPStatsAnalytics: QQPStatsAnalytics,
+                    getQQPAnalytic: getQQPAnalytic
                 };
             })()
         };
