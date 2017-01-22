@@ -1,4 +1,4 @@
-﻿USE [SMDv2]
+﻿
 GO
 /****** Object:  StoredProcedure [dbo].[getCampaignByIdQQFormAnalytic]    Script Date: 1/22/2017 9:32:45 PM ******/
 SET ANSI_NULLS ON
