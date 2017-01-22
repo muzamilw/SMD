@@ -145,6 +145,7 @@
     <Compile Include="DomainModels\getAdsCampaignPerCityPerGenderFormAnalytic_Result.cs" />
     <Compile Include="DomainModels\GetApprovalCount_Result.cs" />
     <Compile Include="DomainModels\getCampaignByIdFormDataAnalytic_Result.cs" />
+    <Compile Include="DomainModels\getCampaignImpression_Result.cs" />
     <Compile Include="DomainModels\GetCampaignPerformanceWeeklyStats_Result.cs" />
     <Compile Include="DomainModels\getCampaignRatioAnalytic_Result.cs" />
     <Compile Include="DomainModels\getCampaignROItblAnalytic_Result.cs" />
@@ -152,6 +153,7 @@
     <Compile Include="DomainModels\getCampaignsTblAnalytic_Result.cs" />
     <Compile Include="DomainModels\GetCouponByID_Result.cs" />
     <Compile Include="DomainModels\getDealByCouponID_Result.cs" />
+    <Compile Include="DomainModels\getDealImpression_Result.cs" />
     <Compile Include="DomainModels\getDisplayAdsCampaignByCampaignIdAnalytics_Result.cs" />
     <Compile Include="DomainModels\GetLiveCampaignCountOverTime_Result.cs" />
     <Compile Include="DomainModels\GetRandomGameByUser_Result.cs" />
