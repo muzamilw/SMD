@@ -804,5 +804,72 @@ namespace DomainModelProject
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUserProfileQuestionsList_Result>("GetUserProfileQuestionsList", userIDParameter);
         }
+    
+        public virtual ObjectResult<getCampaignImpressionByAgeByCId_Result> getCampaignImpressionByAgeByCId(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getCampaignImpressionByAgeByCId_Result>("getCampaignImpressionByAgeByCId", idParameter);
+        }
+    
+        public virtual ObjectResult<getCampaignImpressionByGenderByCId_Result> getCampaignImpressionByGenderByCId(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getCampaignImpressionByGenderByCId_Result>("getCampaignImpressionByGenderByCId", idParameter);
+        }
+    
+        public virtual ObjectResult<getCampaignImpressionByProfessionByCId_Result> getCampaignImpressionByProfessionByCId(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getCampaignImpressionByProfessionByCId_Result>("getCampaignImpressionByProfessionByCId", idParameter);
+        }
+    
+        public virtual ObjectResult<getDealImpressionByAgeByCouponId_Result> getDealImpressionByAgeByCouponId(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getDealImpressionByAgeByCouponId_Result>("getDealImpressionByAgeByCouponId", idParameter);
+        }
+    
+        public virtual ObjectResult<getDealImpressionByGenderByCouponId_Result> getDealImpressionByGenderByCouponId(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getDealImpressionByGenderByCouponId_Result>("getDealImpressionByGenderByCouponId", idParameter);
+        }
+    
+        public virtual ObjectResult<getDealImpressionByProfessionByCouponId_Result> getDealImpressionByProfessionByCouponId(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getDealImpressionByProfessionByCouponId_Result>("getDealImpressionByProfessionByCouponId", idParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> getDealStatByDDProfessionByCId(Nullable<int> id, string profession)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            var professionParameter = profession != null ?
+                new ObjectParameter("profession", profession) :
+                new ObjectParameter("profession", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("getDealStatByDDProfessionByCId", idParameter, professionParameter);
+        }
     }
 }

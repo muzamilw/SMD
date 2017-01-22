@@ -79,6 +79,8 @@ namespace DomainModelProject
         public string LastKnownLocationLat { get; set; }
         public string LastKnownLocationLong { get; set; }
         public System.Data.Entity.Spatial.DbGeography LastKnownLocation { get; set; }
+        public Nullable<bool> optPushNewDeals { get; set; }
+        public Nullable<bool> optPushNewPicturePoll { get; set; }
     
         public virtual ICollection<AdCampaignResponse> AdCampaignResponses { get; set; }
         public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
