@@ -359,7 +359,8 @@ namespace SMD.Repository.Repositories
         }
         public IEnumerable<getCampaignROItblAnalytic_Result> getCampaignROItblAnalytic(int ID)
         {            
-            return db.getCampaignROItblAnalytic(ID);
+           // return db.getCampaignROItblAnalytic(ID);
+            return new List<getCampaignROItblAnalytic_Result>();
         }
         public List<getCampaignByIdFormDataAnalytic_Result> getCampaignByIdFormDataAnalytic(long CampaignId)
         {

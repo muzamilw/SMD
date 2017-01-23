@@ -1,5 +1,4 @@
-﻿USE [SMDv2]
-GO
+﻿GO
 /****** Object:  StoredProcedure [dbo].[getCampaignImpressionByAgeByCId]    Script Date: 1/22/2017 9:35:01 PM ******/
 SET ANSI_NULLS ON
 GO
