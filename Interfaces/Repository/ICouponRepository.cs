@@ -53,5 +53,8 @@ namespace SMD.Interfaces.Repository
         bool CompleteCoupons(long[] couponIds);
         CouponStatsResponse getDealStats(long Id);
         int GetFreeCouponCountApprove(int comid);
+        List<getDealImpressionByAgeByCouponId_Result> getDealImpressionByAgeByCouponId(long CId);
+        List<getDealImpressionByGenderByCouponId_Result> getDealImpressionByGenderByCouponId(long CId);
+        List<getDealImpressionByProfessionByCouponId_Result> getDealImpressionByProfessionByCouponId(long CId);
     }
 }

@@ -1277,6 +1277,19 @@ namespace SMD.Implementation.Services
              return couponRepository.GetDealsByCtgId(CouponId);
         }
 
+        public List<getDealImpressionByAgeByCouponId_Result> getDealImpressionByAgeByCouponId(long CId)
+        {
+            return couponRepository.getDealImpressionByAgeByCouponId(CId);
+        }
+        public List<getDealImpressionByGenderByCouponId_Result> getDealImpressionByGenderByCouponId(long CId)
+        {
+            return couponRepository.getDealImpressionByGenderByCouponId(CId);
+        }
+        public List<getDealImpressionByProfessionByCouponId_Result> getDealImpressionByProfessionByCouponId(long CId)
+        {
+            return couponRepository.getDealImpressionByProfessionByCouponId(CId);
+        }
+
         #endregion
     }
 }

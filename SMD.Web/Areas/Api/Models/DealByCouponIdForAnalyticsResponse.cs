@@ -16,5 +16,8 @@ namespace SMD.MIS.Areas.Api.Models
         public int ImpressionStat { get; set; }
         public int ByProfessionImpStat { get; set; }
         public int ClickTrouStat { get; set; }
+        public List<getDealImpressionByAgeByCouponId_Result> ByAgeStats { get; set; }
+        public List<getDealImpressionByGenderByCouponId_Result> ByGenderStats { get; set; }
+        public List<getDealImpressionByProfessionByCouponId_Result> ByProfessionStats  { get; set; }
     }
 }

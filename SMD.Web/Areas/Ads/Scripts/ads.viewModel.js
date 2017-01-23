@@ -174,6 +174,11 @@ define("ads/ads.viewModel",
                 CurrPage = ko.observable(9);
                 MaxPage = ko.observable(12);
                 // Advertiser dashBoard Section
+                ByGenderStatsChartAnalyticsData = ko.observableArray([]),
+                ByProfessionStatsChartAnalyticsData = ko.observableArray([]),
+                ByAgeStatsChartAnalyticsData = ko.observableArray([]),
+
+                
                 PieChartValue = ko.observableArray([0, 0]),
                 PieChartlabel = ko.observableArray(["", ""]),
                 CampaignRatioData = ko.observable({
@@ -431,6 +436,19 @@ define("ads/ads.viewModel",
 				                PerGenderChartAnalyticsData.removeAll();
 				                ko.utils.arrayPushAll(PerGenderChartAnalyticsData(), data.PerGenderChart);
 				                PerGenderChartAnalyticsData.valueHasMutated();
+
+				                ByAgeStatsChartAnalyticsData.removeAll();
+				                ko.utils.arrayPushAll(ByAgeStatsChartAnalyticsData(), data.ByAgeStats);
+				                ByAgeStatsChartAnalyticsData.valueHasMutated();
+
+				                ByProfessionStatsChartAnalyticsData.removeAll();
+				                ko.utils.arrayPushAll(ByProfessionStatsChartAnalyticsData(), data.ByProfessionStats);
+                                ByProfessionStatsChartAnalyticsData.valueHasMutated();
+
+                                ByGenderStatsChartAnalyticsData.removeAll();
+                                ko.utils.arrayPushAll(ByGenderStatsChartAnalyticsData(), data.ByGenderStats);
+                                ByGenderStatsChartAnalyticsData.valueHasMutated();
+                                                                
 				                PieChartValue.removeAll();
 				                PieChartlabel.removeAll();
 				                for (var i = 0; i < data.pieCharts.length; i++) {
@@ -4193,7 +4211,10 @@ define("ads/ads.viewModel",
                     showSocialPopup: showSocialPopup,
                     hideSocialPopup: hideSocialPopup,
                     QQPStatsAnalytics: QQPStatsAnalytics,
-                    getQQPAnalytic: getQQPAnalytic
+                    getQQPAnalytic: getQQPAnalytic,
+                    ByGenderStatsChartAnalyticsData : ByGenderStatsChartAnalyticsData, 
+                    ByProfessionStatsChartAnalyticsData : ByProfessionStatsChartAnalyticsData,
+                    ByAgeStatsChartAnalyticsData: ByAgeStatsChartAnalyticsData
                 };
             })()
         };

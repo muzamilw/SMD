@@ -38,6 +38,10 @@ namespace SMD.MIS.Areas.Api.Controllers
                 data.ImpressionStat = _ICouponService.getDealStatByCouponIdFormAnalytic(CouponID, Gender, age, 1);
                 data.ClickTrouStat = _ICouponService.getDealStatByCouponIdFormAnalytic(CouponID, Gender, age, 2);
                 data.UserLocation = _ICouponService.getDealUserLocationByCId(CouponID);
+                data.ByAgeStats = _ICouponService.getDealImpressionByAgeByCouponId(CouponID);
+                data.ByProfessionStats = _ICouponService.getDealImpressionByProfessionByCouponId(CouponID);
+                data.ByGenderStats = _ICouponService.getDealImpressionByGenderByCouponId(CouponID);
+
                 IEnumerable<String> prfList = _IActiveUser.getProfessions();
                 List<Profession> Prof = new List<Profession>();
                 Profession prfItem = new Profession("All");
@@ -51,6 +55,8 @@ namespace SMD.MIS.Areas.Api.Controllers
                     Prof.Add(prfItem);
                 }
                 data.Profession = Prof;
+
+
             }
             else
             {

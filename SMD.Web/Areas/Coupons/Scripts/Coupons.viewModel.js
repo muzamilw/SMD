@@ -213,6 +213,9 @@ define("Coupons/Coupons.viewModel",
 					CurrPage = ko.observable(9);
                 MaxPage = ko.observable(12);
                 // advertiser analytics 
+                ByGenderStatsChartAnalyticsData = ko.observableArray([]),
+                ByProfessionStatsChartAnalyticsData = ko.observableArray([]),
+                ByAgeStatsChartAnalyticsData = ko.observableArray([]),
                 ProfessionAnalyticsData = ko.observableArray([]),
                 PieChartValue = ko.observableArray([0, 0]),
                 PieChartlabel = ko.observableArray(["", ""]),
@@ -605,6 +608,19 @@ define("Coupons/Coupons.viewModel",
                             ProfessionAnalyticsData.removeAll();
                             ko.utils.arrayPushAll(ProfessionAnalyticsData(), data.Profession);
                             ProfessionAnalyticsData.valueHasMutated();
+
+                            ByAgeStatsChartAnalyticsData.removeAll();
+                            ko.utils.arrayPushAll(ByAgeStatsChartAnalyticsData(), data.ByAgeStats);
+                            ByAgeStatsChartAnalyticsData.valueHasMutated();
+
+                            ByProfessionStatsChartAnalyticsData.removeAll();
+                            ko.utils.arrayPushAll(ByProfessionStatsChartAnalyticsData(), data.ByProfessionStats);
+                            ByProfessionStatsChartAnalyticsData.valueHasMutated();
+
+                            ByGenderStatsChartAnalyticsData.removeAll();
+                            ko.utils.arrayPushAll(ByGenderStatsChartAnalyticsData(), data.ByGenderStats);
+                            ByGenderStatsChartAnalyticsData.valueHasMutated();
+
                             PieChartValue.removeAll();
                             PieChartlabel.removeAll();
                             for (var i = 0; i < data.pieCharts.length; i++) {
@@ -3559,7 +3575,10 @@ dealSubscription = function () {
                     ProfessionAnalyticsData: ProfessionAnalyticsData,
                     DDPStatsAnalytics: DDPStatsAnalytics,
                     getDDPAnalytic: getDDPAnalytic,
-                    selectedProAnalytics: selectedProAnalytics
+                    selectedProAnalytics: selectedProAnalytics,
+                    ByGenderStatsChartAnalyticsData: ByGenderStatsChartAnalyticsData,
+                    ByProfessionStatsChartAnalyticsData: ByProfessionStatsChartAnalyticsData,
+                    ByAgeStatsChartAnalyticsData: ByAgeStatsChartAnalyticsData
                 };
             })()
         };
