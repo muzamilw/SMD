@@ -16,6 +16,7 @@ define("ads/ads.viewModel",
                     isClickRateVisible = ko.observable(null),
                     IsthisEditCamapiagn = ko.observable(false),
                     LastModifiedDateVal = ko.observable(),
+                    isPPRVisible = ko.observable(false),
 
 
                     totalvideoAdsCount = ko.observable(0),
@@ -339,29 +340,29 @@ define("ads/ads.viewModel",
                 },
                 getQQAnalytic = function () {
                     dataservice.getQQAnalytic({
-                           Id: selectedCampaignIdAnalytics(),
-                           Choice: selectedQQCAnalytics() > 0 ? selectedQQCAnalytics() : 0,
-                           Gender: selectedQQGAnalytics(),
-                           age: selectedQQAAnalytics(),
-                           profession: 'All',
-                           City: selectedQQCtAnalytics() ? selectedQQCtAnalytics() : 'All',
-                           QId: 0,
-                           type: 1
-                       }, {
-                           success: function (data) {
-                               if (data != null) {
-                                   QQStatsAnalytics(data.QQStats);
+                        Id: selectedCampaignIdAnalytics(),
+                        Choice: selectedQQCAnalytics() > 0 ? selectedQQCAnalytics() : 0,
+                        Gender: selectedQQGAnalytics(),
+                        age: selectedQQAAnalytics(),
+                        profession: 'All',
+                        City: selectedQQCtAnalytics() ? selectedQQCtAnalytics() : 'All',
+                        QId: 0,
+                        type: 1
+                    }, {
+                        success: function (data) {
+                            if (data != null) {
+                                QQStatsAnalytics(data.QQStats);
 
-                               }
+                            }
 
-                           },
-                           error: function (response) {
+                        },
+                        error: function (response) {
 
-                           }
-                       });
+                        }
+                    });
 
 
-                   },
+                },
                 getFormAnalytic = function () {
                     dataservice.getFormAnalytic({
                         Id: selectedCampaignIdAnalytics(),
@@ -443,11 +444,11 @@ define("ads/ads.viewModel",
 
 				                ByProfessionStatsChartAnalyticsData.removeAll();
 				                ko.utils.arrayPushAll(ByProfessionStatsChartAnalyticsData(), data.ByProfessionStats);
-                                ByProfessionStatsChartAnalyticsData.valueHasMutated();
+				                ByProfessionStatsChartAnalyticsData.valueHasMutated();
 
-                                ByGenderStatsChartAnalyticsData.removeAll();
-                                ko.utils.arrayPushAll(ByGenderStatsChartAnalyticsData(), data.ByGenderStats);
-                                ByGenderStatsChartAnalyticsData.valueHasMutated();
+				                ByGenderStatsChartAnalyticsData.removeAll();
+				                ko.utils.arrayPushAll(ByGenderStatsChartAnalyticsData(), data.ByGenderStats);
+				                ByGenderStatsChartAnalyticsData.valueHasMutated();
                                                                 
 				                PieChartValue.removeAll();
 				                PieChartlabel.removeAll();
@@ -472,7 +473,7 @@ define("ads/ads.viewModel",
                                       {
                                           "radius": 15,
                                           "maxOpacity": 1,
-                                         // "scaleRadius": true,
+                                          // "scaleRadius": true,
                                           "useLocalExtrema": true,
                                           latField: 'lat',
                                           lngField: 'lng',
@@ -557,8 +558,10 @@ define("ads/ads.viewModel",
                 onDeliveryChange = function ()
                 {
                   
-                    var a = $("#optionsRadiosIncrease").val();
-                    alert(a);
+                    if(campaignModel().isAdDelivery()==1)
+                    isPPRVisible(false);
+                else
+                 isPPRVisible(true);
 
                 },
                 CloseAnalyticInnerView = function () {
@@ -768,7 +771,7 @@ define("ads/ads.viewModel",
                 // Add new Profile Question
 
             addNewCampaign = function () {
-
+               
                 IsthisEditCamapiagn(false);
                 $("#ddTextBtns").val(0);
                 BuyItStatus(false);
@@ -818,16 +821,19 @@ define("ads/ads.viewModel",
                 campaignModel().LandingPageVideoLink("https://www.");
                 campaignModel().IsUseFilter('1');
                 previewScreenNumber(1);
+                campaignModel().isAdDelivery('1');
+                isPPRVisible(false);
+
 
                 //if display ad then
                 if (mode == 4) {
-                  //  campaignModel().CampaignName("New display ad");
+                    //  campaignModel().CampaignName("New display ad");
                     $("#logo_div").css("display", "block");
                     campaignModel().ClickRate("0.04");
                 }
 
                 else {//video ad
-                   // campaignModel().CampaignName("New Video Ads");
+                    // campaignModel().CampaignName("New Video Ads");
                     $("#logo_div").css("display", "none");
                     campaignModel().ClickRate("0.08");
                 }
@@ -1212,49 +1218,49 @@ define("ads/ads.viewModel",
                                 //    UserAndCostDetail().isStripeIntegrated = true;
 
 
-                                    //if (campaignModel().IsUseFilter() == 0) {
+                                //if (campaignModel().IsUseFilter() == 0) {
 
 
-                                    //    campaignModel().AdCampaignTargetLocations.removeAll();
-                                    //    campaignModel().AdCampaignTargetCriterias.removeAll();
-                                    //    campaignModel().AgeRangeEnd(80);
-                                    //    campaignModel().AgeRangeStart(13);
-                                    //    campaignModel().Gender('1');
-                                    //    campaignModel().IsUseFilter('0');
+                                //    campaignModel().AdCampaignTargetLocations.removeAll();
+                                //    campaignModel().AdCampaignTargetCriterias.removeAll();
+                                //    campaignModel().AgeRangeEnd(80);
+                                //    campaignModel().AgeRangeStart(13);
+                                //    campaignModel().Gender('1');
+                                //    campaignModel().IsUseFilter('0');
 
-                                    //}
-                                    //else {
-                                    //    campaignModel().IsUseFilter('1');
-                                    //}
-                                    //if (campaignModel().IsUseFilter() == 0) {
+                                //}
+                                //else {
+                                //    campaignModel().IsUseFilter('1');
+                                //}
+                                //if (campaignModel().IsUseFilter() == 0) {
 
-                                    //    toastr.error("No Target Match.");
-                                    //}
+                                //    toastr.error("No Target Match.");
+                                //}
 
-                                    //if (campaignModel().IsUseFilter() == 1) {
+                                //if (campaignModel().IsUseFilter() == 1) {
 
-                                    //    campaignModel().IsUseFilter(true);
-                                    //}
-                                    //else {
-                                    //    campaignModel().IsUseFilter(false);
-                                    //}
-                                    if (campaignModel().IsPaymentCollected() != true) {
-                                        confirmation.headingPaymentText(headingtext);
-                                        confirmation.messagePaymentText(messageText);
-                                        confirmation.afterProceedPayment(function () {
-                                            saveCampaign(2);
-                                            //addSubscription();
-                                        });
-                                        confirmation.yesPaymentBtnText("Continue");
-                                        confirmation.noPayemetBtnText("Back to Draft");
-                                        confirmation.afterCancelPayment(function () {
-                                            SaveDraftCampaign();
-                                        });
-                                        confirmation.showPaymentPopup();
-                                    }
-                                    else {
+                                //    campaignModel().IsUseFilter(true);
+                                //}
+                                //else {
+                                //    campaignModel().IsUseFilter(false);
+                                //}
+                                if (campaignModel().IsPaymentCollected() != true) {
+                                    confirmation.headingPaymentText(headingtext);
+                                    confirmation.messagePaymentText(messageText);
+                                    confirmation.afterProceedPayment(function () {
                                         saveCampaign(2);
-                                    }
+                                        //addSubscription();
+                                    });
+                                    confirmation.yesPaymentBtnText("Continue");
+                                    confirmation.noPayemetBtnText("Back to Draft");
+                                    confirmation.afterCancelPayment(function () {
+                                        SaveDraftCampaign();
+                                    });
+                                    confirmation.showPaymentPopup();
+                                }
+                                else {
+                                    saveCampaign(2);
+                                }
 
 
                                 //}, 2000, 'Enter your details');
@@ -2386,6 +2392,10 @@ define("ads/ads.viewModel",
                                     }
 
                                     campaignModel().ModifiedDateTime(item.ModifiedDateTime());
+                                    if (campaignModel().isAdDelivery() == 1)
+                                        isPPRVisible(false);
+                                    else
+                                        isPPRVisible(true);
 
 
 
@@ -4219,10 +4229,11 @@ define("ads/ads.viewModel",
                     hideSocialPopup: hideSocialPopup,
                     QQPStatsAnalytics: QQPStatsAnalytics,
                     getQQPAnalytic: getQQPAnalytic,
-                    onDeliveryChange: onDeliveryChange
+                    onDeliveryChange: onDeliveryChange,
                     ByGenderStatsChartAnalyticsData : ByGenderStatsChartAnalyticsData, 
                     ByProfessionStatsChartAnalyticsData : ByProfessionStatsChartAnalyticsData,
-                    ByAgeStatsChartAnalyticsData: ByAgeStatsChartAnalyticsData
+                    ByAgeStatsChartAnalyticsData: ByAgeStatsChartAnalyticsData,
+                    isPPRVisible: isPPRVisible
                 };
             })()
         };

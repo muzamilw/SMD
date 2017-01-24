@@ -147,7 +147,9 @@ namespace SMD.MIS.ModelMappers
                 SubmissionDateTime =source.SubmissionDateTime,
                 ShowBuyitBtn=source.ShowBuyitBtn,
                 IsPaymentCollected =source.IsPaymentCollected,
-                PaymentDate =source.PaymentDate
+                PaymentDate =source.PaymentDate,
+                isAdDelivery = source.isAdDelivery
+                
                 
             };
 
