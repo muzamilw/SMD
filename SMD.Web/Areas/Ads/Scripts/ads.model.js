@@ -253,7 +253,7 @@
                   clickThroughsToday: clickThroughsToday,
                   clickThroughsYesterday: clickThroughsYesterday,
                   clickThroughsAllTime: clickThroughsAllTime,
-                  isAdDelivery:isAdDelivery,
+                  //isAdDelivery:isAdDelivery,
                    MaxDailyBudget : MaxDailyBudget,
                   Locationss: Locationss,
                   ApprovalDateTime: ApprovalDateTime,
