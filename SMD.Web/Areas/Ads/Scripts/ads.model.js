@@ -12,7 +12,7 @@
           couponSmdComission, CouponCategories, DeliveryDays, IsUseFilter, logoUrl,
           VoucherAdditionalInfo, CouponId, IsShowVoucherSetting, VideoLink2, CouponType, IsSavedCoupon, viewCountToday, viewCountYesterday, viewCountAllTime, MaxDailyBudget, Locationss, ApprovalDateTime,
           ChannelType, VideoBytes, showBuyitBtn, clickThroughsToday, clickThroughsYesterday, clickThroughsAllTime,
-          modifiedDateTime, surveyAnsweredAllTime, answer1Stats, answer2Stats, answer3Stats) {
+          modifiedDateTime, surveyAnsweredAllTime, answer1Stats, answer2Stats, answer3Stats, isAdDelivery) {
 
 
           var
@@ -181,6 +181,7 @@
               clickThroughsToday = ko.observable(clickThroughsToday),
               clickThroughsYesterday = ko.observable(clickThroughsYesterday),
               clickThroughsAllTime = ko.observable(clickThroughsAllTime),
+              isAdDelivery = ko.observable(isAdDelivery==1?'1':'2'),
                // Errors
                 errors = ko.validation.group({
                     CampaignName: CampaignName,
@@ -252,6 +253,7 @@
                   clickThroughsToday: clickThroughsToday,
                   clickThroughsYesterday: clickThroughsYesterday,
                   clickThroughsAllTime: clickThroughsAllTime,
+                  //isAdDelivery:isAdDelivery,
                    MaxDailyBudget : MaxDailyBudget,
                   Locationss: Locationss,
                   ApprovalDateTime: ApprovalDateTime,
@@ -388,7 +390,8 @@
                       ChannelType: ChannelType(),
                       clickThroughsToday: clickThroughsToday(),
                       clickThroughsYesterday: clickThroughsYesterday(),
-                      clickThroughsAllTime: clickThroughsAllTime()
+                      clickThroughsAllTime: clickThroughsAllTime(),
+                      isAdDelivery: isAdDelivery(),
 
                   };
               };
@@ -491,7 +494,8 @@
               Answer2Stats: Answer2Stats,
               Answer3Stats: Answer3Stats,
               ClickRate: ClickRate,
-              CampaignRatioData: CampaignRatioData
+              CampaignRatioData: CampaignRatioData,
+              isAdDelivery: isAdDelivery
 
           };
       };
@@ -711,7 +715,7 @@
             source.CouponSwapValue, source.CouponActualValue, source.CouponQuantity, source.CouponTakenCount, source.priority, source.CouponDiscountValue,
              source.couponImage2, source.CouponImage3, source.CouponImage4, source.CouponExpiryLabel, source.couponSmdComission, null, source.DeliveryDays + "", source.IsUseFilter + "", source.LogoUrl, source.VoucherAdditionalInfo, source.CouponId, source.IsShowVoucherSetting, source.VideoLink2, source.CouponType + "", source.IsSavedCoupon, source.viewCountToday, source.viewCountYesterday, source.viewCountAllTime, source.MaxDailyBudget, source.Locationss, source.ApprovalDateTime, source.ChannelType + "", source.VideoBytes, source.ShowBuyitBtn, source.clickThroughsToday,
             source.clickThroughsYesterday, source.clickThroughsAllTime, source.ModifiedDateTime, source.SurveyAnsweredAllTime,
-            source.Answer1Stats, source.Answer2Stats, source.Answer3Stats);
+            source.Answer1Stats, source.Answer2Stats, source.Answer3Stats, source.isAdDelivery);
        
         _.each(source.AdCampaignTargetCriterias, function (item) {
 

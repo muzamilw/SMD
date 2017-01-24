@@ -121,6 +121,7 @@ namespace SMD.Models.DomainModels
 
     public Nullable<System.DateTime> SubmissionDateTime { get; set; }
 
+    public Nullable<int> isAdDelivery { get; set; }
 
         public Nullable<int> ChannelType { get; set; }
         public virtual ICollection<AdCampaignResponse> AdCampaignResponses { get; set; }

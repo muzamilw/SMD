@@ -119,6 +119,7 @@
           <Property Name="ShowBuyitBtn" Type="bit" />
           <Property Name="IsPaymentCollected" Type="bit" />
           <Property Name="PaymentDate" Type="datetime" />
+          <Property Name="isAdDelivery" Type="int" />
         </EntityType>
         <EntityType Name="AdCampaignClickRateHistory">
           <Key>
@@ -2783,6 +2784,15 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Parameter Name="Profession" Type="nvarchar" Mode="In" />
           <Parameter Name="city" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="getCampaignImpressionByAgeByCId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getCampaignImpressionByGenderByCId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getCampaignImpressionByProfessionByCId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetCampaignPerformanceWeeklyStats" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="getCampaignROItblAnalytic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="int" Mode="In" />
@@ -2809,11 +2819,24 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Parameter Name="Id" Type="int" Mode="In" />
           <Parameter Name="DateRange" Type="int" Mode="In" />
         </Function>
+        <Function Name="getDealImpressionByAgeByCouponId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getDealImpressionByGenderByCouponId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getDealImpressionByProfessionByCouponId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
         <Function Name="getDealStatByCouponIdFormAnalytic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="int" Mode="In" />
           <Parameter Name="gender" Type="int" Mode="In" />
           <Parameter Name="ageRange" Type="int" Mode="In" />
           <Parameter Name="type" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getDealStatByDDProfessionByCId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="profession" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="getDisplayAdsCampaignByCampaignIdAnalytics" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CampaignId" Type="int" Mode="In" />
@@ -4484,6 +4507,28 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <FunctionImport Name="GetUserProfileQuestionsList" ReturnType="Collection(DomainModels.GetUserProfileQuestionsList_Result)">
           <Parameter Name="UserID" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="getCampaignImpressionByAgeByCId" ReturnType="Collection(DomainModels.getCampaignImpressionByAgeByCId_Result)">
+          <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getCampaignImpressionByGenderByCId" ReturnType="Collection(DomainModels.getCampaignImpressionByGenderByCId_Result)">
+          <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getCampaignImpressionByProfessionByCId" ReturnType="Collection(DomainModels.getCampaignImpressionByProfessionByCId_Result)">
+          <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getDealImpressionByAgeByCouponId" ReturnType="Collection(DomainModels.getDealImpressionByAgeByCouponId_Result)">
+          <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getDealImpressionByGenderByCouponId" ReturnType="Collection(DomainModels.getDealImpressionByGenderByCouponId_Result)">
+          <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getDealImpressionByProfessionByCouponId" ReturnType="Collection(DomainModels.getDealImpressionByProfessionByCouponId_Result)">
+          <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getDealStatByDDProfessionByCId" ReturnType="Collection(Int32)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="profession" Mode="In" Type="String" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -5779,6 +5824,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="ShowBuyitBtn" Type="Boolean" />
           <Property Name="IsPaymentCollected" Type="Boolean" />
           <Property Name="PaymentDate" Type="DateTime" Precision="3" />
+          <Property Name="isAdDelivery" Type="Int32" />
         </EntityType>
         <Association Name="FK_AdCampaign_Language">
           <End Type="DomainModels.Language" Role="Language" Multiplicity="0..1" />
@@ -7618,13 +7664,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
         </ComplexType>
         <ComplexType Name="getCampaignROItblAnalytic_Result">
           <Property Type="Int32" Name="ordr" Nullable="false" />
-          <Property Type="String" Name="label1" Nullable="false" MaxLength="27" />
-          <Property Type="Int32" Name="Stats1" Nullable="true" />
-          <Property Type="String" Name="label2" Nullable="false" MaxLength="21" />
-          <Property Type="Double" Name="Stats2" Nullable="true" />
-          <Property Type="String" Name="label3" Nullable="false" MaxLength="32" />
-          <Property Type="Int32" Name="Stats3" Nullable="true" />
-        </ComplexType>
+          <Property Type="String" Name="label" Nullable="false" MaxLength="27" />
+          <Property Type="Double" Name="stats" Nullable="true" />
+          </ComplexType>
         <EntityType Name="ProfileQuestionUserAnswer">
           <Key>
             <PropertyRef Name="PQUAnswerID" />
@@ -8171,6 +8213,30 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="String" Name="PQAnswer6" Nullable="true" MaxLength="100" />
           <Property Type="Int64" Name="LastUserAnswerID" Nullable="true" />
           <Property Type="String" Name="LastUserAnswer" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="getCampaignImpressionByAgeByCId_Result">
+          <Property Type="Int32" Name="Stats" Nullable="true" />
+          <Property Type="String" Name="label" Nullable="false" MaxLength="5" />
+        </ComplexType>
+        <ComplexType Name="getCampaignImpressionByGenderByCId_Result">
+          <Property Type="Int32" Name="Stats" Nullable="true" />
+          <Property Type="String" Name="label" Nullable="false" MaxLength="6" />
+        </ComplexType>
+        <ComplexType Name="getCampaignImpressionByProfessionByCId_Result">
+          <Property Type="Int32" Name="Stats" Nullable="true" />
+          <Property Type="String" Name="label" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="getDealImpressionByAgeByCouponId_Result">
+          <Property Type="Int32" Name="Stats" Nullable="true" />
+          <Property Type="String" Name="label" Nullable="false" MaxLength="5" />
+        </ComplexType>
+        <ComplexType Name="getDealImpressionByGenderByCouponId_Result">
+          <Property Type="Int32" Name="Stats" Nullable="true" />
+          <Property Type="String" Name="label" Nullable="false" MaxLength="6" />
+        </ComplexType>
+        <ComplexType Name="getDealImpressionByProfessionByCouponId_Result">
+          <Property Type="Int32" Name="Stats" Nullable="true" />
+          <Property Type="String" Name="label" Nullable="true" MaxLength="50" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -8774,6 +8840,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="AdCampaigns">
             <EntityTypeMapping TypeName="DomainModels.AdCampaign">
               <MappingFragment StoreEntitySet="AdCampaign">
+                <ScalarProperty Name="isAdDelivery" ColumnName="isAdDelivery" />
                 <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
                 <ScalarProperty Name="IsPaymentCollected" ColumnName="IsPaymentCollected" />
                 <ScalarProperty Name="ShowBuyitBtn" ColumnName="ShowBuyitBtn" />
@@ -10025,13 +10092,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <ResultMapping>
               <ComplexTypeMapping TypeName="DomainModels.getCampaignROItblAnalytic_Result">
                 <ScalarProperty Name="ordr" ColumnName="ordr" />
-                <ScalarProperty Name="label1" ColumnName="label1" />
-                <ScalarProperty Name="Stats1" ColumnName="Stats1" />
-                <ScalarProperty Name="label2" ColumnName="label2" />
-                <ScalarProperty Name="Stats2" ColumnName="Stats2" />
-                <ScalarProperty Name="label3" ColumnName="label3" />
-                <ScalarProperty Name="Stats3" ColumnName="Stats3" />
-              </ComplexTypeMapping>
+                <ScalarProperty Name="label" ColumnName="label" />
+                <ScalarProperty Name="stats" ColumnName="stats" />
+                </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
           <EntitySetMapping Name="ProfileQuestionUserAnswers">
@@ -10429,6 +10492,55 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getCampaignImpressionByAgeByCId" FunctionName="SMDModel.Store.getCampaignImpressionByAgeByCId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.getCampaignImpressionByAgeByCId_Result">
+                <ScalarProperty Name="Stats" ColumnName="Stats" />
+                <ScalarProperty Name="label" ColumnName="label" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getCampaignImpressionByGenderByCId" FunctionName="SMDModel.Store.getCampaignImpressionByGenderByCId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.getCampaignImpressionByGenderByCId_Result">
+                <ScalarProperty Name="Stats" ColumnName="Stats" />
+                <ScalarProperty Name="label" ColumnName="label" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getCampaignImpressionByProfessionByCId" FunctionName="SMDModel.Store.getCampaignImpressionByProfessionByCId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.getCampaignImpressionByProfessionByCId_Result">
+                <ScalarProperty Name="Stats" ColumnName="Stats" />
+                <ScalarProperty Name="label" ColumnName="label" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getDealImpressionByAgeByCouponId" FunctionName="SMDModel.Store.getDealImpressionByAgeByCouponId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.getDealImpressionByAgeByCouponId_Result">
+                <ScalarProperty Name="Stats" ColumnName="Stats" />
+                <ScalarProperty Name="label" ColumnName="label" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getDealImpressionByGenderByCouponId" FunctionName="SMDModel.Store.getDealImpressionByGenderByCouponId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.getDealImpressionByGenderByCouponId_Result">
+                <ScalarProperty Name="Stats" ColumnName="Stats" />
+                <ScalarProperty Name="label" ColumnName="label" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getDealImpressionByProfessionByCouponId" FunctionName="SMDModel.Store.getDealImpressionByProfessionByCouponId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.getDealImpressionByProfessionByCouponId_Result">
+                <ScalarProperty Name="Stats" ColumnName="Stats" />
+                <ScalarProperty Name="label" ColumnName="label" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getDealStatByDDProfessionByCId" FunctionName="SMDModel.Store.getDealStatByDDProfessionByCId" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -836,6 +836,7 @@ namespace SMD.Repository.BaseRepository
         {
             var _ID = new ObjectParameter("Id", ID);
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getCampaignROItblAnalytic_Result>("getCampaignROItblAnalytic", _ID);
+           
         }
 
 
@@ -949,6 +950,43 @@ namespace SMD.Repository.BaseRepository
             var varUserId = new ObjectParameter("UserId", UserId);
 
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUserProfileQuestionsList_Result>("GetUserProfileQuestionsList", varUserId);
+        }
+        public ObjectResult<getCampaignImpressionByAgeByCId_Result> getCampaignImpressionByAgeByCId(long CampaignId)
+        {
+            var Id = new ObjectParameter("Id", CampaignId);
+
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getCampaignImpressionByAgeByCId_Result>("getCampaignImpressionByAgeByCId", Id);
+        }
+        public ObjectResult<getCampaignImpressionByProfessionByCId_Result> getCampaignImpressionByProfessionByCId(long CampaignId)
+        {
+            var Id = new ObjectParameter("Id", CampaignId);
+
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getCampaignImpressionByProfessionByCId_Result>("getCampaignImpressionByProfessionByCId", Id);
+        }
+        public ObjectResult<getCampaignImpressionByGenderByCId_Result> getCampaignImpressionByGenderByCId(long CampaignId)
+        {
+            var Id = new ObjectParameter("Id", CampaignId);
+
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getCampaignImpressionByGenderByCId_Result>("getCampaignImpressionByGenderByCId", Id);
+        }
+        public ObjectResult<getDealImpressionByAgeByCouponId_Result> getDealImpressionByAgeByCouponId(long CId)
+        {
+            var Id = new ObjectParameter("Id", CId);
+
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getDealImpressionByAgeByCouponId_Result>("getDealImpressionByAgeByCouponId", Id);
+        
+        }
+        public ObjectResult<getDealImpressionByGenderByCouponId_Result> getDealImpressionByGenderByCouponId(long CId)
+        {
+            var Id = new ObjectParameter("Id", CId);
+
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getDealImpressionByGenderByCouponId_Result>("getDealImpressionByGenderByCouponId", Id);
+        }
+        public ObjectResult<getDealImpressionByProfessionByCouponId_Result> getDealImpressionByProfessionByCouponId(long CId)
+        {
+            var Id = new ObjectParameter("Id", CId);
+
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getDealImpressionByProfessionByCouponId_Result>("getDealImpressionByProfessionByCouponId", Id);
         }
         #endregion
     }

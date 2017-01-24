@@ -50,6 +50,9 @@ namespace SMD.Interfaces.Repository
         List<getAdsCampaignPerCityPerGenderFormAnalytic_Result> getAdsCampaignPerCityPerGenderFormAnalytic(long _Id);
         
         List<getAdsCampaignPerCityPerAgeFormAnalytic_Result> getAdsCampaignPerCityPerAgeFormAnalytic(long _Id);
+       List<getCampaignImpressionByAgeByCId_Result> getCampaignImpressionByAgeByCId(long CampaignId);
+        List<getCampaignImpressionByProfessionByCId_Result> getCampaignImpressionByProfessionByCId(long CampaignId);
+        List<getCampaignImpressionByGenderByCId_Result> getCampaignImpressionByGenderByCId(long CampaignId);
         
 
     }

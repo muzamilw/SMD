@@ -449,6 +449,18 @@ namespace SMD.Repository.Repositories
             return res;
 
         }
+        public List<getDealImpressionByAgeByCouponId_Result> getDealImpressionByAgeByCouponId(long CId)
+        {
+            return db.getDealImpressionByAgeByCouponId(CId).ToList();
+        }
+        public List<getDealImpressionByGenderByCouponId_Result> getDealImpressionByGenderByCouponId(long CId)
+        {
+            return db.getDealImpressionByGenderByCouponId(CId).ToList();
+        }
+        public List<getDealImpressionByProfessionByCouponId_Result> getDealImpressionByProfessionByCouponId(long CId)
+        {
+            return db.getDealImpressionByProfessionByCouponId(CId).ToList(); 
+        }
 
         #endregion
     }

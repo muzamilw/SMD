@@ -70,6 +70,10 @@ namespace SMD.Interfaces.Services
         List<GetRandom3Deal_Result> GetRandomDeals();
         CouponStatsResponse getDealStats(long Id);
         List<CampaignResponseLocation> getDealUserLocationByCId(long CouponId);
+        List<getDealImpressionByAgeByCouponId_Result> getDealImpressionByAgeByCouponId(long CId);
+        List<getDealImpressionByGenderByCouponId_Result> getDealImpressionByGenderByCouponId(long CId);
+        List<getDealImpressionByProfessionByCouponId_Result> getDealImpressionByProfessionByCouponId(long CId);
+
 
     }
 }

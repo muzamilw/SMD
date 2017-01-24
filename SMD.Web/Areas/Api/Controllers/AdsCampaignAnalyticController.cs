@@ -32,6 +32,9 @@ namespace SMD.MIS.Areas.Api.Controllers
             data.PerGenderChart = _IAdvertService.getAdsCampaignPerCityPerGenderFormAnalytic(campaignId);
             data.PerAgeChart =  _IAdvertService.getAdsCampaignPerCityPerAgeFormAnalytic(campaignId);
             data.UserLocation = _IAdCampaignResponseService.getCampaignUserLocationByCId(campaignId);
+            data.ByAgeStats = _IAdvertService.getCampaignImpressionByAgeByCId(campaignId);
+            data.ByProfessionStats = _IAdvertService.getCampaignImpressionByProfessionByCId(campaignId);
+            data.ByGenderStats = _IAdvertService.getCampaignImpressionByGenderByCId(campaignId);
             return data;
         }
               

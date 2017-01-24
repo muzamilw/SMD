@@ -360,6 +360,7 @@ namespace SMD.Repository.Repositories
         public IEnumerable<getCampaignROItblAnalytic_Result> getCampaignROItblAnalytic(int ID)
         {            
             return db.getCampaignROItblAnalytic(ID);
+           // return new List<getCampaignROItblAnalytic_Result>();
         }
         public List<getCampaignByIdFormDataAnalytic_Result> getCampaignByIdFormDataAnalytic(long CampaignId)
         {
@@ -377,6 +378,18 @@ namespace SMD.Repository.Repositories
         public List<getAdsCampaignPerCityPerAgeFormAnalytic_Result> getAdsCampaignPerCityPerAgeFormAnalytic(long _Id)
         {
             return db.getAdsCampaignPerCityPerAgeFormAnalytic(_Id).ToList();
+        }
+        public List<getCampaignImpressionByAgeByCId_Result> getCampaignImpressionByAgeByCId(long CampaignId)
+        {
+            return db.getCampaignImpressionByAgeByCId(CampaignId).ToList();
+        }
+        public List<getCampaignImpressionByProfessionByCId_Result> getCampaignImpressionByProfessionByCId(long CampaignId)
+        {
+            return db.getCampaignImpressionByProfessionByCId(CampaignId).ToList();
+        }
+        public List<getCampaignImpressionByGenderByCId_Result> getCampaignImpressionByGenderByCId(long CampaignId)
+        {
+            return db.getCampaignImpressionByGenderByCId(CampaignId).ToList();
         }
     }
 }

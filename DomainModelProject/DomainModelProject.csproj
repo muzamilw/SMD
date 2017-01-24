@@ -198,6 +198,15 @@
     <Compile Include="getCampaignByIdFormDataAnalytic_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="getCampaignImpressionByAgeByCId_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="getCampaignImpressionByGenderByCId_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="getCampaignImpressionByProfessionByCId_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetCampaignPerformanceWeeklyStats_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -214,6 +223,15 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="getDealByCouponID_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="getDealImpressionByAgeByCouponId_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="getDealImpressionByGenderByCouponId_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="getDealImpressionByProfessionByCouponId_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="GetDealMetric_Result.cs">

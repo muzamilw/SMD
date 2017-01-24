@@ -111,6 +111,7 @@ namespace SMD.MIS.Areas.Api.Models
         public Nullable<int> clickThroughsToday { get; set; }
         public Nullable<int> clickThroughsYesterday { get; set; }
         public Nullable<int> clickThroughsAllTime { get; set; }
+        public Nullable<int> isAdDelivery { get; set; }
 
 
     }
