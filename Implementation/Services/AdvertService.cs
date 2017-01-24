@@ -1424,5 +1424,17 @@ namespace SMD.Implementation.Services
         {
             return _adCampaignRepository.getAdsCampaignPerCityPerAgeFormAnalytic(_Id);
         }
+        public List<getCampaignImpressionByAgeByCId_Result> getCampaignImpressionByAgeByCId(long CampaignId)
+        {
+            return _adCampaignRepository.getCampaignImpressionByAgeByCId(CampaignId).ToList();
+        }
+        public List<getCampaignImpressionByProfessionByCId_Result> getCampaignImpressionByProfessionByCId(long CampaignId)
+        {
+            return _adCampaignRepository.getCampaignImpressionByProfessionByCId(CampaignId).ToList();
+        }
+        public List<getCampaignImpressionByGenderByCId_Result> getCampaignImpressionByGenderByCId(long CampaignId)
+        {
+            return _adCampaignRepository.getCampaignImpressionByGenderByCId(CampaignId).ToList();
+        }
     }
 }

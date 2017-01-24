@@ -10,7 +10,7 @@ namespace SMD.Models.DomainModels
     {
         public int ordr { get; set; }
         public string label { get; set; }
-        public Nullable<int> Stats { get; set; }
+        public Nullable<double> stats { get; set; }
         
     }
 }

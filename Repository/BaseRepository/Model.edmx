@@ -119,6 +119,7 @@
           <Property Name="ShowBuyitBtn" Type="bit" />
           <Property Name="IsPaymentCollected" Type="bit" />
           <Property Name="PaymentDate" Type="datetime" />
+          <Property Name="isAdDelivery" Type="int" />
         </EntityType>
         <EntityType Name="AdCampaignClickRateHistory">
           <Key>
@@ -5823,6 +5824,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="ShowBuyitBtn" Type="Boolean" />
           <Property Name="IsPaymentCollected" Type="Boolean" />
           <Property Name="PaymentDate" Type="DateTime" Precision="3" />
+          <Property Name="isAdDelivery" Type="Int32" />
         </EntityType>
         <Association Name="FK_AdCampaign_Language">
           <End Type="DomainModels.Language" Role="Language" Multiplicity="0..1" />
@@ -8838,6 +8840,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="AdCampaigns">
             <EntityTypeMapping TypeName="DomainModels.AdCampaign">
               <MappingFragment StoreEntitySet="AdCampaign">
+                <ScalarProperty Name="isAdDelivery" ColumnName="isAdDelivery" />
                 <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
                 <ScalarProperty Name="IsPaymentCollected" ColumnName="IsPaymentCollected" />
                 <ScalarProperty Name="ShowBuyitBtn" ColumnName="ShowBuyitBtn" />

@@ -1,5 +1,6 @@
-﻿GO
-/****** Object:  StoredProcedure [dbo].[getDealImpressionByProfessionByCouponId]    Script Date: 1/22/2017 6:05:11 PM ******/
+﻿USE [SMDv2]
+GO
+/****** Object:  StoredProcedure [dbo].[getDealImpressionByProfessionByCouponId]    Script Date: 1/23/2017 11:53:53 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -9,7 +10,7 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-create PROCEDURE [dbo].[getDealImpressionByProfessionByCouponId] (
+ALTER PROCEDURE [dbo].[getDealImpressionByProfessionByCouponId] (
 @Id INT
 )
 AS
@@ -19,7 +20,7 @@ BEGIN
 SET NOCOUNT ON;
 
 
-		select count(*) as Stats, usr.Jobtitle label  from UserCouponView ucv
+		select count(*) as Stats, isnull(usr.Jobtitle,'No Job') label  from UserCouponView ucv
 		inner join AspNetUsers usr on ucv.UserID = usr.Id
 		where ucv.CouponId = @Id 
 		group by usr.Jobtitle
