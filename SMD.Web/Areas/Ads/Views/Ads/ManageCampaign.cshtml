@@ -1154,6 +1154,30 @@ else
                                     </div>
                                 </div>
                                 <div class="row" style="margin-top:12px;">
+                                    <div class="col-lg-12" style="padding-left:22px;">
+                                        <div class="radio col-lg-6" style="text-align: left;">
+                                            <input type="radio" name="optionsRadiosChannelTypes" value="1" id="optionsRadioFree" data-bind="event:{ change: $root.onDeliveryChange}">
+                                            <label for="optionsRadioFree" style="color:red">
+                                                FREE
+                                            </label>
+                                            <span class="help-block text-right"></span>
+                                        </div>
+
+                                        <div class ="col-lg-12"style="margin-top:-20px;">
+                                            <label>Deliver upto 10 video ads per day.</label>
+                                        </div>
+                                        <div class="radio col-lg-12" style="text-align: left;">
+                                            <input type="radio" name="optionsRadiosChannelTypes" value="2" id="optionsRadiosIncrease" data-bind="event:{ change: $root.onDeliveryChange}">
+                                            <label for="optionsRadiosIncrease" style="color:red">
+                                                Increase Delivery
+                                            </label>
+                                            <span class="help-block text-right"></span>
+                                        </div>
+                                        <div class="col-lg-12" style="margin-top:-20px;">
+                                            <label>Set heigher priority, rewards and reach.</label>
+                                        </div>
+                                    </div>
+
                                     <div data-bind="visible:$root.isClickRateVisible()!=true">
                                         <div class="col-lg-12" style="margin-top:14px" data-bind="visible:$root.CurrentMode()==4">
 

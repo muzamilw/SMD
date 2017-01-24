@@ -135,7 +135,7 @@ else
     </div>*@
 
 
-<div class="row" id="CouponsBinding" style="margin-top: 0px;">
+<div class="row" id="CouponsBinding" style="margin-top: 0px;margin-bottom:-31px;">
     <div class="col-lg-12" data-bind="visible: $root.isListVisible()">
         <div class="row">
             <div class="col-lg-12" style="padding-left:0px;padding-right:9px;">
@@ -273,7 +273,7 @@ else
 
         </div>
 
-        <div class="row Subpanels" style="margin-right:1px;padding-top:0px;">
+        <div class="row Subpanels" style="margin-right:1px;padding-top:0px;padding-bottom:10px;">
             <div class="col-lg-12">
 
 
@@ -581,6 +581,8 @@ else
 }
 <script>
     $(document).ready(function () {
+
+        $("#spn_learnmore").css("display", "none");
 
         $(window).scroll(function () {
             if ($(this).scrollTop() > 100) {

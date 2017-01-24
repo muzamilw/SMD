@@ -16,7 +16,7 @@
     IEnumerable<SmdRoleClaimValue> roleClaim = ClaimHelper.GetClaimsByType<SmdRoleClaimValue>(SmdClaimTypes.Role);
     string RoleName = roleClaim != null && roleClaim.Any() ? roleClaim.ElementAt(0).Role : "Role Not Loaded";
     string RoleId = roleClaim != null && roleClaim.Any() ? roleClaim.ElementAt(0).RoleId : "Role Not Loaded";
-    
+
     var Name = string.Empty;
 }
 <!DOCTYPE html>
@@ -71,8 +71,8 @@
         var ComName ='@CompanyName';
         var ComCity='@CompanyCity';
         var ComId='@CompanyID'
-      
-        
+
+
         // alert(url);
         // var  gCompanyLogo='/@CompanyLogo'
 
@@ -183,14 +183,14 @@
                                             if (User != null && User.Identity != null)
                                             {
                                                 @User.Identity.Name;
-                                                               Name = User.Identity.Name;
+                                                                   Name = User.Identity.Name;
                                             }
                                         }
 
 
                                         @*</span> <b class="caret"></b>
-                                <div class="user-positioner" style="position:fixed;">
-                                </div>*@
+                                            <div class="user-positioner" style="position:fixed;">
+                                            </div>*@
                                 </a>
                                 <ul class="dropdown-menu loginMenu">
 
@@ -232,7 +232,7 @@
                                     <li><a class=" " id="btnReferAdvert" style="display:none" href="~/Report/report/ManageAdvertises">Manage Advertisers</a></li>  @*href="~/Report/report/ManageAdvertises" use this link when you nedd for now we are disabled it*@
 
                                     @*<li class="inlineMenuItem"><a href="~/Billing/Manage/Invoice">&nbsp;&nbsp;View Invoices</a></li>
-                            <li class="inlineMenuItem"><a href="">&nbsp;&nbsp;Payment Methods</a></li>*@
+                                        <li class="inlineMenuItem"><a href="">&nbsp;&nbsp;Payment Methods</a></li>*@
 
                                     <li style="display: none;
     margin-top: 0.5em;
@@ -242,14 +242,14 @@
     border-style: inset;
     border-width: 1px;"></li>
 
-                                    <li><a href=""  style="display:none">Delete my Account</a></li>
+                                    <li><a href="" style="display:none">Delete my Account</a></li>
 
                                     @*<li><a href="">Ad Campaigns</a></li>
-                            <li class="inlineMenuItem" style="display:none;"><a href="~/Ads/Ads">&nbsp;&nbsp;Create Ad Campaigns</a></li>
-                            <li class="inlineMenuItem"><a href="~/Ads/Ads">&nbsp;&nbsp;View Ad Campaigns</a></li>
-                            <li><a href="">Survey Slides</a></li>
-                            <li class="inlineMenuItem" style="display:none;"><a href="~/survey">&nbsp;&nbsp;Create Survey Slides</a></li>
-                            <li class="inlineMenuItem"><a href="~/survey">&nbsp;&nbsp;View Survey Slides</a></li>*@
+                                        <li class="inlineMenuItem" style="display:none;"><a href="~/Ads/Ads">&nbsp;&nbsp;Create Ad Campaigns</a></li>
+                                        <li class="inlineMenuItem"><a href="~/Ads/Ads">&nbsp;&nbsp;View Ad Campaigns</a></li>
+                                        <li><a href="">Survey Slides</a></li>
+                                        <li class="inlineMenuItem" style="display:none;"><a href="~/survey">&nbsp;&nbsp;Create Survey Slides</a></li>
+                                        <li class="inlineMenuItem"><a href="~/survey">&nbsp;&nbsp;View Survey Slides</a></li>*@
 
                                     @*<li class=""><a href="~/user/ManageUser/ManageUsers">Invite users </a></li>*@
 
@@ -265,25 +265,25 @@
                                 </ul>
                             </li>
                             @*<li class="dropdown profile-dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <span class="hidden-xs">
-                                <i class="fa fa-life-ring"></i>
-                            </span> <b class="caret"></b>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        <span class="hidden-xs">
+                                            <i class="fa fa-life-ring"></i>
+                                        </span> <b class="caret"></b>
 
-                        </a>
-                        <ul class="dropdown-menu loginMenu">
-                            <li><a href="">Startup Guide</a></li>
-                            <li><a href="">Training Videos</a></li>
-                            <li><a href="">Help Center</a></li>
-                            <li><a href="">Contact Us</a></li>
-                        </ul>
-                    </li>*@
+                                    </a>
+                                    <ul class="dropdown-menu loginMenu">
+                                        <li><a href="">Startup Guide</a></li>
+                                        <li><a href="">Training Videos</a></li>
+                                        <li><a href="">Help Center</a></li>
+                                        <li><a href="">Contact Us</a></li>
+                                    </ul>
+                                </li>*@
 
                             <li>
                                 <a href="http://cash4ads.com/" target="_blank" class="dash_header-btn icon-lg icon-information">
 
                                     @*<i class=" fa fa-life-ring">
-                            </i>*@
+                                        </i>*@
                                     <i class="fa fa-exclamation-circle" aria-hidden="true" style="font-size:19px;"></i>
                                 </a>
                             </li>
@@ -292,23 +292,23 @@
                                 <a class="dash_header-btn icon-lg icon-information" href="/Coupons/Coupons/CouponReviews">
 
                                     @*<i class=" fa fa-life-ring">
-                            </i>*@
+                                        </i>*@
                                     <i class="fa fa-bell" id="whiteicon" aria-hidden="true" style="font-size:19px; color:white;display:none"></i>
                                     <img style="height:25px;width:25px; display:none" id="imgRedbell" src="/images/Red_Bell.png" />
                                 </a>
                             </li>
                             @*<li class="dropdown profile-dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <span class="hidden-xs" style="color:#fff;">
-                                <i class="fa fa-life-ring"></i>
-                            </span> <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu loginMenu">
-                            <li><a href="/Home/StartupGuide">Startup Guide</a></li>
-                            <li><a href="/Home/TrainingVideos">Training Videos</a></li>
-                            <li><a href="/Home/ContactUs">Contact Us</a></li>
-                        </ul>
-                    </li>*@
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        <span class="hidden-xs" style="color:#fff;">
+                                            <i class="fa fa-life-ring"></i>
+                                        </span> <b class="caret"></b>
+                                    </a>
+                                    <ul class="dropdown-menu loginMenu">
+                                        <li><a href="/Home/StartupGuide">Startup Guide</a></li>
+                                        <li><a href="/Home/TrainingVideos">Training Videos</a></li>
+                                        <li><a href="/Home/ContactUs">Contact Us</a></li>
+                                    </ul>
+                                </li>*@
 
 
                             <li class="hidden-xxs">
@@ -432,7 +432,7 @@
                                 <img src="~/Content/DashBannnerImages/4.png" />
                             </a>
 
-                            
+
                         </div>
                         <div class="clear"></div>
 
@@ -448,7 +448,7 @@
 
                             <div id="Counter_panel" class="homePanels pull-left bluebck">
                                 <div style="margin-top:10px;">
-                                    <span id="deal_heading" class="homePanels_headers" style="color: rgb(255, 255, 255); margin-left:13px;">Live Campaigns</span>
+                                    <span id="deal_heading" class="homePanels_headers" style="color: rgb(255, 255, 255); margin-left:5px;">Live Campaigns</span>
                                 </div>
                                 <div class="margintop8px">
                                     <div class="pull-left couters_left cnt_left_width" style="color:white;" onclick="GoToDeals();">Deals</div><div class="pull-right couters_Right cnt_right_right " onclick="GoToDeals();" data-bind="    text:$root.LiveCoupons()" style="color:white;"></div>
@@ -465,6 +465,10 @@
                                 </div>
                                 <div class="margintop8px">
                                     <div class="pull-left couters_left cnt_left_width" style="color:white;" onclick="Gotopolls();">Picture Polls</div><div class="pull-right couters_Right cnt_right_right " onclick="Gotopolls();" data-bind="    text:$root.LivePolls()" style="color:white;"></div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="margintop8px">
+                                    <div class="pull-left couters_left" style="color:white; width:px;">Free Video Ad credits</div><div class="pull-right couters_Right cnt_right_right " style="color:white;width:60px;">£0.00</div>
                                     <div class="clearfix"></div>
                                 </div>
                             </div>
@@ -703,10 +707,10 @@
 
                 </div>
                 @*@using (Html.BeginForm(new { id = "hiddenForm" }))
-                {
-                    <input type="hidden" value="7" name="Cstatus" />
-                
-                }*@
+                    {
+                        <input type="hidden" value="7" name="Cstatus" />
+
+                    }*@
                 @*<div class="row">
                         <div class="col-sm-8"></div>
                         <div class="col-sm-4">
@@ -750,350 +754,403 @@
                 <div id="spinner" style="display: none">
                 </div>
                 <div id="siteUrl">
-                </div>
-                <footer id="footer-bar" class="row">
-                    <p id="footer-copyright" class="col-xs-12">
+                    <div class="row">
 
-                        © Copyright @DateTime.Now.Year Clydy Limited UK. All Rights Reserved.
-                    </p>
-                </footer>
+                    </div>
+                    <span class="col-xs-12" style="color:white;line-height:1;margin-top:0px;text-align:left;margin-left:-11px;" id="spn_learnmore">
+                        Learn more about&nbsp;<a target="_blank" style="font-size:11px;color:white" data-toggle="modal" data-target=".model_youtube_link" onclick="openYoutubeVideo();">FREE Video Ad credits</a>
+                    </span> 
+                    <footer id="footer-bar" class="row">
+
+                       
+
+                        <p id="footer-copyright" class="col-xs-12">
+
+                            © Copyright @DateTime.Now.Year Clydy Limited UK. All Rights Reserved.
+                        </p>
+                    </footer>
+                </div>
             </div>
         </div>
-    </div>
-    @*<!-- ko stopBinding: true -->
-        @Html.Partial("~/Areas/Common/Views/Shared/_ConfirmationDialog.cshtml")
-        <!-- /ko -->*@
-    @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/jquery")
-    <link href="~/Content/CSS/Slider.css" rel="stylesheet" />
-    <script>
-        
-        (function ($) {
-            $("#siteUrl").val("@(Request.ApplicationPath == " / " ? " / " : Request.ApplicationPath)");
-        })($);
-       
-        
-
-        function collapseMainMenu() {
-
-            $('#topArea').collapse('hide');
-        }
-
-
-        function showMainMenu() {
-
-            $('#topArea').collapse('show');
-        }
-        
-
-    </script>
-    @Scripts.Render("~/Bundle/BaseLibs")
-    <script src="~/Content/themes/Centaurus/js/fullcalendar.min.js"></script>
-    @Scripts.Render("~/Bundle/CentaurusLibs")
-    <script src="~/Scripts/intlTelInput.min.js"></script>
-
-    <script>
-        //createCookie();
-       
-        require(["common/confirmation.view"]);
-        require(["Layout/Layout.view"]);
-        require(["PhraseLibrary/phraseLibrary.view"]);
-        require(["common/userProfile.view"]);
-        require(["common/companyProfile.view"]);
-        require(["common/InviteUser.view"]);
-
-        require(["common/dashboardGraphAnalytics.view"]);
-        
-      
-        
-
-        $(document).ready(function () {
-            $("#make-small-nav").click(function () {
-                $("#header-logo").toggle();
-                $("#menu-logo").toggle();
- 
-            });
-           
-         var pageURL = $(location).attr("href");
-         var m=   pageURL.split("//");
-         var nat= m[1].split("/");
-         if(nat[1]=='Home')
-         {
-             $('.dash_slide_panel').css('display','block');
-             $('#main_btnPannels').css('display','block');
-            
-         }
-         slideShow();
-      
-        });
-        function GetQueryString(sParam) {
-            var sPageURL = window.location.search.substring(1);
-            var sURLVariables = sPageURL.split('&');
-            for (var i = 0; i < sURLVariables.length; i++) {
-                var sParameterName = sURLVariables[i].split('=');
-                if (sParameterName[0] == sParam) {
-                    return sParameterName[1];
-                }
-            }
-            return 0;
-        }
-        function slideShow() {
-
-            //Set the opacity of all images to 0
-            $('#gallery a').css({opacity: 0.0});
-
-            //Get the first image and display it (set it to full opacity)
-            $('#gallery a:first').css({opacity: 1.0});
-
-            //Set the caption background to semi-transparent
-            $('#gallery .caption').css({opacity: 0.7});
-
-            //Resize the width of the caption according to the image width
-            $('#gallery .caption').css({width: $('#gallery a').find('img').css('width')});
-
-            //Get the caption of the first image from REL attribute and display it
-            $('#gallery .content').html($('#gallery a:first').find('img').attr('rel'))
-            .animate({opacity: 0.7}, 400);
-
-            //Call the gallery function to run the slideshow, 6000 = change to next image after 6 seconds
-            setInterval('gallery()',6000);
-
-        }
-
-        function gallery() {
-
-            //if no IMGs have the show class, grab the first image
-            var current = ($('#gallery a.show')?  $('#gallery a.show') : $('#gallery a:first'));
-
-            //Get next image, if it reached the end of the slideshow, rotate it back to the first image
-            var next = ((current.next().length) ? ((current.next().hasClass('caption'))? $('#gallery a:first') :current.next()) : $('#gallery a:first'));
-
-            //Get next image caption
-            var caption = next.find('img').attr('rel');
-
-            //Set the fade in effect for the next image, show class has higher z-index
-            next.css({opacity: 0.0})
-            .addClass('show')
-            .animate({opacity: 1.0}, 1000);
-
-            //Hide the current image
-            current.animate({opacity: 0.0}, 1000)
-            .removeClass('show');
-
-            //Set the opacity to 0 and height to 1px
-            $('#gallery .caption').animate({opacity: 0.0}, { queue:false, duration:0 }).animate({height: '1px'}, { queue:true, duration:300 });
-
-            //Animate the caption, opacity to 0.7 and heigth to 100px, a slide up effect
-            $('#gallery .caption').animate({opacity: 0.7},100 ).animate({height: '100px'},500 );
-
-            //Display the content
-            $('#gallery .content').html(caption);
-
-
-        }
-        $('#topArea').collapse();
-
-        $("#btnPhraseLibrary").click(function () {
-            $("#btnPhraseLibrary").css("background-color", "#93bf47");
-        });
-
-        $("#phrase-libraryCloseButton").click(function () {
-            $("#btnPhraseLibrary").css("background-color", "#7f8c8d");
-            $("#btnPhraseLibrary").css("border-color", "#5c6667");
-        });
-        $(".close").click(function () {
-            $("#btnPhraseLibrary").css("background-color", "#7f8c8d");
-            $("#btnPhraseLibrary").css("border-color", "#5c6667");
-        });
-
-        $("#deals_btn").hover(function(){
-
-            $(this).find(".panel_Image").hide();
-
-            $(this).find(".Dealdescription_panel").show();
-
-            $(this).find("#deal_heading").css("color","#fff");
-
-            $(this).find(".plus_btn").css("cssText", "color:#fff!important;");
-
-
-        },function(){
-
-            $(this).find(".panel_Image").show();
-
-            $(this).find(".Dealdescription_panel").hide();
-            $(this).find("#deal_heading").css("color","#127abd");
-
-            $(this).find(".plus_btn").css("cssText", "color:#127abd !important;");
-        });
-
-
-
-        $("#video_ads_btn").hover(function(){
-
-            $(this).find(".panel_Image").hide();
-
-            $(this).find(".Dealdescription_panel").show();
-            $(this).find("#video_heading").css("color","#fff");
-            // $(this).find(".videopanel").css("cssText", "padding-top:0px!important;");
-
-            $(this).find(".plus_btn").css("cssText", "color:#fff!important;");
-
-        },function(){
-
-            $(this).find(".panel_Image").show();
-
-            $(this).find(".Dealdescription_panel").hide();
-            $(this).find("#video_heading").css("color","#127abd");
-            //  $(this).find(".videopanel").css("cssText", "padding-top:15px;");
-            $(this).find(".plus_btn").css("cssText", "color:#127abd !important;");
-        });
-
-
-
-        $("#display_ads_btn").hover(function(){
-
-            $(this).find(".panel_Image").hide();
-
-            $(this).find(".Dealdescription_panel").show();
-            $(this).find("#display_heading").css("color","#fff");
-            $(this).find(".plus_btn").css("cssText", "color:#fff!important;");
-
-        },function(){
-
-            $(this).find(".panel_Image").show();
-
-            $(this).find(".Dealdescription_panel").hide();
-            $(this).find("#display_heading").css("color","#127abd");
-            $(this).find(".plus_btn").css("cssText", "color:#127abd !important;");
-        });
-
-
-        $("#Polls_btn").hover(function(){
-            $(this).find(".plus_btn").css("cssText", "color:#fff!important;");
-
-            $(this).find(".panel_Image").hide();
-
-            $(this).find(".Dealdescription_panel").show();
-            $(this).find("#polls_heading").css("color","#fff");
-
-        },function(){
-
-            $(this).find(".panel_Image").show();
-
-            $(this).find(".Dealdescription_panel").hide();
-            $(this).find("#polls_heading").css("color","#127abd");
-            $(this).find(".plus_btn").css("cssText", "color:#127abd !important;");
-        });
-
-
-
-        $("#surveyQuestion_btn").hover(function(){
-
-            $(this).find(".panel_Image").hide();
-
-            $(this).find(".Dealdescription_panel").show();
-            $(this).find("#surveysheading").css("color","#fff");
-            $(this).find("#polls_heading").css("color","#fff");
-            $(this).find(".plus_btn").css("cssText", "color:#fff!important;");
-
-        },function(){
-
-            $(this).find(".panel_Image").show();
-
-            $(this).find(".Dealdescription_panel").hide();
-            $(this).find("#surveysheading").css("color","#127abd");
-            $(this).find(".plus_btn").css("cssText", "color:#127abd !important;");
-        });
-
-        $('.play_btn').hover(function () {
-
-            $(this).css("cssText", "color:red!important;");
-        },
-       function () {
-           $(this).css("cssText", "color:#676767!important;");
-
-       });
-
-        $('.plus_btn').hover(function () {
-
-            $(this).css("cssText", "color:#fff!important;");
-        },
-     function () {
-         $(this).css("cssText", "color:#676767!important;");
-
-     });
-
-        function GotoHome()
-        {
-            window.location.href = "/";
-        }
-        function GoToDeals()
-        {
-            window.location.href = "/Coupons/Coupons";
-          
-        }
-        function GotoVideoAds()
-        {
-            bannerflag=false;
-            window.location.href = "/Ads/Ads?mode=1";
-          
-        }
-        function GotodisplayAds()
-        {
-            window.location.href = "/Ads/Ads?mode=4";
-            
-        }
-        function Gotopolls()
-        {
-            window.location.href = "/Survey/";
-          
-        }
-        function Gotosurveys()
-        {
-            window.location.href = "/ProfileQuestion/Manage/Index";
-        }
-        function OpenPhraseLibrary()
-        {
-            $("#btnPhraseLibrary").click();
-        }
-        function OpenBranchLocation() {
-            $("#btnBranchLocations").click();
-        }
-
-        function ShowInviteUserPopup() {
-            $('#btninviteusers').click();
-        }
-        var img = document.getElementById('companyLogo');
-
-        //alert(img.getAttribute('src')); // foo.jpg
-        var  gCompanyLogo=img.src;
-
-        //  $( "#cprofile" ).click();
-        //}
-        function openCompanyProfile() {
-            $('#cprofile').click();
-        }
-
-    </script>
-
-    @RenderSection("scripts", required: false)
-
-    <!-- Modal -->
-    @*<div class="modal fade" id="damModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="z-index:99999999999;">
-            <div class="modal-dialog" role="document" style="width:1150px;z-index:99999999999;">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="DamModelclose" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Select an Image or upload</h4>
+        <div class="modal fade my-modal model_youtube_link" id="phQuizDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" style=" width:660px;" =4">
+                <div class="col-lg-12" style=" margin-right: 35px; width:466px;">
+                    <div style="position: relative;top:128px;left: 413px;">
+
+                        <img id="closePop" src="/Content/Images/Close_Button.png" title="Close" width="20" data-dismiss="modal" style="right:14px!important;cursor:pointer" />
                     </div>
-                    <div class="modal-body">
-                        <iframe src="~/DamImages?mode=1&selection=true" style="width:100%;height:600px;border:none;" id="iframe"></iframe>
-                    </div>
-                    <div class="modal-footer">
+                    <div id="youtube_body" style="margin-top:95px;">
+
+                        <pre id="myCodeee" class="preCodeDiv"></pre>
+
                     </div>
                 </div>
+
             </div>
-        </div>*@
+
+        </div>
+        @*<!-- ko stopBinding: true -->
+            @Html.Partial("~/Areas/Common/Views/Shared/_ConfirmationDialog.cshtml")
+            <!-- /ko -->*@
+        @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/jquery")
+        <link href="~/Content/CSS/Slider.css" rel="stylesheet" />
+        <script>
+
+            (function ($) {
+                $("#siteUrl").val("@(Request.ApplicationPath == " / " ? " / " : Request.ApplicationPath)");
+            })($);
+
+
+
+            function collapseMainMenu() {
+
+                $('#topArea').collapse('hide');
+            }
+
+
+            function showMainMenu() {
+
+                $('#topArea').collapse('show');
+            }
+            function openYoutubeVideo() {
+                //   if ($("#viedoLink").val() != '') {
+                $("#myCodeee").css("display", "block");
+        
+                StartVideoDef();
+                // StartVideo($("#viedoLink").val());
+                // }
+            }
+            function StartVideoDef() {
+
+                var vidUrl = 'https://www.youtube.com/watch?v=Xcsp0486olY';
+                var myId = getId(vidUrl);
+
+                $('#myId').html(myId);
+
+                $('#myCodeee').html('<iframe width="412" height="315" src="//www.youtube.com/embed/' + myId + '" frameborder="0" allowfullscreen></iframe>');
+
+            }
+            function getId(url) {
+                var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+                var match = url.match(regExp);
+
+                if (match && match[2].length == 11) {
+                    return match[2];
+                } else {
+                    return 'error';
+                }
+            }
+
+
+        </script>
+        @Scripts.Render("~/Bundle/BaseLibs")
+        <script src="~/Content/themes/Centaurus/js/fullcalendar.min.js"></script>
+        @Scripts.Render("~/Bundle/CentaurusLibs")
+        <script src="~/Scripts/intlTelInput.min.js"></script>
+
+        <script>
+            //createCookie();
+
+            require(["common/confirmation.view"]);
+            require(["Layout/Layout.view"]);
+            require(["PhraseLibrary/phraseLibrary.view"]);
+            require(["common/userProfile.view"]);
+            require(["common/companyProfile.view"]);
+            require(["common/InviteUser.view"]);
+
+            require(["common/dashboardGraphAnalytics.view"]);
+
+
+
+
+            $(document).ready(function () {
+                $("#make-small-nav").click(function () {
+                    $("#header-logo").toggle();
+                    $("#menu-logo").toggle();
+
+                });
+
+                var pageURL = $(location).attr("href");
+                var m=   pageURL.split("//");
+                var nat= m[1].split("/");
+                if(nat[1]=='Home')
+                {
+                    $('.dash_slide_panel').css('display','block');
+                    $('#main_btnPannels').css('display','block');
+
+                }
+                slideShow();
+
+            });
+            function GetQueryString(sParam) {
+                var sPageURL = window.location.search.substring(1);
+                var sURLVariables = sPageURL.split('&');
+                for (var i = 0; i < sURLVariables.length; i++) {
+                    var sParameterName = sURLVariables[i].split('=');
+                    if (sParameterName[0] == sParam) {
+                        return sParameterName[1];
+                    }
+                }
+                return 0;
+            }
+            function slideShow() {
+
+                //Set the opacity of all images to 0
+                $('#gallery a').css({opacity: 0.0});
+
+                //Get the first image and display it (set it to full opacity)
+                $('#gallery a:first').css({opacity: 1.0});
+
+                //Set the caption background to semi-transparent
+                $('#gallery .caption').css({opacity: 0.7});
+
+                //Resize the width of the caption according to the image width
+                $('#gallery .caption').css({width: $('#gallery a').find('img').css('width')});
+
+                //Get the caption of the first image from REL attribute and display it
+                $('#gallery .content').html($('#gallery a:first').find('img').attr('rel'))
+                .animate({opacity: 0.7}, 400);
+
+                //Call the gallery function to run the slideshow, 6000 = change to next image after 6 seconds
+                setInterval('gallery()',6000);
+
+            }
+
+            function gallery() {
+
+                //if no IMGs have the show class, grab the first image
+                var current = ($('#gallery a.show')?  $('#gallery a.show') : $('#gallery a:first'));
+
+                //Get next image, if it reached the end of the slideshow, rotate it back to the first image
+                var next = ((current.next().length) ? ((current.next().hasClass('caption'))? $('#gallery a:first') :current.next()) : $('#gallery a:first'));
+
+                //Get next image caption
+                var caption = next.find('img').attr('rel');
+
+                //Set the fade in effect for the next image, show class has higher z-index
+                next.css({opacity: 0.0})
+                .addClass('show')
+                .animate({opacity: 1.0}, 1000);
+
+                //Hide the current image
+                current.animate({opacity: 0.0}, 1000)
+                .removeClass('show');
+
+                //Set the opacity to 0 and height to 1px
+                $('#gallery .caption').animate({opacity: 0.0}, { queue:false, duration:0 }).animate({height: '1px'}, { queue:true, duration:300 });
+
+                //Animate the caption, opacity to 0.7 and heigth to 100px, a slide up effect
+                $('#gallery .caption').animate({opacity: 0.7},100 ).animate({height: '100px'},500 );
+
+                //Display the content
+                $('#gallery .content').html(caption);
+
+
+            }
+            $('#topArea').collapse();
+
+            $("#btnPhraseLibrary").click(function () {
+                $("#btnPhraseLibrary").css("background-color", "#93bf47");
+            });
+
+            $("#phrase-libraryCloseButton").click(function () {
+                $("#btnPhraseLibrary").css("background-color", "#7f8c8d");
+                $("#btnPhraseLibrary").css("border-color", "#5c6667");
+            });
+            $(".close").click(function () {
+                $("#btnPhraseLibrary").css("background-color", "#7f8c8d");
+                $("#btnPhraseLibrary").css("border-color", "#5c6667");
+            });
+
+            $("#deals_btn").hover(function(){
+
+                $(this).find(".panel_Image").hide();
+
+                $(this).find(".Dealdescription_panel").show();
+
+                $(this).find("#deal_heading").css("color","#fff");
+
+                $(this).find(".plus_btn").css("cssText", "color:#fff!important;");
+
+
+            },function(){
+
+                $(this).find(".panel_Image").show();
+
+                $(this).find(".Dealdescription_panel").hide();
+                $(this).find("#deal_heading").css("color","#127abd");
+
+                $(this).find(".plus_btn").css("cssText", "color:#127abd !important;");
+            });
+
+
+
+            $("#video_ads_btn").hover(function(){
+
+                $(this).find(".panel_Image").hide();
+
+                $(this).find(".Dealdescription_panel").show();
+                $(this).find("#video_heading").css("color","#fff");
+                // $(this).find(".videopanel").css("cssText", "padding-top:0px!important;");
+
+                $(this).find(".plus_btn").css("cssText", "color:#fff!important;");
+
+            },function(){
+
+                $(this).find(".panel_Image").show();
+
+                $(this).find(".Dealdescription_panel").hide();
+                $(this).find("#video_heading").css("color","#127abd");
+                //  $(this).find(".videopanel").css("cssText", "padding-top:15px;");
+                $(this).find(".plus_btn").css("cssText", "color:#127abd !important;");
+            });
+
+
+
+            $("#display_ads_btn").hover(function(){
+
+                $(this).find(".panel_Image").hide();
+
+                $(this).find(".Dealdescription_panel").show();
+                $(this).find("#display_heading").css("color","#fff");
+                $(this).find(".plus_btn").css("cssText", "color:#fff!important;");
+
+            },function(){
+
+                $(this).find(".panel_Image").show();
+
+                $(this).find(".Dealdescription_panel").hide();
+                $(this).find("#display_heading").css("color","#127abd");
+                $(this).find(".plus_btn").css("cssText", "color:#127abd !important;");
+            });
+
+
+            $("#Polls_btn").hover(function(){
+                $(this).find(".plus_btn").css("cssText", "color:#fff!important;");
+
+                $(this).find(".panel_Image").hide();
+
+                $(this).find(".Dealdescription_panel").show();
+                $(this).find("#polls_heading").css("color","#fff");
+
+            },function(){
+
+                $(this).find(".panel_Image").show();
+
+                $(this).find(".Dealdescription_panel").hide();
+                $(this).find("#polls_heading").css("color","#127abd");
+                $(this).find(".plus_btn").css("cssText", "color:#127abd !important;");
+            });
+
+
+
+            $("#surveyQuestion_btn").hover(function(){
+
+                $(this).find(".panel_Image").hide();
+
+                $(this).find(".Dealdescription_panel").show();
+                $(this).find("#surveysheading").css("color","#fff");
+                $(this).find("#polls_heading").css("color","#fff");
+                $(this).find(".plus_btn").css("cssText", "color:#fff!important;");
+
+            },function(){
+
+                $(this).find(".panel_Image").show();
+
+                $(this).find(".Dealdescription_panel").hide();
+                $(this).find("#surveysheading").css("color","#127abd");
+                $(this).find(".plus_btn").css("cssText", "color:#127abd !important;");
+            });
+
+            $('.play_btn').hover(function () {
+
+                $(this).css("cssText", "color:red!important;");
+            },
+           function () {
+               $(this).css("cssText", "color:#676767!important;");
+
+           });
+
+            $('.plus_btn').hover(function () {
+
+                $(this).css("cssText", "color:#fff!important;");
+            },
+         function () {
+             $(this).css("cssText", "color:#676767!important;");
+
+         });
+
+            function GotoHome()
+            {
+                window.location.href = "/";
+            }
+            function GoToDeals()
+            {
+                window.location.href = "/Coupons/Coupons";
+
+            }
+            function GotoVideoAds()
+            {
+                bannerflag=false;
+                window.location.href = "/Ads/Ads?mode=1";
+
+            }
+            function GotodisplayAds()
+            {
+                window.location.href = "/Ads/Ads?mode=4";
+
+            }
+            function Gotopolls()
+            {
+                window.location.href = "/Survey/";
+
+            }
+            function Gotosurveys()
+            {
+                window.location.href = "/ProfileQuestion/Manage/Index";
+            }
+            function OpenPhraseLibrary()
+            {
+                $("#btnPhraseLibrary").click();
+            }
+            function OpenBranchLocation() {
+                $("#btnBranchLocations").click();
+            }
+
+            function ShowInviteUserPopup() {
+                $('#btninviteusers').click();
+            }
+            var img = document.getElementById('companyLogo');
+
+            //alert(img.getAttribute('src')); // foo.jpg
+            var  gCompanyLogo=img.src;
+
+            //  $( "#cprofile" ).click();
+            //}
+            function openCompanyProfile() {
+                $('#cprofile').click();
+            }
+
+        </script>
+
+        @RenderSection("scripts", required: false)
+
+        <!-- Modal -->
+        @*<div class="modal fade" id="damModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="z-index:99999999999;">
+                <div class="modal-dialog" role="document" style="width:1150px;z-index:99999999999;">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="DamModelclose" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Select an Image or upload</h4>
+                        </div>
+                        <div class="modal-body">
+                            <iframe src="~/DamImages?mode=1&selection=true" style="width:100%;height:600px;border:none;" id="iframe"></iframe>
+                        </div>
+                        <div class="modal-footer">
+                        </div>
+                    </div>
+                </div>
+            </div>*@
 </body>
 </html>

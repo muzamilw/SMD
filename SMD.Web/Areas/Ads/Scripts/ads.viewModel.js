@@ -536,6 +536,13 @@ define("ads/ads.viewModel",
 
 
 				},
+                onDeliveryChange = function ()
+                {
+                  
+                    var a = $("#optionsRadiosIncrease").val();
+                    alert(a);
+
+                },
                 CloseAnalyticInnerView = function () {
                     isAdvertdashboardVisible(false);
                     CampaignRatioAnalyticData(1);
@@ -4193,7 +4200,8 @@ define("ads/ads.viewModel",
                     showSocialPopup: showSocialPopup,
                     hideSocialPopup: hideSocialPopup,
                     QQPStatsAnalytics: QQPStatsAnalytics,
-                    getQQPAnalytic: getQQPAnalytic
+                    getQQPAnalytic: getQQPAnalytic,
+                    onDeliveryChange: onDeliveryChange
                 };
             })()
         };
