@@ -7,9 +7,9 @@
 
 <div style="background:#1d7bbb;padding-top: 10px;  " class="text-blue">
     <div class="container">
-        <div class="col-lg-12 col-md-8 col-sm-6 hidden-xs hidden-sm content-main-deals content" id="main_copon_cont">
+        <div class="col-lg-12 col-md-8 col-sm-6  content-main-deals content" id="main_copon_cont">
 
-            <div id="back_btn_div" style="margin-top:36px;">
+            <div id="back_btn_div">
                 <div style="float:left;padding-left:12px;">
                     <span id="deal_group_head" style="font-size:28px;color:white;"></span>
                 </div>
@@ -27,7 +27,7 @@
 
                 <div id="new_layout">
 
-                    <div class="col-lg-4" style="border-radius:5px;">
+                    <div class="col-lg-4 col-md-12" style="border-radius:5px;">
                         <div id="banner_logo">
                             <img id="voucMainSliderImg" style="width:100%;"/>
                         </div>
@@ -79,9 +79,9 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 col-md-12">
                         <div id="deal_lines_box">
-                            
+
                         </div>
 
                         <div id="highlights_deals" class="deals_white_panel">
@@ -99,7 +99,7 @@
 
                             </div>
 
-                            
+
                         </div>
                         <div id="social_icons" class="deals_white_panel" style="margin-top:7px;min-height:77px;padding-top:20px;text-align:center;">
                             <span class='st_sharethis_large' displaytext='ShareThis'></span>
@@ -112,7 +112,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 col-md-12">
                         <div id="deals_reviews_ss"></div>
                     </div>
                 </div>
@@ -316,7 +316,8 @@
 
     </div>
     </div>
-<div id="deals_Footer_panel" class="container" style="height:300px;">
+
+<div id="deals_Footer_panel" class="container footer_height" >
     <div class="col-lg-12">
         
 
@@ -337,6 +338,7 @@
     </div>
 
 </div>
+<div style="clear:both"></div>
 <div class="loading" align="center" id="modalSending">
 
     @*<img src="images/rloader.gif" width="200px" />*@
@@ -429,7 +431,7 @@
                         var urlg=val.URL;
                         
                         //$("#deal_lines").append('<div style="margin-top:11px;"> <div style="float:left;padding:0px;" class="deal_lines col-lg-9">' + val.Description + '</div><div style="float:right" class="col-lg-3"><a title="Buy this deal" class="ctu-buy-big waMultiPrice" data-multibuy="true" onclick="BuyCoupon(' + val.CouponId + ');" id="mainDealBuy">Buy It!</a></div><div style="clear:both"></div></div>')
-                        $("#deal_lines_box").append('<div id="line_box" class="line_box"><div class="line_header">' + val.Description + '</div><div><div class="pull-left"><div id="days_left_div" class="ppl_delas">' + dayLeft + '</div></div><div class="pull-right" style="padding-top:15px;"><div><div class="pull-left" style="font-size:12px;"><span id="saving_costs" class="striketrough">' + Saving + '</span> </div> <div class="pull-right strfont" style="margin-right:16px;"><span id="Price_costs">' + Price + '</span></div> <div class="clearfix"></div></div></div> <div class="clearfix"></div> </div><div style=" margin-left: 18px;margin-top: 9px;"><input type="button"  value="Save 33% - Shop Now" class="save_percent_cls" name=' + val.URL + ' onclick="PriceApiCall(this,' + response.CouponId + ');"/></div><div style="clear:both;"></div><div style="text-align: center;margin-top: 7px;"><span style="color:#848484;font-size:12px">Use coupon code:ABCD123</span></div></div>')
+                        $("#deal_lines_box").append('<div id="line_box" class="line_box"><div class="line_header">' + val.Description + '</div><div><div class="pull-left"><div id="days_left_div" class="ppl_delas">' + dayLeft + '</div></div><div class="pull-right" style="padding-top:15px;"><div><div class="pull-left" style="font-size:12px;"><span id="saving_costs" class="striketrough">' + Saving + '</span> </div> <div class="pull-right strfont" style="margin-right:16px;"><span id="Price_costs">' + Price + '</span></div> <div class="clearfix"></div></div></div> <div class="clearfix"></div> </div><div style=" margin-left: 18px;margin-top: 9px;margin-right:18px;"><input type="button"  value="Save 33% - Shop Now" class="save_percent_cls" name=' + val.URL + ' onclick="PriceApiCall(this,' + response.CouponId + ');"/></div><div style="clear:both;"></div><div style="text-align: center;margin-top: 7px;"><span style="color:#848484;font-size:12px">Use coupon code:ABCD123</span></div></div>')
                     });
 
 
