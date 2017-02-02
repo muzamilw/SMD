@@ -40,6 +40,7 @@ define("ads/ads.viewModel",
                     BuyItStatus = ko.observable(false),
                     showLandingPageUrl = ko.observable(true),
                     StatusCodeName = ko.observable(''),
+                    videoAdbtnLabel = ko.observable(''),
                     StatusCodeImage = ko.observable(''),
                     IsvideoBtn = ko.observable(false),
                     IsGameAds = ko.observable(false),
@@ -3939,6 +3940,7 @@ define("ads/ads.viewModel",
                         UrlHeadings("Leatherboard banner click thru url to your landing  page.");
                         DisplayImage(true);
                         StatusCodeName("Display Ad");
+                        videoAdbtnLabel("Get Free Display Ad Credits");
                         StatusCodeImage("/Content/Images/Displaymod.png");
                         IsvideoBtn(false);
                         IsGameAds(true);
@@ -3949,6 +3951,7 @@ define("ads/ads.viewModel",
                     else {
                         UrlHeadings("Call for Action Button");
                         IsShownforVideo(true);
+                        videoAdbtnLabel("Get Free Video Ad Credits");
                         VideoImage(true);
                         IsvideoBtn(true);
                         IsGameAds(false);
@@ -4239,7 +4242,8 @@ define("ads/ads.viewModel",
                     ByGenderStatsChartAnalyticsData : ByGenderStatsChartAnalyticsData, 
                     ByProfessionStatsChartAnalyticsData : ByProfessionStatsChartAnalyticsData,
                     ByAgeStatsChartAnalyticsData: ByAgeStatsChartAnalyticsData,
-                    isPPRVisible: isPPRVisible
+                    isPPRVisible: isPPRVisible,
+                    videoAdbtnLabel: videoAdbtnLabel
                 };
             })()
         };

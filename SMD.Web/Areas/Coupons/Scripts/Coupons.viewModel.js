@@ -117,6 +117,7 @@ define("Coupons/Coupons.viewModel",
                     ageRange = ko.observableArray([]),
                     isNewCriteria = ko.observable(true),
                     islabelvisible = ko.observable(1),
+                    isCash4dealVisible = ko.observable(false),
                     isEnableVedioVerificationLink = ko.observable(false),
                     SelectedTextField = ko.observable(),
                     BranchLocationId = ko.observable(),
@@ -277,7 +278,7 @@ define("Coupons/Coupons.viewModel",
                         Gender: selectedOGenderAnalytics(),
                         age: selectedOAgeAnalytics(),
                         Stype: 1,
-                        profession : 'All',
+                        profession: 'All',
                     }, {
                         success: function (data) {
 
@@ -292,28 +293,28 @@ define("Coupons/Coupons.viewModel",
 
                 },
                 getDDPAnalytic = function () {
-                      dataservice.getDealsAnalytics({
-                          CouponID: selectedCouponIdAnalytics(),
-                          dateRange: 0,
-                          Granularity: 0,
-                          type: 2,
-                          Gender: 0,
-                          age: 0,
-                          Stype: 3,
-                          profession: selectedProAnalytics(),
-                      }, {
-                          success: function (data) {
+                    dataservice.getDealsAnalytics({
+                        CouponID: selectedCouponIdAnalytics(),
+                        dateRange: 0,
+                        Granularity: 0,
+                        type: 2,
+                        Gender: 0,
+                        age: 0,
+                        Stype: 3,
+                        profession: selectedProAnalytics(),
+                    }, {
+                        success: function (data) {
 
-                           //   DDPStatsAnalytics(data.ByProfessionImpStat);
+                            //   DDPStatsAnalytics(data.ByProfessionImpStat);
 
 
-                          },
-                          error: function (response) {
+                        },
+                        error: function (response) {
 
-                          }
-                      });
+                        }
+                    });
 
-                  },
+                },
                 getDDCTAnalytic = function () {
                     dataservice.getDealsAnalytics({
                         CouponID: selectedCouponIdAnalytics(),
@@ -339,46 +340,46 @@ define("Coupons/Coupons.viewModel",
 
                 },
                 openAdvertiserDashboardDealScreenOnList = function (item) {
-                          if (item != undefined) {
-                              if (item.CouponId() != undefined) {
-                                  selectedCouponIdAnalytics(item.CouponId());
-                                  CouponTitle(item.CouponTitle());
-                              }
+                    if (item != undefined) {
+                        if (item.CouponId() != undefined) {
+                            selectedCouponIdAnalytics(item.CouponId());
+                            CouponTitle(item.CouponTitle());
+                        }
 
 
-                          }
+                    }
 
 
-                          $(".hideInCoupons").css("display", "none");
+                    $(".hideInCoupons").css("display", "none");
 
-                          $("#MarketobjDiv").css("display", "none");
+                    $("#MarketobjDiv").css("display", "none");
 
-                          $("#topArea").css("display", "none");
-                          $("#panelArea").css("display", "none");
+                    $("#topArea").css("display", "none");
+                    $("#panelArea").css("display", "none");
 
-                          $("#Heading_div").css("display", "none");
-                          $(".closecls").css("display", "none");
+                    $("#Heading_div").css("display", "none");
+                    $(".closecls").css("display", "none");
 
-                          isEditorVisible(true);
-                          isListVisible(false);
+                    isEditorVisible(true);
+                    isListVisible(false);
 
-                          if (!IsnewCoupon()) {
-                              isflageClose(true);
-                              getDealsAnalytics();
-                              $("#ddGranularityDropDown").removeAttr("disabled");
-                              $("#ddDateRangeDropDown").removeAttr("disabled");
-                              $("#ddGDropDown").removeAttr("disabled");
-                              $("#ddADropDown").removeAttr("disabled");
-                              $("#ddCTGDropDown").removeAttr("disabled");
-                              $("#ddCTADropDown").removeAttr("disabled");
-                              isAdvertdashboardDealVisible(true);
-                          }
-                          else {
-                              confirmation.showOKpopupforChart();
+                    if (!IsnewCoupon()) {
+                        isflageClose(true);
+                        getDealsAnalytics();
+                        $("#ddGranularityDropDown").removeAttr("disabled");
+                        $("#ddDateRangeDropDown").removeAttr("disabled");
+                        $("#ddGDropDown").removeAttr("disabled");
+                        $("#ddADropDown").removeAttr("disabled");
+                        $("#ddCTGDropDown").removeAttr("disabled");
+                        $("#ddCTADropDown").removeAttr("disabled");
+                        isAdvertdashboardDealVisible(true);
+                    }
+                    else {
+                        confirmation.showOKpopupforChart();
 
-                          }
+                    }
 
-                      },
+                },
                 openAdvertiserDashboardDealScreen = function () {
 
 
@@ -592,7 +593,7 @@ define("Coupons/Coupons.viewModel",
                         Gender: 0,
                         age: 0,
                         Stype: 0,
-                        profession : 'All'
+                        profession: 'All'
 
                     }, {
                         success: function (data) {
@@ -654,7 +655,7 @@ define("Coupons/Coupons.viewModel",
                                   {
                                       "radius": 15,
                                       "maxOpacity": 1,
-                                     // "scaleRadius": true,
+                                      // "scaleRadius": true,
                                       "useLocalExtrema": true
                                   }
                                 );
@@ -714,7 +715,7 @@ define("Coupons/Coupons.viewModel",
 
                     },
                    showSocialPopup = function () {
-                      // isLoading(true);
+                       // isLoading(true);
                        view.showSocialDialog();
                    },
                 // Hide the dialog
@@ -723,102 +724,123 @@ define("Coupons/Coupons.viewModel",
                      //resetDialog();
                      view.hideSocialDialog();
                  },
-                 onGoSocial = function ()
-                 {
+                 onGoSocial = function () {
                      confirmation.showOKpopupforSocail();
 
                  }
-            CloseCouponsAnalyticView = function () {
-                isEditorVisible(false);
-                isListVisible(true);
-                isAdvertdashboardDealVisible(false);
-                CampaignRatioAnalyticData(1);
-                selecteddateRangeAnalytics(1);
-                selectedGranularityAnalytics(1);
-                isflageClose(false);
-                showMainMenu();
-                $(".hideInCoupons").css("display", "none");
-                $("#MarketobjDiv").css("display", "none");
+                CloseCouponsAnalyticView = function () {
+                    isEditorVisible(false);
+                    isListVisible(true);
+                    isAdvertdashboardDealVisible(false);
+                    CampaignRatioAnalyticData(1);
+                    selecteddateRangeAnalytics(1);
+                    selectedGranularityAnalytics(1);
+                    isflageClose(false);
+                    showMainMenu();
+                    $(".hideInCoupons").css("display", "none");
+                    $("#MarketobjDiv").css("display", "none");
 
-                $("#topArea").css("display", "block");
-                $("#Heading_div").css("display", "block");
-                $(".closecls").css("display", "block");
-                $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign,#btnStopAndTerminate,#btnCopyCampaign").removeAttr('disabled');
+                    $("#topArea").css("display", "block");
+                    $("#Heading_div").css("display", "block");
+                    $(".closecls").css("display", "block");
+                    $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign,#btnStopAndTerminate,#btnCopyCampaign").removeAttr('disabled');
 
-            },
-                 CloseCouponsInnerAnalyticView = function () {
-                     isAdvertdashboardDealVisible(false);
-                     CampaignRatioAnalyticData(1);
-                     selecteddateRangeAnalytics(1);
-                     selectedGranularityAnalytics(1);
-                     isflageClose(false);
-                 },
+                },
+                     CloseCouponsInnerAnalyticView = function () {
+                         isAdvertdashboardDealVisible(false);
+                         CampaignRatioAnalyticData(1);
+                         selecteddateRangeAnalytics(1);
+                         selectedGranularityAnalytics(1);
+                         isflageClose(false);
+                     },
 
                 //
 
                 //end advertiser analytics
-            getCampaignBaseContent = function () {
-                dataservice.getBaseData({
-                    RequestId: 1,
-                    QuestionId: 0,
-                }, {
-                    success: function (data) {
-                        var currency;
-                        if (data != null) {
-                            currency = ' (' + data.UserAndCostDetails.CurrencySymbol + ')';
-                            UserAndCostDetail(data.UserAndCostDetails);
-                            currencyCode(currency);
-                            mCurrencyCode(data.UserAndCostDetails.CurrencySymbol);
+                getCampaignBaseContent = function () {
+                    dataservice.getBaseData({
+                        RequestId: 1,
+                        QuestionId: 0,
+                    }, {
+                        success: function (data) {
+                            var currency;
+                            if (data != null) {
+                                currency = ' (' + data.UserAndCostDetails.CurrencySymbol + ')';
+                                UserAndCostDetail(data.UserAndCostDetails);
+                                currencyCode(currency);
+                                mCurrencyCode(data.UserAndCostDetails.CurrencySymbol);
 
 
-                            if (data.Currencies != null) {
-                                CurrencyDropDown.removeAll();
-                                ko.utils.arrayPushAll(CurrencyDropDown(), data.Currencies);
-                                langs.valueHasMutated();
+                                if (data.Currencies != null) {
+                                    CurrencyDropDown.removeAll();
+                                    ko.utils.arrayPushAll(CurrencyDropDown(), data.Currencies);
+                                    langs.valueHasMutated();
 
-                            }
-
-                            if (data.CouponCategories != null) {
-
-                                couponCategories.removeAll();
-                                ko.utils.arrayPushAll(couponCategories, data.CouponCategories);
-
-                                couponCategories.valueHasMutated();
-                                reachedAudience(Count(3150));
-
-                                //ko.utils.arrayPushAll(couponCategoriesCol1, couponCategories.take(7));
-                                //couponCategoriesCol1.valueHasMutated();
-                                var set = parseInt((couponCategories().length / 3));
-
-                                //For 1s Column
-                                for (var i = 0; i < couponCategories().length; i++) {
-                                    couponCategoriesCol1.push(couponCategories()[i]);
                                 }
-                                couponCategoriesCol1.valueHasMutated();
-                                ////For 2nd Column
-                                //if (couponCategories().length > set + 1) {
-                                //    for (var j = set + 1; j < set*2 + 1; j++) {
-                                //        couponCategoriesCol2.push(couponCategories()[j]);
-                                //    }
-                                //    couponCategoriesCol2.valueHasMutated();
-                                //}
-                                ////For 3rd Column
-                                //if (couponCategories().length >= set * 2 + 1) {
-                                //    for (var k = set * 2 + 1; k < couponCategories().length; k++) {
-                                //        couponCategoriesCol3.push(couponCategories()[k]);
-                                //    }
-                                //    couponCategoriesCol2.valueHasMutated();
-                                //}
+
+                                if (data.CouponCategories != null) {
+
+                                    couponCategories.removeAll();
+                                    ko.utils.arrayPushAll(couponCategories, data.CouponCategories);
+
+                                    couponCategories.valueHasMutated();
+                                    reachedAudience(Count(3150));
+
+                                    //ko.utils.arrayPushAll(couponCategoriesCol1, couponCategories.take(7));
+                                    //couponCategoriesCol1.valueHasMutated();
+                                    var set = parseInt((couponCategories().length / 3));
+
+                                    //For 1s Column
+                                    for (var i = 0; i < couponCategories().length; i++) {
+                                        couponCategoriesCol1.push(couponCategories()[i]);
+                                    }
+                                    couponCategoriesCol1.valueHasMutated();
+                                    ////For 2nd Column
+                                    //if (couponCategories().length > set + 1) {
+                                    //    for (var j = set + 1; j < set*2 + 1; j++) {
+                                    //        couponCategoriesCol2.push(couponCategories()[j]);
+                                    //    }
+                                    //    couponCategoriesCol2.valueHasMutated();
+                                    //}
+                                    ////For 3rd Column
+                                    //if (couponCategories().length >= set * 2 + 1) {
+                                    //    for (var k = set * 2 + 1; k < couponCategories().length; k++) {
+                                    //        couponCategoriesCol3.push(couponCategories()[k]);
+                                    //    }
+                                    //    couponCategoriesCol2.valueHasMutated();
+                                    //}
+
+                                }
 
                             }
+
+                        },
+                        error: function (response) {
 
                         }
+                    });
+                    dataservice.getBaseData({
+                        RequestId: 13,
+                        QuestionId: 0,
+                    }, {
+                        success: function (data) {
+                            if (data != null) {
 
-                    },
-                    error: function (response) {
+                                branchLocations([]);
+                                ko.utils.arrayPushAll(branchLocations(), data.listBranches);
+                                branchLocations.valueHasMutated();
 
-                    }
-                });
+                                BindPeriodDD();
+
+                            }
+
+                        },
+                        error: function (response) {
+
+                        }
+                    });
+                },
+            getLocation = function () {
                 dataservice.getBaseData({
                     RequestId: 13,
                     QuestionId: 0,
@@ -830,7 +852,106 @@ define("Coupons/Coupons.viewModel",
                             ko.utils.arrayPushAll(branchLocations(), data.listBranches);
                             branchLocations.valueHasMutated();
 
-                            BindPeriodDD();
+                        }
+
+                    },
+                    error: function (response) {
+
+                    }
+                });
+
+
+
+            },
+                  getDealStats = function (CouponId) {
+                      dataservice.getDealStats({
+                          id: CouponId,
+
+                      }, {
+                          success: function (data) {
+                              if (data != null) {
+
+                                  var Element = ko.utils.arrayFirst(campaignGridContent(), function (item) {
+                                      return item.CouponId() == data.CouponId;
+                                  });
+
+                                  if (Element) {
+                                      Element.DealLines(data.DealLines);
+                                      Element.ClickThruComparison(data.ClickThruComparison);
+                                      Element.ClickThruDirection(data.ClickThruDirection);
+                                      Element.DealsOpenedComparison(data.DealsOpenedComparison);
+                                      Element.DealsOpenedDirection(data.DealsOpenedDirection);
+                                      Element.DealRating(data.DealRating);
+                                      Element.DealReviewsCount(data.DealReviewsCount);
+                                      Element.ClickThruCount(data.ClickThruCount);
+                                  }
+                              }
+                          },
+                          error: function (response) {
+                          }
+                      });
+
+                  },
+
+            getAdCampaignGridContent = function () {
+                dataservice.getCampaignData({
+                    CampaignId: 0,
+                    PageSize: pager().pageSize(),
+                    PageNo: pager().currentPage(),
+                    SearchText: searchFilterValue(),
+                    status: SearchSelectedStatus(),
+                    ShowCoupons: true
+                }, {
+                    success: function (data) {
+                        if (data != null) {
+                            // set grid cont
+                            if ((searchFilterValue() == "" || searchFilterValue() == undefined) && SearchSelectedStatus() == 0)
+                                gridTotalCount(data.TotalCount);
+                            campaignGridContent.removeAll();
+                            _.each(data.Coupon, function (item) {
+                                campaignGridContent.push(model.Coupon.Create(updateCampaignGridItem(item)));
+                            });
+                            _.each(campaignGridContent(), function (item) {
+                                getDealStats(item.CouponId());
+
+                            });
+                            pager().totalCount(data.TotalCount);
+                            if (data.TotalCount == 0) {
+                                if (gridTotalCount() >= 4) {
+                                    isCouponSearch(false);
+                                    islblText(false);
+                                    return;
+                                }
+                                else {
+                                    isCouponSearch(true);
+                                }
+                                islblText(true);
+                            }
+                            else if (data.TotalCount == 1) {
+                                if (gridTotalCount() >= 4) {
+                                    isCouponSearch(false);
+                                    islblText(false);
+                                }
+                                else {
+                                    isCouponSearch(true);
+                                }
+
+                                islblText(false);
+                            }
+                            else if (data.TotalCount > 1 && data.TotalCount <= 4) {
+                                if (gridTotalCount() >= 4) {
+                                    isCouponSearch(false);
+                                }
+                                else {
+                                    isCouponSearch(true);
+                                }
+                                islblText(false);
+                            }
+                            else {
+                                isCouponSearch(false);
+                                islblText(false);
+                            }
+
 
                         }
 
@@ -839,561 +960,419 @@ define("Coupons/Coupons.viewModel",
 
                     }
                 });
+
             },
-        getLocation = function () {
-            dataservice.getBaseData({
-                RequestId: 13,
-                QuestionId: 0,
-            }, {
-                success: function (data) {
-                    if (data != null) {
+           GetMonthNameByID = function (monthId) {
 
-                        branchLocations([]);
-                        ko.utils.arrayPushAll(branchLocations(), data.listBranches);
-                        branchLocations.valueHasMutated();
-
-                    }
-
-                },
-                error: function (response) {
-
-                }
-            });
-
-
-
-        },
-              getDealStats = function (CouponId) {
-                  dataservice.getDealStats({
-                      id: CouponId,
-
-                  }, {
-                      success: function (data) {
-                          if (data != null) {
-
-                              var Element = ko.utils.arrayFirst(campaignGridContent(), function (item) {
-                                  return item.CouponId() == data.CouponId;
-                              });
-
-                              if (Element) {
-                                  Element.DealLines(data.DealLines);
-                                  Element.ClickThruComparison(data.ClickThruComparison);
-                                  Element.ClickThruDirection(data.ClickThruDirection);
-                                  Element.DealsOpenedComparison(data.DealsOpenedComparison);
-                                  Element.DealsOpenedDirection(data.DealsOpenedDirection);
-                                  Element.DealRating(data.DealRating);
-                                  Element.DealReviewsCount(data.DealReviewsCount);
-                                  Element.ClickThruCount(data.ClickThruCount);
-                              }
-                          }
-                      },
-                      error: function (response) {
-                      }
-                  });
-
-              },
-
-        getAdCampaignGridContent = function () {
-            dataservice.getCampaignData({
-                CampaignId: 0,
-                PageSize: pager().pageSize(),
-                PageNo: pager().currentPage(),
-                SearchText: searchFilterValue(),
-                status: SearchSelectedStatus(),
-                ShowCoupons: true
-            }, {
-                success: function (data) {
-                    if (data != null) {
-                        // set grid cont
-                        if ((searchFilterValue() == "" || searchFilterValue() == undefined) && SearchSelectedStatus() == 0)
-                            gridTotalCount(data.TotalCount);
-                        campaignGridContent.removeAll();
-                        _.each(data.Coupon, function (item) {
-                            campaignGridContent.push(model.Coupon.Create(updateCampaignGridItem(item)));
-                        });
-                        _.each(campaignGridContent(), function (item) {
-                            getDealStats(item.CouponId());
-
-                        });
-                        pager().totalCount(data.TotalCount);
-                        if (data.TotalCount == 0) {
-                            if (gridTotalCount() >= 4) {
-                                isCouponSearch(false);
-                                islblText(false);
-                                return;
-                            }
-                            else {
-                                isCouponSearch(true);
-                            }
-                            islblText(true);
-                        }
-                        else if (data.TotalCount == 1) {
-                            if (gridTotalCount() >= 4) {
-                                isCouponSearch(false);
-                                islblText(false);
-                            }
-                            else {
-                                isCouponSearch(true);
-                            }
-
-                            islblText(false);
-                        }
-                        else if (data.TotalCount > 1 && data.TotalCount <= 4) {
-                            if (gridTotalCount() >= 4) {
-                                isCouponSearch(false);
-                            }
-                            else {
-                                isCouponSearch(true);
-                            }
-                            islblText(false);
-                        }
-                        else {
-                            isCouponSearch(false);
-                            islblText(false);
-                        }
-
-
-                    }
-
-                },
-                error: function (response) {
-
-                }
-            });
-
-        },
-       GetMonthNameByID = function (monthId) {
-
-           var month = new Array();
-           month[0] = "January";
-           month[1] = "February";
-           month[2] = "March";
-           month[3] = "April";
-           month[4] = "May";
-           month[5] = "June";
-           month[6] = "July";
-           month[7] = "August";
-           month[8] = "September";
-           month[9] = "October";
-           month[10] = "November";
-           month[11] = "December";
-           var m = month[monthId];
-           return m;
-       },
-       BindPeriodDD = function () {
-           var d = new Date();
-           var month = new Array();
-           month[0] = "January";
-           month[1] = "February";
-           month[2] = "March";
-           month[3] = "April";
-           month[4] = "May";
-           month[5] = "June";
-           month[6] = "July";
-           month[7] = "August";
-           month[8] = "September";
-           month[9] = "October";
-           month[10] = "November";
-           month[11] = "December";
-           var date = '';
-           var getMonth = month[d.getMonth()];
-           var len = 2;
-           for (counter = d.getMonth() ; counter < 12; counter++) {
-               date = d.getFullYear() + ' - ' + month[counter];
-               var dateobj = { id: len, name: date }
-               YearRangeDropDown.push(dateobj);
-               len++;
-           }
-           if (d.getMonth() < 12) {
-               for (i = 0; i < d.getMonth() ; i++) {
-                   date = (d.getFullYear() + 1) + ' - ' + month[i];
+               var month = new Array();
+               month[0] = "January";
+               month[1] = "February";
+               month[2] = "March";
+               month[3] = "April";
+               month[4] = "May";
+               month[5] = "June";
+               month[6] = "July";
+               month[7] = "August";
+               month[8] = "September";
+               month[9] = "October";
+               month[10] = "November";
+               month[11] = "December";
+               var m = month[monthId];
+               return m;
+           },
+           BindPeriodDD = function () {
+               var d = new Date();
+               var month = new Array();
+               month[0] = "January";
+               month[1] = "February";
+               month[2] = "March";
+               month[3] = "April";
+               month[4] = "May";
+               month[5] = "June";
+               month[6] = "July";
+               month[7] = "August";
+               month[8] = "September";
+               month[9] = "October";
+               month[10] = "November";
+               month[11] = "December";
+               var date = '';
+               var getMonth = month[d.getMonth()];
+               var len = 2;
+               for (counter = d.getMonth() ; counter < 12; counter++) {
+                   date = d.getFullYear() + ' - ' + month[counter];
                    var dateobj = { id: len, name: date }
                    YearRangeDropDown.push(dateobj);
                    len++;
                }
+               if (d.getMonth() < 12) {
+                   for (i = 0; i < d.getMonth() ; i++) {
+                       date = (d.getFullYear() + 1) + ' - ' + month[i];
+                       var dateobj = { id: len, name: date }
+                       YearRangeDropDown.push(dateobj);
+                       len++;
+                   }
+               }
+           },
+           GetMonth = function (monthstr) {
+
+               var month = new Array();
+               month[0] = "January";
+               month[1] = "February";
+               month[2] = "March";
+               month[3] = "April";
+               month[4] = "May";
+               month[5] = "June";
+               month[6] = "July";
+               month[7] = "August";
+               month[8] = "September";
+               month[9] = "October";
+               month[10] = "November";
+               month[11] = "December";
+               var index = month.indexOf(monthstr.trim());
+               return index;
            }
-       },
-       GetMonth = function (monthstr) {
+                ,
+            updateCampaignGridItem = function (item) {
 
-           var month = new Array();
-           month[0] = "January";
-           month[1] = "February";
-           month[2] = "March";
-           month[3] = "April";
-           month[4] = "May";
-           month[5] = "June";
-           month[6] = "July";
-           month[7] = "August";
-           month[8] = "September";
-           month[9] = "October";
-           month[10] = "November";
-           month[11] = "December";
-           var index = month.indexOf(monthstr.trim());
-           return index;
-       }
-            ,
-        updateCampaignGridItem = function (item) {
+                if (item.Status == 1) {
+                    item.StatusValue = "Draft";
 
-            if (item.Status == 1) {
-                item.StatusValue = "Draft";
-
-            } else if (item.Status == 2) {
-                item.StatusValue = "Pending Approval"
-            } else if (item.Status == 3) {
-                item.StatusValue = "Live";
-            } else if (item.Status == 4) {
-                item.StatusValue = "Paused"
-            } else if (item.Status == 5) {
-                item.StatusValue = "Completed"
-            } else if (item.Status == 6) {
-                item.StatusValue = "Approval Rejected"
-            } else if (item.Status == 7) {
-                item.StatusValue = ("Remove");
-            } else if (item.Status == 9) {
-                item.StatusValue = ("Completed");
-            } else if (item.Status == 8) {
-                item.StatusValue = ("Archived");
-            }
-            return item;
-        },
-getfreeCouponCount = function () {
-    dataservice.getfreeCouponCount({
-        success: function (count) {
-            freeCouponCount(0);
-            freeCouponCount(count);
-        },
-        error: function () {
-            toastr.error("Failed to load free deal counts");
-        }
-    });
-
-
-},
-        getCampaignByFilter = function () {
-            getAdCampaignGridContent();
-        },
-        addNewCampaign = function () {
-
-            diveNo(0);
-            IsenableBanner(false);
-            buyItQuestionLabelStatus(false);
-            modifiedDate(null);
-            //show the main menu;
-            collapseMainMenu();
-            getfreeCouponCount();
-            openEditScreen(5);
-            isFromEdit(true);
-            isListVisible(false);
-            islabelvisible(1);
-            isBtnSaveDraftVisible(true);
-            isTerminateBtnVisible(false);
-            isNewCampaignVisible(false);
-            IsnewCoupon(true);
-            CouponsubTitle("(Deals)");
-            //$("#rating_id").val(4);
-            RatedFigure(2);
-            $("#btnCancel").css("display", "block");
-            $(".hideInCoupons").css("display", "none");
-
-            $("#MarketobjDiv").css("display", "none");
-            $("#topArea").css("display", "none");
-            $(".closecls").css("display", "none");
-
-            $("#Heading_div").css("display", "none");
-
-            var selectionoption = $("#buyItddl").val();
-            if (selectionoption == 0) {
-                hideLandingPageURl(false);
-            }
-            else {
-                hideLandingPageURl(true);
-            }
-
-            isShowArchiveBtn(false);
-            CouponTitle('New Deal Groups');
-            StatusValue('Draft');
-            IsSubmitBtnVisible(true);
-            couponModel().CouponPriceOptions.splice(0, 0, new model.CouponPriceOption());
-            couponModel().BuyitLandingPageUrl('https://');
-            couponModel().isSaveBtnLable("3");
-            couponModel().CouponListingMode("1");
-            saveBtntext("Buy Now");
-            couponModel().IsShowReviews(true);
-            couponModel().IsShowAddress(true);
-            couponModel().IsShowMap(true);
-            couponModel().IsShowPhoneNo(true);
-
-            Banner2Flag(false);
-            Banner3Flag(false);
-            Banner4Flag(false);
-            Banner5Flag(false);
-            Banner6Flag(false);
-            couponModel().CouponPriceOptions()[0].Price(10);
-            couponModel().CouponPriceOptions()[0].URL('https://');
-            selectedPriceOption(couponModel().CouponPriceOptions()[0]);
-
-            perSaving();
-            couponModel().reset();
-            if (couponCategories().length > 0)
-                _.each(couponCategories(), function (coupcc) {
-                    coupcc.IsSelected = false;
-                });
-            var arrayOfUpdatedList = couponCategories().slice(0);
-            couponCategories.removeAll();
-            ko.utils.arrayPushAll(couponCategories(), arrayOfUpdatedList);
-            couponCategories.valueHasMutated();
-            IsResumeBtnVisible(false);
-            IsPauseBtnVisible(false);
-            googleAddressMap();
-        },
-        onSaveBtnLabel = function () {
-            var price = couponModel().CouponPriceOptions().length > 0 ? couponModel().CouponPriceOptions()[0].Price() : 0;
-            var saving = couponModel().CouponPriceOptions().length > 0 ? couponModel().CouponPriceOptions()[0].Savings() : 0;
-            var result = 0;
-            var cur = currencyCode();
-            var strlable;
-            if (couponModel().isSaveBtnLable() == 1) {
-                if (price != undefined && saving != undefined) {
-                    result = (((price - saving) * 100) / price).toFixed(2);
+                } else if (item.Status == 2) {
+                    item.StatusValue = "Pending Approval"
+                } else if (item.Status == 3) {
+                    item.StatusValue = "Live";
+                } else if (item.Status == 4) {
+                    item.StatusValue = "Paused"
+                } else if (item.Status == 5) {
+                    item.StatusValue = "Completed"
+                } else if (item.Status == 6) {
+                    item.StatusValue = "Approval Rejected"
+                } else if (item.Status == 7) {
+                    item.StatusValue = ("Remove");
+                } else if (item.Status == 9) {
+                    item.StatusValue = ("Completed");
+                } else if (item.Status == 8) {
+                    item.StatusValue = ("Archived");
                 }
-                strlable = "Save " + result + " %" + " - Buy Now";
-                saveBtntext(strlable);
-                return true;
+                return item;
+            },
+    getfreeCouponCount = function () {
+        dataservice.getfreeCouponCount({
+            success: function (count) {
+                freeCouponCount(0);
+                freeCouponCount(count);
+            },
+            error: function () {
+                toastr.error("Failed to load free deal counts");
             }
-            else {
-                if (couponModel().isSaveBtnLable() == 2) {
-                    if (price != undefined && saving != undefined)
-                        result = (price - saving);
-                    strlable = "Save " + result + cur + " - Buy Now";
+        });
+
+
+    },
+            getCampaignByFilter = function () {
+                getAdCampaignGridContent();
+            },
+            addNewCampaign = function () {
+
+                diveNo(0);
+                IsenableBanner(false);
+                buyItQuestionLabelStatus(false);
+                modifiedDate(null);
+                //show the main menu;
+                collapseMainMenu();
+                getfreeCouponCount();
+                openEditScreen(5);
+                isFromEdit(true);
+                isListVisible(false);
+                islabelvisible(1);
+                isBtnSaveDraftVisible(true);
+                isTerminateBtnVisible(false);
+                isNewCampaignVisible(false);
+                IsnewCoupon(true);
+                CouponsubTitle("(Deals)");
+                //$("#rating_id").val(4);
+                RatedFigure(2);
+                $("#btnCancel").css("display", "block");
+                $(".hideInCoupons").css("display", "none");
+
+                $("#MarketobjDiv").css("display", "none");
+                $("#topArea").css("display", "none");
+                $(".closecls").css("display", "none");
+
+                $("#Heading_div").css("display", "none");
+
+                var selectionoption = $("#buyItddl").val();
+                if (selectionoption == 0) {
+                    hideLandingPageURl(false);
+                }
+                else {
+                    hideLandingPageURl(true);
+                }
+
+                isShowArchiveBtn(false);
+                CouponTitle('New Deal Groups');
+                StatusValue('Draft');
+                IsSubmitBtnVisible(true);
+                couponModel().CouponPriceOptions.splice(0, 0, new model.CouponPriceOption());
+                couponModel().BuyitLandingPageUrl('https://');
+                couponModel().isSaveBtnLable("3");
+                couponModel().CouponListingMode("1");
+                saveBtntext("Buy Now");
+                couponModel().IsShowReviews(true);
+                couponModel().IsShowAddress(true);
+                couponModel().IsShowMap(true);
+                couponModel().IsShowPhoneNo(true);
+
+                Banner2Flag(false);
+                Banner3Flag(false);
+                Banner4Flag(false);
+                Banner5Flag(false);
+                Banner6Flag(false);
+                couponModel().CouponPriceOptions()[0].Price(10);
+                couponModel().CouponPriceOptions()[0].URL('https://');
+                selectedPriceOption(couponModel().CouponPriceOptions()[0]);
+
+                perSaving();
+                couponModel().reset();
+                if (couponCategories().length > 0)
+                    _.each(couponCategories(), function (coupcc) {
+                        coupcc.IsSelected = false;
+                    });
+                var arrayOfUpdatedList = couponCategories().slice(0);
+                couponCategories.removeAll();
+                ko.utils.arrayPushAll(couponCategories(), arrayOfUpdatedList);
+                couponCategories.valueHasMutated();
+                IsResumeBtnVisible(false);
+                IsPauseBtnVisible(false);
+                googleAddressMap();
+            },
+            onSaveBtnLabel = function () {
+                var price = couponModel().CouponPriceOptions().length > 0 ? couponModel().CouponPriceOptions()[0].Price() : 0;
+                var saving = couponModel().CouponPriceOptions().length > 0 ? couponModel().CouponPriceOptions()[0].Savings() : 0;
+                var result = 0;
+                var cur = currencyCode();
+                var strlable;
+                if (couponModel().isSaveBtnLable() == 1) {
+                    if (price != undefined && saving != undefined) {
+                        result = (((price - saving) * 100) / price).toFixed(2);
+                    }
+                    strlable = "Save " + result + " %" + " - Buy Now";
                     saveBtntext(strlable);
                     return true;
-
-
                 }
                 else {
-                    if (couponModel().isSaveBtnLable() == 3) {
-                        strlable = "Buy Now";
+                    if (couponModel().isSaveBtnLable() == 2) {
+                        if (price != undefined && saving != undefined)
+                            result = (price - saving);
+                        strlable = "Save " + result + cur + " - Buy Now";
                         saveBtntext(strlable);
                         return true;
+
+
+                    }
+                    else {
+                        if (couponModel().isSaveBtnLable() == 3) {
+                            strlable = "Buy Now";
+                            saveBtntext(strlable);
+                            return true;
+                        }
+
+
                     }
 
-
                 }
 
-            }
 
+            },
 
-        },
+            closeNewCampaignDialog = function () {
+                //if (couponModel().hasChanges() && (couponModel().Status() == null || couponModel().Status() == 1)) {
 
-        closeNewCampaignDialog = function () {
-            //if (couponModel().hasChanges() && (couponModel().Status() == null || couponModel().Status() == 1)) {
+                confirmation.messageText("Do you want to save changes?");
+                confirmation.afterProceed(function () {
+                    saveCampaignData();
+                    isEditorVisible(false);
 
-            confirmation.messageText("Do you want to save changes?");
-            confirmation.afterProceed(function () {
-                saveCampaignData();
-                isEditorVisible(false);
+                    if (isFromEdit() == true) {
+                        isListVisible(true);
+                        isWelcomeScreenVisible(false);
+                    }
+                    else {
+                        isListVisible(false);
+                        isWelcomeScreenVisible(true);
+                    }
 
-                if (isFromEdit() == true) {
                     isListVisible(true);
                     isWelcomeScreenVisible(false);
-                }
-                else {
-                    isListVisible(false);
-                    isWelcomeScreenVisible(true);
-                }
 
-                isListVisible(true);
-                isWelcomeScreenVisible(false);
-
-                $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
-                $("#btnSubmitForApproval,#saveBtn,.table-link").css("display", "inline-block");
-                $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign,#btnStopAndTerminate,#btnCopyCampaign").removeAttr('disabled');
-                //show the main menu;
-                showMainMenu();
-                //   couponModel().reset();
-            });
-            confirmation.afterCancel(function () {
+                    $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
+                    $("#btnSubmitForApproval,#saveBtn,.table-link").css("display", "inline-block");
+                    $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign,#btnStopAndTerminate,#btnCopyCampaign").removeAttr('disabled');
+                    //show the main menu;
+                    showMainMenu();
+                    //   couponModel().reset();
+                });
+                confirmation.afterCancel(function () {
 
 
 
 
-                isEditorVisible(false);
-                if (isFromEdit() == true) {
-                    isListVisible(true);
-                    isWelcomeScreenVisible(false);
-                }
-                else {
-                    isListVisible(false);
-                    isWelcomeScreenVisible(true);
-                }
+                    isEditorVisible(false);
+                    if (isFromEdit() == true) {
+                        isListVisible(true);
+                        isWelcomeScreenVisible(false);
+                    }
+                    else {
+                        isListVisible(false);
+                        isWelcomeScreenVisible(true);
+                    }
 
-                phraseLibrary.RefreshPhraseLibrary();
-                //show the main menu;
-                showMainMenu();
-            });
-            confirmation.show();
-            //  couponModel().reset();
-            return;
-            //} else {
-            //    isEditorVisible(false);
-            //    if (isFromEdit() == true) {
-            //        isListVisible(true);
-            //        isWelcomeScreenVisible(false);
-            //    }
-            //    else {
-            //        isListVisible(false);
-            //        isWelcomeScreenVisible(true);
-            //    }
-
-            //    $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
-            //    $("#btnSubmitForApproval,#saveBtn,.table-link").css("display", "inline-block");
-            //    $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
-            //}
-            isFromEdit(false);
-        },
-
-        saveCampaignData = function () {
-
-            //if (couponModel().isValid()) {
-            if (couponModel().Status() == 3) {
-                saveCampaign(3);
-
-            } else {
-                saveCampaign(1);
-
-            }
-
-
-            //} else {
-            //    couponModel().errors.showAllMessages();
-            //    toastr.error("Please fill the required feilds to continue.");
-            //}
-        },
-
-         BackToAds = function () {
-             isEditorVisible(false);
-             isWelcomeScreenVisible(false);
-             isListVisible(true);
-         },
-          openEditScreen = function (mode) {
-
-              couponModel(new model.Coupon());
-              campaignNamePlaceHolderValue('New Voucher');
-              isEnableVedioVerificationLink(false);
-
-              couponModel().CouponImage2("/images/standardplaceholder.png");
-
-              couponModel().CouponImage3("/images/standardplaceholder.png");
-              couponModel().couponImage1("/images/standardplaceholder.png");
-
-              couponModel().CouponImage4("/images/standardplaceholder.png");
-
-              couponModel().CouponImage5("/images/standardplaceholder.png");
-              couponModel().CouponImage6("/images/standardplaceholder.png");
-
-
-              couponModel().LogoUrl("/images/standardplaceholder.png");
-              couponModel().Price(10);
-              couponModel().Savings(15);
-              couponModel().CouponQtyPerUser(3);
-              isWelcomeScreenVisible(false);
-
-              isEditorVisible(true);
-
-
-
-
-              //selectedCriteria();
-
-
-              view.initializeTypeahead();
-
-              isEditCampaign(false);
-
-          },
-dealSubscription = function () {
-    stripeChargeCustomer.show(function () {
-        UserAndCostDetail().isStripeIntegrated = true;
-        saveCampaign(2);
-    }, 1000, 'Configure your Subscription');
-    return;
-},
-        submitCampaignData = function () {
-            var headingtext;
-            var labelText;
-            if (freeCouponCount() > 0) {
-                headingtext = "Deal - Submission Fee - FREE";
-                labelText = "One Time Charge for this Campaign" + " £19.".strike() + " FREE for BETA" + "<br\>" + "You will NOT be charged the submission fee again if you pause, resume or tweak this deal after approval." + "<br\><br\>" + "Note:" + "<br\>" + "FREE Deal offer allows you to have ONE deal line for a 7 day listing.";
-            }
-            else {
-                headingtext = "FREE Deal Submission";
-                labelText = "Your deal will be listed for 7 days and notifications will still be sent according to your Deal Ending discount selection.";
-            }
-            hasErrors = false;
-            if (couponModel().CouponTitle() == "" || couponModel().CouponTitle() == undefined) {
-                hasErrors = true;
-                toastr.error("Please enter Group Title.");
-            }
-            if (couponModel().SearchKeywords() == "" || couponModel().SearchKeywords() == undefined) {
-                hasErrors = true;
-                toastr.error("Please enter Search Keywords.");
-            }
-
-            if (couponModel().CouponPriceOptions().length == 0 || couponModel().Savings() == undefined) {
-                hasErrors = true;
-                toastr.error("Please create atleast one Price option");
-                gotoScreen(1);
-            }
-            if (hasErrors)
+                    phraseLibrary.RefreshPhraseLibrary();
+                    //show the main menu;
+                    showMainMenu();
+                });
+                confirmation.show();
+                //  couponModel().reset();
                 return;
-            if (freeCouponCount() == 0 && (UserAndCostDetail().StripeSubscriptionStatus == null ||UserAndCostDetail().isStripeIntegrated != true|| UserAndCostDetail().StripeSubscriptionStatus == "canceled") && couponModel().CouponListingMode() == 2) {
-                if (couponModel().IsPaymentCollected() != true) {
-                    confirmation.headingPaymentText("Deal - Submission Fee - FREE");
-                    confirmation.messagePaymentText("One Time Charge for this Campaign" + " £19.".strike() + " FREE for BETA" + "<br\>" + "You will NOT be charged the submission fee again if you pause, resume or tweak this deal after approval." + "<br\><br\>" + "Note:" + "<br\>" + "FREE Deal offer allows you to have ONE deal line for a 7 day listing.");
-                    confirmation.afterProceedPayment(function () {
-                        confirmation.hidePaymentPopup();
-                        //dealSubscription();   dont be remove this comment we will do uncomment after pilot.
-                        saveCampaign(2);
-                    });
-                    confirmation.yesPaymentBtnText("Continue");
-                    confirmation.noPayemetBtnText("Back to Draft");
-                    confirmation.afterCancelPayment(function () {
-                        SaveAsDraft();
-                    });
-                    confirmation.showPaymentPopup();
+                //} else {
+                //    isEditorVisible(false);
+                //    if (isFromEdit() == true) {
+                //        isListVisible(true);
+                //        isWelcomeScreenVisible(false);
+                //    }
+                //    else {
+                //        isListVisible(false);
+                //        isWelcomeScreenVisible(true);
+                //    }
+
+                //    $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
+                //    $("#btnSubmitForApproval,#saveBtn,.table-link").css("display", "inline-block");
+                //    $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
+                //}
+                isFromEdit(false);
+            },
+
+            saveCampaignData = function () {
+
+                //if (couponModel().isValid()) {
+                if (couponModel().Status() == 3) {
+                    saveCampaign(3);
+
+                } else {
+                    saveCampaign(1);
+
+                }
+
+
+                //} else {
+                //    couponModel().errors.showAllMessages();
+                //    toastr.error("Please fill the required feilds to continue.");
+                //}
+            },
+
+             BackToAds = function () {
+                 isEditorVisible(false);
+                 isWelcomeScreenVisible(false);
+                 isListVisible(true);
+             },
+              openEditScreen = function (mode) {
+
+                  couponModel(new model.Coupon());
+                  campaignNamePlaceHolderValue('New Voucher');
+                  isEnableVedioVerificationLink(false);
+
+                  couponModel().CouponImage2("/images/standardplaceholder.png");
+
+                  couponModel().CouponImage3("/images/standardplaceholder.png");
+                  couponModel().couponImage1("/images/standardplaceholder.png");
+
+                  couponModel().CouponImage4("/images/standardplaceholder.png");
+
+                  couponModel().CouponImage5("/images/standardplaceholder.png");
+                  couponModel().CouponImage6("/images/standardplaceholder.png");
+
+
+                  couponModel().LogoUrl("/images/standardplaceholder.png");
+                  couponModel().Price(10);
+                  couponModel().Savings(15);
+                  couponModel().CouponQtyPerUser(3);
+                  isWelcomeScreenVisible(false);
+
+                  isEditorVisible(true);
+
+
+
+
+                  //selectedCriteria();
+
+
+                  view.initializeTypeahead();
+
+                  isEditCampaign(false);
+
+              },
+    dealSubscription = function () {
+        stripeChargeCustomer.show(function () {
+            UserAndCostDetail().isStripeIntegrated = true;
+            saveCampaign(2);
+        }, 1000, 'Configure your Subscription');
+        return;
+    },
+            submitCampaignData = function () {
+                var headingtext;
+                var labelText;
+                if (freeCouponCount() > 0) {
+                    headingtext = "Deal - Submission Fee - FREE";
+                    labelText = "One Time Charge for this Campaign" + " £19.".strike() + " FREE for BETA" + "<br\>" + "You will NOT be charged the submission fee again if you pause, resume or tweak this deal after approval." + "<br\><br\>" + "Note:" + "<br\>" + "FREE Deal offer allows you to have ONE deal line for a 7 day listing.";
+                }
+                else {
+                    headingtext = "FREE Deal Submission";
+                    labelText = "Your deal will be listed for 7 days and notifications will still be sent according to your Deal Ending discount selection.";
+                }
+                hasErrors = false;
+                if (couponModel().CouponTitle() == "" || couponModel().CouponTitle() == undefined) {
+                    hasErrors = true;
+                    toastr.error("Please enter Group Title.");
+                }
+                if (couponModel().SearchKeywords() == "" || couponModel().SearchKeywords() == undefined) {
+                    hasErrors = true;
+                    toastr.error("Please enter Search Keywords.");
+                }
+
+                if (couponModel().CouponPriceOptions().length == 0 || couponModel().Savings() == undefined) {
+                    hasErrors = true;
+                    toastr.error("Please create atleast one Price option");
+                    gotoScreen(1);
+                }
+                if (hasErrors)
                     return;
-                }
-                else {
-                    saveCampaign(2);
-                }
-            }
-            if (freeCouponCount() > 0 && UserAndCostDetail().isStripeIntegrated == true && UserAndCostDetail().IsSpecialAccount != true) {
-                if (couponModel().IsPaymentCollected() != true) {
-                    confirmation.headingPaymentText("Deal - Submission Fee - FREE");
-                    confirmation.messagePaymentText("One Time Charge for this Campaign" + " £19.".strike() + " FREE for BETA" + "<br\>" + "You will NOT be charged the submission fee again if you pause, resume or tweak this deal after approval." + "<br\><br\>" + "Note:" + "<br\>" + "FREE Deal offer allows you to have ONE deal line for a 7 day listing.");
-                    confirmation.afterProceedPayment(function () {
-                        confirmation.hidePaymentPopup();
-                        saveCampaign(2);
-                    });
-                    confirmation.yesPaymentBtnText("Continue");
-                    confirmation.noPayemetBtnText("Back to Draft");
-                    confirmation.afterCancelPayment(function () {
-                        SaveAsDraft();
-                    });
-                    confirmation.showPaymentPopup();
-                }
-                else {
-                    saveCampaign(2);
-                }
-            }
-            else {
-                if (couponModel().CouponListingMode() == 1 && couponModel().CouponPriceOptions().length > 1 && (UserAndCostDetail().StripeSubscriptionStatus == null || UserAndCostDetail().StripeSubscriptionStatus == "canceled" || UserAndCostDetail().isStripeIntegrated != true) && UserAndCostDetail().IsSpecialAccount != true) {
+                if (freeCouponCount() == 0 && (UserAndCostDetail().StripeSubscriptionStatus == null || UserAndCostDetail().isStripeIntegrated != true || UserAndCostDetail().StripeSubscriptionStatus == "canceled") && couponModel().CouponListingMode() == 2) {
                     if (couponModel().IsPaymentCollected() != true) {
                         confirmation.headingPaymentText("Deal - Submission Fee - FREE");
                         confirmation.messagePaymentText("One Time Charge for this Campaign" + " £19.".strike() + " FREE for BETA" + "<br\>" + "You will NOT be charged the submission fee again if you pause, resume or tweak this deal after approval." + "<br\><br\>" + "Note:" + "<br\>" + "FREE Deal offer allows you to have ONE deal line for a 7 day listing.");
                         confirmation.afterProceedPayment(function () {
                             confirmation.hidePaymentPopup();
-                            //dealSubscription();
+                            //dealSubscription();   dont be remove this comment we will do uncomment after pilot.
+                            saveCampaign(2);
+                        });
+                        confirmation.yesPaymentBtnText("Continue");
+                        confirmation.noPayemetBtnText("Back to Draft");
+                        confirmation.afterCancelPayment(function () {
+                            SaveAsDraft();
+                        });
+                        confirmation.showPaymentPopup();
+                        return;
+                    }
+                    else {
+                        saveCampaign(2);
+                    }
+                }
+                if (freeCouponCount() > 0 && UserAndCostDetail().isStripeIntegrated == true && UserAndCostDetail().IsSpecialAccount != true) {
+                    if (couponModel().IsPaymentCollected() != true) {
+                        confirmation.headingPaymentText("Deal - Submission Fee - FREE");
+                        confirmation.messagePaymentText("One Time Charge for this Campaign" + " £19.".strike() + " FREE for BETA" + "<br\>" + "You will NOT be charged the submission fee again if you pause, resume or tweak this deal after approval." + "<br\><br\>" + "Note:" + "<br\>" + "FREE Deal offer allows you to have ONE deal line for a 7 day listing.");
+                        confirmation.afterProceedPayment(function () {
+                            confirmation.hidePaymentPopup();
                             saveCampaign(2);
                         });
                         confirmation.yesPaymentBtnText("Continue");
@@ -1408,14 +1387,13 @@ dealSubscription = function () {
                     }
                 }
                 else {
-                    if (couponModel().CouponListingMode() == 1 && couponModel().CouponPriceOptions().length == 1 && (UserAndCostDetail().StripeSubscriptionStatus == null || UserAndCostDetail().StripeSubscriptionStatus == "canceled") && UserAndCostDetail().IsSpecialAccount != true) {
+                    if (couponModel().CouponListingMode() == 1 && couponModel().CouponPriceOptions().length > 1 && (UserAndCostDetail().StripeSubscriptionStatus == null || UserAndCostDetail().StripeSubscriptionStatus == "canceled" || UserAndCostDetail().isStripeIntegrated != true) && UserAndCostDetail().IsSpecialAccount != true) {
                         if (couponModel().IsPaymentCollected() != true) {
-                            confirmation.headingPaymentText(headingtext);
-                            confirmation.messagePaymentText(labelText);
-                            //"FREE Deal submission still requires credit card details," + "<br\>" + " but we will not take any payment." + "<br\><br\> +"
+                            confirmation.headingPaymentText("Deal - Submission Fee - FREE");
+                            confirmation.messagePaymentText("One Time Charge for this Campaign" + " £19.".strike() + " FREE for BETA" + "<br\>" + "You will NOT be charged the submission fee again if you pause, resume or tweak this deal after approval." + "<br\><br\>" + "Note:" + "<br\>" + "FREE Deal offer allows you to have ONE deal line for a 7 day listing.");
                             confirmation.afterProceedPayment(function () {
                                 confirmation.hidePaymentPopup();
-                                //dealSubscription(); dont be removed this one because we need to use it after pilot
+                                //dealSubscription();
                                 saveCampaign(2);
                             });
                             confirmation.yesPaymentBtnText("Continue");
@@ -1426,574 +1404,619 @@ dealSubscription = function () {
                             confirmation.showPaymentPopup();
                         }
                         else {
-                             saveCampaign(2);
+                            saveCampaign(2);
                         }
-                        
                     }
                     else {
-                        if (UserAndCostDetail().Status == null || UserAndCostDetail().Status == 0) {
-                            confirmation.showOKpopupforinfo();
-                            return false;
-                        }
-                        else {
-                            if (UserAndCostDetail().IsSpecialAccount == true) {
-                                saveCampaign(2);
+                        if (couponModel().CouponListingMode() == 1 && couponModel().CouponPriceOptions().length == 1 && (UserAndCostDetail().StripeSubscriptionStatus == null || UserAndCostDetail().StripeSubscriptionStatus == "canceled") && UserAndCostDetail().IsSpecialAccount != true) {
+                            if (couponModel().IsPaymentCollected() != true) {
+                                confirmation.headingPaymentText(headingtext);
+                                confirmation.messagePaymentText(labelText);
+                                //"FREE Deal submission still requires credit card details," + "<br\>" + " but we will not take any payment." + "<br\><br\> +"
+                                confirmation.afterProceedPayment(function () {
+                                    confirmation.hidePaymentPopup();
+                                    //dealSubscription(); dont be removed this one because we need to use it after pilot
+                                    saveCampaign(2);
+                                });
+                                confirmation.yesPaymentBtnText("Continue");
+                                confirmation.noPayemetBtnText("Back to Draft");
+                                confirmation.afterCancelPayment(function () {
+                                    SaveAsDraft();
+                                });
+                                confirmation.showPaymentPopup();
                             }
                             else {
-                                if (UserAndCostDetail().isStripeIntegrated == false) {
-                                    if (couponModel().CouponPriceOptions().length > 1 && UserAndCostDetail().StripeSubscriptionStatus != 'active' && couponModel().CouponListingMode() != 2) {
-                                        confirmation.messageText("Your deal cannot be submitted as it has more than one deal headlines. " + "<br\>" + "Please subscribe to avail unlimited deal headlines.");
-                                        confirmation.afterProceed(function () {
-                                            stripeChargeCustomer.show(function () {
-                                                UserAndCostDetail().isStripeIntegrated = true;
-                                                // couponModel().CouponListingMode(2);
-                                                saveCampaign(2);
-                                            }, 1000, 'Configure your Subscription');
-
-
-                                        });
-                                        confirmation.yesBtnText("Subscribe for Subscribtion");
-                                        confirmation.afterCancel(function () {
-                                            return;
-                                        });
-                                        confirmation.show();
-                                    }
-                                    else {
-                                        //stripeChargeCustomer.show(function () {         dont remove after pilot we will chage it 
-                                        //    UserAndCostDetail().isStripeIntegrated = true;
-                                        //    // couponModel().CouponListingMode(1)
-                                        //    saveCampaign(2);
-                                        //}, 1000, 'Configure your Subscription');
-                                        confirmation.headingPaymentText("Deal - Submission Fee - FREE");
-                                        confirmation.messagePaymentText("One Time Charge for this Campaign" + " £19.".strike() + " FREE for BETA" + "<br\>" + "You will NOT be charged the submission fee again if you pause, resume or tweak this deal after approval." + "<br\><br\>" + "Note:" + "<br\>" + "FREE Deal offer allows you to have ONE deal line for a 7 day listing.");
-                                        confirmation.afterProceedPayment(function () {
-                                            confirmation.hidePaymentPopup();
-                                            saveCampaign(2);
-                                        });
-                                        confirmation.yesPaymentBtnText("Continue");
-                                        confirmation.noPayemetBtnText("Back to Draft");
-                                        confirmation.afterCancelPayment(function () {
-                                            SaveAsDraft();
-                                        });
-                                        confirmation.showPaymentPopup();
-                                    }
-                                }
-                                else {
-                                    // couponModel().CouponListingMode(2)
-                                    if (couponModel().IsPaymentCollected() != true) {
-                                        confirmation.headingPaymentText("FREE Deal Submission");
-                                        confirmation.messagePaymentText("FREE Deal submission still requires credit card details," + "<br\>" + " but we will not take any payment." + "<br\><br\>" + "Your deal will be listed for 7 days and notifications will still be sent according to your Deal Ending discount selection.");
-                                        confirmation.afterProceedPayment(function () {
-                                            confirmation.hidePaymentPopup();
-                                            saveCampaign(2);
-                                            //dealSubscription();
-                                        });
-                                        confirmation.yesPaymentBtnText("Continue");
-                                        confirmation.noPayemetBtnText("Back to Draft");
-                                        confirmation.afterCancelPayment(function () {
-                                            SaveAsDraft();
-                                        });
-                                        confirmation.showPaymentPopup();
-                                    }
-                                    else {
-                                         saveCampaign(2);
-                                    }
-                                 
-                                }
+                                saveCampaign(2);
                             }
 
                         }
-                    }
-                }
-            }
-        },
-          terminateCampaign = function (item) {
-              if (item.Status() == 1)
-              { couponModel(item); }
-
-
-              confirmation.messageText("Are you sure you want to remove this Deal?  This action cannot be undone. ");
-              confirmation.show();
-              confirmation.afterCancel(function () {
-                  confirmation.hide();
-              });
-              confirmation.afterProceed(function () {
-                  couponModel(item);
-                  saveCampaign(7);
-              });
-
-          },
-          ArchiveCampaign = function () {
-              saveCampaign(8);
-          },
-            OnchangeDateDD = function (data) {
-                //
-                //alert(data);
-                //var res = data.split("-");
-                //couponModel().CouponActiveYear(res[0]);
-                //couponModel().CouponActiveMonth(res[1]);
-                //alert(res[0]);
-
-            }
-            ,
-        saveCampaign = function (mode) {
-
-            if (ValidateCoupon() == false) {
-
-                var isPopulateErrorList = false;
-
-
-                var selectedCouponCategories = $.grep(couponCategories(), function (n, i) {
-                    return (n.IsSelected == true);
-                });
-
-                couponModel().CouponCategories.removeAll();
-                _.each(selectedCouponCategories, function (coup) {
-
-                    couponModel().CouponCategories.push(new model.selectedCouponCategory.Create({
-                        CategoryId: coup.CategoryId,
-                        Name: coup.Name
-                    }));
-                });
-
-                couponModel().Status(mode);
-
-                couponModel().SubmissionDateTime(mode);
-
-
-                //buy it button logic
-                couponModel().ShowBuyitBtn(buyItQuestionStatus());
-
-                //if other question then
-                if (buyItQuestionLabelStatus() == true) {
-
-                    couponModel().BuyitBtnLabel();
-
-                    // couponModel().BuyitBtnLabel(ButItOtherLabel());
-                }
-                else {
-                    couponModel().BuyitBtnLabel($("#buyItddl").val());
-                }
-
-
-                if (CouponActiveMonth() != null && CouponActiveMonth() > 0) {
-
-                    var res = CouponActiveMonth().split("-");
-
-                    couponModel().CouponActiveYear(res[0]);
-
-
-                    couponModel().CouponActiveMonth(GetMonth(res[1]));
-                }
-                var campignServerObj = couponModel().convertToServerData();
-
-                dataservice.addCampaignData(campignServerObj, {
-
-                    success: function (data) {
-
-                        isEditorVisible(false);
-                        getAdCampaignGridContent();
-                        isListVisible(true);
-                        isWelcomeScreenVisible(false);
-                        toastr.success("Successfully saved.");
-                        $("#topArea").css("display", "block");
-                        CloseContent();
-
-
-                        //if (mode == 1)
-                        //{
-                        //    CloseContent();
-                        //}
-                        //   allCouponCodeItems.removeAll();
-                    },
-                    error: function (response) {
-
-                    }
-                });
-
-                //  }
-            }
-        },
-                ///*** Price option Region ***
-
-                // Select a Price option
-                selectPriceOption = function (priceOption) {
-                    if (selectedPriceOption() !== priceOption) {
-                        selectedPriceOption(priceOption);
-                    }
-                },
-                // Template Chooser For Price option
-                templateToUsePriceOptions = function (priceOption) {
-                    return (priceOption === selectedPriceOption() ? 'editPriceOptionTemplate' : 'itemPriceOptionTemplate');
-                },
-                //Create Price option
-                 onCreatePriceOption = function () {
-                     if (couponModel().CouponPriceOptions().length <= 9) {
-                         var priceOption = couponModel().CouponPriceOptions()[0];
-                         //Create Price option for the very First Time
-                         if (priceOption == undefined) {
-                             couponModel().CouponPriceOptions.splice(0, 0, new model.CouponPriceOption());
-                             selectedPriceOption(couponModel().CouponPriceOptions()[couponModel().CouponPriceOptions.length + 1]);
-                         }
-                             //If There are already Price options in list
-                         else {
-                             if (!priceOption.isValid()) {
-                                 priceOption.errors.showAllMessages();
-                             }
-                             else {
-                                 couponModel().CouponPriceOptions.splice(couponModel().CouponPriceOptions().length, 0, new model.CouponPriceOption());
-                                 selectedPriceOption(couponModel().CouponPriceOptions()[couponModel().CouponPriceOptions().length - 1]);
-                             }
-                         }
-                     }
-                     else {
-                         toastr.error("Sorry,you can Create upto 10 deal lines.");
-                     }
-                 },
-                // Delete a Price option
-                onDeletePriceOption = function (priceOption) {
-                    confirmation.messageText("WARNING - This item will be removed from the system and you won’t be able to recover.  There is no undo.");
-                    confirmation.afterProceed(function () {
-                        couponModel().CouponPriceOptions.remove(priceOption);
-                    });
-                    confirmation.show();
-                    return;
-                },
-
-                // Has Changes
-            hasChangesInPauseStatus = ko.computed(function () {
-                if (couponModel() == undefined) {
-                    return false;
-                }
-                return (couponModel().CouponhasChanges() && couponModel().Status() == 4);
-            }),
-            priceLabel = function () {
-                if (couponModel() != undefined) {
-                    if (couponModel().CouponListingMode() == 1) {
-                        islabelvisible(1);
-                    }
-                    else {
-                        islabelvisible(2);
-                    }
-                }
-
-            },
-
-
-
-
-            campaignTypeImageCallback = function (file, data) {
-                couponModel().CampaignTypeImagePath(data);
-            },
-
-            campaignImageCallback = function (file, data) {
-                couponModel().LogoImageBytes(data);
-                // couponModel().LogoUrl(data);
-            },
-            CouponImage2Callback = function (file, data) {
-                couponModel().CouponImage2(data);
-            },
-            CouponImage3Callback = function (file, data) {
-                couponModel().CouponImage3(data);
-            },
-            couponImage1Callback = function (file, data) {
-                couponModel().couponImage1(data);
-            },
-              campaignCSVCallback = function (file, data) {
-
-              },
-            onEditCampaign = function (item) {
-                islabelvisible(item.CouponListingMode());
-                modifiedDate(item.lastModified())
-                getfreeCouponCount();
-                EditorLoading(true);
-                //resetting flags
-                IsSubmitBtnVisible(false);
-                IsRejectionReasonVisible(false);
-                buyItQuestionLabelStatus(false);
-                isTerminateBtnVisible(false);
-                isNewCampaignVisible(false);
-                isShowArchiveBtn(false);
-                IsPauseBtnVisible(false);
-                IsResumeBtnVisible(false);
-                if (UserAndCostDetail().isStripeIntegrated)
-                    isflage(true);
-                else
-                    isflage(false);
-
-                //hide the main menu;
-                collapseMainMenu();
-                IsnewCoupon(false);
-                previewScreenNumber(1);
-                CouponTitle(item.CouponTitle());
-                CouponsubTitle("");
-                selectedCouponIdAnalytics(item.CouponId());
-                $(".hideInCoupons").css("display", "none");
-
-                $("#MarketobjDiv").css("display", "none");
-
-                $("#topArea").css("display", "none");
-                $("#panelArea").css("display", "none");
-
-                $("#Heading_div").css("display", "none");
-                $(".closecls").css("display", "none");
-
-                ShowImages(item);
-                visibleDeleteimage(item);
-
-                if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == 5 || item.Status() == 6 || item.Status() == 7 || item.Status() == 9) {
-
-                    dataservice.getCampaignData({
-                        CampaignId: item.CouponId(),
-                        SearchText: ""
-                    }, {
-                        success: function (data) {
-
-                            if (data != null) {
-                                couponModel(model.Coupon.Create(data.Coupon[0]));
-
-                                CouponActiveMonth(couponModel().CouponActiveYear() + ' - ' + GetMonthNameByID(couponModel().CouponActiveMonth()));
-
-
-                                couponModel().CouponListingMode.subscribe(function (item) {
-                                    CouponListingModeChecker(item);
-                                });
-                                perSaving();
-
-
-                                view.initializeTypeahead();
-                                onSaveBtnLabel();
-                                if (couponModel().Status() == 1) {
-
-                                    isBtnSaveDraftVisible(true);
-
-                                    IsSubmitBtnVisible(true);
-                                    //isTerminateBtnVisible(true);
-                                    couponModel().StatusValue("Draft");
-
-                                } else if (couponModel().Status() == 2) {
-                                    $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
-                                    $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
-                                    $("#saveBtn").css("display", "none")
-                                    $("#btnCancel,#btnPauseCampaign").removeAttr('disabled');
-                                    $("#btnCancel").css("display", "none");
-                                    $("#btnCancel,#btnPauseCampaign,#btnClose").removeAttr('disabled');
-                                    isBtnSaveDraftVisible(false);
-                                    IsenableBanner(true);
-                                    couponModel().StatusValue("Panding Approval");
-
-
-                                } else if (couponModel().Status() == 3) {
-                                    $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
-                                    $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
-                                    $("#btnCancel,#btnPauseCampaign").removeAttr('disabled');
-                                    $("#dialog-confrominfo").removeAttr('disabled');
-                                    //$("#saveBtn").css("display", "none");
-                                    //$("#btnPauseCampaign").css("display", "inline-block");
-                                    //$("#btnCancel,#btnPauseCampaign,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
-                                    isBtnSaveDraftVisible(false);
-                                    IsenableBanner(true);
-                                    couponModel().StatusValue("Live");
-                                    IsPauseBtnVisible(true);
-                                    //isTerminateBtnVisible(true);
-                                    //isNewCampaignVisible(true);
-
-                                    $("#btnCancel").css("display", "block");
-                                } else if (couponModel().Status() == 4) {
-                                    //$("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
-                                    //$("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
-                                    //$("#saveBtn").css("display", "none");
-                                    //$("#btnResumeCampagin").css("display", "inline-block");
-                                    //$("#btnCancel,#btnResumeCampagin,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
-                                    //$("#btnCancel").css("display", "none");
-                                    isBtnSaveDraftVisible(false);
-                                    IsResumeBtnVisible(true);
-                                    IsenableBanner(false);
-                                    couponModel().StatusValue("Paused");
-                                    //IsSubmitBtnVisible(true);
-                                    //isTerminateBtnVisible(true);
-                                    //IsResumeBtnVisible(true);
-
-                                } else if (couponModel().Status() == 5) {
-                                    isBtnSaveDraftVisible(false);
-                                    $("#btnCancel").css("display", "block");
-                                    $("input,button,textarea,a,select").attr('disabled', 'disabled');
-                                    couponModel().StatusValue("Completed");
-                                } else if (couponModel().Status() == 6) {
-                                    couponModel().StatusValue("Approval Rejected");
-                                    $("#btnCancel").css("display", "block");
-                                    IsSubmitBtnVisible(true);
-                                    isBtnSaveDraftVisible(true);
-                                    //isTerminateBtnVisible(true);
-                                    IsRejectionReasonVisible(true);
-                                } else if (couponModel().Status() == 7) {
-                                    couponModel().StatusValue("Remove");
-                                    $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
-                                    $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
-                                    $("#saveBtn").css("display", "none");
-                                    $("#btnPauseCampaign").css("display", "none");
-                                    $("#btnCancel,#btnPauseCampaign,#btnCopyCampaign,#btnArchive").removeAttr('disabled');
-                                    $("#btnCancel").css("display", "none");
-
-
-                                } else if (item.Status == 9) {
-                                    //  $("#btnCancel").css("display", "block");
-                                    item.StatusValue = ("Completed");
-                                } else if (item.Status == 8) {
-                                    item.StatusValue = ("Archived");
-                                    $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
-                                    $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
-                                    $("#saveBtn").css("display", "none");
-                                    $("#btnPauseCampaign").css("display", "inline-block");
-                                    $("#btnCancel,#btnPauseCampaign,#btnCopyCampaign,#btnArchive").removeAttr('disabled');
-                                    $("#btnCancel").css("display", "none");
-                                    isNewCampaignVisible(true);
-                                    isShowArchiveBtn(true);
-                                }
-                                StatusValue(couponModel().StatusValue());
-                                isEditCampaign(true);
-                                isEditorVisible(true);
-                                isListVisible(false);
-                                isFromEdit(true);
-                                //  isBtnSaveDraftVisible(false);
-                                //  buildMap();
-
-                                googleAddressMap();
-
-                                ////buyItQuestionStatus
-                                // handle 2nd edit error 
-                                //  $(".modal-backdrop").remove();
-                                _.each(couponCategories(), function (coupcc) {
-                                    coupcc.IsSelected = false;
-                                });
-
-                                _.each(couponModel().CouponCategories(), function (coup) {
-                                    _.each(couponCategories(), function (coupcc) {
-
-                                        if (coupcc.CategoryId == coup.CategoryId()) {
-
-                                            coupcc.IsSelected = true;
-                                        }
-                                    });
-
-                                });
-
-
-                                var arrayOfUpdatedList = couponCategories().slice(0);
-                                couponCategories.removeAll();
-                                ko.utils.arrayPushAll(couponCategories(), arrayOfUpdatedList);
-                                couponCategories.valueHasMutated();
-                                randonNumber("?r=" + Math.floor(Math.random() * (20 - 1 + 1)) + 1);
-
-
-                                //buy it button logic
-                                buyItQuestionStatus(couponModel().ShowBuyitBtn());
-                                var buyitbuttonlabel = couponModel().BuyitBtnLabel();
-
-                                if (couponModel().ShowBuyitBtn() == false) {
-                                    $("#buyItddl").val('0');
+                        else {
+                            if (UserAndCostDetail().Status == null || UserAndCostDetail().Status == 0) {
+                                confirmation.showOKpopupforinfo();
+                                return false;
+                            }
+                            else {
+                                if (UserAndCostDetail().IsSpecialAccount == true) {
+                                    saveCampaign(2);
                                 }
                                 else {
-                                    if (buyitbuttonlabel == 'Apply Now' ||
-                                        buyitbuttonlabel == 'Book Now' ||
-                                        buyitbuttonlabel == 'Contact Us' ||
-                                        buyitbuttonlabel == 'Download' ||
-                                        buyitbuttonlabel == 'Learn More' ||
-                                        buyitbuttonlabel == 'Shop Now' ||
-                                        buyitbuttonlabel == 'Sign Up' ||
-                                        buyitbuttonlabel == 'Watch More' ||
-                                        buyitbuttonlabel == 'Buy Now' ||
-                                           buyitbuttonlabel == 'Check Availability'
-                                         ) {
-                                        buyItQuestionLabelStatus(false);
-                                        $("#buyItddl").val(buyitbuttonlabel);
+                                    if (UserAndCostDetail().isStripeIntegrated == false) {
+                                        if (couponModel().CouponPriceOptions().length > 1 && UserAndCostDetail().StripeSubscriptionStatus != 'active' && couponModel().CouponListingMode() != 2) {
+                                            confirmation.messageText("Your deal cannot be submitted as it has more than one deal headlines. " + "<br\>" + "Please subscribe to avail unlimited deal headlines.");
+                                            confirmation.afterProceed(function () {
+                                                stripeChargeCustomer.show(function () {
+                                                    UserAndCostDetail().isStripeIntegrated = true;
+                                                    // couponModel().CouponListingMode(2);
+                                                    saveCampaign(2);
+                                                }, 1000, 'Configure your Subscription');
 
+
+                                            });
+                                            confirmation.yesBtnText("Subscribe for Subscribtion");
+                                            confirmation.afterCancel(function () {
+                                                return;
+                                            });
+                                            confirmation.show();
+                                        }
+                                        else {
+                                            //stripeChargeCustomer.show(function () {         dont remove after pilot we will chage it 
+                                            //    UserAndCostDetail().isStripeIntegrated = true;
+                                            //    // couponModel().CouponListingMode(1)
+                                            //    saveCampaign(2);
+                                            //}, 1000, 'Configure your Subscription');
+                                            confirmation.headingPaymentText("Deal - Submission Fee - FREE");
+                                            confirmation.messagePaymentText("One Time Charge for this Campaign" + " £19.".strike() + " FREE for BETA" + "<br\>" + "You will NOT be charged the submission fee again if you pause, resume or tweak this deal after approval." + "<br\><br\>" + "Note:" + "<br\>" + "FREE Deal offer allows you to have ONE deal line for a 7 day listing.");
+                                            confirmation.afterProceedPayment(function () {
+                                                confirmation.hidePaymentPopup();
+                                                saveCampaign(2);
+                                            });
+                                            confirmation.yesPaymentBtnText("Continue");
+                                            confirmation.noPayemetBtnText("Back to Draft");
+                                            confirmation.afterCancelPayment(function () {
+                                                SaveAsDraft();
+                                            });
+                                            confirmation.showPaymentPopup();
+                                        }
                                     }
                                     else {
-                                        $("#buyItddl").val('999');
-                                        buyItQuestionLabelStatus(true);
-                                        ButItOtherLabel(buyitbuttonlabel);
+                                        // couponModel().CouponListingMode(2)
+                                        if (couponModel().IsPaymentCollected() != true) {
+                                            confirmation.headingPaymentText("FREE Deal Submission");
+                                            confirmation.messagePaymentText("FREE Deal submission still requires credit card details," + "<br\>" + " but we will not take any payment." + "<br\><br\>" + "Your deal will be listed for 7 days and notifications will still be sent according to your Deal Ending discount selection.");
+                                            confirmation.afterProceedPayment(function () {
+                                                confirmation.hidePaymentPopup();
+                                                saveCampaign(2);
+                                                //dealSubscription();
+                                            });
+                                            confirmation.yesPaymentBtnText("Continue");
+                                            confirmation.noPayemetBtnText("Back to Draft");
+                                            confirmation.afterCancelPayment(function () {
+                                                SaveAsDraft();
+                                            });
+                                            confirmation.showPaymentPopup();
+                                        }
+                                        else {
+                                            saveCampaign(2);
+                                        }
+
                                     }
                                 }
 
-
-
-
-
-
-                                $.unblockUI(spinner);
-                                couponModel().reset();
                             }
-                            EditorLoading(false);
+                        }
+                    }
+                }
+            },
+              terminateCampaign = function (item) {
+                  if (item.Status() == 1)
+                  { couponModel(item); }
+
+
+                  confirmation.messageText("Are you sure you want to remove this Deal?  This action cannot be undone. ");
+                  confirmation.show();
+                  confirmation.afterCancel(function () {
+                      confirmation.hide();
+                  });
+                  confirmation.afterProceed(function () {
+                      couponModel(item);
+                      saveCampaign(7);
+                  });
+
+              },
+              ArchiveCampaign = function () {
+                  saveCampaign(8);
+              },
+                OnchangeDateDD = function (data) {
+                    //
+                    //alert(data);
+                    //var res = data.split("-");
+                    //couponModel().CouponActiveYear(res[0]);
+                    //couponModel().CouponActiveMonth(res[1]);
+                    //alert(res[0]);
+
+                }
+                ,
+            saveCampaign = function (mode) {
+
+                if (ValidateCoupon() == false) {
+
+                    var isPopulateErrorList = false;
+
+
+                    var selectedCouponCategories = $.grep(couponCategories(), function (n, i) {
+                        return (n.IsSelected == true);
+                    });
+
+                    couponModel().CouponCategories.removeAll();
+                    _.each(selectedCouponCategories, function (coup) {
+
+                        couponModel().CouponCategories.push(new model.selectedCouponCategory.Create({
+                            CategoryId: coup.CategoryId,
+                            Name: coup.Name
+                        }));
+                    });
+
+                    couponModel().Status(mode);
+
+                    couponModel().SubmissionDateTime(mode);
+
+
+                    //buy it button logic
+                    couponModel().ShowBuyitBtn(buyItQuestionStatus());
+
+                    //if other question then
+                    if (buyItQuestionLabelStatus() == true) {
+
+                        couponModel().BuyitBtnLabel();
+
+                        // couponModel().BuyitBtnLabel(ButItOtherLabel());
+                    }
+                    else {
+                        couponModel().BuyitBtnLabel($("#buyItddl").val());
+                    }
+
+
+                    if (CouponActiveMonth() != null && CouponActiveMonth() > 0) {
+
+                        var res = CouponActiveMonth().split("-");
+
+                        couponModel().CouponActiveYear(res[0]);
+
+
+                        couponModel().CouponActiveMonth(GetMonth(res[1]));
+                    }
+                    var campignServerObj = couponModel().convertToServerData();
+
+                    dataservice.addCampaignData(campignServerObj, {
+
+                        success: function (data) {
+
+                            isEditorVisible(false);
+                            getAdCampaignGridContent();
+                            isListVisible(true);
+                            isWelcomeScreenVisible(false);
+                            toastr.success("Successfully saved.");
+                            $("#topArea").css("display", "block");
+                            CloseContent();
+
+
+                            //if (mode == 1)
+                            //{
+                            //    CloseContent();
+                            //}
+                            //   allCouponCodeItems.removeAll();
                         },
                         error: function (response) {
 
                         }
                     });
-                }
 
-
-
-            },
-            ShowImages = function (Item) {
-
-                if (Item.couponImage1() != null && Item.couponImage1() != "" && Item.couponImage1() != undefined && Item.couponImage1() != '/images/standardplaceholder.png') {
-                    Banner2Flag(true);
-                }
-                if (Item.CouponImage2() != null && Item.CouponImage2() != "" && Item.CouponImage2() != undefined && Item.CouponImage2() != '/images/standardplaceholder.png') {
-                    Banner3Flag(true);
-                }
-                if (Item.CouponImage3() != null && Item.CouponImage3() != "" && Item.CouponImage3() != undefined && Item.CouponImage3() != '/images/standardplaceholder.png') {
-                    Banner4Flag(true);
-                }
-                if (Item.CouponImage4() != null && Item.CouponImage4() != "" && Item.CouponImage4() != undefined && Item.CouponImage4() != '/images/standardplaceholder.png') {
-                    Banner5Flag(true);
-                }
-                if (Item.CouponImage5() != null && Item.CouponImage5() != "" && Item.CouponImage5() != undefined && Item.CouponImage5() != '/images/standardplaceholder.png') {
-                    Banner6Flag(true);
-                }
-                if (Item.CouponImage6() != null && Item.CouponImage6() != "" && Item.CouponImage6() != undefined && Item.CouponImage6() != '/images/standardplaceholder.png') {
-                    Banner6Flag(true);
-                }
-                OpenDefault(Item);
-            },
-
-            OpenDefault = function (Item) {
-                if (Item.couponImage1() == '/images/standardplaceholder.png') {
-                    Banner2Flag(true);
-                    return;
-                }
-                if (Item.CouponImage2() == '/images/standardplaceholder.png') {
-                    Banner2Flag(true);
-                    Banner3Flag(false);
-                    return;
-                }
-
-                else if (Item.CouponImage3() == '/images/standardplaceholder.png') {
-                    Banner3Flag(true);
-                    Banner4Flag(false);
-                    return;
-                }
-                else if (Item.CouponImage4() == '/images/standardplaceholder.png') {
-                    Banner4Flag(true);
-                    Banner5Flag(false);
-                    return;
-                }
-                else if (Item.CouponImage5() == '/images/standardplaceholder.png') {
-                    Banner5Flag(true);
-                    Banner6Flag(false);
-                    return;
-                }
-                else if (Item.CouponImage6() == '/images/standardplaceholder.png') {
-                    Banner6Flag(true);
-                    return;
+                    //  }
                 }
             },
-            changeStatus = function (status) {
-                if (status == 3) {
-                    if (UserAndCostDetail() != undefined && (UserAndCostDetail().Status == null || UserAndCostDetail().Status == 0)) {
-                        confirmation.showOKpopupforinfo();
+                ///*** Price option Region ***
+
+                // Select a Price option
+                    selectPriceOption = function (priceOption) {
+                        if (selectedPriceOption() !== priceOption) {
+                            selectedPriceOption(priceOption);
+                        }
+                    },
+                // Template Chooser For Price option
+                    templateToUsePriceOptions = function (priceOption) {
+                        return (priceOption === selectedPriceOption() ? 'editPriceOptionTemplate' : 'itemPriceOptionTemplate');
+                    },
+                //Create Price option
+                     onCreatePriceOption = function () {
+                         if (couponModel().CouponPriceOptions().length <= 9) {
+                             var priceOption = couponModel().CouponPriceOptions()[0];
+                             //Create Price option for the very First Time
+                             if (priceOption == undefined) {
+                                 couponModel().CouponPriceOptions.splice(0, 0, new model.CouponPriceOption());
+                                 selectedPriceOption(couponModel().CouponPriceOptions()[couponModel().CouponPriceOptions.length + 1]);
+                             }
+                                 //If There are already Price options in list
+                             else {
+                                 if (!priceOption.isValid()) {
+                                     priceOption.errors.showAllMessages();
+                                 }
+                                 else {
+                                     couponModel().CouponPriceOptions.splice(couponModel().CouponPriceOptions().length, 0, new model.CouponPriceOption());
+                                     selectedPriceOption(couponModel().CouponPriceOptions()[couponModel().CouponPriceOptions().length - 1]);
+                                 }
+                             }
+                         }
+                         else {
+                             toastr.error("Sorry,you can Create upto 10 deal lines.");
+                         }
+                     },
+                // Delete a Price option
+                    onDeletePriceOption = function (priceOption) {
+                        confirmation.messageText("WARNING - This item will be removed from the system and you won’t be able to recover.  There is no undo.");
+                        confirmation.afterProceed(function () {
+                            couponModel().CouponPriceOptions.remove(priceOption);
+                        });
+                        confirmation.show();
                         return;
+                    },
+
+                // Has Changes
+                hasChangesInPauseStatus = ko.computed(function () {
+                    if (couponModel() == undefined) {
+                        return false;
+                    }
+                    return (couponModel().CouponhasChanges() && couponModel().Status() == 4);
+                }),
+                priceLabel = function () {
+                    if (couponModel() != undefined) {
+                        if (couponModel().CouponListingMode() == 1) {
+                            islabelvisible(1);
+                        }
+                        else {
+                            islabelvisible(2);
+                        }
+                        if (couponModel().CouponListingMode() == 3) {
+                            isCash4dealVisible(true);
+                        }
+                        else {
+                            isCash4dealVisible(false);
+                        }
+
+                    }
+
+                },
+
+
+
+
+                campaignTypeImageCallback = function (file, data) {
+                    couponModel().CampaignTypeImagePath(data);
+                },
+
+                campaignImageCallback = function (file, data) {
+                    couponModel().LogoImageBytes(data);
+                    // couponModel().LogoUrl(data);
+                },
+                CouponImage2Callback = function (file, data) {
+                    couponModel().CouponImage2(data);
+                },
+                CouponImage3Callback = function (file, data) {
+                    couponModel().CouponImage3(data);
+                },
+                couponImage1Callback = function (file, data) {
+                    couponModel().couponImage1(data);
+                },
+                  campaignCSVCallback = function (file, data) {
+
+                  },
+                onEditCampaign = function (item) {
+                    islabelvisible(item.CouponListingMode());
+                    modifiedDate(item.lastModified())
+                    getfreeCouponCount();
+                    EditorLoading(true);
+                    //resetting flags
+                    IsSubmitBtnVisible(false);
+                    IsRejectionReasonVisible(false);
+                    buyItQuestionLabelStatus(false);
+                    isTerminateBtnVisible(false);
+                    isNewCampaignVisible(false);
+                    isShowArchiveBtn(false);
+                    IsPauseBtnVisible(false);
+                    IsResumeBtnVisible(false);
+                    if (UserAndCostDetail().isStripeIntegrated)
+                        isflage(true);
+                    else
+                        isflage(false);
+                    if (item.CouponListingMode() == 3) {
+                        isCash4dealVisible(true);
+                    }
+                    else {
+                        isCash4dealVisible(false);
+                    }
+
+                    //hide the main menu;
+                    collapseMainMenu();
+                    IsnewCoupon(false);
+                    previewScreenNumber(1);
+                    CouponTitle(item.CouponTitle());
+                    CouponsubTitle("");
+
+                    selectedCouponIdAnalytics(item.CouponId());
+                    $(".hideInCoupons").css("display", "none");
+
+                    $("#MarketobjDiv").css("display", "none");
+
+                    $("#topArea").css("display", "none");
+                    $("#panelArea").css("display", "none");
+
+                    $("#Heading_div").css("display", "none");
+                    $(".closecls").css("display", "none");
+
+                    ShowImages(item);
+                    visibleDeleteimage(item);
+
+                    if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == 5 || item.Status() == 6 || item.Status() == 7 || item.Status() == 9) {
+
+                        dataservice.getCampaignData({
+                            CampaignId: item.CouponId(),
+                            SearchText: ""
+                        }, {
+                            success: function (data) {
+
+                                if (data != null) {
+                                    couponModel(model.Coupon.Create(data.Coupon[0]));
+
+                                    CouponActiveMonth(couponModel().CouponActiveYear() + ' - ' + GetMonthNameByID(couponModel().CouponActiveMonth()));
+
+
+                                    couponModel().CouponListingMode.subscribe(function (item) {
+                                        CouponListingModeChecker(item);
+                                    });
+                                    perSaving();
+
+
+                                    view.initializeTypeahead();
+                                    onSaveBtnLabel();
+                                    if (couponModel().Status() == 1) {
+
+                                        isBtnSaveDraftVisible(true);
+
+                                        IsSubmitBtnVisible(true);
+                                        //isTerminateBtnVisible(true);
+                                        couponModel().StatusValue("Draft");
+
+                                    } else if (couponModel().Status() == 2) {
+                                        $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
+                                        $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
+                                        $("#saveBtn").css("display", "none")
+                                        $("#btnCancel,#btnPauseCampaign").removeAttr('disabled');
+                                        $("#btnCancel").css("display", "none");
+                                        $("#btnCancel,#btnPauseCampaign,#btnClose").removeAttr('disabled');
+                                        isBtnSaveDraftVisible(false);
+                                        IsenableBanner(true);
+                                        couponModel().StatusValue("Panding Approval");
+
+
+                                    } else if (couponModel().Status() == 3) {
+                                        $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
+                                        $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
+                                        $("#btnCancel,#btnPauseCampaign").removeAttr('disabled');
+                                        $("#dialog-confrominfo").removeAttr('disabled');
+                                        //$("#saveBtn").css("display", "none");
+                                        //$("#btnPauseCampaign").css("display", "inline-block");
+                                        //$("#btnCancel,#btnPauseCampaign,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
+                                        isBtnSaveDraftVisible(false);
+                                        IsenableBanner(true);
+                                        couponModel().StatusValue("Live");
+                                        IsPauseBtnVisible(true);
+                                        //isTerminateBtnVisible(true);
+                                        //isNewCampaignVisible(true);
+
+                                        $("#btnCancel").css("display", "block");
+                                    } else if (couponModel().Status() == 4) {
+                                        //$("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
+                                        //$("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
+                                        //$("#saveBtn").css("display", "none");
+                                        //$("#btnResumeCampagin").css("display", "inline-block");
+                                        //$("#btnCancel,#btnResumeCampagin,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
+                                        //$("#btnCancel").css("display", "none");
+                                        isBtnSaveDraftVisible(false);
+                                        IsResumeBtnVisible(true);
+                                        IsenableBanner(false);
+                                        couponModel().StatusValue("Paused");
+                                        //IsSubmitBtnVisible(true);
+                                        //isTerminateBtnVisible(true);
+                                        //IsResumeBtnVisible(true);
+
+                                    } else if (couponModel().Status() == 5) {
+                                        isBtnSaveDraftVisible(false);
+                                        $("#btnCancel").css("display", "block");
+                                        $("input,button,textarea,a,select").attr('disabled', 'disabled');
+                                        couponModel().StatusValue("Completed");
+                                    } else if (couponModel().Status() == 6) {
+                                        couponModel().StatusValue("Approval Rejected");
+                                        $("#btnCancel").css("display", "block");
+                                        IsSubmitBtnVisible(true);
+                                        isBtnSaveDraftVisible(true);
+                                        //isTerminateBtnVisible(true);
+                                        IsRejectionReasonVisible(true);
+                                    } else if (couponModel().Status() == 7) {
+                                        couponModel().StatusValue("Remove");
+                                        $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
+                                        $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
+                                        $("#saveBtn").css("display", "none");
+                                        $("#btnPauseCampaign").css("display", "none");
+                                        $("#btnCancel,#btnPauseCampaign,#btnCopyCampaign,#btnArchive").removeAttr('disabled');
+                                        $("#btnCancel").css("display", "none");
+
+
+                                    } else if (item.Status == 9) {
+                                        //  $("#btnCancel").css("display", "block");
+                                        item.StatusValue = ("Completed");
+                                    } else if (item.Status == 8) {
+                                        item.StatusValue = ("Archived");
+                                        $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
+                                        $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
+                                        $("#saveBtn").css("display", "none");
+                                        $("#btnPauseCampaign").css("display", "inline-block");
+                                        $("#btnCancel,#btnPauseCampaign,#btnCopyCampaign,#btnArchive").removeAttr('disabled');
+                                        $("#btnCancel").css("display", "none");
+                                        isNewCampaignVisible(true);
+                                        isShowArchiveBtn(true);
+                                    }
+                                    StatusValue(couponModel().StatusValue());
+                                    isEditCampaign(true);
+                                    isEditorVisible(true);
+                                    isListVisible(false);
+                                    isFromEdit(true);
+                                    //  isBtnSaveDraftVisible(false);
+                                    //  buildMap();
+
+                                    googleAddressMap();
+
+                                    ////buyItQuestionStatus
+                                    // handle 2nd edit error 
+                                    //  $(".modal-backdrop").remove();
+                                    _.each(couponCategories(), function (coupcc) {
+                                        coupcc.IsSelected = false;
+                                    });
+
+                                    _.each(couponModel().CouponCategories(), function (coup) {
+                                        _.each(couponCategories(), function (coupcc) {
+
+                                            if (coupcc.CategoryId == coup.CategoryId()) {
+
+                                                coupcc.IsSelected = true;
+                                            }
+                                        });
+
+                                    });
+
+
+                                    var arrayOfUpdatedList = couponCategories().slice(0);
+                                    couponCategories.removeAll();
+                                    ko.utils.arrayPushAll(couponCategories(), arrayOfUpdatedList);
+                                    couponCategories.valueHasMutated();
+                                    randonNumber("?r=" + Math.floor(Math.random() * (20 - 1 + 1)) + 1);
+
+
+                                    //buy it button logic
+                                    buyItQuestionStatus(couponModel().ShowBuyitBtn());
+                                    var buyitbuttonlabel = couponModel().BuyitBtnLabel();
+
+                                    if (couponModel().ShowBuyitBtn() == false) {
+                                        $("#buyItddl").val('0');
+                                    }
+                                    else {
+                                        if (buyitbuttonlabel == 'Apply Now' ||
+                                            buyitbuttonlabel == 'Book Now' ||
+                                            buyitbuttonlabel == 'Contact Us' ||
+                                            buyitbuttonlabel == 'Download' ||
+                                            buyitbuttonlabel == 'Learn More' ||
+                                            buyitbuttonlabel == 'Shop Now' ||
+                                            buyitbuttonlabel == 'Sign Up' ||
+                                            buyitbuttonlabel == 'Watch More' ||
+                                            buyitbuttonlabel == 'Buy Now' ||
+                                               buyitbuttonlabel == 'Check Availability'
+                                             ) {
+                                            buyItQuestionLabelStatus(false);
+                                            $("#buyItddl").val(buyitbuttonlabel);
+
+                                        }
+                                        else {
+                                            $("#buyItddl").val('999');
+                                            buyItQuestionLabelStatus(true);
+                                            ButItOtherLabel(buyitbuttonlabel);
+                                        }
+                                    }
+
+
+
+
+
+
+                                    $.unblockUI(spinner);
+                                    couponModel().reset();
+                                }
+                                EditorLoading(false);
+                            },
+                            error: function (response) {
+
+                            }
+                        });
+                    }
+
+
+
+                },
+                ShowImages = function (Item) {
+
+                    if (Item.couponImage1() != null && Item.couponImage1() != "" && Item.couponImage1() != undefined && Item.couponImage1() != '/images/standardplaceholder.png') {
+                        Banner2Flag(true);
+                    }
+                    if (Item.CouponImage2() != null && Item.CouponImage2() != "" && Item.CouponImage2() != undefined && Item.CouponImage2() != '/images/standardplaceholder.png') {
+                        Banner3Flag(true);
+                    }
+                    if (Item.CouponImage3() != null && Item.CouponImage3() != "" && Item.CouponImage3() != undefined && Item.CouponImage3() != '/images/standardplaceholder.png') {
+                        Banner4Flag(true);
+                    }
+                    if (Item.CouponImage4() != null && Item.CouponImage4() != "" && Item.CouponImage4() != undefined && Item.CouponImage4() != '/images/standardplaceholder.png') {
+                        Banner5Flag(true);
+                    }
+                    if (Item.CouponImage5() != null && Item.CouponImage5() != "" && Item.CouponImage5() != undefined && Item.CouponImage5() != '/images/standardplaceholder.png') {
+                        Banner6Flag(true);
+                    }
+                    if (Item.CouponImage6() != null && Item.CouponImage6() != "" && Item.CouponImage6() != undefined && Item.CouponImage6() != '/images/standardplaceholder.png') {
+                        Banner6Flag(true);
+                    }
+                    OpenDefault(Item);
+                },
+
+                OpenDefault = function (Item) {
+                    if (Item.couponImage1() == '/images/standardplaceholder.png') {
+                        Banner2Flag(true);
+                        return;
+                    }
+                    if (Item.CouponImage2() == '/images/standardplaceholder.png') {
+                        Banner2Flag(true);
+                        Banner3Flag(false);
+                        return;
+                    }
+
+                    else if (Item.CouponImage3() == '/images/standardplaceholder.png') {
+                        Banner3Flag(true);
+                        Banner4Flag(false);
+                        return;
+                    }
+                    else if (Item.CouponImage4() == '/images/standardplaceholder.png') {
+                        Banner4Flag(true);
+                        Banner5Flag(false);
+                        return;
+                    }
+                    else if (Item.CouponImage5() == '/images/standardplaceholder.png') {
+                        Banner5Flag(true);
+                        Banner6Flag(false);
+                        return;
+                    }
+                    else if (Item.CouponImage6() == '/images/standardplaceholder.png') {
+                        Banner6Flag(true);
+                        return;
+                    }
+                },
+                changeStatus = function (status) {
+                    if (status == 3) {
+                        if (UserAndCostDetail() != undefined && (UserAndCostDetail().Status == null || UserAndCostDetail().Status == 0)) {
+                            confirmation.showOKpopupforinfo();
+                            return;
+                        }
+                        else {
+                            if (couponModel() != undefined)
+                                saveCampaign(status);
+
+                            $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
+                            $("#btnSubmitForApproval,#saveBtn,.lang_delSurvey,.table-link").css("display", "inline-block");
+                            $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign").removeAttr('disabled');
+                        }
                     }
                     else {
                         if (couponModel() != undefined)
@@ -2003,285 +2026,106 @@ dealSubscription = function () {
                         $("#btnSubmitForApproval,#saveBtn,.lang_delSurvey,.table-link").css("display", "inline-block");
                         $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign").removeAttr('disabled');
                     }
-                }
-                else {
-                    if (couponModel() != undefined)
-                        saveCampaign(status);
+                },
+                CouponListingModeChecker = function (item) {
 
-                    $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
-                    $("#btnSubmitForApproval,#saveBtn,.lang_delSurvey,.table-link").css("display", "inline-block");
-                    $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign").removeAttr('disabled');
-                }
-            },
-            CouponListingModeChecker = function (item) {
-
-                if (EditorLoading() == false) {
-                    //if upgrading to paid mode and mode is otehr than draft
-                    if (item == 2 && couponModel().Status() != 1) {
-                        IsSubmitBtnVisible(true);
-                        IsResumeBtnVisible(false);
+                    if (EditorLoading() == false) {
+                        //if upgrading to paid mode and mode is otehr than draft
+                        if (item == 2 && couponModel().Status() != 1) {
+                            IsSubmitBtnVisible(true);
+                            IsResumeBtnVisible(false);
+                        }
                     }
+
+                    return item;
                 }
-
-                return item;
-            }
-            ,
-             handleBuyIt = function (item) {
+                ,
+                 handleBuyIt = function (item) {
 
 
-                 var selectionoption = $("#buyItddl").val();
+                     var selectionoption = $("#buyItddl").val();
 
-                 if (selectionoption == '0') {
-                     buyItQuestionStatus(false);
-                     couponModel().ShowBuyitBtn(false);
-                     buyItQuestionLabelStatus(false);
-                     ButItOtherLabel('');
-                     hideLandingPageURl(false);
-                 }
-                 else if (selectionoption == '999')  //other scenario
-                 {
-                     buyItQuestionStatus(true);
-                     couponModel().ShowBuyitBtn(true);
-                     buyItQuestionLabelStatus(true);
-                     couponModel().BuyitBtnLabel('');
-                     hideLandingPageURl(true);
-                 }
-                 else {
-                     buyItQuestionStatus(true);
-                     couponModel().ShowBuyitBtn(true);
-                     buyItQuestionLabelStatus(false);
-                     ButItOtherLabel('');
-                     couponModel().BuyitBtnLabel('');
-                     hideLandingPageURl(true);
-                 }
+                     if (selectionoption == '0') {
+                         buyItQuestionStatus(false);
+                         couponModel().ShowBuyitBtn(false);
+                         buyItQuestionLabelStatus(false);
+                         ButItOtherLabel('');
+                         hideLandingPageURl(false);
+                     }
+                     else if (selectionoption == '999')  //other scenario
+                     {
+                         buyItQuestionStatus(true);
+                         couponModel().ShowBuyitBtn(true);
+                         buyItQuestionLabelStatus(true);
+                         couponModel().BuyitBtnLabel('');
+                         hideLandingPageURl(true);
+                     }
+                     else {
+                         buyItQuestionStatus(true);
+                         couponModel().ShowBuyitBtn(true);
+                         buyItQuestionLabelStatus(false);
+                         ButItOtherLabel('');
+                         couponModel().BuyitBtnLabel('');
+                         hideLandingPageURl(true);
+                     }
 
-             },
-            nextPreviewScreen = function () {
-                var hasErrors = false;
-                if (previewScreenNumber() == 1) {
+                 },
+                nextPreviewScreen = function () {
+                    var hasErrors = false;
+                    if (previewScreenNumber() == 1) {
+                        if (couponModel().CouponTitle() == "" || couponModel().CouponTitle() == undefined) {
+                            hasErrors = true;
+                            toastr.error("Please enter Coupon Title.");
+                        }
+
+                        if (couponModel().CouponPriceOptions().length == 0 || couponModel().Savings() == undefined) {
+                            hasErrors = true;
+                            toastr.error("Please create atleast one Price option");
+
+                        }
+
+
+                    }
+                    if (previewScreenNumber() == 4) {
+
+
+                    }
+                    if (previewScreenNumber() == 3) {
+
+                        if (couponModel().CouponQtyPerUser() == "" || couponModel().CouponQtyPerUser() == undefined) {
+                            hasErrors = true;
+                            toastr.error("Please enter Quantity.");
+                        }
+                    }
+                    if (hasErrors)
+                        return;
+                    if (previewScreenNumber() < 5) {
+                        if (previewScreenNumber() == 3)
+                            return;
+                        else {
+                            previewScreenNumber(previewScreenNumber() + 1);
+                            $('html, body').animate({ scrollTop: 0 }, 800);
+                        }
+                    }
+
+                },
+
+                 backScreen = function () {
+
+                     if (previewScreenNumber() > 1) {
+                         previewScreenNumber(previewScreenNumber() - 1);
+                         $('html, body').animate({ scrollTop: 0 }, 800);
+                     }
+                 },
+                ValidateCoupon = function () {
+
+                    var hasErrors = false;
+
                     if (couponModel().CouponTitle() == "" || couponModel().CouponTitle() == undefined) {
                         hasErrors = true;
                         toastr.error("Please enter Coupon Title.");
+                        gotoScreen(1);
                     }
-
-                    if (couponModel().CouponPriceOptions().length == 0 || couponModel().Savings() == undefined) {
-                        hasErrors = true;
-                        toastr.error("Please create atleast one Price option");
-
-                    }
-
-
-                }
-                if (previewScreenNumber() == 4) {
-
-
-                }
-                if (previewScreenNumber() == 3) {
-
-                    if (couponModel().CouponQtyPerUser() == "" || couponModel().CouponQtyPerUser() == undefined) {
-                        hasErrors = true;
-                        toastr.error("Please enter Quantity.");
-                    }
-                }
-                if (hasErrors)
-                    return;
-                if (previewScreenNumber() < 5) {
-                    if (previewScreenNumber() == 3)
-                        return;
-                    else {
-                        previewScreenNumber(previewScreenNumber() + 1);
-                        $('html, body').animate({ scrollTop: 0 }, 800);
-                    }
-                }
-
-            },
-
-             backScreen = function () {
-
-                 if (previewScreenNumber() > 1) {
-                     previewScreenNumber(previewScreenNumber() - 1);
-                     $('html, body').animate({ scrollTop: 0 }, 800);
-                 }
-             },
-            ValidateCoupon = function () {
-
-                var hasErrors = false;
-
-                if (couponModel().CouponTitle() == "" || couponModel().CouponTitle() == undefined) {
-                    hasErrors = true;
-                    toastr.error("Please enter Coupon Title.");
-                    gotoScreen(1);
-                }
-
-
-                if (couponModel().CouponPriceOptions().length == 0 || couponModel().Savings() == undefined) {
-                    hasErrors = true;
-                    toastr.error("Please create atleast one Price option");
-                    gotoScreen(1);
-                }
-
-
-
-                return hasErrors;
-            },
-            addIndustry = function (selected) {
-
-                couponModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
-                    Industry: selected.IndustryName,
-                    IndustryId: selected.IndustryId,
-                    IncludeorExclude: true,//parseInt(selected.IndustryIncludeExclude),
-                    Type: 4,
-                    CampaignId: couponModel().CampaignID()
-                }));
-
-                $("#searchIndustries").val("");
-                if (UserAndCostDetail().ProfessionClausePrice != null && isIndustoryPerClickPriceAdded() == false) {
-                    pricePerclick(pricePerclick() + UserAndCostDetail().ProfessionClausePrice);
-                    isIndustoryPerClickPriceAdded(true);
-                }
-            },
-            addQuizQuestPrice = function () {
-
-                if (quizQuestionStatus() == false) {
-                    if (UserAndCostDetail().QuizQuestionClausePrice != null && isQuizQPerClickPriceAdded() == true) {
-
-
-                        pricePerclick(pricePerclick() - UserAndCostDetail().QuizQuestionClausePrice);
-                        isQuizQPerClickPriceAdded(false);
-
-                    }
-                } else {
-
-                    if (UserAndCostDetail().QuizQuestionClausePrice != null && isQuizQPerClickPriceAdded() == false) {
-
-
-                        pricePerclick(pricePerclick() + UserAndCostDetail().QuizQuestionClausePrice);
-                        isQuizQPerClickPriceAdded(true);
-
-                    }
-                }
-
-                return true;
-            },
-            addBuyItPrice = function () {
-
-                //if (buyItQuestionStatus() == false) {
-                //    if (UserAndCostDetail().BuyItClausePrice != null && isBuyItPerClickPriceAdded() == true) {
-
-
-                //        pricePerclick(pricePerclick() - UserAndCostDetail().BuyItClausePrice);
-                //        isBuyItPerClickPriceAdded(false);
-
-                //    }
-                //} else {
-
-                //if (UserAndCostDetail().BuyItClausePrice != null && isBuyItPerClickPriceAdded() == false) {
-
-
-                //    pricePerclick(pricePerclick() + UserAndCostDetail().BuyItClausePrice);
-                //    isBuyItPerClickPriceAdded(true);
-
-                //}
-                //}
-
-                return true;
-            },
-            addDeliveryPrice = function () {
-
-                return true;
-            },
-            DeleteImage = function () {
-                alert(couponModel().couponImage1());
-                $("#img1").css('display', 'none');
-
-
-            },
-           disableDolarCheckBoxes = ko.computed(function () {
-               if (couponModel() != undefined) {
-                   if (couponModel().IsPerSaving3days() == true || couponModel().IsPerSaving2days() == true || couponModel().IsPerSavingLastday() == true) {
-                       return true;
-                   }
-                   else {
-
-                       false;
-                   }
-               }
-
-           }),
-           disablePercentageCheckBoxes = ko.computed(function () {
-               if (couponModel() != undefined) {
-                   if (couponModel().IsDollarSaving3days() == true || couponModel().IsDollarSaving2days() == true || couponModel().IsDollarSavingLastday() == true) {
-                       return true;
-                   }
-                   else {
-
-                       false;
-                   }
-               }
-
-           }),
-            visibleDeleteimage = function (item) {
-                if (item.couponImage1() != null && item.couponImage1() != "/images/standardplaceholder.png" && item.CouponImage2() == "/images/standardplaceholder.png")
-                    diveNo(1);
-                else if (item.CouponImage2() != null && item.CouponImage2() != "/images/standardplaceholder.png" && item.CouponImage3() == "/images/standardplaceholder.png")
-                    diveNo(2);
-                else if (item.CouponImage3() != null && item.CouponImage3() != "/images/standardplaceholder.png" && item.CouponImage4() == "/images/standardplaceholder.png")
-                    diveNo(3);
-                else if (item.CouponImage4() != null && item.CouponImage4() != "/images/standardplaceholder.png" && item.CouponImage5() == "/images/standardplaceholder.png")
-                    diveNo(4);
-                else if (item.CouponImage5() != null && item.CouponImage5() != "/images/standardplaceholder.png" && item.CouponImage6() == "/images/standardplaceholder.png")
-                    diveNo(5);
-                else if (item.CouponImage6() != null && item.CouponImage6() != "/images/standardplaceholder.png")
-                    diveNo(6);
-                else
-                    diveNo(0);
-            },
-            onDeleteImage = function (item) {
-                if (item == 1) {
-                    bannerImage1 = "";
-                    couponModel().couponImage1("/images/standardplaceholder.png")
-                }
-                else if (item == 2) {
-                    bannerImage2 = "";
-                    couponModel().CouponImage2("/images/standardplaceholder.png")
-                }
-                else if (item == 3) {
-                    bannerImage3 = "";
-                    couponModel().CouponImage3("/images/standardplaceholder.png");
-                    Banner4Flag(false);
-
-                }
-                else if (item == 4) {
-                    bannerImage4 = "";
-                    couponModel().CouponImage4("/images/standardplaceholder.png")
-                }
-                else if (item == 5) {
-                    bannerImage5 = "";
-                    couponModel().CouponImage5("/images/standardplaceholder.png")
-                }
-                else if (item == 6) {
-                    bannerImage6 = "";
-                    couponModel().CouponImage6("/images/standardplaceholder.png")
-                }
-
-
-            },
-                SaveAsDraft = function () {
-                    hasErrors = false;
-                    if (couponModel().CouponTitle() == "" || couponModel().CouponTitle() == undefined) {
-                        hasErrors = true;
-                        toastr.error("Please Enter Deal Title.");
-                    }
-                    if (couponModel().SearchKeywords() == "" || couponModel().SearchKeywords() == undefined) {
-                        hasErrors = true;
-                        toastr.error("Please enter Search Keywords.");
-                    }
-
-
-                    //if (couponModel().HowToRedeemLine2() == "" || couponModel().HowToRedeemLine2() == undefined) {
-                    //    hasErrors = true;
-                    //    toastr.error("Please enter deal description.");
-                    //}
 
 
                     if (couponModel().CouponPriceOptions().length == 0 || couponModel().Savings() == undefined) {
@@ -2290,37 +2134,207 @@ dealSubscription = function () {
                         gotoScreen(1);
                     }
 
-                    //couponImage1
-                    //if (couponModel().couponImage1() == "/images/default-placeholder.png" && couponModel().CouponImage2() == "/images/default-placeholder.png" && couponModel().CouponImage3() == "/images/default-placeholder.png") {
-                    //    hasErrors = true;
-                    //    toastr.error("Please enter atleast 1 banner image.");
-                    //}
-                    if (hasErrors)
-                        return;
-                    saveCampaign(1);
 
 
+                    return hasErrors;
                 },
-                FirstCouponOption = ko.computed(function () {
+                addIndustry = function (selected) {
 
-                    if (couponModel() != undefined) {
+                    couponModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
+                        Industry: selected.IndustryName,
+                        IndustryId: selected.IndustryId,
+                        IncludeorExclude: true,//parseInt(selected.IndustryIncludeExclude),
+                        Type: 4,
+                        CampaignId: couponModel().CampaignID()
+                    }));
 
-                        if (couponModel().CouponPriceOptions() != undefined) {
+                    $("#searchIndustries").val("");
+                    if (UserAndCostDetail().ProfessionClausePrice != null && isIndustoryPerClickPriceAdded() == false) {
+                        pricePerclick(pricePerclick() + UserAndCostDetail().ProfessionClausePrice);
+                        isIndustoryPerClickPriceAdded(true);
+                    }
+                },
+                addQuizQuestPrice = function () {
 
-                            if (couponModel().CouponPriceOptions()[0] != undefined) {
+                    if (quizQuestionStatus() == false) {
+                        if (UserAndCostDetail().QuizQuestionClausePrice != null && isQuizQPerClickPriceAdded() == true) {
 
-                                if (couponModel().CouponPriceOptions()[0].Price() != undefined) {
-                                    return mCurrencyCode() + '' + couponModel().CouponPriceOptions()[0].Price();
-                                }
-                                else
-                                    return mCurrencyCode() + '0';
 
-                            }
+                            pricePerclick(pricePerclick() - UserAndCostDetail().QuizQuestionClausePrice);
+                            isQuizQPerClickPriceAdded(false);
+
+                        }
+                    } else {
+
+                        if (UserAndCostDetail().QuizQuestionClausePrice != null && isQuizQPerClickPriceAdded() == false) {
+
+
+                            pricePerclick(pricePerclick() + UserAndCostDetail().QuizQuestionClausePrice);
+                            isQuizQPerClickPriceAdded(true);
+
                         }
                     }
 
+                    return true;
+                },
+                addBuyItPrice = function () {
 
-                }, this);
+                    //if (buyItQuestionStatus() == false) {
+                    //    if (UserAndCostDetail().BuyItClausePrice != null && isBuyItPerClickPriceAdded() == true) {
+
+
+                    //        pricePerclick(pricePerclick() - UserAndCostDetail().BuyItClausePrice);
+                    //        isBuyItPerClickPriceAdded(false);
+
+                    //    }
+                    //} else {
+
+                    //if (UserAndCostDetail().BuyItClausePrice != null && isBuyItPerClickPriceAdded() == false) {
+
+
+                    //    pricePerclick(pricePerclick() + UserAndCostDetail().BuyItClausePrice);
+                    //    isBuyItPerClickPriceAdded(true);
+
+                    //}
+                    //}
+
+                    return true;
+                },
+                addDeliveryPrice = function () {
+
+                    return true;
+                },
+                DeleteImage = function () {
+                    alert(couponModel().couponImage1());
+                    $("#img1").css('display', 'none');
+
+
+                },
+               disableDolarCheckBoxes = ko.computed(function () {
+                   if (couponModel() != undefined) {
+                       if (couponModel().IsPerSaving3days() == true || couponModel().IsPerSaving2days() == true || couponModel().IsPerSavingLastday() == true) {
+                           return true;
+                       }
+                       else {
+
+                           false;
+                       }
+                   }
+
+               }),
+               disablePercentageCheckBoxes = ko.computed(function () {
+                   if (couponModel() != undefined) {
+                       if (couponModel().IsDollarSaving3days() == true || couponModel().IsDollarSaving2days() == true || couponModel().IsDollarSavingLastday() == true) {
+                           return true;
+                       }
+                       else {
+
+                           false;
+                       }
+                   }
+
+               }),
+                visibleDeleteimage = function (item) {
+                    if (item.couponImage1() != null && item.couponImage1() != "/images/standardplaceholder.png" && item.CouponImage2() == "/images/standardplaceholder.png")
+                        diveNo(1);
+                    else if (item.CouponImage2() != null && item.CouponImage2() != "/images/standardplaceholder.png" && item.CouponImage3() == "/images/standardplaceholder.png")
+                        diveNo(2);
+                    else if (item.CouponImage3() != null && item.CouponImage3() != "/images/standardplaceholder.png" && item.CouponImage4() == "/images/standardplaceholder.png")
+                        diveNo(3);
+                    else if (item.CouponImage4() != null && item.CouponImage4() != "/images/standardplaceholder.png" && item.CouponImage5() == "/images/standardplaceholder.png")
+                        diveNo(4);
+                    else if (item.CouponImage5() != null && item.CouponImage5() != "/images/standardplaceholder.png" && item.CouponImage6() == "/images/standardplaceholder.png")
+                        diveNo(5);
+                    else if (item.CouponImage6() != null && item.CouponImage6() != "/images/standardplaceholder.png")
+                        diveNo(6);
+                    else
+                        diveNo(0);
+                },
+                onDeleteImage = function (item) {
+                    if (item == 1) {
+                        bannerImage1 = "";
+                        couponModel().couponImage1("/images/standardplaceholder.png")
+                    }
+                    else if (item == 2) {
+                        bannerImage2 = "";
+                        couponModel().CouponImage2("/images/standardplaceholder.png")
+                    }
+                    else if (item == 3) {
+                        bannerImage3 = "";
+                        couponModel().CouponImage3("/images/standardplaceholder.png");
+                        Banner4Flag(false);
+
+                    }
+                    else if (item == 4) {
+                        bannerImage4 = "";
+                        couponModel().CouponImage4("/images/standardplaceholder.png")
+                    }
+                    else if (item == 5) {
+                        bannerImage5 = "";
+                        couponModel().CouponImage5("/images/standardplaceholder.png")
+                    }
+                    else if (item == 6) {
+                        bannerImage6 = "";
+                        couponModel().CouponImage6("/images/standardplaceholder.png")
+                    }
+
+
+                },
+                    SaveAsDraft = function () {
+                        hasErrors = false;
+                        if (couponModel().CouponTitle() == "" || couponModel().CouponTitle() == undefined) {
+                            hasErrors = true;
+                            toastr.error("Please Enter Deal Title.");
+                        }
+                        if (couponModel().SearchKeywords() == "" || couponModel().SearchKeywords() == undefined) {
+                            hasErrors = true;
+                            toastr.error("Please enter Search Keywords.");
+                        }
+
+
+                        //if (couponModel().HowToRedeemLine2() == "" || couponModel().HowToRedeemLine2() == undefined) {
+                        //    hasErrors = true;
+                        //    toastr.error("Please enter deal description.");
+                        //}
+
+
+                        if (couponModel().CouponPriceOptions().length == 0 || couponModel().Savings() == undefined) {
+                            hasErrors = true;
+                            toastr.error("Please create atleast one Price option");
+                            gotoScreen(1);
+                        }
+
+                        //couponImage1
+                        //if (couponModel().couponImage1() == "/images/default-placeholder.png" && couponModel().CouponImage2() == "/images/default-placeholder.png" && couponModel().CouponImage3() == "/images/default-placeholder.png") {
+                        //    hasErrors = true;
+                        //    toastr.error("Please enter atleast 1 banner image.");
+                        //}
+                        if (hasErrors)
+                            return;
+                        saveCampaign(1);
+
+
+                    },
+                    FirstCouponOption = ko.computed(function () {
+
+                        if (couponModel() != undefined) {
+
+                            if (couponModel().CouponPriceOptions() != undefined) {
+
+                                if (couponModel().CouponPriceOptions()[0] != undefined) {
+
+                                    if (couponModel().CouponPriceOptions()[0].Price() != undefined) {
+                                        return mCurrencyCode() + '' + couponModel().CouponPriceOptions()[0].Price();
+                                    }
+                                    else
+                                        return mCurrencyCode() + '0';
+
+                                }
+                            }
+                        }
+
+
+                    }, this);
                 SecondCouponOption = ko.computed(function () {
 
                     if (couponModel() != undefined) {
@@ -3578,7 +3592,8 @@ dealSubscription = function () {
                     selectedProAnalytics: selectedProAnalytics,
                     ByGenderStatsChartAnalyticsData: ByGenderStatsChartAnalyticsData,
                     ByProfessionStatsChartAnalyticsData: ByProfessionStatsChartAnalyticsData,
-                    ByAgeStatsChartAnalyticsData: ByAgeStatsChartAnalyticsData
+                    ByAgeStatsChartAnalyticsData: ByAgeStatsChartAnalyticsData,
+                    isCash4dealVisible: isCash4dealVisible
                 };
             })()
         };

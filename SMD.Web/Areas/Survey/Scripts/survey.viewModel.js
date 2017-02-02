@@ -2460,11 +2460,13 @@ define("survey/survey.viewModel",
                         if (status == 3) {
                             $("#btnPauseCampaign").css("display", "inline-block");
                             $("#btnPauseCampaign").removeAttr('disabled');
+                            $("#btnFreeAds").removeAttr('disabled');
                             isNewCampaign(false);
                         } else if (status == 4) {
                             $("#btnResumeCampagin").css("display", "inline-block");
                             $("#btnResumeCampagin").removeAttr('disabled');
                             $("#dialog-confrominfo").removeAttr('disabled');
+                            $("#btnFreeAds").removeAttr('disabled');
                             isNewCampaign(false);
                         }
                         $("#topArea a").removeAttr('disabled');
