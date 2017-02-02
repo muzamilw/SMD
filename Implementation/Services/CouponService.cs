@@ -280,7 +280,10 @@ namespace SMD.Implementation.Services
         {
             return couponRepository.GetAllCoupons().ToList();
         }
-
+        public List<Coupon> GetAllCouponList()
+        {
+            return couponRepository.GetAllCouponList();
+        }
         public CampaignResponseModel GetCoupons(AdCampaignSearchRequest request)
         {
             int rowCount;
@@ -1289,6 +1292,7 @@ namespace SMD.Implementation.Services
         {
             return couponRepository.getDealImpressionByProfessionByCouponId(CId);
         }
+
 
         #endregion
     }

@@ -11,6 +11,7 @@ namespace SMD.Interfaces.Repository
 {
     public interface ICouponRepository : IBaseRepository<Coupon, long>
     {
+        List<Coupon> GetAllCouponList();
         IEnumerable<Coupon> GetAllCoupons();
         Coupon Find(long id);
         IEnumerable<Coupon> SearchCampaign(AdCampaignSearchRequest request, out int rowCount);

@@ -152,6 +152,11 @@ namespace SMD.Repository.Repositories
         {
             return db.UserCouponView.ToList().Count(a => a.CouponId == couponId);
         }
+        public List<Coupon> GetAllCouponList()
+        {
+            return db.Coupons.ToList();
+        }
+
         public IEnumerable<Coupon> GetCouponById(long campaignId)
         {
 
@@ -183,11 +188,8 @@ namespace SMD.Repository.Repositories
 
         public Coupon GetCouponByIdSingle(long couponId)
         {
-
-
             return DbSet.Where(g => g.CouponId == couponId).SingleOrDefault();
         }
-
 
         public IEnumerable<SearchCoupons_Result> SearchCoupons(int categoryId, int type, int size, string keywords, int pageNo, int distance, string Lat, string Lon, string UserId)
         {
@@ -195,7 +197,6 @@ namespace SMD.Repository.Repositories
             int? toRow = size;
             return db.SearchCoupons(categoryId, type, keywords, distance, Lat, Lon, UserId, fromRow, toRow);
         }
-
 
         public List<Coupon> GetCouponsByCompanyId(int CompanyId)
         {
@@ -461,7 +462,8 @@ namespace SMD.Repository.Repositories
         {
             return db.getDealImpressionByProfessionByCouponId(CId).ToList(); 
         }
-
+       
+        
         #endregion
     }
 }

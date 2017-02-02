@@ -394,6 +394,7 @@
     <Compile Include="Areas\Api\Controllers\DashboardStatusCounterController.cs" />
     <Compile Include="Areas\Api\Controllers\DealListingController.cs" />
     <Compile Include="Areas\Api\Controllers\DealStatsController.cs" />
+    <Compile Include="Areas\Api\Controllers\GetCouponLocationsController.cs" />
     <Compile Include="Areas\Api\Controllers\GetRandomAdCampaignController.cs" />
     <Compile Include="Areas\Api\Controllers\GetRandomDealController.cs" />
     <Compile Include="Areas\Api\Controllers\GetRandomPollsController.cs" />
@@ -451,6 +452,7 @@
     <Compile Include="Areas\Api\Models\BranchCategoryResponseModel.cs" />
     <Compile Include="Areas\Api\Models\CompanybillingAddress.cs" />
     <Compile Include="Areas\Api\Models\CompanyBranch.cs" />
+    <Compile Include="Areas\Api\Models\CouponLocation.cs" />
     <Compile Include="Areas\Api\Models\CouponRatingReviewApiModel.cs" />
     <Compile Include="Areas\Api\Models\CouponRatingReviewRequest.cs" />
     <Compile Include="Areas\Api\Models\CouponsApproval.cs" />
