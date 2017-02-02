@@ -1692,6 +1692,7 @@
     <Content Include="Images\preview_game.jpg" />
     <Content Include="Images\qqtt.png" />
     <Content Include="Images\Red_Bell.png" />
+    <Content Include="Images\red_Star.png" />
     <Content Include="Images\select_image.jpg" />
     <Content Include="Images\share_icon.png" />
     <Content Include="Images\Share_world.png" />
@@ -1705,6 +1706,7 @@
     <Content Include="Images\twiter_Icon.png" />
     <Content Include="Images\videoAdImage.jpg" />
     <Content Include="Images\White_Arrow.png" />
+    <Content Include="Images\yellow_star.png" />
     <Content Include="Images\youtube_play.JPG" />
     <Content Include="Images\yt_icon.png" />
     <Content Include="ReportViewers\Publisher.aspx" />
