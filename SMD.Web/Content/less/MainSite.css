@@ -1451,6 +1451,19 @@ margin-top:2px;
     background-repeat: no-repeat!important;
     background-color: #27ae60!important;
 }
+.free_VideoAd_btn {
+      background: url(/Images/yt_icon.png)!important;
+    background-position: 244px 5px!important;
+    padding: 6px 10px 8px 10px!important;
+    background-repeat: no-repeat!important;
+    background-color: #e74c3c!important;
+    text-align:left;
+    width:288px;
+    font-weight:bold;
+    font-size:16px;
+       
+    
+}
 
 .create_polls_btn {
   background: url(/Content/Images/Polls_small_36.png)!important;

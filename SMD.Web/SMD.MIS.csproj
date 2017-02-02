@@ -1235,6 +1235,7 @@
     <Content Include="Content\Images\Display_small.png" />
     <Content Include="Content\Images\Display_small_36.png" />
     <Content Include="Content\Images\Drop_Arrow.png" />
+    <Content Include="Content\Images\drop_arrowWhite.png" />
     <Content Include="Content\Images\Email_icon.png" />
     <Content Include="Content\Images\facebookNew.png" />
     <Content Include="Content\Images\flags%402x.png" />
@@ -1705,6 +1706,7 @@
     <Content Include="Images\videoAdImage.jpg" />
     <Content Include="Images\White_Arrow.png" />
     <Content Include="Images\youtube_play.JPG" />
+    <Content Include="Images\yt_icon.png" />
     <Content Include="ReportViewers\Publisher.aspx" />
     <Content Include="ReportViewers\SMDReport.aspx" />
     <Content Include="ReportViewers\test.html" />

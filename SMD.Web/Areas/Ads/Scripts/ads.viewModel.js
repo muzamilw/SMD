@@ -2527,6 +2527,7 @@ define("ads/ads.viewModel",
                                         $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,#btnPauseCampaign,.lang_delSurvey").css("display", "none");
                                         $("#saveBtn").css("display", "none")
                                         $("#btnCancel,#btnPauseCampaign,#btnClose").removeAttr('disabled');
+                                        $("#btnFreeAds").removeAttr('disabled');
                                         campaignModel().StatusValue("Pending Approval");
                                     } else if (campaignModel().Status() == 3) {
                                         $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
@@ -2536,6 +2537,7 @@ define("ads/ads.viewModel",
                                         //$("#btnPauseCampaign").css("display", "inline-block");
                                         //$("#btnCancel,#btnPauseCampaign,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
                                         $("#btnPauseCampaign").css("display", "inline-block");
+                                        $("#btnFreeAds").removeAttr('disabled');
                                         campaignModel().StatusValue("Live");
                                         //isTerminateBtnVisible(true);
                                         isNewCampaignVisible(true);
@@ -2546,16 +2548,19 @@ define("ads/ads.viewModel",
                                         $("#btnResumeCampagin").css("display", "inline-block");
                                         $("#btnCancel,#btnResumeCampagin,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
                                         campaignModel().StatusValue("Paused");
+                                        $("#btnFreeAds").removeAttr('disabled');
                                         // isTerminateBtnVisible(true);
                                         isNewCampaignVisible(true);
                                     } else if (campaignModel().Status() == 5) {
                                         campaignModel().StatusValue("Completed");
+                                        $("#btnFreeAds").removeAttr('disabled');
                                     } else if (campaignModel().Status() == 6) {
                                         //  $("input,button,textarea,select").attr('disabled', 'disabled'); // disable all controls
                                         $("#btnSubmitForApproval2").css("display", "inline-block");
                                         $("#btnSubmitForApproval2").removeAttr('disabled');
                                         $("#btnPauseCampaign").css("display", "none");
                                         campaignModel().StatusValue("Rejected");
+                                        $("#btnFreeAds").removeAttr('disabled');
                                     } else if (campaignModel().Status() == 7) {
 
                                         campaignModel().StatusValue("Remove");
@@ -2564,6 +2569,7 @@ define("ads/ads.viewModel",
                                         $("#saveBtn").css("display", "none");
                                         // $("#btnPauseCampaign").css("display", "inline-block");
                                         $("#btnCancel,#btnPauseCampaign,#btnCopyCampaign,#btnArchive").removeAttr('disabled');
+                                        $("#btnFreeAds").removeAttr('disabled');
                                         isNewCampaignVisible();
                                         isShowArchiveBtn(false);
                                     } else if (item.Status == 9) {
