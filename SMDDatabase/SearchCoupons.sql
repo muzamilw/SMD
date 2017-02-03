@@ -1,6 +1,6 @@
 ﻿USE [SMDv2]
 GO
-/****** Object:  StoredProcedure [dbo].[SearchCoupons]    Script Date: 1/16/2017 1:05:13 PM ******/
+/****** Object:  StoredProcedure [dbo].[SearchCoupons]    Script Date: 2/3/2017 11:10:25 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -8,7 +8,10 @@ GO
 
 
 ALTER PROCEDURE [dbo].[SearchCoupons]
---   EXEC [dbo].[SearchCoupons] 		@categoryId =0,		@type = 1,		@keywords = N'',		@distance = 1000000000,		@Lat = N'31.483177',		@Lon = N'74.288167',		@UserId = N'b18b8879-055f-406f-8fbb-e2e8bf286ca5',		@FromRow = 0,		@ToRow = 100
+
+--   EXEC [dbo].[SearchCoupons]  0,	1,'',1000000000,'','','b18b8879-055f-406f-8fbb-e2e8bf286ca5',0,100
+
+--   EXEC [dbo].[SearchCoupons]  @categoryId =0,	@type = 1,		@keywords = N'',		@distance = 1000000000,		@Lat = N'31.483177',		@Lon = N'74.288167',		@UserId = N'b18b8879-055f-406f-8fbb-e2e8bf286ca5',		@FromRow = 0,		@ToRow = 100
 
 	-- Add the parameters for the stored procedure here
 	@categoryId INT = 1 ,
@@ -25,7 +28,7 @@ AS
 BEGIN
 
 
-set @distance = 50
+set @distance = 50000
 
 
 declare @currentDate datetime
@@ -59,10 +62,6 @@ DECLARE @source geography = geography::Point(@lat, @lon, 4326)
 				(case when selfr.discountType = 1 then cpopt.price - (cpopt.price * selfr.discount/100) else   cpopt.price -  selfr.discount end ) as Savings, 
 				
 				
-				
-				
-				
-				
 				isnull(SwapCost,0) SwapCost, vchr.CompanyId, CouponActiveMonth,CouponActiveYear
 				,DATEFROMPARTS(vchr.CouponActiveYear, vchr.CouponActiveMonth,day(EOMONTH ( DATEFROMPARTS(vchr.CouponActiveYear, vchr.CouponActiveMonth,1)))) eod,
 				vchr.ApprovalDateTime strt,
@@ -75,13 +74,18 @@ DECLARE @source geography = geography::Point(@lat, @lon, 4326)
 				comp.CompanyName,
 				vchr.LocationTitle,
 				vchr.LocationCity,
+				
+				vchr.LocationLAT,
+				vchr.LocationLON,
+
 				cpoptc.cnt DealsCount,
 				curr.CurrencyCode,
 				curr.CurrencySymbol,
 				cast(isnull(crrRatingAvg.arravg,0)+5 as numeric(36,1)) AvgRating,
 				(case when uReview.UserId is null then 0 else 1 end) UserHasRated,
-				(case when couponlistingmode = 1 then datediff(d,getdate(),dateadd(d,7, ApprovalDateTime)) else datediff(d,getdate(),dateadd(d,30, ApprovalDateTime)) end)  DaysLeft
-
+				(case when couponlistingmode = 1 then datediff(d,getdate(),dateadd(d,7, ApprovalDateTime)) else datediff(d,getdate(),dateadd(d,30, ApprovalDateTime)) end)  DaysLeft,
+				(case when vchr.DealFirstDiscountType = 7 then 1 else 0 end) as IsTwoForOneDeal,(case when vchr.CouponListingMode = 3 then 1 else 0 end) as IsCashAMoon,
+				'http://deals.cash4ads.com/Deal?id=' + cast(vchr.couponid as nvarchar(1000)) as  CouponLink
 				
 
 				from Coupon vchr
@@ -189,10 +193,9 @@ DECLARE @source geography = geography::Point(@lat, @lon, 4326)
 
 		
 					)
-					group by vchr.CouponId, CouponTitle,vchr.CouponImage1,LogoUrl,cpopt.Price, cpopt.Savings,SwapCost,vchr.CompanyId,CouponActiveMonth,CouponActiveYear,vchr.LocationLAT, vchr.LocationLON,CouponListingMode, comp.companyname, vchr.LocationTitle, vchr.LocationCity,vchr.ApprovalDateTime, cpoptc.cnt,curr.CurrencyCode,curr.CurrencySymbol,crrRatingAvg.arravg,uReview.UserId,selfr.discountType,selfr.discount
+					group by vchr.CouponId, CouponTitle,vchr.CouponImage1,LogoUrl,cpopt.Price, cpopt.Savings,SwapCost,vchr.CompanyId,CouponActiveMonth,CouponActiveYear,vchr.LocationLAT, vchr.LocationLON,CouponListingMode, comp.companyname, vchr.LocationTitle,vchr.LocationLAT,vchr.LocationLON, vchr.LocationCity,vchr.ApprovalDateTime, cpoptc.cnt,curr.CurrencyCode,curr.CurrencySymbol,crrRatingAvg.arravg,uReview.UserId,selfr.discountType,selfr.discount,vchr.DealFirstDiscountType
 
 
-					
 
 					)as items
 		where distance < @distance
@@ -217,12 +220,18 @@ DECLARE @source geography = geography::Point(@lat, @lon, 4326)
 					comp.CompanyName,
 					vchr.LocationTitle,
 					vchr.LocationCity,
+
+					vchr.LocationLAT,
+				    vchr.LocationLON,
+
 					cpoptc.cnt DealsCount,
 					curr.CurrencyCode,
 					curr.CurrencySymbol,
 					isnull(crrRatingAvg.arravg,0)+5 AvgRating,
 					(case when uReview.UserId is null then 0 else 1 end) UserHasRated,
 					datediff(d,ApprovalDateTime,getdate()) as DaysLeft,
+					0 as IsTwoForOneDeal,0 as IsCashAMoon,
+					'http://deals.cash4ads.com/Deal?id=' + cast(vchr.couponid as nvarchar(1000)) as  CouponLink,
 					0 as TotalItems
 
 					from Coupon vchr
@@ -249,10 +258,6 @@ DECLARE @source geography = geography::Point(@lat, @lon, 4326)
 					where comp.IsSpecialAccount = 1
 
 		
-
-
-
-
 
 	order by distance
 	OFFSET @FromRow ROWS

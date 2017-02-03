@@ -41,6 +41,10 @@ namespace SMD.Models.Common
 
         public string CouponLink { get; set; }
         public int IsTwoForOneDeal { get; set; }
+
+        public int IsCashAMoon { get; set; }
+        public double LocationLAT { get; set; }
+        public double LocationLON { get; set; }
         
     }
 
