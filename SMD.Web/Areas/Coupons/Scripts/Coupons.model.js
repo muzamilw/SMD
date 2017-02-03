@@ -6,7 +6,9 @@
             LocationLine1, LocationLine2, LocationLON, LocationPhone, LocationState, LocationTitle, LocationZipCode, LogoUrl, ModifiedBy, ModifiedDateTime, Price, RejectedBy,
             Rejecteddatetime, RejectedReason, Savings, SearchKeywords, Status, SwapCost, UserId, CouponTitle, CouponExpirydate, CouponQtyPerUser, CouponId, couponImage1, CouponImage2, CouponImage3,
             CurrencyId, couponListingMode, CouponActiveMonth, CouponActiveYear, CouponRedeemedCount, CouponViewCount, CouponIssuedCount, SubmissionDateTime, LocationCountryId, CouponStartDate, CouponEndDate, Priority,
-            ShowBuyitBtn, BuyitLandingPageUrl, BuyitBtnLabel, YoutubeLink, CouponImage4, CouponImage5, CouponImage6, IsPaymentCollected, PaymentDate, IsShowReviews, IsShowAddress, IsShowPhoneNo, IsShowMap, IsShowyouTube, IsShowAboutUs, DealsinGroupCount, IsPerSaving3days, IsPerSaving2days, IsPerSavingLastday, IsDollarSaving3days, IsDollarSaving2days, IsDollarSavingLastday, LastModifiedDate, isSaveBtnLable, DealFirstDiscountType, DealEndingDiscountType
+            ShowBuyitBtn, BuyitLandingPageUrl, BuyitBtnLabel, YoutubeLink, CouponImage4, CouponImage5, CouponImage6, IsPaymentCollected, PaymentDate, IsShowReviews, IsShowAddress, IsShowPhoneNo, IsShowMap, IsShowyouTube, IsShowAboutUs, DealsinGroupCount, IsPerSaving3days, IsPerSaving2days, IsPerSavingLastday, IsDollarSaving3days, IsDollarSaving2days, IsDollarSavingLastday, LastModifiedDate, isSaveBtnLable, DealFirstDiscountType, DealEndingDiscountType, cashBackDeal, pinCode,
+            cashBackDealCounter
+
           ) {
           var
               //type and userID will be set on server sside
@@ -37,7 +39,7 @@
               CouponImage3 = ko.observable(CouponImage3),
               lastModified = ko.observable(LastModifiedDate),
               CouponIssuedCount = ko.observable(CouponIssuedCount),
-              CouponListingMode = ko.observable(couponListingMode == 1 ? "1" : "2"),
+              CouponListingMode = ko.observable(couponListingMode == 1 ? "1" : couponListingMode == 2 ? "2" : "3"),
               CouponQtyPerUser = ko.observable(CouponQtyPerUser).extend({ required: true }),
               CouponRedeemedCount = ko.observable(CouponRedeemedCount),
               CouponTitle = ko.observable(CouponTitle),
@@ -112,15 +114,18 @@
               IsDollarSaving3days = ko.observable(IsDollarSaving3days),
               IsDollarSaving2days = ko.observable(IsDollarSaving2days),
               IsDollarSavingLastday = ko.observable(IsDollarSavingLastday),
-              isSaveBtnLable = ko.observable(isSaveBtnLable ==1 ? "1" :isSaveBtnLable == 2 ? "2" : isSaveBtnLable == 3 ? "3" :null),
+              isSaveBtnLable = ko.observable(isSaveBtnLable == 1 ? "1" : isSaveBtnLable == 2 ? "2" : isSaveBtnLable == 3 ? "3" : null),
               DealFirstDiscountType = ko.observable(DealFirstDiscountType),
               DealEndingDiscountType = ko.observable(DealEndingDiscountType),
+              CashBackDeal = ko.observable(cashBackDeal),
+              PinCode = ko.observable(pinCode),
+              CashBackDealCounter = ko.observable(cashBackDealCounter),
                 DealLines = ko.observable(),
                 ClickThruComparison = ko.observable(0),
                 ClickThruDirection = ko.observable(),
-                DealsOpenedComparison  = ko.observable(0),
-                DealsOpenedDirection   = ko.observable(),
-                DealRating    = ko.observable(0),
+                DealsOpenedComparison = ko.observable(0),
+                DealsOpenedDirection = ko.observable(),
+                DealRating = ko.observable(0),
                 DealReviewsCount = ko.observable(),
                 ClickThruCount = ko.observable(),
                // Errors
@@ -228,6 +233,9 @@
                  isSaveBtnLable: isSaveBtnLable,
                  DealFirstDiscountType: DealFirstDiscountType,
                  DealEndingDiscountType: DealEndingDiscountType,
+                 CashBackDeal: CashBackDeal,
+                 PinCode: PinCode,
+                 CashBackDealCounter: CashBackDealCounter
 
 
              }),
@@ -357,6 +365,10 @@
                   isSaveBtnLable: isSaveBtnLable(),
                   DealFirstDiscountType: DealFirstDiscountType(),
                   DealEndingDiscountType: DealEndingDiscountType(),
+                  CashBackDeal: CashBackDeal(),
+                  PinCode: PinCode(),
+                  CashBackDealCounter: CashBackDealCounter()
+
 
               };
           };
@@ -460,12 +472,17 @@
               isSaveBtnLable: (isSaveBtnLable),
               DealFirstDiscountType: (DealFirstDiscountType),
               DealEndingDiscountType: (DealEndingDiscountType),
-              DealLines : (DealLines),
-              ClickThruComparison : (ClickThruComparison),
-              ClickThruDirection : (ClickThruDirection),
-              DealsOpenedComparison : (DealsOpenedComparison),
-              DealsOpenedDirection   : (DealsOpenedDirection),
-              DealRating    : (DealRating),
+              CashBackDeal: (CashBackDeal),
+              PinCode: (PinCode),
+              CashBackDealCounter: (CashBackDealCounter),
+
+
+              DealLines: (DealLines),
+              ClickThruComparison: (ClickThruComparison),
+              ClickThruDirection: (ClickThruDirection),
+              DealsOpenedComparison: (DealsOpenedComparison),
+              DealsOpenedDirection: (DealsOpenedDirection),
+              DealRating: (DealRating),
               DealReviewsCount: (DealReviewsCount),
               ClickThruCount: (ClickThruCount)
           };
@@ -484,7 +501,7 @@
             source.Rejecteddatetime, source.RejectedReason, source.Savings, source.SearchKeywords, source.Status, source.SwapCost, source.UserId, source.CouponTitle, source.CouponExpirydate,
             source.CouponQtyPerUser, source.CouponId, source.couponImage1, source.CouponImage2, source.CouponImage3, source.CurrencyId, source.CouponListingMode, source.CouponActiveMonth, source.CouponActiveYear, source.CouponRedeemedCount, source.CouponViewCount, source.CouponIssuedCount, source.SubmissionDateTime, source.LocationCountryId, source.CouponStartDate, source.CouponEndDate, source.Priority
             , source.ShowBuyitBtn, source.BuyitLandingPageUrl, source.BuyitBtnLabel, source.YoutubeLink, source.CouponImage4, source.CouponImage5, source.CouponImage6, source.IsPaymentCollected, source.PaymentDate, source.IsShowReviews, source.IsShowAddress, source.IsShowPhoneNo, source.IsShowMap, source.IsShowyouTube, source.IsShowAboutUs, source.DealsinGroupCount, source.IsPerSaving3days, source.IsPerSaving2days
-            , source.IsPerSavingLastday, source.IsDollarSaving3days, source.IsDollarSaving2days, source.IsDollarSavingLastday, source.LastModifiedDate, source.isSaveBtnLable, source.DealFirstDiscountType, source.DealEndingDiscountType
+            , source.IsPerSavingLastday, source.IsDollarSaving3days, source.IsDollarSaving2days, source.IsDollarSavingLastday, source.LastModifiedDate, source.isSaveBtnLable, source.DealFirstDiscountType, source.DealEndingDiscountType, source.CashBackDeal, source.PinCode, source.CashBackDealCounter
             );
 
         _.each(source.CouponCategories, function (item) {
@@ -544,8 +561,8 @@
             VoucherCode4 = ko.observable(specifiedVoucherCode4),
             dealPrice = ko.observable(0),
             percentageSaving = ko.observable(0),
-            Saveing3rdlast =  ko.observable(0),
-            Saveing2ndlast =  ko.observable(0),
+            Saveing3rdlast = ko.observable(0),
+            Saveing2ndlast = ko.observable(0),
             Saveinglast = ko.observable(0),
             PerSav3rdlast = ko.observable(0),
             PerSav2ndlast = ko.observable(0),
@@ -583,7 +600,7 @@
         //            dic = 50;
         //        else if (disper == 6)
         //            dic = 60;
-            
+
 
 
         //        var result = 0;
@@ -592,12 +609,12 @@
         //        return result;
         //    },
         //    write:function(value){
-          
-            
+
+
         //    },
         //    owner:self
         //}),
-    
+
     per20Saving = ko.computed(function () {
 
         if (Price() != undefined && Price() != "" && Savings() != undefined && Savings() != "") {
@@ -613,9 +630,9 @@
          var result = 0;
          if (Price() != undefined && Price() != "" && Savings() != undefined && Savings() != "") {
              result = ((Price() - Savings()) * 100) / Price();
-             result=(result + 20).toFixed(2);
+             result = (result + 20).toFixed(2);
          }
-         return result+"%";
+         return result + "%";
      }),
       dollar10Value = ko.computed(function () {
           if (Savings() != undefined && Savings() != "")
@@ -683,7 +700,7 @@
            var result = ((Price() - Savings()) * 100) / Price();
            return (result + 30).toFixed(2) + "%";
        }
-       else 
+       else
            return 0 + "%";
    }),
     dollar30Value = ko.computed(function () {
@@ -700,7 +717,7 @@
              result = ((price - saving) * 100) / price;
              return result.toFixed(2) + "%";
          }
-         else 
+         else
              return 0 + "%";
      }),
 
@@ -760,7 +777,7 @@
             URL: URL,
             VoucherCode2: VoucherCode2,
             VoucherCode3: VoucherCode3,
-            VoucherCode4:VoucherCode4,
+            VoucherCode4: VoucherCode4,
             reset: reset,
             //perSaving: perSaving,
             per20Saving: per20Saving,
@@ -769,8 +786,8 @@
             per20Value: per20Value,
             per25Value: per25Value,
             per30Value: per30Value,
-            dollar10Value:dollar10Value,
-            dollar20Value:dollar20Value,
+            dollar10Value: dollar10Value,
+            dollar20Value: dollar20Value,
             dollar30Value: dollar30Value,
             dollar10perSaving: dollar10perSaving,
             dollar20perSaving: dollar20perSaving,

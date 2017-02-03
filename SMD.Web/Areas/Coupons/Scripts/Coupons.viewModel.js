@@ -1131,7 +1131,14 @@ define("Coupons/Coupons.viewModel",
                 couponModel().CouponPriceOptions()[0].Price(10);
                 couponModel().CouponPriceOptions()[0].URL('https://');
                 selectedPriceOption(couponModel().CouponPriceOptions()[0]);
-
+                if (couponModel().CouponListingMode() == 3) {
+                    isCash4dealVisible(true);
+                }
+                else {
+                    isCash4dealVisible(false);
+                    couponModel().CashBackDealCounter(0);
+                    couponModel().CashBackDeal(0);
+                }
                 perSaving();
                 couponModel().reset();
                 if (couponCategories().length > 0)
@@ -1671,12 +1678,17 @@ define("Coupons/Coupons.viewModel",
                     if (couponModel() != undefined) {
                         if (couponModel().CouponListingMode() == 1) {
                             islabelvisible(1);
+                            couponModel().CashBackDealCounter(0);
+                            couponModel().CashBackDeal(0);
                         }
                         else {
                             islabelvisible(2);
+                            couponModel().CashBackDealCounter(0);
+                            couponModel().CashBackDeal(0);
                         }
                         if (couponModel().CouponListingMode() == 3) {
                             isCash4dealVisible(true);
+                            couponModel().CashBackDealCounter($("#cashBackValue").val());
                         }
                         else {
                             isCash4dealVisible(false);
@@ -1684,6 +1696,9 @@ define("Coupons/Coupons.viewModel",
 
                     }
 
+                },
+                onchangeCashBackValue = function () {
+                    couponModel().CashBackDealCounter($("#cashBackValue").val());
                 },
 
 
@@ -3593,7 +3608,8 @@ define("Coupons/Coupons.viewModel",
                     ByGenderStatsChartAnalyticsData: ByGenderStatsChartAnalyticsData,
                     ByProfessionStatsChartAnalyticsData: ByProfessionStatsChartAnalyticsData,
                     ByAgeStatsChartAnalyticsData: ByAgeStatsChartAnalyticsData,
-                    isCash4dealVisible: isCash4dealVisible
+                    isCash4dealVisible: isCash4dealVisible,
+                    onchangeCashBackValue: onchangeCashBackValue
                 };
             })()
         };

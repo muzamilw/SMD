@@ -608,7 +608,11 @@ namespace SMD.MIS.ModelMappers
                 LastModifiedDate = source.CampaignEventHistories.ToList().Count > 0 ? source.CampaignEventHistories.ToList().LastOrDefault().EventDateTime : null,
                 isSaveBtnLable = source.isSaveBtnLable,
                 DealFirstDiscountType  = source.DealFirstDiscountType,
-                DealEndingDiscountType  = source.DealEndingDiscountType
+                DealEndingDiscountType  = source.DealEndingDiscountType,
+                CashBackDeal = source.CashBackDeal,
+                CashBackDealCounter = source.CashBackDealCounter,
+                PinCode=source.PinCode
+                
                 
 
               };
