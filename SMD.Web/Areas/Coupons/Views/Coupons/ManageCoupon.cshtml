@@ -655,19 +655,47 @@ else
                                         <div class="col-lg-2">
                                             <label for="txtBuyItlbl" class="control-label text-right tooltip-float floatNone" style="font-weight:bold;font-size:13px">List Deal Group for</label>
                                         </div>
-                                        <div class="radio col-lg-4">
+                                        <div class="radio col-lg-3">
                                             <input type="radio" name="optionsRadiosDelvTypes" value="1" id="optionsRadiosApplyFilterFree" data-bind="checked:CouponListingMode,event:{ change: $root.priceLabel}">
                                             <label for="optionsRadiosApplyFilterFree">
                                                 <span style="font-weight:bold;font-size:13px;">7 Day Flash Deal</span>
                                             </label>
                                             <span class="help-block text-right"></span>
                                         </div>
-                                        <div class="radio col-lg-4">
+                                        <div class="col-lg-4">
+                                            <img class="deal_Star pull-left" src="/Images/yellow_star.png">
+                                            <label for="txtBuyItlbl" class="control-label text-left tooltip-float floatNone" style="text-align:left">Deal auto expires after 7 Days </label>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-2"></div>
+                                        <div class="radio col-lg-3">
                                             <input type="radio" name="optionsRadiosDelvTypes" value="2" id="optionsRadiosApplyFilterOnce" data-bind="checked:CouponListingMode,event:{ change: $root.priceLabel}">
                                             <label for="optionsRadiosApplyFilterOnce">
                                                 <span style="font-weight:bold;font-size:13px;">30 Day Listing</span>
                                             </label>
                                             <span class="help-block text-right"></span>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <img class="deal_Star pull-left" src="/Images/yellow_star.png">
+                                            <label for="txtBuyItlbl" class="control-label text-left tooltip-float floatNone" style="text-align:left">Deal auto expires after 30 Days </label>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-2"></div>
+                                        <div class="radio col-lg-3">
+                                            <input type="radio" name="optionsRadiosDelvTypes" value="3" id="optionsRadiosApplyCashbackDeal" data-bind="checked:CouponListingMode,event:{ change: $root.priceLabel}">
+                                            <label for="optionsRadiosApplyCashbackDeal">
+                                                <span style="font-weight:bold;font-size:13px;">Cash Back Deal</span>
+                                            </label>
+                                            <span class="help-block text-right"></span>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <img class="deal_Star pull-left" src="/Images/red_Star.png">
+                                            <label for="txtBuyItlbl" class="control-label text-left tooltip-float floatNone" style="text-align:left">Deal auto expires after 5 Cash Back have been redemmed  </label>
+                                            <label for="txtBuyItlbl" class="control-label text-left tooltip-float floatNone" style="text-align:left;padding-top:0px;color:red">* Get Free Video Ad credits worth £5.00 </label>
                                         </div>
 
                                     </div>
@@ -677,7 +705,7 @@ else
 
                                         @*<input type="radio" name="optionsRadiosDelvTypes" value="1" id="optionsRadiosApplyFilterFree" data-bind="checked:CouponListingMode">
                                             <label for="optionsRadiosApplyFilterFree">
-                                                <span style="font-weight:bold;font-size:15px;">7 Day Flash Deal &nbsp;&nbsp;</span> <span class="defaultthemetxtclr">7 Day Listing, 1Deal Line, 1Push Notification,4 Email Delivered.</span>
+                                            <span style="font-weight:bold;font-size:15px;">7 Day Flash Deal &nbsp;&nbsp;</span> <span class="defaultthemetxtclr">7 Day Listing, 1Deal Line, 1Push Notification,4 Email Delivered.</span>
 
                                             </label>
                                             <span class="help-block text-right"></span>*@
@@ -686,7 +714,7 @@ else
 
                                         @*<input type="radio" name="optionsRadiosDelvTypes" value="2" id="optionsRadiosApplyFilterOnce" data-bind="checked:CouponListingMode">
                                             <label for="optionsRadiosApplyFilterOnce">
-                                                <span style="font-weight:bold;font-size:15px;">30 Day Listing</span>&nbsp;&nbsp; <span style="margin-left:13px;">30 Day Listing,Upto 6 Deal Lines, 1Push Notification,4 Email Delivered.</span>
+                                            <span style="font-weight:bold;font-size:15px;">30 Day Listing</span>&nbsp;&nbsp; <span style="margin-left:13px;">30 Day Listing,Upto 6 Deal Lines, 1Push Notification,4 Email Delivered.</span>
                                             </label>
                                             <span class="help-block text-right"></span>*@
                                     </div>
@@ -738,6 +766,23 @@ else
                                                 <option value="4" data-bind="visible:$root.disableDollOpp()==true">Extra £10 off on last 3 days</option>
                                                 <option value="5" data-bind="visible:$root.disableDollOpp()==true">Extra £10 off on 3rd last day & £20 off on last 2 days</option>
                                                 <option value="6" data-bind="visible:$root.disableDollOpp()==true">Extra £10 off on 3rd last day, £20 off on 2nd last day & £30 off on last day</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" data-bind="visible:$root.isCash4dealVisible">
+                                        <div class="col-lg-2" style="padding-left:0px;">
+                                            <label for="txtBuyItlbl" class="control-label text-right tooltip-float floatNone">CASH BACK Value</label>
+                                        </div>
+                                        <div class="col-lg-10">
+                                            <select class="form-control" style="width:73%!important;" id="cashBackValue">
+                                                <option value="1">£1</option>
+                                                <option value="2">£2</option>
+                                                <option value="3">£3</option>
+                                                <option value="4" selected>£5</option>
+                                                <option value="5">£10</option>
+                                                <option value="6">£20</option>
+                                                <option value="7">£25</option>
+                                                <option value="8">£50</option>
                                             </select>
                                         </div>
                                     </div>
@@ -849,10 +894,10 @@ else
                                             <label style="color:gray;font-size:13px;margin-left:-6px;">Emails are sent to our members on the 1st, 3rd last, 2nd last and the last day the first Deal Line</label>
                                         </div>
                                         @*<div class="adsubHeading Theme_standard_clr" data-bind="visible: $root.previewScreenNumber() == 2">
-                                                Create up to 6 Deal Lines.
+                                            Create up to 6 Deal Lines.
 
-                                                <label style="color:gray;font-size:13px;">The first Deal Line will be used in all Notification &Emails</label>
-                                                <button class="btn  btn-success" id="saveBtn" style="width:80px;">save Me</button>
+                                            <label style="color:gray;font-size:13px;">The first Deal Line will be used in all Notification &Emails</label>
+                                            <button class="btn  btn-success" id="saveBtn" style="width:80px;">save Me</button>
                                             </div>*@
 
                                     </div>
@@ -1046,7 +1091,7 @@ else
                                             </div>
                                             <div class="modal-body " style="padding-left:10px;padding-bottom:35px; background-color:white">
                                                 <div class="col-sm-1" style="margin-top:-11px;margin-right:6px;">
-                                                    <img src="/Images/faceBook_Icon.png"/>
+                                                    <img src="/Images/faceBook_Icon.png" />
                                                 </div>
                                                 <div class="col-sm-1" style="margin-top:-11px;margin-right:6px;">
                                                     <img src="/Images/twiter_Icon.png" />
@@ -1819,7 +1864,7 @@ else
                             <div class="col-lg-12" data-bind="with: $root.couponModel" style="padding-left:23px;display:none">
                                 @*<input type="radio" name="optionsRadiosDelvTypes" value="1" id="optionsRadiosApplyFilterFree" data-bind="checked:CouponListingMode">
                                     <label for="optionsRadiosApplyFilterFree">
-                                        <span class="panelfntSize">List for 14 days-FREE</span> .
+                                    <span class="panelfntSize">List for 14 days-FREE</span> .
                                     </label>*@
                                 <div class="col-lg-9 fontsize11" style="padding-left: 2px;padding-top: 12px;">
                                     List for 14 days-FREE.
@@ -1845,7 +1890,7 @@ else
                                 </div>
                                 @*<input type="radio" name="optionsRadiosDelvTypes" value="2" id="optionsRadiosApplyFilterOnce" data-bind="checked:CouponListingMode">
                                     <label for="optionsRadiosApplyFilterOnce">
-                                        <span class="panelfntSize" style="margin-left:1px;">List for 6 months-$29 usd</span>.
+                                    <span class="panelfntSize" style="margin-left:1px;">List for 6 months-$29 usd</span>.
                                     </label>*@
                             </div>
 
@@ -1879,7 +1924,7 @@ else
                     </div>
                     @*<div class="col-lg-12 text-center" style="margin-bottom:-8px;padding-top:5px;">
                         <p style=" font-size:16px;color:red;font-weight:bold" class="text-center">  BETA Release - Advertise for FREE<br /> Until 1<sup>st</sup> Sep '17</p>
-                    </div>*@
+                        </div>*@
                     <div class="col-lg-12" style="padding-left:24px;margin-top:12px;">
 
                         <span style=" font-size:12px;">  Learn more about 'PPCV'</span><img style="height:14px;" src="/Content/Images/Drop_Arrow.png" data-toggle="collapse" data-target="#demo">
@@ -1933,6 +1978,28 @@ else
                         <div class="status_date_span" style="margin-left:0px;margin-top:0px;">
                             @*Last modified <span style="margin-left:3px"></span><span data-bind="dateString:$root.modifiedDate,datePattern: 'DD/MM/YYYY,h:mm a'">12 april 2014</span>*@
                             Last modified <span style="margin-left:3px"></span><span data-bind="text: moment($root.modifiedDate()).format('DD MMM YYYY h:mm a')">12 april 2014</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="row" data-bind="visible:$root.isCash4dealVisible">
+                        <div class="col-lg-8" style="padding-left:0px;">
+                            <div class="status_date_span text-left" style="margin-left:0px;">
+                                <label style="text-align:left;font-size:13px;"> Coupons left to issue before this Deals auto expires</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 pull-right" style="padding-top:12px;padding-left:55px;">
+                            <input type="text" style="float:left; color:#127abd; font-weight: bold;font-size: 15px; width:42px; text-align:right;color:red;background-color:white" readonly="readonly" name="Budget" class="form-control" id="txtcashDealExpire" value="5">
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-8" style="padding-top:30px;padding-left:0px;">
+                                <div class="status_date_span text-left">
+                                    <label style="text-align:left;font-size:13px;">Enter Your PIN Code to redeem each Cash Back coupon </label>
+                                </div>
+                            </div>
+                            <div class="col-lg-4" style="padding-top:44px;">
+                                <input type="text" style="float:left; color:#127abd; font-weight: bold;font-size: 15px; width:100px;color:red;background-color:white" name="Budget" class="form-control" id="txtPincode">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2101,8 +2168,8 @@ else
             <div>
                 <div class="tabs-wrapper profile-tabs">
                     @*<ul id="stockLabelTabListItem" class="nav nav-tabs">
-                            <!-- ko template: { name: 'tabListTemplate', foreach: $root.couponModel().CouponPriceOptions } -->
-                            <!-- /ko -->
+                        <!-- ko template: { name: 'tabListTemplate', foreach: $root.couponModel().CouponPriceOptions } -->
+                        <!-- /ko -->
                         </ul>*@
                     <div class="tab-content" id="stockLabelTabListItemDetails">
                         <!-- ko template: { name: 'TabDetailTemplate', foreach: $root.couponModel().CouponPriceOptions } -->
@@ -2236,75 +2303,75 @@ else
             </div>
 
             @*<div class="row" style="padding-top:20px;" data-bind="visible:$root.couponModel().IsPerSaving3days">
-                    <div class="col-lg-4" style="padding-right:0px;">
-                        <div>
-                            <label>
-                                further 20 % Saving on last 3 days
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-lg-2">
-                        <label class="pull-right" style="margin-top:5px;display:none">
-                            Coupon Code
-                        </label>
-                    </div>
-                    <div class="col-lg-2">
-                        <input class="form-control" style="display:none" />
-                    </div>
-                    <div class="col-lg-2">
-                        <span>$</span><span data-bind="text:per20Saving"></span>
-                    </div>
-                    <div class="col-lg-2" style="margin-top:5px;">
-                        <span style="color:green" data-bind="text:per20Value"></span>
-                    </div>
+                <div class="col-lg-4" style="padding-right:0px;">
+                <div>
+                <label>
+                further 20 % Saving on last 3 days
+                </label>
+                </div>
+                </div>
+                <div class="col-lg-2">
+                <label class="pull-right" style="margin-top:5px;display:none">
+                Coupon Code
+                </label>
+                </div>
+                <div class="col-lg-2">
+                <input class="form-control" style="display:none" />
+                </div>
+                <div class="col-lg-2">
+                <span>$</span><span data-bind="text:per20Saving"></span>
+                </div>
+                <div class="col-lg-2" style="margin-top:5px;">
+                <span style="color:green" data-bind="text:per20Value"></span>
+                </div>
                 </div>
 
                 <div class="row" style="padding-top:20px;" data-bind="visible:$root.couponModel().IsPerSaving2days">
-                    <div class="col-lg-4" style="padding-right:0px;">
-                        <div>
-                            <label>
-                                further 25 % Saving on last 2 days
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-lg-2">
-                        <label class="pull-right" style="margin-top:5px;display:none">
-                            Coupon Code
-                        </label>
-                    </div>
-                    <div class="col-lg-2">
-                        <input class="form-control" style="display:none" />
-                    </div>
-                    <div class="col-lg-2">
-                        <span>$</span><span data-bind="text:per25Saving"></span>
-                    </div>
-                    <div class="col-lg-2" style="margin-top:5px;">
-                        <span style="color:green" data-bind="text:per25Value"></span>
-                    </div>
+                <div class="col-lg-4" style="padding-right:0px;">
+                <div>
+                <label>
+                further 25 % Saving on last 2 days
+                </label>
+                </div>
+                </div>
+                <div class="col-lg-2">
+                <label class="pull-right" style="margin-top:5px;display:none">
+                Coupon Code
+                </label>
+                </div>
+                <div class="col-lg-2">
+                <input class="form-control" style="display:none" />
+                </div>
+                <div class="col-lg-2">
+                <span>$</span><span data-bind="text:per25Saving"></span>
+                </div>
+                <div class="col-lg-2" style="margin-top:5px;">
+                <span style="color:green" data-bind="text:per25Value"></span>
+                </div>
                 </div>
 
                 <div class="row" style="padding-top:20px;" data-bind="visible:$root.couponModel().IsPerSavingLastday">
-                    <div class="col-lg-4" style="padding-right:0px;">
-                        <div>
-                            <label>
-                                further 30 % Saving on last day
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-lg-2">
-                        <label class="pull-right" style="margin-top:5px;display:none">
-                            Coupon Code
-                        </label>
-                    </div>
-                    <div class="col-lg-2">
-                        <input class="form-control" style="display:none" />
-                    </div>
-                    <div class="col-lg-2">
-                        <span>$</span><span data-bind="text:per30Saving"></span>
-                    </div>
-                    <div class="col-lg-2" style="margin-top:5px;">
-                        <span style="color:green" data-bind="text:per30Value"></span>
-                    </div>
+                <div class="col-lg-4" style="padding-right:0px;">
+                <div>
+                <label>
+                further 30 % Saving on last day
+                </label>
+                </div>
+                </div>
+                <div class="col-lg-2">
+                <label class="pull-right" style="margin-top:5px;display:none">
+                Coupon Code
+                </label>
+                </div>
+                <div class="col-lg-2">
+                <input class="form-control" style="display:none" />
+                </div>
+                <div class="col-lg-2">
+                <span>$</span><span data-bind="text:per30Saving"></span>
+                </div>
+                <div class="col-lg-2" style="margin-top:5px;">
+                <span style="color:green" data-bind="text:per30Value"></span>
+                </div>
                 </div>*@
 
             @*<div class="row" style="padding-top:20px;">
@@ -2314,75 +2381,75 @@ else
                 </div>*@
 
             @*<div class="row" style="padding-top:20px;" data-bind="visible:$root.couponModel().IsDollarSaving3days">
-                    <div class="col-lg-4" style="padding-right:0px;">
-                        <div>
-                            <label>
-                                further $10 Saving on last 3 days
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-lg-2">
-                        <label class="pull-right" style="margin-top:5px;display:none">
-                            Coupon Code
-                        </label>
-                    </div>
-                    <div class="col-lg-2">
-                        <input class="form-control" style="display:none" />
-                    </div>
-                    <div class="col-lg-2">
-                        <span>$</span><span data-bind="text:dollar10Value"></span>
-                    </div>
-                    <div class="col-lg-2" style="margin-top:5px;">
-                        <span style="color:green" data-bind="text:dollar10perSaving"></span>
-                    </div>
+                <div class="col-lg-4" style="padding-right:0px;">
+                <div>
+                <label>
+                further $10 Saving on last 3 days
+                </label>
+                </div>
+                </div>
+                <div class="col-lg-2">
+                <label class="pull-right" style="margin-top:5px;display:none">
+                Coupon Code
+                </label>
+                </div>
+                <div class="col-lg-2">
+                <input class="form-control" style="display:none" />
+                </div>
+                <div class="col-lg-2">
+                <span>$</span><span data-bind="text:dollar10Value"></span>
+                </div>
+                <div class="col-lg-2" style="margin-top:5px;">
+                <span style="color:green" data-bind="text:dollar10perSaving"></span>
+                </div>
                 </div>
 
                 <div class="row" style="padding-top:20px;" data-bind="visible:$root.couponModel().IsDollarSaving2days">
-                    <div class="col-lg-4" style="padding-right:0px;">
-                        <div>
-                            <label>
-                                further $20 Saving on last 2 days
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-lg-2">
-                        <label class="pull-right" style="margin-top:5px;display:none">
-                            Coupon Code
-                        </label>
-                    </div>
-                    <div class="col-lg-2">
-                        <input class="form-control" style="display:none" />
-                    </div>
-                    <div class="col-lg-2">
-                        <span>$</span><span data-bind="text:dollar20Value"></span>
-                    </div>
-                    <div class="col-lg-2" style="margin-top:5px;">
-                        <span style="color:green" data-bind="text:dollar20perSaving"></span>
-                    </div>
+                <div class="col-lg-4" style="padding-right:0px;">
+                <div>
+                <label>
+                further $20 Saving on last 2 days
+                </label>
+                </div>
+                </div>
+                <div class="col-lg-2">
+                <label class="pull-right" style="margin-top:5px;display:none">
+                Coupon Code
+                </label>
+                </div>
+                <div class="col-lg-2">
+                <input class="form-control" style="display:none" />
+                </div>
+                <div class="col-lg-2">
+                <span>$</span><span data-bind="text:dollar20Value"></span>
+                </div>
+                <div class="col-lg-2" style="margin-top:5px;">
+                <span style="color:green" data-bind="text:dollar20perSaving"></span>
+                </div>
                 </div>
 
                 <div class="row" style="padding-top:20px;" data-bind="visible:$root.couponModel().IsDollarSavingLastday">
-                    <div class="col-lg-4" style="padding-right:0px;">
-                        <div>
-                            <label>
-                                further $30 Saving on last days
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-lg-2">
-                        <label class="pull-right" style="margin-top:5px;display:none">
-                            Coupon Code
-                        </label>
-                    </div>
-                    <div class="col-lg-2">
-                        <input class="form-control" style="display:none" />
-                    </div>
-                    <div class="col-lg-2">
-                        <span>$</span><span data-bind="text:dollar30Value"></span>
-                    </div>
-                    <div class="col-lg-2" style="margin-top:5px;">
-                        <span style="color:green" data-bind="text:dollar30perSaving"></span>
-                    </div>
+                <div class="col-lg-4" style="padding-right:0px;">
+                <div>
+                <label>
+                further $30 Saving on last days
+                </label>
+                </div>
+                </div>
+                <div class="col-lg-2">
+                <label class="pull-right" style="margin-top:5px;display:none">
+                Coupon Code
+                </label>
+                </div>
+                <div class="col-lg-2">
+                <input class="form-control" style="display:none" />
+                </div>
+                <div class="col-lg-2">
+                <span>$</span><span data-bind="text:dollar30Value"></span>
+                </div>
+                <div class="col-lg-2" style="margin-top:5px;">
+                <span style="color:green" data-bind="text:dollar30perSaving"></span>
+                </div>
                 </div>*@
 
             <div class="row" style="margin-top:10px;">
@@ -2474,7 +2541,7 @@ else
 
     function StartVideoDef() {
 
-       
+
         var vidUrl = 'https://www.youtube.com/watch?v=Xcsp0486olY';
         var myId = getId(vidUrl);
 

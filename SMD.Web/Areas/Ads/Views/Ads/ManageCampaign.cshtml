@@ -32,7 +32,7 @@ else
                     <div class="col-lg-3 pull-right" style="margin-right:-1px;display:none">
                         <div class="pull-right">
                             <div class="status_date_span" style="margin-top:26px;">
-                                Last modified <span style="margin-left:3px"></span ><span data-bind="dateString:ModifiedDateTime()"></span>
+                                Last modified <span style="margin-left:3px"></span><span data-bind="dateString:ModifiedDateTime()"></span>
                             </div>
                         </div>
                     </div>
@@ -705,7 +705,7 @@ else
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                                 <div id="first_cont" data-bind="visible:$root.IsBroadMarketing()==true">
@@ -834,8 +834,8 @@ else
                                         <span data-bind="text: $root.professionppc()"></span>
                                     </div>
                                 </div>
-                                
-                                <div id="thirdCont" >
+
+                                <div id="thirdCont">
 
                                     <div class="col-lg-12" style="height:45px;">
                                         <div style="height:34px;" class="borderbtmline ">
@@ -858,7 +858,7 @@ else
                                         </div>
                                     </div>
 
-                                    <div class="form-group margin-btm26" >
+                                    <div class="form-group margin-btm26">
                                         @*<div class="col-lg-2">*@
                                         @*<label for="txtadditionalCrit" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Advanced matching options</label>*@
                                         @*</div>*@
@@ -1086,17 +1086,17 @@ else
                                                     <div data-bind="foreach: AdCampaignTargetLocations">
                                                         <!-- ko if: $index() ==0 -->
                                                         <span class="pull-left" data-bind="text: City()"></span><span class="pull-left" data-bind="text:'(' + Radius() + 'Km)'"></span>
-                                                        
+
                                                         <!-- /ko -->
                                                         <!-- ko if: $index() != 0 -->
                                                         <span class="pull-left" style="margin-left:6px;" data-bind="text: City()"></span><span class="pull-left" data-bind="text:'(' + Radius() + 'Km)'"></span>
-                                                        
+
                                                         <!-- /ko -->
                                                     </div>
                                                     <div class="clearfix"></div>
                                                     <div data-bind="foreach: AdCampaignTargetCriterias">
                                                         <!-- ko if:Type()!=4  -->
-                                                        
+
                                                         <span class="pull-left" data-bind="text: questionString()"></span><span class="pull-left" data-bind="text:' = ' + answerString()"></span>
                                                         <div class="clearfix"></div>
                                                         <!-- /ko -->
@@ -1156,8 +1156,8 @@ else
                                 <div class="row" style="margin-top:12px;">
                                     <div class="col-lg-12" style="padding-left:22px;" data-bind="with: $root.campaignModel">
                                         <div class="radio col-lg-6" style="text-align: left;">
-                                            
-                                            <input type="radio" name="optionsRadioTypes" value="1"id="optionsRadioFree" data-bind="checked:isAdDelivery,event:{ change: $root.onDeliveryChange}">
+
+                                            <input type="radio" name="optionsRadioTypes" value="1" id="optionsRadioFree" data-bind="checked:isAdDelivery,event:{ change: $root.onDeliveryChange}">
                                             <label for="optionsRadioFree" style="color:red;font-weight:500;font-size:14px;">
                                                 FREE
                                             </label>
@@ -1169,7 +1169,7 @@ else
                                             <label data-bind="visible:$root.CurrentMode()==4">Deliver upto 10 display ads per day.</label>
                                         </div>
                                         <div class="radio col-lg-12" style="text-align: left;">
-                                            <input type="radio" name="optionsRadiosTypes" value="2"id="optionsRadiosIncrease" data-bind="checked:isAdDelivery,event:{ change: $root.onDeliveryChange}">
+                                            <input type="radio" name="optionsRadiosTypes" value="2" id="optionsRadiosIncrease" data-bind="checked:isAdDelivery,event:{ change: $root.onDeliveryChange}">
                                             <label for="optionsRadiosIncrease" style="color:red ;font-weight:500;font-size:14px;">
                                                 Increase Delivery
                                             </label>
@@ -1242,39 +1242,46 @@ else
 
 
                                     </div>
-                                   
 
-                                   
+
+
                                 </div>
                             </div>
 
                         </div>
 
 
-                        
-                        <div data-bind="with: $root.campaignModel"style="padding-bottom:15px;">
+
+                        <div data-bind="with: $root.campaignModel" style="padding-bottom:15px;">
                             <div data-bind="visible:$root.IsthisEditCamapiagn">
                                 <div class="row" id="last_mod_panel" data-bind="visible:$root.IsthisEditCamapiagn">
 
                                     <div class="pull-left">
                                         <div class="status_date_span" style="margin-left:0px;margin-top:0px;">
                                             Last modified <span style="margin-left:3px"></span><span data-bind="text: moment(ModifiedDateTime()).format('DD MMM YYYY h:mm a')"></span>
-                                           
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row Subpanels" style="line-height: 2;padding:3px;">
+                        <div class="row">
+                            <div class="col-lg-12 text-left" style="margin-bottom:0px;padding-top:5px;padding-left:0px;">
+                                <button class="btn btn-danger free_VideoAd_btn" id="btnFreeAds" data-bind="text:$root.videoAdbtnLabel" data-toggle="modal" data-target=".model_youtube_link" onclick="openYoutubeVideo();"></button>
+                            </div>
+                        </div>
+                        
+                        <div class="row " style="line-height: 2;padding:0px;">
 
-                            <div class="col-lg-12" style="padding-left:24px;margin-top:6px;">
-                                <div class="col-lg-12 text-center" style="margin-bottom:0px;padding-top:5px;padding-left:0px;">
-                                    <p style=" font-size:14px;color:#127abd;font-weight:500;line-height:1;" class="text-left"> Create Cash-a-Mon Deals and  get Free PPR credits to deliver more Video Ads.</p>
-                                </div>
-                                <span style=" font-size:12px;">  Learn more about 'PPR'</span><img style="height:14px;" src="/Content/Images/Drop_Arrow.png" data-toggle="collapse" data-target="#demo">
+                            <div class="col-lg-12" style="padding-left:0px;margin-top:-3px;">
+
+                                @*<div class="col-lg-12 text-center" style="margin-bottom:0px;padding-top:5px;padding-left:0px;">
+                                        <p style=" font-size:14px;color:#127abd;font-weight:500;line-height:1;" class="text-left"> Create Cash-a-Mon Deals and  get Free PPR credits to deliver more Video Ads.</p>
+                                    </div>*@
+                                <span style=" font-size:12px;color:white">  Learn more about 'PPR'</span><img style="height:7px;" src="/Content/Images/drop_arrowWhite.png" data-toggle="collapse" data-target="#demo">
 
                             </div>
-                            </div>
+                        </div>
                         <div class="row Subpanels collapse" id="demo">
                             <div class="col-lg-12" style="font-size:12px;">
                                 <div class="row">
@@ -1315,43 +1322,43 @@ else
 
 
 
-                            <div class="clearfix">
-                            </div>
+                        <div class="clearfix">
+                        </div>
 
-                            <div class="col-lg-11" data-bind="" style="display:none;  position: absolute;
+                        <div class="col-lg-11" data-bind="" style="display:none;  position: absolute;
     bottom: 15px;
     margin-left: -10px;">
-                                <div style="    background: rgb(69,68,142);
+                            <div style="    background: rgb(69,68,142);
     color: white;
     padding: 13px;
     text-align: center;">
-                                    Our Digital Gurus are ready to help you
-                                </div>
-                                <div style="    background: rgb(107,106,254);
+                                Our Digital Gurus are ready to help you
+                            </div>
+                            <div style="    background: rgb(107,106,254);
     color: white;
     font-size: 12px;
     line-height: 2;">
-                                    <div class="pull-left">
-                                        <img src="/Content/Images/AD_Campaign_cartoon.png" style="    width: 64px;
+                                <div class="pull-left">
+                                    <img src="/Content/Images/AD_Campaign_cartoon.png" style="    width: 64px;
     margin-top: -3px;
     margin-left: 20px;">
-                                    </div>
-                                    <div class="pull-left" style="margin-left: 20px;">
-                                        <span>Make video Ads</span><br><br>
-                                        <span>Create and Manage your </span><br>
-                                        <span>Ad Campaigns and Surveys</span>
-                                    </div>
-                                    <div class="clearfix">
-                                    </div>
                                 </div>
-                                <div style="    background: rgb(69,68,142);
+                                <div class="pull-left" style="margin-left: 20px;">
+                                    <span>Make video Ads</span><br><br>
+                                    <span>Create and Manage your </span><br>
+                                    <span>Ad Campaigns and Surveys</span>
+                                </div>
+                                <div class="clearfix">
+                                </div>
+                            </div>
+                            <div style="    background: rgb(69,68,142);
     color: white;
     padding: 13px;
     text-align: center;">
-                                    +44 800 1234 567
-                                </div>
+                                +44 800 1234 567
                             </div>
                         </div>
+                    </div>
                     <div class="col-lg-9" style="padding-left:0px;" data-bind="visible: !$root.isAdvertdashboardVisible()">
 
                         <div class="col-lg-12 form-horizontal" data-bind="with: $root.campaignModel" style="padding-left:0px;display:none;">
@@ -1715,7 +1722,7 @@ else
 
                                     <div id="secondCont" data-bind="with: $root.campaignModel">
 
-                                     
+
 
                                         <div id="basic_targeting" data-bind="visible:$root.IsBroadMarketing()==true">
                                             <div class="form-group margin-btm26">
@@ -1830,7 +1837,7 @@ else
                                                     </div>
                                                 </div>
                                             </div>
-                                            
+
                                         </div>
                                     </div>
                                     <div id="first_cont" data-bind="visible:$root.IsBroadMarketing()==true">
@@ -1960,7 +1967,7 @@ else
                                     </div>
 
 
-                                    <div id="thirdCont" >
+                                    <div id="thirdCont">
 
                                         <div class="col-lg-12" style="height:45px;">
                                             <div style="height:34px;" class="borderbtmline ">
@@ -2471,7 +2478,7 @@ else
                                             <div class="col-lg-12" style="padding:0px;">
                                                 <div class="adsubHeading Theme_standard_clr">
 
-                                                    <div style="height:48px;display:none;" class="borderbtmline" >
+                                                    <div style="height:48px;display:none;" class="borderbtmline">
 
                                                         <div class="col-lg-2 row header" style="margin-top:20px;">
                                                             <label class="control-label modelHeading">Criteria</label>
@@ -3485,7 +3492,7 @@ else
         <div class="modal-dialog" style=" width:660px;" =4">
             <div class="col-lg-12" style=" margin-right: 35px; width:466px;">
                 <div style="position: relative;top:128px;left: 413px;">
-    
+
                     <img id="closePop" src="/Content/Images/Close_Button.png" title="Close" width="20" data-dismiss="modal" style="right:14px!important;cursor:pointer" />
                 </div>
                 <div id="youtube_body" style="margin-top:95px;">
@@ -4391,15 +4398,15 @@ else
     function playVideo(event) {
 
         var playSelectedFile = function (event) {
-            
+
             var file = this.files[0]
             var type = file.type
-            
+
             var videoNode = document.querySelectorAll('.main_video')
-           
+
             var canPlay = videoNode[0].canPlayType(type)
             var canPlay = videoNode[1].canPlayType(type)
-            
+
 
 
             videoNode[1].removeAttribute("controls")
@@ -4414,7 +4421,7 @@ else
 
             videoNode[0].src = fileURL
             videoNode[1].src = fileURL
-            
+
         }
         var inputNode = document.querySelector('#videoUploader')
 
@@ -4572,7 +4579,7 @@ else
     function openYoutubeVideo() {
         //   if ($("#viedoLink").val() != '') {
         $("#myCodeee").css("display", "block");
-        
+
         StartVideoDef();
         // StartVideo($("#viedoLink").val());
         // }

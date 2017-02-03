@@ -40,6 +40,7 @@ define("ads/ads.viewModel",
                     BuyItStatus = ko.observable(false),
                     showLandingPageUrl = ko.observable(true),
                     StatusCodeName = ko.observable(''),
+                    videoAdbtnLabel = ko.observable(''),
                     StatusCodeImage = ko.observable(''),
                     IsvideoBtn = ko.observable(false),
                     IsGameAds = ko.observable(false),
@@ -2527,6 +2528,7 @@ define("ads/ads.viewModel",
                                         $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,#btnPauseCampaign,.lang_delSurvey").css("display", "none");
                                         $("#saveBtn").css("display", "none")
                                         $("#btnCancel,#btnPauseCampaign,#btnClose").removeAttr('disabled');
+                                        $("#btnFreeAds").removeAttr('disabled');
                                         campaignModel().StatusValue("Pending Approval");
                                     } else if (campaignModel().Status() == 3) {
                                         $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
@@ -2536,6 +2538,7 @@ define("ads/ads.viewModel",
                                         //$("#btnPauseCampaign").css("display", "inline-block");
                                         //$("#btnCancel,#btnPauseCampaign,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
                                         $("#btnPauseCampaign").css("display", "inline-block");
+                                        $("#btnFreeAds").removeAttr('disabled');
                                         campaignModel().StatusValue("Live");
                                         //isTerminateBtnVisible(true);
                                         isNewCampaignVisible(true);
@@ -2546,16 +2549,19 @@ define("ads/ads.viewModel",
                                         $("#btnResumeCampagin").css("display", "inline-block");
                                         $("#btnCancel,#btnResumeCampagin,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
                                         campaignModel().StatusValue("Paused");
+                                        $("#btnFreeAds").removeAttr('disabled');
                                         // isTerminateBtnVisible(true);
                                         isNewCampaignVisible(true);
                                     } else if (campaignModel().Status() == 5) {
                                         campaignModel().StatusValue("Completed");
+                                        $("#btnFreeAds").removeAttr('disabled');
                                     } else if (campaignModel().Status() == 6) {
                                         //  $("input,button,textarea,select").attr('disabled', 'disabled'); // disable all controls
                                         $("#btnSubmitForApproval2").css("display", "inline-block");
                                         $("#btnSubmitForApproval2").removeAttr('disabled');
                                         $("#btnPauseCampaign").css("display", "none");
                                         campaignModel().StatusValue("Rejected");
+                                        $("#btnFreeAds").removeAttr('disabled');
                                     } else if (campaignModel().Status() == 7) {
 
                                         campaignModel().StatusValue("Remove");
@@ -2564,6 +2570,7 @@ define("ads/ads.viewModel",
                                         $("#saveBtn").css("display", "none");
                                         // $("#btnPauseCampaign").css("display", "inline-block");
                                         $("#btnCancel,#btnPauseCampaign,#btnCopyCampaign,#btnArchive").removeAttr('disabled');
+                                        $("#btnFreeAds").removeAttr('disabled');
                                         isNewCampaignVisible();
                                         isShowArchiveBtn(false);
                                     } else if (item.Status == 9) {
@@ -3933,6 +3940,7 @@ define("ads/ads.viewModel",
                         UrlHeadings("Leatherboard banner click thru url to your landing  page.");
                         DisplayImage(true);
                         StatusCodeName("Display Ad");
+                        videoAdbtnLabel("Get Free Display Ad Credits");
                         StatusCodeImage("/Content/Images/Displaymod.png");
                         IsvideoBtn(false);
                         IsGameAds(true);
@@ -3943,6 +3951,7 @@ define("ads/ads.viewModel",
                     else {
                         UrlHeadings("Call for Action Button");
                         IsShownforVideo(true);
+                        videoAdbtnLabel("Get Free Video Ad Credits");
                         VideoImage(true);
                         IsvideoBtn(true);
                         IsGameAds(false);
@@ -4233,7 +4242,8 @@ define("ads/ads.viewModel",
                     ByGenderStatsChartAnalyticsData : ByGenderStatsChartAnalyticsData, 
                     ByProfessionStatsChartAnalyticsData : ByProfessionStatsChartAnalyticsData,
                     ByAgeStatsChartAnalyticsData: ByAgeStatsChartAnalyticsData,
-                    isPPRVisible: isPPRVisible
+                    isPPRVisible: isPPRVisible,
+                    videoAdbtnLabel: videoAdbtnLabel
                 };
             })()
         };
