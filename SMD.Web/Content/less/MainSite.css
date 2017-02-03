@@ -1341,6 +1341,11 @@ margin-top:2px;
     height:auto;
     width: 60px;
 }
+.deal_Star {
+    height:auto;
+    width: 30px;
+    margin-left:-45px;
+}
 .defvideoimage {
     height: 48px;
     width: 59px;
@@ -1450,6 +1455,19 @@ margin-top:2px;
     padding: 8px 10px 8px 47px!important;
     background-repeat: no-repeat!important;
     background-color: #27ae60!important;
+}
+.free_VideoAd_btn {
+      background: url(/Images/yt_icon.png)!important;
+    background-position: 244px 5px!important;
+    padding: 6px 10px 8px 10px!important;
+    background-repeat: no-repeat!important;
+    background-color: #e74c3c!important;
+    text-align:left;
+    width:288px;
+    font-weight:bold;
+    font-size:16px;
+       
+    
 }
 
 .create_polls_btn {

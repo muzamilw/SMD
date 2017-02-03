@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="SMDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SMDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="AccountId" />
@@ -516,6 +516,9 @@
           <Property Name="isSaveBtnLable" Type="int" />
           <Property Name="DealFirstDiscountType" Type="int" />
           <Property Name="DealEndingDiscountType" Type="int" />
+          <Property Name="CashBackDeal" Type="int" />
+          <Property Name="PinCode" Type="int" />
+          <Property Name="CashBackDealCounter" Type="int" />
         </EntityType>
         <EntityType Name="CouponCategories">
           <Key>
@@ -2784,15 +2787,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Parameter Name="Profession" Type="nvarchar" Mode="In" />
           <Parameter Name="city" Type="nvarchar" Mode="In" />
         </Function>
-        <Function Name="getCampaignImpressionByAgeByCId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="getCampaignImpressionByGenderByCId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="getCampaignImpressionByProfessionByCId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Id" Type="int" Mode="In" />
-        </Function>
         <Function Name="GetCampaignPerformanceWeeklyStats" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="getCampaignROItblAnalytic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="int" Mode="In" />
@@ -2819,24 +2813,11 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Parameter Name="Id" Type="int" Mode="In" />
           <Parameter Name="DateRange" Type="int" Mode="In" />
         </Function>
-        <Function Name="getDealImpressionByAgeByCouponId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="getDealImpressionByGenderByCouponId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="getDealImpressionByProfessionByCouponId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Id" Type="int" Mode="In" />
-        </Function>
         <Function Name="getDealStatByCouponIdFormAnalytic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="int" Mode="In" />
           <Parameter Name="gender" Type="int" Mode="In" />
           <Parameter Name="ageRange" Type="int" Mode="In" />
           <Parameter Name="type" Type="int" Mode="In" />
-        </Function>
-        <Function Name="getDealStatByDDProfessionByCId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Id" Type="int" Mode="In" />
-          <Parameter Name="profession" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="getDisplayAdsCampaignByCampaignIdAnalytics" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CampaignId" Type="int" Mode="In" />
@@ -2943,15 +2924,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Parameter Name="mode" Type="int" Mode="In" />
         </Function>
         <Function Name="ResetProductsUserResponses" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="SearchCampaigns" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Status" Type="int" Mode="In" />
-          <Parameter Name="keyword" Type="nvarchar" Mode="In" />
-          <Parameter Name="companyId" Type="int" Mode="In" />
-          <Parameter Name="fromRoww" Type="int" Mode="In" />
-          <Parameter Name="toRow" Type="int" Mode="In" />
-          <Parameter Name="adminMode" Type="bit" Mode="In" />
-          <Parameter Name="type" Type="int" Mode="In" />
-        </Function>
         <Function Name="SearchCoupons" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="categoryId" Type="int" Mode="In" />
           <Parameter Name="type" Type="int" Mode="In" />
@@ -4004,17 +3976,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <FunctionImport Name="GetCouponsByCompanyId" ReturnType="Collection(DomainModels.GetCouponsByCompanyId_Result)">
           <Parameter Name="CompanyId" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="SearchCoupons" ReturnType="Collection(DomainModels.SearchCoupons_Result)">
-            <Parameter Name="categoryId" Mode="In" Type="Int32" />
-            <Parameter Name="type" Mode="In" Type="Int32" />
-            <Parameter Name="keywords" Mode="In" Type="String" />
-            <Parameter Name="distance" Mode="In" Type="Int32" />
-            <Parameter Name="Lat" Mode="In" Type="String" />
-            <Parameter Name="Lon" Mode="In" Type="String" />
-            <Parameter Name="UserId" Mode="In" Type="String" />
-            <Parameter Name="FromRow" Mode="In" Type="Int32" />
-            <Parameter Name="ToRow" Mode="In" Type="Int32" />
-          </FunctionImport>
           <EntitySet Name="UserFavouriteCoupons" EntityType="DomainModels.UserFavouriteCoupon" />
           <EntitySet Name="CompaniesAspNetUsers" EntityType="DomainModels.CompaniesAspNetUser" />
           <AssociationSet Name="FK_CompaniesAspNetUsers_AspNetRoles" Association="DomainModels.FK_CompaniesAspNetUsers_AspNetRoles">
@@ -4028,24 +3989,11 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySet Name="vw_CompanyUsers" EntityType="DomainModels.vw_CompanyUsers" />
           <EntitySet Name="BranchCategories" EntityType="DomainModels.BranchCategory" />
           <EntitySet Name="CompanyBranches" EntityType="DomainModels.CompanyBranch" />
-          <EntitySet Name="Coupons" EntityType="DomainModels.Coupon" />
           <AssociationSet Name="FK_CompanyBranch_BranchCategory" Association="DomainModels.FK_CompanyBranch_BranchCategory">
             <End Role="BranchCategory" EntitySet="BranchCategories" />
             <End Role="CompanyBranch" EntitySet="CompanyBranches" />
           </AssociationSet>
-          <AssociationSet Name="FK_Coupon_CompanyBranch" Association="DomainModels.FK_Coupon_CompanyBranch">
-            <End Role="CompanyBranch" EntitySet="CompanyBranches" />
-            <End Role="Coupon" EntitySet="Coupons" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Coupon_Language" Association="DomainModels.FK_Coupon_Language">
-            <End Role="Language" EntitySet="Languages" />
-            <End Role="Coupon" EntitySet="Coupons" />
-          </AssociationSet>
           <EntitySet Name="CouponCategories1" EntityType="DomainModels.CouponCategories" />
-          <AssociationSet Name="FK_CouponCategories_Coupon" Association="DomainModels.FK_CouponCategories_Coupon">
-            <End Role="Coupon" EntitySet="Coupons" />
-            <End Role="CouponCategories" EntitySet="CouponCategories1" />
-          </AssociationSet>
           <AssociationSet Name="FK_CouponCategories_CouponCategory" Association="DomainModels.FK_CouponCategories_CouponCategory">
             <End Role="CouponCategory" EntitySet="CouponCategories" />
             <End Role="CouponCategories" EntitySet="CouponCategories1" />
@@ -4057,10 +4005,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <End Role="Phrase" EntitySet="Phrases" />
           </AssociationSet>
           <EntitySet Name="UserPurchasedCoupons" EntityType="DomainModels.UserPurchasedCoupon" />
-          <AssociationSet Name="FK_UserPurchasedCoupon_Coupon" Association="DomainModels.FK_UserPurchasedCoupon_Coupon">
-            <End Role="Coupon" EntitySet="Coupons" />
-            <End Role="UserPurchasedCoupon" EntitySet="UserPurchasedCoupons" />
-          </AssociationSet>
           <FunctionImport Name="SearchCampaigns" ReturnType="Collection(DomainModels.SearchCampaigns_Result)">
             <Parameter Name="Status" Mode="In" Type="Int32" />
             <Parameter Name="keyword" Mode="In" Type="String" />
@@ -4112,10 +4056,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <End Role="SurveyQuestion" EntitySet="SurveyQuestions" />
             <End Role="ProfileQuestionTargetCriteria" EntitySet="ProfileQuestionTargetCriterias" />
           </AssociationSet>
-          <AssociationSet Name="FK_InvoiceDetail_Coupon" Association="DomainModels.FK_InvoiceDetail_Coupon">
-            <End Role="Coupon" EntitySet="Coupons" />
-            <End Role="InvoiceDetail" EntitySet="InvoiceDetails" />
-          </AssociationSet>
           <AssociationSet Name="FK_InvoiceDetail_ProfileQuestion" Association="DomainModels.FK_InvoiceDetail_ProfileQuestion">
             <End Role="ProfileQuestion" EntitySet="ProfileQuestions" />
             <End Role="InvoiceDetail" EntitySet="InvoiceDetails" />
@@ -4147,10 +4087,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <End Role="SurveyQuestionTargetCriteria" EntitySet="SurveyQuestionTargetCriterias" />
           </AssociationSet>
           <EntitySet Name="CouponPriceOptions" EntityType="DomainModels.CouponPriceOption" />
-          <AssociationSet Name="FK_CouponPriceOption_Coupon" Association="DomainModels.FK_CouponPriceOption_Coupon">
-            <End Role="Coupon" EntitySet="Coupons" />
-            <End Role="CouponPriceOption" EntitySet="CouponPriceOptions" />
-          </AssociationSet>
           <EntitySet Name="Companies" EntityType="DomainModels.Company" />
           <AssociationSet Name="FK_Account_Company" Association="DomainModels.FK_Account_Company">
             <End Role="Company" EntitySet="Companies" />
@@ -4183,10 +4119,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <AssociationSet Name="FK_CompanyBranch_Company" Association="DomainModels.FK_CompanyBranch_Company">
             <End Role="Company" EntitySet="Companies" />
             <End Role="CompanyBranch" EntitySet="CompanyBranches" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Coupon_Company" Association="DomainModels.FK_Coupon_Company">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="Coupon" EntitySet="Coupons" />
           </AssociationSet>
           <AssociationSet Name="FK_DamImages_Company" Association="DomainModels.FK_DamImages_Company">
             <End Role="Company" EntitySet="Companies" />
@@ -4255,10 +4187,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySet Name="EventStatuses" EntityType="DomainModels.EventStatus" />
           <AssociationSet Name="FK_CampaignEventHistory_AdCampaign" Association="DomainModels.FK_CampaignEventHistory_AdCampaign">
             <End Role="AdCampaign" EntitySet="AdCampaigns" />
-            <End Role="CampaignEventHistory" EntitySet="CampaignEventHistories" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CampaignEventHistory_Coupon" Association="DomainModels.FK_CampaignEventHistory_Coupon">
-            <End Role="Coupon" EntitySet="Coupons" />
             <End Role="CampaignEventHistory" EntitySet="CampaignEventHistories" />
           </AssociationSet>
           <AssociationSet Name="FK_CampaignEventHistory_EventStatus" Association="DomainModels.FK_CampaignEventHistory_EventStatus">
@@ -4470,10 +4398,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <Parameter Name="ageRange" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="CouponRatingReviews" EntityType="DomainModels.CouponRatingReview" />
-          <AssociationSet Name="FK_CouponRatingReview_Coupon" Association="DomainModels.FK_CouponRatingReview_Coupon">
-            <End Role="Coupon" EntitySet="Coupons" />
-            <End Role="CouponRatingReview" EntitySet="CouponRatingReviews" />
-          </AssociationSet>
           <FunctionImport Name="GetUsersCouponsForEmailNotification" ReturnType="Collection(DomainModels.GetUsersCouponsForEmailNotification_Result)">
           <Parameter Name="mode" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -4528,6 +4452,65 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <FunctionImport Name="getDealStatByDDProfessionByCId" ReturnType="Collection(Int32)">
             <Parameter Name="Id" Mode="In" Type="Int32" />
             <Parameter Name="profession" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Coupons" EntityType="DomainModels.Coupon" />
+          <AssociationSet Name="FK_CampaignEventHistory_Coupon" Association="DomainModels.FK_CampaignEventHistory_Coupon">
+            <End Role="Coupon" EntitySet="Coupons" />
+            <End Role="CampaignEventHistory" EntitySet="CampaignEventHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Coupon_Company" Association="DomainModels.FK_Coupon_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Coupon" EntitySet="Coupons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Coupon_CompanyBranch" Association="DomainModels.FK_Coupon_CompanyBranch">
+            <End Role="CompanyBranch" EntitySet="CompanyBranches" />
+            <End Role="Coupon" EntitySet="Coupons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Coupon_Language" Association="DomainModels.FK_Coupon_Language">
+            <End Role="Language" EntitySet="Languages" />
+            <End Role="Coupon" EntitySet="Coupons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CouponCategories_Coupon" Association="DomainModels.FK_CouponCategories_Coupon">
+            <End Role="Coupon" EntitySet="Coupons" />
+            <End Role="CouponCategories" EntitySet="CouponCategories1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CouponPriceOption_Coupon" Association="DomainModels.FK_CouponPriceOption_Coupon">
+            <End Role="Coupon" EntitySet="Coupons" />
+            <End Role="CouponPriceOption" EntitySet="CouponPriceOptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CouponRatingReview_Coupon" Association="DomainModels.FK_CouponRatingReview_Coupon">
+            <End Role="Coupon" EntitySet="Coupons" />
+            <End Role="CouponRatingReview" EntitySet="CouponRatingReviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InvoiceDetail_Coupon" Association="DomainModels.FK_InvoiceDetail_Coupon">
+            <End Role="Coupon" EntitySet="Coupons" />
+            <End Role="InvoiceDetail" EntitySet="InvoiceDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserPurchasedCoupon_Coupon" Association="DomainModels.FK_UserPurchasedCoupon_Coupon">
+            <End Role="Coupon" EntitySet="Coupons" />
+            <End Role="UserPurchasedCoupon" EntitySet="UserPurchasedCoupons" />
+          </AssociationSet>
+          <FunctionImport Name="SearchCoupons" ReturnType="Collection(DomainModels.SearchCoupons_Result)">
+            <Parameter Name="categoryId" Mode="In" Type="Int32" />
+            <Parameter Name="type" Mode="In" Type="Int32" />
+            <Parameter Name="keywords" Mode="In" Type="String" />
+            <Parameter Name="distance" Mode="In" Type="Int32" />
+            <Parameter Name="Lat" Mode="In" Type="String" />
+            <Parameter Name="Lon" Mode="In" Type="String" />
+            <Parameter Name="UserId" Mode="In" Type="String" />
+            <Parameter Name="FromRow" Mode="In" Type="Int32" />
+            <Parameter Name="ToRow" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SearchCoupons1" ReturnType="Collection(DomainModels.SearchCoupons1_Result)">
+            <Parameter Name="categoryId" Mode="In" Type="Int32" />
+            <Parameter Name="type" Mode="In" Type="Int32" />
+            <Parameter Name="keywords" Mode="In" Type="String" />
+            <Parameter Name="distance" Mode="In" Type="Int32" />
+            <Parameter Name="Lat" Mode="In" Type="String" />
+            <Parameter Name="Lon" Mode="In" Type="String" />
+            <Parameter Name="UserId" Mode="In" Type="String" />
+            <Parameter Name="FromRow" Mode="In" Type="Int32" />
+            <Parameter Name="ToRow" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
@@ -4667,8 +4650,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <NavigationProperty Name="Users" Relationship="DomainModels.FK_AspNetUsers_Language" FromRole="Language" ToRole="AspNetUser" />
           <NavigationProperty Name="AdCampaigns" Relationship="DomainModels.FK_AdCampaign_Language" FromRole="Language" ToRole="AdCampaign" />
           <NavigationProperty Name="AdCampaignTargetCriterias" Relationship="DomainModels.FK_AdCampaignTargetCriteria_Language" FromRole="Language" ToRole="AdCampaignTargetCriteria" />
-          <NavigationProperty Name="Coupons" Relationship="DomainModels.FK_Coupon_Language" FromRole="Language" ToRole="Coupon" />
           <NavigationProperty Name="ProfileQuestionTargetCriterias" Relationship="DomainModels.FK_ProfileQuestionTargetCriteria_Language" FromRole="Language" ToRole="ProfileQuestionTargetCriteria" />
+          <NavigationProperty Name="Coupons" Relationship="DomainModels.FK_Coupon_Language" FromRole="Language" ToRole="Coupon" />
         </EntityType>
         <Association Name="FK_ProfileQuestionGroup_Country">
           <End Type="DomainModels.Country" Role="Country" Multiplicity="0..1" />
@@ -5053,8 +5036,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <NavigationProperty Name="AdCampaign" Relationship="DomainModels.FK_InvoiceDetail_AdCampaign" FromRole="InvoiceDetail" ToRole="AdCampaign" />
           <Property Name="PQID" Type="Int32" />
           <Property Name="CouponID" Type="Int64" />
-          <NavigationProperty Name="Coupon" Relationship="DomainModels.FK_InvoiceDetail_Coupon" FromRole="InvoiceDetail" ToRole="Coupon" />
           <NavigationProperty Name="ProfileQuestion" Relationship="DomainModels.FK_InvoiceDetail_ProfileQuestion" FromRole="InvoiceDetail" ToRole="ProfileQuestion" />
+          <NavigationProperty Name="Coupon" Relationship="DomainModels.FK_InvoiceDetail_Coupon" FromRole="InvoiceDetail" ToRole="Coupon" />
         </EntityType>
         <EntityType Name="Tax">
           <Key>
@@ -6091,33 +6074,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="String" Name="CouponActualValue" Nullable="true" />
           <Property Type="String" Name="AdvertisersLogoPath" Nullable="true" MaxLength="227" />
         </ComplexType>
-        <ComplexType Name="SearchCoupons_Result">
-          <Property Type="Int64" Name="CouponId" Nullable="false" />
-          <Property Type="String" Name="CouponTitle" Nullable="true" MaxLength="200" />
-          <Property Type="Int32" Name="TotalItems" Nullable="true" />
-          <Property Type="String" Name="CouponImage1" Nullable="true" />
-          <Property Type="String" Name="LogoUrl" Nullable="true" MaxLength="227" />
-          <Property Type="Double" Name="Price" Nullable="false" />
-          <Property Type="Double" Name="Savings" Nullable="true" />
-          <Property Type="Double" Name="SwapCost" Nullable="false" />
-          <Property Type="Int32" Name="CompanyId" Nullable="true" />
-          <Property Type="Int32" Name="CouponActiveMonth" Nullable="true" />
-          <Property Type="Int32" Name="CouponActiveYear" Nullable="true" />
-          <Property Type="DateTime" Name="eod" Nullable="true" />
-          <Property Type="DateTime" Name="strt" Nullable="true" Precision="23" />
-          <Property Type="Double" Name="distance" Nullable="true" />
-          <Property Type="String" Name="CompanyName" Nullable="true" />
-          <Property Type="String" Name="LocationTitle" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="LocationCity" Nullable="true" MaxLength="500" />
-          <Property Type="Int32" Name="DealsCount" Nullable="true" />
-          <Property Type="String" Name="CurrencyCode" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="CurrencySymbol" Nullable="true" MaxLength="50" />
-          <Property Type="Double" Name="AvgRating" Nullable="true" />
-          <Property Type="Int32" Name="UserHasRated" Nullable="false" />
-          <Property Type="Int32" Name="DaysLeft" Nullable="true" />
-          <Property Type="Int32" Name="IsTwoForOneDeal" Nullable="false" />
-          <Property Type="String" Name="CouponLink" Nullable="true" MaxLength="1034" />
-        </ComplexType>
         <EntityType Name="UserFavouriteCoupon">
           <Key>
             <PropertyRef Name="FavouriteCouponId" />
@@ -6210,114 +6166,10 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="BranchCategoryId" Type="Int64" />
           <Property Name="CompanyId" Type="Int32" />
           <NavigationProperty Name="BranchCategory" Relationship="DomainModels.FK_CompanyBranch_BranchCategory" FromRole="CompanyBranch" ToRole="BranchCategory" />
-          <NavigationProperty Name="Coupons" Relationship="DomainModels.FK_Coupon_CompanyBranch" FromRole="CompanyBranch" ToRole="Coupon" />
           <Property Name="CountryId" Type="Int32" />
           <NavigationProperty Name="Company" Relationship="DomainModels.FK_CompanyBranch_Company" FromRole="CompanyBranch" ToRole="Company" />
           <Property Name="IsDefault" Type="Boolean" />
-        </EntityType>
-        <EntityType Name="Coupon">
-          <Key>
-            <PropertyRef Name="CouponId" />
-          </Key>
-          <Property Name="CouponId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="LanguageId" Type="Int32" />
-          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="CouponTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="SearchKeywords" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Int32" />
-          <Property Name="Archived" Type="Boolean" />
-          <Property Name="Approved" Type="Boolean" />
-          <Property Name="ApprovedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="ApprovalDateTime" Type="DateTime" Precision="3" />
-          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="ModifiedDateTime" Type="DateTime" Precision="3" />
-          <Property Name="ModifiedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="RejectedReason" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="Rejecteddatetime" Type="DateTime" Precision="3" />
-          <Property Name="RejectedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="CurrencyId" Type="Int32" />
-          <Property Name="Price" Type="Double" />
-          <Property Name="Savings" Type="Double" />
-          <Property Name="SwapCost" Type="Double" />
-          <Property Name="CouponViewCount" Type="Int32" />
-          <Property Name="CouponIssuedCount" Type="Int32" />
-          <Property Name="CouponRedeemedCount" Type="Int32" />
-          <Property Name="CouponQtyPerUser" Type="Int32" />
-          <Property Name="CouponListingMode" Type="Int32" />
-          <Property Name="CompanyId" Type="Int32" />
-          <Property Name="CouponActiveMonth" Type="Int32" />
-          <Property Name="CouponActiveYear" Type="Int32" />
-          <Property Name="CouponExpirydate" Type="DateTime" Precision="3" />
-          <Property Name="couponImage1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CouponImage2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CouponImage3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="LogoUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="HighlightLine1" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
-          <Property Name="HighlightLine2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="HighlightLine3" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="HighlightLine4" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="HighlightLine5" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="FinePrintLine1" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
-          <Property Name="FinePrintLine2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="FinePrintLine3" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="FinePrintLine4" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="FinePrintLine5" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="LocationBranchId" Type="Int64" />
-          <Property Name="LocationTitle" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="LocationLine1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="LocationLine2" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="LocationCity" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="LocationState" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="LocationZipCode" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="LocationLAT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LocationLON" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LocationPhone" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="GeographyColumn" Type="Geography" annotation:StoreGeneratedPattern="Computed" />
-          <Property Name="HowToRedeemLine1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="HowToRedeemLine2" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="HowToRedeemLine3" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="HowToRedeemLine4" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="HowToRedeemLine5" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="CompanyBranch" Relationship="DomainModels.FK_Coupon_CompanyBranch" FromRole="Coupon" ToRole="CompanyBranch" />
-          <NavigationProperty Name="Language" Relationship="DomainModels.FK_Coupon_Language" FromRole="Coupon" ToRole="Language" />
-          <NavigationProperty Name="CouponCategories" Relationship="DomainModels.FK_CouponCategories_Coupon" FromRole="Coupon" ToRole="CouponCategories" />
-          <NavigationProperty Name="UserPurchasedCoupons" Relationship="DomainModels.FK_UserPurchasedCoupon_Coupon" FromRole="Coupon" ToRole="UserPurchasedCoupon" />
-          <Property Name="SubmissionDateTime" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="InvoiceDetails" Relationship="DomainModels.FK_InvoiceDetail_Coupon" FromRole="Coupon" ToRole="InvoiceDetail" />
-          <Property Name="LocationCountryId" Type="Int32" />
-          <Property Name="CouponStartDate" Type="DateTime" Precision="3" />
-          <Property Name="CouponEndDate" Type="DateTime" Precision="3" />
-          <Property Name="Priority" Type="Int32" />
-          <Property Name="ShowBuyitBtn" Type="Boolean" />
-          <Property Name="BuyitLandingPageUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="BuyitBtnLabel" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="CouponPriceOptions" Relationship="DomainModels.FK_CouponPriceOption_Coupon" FromRole="Coupon" ToRole="CouponPriceOption" />
-          <NavigationProperty Name="Company" Relationship="DomainModels.FK_Coupon_Company" FromRole="Coupon" ToRole="Company" />
-          <NavigationProperty Name="CampaignEventHistories" Relationship="DomainModels.FK_CampaignEventHistory_Coupon" FromRole="Coupon" ToRole="CampaignEventHistory" />
-          <Property Name="YoutubeLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="CouponImage4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CouponImage5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CouponImage6" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IsPaymentCollected" Type="Boolean" />
-          <Property Name="PaymentDate" Type="DateTime" Precision="3" />
-          <Property Name="IsShowReviews" Type="Boolean" />
-          <Property Name="IsShowAddress" Type="Boolean" />
-          <Property Name="IsShowPhoneNo" Type="Boolean" />
-          <Property Name="IsShowMap" Type="Boolean" />
-          <Property Name="IsShowyouTube" Type="Boolean" />
-          <Property Name="IsShowAboutUs" Type="Boolean" />
-          <Property Name="IsMarketingStories" Type="Boolean" />
-          <NavigationProperty Name="CouponRatingReviews" Relationship="DomainModels.FK_CouponRatingReview_Coupon" FromRole="Coupon" ToRole="CouponRatingReview" />
-          <Property Name="IsPerSaving3days" Type="Boolean" />
-          <Property Name="IsPerSaving2days" Type="Boolean" />
-          <Property Name="IsPerSavingLastday" Type="Boolean" />
-          <Property Name="IsDollarSaving3days" Type="Boolean" />
-          <Property Name="IsDollarSaving2days" Type="Boolean" />
-          <Property Name="IsDollarSavingLastday" Type="Boolean" />
-          <Property Name="isSaveBtnLable" Type="Int32" />
-          <Property Name="DealFirstDiscountType" Type="Int32" />
-          <Property Name="DealEndingDiscountType" Type="Int32" />
+          <NavigationProperty Name="Coupons" Relationship="DomainModels.FK_Coupon_CompanyBranch" FromRole="CompanyBranch" ToRole="Coupon" />
         </EntityType>
         <Association Name="FK_CompanyBranch_BranchCategory">
           <End Type="DomainModels.BranchCategory" Role="BranchCategory" Multiplicity="0..1" />
@@ -6331,30 +6183,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Coupon_CompanyBranch">
-          <End Type="DomainModels.CompanyBranch" Role="CompanyBranch" Multiplicity="0..1" />
-          <End Type="DomainModels.Coupon" Role="Coupon" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CompanyBranch">
-              <PropertyRef Name="BranchId" />
-            </Principal>
-            <Dependent Role="Coupon">
-              <PropertyRef Name="LocationBranchId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Coupon_Language">
-          <End Type="DomainModels.Language" Role="Language" Multiplicity="0..1" />
-          <End Type="DomainModels.Coupon" Role="Coupon" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Language">
-              <PropertyRef Name="LanguageId" />
-            </Principal>
-            <Dependent Role="Coupon">
-              <PropertyRef Name="LanguageId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="CouponCategories">
           <Key>
             <PropertyRef Name="Id" />
@@ -6362,21 +6190,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CategoryId" Type="Int32" />
           <Property Name="CouponId" Type="Int64" />
-          <NavigationProperty Name="Coupon" Relationship="DomainModels.FK_CouponCategories_Coupon" FromRole="CouponCategories" ToRole="Coupon" />
           <NavigationProperty Name="CouponCategory" Relationship="DomainModels.FK_CouponCategories_CouponCategory" FromRole="CouponCategories" ToRole="CouponCategory" />
+          <NavigationProperty Name="Coupon" Relationship="DomainModels.FK_CouponCategories_Coupon" FromRole="CouponCategories" ToRole="Coupon" />
         </EntityType>
-        <Association Name="FK_CouponCategories_Coupon">
-          <End Type="DomainModels.Coupon" Role="Coupon" Multiplicity="0..1" />
-          <End Type="DomainModels.CouponCategories" Role="CouponCategories" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Coupon">
-              <PropertyRef Name="CouponId" />
-            </Principal>
-            <Dependent Role="CouponCategories">
-              <PropertyRef Name="CouponId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_CouponCategories_CouponCategory">
           <End Type="DomainModels.CouponCategory" Role="CouponCategory" Multiplicity="0..1" />
           <End Type="DomainModels.CouponCategories" Role="CouponCategories" Multiplicity="*" />
@@ -6432,21 +6248,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="IsRedeemed" Type="Boolean" />
           <Property Name="RedemptionDateTime" Type="DateTime" Precision="3" />
           <Property Name="RedemptionOperator" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Coupon" Relationship="DomainModels.FK_UserPurchasedCoupon_Coupon" FromRole="UserPurchasedCoupon" ToRole="Coupon" />
           <Property Name="ResponseType" Type="Int32" />
+          <NavigationProperty Name="Coupon" Relationship="DomainModels.FK_UserPurchasedCoupon_Coupon" FromRole="UserPurchasedCoupon" ToRole="Coupon" />
         </EntityType>
-        <Association Name="FK_UserPurchasedCoupon_Coupon">
-          <End Type="DomainModels.Coupon" Role="Coupon" Multiplicity="0..1" />
-          <End Type="DomainModels.UserPurchasedCoupon" Role="UserPurchasedCoupon" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Coupon">
-              <PropertyRef Name="CouponId" />
-            </Principal>
-            <Dependent Role="UserPurchasedCoupon">
-              <PropertyRef Name="CouponId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <ComplexType Name="SearchCampaigns_Result">
           <Property Type="Int64" Name="CampaignID" Nullable="false" />
           <Property Type="String" Name="CampaignName" Nullable="true" MaxLength="200" />
@@ -6725,18 +6529,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_InvoiceDetail_Coupon">
-          <End Type="DomainModels.Coupon" Role="Coupon" Multiplicity="0..1" />
-          <End Type="DomainModels.InvoiceDetail" Role="InvoiceDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Coupon">
-              <PropertyRef Name="CouponId" />
-            </Principal>
-            <Dependent Role="InvoiceDetail">
-              <PropertyRef Name="CouponID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_InvoiceDetail_ProfileQuestion">
           <End Type="DomainModels.ProfileQuestion" Role="ProfileQuestion" Multiplicity="0..1" />
           <End Type="DomainModels.InvoiceDetail" Role="InvoiceDetail" Multiplicity="*" />
@@ -6940,26 +6732,14 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="Price" Type="Double" />
           <Property Name="Savings" Type="Double" />
           <Property Name="OptionUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Coupon" Relationship="DomainModels.FK_CouponPriceOption_Coupon" FromRole="CouponPriceOption" ToRole="Coupon" />
           <Property Name="VoucherCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="ExpiryDate" Type="DateTime" Precision="3" />
           <Property Name="URL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="VoucherCode2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="VoucherCode3" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="VoucherCode4" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Coupon" Relationship="DomainModels.FK_CouponPriceOption_Coupon" FromRole="CouponPriceOption" ToRole="Coupon" />
           </EntityType>
-        <Association Name="FK_CouponPriceOption_Coupon">
-          <End Type="DomainModels.Coupon" Role="Coupon" Multiplicity="0..1" />
-          <End Type="DomainModels.CouponPriceOption" Role="CouponPriceOption" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Coupon">
-              <PropertyRef Name="CouponId" />
-            </Principal>
-            <Dependent Role="CouponPriceOption">
-              <PropertyRef Name="CouponId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Company">
           <Key>
             <PropertyRef Name="CompanyId" />
@@ -7014,7 +6794,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <NavigationProperty Name="CompaniesAspNetUsers" Relationship="DomainModels.FK_CompaniesAspNetUsers_Company" FromRole="Company" ToRole="CompaniesAspNetUser" />
           <NavigationProperty Name="Country" Relationship="DomainModels.FK_Company_Country" FromRole="Company" ToRole="Country" />
           <NavigationProperty Name="CompanyBranches" Relationship="DomainModels.FK_CompanyBranch_Company" FromRole="Company" ToRole="CompanyBranch" />
-          <NavigationProperty Name="Coupons" Relationship="DomainModels.FK_Coupon_Company" FromRole="Company" ToRole="Coupon" />
           <NavigationProperty Name="DamImages" Relationship="DomainModels.FK_DamImages_Company" FromRole="Company" ToRole="DamImage" />
           <NavigationProperty Name="Invoices" Relationship="DomainModels.FK_Invoice_Company" FromRole="Company" ToRole="Invoice" />
           <NavigationProperty Name="ProfileQuestions" Relationship="DomainModels.FK_ProfileQuestion_Company" FromRole="Company" ToRole="ProfileQuestion" />
@@ -7032,6 +6811,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <NavigationProperty Name="ProfileQuestionUserAnswers" Relationship="DomainModels.FK_ProfileQuestionUserAnswer_Company" FromRole="Company" ToRole="ProfileQuestionUserAnswer" />
           <Property Name="StripeSubscriptionId" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
           <Property Name="StripeSubscriptionStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Coupons" Relationship="DomainModels.FK_Coupon_Company" FromRole="Company" ToRole="Coupon" />
         </EntityType>
         <Association Name="FK_Account_Company">
           <End Type="DomainModels.Company" Role="Company" Multiplicity="0..1" />
@@ -7125,18 +6905,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
               <PropertyRef Name="CompanyId" />
             </Principal>
             <Dependent Role="CompanyBranch">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Coupon_Company">
-          <End Type="DomainModels.Company" Role="Company" Multiplicity="0..1" />
-          <End Type="DomainModels.Coupon" Role="Coupon" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="CompanyId" />
-            </Principal>
-            <Dependent Role="Coupon">
               <PropertyRef Name="CompanyId" />
             </Dependent>
           </ReferentialConstraint>
@@ -7411,10 +7179,10 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="SQID" Type="Int64" />
           <Property Name="PQID" Type="Int32" />
           <NavigationProperty Name="AdCampaign" Relationship="DomainModels.FK_CampaignEventHistory_AdCampaign" FromRole="CampaignEventHistory" ToRole="AdCampaign" />
-          <NavigationProperty Name="Coupon" Relationship="DomainModels.FK_CampaignEventHistory_Coupon" FromRole="CampaignEventHistory" ToRole="Coupon" />
           <NavigationProperty Name="EventStatus" Relationship="DomainModels.FK_CampaignEventHistory_EventStatus" FromRole="CampaignEventHistory" ToRole="EventStatus" />
           <NavigationProperty Name="ProfileQuestion" Relationship="DomainModels.FK_CampaignEventHistory_ProfileQuestion" FromRole="CampaignEventHistory" ToRole="ProfileQuestion" />
           <NavigationProperty Name="SurveyQuestion" Relationship="DomainModels.FK_CampaignEventHistory_SurveyQuestion" FromRole="CampaignEventHistory" ToRole="SurveyQuestion" />
+          <NavigationProperty Name="Coupon" Relationship="DomainModels.FK_CampaignEventHistory_Coupon" FromRole="CampaignEventHistory" ToRole="Coupon" />
         </EntityType>
         <EntityType Name="EventStatus">
           <Key>
@@ -7433,18 +7201,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             </Principal>
             <Dependent Role="CampaignEventHistory">
               <PropertyRef Name="CampaignID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CampaignEventHistory_Coupon">
-          <End Type="DomainModels.Coupon" Role="Coupon" Multiplicity="0..1" />
-          <End Type="DomainModels.CampaignEventHistory" Role="CampaignEventHistory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Coupon">
-              <PropertyRef Name="CouponId" />
-            </Principal>
-            <Dependent Role="CampaignEventHistory">
-              <PropertyRef Name="CouponId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -8049,18 +7805,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="Reviewimage3" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Coupon" Relationship="DomainModels.FK_CouponRatingReview_Coupon" FromRole="CouponRatingReview" ToRole="Coupon" />
         </EntityType>
-        <Association Name="FK_CouponRatingReview_Coupon">
-          <End Type="DomainModels.Coupon" Role="Coupon" Multiplicity="0..1" />
-          <End Type="DomainModels.CouponRatingReview" Role="CouponRatingReview" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Coupon">
-              <PropertyRef Name="CouponId" />
-            </Principal>
-            <Dependent Role="CouponRatingReview">
-              <PropertyRef Name="CouponId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <ComplexType Name="GetUsersCouponsForEmailNotification_Result">
           <Property Type="String" Name="UserId" Nullable="false" MaxLength="128" />
           <Property Type="String" Name="FullName" Nullable="false" MaxLength="200" />
@@ -8237,6 +7981,275 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
         <ComplexType Name="getDealImpressionByProfessionByCouponId_Result">
           <Property Type="Int32" Name="Stats" Nullable="true" />
           <Property Type="String" Name="label" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <EntityType Name="Coupon">
+          <Key>
+            <PropertyRef Name="CouponId" />
+          </Key>
+          <Property Name="CouponId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LanguageId" Type="Int32" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CouponTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SearchKeywords" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="Archived" Type="Boolean" />
+          <Property Name="Approved" Type="Boolean" />
+          <Property Name="ApprovedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ApprovalDateTime" Type="DateTime" Precision="3" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="RejectedReason" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Rejecteddatetime" Type="DateTime" Precision="3" />
+          <Property Name="RejectedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CurrencyId" Type="Int32" />
+          <Property Name="Price" Type="Double" />
+          <Property Name="Savings" Type="Double" />
+          <Property Name="SwapCost" Type="Double" />
+          <Property Name="CouponViewCount" Type="Int32" />
+          <Property Name="CouponIssuedCount" Type="Int32" />
+          <Property Name="CouponRedeemedCount" Type="Int32" />
+          <Property Name="CouponQtyPerUser" Type="Int32" />
+          <Property Name="CouponListingMode" Type="Int32" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="CouponActiveMonth" Type="Int32" />
+          <Property Name="CouponActiveYear" Type="Int32" />
+          <Property Name="CouponExpirydate" Type="DateTime" Precision="3" />
+          <Property Name="couponImage1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CouponImage2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CouponImage3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LogoUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="HighlightLine1" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
+          <Property Name="HighlightLine2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="HighlightLine3" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="HighlightLine4" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="HighlightLine5" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FinePrintLine1" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
+          <Property Name="FinePrintLine2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FinePrintLine3" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FinePrintLine4" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FinePrintLine5" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LocationBranchId" Type="Int64" />
+          <Property Name="LocationTitle" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LocationLine1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LocationLine2" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LocationCity" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LocationState" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LocationZipCode" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LocationLAT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LocationLON" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LocationPhone" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="GeographyColumn" Type="Geography" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="HowToRedeemLine1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="HowToRedeemLine2" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="HowToRedeemLine3" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="HowToRedeemLine4" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="HowToRedeemLine5" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SubmissionDateTime" Type="DateTime" Precision="3" />
+          <Property Name="LocationCountryId" Type="Int32" />
+          <Property Name="CouponStartDate" Type="DateTime" Precision="3" />
+          <Property Name="CouponEndDate" Type="DateTime" Precision="3" />
+          <Property Name="Priority" Type="Int32" />
+          <Property Name="ShowBuyitBtn" Type="Boolean" />
+          <Property Name="BuyitLandingPageUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="BuyitBtnLabel" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="YoutubeLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CouponImage4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CouponImage5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CouponImage6" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsPaymentCollected" Type="Boolean" />
+          <Property Name="PaymentDate" Type="DateTime" Precision="3" />
+          <Property Name="IsShowReviews" Type="Boolean" />
+          <Property Name="IsShowAddress" Type="Boolean" />
+          <Property Name="IsShowPhoneNo" Type="Boolean" />
+          <Property Name="IsShowMap" Type="Boolean" />
+          <Property Name="IsShowyouTube" Type="Boolean" />
+          <Property Name="IsShowAboutUs" Type="Boolean" />
+          <Property Name="IsMarketingStories" Type="Boolean" />
+          <Property Name="IsPerSaving3days" Type="Boolean" />
+          <Property Name="IsPerSaving2days" Type="Boolean" />
+          <Property Name="IsPerSavingLastday" Type="Boolean" />
+          <Property Name="IsDollarSaving3days" Type="Boolean" />
+          <Property Name="IsDollarSaving2days" Type="Boolean" />
+          <Property Name="IsDollarSavingLastday" Type="Boolean" />
+          <Property Name="isSaveBtnLable" Type="Int32" />
+          <Property Name="DealFirstDiscountType" Type="Int32" />
+          <Property Name="DealEndingDiscountType" Type="Int32" />
+          <Property Name="CashBackDeal" Type="Int32" />
+          <Property Name="PinCode" Type="Int32" />
+          <Property Name="CashBackDealCounter" Type="Int32" />
+          <NavigationProperty Name="CampaignEventHistories" Relationship="DomainModels.FK_CampaignEventHistory_Coupon" FromRole="Coupon" ToRole="CampaignEventHistory" />
+          <NavigationProperty Name="Company" Relationship="DomainModels.FK_Coupon_Company" FromRole="Coupon" ToRole="Company" />
+          <NavigationProperty Name="CompanyBranch" Relationship="DomainModels.FK_Coupon_CompanyBranch" FromRole="Coupon" ToRole="CompanyBranch" />
+          <NavigationProperty Name="Language" Relationship="DomainModels.FK_Coupon_Language" FromRole="Coupon" ToRole="Language" />
+          <NavigationProperty Name="CouponCategories" Relationship="DomainModels.FK_CouponCategories_Coupon" FromRole="Coupon" ToRole="CouponCategories" />
+          <NavigationProperty Name="CouponPriceOptions" Relationship="DomainModels.FK_CouponPriceOption_Coupon" FromRole="Coupon" ToRole="CouponPriceOption" />
+          <NavigationProperty Name="CouponRatingReviews" Relationship="DomainModels.FK_CouponRatingReview_Coupon" FromRole="Coupon" ToRole="CouponRatingReview" />
+          <NavigationProperty Name="InvoiceDetails" Relationship="DomainModels.FK_InvoiceDetail_Coupon" FromRole="Coupon" ToRole="InvoiceDetail" />
+          <NavigationProperty Name="UserPurchasedCoupons" Relationship="DomainModels.FK_UserPurchasedCoupon_Coupon" FromRole="Coupon" ToRole="UserPurchasedCoupon" />
+        </EntityType>
+        <Association Name="FK_CampaignEventHistory_Coupon">
+          <End Type="DomainModels.Coupon" Role="Coupon" Multiplicity="0..1" />
+          <End Type="DomainModels.CampaignEventHistory" Role="CampaignEventHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coupon">
+              <PropertyRef Name="CouponId" />
+            </Principal>
+            <Dependent Role="CampaignEventHistory">
+              <PropertyRef Name="CouponId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Coupon_Company">
+          <End Type="DomainModels.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="DomainModels.Coupon" Role="Coupon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="Coupon">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Coupon_CompanyBranch">
+          <End Type="DomainModels.CompanyBranch" Role="CompanyBranch" Multiplicity="0..1" />
+          <End Type="DomainModels.Coupon" Role="Coupon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyBranch">
+              <PropertyRef Name="BranchId" />
+            </Principal>
+            <Dependent Role="Coupon">
+              <PropertyRef Name="LocationBranchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Coupon_Language">
+          <End Type="DomainModels.Language" Role="Language" Multiplicity="0..1" />
+          <End Type="DomainModels.Coupon" Role="Coupon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="LanguageId" />
+            </Principal>
+            <Dependent Role="Coupon">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CouponCategories_Coupon">
+          <End Type="DomainModels.Coupon" Role="Coupon" Multiplicity="0..1" />
+          <End Type="DomainModels.CouponCategories" Role="CouponCategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coupon">
+              <PropertyRef Name="CouponId" />
+            </Principal>
+            <Dependent Role="CouponCategories">
+              <PropertyRef Name="CouponId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CouponPriceOption_Coupon">
+          <End Type="DomainModels.Coupon" Role="Coupon" Multiplicity="0..1" />
+          <End Type="DomainModels.CouponPriceOption" Role="CouponPriceOption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coupon">
+              <PropertyRef Name="CouponId" />
+            </Principal>
+            <Dependent Role="CouponPriceOption">
+              <PropertyRef Name="CouponId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CouponRatingReview_Coupon">
+          <End Type="DomainModels.Coupon" Role="Coupon" Multiplicity="0..1" />
+          <End Type="DomainModels.CouponRatingReview" Role="CouponRatingReview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coupon">
+              <PropertyRef Name="CouponId" />
+            </Principal>
+            <Dependent Role="CouponRatingReview">
+              <PropertyRef Name="CouponId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InvoiceDetail_Coupon">
+          <End Type="DomainModels.Coupon" Role="Coupon" Multiplicity="0..1" />
+          <End Type="DomainModels.InvoiceDetail" Role="InvoiceDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coupon">
+              <PropertyRef Name="CouponId" />
+            </Principal>
+            <Dependent Role="InvoiceDetail">
+              <PropertyRef Name="CouponID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserPurchasedCoupon_Coupon">
+          <End Type="DomainModels.Coupon" Role="Coupon" Multiplicity="0..1" />
+          <End Type="DomainModels.UserPurchasedCoupon" Role="UserPurchasedCoupon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coupon">
+              <PropertyRef Name="CouponId" />
+            </Principal>
+            <Dependent Role="UserPurchasedCoupon">
+              <PropertyRef Name="CouponId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="SearchCoupons_Result">
+          <Property Type="Int64" Name="CouponId" Nullable="false" />
+          <Property Type="String" Name="CouponTitle" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="CouponImage1" Nullable="true" />
+          <Property Type="String" Name="LogoUrl" Nullable="true" MaxLength="227" />
+          <Property Type="Double" Name="Price" Nullable="false" />
+          <Property Type="Double" Name="Savings" Nullable="true" />
+          <Property Type="Double" Name="SwapCost" Nullable="false" />
+          <Property Type="Int32" Name="CompanyId" Nullable="true" />
+          <Property Type="Int32" Name="CouponActiveMonth" Nullable="true" />
+          <Property Type="Int32" Name="CouponActiveYear" Nullable="true" />
+          <Property Type="DateTime" Name="eod" Nullable="true" />
+          <Property Type="DateTime" Name="strt" Nullable="true" Precision="23" />
+          <Property Type="Double" Name="distance" Nullable="true" />
+          <Property Type="String" Name="CompanyName" Nullable="true" />
+          <Property Type="String" Name="LocationTitle" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="LocationCity" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="DealsCount" Nullable="true" />
+          <Property Type="String" Name="CurrencyCode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CurrencySymbol" Nullable="true" MaxLength="50" />
+          <Property Type="Double" Name="AvgRating" Nullable="true" />
+          <Property Type="Int32" Name="UserHasRated" Nullable="false" />
+          <Property Type="Int32" Name="DaysLeft" Nullable="true" />
+          <Property Type="Int32" Name="IsTwoForOneDeal" Nullable="false" />
+          <Property Type="String" Name="CouponLink" Nullable="true" MaxLength="1034" />
+          <Property Type="Int32" Name="TotalItems" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SearchCoupons1_Result">
+          <Property Type="Int64" Name="CouponId" Nullable="false" />
+          <Property Type="String" Name="CouponTitle" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="CouponImage1" Nullable="true" />
+          <Property Type="String" Name="LogoUrl" Nullable="true" MaxLength="227" />
+          <Property Type="Double" Name="Price" Nullable="false" />
+          <Property Type="Double" Name="Savings" Nullable="true" />
+          <Property Type="Double" Name="SwapCost" Nullable="false" />
+          <Property Type="Int32" Name="CompanyId" Nullable="true" />
+          <Property Type="Int32" Name="CouponActiveMonth" Nullable="true" />
+          <Property Type="Int32" Name="CouponActiveYear" Nullable="true" />
+          <Property Type="DateTime" Name="eod" Nullable="true" />
+          <Property Type="DateTime" Name="strt" Nullable="true" Precision="23" />
+          <Property Type="Double" Name="distance" Nullable="true" />
+          <Property Type="String" Name="CompanyName" Nullable="true" />
+          <Property Type="String" Name="LocationTitle" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="LocationCity" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="DealsCount" Nullable="true" />
+          <Property Type="String" Name="CurrencyCode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CurrencySymbol" Nullable="true" MaxLength="50" />
+          <Property Type="Double" Name="AvgRating" Nullable="true" />
+          <Property Type="Int32" Name="UserHasRated" Nullable="false" />
+          <Property Type="Int32" Name="DaysLeft" Nullable="true" />
+          <Property Type="Int32" Name="IsTwoForOneDeal" Nullable="false" />
+          <Property Type="String" Name="CouponLink" Nullable="true" MaxLength="1034" />
+          <Property Type="Int32" Name="TotalItems" Nullable="true" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -9050,37 +9063,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="SearchCoupons" FunctionName="SMDModel.Store.SearchCoupons">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="DomainModels.SearchCoupons_Result">
-                <ScalarProperty Name="CouponId" ColumnName="CouponId" />
-                <ScalarProperty Name="CouponTitle" ColumnName="CouponTitle" />
-                <ScalarProperty Name="TotalItems" ColumnName="TotalItems" />
-                <ScalarProperty Name="CouponImage1" ColumnName="CouponImage1" />
-                <ScalarProperty Name="LogoUrl" ColumnName="LogoUrl" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Savings" ColumnName="Savings" />
-                <ScalarProperty Name="SwapCost" ColumnName="SwapCost" />
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="CouponActiveMonth" ColumnName="CouponActiveMonth" />
-                <ScalarProperty Name="CouponActiveYear" ColumnName="CouponActiveYear" />
-                <ScalarProperty Name="eod" ColumnName="eod" />
-                <ScalarProperty Name="strt" ColumnName="strt" />
-                <ScalarProperty Name="distance" ColumnName="distance" />
-                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-                <ScalarProperty Name="LocationTitle" ColumnName="LocationTitle" />
-                <ScalarProperty Name="LocationCity" ColumnName="LocationCity" />
-                <ScalarProperty Name="DealsCount" ColumnName="DealsCount" />
-                <ScalarProperty Name="CurrencyCode" ColumnName="CurrencyCode" />
-                <ScalarProperty Name="CurrencySymbol" ColumnName="CurrencySymbol" />
-                <ScalarProperty Name="AvgRating" ColumnName="AvgRating" />
-                <ScalarProperty Name="UserHasRated" ColumnName="UserHasRated" />
-                <ScalarProperty Name="DaysLeft" ColumnName="DaysLeft" />
-                <ScalarProperty Name="IsTwoForOneDeal" ColumnName="IsTwoForOneDeal" />
-                <ScalarProperty Name="CouponLink" ColumnName="CouponLink" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="UserFavouriteCoupons">
             <EntityTypeMapping TypeName="DomainModels.UserFavouriteCoupon">
               <MappingFragment StoreEntitySet="UserFavouriteCoupon">
@@ -9150,102 +9132,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Coupons">
-            <EntityTypeMapping TypeName="DomainModels.Coupon">
-              <MappingFragment StoreEntitySet="Coupon">
-                <ScalarProperty Name="DealEndingDiscountType" ColumnName="DealEndingDiscountType" />
-                <ScalarProperty Name="DealFirstDiscountType" ColumnName="DealFirstDiscountType" />
-                <ScalarProperty Name="isSaveBtnLable" ColumnName="isSaveBtnLable" />
-                <ScalarProperty Name="IsDollarSavingLastday" ColumnName="IsDollarSavingLastday" />
-                <ScalarProperty Name="IsDollarSaving2days" ColumnName="IsDollarSaving2days" />
-                <ScalarProperty Name="IsDollarSaving3days" ColumnName="IsDollarSaving3days" />
-                <ScalarProperty Name="IsPerSavingLastday" ColumnName="IsPerSavingLastday" />
-                <ScalarProperty Name="IsPerSaving2days" ColumnName="IsPerSaving2days" />
-                <ScalarProperty Name="IsPerSaving3days" ColumnName="IsPerSaving3days" />
-                <ScalarProperty Name="IsMarketingStories" ColumnName="IsMarketingStories" />
-                <ScalarProperty Name="IsShowAboutUs" ColumnName="IsShowAboutUs" />
-                <ScalarProperty Name="IsShowyouTube" ColumnName="IsShowyouTube" />
-                <ScalarProperty Name="IsShowMap" ColumnName="IsShowMap" />
-                <ScalarProperty Name="IsShowPhoneNo" ColumnName="IsShowPhoneNo" />
-                <ScalarProperty Name="IsShowAddress" ColumnName="IsShowAddress" />
-                <ScalarProperty Name="IsShowReviews" ColumnName="IsShowReviews" />
-                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
-                <ScalarProperty Name="IsPaymentCollected" ColumnName="IsPaymentCollected" />
-                <ScalarProperty Name="CouponImage6" ColumnName="CouponImage6" />
-                <ScalarProperty Name="CouponImage5" ColumnName="CouponImage5" />
-                <ScalarProperty Name="CouponImage4" ColumnName="CouponImage4" />
-                <ScalarProperty Name="YoutubeLink" ColumnName="YoutubeLink" />
-                <ScalarProperty Name="BuyitBtnLabel" ColumnName="BuyitBtnLabel" />
-                <ScalarProperty Name="BuyitLandingPageUrl" ColumnName="BuyitLandingPageUrl" />
-                <ScalarProperty Name="ShowBuyitBtn" ColumnName="ShowBuyitBtn" />
-                <ScalarProperty Name="Priority" ColumnName="Priority" />
-                <ScalarProperty Name="CouponEndDate" ColumnName="CouponEndDate" />
-                <ScalarProperty Name="CouponStartDate" ColumnName="CouponStartDate" />
-                <ScalarProperty Name="LocationCountryId" ColumnName="LocationCountryId" />
-                <ScalarProperty Name="SubmissionDateTime" ColumnName="SubmissionDateTime" />
-                <ScalarProperty Name="HowToRedeemLine5" ColumnName="HowToRedeemLine5" />
-                <ScalarProperty Name="HowToRedeemLine4" ColumnName="HowToRedeemLine4" />
-                <ScalarProperty Name="HowToRedeemLine3" ColumnName="HowToRedeemLine3" />
-                <ScalarProperty Name="HowToRedeemLine2" ColumnName="HowToRedeemLine2" />
-                <ScalarProperty Name="HowToRedeemLine1" ColumnName="HowToRedeemLine1" />
-                <ScalarProperty Name="GeographyColumn" ColumnName="GeographyColumn" />
-                <ScalarProperty Name="LocationPhone" ColumnName="LocationPhone" />
-                <ScalarProperty Name="LocationLON" ColumnName="LocationLON" />
-                <ScalarProperty Name="LocationLAT" ColumnName="LocationLAT" />
-                <ScalarProperty Name="LocationZipCode" ColumnName="LocationZipCode" />
-                <ScalarProperty Name="LocationState" ColumnName="LocationState" />
-                <ScalarProperty Name="LocationCity" ColumnName="LocationCity" />
-                <ScalarProperty Name="LocationLine2" ColumnName="LocationLine2" />
-                <ScalarProperty Name="LocationLine1" ColumnName="LocationLine1" />
-                <ScalarProperty Name="LocationTitle" ColumnName="LocationTitle" />
-                <ScalarProperty Name="LocationBranchId" ColumnName="LocationBranchId" />
-                <ScalarProperty Name="FinePrintLine5" ColumnName="FinePrintLine5" />
-                <ScalarProperty Name="FinePrintLine4" ColumnName="FinePrintLine4" />
-                <ScalarProperty Name="FinePrintLine3" ColumnName="FinePrintLine3" />
-                <ScalarProperty Name="FinePrintLine2" ColumnName="FinePrintLine2" />
-                <ScalarProperty Name="FinePrintLine1" ColumnName="FinePrintLine1" />
-                <ScalarProperty Name="HighlightLine5" ColumnName="HighlightLine5" />
-                <ScalarProperty Name="HighlightLine4" ColumnName="HighlightLine4" />
-                <ScalarProperty Name="HighlightLine3" ColumnName="HighlightLine3" />
-                <ScalarProperty Name="HighlightLine2" ColumnName="HighlightLine2" />
-                <ScalarProperty Name="HighlightLine1" ColumnName="HighlightLine1" />
-                <ScalarProperty Name="LogoUrl" ColumnName="LogoUrl" />
-                <ScalarProperty Name="CouponImage3" ColumnName="CouponImage3" />
-                <ScalarProperty Name="CouponImage2" ColumnName="CouponImage2" />
-                <ScalarProperty Name="couponImage1" ColumnName="couponImage1" />
-                <ScalarProperty Name="CouponExpirydate" ColumnName="CouponExpirydate" />
-                <ScalarProperty Name="CouponActiveYear" ColumnName="CouponActiveYear" />
-                <ScalarProperty Name="CouponActiveMonth" ColumnName="CouponActiveMonth" />
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="CouponListingMode" ColumnName="CouponListingMode" />
-                <ScalarProperty Name="CouponQtyPerUser" ColumnName="CouponQtyPerUser" />
-                <ScalarProperty Name="CouponRedeemedCount" ColumnName="CouponRedeemedCount" />
-                <ScalarProperty Name="CouponIssuedCount" ColumnName="CouponIssuedCount" />
-                <ScalarProperty Name="CouponViewCount" ColumnName="CouponViewCount" />
-                <ScalarProperty Name="SwapCost" ColumnName="SwapCost" />
-                <ScalarProperty Name="Savings" ColumnName="Savings" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
-                <ScalarProperty Name="RejectedBy" ColumnName="RejectedBy" />
-                <ScalarProperty Name="Rejecteddatetime" ColumnName="Rejecteddatetime" />
-                <ScalarProperty Name="RejectedReason" ColumnName="RejectedReason" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="ModifiedDateTime" ColumnName="ModifiedDateTime" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
-                <ScalarProperty Name="ApprovalDateTime" ColumnName="ApprovalDateTime" />
-                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
-                <ScalarProperty Name="Approved" ColumnName="Approved" />
-                <ScalarProperty Name="Archived" ColumnName="Archived" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="SearchKeywords" ColumnName="SearchKeywords" />
-                <ScalarProperty Name="CouponTitle" ColumnName="CouponTitle" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
-                <ScalarProperty Name="CouponId" ColumnName="CouponId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="CouponCategories1">
             <EntityTypeMapping TypeName="DomainModels.CouponCategories">
               <MappingFragment StoreEntitySet="CouponCategories">
@@ -9289,43 +9175,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="SearchCampaigns" FunctionName="SMDModel.Store.SearchCampaigns">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="DomainModels.SearchCampaigns_Result">
-                <ScalarProperty Name="CampaignID" ColumnName="CampaignID" />
-                <ScalarProperty Name="CampaignName" ColumnName="CampaignName" />
-                <ScalarProperty Name="viewCountToday" ColumnName="viewCountToday" />
-                <ScalarProperty Name="viewCountYesterday" ColumnName="viewCountYesterday" />
-                <ScalarProperty Name="viewCountAllTime" ColumnName="viewCountAllTime" />
-                <ScalarProperty Name="Locationss" ColumnName="Locationss" />
-                <ScalarProperty Name="StartDateTime" ColumnName="StartDateTime" />
-                <ScalarProperty Name="MaxBudget" ColumnName="MaxBudget" />
-                <ScalarProperty Name="MaxDailyBudget" ColumnName="MaxDailyBudget" />
-                <ScalarProperty Name="AmountSpent" ColumnName="AmountSpent" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="ApprovalDateTime" ColumnName="ApprovalDateTime" />
-                <ScalarProperty Name="ClickRate" ColumnName="ClickRate" />
-                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
-                <ScalarProperty Name="TotalItems" ColumnName="TotalItems" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="clickThroughsToday" ColumnName="clickThroughsToday" />
-                <ScalarProperty Name="clickThroughsYesterday" ColumnName="clickThroughsYesterday" />
-                <ScalarProperty Name="clickThroughsAllTime" ColumnName="clickThroughsAllTime" />
-                <ScalarProperty Name="priority" ColumnName="priority" />
-                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
-                <ScalarProperty Name="VerifyQuestion" ColumnName="VerifyQuestion" />
-                <ScalarProperty Name="ModifiedDateTime" ColumnName="ModifiedDateTime" />
-                <ScalarProperty Name="Answer1" ColumnName="Answer1" />
-                <ScalarProperty Name="Answer2" ColumnName="Answer2" />
-                <ScalarProperty Name="Answer3" ColumnName="Answer3" />
-                <ScalarProperty Name="SurveyAnsweredAllTime" ColumnName="SurveyAnsweredAllTime" />
-                <ScalarProperty Name="Answer1Stats" ColumnName="Answer1Stats" />
-                <ScalarProperty Name="Answer2Stats" ColumnName="Answer2Stats" />
-                <ScalarProperty Name="Answer3Stats" ColumnName="Answer3Stats" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="DamImages">
             <EntityTypeMapping TypeName="DomainModels.DamImage">
               <MappingFragment StoreEntitySet="DamImages">
@@ -10492,56 +10341,168 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="getCampaignImpressionByAgeByCId" FunctionName="SMDModel.Store.getCampaignImpressionByAgeByCId">
+          <EntitySetMapping Name="Coupons">
+            <EntityTypeMapping TypeName="DomainModels.Coupon">
+              <MappingFragment StoreEntitySet="Coupon">
+                <ScalarProperty Name="CashBackDealCounter" ColumnName="CashBackDealCounter" />
+                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+                <ScalarProperty Name="CashBackDeal" ColumnName="CashBackDeal" />
+                <ScalarProperty Name="DealEndingDiscountType" ColumnName="DealEndingDiscountType" />
+                <ScalarProperty Name="DealFirstDiscountType" ColumnName="DealFirstDiscountType" />
+                <ScalarProperty Name="isSaveBtnLable" ColumnName="isSaveBtnLable" />
+                <ScalarProperty Name="IsDollarSavingLastday" ColumnName="IsDollarSavingLastday" />
+                <ScalarProperty Name="IsDollarSaving2days" ColumnName="IsDollarSaving2days" />
+                <ScalarProperty Name="IsDollarSaving3days" ColumnName="IsDollarSaving3days" />
+                <ScalarProperty Name="IsPerSavingLastday" ColumnName="IsPerSavingLastday" />
+                <ScalarProperty Name="IsPerSaving2days" ColumnName="IsPerSaving2days" />
+                <ScalarProperty Name="IsPerSaving3days" ColumnName="IsPerSaving3days" />
+                <ScalarProperty Name="IsMarketingStories" ColumnName="IsMarketingStories" />
+                <ScalarProperty Name="IsShowAboutUs" ColumnName="IsShowAboutUs" />
+                <ScalarProperty Name="IsShowyouTube" ColumnName="IsShowyouTube" />
+                <ScalarProperty Name="IsShowMap" ColumnName="IsShowMap" />
+                <ScalarProperty Name="IsShowPhoneNo" ColumnName="IsShowPhoneNo" />
+                <ScalarProperty Name="IsShowAddress" ColumnName="IsShowAddress" />
+                <ScalarProperty Name="IsShowReviews" ColumnName="IsShowReviews" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="IsPaymentCollected" ColumnName="IsPaymentCollected" />
+                <ScalarProperty Name="CouponImage6" ColumnName="CouponImage6" />
+                <ScalarProperty Name="CouponImage5" ColumnName="CouponImage5" />
+                <ScalarProperty Name="CouponImage4" ColumnName="CouponImage4" />
+                <ScalarProperty Name="YoutubeLink" ColumnName="YoutubeLink" />
+                <ScalarProperty Name="BuyitBtnLabel" ColumnName="BuyitBtnLabel" />
+                <ScalarProperty Name="BuyitLandingPageUrl" ColumnName="BuyitLandingPageUrl" />
+                <ScalarProperty Name="ShowBuyitBtn" ColumnName="ShowBuyitBtn" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="CouponEndDate" ColumnName="CouponEndDate" />
+                <ScalarProperty Name="CouponStartDate" ColumnName="CouponStartDate" />
+                <ScalarProperty Name="LocationCountryId" ColumnName="LocationCountryId" />
+                <ScalarProperty Name="SubmissionDateTime" ColumnName="SubmissionDateTime" />
+                <ScalarProperty Name="HowToRedeemLine5" ColumnName="HowToRedeemLine5" />
+                <ScalarProperty Name="HowToRedeemLine4" ColumnName="HowToRedeemLine4" />
+                <ScalarProperty Name="HowToRedeemLine3" ColumnName="HowToRedeemLine3" />
+                <ScalarProperty Name="HowToRedeemLine2" ColumnName="HowToRedeemLine2" />
+                <ScalarProperty Name="HowToRedeemLine1" ColumnName="HowToRedeemLine1" />
+                <ScalarProperty Name="GeographyColumn" ColumnName="GeographyColumn" />
+                <ScalarProperty Name="LocationPhone" ColumnName="LocationPhone" />
+                <ScalarProperty Name="LocationLON" ColumnName="LocationLON" />
+                <ScalarProperty Name="LocationLAT" ColumnName="LocationLAT" />
+                <ScalarProperty Name="LocationZipCode" ColumnName="LocationZipCode" />
+                <ScalarProperty Name="LocationState" ColumnName="LocationState" />
+                <ScalarProperty Name="LocationCity" ColumnName="LocationCity" />
+                <ScalarProperty Name="LocationLine2" ColumnName="LocationLine2" />
+                <ScalarProperty Name="LocationLine1" ColumnName="LocationLine1" />
+                <ScalarProperty Name="LocationTitle" ColumnName="LocationTitle" />
+                <ScalarProperty Name="LocationBranchId" ColumnName="LocationBranchId" />
+                <ScalarProperty Name="FinePrintLine5" ColumnName="FinePrintLine5" />
+                <ScalarProperty Name="FinePrintLine4" ColumnName="FinePrintLine4" />
+                <ScalarProperty Name="FinePrintLine3" ColumnName="FinePrintLine3" />
+                <ScalarProperty Name="FinePrintLine2" ColumnName="FinePrintLine2" />
+                <ScalarProperty Name="FinePrintLine1" ColumnName="FinePrintLine1" />
+                <ScalarProperty Name="HighlightLine5" ColumnName="HighlightLine5" />
+                <ScalarProperty Name="HighlightLine4" ColumnName="HighlightLine4" />
+                <ScalarProperty Name="HighlightLine3" ColumnName="HighlightLine3" />
+                <ScalarProperty Name="HighlightLine2" ColumnName="HighlightLine2" />
+                <ScalarProperty Name="HighlightLine1" ColumnName="HighlightLine1" />
+                <ScalarProperty Name="LogoUrl" ColumnName="LogoUrl" />
+                <ScalarProperty Name="CouponImage3" ColumnName="CouponImage3" />
+                <ScalarProperty Name="CouponImage2" ColumnName="CouponImage2" />
+                <ScalarProperty Name="couponImage1" ColumnName="couponImage1" />
+                <ScalarProperty Name="CouponExpirydate" ColumnName="CouponExpirydate" />
+                <ScalarProperty Name="CouponActiveYear" ColumnName="CouponActiveYear" />
+                <ScalarProperty Name="CouponActiveMonth" ColumnName="CouponActiveMonth" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="CouponListingMode" ColumnName="CouponListingMode" />
+                <ScalarProperty Name="CouponQtyPerUser" ColumnName="CouponQtyPerUser" />
+                <ScalarProperty Name="CouponRedeemedCount" ColumnName="CouponRedeemedCount" />
+                <ScalarProperty Name="CouponIssuedCount" ColumnName="CouponIssuedCount" />
+                <ScalarProperty Name="CouponViewCount" ColumnName="CouponViewCount" />
+                <ScalarProperty Name="SwapCost" ColumnName="SwapCost" />
+                <ScalarProperty Name="Savings" ColumnName="Savings" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+                <ScalarProperty Name="RejectedBy" ColumnName="RejectedBy" />
+                <ScalarProperty Name="Rejecteddatetime" ColumnName="Rejecteddatetime" />
+                <ScalarProperty Name="RejectedReason" ColumnName="RejectedReason" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDateTime" ColumnName="ModifiedDateTime" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="ApprovalDateTime" ColumnName="ApprovalDateTime" />
+                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+                <ScalarProperty Name="Approved" ColumnName="Approved" />
+                <ScalarProperty Name="Archived" ColumnName="Archived" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="SearchKeywords" ColumnName="SearchKeywords" />
+                <ScalarProperty Name="CouponTitle" ColumnName="CouponTitle" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+                <ScalarProperty Name="CouponId" ColumnName="CouponId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SearchCoupons" FunctionName="SMDModel.Store.SearchCoupons">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="DomainModels.getCampaignImpressionByAgeByCId_Result">
-                <ScalarProperty Name="Stats" ColumnName="Stats" />
-                <ScalarProperty Name="label" ColumnName="label" />
+              <ComplexTypeMapping TypeName="DomainModels.SearchCoupons_Result">
+                <ScalarProperty Name="CouponId" ColumnName="CouponId" />
+                <ScalarProperty Name="CouponTitle" ColumnName="CouponTitle" />
+                <ScalarProperty Name="CouponImage1" ColumnName="CouponImage1" />
+                <ScalarProperty Name="LogoUrl" ColumnName="LogoUrl" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Savings" ColumnName="Savings" />
+                <ScalarProperty Name="SwapCost" ColumnName="SwapCost" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="CouponActiveMonth" ColumnName="CouponActiveMonth" />
+                <ScalarProperty Name="CouponActiveYear" ColumnName="CouponActiveYear" />
+                <ScalarProperty Name="eod" ColumnName="eod" />
+                <ScalarProperty Name="strt" ColumnName="strt" />
+                <ScalarProperty Name="distance" ColumnName="distance" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="LocationTitle" ColumnName="LocationTitle" />
+                <ScalarProperty Name="LocationCity" ColumnName="LocationCity" />
+                <ScalarProperty Name="DealsCount" ColumnName="DealsCount" />
+                <ScalarProperty Name="CurrencyCode" ColumnName="CurrencyCode" />
+                <ScalarProperty Name="CurrencySymbol" ColumnName="CurrencySymbol" />
+                <ScalarProperty Name="AvgRating" ColumnName="AvgRating" />
+                <ScalarProperty Name="UserHasRated" ColumnName="UserHasRated" />
+                <ScalarProperty Name="DaysLeft" ColumnName="DaysLeft" />
+                <ScalarProperty Name="IsTwoForOneDeal" ColumnName="IsTwoForOneDeal" />
+                <ScalarProperty Name="CouponLink" ColumnName="CouponLink" />
+                <ScalarProperty Name="TotalItems" ColumnName="TotalItems" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="getCampaignImpressionByGenderByCId" FunctionName="SMDModel.Store.getCampaignImpressionByGenderByCId">
+          <FunctionImportMapping FunctionImportName="SearchCoupons1" FunctionName="SMDModel.Store.SearchCoupons">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="DomainModels.getCampaignImpressionByGenderByCId_Result">
-                <ScalarProperty Name="Stats" ColumnName="Stats" />
-                <ScalarProperty Name="label" ColumnName="label" />
+              <ComplexTypeMapping TypeName="DomainModels.SearchCoupons1_Result">
+                <ScalarProperty Name="CouponId" ColumnName="CouponId" />
+                <ScalarProperty Name="CouponTitle" ColumnName="CouponTitle" />
+                <ScalarProperty Name="CouponImage1" ColumnName="CouponImage1" />
+                <ScalarProperty Name="LogoUrl" ColumnName="LogoUrl" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Savings" ColumnName="Savings" />
+                <ScalarProperty Name="SwapCost" ColumnName="SwapCost" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="CouponActiveMonth" ColumnName="CouponActiveMonth" />
+                <ScalarProperty Name="CouponActiveYear" ColumnName="CouponActiveYear" />
+                <ScalarProperty Name="eod" ColumnName="eod" />
+                <ScalarProperty Name="strt" ColumnName="strt" />
+                <ScalarProperty Name="distance" ColumnName="distance" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="LocationTitle" ColumnName="LocationTitle" />
+                <ScalarProperty Name="LocationCity" ColumnName="LocationCity" />
+                <ScalarProperty Name="DealsCount" ColumnName="DealsCount" />
+                <ScalarProperty Name="CurrencyCode" ColumnName="CurrencyCode" />
+                <ScalarProperty Name="CurrencySymbol" ColumnName="CurrencySymbol" />
+                <ScalarProperty Name="AvgRating" ColumnName="AvgRating" />
+                <ScalarProperty Name="UserHasRated" ColumnName="UserHasRated" />
+                <ScalarProperty Name="DaysLeft" ColumnName="DaysLeft" />
+                <ScalarProperty Name="IsTwoForOneDeal" ColumnName="IsTwoForOneDeal" />
+                <ScalarProperty Name="CouponLink" ColumnName="CouponLink" />
+                <ScalarProperty Name="TotalItems" ColumnName="TotalItems" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="getCampaignImpressionByProfessionByCId" FunctionName="SMDModel.Store.getCampaignImpressionByProfessionByCId">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="DomainModels.getCampaignImpressionByProfessionByCId_Result">
-                <ScalarProperty Name="Stats" ColumnName="Stats" />
-                <ScalarProperty Name="label" ColumnName="label" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="getDealImpressionByAgeByCouponId" FunctionName="SMDModel.Store.getDealImpressionByAgeByCouponId">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="DomainModels.getDealImpressionByAgeByCouponId_Result">
-                <ScalarProperty Name="Stats" ColumnName="Stats" />
-                <ScalarProperty Name="label" ColumnName="label" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="getDealImpressionByGenderByCouponId" FunctionName="SMDModel.Store.getDealImpressionByGenderByCouponId">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="DomainModels.getDealImpressionByGenderByCouponId_Result">
-                <ScalarProperty Name="Stats" ColumnName="Stats" />
-                <ScalarProperty Name="label" ColumnName="label" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="getDealImpressionByProfessionByCouponId" FunctionName="SMDModel.Store.getDealImpressionByProfessionByCouponId">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="DomainModels.getDealImpressionByProfessionByCouponId_Result">
-                <ScalarProperty Name="Stats" ColumnName="Stats" />
-                <ScalarProperty Name="label" ColumnName="label" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="getDealStatByDDProfessionByCId" FunctionName="SMDModel.Store.getDealStatByDDProfessionByCId" />
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

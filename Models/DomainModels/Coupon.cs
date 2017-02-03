@@ -146,5 +146,8 @@ namespace SMD.Models.DomainModels
         public virtual ICollection<CampaignEventHistory> CampaignEventHistories { get; set; }
 
         public virtual ICollection<CouponRatingReview> CouponRatingReviews { get; set; }
+        public Nullable<int> CashBackDeal { get; set; }
+        public Nullable<int> PinCode { get; set; }
+        public Nullable<int> CashBackDealCounter { get; set; }
     }
 }
