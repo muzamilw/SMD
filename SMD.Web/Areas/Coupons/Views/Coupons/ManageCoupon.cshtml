@@ -1929,11 +1929,40 @@ else
                         </div>*@
                     <div class="col-lg-12" style="padding-left:24px;margin-top:12px;">
 
-                        <span style=" font-size:12px;">  Learn more about 'PPCV'</span><img style="height:14px;" src="/Content/Images/Drop_Arrow.png" data-toggle="collapse" data-target="#demo">
+                            @*<span style=" font-size:12px;">  Learn more about 'PPCV'</span><img style="height:14px;" src="/Content/Images/Drop_Arrow.png" data-toggle="collapse" data-target="#demo">*@
 
+                        </div>
+                </div>
+
+
+
+                <div class="row">
+
+                    <div class="pull-left" data-bind="visible:$root.IsnewCoupon()==false">
+                        <div class="status_date_span" style="margin-left:0px;margin-top:0px;">
+                            @*Last modified <span style="margin-left:3px"></span><span data-bind="dateString:$root.modifiedDate,datePattern: 'DD/MM/YYYY,h:mm a'">12 april 2014</span>*@
+                            Last modified <span style="margin-left:3px"></span><span data-bind="text: moment($root.modifiedDate()).format('DD MMM YYYY h:mm a')">12 april 2014</span>
+                        </div>
                     </div>
                 </div>
 
+
+                <div class="row">
+                    <div class="col-lg-12 text-left" style="margin-bottom:0px;padding-top:20px; padding-bottom:0px; padding-left:0px;">
+                        <button class="btn btn-danger free_VideoAd_btn" id="btnFreeAds" data-toggle="modal" data-target=".model_youtube_link" onclick="openYoutubeVideo();">Get Free Deal Credits</button>
+                    </div>
+                </div>
+                <div class="row " style="line-height: 2;padding:0px;">
+
+                    <div class="col-lg-12" style="padding-left:0px;margin-top:-3px;">
+
+                        @*<div class="col-lg-12 text-center" style="margin-bottom:0px;padding-top:5px;padding-left:0px;">
+                                <p style=" font-size:14px;color:#127abd;font-weight:500;line-height:1;" class="text-left"> Create Cash-a-Mon Deals and  get Free PPR credits to deliver more Video Ads.</p>
+                            </div>*@
+                        <span style=" font-size:12px;color:white">  Learn more about 'PPR'</span><img style="height:7px;" src="/Content/Images/drop_arrowWhite.png" data-toggle="collapse" data-target="#demo">
+
+                    </div>
+                </div>
                 <div class="row Subpanels collapse" id="demo">
                     <div class="col-lg-12" style="font-size:12px;">
                         <div class="row">
@@ -1974,15 +2003,7 @@ else
                     </div>
                 </div>
 
-                <div class="row">
 
-                    <div class="pull-left" data-bind="visible:$root.IsnewCoupon()==false">
-                        <div class="status_date_span" style="margin-left:0px;margin-top:0px;">
-                            @*Last modified <span style="margin-left:3px"></span><span data-bind="dateString:$root.modifiedDate,datePattern: 'DD/MM/YYYY,h:mm a'">12 april 2014</span>*@
-                            Last modified <span style="margin-left:3px"></span><span data-bind="text: moment($root.modifiedDate()).format('DD MMM YYYY h:mm a')">12 april 2014</span>
-                        </div>
-                    </div>
-                </div>
                 <div data-bind="with:$root.couponModel">
                     <div class="row" data-bind="visible:$root.isCash4dealVisible">
                         <div class="col-lg-8" style="padding-left:0px;">
