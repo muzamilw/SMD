@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="SMDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SMDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="AccountId" />
@@ -1273,6 +1273,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_Coupons' does not have a primary key
           <Property Name="isSaveBtnLable" Type="int" />
           <Property Name="DealFirstDiscountType" Type="int" />
           <Property Name="DealEndingDiscountType" Type="int" />
+          <Property Name="CashBackDeal" Type="int" />
+          <Property Name="PinCode" Type="int" />
+          <Property Name="CashBackDealCounter" Type="int" />
           <Property Name="Categories" Type="nvarchar(max)" />
           <Property Name="CurrencyCode" Type="nvarchar" MaxLength="50" />
           <Property Name="CurrencySymbol" Type="nvarchar" MaxLength="50" />
@@ -3143,6 +3146,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
     [vw_Coupons].[isSaveBtnLable] AS [isSaveBtnLable], 
     [vw_Coupons].[DealFirstDiscountType] AS [DealFirstDiscountType], 
     [vw_Coupons].[DealEndingDiscountType] AS [DealEndingDiscountType], 
+    [vw_Coupons].[CashBackDeal] AS [CashBackDeal], 
+    [vw_Coupons].[PinCode] AS [PinCode], 
+    [vw_Coupons].[CashBackDealCounter] AS [CashBackDealCounter], 
     [vw_Coupons].[Categories] AS [Categories], 
     [vw_Coupons].[CurrencyCode] AS [CurrencyCode], 
     [vw_Coupons].[CurrencySymbol] AS [CurrencySymbol]
@@ -7129,6 +7135,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="isSaveBtnLable" Type="Int32" />
           <Property Name="DealFirstDiscountType" Type="Int32" />
           <Property Name="DealEndingDiscountType" Type="Int32" />
+          <Property Name="CashBackDeal" Type="Int32" />
+          <Property Name="PinCode" Type="Int32" />
+          <Property Name="CashBackDealCounter" Type="Int32" />
         </EntityType>
         <Association Name="FK_Country_Currency">
           <End Type="DomainModels.Currency" Role="Currency" Multiplicity="0..1" />
@@ -9572,6 +9581,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="vw_Coupons">
             <EntityTypeMapping TypeName="DomainModels.vw_Coupons">
               <MappingFragment StoreEntitySet="vw_Coupons">
+                <ScalarProperty Name="CashBackDealCounter" ColumnName="CashBackDealCounter" />
+                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+                <ScalarProperty Name="CashBackDeal" ColumnName="CashBackDeal" />
                 <ScalarProperty Name="DealEndingDiscountType" ColumnName="DealEndingDiscountType" />
                 <ScalarProperty Name="DealFirstDiscountType" ColumnName="DealFirstDiscountType" />
                 <ScalarProperty Name="isSaveBtnLable" ColumnName="isSaveBtnLable" />

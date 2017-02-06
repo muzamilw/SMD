@@ -773,16 +773,18 @@ else
                                         <div class="col-lg-2" style="padding-left:0px;">
                                             <label for="txtBuyItlbl" class="control-label text-right tooltip-float floatNone">CASH BACK Value</label>
                                         </div>
-                                        <div class="col-lg-10">
-                                            <select class="form-control" style="width:73%!important;" id="cashBackValue">
-                                                <option value="1">£1</option>
+                                        <div class="col-lg-10" data-bind="with: $root.couponModel">
+                                            <select class="form-control" style="width:73%!important;" id="cashBackValue" data-bind="value:CashBackDeal,event:{change:$root.onchangeCashBackValue}">
+                                                <option value=" 1">
+                                                    £1
+                                                </option>
                                                 <option value="2">£2</option>
                                                 <option value="3">£3</option>
-                                                <option value="4" selected>£5</option>
-                                                <option value="5">£10</option>
-                                                <option value="6">£20</option>
-                                                <option value="7">£25</option>
-                                                <option value="8">£50</option>
+                                                <option value="5" selected>£5</option>
+                                                <option value="10">£10</option>
+                                                <option value="20">£20</option>
+                                                <option value="25">£25</option>
+                                                <option value="50">£50</option>
                                             </select>
                                         </div>
                                     </div>
@@ -1981,24 +1983,24 @@ else
                         </div>
                     </div>
                 </div>
-                <div>
+                <div data-bind="with:$root.couponModel">
                     <div class="row" data-bind="visible:$root.isCash4dealVisible">
                         <div class="col-lg-8" style="padding-left:0px;">
-                            <div class="status_date_span text-left" style="margin-left:0px;">
+                            <div class="status_date_span text-left" style="margin-left:2px;">
                                 <label style="text-align:left;font-size:13px;"> Coupons left to issue before this Deals auto expires</label>
                             </div>
                         </div>
                         <div class="col-lg-4 pull-right" style="padding-top:12px;padding-left:55px;">
-                            <input type="text" style="float:left; color:#127abd; font-weight: bold;font-size: 15px; width:42px; text-align:right;color:red;background-color:white" readonly="readonly" name="Budget" class="form-control" id="txtcashDealExpire" value="5">
+                            <input type="text" style="float:left; color:#127abd; font-weight: bold;font-size: 15px; width:42px; text-align:right;color:red;background-color:white" readonly="readonly" name="Budget" class="form-control" id="txtcashDealExpire" data-bind="value:CashBackDealCounter">
                         </div>
                         <div class="row">
-                            <div class="col-lg-8" style="padding-top:30px;padding-left:0px;">
+                            <div class="col-lg-8" style="padding-top:30px;padding-left:2px;">
                                 <div class="status_date_span text-left">
                                     <label style="text-align:left;font-size:13px;">Enter Your PIN Code to redeem each Cash Back coupon </label>
                                 </div>
                             </div>
-                            <div class="col-lg-4" style="padding-top:44px;">
-                                <input type="text" style="float:left; color:#127abd; font-weight: bold;font-size: 15px; width:100px;color:red;background-color:white" name="Budget" class="form-control" id="txtPincode">
+                            <div class="col-lg-4" style="padding-top:44px;margin-left:-14px;">
+                                <input type="text" maxlength="4" style="float:left; color:#127abd; font-weight: bold;font-size: 15px; width:100px;color:red;background-color:white" name="Budget" class="form-control" id="txtPincode" data-bind="value:PinCode" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
                             </div>
                         </div>
                     </div>
