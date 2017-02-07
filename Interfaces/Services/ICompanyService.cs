@@ -39,5 +39,7 @@ namespace SMD.Interfaces.Services
         String UpdateCompanySubscription(CompanySubscription comSub);
         EmailResponseModel GetEmails(GetPagedListRequest request);
         bool UpdateSystemEmail(SystemMail email);
+        bool UpdateAdsCounter(Company com);
+        int? GetFreeAdsCount();
     }
 }

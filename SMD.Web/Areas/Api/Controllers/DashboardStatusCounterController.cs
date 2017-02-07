@@ -23,6 +23,7 @@ namespace SMD.MIS.Areas.Api.Controllers
             obj.LiveDisplayCampaign = _companyService.GetStatusesCounters().Where(i => i.Key == "liveDisplayCamp").FirstOrDefault().Value;
             obj.LiveDeals = _companyService.GetStatusesCounters().Where(i => i.Key == "Deals").FirstOrDefault().Value;
             obj.LivePolls = _companyService.GetStatusesCounters().Where(i => i.Key == "Polls").FirstOrDefault().Value;
+            obj.FreeAdsCounter = _companyService.GetFreeAdsCount();
             return obj;
         }
 
@@ -34,5 +35,6 @@ namespace SMD.MIS.Areas.Api.Controllers
       public int LiveDisplayCampaign;
       public int LiveDeals;
       public int LivePolls;
+      public int? FreeAdsCounter;
     }
 }

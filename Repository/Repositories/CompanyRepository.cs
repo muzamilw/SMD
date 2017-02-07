@@ -245,5 +245,10 @@ namespace SMD.Repository.Repositories
             obj.StripeSubscriptionStatus = query.FirstOrDefault().StripeSubscriptionStatus;
             return obj;
         }
+        public int? GetFreeAdsCount()
+        {
+            db.Configuration.LazyLoadingEnabled = false;
+            return DbSet.Where(c => c.CompanyId ==this.CompanyId).FirstOrDefault().FreeAdsCounter;
+        }
     }
 }

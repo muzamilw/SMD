@@ -172,6 +172,7 @@ define("ads/ads.viewModel",
                 TodisplayImg = ko.observable(true),
                 SearchSelectedStatus = ko.observable();
                 FlagToShowDivs = ko.observable(false);
+                isvideobtnvisible = ko.observable(false),
 
                 CurrPage = ko.observable(9);
                 MaxPage = ko.observable(12);
@@ -560,9 +561,9 @@ define("ads/ads.viewModel",
                 {
                   
                     if(campaignModel().isAdDelivery()==1)
-                    isPPRVisible(false);
-                else
-                 isPPRVisible(true);
+                        isPPRVisible(false);
+                    else
+                        isPPRVisible(true);
 
                 },
                 CloseAnalyticInnerView = function () {
@@ -811,6 +812,7 @@ define("ads/ads.viewModel",
                 VideoLink2src(0);
                 FlagToShowDivs(false);
                 campaignModel().StatusValue('Draft');
+                isvideobtnvisible(true);
                 VideoLink2src(null);
                 isShowArchiveBtn(false);
                 campaignModel().ChannelType("1");
@@ -2519,12 +2521,13 @@ define("ads/ads.viewModel",
 
                                     if (campaignModel().Status() == 1) {
                                         campaignModel().StatusValue("Draft");
+                                        isvideobtnvisible(true);
                                     } else if (campaignModel().Status() == 2) {
                                         $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
                                         $("#btnSubmitForApproval2").css("display", "none");
 
                                         $('#imgLogo').prop('disabled', true);
-
+                                        isvideobtnvisible(false);
                                         $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,#btnPauseCampaign,.lang_delSurvey").css("display", "none");
                                         $("#saveBtn").css("display", "none")
                                         $("#btnCancel,#btnPauseCampaign,#btnClose").removeAttr('disabled');
@@ -2540,6 +2543,7 @@ define("ads/ads.viewModel",
                                         $("#btnPauseCampaign").css("display", "inline-block");
                                         $("#btnFreeAds").removeAttr('disabled');
                                         campaignModel().StatusValue("Live");
+                                        isvideobtnvisible(false);
                                         //isTerminateBtnVisible(true);
                                         isNewCampaignVisible(true);
                                     } else if (campaignModel().Status() == 4) {
@@ -2550,11 +2554,13 @@ define("ads/ads.viewModel",
                                         $("#btnCancel,#btnResumeCampagin,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
                                         campaignModel().StatusValue("Paused");
                                         $("#btnFreeAds").removeAttr('disabled');
+                                        isvideobtnvisible(false);
                                         // isTerminateBtnVisible(true);
                                         isNewCampaignVisible(true);
                                     } else if (campaignModel().Status() == 5) {
                                         campaignModel().StatusValue("Completed");
                                         $("#btnFreeAds").removeAttr('disabled');
+                                        isvideobtnvisible(false);
                                     } else if (campaignModel().Status() == 6) {
                                         //  $("input,button,textarea,select").attr('disabled', 'disabled'); // disable all controls
                                         $("#btnSubmitForApproval2").css("display", "inline-block");
@@ -2562,6 +2568,7 @@ define("ads/ads.viewModel",
                                         $("#btnPauseCampaign").css("display", "none");
                                         campaignModel().StatusValue("Rejected");
                                         $("#btnFreeAds").removeAttr('disabled');
+                                        isvideobtnvisible(false);
                                     } else if (campaignModel().Status() == 7) {
 
                                         campaignModel().StatusValue("Remove");
@@ -2571,9 +2578,11 @@ define("ads/ads.viewModel",
                                         // $("#btnPauseCampaign").css("display", "inline-block");
                                         $("#btnCancel,#btnPauseCampaign,#btnCopyCampaign,#btnArchive").removeAttr('disabled');
                                         $("#btnFreeAds").removeAttr('disabled');
+                                        isvideobtnvisible(false);
                                         isNewCampaignVisible();
                                         isShowArchiveBtn(false);
                                     } else if (item.Status == 9) {
+                                        isvideobtnvisible(false);
                                         item.StatusValue = ("Completed");
                                     } else if (item.Status == 8) {
                                         item.StatusValue = ("Archived");
@@ -2582,6 +2591,7 @@ define("ads/ads.viewModel",
                                         $("#saveBtn").css("display", "none");
                                         $("#btnPauseCampaign").css("display", "inline-block");
                                         $("#btnCancel,#btnPauseCampaign,#btnCopyCampaign,#btnArchive").removeAttr('disabled');
+                                        isvideobtnvisible(false);
                                         isNewCampaignVisible(true);
                                         isShowArchiveBtn(true);
                                     }
@@ -4243,9 +4253,10 @@ define("ads/ads.viewModel",
                     ByProfessionStatsChartAnalyticsData : ByProfessionStatsChartAnalyticsData,
                     ByAgeStatsChartAnalyticsData: ByAgeStatsChartAnalyticsData,
                     isPPRVisible: isPPRVisible,
-                    videoAdbtnLabel: videoAdbtnLabel
-                };
-            })()
-        };
-        return ist.Ads.viewModel;
-    });
+                    videoAdbtnLabel: videoAdbtnLabel,
+                    isvideobtnvisible:isvideobtnvisible
+            };
+    })()
+};
+return ist.Ads.viewModel;
+});
