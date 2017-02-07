@@ -43,8 +43,10 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                        CurrencySymbol = source.CurrencySymbol == null ? "" : source.CurrencySymbol,
                        AvgRating = source.AvgRating == null ? 0 : source.AvgRating,
                         CouponLink = source.CouponLink,
-                         IsTwoForOneDeal = source.IsTwoForOneDeal
-
+                         IsTwoForOneDeal = source.IsTwoForOneDeal,
+                         IsCashAMoon=source.IsCashAMoon,
+                         LocationLAT=source.LocationLAT,
+                         LocationLON=source.LocationLON
                    };
         }
 
@@ -53,6 +55,9 @@ namespace SMD.MIS.Areas.Api.ModelMappers
         /// </summary>
         public static SearchCouponsViewResponse CreateFrom(this SearchCouponsResponse source)
         {
+
+            var Coupons = source.Coupons != null ? source.Coupons.Select(pd => pd.CreateFrom()) : new List<Coupons>();
+
             return new SearchCouponsViewResponse
                    {
                        Status = source.Status, 
