@@ -1809,6 +1809,7 @@ define("Coupons/Coupons.viewModel",
                                         $("#btnCancel,#btnPauseCampaign,#btnClose").removeAttr('disabled');
                                         isBtnSaveDraftVisible(false);
                                         IsenableBanner(true);
+                                        $("#btnFreeAds").removeAttr('disabled');
                                         couponModel().StatusValue("Panding Approval");
 
 
@@ -1823,6 +1824,7 @@ define("Coupons/Coupons.viewModel",
                                         isBtnSaveDraftVisible(false);
                                         IsenableBanner(true);
                                         couponModel().StatusValue("Live");
+                                        $("#btnFreeAds").removeAttr('disabled');
                                         IsPauseBtnVisible(true);
                                         //isTerminateBtnVisible(true);
                                         //isNewCampaignVisible(true);
@@ -1839,6 +1841,7 @@ define("Coupons/Coupons.viewModel",
                                         IsResumeBtnVisible(true);
                                         IsenableBanner(false);
                                         couponModel().StatusValue("Paused");
+                                        $("#btnFreeAds").removeAttr('disabled');
                                         //IsSubmitBtnVisible(true);
                                         //isTerminateBtnVisible(true);
                                         //IsResumeBtnVisible(true);
@@ -1848,6 +1851,7 @@ define("Coupons/Coupons.viewModel",
                                         $("#btnCancel").css("display", "block");
                                         $("input,button,textarea,a,select").attr('disabled', 'disabled');
                                         couponModel().StatusValue("Completed");
+                                        $("#btnFreeAds").removeAttr('disabled');
                                     } else if (couponModel().Status() == 6) {
                                         couponModel().StatusValue("Approval Rejected");
                                         $("#btnCancel").css("display", "block");
