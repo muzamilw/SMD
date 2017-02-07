@@ -397,7 +397,6 @@ namespace SMD.Implementation.Services
             return companyRepository.GetCompanySubscription();
         }
         public String UpdateCompanySubscription(CompanySubscription comSub)
-
         {
             StripeSubscriptionService subscriptionSvc = new StripeSubscriptionService();
             var dbCo = companyRepository.GetCompanyInfo();
@@ -435,6 +434,24 @@ namespace SMD.Implementation.Services
                 throw ex;
             }
 
+        }
+
+        public bool UpdateAdsCounter(Company com)
+        {
+            try
+            {
+                companyRepository.Update(com);
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+        public int? GetFreeAdsCount()
+        {
+           return companyRepository.GetFreeAdsCount();
         }
 
         #endregion

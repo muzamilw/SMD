@@ -32,6 +32,7 @@ define("survey/survey.viewModel",
                     IsVisibleAudience = ko.observable(false),
                     IsBroadMarketing = ko.observable(true),
                     SearchProfileQuestion = ko.observable(''),
+                    IsvideoVisible = ko.observable(false),
                     // Controlls editor visibility 
                     isEditorVisible = ko.observable(false),
                     ////selected Question
@@ -450,16 +451,22 @@ define("survey/survey.viewModel",
                     });
                     if (item.Status == 1) {
                         item.StatusValue = "Draft";
+                        IsvideoVisible(true);
                     } else if (item.Status == 2) {
                         item.StatusValue = "Panding Approval"; canSubmitForApproval(false);
+                        IsvideoVisible(false);
                     } else if (item.Status == 3) {
                         item.StatusValue = "Live"; canSubmitForApproval(false);
+                        IsvideoVisible(false);
                     } else if (item.Status == 4) {
                         item.StatusValue = "Paused"; canSubmitForApproval(false);
+                        IsvideoVisible(false);
                     } else if (item.Status == 5) {
                         item.StatusValue = "Completed"; canSubmitForApproval(false);
+                        IsvideoVisible(false);
                     } else if (item.Status == 6) {
                         item.StatusValue = "Rejected"; canSubmitForApproval(true);
+                        IsvideoVisible(false);
                     }
                     item.CreatedBy = DilveredPercentage(item);
                     if (item.ResultClicks == null)
@@ -515,6 +522,7 @@ define("survey/survey.viewModel",
                     StatusValue('');
                     isNewCampaign(true);
                     StatusValue("Draft");
+                    IsvideoVisible(true);
                     IsnewSurvey(true);
                     selectedQuestion(new model.Survey());
                     selectedQuestion().Gender("1");
@@ -2717,7 +2725,8 @@ define("survey/survey.viewModel",
                     showSocialPopup: showSocialPopup,
                     hideSocialPopup: hideSocialPopup,
                     Picture1Path: Picture1Path,
-                    Picture2Path: Picture2Path
+                    Picture2Path: Picture2Path,
+                    IsvideoVisible: IsvideoVisible
                 };
             })()
         };

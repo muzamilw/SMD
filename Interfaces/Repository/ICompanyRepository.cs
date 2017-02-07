@@ -32,5 +32,6 @@ namespace SMD.Interfaces.Repository
         Dictionary<string, int> GetStatusesCounters();
         Company GetCompanyInfo();
         CompanySubscription GetCompanySubscription();
+        int? GetFreeAdsCount();
     }
 }

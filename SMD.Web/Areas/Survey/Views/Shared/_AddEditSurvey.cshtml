@@ -1305,7 +1305,7 @@
 
 
                                                 <button class="btn  btn-success btnSubmitApproval" id="btnSubmitForApproval2" data-bind="visible:$root.canSubmitForApproval,click:$root.onSubmitSurveyQuestion" style="width: 229px;margin-bottom:4px;">Submit for Approval</button>
-                                                <button class="btn  btn-success btnSubmitApproval bluethemeclr drafthov" id="btnSaveAsDraft" data-bind="click:$root.SaveAsDraft, visible: $root.isNewCampaign() " style="width: 229px;">Save as Draft</button>
+                                                <button class="btn  btn-success btnSubmitApproval bluethemeclr drafthov" id="btnSaveAsDraft" data-bind="click:$root.SaveAsDraft, visible: $root.isNewCampaign() " style="width: 229px;margin-bottom:20px;">Save as Draft</button>
                                                 <button class="btn  btn-info " id="btnStopAndTerminate" data-bind="visible:$root.isTerminateBtnVisible" style="width:229px; margin-bottom: 10px; display: none;">Stop &amp; Terminate Early</button>
                                                 <button class="btn  btn-danger " id="btnArchive" data-bind="visible: $root.isShowArchiveBtn" style="width:229px; margin-bottom: 10px; display: none;">Archive Campaign</button>
                                                 <button class="btn  btn-info Theme_standard_clr" id="btnCopyCampaign" style="display:none;width:229px;">Create Copy - New Campaign</button>
@@ -1335,9 +1335,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row" data-bind="visible:$root.IsvideoVisible">
                             <div class="col-lg-12 text-left" style="margin-bottom:0px;padding-top:15px;padding-left:0px;">
-                                <button class="btn btn-danger free_VideoAd_btn" id="btnFreeAds" data-toggle="modal" data-target=".model_youtube_link" onclick="openYoutubeVideo();">Get Free Picture Polls Credits</button>
+                                <button class="btn btn-danger free_VideoAd_btn" id="btnFreeAds" data-toggle="modal" data-target=".model_youtube_link" onclick="openYoutubeVideo();">Get Free Video Ad Credits</button>
                             </div>
                         </div>
                         <div class="row " style="line-height: 2;padding:0px;">
