@@ -104,5 +104,7 @@ namespace SMD.Models.DomainModels
 
         public virtual ICollection<PayOutHistory> PayOutHistories { get; set; }
 
+        public Nullable<int> FreeAdsCounter { get; set; }
+
     }
 }

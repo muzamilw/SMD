@@ -43,8 +43,8 @@ namespace SMD.Models.Common
         public int IsTwoForOneDeal { get; set; }
 
         public int IsCashAMoon { get; set; }
-        public double LocationLAT { get; set; }
-        public double LocationLON { get; set; }
+        public string LocationLAT { get; set; }
+        public string LocationLON { get; set; }
         
     }
 

@@ -4021,15 +4021,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <End Role="Phrase" EntitySet="Phrases" />
           </AssociationSet>
           <EntitySet Name="UserPurchasedCoupons" EntityType="DomainModels.UserPurchasedCoupon" />
-          <FunctionImport Name="SearchCampaigns" ReturnType="Collection(DomainModels.SearchCampaigns_Result)">
-            <Parameter Name="Status" Mode="In" Type="Int32" />
-            <Parameter Name="keyword" Mode="In" Type="String" />
-            <Parameter Name="companyId" Mode="In" Type="Int32" />
-            <Parameter Name="fromRoww" Mode="In" Type="Int32" />
-            <Parameter Name="toRow" Mode="In" Type="Int32" />
-            <Parameter Name="adminMode" Mode="In" Type="Boolean" />
-            <Parameter Name="type" Mode="In" Type="Int32" />
-          </FunctionImport>
           <EntitySet Name="DamImages" EntityType="DomainModels.DamImage" />
           <EntitySet Name="UserCouponViews" EntityType="DomainModels.UserCouponView" />
           <FunctionImport Name="GetCouponByID" ReturnType="Collection(DomainModels.GetCouponByID_Result)">
@@ -4517,7 +4508,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <Parameter Name="ToRow" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="vw_Coupons" EntityType="DomainModels.vw_Coupons" />
-          <FunctionImport Name="SearchCampaigns1" ReturnType="Collection(DomainModels.SearchCampaigns1_Result)">
+          <FunctionImport Name="SearchCampaigns" ReturnType="Collection(DomainModels.SearchCampaigns_Result)">
             <Parameter Name="Status" Mode="In" Type="Int32" />
             <Parameter Name="keyword" Mode="In" Type="String" />
             <Parameter Name="companyId" Mode="In" Type="Int32" />
@@ -8140,33 +8131,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="Int32" Name="IsTwoForOneDeal" Nullable="false" />
           <Property Type="String" Name="CouponLink" Nullable="true" MaxLength="1034" />
           <Property Type="Int32" Name="TotalItems" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="SearchCoupons1_Result">
-          <Property Type="Int64" Name="CouponId" Nullable="false" />
-          <Property Type="String" Name="CouponTitle" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="CouponImage1" Nullable="true" />
-          <Property Type="String" Name="LogoUrl" Nullable="true" MaxLength="227" />
-          <Property Type="Double" Name="Price" Nullable="false" />
-          <Property Type="Double" Name="Savings" Nullable="true" />
-          <Property Type="Double" Name="SwapCost" Nullable="false" />
-          <Property Type="Int32" Name="CompanyId" Nullable="true" />
-          <Property Type="Int32" Name="CouponActiveMonth" Nullable="true" />
-          <Property Type="Int32" Name="CouponActiveYear" Nullable="true" />
-          <Property Type="DateTime" Name="eod" Nullable="true" />
-          <Property Type="DateTime" Name="strt" Nullable="true" Precision="23" />
-          <Property Type="Double" Name="distance" Nullable="true" />
-          <Property Type="String" Name="CompanyName" Nullable="true" />
-          <Property Type="String" Name="LocationTitle" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="LocationCity" Nullable="true" MaxLength="500" />
-          <Property Type="Int32" Name="DealsCount" Nullable="true" />
-          <Property Type="String" Name="CurrencyCode" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="CurrencySymbol" Nullable="true" MaxLength="50" />
-          <Property Type="Double" Name="AvgRating" Nullable="true" />
-          <Property Type="Int32" Name="UserHasRated" Nullable="false" />
-          <Property Type="Int32" Name="DaysLeft" Nullable="true" />
-          <Property Type="Int32" Name="IsTwoForOneDeal" Nullable="false" />
-          <Property Type="String" Name="CouponLink" Nullable="true" MaxLength="1034" />
-          <Property Type="Int32" Name="TotalItems" Nullable="true" />
+          <Property Type="String" Name="LocationLAT" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LocationLON" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="IsCashAMoon" Nullable="false" />
         </ComplexType>
         <EntityType Name="vw_Coupons">
           <Key>
@@ -8269,39 +8236,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Name="CurrencyCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CurrencySymbol" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <ComplexType Name="SearchCampaigns1_Result">
-          <Property Type="Int64" Name="CampaignID" Nullable="false" />
-          <Property Type="Int32" Name="CompanyId" Nullable="true" />
-          <Property Type="String" Name="CampaignName" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="ImagePath" Nullable="true" />
-          <Property Type="String" Name="VerifyQuestion" Nullable="true" MaxLength="500" />
-          <Property Type="DateTime" Name="ModifiedDateTime" Nullable="true" Precision="23" />
-          <Property Type="String" Name="Answer1" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="Answer2" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="Answer3" Nullable="true" MaxLength="500" />
-          <Property Type="Int32" Name="viewCountToday" Nullable="true" />
-          <Property Type="Int32" Name="viewCountYesterday" Nullable="true" />
-          <Property Type="Int32" Name="viewCountAllTime" Nullable="true" />
-          <Property Type="Int32" Name="clickThroughsToday" Nullable="true" />
-          <Property Type="Int32" Name="clickThroughsYesterday" Nullable="true" />
-          <Property Type="Int32" Name="clickThroughsAllTime" Nullable="true" />
-          <Property Type="Int32" Name="SurveyAnsweredAllTime" Nullable="true" />
-          <Property Type="Int32" Name="Answer1Stats" Nullable="true" />
-          <Property Type="Int32" Name="Answer2Stats" Nullable="true" />
-          <Property Type="Int32" Name="Answer3Stats" Nullable="true" />
-          <Property Type="String" Name="Locationss" Nullable="true" />
-          <Property Type="DateTime" Name="StartDateTime" Nullable="true" Precision="23" />
-          <Property Type="Double" Name="MaxBudget" Nullable="true" />
-          <Property Type="Double" Name="MaxDailyBudget" Nullable="true" />
-          <Property Type="Double" Name="AmountSpent" Nullable="true" />
-          <Property Type="Int32" Name="Status" Nullable="true" />
-          <Property Type="DateTime" Name="ApprovalDateTime" Nullable="true" Precision="23" />
-          <Property Type="Double" Name="ClickRate" Nullable="true" />
-          <Property Type="DateTime" Name="CreatedDateTime" Nullable="true" Precision="23" />
-          <Property Type="Int32" Name="Type" Nullable="true" />
-          <Property Type="Int32" Name="priority" Nullable="true" />
-          <Property Type="Int32" Name="TotalItems" Nullable="true" />
-        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -10421,6 +10355,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
                 <ScalarProperty Name="IsTwoForOneDeal" ColumnName="IsTwoForOneDeal" />
                 <ScalarProperty Name="CouponLink" ColumnName="CouponLink" />
                 <ScalarProperty Name="TotalItems" ColumnName="TotalItems" />
+                <ScalarProperty Name="LocationLAT" ColumnName="LocationLAT" />
+                <ScalarProperty Name="LocationLON" ColumnName="LocationLON" />
+                <ScalarProperty Name="IsCashAMoon" ColumnName="IsCashAMoon" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -10526,28 +10463,14 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="SearchCampaigns1" FunctionName="SMDModel.Store.SearchCampaigns">
+          <FunctionImportMapping FunctionImportName="SearchCampaigns" FunctionName="SMDModel.Store.SearchCampaigns">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="DomainModels.SearchCampaigns1_Result">
+              <ComplexTypeMapping TypeName="DomainModels.SearchCampaigns_Result">
                 <ScalarProperty Name="CampaignID" ColumnName="CampaignID" />
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
                 <ScalarProperty Name="CampaignName" ColumnName="CampaignName" />
-                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
-                <ScalarProperty Name="VerifyQuestion" ColumnName="VerifyQuestion" />
-                <ScalarProperty Name="ModifiedDateTime" ColumnName="ModifiedDateTime" />
-                <ScalarProperty Name="Answer1" ColumnName="Answer1" />
-                <ScalarProperty Name="Answer2" ColumnName="Answer2" />
-                <ScalarProperty Name="Answer3" ColumnName="Answer3" />
                 <ScalarProperty Name="viewCountToday" ColumnName="viewCountToday" />
                 <ScalarProperty Name="viewCountYesterday" ColumnName="viewCountYesterday" />
                 <ScalarProperty Name="viewCountAllTime" ColumnName="viewCountAllTime" />
-                <ScalarProperty Name="clickThroughsToday" ColumnName="clickThroughsToday" />
-                <ScalarProperty Name="clickThroughsYesterday" ColumnName="clickThroughsYesterday" />
-                <ScalarProperty Name="clickThroughsAllTime" ColumnName="clickThroughsAllTime" />
-                <ScalarProperty Name="SurveyAnsweredAllTime" ColumnName="SurveyAnsweredAllTime" />
-                <ScalarProperty Name="Answer1Stats" ColumnName="Answer1Stats" />
-                <ScalarProperty Name="Answer2Stats" ColumnName="Answer2Stats" />
-                <ScalarProperty Name="Answer3Stats" ColumnName="Answer3Stats" />
                 <ScalarProperty Name="Locationss" ColumnName="Locationss" />
                 <ScalarProperty Name="StartDateTime" ColumnName="StartDateTime" />
                 <ScalarProperty Name="MaxBudget" ColumnName="MaxBudget" />
@@ -10557,9 +10480,23 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
                 <ScalarProperty Name="ApprovalDateTime" ColumnName="ApprovalDateTime" />
                 <ScalarProperty Name="ClickRate" ColumnName="ClickRate" />
                 <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="priority" ColumnName="priority" />
                 <ScalarProperty Name="TotalItems" ColumnName="TotalItems" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="clickThroughsToday" ColumnName="clickThroughsToday" />
+                <ScalarProperty Name="clickThroughsYesterday" ColumnName="clickThroughsYesterday" />
+                <ScalarProperty Name="clickThroughsAllTime" ColumnName="clickThroughsAllTime" />
+                <ScalarProperty Name="priority" ColumnName="priority" />
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+                <ScalarProperty Name="VerifyQuestion" ColumnName="VerifyQuestion" />
+                <ScalarProperty Name="ModifiedDateTime" ColumnName="ModifiedDateTime" />
+                <ScalarProperty Name="Answer1" ColumnName="Answer1" />
+                <ScalarProperty Name="Answer2" ColumnName="Answer2" />
+                <ScalarProperty Name="Answer3" ColumnName="Answer3" />
+                <ScalarProperty Name="SurveyAnsweredAllTime" ColumnName="SurveyAnsweredAllTime" />
+                <ScalarProperty Name="Answer1Stats" ColumnName="Answer1Stats" />
+                <ScalarProperty Name="Answer2Stats" ColumnName="Answer2Stats" />
+                <ScalarProperty Name="Answer3Stats" ColumnName="Answer3Stats" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
