@@ -1265,9 +1265,9 @@ else
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row" data-bind="visible:$root.isvideobtnvisible">
                             <div class="col-lg-12 text-left" style="margin-bottom:0px;padding-top:5px;padding-left:0px;">
-                                <button class="btn btn-danger free_VideoAd_btn" id="btnFreeAds" data-bind="text:$root.videoAdbtnLabel" data-toggle="modal" data-target=".model_youtube_link" onclick="openYoutubeVideo();"></button>
+                                <button class="btn btn-danger free_VideoAd_btn" id="btnFreeAds" data-toggle="modal" data-target=".model_youtube_link" onclick="openYoutubeVideo();">Get Free Video Ad Credits</button>@*data-bind="text:$root.videoAdbtnLabel"*@
                             </div>
                         </div>
                         

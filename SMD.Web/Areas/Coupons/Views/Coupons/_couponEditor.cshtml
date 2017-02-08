@@ -247,18 +247,25 @@
                                                     <div class="col-lg-4 text-right">
                                                         <label for="txtBuyItlbl" class="text-right tooltip-float floatNone">List Deal Group for</label>
                                                     </div>
-                                                    <div class="col-lg-6">
-                                                        <div class="radio col-lg-5">
-                                                            <input type="radio" name="optionsRadiosDelvTypes" value="1" id="optionsRadiosApplyFilterFree" data-bind="checked:couponListingMode()==1? '1':'2',disable:true ">
+                                                    <div class="col-lg-8">
+                                                        <div class="radio col-lg-4">
+                                                            <input type="radio" name="optionsRadiosDelvTypes" value="1" id="optionsRadiosApplyFilterFree" data-bind="checked:couponListingMode()==1? '1': couponListingMode()==2? '2':'3',disable:true ">
                                                             <label for=" optionsradiosapplyfilterfree">
                                                                 <span>7 Day Flash Deal</span>
                                                             </label>
                                                             <span class="help-block text-right"></span>
                                                         </div>
-                                                        <div class="radio col-lg-5">
-                                                            <input type="radio" name="optionsRadiosDelvTypes" value="2" id="optionsRadiosApplyFilterOnce" data-bind="checked:couponListingMode()==1? '1':'2',disable:true ">
+                                                        <div class="radio col-lg-3">
+                                                            <input type="radio" name="optionsRadiosDelvTypes" value="2" id="optionsRadiosApplyFilterOnce" data-bind="checked:couponListingMode()==1? '1': couponListingMode()==2? '2':'3',disable:true ">
                                                             <label for="optionsRadiosApplyFilterOnce">
                                                                 <span>30 Day Listing</span>
+                                                            </label>
+                                                            <span class="help-block text-right"></span>
+                                                        </div>
+                                                        <div class="radio col-lg-4">
+                                                            <input type="radio" name="optionsRadiosDelvTypes" value="3" id="optionsRadiosApplyFiltercash" data-bind="checked:couponListingMode()==1? '1': couponListingMode()==2? '2':'3',disable:true ">
+                                                            <label for="optionsRadiosApplyFiltercash">
+                                                                <span>Cash Back Deal</span>
                                                             </label>
                                                             <span class="help-block text-right"></span>
                                                         </div>

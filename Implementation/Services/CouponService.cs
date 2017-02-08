@@ -934,6 +934,26 @@ namespace SMD.Implementation.Services
                     dbCo.ApprovalDateTime = DateTime.Now;
                     dbCo.ApprovedBy = couponRepository.LoggedInUserIdentity;
                     dbCo.Status = (Int32)AdCampaignStatus.Live;
+                    if (dbCo.CouponListingMode == 3)
+                    {
+                        if (userData.Company != null)
+                        {
+                            int? adCounter = userData.Company.FreeAdsCounter;
+                            if (adCounter == null)
+                            {
+                                adCounter = 5;
+                                userData.Company.FreeAdsCounter = adCounter;
+                                _companyService.UpdateAdsCounter(userData.Company);
+                            }
+                            else {
+                                adCounter = adCounter + 5;
+                                   userData.Company.FreeAdsCounter = adCounter;
+                                _companyService.UpdateAdsCounter(userData.Company);
+                            
+                            }
+
+                        }
+                    }
 
                     // just comment for pilot dent remove this
                     //if ((dbCo.IsPaymentCollected != true && (freeCount > 1 || dbCo.CouponListingMode == 2)) || (dbCo.IsPaymentCollected != true && (dbCo.CouponListingMode==1 && dbCo.CouponPriceOptions.Count>1)))
@@ -979,10 +999,11 @@ namespace SMD.Implementation.Services
 
                 if (source.Approved == true)
                 {
-                    emailManagerService.SendCouponCampaignApprovalEmail(dbCo.UserId, dbCo.CouponTitle,(dbCo.CouponListingMode == 1 ? 7: 30), dbCo.couponImage1);
-                }else
+                    emailManagerService.SendCouponCampaignApprovalEmail(dbCo.UserId, dbCo.CouponTitle, (dbCo.CouponListingMode == 1 ? 7 : 30), dbCo.couponImage1);
+                }
+                else
                 {
-                    emailManagerService.SendCouponCampaignRejectionEmail(dbCo.UserId, dbCo.CouponTitle, (dbCo.CouponListingMode == 1 ? 7 : 30), dbCo.couponImage1, dbCo.RejectedReason );
+                    emailManagerService.SendCouponCampaignRejectionEmail(dbCo.UserId, dbCo.CouponTitle, (dbCo.CouponListingMode == 1 ? 7 : 30), dbCo.couponImage1, dbCo.RejectedReason);
                 }
 
             }
@@ -1006,7 +1027,7 @@ namespace SMD.Implementation.Services
             }
             return respMesg;
         }
-        private string CreateStripeSubscription(Coupon source ,string stripeCustomerID,int freeCount )
+        private string CreateStripeSubscription(Coupon source, string stripeCustomerID, int freeCount)
         {
 
             if (source.CompanyId != null)
@@ -1023,9 +1044,9 @@ namespace SMD.Implementation.Services
                 // Get Current Product
                 var product = (dynamic)null;
 
-                if (source.CouponListingMode == 1 && source.CouponPriceOptions.Count==1 && freeCount ==1)
+                if (source.CouponListingMode == 1 && source.CouponPriceOptions.Count == 1 && freeCount == 1)
                     product = productRepository.GetProductByCountryId("couponfree");
-                else 
+                else
                 {
                     //product = productRepository.GetProductByCountryId("couponunlimited");
 
@@ -1132,7 +1153,7 @@ namespace SMD.Implementation.Services
         }
         public int getDealStatByCouponIdFormAnalytic(long dealId, int Gender, int age, int type)
         {
-            return couponRepository.getDealStatByCouponIdFormAnalytic(dealId, Gender, age, type); 
+            return couponRepository.getDealStatByCouponIdFormAnalytic(dealId, Gender, age, type);
         }
         public DateTime getExpiryDate(int CouponId)
         {
@@ -1168,9 +1189,9 @@ namespace SMD.Implementation.Services
 
 
 
-        public bool InsertCouponRatingReview(CouponRatingReview model,string Image1String,  string Image2String,  string Image3String, string Image1ext,  string Image2ext,  string Image3ext)
+        public bool InsertCouponRatingReview(CouponRatingReview model, string Image1String, string Image2String, string Image3String, string Image1ext, string Image2ext, string Image3ext)
         {
-            
+
             var ReviwerUser = UserManager.FindById(model.UserId);
             var coupon = couponRepository.GetCouponById(model.CouponId.Value).FirstOrDefault();
             var AdvertiserUser = aspnetUserRepository.GetUserbyCompanyId(coupon.CompanyId.Value);
@@ -1193,9 +1214,9 @@ namespace SMD.Implementation.Services
 
 
 
-        private void SaveReviewImages(CouponRatingReview model, string Image1String, string Image2String, string Image3String,string Image1ext, string Image2ext, string Image3ext)
+        private void SaveReviewImages(CouponRatingReview model, string Image1String, string Image2String, string Image3String, string Image1ext, string Image2ext, string Image3ext)
         {
-            
+
             string directoryPath = HttpContext.Current.Server.MapPath("~/SMD_Content/Coupons/" + model.CouponId + "/" + model.CouponReviewId.ToString());
 
             if (directoryPath != null && !Directory.Exists(directoryPath))
@@ -1204,9 +1225,9 @@ namespace SMD.Implementation.Services
             }
 
 
-            if (!string.IsNullOrEmpty(Image1String) )
+            if (!string.IsNullOrEmpty(Image1String))
             {
-                 string image1RElpath = "/SMD_Content/Coupons/" + model.CouponId + "/" + model.CouponReviewId.ToString() +  "Image1." + Image1ext;
+                string image1RElpath = "/SMD_Content/Coupons/" + model.CouponId + "/" + model.CouponReviewId.ToString() + "Image1." + Image1ext;
                 string image1abspath = directoryPath + "\\" + "Image1." + Image1ext;
 
                 ImageHelper.SaveBase64(directoryPath + "\\" + image1abspath, Image1String);
@@ -1232,7 +1253,7 @@ namespace SMD.Implementation.Services
                 model.Reviewimage3 = image3RElpath;
             }
 
-            
+
         }
 
 
@@ -1277,7 +1298,7 @@ namespace SMD.Implementation.Services
         }
         public List<AdGetCouponCategories> GetDealsByCtgId(long CouponId)
         {
-             return couponRepository.GetDealsByCtgId(CouponId);
+            return couponRepository.GetDealsByCtgId(CouponId);
         }
 
         public List<getDealImpressionByAgeByCouponId_Result> getDealImpressionByAgeByCouponId(long CId)

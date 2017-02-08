@@ -24,6 +24,7 @@ define("common/dashboardGraphAnalytics.viewModel",
                      LiveDisplayCampaign = ko.observable(0),
                      LiveCoupons = ko.observable(0),
                      LivePolls = ko.observable(0),
+                     FreeAdsCounter = ko.observable(0),
 
                      getBaseData = function ()
                      {
@@ -47,11 +48,12 @@ define("common/dashboardGraphAnalytics.viewModel",
                          dataService.GetCounters(null, {
                              
                              success: function (data) {
-                                 
+                                 debugger;
                                  LiveVidCampaign(data.LiveVideoCampaign);
                                  LiveDisplayCampaign(data.LiveDisplayCampaign);
                                  LiveCoupons(data.LiveDeals);
                                  LivePolls(data.LivePolls);
+                                 FreeAdsCounter(data.FreeAdsCounter);
 
                              },
                              error: function () {
@@ -215,7 +217,8 @@ define("common/dashboardGraphAnalytics.viewModel",
                     LiveVidCampaign:LiveVidCampaign,
                     LiveDisplayCampaign:LiveDisplayCampaign,
                     LiveCoupons:LiveCoupons,
-                    LivePolls: LivePolls
+                    LivePolls: LivePolls,
+                    FreeAdsCounter: FreeAdsCounter
                 };
             })()
         };

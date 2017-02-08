@@ -789,124 +789,124 @@ else
                                         </div>
                                     </div>
 
-                                    
-                                        <div class="col-lg-12 " style="padding:0px;">
-                                            <div class="adsubHeading Theme_standard_clr borderbtmline">
-                                                Call for Action Button.
-                                            </div>
+
+                                    <div class="col-lg-12 " style="padding:0px;">
+                                        <div class="adsubHeading Theme_standard_clr borderbtmline">
+                                            Call for Action Button.
                                         </div>
+                                    </div>
 
-                                        <div class="form-group">
-                                            <div class="col-lg-2">
-                                                <label for="txtBuyItlbl" class="control-label text-right tooltip-float floatNone">Button Label </label>
-                                            </div>
-                                            <div class="col-lg-7">
-
-                                                <select class="form-control" style="width:50%!important;" id="buyItddl" data-bind="event:{ change: $root.handleBuyIt}">
-
-                                                    <option value="0">Do not show button</option>
-                                                    <option value="Apply Now">
-                                                        Apply Now
-                                                    </option>
-                                                    <option value="Book Now">
-                                                        Book Now
-                                                    </option>
-                                                    <option value="Contact Us">
-                                                        Contact Us
-                                                    </option>
-                                                    <option value="Download">
-                                                        Download
-                                                    </option>
-                                                    <option value="Learn More">
-                                                        Learn More
-                                                    </option>
-                                                    <option value="Shop Now">
-                                                        Shop Now
-                                                    </option>
-                                                    <option value="Sign Up">
-                                                        Sign Up
-                                                    </option>
-                                                    <option value="Watch More">
-                                                        Watch More
-                                                    </option>
-
-                                                    <option value="Buy Now">
-                                                        Buy Now
-                                                    </option>
-                                                    <option value="Check Availability">
-                                                        Check Availability
-                                                    </option>
-                                                    <option value="999">
-                                                        Custom Button Label
-                                                    </option>
-
-
-                                                </select>
-                                            </div>
-                                            <div class="col-lg-3 pull-right" style="padding-left:16px;display:none">
-                                                <button class="btn  btn-success" id="saveBtn" style="width:180px;" data-bind="text:$root.saveBtntext">Save 20% - Buy Now</button>
-                                            </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-2">
+                                            <label for="txtBuyItlbl" class="control-label text-right tooltip-float floatNone">Button Label </label>
                                         </div>
+                                        <div class="col-lg-7">
 
-                                        <div class="form-group" data-bind="visible:$root.buyItQuestionLabelStatus() == true">
+                                            <select class="form-control" style="width:50%!important;" id="buyItddl" data-bind="event:{ change: $root.handleBuyIt}">
 
-                                            <div>
+                                                <option value="0">Do not show button</option>
+                                                <option value="Apply Now">
+                                                    Apply Now
+                                                </option>
+                                                <option value="Book Now">
+                                                    Book Now
+                                                </option>
+                                                <option value="Contact Us">
+                                                    Contact Us
+                                                </option>
+                                                <option value="Download">
+                                                    Download
+                                                </option>
+                                                <option value="Learn More">
+                                                    Learn More
+                                                </option>
+                                                <option value="Shop Now">
+                                                    Shop Now
+                                                </option>
+                                                <option value="Sign Up">
+                                                    Sign Up
+                                                </option>
+                                                <option value="Watch More">
+                                                    Watch More
+                                                </option>
 
-                                                <div class="col-lg-2">
-                                                    <label for="txtBuyItlbl" class="control-label text-ripreview_screen_advtlogoCntght tooltip-float floatNone">Custom button</label>
-                                                </div>
+                                                <option value="Buy Now">
+                                                    Buy Now
+                                                </option>
+                                                <option value="Check Availability">
+                                                    Check Availability
+                                                </option>
+                                                <option value="999">
+                                                    Custom Button Label
+                                                </option>
 
-                                                <div class="col-lg-8">
-                                                    <input style="width:420px!important;" type="text" class=" form-control txtbuyitlbl" id="txtBuyItlbl" placeholder="(12 characters)" data-bind="value:BuyitBtnLabel" maxlength="12">
 
-                                                </div>
-                                            </div>
-
+                                            </select>
                                         </div>
+                                        <div class="col-lg-3 pull-right" style="padding-left:16px;display:none">
+                                            <button class="btn  btn-success" id="saveBtn" style="width:180px;" data-bind="text:$root.saveBtntext">Save 20% - Buy Now</button>
+                                        </div>
+                                    </div>
 
+                                    <div class="form-group" data-bind="visible:$root.buyItQuestionLabelStatus() == true">
 
-                                        <div class="form-group" data-bind="visible:$root.hideLandingPageURl">
+                                        <div>
 
                                             <div class="col-lg-2">
-                                                <label for="txtBuyItUrl" class="control-label text-right tooltip-float floatNone">Landing page url </label>
+                                                <label for="txtBuyItlbl" class="control-label text-ripreview_screen_advtlogoCntght tooltip-float floatNone">Custom button</label>
                                             </div>
-                                            <div class="col-lg-9 borderPanel Subpanels" style="padding-bottom:10px;margin-left:7px;">
-                                                <div class="col-lg-9">
-                                                    <textarea style="width:100%!important;margin-top:5px;resize:none;color:blue" class="form-control" id="txtBuyItUrl" rows="1" placeholder="Enter in landing page url " data-bind="value:BuyitLandingPageUrl"></textarea>
-                                                </div>
-                                                <div class="col-lg-3" style="padding-top:3px;margin-left:0px;">
-                                                    <button style="width:123px;height:33px;" class="btn  btn-success gtild-color urlbtn" id="btnNext" onclick="openUrl();">Test Link</button>
-                                                </div>
+
+                                            <div class="col-lg-8">
+                                                <input style="width:420px!important;" type="text" class=" form-control txtbuyitlbl" id="txtBuyItlbl" placeholder="(12 characters)" data-bind="value:BuyitBtnLabel" maxlength="12">
+
                                             </div>
                                         </div>
+
+                                    </div>
+
+
+                                    <div class="form-group" data-bind="visible:$root.hideLandingPageURl">
+
+                                        <div class="col-lg-2">
+                                            <label for="txtBuyItUrl" class="control-label text-right tooltip-float floatNone">Landing page url </label>
+                                        </div>
+                                        <div class="col-lg-9 borderPanel Subpanels" style="padding-bottom:10px;margin-left:7px;">
+                                            <div class="col-lg-9">
+                                                <textarea style="width:100%!important;margin-top:5px;resize:none;color:blue" class="form-control" id="txtBuyItUrl" rows="1" placeholder="Enter in landing page url " data-bind="value:BuyitLandingPageUrl"></textarea>
+                                            </div>
+                                            <div class="col-lg-3" style="padding-top:3px;margin-left:0px;">
+                                                <button style="width:123px;height:33px;" class="btn  btn-success gtild-color urlbtn" id="btnNext" onclick="openUrl();">Test Link</button>
+                                            </div>
+                                        </div>
+                                    </div>
 
                                     <div style="background-color:#127abd;width:848px;height:7px;margin-left:-58px;"> </div>
                                     @*Banners   Pannel *@
-                                   
-                                        <div class="col-lg-12"style="padding-top:15px;">
-                                            <div class="row">
-                                                <div class="adsubHeading Theme_standard_clr" style="margin-bottom:0px;" data-bind="visible: $root.previewScreenNumber() == 2">
-                                                    Create up to 4 Deal Lines.
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-8" style="padding-left:0px;">
-                                                    <label style="color:gray;font-size:13px;">The first Deal Line will be used in all Notification &Emails</label>
-                                                </div>
 
+                                    <div class="col-lg-12" style="padding-top:15px;">
+                                        <div class="row">
+                                            <div class="adsubHeading Theme_standard_clr" style="margin-bottom:0px;" data-bind="visible: $root.previewScreenNumber() == 2">
+                                                Create up to 4 Deal Lines.
                                             </div>
-                                            <div class="col-lg-9" style="padding-left:0px;">
-                                                <label style="color:gray;font-size:13px;margin-left:-6px;">Emails are sent to our members on the 1st, 3rd last, 2nd last and the last day the first Deal Line</label>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-8" style="padding-left:0px;">
+                                                <label style="color:gray;font-size:13px;">The first Deal Line will be used in all Notification &Emails</label>
                                             </div>
-                                            @*<div class="adsubHeading Theme_standard_clr" data-bind="visible: $root.previewScreenNumber() == 2">
-                Create up to 6 Deal Lines.
-
-                <label style="color:gray;font-size:13px;">The first Deal Line will be used in all Notification &Emails</label>
-                <button class="btn  btn-success" id="saveBtn" style="width:80px;">save Me</button>
-                </div>*@
 
                                         </div>
-                                   
+                                        <div class="col-lg-9" style="padding-left:0px;">
+                                            <label style="color:gray;font-size:13px;margin-left:-6px;">Emails are sent to our members on the 1st, 3rd last, 2nd last and the last day the first Deal Line</label>
+                                        </div>
+                                        @*<div class="adsubHeading Theme_standard_clr" data-bind="visible: $root.previewScreenNumber() == 2">
+                                            Create up to 6 Deal Lines.
+
+                                            <label style="color:gray;font-size:13px;">The first Deal Line will be used in all Notification &Emails</label>
+                                            <button class="btn  btn-success" id="saveBtn" style="width:80px;">save Me</button>
+                                            </div>*@
+
+                                    </div>
+
 
                                     <div class="col-lg-12 borderPanel " style="margin-bottom:20px;">
                                         <!-- ko template: { name: 'dealLinesTemplate' } -->
@@ -1934,27 +1934,44 @@ else
                         </div>*@
                     <div class="col-lg-12" style="padding-left:24px;margin-top:12px;">
 
-                            @*<span style=" font-size:12px;">  Learn more about 'PPCV'</span><img style="height:14px;" src="/Content/Images/Drop_Arrow.png" data-toggle="collapse" data-target="#demo">*@
+                        @*<span style=" font-size:12px;">  Learn more about 'PPCV'</span><img style="height:14px;" src="/Content/Images/Drop_Arrow.png" data-toggle="collapse" data-target="#demo">*@
 
-                        </div>
+                    </div>
                 </div>
-
-
-
+                <div data-bind="with:$root.couponModel" >
+                    <div class="row" data-bind="visible:$root.isCash4dealVisible" style="padding-top:40px;">
+                        <div class="col-lg-8" style="padding-left:0px;">
+                            <div class="status_date_span text-left" style="margin-left:2px;">
+                                <label style="text-align:left;font-size:13px;"> Coupons left to issue before this Deals auto expires</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 pull-right" style="padding-top:12px;padding-left:55px;">
+                            <input type="text" style="float:left; color:#127abd; font-weight: bold;font-size: 15px; width:42px; text-align:right;color:red;background-color:white" readonly="readonly" name="Budget" class="form-control" id="txtcashDealExpire" data-bind="value:CashBackDealCounter">
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-8" style="padding-top:30px;padding-left:2px;">
+                                <div class="status_date_span text-left">
+                                    <label style="text-align:left;font-size:13px;">Enter Your PIN Code to redeem each Cash Back coupon </label>
+                                </div>
+                            </div>
+                            <div class="col-lg-4" style="padding-top:44px;margin-left:-14px;">
+                                <input type="text" maxlength="4" placeholder="****" style="float:left; color:#127abd; font-weight: bold;font-size: 15px; width:100px;color:red;background-color:white" name="Budget" class="form-control" id="txtPincode" data-bind="value:PinCode" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
 
-                    <div class="pull-left" data-bind="visible:$root.IsnewCoupon()==false">
+                    <div class="pull-left" data-bind="visible:$root.IsnewCoupon()==false" style="padding-top:30px;">
                         <div class="status_date_span" style="margin-left:0px;margin-top:0px;">
                             @*Last modified <span style="margin-left:3px"></span><span data-bind="dateString:$root.modifiedDate,datePattern: 'DD/MM/YYYY,h:mm a'">12 april 2014</span>*@
                             Last modified <span style="margin-left:3px"></span><span data-bind="text: moment($root.modifiedDate()).format('DD MMM YYYY h:mm a')">12 april 2014</span>
                         </div>
                     </div>
                 </div>
-
-
-                <div class="row">
+                <div class="row" style="padding-top:10px;" data-bind="visible:$root.isBtnSaveDraftVisible">
                     <div class="col-lg-12 text-left" style="margin-bottom:0px;padding-top:20px; padding-bottom:0px; padding-left:0px;">
-                        <button class="btn btn-danger free_VideoAd_btn" id="btnFreeAds" data-toggle="modal" data-target=".model_youtube_link" onclick="openYoutubeVideo();">Get Free Deal Credits</button>
+                        <button class="btn btn-danger free_VideoAd_btn" id="btnFreeAds" data-toggle="modal" data-target=".model_youtube_link" onclick="openYoutubeVideo();">Get Free Video Ad Credits</button>
                     </div>
                 </div>
                 <div class="row " style="line-height: 2;padding:0px;">
@@ -2005,30 +2022,6 @@ else
                         </div>
 
 
-                    </div>
-                </div>
-
-
-                <div data-bind="with:$root.couponModel">
-                    <div class="row" data-bind="visible:$root.isCash4dealVisible">
-                        <div class="col-lg-8" style="padding-left:0px;">
-                            <div class="status_date_span text-left" style="margin-left:2px;">
-                                <label style="text-align:left;font-size:13px;"> Coupons left to issue before this Deals auto expires</label>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 pull-right" style="padding-top:12px;padding-left:55px;">
-                            <input type="text" style="float:left; color:#127abd; font-weight: bold;font-size: 15px; width:42px; text-align:right;color:red;background-color:white" readonly="readonly" name="Budget" class="form-control" id="txtcashDealExpire" data-bind="value:CashBackDealCounter">
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-8" style="padding-top:30px;padding-left:2px;">
-                                <div class="status_date_span text-left">
-                                    <label style="text-align:left;font-size:13px;">Enter Your PIN Code to redeem each Cash Back coupon </label>
-                                </div>
-                            </div>
-                            <div class="col-lg-4" style="padding-top:44px;margin-left:-14px;">
-                                <input type="text" maxlength="4" style="float:left; color:#127abd; font-weight: bold;font-size: 15px; width:100px;color:red;background-color:white" name="Budget" class="form-control" id="txtPincode" data-bind="value:PinCode" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
