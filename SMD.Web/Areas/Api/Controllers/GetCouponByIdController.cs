@@ -92,8 +92,6 @@ namespace SMD.MIS.Areas.Api.Controllers
                 daysleft = (coupon.ApprovalDateTime.Value.AddDays(30) - DateTime.Now).Days;
             }
 
-
-
             if (coupon.DealEndingDiscountType == 1 && daysleft >= 0 && daysleft <=3) //30% discount on last 3 days
             {
                 additionalDiscount = 20;
@@ -147,14 +145,29 @@ namespace SMD.MIS.Areas.Api.Controllers
                 
             foreach (var item in res.CouponPriceOptions)
             {
-                item.Savings = coupon.discountType.Value == 1 ? item.Price.Value - (item.Price.Value * (coupon.discount.Value + additionalDiscount) / 100) : item.Price.Value - (coupon.discount.Value + additionalDiscount);
+                if (coupon.discountType.HasValue)
+                {
+                    item.Savings = coupon.discountType.Value == 1 ? item.Price.Value - (item.Price.Value * (coupon.discount.Value + additionalDiscount) / 100) : item.Price.Value - (coupon.discount.Value + additionalDiscount);
+                }
             }
 
 
             res.distance = Math.Round(res.distance.Value,1);
             res.FlaggedByCurrentUser = _couponService.CheckCouponFlaggedByUser(Convert.ToInt64(CouponId), UserId);
+            if (coupon.CouponListingMode == 3)
+            {
+                res.IsCashAMoon = 1;
+            }
+            else
+            {
+                res.IsCashAMoon = 0;
+            }
+            if (coupon.CashBackDealCounter == null)
+            {
+                res.CashBackDealCounter = 0;
+            }
             return res;
-
+           
             }
             catch (Exception e)
             {

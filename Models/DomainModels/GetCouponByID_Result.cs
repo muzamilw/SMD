@@ -10,6 +10,7 @@
 namespace SMD.Models.DomainModels
 {
     using System;
+using System.ComponentModel.DataAnnotations.Schema;
     
     public partial class GetCouponByID_Result
     {
@@ -114,6 +115,11 @@ namespace SMD.Models.DomainModels
 
         public string CouponLink { get; set; }
         public int IsTwoForOneDeal { get; set; }
+
+        public Nullable<int> CashBackDealCounter { get; set; }
         
+        [NotMapped]
+        public Nullable<int> IsCashAMoon { get; set; }
+
     }
 }

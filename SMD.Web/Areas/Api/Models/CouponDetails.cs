@@ -100,7 +100,9 @@ namespace SMD.MIS.Areas.Api.Models
         public virtual ICollection<CouponPriceOption> CouponPriceOptions { get; set; }
 
         public List<CouponRatingReviewResponse> CouponRatingReviewResponses { get; set; }
-        
+        public Nullable<int> CashBackDealCounter { get; set; }
+
+        public Nullable<int> IsCashAMoon { get; set; }
     }
 
 

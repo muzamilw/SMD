@@ -424,6 +424,7 @@
     <Compile Include="Areas\Api\Controllers\CreateStripeCustomerController.cs" />
     <Compile Include="Areas\Api\Controllers\DashboardInsightController.cs" />
     <Compile Include="Areas\Api\Controllers\DashboardStatusCounterController.cs" />
+    <Compile Include="Areas\Api\Controllers\DealDecrementController.cs" />
     <Compile Include="Areas\Api\Controllers\DealListingController.cs" />
     <Compile Include="Areas\Api\Controllers\DealStatsController.cs" />
     <Compile Include="Areas\Api\Controllers\DownloadImageController.cs" />

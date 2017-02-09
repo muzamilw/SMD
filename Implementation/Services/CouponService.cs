@@ -1314,7 +1314,10 @@ namespace SMD.Implementation.Services
             return couponRepository.getDealImpressionByProfessionByCouponId(CId);
         }
 
-
+        public DealCashBackResponse DealDecrementCounter(long CouponId, string UserId, long CompanyId)
+        {
+            return couponRepository.DealDecrementCounter(CouponId, UserId, CompanyId);
+        }
         #endregion
     }
 }

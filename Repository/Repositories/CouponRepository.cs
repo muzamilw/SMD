@@ -462,7 +462,43 @@ namespace SMD.Repository.Repositories
         {
             return db.getDealImpressionByProfessionByCouponId(CId).ToList(); 
         }
-       
+
+        public DealCashBackResponse DealDecrementCounter(long CouponId, string UserId, long CompanyId)
+        {
+            
+            DealCashBackResponse Response=new DealCashBackResponse();
+            Coupon TobeUpdatedCoupon = db.Coupons.Where(i => i.CouponId == CouponId && i.UserId.Equals(UserId) && i.CompanyId == CompanyId).FirstOrDefault();
+            
+            if (TobeUpdatedCoupon != null)
+            {
+                if (TobeUpdatedCoupon.CashBackDealCounter == null || TobeUpdatedCoupon.CashBackDealCounter== 0)
+                {
+                   Response.CounterMessage = string.Empty;
+                   Response.CounterMessage="Deal Expired!";
+                   Response.CashbackCounter=TobeUpdatedCoupon.CashBackDealCounter??0;
+                }
+                else if(TobeUpdatedCoupon.IsAppliedDec??false)
+                {
+                   Response.CounterMessage = string.Empty;
+                   Response.CounterMessage="Counter already has been applied!";
+                   Response.CashbackCounter=TobeUpdatedCoupon.CashBackDealCounter??0;
+                }
+                else
+                {
+                    TobeUpdatedCoupon.CashBackDealCounter -= 1;
+                    TobeUpdatedCoupon.IsAppliedDec = true;
+                    db.Coupons.Attach(TobeUpdatedCoupon);
+
+                    db.Entry(TobeUpdatedCoupon).State = EntityState.Modified;
+                    db.SaveChanges();
+                    Response.CounterMessage = string.Empty;
+                    Response.CounterMessage = "Sucess!";
+                    Response.CashbackCounter=TobeUpdatedCoupon.CashBackDealCounter??0;
+                }
+               
+            }
+            return Response;
+        }
         
         #endregion
     }

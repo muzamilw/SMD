@@ -11,6 +11,7 @@ namespace SMD.Interfaces.Repository
 {
     public interface ICouponRepository : IBaseRepository<Coupon, long>
     {
+        DealCashBackResponse DealDecrementCounter(long CouponId, string UserId, long CompanyId);
         List<Coupon> GetAllCouponList();
         IEnumerable<Coupon> GetAllCoupons();
         Coupon Find(long id);
