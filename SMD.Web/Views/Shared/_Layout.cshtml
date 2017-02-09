@@ -411,42 +411,9 @@
 
                 </div>
                 <div class="row" id="topArea" style="margin-left:-15px;">
-                    <div class="row dash_slide_panel" id="slider" style="padding:0px;display:none;">
-                        <div id="gallery">
-
-                            <a href="#" class="show">
-                                <img src="~/Content/DashBannnerImages/1.png" />
-
-                            </a>
-
-                            <a href="#">
-                                <img src="~/Content/DashBannnerImages/2.png" />
-                            </a>
-                            <a href="#">
-
-                                <img src="~/Content/DashBannnerImages/3.png" />
-                            </a>
-
-                            <a href="#">
-
-                                <img src="~/Content/DashBannnerImages/4.png" />
-                            </a>
-
-
-                        </div>
-                        <div class="clear"></div>
-
-                    </div>
-                    <div class="row" id="main_btnPannels" style="display:none;">
-                        <div class="col-lg-12" style="padding-top:3px;padding-left:0px;">
-
-                            @*<a class="btn  btn-default btn-gray" style="float:left;width:136px;height:58px;white-space:normal;    padding-top: 18px;" href="/Coupons/Coupons" id="btnCoupons">Deals </a>
-                                <a class="btn  btn-default btn-gray" style="float:left; width:136px;height:58px;padding-top:16px;margin-right:15px; white-space:normal;" id="btncampaigns" href="/Ads/Ads?mode=1">Videos ads</a>
-                                <a class="btn  btn-default btn-gray" style="float:left; width:136px;height:58px;padding-top:16px;margin-right:15px; white-space:normal;" id="btnspnsergames" href="/Ads/Ads?mode=4">Display Ads</a>
-                                <a class="btn  btn-default btn-gray" style="display:none;float:left;width:136px;height:58px;padding-top:16px;white-space:normal;" href="/Survey/" id="btnSurvey">Polls</a>
-                                <a class="btn  btn-default btn-gray" style="float:left;width:136px;height:58px;padding-top:16px;white-space:normal;" href="~/ProfileQuestion/Manage/Index" id="btnSurveyQuestion">Surveys</a>*@
-
-                            <div id="Counter_panel" class="homePanels pull-left bluebck">
+                    <div class="col-lg-12" style="padding-top:3px;padding-left:0px;margin-left:0px;padding-top:30px;">
+                        <div id="Counter_Btn" style="display:none;">
+                            <div id="Counter_panel" class="homePanels pull-left bluebck" style="margin-left:-4px;">
                                 <div style="margin-top:10px;">
                                     <span id="deal_heading" class="homePanels_headers" style="color: rgb(255, 255, 255); margin-left:5px;">Live Campaigns</span>
                                 </div>
@@ -468,20 +435,66 @@
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="margintop8px">
-                                    <div class="pull-left couters_left" style="color:white; background-color:red;height:20px;width:205px; font-weight:bold;font-size:13px; border-radius:4px;">FREE Video Ad credits &nbsp; <span style="padding-right:17px;" class="pull-right" data-bind="text:'£' +$root.FreeAdsCounter().toFixed(2)">£0.00</span> </div>
-                                    @*<div >
-                                        <div class="tooltip-float-width tooltip " style="margin-top:0px;">
-                                            <a class="input-group-addon" tabindex="-1" href="#" data-toggle="tooltip" title="" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;    padding: 0px;
-    padding-top: 5px;" data-container="body" data-placement="right" data-content="Add a city" data-original-title="Hooray!">
-                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                            </a>
-                                            <i class="fa fa-chevron-up" aria-hidden="true" style="color:#68b359;"></i>
-                                            <span class="tooltiptext">Tooltip text</span>
-                                        </div>
-                                    </div>*@
+                                    <div class="col-lg-10" style="margin-left:0px;padding-left:0px;padding-right:0px;margin-right:0px;">
+                                        <div class="pull-left couters_left" style="color:white; background-color:red;height:27px;width:165px; font-weight:bold;font-size:12px; border-radius:4px;padding-top:4px;">FREE Video Ad credits &nbsp; <span style="padding-right:8px;" class="pull-right" data-bind="text:'£' +$root.FreeAdsCounter().toFixed(2)">£0.00</span> </div>
+                                    </div>
+                                    
+                                    <div class="col-lg-1" style="margin-left:4px;padding-left:0px;padding-right:0px;margin-right:0px;padding-top:4px;">
+                                                        <div class="tooltip-float-width tooltip " style="margin-top:0px;">
+                                                            <a class="input-group-addon" tabindex="-1" href="#" data-toggle="tooltip" title="" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;    padding: 0px;
+                    padding-top: 1px;" data-container="body" data-placement="right" data-content="Add a city" data-original-title="Hooray!">
+                                                                <span class="label label-circle-question">&nbsp;?&nbsp;</span>
+                                                            </a>
+                                                            <i class="fa fa-chevron-up" aria-hidden="true" style="color:#68b359;"></i>
+                                                            <span class="tooltiptext">Tooltip text</span>
+                                                        </div>
+                                                    </div>
                                     <div class="clearfix"></div>
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="col-lg-9">
+                            <div class="row dash_slide_panel" id="slider" style="padding:0px;display:none;">
+                                <div id="gallery">
+
+                                    <a href="#" class="show">
+                                        <img src="~/Content/DashBannnerImages/1.png" style="width:950px;" />
+
+                                    </a>
+
+                                    <a href="#">
+                                        <img src="~/Content/DashBannnerImages/2.png" style="width:950px;" />
+                                    </a>
+                                    <a href="#">
+
+                                        <img src="~/Content/DashBannnerImages/3.png" style="width:950px;" />
+                                    </a>
+
+                                    <a href="#">
+
+                                        <img src="~/Content/DashBannnerImages/4.png" style="width:950px;" />
+                                    </a>
+
+
+                                </div>
+                                <div class="clear"></div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row" id="main_btnPannels" style="display:none;">
+                        <div class="col-lg-12" style="padding-top:3px;padding-left:0px;">
+
+                            @*<a class="btn  btn-default btn-gray" style="float:left;width:136px;height:58px;white-space:normal;    padding-top: 18px;" href="/Coupons/Coupons" id="btnCoupons">Deals </a>
+                                <a class="btn  btn-default btn-gray" style="float:left; width:136px;height:58px;padding-top:16px;margin-right:15px; white-space:normal;" id="btncampaigns" href="/Ads/Ads?mode=1">Videos ads</a>
+                                <a class="btn  btn-default btn-gray" style="float:left; width:136px;height:58px;padding-top:16px;margin-right:15px; white-space:normal;" id="btnspnsergames" href="/Ads/Ads?mode=4">Display Ads</a>
+                                <a class="btn  btn-default btn-gray" style="display:none;float:left;width:136px;height:58px;padding-top:16px;white-space:normal;" href="/Survey/" id="btnSurvey">Polls</a>
+                                <a class="btn  btn-default btn-gray" style="float:left;width:136px;height:58px;padding-top:16px;white-space:normal;" href="~/ProfileQuestion/Manage/Index" id="btnSurveyQuestion">Surveys</a>*@
+
+                           
 
 
                             <div id="deals_btn" class="homePanels pull-left" onclick="GoToDeals()">
@@ -642,6 +655,42 @@
                                 </div>
                             </div>
 
+                            <div id="Email_btn" class="homePanels pull-left" > @*onclick="Gotopolls()"*@
+                                <div style="margin-top:10px;" class="polls_front">
+                                    <div class="pull-left"><span id="polls_heading" class="homePanels_headers">Email Promotions</span></div><div class="pull-right" style="width:53px;"><i class="fa fa-play  font-size13 play_btn" aria-hidden="true" style="color: rgb(103, 103, 103) !important;display:none;"></i> <i class="fa fa-plus plus_btn  font-size13 pull-right" aria-hidden="true" style="color: #127abd !important;"></i><div class="clearfix"></div></div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <br>
+                                <div class="pg pollspanel" id="content_div">
+                                    <div class="panel_Image">
+                                        <img src="/Content/Images/email_Sicon.png" />
+                                    </div>
+                                    <div class="Dealdescription_panel">
+                                        <div>
+                                            <div class="pull-left"><i class="fa fa-circle greyclr fontsize4" aria-hidden="true"></i> </div> <div class="pull-left" style="margin-left:3px;">Send Targeted Emails.</div>
+                                            <div class="clearfix"></div>
+                                        </div>
+
+                                        <div>
+                                            <div class="pull-left"><i class="fa fa-circle greyclr fontsize4" aria-hidden="true"></i>  </div><div class="pull-left" style="margin-left:3px;">Include hyperlinks and images in emails.</div>
+                                            <div class="clearfix"></div>
+                                        </div>
+
+                                        <div>
+                                            <div class="pull-left"><i class="fa fa-circle greyclr fontsize4" aria-hidden="true"></i> </div> <div class="pull-left" style="margin-left:3px;">Analyze click thru rates and responses.</div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <br />
+                                        <div>
+                                            <div class="fbold">£19 per Email campaign.</div>
+                                        </div>
+                                        <div>
+                                            <div class="fbold">Plus £0.04 per email response.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
 
                             <div id="surveyQuestion_btn" class="homePanels pull-left" onclick="Gotosurveys()" style="display:none;">
                                 <div style="margin-top:10px;" class="survey_front">
@@ -768,8 +817,8 @@
 
                     </div>
                     @*<span class="col-xs-12" style="color:white;line-height:1;margin-top:8px;text-align:left;margin-left:-11px;" id="spn_learnmore">
-                        Learn more about&nbsp;<a target="_blank" style="font-size:11px;color:white" data-toggle="modal" data-target=".model_youtube_link" onclick="openYoutubeVideo();">FREE Video Ad credits</a>
-                    </span>*@
+                            Learn more about&nbsp;<a target="_blank" style="font-size:11px;color:white" data-toggle="modal" data-target=".model_youtube_link" onclick="openYoutubeVideo();">FREE Video Ad credits</a>
+                        </span>*@
                     <footer id="footer-bar" class="row">
 
 
@@ -888,6 +937,7 @@
                 {
                     $('.dash_slide_panel').css('display','block');
                     $('#main_btnPannels').css('display','block');
+                    $('#Counter_Btn').css('display','block');
 
                 }
                 slideShow();
@@ -1037,6 +1087,22 @@
 
 
             $("#Polls_btn").hover(function(){
+                $(this).find(".plus_btn").css("cssText", "color:#fff!important;");
+
+                $(this).find(".panel_Image").hide();
+
+                $(this).find(".Dealdescription_panel").show();
+                $(this).find("#polls_heading").css("color","#fff");
+
+            },function(){
+
+                $(this).find(".panel_Image").show();
+
+                $(this).find(".Dealdescription_panel").hide();
+                $(this).find("#polls_heading").css("color","#127abd");
+                $(this).find(".plus_btn").css("cssText", "color:#127abd !important;");
+            });
+            $("#Email_btn").hover(function(){
                 $(this).find(".plus_btn").css("cssText", "color:#fff!important;");
 
                 $(this).find(".panel_Image").hide();

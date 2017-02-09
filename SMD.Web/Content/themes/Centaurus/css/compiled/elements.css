@@ -4538,12 +4538,12 @@ input[type="radio"] {
 
 .tooltip-float-width {
     float: right;
-    width: 25px;
+    width: 15px;
     margin-top: 5px;
     background-color: gainsboro!important;
     text-align: center;
-    height: 25px;
-    border-radius: 25px;
+    height: 15px;
+    border-radius: 15px;
 }
 
 .tooltip-float {
