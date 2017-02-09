@@ -520,6 +520,7 @@
           <Property Name="CashBackDeal" Type="int" />
           <Property Name="PinCode" Type="int" />
           <Property Name="CashBackDealCounter" Type="int" />
+          <Property Name="IsAppliedDec" Type="bit" />
         </EntityType>
         <EntityType Name="CouponCategories">
           <Key>
@@ -7910,6 +7911,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <NavigationProperty Name="CouponRatingReviews" Relationship="DomainModels.FK_CouponRatingReview_Coupon" FromRole="Coupon" ToRole="CouponRatingReview" />
           <NavigationProperty Name="InvoiceDetails" Relationship="DomainModels.FK_InvoiceDetail_Coupon" FromRole="Coupon" ToRole="InvoiceDetail" />
           <NavigationProperty Name="UserPurchasedCoupons" Relationship="DomainModels.FK_UserPurchasedCoupon_Coupon" FromRole="Coupon" ToRole="UserPurchasedCoupon" />
+          <Property Name="IsAppliedDec" Type="Boolean" />
         </EntityType>
         <Association Name="FK_CampaignEventHistory_Coupon">
           <End Type="DomainModels.Coupon" Role="Coupon" Multiplicity="0..1" />
@@ -10142,6 +10144,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="Coupons">
             <EntityTypeMapping TypeName="DomainModels.Coupon">
               <MappingFragment StoreEntitySet="Coupon">
+                <ScalarProperty Name="IsAppliedDec" ColumnName="IsAppliedDec" />
                 <ScalarProperty Name="CashBackDealCounter" ColumnName="CashBackDealCounter" />
                 <ScalarProperty Name="PinCode" ColumnName="PinCode" />
                 <ScalarProperty Name="CashBackDeal" ColumnName="CashBackDeal" />

@@ -229,6 +229,15 @@ namespace SMD.MIS
             null,
             routeHandlers);
 
+
+            config.Routes.MapHttpRoute(
+         "DealDecrement",
+         "DealDecrement/",
+         new { controller = "DealDecrement" },
+         null,
+         routeHandlers);
+
+
             config.Routes.MapHttpRoute(
                "UserFavouriteCoupon",
                "UserFavouriteCoupon/{AuthenticationToken}/",

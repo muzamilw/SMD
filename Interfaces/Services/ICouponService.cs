@@ -74,8 +74,8 @@ namespace SMD.Interfaces.Services
         List<getDealImpressionByAgeByCouponId_Result> getDealImpressionByAgeByCouponId(long CId);
         List<getDealImpressionByGenderByCouponId_Result> getDealImpressionByGenderByCouponId(long CId);
         List<getDealImpressionByProfessionByCouponId_Result> getDealImpressionByProfessionByCouponId(long CId);
-       
 
+        DealCashBackResponse DealDecrementCounter(long CouponId, string UserId, long CompanyId);
 
     }
 }
