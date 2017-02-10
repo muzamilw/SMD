@@ -128,6 +128,7 @@ namespace SMD.Implementation.Services
                 IsReceiveDeals = loginUser.optDealsNearMeEmails ?? false,
                 IsReceiveLatestServices = loginUser.optLatestNewsEmails ?? false,
                 IsReceiveWeeklyUpdates = loginUser.optMarketingEmails ?? false,
+                optPaidEmails = loginUser.optPaidEmails ?? false,
                 Logo = company.Logo,
                 WebsiteLink = company.WebsiteLink,
                 SalesEmail = company.SalesEmail,
@@ -331,6 +332,7 @@ namespace SMD.Implementation.Services
             currentUser.optDealsNearMeEmails = source.IsReceiveDeals;
             currentUser.optLatestNewsEmails = source.IsReceiveLatestServices;
             currentUser.optMarketingEmails = source.IsReceiveWeeklyUpdates;
+            currentUser.optPaidEmails = source.optPaidEmails;
 
             _manageUserRepository.SaveChanges();
 

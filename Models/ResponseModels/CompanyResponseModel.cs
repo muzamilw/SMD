@@ -48,6 +48,7 @@ namespace SMD.Models.ResponseModels
         public bool IsReceiveDeals { get; set; }
         public bool IsReceiveWeeklyUpdates { get; set; }
         public bool IsReceiveLatestServices { get; set; }
+        public bool optPaidEmails { get; set; }
 
         #endregion
         #region Branch Properties
