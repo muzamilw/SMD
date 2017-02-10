@@ -52,7 +52,6 @@ namespace SMD.MIS.Areas.Api.Controllers
             try 
 	{	        
 		
-
             if (request == null || !ModelState.IsValid || string.IsNullOrEmpty(authenticationToken))
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
@@ -62,7 +61,6 @@ namespace SMD.MIS.Areas.Api.Controllers
             var finalResponse =  response.CreateFromForBalance();
             finalResponse.ProfileCompleteness = webApiUserService.GetUserProfileCompletness(request.UserId);
             finalResponse.HasUnredNotifications = notificationService.UserHasNotifications(request.UserId);
-
             return finalResponse;
 
 	        }

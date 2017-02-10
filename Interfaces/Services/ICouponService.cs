@@ -12,6 +12,7 @@ namespace SMD.Interfaces.Services
 {
     public interface ICouponService
     {
+        bool UpdateCouponPrice(string UserId, long CouponId, double Amount);
         List<Coupon> GetAllCouponList();
         List<AdGetCouponCategories> GetDealsByCtgId(long CouponId);
       

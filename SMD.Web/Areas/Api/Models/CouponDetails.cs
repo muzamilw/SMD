@@ -103,6 +103,8 @@ namespace SMD.MIS.Areas.Api.Models
         public Nullable<int> CashBackDealCounter { get; set; }
 
         public Nullable<int> IsCashAMoon { get; set; }
+
+        public Nullable<bool> IsCounterApplied { get; set; }
     }
 
 

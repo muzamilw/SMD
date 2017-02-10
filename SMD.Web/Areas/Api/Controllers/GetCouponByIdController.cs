@@ -166,6 +166,7 @@ namespace SMD.MIS.Areas.Api.Controllers
             {
                 res.CashBackDealCounter = 0;
             }
+            res.IsCounterApplied = coupon.IsAppliedDec??false;
             return res;
            
             }
