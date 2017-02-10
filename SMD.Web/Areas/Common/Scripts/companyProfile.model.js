@@ -7,7 +7,7 @@
           InstagramHandle, PinterestHandle, Logo, LogoImageBase64, specifiedSolutation, specifiedProfession, specifiedfullName, specifiedEmail, specifiedMobile,
             specifiedDob, specifiedPassport, specifiedIsDeals, specifiedIsWeeklyUpdate, specifiedIsLatestService, specifiedBranchName, specifiedBranchCount,
             specifiedSalesPhone, specifiedCompanyType, specifiedAboutUs, specifiedPaypalId, specifiedBusinessName, specifiedRegNumber, specifiedStartDate,
-            specifiedVatNumber, specifiedUserId, specifiedLat, specifiedLong) {
+            specifiedVatNumber, specifiedUserId, specifiedLat, specifiedLong, specoptPaidEmails) {
          var
                
                 CompanyId = ko.observable(CompanyId),
@@ -72,6 +72,7 @@
               userId = ko.observable(specifiedUserId),
               branchLocationLat = ko.observable(specifiedLat),
               branchLocationLong = ko.observable(specifiedLong),
+              optPaidEmails = ko.observable(specoptPaidEmails),
               LogoChanged = ko.observable(false),
               //-------------------
                 
@@ -157,6 +158,7 @@
                   isReceiveDeals: isReceiveDeals,
                   isReceiveWeeklyUpdates: isReceiveWeeklyUpdates,
                   isReceiveLatestServices: isReceiveLatestServices,
+                  optPaidEmails:optPaidEmails,
                   branchName: branchName,
                   numberOfBranches: numberOfBranches,
                   salesPhone: salesPhone,
@@ -220,6 +222,7 @@
                   IsReceiveDeals: isReceiveDeals(),
                   IsReceiveWeeklyUpdates: isReceiveWeeklyUpdates(),
                   IsReceiveLatestServices: isReceiveLatestServices(),
+                  optPaidEmails:optPaidEmails(),
                   BranchName: branchName(),
                   BranchesCount: numberOfBranches(),
                   SalesPhone: salesPhone(),
@@ -280,6 +283,7 @@
               isReceiveDeals: isReceiveDeals,
               isReceiveWeeklyUpdates: isReceiveWeeklyUpdates,
               isReceiveLatestServices: isReceiveLatestServices,
+              optPaidEmails:optPaidEmails,
               branchName: branchName,
               numberOfBranches: numberOfBranches,
               salesPhone: salesPhone,
@@ -311,7 +315,7 @@
           objSrv.BillingState, objSrv.BillingCountryId, objSrv.BillingCity, objSrv.BillingZipCode, objSrv.BillingPhone, objSrv.BillingEmail, objSrv.TwitterHandle, objSrv.FacebookHandle,
           objSrv.InstagramHandle, objSrv.PinterestHandle, objSrv.Logo, objSrv.LogoImageBase64, objSrv.Solutation, objSrv.Profession, objSrv.FirstName, objSrv.Email, objSrv.Mobile, objSrv.DateOfBirth
        , objSrv.PassportNumber, objSrv.IsReceiveDeals, objSrv.IsReceiveWeeklyUpdates, objSrv.IsReceiveLatestServices, objSrv.BranchName, objSrv.BranchesCount, objSrv.SalesPhone, objSrv.CompanyType
-        , objSrv.AboutUs, objSrv.PayPalId, objSrv.BillingBusinessName, objSrv.CompanyRegistrationNo, objSrv.BusinessStartDate, objSrv.VatNumber, objSrv.UserId, objSrv.BranchLocationLat, objSrv.BranchLocationLong);
+        , objSrv.AboutUs, objSrv.PayPalId, objSrv.BillingBusinessName, objSrv.CompanyRegistrationNo, objSrv.BusinessStartDate, objSrv.VatNumber, objSrv.UserId, objSrv.BranchLocationLat, objSrv.BranchLocationLong, objSrv.optPaidEmails);
      
     };
     
