@@ -1341,11 +1341,18 @@ define("Coupons/Coupons.viewModel",
                     hasErrors = true;
                     toastr.error("Please enter Group Title.");
                 }
+
                 if (couponModel().SearchKeywords() == "" || couponModel().SearchKeywords() == undefined) {
                     hasErrors = true;
                     toastr.error("Please enter Search Keywords.");
                 }
 
+                if (couponModel().CouponListingMode() == 3) {
+                    if (couponModel().PinCode() == "" || couponModel().PinCode() == undefined || couponModel().PinCode() == null) {
+                        hasErrors = true;
+                        toastr.error("Please enter 4 degit PIN Code.");
+                    }
+                }
                 if (couponModel().CouponPriceOptions().length == 0 || couponModel().Savings() == undefined) {
                     hasErrors = true;
                     toastr.error("Please create atleast one Price option");
@@ -2309,6 +2316,12 @@ define("Coupons/Coupons.viewModel",
                             hasErrors = true;
                             toastr.error("Please enter Search Keywords.");
                         }
+                        //if (couponModel().CouponListingMode() == 3) {
+                        //    if (couponModel().PinCode() == "" || couponModel().PinCode() == undefined || couponModel().PinCode() == null) {
+                        //        hasErrors = true;
+                        //        toastr.error("Please enter 4 degit PIN Code.");
+                        //    }
+                        //}
 
 
                         //if (couponModel().HowToRedeemLine2() == "" || couponModel().HowToRedeemLine2() == undefined) {
