@@ -683,7 +683,7 @@ namespace SMD.Implementation.Services
         {
 
             var result = couponRepository.GetCouponByIdSP(CouponId, UserId, Lat, Lon);
-
+            
             int RatingCount = 0;
 
             rating = couponRatingReviewRepository.GetPublishedCouponRatingReview(CouponId, out RatingCount);
@@ -764,11 +764,12 @@ namespace SMD.Implementation.Services
             List<Account> accounts = _accountRepository.GetByUserId(UserId);
 
             //var userVirtualAccount = accounts.Where(g => g.AccountType == (int)AccountType.VirtualAccount).FirstOrDefault();
+
             //if (PurchaseAmount < userVirtualAccount.AccountBalance)
             //{
 
             //Update Accounts
-            //TransactionManager.CouponPurchaseTransaction(CouponId, PurchaseAmount, userVirtualAccount.CompanyId.Value);
+           // TransactionManager.CouponPurchaseTransaction(CouponId, PurchaseAmount, userVirtualAccount.CompanyId.Value);
 
 
             //enter the entry for purchased coupon,
@@ -807,6 +808,23 @@ namespace SMD.Implementation.Services
             //return false;
 
         }
+
+        public bool UpdateCouponPrice(string UserId, long CouponId, double Amount)
+        {
+
+            //List<Account> accounts = _accountRepository.GetByUserId(UserId);
+
+            //var userVirtualAccount = accounts.Where(g => g.AccountType == (int)AccountType.VirtualAccount).FirstOrDefault();
+          
+            ////if (PurchaseAmount < userVirtualAccount.AccountBalance)
+            ////{
+            ////Update Accounts
+            //TransactionManager.CouponPurchaseTransaction(CouponId, Amount + userVirtualAccount.AccountBalance, userVirtualAccount.CompanyId.Value);
+
+            return true;
+
+        }
+
         public int RedeemPurchasedCoupon(string UserId, long couponPurchaseId, string pinCode, string operatorId)
         {
 

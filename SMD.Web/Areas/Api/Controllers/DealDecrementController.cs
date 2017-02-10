@@ -21,7 +21,7 @@ namespace SMD.MIS.Areas.Api.Controllers
 
         public DealCashBackResponse Get(string CompanyId, string CouponId, string UserId)
         {
-            var obj = _couponService.DealDecrementCounter(Convert.ToInt64(CouponId), UserId, Convert.ToInt64(CompanyId));
+            
             return _couponService.DealDecrementCounter(Convert.ToInt64(CouponId), UserId, Convert.ToInt64(CompanyId));
         }
 

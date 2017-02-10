@@ -465,37 +465,47 @@ namespace SMD.Repository.Repositories
 
         public DealCashBackResponse DealDecrementCounter(long CouponId, string UserId, long CompanyId)
         {
-            
+            //var result = couponRepository.GetCouponByIdSP(CouponId, UserId, Lat, Lon);
+            string ZeroStr ="0";
             DealCashBackResponse Response=new DealCashBackResponse();
-            Coupon TobeUpdatedCoupon = db.Coupons.Where(i => i.CouponId == CouponId && i.UserId.Equals(UserId) && i.CompanyId == CompanyId).FirstOrDefault();
-            
+
+            GetCouponByID_Result TobeUpdatedCoupon = GetCouponByIdSP(CouponId, UserId, ZeroStr, ZeroStr);
+
             if (TobeUpdatedCoupon != null)
             {
-                if (TobeUpdatedCoupon.CashBackDealCounter == null || TobeUpdatedCoupon.CashBackDealCounter== 0)
+
+                if (TobeUpdatedCoupon.CashBackDealCounter == null || TobeUpdatedCoupon.CashBackDealCounter == 0)
                 {
-                   Response.CounterMessage = string.Empty;
-                   Response.CounterMessage="Deal Expired!";
-                   Response.CashbackCounter=TobeUpdatedCoupon.CashBackDealCounter??0;
+                    Response.CounterMessage = string.Empty;
+                    Response.CounterMessage = "Deal Expired!";
+                    Response.CashbackCounter = TobeUpdatedCoupon.CashBackDealCounter ?? 0;
                 }
-                else if(TobeUpdatedCoupon.IsAppliedDec??false)
+                else if (TobeUpdatedCoupon.IsAppliedDec ?? false)
                 {
-                   Response.CounterMessage = string.Empty;
-                   Response.CounterMessage="Counter already has been applied!";
-                   Response.CashbackCounter=TobeUpdatedCoupon.CashBackDealCounter??0;
+                    Response.CounterMessage = string.Empty;
+                    Response.CounterMessage = "Counter already has been applied!";
+                    Response.CashbackCounter = TobeUpdatedCoupon.CashBackDealCounter ?? 0;
+                    Response.IsCounterApplied = false;
                 }
                 else
                 {
-                    TobeUpdatedCoupon.CashBackDealCounter -= 1;
-                    TobeUpdatedCoupon.IsAppliedDec = true;
-                    db.Coupons.Attach(TobeUpdatedCoupon);
+                    Coupon GetCoupon = db.Coupons.Where(i => i.CouponId == TobeUpdatedCoupon.CouponId).FirstOrDefault();
+                    GetCoupon.CashBackDealCounter -= 1;
+                    GetCoupon.IsAppliedDec = true;
+                    db.Coupons.Attach(GetCoupon);
 
-                    db.Entry(TobeUpdatedCoupon).State = EntityState.Modified;
+                    db.Entry(GetCoupon).State = EntityState.Modified;
                     db.SaveChanges();
                     Response.CounterMessage = string.Empty;
                     Response.CounterMessage = "Sucess!";
-                    Response.CashbackCounter=TobeUpdatedCoupon.CashBackDealCounter??0;
+                    Response.IsCounterApplied = true;
+                    Response.CashbackCounter = GetCoupon.CashBackDealCounter ?? 0;
                 }
-               
+
+            }
+            else
+            {
+                Response.CounterMessage = "Sorry,Coupon not Found!";
             }
             return Response;
         }

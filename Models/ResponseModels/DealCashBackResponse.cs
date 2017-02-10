@@ -10,6 +10,7 @@ namespace SMD.Models.ResponseModels
     {
         public string CounterMessage { get; set; }
         public int CashbackCounter { get; set; }
+        public bool IsCounterApplied { get; set; }
         
     }
 }

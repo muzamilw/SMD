@@ -271,6 +271,7 @@
           <Property Name="LastKnownLocation" Type="geography" />
           <Property Name="optPushNewDeals" Type="bit" />
           <Property Name="optPushNewPicturePoll" Type="bit" />
+          <Property Name="optPaidEmails" Type="bit" />
         </EntityType>
         <EntityType Name="AuditLog">
           <Key>
@@ -5509,6 +5510,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <NavigationProperty Name="UserCouponCategoryClicks" Relationship="DomainModels.FK_UserCouponCategoryClicks_AspNetUsers" FromRole="User" ToRole="UserCouponCategoryClick" />
           <Property Name="optPushNewDeals" Type="Boolean" />
           <Property Name="optPushNewPicturePoll" Type="Boolean" />
+          <Property Name="optPaidEmails" Type="Boolean" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Type="DomainModels.User" Role="AspNetUser" Multiplicity="1">
@@ -8215,6 +8217,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="String" Name="HowToRedeemLine5" Nullable="true" MaxLength="500" />
           <Property Type="DateTime" Name="SubmissionDateTime" Nullable="true" Precision="23" />
           <Property Type="Int32" Name="CashBackDealCounter" Nullable="true" />
+          <Property Type="Boolean" Name="IsAppliedDec" Nullable="true" />
           <Property Type="Double" Name="distance" Nullable="true" />
           <Property Type="String" Name="CurrencySymbol" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="LogoUrl" Nullable="true" MaxLength="227" />
@@ -8718,6 +8721,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="DomainModels.User">
               <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="optPaidEmails" ColumnName="optPaidEmails" />
                 <ScalarProperty Name="optPushNewPicturePoll" ColumnName="optPushNewPicturePoll" />
                 <ScalarProperty Name="optPushNewDeals" ColumnName="optPushNewDeals" />
                 <ScalarProperty Name="LastKnownLocation" ColumnName="LastKnownLocation" />
@@ -10479,6 +10483,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
                 <ScalarProperty Name="HowToRedeemLine5" ColumnName="HowToRedeemLine5" />
                 <ScalarProperty Name="SubmissionDateTime" ColumnName="SubmissionDateTime" />
                 <ScalarProperty Name="CashBackDealCounter" ColumnName="CashBackDealCounter" />
+                <ScalarProperty Name="IsAppliedDec" ColumnName="IsAppliedDec" />
                 <ScalarProperty Name="distance" ColumnName="distance" />
                 <ScalarProperty Name="CurrencySymbol" ColumnName="CurrencySymbol" />
                 <ScalarProperty Name="LogoUrl" ColumnName="LogoUrl" />

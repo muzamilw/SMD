@@ -117,7 +117,8 @@ namespace SMD.Models.IdentityModels
         public string CountryName { get; set; }
         [NotMapped]
         public string CityName { get; set; }
-        
+        public Nullable<bool> optPaidEmails { get; set; }  
+
         #endregion
 
         #region Public
