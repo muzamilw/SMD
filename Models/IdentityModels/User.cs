@@ -123,8 +123,6 @@ namespace SMD.Models.IdentityModels
 
         #region Public
 
-       
-
         #endregion
     }
 }
