@@ -8218,6 +8218,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="DateTime" Name="SubmissionDateTime" Nullable="true" Precision="23" />
           <Property Type="Int32" Name="CashBackDealCounter" Nullable="true" />
           <Property Type="Boolean" Name="IsAppliedDec" Nullable="true" />
+          <Property Type="Int32" Name="PinCode" Nullable="true" />
           <Property Type="Double" Name="distance" Nullable="true" />
           <Property Type="String" Name="CurrencySymbol" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="LogoUrl" Nullable="true" MaxLength="227" />
@@ -10484,6 +10485,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
                 <ScalarProperty Name="SubmissionDateTime" ColumnName="SubmissionDateTime" />
                 <ScalarProperty Name="CashBackDealCounter" ColumnName="CashBackDealCounter" />
                 <ScalarProperty Name="IsAppliedDec" ColumnName="IsAppliedDec" />
+                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
                 <ScalarProperty Name="distance" ColumnName="distance" />
                 <ScalarProperty Name="CurrencySymbol" ColumnName="CurrencySymbol" />
                 <ScalarProperty Name="LogoUrl" ColumnName="LogoUrl" />

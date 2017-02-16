@@ -809,19 +809,24 @@ namespace SMD.Implementation.Services
 
         }
 
-        public bool UpdateCouponPrice(string UserId, long CouponId, double Amount)
+        public DealCashBackResponse UpdateCouponPrice(string UserId, long CouponId, double Amount,long CompanyId)
         {
+              DealCashBackResponse response=  this.couponRepository.DealDecrementCounter(CouponId,UserId,CompanyId);
 
-            //List<Account> accounts = _accountRepository.GetByUserId(UserId);
+              if (response.IsCounterApplied)
+              {
+                  List<Account> accounts = _accountRepository.GetByUserId(UserId);
 
-            //var userVirtualAccount = accounts.Where(g => g.AccountType == (int)AccountType.VirtualAccount).FirstOrDefault();
-          
-            ////if (PurchaseAmount < userVirtualAccount.AccountBalance)
-            ////{
-            ////Update Accounts
-            //TransactionManager.CouponPurchaseTransaction(CouponId, Amount + userVirtualAccount.AccountBalance, userVirtualAccount.CompanyId.Value);
+                  var userVirtualAccount = accounts.Where(g => g.AccountType == (int)AccountType.VirtualAccount).FirstOrDefault();
 
-            return true;
+                  //if (PurchaseAmount < userVirtualAccount.AccountBalance)
+                  //{
+                  //Update Accounts
+                 // double totalamount = Amount + userVirtualAccount.AccountBalance ?? 0.0;
+                  TransactionManager.CouponPurchaseTransactionAddUp(CouponId, Amount, userVirtualAccount.CompanyId.Value);
+             }
+
+              return response;
 
         }
 

@@ -117,6 +117,7 @@ using System.ComponentModel.DataAnnotations.Schema;
         public int IsTwoForOneDeal { get; set; }
 
         public Nullable<int> CashBackDealCounter { get; set; }
+        public Nullable<int> PinCode { get; set; }
         public Nullable<bool> IsAppliedDec { get; set; }
         
         [NotMapped]

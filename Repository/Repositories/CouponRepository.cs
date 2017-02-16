@@ -470,7 +470,7 @@ namespace SMD.Repository.Repositories
             DealCashBackResponse Response=new DealCashBackResponse();
 
             GetCouponByID_Result TobeUpdatedCoupon = GetCouponByIdSP(CouponId, UserId, ZeroStr, ZeroStr);
-
+            
             if (TobeUpdatedCoupon != null)
             {
 
@@ -479,6 +479,7 @@ namespace SMD.Repository.Repositories
                     Response.CounterMessage = string.Empty;
                     Response.CounterMessage = "Deal Expired!";
                     Response.CashbackCounter = TobeUpdatedCoupon.CashBackDealCounter ?? 0;
+                    Response.IsCounterApplied = false;
                 }
                 else if (TobeUpdatedCoupon.IsAppliedDec ?? false)
                 {
