@@ -610,6 +610,8 @@
     <Compile Include="Areas\DAM\Controllers\ImagesController.cs" />
     <Compile Include="Areas\DAM\DAMAreaRegistration.cs" />
     <Compile Include="Areas\DAM\Models\Images.cs" />
+    <Compile Include="Areas\EmailPromotion\Controllers\EmailsController.cs" />
+    <Compile Include="Areas\EmailPromotion\EmailPromotionAreaRegistration.cs" />
     <Compile Include="Areas\Franchise\Controllers\ApprovePayPalController.cs" />
     <Compile Include="Areas\Franchise\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Franchise\Controllers\RegisterUsersController.cs" />
@@ -1189,6 +1191,10 @@
     <Content Include="Areas\User\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\User\Views\web.config" />
     <Content Include="Areas\User\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\EmailPromotion\Views\web.config" />
+    <Content Include="Areas\EmailPromotion\Views\Emails\Index.cshtml" />
+    <Content Include="Areas\EmailPromotion\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\EmailPromotion\Views\Shared\_Layout.cshtml" />
     <None Include="config\Web.connectionstrings.config">
       <SubType>Designer</SubType>
     </None>
@@ -1740,6 +1746,7 @@
     <Content Include="Images\dealFooterimg.jpg" />
     <Content Include="Images\displayAdimg.jpg" />
     <Content Include="Images\download-on-google-play.png" />
+    <Content Include="Images\email_Imagewhite.png" />
     <Content Include="Images\faceBook_Icon.png" />
     <Content Include="Images\googleplay_icon.png" />
     <Content Include="Images\guru.png" />
@@ -3484,6 +3491,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\EmailPromotion\Scripts\" />
     <Folder Include="Content\themes\base\minified\images\" />
     <Folder Include="Models\" />
     <Folder Include="Resources\" />

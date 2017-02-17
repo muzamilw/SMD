@@ -655,7 +655,7 @@
                                 </div>
                             </div>
 
-                            <div id="Email_btn" class="homePanels pull-left" > @*onclick="Gotopolls()"*@
+                            <div id="Email_btn" class="homePanels pull-left" onclick="GotoEmailPromotion()"> @*onclick="Gotopolls()"*@
                                 <div style="margin-top:10px;" class="polls_front">
                                     <div class="pull-left"><span id="polls_heading" class="homePanels_headers">Email Promotions</span></div><div class="pull-right" style="width:53px;"><i class="fa fa-play  font-size13 play_btn" aria-hidden="true" style="color: rgb(103, 103, 103) !important;display:none;"></i> <i class="fa fa-plus plus_btn  font-size13 pull-right" aria-hidden="true" style="color: #127abd !important;"></i><div class="clearfix"></div></div>
                                     <div class="clearfix"></div>
@@ -1180,6 +1180,11 @@
             function Gotopolls()
             {
                 window.location.href = "/Survey/";
+
+            }
+            function GotoEmailPromotion()
+            {
+                window.location.href = "/EmailPromotion/Emails";
 
             }
             function Gotosurveys()
