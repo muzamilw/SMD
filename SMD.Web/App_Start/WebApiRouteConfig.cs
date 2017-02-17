@@ -239,6 +239,13 @@ namespace SMD.MIS
 
 
             config.Routes.MapHttpRoute(
+      "DealBalanceUpdate",
+      "DealBalanceUpdate/",
+      new { controller = "DealBalanceUpdate" },
+      null,
+      routeHandlers);
+
+            config.Routes.MapHttpRoute(
                "UserFavouriteCoupon",
                "UserFavouriteCoupon/{AuthenticationToken}/",
                new { controller = "UserFavouriteCoupon" },

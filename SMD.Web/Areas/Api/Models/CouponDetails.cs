@@ -13,7 +13,7 @@ namespace SMD.MIS.Areas.Api.Models
       
         public string CouponTitle { get; set; }
 
-
+        public Nullable<int> PinCode { get; set; }
         public string HighlightLine1 { get; set; }
         public string HighlightLine2 { get; set; }
         public string HighlightLine3 { get; set; }

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets7AC0ABEC3010F2BAB9D9D72CD1537E9B6E99C1D24DE487ADB3BF702B4CAEA71A))]
+[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets45E7BC9DA91D6339B651BDC78371DCDACF0471B6C0BB0F7CFCB77EF3924A47C6))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -17,18 +17,18 @@ namespace Edm_EntityMappingGeneratedViews
     /// <Summary>
     /// The type contains views for EntitySets and AssociationSets that were generated at design time.
     /// </Summary>
-    public sealed class ViewsForBaseEntitySets7AC0ABEC3010F2BAB9D9D72CD1537E9B6E99C1D24DE487ADB3BF702B4CAEA71A : System.Data.Mapping.EntityViewContainer
+    public sealed class ViewsForBaseEntitySets45E7BC9DA91D6339B651BDC78371DCDACF0471B6C0BB0F7CFCB77EF3924A47C6 : System.Data.Mapping.EntityViewContainer
     {
         
         /// <Summary>
         /// The constructor stores the views for the extents and also the hash values generated based on the metadata and mapping closure and views.
         /// </Summary>
-        public ViewsForBaseEntitySets7AC0ABEC3010F2BAB9D9D72CD1537E9B6E99C1D24DE487ADB3BF702B4CAEA71A()
+        public ViewsForBaseEntitySets45E7BC9DA91D6339B651BDC78371DCDACF0471B6C0BB0F7CFCB77EF3924A47C6()
         {
             this.EdmEntityContainerName = "BaseDbContext";
             this.StoreEntityContainerName = "SMDModelStoreContainer";
-            this.HashOverMappingClosure = "ffc1e0abffa7c73c3e6ccbf3050d64593f89ee6f2eeb5b5f917e771806fe85b1";
-            this.HashOverAllExtentViews = "a5a2bc6ef23f48c57063ba75473657804910679d35f3fd28d019d1c38a7242f8";
+            this.HashOverMappingClosure = "f96f62f8d3ebde2827a0b23368590a3a9fa5177dce4f91c8dee628559298b877";
+            this.HashOverAllExtentViews = "75aab792d46d41f4d99a3f7e31ac0271ba978b67524130a42c5df66007c8d78b";
             this.ViewCount = 142;
         }
         
@@ -1219,7 +1219,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView24()
         {
-            System.Text.StringBuilder viewString = new System.Text.StringBuilder(4654);
+            System.Text.StringBuilder viewString = new System.Text.StringBuilder(4744);
             viewString.Append("\r\n    SELECT VALUE -- Constructing AspNetUsers\r\n        [SMDModel.Store.AspNetUs");
             viewString.Append("ers](T1.AspNetUsers_Id, T1.AspNetUsers_Email, T1.AspNetUsers_EmailConfirmed, T1.");
             viewString.Append("AspNetUsers_PasswordHash, T1.AspNetUsers_SecurityStamp, T1.AspNetUsers_PhoneNumb");
@@ -1239,46 +1239,47 @@ namespace Edm_EntityMappingGeneratedViews
             viewString.Append("rs_PassportNo, T1.AspNetUsers_Title, T1.AspNetUsers_Phone1CodeCountryID, T1.AspN");
             viewString.Append("etUsers_DeleteConfirmationToken, T1.AspNetUsers_LastKnownLocationLat, T1.AspNetU");
             viewString.Append("sers_LastKnownLocationLong, T1.AspNetUsers_LastKnownLocation, T1.AspNetUsers_opt");
-            viewString.Append("PushNewDeals, T1.AspNetUsers_optPushNewPicturePoll)\r\n    FROM (\r\n        SELECT ");
-            viewString.Append("\r\n            T.Id AS AspNetUsers_Id, \r\n            T.Email AS AspNetUsers_Email");
-            viewString.Append(", \r\n            T.EmailConfirmed AS AspNetUsers_EmailConfirmed, \r\n            T.");
-            viewString.Append("PasswordHash AS AspNetUsers_PasswordHash, \r\n            T.SecurityStamp AS AspNe");
-            viewString.Append("tUsers_SecurityStamp, \r\n            T.PhoneNumberConfirmed AS AspNetUsers_PhoneN");
-            viewString.Append("umberConfirmed, \r\n            T.TwoFactorEnabled AS AspNetUsers_TwoFactorEnabled");
-            viewString.Append(", \r\n            T.LockoutEndDateUtc AS AspNetUsers_LockoutEndDateUtc, \r\n        ");
-            viewString.Append("    T.LockoutEnabled AS AspNetUsers_LockoutEnabled, \r\n            T.AccessFailed");
-            viewString.Append("Count AS AspNetUsers_AccessFailedCount, \r\n            T.UserName AS AspNetUsers_");
-            viewString.Append("UserName, \r\n            T.FullName AS AspNetUsers_FullName, \r\n            T.Alte");
-            viewString.Append("rnateEmail AS AspNetUsers_AlternateEmail, \r\n            T.IsEmailVerified AS Asp");
-            viewString.Append("NetUsers_IsEmailVerified, \r\n            T.Status AS AspNetUsers_Status, \r\n      ");
-            viewString.Append("      T.CreatedDateTime AS AspNetUsers_CreatedDateTime, \r\n            T.Modified");
-            viewString.Append("DateTime AS AspNetUsers_ModifiedDateTime, \r\n            T.LastLoginTime AS AspNe");
-            viewString.Append("tUsers_LastLoginTime, \r\n            T.Phone1 AS AspNetUsers_Phone1, \r\n          ");
-            viewString.Append("  T.Phone2 AS AspNetUsers_Phone2, \r\n            T.Jobtitle AS AspNetUsers_Jobtit");
-            viewString.Append("le, \r\n            T.ContactNotes AS AspNetUsers_ContactNotes, \r\n            T.Is");
-            viewString.Append("Subscribed AS AspNetUsers_IsSubscribed, \r\n            T.AppID AS AspNetUsers_App");
-            viewString.Append("ID, \r\n            T.IsCompanyRepresentative AS AspNetUsers_IsCompanyRepresentati");
-            viewString.Append("ve, \r\n            T.UserTimeZone AS AspNetUsers_UserTimeZone, \r\n            T.Ge");
-            viewString.Append("nder AS AspNetUsers_Gender, \r\n            T.LanguageId AS AspNetUsers_LanguageID");
-            viewString.Append(", \r\n            T.IndustryId AS AspNetUsers_IndustryID, \r\n            T.Educatio");
-            viewString.Append("nId AS AspNetUsers_EducationId, \r\n            T.ProfileImage AS AspNetUsers_Prof");
-            viewString.Append("ileImage, \r\n            T.UserCode AS AspNetUsers_UserCode, \r\n            T.SmsC");
-            viewString.Append("ode AS AspNetUsers_SmsCode, \r\n            T.WebsiteLink AS AspNetUsers_WebsiteLi");
-            viewString.Append("nk, \r\n            T.DOB AS AspNetUsers_DOB, \r\n            T.CompanyId AS AspNetU");
-            viewString.Append("sers_CompanyId, \r\n            T.AuthenticationToken AS AspNetUsers_authenticatio");
-            viewString.Append("nToken, \r\n            T.DevicePlatform AS AspNetUsers_DevicePlatform, \r\n        ");
-            viewString.Append("    T.optDealsNearMeEmails AS AspNetUsers_optDealsNearMeEmails, \r\n            T.");
-            viewString.Append("optLatestNewsEmails AS AspNetUsers_optLatestNewsEmails, \r\n            T.optMarke");
-            viewString.Append("tingEmails AS AspNetUsers_optMarketingEmails, \r\n            T.PassportNo AS AspN");
-            viewString.Append("etUsers_PassportNo, \r\n            T.Title AS AspNetUsers_Title, \r\n            T.");
-            viewString.Append("Phone1CodeCountryID AS AspNetUsers_Phone1CodeCountryID, \r\n            T.DeleteCo");
-            viewString.Append("nfirmationToken AS AspNetUsers_DeleteConfirmationToken, \r\n            T.LastKnow");
-            viewString.Append("nLocationLat AS AspNetUsers_LastKnownLocationLat, \r\n            T.LastKnownLocat");
-            viewString.Append("ionLong AS AspNetUsers_LastKnownLocationLong, \r\n            T.LastKnownLocation ");
-            viewString.Append("AS AspNetUsers_LastKnownLocation, \r\n            T.optPushNewDeals AS AspNetUsers");
-            viewString.Append("_optPushNewDeals, \r\n            T.optPushNewPicturePoll AS AspNetUsers_optPushNe");
-            viewString.Append("wPicturePoll, \r\n            True AS _from0\r\n        FROM BaseDbContext.Users AS ");
-            viewString.Append("T\r\n    ) AS T1");
+            viewString.Append("PushNewDeals, T1.AspNetUsers_optPushNewPicturePoll, T1.AspNetUsers_optPaidEmails");
+            viewString.Append(")\r\n    FROM (\r\n        SELECT \r\n            T.Id AS AspNetUsers_Id, \r\n          ");
+            viewString.Append("  T.Email AS AspNetUsers_Email, \r\n            T.EmailConfirmed AS AspNetUsers_Em");
+            viewString.Append("ailConfirmed, \r\n            T.PasswordHash AS AspNetUsers_PasswordHash, \r\n      ");
+            viewString.Append("      T.SecurityStamp AS AspNetUsers_SecurityStamp, \r\n            T.PhoneNumberC");
+            viewString.Append("onfirmed AS AspNetUsers_PhoneNumberConfirmed, \r\n            T.TwoFactorEnabled A");
+            viewString.Append("S AspNetUsers_TwoFactorEnabled, \r\n            T.LockoutEndDateUtc AS AspNetUsers");
+            viewString.Append("_LockoutEndDateUtc, \r\n            T.LockoutEnabled AS AspNetUsers_LockoutEnabled");
+            viewString.Append(", \r\n            T.AccessFailedCount AS AspNetUsers_AccessFailedCount, \r\n        ");
+            viewString.Append("    T.UserName AS AspNetUsers_UserName, \r\n            T.FullName AS AspNetUsers_");
+            viewString.Append("FullName, \r\n            T.AlternateEmail AS AspNetUsers_AlternateEmail, \r\n      ");
+            viewString.Append("      T.IsEmailVerified AS AspNetUsers_IsEmailVerified, \r\n            T.Status A");
+            viewString.Append("S AspNetUsers_Status, \r\n            T.CreatedDateTime AS AspNetUsers_CreatedDate");
+            viewString.Append("Time, \r\n            T.ModifiedDateTime AS AspNetUsers_ModifiedDateTime, \r\n      ");
+            viewString.Append("      T.LastLoginTime AS AspNetUsers_LastLoginTime, \r\n            T.Phone1 AS As");
+            viewString.Append("pNetUsers_Phone1, \r\n            T.Phone2 AS AspNetUsers_Phone2, \r\n            T.");
+            viewString.Append("Jobtitle AS AspNetUsers_Jobtitle, \r\n            T.ContactNotes AS AspNetUsers_Co");
+            viewString.Append("ntactNotes, \r\n            T.IsSubscribed AS AspNetUsers_IsSubscribed, \r\n        ");
+            viewString.Append("    T.AppID AS AspNetUsers_AppID, \r\n            T.IsCompanyRepresentative AS Asp");
+            viewString.Append("NetUsers_IsCompanyRepresentative, \r\n            T.UserTimeZone AS AspNetUsers_Us");
+            viewString.Append("erTimeZone, \r\n            T.Gender AS AspNetUsers_Gender, \r\n            T.Langua");
+            viewString.Append("geId AS AspNetUsers_LanguageID, \r\n            T.IndustryId AS AspNetUsers_Indust");
+            viewString.Append("ryID, \r\n            T.EducationId AS AspNetUsers_EducationId, \r\n            T.Pr");
+            viewString.Append("ofileImage AS AspNetUsers_ProfileImage, \r\n            T.UserCode AS AspNetUsers_");
+            viewString.Append("UserCode, \r\n            T.SmsCode AS AspNetUsers_SmsCode, \r\n            T.Websit");
+            viewString.Append("eLink AS AspNetUsers_WebsiteLink, \r\n            T.DOB AS AspNetUsers_DOB, \r\n    ");
+            viewString.Append("        T.CompanyId AS AspNetUsers_CompanyId, \r\n            T.AuthenticationToke");
+            viewString.Append("n AS AspNetUsers_authenticationToken, \r\n            T.DevicePlatform AS AspNetUs");
+            viewString.Append("ers_DevicePlatform, \r\n            T.optDealsNearMeEmails AS AspNetUsers_optDeals");
+            viewString.Append("NearMeEmails, \r\n            T.optLatestNewsEmails AS AspNetUsers_optLatestNewsEm");
+            viewString.Append("ails, \r\n            T.optMarketingEmails AS AspNetUsers_optMarketingEmails, \r\n  ");
+            viewString.Append("          T.PassportNo AS AspNetUsers_PassportNo, \r\n            T.Title AS AspNe");
+            viewString.Append("tUsers_Title, \r\n            T.Phone1CodeCountryID AS AspNetUsers_Phone1CodeCount");
+            viewString.Append("ryID, \r\n            T.DeleteConfirmationToken AS AspNetUsers_DeleteConfirmationT");
+            viewString.Append("oken, \r\n            T.LastKnownLocationLat AS AspNetUsers_LastKnownLocationLat, ");
+            viewString.Append("\r\n            T.LastKnownLocationLong AS AspNetUsers_LastKnownLocationLong, \r\n  ");
+            viewString.Append("          T.LastKnownLocation AS AspNetUsers_LastKnownLocation, \r\n            T.");
+            viewString.Append("optPushNewDeals AS AspNetUsers_optPushNewDeals, \r\n            T.optPushNewPictur");
+            viewString.Append("ePoll AS AspNetUsers_optPushNewPicturePoll, \r\n            T.optPaidEmails AS Asp");
+            viewString.Append("NetUsers_optPaidEmails, \r\n            True AS _from0\r\n        FROM BaseDbContext");
+            viewString.Append(".Users AS T\r\n    ) AS T1");
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.AspNetUsers", viewString.ToString());
         }
         
@@ -2720,7 +2721,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView75()
         {
-            System.Text.StringBuilder viewString = new System.Text.StringBuilder(3954);
+            System.Text.StringBuilder viewString = new System.Text.StringBuilder(4030);
             viewString.Append("\r\n    SELECT VALUE -- Constructing Users\r\n        [DomainModels.User](T1.User_Id");
             viewString.Append(", T1.User_Email, T1.User_EmailConfirmed, T1.User_PasswordHash, T1.User_SecurityS");
             viewString.Append("tamp, T1.User_PhoneNumberConfirmed, T1.User_TwoFactorEnabled, T1.User_LockoutEnd");
@@ -2736,41 +2737,42 @@ namespace Edm_EntityMappingGeneratedViews
             viewString.Append("ails, T1.User_PassportNo, T1.User_Title, T1.User_Phone1CodeCountryID, T1.User_De");
             viewString.Append("leteConfirmationToken, T1.User_LastKnownLocationLat, T1.User_LastKnownLocationLo");
             viewString.Append("ng, T1.User_LastKnownLocation, T1.User_optPushNewDeals, T1.User_optPushNewPictur");
-            viewString.Append("ePoll)\r\n    FROM (\r\n        SELECT \r\n            T.Id AS User_Id, \r\n            ");
-            viewString.Append("T.Email AS User_Email, \r\n            T.EmailConfirmed AS User_EmailConfirmed, \r\n");
-            viewString.Append("            T.PasswordHash AS User_PasswordHash, \r\n            T.SecurityStamp A");
-            viewString.Append("S User_SecurityStamp, \r\n            T.PhoneNumberConfirmed AS User_PhoneNumberCo");
-            viewString.Append("nfirmed, \r\n            T.TwoFactorEnabled AS User_TwoFactorEnabled, \r\n          ");
-            viewString.Append("  T.LockoutEndDateUtc AS User_LockoutEndDateUtc, \r\n            T.LockoutEnabled ");
-            viewString.Append("AS User_LockoutEnabled, \r\n            T.AccessFailedCount AS User_AccessFailedCo");
-            viewString.Append("unt, \r\n            T.UserName AS User_UserName, \r\n            T.FullName AS User");
-            viewString.Append("_FullName, \r\n            T.AlternateEmail AS User_AlternateEmail, \r\n            ");
-            viewString.Append("T.IsEmailVerified AS User_IsEmailVerified, \r\n            T.Status AS User_Status");
-            viewString.Append(", \r\n            T.CreatedDateTime AS User_CreatedDateTime, \r\n            T.Modif");
-            viewString.Append("iedDateTime AS User_ModifiedDateTime, \r\n            T.LastLoginTime AS User_Last");
-            viewString.Append("LoginTime, \r\n            T.Phone1 AS User_Phone1, \r\n            T.Phone2 AS User");
-            viewString.Append("_Phone2, \r\n            T.Jobtitle AS User_Jobtitle, \r\n            T.ContactNotes");
-            viewString.Append(" AS User_ContactNotes, \r\n            T.IsSubscribed AS User_IsSubscribed, \r\n    ");
-            viewString.Append("        T.AppID AS User_AppID, \r\n            T.IsCompanyRepresentative AS User_I");
-            viewString.Append("sCompanyRepresentative, \r\n            T.UserTimeZone AS User_UserTimeZone, \r\n   ");
-            viewString.Append("         T.Gender AS User_Gender, \r\n            T.LanguageID AS User_LanguageId,");
-            viewString.Append(" \r\n            T.IndustryID AS User_IndustryId, \r\n            T.EducationId AS U");
-            viewString.Append("ser_EducationId, \r\n            T.ProfileImage AS User_ProfileImage, \r\n          ");
-            viewString.Append("  T.UserCode AS User_UserCode, \r\n            T.SmsCode AS User_SmsCode, \r\n      ");
-            viewString.Append("      T.WebsiteLink AS User_WebsiteLink, \r\n            T.DOB AS User_DOB, \r\n    ");
-            viewString.Append("        T.CompanyId AS User_CompanyId, \r\n            T.authenticationToken AS Us");
-            viewString.Append("er_AuthenticationToken, \r\n            T.DevicePlatform AS User_DevicePlatform, \r");
-            viewString.Append("\n            T.optDealsNearMeEmails AS User_optDealsNearMeEmails, \r\n            ");
-            viewString.Append("T.optLatestNewsEmails AS User_optLatestNewsEmails, \r\n            T.optMarketingE");
-            viewString.Append("mails AS User_optMarketingEmails, \r\n            T.PassportNo AS User_PassportNo,");
-            viewString.Append(" \r\n            T.Title AS User_Title, \r\n            T.Phone1CodeCountryID AS Use");
-            viewString.Append("r_Phone1CodeCountryID, \r\n            T.DeleteConfirmationToken AS User_DeleteCon");
-            viewString.Append("firmationToken, \r\n            T.LastKnownLocationLat AS User_LastKnownLocationLa");
-            viewString.Append("t, \r\n            T.LastKnownLocationLong AS User_LastKnownLocationLong, \r\n      ");
-            viewString.Append("      T.LastKnownLocation AS User_LastKnownLocation, \r\n            T.optPushNewD");
-            viewString.Append("eals AS User_optPushNewDeals, \r\n            T.optPushNewPicturePoll AS User_optP");
-            viewString.Append("ushNewPicturePoll, \r\n            True AS _from0\r\n        FROM SMDModelStoreConta");
-            viewString.Append("iner.AspNetUsers AS T\r\n    ) AS T1");
+            viewString.Append("ePoll, T1.User_optPaidEmails)\r\n    FROM (\r\n        SELECT \r\n            T.Id AS ");
+            viewString.Append("User_Id, \r\n            T.Email AS User_Email, \r\n            T.EmailConfirmed AS ");
+            viewString.Append("User_EmailConfirmed, \r\n            T.PasswordHash AS User_PasswordHash, \r\n      ");
+            viewString.Append("      T.SecurityStamp AS User_SecurityStamp, \r\n            T.PhoneNumberConfirme");
+            viewString.Append("d AS User_PhoneNumberConfirmed, \r\n            T.TwoFactorEnabled AS User_TwoFact");
+            viewString.Append("orEnabled, \r\n            T.LockoutEndDateUtc AS User_LockoutEndDateUtc, \r\n      ");
+            viewString.Append("      T.LockoutEnabled AS User_LockoutEnabled, \r\n            T.AccessFailedCount");
+            viewString.Append(" AS User_AccessFailedCount, \r\n            T.UserName AS User_UserName, \r\n       ");
+            viewString.Append("     T.FullName AS User_FullName, \r\n            T.AlternateEmail AS User_Alterna");
+            viewString.Append("teEmail, \r\n            T.IsEmailVerified AS User_IsEmailVerified, \r\n            ");
+            viewString.Append("T.Status AS User_Status, \r\n            T.CreatedDateTime AS User_CreatedDateTime");
+            viewString.Append(", \r\n            T.ModifiedDateTime AS User_ModifiedDateTime, \r\n            T.Las");
+            viewString.Append("tLoginTime AS User_LastLoginTime, \r\n            T.Phone1 AS User_Phone1, \r\n     ");
+            viewString.Append("       T.Phone2 AS User_Phone2, \r\n            T.Jobtitle AS User_Jobtitle, \r\n   ");
+            viewString.Append("         T.ContactNotes AS User_ContactNotes, \r\n            T.IsSubscribed AS Us");
+            viewString.Append("er_IsSubscribed, \r\n            T.AppID AS User_AppID, \r\n            T.IsCompanyR");
+            viewString.Append("epresentative AS User_IsCompanyRepresentative, \r\n            T.UserTimeZone AS U");
+            viewString.Append("ser_UserTimeZone, \r\n            T.Gender AS User_Gender, \r\n            T.Languag");
+            viewString.Append("eID AS User_LanguageId, \r\n            T.IndustryID AS User_IndustryId, \r\n       ");
+            viewString.Append("     T.EducationId AS User_EducationId, \r\n            T.ProfileImage AS User_Pro");
+            viewString.Append("fileImage, \r\n            T.UserCode AS User_UserCode, \r\n            T.SmsCode AS");
+            viewString.Append(" User_SmsCode, \r\n            T.WebsiteLink AS User_WebsiteLink, \r\n            T.");
+            viewString.Append("DOB AS User_DOB, \r\n            T.CompanyId AS User_CompanyId, \r\n            T.au");
+            viewString.Append("thenticationToken AS User_AuthenticationToken, \r\n            T.DevicePlatform AS");
+            viewString.Append(" User_DevicePlatform, \r\n            T.optDealsNearMeEmails AS User_optDealsNearM");
+            viewString.Append("eEmails, \r\n            T.optLatestNewsEmails AS User_optLatestNewsEmails, \r\n    ");
+            viewString.Append("        T.optMarketingEmails AS User_optMarketingEmails, \r\n            T.Passpor");
+            viewString.Append("tNo AS User_PassportNo, \r\n            T.Title AS User_Title, \r\n            T.Pho");
+            viewString.Append("ne1CodeCountryID AS User_Phone1CodeCountryID, \r\n            T.DeleteConfirmation");
+            viewString.Append("Token AS User_DeleteConfirmationToken, \r\n            T.LastKnownLocationLat AS U");
+            viewString.Append("ser_LastKnownLocationLat, \r\n            T.LastKnownLocationLong AS User_LastKnow");
+            viewString.Append("nLocationLong, \r\n            T.LastKnownLocation AS User_LastKnownLocation, \r\n  ");
+            viewString.Append("          T.optPushNewDeals AS User_optPushNewDeals, \r\n            T.optPushNewP");
+            viewString.Append("icturePoll AS User_optPushNewPicturePoll, \r\n            T.optPaidEmails AS User_");
+            viewString.Append("optPaidEmails, \r\n            True AS _from0\r\n        FROM SMDModelStoreContainer");
+            viewString.Append(".AspNetUsers AS T\r\n    ) AS T1");
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Users", viewString.ToString());
         }
         
