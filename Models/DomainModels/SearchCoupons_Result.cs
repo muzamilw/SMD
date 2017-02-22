@@ -49,5 +49,9 @@ namespace SMD.Models.DomainModels
         public int IsCashAMoon { get; set; }
         public string LocationLAT { get; set; }
         public string LocationLON { get; set; }
+
+     
+
+        public Nullable<int> CouponListingMode { get; set; }
     }
 }

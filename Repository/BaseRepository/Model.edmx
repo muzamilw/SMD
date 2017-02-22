@@ -2793,6 +2793,12 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Parameter Name="Profession" Type="nvarchar" Mode="In" />
           <Parameter Name="city" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="getCampaignImpressionByAgeByCId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getCampaignImpressionByGenderByCId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetCampaignPerformanceWeeklyStats" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="getCampaignROItblAnalytic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="int" Mode="In" />
@@ -4492,17 +4498,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <End Role="Coupon" EntitySet="Coupons" />
             <End Role="UserPurchasedCoupon" EntitySet="UserPurchasedCoupons" />
           </AssociationSet>
-          <FunctionImport Name="SearchCoupons" ReturnType="Collection(DomainModels.SearchCoupons_Result)">
-            <Parameter Name="categoryId" Mode="In" Type="Int32" />
-            <Parameter Name="type" Mode="In" Type="Int32" />
-            <Parameter Name="keywords" Mode="In" Type="String" />
-            <Parameter Name="distance" Mode="In" Type="Int32" />
-            <Parameter Name="Lat" Mode="In" Type="String" />
-            <Parameter Name="Lon" Mode="In" Type="String" />
-            <Parameter Name="UserId" Mode="In" Type="String" />
-            <Parameter Name="FromRow" Mode="In" Type="Int32" />
-            <Parameter Name="ToRow" Mode="In" Type="Int32" />
-          </FunctionImport>
           <EntitySet Name="vw_Coupons" EntityType="DomainModels.vw_Coupons" />
           <FunctionImport Name="SearchCampaigns" ReturnType="Collection(DomainModels.SearchCampaigns_Result)">
             <Parameter Name="Status" Mode="In" Type="Int32" />
@@ -4518,6 +4513,23 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <Parameter Name="Lat" Mode="In" Type="String" />
             <Parameter Name="Lon" Mode="In" Type="String" />
             <Parameter Name="UserId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SearchCoupons" ReturnType="Collection(DomainModels.SearchCoupons_Result)">
+            <Parameter Name="categoryId" Mode="In" Type="Int32" />
+            <Parameter Name="type" Mode="In" Type="Int32" />
+            <Parameter Name="keywords" Mode="In" Type="String" />
+            <Parameter Name="distance" Mode="In" Type="Int32" />
+            <Parameter Name="Lat" Mode="In" Type="String" />
+            <Parameter Name="Lon" Mode="In" Type="String" />
+            <Parameter Name="UserId" Mode="In" Type="String" />
+            <Parameter Name="FromRow" Mode="In" Type="Int32" />
+            <Parameter Name="ToRow" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getCampaignImpressionByAgeByCId1" ReturnType="Collection(DomainModels.getCampaignImpressionByAgeByCId1_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getCampaignImpressionByGenderByCId1" ReturnType="Collection(DomainModels.getCampaignImpressionByGenderByCId1_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
@@ -8023,36 +8035,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="SearchCoupons_Result">
-          <Property Type="Int64" Name="CouponId" Nullable="false" />
-          <Property Type="String" Name="CouponTitle" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="CouponImage1" Nullable="true" />
-          <Property Type="String" Name="LogoUrl" Nullable="true" MaxLength="227" />
-          <Property Type="Double" Name="Price" Nullable="false" />
-          <Property Type="Double" Name="Savings" Nullable="true" />
-          <Property Type="Double" Name="SwapCost" Nullable="false" />
-          <Property Type="Int32" Name="CompanyId" Nullable="true" />
-          <Property Type="Int32" Name="CouponActiveMonth" Nullable="true" />
-          <Property Type="Int32" Name="CouponActiveYear" Nullable="true" />
-          <Property Type="DateTime" Name="eod" Nullable="true" />
-          <Property Type="DateTime" Name="strt" Nullable="true" Precision="23" />
-          <Property Type="Double" Name="distance" Nullable="true" />
-          <Property Type="String" Name="CompanyName" Nullable="true" />
-          <Property Type="String" Name="LocationTitle" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="LocationCity" Nullable="true" MaxLength="500" />
-          <Property Type="Int32" Name="DealsCount" Nullable="true" />
-          <Property Type="String" Name="CurrencyCode" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="CurrencySymbol" Nullable="true" MaxLength="50" />
-          <Property Type="Double" Name="AvgRating" Nullable="true" />
-          <Property Type="Int32" Name="UserHasRated" Nullable="false" />
-          <Property Type="Int32" Name="DaysLeft" Nullable="true" />
-          <Property Type="Int32" Name="IsTwoForOneDeal" Nullable="false" />
-          <Property Type="String" Name="CouponLink" Nullable="true" MaxLength="1034" />
-          <Property Type="Int32" Name="TotalItems" Nullable="true" />
-          <Property Type="String" Name="LocationLAT" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="LocationLON" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="IsCashAMoon" Nullable="false" />
-        </ComplexType>
         <EntityType Name="vw_Coupons">
           <Key>
             <PropertyRef Name="CouponId" />
@@ -8242,6 +8224,45 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <Property Type="Int32" Name="DealEndingDiscountType" Nullable="true" />
           <Property Type="String" Name="CouponLink" Nullable="true" MaxLength="1034" />
           <Property Type="Int32" Name="IsTwoForOneDeal" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="SearchCoupons_Result">
+          <Property Type="Int64" Name="CouponId" Nullable="false" />
+          <Property Type="String" Name="CouponTitle" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="CouponImage1" Nullable="true" />
+          <Property Type="String" Name="LogoUrl" Nullable="true" MaxLength="227" />
+          <Property Type="Double" Name="Price" Nullable="false" />
+          <Property Type="Double" Name="Savings" Nullable="true" />
+          <Property Type="Double" Name="SwapCost" Nullable="false" />
+          <Property Type="Int32" Name="CompanyId" Nullable="true" />
+          <Property Type="Int32" Name="CouponActiveMonth" Nullable="true" />
+          <Property Type="Int32" Name="CouponActiveYear" Nullable="true" />
+          <Property Type="DateTime" Name="eod" Nullable="true" />
+          <Property Type="DateTime" Name="strt" Nullable="true" Precision="23" />
+          <Property Type="Double" Name="distance" Nullable="true" />
+          <Property Type="String" Name="CompanyName" Nullable="true" />
+          <Property Type="String" Name="LocationTitle" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="LocationCity" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="LocationLAT" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LocationLON" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="CouponListingMode" Nullable="true" />
+          <Property Type="Int32" Name="DealsCount" Nullable="true" />
+          <Property Type="String" Name="CurrencyCode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CurrencySymbol" Nullable="true" MaxLength="50" />
+          <Property Type="Double" Name="AvgRating" Nullable="true" />
+          <Property Type="Int32" Name="UserHasRated" Nullable="false" />
+          <Property Type="Int32" Name="DaysLeft" Nullable="true" />
+          <Property Type="Int32" Name="IsTwoForOneDeal" Nullable="false" />
+          <Property Type="Int32" Name="IsCashAMoon" Nullable="false" />
+          <Property Type="String" Name="CouponLink" Nullable="true" MaxLength="1034" />
+          <Property Type="Int32" Name="TotalItems" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="getCampaignImpressionByAgeByCId1_Result">
+          <Property Type="Int32" Name="Stats" Nullable="true" />
+          <Property Type="String" Name="label" Nullable="false" MaxLength="5" />
+        </ComplexType>
+        <ComplexType Name="getCampaignImpressionByGenderByCId1_Result">
+          <Property Type="Int32" Name="Stats" Nullable="true" />
+          <Property Type="String" Name="label" Nullable="false" MaxLength="6" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -10246,40 +10267,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="SearchCoupons" FunctionName="SMDModel.Store.SearchCoupons">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="DomainModels.SearchCoupons_Result">
-                <ScalarProperty Name="CouponId" ColumnName="CouponId" />
-                <ScalarProperty Name="CouponTitle" ColumnName="CouponTitle" />
-                <ScalarProperty Name="CouponImage1" ColumnName="CouponImage1" />
-                <ScalarProperty Name="LogoUrl" ColumnName="LogoUrl" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Savings" ColumnName="Savings" />
-                <ScalarProperty Name="SwapCost" ColumnName="SwapCost" />
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="CouponActiveMonth" ColumnName="CouponActiveMonth" />
-                <ScalarProperty Name="CouponActiveYear" ColumnName="CouponActiveYear" />
-                <ScalarProperty Name="eod" ColumnName="eod" />
-                <ScalarProperty Name="strt" ColumnName="strt" />
-                <ScalarProperty Name="distance" ColumnName="distance" />
-                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-                <ScalarProperty Name="LocationTitle" ColumnName="LocationTitle" />
-                <ScalarProperty Name="LocationCity" ColumnName="LocationCity" />
-                <ScalarProperty Name="DealsCount" ColumnName="DealsCount" />
-                <ScalarProperty Name="CurrencyCode" ColumnName="CurrencyCode" />
-                <ScalarProperty Name="CurrencySymbol" ColumnName="CurrencySymbol" />
-                <ScalarProperty Name="AvgRating" ColumnName="AvgRating" />
-                <ScalarProperty Name="UserHasRated" ColumnName="UserHasRated" />
-                <ScalarProperty Name="DaysLeft" ColumnName="DaysLeft" />
-                <ScalarProperty Name="IsTwoForOneDeal" ColumnName="IsTwoForOneDeal" />
-                <ScalarProperty Name="CouponLink" ColumnName="CouponLink" />
-                <ScalarProperty Name="TotalItems" ColumnName="TotalItems" />
-                <ScalarProperty Name="LocationLAT" ColumnName="LocationLAT" />
-                <ScalarProperty Name="LocationLON" ColumnName="LocationLON" />
-                <ScalarProperty Name="IsCashAMoon" ColumnName="IsCashAMoon" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="vw_Coupons">
             <EntityTypeMapping TypeName="DomainModels.vw_Coupons">
               <MappingFragment StoreEntitySet="vw_Coupons">
@@ -10509,6 +10496,57 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
                 <ScalarProperty Name="DealEndingDiscountType" ColumnName="DealEndingDiscountType" />
                 <ScalarProperty Name="CouponLink" ColumnName="CouponLink" />
                 <ScalarProperty Name="IsTwoForOneDeal" ColumnName="IsTwoForOneDeal" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SearchCoupons" FunctionName="SMDModel.Store.SearchCoupons">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.SearchCoupons_Result">
+                <ScalarProperty Name="CouponId" ColumnName="CouponId" />
+                <ScalarProperty Name="CouponTitle" ColumnName="CouponTitle" />
+                <ScalarProperty Name="CouponImage1" ColumnName="CouponImage1" />
+                <ScalarProperty Name="LogoUrl" ColumnName="LogoUrl" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Savings" ColumnName="Savings" />
+                <ScalarProperty Name="SwapCost" ColumnName="SwapCost" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="CouponActiveMonth" ColumnName="CouponActiveMonth" />
+                <ScalarProperty Name="CouponActiveYear" ColumnName="CouponActiveYear" />
+                <ScalarProperty Name="eod" ColumnName="eod" />
+                <ScalarProperty Name="strt" ColumnName="strt" />
+                <ScalarProperty Name="distance" ColumnName="distance" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="LocationTitle" ColumnName="LocationTitle" />
+                <ScalarProperty Name="LocationCity" ColumnName="LocationCity" />
+                <ScalarProperty Name="LocationLAT" ColumnName="LocationLAT" />
+                <ScalarProperty Name="LocationLON" ColumnName="LocationLON" />
+                <ScalarProperty Name="CouponListingMode" ColumnName="CouponListingMode" />
+                <ScalarProperty Name="DealsCount" ColumnName="DealsCount" />
+                <ScalarProperty Name="CurrencyCode" ColumnName="CurrencyCode" />
+                <ScalarProperty Name="CurrencySymbol" ColumnName="CurrencySymbol" />
+                <ScalarProperty Name="AvgRating" ColumnName="AvgRating" />
+                <ScalarProperty Name="UserHasRated" ColumnName="UserHasRated" />
+                <ScalarProperty Name="DaysLeft" ColumnName="DaysLeft" />
+                <ScalarProperty Name="IsTwoForOneDeal" ColumnName="IsTwoForOneDeal" />
+                <ScalarProperty Name="IsCashAMoon" ColumnName="IsCashAMoon" />
+                <ScalarProperty Name="CouponLink" ColumnName="CouponLink" />
+                <ScalarProperty Name="TotalItems" ColumnName="TotalItems" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getCampaignImpressionByAgeByCId1" FunctionName="SMDModel.Store.getCampaignImpressionByAgeByCId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.getCampaignImpressionByAgeByCId1_Result">
+                <ScalarProperty Name="Stats" ColumnName="Stats" />
+                <ScalarProperty Name="label" ColumnName="label" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getCampaignImpressionByGenderByCId1" FunctionName="SMDModel.Store.getCampaignImpressionByGenderByCId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.getCampaignImpressionByGenderByCId1_Result">
+                <ScalarProperty Name="Stats" ColumnName="Stats" />
+                <ScalarProperty Name="label" ColumnName="label" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

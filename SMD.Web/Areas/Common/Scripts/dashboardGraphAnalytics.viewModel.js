@@ -48,7 +48,7 @@ define("common/dashboardGraphAnalytics.viewModel",
                          dataService.GetCounters(null, {
                              
                              success: function (data) {
-                                 debugger;
+                                
                                  LiveVidCampaign(data.LiveVideoCampaign);
                                  LiveDisplayCampaign(data.LiveDisplayCampaign);
                                  LiveCoupons(data.LiveDeals);

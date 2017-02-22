@@ -224,10 +224,11 @@ namespace SMD.Repository.Repositories
         public Dictionary<string, int> GetStatusesCounters()
         {
             Dictionary<string, int> StDictionary = new Dictionary<string, int>();
-            StDictionary.Add("liveVidCamp", db.AdCampaigns.Where(i => i.Status == 3 && i.Type ==1 && i.UserId==this.LoggedInUserIdentity).ToList().Count);
-            StDictionary.Add("liveDisplayCamp", db.AdCampaigns.Where(i => i.Status == 3 && i.Type == 4 && i.UserId == this.LoggedInUserIdentity).ToList().Count);
-            StDictionary.Add("Deals", db.Coupons.Where(i => i.Status == 3 && i.UserId == this.LoggedInUserIdentity).ToList().Count);
-            StDictionary.Add("Polls", db.SurveyQuestions.Where(i => i.Status == 3 && i.UserId == this.LoggedInUserIdentity).ToList().Count);
+            StDictionary.Add("liveVidCamp", db.AdCampaigns.Where(i => i.Status == 3 && i.Type == 1 && i.UserId == this.LoggedInUserIdentity && i.CompanyId == this.CompanyId).ToList().Count);
+            StDictionary.Add("liveDisplayCamp", db.AdCampaigns.Where(i => i.Status == 3 && i.Type == 4 && i.UserId == this.LoggedInUserIdentity && i.CompanyId == this.CompanyId).ToList().Count);
+
+            StDictionary.Add("Deals", db.Coupons.Where(i => i.Status == 3 && i.UserId == this.LoggedInUserIdentity&& i.CompanyId==this.CompanyId).ToList().Count);
+            StDictionary.Add("Polls", db.SurveyQuestions.Where(i => i.Status == 3 && i.UserId == this.LoggedInUserIdentity && i.CompanyId==this.CompanyId).ToList().Count);
 
             return StDictionary;
         }
