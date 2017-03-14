@@ -13,7 +13,7 @@ else
     adminClasses = "displayNone";
 }
 
-<div class="row" id="emailsPromotion" style="margin-top:5px;">
+<div class="row" id="emailBinding" style="margin-top:5px;">
     <div class="row" id="Heading_div" style="opacity: 1;">
         <div class="col-lg-12" style="padding-left: 0px;padding-right:0px;padding-bottom:18px;">
             <div class="col-lg-3" style="margin-left:-3px !important;">
@@ -41,9 +41,63 @@ else
         <div class="row">
             <div class="col-lg-12" style="padding-left:0px;padding-right:9px;padding-bottom:10px;">
 
-                <!-- ko template: { name: 'filterTemplate' } -->
-                <!-- /ko -->
-                <div class="margintop13">
+                <div class="filter-body" style="padding-top:0px!important;" id="filter">
+                    <div class="row" id="topArea">
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12" style="float: left;">
+
+                            <div style="width:100%;">
+                                <span style="font-size:18px;float:left;color:#81d3dc!important;"></span>
+                                <div style="clear:both;"></div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <form>
+                            <div id="filter_block">
+
+                                <div class="col-sm-2" style="float:left;margin-top:8px;">
+                                    <div class="filter-block " style="margin-right: -10px;display:none">
+                                        <div class="form-group ">
+                                            <input type="text" class="form-control " placeholder="Search...">
+                                            <i class="fa fa-search search-icon"></i>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="col-sm-2 filterbloclkspos" style="float:left;margin-top:8px;">
+                                    <select id="ddlStatus" class="form-control" style="float:right;height:36px; display:none">
+                                        <option value="0">All Statuses</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                        <div>
+                            <div class="col-sm-4 filterbloclkspos" style="float:left;font-size: 20px;margin-top:8px;">
+                                <span>Sponsor a EmailPromotion !</span>
+                            </div>
+
+                            <div class="col-sm-1">
+                                <img src="/Images/Arrow.png" style="height:35px;">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3" style="float:right;margin-top:8px; text-align:right">
+                            <div>
+                                <button class=" btn btn-success create_Campaign_btn" style="">
+                                    Create Email Campaign
+                                </button>
+                            </div>
+                        </div>
+                        <div class="clearfix">
+                        </div>
+                    </div>
+                </div>
+                <div class="margintop13" style="display:none">
                     <div class="main-box no-header clearfix" style="padding-top:0px;">
                         <div class="main-box-body clearfix" style="padding-left:20px;padding-right:22px;">
                             <div class="tabsdescriptions" style="margin-left:0px;">
@@ -80,7 +134,7 @@ else
                     <div class="clearfix">
                     </div>
                 </div>
-                <div >
+                <div>
                     <div class="clearfix text-center" style="padding:20px;padding-bottom:10px;">
                         <span style="color:white">You haven’t created any Email Promotion yet</span>
                     </div>
@@ -93,10 +147,11 @@ else
 
             </div>
             <div class="col-lg-6 col-sm-6" style="float:left;padding-left:50px; display:none;">
-                <button class="btn  btn-success btnAdsCampaign" style="width:24%;float:left;padding:0px;" id="btnSubmitForApproval" >Coupons</button>
-                <button class="btn  btn-success btnAdsCampaign @adminClasses" style="width:24%;float:left;padding:0px;" id="btnSubmitForApproval" >Manage Users</button>
-                <button class="btn  btn-success btnAdsCampaign" style="width:24%;float:left;padding:0px;" id="btnSubmitForApproval" 
-                        >Marketing Info</button>
+                <button class="btn  btn-success btnAdsCampaign" style="width:24%;float:left;padding:0px;" id="btnSubmitForApproval">Coupons</button>
+                <button class="btn  btn-success btnAdsCampaign @adminClasses" style="width:24%;float:left;padding:0px;" id="btnSubmitForApproval">Manage Users</button>
+                <button class="btn  btn-success btnAdsCampaign" style="width:24%;float:left;padding:0px;" id="btnSubmitForApproval">
+                    Marketing Info
+                </button>
             </div>
 
             <div class="col-lg-2 col-sm-2" style="float:left;">
@@ -104,22 +159,23 @@ else
             </div>
 
         </div>
+
         <div class="row Subpanels" style="margin-right:1px;padding-top:0px;">
             <div class="col-lg-12">
 
                 <div class="col-lg-6" style="padding-top:20px;padding-left:15px;">
                     <div class="row">
                         <span style="font-size:20px;">Target & reward audiences near you</span>
-                        <span style="font-size:20px;">Target & reward audiences to watch your Video ad</span>
+
                     </div>
                     <div class="row center">
                         <img src="/Images/Share_world.png">
                     </div>
                 </div>
-                <div class="col-lg-6" style="padding-top:20px;padding-left:15px;">
+                <div class="col-lg-6" style="padding-top:20px;padding-left:15px; display:none">
                     <div class="row" style="padding-bottom:10px;">
-                        <span style="font-size:20px;margin-left:5px;" >Here’s some Display Ads by other advertisers</span>
-                        <span style="font-size:20px;margin-left:5px;" >Here’s some Video Ads by other advertisers</span>
+                        <span style="font-size:20px;margin-left:5px;">Here’s some Display Ads by other advertisers</span>
+
                     </div>
                     <div class="row center">
                         <div class="col-lg-4">
@@ -141,28 +197,6 @@ else
                             </div>
                         </div>
                     </div>
-
-                    <div class="row center">
-                        <div class="col-lg-4">
-                            <video id="videoTag" style="width:168px;height:70px;background-color:white" ></video>
-                            <div class="main-box no-header clearfix text-center" style="padding:8px;margin-top:1px;">
-                                <span style="font-size:12px;font-weight:bold" ></span>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <video id="videoTag" style="width:168px;height:70px;background-color:white"></video>
-                            <div class="main-box no-header clearfix text-center" style="padding:8px;margin-top:-4px;">
-                                <span style="font-size:12px;font-weight:bold" ></span>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <video id="videoTag" style="width:168px;height:70px;background-color:white"></video>
-                            <div class="main-box no-header clearfix text-center" style="padding:8px;margin-top:-4px;">
-                                <span style="font-size:12px;font-weight:bold" ></span>
-                            </div>
-                        </div>
-                    </div>
-
                     <div class="row" style="padding-top:0px;padding-left:8px;padding-bottom:16px;">
                         <a href="http://cash4ads.com/" target="_blank">
                             More...
@@ -172,8 +206,7 @@ else
 
                 <div class="col-lg-6" style="padding-top:20px;">
                     <div class="row" style="padding-bottom:10px;">
-                        <span style="font-size:20px;" >Get more Click-thrus to your landing pages</span>
-                        <span style="font-size:20px;">Ask an Insight question</span>
+                        <span style="font-size:20px;">Get more Click-thrus to your landing pages</span>
                     </div>
                     <div class="row">
                         <div class="form-group">
@@ -182,12 +215,6 @@ else
                                 <li>Upload a Banner Image and link to your web site</li>
                                 <li>Ask an Insight question and use the result to refine future targeting</li>
                                 <li>Reward Gamers with 50% of the click charge if they answer your survey question</li>
-                            </ul>
-                            <ul style="list-style-type:circle;margin-left:17px;">
-                                <li>Target audiences near you</li>
-                                <li>Upload a 30 sec Video ad / TV commercial</li>
-                                <li>Ask an Insight question and use the result to refine future targeting</li>
-                                <li>Reward audiences with 50% of your PPCV to watch ad and answer survey</li>
                             </ul>
                         </div>
                     </div>
@@ -208,7 +235,7 @@ else
 
 
                 <div class="row center">
-                    <img width="1147" style="padding:1px;">
+                    <img width="1147" style="padding:1px;" src="/Images/videoAdImage.jpg">
                 </div>
             </div>
         </div>
@@ -219,9 +246,9 @@ else
         </div>
     </div>
     @*@{
-        Html.RenderPartial("~/Areas/Ads/Views/Ads/ManageCampaign.cshtml");
+        Html.RenderPartial("~/Areas/EmailPromotion/Views/Emails/ManageEmail.cshtml");
     }*@
-    
+
 </div>
 <script id="advertsTemplate" type="text/html">
     <tr style="cursor: pointer">
@@ -409,7 +436,7 @@ else
     <div class="filter-body" style="padding-top:0px!important;" id="filter">
         <div class="row" id="topArea">
         </div>
-        <div class="row" style="display:none;">
+        <div class="row">
             <div class="col-sm-12" style="float: left;">
 
                 <div style="width:100%;">
@@ -419,9 +446,7 @@ else
                     </button>
                     <div style="clear:both;"></div>
                 </div>
-                <div style="width:641px;word-wrap:break-word;">
-                    <span style="font-size: 14px;" class="Theme_subheading-Clr "></span>  &nbsp; &nbsp; &nbsp; <span class="red bold rightAlign"> Watch Video <img src="/Images/youtube_play.JPG" height="25px" /> </span>   </span><br />
-                </div>
+        
             </div>
 
         </div>
@@ -493,9 +518,9 @@ else
     <script src="~/Scripts/gmaps-heatmap.js"></script>
     <script src="~/Scripts/chart.js"></script>
     <script src="~/Scripts/Charts/knockout.chart.js"></script>
-    @*<script type="text/javascript">
+    <script type="text/javascript">
         var mode = 1;
-        require(["ads/ads.view", "common/stripeChargeCustomer.view", "common/confirmation.view", ]);
+        require(["Emails/EmailPromotion.view", "common/stripeChargeCustomer.view", "common/confirmation.view", ]);
 
         function GetURLParameter(sParam) {
             var sPageURL = window.location.search.substring(1);
@@ -551,7 +576,7 @@ else
 
 
 
-    </script>*@
+    </script>
 
 }
 

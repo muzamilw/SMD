@@ -29,6 +29,7 @@
             "DAM": "/Areas/DAM/Scripts",
             "FranchiseDashboard": "/Areas/Franchise/Scripts", 
             "analytic": "/Areas/SuperNova/Scripts",
+            "Emails": "/Areas/EmailPromotion/Scripts",
             "Report": "/Areas/Report/Scripts",
         }
     });

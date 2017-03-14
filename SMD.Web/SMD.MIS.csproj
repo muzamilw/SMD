@@ -1042,6 +1042,10 @@
     <Content Include="Areas\DAM\Scripts\DamGrid.model.js" />
     <Content Include="Areas\DAM\Scripts\DamGrid.view.js" />
     <Content Include="Areas\DAM\Scripts\DamGrid.viewModel.js" />
+    <Content Include="Areas\EmailPromotion\Scripts\EmailPromotion.dataservice.js" />
+    <Content Include="Areas\EmailPromotion\Scripts\EmailPromotion.model.js" />
+    <Content Include="Areas\EmailPromotion\Scripts\EmailPromotion.view.js" />
+    <Content Include="Areas\EmailPromotion\Scripts\EmailPromotion.viewModel.js" />
     <Content Include="Areas\Franchise\Scripts\addApproval.dataservice.js" />
     <Content Include="Areas\Franchise\Scripts\addApproval.model.js" />
     <Content Include="Areas\Franchise\Scripts\addApproval.view.js" />
@@ -3492,7 +3496,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\EmailPromotion\Scripts\" />
     <Folder Include="Content\themes\base\minified\images\" />
     <Folder Include="Models\" />
     <Folder Include="Resources\" />
