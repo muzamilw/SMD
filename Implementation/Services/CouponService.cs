@@ -384,8 +384,15 @@ namespace SMD.Implementation.Services
 
         public SearchCouponsResponse SearchCoupons(int categoryId, int type, int size, string keywords, int pageNo, int distance, string Lat, string Lon, string UserId)
         {
-            List<SearchCoupons_Result> coupons = couponRepository.SearchCoupons(categoryId, type, size, keywords, pageNo, distance, Lat, Lon, UserId).ToList();
-
+            List<SearchCoupons_Result> coupons = null;
+            if (type == 6)
+            {
+                coupons = couponRepository.SearchCoupons(categoryId, type, size, keywords, pageNo, distance, Lat, Lon, UserId).Where(i => i.CouponListingMode == 3).ToList();
+            }
+            else
+            {
+                 coupons = couponRepository.SearchCoupons(categoryId, type, size, keywords, pageNo, distance, Lat, Lon, UserId).ToList();
+            }
 
 
             return new SearchCouponsResponse

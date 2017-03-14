@@ -59,11 +59,11 @@ namespace SMD.MIS.Areas.Api.Controllers
                 {
                     keywords = "";
                 }
-                response = _couponService.SearchCoupons(Convert.ToInt32(categoryId), Convert.ToInt32(ctype), Convert.ToInt32(size), keywords, Convert.ToInt32(pageNo), Convert.ToInt32(distance), Lat, Lon, UserId).CreateFrom();
-
-
-
-                //response = webApiUserService.GetProducts(request).CreateFrom();
+               
+             response = _couponService.SearchCoupons(Convert.ToInt32(categoryId), Convert.ToInt32(ctype), Convert.ToInt32(size), keywords, Convert.ToInt32(pageNo), Convert.ToInt32(distance), Lat, Lon, UserId).CreateFrom();
+                    
+                
+               
             }
             catch (Exception e)
             {
