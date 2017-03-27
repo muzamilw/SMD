@@ -4445,9 +4445,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
           <FunctionImport Name="getCampaignImpressionByGenderByCId" ReturnType="Collection(DomainModels.getCampaignImpressionByGenderByCId_Result)">
           <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="getCampaignImpressionByProfessionByCId" ReturnType="Collection(DomainModels.getCampaignImpressionByProfessionByCId_Result)">
-          <Parameter Name="Id" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="getDealImpressionByAgeByCouponId" ReturnType="Collection(DomainModels.getDealImpressionByAgeByCouponId_Result)">
           <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -4524,12 +4521,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
             <Parameter Name="UserId" Mode="In" Type="String" />
             <Parameter Name="FromRow" Mode="In" Type="Int32" />
             <Parameter Name="ToRow" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="getCampaignImpressionByAgeByCId1" ReturnType="Collection(DomainModels.getCampaignImpressionByAgeByCId1_Result)">
-            <Parameter Name="Id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="getCampaignImpressionByGenderByCId1" ReturnType="Collection(DomainModels.getCampaignImpressionByGenderByCId1_Result)">
-            <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
@@ -10534,17 +10525,17 @@ warning 6002: The table/view 'SMDDev.dbo.vw_ReferringCompanies' does not have a 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="getCampaignImpressionByAgeByCId1" FunctionName="SMDModel.Store.getCampaignImpressionByAgeByCId">
+          <FunctionImportMapping FunctionImportName="getCampaignImpressionByAgeByCId" FunctionName="SMDModel.Store.getCampaignImpressionByAgeByCId">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="DomainModels.getCampaignImpressionByAgeByCId1_Result">
+              <ComplexTypeMapping TypeName="DomainModels.getCampaignImpressionByAgeByCId_Result">
                 <ScalarProperty Name="Stats" ColumnName="Stats" />
                 <ScalarProperty Name="label" ColumnName="label" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="getCampaignImpressionByGenderByCId1" FunctionName="SMDModel.Store.getCampaignImpressionByGenderByCId">
+          <FunctionImportMapping FunctionImportName="getCampaignImpressionByGenderByCId" FunctionName="SMDModel.Store.getCampaignImpressionByGenderByCId">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="DomainModels.getCampaignImpressionByGenderByCId1_Result">
+              <ComplexTypeMapping TypeName="DomainModels.getCampaignImpressionByGenderByCId_Result">
                 <ScalarProperty Name="Stats" ColumnName="Stats" />
                 <ScalarProperty Name="label" ColumnName="label" />
               </ComplexTypeMapping>
