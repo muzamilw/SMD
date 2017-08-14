@@ -13,5 +13,7 @@ namespace SMD.Interfaces
         /// Add claims to the identity
         /// </summary>
         void AddClaimsToIdentity(UserIdentityModel identity, ClaimsIdentity claimsIdentity);
+
+        void AddCompanyIdClaimToIdentity(ClaimsIdentity identity, int CompanyId, string CompanyName, string CompanyLogo, string RoleName, string userName, string MobileNumber, string email, string RoleId, string CompanyCity, string AddressLine1);
     }
 }

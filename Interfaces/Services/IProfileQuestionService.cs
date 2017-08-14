@@ -11,6 +11,8 @@ namespace SMD.Interfaces.Services
     /// </summary>
     public interface IProfileQuestionService
     {
+        
+
         /// <summary>
         /// Profile Question Search request 
         /// </summary>
@@ -35,5 +37,16 @@ namespace SMD.Interfaces.Services
         /// Profile Questions For Api
         /// </summary>
         ProfileQuestionApiSearchResponse GetProfileQuestionsByGroupForApi(GetProfileQuestionApiRequest request);
+        ProfileQuestionResponseModelForApproval GetProfileQuestionForAproval(GetPagedListRequest request);
+        //List<ProfileQuestionTargetLocation> GetPQlocation(long pqId);
+        string UpdatePQForApproval(ProfileQuestion source);
+        ProfileQuestionGroup GetPQGroupById(int id);
+        IEnumerable<getSurvayByPQID_Result> getSurvayByPQIDAnalytics(int PQId, int CampStatus, int dateRange, int Granularity);
+        IEnumerable<getSurveyByPQIDRatioAnalytic_Result> getSurveyByPQIDRatioAnalytic(int ID, int dateRange);
+        IEnumerable<getSurvayByPQIDtblAnalytic_Result> getSurvayByPQIDtblAnalytic(int ID);
+
+        IEnumerable<GetUserProfileQuestionsList_Result> GetUserProfileQuestionsList(string UserID);
+
+        bool SaveUserProfileQuestionResponse(int PQID, string UserID, int CompanyId, int[] ProfileQuestionAnswerIds);
     }
 }

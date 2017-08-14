@@ -1,0 +1,37 @@
+﻿input:focus ~ .floating-label,
+input:not(:focus):valid ~ .floating-label{
+  top: 8px;
+  bottom: 10px;
+  left: 20px;
+  font-size: 11px;
+  opacity: 1;
+}
+
+.inputText {
+  font-size: 16px;
+  height:60px;
+  width:50%;
+  padding-left:12px;
+}
+
+.floating-label {
+  position: absolute;
+  pointer-events: none;
+  left: 20px;
+  top: 18px;
+  transition: 0.2s ease all;
+}
+.dealDaysLabel {
+    font-weight:bold;
+    color:lightgray;
+    font-size:14px;
+}
+.dealsavLabel {
+   
+    color:green;
+    
+}
+.dealPerLabel {
+   
+    font-size:13px;
+}

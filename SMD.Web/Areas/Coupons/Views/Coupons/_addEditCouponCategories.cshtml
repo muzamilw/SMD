@@ -1,0 +1,56 @@
+﻿<div class="modal fade my-modal" id="productCategoryDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                @*<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>*@
+                <h4 class="modal-title Theme_standard_clr">Deal Categories</h4>
+            </div>
+            <div class="col-lg-12">
+                <div class="row pull-right" style="margin-right:17px;">Select</div>
+                <div class="row" style="padding-top: 15px;">
+                    <div style="padding-right: 16px;padding-left: 16px;" id="nestable2">
+                        <ol id="productCategoryDialogCategories" class="dd-list">
+                            <!-- ko template: { name: 'productCategoryDialogTemplate', foreach: $root.couponCategories } -->
+                            <!-- /ko -->
+                        </ol>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="click: $root.updateCouponCategories">Save & Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* Product Category Template *@
+<script id="productCategoryDialogTemplate" type="text/html">
+    <li class="dd-item dd-item-list" data-bind="attr: { id: CategoryId }">
+        <div class="dd-handle" style="padding-left:18px!important;">
+            <div id="Checkedcol">
+                <span data-bind="text: Name" style="font-size:12px!important;">
+
+                </span>
+                <input name="mcheck" type="checkbox" onclick="onchangeCheckbox();"  class="bigcheckbox" style="float:right" data-bind="    checked: IsSelected" />
+            </div>
+
+        </div>
+    </li>
+</script>
+
+<script type="text/javascript">
+    function onchangeCheckbox()
+    {
+        $('.bigcheckbox').change(function () {
+            if ($('input.bigcheckbox').filter(':checked').length == 3)
+                $('input.bigcheckbox:not(:checked)').attr('disabled', 'disabled');
+            else
+                $('input.bigcheckbox').removeAttr('disabled');
+         
+        });
+  
+    }
+</script>
+
+@* Wizard Popup ends here*@

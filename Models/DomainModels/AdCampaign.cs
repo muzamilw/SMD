@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SMD.Models.DomainModels
 {
@@ -53,18 +50,204 @@ namespace SMD.Models.DomainModels
         public string Voucher1Heading { get; set; }
         public string Voucher1Description { get; set; } 
         public string Voucher1Value { get; set; }
+        public string Voucher1ImagePath { get; set; }
         public string Voucher2Heading { get; set; }
         public string Voucher2Description { get; set; }
         public string Voucher2Value { get; set; }
+        public string Voucher2ImagePath { get; set; }
+        public string VideoUrl { get; set; }
+        public string BuuyItLine1 { get; set; }
+        public string BuyItLine2 { get; set; }
+        public string BuyItLine3 { get; set; }
+        public string BuyItButtonLabel { get; set; }
+        public string BuyItImageUrl { get; set; }
+        public int? CompanyId { get; set; }
+        public string CouponSwapValue { get; set; }
+        public string CouponActualValue { get; set; }
+        public Nullable<int> CouponTakenCount { get; set; }
+        public Nullable<int> CouponQuantity { get; set; }
+        public int? priority { get; set; }
+        public string couponSmdComission { get; set; }
+        public string couponImage2 { get; set; }
+        public string CouponImage3 { get; set; }
+        public string CouponImage4 { get; set; }
+        public string CouponExpiryLabel { get; set; }
+        public double? CouponDiscountValue { get; set; }
+        public Nullable<int> CouponType { get; set; }
+        public virtual Company Company { get; set; }
         public virtual Language Language { get; set; }
+        public Nullable<int> DeliveryDays { get; set; }
+        public Nullable<bool> IsUseFilter { get; set; }
+        public string LogoUrl { get; set; }
+        public string VoucherAdditionalInfo { get; set; }
+        public Nullable<long> CouponId { get; set; }
+        public Nullable<bool> IsShowVoucherSetting { get; set; }
+        public string VideoLink2 { get; set; }
+
+        public Nullable<bool> IsSavedCoupon { get; set; }
+        public string VoucherHighlightLine1 { get; set; }
+	public string VoucherHighlightLine2 { get; set; }
+	public string VoucherHighlightLine3 { get; set; }
+	public string VoucherHighlightLine4 { get; set; }
+	public string VoucherHighlightLine5 { get; set; }
+	public string VoucherFinePrintLine1 { get; set; }
+	public string VoucherFinePrintLine2 { get; set; }
+	public string VoucherFinePrintLine3 { get; set; }
+	public string VoucherFinePrintLine4 { get; set; }
+	public string VoucherFinePrintLine5 { get; set; }
+	public string VoucherLocationLine1 { get; set; }
+	public string VoucherLocationLine2 { get; set; }
+	public string VoucherLocationLine3 { get; set; }
+	public string VoucherLocationLine4 { get; set; }
+	public string VoucherLocationLine5 { get; set; }
+	public string VoucherHowToRedeemLine1 { get; set; }
+	public string VoucherHowToRedeemLine2 { get; set; }
+	public string VoucherHowToRedeemLine3 { get; set; }
+	public string VoucherHowToRedeemLine4 { get; set; }
+	public string VoucherHowToRedeemLine5 { get; set; }
+	public string VoucherRedemptionPhone { get; set; }
+	public string VoucherLocationLAT { get; set; }
+    public string VoucherLocationLON { get; set; }
+
+
+    public double? MaxDailyBudget { get; set; }
+
+    public Nullable<bool> ShowBuyitBtn { get; set; }
+
+    public Nullable<bool> IsPaymentCollected { get; set; }
+
+    public Nullable<System.DateTime> PaymentDate { get; set; }
+        
+
+    public Nullable<System.DateTime> SubmissionDateTime { get; set; }
+
+    public Nullable<int> isAdDelivery { get; set; }
+
+        public Nullable<int> ChannelType { get; set; }
         public virtual ICollection<AdCampaignResponse> AdCampaignResponses { get; set; }
         public virtual ICollection<AdCampaignTargetCriteria> AdCampaignTargetCriterias { get; set; }
         public virtual ICollection<AdCampaignTargetLocation> AdCampaignTargetLocations { get; set; }
         public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }
 
+        public virtual ICollection<SurveyQuestionTargetCriteria> SurveyQuestionTargetCriterias { get; set; }
+
+        public virtual ICollection<CouponCategory> CouponCategories { get; set; }
+    
+        public virtual ICollection<CampaignCategory> CampaignCategories { get; set; }
+
+        public virtual ICollection<CampaignEventHistory> CampaignEventHistories { get; set; }
+
+        public virtual ICollection<AdCampaignClickRateHistory> AdCampaignClickRateHistories { get; set; }
+
         [NotMapped]
         public string CampaignImagePath { get; set; }
         [NotMapped]
         public string CampaignTypeImagePath { get; set; }
+        [NotMapped]
+        public string VoucherImagePath { get; set; }
+        [NotMapped]
+        public string buyItImageBytes { get; set; }
+        [NotMapped]
+        public string LogoImageBytes { get; set; }
+
+        [NotMapped]
+        public string VideoBytes { get; set; }
+
+
+        [NotMapped]
+        public int AdViews { get; set; }
+
+
+        /// <summary>
+        /// Makes a copy of Campaign
+        /// </summary>
+        public void Clone(AdCampaign target)
+        {
+      
+            target.LanguageId = LanguageId;
+            target.UserId = UserId;
+            target.SmdCampaign = SmdCampaign;
+
+            target.CampaignName = CampaignName + "- Copy";
+            target.CampaignDescription = CampaignDescription;
+            target.Status = Status;
+
+
+            target.Archived = Archived;
+            target.Approved = Approved;
+            target.ApprovedBy = ApprovedBy;
+
+            target.ApprovalDateTime = ApprovalDateTime;
+            target.StartDateTime = StartDateTime;
+            target.EndDateTime = EndDateTime;
+
+            target.MaxBudget = MaxBudget;
+            target.Type = Type;
+            target.ClickRate = ClickRate;
+
+            target.SmdCredits = SmdCredits;
+            target.DisplayTitle = DisplayTitle;
+            target.Description = Description;
+
+            target.ImagePath = ImagePath;
+            target.LandingPageVideoLink = LandingPageVideoLink;
+            target.VerifyQuestion = VerifyQuestion;
+
+            target.Answer1 = Answer1;
+            target.Answer2 = Answer2;
+            target.Answer3 = Answer3;
+            target.CorrectAnswer = CorrectAnswer;
+
+            target.CreatedDateTime = CreatedDateTime;
+            target.CreatedBy = CreatedBy;
+            target.ModifiedDateTime = ModifiedDateTime;
+
+
+            target.ModifiedBy = ModifiedBy;
+            target.AgeRangeStart = AgeRangeStart;
+            target.AgeRangeEnd = AgeRangeEnd;
+
+            target.Gender = Gender;
+            target.RejectedReason = RejectedReason;
+            target.ProjectedReach = ProjectedReach;
+
+            target.ResultClicks = ResultClicks;
+            target.AmountSpent = AmountSpent;
+            target.RewardType = RewardType;
+
+            target.Voucher1Heading = Voucher1Heading;
+            target.Voucher1Description = Voucher1Description;
+            target.Voucher1Value = Voucher1Value;
+           
+
+            target.Voucher1ImagePath = Voucher1ImagePath;
+            target.Voucher2Heading = Voucher2Heading;
+            target.Voucher2Description = Voucher2Description;
+
+            target.Voucher2Value = Voucher2Value;
+            target.Voucher2ImagePath = Voucher2ImagePath;
+            target.VideoUrl = VideoUrl;
+
+            target.BuyItLine2 = BuyItLine2;
+            target.BuyItLine3 = BuyItLine3;
+
+
+            target.BuyItButtonLabel = BuyItButtonLabel;
+            target.BuyItImageUrl = BuyItImageUrl;
+            target.CompanyId = CompanyId;
+
+            target.CouponSwapValue = CouponSwapValue;
+            target.CouponActualValue = CouponActualValue;
+            target.CouponTakenCount = CouponTakenCount;
+            target.CouponQuantity = CouponQuantity;
+            target.priority = priority;
+            target.CouponDiscountValue = CouponDiscountValue;
+            target.IsUseFilter = IsUseFilter;
+            target.CouponType = CouponType;
+            target.DeliveryDays = DeliveryDays;
+            target.VoucherAdditionalInfo = VoucherAdditionalInfo;
+            target.ChannelType = ChannelType;
+              
+        }
     }
 }

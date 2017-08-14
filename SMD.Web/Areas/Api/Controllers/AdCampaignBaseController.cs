@@ -50,12 +50,49 @@ namespace SMD.MIS.Areas.Api.Controllers
                     ProfileQuestionAnswers = _campaignService.GetProfileQuestionAnswersData((int)request.QuestionId).ProfileQuestionAnswers.Select(ques => ques.CreateFromDropdown()),
 
                 };
+               
             }
             else if (request.RequestId == 4) //  get survey question data 
             {
                 return new AdCampaignBaseResponse
                 {
                     SurveyQuestions = _campaignService.GetSurveyQuestionData(request.SQID).SurveyQuestions.Select(sur => sur.CreateFromDropdown()),
+
+                };
+            }
+            else if (request.RequestId == 12) //  get user quiz question data 
+            {
+                return new AdCampaignBaseResponse
+                {
+                    AdCampaigns = _campaignService.getQuizCampaigns().AdCampaigns.Select(sur => sur.CreateFromDropdown()),
+
+                };
+            }
+
+            else
+                if (request.RequestId == 6) //  get survey question data 
+            {
+                return new AdCampaignBaseResponse
+                {
+                    SurveyQuestions = _campaignService.GetSurveyQuestionDataByCompanyId().SurveyQuestions.Select(ques => ques.CreateFromDropdowndd()),
+
+                };
+            }
+                else
+                    if (request.RequestId == 7) //  get survey question Answers 
+                    {
+                        return new AdCampaignBaseResponse
+                        {
+                            SurveyQuestions = _campaignService.GetSurveyQuestionAnser((int)request.QuestionId).SurveyQuestions.Select(ques => ques.CreateFromDropdowndd()),
+
+                        };
+                    }
+            else if (request.RequestId == 13) // get branch addresses 
+            {
+
+                return new AdCampaignBaseResponse
+                {
+                    listBranches = _campaignService.getCompanyBranches().listBranches.Select(sur => sur.CreateFromDropdown()),
 
                 };
             }
@@ -101,7 +138,7 @@ namespace SMD.MIS.Areas.Api.Controllers
             }
             else if (argsList[1] == "3")  // get industry
             {
-                IEnumerable<Industry> listOfIndustry = _campaignService.SearchIndustry(argsList[0]).Select(lang => lang.CreateFrom());
+                IEnumerable<SMD.MIS.Areas.Api.Models.Industry> listOfIndustry = _campaignService.SearchIndustry(argsList[0]).Select(lang => lang.CreateFrom());
 
                 if (listOfIndustry != null && listOfIndustry.Count() > 10)
                 {
@@ -114,7 +151,7 @@ namespace SMD.MIS.Areas.Api.Controllers
             }
             else  // get education  4
             {
-                IEnumerable<Education> listOfEducation = _campaignService.SearchEducation(argsList[0]).Select(edu => edu.CreateFrom());
+                IEnumerable<SMD.MIS.Areas.Api.Models.Education> listOfEducation = _campaignService.SearchEducation(argsList[0]).Select(edu => edu.CreateFrom());
 
                 if (listOfEducation != null && listOfEducation.Count() > 10)
                 {

@@ -1,18 +1,23 @@
 ﻿using System;
+using System.Threading.Tasks;
 using SMD.Interfaces.Services;
+using SMD.MIS.Areas.Api.ModelMappers;
+using SMD.MIS.Areas.Api.Models;
 using SMD.Models.RequestModels;
 using System.Net;
 using System.Web;
 using System.Web.Http;
 using SMD.Models.ResponseModels;
 using SMD.WebBase.Mvc;
+using System.Collections.Generic;
 
 namespace SMD.MIS.Areas.Api.Controllers
 {
     /// <summary>
     /// Get Products Controller 
     /// </summary>
-    public class GetProductsController : ApiController
+    /// 
+    public class ProductsController : ApiController
     {
         
         #region Private
@@ -26,7 +31,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Constuctor 
         /// </summary>
-        public GetProductsController(IWebApiUserService webApiUserService)
+        public ProductsController(IWebApiUserService webApiUserService)
         {
             if (webApiUserService == null)
             {
@@ -44,16 +49,60 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// Get Ads, Surveys, Questions
         /// </summary>
         [ApiExceptionCustom]
-        public GetProductsResponse Get(string authenticationToken,[FromUri] GetProductsRequest request)
+        public ProductViewResponse Get(string authenticationToken, [FromUri] GetProductsRequest request)
         {
             if (string.IsNullOrEmpty(authenticationToken) || request == null || !ModelState.IsValid)
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
             }
 
-            return webApiUserService.GetProducts(request);
+            ProductViewResponse response = null;
+
+            try
+            {
+                response = webApiUserService.GetProducts(request).CreateFrom();
+            }
+            catch (Exception e)
+            {
+                response = new ProductViewResponse();
+                response.ErrorMessage = e.ToString();
+                
+            }
+
+            return response;
+
         }
 
+        /// <summary>
+        /// Response From User on Ads, Surveys, Questions
+        /// </summary>
+        //[ApiExceptionCustom]
+        public async Task<BaseApiResponse> Post(string authenticationToken, ProductActionRequest request)
+        {
+            try
+            {
+
+            
+            if (string.IsNullOrEmpty(authenticationToken) || request == null || !ModelState.IsValid || string.IsNullOrEmpty(request.UserId))
+            {
+                throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
+            }
+
+            BaseApiResponse response = await webApiUserService.ExecuteActionOnProductsResponse(request);
+            return response;
+
+            }
+            catch (Exception e)
+            {
+
+                return new BaseApiResponse
+                {
+                    Status = false,
+                    Message = e.ToString()
+                };
+            }
+        }
+        
         #endregion
     }
 }

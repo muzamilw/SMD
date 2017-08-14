@@ -45,12 +45,31 @@ namespace SMD.MIS.Areas.Api.Controllers
         [ApiExceptionCustom]
         public async Task<BaseApiResponse> Post(string authenticationToken, string userId)
         {
-            if (string.IsNullOrEmpty(authenticationToken) || string.IsNullOrEmpty(userId))
+            try
             {
-                throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
-            }
 
-            return await webApiUserService.Archive(userId); 
+
+                if (string.IsNullOrEmpty(authenticationToken) || string.IsNullOrEmpty(userId))
+                {
+                    throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
+                }
+
+                var user = webApiUserService.GetUserByUserId(userId);
+
+                string token = Guid.NewGuid().ToString();
+
+                var baseUrl = Request.RequestUri.GetLeftPart(UriPartial.Authority);
+
+                var callbackUrl = baseUrl + "/account/DeleteAccount/?UserId=" + userId + "&code=" + token;
+
+                return await webApiUserService.ArchiveRequestConfirmation(userId, token, callbackUrl);
+
+            }
+            catch (Exception e)
+            {
+
+                return new BaseApiResponse { Message = e.ToString(), Status = false };
+            }
         }
 
         #endregion

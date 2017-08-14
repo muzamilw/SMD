@@ -42,6 +42,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=5.0.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.5.0.2\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Castle.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Castle.Core.3.0.0.4001\lib\net40-client\Castle.Core.dll</HintPath>
@@ -208,9 +212,9 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Report.Viewer.11.0.0.0\lib\net\Microsoft.ReportViewer.WebForms.DLL</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
@@ -252,6 +256,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Cors">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.3\lib\net45\System.Web.Cors.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData">
       <Private>True</Private>
     </Reference>
@@ -277,6 +284,9 @@
     <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.Cors">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.3\lib\net45\System.Web.Http.Cors.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Http.Owin">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Owin.5.2.3\lib\net45\System.Web.Http.Owin.dll</HintPath>
@@ -377,98 +387,551 @@
     <Compile Include="Areas\Ads\AdsAreaRegistration.cs" />
     <Compile Include="Areas\Ads\Controllers\AdsController.cs" />
     <Compile Include="Areas\Api\ApiAreaRegistration.cs" />
+    <Compile Include="Areas\Api\Controllers\AdaptivePaypalPaymentController.cs" />
+    <Compile Include="Areas\Api\Controllers\AdCampaignApprovalController.cs" />
     <Compile Include="Areas\Api\Controllers\AdCampaignBaseController.cs" />
+    <Compile Include="Areas\Api\Controllers\AdCampaignController.cs" />
+    <Compile Include="Areas\Api\Controllers\AdsCampaignAnalyticController.cs" />
+    <Compile Include="Areas\Api\Controllers\AdViewedController.cs" />
+    <Compile Include="Areas\Api\Controllers\ApprovePayOutHistoryController.cs" />
+    <Compile Include="Areas\Api\Controllers\ApproveProfileQuestionAnsController.cs" />
+    <Compile Include="Areas\Api\Controllers\ApproveProfileQuestionController.cs" />
     <Compile Include="Areas\Api\Controllers\ApproveSurveyController.cs" />
-    <Compile Include="Areas\Api\Controllers\CreateStripeCustomerController.cs" />
-    <Compile Include="Areas\Api\Controllers\CampaignController.cs" />
-    <Compile Include="Areas\Api\Controllers\ChargeCustomerController.cs" />
-    <Compile Include="Areas\Api\Controllers\ConfirmEmailController.cs" />
     <Compile Include="Areas\Api\Controllers\ArchiveUserAccountController.cs" />
-    <Compile Include="Areas\Api\Controllers\GetProductsController.cs" />
+    <Compile Include="Areas\Api\Controllers\BranchCategoryController.cs" />
+    <Compile Include="Areas\Api\Controllers\BuyItController.cs" />
+    <Compile Include="Areas\Api\Controllers\CampaignController.cs" />
+    <Compile Include="Areas\Api\Controllers\CampaignFormAnalyticController.cs" />
+    <Compile Include="Areas\Api\Controllers\CategoryController.cs" />
+    <Compile Include="Areas\Api\Controllers\ChargeCustomerController.cs" />
+    <Compile Include="Areas\Api\Controllers\CollectionController.cs" />
+    <Compile Include="Areas\Api\Controllers\CompanyController.cs" />
+    <Compile Include="Areas\Api\Controllers\CompanyDetailController.cs" />
+    <Compile Include="Areas\Api\Controllers\CompanyInfoController.cs" />
+    <Compile Include="Areas\Api\Controllers\CompanySubscriptionController.cs" />
+    <Compile Include="Areas\Api\Controllers\ConfirmEmailController.cs" />
+    <Compile Include="Areas\Api\Controllers\CopyAddCampaignsController.cs" />
+    <Compile Include="Areas\Api\Controllers\CopyCampaignController.cs" />
+    <Compile Include="Areas\Api\Controllers\CountryController.cs" />
+    <Compile Include="Areas\Api\Controllers\CouponAnalyticsController.cs" />
+    <Compile Include="Areas\Api\Controllers\CouponApprovalController.cs" />
+    <Compile Include="Areas\Api\Controllers\CouponCategoryController.cs" />
+    <Compile Include="Areas\Api\Controllers\CouponController.cs" />
+    <Compile Include="Areas\Api\Controllers\CouponCountController.cs" />
+    <Compile Include="Areas\Api\Controllers\CouponRatingReviewController.cs" />
+    <Compile Include="Areas\Api\Controllers\CouponReviewController.cs" />
+    <Compile Include="Areas\Api\Controllers\CouponReviewCountController.cs" />
+    <Compile Include="Areas\Api\Controllers\CreateStripeCustomerController.cs" />
+    <Compile Include="Areas\Api\Controllers\DashboardInsightController.cs" />
+    <Compile Include="Areas\Api\Controllers\DashboardStatusCounterController.cs" />
+    <Compile Include="Areas\Api\Controllers\DealBalanceUpdateController.cs" />
+    <Compile Include="Areas\Api\Controllers\DealDecrementController.cs" />
+    <Compile Include="Areas\Api\Controllers\DealListingController.cs" />
+    <Compile Include="Areas\Api\Controllers\DealStatsController.cs" />
+    <Compile Include="Areas\Api\Controllers\DownloadImageController.cs" />
+    <Compile Include="Areas\Api\Controllers\EducationController.cs" />
+    <Compile Include="Areas\Api\Controllers\ExternalLoginController.cs" />
+    <Compile Include="Areas\Api\Controllers\FormAnalyticController.cs" />
+    <Compile Include="Areas\Api\Controllers\GenerateCouponController.cs" />
+    <Compile Include="Areas\Api\Controllers\GenerateSMSController.cs" />
+    <Compile Include="Areas\Api\Controllers\GetAdsForApiController.cs" />
+    <Compile Include="Areas\Api\Controllers\GetApprovalCountController.cs" />
     <Compile Include="Areas\Api\Controllers\GetAudienceAdCampaignForApiController.cs" />
     <Compile Include="Areas\Api\Controllers\GetAudienceSurveyForApiController.cs" />
+    <Compile Include="Areas\Api\Controllers\GetCitiesController.cs" />
+    <Compile Include="Areas\Api\Controllers\GetCityByCountryController.cs" />
+    <Compile Include="Areas\Api\Controllers\GetCompanyController.cs" />
+    <Compile Include="Areas\Api\Controllers\GetCountryController.cs" />
+    <Compile Include="Areas\Api\Controllers\GetCouponAndCategoriesController.cs" />
+    <Compile Include="Areas\Api\Controllers\GetCouponByCompanyIdController.cs" />
+    <Compile Include="Areas\Api\Controllers\GetCouponByIdController.cs" />
+    <Compile Include="Areas\Api\Controllers\GetCouponController.cs" />
+    <Compile Include="Areas\Api\Controllers\GetCouponLocationsController.cs" />
+    <Compile Include="Areas\Api\Controllers\GetCouponPriceOptionController.cs" />
+    <Compile Include="Areas\Api\Controllers\GetCurrencyController.cs" />
+    <Compile Include="Areas\Api\Controllers\GetPayOutHistoryController.cs" />
+    <Compile Include="Areas\Api\Controllers\GetProductController.cs" />
+    <Compile Include="Areas\Api\Controllers\GetProductsController.cs" />
+    <Compile Include="Areas\Api\Controllers\GetProfileQuestionForApiController.cs" />
+    <Compile Include="Areas\Api\Controllers\GetRandomAdCampaignController.cs" />
+    <Compile Include="Areas\Api\Controllers\GetRandomDealController.cs" />
+    <Compile Include="Areas\Api\Controllers\GetRandomGameController.cs" />
+    <Compile Include="Areas\Api\Controllers\GetRandomPollsController.cs" />
     <Compile Include="Areas\Api\Controllers\GetSurveysForApiController.cs" />
-    <Compile Include="Areas\Api\Controllers\AdViewedController.cs" />
-    <Compile Include="Areas\Api\Controllers\InvoiceDetailController.cs" />
+    <Compile Include="Areas\Api\Controllers\IndustryController.cs" />
+    <Compile Include="Areas\Api\Controllers\InviteUserController.cs" />
     <Compile Include="Areas\Api\Controllers\InvoiceController.cs" />
+    <Compile Include="Areas\Api\Controllers\InvoiceDetailController.cs" />
+    <Compile Include="Areas\Api\Controllers\ManageUsersController.cs" />
+    <Compile Include="Areas\Api\Controllers\MarketingDealsController.cs" />
+    <Compile Include="Areas\Api\Controllers\NotificationsController.cs" />
+    <Compile Include="Areas\Api\Controllers\PayoutController.cs" />
+    <Compile Include="Areas\Api\Controllers\PayoutRevenueController.cs" />
+    <Compile Include="Areas\Api\Controllers\PhaseLibraryController.cs" />
+    <Compile Include="Areas\Api\Controllers\profileQuestionAnalyticController.cs" />
+    <Compile Include="Areas\Api\Controllers\ProfileQuestionAnswerController.cs" />
+    <Compile Include="Areas\Api\Controllers\ProfileQuestionBaseController.cs" />
+    <Compile Include="Areas\Api\Controllers\ProfileQuestionController.cs" />
+    <Compile Include="Areas\Api\Controllers\ProfileQuestionGroupAppController.cs" />
+    <Compile Include="Areas\Api\Controllers\RedeemPurchasedCouponController.cs" />
+    <Compile Include="Areas\Api\Controllers\ReferralComponiesController.cs" />
+    <Compile Include="Areas\Api\Controllers\ReferUsersController.cs" />
+    <Compile Include="Areas\Api\Controllers\RegisterController.cs" />
+    <Compile Include="Areas\Api\Controllers\RegisteredUsersController.cs" />
+    <Compile Include="Areas\Api\Controllers\RegisterExternalController.cs" />
+    <Compile Include="Areas\Api\Controllers\ResetProductsController.cs" />
+    <Compile Include="Areas\Api\Controllers\RevenueController.cs" />
+    <Compile Include="Areas\Api\Controllers\SearchCouponsController.cs" />
+    <Compile Include="Areas\Api\Controllers\SharedSurveyQuestionController.cs" />
+    <Compile Include="Areas\Api\Controllers\StandardLoginController.cs" />
+    <Compile Include="Areas\Api\Controllers\StatementController.cs" />
+    <Compile Include="Areas\Api\Controllers\StripeSubscribeCustomerController.cs" />
+    <Compile Include="Areas\Api\Controllers\SuperNovaCampaignController.cs" />
+    <Compile Include="Areas\Api\Controllers\SurvayQuestionAnalyticController.cs" />
     <Compile Include="Areas\Api\Controllers\SurveyAudienceController.cs" />
+    <Compile Include="Areas\Api\Controllers\SurveyController.cs" />
+    <Compile Include="Areas\Api\Controllers\SurveyQuestionApprovalController.cs" />
     <Compile Include="Areas\Api\Controllers\SurveyQuestionEditorController.cs" />
+    <Compile Include="Areas\Api\Controllers\SurveySharingGroupController.cs" />
+    <Compile Include="Areas\Api\Controllers\SystemEmailController.cs" />
+    <Compile Include="Areas\Api\Controllers\testController.cs" />
     <Compile Include="Areas\Api\Controllers\UpdateCampaignController.cs" />
     <Compile Include="Areas\Api\Controllers\UpdateQuestionAnswerForApiController.cs" />
+    <Compile Include="Areas\Api\Controllers\UpdateUserFromWebBaseController.cs" />
+    <Compile Include="Areas\Api\Controllers\UpdateUserFromWebController.cs" />
     <Compile Include="Areas\Api\Controllers\UpdateUserProfileController.cs" />
-    <Compile Include="Areas\Api\Controllers\RegisterController.cs" />
-    <Compile Include="Areas\Api\Controllers\GetAdsForApiController.cs" />
-    <Compile Include="Areas\Api\Controllers\RegisterExternalController.cs" />
-    <Compile Include="Areas\Api\Controllers\ProfileQuestionBaseController.cs" />
-    <Compile Include="Areas\Api\Controllers\ProfileQuestionAnswerController.cs" />
-    <Compile Include="Areas\Api\Controllers\ExternalLoginController.cs" />
-    <Compile Include="Areas\Api\Controllers\AdaptivePaypalPaymentController.cs" />
-    <Compile Include="Areas\Api\Controllers\AdCampaignController.cs" />
-    <Compile Include="Areas\Api\Controllers\GetProfileQuestionForApiController.cs" />
-    <Compile Include="Areas\Api\Controllers\SurveyQuestionApprovalController.cs" />
-    <Compile Include="Areas\Api\Controllers\StandardLoginController.cs" />
-    <Compile Include="Areas\Api\Controllers\ProfileQuestionController.cs" />
-    <Compile Include="Areas\Api\Controllers\SurveyController.cs" />
-    <Compile Include="Areas\Api\LanguageResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>LanguageResources.resx</DependentUpon>
-    </Compile>
+    <Compile Include="Areas\Api\Controllers\UpdateUserProfileImageController.cs" />
+    <Compile Include="Areas\Api\Controllers\UserBalanceInquiryController.cs" />
+    <Compile Include="Areas\Api\Controllers\UserCashoutController.cs" />
+    <Compile Include="Areas\Api\Controllers\UserController.cs" />
+    <Compile Include="Areas\Api\Controllers\UserCouponCategoryClickController.cs" />
+    <Compile Include="Areas\Api\Controllers\UserFavouriteCouponController.cs" />
+    <Compile Include="Areas\Api\Controllers\UserFeedbackController.cs" />
+    <Compile Include="Areas\Api\Controllers\UserProfileQuestionsController.cs" />
+    <Compile Include="Areas\Api\Controllers\UserPurchasedCouponController.cs" />
+    <Compile Include="Areas\Api\DashboardAnalyticsController.cs" />
+    <Compile Include="Areas\Api\LanguageResources.Designer.cs" />
+    <Compile Include="Areas\Api\ModelMappers\ProductViewMapper.cs" />
+    <Compile Include="Areas\Api\ModelMappers\SearchCouponsViewMapper.cs" />
     <Compile Include="Areas\Api\ModelMappers\WebApiUserMapper.cs" />
     <Compile Include="Areas\Api\Models\AdCampaign.cs" />
     <Compile Include="Areas\Api\Models\AdCampaignApiModel.cs" />
     <Compile Include="Areas\Api\Models\AdCampaignApiSearchRequestResponse.cs" />
+    <Compile Include="Areas\Api\Models\AdCampaignBaseResponse.cs" />
+    <Compile Include="Areas\Api\Models\AdCampaignResposneModelForAproval.cs" />
     <Compile Include="Areas\Api\Models\AdCampaignTargetCriteria.cs" />
     <Compile Include="Areas\Api\Models\AdCampaignTargetLocation.cs" />
+    <Compile Include="Areas\Api\Models\AddCouponsResponseModelForApproval.cs" />
+    <Compile Include="Areas\Api\Models\AdsCampaignByCampaignIdForAnalyticsResponse.cs" />
+    <Compile Include="Areas\Api\Models\ApproveProfileQuestion.cs" />
     <Compile Include="Areas\Api\Models\AudienceAdCampaignForApiResponse.cs" />
     <Compile Include="Areas\Api\Models\AudienceSurveyForApiResponse.cs" />
+    <Compile Include="Areas\Api\Models\BranchCategory.cs" />
+    <Compile Include="Areas\Api\Models\BranchCategoryResponseModel.cs" />
     <Compile Include="Areas\Api\Models\CampaignRequestResponseModel.cs" />
     <Compile Include="Areas\Api\Models\CampaignSearchRequest.cs" />
-    <Compile Include="Areas\Api\Models\AdCampaignResposneModelForAproval.cs" />
+    <Compile Include="Areas\Api\Models\CityDropDown.cs" />
+    <Compile Include="Areas\Api\Models\CompanyApiModel.cs" />
+    <Compile Include="Areas\Api\Models\CompanybillingAddress.cs" />
+    <Compile Include="Areas\Api\Models\CompanyBranch.cs" />
+    <Compile Include="Areas\Api\Models\CountryDropdown.cs" />
+    <Compile Include="Areas\Api\Models\CouponDetails.cs" />
+    <Compile Include="Areas\Api\Models\CouponLocation.cs" />
+    <Compile Include="Areas\Api\Models\CouponRatingReviewApiModel.cs" />
+    <Compile Include="Areas\Api\Models\CouponRatingReviewRequest.cs" />
+    <Compile Include="Areas\Api\Models\CouponsApproval.cs" />
+    <Compile Include="Areas\Api\Models\CurrencyApprov.cs" />
+    <Compile Include="Areas\Api\Models\Dashboard_analytics_Result.cs" />
+    <Compile Include="Areas\Api\Models\DealByCouponIdForAnalyticsResponse.cs" />
+    <Compile Include="Areas\Api\Models\EducationDropdown.cs" />
+    <Compile Include="Areas\Api\Models\EmailResponseModel.cs" />
+    <Compile Include="Areas\Api\Models\FavouriteCouponResponse.cs" />
+    <Compile Include="Areas\Api\Models\FormAnalyticResponseModel.cs" />
+    <Compile Include="Areas\Api\Models\FormDataAnalyticResponse.cs" />
+    <Compile Include="Areas\Api\Models\GenerateSMSResponse.cs" />
+    <Compile Include="Areas\Api\Models\GetApprovalCount_Result.cs" />
+    <Compile Include="Areas\Api\Models\IndusteryDropdown.cs" />
     <Compile Include="Areas\Api\Models\Invoice.cs" />
     <Compile Include="Areas\Api\Models\InvoiceDetail.cs" />
     <Compile Include="Areas\Api\Models\InvoiceSearchRequestResponse.cs" />
-    <Compile Include="Areas\Api\Models\LoginResponse.cs" />
-    <Compile Include="Areas\Api\Models\SurveyForApiSearchResponse.cs" />
+    <Compile Include="Areas\Api\Models\LanguageDropdown.cs" />
     <Compile Include="Areas\Api\Models\LocationDropDown.cs" />
+    <Compile Include="Areas\Api\Models\LoginResponse.cs" />
+    <Compile Include="Areas\Api\Models\ManageUserRolesModel.cs" />
+    <Compile Include="Areas\Api\Models\PayOutHistory.cs" />
+    <Compile Include="Areas\Api\Models\PayOutResponseModelForApproval.cs" />
+    <Compile Include="Areas\Api\Models\Phrase.cs" />
+    <Compile Include="Areas\Api\Models\PhraseResponseModel.cs" />
+    <Compile Include="Areas\Api\Models\PQByPQIDForAnalyticsResponse.cs" />
+    <Compile Include="Areas\Api\Models\PQResponseModelForApproval.cs" />
+    <Compile Include="Areas\Api\Models\Product.cs" />
+    <Compile Include="Areas\Api\Models\ProductView.cs" />
+    <Compile Include="Areas\Api\Models\ProductViewResponse.cs" />
+    <Compile Include="Areas\Api\Models\ProfileQuestion.cs" />
+    <Compile Include="Areas\Api\Models\ProfileQuestionAnswer.cs" />
     <Compile Include="Areas\Api\Models\ProfileQuestionAnswerApiModel.cs" />
     <Compile Include="Areas\Api\Models\ProfileQuestionAnswerDropdown.cs" />
+    <Compile Include="Areas\Api\Models\ProfileQuestionAnswerSearchRequest.cs" />
+    <Compile Include="Areas\Api\Models\ProfileQuestionAnswerView.cs" />
     <Compile Include="Areas\Api\Models\ProfileQuestionApiModel.cs" />
     <Compile Include="Areas\Api\Models\ProfileQuestionApiSearchResponse.cs" />
+    <Compile Include="Areas\Api\Models\ProfileQuestionBaseResponse.cs" />
+    <Compile Include="Areas\Api\Models\ProfileQuestionDropdown.cs" />
+    <Compile Include="Areas\Api\Models\ProfileQuestionGroupApp.cs" />
+    <Compile Include="Areas\Api\Models\ProfileQuestionGroupDropdown.cs" />
+    <Compile Include="Areas\Api\Models\ProfileQuestionSearchRequestResponse.cs" />
+    <Compile Include="Areas\Api\Models\ProfileQuestionTargetCriteria.cs" />
+    <Compile Include="Areas\Api\Models\ProfileQuestionTargetLocation.cs" />
+    <Compile Include="Areas\Api\Models\Role.cs" />
+    <Compile Include="Areas\Api\Models\RoleDropDown.cs" />
+    <Compile Include="Areas\Api\Models\SearchCouponsViewResponse.cs" />
+    <Compile Include="Areas\Api\Models\Section.cs" />
+    <Compile Include="Areas\Api\Models\SharedSurveyQuestionApiModel.cs" />
+    <Compile Include="Areas\Api\Models\SharedSurveyQuestionResponse.cs" />
+    <Compile Include="Areas\Api\Models\SurvayBySQIDForAnalyticsResponse.cs" />
     <Compile Include="Areas\Api\Models\SurveyApiModel.cs" />
+    <Compile Include="Areas\Api\Models\SurveyForApiSearchResponse.cs" />
     <Compile Include="Areas\Api\Models\SurveyQuestion.cs" />
-    <Compile Include="Areas\Api\Models\AdCampaignBaseResponse.cs" />
     <Compile Include="Areas\Api\Models\SurveyQuestionDropDown.cs" />
     <Compile Include="Areas\Api\Models\SurveyQuestionRequestResponseModel.cs" />
     <Compile Include="Areas\Api\Models\SurveyQuestionResposneModelForAproval.cs" />
+    <Compile Include="Areas\Api\Models\SurveySharingGroupApiModel.cs" />
+    <Compile Include="Areas\Api\Models\SystemEmailModel.cs" />
+    <Compile Include="Areas\Api\Models\TimeZoneDropDown.cs" />
     <Compile Include="Areas\Api\Models\UpdateProfileQuestionUserAnswerResponse.cs" />
     <Compile Include="Areas\Api\Models\UserAndCostDetail.cs" />
     <Compile Include="Areas\Api\Models\UserBaseData.cs" />
+    <Compile Include="Areas\Api\Models\UserProfileBaseResponse.cs" />
     <Compile Include="Areas\Api\Models\WebApiUser.cs" />
-    <Compile Include="Areas\Api\Models\CountryDropdown.cs" />
-    <Compile Include="Areas\Api\Models\ProfileQuestionDropdown.cs" />
-    <Compile Include="Areas\Api\Models\LanguageDropdown.cs" />
-    <Compile Include="Areas\Api\Models\ProfileQuestion.cs" />
-    <Compile Include="Areas\Api\Models\ProfileQuestionAnswer.cs" />
-    <Compile Include="Areas\Api\Models\ProfileQuestionBaseResponse.cs" />
-    <Compile Include="Areas\Api\Models\ProfileQuestionGroupDropdown.cs" />
-    <Compile Include="Areas\Api\Models\ProfileQuestionAnswerSearchRequest.cs" />
-    <Compile Include="Areas\Api\Models\ProfileQuestionSearchRequestResponse.cs" />
     <Compile Include="Areas\Billing\BillingAreaRegistration.cs" />
     <Compile Include="Areas\Billing\Controllers\ManageController.cs" />
     <Compile Include="Areas\Common\CommonAreaRegistration.cs" />
+    <Compile Include="Areas\Coupons\Controllers\CouponsController.cs" />
+    <Compile Include="Areas\Coupons\CouponsAreaRegistration.cs" />
+    <Compile Include="Areas\DAM\Controllers\ImagesController.cs" />
+    <Compile Include="Areas\DAM\DAMAreaRegistration.cs" />
+    <Compile Include="Areas\DAM\Models\Images.cs" />
+    <Compile Include="Areas\EmailPromotion\Controllers\EmailsController.cs" />
+    <Compile Include="Areas\EmailPromotion\EmailPromotionAreaRegistration.cs" />
+    <Compile Include="Areas\Franchise\Controllers\ApprovePayPalController.cs" />
+    <Compile Include="Areas\Franchise\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Franchise\Controllers\RegisterUsersController.cs" />
+    <Compile Include="Areas\Franchise\FranchiseAreaRegistration.cs" />
     <Compile Include="Areas\ProfileQuestion\Controllers\ManageController.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Areas\ProfileQuestion\ProfileQuestionAreaRegistration.cs" />
+    <Compile Include="Areas\Report\Controllers\ReportController.cs" />
+    <Compile Include="Areas\Report\ReportAreaRegistration.cs" />
+    <Compile Include="Areas\SuperNova\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\SuperNova\SuperNovaAreaRegistration.cs" />
     <Compile Include="Areas\Survey\Controllers\SurveyController.cs" />
     <Compile Include="Areas\Survey\SurveyAreaRegistration.cs" />
+    <Compile Include="Areas\User\Controllers\ManageUserController.cs" />
+    <Compile Include="Areas\User\UserAreaRegistration.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UnauthorizedRequestController.cs" />
+    <Compile Include="Emails\Deal_Expired.aspx.cs">
+      <DependentUpon>Deal_Expired.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Deal_Expired.aspx.designer.cs">
+      <DependentUpon>Deal_Expired.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\DailyuserCategoryClickDeals.aspx.cs">
+      <DependentUpon>DailyuserCategoryClickDeals.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\DailyuserCategoryClickDeals.aspx.designer.cs">
+      <DependentUpon>DailyuserCategoryClickDeals.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\SendNotificationToAdvertiserForAdditional20DollarDiscounton2ndLastDay.aspx.cs">
+      <DependentUpon>SendNotificationToAdvertiserForAdditional20DollarDiscounton2ndLastDay.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\SendNotificationToAdvertiserForAdditional20DollarDiscounton2ndLastDay.aspx.designer.cs">
+      <DependentUpon>SendNotificationToAdvertiserForAdditional20DollarDiscounton2ndLastDay.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\SendNotificationToAdvertiserForAdditional30DollarDiscountonLastDay.aspx.cs">
+      <DependentUpon>SendNotificationToAdvertiserForAdditional30DollarDiscountonLastDay.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\SendNotificationToAdvertiserForAdditional30DollarDiscountonLastDay.aspx.designer.cs">
+      <DependentUpon>SendNotificationToAdvertiserForAdditional30DollarDiscountonLastDay.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\SendNotificationToAdvertiserForAdditional10DollarDiscounton3rdLastDay.aspx.cs">
+      <DependentUpon>SendNotificationToAdvertiserForAdditional10DollarDiscounton3rdLastDay.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\SendNotificationToAdvertiserForAdditional10DollarDiscounton3rdLastDay.aspx.designer.cs">
+      <DependentUpon>SendNotificationToAdvertiserForAdditional10DollarDiscounton3rdLastDay.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\SendNotificationToAdvertiserForAdditional30PercentDiscountonLastDay.aspx.cs">
+      <DependentUpon>SendNotificationToAdvertiserForAdditional30PercentDiscountonLastDay.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\SendNotificationToAdvertiserForAdditional30PercentDiscountonLastDay.aspx.designer.cs">
+      <DependentUpon>SendNotificationToAdvertiserForAdditional30PercentDiscountonLastDay.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\SendNotificationToAdvertiserForAdditional25PercentDiscounton2ndLastDay.aspx.cs">
+      <DependentUpon>SendNotificationToAdvertiserForAdditional25PercentDiscounton2ndLastDay.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\SendNotificationToAdvertiserForAdditional25PercentDiscounton2ndLastDay.aspx.designer.cs">
+      <DependentUpon>SendNotificationToAdvertiserForAdditional25PercentDiscounton2ndLastDay.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\SendNotificationToAdvertiserForAdditional20PercentDiscounton3rdLastDay.aspx.cs">
+      <DependentUpon>SendNotificationToAdvertiserForAdditional20PercentDiscounton3rdLastDay.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\SendNotificationToAdvertiserForAdditional20PercentDiscounton3rdLastDay.aspx.designer.cs">
+      <DependentUpon>SendNotificationToAdvertiserForAdditional20PercentDiscounton3rdLastDay.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Deal_Expiry_3_days.aspx.cs">
+      <DependentUpon>Deal_Expiry_3_days.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Deal_Expiry_3_days.aspx.designer.cs">
+      <DependentUpon>Deal_Expiry_3_days.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Picture_poll_Submission.aspx.cs">
+      <DependentUpon>Picture_poll_Submission.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Picture_poll_Submission.aspx.designer.cs">
+      <DependentUpon>Picture_poll_Submission.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Display_Ad_Rejected.aspx.cs">
+      <DependentUpon>Display_Ad_Rejected.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Display_Ad_Rejected.aspx.designer.cs">
+      <DependentUpon>Display_Ad_Rejected.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Deal_Submission.aspx.cs">
+      <DependentUpon>Deal_Submission.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Deal_Submission.aspx.designer.cs">
+      <DependentUpon>Deal_Submission.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\LastDayDollarDiscountCouponsNearMe.aspx.cs">
+      <DependentUpon>LastDayDollarDiscountCouponsNearMe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\LastDayDollarDiscountCouponsNearMe.aspx.designer.cs">
+      <DependentUpon>LastDayDollarDiscountCouponsNearMe.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Last2DaysDollarDiscountCouponsNearMe.aspx.cs">
+      <DependentUpon>Last2DaysDollarDiscountCouponsNearMe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Last2DaysDollarDiscountCouponsNearMe.aspx.designer.cs">
+      <DependentUpon>Last2DaysDollarDiscountCouponsNearMe.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Last3DaysDollarDiscountCouponsNearMe.aspx.cs">
+      <DependentUpon>Last3DaysDollarDiscountCouponsNearMe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Last3DaysDollarDiscountCouponsNearMe.aspx.designer.cs">
+      <DependentUpon>Last3DaysDollarDiscountCouponsNearMe.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\LastDayPercentageCouponsNearMe.aspx.cs">
+      <DependentUpon>LastDayPercentageCouponsNearMe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\LastDayPercentageCouponsNearMe.aspx.designer.cs">
+      <DependentUpon>LastDayPercentageCouponsNearMe.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Last2DaysPercentageCouponsNearMe.aspx.cs">
+      <DependentUpon>Last2DaysPercentageCouponsNearMe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Last2DaysPercentageCouponsNearMe.aspx.designer.cs">
+      <DependentUpon>Last2DaysPercentageCouponsNearMe.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Last3DaysPercentageCouponsNearMe.aspx.cs">
+      <DependentUpon>Last3DaysPercentageCouponsNearMe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Last3DaysPercentageCouponsNearMe.aspx.designer.cs">
+      <DependentUpon>Last3DaysPercentageCouponsNearMe.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\PayOutRequestNotificationToUser.aspx.cs">
+      <DependentUpon>PayOutRequestNotificationToUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\PayOutRequestNotificationToUser.aspx.designer.cs">
+      <DependentUpon>PayOutRequestNotificationToUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\PayOutRequestNotificationToAdmins.aspx.cs">
+      <DependentUpon>PayOutRequestNotificationToAdmins.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\PayOutRequestNotificationToAdmins.aspx.designer.cs">
+      <DependentUpon>PayOutRequestNotificationToAdmins.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Picture_poll_Rejected.aspx.cs">
+      <DependentUpon>Picture_poll_Rejected.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Picture_poll_Rejected.aspx.designer.cs">
+      <DependentUpon>Picture_poll_Rejected.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Deal_Rejected.aspx.cs">
+      <DependentUpon>Deal_Rejected.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Deal_Rejected.aspx.designer.cs">
+      <DependentUpon>Deal_Rejected.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\ReviewRecievedForDeal.aspx.cs">
+      <DependentUpon>ReviewRecievedForDeal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\ReviewRecievedForDeal.aspx.designer.cs">
+      <DependentUpon>ReviewRecievedForDeal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\NewUserSignup.aspx.cs">
+      <DependentUpon>NewUserSignup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\NewUserSignup.aspx.designer.cs">
+      <DependentUpon>NewUserSignup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\UserAppFeedback.aspx.cs">
+      <DependentUpon>UserAppFeedback.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\UserAppFeedback.aspx.designer.cs">
+      <DependentUpon>UserAppFeedback.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Display_Ad_Submission.aspx.cs">
+      <DependentUpon>Display_Ad_Submission.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Display_Ad_Submission.aspx.designer.cs">
+      <DependentUpon>Display_Ad_Submission.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Video_Ad_Submission.aspx.cs">
+      <DependentUpon>Video_Ad_Submission.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Video_Ad_Submission.aspx.designer.cs">
+      <DependentUpon>Video_Ad_Submission.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Video_Ad_Rejected.aspx.cs">
+      <DependentUpon>Video_Ad_Rejected.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Video_Ad_Rejected.aspx.designer.cs">
+      <DependentUpon>Video_Ad_Rejected.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\delete_account_confirmation.aspx.cs">
+      <DependentUpon>delete_account_confirmation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\delete_account_confirmation.aspx.designer.cs">
+      <DependentUpon>delete_account_confirmation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Deal_Approved.aspx.cs">
+      <DependentUpon>Deal_Approved.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Deal_Approved.aspx.designer.cs">
+      <DependentUpon>Deal_Approved.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Reset_Password.aspx.cs">
+      <DependentUpon>Reset_Password.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Reset_Password.aspx.designer.cs">
+      <DependentUpon>Reset_Password.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Invite_Manage_User.aspx.cs">
+      <DependentUpon>Invite_Manage_User.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Invite_Manage_User.aspx.designer.cs">
+      <DependentUpon>Invite_Manage_User.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\AccountVerify.aspx.cs">
+      <DependentUpon>AccountVerify.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\AccountVerify.aspx.designer.cs">
+      <DependentUpon>AccountVerify.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Picture_poll_approved.aspx.cs">
+      <DependentUpon>Picture_poll_approved.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Picture_poll_approved.aspx.designer.cs">
+      <DependentUpon>Picture_poll_approved.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Display_Ad_Approved.aspx.cs">
+      <DependentUpon>Display_Ad_Approved.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Display_Ad_Approved.aspx.designer.cs">
+      <DependentUpon>Display_Ad_Approved.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Video_Ad_Approved.aspx.cs">
+      <DependentUpon>Video_Ad_Approved.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Video_Ad_Approved.aspx.designer.cs">
+      <DependentUpon>Video_Ad_Approved.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\subscription_created.aspx.cs">
+      <DependentUpon>subscription_created.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\subscription_created.aspx.designer.cs">
+      <DependentUpon>subscription_created.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\NewDeals.aspx.cs">
+      <DependentUpon>NewDeals.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\NewDeals.aspx.designer.cs">
+      <DependentUpon>NewDeals.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\DisplayAd_Performance.aspx.cs">
+      <DependentUpon>DisplayAd_Performance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\DisplayAd_Performance.aspx.designer.cs">
+      <DependentUpon>DisplayAd_Performance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Deal_Performance.aspx.cs">
+      <DependentUpon>Deal_Performance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Deal_Performance.aspx.designer.cs">
+      <DependentUpon>Deal_Performance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Picture_Poll_Performance.aspx.cs">
+      <DependentUpon>Picture_Poll_Performance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Picture_Poll_Performance.aspx.designer.cs">
+      <DependentUpon>Picture_Poll_Performance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Video_Performance.aspx.cs">
+      <DependentUpon>Video_Performance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Video_Performance.aspx.designer.cs">
+      <DependentUpon>Video_Performance.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HelperExtension\Extesion.cs" />
     <Compile Include="Helper\CultureHelper.cs" />
     <Compile Include="ModelMappers\AdCampaignMapper.cs" />
+    <Compile Include="ModelMappers\CityMapper.cs" />
+    <Compile Include="ModelMappers\CouponCategoryMapper.cs" />
     <Compile Include="ModelMappers\EducationMapper.cs" />
     <Compile Include="ModelMappers\IndustryMapper.cs" />
     <Compile Include="ModelMappers\InvoiceDetailMapper.cs" />
@@ -476,53 +939,271 @@
     <Compile Include="ModelMappers\LanguageMapper.cs" />
     <Compile Include="ModelMappers\CountryMapper.cs" />
     <Compile Include="ModelMappers\LocationMapper.cs" />
+    <Compile Include="ModelMappers\ManageUsersModelMapper.cs" />
     <Compile Include="ModelMappers\ProfileQuestionAnswerMapper.cs" />
     <Compile Include="ModelMappers\ProfileQuestionGroupMapper.cs" />
     <Compile Include="ModelMappers\ProfileQuestionMapper.cs" />
+    <Compile Include="ModelMappers\RoleMapper.cs" />
     <Compile Include="ModelMappers\SurveyQuestionModelMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportViewers\Publisher.aspx.cs">
+      <DependentUpon>Publisher.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportViewers\Publisher.aspx.designer.cs">
+      <DependentUpon>Publisher.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReportViewers\SMDReport.aspx.cs">
+      <DependentUpon>SMDReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportViewers\SMDReport.aspx.designer.cs">
+      <DependentUpon>SMDReport.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="ReportViewers\User.aspx.cs">
+      <DependentUpon>User.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportViewers\User.aspx.designer.cs">
+      <DependentUpon>User.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="StripeWebhooks\StripeHandler.ashx.cs">
+      <DependentUpon>StripeHandler.ashx</DependentUpon>
+    </Compile>
     <Compile Include="TypeRegistrations.cs" />
+    <Compile Include="Emails\Welcome_Cash4ads.aspx.cs">
+      <DependentUpon>Welcome_Cash4ads.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Welcome_Cash4ads.aspx.designer.cs">
+      <DependentUpon>Welcome_Cash4ads.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Ads\Scripts\ads.dataservice.js" />
     <Content Include="Areas\Ads\Scripts\ads.model.js" />
     <Content Include="Areas\Ads\Scripts\ads.view.js" />
     <Content Include="Areas\Ads\Scripts\ads.viewModel.js" />
-    <Content Include="Areas\Ads\Scripts\addApproval.dataservice.js" />
-    <Content Include="Areas\Ads\Scripts\addApproval.model.js" />
-    <Content Include="Areas\Ads\Scripts\addApproval.view.js" />
-    <Content Include="Areas\Ads\Scripts\addApproval.viewModel.js" />
+    <Content Include="Areas\Ads\Scripts\BaseLibs.js" />
+    <Content Include="Areas\Billing\Scripts\Email.dataservice.js" />
+    <Content Include="Areas\Billing\Scripts\Email.model.js" />
+    <Content Include="Areas\Billing\Scripts\Email.view.js" />
+    <Content Include="Areas\Billing\Scripts\Email.viewModel.js" />
     <Content Include="Areas\Billing\Scripts\invoice.dataservice.js" />
     <Content Include="Areas\Billing\Scripts\invoice.model.js" />
     <Content Include="Areas\Billing\Scripts\invoice.view.js" />
     <Content Include="Areas\Billing\Scripts\invoice.viewModel.js" />
     <Content Include="Areas\Common\Scripts\clientSidePagination.js" />
-    <Content Include="Areas\Common\Scripts\paypalPayment.dataservice.js" />
-    <Content Include="Areas\Common\Scripts\stripeChargeCustomer.dataservice.js" />
-    <Content Include="Areas\Common\Scripts\paypalPayment.view.js" />
-    <Content Include="Areas\Common\Scripts\stripeChargeCustomer.view.js" />
+    <Content Include="Areas\Common\Scripts\companyProfile.dataservice.js" />
+    <Content Include="Areas\Common\Scripts\companyProfile.model.js" />
+    <Content Include="Areas\Common\Scripts\companyProfile.view.js" />
+    <Content Include="Areas\Common\Scripts\companyProfile.viewModel.js" />
     <Content Include="Areas\Common\Scripts\confirmation.view.js" />
-    <Content Include="Areas\Common\Scripts\paypalPayment.viewModel.js" />
-    <Content Include="Areas\Common\Scripts\stripeChargeCustomer.viewModel.js" />
     <Content Include="Areas\Common\Scripts\confirmation.viewModel.js" />
+    <Content Include="Areas\Common\Scripts\dashboardGraphAnalytics.dataservice.js" />
+    <Content Include="Areas\Common\Scripts\dashboardGraphAnalytics.model.js" />
+    <Content Include="Areas\Common\Scripts\dashboardGraphAnalytics.view.js" />
+    <Content Include="Areas\Common\Scripts\dashboardGraphAnalytics.viewModel.js" />
+    <Content Include="Areas\Common\Scripts\InviteUser.dataservice.js" />
+    <Content Include="Areas\Common\Scripts\Inviteuser.model.js" />
+    <Content Include="Areas\Common\Scripts\InviteUser.view.js" />
+    <Content Include="Areas\Common\Scripts\InviteUser.viewModel.js" />
     <Content Include="Areas\Common\Scripts\pagination.js" />
+    <Content Include="Areas\Common\Scripts\paypalPayment.dataservice.js" />
+    <Content Include="Areas\Common\Scripts\paypalPayment.view.js" />
+    <Content Include="Areas\Common\Scripts\paypalPayment.viewModel.js" />
+    <Content Include="Areas\Common\Scripts\phraseLibrary.dataservice.js" />
+    <Content Include="Areas\Common\Scripts\phraseLibrary.model.js" />
+    <Content Include="Areas\Common\Scripts\phraseLibrary.view.js" />
+    <Content Include="Areas\Common\Scripts\phraseLibrary.viewModel.js" />
+    <Content Include="Areas\Common\Scripts\stripeChargeCustomer.dataservice.js" />
+    <Content Include="Areas\Common\Scripts\stripeChargeCustomer.view.js" />
+    <Content Include="Areas\Common\Scripts\stripeChargeCustomer.viewModel.js" />
+    <Content Include="Areas\Common\Scripts\userProfile.dataservice.js" />
+    <Content Include="Areas\Common\Scripts\userProfile.model.js" />
+    <Content Include="Areas\Common\Scripts\userProfile.view.js" />
+    <Content Include="Areas\Common\Scripts\userProfile.viewModel.js" />
+    <Content Include="Areas\Coupons\Scripts\couponReview.dataservice.js" />
+    <Content Include="Areas\Coupons\Scripts\couponReview.model.js" />
+    <Content Include="Areas\Coupons\Scripts\couponReview.view.js" />
+    <Content Include="Areas\Coupons\Scripts\couponReview.viewModel.js" />
+    <Content Include="Areas\Coupons\Scripts\Coupons.dataservice.js" />
+    <Content Include="Areas\Coupons\Scripts\Coupons.model.js" />
+    <Content Include="Areas\Coupons\Scripts\Coupons.view.js" />
+    <Content Include="Areas\Coupons\Scripts\Coupons.viewModel.js" />
+    <Content Include="Areas\Coupons\Scripts\Layout.dataService.js" />
+    <Content Include="Areas\Coupons\Scripts\Layout.model.js" />
+    <Content Include="Areas\Coupons\Scripts\Layout.view.js" />
+    <Content Include="Areas\Coupons\Scripts\Layout.viewModel.js" />
+    <Content Include="Areas\Coupons\Scripts\__Layout.view .js" />
+    <Content Include="Areas\Coupons\Scripts\__Layout.viewModel .js" />
+    <Content Include="Areas\DAM\Scripts\DamGrid.dataservice.js" />
+    <Content Include="Areas\DAM\Scripts\DamGrid.model.js" />
+    <Content Include="Areas\DAM\Scripts\DamGrid.view.js" />
+    <Content Include="Areas\DAM\Scripts\DamGrid.viewModel.js" />
+    <Content Include="Areas\EmailPromotion\Scripts\EmailPromotion.dataservice.js" />
+    <Content Include="Areas\EmailPromotion\Scripts\EmailPromotion.model.js" />
+    <Content Include="Areas\EmailPromotion\Scripts\EmailPromotion.view.js" />
+    <Content Include="Areas\EmailPromotion\Scripts\EmailPromotion.viewModel.js" />
+    <Content Include="Areas\Franchise\Scripts\addApproval.dataservice.js" />
+    <Content Include="Areas\Franchise\Scripts\addApproval.model.js" />
+    <Content Include="Areas\Franchise\Scripts\addApproval.view.js" />
+    <Content Include="Areas\Franchise\Scripts\addApproval.viewModel.js" />
+    <Content Include="Areas\Franchise\Scripts\Coupons.dataservice.js" />
+    <Content Include="Areas\Franchise\Scripts\Coupons.model.js" />
+    <Content Include="Areas\Franchise\Scripts\Coupons.view.js" />
+    <Content Include="Areas\Franchise\Scripts\Coupons.viewModel.js" />
+    <Content Include="Areas\Franchise\Scripts\MarketingDeals.dataservice.js" />
+    <Content Include="Areas\Franchise\Scripts\MarketingDeals.model.js" />
+    <Content Include="Areas\Franchise\Scripts\MarketingDeals.view.js" />
+    <Content Include="Areas\Franchise\Scripts\MarketingDeals.viewModel.js" />
+    <Content Include="Areas\Franchise\Scripts\payPallApp.dataservice.js" />
+    <Content Include="Areas\Franchise\Scripts\payPallApp.model.js" />
+    <Content Include="Areas\Franchise\Scripts\payPallApp.view.js" />
+    <Content Include="Areas\Franchise\Scripts\payPallApp.viewModel.js" />
+    <Content Include="Areas\Franchise\Scripts\profileQuestionApp.model.js" />
+    <Content Include="Areas\Franchise\Scripts\profileQuestionApp.view.js" />
+    <Content Include="Areas\Franchise\Scripts\profileQuestionApp.viewModel.js" />
+    <Content Include="Areas\Franchise\Scripts\profileQuetionApp.dataservice.js" />
+    <Content Include="Areas\Franchise\Scripts\registeredUsers.dataservice.js" />
+    <Content Include="Areas\Franchise\Scripts\registeredUsers.model.js" />
+    <Content Include="Areas\Franchise\Scripts\registeredUsers.view.js" />
+    <Content Include="Areas\Franchise\Scripts\registeredUsers.viewModel.js" />
+    <Content Include="Areas\Franchise\Scripts\surveyQuestionApp.dataservice.js" />
+    <Content Include="Areas\Franchise\Scripts\surveyQuestionApp.model.js" />
+    <Content Include="Areas\Franchise\Scripts\surveyQuestionApp.view.js" />
+    <Content Include="Areas\Franchise\Scripts\surveyQuestionApp.viewModel.js" />
+    <Content Include="Areas\ProfileQuestion\Scripts\paypalExample.view.js" />
+    <Content Include="Areas\ProfileQuestion\Scripts\paypalExample.viewModel.js" />
     <Content Include="Areas\ProfileQuestion\Scripts\pQuestion.dataservice.js" />
     <Content Include="Areas\ProfileQuestion\Scripts\pQuestion.model.js" />
-    <Content Include="Areas\ProfileQuestion\Scripts\paypalExample.view.js" />
-    <Content Include="Areas\ProfileQuestion\Scripts\stripeExample.view.js" />
     <Content Include="Areas\ProfileQuestion\Scripts\pQuestion.view.js" />
-    <Content Include="Areas\ProfileQuestion\Scripts\paypalExample.viewModel.js" />
-    <Content Include="Areas\ProfileQuestion\Scripts\stripeExample.viewModel.js" />
     <Content Include="Areas\ProfileQuestion\Scripts\pQuestion.viewModel.js" />
-    <Content Include="Areas\Survey\Scripts\surveyQuestionApp.dataservice.js" />
-    <Content Include="Areas\Survey\Scripts\surveyQuestionApp.model.js" />
-    <Content Include="Areas\Survey\Scripts\surveyQuestionApp.view.js" />
-    <Content Include="Areas\Survey\Scripts\surveyQuestionApp.viewModel.js" />
+    <Content Include="Areas\ProfileQuestion\Scripts\stripeExample.view.js" />
+    <Content Include="Areas\ProfileQuestion\Scripts\stripeExample.viewModel.js" />
+    <Content Include="Areas\Report\Scripts\walletReport.dataservice.js" />
+    <Content Include="Areas\Report\Scripts\walletReport.model.js" />
+    <Content Include="Areas\Report\Scripts\walletReport.view.js" />
+    <Content Include="Areas\Report\Scripts\walletReport.viewModel.js" />
+    <Content Include="Areas\SuperNova\Scripts\analytic.dataservice.js" />
+    <Content Include="Areas\SuperNova\Scripts\analytic.model.js" />
+    <Content Include="Areas\SuperNova\Scripts\analytic.view.js" />
+    <Content Include="Areas\SuperNova\Scripts\analytic.viewModel.js" />
     <Content Include="Areas\Survey\Scripts\survey.dataservice.js" />
     <Content Include="Areas\Survey\Scripts\survey.model.js" />
     <Content Include="Areas\Survey\Scripts\survey.view.js" />
     <Content Include="Areas\Survey\Scripts\survey.viewModel.js" />
+    <Content Include="Areas\User\Scripts\user.dataservice.js" />
+    <Content Include="Areas\User\Scripts\user.model.js" />
+    <Content Include="Areas\User\Scripts\user.view.js" />
+    <Content Include="Areas\User\Scripts\user.viewModel.js" />
+    <Content Include="Areas\Ads\Views\Ads\Index.cshtml" />
+    <Content Include="Areas\Ads\Views\Ads\ManageCampaign.cshtml" />
+    <Content Include="Areas\Ads\Views\Ads\_addEditCouponCategories.cshtml" />
+    <Content Include="Areas\Ads\Views\Ads\_addEditCouponCodes.cshtml" />
+    <Content Include="Areas\Ads\Views\Ads\_addEditor.cshtml" />
+    <Content Include="Areas\Ads\Views\Ads\_advertDashboard.cshtml" />
+    <Content Include="Areas\Ads\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Ads\Views\web.config" />
+    <Content Include="Areas\Ads\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Api\Views\web.config" />
+    <Content Include="Areas\Billing\Views\Manage\EmailDashboard.cshtml" />
+    <Content Include="Areas\Billing\Views\Manage\Invoice.cshtml" />
+    <Content Include="Areas\Billing\Views\Manage\_InvoiceDetail.cshtml" />
+    <Content Include="Areas\Billing\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Billing\Views\web.config" />
+    <Content Include="Areas\Billing\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Common\Views\Shared\_CompanyProfile.cshtml" />
+    <Content Include="Areas\Common\Views\Shared\_ConfirmationDialog.cshtml" />
+    <Content Include="Areas\Common\Views\Shared\_InviteSharingUser.cshtml" />
+    <Content Include="Areas\Common\Views\Shared\_Pager.cshtml" />
+    <Content Include="Areas\Common\Views\Shared\_PaypalPayment.cshtml" />
+    <Content Include="Areas\Common\Views\Shared\_phraseLibrary.cshtml" />
+    <Content Include="Areas\Common\Views\Shared\_phraseLibraryDialog.cshtml" />
+    <Content Include="Areas\Common\Views\Shared\_StripeChargeCustomerDialog.cshtml" />
+    <Content Include="Areas\Common\Views\Shared\_UserProfile.cshtml" />
+    <Content Include="Areas\Common\Views\web.config" />
+    <Content Include="Areas\Coupons\Views\Coupons\CouponReviews.cshtml" />
+    <Content Include="Areas\Coupons\Views\Coupons\Index.cshtml" />
+    <Content Include="Areas\Coupons\Views\Coupons\ManageCoupon.cshtml" />
+    <Content Include="Areas\Coupons\Views\Coupons\marketingDealeditor.cshtml" />
+    <Content Include="Areas\Coupons\Views\Coupons\_addEditCouponCategories.cshtml" />
+    <Content Include="Areas\Coupons\Views\Coupons\_advertDashboardDeal.cshtml" />
+    <Content Include="Areas\Coupons\Views\Coupons\_couponEditor.cshtml" />
+    <Content Include="Areas\Coupons\Views\Shared\_BranchDetails.cshtml" />
+    <Content Include="Areas\Coupons\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Coupons\Views\web.config" />
+    <Content Include="Areas\Coupons\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\DAM\Views\Images\-Index - Copy.cshtml" />
+    <Content Include="Areas\DAM\Views\Images\AdminIndex.cshtml" />
+    <Content Include="Areas\DAM\Views\Images\Grid.cshtml" />
+    <Content Include="Areas\DAM\Views\Images\Index.cshtml" />
+    <Content Include="Areas\DAM\Views\Shared\_DAMGrid.cshtml" />
+    <Content Include="Areas\DAM\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\DAM\Views\web.config" />
+    <Content Include="Areas\DAM\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Franchise\Scripts\payPallApp.model.js.map" />
+    <Content Include="Areas\Franchise\Views\ApprovePayPal\PayPalDashboard.cshtml" />
+    <Content Include="Areas\Franchise\Views\ApprovePayPal\_payPallEditorForApp.cshtml" />
+    <Content Include="Areas\Franchise\Views\Dashboard\AddAproval.cshtml" />
+    <Content Include="Areas\Franchise\Views\Dashboard\CouponsAproval.cshtml" />
+    <Content Include="Areas\Franchise\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\Franchise\Views\Dashboard\MarketingDealsStories.cshtml" />
+    <Content Include="Areas\Franchise\Views\Dashboard\ProfileQuestionApproval.cshtml" />
+    <Content Include="Areas\Franchise\Views\Dashboard\SurveyQuestionApproval.cshtml" />
+    <Content Include="Areas\Franchise\Views\Dashboard\TransferRateDashboard.cshtml" />
+    <Content Include="Areas\Franchise\Views\RegisterUsers\UsersDashboard.cshtml" />
+    <Content Include="Areas\Franchise\Views\RegisterUsers\_registeredUserEditor.cshtml" />
+    <Content Include="Areas\Franchise\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Franchise\Views\web.config" />
+    <Content Include="Areas\Franchise\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\ProfileQuestion\Scripts\5m2vhqr1.3a4~" />
+    <Content Include="Areas\ProfileQuestion\Views\Manage\Index.cshtml" />
+    <Content Include="Areas\ProfileQuestion\Views\Manage\PaypalExample.cshtml" />
+    <Content Include="Areas\ProfileQuestion\Views\Manage\StripeExample.cshtml" />
+    <Content Include="Areas\ProfileQuestion\Views\Manage\test.cshtml" />
+    <Content Include="Areas\ProfileQuestion\Views\Manage\_advertProfileQuestionAnalytic.cshtml" />
+    <Content Include="Areas\ProfileQuestion\Views\Manage\_pqEditorForApp.cshtml" />
+    <Content Include="Areas\ProfileQuestion\Views\Manage\_ProfileQuestionEditor.cshtml" />
+    <Content Include="Areas\ProfileQuestion\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\ProfileQuestion\Views\web.config" />
+    <Content Include="Areas\ProfileQuestion\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Report\Views\Report\ManageAdvertises.cshtml" />
+    <Content Include="Areas\Report\Views\Report\ReferAdvertises.cshtml" />
+    <Content Include="Areas\Report\Views\Report\TransactionReport.cshtml" />
+    <Content Include="Areas\Report\Views\Report\WalletReport.cshtml" />
+    <Content Include="Areas\Report\Views\Report\WalletReport1.cshtml" />
+    <Content Include="Areas\Report\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Report\Views\web.config" />
+    <Content Include="Areas\Report\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\SuperNova\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\SuperNova\Views\Dashboard\mails.cshtml" />
+    <Content Include="Areas\SuperNova\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\SuperNova\Views\web.config" />
+    <Content Include="Areas\SuperNova\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Survey\Views\Shared\_AddEditSurvey.cshtml" />
+    <Content Include="Areas\Survey\Views\Shared\_advertSurveyAnalytic.cshtml" />
+    <Content Include="Areas\Survey\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Survey\Views\Survey\Index.cshtml" />
+    <Content Include="Areas\Survey\Views\web.config" />
+    <Content Include="Areas\Survey\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\User\Views\ManageUser\Index.cshtml" />
+    <Content Include="Areas\User\Views\ManageUser\ManageUsers.cshtml" />
+    <Content Include="Areas\User\Views\Shared\_ChangePassword.cshtml" />
+    <Content Include="Areas\User\Views\Shared\_EditManagedUser.cshtml" />
+    <Content Include="Areas\User\Views\Shared\_InviteUser.cshtml" />
+    <Content Include="Areas\User\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\User\Views\web.config" />
+    <Content Include="Areas\User\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\EmailPromotion\Views\web.config" />
+    <Content Include="Areas\EmailPromotion\Views\Emails\Index.cshtml" />
+    <Content Include="Areas\EmailPromotion\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\EmailPromotion\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\EmailPromotion\Views\Emails\ManageEmailCampaign.cshtml" />
+    <None Include="config\Web.connectionstrings.config">
+      <SubType>Designer</SubType>
+    </None>
     <Content Include="Content\colorpicker.css" />
     <Content Include="Content\CSS\bootstrap\bootstrap-responsive.css" />
     <Content Include="Content\CSS\bootstrap\bootstrap-responsive.min.css" />
@@ -542,9 +1223,11 @@
     <Content Include="Content\CSS\fonts\typicons.svg" />
     <Content Include="Content\CSS\fonts\wpzoom.svg" />
     <Content Include="Content\CSS\icons.css" />
+    <Content Include="Content\CSS\intlTelInput.css" />
     <Content Include="Content\CSS\jquery-Slider.css" />
     <Content Include="Content\CSS\jquery.tokenize.css" />
     <Content Include="Content\CSS\main.css" />
+    <Content Include="Content\CSS\Slider.css" />
     <Content Include="Content\CSS\spectrum.css" />
     <Content Include="Content\CSS\supr-theme\images\ui-bg_diagonals-small_100_f4f4f4_40x40.png" />
     <Content Include="Content\CSS\supr-theme\images\ui-bg_dots-small_75_dedede_2x2.png" />
@@ -571,11 +1254,48 @@
     <Content Include="Content\CSS\supr-theme\jquery.ui.supr.css" />
     <Content Include="Content\CSS\supr-theme\jquery.ui.theme.css" />
     <Content Include="Content\CSS\toastr.css" />
+    <Content Include="Content\DAM\after.png" />
+    <Content Include="Content\DAM\before.png" />
+    <Content Include="Content\DAM\border-anim-h.gif" />
+    <Content Include="Content\DAM\border-anim-v.gif" />
+    <Content Include="Content\DAM\constants.js" />
+    <Content Include="Content\DAM\cropit.js" />
+    <Content Include="Content\DAM\DamSite.css" />
+    <Content Include="Content\DAM\empty.png" />
+    <Content Include="Content\DAM\ImageArea.css" />
+    <Content Include="Content\DAM\jquery-ui.css" />
+    <Content Include="Content\DAM\jquery-ui.js" />
+    <Content Include="Content\DAM\jquery.cropbox.css" />
+    <Content Include="Content\DAM\jquery.cropbox.js" />
+    <Content Include="Content\DAM\options.js" />
+    <Content Include="Content\DAM\pc1.js" />
+    <Content Include="Content\DAM\pc2.js" />
+    <Content Include="Content\DAM\pc3.js" />
+    <Content Include="Content\DAM\plugin.js" />
+    <Content Include="Content\DAM\Preloader_3.gif" />
+    <Content Include="Content\DAM\utils.js" />
+    <Content Include="Content\DAM\zoomer.js" />
+    <Content Include="Content\DashBannnerImages\1.png" />
+    <Content Include="Content\DashBannnerImages\2.png" />
+    <Content Include="Content\DashBannnerImages\3.png" />
+    <Content Include="Content\DashBannnerImages\4.png" />
+    <Content Include="Content\DashBannnerImages\Banner_1_deals.jpg" />
+    <Content Include="Content\DashBannnerImages\Banner_2_Videos.jpg" />
+    <Content Include="Content\DashBannnerImages\Banner_3_Games.jpg" />
+    <Content Include="Content\DashBannnerImages\Banner_4_Polls.jpg" />
+    <Content Include="Content\Images\5_Main_4.png" />
+    <Content Include="Content\Images\a5485b563efc4511e0cd8bd04ad0fe9e.png" />
+    <Content Include="Content\Images\AD_Campaign_mobileStencil.png" />
     <Content Include="Content\Images\arrow-down-small.png" />
     <Content Include="Content\Images\arrow-down.png" />
     <Content Include="Content\Images\arrow-right.jpg" />
     <Content Include="Content\Images\arrow-up-small.png" />
     <Content Include="Content\Images\arrow-up.png" />
+    <Content Include="Content\Images\Back_Footer_Tab.png" />
+    <Content Include="Content\Images\bradPit.jpg" />
+    <Content Include="Content\Images\Cash_4_ads_Dial.png" />
+    <Content Include="Content\Images\Charts.png" />
+    <Content Include="Content\Images\Close_Button.png" />
     <Content Include="Content\Images\colorpicker_background.png" />
     <Content Include="Content\Images\colorpicker_hex.png" />
     <Content Include="Content\Images\colorpicker_hsb_b.png" />
@@ -590,16 +1310,68 @@
     <Content Include="Content\Images\colorpicker_select.gif" />
     <Content Include="Content\Images\colorpicker_submit.png" />
     <Content Include="Content\Images\coming.jpg" />
+    <Content Include="Content\Images\CompanyLogo.png" />
     <Content Include="Content\Images\Company_Default.png" />
     <Content Include="Content\Images\CZ_AOFDdEE7.png" />
+    <Content Include="Content\Images\Deals.png" />
+    <Content Include="Content\Images\Dealsicon.png" />
+    <Content Include="Content\Images\Dealsmod.png" />
+    <Content Include="Content\Images\Dealsuicon.png" />
+    <Content Include="Content\Images\Deals_Small.png" />
+    <Content Include="Content\Images\Deals_Small_36.png" />
+    <Content Include="Content\Images\Displaymod.png" />
+    <Content Include="Content\Images\Display_small.png" />
+    <Content Include="Content\Images\Display_small_36.png" />
+    <Content Include="Content\Images\Drop_Arrow.png" />
+    <Content Include="Content\Images\drop_arrowWhite.png" />
+    <Content Include="Content\Images\Email_icon.png" />
+    <Content Include="Content\Images\email_image.png" />
+    <Content Include="Content\Images\email_Imagewhite.png" />
+    <Content Include="Content\Images\email_Sicon.png" />
+    <Content Include="Content\Images\email_small_icon.png" />
+    <Content Include="Content\Images\facebookNew.png" />
+    <Content Include="Content\Images\flags%402x.png" />
+    <Content Include="Content\Images\flags.png" />
     <Content Include="Content\Images\foldericon3.png" />
+    <Content Include="Content\Images\Games.png" />
+    <Content Include="Content\Images\Games_icon.png" />
+    <Content Include="Content\Images\HeatMap.jpg" />
+    <Content Include="Content\Images\help2.png" />
+    <Content Include="Content\Images\Hero.png" />
     <Content Include="Content\Images\ImageAttach.png" />
     <Content Include="Content\Images\company_contact.jpg" />
     <Content Include="Content\Images\company_contact.jpg" />
     <Content Include="Content\Images\imageplaceholder.png" />
+    <Content Include="Content\Images\LinkedInNew.png" />
     <Content Include="Content\Images\meter.png" />
+    <Content Include="Content\Images\movie_up.png" />
+    <Content Include="Content\Images\Phone_Preview.png" />
     <Content Include="Content\Images\pin.png" />
+    <Content Include="Content\Images\placeholder.png" />
+    <Content Include="Content\Images\Plaz%402x.png" />
+    <Content Include="Content\Images\Pollmod.png" />
+    <Content Include="Content\Images\Polls.png" />
+    <Content Include="Content\Images\Polls_small.png" />
+    <Content Include="Content\Images\Polls_small_36.png" />
+    <Content Include="Content\Images\Poll_icon.png" />
+    <Content Include="Content\Images\Preview.png" />
+    <Content Include="Content\Images\ReportControlbg.jpg" />
+    <Content Include="Content\Images\Share_icon_100.png" />
+    <Content Include="Content\Images\Surveys_icon.png" />
+    <Content Include="Content\Images\Surveys_small.png" />
+    <Content Include="Content\Images\Surveys_small_36.png" />
+    <Content Include="Content\Images\tom_cruis.jpg" />
+    <Content Include="Content\Images\TwitterNew.png" />
+    <Content Include="Content\Images\UK-Union-Flag.png" />
     <Content Include="Content\Images\up-arrow-small.png" />
+    <Content Include="Content\Images\updatedMovie_lg.png" />
+    <Content Include="Content\Images\vide.png" />
+    <Content Include="Content\Images\Videomod.png" />
+    <Content Include="Content\Images\Videos.png" />
+    <Content Include="Content\Images\Videosuicon.png" />
+    <Content Include="Content\Images\Videos_small.png" />
+    <Content Include="Content\Images\Videos_small_20.png" />
+    <Content Include="Content\Images\Videos_small_36.png" />
     <Content Include="Content\layout.css" />
     <Content Include="Content\less\Campaign.css">
       <DependentUpon>Campaign.less</DependentUpon>
@@ -619,8 +1391,49 @@
     <Content Include="Content\less\Survey.css">
       <DependentUpon>Survey.less</DependentUpon>
     </Content>
+    <Content Include="Content\metroUI\css\metro-icons.css" />
+    <Content Include="Content\metroUI\css\metro-responsive.css" />
+    <Content Include="Content\metroUI\css\metro-rtl.css" />
+    <Content Include="Content\metroUI\css\metro-schemes.css" />
+    <Content Include="Content\metroUI\css\metro.css" />
+    <Content Include="Content\metroUI\js\metro.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-apollo.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-basic.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-clj.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-css.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-dart.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-erlang.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-go.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-hs.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-lisp.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-llvm.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-lua.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-matlab.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-ml.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-mumps.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-n.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-pascal.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-proto.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-r.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-rd.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-scala.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-sql.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-tcl.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-tex.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-vb.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-vhdl.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-wiki.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-xq.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-yaml.js" />
+    <Content Include="Content\metroUI\js\prettify\prettify.css" />
+    <Content Include="Content\metroUI\js\prettify\prettify.js" />
+    <Content Include="Content\metroUI\js\prettify\run_prettify.js" />
+    <Content Include="Content\Range\rangeslider.css" />
+    <Content Include="Content\Range\rangeslider.js" />
+    <Content Include="Content\Range\rangeslider.min.js" />
     <Content Include="Content\ReportViewerSite.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\textboxLabel.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -662,6 +1475,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\themes\Centaurus\css\basecss.css" />
     <Content Include="Content\themes\Centaurus\js\CSJSRequestObject.js" />
     <Content Include="Content\themes\Centaurus\css\bootstrap\bootstrap.css" />
     <Content Include="Content\themes\Centaurus\css\bootstrap\bootstrap.min.css" />
@@ -856,14 +1670,104 @@
     <Content Include="Content\themes\Centaurus\js\typeahead.min.js" />
     <Content Include="Content\themes\Centaurus\js\wizard.js" />
     <Content Include="Content\themes\Centaurus\js\xcharts.js" />
+    <Content Include="Emails\Deal_Expired.aspx" />
+    <Content Include="Emails\DailyuserCategoryClickDeals.aspx" />
+    <Content Include="Emails\SendNotificationToAdvertiserForAdditional20DollarDiscounton2ndLastDay.aspx" />
+    <Content Include="Emails\SendNotificationToAdvertiserForAdditional30DollarDiscountonLastDay.aspx" />
+    <Content Include="Emails\SendNotificationToAdvertiserForAdditional10DollarDiscounton3rdLastDay.aspx" />
+    <Content Include="Emails\SendNotificationToAdvertiserForAdditional30PercentDiscountonLastDay.aspx" />
+    <Content Include="Emails\SendNotificationToAdvertiserForAdditional25PercentDiscounton2ndLastDay.aspx" />
+    <Content Include="Emails\SendNotificationToAdvertiserForAdditional20PercentDiscounton3rdLastDay.aspx" />
+    <Content Include="Emails\Deal_Expiry_3_days.aspx" />
+    <Content Include="Emails\Picture_poll_Submission.aspx" />
+    <Content Include="Emails\Display_Ad_Rejected.aspx" />
+    <Content Include="Emails\Deal_Submission.aspx" />
+    <Content Include="Emails\LastDayDollarDiscountCouponsNearMe.aspx" />
+    <Content Include="Emails\Last2DaysDollarDiscountCouponsNearMe.aspx" />
+    <Content Include="Emails\Last3DaysDollarDiscountCouponsNearMe.aspx" />
+    <Content Include="Emails\LastDayPercentageCouponsNearMe.aspx" />
+    <Content Include="Emails\Last2DaysPercentageCouponsNearMe.aspx" />
+    <Content Include="Emails\Last3DaysPercentageCouponsNearMe.aspx" />
+    <Content Include="Emails\PayOutRequestNotificationToUser.aspx" />
+    <Content Include="Emails\PayOutRequestNotificationToAdmins.aspx" />
+    <Content Include="Emails\Picture_poll_Rejected.aspx" />
+    <Content Include="Emails\Deal_Rejected.aspx" />
+    <Content Include="Emails\ReviewRecievedForDeal.aspx" />
+    <Content Include="Emails\NewUserSignup.aspx" />
+    <Content Include="Emails\UserAppFeedback.aspx" />
+    <Content Include="Emails\Display_Ad_Submission.aspx" />
+    <Content Include="Emails\Video_Ad_Submission.aspx" />
+    <Content Include="Emails\Video_Ad_Rejected.aspx" />
+    <Content Include="Emails\delete_account_confirmation.aspx" />
+    <Content Include="Emails\Deal_Approved.aspx" />
+    <Content Include="Emails\Reset_Password.aspx" />
+    <Content Include="Emails\Invite_Manage_User.aspx" />
+    <Content Include="Emails\AccountVerify.aspx" />
+    <Content Include="Emails\Picture_poll_approved.aspx" />
+    <Content Include="Emails\Display_Ad_Approved.aspx" />
+    <Content Include="Emails\Video_Ad_Approved.aspx" />
+    <Content Include="Emails\subscription_created.aspx" />
+    <Content Include="Emails\NewDeals.aspx" />
+    <Content Include="Emails\DisplayAd_Performance.aspx" />
+    <Content Include="Emails\Deal_Performance.aspx" />
+    <Content Include="Emails\Picture_Poll_Performance.aspx" />
+    <Content Include="Emails\Video_Performance.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="games\bouncingball\Bounce_files\abg.js" />
+    <Content Include="games\bouncingball\Bounce_files\bundle-cmp.js" />
+    <Content Include="games\bouncingball\Bounce_files\desktop.css" />
+    <Content Include="games\bouncingball\Bounce_files\ima3_debug.js" />
+    <Content Include="games\bouncingball\Bounce_files\kik.js" />
+    <Content Include="games\bouncingball\Bounce_files\layout_engine.js" />
+    <Content Include="games\bouncingball\Bounce_files\osd.js" />
+    <Content Include="games\bouncingball\Bounce_files\scream_V3_display_url_single_css.css" />
+    <Content Include="games\bouncingball\Bounce_files\scream_V3_display_url_single_css.js" />
+    <Content Include="games\bouncingball\Bounce_files\style.css" />
+    <Content Include="games\bouncingball\img\blk.jpg" />
+    <Content Include="games\bouncingball\img\kik.png" />
+    <Content Include="games\bouncingball\img\more.png" />
+    <Content Include="games\bouncingball\index.html" />
+    <Content Include="games\connect4\index.html" />
+    <Content Include="games\connect4\script.js" />
+    <Content Include="games\connect4\style.css" />
     <Content Include="Global.asax" />
+    <Content Include="Images\1_Splash_screen_1.png" />
     <Content Include="Images\accent.png" />
     <Content Include="Images\ads.png" />
+    <Content Include="Images\app-store.png" />
+    <Content Include="Images\Arrow.png" />
+    <Content Include="Images\beta.jpg" />
     <Content Include="Images\bullet.png" />
+    <Content Include="Images\Cash4ads_logo-circle.png" />
+    <Content Include="Images\Cash4ads_logo.png" />
+    <Content Include="Images\Cash4Ads_White_pink.png" />
     <Content Include="Images\Cash4Ads_White_text.png" />
+    <Content Include="Images\clidyLogo.png" />
+    <Content Include="Images\clidy_circle_logo.png" />
+    <Content Include="Images\clodyInvoice.png" />
+    <Content Include="Images\close2-128.png" />
+    <Content Include="Images\commute.jpg" />
+    <Content Include="Images\crowdcentz_logo.png" />
+    <Content Include="Images\crowdcentz_logo_whitebg.png" />
+    <Content Include="Images\dealFooterimg.jpg" />
+    <Content Include="Images\displayAdimg.jpg" />
+    <Content Include="Images\download-on-google-play.png" />
+    <Content Include="Images\email-White_Icon.png" />
+    <Content Include="Images\email_Imagewhite.png" />
+    <Content Include="Images\faceBook_Icon.png" />
+    <Content Include="Images\googleplay_icon.png" />
+    <Content Include="Images\guru.png" />
     <Content Include="Images\heroAccent.png" />
+    <Content Include="Images\imgDealFooter.png" />
+    <Content Include="Images\imgAddFooter.png" />
+    <Content Include="Images\imgFooterDisplay.png" />
+    <Content Include="Images\imgFooterPools.png" />
+    <Content Include="Images\instragram_icon.png" />
+    <Content Include="Images\iphoneStencil.png" />
+    <Content Include="Images\linckedin_icon.png" />
+    <Content Include="Images\New_Register_Image.png" />
+    <Content Include="Images\NY-city.jpg" />
     <Content Include="Images\orderedList0.png" />
     <Content Include="Images\orderedList1.png" />
     <Content Include="Images\orderedList2.png" />
@@ -874,6 +1778,34 @@
     <Content Include="Images\orderedList7.png" />
     <Content Include="Images\orderedList8.png" />
     <Content Include="Images\orderedList9.png" />
+    <Content Include="Images\Phones4u.png" />
+    <Content Include="Images\pollpicture1.png" />
+    <Content Include="Images\pollpicture2.png" />
+    <Content Include="Images\pollsFooterImg.jpg" />
+    <Content Include="Images\Preview.png" />
+    <Content Include="Images\preview_game.jpg" />
+    <Content Include="Images\qqtt.png" />
+    <Content Include="Images\Red_Bell.png" />
+    <Content Include="Images\red_Star.png" />
+    <Content Include="Images\select_image.jpg" />
+    <Content Include="Images\share_icon.png" />
+    <Content Include="Images\Share_world.png" />
+    <Content Include="Images\Sign_In_Image.png" />
+    <Content Include="Images\splaceholder.png" />
+    <Content Include="Images\standardplaceholder.png" />
+    <Content Include="Images\StartImage.png" />
+    <Content Include="Images\Taget.png" />
+    <Content Include="Images\Tips-Icon-2.png" />
+    <Content Include="Images\topbarph.png" />
+    <Content Include="Images\twiter_Icon.png" />
+    <Content Include="Images\videoAdImage.jpg" />
+    <Content Include="Images\White_Arrow.png" />
+    <Content Include="Images\yellow_star.png" />
+    <Content Include="Images\youtube_play.JPG" />
+    <Content Include="Images\yt_icon.png" />
+    <Content Include="ReportViewers\Publisher.aspx" />
+    <Content Include="ReportViewers\SMDReport.aspx" />
+    <Content Include="ReportViewers\test.html" />
     <Content Include="RichTextEditor\adapters\jquery.js" />
     <Content Include="RichTextEditor\build-config.js" />
     <Content Include="RichTextEditor\ckeditor.js" />
@@ -1200,6 +2132,22 @@
     <Content Include="RichTextEditor\skins\moono\images\lock.png" />
     <Content Include="RichTextEditor\skins\moono\images\refresh.png" />
     <Content Include="RichTextEditor\styles.js" />
+    <Content Include="scheduler_batch_files\Deal near Me.xml" />
+    <Content Include="scheduler_batch_files\Last2DaysDollarDiscountCouponsNearMe.xml" />
+    <Content Include="scheduler_batch_files\Last2DaysPercentageCouponsNearMe.xml" />
+    <Content Include="scheduler_batch_files\Last3DaysDollarDiscountCouponsNearMe.xml" />
+    <Content Include="scheduler_batch_files\Last3DaysPercentageCouponsNearMe.xml" />
+    <Content Include="scheduler_batch_files\LastDayDollarDiscountCouponsNearMe.xml" />
+    <Content Include="scheduler_batch_files\LastDayPercentageCouponsNearMe.xml" />
+    <Content Include="scheduler_batch_files\Send3DaysDealExpiredNotificationToAdvertiser.xml" />
+    <Content Include="scheduler_batch_files\SendCampaignPerformanceEmails.xml" />
+    <Content Include="scheduler_batch_files\SendDealExpiredNotificationToAdvertiser.xml" />
+    <Content Include="scheduler_batch_files\SendNotificationToAdvertiserForAdditional10DollarDiscounton3rdLastDay.xml" />
+    <Content Include="scheduler_batch_files\SendNotificationToAdvertiserForAdditional20DollarDiscounton2ndLastDay.xml" />
+    <Content Include="scheduler_batch_files\SendNotificationToAdvertiserForAdditional20PercentDiscounton3rdLastDay.xml" />
+    <Content Include="scheduler_batch_files\SendNotificationToAdvertiserForAdditional25PercentDiscounton2ndLastDay.xml" />
+    <Content Include="scheduler_batch_files\SendNotificationToAdvertiserForAdditional30DollarDiscountonLastDay.xml" />
+    <Content Include="scheduler_batch_files\SendNotificationToAdvertiserForAdditional30PercentDiscountonLastDay.xml" />
     <Content Include="Scripts\Ace\lib\ace\ace.js" />
     <Content Include="Scripts\Ace\lib\ace\mode-css.js" />
     <Content Include="Scripts\Ace\lib\ace\theme-clouds.js" />
@@ -1207,6 +2155,19 @@
     <Content Include="Scripts\Ace\lib\ace\worker-css.js" />
     <Content Include="Scripts\autoNumeric\autoNumeric-1.9.25.js" />
     <Content Include="Scripts\autoNumeric\autoNumeric-1.9.25.min.js" />
+    <Content Include="Scripts\chart.js" />
+    <Content Include="Scripts\Charts\Chart.js" />
+    <Content Include="Scripts\Charts\exporting.js" />
+    <Content Include="Scripts\Charts\highcharts.js" />
+    <Content Include="Scripts\Charts\jquery-2.1.4.min.js" />
+    <Content Include="Scripts\Charts\jquery.min.js" />
+    <Content Include="Scripts\Charts\knockout.chart.js" />
+    <Content Include="Scripts\gmaps-heatmap.js" />
+    <Content Include="Scripts\heatmap.js" />
+    <Content Include="Scripts\heatmap.min.js" />
+    <Content Include="Scripts\intlTelInput.min.js" />
+    <Content Include="Scripts\intphnumutils.js" />
+    <Content Include="Scripts\jquery.imgareaselect.js" />
     <Content Include="Scripts\jquery.tokenize.js" />
     <Content Include="Scripts\knockout-3.1.0.debug.js" />
     <Content Include="Scripts\knockout-ace.js" />
@@ -1333,9 +2294,6 @@
     <Content Include="Scripts\Ace\theme-clouds.js" />
     <Content Include="Scripts\affix.js" />
     <Content Include="Scripts\alert.js" />
-    <Content Include="Areas\Api\Views\web.config">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="Content\CSS\fonts\broccolidry.eot" />
     <Content Include="Content\CSS\fonts\broccolidry.ttf" />
     <Content Include="Content\CSS\fonts\broccolidry.woff" />
@@ -1378,34 +2336,8 @@
     <Content Include="Content\themes\Centaurus\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\themes\Centaurus\fonts\glyphicons-halflings-regulard41d.eot" />
     <Content Include="Content\less\MainSite.less" />
-    <Content Include="Areas\ProfileQuestion\Views\web.config" />
-    <Content Include="Areas\ProfileQuestion\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\ProfileQuestion\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Survey\Views\web.config" />
-    <Content Include="Areas\Survey\Views\Survey\Index.cshtml" />
-    <Content Include="Areas\ProfileQuestion\Views\Manage\Index.cshtml" />
-    <Content Include="Areas\ProfileQuestion\Views\Manage\_ProfileQuestionEditor.cshtml" />
-    <Content Include="Areas\Common\Views\web.config" />
-    <Content Include="Areas\Common\Views\Shared\_ConfirmationDialog.cshtml" />
-    <Content Include="Areas\Common\Views\Shared\_Pager.cshtml" />
-    <Content Include="Areas\Ads\Views\web.config" />
-    <Content Include="Areas\Ads\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Ads\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Ads\Views\Ads\Index.cshtml" />
-    <Content Include="Areas\Common\Views\Shared\_StripeChargeCustomerDialog.cshtml" />
-    <Content Include="Areas\ProfileQuestion\Views\Manage\StripeExample.cshtml" />
-    <Content Include="Areas\Ads\Views\Ads\ManageCampaign.cshtml" />
-    <Content Include="Areas\ProfileQuestion\Views\Manage\PaypalExample.cshtml" />
-    <Content Include="Areas\Common\Views\Shared\_PaypalPayment.cshtml" />
-    <Content Include="Areas\Survey\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Survey\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Survey\Views\Shared\_AddEditSurvey.cshtml" />
     <Content Include="Content\less\Campaign.less" />
     <Content Include="Content\less\Survey.less" />
-    <Content Include="Areas\Survey\Views\Survey\SurveyQuestionApproval.cshtml" />
-    <Content Include="Areas\Survey\Views\Survey\_SurveyQuestionEditor.cshtml" />
-    <Content Include="Areas\Ads\Views\Ads\_addEditor.cshtml" />
-    <Content Include="Areas\Ads\Views\Ads\AddAproval.cshtml" />
     <Content Include="RichTextEditor\CHANGES.md" />
     <Content Include="RichTextEditor\LICENSE.md" />
     <Content Include="RichTextEditor\plugins\scayt\LICENSE.md" />
@@ -1417,13 +2349,31 @@
     <Content Include="RichTextEditor\samples\plugins\htmlwriter\assets\outputforflash\outputforflash.fla" />
     <Content Include="RichTextEditor\skins\moono\readme.md" />
     <Content Include="Content\less\ProfileQuestion.less" />
-    <Content Include="Areas\Billing\Views\web.config" />
-    <Content Include="Areas\Billing\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Billing\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Billing\Views\Manage\Invoice.cshtml" />
-    <Content Include="Areas\Billing\Views\Manage\_InvoiceDetail.cshtml" />
+    <Content Include="Content\less\MainSite.css.map">
+      <DependentUpon>MainSite.css</DependentUpon>
+    </Content>
+    <Content Include="Content\less\Campaign.css.map">
+      <DependentUpon>Campaign.css</DependentUpon>
+    </Content>
+    <None Include="Properties\PublishProfiles\mz profile.pubxml" />
     <None Include="Properties\PublishProfiles\SMD MIS Saqib.pubxml" />
     <None Include="Properties\PublishProfiles\SMD.pubxml" />
+    <Content Include="scheduler_batch_files\deals_near_me.bat" />
+    <Content Include="scheduler_batch_files\Last2DaysDollar.bat" />
+    <Content Include="scheduler_batch_files\Last2DaysPercentage.bat" />
+    <Content Include="scheduler_batch_files\Last3DaysDollar.bat" />
+    <Content Include="scheduler_batch_files\Last3DaysPercentage.bat" />
+    <Content Include="scheduler_batch_files\LastDayDollar.bat" />
+    <Content Include="scheduler_batch_files\LastDayPercentage.bat" />
+    <Content Include="scheduler_batch_files\Send3DaysDealExpiredNotificationToAdvertiser.bat" />
+    <Content Include="scheduler_batch_files\SendDealExpiredNotificationToAdvertiser.bat" />
+    <Content Include="scheduler_batch_files\SendPerformanceUpdates.bat" />
+    <Content Include="scheduler_batch_files\SendNotificationToAdvertiserForAdditional10DollarDiscounton3rdLastDay.bat" />
+    <Content Include="scheduler_batch_files\SendNotificationToAdvertiserForAdditional20DollarDiscounton2ndLastDay.bat" />
+    <Content Include="scheduler_batch_files\SendNotificationToAdvertiserForAdditional20PercentDiscounton3rdLastDay.bat" />
+    <Content Include="scheduler_batch_files\SendNotificationToAdvertiserForAdditional25PercentDiscounton2ndLastDay.bat" />
+    <Content Include="scheduler_batch_files\SendNotificationToAdvertiserForAdditional30DollarDiscountonLastDay.bat" />
+    <Content Include="scheduler_batch_files\SendNotificationToAdvertiserForAdditional30PercentDiscountonLastDay.bat" />
     <None Include="Scripts\amplify-vsdoc.js" />
     <Content Include="Scripts\amplify.js" />
     <Content Include="Scripts\amplify.min.js" />
@@ -2439,6 +3389,10 @@
     <Content Include="Scripts\popover.js" />
     <Content Include="Scripts\quick-sidebar.js" />
     <Content Include="Scripts\r.js" />
+    <Content Include="Scripts\Rating\jquery.js" />
+    <Content Include="Scripts\Rating\rating.css" />
+    <Content Include="Scripts\Rating\rating.js" />
+    <Content Include="Scripts\Rating\rating.png" />
     <Content Include="Scripts\README.txt" />
     <Content Include="Scripts\require.js" />
     <Content Include="Scripts\respond.js" />
@@ -2485,7 +3439,10 @@
     <Content Include="Scripts\underscore-min.js" />
     <Content Include="Scripts\underscore.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="ReportViewers\User.aspx" />
+    <Content Include="Emails\Welcome_Cash4ads.aspx" />
+    <Content Include="Views\Home\-------Login.cshtml" />
+    <Content Include="Views\MobileMessageBox\Message.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -2522,6 +3479,17 @@
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="Views\Shared\_LoginMain.cshtml" />
     <Content Include="Views\Shared\_ExternalLoginPartial.cshtml" />
+    <Content Include="Views\Account\SelectCompany.cshtml" />
+    <Content Include="Views\Account\AcceptInvitation.cshtml" />
+    <Content Include="Views\Shared\_Layout - Copy.cshtml" />
+    <Content Include="Views\Shared\_Layout_Supernova.cshtml" />
+    <Content Include="Views\Shared\_Layout_Franchise.cshtml" />
+    <Content Include="Views\Home\StartUpGuide.cshtml" />
+    <Content Include="Views\Home\TrainingVideos.cshtml" />
+    <Content Include="Views\Home\HelpCenter.cshtml" />
+    <Content Include="Views\Home\ContactUs.cshtml" />
+    <Content Include="StripeWebhooks\StripeHandler.ashx" />
+    <Content Include="Views\Account\DeleteAccount.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2531,22 +3499,15 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Ads\Models\" />
-    <Folder Include="Areas\Api\Views\ProfileQuestion\" />
-    <Folder Include="Areas\Api\Views\Survey\" />
-    <Folder Include="Areas\Billing\Models\" />
-    <Folder Include="Areas\Common\Controllers\" />
-    <Folder Include="Areas\Common\Models\" />
-    <Folder Include="Areas\Survey\Models\" />
     <Folder Include="Content\themes\base\minified\images\" />
     <Folder Include="Models\" />
-    <Folder Include="Reports\" />
     <Folder Include="Resources\" />
     <Folder Include="Scripts\Plugins\forms\tiny_mce\plugins\spellchecker\classes\utils\" />
     <Folder Include="Scripts\Plugins\forms\tiny_mce\plugins\spellchecker\includes\" />
     <Folder Include="SMD_Content\AdCampaigns\" />
     <Folder Include="SMD_Content\ProfileQuestions\" />
     <Folder Include="SMD_Content\SurveyQuestions\" />
+    <Folder Include="SMD_Content\Users\02de201f-f4ea-420e-a1a8-74e7c1975277\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
@@ -2575,6 +3536,10 @@
       <Project>{81067904-2176-4648-87ab-014b0d76b85e}</Project>
       <Name>SMD.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SMD.Common\SMD.Common.csproj">
+      <Project>{4ba9e712-f447-4a6b-bae6-18eeb43087c6}</Project>
+      <Name>SMD.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WebBase\SMD.WebBase.csproj">
       <Project>{bcb8bcfd-0163-430c-8088-224074d6e384}</Project>
       <Name>SMD.WebBase</Name>
@@ -2584,11 +3549,10 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Areas\Api\LanguageResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>LanguageResources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Api\LanguageResources.resx" />
+    <EmbeddedResource Include="Reports\Publisher.rdlc" />
+    <EmbeddedResource Include="Reports\SMDReport.rdlc" />
+    <EmbeddedResource Include="Reports\Users.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -2609,7 +3573,9 @@
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>30630</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://smdpreview.com/</IISUrl>
+          <IISUrl>http://smdpreview.com</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://smdpreview.com</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

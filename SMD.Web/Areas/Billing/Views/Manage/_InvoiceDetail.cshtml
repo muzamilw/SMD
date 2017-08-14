@@ -7,23 +7,27 @@
 <div data-bind="visible: $root.isEditorVisible()" style="display: none">
     <div class="col-lg-12">
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-12" style="display:none">
                 <ol class="breadcrumb">
-                    <li><a href="#" class="my-navigator">Home</a></li>
-                    <li><a href="#" class="my-navigator">Invoice</a></li>
+                    <li><a href="#" class="my-navigator" style="color: #ffffff">Home</a></li>
+                    <li><a href="#" class="my-navigator"style="color: #ffffff">Invoice</a></li>
                 </ol>
-                <div class="tab-content dynamicNameHeading" style="height:41px;">
-                    <h1>Details</h1>
-                </div>
             </div>
         </div>
         <div class="row" id="user-profile">
-            <div class="col-lg-12 col-md-8 col-sm-8" style="padding-bottom: 10px;">
-                <div class="clearfix ">
-                    <div class="col-xs-12" style="text-align: right; padding-right:0;margin-bottom:10px;">
-                        <button class="btn btn-default" id="saveBtn" data-bind="click: $root.closeEditDialog">Close</button>
-                    </div>
+            <div class="col-lg-12 col-md-8 col-sm-8" style="padding-bottom: 25px;padding-top:15px;">
+
+                <div class="col-lg-6" style="padding-left:0px;">
+                    <span style="font-size: 24px;color: #ffffff">Details</span>
                 </div>
+                <div class="col-lg-6" style="text-align: right;margin-bottom:3px;margin-top:18px;padding-right:0px;">
+                    <div style="float:right;margin-top:-9px;"><img data-bind="click: $root.closeEditDialog" src="/Content/Images/Close_Button.png" style="width:20px;height:20px;float:right;cursor:pointer;"></div>
+                    @*<button class="btn btn-default" id="saveBtn" data-bind="click: $root.closeEditDialog">Close</button>*@
+                </div>
+
+
+
+
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <div class="main-box clearfix" id="tabsHeader">
@@ -40,7 +44,7 @@
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <div class="col-lg-6">
-                                                <img style="height: 100px; width: 350px; margin-left: 65px; margin-top: 12px;" src="~/Images/Cash4Ads_White_text.png" />
+                                                <img style="height: 100px; width: 243px; margin-left: 65px; margin-top: 12px;" src="~/Images/clodyInvoice.png" />
                                             </div>
                                             <div class="col-lg-6">
                                                 <p style="text-align: left; font-size: 28px; text-align: left; font-weight: 600;" class="control-label col-lg-12 tooltip-float">Invoice</p>
@@ -48,12 +52,12 @@
                                                     <p style="text-align: left; padding-left: 0px; float: left; " class="control-label tooltip-float col-lg-3">Invoice #</p>
                                                     <p style="text-align: left; padding-top: 9px; font-weight: bold; " class="col-lg-6" data-bind="text:id"></p>
                                                 </div>
-                                                
+
                                                 <div class="col-lg-12">
                                                     <p style="text-align: left; padding-left: 0px; float: left; " class="control-label tooltip-float col-lg-3">Invoice Date</p>
                                                     <p style="text-align: left; padding-top: 9px; font-weight: bold;" class="col-lg-6" data-bind="dateString : invoDate, datePattern: 'DD/MM/YYYY'"></p>
                                                 </div>
-                                                 
+
                                                 <div class="col-lg-12">
                                                     <p style="text-align: left; padding-left: 0px; float: left; " class="control-label tooltip-float col-lg-3">Invoice Amount</p>
                                                     <p style="text-align: left; padding-top: 9px; font-weight: bold; " class="col-lg-6" data-bind="text:invoiceTotal"></p>
@@ -62,14 +66,14 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <div class="col-lg-6">
                                                 <p style="text-align: left; padding-top: 0px; text-align: left; " class="control-label col-lg-12 tooltip-float">Clydy Ltd t/a Cash4Ads</p>
                                                 <p style="text-align: left; padding-top: 0px; text-align: left; " class="control-label col-lg-12 tooltip-float">268 Bath Road, Slough</p>
                                                 <p style="text-align: left; padding-top: 0px; text-align: left; " class="control-label col-lg-12 tooltip-float">United Kingdom SL1 4DX</p>
-                                                
+
                                                 <p style="text-align: left; padding-top: 0px; text-align: left; " class="control-label col-lg-12 tooltip-float">Vat No : 164 4260 19</p>
                                                 <p style="text-align: left; padding-top: 0px; text-align: left; " class="control-label col-lg-12 tooltip-float">UK : +44 1753 369 069</p>
                                                 <div class="col-lg-12">
@@ -90,17 +94,17 @@
                                                 <p style="text-align: left; padding-top: 0px; text-align: left; " class="control-label col-lg-12 tooltip-float" data-bind="text: user"></p>
 
                                                 <div class="col-lg-12">
-                                                    <hr style="margin-bottom: 0px;"/>
+                                                    <hr style="margin-bottom: 0px;" />
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="col-lg-12">
                                         <div class="main-box no-header clearfix">
                                             <div class="main-box-body clearfix">
                                                 <div class="table-responsive">
-                                                    <table class="table" >
+                                                    <table class="table">
                                                         <thead>
                                                             <tr>
                                                                 <th class="col-lg-6 th-pointer"><span id="1">DESCRIPTION</span></th>
@@ -114,7 +118,7 @@
                                                             <!-- ko template: { name: 'invoiceDEtailTemplate' , foreach: $root.selectedInvoice().invoiceDetails } -->
                                                             <!-- /ko -->
                                                             <!-- /ko -->
-                                                            
+
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -156,7 +160,7 @@
                                             <div class="col-lg-12">
                                                 <div class="col-lg-2">
                                                     <p style="text-align: left; padding-left: 0px; padding-top: 0px; text-align: left; float: left; font-weight: bold;" class="control-label col-lg-12 tooltip-float">PAYMENT DETAILS</p>
-                                                    <hr style=" margin-bottom: 0px;"/>
+                                                    <hr style=" margin-bottom: 0px;" />
                                                 </div>
                                                 <div class="col-lg-11">
                                                     <label style="float: left; text-align: left; padding-top: 0px; text-align: left; " class="control-label  tooltip-float" data-bind="text:'$'+invoiceTotal()+' was paid on '"></label>
@@ -164,7 +168,7 @@
                                                     <label style="float: left; text-align: left; padding-top: 0px; text-align: left; " class="control-label tooltip-float">&nbsp;by card ending 4015.</label>
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="col-lg-12" style="margin-top: 10px">
                                                 <div class="col-lg-2">
                                                     <p style="font-weight: bold; text-align: left; padding-left: 0px; padding-top: 0px; text-align: left; float: left" class="control-label col-lg-12 tooltip-float">NOTES</p>
@@ -173,7 +177,7 @@
                                                 <p style="text-align: left; padding-top: 0px; text-align: left; " class="control-label col-lg-12 tooltip-float">Thank you for business with us.</p>
                                             </div>
                                         </div>
-                                     </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -1,18 +1,19 @@
-﻿using SMD.Models.DomainModels;
-using SMD.Models.Common;
+﻿using SMD.Models.Common;
+using SMD.Models.DomainModels;
 using SMD.Models.RequestModels;
 using SMD.Models.ResponseModels;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SMD.Interfaces.Services
 {
     public interface IAdvertService
     {
-       
+        AdCampaignBaseResponse GetSurveyQuestionAnser(long SqID);
+        AdCampaignBaseResponse GetALLSurveyQuestionData();
+
+        AdCampaignBaseResponse GetSurveyQuestionDataByCompanyId();
+
         AdCampaignBaseResponse GetCampaignBaseData();
         AdCampaignBaseResponse SearchCountriesAndCities(string searchString);
         AdCampaignBaseResponse SearchLanguages(string searchString);
@@ -28,7 +29,7 @@ namespace SMD.Interfaces.Services
         /// <summary>
         /// Update Ad CAmpaign  | baqer
         /// </summary>
-        AdCampaign UpdateAdCampaign(AdCampaign source);
+        //AdCampaign UpdateAdCampaign(AdCampaign source);
 
         /// <summary>
         /// Get Ads For API  | baqer
@@ -39,6 +40,9 @@ namespace SMD.Interfaces.Services
         AdCampaignBaseResponse GetProfileQuestionAnswersData(int QuestionId);
         AdCampaignBaseResponse GetSurveyQuestionData(long surveyId);
         CampaignResponseModel GetCampaigns(AdCampaignSearchRequest request);
+
+        CampaignSearchResponseModel SearchCampaigns(AdCampaignSearchRequest request);
+
         CampaignResponseModel GetCampaignById(long CampaignId);
         void UpdateCampaign(AdCampaign campaignModel);
 
@@ -46,5 +50,34 @@ namespace SMD.Interfaces.Services
         /// Get Ad Campaign By Id
         /// </summary>
         AdCampaign GetAdCampaignById(long campaignId);
+
+        long CopyAddCampaigns(long CampaignId);
+        AdCampaignBaseResponse getQuizCampaigns();
+        AdCampaignBaseResponse getCompanyBranches();
+
+        List<GetCoupons_Result> GetCoupons(string UserId);
+
+
+        AdCampaign SendApprovalRejectionEmail(AdCampaign source);
+        string UpdateAdApprovalCampaign(AdCampaign source);
+        IEnumerable<getCampaignsByStatus_Result> getCampaignsByStatus();
+        IEnumerable<GetLiveCampaignCountOverTime_Result> GetLiveCampaignCountOverTime(int CampaignType, DateTime DateFrom, DateTime DateTo, int Granularity);
+
+
+        //CouponCodeModel GenerateCouponCodes(int numbers, long CampaignId);
+        IEnumerable<getDisplayAdsCampaignByCampaignIdAnalytics_Result> getAdsCampaignByCampaignIdAnalytics(int compaignId, int CampStatus, int dateRange, int Granularity);
+        IEnumerable<getAdsCampaignByCampaignIdRatioAnalytic_Result> getAdsCampaignByCampaignIdRatioAnalytic(int ID, int dateRange);
+        IEnumerable<getAdsCampaignByCampaignIdtblAnalytic_Result> getAdsCampaignByCampaignIdtblAnalytic(int ID);
+        IEnumerable<getCampaignROItblAnalytic_Result> getCampaignROItblAnalytic(int ID);
+        List<getCampaignByIdFormDataAnalytic_Result> getCampaignByIdFormDataAnalytic(long CampaignId);
+        List<GetRandomAdCampaign_Result> GetRandomAdCampaign(int Type);
+        List<getAdsCampaignPerCityPerGenderFormAnalytic_Result> getAdsCampaignPerCityPerGenderFormAnalytic(long _Id);
+       
+        List<getAdsCampaignPerCityPerAgeFormAnalytic_Result> getAdsCampaignPerCityPerAgeFormAnalytic(long _Id);
+        List<getCampaignImpressionByAgeByCId_Result> getCampaignImpressionByAgeByCId(long CampaignId);
+        List<getCampaignImpressionByProfessionByCId_Result> getCampaignImpressionByProfessionByCId(long CampaignId);
+        List<getCampaignImpressionByGenderByCId_Result> getCampaignImpressionByGenderByCId(long CampaignId);
+
+
     }
 }

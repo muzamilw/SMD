@@ -16,6 +16,8 @@ namespace SMD.Implementation.Services
         #region Private
 
         private readonly IProfileQuestionUserAnswerRepository profileQuestionUserAnswerRepository;
+
+        
         #endregion
         #region Constructor
         /// <summary>
@@ -32,41 +34,64 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Update user's answer for question
         /// </summary>
-        public string UpdateProfileQuestionUserAnswer(UpdateProfileQuestionUserAnswerApiRequest request)
+        public string SaveProfileQuestionUserResponse(UpdateProfileQuestionUserAnswerApiRequest request)
         {
-            #region Deletion of Existing Answers
-            var answerList = profileQuestionUserAnswerRepository.GetProfileQuestionUserAnswerByQuestionId(request);
-            var profileQuestionUserAnswers = answerList as IList<ProfileQuestionUserAnswer> ?? answerList.ToList();
-            if (answerList != null && profileQuestionUserAnswers.Any())
-            {
-                foreach (var answer in profileQuestionUserAnswers)
-                {
-                    profileQuestionUserAnswerRepository.Delete(answer);
-                }
-            }
-            #endregion
+
+            //not deleting the old responses anymore.
+
+            //#region Deletion of Existing Answers
+            //var answerList = profileQuestionUserAnswerRepository.GetProfileQuestionUserAnswerByQuestionId(request);
+            //var profileQuestionUserAnswers = answerList as IList<ProfileQuestionUserAnswer> ?? answerList.ToList();
+            //if (answerList != null && profileQuestionUserAnswers.Any())
+            //{
+            //    foreach (var answer in profileQuestionUserAnswers)
+            //    {
+            //        profileQuestionUserAnswerRepository.Delete(answer);
+            //    }
+            //}
+            //#endregion
             #region Updation
 
-            if (request.ProfileQuestionAnswerIds != null && request.ProfileQuestionAnswerIds.Count > 0)
+            if (request.ProfileQuestionAnswerIds != null && request.ProfileQuestionAnswerIds.Count > 0 && request.ProfileQuestionAnswerIds[0] != -1)
             {
                 foreach (var ansId in request.ProfileQuestionAnswerIds)
                 {
                     var newAnswer = new ProfileQuestionUserAnswer
                     {
-                        PqId = request.ProfileQuestionId,
+                        PQID = request.ProfileQuestionId,
                         AnswerDateTime = DateTime.Now,
-                        PqAnswerId = ansId,
-                        UserId = request.UserId
+                        PQAnswerID = ansId,
+                        UserID = request.UserId,
+                        ResponseType =  (int)request.ResponeEventType,
+                        CompanyId = request.companyId
                     };
                     profileQuestionUserAnswerRepository.Add(newAnswer);
                 }
             }
             else
             {
-                return "Profile Question's Answer Id is null!";
+                //other events processing if not answerered
+
+                var newAnswer = new ProfileQuestionUserAnswer
+                    {
+                        PQID = request.ProfileQuestionId,
+                        AnswerDateTime = DateTime.Now,
+                        PQAnswerID = null,
+                        UserID = request.UserId,
+                        ResponseType =  (int)request.ResponeEventType,
+                        CompanyId = request.companyId
+                    };
+                    profileQuestionUserAnswerRepository.Add(newAnswer);
             }
             #endregion
             profileQuestionUserAnswerRepository.SaveChanges();
+
+
+
+          
+
+
+
             return "Success";
         }
         #endregion

@@ -17,6 +17,8 @@ using System.Web.Mvc;
 using SMD.Models.IdentityModels;
 using Microsoft.AspNet.Identity.Owin;
 using ClaimsIdentity = System.Security.Claims.ClaimsIdentity;
+using SMD.Models.DomainModels;
+using SMD.Implementation.Services;
 
 namespace SMD.MIS.Controllers
 {
@@ -24,12 +26,14 @@ namespace SMD.MIS.Controllers
     public class AccountController : Controller
     {
         #region Private
-
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private IClaimsSecurityService claimsSecurityService;
         private IEmailManagerService emailManagerService;
-
+        private readonly IAccountService accountService;
+        private readonly ICompanyService companyService;
+        private readonly IWebApiUserService userService;
+        private readonly IManageUserService manageUserService;
         /// <summary>
         /// Adds Claims to generated identity
         /// </summary>
@@ -47,16 +51,22 @@ namespace SMD.MIS.Controllers
                     timeZoneOffSetValue = TimeSpan.FromMinutes(offsetMinutes);
                 }
             }
-            //claimsSecurityService.AddClaimsToIdentity(new UserIdentityModel { TimezoneOffset = timeZoneOffSetValue },
-            //    identity);
+            claimsSecurityService.AddClaimsToIdentity(new UserIdentityModel { TimezoneOffset = timeZoneOffSetValue },
+                identity);
+
+            claimsSecurityService.AddClaimsToIdentity(new UserIdentityModel { TimezoneOffset = timeZoneOffSetValue },
+                identity);
             Session["UserTimezoneOffset"] = timeZoneOffSetValue;
         }
+
+
+
         
         #endregion
 
         #region Constructor
 
-        public AccountController(IClaimsSecurityService claimsSecurityService, IEmailManagerService emailManagerService)
+        public AccountController(IClaimsSecurityService claimsSecurityService, IEmailManagerService emailManagerService, IAccountService account, ICompanyService companyService, IWebApiUserService userService, IManageUserService userManageService)
         {
             if (emailManagerService == null)
             {
@@ -65,6 +75,10 @@ namespace SMD.MIS.Controllers
 
             this.claimsSecurityService = claimsSecurityService;
             this.emailManagerService = emailManagerService;
+            this.companyService = companyService;
+            this.userService = userService;
+            accountService = account;
+            this.manageUserService = userManageService;
         }
 
         #endregion
@@ -95,7 +109,7 @@ namespace SMD.MIS.Controllers
                 ViewBag.ReturnUrl = returnUrl;
                 return View();
             }
-            return RedirectToAction("Welcome", "Home", new { area = "" });
+            return RedirectToLocal("");
         }
 
         public ApplicationSignInManager SignInManager
@@ -142,9 +156,25 @@ namespace SMD.MIS.Controllers
             {
                 case SignInStatus.Success:
                     {
+                        var company = companyService.GetCompanyById(user.CompanyId.Value);
+
+                        if ( company.Status != 1)
+                        {
+                            ModelState.AddModelError("", "Account not Active - Plz contact info@cash4ads.com ");
+                            return View(model);
+                        }
+                        else if (company.IsDeleted.HasValue && company.IsDeleted.Value == true)
+                        {
+                            ModelState.AddModelError("", "Account has been deleted");
+                            return View(model);
+                        } 
+                        
+
                         SetupUserClaims(identity);
-                        AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = true }, identity);
-                        return RedirectToLocal(returnUrl);
+                        AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = false }, identity);
+                        //return RedirectToLocal(returnUrl);
+
+                        return RedirectToAction("SelectCompany");
                     }
                 case SignInStatus.LockedOut:
                     {
@@ -166,14 +196,46 @@ namespace SMD.MIS.Controllers
 
         private ActionResult RedirectToLocal(string returnUrl)
         {
-            if (Url.IsLocalUrl(returnUrl))
+
+            //if (UserManager.LoggedInUserRole !=  "" && UserManager.LoggedInUserRole != (string)Roles.User)
+            //{
+                if (Url.IsLocalUrl(returnUrl))
+                {
+                    return Redirect(returnUrl);
+                }
+                else
+                {
+                    return RedirectToAction("Welcome", "Home", new { area = "" });
+                }
+            //}
+            //else
+            //{
+            //    return RedirectToAction("Index","Ads", new { area = "Ads" });
+            //}
+        }
+        //
+        // GET: /Account/AutoLogin
+        [AllowAnonymous]
+        public async Task<ActionResult> AutoLogin(string token)
+        {
+            User user = userService.getUserByAuthenticationToken(token);
+            if (user == null)
             {
-                return Redirect(returnUrl);
+              return Content("Invalid or expired authentication token!");
             }
-            else
+            ClaimsIdentity identity = await user.GenerateUserIdentityAsync(UserManager, DefaultAuthenticationTypes.ApplicationCookie);
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+            if (user != null)
             {
-                return RedirectToAction("Welcome", "Home", new { area = "" });
+                if (!await UserManager.IsEmailConfirmedAsync(user.Id))
+                {
+                    return Content("Email not confirmed!");
+                }
             }
+            SetupUserClaims(identity);
+            AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = false }, identity);
+            return RedirectToLocal("");
+
         }
 
         //
@@ -227,9 +289,20 @@ namespace SMD.MIS.Controllers
         //
         // GET: /Account/Register
         [AllowAnonymous]
-        public ActionResult Register()
+        public ActionResult Register(string code)
         {
-            return View(new RegisterViewModel());
+
+            var model = new RegisterViewModel();
+            if (code != null)
+            {
+                model.code = code;
+
+                Response.Cookies["invitationcode"].Value = code;
+
+            }
+
+
+            return View(model);
         }
 
         //
@@ -241,23 +314,56 @@ namespace SMD.MIS.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new User { UserName = model.Email, Email = model.Email, FullName = model.FullName };
+
+               
+                var user = new User { UserName = model.Email, Email = model.Email, FullName = model.FullName, DOB = null, Status = 1, optDealsNearMeEmails= true, optLatestNewsEmails = true, optMarketingEmails = true };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    var addUserToRoleResult = await UserManager.AddToRoleAsync(user.Id, Roles.User); // Only Type 'User' Role will be registered from app
+                    var addUserToRoleResult = await UserManager.AddToRoleAsync(user.Id, SecurityRoles.EndUser_Admin); // Only Type 'User' Role will be registered from app
                     if (!addUserToRoleResult.Succeeded)
                     {
-                        throw new InvalidOperationException(string.Format("Failed to add user to role {0}", Roles.User));
+                        throw new InvalidOperationException(string.Format("Failed to add user to role {0}", SecurityRoles.EndUser_Admin));
                     }
 
-                    var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code },
-                        protocol: Request.Url.Scheme);
-                    await
-                        emailManagerService.SendAccountVerificationEmail(user, callbackUrl);
-                    ViewBag.Link = callbackUrl;
-                    return View("DisplayEmail");
+
+                  
+
+                        var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                        var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code },
+                            protocol: Request.Url.Scheme);
+
+                        //if code is empty then do the confirmation
+                        if (string.IsNullOrEmpty(model.code))
+                        {
+                        await
+                            emailManagerService.SendAccountVerificationEmail(user, callbackUrl);
+                        ViewBag.Link = callbackUrl;
+
+                    }
+                    
+                    int CompanyId = companyService.createCompany(user.Id, model.Email, model.FullName, Guid.NewGuid().ToString());
+
+                    //process the invitation code if not null
+                    if (!string.IsNullOrEmpty(model.code))
+                    {
+                        manageUserService.AcceptInvitation(model.code,user.Id);
+
+                        IdentityResult cresult = await UserManager.ConfirmEmailAsync(user.Id, code);
+                        if (cresult.Succeeded)
+                        {
+
+                            CreateUserAccounts(CompanyId);
+                            TransactionManager.UserSignupFreeGiftBalanceTransaction(500, CompanyId);
+                            return RedirectToAction("Login","Account");
+                        }
+
+                    }
+                    else
+                    {
+                        //perform email verification
+                        return View("DisplayEmail");
+                    }
                 }
                 AddErrors(result);
             }
@@ -278,8 +384,44 @@ namespace SMD.MIS.Controllers
             IdentityResult result = await UserManager.ConfirmEmailAsync(userId, code);
             if (result.Succeeded)
             {
-                return View("Login");
+                int companyId = companyService.GetUserCompany(userId);
+                CreateUserAccounts(companyId);
+                TransactionManager.UserSignupFreeGiftBalanceTransaction(500, companyId);
+                return RedirectToAction("Login", "Account");
             }
+            else
+            {
+
+                ViewBag.error = string.Join(",", result.Errors.ToArray()); ;
+                return View("ConfirmEmail");
+            }
+
+            return View("Error");
+        }
+
+
+        //
+        // GET: /Account/ConfirmEmail
+        [AllowAnonymous]
+        public async Task<ActionResult> DeleteAccount(string userId, string code)
+        {
+            //code = HttpUtility.UrlDecode(code);
+            if (userId == null || code == null)
+            {
+                return View("Error");
+            }
+          
+            if (userService.Archive(userId, code))
+            {
+                return View();
+            }
+            else
+            {
+
+                ViewBag.error = "Account not deleted due to an error. please contact info@cash4ads.com ";
+                return View();
+            }
+
             return View("Error");
         }
 
@@ -304,15 +446,16 @@ namespace SMD.MIS.Controllers
                 if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
                 {
                     // Don't reveal that the user does not exist or is not confirmed
-                    return View("ForgotPasswordConfirmation");
+                    ViewBag.error = "We could not find an account with provided email.";
+                    return View(model);
                 }
 
                 var code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code },
                     protocol: Request.Url.Scheme);
                 await
-                    UserManager.SendEmailAsync(user.Id, "Reset Password",
-                        "Please reset your password by clicking here: <a href=\"" + callbackUrl + "\">link</a>");
+                    emailManagerService.SendPasswordResetLinkEmail(user, 
+                        callbackUrl);
                 ViewBag.Link = callbackUrl;
                 return View("ForgotPasswordConfirmation");
             }
@@ -378,9 +521,14 @@ namespace SMD.MIS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ExternalLogin(string provider, string returnUrl)
         {
+
+            ControllerContext.HttpContext.Session.RemoveAll();
+
             // Request a redirect to the external login provider
-            return new ChallengeResult(provider,
+            var res =  new ChallengeResult(provider,
                 Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
+
+            return res;
         }
 
         //
@@ -419,11 +567,11 @@ namespace SMD.MIS.Controllers
             return RedirectToAction("VerifyCode", new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl });
         }
 
-        [AllowAnonymous]
-        public ActionResult ExternalLoginCallbackRedirect(string returnUrl)
-        {
-            return RedirectPermanent("ExternalLoginCallback");
-        }
+        //[AllowAnonymous]
+        //public ActionResult ExternalLoginCallbackRedirect(string returnUrl)
+        //{
+        //    return RedirectPermanent("ExternalLoginCallback");
+        //}
 
         //
         // GET: /Account/ExternalLoginCallback
@@ -433,7 +581,7 @@ namespace SMD.MIS.Controllers
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
             if (loginInfo == null)
             {
-                return RedirectToAction("Login");
+                return RedirectToAction("ExternalLoginFailure");
             }
 
             // Sign in the user with this external login provider if the user already has a login
@@ -441,8 +589,28 @@ namespace SMD.MIS.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    SetupUserClaims(loginInfo.ExternalIdentity);
-                    return RedirectToLocal(returnUrl);
+                    
+                        //SetupUserClaims(loginInfo.ExternalIdentity);
+                        //AuthenticationManager.SignIn(new AuthenticationProperties { `sistent = true }, loginInfo.ExternalIdentity);
+
+                    //var user = _userManager.FindById(loginInfo.ExternalIdentity.GetUserId());
+
+                    //var company = companyService.GetCompanyById(user.CompanyId.Value);
+                    //LoginViewModel model = new LoginViewModel();
+
+                    //    if ( company.Status != 1)
+                    //    {
+                    //        ModelState.AddModelError("", "Account not Active");
+                    //        return View("login",model);
+                    //    }
+                    //    else if (company.IsDeleted.HasValue && company.IsDeleted.Value == true)
+                    //    {
+                    //        ModelState.AddModelError("", "Account has been deleted");
+                    //        return View("login",model);
+                    //    } 
+                       
+                        return RedirectToAction("SelectCompany");
+
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -467,7 +635,7 @@ namespace SMD.MIS.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Index", "Manage");
+                return RedirectToAction("Login");
             }
 
             if (ModelState.IsValid)
@@ -478,16 +646,37 @@ namespace SMD.MIS.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new User { UserName = model.Email, Email = model.Email, FullName = info.DefaultUserName };
+                var user = new User { UserName = model.Email, Email = model.Email, FullName = info.DefaultUserName, DOB = null, Status =1 };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
                     result = await UserManager.AddLoginAsync(user.Id, info.Login);
                     if (result.Succeeded)
                     {
+
+                        var addUserToRoleResult = await UserManager.AddToRoleAsync(user.Id, SecurityRoles.EndUser_Admin); // Only Type 'User' Role will be registered from app
+                        if (!addUserToRoleResult.Succeeded)
+                        {
+                            throw new InvalidOperationException(string.Format("Failed to add user to role {0}", SecurityRoles.EndUser_Admin));
+                        }
+
+
+                        int CompanyId = companyService.createCompany(user.Id, model.Email, info.DefaultUserName, Guid.NewGuid().ToString());
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                         SetupUserClaims(info.ExternalIdentity);
-                        return RedirectToLocal(returnUrl);
+                        CreateUserAccounts(CompanyId);
+                        TransactionManager.UserSignupFreeGiftBalanceTransaction(500, CompanyId);
+
+                        if (Request.Cookies["invitationcode"] != null)
+                        {
+                            if (Request.Cookies["invitationcode"].Value != null)
+                            {
+
+                                manageUserService.AcceptInvitation(Request.Cookies["invitationcode"].Value, user.Id);
+
+                            }
+                        }
+                        return RedirectToAction("SelectCompany");
                     }
                 }
                 AddErrors(result);
@@ -543,7 +732,102 @@ namespace SMD.MIS.Controllers
             return View(model);
         }
 
-        #endregion
+
+        [HttpGet]
+      
+        public async Task<bool> ChangePassword(string Password,string OldPassword,string UserId)
+        {
+
+            var result = await UserManager.ChangePasswordAsync(UserId, OldPassword, Password);
+
+            return result.Succeeded;
+        }
+
+
+         [HttpGet]
+         [AllowAnonymous]
+        public ActionResult SelectCompany()
+        {
+
+            //var id = SignInManager.AuthenticationManager.AuthenticationResponseGrant.Identity;
+             
+
+            List<vw_CompanyUsers> comapnies = manageUserService.GetCompaniesByUserId(User.Identity.GetUserId());
+
+            if (comapnies != null && comapnies.Count > 1)
+            {
+                User user = UserManager.FindById(User.Identity.GetUserId());
+                ViewBag.fullname = user.FullName;
+                ViewBag.UserId = user.Id;
+                return View("SelectCompany", comapnies);
+            }
+            else if (comapnies != null && comapnies.Count == 1)
+            {
+                var company = comapnies.First();
+                var companyrec = companyService.GetCompanyById(company.companyid);
+
+                return RedirectToAction("SetCompany", "Account", new { CompanyId = company.companyid, Role = company.RoleName, CompanyName = company.CompanyName, companyrec.City, CompanyLogo = companyrec.Logo, RoleId = company.RoleId, Addressline1 = companyrec.AddressLine1});
+            }
+            else
+            {
+                return RedirectToLocal("Login");
+            }
+        }
+
+
+         [HttpGet]
+         public async Task<ActionResult> SetCompany(string CompanyId, string Role, string CompanyName, string CompanyCity, string CompanyLogo, string RoleId,string Addressline1)
+         {
+             User user = UserManager.FindById(User.Identity.GetUserId());
+             ClaimsIdentity identity = await user.GenerateUserIdentityAsync(UserManager, DefaultAuthenticationTypes.ApplicationCookie);
+             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+
+
+             if (identity != null)
+             {
+                 SetupUserClaims(identity);
+                 claimsSecurityService.AddCompanyIdClaimToIdentity(identity, Convert.ToInt32(CompanyId), CompanyName, CompanyLogo, Role, user.FullName, user.Phone1, user.Email, RoleId, CompanyCity, Addressline1);
+                 
+                 AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = false }, identity);
+
+                 if ( RoleId == "Supernova_Admin")
+                    return RedirectToLocal("/Supernova/Dashboard/Index");
+                 else if (RoleId.StartsWith("Franchise_"))
+                     return RedirectToLocal("/Franchise/Dashboard/Index");
+                 else
+                     return RedirectToLocal("");
+
+             }
+             else
+             {
+                 return RedirectToLocal("");
+             }
+         }
+
+
+
+         [AllowAnonymous]
+         public async Task<ActionResult> AcceptInvitation(string code)
+         {
+
+
+             ViewBag.acceptResult = manageUserService.AcceptInvitation(code);
+             return View();
+             // Require that the user has already logged in via username/password or external login
+             //if (!await SignInManager.HasBeenVerifiedAsync())
+             //{
+             //    return View("Error");
+             //}
+             //var user = await UserManager.FindByIdAsync(await SignInManager.GetVerifiedUserIdAsync());
+             //if (user != null)
+             //{
+             //    ViewBag.Status = "For DEMO purposes the current " + provider + " code is: " +
+             //                     await UserManager.GenerateTwoFactorTokenAsync(user.Id, provider);
+             //}
+             //return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl });
+         }
+
 
         #region Helpers
 
@@ -585,6 +869,9 @@ namespace SMD.MIS.Controllers
 
             public override void ExecuteResult(ControllerContext context)
             {
+                // this line did the trick
+                context.RequestContext.HttpContext.Response.SuppressFormsAuthenticationRedirect = true;
+
                 var properties = new AuthenticationProperties { RedirectUri = RedirectUri };
                 if (UserId != null)
                 {
@@ -594,6 +881,15 @@ namespace SMD.MIS.Controllers
             }
         }
 
+        /// <summary>
+        /// Account Creater
+        /// </summary>
+        private void CreateUserAccounts(int companyId)
+        {
+            //Creates User Native Accounts
+            accountService.AddAccountsForNewUser(companyId);
+        }
+        #endregion
         #endregion
     }
 }

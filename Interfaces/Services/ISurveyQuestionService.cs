@@ -18,7 +18,7 @@ namespace SMD.Interfaces.Services
         /// <summary>
         /// Get Survey Questions that are need aprroval | baqer
         /// </summary>
-        SurveyQuestionResposneModelForAproval GetRejectedSurveyQuestionsForAproval(SurveySearchRequest request);
+        SurveyQuestionResposneModelForAproval GetSurveyQuestionsForAproval(SurveySearchRequest request);
 
         /// <summary>
         /// Edit Survey Question | baqer
@@ -57,5 +57,12 @@ namespace SMD.Interfaces.Services
         /// Get Survey By Id
         /// </summary>
         SurveyQuestion GetSurveyQuestionById(long sqid);
+        IEnumerable<getPollsBySQID_Result> getPollsBySQIDAnalytics(int SQId, int CampStatus, int dateRange, int Granularity);
+        List<getPollBySQIDRatioAnalytic_Result> getPollBySQIDRatioAnalytic(int ID, int dateRange);
+        IEnumerable<getPollBySQIDtblAnalytic_Result> getPollBySQIDtblAnalytic(int ID);
+        List<GetRandomPolls_Result> GetRandomPolls();
+
+        int getPollImpressionStatBySQIdFormAnalytic(long Id, int Gender, int age);
+      
     }
 }

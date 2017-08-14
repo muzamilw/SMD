@@ -1,0 +1,40 @@
+﻿@{
+
+    var vtype = Request.QueryString["type"];
+    var vtypeSigned = Request.QueryString["signedIn"];
+    
+    if (string.IsNullOrEmpty(vtype))
+    { 
+        vtype = "1";
+    }
+    var colorOfBakV = "background:#33d3b4;padding-bottom: 20px;";
+    var cashoutclass = vtype == "3" ? "btn-leadActive" : "btn-lead";
+    var swapclass = vtype == "1"  ? "btn-leadActive" : "btn-lead";
+    var offerclass = vtype == "2" ? "btn-leadActive" : "btn-lead";
+    
+    
+    if (vtype == "2")
+    {
+        colorOfBakV = "background:#31abe2;padding-bottom: 20px;";
+        
+    }
+}
+<section style="@colorOfBakV">
+
+    <div class="container">
+
+        <div id="bal" class="pull-left inner-top-xs" style="padding-left:140px; color:white">
+            <div>Your Balance</div>
+            <div style="font-size:22px;font-weight:bold">  £ Sign In</div>
+        </div>
+
+        <div id="nav" class=" pull-right inner-top-xs" style="">
+
+
+            <a href="@Url.Action("cashout", "Home", new { type = 3, signedIn = @vtypeSigned })" class=" btn @cashoutclass btn-xlg ">Cash Out</a>
+            <a href="@Url.Action("Index", "Home", new { type = 1, signedIn = @vtypeSigned })" class="btn @swapclass btn-xlg">Swap 4 Vouchers</a>
+            <a href="@Url.Action("Index", "Home", new { type = 2, signedIn = @vtypeSigned })" class="btn @offerclass btn-xlg ">2-4-1 Offers</a>
+
+        </div>
+    </div>
+</section>

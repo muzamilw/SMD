@@ -55,9 +55,13 @@ namespace SMD.MIS.Areas.Api.Controllers
 
             string customerId = await webApiUserService.GetStripeCustomerId();
             // Check if Stripe Customer Id Exists then use that to Create Charge
-            if (string.IsNullOrEmpty(customerId))
+            if (string.IsNullOrEmpty(customerId) || customerId == "undefined")
             {
                 await stripeService.CreateCustomer(request);
+            }
+            else 
+            {
+                await stripeService.UpdateCustomer(request, customerId);
             }
         }
         

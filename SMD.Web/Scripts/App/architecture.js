@@ -4,11 +4,12 @@ var ist = {
     datePattern: "DD/MM/YY",
     shortDatePattern: "dd-M-yy",
     customShortDatePattern: "dd-mm-yy",
-    customDatePattern: "DD-MMM-YYYY",
+    customDatePattern: "DD MMM YYYY",
     timePattern: "HH:mm",
     hourPattern: "HH",
     minutePattern: "mm",
     dateTimePattern: "DD/MM/YY HH:mm",
+    customdateTimePattern: "DD MMM YYYY HH:mm",
     dateTimeWithSecondsPattern: "DD/MM/YY HH:mm:ss",
     // UTC Date Format
     utcFormat: "YYYY-MM-DDTHH:mm:ss",
@@ -26,6 +27,7 @@ var ist = {
         Inventory: 7,
         JobCards: 9
     },
+
 
     
     //server exceptions enumeration 
@@ -72,6 +74,7 @@ var ist = {
     numberFormat: "0,0.00",
     ordinalFormat: "0",
     lengthFormat: "0.000",
+    numberFormatwod: "0,0",
     // Sections enumeration
     sectionsEnum: [
         { id: 1, name: "Estimates" },
@@ -327,28 +330,29 @@ require(["ko", "knockout-validation"], function (ko) {
 
 
     ko.bindingHandlers.editor = {
+       
         init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
+            
             var value = valueAccessor();
             var valueUnwrapped = ko.unwrap(value);
             var allBindings = allBindingsAccessor();
             var $element = $(element);
             var droppable = allBindingsAccessor().drop;
-            CKEDITOR.basePath = ist.siteUrl + "/RichTextEditor/";
-            var myinstance = CKEDITOR.instances['content'];
+            CKEDITOR.basePath = ist.siteUrl + "RichTextEditor/";
+            var myinstance = CKEDITOR.instances['couponAddInfoCK'];
             //check if my instance already exist
             if (myinstance !== undefined) {
                 CKEDITOR.remove(myinstance);
             }
-            if (allBindingsAccessor().openFrom() === "Campaign" || allBindingsAccessor().openFrom() === "SecondaryPage") {
+
                 CKEDITOR.config.toolbar = [
                     ['Source', 'Bold', 'Italic', 'Underline', 'SpellChecker', 'TextColor', 'BGColor', 'Undo', 'Redo', 'Link', 'Unlink', '-', 'Format'],
                     '/', ['NumberedList', 'BulletedList', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'Font', 'FontSize']
                 ];
-            } else {
-                CKEDITOR.config.toolbar = 'Full';
-            }
+            
+              
             CKEDITOR.replace(element).setData(valueUnwrapped || $element.html());
-            var instance = CKEDITOR.instances['content'];
+            var instance = CKEDITOR.instances['couponAddInfoCK'];
             if (ko.isObservable(value)) {
                 var isSubscriberChange = false;
                 var isEditorChange = true;
@@ -367,35 +371,42 @@ require(["ko", "knockout-validation"], function (ko) {
                 };
                 // Handles typing changes 
                 instance.on('contentDom', function () {
+                    
                     instance.document.on('keyup', function (event) {
                         handleAfterCommandExec(event);
                     });
                 });
                
-             
+                instance.on('blur', function () {
+                    if (ist.Ads.viewModel.campaignModel() !== undefined && ist.Ads.viewModel.campaignModel() !== null) {
+                        if (ist.Ads.viewModel.campaignModel().VoucherAdditionalInfo() !== undefined && ist.Ads.viewModel.campaignModel().VoucherAdditionalInfo() !== null) {
+                            ist.Ads.viewModel.campaignModel().VoucherAdditionalInfo(instance.getData());
+                        }
+                    }
+                   
+                });
                 function handleAfterCommandExec(event) {
-                    if (ist.stores.viewModel.selectedSecondaryPage() !== undefined && ist.stores.viewModel.selectedSecondaryPage() !== null) {
-                        if (instance.getData() === ist.stores.viewModel.selectedSecondaryPage().pageHTML()) {
-                            return;
+                    
+                    if (ist.Ads.viewModel.campaignModel() !== undefined && ist.Ads.viewModel.campaignModel() !== null) {
+                        if (ist.Ads.viewModel.campaignModel().VoucherAdditionalInfo() !== undefined && ist.Ads.viewModel.campaignModel().VoucherAdditionalInfo() !== null) {
+                            if (instance.getData() === ist.Ads.viewModel.campaignModel().VoucherAdditionalInfo()) {
+                                return;
+                            }
+                        
                         }
-                        ist.stores.viewModel.selectedSecondaryPage().isEditorDirty(new Date());
                     }
-                    if (ist.stores.viewModel.selectedEmail() !== undefined && ist.stores.viewModel.selectedEmail() !== null) {
-                        if (instance.getData() === ist.stores.viewModel.selectedEmail().hTMLMessageA()) {
-                            return;
-                        }
-                        ist.stores.viewModel.selectedEmail().isEditorDirty(new Date());
-                    }
+                   
                 }
-
+               
                 // Handles styling changes 
                 instance.on('afterCommandExec', handleAfterCommandExec);
                 // Handles styling Drop down changes like font size, font family 
                 instance.on('selectionChange', handleAfterCommandExec);
 
-
+                
                 value.subscribe(function (newValue) {
                     if (!isEditorChange) {
+                    
                         isSubscriberChange = true;
                         $element.html(newValue);
                         isSubscriberChange = false;
@@ -404,12 +415,14 @@ require(["ko", "knockout-validation"], function (ko) {
             }
         },
         update: function (element, valueAccessor, allBindingsAccessor, viewModel) {
-            //handle programmatic updates to the observable
+                        //handle programmatic updates to the observable
             var existingEditor = CKEDITOR.instances && CKEDITOR.instances[element.id];
             if (existingEditor) {
+               
                 existingEditor.setData(ko.utils.unwrapObservable(valueAccessor()), function () {
                     this.checkDirty(); // true
                 });
+               
             }
         }
     }
@@ -476,11 +489,14 @@ require(["ko", "knockout-validation"], function (ko) {
             //initialize datepicker with some optional options
             // ReSharper disable DuplicatingLocalDeclaration
             var options = allBindingsAccessor().datepickerOptions || {};
+            options.changeMonth = true;
+            options.changeYear = true;
+            if (!options.yearRange) {
+                options.yearRange = "-20:+10";
+            }
             // ReSharper restore DuplicatingLocalDeclaration
             $(element).datepicker(options);
             $(element).datepicker("option", "dateFormat", ist.shortDatePattern);
-            $(element).datepicker("option", "changeMonth", true);
-            $(element).datepicker("option", "changeYear", true);
             //handle the field changing
             ko.utils.registerEventHandler(element, "change", function () {
                 var observable = valueAccessor();
@@ -519,16 +535,19 @@ require(["ko", "knockout-validation"], function (ko) {
             //initialize datepicker with some optional options
             // ReSharper disable DuplicatingLocalDeclaration
             var options = allBindingsAccessor().datepickerOptions || {};
+            options.changeMonth = true;
+            options.changeYear = true;
+            if (!options.yearRange) {
+                options.yearRange = "-20:+10";
+            }
             // ReSharper restore DuplicatingLocalDeclaration
             $(element).datetimepicker(options);
             $(element).datetimepicker("option", "dateFormat", ist.shortDatePattern);
-            $(element).datepicker("option", "changeMonth", true);
-            $(element).datepicker("option", "changeYear", true);
             // this will disable all previous months and also days from current date 
-            var today_date = new Date();
+            var todayDate = new Date();
            // today_date.setDate(today_date.getDate() + 7);
-            today_date.setDate(today_date.getDate());
-            $(element).datepicker("option", "minDate", today_date);
+            todayDate.setDate(todayDate.getDate());
+            $(element).datepicker("option", "minDate", todayDate);
             //handle the field changing
             ko.utils.registerEventHandler(element, "change", function () {
                 var observable = valueAccessor();
@@ -687,6 +706,22 @@ require(["ko", "knockout-validation"], function (ko) {
         }
     };
 
+    //customdateTimePattern
+    ko.bindingHandlers.dateTimeString = {
+        update: function (element, valueAccessor, allBindingsAccessor) {
+            var value = valueAccessor(),
+                allBindings = allBindingsAccessor();
+            var valueUnwrapped = ko.utils.unwrapObservable(value);
+            var pattern = allBindings.datePattern || ist.datePattern;
+            if (valueUnwrapped !== undefined && valueUnwrapped !== null) {
+                $(element).text(moment(valueUnwrapped).format(ist.customdateTimePattern));
+            }
+            else {
+                $(element).text("");
+            }
+
+        }
+    };
 
     //Custom binding for handling validation messages in tooltip
     ko.bindingHandlers.validationTooltip = {
@@ -703,9 +738,9 @@ require(["ko", "knockout-validation"], function (ko) {
     };
 
     // Knockout Extender for Element
-    ko.extenders.element = function (target, element) {
+    ko.extenders.element = function(target, element) {
         target.domElement = element;
-    }
+    };
 
     // Custom Binding for handling validation elements
     ko.bindingHandlers.validationOnElement = {
@@ -971,6 +1006,39 @@ require(["ko", "knockout-validation"], function (ko) {
     var options = { insertMessages: false, decorateElement: true, errorElementClass: 'errorFill', messagesOnModified: true, registerExtenders: true };
     ko.validation.init(options);
 
+    // number formatting setting the text property of an element
+    ko.bindingHandlers.numberInput = {
+        update: function (element, valueAccessor, allBindingsAccessor) {
+            var value = valueAccessor(),
+                allBindings = allBindingsAccessor();
+            var valueUnwrapped = ko.utils.unwrapObservable(value);
+            var pattern = allBindings.format || ist.numberFormat;
+            if (valueUnwrapped !== undefined && valueUnwrapped !== null) {
+                var formattedValue = numeral(valueUnwrapped).format(pattern);
+                $(element).text(formattedValue);
+            }
+            else {
+                $(element).text("");
+            }
+
+        }
+    };
+
+    // number formatting setting the text property of an element
+    ko.bindingHandlers.NewCampaignBinding = {
+        update: function (element, valueAccessor, allBindingsAccessor) {
+            var value = valueAccessor(),
+                allBindings = allBindingsAccessor();
+            var valueUnwrapped = ko.utils.unwrapObservable(value);
+            if (valueUnwrapped == '') {
+                $(element).text("New Campaign");
+            }
+            else {
+                $(element).text(valueUnwrapped);
+            }
+
+        }
+    };
 });
 
 

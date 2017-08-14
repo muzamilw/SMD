@@ -19,31 +19,70 @@ define("common/confirmation.view",
                  // Binding root used with knockout for user actions log
                 bindingRootaction = $("#dialog-okUserActionLog")[0],
 
+                 bindingRootPayment = $("#dialog-confirmPayment")[0],
+
                 // Show the dialog
-                show = function() {
+                show = function () {
                     $("#dialog-confirm").modal("show");
                 },
                 // Hide the dialog
-                hide = function() {
+                hide = function () {
                     $("#dialog-confirm").modal("hide");
                 },
-                showWarningPopup = function() {
+                  showPayment = function () {
+                      $("#dialog-confirmPayment").modal("show");
+                  },
+                // Hide the dialog
+                hidePayment = function () {
+                    $("#dialog-confirmPayment").modal("hide");
+                },
+                showWarningPopup = function () {
                     $("#dialog-ok").modal("show");
                 },
+                 showOKpopup = function () {
+                     $("#dialog-okWarning").modal("show");
+                 },
+                  hideshowOKpopup = function () {
+                      $("#dialog-okWarning").modal("hide");
+                  },
+                   showOKpopupforinfo = function () {
+                       $("#dialog-okWarningforinfo").modal("show");
+                   },
+                     showOKpopupforFreeCoupon = function () {
+                         $("#dialog-okWarningforFreeCoupon").modal("show");
+                     },
+                      showOKpopupforSocial = function () {
+                          $("#dialog-okSocail").modal("show");
+                      },
+                      showOKpopupfordealheadline = function () {
+                          $("#dialog-okWarningfordealheadline").modal("show");
+                      },
+                   showOKpopupforchart = function () {
+                       $("#dialog-chartmessage").modal("show");
+                   },
+                    hidesOKpopupforinfo = function () {
+                        $("#dialog-okWarningforinfo").modal("hide");
+                    },
                 // Hide the dialog
-                hideWarningPopup = function() {
+                hideWarningPopup = function () {
                     $("#dialog-ok").modal("hide");
                 },
+                showAccountSetingPopup = function () {
+                    $("#AccountSetingConformation").modal("show");
+                },
                 // Show Upgrade Plan dialog
-                showUpgradePopup = function() {
+                showUpgradePopup = function () {
                     $("#dialog-okLicensing").modal("show");
                 };
-                // Show Upgrade Plan dialog
-                showActionPopup = function () {
-                    $("#dialog-okUserActionLog").modal("show");
-                };
+            // Show Upgrade Plan dialog
+            showActionPopup = function () {
+                $("#dialog-okUserActionLog").modal("show");
+            };
+            showOKpopupforMax3Deal = function () {
+                $("#dialog-okMax3Deal").modal("show");
+            },
 
-           
+
                 hideActionPopup = function () {
                     $("#dialog-okUserActionLog").modal("hide");
                 };
@@ -54,14 +93,27 @@ define("common/confirmation.view",
                 bindingRootq: bindingRootq,
                 bindingRootupgrade: bindingRootupgrade,
                 bindingRootaction: bindingRootaction,
+                bindingRootPayment: bindingRootPayment,
                 viewModel: viewModel,
                 show: show,
                 hide: hide,
+                showPayment: showPayment,
+                hidePayment: hidePayment,
                 showWarningPopup: showWarningPopup,
                 hideWarningPopup: hideWarningPopup,
                 showUpgradePopup: showUpgradePopup,
                 showActionPopup: showActionPopup,
-                hideActionPopup: hideActionPopup
+                hideActionPopup: hideActionPopup,
+                showOKpopup: showOKpopup,
+                hideshowOKpopup: hideshowOKpopup,
+                showOKpopupforinfo: showOKpopupforinfo,
+                hidesOKpopupforinfo: hidesOKpopupforinfo,
+                showOKpopupforchart: showOKpopupforchart,
+                showOKpopupforFreeCoupon: showOKpopupforFreeCoupon,
+                showOKpopupfordealheadline: showOKpopupfordealheadline,
+                showAccountSetingPopup: showAccountSetingPopup,
+                showOKpopupforMax3Deal: showOKpopupforMax3Deal,
+                showOKpopupforSocial: showOKpopupforSocial
             };
         })(ist.confirmation.viewModel);
 

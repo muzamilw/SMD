@@ -13,7 +13,7 @@ namespace SMD.Repository.Repositories
 {
     public class CityRepository : BaseRepository<City>, ICityRepository
     {
-         #region Private
+        #region Private
        
         #endregion
         #region Constructor
@@ -54,6 +54,49 @@ namespace SMD.Repository.Repositories
         public IEnumerable<City> GetSearchCities(string searchText)
         {
             return DbSet.Where(city => city.CityName.StartsWith(searchText)).ToList();
+        }
+
+        /// <summary>
+        /// Get List of City Of a Country
+        /// </summary>
+        public IEnumerable<City> GetAllCitiesOfCountry(long countryId)
+        {
+            return DbSet.Where(city => city.CountryId == countryId).ToList();
+        }
+        public IEnumerable<City> GetCities()
+        {
+            long id = 20;
+            return DbSet.Where(city => city.CountryId == id).OrderBy(g=>g.CityName).ToList();
+        }
+        public int GetCityId(string name)
+        {
+            int cityId = 0;
+            City city = DbSet.Where(g => g.CityName.ToLower() == name.ToLower()).SingleOrDefault();
+            if (city != null)
+            {
+                cityId = city.CityId;
+            }
+            else
+            {
+                city = new City();
+                city.CityName = name;
+                db.Cities.Add(city);
+                db.SaveChanges();
+                cityId = city.CityId;
+            }
+            return cityId;
+        }
+
+        public List<string> GetTargetCitiesPerCampaign(long id)
+        {
+
+            IEnumerable<string> result = from AdCampaignTargetLocatio in db.AdCampaignTargetLocations 
+                                    join city in db.Cities on AdCampaignTargetLocatio.CityId equals city.CityId
+                                     where AdCampaignTargetLocatio.CampaignId == id
+                                    select city.CityName ;
+
+
+            return result.ToList();
         }
         #endregion
     }

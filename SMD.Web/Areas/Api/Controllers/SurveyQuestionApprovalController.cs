@@ -38,7 +38,7 @@ namespace SMD.MIS.Areas.Api.Controllers
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, "Invalid Request");
             }
-            return surveyQuestionService.GetRejectedSurveyQuestionsForAproval(request).CreateFrom();
+            return surveyQuestionService.GetSurveyQuestionsForAproval(request).CreateFrom();
         }
 
 

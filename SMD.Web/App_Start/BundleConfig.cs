@@ -72,7 +72,7 @@ namespace SMD.MIS
                 .Include("~/Scripts/amplify.js")
                 .Include("~/Scripts/knockout-sortable.js")
                 .Include("~/Scripts/knockout-morris.js")
-                .Include("~/RichTextEditor/ckeditor.js")
+                //.Include("~/RichTextEditor/ckeditor.js")
                 .Include("~/Scripts/require.js")
                 .Include("~/Scripts/respond.js")
                 .Include("~/Scripts/App/architecture.js")
@@ -91,7 +91,7 @@ namespace SMD.MIS
                 .Include("~/Content/CSS/toastr.css")
                 .Include("~/Content/colorpicker.css")
                 .Include("~/Content/CSS/spectrum.css")
-                .Include("~/RichTextEditor/skins/moono/editor.css")
+                //.Include("~/RichTextEditor/skins/moono/editor.css")
                 .Include("~/Content/CSS/custom.css")
                 .Include("~/Content/CSS/jquery.tokenize.css"));
 
@@ -133,8 +133,14 @@ namespace SMD.MIS
                 .Include("~/Content/themes/Centaurus/css/libs/bootstrap-wizard.css")
                 .Include("~/Content/themes/Centaurus/css/libs/select2.css")
                 .Include("~/Content/themes/Centaurus/css/libs/jquery.nouislider.css")
-                .Include("~/Content/CSS/jquery-Slider.css"));
+                .Include("~/Content/themes/Centaurus/css/libs/fullcalendar.css")
+                .Include("~/Content/themes/Centaurus/css/libs/fullcalendar.print.css")
+                .Include("~/Content/CSS/jquery-Slider.css")
+                .Include("~/Content/CSS/custom.css"));
 
+
+            
+             
             Bundle lessBundle = new Bundle("~/Bundle/AppLess").Include("~/Content/less/MainSite.less");
 
             lessBundle.Transforms.Add(new LessTransform(Path.Combine(HttpRuntime.AppDomainAppPath, "Content\\less")));

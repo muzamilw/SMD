@@ -42,14 +42,16 @@ namespace SMD.Repository.Repositories
       
         public Country Find(int id)
         {
-            throw new NotImplementedException();
+            return DbSet.Where(c => c.CountryId == id).FirstOrDefault();
         }
 
         /// <summary>
         /// Get List of Coutries 
         /// </summary>
-        public IEnumerable<Country> GetAllCountries()
+        public List<Country> GetAllCountries()
         {
+            db.Configuration.LazyLoadingEnabled = false;
+
            return DbSet.Select(country => country).ToList();
         }
         /// <summary>
@@ -59,7 +61,34 @@ namespace SMD.Repository.Repositories
         {
             return DbSet.Where(country => country.CountryName.StartsWith(searchString)).ToList();
         }
-       
+        public int GetCountryId(string name)
+        {
+            int countryId = 0;
+            Country country = DbSet.Where(g => g.CountryName.ToLower() == name.ToLower()).SingleOrDefault();
+            if(country != null)
+            {
+                countryId = country.CountryId;
+            }
+            else
+            {
+                country = new Country();
+                country.CountryName = name;
+                db.Countries.Add(country);
+                db.SaveChanges();
+                countryId = country.CountryId;
+            }
+            return countryId;
+        }
+
+        public string GetCountryNameById(int countryId)
+        {
+            var country = DbSet.FirstOrDefault(c => c.CountryId == countryId);
+            return country != null ? country.CountryName : string.Empty;
+        }
+        public int GetCurrencyCode(int countryId)
+        {
+            return DbSet.Where(c => c.CountryId == countryId).FirstOrDefault().CurrencyID ??0;    
+        }
         #endregion
     }
 }

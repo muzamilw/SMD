@@ -42,6 +42,20 @@ namespace SMD.MIS.Areas.Api.Models
         public int? Gender { get; set; }
         public long? ParentSurveyId { get; set; }
         public int? Priority { get; set; }
+        public int? CompanyId { get; set; }
+        public int? AnswerNeeded { get; set; }
+        public long? ResultClicks { get; set; }
+
+        public double? AmountCharged { get; set; }
+
+        public string Company { get; set; }
+
+        public long? ProjectedReach { get; set; }
+
+        public Nullable<bool> IsUseFilter { get; set; }
+
+        public DateTime? LastModifiedDate { get; set; }
+        
     }
     public class SurveyQuestionTargetCriteria
     {
@@ -56,6 +70,8 @@ namespace SMD.MIS.Areas.Api.Models
         public int? LanguageId { get; set; }
         public int? IndustryId { get; set; }
         public long? EducationId { get; set; }
+        public Nullable<long> QuizCampaignId { get; set; }
+        public Nullable<int> QuizAnswerId { get; set; }
         public string questionString { get; set; }   // survey Question , profile Question,  industry name
         public string answerString { get; set; }  // survey Question Answer , profile Question Answer
         public string Language { get; set; } // language name

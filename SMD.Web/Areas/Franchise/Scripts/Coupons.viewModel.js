@@ -1,0 +1,554 @@
+﻿/*
+    Module with the view model for the AdCampaign
+*/
+define("FranchiseDashboard/Coupons.viewModel",
+    ["jquery", "amplify", "ko", "FranchiseDashboard/Coupons.dataservice", "FranchiseDashboard/Coupons.model", "common/pagination",
+     "common/confirmation.viewModel"],
+    function ($, amplify, ko, dataservice, model, pagination, confirmation) {
+        var ist = window.ist || {};
+        ist.Coupons = {
+            viewModel: (function () {
+                var view,
+                    coupons = ko.observableArray([]),
+                    couponsPriceOption = ko.observableArray([]),
+                    //pager
+                    pager = ko.observable(),
+                    //sorting
+                    sortOn = ko.observable(5),
+                    company = ko.observable(),
+                    currencyCode = ko.observable(),
+                    //Assending  / Desending
+                    sortIsAsc = ko.observable(true),
+                    isEditorVisible = ko.observable(false),
+                    isShowCopounMode = ko.observable(false),
+                    dealPriceval = ko.observable(false),
+                    selectedCoupon = ko.observable(),
+                    selectedCompany = ko.observable(),
+                    onEditCoupon = function (item) {
+                        $("#topArea").css("display", "none");
+                        $("#divApprove").css("display", "none");
+                        selectedCoupon(item);
+                        getCompanyData(item);
+
+
+                        //selectedCoupon(item);
+                        //isEditorVisible(true);
+                    },
+                    getCouponPriceOption = function (couponid, comData, coItem) {
+                        var dic = 10;
+                        var result = 0;
+                        var end20perResult = 0;
+                        var end25perResult = 0;
+                        var end30perResult = 0;
+                        var perVale10D = 0;
+                        var perVale20D = 0;
+                        var perVale30D = 0;
+                        var disper = coItem.dealFirstDiscountType();
+                        var endDis = coItem.dealEndingDiscountType();
+                        if (disper >= 8) {
+                            dealPriceval(true);
+                        }
+                        else {
+                            dealPriceval(false);
+                        }
+                        if (disper == 0)
+                            dic = 10;
+                        else if (disper == 1)
+                            dic = 20;
+                        else if (disper == 2)
+                            dic = 25;
+                        else if (disper == 3)
+                            dic = 30;
+                        else if (disper == 4)
+                            dic = 40;
+                        else if (disper == 5)
+                            dic = 50;
+                        else if (disper == 6)
+                            dic = 60;
+                        else if (disper == 7)
+                            dic = 50;
+                        else if (disper == 8)
+                            dic = 1;
+                        else if (disper == 9)
+                            dic = 3;
+                        else if (disper == 10)
+                            dic = 5;
+                        else if (disper == 11)
+                            dic = 10;
+                        else if (disper == 12)
+                            dic = 15;
+                        else if (disper == 13)
+                            dic = 20;
+                        else if (disper == 14)
+                            dic = 25;
+                        else if (disper == 15)
+                            dic = 30;
+                        else if (disper == 16)
+                            dic = 40;
+                        else if (disper == 17)
+                            dic = 50;
+                        dataservice.getCouponPriceOption(
+                                             { CouponId: couponid },
+                                             {
+                                                 success: function (data) {
+                                                     couponsPriceOption.removeAll();
+                                                     _.each(data, function (item) {
+                                                         if (dealPriceval() == false) {
+                                                             result = (item.Price - ((item.Price * dic) / 100)).toFixed(2);
+                                                             end20perResult = (item.Price - ((item.Price * (dic + 20)) / 100)).toFixed(2);
+                                                             end25perResult = (item.Price - ((item.Price * (dic + 25)) / 100)).toFixed(2);
+                                                             end30perResult = (item.Price - ((item.Price * (dic + 30)) / 100)).toFixed(2);
+
+                                                             item.ist4dayPrice = result;
+                                                             item.ist4dayPer = dic + "%";
+
+                                                             if (endDis == 1) {
+                                                                 item.day5Price = end20perResult;
+                                                                 item.day6Price = end20perResult;
+                                                                 item.day7Price = end20perResult;
+
+                                                                 item.day5Per = ((dic + 20) + "%");
+                                                                 item.day6Per = ((dic + 20) + "%");
+                                                                 item.day7Per = ((dic + 20) + "%");
+                                                             }
+                                                             else if (endDis == 2) {
+                                                                 item.day5Price = end20perResult;
+                                                                 item.day6Price = end25perResult;
+                                                                 item.day7Price = end25perResult;
+
+                                                                 item.day5Per = ((dic + 20) + "%");
+                                                                 item.day6Per = ((dic + 25) + "%");
+                                                                 item.day7Per = ((dic + 25) + "%");
+                                                             }
+                                                             else if (endDis == 3) {
+                                                                 item.day5Price = end20perResult;
+                                                                 item.day6Price = end25perResult;
+                                                                 item.day7Price = end30perResult;
+
+                                                                 item.day5Per = ((dic + 20) + "%");
+                                                                 item.day6Per = ((dic + 25) + "%");
+                                                                 item.day7Per = ((dic + 30) + "%");
+                                                             }
+                                                             else if (endDis == 0) {
+                                                                 item.day5Price = result;
+                                                                 item.day6Price = result;
+                                                                 item.day7Price = result;
+
+                                                                 item.day5Per = dic + "%";
+                                                                 item.day6Per = dic + "%";
+                                                                 item.day7Per = dic + "%";
+                                                             }
+
+                                                         }
+                                                         else {
+                                                             result = (item.Price - dic).toFixed(2);
+                                                             var perValue = (((item.Price - result) * 100) / item.Price).toFixed(2);
+                                                             item.ist4dayPrice = result;
+                                                             item.ist4dayPer = perValue + "%";
+                                                             var result10 = (item.Price - (dic + 10)).toFixed(2);
+                                                             var result20 = (item.Price - (dic + 20)).toFixed(2);
+                                                             var result30 = (item.Price - (dic + 30)).toFixed(2);
+                                                             perVale10D = (((item.Price - result10) * 100) / item.Price).toFixed(2);
+                                                             perVale20D = (((item.Price - result20) * 100) / item.Price).toFixed(2);
+                                                             perVale30D = (((item.Price - result30) * 100) / item.Price).toFixed(2);
+
+                                                             if (endDis == 4) {
+
+                                                                 item.day5Price = result10;
+                                                                 item.day6Price = result10;
+                                                                 item.day7Price = result10;
+
+                                                                 item.day5Per = perVale10D + "%";
+                                                                 item.day6Per = perVale10D + "%";
+                                                                 item.day7Per = perVale10D + "%";
+                                                             }
+                                                             else if (endDis == 5) {
+
+                                                                 item.day5Price = result10;
+                                                                 item.day6Price = result20;
+                                                                 item.day7Price = result20;
+
+                                                                 item.day5Per = perVale10D + "%";
+                                                                 item.day6Per = perVale20D + "%";
+                                                                 item.day7Per = perVale20D + "%";
+                                                             }
+                                                             else if (endDis == 6) {
+
+                                                                 item.day5Price = result10;
+                                                                 item.day6Price = result20;
+                                                                 item.day7Price = result30;
+
+                                                                 item.day5Per = perVale10D + "%";
+                                                                 item.day6Per = perVale20D + "%";
+                                                                 item.day7Per = perVale30D + "%";
+                                                             }
+
+                                                         }
+                                                         couponsPriceOption.push(item);
+                                                     });
+                                                     getCurrencyData(comData);
+
+                                                 },
+                                                 error: function () {
+                                                     toastr.error("Failed to load CouponCategory");
+                                                 }
+                                             });
+
+                    },
+                    closeEditDialog = function () {
+                        selectedCoupon(undefined);
+                        isEditorVisible(false);
+                        $("#topArea").css("display", "block");
+                        $("#divApprove").css("display", "block");
+                    },
+                    getCoupons = function () {
+                        dataservice.getCouponsForApproval(
+                            {
+                                PageSize: pager().pageSize(),
+                                PageNo: pager().currentPage(),
+                                SortBy: sortOn(),
+                                IsAsc: sortIsAsc(),
+
+                            },
+                            {
+                                success: function (data) {
+                                    coupons.removeAll();
+                                    console.log("approval Coupons");
+                                    console.log(data.Coupons);
+                                    _.each(data.Coupons, function (item) {
+                                        coupons.push(model.CouponsServertoClientMapper(item));
+                                    });
+                                    //pager().totalCount(0);
+                                    pager().totalCount(data.TotalCount);
+                                    getApprovalCount();
+                                },
+                                error: function () {
+                                    toastr.error("Failed to load Ad Campaigns!");
+                                }
+                            });
+                    },
+                     rejectionReasondd = ko.observableArray([
+                         {
+                             "RejectionId": "1",
+                             "Reason": " Content is of unlawful, harmful, tortious, threatening, abusive, harassing, hateful, racist or homophobic."
+
+                         },
+                           {
+                               "RejectionId": "2",
+                               "Reason": "Content is of infringing, pornographic, violent, misleading, grossly offensive, of an indecent, obscene or menacing character, blasphemous or defamatory."
+
+                           },
+                           {
+                               "RejectionId": "3",
+                               "Reason": "Content is of of a libellous nature of any person or entity, in contempt of court or in breach of confidence, or which infringes the rights of another person or entity, including copyrights, trademarks, trade secrets, patents, rights of personality, publicity or privacy or any other third party rights."
+
+                           },
+                            {
+                                "RejectionId": "4",
+                                "Reason": "We suspect that material, including User Content, you may have not obtained all necessary licenses and/or approvals (from us or third parties); or which constitutes or encourages conduct that would be considered a criminal offence, give rise to civil liability, or otherwise be contrary to the law of or infringe the rights of any third party in any country in the world."
+
+                            },
+                             {
+                                 "RejectionId": "5",
+                                 "Reason": "We suspect material which may technically harmful (including computer viruses, logic bombs, Trojan horses, worms, harmful components, corrupted data, malicious software, harmful data, or anything else which may interrupt, interfere with, corrupt or otherwise cause loss, damage, destruction or limitation to the functionality of any software or computer equipment)."
+
+                             },
+                             {
+                                 "RejectionId": "6",
+                                 "Reason": "Content may  to cause annoyance, inconvenience or needless anxiety to others."
+                             },
+                             {
+                                 "RejectionId": "7",
+                                 "Reason": "We suspect that material, including User Content, may intercept or attempt to intercept any communications transmitted by way of a telecommunications system."
+                             },
+                             {
+                                 "RejectionId": "8",
+                                 "Reason": "We suspect that material, including User Content,  may not be for a purpose other than which we have designed them or intended them to be used."
+                             },
+                              {
+                                  "RejectionId": "9",
+                                  "Reason": "We suspect that material, including User Content, may be for fraudulent purposes."
+                              },
+                              {
+                                  "RejectionId": "10",
+                                  "Reason": "We suspect that material, including User Content, may be used in any way which could be calculated to incite hatred against any ethnic, religious or any other minority or is otherwise could be calculated to adversely affect any individual, group or entity."
+                              },
+                              {
+                                  "RejectionId": "11",
+                                  "Reason": "Poor Imag quality, use higher quality images i.e. 300 dpi and of size 300 x 300 as a minimum."
+                              },
+                              {
+                                  "RejectionId": "12",
+                                  "Reason": "Too much text on image(s), use clear and inspiring images	Not enough text in Descriptions or Titles."
+                              },
+                              {
+                                  "RejectionId": "13",
+                                  "Reason": "URL LINK does not click thru to a vaild website page."
+                              },
+                               {
+                                   "RejectionId": "14",
+                                   "Reason": "Video Ad does not player on our app players, change format to MP4 and less than 30 seconds."
+                               },
+                               {
+                                   "RejectionId": "15",
+                                   "Reason": "Video Ad length is to long, reduce to less than 30 seconds."
+                               },
+                               {
+                                   "RejectionId": "16",
+                                   "Reason": "Incomplete information about campaign promotion."
+                               },
+                                {
+                                    "RejectionId": "17",
+                                    "Reason": "Your Company Logo or Details are incomplete."
+                                },
+                                 {
+                                     "RejectionId": "18",
+                                     "Reason": "Your Discount Pricing seems unrealitic for your promotion."
+                                 },
+                                 {
+                                     "RejectionId": "19",
+                                     "Reason": "Your Branch Address Details must be in the UK and have correct Geo X,Y co ordinates."
+                                 },
+                                 {
+                                     "RejectionId": "20",
+                                     "Reason": "Your telephone number does not work."
+                                 },
+                                 {
+                                     "RejectionId": "21",
+                                     "Reason": "Your web site is not valid or live."
+                                 },
+                                  {
+                                      "RejectionId": "22",
+                                      "Reason": "Your Deal Group Heading is not clear and concise."
+                                  },
+                                  {
+                                      "RejectionId": "23",
+                                      "Reason": "Your Deal Lines are not Clear or are ambiguous."
+                                  },
+                                  {
+                                      "RejectionId": "24",
+                                      "Reason": "Your Video Ad title is not Clear or is ambiguous."
+                                  },
+                                  {
+                                      "RejectionId": "25",
+                                      "Reason": "Your Content is not in line with our ethical or moral publishing policies."
+                                  },
+                                  {
+                                      "RejectionId": "26",
+                                      "Reason": "Your Content is not Clear or is ambiguous."
+                                  },
+                     ]),
+                     onChangeRejectionReason = function () {
+
+                         var reason = $("#rejectReasondd").val();
+                         selectedCoupon().rejectedReason(reason);
+                     },
+                    onApproveCoupon = function () {
+                        var conformTet = "Do you want to approve this deal? " + "<br\>" + "System will attempt to collect payment and generate invoice.";
+                        confirmation.messageText(conformTet);
+                        confirmation.show();
+                        confirmation.afterCancel(function () {
+                            confirmation.hide();
+                        });
+                        confirmation.afterProceed(function () {
+                            selectedCoupon().isApproved(true);
+                            onSaveCoupon();
+                            $("#topArea").css("display", "block");
+                            $("#divApprove").css("display", "block");
+                            toastr.success("Approved Successfully.");
+                        });
+                    },
+                    onSaveCoupon = function () {
+
+                        var couponId = selectedCoupon().couponId();
+                        dataservice.saveCoupon(selectedCoupon().convertToServerData(), {
+                            success: function (response) {
+
+                                if (response.indexOf("Failed") == -1 && response != "True") {
+                                    dataservice.sendApprovalRejectionEmail(selectedCoupon().convertToServerData(), {
+                                        success: function (obj) {
+                                            getCoupons();
+                                            isEditorVisible(false);
+                                        },
+                                        error: function () {
+                                            toastr.error("Failed to save!");
+                                        }
+                                    });
+                                }
+                                else {
+                                    getCoupons();
+                                    isEditorVisible(false);
+                                }
+                            },
+                            error: function () {
+                                toastr.error("Failed to save!");
+                            }
+                        });
+                    },
+                    getApprovalCount = function () {
+                        dataservice.getapprovalCount({
+                            success: function (data) {
+                                $('#couponCount').text(data.CouponCount);
+                                $('#vidioAdCount').text(data.AdCmpaignCount);
+                                $('#displayAdCount').text(data.DisplayAdCount);
+                                $('#surveyCount').text(data.SurveyQuestionCount);
+                                $('#profileCount').text(data.ProfileQuestionCount);
+
+                            },
+                            error: function () {
+                                toastr.error("Failed to load Approval Count.");
+                            }
+                        });
+                    },
+                    getCurrencyData = function (item) {
+                        dataservice.getCurrenybyID(
+                       { id: item.CurrencyID },
+                       {
+                           success: function (data) {
+                               currencyCode(null);
+                               var cCode = '(' + data.CurrencySymbol + ')';
+                               currencyCode(cCode);
+
+
+
+                           },
+                           error: function () {
+
+                           }
+                       });
+                    },
+                    companyTypes = ko.observableArray([
+                    { Id: 1, Name: 'Amusement, Gambling, and Recreation Industries' },
+                    { Id: 2, Name: 'Arts, Entertainment, and Recreation' },
+                    { Id: 3, Name: 'Broadcasting (except Internet)' },
+                    { Id: 4, Name: 'Building Material and Garden Equipment and Supplies Dealers' },
+                    { Id: 5, Name: 'Clothing and Clothing Accessories Stores' },
+                    { Id: 6, Name: 'Computer and Electronics' },
+                    { Id: 7, Name: 'Construction' },
+                    { Id: 8, Name: 'Couriers and Messengers' },
+                    { Id: 9, Name: 'Data Processing, Hosting, and Related Services' },
+                    { Id: 10, Name: 'Health Services' },
+                    { Id: 11, Name: 'Educational Services' },
+                    { Id: 12, Name: 'Electronics and Appliance Stores' },
+                    { Id: 13, Name: 'Finance and Insurance' },
+                    { Id: 14, Name: 'Food Services' },
+                    { Id: 15, Name: 'Food and Beverage Stores' },
+                    { Id: 16, Name: 'Furniture and Home Furnishings Stores' },
+                    { Id: 17, Name: 'General Merchandise Stores' },
+                    { Id: 18, Name: 'Health Care' },
+                    { Id: 19, Name: 'Internet Publishing and Broadcasting' },
+                    { Id: 20, Name: 'Leisure and Hospitality' },
+                    { Id: 21, Name: 'Manufacturing' },
+                    { Id: 22, Name: 'Merchant Wholesalers ' },
+                    { Id: 23, Name: 'Motor Vehicle and Parts Dealers ' },
+                    { Id: 24, Name: 'Museums, Historical Sites, and Similar Institutions ' },
+                    { Id: 25, Name: 'Performing Arts, Spectator Sports' },
+                    { Id: 26, Name: 'Printing Services' },
+                    { Id: 27, Name: 'Professional and Business Services' },
+                    { Id: 28, Name: 'Real Estate' },
+                    { Id: 29, Name: 'Repair and Maintenance' },
+                    { Id: 30, Name: 'Scenic and Sightseeing Transportation' },
+                    { Id: 31, Name: 'Service-Providing Industries' },
+                    { Id: 32, Name: 'Social Assistance' },
+                    { Id: 33, Name: 'Sporting Goods, Hobby, Book, and Music Stores' },
+                    { Id: 34, Name: 'Telecommunications' },
+                    { Id: 35, Name: 'Transportation' },
+                    { Id: 36, Name: 'Utilities' }
+                    ]),
+                    hasChangesOnCoupon = ko.computed(function () {
+                        if (selectedCoupon() == undefined) {
+                            return false;
+                        }
+                        return (selectedCoupon().hasChanges());
+                    }),
+                    onRejectCoupon = function () {
+
+                        confirmation.messageText("Do you want to reject this deal?  ");
+                        confirmation.show();
+                        confirmation.afterCancel(function () {
+                            confirmation.hide();
+                        });
+                        confirmation.afterProceed(function () {
+                            if (selectedCoupon().rejectedReason() == undefined || selectedCoupon().rejectedReason() == "" || selectedCoupon().rejectedReason() == " ") {
+                                toastr.info("Please add rejection reason!");
+                                return false;
+                            }
+                            selectedCoupon().isApproved(false);
+                            onSaveCoupon();
+                            $("#topArea").css("display", "block");
+                            $("#divApprove").css("display", "block");
+                            toastr.success("Rejected Successfully.");
+                        });
+                    },
+                    getCompanyData = function (selectedItem) {
+                        dataservice.getCompanyData(
+                     {
+                         companyId: selectedItem.companyId,
+                         userId: selectedItem.userID,
+                     },
+                     {
+                         success: function (comData) {
+                             var cType = companyTypes().find(function (item) {
+                                 return comData.CompanyType === item.Id;
+                             });
+                             if (cType != undefined)
+                                 company(cType.Name);
+                             else
+                                 company(null);
+                             selectedCompany(comData);
+                             getCouponPriceOption(selectedItem.couponId, comData, selectedItem);
+
+                             isEditorVisible(true);
+
+                         },
+                         error: function () {
+                             toastr.error("Failed to load Company");
+                         }
+                     });
+
+                    },
+
+                    // Initialize the view model
+                    initialize = function (specifiedView) {
+                        view = specifiedView;
+                        ko.applyBindings(view.viewModel, view.bindingRoot);
+                        pager(pagination.Pagination({ PageSize: 10 }, coupons, getCoupons));
+                        var mode = getParameter(window.location.href, "mode");
+                        if (mode == 2) {
+                            lblPageTitle("Coupons For Approval");
+                            isShowCopounMode(true);
+                        }
+                        //// First request for LV
+                        getCoupons();
+                    };
+                return {
+
+                    initialize: initialize,
+                    getCoupons: getCoupons,
+                    coupons: coupons,
+                    pager: pager,
+                    sortOn: sortOn,
+                    sortIsAsc: sortIsAsc,
+                    isEditorVisible: isEditorVisible,
+                    onEditCoupon: onEditCoupon,
+                    selectedCoupon: selectedCoupon,
+                    closeEditDialog: closeEditDialog,
+                    onApproveCoupon: onApproveCoupon,
+                    onSaveCoupon: onSaveCoupon,
+                    selectedCompany: selectedCompany,
+                    onRejectCoupon: onRejectCoupon,
+                    hasChangesOnCoupon: hasChangesOnCoupon,
+                    couponsPriceOption: couponsPriceOption,
+                    getApprovalCount: getApprovalCount,
+                    companyTypes: companyTypes,
+                    company: company,
+                    currencyCode: currencyCode,
+                    dealPriceval: dealPriceval,
+                    onChangeRejectionReason: onChangeRejectionReason,
+                    rejectionReasondd: rejectionReasondd
+
+                };
+            })()
+        };
+        return ist.Coupons.viewModel;
+    });

@@ -16,5 +16,13 @@ namespace SMD.MIS.ModelMappers
                 LanguageName = source.LanguageName
             };
         }
+        public static CurrencyDropdown CreateFrom(this Currency source)
+        {
+            return new CurrencyDropdown
+            {
+                CurrencyId = source.CurrencyId,
+                CurrencyName = source.CurrencyCode +  " " + source.CurrencySymbol
+            };
+        }
     }
 }

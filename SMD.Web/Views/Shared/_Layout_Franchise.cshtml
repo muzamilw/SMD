@@ -1,0 +1,433 @@
+﻿@using SMD.Models.Common
+@using SMD.Common
+@{
+
+
+    string classes = "";
+    string classesMenu = "";
+
+
+    IEnumerable<CompanyIdClaimValue> companyClaimValues = ClaimHelper.GetClaimsByType<CompanyIdClaimValue>(SmdClaimTypes.CompanyId);
+    string CompanyName = companyClaimValues != null && companyClaimValues.Any() ? companyClaimValues.ElementAt(0).CompanyName : "Company Not Loaded";
+    string CompanyLogo = companyClaimValues != null && companyClaimValues.Any() ? companyClaimValues.ElementAt(0).CompanyLogo : "Claim not found";
+    string CompanyID = companyClaimValues != null && companyClaimValues.Any() ? companyClaimValues.ElementAt(0).CompanyId.ToString() : "Claim not found";
+
+    IEnumerable<SmdRoleClaimValue> roleClaim = ClaimHelper.GetClaimsByType<SmdRoleClaimValue>(SmdClaimTypes.Role);
+    string RoleName = roleClaim != null && roleClaim.Any() ? roleClaim.ElementAt(0).Role : "Role Not Loaded";
+    string RoleId = roleClaim != null && roleClaim.Any() ? roleClaim.ElementAt(0).RoleId : "Role Not Loaded";
+
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <script src="~/Scripts/jquery-2.1.0.min.js"></script>
+    <script src="~/Scripts/jquery.blockUI.js"></script>
+    <link rel="stylesheet" href="~/Content/themes/Centaurus/css/libs/fullcalendar.css" type="text/css" />
+    <link rel="stylesheet" href="~/Content/themes/Centaurus/css/libs/fullcalendar.print.css" type="text/css" media="print" />
+    @Styles.Render("~/Content/themes/Centaurus/css/bundleCentaurus/css")
+    @* If Debuggin is Enabled then pick css *@
+    @if (HttpContext.Current.IsDebuggingEnabled)
+    {
+        <link href="~/Content/less/MainSite.css" rel="stylesheet" />
+    }
+    else
+    {
+        @Styles.Render("~/Bundle/AppLess")
+    }
+    @Styles.Render("~/Bundles/BaseCss")
+    @Styles.Render("~/Content/themes/base/css")
+    <link type="image/x-icon" href="/favicon.png" rel="shortcut icon" />
+    @if (HttpContext.Current.Request.IsLocal == false)
+    {
+        <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+
+    }
+
+    <script>
+        var gCompanyID = @CompanyID;
+        var UserRole = '@RoleName';
+        var UserRoleId = '@RoleId';
+
+    </script>
+
+    <!--[if lt IE 9]>
+        <script src="js/html5shiv.js"></script>
+        <script src="js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="theme-blue-gradient">
+    <header class="navbar" id="header-navbar">
+        <div class="col-md-12 col-lg-12 col-sm-12" style="height: 4px; position: absolute; margin-top: 100px;"></div>
+        <div class="container" style="height:100px;">
+            <a href="~/" id="header" class="cashlogox my-navigator navbar-brand logoAnchor "></a>
+
+            <a href="~/" id="beta" class="cashbeta"></a>
+            <div class="clearfix">
+                <button class="navbar-toggle" data-target=".navbar-ex1-collapse" data-toggle="collapse" type="button">
+                    <span class="sr-only">Toggle navigation</span>
+                    @*<span class="fa fa-bars"></span>*@
+                </button>
+                <div style="display:inline-block;margin-top:20px;width:850px;">
+                    <div style="float:right;">
+                        <div class="pull-left" style="display:inline-block;margin-top:20px;">
+                            @*<p style="box-shadow: inset 0 0px 0 white, inset 0 -1px 0 white;margin-bottom:3px;display:inline-block;font-size:11px;color:white">
+                                    Franchise Dashboard
+                                </p>*@
+                            <p style="font-size:16px;color:white;">@CompanyName</p>
+                        </div>
+                        <div class="pull-left" style="color:white;margin-left: 10px;margin-top: 12px;margin-right: -5px;"><img style="width:70px;height:35px;    background-color: white; border: 1px solid white;" src="~/@CompanyLogo" /></div>
+                    </div>
+                </div>
+                <div class="nav-no-collapse navbar-left pull-left hidden-sm hidden-xs" style="margin-top:23px;">
+                    @*<span style="font-size: 3em;color:white;padding-left:200px;">Targeting Material</span>*@
+                    <ul class="nav navbar-nav pull-left">
+                        <li>
+                            @if (!User.IsInRole("User"))
+                            {
+                                @*<a class="btn" id="make-small-nav">
+                                        <i class="fa fa-bars"></i>
+                                    </a>*@
+                            }
+                            else
+                            {
+                                //  classes = "removeMenuMargin";
+                                classesMenu = "displayNone";
+                            }
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-no-collapse pull-right" id="header-nav" style="margin-top:32px;">
+                    <ul class="nav navbar-nav pull-right">
+                        <!-- MPC Admin Menu-->
+                        <li class="dropdown profile-dropdown @classesMenu" style="display:none;">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="hidden-xs"> Admin Options  </span> <b class="caret"></b>
+                                <div class="user-positioner" style="position:fixed;">
+                                </div>
+                            </a>
+                        </li>
+                        <!-- Normal Menu-->
+                        <li class="dropdown profile-dropdown">
+                            <a href="#" class="dropdown-toggle dash_header-btn" data-toggle="dropdown">
+                                <span class="hidden-xs">
+                                    @if (User != null && User.Identity != null)
+                                    {
+                                        @User.Identity.Name
+                                    }
+                                </span> <b class="caret"></b>
+                                <div class="user-positioner" style="position:fixed;">
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu loginMenu" style="min-width:205px;margin-right:8px;">
+                                <li><a href="">Role : @RoleName</a></li>
+                                <li id="companyProfileBinding"style="display:none"><a data-bind="click:showCompanyProfileDialog">Marketing profile/logo</a></li>
+                                <li id="userProfileBinding">
+                                    <a data-bind="click:showUserProfileDialog"style="display:none">User Profile</a>
+                                    <a data-bind="click:ChangePassword">Change Password</a>
+                                </li>
+                                <li>
+                                <a href="~/Account/LogOff"><i class="fa fa-power-off dash_header-btn"style="margin-top:-7px;"></i>Logout</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a class="dash_header-btn" href="http://cash4ads.com/" target="_blank">
+
+                                <i class="fa fa-life-ring" style="padding-left:2px;padding-top:10px;"></i>
+
+                            </a>
+                        </li>
+
+
+                        @*<li class="dropdown profile-dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <span class="hidden-xs">
+                                        <i class="fa fa-life-ring"></i>
+                                    </span> <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu loginMenu">
+                                    <li><a href="">Startup Guide</a></li>
+                                    <li><a href="">Training Videos</a></li>
+                                    <li><a href="">Help Center</a></li>
+                                    <li><a href="">Contact Us</a></li>
+                                </ul>
+                            </li>*@
+                        @*<li class="hidden-xxs">
+                            <a class="dash_header-btn icon-lg icon-information" href="~/Account/LogOff">
+                                <i class="fa fa-power-off"></i>
+                            </a>
+                        </li>*@
+                        <li class="hidden-xxs">
+                            <a class="dash_header-btn icon-lg icon-information" href="~/Account/LogOff">
+                                <i class="fa fa-power-off"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div id="page-wrapper" class="container">
+        <div class="row topMenuBtns">
+
+            @RenderSection("leftmenue", required: false)
+            @*content wrapper goes here*@
+            <div style="margin-top:20px;margin-left:8px;" id="divApprove">
+                @if (RoleId != "Franchise_Creative")
+                {
+                    <span style="color:#ffffff;font-size:24px;">Approve or Reject</span>
+                }
+
+                @if (RoleId == "Franchise_Account_Manager")
+                {
+                    <span style="color:#ffffff;font-size:24px; margin-left:284px;">Enable or Disable</span>
+                }
+                @if (RoleId == "Franchise_Creative")
+                {
+                    <span style="color:#ffffff;font-size:24px;">Manage</span>
+                }
+            </div>
+
+
+            <div id="content-wrapper" style="padding-bottom:0px;" class="removeMenuMargin">
+
+
+                <div class="row" id="topArea" style="padding-left:0px; ">
+
+
+
+
+                    <div class="pull-left hideInCoupons" style=" position: absolute;top:32%;">
+
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 pull-left">
+
+                            @if (RoleId == "Franchise_Admin")
+                            {
+
+                                <a class="btn btn-default btn-gray " aria-expanded="false" style="padding-top:16px;" id="btnDealsApprov" href="~/Franchise/Dashboard/CouponsAproval">
+                                    Deals <br /><br /><label style="font-size:30px;font-weight:bold" id="couponCount"> </label>
+                                </a>
+                                <a class="btn btn-default btn-gray " aria-expanded="false" style="padding-top:16px;" id="btnVideaAddApprov" href="~/Franchise/Dashboard/AddAproval?adType=1">
+                                    Video Ads<br /><br /><label style="font-size:30px;font-weight:bold" id="vidioAdCount"></label>
+                                </a>
+                                <a class="btn btn-default btn-gray " aria-expanded="false" style="padding-top:16px;" id="btnsponserGameApprov" href="~/Franchise/Dashboard/AddAproval?adType=4">
+                                    Display Ads<br /><br /><label style="font-size:30px;font-weight:bold" id="displayAdCount"></label>
+                                </a>
+                                <a class="btn  btn-default btn-gray " aria-expanded="false" style="padding-top:16px;" id="btnPollsApprov" href="~/Franchise/Dashboard/SurveyQuestionApproval">
+                                    Polls<br /><br /><label style="font-size:30px;font-weight:bold" id="surveyCount"></label>
+                                </a>
+                                <a class="btn btn-default btn-gray " aria-expanded="false" style="padding-top:16px;" id="btnSurveyApprove" href="~/Franchise/Dashboard/ProfileQuestionApproval">
+                                    Surveys<br /><br /><label style="font-size:30px;font-weight:bold" id="profileCount"></label>
+
+                                </a>
+
+                                <a class="btn btn-default btn-gray " aria-expanded="false" id="btnAprroveTransfer" style="padding-top:16px;" href="~/Franchise/ApprovePayPal/PayPalDashboard">
+                                    Payment Approval 1
+                                </a>
+                            }
+                            @if (RoleId == "Franchise_Account_Manager")
+                            {
+                                <a class="btn btn-default btn-gray " aria-expanded="false" id="btnAprroveTransfer" style="padding-top:16px;margin-bottom:13px;" href="~/Franchise/ApprovePayPal/PayPalDashboard">
+                                    Payment Approval 2<br /><br /><label></label>
+                                </a>
+                                @*<a class="btn btn-default btn-gray " aria-expanded="false" id="btnTransferRates" style="padding-top:16px;" href="~/Franchise/Dashboard/TransferRateDashboard">
+                                        Transfers
+                                    </a>*@
+                                <a class="btn btn-default btn-gray " aria-expanded="false" id="btnAppUsers" style="padding-top:16px; margin-left:300px;margin-bottom:13px;" href="~/Franchise/RegisterUsers/UsersDashboard">
+                                    App Users<br /><br /><label></label>
+                                </a>
+                            }
+                            @if (RoleId == "Franchise_Creative")
+                            {
+                                <a class="btn btn-default btn-gray " aria-expanded="false" id="btnAppUsers" style="padding-top:16px;" href="~/survey/?m=1">
+                                    System Picture Polls
+                                </a>
+                                <a class="btn btn-default btn-gray " aria-expanded="false" id="btnAppUsers" style="padding-top:16px;" href="~/ProfileQuestion/Manage/Index">
+                                    System Profile Questions
+                                </a>
+                                <a class="btn btn-default btn-gray " aria-expanded="false" style="padding-top:16px;" id="btnMarketingStories" href="~/Franchise/Dashboard/MarketingDealsStories">
+                                    Marketing Stories
+                                </a>
+
+                            }
+
+                            <div class="btn-group" style="display:none">
+                                <button type="button" class="btn btn-default btn-gray dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width:177px;">
+                                    Approve/Reject <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+
+                                    <li><a href="~/Franchise/Dashboard/AddAproval">Ad Campaigns</a></li>
+                                    <li><a href="~/Franchise/Dashboard/CouponsAproval">Coupons</a></li>
+                                    <li><a href="~/Franchise/Dashboard/SurveyQuestionApproval">Survey Questions</a></li>
+                                    <li><a href="~/Franchise/Dashboard/ProfileQuestionApproval">Profile Questions</a></li>
+
+                                </ul>
+                            </div>
+                            <div class="btn-group" style="display:none">
+                                <button type="button" class="btn btn-default btn-gray dropdown-toggle" id="btnManageApprov" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Manage <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+
+                                    <li><a href="~/ProfileQuestion/Manage/Index">System Profile Questions</a></li>
+                                    <li><a href="~/survey/?m=1">System Surveys</a></li>
+                                    <li><a href="~/survey">System Coupon Categories</a></li>
+
+                                </ul>
+                            </div>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default btn-gray dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="display:none">
+                                    Reports <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+
+                                    <li><a href="#">All Live Campaigns Report</a></li>
+                                    <li><a href="#">Afilliated Companies Report</a></li>
+                                    <li><a href="~/Billing/Manage/Invoice">Invoices</a></li>
+                                    <li><a href="~/Report/Report/TransactionReport">Transaction Report</a></li>
+                                </ul>
+                            </div>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default btn-gray dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="display:none ">
+                                    Actions <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li class=""><a href="~/user/ManageUser/ManageUsers">Invite Users </a></li>
+
+                                    <li><a href="~/survey/?m=1">Invite A Business</a></li>
+
+
+                                </ul>
+                            </div>
+
+                            @*<a class="btn  btn-default btn-gray" style="float:left; width:20%;height:66px;margin-right:15px; white-space:normal;" id="btncampaigns" href="/Ads/Ads/AddAproval">Approve Video Campaigns</a>
+                                <a class="btn  btn-default btn-gray" style="float:left;width:20%;height:66px;white-space:normal;" href="/Coupons/Coupons" id="btnCoupons">Approve Cooupons</a>
+                                <a class="btn  btn-default btn-gray" style="float:left;width:20%;height:66px;white-space:normal;" href="/Survey/" id="btnSurvey">Approve Survey Questions</a>
+                                <a class="btn  btn-default btn-gray" style="float:left;width:20%;height:66px;white-space:normal;" href="~/ProfileQuestion/Manage/Index" id="btnProQuestions">Approve Profile Questions</a>*@
+
+                        </div>
+                        @*<div class="col-sm-6 pull-right text-right" >
+
+                            <a class="btn btn-default btn-gray " id="btninviteusers" style="    width: 100px;float:right;margin-right:0px;" href="~/user/ManageUser/ManageUsers">Create Global Surveys</a>
+                            <a class="btn btn-default btn-gray " id="btninviteusers" style="    width: 100px;float:right;margin-right:0px;" href="~/user/ManageUser/ManageUsers">Create Global Profile Questions</a>
+                            <a class="btn btn-default btn-gray " id="btninviteusers" style="    width: 100px;float:right;margin-right:0px;" href="~/user/ManageUser/ManageUsers">Refer a Business</a>
+                            <a class="btn btn-default btn-gray " id="btninviteusers" style="    width: 100px;float:right;margin-right:0px;" href="~/user/ManageUser/ManageUsers">Franchise Analtics</a>
+                            <a class="btn btn-default btn-gray " id="btninviteusers" style="    width: 100px;float:right;margin-right:0px;" href="~/user/ManageUser/ManageUsers">Franchise sub Companies</a>
+                            <a class="btn btn-default btn-gray " id="btninviteusers" style="    width: 100px;float:right;margin-right:0px;" href="~/user/ManageUser/ManageUsers">Invite Users</a>
+
+                            </div>*@
+                    </div>
+                </div>
+
+            </div>
+
+            @RenderBody()
+            <!-- ko stopBinding: true -->
+            @Html.Partial("~/Areas/Common/Views/Shared/_ConfirmationDialog.cshtml")
+            <!-- /ko -->
+            <div id="bindingPartialViews">
+                @{
+                    Html.RenderPartial("~/Areas/Coupons/Views/Shared/_BranchDetails.cshtml");
+                }
+            </div>
+            <div id="bindingPhrasePartialViews">
+                @{
+                    Html.RenderPartial("~/Areas/Common/Views/Shared/_phraseLibrary.cshtml");
+                }
+            </div>
+            <div id="bindingUserProfilePartialViews">
+                @{
+                    Html.RenderPartial("~/Areas/Common/Views/Shared/_UserProfile.cshtml");
+                }
+            </div>
+            <div id="bindingCompanyProfilePartialViews">
+                @{
+                    Html.RenderPartial("~/Areas/Common/Views/Shared/_companyProfile.cshtml");
+                }
+            </div>
+            <div id="spinner" style="display: none">
+            </div>
+            <div id="siteUrl">
+            </div>
+            <footer id="footer-bar" class="row">
+                <p id="footer-copyright" class="col-xs-12">
+                    © Copyright @DateTime.Now.Year Clydy Limited UK. All Rights Reserved.
+                </p>
+            </footer>
+        </div>
+    </div>
+
+    @*<!-- ko stopBinding: true -->
+        @Html.Partial("~/Areas/Common/Views/Shared/_ConfirmationDialog.cshtml")
+        <!-- /ko -->*@
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    <script>
+
+        (function ($) {
+            $("#siteUrl").val("@(Request.ApplicationPath == " / " ? " / " : Request.ApplicationPath)");
+        })($);
+
+
+        function collapseMainMenu() {
+
+            $('#topArea').collapse('hide');
+        }
+
+
+        function showMainMenu() {
+
+            $('#topArea').collapse('show');
+        }
+        function GotoHome()
+        {
+            window.location.href = "/";
+        }
+
+    </script>
+    @Scripts.Render("~/Bundle/BaseLibs")
+    <script src="~/Content/themes/Centaurus/js/fullcalendar.min.js"></script>
+    @Scripts.Render("~/Bundle/CentaurusLibs")
+    <script>
+
+        require(["common/confirmation.view"]);
+        require(["Layout/Layout.view"]);
+        require(["PhraseLibrary/phraseLibrary.view"]);
+        require(["common/userProfile.view"]);
+        require(["common/companyProfile.view"]);
+
+        $(document).ready(function () {
+            $("#make-small-nav").click(function () {
+                $("#header-logo").toggle();
+                $("#menu-logo").toggle();
+            });
+
+            $('#topArea').collapse();
+
+            $("#btnPhraseLibrary").click(function () {
+                $("#btnPhraseLibrary").css("background-color", "#93bf47");
+            });
+
+            $("#phrase-libraryCloseButton").click(function () {
+                $("#btnPhraseLibrary").css("background-color", "#7f8c8d");
+                $("#btnPhraseLibrary").css("border-color", "#5c6667");
+            });
+            $(".close").click(function () {
+                $("#btnPhraseLibrary").css("background-color", "#7f8c8d");
+                $("#btnPhraseLibrary").css("border-color", "#5c6667");
+            });
+
+        });
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

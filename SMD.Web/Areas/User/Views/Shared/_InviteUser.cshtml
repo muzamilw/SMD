@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "Invite User ";
+}
+<link href="~/Content/textboxLabel.css" rel="stylesheet" />
+<div class="modal fade" id="InviteUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
+    <div style="width: 838px;" class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" id="dialgHeaderPadding" style="background-color:#0f68a1;text-align: center;">
+                <img src="/Content/Images/Close_Button.png" class="close" data-dismiss="modal" style="width:20px;height:20px;float:right;cursor:pointer;">
+                <span class="text-center" style="font-size:24px;color: #ffffff; line-height: 2.5 !important;">Invite Collegues</span>
+            </div>
+            <div class="col-lg-12 clearfix" style="margin-top:8px;">
+                <div class="row" id="user-profile">
+                    <div class="col-lg-12 col-md-12 col-sm-12 form-horizontal" style=" padding: 15px 50px 15px 50px;">
+                        <div style="border-bottom: 1px solid rgb(220,220,220);width: 100%;margin-left: 0px;margin-bottom:10px;" class="adsubHeading Theme_standard_clr">
+                            Invite collegues to manage your marketing campaigns.
+                            <div class="bs-example-tooltips tooltip-float-width tooltip" style=" margin-top: -5px; ">
+                                <a class="input-group-addon" tabindex="-1" href="#" data-toggle="tooltip" title="Hooray!" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;    padding: 0px;padding-top: 5px;"
+                                   data-container="body" data-placement="right" data-content="Add a city">
+                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                </a>
+                                <i class="fa fa-chevron-up" aria-hidden="true" style="color:#68b359;"></i>
+                                <span class="tooltiptext">Tooltip text</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="form-group" style="margin-bottom:0px;">
+                                <div class="col-lg-10" style="margin-left:20px;margin-top:20px;">
+                                    <div>
+                                        <input id="txtemail" type="text" class="form-control inputText" maxlength="36" required data-bind="value: $root.InviteEmail">
+                                        <span class="floating-label" style="color:lightgray">Email Address</span>
+                                    </div>
+                                    <div style="margin-top:5px;">
+                                        <label id="lblCountValue" style="padding-left:12px;color:lightgray"></label> <label style="color:lightgray"> of</label> <label id=" lbltotalCharacter" style="color: lightgray"> 36 chars</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-10 text-left" style="margin-left:20px;">
+                                    <div>
+                                        @*<label class=" tooltip-float">Role</label>*@
+                                        <select class="form-control" style="height:50px;width:50%;" data-bind="options: $root.roles, optionsText: 'RoleName', optionsValue: 'RoleId', value:selectedRoleId"></select>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer col-xs-12">
+                <button type="button" class="btn btn-info" style="margin-left:0px;" data-bind="click: $root.Invite">Invite</button>
+            </div>
+            <div class="clearfix">
+            </div>
+        </div>
+    </div>
+    <div class="clearfix">
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        var text_max = 99;
+        var text_length = 0;
+        $('#lblCountValue').text(text_length);
+
+        $('#txtemail').keyup(function () {
+            text_length = $('#txtemail').val().length;
+            $('#lblCountValue').text(text_length);
+
+        });
+    });
+</script>
+
+@* Wizard Popup ends here*@
+
+

@@ -1,0 +1,546 @@
+﻿@{
+
+}
+<div class="row">
+    <div class="row" id="analyticsdashboardBindingRoot" style="z-index:0;">
+        <div class="row">
+            <div class="col-lg-12">
+                <br />
+                <h1 style="padding-left:7px!important;">DashBoard Insights </h1>
+            </div>
+        </div>
+        <div class="row main-box">
+            <div class="col-lg-12">
+                <div class="table-responsive tbl-dashboard" style="margin-right:-4px; ">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th class="text-left">
+                                    <span class="GridHeaderFont_size">
+                                        USA
+                                    </span>
+                                </th>
+                                <th></th>
+                                <th></th>
+                                <th class="text-left">
+                                    <span class="GridHeaderFont_size">
+                                        UK
+                                    </span>
+                                </th>
+                                <th></th>
+                                <th></th>
+                                <th class="text-left">
+                                    <span class="GridHeaderFont_size">
+                                        PK
+                                    </span>
+                                </th>
+                                <th></th>
+                                <th></th>
+                                <th class="text-left">
+                                    <span class="GridHeaderFont_size">
+                                        AU
+                                    </span>
+                                </th>
+                                <th></th>
+                                <th></th>
+                                <th class="text-left">
+                                    <span class="GridHeaderFont_size">
+                                        UAE
+                                    </span>
+                                </th>
+                                <th> </th>
+
+                            </tr>
+                            <tr>
+                                <td><span class="h4"># Users</span></td>
+                                <td> </td>
+                                <td class="text-right">
+                                    <span class="Theme_subheading-Clr  font14">
+                                        Last
+                                    </span>
+                                </td>
+                                <td class="text-right">
+                                    <span class="Theme_subheading-Clr  font14">
+                                        Current
+                                    </span>
+                                </td>
+                                <td> </td>
+                                <td class="text-right bk-gray">
+                                    <span class="Theme_subheading-Clr  font14">
+                                        Last
+                                    </span>
+                                </td>
+                                <td class="text-right bk-gray">
+                                    <span class="Theme_subheading-Clr  font14">
+                                        Current
+                                    </span>
+                                </td>
+                                <td class="bk-gray"> </td>
+                                <td class="text-right">
+                                    <span class="Theme_subheading-Clr  font14">
+                                        Last
+                                    </span>
+                                </td>
+                                <td class="text-right">
+                                    <span class="Theme_subheading-Clr  font14">
+                                        Current
+                                    </span>
+                                </td>
+                                <td> </td>
+                                <td class="text-right bk-gray">
+                                    <span class="Theme_subheading-Clr  font14">
+                                        Last
+                                    </span>
+                                </td>
+                                <td class="text-right bk-gray">
+                                    <span class="Theme_subheading-Clr  font14">
+                                        Current
+                                    </span>
+                                </td>
+                                <td class="bk-gray"> </td>
+                                <td class="text-right">
+                                    <span class="Theme_subheading-Clr  font14">
+                                        Last
+                                    </span>
+                                </td>
+                                <td class="text-right">
+                                    <span class="Theme_subheading-Clr  font14">
+                                        Current
+                                    </span>
+                                </td>
+                                <td> </td>
+
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            <!-- ko template: { name: 'DashboardInsightTemplate' , foreach: $root.DashboardInsightsData } -->
+                            <!-- /ko -->
+                            <tr><td colspan="17"> </td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <br />
+                <h1 style="padding-left:7px!important;"># Campaigns by status type </h1>
+            </div>
+        </div>
+        <div class="row main-box">
+            <div class="col-lg-12">
+                <div class="table-responsive tbl-dashboard" style="margin-right:-4px; ">
+                    <table class="table" style="border-right:solid white 8px;">
+                        <thead>
+                            <tr>
+                                <th> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                <th>
+                                    <span class="GridHeaderFont_size">
+                                        Draft
+                                    </span>
+                                </th>
+
+                                <th>
+                                    <span class="GridHeaderFont_size">
+                                        Pending
+                                    </span>
+                                </th>
+
+                                <th>
+                                    <span class="GridHeaderFont_size">
+                                        Live
+                                    </span>
+                                </th>
+
+                                <th>
+                                    <span class="GridHeaderFont_size">
+                                        Paused
+                                    </span>
+                                </th>
+
+                                <th>
+                                    <span class="GridHeaderFont_size">
+                                        Rejected
+                                    </span>
+                                </th>
+
+
+                            </tr>
+
+
+                        </thead>
+                        <tbody>
+                            <!-- ko template: { name: 'CampaignsByStatusTemplate' , foreach: $root.CampaignsByStatusData } -->
+                            <!-- /ko -->
+                            <tr><td colspan="17"> </td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <br />
+                <h1 style="padding-left:7px!important;"># Logged in, registered and deleted users</h1>
+            </div>
+        </div>
+        <div class="row main-box">
+            <div class="col-lg-12">
+                <div class="table-responsive tbl-dashboard" style="margin-right:-4px; ">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                <th class="text-left">
+                                    <span class="GridHeaderFont_size">
+                                        Within 7 Days
+                                    </span>
+                                </th>
+
+                                <th class="text-left">
+                                    <span class="GridHeaderFont_size">
+                                        Last 14 Days
+                                    </span>
+                                </th>
+
+                                <th class="text-left">
+                                    <span class="GridHeaderFont_size">
+                                        Last 30 Days
+                                    </span>
+                                </th>
+
+                                <th class="text-left">
+                                    <span class="GridHeaderFont_size">
+                                        Last 60 Days
+                                    </span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- ko template: { name: 'UserCountsTemplate' , foreach: $root.UserCountsData } -->
+                            <!-- /ko -->
+                            <tr><td colspan="17"> </td></tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <br />
+                    <h1 style="padding-left:7px!important;">Reports </h1>
+                </div>
+            </div>
+            <div class="row main-box">
+                <div class="col-lg-5"></div>
+                <div class="col-lg-7">
+                    <select class="form-control margin10 pull-left" style="width:25%!important;" id="ddprevenue" data-bind="options: $root.granularityDropDown, optionsText: 'name', optionsValue: 'id', value:$root.selectedGranual, event: { change: $root.ReloadAnalytic }"></select>
+                    <label class="control-label text-right pull-left margin10" style="padding-top:8px;">Date Range </label>
+                    <input type="text" class="form-control margin10 pull-left" style="width:25%;" id="FromDate" data-bind="datepicker:$root.analyticFromdate,  event: { change: $root.ReloadAnalytic }">
+                    <input type="text" class="form-control margin10" style="width:25%;" id="ToDate" data-bind="datepicker:$root.analyticTodate,  event: { change: $root.ReloadAnalytic }">
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <br />
+                    <h1 style="padding-left:7px!important;">Paypal payout vs all revenue</h1>
+                </div>
+            </div>
+            <div class="row main-box">
+                <div class="col-lg-12">
+                    <div class=" margin10">
+
+                        <div style="height:150px;" class="margin-Top-30" data-bind="morris: {type: 'Line', data: $root.PayoutVSRevenueOverTimeData, xkey: 'Granual', ykeys: ['revStats', 'PayoutStats'], labels: ['All Revenue', 'Payout to Paypal'], parseTime:false, setAxisAlignFirstX: true, lineColors: ['blue','red'], preUnits: '$' }"></div>
+
+                    </div>
+                </div>
+
+            </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <br />
+                <h1 style="padding-left:7px!important;"> New registrations vs logged in vs deleted</h1>
+            </div>
+        </div>
+        <div class="row main-box">
+            <div class="col-lg-12">
+                <div class=" margin10">
+                    <div style="height:150px;" class="margin-Top-30" data-bind="morris: {type: 'Line', data: $root.UserActivitiesOverTimeData, xkey: 'Granual', ykeys: ['newStats', 'loginStats', 'deleteStats'], labels: ['New Users','Active Users', 'Deleted User'], parseTime:false, setAxisAlignFirstX: true, lineColors: ['green', 'blue','red']}"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <br />
+                <h1 style="padding-left:7px!important;"> Live campaigns counts</h1>
+            </div>
+        </div>
+        <div class="row main-box">
+            <div class="col-lg-9">
+                </div>
+            <div class="col-lg-3">
+                <div class=" margin10">
+                    <select class="form-control" style="width:85%!important;" id="ddprevenue" data-bind="options: $root.CampaignTypeForLiveCampDD, optionsText: 'name', optionsValue: 'id', value:$root.LCampaignType, event: { change: $root.GetLiveCampaignCountOverTime }"></select>
+                </div>
+            </div>
+                        <div class="col-lg-12">
+                        
+                            <div style="height:150px;" class="margin-Top-30" data-bind="morris: {type: 'Line', data: $root.LiveCampaignOverTimeData, xkey: 'Granual', ykeys: ['campCount'], labels: ['Live Campaign'], parseTime:false, setAxisAlignFirstX: true}"></div>
+                    </div>
+                
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <br />
+                <h1 style="padding-left:7px!important;">Revenue by campaign</h1>
+            </div>
+        </div>
+        <div class="row main-box">
+            <div class="col-lg-9">
+            </div>
+            <div class="col-lg-3">
+                <div class=" margin10">
+
+                    <select class="form-control" style="width:85%!important;" id="ddprevenue" data-bind="options: $root.CampaignTypeDD, optionsText: 'name', optionsValue: 'id', value:$root.rCampaignType, event: { change: $root.getRevenueOverTime }"></select>
+
+                </div>
+            </div>
+            <div class="col-lg-12">
+                
+                <div style="height:150px;" class="margin-Top-30" data-bind="morris: {type: 'Line', data: $root.RevenueOverTimeData, xkey: 'Granual', ykeys: ['Revenue'], labels: ['Revenue'], parseTime:false, setAxisAlignFirstX: true, preUnits: '$'}"></div>
+
+               
+            </div>
+        </div>
+            </div>
+        </div>
+
+<script id="DashboardInsightTemplate" type="text/html">
+    <tr style="border-bottom: none;">
+        <td class="col-sm-3 font14">
+            <!-- ko if: activity() === "# Answered" ||  activity() === "# Skipped" || activity() === "# Conversion to landing pages" || activity() === "# Opened" || activity() === "$ Revenue by campaign types"  || activity() === "$ Total revenue (stripe)"  || activity() === "$ Total payouts (payPal)" -->
+            <span class="h4" data-bind="text: activity"></span>
+            <!-- /ko -->
+
+            <!-- ko ifnot: activity() === "# Answered" ||  activity() === "# Skipped" || activity() === "# Conversion to landing pages" || activity() === "# Opened" || activity() === "$ Revenue by campaign types"  || activity() === "$ Total revenue (stripe)"  || activity() === "$ Total payouts (payPal)" -->
+            <span class="paddingLeft20px" data-bind="text: activity"></span>
+            <!-- /ko -->
+        </td>
+        <td></td>
+        <td class="text-right">
+            <!-- ko if: ordr() === 32 || ordr() === 33 || ordr() === 34 || ordr() === 35 || ordr() === 36 || ordr() === 39 || ordr() === 40 -->
+            $
+            <!-- /ko -->
+            <span data-bind="text: usL"></span>
+        </td>
+        <td class="text-right">
+            <!-- ko if: ordr() === 32 || ordr() === 33 || ordr() === 34 || ordr() === 35 || ordr() === 36 || ordr() === 39 || ordr() === 40 -->
+            $
+            <!-- /ko -->
+            <span data-bind="text: usC()"></span>
+        </td>
+        <td class="text-left">
+            <!-- ko if: usT() > 0-->
+            <span style="color:green;">
+                <i class="fa fa-long-arrow-up" aria-hidden="true"></i>
+                <span data-bind="text: usT"></span>%
+
+            </span>
+            <!-- /ko -->
+            <!-- ko if: usT() < 0-->
+            <span style="color:red;">
+                <i class="fa fa-long-arrow-down" aria-hidden="true"></i>
+                <span data-bind="text: usT"></span>%
+
+            </span>
+            <!-- /ko -->
+        </td>
+        <td class="text-right bk-gray">
+            <!-- ko if: ordr() === 32 || ordr() === 33 || ordr() === 34 || ordr() === 35 || ordr() === 36 || ordr() === 39 || ordr() === 40 -->
+            $
+            <!-- /ko -->
+            <span data-bind="text: ukL"></span>
+        </td>
+        <td class="text-right bk-gray">
+            <!-- ko if: ordr() === 32 || ordr() === 33 || ordr() === 34 || ordr() === 35 || ordr() === 36 || ordr() === 39 || ordr() === 40 -->
+            $
+            <!-- /ko -->
+            <span data-bind="text: ukC"></span>
+        </td>
+        <td class="text-left bk-gray">
+            <!-- ko if: ukT() > 0-->
+            <span style="color:green;padding-left:10px">
+                <i class="fa fa-long-arrow-up" aria-hidden="true"></i>
+                <span data-bind="text: ukT"></span>%
+
+            </span>
+            <!-- /ko -->
+            <!-- ko if: ukT() < 0-->
+            <span style="color:red; padding-left:10px">
+                <i class="fa fa-long-arrow-down" aria-hidden="true"></i>
+                <span data-bind="text: ukT"></span>%
+
+            </span>
+            <!-- /ko -->
+        </td>
+       
+
+        <td class="text-right">
+            <!-- ko if: ordr() === 32 || ordr() === 33 || ordr() === 34 || ordr() === 35 || ordr() === 36 || ordr() === 39 || ordr() === 40 -->
+            $
+            <!-- /ko -->
+            <span data-bind="text: caL"></span>
+        </td>
+        <td class="text-right">
+            <!-- ko if: ordr() === 32 || ordr() === 33 || ordr() === 34 || ordr() === 35 || ordr() === 36 || ordr() === 39 || ordr() === 40 -->
+            $
+            <!-- /ko -->
+            <span data-bind="text: caC"></span>
+            </td>
+        <td class="text-left">
+            <!-- ko if: caT() > 0-->
+            <span style="color:green;padding-left:10px">
+                <i class="fa fa-long-arrow-up" aria-hidden="true"></i>
+                <span data-bind="text: caT"></span>%
+
+            </span>
+            <!-- /ko -->
+            <!-- ko if: caT() < 0-->
+            <span style="color:red; padding-left:10px">
+                <i class="fa fa-long-arrow-down" aria-hidden="true"></i>
+                <span data-bind="text: caT"></span>%
+
+            </span>
+            <!-- /ko -->
+        </td>
+       
+        <td class="text-right bk-gray">
+            <!-- ko if: ordr() === 32 || ordr() === 33 || ordr() === 34 || ordr() === 35 || ordr() === 36 || ordr() === 39 || ordr() === 40 -->
+            $
+            <!-- /ko -->
+            <span data-bind="text: auL"></span>
+        </td>
+        <td class="text-right bk-gray">
+            <!-- ko if: ordr() === 32 || ordr() === 33 || ordr() === 34 || ordr() === 35 || ordr() === 36 || ordr() === 39 || ordr() === 40 -->
+            $
+            <!-- /ko -->
+            <span data-bind="text: auC"></span>
+        </td>
+        <td class="text-left bk-gray">
+            <!-- ko if: auT() > 0-->
+            <span style="color:green;padding-left:10px">
+                <i class="fa fa-long-arrow-up" aria-hidden="true"></i>
+                <span data-bind="text: auT"></span>%
+
+            </span>
+            <!-- /ko -->
+            <!-- ko if: auT() < 0-->
+            <span style="color:red; padding-left:10px">
+                <i class="fa fa-long-arrow-down" aria-hidden="true"></i>
+                <span data-bind="text: auT"></span>%
+
+            </span>
+            <!-- /ko -->
+        </td>
+        
+
+        <td class="text-right">
+            <!-- ko if: ordr() === 32 || ordr() === 33 || ordr() === 34 || ordr() === 35 || ordr() === 36 || ordr() === 39 || ordr() === 40 -->
+            $
+            <!-- /ko -->
+            <span data-bind="text: aeL"></span>
+        </td>
+        <td class="text-right">
+            <!-- ko if: ordr() === 32 || ordr() === 33 || ordr() === 34 || ordr() === 35 || ordr() === 36 || ordr() === 39 || ordr() === 40 -->
+            $
+            <!-- /ko -->
+            <span data-bind="text: aeC"></span>
+            </td>
+        <td class="text-left">
+            <!-- ko if: aeT() > 0-->
+            <span style="color:green;padding-left:10px">
+                <i class="fa fa-long-arrow-up" aria-hidden="true"></i>
+                <span data-bind="text: aeT"></span>%
+
+            </span>
+            <!-- /ko -->
+            <!-- ko if: aeT() < 0-->
+            <span style="color:red; padding-left:10px">
+                <i class="fa fa-long-arrow-down" aria-hidden="true"></i>
+                <span data-bind="text: aeT"></span>%
+
+            </span>
+            <!-- /ko -->
+        </td>
+        
+    </tr>
+</script>
+<script id="CampaignsByStatusTemplate" type="text/html">
+    <tr style="border-bottom: none;">
+        <td class="col-sm-2 font14">
+            <span class="text-center" data-bind="text: rectype"></span>
+        </td>
+        <td class="bk-gray col-sm-2">
+            <span class="text-center" data-bind="text: Draft"></span>
+        </td>
+        <td class="col-sm-2">
+            <span class="text-center" data-bind="text: Pending"></span>
+        </td>
+         
+        <td class="bk-gray col-sm-2">
+            <span class="text-center" data-bind="text: Live"></span>
+        </td>
+        <td class="col-sm-2">
+            <span class="text-center" data-bind="text: Paused"></span>
+
+        </td>
+        <td class="bk-gray col-sm-2" >
+            <span class="text-center" data-bind="text: Rejected"></span>
+            
+        </td>
+       
+
+    </tr>
+</script>
+
+<script id="UserCountsTemplate" type="text/html">
+    <tr style="border-bottom: none;">
+        <td class="col-sm-4 font14">
+            <span data-bind="text: title"></span>
+        </td>
+        <td class="bk-gray col-sm-2">
+            <span data-bind="text: C7Days"></span>
+        </td>
+        <td class="col-sm-2">
+            <span data-bind="text: C14Days"></span>
+        </td>
+
+        <td class="bk-gray col-sm-2">
+            <span data-bind="text: C30Days"></span>
+        </td>
+        <td class="col-sm-2">
+            <span data-bind="text: C60Days"></span>
+
+        </td>
+     </tr>
+</script>
+
+@section Scripts{
+    <script type="text/javascript">
+        require(["analytic/analytic.view"]);
+
+
+
+    </script>
+}

@@ -4,6 +4,7 @@ using SMD.Implementation.Identity;
 using SMD.Implementation.Services;
 using SMD.Interfaces;
 using SMD.Interfaces.Logger;
+using SMD.Interfaces.Repository;
 using SMD.Interfaces.Services;
 
 namespace SMD.Implementation
@@ -36,6 +37,32 @@ namespace SMD.Implementation
             unityContainer.RegisterType<ITransactionService, TransactionService>();
             unityContainer.RegisterType<IInvoiceDetailService, InvoiceDetailService>();
             unityContainer.RegisterType<IStripeService, StripeService>();
+            unityContainer.RegisterType<ITransactionLogService, TransactionLogService>();
+            unityContainer.RegisterType<IAccountService, AccountService>();
+            unityContainer.RegisterType<ICityService, CityService>();
+            unityContainer.RegisterType<IEducationService, EducationService>();
+            unityContainer.RegisterType<IIndustryService, IndustryService>();
+            unityContainer.RegisterType<ICompanyService, CompanyService>();
+            unityContainer.RegisterType<IManageUserService, ManageUserService>();
+            unityContainer.RegisterType<ICouponCategoryService, CouponCategoryService>();
+            unityContainer.RegisterType<ICouponService, CouponService>();
+            unityContainer.RegisterType<ISectionService, SectionService>();
+            unityContainer.RegisterType<IPhraseService, PhraseService>();
+            unityContainer.RegisterType<IBrachCategoryService, BrachCategoryService>();
+            unityContainer.RegisterType<ICompanyBranchService, CompanyBranchService>();
+            unityContainer.RegisterType<IDamImageService, DamImageService>();
+            unityContainer.RegisterType<IGameService, GameService>();
+            unityContainer.RegisterType<IActiveUser, ActiveUser>();
+            unityContainer.RegisterType<IDashboardService, DashboardService>();
+            unityContainer.RegisterType<IPayOutHistoryService, PayOutHistoryService>();
+            unityContainer.RegisterType<ISmsServiceCustom, SmsServiceCustom>();
+            unityContainer.RegisterType<ISurveySharingGroupService, SurveySharingGroupService>();
+            unityContainer.RegisterType<ISurveyQuestionService, SurveyQuestionService>();
+            unityContainer.RegisterType<ISharedSurveyQuestionService, SharedSurveyQuestionService>();
+            unityContainer.RegisterType<INotificationService, NotificationService>();
+            unityContainer.RegisterType<IAdCampaignResponseService, AdCampaignResponseService>();
+            unityContainer.RegisterType<ICountryService, CountryService>();
+            
         }
     }
 }

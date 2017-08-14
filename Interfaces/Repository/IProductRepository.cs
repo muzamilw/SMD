@@ -10,6 +10,6 @@ namespace SMD.Interfaces.Repository
         /// <summary>
         /// Get Product By Country 
         /// </summary>
-        Product GetProductByCountryId(int? countryId, string productCode);
+        Product GetProductByCountryId(string productCode);
     }
 }

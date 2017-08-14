@@ -2,6 +2,7 @@
 using SMD.Interfaces.Repository;
 using SMD.Models.Common;
 using SMD.Models.DomainModels;
+using SMD.Models.IdentityModels;
 using SMD.Models.RequestModels;
 using SMD.Repository.BaseRepository;
 using System;
@@ -20,7 +21,7 @@ namespace SMD.Repository.Repositories
         /// <summary>
         /// Survey Question Orderby clause
         /// </summary>
-        private readonly Dictionary<SurveyQuestionByColumn, Func<SurveyQuestion, object>> _surveyQuestionOrderByClause = 
+        private readonly Dictionary<SurveyQuestionByColumn, Func<SurveyQuestion, object>> _surveyQuestionOrderByClause =
             new Dictionary<SurveyQuestionByColumn, Func<SurveyQuestion, object>>
                     {
                         {SurveyQuestionByColumn.Question, d => d.Question}  ,    
@@ -56,41 +57,72 @@ namespace SMD.Repository.Repositories
         /// </summary>
         public IEnumerable<SurveyQuestion> SearchSurveyQuestions(SurveySearchRequest request, out int rowCount)
         {
-            if (request == null)
+
+
+            //if (request == null)
+            //{
+            //    int fromRow = 0;
+            //    int toRow = 10;
+            //    rowCount = DbSet.Count();
+            //    if (isAdmin)
+            //    {
+            //        return DbSet.OrderBy(g => g.SqId)
+            //            .Skip(fromRow)
+            //            .Take(toRow)
+            //            .ToList();
+            //    }
+            //    else
+            //    {
+            //        return DbSet.Where(g => g.UserId == LoggedInUserIdentity).OrderBy(g => g.SqId)
+            //                .Skip(fromRow)
+            //                .Take(toRow)
+            //                .ToList();
+            //    }
+            //}
+            //else
+            //{
+            int fromRow = (request.PageNo - 1) * request.PageSize;
+            int toRow = request.PageSize;
+            Expression<Func<SurveyQuestion, bool>> query = null;
+
+            if (request.fmode == true)// admin
             {
-                int fromRow = 0;
-                int toRow = 10;
-                rowCount = DbSet.Count();
-                return DbSet.Where(g=>g.UserId == LoggedInUserIdentity).OrderBy(g => g.SqId)
-                        .Skip(fromRow)
-                        .Take(toRow)
-                        .ToList();
+                query =
+                   question =>
+                       (string.IsNullOrEmpty(request.SearchText) ||
+                        (question.Question.Contains(request.SearchText)))
+                        && (request.CountryFilter == 0 || question.CountryId == request.CountryFilter)
+                        && (request.LanguageFilter == 0 || question.LanguageId == request.LanguageFilter)
+                        && (request.Status == 0 || question.Status == request.Status) && question.Status != 7
+
+                        && question.CompanyId == null;
+
             }
             else
             {
-                int fromRow = (request.PageNo - 1) * request.PageSize;
-                int toRow = request.PageSize;
-                Expression<Func<SurveyQuestion, bool>> query =
+                query =
                     question =>
                         (string.IsNullOrEmpty(request.SearchText) ||
                          (question.Question.Contains(request.SearchText)))
-                         && (request.CountryFilter == 0 ||  question.CountryId == request.CountryFilter) 
-                         &&( question.UserId == LoggedInUserIdentity)
-                         && (request.LanguageFilter == 0 || question.LanguageId == request.LanguageFilter);
+                         && (request.CountryFilter == 0 || question.CountryId == request.CountryFilter)
+                         && (request.LanguageFilter == 0 || question.LanguageId == request.LanguageFilter)
+                         && (request.Status == 0 || question.Status == request.Status) && question.Status != 7
+                         && question.CompanyId == this.CompanyId;
 
-
-                rowCount = DbSet.Count(query);
-                return DbSet.Where(query).OrderBy(g=>g.SqId)
-                        .Skip(fromRow)
-                        .Take(toRow)
-                        .ToList();
             }
+
+            rowCount = DbSet.Count(query);
+            return DbSet.Where(query).OrderByDescending(g => g.CreationDate).ThenByDescending(g => g.StartDate)
+                    .Skip(fromRow)
+                    .Take(toRow)
+                    .ToList();
+
         }
 
         /// <summary>
         /// Get Rejected Survey Questions | baqer
         /// </summary>
-        public IEnumerable<SurveyQuestion> SearchRejectedProfileQuestions(SurveySearchRequest request, out int rowCount)
+        public IEnumerable<SurveyQuestion> GetSurveyQuestionsForAproval(SurveySearchRequest request, out int rowCount)
         {
             int fromRow = (request.PageNo - 1) * request.PageSize;
             int toRow = request.PageSize;
@@ -101,6 +133,7 @@ namespace SMD.Repository.Repositories
             return request.IsAsc
                 ? DbSet.Where(query)
                     .OrderBy(_surveyQuestionOrderByClause[request.SurveyQuestionOrderBy])
+                    .OrderByDescending(s => s.SubmissionDate)
                     .Skip(fromRow)
                     .Take(toRow)
                     .ToList()
@@ -118,6 +151,16 @@ namespace SMD.Repository.Repositories
         {
             return DbSet.Select(survey => survey).ToList();
         }
+
+        /// <summary>
+        /// Get survey Questions by current Companyid
+        /// </summary>
+        public IEnumerable<SurveyQuestion> GetAllByCompanyId()
+        {
+            return DbSet.Where(g => g.CompanyId == CompanyId).Select(survey => survey).ToList();
+        }
+
+
         public SurveyQuestion Get(long SqId)
         {
             db.Configuration.ProxyCreationEnabled = false;
@@ -142,7 +185,7 @@ namespace SMD.Repository.Repositories
         {
             int fromRow = (request.PageNo - 1) * request.PageSize;
             int toRow = request.PageSize;
-            return db.GetSurveysForApi(request.UserId, fromRow, toRow);  
+            return db.GetSurveysForApi(request.UserId, fromRow, toRow);
         }
 
         /// <summary>
@@ -150,8 +193,8 @@ namespace SMD.Repository.Repositories
         /// </summary>
         public long GetAudienceSurveyCount(GetAudienceSurveyRequest request)
         {
-           var resposne=  db.GetAudienceSurveyCount(request).ToList();
-           return resposne.FirstOrDefault();
+            var resposne = db.GetAudienceSurveyCount(request).ToList();
+            return resposne.FirstOrDefault();
         }
 
         /// <summary>
@@ -160,39 +203,100 @@ namespace SMD.Repository.Repositories
         public long GetAudienceAdCampaignCount(GetAudienceSurveyRequest request)
         {
             var resposne = db.GetAudienceAdCampaignCount(request);
-            return resposne.FirstOrDefault(); 
+            return resposne.FirstOrDefault();
         }
 
         public GetAudience_Result GetAudienceCount(GetAudienceCountRequest request)
         {
             return db.GetAudienceCampaignAndSurveyCounts(request.ageFrom, request.ageTo, request.gender, request.countryIds, request.cityIds, request.languageIds, request.industryIds
                 , request.profileQuestionIds, request.profileAnswerIds, request.surveyQuestionIds, request.surveyAnswerIds,
-                request.countryIdsExcluded, request.cityIdsExcluded, request.languageIdsExcluded, request.industryIdsExcluded).FirstOrDefault();
+                request.countryIdsExcluded, request.cityIdsExcluded, request.languageIdsExcluded, request.industryIdsExcluded,
+                request.educationIds, request.educationIdsExcluded, request.profileQuestionIdsExcluded, request.surveyQuestionIdsExcluded, request.CampaignQuizIds, request.CampaignQuizAnswerIds, request.CampaignQuizIdsExcluded).FirstOrDefault();
         }
         public UserBaseData getBaseData()
         {
             UserBaseData data = new UserBaseData();
-            var usr = db.Users.Where(g => g.Id == LoggedInUserIdentity).SingleOrDefault();
-            if(usr!= null)
+            var user = db.Users.Where(g => g.Id == LoggedInUserIdentity).SingleOrDefault();
+
+            var usr = db.Companies.Where(g => g.CompanyId == CompanyId).SingleOrDefault();
+
+            if (usr != null)
             {
-                
-                var country = 
-                 data.CityId = usr.CityId;
-                 data.CountryId = usr.CountryId;
-                 data.EducationId = usr.EducationId;
-                 data.IndustryId = usr.IndustryId;
-                 data.LanguageId = usr.LanguageId;
-                 data.City = usr.City != null ? usr.City.CityName : "";
-                 data.Country = usr.Country != null ? usr.Country.CountryName : "";
-                 data.Education = usr.Education != null?usr.Education.Title : "";
-                 data.Industry = usr.Industry != null?usr.Industry.IndustryName:"";
-                 data.Language = usr.Language != null? usr.Language.LanguageName: "";
-                 data.isStripeIntegrated = String.IsNullOrEmpty(usr.StripeCustomerId) == true ? false : true;
-                 data.Latitude = usr.City != null ? usr.City.GeoLat : "";
-                 data.Longitude = usr.City != null ? usr.City.GeoLong : "";
+                bool isAdmin = false;
+
+
+                //data.CityId =usr.Company == null? null: usr.Company.CityId;
+                data.CountryId = usr == null ? null : usr.CountryId;
+                data.EducationId = user.EducationId;
+                data.IndustryId = user.IndustryId;
+                data.LanguageId = user.LanguageId;
+                data.City = usr.City != null ? usr.City : "";
+                data.Country = usr.Country != null ? usr.Country.CountryName : "";
+                data.Education = user.Education != null ? user.Education.Title : "";
+                data.Industry = user.Industry != null ? user.Industry.IndustryName : "";
+                data.Language = user.Language != null ? user.Language.LanguageName : "";
+                data.isStripeIntegrated = usr == null ? false : String.IsNullOrEmpty(usr.StripeCustomerId) == true ? false : true;
+                //data.Latitude = usr.Company.City != null ? usr.Company.City.GeoLat : "";
+                //data.Longitude = usr.Company.City != null ? usr.Company.City.GeoLong : "";
+                data.isUserAdmin = isAdmin;
+                data.IsSpecialAccount = usr.IsSpecialAccount;
+                data.Status = user.Status;
             }
 
             return data;
         }
+        public IEnumerable<SurveyQuestion> UpdateQuestionsListCompanyID(IEnumerable<SurveyQuestion> SurveyQuestions)
+        {
+
+            if (this.CompanyId > 0)
+            {
+                foreach (var Question in SurveyQuestions)
+                {
+                    if (Question.CompanyId == null || Question.CompanyId == 0)
+                    {
+                        Question.CompanyId = this.CompanyId;
+
+                        db.SurveyQuestions.Attach(Question);
+
+                        db.Entry(Question).State = EntityState.Modified;
+                    }
+                }
+                db.SaveChanges();
+            }
+            return SurveyQuestions;
+
+        }
+
+        public IEnumerable<SurveyQuestion> GetSurveyQuestionAnswer(long SurveyQuestionId)
+        {
+            return DbSet.Where(ans => ans.SqId == SurveyQuestionId && ans.Status != 0).ToList();
+        }
+        public IEnumerable<getPollsBySQID_Result> getPollsBySQIDAnalytics(int SQId, int CampStatus, int dateRange, int Granularity)
+        {
+
+            return db.getPollsBySQIDAnalytics(SQId, CampStatus, dateRange, Granularity);
+        }
+        public List<getPollBySQIDRatioAnalytic_Result> getPollBySQIDRatioAnalytic(int ID, int dateRange)
+        {
+
+            return db.getPollBySQIDRatioAnalytic(ID, dateRange).ToList();
+        }
+        public int getPollImpressionStatBySQIdFormAnalytic(long Id, int Gender, int age)
+        {
+
+            return db.getPollImpressionStatBySQIdFormAnalytic(Id, Gender, age).ToList().FirstOrDefault();
+           
+        }
+        public IEnumerable<getPollBySQIDtblAnalytic_Result> getPollBySQIDtblAnalytic(int ID)
+        {
+            return db.getPollBySQIDtblAnalytic(ID);
+        }
+
+        public List<GetRandomPolls_Result> GetRandomPolls()
+        {
+            return db.GetRandomPolls().ToList();
+        }
+
+
     }
 }

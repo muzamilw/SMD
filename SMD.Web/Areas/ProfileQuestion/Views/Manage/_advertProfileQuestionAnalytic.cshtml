@@ -1,0 +1,145 @@
+﻿         <div data-bind="visible: $root.isAdvertdashboardSurvayVisible()" style="display: none;padding-left:0px;padding-right:0px;" class=" col-lg-12 form-horizontal" >
+    <div class="main-box main-box-subpage">
+        <div class="row">
+
+            <br />
+            <div class="col-lg-6 adsubHeading Theme_standard_clr borderbtmline" style="padding-bottom:10px;">
+                Timeline
+            </div>
+            <div class="col-lg-3 adsubHeading Theme_standard_clr borderbtmline" style="padding-bottom:10px;">
+                <label class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Date range </label>
+            </div>
+            <div class="col-lg-3 adsubHeading Theme_standard_clr borderbtmline" style="padding-bottom:2px;">
+                <select class="form-control" id="ddDateRangeDropDown" data-bind="options: $root.DateRangeDropDown, optionsText: 'name', optionsValue: 'id', value:$root.selecteddateRangeAnalytics, event: { change: $root.getSurvayAnalytics }"></select>
+            </div>
+
+
+
+        </div>
+        <div>
+            <div class="col-lg-3"></div>
+
+            <div class="col-lg-2">
+                <label style="padding-top:18px;" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Granularity level </label>
+            </div>
+            <div class="col-lg-3">
+                <select class="form-control margin10 pull-left" id="ddGranularityDropDown" data-bind="options: $root.granularityDropDown, optionsText: 'name', optionsValue: 'id', value:$root.selectedGranularityAnalytics, event: { change: $root.getSurvayAnalytics }"></select>
+            </div>
+
+            <div class="col-lg-1">
+                <label style="padding-top:18px;" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Status </label>
+            </div>
+            <div class="col-lg-3">
+                <select class="form-control margin10 pull-left" id="ddCampaignStatusDropDown" data-bind="options: $root.CampaignStatusDropDown, optionsText: 'name', optionsValue: 'id', value:$root.selectedCampStatusAnalytics, event: { change: $root.getSurvayAnalytics }"></select>
+            </div>
+
+        </div>
+        <div class="row main-box">
+            <div class="col-lg-12">
+                <div class=" margin10">
+                   
+                    <div style="height:150px;" data-bind="morris: {type: 'Line', data: $root.PQAnalyticsData, xkey: 'Granual', ykeys: ['openStats', 'Stats','SkipStats'], labels: ['Opened', 'Answered','Skipped'], parseTime:false, setAxisAlignFirstX: true, lineColors: ['blue','green','red'] }"></div>
+                   
+                  
+
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="adsubHeading Theme_standard_clr borderbtmline">
+                <br />
+                Results by Q&A by answer
+            </div>
+        </div>
+        <div class="row main-box margin-Top-30">
+
+            <div class="col-lg-6">
+                <!--ko if: $root.selecteddateRangeAnalytics() == 1 -->
+                <div>Date range : Last 30 days </div>
+                <!--/ko-->
+                <!--ko if: $root.selecteddateRangeAnalytics() == 2 -->
+                <div>Date range : All time </div>
+                <!--/ko-->
+
+                <div data-bind="morris: {type: 'Donut', data: $root.CampaignRatioAnalyticData, resize:true, colors: ['green', 'blue','red', 'yellow' ,'purple', 'orange' ]  }" style="width:250px;height:250px;padding-left:50px;cursor:pointer;"></div>
+               
+            </div>
+            <div class="col-lg-5">
+                <table class="roitbl" style="margin-top:70px;">
+                    <!-- ko template: { name: 'ROITblAnalyticsDataTemplate' , foreach: $root.CampaignROItblAnalyticData } -->
+                    <!-- /ko -->
+                </table>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="adsubHeading Theme_standard_clr borderbtmline">
+                <br />
+                @*Campaign ROI*@
+            </div>
+        </div>
+        <div class="row">
+
+
+            <div class="col-lg-12">
+                <table class="roitbl" style="">
+                    <thead>
+                        <tr>
+                            <th class="col-lg-4">
+                                &nbsp;
+                            </th>
+                            <th class="col-lg-4 padingL15 text-right" style="background-color: #eee">
+                                All time
+                            </th>
+                            <th class="col-lg-4 padingL15 text-right">
+                                Last 30 days
+                            </th>
+                        </tr>
+                    </thead>
+                    <!-- ko template: { name: 'CampaignTblAnalyticsDataTemplate' , foreach: $root.CampaignTblAnalyticsData } -->
+                    <!-- /ko -->
+                   
+                </table>
+            </div>
+
+        </div>
+        <div class="clearfix">
+        </div>
+        <div class="clearfix">
+        </div>
+    </div>
+
+</div>
+
+
+<script id="CampaignTblAnalyticsDataTemplate" type="text/html">
+    <tr>
+        <td><span data-bind="text: label"></span></td>
+
+        <td class="padingL15 text-right" style="background-color: #eee">
+            <!-- ko if: ordr === 4  -->
+            $
+            <!-- /ko -->
+            <span data-bind="text: All_time"></span>
+        </td>
+        <td class="padingL15 text-right">
+            <!-- ko if: ordr === 4  -->
+            $
+            <!-- /ko -->
+            <span data-bind="text: C30_days"></span>
+        </td>
+    </tr>
+</script>
+
+
+<script id="ROITblAnalyticsDataTemplate" type="text/html">
+    <tr>
+        <td><span data-bind="text: label"></span></td>
+
+        <td class="text-right">
+            <span data-bind="text: value"></span>%
+        </td>
+
+    </tr>
+</script>

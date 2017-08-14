@@ -1,176 +1,574 @@
 ﻿@{
     ViewBag.Title = "Store Details";
 }
-@section leftmenue {
-}
-
 <div data-bind="visible: $root.isEditorVisible()" style="display: none">
     <div class="col-lg-12">
-        <div class="row">
-            <div class="col-lg-12">
-                <ol class="breadcrumb">
-                    <li><a href="#" class="my-navigator">Home</a></li>
-                    <li><a href="#" class="my-navigator">Ad Campaign Approval</a></li>
-                </ol>
-                <div class="tab-content dynamicNameHeading" style="height:41px;">
-                    <h1>Details</h1>
+        @*<div class="row">
+                <div class="col-lg-12">
+                    <ol class="breadcrumb">
+                        <li><a href="#" class="my-navigator">Home</a></li>
+                        <li><a href="#" class="my-navigator" >Ad Campaign Approval</a></li>
+                    </ol>
+
                 </div>
-            </div>
-        </div>
+            </div>*@
         <div class="row" id="user-profile">
             <div class="col-lg-12 col-md-8 col-sm-8" style="padding-bottom: 10px;">
                 <div class="clearfix ">
-                    <div class="col-xs-12" style="text-align: right; padding-right:0;margin-bottom:10px;">
-                        <button class="btn  btn-info" id="saveBtn" data-bind="click:$root.onSaveCampaign">Approve</button>
-                        <button class="btn  btn-info" id="saveBtn" data-bind="click:$root.onRejectCampaign, enable: $root.hasChangesOnCampaign, css: { 'btn-warning': $root.hasChangesOnCampaign }">Reject</button>
-                        <button class="btn btn-default" id="saveBtn" data-bind="click: $root.closeEditDialog">Close</button>
+                    <div class="col-xs-12" style="text-align: right; padding-right:14px;margin-bottom:1px;margin-top:10px;">
+                        <div style="float:right;margin-top:-9px;"><img data-bind="click: $root.closeEditDialog" src="/Content/Images/Close_Button.png" style="width:20px;height:20px;float:right;cursor:pointer;"></div>
+                        @*<button class="btn btn-default" id="saveBtn" data-bind="click: $root.closeEditDialog">Close</button>*@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="col-lg-12 col-md-12 col-sm-12" style="margin-left:8px;padding-right:32px;">
                 <div class="main-box clearfix" id="tabsHeader">
                     <div class="tabs-wrapper profile-tabs">
-                        <ul class="nav nav-tabs">
+                        <ul class="nav nav-tabs" style="display:none;">
                             <li class="active" id="generalInfoTab"><a href="#tab-generalinfo" data-toggle="tab">General Info</a></li>
                         </ul>
                         <div class="tab-content">
-                            <div class="tab-pane fade in active" data-bind="with: $root.selectedCampaign" id="tab-generalinfo">
+                            <div class="tab-pane fade in active" id="tab-generalinfo">
                                 <div class="col-lg-12 form-horizontal">
-                                    <h3 class="group-header" style="margin-top:20px;">
-                                        Ad Campaign General Info
+                                    <h3 class="group-header" style="margin-top:20px;" data-bind="visible:$root.adType()==1">
+                                        Approve - Reject Video Ads
                                     </h3>
-                                    <p class="group-header-description">Enter information below </p>
-                                    <div class="col-lg-9">
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                                <div class="bs-example-tooltips tooltip-float-width">
-                                                    <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                    </a>
+                                    <h3 class="group-header" style="margin-top:20px;" data-bind="visible:$root.adType()==4">
+                                        Approve - Reject Display Ads
+                                    </h3>
+                                    <div class="col-lg-12 col-md-12 col-sm-12" style="padding-bottom:20px" data-bind="with:$root.selectedCompany">
+                                        <div style="padding-left:0px;padding-right:0px;padding-bottom:5px; min-height: 250.90px;background-color:#f9f9f9;">
+                                            <div class="col-lg-4 text-left">
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class="col-lg-4">
+                                                        <label class="control-label" style="padding-top:10px;padding-left:10px;font-weight:bold">Account Profile</label>
+                                                    </div>
                                                 </div>
-                                                <label class="control-label text-right tooltip-float">Campaign Name</label>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class=" col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;color:lightgray">Title:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="text:FirstName" style="font-size:small"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class=" col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;color:lightgray">E-mail address:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="text:Email" style="font-size:small"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class=" col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;color:lightgray">Gender:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="text:Gender==1?'Male':'Female'" style="font-size:small"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class=" col-lg-4 text-right" style="font-size:11px">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;color:lightgray">Mobile no:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="text:Mobile" style="font-size:small"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;display:none">
+                                                    <div class=" col-lg-4 text-right" style="font-size:11px">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;color:lightgray">Date of birth:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="dateString:DateOfBirth,datePattern: 'DD/MM/YYYY'" style="font-size:small"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;display:none">
+                                                    <div class=" col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;color:lightgray">ID no:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="text:PassportNumber" style="font-size:small"></label>
+                                                    </div>
+                                                </div>
+
                                             </div>
-                                            <div class="col-lg-6">
-                                                <input type="text" readonly class="form-control" data-bind="value:campaignName">
+                                            <div class="col-lg-4 text-left">
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class="col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:10px;padding-left:10px;font-size:11px;font-size:11px;color:lightgray">Business Name:</label>
+                                                    </div>
+                                                    <div class="col-lg-8" style="padding-top:6px;">
+                                                        <label data-bind="text:CompanyName" style="font-size:small"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class="col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;font-size:11px;color:lightgray">Website:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <a data-bind="text:WebsiteLink,attr: { href: WebsiteLink }" target="_blank" style="font-size:11px"></a>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class="col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;font-size:11px;color:lightgray">Sale phone no:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="text:SalesPhone" style="font-size:small"></label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group" style="margin-bottom:0px;display:none">
+                                                    <div class="col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;color:lightgray">Company Type:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="text:$root.company()" style="font-size:small"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;display:none">
+                                                    <div class="col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;font-size:11px;font-size:11px;color:lightgray">Company Reg No:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="text:CompanyRegistrationNo" style="font-size: small"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class="col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;color:lightgray">Sales Tex No:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="text:VatNumber" style="font-size:small"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;display:none">
+                                                    <div class="col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;color:lightgray">B.Start Date:</label>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <label data-bind="dateString:BusinessStartDate,datePattern: 'DD/MM/YYYY'" style="font-size:small"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class="col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;color:lightgray">Credit Card:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="text:StripeCustomerId==null ?'No':'Yes'" style="font-size:small"></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-4 text-left">
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class="col-lg-6">
+                                                        <label class="control-label" style="padding-top:10px;padding-left:10px;font-weight:bold">Billing Address</label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class=" col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;color:lightgray">Billing Address 1:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="text:BillingAddressLine1" style="font-size:small"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class=" col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;color:lightgray">Billing City:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="text:BillingCity" style="font-size:small"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class=" col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;color:lightgray">Billing State:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="text:BillingState" style="font-size:small"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class=" col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;color:lightgray">Billing Country:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label style="font-size:small" data-bind="text:BillingCountryName"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class="col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;color:lightgray">Billing E-mail:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="text:BillingEmail" style="font-size:small"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;display:none">
+                                                    <div class="col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;color:lightgray">Billing phone no:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="text:BillingPhone" style="font-size:small"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class=" col-lg-4 text-right">
+                                                        <label style="font-size:11px;color:lightgray">Logo:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <img id="vehicleImage" alt="" style="width:60%;height:auto" data-bind="attr:{src:Logo!=null && Logo.startsWith('http') ? Logo : '/' + Logo }" />
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class="col-lg-9">
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                                <div class="bs-example-tooltips tooltip-float-width">
-                                                    <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                    </a>
+                                    <div data-bind="with: $root.selectedCampaign">
+                                        <div class="col-lg-9">
+                                            <div class="form-group">
+                                                <div class="col-lg-4 text-right">
+                                                    <label class="control-label text-right tooltip-float" data-bind="visible:!$root.isShowCopounMode()">Ad Title</label>
+                                                    <label class="control-label text-right tooltip-float" data-bind="visible:$root.isShowCopounMode()">Coupon Name</label>
                                                 </div>
-                                                <label class="control-label text-right tooltip-float">Description</label>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <input type="text" readonly class="form-control" data-bind="value: description">
+                                                <div class="col-lg-6">
+                                                    <input type="text" readonly class="form-control" data-bind="value:campaignName">
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-9" data-bind="visible:!isApproved()">
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                                <div class="bs-example-tooltips tooltip-float-width">
-                                                    <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                    </a>
+                                        <div class="col-lg-9" style="display:none">
+                                            <div class="form-group">
+                                                <div class="col-lg-4 text-right">
+                                                    <label class="control-label text-right tooltip-float">Mode</label>
                                                 </div>
-                                                <label class="control-label text-right tooltip-float">Rejection Reason</label>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <input type="text" placeholder="Enter rejection reason " class="form-control" data-bind="value: rejectionReason">
+                                                <div class="col-lg-6">
+                                                    <input type="text" readonly class="form-control" data-bind="value:deliveryDays">
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <div class="col-lg-9 marginBottom12">
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                                <div class="bs-example-tooltips tooltip-float-width">
-                                                    <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                    </a>
+                                        <div class="col-lg-9" data-bind="visible:false">
+                                            <div class="form-group">
+                                                <div class="col-lg-4 text-right">
+                                                    <label class="control-label text-right tooltip-float">First line</label>
                                                 </div>
-                                                <label class="control-label text-right tooltip-float">Image</label>
+                                                <div class="col-lg-6">
+                                                    <input type="text" readonly class="form-control" data-bind="value: description">
+                                                </div>
                                             </div>
+                                        </div>
+                                        <div class="col-lg-9" data-bind="visible:false">
+                                            <div class="form-group">
+                                                <div class="col-lg-4 text-right">
+                                                    <label class="control-label text-right tooltip-float">Second line</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" readonly class="form-control" data-bind="value: CampaignDescription">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9" data-bind="visible:$root.isShowCopounMode()">
+                                            <div class="form-group">
+                                                <div class="col-lg-6">
+                                                    <input type="text" readonly class="form-control" data-bind="value: CouponSwapValue">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9" data-bind="visible:$root.isShowCopounMode()">
+                                            <div class="form-group">
+                                                <div class="col-lg-4 text-right">
+                                                    <label class="control-label text-right tooltip-float">Actual Value</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" readonly class="form-control" data-bind="value: CouponActualValue">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9" data-bind="visible:$root.isShowCopounMode()">
+                                            <div class="form-group">
+                                                <div class="col-lg-4 text-right">
+                                                    <label class="control-label text-right tooltip-float">Quantity</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" readonly class="form-control" data-bind="value: CouponQuantity">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9 marginBottom12" data-bind="visible:: type()==4">
+                                            <div class="form-group">
+                                                <div class="col-lg-4 text-right">
+                                                    <label class="control-label text-right tooltip-float">Leaderboard Banner</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <img id="vehicleImage" alt="" style="width: auto;height:auto;width:468px;" data-bind="attr:{src:imagePath()}" />
+                                                    <h5><span></span></h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9" style="display:none">
+                                            @*data-bind="visible:!$root.isShowCopounMode()"*@
+                                            <div class="form-group">
+                                                <div class="col-lg-4 text-right">
+                                                    <label class="control-label text-right tooltip-float">Max Budget</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" readonly class="form-control" data-bind="value: maxBudget">
+                                                </div>
+                                            </div>
+                                        </div>
 
+                                        <div class="col-lg-12" data-bind="visible:!$root.isShowCopounMode()">
+                                            <div class="col-lg-9">
+                                                <div class="form-group">
+                                                    <div class="col-lg-4 text-right">
+                                                        <label class="control-label text-right tooltip-float">Daily Budget</label>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <input type="text" readonly class="form-control" data-bind="value: maxDailyBudget">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @*<div class="col-lg-3 marginBottom12" style="margin-bottom:0px;" data-bind="visible:imagePath()!=''">
                                             <div class="col-md-6">
-                                                <img id="vehicleImage" alt="" style="width: 120px;height:120px" data-bind="attr:{src:imagePath }" />
-                                                <h5><span></span></h5>
+                                                <label>Logo</label>
+                                                <img id="vehicleImage" alt="" style="width: auto;height:80px" data-bind="attr:{src:imagePath()}" />
                                             </div>
+                                        </div>*@
                                         </div>
-                                    </div>
-                                    <div class="col-lg-9">
+
+
+                                        @*<div class="col-lg-9" data-bind="visible:!$root.isShowCopounMode()">
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
-                                                <div class="bs-example-tooltips tooltip-float-width">
-                                                    <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                    </a>
-                                                </div>
-                                                <label class="control-label text-right tooltip-float">Max Budget</label>
+                                                <label class="control-label text-right tooltip-float">Max Daily Budget</label>
                                             </div>
                                             <div class="col-lg-6">
-                                                <input type="text" readonly class="form-control" data-bind="value: maxBudget">
+                                                <input type="text" readonly class="form-control" data-bind="value:maxDailyBudget">
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-9">
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                                <div class="bs-example-tooltips tooltip-float-width">
-                                                    <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                    </a>
+                                    </div>*@
+                                        <div class="col-lg-9" data-bind="visible:!$root.isShowCopounMode()">
+                                            <div class="form-group">
+                                                <div class="col-lg-4 text-right">
+                                                    <label class="control-label text-right tooltip-float">Ad Click</label>
                                                 </div>
-                                                <label class="control-label text-right tooltip-float">Click Rate</label>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <input type="text" readonly class="form-control" data-bind="value: clickRate">
+                                                <div class="col-lg-6">
+                                                    <input type="text" readonly class="form-control" data-bind="value: clickRate">
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-9">
+                                        <div class="col-lg-9" style="display:none">
+                                            <div class="form-group">
+                                                <div class="col-lg-4 text-right">
+                                                    <label class="control-label text-right tooltip-float">Currency Symbol</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" readonly class="form-control" data-bind="value:'$'">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @*<div class="col-lg-9" data-bind="visible:!$root.isShowCopounMode()" style="display:none">
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
-                                                <div class="bs-example-tooltips tooltip-float-width">
-                                                    <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                    </a>
-                                                </div>
                                                 <label class="control-label text-right tooltip-float">Type</label>
                                             </div>
                                             <div class="col-lg-6">
                                                 <input type="text" readonly class="form-control" data-bind="value: type()==1 ? 'Video':'Link'">
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-9" data-bind="visible:type()==2">
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                              
-                                                <label class="control-label text-right tooltip-float"></label>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <a href="#"target="_blank" data-bind="text:landingLink , attr:{href:landingLink}"></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-9" data-bind="visible:type()==1">
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                              
-                                                <label class="control-label text-right tooltip-float"></label>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <iframe width="420" height="315" data-bind="attr:{src:landingLink}"></iframe>
+                                    </div>*@
+                                        <div class="col-lg-9" style="display:none;">
+                                            @*Todo::pilot data-bind="visible:!$root.isShowCopounMode()"*@
+                                            <div class="form-group">
+                                                <div class="col-lg-4 text-right">
+                                                    <label class="control-label text-right tooltip-float">Voucher Heading</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" readonly class="form-control" data-bind="value: Voucher1Heading">
+                                                </div>
                                             </div>
                                         </div>
+                                        <div class="col-lg-9" style="display:none;">
+                                            @*Todo::pilot data-bind="visible:!$root.isShowCopounMode()"*@
+                                            <div class="form-group">
+                                                <div class="col-lg-4 text-right">
+                                                    <div class="bs-example-tooltips tooltip-float-width">
+                                                        <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
+                                                            <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                        </a>
+                                                    </div>
+                                                    <label class="control-label text-right tooltip-float">Voucher Description</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" readonly class="form-control" data-bind="value: Voucher1Description">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9" style="display:none;">
+                                            @*Todo::pilot data-bind="visible:!$root.isShowCopounMode()"*@
+                                            <div class="form-group">
+                                                <div class="col-lg-4 text-right">
+                                                    <div class="bs-example-tooltips tooltip-float-width">
+                                                        <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
+                                                            <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                        </a>
+                                                    </div>
+                                                    <label class="control-label text-right tooltip-float">Voucher Value Discount</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" readonly class="form-control" data-bind="value:Voucher1Value">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9 marginBottom12" style="display:none;">
+                                            @*Todo::pilot data-bind="visible:!$root.isShowCopounMode()"*@
+                                            <div class="form-group">
+                                                <div class="col-lg-4 text-right">
+                                                    <div class="bs-example-tooltips tooltip-float-width">
+                                                        <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
+                                                            <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                        </a>
+                                                    </div>
+                                                    <label class="control-label text-right tooltip-float">Voucher Image</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <img id="vehicleImage" alt="" style="width: 120px;height:120px" data-bind="attr:{src:'/' + Voucher1ImagePath() }" />
+                                                    <h5><span></span></h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9" data-bind="visible:type()==2">
+                                            <div class="form-group">
+                                                <div class="col-lg-4 text-right">
+
+                                                    <label class="control-label text-right tooltip-float"></label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <a href="#" target="_blank" data-bind="text:landingLink , attr:{href:landingLink}"></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <div class="form-group" data-bind="visible:type()==1">
+                                                <div class="col-lg-4 text-right">
+
+                                                    <label class="control-label text-right tooltip-float"></label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <video controls width="420" height="315" data-bind="attr:{ src:videoLink2 }"></video>
+                                                    @*<object id="objvideolink" width="420" height="315" data-bind="attr:{data:landingLink}"></object>*@
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-lg-4 text-right">
+                                                    <label class="control-label text-right tooltip-float">Quiz Question</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" readonly class="form-control" data-bind="value:verifyQuestion">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-lg-4 text-right">
+                                                    <label class="control-label text-right tooltip-float">Choice 1</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" readonly class="form-control" data-bind="value:answer1">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-lg-4 text-right">
+                                                    <label class="control-label text-right tooltip-float">Choice 2</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" readonly class="form-control" data-bind="value:answer2">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-lg-4 text-right">
+                                                    <label class="control-label text-right tooltip-float">Choice 3</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" readonly class="form-control" data-bind="value:answer3">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-lg-4 text-right">
+                                                    <label class="control-label text-right tooltip-float">Correct Answer</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" readonly class="form-control" data-bind="value:correctAnswer()==1 ? answer1 :correctAnswer()==2 ? answer2:correctAnswer()==3 ? answer3 :'Any of above'">
+                                                </div>
+                                            </div>
+                                            <div data-bind="visible:type()==1 && buyItButtonLabel()!=0">
+                                                <div class="form-group">
+                                                    <div class="col-lg-4 text-campaign-left  Float-Left">
+                                                        <label class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;    margin-left: 6px; ">Call for action options</label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="display:none">
+                                                    @*data-bind="visible:type()==1"*@
+                                                <div class="col-lg-4 text-right">
+                                                    <label class="control-label text-right tooltip-float">Call For Action</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" readonly class="form-control" data-bind="value:buyItLine1">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-lg-4 text-right">
+                                                    <label class="control-label text-right tooltip-float">Landing page url</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" readonly class="form-control" data-bind="value:landingLink">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-lg-4 text-right">
+                                                    <label class="control-label text-right tooltip-float">Custom button</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" readonly class="form-control" data-bind="value:buyItButtonLabel">
+                                                </div>
+                                                <div class="col-lg-1">
+                                                    <a id="displayBrabchlocatuion" target="_blank" data-bind="attr: { href: landingLink }" style="padding: 4px 8px;" class="btn btn-primary">
+                                                        <i class="fa fa-lg"></i>&nbsp;Open Link
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <div style="padding-left:0px;padding-right:0px;padding-bottom:5px; padding:15px; min-height: 235.90px;background-color:#f9f9f9">
+                                                <div class="col-lg-9" data-bind="visible:!isApproved()">
+                                                    <div class="form-group">
+                                                        <div class="col-lg-2 text-right">
+                                                            <label class="control-label text-right tooltip-float">Rejection Reason</label>
+                                                        </div>
+                                                        <div class="col-lg-8">
+                                                            <select class="form-control" id="rejectReasondd" style="width:100%;margin-bottom:15px;" data-bind="options: $root.rejectionReasondd, optionsText: 'Reason', optionsValue: 'Reason', optionsCaption: 'Select Rejection Reason',event:{ change: $root.onChangeRejectionReason}"></select>
+                                                            <textarea placeholder="Enter rejection reason " rows="5" style=" resize: none" class="form-control" data-bind="value: rejectionReason"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-9">
+                                                    <div class="form-group">
+                                                        <div class="col-lg-4 text-right">
+
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <button class="btn  btn-success" id="saveBtn" data-bind="click:$root.onApproveCampaign,visible:rejectionReason()==null ||rejectionReason()==''">Approve</button>
+                                                            <button class="btn " id="saveBtn" data-bind="click:$root.onRejectCampaign, enable: $root.hasChangesOnCampaign, css: { ' btn-danger': $root.hasChangesOnCampaign }">Reject</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -178,7 +576,7 @@
                 </div>
             </div>
         </div>
-       
+
     </div>
-   
+
 </div>

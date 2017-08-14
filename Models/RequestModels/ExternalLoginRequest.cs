@@ -24,5 +24,21 @@
         /// Login Provider Key
         /// </summary>
         public string LoginProviderKey { get; set; }
+
+        public string City { get; set; }
+
+
+        public string Country { get; set; }
+
+        public string ProfilePicturePath { get; set; }
+
+        public string Client { get; set; }
+
+        public string NotificationToken { get; set; }
+
+        public string LocationLat { get; set; }
+
+        public string LocationLong { get; set; }
+
     }
 }

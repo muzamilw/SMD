@@ -44,14 +44,16 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// Update User Profile
         /// </summary>
         [ApiExceptionCustom]
-        public async Task<BaseApiResponse> Post(string authenticationToken, UpdateUserProfileRequest request)
+        public async Task<UpdateProfileImageResponse> Post(string authenticationToken, UpdateUserProfileRequest request)
         {
-            if (string.IsNullOrEmpty(authenticationToken) || request == null || !ModelState.IsValid)
-            {
-                throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
-            }
+            //if (string.IsNullOrEmpty(authenticationToken) || request == null || !ModelState.IsValid)
+            //{
+            //    throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
+            //}
 
-            return await webApiUserService.UpdateProfile(request); 
+            //return await webApiUserService.UpdateProfileImage(request); 
+
+            return null;
         }
 
         #endregion

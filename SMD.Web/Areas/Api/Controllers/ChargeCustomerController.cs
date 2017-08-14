@@ -45,14 +45,14 @@ namespace SMD.MIS.Areas.Api.Controllers
                 // If Item is Ad Campaign 
                 var adCampaign = advertService.GetAdCampaignById(itemId);
                 var user = webApiUserService.GetUserByUserId(adCampaign.UserId);
-                stripeCustomerId = user.StripeCustomerId;
+                stripeCustomerId = user.Company.StripeCustomerId;
             }
             else
             {
                 // If Item is Survey Question 
                 var survey = surveyQuestionService.GetSurveyQuestionById(itemId);
                 var user = webApiUserService.GetUserByUserId(survey.UserId);
-                stripeCustomerId = user.StripeCustomerId;
+                stripeCustomerId = user.Company.StripeCustomerId;
             }
 
             // Check if Stripe Customer Id Exists then use that to Create Charge

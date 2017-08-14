@@ -79,11 +79,38 @@ namespace SMD.Implementation {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Transaction can&apos;t be processed as user {0} doesn&apos;t have {1} registration..
+        /// </summary>
+        internal static string CollectionService_AccountNotRegistered {
+            get {
+                return ResourceManager.GetString("CollectionService_AccountNotRegistered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Transaction can&apos;t be processed as user {0} doesn&apos;t exist..
+        /// </summary>
+        internal static string CollectionService_UserNotFound {
+            get {
+                return ResourceManager.GetString("CollectionService_UserNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There is some problem while sending email..
         /// </summary>
         internal static string EmailManagerService_FailedToSendEmail {
             get {
                 return ResourceManager.GetString("EmailManagerService_FailedToSendEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Profile Question not found against Id {0}..
+        /// </summary>
+        internal static string ProfileQuestionService_ProfileQuestionNotFound {
+            get {
+                return ResourceManager.GetString("ProfileQuestionService_ProfileQuestionNotFound", resourceCulture);
             }
         }
         
@@ -160,6 +187,15 @@ namespace SMD.Implementation {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User with name {0} does not exist..
+        /// </summary>
+        internal static string WebApiUserService_InvalidUser {
+            get {
+                return ResourceManager.GetString("WebApiUserService_InvalidUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to UserId is invalid..
         /// </summary>
         internal static string WebApiUserService_InvalidUserId {
@@ -174,6 +210,15 @@ namespace SMD.Implementation {
         internal static string WebApiUserService_LoginInfoNotFound {
             get {
                 return ResourceManager.GetString("WebApiUserService_LoginInfoNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Product Type is not provided..
+        /// </summary>
+        internal static string WebApiUserService_ProductTypeNotProvided {
+            get {
+                return ResourceManager.GetString("WebApiUserService_ProductTypeNotProvided", resourceCulture);
             }
         }
         

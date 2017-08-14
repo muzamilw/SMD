@@ -126,6 +126,9 @@
   <data name="WebApiUserService_InvalidEmail" xml:space="preserve">
     <value>Email is invalid.</value>
   </data>
+  <data name="WebApiUserService_ProductTypeNotProvided" xml:space="preserve">
+    <value>Product Type is not provided.</value>
+  </data>
   <data name="WebApiUserService_LoginInfoNotFound" xml:space="preserve">
     <value>No Login info found for provided email.</value>
   </data>
@@ -143,6 +146,9 @@
   </data>
   <data name="WebApiUserService_InvalidUserId" xml:space="preserve">
     <value>UserId is invalid.</value>
+  </data>
+  <data name="WebApiUserService_InvalidUser" xml:space="preserve">
+    <value>User with name {0} does not exist.</value>
   </data>
   <data name="WebApiUserService_InactiveUser" xml:space="preserve">
     <value>This user is not active anymore.</value>
@@ -162,7 +168,16 @@
   <data name="WebApiUserService_SurveyQuestionNotFound" xml:space="preserve">
     <value>Survey Question not found against Id {0}.</value>
   </data>
+  <data name="ProfileQuestionService_ProfileQuestionNotFound" xml:space="preserve">
+    <value>Profile Question not found against Id {0}.</value>
+  </data>
   <data name="Success" xml:space="preserve">
     <value>Success</value>
+  </data>
+  <data name="CollectionService_UserNotFound" xml:space="preserve">
+    <value>Transaction can't be processed as user {0} doesn't exist.</value>
+  </data>
+  <data name="CollectionService_AccountNotRegistered" xml:space="preserve">
+    <value>Transaction can't be processed as user {0} doesn't have {1} registration.</value>
   </data>
 </root>

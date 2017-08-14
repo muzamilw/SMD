@@ -14,7 +14,7 @@ namespace SMD.MIS.Areas.Api.Controllers
     public class SurveyAudienceController : ApiController
     {
 
-        #region Public
+        #region Private
         private readonly ISurveyQuestionService _surveyQuestionService;
         #endregion
         #region Constructor
@@ -39,6 +39,18 @@ namespace SMD.MIS.Areas.Api.Controllers
             }
             else
             {
+                //if (request.CampaignQuizIds == null)
+                //{
+                //    request.CampaignQuizIds = string.Empty;
+                //}
+                //if (request.CampaignQuizAnswerIds == null)
+                //{
+                //    request.CampaignQuizAnswerIds = string.Empty;
+                //}
+                //if(request.CampaignQuizIdsExcluded == null)
+                //{
+                //    request.CampaignQuizIdsExcluded = string.Empty;
+                //}
                 return _surveyQuestionService.GetAudienceCount(request);
             }
 

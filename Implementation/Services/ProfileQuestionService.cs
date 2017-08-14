@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
+using SMD.Common;
+using SMD.ExceptionHandling;
 using SMD.Interfaces.Repository;
 using SMD.Interfaces.Services;
 using SMD.Models.Common;
@@ -11,6 +14,13 @@ using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Web;
+using SMD.Repository.Repositories;
+using SMD.Interfaces;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using SMD.Implementation.Identity;
+
+
 
 namespace SMD.Implementation.Services
 {
@@ -25,87 +35,94 @@ namespace SMD.Implementation.Services
         private readonly ILanguageRepository _languageRepository;
         private readonly IProfileQuestionGroupRepository _profileQuestionGroupRepository;
         private readonly IProfileQuestionAnswerRepository _profileQuestionAnswerRepository;
-        /// <summary>
-        /// Saving Function 
-        /// </summary>
-        private string SaveImage(string mapPath, string existingImage, string caption, string fileName,
-            string fileSource, byte[] fileSourceBytes, bool fileDeleted = false)
+        private readonly IIndustryRepository _industoryRepository;
+        private readonly IEducationRepository _educationRepository;
+        private readonly IProfileQuestionTargetCriteriaRepository _profileQuestionTargetCriteriaRepository;
+        private readonly IProfileQuestionTargetLocationRepository _profileQuestionTargetLocationRepository;
+        private readonly IEmailManagerService _emailManagerService;
+        private readonly IStripeService _stripeService;
+        //private readonly WebApiUserService _webApiUserService;
+        private readonly IProductRepository _productRepository;
+        private readonly ITaxRepository _taxRepository;
+        private readonly IInvoiceRepository _invoiceRepository;
+        private readonly IInvoiceDetailRepository _invoiceDetailRepository;
+        private readonly ICompanyRepository _iCompanyRepository;
+        private readonly ICampaignEventHistoryRepository campaignEventHistoryRepository;     
+        
+        private readonly IProfileQuestionUserAnswerRepository       profileQuestionUserAnswerRepository;
+        private ApplicationUserManager UserManager
         {
-            if (fileSourceBytes == null)
-            {
-                return fileSource;
-            }
-            if (!string.IsNullOrEmpty(fileSource) || fileDeleted)
-            {
-                // Look if file already exists then replace it
-                if (!string.IsNullOrEmpty(existingImage))
-                {
-                    if (Path.IsPathRooted(existingImage))
-                    {
-                        if (File.Exists(existingImage))
-                        {
-                            // Remove Existing File
-                            File.Delete(existingImage);
-                        }
-                    }
-                    else
-                    {
-                        string filePath = HttpContext.Current.Server.MapPath("~/" + existingImage);
-                        if (File.Exists(filePath))
-                        {
-                            // Remove Existing File
-                            File.Delete(filePath);
-                        }
-                    }
-
-                }
-
-                // If File has been deleted then set the specified field as empty
-                // Used for File1, File2, File3, File4, File5
-                if (fileDeleted)
-                {
-                    return string.Empty;
-                }
-
-                // First Time Upload
-                string imageurl = mapPath + "\\" + caption + fileName;
-                File.WriteAllBytes(imageurl, fileSourceBytes);
-
-                int indexOf = imageurl.LastIndexOf("SMD_Content", StringComparison.Ordinal);
-                imageurl = imageurl.Substring(indexOf, imageurl.Length - indexOf);
-                return imageurl;
-            }
-
-            return null;
+            get { return HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
         }
+
         #endregion
         #region Constructor
         /// <summary>
         /// Constructor 
         /// </summary>
 
-        public ProfileQuestionService(IProfileQuestionRepository profileQuestionRepository, ICountryRepository countryRepository, ILanguageRepository languageRepository, IProfileQuestionGroupRepository profileQuestionGroupRepository, IProfileQuestionAnswerRepository profileQuestionAnswerRepository)
+        public ProfileQuestionService(IProfileQuestionRepository profileQuestionRepository, ICountryRepository countryRepository,
+            ILanguageRepository languageRepository, IProfileQuestionGroupRepository profileQuestionGroupRepository,
+            IProfileQuestionAnswerRepository profileQuestionAnswerRepository, IIndustryRepository industoryRepository, IEducationRepository educationRepository, IProfileQuestionTargetCriteriaRepository profileQuestionTargetCriteriaRepository, IProfileQuestionTargetLocationRepository profileQuestionTargetLocationRepository
+            , IEmailManagerService emailManagerService, IStripeService stripeService, IProductRepository productRepository, ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository, ICompanyRepository iCompanyRepository, ICampaignEventHistoryRepository campaignEventHistoryRepository,IProfileQuestionUserAnswerRepository       profileQuestionUserAnswerRepository)
         {
             _profileQuestionRepository = profileQuestionRepository;
             _countryRepository = countryRepository;
             _languageRepository = languageRepository;
             _profileQuestionGroupRepository = profileQuestionGroupRepository;
             _profileQuestionAnswerRepository = profileQuestionAnswerRepository;
+            _industoryRepository = industoryRepository;
+            _educationRepository = educationRepository;
+            _profileQuestionTargetCriteriaRepository = profileQuestionTargetCriteriaRepository;
+            _profileQuestionTargetLocationRepository = profileQuestionTargetLocationRepository;
+            _emailManagerService = emailManagerService;
+            _stripeService = stripeService;
+            //_webApiUserService = webApiUserService;
+            _productRepository = productRepository;
+            _taxRepository = taxRepository;
+            _invoiceRepository = invoiceRepository;
+            _invoiceDetailRepository = invoiceDetailRepository;
+            _iCompanyRepository = iCompanyRepository;
+             this.campaignEventHistoryRepository = campaignEventHistoryRepository;
+            this.profileQuestionUserAnswerRepository=        profileQuestionUserAnswerRepository;
         }
 
         #endregion
+
         #region Public
+
+       
+
         /// <summary>
         /// Profile Question Search request 
         /// </summary>
         public ProfileQuestionSearchRequestResponse GetProfileQuestions(ProfileQuestionSearchRequest request)
         {
             int rowCount;
+            // var obj = _profileQuestionRepository.SearchProfileQuestions(request, out rowCount);
+
+
+            //string code = Convert.ToString((int)ProductCode.);
+            //var product = productRepository.GetAll().Where(g => g.ProductCode == code).FirstOrDefault();
+            //var userBaseData = surveyQuestionRepository.getBaseData();
+            //double? setupPrice = 0;
+            //if (product != null)
+            //{
+            //    userBaseData.CurrencySymbol = product.Currency != null ? product.Currency.CurrencyCode : "$";
+            //    setupPrice = product.SetupPrice;
+            //}
             return new ProfileQuestionSearchRequestResponse
             {
                 ProfileQuestions = _profileQuestionRepository.SearchProfileQuestions(request, out rowCount),
+                Countries = _countryRepository.GetAllCountries(),
+                Languages = _languageRepository.GetAllLanguages(),
+                Professions = _industoryRepository.GetAll(),
+                Education = _educationRepository.GetAll(),
+                Industry = _industoryRepository.GetAll(),
+                objBaseData = _profileQuestionRepository.getBaseData(),
                 TotalCount = rowCount
             };
+
         }
 
         /// <summary>
@@ -113,10 +130,10 @@ namespace SMD.Implementation.Services
         /// </summary>
         public bool DeleteProfileQuestion(ProfileQuestion profileQuestion)
         {
-            var dBprofileQuestion=_profileQuestionRepository.Find(profileQuestion.PqId);
+            var dBprofileQuestion = _profileQuestionRepository.Find(profileQuestion.PqId);
             if (dBprofileQuestion != null)
             {
-                dBprofileQuestion.Status = (Int32)ObjectStatus.Archived;     
+                dBprofileQuestion.Status = (Int32)ObjectStatus.Archived;
                 _profileQuestionRepository.SaveChanges();
                 return true;
             }
@@ -133,7 +150,8 @@ namespace SMD.Implementation.Services
                 Countries = _countryRepository.GetAllCountries(),
                 Languages = _languageRepository.GetAllLanguages(),
                 ProfileQuestionGroups = _profileQuestionGroupRepository.GetAllProfileQuestionGroups(),
-                ProfileQuestions = _profileQuestionRepository.GetAllProfileQuestions()
+                ProfileQuestions = _profileQuestionRepository.GetAllProfileQuestions(),
+                objBaseData = _profileQuestionRepository.getBaseData(),
             };
         }
 
@@ -142,15 +160,20 @@ namespace SMD.Implementation.Services
         /// </summary>
         public ProfileQuestion SaveProfileQuestion(ProfileQuestion source)
         {
-            var serverObj=_profileQuestionRepository.Find(source.PqId);
+            var user = UserManager.Users.Where(g => g.Id == _profileQuestionRepository.LoggedInUserIdentity).SingleOrDefault();
+
+
+            var serverObj = _profileQuestionRepository.Find(source.PqId);
+            //var user = UserManager.Users.Where(g => g.Id == _profileQuestionRepository.LoggedInUserIdentity).SingleOrDefault();
+
             #region Edit Question
             // Edit Profile Question 
             if (serverObj != null)
             {
                 serverObj.Question = source.Question;
+
                 serverObj.Priority = source.Priority;
                 serverObj.HasLinkedQuestions = source.HasLinkedQuestions;
-
                 serverObj.LanguageId = source.LanguageId;
                 serverObj.CountryId = source.CountryId;
                 serverObj.ProfileGroupId = source.ProfileGroupId;
@@ -160,9 +183,23 @@ namespace SMD.Implementation.Services
                 serverObj.ModifiedDate = source.ModifiedDate;
                 serverObj.PenalityForNotAnswering = source.PenalityForNotAnswering;
                 serverObj.Status = source.Status;
-                serverObj.ModifiedDate = DateTime.Now;
+                serverObj.AmountCharged = source.AmountCharged;
+                serverObj.ModifiedDate = DateTime.Now.Add(-(_profileQuestionRepository.UserTimezoneOffSet));
+
+                _profileQuestionRepository.SaveChanges();
+
+
+                //event history
+                campaignEventHistoryRepository.InsertProfileQuestionEvent((AdCampaignStatus)serverObj.Status, serverObj.PqId);
+
+
+
                 if (source.ProfileQuestionAnswers != null)
                 {
+                    if (serverObj.ProfileQuestionAnswers == null)
+                    {
+                        serverObj.ProfileQuestionAnswers = new List<ProfileQuestionAnswer>();
+                    }
                     #region Answer Add/Edit
                     // Add/Edit Answer
                     foreach (var answer in source.ProfileQuestionAnswers)
@@ -174,7 +211,6 @@ namespace SMD.Implementation.Services
                             serverAns.Type = answer.Type;
                             serverAns.AnswerString = answer.AnswerString;
                             serverAns.ImagePath = answer.ImagePath;
-
                             serverAns.LinkedQuestion1Id = answer.LinkedQuestion1Id;
                             serverAns.LinkedQuestion2Id = answer.LinkedQuestion2Id;
                             serverAns.LinkedQuestion3Id = answer.LinkedQuestion3Id;
@@ -184,6 +220,7 @@ namespace SMD.Implementation.Services
                             serverAns.LinkedQuestion6Id = answer.LinkedQuestion6Id;
                             serverAns.PqAnswerId = answer.PqAnswerId;
                             serverAns.SortOrder = answer.SortOrder;
+                            serverAns.Status = (int)ObjectStatus.Active;
                             if (serverAns.Type == 2)
                             {
                                 serverAns.ImagePath = SaveAnswerImage(serverAns);
@@ -197,6 +234,7 @@ namespace SMD.Implementation.Services
                                 Type = answer.Type,
                                 AnswerString = answer.AnswerString,
                                 ImagePath = answer.ImagePath,
+                                Status = (int)ObjectStatus.Active,
                                 LinkedQuestion1Id = answer.LinkedQuestion1Id,
                                 LinkedQuestion2Id = answer.LinkedQuestion2Id,
                                 LinkedQuestion3Id = answer.LinkedQuestion3Id,
@@ -206,38 +244,55 @@ namespace SMD.Implementation.Services
                                 PqAnswerId = answer.PqAnswerId,
                                 SortOrder = answer.SortOrder
                             };
+                            if (serverAns.Type == 2)
+                            {
+                                serverAns.ImagePath = SaveAnswerImage(serverAns);
+                            }
                             _profileQuestionAnswerRepository.Add(serverAns);
+                            serverObj.ProfileQuestionAnswers.Add(serverAns);
                         }
                     }
 
                     #endregion
                 }
-              
-                    #region Answer Deletion
+
+                #region Answer Deletion
 
                 if (source.ProfileQuestionAnswers == null)
                 {
-                    source.ProfileQuestionAnswers= new Collection<ProfileQuestionAnswer>();
+                    source.ProfileQuestionAnswers = new Collection<ProfileQuestionAnswer>();
                 }
-                    var serverListOfAns = _profileQuestionAnswerRepository.GetProfileQuestionAnswerByQuestionId(source.PqId);
-                    if (serverListOfAns != null)
+                var serverListOfAns = _profileQuestionAnswerRepository.GetProfileQuestionAnswerByQuestionId(source.PqId);
+                if (serverListOfAns != null)
+                {
+                    foreach (var serverAns in serverListOfAns)
                     {
-                        foreach (var serverAns in serverListOfAns)
+                        if (!source.ProfileQuestionAnswers.Any(ans => ans.PqAnswerId == serverAns.PqAnswerId))
                         {
-                            if (!source.ProfileQuestionAnswers.Any(ans => ans.PqAnswerId == serverAns.PqAnswerId))
-                            {
-                                serverAns.Status = (Int32)ObjectStatus.Archived;   
-                            }
+                            serverAns.Status = (Int32)ObjectStatus.Archived;
                         }
                     }
-                    #endregion
+                }
+                #endregion
             }
             #endregion
             #region Add Question
             else
             {
-                serverObj= new ProfileQuestion
+
+                IEnumerable<SmdRoleClaimValue> roleClaim = ClaimHelper.GetClaimsByType<SmdRoleClaimValue>(SmdClaimTypes.Role);
+                string RoleName = roleClaim != null && roleClaim.Any() ? roleClaim.ElementAt(0).Role : "Role Not Loaded";
+
+                int? compid = 0;
+
+                if (RoleName.StartsWith("Franchise"))
+                    compid = null;
+                else
+                    compid = _profileQuestionRepository.CompanyId;
+
+                serverObj = new ProfileQuestion
                 {
+
                     Question = source.Question,
                     Priority = source.Priority,
                     HasLinkedQuestions = source.HasLinkedQuestions,
@@ -249,19 +304,49 @@ namespace SMD.Implementation.Services
                     SkippedCount = source.SkippedCount,
                     ModifiedDate = source.ModifiedDate,
                     PenalityForNotAnswering = source.PenalityForNotAnswering,
-                    Status = source.Status
+                    Status = source.Status,
+                    CompanyId = compid,
+                    AgeRangeStart = source.AgeRangeStart,
+                    AgeRangeEnd = source.AgeRangeEnd,
+                    Gender = source.Gender,
+                    SubmissionDateTime = source.SubmissionDateTime,
+                    CreatedBy = source.CreatedBy,
+                    UserID = source.UserID,
+                    AmountCharged = source.AmountCharged,
+                    AnswerNeeded = source.AnswerNeeded
+                    //    CreatedBy = user.FullName
                 };
+                serverObj.CompanyId = compid;
+                if (serverObj.Status == 2)
+                {
+                    serverObj.SubmissionDateTime = DateTime.Now;
+                }
+                if (user != null)
+                {
+                    serverObj.CreatedBy = user.FullName;
+                    serverObj.UserID = user.Id;
+                }
+                serverObj.CreationDate = DateTime.Now;
                 _profileQuestionRepository.Add(serverObj);
                 _profileQuestionRepository.SaveChanges();
+
+
+                 //event history
+                campaignEventHistoryRepository.InsertProfileQuestionEvent((AdCampaignStatus)serverObj.Status, serverObj.PqId);
+
+
+
+                if (serverObj.ProfileQuestionAnswers == null)
+                {
+                    serverObj.ProfileQuestionAnswers = new List<ProfileQuestionAnswer>();
+                }
                 foreach (var answer in source.ProfileQuestionAnswers)
                 {
-                    var serverAns = _profileQuestionAnswerRepository.Find(answer.PqAnswerId);
-                        serverAns = new ProfileQuestionAnswer
+                    var serverAns = new ProfileQuestionAnswer
                         {
                             PqId = serverObj.PqId,
                             Type = answer.Type,
                             AnswerString = answer.AnswerString,
-                            ImagePath = answer.ImagePath,
                             LinkedQuestion1Id = answer.LinkedQuestion1Id,
                             LinkedQuestion2Id = answer.LinkedQuestion2Id,
                             LinkedQuestion3Id = answer.LinkedQuestion3Id,
@@ -269,17 +354,73 @@ namespace SMD.Implementation.Services
                             LinkedQuestion5Id = answer.LinkedQuestion5Id,
                             LinkedQuestion6Id = answer.LinkedQuestion6Id,
                             PqAnswerId = answer.PqAnswerId,
-                            SortOrder = answer.SortOrder
+                            SortOrder = answer.SortOrder,
+                            Status = (int)ObjectStatus.Active
                         };
-                        _profileQuestionAnswerRepository.Add(serverAns);
+                    if (serverAns.Type == 2)
+                    {
+                        serverAns.ImagePath = SaveAnswerImage(answer);
+                    }
+                    _profileQuestionAnswerRepository.Add(serverAns);
+                    _profileQuestionAnswerRepository.SaveChanges();
+                    serverObj.ProfileQuestionAnswers.Add(serverAns);
                 }
             }
             #endregion
-            _profileQuestionAnswerRepository.SaveChanges();
+            foreach (var loc in source.ProfileQuestionTargetLocations)
+            {
+                if (loc.ID > 0 && loc.IsDeleted)
+                {
+                    _profileQuestionTargetCriteriaRepository.RemoveCriteria(loc.PQID ?? 0);
+                }
+                else
+                {
+                    if (loc.ID != null && loc.ID != 0)
+                    {
+                        _profileQuestionTargetLocationRepository.UpdateTargetLocation(loc);
+                        
+                    }
+                    else
+                    {
+                        if (loc.CityID > 0 && loc.CountryID > 0)
+                        {
+                            loc.PQID = serverObj.PqId;
+                            _profileQuestionTargetLocationRepository.Add(loc);
+                            _profileQuestionTargetLocationRepository.SaveChanges();
+                        }
+                    }
+                }
+            }
+            // add or update criteria
+            foreach (var criteria in source.ProfileQuestionTargetCriterias)
+            {
+                if (criteria.ID > 0 && criteria.IsDeleted)
+                {
+                    _profileQuestionTargetCriteriaRepository.RemoveCriteria(criteria.PQID ?? 0);
+                }
+                else
+                {
+                    if (criteria.ID != null && criteria.ID != 0)
+                    {
+                        if (criteria.PQAnswerID != null && criteria.PQAnswerID != 0)
+                        {
+                            if (criteria.Type != (int)ProfileQuestionTargetCriteriaType.Language && criteria.Type != (int)ProfileQuestionTargetCriteriaType.Industry)  // industry and languages are addable and deleteable
+                                _profileQuestionTargetCriteriaRepository.UpdateTargetcriteria(criteria);
+                        }
+                    }
+                    else
+                    {
+                         criteria.PQID = serverObj.PqId;
+                        _profileQuestionTargetCriteriaRepository.Add(criteria);
+                        _profileQuestionTargetCriteriaRepository.SaveChanges();
+                    }
+                }
+            }
+            
             return _profileQuestionRepository.Find(serverObj.PqId);
 
         }
-        
+
         /// <summary>
         /// Save Answer Image
         /// </summary>
@@ -288,7 +429,7 @@ namespace SMD.Implementation.Services
             string mpcContentPath = ConfigurationManager.AppSettings["SMD_Content"];
             HttpServerUtility server = HttpContext.Current.Server;
             string mapPath =
-                server.MapPath(mpcContentPath + "/ProfileQuestions/" + "PQId-"+source.PqId +
+                server.MapPath(mpcContentPath + "/ProfileQuestions/" + "PQId-" + source.PqId +
                                "/PQAId-" + source.PqAnswerId);
 
             if (!Directory.Exists(mapPath))
@@ -296,8 +437,8 @@ namespace SMD.Implementation.Services
                 Directory.CreateDirectory(mapPath);
             }
 
-            mapPath = SaveImage(mapPath, string.Empty, string.Empty,
-                "AnswerImage_"+DateTime.Now.Second+".png", source.ImagePath, source.ImageUrlBytes);
+            mapPath = ImageHelper.Save(mapPath, string.Empty, string.Empty,
+                "AnswerImage_" + DateTime.Now.Second + ".png", source.ImagePath, source.ImageUrlBytes);
 
             return mapPath;
         }
@@ -315,7 +456,7 @@ namespace SMD.Implementation.Services
             foreach (var pqGroup in allPqGroups)
             {
                 var unAnsweredQuestionsCount = _profileQuestionRepository.GetCountOfUnAnsweredQuestionsByGroupId(pqGroup.ProfileGroupId, request.UserId);
-               int totalQuestionsCount= _profileQuestionRepository.GetTotalCountOfGroupQuestion(pqGroup.ProfileGroupId);
+                int totalQuestionsCount = _profileQuestionRepository.GetTotalCountOfGroupQuestion(pqGroup.ProfileGroupId);
                 if (unAnsweredQuestionsCount > 0)
                 {
                     request.GroupId = pqGroup.ProfileGroupId;
@@ -334,8 +475,241 @@ namespace SMD.Implementation.Services
                 PercentageCompleted = percentageCompleted
             };
         }
-       
+        //private ApplicationUserManager UserManager
+        //{
+        //    get { return HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
+        //}
+        public ProfileQuestionResponseModelForApproval GetProfileQuestionForAproval(GetPagedListRequest request)
+        {
+            int rowCount;
+            return new ProfileQuestionResponseModelForApproval
+            {
+                Coupons = _profileQuestionRepository.GetProfileQuestionsForApproval(request, out rowCount).ToList(),
+                TotalCount = rowCount
+            };
+        }
+        //public List<ProfileQuestionTargetLocation> GetPQlocation(long pqId)
+        //{
+        //    return _profileQuestionTargetLocationRepository.GetPQlocation(pqId);
+
+        //}
+        public string UpdatePQForApproval(ProfileQuestion source)
+        {
+            string respMesg = "True";
+            var dbCo = _profileQuestionRepository.Find(source.PqId);
+            var userData = UserManager.FindById(dbCo.UserID);
+            // Update 
+            if (dbCo != null)
+            {
+                // Approval
+                if (source.Approved == true)
+                {
+                    // Stripe payment + Invoice Generation
+                    // Muzi bhai said we will see it on latter stage 
+
+                    //todo pilot: unCommenting Stripe payment code on Ads approval
+                    if (dbCo.CompanyId == null)
+                    {
+                        dbCo.Approved = true;
+                        dbCo.ApprovalDate = DateTime.Now;
+                        dbCo.ApprovedByUserID = _profileQuestionRepository.LoggedInUserIdentity;
+                        dbCo.Status = (Int32)AdCampaignStatus.Live;
+                    }
+                    else
+                    {
+                        if (userData.Company.IsSpecialAccount != true)
+                        {
+                            respMesg = MakeStripePaymentandAddInvoiceForPQ(dbCo);
+                        }
+                        if (respMesg.Contains("Failed"))
+                        {
+                            return respMesg;
+                        }
+                        else
+                        {
+                            dbCo.Approved = true;
+                            dbCo.ApprovalDate = DateTime.Now;
+                            dbCo.ApprovedByUserID = _profileQuestionRepository.LoggedInUserIdentity;
+                            dbCo.Status = (Int32)AdCampaignStatus.Live;
+                        }
+                    }
+                }
+                // Rejection 
+                else
+                {
+                    dbCo.Status = (Int32)AdCampaignStatus.ApprovalRejected;
+                    dbCo.Approved = false;
+                    dbCo.RejectionReason = source.RejectionReason.ToString();
+                    _emailManagerService.SendProfileQuestionRejectionEmailForApproval(dbCo.UserID, dbCo.RejectionReason);
+                }
+                dbCo.ModifiedDate = DateTime.Now;
+                dbCo.ModifiedBy = _profileQuestionRepository.LoggedInUserIdentity;
+                _profileQuestionRepository.SaveChanges();
+
+                    //event history
+                campaignEventHistoryRepository.InsertProfileQuestionEvent((AdCampaignStatus)dbCo.Status, dbCo.PqId);
+
+
+            }
+            return respMesg;
+        }
+        private string MakeStripePaymentandAddInvoiceForPQ(ProfileQuestion source)
+        {
+            #region Stripe Payment
+            string response = null;
+            Boolean isSystemUser = false;
+            double amount = 0;
+            // User who added Campaign for approval 
+            var user = UserManager.FindById(source.UserID);
+            // Get Current Product
+            var product = (dynamic)null;
+            product = _productRepository.GetProductByCountryId("PQID");
+
+            // Tax Applied
+            var tax = _taxRepository.GetTaxByCountryId(user.Company.CountryId);
+            // Total includes tax
+            if (product != null)
+            {
+                if (source.AmountCharged!=null)
+                amount = source.AmountCharged ?? 0 + tax.TaxValue ?? 0;
+                else
+                    amount = 0 ;
+                // If It is not System User then make transation 
+                //if (user.Roles.Any(role => role.Name.ToLower().Equals("user")))
+                //{
+                // Make Stripe actual payment 
+                response = _stripeService.ChargeCustomer((int?)amount, user.Company.StripeCustomerId);
+                isSystemUser = false;
+
+            }
+
+            #endregion
+
+            if (response != null && !response.Contains("Failed"))
+            {
+                if (source.CompanyId != null)
+                {
+                    TransactionManager.ProfileQuestionApproveTransaction(source.PqId, amount, source.CompanyId.Value);
+                    String CompanyName = _iCompanyRepository.GetCompanyNameByID(source.CompanyId.Value);
+
+                    #region Add Invoice
+
+                    // Add invoice data
+                    var invoice = new Invoice
+                    {
+                        Country = user.Company.CountryId.ToString(),
+                        Total = (double)amount,
+                        NetTotal = (double)amount,
+                        InvoiceDate = DateTime.Now,
+                        InvoiceDueDate = DateTime.Now.AddDays(7),
+                        Address1 = user.Company.CountryId.ToString(),
+                        CompanyId = user.Company.CompanyId,
+                        CompanyName = CompanyName,
+                        CreditCardRef = response
+                    };
+                    _invoiceRepository.Add(invoice);
+
+                    #endregion
+                    #region Add Invoice Detail
+
+                    // Add Invoice Detail Data 
+                    var invoiceDetail = new InvoiceDetail
+                    {
+                        InvoiceId = invoice.InvoiceId,
+                        ProductId = product.ProductId,
+                        ItemName = product.ProductName,
+                        ItemAmount = (double)amount,
+                        ItemTax = (double)(tax != null ? tax.TaxValue : 0),
+                        ItemDescription = "This is description!",
+                        ItemGrossAmount = (double)amount,
+                        PQID = source.PqId,
+
+                    };
+                    _invoiceDetailRepository.Add(invoiceDetail);
+                    _invoiceDetailRepository.SaveChanges();
+
+                    #endregion
+                }
+            }
+            return response;
+        }
+
+        public ProfileQuestionGroup GetPQGroupById(int id)
+        {
+            return _profileQuestionGroupRepository.Find(id);
         
+        }
+        public IEnumerable<getSurvayByPQID_Result> getSurvayByPQIDAnalytics(int PQId, int CampStatus, int dateRange, int Granularity)
+        {
+
+            return this._profileQuestionRepository.getSurvayByPQIDAnalytics(PQId, CampStatus, dateRange, Granularity);
+        }
+        public IEnumerable<getSurveyByPQIDRatioAnalytic_Result> getSurveyByPQIDRatioAnalytic(int ID, int dateRange)
+        {
+            return _profileQuestionRepository.getSurveyByPQIDRatioAnalytic(ID, dateRange);
+        }
+        public IEnumerable<getSurvayByPQIDtblAnalytic_Result> getSurvayByPQIDtblAnalytic(int ID)
+        {
+            return _profileQuestionRepository.getSurvayByPQIDtblAnalytic(ID);
+        }
+
+
+        public IEnumerable<GetUserProfileQuestionsList_Result> GetUserProfileQuestionsList(string UserID)
+        {
+            return _profileQuestionRepository.GetUserProfileQuestionsList(UserID);
+        }
+
+
+        public bool SaveUserProfileQuestionResponse(int PQID, string UserID, int CompanyId, int[] ProfileQuestionAnswerIds)
+        {
+
+            if (ProfileQuestionAnswerIds != null && ProfileQuestionAnswerIds.Count() > 0 && ProfileQuestionAnswerIds[0] != -1)
+            {
+                foreach (var ansId in ProfileQuestionAnswerIds)
+                {
+                    var newAnswer = new ProfileQuestionUserAnswer
+                    {
+                        PQID = PQID,
+                        AnswerDateTime = DateTime.Now,
+                        PQAnswerID = ansId,
+                        UserID = UserID,
+                        ResponseType = 3,
+                        CompanyId = CompanyId
+                    };
+                    profileQuestionUserAnswerRepository.Add(newAnswer);
+                }
+            }
+            else
+            {
+                //other events processing if not answerered
+
+                var newAnswer = new ProfileQuestionUserAnswer
+                    {
+                        PQID = PQID,
+                        AnswerDateTime = DateTime.Now,
+                        PQAnswerID = null,
+                        UserID = UserID,
+                        ResponseType = 3,
+                        CompanyId = CompanyId
+                    };
+                profileQuestionUserAnswerRepository.Add(newAnswer);
+            }
+        
+            profileQuestionUserAnswerRepository.SaveChanges();
+
+            var profileQuestion = _profileQuestionRepository.Find(PQID);
+            //rewarding and increasing count happens only when they answer it.
+            //updating answer count
+            profileQuestion.AsnswerCount = (profileQuestion.AsnswerCount.HasValue ? profileQuestion.AsnswerCount.Value : 0) + 1;
+            _profileQuestionRepository.Update(profileQuestion);
+            _profileQuestionRepository.SaveChanges();
+            return true;
+
+        }
+
+
         #endregion
+
+
     }
 }

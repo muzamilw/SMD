@@ -9,17 +9,12 @@
         SHA512
     }
     
-    /// <summary>
-    /// Roles
-    /// </summary>
-    public static class Roles
+    
+    public enum CompanyType
     {
-        public static string Adminstrator { get { return "AMD Admin"; } }
-        public static string Approver { get { return "SMD Approver"; } }
-        public static string Editor { get { return "SMD Editor"; } }
-        public static string User { get { return "User"; } }
+        User = 2,
+        SMD = 1
     }
-
     public enum RequestType
     {
         Xml = 0, 
@@ -27,35 +22,83 @@
     }
 
     /// <summary>
-    /// System Email Types
+    /// System Email Types 
     /// </summary>
     public enum EmailTypes
     {
-        RegisterConfirm = 5,
         VerifyAccount = 6, // Email Confirmation
-        SuuportTicketReciept = 7,
-        TicketAssignedToUser = 12,
-        IssueResolved = 13,
-        TicketReAssignedToUser = 14,
-        DeveloperDueDate = 15,
-        DeveloperQuestion = 16,
         ResetPassword = 9,
         RegistrationConfirmed = 1,
         QuestionApproved = 10,
-        QuestionRejected = 11
-    }
+        QuestionRejected = 11,
+        CollectionMade=12,
+        PayoutNotificationToUser=13,
+        Voucher = 14,
+       InviteUsers = 15,
+       BuyItUsers = 16,
+       VoucherPaymentEmail = 14,
+       VideoAdCampaignApproved = 17,
+       VideoAdCampaignReject = 18,
+       PayoutNotificationToAdmin = 19,
+        InviteBusiness = 20,
+        InviteAdvertiser = 21,
+        AppFeedbackFromUser = 22,
+        SubscriptionPaymentFailed = 23,
+        DeleteAccountConfirmationEmail = 24,
+        SubscriptionCreated = 25,
+        CouponApproved = 26,
+        CouponRejected = 27,
+        DisplayAdCampaignApproved = 28,
+        DisplayAdCampaignRejected = 29,
+        PicturePollCampaignApproved = 30,
+        PicturePollCampaignRejected = 31,
+        NewCouponsNearMe = 32,
+        Last3DaysPercentageCouponsNearMe = 33,
+        Last2DaysPercentageCouponsNearMe = 34,
+        LastDayPercentageCouponsNearMe = 35,
+        Last3DaysDollarDiscountCouponsNearMe = 36,
+        Last2DaysDollarDiscountCouponsNearMe = 37,
+        LastDayDollarDiscountCouponsNearMe = 38,
+        WeeklyVideoAdPerformanceStats = 39,
+        WeeklyDisplayAdPerformanceStats = 40,
+        WeeklyDealPerformanceStats = 41,
+        WeeklyPollSurveyPerformanceStats = 42,
+        DealReviewNotificationToAdvertiser = 43,
+        NewUserSignupToAdmin = 44,
+        DealExpiryNotificationToAdvertiser = 45,
+        ThreeDayDealExpiryNotificationToAdvertiser = 46,
+        VideoAdCampaignSubmitted = 47,
+        DisplayAdCampaignSubmitted = 48,
+        CouponSubmitted = 49,
+        PicturePollCampaignSubmitted = 50,
 
+
+        ToAdvertiserLast3Days20PercentageCoupons = 51,
+        ToAdvertiserLast2Days25PercentageCoupons = 52,
+        ToAdvertiserLastDay30PercentageCoupons = 53,
+        ToAdvertiserLast3Days10DollarDiscountCoupons = 54,
+        ToAdvertiserLast2Days20DollarDiscountCoupons = 55,
+        ToAdvertiserLastDay30DollarDiscountCoupons = 56,
+
+
+        UserCategoryClickWeekdaysEmail = 57,
+        
+
+    }
+     
     public enum AdCampaignCriteriaType
     {
         ProfileQuestion = 1,
         SurveyQuestion = 2,
-        Language = 3
+        Language = 3,
+        QuizQustion = 6
     }
     public enum AdCampaignType
     {
         Video = 1,
         Link = 2,
-        Other = 3
+        Other = 3,
+        Coupon = 5
     }
 
     public enum AdCampaignStatus 
@@ -65,7 +108,10 @@
         Live = 3,
         Paused = 4,
         Completed = 5,
-        ApprovalRejected = 6
+        ApprovalRejected = 6,
+        Remove = 7,
+        Archived = 8,
+        AutoComplete = 9
     }
     /// <summary>
     /// Object Status enum for profile question
@@ -73,7 +119,7 @@
     public enum ObjectStatus
     {
         Archived=0,
-        Acitve =1
+        Active =1
     }
 
     /// <summary>
@@ -136,29 +182,50 @@
     }
 
     /// <summary>
+    /// System User
+    /// </summary>
+    public static class SystemUsers
+    {
+        public static string Cash4Ads { get { return "cash4ads@cash4ads.com"; } }
+    }
+
+    /// <summary>
     /// Transaction Types
     /// </summary>
     public enum TransactionType
     {
-        /// <summary>
-        /// Ad Click / Viewed
-        /// </summary>
+       
         AdClick = 1,
-
-        /// <summary>
-        /// Approve Survey
-        /// </summary>
         ApproveSurvey = 2,
+        ViewSurveyReport = 3,
+        CouponPurchased = 4,
+        SurveyWatched = 5,
+        ProfileQuestionAnswered = 6,
+        ApproveProfileQuestion = 7,
+        ApproveCoupon = 8,
+        ApproveAd = 9,
+        UserCashOutPaypal = 10,
+        AdWeeklyCollection = 11,
+        WelcomeGiftBalance = 12,
+        PromotionalCentz = 13,
+        ReferFriendBalance = 14,
+        UnCollectedCentz = 14
 
-        /// <summary>
-        /// View Survey Report
-        /// </summary>
-        ViewSurveyReport = 3
+
     }
     public enum SurveyQuestionTargetCriteriaType
     {
-        ProfileQuestion = 1, 
+        ProfileQuestion = 1,
+        UserProfileQuestion = 6, 
         SurveryQuestion = 2, 
+        Language = 3,
+        Industry = 4,
+        Education = 5
+    }
+    public enum ProfileQuestionTargetCriteriaType
+    {
+        ProfileQuestion = 1,
+        SurveryQuestion = 2,
         Language = 3,
         Industry = 4,
         Education = 5
@@ -168,5 +235,54 @@
         SurveyQuestion = 1,
         AdApproval = 2,
         DownloadReport = 3
+    }
+
+    /// <summary>
+    /// User Account Types
+    /// </summary>
+    public enum AccountType
+    {
+        Stripe =1 ,
+        Paypal=2,
+        GoogleWallet=3,
+        VirtualAccount=4
+    }
+
+    /// <summary>
+    /// User payment mehtod  Types
+    /// </summary>
+    public enum PaymentMethod
+    {
+        Paypal = 1,
+        Coupon = 3
+    }
+    public enum CampaignType
+    {
+        VideoAd = 1,
+        GameAd = 4,
+        SurveyQuestion = 2,
+        ProfileQuestion = 3
+    }
+
+
+    public enum CampaignResponseEventType
+    {
+        Opened = 1,
+        BuyItbuttonClicked = 2,
+        Answered =3,
+        Skip = 4,
+        
+
+
+    }
+
+
+    /// <summary>
+    /// Ad Reward
+    /// </summary>
+    public enum AdRewardType
+    {
+        Cash = 1,
+        Voucher = 2
     }
 }

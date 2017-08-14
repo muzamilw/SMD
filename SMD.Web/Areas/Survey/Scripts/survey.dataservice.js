@@ -50,9 +50,24 @@ define("survey/survey.dataservice", function () {
                         dataType: 'json',
                         type: 'GET'
                     });
+                    amplify.request.define('getProduct', 'ajax', {
+                        url: '/Api/GetProduct',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
+                    amplify.request.define('getSurvayAnalytics', 'ajax', {
+                        url: '/Api/SurvayQuestionAnalytic',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
+                    amplify.request.define('getRandomPolls', 'ajax', {
+                        url: '/Api/GetRandomPolls',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
                     isInitialized = true;
                 }
-            },
+            }, // 
             // callings ads comapaign service for profile questions and survey questions list 
             getBaseData = function (params, callbacks) {
                 initialize();
@@ -73,6 +88,14 @@ define("survey/survey.dataservice", function () {
                     data: params
                 });
             },
+            getProduct = function (callbacks) {
+                initialize();
+                return amplify.request({
+                    resourceId: 'getProduct',
+                    success: callbacks.success,
+                    error: callbacks.error,
+                });
+            },
                // get survey Questions
             getSurveyQuestion = function (params, callbacks) {
                 initialize();
@@ -83,6 +106,7 @@ define("survey/survey.dataservice", function () {
                     data: params
                 });
             },
+
             // get audiance Count
              getAudienceData = function (params, callbacks) {
                  initialize();
@@ -103,6 +127,15 @@ define("survey/survey.dataservice", function () {
                        error: callbacks.error,
                    });
                },
+			  getSurvayAnalytics = function (params, callbacks) {
+			      initialize();
+			      return amplify.request({
+			          resourceId: 'getSurvayAnalytics',
+			          data: params,
+			          success: callbacks.success,
+			          error: callbacks.error,
+			      });
+			  },
            addSurveyData = function (params, callbacks) {
                initialize();
                return amplify.request({
@@ -111,8 +144,17 @@ define("survey/survey.dataservice", function () {
                    success: callbacks.success,
                    error: callbacks.error,
                });
-              
-           };
+
+           },
+            getRandomPolls = function (callbacks) {
+                initialize();
+
+                return amplify.request({
+                    resourceId: 'getRandomPolls',
+                    success: callbacks.success,
+                    error: callbacks.error,
+                });
+            };
 
         return {
             getBaseData: getBaseData,
@@ -120,7 +162,10 @@ define("survey/survey.dataservice", function () {
             addSurveyData: addSurveyData,
             getSurveyQuestion: getSurveyQuestion,
             getAudienceData: getAudienceData,
-            getSurveyParentList:getSurveyParentList
+            getSurveyParentList: getSurveyParentList,
+            getProduct: getProduct,
+            getSurvayAnalytics: getSurvayAnalytics,
+            getRandomPolls: getRandomPolls
         };
        
     })();

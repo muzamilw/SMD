@@ -1,5 +1,6 @@
 ﻿
 
+using System;
 namespace SMD.Models.DomainModels
 {
     /// <summary>
@@ -28,6 +29,9 @@ namespace SMD.Models.DomainModels
         public long? SqId { get; set; }
 
         public int? ProductId { get; set; }
+
+        public Nullable<int> PQID { get; set; }
+        public Nullable<long> CouponID { get; set; }
         #endregion
         #region Navigational
 
@@ -35,6 +39,8 @@ namespace SMD.Models.DomainModels
         public virtual Invoice Invoice { get; set; }
         public virtual Product Product { get; set; }
         public virtual SurveyQuestion SurveyQuestion { get; set; }
+        public virtual Coupon Coupon { get; set; }
+        public virtual ProfileQuestion ProfileQuestion { get; set; }
         #endregion
     }
 }

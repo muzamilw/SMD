@@ -1,4 +1,5 @@
 ﻿using SMD.Models.IdentityModels;
+using System;
 using System.Collections.Generic;
 
 namespace SMD.Models.DomainModels
@@ -8,6 +9,9 @@ namespace SMD.Models.DomainModels
         public int CountryId { get; set; }
         public string CountryName { get; set; }
         public string CountryCode { get; set; }
+        public string CountryPhoneCode { get; set; }
+
+        public Nullable<int> CurrencyID { get; set; }
 
 
 
@@ -20,5 +24,12 @@ namespace SMD.Models.DomainModels
         public virtual ICollection<Tax> Taxes { get; set; }
 
         public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<Company> Companies { get; set; }
+
+        public virtual Currency Currency { get; set; }
+
+        public virtual ICollection<ProfileQuestionTargetLocation> ProfileQuestionTargetLocations { get; set; }
+
+        public virtual ICollection<User> AspNetUsers { get; set; }
     }
 }

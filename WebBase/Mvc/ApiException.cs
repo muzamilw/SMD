@@ -56,9 +56,9 @@ namespace SMD.WebBase.Mvc
         }
         private void SetGeneralExceptionApplicationResponse(HttpActionExecutedContext filterContext)
         {
-            string exceptionMessage = filterContext.Exception == null || HttpContext.Current.IsDebuggingEnabled
+            string exceptionMessage = filterContext.Exception == null //|| HttpContext.Current.IsDebuggingEnabled
                 ? string.Empty
-                : filterContext.Exception.InnerException.Message;
+                : filterContext.Exception.ToString();
 
 // ReSharper disable SuggestUseVarKeywordEvident
             SMDExceptionContent contents = new SMDExceptionContent

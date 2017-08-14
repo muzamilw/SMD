@@ -9,8 +9,6 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SMD.Models.IdentityModels;
 
 namespace SMD.Repository.Repositories
@@ -21,7 +19,7 @@ namespace SMD.Repository.Repositories
         /// <summary>
         ///Ad Campaign Orderby clause
         /// </summary>
-        private readonly Dictionary<AdCampaignByColumn, Func<AdCampaign, object>> _addCampaignByClause =
+        private readonly Dictionary<AdCampaignByColumn, Func<AdCampaign, object>> addCampaignByClause =
             new Dictionary<AdCampaignByColumn, Func<AdCampaign, object>>
                     {
                         {AdCampaignByColumn.Name, d => d.CampaignName}  ,    
@@ -50,37 +48,64 @@ namespace SMD.Repository.Repositories
         }
 
         /// <summary>
+        /// Page Size for Products Feed
+        /// </summary>
+        protected int PageSizeForProducts
+        {
+            get
+            {
+                return 10;
+            }
+        }
+
+        /// <summary>
+        /// Resets Users Responses for Ads, Surveys and Questions
+        /// </summary>
+        public void ResetUserProductsResponses()
+        {
+            db.ResetProductsUserResponses();
+        }
+
+        /// <summary>
         /// Gets Combination of Ads, Surveys, Questions in a paged view
         /// </summary>
         public IEnumerable<GetProducts_Result> GetProducts(GetProductsRequest request)
         {
-            int fromRow = (request.PageNo - 1) * request.PageSize;
-            int toRow = request.PageSize;
+            int fromRow = (request.PageNo - 1) * PageSizeForProducts;
+            int toRow = PageSizeForProducts;
             return db.GetProducts(request.UserId, fromRow, toRow);
         }
 
         /// <summary>
         /// Get Ad Campaigns
         /// </summary>
-        public IEnumerable<AdCampaign> SearchAdCampaigns(AdCampaignSearchRequest request, out int rowCount)
+        public IEnumerable<AdCampaign> SearchAdCampaignsForApproval(AdCampaignSearchRequest request, out int rowCount)
         {
             int fromRow = (request.PageNo - 1) * request.PageSize;
             int toRow = request.PageSize;
             Expression<Func<AdCampaign, bool>> query =
-                ad => ad.Status == (Int32)AdCampaignStatus.SubmitForApproval;
+                ad => ad.Status == (Int32)AdCampaignStatus.SubmitForApproval && ad.Type==request.status;
+
+            //if (request.ShowCoupons.HasValue && request.ShowCoupons.Value == true)
+            //    query = ad => ad.Status == (Int32)AdCampaignStatus.SubmitForApproval && ad.Type == (int)AdCampaignType.Coupon;
 
             rowCount = DbSet.Count(query);
-            return request.IsAsc
-                ? DbSet.Where(query)
-                    .OrderBy(_addCampaignByClause[request.AdCampaignOrderBy])
-                    .Skip(fromRow)
-                    .Take(toRow)
-                    .ToList()
-                : DbSet.Where(query)
-                    .OrderByDescending(_addCampaignByClause[request.AdCampaignOrderBy])
-                    .Skip(fromRow)
-                    .Take(toRow)
-                    .ToList();
+            //var res =  request.IsAsc
+            //    ? DbSet.Where(query)
+            //        .OrderBy(addCampaignByClause[request.AdCampaignOrderBy])
+            //        .Skip(fromRow)
+            //        .Take(toRow)
+            //    : DbSet.Where(query)
+            //        .OrderByDescending(addCampaignByClause[request.AdCampaignOrderBy])
+            //        .Skip(fromRow)
+            //        .Take(toRow)
+            //        .ToList();
+            //res = res.OrderByDescending(g => g.priority);
+            var res = DbSet.Where(query)
+                    .OrderByDescending(g => g.ClickRate);
+            return res.Skip(fromRow)
+                    .Take(toRow);
+
         }
 
         /// <summary>
@@ -88,45 +113,151 @@ namespace SMD.Repository.Repositories
         /// </summary>
         public IEnumerable<AdCampaign> SearchCampaign(AdCampaignSearchRequest request, out int rowCount)
         {
+
+            
+
+
+            bool isAdmin = false;
+            var users = db.Users.Where(g => g.Id == LoggedInUserIdentity).SingleOrDefault();
+           
             if (request == null)
             {
-                int fromRow = 0;
-                int toRow = 10;
-                rowCount = DbSet.Count();
-                return DbSet.Where(g => g.UserId == LoggedInUserIdentity).OrderBy(g => g.CampaignId)
-                        .Skip(fromRow)
-                        .Take(toRow)
-                        .ToList();
+
+
+             
+                
+                const int fromRow = 0;
+                const int toRow = 10;
+                rowCount = DbSet.Where(c => c.Type != 5).Count();
+                if (isAdmin)
+                {
+                    IEnumerable<AdCampaign> adCampaigns = DbSet.OrderByDescending(g => g.priority).Where(c => c.Type != 5)
+                           .Skip(fromRow)
+                           .Take(toRow)
+                           .ToList();
+
+                    if (adCampaigns != null && adCampaigns.Count() > 0)
+                    {
+                        foreach (var ad in adCampaigns)
+                        {
+                            ad.AdViews = db.AdCampaignResponses.Where(c => c.CampaignId == ad.CampaignId).Count();
+                        }
+
+                    }
+                    return adCampaigns;
+
+
+                }
+                else
+                {
+                    IEnumerable<AdCampaign> adCampaigns = DbSet.Where(g => g.CompanyId == CompanyId && g.Type != 5).OrderByDescending(g => g.priority)
+                           .Skip(fromRow)
+                           .Take(toRow)
+                           .ToList();
+                    if (adCampaigns != null && adCampaigns.Count() > 0)
+                    {
+                        foreach (var ad in adCampaigns)
+                        {
+                            ad.AdViews = db.AdCampaignResponses.Where(c => c.CampaignId == ad.CampaignId).Count();
+                        }
+
+                    }
+                    return adCampaigns;
+
+                }
             }
-            else
+            else   //searching mode
             {
                 int fromRow = (request.PageNo - 1) * request.PageSize;
                 int toRow = request.PageSize;
                 Expression<Func<AdCampaign, bool>> query =
                     campaign =>
                         (string.IsNullOrEmpty(request.SearchText) ||
-                         (campaign.DisplayTitle.Contains(request.SearchText)))
-                         && (campaign.UserId == LoggedInUserIdentity);
+                         (campaign.DisplayTitle.Contains(request.SearchText)) || (campaign.CampaignName.Contains(request.SearchText))
+                          || (campaign.Description.Contains(request.SearchText)) || (campaign.CampaignDescription.Contains(request.SearchText)))
+                         && (campaign.CompanyId == CompanyId || isAdmin);
 
 
-                rowCount = DbSet.Count(query);
-                return DbSet.Where(query).OrderBy(g => g.CampaignId)
-                        .Skip(fromRow)
-                        .Take(toRow)
-                        .ToList();
+                rowCount = DbSet.Where(c => c.Type != 5).Count(query);
+                IEnumerable<AdCampaign> adCampaigns = null;
+                if (request.ShowCoupons != null && request.ShowCoupons == true)
+                {
+                    rowCount = DbSet.Where(c => c.Type == 5).Count();
+                    adCampaigns = DbSet.Where(query).Where(g => g.Type == 5).OrderByDescending(g => g.priority)
+                      .Skip(fromRow)
+                      .Take(toRow)
+                      .ToList();
+                }
+                else
+                {
+                    adCampaigns = DbSet.Where(query).Where(g => g.Type != 5).OrderByDescending(g => g.priority)
+                         .Skip(fromRow)
+                         .Take(toRow)
+                         .ToList();
+                }
+
+                if (adCampaigns != null && adCampaigns.Count() > 0)
+                {
+                    foreach (var ad in adCampaigns)
+                    {
+                        ad.AdViews = db.AdCampaignResponses.Where(c => c.CampaignId == ad.CampaignId).Count();
+                    }
+
+                }
+                return adCampaigns;
             }
         }
+
+
+
+        public IEnumerable<SearchCampaigns_Result> SearchCampaigns(AdCampaignSearchRequest request, out int rowCount)
+        {
+            var results =  db.SearchCampaigns(request.status, request.SearchText,this.CompanyId, (request.PageNo - 1) * request.PageSize, request.PageSize, false,request.mode).ToList();
+
+            if (results.Count() > 0)
+            {
+                var firstrec = results.First();
+                rowCount = firstrec.TotalItems.Value;
+            }
+            else
+                rowCount = 0;
+
+            //rowCount = 211;
+            return results;
+        }
+        /// <summary>
+        /// Get Ad Campaign by id
+        /// </summary>
+        public IEnumerable<AdCampaign> GetAdCampaignById(long campaignId)
+        {
+
+            Expression<Func<AdCampaign, bool>> query =
+                ad => ad.CampaignId == campaignId;
+
+            return DbSet.Where(query);
+
+        }
+
+
 
         /// <summary>
         /// Get Ad Campaign by id
         /// </summary>
-        public IEnumerable<AdCampaign> GetAdCampaignById(long CampaignId)
+        public IEnumerable<AdCampaign> GetSpecialAdCampaigns(out string CompanyLogoPath)
         {
 
-            Expression<Func<AdCampaign, bool>> query =
-                ad => ad.CampaignId == CampaignId;
 
-            return DbSet.Where(query);
+            var res = (from p in db.AdCampaigns 
+                      join c in db.Companies on p.CompanyId equals c.CompanyId
+                      where c.IsSpecialAccount == true
+                      select p).ToList();
+
+
+            var comp = db.Companies.Where(g => g.IsSpecialAccount == true).FirstOrDefault();
+            CompanyLogoPath = "http://manage.cash4ads.com/" + comp.Logo;
+                      
+            return res;
+
         }
         /// <summary>
         /// Get user by id
@@ -134,39 +265,131 @@ namespace SMD.Repository.Repositories
         public User GetUserById()
         {
 
-            return db.Users.Where(i => i.Id == LoggedInUserIdentity).SingleOrDefault();
+            return db.Users.SingleOrDefault(i => i.Id == LoggedInUserIdentity);
         }
         /// <summary>
         /// Get User And Cost
         /// </summary>
         public UserAndCostDetail GetUserAndCostDetail()
         {
-            
+
             var query = from usr in db.Users.Include("Cities").Include("Countries")
-                        join prod in db.Products on usr.CountryId equals prod.CountryId
+                        join prod in db.Products on usr.Company.CountryId equals prod.CountryId
                         where usr.Id == LoggedInUserIdentity && prod.ProductId == 2 //&& prod.ProductCode == code
-                        select new UserAndCostDetail()
+                        select new UserAndCostDetail
                         {
-                            AgeClausePrice = prod.AgeClausePrice,
-                            CityId = usr.CityId,
-                            CountryId = usr.CountryId,
-                            EducationClausePrice = prod.EducationClausePrice,
+                            AgeClausePrice = prod.AgeClausePrice ?? 0,
+                            City = usr.Company.City,
+                            CountryId = usr.Company.CountryId,
+                            EducationClausePrice = prod.EducationClausePrice ?? 0,
                             EducationId = usr.EducationId,
-                            GenderClausePrice = prod.GenderClausePrice,
+                            GenderClausePrice = prod.GenderClausePrice ?? 0,
                             IndustryId = usr.IndustryId,
                             LanguageId = usr.LanguageId,
-                            LocationClausePrice = prod.LocationClausePrice,
-                            OtherClausePrice = prod.OtherClausePrice,
-                            ProfessionClausePrice = prod.ProfessionClausePrice//,
-                            //CityName = usr.Cities.Cities != null ? usr.Cities.CityName : "",
-                            //CountryName = usr.Countries != null ? usr.Countries.CountryName : "",
-                            //EducationTitle = usr.Education != null?usr.Education.Title : "",
-                            //IndustryName = usr.Industry != null?usr.Industry.IndustryName:"",
-                            //LanguageName = usr.Language != null? usr.Language.LanguageName: ""
-                           
+                            LocationClausePrice = prod.LocationClausePrice ?? 0,
+                            OtherClausePrice = prod.OtherClausePrice ?? 0,
+                            ProfessionClausePrice = prod.ProfessionClausePrice ?? 0
                         };
 
             return query.FirstOrDefault();
+        }
+
+        public List<GetCoupons_Result> GetCoupons(string UserId)
+        {
+         
+            return db.GetCoupons(UserId).ToList();
+
+            //var query = from ad in db.AdCampaigns
+            //            where ad.Type == 5 && (ad.CouponTakenCount == null || ad.CouponTakenCount < ad.CouponQuantity)
+            //            && (ad.Archived == null || ad.Archived == false)
+            //            select new Coupons
+            //            {
+            //                CouponId = ad.CampaignId,
+            //                CouponActualValue = ad.CouponActualValue,
+            //                CouponName = ad.CampaignName,
+            //                CouponTitle = ad.DisplayTitle,
+            //                Firstline = ad.Description,
+            //                SecondLine = ad.CampaignDescription,
+            //                CouponSwapValue = ad.CouponSwapValue,
+            //                CouponImage = System.Web.HttpContext.Current.Request.Url.Scheme + "://" + System.Web.HttpContext.Current.Request.Url.Authority + "/" + ad.ImagePath
+            //            };
+
+            //return query.ToList<Coupons>();
+        }
+
+        public IEnumerable<CompanyBranch> GetAllBranches()
+        {
+            var user = db.Users.Where(g => g.Id == LoggedInUserIdentity).SingleOrDefault();
+            if (user == null)
+                return null;
+            var comp = db.Companies.Where(g => g.CompanyId == user.CompanyId).SingleOrDefault();
+            if (comp == null)
+                return null;
+            var branches = db.CompanyBranches.Where(g => g.CompanyId == comp.CompanyId);
+            return branches;
+        }
+        public string CampaignVerifyQuestionById(int CampaignID)
+        {
+            return DbSet.Where(i => i.CampaignId == CampaignID).FirstOrDefault().VerifyQuestion;
+        
+        }
+        public AdCampaign GetCampaignByID(long CampaignID)
+        {
+            return DbSet.Where(i => i.CampaignId == CampaignID).FirstOrDefault();
+        
+        }
+        //public IEnumerable<getAdsCampaignByCampaignId_Result> getAdsCampaignByCampaignIdForAnalytics(int compaignId, int CampStatus, int dateRange, int Granularity)
+        //{
+
+        //    return db.getAdsCampaignByCampaignId(compaignId, CampStatus, dateRange, Granularity);
+        //}
+        public IEnumerable<getDisplayAdsCampaignByCampaignIdAnalytics_Result> getAdsCampaignByCampaignIdAnalytics(int compaignId, int CampStatus, int dateRange, int Granularity)
+        {
+           
+            return db.getAdsCampaignByCampaignIdAnalytics(compaignId, CampStatus, dateRange, Granularity);
+        }
+        public IEnumerable<getAdsCampaignByCampaignIdRatioAnalytic_Result> getAdsCampaignByCampaignIdRatioAnalytic(int ID, int dateRange)
+        {
+            
+            return db.getAdsCampaignByCampaignIdRatioAnalytic(ID, dateRange);
+        }
+        public IEnumerable<getAdsCampaignByCampaignIdtblAnalytic_Result> getAdsCampaignByCampaignIdtblAnalytic(int ID)
+        {
+            return db.getAdsCampaignByCampaignIdtblAnalytic(ID);
+        }
+        public IEnumerable<getCampaignROItblAnalytic_Result> getCampaignROItblAnalytic(int ID)
+        {            
+            return db.getCampaignROItblAnalytic(ID);
+           // return new List<getCampaignROItblAnalytic_Result>();
+        }
+        public List<getCampaignByIdFormDataAnalytic_Result> getCampaignByIdFormDataAnalytic(long CampaignId)
+        {
+            return db.getCampaignByIdFormDataAnalytic(CampaignId).ToList();
+        }
+        public List<GetRandomAdCampaign_Result> GetRandomAdCampaign(int Type)
+        {
+            return db.GetRandomAdCampaign(Type).ToList();
+        }
+
+        public List<getAdsCampaignPerCityPerGenderFormAnalytic_Result> getAdsCampaignPerCityPerGenderFormAnalytic(long _Id) {
+            return db.getAdsCampaignPerCityPerGenderFormAnalytic(_Id).ToList();
+        
+        }
+        public List<getAdsCampaignPerCityPerAgeFormAnalytic_Result> getAdsCampaignPerCityPerAgeFormAnalytic(long _Id)
+        {
+            return db.getAdsCampaignPerCityPerAgeFormAnalytic(_Id).ToList();
+        }
+        public List<getCampaignImpressionByAgeByCId_Result> getCampaignImpressionByAgeByCId(long CampaignId)
+        {
+            return db.getCampaignImpressionByAgeByCId(CampaignId).ToList();
+        }
+        public List<getCampaignImpressionByProfessionByCId_Result> getCampaignImpressionByProfessionByCId(long CampaignId)
+        {
+            return db.getCampaignImpressionByProfessionByCId(CampaignId).ToList();
+        }
+        public List<getCampaignImpressionByGenderByCId_Result> getCampaignImpressionByGenderByCId(long CampaignId)
+        {
+            return db.getCampaignImpressionByGenderByCId(CampaignId).ToList();
         }
     }
 }

@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
@@ -64,6 +68,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -103,7 +108,10 @@
     <Compile Include="Common\AccessRightClaimValue.cs" />
     <Compile Include="Common\ActiveModuleMenuItem.cs" />
     <Compile Include="Common\AdCampaignByColumn.cs" />
+    <Compile Include="Common\CouponCodeModel.cs" />
+    <Compile Include="Common\Coupons.cs" />
     <Compile Include="Common\InvoiceByColumn.cs" />
+    <Compile Include="Common\CompanyIdClaimValue.cs" />
     <Compile Include="Common\SurveyQuestionByColumn.cs" />
     <Compile Include="Common\ProfileQuestionByColumn.cs" />
     <Compile Include="Common\SecurityRoles.cs" />
@@ -116,20 +124,94 @@
     <Compile Include="Common\UserBaseData.cs" />
     <Compile Include="Common\UserIdentityModel.cs" />
     <Compile Include="Common\Utility.cs" />
+    <Compile Include="DomainModels\AdCampaignClickRateHistory.cs" />
+    <Compile Include="DomainModels\AspNetUsersNotificationToken.cs" />
+    <Compile Include="DomainModels\BranchCategory.cs" />
+    <Compile Include="DomainModels\CampaignEventHistory.cs" />
+    <Compile Include="DomainModels\CompanyBranch.cs" />
+    <Compile Include="DomainModels\Coupon.cs" />
+    <Compile Include="DomainModels\CouponCategories.cs" />
+    <Compile Include="DomainModels\CouponPriceOption.cs" />
+    <Compile Include="DomainModels\CouponRatingReview.cs" />
+    <Compile Include="DomainModels\CouponStatsResponse.cs" />
+    <Compile Include="DomainModels\DamImage.cs" />
+    <Compile Include="DomainModels\Dashboard_analytics_Result.cs" />
+    <Compile Include="DomainModels\EventStatus.cs" />
+    <Compile Include="DomainModels\GameExerciseCategory.cs" />
+    <Compile Include="DomainModels\GameExerciseCategoryList.cs" />
+    <Compile Include="DomainModels\GetActiveVSNewUsers_Result.cs" />
+    <Compile Include="DomainModels\GetAdminDashBoardInsights_Result.cs" />
+    <Compile Include="DomainModels\getAdsCampaignPerCityPerAgeFormAnalytic_Result.cs" />
+    <Compile Include="DomainModels\getAdsCampaignPerCityPerGenderFormAnalytic_Result.cs" />
+    <Compile Include="DomainModels\GetApprovalCount_Result.cs" />
+    <Compile Include="DomainModels\getCampaignByIdFormDataAnalytic_Result.cs" />
+    <Compile Include="DomainModels\getCampaignImpression_Result.cs" />
+    <Compile Include="DomainModels\GetCampaignPerformanceWeeklyStats_Result.cs" />
+    <Compile Include="DomainModels\getCampaignRatioAnalytic_Result.cs" />
+    <Compile Include="DomainModels\getCampaignROItblAnalytic_Result.cs" />
+    <Compile Include="DomainModels\getCampaignsByStatus.cs" />
+    <Compile Include="DomainModels\getCampaignsTblAnalytic_Result.cs" />
+    <Compile Include="DomainModels\GetCouponByID_Result.cs" />
+    <Compile Include="DomainModels\getDealByCouponID_Result.cs" />
+    <Compile Include="DomainModels\getDealImpression_Result.cs" />
+    <Compile Include="DomainModels\getDisplayAdsCampaignByCampaignIdAnalytics_Result.cs" />
+    <Compile Include="DomainModels\GetLiveCampaignCountOverTime_Result.cs" />
+    <Compile Include="DomainModels\GetRandomGameByUser_Result.cs" />
+    <Compile Include="DomainModels\GetUserProfileQuestionsList_Result.cs" />
+    <Compile Include="DomainModels\GetUsersCouponsForEmailNotification_Result.cs" />
+    <Compile Include="DomainModels\getPayoutVSRevenueOverTime_Result.cs" />
+    <Compile Include="DomainModels\getPollsBySQID_Result.cs" />
+    <Compile Include="DomainModels\GetRandom3Deal_Result.cs" />
+    <Compile Include="DomainModels\GetRandomAdCampaign_Result.cs" />
+    <Compile Include="DomainModels\GetRandomPolls_Result.cs" />
+    <Compile Include="DomainModels\GetRegisteredUserData_Result.cs" />
+    <Compile Include="DomainModels\GetRevenueByCampaignOverTime_Result.cs" />
+    <Compile Include="DomainModels\GetRevenueOverTime_Result.cs" />
+    <Compile Include="DomainModels\GetSharedSurveyQuestionsByUserId_Result.cs" />
+    <Compile Include="DomainModels\GetSharedSurveyQuestion_Result.cs" />
+    <Compile Include="DomainModels\getSurvayByPQID_Result.cs" />
+    <Compile Include="DomainModels\GetTransactions_Result.cs" />
+    <Compile Include="DomainModels\getUserActivitiesOverTime_Result.cs" />
+    <Compile Include="DomainModels\GetUserCounts.cs" />
+    <Compile Include="DomainModels\Notification.cs" />
+    <Compile Include="DomainModels\PayOutHistory.cs" />
+    <Compile Include="DomainModels\Phrase.cs" />
+    <Compile Include="DomainModels\ProfileQuestionTargetCriteria.cs" />
+    <Compile Include="DomainModels\ProfileQuestionTargetLocation.cs" />
+    <Compile Include="DomainModels\SearchCampaigns_Result.cs" />
+    <Compile Include="DomainModels\Section.cs" />
+    <Compile Include="DomainModels\SharedSurveyQuestion.cs" />
+    <Compile Include="DomainModels\SurveySharingGroup.cs" />
+    <Compile Include="DomainModels\SurveySharingGroupMember.cs" />
+    <Compile Include="DomainModels\SurveySharingGroupShare.cs" />
+    <Compile Include="DomainModels\UserCouponCategoryClick.cs" />
+    <Compile Include="DomainModels\UserCouponView.cs" />
+    <Compile Include="DomainModels\UserGameResponse.cs" />
+    <Compile Include="DomainModels\UserPurchasedCoupon.cs" />
+    <Compile Include="DomainModels\vw_CompanyUsers.cs" />
     <Compile Include="DomainModels\Account.cs" />
     <Compile Include="DomainModels\AdCampaign.cs" />
     <Compile Include="DomainModels\AdCampaignResponse.cs" />
     <Compile Include="DomainModels\AdCampaignTargetCriteria.cs" />
     <Compile Include="DomainModels\AdCampaignTargetLocation.cs" />
     <Compile Include="DomainModels\AuditLog.cs" />
+    <Compile Include="DomainModels\CompaniesAspNetUser.cs" />
+    <Compile Include="DomainModels\CampaignCategory.cs" />
     <Compile Include="DomainModels\City.cs" />
+    <Compile Include="DomainModels\Company.cs" />
     <Compile Include="DomainModels\Country.cs" />
+    <Compile Include="DomainModels\CouponCategory.cs" />
+    <Compile Include="DomainModels\CouponCode.cs" />
     <Compile Include="DomainModels\Currency.cs" />
     <Compile Include="DomainModels\CustomUrl.cs" />
     <Compile Include="DomainModels\Education.cs" />
+    <Compile Include="DomainModels\EmailQueue.cs" />
     <Compile Include="DomainModels\Game.cs" />
     <Compile Include="DomainModels\GetAds_Result.cs" />
     <Compile Include="DomainModels\GetAudience_Result.cs" />
+    <Compile Include="DomainModels\SearchCoupons_Result.cs" />
+    <Compile Include="DomainModels\GetCouponsByCompanyId_Result.cs" />
+    <Compile Include="DomainModels\GetCoupons_Result.cs" />
     <Compile Include="DomainModels\GetProducts_Result.cs" />
     <Compile Include="DomainModels\GetSurveys_Result.cs" />
     <Compile Include="DomainModels\Industry.cs" />
@@ -148,6 +230,14 @@
     <Compile Include="DomainModels\SystemMail.cs" />
     <Compile Include="DomainModels\Tax.cs" />
     <Compile Include="DomainModels\Transaction.cs" />
+    <Compile Include="DomainModels\TransactionLog.cs" />
+    <Compile Include="DomainModels\UserFavouriteCoupon.cs" />
+    <Compile Include="DomainModels\vw_Cash4AdsReport.cs" />
+    <Compile Include="DomainModels\vw_Coupons.cs" />
+    <Compile Include="DomainModels\vw_GetUserTransactions.cs" />
+    <Compile Include="DomainModels\vw_Notifications.cs" />
+    <Compile Include="DomainModels\vw_PublisherTransaction.cs" />
+    <Compile Include="DomainModels\vw_ReferringCompanies.cs" />
     <Compile Include="IdentityModels\Role.cs" />
     <Compile Include="IdentityModels\Role`.cs" />
     <Compile Include="IdentityModels\User.cs" />
@@ -174,12 +264,20 @@
     </Compile>
     <Compile Include="Common\CampaignGridModel.cs" />
     <Compile Include="RequestModels\AdCampaignSearchRequest.cs" />
+    <Compile Include="RequestModels\ApproveProfileQuestionRequest.cs" />
+    <Compile Include="RequestModels\BuyItModel.cs" />
+    <Compile Include="RequestModels\GetUserRequestModel.cs" />
+    <Compile Include="RequestModels\InviteUserEmail.cs" />
+    <Compile Include="RequestModels\RegisteredUsersSearchRequest.cs" />
+    <Compile Include="RequestModels\RequestModelForUpdateCompanyStatus.cs" />
+    <Compile Include="RequestModels\UserBalanceInquiryRequest.cs" />
+    <Compile Include="RequestModels\ProductActionRequest.cs" />
     <Compile Include="RequestModels\ApproveSurveyRequest.cs" />
-    <Compile Include="RequestModels\GetProductsRequest.cs" />
     <Compile Include="RequestModels\GetAdsApiRequest.cs" />
     <Compile Include="RequestModels\GetAudienceCountRequest.cs" />
     <Compile Include="RequestModels\GetAudienceSurveyRequest.cs" />
     <Compile Include="RequestModels\GetInvoiceDetailRequest.cs" />
+    <Compile Include="RequestModels\GetProductsRequest.cs" />
     <Compile Include="RequestModels\GetProfileQuestionApiRequest.cs" />
     <Compile Include="RequestModels\GetSurveysApiRequest.cs" />
     <Compile Include="RequestModels\AdViewedRequest.cs" />
@@ -198,10 +296,28 @@
     <Compile Include="ResponseModels\AdCampaignBaseResponse.cs" />
     <Compile Include="ResponseModels\AdCampaignResposneModelForAproval.cs" />
     <Compile Include="ResponseModels\AdCampaignApiSearchRequestResponse.cs" />
+    <Compile Include="ResponseModels\AdGetCouponCategories.cs" />
     <Compile Include="ResponseModels\BaseApiResponse.cs" />
-    <Compile Include="ResponseModels\InvoiceSearchRequestResponse.cs" />
-    <Compile Include="ResponseModels\LoginResponse.cs" />
+    <Compile Include="ResponseModels\CompanyResponseModel.cs" />
+    <Compile Include="ResponseModels\CompanySubscription.cs" />
+    <Compile Include="ResponseModels\CouponsResponseModelForApproval.cs" />
+    <Compile Include="ResponseModels\CouponRatingReviewResponse.cs" />
+    <Compile Include="ResponseModels\DealCashBackResponse.cs" />
+    <Compile Include="ResponseModels\EmailResponseModel.cs" />
+    <Compile Include="ResponseModels\PayOutResponseModelForApproval.cs" />
+    <Compile Include="ResponseModels\RandomGameResponse.cs" />
+    <Compile Include="ResponseModels\ProfileQuestionResponseModelForApproval.cs" />
+    <Compile Include="ResponseModels\RegisteredUsersResponseModel.cs" />
+    <Compile Include="ResponseModels\RevenueOverTimeResponseModel.cs" />
+    <Compile Include="ResponseModels\SearchCouponsResponse.cs" />
+    <Compile Include="ResponseModels\IndustryResponse.cs" />
     <Compile Include="ResponseModels\GetProductsResponse.cs" />
+    <Compile Include="ResponseModels\InvoiceSearchRequestResponse.cs" />
+    <Compile Include="ResponseModels\EducationResponse.cs" />
+    <Compile Include="ResponseModels\StripeSubscriptionResponse.cs" />
+    <Compile Include="ResponseModels\UserBalanceInquiryResponse.cs" />
+    <Compile Include="ResponseModels\UpdateProfileImageResponse.cs" />
+    <Compile Include="ResponseModels\LoginResponse.cs" />
     <Compile Include="ResponseModels\SurveyForApiSearchResponse.cs" />
     <Compile Include="ResponseModels\ProfileQuestionApiSearchResponse.cs" />
     <Compile Include="ResponseModels\ProfileQuestionBaseResponse.cs" />
@@ -209,6 +325,7 @@
     <Compile Include="ResponseModels\CampaignResponseModel.cs" />
     <Compile Include="ResponseModels\SurveyQuestionResponseModel.cs" />
     <Compile Include="ResponseModels\SurveyQuestionResposneModelForAproval.cs" />
+    <Compile Include="ResponseModels\UserProfileBaseResponseModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">

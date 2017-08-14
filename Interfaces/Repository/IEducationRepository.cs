@@ -1,18 +1,24 @@
 ﻿using SMD.Models.DomainModels;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SMD.Interfaces.Repository
 {
   
-    public interface IEducationRepository : IBaseRepository<Education, int>
+    public interface IEducationRepository : IBaseRepository<Education, long>
     {
         /// <summary>
         /// Search Invoces for LV
         /// </summary>
         IEnumerable<Education> SearchEducation(string input);
+
+        /// <summary>
+        /// Get List of Language 
+        /// </summary>
+        IEnumerable<Education> GetAllEducations();
+
+        /// <summary>
+        /// Get All Active ones
+        /// </summary>
+        IEnumerable<Education> GetAllAvailable();
     }
 }

@@ -1,0 +1,95 @@
+﻿USE [SMDv2]
+GO
+/****** Object:  StoredProcedure [dbo].[getDealStatByCouponIdFormAnalytic]    Script Date: 12/27/2016 1:18:34 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+ALTER PROCEDURE [dbo].[getDealStatByCouponIdFormAnalytic] (
+@Id INT,
+@gender INT,  -- 0 for all, 1 for male and 2 for female
+@ageRange INT, -- 0 for All , 1 for 10-20 , 2 for 20-30, 3 for 30-40 , 4 for 40-50, 5 for 50-60, 6 for 60-70, 7 for 70-80, 8 for 80-90, 9 for 90+
+@type INT
+)
+AS
+BEGIN
+-- SET NOCOUNT ON added to prevent extra result sets from
+-- interfering with SELECT statements.
+SET NOCOUNT ON;
+DECLARE @AgedateFrom DATE =  DATEADD(YYYY,-200,getdate()) ;
+DECLARE @AgedateTo DATE = getdate();
+ 
+
+IF @ageRange = 1
+	BEGIN
+		set @AgedateFrom = DATEADD(YYYY,-20,getdate()) ;
+		set @AgedateTo = DATEADD(YYYY,-10,getdate()) ;
+	END
+IF @ageRange = 2
+	BEGIN
+		set @AgedateFrom = DATEADD(YYYY,-30,getdate()) ;
+		set @AgedateTo = DATEADD(YYYY,-20,getdate()) ;
+	END
+	IF @ageRange = 3
+	BEGIN
+		set @AgedateFrom = DATEADD(YYYY,-40,getdate()) ;
+		set @AgedateTo = DATEADD(YYYY,-30,getdate()) ;
+	END
+	IF @ageRange = 4
+	BEGIN
+		set @AgedateFrom = DATEADD(YYYY,-50,getdate()) ;
+		set @AgedateTo = DATEADD(YYYY,-40,getdate()) ;
+	END
+	IF @ageRange = 5
+	BEGIN
+		set @AgedateFrom = DATEADD(YYYY,-60,getdate()) ;
+		set @AgedateTo = DATEADD(YYYY,-50,getdate()) ;
+	END
+	IF @ageRange = 6
+	BEGIN
+		set @AgedateFrom = DATEADD(YYYY,-70,getdate()) ;
+		set @AgedateTo = DATEADD(YYYY,-60,getdate()) ;
+	END
+	IF @ageRange = 7
+	BEGIN
+		set @AgedateFrom = DATEADD(YYYY,-80,getdate()) ;
+		set @AgedateTo = DATEADD(YYYY,-70,getdate()) ;
+	END
+	IF @ageRange = 8
+	BEGIN
+		set @AgedateFrom = DATEADD(YYYY,-90,getdate()) ;
+		set @AgedateTo = DATEADD(YYYY,-80,getdate()) ;
+	END
+	IF @ageRange = 9
+	BEGIN
+		set @AgedateFrom = DATEADD(YYYY,-200,getdate()) ;
+		set @AgedateTo = DATEADD(YYYY,-90,getdate()) ;
+	END
+	
+	IF @type = 1 -- impression
+	BEGIN
+		select count(*) as Stats  from UserCouponView ucv
+		inner join AspNetUsers usr on ucv.UserID = usr.Id
+		where ucv.CouponId = @Id 
+		and (usr.Gender = @gender OR @gender = 0)
+		and usr.DOB > = @AgedateFrom and usr.DOB < @AgedateTo
+	END	
+	IF @type = 2 -- Click throu
+	BEGIN
+		select count(*) as Stats  from UserPurchasedCoupon upc
+		inner join AspNetUsers usr on upc.UserID = usr.Id
+		where upc.CouponId = @Id 
+		and (usr.Gender = @gender OR @gender = 0)
+		and usr.DOB > = @AgedateFrom and usr.DOB < @AgedateTo
+	END	
+			
+	
+END
+ 
+--EXEC [getDealStatByCouponIdFormAnalytic] 10175, 0, 0, 2
+

@@ -46,6 +46,41 @@ define("ads/ads.dataservice", function () {
                         contentType: "application/json; charset=utf-8",
                         type: 'POST'
                     });
+
+                    amplify.request.define('copyCampaignById', 'ajax', {
+                        url: '/Api/CopyCampaign',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
+                    amplify.request.define('getFormAnalytic', 'ajax', {
+                        url: '/Api/FormAnalytic',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
+                    
+                    amplify.request.define('getQQAnalytic', 'ajax', {
+                        url: '/Api/CampaignFormAnalytic',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
+                    // 
+                    amplify.request.define('generateCouponCodes', 'ajax', {
+                        url: '/Api/GenerateCoupon',
+                        dataType: 'json',
+                        ////dataMap: JSON.stringify,
+                        //contentType: "application/json; charset=utf-8",
+                        type: 'Get'
+                    });
+					 amplify.request.define('getAdsByCampaignIdAnalytics', 'ajax', {
+                        url: '/Api/AdsCampaignAnalytic',
+                        dataType: 'json',
+                        type: 'GET'
+					 });
+					 amplify.request.define('getRandomCampaign', 'ajax', {
+					     url: '/Api/GetRandomAdCampaign',
+					     dataType: 'json',
+					     type: 'GET'
+					 });
                 }
             };
 
@@ -53,6 +88,24 @@ define("ads/ads.dataservice", function () {
             initialize();
             return amplify.request({
                 resourceId: 'getBaseData',
+                data: params,
+                success: callbacks.success,
+                error: callbacks.error,
+            });
+        },
+        getFormAnalytic = function (params, callbacks) {
+            initialize();
+            return amplify.request({
+                resourceId: 'getFormAnalytic',
+                data: params,
+                success: callbacks.success,
+                error: callbacks.error,
+            });
+        },
+        getQQAnalytic = function (params, callbacks) {
+            initialize();
+            return amplify.request({
+                resourceId: 'getQQAnalytic',
                 data: params,
                 success: callbacks.success,
                 error: callbacks.error,
@@ -68,7 +121,8 @@ define("ads/ads.dataservice", function () {
             });
         },
         addCampaignData = function (params, callbacks) {
-             initialize();
+            initialize();
+           
              return amplify.request({
                  resourceId: 'addCampaignData',
                  data: params,
@@ -94,13 +148,56 @@ define("ads/ads.dataservice", function () {
                      success: callbacks.success,
                      error: callbacks.error,
                  });
-             }
+             },
+              // copy campaign
+             copyCampaignById = function (params, callbacks) {
+                 initialize();
+                 return amplify.request({
+                     resourceId: 'copyCampaignById',
+                     data: params,
+                     success: callbacks.success,
+                     error: callbacks.error,
+                 });
+             },
+			 getAdsByCampaignIdAnalytics = function (params, callbacks) {
+                 initialize();
+                 return amplify.request({
+                     resourceId: 'getAdsByCampaignIdAnalytics',
+                     data: params,
+                     success: callbacks.success,
+                     error: callbacks.error,
+                 });
+             },
+        generateCouponCodes = function (params, callbacks) {
+                 initialize();
+                 return amplify.request({
+                     resourceId: 'generateCouponCodes',
+                     data: params,
+                     success: callbacks.success,
+                     error: callbacks.error,
+                 });
+        },
+          getRandomCampaign = function (params, callbacks) {
+              initialize();
+              return amplify.request({
+                  resourceId: 'getRandomCampaign',
+                  data: params,
+                  success: callbacks.success,
+                  error: callbacks.error,
+              });
+          }
         return {
             getBaseData: getBaseData,
             getCampaignData: getCampaignData,
             addCampaignData: addCampaignData,
             UpdateCampaignCriteriaOrLocation: UpdateCampaignCriteriaOrLocation,
-            getAudienceData: getAudienceData
+            getAudienceData: getAudienceData,
+            copyCampaignById: copyCampaignById,
+            generateCouponCodes: generateCouponCodes,
+            getAdsByCampaignIdAnalytics: getAdsByCampaignIdAnalytics,
+            getFormAnalytic: getFormAnalytic,
+            getQQAnalytic: getQQAnalytic,
+            getRandomCampaign: getRandomCampaign
         };
     })();
     return dataService;

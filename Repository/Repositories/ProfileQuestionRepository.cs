@@ -57,7 +57,11 @@ namespace SMD.Repository.Repositories
         /// </summary>
         public ProfileQuestion Find(int id)
         {
-            return DbSet.Find(id);
+           // ProfileQuestionTargetLocation
+
+            return DbSet.Include("ProfileQuestionTargetLocations.City").Include("ProfileQuestionTargetLocations.Country").Where(i => i.PqId == id).FirstOrDefault();
+            
+           // Query.ProfileQuestionTargetLocations.include<>
         }
 
         /// <summary>
@@ -65,21 +69,47 @@ namespace SMD.Repository.Repositories
         /// </summary>
         public IEnumerable<ProfileQuestion> SearchProfileQuestions(ProfileQuestionSearchRequest request, out int rowCount)
         {
+            db.Configuration.LazyLoadingEnabled = true;
             int fromRow = (request.PageNo - 1) * request.PageSize;
             int toRow = request.PageSize;
-            Expression<Func<ProfileQuestion, bool>> query =
+
+            Expression<Func<ProfileQuestion, bool>> query = null;
+            if ( request.fmode == true)
+            {
+                 query =
                 question =>
                     (string.IsNullOrEmpty(request.ProfileQuestionFilterText) ||
                      (question.Question.Contains(request.ProfileQuestionFilterText)))
                      &&
                      (request.QuestionGroupFilter == 0 || question.ProfileQuestionGroup.ProfileGroupId == request.QuestionGroupFilter)
                      &&
-                     (question.CountryId==request.CountryFilter)
+                     (question.CountryId == request.CountryFilter)
                      &&
-                     (question.LanguageId==request.LanguageFilter)
-                     && (question.Status == null || question.Status == (Int32) ObjectStatus.Acitve);   
+                     (question.LanguageId == request.LanguageFilter)
+                     && (question.CompanyId == null)
+                     && question.Status != 7;   
+            }
+            else
+            {
+                 query =
+                question =>
+                    (string.IsNullOrEmpty(request.ProfileQuestionFilterText) ||
+                     (question.Question.Contains(request.ProfileQuestionFilterText)))
+                     &&
+                     (request.QuestionGroupFilter == 0 || question.ProfileQuestionGroup.ProfileGroupId == request.QuestionGroupFilter)
+                     &&
+                     (question.CountryId == request.CountryFilter)
+                     &&
+                     (question.LanguageId == request.LanguageFilter)
+                     && (question.CompanyId == this.CompanyId)
+                     && question.Status != 7;   
+            }
+
 
             rowCount = DbSet.Count(query);
+           // DbSet.Where(query).Include(a => a.ProfileQuestionTargetCriterias);
+             DbSet.Where(query).Include(a => a.ProfileQuestionTargetLocations).Include("City");
+
             return request.IsAsc
                 ? DbSet.Where(query)
                     .OrderBy(_profileQuestionOrderByClause[request.ProfileQuestionOrderBy])
@@ -90,7 +120,11 @@ namespace SMD.Repository.Repositories
                     .OrderByDescending(_profileQuestionOrderByClause[request.ProfileQuestionOrderBy])
                     .Skip(fromRow)
                     .Take(toRow)
-                    .ToList(); 
+                    .ToList();
+
+            
+           
+             
         }
 
         /// <summary>
@@ -98,7 +132,7 @@ namespace SMD.Repository.Repositories
         /// </summary>
         public IEnumerable<ProfileQuestion> GetAllProfileQuestions()
         {
-            return DbSet.Where(question => question.Status == null || question.Status == 1).ToList();
+            return DbSet.Where(question => question.Status == 3 && question.CompanyId == null).ToList();
         }
 
 
@@ -117,7 +151,7 @@ namespace SMD.Repository.Repositories
         {
             var countOfUnAnsweredQuestions = (from question in db.ProfileQuestions
                                               where (question.ProfileGroupId == groupId &&
-                                              !(db.ProfileQuestionUserAnswers.Distinct().Any(ans => ans.PqId == question.PqId && ans.UserId == userId)))
+                                              !(db.ProfileQuestionUserAnswers.Distinct().Any(ans => ans.PQID == question.PqId && ans.UserID == userId)))
                                               select question.PqId).ToList().Count;
             return countOfUnAnsweredQuestions;
         }
@@ -132,7 +166,7 @@ namespace SMD.Repository.Repositories
             int toRow = request.PageSize;
 
             var unAnsweredQuestions = (from question in db.ProfileQuestions
-                     where (question.ProfileGroupId==request.GroupId && !(db.ProfileQuestionUserAnswers.Any(ans => ans.PqId == question.PqId)))
+                     where (question.ProfileGroupId==request.GroupId && !(db.ProfileQuestionUserAnswers.Any(ans => ans.PQID == question.PqId)))
                 select question)
                 .OrderBy(qst => qst.ProfileQuestionGroup.ProfileGroupName)
                  .Skip(fromRow)
@@ -141,7 +175,102 @@ namespace SMD.Repository.Repositories
             return unAnsweredQuestions;
         }
 
-       
+        public IEnumerable<ProfileQuestion> UpdateQuestionsCompanyID(IEnumerable<ProfileQuestion> ProfileQuestions)
+        {
+           ///////Setting CompanyId against question if he is user else setting null means these question related to admin
+            if(this.CompanyId>0)
+            {
+                foreach (var Question in ProfileQuestions)
+                {
+                    if (Question.CompanyId == null || Question.CompanyId == 0)
+                    {
+                        Question.CompanyId = this.CompanyId;
+
+                        db.ProfileQuestions.Attach(Question);
+
+                        db.Entry(Question).State = EntityState.Modified;
+                    }
+                }
+                db.SaveChanges();
+            }
+            return ProfileQuestions;
+        }
+        public void AddProfileQuestions(ProfileQuestion Obj)
+        {
+            Obj.CompanyId = this.CompanyId;
+            DbSet.Add(Obj);
+        }
+        public UserBaseData getBaseData()
+        {
+            UserBaseData data = new UserBaseData();
+            var usr = db.Users.Where(g => g.Id == LoggedInUserIdentity).SingleOrDefault();
+
+            if (usr != null)
+            {
+                bool isAdmin = false;
+
+
+                
+                data.CountryId = usr.Company == null ? null : usr.Company.CountryId;
+                data.EducationId = usr.EducationId;
+                data.IndustryId = usr.IndustryId;
+                data.LanguageId = usr.LanguageId;
+                data.City = usr.Company != null? usr.Company.City != null ? usr.Company.City : "":"";
+                data.Country =usr.Company!=null? usr.Company.Country != null ? usr.Company.Country.CountryName : "":"";
+                data.Education = usr.Education != null ? usr.Education.Title : "";
+                data.Industry = usr.Industry != null ? usr.Industry.IndustryName : "";
+                data.Language = usr.Language != null ? usr.Language.LanguageName : "";
+                data.isStripeIntegrated = usr.Company == null ? false : String.IsNullOrEmpty(usr.Company.StripeCustomerId) == true ? false : true;
+                data.IsSpecialAccount = usr.Company!=null? usr.Company.IsSpecialAccount:false;
+                //data.Latitude = usr.Company.City != null ? usr.Company.City.GeoLat : "";
+                //data.Longitude = usr.Company.City != null ? usr.Company.City.GeoLong : "";
+                data.isUserAdmin = isAdmin;
+                data.Status = usr.Status;
+            }
+
+            return data;
+        }
+
+        public IEnumerable<ProfileQuestion> GetProfileQuestionsForApproval(GetPagedListRequest request, out int rowCount)
+        {
+            int fromRow = (request.PageNo - 1) * request.PageSize;
+            int toRow = request.PageSize;
+            Expression<Func<ProfileQuestion, bool>> query =
+                c => c.Status == (Int32)AdCampaignStatus.SubmitForApproval;
+                rowCount = DbSet.Count(query);
+                var res = DbSet.Where(query)
+               .OrderByDescending(p => p.SubmissionDateTime);
+                return res.Skip(fromRow)
+                    .Take(toRow);
+
+        }
+        public IEnumerable<getSurvayByPQID_Result> getSurvayByPQIDAnalytics(int PQId, int CampStatus, int dateRange, int Granularity)
+        {
+          
+            return db.getSurvayByPQIDAnalytics(PQId, CampStatus, dateRange, Granularity);
+        }
+
+        //public ProfileQuestion GetProfileQuestionByID(long PQID)
+        //{ 
+        
+        //   return DbSet.Where(i=>i.PqId==PQID).Include<q=>Queryable.>
+
+        //}
+        public IEnumerable<getSurveyByPQIDRatioAnalytic_Result> getSurveyByPQIDRatioAnalytic(int ID, int dateRange)
+        {
+            return db.getSurveyByPQIDRatioAnalytic(ID, dateRange);
+        }
+        public IEnumerable<getSurvayByPQIDtblAnalytic_Result> getSurvayByPQIDtblAnalytic(int ID)
+        {
+            return db.getSurvayByPQIDtblAnalytic(ID);
+        }
+
+
+        public IEnumerable<GetUserProfileQuestionsList_Result> GetUserProfileQuestionsList(string UserID)
+        {
+            return db.GetUserProfileQuestionsList(UserID);
+        }
+
         #endregion
     }
 }

@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Cash4Ads.Models;
+using System.Web.Security;
 
 namespace Cash4Ads.Controllers
 {
@@ -63,30 +64,58 @@ namespace Cash4Ads.Controllers
         // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+       
+        public ActionResult Login(User oUser)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
+            Session["User"] = oUser;
+            
+            //Let us now set the authentication cookie so that we can use that later.
+            FormsAuthentication.SetAuthCookie(oUser.AuthenticationToken, false);
 
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
-            {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
-            }
+            return Content("Success");
+            //if (!ModelState.IsValid)
+            //{
+            //    return View(model);
+            //}
+
+            //// This doesn't count login failures towards account lockout
+            //// To enable password failures to trigger account lockout, change to shouldLockout: true
+            //var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            //switch (result)
+            //{
+            //    case SignInStatus.Success:
+            //        return RedirectToLocal(returnUrl);
+            //    case SignInStatus.LockedOut:
+            //        return View("Lockout");
+            //    case SignInStatus.RequiresVerification:
+            //        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+            //    case SignInStatus.Failure:
+            //    default:
+            //        ModelState.AddModelError("", "Invalid login attempt.");
+            //        return View(model);
+            //}
+
+            //User user = userService.getUserByAuthenticationToken(token);
+
+            //var user = new ApplicationUser { UserName = oUser.FullName, Email = oUser.Email};
+            //if (user == null)
+            //{
+            //    return Content("Invalid or expired authentication token!");
+            //}
+            ////ClaimsIdentity userIdentity = await user.CreateIdentityAsync(UserManager, DefaultAuthenticationTypes.ApplicationCookie);
+            //ClaimsIdentity userIdentity = await oUser.GenerateUserIdentityAsync(UserManager, DefaultAuthenticationTypes.ApplicationCookie);
+            //AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+            ////if (user != null)
+            ////{
+            ////    if (!await UserManager.IsEmailConfirmedAsync(user.Id))
+            ////    {
+            ////        return Content("Email not confirmed!");
+            ////    }
+            ////}
+            //SetupUserClaims(userIdentity);
+            //AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = true }, userIdentity);
+            //return RedirectToLocal("");
+
         }
 
         //
@@ -405,7 +434,23 @@ namespace Cash4Ads.Controllers
         {
             return View();
         }
-
+        private void SetupUserClaims(ClaimsIdentity identity)
+        {
+            // Parse TimeZoneOffset.
+            var timeZoneCookie = Request.Cookies["_timeZoneOffset"];
+            var timeZoneOffSetValue = TimeSpan.FromMinutes(0);
+            if (timeZoneCookie != null)
+            {
+                double offsetMinutes = 0;
+                if (double.TryParse(timeZoneCookie.Value, out offsetMinutes))
+                {
+                    timeZoneOffSetValue = TimeSpan.FromMinutes(offsetMinutes);
+                }
+            }
+            //claimsSecurityService.AddClaimsToIdentity(new UserIdentityModel { TimezoneOffset = timeZoneOffSetValue },
+            //    identity);
+            Session["UserTimezoneOffset"] = timeZoneOffSetValue;
+        }
         #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";

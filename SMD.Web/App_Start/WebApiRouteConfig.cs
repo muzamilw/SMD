@@ -142,11 +142,255 @@ namespace SMD.MIS
 
             // Get Products (Ads, Surveys, Questions) Custom route
             config.Routes.MapHttpRoute(
-                "GetProducts",
+                "Products",
                 "Products/{AuthenticationToken}/",
-                new { controller = "GetProducts" },
+                new { controller = "Products" },
                 null,
                 null);
+
+            // Get Users Balance Custom route
+            config.Routes.MapHttpRoute(
+                "UserBalanceInquiry",
+                "Balance/Inquire/{AuthenticationToken}/",
+                new { controller = "UserBalanceInquiry" },
+                null,
+                null);
+
+            // Get Education Custom route
+            config.Routes.MapHttpRoute(
+                "Education",
+                "Education/{AuthenticationToken}/",
+                new { controller = "Education" },
+                null,
+                null);
+
+            // Get Industry Custom route
+            config.Routes.MapHttpRoute(
+                "Industry",
+                "Industry/{AuthenticationToken}/",
+                new { controller = "Industry" },
+                null,
+                null);
+            // Get Industry Custom route
+            config.Routes.MapHttpRoute(
+                "GenerateSMS",
+                "GenerateSMS/{AuthenticationToken}/",
+                new { controller = "GenerateSMS" },
+                null,
+                null);
+
+            // Get Industry Custom route
+            config.Routes.MapHttpRoute(
+                "BuyItEmail",
+                "BuyItEmail/{AuthenticationToken}/",
+                new { controller = "BuyIt" },
+                null,
+                null);
+            // Get Industry Custom route
+            config.Routes.MapHttpRoute(
+                "GetCoupons",
+                "GetCoupons/{AuthenticationToken}/",
+                new { controller = "GetCoupon" },
+                null,
+                null);
+           
+            //
+            config.Routes.MapHttpRoute(
+              "GetAllCoupons",
+              "GetAllCoupons/{AuthenticationToken}/",
+              new { controller = "GetCouponAndCategories" },
+              null,
+              null);
+            // Get transaction Custom route
+            config.Routes.MapHttpRoute(
+                "UserTransactionInquiry",
+                "Balance/Transactions/{AuthenticationToken}/",
+                new { controller = "Statement" },
+                null,
+                null);
+            // Get coupon categories route
+            config.Routes.MapHttpRoute(
+                "CouponCategories",
+                "CouponCategories/{AuthenticationToken}/",
+                new { controller = "CouponCategory" },
+                null,
+                null);
+            config.Routes.MapHttpRoute(
+               "InviteUserByEmail",
+               "InviteUserByEmail/{AuthenticationToken}/",
+               new { controller = "InviteUser" },
+               null,
+               null);
+           
+            config.Routes.MapHttpRoute(
+            "SearchCoupons",
+            "SearchCoupons/",
+            new { controller = "SearchCoupons" },
+            null,
+            routeHandlers);
+
+
+            config.Routes.MapHttpRoute(
+         "DealDecrement",
+         "DealDecrement/",
+         new { controller = "DealDecrement" },
+         null,
+         routeHandlers);
+
+
+            config.Routes.MapHttpRoute(
+      "DealBalanceUpdate",
+      "DealBalanceUpdate/",
+      new { controller = "DealBalanceUpdate" },
+      null,
+      routeHandlers);
+
+            config.Routes.MapHttpRoute(
+               "UserFavouriteCoupon",
+               "UserFavouriteCoupon/{AuthenticationToken}/",
+               new { controller = "UserFavouriteCoupon" },
+               null,
+               null);
+
+            config.Routes.MapHttpRoute(
+            "IsValidCoupon",
+            "IsValidCoupon/{AuthenticationToken}/",
+            new { controller = "GenerateCoupon" },
+            null,
+            null);
+
+
+
+              config.Routes.MapHttpRoute(
+            "GetCouponById",
+            "GetCouponById/",
+            new { controller = "GetCouponById" },
+            null,
+            routeHandlers);
+
+            
+            
+              config.Routes.MapHttpRoute(
+            "GetCouponByCompanyId",
+            "GetCouponByCompanyId/",
+            new { controller = "GetCouponByCompanyId" },
+            null,
+            routeHandlers);
+
+
+
+
+              config.Routes.MapHttpRoute(
+            "UserPurchasedCoupon",
+            "UserPurchasedCoupon/{AuthenticationToken}/",
+            new { controller = "UserPurchasedCoupon" },
+            null,
+            routeHandlers);
+
+              config.Routes.MapHttpRoute(
+         "UserCashout",
+         "UserCashout/{AuthenticationToken}/",
+         new { controller = "UserCashout" },
+         null,
+         routeHandlers);
+
+        config.Routes.MapHttpRoute(
+         "UserFeedback",
+         "UserFeedback/{AuthenticationToken}/",
+         new { controller = "UserFeedback" },
+         null,
+         routeHandlers);
+
+            
+              config.Routes.MapHttpRoute(
+            "RedeemPurchasedCoupon",
+            "RedeemPurchasedCoupon/{AuthenticationToken}/",
+            new { controller = "RedeemPurchasedCoupon" },
+            null,
+            routeHandlers);
+
+
+           config.Routes.MapHttpRoute(
+            "ReferUsers",
+            "ReferUsers/{AuthenticationToken}/",
+            new { controller = "ReferUsers" },
+            null,
+            routeHandlers);
+
+
+           config.Routes.MapHttpRoute(
+      "GetRandomGame",
+      "GetRandomGame/{AuthenticationToken}/",
+      new { controller = "GetRandomGame" },
+      null,
+      routeHandlers);
+
+
+               config.Routes.MapHttpRoute(
+      "SurveySharingGroup",
+      "SurveySharingGroup/{AuthenticationToken}/",
+      new { controller = "SurveySharingGroup" },
+      null,
+      null);
+
+
+    config.Routes.MapHttpRoute(
+      "SharedSurveyQuestion",
+      "SharedSurveyQuestion/{AuthenticationToken}/",
+      new { controller = "SharedSurveyQuestion" },
+      null,
+      null);
+
+              config.Routes.MapHttpRoute(
+      "Notifications",
+      "Notifications/{AuthenticationToken}/",
+      new { controller = "Notifications" },
+      null,
+      null);
+
+              config.Routes.MapHttpRoute(
+      "Country",
+      "Country/{AuthenticationToken}/",
+      new { controller = "Country" },
+      null,
+      null);
+
+              config.Routes.MapHttpRoute(
+    "CouponRatingReview",
+    "CouponRatingReview/{AuthenticationToken}/",
+    new { controller = "CouponRatingReview" },
+    null,
+    null);
+
+
+              config.Routes.MapHttpRoute(
+                "UserCouponCategoryClick",
+                "UserCouponCategoryClick/{AuthenticationToken}/",
+                new { controller = "UserCouponCategoryClick" },
+                null,
+                null);
+
+             config.Routes.MapHttpRoute(
+                "UserProfileQuestions",
+                "UserProfileQuestions/{AuthenticationToken}/",
+                new { controller = "UserProfileQuestions" },
+                null,
+                null);
+
+
+            
+            
+
+
+           //config.Routes.MapHttpRoute(
+           //"CouponApproval",
+           //"CouponApproval/{AuthenticationToken}/",
+           //new { controller = "CouponApproval" },
+           //null,
+           //routeHandlers);
+            
+
+            
         }
     }
 }

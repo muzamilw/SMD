@@ -1,4 +1,5 @@
-﻿namespace SMD.Models.RequestModels
+﻿using SMD.Models.Common;
+namespace SMD.Models.RequestModels
 {
     /// <summary>
     /// Ad Viewed Request Model 
@@ -14,5 +15,10 @@
         /// AdCampaign Id
         /// </summary>
         public long AdCampaignId { get; set; }
+
+        public int companyId { get; set; }
+        public int? userQuizSelection { get; set; }
+
+        public CampaignResponseEventType ResponeEventType { get; set; }
     }
 }

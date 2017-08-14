@@ -37,6 +37,8 @@ namespace SMD.Models.DomainModels
         public bool? DiscountVoucherApplied { get; set; }
         public string VoucherCode { get; set; }
         public long? DiscountVoucherId { get; set; }
+
+       
         public string RejectionReason { get; set; }
 
         public int? Status { get; set; }
@@ -47,6 +49,15 @@ namespace SMD.Models.DomainModels
         public int? Gender { get; set; }
         public long? ParentSurveyId { get; set; }
         public int? Priority { get; set; }
+        public Nullable<int> CompanyId { get; set; }
+
+
+        public int? AnswerNeeded { get; set; }
+
+        public double? AmountCharged { get; set; }
+
+        public Nullable<bool> IsUseFilter { get; set; }
+
         public virtual ICollection<AdCampaignTargetCriteria> AdCampaignTargetCriterias { get; set; }
         public virtual User User { get; set; }
         public virtual Country Country { get; set; }
@@ -56,11 +67,16 @@ namespace SMD.Models.DomainModels
         public virtual ICollection<SurveyQuestionTargetLocation> SurveyQuestionTargetLocations { get; set; }
         public virtual ICollection<SurveyQuestionResponse> SurveyQuestionResponses { get; set; }
 
+        public virtual ICollection<ProfileQuestionTargetCriteria> ProfileQuestionTargetCriterias { get; set; }
+
         public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }
+        public virtual Company Company { get; set; }
         //left image and right image not mapped bytes
-        [NotMapped]
+        //[NotMapped]
         public string LeftPictureBytes { get; set; }
-        [NotMapped]
+        //[NotMapped]
         public string RightPictureBytes { get; set; }
+
+        public virtual ICollection<CampaignEventHistory> CampaignEventHistories { get; set; }
     }
 }

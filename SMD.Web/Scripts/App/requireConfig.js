@@ -1,4 +1,4 @@
-﻿// Setup requirejs
+// Setup requirejs
 (function () {
 
     var root = this;
@@ -14,13 +14,23 @@
         paths: {
             "sammy": "/Scripts/sammy-0.7.5.min",
             "common":  "/Areas/Common/Scripts",
+
             // SMD 
             "pQuestion": "/Areas/ProfileQuestion/Scripts",
             "ads": "/Areas/Ads/Scripts",
-            "addApproval": "/Areas/Ads/Scripts",
+          //  "addApproval": "/Areas/Ads/Scripts",
             "survey": "/Areas/Survey/Scripts",
             "surveyQuestionApp": "/Areas/Survey/Scripts",
-            "invoice":"/Areas/Billing/Scripts"
+            "invoice":"/Areas/Billing/Scripts",
+            "user": "/Areas/User/Scripts",
+            "Coupons": "/Areas/Coupons/Scripts",
+            "Layout": "/Areas/Coupons/Scripts",
+            "PhraseLibrary": "/Areas/Common/Scripts",
+            "DAM": "/Areas/DAM/Scripts",
+            "FranchiseDashboard": "/Areas/Franchise/Scripts", 
+            "analytic": "/Areas/SuperNova/Scripts",
+            "Emails": "/Areas/EmailPromotion/Scripts",
+            "Report": "/Areas/Report/Scripts",
         }
     });
 

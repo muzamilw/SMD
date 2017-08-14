@@ -1,9 +1,12 @@
 ﻿using System.Linq;
 using Microsoft.Practices.Unity;
 using SMD.Interfaces.Repository;
+using SMD.Models.Common;
 using SMD.Models.DomainModels;
 using SMD.Repository.BaseRepository;
 using System.Data.Entity;
+using SMD.Models.IdentityModels;
+using System.Collections.Generic;
 
 namespace SMD.Repository.Repositories
 {
@@ -43,11 +46,30 @@ namespace SMD.Repository.Repositories
         /// <summary>
         /// Get Account by user id
         /// </summary>
-        public Account GetByUserId(string userId)
+        public Account GetByUserId(string userId, AccountType accountType)
         {
-            return DbSet.FirstOrDefault(account => account.UserId == userId);
+            var user = db.Users.Where(g => g.Id == userId).SingleOrDefault();
+            if (user != null && user.CompanyId.HasValue)
+                return DbSet.FirstOrDefault(account => account.CompanyId == user.CompanyId && account.AccountType == (int)accountType);
+            else
+                return null;
         }
 
+        public List<Account> GetByUserId(string UserId)
+        {
+            var result = from a in db.Accounts
+                         join c in db.Companies on a.CompanyId equals c.CompanyId
+                         join u in db.Users on c.CompanyId equals u.CompanyId
+                         where u.Id == UserId
+                         select a;
+
+            return result.ToList();
+        }
+
+        public Account GetByCompanyId(int commpanyId, AccountType accountType)
+        {
+            return DbSet.FirstOrDefault(account => account.CompanyId == commpanyId && account.AccountType == (int)accountType);
+        }
         /// <summary>
         /// Get Account by name
         /// </summary>
@@ -64,6 +86,8 @@ namespace SMD.Repository.Repositories
         {
             return DbSet.FirstOrDefault(account => account.AccountId == accountId);
         }
+
+       
         #endregion
 
         

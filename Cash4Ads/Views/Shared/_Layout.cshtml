@@ -1,5 +1,6 @@
 ﻿@{
     Layout = null;
+    var sessionVar = Session["User"] as Cash4Ads.Models.User;
 }
 <!DOCTYPE html>
 
@@ -23,8 +24,13 @@
     <link rel="stylesheet" href="~/content/style.css">
 
 
+    <link rel="stylesheet" href="~/content/font-awesome.min.css">
+
+
     @RenderSection("COLOR", required: false)
- 
+    <script src="~/Scripts/Rating/jquery.js"></script>
+    <script src="~/Scripts/Rating/rating.js"></script>
+    <link href="~/Scripts/Rating/rating.css" rel="stylesheet" />
 
     <!-- FLEXSLIDER -->
     <link href="~/content//flexslider.css" rel="stylesheet" />
@@ -40,6 +46,28 @@
 
     <script src="~/scripts/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 
+   
+    <link href="~/content//voucher.css" rel="stylesheet" />
+
+
+    
+    <script>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-72555380-1', 'auto');
+    ga('send', 'pageview');
+
+    </script>
+    <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+  
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="584729032378-al3tomni29c6uqh54kuph83dhdtl6lk4.apps.googleusercontent.com">
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 </head>
 <body>
     <!--[if lt IE 7]>
@@ -55,28 +83,45 @@
                     <span class="icon-bar"></span>
                 </button>
 
+                <a href="/"><img src="~/images/Cash4ads_logo.png" style="" class="logocash" /></a>
+                <a href="/"><img src="~/images/beta.jpg" style="" class="logocashbeta" /></a>
 
-                <a class="navbar-brand" href="/">Logo</a>
+                @*<a class="navbar-brand" href="/">Logo</a>*@
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="top-navbar-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a class="scroll-link" href="@Url.Action("Index", "Home")">Get Paid to watch Ads</a></li>
-                    <li><a class="scroll-link" href="@Url.Action("advertisers", "Home")">Want to Advertise</a></li>
-                   
-                    <li><a class="scroll-link" href="http://blog.cash4ads.com">Blog</a></li>
-                    <li><a class="scroll-link" href="http://create.cash4ads.com">Sign In</a></li>
+                    
+                    @if (sessionVar == null)
+                    {
+                        <li><a class="scroll-link" href="http://cash4ads.com/download-app/">Get paid to watch ads</a></li>
+                        <li><a class="scroll-link" href="http://cash4ads.com/">Advertise for free</a></li>
 
+                        @*<li><img src="~/images/United-Kingdom-icon.png" style="padding-top:22px;" /></li>
+                        <li><a href="http://cash4ads.com/download-app/" title="Login" style="    padding-top: 30px;    font-size: 23px;    margin-left: 12px;"><i class="fa fa-user fa-lg text-white "></i></a></li>*@
+
+                    }
+                    else
+                    {
+                        <li><a class="scroll-link" onclick="openRptViewer(1);" >My Account Activity</a></li>
+                        <li><a class="scroll-link" onclick="openRptViewer(2);" >My Campaign Activity</a></li>
+                        <li><a class="scroll-link" onclick="logOutFromGoogle();" href="@Url.Action("logOut", "Home")">Sign out</a></li>
+                        <li><img src="~/images/United-Kingdom-icon.png" style="padding-top:22px;" /></li>
+
+                    }
+                   
                 </ul>
             </div>
         </div>
     </nav>
-
-
+  
+  
     @RenderBody()
 
 
     <!-- Social -->
+    
+
     <section id="social" class="container-fluid text-white">
         <div class="container">
             <div class="row">
@@ -86,31 +131,26 @@
                        
 
                         <li>
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Facebook" class="green-tooltip">
+                            <a href="https://www.facebook.com/Cash4ads-567555380070390/" target="_blank" data-toggle="tooltip" data-placement="top" title="" data-original-title="Facebook" class="green-tooltip">
                                 <div class="social-icon text-center"><i class="fa fa-facebook fa-lg"></i></div>
                             </a>
                         </li>
 
                         <li>
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Twitter" class="green-tooltip">
+                            <a href="https://twitter.com/AnnaCash4ads" target="_blank" data-toggle="tooltip" data-placement="top" title="" data-original-title="Twitter" class="green-tooltip">
                                 <div class="social-icon text-center"><i class="fa fa-twitter fa-lg"></i></div>
                             </a>
                         </li>
 
                         <li>
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="YouTube" class="green-tooltip">
+                            <a href="https://m.youtube.com/channel/UCgKZnVxCux7yhYPJMzO8oBA" data-toggle="tooltip" data-placement="top" title="" data-original-title="YouTube" class="green-tooltip">
                                 <div class="social-icon text-center"><i class="fa fa-youtube fa-lg"></i></div>
                             </a>
                         </li>
 
+                    
                         <li>
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Instagram" class="green-tooltip">
-                                <div class="social-icon text-center"><i class="fa fa-instagram fa-lg"></i></div>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="mailto:info@cash4ads.com" data-toggle="tooltip" data-placement="top" title="" data-original-title="Email" class="green-tooltip">
+                            <a href="mailto:anna@cash4ads.com" data-toggle="tooltip" data-placement="top" title="" data-original-title="Email" class="green-tooltip">
                                 <!-- Change to your own email address -->
                                 <div class="social-icon text-center"><i class="fa fa-envelope fa-lg"></i></div>
                             </a>
@@ -129,21 +169,16 @@
 
                 <div class="col-md-12 text-center ">
                     <p>
-                        Copyright © 2016 Cash4Ads.com Inc. All rights reserved.
+                        Copyright © 2017 Clydy Limited UK. All rights reserved.
                     </p>
                     <p>
-                        <a href="#">Privacy Policy</a>&nbsp;&nbsp;&nbsp;&nbsp;        <a href="#">Terms of Use</a>&nbsp;&nbsp;&nbsp;&nbsp;     <a href="#">Site Map</a>&nbsp;&nbsp;&nbsp;&nbsp;       <a href="#">Contact Us</a>&nbsp;&nbsp;&nbsp;&nbsp;       <a href="#">Help Center</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="http://blog.cash4ads.com">Blog</a> &nbsp;&nbsp;&nbsp;&nbsp;    <a href="#">Language</a>
+                        <a href="@Url.Action("get_paid_watch_ads", "Home")">Get paid to watch Ads</a>&nbsp;&nbsp;&nbsp;&nbsp; <a href="@Url.Action("advertisers", "Home")">Advertise for free</a>&nbsp;&nbsp;&nbsp;&nbsp; <a href="#">Privacy Policy</a>&nbsp;&nbsp;&nbsp;&nbsp;        <a href="#">Terms of Use</a>&nbsp;&nbsp;&nbsp;&nbsp;     <a href="@Url.Action("contact", "Home")">Contact Us</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://blog.cash4ads.com" target="_blank">Blog</a> &nbsp;&nbsp;&nbsp;&nbsp;    
 </p>
                 </div>
             </div>
         </div>
     </section>
-
-             
-
-
-
-
+  
                 <script src="~/scripts/jquery-2.1.4.min.js"></script>
                 <script>window.jQuery || document.write('<script src="~/scripts/jquery-2.1.4.min.js"><\/script>')</script>
 
@@ -162,6 +197,59 @@
 
                 <!-- Isotope JS file -->
                 <script src="~/scripts/jquery.isotope.min.js"></script>
+
+    <script>
+       
+        function getBrowserHeight() {
+            var intH = 0;
+            var intW = 0;
+            if (typeof window.innerWidth == 'number') {
+                intH = window.innerHeight;
+                intW = window.innerWidth;
+            }
+            else if (document.documentElement && (document.documentElement.clientWidth || document.documentElement.clientHeight)) {
+                intH = document.documentElement.clientHeight;
+                intW = document.documentElement.clientWidth;
+            }
+            else if (document.body && (document.body.clientWidth || document.body.clientHeight)) {
+                intH = document.body.clientHeight;
+                intW = document.body.clientWidth;
+            }
+            return { width: parseInt(intW), height: parseInt(intH) };
+        }
+        function logOutFromGoogle(){
+                        logoutparam = true;
+            //window.open("https://mail.google.com/mail/u/0/?logout&hl=en", "_blank");
+            //var token = gapi.auth2.getToken();
+            //if (token) {
+            //    var accessToken = gapi.auth2.getToken().access_token;
+            //    if (accessToken) {
+            //        // make http get request towards: 'https://accounts.google.com/o/oauth2/revoke?token=' + accessToken
+            //        // In angular you can do it like this:
+            //        // $http({
+            //        //   method: 'GET',
+            //        //   url: 'https://accounts.google.com/o/oauth2/revoke?token=' + accessToken
+            //        // });
+            //    }
+            //}
+            //gapi.auth2.setToken(null);
+            //gapi.auth2.signOut();
+            //$.ajax({
+            //    type: 'GET',
+            //    url: 'https://mail.google.com/mail/u/0/?logout&hl=en',
+            //    async: false,
+            //    contentType: 'application/json',
+            //    dataType: 'jsonp',
+            //    success: function (result) {
+            //        debugger
+            //        window.location.href = "/Home/logOut";
+            //    },
+            //    error: function (e) {
+            //        console.log(e);
+            //    }
+            //});
+        }
+    </script>
 
 
 

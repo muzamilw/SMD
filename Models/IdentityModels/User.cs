@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using SMD.Models.DomainModels;
 using SMD.Models.RequestModels;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SMD.Models.IdentityModels
 {
@@ -19,61 +20,65 @@ namespace SMD.Models.IdentityModels
         public string PhoneNumber { get; set; }
         public bool PhoneNumberConfirmed { get; set; }
         public bool TwoFactorEnabled { get; set; }
-        public DateTime? LockoutEndDateUtc { get; set; }
+        public Nullable<System.DateTime> LockoutEndDateUtc { get; set; }
         public bool LockoutEnabled { get; set; }
         public int AccessFailedCount { get; set; }
         public string UserName { get; set; }
         public string FullName { get; set; }
         public string AlternateEmail { get; set; }
         public string IsEmailVerified { get; set; }
-        public int? Status { get; set; }
-        public DateTime? CreatedDateTime { get; set; }
-        public DateTime? ModifiedDateTime { get; set; }
-        public DateTime? LastLoginTime { get; set; }
+        public Nullable<int> Status { get; set; }
+        public Nullable<System.DateTime> CreatedDateTime { get; set; }
+        public Nullable<System.DateTime> ModifiedDateTime { get; set; }
+        public Nullable<System.DateTime> LastLoginTime { get; set; }
         public string Phone1 { get; set; }
         public string Phone2 { get; set; }
         public string Jobtitle { get; set; }
         public string ContactNotes { get; set; }
         public bool IsSubscribed { get; set; }
-        public int? AppId { get; set; }
-        public string CompanyName { get; set; }
-        public string SalesEmail { get; set; } // till here 
-        public string CompanyRepresentative { get; set; }
-        public string Address1 { get; set; }
-        public string Address2 { get; set; }
-        public int? CityId { get; set; }
-        public int? CountryId { get; set; }
-        public string State { get; set; }
-        public string ZipCode { get; set; }
+        public Nullable<int> AppID { get; set; }
+        public Nullable<bool> IsCompanyRepresentative { get; set; }
+        //public string Address1 { get; set; }
+        //public string Address2 { get; set; }
+        //public Nullable<int> CityId { get; set; }
+        //public Nullable<int> CountryId { get; set; }
+        //public string State { get; set; }
+        //public string ZipCode { get; set; }
         public string UserTimeZone { get; set; }
-        public string ReferralCode { get; set; }
-        public bool? AfilliatianStatus { get; set; }
-        public string StripeCustomerId { get; set; }
-        public string ChargeBeesubscriptionId { get; set; }
-        public bool? RegisteredViaReferral { get; set; }
-        public string ReferringUserId { get; set; }
-        public int? Age { get; set; }
-        public int? Gender { get; set; }
-        public int? LanguageId { get; set; }
-        public int? IndustryId { get; set; }
-        public long? EducationId { get; set; }
+        public Nullable<int> Gender { get; set; }
+        public Nullable<int> LanguageId { get; set; }
+        public Nullable<int> IndustryId { get; set; }
+        public Nullable<long> EducationId { get; set; }
         public string ProfileImage { get; set; }
         public string UserCode { get; set; }
         public string SmsCode { get; set; }
         public string WebsiteLink { get; set; }
-        public string AdvertisingContact { get; set; }
-        public string AdvertisingContactPhoneNumber { get; set; }
-        public string AdvertisingContactEmail { get; set; }
+        public Nullable<System.DateTime> DOB { get; set; }
+        public Nullable<int> CompanyId { get; set; }
+        public string AuthenticationToken { get; set; }
 
-        public string PaypalCustomerId { get; set; }
-        public string GoogleWalletCustomerId { get; set; }
-        public int? PreferredPayoutAccount { get; set; }
-        
-
-
-
+        public virtual Company Company { get; set; }
         public virtual Industry Industry { get; set; }
         public virtual Language Language { get; set; }
+
+        public Nullable<int> DevicePlatform { get; set; }
+
+        public Nullable<bool> optDealsNearMeEmails { get; set; }
+        public Nullable<bool> optLatestNewsEmails { get; set; }
+        public Nullable<bool> optMarketingEmails { get; set; }
+
+        public Nullable<bool> optPushNewDeals { get; set; }
+        public Nullable<bool> optPushNewPicturePoll { get; set; }
+             
+
+        public string LastKnownLocationLat { get; set; }
+        public string LastKnownLocationLong { get; set; }
+        public System.Data.Entity.Spatial.DbGeography LastKnownLocation { get; set; }
+
+        public string Title { get; set; }
+
+        public string DeleteConfirmationToken { get; set; }
+
         public virtual ICollection<UserLogin> UserLogins { get; set; }
         public virtual ICollection<Role> Roles { get; set; }
         public virtual ICollection<UserClaim> Claims { get; set; }
@@ -83,106 +88,40 @@ namespace SMD.Models.IdentityModels
         public virtual ICollection<SurveyQuestion> SurveyQuestions { get; set; }
         public virtual ICollection<SurveyQuestionResponse> SurveyQuestionResponses { get; set; }
 
-        public virtual ICollection<Account> Accounts { get; set; }
+        public virtual ICollection<AspNetUsersNotificationToken> AspNetUsersNotificationTokens { get; set; }
 
+        public virtual ICollection<Account> Accounts { get; set; }
+       
         public virtual ICollection<Invoice> Invoices { get; set; }
+
+        public virtual ICollection<CompaniesAspNetUser> CompaniesAspNetUsers { get; set; }
+
+        public virtual Country Country { get; set; }
+
+        public Nullable<int> Phone1CodeCountryID { get; set; }
 
 
         public virtual Education Education { get; set; }
 
-        public virtual City City { get; set; }
-        public virtual Country Country { get; set; }
-        
+        public virtual ICollection<UserGameResponse> UserGameResponses { get; set; }
+
+        public virtual ICollection<UserCouponCategoryClick> UserCouponCategoryClicks { get; set; }
+
+        public string PassportNo { get; set; }
+
+        //public virtual City City { get; set; }
+        //public virtual Country Country { get; set; }
+
+        //city name and country name
+        [NotMapped]
+        public string CountryName { get; set; }
+        [NotMapped]
+        public string CityName { get; set; }
+        public Nullable<bool> optPaidEmails { get; set; }  
+
         #endregion
 
         #region Public
-
-        /// <summary>
-        /// Update user
-        /// </summary>
-        public void Update(UpdateUserProfileRequest source)
-        {
-            if (source == null)
-            {
-                return;
-            }
-
-            // Update only the ones that changed
-            if (!string.IsNullOrEmpty(source.Phone1))
-            {
-                Phone1 = source.Phone1;
-            }
-
-            if (!string.IsNullOrEmpty(source.Phone2))
-            {
-                Phone2 = source.Phone2;
-            }
-
-            if (!string.IsNullOrEmpty(source.Address1))
-            {
-                Address1 = source.Address1;
-            }
-
-            if (!string.IsNullOrEmpty(source.Address2))
-            {
-                Address2 = source.Address2;
-            }
-
-            if (!string.IsNullOrEmpty(source.JobTitle))
-            {
-                Jobtitle = source.JobTitle;
-            }
-
-            if (!string.IsNullOrEmpty(source.CompanyName))
-            {
-                CompanyName = source.CompanyName;
-            }
-
-            if (!string.IsNullOrEmpty(source.ContactNotes))
-            {
-                ContactNotes = source.ContactNotes;
-            }
-
-            if (!string.IsNullOrEmpty(source.State))
-            {
-                State = source.State;
-            }
-
-            if (!string.IsNullOrEmpty(source.ZipCode))
-            {
-                ZipCode = source.ZipCode;
-            }
-
-            if (source.Age.HasValue)
-            {
-                Age = source.Age;
-            }
-
-            if (source.CityId.HasValue)
-            {
-                CityId = source.CityId;
-            }
-
-            if (source.CountryId.HasValue)
-            {
-                CountryId = source.CountryId;
-            }
-
-            if (source.Gender.HasValue)
-            {
-                Gender = source.Gender;
-            }
-
-            if (source.IndustryId.HasValue)
-            {
-                IndustryId = source.IndustryId;
-            }
-
-            if (!string.IsNullOrEmpty(source.FullName))
-            {
-                FullName = source.FullName;
-            }
-        }
 
         #endregion
     }

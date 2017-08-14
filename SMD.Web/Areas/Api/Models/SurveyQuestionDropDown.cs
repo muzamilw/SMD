@@ -12,4 +12,14 @@ namespace SMD.MIS.Areas.Api.Models
         public string LeftPicturePath { get; set; }
         public string RightPicturePath { get; set; }
     }
+    public class AdCampaignDropDown
+    {
+        public long CampaignId { get; set; }
+        public string VerifyQuestion { get; set; }
+        public string Answer1 { get; set; }
+        public string Answer2 { get; set; }
+        public string Answer3 { get; set; }
+        public bool isSelected { get; set; }
+    }
+    
 }

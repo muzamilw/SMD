@@ -1,4 +1,5 @@
-﻿using FluentScheduler;
+﻿using System;
+using FluentScheduler;
 
 namespace SMD.Implementation.Services
 {
@@ -10,15 +11,19 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Constructor 
         /// </summary>
-        public ParentScheduler()
+        public ParentScheduler(System.Web.HttpContext context) //Action<Exception> unhandledExceptionHandler
         {
+            EmailScheduler.UserAccountDetailScheduler(this, context);
+            EmailScheduler.MonitorQueue(this);
             // Debit Scheduler 
-             CollectionScheduler.SetDebitScheduler(this);
+           // CollectionScheduler.SetDebitScheduler(this);
 
             // Credit Scheduler
-             PayOutScheduler.SetDebitScheduler(this);
+            TransactionManager.SetDebitScheduler(this);
 
             // Ad more Schedulers here ...
+
+            EmailScheduler.DealsRelatedNotifications(this, context);
         }
     }
 

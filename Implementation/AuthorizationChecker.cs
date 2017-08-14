@@ -21,13 +21,13 @@ namespace SMD.Implementation
         /// </summary>
         public bool Check(AuthorizationCheckRequest request)
         {
-            if (IsPortalAdministrator())
-            {
-                return true;
-            }
-            
-            return HasRequiredPortalRole(request.RequiredPortalRoles)
-                && HasRequiredAccessRights(request.RequiredAccessRights);
+            //if (IsPortalAdministrator())
+            //{
+            //    return true;
+            //}
+
+            return HasRequiredPortalRole(request.RequiredPortalRoles);
+                //&& HasRequiredAccessRights(request.RequiredAccessRights);
         }
         
         /// <summary>
@@ -35,8 +35,8 @@ namespace SMD.Implementation
         /// </summary>
         public bool IsPortalAdministrator()
         {
-            IList<SmdRoleClaimValue> roles = ClaimHelper.GetClaimsByType<SmdRoleClaimValue>(ClaimTypes.Role);
-            return roles.Any(role => role.Role == SecurityRoles.Admin);
+            IList<SmdRoleClaimValue> roles = ClaimHelper.GetClaimsByType<SmdRoleClaimValue>(SmdClaimTypes.Role);
+            return roles.Any(role => role.Role == SecurityRoles.Supernova_Admin);
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace SMD.Implementation
             {
                 throw new ArgumentNullException("requiredPortalRoles");
             }
-            IEnumerable<SmdRoleClaimValue> roles = ClaimHelper.GetClaimsByType<SmdRoleClaimValue>(ClaimTypes.Role);
+            IEnumerable<SmdRoleClaimValue> roles = ClaimHelper.GetClaimsByType<SmdRoleClaimValue>(SmdClaimTypes.Role);
             return !requiredPortalRoles.Any() || roles.Any(role => requiredPortalRoles.Contains(role.Role));
         }
 

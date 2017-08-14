@@ -1,0 +1,106 @@
+﻿@{
+    ViewBag.Title = "Ad Campaigns For Approval";
+    
+}
+<div class="row" id="AdCampaignApprovalBindingSpot">
+    <div class="col-lg-12" data-bind="visible: !$root.isEditorVisible()">
+        <div class="row">
+            <div class="col-lg-12">
+                <input type="hidden" id="typeParam" name="typeParam" value="@ViewBag.addType" />
+                @*<ol class="breadcrumb">
+                    <li><a href="~/Dashboard/Index">&nbsp;</a></li>
+                </ol>*@
+                <div class="clearfix">
+                    <h1 class="pull-left" style="padding-left:7px; font-size:24px;color:#fff" data-bind="text:$root.lblPageTitle"></h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12" style="margin-left:6px;padding-right:30px;">
+                <div class=" main-box no-header clearfix">
+                <div class="main-box-body clearfix">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover" id="adCampaignApprovalLVTable">
+                            <thead>
+                                <tr>
+                                    <th class="col-lg-2 th-pointer"><span id="4">Submitted By<span></span></span></th>
+                                    <th class="col-lg-2 th-pointer">
+                                        <span id="1" data-bind="visible:!$root.isShowCopounMode()">Campaign Name<span></span></span>
+                                        <span id="1" data-bind="visible:$root.isShowCopounMode()">Coupon Name<span></span></span>
+                                    </th>
+                                    <th class="col-lg-2 th-pointer"><span id="5">Submission Date<span class="icon-up"></span></span></th>
+                                    <th class="col-lg-1 th-pointer" data-bind="visible:!$root.isShowCopounMode()"><span id="6">PPC<span></span></span></th>
+                                    <th class="col-lg-1 th-pointer"><span id="3">Type<span></span></span></th>
+                                    <th class="col-lg-1">&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- ko template: { name: 'adCampaignsLVTemplate' , foreach: campaigns } -->
+                                <!-- /ko -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+                <div id="pagerDivForStore" class="pull-right">
+                    <!-- ko with: pager -->
+                    @Html.Partial("~/Areas/Common/Views/Shared/_Pager.cshtml")
+                    <!-- /ko -->
+                </div>
+            </div>
+        </div>
+
+        <script id="adCampaignsLVTemplate" type="text/html">
+            <tr style="cursor: pointer" data-bind="click:$root.onEditCampaign">
+                <td>
+                    <p data-bind="text:createdBy"></p>
+                </td>
+                <td>
+                    <p data-bind="text:campaignName"></p>
+                </td>
+
+
+
+                <td>
+                    <p data-bind="dateString:submissionDate,datePattern: 'DD/MM/YYYY'"></p>
+                </td>
+                <td data-bind="visible:!$root.isShowCopounMode()">
+                    <p data-bind="text:clickRate"></p>
+                </td>
+                <td>
+                    <p data-bind="text:type()==1 ? 'Video Ad':'Display Ad',visible:!$root.isShowCopounMode()"></p>
+                    <p data-bind="visible:$root.isShowCopounMode()">Coupon</p>
+                </td>
+                <td>
+                    <a class="table-link" style="float: right">
+                        <span class="fa-stack">
+                            <i class="fa fa-square fa-stack-2x"></i>
+                            <i class="fa fa-pencil fa-stack-1x fa-inverse" data-bind="click:$root.onEditCampaign"></i>
+                        </span>
+                    </a>
+                </td>
+            </tr>
+        </script>
+    </div>
+    @{
+        Html.RenderPartial("~/Areas/Ads/Views/Ads/_addEditor.cshtml");
+    }
+</div>
+<!-- ko stopBinding: true -->
+@Html.Partial("~/Areas/Common/Views/Shared/_ConfirmationDialog.cshtml")
+<!-- /ko -->
+@section Scripts{
+    <script type="text/javascript">
+        require(["FranchiseDashboard/addApproval.view", "common/confirmation.view"]);
+       
+    </script>
+    <script>
+        function getParameter(url, param) {
+            if (url.indexOf('?') == -1)
+                return 1;
+            url = url.split('?');
+            var pattern = new RegExp(param + '=(.*?)(;|&|$)', 'gi');
+            return url[1].split(pattern)[1];
+        }
+    </script>
+}

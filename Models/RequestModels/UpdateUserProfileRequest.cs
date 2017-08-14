@@ -13,131 +13,38 @@ namespace SMD.Models.RequestModels
         public string UserId { get; set; }
 
         /// <summary>
-        /// Phone 1
-        /// </summary>
-        public string Phone1 { get; set; }
-
-        /// <summary>
-        /// Phone 2
-        /// </summary>
-        public string Phone2 { get; set; }
-
-        /// <summary>
-        /// Job Title 
-        /// </summary>
-        public string JobTitle { get; set; }
-
-        /// <summary>
-        /// Contact Notes
-        /// </summary>
-        public string ContactNotes { get; set; }
-
-        /// <summary>
-        /// Company Name
-        /// </summary>
-        public string CompanyName { get; set; }
-
-        /// <summary>
-        /// Address 1 
-        /// </summary>
-        public string Address1 { get; set; }
-
-        /// <summary>
-        /// Address 2
-        /// </summary>
-        public string Address2 { get; set; }
-
-        /// <summary>
-        /// CityId
-        /// </summary>
-        public int? CityId { get; set; }
-
-        /// <summary>
-        /// Country Id
-        /// </summary>
-        public int? CountryId { get; set; }
-
-        /// <summary>
-        /// State
-        /// </summary>
-        public string State { get; set; }
-
-        /// <summary>
-        /// Zip Code
-        /// </summary>
-        public string ZipCode { get; set; }
-
-        /// <summary>
         /// Age
         /// </summary>
-        public int? Age { get; set; }
+        public DateTime? DOB { get; set; }
 
         /// <summary>
         /// Gender
         /// </summary>
         public int? Gender { get; set; }
 
-        /// <summary>
-        /// Industry Id
-        /// </summary>
-        public int? IndustryId { get; set; }
-
-        /// <summary>
-        /// Full Name
-        /// </summary>
-        public string FullName { get; set; }
-
-        /// <summary>
-        /// Profile Image
-        /// Base64 representation of image
-        /// </summary>
-        public string ProfileImage { get; set; }
-
-        /// <summary>
-        /// Profile Image Name
-        /// </summary>
-        public string ProfileImageName { get; set; }
-
-        /// <summary>
-        /// Profile Image Bytes
-        /// </summary>
-        public byte[] ProfileImageBytes
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(ProfileImage))
-                {
-                    return null;
-                }
-
-                int firtsAppearingCommaIndex = ProfileImage.IndexOf(',');
-
-                if (firtsAppearingCommaIndex < 0)
-                {
-                    return null;
-                }
-
-                if (ProfileImage.Length < firtsAppearingCommaIndex + 1)
-                {
-                    return null;
-                }
-
-                string sourceSubString = ProfileImage.Substring(firtsAppearingCommaIndex + 1);
-
-                try
-                {
-                    return Convert.FromBase64String(sourceSubString.Trim('\0'));
-                }
-                catch (FormatException)
-                {
-                    return null;
-                }
-            }
-        }
-
+       
         /// <summary>
         /// Authentication Token
         /// </summary>
         public string AuthenticationToken { get; set; }
+
+
+        /// <summary>
+        /// User Time ZOne
+        /// </summary>
+        public string Title { get; set; }
+
+        public string FullName { get; set; }
+
+        public int ProfessionID { get; set; }
+
+        public int Phone1CountryID { get; set; }
+
+        public string Phone1 { get; set; }
+
+        public Nullable<bool> optDealsNearMeEmails { get; set; }
+        public Nullable<bool> optPushNewDeals { get; set; }
+        public Nullable<bool> optPushNewPicturePoll { get; set; }
+             
     }
 }

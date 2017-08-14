@@ -24,7 +24,8 @@ namespace SMD.Models.DomainModels
         public int? IndustryId { get; set; }
 
         public Nullable<long> EducationId { get; set; }
-    
+        public Nullable<long> QuizCampaignId { get; set; }
+        public Nullable<int> QuizAnswerId { get; set; }
         public virtual Industry Industry { get; set; }
         public virtual AdCampaign AdCampaign { get; set; }
         public virtual ProfileQuestion ProfileQuestion { get; set; }
@@ -33,5 +34,24 @@ namespace SMD.Models.DomainModels
 
         public virtual Language Language { get; set; }
         public virtual Education Education { get; set; }
+        public virtual AdCampaign QuizCampaign { get; set; }
+        /// Makes a copy of Campaign response
+        /// </summary>
+        public void Clone(AdCampaignTargetCriteria target)
+        {
+
+            target.Type = Type;
+            target.PqId = PqId;
+            target.PqAnswerId = PqAnswerId;
+            target.SqId = SqId;
+            target.SqAnswer = SqAnswer;
+            target.IncludeorExclude = IncludeorExclude;
+            target.LanguageId = LanguageId;
+            target.IndustryId = IndustryId;
+            target.EducationId = EducationId;
+            target.QuizCampaignId = QuizCampaignId;
+            target.QuizAnswerId = QuizAnswerId;
+
+        }
     }
 }

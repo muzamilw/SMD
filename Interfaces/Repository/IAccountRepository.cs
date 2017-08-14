@@ -1,4 +1,7 @@
-﻿using SMD.Models.DomainModels;
+﻿using SMD.Models.Common;
+using SMD.Models.DomainModels;
+using SMD.Models.IdentityModels;
+using System.Collections.Generic;
 
 namespace SMD.Interfaces.Repository
 {
@@ -10,8 +13,9 @@ namespace SMD.Interfaces.Repository
         /// <summary>
         /// Get Account By user id
         /// </summary>
-        Account GetByUserId(string userId);
+        Account GetByCompanyId(int commpanyId, AccountType accountType);
 
+        Account GetByUserId(string userId, AccountType accountType);
         /// <summary>
         /// Get Account By name
         /// </summary>
@@ -21,5 +25,8 @@ namespace SMD.Interfaces.Repository
         /// Get Account By ID
         /// </summary>
         Account GetById(long accountId);
+
+
+        List<Account> GetByUserId(string UserId);
     }
 }

@@ -197,12 +197,46 @@
       <DependentUpon>LanguageResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\BranchCategoryRepository.cs" />
+    <Compile Include="Repositories\CampaignCategoriesRepository.cs" />
+    <Compile Include="Repositories\CouponRatingReviewRepository.cs" />
+    <Compile Include="Repositories\SurveySharingGroupShareRepository.cs" />
+    <Compile Include="Repositories\SharedSurveyQuestionRepository.cs" />
+    <Compile Include="Repositories\NotificationRepository.cs" />
+    <Compile Include="Repositories\SurveySharingGroupMemberRepository.cs" />
+    <Compile Include="Repositories\SurveySharingGroupRepository.cs" />
+    <Compile Include="Repositories\CouponPriceOptionRepository.cs" />
+    <Compile Include="Repositories\CompanyBranchRepository.cs" />
+    <Compile Include="Repositories\CompanyRepository.cs" />
+    <Compile Include="Repositories\CompanyAspNetUsersRepository.cs" />
+    <Compile Include="Repositories\AspnetUsersRepository.cs" />
+    <Compile Include="Repositories\PayOutHistoryRepository.cs" />
+    <Compile Include="Repositories\GameRepository.cs" />
+    <Compile Include="Repositories\DamImageRepository.cs" />
+    <Compile Include="Repositories\CouponCategoriesRepository.cs" />
+    <Compile Include="Repositories\CurrencyRepository.cs" />
+    <Compile Include="Repositories\CouponCategoryRepository.cs" />
+    <Compile Include="Repositories\CouponCodeRepository.cs" />
+    <Compile Include="Repositories\CouponRepository.cs" />
+    <Compile Include="Repositories\ManageUserRepository.cs" />
+    <Compile Include="Repositories\ProfileQuestionTargetCriteriaRepository.cs" />
+    <Compile Include="Repositories\ProfileQuestionTargetLocation.cs" />
+    <Compile Include="Repositories\SectionRepository.cs" />
+    <Compile Include="Repositories\PhraseRepository.cs" />
+    <Compile Include="Repositories\SurveyQuestionResponseRepository.cs" />
     <Compile Include="Repositories\EducationRepository.cs" />
     <Compile Include="Repositories\InvoiceDetailRepository.cs" />
     <Compile Include="Repositories\ProductRepository.cs" />
+    <Compile Include="Repositories\AdCampaignClickRateHistoryRepository.cs" />
+    <Compile Include="Repositories\CampaignEventHistoryRepository.cs" />
+    <Compile Include="Repositories\AspNetUsersNotificationTokenRepository.cs" />
+    <Compile Include="Repositories\UserCouponCategoryClickRepository.cs" />
+    <Compile Include="Repositories\UserGameResponseRepository.cs" />
+    <Compile Include="Repositories\UserCouponViewRepository.cs" />
     <Compile Include="Repositories\TaxRepository.cs" />
     <Compile Include="Repositories\IndustryRepository.cs" />
     <Compile Include="Repositories\InvoiceRepository.cs" />
+    <Compile Include="Repositories\TransactionLogRepository.cs" />
     <Compile Include="Repositories\TransactionRepository.cs" />
     <Compile Include="Repositories\AuditLogRepository.cs" />
     <Compile Include="Repositories\CityRepository.cs" />
@@ -222,6 +256,8 @@
     <Compile Include="Repositories\CountryRepository.cs" />
     <Compile Include="Repositories\RoleStore.cs" />
     <Compile Include="Repositories\ProfileQuestionRepository.cs" />
+    <Compile Include="Repositories\UserPurchasedCouponRepository.cs" />
+    <Compile Include="Repositories\UserFavouriteCouponRepository.cs" />
     <Compile Include="Repositories\UserStore.cs" />
     <Compile Include="TypeRegistrations.cs" />
   </ItemGroup>

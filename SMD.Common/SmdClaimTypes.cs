@@ -19,5 +19,20 @@
         /// User Timezone Offset
         /// </summary>
         public const string UserTimezoneOffset = "http://schemas.smd.com/2015/12/identity/claims/userTimeZoneOffset";
+
+        /// <summary>
+        /// User Timezone Offset
+        /// </summary>
+        public const string Role = "http://schemas.smd.com/2015/12/identity/claims/userRole";
+
+        /// <summary>
+        /// User Timezone Offset
+        /// </summary>
+        public const string RoleId = "http://schemas.smd.com/2015/12/identity/claims/userRoleId";
+      
+        /// <summary>
+        /// Logged in CompanyId
+        /// </summary>
+        public const string CompanyId = "http://schemas.smd.com/2015/12/identity/claims/CompanyId";
     }
 }

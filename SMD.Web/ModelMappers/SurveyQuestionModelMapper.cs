@@ -49,17 +49,20 @@ namespace SMD.MIS.ModelMappers
         public static SurveyQuestionRequestResponseModel CreateFrom(
             this Models.ResponseModels.SurveyQuestionResponseModel source)
         {
-            return new SurveyQuestionRequestResponseModel
-            {
-                TotalCount = source.TotalCount,
-                SurveyQuestions = source.SurveyQuestions.Select(question => question.CreateFrom()),
-                CountryDropdowns = source.Countries.Select(country => country.CreateFrom()),
-                LanguageDropdowns = source.Languages.Select(lang => lang.CreateFrom()),
-                objBaseData = source.objBaseData.CreateFrom(),
-                setupPrice = source.setupPrice,
-                Educations = source.Education.Select(edu => edu.CreateFrom()),
-                Professions = source.Industry.Select(ind => ind.CreateFrom())
-            };
+           
+                return new SurveyQuestionRequestResponseModel
+                {
+                    TotalCount = source.TotalCount,
+                    SurveyQuestions = source.SurveyQuestions.Select(question => question.CreateFrom()),
+                    CountryDropdowns = source.Countries.Select(country => country.CreateFrom()),
+                    LanguageDropdowns = source.Languages.Select(lang => lang.CreateFrom()),
+                    objBaseData = source.objBaseData.CreateFrom(),
+                    setupPrice = source.setupPrice,
+                    Educations = source.Education.Select(edu => edu.CreateFrom()),
+                    Professions = source.Industry.Select(ind => ind.CreateFrom())
+                };
+            
+           
         }
 
         /// <summary>
@@ -102,9 +105,16 @@ namespace SMD.MIS.ModelMappers
                 DiscountVoucherId = source.DiscountVoucherId,
                 RejectionReason = source.RejectionReason,
                 SubmissionDate = source.SubmissionDate,
-                CreatedBy = source.User.FullName,
-                CreatorAddress = source.User.State + " " + source.User.Address1
-
+                CreatedBy = source.User!=null ?source.User.FullName:string.Empty,
+                CreatorAddress = source.Company!= null ? source.Company.BillingAddressLine1 : string.Empty,
+                CompanyId = source.CompanyId,
+                AnswerNeeded=source.AnswerNeeded,
+                ResultClicks=source.ResultClicks,
+                AmountCharged = source.AmountCharged,
+                Company = source.Company != null ? source.Company.CompanyName : "System Survey",
+                ProjectedReach = source.ProjectedReach,
+                IsUseFilter=source.IsUseFilter,
+                LastModifiedDate =source.CampaignEventHistories.ToList().Count>0? source.CampaignEventHistories.ToList().LastOrDefault().EventDateTime:null
             };
         }
 
@@ -139,6 +149,7 @@ namespace SMD.MIS.ModelMappers
                 DiscountVoucherId = source.DiscountVoucherId,
                 RejectionReason = source.RejectionReason,
                 SubmissionDate = source.SubmissionDate,
+                IsUseFilter=source.IsUseFilter
             };
         }
 
@@ -189,13 +200,42 @@ namespace SMD.MIS.ModelMappers
                 RightPicturePath = rightPath
             };
         }
+        public static AdCampaignDropDown CreateFromDropdown(this Models.DomainModels.AdCampaign source)
+        {
+            return new AdCampaignDropDown
+            {
+                CampaignId = source.CampaignId,
+                VerifyQuestion = source.VerifyQuestion,
+                Answer1 = source.Answer1,
+                Answer2 = source.Answer2,
+                Answer3=source.Answer3
+            };
+        }
+        public static SMD.MIS.Areas.Api.Models.CompanyBranch CreateFromDropdown(this Models.DomainModels.CompanyBranch source)
+        {
+            return new SMD.MIS.Areas.Api.Models.CompanyBranch
+            {
+                BranchAddressLine1 = source.BranchAddressLine1,
+                BranchAddressLine2 = source.BranchAddressLine2,
+                BranchCategoryId = source.BranchCategoryId,
+                BranchCity = source.BranchCity,
+                BranchId = source.BranchId,
+                BranchLocationLat = source.BranchLocationLat,
+                BranchLocationLong = source.BranchLocationLong,
+                BranchPhone = source.BranchPhone,
+                BranchState = source.BranchState,
+                BranchTitle = source.BranchTitle,
+                BranchZipCode = source.BranchZipCode,
+                CompanyId = source.CompanyId
+            };
+        }
         public static SMD.MIS.Areas.Api.Models.UserBaseData CreateFrom(this Models.Common.UserBaseData source)
         {
             if (source != null)
             {
                 return new SMD.MIS.Areas.Api.Models.UserBaseData
                 {
-                    CityId = source.CityId,
+                    //CityId = source.CityId,
                     CountryId = source.CountryId,
                     LanguageId = source.LanguageId,
                     IndustryId = source.IndustryId,
@@ -208,7 +248,10 @@ namespace SMD.MIS.ModelMappers
                     CurrencySymbol = source.CurrencySymbol,
                     Latitude = source.Latitude,
                     Longitude = source.Longitude,
-                    isStripeIntegrated = source.isStripeIntegrated
+                    isStripeIntegrated = source.isStripeIntegrated,
+                    isUserAddmin = source.isUserAdmin,
+                    IsSpecialAccount = source.IsSpecialAccount,
+                    Status = source.Status,
                 };
             }
             else
@@ -280,7 +323,9 @@ namespace SMD.MIS.ModelMappers
                 AgeRangeStart = source.AgeRangeStart,
                 Gender = source.Gender,
                 ParentSurveyId = source.ParentSurveyId,
-                Priority = source.Priority
+                Priority = source.Priority,
+                CompanyId = source.CompanyId,
+                IsUseFilter=source.IsUseFilter
             };
         }
         public static List<SMD.MIS.Areas.Api.Models.SurveyQuestionTargetCriteria> GetSurveyQuestionTargetCriterias(this Models.DomainModels.SurveyQuestion source)
@@ -300,8 +345,11 @@ namespace SMD.MIS.ModelMappers
                 modelCriteria.PqId = criteria.PqId;
                 modelCriteria.SqId = criteria.SqId;
                 modelCriteria.Type = criteria.Type;
+                modelCriteria.QuizAnswerId = criteria.QuizAnswerId;
+                modelCriteria.QuizCampaignId = criteria.QuizCampaignId;
                 modelCriteria.EducationId = criteria.EducationId;
-                if (criteria.Type == (int)SurveyQuestionTargetCriteriaType.ProfileQuestion)
+                
+                if (criteria.Type == (int)SurveyQuestionTargetCriteriaType.ProfileQuestion )
                 {
                     if (criteria.ProfileQuestion != null)
                     {
@@ -346,6 +394,15 @@ namespace SMD.MIS.ModelMappers
                     {
                         modelCriteria.Education = criteria.Education.Title;
                     }
+                } else if (criteria.Type == (int)SurveyQuestionTargetCriteriaType.UserProfileQuestion) {
+                    if (criteria.AdCampaign != null)
+                    {
+                        modelCriteria.questionString = criteria.AdCampaign.VerifyQuestion;
+                        if (criteria.QuizAnswerId == 1)
+                            modelCriteria.answerString = criteria.AdCampaign.Answer1;
+                        if (criteria.QuizAnswerId == 2)
+                            modelCriteria.answerString = criteria.AdCampaign.Answer2;
+                    }
                 }
                 result.Add(modelCriteria);
             }
@@ -362,8 +419,8 @@ namespace SMD.MIS.ModelMappers
                 if (location.City != null)
                 {
                     modelLocation.City = location.City.CityName;
-                    modelLocation.Latitude = location.City.GeoLat;
-                    modelLocation.Longitude = location.City.GeoLong;
+                    modelLocation.Latitude = location.City.GeoLAT;
+                    modelLocation.Longitude = location.City.GeoLONG;
                 }
                 if (location.Country != null)
                     modelLocation.Country = location.Country.CountryName;

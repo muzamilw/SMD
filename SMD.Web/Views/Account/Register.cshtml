@@ -4,10 +4,28 @@
     Layout = "~/Views/Shared/_LoginLayout.cshtml";
 }
 
+@section styleoverride{
+
+    <style>
+        #login-full-wrapper {
+            background: url(/images/NY-city.jpg) no-repeat center center;
+            background-size: cover;
+        }
+
+    </style>
+}
+
+
+
+
+
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary()
+
+    <h4>Register</h4>
 
     <div class="input-group">
         <span class="input-group-addon" tabindex="-1"><i class="fa fa-user"></i></span>
@@ -24,20 +42,74 @@
     <div class="input-group">
         <span class="input-group-addon" tabindex="-1"><i class="fa fa-key"></i></span>
         @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password" })
+
+
     </div>
     <div class="row">
         <div class="col-xs-12">
             <input type="submit" value="Register" class="btn btn-success col-xs-12">
         </div>
     </div>
-    <div class="row">
-        <div class="col-xs-12">
+}
+    @*<div class="row" style="margin-top:15px;">
+        <div class="col-xs-6">
             <p class="social-text">
                 Or Register with
             </p>
         </div>
+        <div class="col-xs-6 text-right ">
+            @Html.Partial("~/Views/Shared/_ExternalLoginPartial.cshtml")
+        </div>
+    </div>*@
+
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="create-account text-center">
+            
+              
+
+                <a class="btn btn-darkgray col-xs-12" style="color:white;margin-top:10px;text-transform:none" href="~/Account/Login"> Already have an account - Login</a>
+           
+        </div>
+    </div>
+</div>
+
+@section Sidebar{
+    
+    <div style="margin-top:120px;text-align:center" id="registersidebar">
+        <h1 style="color:white">The advertising platform <br />run by you!</h1>
+        @*<img style="width:500px;margin-top:60px;" src="~/Images/New_Register_Image.png" />*@
+        @*<p style="font-style:italic; color:black;margin-top:60px;font-size:1.6em;">We don't do BOTS - people to people advertising platform</p>*@
     </div>
 }
-<div class="row">
-    @Html.Partial("~/Views/Shared/_ExternalLoginPartial.cshtml")
-</div>
+
+
+
+
+
+
+@*<script src="~/Scripts/jquery-2.1.0.js"></script>
+    <script>
+        function getParameter(url, param) {
+            if (url.indexOf('?') == -1)
+                return 1;
+            url = url.split('?');
+            var pattern = new RegExp(param + '=(.*?)(;|&|$)', 'gi');
+            return url[1].split(pattern)[1];
+        }
+
+        $(document).ready(function () {
+            var value = getParameter(window.location.href, "CompanyId")
+
+            $("#hdnCompanyId").val(value);
+
+        });
+
+
+    </script>*@
+
+
+
+
+

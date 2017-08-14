@@ -1,0 +1,202 @@
+﻿@{
+    ViewBag.Title = "ManageCampaign";
+    string adminClasses = "";
+    string userClasses = "";
+}
+@if (!User.IsInRole("User"))
+{
+    userClasses = "displayNone";
+}
+else
+{
+    adminClasses = "displayNone";
+}
+<div data-bind="visible: $root.isEditorVisible()" style="display: none">
+    <div class="col-lg-12">
+        <div class="row">
+            <div class="col-lg-12" style="padding-left:1px; padding-bottom:17px;" id="topArea">
+                <ol class="breadcrumb" style="display:none;">
+                    <li><a href="~/Dashboard/Index" class="my-navigator">Home</a></li>
+                    <li><a class="my-navigator">Video Campaigns</a></li>
+                </ol>
+                <div class="clearfix col-lg-9" style="padding:0px;padding-top:3px;margin-left:0px;">
+
+                    <div class="col-lg-9" style="margin-left:-11px !important;">
+
+
+                        <img class="vid_image pull-left" src="/Images/email_Imagewhite.png">
+                        <span id="newVid" class="pull-left " style="color:#fff!important; padding-left:0px;font-size:23px;margin-top:15px;margin-left:9px;">New Email Campaign</span> <span style="color:#fff!important;margin-left:3px;margin-top:21px;display:none" class="subtitle pull-left"></span>
+
+                        @*<span id="newdisplay_Ad" class="pull-left " style="color:black!important; padding-left:0px;font-size:23px;margin-top:12px;display:none;" data-bind="NewCampaignBinding: CampaignName">New display ad</span>*@
+                    </div>
+                    <div class="col-lg-3 pull-right" style="margin-right:-1px;display:none">
+                        <div class="pull-right">
+                            <div class="status_date_span" style="margin-top:26px;">
+                                Last modified <span style="margin-left:3px"></span><span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3" style="padding-left:0px;padding-right:0px;">
+                    @*<div style="margin-top:-5px;float:right;background:url(/Content/Images/Close_Button.png);background-repeat: no-repeat;width:40px;height:40px;border: 0;"><button style="margin-top:9px;" id="MainBtnClose" data-bind="click: $root.closeNewCampaignDialog" class="btn btn-default CloseBtn">Close</button></div>*@
+                    <div class="pull-left" style="margin-left:0px;margin-top: 18px;">
+                        <div class="pull-left" style="margin-top:1px;">
+                            <span style="font-size:23px;color:white;">Draft</span>
+                        </div>
+                    </div>
+                    <div style="margin-right:-3px !important;">
+                        <img class="pull-right" src="/Content/Images/Close_Button.png" style="width:20px;height:20px;cursor:pointer;margin-top:26px;" data-bind="click:$root.closeEditCampaign" />
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-6 pull-left validationSummaryContainer">
+                        <ul>
+                            <li>
+                                <a><span></span></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="pull-right top-page-ui" style="margin-right:5px;margin-bottom:5px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div>
+                <div class="no-header clearfix col-lg-9 form-horizontal" style="padding-left:0px;">
+                    <div class="main-box header" style="padding-left:42px;">
+                        <div class="col-lg-12" style="margin:auto;float:none !important">
+                            <div class="pull-left ads-numbering-main">
+                                <div class="ads-numbering-box">
+                                    1
+                                </div>
+                                <br />
+                                <span>Upload</span>
+                            </div>
+                            <div class="pull-left ads-numbering-linebar">
+                            </div>
+                            <div class="pull-left ads-numbering-main">
+                                <div class="ads-numbering-box">
+                                    2
+                                </div>
+                                <br />
+                                <span>Target</span>
+                            </div>
+                            <div class="pull-left ads-numbering-linebar">
+                            </div>
+                            <div class="pull-left ads-numbering-main" >
+                                <div class="ads-numbering-box">
+                                    3
+                                </div>
+                                <br />
+                                <span >Survey</span>
+                            </div>
+                            @*<div class="pull-left ads-numbering-linebar" data-bind="css: $root.previewScreenNumber() == 6 ? 'ads-selected-numbering-box' : ''">
+            </div>
+            <div class="pull-left ads-numbering-main">
+                <div class="ads-numbering-box" data-bind="css: $root.previewScreenNumber() == 4 ? 'ads-selected-numbering-box' : '',click: $root.gotoScreen.bind(null,4)">
+                    4
+                </div>
+                <br />
+                <span data-bind="css: $root.previewScreenNumber() == 4 ? 'ads-selected-numbering-text' : '',click: $root.gotoScreen.bind(null,4)">Delivery</span>
+            </div>*@
+                            <div class="pull-left" style="width:49px;">
+                                &nbsp;
+                            </div>
+                            <div class="pull-left ads-numbering-main" onclick="RefreshScript()">
+                                <a data-toggle="modal" data-target=".model_quizQ_ph">
+                                    <div class="ads-numbering-box" style="background: rgb(104,179,89);">
+                                        <img src="~/Content/Images/Preview.png" class="previewImg" />
+                                    </div>
+                                    <br />
+                                    <span>Preview</span>
+                                </a>
+                            </div>
+                            <div class="pull-left" style="width:26px;">
+                                &nbsp;
+                            </div>
+                            <div class="pull-left" style="width:254px;">
+                                <div>
+                                    <div class="pull-right ads-numbering-main">
+                                        <a data-toggle="modal">
+                                            <div class="ads-numbering-box socialbck">
+                                                <img src="~/Content/Images/Share_icon_100.png" width="20px" />
+                                            </div>
+                                            <br />
+                                            <span class="goSocial">Go Social</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pull-left">
+                                <div>
+                                    <div class="pull-right ads-numbering-main" style=" padding-left: 32px;
+                                    text-align: left;height:108px;">
+
+
+                                        <a data-toggle="modal">
+                                            <div class="ads-numbering-box" style="background:#9690cf;">
+                                                <img src="~/Content/Images/Charts.png" width="20px" />
+                                            </div>
+                                            <br />
+                                            <span style="color:gainsboro;margin-left:6px;">Charts</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                          
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+
+                    <div class="main-box main-box-subpage">
+
+                        <div class="col-lg-12" >
+                            <div style="height:34px;" class="borderbtmline ">
+                                <div class="col-lg-10 adsubHeading Theme_standard_clr">
+
+                                    <div class="adsubHeading Theme_standard_clr">
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <div class="bs-example-tooltips tooltip-float-width tooltip">
+                                        <a class="input-group-addon" tabindex="-1" href="#" data-toggle="tooltip" title="" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;    padding: 0px;
+    padding-top: 5px;" data-container="body" data-placement="right" data-content="Add a city" data-original-title="Hooray!">
+                                            <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                        </a>
+                                        <i class="fa fa-chevron-up" aria-hidden="true" style="color:#68b359;"></i>
+                                        <span class="tooltiptext">Tooltip text</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12" >
+                            <div style="height:34px; display:none;" class="borderbtmline">
+                                <div class="col-lg-9">
+                                    <div class="adsubHeading Theme_standard_clr">
+                                        Target audience in different cities.
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+
+                                    <div class="bs-example-tooltips tooltip-float-width tooltip ">
+                                        <a class="input-group-addon" tabindex="-1" href="#" data-toggle="tooltip" title="" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;    padding: 0px;
+    padding-top: 5px;" data-container="body" data-placement="right" data-content="Add a city" data-original-title="Hooray!">
+                                            <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                        </a>
+                                        <i class="fa fa-chevron-up" aria-hidden="true" style="color:#68b359;"></i>
+                                        <span class="tooltiptext">Tooltip text</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>

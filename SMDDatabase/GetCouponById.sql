@@ -1,0 +1,220 @@
+﻿
+GO
+/****** Object:  StoredProcedure [dbo].[GetCouponByID]    Script Date: 1/4/2017 5:15:14 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Mz
+-- Create date: 30 august 2016
+-- Description:	
+-- =============================================
+ALTER PROCEDURE [dbo].[GetCouponByID] 
+
+--    getcouponbyid 23, '','','d70b04d3-e76c-4ca2-95fe-9746ceff1a88',
+	-- Add the parameters for the stored procedure here
+	@CouponId as bigint = 0, 
+	@Lat as nvarchar(50),
+	@Lon as nvarchar(50),
+	@UserId as nvarchar(128)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+
+if @lat = '' 
+	set @lat = '31.482932'
+
+
+if @lon = '' 
+	set @lon = '74.288557'
+
+
+DECLARE @source geography = geography::Point(@lat, @lon, 4326)
+
+
+	update coupon set CouponViewcount = CouponViewcount + 1 where CouponId= @CouponId
+
+
+INSERT INTO [dbo].[UserCouponView]
+           ([CouponId]
+           ,[UserId]
+           ,[ViewDateTime],
+		   userLocationLAT,
+		   userLocationLONG)
+     VALUES
+           (@CouponId
+           ,@UserId
+           ,GETDATE(),@Lat,@Lon)
+
+
+		   --handle notification scenario and mark it read.
+
+		   declare @userphone nvarchar(128)
+		    select @userphone = right(replace(phone1,' ',''),9) from aspnetusers where id = @UserId
+
+		   update notifications
+		   set isread = 1
+		   where couponID = @couponid and (Userid = @Userid or right(replace(phonenumber,' ',''),9) = @userphone)
+
+
+SELECT c.[CouponId]
+      ,[LanguageId]
+      ,c.[UserId]
+      ,[CouponTitle]
+      ,[SearchKeywords]
+      ,c.[Status]
+      ,[Archived]
+      ,[Approved]
+      ,[ApprovedBy]
+      ,[ApprovalDateTime]
+      ,[CreatedDateTime]
+      ,[CreatedBy]
+      ,[ModifiedDateTime]
+      ,[ModifiedBy]
+      ,[RejectedReason]
+      ,[Rejecteddatetime]
+      ,[RejectedBy]
+      ,c.[CurrencyId]
+      ,[Price] as Savings
+      ,[Savings] as Price
+      
+      ,[CouponViewCount]
+      ,[CouponIssuedCount]
+      ,[CouponRedeemedCount]
+      ,[CouponQtyPerUser]
+      ,[CouponListingMode]
+      ,c.[CompanyId]
+      ,[CouponActiveMonth]
+      ,[CouponActiveYear]
+      ,[CouponExpirydate]
+      ,[couponImage1]
+      ,[CouponImage2]
+      ,[CouponImage3]
+	  ,[CouponImage4]
+	  ,[CouponImage5]
+	  ,[CouponImage6]
+      
+      ,[HighlightLine1]
+      ,[HighlightLine2]
+      ,[HighlightLine3]
+      ,[HighlightLine4]
+      ,[HighlightLine5]
+      ,[FinePrintLine1]
+      ,[FinePrintLine2]
+      ,[FinePrintLine3]
+      ,[FinePrintLine4]
+      ,[FinePrintLine5]
+      ,[LocationBranchId]
+      ,[LocationTitle]
+      ,[LocationLine1]
+      ,[LocationLine2]
+      ,[LocationCity]
+      ,[LocationState]
+      ,[LocationZipCode]
+      ,[LocationLAT]
+      ,[LocationLON]
+      ,[LocationPhone]
+      ,[GeographyColumn]
+      ,[HowToRedeemLine1]
+      ,[HowToRedeemLine2]
+      ,[HowToRedeemLine3]
+      ,[HowToRedeemLine4]
+      ,[HowToRedeemLine5]
+      ,[SubmissionDateTime]
+ ,
+
+
+	case when c.CouponListingMode = 3 then 0 
+	else
+	@source.STDistance(geography::Point(c.LocationLAT, c.LocationLON, 4326))/1000 
+       
+	end  as distance, curr.CurrencySymbol
+	,
+		
+		
+		'http://manage.cash4ads.com/' + comp.Logo
+		
+	 [LogoUrl],
+
+	 (case when c.couponlistingmode = 1 then datediff(d,getdate(),dateadd(d,7, c.ApprovalDateTime)) else datediff(d,getdate(),dateadd(d,30, c.ApprovalDateTime)) end)  DaysLeft 
+	 ,
+	 case when 
+
+	 
+	 (c.Savings / curr.SMDCreditRatio) / 100  > 0.50 then cast(round((c.Savings / curr.SMDCreditRatio),2) as numeric(36,2))
+	 else
+	 50
+	 end
+	 
+	 as SwapCost,
+	 c.ShowBuyitBtn,
+	c.BuyitLandingPageUrl,
+	c.BuyitBtnLabel,
+	comp.AboutUsDescription,
+	comp.CompanyName,
+	curr.CurrencyCode,
+	c.IsShowReviews,
+c.IsShowAddress,
+c.IsShowPhoneNo,
+c.IsShowMap,
+c.IsShowyouTube,
+c.IsShowAboutUs,
+(case when uReview.UserId is null then 0 else 1 end) UserHasRated,
+(case when c.DealFirstDiscountType = 0 then 10
+					when c.DealFirstDiscountType = 1 then 20
+					when c.DealFirstDiscountType = 2 then 25
+					when c.DealFirstDiscountType = 3 then 30
+					when c.DealFirstDiscountType = 4 then 40
+					when c.DealFirstDiscountType = 5 then 50
+					when c.DealFirstDiscountType = 6 then 60
+					when c.DealFirstDiscountType = 7 then 50
+					when c.DealFirstDiscountType = 8 then 1
+					when c.DealFirstDiscountType = 9 then 3
+					when c.DealFirstDiscountType = 10 then 5
+					when c.DealFirstDiscountType = 11 then 10
+					when c.DealFirstDiscountType = 12 then 15
+					when c.DealFirstDiscountType = 13 then 20
+					when c.DealFirstDiscountType = 14 then 25
+					when c.DealFirstDiscountType = 15 then 30
+					when c.DealFirstDiscountType = 16 then 40
+					when c.DealFirstDiscountType = 17 then 50
+					
+
+
+
+					end ) discount,
+					(case when c.DealFirstDiscountType = 0 then 1
+					when c.DealFirstDiscountType = 1 then 1
+					when c.DealFirstDiscountType = 2 then 1
+					when c.DealFirstDiscountType = 3 then 1
+					when c.DealFirstDiscountType = 4 then 1
+					when c.DealFirstDiscountType = 5 then 1
+					when c.DealFirstDiscountType = 6 then 1
+					when c.DealFirstDiscountType = 7 then 1
+					when c.DealFirstDiscountType = 8 then 2
+					when c.DealFirstDiscountType = 9 then 2
+					when c.DealFirstDiscountType = 10 then 2
+					when c.DealFirstDiscountType = 11 then 2
+					when c.DealFirstDiscountType = 12 then 2
+					when c.DealFirstDiscountType = 13 then 2
+					when c.DealFirstDiscountType = 14 then 2
+					when c.DealFirstDiscountType = 15 then 2
+					when c.DealFirstDiscountType = 16 then 2
+					when c.DealFirstDiscountType = 17 then 2
+
+					end ) discountType
+
+
+	from coupon as c 
+	
+	inner join Company comp on c.CompanyId = comp.CompanyId
+	inner join Country countr on comp.BillingCountryId = countr.CountryID
+	inner join Currency curr on countr.CurrencyId = curr.CurrencyID 
+	left outer join CouponRatingReview uReview on c.CouponId = uReview.CouponId and uReview.UserId = @UserId
+	
+	where c.CouponId = @CouponId
+END

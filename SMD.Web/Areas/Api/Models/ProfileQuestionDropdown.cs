@@ -8,5 +8,6 @@ namespace SMD.MIS.Areas.Api.Models
     {
         public int PqId { get; set; }
         public string Question { get; set; }
+        public int? CompanyId { get; set; }
     }
 }

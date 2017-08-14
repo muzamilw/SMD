@@ -25,10 +25,47 @@ namespace SMD.Models.DomainModels
         public int? PenalityForNotAnswering { get; set; }
         public int? Status { get; set; }
 
+        public Nullable<int> CompanyId { get; set; }
+        public Nullable<int> AnswerNeeded { get; set; }
+        public Nullable<int> AsnswerCount { get; set; }
+
+
+          public Nullable<int> AgeRangeStart { get; set; }
+          public Nullable<int> AgeRangeEnd { get; set; }
+          public Nullable<int> Gender { get; set; }
+
+
+          public bool? Approved { get; set; }
+          public string ApprovedByUserID { get; set; }
+          public DateTime? ApprovalDate { get; set; }
+        
+          public string RejectionReason { get; set; }
+          public string UserID { get; set; }
+
+          public double? AmountCharged { get; set; }
+          public DateTime? StartDate { get; set; }
+          public DateTime? EndDate { get; set; }
         public virtual ICollection<ProfileQuestionAnswer> ProfileQuestionAnswers { get; set; }
         public virtual ICollection<ProfileQuestionUserAnswer> ProfileQuestionUserAnswers { get; set; }
         public virtual ProfileQuestionGroup ProfileQuestionGroup { get; set; }
         public virtual ICollection<AdCampaignTargetCriteria> AdCampaignTargetCriterias { get; set; }
         public virtual ICollection<SurveyQuestionTargetCriteria> SurveyQuestionTargetCriterias { get; set; }
+
+        public virtual Company Company { get; set; }
+
+        public Nullable<System.DateTime> SubmissionDateTime { get; set; }
+
+
+
+        public virtual ICollection<ProfileQuestionTargetCriteria> ProfileQuestionTargetCriterias { get; set; }
+
+        public virtual ICollection<ProfileQuestionTargetLocation> ProfileQuestionTargetLocations { get; set; }
+
+        public virtual ICollection<ProfileQuestionTargetCriteria> ProfileQuestionTargetCriterias1 { get; set; }
+
+        public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }
+
+        public virtual ICollection<CampaignEventHistory> CampaignEventHistories { get; set; }
+        
     }
 }

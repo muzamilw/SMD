@@ -45,7 +45,7 @@ namespace SMD.Repository.Repositories
         /// </summary>
         public IEnumerable<ProfileQuestionUserAnswer> GetProfileQuestionUserAnswerByQuestionId(UpdateProfileQuestionUserAnswerApiRequest request)
         {
-           return DbSet.Where(ans => ans.PqId == request.ProfileQuestionId && ans.UserId==request.UserId).ToList();
+           return DbSet.Where(ans => ans.PQID == request.ProfileQuestionId && ans.UserID==request.UserId).ToList();
         }
         #endregion
     }

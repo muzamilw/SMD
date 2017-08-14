@@ -1,0 +1,624 @@
+﻿@{
+    ViewBag.Title = "User Profile";
+}
+
+
+<div class="modal fade my-modal" id="companyProfileDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true" style="z-index:1450 !important">
+    <div class="modal-dialog" style="width:900px;border-radius:5px;">
+        <div class="modal-content"style="border-radius:7px;">
+            <div class="modal-content partial-contents" style="background-color:#dedede;margin-top:-1px;border-radius:6px;" id="">
+                <div class="modal-header" id="" style="background-color: #0f68a1;text-align: center;padding-bottom:0px;border-radius:5px;">
+                    <img src="/Content/Images/Close_Button.png" class="close"data-dismiss="modal" style="width:20px;height:20px;float:right;cursor:pointer;">
+                    @*<button id="btnCloseP" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>*@
+                    <span class="text-center" style="font-size:24px;color: #ffffff; line-height: 2.5 !important;">Account Settings</span>
+
+                </div>
+                <div class="row" id="" style="margin-left: 0; margin-right: 0">
+
+                    <div class="col-lg-12" style="padding-top:10px;float:none !important; background-color: #ffffff; padding-bottom: 5px; margin-bottom: 0px;">
+                        <div class="col-lg-3">
+
+                        </div>
+                        <div class="col-lg-8" style="text-align: center;">
+                            <div class="pull-left" style="width:51px;">
+                                <a href="#tab-PersonalInfo" style="text-decoration: none" data-toggle="tab" data-bind="click: function(){$root.onTabChange(1);}">
+                                    <div class="ads-numbering-box" data-bind="css: $root.currentTab() == 1 ? 'ads-selected-numbering-box' : ''">
+                                        1
+                                    </div>
+                                </a>
+                                <br />
+                                <span>Personal</span>
+                            </div>
+
+                            <div class="pull-left ads-numbering-linebar">
+
+
+                            </div>
+                            <div class="pull-left" style="width:51px;">
+                                <a href="#tab-Business" style="text-decoration: none" data-toggle="tab" data-bind="click: function(){$root.onTabChange(2);}">
+                                    <div class="ads-numbering-box" data-bind="css: $root.currentTab() == 2 ? 'ads-selected-numbering-box' : ''">
+                                        2
+                                    </div>
+                                </a>
+                                <br />
+                                <span>Business</span>
+                            </div>
+                            <div class="pull-left ads-numbering-linebar">
+
+                            </div>
+                            <div class="pull-left" style="width:51px;">
+                                <a href="#tab-Logo" style="text-decoration: none" data-toggle="tab" data-bind="click: function(){$root.onTabChange(3);}">
+                                    <div class="ads-numbering-box" data-bind="css: $root.currentTab() == 3 ? 'ads-selected-numbering-box' : ''">
+                                        3
+                                    </div>
+                                </a>
+                                <br />
+                                <span>Logo</span>
+                            </div>
+                            <div class="pull-left ads-numbering-linebar">
+                            </div>
+                            <div class="pull-left" style="width:51px;">
+                                <a href="#tab-Money" style="text-decoration: none" data-toggle="tab" data-bind="click: function(){$root.onTabChange(4);}">
+                                    <div class="ads-numbering-box" data-bind="css: $root.currentTab() == 4 ? 'ads-selected-numbering-box' : ''">
+                                        4
+                                    </div>
+                                </a>
+                                <br />
+                                <span>Billing</span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-1">
+
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <div class="col-xs-9 pull-left validationSummaryContainer" style="padding-top: 10px;">
+                            <a class="validationSummaryLink" data-bind="visible: $root.errorList().length > 0, bootstrapPopover: { html: true, title: 'Please fix following errors', elementNode: 'validationSummaryPopupForCompany', popoverId: 'validationSummaryPopoverBodyForCompany' }" style="display: none; cursor: pointer">Invalid data: Click here to see details.</a>
+                            <div class="well well-small validationSummaryModal" id="validationSummaryPopupForCompany" style="display: none">
+                                <div id="validationSummaryPopoverBodyForCompany">
+                                    <ul data-bind="foreach: $root.errorList">
+                                        <li>
+                                            <a style="cursor: pointer" data-bind="click: $root.gotoElement.bind($data.element)"><span data-bind="text: name"></span></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="tab-content" data-bind="with:$root.selectedCompany">
+                        <div class="tab-pane fade in active" id="tab-PersonalInfo">
+                            <div class="col-lg-12 col-sm-12 col-md-12 form-horizontal">
+                                <div class="col-md-12 main-box">
+                                    <div class="col-md-6">
+                                        <header class="main-box-header clearfix" style="padding-left: 0">
+                                            <h2>1. Your personal data:</h2>
+                                        </header>
+                                        <div class="main-box-body" style="padding-bottom: 0;">
+                                            <div class="form-group">
+                                                <label for="ddlSalutation" class="requiredlabel">Salutation </label>
+                                                <select class="form-control" id="ddlSalutation" name="Missing Salutation" data-bind="options: $root.genderList, optionsText: 'name', optionsValue: 'id', optionsCaption: '<' + 'Select Title'+ '>' , value:salutation, validationOnElement: salutation"></select>
+                                            </div>
+                                            <div class="form-group" style="margin-bottom:9px">
+                                                <label for="txtFirstName" class="requiredlabel">Full Name </label>
+                                                <input type="text" id="txtFirstName" class="form-control" name="Missing Full Name" placeholder="Enter First Name" maxlength="64" data-bind="value:fullName, validationOnElement: fullName">
+                                            </div>
+                                            <div class="form-group" style="display:none">
+                                                <label for="txtEmail" class="requiredlabel">Email </label>
+                                                <input type="email" class="form-control" id="txtEmail" placeholder="Enter email" data-bind="value:email, enable:false">
+                                            </div>
+                                            @*<div class="form-group">
+                                                    <label for="txtDob" class="requiredlabel">Date of Birth </label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                        <input type="text" class="form-control" id="txtDob" name="Missing date of birth" placeholder="Enter Date of birth" data-bind="datepicker:dateOfBirth, datepickerOptions: { yearRange: '-60:+0' }, validationOnElement: dateOfBirth">
+                                                    </div>
+                                                </div>*@
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <header class="main-box-header clearfix" style="padding-left: 0">
+                                            <p class="pull-right" style="color:red">* Required </p>
+                                        </header>
+                                        <div class="main-box-body clearfix" style="padding-bottom: 0;">
+                                            <div class="form-group">
+                                                <label for="phone" class="requiredlabel">Mobile Number </label>
+                                                <input type="tel" id="phone" class="form-control" style="border-radius:3px;height:34px;" name="Missing mobile number" placeholder="Enter Mobile Number" data-bind="value:mobileNumber, validationOnElement: mobileNumber">
+                                            </div>
+                                            @*<div class="form-group">
+                                                    <label for="ddlProfession" class="requiredlabel">Profession </label>
+                                                    <select class="form-control" id="ddlProfession" name="Missing profession" data-bind="options: $root.professionsList, optionsText: 'IndusteryName', optionsValue: 'IndusteryId', optionsCaption:  'Select ...', value:profession, validationTooltip: profession, validationOnElement: profession"></select>
+                                                </div>*@
+                                            <div class="form-group" style="display:none">
+                                                <label for="txtDob" class="requiredlabel">Date of Birth </label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    <input type="text" class="form-control" id="txtDob" name="Missing date of birth" placeholder="Enter Date of birth" data-bind="datepicker:dateOfBirth, datepickerOptions: { yearRange: '-60:+0' }, validationOnElement: dateOfBirth">
+                                                </div>
+                                            </div>
+                                            <div class="form-group" style="margin-top:-8px;margin-bottom:9px;">
+                                                <label for="txtEmail" class="requiredlabel">Email </label>
+                                                <input type="email" class="form-control" id="txtEmail" placeholder="Enter email" data-bind="value:email, enable:false">
+                                            </div>
+                                            <div class="form-group" style="display:none">
+                                                <label for="txtPasportNo">User Id (i.e Passport #, DrivingLicense #)</label>
+                                                <input type="text" id="txtPasportNo" class="form-control" maxlength="16" placeholder="Enter Valid Passport number" data-bind="value:passportNumber">
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12" style="padding-top: 0;padding-left: 20px;">
+                                        <div class="col-md-11" style="padding-top: 0;">
+                                            <div class="form-group" style="margin-bottom:0;">
+                                                <div class="checkbox-nice ">
+                                                    <input type="checkbox" name="chkreceiveDeals" value="1" id="chkreceiveDeals" data-bind="checked:isReceiveDeals">
+                                                    <label for="chkreceiveDeals">
+                                                        Yes, I want to receive deals near me by email.
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group" style="margin-bottom:0;">
+                                                <div class="checkbox-nice ">
+                                                    <input type="checkbox" name="chkwupdates" value="1" id="chkwupdates" data-bind="checked:isReceiveWeeklyUpdates">
+                                                    <label for="chkwupdates">
+                                                        Yes, I want to receive weekly updates on how my advertising campaigns are performing.
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group" style="margin-bottom:8px;">
+                                                <div class="checkbox-nice ">
+                                                    <input type="checkbox" name="chklatescasg4ads" value="1" id="chklatescasg4ads" data-bind="checked:isReceiveLatestServices">
+                                                    <label for="chklatescasg4ads">
+                                                        Yes, I want to receive emails about the latest Cash4Ads news and partnering services.
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group" style="margin-bottom:8px;">
+                                                <div class="checkbox-nice ">
+                                                    <input type="checkbox" name="chkpaidEmails" value="1" id="chkpaidmails" data-bind="checked:optPaidEmails">
+                                                    <label for="chkpaidmails">
+                                                        Yes, I want to receive PAID emails from advertisers.
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group" style="margin-bottom:15px;">
+                                                <div class="btn-group" style="float: left;">
+                                                    <button type="button" class="btn btn-primary" data-bind="click:$root.ChangePassword">Change Password</button>
+                                                </div>
+                                                <div class="btn-group" style="float: left; margin-left: 5px;">
+                                                    <button type="button" class="btn btn-danger"> Delete Account</button>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group" style="display:none">
+                                                <footer id="footer-bar">
+                                                    <p id="footer-copyright">
+                                                        &copy; @DateTime.Now.Year Powered by CASH 4 Ads Inc.,USA
+                                                    </p>
+                                                </footer>
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="col-lg-9">
+                                        <span class="help-block text-left" style="margin-bottom:0px;color:black">We take your privacy extremely seriously. See our privacy policy for full details on how we use and secure your personal data.</span>
+
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div style="float: right;">
+
+                                            <a class="btn btn-default" href="#tab-Business" style="text-decoration: none;margin-bottom: 10px;" data-toggle="tab" data-bind="click: function(){$root.onTabChange(2);}">
+                                                <span>Continue to Step 2</span>
+                                            </a>
+                                            <button class="btn  btn-success" style="margin-bottom: 10px; margin-left: 4px;" id="btnSaveCompProfile" data-bind="click:$root.onUpdateProfile , enable: hasChanges, css: { 'btn-warning': hasChanges }">Save</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+
+                                @*<button class="btn  btn-default pull-right" style="margin-bottom: 10px;" id="saveBtn" data-bind="click: $root.onTabChange(2)">Continue to Step 2</button>*@
+                            </div>
+
+                        </div>
+                        <div class="tab-pane fade" id="tab-Business">
+
+                            <div class="col-lg-12 col-sm-12 col-md-12 form-horizontal clearfix">
+                                <div class="col-md-12 main-box">
+                                    <div class="col-md-6">
+                                        <header class="main-box-header clearfix" style="padding-left: 0">
+                                            <h2>2. Your business data:</h2>
+                                        </header>
+                                        <div class="main-box-body clearfix" style="padding-bottom: 0">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="txtBusinessName" class="requiredlabel">Business Name </label>
+                                                    <input type="text" id="txtBusinessName" class="form-control" style="width:90%" name="Missing business name" maxlength="64" placeholder="Enter Your Business Name" data-bind="value:CompanyName, validationOnElement: CompanyName">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="txtBranchName" class="requiredlabel">Branch Name </label>
+                                                    <input type="text" id="txtBranchName" class="form-control" style="width:104%" name="Missing branch name" maxlength="32" placeholder="Enter Branch Name" data-bind="value:branchName, validationOnElement: branchName">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="txtBusinessAddress" class="requiredlabel">Business Address </label>
+                                                <input type="text" id="txtBusinessAddress" class="form-control" name="Missing business address" maxlength="128" placeholder="Enter Business Address" data-bind="value:BillingAddressLine1, validationOnElement: BillingAddressLine1">
+                                            </div>
+                                            <div class="col-md-6" style="padding-left:0px;">
+                                                <div class="form-group">
+                                                    <label for="txtCity" class="requiredlabel">Town/City</label>
+                                                    <input type="text" id="txtCity" style=" width:90%" class="form-control" name="Missing City" placeholder="Enter Town/City" maxlength="32" data-bind="value:billingCity, validationOnElement: billingCity">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="txtState" class="requiredlabel">State/County</label>
+                                                    <input type="text" id="txtState" class="form-control" style=" width:104%" name="Missing State" placeholder="Enter State/County" maxlength="32" data-bind="value:BillingState, validationOnElement: BillingState">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6" style="padding-left:0px;">
+                                                <div class="form-group">
+                                                    <label for="txtPostCode" class="requiredlabel">Post Code </label>
+                                                    <input type="text" id="txtPostCode" style=" width:90%" class="form-control" name="Missing Post Code" maxlength="12" placeholder="Enter Postal Code" data-bind="value:BillingZipCode, validationOnElement: BillingZipCode">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="ddlCountry" class="requiredlabel">Country </label>
+                                                    @*<select class="form-control" id="ddlCountry" style=" width:104%" name="Missing Country" data-bind="options: $root.countryDd, optionsText: 'CountryName', optionsValue: 'CountryId', optionsCaption:  '&lt;' + 'Select Country'+ '&gt;', value:BillingCountryId, validationOnElement: BillingCountryId"></select>*@
+                                                    <select class="form-control" id="ddlCountry" style=" width:104%" name="Missing Country" data-bind="options: $root.countries, optionsText: 'CountryName', optionsValue: 'CountryId', optionsCaption:  '&lt;' + 'Select Country'+ '&gt;', value:BillingCountryId, validationOnElement: BillingCountryId"></select>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <header class="main-box-header clearfix" style="padding-left: 0">
+                                            <p class="pull-right" style="color:red">* Required</p>
+                                        </header>
+                                        <div class="main-box-body clearfix" style="padding-bottom: 0">
+                                            <div class="form-group">
+                                                <label for="map-canvasCompany">Get direction pointer and map </label>
+                                                <div>
+                                                    <div id="map-canvasCompany" style="width:100%;height:268px; border:2px solid"></div>
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group" style="display:none">
+                                                <label for="txtBranchName" class="requiredlabel">Branch Name </label>
+                                                <input type="text" id="txtBranchName" class="form-control" name="Missing branch name" maxlength="32" placeholder="Enter Branch Name" data-bind="value:branchName, validationOnElement: branchName">
+                                            </div>
+                                            <div class="form-group" style="display:none">
+                                                <label for="txtBranchLocations">How Many Branch Locations do you have? </label>
+                                                <input type="text" id="txtBranchLocations" class="form-control" placeholder="Enter Number of branches" maxlength="12" data-bind="autoNumeric:numberOfBranches,settings:{mDec:0}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @*<button class="btn  btn-default pull-right" style="margin-bottom: 10px;" id="saveBtn" data-bind="click: $root.onTabChange(3)">Continue to Step 3</button>*@
+                                <div class="col-lg-12">
+                                    <div class="col-lg-9">
+                                        <span class="help-block text-left" style="margin-bottom:0px;">We take your privacy extremely seriously. See our privacy policy for full details on how we use and secure your personal data.</span>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div style="float: right;">
+                                            <a class="btn btn-default" href="#tab-Logo" style="text-decoration: none;margin-bottom: 10px;" data-toggle="tab" data-bind="click: function(){$root.onTabChange(3);}">
+                                                <span>Continue to Step 3</span>
+                                            </a>
+                                            <button class="btn  btn-success" style="margin-bottom: 10px;margin-left: 4px;" id="btnSaveCompProfile" data-bind="click:$root.onUpdateProfile , enable: hasChanges, css: { 'btn-warning': hasChanges }">Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="tab-Logo">
+                            <div class="col-lg-12 col-sm-12 col-md-12 form-horizontal clearfix">
+                                <div class="col-md-12 main-box">
+                                    <div class="col-md-6">
+                                        <header class="main-box-header clearfix" style="padding-left: 0">
+                                            <h2>3. Logo and Sales contact details:</h2>
+                                        </header>
+                                        <div class="main-box-body clearfix" style="padding-bottom: 0">
+                                            <div class="form-group">
+                                                <label for="divLogo" class="requiredlabel">Logo </label>
+                                                <div id="divLogo" style="background-color: #dedede; height: auto;width:40%">
+                                                    <img style="height:100%;width:100%;" data-bind="attr: { src: $root.selectedCompany().Logo()()==null?'/images/splaceholder.png' : $root.selectedCompany().Logo()}, validationOnElement: Logo" name="Missing logo" src="/Content/Images/Company_Default.png" id="imgLogoCProfile" data-toggle="modal" data-target="#damModelcpo" onclick="changeIframeSrcCProfile(1)" />
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="txtWebsite">Website </label>
+                                                <input type="text" id="txtWebsite" class="form-control" maxlength="64" placeholder="Enter Web Address" data-bind="value:WebsiteLink">
+                                            </div>
+                                            <div class="form-group" style="display:none">
+                                                <label for="txtSalesEmail">Sales Email</label>
+                                                <input type="text" id="txtSalesEmail" class="form-control" maxlength="64" placeholder="Enter Sales Email" data-bind="value:SalesEmail">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="txtSalesPhone">Sales Phone Line </label>
+                                                <input type="text" id="txtSalesPhone" class="form-control" maxlength="16" placeholder="Enter Sales Phone" data-bind="value:salesPhone">
+                                            </div>
+                                            <div class="form-group" style="display:none">
+                                                <label for="ddlCompanyType">Industry Type </label>
+                                                <select class="form-control" id="ddlCompanyType" data-bind="options: $root.companyTypes, optionsText: 'Name', optionsValue: 'Id', optionsCaption:  'Select ...', value:companyType"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <header class="main-box-header clearfix" style="padding-left: 0">
+                                            <p class="pull-right" style="color:red">* Required</p>
+                                        </header>
+                                        <div class="main-box-body clearfix" style="padding-bottom: 0">
+                                            <div class="form-group">
+                                                <label for="txtAboutUs">Tell us more about your business. &nbsp;<label class="text-left" style="color:darkgray"> (This text is used for About Us Section)</label></label>
+                                                <textarea class="form-control" style="height:235px; border:1px solid" id="txtAboutUs" data-bind="value:aboutUs"></textarea>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                @*<button class="btn  btn-default pull-right" style="margin-bottom: 10px;" id="saveBtn" data-bind="click: $root.onTabChange(4)">Continue to Step 4</button>*@
+                                <div class="col-lg-12">
+                                    <div class="col-lg-9">
+                                        <span class="help-block text-left" style="margin-bottom:0px;">We take your privacy extremely seriously. See our privacy policy for full details on how we use and secure your personal data.</span>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div style="float: right;">
+                                            <a class="btn btn-default" href="#tab-Money" style="text-decoration: none;margin-bottom: 10px;" data-toggle="tab" data-bind="click: function(){$root.onTabChange(4);}">
+                                                <span>Continue to Step 4</span>
+                                            </a>
+                                            <button class="btn  btn-success" style="margin-bottom: 10px; margin-left:4px;" id="btnSaveCompProfile" data-bind="click:$root.onUpdateProfile , enable: hasChanges, css: { 'btn-warning': hasChanges }">Save</button>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="tab-Money">
+                            <div class="col-lg-12 col-sm-12 col-md-12 form-horizontal clearfix">
+                                <div class="col-md-12 main-box">
+                                    <div class="col-md-6">
+                                        <header class="main-box-header clearfix" style="padding-left: 0">
+                                            <h2>4. Money Transfers & Billing Details:</h2>
+                                        </header>
+                                        <div class="main-box-body clearfix" style="padding-bottom: 0;display:none">
+                                            <div class="form-group">
+                                                <label for="txtPaypalId" class="requiredlabel">Your Paypal Id (email) </label>
+                                                <input type="text" id="txtPaypalId" class="form-control" name="Missing Paypal Id" placeholder="Enter Your Paypal Id" maxlength="64" data-bind="value:paypalMailId, validationOnElement: paypalMailId">
+                                                <span class="help-block text-left">This used to transfer cash credits(centz) from your App wallet to your Paypal account.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <header class="main-box-header clearfix" style="padding-left: 0">
+                                            <p class="pull-right" style="color:red">* Required</p>
+                                        </header>
+                                        <div class="main-box-body clearfix" style="padding-bottom: 0">
+                                            <div class="form-group">
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 main-box" style="background-color: #f0f1f1; padding-top: 20px;">
+                                        <div class="col-md-6 main-box-body clearfix">
+                                            <div class="form-group">
+                                                <label for="txtBillInvoiceTo" class="requiredlabel">Bill Invoices to (Business Name) </label>
+                                                <input type="text" id="txtBillInvoiceTo" class="form-control" name="Missing billing business name" maxlength="64" placeholder="Enter Billing Business Name" data-bind="value:billingBusinessName, validationOnElement: billingBusinessName">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="txtVatNo">Sale Tax / Vat #</label>
+                                                <input type="text" id="txtVatNo" class="form-control" placeholder="Enter VAT Number" maxlength="16" data-bind="value:vatNumber">
+                                            </div>
+                                            <div class="form-group" style="display:none">
+                                                <label for="txtRegNo">Company Registration Number</label>
+                                                <input type="text" id="txtRegNo" class="form-control" placeholder="Enter Registration Number" maxlength="16" data-bind="value:companyRegNo">
+                                            </div>
+                                            <div class="form-group" style="display:none">
+                                                <label for="txtBusinessStartDate">Business Start Date </label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    <input type="text" class="form-control" id="txtBusinessStartDate" placeholder="Enter Business Start Date" data-bind="datepicker:businessStartDate, datepickerOptions: { yearRange: '-60:+0' }">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 main-box-body clearfix">
+                                            <div class="form-group">
+                                                <label for="txtCreditCard" class="requiredlabel">Credit Card </label>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" id="txtCreditCard" data-bind="value:creditCardUi,enable:false">
+                                                    <span class="input-group-btn">
+                                                        <button class="btn btn-primary" data-bind="text: creditCard() ? 'Update' : 'Link', click: $root.chargeCustomer" id="btnlinkCard" type="button">Go!</button>
+                                                    </span>
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group" style="display:none">
+                                                <label for="txtBillingPhone">Billing Phone Line</label>
+                                                <input type="text" id="txtBillingPhone" class="form-control" placeholder="Enter Billing Phone Line" maxlength="16" data-bind="value:BillingPhone">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="txtBillingEmail" class="requiredlabel">Billing Email </label>
+                                                <input type="text" id="txtBillingEmail" class="form-control" maxlength="64" name="Missing billing email" placeholder="Enter Billing Email" data-bind="value:BillingEmail, validationOnElement: BillingEmail">
+                                            </div>
+
+
+
+                                            <input id="hdlogchanged" type="checkbox" name="hdlogchanged" data-bind="value:LogoChanged" style="display:none">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="col-lg-9">
+                                        <span class="help-block text-left" style="margin-bottom:0px;">We take your privacy extremely seriously. See our privacy policy for full details on how we use and secure your personal data.</span>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <button class="btn  btn-success pull-right" style="margin-bottom: 10px;" id="btnSaveCompProfile" data-bind="click:$root.onUpdateProfile , enable: hasChanges, css: { 'btn-warning': hasChanges }">Save</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                @* <div class="modal-footer" style="padding-left:0;padding-right:0;padding-bottom:5px;background-color:#dedede">
+                    <div style="padding-right:8px;">
+
+                       <button class="btn  btn-info" id="saveBtn" data-bind="click:$root.onUpdateProfile , enable: $root.hasChangesOnProfile, css: { 'btn-warning': $root.hasChangesOnProfile }">Save</button>
+                                       <a class="btn btn-default" aria-hidden="true" data-bind="click: $root.onCloseUserProfileDialog" data-dismiss="modal" id="" style="float: right;margin-bottom: 10px;visibility:visible; ">Close</a>
+                                    </div>
+                                </div>*@
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@Html.Partial("~/Areas/User/Views/Shared/_ChangePassword.cshtml")
+
+@section Scripts{
+    <script type="text/javascript">
+        require(["common/companyProfile.view", "common/confirmation.view", "common/stripeChargeCustomer.view"]);
+
+    </script>
+    <script>
+        function getParameter(url, param) {
+            if (url.indexOf('?') == -1)
+                return 1;
+            url = url.split('?');
+            var pattern = new RegExp(param + '=(.*?)(;|&|$)', 'gi');
+            return url[1].split(pattern)[1];
+        }
+    </script>
+    <script type="text/javascript">
+
+
+        $(document).ready(function () {
+
+
+        });
+
+    </script>
+
+
+
+
+}
+
+
+
+<script type="text/javascript">
+
+    var logoImage = "";
+    var bannerImage1 = "";
+    var bannerImage2 = "";
+    var bannerImage3 = "";
+    var mode = 1;
+    function changeIframeSrcCProfile(mode1) {
+        //debugger;
+        mode = mode1;
+        if (mode1 != 1)
+            mode1 = 2;
+        $("#iframecpo").attr("src", "/DamImages?mode=" + mode1 + "&selection=true");
+
+        console.log(mode);
+    }
+    function iframeLoadedCProfile() {
+
+        var iframeBodycpo = $('body', $('#iframecpo')[0].contentWindow.document);
+
+        //var cpoDamClose = $('body', $('#btnDamClosexp'));
+
+        var cpoDamClose = $('#btnDamClosexp');
+
+
+        $(iframeBodycpo).on('click', '.damImgContainer img', function (event) {
+          
+            console.log(mode);
+            if (mode == 1) {
+                $("#imgLogoCProfile").attr("src", this.src).change();
+                logoImage = this.src;
+
+                $('#hdlogchanged').prop('checked', true);
+                $('#hdlogchanged').trigger('change');
+
+
+                cpoDamClose.click();
+            } else if (mode == 2) {
+                $("#bannerImage1").attr("src", this.src).change();
+                bannerImage1 = this.src;
+                cpoDamClose.click();
+            } else if (mode == 3) {
+                $("#bannerImage2").attr("src", this.src).change();
+                bannerImage2 = this.src;
+                cpoDamClose.click();
+            } else if (mode == 4) {
+                $("#bannerImage3").attr("src", this.src).change();
+                bannerImage3 = this.src;
+                cpoDamClose.click();
+            }
+        });
+    }
+    function testm() {
+        $("#phone").intlTelInput({
+            allowExtensions: true,
+            autoFormat: true,
+            autoHideDialCode: false,
+            autoPlaceholder: true,
+            customPlaceholder: function (selectedCountryPlaceholder, selectedCountryData) {
+                return 'Phone (include country code) e.g. ' + selectedCountryPlaceholder;
+            },
+            //defaultCountry: "auto",
+            //geoIpLookup: function(callback) {
+            //  $.get('http://ipinfo.io', function() {}, "jsonp").always(function(resp) {
+            //    var countryCode = (resp && resp.country) ? resp.country : "";
+            //    callback(countryCode);
+            //  });
+            //},
+            nationalMode: false,
+            //numberType: "MOBILE",
+            //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+            preferredCountries: ['gb', 'us', 'au'],
+            utilsScript: "../Scripts/intphnumutils.js"
+
+        });
+    }
+
+</script>
+
+
+<!-- Modal -->
+<div class="modal fade" id="damModelcpo" tabindex="-1" role="dialog" aria-labelledby="myModalLabelcpo" style="z-index:9999">
+    <div class="modal-dialog" role="document" style="width:883px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" id="btnDamClosexp" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Select an Image or upload</h4>
+            </div>
+            <div class="modal-body">
+                <iframe src="~/DamImages?mode=1&selection=true" style="width:100%;height:600px;border:none;" id="iframecpo"></iframe>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>

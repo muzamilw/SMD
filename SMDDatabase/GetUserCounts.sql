@@ -1,0 +1,82 @@
+﻿GO
+/****** Object:  StoredProcedure [dbo].[GetUserCounts]    Script Date: 10/12/2016 11:14:47 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+ALTER PROCEDURE [dbo].[GetUserCounts] 
+	
+AS
+BEGIN
+	
+	select title, (case when [7] is not null then [7] else 0 end ) '7Days', (case when [14] is not null then [14] else 0 end ) '14Days' , (case when [30] is not null then [30] else 0 end ) '30Days', (case when [60] is not null then [60] else 0 end ) '60Days'  from (
+	Select 1 ordr,  count(u.id) stats, '7' Granual , 'Last log in date' title
+	from AspNetUsers u
+	where u.LastLoginTime > getdate()-7
+	union
+	Select  2 ordr, count(us.id) stats , '7' Granual , 'Registration date' title
+	from AspNetUsers us 
+	where us.CreatedDateTime > getdate()-7 
+	union
+	Select  3 ordr, count(c.CompanyId) stats, '7' Granual , 'Deleted account date' title
+	from Company c 
+	where c.DeleteDate > getdate()-7
+	union
+
+	Select 1 ordr, count(u.id) stats, '14' Granual , 'Last log in date' title
+	from AspNetUsers u
+	where u.LastLoginTime > getdate()-14
+	union
+	Select  2 ordr, count(us.id) stats , '14' Granual , 'Registration date' title
+	from AspNetUsers us 
+	where us.CreatedDateTime > getdate()-14 
+	union
+	Select  3 ordr, count(c.CompanyId) stats, '14' Granual , 'Deleted account date' title
+	from Company c 
+	where c.DeleteDate > getdate()-14
+	union
+
+	Select 1 ordr, count(u.id) stats, '30' Granual , 'Last log in date' title
+	from AspNetUsers u
+	where u.LastLoginTime > getdate()-30
+	union
+	Select  2 ordr, count(us.id) stats , '30' Granual , 'Registration date' title
+	from AspNetUsers us 
+	where us.CreatedDateTime > getdate()-30 
+	union
+	Select 3 ordr, count(c.CompanyId) stats, '30' Granual , 'Deleted account date' title
+	from Company c 
+	where c.DeleteDate > getdate()-30
+
+	union
+
+	Select 1 ordr, count(u.id) stats, '60' Granual , 'Last log in date' title
+	from AspNetUsers u
+	where u.LastLoginTime > getdate()-60
+	union
+	Select 2 ordr, count(us.id) stats , '60' Granual , 'Registration date' title
+	from AspNetUsers us 
+	where us.CreatedDateTime > getdate()-60
+	union
+	Select 3 ordr, count(c.CompanyId) stats, '60' Granual , 'Deleted account date' title
+	from Company c 
+	where c.DeleteDate > getdate()-60
+	
+	
+	) as rec
+	pivot
+	(
+	 max(stats)
+    for Granual in ([7], [14],[30], [60]) 
+	) piv
+	order by ordr
+	
+END
+
+--EXEC GetUserCounts
+

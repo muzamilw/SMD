@@ -12,6 +12,7 @@ namespace SMD.MIS.Areas.Api.Models
         /// Langs
         /// </summary>
         public IEnumerable<LanguageDropdown> Languages { get; set; }
+        public IEnumerable<CurrencyDropdown> Currencies { get; set; }
         /// <summary>
         /// User and Cost detail
         /// </summary>
@@ -37,16 +38,23 @@ namespace SMD.MIS.Areas.Api.Models
         /// </summary>
         public IEnumerable<SurveyQuestionDropDown> SurveyQuestions { get; set; }
 
+        public IEnumerable<SurveyQuestionDropDown> SurveyQuestionsList { get; set; }
+
         public IEnumerable<Industry> listIndustry { get; set; }
         public IEnumerable<Education> listEducation { get; set; }
 
         /// <summary>
         /// Industory
         /// </summary>
-        public IEnumerable<Industry> Professions { get; set; }
+        public IEnumerable<Models.Industry> Professions { get; set; }
         /// <summary>
         /// Education
         /// </summary>
-        public IEnumerable<Education> Educations { get; set; }
+        public IEnumerable<Models.Education> Educations { get; set; }
+        public IEnumerable<AdCampaignDropDown> AdCampaigns { get; set; }
+        public IEnumerable<CouponCategoryModel> CouponCategories { get; set; }
+        
+        public IEnumerable<DiscountVoucher> DiscountVouchers { get; set; }
+        public IEnumerable<CompanyBranch> listBranches { get; set; }
     }
 }

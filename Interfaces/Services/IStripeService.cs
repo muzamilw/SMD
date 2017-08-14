@@ -1,6 +1,7 @@
-﻿
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using SMD.Models.RequestModels;
+
+using SMD.Models.ResponseModels;
 
 namespace SMD.Interfaces.Services
 {
@@ -18,5 +19,12 @@ namespace SMD.Interfaces.Services
         /// Create Charge With Token
         /// </summary>
         Task<string> CreateCustomer(StripeChargeCustomerRequest request);
+        Task<string> UpdateCustomer(StripeChargeCustomerRequest request, string CustomerId);
+
+
+        StripeSubscriptionResponse CreateCustomerSubscription(string StripeCustomerId);
+
+
+        StripeSubscriptionResponse GetCustomerSubscription(string StripeSubscriptionId, string StripeCustomerId);
     }
 }

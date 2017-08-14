@@ -60,5 +60,63 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="SMDChanges.sql" />
+    <None Include="GetUserProfileQuestions.sql" />
+    <None Include="GetUserSurveys.sql" />
+    <None Include="SMDChanges2.sql" />
+    <None Include="SearchCoupons.sql" />
+    <None Include="getActiveCampaignsOverTime.sql" />
+    <None Include="GetCouponByID.sql" />
+    <None Include="getUserActivitiesOverTime.sql" />
+    <None Include="getPayoutVSRevenueOverTime.sql" />
+    <None Include="GetRevenueByCampaignOverTime.sql" />
+    <None Include="GetLiveCampaignCountOverTime.sql" />
+    <None Include="getAdsCampaignByCampaignId.sql" />
+    <None Include="getPollsBySQID.sql" />
+    <None Include="getSurvayByPQID.sql" />
+    <None Include="getDealByCouponID.sql" />
+    <None Include="getDisplayAdsCampaignByCampaignIdAnalytics.sql" />
+    <None Include="getAdsCampaignByCampaignIdRatioAnalytic.sql" />
+    <None Include="getSurveyByPQIDRatioAnalytic.sql" />
+    <None Include="getPollBySQIDRatioAnalytic.sql" />
+    <None Include="getDealByCouponIdRatioAnalytic.sql" />
+    <None Include="getSurvayByPQIDtblAnalytic.sql" />
+    <None Include="getAdsCampaignByCampaignIdtblAnalytic.sql" />
+    <None Include="getPollBySQIDtblAnalytic.sql" />
+    <None Include="GetAudience.sql" />
+    <None Include="getCampaignROItblAnalytic.sql" />
+    <None Include="GetProducts.sql" />
+    <None Include="GetUserProfileCompletness.sql" />
+    <None Include="GetAdminDashBoardInsights.sql" />
+    <None Include="GetRegisteredUserData.sql" />
+    <None Include="GetUserSurveySelectionPercentage.sql" />
+    <None Include="GetSharedSurveyQuestion.sql" />
+    <None Include="GetSharedSurveyQuestionsByUserId.sql" />
+    <None Include="GetUsersCouponsForEmailNotification.sql" />
+    <None Include="SearchCampaigns.sql" />
+    <None Include="GetCampaignPerformanceWeeklyStats.sql" />
+    <None Include="GetRandomGameByUser.sql" />
+    <None Include="vw_Notifications.sql" />
+    <None Include="GetUserProfileQuestionsList.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="getCampaignsByStatus.sql" />
+    <None Include="GetUserCounts.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="getCampaignByIdFormDataAnalytic.sql" />
+    <Build Include="getCampaignByIdQQFormAnalytic.sql" />
+    <Build Include="getDealImpressionByProfessionByCouponId.sql" />
+    <Build Include="getDealImpressionByGenderByCouponId.sql" />
+    <Build Include="getDealImpressionByAgeByCouponId.sql" />
+    <Build Include="getCampaignImpressionByProfessionByCId.sql" />
+    <Build Include="getCampaignImpressionByGenderByCId.sql" />
+    <Build Include="getCampaignImpressionByAgeByCId.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="getAdsCampaignPerCityPerGenderFormAnalytic.sql" />
+    <None Include="getAdsCampaignPerCityPerAgeFormAnalytic.sql" />
+    <None Include="getPollImpressionStatBySQIdFormAnalytic.sql" />
+    <None Include="getDealStatByCouponIdFormAnalytic.sql" />
+    <None Include="getDealStatByDDProfessionByCId.sql" />
   </ItemGroup>
 </Project>

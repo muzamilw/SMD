@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SMD - 2015</title>
+    <title>Cash4ads.com</title>
     <script type="text/javascript">
         //<![CDATA[
         try { if (!window.CloudFlare) { var CloudFlare = [{ verbose: 0, p: 0, byc: 0, owlid: "cf", bag2: 1, mirage2: 0, oracle: 0, paths: { cloudflare: "/cdn-cgi/nexp/dokv=88e434a982/" }, atok: "dd9c6b9d970c21043597a4fadd80e4dd", petok: "c72ad64ff02a636e9ee15a6b938d94e820ea3f2d-1408352066-1800", zone: "adbee.technology", rocket: "0", apps: { "ga_key": { "ua": "UA-49262924-2", "ga_bs": "2" } } }]; !function (a, b) { a = document.createElement("script"), b = document.getElementsByTagName("script")[0], a.async = !0, a.src = "//ajax.cloudflare.com/cdn-cgi/nexp/dokv=97fb4d042e/cloudflare.min.js", b.parentNode.insertBefore(a, b) }() } } catch (e) { };
@@ -16,9 +16,9 @@
     <link href="../Content/themes/Centaurus/css/libs/font-awesome.css" type="text/css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="../Content/themes/Centaurus/css/compiled/layout.css">
     <link rel="stylesheet" type="text/css" href="../Content/themes/Centaurus/css/compiled/elements.css">
-    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,600,700,300|Titillium+Web:200,300,400'
-          rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
     <link type="image/x-icon" href="~/Views/Account/favicon.png" rel="shortcut icon" />
+    @RenderSection("styleoverride", required: false)
     <!--[if lt IE 9]>
         <script src="~/Views/Account/js/html5shiv.js"></script>
         <script src="~/Views/Account/js/respond.min.js"></script>
@@ -36,21 +36,21 @@
         })();
 
         (function (b) { (function (a) { "__CF" in b && "DJS" in b.__CF ? b.__CF.DJS.push(a) : "addEventListener" in b ? b.addEventListener("load", a, !1) : b.attachEvent("onload", a) })(function () { "FB" in b && "Event" in FB && "subscribe" in FB.Event && (FB.Event.subscribe("edge.create", function (a) { _gaq.push(["_trackSocial", "facebook", "like", a]) }), FB.Event.subscribe("edge.remove", function (a) { _gaq.push(["_trackSocial", "facebook", "unlike", a]) }), FB.Event.subscribe("message.send", function (a) { _gaq.push(["_trackSocial", "facebook", "send", a]) })); "twttr" in b && "events" in twttr && "bind" in twttr.events && twttr.events.bind("tweet", function (a) { if (a) { var b; if (a.target && a.target.nodeName == "IFRAME") a: { if (a = a.target.src) { a = a.split("#")[0].match(/[^?=&]+=([^&]*)?/g); b = 0; for (var c; c = a[b]; ++b) if (c.indexOf("url") === 0) { b = unescape(c.split("=")[1]); break a } } b = void 0 } _gaq.push(["_trackSocial", "twitter", "tweet", b]) } }) }) })(window);
-    /* ]]> */
+        /* ]]> */
     </script>
     @* Get Local Time Zone and Keep in Cache *@
     <script type="text/javascript">
-    function cookieExists(name) {
-        var nameToFind = name + "=";
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            if (cookies[i].trim().indexOf(nameToFind) === 0) return true;
+        function cookieExists(name) {
+            var nameToFind = name + "=";
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                if (cookies[i].trim().indexOf(nameToFind) === 0) return true;
+            }
+            return false;
         }
-        return false;
-    }
-    function addTimeZoneOffSetCookie() {
-        if (!cookieExists("_timeZoneOffset") && '@HttpContext.Current.Request.Url.Authority' != "localhost" &&
-            '@HttpContext.Current.Request.Url.Authority' != "smd" && '@HttpContext.Current.Request.Url.Authority' != "smdpreview.com") {
+        function addTimeZoneOffSetCookie() {
+            if (!cookieExists("_timeZoneOffset") && '@HttpContext.Current.Request.Url.Authority' != "localhost" &&
+                '@HttpContext.Current.Request.Url.Authority' != "smd" && '@HttpContext.Current.Request.Url.Authority' != "smdpreview.com") {
                 var now = new Date();
                 var timeZoneOffset = -now.getTimezoneOffset();  // in minutes
                 now.setTime(now.getTime() + 10 * 24 * 60 * 60 * 1000); // keep it for 10 days
@@ -66,13 +66,33 @@
     <div id="login-full-wrapper">
         <div class="container">
             <div class="row">
-                <div class="col-xs-12">
-                    <div id="login-box">
+                <div class="col-lg-4  col-lg-offset-1">
+
+                    <div class="text-center hidden-xs">
+                        <h4 style="color:white;margin-top:35px;" class="text-center;">@RenderSection("headerText", required: false)</h4>
+                    </div>
+
+
+                    <div id="login-box" class="hidden-xs">
                         <div class="row">
                             <div class="col-xs-12">
                                 <header id="login-header">
-                                    <div id="login-logo">
-                                        <img src="~/Images/Cash4Ads_White_text.png" />
+                                    <div id="login-logo" style="">
+                                        <a href="~/" id="beta" style="         background-image: url(/Images/beta.jpg);
+    background-repeat: no-repeat;
+    background-size: 63%;
+    margin-top: 16px;
+    margin-left: 0px;
+    width: 72px;
+    height: 18px;
+    position: absolute;
+    left: 200px;z-index:100;">
+
+                                        </a>
+                                        <div class="login-logo-bakImg">
+
+                                        </div>
+                                        @*<img src="~/Images/Cash4Ads_White_pink.png" />*@
                                     </div>
                                 </header>
                                 <div id="login-box-inner">
@@ -81,7 +101,26 @@
                             </div>
                         </div>
                     </div>
-                </div>
+
+                   
+
+
+                    <div class="text-center visible-xs" style="margin-top:40px;padding:20px">
+
+                        <img src="~/Images/Cash4ads_logo-circle.png" style="width:115px;" />
+
+                        <h4 style="color:white;margin-top:35px;font-size:2em;font-weight:bolder" class="text-center;">Sign In from your laptop<br /></h4>
+                        <h4 style="color:white;margin-top:35px;font-size:2em" class="text-center;">We're working hard to allow you to manage campaigns from your mobile.<br /><br /> In the meanwhile have fun playing games, Watching ads and Earning Cash<br /> with our apps.</h4>
+                        </div>
+
+                    <div class="text-center visible-xs" style="margin-top:30px;" >
+                        <img style="height:47px" src="../../Images/app-store.png" alt="" /><img style="margin-left:10px;width:152px" src="../../Images/download-on-google-play.png" alt="" />
+                    </div>
+
+
+                    </div>
+                <div class="col-xs-6 hidden-xs">@RenderSection("Sidebar", required: false)</div>
+                
             </div>
         </div>
     </div>
@@ -89,7 +128,6 @@
     <script src="../Content/themes/Centaurus/js/bootstrap.js"></script>
     <script src="../Content/themes/Centaurus/js/jquery.nanoscroller.min.js"></script>
     <script src="../Content/themes/Centaurus/js/scripts.js"></script>
-    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryval") 
 </body>
 </html>
-

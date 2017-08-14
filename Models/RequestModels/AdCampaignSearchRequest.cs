@@ -28,5 +28,26 @@ namespace SMD.Models.RequestModels
                 SortBy = (short)value;
             }
         }
+
+
+        public int status { get; set; }
+        public int mode { get; set; }
+
+        public bool? ShowCoupons { get; set; }
+    }
+    public class DownloadImageModel
+    {
+
+        /// <summary>
+        ///  text for searching 
+        /// </summary>
+        public string path { get; set; }
+
+        public int id { get; set; }
+
+
+        public int type { get; set; }
+
+        public int mode { get; set; }
     }
 }

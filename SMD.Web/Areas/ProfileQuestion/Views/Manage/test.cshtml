@@ -1,0 +1,372 @@
+﻿@{
+    ViewBag.Title = "User Profile";
+}
+
+<div class="row" id="userProfileScreen">
+    <div class="col-lg-12 col-md-8 col-sm-8" style="padding-bottom: 10px;">
+        <div class="clearfix ">
+            <div class="col-xs-12" style="text-align: right; padding-right:0;margin-bottom:10px;">
+                <button class="btn  btn-info" id="saveBtn" data-bind="click:$root.onUpdateProfile @*, enable: $root.hasChangesOnQuestion, css: { 'btn-warning': $root.hasChangesOnQuestion }*@">Update</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="main-box clearfix" id="tabsHeader">
+            <div class="tabs-wrapper profile-tabs">
+                <ul class="nav nav-tabs">
+                    <li class="active" id="generalInfoTab"><a href="#tab-generalinfo" data-toggle="tab">User Profile</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" data-bind="with: $root.selectedUser" id="tab-generalinfo">
+                        <div class="col-lg-12 form-horizontal">
+                            <h3 class="group-header" style="margin-top:20px;">
+                                Personal Info
+                            </h3>
+                            <p class="group-header-description">Enter information below </p>
+                            <div class="col-lg-9">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <div class="col-lg-4 text-right">
+                                            <div class="bs-example-tooltips tooltip-float-width">
+                                                <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
+                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                </a>
+                                            </div>
+                                            <label class="control-label text-right tooltip-float">Full name</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <input type="text" class="form-control" data-bind="value: fullName">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <div class="col-lg-4 text-right">
+                                            <div class="bs-example-tooltips tooltip-float-width">
+                                                <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
+                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                </a>
+                                            </div>
+                                            <label class="control-label text-right tooltip-float">Address 1</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <input type="text" class="form-control" data-bind="value: address1">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <div class="col-lg-4 text-right">
+                                            <div class="bs-example-tooltips tooltip-float-width">
+                                                <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
+                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                </a>
+                                            </div>
+                                            <label class="control-label text-right tooltip-float">Address 2</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <input type="text" class="form-control" data-bind="value: address2">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <div class="col-md-4" style="text-align:right">
+                                        <div class="fileUpload btn btn-primary">
+                                            <span>Upload </span>
+                                            <input type="file" class="upload" id="image_files" onchange="readPhotoURL(this);" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <img id="vehicleImage" alt="" style="width: 120px;height:120px" data-bind="attr:{src:imageUrl }" />
+                                        <h5>Answer Image<span></span></h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-9" style="margin-top: -14px;">
+                                <div class="form-group">
+                                    <div class="col-lg-4 text-right">
+                                        <div class="bs-example-tooltips tooltip-float-width">
+                                            <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
+                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                            </a>
+                                        </div>
+                                        <label class="control-label text-right tooltip-float">Company name</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" data-bind="value: companyName">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-9">
+                                <div class="form-group">
+                                    <div class="col-lg-4 text-right">
+                                        <div class="bs-example-tooltips tooltip-float-width">
+                                            <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
+                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                            </a>
+                                        </div>
+                                        <label class="control-label text-right tooltip-float">Email</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" data-bind="value: email">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-9">
+                                <div class="form-group">
+                                    <div class="col-lg-4 text-right">
+                                        <div class="bs-example-tooltips tooltip-float-width">
+                                            <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
+                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                            </a>
+                                        </div>
+                                        <label class="control-label text-right tooltip-float">Job Title</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" data-bind="value: jobTitle">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-9">
+                                <div class="form-group">
+                                    <div class="col-lg-4 text-right">
+                                        <div class="bs-example-tooltips tooltip-float-width">
+                                            <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
+                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                            </a>
+                                        </div>
+                                        <label class="control-label text-right tooltip-float">Time Zone</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" data-bind="value: userTimeZone">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-9">
+                                <div class="form-group">
+                                    <div class="col-lg-4 text-right">
+                                        <div class="bs-example-tooltips tooltip-float-width">
+                                            <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
+                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                            </a>
+                                        </div>
+                                        <label class="control-label text-right tooltip-float">Gender</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <select class="form-control" data-bind="options: $root.genderList, optionsText: 'name', optionsValue: 'id', optionsCaption: '&lt;' + 'Select Gender'+ '&gt;' , value:gender"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-9">
+                                <div class="form-group">
+                                    <div class="col-lg-4 text-right">
+                                        <div class="bs-example-tooltips tooltip-float-width">
+                                            <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
+                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                            </a>
+                                        </div>
+                                        <label class="control-label text-right tooltip-float">Age</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" data-bind="value: age">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-9">
+                                <div class="form-group">
+                                    <div class="col-lg-4 text-right">
+                                        <div class="bs-example-tooltips tooltip-float-width">
+                                            <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
+                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                            </a>
+                                        </div>
+                                        <label class="control-label text-right tooltip-float">Country</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <select class="form-control" data-bind="options: $root.countries, optionsText: 'CountryName', optionsValue: 'CountryId', optionsCaption: '&lt;' + 'Select Country'+ '&gt;' , value:countryId"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-9">
+                                <div class="form-group">
+                                    <div class="col-lg-4 text-right">
+                                        <div class="bs-example-tooltips tooltip-float-width">
+                                            <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
+                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                            </a>
+                                        </div>
+                                        <label class="control-label text-right tooltip-float">City</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <select class="form-control" data-bind="options: $root.cities, optionsText: 'CityName', optionsValue: 'CityId', optionsCaption: '&lt;' + 'Select City'+ '&gt;' , value:cityId"></select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-9">
+                                <div class="form-group">
+                                    <div class="col-lg-4 text-right">
+                                        <div class="bs-example-tooltips tooltip-float-width">
+                                            <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
+                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                            </a>
+                                        </div>
+                                        <label class="control-label text-right tooltip-float">Conact Notes</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" data-bind="value: contactNotes">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-9">
+                                <div class="form-group">
+                                    <div class="col-lg-4 text-right">
+                                        <div class="bs-example-tooltips tooltip-float-width">
+                                            <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
+                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                            </a>
+                                        </div>
+                                        <label class="control-label text-right tooltip-float">Industery</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <select class="form-control" data-bind="options: $root.industries, optionsText: 'IndusteryName', optionsValue: 'IndusteryId', optionsCaption: '&lt;' + 'Select Language'+ '&gt;' , value:industeryId"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-9">
+                                <div class="form-group">
+                                    <div class="col-lg-4 text-right">
+                                        <div class="bs-example-tooltips tooltip-float-width">
+                                            <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
+                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                            </a>
+                                        </div>
+                                        <label class="control-label text-right tooltip-float">Phone 1</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" data-bind="value: phone1">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-9">
+                                <div class="form-group">
+                                    <div class="col-lg-4 text-right">
+                                        <div class="bs-example-tooltips tooltip-float-width">
+                                            <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
+                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                            </a>
+                                        </div>
+                                        <label class="control-label text-right tooltip-float">Phone 2</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" data-bind="value: phone2">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-9">
+                                <div class="form-group">
+                                    <div class="col-lg-4 text-right">
+                                        <div class="bs-example-tooltips tooltip-float-width">
+                                            <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
+                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                            </a>
+                                        </div>
+                                        <label class="control-label text-right tooltip-float">State</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" data-bind="value: state">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-9">
+                                <div class="form-group">
+                                    <div class="col-lg-4 text-right">
+                                        <div class="bs-example-tooltips tooltip-float-width">
+                                            <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
+                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                            </a>
+                                        </div>
+                                        <label class="control-label text-right tooltip-float">Zip Code</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" data-bind="value: zipCode">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 form-horizontal">
+                            <h3 class="group-header" style="margin-top:20px;">
+                                User Buisness Info
+                            </h3>
+                            <div class="col-lg-9">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <div class="col-lg-4 text-right">
+                                            <div class="bs-example-tooltips tooltip-float-width">
+                                                <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
+                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                </a>
+                                            </div>
+                                            <label class="control-label text-right tooltip-float">Full name</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <input type="text" class="form-control" data-bind="value: fullName">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <div class="col-lg-4 text-right">
+                                            <div class="bs-example-tooltips tooltip-float-width">
+                                                <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
+                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                </a>
+                                            </div>
+                                            <label class="control-label text-right tooltip-float">Address 1</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <input type="text" class="form-control" data-bind="value: address1">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <div class="col-lg-4 text-right">
+                                            <div class="bs-example-tooltips tooltip-float-width">
+                                                <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
+                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                </a>
+                                            </div>
+                                            <label class="control-label text-right tooltip-float">Address 2</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <input type="text" class="form-control" data-bind="value: address2">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- ko stopBinding: true -->
+@Html.Partial("~/Areas/Common/Views/Shared/_ConfirmationDialog.cshtml")
+<!-- /ko -->
+@section Scripts{
+    <script type="text/javascript">
+        require(["user/user.view", "common/confirmation.view"]);
+    </script>
+
+}

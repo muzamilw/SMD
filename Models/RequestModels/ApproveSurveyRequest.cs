@@ -24,5 +24,7 @@
         /// Stripe Response
         /// </summary>
         public string StripeResponse { get; set; }
+
+     
     }
 }

@@ -1,311 +1,475 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var colorOfBak = "background:#1d7bbb;padding-top: 10px; ";
+    var vtype = Request.QueryString["type"];
+    
+    if (string.IsNullOrEmpty(vtype))
+    {
+        vtype = "1";
+    }
+
+    var heading = "";
+
+    if (vtype == "1")
+    {
+        heading = "Save Up To 90% on Deals Near You";
+    }
+    else if (vtype == "2")
+    {
+        colorOfBak = "background:#31abe2;padding-top: 10px; ";
+        heading = "Purchase any 2-4-1 Offer for <b>£1</b> using your cash balance";
+        
+    }
+    var sessionVar = Session["User"] as Cash4Ads.Models.User;
+    var getUpdatedSession = Session["logSession"];
 }
 
 
 @section COLOR
 {
-
-   <!-- COLOR STYLE CSS -->
-<link rel="stylesheet" href="~/content/green.css">
+    <!-- COLOR STYLE CSS -->
+    <link rel="stylesheet" href="~/content/green.css">
 }
-  
-  <!-- Header -->
-<section id="header" class="container-fluid text-white">
-    <div class="container">
-        <div class="row clearfix">
 
-            <div class="row clearfix text-center">
-
-                <h1 class="main_title">Get paid to watch Ads - $$</h1>
-                <p class="text-center lead">
-                    We pay directly into your account for every ad you watch.
-                </p>
-            </div>
+@*@Html.Partial("~/Views/Shared/voucherbar.cshtml")*@
 
 
-            <div class="row clearfix staff">
-                <div class="col-xs-6 col-md-3 column text-center">
-                    <img class="img-circle" alt="140x140" src="~/images/team_01.png" />
-                    <h3 class="">Cash Pay Out</h3>
-                    <span>
-                        Minimum pay out of 8p to watch
-                        a video or click to a website
-
-                    </span>
-                </div>
-                <div class="col-xs-6 col-md-3 column text-center">
-                    <img class="img-circle" alt="140x140" src="~/images/team_03.png" />
-                    <h3 class="">Discount Vouchers</h3>
-                    <span>
-                        Choose higher value voucher offers
-                        instead of cash pay outs
-
-                    </span>
-                </div>
-                <div class="col-xs-6 col-md-3 column text-center">
-                    <img class="img-circle" alt="140x140" src="~/images/team_02.png" />
-                    <h3 class="">Play Games</h3>
-                    <span>
-                        Get paid to play games
-                        and train your brain
-
-                    </span>
-                </div>
-                <div class="col-xs-6 col-md-3 column text-center">
-                    <img class="img-circle" alt="140x140" src="~/images/team_04.png" />
-                    <h3 class="">Get Matched</h3>
-                    <span>
-                        Increase your value and get
-                        paid more from advertisers
-
-
-
-                    </span>
-                </div>
-            </div>
-
-
-
-            <div class="row clearfix text-center inner-top-xs">
-
-                <h1 class="main_title">Free App</h1>
-
-                <a href="#download" class="btn btn-lg btn-submit"><span class="fa fa-android"></span> Download App</a>
-
-                <a href="http://create.cash4ads.com/Account/Register" class="btn btn-lg btn-submit"><span class="fa fa-apple"></span> Sign up now</a>
-
-            </div>
-
-        </div>
-    </div><!-- /container  -->
-</section>
-
-<section id="feature" class="text-blue">
+<section style="@colorOfBak " class="text-blue">
     <div id="sense" class="container text-blue">
-        <div class="row clearfix">
-            <div class="col-md-12 column p_title">
-                <h2 class="text-center">
-                    Share the love
+        <div class="row clearfix inner-bottom-md">
+
+
+            <div class="col-md-12" style="height:47px;">
+                @*<h1 class="main_title text-white" style="margin-bottom:0px;font-size:29px;">
+
+                    @Html.Raw(heading)
+                </h1>*@
+
+</div>
+                <div class=" inner-top-xs" id="couponsContains">
+
+                    <div class="col-lg-12 col-md-12">
+                        <div class="col-lg-7 col-sm-12 col-xs-12">
+                            <div class="col-lg-6 ">
+                                <div class="input-group formcontrol selec_criter" style="padding-left:0px;padding-right:0px;">
+
+                                    <input type="text" id="txtKeyword" class="form-control input-lg" placeholder="Search" style="font-size:22px;height:45px;" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default btn-lg" type="button">
+                                            <i class="glyphicon glyphicon-search"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-sm-12 col-xs-12" style="padding:0px;padding-left:8px;">
+                                <div class="formcontrol selec_criter_ctg" style="padding-top:1px;padding-left:0px;padding-right:29px;margin-right:0px;">
+                                    <label class="clabel">
+                                        <select class="cselect col-md-12" id="selcat" style="height:44px;">
+                                            <option selected value="0">All Categories</option>
+
+                                        </select>
+                                    </label>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-5" style="padding-left:56px;">
+                            <h1 class="main_title text-white">
+
+                                Save Up To 90% on Deals Near You
+                            </h1>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="col-lg-8 col-md-12 imgeCont" style="margin-bottom:12px;">
+
+                            <div class="extraMargingStandardContainer" style="margin-top: 17px;padding-left: 7px; padding-right: 26px;">
+
+                                <div id="bonus-deals-side">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-4 col-md-12" style="padding-top:6px;">
+
+
+                            <div class="CountryDDPanels">
+                                <div style="padding:0px;padding-right:4px;">
+
+                                    <div class="pull-left" style="padding-top: 4px;padding-left:6px;">
+                                        <img src="~/images/ukflag.png" style="height:35px;" id="flag_img" />
+                                    </div>
+                                    <div class="input-group  formcontrol selec_criter_ctg pull-right" style="padding-top:1px;padding-left:0px;padding-right:0px;margin-right:0px;width:261px!important;margin-left:0px;">
+                                        <label class="clabel">
+                                            <select class="cselect col-md-12" id="selcont" style="height:44px;">
+                                                <option value="1">London</option>
+                                                <option value="2">Manchester</option>
+                                                <option value="2">Birmingham</option>
+                                                <option value="4">Leeds</option>
+                                                <option value="5">Glasgow</option>
+                                                <option value="6">Southampton</option>
+                                                <option value="7">Glasgow</option>
+                                                <option value="8">Liverpool</option>
+                                                <option value="9">Newcastle</option>
+                                                <option value="10">Nottingham</option>
+                                                <option value="11">Sheffield</option>
+                                                <option value="12">Bristol</option>
+                                                <option value="13">Belfast</option>
+                                                <option value="14">Leicester</option>
+                                                <option value="15">Derby</option>
+                                                <option value="16">Coventry</option>
+                                                <option value="17">Durham</option>
+                                                <option value="18">Edinburgh</option>
+                                                <option value="19">Hereford</option>
+                                                <option value="20">Lincoln</option>
+
+                                            </select>
+                                        </label>
+
+                                    </div>
+                                    <div class="clearfix">
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div id="ddsePanel" style="margin-top:24px;">
+                                <div class="bck_panels">
+                                    <div>
+                                        <h3 style="color:white">List A Deal For FREE</h3>
+                                    </div>
+
+                                    <div style="margin-top:25px;">
+                                        <div class="Dealdescription_panel">
+                                            <div>
+                                                <div class="pull-left"><i class="fa fa-circle " aria-hidden="true" style="font-size:4px;color:#e9eff4;"></i> </div> <div class="pull-left" style="margin-left:3px;color:#e9eff4;">Link deals to landing pages.</div>
+
+                                                <div class="clearfix"></div>
+                                            </div>
+
+                                            <div>
+                                                <div class="pull-left"><i class="fa fa-circle greyclr fontsize4" aria-hidden="true" style="font-size:4px;color:#e9eff4;"></i>  </div><div class="pull-left" style="margin-left:3px;color:#e9eff4;">No fees for any referrals.</div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div>
+                                                <div class="pull-left"><i class="fa fa-circle greyclr fontsize4" aria-hidden="true" style="font-size:4px;color:#e9eff4;"></i>  </div><div class="pull-left" style="margin-left:3px;color:#e9eff4;"> Group deals together.</div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div>
+                                                <div class="pull-left"><i class="fa fa-circle greyclr fontsize4" aria-hidden="true" style="font-size:4px;color:#e9eff4;"></i>  </div><div class="pull-left" style="margin-left:3px;color:#e9eff4;"> List deals to people near you.</div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div style="margin-top:36px;">
+
+                                        <input value="Sign In / Sign Up" class="signIn_btn" readonly="readonly" onclick="NavigateToLogin();" />
+                                    </div>
+
+                                </div>
+                                <div id="dwn_app_btn" style="margin-top:25px;">
+                                    <input type="button" class="signIn_btn_app" value="Download The APP" readonly="readonly" onclick="NavigateToApps();" />
+                                </div>
+                                <div id="dwn_app_btn" style="margin-top:90px;">
+                                    <div class="abcsf col-lg-12 col-md-12">
+                                        <div style="text-align:left;padding-left:16px;">
+                                            <span style="font-size:14px;color:#65a0cf">Why Don't We Get Paid to Watch Ads ?</span>
+                                        </div>
+
+                                        <div style="margin-top: 5px;padding-left: 16px;text-align:left;">
+                                            <span style="font-size:12px;color:#4c4c4c">Our data is out there and being used by data aggregators but we are the ones in value chain</span>
+                                        </div>
+
+                                        <div id="read_blogs" style="text-align:right;padding-right: 25px;">
+
+                                            <a style="font-size:14px;color:#65a0cf">Read Blog</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div id="dwn_app_btn" style="margin-top:25px;">
+                                    <div class="abcsf col-lg-12 col-md-12">
+                                        <div>
+                                            <span style="font-size:12px;color:#4c4c4c">support us on</span>
+                                        </div>
+                                        <div style="margin-top:11px;">
+                                            <img src="/images/kickstarter.png" style="width:215px;">
+                                        </div>
+                                        <div style="margin-top:11px;">
+                                            <span style="font-size:12px;color:#4c4c4c">to bring you a richer experience</span>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 
 
+                    <div class="col-lg-12 col-md-8 col-sm-6 hidden-xs hidden-sm content-main-deals content" style="display:none;" id="main_copon_cont">
 
 
+                        <div class="standard-container" style="padding:0px; display:none;" id="inner_coupon_cont">
 
-                </h2>
-                <p class="lead text-center">Advertisers pay 50% of their advertising spend on Cash 4 Ads directly to the people that watch their Ads.</p>
-                <p class="lead text-center"><span class="fa fa-heart" style="color:red"></span> </p>
-                <p class="lead text-center">This sharing approach allows local advertisers to promote their businesses and give back to the local community in a beneficial and easy way.</p>
+                            <div class="unit ctu  js-main-deal selector-620648" data-om=";620648;" data-dealid="620648">
+                                <h1 class="mvtest_header_v2 cld" id="couponMainHeading"></h1>
+
+
+                                <div class="cld pos-r main-deal-data parent-container">
+                                    <div class="slider">
+                                        <div class="">
+                                            <ul class="slides">
+                                                <li class="clone" style="width: 100%; float: left; display: block;">
+
+                                                    <a class="main-deal-image-link" href="/payment/620648" style="cursor: pointer;">
+                                                        <img id="voucMainSliderImg" src="https://static.wowcher.co.uk/images/deal/620648/154352.jpg" width="778" height="521" class="picture-slides-image deal-detail-img top" alt="£289 for a PDO threadlift on eye bags, £489 for one facial area of your choice or £985 for the full face at Harley Street Elite Clinic - save up to 59%" title="£289 for a PDO threadlift on eye bags, £489 for one facial area of your choice or £985 for the full face at Harley Street Elite Clinic - save up to 59%">
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div id="deal-of-day-esi" class="flt-r">
+
+                                        <div class="corner-container ctu-redeem-now main-deal-data"></div>
+                                        <div class="ctu-pointsCollect main-deal-data">
+                                            <span style="color:white">
+                                                Collect 28,900
+                                                Club Wowcher points when you buy this deal
+                                            </span>
+                                        </div>
+                                        <div class="ctu-discounted main-deal-data">
+                                            <div class="ndod-multiprice" style="padding-top: 35.5px ; ">
+                                                <span class="innerColour">
+
+                                                    FROM
+                                                </span>
+                                            </div>
+                                            <div class="ndod-price" style="font-size: 64px; margin: 5.5px 0; letter-spacing: -3px">
+                                                <span class="inner innerColour">
+                                                    <span class="ndod-currency">£</span><span id="couDiscountedVal" class="ndod-amount">289</span>
+                                                </span>
+                                            </div>
+                                            <a href="http://harleystreeteliteclinic.com/tear-trough/" target="_blank" class="price-link" rel="nofollow">
+                                                <del class="ndod-original-price"><span class="ndod-currency">£</span><span id="couActualVal" class="ndod-amount">700</span></del>
+                                            </a>
+                                        </div><div class="main-deal-data-wrapper">
+                                            <div class="ctu-stats-md-topbg"></div>
+                                            <div class="ctu-stats main-deal-data">
+
+                                                <table class="ctu-stats-table ctu-stats-table-full-width">
+                                                    <tbody>
+                                                        <tr>
+
+                                                            <td>
+                                                                <div class="stat-bought"><span class="innerColour">Bought</span><strong style="font-size:55px;line-height:48px" id="coupBought">0</strong></div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="stat-save" ID="stae_sv">
+                                                                    <span id="savee" class="innerColour">Save </span><span class="innerColour" id="up_too">up to </span><strong style="font-size:52px;line-height:48px" id="coupPerct">59%</strong>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="deal-detail-timer timer-620648">
+
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+
+                                                <a title="Buy this deal" class="ctu-buy-big waMultiPrice" data-multibuy="true" onclick="BuyCoupon();" id="mainDealBuy">BUY!</a>
+
+                                                @*<a class="waBuyAsGift js-buy-gift-button-track ctu-buy-gift" href="/payment/620648?gift=1">BUY AS A GIFT</a>*@
+
+                                            </div>
+
+                                            <div class="ctu-stats-md-btmbg"></div>
+                                        </div><!-- main-deal-data-wrapper END -->
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="ctu-details">
+                                <div class="twocol">
+                                    <h2>Highlights</h2>
+                                    <ul>
+                                        <li>Feel fantastic with a PDO threadlift.</li>
+                                        <li>Treat eye bags, cheeks, forehead, lower face, neck or the full face.</li>
+                                        <li>Aims to help reduce the appearance of unwanted fine lines and wrinkles.</li>
+                                        <li>Non-surgical treatment carried out by a qualified doctor.</li>
+                                        <li>Includes pre-treatment consultation.</li>
+                                        <li>Open seven days a week (see below). Based on world-famous Harley Street. </li>
+                                    </ul>
+                                </div>
+                                <div class="twocol">
+                                    <h2>The Fine Print</h2>
+                                    <ul>
+                                        <li>One per person.</li>
+                                        <li>May buy multiples as gifts.</li>
+                                        <li>Voucher valid until 10th Jul 2016.</li>
+                                        <li>New Harley Street Elite Clinic customers only.</li>
+                                        <li>If deemed medically unsuitable, a full refund will be given.</li>
+                                        <li>48-hour cancellation policy applies.</li>
+                                        <li>Appointments subject to availability.</li>
+                                    </ul>
+                                </div>
+                                <br class="clearing">
+
+                                <div id="deal-detail-fullview" class="cld pos-r pink-star-bullet " style="display: block;">
+                                    <h2>Full Details</h2>
+                                    <p>If you're woeful about wrinkles and baffled by bags under your eyes, fret not - follow the <i>thread</i> of today's deal...</p>
+
+                                    <p>We're offering you a <b>PDO threadlift for eye bags</b> for <b>£289</b>, <b>on the cheeks, forehead line, lower face or neck</b> for <b>£489</b> or <b>your full face</b> for just <b>£985</b>, saving you <b>up to 59% off</b> <a href="http://harleystreeteliteclinic.com/" rel="nofollow" target="_blank">Harley Street Elite Clinic's</a> prices.</p>
+
+                                    <p>Based in central London, the experienced and friendly professionals at Harley Street Elite Clinic are on a mission to help you look and feel great! With today’s deal, you’ll get a non-surgical PDO threadlift treatment on your eye bags, full face, or a choice of either the cheeks, forehead, lower part of the face or neck. With a full consultation included, the total treatment time takes just up to an hour for one area and up to two hours for a full face session. Perfect!</p>
+
+                                    <p><b>Opening Hours</b></p>
+
+                                    <p></p><ul>
+                                        <li>
+                                            Monday-Friday: 10am-9pm<p></p>
+                                            <p></p>
+                                        </li>
+                                        <li>Saturday-Sunday; 10am-5.30pm</li>
+                                    </ul>
+
+                                </div>
+                                <div class="deal-detail-fullview-btmbg"></div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+                <div class="row inner-top-xs " id="couponsNotFound" style="display:none">
+                    <div id="back_btn_div">
+                        <div style="float:right;">
+                            <img style="height:40px;cursor:pointer" src="/images/back-arrow.png" title="Back to Categories" onclick="NavigateOwn()">
+                        </div>
+                        <div style="clear:both;"></div>
+                    </div>
+                    <div class=" col-xs-12">
+                        <h5 class="text-white text-center">No Deals found based on your search and selection criteria. Please try again by changing search and filtering criteria.</h5>
+                    </div>
+                </div>
+            </div>
+
+        <div id="AccountSetingConformation" data-backdrop="static" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialogConfirmModalLabel" aria-hidden="true" style="z-index: 100000;display:block;">
+            <div class="modal-dialog" style="width:578px;margin:150px auto">
+                <div class="modal-content" style="border-radius:267px;">
+
+                    <div class="modal-body" style="padding-top:0px;height:539px;">
+                        <div class="col-lg-12" style="display:none;">
+                            <div class="col-lg-6"></div>
+                            <div class="col-lg-3">
+                                <div class="form-group" style="padding-top:20px;padding-left:90px;">
+                                    <img src="/Images/White_Arrow.png" style="height:50px;width:50px;" />
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div style="margin-bottom:20px;">
+                                    <div style="float:right;margin-top:20px;margin-right:-15px;"><img src="/Content/Images/Close_Button.png" class="close" id="dismiss" data-dismiss="modal" style="width:20px;height:20px;float:right;cursor:pointer;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 text-center" style="padding: 0px;margin-left: -20px;">
+
+                            <div class="form-group">
+                                <div id="White_panel" style="height:248px;padding-top: 36px;padding-left:43px;">
+
+                                    <div>
+                                        <span class="text-center" style="font-size:24px;padding-top:25px; color:#137abd;">Why Don't We <br /> Get Paid To Watch Targeted Ads!</span>
+                                    </div>
+                                    <div style="margin-top:7px;">
+                                        <span class="text-center" style="font-size:10px;color: #1068a1;">
+                                            support us on
+                                        </span>
+                                    </div>
+
+                                    <div id="logo_div" style="margin-top:23px;">
+                                        <img src="~/images/kickstarter.png" style="width:275px;" />
+                                    </div>
+                                </div>
+                                <div id="grey_panel">
+                                    <div>
+                                        <span class="text-center" style="font-size:24px;color: #3fc75b;">
+                                            Discover Big Savings Near You
+                                        </span>
+                                    </div>
+                                    <div id="rest_spans" style="margin-top:28px;">
+                                        <div>
+                                            <span class="text-center" style="font-size:21px;color: #137abd;">
+                                                Going Out To Eat?
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <span class="text-center" style="font-size:21px;color: #137abd;">
+                                                Want to Know Events Near You?
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <span class="text-center" style="font-size:21px;color: #137abd;">
+                                                Get Fitter?
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <span class="text-center" style="font-size:21px;color: #137abd;">
+                                                Go On, Treat Yourself...
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div style="margin-top:28px;">
+                                        @*<div class="form-group text-center">
+                                            <button class="btn" data-dismiss="modal" style=" background-color:#3fc75b;border-color:#3fc75b; color:white">Skip </button>
+                                        </div>*@
+                                        @*<span id="start_btn" data-dismiss="modal" style="font-size:25px;color: #3fc75b;">start</span>*@
+                                        <a id="start_btn" data-dismiss="modal" style="font-size:25px;color: #3fc75b;">Start</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @*<div class="col-lg-12 text-center">
+                            <div class="form-group">
+                                <button class="btn  btn-success" onclick="openCompanyProfile();" data-dismiss="modal" style=" font-size:24px">Upload your Company Logo </button>
+                            </div>
+                        </div>
+
+                        <div class="form-group text-center">
+                            <button class="btn" data-dismiss="modal" style=" background-color:#0f68a1;border-color:#0f68a1; color:white">Skip </button>
+
+                        </div>*@
+
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
-    </section>
-
-
-  <!-- Image -->
-<section id="image" class="container-fluid text-blue inner-bottom">
-    <div class="container">
-        <div class="row clearfix">
-            <div class="col-sm-12 col-md-6 column">
-                <img alt="Friends" class="img-responsive" src="~/images/friends.png" />
-            </div>
-            <div class="col-sm-12 col-md-6">
-                <div class="row">
-                    <div class="col-sm-12 col-md-12 p_title">
-                        <h2>
-                            Train your Brain with paid games
-                        </h2>
-                        <p class="lead text-left">
-                            We’re aiming to deliver Ads from local advertisers to you on a regular basis.  In the meantime play games and complete simple puzzles.
-                        </p>
-                        <p class="lead text-left">
-                            All the games and puzzles are designed to help train your brain and improve your memory mapping techniques.
-                        </p>
-                        <p class="lead text-left">
-                            Help support us in sharing the revenue by referring a local business to sponsor games to increase their brand awareness ;)
-
-                        </p>
-                    </div>
-                    <div class="scroll col-sm-12 col-sm-12 col-md-8">
-                        <a href="#download" class="btn btn-lg btn-submit"><span class="fa fa-android"></span> Download App</a>
-
-                        <a href="http://create.cash4ads.com/Account/Register" class="btn btn-lg btn-submit"><span class="fa fa-apple"></span> Sign up now</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> <!-- /container -->
 </section>
-<!-- end image -->
-
-    <!-- Feature -->
-    <section id="feature" class="text-blue">
-        <div class="container">
-            <div class="row clearfix">
-                <div class="col-md-12 column p_title">
-                    <h2 class="text-center">Increase your value.</h2>
-                    <p class="text-center lead">Build up your profile by answering questions and playing brain training games.
-
-</p>
-                </div>
-                <div class="col-md-12 column">
-                    <div class="row clearfix">
-                        <!-- RIGHT COLUMN -->
-                        <div class="col-sm-4 col-md-4 column text-center">
-
-                            <!-- #1 -->
-                            <div class="item-icon ">
-                                <i class="fa fa-bicycle fa-2x"></i>
-                            </div>
-
-                            <h3>Get paid per Ad</h3>
-
-                            <p>
-                                Your data is out there, so why not get paid for it!
-                            </p>
-
-                            <!-- #2 -->
-                            <div class="item-icon ">
-                                <i class="fa fa-cubes fa-2x"></i>
-                            </div>
-
-                            <h3>Paid Online</h3>
-
-                            <p>
-                                We pay directly into your  PayPal or Google account.
-                            </p>
-
-                            <!-- #3 -->
-                            <div class="item-icon ">
-                                <i class="fa fa-line-chart fa-2x"></i>
-                            </div>
-
-                            <h3>Increase Your Value</h3>
-
-                            <p>
-                                Build up your profile and get targeted today.
-                            </p>
-
-                        </div>
-
-
-                        <!-- IPHONE IMAGE -->
-                        <div class="col-sm-4 col-md-4 column ">
-                            <img alt="iPhone" class="img-responsive" src="~/images/iPhone.png" />
-                        </div>
-
-                        <!-- LEFT COLUMN -->
-                        <div class="col-sm-4 col-md-4 column text-center">
-
-                            <!-- #1 -->
-                            <div class="item-icon ">
-                                <i class="fa fa-life-ring fa-2x"></i>
-                            </div>
-
-                            <h3>Play Brain Games</h3>
-
-                            <p>
-                                Cash rewards for completing puzzles.
-                            </p>
-
-                            <!-- #2 -->
-                            <div class="item-icon ">
-                                <i class="fa fa-laptop fa-2x"></i>
-                            </div>
-
-                            <h3>No Spamming</h3>
-
-                            <p>
-                                Your data is never disclosed or shared with third parties.
-                            </p>
-
-                            <!-- #3 -->
-                            <div class="item-icon ">
-                                <i class="fa fa-users fa-2x"></i>
-                            </div>
-
-                            <h3>Refer a Friend</h3>
-
-                            <p>
-                                Help businesses to advertise more effectively 
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> <!-- /container -->
-    </section>
-    <!-- end feature -->
-       <!-- Video -->
-<section id="video" class="container-fluid text-blue">
-    <div class="container">
-        <div class="row clearfix">
-            <div class="col-md-12 column p_title">
-                <h2 class="text-center">Get matched with Advertisers. </h2>
-                <p class="lead text-center">
-                    Earn more per ad by answering your profile questions.
-                    <br /><br />
-                    We allow advertisers to run campaigns that match user profiles.  The more targeted their reach criteria is the more they pay out per ad to happy viewers.
-                    <br /><br />
-                <span class="fa fa-heart" style="color:white"></span>
-                <br /><br />
-                    This matching approach reduces wasteful clicks for advertisers and they get to reward you more for volunteering your preferences.
-
-
-                   
-                 
-                </p>
-            </div>
-         
-        </div>
-    </div>
-</section>
-<!-- end vodeo -->
-
-    <div id="about" class="container text-blue">
-       
-        <div class="row clearfix staff">
-            <div class="col-xs-6 col-md-3 column text-center">
-                <img class="img-circle" alt="140x140" src="~/images/team_01.png" />
-                <h3 class="">Cash 4 Ads</h3>
-                <span>Get paid for watching relevant Ads.</span>
-            </div>
-            <div class="col-xs-6 col-md-3 column text-center">
-                <img class="img-circle" alt="140x140" src="~/images/team_03.png" />
-                <h3 class="">Get Targeted</h3>
-                <span>Increase your value by building your profile</span>
-            </div>
-            <div class="col-xs-6 col-md-3 column text-center">
-                <img class="img-circle" alt="140x140" src="~/images/team_02.png" />
-                <h3 class="">Play Games</h3>
-                <span>Cash rewards for completing games and puzzles.</span>
-            </div>
-            <div class="col-xs-6 col-md-3 column text-center">
-                <img class="img-circle" alt="140x140" src="~/images/team_04.png" />
-                <h3 class="">Refer a Friend</h3>
-                <span>Share the love with friends and local businesses.</span>
-            </div>
-        </div>
-    </div> <!-- container -->
-    <!-- end about -->
-
-
-
-
-
-
-
-
-
-        <!-- Testimonial -->
+<!-- Header -->
+<!-- Testimonial -->
 <div id="testimonial" class="container text-blue" style="padding-top:20px;">
-   
+
     <div class="row">
-        <div class='col-md-12 text-center p_title'>
-            <h2>Happy Viewers</h2>
-            <p class="lead text-center"></p>
-        </div>
+        @*<div class='col-md-12 text-center p_title'>
+                <h2>Happy Clickers</h2>
+
+            </div>*@
     </div>
     <div class='row'>
         <div class=' col-md-12'>
@@ -402,28 +566,1145 @@
     </div>
 </div>
 <!-- end testimonial -->
-
-
-    <!-- Video -->
-<section id="video" class="container-fluid text-blue">
+<!-- Video -->
+<section id="video" class="container-fluid text-blue" style="display:none">
     <div class="container">
         <div class="row clearfix">
             <div class="col-md-12 column p_title">
                 <h2 class="text-center">Lets get Disruptive</h2>
-                <p class="lead text-center">
-                    It’s not a Data Privacy issue anymore.<br />
-                    Consumers are ready to volunteer their profiles, be targeted and get paid for their online data / profile.<br />
 
-                    Why should the big boys profit and not share the love. 
-
-                </p>
             </div>
             <div class="col-md-offset-2 col-md-8 ipad">
-                <a class="popup-vimeo" href="http://player.vimeo.com/video/78554894?title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff">
+                <a class="popup-youtube" href="http://www.youtube.com/watch?v=sE_YY8E1JMs">
                     <i class="fa fa-play-circle-o fa-3x"></i>
                 </a>
             </div>
         </div>
     </div>
 </section>
+<div class="loading" align="center" id="modalSending">
+
+    @*<img src="images/rloader.gif" width="200px" />*@
+    <img src="images/abcLoader.gif" />
+</div>
+
 <!-- end vodeo -->
+<script src="~/Scripts/jquery-2.1.4.min.js"></script>
+@*<script src="~/Scripts/jquery.loader.min.js"></script>*@
+<link href="~/Content/loadingLoader.css" rel="stylesheet" />
+<script>
+
+    var viewportWidth = $(window).width();
+    var viewportHeight = $(window).height();
+
+
+    
+
+    //$.LoadingOverlaySetup({
+    //    color           : "rgba(0, 0, 0, 0.4)",
+    //    image           : "images/ajax-loader.gif",
+    //    maxSize         : "80px",
+    //    minSize         : "20px",
+    //    resizeInterval  : 0,
+    //    size            : "50%"
+    //});
+    var IsCategorySelected=false;
+    $(document).ready(function(){
+        ShowSendingProgress();
+    });
+    $("#selcat").change(function () {
+        //var categoryId = this.value;
+        $("#bonus-deals-side").html('');
+        getCoupons();
+        
+        //$( "#start_btn" ).trigger( "click" );
+        //$("#AccountSetingConformation").modal("hide");
+        //$("#AccountSetingConformation").css('display','none');
+    });
+
+    function NavigateToLogin()
+    {
+         
+        window.location.href = 'http://manage.cash4ads.com/'; 
+    }
+
+
+    //$(document).ajaxStart(function(){
+
+    //    $.LoadingOverlay("show", {
+    //        image       : "",
+    //        fontawesome : "fa fa-spinner fa-spin"
+    //    });
+
+    //});
+
+
+        function ShowSendingProgress() {
+            var modal = $('<div  />');
+            modal.addClass("modal");
+            modal.attr("id", "modalSending");
+            $('body').append(modal);
+            var loading = $("#modalSending.loading");
+            loading.show();
+            var top = '215px';
+            var left = '560px';
+            loading.css({ top: top, left: left, color: '#ffffff' });
+        }
+
+
+        function StopProgress() {
+
+            $("div.modal").hide();
+
+            var loading = $(".loading");
+            loading.hide();
+        }
+
+        var Coupons = [];
+        $(document).ready(function () {
+            //  $.LoadingOverlay("");
+            LoadCategories();
+           // LoadCountriesDD();
+        });
+
+        function NavigateToApps()
+        {
+            window.location.href ='http://cash4ads.com/download-app/';
+        }
+        function getCoupons()
+        {
+         
+            var categoryId = $("#selcat option:selected").val();
+            var keywords = $("#txtKeyword").val();
+            var UdateSession='@getUpdatedSession';
+            var vtype = @vtype;
+            var couponFId = 0;
+            var size=10;
+            var pageno=1;
+            var distance=100000;
+            var lat=31.4830349;
+            var lon=74.2886745;
+            var userId='x';
+            
+            var urlofcoup = 'http://manage.cash4ads.com/Api_Mobile/SearchCoupons?categoryId=' + categoryId + '&ctype='+vtype+''+'&size='+size+''+'&keywords='+keywords+''+'&pageNo='+pageno+''+'&distance='+distance+''+'&Lat='+lat+''+'&Lon='+lon+''+'&UserId='+userId+'';
+            if(keywords == ""){
+          
+
+                urlofcoup = 'http://manage.cash4ads.com/Api_Mobile/SearchCoupons?categoryId=' + categoryId + '&ctype='+vtype+''+'&size='+size+''+'&keywords='+'&pageNo='+pageno+''+'&distance='+distance+''+'&Lat='+lat+''+'&Lon='+lon+''+'&UserId='+userId+'';
+            }
+
+            $.ajax({
+                dataType: "json",
+                url: urlofcoup,
+                cache: false,
+                success: function (response) {
+                   
+                    if ( response.Coupons.length > 0)
+                    {
+                        Coupons = response.Coupons;
+                        if (couponFId == 0) {
+                            couponFId = response.Coupons[0].CouponId;
+                        }
+                        var htmlToBindAllVoucher = [];
+                        $(response.Coupons).each(function (i, val) {
+                           
+                            if(val.IsTwoForOneDeal==1)
+                            {
+                                $("#12deal").css('display','block');
+                            }
+
+                            if(val.DaysLeft==0)
+                            {
+                                $("#days_left_div").css('display','block');
+                                var dayeleft="Last Day";
+                            }
+                            else if(val.DaysLeft==1 || val.DaysLeft==2 || val.DaysLeft==3)
+                            {
+                              $("#days_left_div").css('display','block');
+                               var dayeleft=val.DaysLeft+ " Days Left";
+                            }
+                           
+                            
+                            var result=GetPercent(val.Price,val.Savings).toFixed(0)+'%';
+
+                            var dealcor="2 for 1 Deal";
+                            $("#bonus-deals-side").append(' <div class="ndod-view-mini ndod-view-mini-nodesc"><div class="ndod-deal-header"><h2>' + val.CouponTitle + '</h2></div><div class="ndod-deal-content"><a class="" href="#"><img class="ndod-deal-image  js-show" data-original="' + val.CouponImage1 + '" src="' + val.CouponImage1 + '" onclick="NavigateToDeal(' + val.CouponId + ')" alt="" /></a><div class="ndod-redeem-now"></div><div class="ndod-business-logo-wrapper"><div class="ndod-business-logo"><img id="Company_logo" class="" data-original="' + val.LogoUrl + '" src="' + val.LogoUrl + '" width="70" height="28" /> </div><div class="btm-header-bg-business-logo"></div></div><div class="ndod-discount"><span class="ndod-amount">Save </br>'+result+'</div><div class="ndod-deal-footer-wrapper"><div class="ndod-deal-footer cld" id="main_deal_ffter"><div class="col-lg-12 col-md-12"><div class="yel_box_rat_tt">'+val.AvgRating+'</div> <p class="deals_header_ad">' + val.CouponTitle + '</p> <div class="deal_insder_adPanel"><div style="float:left"><p id="loc_1" style="margin-bottom:5px;">'+val.LocationTitle+'</p> <p id="loc-city">'+val.LocationCity+'</p></div><div class=""> <p class="delto_deal"> £'+val.Price+'</p><p id="from_id" style="float:right;margin-top:9px;">from</p><div style="clear:both;"></div></div> <div style="clear:both;"></div></div></div></div> <a href="#" onclick="NavigateToDeal(' + val.CouponId + ')" class="ndod-button-small waViewButton"><span class="outer"><span class="inner">VIEW DEAL!</span></span></a></div><div class="ndod-deal-footer-btmbg"></div>    </div>    <div id="days_left_div" class="ppl">'+dayeleft+'</div><div id="12deal" class="tpl">'+dealcor+'</div></div></div>');
+                        });
+                        $("#bonus-deals-side").append('<div style="clear:both;"></div>');
+
+                       
+                        if(IsCategorySelected==true)
+                        {
+                            $("#AccountSetingConformation").modal("hide");
+                            $("#AccountSetingConformation").css('display','none');
+                        }
+                        else
+                        {
+                            if(UdateSession=="")
+                            {
+                          
+                            if(viewportWidth >=300 && viewportWidth <=480)
+                            {
+                                $("#AccountSetingConformation").modal("hide");
+                                $("#AccountSetingConformation").css('display','none');
+                                SetSessionVar('postback');
+                            }
+                            else
+                            {
+                                $("#AccountSetingConformation").modal("show");
+                                $("#AccountSetingConformation").css('display','block');
+                                SetSessionVar('postback');
+                            }
+
+                            }
+                          
+                        }
+                       
+                        StopProgress();
+                    }
+                    else
+                    {
+                        $('#couponsNotFound').show();
+                        $('#couponsContains').hide();
+                    }
+
+                },
+                error : function()
+                {
+
+                    $.LoadingOverlay("hide");
+                }
+            });
+
+        }
+
+            function GetPercent(op, sp)
+            {
+                return ((op-sp)*100)/op;
+            }
+
+
+            function getReqCoupons()
+            {
+                var categoryId = 0;
+                var keywords = $("#txtKeyword").val();
+                var vtype = @vtype;
+                var couponFId = 0;
+                var size=10;
+                var pageno=1;
+                var distance=100000;
+                var lat=31.4830349;
+                var lon=74.2886745;
+                var userId='x';
+                var urlofcoup = 'http://manage.cash4ads.com/Api_Mobile/SearchCoupons?categoryId=' + categoryId + '&ctype='+vtype+''+'&size='+size+''+'&keywords='+keywords+''+'&pageNo='+pageno+''+'&distance='+distance+''+'&Lat='+lat+''+'&Lon='+lon+''+'&UserId='+userId+'';
+                if(keywords == ""){
+          
+
+                    urlofcoup = 'http://manage.cash4ads.com/Api_Mobile/SearchCoupons?categoryId=' + categoryId + '&ctype='+vtype+''+'&size='+size+''+'&keywords='+'&pageNo='+pageno+''+'&distance='+distance+''+'&Lat='+lat+''+'&Lon='+lon+''+'&UserId='+userId+'';
+                }
+
+                $.ajax({
+                    dataType: "json",
+                    url: urlofcoup,
+                    cache: false,
+                    success: function (response) {
+
+                        if ( response.TotalCount > 0)
+                        {
+                            Coupons = response.Coupons;
+                            if (couponFId == 0) {
+                                couponFId = response.Coupons[0].CouponId;
+                            }
+                            var htmlToBindAllVoucher = [];
+                            $(response.Coupons).each(function (i, val) {
+                      
+                                $("#bonus-deals-side").append(' <div class="ndod-view-mini ndod-view-mini-nodesc"><div class="ndod-deal-header"><h2>' + val.CouponTitle + '</h2></div><div class="ndod-deal-content"><a class="" href="#"><img class="ndod-deal-image  js-show" data-original="' + val.CouponImage1 + '" src="' + val.CouponImage1 + '" alt="" /></a><div class="ndod-redeem-now"></div><div class="ndod-business-logo-wrapper"><div class="ndod-business-logo"><img id="Company_logo" class="" data-original="' + val.LogoUrl + '" src="' + val.LogoUrl + '" width="70" height="28" /> </div><div class="btm-header-bg-business-logo"></div></div><div class="ndod-discount"><div class="ndod-multiprice" style="padding-top: 22.0px ; "><span class="innerColour">NOW</span></div><div class="ndod-price" style="font-size: 36px; margin: 2.0px 0 -1.0px;"><span class="inner innerColour"><span class="ndod-currency">'+val.CurrencyCode+'</span><span class="ndod-amount">' + val.Savings + '</span></span></div><del class="ndod-original-price"><span class="ndod-currency">'+val.CurrencyCode+'</span><span class="ndod-amount">' + val.Price + '</span></del></div></div><div class="ndod-deal-footer-wrapper">  <div class="ndod-deal-footer cld" > <p class="ndod-bought bonus-bought"><span class="ndod-label innerColour">Bought</span><span class="ndod-amount">' + val.SwapCost + '</span></p><p class="ndod-savings"><span class="ndod-label innerColour">Save <span>up to </span></span><span class="ndod-abount">' + val.DealsCount + '<span class="ndod-percent-sign">%</span></span></p><a href="#" onclick="NavigateToDeal(' + val.CouponId + ')" class="ndod-button-small waViewButton"><span class="outer"><span class="inner">VIEW!</span></span>     </a>        </div>         <div class="ndod-deal-footer-btmbg"></div>    </div>    </div></div>');
+                            });
+                            $("#bonus-deals-side").append('<div style="clear:both;"></div>');
+                        }
+                        else
+                        {
+                            $('#couponsNotFound').show();
+                            $('#couponsContains').hide();
+                        }
+
+                    },
+                    error : function()
+                    {
+
+                        $.LoadingOverlay("hide");
+                    }
+                });
+
+            }
+
+
+
+
+            function GetCategories()
+            {
+
+                $.ajax({
+                    dataType: "json",
+                    url: 'http://manage.cash4ads.com/Api_Mobile/CouponCategories/8667e1a9-60af-4d99-8013-a241b81fa550',
+                    cache: false,
+                    success: function (response) {
+
+                        var selcat = $("#selcat");
+                        Coupons = response;
+
+                        $(response.CouponCategories).each(function (i, val) {
+
+                            selcat.append('<option value="' + val.CategoryId + '">' + val.Name + '</option>');
+                            //$("#bonus-deals-side").append(' <div class="ndod-view-mini ndod-view-mini-nodesc"><div class="ndod-deal-header"><h2>' + val.CouponTitle + '</h2>               </div><div class="ndod-deal-content"><a class="" href="#"><img class="ndod-deal-image  js-show" data-original="' + val.CouponImage + '" src="' + val.CouponImage + '" alt="" /></a><div class="ndod-redeem-now"></div><div class="ndod-business-logo-wrapper"><div class="ndod-business-logo"><img class="" data-original="http://manage.cash4ads.com/images/vLogo.png" src="http://manage.cash4ads.com/images/vLogo.png" width="70" height="28" /> </div><div class="btm-header-bg-business-logo"></div></div><div class="ndod-discount"><div class="ndod-multiprice" style="padding-top: 22.0px ; "><span class="innerColour">NOW</span></div><div class="ndod-price" style="font-size: 36px; margin: 2.0px 0 -1.0px;"><span class="inner innerColour"><span class="ndod-currency">£</span><span class="ndod-amount">' + val.CouponDiscountedValue + '</span></span></div><del class="ndod-original-price"><span class="ndod-currency">£</span><span class="ndod-amount">' + val.CouponActualValue + '</span></del></div></div><div class="ndod-deal-footer-wrapper">  <div class="ndod-deal-footer cld"> <p class="ndod-bought bonus-bought"><span class="ndod-label innerColour">Bought</span><span class="ndod-amount">' + val.CouponTakenValue + '</span>      </p><p class="ndod-savings"><span class="ndod-label innerColour">Save <span>up to </span></span><span class="ndod-abount">' + discountedValPer + '<span class="ndod-percent-sign">%</span></span>            </p><a href="#" onclick="LoadSelectedVoucher(' + val.CouponId + ')" class="ndod-button-small waViewButton">    <span class="outer"><span class="inner">VIEW!</span></span>     </a>        </div>         <div class="ndod-deal-footer-btmbg"></div>    </div>    </div></div>');
+                        });
+
+                        getCoupons();
+
+                    }
+                });
+            }
+            function LoadCountriesDD()
+            {
+                $.ajax({
+                    dataType: "json",
+                    url: 'http://manage.cash4ads.com/Api_Mobile/Country/abc',
+                    cache: false,
+                    success: function (response) {
+
+                        var selcat = $("#selcont");
+                       
+                        $(response).each(function (i, val) {
+
+                            selcat.append('<option value="' + val.CountryId + '">' + val.CountryName + '</option>');
+                            //$("#bonus-deals-side").append(' <div class="ndod-view-mini ndod-view-mini-nodesc"><div class="ndod-deal-header"><h2>' + val.CouponTitle + '</h2>               </div><div class="ndod-deal-content"><a class="" href="#"><img class="ndod-deal-image  js-show" data-original="' + val.CouponImage + '" src="' + val.CouponImage + '" alt="" /></a><div class="ndod-redeem-now"></div><div class="ndod-business-logo-wrapper"><div class="ndod-business-logo"><img class="" data-original="http://manage.cash4ads.com/images/vLogo.png" src="http://manage.cash4ads.com/images/vLogo.png" width="70" height="28" /> </div><div class="btm-header-bg-business-logo"></div></div><div class="ndod-discount"><div class="ndod-multiprice" style="padding-top: 22.0px ; "><span class="innerColour">NOW</span></div><div class="ndod-price" style="font-size: 36px; margin: 2.0px 0 -1.0px;"><span class="inner innerColour"><span class="ndod-currency">£</span><span class="ndod-amount">' + val.CouponDiscountedValue + '</span></span></div><del class="ndod-original-price"><span class="ndod-currency">£</span><span class="ndod-amount">' + val.CouponActualValue + '</span></del></div></div><div class="ndod-deal-footer-wrapper">  <div class="ndod-deal-footer cld"> <p class="ndod-bought bonus-bought"><span class="ndod-label innerColour">Bought</span><span class="ndod-amount">' + val.CouponTakenValue + '</span>      </p><p class="ndod-savings"><span class="ndod-label innerColour">Save <span>up to </span></span><span class="ndod-abount">' + discountedValPer + '<span class="ndod-percent-sign">%</span></span>            </p><a href="#" onclick="LoadSelectedVoucher(' + val.CouponId + ')" class="ndod-button-small waViewButton">    <span class="outer"><span class="inner">VIEW!</span></span>     </a>        </div>         <div class="ndod-deal-footer-btmbg"></div>    </div>    </div></div>');
+                        });
+
+                       
+
+                    }
+                });
+            
+            }
+
+
+            $('#selcat').on('change', function() {
+                $("#bonus-deals-side").css('display','block');
+                IsCategorySelected=true;
+                getCoupons();
+            });
+
+            function LoadSelectedVoucher(CouponId) {
+
+                var couponObj = $.grep(Coupons, function (n, i) {
+                    return (n.CouponId == CouponId);
+                });
+
+        
+                if (couponObj != null) {
+                    $("#inner_coupon_cont,#main_copon_cont").css('display','block');
+                    $("#bonus-deals-side,.extraMargingStandardContainer").css('display','none');
+                    //$("#couponMainHeading").html(couponObj[0].CouponTitle + '<span class="mvtest_header_v1">' + couponObj[0].Firstline + ' ' + couponObj[0].SecondLine + '</span><div class="btm-header-bg"></div>');
+
+                    $("#couponMainHeading").html(couponObj[0].CouponTitle + '<span class="mvtest_header_v1">' + '' + '</span><div class="btm-header-bg"></div>');
+                    $("#voucMainSliderImg").attr('src', couponObj[0].CouponImage1);
+
+                    $("#couDiscountedVal").html(couponObj[0].Savings);
+                    $("#couActualVal").html(couponObj[0].Price);
+
+            
+                    $("#coupPerct").text(100 - parseInt((parseFloat(couponObj[0].Savings) / parseFloat(couponObj[0].Price)) * 100) + '%');
+                    // $("#coupBought").text(couponObj[0].CouponTakenValue);
+                    $("#mainDealBuy").attr('data-couponId', couponObj[0].CouponId);
+                }
+
+            }
+            function BuyCoupon(){
+                if("@sessionVar" == ""){
+                    alert("Please login to buy voucher.");
+
+                }else{
+                    var urlToSite = "";
+                    urlToSite = 'http://smdpreview.com/Api/RedeemCoupon?authenticationToken='+ '@ViewBag.userid' +'&companyId='+ '@ViewBag.companyid' +'&CouponId='+ $("#mainDealBuy").attr('data-couponId') +'&mode=3&amount='+ $("#couDiscountedVal").text() +'';
+           
+                    $.ajax({
+                        dataType: "json",
+                        url: urlToSite,
+                        cache: false,
+                        success: function (response) {
+                            if(response == false){
+                                alert("Can't purchase voucher because balance is not sufficient.");
+                            }else{
+                                alert("Voucher redeemed successfully.");
+                            }
+                        }
+                    });
+                }
+
+        
+            }
+            function LoadCategories()
+            {
+            
+                GetCategories();
+                $("#inner_coupon_cont,#main_copon_cont,#toggle_btn").css('display','none');
+                $("#bonus-deals-side,.extraMargingStandardContainer").css('display','block');
+
+            }
+            function SetSessionVar(updatedSessionvar)
+            {
+                $(function () {
+                    $.post('/Home/SetSession', 
+                           { key : "TestKey", value : updatedSessionvar }, function (data) 
+                           {
+
+                           });
+                });
+            }
+            function Toggle()
+            {
+                LoadCategories();
+            }
+
+            function NavigateToDeal(id)
+            {
+                var url = "/Deal?id=" + id; 
+                window.location.href = url; 
+            }
+
+            function NavigateOwn()
+            {
+                $("#bonus-deals-side").html('');
+                getReqCoupons();
+                $("#selcat").prop('selectedIndex', 0);
+                $('#couponsNotFound').hide();
+                $('#couponsContains').show();
+            }
+
+            function LoadSelCities()
+            {
+                {
+                    Cars: [{
+                        "City": "London",
+
+                        "Latitude": "51.507351",
+
+                        "Longitude": "-0.127758"
+
+                    }, {
+                        "City": "Birmingham",
+
+                        "Latitude": "33.520661",
+
+                        "Longitude": "-86.80249"
+
+                    }, {
+                        "City": "Leeds",
+
+                        "Latitude": "53.800755",
+
+                        "Longitude": "-1.549077"
+
+                    }, {
+                        "City": "Glasgow",
+
+                        "Latitude": "55.864237",
+
+                        "Longitude": "-4.251806"
+
+                    },
+                     {
+                         "City": "Sheffield",
+
+                         "Latitude": "53.381129",
+
+                         "Longitude": "-1.470085"
+
+                     },
+                      {
+                          "City": "Bradford",
+
+                          "Latitude": "53.795984",
+
+                          "Longitude": "-1.759398"
+
+                      },
+                       {
+                           "City": "Liverpool",
+
+                           "Latitude": "53.408371",
+
+                           "Longitude": "-2.991573"
+
+                       },
+                        {
+                            "City": "Edinburgh",
+
+                            "Latitude": "55.953252",
+
+                            "Longitude": "-3.188267"
+
+                        },
+                         {
+                             "City": "Manchester",
+
+                             "Latitude": "53.480759",
+
+                             "Longitude": "-2.242631"
+
+                         },
+                          {
+                              "City": "Bristol",
+
+                              "Latitude": "51.454513",
+
+                              "Longitude": "-2.58791"
+
+                          },
+                           {
+                               "City": "Kirklees",
+
+                               "Latitude": "53.593343",
+
+                               "Longitude": "-1.800951"
+
+                           },
+                            {
+                                "City": "Fife",
+
+                                "Latitude": "47.239266",
+
+                                "Longitude": "-122.357066"
+
+                            },
+                             {
+                                 "City": "Wirral",
+
+                                 "Latitude": "53.372718",
+
+                                 "Longitude": "-3.073754"
+
+                             },
+                              {
+                                  "City": "North Lanarkshire",
+
+                                  "Latitude": "55.866243",
+
+                                  "Longitude": "-3.961314"
+
+                              }, {
+                                  "City": "Wakefield",
+
+                                  "Latitude": "42.50394",
+
+                                  "Longitude": "-71.072339"
+
+                              }, {
+                                  "City": "Cardiff",
+
+                                  "Latitude": "51.481581",
+
+                                  "Longitude": "-3.17909"
+
+                              }, {
+                                  "City": "Dudley",
+
+                                  "Latitude": "42.043366",
+
+                                  "Longitude": "-71.927603"
+
+                              },
+                               {
+                                   "City": "Wigan",
+
+                                   "Latitude": "53.545065",
+
+                                   "Longitude": "-2.632507"
+
+                               }, {
+                                   "City": "Beverley",
+
+                                   "Latitude": "53.841617",
+
+                                   "Longitude": "-0.434411"
+
+                               }, {
+                                   "City": "South Lanarkshire",
+
+                                   "Latitude": "55.673591",
+
+                                   "Longitude": "-3.781966"
+
+                               }, {
+                                   "City": "Coventry",
+
+                                   "Latitude": "52.406822",
+
+                                   "Longitude": "-1.519693"
+
+                               }, {
+                                   "City": "Belfast",
+
+                                   "Latitude": "54.597285",
+
+                                   "Longitude": "-5.93012"
+
+                               }, {
+                                   "City": "Leicester",
+
+                                   "Latitude": "52.636878",
+
+                                   "Longitude": "-1.139759"
+
+                               }, {
+                                   "City": "Sunderland",
+
+                                   "Latitude": "54.906869",
+
+                                   "Longitude": "-1.383801"
+
+                               }, {
+                                   "City": "Sandwell",
+
+                                   "Latitude": "52.536167",
+
+                                   "Longitude": "-2.010793"
+
+                               }, {
+                                   "City": "Doncaster",
+
+                                   "Latitude": "53.52282",
+
+                                   "Longitude": "-1.128462"
+
+                               }, {
+                                   "City": "Stockport",
+
+                                   "Latitude": "53.410632",
+
+                                   "Longitude": "-2.157533"
+
+                               }, {
+                                   "City": "Sefton",
+
+                                   "Latitude": "53.503445",
+
+                                   "Longitude": "-2.970359"
+
+                               }, {
+                                   "City": "Nottingham",
+
+                                   "Latitude": "52.954783",
+
+                                   "Longitude": "-1.158109"
+
+                               },
+                                {
+                                    "City": "Newcastle-upon-Tyne",
+
+                                    "Latitude": "54.978252",
+
+                                    "Longitude": "-1.61778"
+
+                                },
+                                 {
+                                     "City": "Kingston-upon-Hull",
+
+                                     "Latitude": "53.745671",
+
+                                     "Longitude": "-0.336741"
+
+                                 },
+                                  {
+                                      "City": "Bolton",
+
+                                      "Latitude": "44.372648",
+
+                                      "Longitude": "-72.878762"
+
+                                  }, {
+                                      "City": "Walsall",
+
+                                      "Latitude": "52.586214",
+
+                                      "Longitude": "-1.982919"
+
+                                  }, {
+                                      "City": "Plymouth",
+
+                                      "Latitude": "41.958446",
+
+                                      "Longitude": "-70.667262"
+
+                                  }, {
+                                      "City": "Rotherham",
+
+                                      "Latitude": "53.432603",
+
+                                      "Longitude": "-1.363501"
+
+                                  }, {
+                                      "City": "Stoke-on-Trent",
+
+                                      "Latitude": "53.002668",
+
+                                      "Longitude": "-2.179404"
+
+                                  }, {
+                                      "City": "Wolverhampton",
+
+                                      "Latitude": "52.586973",
+
+                                      "Longitude": "-2.12882"
+
+                                  }, {
+                                      "City": "Rhondda, Cynon, Taff",
+
+                                      "Latitude": "51.649021",
+
+                                      "Longitude": "-3.428869"
+
+                                  }, {
+                                      "City": "South Gloucestershire",
+
+                                      "Latitude": "51.526436",
+
+                                      "Longitude": "-2.472849"
+
+                                  }, {
+                                      "City": "Derby",
+
+                                      "Latitude": "41.320652",
+
+                                      "Longitude": "-73.088997"
+
+                                  }, {
+                                      "City": "Swansea",
+
+                                      "Latitude": "51.62144",
+
+                                      "Longitude": "-3.943646"
+
+                                  }, {
+                                      "City": "Salford",
+                                      "Latitude": "53.487523",
+                                      "Longitude": "-2.290126"
+                                  }, {
+                                      "City": "Aberdeenshire",
+                                      "Latitude": "57.149581",
+                                      "Longitude": "-2.093763"
+                                  }, {
+                                      "City": "Barnsley",
+                                      "Latitude": "53.55263",
+                                      "Longitude": "-1.479726"
+                                  }, {
+                                      "City": "Tameside",
+                                      "Latitude": "53.480583",
+
+                                      "Longitude": "-2.080989"
+                                  }, {
+                                      "City": "Oldham",
+
+                                      "Latitude": "53.54093",
+
+                                      "Longitude": "-2.111366"
+
+                                  }, {
+                                      "City": "Trafford",
+
+                                      "Latitude": "53.421513",
+
+                                      "Longitude": "-2.351726"
+
+                                  }, {
+                                      "City": "Aberdeen",
+
+                                      "Latitude": "57.149717",
+
+                                      "Longitude": "-2.094278"
+
+                                  }, {
+                                      "City": "Southampton",
+
+                                      "Latitude": "50.9097",
+
+                                      "Longitude": "-1.404351"
+
+                                  }, {
+                                      "City": "Highland",
+
+                                      "Latitude": "38.399974",
+
+                                      "Longitude": "-79.605288"
+
+                                  }, {
+                                      "City": "Rochdale",
+
+                                      "Latitude": "53.609714",
+
+                                      "Longitude": "-2.1561"
+
+                                  }, {
+                                      "City": "Solihull",
+
+                                      "Latitude": "52.411811",
+
+                                      "Longitude": "-1.77761"
+
+                                  }, {
+                                      "City": "Gateshead",
+
+                                      "Latitude": "54.95268",
+
+                                      "Longitude": "-1.603411"
+
+                                  }, {
+                                      "City": "Milton Keynes",
+
+                                      "Latitude": "52.040622",
+
+                                      "Longitude": "-0.759417"
+
+                                  }, {
+                                      "City": "North Tyneside",
+
+                                      "Latitude": "55.01824",
+
+                                      "Longitude": "-1.485844"
+
+                                  }, {
+                                      "City": "BMW",
+                                      "Latitude": "bmw123",
+                                      "Longitude": "bmw123"
+                                  }, {
+                                      "City": "BMW",
+                                      "Latitude": "bmw123",
+                                      "Longitude": "bmw123"
+                                  }, {
+                                      "City": "BMW",
+                                      "Latitude": "bmw123",
+                                      "Longitude": "bmw123"
+                                  },
+                                   {
+                                       "City": "BMW",
+                                       "Latitude": "bmw123",
+                                       "Longitude": "bmw123"
+                                   },
+                                    {
+                                        "City": "BMW",
+                                        "Latitude": "bmw123",
+                                        "Longitude": "bmw123"
+                                    },
+                                     {
+                                         "City": "BMW",
+                                         "Latitude": "bmw123",
+                                         "Longitude": "bmw123"
+                                     },
+                                      {
+                                          "City": "BMW",
+                                          "Latitude": "bmw123",
+                                          "Longitude": "bmw123"
+                                      }, {
+                                          "City": "BMW",
+                                          "Latitude": "bmw123",
+                                          "Longitude": "bmw123"
+                                      },
+                                       {
+                                           "City": "BMW",
+                                           "Latitude": "bmw123",
+                                           "Longitude": "bmw123"
+                                       },
+                                        {
+                                            "City": "BMW",
+                                            "Latitude": "bmw123",
+                                            "Longitude": "bmw123"
+                                        },
+                                         {
+                                             "City": "BMW",
+                                             "Latitude": "bmw123",
+                                             "Longitude": "bmw123"
+                                         },
+                                          {
+                                              "City": "BMW",
+                                              "Latitude": "bmw123",
+                                              "Longitude": "bmw123"
+                                          }, {
+                                              "City": "BMW",
+                                              "Latitude": "bmw123",
+                                              "Longitude": "bmw123"
+                                          }, {
+                                              "City": "BMW",
+                                              "Latitude": "bmw123",
+                                              "Longitude": "bmw123"
+                                          }, {
+                                              "City": "BMW",
+                                              "Latitude": "bmw123",
+                                              "Longitude": "bmw123"
+                                          }, {
+                                              "City": "BMW",
+                                              "Latitude": "bmw123",
+                                              "Longitude": "bmw123"
+                                          }, {
+                                              "City": "BMW",
+                                              "Latitude": "bmw123",
+                                              "Longitude": "bmw123"
+                                          }, {
+                                              "City": "BMW",
+                                              "Latitude": "bmw123",
+                                              "Longitude": "bmw123"
+                                          }, {
+                                              "City": "BMW",
+                                              "Latitude": "bmw123",
+                                              "Longitude": "bmw123"
+                                          }, {
+                                              "City": "BMW",
+                                              "Latitude": "bmw123",
+                                              "Longitude": "bmw123"
+                                          }, {
+                                              "City": "BMW",
+                                              "Latitude": "bmw123",
+                                              "Longitude": "bmw123"
+                                          }, {
+                                              "City": "BMW",
+                                              "Latitude": "bmw123",
+                                              "Longitude": "bmw123"
+                                          }, {
+                                              "City": "BMW",
+                                              "Latitude": "bmw123",
+                                              "Longitude": "bmw123"
+                                          }, {
+                                              "City": "BMW",
+                                              "Latitude": "bmw123",
+                                              "Longitude": "bmw123"
+                                          }, {
+                                              "City": "BMW",
+                                              "Latitude": "bmw123",
+                                              "Longitude": "bmw123"
+                                          }, {
+                                              "City": "BMW",
+                                              "Latitude": "bmw123",
+                                              "Longitude": "bmw123"
+                                          }, {
+                                              "City": "BMW",
+                                              "Latitude": "bmw123",
+                                              "Longitude": "bmw123"
+                                          },
+                                           {
+                                               "City": "BMW",
+                                               "Latitude": "bmw123",
+                                               "Longitude": "bmw123"
+                                           },
+                                            {
+                                                "City": "BMW",
+                                                "Latitude": "bmw123",
+                                                "Longitude": "bmw123"
+                                            },
+                                             {
+                                                 "City": "BMW",
+                                                 "Latitude": "bmw123",
+                                                 "Longitude": "bmw123"
+                                             },
+                                              {
+                                                  "City": "BMW",
+                                                  "Latitude": "bmw123",
+                                                  "Longitude": "bmw123"
+                                              },
+                                               {
+                                                   "City": "BMW",
+                                                   "Latitude": "bmw123",
+                                                   "Longitude": "bmw123"
+                                               },
+                                                {
+                                                    "City": "BMW",
+                                                    "Latitude": "bmw123",
+                                                    "Longitude": "bmw123"
+                                                },
+                                                 {
+                                                     "City": "BMW",
+                                                     "Latitude": "bmw123",
+                                                     "Longitude": "bmw123"
+                                                 },
+                                                  {
+                                                      "City": "BMW",
+                                                      "Latitude": "bmw123",
+                                                      "Longitude": "bmw123"
+                                                  },
+                                                   {
+                                                       "City": "BMW",
+                                                       "Latitude": "bmw123",
+                                                       "Longitude": "bmw123"
+                                                   },
+                                                    {
+                                                        "City": "BMW",
+                                                        "Latitude": "bmw123",
+                                                        "Longitude": "bmw123"
+                                                    },
+                                                     {
+                                                         "City": "BMW",
+                                                         "Latitude": "bmw123",
+                                                         "Longitude": "bmw123"
+                                                     },
+                                                      {
+                                                          "City": "BMW",
+                                                          "Latitude": "bmw123",
+                                                          "Longitude": "bmw123"
+                                                      },
+                                                       {
+                                                           "City": "BMW",
+                                                           "Latitude": "bmw123",
+                                                           "Longitude": "bmw123"
+                                                       },
+                                                        {
+                                                            "City": "BMW",
+                                                            "Latitude": "bmw123",
+                                                            "Longitude": "bmw123"
+                                                        },
+                                                         {
+                                                             "City": "BMW",
+                                                             "Latitude": "bmw123",
+                                                             "Longitude": "bmw123"
+                                                         },
+                                                          {
+                                                              "City": "BMW",
+                                                              "Latitude": "bmw123",
+                                                              "Longitude": "bmw123"
+                                                          },
+                                                           {
+                                                               "City": "BMW",
+                                                               "Latitude": "bmw123",
+                                                               "Longitude": "bmw123"
+                                                           },
+                                                            {
+                                                                "City": "BMW",
+                                                                "Latitude": "bmw123",
+                                                                "Longitude": "bmw123"
+                                                            },
+                                                             {
+                                                                 "City": "BMW",
+                                                                 "Latitude": "bmw123",
+                                                                 "Longitude": "bmw123"
+                                                             },
+                                                              {
+                                                                  "City": "BMW",
+                                                                  "Latitude": "bmw123",
+                                                                  "Longitude": "bmw123"
+                                                              },
+                                                               {
+                                                                   "City": "BMW",
+                                                                   "Latitude": "bmw123",
+                                                                   "Longitude": "bmw123"
+                                                               },
+                                                                {
+                                                                    "City": "BMW",
+                                                                    "Latitude": "bmw123",
+                                                                    "Longitude": "bmw123"
+                                                                },
+                                                                 {
+                                                                     "City": "BMW",
+                                                                     "Latitude": "bmw123",
+                                                                     "Longitude": "bmw123"
+                                                                 },
+                                                                  {
+                                                                      "City": "BMW",
+                                                                      "Latitude": "bmw123",
+                                                                      "Longitude": "bmw123"
+                                                                  },
+                                                                   {
+                                                                       "City": "BMW",
+                                                                       "Latitude": "bmw123",
+                                                                       "Longitude": "bmw123"
+                                                                   },
+                                                                    {
+                                                                        "City": "BMW",
+                                                                        "Latitude": "bmw123",
+                                                                        "Longitude": "bmw123"
+                                                                    },
+                                                                     {
+                                                                         "City": "BMW",
+                                                                         "Latitude": "bmw123",
+                                                                         "Longitude": "bmw123"
+                                                                     },
+                                                                      {
+                                                                          "City": "BMW",
+                                                                          "Latitude": "bmw123",
+                                                                          "Longitude": "bmw123"
+                                                                      },
+                                                                       {
+                                                                           "City": "BMW",
+                                                                           "Latitude": "bmw123",
+                                                                           "Longitude": "bmw123"
+                                                                       },
+                                                                        {
+                                                                            "City": "BMW",
+                                                                            "Latitude": "bmw123",
+                                                                            "Longitude": "bmw123"
+                                                                        },
+                                                                         {
+                                                                             "City": "BMW",
+                                                                             "Latitude": "bmw123",
+                                                                             "Longitude": "bmw123"
+                                                                         },
+                                                                          {
+                                                                              "City": "BMW",
+                                                                              "Latitude": "bmw123",
+                                                                              "Longitude": "bmw123"
+                                                                          },
+                                                                           {
+                                                                               "City": "BMW",
+                                                                               "Latitude": "bmw123",
+                                                                               "Longitude": "bmw123"
+                                                                           },
+                                                                            {
+                                                                                "City": "BMW",
+                                                                                "Latitude": "bmw123",
+                                                                                "Longitude": "bmw123"
+                                                                            },
+                                                                             {
+                                                                                 "City": "BMW",
+                                                                                 "Latitude": "bmw123",
+                                                                                 "Longitude": "bmw123"
+                                                                             },
+                                                                              {
+                                                                                  "City": "BMW",
+                                                                                  "Latitude": "bmw123",
+                                                                                  "Longitude": "bmw123"
+                                                                              },
+                                                                               {
+                                                                                   "City": "BMW",
+                                                                                   "Latitude": "bmw123",
+                                                                                   "Longitude": "bmw123"
+                                                                               },
+                                                                                {
+                                                                                    "City": "BMW",
+                                                                                    "Latitude": "bmw123",
+                                                                                    "Longitude": "bmw123"
+                                                                                },
+                                                                                 {
+                                                                                     "City": "BMW",
+                                                                                     "Latitude": "bmw123",
+                                                                                     "Longitude": "bmw123"
+                                                                                 },
+                                                                                  {
+                                                                                      "City": "BMW",
+                                                                                      "Latitude": "bmw123",
+                                                                                      "Longitude": "bmw123"
+                                                                                  },
+                                                                                   {
+                                                                                       "City": "BMW",
+                                                                                       "Latitude": "bmw123",
+                                                                                       "Longitude": "bmw123"
+                                                                                   },
+                                                                                    {
+                                                                                        "City": "BMW",
+                                                                                        "Latitude": "bmw123",
+                                                                                        "Longitude": "bmw123"
+                                                                                    }
+
+
+                    
+                    ]
+                }
+            
+            }
+          
+</script>

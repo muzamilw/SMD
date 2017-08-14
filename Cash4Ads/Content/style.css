@@ -28,7 +28,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .lead {
 }
 
 .navbar{
-
+    background-color:#0f68a1;
     margin-bottom:0px;
     -o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; -ms-transition: all .3s; transition: all .3s;
 }
@@ -52,7 +52,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .lead {
 
 .navbar-brand {
     width: 322px;
-    background: url(../images/Cash4Ads_White_text.svg) left 64% no-repeat;
+    background: url(../images/Cash4ads_logo.png) left 64% no-repeat;
     text-indent: -99999px;
     height: 78px;
     background-size: 64%;
@@ -72,8 +72,17 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .lead {
 }
 #header {
     padding-top: 100px;
-    padding-bottom:150px;
+    padding-bottom:60px;
+    padding-left:10px;
+    padding-right:10px;
 }
+
+#header .subbox {
+    margin-bottom:15px;
+    padding-right:10px;
+    padding-left:10px;
+}
+
 #feature, #about, #testimonial, #screenshots, #portfolio {
     padding-top: 100px;
     padding-bottom:100px;
@@ -400,6 +409,90 @@ fieldset[disabled] .btn-submit.active {
     margin-top:-6px;
 }
 
+
+
+.btn-orange { 
+  color: #FFFFFF; 
+  background-color: #f4a309; 
+  border-color: #f4a309; 
+  margin-bottom: 20px;
+  transition: all .25s ease-in-out;
+  -moz-transition: all .25s ease-in-out;
+  -webkit-transition: all .25s ease-in-out;
+  font-size:23px;
+  border-radius:20px;
+  padding: 15px 20px;
+} 
+ 
+.btn-orange:hover, 
+.btn-orange:focus, 
+.btn-orange:active, 
+.btn-orange.active, 
+.open .dropdown-toggle.orange { 
+  color: #FFFFFF; 
+  background-color: #f4a309; 
+  border-color: #f4a309; 
+} 
+ 
+.btn-orange:active, 
+.btn-orange.active, 
+.open .dropdown-toggle.btn-orange { 
+  background-image: none; 
+} 
+ 
+ 
+.btn-orange .badge { 
+  color: #446A8E; 
+  background-color: #FFFFFF; 
+}
+
+
+
+
+
+.btn-black { 
+  color: #FFFFFF; 
+  background-color: black; 
+  border-color: black; 
+  margin-bottom: 20px;
+  transition: all .25s ease-in-out;
+  -moz-transition: all .25s ease-in-out;
+  -webkit-transition: all .25s ease-in-out;
+
+} 
+ 
+.btn-black:hover, 
+.btn-black:focus, 
+.btn-black:active, 
+.btn-black.active, 
+.open .dropdown-toggle.black { 
+  color: #FFFFFF; 
+  background-color: black; 
+  border-color: black; 
+} 
+ 
+.btn-black:active, 
+.btn-black.active, 
+.open .dropdown-toggle.btn-black { 
+  background-image: none; 
+} 
+ 
+ 
+.btn-black .badge { 
+  color: #446A8E; 
+  background-color: #FFFFFF; 
+}
+
+
+.btn-black span {
+    font-size: 27px;
+    vertical-align: middle;
+    margin-top: -6px;
+}
+
+
+
+
 /* end BUTTON */
 
 
@@ -717,3 +810,627 @@ fieldset[disabled] .btn-submit.active {
 .inner-right-xs {
 	padding-right: 30px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.cselect {
+    padding:8px;
+    margin: 0;
+    -webkit-border-radius:4px;
+    -moz-border-radius:4px;
+    border-radius:4px;
+    -webkit-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+    -moz-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+    box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+    background: #f8f8f8;
+    color:#888;
+    border:none;
+    outline:none;
+    display: inline-block;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+    cursor:pointer;
+    font-size:22px;
+    padding-left:20px;
+    width:100%;
+}
+
+/* Targetting Webkit browsers only. FF will show the dropdown arrow with so much padding. */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    .cselect {padding-right:18px}
+}
+
+.clabel {position:relative;
+    display: block;
+    float: left;
+    font-size: 8.7pt;
+    margin: 0;
+    padding: 0px 0px 0 0;
+    text-align: right;
+    width: 100%;
+}
+.clabel:after {
+    content:'<>';
+    font:30px "Consolas", monospace;
+    color:#aaa;
+    -webkit-transform:rotate(90deg);
+    -moz-transform:rotate(90deg);
+    -ms-transform:rotate(90deg);
+    transform:rotate(90deg);
+    right:0px; top:2px;
+    padding:0 0 2px;
+    border-bottom:1px solid #ddd;
+    position:absolute;
+    pointer-events:none;
+}
+.clabel:before {
+    content:'';
+    right:6px; top:0px;
+    width:80px; height:20px;
+    background:#f8f8f8;
+    position:absolute;
+    pointer-events:none;
+    display:block;
+}
+
+
+
+
+.btn-xlg {
+    padding: 20px 39px;
+    font-size: 24px;
+    line-height: 1.33;
+    border-radius: 30px;
+    font-weight:normal;
+    
+}
+
+
+@media (max-width: 767px)
+{
+
+    .btn-xlg {
+    padding: 13px 10px;
+    font-size: 14px;
+    line-height: 1.33;
+    border-radius: 20px;
+    font-weight: normal;
+    margin-left: 2px;
+}
+
+
+}
+/******Login Pop Up styles*/
+.close_popp {
+    position: absolute;
+    right: 17px;
+    top: 17px;cursor:pointer;
+}
+.appollo_heading {
+    margin:0px !important;
+
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 24px;
+    padding: 20px;
+    color: #fff;
+    background-color: #33d3b4;
+    font-weight: 700;
+    /*border-top-right-radius: 5px;
+    border-top-left-radius: 5px;*/
+}
+.popUpOuterLayer {
+top: 0;
+left:0;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-color: rgba(0,0,0,0.2);
+    z-index: 2000;
+}
+
+/* line 18, ../sass/main.scss */
+.apollo {
+  margin: 0 auto;
+  max-width: 386px;
+  /*border: 12px solid rgba(0, 0, 0, 0.45);*/
+  /*border-radius: 5px;*/
+  position: relative;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+/* line 28, ../sass/main.scss */
+.apollo .btn-signin {
+  background-color: #F5F5F5;
+  background-image: -moz-linear-gradient(top, white, #e6e6e6);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(#e6e6e6));
+  background-image: -webkit-linear-gradient(top, white, #e6e6e6);
+  background-image: -o-linear-gradient(top, white, #e6e6e6);
+  background-image: linear-gradient(to bottom, white, #e6e6e6);
+  background-repeat: repeat-x;
+  border: 1px solid #CCC;
+  border-color: #E6E6E6 #E6E6E6 #BFBFBF;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  border-bottom-color: #B3B3B3;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff',endColorstr='#ffe6e6e6',GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+/* line 50, ../sass/main.scss */
+.apollo .control-group {
+  margin-bottom: 0;
+}
+/* line 54, ../sass/main.scss */
+.apollo .popover {
+  width: 300px;
+}
+/* line 58, ../sass/main.scss */
+.apollo strong {
+  font-weight: 700;
+}
+/* line 63, ../sass/main.scss */
+.apollo.register .apollo-register {
+  display: block;
+}
+/* line 67, ../sass/main.scss */
+.apollo.register .apollo-back {
+  display: block;
+}
+/* line 71, ../sass/main.scss */
+.apollo.register .apollo-login {
+  display: none;
+}
+/* line 77, ../sass/main.scss */
+.apollo.forgotten-password .apollo-forgotten-password {
+  display: block;
+}
+/* line 81, ../sass/main.scss */
+.apollo.forgotten-password .apollo-register {
+  display: none;
+}
+/* line 85, ../sass/main.scss */
+.apollo.forgotten-password .apollo-back {
+  display: block;
+}
+/* line 89, ../sass/main.scss */
+.apollo.forgotten-password .apollo-login {
+  display: none;
+}
+/* line 94, ../sass/main.scss */
+.apollo .apollo-login {
+  max-width: 300px;
+      margin: auto;
+      margin-bottom:20px;
+}
+/* line 98, ../sass/main.scss */
+.apollo .apollo-login .apollo-seperator:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 43%;
+  border-bottom: 1px solid #cccccc;
+}
+/* line 107, ../sass/main.scss */
+.apollo .apollo-login .apollo-seperator:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 43%;
+  border-bottom: 1px solid #cccccc;
+}
+/* line 118, ../sass/main.scss */
+.apollo .apollo-forgotten-password {
+  display: none;
+  max-width: 300px;
+}
+/* line 123, ../sass/main.scss */
+.apollo .apollo-password-reset {
+  display: none;
+  max-width: 300px;
+  text-align: center;
+}
+/* line 129, ../sass/main.scss */
+.apollo .apollo-register {
+  max-width: 300px;
+  display: none;
+}
+/* line 134, ../sass/main.scss */
+.apollo .apollo-register .apollo-seperator:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 36%;
+  border-bottom: 1px solid #cccccc;
+}
+/* line 143, ../sass/main.scss */
+.apollo .apollo-register .apollo-seperator:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 36%;
+  border-bottom: 1px solid #cccccc;
+}
+/* line 154, ../sass/main.scss */
+.apollo a {
+  color: #444;
+}
+/* line 157, ../sass/main.scss */
+.apollo a:hover {
+  text-decoration: none;
+  color: #000;
+}
+/* line 166, ../sass/main.scss */
+.apollo.logged-in-facebook .btn-facebook,
+.apollo.logged-in-facebook .apollo-seperator,
+.apollo.logged-in-facebook input[type="text"] {
+  display: none;
+}
+/* line 170, ../sass/main.scss */
+.apollo.logged-in-facebook .apollo-register-account {
+  display: none;
+}
+/* line 174, ../sass/main.scss */
+.apollo.logged-in-facebook .apollo-change-account {
+  display: block;
+}
+/* line 179, ../sass/main.scss */
+.apollo .apollo-register-account {
+  text-align: center;
+  margin: 25px 0 0;
+}
+/* line 185, ../sass/main.scss */
+.apollo .apollo-change-account,
+.apollo .apollo-back {
+  display: none;
+  font-size: 12px;
+  margin: 25px 0 0 0;
+  text-align: center;
+}
+
+/* line 193, ../sass/main.scss */
+.apollo-facebook {
+  background: url(/img/loader.gif) no-repeat center center;
+}
+
+/* line 197, ../sass/main.scss */
+.apollo-seperator {
+  position: relative;
+  display: block;
+  margin: 20px 0 20px 0;
+  text-align: center;
+  color: #666;
+}
+
+/* line 205, ../sass/main.scss */
+.apollo-container {
+  /*padding: 40px 30px 30px;*/
+  margin: 0 auto;
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+/* line 215, ../sass/main.scss */
+.apollo-container .apollo-logging-in,
+.apollo-container .apollo-registering {
+  text-align: center;
+  display: none;
+}
+/* line 220, ../sass/main.scss */
+.apollo-container .apollo-image {
+  -webkit-box-shadow: inset 0px 0px 8px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0px 0px 8px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 150px;
+  margin: 0 auto 40px auto;
+  width: 200px;
+  height: 200px;
+  display: block;
+  background: url(/img/avatar.png) top center;
+}
+/* line 231, ../sass/main.scss */
+.apollo-container .btn-facebook {
+    margin-top: 20px;
+  margin-bottom: 20px;
+}
+.apollo-container .btn-google {
+  margin-bottom: 20px;
+}
+/* line 235, ../sass/main.scss */
+.apollo-container {
+  padding: 0;
+  margin: 0;
+}
+/* line 240, ../sass/main.scss */
+.apollo-container  input[type="text"],
+.apollo-container  input[type="password"] {
+  font-size: 16px;
+  height: auto;
+  margin-bottom: 15px;
+  padding: 7px 9px;
+}
+/* line 248, ../sass/main.scss */
+.apollo-container .btn-facebook {
+  color: #FFFFFF;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #586B93;
+  background-image: -moz-linear-gradient(top, #7787a7, #586b93);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#7787a7), to(#586b93));
+  background-image: -webkit-linear-gradient(top, #7787a7, #586b93);
+  background-image: -o-linear-gradient(top, #7787a7, #586b93);
+  background-image: linear-gradient(to bottom, #7787a7, #586b93);
+  background-repeat: repeat-x;
+  /*border-color: #586B93;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);*/
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#7787A7', endColorstr='#586B93', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.apollo-container .btn-google {
+  color: #FFFFFF;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #586B93;
+  background-image: -moz-linear-gradient(top, #d73d32, #C14B43);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#d73d32), to(#C14B43));
+  background-image: -webkit-linear-gradient(top, #d73d32, #C14B43);
+  background-image: -o-linear-gradient(top, #d73d32, #C14B43);
+  background-image: linear-gradient(to bottom, #d73d32, #C14B43);
+  background-repeat: repeat-x;
+  border-color: #586B93;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#7787A7', endColorstr='#586B93', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+/* line 270, ../sass/main.scss */
+.apollo-container .btn-facebook:hover,
+.apollo-container .btn-facebook:active,
+.apollo-container .btn-facebook:focus,
+.apollo-container .btn-facebook.active,
+.apollo-container .btn-facebook.disabled,
+.apollo-container .btn-facebook[disabled] {
+  color: #FFFFFF;
+  background-color: #586B93;
+}
+.apollo-container .btn-google:hover,
+.apollo-container .btn-google:active,
+.apollo-container .btn-google:focus,
+.apollo-container .btn-google.active,
+.apollo-container .btn-google.disabled,
+.apollo-container .btn-google[disabled] {
+  color: #FFFFFF;
+  background-color: #586B93;
+}
+/* line 275, ../sass/main.scss */
+.apollo-container .btn-primary {
+  color: #FFFFFF;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #2087BF;
+  *background-color: #2087BF;
+  background-image: -moz-linear-gradient(top, #279ad8, #2087bf);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#279ad8), to(#2087bf));
+  background-image: -webkit-linear-gradient(top, #279ad8, #2087bf);
+  background-image: -o-linear-gradient(top, #279ad8, #2087bf);
+  background-image: linear-gradient(to bottom, #279ad8, #2087bf);
+  background-repeat: repeat-x;
+  border-color: #2087BF;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#279AD8', endColorstr='#2087BF', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+}
+/* line 295, ../sass/main.scss */
+.apollo-container .btn-primary:hover,
+.apollo-container .btn-primary:active,
+.apollo-container .btn-primary.active,
+.apollo-container .btn-primary.disabled,
+.apollo-container .btn-primary[disabled] {
+  color: #FFFFFF;
+  background-color: #2087BF;
+  *background-color: #003bb3;
+}
+/* line 301, ../sass/main.scss */
+.apollo-container textarea:focus, .apollo-container input[type="text"]:focus, .apollo-container input[type="password"]:focus, .apollo-container input[type="datetime"]:focus, .apollo-container input[type="datetime-local"]:focus, .apollo-container input[type="date"]:focus, .apollo-container input[type="month"]:focus, .apollo-container input[type="time"]:focus, .apollo-container input[type="week"]:focus, .apollo-container input[type="number"]:focus, .apollo-container input[type="email"]:focus, .apollo-container input[type="url"]:focus, .apollo-container input[type="search"]:focus, .apollo-container input[type="tel"]:focus, .apollo-container input[type="color"]:focus, .apollo-container .uneditable-input:focus {
+  border-color: rgba(140, 168, 41, 0.8);
+  outline: 0;
+  outline: thin dotted 9;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(140, 168, 41, 0.6);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(140, 168, 41, 0.6);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(140, 168, 41, 0.6);
+}
+
+/* Demo Styles */
+/* line 313, ../sass/main.scss */
+#demo {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #fff;
+  padding: 0 20px 8px 20px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  border: 1px solid #e5e5e5;
+  width: 272px;
+}
+/* line 325, ../sass/main.scss */
+#demo  {
+  margin-bottom: 15px;
+}
+/* line 329, ../sass/main.scss */
+#demo .radio {
+  padding-left: 20px;
+  font-weight: 400;
+}
+.apollo-error-cnt {
+    padding: 20px;
+    color: red;
+}
+
+
+.abcRioButtonLightBlue {
+width:100% !important;
+    height: 43px !important;
+}
+.abcRioButtonLightBlue {
+      font-size: 16px;
+    color:white !important;
+     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #586B93 !important;
+  background-image: -moz-linear-gradient(top, #d73d32, #C14B43) !important;
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#d73d32), to(#C14B43)) !important;
+  background-image: -webkit-linear-gradient(top, #d73d32, #C14B43) !important;
+  background-image: -o-linear-gradient(top, #d73d32, #C14B43) !important;
+  background-image: linear-gradient(to bottom, #d73d32, #C14B43) !important;
+  background-repeat: repeat-x;
+  border-color: #586B93 !important;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25) !important;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#7787A7', endColorstr='#586B93', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      border-radius: 5px !important;
+    padding-top: 5px;
+}
+.abcRioButtonIcon {
+display:none;
+}
+.abcRioButtonContents {
+font-size:19px !important;
+}
+.loadingoverlay {
+z-index:999999;
+}
+.apollo_rptViewer {
+  margin: 0 auto;
+  max-width: 71%;
+  /*border: 12px solid rgba(0, 0, 0, 0.45);*/
+  /*border-radius: 5px;*/
+  position: relative;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+      background: white;
+}
+.appollo_rptViewrheading {
+    margin: 0 auto;
+    max-width: 71%;
+    box-sizing: border-box;
+    font-size: 20px;
+    padding: 10px;
+    color: gray;
+    background-color: #ffffff;
+    font-weight: 700;
+    position: relative;
+    text-align: left;
+}
+
+
+
+
+
+
+
+input,
+textarea,
+.uneditable-input,
+.form-inline .form-control,
+.navbar-form .form-control {
+    width: 100%;
+}
+select,
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"],
+.uneditable-input {
+    display: inline-block;
+    -webkit-font-smoothing: antialiased;
+    height: 40px;
+    padding: 0 10px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    line-height: 25px;
+    color: #73879C;
+    resize: none;
+    vertical-align: middle;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    background-color: #f5f5f5;
+    border: 1px solid #E6E9ED;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    -webkit-transition: all 200ms ease-out;
+    -o-transition: all 200ms ease-out;
+    -moz-transition: all 200ms ease-out;
+}
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus {
+    border: 1px solid #BCC7D1;
+    box-shadow: none;
+}
+textarea {
+    height: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    min-height: 150px;
+    resize: vertical;
+}
+
+

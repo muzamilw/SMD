@@ -2,6 +2,7 @@
 using SMD.Models.IdentityModels;
 using SMD.Models.RequestModels;
 using SMD.Models.ResponseModels;
+using SMD.Models.DomainModels;
 
 namespace SMD.Interfaces.Services
 {
@@ -11,29 +12,42 @@ namespace SMD.Interfaces.Services
     public interface IWebApiUserService
     {
         /// <summary>
+        /// Get User by Id
+        /// </summary>
+        Task<LoginResponse> GetById(string userId);
+
+        /// <summary>
+        /// Resets User Responses for Ads, Surveys and Questions
+        /// </summary>
+        void ResetProductsResponses();
+
+        /// <summary>
+        /// Gets Ads, Surveys, Questions as paged view
+        /// </summary>
+        Task<BaseApiResponse> ExecuteActionOnProductsResponse(ProductActionRequest request);
+
+        /// <summary>
         /// Gets Ads, Surveys, Questions as paged view
         /// </summary>
         GetProductsResponse GetProducts(GetProductsRequest request);
         
         /// <summary>
-        /// Approve Survey
-        /// </summary>
-        Task<BaseApiResponse> UpdateTransactionOnSurveyApproval(ApproveSurveyRequest request, bool isApiCall = true);
-
-        /// <summary>
-        /// Ad Viewed
-        /// </summary>
-        Task<BaseApiResponse> UpdateTransactionOnViewingAd(AdViewedRequest request);
-
-        /// <summary>
         /// Archive Account
         /// </summary>
-        Task<BaseApiResponse> Archive(string userId);
+        bool Archive(string userId, string confirmationToken);
+
+
+       Task<BaseApiResponse> ArchiveRequestConfirmation(string userId, string token, string confirmationLink);
         
         /// <summary>
         /// Update Profile
         /// </summary>
         Task<BaseApiResponse> UpdateProfile(UpdateUserProfileRequest request);
+
+        ///// <summary>
+        ///// Update Profile Image
+        ///// </summary>
+        //Task<UpdateProfileImageResponse> UpdateProfileImage(UpdateUserProfileRequest request);
         
         /// <summary>
         /// Confirm Email
@@ -85,5 +99,29 @@ namespace SMD.Interfaces.Services
         /// Get User using usermanager  For Stripe Work 
         /// </summary>
         User GetUserByUserId(string userId);
+
+        /// <summary>
+        /// Get Logged-In User profile 
+        /// </summary>
+        User GetLoggedInUser(string userId);
+
+        /// <summary>
+        /// Base Data for User Profile 
+        /// </summary>
+        UserProfileBaseResponseModel GetBaseDataForUserProfile();
+        int generateAndSmsCode(string userId,string phone);
+        User getUserByAuthenticationToken(string token);
+
+
+        User GetUserByEmail(string email);
+
+        User GetUserByCompanyId(int CompanyId);
+
+        string GetRoleNameByRoleId(string RoleId);
+
+
+        int GetUserProfileCompletness(string UserId);
+
+        GetApprovalCount_Result GetApprovalCount();
     }
 }

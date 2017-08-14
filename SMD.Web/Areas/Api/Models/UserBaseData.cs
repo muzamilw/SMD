@@ -7,7 +7,7 @@ namespace SMD.MIS.Areas.Api.Models
 {
     public class UserBaseData
     {
-        public int? CityId { get; set; }
+        //public int? CityId { get; set; }
         public int? CountryId { get; set; }
         public int? LanguageId { get; set; }
         public int? IndustryId { get; set; }
@@ -21,5 +21,10 @@ namespace SMD.MIS.Areas.Api.Models
         public bool isStripeIntegrated { get; set; }
         public string Latitude { get; set; }
         public string Longitude { get; set; }
+        public bool isUserAddmin { get; set; }
+
+        public bool? IsSpecialAccount { get; set; }
+
+        public Nullable<int> Status { get; set; }
     }
 }

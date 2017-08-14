@@ -19,6 +19,9 @@ using SMD.Models.DomainModels;
 using SMD.Models.IdentityModels;
 using SMD.Models.RequestModels;
 using SMD.Models.ResponseModels;
+using com.esendex.sdk.messaging;
+using System.Text.RegularExpressions;
+using System.Security.Policy;
 
 namespace SMD.Implementation.Services
 {
@@ -39,11 +42,39 @@ namespace SMD.Implementation.Services
         private readonly IInvoiceDetailRepository invoiceDetailRepository;
         private readonly IProductRepository productRepository;
         private readonly ITaxRepository taxRepository;
+        private readonly ICountryRepository countryRepository;
+        private readonly IIndustryRepository industryRepository;
+        private readonly IEducationRepository educationRepository;
+        private readonly ICityRepository cityRepository;
+        private readonly IProfileQuestionUserAnswerService profileQuestionAnswerService;
+        private readonly IProfileQuestionService profileQuestionService;
+        private readonly IAdCampaignResponseRepository adCampaignResponseRepository;
+        private readonly ISurveyQuestionResponseRepository surveyQuestionResponseRepository;
+        private readonly ICompanyRepository companyRepository;
+        private readonly IManageUserRepository manageUserRepository;
+        private readonly IAccountService accountService;
+        private readonly IProfileQuestionRepository profileQuestionRepository;
+        private readonly ISmsServiceCustom smsService;
+        private readonly IGameRepository gameRepositry;
+        private readonly ICouponRatingReviewRepository couponRatingReviewRepository;
+
+        private readonly IAspnetUsersRepository aspnetUsersRepository;
+
+        private readonly IAspNetUsersNotificationTokenRepository aspNetUsersNotificationTokenRepository;
+
+        private readonly IUserGameResponseRepository userGameResponseRepository;
 
         private ApplicationUserManager UserManager
         {
             get { return HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
         }
+
+        private ApplicationRoleManager RoleManager
+        {
+            get { return HttpContext.Current.GetOwinContext().Get<ApplicationRoleManager>(); }
+        }
+
+        
 
         /// <summary>
         /// Throws Exception if registreation fails
@@ -69,15 +100,16 @@ namespace SMD.Implementation.Services
         /// <param name="transactionSequence">Sequence this transaction is going through</param>
         /// <param name="transactionType">Type of transaction AdClick or Approve Survey</param>
         /// <param name="isCredit">Credit if true</param>
+        /// <param name="isProcessed">Tranation status </param>
         private void PerformTransaction(long? adCampaingId, long? surveyQuestionId, Account account, double? transactionAmount,
-            int transactionSequence, TransactionType transactionType, bool isCredit = true)
+            int transactionSequence, TransactionType transactionType, bool isCredit = true, bool isProcessed = false, int PQID = 0)
         {
             var transaction = new Transaction
                                              {
                                                  AccountId = account.AccountId,
                                                  Sequence = transactionSequence,
                                                  Type = (int)transactionType,
-                                                 isProcessed = true,
+                                                 isProcessed = isProcessed,
                                                  TransactionDate = DateTime.Now
                                              };
 
@@ -103,12 +135,16 @@ namespace SMD.Implementation.Services
             if (isCredit)
             {
                 transaction.CreditAmount = transactionAmount;
-                account.AccountBalance += Convert.ToDecimal(transactionAmount);
+                transaction.AccountBalance = (account.AccountBalance ?? 0) + transactionAmount;
+                account.AccountBalance += transactionAmount;
+              
             }
             else
             {
                 transaction.DebitAmount = transactionAmount;
-                account.AccountBalance -= Convert.ToDecimal(transactionAmount);
+                transaction.AccountBalance = (account.AccountBalance ?? 0) - transactionAmount;
+                account.AccountBalance -= transactionAmount;
+                
             }
 
             // Add Transcation to repository
@@ -128,82 +164,80 @@ namespace SMD.Implementation.Services
         /// <param name="affiliatesAccount">Affiliate Account Info</param>
         /// <param name="smdAccount">SMD Account Info</param>
         /// <param name="adCampaign">Ad Campaign</param>
-        private void PerformAdCampaignTransactions(AdViewedRequest request, Account advertisersAccount, double? adClickRate,
-            Account adViewersAccount, double? adViewersCut, User referringUser, double? smdsCut, Account affiliatesAccount,
-            Account smdAccount, AdCampaign adCampaign)
+        /// <param name="adViewerUsedVoucher">If Ad Viewer Uses Voucher</param>
+        private async Task PerformAdCampaignClickTransactions(long AdCampaignId, Account advertisersAccount, double? adClickRate,
+            Account adViewersAccount, double? adViewersCut, Company referringCompany, double? smdsCut, Account affiliatesAccount,
+            Account smdAccount, AdCampaign adCampaign, bool ReferralScenario, double? referralCut)
         {
             // Debit Advertiser
             var transactionSequence = 1;
 
             // Perform the transactions
             // Debit Campaign Advertiser
-            PerformTransaction(request.AdCampaignId, null, advertisersAccount, adClickRate, transactionSequence, TransactionType.AdClick, false);
+            PerformTransaction(AdCampaignId, null, advertisersAccount, adClickRate, transactionSequence, TransactionType.AdClick, false);
 
-            // Credit AdViewer
+           
             transactionSequence += 1;
-            PerformTransaction(request.AdCampaignId, null, adViewersAccount, adViewersCut, transactionSequence, TransactionType.AdClick);
+            PerformTransaction(AdCampaignId, null, adViewersAccount, adViewersCut, transactionSequence, TransactionType.AdClick,true);
 
+  
             // Credit Affiliate
-            smdsCut = PerformCreditTransactionForAffiliate(request, referringUser, smdsCut, affiliatesAccount, ref transactionSequence);
-
+            //todo pilot: Commenting Smd Transaction
+            if (ReferralScenario)
+            {
+                transactionSequence += 1;
+                PerformTransaction(AdCampaignId, null, affiliatesAccount, referralCut, transactionSequence, TransactionType.AdClick);
+            }
+            
+            
             // Credit SMD
+            //todo pilot: Commenting Smd Transaction
             transactionSequence += 1;
-            PerformTransaction(request.AdCampaignId, null, smdAccount, smdsCut, transactionSequence, TransactionType.AdClick);
+            PerformTransaction(AdCampaignId, null, smdAccount, smdsCut, transactionSequence, TransactionType.AdClick, true, true);
 
             // Update AdCampaign Amount Spent
+            if (!adCampaign.AmountSpent.HasValue)
+            {
+                adCampaign.AmountSpent = 0;
+            }
             adCampaign.AmountSpent += adClickRate;
+
+          
 
             // Save Changes
             transactionRepository.SaveChanges();
+          
         }
 
-        /// <summary>
-        /// Credit Campaing Affiliate
-        /// </summary>
-        private double? PerformCreditTransactionForAffiliate(AdViewedRequest request, User referringUser, double? smdsCut,
-            Account affiliatesAccount, ref int transactionSequence)
-        {
-            if (referringUser != null)
-            {
-                // Credit Affiliate - if exists
-                double? affiliatesCut = ((smdsCut * 20) / 100);
-                smdsCut = ((smdsCut * 30) / 100);
-                transactionSequence += 1;
-                // Perform Transaction
-                PerformTransaction(request.AdCampaignId, null, affiliatesAccount, affiliatesCut, transactionSequence, TransactionType.AdClick);
-            }
-
-            return smdsCut;
-        }
 
         /// <summary>
         /// Sets up accounts for transcations
         /// Verifies if required accounts exist
         /// </summary>
-        private void SetupAdCampaignTransaction(AdViewedRequest request, AdCampaign adCampaign,
-            out Account adViewersAccount, out Account advertisersAccount, out Account smdAccount)
+        private void SetupAdCampaignTransaction(ProductActionRequest request, AdCampaign adCampaign,
+            out Account adViewersAccount, out Account advertisersAccount, out Account smdAccount, string systemUserId)
         {
 
             // Get business Accounts for Each Individual involved in this transaction
-            adViewersAccount = accountRepository.GetByUserId(request.UserId);
+            adViewersAccount = accountRepository.GetByUserId(request.UserId, AccountType.VirtualAccount);
             if (adViewersAccount == null)
             {
                 throw new SMDException(string.Format(CultureInfo.InvariantCulture,
                     LanguageResources.WebApiUserService_AccountNotFound, "Current User"));
             }
 
-            advertisersAccount = accountRepository.GetByUserId(adCampaign.UserId);
+            advertisersAccount = accountRepository.GetByUserId(adCampaign.UserId, AccountType.VirtualAccount);
             if (advertisersAccount == null)
             {
                 throw new SMDException(string.Format(CultureInfo.InvariantCulture,
                     LanguageResources.WebApiUserService_AccountNotFound, "Advertiser"));
             }
 
-            smdAccount = accountRepository.GetByName(Accounts.Smd);
+            smdAccount = accountRepository.GetByUserId(systemUserId, AccountType.VirtualAccount);
             if (smdAccount == null)
             {
                 throw new SMDException(string.Format(CultureInfo.InvariantCulture,
-                    LanguageResources.WebApiUserService_AccountNotFound, "SMD"));
+                    LanguageResources.WebApiUserService_AccountNotFound, "Cash4Ads"));
             }
         }
 
@@ -211,15 +245,15 @@ namespace SMD.Implementation.Services
         /// Validates Ad Campaing
         /// AdCampaign Exists
         /// </summary>
-        private async Task<AdCampaign> ValidateAdCampaign(AdViewedRequest request)
+        private async Task<AdCampaign> ValidateAdCampaign(long AdCampaignId)
         {
             // Get AdCampaign against AdCampaign Id
-            AdCampaign adCampaign = adCampaignRepository.Find(request.AdCampaignId);
+            AdCampaign adCampaign = adCampaignRepository.Find(AdCampaignId);
             if (adCampaign == null)
             {
                 throw new SMDException(string.Format(CultureInfo.InvariantCulture,
                     LanguageResources.WebApiUserService_AdCampaignNotFound,
-                    request.AdCampaignId));
+                    AdCampaignId));
             }
 
             if (string.IsNullOrEmpty(adCampaign.UserId))
@@ -242,90 +276,9 @@ namespace SMD.Implementation.Services
         #region Survery Approval Transactions
 
 
-        /// <summary>
-        /// Validates Survey Question
-        /// Survey Question Exists
-        /// </summary>
-        private async Task<SurveyQuestion> ValidateSurveyQuestion(ApproveSurveyRequest request)
-        {
-            // Get Survey Question against Survery Question Id
-            SurveyQuestion surveyQuestion = surveyQuestionRepository.Find(request.SurveyQuestionId);
-            if (surveyQuestion == null)
-            {
-                throw new SMDException(string.Format(CultureInfo.InvariantCulture,
-                    LanguageResources.WebApiUserService_SurveyQuestionNotFound,
-                    request.SurveyQuestionId));
-            }
 
-            if (string.IsNullOrEmpty(surveyQuestion.UserId))
-            {
-                throw new SMDException(LanguageResources.WebApiUserService_AdvertiserNotFound);
-            }
 
-            // Get Advertiser
-            User advertiser = await UserManager.FindByIdAsync(surveyQuestion.UserId);
-            if (advertiser == null)
-            {
-                throw new SMDException(LanguageResources.WebApiUserService_AdvertiserNotFound);
-            }
 
-            return surveyQuestion;
-        }
-
-        /// <summary>
-        /// Sets up accounts for transcations
-        /// Verifies if required accounts exist
-        /// </summary>
-        private void SetupSurveyApproveTransaction(SurveyQuestion surveyQuestion, out Account advertisersAccount, out Account smdAccount)
-        {
-            advertisersAccount = accountRepository.GetByUserId(surveyQuestion.UserId);
-            if (advertisersAccount == null)
-            {
-                throw new SMDException(string.Format(CultureInfo.InvariantCulture,
-                    LanguageResources.WebApiUserService_AccountNotFound, "Advertiser"));
-            }
-
-            smdAccount = accountRepository.GetByName(Accounts.Smd);
-            if (smdAccount == null)
-            {
-                throw new SMDException(string.Format(CultureInfo.InvariantCulture,
-                    LanguageResources.WebApiUserService_AccountNotFound, "SMD"));
-            }
-        }
-
-        /// <summary>
-        /// Performs Transactions on Survey Approval
-        /// </summary>
-        private void PerformSurveyApproveTransactions(ApproveSurveyRequest request, Account advertisersAccount, double approvedSurveyAmount,
-            double? smdsCut, Account smdAccount, SurveyQuestion surveyQuestion, double amount, int? productId,
-            double taxValue, bool isApiCall = true)
-        {
-            // Debit Advertiser
-            var transactionSequence = 1;
-
-            // Perform the transactions
-            // Debit Survey Advertiser
-            PerformTransaction(null, request.SurveyQuestionId, advertisersAccount, approvedSurveyAmount, transactionSequence, TransactionType.ApproveSurvey, false);
-
-            // Credit SMD
-            transactionSequence += 1;
-            PerformTransaction(null, request.SurveyQuestionId, smdAccount, smdsCut, transactionSequence, TransactionType.ApproveSurvey);
-
-            // Add Invoice Details
-            AddInvoiceDetails(surveyQuestion, amount, request.StripeResponse, productId, taxValue, isApiCall);
-            // If called locally
-            if (!isApiCall)
-            {
-                return;
-            }
-
-            // Mark survey as approved
-            surveyQuestion.Approved = true;
-            surveyQuestion.ApprovedByUserId = request.UserId;
-
-            // Save Changes
-            transactionRepository.SaveChanges();
-        }
 
         /// <summary>
         /// Invoice + Details work 
@@ -344,8 +297,8 @@ namespace SMD.Implementation.Services
                 InvoiceDate = DateTime.Now,
                 InvoiceDueDate = DateTime.Now.AddDays(7),
                 Address1 = source.Country.CountryName,
-                UserId = source.UserId,
-                CompanyName = "My Company",
+                CompanyId = source.CompanyId,
+                CompanyName = "Cash4Ads",
                 CreditCardRef = stripeResponse
             };
             invoiceRepository.Add(invoice);
@@ -376,6 +329,7 @@ namespace SMD.Implementation.Services
         }
         #endregion
 
+
         /// <summary>
         /// Logs in user to system
         /// </summary>
@@ -386,24 +340,305 @@ namespace SMD.Implementation.Services
             HttpContext.Current.User = new ClaimsPrincipal(identity);
         }
 
-        /// <summary>
-        /// Updates Profile Image
-        /// </summary>
-        private static void UpdateProfileImage(UpdateUserProfileRequest request, User user)
-        {
-            string smdContentPath = ConfigurationManager.AppSettings["SMD_Content"];
-            HttpServerUtility server = HttpContext.Current.Server;
-            string mapPath = server.MapPath(smdContentPath + "/Users/" + user.Id);
+        ///// <summary>
+        ///// Updates Profile Image
+        ///// </summary>
+        //private static void UpdateProfileImage(UpdateUserProfileRequest request, User user)
+        //{
+        //    string smdContentPath = ConfigurationManager.AppSettings["SMD_Content"];
+        //    HttpServerUtility server = HttpContext.Current.Server;
+        //    string mapPath = server.MapPath(smdContentPath + "/Users/" + user.CompanyId);
 
-            // Create directory if not there
-            if (!Directory.Exists(mapPath))
+        //    // Create directory if not there
+        //    if (!Directory.Exists(mapPath))
+        //    {
+        //        Directory.CreateDirectory(mapPath);
+        //    }
+
+        //    user.ProfileImage = ImageHelper.Save(mapPath, user.ProfileImage, string.Empty, request.ProfileImageName,
+        //        request.ProfileImage, request.ProfileImageBytes);
+        //     string imgExt = Path.GetExtension(user.ProfileImage);
+        //     string sourcePath = HttpContext.Current.Server.MapPath("~/"+user.ProfileImage);
+        //     string[] results = sourcePath.Split(new string[] { imgExt }, StringSplitOptions.None);
+        //     string res = results[0];
+        //     string destPath = res + "_thumb" + imgExt;
+        //     ImageHelper.GenerateThumbNail(sourcePath, sourcePath, 200);
+        //}
+        
+        #region Product Response Actions
+
+        /// <summary>
+        /// Update Profile Question User Answer
+        /// </summary>
+        /// <param name="response"></param>
+        private void ExecuteProfileQuestionEvent(ProductActionRequest response)
+        {
+
+
+            if (response.PqAnswerIds == null)
             {
-                Directory.CreateDirectory(mapPath);
+                response.PqAnswerIds = new List<int>();
             }
 
-            user.ProfileImage = ImageHelper.Save(mapPath, user.ProfileImage, string.Empty, request.ProfileImageName,
-                request.ProfileImage, request.ProfileImageBytes);
+            //recording response
+            profileQuestionAnswerService.SaveProfileQuestionUserResponse(
+               new UpdateProfileQuestionUserAnswerApiRequest
+               {
+                   ProfileQuestionAnswerIds = response.PqAnswerIds,
+                   ProfileQuestionId = (int)response.ItemId.Value,
+                   UserId = response.UserId,
+                   companyId = response.companyId.Value,
+                   ResponeEventType = response.ResponeEventType
+               });
+
+            var profileQuestion = profileQuestionRepository.Find((int)response.ItemId.Value);
+            //rewarding and increasing count happens only when they answer it.
+            if (response.ResponeEventType == CampaignResponseEventType.Answered)
+            {
+
+
+                //updating answer count
+                profileQuestion.AsnswerCount = (profileQuestion.AsnswerCount.HasValue ? profileQuestion.AsnswerCount.Value : 0) + 1;
+                profileQuestionRepository.Update(profileQuestion);
+                profileQuestionRepository.SaveChanges();
+
+
+                //since its a purchased ProfileQuestion hence reward the end user
+                if (profileQuestion.CompanyId != null)
+                {
+
+                    UpdateTransactionOnPaidProfileQuestionAnswer(new AdViewedRequest
+                  {
+                      AdCampaignId = response.ItemId.Value,
+                      UserId = response.UserId,
+                      companyId = response.companyId.Value,
+                      userQuizSelection = response.UserQuestionResponse,
+
+                  }, response, 2, profileQuestion.CompanyId.Value);
+
+                }
+            }
+            else if (response.ResponeEventType == CampaignResponseEventType.Skip)
+            {
+                profileQuestion.SkippedCount = (profileQuestion.SkippedCount.HasValue ? profileQuestion.SkippedCount.Value : 0) + 1;
+                profileQuestionRepository.Update(profileQuestion);
+                profileQuestionRepository.SaveChanges();
+            }
+
+
         }
+
+        /// <summary>
+        /// Execute AdClicked / Viewed
+        /// </summary>
+        private async Task<BaseApiResponse> ExecuteVideoOrGameEvent(ProductActionRequest request)
+        {
+
+            double? adViewersCut = 0;
+            // Get Ad Viewer
+            User adViewer = await UserManager.FindByIdAsync(request.UserId);
+            if (adViewer == null)
+            {
+                throw new SMDException(LanguageResources.WebApiUserService_InvalidUserId);
+            }
+
+            User cash4Ads = await UserManager.FindByEmailAsync(SystemUsers.Cash4Ads);
+            if (cash4Ads == null)
+            {
+                throw new SMDException(string.Format(CultureInfo.InvariantCulture, LanguageResources.WebApiUserService_InvalidUser,
+                    "Cash4Ads"));
+            }
+
+            var adCampaign = await ValidateAdCampaign(request.ItemId.Value);
+
+            if (request.ResponeEventType == CampaignResponseEventType.Answered)
+            {
+
+                // Validates if Ad Campaing Exists
+               
+                bool ReferralScenario = false;
+                Company referringCompany = null;
+                Account referringCompanyAccount = null;
+                var advertiserCompany = companyRepository.Find(adCampaign.CompanyId.Value);
+               
+
+
+                // Get Referral if any
+                if (advertiserCompany.ReferringCompanyID.HasValue)
+                {
+                    referringCompany = companyRepository.Find(advertiserCompany.ReferringCompanyID.Value);
+                    ReferralScenario = true;
+
+                    if (referringCompany == null)
+                    {
+                        throw new SMDException(LanguageResources.WebApiUserService_ReferrerNotFound);
+                    }
+
+                    referringCompanyAccount = accountRepository.GetByCompanyId(referringCompany.CompanyId, AccountType.VirtualAccount);
+                    if (referringCompanyAccount == null)
+                    {
+                        throw new SMDException(string.Format(CultureInfo.InvariantCulture,
+                            LanguageResources.WebApiUserService_AccountNotFound, "Affiliate"));
+                    }
+                }
+
+
+                // Ad Viewer will get 50% and other 50% will be divided b/w SMD (30%), Affiliate(20%) (Referrer) if exists
+                double? adClickRate = adCampaign.ClickRate ?? 0;
+
+                adClickRate = adClickRate * 100;
+
+                adViewersCut = adClickRate / 2; // commenting for pilot launch, now smd hace no percentage and all the money will go to user account from advertiser account. So there will be 2 transactions now advertiser debit transaction and user credit transaction ((adClickRate * 50) / 100); 
+                double? smdsCut = 0;
+                double? referralCut = 0;
+
+
+                if (ReferralScenario)
+                {
+                    smdsCut = adClickRate / 4; //adViewersCut;
+                    referralCut = adClickRate / 4;
+                }
+                else
+                {
+                    smdsCut = adClickRate / 2;
+                    referralCut = 0;
+                }
+
+                Account adViewersAccount;
+                Account advertisersAccount;
+                Account smdAccount;
+
+                // Sets up transaction 
+                // Gets Accounts required
+                SetupAdCampaignTransaction(request, adCampaign, out adViewersAccount, out advertisersAccount, out smdAccount, cash4Ads.Id);
+
+                // Perform financial Transactions
+                await PerformAdCampaignClickTransactions(request.ItemId.Value, advertisersAccount, adClickRate, adViewersAccount, adViewersCut, referringCompany, smdsCut,
+                    referringCompanyAccount, smdAccount, adCampaign, ReferralScenario, referralCut);
+
+            }
+
+
+            // Add Campaign Response recording
+
+            AdCampaignResponse adCampaignResponse = adCampaignResponseRepository.Create();
+            adCampaignResponse.CampaignId = request.ItemId.Value;
+            adCampaignResponse.UserId = request.UserId;
+            adCampaignResponse.UserLocationLat = request.UserLocationLat;
+            adCampaignResponse.UserLocationLong = request.UserLocationLong;
+            adCampaignResponse.UserLocationCity = request.City;
+            adCampaignResponse.UserLocationCountry = request.Country;
+            adCampaignResponse.CompanyId = request.companyId;
+            adCampaignResponse.UserQuestionResponse = request.UserQuestionResponse;
+            adCampaignResponse.UserSelection = request.UserQuestionResponse;
+            adCampaignResponse.ResponseType = (int)request.ResponeEventType;
+            adCampaignResponse.EndUserDollarAmount = adViewersCut;
+            adCampaignResponse.CreatedDateTime = DateTime.Now;
+
+            adCampaignResponseRepository.Add(adCampaignResponse);
+            adCampaign.AdCampaignResponses.Add(adCampaignResponse);
+            adCampaignRepository.SaveChanges();
+
+
+            //game response handling
+            if (request.Type == CampaignType.GameAd && request.ResponeEventType == CampaignResponseEventType.Answered)
+            {
+
+                if (request.GameId.HasValue)
+                {
+                    //storing user's game reponse
+
+                    UserGameResponse gameResponse = new UserGameResponse();
+                    gameResponse.Accuracy = request.GameAccuracy;
+                    gameResponse.AdCampaignResponseID = adCampaignResponse.ResponseId;
+                    gameResponse.GameId = request.GameId;
+                    gameResponse.PlayTime = request.GamePlayTime;
+                    gameResponse.ResponseDateTime = DateTime.Now;
+                    gameResponse.Score = request.GameScore;
+                    gameResponse.UserId = request.UserId;
+
+                    userGameResponseRepository.Add(gameResponse);
+                    userGameResponseRepository.SaveChanges();
+                }
+
+            }
+
+
+
+            return new BaseApiResponse
+            {
+                Status = true,
+                Message = LanguageResources.Success
+            };
+
+
+
+
+        }
+
+               
+
+
+
+        /// <summary>
+        /// Skips Survey Question
+        /// </summary>
+        private void ExecuteSurveyQuestionEvent(int sqId, string userId, int? userSelection, bool? isSkipped,int companyId, ProductActionRequest request)
+        {
+            SurveyQuestion surveyQuestion = surveyQuestionRepository.Find(sqId);
+            if (surveyQuestion == null)
+            {
+                throw new SMDException(string.Format(CultureInfo.InvariantCulture,
+                    LanguageResources.WebApiUserService_SurveyQuestionNotFound, sqId));
+            }
+
+            //adding response
+            SurveyQuestionResponse sqResponse = surveyQuestionResponseRepository.Create();
+            sqResponse.SqId = sqId;
+            sqResponse.UserId = userId;
+            sqResponse.ResponseType = (int)request.ResponeEventType;
+            if (userSelection.HasValue)
+            {
+                sqResponse.UserSelection = userSelection;
+            }
+            sqResponse.CompanyId = companyId;
+            sqResponse.ResoponseDateTime = DateTime.Now.Add(-(surveyQuestionRepository.UserTimezoneOffSet));
+
+            surveyQuestionResponseRepository.Add(sqResponse);
+            surveyQuestion.SurveyQuestionResponses.Add(sqResponse);
+
+            //increment counter
+            if ( request.ResponeEventType != CampaignResponseEventType.Skip)
+                surveyQuestion.ResultClicks = (surveyQuestion.ResultClicks.HasValue  ? surveyQuestion.ResultClicks.Value : 0) +  1;
+
+            surveyQuestionRepository.Update(surveyQuestion);
+            surveyQuestionRepository.SaveChanges();
+
+
+            //since its a purchased ProfileQuestion hence reward the end user and its an answered event
+
+            if (surveyQuestion.CompanyId != null && request.ResponeEventType == CampaignResponseEventType.Answered)
+            {
+
+                UpdateTransactionOnPaidSurveyAnswer(new AdViewedRequest
+                {
+                    AdCampaignId = request.ItemId.Value,
+                    UserId = request.UserId,
+                    companyId = request.companyId.Value,
+                    userQuizSelection = request.UserQuestionResponse,
+
+                }, request, 2, surveyQuestion.CompanyId.Value);
+
+            }
+        }
+
+      
+
+       
+
+
+
+        #endregion
 
         #endregion
 
@@ -416,7 +651,10 @@ namespace SMD.Implementation.Services
             IAccountRepository accountRepository, ITransactionRepository transactionRepository,
             ISurveyQuestionRepository surveyQuestionRepository, IInvoiceRepository invoiceRepository,
             IInvoiceDetailRepository invoiceDetailRepository, IProductRepository productRepository,
-            ITaxRepository taxRepository)
+            ITaxRepository taxRepository, IProfileQuestionUserAnswerService profileQuestionAnswerService,
+            ICountryRepository countryRepository, IIndustryRepository industryRepository,
+            IProfileQuestionService profileQuestionService, IAdCampaignResponseRepository adCampaignResponseRepository,
+            ISurveyQuestionResponseRepository surveyQuestionResponseRepository, IEducationRepository educationRepository, ICityRepository cityRepository, ICompanyRepository companyRepository, IManageUserRepository manageUserRepository, IAccountService accountService, IProfileQuestionRepository profileQuestionRepository, IAspnetUsersRepository aspnetUsersRepository, ISmsServiceCustom smsService, IGameRepository gameRepositry, ICouponRatingReviewRepository couponRatingReviewRepository, IAspNetUsersNotificationTokenRepository aspNetUsersNotificationTokenRepository, IUserGameResponseRepository userGameResponseRepository)
         {
             if (emailManagerService == null)
             {
@@ -438,8 +676,30 @@ namespace SMD.Implementation.Services
             {
                 throw new ArgumentNullException("surveyQuestionRepository");
             }
-            if (productRepository == null) throw new ArgumentNullException("productRepository");
-            if (taxRepository == null) throw new ArgumentNullException("taxRepository");
+            if (productRepository == null)
+            {
+                throw new ArgumentNullException("productRepository");
+            }
+            if (taxRepository == null)
+            {
+                throw new ArgumentNullException("taxRepository");
+            }
+            if (profileQuestionAnswerService == null)
+            {
+                throw new ArgumentNullException("profileQuestionAnswerService");
+            }
+            if (profileQuestionService == null)
+            {
+                throw new ArgumentNullException("profileQuestionService");
+            }
+            if (adCampaignResponseRepository == null)
+            {
+                throw new ArgumentNullException("adCampaignResponseRepository");
+            }
+            if (surveyQuestionResponseRepository == null)
+            {
+                throw new ArgumentNullException("surveyQuestionResponseRepository");
+            }
 
             this.emailManagerService = emailManagerService;
             this.adCampaignRepository = adCampaignRepository;
@@ -450,77 +710,38 @@ namespace SMD.Implementation.Services
             this.invoiceDetailRepository = invoiceDetailRepository;
             this.productRepository = productRepository;
             this.taxRepository = taxRepository;
+            this.countryRepository = countryRepository;
+            this.industryRepository = industryRepository;
+            this.profileQuestionAnswerService = profileQuestionAnswerService;
+            this.profileQuestionService = profileQuestionService;
+            this.adCampaignResponseRepository = adCampaignResponseRepository;
+            this.surveyQuestionResponseRepository = surveyQuestionResponseRepository;
+            this.educationRepository = educationRepository;
+            this.cityRepository = cityRepository;
+            this.companyRepository = companyRepository;
+            this.manageUserRepository = manageUserRepository;
+            this.accountService = accountService;
+            this.profileQuestionRepository = profileQuestionRepository;
+            this.aspnetUsersRepository = aspnetUsersRepository;
+            this.smsService = smsService;
+            this.gameRepositry = gameRepositry;
+            this.couponRatingReviewRepository = couponRatingReviewRepository;
+            this.aspNetUsersNotificationTokenRepository = aspNetUsersNotificationTokenRepository;
+            this.userGameResponseRepository = userGameResponseRepository;
         }
 
-        #endregion
 
+        #endregion
         #region Public
 
-        #region Approve Survey
+      
 
-        /// <summary>
-        /// Gets Combination of Ads, Surveys, Questions as paged view
-        /// </summary>
-        public GetProductsResponse GetProducts(GetProductsRequest request)
-        {
-            List<GetProducts_Result> products = adCampaignRepository.GetProducts(request).ToList();
-            return new GetProductsResponse
-                   {
-                       Status = true, 
-                       Message = LanguageResources.Success, 
-                       Products = products, 
-                       TotalCount = products.Any() && products[0].TotalItems.HasValue ? products[0].TotalItems.Value : 0
-                   };
-        }
+        #region Ad Approve
 
-        /// <summary>
-        /// Update Transactions on viewing ad
-        /// </summary>
-        public async Task<BaseApiResponse> UpdateTransactionOnSurveyApproval(ApproveSurveyRequest request, bool isApiCall = true)
-        {
-            // Get Survey Approver
-            User surveyApprover = await UserManager.FindByIdAsync(request.UserId);
-            if (surveyApprover == null)
-            {
-                throw new SMDException(LanguageResources.WebApiUserService_InvalidUserId);
-            }
+      
 
-            // Validates if Ad Campaing Exists and has Advertiser info as well
-            var surveyQuestion = await ValidateSurveyQuestion(request);
 
-            // Begin Transaction
-            // SMD will get 100 %
-            // Get Current Product
-            var product = productRepository.GetProductByCountryId(surveyQuestion.CountryId, "SQ");
-            // Tax Applied
-            var tax = taxRepository.GetTaxByCountryId(surveyQuestion.CountryId);
-            var taxValue = tax != null && tax.TaxValue.HasValue ? tax.TaxValue.Value : 0;
-            // Total includes tax
-            double? approvedSurveyAmount = product.SetupPrice + taxValue;
-            Account advertisersAccount;
-            Account smdAccount;
-
-            // Sets up transaction 
-            // Gets Accounts required
-            SetupSurveyApproveTransaction(surveyQuestion, out advertisersAccount, out smdAccount);
-
-            // Perform Transactions
-            PerformSurveyApproveTransactions(request, advertisersAccount, (double)approvedSurveyAmount, approvedSurveyAmount,
-                smdAccount, surveyQuestion, (double)approvedSurveyAmount, product.ProductId, taxValue, isApiCall);
-
-            return new BaseApiResponse
-            {
-                Status = true,
-                Message = "Success"
-            };
-        }
-
-        #endregion
-
-        /// <summary>
-        /// Update Transactions on viewing ad
-        /// </summary>
-        public async Task<BaseApiResponse> UpdateTransactionOnViewingAd(AdViewedRequest request)
+        public async Task<BaseApiResponse> UpdateTransactionOnPaidSurveyAnswer(AdViewedRequest request, ProductActionRequest pRequest, double rewardCentz, int AdvertiserCompanyId)
         {
             // Get Ad Viewer
             User adViewer = await UserManager.FindByIdAsync(request.UserId);
@@ -529,56 +750,152 @@ namespace SMD.Implementation.Services
                 throw new SMDException(LanguageResources.WebApiUserService_InvalidUserId);
             }
 
-            // Validates if Ad Campaing Exists
-            var adCampaign = await ValidateAdCampaign(request);
-
-            // Get Referral if any
-            User referringUser = null;
-            Account affiliatesAccount = null;
-            if (!string.IsNullOrEmpty(adViewer.ReferringUserId))
+            User cash4Ads = await UserManager.FindByEmailAsync(SystemUsers.Cash4Ads);
+            if (cash4Ads == null)
             {
-                referringUser = await UserManager.FindByIdAsync(adViewer.ReferringUserId);
-                if (referringUser == null)
-                {
-                    throw new SMDException(LanguageResources.WebApiUserService_ReferrerNotFound);
-                }
-
-                affiliatesAccount = accountRepository.GetByUserId(adViewer.ReferringUserId);
-                if (affiliatesAccount == null)
-                {
-                    throw new SMDException(string.Format(CultureInfo.InvariantCulture,
-                        LanguageResources.WebApiUserService_AccountNotFound, "Affiliate"));
-                }
+                throw new SMDException(string.Format(CultureInfo.InvariantCulture, LanguageResources.WebApiUserService_InvalidUser,
+                    "Cash4Ads"));
             }
+
+            // Validates if Ad Campaing Exists
+          
 
             // Begin Transaction
             // Ad Viewer will get 50% and other 50% will be divided b/w SMD (30%), Affiliate(20%) (Referrer) if exists
-            double? adClickRate = adCampaign.ClickRate ?? 0;
-            double? adViewersCut = ((adClickRate * 50) / 100);
-            double? smdsCut = adViewersCut;
+            double? adClickRate = rewardCentz;
+            double? adViewersCut = adClickRate; // commenting for pilot launch, now smd hace no percentage and all the money will go to user account from advertiser account. So there will be 2 transactions now advertiser debit transaction and user credit transaction ((adClickRate * 50) / 100); 
+            
+         
+            double? smdsCut = 0; //adViewersCut;
             Account adViewersAccount;
             Account advertisersAccount;
             Account smdAccount;
 
             // Sets up transaction 
             // Gets Accounts required
-            SetupAdCampaignTransaction(request, adCampaign, out adViewersAccount, out advertisersAccount, out smdAccount);
+            // Get business Accounts for Each Individual involved in this transaction
+                adViewersAccount = accountRepository.GetByUserId(request.UserId, AccountType.VirtualAccount);
+                if (adViewersAccount == null)
+                {
+                    throw new SMDException(string.Format(CultureInfo.InvariantCulture,
+                        LanguageResources.WebApiUserService_AccountNotFound, "Current User"));
+                }
+
+                advertisersAccount = accountRepository.GetByCompanyId(AdvertiserCompanyId, AccountType.VirtualAccount);
+                if (advertisersAccount == null)
+                {
+                    throw new SMDException(string.Format(CultureInfo.InvariantCulture,
+                        LanguageResources.WebApiUserService_AccountNotFound, "Advertiser"));
+                }
+
+                smdAccount = accountRepository.GetByUserId(cash4Ads.Id, AccountType.VirtualAccount);
+                if (smdAccount == null)
+                {
+                    throw new SMDException(string.Format(CultureInfo.InvariantCulture,
+                        LanguageResources.WebApiUserService_AccountNotFound, "Cash4Ads"));
+                }
 
             // Perform Transactions
-            PerformAdCampaignTransactions(request, advertisersAccount, adClickRate, adViewersAccount, adViewersCut, referringUser, smdsCut,
-                affiliatesAccount, smdAccount, adCampaign);
+
+            PerformTransaction(request.AdCampaignId, null, advertisersAccount, adClickRate, 1, TransactionType.SurveyWatched, false);
+
+            // Credit AdViewer
+            PerformTransaction(request.AdCampaignId, null, adViewersAccount, adClickRate, 2, TransactionType.SurveyWatched);
+            transactionRepository.SaveChanges();
 
             return new BaseApiResponse
-                   {
-                       Status = true,
-                       Message = "Success"
-                   };
+            {
+                Status = true,
+                Message = LanguageResources.Success
+            };
         }
 
+
+        public async Task<BaseApiResponse> UpdateTransactionOnPaidProfileQuestionAnswer(AdViewedRequest request, ProductActionRequest pRequest, double rewardCentz, int AdvertiserCompanyId)
+        {
+            // Get Ad Viewer
+            User adViewer = await UserManager.FindByIdAsync(request.UserId);
+            if (adViewer == null)
+            {
+                throw new SMDException(LanguageResources.WebApiUserService_InvalidUserId);
+            }
+
+            User cash4Ads = await UserManager.FindByEmailAsync(SystemUsers.Cash4Ads);
+            if (cash4Ads == null)
+            {
+                throw new SMDException(string.Format(CultureInfo.InvariantCulture, LanguageResources.WebApiUserService_InvalidUser,
+                    "Cash4Ads"));
+            }
+
+            // Validates if Ad Campaing Exists
+
+
+            // Begin Transaction
+            // Ad Viewer will get 50% and other 50% will be divided b/w SMD (30%), Affiliate(20%) (Referrer) if exists
+            double? adClickRate = rewardCentz;
+            double? adViewersCut = adClickRate; // commenting for pilot launch, now smd hace no percentage and all the money will go to user account from advertiser account. So there will be 2 transactions now advertiser debit transaction and user credit transaction ((adClickRate * 50) / 100); 
+            double? smdsCut = 0; //adViewersCut;
+            Account adViewersAccount;
+            Account advertisersAccount;
+            Account smdAccount;
+
+            // Sets up transaction 
+            // Gets Accounts required
+            // Get business Accounts for Each Individual involved in this transaction
+            adViewersAccount = accountRepository.GetByUserId(request.UserId, AccountType.VirtualAccount);
+            if (adViewersAccount == null)
+            {
+                throw new SMDException(string.Format(CultureInfo.InvariantCulture,
+                    LanguageResources.WebApiUserService_AccountNotFound, "Current User"));
+            }
+
+            advertisersAccount = accountRepository.GetByCompanyId(AdvertiserCompanyId, AccountType.VirtualAccount);
+            if (advertisersAccount == null)
+            {
+                throw new SMDException(string.Format(CultureInfo.InvariantCulture,
+                    LanguageResources.WebApiUserService_AccountNotFound, "Advertiser"));
+            }
+
+            smdAccount = accountRepository.GetByUserId(cash4Ads.Id, AccountType.VirtualAccount);
+            if (smdAccount == null)
+            {
+                throw new SMDException(string.Format(CultureInfo.InvariantCulture,
+                    LanguageResources.WebApiUserService_AccountNotFound, "Cash4Ads"));
+            }
+
+            // Perform Transactions
+          
+
+            PerformTransaction(request.AdCampaignId, null, advertisersAccount, adClickRate, 1, TransactionType.ProfileQuestionAnswered, false);
+
+            // Credit AdViewer
+
+
+            PerformTransaction(request.AdCampaignId, null, adViewersAccount, adViewersCut, 2, TransactionType.ProfileQuestionAnswered);
+
+
+            transactionRepository.SaveChanges();
+
+            return new BaseApiResponse
+            {
+                Status = true,
+                Message = LanguageResources.Success
+            };
+        }
+        
+
+
+        #endregion
+
+        #region Other
+
+
+
+
         /// <summary>
-        /// Archive Account
+        /// Get User By Id Async
         /// </summary>
-        public async Task<BaseApiResponse> Archive(string userId)
+        public async Task<LoginResponse> GetById(string userId)
         {
             User user = await UserManager.FindByIdAsync(userId);
             if (user == null)
@@ -586,11 +903,124 @@ namespace SMD.Implementation.Services
                 throw new SMDException(LanguageResources.WebApiUserService_InvalidUserId);
             }
 
-            // Archive Account
-            user.Status = (int)UserStatus.InActive;
+            return new LoginResponse
+                   {
+                       Status = true,
+                       Message = LanguageResources.Success,
+                       User = user
+                   };
+        }
 
-            // Save Changes
-            await UserManager.UpdateAsync(user);
+        /// <summary>
+        /// Resets User Responses for Products
+        /// </summary>
+        public void ResetProductsResponses()
+        {
+            adCampaignRepository.ResetUserProductsResponses();
+        }
+
+        /// <summary>
+        /// Handles Response for Products
+        /// Ad Clicked/Viewed, Question Answered, Survey Selection
+        /// </summary>
+        public async Task<BaseApiResponse> ExecuteActionOnProductsResponse(ProductActionRequest response)
+        {
+            //if (request.Type)
+            //{
+            //    throw new SMDException(LanguageResources.WebApiUserService_ProductTypeNotProvided);
+            //}
+
+            // Check if user exists
+            User user = await UserManager.FindByIdAsync(response.UserId);
+            if (user == null)
+            {
+                throw new SMDException(LanguageResources.WebApiUserService_InvalidUserId);
+            }
+
+            // Profile Question  Event
+            // (int?)ProductType.Question 3
+            if ( response.Type ==  CampaignType.ProfileQuestion)
+                ExecuteProfileQuestionEvent(response);
+
+            // Ad Clicked / Viewed
+            if (response.Type == CampaignType.GameAd || response.Type == CampaignType.VideoAd)
+                await ExecuteVideoOrGameEvent(response);
+
+            // Update Survey User Selection
+            if (response.Type == CampaignType.SurveyQuestion)
+            {
+                ExecuteSurveyQuestionEvent((int)response.ItemId.Value, response.UserId, response.SqUserSelection, null, response.companyId.Value, response);
+            }
+
+
+            return new BaseApiResponse
+            {
+                Status = true,
+                Message = LanguageResources.Success
+            };
+        }
+
+        /// <summary>
+        /// Gets Combination of Ads, Surveys, Questions as paged view
+        /// </summary>
+        public GetProductsResponse GetProducts(GetProductsRequest request)
+        {
+            List<GetProducts_Result> products = adCampaignRepository.GetProducts(request).ToList();
+
+            //no ads found in this page then insert the manual pages
+            if (products.FindAll( g=> g.Type == "Ad").Count == 0)
+            {
+                
+
+                string companylogo = "";
+
+                var specialads = adCampaignRepository.GetSpecialAdCampaigns(out companylogo);
+                var gamead = specialads.Where(g => g.Type == 4).FirstOrDefault();
+                var videoad = specialads.Where(g => g.Type == 1).FirstOrDefault();
+
+                if (gamead != null)
+                {
+                    var game = gameRepositry.GetRandomGame();
+                    var freeGame = new GetProducts_Result { ItemId = gamead.CampaignId, ItemName = gamead.CampaignName, Type = "freeGame", ItemType = 3, AdImagePath = "http://manage.cash4ads.com/" + gamead.LogoUrl, AdClickRate = 0, AdvertisersLogoPath = companylogo, BuyItImageUrl = "http://manage.cash4ads.com/" + gamead.BuyItImageUrl, GameId = game.GameId, GameUrl = game.GameUrl, AdVerifyQuestion = videoad.VerifyQuestion, AdAnswer1 = videoad.Answer1, AdAnswer2 = videoad.Answer2, AdAnswer3 = videoad.Answer3, AdCorrectAnswer = videoad.CorrectAnswer };
+                    products.Insert(0, freeGame);
+                }
+
+
+                int insertionPoint = 3;
+                if (products.Count < 3)
+                    insertionPoint = 1;
+
+                if (videoad != null)
+                {
+                    var freevideoAd = new GetProducts_Result { ItemId = videoad.CampaignId, ItemName = videoad.CampaignName, Type = "freeAd", ItemType = 1, AdImagePath = "http://manage.cash4ads.com/" + videoad.LogoUrl, AdClickRate = 0, AdvertisersLogoPath = companylogo, BuyItImageUrl = "http://manage.cash4ads.com/" + videoad.BuyItImageUrl, GameId = 1, GameUrl = "", AdVideoLink = videoad.LandingPageVideoLink, VideoLink2 = videoad.VideoLink2, AdVerifyQuestion = videoad.VerifyQuestion, AdAnswer1 = videoad.Answer1, AdAnswer2 = videoad.Answer2, AdAnswer3 = videoad.Answer3, AdCorrectAnswer = videoad.CorrectAnswer };
+                    products.Insert(insertionPoint, freevideoAd);
+                }
+            }
+
+            return new GetProductsResponse
+            {
+                Status = true,
+                Message = LanguageResources.Success,
+                Products = products,
+                TotalCount = products.Any() && products[0].TotalItems.HasValue ? products[0].TotalItems.Value : 0
+            };
+        }
+
+        /// <summary>
+        /// Archive Account
+        /// </summary>
+        public async Task<BaseApiResponse> ArchiveRequestConfirmation(string userId,string  token, string confirmationLink)
+        {
+            User user = await UserManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                throw new SMDException(LanguageResources.WebApiUserService_InvalidUserId);
+            }
+
+            user.DeleteConfirmationToken = token;
+            UserManager.Update(user);
+
+            await emailManagerService.SendDeleteAccountConfirmationEmail(user, confirmationLink);
 
             return new BaseApiResponse
                    {
@@ -599,25 +1029,122 @@ namespace SMD.Implementation.Services
                    };
         }
 
+
+        /// <summary>
+        /// Archive Account
+        /// </summary>
+        public bool Archive(string userId, string confirmationToken)
+        {
+            User user =  UserManager.FindById(userId);
+            if (user == null)
+            {
+                throw new SMDException(LanguageResources.WebApiUserService_InvalidUserId);
+            }
+
+            if (user.DeleteConfirmationToken != confirmationToken)
+            {
+                throw new SMDException("Invalid confiramtion token or token expired");
+            }
+
+            Random rnd = new Random();
+            int numb = rnd.Next(100);
+
+
+            user.ContactNotes = "Archived user on app request=" + DateTime.Now.ToLongDateString() + ", old username=" + user.UserName + ", old email=" + user.Email;
+
+            // Archive Account
+            user.Status = (int)UserStatus.InActive;
+            user.ModifiedDateTime = DateTime.Now;
+            user.UserName = user.UserName + "_archived" + numb.ToString();
+            user.Email = user.Email + "_archived" + numb.ToString();
+            user.DeleteConfirmationToken = "";
+
+            var company = companyRepository.Find(user.CompanyId.Value);
+            if (company != null)
+            {
+                company.IsDeleted = true;
+                company.DeleteDate = DateTime.Now;
+                company.AboutUsDescription = user.ContactNotes;
+
+                companyRepository.Update(company);
+                companyRepository.SaveChanges();
+
+            }
+
+
+            //removing any provider logins.
+            var logins = UserManager.GetLogins(userId);
+            if (logins != null && logins.Count > 0)
+                foreach (var item in logins)
+                {
+                    UserManager.RemoveLogin(userId, item);
+                }
+
+
+            // Save Changes
+            UserManager.Update(user);
+
+            //reset virtual accounts balance and transferring it back to Cash4ads virtual account
+            TransactionManager.ArchiveUserResetVirtualAccountBalance(user.CompanyId.Value);
+
+            return true;
+        }
+
         /// <summary>
         /// Update Profile
         /// </summary>
         public async Task<BaseApiResponse> UpdateProfile(UpdateUserProfileRequest request)
         {
+            
+            
             User user = await UserManager.FindByIdAsync(request.UserId);
             if (user == null)
             {
                 throw new SMDException(LanguageResources.WebApiUserService_InvalidUserId);
             }
 
-            // Update User
-            user.Update(request);
 
-            // Update Profile Image
-            UpdateProfileImage(request, user);
+            if (!string.IsNullOrEmpty(request.Title))
+            {
+                user.Title = request.Title;
+            }
+
+            if (request.DOB.HasValue)
+            {
+                user.DOB = request.DOB;
+            }
+
+            if (request.Gender.HasValue)
+            {
+                user.Gender = request.Gender;
+            }
+                user.IndustryId = request.ProfessionID;
+                user.FullName= request.FullName;
+
+
+            if (! string.IsNullOrEmpty( request.Phone1))
+            {
+
+                var phone = Regex.Replace(request.Phone1, @"\s+", "");
+                phone = phone.Replace ("-","");
+                user.Phone1 = phone;
+            }
+
+            user.Phone1CodeCountryID = request.Phone1CountryID;
+
+            if (request.optDealsNearMeEmails.HasValue)
+                user.optDealsNearMeEmails = request.optDealsNearMeEmails.Value;
+
+
+            if (request.optPushNewDeals.HasValue)
+                user.optPushNewDeals = request.optPushNewDeals.Value;
+
+            if (request.optPushNewPicturePoll.HasValue)
+                user.optPushNewPicturePoll = request.optPushNewPicturePoll.Value;
+
 
             // Save Changes
-            await UserManager.UpdateAsync(user);
+           await UserManager.UpdateAsync(user);
 
             return new BaseApiResponse
             {
@@ -625,7 +1152,55 @@ namespace SMD.Implementation.Services
                 Message = "Success"
             };
         }
-        
+
+        ///// <summary>
+        ///// Update Profile Image
+        ///// </summary>
+        //public async Task<UpdateProfileImageResponse> UpdateProfileImage(UpdateUserProfileRequest request)
+        //{
+        //    User user = await UserManager.FindByIdAsync(request.UserId);
+            
+        //    if (user == null)
+        //    {
+        //        throw new SMDException(LanguageResources.WebApiUserService_InvalidUserId);
+        //    }
+
+        //    // Update Profile Image
+        //    UpdateProfileImage(request, user);
+        //    companyRepository.updateCompanyLogo(user.ProfileImage, user.CompanyId.Value);
+        //    // Save Changes
+        //   // await UserManager.UpdateAsync(user); // because now we will save profile image in company 
+
+        //    return new UpdateProfileImageResponse
+        //           {
+        //               ImageUrl = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + user.ProfileImage,
+        //               Status = true,
+        //               Message = "Success"
+        //           };
+        //}
+
+        /// <summary>
+        /// Get Logged-In User profile 
+        /// </summary>
+        public User GetLoggedInUser(string userid)
+        {
+            User user = null;
+            if (!string.IsNullOrEmpty(userid) && userid != "0")
+            {
+                user = UserManager.FindById(userid);
+            }
+            else
+            {
+                user = UserManager.FindById(productRepository.LoggedInUserIdentity);
+            }
+           
+            if (user == null)
+            {
+                throw new SMDException(LanguageResources.WebApiUserService_InvalidUserId);
+            }
+            return user;
+        }
+
         /// <summary>
         /// Confirm Email
         /// </summary>
@@ -638,6 +1213,10 @@ namespace SMD.Implementation.Services
             }
 
             await emailManagerService.SendRegisrationSuccessEmail(userId);
+
+            var user = UserManager.FindById(userId);
+
+            emailManagerService.NewUserSignupToAdmin(user.Id, user.FullName, user.Email, user.Phone1, "Dashboard");
 
             // Login user
             LoginUser(userId);
@@ -654,24 +1233,28 @@ namespace SMD.Implementation.Services
         /// </summary>
         public async Task<LoginResponse> RegisterCustom(RegisterCustomRequest request)
         {
-            var user = new User { UserName = request.Email, Email = request.Email, FullName = request.FullName };
+            var user = new User { UserName = request.Email, Email = request.Email, FullName = request.FullName, DOB = null, Status = 1 };
             var result = await UserManager.CreateAsync(user, request.Password);
             if (!result.Succeeded)
             {
                 return ThrowRegisterUserErrors(result);
             }
 
-            var addUserToRoleResult = await UserManager.AddToRoleAsync(user.Id, Roles.User); // Only Type 'User' Role will be registered from app
+            var addUserToRoleResult = await UserManager.AddToRoleAsync(user.Id, SecurityRoles.EndUser_Admin); // Only Type 'User' Role will be registered from app
             if (!addUserToRoleResult.Succeeded)
             {
-                throw new InvalidOperationException(string.Format("Failed to add user to role {0}", Roles.User));
+                throw new InvalidOperationException(string.Format("Failed to add user to role {0}", SecurityRoles.EndUser_Admin));
             }
-
+            int companyId = companyRepository.createCompany(user.Id, request.Email, request.FullName,Guid.NewGuid().ToString());
             var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
             var callbackUrl = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority +
                               "/Api_Mobile/Register/Confirm/?UserId=" + user.Id + "&Code=" + HttpUtility.UrlEncode(code);
             await
                 emailManagerService.SendAccountVerificationEmail(user, callbackUrl);
+
+
+            accountService.AddAccountsForNewUser(companyId);
+            
 
             return new LoginResponse
             {
@@ -686,7 +1269,8 @@ namespace SMD.Implementation.Services
         /// </summary>
         public async Task<LoginResponse> RegisterExternal(RegisterExternalRequest request)
         {
-            var user = new User { UserName = request.Email, Email = request.Email, FullName = request.FullName };
+
+            var user = new User { UserName = request.Email, Email = request.Email, FullName = request.FullName, DOB = null, Status = 1, ProfileImage = request.ProfilePicturePath, DevicePlatform = request.Client == "android" ? 1 : 0, optMarketingEmails = true, optLatestNewsEmails = true, optDealsNearMeEmails = true };
             var result = await UserManager.CreateAsync(user);
             if (!result.Succeeded)
             {
@@ -700,8 +1284,34 @@ namespace SMD.Implementation.Services
                 return ThrowRegisterUserErrors(result);
             }
 
+            var addUserToRoleResult = await UserManager.AddToRoleAsync(user.Id, SecurityRoles.EndUser_Admin); // Only Type 'User' Role will be registered from app
+            if (!addUserToRoleResult.Succeeded)
+            {
+                throw new InvalidOperationException(string.Format("Failed to add user to role {0}", SecurityRoles.EndUser_Admin));
+            }
+            int companyId = companyRepository.createCompany(user.Id, request.Email, request.FullName, Guid.NewGuid().ToString());
+
+
+            accountService.AddAccountsForNewUser(companyId);
+            TransactionManager.UserSignupFreeGiftBalanceTransaction(500, companyId);
+
+
+            //handling notificationtoken
+            if (!string.IsNullOrEmpty(request.NotificationToken))
+            {
+
+                var token = new AspNetUsersNotificationToken { UserId = user.Id, ClientType = user.DevicePlatform, DateAdded = DateTime.Now, Token = request.NotificationToken };
+
+                aspNetUsersNotificationTokenRepository.Add(token);
+                aspNetUsersNotificationTokenRepository.SaveChanges();
+            }
+
             // Login user
             LoginUser(request.Email);
+
+
+            await emailManagerService.SendRegisrationSuccessEmail(user.Id);
+            emailManagerService.NewUserSignupToAdmin(user.Id, user.FullName, user.Email, user.Phone1, "App");
 
             return new LoginResponse
             {
@@ -727,15 +1337,63 @@ namespace SMD.Implementation.Services
                     };
                 }
 
-                UserLogin userLoginInfo = user.UserLogins.FirstOrDefault(
-                    u => u.LoginProvider == request.LoginProvider && u.ProviderKey == request.LoginProviderKey);
 
+                //updating logged in user
+                if (user.Company != null)
+                {
+                    var company = companyRepository.Find(user.CompanyId.Value);
+                    if ( company != null)
+                    {
+                        company.BillingCity = request.City;
+                        company.City = request.City;
+
+                        var country = countryRepository.GetSearchedCountries(request.Country).FirstOrDefault();
+                        
+                        if ( country != null)
+                        {
+                            company.BillingCountryId = country.CountryId;
+                        }
+
+                        companyRepository.Update(company);
+                        companyRepository.SaveChanges();
+
+                    }
+                }
+                else
+                {
+                   
+                    var CompanyId = companyRepository.createCompany(user.Id, request.Email, request.FullName, user.AuthenticationToken);
+                    accountService.AddAccountsForNewUser(CompanyId);
+                    TransactionManager.UserSignupFreeGiftBalanceTransaction(500, CompanyId);
+                    
+                }
+
+                UserLogin userLoginInfo = user.UserLogins.FirstOrDefault(
+                    u => u.LoginProvider == request.LoginProvider);
+
+
+                //provider did not match hence creating the provider profile.
                 if (userLoginInfo == null)
                 {
-                    return new LoginResponse
+
+                    UserLogin oLogin = new UserLogin();
+                    oLogin.LoginProvider = request.LoginProvider;
+                    oLogin.ProviderKey = request.LoginProviderKey;
+                    oLogin.UserId = user.Id;
+
+                    user.UserLogins.Add(oLogin);
+                    await UserManager.UpdateAsync(user);
+                }
+                else// we have the provider already now checking for the API key
+                {
+                    if ( userLoginInfo.ProviderKey !=  request.LoginProviderKey)
                     {
-                        Message = LanguageResources.WebApiUserService_ProviderKeyInvalid
-                    };
+                        return new LoginResponse
+                        {
+                            Message = LanguageResources.WebApiUserService_ProviderKeyInvalid
+                        };
+                    }
+                       
                 }
 
                 if (user.Status == (int)UserStatus.InActive)
@@ -745,6 +1403,35 @@ namespace SMD.Implementation.Services
                         Message = LanguageResources.WebApiUserService_InactiveUser
                     };
                 }
+                // update GUID 
+                user.LastLoginTime = DateTime.Now;
+                user.ProfileImage = request.ProfilePicturePath;
+                user.DevicePlatform =  request.Client  == "android" ? 1 : 0;
+
+                user.CityName = request.City;
+                user.CountryName = request.Country;
+
+                user.LastKnownLocationLat = request.LocationLat;
+                user.LastKnownLocationLong = request.LocationLong;
+
+
+                user.AuthenticationToken = Guid.NewGuid().ToString();
+                
+                await UserManager.UpdateAsync(user);
+
+
+                //handling notificationtoken
+                if ( !string.IsNullOrEmpty( request.NotificationToken ))
+                {
+
+                    var token = new AspNetUsersNotificationToken{ UserId = user.Id, ClientType = user.DevicePlatform, DateAdded = DateTime.Now, Token = request.NotificationToken};
+
+                    aspNetUsersNotificationTokenRepository.Add(token);
+                    aspNetUsersNotificationTokenRepository.SaveChanges();
+                }
+
+
+                
 
                 // Login user
                 LoginUser(request.Email);
@@ -762,7 +1449,10 @@ namespace SMD.Implementation.Services
                 Email = request.Email,
                 FullName = request.FullName,
                 LoginProvider = request.LoginProvider,
-                LoginProviderKey = request.LoginProviderKey
+                LoginProviderKey = request.LoginProviderKey,
+                 Client = request.Client,
+                  NotificationToken = request.NotificationToken,
+                  ProfilePicturePath = request.ProfilePicturePath
             });
         }
 
@@ -788,14 +1478,18 @@ namespace SMD.Implementation.Services
                 };
             }
 
-            if (user.Status == (int)UserStatus.InActive)
-            {
-                return new LoginResponse
-                {
-                    Message = LanguageResources.WebApiUserService_InactiveUser
-                };
-            }
-
+            //if (user.Status == (int)UserStatus.InActive)
+            //{
+            //    return new LoginResponse
+            //    {
+            //        Message = LanguageResources.WebApiUserService_InactiveUser
+            //    };
+            //}  // always unarchive  user
+            user.Status = (int)UserStatus.Active;
+            // update GUID 
+            user.AuthenticationToken = Guid.NewGuid().ToString();
+           
+            await UserManager.UpdateAsync(user);
             // Login user
             LoginUser(request.UserName);
 
@@ -832,7 +1526,7 @@ namespace SMD.Implementation.Services
                 throw new SMDException(LanguageResources.WebApiUserService_LoginInfoNotFound);
             }
 
-            user.StripeCustomerId = customerId;
+            user.Company.StripeCustomerId = customerId;
             await UserManager.UpdateAsync(user);
         }
 
@@ -847,7 +1541,7 @@ namespace SMD.Implementation.Services
                 throw new SMDException(LanguageResources.WebApiUserService_LoginInfoNotFound);
             }
 
-            return user.StripeCustomerId;
+            return user.Company.StripeCustomerId;
         }
 
 
@@ -862,7 +1556,7 @@ namespace SMD.Implementation.Services
                 throw new SMDException("No such user with provided email address!");
             }
 
-            return user.StripeCustomerId;
+            return user.Company.StripeCustomerId;
         }
 
         /// <summary>
@@ -876,8 +1570,106 @@ namespace SMD.Implementation.Services
                 throw new SMDException("No such user with provided user Id!");
             }
 
-            return user; 
+            return user;
         }
+
+
+        public User GetUserByEmail(string email)
+        {
+            User user = UserManager.FindByEmail(email);
+           
+
+            return user;
+        }
+
+
+        public User GetUserByCompanyId(int CompanyId)
+        {
+
+            return aspnetUsersRepository.GetUserbyCompanyId(CompanyId);
+
+        }
+
+
+        /// <summary>
+        /// Base Data for User Profile 
+        /// </summary>
+        public UserProfileBaseResponseModel GetBaseDataForUserProfile()
+        {
+            Company company = companyRepository.GetCompanyById();
+            
+            return new UserProfileBaseResponseModel
+            {
+               Countries = countryRepository.GetAllCountries().ToList(),
+               //Cities = company != null? cityRepository.GetAllCitiesOfCountry(company.BillingCountryId??0).ToList(): null,
+               Industries = industryRepository.GetAll().ToList(),
+               Educations = educationRepository.GetAllEducations().ToList(),
+               UserRoles = this.RoleManager.Roles.Where(g => g.Id.StartsWith("EndUser")).ToList(), //   manageUserRepository.getUserRoles().ToList()
+               GetApprovalCount = companyRepository.GetApprovalCount(),
+               GetCouponreviewCount = couponRatingReviewRepository.CouponReviewCount()
+            };
+        }
+        public int generateAndSmsCode(string userId, string phone)
+        {
+            User user = UserManager.FindById(userId);
+            if (user == null)
+            {
+                throw new SMDException("No such user with provided user Id!");
+            }
+            Random _rdm = new Random(); 
+            int code = _rdm.Next(1000, 9999);
+            //if (String.IsNullOrEmpty(user.Phone1))
+            //    return 0;
+            if (!string.IsNullOrEmpty(phone))
+            {
+                smsService.SendSMS(phone, "Your verification code for Cash4Ads profile update is " + code.ToString() + ". Please enter this code in Cash4Ads app to update your profile.");
+            }
+            else
+            {
+                smsService.SendSMS(user.Phone1, "Your verification code for Cash4Ads profile update is " + code.ToString() + ". Please enter this code in Cash4Ads app to update your profile.");
+            }
+
+            
+            //var messagingService = new MessagingService("omar.c@me.com", "DBVgYFGNCWwK");
+            //if (!string.IsNullOrEmpty(phone))
+            //{
+            //    messagingService.SendMessage(new SmsMessage(phone, "Your verification code for Cash4Ads profile update is " + code.ToString() + ". Please enter this code in Cash4Ads app to update your profile.", "EX0205631"));
+            //} else
+            //{
+            //    messagingService.SendMessage(new SmsMessage(user.Phone1, "Your verification code for Cash4Ads profile update is " + code.ToString() + ". Please enter this code in Cash4Ads app to update your profile.", "EX0205631"));
+            //}
+            
+            return code;
+        }
+        public User getUserByAuthenticationToken(string token)
+        {
+          return  companyRepository.getUserBasedOnAuthenticationToken(token);
+        }
+
+
+        public string GetRoleNameByRoleId(string RoleId)
+        {
+
+            return this.RoleManager.Roles.Where(g => g.Id == RoleId).SingleOrDefault().Name; //   manageUserRepository.getUserRoles().ToList()
+           
+        }
+
+
+        public int GetUserProfileCompletness(string UserId)
+        {
+            return aspnetUsersRepository.GetUserProfileCompletness(UserId);
+        }
+        public GetApprovalCount_Result GetApprovalCount()
+        {
+            return companyRepository.GetApprovalCount();
+        
+        }
+       
+
+        #endregion
+
+     
+       
         #endregion
     }
 }

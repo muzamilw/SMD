@@ -1,0 +1,156 @@
+.set-border {
+    border: 1px #d9d9d9 solid;
+}
+
+.padding10 {
+    padding: 0.625rem;
+}
+
+.listview {
+    display: block;
+    width:899px;
+    height: auto;
+ 
+}
+.parentList{
+    height:400px;
+       overflow-y: scroll;
+    overflow-x: hidden;
+        width: 99%;
+}
+.childList
+{
+        width: 118px !important;
+    font-size: 12px;
+       background-color:white !important;
+}
+    .listview:before, .listview:after {
+        display: table;
+        content: "";
+    }
+
+    .listview .list {
+        display: block;
+        width: 100%;
+        padding: 8px 8px 4px 48px;
+        border: 1px transparent solid;
+      
+        border-bottom-color: #eeeeee;
+        position: relative;
+        border-color: #eeeeee;
+    }
+.listview .list span{
+    cursor:pointer;
+}
+.childList {
+        cursor:pointer;
+}
+    .listview.list-type-tiles .list {
+        display: block;
+        float: left;
+        padding: 6px 4px 4px 10px;
+        width: 872px;
+        min-height: 52px;
+        margin: .625rem;
+        margin-left:0px;
+    background-color: white;
+    }
+    #ProfileQtsList:nth-child(even) {
+    background-color:white!important;
+}
+
+#ProfileQtsList:nth-child(odd) {
+    background-color: #f9f9f9!important;
+}
+
+#lv2:nth-child(odd) {
+    background-color: #f9f9f9!important;
+}
+   #lv2:nth-child(even) {
+    background-color:white!important;
+}
+   #lv1:nth-child(odd) {
+    background-color: #f9f9f9!important;
+}
+      #lv1:nth-child(even) {
+    background-color:white!important;
+}
+    .listview .list.active {
+        background-color: #d1e8ff;
+        border-color: #64b4db;
+    }
+
+    .listview .list .list-icon {
+        position: absolute;
+        left: 0;
+        top: 0;
+        margin: 8px;
+        width: 32px;
+        height: 32px;
+        font-size: 32px;
+        text-align: center;
+    }
+
+    .listview.list-type-tiles .list .list-icon {
+        width: 48px;
+        height: 48px;
+        font-size: 48px;
+        text-align: center;
+        top: 0;
+        left: 0;
+        margin: 2px;
+    }
+
+    .listview.list-type-tiles .list .list-title {
+          margin-top: 8px;
+    display: inline-block;
+    /*min-width: 140px;*/
+}
+    
+.parent-list-title{
+      margin-top: 8px;
+        display: block;
+        height:30px;
+}
+
+.clear-both {
+    clear: both;
+}
+.chlidList {
+    display:none;
+}
+.active .chlidList {
+    display:block;
+}
+.chlidList .list.active {
+     background-color: #4dc5d3  !important;
+}
+.modelHeading{
+        padding-left: 0.825rem;
+    padding-bottom: 0.5rem;
+    font-size: 14px;
+ 
+}
+#lv1 .list {
+    background-color:white; overflow:hidden;
+}
+#lv2 .list {
+    background-color:white; overflow:hidden;
+}
+
+
+
+.filterCrtTilesClr {
+        background-color: #81d3dc!important;
+    border-color: #81d3dc!important;
+    text-align: center;
+    border-radius: 5px;
+    color: white;
+}
+.active {
+  background-color: #f9f9f9!important;
+   border-color: #f9f9f9!important;
+}
+.ListRowHov:hover {
+    background-color: #f9f9f9;
+}

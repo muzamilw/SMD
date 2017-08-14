@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Net;
 using System.Web.Configuration;
 using PayPal.AdaptivePayments.Model;
 using PayPal.Manager;
@@ -23,9 +23,9 @@ namespace SMD.Implementation.Services
         {
             // # PayRequest
             // The code for the language in which errors are returned
-            var envelopeRequest = new RequestEnvelope {errorLanguage = "en_US"};
+            var envelopeRequest = new RequestEnvelope { errorLanguage = "en_US" };
 
-            var listReceiver = request.RecieverEmails.Select(recieverEmail => new Receiver(request.Amount) {email = recieverEmail}).ToList();
+            var listReceiver = request.RecieverEmails.Select(recieverEmail => new Receiver(request.Amount) { email = recieverEmail }).ToList();
 
             var listOfReceivers = new ReceiverList(listReceiver);
 
@@ -42,6 +42,7 @@ namespace SMD.Implementation.Services
                              };
 
             var adaptivePaymentsService = new AdaptivePaymentsService(sdkConfig);
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             var payResponse = adaptivePaymentsService.Pay(requestPay);
             List<ErrorData> errorData = payResponse.error;
             if (errorData.Count > 0)

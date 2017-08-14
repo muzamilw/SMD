@@ -1,0 +1,362 @@
+﻿@{
+    ViewBag.Title = "Store Details";
+}
+
+<div data-bind="visible: $root.isEditorVisible()" style="display: none">
+    <div class="col-lg-12">
+
+        <div class="row" id="user-profile">
+            <div class="col-lg-12 col-md-8 col-sm-8" style="padding-bottom: 10px;">
+                <div class="clearfix ">
+                    <div class="col-xs-12" style="text-align: right; padding-right:14px;margin-bottom:1px; margin-top:10px;">
+                        <div style="float:right;margin-top:-9px;"><img data-bind="click: $root.closeEditDialog" src="/Content/Images/Close_Button.png" style="width:20px;height:20px;float:right;cursor:pointer;"></div>
+                        @*<button class="btn btn-default" id="saveBtn" data-bind="click:$root.closeEditDialog">Close</button>*@
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12" style="margin-left:8px;padding-right:32px;">
+                <div class="main-box clearfix" id="tabsHeader">
+                    <div class="tabs-wrapper profile-tabs">
+                        <ul class="nav nav-tabs" style="display:none;">
+                            <li class="active" id="generalInfoTab"><a href="#tab-generalinfo" data-toggle="tab">General Info</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade in active" id="tab-generalinfo">
+                                <div class="col-lg-12 form-horizontal">
+                                    <h3 class="group-header" style="margin-top:20px;">
+                                        Approve - Reject PayPall
+                                    </h3>
+                                    <div class="col-lg-12 col-md-12 col-sm-12" style="padding-bottom:20px" data-bind="with:$root.selectedCompany">
+                                        <div style="padding-left:0px;padding-right:0px;padding-bottom:5px; min-height: 250.90px;background-color:#f9f9f9;">
+                                            <div class="col-lg-4 text-left">
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class="col-lg-4">
+                                                        <label class="control-label" style="padding-top:10px;padding-left:10px;font-weight:bold">Account Profile</label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class=" col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;color:lightgray">Title:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="text:FirstName" style="font-size:small"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class=" col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;color:lightgray">E-mail address:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="text:Email" style="font-size:small"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class=" col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;color:lightgray">Gender:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="text:Gender==1?'Male':'Female'" style="font-size:small"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class=" col-lg-4 text-right" style="font-size:11px">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;color:lightgray">Mobile no:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="text:Mobile" style="font-size:small"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class=" col-lg-4 text-right" style="font-size:11px">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;color:lightgray">Date of birth:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="dateString:DateOfBirth,datePattern: 'DD/MM/YYYY'" style="font-size:small"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;display:none">
+                                                    <div class=" col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;color:lightgray">ID no:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="text:PassportNumber" style="font-size:small"></label>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-lg-4 text-left">
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class="col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:10px;padding-left:10px;font-size:11px;font-size:11px;color:lightgray">Business Name:</label>
+                                                    </div>
+                                                    <div class="col-lg-8" style="padding-top:10px;">
+                                                        <label data-bind="text:CompanyName" style="font-size:small"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class="col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;font-size:11px;color:lightgray">Website:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <a data-bind="text:WebsiteLink,attr: { href: WebsiteLink }" target="_blank" style="font-size:11px"></a>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class="col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;font-size:11px;color:lightgray">Sale phone no:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="text:SalesPhone" style="font-size:small"></label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group" style="margin-bottom:0px;display:none">
+                                                    <div class="col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;color:lightgray">Company Type:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="text:$root.company()" style="font-size:small"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;display:none">
+                                                    <div class="col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;font-size:11px;font-size:11px;color:lightgray">Company Reg No:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="text:CompanyRegistrationNo" style="font-size: small"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class="col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;color:lightgray">Sales Tex No:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="text:VatNumber" style="font-size:small"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;display:none">
+                                                    <div class="col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;color:lightgray">B.Start Date:</label>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <label data-bind="dateString:BusinessStartDate,datePattern: 'DD/MM/YYYY'" style="font-size:small"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class="col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;color:lightgray">Credit Card:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="text:StripeCustomerId==null ?'No':'Yes'" style="font-size:small"></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-4 text-left">
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class="col-lg-6">
+                                                        <label class="control-label" style="padding-top:10px;padding-left:10px;font-weight:bold">Billing Address</label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class=" col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;color:lightgray">Billing Address 1:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="text:BillingAddressLine1" style="font-size:small"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class=" col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;color:lightgray">Billing City:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="text:BillingCity" style="font-size:small"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class=" col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;color:lightgray">Billing State:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="text:BillingState" style="font-size:small"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class=" col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;color:lightgray">Billing Country:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label style="font-size:small" data-bind="text:BillingCountryName"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class="col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;color:lightgray">Billing E-mail:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="text:BillingEmail" style="font-size:small"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;display:none">
+                                                    <div class="col-lg-4 text-right">
+                                                        <label class="control-label" style="padding-top:0px;padding-left:10px;font-size:11px;color:lightgray">Billing phone no:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <label data-bind="text:BillingPhone" style="font-size:small"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom:0px;">
+                                                    <div class=" col-lg-4 text-right">
+                                                        <label style="font-size:11px;color:lightgray">Logo:</label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <img id="vehicleImage" alt="" style="width:60%;height:auto" data-bind="attr:{src:Logo!=null && Logo.startsWith('http') ? Logo : '/' + Logo }" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h3 class="group-header" style="margin-top:20px;">
+                                        PayOut History
+                                    </h3>
+                                    <div class="clearfix">
+                                        <div class="table-responsive">
+                                            <table id="subCategoriesTable" class="table table-striped table-hover">
+                                                <thead>
+                                                    <tr>
+
+                                                        @*<th class="GridHeaderFont_size" style="padding-left:7px;"><span>Company Name</span></th>*@
+                                                        <th class=" col-sm-2 GridHeaderFont_size"> <span>EventDate 1</span></th>
+                                                        @*<th class=" col-lg-2 GridHeaderFont_size"> <span>Email&nbsp;<span></span></span></th>*@
+                                                        <th class=" col-lg-1 GridHeaderFont_size"> <span>Centz</span></th>
+                                                        <th class=" col-lg-1 GridHeaderFont_size"> <span>$</span></th>
+                                                        <th class="col-lg-1 GridHeaderFont_size"> <span>Status 1</span></th>
+                                                        <th class="col-lg-2 GridHeaderFont_size"> <span>Reason 1</span></th>
+                                                        <th class="col-sm-2 GridHeaderFont_size"> <span>EventDate 2</span></th>
+                                                        <th class="col-lg-1 GridHeaderFont_size"> <span>Status 2</span></th>
+                                                        <th class=" col-lg-2 GridHeaderFont_size"> <span>Reason 2</span></th>
+
+
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody data-bind="foreach:$root.payOutPreviousHistory">
+                                                    <tr>
+                                                        @*<td data-bind="text:CompanyName"></td>*@
+                                                        <td style="font-size:12px" data-bind="dateString:StageOneEventDate,datePattern: 'DD/MM/YYYY'"></td>
+                                                        @*<td data-bind="text:Email"></td>*@
+
+                                                        <td data-bind="text:CentzAmount"></td>
+                                                        <td data-bind="text:DollarAmount"></td>
+                                                        <td data-bind="text:StageOneStatus==null?'Pending Approval':StageOneStatus==1?'Approved':StageOneStatus==2?'Rejected':StageOneStatus"></td>
+                                                        <td data-bind="text:StageOneRejectionReason"></td>
+                                                        <td data-bind="dateString:StageTwoEventDate,datePattern: 'DD/MM/YYYY'"></td>
+                                                        <td data-bind="text:StageTwoStatus==null?'Pending Paid out':StageTwoStatus==3 ?'Panding Investigation':StageTwoStatus==2?'Rejected':StageTwoStatus==4?'Paid out':StageTwoStatus"></td>
+                                                        <td data-bind="text:StageTwoRejectionReason"></td>
+
+
+
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div data-bind="with:$root.selectedPayPall">
+                                        <div class="col-lg-9">
+                                            <div class="form-group">
+                                                <div class="col-lg-4 text-right">
+                                                    <label class="control-label text-right tooltip-float">Target Payout Account</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" readonly class="form-control" data-bind="value:targetPayoutAccount">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <div class="form-group">
+                                                <div class="col-lg-4 text-right">
+                                                    <label class="control-label text-right tooltip-float">Centz Amount</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" readonly class="form-control" data-bind="value:centzAmount">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <div class="form-group">
+                                                <div class="col-lg-4 text-right">
+                                                    <label class="control-label text-right tooltip-float">Dollar Amount</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" readonly class="form-control" data-bind="value:dollarAmount">
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-lg-12 col-md-12 col-sm-12" data-bind="visible:$root.approval1">
+                                            <div style="padding-left:0px;padding-right:0px;padding-bottom:5px; padding:15px; min-height: 128.90px;background-color:#f9f9f9">
+                                                <div class="col-lg-9">
+                                                    <div class="form-group">
+                                                        <div class="col-lg-4 text-right">
+                                                            <label class="control-label text-right tooltip-float">Reason</label>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <textarea placeholder="Enter reason " style="resize: none" class="form-control" data-bind="value:rejectionReasonStage1"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-9">
+                                                    <div class="form-group">
+                                                        <div class="col-lg-4 text-right">
+
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <button class="btn  btn-success" id="saveBtn" data-bind="click:$root.onApprovePayOut">Approve</button>
+                                                            <button class="btn  btn-danger" id="delbtn" data-bind="click:$root.onRejectPayOut">Reject</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12" data-bind="visible:$root.approval2">
+                                            <div style="padding-left:0px;padding-right:0px;padding-bottom:5px; padding:15px; min-height: 128.90px;background-color:#f9f9f9">
+                                                <div class="col-lg-9">
+                                                    <div class="form-group">
+                                                        <div class="col-lg-4 text-right">
+                                                            <label class="control-label text-right tooltip-float">Reason2</label>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <textarea placeholder="Enter reason " style="resize: none" class="form-control" data-bind="value:rejectionReasonStage2"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-9">
+                                                    <div class="form-group">
+                                                        <div class="col-lg-4 text-right">
+
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <button class="btn  btn-success" id="saveBtn" data-bind="click:$root.onApprovePayOut">Approve</button>
+                                                            <button class="btn  btn-success" id="saveBtn" data-bind="click:$root.onInvestigationPayOut">Investigation</button>
+                                                            <button class="btn  btn-danger" id="delbtn" data-bind="click:$root.onRejectPayOut">Reject</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

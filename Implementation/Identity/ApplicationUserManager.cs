@@ -30,36 +30,8 @@ namespace SMD.Implementation.Identity
 
         public string LoggedInUserId { get { return HttpContext.Current.User.Identity.GetUserId(); } }
 
-        public string LoggedInUserRole {
-            get
-            {
-                if (!HttpContext.Current.User.Identity.IsAuthenticated ||
-                    string.IsNullOrEmpty(HttpContext.Current.User.Identity.GetUserId()))
-                {
-                    return string.Empty;
-                }
 
-                if (HttpContext.Current.User.IsInRole(Roles.User))
-                {
-                    return Roles.User;
-                }
-                if (HttpContext.Current.User.IsInRole(Roles.Adminstrator))
-                {
-                    return Roles.Adminstrator;
-                }
-                if (HttpContext.Current.User.IsInRole(Roles.Approver))
-                {
-                    return Roles.Approver;
-                }
-                if (HttpContext.Current.User.IsInRole(Roles.Editor))
-                {
-                    return Roles.Editor;
-                }
-
-                return Roles.User;
-            } 
-        }
-
+        
         /// <summary>
         /// Send Email
         /// </summary>
@@ -123,12 +95,15 @@ namespace SMD.Implementation.Identity
                 RequireLowercase = false,
                 RequireUppercase = false,
             };
+
             // Configure user lockout defaults
             manager.UserLockoutEnabledByDefault = true;
             manager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
             manager.MaxFailedAccessAttemptsBeforeLockout = 5;
             // Register two factor authentication providers. This application uses Phone and Emails as a step of receiving a code for verifying the user
             // You can write your own provider and plug in here.
+
+
             manager.RegisterTwoFactorProvider("PhoneCode", new PhoneNumberTokenProvider<User, string>
             {
                 MessageFormat = "Your security code is: {0}"
@@ -147,6 +122,11 @@ namespace SMD.Implementation.Identity
                     new DataProtectorTokenProvider<User, string>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
             return manager;
+
+            
         }
+
+
+
     }
 }

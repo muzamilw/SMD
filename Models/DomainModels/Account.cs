@@ -8,10 +8,10 @@ namespace SMD.Models.DomainModels
         public long AccountId { get; set; }
         public string AccountName { get; set; }
         public int? AccountType { get; set; }
-        public decimal? AccountBalance { get; set; }
-        public string UserId { get; set; }
+        public double? AccountBalance { get; set; }
+        public int? CompanyId { get; set; }
 
-        public virtual User AspNetUser { get; set; }
+        public virtual Company Company { get; set; }
         public virtual ICollection<Transaction> Transactions { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Practices.Unity;
+using SMD.Interfaces;
 using SMD.Interfaces.Repository;
 using SMD.Repository.BaseRepository;
 using SMD.Repository.Repositories;
@@ -19,7 +20,6 @@ namespace SMD.Repository
             unityContainer.RegisterType<IProfileQuestionRepository, ProfileQuestionRepository>();
             unityContainer.RegisterType<IAdCampaignRepository, AdCampaignRepository>();
             unityContainer.RegisterType<IProfileQuestionGroupRepository, ProfileQuestionGroupRepository>();
-            unityContainer.RegisterType<IAdCampaignResponseRepository, IAdCampaignResponseRepository>();
             unityContainer.RegisterType<IAdCampaignTargetCriteriaRepository, AdCampaignTargetCriteriaRepository>();
             unityContainer.RegisterType<IAdCampaignTargetLocationRepository, AdCampaignTargetLocationRepository>();
             unityContainer.RegisterType<ICountryRepository, CountryRepository>();
@@ -40,6 +40,60 @@ namespace SMD.Repository
             unityContainer.RegisterType<ITaxRepository, TaxRepository>();
             unityContainer.RegisterType<IInvoiceDetailRepository, InvoiceDetailRepository>();
             unityContainer.RegisterType<IEducationRepository, EducationRepository>();
+            unityContainer.RegisterType<ITransactionLogRepository, TransactionLogRepository>();
+            unityContainer.RegisterType<ISurveyQuestionResponseRepository, SurveyQuestionResponseRepository>();
+            unityContainer.RegisterType<IAdCampaignResponseRepository, AdCampaignResponseRepository>();
+            unityContainer.RegisterType<ICompanyRepository, CompanyRepository>();
+            unityContainer.RegisterType<IManageUserRepository, ManageUserRepository>();
+            unityContainer.RegisterType<ICouponCategoryRepository, CouponCategoryRepository>();
+            unityContainer.RegisterType<ICampaignCategoriesRepository, CampaignCategoriesRepository>();
+          
+            unityContainer.RegisterType<IUserFavouriteCouponRepository, UserFavouriteCouponRepository>();
+            unityContainer.RegisterType<ICompanyAspNetUsersRepository, CompanyAspNetUsersRepository>();
+            unityContainer.RegisterType<ICouponRepository, CouponRepository>();
+            unityContainer.RegisterType<ISectionRepository, SectionRepository>();
+            unityContainer.RegisterType<IPhraseRepository, PhraseRepository>();
+            unityContainer.RegisterType<IUserPurchasedCouponRepository, UserPurchasedCouponRepository>();
+            unityContainer.RegisterType<ICurrencyRepository, CurrencyRepository>();
+
+            unityContainer.RegisterType<ICouponCategoriesRepository, CouponCategoriesRepository>();
+
+
+            unityContainer.RegisterType<IBranchCategoryRepository, BranchCategoryRepository>();
+            unityContainer.RegisterType<ICompanyBranchRepository, CompanyBranchRepository>();
+            unityContainer.RegisterType<IDamImageRepository, DamImageRepository>();
+
+            unityContainer.RegisterType<IUserCouponViewRepository, UserCouponViewRepository>();
+            unityContainer.RegisterType<IProfileQuestionTargetCriteriaRepository, ProfileQuestionTargetCriteriaRepository>();
+            unityContainer.RegisterType<IProfileQuestionTargetLocationRepository, ProfileQuestionTargetLocationRepository>();
+
+            unityContainer.RegisterType<IGameRepository, GameRepository>();
+
+            unityContainer.RegisterType<ICouponPriceOptionRepository, CouponPriceOptionRepository>();
+
+            unityContainer.RegisterType<IAdCampaignClickRateHistoryRepository, AdCampaignClickRateHistoryRepository>();
+
+            unityContainer.RegisterType<IPayOutHistoryRepository, PayOutHistoryRepository>();
+
+            unityContainer.RegisterType<IAspnetUsersRepository, AspnetUsersRepository>();
+
+            unityContainer.RegisterType<ICampaignEventHistoryRepository, CampaignEventHistoryRepository>();
+
+
+            unityContainer.RegisterType<INotificationRepository, NotificationRepository>();
+            unityContainer.RegisterType<ISurveySharingGroupRepository, SurveySharingGroupRepository>();
+            unityContainer.RegisterType<ISurveySharingGroupShareRepository, SurveySharingGroupShareRepository>();
+            unityContainer.RegisterType<ISurveySharingGroupMemberRepository, SurveySharingGroupMemberRepository>();
+            unityContainer.RegisterType<ISharedSurveyQuestionRepository, SharedSurveyQuestionRepository>();
+
+            unityContainer.RegisterType<ICouponRatingReviewRepository, CouponRatingReviewRepository>();
+
+            unityContainer.RegisterType<IAspNetUsersNotificationTokenRepository,AspNetUsersNotificationTokenRepository>();
+
+            unityContainer.RegisterType<IUserGameResponseRepository, UserGameResponseRepository>();
+
+            unityContainer.RegisterType<IUserCouponCategoryClickRepository, UserCouponCategoryClickRepository>();
+            
         }
     }
 }

@@ -7,7 +7,7 @@ namespace SMD.MIS.Areas.Api.Models
 {
     public class UserAndCostDetail
     {
-        public int? CityId { get; set; }
+        //public int? CityId { get; set; }
         public int? CountryId { get; set; }
         public int? LanguageId { get; set; }
         public int? IndustryId { get; set; }
@@ -18,6 +18,12 @@ namespace SMD.MIS.Areas.Api.Models
         public Nullable<double> OtherClausePrice { get; set; }
         public Nullable<double> ProfessionClausePrice { get; set; }
         public Nullable<double> EducationClausePrice { get; set; }
+        public Nullable<double> BuyItClausePrice { get; set; }
+        public Nullable<double> QuizQuestionClausePrice { get; set; }
+        public Nullable<double> TenDayDeliveryClausePrice { get; set; }
+        public Nullable<double> FiveDayDeliveryClausePrice { get; set; }
+        public Nullable<double> ThreeDayDeliveryClausePrice { get; set; }
+        public Nullable<double> VoucherClausePrice { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
         public string Language { get; set; }
@@ -26,5 +32,17 @@ namespace SMD.MIS.Areas.Api.Models
         public bool isStripeIntegrated { get; set; }
         public string GeoLat { get; set; }
         public string GeoLong { get; set; }
+        public string UserProfileImage { get; set; }
+
+
+        public bool? IsSpecialAccount { get; set; }
+        public string CurrencyCode { get; set; }
+
+        public string CurrencySymbol { get; set; }
+
+        public Nullable<int> Status { get; set; }
+        public string StripeSubscriptionStatus { get; set; }
+
+
     }
 }

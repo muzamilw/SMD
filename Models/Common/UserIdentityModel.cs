@@ -9,5 +9,8 @@ namespace SMD.Models.Common
     public class UserIdentityModel
     {
         public TimeSpan TimezoneOffset { get; set; }
+
+
+      
     }
 }

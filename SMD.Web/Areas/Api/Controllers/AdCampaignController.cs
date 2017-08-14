@@ -9,20 +9,22 @@ using System.Web.Http;
 namespace SMD.MIS.Areas.Api.Controllers
 {
     /// <summary>
-    /// Ad Campaign Api Controller 
+    /// Ad Campaign approval API controller
     /// </summary>
     public class AdCampaignController : ApiController
     {
         #region Public
         private readonly IAdvertService _advertService;
+        private readonly IEmailManagerService _emailManagerService;
         #endregion
         #region Constructor
         /// <summary>
         /// Constuctor 
         /// </summary>
-        public AdCampaignController(IAdvertService advertService)
+        public AdCampaignController(IAdvertService advertService, IEmailManagerService emailManagerService)
         {
             _advertService = advertService;
+            _emailManagerService = emailManagerService;
         }
 
         #endregion
@@ -31,7 +33,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Get Add Campaigns
         /// </summary>
-        public AdCampaignResposneModelForAproval Get([FromUri] AdCampaignSearchRequest request)
+        public AdCampaignResposneModelForAproval Get([FromUri] AdCampaignSearchRequest request )
         {
             if (request == null || !ModelState.IsValid)
             {
@@ -44,13 +46,14 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Update Ad Campaign 
         /// </summary>
-        public AdCampaign Post(AdCampaign campaign)
+        public string Post(AdCampaign campaign)
         {
             if (campaign == null || !ModelState.IsValid)
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, "Invalid Request");
             }
-            return _advertService.UpdateAdCampaign(campaign.CreateFrom()).CreateFrom();
+            return _advertService.UpdateAdApprovalCampaign(campaign.CreateFrom());
+           
         }
         #endregion
     }

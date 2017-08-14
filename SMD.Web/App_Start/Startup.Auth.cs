@@ -55,14 +55,17 @@ namespace SMD.MIS
             app.UseTwoFactorRememberBrowserCookie(DefaultAuthenticationTypes.TwoFactorRememberBrowserCookie);
 
             // Use Google Authentication
-            app.UseGoogleAuthentication(
-                clientId: "569299227032-23iqpe7ggoqdearjf83n3cid8ahhnd6r.apps.googleusercontent.com",
-                clientSecret: "iCQoRPK-m9W9B8NyGO9XQbCN");
+            //app.UseGoogleAuthentication(
+            //    clientId: "197085324979-kfdqdvse9bod3m9f1rdmjs2h73hl1abv.apps.googleusercontent.com",
+            //    clientSecret: "DOpWlpb4Kz97gsvpqj9ks9LU");
 
             // Use Facebook Authentication
-            app.UseFacebookAuthentication(
-                appId: "900194280062971",
-                appSecret: "7d8a7f398bb09ca362a051f1d8e2d71e");
+            //app.UseFacebookAuthentication(
+            //    appId: "900194280062971",
+            //    appSecret: "acd6c38978bc63083321cb5ad7122aa2");
+
+
+            //app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             app.Map("/Api_Mobile", inner =>
             {

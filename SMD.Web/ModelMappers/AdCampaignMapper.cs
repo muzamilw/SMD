@@ -33,6 +33,7 @@ namespace SMD.MIS.ModelMappers
         {
             string path = source.ImagePath;
 
+            string Voucherpath = "";
             if (source.ImagePath != null && !source.ImagePath.Contains("http"))
             {
                 path = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.ImagePath;
@@ -41,13 +42,27 @@ namespace SMD.MIS.ModelMappers
             string LandingPageVideoLink = source.LandingPageVideoLink;
             if (source.Type == (int)AdCampaignType.Other && !string.IsNullOrEmpty(source.LandingPageVideoLink))
             {
-                LandingPageVideoLinkAsPath = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.LandingPageVideoLink;
-                LandingPageVideoLink = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.LandingPageVideoLink;
+                LandingPageVideoLinkAsPath = source.LandingPageVideoLink;
+                //if (LandingPageVideoLink != null && !LandingPageVideoLink.Contains("http"))
+                //{
+                //    LandingPageVideoLinkAsPath = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.LandingPageVideoLink;
+                //}
+                //if (LandingPageVideoLink != null && !LandingPageVideoLink.Contains("http"))
+                //{
+                //    LandingPageVideoLink = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.LandingPageVideoLink;
+                //}
+
+            }
+
+
+            if (source.Voucher1ImagePath != null && !source.Voucher1ImagePath.Contains("http"))
+            {
+                Voucherpath = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.Voucher1ImagePath;
             }
             return new AdCampaign
             {
                 CampaignId = source.CampaignId,
-                CreatedBy = source.CreatedBy,
+                CreatedBy = source.Company != null ? source.Company.CompanyName : source.CreatedBy,
                 LanguageId = source.LanguageId,
                 Type = source.Type,
                 Status = source.Status,
@@ -86,17 +101,56 @@ namespace SMD.MIS.ModelMappers
                 CampaignTypeImagePath = LandingPageVideoLinkAsPath,
                 Description = source.Description,
                 AdCampaignTargetCriterias =
-                    source.AdCampaignTargetCriterias != null ? source.AdCampaignTargetCriterias.Select(x => x.CreateFrom()).ToList() : null,
-
+                source.AdCampaignTargetCriterias != null ? source.AdCampaignTargetCriterias.Select(x => x.CreateFrom()).ToList() : null,
                 AdCampaignTargetLocations =
-                    source.AdCampaignTargetLocations != null ? source.AdCampaignTargetLocations.Select(x => x.CreateFrom()).ToList() : null,
+                source.AdCampaignTargetLocations != null ? source.AdCampaignTargetLocations.Select(x => x.CreateFrom()).ToList() : null,
                 Voucher1Description = source.Voucher1Description,
                 Voucher1Heading = source.Voucher1Heading,
                 Voucher1Value = source.Voucher1Value,
                 Voucher2Description = source.Voucher2Description,
                 Voucher2Heading = source.Voucher2Heading,
-                Voucher2Value = source.Voucher2Value
+                Voucher2Value = source.Voucher2Value,
+                Voucher1ImagePath = source.Voucher1ImagePath,
+                VoucherImagePath = Voucherpath,
+                VideoUrl = source.VideoUrl,
+                BuuyItLine1 = source.BuuyItLine1,
+                BuyItButtonLabel = source.BuyItButtonLabel,
+                BuyItImageUrl = source.BuyItImageUrl,
+                BuyItLine2 = source.BuyItLine2,
+                BuyItLine3 = source.BuyItLine3,
+                AdViews = source.AdViews,
+                CompanyId = source.CompanyId,
+                CouponActualValue = source.CouponActualValue,
+                CouponQuantity = source.CouponQuantity,
+                CouponSwapValue = source.CouponSwapValue,
+                CouponTakenCount = source.CouponTakenCount,
+                priority = source.priority,
+                CouponDiscountValue = source.CouponDiscountValue,
+                CouponExpiryLabel = source.CouponExpiryLabel,
+                couponImage2 = source.couponImage2,
+                CouponCategories = source.CampaignCategories != null ? source.CampaignCategories.Select(x => x.CouponCategory.CreateFrom()).ToList() : null,
 
+                couponSmdComission = source.couponSmdComission,
+                CouponImage3 = source.CouponImage3,
+                CouponImage4 = source.CouponImage4,
+               // CouponCodes = source.CouponCodes != null ? source.CouponCodes.Select(x => x.CreateFrom()).ToList() : null,
+                IsUseFilter = source.IsUseFilter == true ? 1 : 0,
+                LogoUrl = source.LogoUrl == null ? "" : source.LogoUrl,
+                VoucherAdditionalInfo = source.VoucherAdditionalInfo == null ? "" : source.VoucherAdditionalInfo,
+                CouponId = source.CouponId ?? 0,
+                IsShowVoucherSetting = source.IsShowVoucherSetting ?? false,
+                VideoLink2 = source.VideoLink2,
+                CouponType = source.CouponType ?? 1,
+                IsSavedCoupon = source.IsSavedCoupon ?? false,
+                DeliveryDays = source.DeliveryDays ?? 1,
+                MaxDailyBudget = source.MaxDailyBudget ?? 0,
+                SubmissionDateTime =source.SubmissionDateTime,
+                ShowBuyitBtn=source.ShowBuyitBtn,
+                IsPaymentCollected =source.IsPaymentCollected,
+                PaymentDate =source.PaymentDate,
+                isAdDelivery = source.isAdDelivery
+                
+                
             };
 
 
@@ -148,7 +202,7 @@ namespace SMD.MIS.ModelMappers
                 StartDateTime = source.StartDateTime,
                 UserId = source.UserId,
                 VerifyQuestion = source.VerifyQuestion,
-
+                ShowBuyitBtn=source.ShowBuyitBtn
             };
 
 
@@ -163,11 +217,17 @@ namespace SMD.MIS.ModelMappers
             return new CampaignRequestResponseModel
             {
                 TotalCount = source.TotalCount,
-                Campaigns = source.Campaign.Select(campaign => campaign.CreateFrom()),
+                Campaigns =source.Campaign != null? source.Campaign.Select(campaign => campaign.CreateFrom()):null,
+                Coupon = source.Coupon != null? source.Coupon.Select(coupon =>coupon.CreateFrom()):null
                 //LanguageDropdowns = source.Languages.Select(lang => lang.CreateFrom()),
                 //UserAndCostDetails = source.UserAndCostDetails.CreateFrom()
             };
         }
+
+
+
+
+
 
         /// <summary>
         /// Domain to Web Resposne For API  |baqer
@@ -289,6 +349,19 @@ namespace SMD.MIS.ModelMappers
                     EducationName = source.Education.Title;
                 }
             }
+            else if (source.Type == (int)AdCampaignCriteriaType.QuizQustion)
+            {
+                if (source.QuizCampaign != null)
+                {
+                    QuestionString = source.QuizCampaign.VerifyQuestion;
+                    if (source.QuizAnswerId == 1)
+                        AnswerString = source.QuizCampaign.Answer1;
+                    if (source.QuizAnswerId == 2)
+                        AnswerString = source.QuizCampaign.Answer2;
+                    if (source.QuizAnswerId == 3)
+                       AnswerString = source.QuizCampaign.Answer3;
+                }
+            }
             return new SMD.MIS.Areas.Api.Models.AdCampaignTargetCriteria
             {
                 CriteriaId = source.CriteriaId,
@@ -306,7 +379,9 @@ namespace SMD.MIS.ModelMappers
                 Language = LanguageName,
                 Industry = IndustryName,
                 EducationId = source.EducationId,
-                Education = EducationName
+                Education = EducationName,
+                QuizAnswerId = source.QuizAnswerId,
+                QuizCampaignId = source.QuizCampaignId
             };
         }
 
@@ -327,8 +402,8 @@ namespace SMD.MIS.ModelMappers
             if (source.CityId != null && source.CityId > 0 && source.City != null)
             {
                 CName = source.City.CityName;
-                latitdue = source.City.GeoLat;
-                longitude = source.City.GeoLong;
+                latitdue = source.City.GeoLAT;
+                longitude = source.City.GeoLONG;
             }
             return new SMD.MIS.Areas.Api.Models.AdCampaignTargetLocation
             {
@@ -356,7 +431,7 @@ namespace SMD.MIS.ModelMappers
             return new SMD.MIS.Areas.Api.Models.UserAndCostDetail
             {
                 AgeClausePrice = source.AgeClausePrice,
-                CityId = source.CityId,
+                //CityId = source.CityId,
                 CountryId = source.CountryId,
                 EducationClausePrice = source.EducationClausePrice,
                 EducationId = source.EducationId,
@@ -366,14 +441,28 @@ namespace SMD.MIS.ModelMappers
                 LocationClausePrice = source.LocationClausePrice,
                 OtherClausePrice = source.OtherClausePrice,
                 ProfessionClausePrice = source.ProfessionClausePrice,
-                City = source.CityName,
+                City = source.City,
                 Country = source.CountryName,
                 Education = source.EducationTitle,
                 Industry = source.IndustryName,
                 Language = source.LanguageName,
                 isStripeIntegrated = source.isStripeIntegrated,
                 GeoLat = source.GeoLat,
-                GeoLong = source.GeoLong
+                GeoLong = source.GeoLong,
+                BuyItClausePrice = source.BuyItClausePrice,
+                FiveDayDeliveryClausePrice = source.FiveDayDeliveryClausePrice,
+                QuizQuestionClausePrice = source.QuizQuestionClausePrice,
+                TenDayDeliveryClausePrice = source.TenDayDeliveryClausePrice,
+                ThreeDayDeliveryClausePrice = source.ThreeDayDeliveryClausePrice,
+                UserProfileImage = source.UserProfileImage,
+                VoucherClausePrice = source.VoucherClausePrice,
+                IsSpecialAccount = source.IsSpecialAccount,
+                CurrencyCode = source.CurrencyCode,
+                CurrencySymbol = source.CurrencySymbol,
+                Status = source.Status,
+                StripeSubscriptionStatus = source.StripeSubscriptionStatus
+                
+               
             };
 
 
@@ -389,7 +478,175 @@ namespace SMD.MIS.ModelMappers
                 Languages = source.Languages.Select(lang => lang.CreateFrom()),
                 UserAndCostDetails = source.UserAndCostDetails.CreateFrom(),
                 Educations = source.Education.Select(edu => edu.CreateFrom()),
-                Professions = source.Industry.Select(ind => ind.CreateFrom())
+                Professions = source.Industry.Select(ind => ind.CreateFrom()),
+                CouponCategories = source.CouponCategory.Select(cc => cc.CreateFromForCategories(false)),
+                DiscountVouchers = source.DiscountVouchers == null? null: source.DiscountVouchers.Select(dv => dv.CreateFromDiscountVoucher()),
+                Currencies = source.Currencies == null? null: source.Currencies.Select(cr =>cr.CreateFrom())
+            };
+        }
+
+        public static SMD.MIS.Areas.Api.Models.Coupon CreateFrom(this Models.DomainModels.Coupon source)
+        {
+            //string path = source.ImagePath;
+
+            //string Voucherpath = "";
+            //if (source.ImagePath != null && !source.ImagePath.Contains("http"))
+            //{
+            //    path = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.ImagePath;
+            //}
+            //string LandingPageVideoLinkAsPath = "";
+            //string LandingPageVideoLink = source.LandingPageVideoLink;
+            //if (source.Type == (int)AdCampaignType.Other && !string.IsNullOrEmpty(source.LandingPageVideoLink))
+            //{
+            //    LandingPageVideoLinkAsPath = source.LandingPageVideoLink;
+            //    //if (LandingPageVideoLink != null && !LandingPageVideoLink.Contains("http"))
+            //    //{
+            //    //    LandingPageVideoLinkAsPath = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.LandingPageVideoLink;
+            //    //}
+            //    //if (LandingPageVideoLink != null && !LandingPageVideoLink.Contains("http"))
+            //    //{
+            //    //    LandingPageVideoLink = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.LandingPageVideoLink;
+            //    //}
+
+            //}
+
+
+            //if (source.Voucher1ImagePath != null && !source.Voucher1ImagePath.Contains("http"))
+            //{
+            //    Voucherpath = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.Voucher1ImagePath;
+            //}
+            return new SMD.MIS.Areas.Api.Models.Coupon
+            {
+                ApprovalDateTime = source.ApprovalDateTime,
+                Approved = source.Approved,
+                ApprovedBy = source.ApprovedBy,
+                Archived = source.Archived,
+                CompanyId = source.CompanyId,
+                CouponActiveMonth = source.CouponActiveMonth,
+                CouponActiveYear = source.CouponActiveYear,
+                CouponExpirydate = source.CouponExpirydate,
+                CouponId = source.CouponId,
+                couponImage1 = source.couponImage1,
+                CouponImage2 = source.CouponImage2,
+                CouponImage3 = source.CouponImage3,
+                CouponIssuedCount = source.UserPurchasedCoupons != null ? source.UserPurchasedCoupons.Count : 0,
+                CouponListingMode = source.CouponListingMode,
+                CouponQtyPerUser = source.CouponQtyPerUser,
+                CouponRedeemedCount = source.CouponRedeemedCount,
+                CouponTitle = source.CouponTitle,
+                CouponViewCount = source.CouponViewCount,
+                CreatedBy = source.CreatedBy,
+                CreatedDateTime = source.CreatedDateTime,
+                CurrencyId = source.CurrencyId,
+                FinePrintLine1 = source.FinePrintLine1,
+                FinePrintLine2 = source.FinePrintLine2,
+                FinePrintLine3 = source.FinePrintLine3,
+                FinePrintLine4 = source.FinePrintLine4,
+                FinePrintLine5 = source.FinePrintLine5,
+                GeographyColumn = source.GeographyColumn,
+                HighlightLine1 = source.HighlightLine1,
+                HighlightLine2 = source.HighlightLine2,
+                HighlightLine3 = source.HighlightLine3,
+                HighlightLine4 = source.HighlightLine4,
+                HighlightLine5 = source.HighlightLine5,
+                HowToRedeemLine1 = source.HowToRedeemLine1,
+                HowToRedeemLine2 = source.HowToRedeemLine2,
+                HowToRedeemLine3 = source.HowToRedeemLine3,
+                HowToRedeemLine4 = source.HowToRedeemLine4,
+                HowToRedeemLine5 = source.HowToRedeemLine5,
+                LanguageId = source.LanguageId,
+                LocationBranchId = source.LocationBranchId,
+                LocationCity = source.LocationCity,
+                LocationLAT = source.LocationLAT,
+                LocationLine1 = source.LocationLine1,
+                LocationLine2 = source.LocationLine2,
+                LocationLON = source.LocationLON,
+                LocationPhone = source.LocationPhone,
+                LocationState = source.LocationState,
+                LocationTitle = source.LocationTitle,
+                LocationZipCode = source.LocationZipCode,
+                LogoUrl = source.LogoUrl.StartsWith("http://") ? source.LogoUrl : "/" + source.LogoUrl,
+                ModifiedBy = source.ModifiedBy,
+                ModifiedDateTime = source.ModifiedDateTime,
+                Price = source.Price,
+                RejectedBy = source.RejectedBy,
+                Rejecteddatetime = source.Rejecteddatetime,
+                RejectedReason = source.RejectedReason,
+                Savings = source.Savings,
+                SearchKeywords = source.SearchKeywords,
+                Status = source.Status,
+                SwapCost = source.SwapCost,
+                UserId = source.UserId,
+                SubmissionDateTime=source.SubmissionDateTime,
+                CouponCategories = source.CouponCategories != null ? source.CouponCategories.Select(coupon => coupon.CreateFrom()) : null,
+                CouponStartDate=source.CouponStartDate,
+                CouponEndDate=source.CouponEndDate,
+                Priority=source.Priority,
+                BuyitBtnLabel = source.BuyitBtnLabel,
+                BuyitLandingPageUrl = source.BuyitLandingPageUrl,
+                ShowBuyitBtn = source.ShowBuyitBtn,
+                CouponPriceOptions =  source.CouponPriceOptions == null? null: source.CouponPriceOptions.Select(cr =>cr.CreateFrom()),// source.CouponPriceOptions
+                YoutubeLink=source.YoutubeLink,
+                CouponImage4=source.CouponImage4,
+                CouponImage5=source.CouponImage5,
+                CouponImage6=source.CouponImage6,
+                IsPaymentCollected =source.IsPaymentCollected,
+                PaymentDate = source.PaymentDate,
+                IsShowReviews = source.IsShowReviews,
+                IsShowAddress = source.IsShowAddress,
+                IsShowPhoneNo = source.IsShowPhoneNo,
+                IsShowMap = source.IsShowMap,
+                IsShowyouTube = source.IsShowyouTube,
+                IsShowAboutUs=source.IsShowAboutUs,
+                DealsinGroupCount = source.CouponPriceOptions != null ? source.CouponPriceOptions.Count : 0,
+                IsPerSaving3days = source.IsPerSaving3days,
+                IsPerSaving2days =source.IsPerSaving2days,
+                IsPerSavingLastday =source.IsPerSavingLastday,
+                IsDollarSaving3days = source.IsDollarSaving3days,
+                IsDollarSaving2days = source.IsDollarSaving2days,
+                IsDollarSavingLastday = source.IsDollarSavingLastday,
+                LastModifiedDate = source.CampaignEventHistories.ToList().Count > 0 ? source.CampaignEventHistories.ToList().LastOrDefault().EventDateTime : null,
+                isSaveBtnLable = source.isSaveBtnLable,
+                DealFirstDiscountType  = source.DealFirstDiscountType,
+                DealEndingDiscountType  = source.DealEndingDiscountType,
+                CashBackDeal = source.CashBackDeal,
+                CashBackDealCounter = source.CashBackDealCounter,
+                PinCode=source.PinCode
+                
+                
+
+              };
+
+
+        }
+        public static SMD.MIS.Areas.Api.Models.CouponCategories CreateFrom(this Models.DomainModels.CouponCategories source)
+        {
+            return new SMD.MIS.Areas.Api.Models.CouponCategories
+            {
+                CategoryId = source.CategoryId,
+                CouponId = source.CouponId,
+                Id = source.Id
+            };
+        }
+
+
+
+        public static SMD.MIS.Areas.Api.Models.CouponPriceOption CreateFrom(this Models.DomainModels.CouponPriceOption source)
+        {
+            return new SMD.MIS.Areas.Api.Models.CouponPriceOption
+            {
+                CouponId = source.CouponId,
+                 CouponPriceOptionId = source.CouponPriceOptionId,
+                 Description = source.Description,
+                 OptionUrl = source.OptionUrl,
+                 Price = source.Price,
+                 Savings = source.Savings,
+                 VoucherCode = source.VoucherCode,
+                 ExpiryDate=source.ExpiryDate,
+                 URL = source.URL,
+                 VoucherCode2 =source.VoucherCode2,
+                 VoucherCode3=source.VoucherCode3,
+                 VoucherCode4 = source.VoucherCode4
             };
         }
     }

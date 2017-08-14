@@ -1,12 +1,12 @@
 ﻿define(["ko", "underscore", "underscore-ko"], function (ko) {
 
     var // ReSharper disable InconsistentNaming
-        Survey = function (SQID, LanguageID, CountryID, UserID, Status, StatusValue, Question, Gender, Language, Country,
+        Survey = function (SQID, LanguageID, CountryID, UserID, Status, StatusValue, Question,LastModifiedDate, Gender, Language, Country,
             Description, DisplayQuestion, StartDate, EndDate, ModifiedDate, LeftPicturePath, RightPicturePath, ProjectedReach, AgeRangeStart,
-            AgeRangeEnd, LeftPictureBytes, RightPictureBytes, ParentSurveyId, Priority) {
-           
+            AgeRangeEnd, LeftPictureBytes, RightPictureBytes, ParentSurveyId, Priority, CreatedBy, CompanyId, AnswerNeeded, ResultClicks, AmountCharged, IsUseFilter) {
             var
                 //type and userID will be set on server sside
+                
                 SQID = ko.observable(SQID),
                 LanguageID = ko.observable(LanguageID),
                 CountryID = ko.observable(CountryID),
@@ -15,11 +15,17 @@
                 Question = ko.observable(Question).extend({  // custom message
                     required: true
                 }),
+                LastModified = ko.observable(LastModifiedDate),
+                IsUseFilter = ko.observable(IsUseFilter),
+
                 Gender = ko.observable(Gender),
                 Language = ko.observable(Language),
                 Country = ko.observable(Country),
                 StatusValue = ko.observable(StatusValue),
                 Description = ko.observable(Description),
+                answerNeeded = ko.observable(AnswerNeeded),
+                resultClicks = ko.observable(ResultClicks),
+                PieChartData = ko.observable([{label: 'download sales', value: 12}]),
                 DisplayQuestion = ko.observable(DisplayQuestion).extend({  // custom message
                     required: true
                 }),
@@ -43,6 +49,8 @@
                 RightPicturePath = ko.observable(RightPicturePath),
                 ProjectedReach = ko.observable(ProjectedReach),
                 AgeRangeStart = ko.observable(AgeRangeStart),
+                CreatedBy = ko.observable(CreatedBy),
+                CompanyId = ko.observable(CompanyId),
                 AgeRangeEnd = ko.observable(AgeRangeEnd).extend({
                     validation: {
                         validator: function (val, someOtherVal) {
@@ -57,16 +65,37 @@
                 SubmissionDate = ko.observable(SubmissionDate),
                 SurveyQuestionTargetCriteria = ko.observableArray([]),
                 SurveyQuestionTargetLocation = ko.observableArray([]),
-                LeftPictureBytes = ko.observable(LeftPictureBytes),
-                RightPictureBytes = ko.observable(RightPictureBytes),
+                LeftPictureBytes = ko.observable(LeftPictureBytes).extend({  // custom message
+                    required: true
+                }),
+                RightPictureBytes = ko.observable(RightPictureBytes).extend({  // custom message
+                    required: true
+                }),
                 ParentSurveyId = ko.observable(ParentSurveyId),
                 Priority = ko.observable(Priority),
+
+                AmountCharged = ko.observable(AmountCharged),
+
+                PieChartValue = ko.observableArray([0,0]),
+                PieChartlabel = ko.observableArray(["",""]),
+                CampaignRatioData = ko.observable({
+                    labels: PieChartlabel,
+                    datasets: [
+                        {
+                            data: PieChartValue,
+                            backgroundColor: ['green', 'blue', 'red']
+
+                        }]
+
+                }),
                 errors = ko.validation.group({
                     Question: Question,
-                    DisplayQuestion: DisplayQuestion,
-                    StartDate: StartDate,
-                    EndDate: EndDate,
-                    AgeRangeEnd: AgeRangeEnd,
+                    //LeftPictureBytes: LeftPictureBytes,
+                    //RightPictureBytes: RightPictureBytes,
+                    //DisplayQuestion: DisplayQuestion,
+                    //StartDate: StartDate,
+                    //EndDate: EndDate,
+                    //AgeRangeEnd: AgeRangeEnd,
                     }),
                 // Is Valid
                 isValid = ko.computed(function () {
@@ -93,7 +122,10 @@
                     LeftPictureBytes: LeftPictureBytes,
                     RightPictureBytes: RightPictureBytes,
                     ParentSurveyId: ParentSurveyId,
-                    Priority: Priority
+                    Priority: Priority,
+                    answerNeeded: answerNeeded,
+                    AmountCharged: AmountCharged,
+                    IsUseFilter: IsUseFilter
                 }),
                 // Has Changes
                 hasChanges = ko.computed(function () {
@@ -130,8 +162,8 @@
                         EndDate: moment(EndDate()).format(ist.utcFormat) + 'Z',
                         CreationDate: CreationDate(),
                         ModifiedDate : ModifiedDate(),
-                        LeftPicturePath : LeftPicturePath(),
-                        RightPicturePath : RightPicturePath(),
+                        LeftPicturePath: sImageLeft == "" || sImageLeft==undefined ? LeftPicturePath() : sImageLeft,
+                        RightPicturePath: sImageRight == "" || sImageRight==undefined ? RightPicturePath() : sImageRight,
                         ProjectedReach: ProjectedReach(),
                         AgeRangeStart: AgeRangeStart(),
                         AgeRangeEnd : AgeRangeEnd(),
@@ -144,7 +176,10 @@
                         RightPictureBytes: RightPictureBytes(),
                         SurveyQuestionTargetLocations: targetLocation,
                         ParentSurveyId: ParentSurveyId(),
-                        Priority: Priority()
+                        Priority: Priority(),
+                        CompanyId: CompanyId(),
+                        AmountCharged: AmountCharged,
+                        IsUseFilter: IsUseFilter()
                     };
                 };
             return {
@@ -184,12 +219,24 @@
                 dirtyFlag: dirtyFlag,
                 convertToServerData: convertToServerData,
                 ParentSurveyId: ParentSurveyId,
-                Priority: Priority
+                Priority: Priority,
+                CreatedBy: CreatedBy,
+                CompanyId: CompanyId,
+                answerNeeded: answerNeeded,
+                resultClicks: resultClicks,
+                AmountCharged: AmountCharged,
+                IsUseFilter: IsUseFilter,
+                LastModified:LastModified,
+                PieChartData: PieChartData,
+                CampaignRatioData: CampaignRatioData,
+                PieChartValue :PieChartValue ,
+                PieChartlabel : PieChartlabel
             };
         };
 
     var // ReSharper disable InconsistentNaming
-      SurveyQuestionTargetCriteria = function (ID, SQID, Type, PQID, PQAnswerID, LinkedSQID, LinkedSqAnswer, IncludeorExclude, LanguageID, questionString, answerString, Language, surveyQuestLeftImageSrc, surveyQuestRightImageSrc, IndustryID, Industry, EducationId, Education) {
+      SurveyQuestionTargetCriteria = function (ID, SQID, Type, PQID, PQAnswerID, LinkedSQID, LinkedSqAnswer, IncludeorExclude, LanguageID, questionString, answerString,
+          Language, surveyQuestLeftImageSrc, surveyQuestRightImageSrc, IndustryID, Industry, EducationId, Education, QuizCampaignId, QuizAnswerId) {
           var
               //type and userID will be set on server side
               ID = ko.observable(ID),
@@ -210,6 +257,9 @@
               Industry = ko.observable(Industry),
               Education = ko.observable(Education),
               EducationId = ko.observable(EducationId),
+               QuizCampaignId = ko.observable(QuizCampaignId),
+               QuizAnswerId = ko.observable(QuizAnswerId),
+
               // Convert to server data
               convertToServerData = function () {
                   return {
@@ -227,7 +277,9 @@
                       IndustryID: IndustryID(),
                       Industry: Industry(),
                       EducationId: EducationId(),
-                      Education: Education()
+                      Education: Education(),
+                      QuizCampaignId: QuizCampaignId(),
+                      QuizAnswerId: QuizAnswerId()
                   };
               };
           return {
@@ -249,7 +301,9 @@
               IndustryID: IndustryID,
               Industry: Industry,
               EducationId: EducationId,
-              Education: Education
+              Education: Education,
+              QuizCampaignId: QuizCampaignId,
+              QuizAnswerId: QuizAnswerId
           };
       };
     var // ReSharper disable InconsistentNaming
@@ -295,21 +349,24 @@
     };
     // Factory Method
     Survey.Create = function (source) {
-        var survey = new Survey(source.SqId, source.LanguageId, source.CountryId, source.UserId, source.Status, source.StatusValue, source.Question,
+        var survey = new Survey(source.SqId, source.LanguageId, source.CountryId, source.UserId, source.Status, source.StatusValue, source.Question,source.LastModifiedDate,
             source.Gender + "", source.Language, source.Country, source.Description, source.DisplayQuestion, source.StartDate, source.EndDate, source.ModifiedDate,
             source.LeftPicturePath, source.RightPicturePath, source.ProjectedReach, source.AgeRangeStart, source.AgeRangeEnd, source.LeftPictureBytes,
-            source.RightPictureBytes, source.ParentSurveyId, source.Priority);
+            source.RightPictureBytes, source.ParentSurveyId, source.Priority, source.CreatedBy, source.CompanyId, source.AnswerNeeded, source.ResultClicks, source.AmountCharged, source.IsUseFilter);
         _.each(source.SurveyQuestionTargetCriterias, function (item) {
             survey.SurveyQuestionTargetCriteria.push(SurveyQuestionTargetCriteria.Create(item));
         });
         _.each(source.SurveyQuestionTargetLocations, function (item) {
             survey.SurveyQuestionTargetLocation.push(SurveyQuestionTargetLocation.Create(item));
         });
+        
         return survey;
     };
     // Factory Method
     SurveyQuestionTargetCriteria.Create = function (source) {
-        return new SurveyQuestionTargetCriteria(source.Id, source.SqId, source.Type, source.PqId, source.PqAnswerId, source.LinkedSqId, source.LinkedSqAnswer, source.IncludeorExclude, source.LanguageId, source.questionString, source.answerString, source.Language, source.surveyQuestLeftImageSrc, source.surveyQuestRightImageSrc, source.IndustryId, source.Industry,source.EducationId, source.Education);
+        return new SurveyQuestionTargetCriteria(source.Id, source.SqId, source.Type, source.PqId, source.PqAnswerId, source.LinkedSqId, source.LinkedSqAnswer, source.IncludeorExclude,
+            source.LanguageId, source.questionString, source.answerString, source.Language, source.surveyQuestLeftImageSrc, source.surveyQuestRightImageSrc, source.IndustryId,
+            source.Industry, source.EducationId, source.Education, source.QuizCampaignId, source.QuizAnswerId);
     };
     SurveyQuestionTargetLocation.Create = function (source) {
         return new SurveyQuestionTargetLocation(source.Id, source.SqId, source.CountryId, source.CityId, source.Radius,
