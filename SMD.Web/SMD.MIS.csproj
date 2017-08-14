@@ -1200,6 +1200,7 @@
     <Content Include="Areas\EmailPromotion\Views\Emails\Index.cshtml" />
     <Content Include="Areas\EmailPromotion\Views\_ViewStart.cshtml" />
     <Content Include="Areas\EmailPromotion\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\EmailPromotion\Views\Emails\ManageEmailCampaign.cshtml" />
     <None Include="config\Web.connectionstrings.config">
       <SubType>Designer</SubType>
     </None>
@@ -1327,6 +1328,7 @@
     <Content Include="Content\Images\email_image.png" />
     <Content Include="Content\Images\email_Imagewhite.png" />
     <Content Include="Content\Images\email_Sicon.png" />
+    <Content Include="Content\Images\email_small_icon.png" />
     <Content Include="Content\Images\facebookNew.png" />
     <Content Include="Content\Images\flags%402x.png" />
     <Content Include="Content\Images\flags.png" />
@@ -1751,6 +1753,7 @@
     <Content Include="Images\dealFooterimg.jpg" />
     <Content Include="Images\displayAdimg.jpg" />
     <Content Include="Images\download-on-google-play.png" />
+    <Content Include="Images\email-White_Icon.png" />
     <Content Include="Images\email_Imagewhite.png" />
     <Content Include="Images\faceBook_Icon.png" />
     <Content Include="Images\googleplay_icon.png" />

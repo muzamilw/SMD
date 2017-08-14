@@ -11,19 +11,19 @@ define("Emails/EmailPromotion.view",
         //  ist.Ads = window.ist.Ads || {};
 
         // View 
-        ist.Email.view = (function (specifiedViewModel) {
+        ist.EmailPromotion.view = (function (specifiedViewModel) {
             var
                 // View model 
                 viewModel = specifiedViewModel,
                 // Binding root used with knockout
                 bindingRoot = $("#emailBinding")[0],
-                bindingRootgoSocial = $("#dialog-goSocial")[0],
-                showSocialDialog = function () {
-                    $("#dialog-goSocial").modal("show");
-                },
-                hideSocialDialog = function () {
-                    $("#dialog-goSocial").modal("hide");
-                },
+                //bindingRootgoSocial = $("#dialog-goSocial")[0],
+                //showSocialDialog = function () {
+                //    $("#dialog-goSocial").modal("show");
+                //},
+                //hideSocialDialog = function () {
+                //    $("#dialog-goSocial").modal("hide");
+                //},
                 
                 // Initialize
                 initialize = function () {
@@ -36,16 +36,16 @@ define("Emails/EmailPromotion.view",
 
             return {
                 bindingRoot: bindingRoot,
-                bindingRootgoSocial: bindingRootgoSocial,
-                showSocialDialog: showSocialDialog,
-                hideSocialDialog: hideSocialDialog,
+                //bindingRootgoSocial: bindingRootgoSocial,
+                //showSocialDialog: showSocialDialog,
+                //hideSocialDialog: hideSocialDialog,
                 viewModel: viewModel,
             };
         })(contentViewModel);
 
         // Initialize the view model
-        if (ist.Email.view.bindingRoot) {
-            ist.Email.viewModel.initialize(ist.Email.view);
+        if (ist.EmailPromotion.view.bindingRoot) {
+            ist.EmailPromotion.viewModel.initialize(ist.EmailPromotion.view);
         }
-        return ist.Email.view;
+        return ist.EmailPromotion.view;
     });

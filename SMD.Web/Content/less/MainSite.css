@@ -1491,6 +1491,13 @@ margin-top:2px;
     background-repeat: no-repeat!important;
     background-color: #3071a9!important;
 }
+.email_promotion_btn {
+  background: url(/Content/Images/email_small_icon.png)!important;
+    background-position: 5px 0px!important;
+    padding: 8px 10px 8px 47px!important;
+    background-repeat: no-repeat!important;
+    background-color: #3071a9!important;
+}
 .modal-title {
     color:#fff!important;
 

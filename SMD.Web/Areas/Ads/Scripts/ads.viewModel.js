@@ -44,6 +44,7 @@ define("ads/ads.viewModel",
                     StatusCodeImage = ko.observable(''),
                     IsvideoBtn = ko.observable(false),
                     IsGameAds = ko.observable(false),
+                    IsEmailBtn = ko.observable(false),
                     countoryidList = [],
                     cityidList = [],
                     langidList = [],
@@ -72,6 +73,8 @@ define("ads/ads.viewModel",
                     headText = ko.observable(),
                     //caption variablels 
                     lblCampaignName = ko.observable("Campaign Name"),
+                    PPRlable = ko.observable("PPR"),
+                    budgetText = ko.observable("Daily budget"),
                     Modelheading = ko.observable(""),
                     lblDetailsHeading = ko.observable("Free Display Ad Details"),
                     lblAdTitle = ko.observable("Ad Title"),
@@ -181,7 +184,7 @@ define("ads/ads.viewModel",
                 ByProfessionStatsChartAnalyticsData = ko.observableArray([]),
                 ByAgeStatsChartAnalyticsData = ko.observableArray([]),
 
-                
+
                 PieChartValue = ko.observableArray([0, 0]),
                 PieChartlabel = ko.observableArray(["", ""]),
                 CampaignRatioData = ko.observable({
@@ -451,7 +454,7 @@ define("ads/ads.viewModel",
 				                ByGenderStatsChartAnalyticsData.removeAll();
 				                ko.utils.arrayPushAll(ByGenderStatsChartAnalyticsData(), data.ByGenderStats);
 				                ByGenderStatsChartAnalyticsData.valueHasMutated();
-                                                                
+
 				                PieChartValue.removeAll();
 				                PieChartlabel.removeAll();
 				                for (var i = 0; i < data.pieCharts.length; i++) {
@@ -557,10 +560,9 @@ define("ads/ads.viewModel",
 
 
 				},
-                onDeliveryChange = function ()
-                {
-                  
-                    if(campaignModel().isAdDelivery()==1)
+                onDeliveryChange = function () {
+
+                    if (campaignModel().isAdDelivery() == 1)
                         isPPRVisible(false);
                     else
                         isPPRVisible(true);
@@ -773,7 +775,7 @@ define("ads/ads.viewModel",
                 // Add new Profile Question
 
             addNewCampaign = function () {
-               
+
                 IsthisEditCamapiagn(false);
                 $("#ddTextBtns").val(0);
                 BuyItStatus(false);
@@ -799,7 +801,7 @@ define("ads/ads.viewModel",
                 $("#Heading_div, #headdesc").css("display", "none");
                 $(".closecls").css("display", "none");
 
-
+                
                 collapseMainMenu();
                 TodisplayImg(true);
                 openEditScreen(1);
@@ -812,6 +814,9 @@ define("ads/ads.viewModel",
                 VideoLink2src(0);
                 FlagToShowDivs(false);
                 campaignModel().StatusValue('Draft');
+                if (mode == 5) {
+                    lblAdTitle("Subject Line");
+                }
                 isvideobtnvisible(true);
                 VideoLink2src(null);
                 isShowArchiveBtn(false);
@@ -835,10 +840,21 @@ define("ads/ads.viewModel",
                     campaignModel().ClickRate("0.04");
                 }
 
-                else {//video ad
-                    // campaignModel().CampaignName("New Video Ads");
-                    $("#logo_div").css("display", "none");
-                    campaignModel().ClickRate("0.08");
+                else {
+
+                    if (mode == 5) {
+                        $("#logo_div").css("display", "block");
+                        campaignModel().ClickRate("0.02");
+                        campaignModel().isAdDelivery('2');
+                        isPPRVisible(true);
+                       
+                    }
+                    else {
+                        //video ad
+                        // campaignModel().CampaignName("New Video Ads");
+                        $("#logo_div").css("display", "none");
+                        campaignModel().ClickRate("0.08");
+                    }
                 }
                 campaignModel().reset();
                 $("#btnPauseCampaign").css("display", "none");
@@ -1088,7 +1104,7 @@ define("ads/ads.viewModel",
                       campaignModel().Type('5');
                       lblCampaignName("Voucher Name");
                       lblDetailsHeading("Voucher Display Details");
-                      lblAdTitle("Voucher Title");
+                      lblAdTitle("Subject Line");
                       lblFirstLine("First line");
                       lbllSecondLine("Second Line");
                       lblCampaignSchedule("Schedule");
@@ -1146,7 +1162,7 @@ define("ads/ads.viewModel",
                          UserAndCostDetail().isStripeIntegrated = true;
                          saveCampaign(2);
                      }, 2000, 'Enter your details');
-                     
+
                  },
 
             submitCampaignData = function () {
@@ -1314,7 +1330,7 @@ define("ads/ads.viewModel",
                                 else {
                                     saveCampaign(2);
                                 }
-                                
+
                             }
                         }
                     }
@@ -2378,7 +2394,7 @@ define("ads/ads.viewModel",
 
                                     var clonedVersofCariterias = data.Campaigns[0].AdCampaignTargetCriterias.clone();
 
-                                    
+
                                     _.each(data.Campaigns[0].CouponCodes, function (cc) {
 
                                         allCouponCodeItems.push(cc.Code);
@@ -2785,7 +2801,7 @@ define("ads/ads.viewModel",
 
                                         lblCampaignName("Voucher Name");
                                         lblDetailsHeading("voucher Display Details");
-                                        lblAdTitle("Voucher Title");
+                                        lblAdTitle("Subject Line");
                                         lblFirstLine("First line");
                                         lbllSecondLine("Second Line");
                                         lblCampaignSchedule("Schedule");
@@ -2800,8 +2816,13 @@ define("ads/ads.viewModel",
                                     }
 
                                     else {
+                                        if (mode == 5) {
+                                            $("#logo_div").css("display", "block");
+                                        }
+                                        else {
 
-                                        $("#logo_div").css("display", "none");
+                                            $("#logo_div").css("display", "none");
+                                        }
                                     }
 
                                     $.unblockUI(spinner);
@@ -3953,23 +3974,47 @@ define("ads/ads.viewModel",
                         videoAdbtnLabel("Get Free Display Ad Credits");
                         StatusCodeImage("/Content/Images/Displaymod.png");
                         IsvideoBtn(false);
+                        IsEmailBtn(false);
                         IsGameAds(true);
-                        CampaignHeader('( Display Ad )');
+                        CampaignHeader('New Display Ad ');
                         IsNewVideoCampaign(false);
                         headText("Display Ads");
+                        PPRlable("PPR");
+                        budgetText("Daily budget");
                     }
                     else {
-                        UrlHeadings("Call for Action Button");
-                        IsShownforVideo(true);
-                        videoAdbtnLabel("Get Free Video Ad Credits");
-                        VideoImage(true);
-                        IsvideoBtn(true);
-                        IsGameAds(false);
-                        StatusCodeName("Display");
-                        headText("Video Ads");
-                        CampaignHeader("");
-                        StatusCodeImage("/Content/Images/Videomod.png");
-                        IsNewVideoCampaign(true);
+                        if (mode == 1) {
+                            UrlHeadings("Call for Action Button");
+                            IsShownforVideo(true);
+                            videoAdbtnLabel("Get Free Video Ad Credits");
+                            VideoImage(true);
+                            IsvideoBtn(true);
+                            IsEmailBtn(false);
+                            IsGameAds(false);
+                            StatusCodeName("Display");
+                            headText("Video Ads");
+                            CampaignHeader("New Video Campaign");
+                            StatusCodeImage("/Content/Images/Videomod.png");
+                            IsNewVideoCampaign(true);
+                            PPRlable("PPR");
+                            budgetText("Daily budget");
+                        }
+                        else {
+                            UrlHeadings("Call for Action Button");
+                            IsShownforVideo(true);
+                            videoAdbtnLabel("Get Free Video Ad Credits");
+                            VideoImage(true);
+                            IsEmailBtn(true);
+                            IsGameAds(false);
+                            StatusCodeName("Display");
+                            headText("Email Promotion");
+                            CampaignHeader("New Email Campaign");
+                            StatusCodeImage("/Images/email_Imagewhite.png");
+                            IsNewVideoCampaign(true);
+                            PPRlable("Price per email");
+                            budgetText("Total budget");
+
+                        }
                     }
                     view = specifiedView;
                     ko.applyBindings(view.viewModel, view.bindingRoot);
@@ -4095,6 +4140,8 @@ define("ads/ads.viewModel",
                     tab1Heading: tab1Heading,
                     tab2Heading: tab2Heading,
                     tab4SubHeading: tab4SubHeading,
+                    PPRlable: PPRlable,
+                    budgetText:budgetText,
 
                     gotoProfile: gotoProfile,
                     gotoManageUsers: gotoManageUsers,
@@ -4194,6 +4241,7 @@ define("ads/ads.viewModel",
                     StatusCodeName: StatusCodeName,
                     StatusCodeImage: StatusCodeImage,
                     IsvideoBtn: IsvideoBtn,
+                    IsEmailBtn: IsEmailBtn,
                     IsGameAds: IsGameAds,
                     CampaignHeader: CampaignHeader,
                     IsthisEditCamapiagn: IsthisEditCamapiagn,
@@ -4249,14 +4297,14 @@ define("ads/ads.viewModel",
                     QQPStatsAnalytics: QQPStatsAnalytics,
                     getQQPAnalytic: getQQPAnalytic,
                     onDeliveryChange: onDeliveryChange,
-                    ByGenderStatsChartAnalyticsData : ByGenderStatsChartAnalyticsData, 
-                    ByProfessionStatsChartAnalyticsData : ByProfessionStatsChartAnalyticsData,
+                    ByGenderStatsChartAnalyticsData: ByGenderStatsChartAnalyticsData,
+                    ByProfessionStatsChartAnalyticsData: ByProfessionStatsChartAnalyticsData,
                     ByAgeStatsChartAnalyticsData: ByAgeStatsChartAnalyticsData,
                     isPPRVisible: isPPRVisible,
                     videoAdbtnLabel: videoAdbtnLabel,
-                    isvideobtnvisible:isvideobtnvisible
-            };
-    })()
-};
-return ist.Ads.viewModel;
-});
+                    isvideobtnvisible: isvideobtnvisible
+                };
+            })()
+        };
+        return ist.Ads.viewModel;
+    });

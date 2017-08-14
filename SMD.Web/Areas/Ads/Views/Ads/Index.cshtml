@@ -87,6 +87,9 @@ else
                     <div class="clearfix text-center" style="padding:20px;padding-bottom:10px;" data-bind="visible:$root.IsvideoBtn()">
                         <span style="color:white">You haven’t created any Video Ad yet</span>
                     </div>
+                    <div class="clearfix text-center" style="padding:20px;padding-bottom:10px;" data-bind="visible:$root.IsEmailBtn()">
+                        <span style="color:white">You haven’t created any Email Promotion yet</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -113,6 +116,7 @@ else
                     <div class="row">
                         <span style="font-size:20px;" data-bind="visible:$root.IsGameAds()">Target & reward audiences near you</span>
                         <span style="font-size:20px;" data-bind="visible:$root.IsvideoBtn()">Target & reward audiences to watch your Video ad</span>
+                        <span style="font-size:20px;" data-bind="visible:$root.IsEmailBtn()">Target & reward audiences to watch your Email Promotion</span>
                     </div>
                     <div class="row center">
                         <img src="/Images/Share_world.png">
@@ -122,6 +126,7 @@ else
                     <div class="row" style="padding-bottom:10px;">
                         <span style="font-size:20px;margin-left:5px;" data-bind="visible:$root.IsGameAds()">Here’s some Display Ads by other advertisers</span>
                         <span style="font-size:20px;margin-left:5px;" data-bind="visible:$root.IsvideoBtn()">Here’s some Video Ads by other advertisers</span>
+                        <span style="font-size:20px;" data-bind="visible:$root.IsEmailBtn()">Here’s some Email Promotions by other advertisers</span>
                     </div>
                     <div class="row center" data-bind="visible:$root.IsGameAds()">
                         <div class="col-lg-4">
@@ -164,6 +169,26 @@ else
                             </div>
                         </div>
                     </div>
+                    <div class="row center" data-bind="visible:$root.IsEmailBtn()">
+                        <div class="col-lg-4">
+                            <video id="videoTag" style="width:168px;height:70px;background-color:white" data-bind="attr:{ src:$root.VideoLink1 }"></video>
+                            <div class="main-box no-header clearfix text-center" style="padding:8px;margin-top:1px;">
+                                <span style="font-size:12px;font-weight:bold" data-bind="text:$root.CampaignName1"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <video id="videoTag" style="width:168px;height:70px;background-color:white" data-bind="attr:{ src:$root.VideoLink2 }"></video>
+                            <div class="main-box no-header clearfix text-center" style="padding:8px;margin-top:-4px;">
+                                <span style="font-size:12px;font-weight:bold" data-bind="text:$root.CampaignName2"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <video id="videoTag" style="width:168px;height:70px;background-color:white" data-bind="attr:{ src:$root.VideoLink3 }"></video>
+                            <div class="main-box no-header clearfix text-center" style="padding:8px;margin-top:-4px;">
+                                <span style="font-size:12px;font-weight:bold" data-bind="text:$root.CampaignName3"></span>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="row" style="padding-top:0px;padding-left:8px;padding-bottom:16px;">
                         <a href="http://cash4ads.com/" target="_blank">
@@ -176,6 +201,7 @@ else
                     <div class="row" style="padding-bottom:10px;">
                         <span style="font-size:20px;" data-bind="visible:$root.IsGameAds()">Get more Click-thrus to your landing pages</span>
                         <span style="font-size:20px;" data-bind="visible:$root.IsvideoBtn()">Ask an Insight question</span>
+                        <span style="font-size:20px;" data-bind="visible:$root.IsEmailBtn()">Ask an Insight question</span>
                     </div>
                     <div class="row">
                         <div class="form-group">
@@ -186,6 +212,12 @@ else
                                 <li>Reward Gamers with 50% of the click charge if they answer your survey question</li>
                             </ul>
                             <ul style="list-style-type:circle;margin-left:17px;" data-bind="visible:$root.IsvideoBtn()">
+                                <li>Target audiences near you</li>
+                                <li>Upload a 30 sec Video ad / TV commercial</li>
+                                <li>Ask an Insight question and use the result to refine future targeting</li>
+                                <li>Reward audiences with 50% of your PPCV to watch ad and answer survey</li>
+                            </ul>
+                            <ul style="list-style-type:circle;margin-left:17px;" data-bind="visible:$root.IsEmailBtn()">
                                 <li>Target audiences near you</li>
                                 <li>Upload a 30 sec Video ad / TV commercial</li>
                                 <li>Ask an Insight question and use the result to refine future targeting</li>
@@ -461,6 +493,7 @@ else
                 <div class="col-sm-4 filterbloclkspos" style="float:left;font-size: 20px;margin-top:6px;">
                     <span data-bind="visible:$root.IsGameAds()">Sponsor a brain training game !</span>
                     <span data-bind="visible:$root.IsvideoBtn()">Target Audiences with a Video Ad !</span>
+                    <span data-bind="visible:$root.IsEmailBtn()">Target Audiences with a Email Promotion !</span>
                 </div>
 
                 <div class="col-sm-1">
@@ -479,6 +512,11 @@ else
                 <div data-bind="visible:$root.IsGameAds()">
                     <button class="btn btn-primary create_game_btn" style="background-color:#37c675!important;border-color:#37c675!important;" data-bind="click:$root.addNewCampaign,visible:!$root.isDisplayCouponsAds()">
                         Create Display Ad
+                    </button>
+                </div>
+                <div data-bind="visible:$root.IsEmailBtn()">
+                    <button class="btn btn-primary email_promotion_btn" style="background-color:#37c675!important;border-color:#37c675!important;" data-bind="click:$root.addNewCampaign,visible:!$root.isDisplayCouponsAds()">
+                        Create Email Promotion
                     </button>
                 </div>
                 @*<button class="btn btn-primary" style="display:none;" data-bind="click:$root.addNewCampaign,visible:$root.isDisplayCouponsAds()">

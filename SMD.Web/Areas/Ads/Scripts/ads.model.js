@@ -85,6 +85,8 @@
                       tname = 'Flyer';
                   else if (Type() == 4)
                       tname = 'Game';
+                  else if (Type() == 5)
+                      tname = 'Email';
                   return tname;
               }),
               DisplayTitle = ko.observable(DisplayTitle).extend({  // custom message

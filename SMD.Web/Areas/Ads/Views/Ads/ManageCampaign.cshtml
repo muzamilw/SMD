@@ -25,7 +25,7 @@ else
                         <span class="pull-left Theme_standard_clr" style="padding-left:0px;font-size:21px;" data-bind="NewCampaignBinding: CampaignName,visible:$root.isDisplayCouponsAds()">New Coupon</span>
 
                         <img class="vid_image pull-left" data-bind="attr: { src: $root.StatusCodeImage }" src="/Content/Images/Videos_small.png">
-                        <span id="newVid" class="pull-left " style="color:#fff!important; padding-left:0px;font-size:23px;margin-top:15px;margin-left:9px;" data-bind="NewCampaignBinding: CampaignName">New video campaign</span> <span style="color:#fff!important;margin-left:3px;margin-top:21px;display:none" class="subtitle pull-left" data-bind="text:$root.CampaignHeader()"></span>
+                        <span id="newVid" class="pull-left " style="color:#fff!important; padding-left:0px;font-size:23px;margin-top:15px;margin-left:9px;" data-bind="NewCampaignBinding: CampaignName() !=undefined ?CampaignName:$root.CampaignHeader">New video campaign</span> <span style="color:#fff!important;margin-left:3px;margin-top:21px;display:none" class="subtitle pull-left" data-bind="text:$root.CampaignHeader()"></span>
 
                         @*<span id="newdisplay_Ad" class="pull-left " style="color:black!important; padding-left:0px;font-size:23px;margin-top:12px;display:none;" data-bind="NewCampaignBinding: CampaignName">New display ad</span>*@
                     </div>
@@ -332,6 +332,24 @@ else
 
                                     </div>
                                 </div>
+                                <div class="form-group" style="margin-bottom:14px;"data-bind="visible:Type()==5">
+                                    <div class="col-lg-2">
+                                        <label for="txtCampaignDisplayName" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Image Heading</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input type="text" maxlength="40" style="width:91% !important" name="Campaign Display Name" class="form-control width80percent" id="txtCampaignDisplayName" placeholder="Image title (40 characters)">
+                                    </div>
+                                    <div style="margin-top:5px;">
+                                        <label id=" lbltotalCharacter" style="color: lightgray;margin-top:9px;margin-left:-33px;"> 40 chars</label>
+                                    </div>
+                                    <div class="col-lg-1" data-bind="visible:!$root.isDisplayCouponsAds()" style="  text-align: right;
+    font-size: 17px;
+    color: red;">
+                                    </div>
+                                    <div class="col-lg-2">
+
+                                    </div>
+                                </div>
                                 <div class="form-group" style="margin-bottom:25px;" data-bind="if: Type()==1,visible:!$root.isDisplayCouponsAds()">
                                     <div class="col-lg-2">
                                         <label for="txtUploadVideo" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Upload</label>
@@ -388,6 +406,22 @@ else
                                         </div>
                                     </div>
                                 </div>
+                                <div class="form-group" style="margin-bottom:14px;" data-bind="visible:Type()==5">
+                                    <div class="col-lg-2">
+                                        <label for="txtCampaignDisplayName" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Main Body Text</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <textarea class="form-control" id="highlightedfield1" rows="4" style="resize:none" placeholder="max 800 characters" maxlength="800"></textarea>
+                                    </div>
+                                    <div style="margin-top:5px;">
+                                        <label id=" lbltotalCharacter" style="color: lightgray;margin-top:9px;margin-left:0px;"> 800 chars</label>
+                                    </div>
+                                    <div class="col-lg-1" data-bind="visible:!$root.isDisplayCouponsAds()" style="  text-align: right;font-size: 17px; color: red;">
+                                    </div>
+                                    <div class="col-lg-2">
+
+                                    </div>
+                                </div>
                                 <div>
                                     @*<div class="col-lg-11">
                                             <div class="form-group" style="margin-bottom:20px; margin-top:20px;">
@@ -414,7 +448,7 @@ else
                                                 </div>
                                             </div>
                                         </div>*@
-                                    <div class="col-lg-12" data-bind="visible:Type()==1">
+                                    <div class="col-lg-12" data-bind="visible:Type()==1 ||Type() ==5">
                                         <div style="height:34px;" class="borderbtmline">
 
 
@@ -1154,8 +1188,8 @@ else
                                     </div>
                                 </div>
                                 <div class="row" style="margin-top:12px;">
-                                    <div class="col-lg-12" style="padding-left:22px;" data-bind="with: $root.campaignModel">
-                                        <div class="radio col-lg-6" style="text-align: left;">
+                                    <div class="col-lg-12" style="padding-left:22px;" data-bind="with: $root.campaignModel,visible:$root.campaignModel">
+                                        <div class="radio col-lg-6" style="text-align: left;" data-bind="visible:Type()!=5">
 
                                             <input type="radio" name="optionsRadioTypes" value="1" id="optionsRadioFree" data-bind="checked:isAdDelivery,event:{ change: $root.onDeliveryChange}">
                                             <label for="optionsRadioFree" style="color:red;font-weight:500;font-size:14px;">
@@ -1168,15 +1202,17 @@ else
                                             <label data-bind="visible:$root.CurrentMode()==1">Deliver upto 10 video ads per day.</label>
                                             <label data-bind="visible:$root.CurrentMode()==4">Deliver upto 10 display ads per day.</label>
                                         </div>
-                                        <div class="radio col-lg-12" style="text-align: left;">
-                                            <input type="radio" name="optionsRadiosTypes" value="2" id="optionsRadiosIncrease" data-bind="checked:isAdDelivery,event:{ change: $root.onDeliveryChange}">
-                                            <label for="optionsRadiosIncrease" style="color:red ;font-weight:500;font-size:14px;">
-                                                Increase Delivery
-                                            </label>
-                                            <span class="help-block text-right"></span>
-                                        </div>
-                                        <div class="col-lg-12" style="margin-top:-20px;">
-                                            <label>Set higher priority(PPR) and deliver more.</label>
+                                        <div data-bind="visible:Type()!=5">
+                                            <div class="radio col-lg-12" style="text-align: left;">
+                                                <input type="radio" name="optionsRadiosTypes" value="2" id="optionsRadiosIncrease" data-bind="checked:isAdDelivery,event:{ change: $root.onDeliveryChange}">
+                                                <label for="optionsRadiosIncrease" style="color:red ;font-weight:500;font-size:14px;">
+                                                    Increase Delivery
+                                                </label>
+                                                <span class="help-block text-right"></span>
+                                            </div>
+                                            <div class="col-lg-12" style="margin-top:-20px;">
+                                                <label>Set higher priority(PPR) and deliver more.</label>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -1185,7 +1221,7 @@ else
 
                                             <div class="col-lg-7" style="padding-top:3px;">
                                                 <div class="col-lg-11 paddingright0px">
-                                                    <span class="text-campaign-left fontsize13px" style="margin-top:-4px;">PPR</span>
+                                                    <span class="text-campaign-left fontsize13px" style="margin-top:-4px;" data-bind="text:$root.PPRlable"></span>
                                                 </div>
                                                 <div class="col-lg-1" style="padding-right:0px;text-align:right;">
                                                     <span>£</span>
@@ -1204,7 +1240,7 @@ else
 
                                             <div class="col-lg-7" style="float:left;padding-top:4px;">
                                                 <div class="col-lg-11">
-                                                    <span class="text-campaign-left fontsize13px" style="margin-top:-4px;">Daily budget</span>
+                                                    <span class="text-campaign-left fontsize13px" style="margin-top:-4px;" data-bind="text:$root.budgetText"></span>
                                                 </div>
 
                                                 <div class="col-lg-1" style="padding-right:0px;text-align:right;">
@@ -1270,7 +1306,7 @@ else
                                 <button class="btn btn-danger free_VideoAd_btn" id="btnFreeAds" data-toggle="modal" data-target=".model_youtube_link" onclick="openYoutubeVideo();">Get Free Video Ad Credits</button>@*data-bind="text:$root.videoAdbtnLabel"*@
                             </div>
                         </div>
-                        
+
                         <div class="row " style="line-height: 2;padding:0px;">
 
                             <div class="col-lg-12" style="padding-left:0px;margin-top:-3px;">
