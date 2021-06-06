@@ -134,6 +134,7 @@ namespace SMD.MIS.Controllers
             // To enable password failures to trigger lockout, change to shouldLockout: true
 
             User user = await UserManager.FindByNameAsync(model.Email);
+            user.SecurityStamp = Guid.NewGuid().ToString();
             if (user == null)
             {
                 ModelState.AddModelError("", "Error! Invalid email.");

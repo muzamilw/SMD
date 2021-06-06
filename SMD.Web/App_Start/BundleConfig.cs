@@ -93,7 +93,8 @@ namespace SMD.MIS
                 .Include("~/Content/CSS/spectrum.css")
                 //.Include("~/RichTextEditor/skins/moono/editor.css")
                 .Include("~/Content/CSS/custom.css")
-                .Include("~/Content/CSS/jquery.tokenize.css"));
+                .Include("~/Content/CSS/jquery.tokenize.css")
+                .Include("~/Content/CSS/sublayout.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                 "~/Content/themes/base/jquery.ui.core.css",
@@ -137,16 +138,18 @@ namespace SMD.MIS
                 .Include("~/Content/themes/Centaurus/css/libs/fullcalendar.print.css")
                 .Include("~/Content/CSS/jquery-Slider.css")
                 .Include("~/Content/CSS/custom.css"));
+                
 
 
-            
-             
-            Bundle lessBundle = new Bundle("~/Bundle/AppLess").Include("~/Content/less/MainSite.less");
 
-            lessBundle.Transforms.Add(new LessTransform(Path.Combine(HttpRuntime.AppDomainAppPath, "Content\\less")));
-            lessBundle.Transforms.Add(new CssMinify());
 
-            bundles.Add(lessBundle);
+            //Bundle lessBundle = new Bundle("~/Bundle/AppLess").Include("~/Content/less/MainSite.less");
+
+            //lessBundle.Transforms.Add(new LessTransform(Path.Combine(HttpRuntime.AppDomainAppPath, "Content\\less")));
+            //lessBundle.Transforms.Add(new CssMinify());
+
+            //bundles.Add(lessBundle);
+            System.Web.Optimization.BundleTable.EnableOptimizations = false;
         }
     }
 }

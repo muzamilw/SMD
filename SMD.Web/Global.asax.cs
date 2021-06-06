@@ -95,6 +95,8 @@ namespace SMD.MIS
             ChangeMvcConfiguration();
             AreaRegistration.RegisterAllAreas();
 
+            SqlServerTypes.Utilities.LoadNativeAssemblies(Server.MapPath("~/bin"));
+
             BundleTable.EnableOptimizations = !HttpContext.Current.IsDebuggingEnabled;
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters, container);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

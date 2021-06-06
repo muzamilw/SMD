@@ -97,6 +97,8 @@
     <None Include="GetRandomGameByUser.sql" />
     <None Include="vw_Notifications.sql" />
     <None Include="GetUserProfileQuestionsList.sql" />
+    <None Include="smd.bacpac" />
+    <None Include="smd.data_insert_sql.rar" />
   </ItemGroup>
   <ItemGroup>
     <None Include="getCampaignsByStatus.sql" />
