@@ -5079,15 +5079,15 @@ input[type="radio"] {
     height:100px !important;
 }
 .login-logo-bakImg {
-    background: url(/Images/clidy_circle_logo.png);
+    background: url(/Images/BitFlix_Beta2_1x.png);
     width: 228px;
     height: 70px;
-    background-size: 31%;
-    background-position-x: 50%;
+    background-size: 93%;
+    background-position-x: 259%;
     margin: auto;
     background-repeat: no-repeat;
     position: relative;
-    top: 16px;
+    top: 39px;
 }
 
 .padding23
