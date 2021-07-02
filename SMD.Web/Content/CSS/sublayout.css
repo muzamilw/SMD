@@ -1172,8 +1172,8 @@ div#spinner {
 }
 
 #btnNext, #btnBack {
-    background-color: #127abd !important;
-    border-color: #127abd !important;
+    background-color: #f9c943 !important;
+    border-color: #f9c943 !important;
 }
 
 .filterbtnclrs {
@@ -1700,7 +1700,7 @@ div#spinner {
     background-position: 6px 1px !important;
     padding: 8px 10px 8px 47px !important;
     background-repeat: no-repeat !important;
-    background-color: #27ae60 !important;
+    background-color: #ffc106 !important;
 }
 
 .free_VideoAd_btn {
