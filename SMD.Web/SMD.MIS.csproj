@@ -1498,6 +1498,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\themes\Centaurus\css\basecss.css" />
+    <Content Include="Content\themes\Centaurus\css\compiled\theme_styles.css" />
     <Content Include="Content\themes\Centaurus\js\CSJSRequestObject.js" />
     <Content Include="Content\themes\Centaurus\css\bootstrap\bootstrap.css" />
     <Content Include="Content\themes\Centaurus\css\bootstrap\bootstrap.min.css" />
@@ -2164,6 +2165,8 @@
     <Content Include="Images\instragram_icon.png" />
     <Content Include="Images\iphoneStencil.png" />
     <Content Include="Images\linckedin_icon.png" />
+    <Content Include="Images\logo.png" />
+    <Content Include="Images\logo_small.png" />
     <Content Include="Images\New_Register_Image.png" />
     <Content Include="Images\NY-city.jpg" />
     <Content Include="Images\orderedList0.png" />

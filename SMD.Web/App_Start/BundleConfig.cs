@@ -171,7 +171,30 @@ namespace SMD.MIS
                 .Include("~/Content/themes/Centaurus/css/libs/fullcalendar.print.css")
                 .Include("~/Content/CSS/jquery-Slider.css")
                 .Include("~/Content/CSS/custom.css"));
-                
+
+
+            bundles.Add(new StyleBundle("~/Content/themes/Centaurus/css/bundleCentaurus/cssNew")
+                .Include("~/Content/themes/Centaurus/css/bootstrap/bootstrap.min.css")
+                .Include("~/Content/themes/Centaurus/css/libs/font-awesome.css")
+                .Include("~/Content/themes/Centaurus/css/libs/nanoscroller.css")
+                .Include("~/Content/themes/Centaurus/css/libs/datepicker.css")
+                .Include("~/Content/themes/Centaurus/css/compiled/theme_styles.css")
+                .Include("~/Content/themes/Centaurus/css/compiled/elements.css")
+                .Include("~/Content/themes/Centaurus/css/libs/dropzone.css")
+                .Include("~/Content/themes/Centaurus/css/libs/magnific-popup.css")
+                .Include("~/Content/themes/Centaurus/css/compiled/calendar.css")
+                .Include("~/Content/themes/Centaurus/css/libs/morris.css")
+                .Include("~/Content/themes/Centaurus/css/libs/daterangepicker.css")
+                .Include("~/Content/themes/Centaurus/css/libs/jquery-jvectormap-1.2.2.css")
+                .Include("~/Content/themes/Centaurus/css/compiled/wizard.css")
+                .Include("~/Content/themes/Centaurus/css/libs/bootstrap-wizard.css")
+                .Include("~/Content/themes/Centaurus/css/libs/select2.css")
+                .Include("~/Content/themes/Centaurus/css/libs/jquery.nouislider.css")
+                .Include("~/Content/themes/Centaurus/css/libs/fullcalendar.css")
+                .Include("~/Content/themes/Centaurus/css/libs/fullcalendar.print.css")
+                .Include("~/Content/CSS/jquery-Slider.css")
+                .Include("~/Content/CSS/custom.css"));
+
 
 
 
