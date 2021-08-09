@@ -52,6 +52,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Castle.Core.3.0.0.4001\lib\net40-client\Castle.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Common.Logging.Core, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.Core.3.4.1\lib\net40\Common.Logging.Core.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
@@ -217,9 +220,14 @@
     <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.1016.290\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Nethereum.JsonRpc.Client, Version=4.0.0.0, Culture=neutral, PublicKeyToken=8768a594786aba4e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nethereum.JsonRpc.Client.4.0.3\lib\netstandard1.1\Nethereum.JsonRpc.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Nethereum.JsonRpc.RpcClient, Version=4.0.0.0, Culture=neutral, PublicKeyToken=8768a594786aba4e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nethereum.JsonRpc.RpcClient.4.0.3\lib\netstandard1.1\Nethereum.JsonRpc.RpcClient.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
@@ -243,6 +251,7 @@
     <Reference Include="System">
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data">
       <Private>True</Private>
     </Reference>
@@ -257,9 +266,14 @@
     <Reference Include="System.IdentityModel.Tokens.Jwt">
       <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.1.0.0\lib\net45\System.IdentityModel.Tokens.Jwt.dll</HintPath>
     </Reference>
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Cors">
       <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.3\lib\net45\System.Web.Cors.dll</HintPath>
@@ -1231,6 +1245,7 @@
     <Content Include="Content\CSS\icons.css" />
     <Content Include="Content\CSS\intlTelInput.css" />
     <Content Include="Content\CSS\jquery-Slider.css" />
+    <Content Include="Content\CSS\jquery-ui-1.12.1.min.css" />
     <Content Include="Content\CSS\jquery.tokenize.css" />
     <Content Include="Content\CSS\main.css" />
     <Content Include="Content\CSS\Slider.css" />
@@ -1677,6 +1692,381 @@
     <Content Include="Content\themes\Centaurus\js\typeahead.min.js" />
     <Content Include="Content\themes\Centaurus\js\wizard.js" />
     <Content Include="Content\themes\Centaurus\js\xcharts.js" />
+    <Content Include="Content\themes\smartadmin\css\app.bundle.css" />
+    <Content Include="Content\themes\smartadmin\css\datagrid\datatables\datatables.bundle.css" />
+    <Content Include="Content\themes\smartadmin\css\fa-brands.css" />
+    <Content Include="Content\themes\smartadmin\css\fa-duotone.css" />
+    <Content Include="Content\themes\smartadmin\css\fa-light.css" />
+    <Content Include="Content\themes\smartadmin\css\fa-regular.css" />
+    <Content Include="Content\themes\smartadmin\css\fa-solid.css" />
+    <Content Include="Content\themes\smartadmin\css\formplugins\bootstrap-colorpicker\bootstrap-colorpicker.css" />
+    <Content Include="Content\themes\smartadmin\css\formplugins\bootstrap-datepicker\bootstrap-datepicker.css" />
+    <Content Include="Content\themes\smartadmin\css\formplugins\bootstrap-daterangepicker\bootstrap-daterangepicker.css" />
+    <Content Include="Content\themes\smartadmin\css\formplugins\bootstrap-markdown\bootstrap-markdown.css" />
+    <Content Include="Content\themes\smartadmin\css\formplugins\cropperjs\cropper.css" />
+    <Content Include="Content\themes\smartadmin\css\formplugins\dropzone\dropzone.css" />
+    <Content Include="Content\themes\smartadmin\css\formplugins\ion-rangeslider\ion-rangeslider.css" />
+    <Content Include="Content\themes\smartadmin\css\formplugins\nouislider\nouislider.css" />
+    <Content Include="Content\themes\smartadmin\css\formplugins\select2\select2.bundle.css" />
+    <Content Include="Content\themes\smartadmin\css\formplugins\smartwizard\smartwizard.css" />
+    <Content Include="Content\themes\smartadmin\css\formplugins\summernote\summernote.css" />
+    <Content Include="Content\themes\smartadmin\css\json-path-picker\json-path-picker.css" />
+    <Content Include="Content\themes\smartadmin\css\miscellaneous\fullcalendar\fullcalendar.bundle.css" />
+    <Content Include="Content\themes\smartadmin\css\miscellaneous\jqvmap\jqvmap.bundle.css" />
+    <Content Include="Content\themes\smartadmin\css\miscellaneous\lightgallery\lightgallery.bundle.css" />
+    <Content Include="Content\themes\smartadmin\css\miscellaneous\nestable\nestable.css" />
+    <Content Include="Content\themes\smartadmin\css\miscellaneous\reactions\reactions.css" />
+    <Content Include="Content\themes\smartadmin\css\miscellaneous\treeview\treeview.css" />
+    <Content Include="Content\themes\smartadmin\css\notifications\sweetalert2\sweetalert2.bundle.css" />
+    <Content Include="Content\themes\smartadmin\css\notifications\toastr\toastr.css" />
+    <Content Include="Content\themes\smartadmin\css\page-invoice.css" />
+    <Content Include="Content\themes\smartadmin\css\page-login-alt.css" />
+    <Content Include="Content\themes\smartadmin\css\skins\skin-master.css" />
+    <Content Include="Content\themes\smartadmin\css\statistics\c3\c3.css" />
+    <Content Include="Content\themes\smartadmin\css\statistics\chartist\chartist.css" />
+    <Content Include="Content\themes\smartadmin\css\statistics\chartjs\chartjs.css" />
+    <Content Include="Content\themes\smartadmin\css\statistics\dygraph\dygraph.css" />
+    <Content Include="Content\themes\smartadmin\css\theme-demo.css" />
+    <Content Include="Content\themes\smartadmin\css\themes\cust-theme-1.css" />
+    <Content Include="Content\themes\smartadmin\css\themes\cust-theme-10.css" />
+    <Content Include="Content\themes\smartadmin\css\themes\cust-theme-11.css" />
+    <Content Include="Content\themes\smartadmin\css\themes\cust-theme-12.css" />
+    <Content Include="Content\themes\smartadmin\css\themes\cust-theme-13.css" />
+    <Content Include="Content\themes\smartadmin\css\themes\cust-theme-14.css" />
+    <Content Include="Content\themes\smartadmin\css\themes\cust-theme-15.css" />
+    <Content Include="Content\themes\smartadmin\css\themes\cust-theme-2.css" />
+    <Content Include="Content\themes\smartadmin\css\themes\cust-theme-3.css" />
+    <Content Include="Content\themes\smartadmin\css\themes\cust-theme-4.css" />
+    <Content Include="Content\themes\smartadmin\css\themes\cust-theme-5.css" />
+    <Content Include="Content\themes\smartadmin\css\themes\cust-theme-6.css" />
+    <Content Include="Content\themes\smartadmin\css\themes\cust-theme-7.css" />
+    <Content Include="Content\themes\smartadmin\css\themes\cust-theme-8.css" />
+    <Content Include="Content\themes\smartadmin\css\themes\cust-theme-9.css" />
+    <Content Include="Content\themes\smartadmin\css\vendors.bundle.css" />
+    <Content Include="Content\themes\smartadmin\img\backgrounds\bg-1.png" />
+    <Content Include="Content\themes\smartadmin\img\backgrounds\bg-2.png" />
+    <Content Include="Content\themes\smartadmin\img\backgrounds\bg-3.png" />
+    <Content Include="Content\themes\smartadmin\img\backgrounds\bg-4.png" />
+    <Content Include="Content\themes\smartadmin\img\backgrounds\bg-5.png" />
+    <Content Include="Content\themes\smartadmin\img\backgrounds\clouds.png" />
+    <Content Include="Content\themes\smartadmin\img\backgrounds\credit.txt" />
+    <Content Include="Content\themes\smartadmin\img\backgrounds\glass.jpg" />
+    <Content Include="Content\themes\smartadmin\img\backgrounds\page-bg.png" />
+    <Content Include="Content\themes\smartadmin\img\backgrounds\prev-bg-1.png" />
+    <Content Include="Content\themes\smartadmin\img\backgrounds\prev-bg-2.png" />
+    <Content Include="Content\themes\smartadmin\img\backgrounds\prev-bg-3.png" />
+    <Content Include="Content\themes\smartadmin\img\backgrounds\prev-bg-4.png" />
+    <Content Include="Content\themes\smartadmin\img\bitbucket-logo.png" />
+    <Content Include="Content\themes\smartadmin\img\card-backgrounds\cover-1-lg.png" />
+    <Content Include="Content\themes\smartadmin\img\card-backgrounds\cover-2-lg.png" />
+    <Content Include="Content\themes\smartadmin\img\card-backgrounds\cover-3-lg.png" />
+    <Content Include="Content\themes\smartadmin\img\card-backgrounds\cover-4-lg.png" />
+    <Content Include="Content\themes\smartadmin\img\card-backgrounds\cover-5-lg.png" />
+    <Content Include="Content\themes\smartadmin\img\card-backgrounds\cover-6-lg.png" />
+    <Content Include="Content\themes\smartadmin\img\card-backgrounds\cover-7-lg.png" />
+    <Content Include="Content\themes\smartadmin\img\clouds.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\ajax.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\angular.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\authors\josh.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\authors\jovanni.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\authors\roberto.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\authors\sunny.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\avatars\avatar-a.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\avatars\avatar-admin-lg.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\avatars\avatar-admin.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\avatars\avatar-admin.txt" />
+    <Content Include="Content\themes\smartadmin\img\demo\avatars\avatar-b.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\avatars\avatar-c.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\avatars\avatar-d.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\avatars\avatar-e.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\avatars\avatar-f.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\avatars\avatar-g.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\avatars\avatar-h.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\avatars\avatar-i.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\avatars\avatar-j.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\avatars\avatar-k.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\avatars\avatar-m.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\avatars\cc.txt" />
+    <Content Include="Content\themes\smartadmin\img\demo\avatars\ng.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\chromedevtools-1.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\chromedevtools-2.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\chromedevtools-3.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\chromedevtools-4.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\debounce-at_begin.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\debounce.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\demo-panel.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\1.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\10.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\11.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\12.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\13.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\14.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\15.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\16.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\17.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\18.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\19.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\2.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\20.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\21.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\22.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\23.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\24.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\25.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\26.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\27.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\28.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\29.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\3.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\30.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\31.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\32.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\33.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\34.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\35.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\36.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\37.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\38.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\39.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\4.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\40.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\41.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\42.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\43.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\44.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\45.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\46.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\47.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\48.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\49.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\5.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\50.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\51.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\52.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\53.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\54.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\55.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\56.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\57.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\58.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\59.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\6.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\7.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\8.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\9.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\source.txt" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\1.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\10.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\11.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\12.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\13.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\14.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\15.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\16.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\17.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\18.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\19.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\2.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\20.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\21.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\22.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\23.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\24.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\25.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\26.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\27.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\28.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\29.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\3.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\30.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\31.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\32.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\33.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\34.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\35.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\36.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\37.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\38.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\39.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\4.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\40.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\41.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\42.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\43.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\44.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\45.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\46.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\47.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\48.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\49.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\5.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\50.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\51.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\52.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\53.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\54.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\55.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\56.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\57.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\58.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\59.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\6.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\7.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\8.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\gallery\thumb\9.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\grid-options.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\html5.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\laravel.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\modes\mode-dark-lg.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\modes\mode-dark.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\modes\mode-default-lg.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\modes\mode-glass-lg.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\modes\mode-light-lg.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\modes\mode-light.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\mvc.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\peace-full.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\php.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\position-absolute.gif" />
+    <Content Include="Content\themes\smartadmin\img\demo\position-fixed.gif" />
+    <Content Include="Content\themes\smartadmin\img\demo\position-sticky.gif" />
+    <Content Include="Content\themes\smartadmin\img\demo\profile\article-healthyfood.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\profile\cc.txt" />
+    <Content Include="Content\themes\smartadmin\img\demo\rails.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\react.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\relax-full.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\s-1.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\sea-full.jpg" />
+    <Content Include="Content\themes\smartadmin\img\demo\search\1.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\search\10.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\search\11.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\search\12.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\search\13.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\search\14.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\search\15.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\search\2.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\search\3.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\search\4.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\search\5.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\search\6.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\side-panel-demo.gif" />
+    <Content Include="Content\themes\smartadmin\img\demo\skins\black.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\skins\blue.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\skins\green.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\skins\pink.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\throttle-no_trailing.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\throttle.png" />
+    <Content Include="Content\themes\smartadmin\img\demo\vuejs.png" />
+    <Content Include="Content\themes\smartadmin\img\favicon\android-chrome-144x144.png" />
+    <Content Include="Content\themes\smartadmin\img\favicon\apple-touch-icon.png" />
+    <Content Include="Content\themes\smartadmin\img\favicon\browserconfig.xml" />
+    <Content Include="Content\themes\smartadmin\img\favicon\favicon-16x16.png" />
+    <Content Include="Content\themes\smartadmin\img\favicon\favicon-32x32.png" />
+    <Content Include="Content\themes\smartadmin\img\favicon\favicon-generator.txt" />
+    <Content Include="Content\themes\smartadmin\img\favicon\favicon.ico" />
+    <Content Include="Content\themes\smartadmin\img\favicon\mstile-150x150.png" />
+    <Content Include="Content\themes\smartadmin\img\favicon\safari-pinned-tab.svg" />
+    <Content Include="Content\themes\smartadmin\img\loading.gif" />
+    <Content Include="Content\themes\smartadmin\img\logo-big.png" />
+    <Content Include="Content\themes\smartadmin\img\logo-flat.svg" />
+    <Content Include="Content\themes\smartadmin\img\logo-gradient.svg" />
+    <Content Include="Content\themes\smartadmin\img\logo-red.png" />
+    <Content Include="Content\themes\smartadmin\img\logo.png" />
+    <Content Include="Content\themes\smartadmin\img\logo.svg" />
+    <Content Include="Content\themes\smartadmin\img\svg\pattern-1.svg" />
+    <Content Include="Content\themes\smartadmin\img\svg\pattern-2.svg" />
+    <Content Include="Content\themes\smartadmin\img\svg\pattern-3.svg" />
+    <Content Include="Content\themes\smartadmin\img\svg\pattern-4.svg" />
+    <Content Include="Content\themes\smartadmin\img\thumbs\ng-thumb-1.png" />
+    <Content Include="Content\themes\smartadmin\img\thumbs\ng-thumb-2.png" />
+    <Content Include="Content\themes\smartadmin\img\thumbs\ng-thumb-3.png" />
+    <Content Include="Content\themes\smartadmin\img\thumbs\ng-thumb-4.png" />
+    <Content Include="Content\themes\smartadmin\img\thumbs\ng-thumb-video-1.png" />
+    <Content Include="Content\themes\smartadmin\img\thumbs\ng-thumb-video-2.png" />
+    <Content Include="Content\themes\smartadmin\img\thumbs\pic-1.png" />
+    <Content Include="Content\themes\smartadmin\img\thumbs\pic-10.png" />
+    <Content Include="Content\themes\smartadmin\img\thumbs\pic-11.png" />
+    <Content Include="Content\themes\smartadmin\img\thumbs\pic-12.png" />
+    <Content Include="Content\themes\smartadmin\img\thumbs\pic-3.png" />
+    <Content Include="Content\themes\smartadmin\img\thumbs\pic-4.png" />
+    <Content Include="Content\themes\smartadmin\img\thumbs\pic-5.png" />
+    <Content Include="Content\themes\smartadmin\img\thumbs\pic-6.png" />
+    <Content Include="Content\themes\smartadmin\img\thumbs\pic-7.png" />
+    <Content Include="Content\themes\smartadmin\img\thumbs\pic-8.png" />
+    <Content Include="Content\themes\smartadmin\img\thumbs\pic-9.png" />
+    <Content Include="Content\themes\smartadmin\js\app.bundle.js" />
+    <Content Include="Content\themes\smartadmin\js\datagrid\datatables\datatables.bundle.js" />
+    <Content Include="Content\themes\smartadmin\js\datagrid\datatables\datatables.export.js" />
+    <Content Include="Content\themes\smartadmin\js\dependency\moment\moment.js" />
+    <Content Include="Content\themes\smartadmin\js\formplugins\bootstrap-colorpicker\bootstrap-colorpicker.js" />
+    <Content Include="Content\themes\smartadmin\js\formplugins\bootstrap-datepicker\bootstrap-datepicker.js" />
+    <Content Include="Content\themes\smartadmin\js\formplugins\bootstrap-daterangepicker\bootstrap-daterangepicker.js" />
+    <Content Include="Content\themes\smartadmin\js\formplugins\bootstrap-markdown\bootstrap-markdown.js" />
+    <Content Include="Content\themes\smartadmin\js\formplugins\cropperjs\cropper.js" />
+    <Content Include="Content\themes\smartadmin\js\formplugins\dropzone\dropzone.js" />
+    <Content Include="Content\themes\smartadmin\js\formplugins\inputmask\inputmask.bundle.js" />
+    <Content Include="Content\themes\smartadmin\js\formplugins\ion-rangeslider\ion-rangeslider.js" />
+    <Content Include="Content\themes\smartadmin\js\formplugins\nouislider\nouislider.js" />
+    <Content Include="Content\themes\smartadmin\js\formplugins\select2\select2.bundle.js" />
+    <Content Include="Content\themes\smartadmin\js\formplugins\smartwizard\smartwizard.js" />
+    <Content Include="Content\themes\smartadmin\js\formplugins\summernote\summernote.js" />
+    <Content Include="Content\themes\smartadmin\js\i18n\i18n.js" />
+    <Content Include="Content\themes\smartadmin\js\json-path-picker\json-path-picker.js" />
+    <Content Include="Content\themes\smartadmin\js\miscellaneous\fullcalendar\fullcalendar.bundle.js" />
+    <Content Include="Content\themes\smartadmin\js\miscellaneous\jqvmap\jqvmap.bundle.js" />
+    <Content Include="Content\themes\smartadmin\js\miscellaneous\jqvmap\maps\jquery.vmap.algeria.js" />
+    <Content Include="Content\themes\smartadmin\js\miscellaneous\jqvmap\maps\jquery.vmap.argentina.js" />
+    <Content Include="Content\themes\smartadmin\js\miscellaneous\jqvmap\maps\jquery.vmap.brazil.js" />
+    <Content Include="Content\themes\smartadmin\js\miscellaneous\jqvmap\maps\jquery.vmap.canada.js" />
+    <Content Include="Content\themes\smartadmin\js\miscellaneous\jqvmap\maps\jquery.vmap.europe.js" />
+    <Content Include="Content\themes\smartadmin\js\miscellaneous\jqvmap\maps\jquery.vmap.france.js" />
+    <Content Include="Content\themes\smartadmin\js\miscellaneous\jqvmap\maps\jquery.vmap.germany.js" />
+    <Content Include="Content\themes\smartadmin\js\miscellaneous\jqvmap\maps\jquery.vmap.greece.js" />
+    <Content Include="Content\themes\smartadmin\js\miscellaneous\jqvmap\maps\jquery.vmap.iran.js" />
+    <Content Include="Content\themes\smartadmin\js\miscellaneous\jqvmap\maps\jquery.vmap.iraq.js" />
+    <Content Include="Content\themes\smartadmin\js\miscellaneous\jqvmap\maps\jquery.vmap.russia.js" />
+    <Content Include="Content\themes\smartadmin\js\miscellaneous\jqvmap\maps\jquery.vmap.tunisia.js" />
+    <Content Include="Content\themes\smartadmin\js\miscellaneous\jqvmap\maps\jquery.vmap.turkey.js" />
+    <Content Include="Content\themes\smartadmin\js\miscellaneous\jqvmap\maps\jquery.vmap.usa.js" />
+    <Content Include="Content\themes\smartadmin\js\miscellaneous\lightgallery\lightgallery.bundle.js" />
+    <Content Include="Content\themes\smartadmin\js\miscellaneous\lightgallery\smartvoice.bundle.js" />
+    <Content Include="Content\themes\smartadmin\js\miscellaneous\nestable\nestable.js" />
+    <Content Include="Content\themes\smartadmin\js\miscellaneous\treeview\treeview.js" />
+    <Content Include="Content\themes\smartadmin\js\notifications\sweetalert2\sweetalert2.bundle.js" />
+    <Content Include="Content\themes\smartadmin\js\notifications\toastr\toastr.js" />
+    <Content Include="Content\themes\smartadmin\js\statistics\c3\c3.js" />
+    <Content Include="Content\themes\smartadmin\js\statistics\chartist\chartist.js" />
+    <Content Include="Content\themes\smartadmin\js\statistics\chartjs\chartjs.bundle.js" />
+    <Content Include="Content\themes\smartadmin\js\statistics\d3\d3.js" />
+    <Content Include="Content\themes\smartadmin\js\statistics\demo-data\demo-c3.js" />
+    <Content Include="Content\themes\smartadmin\js\statistics\demo-data\demo-data-dygraph.js" />
+    <Content Include="Content\themes\smartadmin\js\statistics\dygraph\dygraph.js" />
+    <Content Include="Content\themes\smartadmin\js\statistics\easypiechart\easypiechart.bundle.js" />
+    <Content Include="Content\themes\smartadmin\js\statistics\flot\flot.bundle.js" />
+    <Content Include="Content\themes\smartadmin\js\statistics\peity\peity.bundle.js" />
+    <Content Include="Content\themes\smartadmin\js\statistics\sparkline\sparkline.bundle.js" />
+    <Content Include="Content\themes\smartadmin\js\vendors.bundle.js" />
+    <Content Include="Content\themes\smartadmin\media\sound\bigbox.mp3" />
+    <Content Include="Content\themes\smartadmin\media\sound\bigbox.ogg" />
+    <Content Include="Content\themes\smartadmin\media\sound\license.txt" />
+    <Content Include="Content\themes\smartadmin\media\sound\messagebox.mp3" />
+    <Content Include="Content\themes\smartadmin\media\sound\messagebox.ogg" />
+    <Content Include="Content\themes\smartadmin\media\sound\smallbox.mp3" />
+    <Content Include="Content\themes\smartadmin\media\sound\smallbox.ogg" />
+    <Content Include="Content\themes\smartadmin\media\sound\voice_alert.mp3" />
+    <Content Include="Content\themes\smartadmin\media\sound\voice_alert.ogg" />
+    <Content Include="Content\themes\smartadmin\media\sound\voice_off.mp3" />
+    <Content Include="Content\themes\smartadmin\media\sound\voice_off.ogg" />
+    <Content Include="Content\themes\smartadmin\media\sound\voice_on.mp3" />
+    <Content Include="Content\themes\smartadmin\media\sound\voice_on.ogg" />
+    <Content Include="Content\themes\smartadmin\media\video\36150715-heavenly-clouds-v2-license.txt" />
+    <Content Include="Content\themes\smartadmin\media\video\cc.mp4" />
+    <Content Include="Content\themes\smartadmin\media\video\cc.webm" />
+    <Content Include="Content\themes\smartadmin\webfonts\fa-brands-400.svg" />
+    <Content Include="Content\themes\smartadmin\webfonts\fa-duotone-900.svg" />
+    <Content Include="Content\themes\smartadmin\webfonts\fa-light-300.svg" />
+    <Content Include="Content\themes\smartadmin\webfonts\fa-regular-400.svg" />
+    <Content Include="Content\themes\smartadmin\webfonts\fa-solid-900.svg" />
+    <Content Include="Content\themes\smartadmin\webfonts\nextgen-icons.svg" />
     <Content Include="Emails\Deal_Expired.aspx" />
     <Content Include="Emails\DailyuserCategoryClickDeals.aspx" />
     <Content Include="Emails\SendNotificationToAdvertiserForAdditional20DollarDiscounton2ndLastDay.aspx" />
@@ -2175,6 +2565,7 @@
     <Content Include="Scripts\heatmap.min.js" />
     <Content Include="Scripts\intlTelInput.min.js" />
     <Content Include="Scripts\intphnumutils.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
     <Content Include="Scripts\jquery.imgareaselect.js" />
     <Content Include="Scripts\jquery.tokenize.js" />
     <Content Include="Scripts\knockout-3.1.0.debug.js" />
@@ -2363,6 +2754,100 @@
     <Content Include="Content\less\Campaign.css.map">
       <DependentUpon>Campaign.css</DependentUpon>
     </Content>
+    <Content Include="Content\themes\smartadmin\css\app.bundle.css.map" />
+    <Content Include="Content\themes\smartadmin\css\datagrid\datatables\datatables.bundle.css.map" />
+    <Content Include="Content\themes\smartadmin\css\fa-brands.css.map" />
+    <Content Include="Content\themes\smartadmin\css\fa-duotone.css.map" />
+    <Content Include="Content\themes\smartadmin\css\fa-light.css.map" />
+    <Content Include="Content\themes\smartadmin\css\fa-regular.css.map" />
+    <Content Include="Content\themes\smartadmin\css\fa-solid.css.map" />
+    <Content Include="Content\themes\smartadmin\css\formplugins\bootstrap-colorpicker\bootstrap-colorpicker.css.map" />
+    <Content Include="Content\themes\smartadmin\css\formplugins\bootstrap-datepicker\bootstrap-datepicker.css.map" />
+    <Content Include="Content\themes\smartadmin\css\formplugins\bootstrap-daterangepicker\bootstrap-daterangepicker.css.map" />
+    <Content Include="Content\themes\smartadmin\css\formplugins\bootstrap-markdown\bootstrap-markdown.css.map" />
+    <Content Include="Content\themes\smartadmin\css\formplugins\cropperjs\cropper.css.map" />
+    <Content Include="Content\themes\smartadmin\css\formplugins\dropzone\dropzone.css.map" />
+    <Content Include="Content\themes\smartadmin\css\formplugins\ion-rangeslider\ion-rangeslider.css.map" />
+    <Content Include="Content\themes\smartadmin\css\formplugins\nouislider\nouislider.css.map" />
+    <Content Include="Content\themes\smartadmin\css\formplugins\select2\select2.bundle.css.map" />
+    <Content Include="Content\themes\smartadmin\css\formplugins\smartwizard\smartwizard.css.map" />
+    <Content Include="Content\themes\smartadmin\css\formplugins\summernote\summernote.css.map" />
+    <Content Include="Content\themes\smartadmin\css\json-path-picker\json-path-picker.css.map" />
+    <Content Include="Content\themes\smartadmin\css\miscellaneous\fullcalendar\fullcalendar.bundle.css.map" />
+    <Content Include="Content\themes\smartadmin\css\miscellaneous\jqvmap\jqvmap.bundle.css.map" />
+    <Content Include="Content\themes\smartadmin\css\miscellaneous\lightgallery\lightgallery.bundle.css.map" />
+    <Content Include="Content\themes\smartadmin\css\miscellaneous\nestable\nestable.css.map" />
+    <Content Include="Content\themes\smartadmin\css\miscellaneous\reactions\reactions.css.map" />
+    <Content Include="Content\themes\smartadmin\css\miscellaneous\treeview\treeview.css.map" />
+    <Content Include="Content\themes\smartadmin\css\notifications\sweetalert2\sweetalert2.bundle.css.map" />
+    <Content Include="Content\themes\smartadmin\css\notifications\toastr\toastr.css.map" />
+    <Content Include="Content\themes\smartadmin\css\page-invoice.css.map" />
+    <Content Include="Content\themes\smartadmin\css\page-login-alt.css.map" />
+    <Content Include="Content\themes\smartadmin\css\skins\skin-master.css.map" />
+    <Content Include="Content\themes\smartadmin\css\statistics\c3\c3.css.map" />
+    <Content Include="Content\themes\smartadmin\css\statistics\chartist\chartist.css.map" />
+    <Content Include="Content\themes\smartadmin\css\statistics\chartjs\chartjs.css.map" />
+    <Content Include="Content\themes\smartadmin\css\statistics\dygraph\dygraph.css.map" />
+    <Content Include="Content\themes\smartadmin\css\theme-demo.css.map" />
+    <Content Include="Content\themes\smartadmin\css\themes\cust-theme-1.css.map" />
+    <Content Include="Content\themes\smartadmin\css\themes\cust-theme-10.css.map" />
+    <Content Include="Content\themes\smartadmin\css\themes\cust-theme-11.css.map" />
+    <Content Include="Content\themes\smartadmin\css\themes\cust-theme-12.css.map" />
+    <Content Include="Content\themes\smartadmin\css\themes\cust-theme-13.css.map" />
+    <Content Include="Content\themes\smartadmin\css\themes\cust-theme-14.css.map" />
+    <Content Include="Content\themes\smartadmin\css\themes\cust-theme-15.css.map" />
+    <Content Include="Content\themes\smartadmin\css\themes\cust-theme-2.css.map" />
+    <Content Include="Content\themes\smartadmin\css\themes\cust-theme-3.css.map" />
+    <Content Include="Content\themes\smartadmin\css\themes\cust-theme-4.css.map" />
+    <Content Include="Content\themes\smartadmin\css\themes\cust-theme-5.css.map" />
+    <Content Include="Content\themes\smartadmin\css\themes\cust-theme-6.css.map" />
+    <Content Include="Content\themes\smartadmin\css\themes\cust-theme-7.css.map" />
+    <Content Include="Content\themes\smartadmin\css\themes\cust-theme-8.css.map" />
+    <Content Include="Content\themes\smartadmin\css\themes\cust-theme-9.css.map" />
+    <Content Include="Content\themes\smartadmin\css\vendors.bundle.css.map" />
+    <Content Include="Content\themes\smartadmin\img\favicon\site.webmanifest" />
+    <Content Include="Content\themes\smartadmin\media\data\2500.json" />
+    <Content Include="Content\themes\smartadmin\media\data\ch.json" />
+    <Content Include="Content\themes\smartadmin\media\data\en.json" />
+    <Content Include="Content\themes\smartadmin\media\data\es.json" />
+    <Content Include="Content\themes\smartadmin\media\data\fa-brand-list.json" />
+    <Content Include="Content\themes\smartadmin\media\data\fa-duotone.json" />
+    <Content Include="Content\themes\smartadmin\media\data\fa-icon-list.json" />
+    <Content Include="Content\themes\smartadmin\media\data\ng-bg-colors.json" />
+    <Content Include="Content\themes\smartadmin\media\data\ng-icon-base.json" />
+    <Content Include="Content\themes\smartadmin\media\data\ng-icon-list.json" />
+    <Content Include="Content\themes\smartadmin\media\data\ng-text-colors.json" />
+    <Content Include="Content\themes\smartadmin\media\data\plugin-reference.json" />
+    <Content Include="Content\themes\smartadmin\media\data\project-structure.json" />
+    <Content Include="Content\themes\smartadmin\media\data\server-demo.json" />
+    <Content Include="Content\themes\smartadmin\webfonts\fa-brands-400.eot" />
+    <Content Include="Content\themes\smartadmin\webfonts\fa-brands-400.ttf" />
+    <Content Include="Content\themes\smartadmin\webfonts\fa-brands-400.woff" />
+    <Content Include="Content\themes\smartadmin\webfonts\fa-brands-400.woff2" />
+    <Content Include="Content\themes\smartadmin\webfonts\fa-duotone-900.eot" />
+    <Content Include="Content\themes\smartadmin\webfonts\fa-duotone-900.ttf" />
+    <Content Include="Content\themes\smartadmin\webfonts\fa-duotone-900.woff" />
+    <Content Include="Content\themes\smartadmin\webfonts\fa-duotone-900.woff2" />
+    <Content Include="Content\themes\smartadmin\webfonts\fa-light-300.eot" />
+    <Content Include="Content\themes\smartadmin\webfonts\fa-light-300.ttf" />
+    <Content Include="Content\themes\smartadmin\webfonts\fa-light-300.woff" />
+    <Content Include="Content\themes\smartadmin\webfonts\fa-light-300.woff2" />
+    <Content Include="Content\themes\smartadmin\webfonts\fa-regular-400.eot" />
+    <Content Include="Content\themes\smartadmin\webfonts\fa-regular-400.ttf" />
+    <Content Include="Content\themes\smartadmin\webfonts\fa-regular-400.woff" />
+    <Content Include="Content\themes\smartadmin\webfonts\fa-regular-400.woff2" />
+    <Content Include="Content\themes\smartadmin\webfonts\fa-solid-900.eot" />
+    <Content Include="Content\themes\smartadmin\webfonts\fa-solid-900.ttf" />
+    <Content Include="Content\themes\smartadmin\webfonts\fa-solid-900.woff" />
+    <Content Include="Content\themes\smartadmin\webfonts\fa-solid-900.woff2" />
+    <Content Include="Content\themes\smartadmin\webfonts\nextgen-icons.eot" />
+    <Content Include="Content\themes\smartadmin\webfonts\nextgen-icons.ttf" />
+    <Content Include="Content\themes\smartadmin\webfonts\nextgen-icons.woff" />
+    <Content Include="Content\themes\smartadmin\webfonts\nextgen-icons.woff2" />
+    <Content Include="Content\themes\smartadmin\webfonts\summernote.eot" />
+    <Content Include="Content\themes\smartadmin\webfonts\summernote.ttf" />
+    <Content Include="Content\themes\smartadmin\webfonts\summernote.woff" />
+    <Content Include="Content\themes\smartadmin\webfonts\summernote.woff2" />
     <None Include="Properties\PublishProfiles\mz profile.pubxml" />
     <None Include="Properties\PublishProfiles\SMD MIS Saqib.pubxml" />
     <None Include="Properties\PublishProfiles\SMD.pubxml" />
@@ -3463,6 +3948,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Home\-------Login.cshtml" />
+    <None Include="Views\Home\dashboard.cshtml" />
     <Content Include="Views\MobileMessageBox\Message.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -3511,6 +3997,8 @@
     <Content Include="Views\Home\ContactUs.cshtml" />
     <Content Include="StripeWebhooks\StripeHandler.ashx" />
     <Content Include="Views\Account\DeleteAccount.cshtml" />
+    <Content Include="Views\Shared\_Layout_SmartAdmin.cshtml" />
+    <Content Include="Views\Shared\_Layout_New.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

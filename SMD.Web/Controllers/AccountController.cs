@@ -206,7 +206,7 @@ namespace SMD.MIS.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Welcome", "Home", new { area = "" });
+                    return RedirectToAction("dashboard", "Home", new { area = "" });
                 }
             //}
             //else

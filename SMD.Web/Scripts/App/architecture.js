@@ -484,50 +484,50 @@ require(["ko", "knockout-validation"], function (ko) {
     };
 
     // jquery date picker binding. Usage: <input data-bind="datepicker: myDate, datepickerOptions: { minDate: new Date() }" />. Source: http://jsfiddle.net/rniemeyer/NAgNV/
-    ko.bindingHandlers.datepicker = {
-        init: function (element, valueAccessor, allBindingsAccessor) {
-            //initialize datepicker with some optional options
-            // ReSharper disable DuplicatingLocalDeclaration
-            var options = allBindingsAccessor().datepickerOptions || {};
-            options.changeMonth = true;
-            options.changeYear = true;
-            if (!options.yearRange) {
-                options.yearRange = "-20:+10";
-            }
-            // ReSharper restore DuplicatingLocalDeclaration
-            $(element).datepicker(options);
-            $(element).datepicker("option", "dateFormat", ist.shortDatePattern);
-            //handle the field changing
-            ko.utils.registerEventHandler(element, "change", function () {
-                var observable = valueAccessor();
-                observable($(element).datepicker("getDate"));
-            });
+    //ko.bindingHandlers.datepicker = {
+    //    init: function (element, valueAccessor, allBindingsAccessor) {
+    //        //initialize datepicker with some optional options
+    //        // ReSharper disable DuplicatingLocalDeclaration
+    //        var options = allBindingsAccessor().datepickerOptions || {};
+    //        options.changeMonth = true;
+    //        options.changeYear = true;
+    //        if (!options.yearRange) {
+    //            options.yearRange = "-20:+10";
+    //        }
+    //        // ReSharper restore DuplicatingLocalDeclaration
+    //        $(element).datepicker(options);
+    //        $(element).datepicker("option", "dateFormat", ist.shortDatePattern);
+    //        //handle the field changing
+    //        ko.utils.registerEventHandler(element, "change", function () {
+    //            var observable = valueAccessor();
+    //            observable($(element).datepicker("getDate"));
+    //        });
 
-            //handle disposal (if KO removes by the template binding)
-            ko.utils.domNodeDisposal.addDisposeCallback(element, function () {
-                $(element).datepicker("destroy");
-            });
+    //        //handle disposal (if KO removes by the template binding)
+    //        ko.utils.domNodeDisposal.addDisposeCallback(element, function () {
+    //            $(element).datepicker("destroy");
+    //        });
 
-        },
-        update: function (element, valueAccessor) {
-            var observable = valueAccessor();
+    //    },
+    //    update: function (element, valueAccessor) {
+    //        var observable = valueAccessor();
 
-            var value = ko.utils.unwrapObservable(valueAccessor()),
-                current = $(element).datepicker("getDate");
+    //        var value = ko.utils.unwrapObservable(valueAccessor()),
+    //            current = $(element).datepicker("getDate");
 
-            if (value - current !== 0) {
-                $(element).datepicker("setDate", value);
-            }
-            //For showing highlighted field if contains invalid value
-            if (observable.isValid) {
-                if (!observable.isValid() && observable.isModified()) {
-                    $(element).addClass('errorFill');
-                } else {
-                    $(element).removeClass('errorFill');
-                }
-            }
-        }
-    };
+    //        if (value - current !== 0) {
+    //            $(element).datepicker("setDate", value);
+    //        }
+    //        //For showing highlighted field if contains invalid value
+    //        if (observable.isValid) {
+    //            if (!observable.isValid() && observable.isModified()) {
+    //                $(element).addClass('errorFill');
+    //            } else {
+    //                $(element).removeClass('errorFill');
+    //            }
+    //        }
+    //    }
+    //};
 
     // jquery date time picker binding. Usage: <input data-bind="datetimepicker: myDate, datepickerOptions: { minDate: new Date() }" />. Source: http://jsfiddle.net/rniemeyer/NAgNV/
     ko.bindingHandlers.datetimepicker = {

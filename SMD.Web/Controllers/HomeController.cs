@@ -104,7 +104,32 @@ namespace SMD.MIS.Controllers
            
             return View();
         }
-        
+
+        public ActionResult dashboard()
+
+        {
+            IEnumerable<SmdRoleClaimValue> roleClaim = ClaimHelper.GetClaimsByType<SmdRoleClaimValue>(SmdClaimTypes.Role);
+            string RoleName = roleClaim != null && roleClaim.Any() ? roleClaim.ElementAt(0).Role : "Role Not Loaded";
+
+            if (roleClaim == null && roleClaim.Any() == false)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+
+
+
+            if (RoleName.StartsWith("Franchise"))
+                return RedirectToLocal("/Franchise/Dashboard/Index");
+
+            if (RoleName.StartsWith("Supernova"))
+                return RedirectToLocal("/Supernova/Dashboard/Index");
+
+            ViewBag.isUser = true;
+
+            return View();
+        }
+
 
         private ActionResult RedirectToLocal(string returnUrl)
         {

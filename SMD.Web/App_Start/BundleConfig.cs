@@ -84,8 +84,41 @@ namespace SMD.MIS
                 .Include("~/Scripts/jquery.tokenize.js")
                 .Include("~/Scripts/typeahead.bundle.js"));
 
+            bundles.Add(new ScriptBundle("~/Bundle/BaseLibsNew")
+                //.Include("~/Scripts/jquery-ui-1.10.4.js")
+                //.Include("~/Scripts/jquery-ui-timepicker-addon.js")
+                //.Include("~/Scripts/jquery.blockUI.js")
+                .Include("~/Scripts/spectrum.js")
+                .Include("~/Scripts/Ace/colorpicker.js")
+                .Include("~/Scripts/json2.js")
+                .Include("~/Scripts/knockout-3.1.0.js")
+                .Include("~/Scripts/knockout.mapping-latest.js")
+                .Include("~/Scripts/knockout.validation.js")
+                .Include("~/Scripts/underscore.js")
+                .Include("~/Scripts/underscore-ko-1.6.0.js")
+                .Include("~/Scripts/moment.js")
+                .Include("~/Scripts/toastr.js")
+                .Include("~/Scripts/amplify.js")
+                .Include("~/Scripts/knockout-sortable.js")
+                .Include("~/Scripts/knockout-morris.js")
+                //.Include("~/RichTextEditor/ckeditor.js")
+                .Include("~/Scripts/require.js")
+                .Include("~/Scripts/respond.js")
+                .Include("~/Scripts/App/architecture.js")
+                .Include("~/Scripts/App/requireConfig.js")
+                .Include("~/Scripts/Ace/lib/ace/ace.js")
+                .Include("~/Scripts/autoNumeric/autoNumeric-1.9.25.min.js")
+                .Include("~/Scripts/numeral/numeral.min.js")
+                .Include("~/Scripts/knockout-ace.js")
+                //.Include("~/Scripts/jquery.tokenize.js")
+                .Include("~/Scripts/typeahead.bundle.js"));
+
+            bundles.Add(new ScriptBundle("~/Bundle/jQueryUI").Include(
+                 "~/Scripts/jquery-ui-1.12.1.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                 "~/Scripts/bootstrap.js"));
+                "~/Scripts/bootstrap.js"));
+
 
             bundles.Add(new StyleBundle("~/Bundles/BaseCss")
                 .Include("~/Content/CSS/toastr.css")
