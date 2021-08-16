@@ -186,7 +186,7 @@
     /// </summary>
     public static class SystemUsers
     {
-        public static string Cash4Ads { get { return "cash4ads@cash4ads.com"; } }
+        public static string Cash4Ads { get { return "muzamil@biggtech.com"; } }
     }
 
     /// <summary>

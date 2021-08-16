@@ -353,17 +353,19 @@ namespace SMD.Implementation.Services
             // ReSharper disable SuggestUseVarKeywordEvident
             SmtpClient objSmtpClient = new SmtpClient(smtp);
             NetworkCredential mailAuthentication = new NetworkCredential(mailAddress, mailPassword);
-            objSmtpClient.EnableSsl = true;
-            objSmtpClient.UseDefaultCredentials = false;
+            //objSmtpClient.EnableSsl = true;
+            objSmtpClient.UseDefaultCredentials = false; 
             objSmtpClient.Credentials = mailAuthentication;
+            objSmtpClient.Port = 465;
             MMailto.Clear();
             try
             {
                 await objSmtpClient.SendMailAsync(oMailBody);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new SMDException(LanguageResources.EmailManagerService_FailedToSendEmail);
+                //throw new SMDException(LanguageResources.EmailManagerService_FailedToSendEmail);
+                throw new SMDException(ex.ToString());
             }
         }
 
@@ -516,6 +518,7 @@ namespace SMD.Implementation.Services
             objSmtpClient.EnableSsl = true;
             objSmtpClient.UseDefaultCredentials = false;
             objSmtpClient.Credentials = mailAuthentication;
+            objSmtpClient.Port = 587;
             MMailto.Clear();
             try
             {

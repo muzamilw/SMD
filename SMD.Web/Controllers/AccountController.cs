@@ -306,6 +306,15 @@ namespace SMD.MIS.Controllers
             return View(model);
         }
 
+        [AllowAnonymous]
+        public async Task<string> getconfirmationcode(string id)
+        {
+            var code = await UserManager.GenerateEmailConfirmationTokenAsync(id);
+            var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = id, code = code },
+                protocol: Request.Url.Scheme);
+            return callbackUrl;
+        }
+
         //
         // POST: /Account/Register
         [HttpPost]
@@ -328,7 +337,7 @@ namespace SMD.MIS.Controllers
                     }
 
 
-                  
+                 
 
                         var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                         var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code },
