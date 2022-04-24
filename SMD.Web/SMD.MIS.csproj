@@ -2362,6 +2362,7 @@
     <Content Include="Content\less\Campaign.css.map">
       <DependentUpon>Campaign.css</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\cash4ads - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\mz profile.pubxml" />
     <None Include="Properties\PublishProfiles\SMD MIS Saqib.pubxml" />
     <None Include="Properties\PublishProfiles\SMD.pubxml" />
@@ -3510,6 +3511,9 @@
     <Content Include="Views\Home\ContactUs.cshtml" />
     <Content Include="StripeWebhooks\StripeHandler.ashx" />
     <Content Include="Views\Account\DeleteAccount.cshtml" />
+    <None Include="Web.cash4ads - Web Deploy.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
